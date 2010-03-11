@@ -478,9 +478,10 @@ class Zend_Loader_Autoloader
      *
      * @param  object|array|string $callback PHP callback or Zend_Loader_Autoloader_Interface implementation
      * @param  string|array $namespace Specific namespace(s) under which to register callback
+     * @param  bool $useNamespaceAsPrefix Whether the namespace should be used as a prefix instead
      * @return Zend_Loader_Autoloader
      */
-    public function unshiftAutoloader($callback, $namespace = '')
+    public function unshiftAutoloader($callback, $namespace = '', $useNamespaceAsPrefix = false)
     {
         $autoloaders = $this->getAutoloaders();
         array_unshift($autoloaders, $callback);
@@ -488,9 +489,13 @@ class Zend_Loader_Autoloader
 
         $namespace = (array) $namespace;
         foreach ($namespace as $ns) {
-            $autoloaders = $this->getNamespaceAutoloaders($ns);
+            $autoloaders = ($useNamespaceAsPrefix)
+                         ? $this->getPrefixAutoloaders($ns)
+                         : $this->getNamespaceAutoloaders($ns);
             array_unshift($autoloaders, $callback);
-            $this->_setNamespaceAutoloaders($autoloaders, $ns);
+            ($useNamespaceAsPrefix)
+                ? $this->_setPrefixAutoloaders($autoloaders, $ns)
+                : $this->_setNamespaceAutoloaders($autoloaders, $ns);
         }
 
         return $this;
@@ -503,7 +508,7 @@ class Zend_Loader_Autoloader
      * @param  string|array $namespace Specific namespace(s) under which to register callback
      * @return Zend_Loader_Autoloader
      */
-    public function pushAutoloader($callback, $namespace = '')
+    public function pushAutoloader($callback, $namespace = '', $useNamespaceAsPrefix = false)
     {
         $autoloaders = $this->getAutoloaders();
         array_push($autoloaders, $callback);
@@ -511,9 +516,13 @@ class Zend_Loader_Autoloader
 
         $namespace = (array) $namespace;
         foreach ($namespace as $ns) {
-            $autoloaders = $this->getNamespaceAutoloaders($ns);
+            $autoloaders = ($useNamespaceAsPrefix)
+                         ? $this->getPrefixAutoloaders($ns)
+                         : $this->getNamespaceAutoloaders($ns);
             array_push($autoloaders, $callback);
-            $this->_setNamespaceAutoloaders($autoloaders, $ns);
+            ($useNamespaceAsPrefix)
+                ? $this->_setPrefixAutoloaders($autoloaders, $ns)
+                : $this->_setNamespaceAutoloaders($autoloaders, $ns);
         }
 
         return $this;
@@ -526,7 +535,7 @@ class Zend_Loader_Autoloader
      * @param  null|string|array $namespace Specific namespace(s) from which to remove autoloader
      * @return Zend_Loader_Autoloader
      */
-    public function removeAutoloader($callback, $namespace = null)
+    public function removeAutoloader($callback, $namespace = null, $useNamespaceAsPrefix = false)
     {
         if (null === $namespace) {
             $autoloaders = $this->getAutoloaders();
@@ -535,19 +544,28 @@ class Zend_Loader_Autoloader
                 $this->setAutoloaders($autoloaders);
             }
 
-            foreach ($this->_namespaceAutoloaders as $ns => $autoloaders) {
+            $nsAutoloaders = ($useNamespaceAsPrefix)
+                           ? $this->_prefixAutoloaders
+                           : $this->_namespaceAutoloaders;
+            foreach ($nsAutoloaders as $ns => $autoloaders) {
                 if (false !== ($index = array_search($callback, $autoloaders, true))) {
                     unset($autoloaders[$index]);
-                    $this->_setNamespaceAutoloaders($autoloaders, $ns);
+                    ($useNamespaceAsPrefix)
+                        ? $this->_setPrefixAutoloaders($autoloaders, $ns)
+                        : $this->_setNamespaceAutoloaders($autoloaders, $ns);
                 }
             }
         } else {
             $namespace = (array) $namespace;
             foreach ($namespace as $ns) {
-                $autoloaders = $this->getNamespaceAutoloaders($ns);
+                $autoloaders = ($useNamespaceAsPrefix)
+                             ? $this->getPrefixAutoloaders($ns)
+                             : $this->getNamespaceAutoloaders($ns);
                 if (false !== ($index = array_search($callback, $autoloaders, true))) {
                     unset($autoloaders[$index]);
-                    $this->_setNamespaceAutoloaders($autoloaders, $ns);
+                    ($useNamespaceAsPrefix)
+                        ? $this->_setPrefixAutoloaders($autoloaders, $ns)
+                        : $this->_setNamespaceAutoloaders($autoloaders, $ns);
                 }
             }
         }
@@ -600,6 +618,20 @@ class Zend_Loader_Autoloader
     {
         $namespace = (string) $namespace;
         $this->_namespaceAutoloaders[$namespace] = $autoloaders;
+        return $this;
+    }
+
+    /**
+     * Set autoloaders for a specific prefix
+     *
+     * @param  array $autoloaders
+     * @param  string $prefix
+     * @return Zend_Loader_Autoloader
+     */
+    protected function _setPrefixAutoloaders(array $autoloaders, $prefix = '')
+    {
+        $prefix = (string) $prefix;
+        $this->_prefixAutoloaders[$prefix] = $autoloaders;
         return $this;
     }
 

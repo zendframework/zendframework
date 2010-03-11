@@ -376,9 +376,9 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
     public function testAutoloaderShouldReceiveNamespaceWithTrailingUnderscore()
     {
         $al = Zend_Loader_Autoloader::getInstance();
-        $loaders = $al->getNamespaceAutoloaders('FooBar');
+        $loaders = $al->getPrefixAutoloaders('FooBar');
         $this->assertTrue(empty($loaders));
-        $loaders = $al->getNamespaceAutoloaders('FooBar_');
+        $loaders = $al->getPrefixAutoloaders('FooBar_');
         $this->assertFalse(empty($loaders));
         $loader = array_shift($loaders);
         $this->assertSame($this->loader, $loader);

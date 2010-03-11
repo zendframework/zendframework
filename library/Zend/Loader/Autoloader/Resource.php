@@ -86,7 +86,7 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
         if (!empty($namespace)) {
             $namespace .= '_';
         }
-        Zend_Loader_Autoloader::getInstance()->unshiftAutoloader($this, $namespace);
+        Zend_Loader_Autoloader::getInstance()->unshiftAutoloader($this, $namespace, true);
     }
 
     /**

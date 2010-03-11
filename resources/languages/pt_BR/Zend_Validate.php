@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 21134
+ * EN-Revision: 21362
  */
 return array(
     // Zend_Validate_Alnum
@@ -242,15 +242,19 @@ return array(
 
     // Zend_Validate_Sitemap_Changefreq
     "'%value%' is no valid sitemap changefreq" => "'%value%' não é um changefreq de sitemap válido",
+    "Invalid type given, the value should be a string" => "Tipo especificado inválido, o valor deve ser uma string",
 
     // Zend_Validate_Sitemap_Lastmod
     "'%value%' is no valid sitemap lastmod" => "'%value%' não é um lastmod de sitemap válido",
+    "Invalid type given, the value should be a string" => "Tipo especificado inválido, o valor deve ser uma string",
 
     // Zend_Validate_Sitemap_Loc
     "'%value%' is no valid sitemap location" => "'%value%' não é uma localização de sitemap válida",
+    "Invalid type given, the value should be a string" => "Tipo especificado inválido, o valor deve ser uma string",
 
     // Zend_Validate_Sitemap_Priority
     "'%value%' is no valid sitemap priority" => "'%value%' não é uma prioridade de sitemap válida",
+    "Invalid type given, the value should be a integer, a float or a numeric string" => "Tipo especificado inválido, o valor deve ser um inteiro, um float ou uma string numérica",
 
     // Zend_Validate_StringLength
     "Invalid type given, value should be a string" => "Tipo especificado inválido, o valor deve ser uma string",

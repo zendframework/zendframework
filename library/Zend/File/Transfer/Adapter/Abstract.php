@@ -1284,13 +1284,15 @@ abstract class Zend_File_Transfer_Adapter_Abstract
         if (class_exists('finfo', false)) {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
             if (!empty($value['options']['magicFile'])) {
-                $mime = new finfo($const, $value['options']['magicFile']);
-            } else {
-                $mime = new finfo($const);
+                $mime = @finfo_open($const, $value['options']['magicFile']);
+            }
+
+            if (empty($mime) {
+                $mime = @finfo_open($const);
             }
 
             if ($mime !== false) {
-                $result = $mime->file($file);
+                $result = finfo_file($mime, $file);
             }
 
             unset($mime);

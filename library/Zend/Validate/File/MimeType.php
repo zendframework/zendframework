@@ -152,13 +152,16 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
             if (!empty($_ENV['MAGIC'])) {
                 $this->setMagicFile($_ENV['MAGIC']);
             } elseif (!(@ini_get("safe_mode") == 'On' || @ini_get("safe_mode") === 1)) {
+                require_once 'Zend/Validate/Exception.php';
                 foreach ($this->_magicFiles as $file) {
                     // supressing errors which are thrown due to openbase_dir restrictions
-                    if (@file_exists($file)) {
+                    try {
                         $this->setMagicFile($file);
                         if ($this->_magicfile !== null) {
                             break;
                         }
+                    } catch (Zend_Validate_Exception $e) {
+                        // Intentionally, catch and fall through
                     }
                 }
             }
@@ -177,12 +180,17 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
      * if the MAGIC file is errorous, no file will be set
      *
      * @param  string $file
+     * @throws Zend_Validate_Exception When finfo can not read the magicfile
      * @return Zend_Validate_File_MimeType Provides fluid interface
      */
     public function setMagicFile($file)
     {
-        if (empty($file) || !(class_exists('finfo', false))) {
+        if (empty($file)) {
             $this->_magicfile = null;
+        } else if (!(class_exists('finfo', false))) {
+            $this->_magicfile = null;
+            require_once 'Zend/Validate/Exception.php';
+            throw new Zend_Validate_Exception('Magicfile can not be set. There is no finfo extension installed');
         } else if (!is_readable($file)) {
             require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('The given magicfile can not be read');
@@ -191,6 +199,8 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
             $this->_finfo = @finfo_open($const, $file);
             if ($this->_finfo === false) {
                 $this->_finfo = null;
+                require_once 'Zend/Validate/Exception.php';
+                throw new Zend_Validate_Exception('The given magicfile is not accepted by finfo');
             } else {
                 $this->_magicfile = $file;
             }

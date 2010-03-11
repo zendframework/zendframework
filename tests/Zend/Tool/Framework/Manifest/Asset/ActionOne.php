@@ -28,10 +28,10 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Manifest_ActionTwo implements Zend_Tool_Framework_Action_Interface
+class Zend_Tool_Framework_Manifest_Asset_ActionOne implements Zend_Tool_Framework_Action_Interface
 {
     public function getName()
     {
-        return 'ActionTwo';
+        return 'ActionOne';
     }
 }

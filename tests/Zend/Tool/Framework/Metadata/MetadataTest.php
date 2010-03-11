@@ -49,7 +49,7 @@ class Zend_Tool_Framework_Manifest_MetadataTest extends PHPUnit_Framework_TestCa
 
     public function setup()
     {
-        $this->_metadata = new Zend_Tool_Framework_Manifest_Metadata();
+        $this->_metadata = new Zend_Tool_Framework_Metadata_Basic();
     }
 
     public function teardown()
@@ -61,7 +61,7 @@ class Zend_Tool_Framework_Manifest_MetadataTest extends PHPUnit_Framework_TestCa
     {
         $obj1 = new ArrayObject();
 
-        $metadata = new Zend_Tool_Framework_Manifest_Metadata(array(
+        $metadata = new Zend_Tool_Framework_Metadata_Basic(array(
             'name' => 'Foo',
             'value' => 'Bar',
             'reference' => $obj1
@@ -89,7 +89,7 @@ class Zend_Tool_Framework_Manifest_MetadataTest extends PHPUnit_Framework_TestCa
 
     public function testGetTypeHasDefaultValue()
     {
-        $this->assertEquals('Global', $this->_metadata->getType());
+        $this->assertEquals('Basic', $this->_metadata->getType());
     }
 
     public function testTypeIsModifiable()
@@ -120,21 +120,21 @@ class Zend_Tool_Framework_Manifest_MetadataTest extends PHPUnit_Framework_TestCa
 
         $this->assertEquals(4, count($attributes));
 
-        $this->assertEquals('Global', $attributes['type']);
+        $this->assertEquals('Basic', $attributes['type']);
         $this->assertEquals('Foo', $attributes['name']);
         $this->assertEquals(null, $attributes['value']);
         $this->assertTrue($obj1 === $attributes['reference']);
 
-        $attributes = $this->_metadata->getAttributes(Zend_Tool_Framework_Manifest_Metadata::ATTRIBUTES_NO_PARENT);
+        $attributes = $this->_metadata->getAttributes(Zend_Tool_Framework_Metadata_Basic::ATTRIBUTES_NO_PARENT);
 
         $this->assertEquals(0, count($attributes));
 
 
-        $attributes = $this->_metadata->getAttributes(Zend_Tool_Framework_Manifest_Metadata::ATTRIBUTES_ALL, true);
+        $attributes = $this->_metadata->getAttributes(Zend_Tool_Framework_Metadata_Basic::ATTRIBUTES_ALL, true);
 
         $this->assertEquals(4, count($attributes));
 
-        $this->assertEquals('Global', $attributes['type']);
+        $this->assertEquals('Basic', $attributes['type']);
         $this->assertEquals('Foo', $attributes['name']);
         $this->assertEquals('(null)', $attributes['value']);
         $this->assertEquals('(object)', $attributes['reference']);
@@ -151,7 +151,7 @@ class Zend_Tool_Framework_Manifest_MetadataTest extends PHPUnit_Framework_TestCa
             'reference' => $obj1
             ));
 
-        $this->assertEquals('Type: Global, Name: Foo, Value: Bar', (string) $this->_metadata);
+        $this->assertEquals('Type: Basic, Name: Foo, Value: Bar', (string) $this->_metadata);
     }
 
 }

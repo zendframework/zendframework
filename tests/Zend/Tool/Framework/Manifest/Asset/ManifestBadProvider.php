@@ -28,12 +28,19 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Provider_ProviderTwo extends Zend_Tool_Framework_Provider_Abstract
+class Zend_Tool_Framework_Manifest_Asset_ManifestBadProvider
+    implements Zend_Tool_Framework_Manifest_ProviderManifestable,
+        Zend_Tool_Framework_Manifest_Indexable
 {
 
-    public function act()
+    public function getIndex()
     {
+        return 20;
+    }
 
+    public function getProviders()
+    {
+        return new ArrayObject();
     }
 
 }

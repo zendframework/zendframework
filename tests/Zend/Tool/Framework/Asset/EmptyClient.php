@@ -28,12 +28,26 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Action_Foo implements Zend_Tool_Framework_Action_Interface
+class Zend_Tool_Framework_Asset_EmptyClient
+    extends Zend_Tool_Framework_Client_Abstract
+    implements Zend_Tool_Framework_Registry_EnabledInterface
 {
+
+    protected $_registry = null;
+
     public function getName()
     {
-        return 'Foo';
+        return 'emptyClient';
     }
 
+    protected function _preDispatch()
+    {
+        return $this;
+    }
+
+    public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
+    {
+        $this->_registry = $registry;
+    }
 
 }

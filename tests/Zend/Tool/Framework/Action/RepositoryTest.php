@@ -74,8 +74,8 @@ class Zend_Tool_Framework_Action_RepositoryTest extends PHPUnit_Framework_TestCa
 
     public function testAddActionWillParseNameFromClassNameOnExtendedActions()
     {
-        $this->_repository->addAction(new Zend_Tool_Framework_Action_Foo());
-        $this->assertEquals('Zend_Tool_Framework_Action_Foo', get_class($this->_repository->getAction('Foo')));
+        $this->_repository->addAction(new Zend_Tool_Framework_Action_Asset_Foo());
+        $this->assertEquals('Zend_Tool_Framework_Action_Asset_Foo', get_class($this->_repository->getAction('Foo')));
     }
 
     /**
@@ -83,8 +83,8 @@ class Zend_Tool_Framework_Action_RepositoryTest extends PHPUnit_Framework_TestCa
      */
     public function testAddActionThrowsExceptionOnDuplicateNameAction()
     {
-        $this->_repository->addAction(new Zend_Tool_Framework_Action_Foo());
-        $this->_repository->addAction(new Zend_Tool_Framework_Action_Foo());
+        $this->_repository->addAction(new Zend_Tool_Framework_Action_Asset_Foo());
+        $this->_repository->addAction(new Zend_Tool_Framework_Action_Asset_Foo());
     }
 
     /**

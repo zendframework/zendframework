@@ -56,14 +56,14 @@ class Zend_Tool_Framework_RegistryTest extends PHPUnit_Framework_TestCase
     public function testRegistryCanGetAndSetClient()
     {
         $this->assertNull($this->_registry->getClient());
-        $this->_registry->setClient($client = new Zend_Tool_Framework_EmptyClient());
+        $this->_registry->setClient($client = new Zend_Tool_Framework_Asset_EmptyClient());
         $this->assertTrue($this->_registry->getClient() === $client);
     }
 
     public function testRegistryCanGetAndSetLoader()
     {
         $this->assertTrue($this->_registry->getLoader() instanceof Zend_Tool_Framework_Loader_Abstract);
-        $this->_registry->setLoader($loader = new Zend_Tool_Framework_EmptyLoader());
+        $this->_registry->setLoader($loader = new Zend_Tool_Framework_Asset_EmptyLoader());
         $this->assertTrue($this->_registry->getLoader() === $loader);
     }
 

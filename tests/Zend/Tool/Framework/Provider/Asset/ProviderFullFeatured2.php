@@ -28,10 +28,53 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_EmptyLoader extends Zend_Tool_Framework_Loader_Abstract
+class Zend_Tool_Framework_Provider_Asset_ProviderFullFeatured2 extends Zend_Tool_Framework_Provider_Abstract
 {
-    protected function _getFiles()
+
+    public function getName()
     {
-        return array();
+        return 'FooBarBaz';
     }
+
+    public function getSpecialties()
+    {
+        return array('Hi', 'BloodyMurder', 'ForYourTeam');
+    }
+
+    /**
+     * Enter description here...
+     *
+     * @param string $what What is a string
+     */
+    public function say($what)
+    {
+
+    }
+
+    public function scream($what = 'HELLO')
+    {
+
+    }
+
+    public function sayHiAction()
+    {
+
+    }
+
+    public function screamBloodyMurder()
+    {
+
+    }
+
+    public function screamForYourTeam()
+    {
+
+    }
+
+    protected function _iAmNotCallable()
+    {
+
+    }
+
 }
+

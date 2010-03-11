@@ -55,7 +55,7 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
         // setup the registry components required to test with
         $this->_registry = new Zend_Tool_Framework_Registry();
         $this->_registry->setActionRepository(new Zend_Tool_Framework_Action_Repository());
-        $this->_targetSignature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_ProviderFullFeatured());
+        $this->_targetSignature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderFullFeatured());
         $this->_targetSignature->setRegistry($this->_registry);
         $this->_targetSignature->process();
     }
@@ -67,7 +67,7 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
 
     public function testSignatureCanBeCreatedFromProvider()
     {
-        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_ProviderOne());
+        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderOne());
         $signature->setRegistry($this->_registry);
         $signature->process();
         $signature->process();
@@ -76,7 +76,7 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
 
     public function testSignatureCanBeCreatedFromProviderWhenOverridingName()
     {
-        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_ProviderFullFeatured());
+        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderFullFeatured());
         $signature->setRegistry($this->_registry);
         $signature->process();
         $this->assertEquals('FooBarBaz', $signature->getName());
@@ -84,15 +84,15 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
 
     public function testGetProviderReturnsProvider()
     {
-        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_ProviderOne());
+        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderOne());
         $signature->setRegistry($this->_registry);
         $signature->process();
-        $this->assertTrue($signature->getProvider() instanceof Zend_Tool_Framework_Provider_ProviderOne);
+        $this->assertTrue($signature->getProvider() instanceof Zend_Tool_Framework_Provider_Asset_ProviderOne);
     }
 
     public function testGetProviderReflectionWillReturnZendReflectionClassObject()
     {
-        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_ProviderOne());
+        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderOne());
         $signature->setRegistry($this->_registry);
         $signature->process();
         $this->assertTrue($signature->getProviderReflection() instanceof Zend_Reflection_Class);
@@ -105,7 +105,7 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
 
     public function testGetSpecialtiesReturnsParsedSpecialtiesFromMethodInsteadOfProperty()
     {
-        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_ProviderFullFeatured2());
+        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderFullFeatured2());
         $signature->setRegistry($this->_registry);
         $signature->process();
         $this->assertEquals(array('_Global', 'Hi', 'BloodyMurder', 'ForYourTeam'), $signature->getSpecialties());
@@ -116,7 +116,7 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
      */
     public function testGetSpecialtiesReturnsParsedSpecialtiesThrowsExceptionOnBadPropertyValue()
     {
-        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_ProviderFullFeaturedBadSpecialties());
+        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderFullFeaturedBadSpecialties());
         $signature->setRegistry($this->_registry);
         $signature->process();
     }
@@ -126,7 +126,7 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
      */
     public function testGetSpecialtiesReturnsParsedSpecialtiesThrowsExceptionOnBadReturnValue()
     {
-        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_ProviderFullFeaturedBadSpecialties2());
+        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderFullFeaturedBadSpecialties2());
         $signature->setRegistry($this->_registry);
         $signature->process();
     }

@@ -28,15 +28,50 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Manifest_ProviderOne
-    implements Zend_Tool_Framework_Provider_Interface, Zend_Tool_Framework_Registry_EnabledInterface
+class Zend_Tool_Framework_Provider_Asset_ProviderFullFeatured extends Zend_Tool_Framework_Provider_Abstract
 {
 
-    protected $_registry = null;
+    protected $_specialties = array('Hi', 'BloodyMurder', 'ForYourTeam');
 
-    public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
+    public function getName()
     {
-        $this->_registry = $registry;
+        return 'FooBarBaz';
+    }
+
+    public function say($what)
+    {
+
+    }
+
+    public function scream($what = 'HELLO')
+    {
+
+    }
+
+    public function sayHi()
+    {
+
+    }
+
+    public function screamBloodyMurder()
+    {
+
+    }
+
+    public function screamForYourTeam()
+    {
+
+    }
+
+    protected function _iAmNotCallable()
+    {
+
+    }
+
+    public function _testReturnInternals()
+    {
+        return array($this->_registry->getRequest(), $this->_registry->getResponse());
     }
 
 }
+

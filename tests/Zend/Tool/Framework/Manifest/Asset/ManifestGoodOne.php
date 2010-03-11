@@ -21,6 +21,7 @@
  */
 
 
+
 /**
  * @category   Zend
  * @package    Zend_Tool
@@ -28,26 +29,31 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_EmptyClient
-    extends Zend_Tool_Framework_Client_Abstract
-    implements Zend_Tool_Framework_Registry_EnabledInterface
+class Zend_Tool_Framework_Manifest_Asset_ManifestGoodOne
+    implements Zend_Tool_Framework_Manifest_ActionManifestable,
+        Zend_Tool_Framework_Manifest_ProviderManifestable,
+        Zend_Tool_Framework_Manifest_MetadataManifestable,
+        Zend_Tool_Framework_Manifest_Indexable
 {
 
-    protected $_registry = null;
-
-    public function getName()
+    public function getIndex()
     {
-        return 'emptyClient';
+        return 5;
     }
 
-    protected function _predispatch()
+    public function getProviders()
     {
-        return $this;
+        return new Zend_Tool_Framework_Manifest_Asset_ProviderOne();
     }
 
-    public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
+    public function getActions()
     {
-        $this->_registry = $registry;
+        return new Zend_Tool_Framework_Manifest_Asset_ActionOne();
+    }
+
+    public function getMetadata()
+    {
+        return new Zend_Tool_Framework_Metadata_Basic(array('name' => 'FooOne', 'value' => 'Bar'));
     }
 
 }

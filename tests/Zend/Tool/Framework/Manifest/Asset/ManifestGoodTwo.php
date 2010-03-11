@@ -21,6 +21,7 @@
  */
 
 
+
 /**
  * @category   Zend
  * @package    Zend_Tool
@@ -28,15 +29,46 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Manifest_ManifestBadMetadata
-    implements Zend_Tool_Framework_Manifest_MetadataManifestable
+class Zend_Tool_Framework_Manifest_Asset_ManifestGoodTwo
+    implements Zend_Tool_Framework_Manifest_ActionManifestable,
+        Zend_Tool_Framework_Manifest_ProviderManifestable,
+        Zend_Tool_Framework_Manifest_MetadataManifestable,
+        Zend_Tool_Framework_Manifest_Indexable,
+        Zend_Tool_Framework_Registry_EnabledInterface
 {
+
+    protected $_registry = null;
+
+    public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
+    {
+        $this->_registry = $registry;
+    }
+
+    public function getIndex()
+    {
+        return 10;
+    }
+
+    public function getProviders()
+    {
+        return array(
+            new Zend_Tool_Framework_Manifest_Asset_ProviderTwo()
+            );
+    }
+
+    public function getActions()
+    {
+        return array(
+            new Zend_Tool_Framework_Manifest_Asset_ActionTwo(),
+            'Foo'
+            );
+    }
 
     public function getMetadata()
     {
         return array(
             new Zend_Tool_Framework_Metadata_Basic(array('name' => 'FooTwo', 'value' => 'Baz1')),
-            new ArrayObject()
+            new Zend_Tool_Framework_Metadata_Basic(array('name' => 'FooThree', 'value' => 'Baz2'))
             );
 
     }

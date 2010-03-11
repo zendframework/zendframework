@@ -28,19 +28,10 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Manifest_ManifestBadProvider
-    implements Zend_Tool_Framework_Manifest_ProviderManifestable,
-        Zend_Tool_Framework_Manifest_Indexable
+class Zend_Tool_Framework_Asset_EmptyLoader extends Zend_Tool_Framework_Loader_Abstract
 {
-
-    public function getIndex()
+    protected function _getFiles()
     {
-        return 20;
+        return array();
     }
-
-    public function getProviders()
-    {
-        return new ArrayObject();
-    }
-
 }

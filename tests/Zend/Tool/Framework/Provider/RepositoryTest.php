@@ -70,17 +70,17 @@ class Zend_Tool_Framework_Provider_RepositoryTest extends PHPUnit_Framework_Test
 
     public function testAddProviderCanHandleProviderObjects()
     {
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderOne());
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderTwo());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderOne());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderTwo());
         $this->_repository->process();
         $this->assertEquals(2, count($this->_repository));
     }
 
     public function testAddProviderCanHandleProviderWithAlternateName()
     {
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderOne());
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderTwo());
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderAltName());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderOne());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderTwo());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderAltName());
         $this->_repository->process();
         $this->assertEquals(3, count($this->_repository));
         $this->assertEquals('FooBar', $this->_repository->getProviderSignature('FooBar')->getName());
@@ -91,25 +91,25 @@ class Zend_Tool_Framework_Provider_RepositoryTest extends PHPUnit_Framework_Test
      */
     public function testAddProviderThrowsExceptionOnDuplicateName()
     {
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderOne());
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderOne());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderOne());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderOne());
     }
 
     public function testAddProviderWillProcessOnCall()
     {
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderOne());
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderTwo());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderOne());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderTwo());
         $this->_repository->process();
         $this->_repository->setProcessOnAdd(true);
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderAltName());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderAltName());
         $this->assertEquals(3, count($this->_repository));
         $this->assertEquals('FooBar', $this->_repository->getProviderSignature('FooBar')->getName());
     }
 
     public function testGetProvidersReturnsProviders()
     {
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderOne());
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderTwo());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderOne());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderTwo());
         $this->_repository->process();
         $this->assertEquals(2, count($this->_repository));
         foreach ($this->_repository->getProviders() as $provider) {
@@ -120,8 +120,8 @@ class Zend_Tool_Framework_Provider_RepositoryTest extends PHPUnit_Framework_Test
 
     public function testGetProviderSignaturesReturnsProviderSignatures()
     {
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderOne());
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderTwo());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderOne());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderTwo());
         $this->_repository->process();
         $this->assertEquals(2, count($this->_repository));
         foreach ($this->_repository->getProviderSignatures() as $providerSignature) {
@@ -132,25 +132,25 @@ class Zend_Tool_Framework_Provider_RepositoryTest extends PHPUnit_Framework_Test
 
     public function testHasProviderReturnsCorrectValues()
     {
-        $this->_repository->addProvider(($providerOne = new Zend_Tool_Framework_Provider_ProviderOne()));
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderTwo());
+        $this->_repository->addProvider(($providerOne = new Zend_Tool_Framework_Provider_Asset_ProviderOne()));
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderTwo());
 
-        $this->assertTrue($this->_repository->hasProvider('Zend_Tool_Framework_Provider_ProviderOne', false));
+        $this->assertTrue($this->_repository->hasProvider('Zend_Tool_Framework_Provider_Asset_ProviderOne', false));
         $this->assertTrue($this->_repository->hasProvider($providerOne, false));
-        $this->assertTrue($this->_repository->hasProvider('Zend_Tool_Framework_Provider_ProviderTwo', false));
-        $this->assertFalse($this->_repository->hasProvider('Zend_Tool_Framework_Provider_ProviderThree', false));
-        $this->assertFalse($this->_repository->hasProvider('Zend_Tool_Framework_Provider_ProviderOne'));
+        $this->assertTrue($this->_repository->hasProvider('Zend_Tool_Framework_Provider_Asset_ProviderTwo', false));
+        $this->assertFalse($this->_repository->hasProvider('Zend_Tool_Framework_Provider_Asset_ProviderThree', false));
+        $this->assertFalse($this->_repository->hasProvider('Zend_Tool_Framework_Provider_Asset_ProviderOne'));
 
         $this->_repository->process();
-        $this->assertTrue($this->_repository->hasProvider('Zend_Tool_Framework_Provider_ProviderOne', false));
-        $this->assertTrue($this->_repository->hasProvider('Zend_Tool_Framework_Provider_ProviderOne'));
-        $this->assertFalse($this->_repository->hasProvider('Zend_Tool_Framework_Provider_ProviderThree'));
+        $this->assertTrue($this->_repository->hasProvider('Zend_Tool_Framework_Provider_Asset_ProviderOne', false));
+        $this->assertTrue($this->_repository->hasProvider('Zend_Tool_Framework_Provider_Asset_ProviderOne'));
+        $this->assertFalse($this->_repository->hasProvider('Zend_Tool_Framework_Provider_Asset_ProviderThree'));
     }
 
     public function testGetProviderReturnsProvider()
     {
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderOne());
-        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderTwo());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderOne());
+        $this->_repository->addProvider(new Zend_Tool_Framework_Provider_Asset_ProviderTwo());
         $this->_repository->process();
         $this->assertTrue($this->_repository->getProvider('ProviderOne') instanceof Zend_Tool_Framework_Provider_Interface);
     }

@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+
 /**
  * @category   Zend
  * @package    Zend_Tool
@@ -27,12 +28,13 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Provider_ProviderAltName implements Zend_Tool_Framework_Provider_Interface
+class Zend_Tool_Framework_Provider_Asset_ProviderFullFeaturedBadSpecialties2 extends Zend_Tool_Framework_Provider_Abstract
 {
 
-    public function getName()
+    public function getSpecialties()
     {
-        return 'FooBar';
+        return new ArrayObject(array('Hi', 'BloodyMurder', 'ForYourTeam'));
     }
 
 }
+

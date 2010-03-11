@@ -56,7 +56,7 @@ class Zend_Tool_Framework_Provider_AbstractTest extends PHPUnit_Framework_TestCa
 
     public function testAbsractReturnsRequestAndResponse()
     {
-        $provider = new Zend_Tool_Framework_Provider_ProviderFullFeatured();
+        $provider = new Zend_Tool_Framework_Provider_Asset_ProviderFullFeatured();
         $provider->setRegistry($this->_registry);
         $returnInternals = $provider->_testReturnInternals();
         $this->assertTrue(array_shift($returnInternals) === $this->_request);

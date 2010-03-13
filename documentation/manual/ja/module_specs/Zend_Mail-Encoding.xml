@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19518 -->
+<!-- EN-Revision: 20819 -->
 <sect1 id="zend.mail.encoding">
     <title>エンコーディング</title>
+
     <para>
         テキストおよび HTML メッセージの本文は、デフォルトでは
         quotedprintable 方式でエンコードされます。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21259 -->
+<!-- EN-Revision: 21474 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -206,23 +206,9 @@ if ($validator->isValid($iban)) {
 
     <xi:include href="Zend_Validate-Sitemap.xml" />
 
-    <sect2 id="zend.validate.set.string_length">
-        <title>StringLength</title>
-
-        <para>
-            文字列 <code>$value</code> の長さが最小値以上、
-            かつ最大値以下 (最大値が <constant>NULL</constant> 以外のとき)
-            の場合にのみ <constant>TRUE</constant> を返します。
-            <methodname>setMin()</methodname>
-            で最大値より大きい値を指定したり <methodname>setMax()</methodname>
-            で最小値より小さい値を設定したりした場合に例外をスローします。
-            このクラスは UTF-8 のほかに <ulink
-                url="http://www.php.net/manual/ja/ref.iconv.php#iconv.configuration">iconv.internal_encoding</ulink>
-            にもとづいたその他の文字エンコーディングもサポートします。
-            別のエンコーディングを使用したい場合は、アクセサメソッド getEncoding
-            および setEncoding で設定します。
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-StringLength.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-StringLength.xml" /></xi:fallback>
+    </xi:include>
 
 </sect1>
 <!--

@@ -159,8 +159,8 @@ $validator->isValid("Testing"); // returns true
 
         <para>
             Strings are always using a encoding. Even when you don't set the encoding explicit,
-            <acromyn>PHP</acronym> uses one. When your application is using a different encoding
-            than <acromyn>PHP</acronym> itself then you should set an encoding yourself.
+            <acronym>PHP</acronym> uses one. When your application is using a different encoding
+            than <acronym>PHP</acronym> itself then you should set an encoding yourself.
         </para>
 
         <para>

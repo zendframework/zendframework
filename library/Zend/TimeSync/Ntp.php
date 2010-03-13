@@ -139,6 +139,61 @@ class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol
     }
 
     /**
+     * Calculates a 32bit integer
+     *
+     * @param string $input
+     * @return integer
+     */
+    protected function _getInteger($input)
+    {
+        $f1  = str_pad(ord($input[0]), 2, '0', STR_PAD_LEFT);
+        $f1 .= str_pad(ord($input[1]), 2, '0', STR_PAD_LEFT);
+        $f1 .= str_pad(ord($input[2]), 2, '0', STR_PAD_LEFT);
+        $f1 .= str_pad(ord($input[3]), 2, '0', STR_PAD_LEFT);
+        return (int) $f1;
+    }
+
+    /**
+     * Calculates a 32bit signed fixed point number
+     *
+     * @param string $input
+     * @return float
+     */
+    protected function _getFloat($input)
+    {
+        $f1  = str_pad(ord($input[0]), 2, '0', STR_PAD_LEFT);
+        $f1 .= str_pad(ord($input[1]), 2, '0', STR_PAD_LEFT);
+        $f1 .= str_pad(ord($input[2]), 2, '0', STR_PAD_LEFT);
+        $f1 .= str_pad(ord($input[3]), 2, '0', STR_PAD_LEFT);
+        $f2  = $f1 >> 17;
+        $f3  = ($f1 & 0x0001FFFF);
+        $f1  = $f2 . '.' . $f3;
+        return (float) $f1;
+    }
+
+    /**
+     * Calculates a 64bit timestamp
+     *
+     * @param string $input
+     * @return float
+     */
+    protected function _getTimestamp($input)
+    {
+        $f1  = (ord($input[0]) * pow(256, 3));
+        $f1 += (ord($input[1]) * pow(256, 2));
+        $f1 += (ord($input[2]) * pow(256, 1));
+        $f1 += (ord($input[3]));
+        $f1 -= 2208988800;
+
+        $f2  = (ord($input[4]) * pow(256, 3));
+        $f2 += (ord($input[5]) * pow(256, 2));
+        $f2 += (ord($input[6]) * pow(256, 1));
+        $f2 += (ord($input[7]));
+
+        return (float) ($f1 . "." . $f2);
+    }
+
+    /**
      * Reads the data returned from the timeserver
      *
      * This will return an array with binary data listing:
@@ -162,22 +217,17 @@ class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol
             'stratum'        => ord(fread($this->_socket, 1)),
             'poll'           => ord(fread($this->_socket, 1)),
             'precision'      => ord(fread($this->_socket, 1)),
-            'rootdelay'      => ord(fread($this->_socket, 4)),
-            'rootdispersion' => ord(fread($this->_socket, 4)),
-            'referenceid'    => ord(fread($this->_socket, 4)),
-            'referencestamp' => ord(fread($this->_socket, 4)),
-            'referencemicro' => ord(fread($this->_socket, 4)),
-            'originatestamp' => ord(fread($this->_socket, 4)),
-            'originatemicro' => ord(fread($this->_socket, 4)),
-            'receivestamp'   => ord(fread($this->_socket, 4)),
-            'receivemicro'   => ord(fread($this->_socket, 4)),
-            'transmitstamp'  => ord(fread($this->_socket, 4)),
-            'transmitmicro'  => ord(fread($this->_socket, 4)),
-            'clientreceived' => 0
+            'rootdelay'      => $this->_getFloat(fread($this->_socket, 4)),
+            'rootdispersion' => $this->_getFloat(fread($this->_socket, 4)),
+            'referenceid'    => fread($this->_socket, 4),
+            'referencestamp' => $this->_getTimestamp(fread($this->_socket, 8)),
+            'originatestamp' => $this->_getTimestamp(fread($this->_socket, 8)),
+            'receivestamp'   => $this->_getTimestamp(fread($this->_socket, 8)),
+            'transmitstamp'  => $this->_getTimestamp(fread($this->_socket, 8)),
+            'clientreceived' => microtime(true)
         );
 
         $this->_disconnect();
-
         return $result;
     }
 
@@ -345,8 +395,7 @@ class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol
          * Both positive and negative values, depending on clock precision and skew, are
          * possible.
          */
-        $this->_info['rootdelay']     = $binary['rootdelay'] >> 15;
-        $this->_info['rootdelayfrac'] = ($binary['rootdelay'] << 17) >> 17;
+        $this->_info['rootdelay'] = $binary['rootdelay'];
 
         /*
          * Indicates the maximum error relative to the primary reference source at the
@@ -354,29 +403,7 @@ class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol
          *
          * Only positive values greater than zero are possible.
          */
-        $this->_info['rootdispersion']     = $binary['rootdispersion'] >> 15;
-        $this->_info['rootdispersionfrac'] = ($binary['rootdispersion'] << 17) >> 17;
-
-        /*
-         * The local time, in timestamp format, at the peer
-         * when its latest NTP message was sent.
-         */
-        $original  = (float) $binary['originatestamp'];
-        $original += (float) ($binary['originatemicro'] / 4294967296);
-
-        /*
-         * The local time, in timestamp format, when the latest
-         * NTP message from the peer arrived.
-         */
-        $received  = (float) $binary['receivestamp'];
-        $received += (float) ($binary['receivemicro'] / 4294967296);
-
-        /*
-         * The local time, in timestamp format, at which the
-         * NTP message departed the sender.
-         */
-        $transmit  = (float) $binary['transmitstamp'];
-        $transmit += (float) ($binary['transmitmicro'] / 4294967296);
+        $this->_info['rootdispersion'] = $binary['rootdispersion'];
 
         /*
          * The roundtrip delay of the peer clock relative to the local clock
@@ -385,14 +412,18 @@ class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol
          * Note that this variable can take on both positive and negative values,
          * depending on clock precision and skew-error accumulation.
          */
-        $roundtrip                = ($binary['clientreceived'] - $original);
-        $roundtrip               -= ($transmit - $received);
-        $this->_info['roundtrip'] = ($roundtrip / 2);
+        $this->_info['roundtrip']  = $binary['receivestamp'];
+        $this->_info['roundtrip'] -= $binary['originatestamp'];
+        $this->_info['roundtrip'] -= $binary['transmitstamp'];
+        $this->_info['roundtrip'] += $binary['clientreceived'];
+        $this->_info['roundtrip'] /= 2;
 
         // The offset of the peer clock relative to the local clock, in seconds.
-        $offset                = ($received - $original + $transmit - $binary['clientreceived']);
-        $this->_info['offset'] = ($offset / 2);
-
+        $this->_info['offset']  = $binary['receivestamp'];
+        $this->_info['offset'] -= $binary['originatestamp'];
+        $this->_info['offset'] += $binary['transmitstamp'];
+        $this->_info['offset'] -= $binary['clientreceived'];
+        $this->_info['offset'] /= 2;
         $time = (time() - $this->_info['offset']);
 
         return $time;

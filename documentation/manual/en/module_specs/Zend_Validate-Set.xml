@@ -167,16 +167,7 @@ if ($validator->isValid($iban)) {
     <xi:include href="Zend_Validate-LessThan.xml" />
     <xi:include href="Zend_Validate-NotEmpty.xml" />
     <xi:include href="Zend_Validate-PostCode.xml" />
-
-    <sect2 id="zend.validate.set.regex">
-        <title>Regex</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> matches
-            against a regular expression pattern.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Regex.xml" />
     <xi:include href="Zend_Validate-Sitemap.xml" />
     <xi:include href="Zend_Validate-StringLength.xml" />
 </sect1>

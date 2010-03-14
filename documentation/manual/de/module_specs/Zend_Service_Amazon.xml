@@ -778,7 +778,8 @@ foreach ($results as $result) {
                                     Empfangen werden zu können.
                                 </entry>
                             </row>
-+                            <row>
+
+                            <row>
                                 <entry>GlancePage</entry>
                                 <entry>string</entry>
 

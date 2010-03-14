@@ -452,6 +452,7 @@ C:\WAMP\PHP\bin
                             zugegriffen werden kann.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             Wenn der Provider eine Methode <methodname>getName()</methodname> hat,
@@ -459,6 +460,7 @@ C:\WAMP\PHP\bin
                             erkennen.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             Wenn der Provider den Präfix "Provider" hat, zum Beispiel wenn er
@@ -476,18 +478,19 @@ C:\WAMP\PHP\bin
                     </para>
                 </note>
 
-                <example id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading.example">
+                <example
+                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading.example">
                     <title>Provider mit einem Manifest bekanntmachen</title>
 
                     <para>
-                        You can expose your providers to Zend Tool by offering a manifest
-                        with a special filename ending with "Manifest.php".
-                        A Provider Manifest is an implementation of the
-                        <interface>Zend_Tool_Framework_Manifest_ProviderManifestable</interface>
-                        and requires the <methodname>getProviders()</methodname> method to return
-                        an array of instantiated providers. In anticipation of our first
-                        own provider <classname>My_Component_HelloProvider</classname>
-                        we will create the following manifest:
+                        Man kann eigene Provider bei Zend Tool bekannt machen indem man ein Manifest
+                        anbietet, mit einer speziellen Endung des Dateinamens von "Manifest.php".
+                        Ein Provider-Manifest ist eine Implementation von
+                        <interface>Zend_Tool_Framework_Manifest_ProviderManifestable</interface> und
+                        benötigt die <methodname>getProviders()</methodname> Methode um ein Array
+                        von instanziierten Providern zurückzugeben. Anders als unser erster eigener
+                        Provider <classname>My_Component_HelloProvider</classname> erstellen wir das
+                        folgende Manifest:
                     </para>
 
                     <programlisting language="php"><![CDATA[
@@ -507,18 +510,18 @@ class My_Component_Manifest
             </sect4>
 
             <sect4 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.basic">
-                <title>Basic Instructions for Creating Providers</title>
+                <title>Grundsätzliche Instruktionen für die Erstellung von Providern</title>
 
                 <para>
-                    As an example, if a developer wants to add the capability of showing
-                    the version of a datafile that his 3rd party component is working
-                    from, there is only one class the developer would need to implement.
-                    Assuming the component is called <classname>My_Component</classname>, he would
-                    create a class named <classname>My_Component_HelloProvider</classname> in a
-                    file named <filename>HelloProvider.php</filename> somewhere on the
-                    <property>include_path</property>. This class would implement
-                    <classname>Zend_Tool_Framework_Provider_Interface</classname>, and the body of
-                    this file would only have to look like the following:
+                    Wenn, als Beispiel, ein Entwickler die Fähigkeit, eine Version einer Datendatei
+                    anzuzeigen, hinzufügen will mit der seine 3rd Party Komponente arbeitet, gibt es
+                    nur eine Klasse welche der Entwickler implementieren muss. Angenommen die
+                    Komponente wird <classname>My_Component</classname> genannt, dann würde er eine
+                    Klasse erstellen welche <classname>My_Component_HelloProvider</classname> heißt
+                    in einer Datei wleche <filename>HelloProvider.php</filename> genannt ist und
+                    irgendwo in seinem <property>include_path</property> liegt. Diese Klasse würde
+                    <classname>Zend_Tool_Framework_Provider_Interface</classname> implementieren und
+                    diese Datei würde etwa wie folgt auszusehen haben:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -527,32 +530,34 @@ class My_Component_HelloProvider
 {
     public function say()
     {
-        echo 'Hello from my provider!';
+        echo 'Hallo von meinem Provider!';
     }
 }
 ]]></programlisting>
 
                 <para>
-                    Given that code above, and assuming the developer wishes to access
-                    this functionality through the console client, the call would look
-                    like this:
+                    Bei dem obigen Code und der Annahme das der Entwickler Zugriff auf diese
+                    Funktionalität über den Konsolen-Client haben will, würde der Aufruf wie folgt
+                    aussehen:
                 </para>
 
                 <programlisting language="sh"><![CDATA[
 % zf say hello
-Hello from my provider!
+Hallo von meinem Provider!
 ]]></programlisting>
             </sect4>
 
             <sect4 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.response">
-                <title>The response object</title>
+                <title>Das Antwort-Objekt</title>
 
                 <para>
-                    As discussed in the architecture section Zend Tool allows to hook different clients for
-                    using your Zend Tool providers. To keep compliant with different clients you should
-                    use the response object to return messages from your providers instead of using
-                    <methodname>echo()</methodname> or a similiar output mechanism. Rewritting our hello
-                    provider with this knowledge it looks like:
+                    Wie im Architektur-Abschnitt diskutiert erlaubt es Zend Tool andere Clients für
+                    die Verwendung eigener Zend Tool Provider zu verknüpfen. Um den
+                    unterschiedlichen Clients zu entsprechen sollte man das Antwort-Objekt verwenden
+                    um Rückgabe-Meldungen von Providern zurückzugeben anstatt
+                    <methodname>echo()</methodname> oder ähnliche Ausgabe-Mechanismen zu verwenden.
+                    Nach dem Umschreiben des Hello-Providers mit diesen Erkenntnissen sieht er wie
+                    folgt aus:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -562,40 +567,41 @@ class My_Component_HelloProvider
     public function say()
     {
         $this->_registry->getResponse
-                        ->appendContent("Hello from my provider!");
+                        ->appendContent("Hallo von meinem Provider!");
     }
 }
 ]]></programlisting>
 
                 <para>
-                    As you can see one has to extend the <classname>Zend_Tool_Framework_Provider_Abstract</classname>
-                    to gain access to the Registry which holds the <classname>Zend_Tool_Framework_Client_Response</classname>
-                    instance.
+                    Wie man sieht muss <classname>Zend_Tool_Framework_Provider_Abstract</classname>
+                    erweitert werden um Zugriff auf die Registry zu erhalten welche die
+                    <classname>Zend_Tool_Framework_Client_Response</classname> Instanz enthält.
                 </para>
             </sect4>
 
             <sect4 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced">
-                <title>Advanced Development Information</title>
+                <title>Fortgeschrittene Informationen für die Entwicklung</title>
 
-                <sect5 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.variables">
-                    <title>Passing Variables to a Provider</title>
+                <sect5
+                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.variables">
+                    <title>Variablen an einen Provider übergeben</title>
 
                     <para>
-                        The above "Hello World" example is great for simple commands, but
-                        what about something more advanced? As your scripting and tooling
-                        needs grow, you might find that you need the ability to accept
-                        variables. Much like function signatures have parameters, your
-                        tooling requests can also accept parameters.
+                        Das obige "Hello World" Beispiel ist großartig für einfache Befehle, aber
+                        was ist mit etwas komplizierterem? Wenn die eigenen Skripting- und
+                        Tooling-Bedürfnisse wachsen kann man die Notwendigkeit sehen dass man
+                        Variablen akzeptiert. So wie Funktions-Signaturen Parameter haben, so können
+                        eigene Tooling-Anfragen auch Parmeter akzeptieren.
                     </para>
 
                     <para>
-                        Just as each tooling request can be isolated to a method within a
-                        class, the parameters of a tooling request can also be isolated in a
-                        very well known place. Parameters of the action methods of a
-                        provider can include the same parameters you want your client to
-                        utilize when calling that provider and action combination. For
-                        example, if you wanted to accept a name in the above example, you
-                        would probably do this in OO code:
+                        So wie jede Tooling-Anfrage isoliert von einer Methode in einer Klasse sein
+                        kann, können auch die Parameter einer Tooling-Anfrage in einem sehr
+                        bekanntem Platz isoliert sein. Parameter einer Aktions-Methode eines
+                        Providers können die selben Parameter enthalten welche der eigene Client
+                        verwenden soll wenn diese Provider und Aktions-Methode aufgerufen wird.
+                        Wenn man zum Beispiel einen Namen im oben stehenden Beispiel akzeptieren
+                        will, würde man möglicherweise folgendes in OO Code machen:
                     </para>
 
                 <programlisting language="php"><![CDATA[
@@ -604,29 +610,31 @@ class My_Component_HelloProvider
 {
     public function say($name = 'Ralph')
     {
-        echo 'Hello' . $name . ', from my provider!';
+        echo 'Hallo' . $name . ', von meinem Provider!';
     }
 }
 ]]></programlisting>
 
                     <para>
-                        The above example can then be called via the command line
-                        <command>zf say hello Joe</command>. "Joe" will be supplied to the provider as
-                        a parameter of the method call. Also note, as you see that the
-                        parameter is optional, that means it is also optional on the command
-                        line, so that <command>zf say hello</command> will still work, and default
-                        to the name "Ralph".
+                        Das obige Beispiel kann dann über die Kommandozeile
+                        <command>zf say hello Joe</command> aufgerufen werden. "Joe" wird dem
+                        Provider bereitgestellt so wie ein Parameter eines Methodenaufrufs. Es ist
+                        auch zu beachten das der Parameter optional ist, was bedeutet das er auch
+                        in der Kommandozeile optional ist, so dass
+                        <command>zf say hello</command> trotzdem noch funktioniert, und auf den
+                        Standardwert "Ralph" zeigt.
                     </para>
-
                 </sect5>
 
-                <sect5 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.prompt">
-                    <title>Prompt the User for Input</title>
+                <sect5
+                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.prompt">
+                    <title>Den Benutzer nach einer Eingabe fragen</title>
 
                     <para>
-                        There are cases when the workflow of your provider requires
-                        to prompt the user for input. This can be done by requesting
-                        the client to ask for more the required input by calling:
+                        Es gibt Fälle in denen der Workflow des eigenen Providers es notwendig macht
+                        den Benutzer nach einer Eingabe zu fragen. Dies kann getan werden indem der
+                        Client nach einer zusätzlich benötigten Eingabe gefragt wird indem folgendes
+                        aufgerufen wird:
                     </para>
 
                     <programlisting language="php"><![CDATA[
@@ -637,41 +645,43 @@ class My_Component_HelloProvider
     {
         $nameResponse = $this->_registry
                              ->getClient()
-                             ->promptInteractiveInput("Whats your name?");
+                             ->promptInteractiveInput("Wie ist dein Name?");
         $name = $name->getContent();
 
-        echo 'Hello' . $name . ', from my provider!';
+        echo 'Hallo' . $name . ', von meinem Provider!';
     }
 }
 ]]></programlisting>
 
                     <para>
-                        This command throws an exception if the current client is not
-                        able to handle interactive requests. In case of the default Console Client
-                        however you will be asked to enter the name.
+                        Dieses Kommando wirft eine Ausnahme wenn der aktuelle Client nicht in der
+                        Lage ist interaktive Anfragen zu behandeln. Im Falle des standardmäßigen
+                        Konsolen-Clients wird man aber danach gefragt den Namen einzugeben.
                     </para>
                 </sect5>
 
-                <sect5 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.pretendable">
-                    <title>Pretending to execute a Provider Action</title>
+                <sect5
+                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.pretendable">
+                    <title>Die Ausführung einer Provider-Aktion vorbereiten</title>
 
                     <para>
-                        Another interesting feature you might wish to implement is
-                        <emphasis>pretendability</emphasis>. Pretendabilty is the ability
-                        for your provider to "pretend" as if it is doing the requested
-                        action and provider combination and give the user as much
-                        information about what it <emphasis>would</emphasis> do without
-                        actually doing it. This might be an important notion when doing
-                        heavy database or filesystem modifications that the user might not
-                        otherwise want to do.
+                        Ein anderes interessantes Feature das man möglicherweise implementieren will
+                        ist die <emphasis>Vorbereitung</emphasis>. Vorbereitung ist die Fähigkeit
+                        des eigenen Providers sich "vorzubereiten", wie wenn er die angefragte
+                        Kombination von Aktion und Provider  durchführt und dem Benutzer so viele
+                        Informationen wie möglich darüber zu geben was er tun
+                        <emphasis>würde</emphasis> ohne es wirklich zu tun. Das kann ein wichtiger
+                        Hinweis sein wenn große Änderungen in der Datenbank oder auf dem Dateisystem
+                        durchgeführt werden welche der Benutzer andernfalls nicht durchführen wollen
+                        würde.
                     </para>
 
                     <para>
-                        Pretendability is easy to implement. There are two parts to this
-                        feature: 1) marking the provider as having the ability to "pretend",
-                        and 2) checking the request to ensure the current request was indeed
-                        asked to be "pretended". This feature is demonstrated in the code
-                        sample below.
+                        Voranstellbarkeit ist einfach zu implementieren. Es gibt zwei Teile zu
+                        diesem Feature: 1) Den Provider markieren, das er die Fähigkeit hat
+                        "vorzubereiten", und 2) die Anfrage prüfen und sicherstellen das die
+                        aktuelle Anfrage wirklich als "vorzubereiten" angefragt wurde. Dieses
+                        Feature wird im folgenden Code-Beispiel demonstriert.
                     </para>
 
                     <programlisting language="php"><![CDATA[
@@ -682,33 +692,34 @@ class My_Component_HelloProvider
     public function say($name = 'Ralph')
     {
         if ($this->_registry->getRequest()->isPretend()) {
-            echo 'I would say hello to ' . $name . '.';
+            echo 'Ich würde Hallo zu ' . $name . ' sagen.';
         } else {
-            echo 'Hello' . $name . ', from my provider!';
+            echo 'Hallo' . $name . ', von meinem Provider!';
         }
     }
 }
 ]]></programlisting>
 
                     <para>
-                        To run the provider in pretend mode just call:
+                        Um den Provider im vorbereiteten Modus auszuführen muss nur folgendes
+                        aufgerufen werden:
                     </para>
 
                     <programlisting language="sh"><![CDATA[
 % zf --pretend say hello Ralph
-I would say hello Ralph.
+Ich würde Hallo zu Ralph sagen.
 ]]></programlisting>
-
                 </sect5>
 
-                <sect5 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.verbosedebug">
-                    <title>Verbose and Debug modes</title>
+                <sect5
+                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.verbosedebug">
+                    <title>Verbose und Debug Modi</title>
 
                     <para>
-                        You can also run your provider actions in "verbose" or "debug" modes.
-                        The semantics in regard to this actions have to be implemented by you
-                        in the context of your provider. You can access debug or verbose modes
-                        with:
+                        Man kann Provider Aktionen auch in den Modi "verbose" oder "debug" laufen
+                        lassen. Die Semantik bezüglich dieser Aktionen muss man im Kontext des
+                        Providers implementieren. Man kann auf die Modi Debug oder Verbose wie
+                        folgt zugreifen:
                     </para>
 
                     <programlisting language="php"><![CDATA[
@@ -718,25 +729,26 @@ class My_Component_HelloProvider
     public function say($name = 'Ralph')
     {
         if($this->_registry->getRequest()->isVerbose()) {
-            echo "Hello::say has been called\n";
+            echo "Hello::say wurde aufgerufen\n";
         }
         if($this->_registry->getRequest()->isDebug()) {
-            syslog(LOG_INFO, "Hello::say has been called\n");
+            syslog(LOG_INFO, "Hello::say wurde aufgerufen\n");
         }
     }
 }
 ]]></programlisting>
                 </sect5>
 
-                <sect5 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.configstorage">
-                    <title>Accessing User Config and Storage</title>
+                <sect5
+                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.configstorage">
+                    <title>Auf die Benutzerkonfiguration und den Speicher zugreifen</title>
 
                     <para>
-                        Using the Enviroment variable <property>ZF_CONFIG_FILE</property> or the
-                        .zf.ini in your home directory you can inject configuration parameters into
-                        any Zend Tool provider. Access to this configuration is available via the
-                        registry that is passed to your provider if you extend
-                        <classname>Zend_Tool_Framework_Provider_Abstract</classname>.
+                        Bei Verwendung der Umgebungsvariable <property>ZF_CONFIG_FILE</property>
+                        oder von .zf.ini im Heimverzeichnis können Konfigurationsparameter in jeden
+                        Zend Tool Provider eingefügt werden. Der Zugriff auf diese Konfiguration ist
+                        über die Registry möglich welche dem Provider übergeben wird wenn man
+                        <classname>Zend_Tool_Framework_Provider_Abstract</classname> erweitert.
                     </para>
 
                     <programlisting language="php"><![CDATA[
@@ -747,25 +759,27 @@ class My_Component_HelloProvider
     {
         $username = $this->_registry->getConfig()->username;
         if(!empty($username)) {
-            echo "Hello $username!";
+            echo "Hallo $username!";
         } else {
-            echo "Hello!";
+            echo "Hallo!";
         }
     }
 }
 ]]></programlisting>
 
                     <para>
-                        The returned configuration is of the type
-                        <classname>Zend_Tool_Framework_Client_Config</classname> but internally the
-                        <methodname>__get()</methodname> and <methodname>__set()</methodname> magic methods
-                        proxy to a <classname>Zend_Config</classname> of the given configuration type.
+                        Die zurückgegebene Konfiguration ist vom Typ
+                        <classname>Zend_Tool_Framework_Client_Config</classname> allerdings
+                        verweisen die magischen Methoden <methodname>__get()</methodname> und
+                        <methodname>__set()</methodname> intern auf eine
+                        <classname>Zend_Config</classname> oder den angegebenen Konfigurationstyp.
                     </para>
 
                     <para>
-                        The storage allows to save arbitrary data for later reference. This can be useful for batch
-                        processing tasks or for re-runs of your tasks. You can access the storage in a similar way
-                        like the configuration:
+                        Der Speicher erlaubt es notwendige Daten für eine spätere Referenz zu
+                        speichern. Das kann für Aufgaben bei der Ausführung von Batches nützlich
+                        sein oder für das wiederausführen von Aufgaben. Man kann auf den Speicher
+                        auf dem gleichen Weg zugreifen wie auf die Konfiguration:
                     </para>
 
                     <programlisting language="php"><![CDATA[
@@ -775,13 +789,13 @@ class My_Component_HelloProvider
     public function say()
     {
         $aValue = $this->_registry->getStorage()->get("myUsername");
-        echo "Hello $aValue!";
+        echo "Hallo $aValue!";
     }
 }
 ]]></programlisting>
 
                     <para>
-                        The API of the storage is very simple:
+                        Die API des Speichers ist sehr einfach:
                     </para>
 
                     <programlisting language="php"><![CDATA[
@@ -799,68 +813,69 @@ class Zend_Tool_Framework_Client_Storage
 
                     <important>
                         <para>
-                            When designing your providers that are config or storage aware remember to
-                            check if the required user-config or storage keys really exist for a user.
-                            You won't run into fatal errors when none of these are provided though,
-                            since empty ones are created upon request.
+                            Wenn man Provider erstellt welche Konfigurations-fähig oder
+                            Speicher-fähig sind muss man daran denken dass man prüfen muss ob die
+                            notwendigen Benutzerkonfigurations- oder Speicher-Schlüssel wirklich
+                            für diesen Benutzer existieren. Man wird keine fatalen Fehler erhalten
+                            wenn keiner von Ihnen angegeben wurde, da leere Schlüssel bei der
+                            Anfrage erstellt werden.
                         </para>
                     </important>
                 </sect5>
-
             </sect4>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.tool.extending.zend-tool-project">
-        <title>Zend_Tool_Project Extensions</title>
+        <title>Zend_Tool_Project Erweiterungen</title>
 
         <para>
-            Zend_Tool_Project exposes a rich set of functionality and capabilities that make the task
-            of creating new providers, specficially those targetting project easier and more manageable.
+            Zend_Tool_Project bietet ein reiches Set an Funktionalitäten und Möglichkeiten welche
+            die Aufgabe der Erstellung neuer Provider, speziell jener welche auf ein Projekt
+            abzielen, einfacher und besser managebar.
         </para>
 
         <sect3 id="zend.tool.extending.zend-tool-project.architecture">
-            <title>Overall Architecture</title>
+            <title>Architektur-Übersicht</title>
 
             <para>
-                This same concept applies to Zend Framework projects. In Zend Framework projects, you have
-                controllers, actions, views, models, databases and so on and so forth. In terms of
-                <classname>Zend_Tool</classname>, we need a way to track these types of resources - thus
-                <classname>Zend_Tool_Project</classname>.
+                Das selbe Konzept gilt auch für Zend Framework Projekte. In Zend Framework Projekten
+                hat man Controller, Aktionen, Views, Modelle, Datenbanken und so weiter. Im Sinn
+                von <classname>Zend_Tool</classname> benötigen wir einen Weg um diese Arten von
+                Ressourcen zu verfolgen -- deshalb <classname>Zend_Tool_Project</classname>.
             </para>
 
             <para>
-                <classname>Zend_Tool_Project</classname> is capable of tracking project resources throughout
-                the development of a project. So, for example, if in one command you created a controller,
-                and in the next command you wish to create an action within that controller,
-                <classname>Zend_Tool_Project</classname> is gonna have to <emphasis>know</emphasis> about
-                the controller file you created so that you can (in the next action), be able to append that
-                action to it. This is what keeps our projects up to date and <emphasis>stateful</emphasis>.
+                <classname>Zend_Tool_Project</classname> ist in der Lage Projektressourcen wärend
+                der Entwicklung eines Projekts zu verfolgen. Wenn man, zum Beispiel, in einem
+                Kommando einen Controller erstellt, und im nächsten Kommando eine Aktion in diesem
+                Controller erstellen will, muss <classname>Zend_Tool_Project</classname> über die
+                Controllerdatei bescheid <emphasis>wissen</emphasis> die man erstellt hat, damit
+                man (in der nächsten Aktion) in der Lage ist diese Aktion daran anzuhängen. Das ist
+                was das Projekt aktuell hält und <emphasis>zustandsbehaftet</emphasis>.
             </para>
 
             <para>
-                Another important point to understand about projects is that typically, resources are
-                organized in a hierarchical fashion. With that in mind,
-                <classname>Zend_Tool_Project</classname> is capable of serializing the current project into
-                a internal representation that allows it to keep track of not only <emphasis>what</emphasis>
-                resources are part of a project at any given time, but also <emphasis>where</emphasis> they
-                are in relation to one another.
+                Ein andere wichtiger Punkt den man über Projekte verstehen sollte ist, dass
+                Ressourcen typischerweise in einer hierarchischen Art orgainisiert sind. Dies zu
+                wissen bedeutet das <classname>Zend_Tool_Project</classname> in der Lage ist das
+                aktuelle Projekt in eine interne Repräsentation zu serialisieren welche es erlaubt
+                nicht nur jederzeit festzustellen <emphasis>welche</emphasis> Ressourcen Teil eines
+                Projekts sind, sondern auch <emphasis>wo</emphasis> Sie in Relation zu anderen
+                stehen.
             </para>
-
         </sect3>
 
-
         <sect3 id="zend.tool.extending.zend-tool-project.providers">
-            <title>Creating Providers</title>
+            <title>Provider erstellen</title>
 
             <para>
-                Project specific providers are created in the same fashion as plain framework providers, with
-                one exception: project providers must extend the <code>Zend_Tool_Project_Provider_Abstract</code>.
-                This class comes with some significant functionality that helps developers load existing project,
-                obtian the profile object, and be able to search the profile, then later store any changes to the
-                current project profile.
+                Projektspezifische Provider werden auf dem selben Weg erstellt wie reine Framework
+                Provider, mit einer Ausnahme: Projektprovider müssen
+                <code>Zend_Tool_Project_Provider_Abstract</code> erweitern. Diese Klasse kommt mit
+                einigen signifikanten Funktionalitäten welche Entwicklern helfen existierende
+                Projekte zu laden, das Profilobjekt zu erhalten, und in der Lage zu sein das Profil
+                zu suchen, und später dann alle Änderungen im aktuellen Projektprofil zu speichern.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -871,13 +886,12 @@ class My_Component_HelloProvider
     {
         $profile = $this->_loadExistingProfile();
 
-        /* ... do project stuff here */
+        /* ... Projektarbeiten hier durchführen */
 
         $this->_storeProfile();
     }
 }
 ]]></programlisting>
-
         </sect3>
 
         <!--
@@ -888,6 +902,5 @@ class My_Component_HelloProvider
 
         </sect3>
         -->
-
     </sect2>
 </sect1>

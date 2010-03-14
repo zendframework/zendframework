@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 21496 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.validate.set.greaterthan">
+    <title>GreaterThan</title>
+
+    <para>
+        <classname>Zend_Validate_GreaterThan</classname> permet de valider qu'une valeur est plus grande
+        qu'une autre (la borne).
+    </para>
+
+    <note>
+        <title>Zend_Validate_GreaterThan ne supporte que les nombres</title>
+
+        <para>
+            Zend_Validate_GreaterThan ne fonctionnera pas avec les chaines ou les dates.
+        </para>
+    </note>
+
+    <sect3 id="zend.validate.set.greaterthan.options">
+        <title>Options gérées par Zend_Validate_GreaterThan</title>
+
+        <para>
+            Les options suivantes sont reconnues par <classname>Zend_Validate_GreaterThan</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>min</property></emphasis>: Affecte la borne inférieure.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.validate.set.greaterthan.basic">
+        <title>Utilisation de base</title>
+
+        <para>
+            Voyez l'exemple ci-après.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid  = new Zend_Validate_GreaterThan(array('min' => 10));
+$value  = 10;
+$return = $valid->isValid($value);
+// retourne true
+]]></programlisting>
+
+        <para>
+            L'exemple ci-dessus retourne <constant>TRUE</constant> pour toutes les valeurs égales ou
+            supérieures à 10.
+        </para>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

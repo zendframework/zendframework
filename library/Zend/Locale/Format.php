@@ -311,6 +311,10 @@ class Zend_Locale_Format
         if ($format === null) {
             $format  = Zend_Locale_Data::getContent($options['locale'], 'decimalnumber');
             $format  = self::_seperateFormat($format, $value, $options['precision']);
+
+            if ($options['precision'] !== null) {
+                $value   = Zend_Locale_Math::normalize(Zend_Locale_Math::round($value, $options['precision']));
+            }
         } else {
             // seperate negative format pattern when available
             $format  = self::_seperateFormat($format, $value, $options['precision']);
@@ -322,7 +326,7 @@ class Zend_Locale_Format
                         $options['precision'] = null;
                     } else {
                         $options['precision'] = iconv_strlen(iconv_substr($format, iconv_strpos($format, '.') + 1,
-                                                              iconv_strrpos($format, '0') - iconv_strpos($format, '.')));
+                                                             iconv_strrpos($format, '0') - iconv_strpos($format, '.')));
                         $format = iconv_substr($format, 0, iconv_strpos($format, '.') + 1) . '###'
                                 . iconv_substr($format, iconv_strrpos($format, '0') + 1);
                     }

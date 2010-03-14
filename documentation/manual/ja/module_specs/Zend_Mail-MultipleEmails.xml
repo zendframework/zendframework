@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20039 -->
+<!-- EN-Revision: 20819 -->
 <sect1 id="zend.mail.multiple-emails">
     <title>SMTP 接続による複数のメールの送信</title>
 
@@ -12,16 +12,14 @@
         メッセージの配送の前に RSET コマンドを発行します。
     </para>
 
-    <!-- TODO : to be translated -->
     <para>
-        Optionally, you can also define a default From email address and name,
-        as well as a default reply-to header. This can be done through the static
-        methods <methodname>setDefaultFrom()</methodname> and
-        <methodname>setDefaultReplyTo()</methodname>. These defaults will be used when you
-        don't specify a From/Reply-to Address or -Name until the defaults are reset (cleared).
-        Resetting the defaults can be done through the use of the
-        <methodname>clearDefaultFrom()</methodname> and
-        <methodname>clearDefaultReplyTo</methodname>.
+        任意で、既定の reply-to ヘッダだけではなく、既定の email アドレスと名前も
+        定義できます。これは静的メソッド <methodname>setDefaultFrom()</methodname>
+        及び <methodname>setDefaultReplyTo()</methodname> を介して行なわれます。
+        これらの既定値は、既定値がリセット（消去）されるまで、 From/Reply-to のアドレスや
+        名前を指定しない場合に使われます。
+        既定値は <methodname>clearDefaultFrom()</methodname> 及び
+        <methodname>clearDefaultReplyTo</methodname> を使って消去されます。
     </para>
 
     <example id="zend.mail.multiple-emails.example-1">

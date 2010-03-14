@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 21362
+ * EN-Revision: 21485
  */
 return array(
     // Zend_Validate_Alnum
@@ -233,8 +233,8 @@ return array(
     "Value is required and can't be empty" => "Es wird ein Wert benötigt. Dieser darf nicht leer sein",
 
     // Zend_Validate_PostCode
-    "Invalid type given, value should be string or integer" => "Ungültiger Typ angegeben. Der Wert sollte ein String oder Integer sein",
-    "'%value%' does not appear to be an postal code" => "'%value%' scheint keine gültige Postleitzahl zu sein",
+    "Invalid type given. The value should be a string or a integer" => "Ungültiger Typ angegeben. Der Wert sollte ein String oder ein Integer sein",
+    "'%value%' does not appear to be a postal code" => "'%value%' scheint keine gültige Postleitzahl zu sein",
 
     // Zend_Validate_Regex
     "Invalid type given, value should be string, integer or float" => "Ungültiger Typ angegeben. Der Wert sollte ein String, Integer oder Float sein",

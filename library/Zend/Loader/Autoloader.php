@@ -420,6 +420,7 @@ class Zend_Loader_Autoloader
 
         // Add concrete namespaced autoloaders
         if (strstr($class, self::NS)) {
+            $class = ltrim($class, self::NS);
             foreach (array_keys($this->_namespaceAutoloaders) as $ns) {
                 if ('' == $ns) {
                     continue;

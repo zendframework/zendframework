@@ -52,7 +52,7 @@
         </itemizedlist>
 
         <para>
-        	Używanie <classname>Zend_Db_Select</classname> nie jest obowiązkowe. Dla najprostrzych
+        	Używanie <classname>Zend_Db_Select</classname> nie jest obowiązkowe. Dla najprostszych
         	zapytań SELECT z reguły łatwiej jest zapisać całe polecenie <acronym>SQL</acronym> w 
         	postaci łańcucha znaków i wywołać je za pomocą metod Adaptera takich jak 
         	<methodname>query()</methodname> lub <methodname>fetchAll()</methodname>. Użycie
@@ -65,7 +65,7 @@
 
     <sect2 id="zend.db.select.creating">
 
-        <title>Tworzenie objektu Select</title>
+        <title>Tworzenie obiektu Select</title>
 
         <para>
         	Instancję klasy <classname>Zend_Db_Select</classname> można utworzyć poprzez metodę 
@@ -84,7 +84,7 @@ $select = $db->select();
         </example>
 
         <para>
-        	Innym sposobem utworzenia objektu <classname>Zend_Db_Select</classname> jest użycie
+        	Innym sposobem utworzenia obiektu <classname>Zend_Db_Select</classname> jest użycie
         	konstruktora, podając adapter bazy danych w argumencie.
         </para>
 
@@ -116,7 +116,7 @@ $select = new Zend_Db_Select($db);
             <title>Przykład użycia metod służących dodawaniu części zapytania</title>
 
             <programlisting language="php"><![CDATA[
-// Utworzenie objektu Zend_Db_Select
+// Utworzenie obiektu Zend_Db_Select
 $select = $db->select();
 
 // Dodanie klauzuli FROM
@@ -133,13 +133,13 @@ $select->order( ...podanie kryteriów sortowania... );
 
         <para>
         	Większości metod obiektu <classname>Zend_Db_Select</classname> można używać za pomocą przyjaznego
-        	płynego interfejsu (fluent interface). Interfejs płynny oznacza, że każda z metod zwraca
+        	płynnego interfejsu (fluent interface). Interfejs płynny oznacza, że każda z metod zwraca
         	referencję do obiektu wywołującego więc można od razu użyć następnej metody.
         </para>
 
         <example id="zend.db.select.building.example-fluent">
 
-            <title>Przykład użycia płynego interfejsu</title>
+            <title>Przykład użycia płynnego interfejsu</title>
 
             <programlisting language="php"><![CDATA[
 $select = $db->select()
@@ -169,7 +169,7 @@ $select = $db->select()
 
             <example id="zend.db.select.building.from.example">
 
-                <title>Przykład używacia metody from()</title>
+                <title>Przykład użycia metody from()</title>
 
                 <programlisting language="php"><![CDATA[
 // Utworzenie zapytania:
@@ -183,7 +183,7 @@ $select = $db->select()
             </example>
 
             <para>
-            	Można podać również nazwę korelacyjną (nazywaną również "aliasem tabeli") danej tabeli.
+            	Można podać również nazwę korelacyjną (nazywaną również aliasem tabeli) danej tabeli.
             	Aby to zrobić w argumencie należy podać tablicę asocjacyjną, która będzie zawierała 
             	mapowanie nazwy aliasu na nazwę tabeli. W pozostałych częściach zapytania 
             	<acronym>SQL</acronym> będzie można używać tej nazwy zamiast tabeli. Jeśli dane zapytanie
@@ -393,7 +393,7 @@ $select = $db->select()
             	znaków do ograniczania identyfikatorów. Metoda <methodname>quoteIdentifier()</methodname>
             	jest przystosowana do używania odpowiednich symboli ograniczających w zależności
             	od typu używanego adaptera. Metoda <methodname>quoteIdentifier()</methodname> dokonuje
-            	również unikania znaków cudzysłowia, które pojawią się w argumencie wejściowym.
+            	również unikania znaków cudzysłowu, które pojawią się w argumencie wejściowym.
             </para>
 
             <example id="zend.db.select.building.columns-quoteid.example">
@@ -542,7 +542,7 @@ $select = $db->select()
 ]]></programlisting>
 
                 <para>
-                	W miejscu listy kolum tabeli połączonej występuje pusta tablica
+                	W miejscu listy kolumn tabeli połączonej występuje pusta tablica
                 	(<methodname>array()</methodname>).
                 </para>
 
@@ -933,7 +933,7 @@ $select = $db->select()
 
         <sect3 id="zend.db.select.building.group">
 
-            <title>Adding a GROUP BY Clause</title>
+            <title>Dodanie klauzuli GROUP BY</title>
 
             <para>
             	W <acronym>SQL</acronym>, klauzula <command>GROUP BY</command> pozwala na 
@@ -980,7 +980,7 @@ $select = $db->select()
 
         <sect3 id="zend.db.select.building.having">
 
-            <title>Dodawanie klauzuli HAVING</title>
+            <title>Dodanie klauzuli HAVING</title>
 
             <para>
             	W <acronym>SQL</acronym>, klauzula <constant>HAVING</constant> wprowadza ograniczenie
@@ -1041,13 +1041,13 @@ $select = $db->select()
 
         <sect3 id="zend.db.select.building.order">
 
-            <title>Dodawanie klauzuli ORDER BY</title>
+            <title>Dodanie klauzuli ORDER BY</title>
 
             <para>
             	W <acronym>SQL</acronym>, klauzula <code>ORDER BY</code> określa jedną bądź więcej
             	kolumn lub wyrażeń według których zbiór wynikowy jest posortowany. Jeśli poda się
             	wiele kolumn to sortowanie odbywa się w pierwszej kolejności na podstawie wcześniej
-            	podanej kolumny. Jeśli istnieją wiersze o takiej samej wartośći w danej kolumnie 
+            	podanej kolumny. Jeśli istnieją wiersze o takiej samej wartości w danej kolumnie 
             	to do sortowania używana jest kolejna klumna klauzuli <code>ORDER BY</code>. Domyślny 
             	kierunek sortowania to od najmniejszej wartości do największej. Można sortować w 
             	przeciwnym kierunku przez użycie słowa kluczowego <constant>DESC</constant> po 
@@ -1097,7 +1097,7 @@ $select = $db->select()
 
         <sect3 id="zend.db.select.building.limit">
 
-            <title>Dodawanie klauzuli LIMIT</title>
+            <title>Dodanie klauzuli LIMIT</title>
 
             <para>
             	Niektóre systemy zarządzania bazą danych (<acronym>RDBMS</acronym>) rozszerzają
@@ -1112,7 +1112,7 @@ $select = $db->select()
             <para>
             	W <classname>Zend_Db_Select</classname> można użyć metody 
             	<methodname>limit()</methodname> aby określić ilość wierszy do zwrócenia oraz do
-            	opuszczenia. <emphasis>Pierswszy</emphasis> argumement metody to ilość wierszy
+            	opuszczenia. <emphasis>Pierwszy</emphasis> argument metody to ilość wierszy
             	jaka maksymalnie ma zostać zwrócona. <emphasis>Drugi</emphasis> argument to ilość
             	wierszy do opuszczenia.
             </para>
@@ -1183,7 +1183,7 @@ $select = $db->select()
 
         <sect3 id="zend.db.select.building.distinct">
 
-            <title>Dodawanie słowa kluczowego DISTINCT do zapytania</title>
+            <title>Dodanie słowa kluczowego DISTINCT do zapytania</title>
 
             <para>
             	Metoda <methodname>distinct()</methodname> pozwala na dodanie słowa 
@@ -1210,7 +1210,7 @@ $select = $db->select()
 
         <sect3 id="zend.db.select.building.for-update">
 
-            <title>Dodawanie słowa kluczowego FOR UPDATE do zapytania</title>
+            <title>Dodanie słowa kluczowego FOR UPDATE do zapytania</title>
 
             <para>
             	Metoda <methodname>forUpdate()</methodname> pozwala na dodanie słowa 
@@ -1377,7 +1377,7 @@ echo "$sql\n";
             <title>Uzyskanie części obiektu Select</title>
 
             <para>
-            	Metoda <methodname>getPart()</methodname> zwraca postać łąńcucha znaków odpowiadającą
+            	Metoda <methodname>getPart()</methodname> zwraca postać łańcucha znaków odpowiadającą
             	jednej części polecenia <acronym>SQL</acronym>. Można użyć tej metody aby uzyskać
             	tablicę warunków klauzuli <constant>WHERE</constant>, tablicę kolumn (lub wyrażeń)
             	zawartych w liście <constant>SELECT</constant> albo wartości ilości wierszy 
@@ -1504,7 +1504,7 @@ print_r( $orderData );
 
             <para>
             	Jedyny argument jest opcjonalny. Można podać w nim część zapytania przeznaczoną
-            	do wyczyszczenia używając tych samych łąńcuchów co w przypadku metody
+            	do wyczyszczenia używając tych samych łańcuchów co w przypadku metody
             	<methodname>getPart()</methodname>. Podana część zapytania jest ustawiana w stan
             	domyślny.
             </para>

@@ -241,13 +241,6 @@ Zend_Session::setOptions($config->toArray());
 
             <listitem>
                 <para>
-                    Alternatively, try rearranging the application logic so that actions
-                    manipulating headers are performed prior to sending any output whatsoever.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
                     If a <classname>Zend_Session</classname> method is involved in causing the error
                     message, examine the method carefully, and make sure its use really is needed in
                     the application. For example, the default usage of

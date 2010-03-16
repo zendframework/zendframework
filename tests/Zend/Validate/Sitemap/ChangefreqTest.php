@@ -86,6 +86,8 @@ class Zend_Validate_Sitemap_ChangefreqTest extends PHPUnit_Framework_TestCase
 
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));
+            $messages = $this->_validator->getMessages();
+            $this->assertContains('is no valid', current($messages));
         }
     }
 
@@ -101,6 +103,8 @@ class Zend_Validate_Sitemap_ChangefreqTest extends PHPUnit_Framework_TestCase
 
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));
+            $messages = $this->_validator->getMessages();
+            $this->assertContains('should be a string', current($messages));
         }
     }
 }

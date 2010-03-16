@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20766 -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>Zend_Db_Profiler</title>
@@ -161,18 +161,21 @@ $profiler = $db->getProfiler();
                     情報を取得したクエリの総数を返します。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getTotalElapsedSecs()</methodname> は、
                     情報を取得したクエリの実行所要時間の合計を返します。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getQueryProfiles()</methodname> は、
                     すべてのクエリ情報を配列で返します。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getLastQueryProfile()</methodname> は、最後に
@@ -181,6 +184,7 @@ $profiler = $db->getProfiler();
                     (クエリが完了していない場合は、終了時刻が <constant>NULL</constant> となります)。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>clear()</methodname> は、スタック上に残っている
@@ -206,6 +210,7 @@ $profiler = $db->getProfiler();
                     実行時に置き換えられた値を知ることはできません。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getQueryParams()</methodname> は、
@@ -215,6 +220,7 @@ $profiler = $db->getProfiler();
                     配列のキーは、(1 から始まる) 数値かあるいは (文字列の) パラメータ名となります。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getElapsedSecs()</methodname> は、
@@ -310,12 +316,14 @@ $profiler->setFilterElapsedSecs(null);
                         接続操作、あるいはデータベースの選択。
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::QUERY</constant>:
                         他の形式にあてはまらないクエリ。
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::INSERT</constant>:
@@ -323,24 +331,28 @@ $profiler->setFilterElapsedSecs(null);
                         一般的には <acronym>SQL</acronym> の <acronym>INSERT</acronym>。
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::UPDATE</constant>:
                         既存のデータを更新するクエリ。通常は <acronym>SQL</acronym> の <acronym>UPDATE</acronym>。
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::DELETE</constant>:
                         既存のデータを削除するクエリ。通常は <acronym>SQL</acronym> の <constant>DELETE</constant>。
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::SELECT</constant>:
                         既存のデータを取得するクエリ。通常は <acronym>SQL</acronym> の <acronym>SELECT</acronym>。
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::TRANSACTION</constant>:

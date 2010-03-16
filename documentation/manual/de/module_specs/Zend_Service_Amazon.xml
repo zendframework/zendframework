@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
+<!-- EN-Revision: 21154 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon">
     <title>Zend_Service_Amazon</title>
@@ -766,6 +766,17 @@ foreach ($results as $result) {
                                 <entry>MerchantId</entry>
                                 <entry>string</entry>
                                 <entry>Amazon ID des Anbieters</entry>
+                            </row>
+
+                            <row>
+                                <entry>MerchantName</entry>
+                                <entry>string</entry>
+
+                                <entry>
+                                    Der Amazon Name des Anbieters. Benötigt die Option
+                                    <code>ResponseGroup</code> auf <code>OfferFull</code> um
+                                    Empfangen werden zu können.
+                                </entry>
                             </row>
 
                             <row>

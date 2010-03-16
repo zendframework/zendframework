@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20818 -->
 <sect1 id="zend.rest.server">
     <title>Zend_Rest_Server</title>
 
@@ -61,6 +61,7 @@ $server->handle();
 
         <note>
             <title>数値インデックス</title>
+
             <para>
                数値で指定する引数のインデックスは、1 から始まります。
             </para>
@@ -93,6 +94,7 @@ $server->handle();
 
         <example id="zend.rest.server.customstatus.example-1">
             <title>独自のステータスを返す</title>
+
             <programlisting language="php"><![CDATA[
 /**
  * Say Hello

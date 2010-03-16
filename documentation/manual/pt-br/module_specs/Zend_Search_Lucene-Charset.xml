@@ -2,14 +2,14 @@
 <!-- EN-Revision: 20854 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.charset">
-    <title>Conjunto de Caractere</title>
+    <title>Conjunto de Caracteres</title>
 
     <sect2 id="zend.search.lucene.charset.description">
-        <title>Suporte ao conjunto de caractere UTF-8 e byte-simples</title>
+        <title>Suporte aos conjuntos de caracteres UTF-8 e single-byte</title>
 
         <para>
             <classname>Zend_Search_Lucene</classname> trabalha internamente com o conjunto de
-            caractere UTF-8. Arquivos de índice armazenam dados unicode no formato de codificação
+            caracteres UTF-8. Arquivos de índice armazenam dados unicode no formato de codificação
             "UTF-8 modificado" usado pelo Java. O núcleo do
             <classname>Zend_Search_Lucene</classname> suporta esta codificação plenamente, com uma
             exceção.
@@ -47,39 +47,39 @@
         </para>
 
         <para>
-            ctype_alpha() is not UTF-8 compatible, so the analyzer converts text to
-            'ASCII//TRANSLIT' encoding before indexing. The same processing is transparently
-            performed during query parsing.
+            ctype_alpha() não é compatível com UTF-8, por isso o analisador converte o texto para a
+            codificação 'ASCII//TRANSLIT' antes da indexação. O mesmo processo é realizado
+            transparentemente durante a análise da consulta.
 
             <footnote>
                <para>
-                   Conversion to 'ASCII//TRANSLIT' may depend on current locale and OS.
+                   A conversão para 'ASCII//TRANSLIT' depende da localidade atual e do SO.
                </para>
             </footnote>
         </para>
 
         <note>
-            <title/>
             <para>
-                Default analyzer doesn't treats numbers as parts of terms. Use corresponding 'Num'
-                analyzer if you don't want words to be broken by numbers.
+                O analisador padrão não trata os números como parte de termos. Utilize o analisador
+                'Num' correspondente se você não quer que palavras sejam quebradas por números.
             </para>
         </note>
     </sect2>
 
     <sect2 id="zend.search.lucene.charset.utf_analyzer">
-        <title>UTF-8 compatible text analyzers</title>
+        <title>Analisadores de texto compatíveis com UTF-8</title>
 
         <para>
-            <classname>Zend_Search_Lucene</classname> also contains a set of UTF-8 compatible
-            analyzers: <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8</classname>,
+            <classname>Zend_Search_Lucene</classname> também contém um conjunto de analisadores
+            compatíveis com UTF-8:
+            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8</classname>,
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num</classname>,
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive</classname>,
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num_CaseInsensitive</classname>.
         </para>
 
         <para>
-             Any of this analyzers can be enabled with the code like this:
+            Qualquer um desses analisadores pode ser ativado como o código a seguir:
 
             <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(
@@ -88,52 +88,54 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         </para>
 
         <warning>
-            <title/>
             <para>
-                UTF-8 compatible analyzers were improved in Zend Framework 1.5. Early versions of
-                analyzers assumed all non-ascii characters are letters. New analyzers implementation
-                has more accurate behavior.
+                Os analisadores compatíveis com UTF-8 foram melhorados no Zend Framework 1.5. As
+                primeiras versões dos analisadores assumiam como sendo letras todos os caracteres
+                que não fossem ASCII. A implementação dos novos analisadores possui um comportamento
+                mais correto.
             </para>
 
             <para>
-                This may need you to re-build index to have data and search queries tokenized in the
-                same way, otherwise search engine may return wrong result sets.
+                Isso pode exigir que você reconstrua o índice para ter os dados e as consultas de
+                pesquisa no mesmo formato, caso contrário o motor de busca pode retornar conjuntos
+                de resultados errados.
             </para>
         </warning>
 
         <para>
-            All of these analyzers need PCRE (Perl-compatible regular expressions) library to be
-            compiled with UTF-8 support turned on. PCRE UTF-8 support is turned on for the PCRE
-            library sources bundled with <acronym>PHP</acronym> source code distribution, but if
-            shared library is used instead of bundled with <acronym>PHP</acronym> sources, then
-            UTF-8 support state may depend on you operating system.
+            Todos estes analisadores necessitam da biblioteca PCRE (Perl-compatible regular
+            expressions) compilada com suporte à UTF-8 ativado. O suporte à UTF-8 do PCRE está
+            ativado nas fontes da biblioteca PCRE fornecidas com o código fonte do
+            <acronym>PHP</acronym>, mas se uma biblioteca compartilhada é usada em vez do pacote com
+            as fontes do <acronym>PHP</acronym>, então o estado do suporte à UTF-8 vai depender de
+            seu sistema operacional.
         </para>
 
         <para>
-             Use the following code to check, if PCRE UTF-8 support is enabled:
+            Use o seguinte código para verificar, se o PCRE com suporte à UTF-8 está habilitado:
 
             <programlisting language="php"><![CDATA[
 if (@preg_match('/\pL/u', 'a') == 1) {
-    echo "PCRE unicode support is turned on.\n";
+    echo "PCRE com suporte a Unicode está ativado.\n";
 } else {
-    echo "PCRE unicode support is turned off.\n";
+    echo "PCRE com suporte a Unicode está desativado.\n";
 }
 ]]></programlisting>
         </para>
 
         <para>
-            Case insensitive versions of UTF-8 compatible analyzers also need <ulink
-                url="http://www.php.net/manual/en/ref.mbstring.php">mbstring</ulink> extension to
-            be enabled.
+            Versões dos analisadores compatíveis com UTF-8 insensíveis a maiúsculas e minúsculas
+            precisam também da extensão <ulink
+                url="http://www.php.net/manual/en/ref.mbstring.php">mbstring</ulink> habilitada.
         </para>
 
         <para>
-            If you don't want mbstring extension to be turned on, but need case insensitive search,
-            you may use the following approach: normalize source data before indexing and query
-            string before searching by converting them to lowercase:
+            Se você não quer ativar a extensão mbstring, mas precisa de buscas sem diferenciação de
+            maiúsculas e minúsculas, pode-se usar a seguinte abordagem: normalizar os dados antes da
+            indexação e a string de consulta antes de pesquisar, convertendo-os em minúsculas:
 
             <programlisting language="php"><![CDATA[
-// Indexing
+// Indexando
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
 ...
@@ -148,16 +150,16 @@ $doc = new Zend_Search_Lucene_Document();
 $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
                                                   strtolower($contents)));
 
-// Title field for search through (indexed, unstored)
+// Título de campo para pesquisa direta (indexado, não armazenado)
 $doc->addField(Zend_Search_Lucene_Field::UnStored('title',
                                                   strtolower($title)));
 
-// Title field for retrieving (unindexed, stored)
+// Título de campo para recuperação (não indexado, armazenado)
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed('_title', $title));
 ]]></programlisting>
 
             <programlisting language="php"><![CDATA[
-// Searching
+// Buscando
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
 ...

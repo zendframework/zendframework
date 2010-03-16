@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21129 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.realpath">
     <title>RealPath</title>
 
     <para>
         Dieser Filter löst gegebene Links und Pfadnamen auf und gibt kanonische absolute Pfadnamen
-        zurück. Referenzen zu <filename>'/./'</filename>, <filename>'/../'</filename> und extra
-        <filename>'/'</filename> Zeichen im Eingabepfad werden entfernt. Der Ergebnispfad hat
-        keine symbolischen Links, <filename>'/./'</filename> oder <filename>'/../'</filename>
+        zurück. Referenzen zu '<filename>/./</filename>', '<filename>/../</filename>' und extra
+        '<filename>/</filename>' Zeichen im Eingabepfad werden entfernt. Der Ergebnispfad hat
+        keine symbolischen Links, '<filename>/./</filename>' oder '<filename>/../</filename>'
         Zeichen mehr.
     </para>
 
     <para>
         <classname>Zend_Filter_RealPath</classname> gibt bei einem Fehler <constant>FALSE</constant>
-        zurück, z.B. wenn die Datei nicht existiert. Auf BSD Systemen schlägt
+        zurück, z.B. wenn die Datei nicht existiert. Auf <acronym>BSD</acronym> Systemen schlägt
         <classname>Zend_Filter_RealPath</classname> nicht fehl wenn nur die letzte Komponente des
         Pfades nicht existiert, wärend andere Systeme <constant>FALSE</constant> zurückgeben.
     </para>

@@ -161,17 +161,17 @@ $client->setFileUpload('file2.txt',
     <sect2 id="migration.19.zend.locale">
         <title>Zend_Locale</title>
 
-        <sect3 id="migration.19.zend.locale.depreciated">
-            <title>Depreciated methods</title>
+        <sect3 id="migration.19.zend.locale.deprecated">
+            <title>Deprecated methods</title>
 
             <para>
-                Some specialized translation methods have been depreciated because they duplicate
+                Some specialized translation methods have been deprecated because they duplicate
                 existing behaviour. Note that the old methods will still work, but a user notice is
                 triggered which describes the new call. The methods will be erased with 2.0.
                 See the following list for old and new method call.
             </para>
 
-            <table id="migration.19.zend.locale.depreciated.table-1">
+            <table id="migration.19.zend.locale.deprecated.table-1">
                 <title>List of measurement types</title>
 
                 <tgroup cols="2">

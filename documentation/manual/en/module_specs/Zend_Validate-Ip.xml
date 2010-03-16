@@ -8,6 +8,30 @@
         address. It supports the IPv4 and also the IPv6 standard.
     </para>
 
+    <sect3 id="zend.validate.set.ip.options">
+        <title>Supported options for Zend_Validate_Ip</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Validate_Ip</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>allowipv4</property></emphasis>: Defines if the validator
+                    allows IPv4 adresses. This option defaults to <constant>TRUE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>allowipv6</property></emphasis>: Defines if the validator
+                    allows IPv6 adresses. This option defaults to <constant>TRUE</constant>.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
     <sect3 id="zend.validate.set.ip.basic">
         <title>Basic usage</title>
 

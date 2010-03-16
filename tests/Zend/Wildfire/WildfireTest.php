@@ -143,6 +143,14 @@ class Zend_Wildfire_WildfireTest extends PHPUnit_Framework_TestCase
         $this->_request->setUserAgentExtensionEnabled(false);
 
         $this->assertFalse($channel->isReady(true));
+        
+        $this->_request->setUserAgentExtensionEnabled(true, 'User-Agent');
+        
+        $this->assertTrue($channel->isReady(true));
+
+        $this->_request->setUserAgentExtensionEnabled(true, 'X-FirePHP-Version');
+        
+        $this->assertTrue($channel->isReady(true));
     }
 
     public function testIsReady2()
@@ -156,6 +164,14 @@ class Zend_Wildfire_WildfireTest extends PHPUnit_Framework_TestCase
         $this->_request->setUserAgentExtensionEnabled(false);
 
         $this->assertFalse($channel->isReady());
+
+        $this->_request->setUserAgentExtensionEnabled(true, 'User-Agent');
+        
+        $this->assertTrue($channel->isReady());
+
+        $this->_request->setUserAgentExtensionEnabled(true, 'X-FirePHP-Version');
+        
+        $this->assertTrue($channel->isReady());
     }
 
     public function testFirePhpPluginInstanciation()
@@ -524,6 +540,36 @@ class Zend_Wildfire_WildfireTest extends PHPUnit_Framework_TestCase
                                                         $rowOld));
     }
 
+    /**
+     * @group ZF-6396
+     */
+    public function testTableMessage2()
+    {
+        $this->_setupWithoutFrontController();
+
+        $channel = Zend_Wildfire_Channel_HttpHeaders::getInstance();
+        $protocol = $channel->getProtocol(Zend_Wildfire_Plugin_FirePhp::PROTOCOL_URI);
+
+        $table = new Zend_Wildfire_Plugin_FirePhp_TableMessage('TestMessage');
+        $table->setHeader(array('col1','col2'));
+        $table->setBuffered(true);
+
+        Zend_Wildfire_Plugin_FirePhp::send($table);
+
+        $cell = new ArrayObject();
+        $cell->append("item1");
+        $cell->append("item2");
+
+        $table->addRow(array("row1", $cell));
+
+        Zend_Wildfire_Channel_HttpHeaders::getInstance()->flush();
+
+        $messages = $protocol->getMessages();
+
+        $this->assertEquals($messages[Zend_Wildfire_Plugin_FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
+                                            [Zend_Wildfire_Plugin_FirePhp::PLUGIN_URI][0],
+                            '[{"Type":"TABLE","Label":"TestMessage"},[["col1","col2"],["row1",{"__className":"ArrayObject","undeclared:0":"item1","undeclared:1":"item2"}]]]');
+    }
 
     public function testMessageGroups()
     {
@@ -959,20 +1005,28 @@ class Zend_Wildfire_WildfireTest_Request extends Zend_Controller_Request_HttpTes
 {
 
     protected $_enabled = false;
+    protected $_enabled_headerName = false;
 
-    public function setUserAgentExtensionEnabled($enabled) {
+    public function setUserAgentExtensionEnabled($enabled, $headerName = "User-Agent") {
         $this->_enabled = $enabled;
+        $this->_enabled_headerName = $headerName;
     }
 
     public function getHeader($header, $default = null)
     {
-        if ($header == 'User-Agent') {
+        if ($header == 'User-Agent' && $this->_enabled_headerName == 'User-Agent') {
             if ($this->_enabled) {
                 return 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en-US; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14 FirePHP/0.1.0';
             } else {
                 return 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en-US; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14';
             }
+        } else
+        if ($header == 'X-FirePHP-Version' && $this->_enabled_headerName == 'X-FirePHP-Version') {
+            if ($this->_enabled) {
+                return '0.1.0';
+            }
         }
+        return null;
     }
 }
 

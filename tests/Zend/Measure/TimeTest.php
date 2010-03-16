@@ -384,4 +384,18 @@ class Zend_Measure_TimeTest extends PHPUnit_Framework_TestCase
         $unit  = $value->getConversionList();
         $this->assertTrue(is_array($unit), 'Array expected');
     }
+
+    /**
+     * @group ZF-9078
+     */
+    public function testSetTypeOnPhpMathWithStrippedValue()
+    {
+        $locale = new Zend_Locale('en_US');
+        $time = new Zend_Measure_Time(0, Zend_Measure_Time::SECOND);
+        $time->setLocale($locale);
+        $time->setType(Zend_Measure_Time::SECOND);
+        $seconds = $time->getValue();
+        $this->assertEquals(0, $seconds);
+        $this->assertEquals(Zend_Measure_Time::SECOND, $time->getType());
+    }
 }

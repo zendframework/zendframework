@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 20819 -->
 <sect1 id="zend.mail.different-transports">
     <title>異なる転送手段の使用</title>
+
     <para>
         複数のメールをそれぞれ別の接続を使用して送信したい場合は、
         <methodname>setDefaultTransport()</methodname> をコールするかわりに
@@ -10,8 +11,10 @@
         実際の  <methodname>send()</methodname> の際に、
         渡されたオブジェクトがデフォルトのトランスポートを上書きします。
     </para>
+
     <example id="zend.mail.different-transports.example-1">
         <title>異なる転送手段の使用</title>
+
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 // メッセージを作成します...
@@ -22,8 +25,10 @@ $mail->send($tr2);
 $mail->send();  // もう一度デフォルトを使用します
 ]]></programlisting>
     </example>
+
     <note>
         <title>転送手段の追加</title>
+
         <para>
             別の転送手段を用意するには、<classname>Zend_Mail_Transport_Interface</classname>
             を実装します。

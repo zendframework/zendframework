@@ -173,17 +173,18 @@ class Zend_Validate_File_MimeTypeTest extends PHPUnit_Framework_TestCase
         try {
             $validator->setMagicFile('/unknown/magic/file');
         } catch (Zend_Validate_Exception $e) {
-            $this->assertContains('can not be read', $e->getMessage());
+            $this->assertContains('can not be', $e->getMessage());
         }
-
-        $validator->setMagicFile(__FILE__);
-        $this->assertEquals(__FILE__, $validator->getMagicFile());
     }
 
     public function testSetMagicFileWithinConstructor()
     {
-        $validator = new Zend_Validate_File_MimeType(array('image/gif', 'magicfile' => __FILE__));
-        $this->assertEquals(__FILE__, $validator->getMagicFile());
+        require_once 'Zend/Validate/Exception.php';
+        try {
+            $validator = new Zend_Validate_File_MimeType(array('image/gif', 'magicfile' => __FILE__));
+        } catch (Zend_Validate_Exception $e) {
+            // @ZF-9320: False Magic File is not allowed to be set
+        }
     }
 
     public function testOptionsAtConstructor()
@@ -191,10 +192,8 @@ class Zend_Validate_File_MimeTypeTest extends PHPUnit_Framework_TestCase
         $validator = new Zend_Validate_File_MimeType(array(
             'image/gif',
             'image/jpg',
-            'magicfile' => __FILE__,
             'headerCheck' => true));
 
-        $this->assertEquals(__FILE__, $validator->getMagicFile());
         $this->assertTrue($validator->getHeaderCheck());
         $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
     }

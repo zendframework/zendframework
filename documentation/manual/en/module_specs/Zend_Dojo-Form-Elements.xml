@@ -249,7 +249,7 @@ $form->addElement(
         <para>
             The ComboBox and FilteringSelect form elements provide accessors and mutators for
             examining and setting the select options as well as specifying a
-            dojo.data datastore (if used). They extend from DijitMulti, which
+            <command>dojo.data</command> datastore (if used). They extend from DijitMulti, which
             allows you to specify select options via the
             <methodname>setMultiOptions()</methodname> and <methodname>setMultiOption()</methodname>
             methods. In addition, the following methods are available:
@@ -281,7 +281,7 @@ $form->addElement(
             <listitem>
                 <para>
                     <methodname>setStoreType($dojoType)</methodname>: set the datastore class
-                    to use; e.g., "dojo.data.ItemFileReadStore".
+                    to use; e.g., "<command>dojo.data.ItemFileReadStore</command>".
                 </para>
             </listitem>
 
@@ -295,9 +295,9 @@ $form->addElement(
                 <para>
                     <methodname>setStoreParams(array $params)</methodname>: set any parameters
                     used to configure the datastore object. As an example,
-                    dojo.data.ItemFileReadStore datastore would expect a 'url'
+                    <command>dojo.data.ItemFileReadStore</command> datastore would expect a 'url'
                     parameter pointing to a location that would return the
-                    dojo.data object.
+                    <command>dojo.data</command> object.
                 </para>
             </listitem>
 
@@ -324,7 +324,7 @@ $form->addElement(
         </itemizedlist>
 
         <para>
-            By default, if no dojo.data store is registered with the element,
+            By default, if no <command>dojo.data</command> store is registered with the element,
             this element registers an <classname>InArray</classname> validator which
             validates against the array keys of registered options. You can
             disable this behavior by either calling
@@ -488,7 +488,7 @@ $form->addElement(
             <listitem>
                 <para>
                     <methodname>setAmPm($flag)</methodname> and <methodname>getAmPm()</methodname>:
-                    Whether or not to use AM/PM strings in times.
+                    Whether or not to use AM or PM strings in times.
                 </para>
             </listitem>
 
@@ -557,9 +557,9 @@ $form->addElement(
         <title>Editor</title>
 
         <para>
-            Editor provides a WYSIWYG editor that can be used to both create and
-            edit rich HTML content. dijit.Editor is pluggable and may be
-            extended with custom plugins if desired; see <ulink
+            Editor provides a <acronym>WYSIWYG</acronym> editor that can be used to both create and
+            edit rich <acronym>HTML</acronym> content. <command>dijit.Editor</command> is pluggable
+            and may be extended with custom plugins if desired; see <ulink
                 url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">the
                 dijit.Editor documentation</ulink> for more details.
         </para>
@@ -608,7 +608,7 @@ $form->addElement(
 
             <listitem>
                 <para>
-                    <emphasis>events</emphasis> are standard DOM events, such as
+                    <emphasis>events</emphasis> are standard <acronym>DOM</acronym> events, such as
                     onClick, onKeyUp, etc. The following accessors and mutators
                     are available for manipulating events:
                 </para>
@@ -766,15 +766,15 @@ $form->addElement('editor', 'content', array(
 
             <para>
                 The Editor dijit uses an <acronym>HTML</acronym> <acronym>DIV</acronym> by default.
-                The <classname>dijit._editor.RichText</classname> documentation indicates that
-                having it built on an HTML <acronym>TEXTAREA</acronym> can potentially have security
-                implications.
+                The <command>dijit._editor.RichText</command> documentation indicates that
+                having it built on an <acronym>HTML</acronym> <acronym>TEXTAREA</acronym> can
+                potentially have security implications.
             </para>
 
             <para>
                 That said, there may be times when you want an Editor widget that can gracefully
                 degrade to a <acronym>TEXTAREA</acronym>. In such situations, you can do so by
-                setting the <varname>degrade</varname> property to <constant>TRUE</constant>:
+                setting the <property>degrade</property> property to <constant>TRUE</constant>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -855,8 +855,8 @@ $editor->degrade = true;
                 <para>
                     <methodname>setTopDecorationAttribs(array $attribs)</methodname> and
                     <methodname>setBottomDecorationAttribs(array $attribs)</methodname>:
-                    HTML attributes to specify for the given Rule or RuleLabels
-                    HTML element container.
+                    <acronym>HTML</acronym> attributes to specify for the given Rule or RuleLabels
+                    <acronym>HTML</acronym> element container.
                 </para>
             </listitem>
 
@@ -1203,8 +1203,8 @@ $form->addElement(
         <title>SimpleTextarea</title>
 
         <para>
-            SimpleTextarea acts primarily like a standard HTML textarea. However, it
-            does not support either the rows or cols settings. Instead, the
+            SimpleTextarea acts primarily like a standard <acronym>HTML</acronym> textarea. However,
+            it does not support either the rows or cols settings. Instead, the
             textarea width should be specified using standard <acronym>CSS</acronym> measurements.
             Unlike Textarea, it will not grow automatically
         </para>
@@ -1359,7 +1359,8 @@ $form->addElement(
                 <para>
                     <methodname>setUppercase($flag)</methodname> and
                     <methodname>getUppercase()</methodname>: set and retrieve
-                    the flag indicating whether or not the input should be cast to UPPERCASE.
+                    the flag indicating whether or not the input should be cast to
+                    <acronym>UPPERCASE</acronym>.
                 </para>
             </listitem>
 
@@ -1402,7 +1403,7 @@ $form->addElement(
         <title>Textarea</title>
 
         <para>
-            Textarea acts primarily like a standard HTML textarea. However, it
+            Textarea acts primarily like a standard <acronym>HTML</acronym> textarea. However, it
             does not support either the rows or cols settings. Instead, the
             textarea width should be specified using standard <acronym>CSS</acronym> measurements;
             rows should be omitted entirely. The textarea will then grow
@@ -1459,7 +1460,7 @@ $form->addElement(
                 <para>
                     <methodname>setClickableIncrement($format)</methodname> and
                     <methodname>getClickableIncrement()</methodname>: set the <ulink
-                        url="http://en.wikipedia.org/wiki/ISO_8601">ISO-8601</ulink>
+                        url="http://en.wikipedia.org/wiki/ISO_8601">ISO_8601</ulink>
                     string representing the amount by which every clickable element
                     in the time picker increases.
                 </para>
@@ -1469,7 +1470,7 @@ $form->addElement(
                 <para>
                     <methodname>setVisibleIncrement($format)</methodname> and
                     <methodname>getVisibleIncrement()</methodname>: set the increment visible
-                    in the time chooser; must follow ISO-8601 formats.
+                    in the time chooser; must follow <acronym>ISO_8601</acronym> formats.
                 </para>
             </listitem>
 
@@ -1478,7 +1479,7 @@ $form->addElement(
                     <methodname>setVisibleRange($format)</methodname> and
                     <methodname>getVisibleRange()</methodname>: set and retrieve the range of
                     time visible in the time chooser at any given moment; must
-                    follow ISO-8601 formats.
+                    follow <acronym>ISO_8601</acronym> formats.
                 </para>
             </listitem>
         </itemizedlist>

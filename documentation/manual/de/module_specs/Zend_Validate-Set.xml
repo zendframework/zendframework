@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21047 -->
+<!-- EN-Revision: 21259 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Standard Prüfklassen</title>
@@ -39,29 +39,12 @@
     </sect2>
 
     <xi:include href="Zend_Validate-Barcode.xml" />
-
-    <sect2 id="zend.validate.set.between">
-        <title>Between</title>
-
-        <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> zwischen
-            dem minimalen und maximalen Grenzwert ist. Der Vergleich ist standardmäßig inklusive
-            (<varname>$value</varname> kann gleich dem Grenzwert sein), kann aber überschrieben
-            werden um einen strikten Vergleich dort durchzuführen wo <varname>$value</varname>
-            strikt größer als das Minimum und strikt kleiner als das Maximum sein muß.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Between.xml" />
     <xi:include href="Zend_Validate-Callback.xml" />
     <xi:include href="Zend_Validate-CreditCard.xml" />
 
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
-
-        <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> dem Luhn
-            Algorithmus (mod-10 Checksumme) für Kreditkarten Nummern folgt.
-        </para>
 
         <note>
             <para>
@@ -112,15 +95,7 @@
         </para>
     </sect2>
 
-    <sect2 id="zend.validate.set.greater_than">
-        <title>GreaterThan</title>
-
-        <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> größer als
-            die Minimale Grenze ist.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-GreaterThan.xml" />
     <xi:include href="Zend_Validate-Hex.xml" />
     <xi:include href="Zend_Validate-Hostname.xml" />
 
@@ -196,16 +171,7 @@ if ($validator->isValid($iban)) {
 
     <xi:include href="Zend_Validate-Isbn.xml" />
     <xi:include href="Zend_Validate-Ip.xml" />
-
-    <sect2 id="zend.validate.set.less_than">
-        <title>LessThan</title>
-
-        <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> kleiner
-            als die Maximale Grenze ist.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-LessThan.xml" />
     <xi:include href="Zend_Validate-NotEmpty.xml" />
     <xi:include href="Zend_Validate-PostCode.xml" />
 

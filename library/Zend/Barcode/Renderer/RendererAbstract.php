@@ -81,7 +81,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Barcode object
-     * @var Zend_Barcode_Object
+     * @var Zend_Barcode_Object_ObjectAbstract
      */
     protected $_barcode;
 

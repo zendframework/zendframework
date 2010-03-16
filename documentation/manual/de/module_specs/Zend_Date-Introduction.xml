@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 17986 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 17986 -->
 <sect1 id="zend.date.introduction">
     <title>Einführung</title>
 
@@ -28,21 +28,21 @@
     <para>
         <classname>Zend_Date</classname> unterstützt auch abgekürzte Monatsnamen in vielen Sprachen.
         <classname>Zend_Locale</classname> erleichert die Normalisierung von lokalisierten
-        Monatsnamen und Wochentagen zu Zeitpunkten die umgekehrt auch wieder lokalisiert für andere
+        Monatsnamen und Wochentagen zu Zeitpunkten, die umgekehrt auch wieder lokalisiert für andere
         Regionen übersetzt werden können.
     </para>
 
     <sect2 id="zend.date.setdefaulttimezone">
-        <title>Immer eine Standard-Zeitzone definieren</title>
+        <title>Immer eine Standardzeitzone definieren</title>
 
         <para>
             Bevor beliebige datumsrelevante Funktionen in <acronym>PHP</acronym> oder dem Zend
             Framework verwendet werden können, sollten sichergestellt werden, dass die
-            Standard-Zeitzone in der Anwendung korrekt definiert wurde. Das kann wahlweise mit dem
+            Standardzeitzone in der Anwendung korrekt definiert wurde. Das kann wahlweise mit dem
             Definieren einer TZ Umgebungsvariablen, der <property>date.timezone</property>
             Einstellung in der <filename>php.ini</filename> oder durch die Funktion <ulink
                 url="http://php.net/date_default_timezone_set">date_default_timezone_set()</ulink>
-            durchgeführt werden. Durch das Setzen einer Standard-Zeitzone können in
+            durchgeführt werden. Durch das Setzen einer Standardzeitzone können in
             <acronym>PHP</acronym> können alle datums- und zeitabhängigen Funktionen für einen
             bestimmten Benutzer angepasst werden. Eine vollständige Auflistung der
             Zeitzoneneinstellungen kann in der <ulink
@@ -51,7 +51,7 @@
         </para>
 
         <example id="zend.date.setdefaulttimezone.example-1">
-            <title>Definieren einer Standard-Zeitzone</title>
+            <title>Definieren einer Standardzeitzone</title>
 
             <programlisting language="php"><![CDATA[
 // Zeitzone für die USA, Kalifornien
@@ -64,18 +64,18 @@ date_default_timezone_set('Europe/Berlin');
         <para>
             <emphasis>Wenn eine <classname>Zend_Date</classname> Instanz erzeugt wird, wird die
             Zeitzone des aktuellen Benutzers automatisch als aktuelle Standardzeitzone
-            übernommen</emphasis>. Deshalb wir die Einstellung der Zeitzone für jede Zeitumstellung
-            (<acronym>DST</acronym>) hergenommen, und erspart effektiv das explizite Setzen der
+            übernommen</emphasis>. Deshalb wird die Einstellung der Zeitzone für jede Zeitumstellung
+            (<acronym>DST</acronym>) berücksichtigt und erspart effektiv das explizite Setzen der
             Sommer-/Winterzeitumstellung (<acronym>DST</acronym>).
         </para>
 
         <para>
-            Es gilt zu beachten das die Zeitzonen <emphasis><acronym>UTC</acronym></emphasis> und
+            Es gilt zu beachten, dass die Zeitzonen <emphasis><acronym>UTC</acronym></emphasis> und
             <emphasis><acronym>GMT</acronym></emphasis> keine Sommer-/Winterzeitumstellung
-            enthalten. Das bedeutet das selbst wenn per Hand definiert wurde das
+            enthalten. Das bedeutet, dass selbst wenn per Hand definiert wurde, dass
             <classname>Zend_Date</classname> die <acronym>DST</acronym> berücksichtigen soll, das
             automatisch für alle Instanzen von <classname>Zend_Date</classname> zurückgeschaltet
-            wird die auf <acronym>UTC</acronym> oder <acronym>GMT</acronym> eingestellt wurden.
+            wird, die auf <acronym>UTC</acronym> oder <acronym>GMT</acronym> eingestellt wurden.
         </para>
     </sect2>
 
@@ -103,7 +103,7 @@ date_default_timezone_set('Europe/Berlin');
 
             <listitem>
                 <para>
-                    Vollständig Internationalisiert
+                    Vollständig internationalisiert
                 </para>
 
                 <para>
@@ -132,7 +132,7 @@ date_default_timezone_set('Europe/Berlin');
                         url="http://www.php.net/float">http://www.php.net/float</ulink>]. Zusätzlich
                     können inhärente Beschränkungen der Float-Datentypen sowie Rundungsfehler von
                     Fließkommazahlen Berechnungsfehler verursachen. Um diese Probleme zu vermeiden,
-                    verwenden Zend Framework's I18n Komponenten die BCMatch Extension, wenn
+                    verwenden die I18n-Komponenten des Zend Frameworks die BCMath Extension, wenn
                     verfügbar.
                 </para>
             </listitem>
@@ -166,8 +166,8 @@ date_default_timezone_set('Europe/Berlin');
 
                 <para>
                     Sonnenauf-und Untergang können für jeden beliebigen Ort und Tag anzeigen werden,
-                    so dass keine einzige Sekunde Tageslicht für das Lieblings
-                    <acronym>PHP</acronym> Projekt verpasst werden muß :)
+                    so dass keine einzige Sekunde Tageslicht für das 
+                    Lieblings-<acronym>PHP</acronym>-Projekt verpasst werden muß :)
                 </para>
             </listitem>
         </itemizedlist>

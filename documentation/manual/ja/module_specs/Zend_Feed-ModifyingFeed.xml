@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 20774 -->
 <sect1 id="zend.feed.modifying-feed">
     <title>フィードおよびエントリの構造の変更</title>
 
@@ -13,6 +13,7 @@
 
     <example id="zend.feed.modifying-feed.example.modifying">
         <title>既存のフィードエントリの変更</title>
+
         <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
 $entry = $feed->current();
@@ -27,6 +28,7 @@ echo $entry->saveXML();
             (最初の <code>&lt;?xml ... &gt;</code> も含めた)
             <acronym>XML</acronym> 表記で新しいエントリを出力します。
         </para>
+
         <para>
             既存のエントリが author タグを保持していない場合にも、
             上の例は正しく動作することに注意しましょう。
@@ -47,6 +49,7 @@ echo $entry->saveXML();
 
     <example id="zend.feed.modifying-feed.example.creating">
         <title>独自の名前空間の要素としての Atom エントリの作成</title>
+
         <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom();
 // Atom では id は常にサーバから割り当てられます

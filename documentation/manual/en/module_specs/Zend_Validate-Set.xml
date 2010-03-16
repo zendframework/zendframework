@@ -38,29 +38,12 @@
     </sect2>
 
     <xi:include href="Zend_Validate-Barcode.xml" />
-
-    <sect2 id="zend.validate.set.between">
-        <title>Between</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> is between
-            the minimum and maximum boundary values. The comparison is inclusive by default
-            (<varname>$value</varname> may equal a boundary value), though this may be overridden in
-            order to do a strict comparison, where <varname>$value</varname> must be strictly
-            greater than the minimum and strictly less than the maximum.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Between.xml" />
     <xi:include href="Zend_Validate-Callback.xml" />
     <xi:include href="Zend_Validate-CreditCard.xml" />
 
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> follows the
-            Luhn algorithm (mod-10 checksum) for credit card numbers.
-        </para>
 
         <note>
             <para>
@@ -109,15 +92,7 @@
         </para>
     </sect2>
 
-    <sect2 id="zend.validate.set.greater_than">
-        <title>GreaterThan</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> is greater
-            than the minimum boundary.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-GreaterThan.xml" />
     <xi:include href="Zend_Validate-Hex.xml" />
     <xi:include href="Zend_Validate-Hostname.xml" />
 
@@ -189,46 +164,12 @@ if ($validator->isValid($iban)) {
 
     <xi:include href="Zend_Validate-Ip.xml" />
     <xi:include href="Zend_Validate-Isbn.xml" />
-
-    <sect2 id="zend.validate.set.less_than">
-        <title>LessThan</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> is less than
-            the maximum boundary.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-LessThan.xml" />
     <xi:include href="Zend_Validate-NotEmpty.xml" />
     <xi:include href="Zend_Validate-PostCode.xml" />
-
-    <sect2 id="zend.validate.set.regex">
-        <title>Regex</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> matches
-            against a regular expression pattern.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Regex.xml" />
     <xi:include href="Zend_Validate-Sitemap.xml" />
-
-    <sect2 id="zend.validate.set.string_length">
-        <title>StringLength</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if and only if the string length of
-            <varname>$value</varname> is at least a minimum and no greater than a maximum (when the
-            max option is not <constant>NULL</constant>). The <methodname>setMin()</methodname>
-            method throws an exception if the minimum length is set to a value greater than the set
-            maximum length, and the <methodname>setMax()</methodname> method throws an exception if
-            the maximum length is set to a value less than the set minimum length. This class
-            supports UTF-8 and other character encodings, based on the current value of <ulink
-                url="http://www.php.net/manual/en/ref.iconv.php#iconv.configuration">iconv.internal_encoding</ulink>.
-            If you need a different encoding you can set it with the accessor methods getEncoding
-            and setEncoding.
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-StringLength.xml" />
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

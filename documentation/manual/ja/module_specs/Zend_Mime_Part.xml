@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20827 -->
 <sect1 id="zend.mime.part">
     <title>Zend_Mime_Part</title>
 
     <sect2 id="zend.mime.part.introduction">
-      <title>導入</title>
+        <title>導入</title>
 
-      <para>このクラスは、<acronym>MIME</acronym> メッセージのひとつのパートを表します。
-      実際のメッセージの内容に加え、エンコーディングや Content Type、
-      そして元のファイル名などの情報も含まれます。
-      保存されたデータから文字列を生成するためのメソッドが用意されています。
-      <classname>Zend_Mime_Part</classname> オブジェクトを <link
-      linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>
-      に追加することで、完全なマルチパートメッセージを作成することができます。</para>
+        <para>
+            このクラスは、 <acronym>MIME</acronym> メッセージのひとつのパートを表します。
+            実際のメッセージの内容に加え、エンコーディングや Content Type、
+            そして元のファイル名などの情報も含まれます。
+            保存されたデータから文字列を生成するためのメソッドが用意されています。
+            <classname>Zend_Mime_Part</classname> オブジェクトを <link
+            linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>
+            に追加することで、完全なマルチパートメッセージを作成できます。
+        </para>
     </sect2>
 
-  <sect2 id="zend.mime.part.instantiation">
-    <title>インスタンスの作成</title>
+    <sect2 id="zend.mime.part.instantiation">
+        <title>インスタンスの作成</title>
 
-    <para><classname>Zend_Mime_Part</classname> のインスタンスを作成する際には、
-    新しいパートの内容を表す文字列を使用します。新しいパートの型は
-    OCTET-STREAM、エンコーディングは 8Bit であるとして作成されます。
-    <classname>Zend_Mime_Part</classname> のインスタンスを作成した後で、
-    その属性に直接アクセスすることでメタ情報を設定することができます。</para>
+        <para>
+            <classname>Zend_Mime_Part</classname> のインスタンスを作成する際には、
+            新しいパートの内容を表す文字列を使用します。新しいパートの型は
+            OCTET-STREAM、エンコーディングは 8Bit であるとして作成されます。
+            <classname>Zend_Mime_Part</classname> のインスタンスを作成した後で、
+            その属性に直接アクセスすることでメタ情報を設定できます。
+        </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public $type = Zend_Mime::TYPE_OCTETSTREAM;
 public $encoding = Zend_Mime::ENCODING_8BIT;
 public $id;
@@ -39,72 +43,81 @@ public $language;
 ]]></programlisting>
     </sect2>
 
-  <sect2 id="zend.mime.part.methods">
-    <title>メッセージパートを文字列にレンダリングするためのメソッド</title>
+    <sect2 id="zend.mime.part.methods">
+        <title>メッセージパートを文字列にレンダリングするためのメソッド</title>
 
-    <para><methodname>getContent()</methodname> は、MimePart
-    の内容をエンコードし、文字列で返します。
-    使用するエンコーディングは属性 $encoding で指定します。
-    使用可能な値は Zend_Mime::ENCODING_* です。
-    文字セットの変換は行いません。</para>
+        <para>
+            <methodname>getContent()</methodname> は、MimePart
+            の内容をエンコードし、文字列で返します。
+            使用するエンコーディングは属性 $encoding で指定します。
+            使用可能な値は Zend_Mime::ENCODING_* です。
+            文字セットの変換は行いません。
+        </para>
 
-    <para>
-        <methodname>getHeaders()</methodname> は、アクセス可能な属性の情報から生成した
-        MimePart の Mime ヘッダを返します。
-        このメソッドをコールする前に、オブジェクトの属性を正しく設定しておく必要があります。
-        <itemizedlist>
-            <listitem>
-                <para>
-                    <code>$charset</code>
-                    テキスト型 (Text あるいは HTML) の場合は、実際の文字セットを設定しなければなりません。
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>$id</code>
-                    HTML メールにおけるインライン画像のための ID を設定します。
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>$filename</code>
-                    ダウンロードする際に使用されるファイル名を含めます。
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>$disposition</code>
-                    ファイルを添付として扱うのか、あるいは (HTML-) メールに埋め込む (インライン)
-                    のかを指定します。
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>$description</code>
-                    情報を提供するためだけの目的で使用されます。
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>$boundary</code>
-                    バウンダリ文字列を指定します。
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>$location</code>
-                    コンテンツに関連するリソース <acronym>URI</acronym> として使用します。
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>$language</code>
-                    コンテンツで使用する言語を指定します。
-                </para>
-            </listitem>
-        </itemizedlist>
-    </para>
-  </sect2>
+        <para>
+            <methodname>getHeaders()</methodname> は、アクセス可能な属性の情報から生成した
+            MimePart の Mime ヘッダを返します。
+            このメソッドをコールする前に、オブジェクトの属性を正しく設定しておく必要があります。
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>$charset</code>
+                        テキスト型 (Text あるいは HTML) の場合は、実際の文字セットを設定しなければなりません。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$id</code>
+                        HTML メールにおけるインライン画像のための ID を設定します。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$filename</code>
+                        ダウンロードする際に使用されるファイル名を含めます。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$disposition</code>
+                        ファイルを添付として扱うのか、あるいは (HTML-) メールに埋め込む (インライン)
+                        のかを指定します。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$description</code>
+                        情報を提供するためだけの目的で使用されます。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$boundary</code>
+                        バウンダリ文字列を指定します。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$location</code>
+                        コンテンツに関連するリソース <acronym>URI</acronym> として使用します。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$language</code>
+                        コンテンツで使用する言語を指定します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </sect2>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

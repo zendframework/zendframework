@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20946 -->
+<!-- EN-Revision: 21145 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Verbindungsadapter</title>
@@ -123,7 +123,7 @@
                             <entry>string</entry>
                             <entry><constant>NULL</constant></entry>
                         </row>
-                        
+
                         <row>
                             <entry>sslusecontext</entry>
 
@@ -662,7 +662,7 @@ $client = new Zend_Http_Client('http://www.example.com', array(
 ));
 
 // Erzwingen das die nächste Anfrage mit einer Exception fehlschlägt
-$adapter->nextRequestWillFail(true);
+$adapter->setNextRequestWillFail(true);
 
 try {
     // Dieser Aufruf führt zu einer Zend_Http_Client_Adapter_Exception

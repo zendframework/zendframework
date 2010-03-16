@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 21134
+ * EN-Revision: 21485
  */
 return array(
     // Zend_Validate_Alnum
@@ -233,8 +233,8 @@ return array(
     "Value is required and can't be empty" => "Value is required and can't be empty",
 
     // Zend_Validate_PostCode
-    "Invalid type given, value should be string or integer" => "Invalid type given, value should be string or integer",
-    "'%value%' does not appear to be an postal code" => "'%value%' does not appear to be an postal code",
+    "Invalid type given. The value should be a string or a integer" => "Invalid type given. The value should be a string or a integer",
+    "'%value%' does not appear to be a postal code" => "'%value%' does not appear to be a postal code",
 
     // Zend_Validate_Regex
     "Invalid type given, value should be string, integer or float" => "Invalid type given, value should be string, integer or float",
@@ -242,15 +242,19 @@ return array(
 
     // Zend_Validate_Sitemap_Changefreq
     "'%value%' is no valid sitemap changefreq" => "'%value%' is no valid sitemap changefreq",
+    "Invalid type given, the value should be a string" => "Invalid type given, the value should be a string",
 
     // Zend_Validate_Sitemap_Lastmod
     "'%value%' is no valid sitemap lastmod" => "'%value%' is no valid sitemap lastmod",
+    "Invalid type given, the value should be a string" => "Invalid type given, the value should be a string",
 
     // Zend_Validate_Sitemap_Loc
     "'%value%' is no valid sitemap location" => "'%value%' is no valid sitemap location",
+    "Invalid type given, the value should be a string" => "Invalid type given, the value should be a string",
 
     // Zend_Validate_Sitemap_Priority
     "'%value%' is no valid sitemap priority" => "'%value%' is no valid sitemap priority",
+    "Invalid type given, the value should be a integer, a float or a numeric string" => "Invalid type given, the value should be a integer, a float or a numeric string",
 
     // Zend_Validate_StringLength
     "Invalid type given, value should be a string" => "Invalid type given, value should be a string",

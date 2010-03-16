@@ -27,6 +27,14 @@ if ($validator->isValid('123ABC')) {
             unicode zeros and numbers from other scripts than latin will not be treaten as valid.
         </para>
     </note>
+
+    <sect3 id="zend.validate.set.hex.options">
+        <title>Supported options for Zend_Validate_Hex</title>
+
+        <para>
+            There are no additional options for <classname>Zend_Validate_Hex</classname>:
+        </para>
+    </sect3>
 </sect2>
 <!--
 vim:se ts=4 sw=4 et:

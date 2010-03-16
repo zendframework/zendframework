@@ -601,10 +601,10 @@
                 <entry morerows="1" valign="middle">&requirements.soft;</entry>
                 <entry>
                     <emphasis>
-	                    <ulink
-	                        url="&zf.manual.link;/zend.json.html">
-	                        <classname>Zend_Json</classname>
-	                    </ulink>
+                        <ulink
+                            url="&zf.manual.link;/zend.json.html">
+                            <classname>Zend_Json</classname>
+                        </ulink>
                     </emphasis>
                 </entry>
             </row>
@@ -992,7 +992,7 @@
                 <entry morerows="9" valign="middle">
                     <emphasis>
                         <ulink
-                            url="&php.manual.link;/language.oop5.reflection.php">Reflection</ulink>
+                            url="&php.manual.link;/book.reflection.php">Reflection</ulink>
                     </emphasis>
                 </entry>
                 <entry morerows="9" valign="middle">&requirements.hard;</entry>

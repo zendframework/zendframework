@@ -8,6 +8,30 @@
         validate a given value.
     </para>
 
+    <sect3 id="zend.validate.set.callback.options">
+        <title>Supported options for Zend_Validate_Callback</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Validate_Callback</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>callback</property></emphasis>: Sets the callback which will
+                    be called for the validation.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>options</property></emphasis>: Sets the additional options
+                    which will be given to the callback.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
     <sect3 id="zend.validate.set.callback.basic">
         <title>Basic usage</title>
 
@@ -146,7 +170,7 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
     </sect3>
 
-    <sect3 id="zend.validate.set.callback.options">
+    <sect3 id="zend.validate.set.callback.options2">
         <title>Adding options</title>
 
         <para>

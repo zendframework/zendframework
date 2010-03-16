@@ -31,14 +31,14 @@
       <listitem>
         <para>
           Firebug 拡張。
-          <ulink url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>
+          <ulink url="https://addons.mozilla.org/ja/firefox/addon/1843">https://addons.mozilla.org/ja/firefox/addon/1843</ulink>
           からダウンロードできます。
         </para>
       </listitem>
       <listitem>
         <para>
           FirePHP 拡張。
-          <ulink url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>
+          <ulink url="https://addons.mozilla.org/ja/firefox/addon/6149">https://addons.mozilla.org/ja/firefox/addon/6149</ulink>
           からダウンロードできます。
         </para>
       </listitem>
@@ -154,7 +154,7 @@ $writer->setDefaultPriorityStyle('TRACE');
       <title>ログ記録用のデータの準備</title>
 
       <para>
-        任意の <acronym>PHP</acronym> の変数を組み込みの優先度でログに記録することができますが、
+        任意の <acronym>PHP</acronym> の変数を組み込みの優先度でログに記録できますが、
         特殊なログ形式を使う場合は、何らかの書式変換が必要となります。
       </para>
       <para>
@@ -184,7 +184,7 @@ $logger->err($exception);
       <title>表形式のログ</title>
 
       <para>
-        ログを表形式で記録することができます。カラムは自動検出され、
+        ログを表形式で記録できます。カラムは自動検出され、
         データの最初の行がヘッダと見なされます。
       </para>
       <programlisting language="php"><![CDATA[

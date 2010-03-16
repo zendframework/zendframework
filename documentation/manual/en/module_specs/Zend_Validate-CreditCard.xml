@@ -99,6 +99,30 @@
         </para>
     </note>
 
+    <sect3 id="zend.validate.set.creditcard.options">
+        <title>Supported options for Zend_Validate_CreditCard</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Validate_CreditCard</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>service</property></emphasis>: A callback to an online
+                    service which will additionally be used for the validation.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>type</property></emphasis>: The type of creditcard which
+                    will be validated. See the below list of institutes for details.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
     <sect3 id="zend.validate.set.creditcard.basic">
         <title>Basic usage</title>
 

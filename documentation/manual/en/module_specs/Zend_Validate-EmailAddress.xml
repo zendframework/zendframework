@@ -47,10 +47,10 @@ if ($validator->isValid($email)) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>allow</emphasis>: Defines which type of domain names are accepted.
-                    This option is used in conjunction with the hostname option to set the
-                    hostname validator. For more informations about possible values of this
-                    option, look at <link linkend="zend.validate.set.hostname">Hostname</link>
+                    <emphasis><property>allow</property></emphasis>: Defines which type of domain
+                    names are accepted. This option is used in conjunction with the hostname option
+                    to set the hostname validator. For more informations about possible values of
+                    this option, look at <link linkend="zend.validate.set.hostname">Hostname</link>
                     and possible <constant>ALLOW</constant>* constants. This option defaults to
                     <constant>ALLOW_DNS</constant>.
                 </para>
@@ -58,36 +58,37 @@ if ($validator->isValid($email)) {
 
             <listitem>
                 <para>
-                    <emphasis>hostname</emphasis>: Sets the hostname validator with which the
-                    domain part of the email address will be validated.
+                    <emphasis><property>deep</property></emphasis>: Defines if the servers MX
+                    records should be verified by a deep check. When this option is set to
+                    <constant>TRUE</constant> then additionally to MX records also the A, A6 and
+                    <constant>AAAA</constant> records are used to verify if the server accepts
+                    emails. This option defaults to <constant>FALSE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>mx</emphasis>: Defines if the MX records from the server should be
-                    detected. If this option is defined to <constant>TRUE</constant> then the MX
-                    records are used to verify if the server
+                    <emphasis><property>domain</property></emphasis>: Defines if the domain part
+                    should be checked. When this option is set to <constant>FALSE</constant>, then
+                    only the local part of the email address will be checked. In this case the
+                    hostname validator will not be called. This option defaults to
+                    <constant>TRUE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>hostname</property></emphasis>: Sets the hostname validator
+                    with which the domain part of the email address will be validated.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>mx</property></emphasis>: Defines if the MX records from the
+                    server should be detected. If this option is defined to
+                    <constant>TRUE</constant> then the MX records are used to verify if the server
                     accepts emails. This option defaults to <constant>FALSE</constant>.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>deep</emphasis>: Defines if the servers MX records should be verified
-                    by a deep check. When this option is set to <constant>TRUE</constant> then
-                    additionally to MX records also the A, A6 and <constant>AAAA</constant> records
-                    are used to verify if the server accepts emails. This option defaults to
-                    <constant>FALSE</constant>.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>domain</emphasis>: Defines if the domain part should be checked.
-                    When this option is set to <constant>FALSE</constant>, then only the local part
-                    of the email address will be checked. In this case the hostname validator will
-                    not be called. This option defaults to <constant>TRUE</constant>.
                 </para>
             </listitem>
         </itemizedlist>

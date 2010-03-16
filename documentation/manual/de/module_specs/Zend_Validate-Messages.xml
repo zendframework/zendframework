@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20352 -->
+<!-- EN-Revision: 21213 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.messages">
     <title>Prüfungsmeldungen</title>
@@ -88,7 +88,7 @@ $translator = new Zend_Translate(
     'array',
     '/resources/languages',
     $language,
-    array('scan' => Zend_Locale::LOCALE_DIRECTORY)
+    array('scan' => Zend_Translate::LOCALE_DIRECTORY)
 );
 Zend_Validate_Abstract::setDefaultTranslator($translator);
 ]]></programlisting>

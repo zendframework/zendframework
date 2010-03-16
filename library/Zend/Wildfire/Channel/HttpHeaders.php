@@ -256,14 +256,17 @@ class Zend_Wildfire_Channel_HttpHeaders
         ) {
             return true;
         }
-
+        
         return ($this->getResponse()->canSendHeaders()
-                && preg_match_all(
-                    '/\s?FirePHP\/([\.|\d]*)\s?/si',
-                    $this->getRequest()->getHeader('User-Agent'),
-                    $m
-                )
-        );
+                && (preg_match_all(
+                        '/\s?FirePHP\/([\.\d]*)\s?/si',
+                        $this->getRequest()->getHeader('User-Agent'),
+                        $m
+                    ) ||
+                    (($header = $this->getRequest()->getHeader('X-FirePHP-Version'))
+                     && preg_match_all('/^([\.\d]*)$/si', $header, $m)
+                   ))
+               );
     }
 
 

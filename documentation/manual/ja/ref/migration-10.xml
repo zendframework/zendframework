@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18781 -->
+<!-- EN-Revision: 20876 -->
 <sect1 id="migration.10">
     <title>Zend Framework 1.0</title>
 
@@ -111,12 +111,14 @@ public function preDispatch()
                     なにも変更する必要はありません。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     何も引数を指定せずに <methodname>render()</methodname> をコールしている場合は、
                     その行を削除します。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     引数つきで <methodname>render()</methodname> をコールしていて、
@@ -216,12 +218,14 @@ $currency = new Zend_Currency($currency, $locale);
                     以前の 'rules' パラメータを置き換えるものです。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>script</emphasis>:
                     以前の 'script' パラメータを置き換えるものです。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>format</emphasis>:
@@ -230,18 +234,21 @@ $currency = new Zend_Currency($currency, $locale);
                     数値フォーマットのみを設定します。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>display</emphasis>:
                     以前の 'rules' パラメータを置き換えるものです。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>precision</emphasis>:
                     新しいパラメータです。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>name</emphasis>:
@@ -249,12 +256,14 @@ $currency = new Zend_Currency($currency, $locale);
                     完全な通貨名を指定します。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>currency</emphasis>:
                     新しいパラメータです。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>symbol</emphasis>:

@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 20807 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 20807 -->
 <sect2 id="zend.test.phpunit.bootstrapping">
-    <title>Bootstrapping der eigenen TestCases</title>
+    <title>Bootstrapping der eigenen Testfälle</title>
 
     <para>
-        Wie im <link linkend="zend.test.phpunit.loginexample">Login Beispiel</link> gezeigt sollten
-        alle <acronym>MVC</acronym> Testcases
+        Wie im <link linkend="zend.test.phpunit.loginexample">Login-Beispiel</link> gezeigt, sollten
+        alle <acronym>MVC</acronym>-Testfälle
         <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> erweitern. Diese Klasse
-        ihrerseits erweitert <classname>PHPUnit_Framework_TestCase</classname>, und gibt einem alle
-        Strukturen und Behauptungen die man von PHPUnit erwartet -- sowie einiges an Scaffolding und
-        Behauptungs-spezifisches der Zend Framework <acronym>MVC</acronym> Implementation.
+        ihrerseits erweitert <classname>PHPUnit_Framework_TestCase</classname> und gibt einem alle
+        Strukturen und Zusicherungen, die man von PHPUnit erwartet -- sowie einiges an Scaffolding und
+        Zusicherungen, die genau auf die Zend Framework <acronym>MVC</acronym>-Implementation zugeschnitten sind.
     </para>
 
     <para>
-        Um die eigene <acronym>MVC</acronym> Anwendung zu testen muß diese ein Bootstrap ausführen.
-        Es gibt verschiedene Wege um das zu tun, wobei alle von Ihnen sich der öffentlichen
-        <varname>$bootstrap</varname> Eigenschaft bedienen.
+        Um die eigene <acronym>MVC</acronym>-Anwendung zu testen, muß diese ein Bootstrap ausführen.
+        Es gibt verschiedene Wege, dies zu tun, wobei sich alle der öffentlichen
+        <varname>$bootstrap</varname>-Eigenschaft bedienen.
     </para>
 
     <para>
-        Zuerst, und möglicherweise am zielgerichtetsten, kann kein einfach eine Instanz von
-        <classname>Zend_Application</classname> erstellen wie man es in der
-        <filename>index.php</filename> machen würde, und diese der <varname>$bootstrap</varname>
-        Eigenschaft zuordnen. Typischerweise macht man das in der <methodname>setUp()</methodname>
-        Methode; man muss <methodname>parent::setUp()</methodname> aufrufen wenn man das getan hat:
+        Erstens und möglicherweise am zielgerichtetsten kann man einfach eine Instanz von
+        <classname>Zend_Application</classname> erstellen, wie man es in der
+        <filename>index.php</filename> machen würde und diese der <varname>$bootstrap</varname>-Eigenschaft
+        zuweisen. Normalerweise macht man das in der <methodname>setUp()</methodname>-Methode;
+        anschließend muss man <methodname>parent::setUp()</methodname> aufrufen:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -43,10 +43,10 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        Zweitens kann diese Eigenschaft so gesetzt werden das Sie auf eine Datei zeigt. Wenn das
-        getan wurde sollte diese Datei <emphasis>nicht</emphasis> den Front Controller ausführen,
-        aber stattdessen den Front Controller konfigurieren und alles was die Anwendung an
-        speziellen Dingen benötigt.
+        Zweitens kann diese Eigenschaft so gesetzt werden, dass sie auf eine Datei zeigt. Wenn dieser
+        Weg gewählt wird, sollte diese Datei <emphasis>nicht</emphasis> den Front-Controller ausführen,
+        sondern stattdessen den Front-Controller konfigurieren und alles, was die Anwendung an
+        speziellen Anforderungen benötigt.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -59,10 +59,10 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        Drittens kann ein <acronym>PHP</acronym> Callback angegeben werden der nach dem Bootstrap
+        Drittens kann ein <acronym>PHP</acronym>-Callback angegeben werden, der nach dem Bootstrap
         der Anwendung ausgeführt wird. Diese Methode kann im <link
-            linkend="zend.test.phpunit.loginexample">Login Beispiel</link> gesehen werden. Wenn das
-        Callback eine Funktion oder statische Methode ist, könnte Sie auch in der Klasse gesetzt
+            linkend="zend.test.phpunit.loginexample">Login-Beispiel</link> gesehen werden. Wenn das
+        Callback eine Funktion oder statische Methode ist, könnte sie auch in der Klasse gesetzt
         werden:
     </para>
 
@@ -76,8 +76,8 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        In Fällen in denen eine Objekt Instanz notwendig ist, empfehlen wir die Durchführung in der
-        eigenen <methodname>setUp()</methodname> Methode:
+        In Fällen, in denen eine Objektinstanz notwendig ist, empfehlen wir die Durchführung in der
+        eigenen <methodname>setUp()</methodname>-Methode:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -85,7 +85,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function setUp()
     {
-        // Verwende die 'start' Methode einer Bootstrap Objekt Instanz:
+        // Verwende die 'start' Methode einer Bootstrap-Objektinstanz:
         $bootstrap = new Bootstrap('test');
         $this->bootstrap = array($bootstrap, 'start');
         parent::setUp();
@@ -94,52 +94,52 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        Beachte das <methodname>parent::setUp()</methodname> aufgerufen wird; das ist notwendig, da
-        die <methodname>setUp()</methodname> Methode von
-        <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> die Erinnerung des Bootstrap
-        Prozesses durchführen wird (was den Aufruf des Callbacks inkludiert).
+        Man beachte, dass <methodname>parent::setUp()</methodname> aufgerufen wird; das ist notwendig, da
+        die <methodname>setUp()</methodname>-Methode von
+        <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> den Rest des Bootstrap-Prozesses
+        durchführen wird (was den Aufruf des Callbacks einschließt).
     </para>
 
     <para>
-        Wärend der normalen Anwendung wird die <methodname>setUp()</methodname> Methode das
-        Bootstrap der Anwendung ausführen. Dieser Prozess wird zuerst das Löschen der Umgebung
-        enthalten um einen reinen Anfragestatus zu erhalten, das Zurücksetzen jedes Plugins, Helfers
-        und Antwort Objektes. Sobald das getan wurde, wird sie anschließend die Datei mit
-        <methodname>include()</methodname> laden, die in <varname>$bootstrap</varname> spezifiziert
-        wurde, oder den spezifizierten Callback aufrufen.
+        Während der normalen Anwendung wird die <methodname>setUp()</methodname>-Methode das
+        Bootstrap der Anwendung ausführen. Dieser Prozess wird zunächst das Löschen der Umgebung
+        enthalten, um einen sauberen Anfragestatus zu erhalten, das Zurücksetzen aller Plugins, Helfer
+        und Antwortobjekte. Sobald das getan wurde, wird sie anschließend die Datei mit
+        <methodname>include()</methodname> laden, die in <varname>$bootstrap</varname> angegeben
+        ist oder den spezifizierten Callback aufrufen.
     </para>
 
     <para>
-        Das Bootstrappen sollte so nahe wie möglich daran sein wie die Anwendung das Bootstrap
+        Das Bootstrappen sollte so nahe wie möglich daran sein, wie die Anwendung das Bootstrap
         durchführt. Trotzdem gibt es einige Fallstricke:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                Wir bieten keine alternative Implementierung der Anfrage und Antwort Objekte; diese
+                Wir bieten keine alternative Implementierung der Anfrage- und Antwortobjekte; diese
                 werden nicht verwendet. <classname>Zend_Test_PHPUnit_ControllerTestCase</classname>
-                verwendet eigene Anfrage und Antwort Objekte,
+                verwendet eigene Anfrage- und Antwortobjekte,
                 <classname>Zend_Controller_Request_HttpTestCase</classname> und
-                <classname>Zend_Controller_Response_HttpTestCase</classname>. Diese Objekte bieten
-                Methoden für das Konfigurieren der Anfrageumgebung auf gezieltem Wege an, und dem
-                Holen von Antwort Artefakten auf speziellem Weg.
+                <classname>Zend_Controller_Response_HttpTestCase</classname>. Diese Objekte stellen
+                Methoden zur Verfügung, um die Anfrageumgebung gezielt aufzusetzen und um auf
+                speziellem Weg die Antwort als Prüfgegenstand abzuholen.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Man sollte nicht erwarten Server spezielles zu testen. In anderen Worten, die Tests
-                garantieren nicht das der Code in einer speziellen Serverkonfiguration läuft, aber
-                das die Anwendung wie erwartet funktionieren sollte, und der Router eine gegebene
-                Anfrage routen kann. Um das Abzuschließen sollten keine Server-speziellen Header im
-                Anfrage Objekt gesetzt werden.
+                Man sollte nicht erwarten Server-spezifisches zu testen. Mit anderen Worten, die Tests
+                garantieren nicht, dass der Code in einer speziellen Serverkonfiguration läuft, aber
+                dass die Anwendung wie erwartet funktionieren sollte und der Router eine gegebene
+                Anfrage routen kann. Aus diesem Grund sollten keine Server-spezifischen Header im
+                Anfrageobjekt gesetzt werden.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Sobald die Anwendung das Bootstrapping ausgeführt hat, kann damit begonnen werden eigene
+        Sobald die Anwendung das Bootstrapping ausgeführt hat, kann damit begonnen werden, eigene
         Tests zu erstellen.
     </para>
 </sect2>

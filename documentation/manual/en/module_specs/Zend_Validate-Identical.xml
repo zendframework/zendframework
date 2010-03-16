@@ -8,6 +8,23 @@
         identical with an set haystack.
     </para>
 
+    <sect3 id="zend.validate.set.identical.options">
+        <title>Supported options for Zend_Validate_Identical</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Validate_Identical</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>token</property></emphasis>: Sets the token with which the
+                    input will be validated against.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
     <sect3 id="zend.validate.set.identical.basic">
         <title>Basic usage</title>
 

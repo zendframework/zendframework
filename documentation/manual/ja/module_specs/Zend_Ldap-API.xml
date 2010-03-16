@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 20792 -->
 <sect1 id="zend.ldap.api" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>API概要</title>
 
@@ -23,24 +23,30 @@
                         <entry>説明</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><property>host</property></entry>
+
                         <entry>
                             <acronym>LDAP</acronym>サーバのデフォルトのホスト名。
                             <methodname>connect()</methodname>で指定しなかった場合に使用します
                              (<methodname>bind()</methodname>の際にユーザ名を正規化するときにも使用します)。
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>port</property></entry>
+
                         <entry>
                             <acronym>LDAP</acronym>サーバのデフォルトのポート。
                             <methodname>connect()</methodname>で指定しなかった場合に使用します。
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>useStartTls</property></entry>
+
                         <entry>
                             <acronym>LDAP</acronym>クライアント側に
                             <acronym>TLS</acronym>(別名<acronym>SSLv2</acronym>)
@@ -57,8 +63,10 @@
                             中にはこの新しい仕組みをサポートしていないサーバもあります。
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>useSsl</property></entry>
+
                         <entry>
                             <acronym>LDAP</acronym>クライアント側に
                             <acronym>SSL</acronym>での暗号化トランスポートを要求するか否か。
@@ -66,8 +74,10 @@
                             <emphasis>useStartTls</emphasis> オプションは共存できません。
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>username</property></entry>
+
                         <entry>
                             デフォルトの認証ユーザ名。
                             サーバによっては、DN 形式を要求するものもあります。
@@ -76,30 +86,38 @@
                             そして、バインディングは単純なユーザー名で可能でなければなりません
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>password</property></entry>
+
                         <entry>
                             デフォルトの認証パスワード (上のユーザ名との組み合わせでのみ使用します)。
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>bindRequiresDn</property></entry>
+
                         <entry>
                             <constant>TRUE</constant> を指定すると、ユーザ名が DN 形式でない場合に
                             <classname>Zend_Ldap</classname> をバインド時に使用してアカウントの DN を取得します。
                             デフォルト値は <constant>FALSE</constant> です。
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>baseDn</property></entry>
+
                         <entry>
                             (アカウントなどの) 検索に使用するデフォルトのベース DN。
                             このオプションは、アカウントに関する大半の操作で必須となります。
                             そのアカウントが存在する DN を指す必要があります。
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>accountCanonicalForm</property></entry>
+
                         <entry>
                             アカウント名の正規化方式を表す整数値。
                             以下の<link
@@ -108,23 +126,29 @@
                             節を参照ください。
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>accountDomainName</property></entry>
+
                         <entry>
                             対象となる<acronym>LDAP</acronym>サーバの <acronym>FQDN</acronym> ドメイン
                             (例 example.com)。
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>accountDomainNameShort</property></entry>
+
                         <entry>
                             対象となる<acronym>LDAP</acronym>サーバの '短い' ドメイン。
                             これは、Windows ネットワークの NetBIOS ドメイン名として用いられますが、
                             AD 以外のサーバで用いられることもあります。
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>accountFilterFormat</property></entry>
+
                         <entry>
                             アカウントを検索する際に使用する<acronym>LDAP</acronym>検索フィルタ。
                             この文字列は
@@ -139,8 +163,10 @@
                             それにあわせてこのオプションを変更しなければなりません。
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>allowEmptyPassword</property></entry>
+
                         <entry>
                             <acronym>LDAP</acronym>サーバによっては、
                             匿名バインドの際のパスワードに空文字を設定できるものもあります。
@@ -150,16 +176,20 @@
                             バインド時に空文字列のパスワードを使用できるようになります。
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>optReferrals</property></entry>
+
                         <entry>
                             <constant>TRUE</constant>に設定すると、
                             参照先を追跡するよう<acronym>LDAP</acronym>クライアントに指示します。
                             デフォルト値は<constant>FALSE</constant>です。
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>tryUsernameSplit</property></entry>
+
                         <entry>
                             <constant>FALSE</constant>にセットすると、
                             バインディング手続きの間、与えられたユーザー名において
@@ -193,20 +223,12 @@
         <xi:include href="Zend_Ldap-API-Ldap-Dn.xml">
             <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Dn.xml" /></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Ldap-API-Ldap-Filter.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Filter.xml" /></xi:fallback>
-        </xi:include>
+        <xi:include href="Zend_Ldap-API-Ldap-Filter.xml" />
         <xi:include href="Zend_Ldap-API-Ldap-Node.xml">
             <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Node.xml" /></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Ldap-API-Ldap-Node-RootDse.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Node-RootDse.xml" /></xi:fallback>
-        </xi:include>
-        <xi:include href="Zend_Ldap-API-Ldap-Node-Schema.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Node-Schema.xml" /></xi:fallback>
-        </xi:include>
-        <xi:include href="Zend_Ldap-API-Ldap-Ldif-Encoder.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Ldif-Encoder.xml" /></xi:fallback>
-        </xi:include>
+        <xi:include href="Zend_Ldap-API-Ldap-Node-RootDse.xml" />
+        <xi:include href="Zend_Ldap-API-Ldap-Node-Schema.xml" />
+        <xi:include href="Zend_Ldap-API-Ldap-Ldif-Encoder.xml" />
     </sect2>
 </sect1>

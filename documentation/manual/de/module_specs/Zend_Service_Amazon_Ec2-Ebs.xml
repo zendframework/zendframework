@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
+<!-- EN-Revision: 21194 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.ebs">
     <title>Zend_Service_Amazon_Ec2: Elastischer Block Speicher (EBS)</title>

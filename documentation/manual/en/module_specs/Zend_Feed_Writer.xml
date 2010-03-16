@@ -158,9 +158,9 @@ $out = $feed->export('atom');
     </author>
     <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
     <entry>
-        <title type="html"><![CDATA[All Your Base Are Belong To Us]]></title>
+        <title type="html"><![CDATA[All Your Base Are Belong To Us]]]]><![CDATA[></title>
         <summary type="html">
-            <![CDATA[Exposing the difficultly of porting games to English.]]>
+            <![CDATA[Exposing the difficultly of porting games to English.]]]]><![CDATA[>
         </summary>
         <published>2009-12-14T20:28:18+00:00</published>
         <updated>2009-12-14T20:28:18+00:00</updated>
@@ -174,7 +174,7 @@ $out = $feed->export('atom');
         </author>
         <content type="html">
             <![CDATA[I am not writing the article.
-                     The example is long enough as is ;).]]>
+                     The example is long enough as is ;).]]]]><![CDATA[>
         </content>
     </entry>
 </feed>

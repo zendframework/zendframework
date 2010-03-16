@@ -122,7 +122,7 @@
         <para>
             Zuerst muss man die Entscheidung treffen welchen der Adapter man für
             <classname>Zend_Translate</classname> benutzen soll. Oft sind externe Kriterien wie die
-            Vorgaben durch ein Projekt oder durch eien Kunden dafür ausschlaggebend. Aber
+            Vorgaben durch ein Projekt oder durch einen Kunden dafür ausschlaggebend. Aber
             wenn die Entscheidungsgewalt in den eigenen Händen liegt, werden die folgenden
             Hinweise die Entscheidung vereinfachen.
         </para>

@@ -86,7 +86,16 @@ print $decrypted;
                 <para>
                     <emphasis>envelope</emphasis>: The encrypted envelope key from the user who
                     encrypted the content. You can either provide the path and filename of the key
-                    file, or just the content of the key file itself.
+                    file, or just the content of the key file itself. When the
+                    <property>package</property> option has been set, then you can omit this
+                    parameter.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>package</emphasis>: If the envelope key has been packed with the
+                    encrypted value. Defaults to <constant>FALSE</constant>.
                 </para>
             </listitem>
         </itemizedlist>

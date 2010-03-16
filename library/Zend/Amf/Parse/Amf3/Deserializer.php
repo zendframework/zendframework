@@ -284,7 +284,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
             }
             $returnObject = $this->_referenceObjects[$ref];
         } else {
-            // Check if the Object is in the stored Definistions reference table
+            // Check if the Object is in the stored Definitions reference table
             $storedClass = ($traitsInfo & 0x01) == 0;
             $traitsInfo  = $traitsInfo >> 1;
             if ($storedClass) {
@@ -311,7 +311,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
                 $returnObject = new stdClass();
             } else {
                 // Defined object
-                // Typed object lookup agsinst registered classname maps
+                // Typed object lookup against registered classname maps
                 if ($loader = Zend_Amf_Parse_TypeLoader::loadType($className)) {
                     $returnObject = new $loader();
                 } else {
@@ -320,7 +320,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
                 }
             }
 
-            // Add the Object ot the reference table
+            // Add the Object to the reference table
             $this->_referenceObjects[] = $returnObject;
 
             $properties = array(); // clear value
@@ -346,7 +346,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
                             'propertyNames' => $propertyNames,
                         );
                     }
-                    // not a refrence object read name value properties from byte stream
+                    // not a reference object read name value properties from byte stream
                     do {
                         $property = $this->readString();
                         if ($property != "") {
@@ -362,7 +362,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
                         for($i=0; $i< $count; $i++) {
                             $propertyNames[] = $this->readString();
                         }
-                        // Add a refrence to the class.
+                        // Add a reference to the class.
                         $this->_referenceDefinitions[] = array(
                             'className'     => $className,
                             'encoding'      => $encoding,

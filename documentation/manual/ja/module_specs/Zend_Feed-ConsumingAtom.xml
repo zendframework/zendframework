@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 20774 -->
 <sect1 id="zend.feed.consuming-atom">
-<title>Atom フィードの使用</title>
+    <title>Atom フィードの使用</title>
 
     <para>
         <classname>Zend_Feed_Atom</classname> の使用法は <classname>Zend_Feed_Rss</classname>
@@ -17,10 +17,12 @@
 
     <example id="zend.feed.consuming-atom.example.usage">
         <title>Atom フィードの基本的な使用法</title>
+
         <para>
             Atom フィードを読み込み、各エントリの <code>title</code> と
             <code>summary</code> を表示します。
         </para>
+
         <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/');
 echo 'このフィードには ' . $feed->count() . ' 件のエントリが含まれます。' . "\n\n";
@@ -38,25 +40,36 @@ foreach ($feed as $entry) {
     <para>
         <itemizedlist>
             <listitem>
-                <para><code>title</code> - フィードのタイトル。<acronym>RSS</acronym> チャネルの title と同じです</para>
+                <para>
+                    <code>title</code> - フィードのタイトル。<acronym>RSS</acronym> チャネルの title と同じです
+                </para>
             </listitem>
+
             <listitem>
-                <para><code>id</code> -
-                Atom では、すべてのフィードやエントリが ID を持っています</para>
+                <para>
+                    <code>id</code> - Atom では、すべてのフィードやエントリが ID を持っています
+                </para>
             </listitem>
+
             <listitem>
-                <para><code>link</code> - フィードには複数のリンクを含めることができ、
-                それらは <code>type</code> 属性によって識別されます</para>
+                <para>
+                    <code>link</code> - フィードには複数のリンクを含めることができ、
+                    それらは <code>type</code> 属性によって識別されます
+                </para>
+
                 <para>
                     <code>type="text/html"</code> とすると、<acronym>RSS</acronym> チャネルの link
                     と同等になります。リンク先がこのフィードのコンテンツの別バージョンである場合は、
                     <code>rel="alternate"</code> 属性を使用します。
                 </para>
             </listitem>
+
             <listitem>
-                <para><code>subtitle</code> - フィードの説明。<acronym>RSS</acronym> チャネルの description
-                と同じです
+                <para>
+                    <code>subtitle</code> - フィードの説明。
+                    <acronym>RSS</acronym> チャネルの description と同じです
                 </para>
+
                 <para><code>author->name()</code> - フィードの著者の名前</para>
                 <para><code>author->email()</code> - フィードの著者のメールアドレス</para>
             </listitem>
@@ -72,28 +85,46 @@ foreach ($feed as $entry) {
             <listitem>
                 <para><code>id</code> - エントリの ID</para>
             </listitem>
+
             <listitem>
-                <para><code>title</code> - エントリのタイトル。<acronym>RSS</acronym> アイテムの title と同じです</para>
+                <para>
+                    <code>title</code> - エントリのタイトル。
+                    <acronym>RSS</acronym> アイテムの title と同じです
+                </para>
             </listitem>
+
             <listitem>
                 <para><code>link</code> - このエントリの別フォーマットの文書へのリンク</para>
             </listitem>
+
             <listitem>
                 <para><code>summary</code> - エントリの概要</para>
             </listitem>
+
             <listitem>
-                <para><code>content</code> - エントリの完全なテキスト。
-                概要のみを提供するフィードの場合は省略可能です</para>
+                <para>
+                    <code>content</code> - エントリの完全なテキスト。
+                    概要のみを提供するフィードの場合は省略可能です
+                </para>
             </listitem>
+
             <listitem>
-                <para><code>author</code> - フィードと同様に <code>name</code> および <code>email</code>
-                を配下に保持します</para>
+                <para>
+                    <code>author</code> - フィードと同様に <code>name</code> および <code>email</code>
+                    を配下に保持します
+                </para>
             </listitem>
+
             <listitem>
-                <para><code>published</code> - エントリの公開日 (<acronym>RFC</acronym> 3339 形式)</para>
+                <para>
+                    <code>published</code> - エントリの公開日 (<acronym>RFC</acronym> 3339 形式)
+                </para>
             </listitem>
+
             <listitem>
-                <para><code>updated</code> - エントリの最終更新日 (<acronym>RFC</acronym> 3339 形式)</para>
+                <para>
+                    <code>updated</code> - エントリの最終更新日 (<acronym>RFC</acronym> 3339 形式)
+                </para>
             </listitem>
         </itemizedlist>
     </para>

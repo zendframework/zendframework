@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
-<!-- Reviewed: 20818 -->
+<!-- EN-Revision: 21119 -->
+<!-- Reviewed: 21119 -->
 <sect1 id="zend.server.reflection">
     <title>Zend_Server_Reflection</title>
 
@@ -13,7 +13,7 @@
             basiert auf der <acronym>PHP</acronym> 5 Reflection <acronym>API</acronym> und erweitert
             diese, um Methoden für die Erhaltung von Parameter und Rückgabewerttypen und
             Beschreibung, eine komplette Liste mit Funktion und Methoden Prototypen (d.h.
-            alle möglichen, gültigen Aufrufkombinationen) sowie Funktions- und
+            alle möglichen, gültigen Aufrufkombinationen) sowie Funktions- oder
             Methodenbeschreibungen bereit zu stellen.
         </para>
 
@@ -62,9 +62,10 @@ $reflection->getNamespace();
         <para>
             <methodname>reflectFunction()</methodname> gibt ein
             <classname>Zend_Server_Reflection_Function</classname> Objekt zurück;
-            <code>reflectClass</code> gibt ein <classname>Zend_Server_Reflection_Class</classname>
-            Objekt zurück. Bitte die <acronym>API</acronym> Documentation beachten, um zu erfahren,
-            welche Methoden für beide Klassen verfügbar sind.
+            <methodname>reflectClass()</methodname> gibt ein
+            <classname>Zend_Server_Reflection_Class</classname> Objekt zurück. Bitte die
+            <acronym>API</acronym> Documentation beachten, um zu erfahren, welche Methoden für beide
+            Klassen verfügbar sind.
         </para>
     </sect2>
 </sect1>

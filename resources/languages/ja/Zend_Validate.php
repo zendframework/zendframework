@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 21135
+ * EN-Revision: 21362
  */
 return array(
     // Zend_Validate_Alnum
@@ -242,15 +242,19 @@ return array(
 
     // Zend_Validate_Sitemap_Changefreq
     "'%value%' is no valid sitemap changefreq" => " '%value%' は正しいサイトマップの更新頻度ではありません",
+    "Invalid type given, the value should be a string" => "不正な形式です。値は文字列である必要があります",
 
     // Zend_Validate_Sitemap_Lastmod
     "'%value%' is no valid sitemap lastmod" => " '%value%' は正しいサイトマップの最終更新日ではありません",
+    "Invalid type given, the value should be a string" => "不正な形式です。値は文字列である必要があります",
 
     // Zend_Validate_Sitemap_Loc
     "'%value%' is no valid sitemap location" => " '%value%' は正しいサイトマップの位置ではありません",
+    "Invalid type given, the value should be a string" => "不正な形式です。値は文字列である必要があります",
 
     // Zend_Validate_Sitemap_Priority
     "'%value%' is no valid sitemap priority" => " '%value%' は正しいサイトマップの優先度ではありません",
+    "Invalid type given, the value should be a integer, a float or a numeric string" => "不正な形式です。値は数値、小数もしくは数字である必要があります",
 
     // Zend_Validate_StringLength
     "Invalid type given, value should be a string" => "不正な形式です。値は文字列である必要があります",

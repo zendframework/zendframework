@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19450 -->
+<!-- EN-Revision: 20819 -->
 <sect1 id="zend.mail.additional-headers">
     <title>追加のヘッダ</title>
 
     <para>
         <classname>Zend_Mail</classname> は追加のメールヘッダを設定するためのメソッドをいくつか提供します。
+
         <itemizedlist>
             <listitem>
                 <para>
                     <methodname>setReplyTo($email, $name=null)</methodname>: Reply-To: ヘッダを設定します。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>setDate($date = null)</methodname>: Date: ヘッダを設定します。
@@ -20,6 +22,7 @@
                     インスタンスを渡せます。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>setMessageId($id = true)</methodname>: Message-Id: ヘッダを設定します。
@@ -29,9 +32,11 @@
                 </para>
             </listitem>
         </itemizedlist>
-     </para>
+    </para>
+
     <note>
         <title>Return-Path</title>
+
         <para>
             もしメールに Return-Path を設定する場合は、<link linkend="zend.mail.introduction.sendmail"
                 >sendmail トランスポートの設定</link>をご覧ください。
@@ -48,6 +53,7 @@
 
     <example id="zend.mail.additional-headers.example-1">
         <title>メールヘッダの追加</title>
+
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->addHeader('X-MailGenerator', 'MyCoolApplication');

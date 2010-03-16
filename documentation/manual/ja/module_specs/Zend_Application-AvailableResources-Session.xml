@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17136 -->
+<!-- EN-Revision: 20763 -->
 <sect2 id="zend.application.available-resources.session">
     <title>Zend_Application_Resource_Session</title>
 
@@ -18,23 +18,29 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            <type>String</type>:
-            インスタンス化されるべき<classname>Zend_Session_SaveHandler_Interface</classname>を
-            実装するクラスを示す文字列
-        </para></listitem>
+        <listitem>
+            <para>
+                <type>String</type>:
+                インスタンス化されるべき<classname>Zend_Session_SaveHandler_Interface</classname>を
+                実装するクラスを示す文字列
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <type>Array</type>:
-            インスタンス化されるべき<classname>Zend_Session_SaveHandler_Interface</classname>を実装しているクラスと
-            そのコンストラクタに与えるオプションの配列を示す、
-            "class" 及び、任意で "options"キーを持つ配列
-        </para></listitem>
+        <listitem>
+            <para>
+                <type>Array</type>:
+                インスタンス化されるべき<classname>Zend_Session_SaveHandler_Interface</classname>を実装しているクラスと
+                そのコンストラクタに与えるオプションの配列を示す、
+                "class" 及び、任意で "options"キーを持つ配列
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <classname>Zend_Session_SaveHandler_Interface</classname>:
-            このインターフェースを実装するオブジェクト
-        </para></listitem>
+        <listitem>
+            <para>
+                <classname>Zend_Session_SaveHandler_Interface</classname>:
+                このインターフェースを実装するオブジェクト
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>

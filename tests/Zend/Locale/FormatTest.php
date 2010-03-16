@@ -730,7 +730,7 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
         $this->assertEquals( '1.234.567,00',      Zend_Locale_Format::toNumber( 1234567,         array('number_format' => '#,##0.00', 'locale' => 'de_AT')));
         $this->assertEquals( '1.234.567,12',      Zend_Locale_Format::toNumber( 1234567.123,     array('precision' => 2,              'locale' => 'de_AT')));
         $this->assertEquals(   '1234567,12-',     Zend_Locale_Format::toNumber(-1234567.123,     array('number_format' => '#0.00-',   'locale' => 'de_AT')));
-        $this->assertEquals(   '-12.345',         Zend_Locale_Format::toNumber(  -12345.67,      array('precision' => 0,              'locale' => 'de_AT')));
+        $this->assertEquals(   '-12.346',         Zend_Locale_Format::toNumber(  -12345.67,      array('precision' => 0,              'locale' => 'de_AT')));
     }
 
     /**
@@ -1079,5 +1079,18 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
     public function testGetNumberWithZeroPrecision()
     {
         $this->assertEquals(1234, Zend_Locale_Format::getNumber('1234.567', array('locale' => 'en_US', 'precision' => 0)));
+    }
+
+    /**
+     * @group ZF-9319
+     */
+    public function testToNumberWithoutFormatWithPrecision()
+    {
+        $options = array('locale' => 'de_AT', 'precision' => 2);
+        $this->assertEquals('3,99', Zend_Locale_Format::toNumber(3.99, $options));
+        $this->assertEquals('3,99', Zend_Locale_Format::toNumber(3.994, $options));
+        $this->assertEquals('4,00', Zend_Locale_Format::toNumber(3.995, $options));
+        $this->assertEquals('4,00', Zend_Locale_Format::toNumber(3.999, $options));
+        $this->assertEquals('4,00', Zend_Locale_Format::toNumber(4, $options));
     }
 }

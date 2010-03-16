@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 20766 -->
 <sect3 id="zend.db.profiler.profilers.firebug">
     <title>Firebug によるプロファイリング</title>
 
@@ -24,21 +24,27 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            Firefox ブラウザ。バージョン 3 が最適ですがバージョン 2 にも対応しています。
-        </para></listitem>
+        <listitem>
+            <para>
+                Firefox ブラウザ。バージョン 3 が最適ですがバージョン 2 にも対応しています。
+            </para>
+        </listitem>
 
-        <listitem> <para>
-            Firebug 拡張。<ulink
-                url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>
-            からダウンロードできます。
-        </para></listitem>
+        <listitem>
+            <para>
+                Firebug 拡張。<ulink
+                    url="https://addons.mozilla.org/ja/firefox/addon/1843">https://addons.mozilla.org/ja/firefox/addon/1843</ulink>
+                からダウンロードできます。
+            </para>
+        </listitem>
 
-        <listitem><para>
-            FirePHP 拡張。<ulink
-                url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>
-            からダウンロードできます。
-        </para></listitem>
+        <listitem>
+            <para>
+                FirePHP 拡張。<ulink
+                    url="https://addons.mozilla.org/ja/firefox/addon/6149">https://addons.mozilla.org/ja/firefox/addon/6149</ulink>
+                からダウンロードできます。
+            </para>
+        </listitem>
     </itemizedlist>
 
     <example id="zend.db.profiler.profilers.firebug.example.with_front_controller">

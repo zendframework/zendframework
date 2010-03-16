@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16656 -->
+<!-- EN-Revision: 20807 -->
 <sect1 id="zend.tool.framework.clitool">
     <title>CLIツールの使用</title>
 
@@ -51,6 +51,7 @@
                     これはあなたのコマンド・ラインでどこからでも<filename>zf</filename>を呼ぶ能力です。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <filename>ZendFramework/library</filename>は<property>include_path</property>にあります。

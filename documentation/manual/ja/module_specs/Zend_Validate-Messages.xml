@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20352 -->
+<!-- EN-Revision: 21213 -->
 <sect1 id="zend.validate.messages">
 
     <title>検証メッセージ</title>
@@ -60,8 +60,8 @@ $validator->setMessage('Please enter a lower value', Zend_Validate_GreaterThan::
 
         <para>
             Zend Framework is shipped with more than 45 different validators with more than 200
-            failure messages. It can be a tendious task to translate all of these messages. But for
-            your convinience Zend Framework comes with already pre-translated validation messages.
+            failure messages. It can be a tedious task to translate all of these messages. But for
+            your convenience Zend Framework comes with already pre-translated validation messages.
             You can find them within the path <filename>/resources/languages</filename> in your
             Zend Framework installation.
         </para>
@@ -76,7 +76,7 @@ $validator->setMessage('Please enter a lower value', Zend_Validate_GreaterThan::
         </note>
 
         <para>
-            So to translate all validation messages to german for example, all you have to do is to
+            So to translate all validation messages to German for example, all you have to do is to
             attach a translator to <classname>Zend_Validate</classname> using these resource files.
         </para>
 
@@ -85,7 +85,7 @@ $translator = new Zend_Translate(
     'array',
     '/resources/languages',
     $language,
-    array('scan' => Zend_Locale::LOCALE_DIRECTORY)
+    array('scan' => Zend_Translate::LOCALE_DIRECTORY)
 );
 Zend_Validate_Abstract::setDefaultTranslator($translator);
 ]]></programlisting>
@@ -94,7 +94,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
             <title>Used translation adapter</title>
 
             <para>
-                As translation adapter Zend Framework choosed the array adapter. It is simple to
+                As translation adapter Zend Framework chose the array adapter. It is simple to
                 edit and created very fast.
             </para>
         </note>
@@ -146,8 +146,8 @@ Zend_Validate::setMessageLength(100);
 ]]></programlisting>
 
         <note>
-            <!-- TODO : to be translated -->
-            <title>Where is this parameter used?</title>
+            <title>このパラメータはどこで使われますか？</title>
+
             <para>
                 ここで設定したメッセージ長はすべてのバリデータで使われます。
                 自前で定義したバリデータでさえも、それが <classname>Zend_Validate_Abstract</classname>

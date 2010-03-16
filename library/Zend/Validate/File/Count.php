@@ -241,7 +241,10 @@ class Zend_Validate_File_Count extends Zend_Validate_Abstract
             $value = $file['destination'] . DIRECTORY_SEPARATOR . $file['name'];
         }
 
-        $this->addFile($value);
+        if (($file === null) || !empty($file['tmp_name'])) {
+            $this->addFile($value);
+        }
+
         $this->_count = count($this->_files);
         if (($this->_max !== null) && ($this->_count > $this->_max)) {
             return $this->_throw($file, self::TOO_MANY);

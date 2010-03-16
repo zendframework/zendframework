@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21080 -->
+<!-- EN-Revision: 21358 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
     <title>Zend_Db_Adapter</title>
@@ -29,8 +29,8 @@
     <itemizedlist>
         <listitem>
             <para>
-                IBM DB2 e Informix Dynamic Server (IDS), usando a extensão
-                <acronym>PHP</acronym>
+                <acronym>IBM</acronym> <acronym>DB2</acronym> e Informix Dynamic Server
+                (<acronym>IDS</acronym>), usando a extensão <acronym>PHP</acronym>
                 <ulink url="http://www.php.net/pdo-ibm">pdo_ibm</ulink>
             </para>
         </listitem>
@@ -94,14 +94,15 @@
 
         <listitem>
             <para>
-                IBM DB2 e DB2/i5, usando a extensão <acronym>PHP</acronym> <ulink
+                <acronym>IBM</acronym> <acronym>DB2</acronym> e <acronym>DB2</acronym> I5, usando a
+                extensão <acronym>PHP</acronym> <ulink
                     url="http://www.php.net/ibm_db2">ibm_db2</ulink>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Firebird/Interbase, usando a extensão <acronym>PHP</acronym> <ulink
+                Firebird (Interbase), usando a extensão <acronym>PHP</acronym> <ulink
                     url="http://www.php.net/ibase">php_interbase</ulink>
             </para>
         </listitem>
@@ -375,11 +376,11 @@ $db = Zend_Db::factory($config->database);
 
                 <para>
                     Você pode especificar essa opção pela constante
-                    <constant>Zend_Db::CASE_FOLDING</constant>.
-                    Ela corresponde ao atributo <constant>ATTR_CASE</constant> nos
-                    drivers de banco de dados <acronym>PDO</acronym> e IBM DB2, ajustando a caixa
-                    das chaves de string nos conjuntos de resultado de consulta. A opção leva os
-                    valores <constant>Zend_Db::CASE_NATURAL</constant> (padrão),
+                    <constant>Zend_Db::CASE_FOLDING</constant>. Ela corresponde ao atributo
+                    <constant>ATTR_CASE</constant> nos drivers de banco de dados
+                    <acronym>PDO</acronym> e <acronym>IBM</acronym> <acronym>DB2</acronym>,
+                    ajustando a caixa das chaves de string nos conjuntos de resultado de consulta.
+                    A opção leva os valores <constant>Zend_Db::CASE_NATURAL</constant> (padrão),
                     <constant>Zend_Db::CASE_UPPER</constant>, e
                     <constant>Zend_Db::CASE_LOWER</constant>.
                 </para>
@@ -704,7 +705,7 @@ $result = $db->fetchAll($sql, 2);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_ASSOC</emphasis>:
+                        <emphasis><constant>Zend_Db::FETCH_ASSOC</constant></emphasis>:
                         retorna dados em um matriz de matrizs associativos.
                         As chaves de matriz são nomes de coluna, como strings. Este é o modo padrão
                         de busca para classes <classname>Zend_Db_Adapter</classname>.
@@ -715,7 +716,7 @@ $result = $db->fetchAll($sql, 2);
                         coluna com o mesmo nome, por exemplo se elas são de
                         duas tabelas diferentes em um <acronym>JOIN</acronym>, pode haver somente
                         uma entrada na matriz associativa para o nome dado.
-                        Se você usa o modo <acronym>FETCH_ASSOC</acronym>, deve especificar
+                        Se você usa o modo <constant>FETCH_ASSOC</constant>, deve especificar
                         apelidos de coluna em sua consulta <acronym>SELECT</acronym> para garantir
                         que os nomes resultem em chaves de matriz únicas.
                     </para>
@@ -727,13 +728,14 @@ $result = $db->fetchAll($sql, 2);
                         especificar a caixa para essas strings, usando a
                         opção <constant>Zend_Db::CASE_FOLDING</constant>.
                         Especifique isso quando instanciar a adaptadora.
-                        Veja <xref linkend="zend.db.adapter.connecting.parameters.example1" />.
+                        Veja <link linkend="zend.db.adapter.connecting.parameters.example1">este
+                            exemplo</link>.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_NUM</emphasis>:
+                        <emphasis><constant>Zend_Db::FETCH_NUM</constant></emphasis>:
                         retorna dados em um matriz de matrizs. Os matrizs são
                         indexados por inteiros, correspondendo à posição do
                         respectivo campo na lista de seleção da consulta.
@@ -742,19 +744,18 @@ $result = $db->fetchAll($sql, 2);
 
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_BOTH</emphasis>:
+                        <emphasis><constant>Zend_Db::FETCH_BOTH</constant></emphasis>:
                         retorna dados em um matriz de matrizs. As chaves de matriz são
-                        tanto strings como as usadas no modo FETCH_ASSOC, como
-                        inteiros como os usados no modo FETCH_NUM. Note que o
-                        número de elementos na matriz é o dobro do que
-                        seria se você usasse FETCH_ASSOC
-                        ou FETCH_NUM.
+                        tanto strings como as usadas no modo <constant>FETCH_ASSOC</constant>, como
+                        inteiros como os usados no modo <constant>FETCH_NUM</constant>. Note que o
+                        número de elementos na matriz é o dobro do que seria se você usasse
+                        <constant>FETCH_ASSOC</constant> ou <constant>FETCH_NUM</constant>.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_COLUMN</emphasis>:
+                        <emphasis><constant>Zend_Db::FETCH_COLUMN</constant></emphasis>:
                         retorna dados em um matriz de valores. O valor em cada matriz
                         é o valor retornado pela coluna do conjunto de resultados.
                         Por padrão, essa é a primeira coluna, indexada por 0.
@@ -763,7 +764,7 @@ $result = $db->fetchAll($sql, 2);
 
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_OBJ</emphasis>:
+                        <emphasis><constant>Zend_Db::FETCH_OBJ</constant></emphasis>:
                         retorna dados em um matriz de objetos. A classe padrão
                         é a classe interna <acronym>PHP</acronym> stdClass. Colunas do conjunto de
                         resultados estão disponíveis como propriedades públicas do
@@ -801,11 +802,13 @@ echo $result[0]->bug_description;
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
-$result = $db->fetchAssoc('SELECT bug_id, bug_description, bug_status FROM bugs');
+$result = $db->fetchAssoc(
+    'SELECT bug_id, bug_description, bug_status FROM bugs'
+);
 
 // $result é uma matriz de matrizes associativas, conforme o modo de busca
-echo $result[2]['bug_description']; // Descrição do Erro #2
-echo $result[1]['bug_description']; // Descrição do Erro #1
+echo $result[2]['bug_description']; // Descrição do Bug #2
+echo $result[1]['bug_description']; // Descrição do Bug #1
 ]]></programlisting>
             </example>
         </sect3>
@@ -819,7 +822,7 @@ echo $result[1]['bug_description']; // Descrição do Erro #1
                 Ele devolve somente a primeira coluna devolvida pela consulta.
                 Quaisquer outras colunas devolvidas pela consulta são descartadas.
                 Se você precisar devolver uma outra coluna que não seja a primeira, veja
-                <xref linkend="zend.db.statement.fetching.fetchcolumn" />.
+                <link linkend="zend.db.statement.fetching.fetchcolumn">esta seção</link>.
             </para>
 
             <example id="zend.db.adapter.select.fetchcol.example">
@@ -1005,7 +1008,7 @@ $db->insert('bugs', $data);
 
             <para>
                 Se sua tabela é definida com uma chave primária de autoincremento
-                você pode chamar  o método <methodname>lastInsertId()</methodname> depois da
+                você pode chamar o método <methodname>lastInsertId()</methodname> depois da
                 inclusão. Esse método retonra o último valor gerado no
                 escopo da conexão atual com o banco de dados.
             </para>
@@ -1030,8 +1033,8 @@ $id = $db->lastInsertId();
                 sequencias é denominada usando os nomes de tabela e coluna para os quais
                 a sequencia gera valores, e um sufixo "_seq". Isso é
                 baseado na convenção usada pelo PostgreSQL quando nomeia
-                sequencias para colunas SERIAL. Por exemplo, uma tabela "bugs" com
-                a coluna de chave primária "bug_id" usaria uma sequencia denominada
+                sequencias para colunas <constant>SERIAL</constant>. Por exemplo, uma tabela "bugs"
+                com a coluna de chave primária "bug_id" usaria uma sequencia denominada
                 "bugs_bug_id_seq".
             </para>
 
@@ -1103,7 +1106,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 </para>
 
                 <para>
-                    Além disso, usar uma expressão como "MAX (id) +1" para gerar
+                    Além disso, usar uma expressão como "<command>MAX(id)+1</command>" para gerar
                     um novo valor para uma chave primária não é seguro, porque dois clientes
                     poderiam fazer esta consulta simultanamente, e em seguida, ambos usariam
                     o mesmo valor calculado para sua próxima operação <acronym>INSERT</acronym>.
@@ -1134,7 +1137,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
 
             <para>
                 Os valores na matriz de dados são tratados como sequências de caracteres.
-                Veja <xref linkend="zend.db.adapter.write.insert" />
+                Veja <link linkend="zend.db.adapter.write.insert">esta seção</link>
                 para obter informações sobre como utilizar expressões <acronym>SQL</acronym> na
                 matriz de dados.
             </para>
@@ -1145,7 +1148,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 e identificadores nesse argumento não são citados ou escapados.
                 Você é responsável por garantir que o conteúdo dinâmico seja
                 interpolados para essa sequência de forma segura.
-                Veja <xref linkend="zend.db.adapter.quoting" />
+                Veja <link linkend="zend.db.adapter.quoting">esta seção</link>
                 para métodos que o ajudam a fazer isso.
             </para>
 
@@ -1242,7 +1245,7 @@ $n = $db->update('bugs', $data, $where);
                 e identificadores nesse argumento não são citados ou escapado.
                 Você é responsável por garantir que o conteúdo dinâmico seja
                 interpolado para esta seqüência de forma segura.
-                Veja <xref linkend="zend.db.adapter.quoting" />
+                Veja <link linkend="zend.db.adapter.quoting">esta seção</link>
                 para métodos que o ajudam a fazer isso.
             </para>
 
@@ -1289,15 +1292,15 @@ $n = $db->delete('bugs', 'bug_id = 3');
             <acronym>PHP</acronym> contém certos símbolos, como o símbolo de citação, isso pode
             resultar em <acronym>SQL</acronym> inválido. Por exemplo, observe os apóstrofos não
             balanceados na seguinte consulta:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $name = "O'Reilly";
 $sql = "SELECT * FROM bugs WHERE reported_by = '$name'";
 
 echo $sql;
 // SELECT * FROM bugs WHERE reported_by = 'O'Reilly'
 ]]></programlisting>
-        </para>
 
         <para>
             Ainda pior é o risco de tais erros de código possam ser explorados
@@ -1363,16 +1366,16 @@ echo $sql;
             <para>
                 Os valores podem precisar ser citados ou não citados de acordo com o
                 contexto de tipo de dados <acronym>SQL</acronym> em que eles são usados. Por
-                exemplo, em algumas marcas de SGBDR, um valor inteiro não deve ser citado como uma
-                string se for comparado a uma coluna ou expressão do tipo inteiro.
-                Em outras palavras, o código seguinte é um erro em algumas implementações
+                exemplo, em algumas marcas de <acronym>SGBDR</acronym>, um valor inteiro não deve
+                ser citado como uma string se for comparado a uma coluna ou expressão do tipo
+                inteiro. Em outras palavras, o código seguinte é um erro em algumas implementações
                 <acronym>SQL</acronym>, assumindo que <property>intColumn</property> tem um tipo de
                 dados <acronym>SQL</acronym> <constant>INTEGER</constant>
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'
 ]]></programlisting>
-            </para>
 
             <para>
                 Você pode usar o segundo argumento opcional para o
@@ -1514,7 +1517,7 @@ echo $sql
             </example>
 
             <para>
-                Identificadores delimitados <acronym>SQL</acronym>  são sensíveis à caixa, ao
+                Identificadores delimitados <acronym>SQL</acronym> são sensíveis à caixa, ao
                 contrário de identificadores não citados. Portanto, se você usar identificadores
                 delimitados, você deve usar a ortografia do identificador exatamente como ela é
                 armazenada no seu esquema, incluindo a caixa das letras.
@@ -1526,7 +1529,8 @@ echo $sql
                 sejam delimitados automaticamente. Você pode alterar esse comportamento com a opção
                 <constant>Zend_Db::AUTO_QUOTE_IDENTIFIERS </constant>. Especifique essa opção
                 ao instanciar o adaptador.
-                Veja <xref linkend="zend.db.adapter.connecting.parameters.example2" />.
+                Veja <link linkend="zend.db.adapter.connecting.parameters.example2">este
+                    exemplo</link>.
             </para>
         </sect3>
     </sect2>
@@ -1671,7 +1675,7 @@ try {
                     <row>
                         <entry><constant>DATA_TYPE</constant></entry>
                         <entry>(string)</entry>
-                        <entry>Nome do tipo de dados do SGBDR da coluna.</entry>
+                        <entry>Nome do tipo de dados do <acronym>SGBDR</acronym> da coluna.</entry>
                     </row>
 
                     <row>
@@ -1707,7 +1711,7 @@ try {
                         <entry>(integer)</entry>
 
                         <entry>
-                            Escala de tipo <acronym>SQL</acronym> NUMERIC ou
+                            Escala de tipo <acronym>SQL</acronym> <constant>NUMERIC</constant> ou
                             <constant>DECIMAL</constant>.
                         </entry>
                     </row>
@@ -1717,7 +1721,7 @@ try {
                         <entry>(integer)</entry>
 
                         <entry>
-                            Precisão de tipo <acronym>SQL</acronym> NUMERIC ou
+                            Precisão de tipo <acronym>SQL</acronym> <constant>NUMERIC</constant> ou
                             <constant>DECIMAL</constant>.
                         </entry>
                     </row>
@@ -1764,15 +1768,16 @@ try {
             <title>Como o Campo de Metadados IDENTITY Relaciona-se com SGBDRs Específicos</title>
 
             <para>
-                O campo de metadados IDENTITY foi escolhido como um termo 'idiomático' para
-                representar uma relação de chaves substitutas. Este campo pode ser
+                O campo de metadados <constant>IDENTITY</constant> foi escolhido como um termo
+                'idiomático' para representar uma relação de chaves substitutas. Este campo pode ser
                 vulgarmente conhecido pelos seguintes valores: --
             </para>
 
             <itemizedlist>
                 <listitem>
                     <para>
-                        <constant>IDENTITY</constant> - DB2, MSSQL
+                        <constant>IDENTITY</constant> - <acronym>DB2</acronym>,
+                        <acronym>MSSQL</acronym>
                     </para>
                 </listitem>
 
@@ -1882,9 +1887,9 @@ $db = Zend_Db::factory('Oracle', array(
             </para>
 
             <para>
-                Atualmente, apenas  Oracle, DB2, e os adaptadores <acronym>PDO</acronym> (onde
-                especificado pelo <acronym>PHP</acronym>) suportam persistência em
-                <classname>Zend_Db</classname>.
+                Atualmente, apenas Oracle, <acronym>DB2</acronym>, e os adaptadores
+                <acronym>PDO</acronym> (onde especificado pelo <acronym>PHP</acronym>) suportam
+                persistência em <classname>Zend_Db</classname>.
             </para>
         </note>
     </sect2>
@@ -1893,7 +1898,7 @@ $db = Zend_Db::factory('Oracle', array(
         <title>Rodando Outras Declarações de Banco de Dados</title>
 
         <para>
-            Pode haver casos em que você precisa acessar  o objeto de conexão
+            Pode haver casos em que você precisa acessar o objeto de conexão
             diretamente, como provido pela extensão de banco de dados <acronym>PHP</acronym>.
             Algumas dessas extensões podem oferecer recursos que não são cobertos por
             métodos de <classname>Zend_Db_Adapter_Abstract</classname>.
@@ -1902,11 +1907,12 @@ $db = Zend_Db::factory('Oracle', array(
         <para>
             Por exemplo, todas as declarações <acronym>SQL</acronym> rodadas por
             <classname>Zend_Db</classname> são preparadas, então executadas. No entanto, algumas
-            funções de banco de dados são incompatíveis com declarações preparadas. Instruções DDL
-            como CREATE e ALTER não podem ser preparadas no MySQL. Além disso, declarações
-            <acronym>SQL</acronym> não se beneficiam do
-            <ulink url="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">
-            MySQL Query Cache </ulink>, antes do MySQL 5.1.17.
+            funções de banco de dados são incompatíveis com declarações preparadas. Instruções
+            <constant>DDL</constant> como <constant>CREATE</constant> e <constant>ALTER</constant>
+            não podem ser preparadas no MySQL. Além disso, declarações <acronym>SQL</acronym> não se
+            beneficiam do <ulink
+                url="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">MySQL Query
+                Cache</ulink>, antes do MySQL 5.1.17.
         </para>
 
         <para>
@@ -1990,19 +1996,19 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
-                        Este adaptador usa a extensão <acronym>PHP</acronym> ibm_db2.
+                        Este adaptador usa a extensão <acronym>PHP</acronym>
+                        <constant>IBM_DB2</constant>.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        IBM DB2 suporta tanto seqüências quanto chaves de autoincremento.
-                        Portanto os argumentos para
+                        <acronym>IBM</acronym> <acronym>DB2</acronym> suporta tanto seqüências
+                        quanto chaves de autoincremento. Portanto os argumentos para
                         <methodname>lastInsertId()</methodname> são opcionais. Se você não fornecer
-                        argumentos, o adaptador retorna o último valor
-                        gerado para uma chave de autoincremento. Se você fornecer
-                        argumentos, o adaptador retorna o último valor gerado
-                        pela seqüência nomeada de acordo com a convenção
+                        argumentos, o adaptador retorna o último valor gerado para uma chave de
+                        autoincremento. Se você fornecer argumentos, o adaptador retorna o último
+                        valor gerado pela seqüência nomeada de acordo com a convenção
                         '<emphasis>table</emphasis>_<emphasis>column</emphasis>_seq'.
                     </para>
                 </listitem>
@@ -2075,17 +2081,19 @@ if (!is_null($version)) {
                     <para>
                         Atualmente, a opção <constant>Zend_Db::CASE_FOLDING</constant>
                         não é suportada pelo adaptador Oracle. Para utilizar essa
-                        opção com a Oracle, você deve usar o adaptador <acronym>PDO</acronym> OCI.
+                        opção com a Oracle, você deve usar o adaptador <acronym>PDO</acronym>
+                        <acronym>OCI</acronym>.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        Por padrão, os campos LOB são devolvidos como objetos OCI-Lob. Você pode
-                        recuperá-los como string para todas as solicitações, utilizando as opções
-                        do driver '<property>lob_as_string</property>' ou para uma solicitação
-                        particular, usando <methodname>setLobAsString(boolean)</methodname> no
-                        adaptador ou na declaração.
+                        Por padrão, os campos <acronym>LOB</acronym> são devolvidos como objetos
+                        <acronym>OCI</acronym>-Lob. Você pode recuperá-los como string para todas as
+                        solicitações, utilizando as opções do driver
+                        '<property>lob_as_string</property>' ou para uma solicitação particular,
+                        usando <methodname>setLobAsString(boolean)</methodname> no adaptador ou na
+                        declaração.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2121,8 +2129,8 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Adapter_Sqlsrv</classname> configur
-                        <constant>QUOTED_IDENTIFIER ON</constant> imediatamente após conectar-se
+                        <classname>Zend_Db_Adapter_Sqlsrv</classname> configura
+                        <constant>QUOTED_IDENTIFIER</constant> ON imediatamente após conectar-se
                         a um servidor <acronym>SQL</acronym>. Isso faz com que o driver utilize o
                         o símbolo delimitador de identificador da <acronym>SQL</acronym> padrão
                         (<emphasis> "</emphasis>) em vez dos colchetes que a sintaxe do
@@ -2175,15 +2183,16 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
-                        Esse adaptador usa as extensões <acronym>PHP</acronym> pdo e pdo_ibm.
+                        Esse adaptador usa as extensões <acronym>PHP</acronym>
+                        <acronym>PDO</acronym> e <constant>PDO_IBM</constant>.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        Você deve usar pelo menos a versão da extensão PDO_IBM 1.2.2.
-                        Se você tiver uma versão anterior desta extensão, você
-                        deve atualizar a extensão PDO_IBM a partir da <acronym>PECL</acronym>.
+                        Você deve usar pelo menos a versão da extensão <constant>PDO_IBM</constant>
+                        1.2.2. Se você tiver uma versão anterior desta extensão, você deve atualizar
+                        a extensão <constant>PDO_IBM</constant> a partir da <acronym>PECL</acronym>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2219,17 +2228,18 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Se você está trabalhando com strings Unicode em uma codificação diferente
-                        de UCS-2 (tal como UTF-8), você pode ter que realizar uma conversão no
-                        código de sua aplicação ou armazenar os dados em uma coluna binária. Por
-                        favor, consulte a <ulink url = "http://support.microsoft.com/kb/232580">
-                        Base de Conhecimento da Microsoft</ulink> para mais informações.
+                        de <acronym>UCS</acronym>-2 (tal como <acronym>UTF</acronym>-8), você pode
+                        ter que realizar uma conversão no código de sua aplicação ou armazenar os
+                        dados em uma coluna binária. Por favor, consulte a <ulink
+                            url="http://support.microsoft.com/kb/232580">Base de Conhecimento da
+                            Microsoft</ulink> para mais informações.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <classname>Zend_Db_Adapter_Pdo_Mssql</classname> configura
-                        <constant>QUOTED_IDENTIFIER ON</constant> imediatamente depois de
+                        <constant>QUOTED_IDENTIFIER</constant> ON imediatamente depois de
                         conectar-se a um banco de dados <acronym>SQL</acronym> Server. Isso
                         faz com que o driver utilize o símbolo delimitador de identificador
                         da <acronym>SQL</acronym> padrão ( ") em vez dos colchetes que a sintaxe
@@ -2393,7 +2403,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Versões antigas do driver SQLite para <acronym>PHP</acronym> parecem não
-                        suportar os comandos PRAGMA necessários para garantir que
+                        suportar os comandos <acronym>PRAGMA</acronym> necessários para garantir que
                         nomes de coluna curtos sejam usados em conjuntos de resultados. Se você
                         tem problemas que seus conjuntos de resultados são retornados com
                         chaves da forma "tablename.columnname" quando você faz uma
@@ -2405,7 +2415,7 @@ if (!is_null($version)) {
         </sect3>
 
         <sect3 id="zend.db.adapter.adapter-notes.firebird">
-            <title>Firebird/Interbase</title>
+            <title>Firebird (Interbase)</title>
 
             <itemizedlist>
                 <listitem>
@@ -2416,7 +2426,7 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
-                        Firebird/Interbase não suporta chaves de autoincremento,
+                        Firebird (Interbase) não suporta chaves de autoincremento,
                         portanto, você deve especificar o nome de uma sequência para
                         <methodname>lastInsertId()</methodname> ou
                         <methodname>lastSequenceId()</methodname>.
@@ -2426,7 +2436,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Atualmente, a opção <constant>Zend_Db::CASE_FOLDING</constant>
-                        não é suportada pelo adaptador Firebird/InterBase.
+                        não é suportada pelo adaptador Firebird (Interbase).
                         Identificadores não citadas são automaticamente devolvidos em
                         maiúsculas.
                     </para>

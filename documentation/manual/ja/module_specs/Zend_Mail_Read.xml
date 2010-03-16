@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 21109 -->
 <sect1 id="zend.mail.read">
     <title>メールメッセージの読み込み</title>
 
@@ -8,7 +8,7 @@
         <classname>Zend_Mail</classname> を使用すると、
         ローカルあるいはリモートに保存されたメールを読み込むことができます。
         すべての保存形式に共通の基本 <acronym>API</acronym> では、メッセージ数を数えたり
-        メッセージを読み込んだりすることができます。また、
+        メッセージを読み込んだりできます。また、
         いくつかの保存形式では、特殊な追加機能も実装されています。
         各保存形式で実装されている機能の概要については以下の表を参照ください。
     </para>
@@ -186,7 +186,7 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
         <title>メッセージの取得およびシンプルなメソッド</title>
 
         <para>
-            ストレージをオープンしたら、メッセージを取得することができます。
+            ストレージをオープンしたら、メッセージを取得できます。
             メッセージを取得するには、メッセージ番号が必要です。
             これは、最初のメッセージを 1 番とする連番となります。
             メッセージを取得する際に使用するメソッドは <methodname>getMessage()</methodname> です。
@@ -380,7 +380,7 @@ if (!$foundPart) {
         <classname>Zend_Mail_Storage::FLAG_&lt;flagname&gt;</classname> という名前です。
         フラグをチェックするには、<classname>Zend_Mail_Message</classname>
         の <methodname>hasFlag()</methodname> メソッドを使用します。
-        <methodname>getFlags()</methodname> で、設定されているすべてのフラグを取得することができます。</para>
+        <methodname>getFlags()</methodname> で、設定されているすべてのフラグを取得できます。</para>
 
         <programlisting language="php"><![CDATA[
 // 未読メッセージを探します
@@ -420,7 +420,7 @@ foreach ($flags as $flag) {
 }
 ]]></programlisting>
 
-        <para>IMAP ではユーザやクライアントが独自にフラグを設定することができます。
+        <para>IMAP ではユーザやクライアントが独自にフラグを設定できます。
         <classname>Zend_Mail_Storage</classname> で定数が定義されていない、
         このようなフラグを取得することも可能です。これらは文字列として返され、
         <methodname>hasFlag()</methodname> で同じようにチェックできます。</para>
@@ -619,7 +619,7 @@ foreach ($mail as $message) {
             難点があるとすれば、Mbox や Maildir を変更することができなくなるということです。
             簡単な解決策としては、最終更新時刻が変更されたときに Mbox ファイルをパースしなおしたり、
             フォルダがなくなった場合にフォルダ構造を再パースしたり
-            (これはエラーとなりますが、その後別のフォルダを検索することができます)
+            (これはエラーとなりますが、その後別のフォルダを検索できます)
             といったことが考えられます。よりよい方法は、シグナルファイル的なものを用意して
             変更情報をそこに記録し、まずそれをチェックしてからキャッシュを利用するようにすることです。
             </para>

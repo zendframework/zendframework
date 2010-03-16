@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20876 -->
+<!-- EN-Revision: 21161 -->
 <appendix id="coding-standard">
     <title>Zend Framework PHP 標準コーディング規約</title>
     <sect1 id="coding-standard.overview">
@@ -188,6 +188,50 @@
                     それより前のバージョンではこの規約に従っていないものもあるかもしれませんが、
                     将来のバージョンでは規約に従うよう名前が変わる予定です。
                 </para>
+
+                <!-- TODO : to be translated -->
+                <para>
+                    The rationale for the change is due to namespace usage. As we look towards Zend
+                    Framework 2.0 and usage of PHP 5.3, we will be using namespaces. The easiest way
+                    to automate conversion to namespaces is to simply convert underscores to the
+                    namespace separator -- but under the old naming conventions, this leaves the
+                    classname as simply "Abstract" or "Interface" -- both of which are reserved
+                    keywords in PHP. If we prepend the (sub)component name to the classname, we can
+                    avoid these issues.
+                </para>
+
+                <para>
+                    To illustrate the situation, consider converting the class
+                    <classname>Zend_Controller_Request_Abstract</classname> to use namespaces:
+                </para>
+
+                <programlisting language="php"><![CDATA[
+namespace Zend\Controller\Request;
+
+abstract class Abstract
+{
+    // ...
+}
+]]></programlisting>
+
+                <para>
+                    Clearly, this will not work. Under the new naming conventions, however, this
+                    would become:
+                </para>
+
+                <programlisting language="php"><![CDATA[
+namespace Zend\Controller\Request;
+
+abstract class RequestAbstract
+{
+    // ...
+}
+]]></programlisting>
+
+                <para>
+                    We still retain the semantics and namespace separation, while omitting the
+                    keyword issues; simultaneously, it better describes the abstract class.
+                </para>
             </note>
         </sect2>
 
@@ -216,6 +260,9 @@
                     この命名規約が適用されるのは、Zend Framework 1.9.0 以降です。
                     それより前のバージョンではこの規約に従っていないものもあるかもしれませんが、
                     将来のバージョンでは規約に従うよう名前が変わる予定です。
+                    この変更に関連する詳細については<link
+                        linkend="coding-standard.naming-conventions.abstracts">前節</link>
+                    をご覧ください。
                 </para>
             </note>
         </sect2>

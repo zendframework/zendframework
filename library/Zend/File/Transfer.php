@@ -71,8 +71,8 @@ class Zend_File_Transfer
 
         $direction = (integer) $direction;
         $this->_adapter[$direction] = new $adapter($options);
-        if (!$this->_adapter[$direction] instanceof Zend_File_Transfer_Adapter) {
-            throw new Zend_File_Transfer_Exception("Adapter " . $adapter . " does not extend Zend_File_Transfer_Adapter");
+        if (!$this->_adapter[$direction] instanceof Zend_File_Transfer_Adapter_Abstract) {
+            throw new Zend_File_Transfer_Exception("Adapter " . $adapter . " does not extend Zend_File_Transfer_Adapter_Abstract");
         }
 
         return $this;

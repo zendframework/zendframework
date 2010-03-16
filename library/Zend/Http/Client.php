@@ -25,7 +25,7 @@
  * Zend_Http_Client is an implemetation of an HTTP client in PHP. The client
  * supports basic features like sending different HTTP requests and handling
  * redirections, as well as more advanced features like proxy settings, HTTP
- * authentication and cookie persistance (using a Zend_Http_CookieJar object)
+ * authentication and cookie persistence (using a Zend_Http_CookieJar object)
  *
  * @todo Implement proxy settings
  * @uses       Zend_Http_Client_Adapter_Interface
@@ -103,7 +103,7 @@ class Zend_Http_Client
     );
 
     /**
-     * The adapter used to preform the actual connection to the server
+     * The adapter used to perform the actual connection to the server
      *
      * @var Zend_Http_Client_Adapter_Interface
      */
@@ -138,7 +138,7 @@ class Zend_Http_Client
     protected $paramsGet = array();
 
     /**
-     * Assiciative array of POST parameters
+     * Associative array of POST parameters
      *
      * @var array
      */
@@ -213,7 +213,7 @@ class Zend_Http_Client
     /**
      * Fileinfo magic database resource
      *
-     * This varaiable is populated the first time _detectFileMimeType is called
+     * This variable is populated the first time _detectFileMimeType is called
      * and is then reused on every call to this method
      *
      * @var resource
@@ -221,7 +221,7 @@ class Zend_Http_Client
     static protected $_fileInfoDb = null;
 
     /**
-     * Contructor method. Will create a new HTTP client. Accepts the target
+     * Constructor method. Will create a new HTTP client. Accepts the target
      * URL and optionally configuration array.
      *
      * @param Zend_Uri_Http|string $uri
@@ -343,12 +343,12 @@ class Zend_Http_Client
      *
      * This function can be used in several ways to set the client's request
      * headers:
-     * 1. By providing two parameters: $name as the header to set (eg. 'Host')
-     *    and $value as it's value (eg. 'www.example.com').
+     * 1. By providing two parameters: $name as the header to set (e.g. 'Host')
+     *    and $value as it's value (e.g. 'www.example.com').
      * 2. By providing a single header string as the only parameter
-     *    eg. 'Host: www.example.com'
+     *    e.g. 'Host: www.example.com'
      * 3. By providing an array of headers as the first parameter
-     *    eg. array('host' => 'www.example.com', 'x-foo: bar'). In This case
+     *    e.g. array('host' => 'www.example.com', 'x-foo: bar'). In This case
      *    the function will call itself recursively for each array item.
      *
      * @param string|array $name Header name, full header string ('Header: value')
@@ -359,7 +359,7 @@ class Zend_Http_Client
      */
     public function setHeaders($name, $value = null)
     {
-        // If we got an array, go recusive!
+        // If we got an array, go recursive!
         if (is_array($name)) {
             foreach ($name as $k => $v) {
                 if (is_string($k)) {

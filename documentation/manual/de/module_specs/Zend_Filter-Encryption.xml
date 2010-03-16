@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21212 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
@@ -108,6 +108,15 @@ $filter->setAdapter('openssl');
                     verschlüsselt. Der Standardwert ist <constant>FALSE</constant>.
                 </para>
             </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>compression</emphasis>: Ob der verschlüsselte Wert komprimiert werden
+                    soll. Der Standard ist nicht komprimiert. Für Details sehen Sie unter <link
+                        linkend="zend.filter.set.encrypt.openssl.compressed">Komprimierung für
+                        Openssl</link> nach.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -193,6 +202,20 @@ print $encrypted;
                     Verschlüsselung des Inhalts verwendet wird. Auch der private Schlüssel kann
                     entweder ein Dateiname mit Pfad zur Schlüsseldatei sein, oder nur der Inhalt der
                     Schlüsseldatei selbst.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>compression</emphasis>: Ob der verschlüsselte Wert komprimiert werden
+                    soll. Standardmäßig wird nicht komprimiert.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>package</emphasis>: Ob der Umschlagschlüssel mit dem verschlüsselten
+                    Wert gepackt werden soll. Der Standardwert ist <constant>FALSE</constant>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -288,5 +311,91 @@ print $encrypted;
 
 // Für die Entschlüsselung siehe beim Decrypt Filter
 ]]></programlisting>
+
+        <sect4 id="zend.filter.set.encrypt.openssl.simplified">
+            <title>Vereinfachte Verwendung mit Openssl</title>
+
+            <para>
+                Wie vorher zu sehen war, muss man den Umschlagschlüssel holen um in der Lage zu sein
+                den vorher verschlüsselten Wert wieder zu entschlüsseln. Das kann sehr frustrierend
+                sein wenn man mit mehreren Werten arbeitet.
+            </para>
+
+            <para>
+                Für eine vereinfachte Verwendung kann man die <property>package</property> Option
+                auf <constant>TRUE</constant> setzen. Der Standardwert ist
+                <constant>FALSE</constant>.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+// Verwende openssl und gib einen privaten Schlüssel an
+$filter = new Zend_Filter_Encrypt(array(
+    'adapter' => 'openssl',
+    'private' => '/path/to/mykey/private.pem',
+    'public'  => '/public/key/path/public.pem',
+    'package' => true
+));
+
+$encrypted = $filter->filter('text_to_be_encoded');
+print $encrypted;
+
+// Für die Entschlüsselung siehe beim Decrypt Filter
+]]></programlisting>
+
+            <para>
+                Jetzt enthält der zurückgegebene Wert sowohl den verschlüsselten Wert als auch den
+                Umschlagschlüssel. Man muss diesen also nicht mehr nach der Verschlüsselung holen.
+                Aber, und das ist der negative Aspekt dieses Features, der verschlüsselte Wert kann
+                jetzt nur mehr entschlüsselt werden indem man
+                <classname>Zend_Filter_Encrypt</classname> verwendet.
+            </para>
+        </sect4>
+
+        <sect4 id="zend.filter.set.encrypt.openssl.compressed">
+            <title>Komprimieren des Inhalts</title>
+
+            <para>
+                Basierend auf dem originalen Wert, kann der verschlüsselte Wert ein sehr langer
+                String sein. Um den Wert zu reduzieren erlaubt
+                <classname>Zend_Filter_Encrypt</classname> die Verwendung von Kompression.
+            </para>
+
+            <para>
+                Die <property>compression</property> Option kann entweder auf den Namen eines
+                Komprimierungsadapters gesetzt werden, oder auf ein Array welches alle gewünschten
+                Optionen für den Komprimierungsadapter setzt.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+// Verwende nur den grundsätzlichen Komprimierungsadapter
+$filter1 = new Zend_Filter_Encrypt(array(
+    'adapter'     => 'openssl',
+    'private'     => '/path/to/mykey/private.pem',
+    'public'      => '/public/key/path/public.pem',
+    'package'     => true,
+    'compression' => 'bz2'
+));
+
+// Verwende den Basis Komprimierungsadapter
+$filter2 = new Zend_Filter_Encrypt(array(
+    'adapter'     => 'openssl',
+    'private'     => '/path/to/mykey/private.pem',
+    'public'      => '/public/key/path/public.pem',
+    'package'     => true,
+    'compression' => array('adapter' => 'zip', 'target' => '\usr\tmp\tmp.zip')
+));
+]]></programlisting>
+
+            <note>
+                <title>Entschlüsselung mit den selben Werten</title>
+
+                <para>
+                    Wenn man einen Wert entschlüsseln will welcher zusätzlich komprimiert wurde,
+                    dann muss man die selben Komprimierungseinstellungen für die Entschlüsselung
+                    verwenden wie bei der Verschlüsselung. Andernfalls wird die Entschlüsselung
+                    fehlschlagen.
+                </para>
+            </note>
+        </sect4>
     </sect3>
 </sect2>

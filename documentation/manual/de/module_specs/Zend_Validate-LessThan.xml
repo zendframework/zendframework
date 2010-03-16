@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 21263 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.validate.set.lessthan">
+    <title>LessThan</title>
+
+    <para>
+        <classname>Zend_Validate_LessThan</classname> erlaubt es zu prüfen ob ein angegebener Wert
+        kleiner als ein maximaler Grenzwert ist. Das ist der Cousine von
+        <classname>Zend_Validate_GreaterThan</classname>.
+    </para>
+
+    <note>
+        <title>Zend_Validate_LessThan unterstützt nur die Prüfung von Nummern</title>
+
+        <para>
+            Es sollte beachtet werden das <classname>Zend_Validate_LessThan</classname> nur die
+            Prüfung von Nummern unterstützt. Strings oder ein Datum können mit dieser Prüfung nicht
+            geprüft werden.
+        </para>
+    </note>
+
+    <sect3 id="zend.validate.set.lessthan.options">
+        <title>Unterstützte Optionen für Zend_Validate_LessThan</title>
+
+        <para>
+            Die folgenden Optionen werden für <classname>Zend_Validate_LessThan</classname>
+            unterstützt:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>max</property></emphasis>: Setzt den maximal erlaubten Wert.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.validate.set.lessthan.basic">
+        <title>Normale Verwendung</title>
+
+        <para>
+            Um zu prüfen ob ein angegebener Wert kleiner als eine definierte Grenz ist kann einfach
+            das folgende Beispiel verwendet werden.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid  = new Zend_Validate_LessThan(array('max' => 10));
+$value  = 10;
+$return = $valid->isValid($value);
+// Gibt true zurück
+]]></programlisting>
+
+        <para>
+            Das obige Beispiel gibt für alle Werte <constant>TRUE</constant> zurück die 10 sind oder
+            kleiner als 10.
+        </para>
+    </sect3>
+</sect2>

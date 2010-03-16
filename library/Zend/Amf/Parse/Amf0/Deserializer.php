@@ -39,7 +39,7 @@
 class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
 {
     /**
-     * An array of objects used for recursivly deserializing an object.
+     * An array of objects used for recursively deserializing an object.
      * @var array
      */
     protected $_reference = array();
@@ -169,7 +169,7 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
     /**
      * Read reference objects
      *
-     * Used to gain access to the private array of refrence objects.
+     * Used to gain access to the private array of reference objects.
      * Called when marker type is 7.
      *
      * @return object
@@ -201,7 +201,7 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
     }
 
     /**
-     * Converts numberically indexed actiosncript arrays into php arrays.
+     * Converts numerically indexed actiosncript arrays into php arrays.
      *
      * Called when marker type is 10
      *

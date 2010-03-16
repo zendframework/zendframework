@@ -273,7 +273,7 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
         foreach ($this->_options as $name => $options) {
 
             if (!is_array($options)) {
-                throw new Zend_Auth_Adapter_Exception('Adapter options array not in array');
+                throw new Zend_Auth_Adapter_Exception('Adapter options array not an array');
             }
             $adapterOptions = $this->_prepareOptions($ldap, $options);
             $dname = '';

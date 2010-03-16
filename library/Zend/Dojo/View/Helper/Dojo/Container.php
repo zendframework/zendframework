@@ -267,6 +267,12 @@ class Zend_Dojo_View_Helper_Dojo_Container
                 case 'registerdojostylesheet':
                     $this->registerDojoStylesheet($value);
                     break;
+                case 'enable':
+                    if($value) {
+                        $this->enable();
+                    } else {
+                        $this->disable();
+                    }
             }
         }
 

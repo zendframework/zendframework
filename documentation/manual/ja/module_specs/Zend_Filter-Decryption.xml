@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19150 -->
+<!-- EN-Revision: 21212 -->
 <sect2 id="zend.filter.set.decrypt">
     <title>Decrypt</title>
     <para>
         このフィルタは、指定した文字列を指定した設定で復号します。
         復号の際に、アダプタを使用します。実際には、PHP の
-        <code>Mcrypt</code> および <code>OpenSSL</code>
+        <classname>Mcrypt</classname> および <classname>OpenSSL</classname>
         拡張モジュール用のアダプタを使用します。
     </para>
 
     <para>
-        コンテンツの暗号化方法の詳細については <code>Encrypt</code> フィルタを参照ください。
-        基本的な内容は <code>Encrypt</code> フィルタで網羅されているので、
+        コンテンツの暗号化方法の詳細については <classname>Encrypt</classname> フィルタを参照ください。
+        基本的な内容は <classname>Encrypt</classname> フィルタで網羅されているので、
         ここでは追加のメソッドや復号時に固有のことなどについてのみ説明します。
     </para>
 
     <sect3 id="zend.filter.set.decrypt.mcrypt">
         <title>Mcrypt の復号</title>
         <para>
-            <code>Mcrypt</code> で暗号化したコンテンツを復号するには、
+            <classname>Mcrypt</classname> で暗号化したコンテンツを復号するには、
             暗号化を行った際に指定したオプションが必要です。
         </para>
 
@@ -53,7 +53,7 @@ print $decrypted;
 
         <note>
             <para>
-                また、インスタンス作成時あるいは setEncryption()
+                また、インスタンス作成時あるいは <methodname>setEncryption()</methodname>
                 をコールした際にすべての設定がチェックされることにも注意しましょう。
                 設定内容に問題があることを mcrypt が検知すると、例外がスローされます。
             </para>
@@ -63,12 +63,12 @@ print $decrypted;
     <sect3 id="zend.filter.set.decrypt.openssl">
         <title>OpenSSL の復号</title>
         <para>
-            <code>OpenSSL</code> での復号は、暗号化と同様にシンプルです。
+            <classname>OpenSSL</classname> での復号は、暗号化と同様にシンプルです。
             しかし、コンテンツを暗号化した人からすべてのデータを受け取る必要があります。
         </para>
 
         <para>
-            <code>OpenSSL</code> の復号には、以下が必要となります。
+            <classname>OpenSSL</classname> の復号には、以下が必要となります。
         </para>
 
         <itemizedlist>
@@ -86,6 +86,17 @@ print $decrypted;
                     暗号化されたエンベロープ鍵。
                     鍵ファイルのパスとファイル名を指定するか、
                     あるいは単に鍵ファイルの内容そのものを指定することもできます。
+                    <!-- TODO : to be translated -->
+                    When the
+                    <property>package</property> option has been set, then you can omit this
+                    parameter.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>package</emphasis>: If the envelope key has been packed with the
+                    encrypted value. Defaults to <constant>FALSE</constant>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -106,7 +117,7 @@ $filter->setEnvelopeKey(array(
 
         <note>
             <para>
-                <code>OpenSSL</code> アダプタは、正しい鍵を渡さないと動作しないことに注意しましょう。
+                <classname>OpenSSL</classname> アダプタは、正しい鍵を渡さないと動作しないことに注意しましょう。
             </para>
         </note>
 

@@ -28,8 +28,9 @@
     <itemizedlist>
         <listitem>
             <para>
-                IBM DB2 and Informix Dynamic Server (IDS), using the
-                <ulink url="http://www.php.net/pdo-ibm">pdo_ibm</ulink> <acronym>PHP</acronym>
+                <acronym>IBM</acronym> <acronym>DB2</acronym> and Informix Dynamic Server
+                (<acronym>IDS</acronym>), using the <ulink
+                    url="http://www.php.net/pdo-ibm">pdo_ibm</ulink> <acronym>PHP</acronym>
                 extension
             </para>
         </listitem>
@@ -94,15 +95,15 @@
 
         <listitem>
             <para>
-                IBM DB2 and DB2/i5, using the <ulink
-                    url="http://www.php.net/ibm_db2">ibm_db2</ulink> <acronym>PHP</acronym>
+                <acronym>IBM</acronym> <acronym>DB2</acronym> and <acronym>DB2</acronym> I5, using
+                the <ulink url="http://www.php.net/ibm_db2">ibm_db2</ulink> <acronym>PHP</acronym>
                 extension
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Firebird/Interbase, using the <ulink
+                Firebird (Interbase), using the <ulink
                     url="http://www.php.net/ibase">php_interbase</ulink> <acronym>PHP</acronym>
                 extension
             </para>
@@ -374,9 +375,9 @@ $db = Zend_Db::factory($config->database);
                     You can specify this option by the constant
                     <constant>Zend_Db::CASE_FOLDING</constant>.
                     This corresponds to the <constant>ATTR_CASE</constant> attribute in
-                    <acronym>PDO</acronym> and IBM DB2 database drivers, adjusting the case of
-                    string keys in query result sets. The option takes values
-                    <constant>Zend_Db::CASE_NATURAL</constant> (the default),
+                    <acronym>PDO</acronym> and <acronym>IBM</acronym> <acronym>DB2</acronym>
+                    database drivers, adjusting the case of string keys in query result sets. The
+                    option takes values <constant>Zend_Db::CASE_NATURAL</constant> (the default),
                     <constant>Zend_Db::CASE_UPPER</constant>, and
                     <constant>Zend_Db::CASE_LOWER</constant>.
                 </para>
@@ -698,7 +699,7 @@ $result = $db->fetchAll($sql, 2);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_ASSOC</emphasis>:
+                        <emphasis><constant>Zend_Db::FETCH_ASSOC</constant></emphasis>:
                         return data in an array of associative arrays.
                         The array keys are column names, as strings. This is the default fetch mode
                         for <classname>Zend_Db_Adapter</classname> classes.
@@ -709,7 +710,7 @@ $result = $db->fetchAll($sql, 2);
                         column with the same name, for example if they are from
                         two different tables in a <acronym>JOIN</acronym>, there can be only one
                         entry in the associative array for a given name.
-                        If you use the <acronym>FETCH_ASSOC</acronym> mode, you should specify
+                        If you use the <constant>FETCH_ASSOC</constant> mode, you should specify
                         column aliases in your <acronym>SELECT</acronym> query to ensure that the
                         names result in unique array keys.
                     </para>
@@ -721,13 +722,14 @@ $result = $db->fetchAll($sql, 2);
                         specify the case for these strings, using the
                         <constant>Zend_Db::CASE_FOLDING</constant> option.
                         Specify this when instantiating the Adapter.
-                        See <xref linkend="zend.db.adapter.connecting.parameters.example1" />.
+                        See <link linkend="zend.db.adapter.connecting.parameters.example1">this
+                            example</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_NUM</emphasis>:
+                        <emphasis><constant>Zend_Db::FETCH_NUM</constant></emphasis>:
                         return data in an array of arrays. The arrays are
                         indexed by integers, corresponding to the position of
                         the respective field in the select-list of the query.
@@ -736,19 +738,19 @@ $result = $db->fetchAll($sql, 2);
 
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_BOTH</emphasis>:
+                        <emphasis><constant>Zend_Db::FETCH_BOTH</constant></emphasis>:
                         return data in an array of arrays. The array keys are
-                        both strings as used in the FETCH_ASSOC mode, and
-                        integers as used in the FETCH_NUM mode. Note that the
+                        both strings as used in the <constant>FETCH_ASSOC</constant> mode, and
+                        integers as used in the <constant>FETCH_NUM</constant> mode. Note that the
                         number of elements in the array is double that which
-                        would be in the array if you used either FETCH_ASSOC
-                        or FETCH_NUM.
+                        would be in the array if you used either <constant>FETCH_ASSOC</constant>
+                        or <constant>FETCH_NUM</constant>.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_COLUMN</emphasis>:
+                        <emphasis><constant>Zend_Db::FETCH_COLUMN</constant></emphasis>:
                         return data in an array of values. The value in each array
                         is the value returned by one column of the result set.
                         By default, this is the first column, indexed by 0.
@@ -757,7 +759,7 @@ $result = $db->fetchAll($sql, 2);
 
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_OBJ</emphasis>:
+                        <emphasis><constant>Zend_Db::FETCH_OBJ</constant></emphasis>:
                         return data in an array of objects. The default class
                         is the <acronym>PHP</acronym> built-in class stdClass. Columns of the
                         result set are available as public properties of the
@@ -795,7 +797,9 @@ echo $result[0]->bug_description;
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
-$result = $db->fetchAssoc('SELECT bug_id, bug_description, bug_status FROM bugs');
+$result = $db->fetchAssoc(
+    'SELECT bug_id, bug_description, bug_status FROM bugs'
+);
 
 // $result is an array of associative arrays, in spite of the fetch mode
 echo $result[2]['bug_description']; // Description of Bug #2
@@ -813,7 +817,7 @@ echo $result[1]['bug_description']; // Description of Bug #1
                 This only returns the first column returned by the query.
                 Any other columns returned by the query are discarded.
                 If you need to return a column other than the first, see
-                <xref linkend="zend.db.statement.fetching.fetchcolumn" />.
+                <link linkend="zend.db.statement.fetching.fetchcolumn">this section</link>.
             </para>
 
             <example id="zend.db.adapter.select.fetchcol.example">
@@ -1024,7 +1028,7 @@ $id = $db->lastInsertId();
                 sequence is named using the table and column names for which
                 the sequence generates values, and a suffix "_seq". This is
                 based on the convention used by PostgreSQL when naming
-                sequences for SERIAL columns. For example, a table "bugs" with
+                sequences for <constant>SERIAL</constant> columns. For example, a table "bugs" with
                 primary key column "bug_id" would use a sequence named
                 "bugs_bug_id_seq".
             </para>
@@ -1097,7 +1101,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 </para>
 
                 <para>
-                    Furthermore, using an expression like "MAX(id)+1" to generate
+                    Furthermore, using an expression like "<command>MAX(id)+1</command>" to generate
                     a new value for a primary key is not safe, because two clients
                     could do this query simultaneously, and then both use the same
                     calculated value for their next <acronym>INSERT</acronym> operation.
@@ -1128,7 +1132,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
 
             <para>
                 The values in the data array are treated as string literals.
-                See <xref linkend="zend.db.adapter.write.insert" />
+                See <link linkend="zend.db.adapter.write.insert">this section</link>
                 for information on using <acronym>SQL</acronym> expressions in the data array.
             </para>
 
@@ -1138,7 +1142,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 and identifiers in this argument are not quoted or escaped.
                 You are responsible for ensuring that any dynamic content is
                 interpolated into this string safely.
-                See <xref linkend="zend.db.adapter.quoting" />
+                See <link linkend="zend.db.adapter.quoting">this section</link>
                 for methods to help you do this.
             </para>
 
@@ -1234,7 +1238,7 @@ $n = $db->update('bugs', $data, $where);
                 and identifiers in this argument are not quoted or escaped.
                 You are responsible for ensuring that any dynamic content is
                 interpolated into this string safely.
-                See <xref linkend="zend.db.adapter.quoting" />
+                See <link linkend="zend.db.adapter.quoting"> this section</link>
                 for methods to help you do this.
             </para>
 
@@ -1281,14 +1285,15 @@ $n = $db->delete('bugs', 'bug_id = 3');
             contains certain symbols, such as the quote symbol, it could result in invalid
             <acronym>SQL</acronym>. For example, notice the imbalanced quote characters in the
             following query:
-            <programlisting language="php"><![CDATA[
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $name = "O'Reilly";
 $sql = "SELECT * FROM bugs WHERE reported_by = '$name'";
 
 echo $sql;
 // SELECT * FROM bugs WHERE reported_by = 'O'Reilly'
 ]]></programlisting>
-        </para>
 
         <para>
             Even worse is the risk that such code mistakes might be exploited
@@ -1350,16 +1355,16 @@ echo $sql;
             <para>
                 Values may need to be quoted or not quoted according to the <acronym>SQL</acronym>
                 datatype context in which they are used. For instance, in some
-                RDBMS brands, an integer value must not be quoted as a string
+                <acronym>RDBMS</acronym> brands, an integer value must not be quoted as a string
                 if it is compared to an integer-type column or expression.
                 In other words, the following is an error in some <acronym>SQL</acronym>
                 implementations, assuming <property>intColumn</property> has a
                 <acronym>SQL</acronym> datatype of <constant>INTEGER</constant>
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'
 ]]></programlisting>
-            </para>
 
             <para>
                 You can use the optional second argument to the
@@ -1510,7 +1515,8 @@ echo $sql
                 delimited automatically. You can change this behavior with the option
                 <constant>Zend_Db::AUTO_QUOTE_IDENTIFIERS</constant>. Specify this
                 when instantiating the Adapter.
-                See <xref linkend="zend.db.adapter.connecting.parameters.example2" />.
+                See <link linkend="zend.db.adapter.connecting.parameters.example2">this
+                    example</link>.
             </para>
         </sect3>
     </sect2>
@@ -1654,7 +1660,7 @@ try {
                     <row>
                         <entry><constant>DATA_TYPE</constant></entry>
                         <entry>(string)</entry>
-                        <entry>RDBMS name of the datatype of the column.</entry>
+                        <entry><acronym>RDBMS</acronym> name of the datatype of the column.</entry>
                     </row>
 
                     <row>
@@ -1690,8 +1696,8 @@ try {
                         <entry>(integer)</entry>
 
                         <entry>
-                            Scale of <acronym>SQL</acronym> NUMERIC or <constant>DECIMAL</constant>
-                            type.
+                            Scale of <acronym>SQL</acronym> <constant>NUMERIC</constant> or
+                            <constant>DECIMAL</constant> type.
                         </entry>
                     </row>
 
@@ -1700,7 +1706,7 @@ try {
                         <entry>(integer)</entry>
 
                         <entry>
-                            Precision of <acronym>SQL</acronym> NUMERIC or
+                            Precision of <acronym>SQL</acronym> <constant>NUMERIC</constant> or
                             <constant>DECIMAL</constant> type.
                         </entry>
                     </row>
@@ -1747,15 +1753,16 @@ try {
             <title>How the IDENTITY Metadata Field Relates to Specific RDBMSs</title>
 
             <para>
-                The IDENTITY metadata field was chosen as an 'idiomatic' term to
-                represent a relation to surrogate keys. This field can be
+                The <constant>IDENTITY</constant> metadata field was chosen as an 'idiomatic' term
+                to represent a relation to surrogate keys. This field can be
                 commonly known by the following values:-
             </para>
 
             <itemizedlist>
                 <listitem>
                     <para>
-                        <constant>IDENTITY</constant> - DB2, MSSQL
+                        <constant>IDENTITY</constant> - <acronym>DB2</acronym>,
+                        <acronym>MSSQL</acronym>
                     </para>
                 </listitem>
 
@@ -1863,8 +1870,8 @@ $db = Zend_Db::factory('Oracle', array(
             </para>
 
             <para>
-                Currently, only Oracle, DB2, and the <acronym>PDO</acronym> adapters (where
-                specified by <acronym>PHP</acronym>) support persistence in
+                Currently, only Oracle, <acronym>DB2</acronym>, and the <acronym>PDO</acronym>
+                adapters (where specified by <acronym>PHP</acronym>) support persistence in
                 <classname>Zend_Db</classname>.
             </para>
         </note>
@@ -1883,9 +1890,10 @@ $db = Zend_Db::factory('Oracle', array(
         <para>
             For example, all <acronym>SQL</acronym> statements run by <classname>Zend_Db</classname>
             are prepared, then executed. However, some database features are incompatible with
-            prepared statements. DDL statements like CREATE and ALTER cannot
-            be prepared in MySQL. Also, <acronym>SQL</acronym> statements don't benefit from the
-            <ulink url="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">MySQL Query
+            prepared statements. <constant>DDL</constant> statements like
+            <constant>CREATE</constant> and <constant>ALTER</constant> cannot be prepared in MySQL.
+            Also, <acronym>SQL</acronym> statements don't benefit from the <ulink
+                url="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">MySQL Query
                 Cache</ulink>, prior to MySQL 5.1.17.
         </para>
 
@@ -1968,14 +1976,15 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
-                        This Adapter uses the <acronym>PHP</acronym> extension ibm_db2.
+                        This Adapter uses the <acronym>PHP</acronym> extension
+                        <constant>IBM_DB2</constant>.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        IBM DB2 supports both sequences and auto-incrementing
-                        keys. Therefore the arguments to
+                        <acronym>IBM</acronym> <acronym>DB2</acronym> supports both sequences and
+                        auto-incrementing keys. Therefore the arguments to
                         <methodname>lastInsertId()</methodname> are optional. If you give
                         no arguments, the Adapter returns the last value
                         generated for an auto-increment key. If you give
@@ -2053,17 +2062,18 @@ if (!is_null($version)) {
                     <para>
                         Currently the <constant>Zend_Db::CASE_FOLDING</constant> option
                         is not supported by the Oracle adapter. To use this
-                        option with Oracle, you must use the <acronym>PDO</acronym> OCI adapter.
+                        option with Oracle, you must use the <acronym>PDO</acronym>
+                        <acronym>OCI</acronym> adapter.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        By default, LOB fields are returned as OCI-Lob objects. You could
-                        retrieve them as string for all requests by using driver options
-                        '<property>lob_as_string</property>' or for particular request by using
-                        <methodname>setLobAsString(boolean)</methodname> on adapter or on
-                        statement.
+                        By default, <acronym>LOB</acronym> fields are returned as
+                        <acronym>OCI</acronym>-Lob objects. You could retrieve them as string for
+                        all requests by using driver options '<property>lob_as_string</property>' or
+                        for particular request by using
+                        <methodname>setLobAsString(boolean)</methodname> on adapter or on statement.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2100,9 +2110,9 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         <classname>Zend_Db_Adapter_Sqlsrv</classname> sets
-                        <constant>QUOTED_IDENTIFIER ON</constant> immediately after connecting to
-                        a <acronym>SQL</acronym> Server database. This makes the driver use the
-                        standard <acronym>SQL</acronym> identifier delimiter symbol
+                        <constant>QUOTED_IDENTIFIER</constant> ON immediately
+                        after connecting to a <acronym>SQL</acronym> Server database. This makes the
+                        driver use the standard <acronym>SQL</acronym> identifier delimiter symbol
                         (<emphasis>"</emphasis>) instead of the proprietary square-brackets
                         syntax <acronym>SQL</acronym> Server uses for delimiting identifiers.
                     </para>
@@ -2152,15 +2162,17 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
-                        This Adapter uses the <acronym>PHP</acronym> extensions pdo and pdo_ibm.
+                        This Adapter uses the <acronym>PHP</acronym> extensions
+                        <acronym>PDO</acronym> and <constant>PDO_IBM</constant>.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        You must use at least PDO_IBM extension version 1.2.2.
+                        You must use at least <constant>PDO_IBM</constant> extension version 1.2.2.
                         If you have an earlier version of this extension, you
-                        must upgrade the PDO_IBM extension from <acronym>PECL</acronym>.
+                        must upgrade the <constant>PDO_IBM</constant> extension from
+                        <acronym>PECL</acronym>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2195,9 +2207,10 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
-                        If you are working with unicode strings in an encoding other than UCS-2
-                        (such as UTF-8), you may have to perform a conversion in your application
-                        code or store the data in a binary column. Please refer to <ulink
+                        If you are working with unicode strings in an encoding other than
+                        <acronym>UCS</acronym>-2 (such as <acronym>UTF</acronym>-8), you may have to
+                        perform a conversion in your application code or store the data in a binary
+                        column. Please refer to <ulink
                             url="http://support.microsoft.com/kb/232580">Microsoft's Knowledge
                             Base</ulink> for more information.
                     </para>
@@ -2206,10 +2219,10 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         <classname>Zend_Db_Adapter_Pdo_Mssql</classname> sets
-                        <constant>QUOTED_IDENTIFIER ON</constant> immediately after connecting to a
-                        <acronym>SQL</acronym> Server database. This makes the driver use the
-                        standard <acronym>SQL</acronym> identifier delimiter symbol (")
-                        instead of the proprietary square-brackets syntax <acronym>SQL</acronym>
+                        <constant>QUOTED_IDENTIFIER</constant> ON immediately
+                        after connecting to a <acronym>SQL</acronym> Server database. This makes the
+                        driver use the standard <acronym>SQL</acronym> identifier delimiter symbol
+                        (") instead of the proprietary square-brackets syntax <acronym>SQL</acronym>
                         Server uses for delimiting identifiers.
                     </para>
                 </listitem>
@@ -2371,7 +2384,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Older versions of the SQLite driver for <acronym>PHP</acronym> do not seem
-                        to support the PRAGMA commands necessary to ensure that
+                        to support the <acronym>PRAGMA</acronym> commands necessary to ensure that
                         short column names are used in result sets. If you
                         have problems that your result sets are returned with
                         keys of the form "tablename.columnname" when you do a
@@ -2383,7 +2396,7 @@ if (!is_null($version)) {
         </sect3>
 
         <sect3 id="zend.db.adapter.adapter-notes.firebird">
-            <title>Firebird/Interbase</title>
+            <title>Firebird (Interbase)</title>
 
             <itemizedlist>
                 <listitem>
@@ -2394,8 +2407,8 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
-                        Firebird/interbase does not support auto-incrementing keys,
-                        so you should specify the name of a sequence to
+                        Firebird (Interbase) does not support auto-incrementing
+                        keys, so you should specify the name of a sequence to
                         <methodname>lastInsertId()</methodname> or
                         <methodname>lastSequenceId()</methodname>.
                     </para>
@@ -2404,7 +2417,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Currently the <constant>Zend_Db::CASE_FOLDING</constant> option
-                        is not supported by the Firebird/interbase adapter.
+                        is not supported by the Firebird (Interbase) adapter.
                         Unquoted identifiers are automatically returned in
                         upper case.
                     </para>

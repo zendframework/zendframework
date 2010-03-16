@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21263 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.sitemap">
     <title>Sitemap Prüfungen</title>
@@ -98,5 +98,13 @@ $validator->isValid(0xFF); // false
 $validator->isValid('foo'); // false
 ]]></programlisting>
         </example>
+    </sect3>
+
+    <sect3 id="zend.validate.set.sitemap.options">
+        <title>Unterstützte Optionen für Zend_Validate_Sitemap_*</title>
+
+        <para>
+            Es gibt keine unterstützten Optionen für irgendeine der Sitemap Prüfungen.
+        </para>
     </sect3>
 </sect2>

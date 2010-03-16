@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 20819 -->
 <sect1 id="zend.mail.smtp-authentication">
-  <title>SMTP 認証</title>
+    <title>SMTP 認証</title>
 
-  <para><classname>Zend_Mail</classname> は SMTP 認証の使用をサポートしています。
-  これを使用するには、<classname>Zend_Mail_Transport_Smtp</classname>
-  のコンストラクタに渡す設定配列で、パラメータ 'auth' を指定します。
-  組み込みの認証方式は PLAIN、LOGIN および CRAM-MD5 で、
-  これらはすべて、設定配列に 'username' および 'password'
-  が指定されていることを想定しています。</para>
+    <para>
+        <classname>Zend_Mail</classname> は SMTP 認証の使用をサポートしています。
+        これを使用するには、<classname>Zend_Mail_Transport_Smtp</classname>
+        のコンストラクタに渡す設定配列で、パラメータ 'auth' を指定します。
+        組み込みの認証方式は PLAIN、LOGIN および CRAM-MD5 で、
+        これらはすべて、設定配列に 'username' および 'password'
+        が指定されていることを想定しています。
+    </para>
 
-  <example id="zend.mail.smtp-authentication.example-1">
-    <title>Zend_Mail_Transport_Smtp での認証の有効化</title>
+    <example id="zend.mail.smtp-authentication.example-1">
+        <title>Zend_Mail_Transport_Smtp での認証の有効化</title>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = array('auth' => 'login',
                 'username' => 'myusername',
                 'password' => 'password');
@@ -28,17 +30,18 @@ $mail->addTo('recipient@test.com', 'Some Recipient');
 $mail->setSubject('TestSubject');
 $mail->send($transport);
 ]]></programlisting>
-  </example>
+    </example>
 
-  <note>
-    <title>認証方式</title>
+    <note>
+        <title>認証方式</title>
 
-    <para>
-        認証方式は大文字小文字を区別しませんが、区切り文字は含めません。
-        たとえば CRAM-MD5 を使用する場合は、
-        <classname>Zend_Mail_Transport_Smtp</classname> のコンストラクタに渡す値は
-        'auth' => 'crammd5' となります。</para>
-  </note>
+        <para>
+            認証方式は大文字小文字を区別しませんが、区切り文字は含めません。
+            たとえば CRAM-MD5 を使用する場合は、
+            <classname>Zend_Mail_Transport_Smtp</classname> のコンストラクタに渡す値は
+            'auth' => 'crammd5' となります。
+        </para>
+    </note>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18940 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>標準のルータ</title>
+
     <sect2 id="zend.controller.router.introduction">
         <title>導入</title>
+
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> は、標準のルータです。
             ルーティングとは、<acronym>URI</acronym> (ベース <acronym>URL</acronym> から取得した <acronym>URI</acronym> の一部)
@@ -55,6 +57,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
 
         <note>
             <title>IIS Isapi_Rewrite</title>
+
             <para>
                 <acronym>IIS</acronym> を使用すると、<varname>$_SERVER['REQUEST_URI']</varname>
                 が存在しないか空の文字列に設定されます。このような場合、
@@ -159,30 +162,35 @@ $router->addRoute('user',
                         linkend="zend.controller.router.routes.standard">Zend_Controller_Router_Route</link>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link
                         linkend="zend.controller.router.routes.static">Zend_Controller_Router_Route_Static</link>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link
                         linkend="zend.controller.router.routes.regex">Zend_Controller_Router_Route_Regex</link>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link
                         linkend="zend.controller.router.routes.hostname">Zend_Controller_Router_Route_Hostname</link>
                 </para>
              </listitem>
+
             <listitem>
                 <para>
                     <link
                         linkend="zend.controller.router.routes.chain">Zend_Controller_Router_Route_Chain</link>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link
@@ -404,6 +412,7 @@ $router->setGlobalParam('lang', 'en');
 
     <sect2 id="zend.controller.router.routes">
         <title>ルートの型</title>
+
         <xi:include href="Zend_Controller-Router-Route.xml" />
         <xi:include href="Zend_Controller-Router-Route-Static.xml" />
         <xi:include href="Zend_Controller-Router-Route-Regex.xml" />

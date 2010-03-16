@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18834 -->
+<!-- EN-Revision: 20766 -->
 <sect1 id="zend.debug.dumping">
 
     <title>変数の出力</title>
@@ -15,6 +15,7 @@
 
     <example id="zend.debug.dumping.example">
         <title>dump() メソッドの例</title>
+
         <programlisting language="php"><![CDATA[
 Zend_Debug::dump($var, $label = null, $echo = true);
 ]]></programlisting>
@@ -50,11 +51,13 @@ Zend_Debug::dump($var, $label = null, $echo = true);
 
     <tip>
         <title>Zend_Log を使用したデバッグ</title>
+
         <para>
             <methodname>Zend_Debug::dump()</methodname> は、ソフトウェアの開発中の
             ちょっとしたデバッグには最適です。
             変数の中身を見るメソッドを追加したり削除したりするのが手っ取り早くできます。
         </para>
+
         <para>
             その場限りのコードではなくずっと使用し続けるデバッグコードを書くのなら、
             <link linkend="zend.log.overview">Zend_Log</link>

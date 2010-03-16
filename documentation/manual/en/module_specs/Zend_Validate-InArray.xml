@@ -8,6 +8,37 @@
         contained within an array. It is also able to validate multidimensional arrays.
     </para>
 
+    <sect3 id="zend.validate.set.in_array.options">
+        <title>Supported options for Zend_Validate_InArray</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Validate_InArray</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>haystack</property></emphasis>: Sets the haystack for the
+                    validation.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>recursive</property></emphasis>: Defines if the validation
+                    should be done recursive. This option defaults to <constant>FALSE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>strict</property></emphasis>: Defines if the validation
+                    should be done strict. This option defaults to <constant>FALSE</constant>.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
     <sect3 id="zend.validate.set.in_array.basic">
         <title>Simple array validation</title>
 

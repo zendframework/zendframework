@@ -5,14 +5,14 @@
 
     <para>
         Dojo provides data abstractions for data-enabled widgets via its
-        dojo.data component. This component provides the ability to attach a
+        <command>dojo.data</command> component. This component provides the ability to attach a
         data store, provide some metadata regarding the identity field and
         optionally a label field, and an <acronym>API</acronym> for querying, sorting, and
         retrieving records and sets of records from the datastore.
     </para>
 
     <para>
-        dojo.data is often used with XmlHttpRequest to pull dynamic data from
+        <command>dojo.data</command> is often used with XmlHttpRequest to pull dynamic data from
         the server. The primary mechanism for this is to extend the
         QueryReadStore to point at a <acronym>URL</acronym> and specify the query information. The
         server side then returns data in the following <acronym>JSON</acronym> format:
@@ -39,7 +39,7 @@
         <title>Zend_Dojo_Data Usage</title>
 
         <para>
-            At its simplest, dojo.data requires that you provide the name of the
+            At its simplest, <command>dojo.data</command> requires that you provide the name of the
             identifier field in each item, and a set of items (data). You
             can either pass these in via the constructor, or via mutators:
         </para>
@@ -82,7 +82,7 @@ $data->addItems($someMoreItems);
             <title>Always use an identifier!</title>
 
             <para>
-                Every dojo.data datastore requires that the identifier column
+                Every <command>dojo.data</command> datastore requires that the identifier column
                 be provided as metadata, including <classname>Zend_Dojo_Data</classname>. In fact,
                 if you attempt to add items without an identifier, it will raise an exception.
             </para>
@@ -100,7 +100,10 @@ $data->addItems($someMoreItems);
             </listitem>
 
             <listitem>
-                <para>Any other objects (will serialize via get_object_vars())</para>
+                <para>
+                    Any other objects (will serialize via
+                    <methodname>get_object_vars()</methodname>)
+                </para>
             </listitem>
         </itemizedlist>
 
@@ -137,8 +140,8 @@ $data->setLabel('name');
 
         <para>
             Finally, you can also load a <classname>Zend_Dojo_Data</classname> item from a
-            dojo.data <acronym>JSON</acronym> array, using the <methodname>fromJson()</methodname>
-            method.
+            <command>dojo.data</command> <acronym>JSON</acronym> array, using the
+            <methodname>fromJson()</methodname> method.
         </para>
 
         <example id="zend.dojo.data.usage.populate">
@@ -155,8 +158,8 @@ $data->fromJson($json);
 
         <para>
             Some Dojo components require additional metadata along with
-            the dojo.data payload. As an example, <command>dojox.grid.Grid</command>
-            can pull data dynamically from a
+            the <command>dojo.data</command> payload. As an example,
+            <command>dojox.grid.Grid</command> can pull data dynamically from a
             <command>dojox.data.QueryReadStore</command>. For pagination to work
             correctly, each return payload should contain a <property>numRows</property>
             key with the total number of rows that could be returned by the

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 18429 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 18429 -->
 <sect1 id="zend.date.definition.theory">
     <title>Theorie der Arbeitsweise</title>
 
@@ -16,9 +16,9 @@
         Situationen eine Belastung. Da die Methoden von <classname>Zend_Date</classname> das
         Arbeiten mit vieldeutigen Daten unterstützen, die möglicherweise nicht alle Datumsabschnitte
         beinhalten (Zeitalter, Jahr, Monat, Tag, Stunde, Minute, Sekunde, Zeitzone), können
-        Entwickler die Flexibilität und die einfache Handhabung der selben Klasse und der selben
-        Methode geniessen, um die gleichen Änderungen durchzuführen (zum Beispiel Addieren,
-        Subtrahieren, Vergleichen, Verbinden von Datumsabschnitten, und vieles mehr). Das Aufteilen
+        Entwickler die Flexibilität und die einfache Handhabung derselben Klasse und derselben
+        Methoden geniessen, um die gleichen Änderungen durchzuführen (zum Beispiel Addieren,
+        Subtrahieren, Vergleichen, Verbinden von Datumsabschnitten und vieles mehr). Das Aufteilen
         der Handhabung dieser Datumsabschnitte in verschiedene Klassen würde Komplikationen
         hervorrufen, wenn einfaches gemeinsames Arbeiten und eine kleine Lernkurve gewünscht sind.
         Eine einzige Klasse reduziert die Verdopplung von Code für gleichartige Arbeiten, ohne die
@@ -36,11 +36,11 @@
 
                 <para>
                     Alle Daten und Zeiten, selbst die mehrdeutigen (z.B. kein Jahr), sind intern
-                    dargestellt in absoluten Momenten der Zeit, repräsentiert als
-                    <acronym>UNIX</acronym> Zeitpunkt welcher die Differenz zwischen der gewünschten
+                    dargestellt in absoluten Zeitpunkten, repräsentiert als
+                    <acronym>UNIX</acronym>-Zeitpunkt welcher die Differenz zwischen der gewünschten
                     Zeit und dem 01. Januar 1970 00:00:00 <acronym>GMT</acronym> darstellt. Das ist
                     nur deshalb möglich, weil <classname>Zend_Date</classname> nicht durch
-                    <acronym>UNIX</acronym> Zeitpunkte oder Integer-Zahlen limitert ist. Die BCMath
+                    <acronym>UNIX</acronym>-Zeitpunkte oder Integer-Zahlen limitert ist. Die BCMath
                     Erweiterung wird benötigt, um extrem große Daten außerhalb des Bereichs vom
                     Freitag dem 13.Dezember 1901 20:45:54 <acronym>GMT</acronym> bis zum 19. Januar
                     2038 03:14:07 <acronym>GMT</acronym> zu unterstützen. Zusätzlich können kleine
@@ -68,7 +68,7 @@
 
                 <para>
                     Wo es möglich ist, verwendet <classname>Zend_Date</classname> normalerweise
-                    <acronym>PHP</acronym> Funktionen, um die Geschwindigkeit zu erhöhen.
+                    <acronym>PHP</acronym>-Funktionen, um die Geschwindigkeit zu erhöhen.
                 </para>
             </listitem>
         </itemizedlist>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
+<!-- EN-Revision: 21130 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
@@ -115,6 +115,7 @@ echo $config->database->params->dbname; // Ausgabe "dbname"
                         <entry><varname>$filename</varname></entry>
                         <entry>Die <acronym>INI</acronym> Datei die geladen wird.</entry>
                     </row>
+
                     <row>
                         <entry><varname>$section</varname></entry>
 
@@ -127,7 +128,9 @@ echo $config->database->params->dbname; // Ausgabe "dbname"
                     </row>
 
                     <row>
-                        <entry><varname>$options</varname> (Default <constant>FALSE</constant>)</entry>
+                        <entry>
+                            <varname>$options</varname> (Default <constant>FALSE</constant>)
+                        </entry>
 
                         <entry>
                             Options Array. Die folgenden Schlüssel werden unterstützt:

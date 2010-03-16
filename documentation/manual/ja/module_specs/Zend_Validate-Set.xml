@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21047 -->
+<!-- EN-Revision: 21474 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -40,18 +40,9 @@
         <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Barcode.xml" /></xi:fallback>
     </xi:include>
 
-    <sect2 id="zend.validate.set.between">
-        <title>Between</title>
-
-        <para>
-            <code>$value</code> が最小値と最大値の間にある場合にのみ <constant>TRUE</constant> を返します。
-            デフォルトでは、両端の値も含めて比較します
-            (<code>$value</code> が境界値と等しくてもかまいません)
-            が、strict オプションを変更して、<code>$value</code> が最小値より大きくて最大値より小さい
-            (最小値と最大値は含まない) とすることもできます。
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Between.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Between.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Validate-Callback.xml">
         <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Callback.xml" /></xi:fallback>
     </xi:include>
@@ -61,11 +52,6 @@
 
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
-
-        <para>
-            <code>$value</code> が Luhn アルゴリズム (10 で割ったあまりのチェックサム)
-            を満たすクレジットカード番号である場合にのみ <constant>TRUE</constant> を返します。
-        </para>
 
         <note>
             <para>
@@ -115,14 +101,9 @@
         </para>
     </sect2>
 
-    <sect2 id="zend.validate.set.greater_than">
-        <title>GreaterThan</title>
-
-        <para>
-            <code>$value</code> が最小値よりも大きい場合にのみ <constant>TRUE</constant> を返します。
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-GreaterThan.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-GreaterThan.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Validate-Hex.xml">
         <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Hex.xml" /></xi:fallback>
     </xi:include>
@@ -204,14 +185,9 @@ if ($validator->isValid($iban)) {
         <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Isbn.xml" /></xi:fallback>
     </xi:include>
 
-    <sect2 id="zend.validate.set.less_than">
-        <title>LessThan</title>
-
-        <para>
-            <code>$value</code> が最大値よりも小さい場合にのみ <constant>TRUE</constant> を返します。
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-LessThan.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-LessThan.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Validate-NotEmpty.xml">
         <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-NotEmpty.xml" /></xi:fallback>
     </xi:include>
@@ -230,23 +206,9 @@ if ($validator->isValid($iban)) {
 
     <xi:include href="Zend_Validate-Sitemap.xml" />
 
-    <sect2 id="zend.validate.set.string_length">
-        <title>StringLength</title>
-
-        <para>
-            文字列 <code>$value</code> の長さが最小値以上、
-            かつ最大値以下 (最大値が <constant>NULL</constant> 以外のとき)
-            の場合にのみ <constant>TRUE</constant> を返します。
-            <methodname>setMin()</methodname>
-            で最大値より大きい値を指定したり <methodname>setMax()</methodname>
-            で最小値より小さい値を設定したりした場合に例外をスローします。
-            このクラスは UTF-8 のほかに <ulink
-                url="http://www.php.net/manual/ja/ref.iconv.php#iconv.configuration">iconv.internal_encoding</ulink>
-            にもとづいたその他の文字エンコーディングもサポートします。
-            別のエンコーディングを使用したい場合は、アクセサメソッド getEncoding
-            および setEncoding で設定します。
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-StringLength.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-StringLength.xml" /></xi:fallback>
+    </xi:include>
 
 </sect1>
 <!--

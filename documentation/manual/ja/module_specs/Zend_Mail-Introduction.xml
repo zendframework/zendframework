@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19418 -->
+<!-- EN-Revision: 20819 -->
 <sect1 id="zend.mail.introduction">
 
     <title>導入</title>
@@ -15,7 +15,7 @@
             <classname>Zend_Mail</classname> を使用すると、デフォルトの
             <classname>Zend_Mail_Transport_Sendmail</classname> か、あるいは
             <classname>Zend_Mail_Transport_Smtp</classname>
-            を使用してメールを送信することが可能です。
+            を使用してメールを送信できます。
         </para>
 
         <example id="zend.mail.introduction.example-1">
@@ -41,6 +41,7 @@ $mail->send();
 
         <note>
             <title>最低限の定義</title>
+
             <para>
                 <classname>Zend_Mail</classname> でメールを送信するには、
                 最低 1 か所以上の受信者、送信者 (<methodname>setFrom()</methodname> を使用します)、
@@ -84,10 +85,12 @@ $mail->setBodyText('This is the text of the mail.')
         <title>デフォルトの sendmail トランスポートの設定</title>
 
         <para>
-            <classname>Zend_Mail</classname> がデフォルトで使用するのは <classname>Zend_Mail_Transport_Sendmail</classname>
-            です。これは、単に <acronym>PHP</acronym> の <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>
-            関数をラップしただけのものです。
-            <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>
+            <classname>Zend_Mail</classname> がデフォルトで使用するのは
+            <classname>Zend_Mail_Transport_Sendmail</classname> です。これは、単に
+            <acronym>PHP</acronym> の <ulink
+            url="http://php.net/mail"><methodname>mail()</methodname></ulink>
+            関数をラップしただけのものです。 <ulink
+            url="http://php.net/mail"><methodname>mail()</methodname></ulink>
             関数に追加のパラメータを渡したい場合は、
             新しいインスタンスを作成する際のコンストラクタにパラメータを渡します。
             新しく作成したインスタンスは、<classname>Zend_Mail</classname>

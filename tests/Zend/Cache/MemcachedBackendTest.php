@@ -167,6 +167,12 @@ class Zend_Cache_MemcachedBackendTest extends Zend_Cache_CommonExtendedBackendTe
         parent::testGetFillingPercentage();
     }
 
+    public function testGetFillingPercentageOnEmptyBackend()
+    {
+        $this->_instance->setDirectives(array('logging' => false));
+        parent::testGetFillingPercentageOnEmptyBackend();
+    }
+
 }
 
 

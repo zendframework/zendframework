@@ -65,6 +65,17 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
         $this->assertTrue($res <= 100);
     }
 
+    public function testGetFillingPercentageOnEmptyBackend()
+    {
+        $this->_instance->setDirectives(array('logging' => false)); // ???
+        $this->_instance->clean(Zend_Cache::CLEANING_MODE_ALL);
+        $res = $this->_instance->getFillingPercentage();
+        $this->_instance->setDirectives(array('logging' => true)); // ???
+        $this->assertTrue(is_integer($res));
+        $this->assertTrue($res >= 0);
+        $this->assertTrue($res <= 100);
+    }
+
     public function testGetIds()
     {
         if (!($this->_capabilities['get_list'])) {

@@ -12,8 +12,8 @@
         pojedynczych komponentów. Nazywamy to często architekturą "use-at-will".
     </para>
     <para>
-        Pomimo tego, że można ich użyć osobno, komponenty Zend Framework
-        znajdujące się w standardowej bibliotece po połączeniu ich ze sobą
+        Pomimo tego, że można ich użyć osobno, komponenty Zend Framework,
+        znajdujące się w standardowej bibliotece, po połączeniu
         tworzą potężny i elastyczny framework. ZF oferuje mocną i wydajną
         implementację wzorca MVC, prosty w obsłudze interfejs komunikacji z
         bazą danych, a także komponent formularzy, który obsługuje renderowanie
@@ -24,8 +24,8 @@
         uwierzytelniania i autoryzacji w oparciu o najczęściej używane sposoby
         przechowywania danych uwierzytelniania. Oprócz tego jest dostępnych
         wiele bibliotek pozwalających na prostą obsługę najbardziej popularnych
-        webserwisów. Jakiekolwiek są potrzeby twojej aplikacji,
-        najprawdopodobniej uda ci się znaleźć komponent Zend Framework, który
+        webserwisów. Jakiekolwiek są potrzeby Twojej aplikacji,
+        najprawdopodobniej uda Ci się znaleźć komponent Zend Framework, który
         mocno zmniejszy czas tworzenia aplikacji.
     </para>
     <para>
@@ -37,15 +37,13 @@
         udostępnić programistom Zend Framework.
     </para>
     <para>
-        Zend Framework nie posiadał by tych wszystkich funkcjonalności gdyby nie
+        Zend Framework nie posiadałby tych wszystkich funkcjonalności gdyby nie
         pomoc społeczności ZF.
-
         Członkowie społeczności, włączając w to osoby wnoszące wkład do ZF, są
         dostępni na
         <ulink url="http://framework.zend.com/archives">listach dyskusyjnych</ulink>,
         <ulink url="http://www.zftalk.com">kanałach IRC</ulink> oraz na innych forach.
-
-        Jeśli masz pytania odnośie ZF, najlepiej będzie skierować je do społęczności.
+        Jeśli masz pytania odnośie ZF, najlepiej będzie skierować je do społeczności.
     </para>
 </sect1>
 <!--

@@ -382,10 +382,13 @@ class Zend_Ldap_Attribute
         if (is_array($values)) {
             for ($i = 0; $i<count($values); $i++) {
                 $newVal = self::_valueFromLdapDateTime($values[$i]);
-                if (!is_null($newVal)) $values[$i] = $newVal;
+                if ($newVal !== null) $values[$i] = $newVal;
             }
         }
-        else $values = self::_valueFromLdapDateTime($values);
+        else {
+			$newVal = self::_valueFromLdapDateTime($values);
+			if ($newVal !== null) $values = $newVal;
+		}
         return $values;
     }
 

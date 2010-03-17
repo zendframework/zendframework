@@ -801,13 +801,15 @@ switch ($numPeople) {
                 </para>
 
                 <para>
-                    <emphasis>UWAGA:</emphasis> It is sometimes useful to write
-                    a <code>case</code> statement which falls through to the
-                    next case by not including a <code>break</code> or
-                    <code>return</code> in that case. To distinguish these cases
-                    from bugs, any <code>case</code> statement where <code>break</code>
-                    or <code>return</code> are omitted must contain the comment
-                    "// break intentionally omitted".
+                	<emphasis>UWAGA:</emphasis> W niektórych przypadkach przydatne
+                	jest zapisanie jednej klauzuli <code>case</code>, po której
+                	sterowanie powinno przejść do następnej klauzuli <code>case</code>
+                	poprzez nie umieszczanie polecenia <code>break</code> lub 
+                	<code>return</code> w wyjściowym <code>case</code>.
+                	Aby odróżnić takie sytuacje od niezamierzonych błędów, 
+                	wszystkie instrukcje <code>case</code> których intencjonalnie
+                	pozbawiono <code>break</code> lub <code>return</code> muszą
+                	zawierać komentarz: "// break intentionally omitted".
                 </para>
             </sect3>
         </sect2>

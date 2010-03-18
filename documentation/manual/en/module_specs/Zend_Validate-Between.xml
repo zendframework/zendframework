@@ -35,14 +35,14 @@
 
             <listitem>
                 <para>
-                    <emphasis><property>min</property></emphasis>: Sets the minimum border for the
+                    <emphasis><property>max</property></emphasis>: Sets the maximum border for the
                     validation.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><property>max</property></emphasis>: Sets the maximum border for the
+                    <emphasis><property>min</property></emphasis>: Sets the minimum border for the
                     validation.
                 </para>
             </listitem>

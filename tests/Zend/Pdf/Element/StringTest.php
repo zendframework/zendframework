@@ -21,6 +21,11 @@
  */
 
 /**
+ * TestHelper
+ */
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
+/**
  * Zend_Pdf_Element_String
  */
 require_once 'Zend/Pdf/Element/String.php';
@@ -67,5 +72,21 @@ class Zend_Pdf_Element_StringTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(Zend_Pdf_Element_String::unescape("\\n\\r\\t\\b\\f\\(\\)\\\\  \nsome \\\ntext"),
                             "\n\r\t\x08\x0C()\\  \nsome text");
+    }
+
+    /**
+     * @group ZF-9450
+     */
+    public function testUnescapeOctal()
+    {
+        $input = array(
+            0304 => '\\304',
+            0326 => '\\326',
+            0334 => '\\334'
+        );
+        foreach ($input as $k => $v) {
+            $this->assertEquals(Zend_Pdf_Element_String::unescape($v),
+                chr($k), 'expected German Umlaut');
+        }
     }
 }

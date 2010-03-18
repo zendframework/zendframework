@@ -530,6 +530,16 @@ BBCODE;
         $this->assertEquals('<a href="http://framework.zend.com/">test</a><a href="http://framework.zend.com/">test</a>',
             $m->render('[url="http://framework.zend.com/"]test[/url][url="http://framework.zend.com/"]test[/url]'));
     }
+
+    /**
+     * Test for ZF-9463
+     */
+    public function testNoXssInH()
+    {
+        $m = $this->_markup;
+        $this->assertEquals('<h1>&lt;script&gt;alert(&quot;hi&quot;);&lt;/script&gt;</h1>',
+            $m->render('[h1]<script>alert("hi");</script>[/h1]'));
+    }
 }
 
 // Call Zend_Markup_BbcodeAndHtmlTest::main()

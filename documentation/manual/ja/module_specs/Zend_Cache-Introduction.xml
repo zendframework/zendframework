@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15962 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.cache.introduction">
     <title>導入</title>
+
     <para>
         <classname>Zend_Cache</classname> は、任意のデータをキャッシュするための一般的な手法を提供します。
     </para>
+
     <para>
       Zend Framework におけるキャッシュ処理はフロントエンドで行われ、キャッシュレコードの保存には
       バックエンドのアダプタ (<emphasis>File</emphasis>、<emphasis>Sqlite</emphasis>、<emphasis>Memcache</emphasis>...)
@@ -13,6 +15,7 @@
       キャッシュデータの一部だけを削除する (「指定したタグがつけられているキャッシュレコードをすべて削除する」
       など) といったことも簡単にできるようになります。
     </para>
+
     <para>
         このモジュールの中心となる部分 (<classname>Zend_Cache_Core</classname>) は、標準的で柔軟なものとなっています。
         設定変更も可能です。とは言え、
@@ -21,8 +24,10 @@
         (たとえば <emphasis>Output</emphasis>、<emphasis>File</emphasis>、<emphasis>Function</emphasis>、<emphasis>Class</emphasis> など)
         こともできます。
     </para>
+
     <example id="zend.cache.introduction.example-1">
         <title>Zend_Cache::factory() によるフロントエンドの取得</title>
+
         <para>
             <methodname>Zend_Cache::factory()</methodname> は、適切なオブジェクトを作成してそれらを互いに結び付けます。
             この最初の例では、フロントエンドに <emphasis>Core</emphasis>、バックエンドに <emphasis>File</emphasis>
@@ -49,6 +54,7 @@ $cache = Zend_Cache::factory('Core',
 
     <note>
         <title>複数の単語からなるフロントエンドやバックエンドについて</title>
+
         <para>
             'ZendPlatform' のように複数の単語からなるフロントエンドやバックエンドもあります。
             これをファクトリで指定する場合は、単語の間に区切り文字を指定します。
@@ -61,7 +67,7 @@ $cache = Zend_Cache::factory('Core',
         <title>データベースへのクエリの結果のキャッシュ</title>
 
         <para>
-            これでフロントエンドが得られました。あらゆる種類のデータを保存することができます
+            これでフロントエンドが得られました。あらゆる種類のデータを保存できます
             (そのために、シリアライズを有効にしました)。例えば、非常に時間がかかるデータベースクエリの結果を
             キャッシュすることが可能です。いったんキャッシュしてしまえば、
             あとはデータベースに接続する必要さえありません。キャッシュから取得したレコードを
@@ -95,16 +101,20 @@ print_r($result);
 
     <example id="zend.cache.introduction.example-3">
         <title>Zend_Cache 出力フロントエンドによる出力のキャッシュ</title>
+
         <para>
             まず、出力をキャッシュしたい部分を何らかの条件式で「マークアップ」し、
             その前後を <methodname>start()</methodname> メソッドおよび <methodname>end()</methodname>
             メソッドで囲みます (これは最初の例に似ており、キャッシュ処理の基本となる考え方です)。
-        </para><para>
+        </para>
+
+        <para>
             内部では、通常通りに出力を行います。出力内容は、 <methodname>end()</methodname>
             メソッドに到達するまでずっとキャッシュされます。次回の実行時には、
             このセクションが読み飛ばされ、その代わりにキャッシュから取得したデータが使用されます
             (キャッシュレコードが有効なものである限ります)。
-       </para>
+        </para>
+
         <programlisting language="php"><![CDATA[
 $frontendOptions = array(
    'lifetime' => 30,                   // キャッシュの有効期間は 30 秒です
@@ -130,27 +140,32 @@ if(!$cache->start('mypage')) {
 
 echo 'これはキャッシュされません ('.time().').';
 ]]></programlisting>
-       <para>
-           <methodname>time()</methodname> の結果を二度出力していることに注目しましょう。
-           動作説明のため、何らかの動的な出力がほしかったのです。これを実行し、
-           さらに何度か「最新の情報に更新」してみましょう。
-           ふたつめの値が時とともに変化していくのに対して、
-           最初の方の値は変化しないことに気づかれるでしょう。
-           なぜなら、最初の値はキャッシュされたセクションの出力であり、
-           その他の内容とともにキャッシュに保存されているからです。
-           30 秒経過すると (有効期限を 30 秒に設定したので)、
-           ふたつの値は再び一致するようになります。これはキャッシュレコードが
-           有効期限切れになり、もう一度キャッシュしなおされたからです。
-           この例は、ブラウザあるいはコンソールで試してみてください。
-       </para>
+
+        <para>
+            <methodname>time()</methodname> の結果を二度出力していることに注目しましょう。
+            動作説明のため、何らかの動的な出力がほしかったのです。これを実行し、
+            さらに何度か「最新の情報に更新」してみましょう。
+            ふたつめの値が時とともに変化していくのに対して、
+            最初の方の値は変化しないことに気づかれるでしょう。
+            なぜなら、最初の値はキャッシュされたセクションの出力であり、
+            その他の内容とともにキャッシュに保存されているからです。
+            30 秒経過すると (有効期限を 30 秒に設定したので)、
+            ふたつの値は再び一致するようになります。これはキャッシュレコードが
+            有効期限切れになり、もう一度キャッシュしなおされたからです。
+            この例は、ブラウザあるいはコンソールで試してみてください。
+        </para>
+
     </example>
-    <note><para>
-        <classname>Zend_Cache</classname> を使用する際には、キャッシュ ID (<methodname>save()</methodname> および
-        <methodname>start()</methodname> で使用します) に十分な注意を払うようにしましょう。
-        これは、キャッシュしようとしているリソース内で一意である必要があります。
-        さもないと、無関係なレコードによってキャッシュを削除されてしまったり、
-        さらに悪いことにはまったく無関係な場所に表示されてしまったりなどという問題が起こります。
-    </para></note>
+
+    <note>
+        <para>
+            <classname>Zend_Cache</classname> を使用する際には、キャッシュ ID (<methodname>save()</methodname> および
+            <methodname>start()</methodname> で使用します) に十分な注意を払うようにしましょう。
+            これは、キャッシュしようとしているリソース内で一意である必要があります。
+            さもないと、無関係なレコードによってキャッシュを削除されてしまったり、
+            さらに悪いことにはまったく無関係な場所に表示されてしまったりなどという問題が起こります。
+        </para>
+    </note>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

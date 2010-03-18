@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20876 -->
+<!-- EN-Revision: 21504 -->
 <sect1 id="migration.19">
     <title>Zend Framework 1.9</title>
 
@@ -163,7 +163,7 @@ $client->setFileUpload('file2.txt',
     <sect2 id="migration.19.zend.locale">
         <title>Zend_Locale</title>
 
-        <sect3 id="migration.19.zend.locale.depreciated">
+        <sect3 id="migration.19.zend.locale.deprecated">
             <title>非推奨となるメソッド</title>
 
             <para>
@@ -175,7 +175,7 @@ $client->setFileUpload('file2.txt',
                 次の一覧で、新旧のメソッドコールを参照ください。
             </para>
 
-            <table id="migration.19.zend.locale.depreciated.table-1">
+            <table id="migration.19.zend.locale.deprecated.table-1">
                 <title>新旧のメソッドコールの一覧</title>
 
                 <tgroup cols="2">

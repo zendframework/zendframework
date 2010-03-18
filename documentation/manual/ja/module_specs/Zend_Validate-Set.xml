@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21474 -->
+<!-- EN-Revision: 21501 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -196,13 +196,9 @@ if ($validator->isValid($iban)) {
         <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-PostCode.xml" /></xi:fallback>
     </xi:include>
 
-    <sect2 id="zend.validate.set.regex">
-        <title>Regex</title>
-
-        <para>
-            <code>$value</code> が正規表現パターンにマッチする場合にのみ <constant>TRUE</constant> を返します。
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-Regex.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Regex.xml" /></xi:fallback>
+    </xi:include>
 
     <xi:include href="Zend_Validate-Sitemap.xml" />
 

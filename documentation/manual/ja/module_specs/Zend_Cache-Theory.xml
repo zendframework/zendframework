@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16422 -->
+<!-- EN-Revision: 21109 -->
 <sect1 id="zend.cache.theory">
     <title>キャッシュの仕組み</title>
+
     <para>
         <classname>Zend_Cache</classname> には、3 つのポイントがあります。まず最初は一意な ID (文字列) で、
         これによってキャッシュレコードを識別します。二番目は、例に含まれる
@@ -19,26 +20,35 @@
         (例えば <methodname>Zend_Cache_Core::save()</methodname> などで)
         保存する必要があります。
     </para>
-    <note><para>
-        条件付きの実行処理を必ず記述しなければならないわけではありません。
-        フロントエンドの種類によっては (例えば <emphasis>Function</emphasis> など)、
-        すべてのロジックがフロントエンドの中で実装されています。
-    </para></note>
-    <note><para>
-        'Cache hit (キャッシュにヒットした)' とは、キャッシュレコードが見つかり、
-        かつそのレコードが 'fresh (新鮮)' (言い換えると、まだ有効期限が切れていない)
-        状態であることを表す言葉です。'Cache miss (キャッシュが見つからなかった)'
-        はその正反対です。キャッシュが見つからなかった場合は、
-        データを (通常どおりに) 作成し、それをキャッシュしなければなりません。
-        一方、キャッシュにヒットした場合は、
-        バックエンドが自動的にキャッシュレコードを取得してくれます。
-    </para></note>
+
+    <note>
+        <para>
+            条件付きの実行処理を必ず記述しなければならないわけではありません。
+            フロントエンドの種類によっては (例えば <emphasis>Function</emphasis> など)、
+            すべてのロジックがフロントエンドの中で実装されています。
+        </para>
+    </note>
+
+    <note>
+        <para>
+            'Cache hit (キャッシュにヒットした)' とは、キャッシュレコードが見つかり、
+            かつそのレコードが 'fresh (新鮮)' (言い換えると、まだ有効期限が切れていない)
+            状態であることを表す言葉です。'Cache miss (キャッシュが見つからなかった)'
+            はその正反対です。キャッシュが見つからなかった場合は、
+            データを (通常どおりに) 作成し、それをキャッシュしなければなりません。
+            一方、キャッシュにヒットした場合は、
+            バックエンドが自動的にキャッシュレコードを取得してくれます。
+        </para>
+    </note>
+
     <sect2 id="zend.cache.factory">
         <title>Zend_Cache ファクトリメソッド</title>
+
         <para>
             使用可能な <classname>Zend_Cache</classname> フロントエンドのインスタンスを作成する方法を、
             以下の例で示します。
         </para>
+
         <programlisting language="php"><![CDATA[
 // バックエンドを選びます (例えば 'File' や 'Sqlite'...)
 $backendName = '[...]';
@@ -59,81 +69,102 @@ $cache = Zend_Cache::factory($frontendName,
                              $frontendOptions,
                              $backendOptions);
 ]]></programlisting>
+
          <para>
             これ以降のドキュメントでは、<varname>$cache</varname>
             の中身が有効なフロントエンドになっているものとします。また、
             選択したバックエンドにパラメータを渡す方法は理解できているものとします。
         </para>
-        <note><para>
-            常に <methodname>Zend_Cache::factory()</methodname> を使用してフロントエンドの
-            インスタンスを作成するようにしてください。フロントエンドやバックエンドを
-            自前で作成しようとしても、期待通りには動作しないでしょう。
-        </para></note>
+
+        <note>
+            <para>
+                常に <methodname>Zend_Cache::factory()</methodname> を使用してフロントエンドの
+                インスタンスを作成するようにしてください。フロントエンドやバックエンドを
+                自前で作成しようとしても、期待通りには動作しないでしょう。
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.cache.tags">
         <title>レコードのタグ付け</title>
+
         <para>
             タグは、キャッシュレコードを分類するための仕組みです。
             <methodname>save()</methodname> メソッドでキャッシュを保存する際に、
-            適用するタグを配列で指定することができます。これを使用すると、
+            適用するタグを配列で指定できます。これを使用すると、
             指定したタグが設定されているキャッシュレコードのみを削除するといったことが可能となります。
         </para>
+
         <programlisting language="php"><![CDATA[
 $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
 ]]></programlisting>
-        <note><para>
-            <methodname>save()</methodname> メソッドには、オプションの第四引数
-            <varname>$specificLifetime</varname> を指定できることに注意しましょう
-            (<constant>FALSE</constant> 以外を指定することで、このキャッシュレコードの有効期限を特定の値に設定できます)。
-        </para></note>
+
+        <note>
+            <para>
+                <methodname>save()</methodname> メソッドには、オプションの第四引数
+                <varname>$specificLifetime</varname> を指定できることに注意しましょう
+                (<constant>FALSE</constant> 以外を指定することで、このキャッシュレコードの有効期限を特定の値に設定できます)。
+            </para>
+        </note>
     </sect2>
+
     <sect2 id="zend.cache.clean">
         <title>キャッシュの削除</title>
+
         <para>
             特定のキャッシュ ID を削除/無効化するには、<methodname>remove()</methodname>
             メソッドを使用します。
         </para>
+
         <programlisting language="php"><![CDATA[
 $cache->remove('削除するID');
 ]]></programlisting>
+
         <para>
             一回の操作で複数のキャッシュ ID を削除/無効化するには、<methodname>clean()</methodname>
             メソッドを使用します。例えば、すべてのキャッシュレコードを削除するには次のようにします。
         </para>
+
         <programlisting language="php"><![CDATA[// すべてのレコードを削除します
 $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 
 // 有効期限切れのレコードのみ削除します
 $cache->clean(Zend_Cache::CLEANING_MODE_OLD);
 ]]></programlisting>
+
         <para>
             タグ 'tagA' および 'tagC' に該当するキャッシュエントリを削除するには、このようにします。
         </para>
+
         <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_TAG,
     array('tagA', 'tagC')
 );
 ]]></programlisting>
+
         <para>
             タグ 'tagA' にも 'tagC' にも該当しないキャッシュエントリを削除するには、このようにします。
         </para>
+
         <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
     array('tagA', 'tagC')
 );
 ]]></programlisting>
+
         <para>
             タグ 'tagA' または 'tagC' に該当するキャッシュエントリを削除するには、このようにします。
         </para>
+
         <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
     array('tagA', 'tagC')
 );
 ]]></programlisting>
+
         <para>
             削除モードとして指定可能な値は <constant>CLEANING_MODE_ALL</constant>、<constant>CLEANING_MODE_OLD</constant>、
             <constant>CLEANING_MODE_MATCHING_TAG</constant>、<constant>CLEANING_MODE_NOT_MATCHING_TAG</constant> および

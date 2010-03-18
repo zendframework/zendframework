@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework
  *
@@ -34,6 +35,11 @@ require_once 'Zend/Filter/Interface.php';
  */
 class Zend_Filter_StripTags implements Zend_Filter_Interface
 {
+    /**
+     * Unique ID prefix used for allowing comments
+     */
+    const UNIQUE_ID_PREFIX = '__Zend_Filter_StripTags__';
+
     /**
      * Whether comments are allowed
      *
@@ -231,14 +237,22 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
      */
     public function filter($value)
     {
+        $value = (string) $value;
+
         // Strip HTML comments first
-        $valueCopy = preg_replace('#<!--(?:[^<]+|<(?!\!--))*?(--\s*>)#s', '', (string) $value);
+        while (strpos($value, '<!--') !== false) {
+            $pos   = strrpos($value, '<!--');
+            $start = substr($value, 0, $pos);
+            $value = substr($value, $pos);
+            $value = preg_replace('/<(?:!(?:--[\s\S]*?--\s*)?(>))/us', '',  $value);
+            $value = $start . $value;
+        }
 
         // Initialize accumulator for filtered data
         $dataFiltered = '';
         // Parse the input data iteratively as regular pre-tag text followed by a
         // tag; either may be empty strings
-        preg_match_all('/([^<]*)(<?[^>]*>?)/', (string) $valueCopy, $matches);
+        preg_match_all('/([^<]*)(<?[^>]*>?)/', (string) $value, $matches);
         // Iterate over each set of matches
         foreach ($matches[1] as $index => $preTag) {
             // If the pre-tag text is non-empty, strip any ">" characters from it

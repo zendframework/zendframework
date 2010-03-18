@@ -275,7 +275,7 @@ http://phpstorage.blob.core.windows.net/phpazuretestshared1?st=2009-08-17T09%3A0
 
                 <programlisting language="php"><![CDATA[
 $storageClient   = new Zend_Service_WindowsAzure_Storage_Blob();
-$sharedAccessUrl = storageClient->generateSharedAccessUrl(
+$sharedAccessUrl = $storageClient->generateSharedAccessUrl(
     'container1',
     '',
     'c',
@@ -297,7 +297,7 @@ $sharedAccessUrl = storageClient->generateSharedAccessUrl(
 
                 <programlisting language="php"><![CDATA[
 $storageClient   = new Zend_Service_WindowsAzure_Storage_Blob();
-$sharedAccessUrl = storageClient->generateSharedAccessUrl(
+$sharedAccessUrl = $storageClient->generateSharedAccessUrl(
     'container1',
     'test.txt',
     'b',

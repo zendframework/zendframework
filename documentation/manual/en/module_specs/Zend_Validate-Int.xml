@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.validate.set.int">
+    <title>Int</title>
+
+    <para>
+        <classname>Zend_Validate_Int</classname> validates if a given value is an integer. Also
+        localized integer values are recognised and can be validated.
+    </para>
+
+    <sect3 id="zend.validate.set.int.options">
+        <title>Supported options for Zend_Validate_Int</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Validate_Int</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>locale</property></emphasis>: Sets the locale which will be
+                    used to validate localized integers.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.validate.set.int.basic">
+        <title>Simple integer validation</title>
+
+        <para>
+            The simplest way to validate an integer is by using the system settings. When no option
+            is used, the environment locale is used for validation:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Int();
+
+$validator->isValid(1234);   // returns true
+$validator->isValid(1234.5); // returns false
+$validator->isValid('1,234'); // returns true
+]]></programlisting>
+
+        <para>
+            In the above example we expected that our environment is set to "en" as locale. As you
+            can see in the third example also grouping is recognised.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.validate.set.int.localized">
+        <title>Localized integer validation</title>
+
+        <para>
+            Often it's useful to be able to validate also localized values. Integer values are often
+            written different in other countries. For example using english you can write "1234" or
+            "1,234". Both are integer values but the grouping is optional. In german for example you
+            may write "1.234" and in french "1 234".
+        </para>
+
+        <para>
+            <classname>Zend_Validate_Int</classname> is able to validate such notations. But it is
+            limited to the locale you set. This means that it not simply strips off the separator,
+            it validates if the correct separator is used. See the following code:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Int(array('locale' => 'de'));
+
+$validator->isValid(1234); // returns true
+$validator->isValid("1,234"); // returns false
+$validator->isValid("1.234"); // returns true
+]]></programlisting>
+
+        <para>
+            As you can see, by using a locale, your input is validated localized. Using the english
+            notation you get a <constant>FALSE</constant> when the locale forces a different
+            notation.
+        </para>
+
+        <para>
+            The locale can also be set afterwards by using <methodname>setLocale()</methodname> and
+            retrieved by using <methodname>getLocale()</methodname>.
+        </para>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

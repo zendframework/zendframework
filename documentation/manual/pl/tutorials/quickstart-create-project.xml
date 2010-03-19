@@ -61,7 +61,7 @@
 
             <para>
                 Jeśli w dokumentacji pojawią się odniesienia do komendy <command>zf</command>,
-                prosze pamiętać o zastąpieniu ich pełną ścieżką dostępu do odpowiedniego skryptu.
+                proszę pamiętać o zastąpieniu ich pełną ścieżką dostępu do odpowiedniego skryptu.
                 Dla systemów Unix można skorzystać z polecenia alias:
                 <command>alias zf.sh=path/to/ZendFramework/bin/zf.sh</command>.
             </para>
@@ -136,7 +136,7 @@ quickstart
 ]]></programlisting>
 
         <para>
-            W systemach Windows najprostrzym rozwiązaniem będzie wykonanie tego z poziomu Explorera.
+            W systemach Windows najprostszym rozwiązaniem będzie wykonanie tego z poziomu Explorera.
         </para>
 
         <para>

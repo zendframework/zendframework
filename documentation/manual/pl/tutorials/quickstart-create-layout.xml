@@ -40,7 +40,7 @@
     <para>
         Mogą powstać sytuacje, w których niezbędne okaże się umieszczenie globalnych elementów w 
         pojedynczym widoku. W tym celu Zend Framework udostępnia szereg
-        <emphasis>pojemników (placeholders)</emphasis>, które umożliwają dostęp do takich
+        <emphasis>pojemników (placeholders)</emphasis>, które umożliwiają dostęp do takich
         elementów z poziomu lokalnego skryptu widoku.
     </para>
 

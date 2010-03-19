@@ -33,7 +33,7 @@
             <acronym>IBAN</acronym> numbers are always related to a country. This means that
             different countries use different formats for their <acronym>IBAN</acronym> numbers.
             This is the reason why <acronym>IBAN</acronym> numbers always need a locale. By knowing
-            this we already know how to use <classname>Zend_Validate_Iban</acronym>.
+            this we already know how to use <classname>Zend_Validate_Iban</classname>.
         </para>
 
         <sect4 id="zend.validate.set.iban.basic.application">

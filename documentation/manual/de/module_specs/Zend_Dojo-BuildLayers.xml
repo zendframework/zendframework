@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20176 -->
+<!-- EN-Revision: 21357 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.build-layers">
     <title>Support für den Build Layer von Zend_Dojo</title>
@@ -89,9 +89,9 @@ $view->dojo()->registerModulePath('custom', '../custom/')
         </para>
 
         <para>
-            Nehmen wir als Beispiel an das man den Modul Layer "custom.main"  erstellen will.
-            Angenommen man folgt der vorgeschlagenen Projekt Verzeichnisstruktur, und man
-            will JavaScript Dateien unter <filename>public/js/</filename> speichern, dann
+            Nehmen wir als Beispiel an dass man den Modul Layer "<filename>custom.main</filename>"
+            erstellen will. Angenommen man folgt der vorgeschlagenen Projekt Verzeichnisstruktur,
+            und man will JavaScript Dateien unter <filename>public/js/</filename> speichern, dann
             könnte man das folgende tun:
         </para>
 

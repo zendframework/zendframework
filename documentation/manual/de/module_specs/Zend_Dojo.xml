@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
+<!-- EN-Revision: 21357 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.introduction">
     <title>Einführung</title>
@@ -12,8 +12,8 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>JSON-RPC Unterstützung</para></listitem>
-        <listitem><para>dojo.data Kompatibilität</para></listitem>
+        <listitem><para><acronym>JSON-RPC</acronym> Unterstützung</para></listitem>
+        <listitem><para><command>dojo.data</command> Kompatibilität</para></listitem>
         <listitem><para>View Helfer um beim Setup der Dojo Umgebung zu helfen</para></listitem>
         <listitem><para>Dijit-spezifische <classname>Zend_View</classname> Helfer</para></listitem>
 
@@ -29,6 +29,7 @@
         Javascript Verzeichnis symbolisch linken, es kopieren, oder das Build Tool verwenden um
         einen eigenen Build zu erstellen und ins eigene Projekt zu inkludieren. Alternativ kann
         eines der Content Delivery Networks verwendet werden die Dojo anbietet (Zend Framework
-        unterstützt beide, den offiziellen AOL CDN sowie den Google CDN).
+        unterstützt beide, den offiziellen <acronym>AOL</acronym> <acronym>CDN</acronym> sowie den
+        Google <acronym>CDN</acronym>).
     </para>
 </sect1>

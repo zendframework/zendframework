@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 21358 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
     <title>Zend_Db_Adapter</title>
@@ -13,23 +14,24 @@
     </para>
 
     <para>
-    	Adaptery <classname>Zend_Db</classname> tworzą połączenie pomiędzy rozszerzeniami 
-    	<acronym>PHP</acronym> dla konkretnych rodzajów baz danych a wspólnym interfejsem,
-    	dzięki czemu można napisać aplikację raz i w nieskomplikowany sposób uruchamiać 
-    	ją z wieloma rodzajami <acronym>RDBMS</acronym>
+        Adaptery <classname>Zend_Db</classname> tworzą połączenie pomiędzy rozszerzeniami 
+        <acronym>PHP</acronym> dla konkretnych rodzajów baz danych a wspólnym interfejsem,
+        dzięki czemu można napisać aplikację raz i w nieskomplikowany sposób uruchamiać 
+        ją z wieloma rodzajami <acronym>RDBMS</acronym>
     </para>
 
     <para>
-    	Interfejs klasy adaptera jest podobny do interfejsu rozszerzenia
-    	<ulink url="http://www.php.net/pdo">PHP Data Objects</ulink>. <classname>Zend_Db</classname>
-    	zawiera klasy adapterów dla sterowników <acronym>PDO</acronym> następujących rodzajów
-    	baz danych:
+        Interfejs klasy adaptera jest podobny do interfejsu rozszerzenia
+        <ulink url="http://www.php.net/pdo">PHP Data Objects</ulink>. <classname>Zend_Db</classname>
+        zawiera klasy adapterów dla sterowników <acronym>PDO</acronym> następujących rodzajów
+        baz danych:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                IBM DB2 oraz Informix Dynamic Server (IDS), poprzez rozszerzenie <acronym>PHP</acronym>
+                IBM DB2 oraz Informix Dynamic Server (IDS), poprzez rozszerzenie
+                <acronym>PHP</acronym>
                 <ulink url="http://www.php.net/pdo-ibm">pdo_ibm</ulink>.
             </para>
         </listitem>
@@ -43,7 +45,8 @@
 
         <listitem>
             <para>
-                Microsoft <acronym>SQL</acronym> Server, używając rozszerzenia <acronym>PHP</acronym>
+                Microsoft <acronym>SQL</acronym> Server, używając rozszerzenia
+                <acronym>PHP</acronym>
                 <ulink url="http://www.php.net/pdo-dblib">pdo_dblib</ulink>
             </para>
         </listitem>
@@ -71,9 +74,9 @@
     </itemizedlist>
 
     <para>
-    	Dodatkowo <classname>Zend_Db</classname> dostarcza klas adapterów korzystających
-    	z rozszerzeń <acronym>PHP</acronym> dla następujących rodzajów
-    	baz danych:
+        Dodatkowo <classname>Zend_Db</classname> dostarcza klas adapterów korzystających
+        z rozszerzeń <acronym>PHP</acronym> dla następujących rodzajów
+        baz danych:
     </para>
 
     <itemizedlist>
@@ -108,12 +111,12 @@
 
     <note>
         <para>
-        	Każdy adapter <classname>Zend_Db</classname> używa określonego rozszerzenia
-        	<acronym>PHP</acronym>. Aby użyć adaptera należy mieć zainstalowane i włączone
-        	odpowiadające mu rozszerzenie <acronym>PHP</acronym>. Np. aby użyć dowolnego
-        	adaptera <acronym>PDO</acronym> <classname>Zend_Db</classname>, wymagane jest
-        	posiadanie włączonego rozszerzenia <acronym>PDO</acronym> oraz sterownika dla 
-        	danego rodzaju <acronym>RDBMS</acronym>.
+            Każdy adapter <classname>Zend_Db</classname> używa określonego rozszerzenia
+            <acronym>PHP</acronym>. Aby użyć adaptera należy mieć zainstalowane i włączone
+            odpowiadające mu rozszerzenie <acronym>PHP</acronym>. Np. aby użyć dowolnego
+            adaptera <acronym>PDO</acronym> <classname>Zend_Db</classname>, wymagane jest
+            posiadanie włączonego rozszerzenia <acronym>PDO</acronym> oraz sterownika dla 
+            danego rodzaju <acronym>RDBMS</acronym>.
         </para>
     </note>
 
@@ -121,16 +124,16 @@
         <title>Połączenie z bazą danych za pomocą adaptera</title>
 
         <para>
-        	Ta część opisuje jak tworzy się instancję adaptera bazy danych. Jest to odpowiednik
-        	połączenia z bazą danych w aplikacji <acronym>PHP</acronym>.
+            Ta część opisuje jak tworzy się instancję adaptera bazy danych. Jest to odpowiednik
+            połączenia z bazą danych w aplikacji <acronym>PHP</acronym>.
         </para>
 
         <sect3 id="zend.db.adapter.connecting.constructor">
             <title>Użycie konstruktora adaptera Zend_Db</title>
 
             <para>
-            	Można utworzyć instancję adaptera za pomocą konstruktora. Przyjmuje on
-            	pojedynczy argument - tablicę parametrów używanych do deklaracji połączenia. 
+                Można utworzyć instancję adaptera za pomocą konstruktora. Przyjmuje on
+                pojedynczy argument - tablicę parametrów używanych do deklaracji połączenia. 
             </para>
 
             <example id="zend.db.adapter.connecting.constructor.example">
@@ -151,18 +154,18 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
             <title>Użycie fabryki Zend_Db</title>
 
             <para>
-            	Alternatywą w stosunku do bezpośredniego używania konstruktora jest utworzenie
-            	instancji adaptera za pomocą statycznej metody 
-            	<methodname>Zend_Db::factory()</methodname>. Ta metoda dynamicznie ładuje plik
-            	klasy adaptera używając
-            	<link linkend="zend.loader.load.class">Zend_Loader::loadClass()</link>.
+                Alternatywą w stosunku do bezpośredniego używania konstruktora jest utworzenie
+                instancji adaptera za pomocą statycznej metody 
+                <methodname>Zend_Db::factory()</methodname>. Ta metoda dynamicznie ładuje plik
+                klasy adaptera używając
+                <link linkend="zend.loader.load.class">Zend_Loader::loadClass()</link>.
             </para>
 
             <para>
-            	Pierwszy argument metody to łańcuch znaków, który wyznacza nazwę bazową klasy
-            	adaptera. Np. string '<classname>Pdo_Mysql</classname>' odpowiada klasie
-            	<classname>Zend_Db_Adapter_Pdo_Mysql</classname>. Drugi argument to ta sama
-            	tablica parametrów, którą należało podać adapterowi konstruktora.
+                Pierwszy argument metody to łańcuch znaków, który wyznacza nazwę bazową klasy
+                adaptera. Np. string '<classname>Pdo_Mysql</classname>' odpowiada klasie
+                <classname>Zend_Db_Adapter_Pdo_Mysql</classname>. Drugi argument to ta sama
+                tablica parametrów, którą należało podać adapterowi konstruktora.
             </para>
 
             <example id="zend.db.adapter.connecting.factory.example">
@@ -187,12 +190,12 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             </example>
 
             <para>
-            	Jeśli jest zdefiniowana własna klasa dziedzicząca po
-            	<classname>Zend_Db_Adapter_Abstract</classname> ale jej nazwa nie zawiera
-            	"<classname>Zend_Db_Adapter</classname>", można użyć metody
-            	<methodname>factory()</methodname> do załadowania adaptera jedynie jeśli
-            	poda się swój prefiks nazwy adaptera z kluczem 'adapterNamespace' do
-            	argumentu zawierającego parametry połączenia.
+                Jeśli jest zdefiniowana własna klasa dziedzicząca po
+                <classname>Zend_Db_Adapter_Abstract</classname> ale jej nazwa nie zawiera
+                "<classname>Zend_Db_Adapter</classname>", można użyć metody
+                <methodname>factory()</methodname> do załadowania adaptera jedynie jeśli
+                poda się swój prefiks nazwy adaptera z kluczem 'adapterNamespace' do
+                argumentu zawierającego parametry połączenia.
             </para>
 
             <example id="zend.db.adapter.connecting.factory.example2">
@@ -218,26 +221,29 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             <title>Użycie Zend_Config z fabryką Zend_Db</title>
 
             <para>
-            	Każdy z argumentów metody <methodname>factory()</methodname> może również zostać
-            	podany w formie obiektu klasy <link linkend="zend.config">Zend_Config</link>.
+                Każdy z argumentów metody <methodname>factory()</methodname> może również zostać
+                podany w formie obiektu klasy <link linkend="zend.config">Zend_Config</link>.
             </para>
 
             <para>
-            	Jeśli pierwszy argument jest obiektem <classname>Zend_Config</classname> to wymagane
-            	jest aby posiadał właściwość o nazwie <property>adapter</property>, w której będzie
-            	zapisany łańcuch znaków określający nazwę bazową klasy adaptera. Opcjonalnie, obiekt
-            	ten może zawierać właściwość '<property>params</property>' z właściwościami potomnymi
-            	odpowiadającymi nazwom parametrów adaptera. Będą one użyte jedynie w przypadku braku
-            	drugiego argumentu metody <methodname>factory()</methodname>.
+                Jeśli pierwszy argument jest obiektem <classname>Zend_Config</classname>
+                to wymagane jest aby posiadał właściwość o nazwie
+                <property>adapter</property>, w której będzie zapisany łańcuch znaków
+                określający nazwę bazową klasy adaptera. Opcjonalnie, obiekt ten może zawierać
+                właściwość '<property>params</property>' z właściwościami potomnymi
+                odpowiadającymi nazwom parametrów adaptera. Będą one użyte jedynie w
+                przypadku braku drugiego argumentu metody
+                <methodname>factory()</methodname>.
             </para>
 
             <example id="zend.db.adapter.connecting.factory.example1">
                 <title>Użycie metody fabryki adaptera z obiektem Zend_Config</title>
 
                 <para>
-                	W poniższym przykładzie, obiekt <classname>Zend_Config</classname> jest utworzony
-                	z tablicy. Można również załadować dane z pliku zewnętrznego poprzez klasy
-                	<link linkend="zend.config.adapters.ini">Zend_Config_Ini</link> oraz
+                    W poniższym przykładzie, obiekt <classname>Zend_Config</classname>
+                    jest utworzony z tablicy.
+                    Można również załadować dane z pliku zewnętrznego poprzez klasy
+                    <link linkend="zend.config.adapters.ini">Zend_Config_Ini</link> oraz
                     <link linkend="zend.config.adapters.xml">Zend_Config_Xml</link>.
                 </para>
 
@@ -261,11 +267,11 @@ $db = Zend_Db::factory($config->database);
             </example>
 
             <para>
-            	Drugi argument metody <methodname>factory()</methodname> może stanowić tablicę
-            	asocjacyjną zawierającą wartości odpowiadające parametrom adaptera. Ten argument 
-            	jest opcjonalny. Jeśli pierwszy argument jest obiektem klasy 
-            	<classname>Zend_Config</classname> to powinien zawierać wszystkie parametry a
-            	drugi argument jest ignorowany. 
+                Drugi argument metody <methodname>factory()</methodname> może stanowić tablicę
+                asocjacyjną zawierającą wartości odpowiadające parametrom adaptera. Ten argument 
+                jest opcjonalny. Jeśli pierwszy argument jest obiektem klasy 
+                <classname>Zend_Config</classname> to powinien zawierać wszystkie parametry a
+                drugi argument jest ignorowany. 
             </para>
         </sect3>
 
@@ -273,8 +279,8 @@ $db = Zend_Db::factory($config->database);
             <title>Parametry adaptera</title>
 
             <para>
-            	Poniższa lista opisuje parametry wspólne dla klas adapterów 
-            	<classname>Zend_Db</classname>.
+                Poniższa lista opisuje parametry wspólne dla klas adapterów 
+                <classname>Zend_Db</classname>.
             </para>
 
             <itemizedlist>
@@ -340,7 +346,8 @@ $db = Zend_Db::factory($config->database);
                         <emphasis>driver_options</emphasis>:
                         ten parametr to tablica asocjacyjna zawierająca dodatkowe opcje
                         specyficzne dla każdego rozszerzenia bazy danych. Typowym przykładem
-                        użycia tego parametru jest zbiór atrybutów sterownika <acronym>PDO</acronym>.
+                        użycia tego parametru jest zbiór atrybutów sterownika
+                        <acronym>PDO</acronym>.
                     </para>
                 </listitem>
 
@@ -359,11 +366,12 @@ $db = Zend_Db::factory($config->database);
                 <title>Przekazanie do fabryki opcji zmiany wielkości znaków</title>
 
                 <para>
-                	Opcję tą można podać za pomocą stałej <constant>Zend_Db::CASE_FOLDING</constant>.
-                	Odpowiada ona atrybutowi <constant>ATTR_CASE</constant> w <acronym>PDO</acronym>
-                	oraz rozszerzeniu IBM DB2, który zmienia wielkość znaków w nazwach kolumn 
-                	zwracanych w rezultacie zapytania. Opcja przybiera wartości
-                	<constant>Zend_Db::CASE_NATURAL</constant> (bez zmiany - domyślnie),
+                    Opcję tą można podać za pomocą stałej
+                    <constant>Zend_Db::CASE_FOLDING</constant>.
+                    Odpowiada ona atrybutowi <constant>ATTR_CASE</constant> w <acronym>PDO</acronym>
+                    oraz rozszerzeniu IBM DB2, który zmienia wielkość znaków w nazwach kolumn 
+                    zwracanych w rezultacie zapytania. Opcja przybiera wartości
+                    <constant>Zend_Db::CASE_NATURAL</constant> (bez zmiany - domyślnie),
                     <constant>Zend_Db::CASE_UPPER</constant> (zmiana na wielkie znaki) oraz
                     <constant>Zend_Db::CASE_LOWER</constant> (zmiana na małe znaki).
                 </para>
@@ -386,19 +394,21 @@ $db = Zend_Db::factory('Db2', $params);
             </example>
 
             <example id="zend.db.adapter.connecting.parameters.example2">
-                <title>Przekazanie do fabryki opcji automatycznego umieszczania w cudzysłowie</title>
+                <title>Przekazanie do fabryki opcji automatycznego umieszczania
+                w cudzysłowie</title>
 
                 <para>
-                	Tą opcję można podać za pomocą stałej <constant>Zend_Db::AUTO_QUOTE_IDENTIFIERS</constant>.
-                	Jeśli jej wartość wynosi <constant>TRUE</constant> (domyślnie) to identyfikatory
-                	takie jak nazwy tabel, kolumn oraz aliasy w składni każdego	polecenia 
-                	<acronym>SQL</acronym> generowanego za pomocą danego adaptera będą 
-                	umieszczane w cudzysłowie. Takie podejście upraszcza używanie identyfikatorów
-                	zawierających słowa kluczowe <acronym>SQL</acronym> lub znaki specjalne. Jeśli
-                	wartość opcji wynosi <constant>FALSE</constant> to identyfikatory nie są
-                	umieszczane w cudzysłowie. Jeśli zachodzi potrzeba owinięcia identyfikatorów
-                	cudzysłowami należy to zrobić samodzielnie za pomocą metody
-                	<methodname>quoteIdentifier()</methodname>.
+                    Tą opcję można podać za pomocą stałej
+                    <constant>Zend_Db::AUTO_QUOTE_IDENTIFIERS</constant>.
+                    Jeśli jej wartość wynosi <constant>TRUE</constant> (domyślnie) to identyfikatory
+                    takie jak nazwy tabel, kolumn oraz aliasy w składni każdego    polecenia 
+                    <acronym>SQL</acronym> generowanego za pomocą danego adaptera będą 
+                    umieszczane w cudzysłowie. Takie podejście upraszcza używanie identyfikatorów
+                    zawierających słowa kluczowe <acronym>SQL</acronym> lub znaki specjalne. Jeśli
+                    wartość opcji wynosi <constant>FALSE</constant> to identyfikatory nie są
+                    umieszczane w cudzysłowie. Jeśli zachodzi potrzeba owinięcia identyfikatorów
+                    cudzysłowami należy to zrobić samodzielnie za pomocą metody
+                    <methodname>quoteIdentifier()</methodname>.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -466,43 +476,49 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
             <title>Zarządzanie leniwymi połączeniami</title>
 
             <para>
-            	Utworzenie instancji klasy adaptera nie powoduje natychmiastowego połączenia
-            	z serwerem bazy danych. Adapter zachowuje parametry połączenia ale łączy się
-            	na żądanie - w momencie pierwszego wywołania zapytania. Dzięki temu zainicjowanie
-            	adaptera jest szybkie i tanie. Można utworzyć adapter nawet jeśli nie jest
-            	się pewnym czy wykonanie jakiegokolwiek zapytania przy danym połączeniu będzie
-            	niezbędne.
+                Utworzenie instancji klasy adaptera nie powoduje natychmiastowego połączenia
+                z serwerem bazy danych. Adapter zachowuje parametry połączenia ale łączy się
+                na żądanie - w momencie pierwszego wywołania zapytania. Dzięki temu zainicjowanie
+                adaptera jest szybkie i tanie. Można utworzyć adapter nawet jeśli nie jest
+                się pewnym czy wykonanie jakiegokolwiek zapytania przy danym połączeniu będzie
+                niezbędne.
             </para>
 
             <para>
-            	Jeśli zajdzie potrzeba zmuszenia adaptera do połączenia z bazą danych, należy wówczas
-            	wywołać metodę <methodname>getConnection()</methodname>. Zwraca ona obiekt połączenia
-            	odpowiednio do rozszerzenia <acronym>PHP</acronym> używanego do połączenia. Jeśli
-            	używa się adaptera korzystającego z <acronym>PDO</acronym>, to metoda
-            	<methodname>getConnection()</methodname>, po zainicjowaniu połączenia z serwerem bazy 
-            	danych, zwróci obiekt <acronym>PDO</acronym>.
+                Jeśli zajdzie potrzeba zmuszenia adaptera do połączenia z bazą danych,
+                należy wówczas wywołać metodę <methodname>getConnection()</methodname>.
+                Zwraca ona obiekt połączenia odpowiednio do rozszerzenia
+                <acronym>PHP</acronym> używanego do połączenia. Jeśli
+                używa się adaptera korzystającego z <acronym>PDO</acronym>, to metoda
+                <methodname>getConnection()</methodname>, po zainicjowaniu połączenia
+                z serwerem bazy danych, zwróci obiekt <acronym>PDO</acronym>.
             </para>
 
             <para>
-            	Możliwość wymuszenia połączenia z bazą danych może być przydatna gdy chce się
-            	złapać wyjątki rzucane przez adapter powstałe w rezultacie podania złych danych
-            	uwierzytelniających lub innych błędów połączenia. Te wyjątki nie są rzucane dopóki
-            	nie jest ustanowiona próba połączenia, więc można uprościć kod aplikacji i obsłużyć
-            	je w jednym miejscu. W przeciwnym razie należałoby je przechwycać w momencie 
-            	wywołania pierwszego zapytania do bazy danych.
+                Możliwość wymuszenia połączenia z bazą danych może być przydatna gdy chce się
+                złapać wyjątki rzucane przez adapter powstałe w rezultacie podania złych danych
+                uwierzytelniających lub innych błędów połączenia. Te wyjątki nie są rzucane dopóki
+                nie jest ustanowiona próba połączenia, więc można uprościć kod aplikacji i obsłużyć
+                je w jednym miejscu. W przeciwnym razie należałoby je przechwycać w momencie 
+                wywołania pierwszego zapytania do bazy danych.
             </para>
 
             <para>
-            	Dodatkowo adapter może zostać poddany serializacji i przechowany np. w zmiennej sesyjnej.
-            	Może to być pomocne nie tylko dla adaptera ale również z punktu widzenia obiektów,
-            	które z niego korzystają, takich jak <classname>Zend_Db_Select</classname>. Domyślnie
-            	serializacja adapterów jest dozwolona ale jeśli jest taka potrzeba - można ją wyłączyć
-            	poprzez podanie opcji <constant>Zend_Db::ALLOW_SERIALIZATION</constant> z wartością 
-                <constant>FALSE</constant> (przykład niżej). Aby pozostać w zgodzie z zasadą leniwego
-                połączenia, adapter nie połączy się automatycznie po odserializowaniu. Należy zatem
-                wywołać metodę <methodname>getConnection()</methodname>. Można również zmusić adapter
-                aby po odserializowaniu łączył się z bazą danych automatycznie poprzez podanie opcji
-                <constant>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE</constant> z wartością <constant>TRUE</constant>.
+                Dodatkowo adapter może zostać poddany serializacji i przechowany
+                np. w zmiennej sesyjnej.
+                Może to być pomocne nie tylko dla adaptera ale również z punktu widzenia obiektów,
+                które z niego korzystają, takich jak <classname>Zend_Db_Select</classname>.
+                Domyślnie serializacja adapterów jest dozwolona ale jeśli jest taka
+                potrzeba - można ją wyłączyć poprzez podanie opcji
+                <constant>Zend_Db::ALLOW_SERIALIZATION</constant> z wartością 
+                <constant>FALSE</constant> (przykład niżej).
+                Aby pozostać w zgodzie z zasadą leniwego połączenia, adapter nie połączy się
+                automatycznie po odserializowaniu. Należy zatem
+                wywołać metodę <methodname>getConnection()</methodname>.
+                Można również zmusić adapter aby po odserializowaniu łączył się z bazą
+                danych automatycznie poprzez podanie opcji
+                <constant>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE</constant>
+                z wartością <constant>TRUE</constant>.
             </para>
 
             <example id="zend.db.adapter.connecting.getconnection.example">
@@ -513,7 +529,8 @@ try {
     $db = Zend_Db::factory('Pdo_Mysql', $parameters);
     $db->getConnection();
 } catch (Zend_Db_Adapter_Exception $e) {
-    // przyczyną problemów mogą być złe dane uwierzytelniające lub np. baza danych nie jest uruchomiona
+    // przyczyną problemów mogą być złe dane uwierzytelniające lub np. baza danych
+    // nie jest uruchomiona
 } catch (Zend_Exception $e) {
     // przyczyną może być np. problem z załadowaniem odpowiedniej klasy adaptera
 }
@@ -529,10 +546,10 @@ try {
         <title>Przykładowa baza danych</title>
 
         <para>
-        	W dokumentacji klas <classname>Zend_Db</classname> używany jest prosty zestaw tabel w
-        	celu zilustrowania użycia klas i metod. Te tabele mogą przechowywać dane związane z
-        	przechowywaniem błędów (bugs) powstałych podczas rozwijania projektu informatycznego. Baza 
-        	danych zawiera cztery tabele:
+            W dokumentacji klas <classname>Zend_Db</classname> używany jest prosty zestaw tabel w
+            celu zilustrowania użycia klas i metod. Te tabele mogą przechowywać dane związane z
+            przechowywaniem błędów (bugs) powstałych podczas rozwijania projektu informatycznego.
+            Baza danych zawiera cztery tabele:
         </para>
 
         <itemizedlist>
@@ -566,8 +583,9 @@ try {
         </itemizedlist>
 
         <para>
-        	Poniższy pseudokod definicji danych <acronym>SQL</acronym> opisuje tabele z tego przykładu.
-        	Te tabele są bardzo często używane w testach jednostkowych <classname>Zend_Db</classname>.
+            Poniższy pseudokod definicji danych <acronym>SQL</acronym> opisuje tabele z tego
+            przykładu. Te tabele są bardzo często używane w testach jednostkowych
+            <classname>Zend_Db</classname>.
         </para>
 
         <programlisting language="sql"><![CDATA[
@@ -597,13 +615,13 @@ CREATE TABLE bugs_products (
 ]]></programlisting>
 
         <para>
-        	Należy zwrócić uwagę, iż tabela 'bugs' zawiera wiele kluczy obcych
-        	odnoszących się do tabeli 'accounts'. Każdy z nich może prowadzić do
-        	innego wiersza tabeli 'accounts' w ramach jednego bugu.
+            Należy zwrócić uwagę, iż tabela 'bugs' zawiera wiele kluczy obcych
+            odnoszących się do tabeli 'accounts'. Każdy z nich może prowadzić do
+            innego wiersza tabeli 'accounts' w ramach jednego bugu.
         </para>
 
         <para>
-        	Poniższy diagram ilustruje fizyczny model danych przykładowej bazy danych
+            Poniższy diagram ilustruje fizyczny model danych przykładowej bazy danych
         </para>
 
         <para>
@@ -618,8 +636,8 @@ CREATE TABLE bugs_products (
         <title>Pobranie rezultatów zapytania</title>
 
         <para>
-        	Ta część opisuje metody klasy adaptera za pomocą których można wywołać
-        	zapytania <acronym>SELECT</acronym> oraz pobrać ich rezultaty.
+            Ta część opisuje metody klasy adaptera za pomocą których można wywołać
+            zapytania <acronym>SELECT</acronym> oraz pobrać ich rezultaty.
         </para>
 
         <sect3 id="zend.db.adapter.select.fetchall">
@@ -627,22 +645,22 @@ CREATE TABLE bugs_products (
             <title>Pobranie całego zbioru rezultatów</title>
 
             <para>
-            	Za pomocą metody <methodname>fetchAll()</methodname> można wywołać zapytanie 
-            	<acronym>SQL</acronym> <acronym>SELECT</acronym> oraz pobrać jego rezultaty
-            	w jednym kroku.
+                Za pomocą metody <methodname>fetchAll()</methodname> można wywołać zapytanie 
+                <acronym>SQL</acronym> <acronym>SELECT</acronym> oraz pobrać jego rezultaty
+                w jednym kroku.
             </para>
 
             <para>
-            	Pierwszym argumentem metody jest łańcuch znaków zawierający polecenie 
-            	<acronym>SELECT</acronym>. Alternatywnie, w pierwszym argumencie można umieścić
-            	obiekt klasy <link linkend="zend.db.select">Zend_Db_Select</link>. Adapter
-            	automatycznie dokonuje konwersji tego obiektu do łańcucha znaków zawierającego
-            	zapytanie <acronym>SELECT</acronym>.
+                Pierwszym argumentem metody jest łańcuch znaków zawierający polecenie 
+                <acronym>SELECT</acronym>. Alternatywnie, w pierwszym argumencie można umieścić
+                obiekt klasy <link linkend="zend.db.select">Zend_Db_Select</link>. Adapter
+                automatycznie dokonuje konwersji tego obiektu do łańcucha znaków zawierającego
+                zapytanie <acronym>SELECT</acronym>.
             </para>
 
             <para>
-            	Drugi argument metody <methodname>fetchAll()</methodname> to tablica wartości
-            	używanych do zastąpienia parametrów wiązanych w zapytaniu <acronym>SQL</acronym>.
+                Drugi argument metody <methodname>fetchAll()</methodname> to tablica wartości
+                używanych do zastąpienia parametrów wiązanych w zapytaniu <acronym>SQL</acronym>.
             </para>
 
             <example id="zend.db.adapter.select.fetchall.example">
@@ -661,41 +679,45 @@ $result = $db->fetchAll($sql, 2);
             <title>Zmiana trybu zwracania danych</title>
 
             <para>
-            	Domyślnie <methodname>fetchAll()</methodname> zwraca tablicę wierszy, z których
-            	każdy jest tablicą asocjacyjną. Kluczami tablicy asocjacyjnej są kolumny lub ich 
-            	aliasy podane w zapytaniu <acronym>SELECT</acronym>.
+                Domyślnie <methodname>fetchAll()</methodname> zwraca tablicę wierszy, z których
+                każdy jest tablicą asocjacyjną. Kluczami tablicy asocjacyjnej są kolumny lub ich 
+                aliasy podane w zapytaniu <acronym>SELECT</acronym>.
             </para>
 
             <para>
-            	Można ustawić inny tryb zwracania rezultatów poprzez metodę
-            	<methodname>setFetchMode()</methodname>. Dopuszczalne tryby są identyfikowane
-            	przez stałe:
+                Można ustawić inny tryb zwracania rezultatów poprzez metodę
+                <methodname>setFetchMode()</methodname>. Dopuszczalne tryby są identyfikowane
+                przez stałe:
             </para>
 
             <itemizedlist>
                 <listitem>
                     <para>
                         <emphasis>Zend_Db::FETCH_ASSOC</emphasis>:
-                        zwraca dane w postaci tablicy tablic asocjacyjnych. Klucze tablicy asocjacyjnej
+                        zwraca dane w postaci tablicy tablic asocjacyjnych.
+                        Klucze tablicy asocjacyjnej
                         to nazwy kolumn. To jest domyślny tryb zwrotu danych w klasach
                          <classname>Zend_Db_Adapter</classname>.
                     </para>
                     <para>
-                    	Należy zwrócić uwagę na fakt iż jeśli lista kolumn do zwrotu zawiera więcej niż
-                    	jedną kolumnę o określonej nazwie, np. jeśli pochodzą one z różnych tabel 
-                    	połączonych klauzulą <acronym>JOIN</acronym>, to w asocjacyjnej tablicy wynikowej 
-                    	może być tylko jeden klucz o podanej nazwie. Jeśli używany jest tryb
-                    	<acronym>FETCH_ASSOC</acronym>, należy upewnić się, że kolumny w zapytaniu
-                    	<acronym>SELECT</acronym> posiadają aliasy, dzięki czemu rezultat zapytania
-                    	będzie zawierał unikatowe nazwy kolumn.
+                        Należy zwrócić uwagę na fakt iż jeśli lista kolumn do zwrotu
+                        zawiera więcej niż     jedną kolumnę o określonej nazwie,
+                        np. jeśli pochodzą one z różnych tabel 
+                        połączonych klauzulą <acronym>JOIN</acronym>, to w asocjacyjnej
+                        tablicy wynikowej może być tylko jeden klucz o podanej nazwie.
+                        Jeśli używany jest tryb <acronym>FETCH_ASSOC</acronym>,
+                        należy upewnić się, że kolumny w zapytaniu
+                        <acronym>SELECT</acronym> posiadają aliasy, dzięki czemu rezultat zapytania
+                        będzie zawierał unikatowe nazwy kolumn.
                     </para>
                     <para>
-                    	Domyślnie, łańcuchy znaków z nazwami kolumn są zwracane w taki sposób w jaki
-                    	zostały otrzymane przez sterownik bazy danych. Przeważnie jest odpowiada to
-                    	stylowi nazw kolumn używanego rodzaju bazy danych. Dzięki opcji
-                    	<constant>Zend_Db::CASE_FOLDING</constant> można określić wielkość zwracanych
-                    	znaków. Opcji tej można użyć podczas inicjowania adaptera. Przykład:
-                    	<xref linkend="zend.db.adapter.connecting.parameters.example1" />.
+                        Domyślnie, łańcuchy znaków z nazwami kolumn są zwracane w taki sposób w jaki
+                        zostały otrzymane przez sterownik bazy danych. Przeważnie jest odpowiada to
+                        stylowi nazw kolumn używanego rodzaju bazy danych. Dzięki opcji
+                        <constant>Zend_Db::CASE_FOLDING</constant> można określić wielkość
+                        zwracanych znaków.
+                        Opcji tej można użyć podczas inicjowania adaptera.
+                        Przykład: <xref linkend="zend.db.adapter.connecting.parameters.example1" />.
                     </para>
                 </listitem>
                 <listitem>
@@ -711,24 +733,26 @@ $result = $db->fetchAll($sql, 2);
                         <emphasis>Zend_Db::FETCH_BOTH</emphasis>:
                         zwraca dane jako tablicę tablic. Kluczami tablicy są zarówno łańcuchy znaków
                         (tak jak w trybie FETCH_ASSOC) oraz liczby całkowite (tak jak w trybie
-                        FETCH_NUM). Należy zwrócić uwagę na fakt iż liczba elementów tablicy wynikowej
-                        będzie dwukrotnie większa niż w przypadku użycia trybów  FETCH_ASSOC
-                        lub FETCH_NUM.
+                        FETCH_NUM). Należy zwrócić uwagę na fakt iż liczba elementów
+                        tablicy wynikowej będzie dwukrotnie większa niż w przypadku
+                        użycia trybów  FETCH_ASSOC lub FETCH_NUM.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <emphasis>Zend_Db::FETCH_COLUMN</emphasis>:
-                        zwraca dane jako tablicę wartości. Wartości odpowiadają rezultatom zapytania
-                        przypisanym jednej kolumnie zbioru wynikowego. Domyślnie, jest to pierwsza kolumna,
+                        zwraca dane jako tablicę wartości. Wartości odpowiadają rezultatom
+                        zapytania przypisanym jednej kolumnie zbioru wynikowego.
+                        Domyślnie, jest to pierwsza kolumna,
                         indeksy rozpoczynają się od 0.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <emphasis>Zend_Db::FETCH_OBJ</emphasis>:
-                        zwraca dane jako tablicę obiektów. Domyślną klasą jest wbudowana w <acronym>PHP</acronym>
-                        klasa stdClass. Kolumny rezultatu zapytania stają się właściwościami powstałego obiektu.
+                        zwraca dane jako tablicę obiektów. Domyślną klasą jest wbudowana
+                        w <acronym>PHP</acronym> klasa stdClass.
+                        Kolumny rezultatu zapytania stają się właściwościami powstałego obiektu.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -752,8 +776,9 @@ echo $result[0]->bug_description;
             <title>Pobranie rezultatów jako tablicy asocjacyjnej</title>
 
             <para>
-            	Metoda <methodname>fetchAssoc()</methodname> zwraca dane w formie tablicy tablic
-            	asocjacyjnych, niezależnie od wartości ustalonej jako tryb zwracania rezultatów zapytania.
+                Metoda <methodname>fetchAssoc()</methodname> zwraca dane w formie tablicy tablic
+                asocjacyjnych, niezależnie od wartości ustalonej jako tryb
+                zwracania rezultatów zapytania.
             </para>
 
             <example id="zend.db.adapter.select.fetchassoc.example">
@@ -763,7 +788,8 @@ $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchAssoc('SELECT * FROM bugs WHERE bug_id = ?', 2);
 
-// $result staje się tablicą tablic asocjacyjnych, mimo ustawionego trybu zwracania rezultatów zapytania
+// $result staje się tablicą tablic asocjacyjnych, mimo ustawionego
+// trybu zwracania rezultatów zapytania
 echo $result[0]['bug_description'];
 ]]></programlisting>
             </example>
@@ -775,12 +801,12 @@ echo $result[0]['bug_description'];
             <title>Zwrócenie pojedynczej kolumny ze zbioru wynikowego</title>
 
             <para>
-            	Metoda <methodname>fetchCol()</methodname> zwraca dane w postaci tablicy wartości
-            	niezależnie od wartości ustalonej jako tryb zwrcania rezultatów zapytania. Ta
-            	metoda zwraca pierwszą kolumnę ze zbioru powstałego na skutek wywołania zapytania.
-            	Inne kolumny znajdujące się w tym zbiorze są ignorowane. Aby zwrócić inną niż 
-            	pierwsza kolumnę należy skorzystać z przykładu
-            	<xref linkend="zend.db.statement.fetching.fetchcolumn" />.
+                Metoda <methodname>fetchCol()</methodname> zwraca dane w postaci tablicy wartości
+                niezależnie od wartości ustalonej jako tryb zwrcania rezultatów zapytania. Ta
+                metoda zwraca pierwszą kolumnę ze zbioru powstałego na skutek wywołania zapytania.
+                Inne kolumny znajdujące się w tym zbiorze są ignorowane. Aby zwrócić inną niż 
+                pierwsza kolumnę należy skorzystać z przykładu
+                <xref linkend="zend.db.statement.fetching.fetchcolumn" />.
             </para>
 
             <example id="zend.db.adapter.select.fetchcol.example">
@@ -803,17 +829,17 @@ echo $result[0];
             <title>Zwrócenie ze zbioru wynikowego par klucz-wartość</title>
 
             <para>
-            	Metoda <methodname>fetchPairs()</methodname> zwraca dane w postaci tablicy
-            	par klucz-wartość. Zwracana jest to tablica asocjacyjna z pojedynczą wartością
-            	w każdym polu. Wartości z pierwszej kolumny zapytania <acronym>SELECT</acronym>
-            	stają się kluczami tablicy wynikowej zaś wartości drugiej zostają umieszczone
-            	jako wartości tablicy. Pozostałe kolumny zwracane przez zapytanie są ignorowane.
+                Metoda <methodname>fetchPairs()</methodname> zwraca dane w postaci tablicy
+                par klucz-wartość. Zwracana jest to tablica asocjacyjna z pojedynczą wartością
+                w każdym polu. Wartości z pierwszej kolumny zapytania <acronym>SELECT</acronym>
+                stają się kluczami tablicy wynikowej zaś wartości drugiej zostają umieszczone
+                jako wartości tablicy. Pozostałe kolumny zwracane przez zapytanie są ignorowane.
             </para>
 
             <para>
-            	Należy konstruować zapytanie <acronym>SELECT</acronym> w taki sposób aby pierwsza
-            	kolumna posiadała unikalne wartości. W przeciwnym wypadku wartości tablicy asocjacyjnej
-            	zostaną nadpisane.
+                Należy konstruować zapytanie <acronym>SELECT</acronym> w taki sposób aby pierwsza
+                kolumna posiadała unikalne wartości. W przeciwnym wypadku wartości
+                tablicy asocjacyjnej zostaną nadpisane.
             </para>
 
             <example id="zend.db.adapter.select.fetchpairs.example">
@@ -833,9 +859,9 @@ echo $result[2];
             <title>Zwrócenie pojedynczego wiersza ze zbioru wynikowego</title>
 
             <para>
-            	Metoda <methodname>fetchRow()</methodname> pobiera dane używając bieżącego 
-            	trybu zwracania rezultatów ale zwraca jedynie pierwszy wiersz ze zbioru
-            	wynikowego.
+                Metoda <methodname>fetchRow()</methodname> pobiera dane używając bieżącego 
+                trybu zwracania rezultatów ale zwraca jedynie pierwszy wiersz ze zbioru
+                wynikowego.
             </para>
 
             <example id="zend.db.adapter.select.fetchrow.example">
@@ -856,11 +882,11 @@ echo $result->bug_description;
             <title>Zwrócenie pojedynczej wartości ze zbioru wynikowego</title>
 
             <para>
-            	Metoda <methodname>fetchOne()</methodname> można opisać jako kombinacja 
-            	<methodname>fetchRow()</methodname> oraz <methodname>fetchCol()</methodname>
-            	bo zwraca dane pochodzące z pierwszego wiersza zbioru wynikowego ograniczając
-            	kolumny do pierwszej w wierszu. Ostatecznie zostaje zwrócona pojedyncza
-            	wartość skalarna a nie tablica czy obiekt
+                Metoda <methodname>fetchOne()</methodname> można opisać jako kombinacja 
+                <methodname>fetchRow()</methodname> oraz <methodname>fetchCol()</methodname>
+                bo zwraca dane pochodzące z pierwszego wiersza zbioru wynikowego ograniczając
+                kolumny do pierwszej w wierszu. Ostatecznie zostaje zwrócona pojedyncza
+                wartość skalarna a nie tablica czy obiekt
             </para>
 
             <example id="zend.db.adapter.select.fetchone.example">
@@ -881,8 +907,8 @@ echo $result;
         <title>Zapisywanie zmian do bazy danych</title>
 
         <para>
-        	Adaptera klasy można użyć również do zapisania nowych, bądź do zmiany
-        	istniejących danych w bazie. Ta część opisuje metody włąściwe dla tych operacji.
+            Adaptera klasy można użyć również do zapisania nowych, bądź do zmiany
+            istniejących danych w bazie. Ta część opisuje metody włąściwe dla tych operacji.
         </para>
 
         <sect3 id="zend.db.adapter.write.insert">
@@ -890,10 +916,10 @@ echo $result;
             <title>Dodawanie danych</title>
 
             <para>
-            	Za pomocą metody <methodname>insert()</methodname> można dodać nowe wiersze
-            	do tabeli bazy danych. Jej pierwszym argumentem jest łańcuch znaków oznaczający
-            	nazwę tabeli. Drugim - tablica asocjacyjna z odwzorowaniem nazw kolumn i wartości
-            	jakie mają zostać w nich zapisane.
+                Za pomocą metody <methodname>insert()</methodname> można dodać nowe wiersze
+                do tabeli bazy danych. Jej pierwszym argumentem jest łańcuch znaków oznaczający
+                nazwę tabeli. Drugim - tablica asocjacyjna z odwzorowaniem nazw kolumn i wartości
+                jakie mają zostać w nich zapisane.
             </para>
 
             <example id="zend.db.adapter.write.insert.example">
@@ -910,26 +936,33 @@ $db->insert('bugs', $data);
             </example>
 
             <para>
-            	Kolumny, które nie zostały podane w tablicy z danymi nie będą umieszczone w zapytaniu.
-            	na zasadzie analogicznej do użycia polecenia <acronym>SQL</acronym> <acronym>INSERT</acronym>:
-            	Jeśli kolumna ma podaną wartość domyślną (<acronym>DEFAULT</acronym>) to ta wartość 
-            	zostanie zapisana w nowym wierszu. W przeciwnym przypadku kolumna nie będzie miała żadnej 
-            	wartości (<constant>NULL</constant>).
+                Kolumny, które nie zostały podane w tablicy z danymi nie będą umieszczone
+                w zapytaniu na zasadzie analogicznej do użycia polecenia
+                <acronym>SQL</acronym> <acronym>INSERT</acronym>:
+                Jeśli kolumna ma podaną wartość domyślną (<acronym>DEFAULT</acronym>)
+                to ta wartość zostanie zapisana w nowym wierszu.
+                W przeciwnym przypadku kolumna nie będzie miała żadnej 
+                wartości (<constant>NULL</constant>).
             </para>
 
             <para>
-            	Domyślnym sposobem zapisu danych jest użycie parametrów wiązanych. Dzięki temu ryzyko
-            	wystąpienia niektórych form zagrożenia bezpieczeństwa aplikacji jest ograniczone. W tablicy
-            	z danymi nie trzeba używać unikania lub umieszczania wartości w cudzysłowie.
+                Domyślnym sposobem zapisu danych jest użycie parametrów wiązanych.
+                Dzięki temu ryzyko wystąpienia niektórych form zagrożenia
+                bezpieczeństwa aplikacji jest ograniczone.
+                W tablicy z danymi nie trzeba używać unikania
+                lub umieszczania wartości w cudzysłowiu.
             </para>
 
             <para>
-            	Może wystąpić potrzeba potraktowania wartości w tablicy danych jako wyrażeń
-            	<acronym>SQL</acronym>. W takim wypadku nie powinno się stosować umieszczania w cudzysłowie.
-            	Domyślnie wszystkie podane wartości string są traktowane jak literały. Aby upewnić się, że
-            	wartość jest wyrażeniem <acronym>SQL</acronym> i nie powinna zostać umieszczona w 
-            	cudzysłowie, należy ją podać jako obiekt klasy <classname>Zend_Db_Expr</classname> zamiast
-            	prostego łańcucha znaków.
+                Może wystąpić potrzeba potraktowania wartości w tablicy danych jako wyrażeń
+                <acronym>SQL</acronym>. W takim wypadku nie powinno się stosować
+                umieszczania w cudzysłowiu.
+                Domyślnie wszystkie podane wartości string są traktowane jak literały.
+                Aby upewnić się, że
+                wartość jest wyrażeniem <acronym>SQL</acronym> i nie powinna zostać umieszczona w 
+                cudzysłowie, należy ją podać jako obiekt klasy
+                <classname>Zend_Db_Expr</classname> zamiast
+                prostego łańcucha znaków.
             </para>
 
             <example id="zend.db.adapter.write.insert.example2">
@@ -952,19 +985,21 @@ $db->insert('bugs', $data);
             <title>Pobranie wygenerowanej wartości</title>
 
             <para>
-            	Niektóre systemy zarządzania bazą danych wspierają klucze pierwotne o automatycznie 
-            	zwiększanych wartościach. Tabela zdefiniowana w ten sposób generuje wartość klucza
-            	pierwotnego automatycznie przy każdym poleceniu <acronym>INSERT</acronym>. Wartością
-            	zwracaną przez metodę <methodname>insert()</methodname> <emphasis>nie</emphasis> jest
-            	ostatni zapisany identyfikator, ponieważ tabela mogła nie posiadać automatycznie 
-            	inkrementowanej kolumny. Zamiast tego wartością zwrotną jest ilość zapisanych wierszy
-            	(przeważnie 1). 
+                Niektóre systemy zarządzania bazą danych wspierają klucze pierwotne o automatycznie 
+                zwiększanych wartościach. Tabela zdefiniowana w ten sposób generuje wartość klucza
+                pierwotnego automatycznie przy każdym poleceniu <acronym>INSERT</acronym>.
+                Wartością zwracaną przez metodę
+                <methodname>insert()</methodname> <emphasis>nie</emphasis> jest
+                ostatni zapisany identyfikator, ponieważ tabela mogła nie posiadać automatycznie 
+                inkrementowanej kolumny.
+                Zamiast tego wartością zwrotną jest ilość zapisanych wierszy (przeważnie 1). 
             </para>
 
             <para>
-            	Jeśli tabela jest zdefiniowana za pomocą automatycznego klucza pierwotnego to można
-            	użyć metody <methodname>lastInsertId()</methodname>. Po udanym dodaniu wiersza metoda
-            	ta zwraca ostatnią wartość klucza wygenerowaną w ramach bieżącego połączenia.
+                Jeśli tabela jest zdefiniowana za pomocą automatycznego klucza pierwotnego to można
+                użyć metody <methodname>lastInsertId()</methodname>.
+                Po udanym dodaniu wiersza metoda
+                ta zwraca ostatnią wartość klucza wygenerowaną w ramach bieżącego połączenia.
             </para>
 
             <example id="zend.db.adapter.write.lastinsertid.example-1">
@@ -978,15 +1013,15 @@ $id = $db->lastInsertId();
             </example>
 
             <para>
-            	Niektóre systemy zarządzania bazą danych wspierają obiekt sekwencji, który służy
-            	do generowania unikalnych wartości, które mogą posłużyć jako klucz pierwotny.
-            	Aby obsługiwać również sekwencje metoda <methodname>lastInsertId()</methodname>
-            	akceptuje dodatkowe dwa argumenty. Pierwszym z nich jest nazwa tabeli zaś 
-            	drugim - nazwa kolumny. Założona jest konwencja według której sekwencja ma nazwę
-            	składającą się z nazwy tabeli oraz kolumny do której generuje wartości z dodatkowym
-            	sufiksem "_seq". Podstawą tego założenia są domyślne ustawienia PostgreSQL. Przykładowo
-            	tabela "bugs" z kluczem pierwotnym w kolumnie "bug_id" będzie używała sekwencji o nazwie
-            	"bugs_bug_id_seq".
+                Niektóre systemy zarządzania bazą danych wspierają obiekt sekwencji, który służy
+                do generowania unikalnych wartości, które mogą posłużyć jako klucz pierwotny.
+                Aby obsługiwać również sekwencje metoda <methodname>lastInsertId()</methodname>
+                akceptuje dodatkowe dwa argumenty. Pierwszym z nich jest nazwa tabeli zaś 
+                drugim - nazwa kolumny. Założona jest konwencja według której sekwencja ma nazwę
+                składającą się z nazwy tabeli oraz kolumny do której generuje wartości z dodatkowym
+                sufiksem "_seq". Podstawą tego założenia są domyślne ustawienia PostgreSQL.
+                Przykładowo tabela "bugs" z kluczem pierwotnym w kolumnie "bug_id"
+                będzie używała sekwencji o nazwie "bugs_bug_id_seq".
             </para>
 
             <example id="zend.db.adapter.write.lastinsertid.example-2">
@@ -1003,9 +1038,9 @@ $id = $db->lastInsertId('bugs');
             </example>
 
             <para>
-            	Jeśli nazwa obiektu sekwencji nie podąża za tą konwencją można użyć metody
-            	<methodname>lastSequenceId()</methodname>, która przyjmuje pojedynczy łańcuch
-            	znaków - nazwę sekwencji - jako argument.
+                Jeśli nazwa obiektu sekwencji nie podąża za tą konwencją można użyć metody
+                <methodname>lastSequenceId()</methodname>, która przyjmuje pojedynczy łańcuch
+                znaków - nazwę sekwencji - jako argument.
             </para>
 
             <example id="zend.db.adapter.write.lastinsertid.example-3">
@@ -1019,46 +1054,51 @@ $id = $db->lastSequenceId('bugs_id_gen');
             </example>
 
             <para>
-            	Dla systemów zarządzania bazą danych które nie wspierają sekwencji, włączając MySQL,
-            	Microsoft <acronym>SQL</acronym> Server, oraz SQLite dodatkowe argumenty podane do
-            	metody <methodname>lastInsertId()</methodname> są ignorowane a zwrócona jest
-            	ostatnia wartość wygenerowana dla dowolnej tabeli poprzez polecenie <acronym>INSERT</acronym>
-            	podczas bieżącego połączenia. Dla tych <acronym>RDBMS</acronym> metoda 
-            	<methodname>lastSequenceId()</methodname> zawsze zwraca <constant>NULL</constant>.
+                Dla systemów zarządzania bazą danych które nie wspierają sekwencji, włączając MySQL,
+                Microsoft <acronym>SQL</acronym> Server, oraz SQLite dodatkowe argumenty podane do
+                metody <methodname>lastInsertId()</methodname> są ignorowane a zwrócona jest
+                ostatnia wartość wygenerowana dla dowolnej tabeli poprzez polecenie
+                <acronym>INSERT</acronym>
+                podczas bieżącego połączenia. Dla tych <acronym>RDBMS</acronym> metoda 
+                <methodname>lastSequenceId()</methodname> zawsze zwraca <constant>NULL</constant>.
             </para>
 
             <note>
                 <title>Dlaczego nie należy używać "SELECT MAX(id) FROM table"?</title>
                 <para>
-                	Powyższe zapytanie często zwraca ostatni klucz pierwotny, jaki został zapisany
-                	w wierszu tabeli. Ten sposób nie jest jednak bezpieczny w przypadku, gdy
-                	wiele klientów zapisuje rekordy do bazy danych. Jest możliwe, że w momencie 
-                	pomiędzy zapisaniem jednego rekordu a zapytaniem o 
-                	<methodname>MAX(id)</methodname>, do tabeli zostanie zapisany kolejny rekord, 
-                	wprowadzony przez innego użytkownika. Przez to zwrócona wartość nie będzie 
-                	identyfikowała pierwszego wprowadzonego wiersza tylko drugi - wprowadzony przez
-                	inne połączenie. Nie ma pewnego sposobu na wykrycie, że do takiego zdarzenia
-                	doszło.
+                    Powyższe zapytanie często zwraca ostatni klucz pierwotny, jaki został zapisany
+                    w wierszu tabeli. Ten sposób nie jest jednak bezpieczny w przypadku, gdy
+                    wiele klientów zapisuje rekordy do bazy danych. Jest możliwe, że w momencie 
+                    pomiędzy zapisaniem jednego rekordu a zapytaniem o 
+                    <methodname>MAX(id)</methodname>, do tabeli zostanie zapisany kolejny rekord, 
+                    wprowadzony przez innego użytkownika. Przez to zwrócona wartość nie będzie 
+                    identyfikowała pierwszego wprowadzonego wiersza tylko drugi - wprowadzony przez
+                    inne połączenie. Nie ma pewnego sposobu na wykrycie, że do takiego zdarzenia
+                    doszło.
                 </para>
                 <para>
-                	Zastosowanie mocnej izolacji transakcji, tak jak przy trybie "repeatable read" może
-                	pomóc w ograniczeniu ryzyka wystąpienia takiej sytuacji ale niektóre systemy 
-                	zarządzania bazą danych nie wspierają izolacji transakcji w wystarczającym stopniu lub
-                	aplikacja może intencjonalnie korzystać jedynie z niskiego trybu izolacji transakcji.
-                </para>
-
-                <para>
-                	Dodatkowo, używanie wyrażeń takich jak "MAX(id)+1" do generowania nowych wartości
-                	klucza głównego nie jest bezpieczne bo dwa połączenia mogą wykonać to zapytanie 
-                	praktycznie jednocześnie i w rezultacie próbować użyć jednakowej wartości 
-                	dla kolejnego polecenia <acronym>INSERT</acronym>.
+                    Zastosowanie mocnej izolacji transakcji, tak jak przy trybie
+                    "repeatable read" może pomóc w ograniczeniu ryzyka wystąpienia takiej
+                    sytuacji ale niektóre systemy zarządzania bazą danych nie wspierają
+                    izolacji transakcji w wystarczającym stopniu lub aplikacja może
+                    intencjonalnie korzystać jedynie z niskiego trybu izolacji transakcji.
                 </para>
 
                 <para>
-                	Wszystkie systemy zarządzania bazą danych udostępniają mechanizmy służące generowaniu
-                	unikalnych wartości oraz zwracaniu ostatniej z nich. Mechanizmy te intencjonalnie
-                	działają poza zasięgiem izolacji transakcji więc nie jest możliwe aby wartość wygenerowana
-                	dla jednego klienta pojawiła się jako ostatnia wygenerowana dla innego połączenia.
+                    Dodatkowo, używanie wyrażeń takich jak "MAX(id)+1" do generowania
+                    nowych wartości klucza głównego nie jest bezpieczne bo
+                    dwa połączenia mogą wykonać to zapytanie 
+                    praktycznie jednocześnie i w rezultacie próbować użyć jednakowej wartości 
+                    dla kolejnego polecenia <acronym>INSERT</acronym>.
+                </para>
+
+                <para>
+                    Wszystkie systemy zarządzania bazą danych udostępniają
+                    mechanizmy służące generowaniu
+                    unikalnych wartości oraz zwracaniu ostatniej z nich.
+                    Mechanizmy te intencjonalnie działają poza zasięgiem izolacji
+                    transakcji więc nie jest możliwe aby wartość wygenerowana dla jednego
+                    klienta pojawiła się jako ostatnia wygenerowana dla innego połączenia.
                 </para>
             </note>
 
@@ -1068,29 +1108,29 @@ $id = $db->lastSequenceId('bugs_id_gen');
             <title>Aktualizacja danych</title>
 
             <para>
-            	Aktualizacji wierszy tabeli w bazie danych można dokonać poprzez metodę adaptera
-            	<methodname>update()</methodname> . Metoda przyjmuje trzy argumenty: pierwszym 
-            	jest nazwa tabeli; drugim - tablica asocjacyjna mapująca kolumny, które mają ulec
-            	zmianie oraz wartości jakie kolumny przybiorą; trzecim - warunek wyznaczający wiersze
-            	do zmiany.
+                Aktualizacji wierszy tabeli w bazie danych można dokonać poprzez metodę adaptera
+                <methodname>update()</methodname> . Metoda przyjmuje trzy argumenty: pierwszym 
+                jest nazwa tabeli; drugim - tablica asocjacyjna mapująca kolumny, które mają ulec
+                zmianie oraz wartości jakie kolumny przybiorą; trzecim - warunek
+                wyznaczający wiersze do zmiany.
             </para>
 
             <para>
-            	Wartości w tablicy z danymi są traktowane jak literały znakowe. Należy zapoznać
-            	się z akapitem <xref linkend="zend.db.adapter.write.insert" /> aby uzyskać więcej
-            	informacji na temat użyci w niej wyrażeń <acronym>SQL</acronym>. 
+                Wartości w tablicy z danymi są traktowane jak literały znakowe. Należy zapoznać
+                się z akapitem <xref linkend="zend.db.adapter.write.insert" /> aby uzyskać więcej
+                informacji na temat użyci w niej wyrażeń <acronym>SQL</acronym>. 
             </para>
 
             <para>
-            	Trzecim argumentem metody jest string zawierający wyrażenie <acronym>SQL</acronym>
-            	będące kryterium wyznaczającym wiersze do zmiany. Wartości i identyfikatory w tym
-            	argumencie nie są umieszczane w cudzysłowie ani unikane. Należy, więc, zadbać o to
-            	samemu. Należy zapoznać się z akapitem <xref linkend="zend.db.adapter.quoting" />
-            	aby zasięgnąć dodatkowych informacji.
+                Trzecim argumentem metody jest string zawierający wyrażenie <acronym>SQL</acronym>
+                będące kryterium wyznaczającym wiersze do zmiany. Wartości i identyfikatory w tym
+                argumencie nie są umieszczane w cudzysłowie ani unikane. Należy, więc, zadbać o to
+                samemu. Należy zapoznać się z akapitem <xref linkend="zend.db.adapter.quoting" />
+                aby zasięgnąć dodatkowych informacji.
             </para>
 
             <para>
-            	Wartością zwracaną jest ilość wierszy zmienionych przez operację aktualizacji.
+                Wartością zwracaną jest ilość wierszy zmienionych przez operację aktualizacji.
             </para>
 
             <example id="zend.db.adapter.write.update.example">
@@ -1106,21 +1146,22 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
             </example>
 
             <para>
-            	Jeśli trzeci argument nie zostanie podany to wszystkie wiersze w tabeli
-            	zostaną zaktualizowane zgodnie z kolumnami i wartościami podanymi w 
-            	drugim argumencie.
+                Jeśli trzeci argument nie zostanie podany to wszystkie wiersze w tabeli
+                zostaną zaktualizowane zgodnie z kolumnami i wartościami podanymi w 
+                drugim argumencie.
             </para>
 
             <para>
-            	Jeśli trzeci argument zostanie podany jako tablica łańcuchów znakowych to
-            	w zapytaniu łańcuchy zostaną połączone za pomocą operatorów 
-            	<constant>AND</constant>.
+                Jeśli trzeci argument zostanie podany jako tablica łańcuchów znakowych to
+                w zapytaniu łańcuchy zostaną połączone za pomocą operatorów 
+                <constant>AND</constant>.
             </para>
 
             <para>
-            	Przy podaniu trzeciego argumentu jako tablicy tablic, ich wartości zostaną automatycznie
-            	otoczone cudzysłowami i umieszczone w kluczach tych tablic. Po czym zostaną
-            	połączone za pomocą operatorów <constant>AND</constant>.
+                Przy podaniu trzeciego argumentu jako tablicy tablic, ich wartości
+                zostaną automatycznie
+                otoczone cudzysłowami i umieszczone w kluczach tych tablic. Po czym zostaną
+                połączone za pomocą operatorów <constant>AND</constant>.
             </para>
 
             <example id="zend.db.adapter.write.update.example-array">
@@ -1165,22 +1206,22 @@ $n = $db->update('bugs', $data, $where);
         <sect3 id="zend.db.adapter.write.delete">
             <title>Usuwanie danych</title>
             <para>
-            	Usuwania danych można dokonać używając metody <methodname>delete()</methodname>.
-            	Przyjmuje ona dwa argumenty: pierwszym z nich jest łańcuch znaków z nazwą tabeli; 
-            	Drugim - warunek określający wiersze do usunięcia.
+                Usuwania danych można dokonać używając metody <methodname>delete()</methodname>.
+                Przyjmuje ona dwa argumenty: pierwszym z nich jest łańcuch znaków z nazwą tabeli; 
+                Drugim - warunek określający wiersze do usunięcia.
             </para>
 
             <para>
-            	Drugi argument to string zawierający wyrażenie <acronym>SQL</acronym> użyte jako
-            	kryterium wyznaczania usuwanych wierszy. Wartości i identyfikatory nie są
-            	unikane ani umieszczane w cudzysłowie - należy zatroszczyć się o to samemu. Aby
-            	dowiedzieć się więcej na ten temat
-            	można skorzystać z akapitu <xref linkend="zend.db.adapter.quoting" />.
+                Drugi argument to string zawierający wyrażenie <acronym>SQL</acronym> użyte jako
+                kryterium wyznaczania usuwanych wierszy. Wartości i identyfikatory nie są
+                unikane ani umieszczane w cudzysłowie - należy zatroszczyć się o to samemu. Aby
+                dowiedzieć się więcej na ten temat
+                można skorzystać z akapitu <xref linkend="zend.db.adapter.quoting" />.
             </para>
 
             <para>
-            	Wartość zwrotna to ilość wierszy, jakie uległy zmianie w wyniku zadziałania
-            	operacji usuwania.
+                Wartość zwrotna to ilość wierszy, jakie uległy zmianie w wyniku zadziałania
+                operacji usuwania.
             </para>
 
             <example id="zend.db.adapter.write.delete.example">
@@ -1191,20 +1232,20 @@ $n = $db->delete('bugs', 'bug_id = 3');
             </example>
 
             <para>
-            	Jeśli drugi argument nie zostanie podany to wszystkie wiersze z tabeli
-            	ulegną usunięciu.
+                Jeśli drugi argument nie zostanie podany to wszystkie wiersze z tabeli
+                ulegną usunięciu.
             </para>
 
             <para>
-            	Jeśli drugi argument zostanie podany jako tablica łańcuchów znaków to
-            	te łańcuchy ulegną konkatenacji jako wyrażenia logiczne połączone
-            	operatorem <constant>AND</constant>.
+                Jeśli drugi argument zostanie podany jako tablica łańcuchów znaków to
+                te łańcuchy ulegną konkatenacji jako wyrażenia logiczne połączone
+                operatorem <constant>AND</constant>.
             </para>
 
             <para>
-            	Jeśli trzeci argument będzie tablicą tablic to jej wartości zostaną
-            	automatycznie otoczone cudzysłowami i umieszczona w kluczach tablic. Potem
-            	zostaną połączone razem za pomocą operatora <constant>AND</constant>.
+                Jeśli trzeci argument będzie tablicą tablic to jej wartości zostaną
+                automatycznie otoczone cudzysłowami i umieszczona w kluczach tablic. Potem
+                zostaną połączone razem za pomocą operatora <constant>AND</constant>.
             </para>
 
         </sect3>
@@ -1216,12 +1257,12 @@ $n = $db->delete('bugs', 'bug_id = 3');
         <title>Umieszczanie wartości i identyfikatorów w cudzysłowie</title>
 
         <para>
-        	Podczas tworzenia zapytań <acronym>SQL</acronym> często dochodzi do sytuacji, w której
-        	niezbędne jest umieszczenie wartości zmiennych <acronym>PHP</acronym> w wyrażeniach
-        	<acronym>SQL</acronym>. Stanowi to zagrożenie, ponieważ jeśli wartość
-        	łańcuchowej zmiennej <acronym>PHP</acronym> zawiera określone znaki, takie jak symbol
-        	cudzysłowu, to mogą one spowodować błąd w poleceniu <acronym>SQL</acronym>. Poniżej
-        	znajduje się przykład zapytania zawierającego niespójną liczbę symboli cudzysłowu:
+            Podczas tworzenia zapytań <acronym>SQL</acronym> często dochodzi do sytuacji, w której
+            niezbędne jest umieszczenie wartości zmiennych <acronym>PHP</acronym> w wyrażeniach
+            <acronym>SQL</acronym>. Stanowi to zagrożenie, ponieważ jeśli wartość
+            łańcuchowej zmiennej <acronym>PHP</acronym> zawiera określone znaki, takie jak symbol
+            cudzysłowu, to mogą one spowodować błąd w poleceniu <acronym>SQL</acronym>. Poniżej
+            znajduje się przykład zapytania zawierającego niespójną liczbę symboli cudzysłowu:
             <programlisting language="php"><![CDATA[
 $name = "O'Reilly";
 $sql = "SELECT * FROM bugs WHERE reported_by = '$name'";
@@ -1232,27 +1273,30 @@ echo $sql;
         </para>
 
         <para>
-        	
-        	
-        	Zagrożenie potęguje fakt iż podobne błędy mogą zostać wykorzystane przez osobę
-        	próbującą zmanipulować działanie funkcji aplikacji. Jeśli takiej osobie uda się wpłynąć na
-        	wartość zmiennej <acronym>PHP</acronym> poprzez parametr <acronym>HTTP</acronym>
-        	(bądź inny mechanizm), to będzie mogła zmienić zapytanie <acronym>SQL</acronym>
-        	tak by dokonywało operacji zupełnie niezamierzonych przez twórców, takich jak
-        	zwrócenie danych, do których osoba nie powinna mieć dostępu. To jest poważny i szeroko
-        	rozpowszechniony sposób łamania zabezpieczeń aplikacji znany pod nazwą "SQL Injection"
-        	(wstrzyknięcie SQL - 
-        	<ulink url="http://en.wikipedia.org/wiki/SQL_Injection">http://en.wikipedia.org/wiki/SQL_Injection</ulink>).
+            
+            
+            Zagrożenie potęguje fakt iż podobne błędy mogą zostać wykorzystane przez osobę
+            próbującą zmanipulować działanie funkcji aplikacji. Jeśli takiej osobie
+            uda się wpłynąć na wartość zmiennej <acronym>PHP</acronym> poprzez
+            parametr <acronym>HTTP</acronym>
+            (bądź inny mechanizm), to będzie mogła zmienić zapytanie <acronym>SQL</acronym>
+            tak by dokonywało operacji zupełnie niezamierzonych przez twórców, takich jak
+            zwrócenie danych, do których osoba nie powinna mieć dostępu. To jest poważny i szeroko
+            rozpowszechniony sposób łamania zabezpieczeń aplikacji znany pod nazwą "SQL Injection"
+            (wstrzyknięcie SQL - <ulink url="http://en.wikipedia.org/wiki/SQL_Injection">
+            http://en.wikipedia.org/wiki/SQL_Injection</ulink>).
         </para>
 
         <para>
-        	Adaptery klasy <classname>Zend_Db</classname> udostępniają funkcje przydatne do zredukowania
-        	zagrożenia atakiem <acronym>SQL</acronym> Injection w kodzie <acronym>PHP</acronym>. Przyjętym 
-        	rozwiązaniem jest unikanie znaków specjalnych takich jak cudzysłów w 
-        	wartościach zmiennych <acronym>PHP</acronym>
-        	przed umieszczeniem ich w poleceniu <acronym>SQL</acronym>. Takie podejście zapewnia ochronę
-        	przed przypadkową jak i intencjonalną zmianą znaczenia poleceń <acronym>SQL</acronym> przez
-        	zmienne <acronym>PHP</acronym> zawierające znaki specjalne.
+            Adaptery klasy <classname>Zend_Db</classname> udostępniają funkcje przydatne
+            do zredukowania zagrożenia atakiem <acronym>SQL</acronym> Injection w kodzie
+            <acronym>PHP</acronym>.
+            Przyjętym rozwiązaniem jest unikanie znaków specjalnych takich jak cudzysłów w 
+            wartościach zmiennych <acronym>PHP</acronym>
+            przed umieszczeniem ich w poleceniu <acronym>SQL</acronym>.
+            Takie podejście zapewnia ochronę przed przypadkową jak i intencjonalną zmianą
+            znaczenia poleceń <acronym>SQL</acronym> przez
+            zmienne <acronym>PHP</acronym> zawierające znaki specjalne.
         </para>
 
         <sect3 id="zend.db.adapter.quoting.quote">
@@ -1260,11 +1304,13 @@ echo $sql;
             <title>Użycie quote()</title>
 
             <para>
-            	Metoda <methodname>quote()</methodname> przyjmuje pojedynczy argument - łańcuch znaków.
-            	Na wyjściu zwraca podany argument ze wszystkimi znakami specjalnymi poddanymi uniknięciu
-            	w sposób właściwy dla używanego <acronym>RDBMS</acronym> i otoczony znakami ograniczającymi
-            	łańcuchy znakowe. Standardowym znakiem ograniczającym stringi w <acronym>SQL</acronym> 
-            	jest pojedynczy cudzysłów (').
+                Metoda <methodname>quote()</methodname> przyjmuje pojedynczy
+                argument - łańcuch znaków.
+                Na wyjściu zwraca podany argument ze wszystkimi znakami specjalnymi
+                poddanymi uniknięciu w sposób właściwy dla używanego
+                <acronym>RDBMS</acronym> i otoczony znakami ograniczającymi
+                łańcuchy znakowe. Standardowym znakiem ograniczającym
+                stringi w <acronym>SQL</acronym> jest pojedynczy cudzysłów (').
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example">
@@ -1282,20 +1328,23 @@ echo $sql;
             </example>
 
             <para>
-            	Należy zwrócić uwagę, że wartość zwrotna metody <methodname>quote()</methodname>
-            	zawiera znaki ograniczające stringi. Jest to zachowanie różne od niektórych funkcji
-            	które unikają specjalne znaki ale nie ujmują całego łańcucha w znaki ograniczające,
-            	tak jak <ulink
-                    url="http://www.php.net/mysqli_real_escape_string">mysql_real_escape_string()</ulink>.
+                Należy zwrócić uwagę, że wartość zwrotna metody <methodname>quote()</methodname>
+                zawiera znaki ograniczające stringi. Jest to zachowanie różne od niektórych funkcji
+                które unikają specjalne znaki ale nie ujmują całego łańcucha w znaki ograniczające,
+                tak jak <ulink url="http://www.php.net/mysqli_real_escape_string">
+                mysql_real_escape_string()</ulink>.
             </para>
 
             <para>
-            	Wartości mogą wymagać umieszczenia w cudzysłowach lub nie, zgodnie z kontekstem używanego
-            	typu danych <acronym>SQL</acronym>. W przypadku niektórych rodzajów systemów zarządzania
-            	bazą danych liczby całkowite nie mogą być ograniczane cudzysłowami jeśli są porównywane
-            	z kolumną lub wyrażeniem zwracającym inną liczbę całkowitą. Innymi słowy, poniższy zapis
-            	może wywołać błąd w niektórych implementacjach <acronym>SQL</acronym> zakładając, że
-            	<property>intColumn</property> jest określona typem danych <constant>INTEGER</constant>.
+                Wartości mogą wymagać umieszczenia w cudzysłowach lub nie, zgodnie z
+                kontekstem używanego typu danych <acronym>SQL</acronym>.
+                W przypadku niektórych rodzajów systemów zarządzania
+                bazą danych liczby całkowite nie mogą być ograniczane cudzysłowami
+                jeśli są porównywane z kolumną lub wyrażeniem zwracającym inną liczbę całkowitą.
+                Innymi słowy, poniższy zapis może wywołać błąd w niektórych
+                implementacjach <acronym>SQL</acronym> zakładając, że
+                <property>intColumn</property> jest określona
+                typem danych <constant>INTEGER</constant>.
 
                 <programlisting language="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'
@@ -1303,8 +1352,8 @@ SELECT * FROM atable WHERE intColumn = '123'
             </para>
 
             <para>
-            	Można użyć opcjonalnego, drugiego argumentu metody <methodname>quote()</methodname>
-            	aby określić typ danych <acronym>SQL</acronym> i ograniczyć stosowanie cudzysłowu.
+                Można użyć opcjonalnego, drugiego argumentu metody <methodname>quote()</methodname>
+                aby określić typ danych <acronym>SQL</acronym> i ograniczyć stosowanie cudzysłowu.
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example-2">
@@ -1318,17 +1367,21 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             </example>
 
             <para>
-            	Każda klasa <classname>Zend_Db_Adapter</classname> ma zapisane nazwy numerycznych
-            	typów danych <acronym>SQL</acronym> odpowiednio do swojego rodzaju <acronym>RDBMS</acronym>.
-            	Zamiast tego można w tym miejscu również korzystać ze stałych  
-            	<constant>Zend_Db::INT_TYPE</constant>, <constant>Zend_Db::BIGINT_TYPE</constant> oraz
-                <constant>Zend_Db::FLOAT_TYPE</constant> aby uniezależnić kod od rodzaju bazy danych.
+                Każda klasa <classname>Zend_Db_Adapter</classname> ma zapisane nazwy numerycznych
+                typów danych <acronym>SQL</acronym> odpowiednio do swojego rodzaju
+                <acronym>RDBMS</acronym>.
+                Zamiast tego można w tym miejscu również korzystać ze stałych  
+                <constant>Zend_Db::INT_TYPE</constant>,
+                <constant>Zend_Db::BIGINT_TYPE</constant> oraz
+                <constant>Zend_Db::FLOAT_TYPE</constant> aby uniezależnić kod
+                od rodzaju bazy danych.
             </para>
 
             <para>
-            	<classname>Zend_Db_Table</classname> automatycznie określa typy danych <acronym>SQL</acronym>
-            	dla metody <methodname>quote()</methodname> podczas generowania zapytań <acronym>SQL</acronym>
-            	odnoszących się do klucza pierwotnego tabeli.
+                <classname>Zend_Db_Table</classname> automatycznie określa
+                typy danych <acronym>SQL</acronym>
+                dla metody <methodname>quote()</methodname> podczas generowania
+                zapytań <acronym>SQL</acronym> odnoszących się do klucza pierwotnego tabeli.
             </para>
 
         </sect3>
@@ -1338,21 +1391,22 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             <title>Użycie quoteInto()</title>
 
             <para>
-            	Najbardziej typowym przypadkiem użycia cudzysłowu do ograniczania zmiennych jest
-            	umieszczenie zmiennej <acronym>PHP</acronym> w zapytaniu <acronym>SQL</acronym>. Aby
-            	to osiągnąć można użyć metody <methodname>quoteInto()</methodname>. Przyjmuje ona
-            	dwa argumenty: pierwszym jest łańcuch znaków zawierający symbol "?", który zostanie
-            	zastąpiony; drugim jest zmienna <acronym>PHP</acronym>, która ma trafić na miejsce "?".
+                Najbardziej typowym przypadkiem użycia cudzysłowu do ograniczania zmiennych jest
+                umieszczenie zmiennej <acronym>PHP</acronym> w zapytaniu <acronym>SQL</acronym>.
+                Aby to osiągnąć można użyć metody <methodname>quoteInto()</methodname>.
+                Przyjmuje ona dwa argumenty: pierwszym jest łańcuch znaków zawierający
+                symbol "?", który zostanie zastąpiony; drugim jest zmienna
+                <acronym>PHP</acronym>, która ma trafić na miejsce "?".
             </para>
 
             <para>
-            	Zastępowany symbol jest używany przez wielu producentów baz danych do oznaczenia
-            	pozycyjnych parametrów wiązanych ale metoda <methodname>quoteInto()</methodname>
-            	jedynie emuluje takie parametry. W wyniku jej działania wartość zmiennej jest
-            	zwyczajnie umieszczana w łańcuchu z zapytaniem, po wstępnym uniknięciu specjalnych
-            	znaków i umieszczeniu w cudzysłowie. Prawdziwa implementacja parametrów wiązanych
-            	zakłada separację łańcucha znaków polecenia <acronym>SQL</acronym> od samych
-            	parametrów oraz wstępne parsowanie polecenia na serwerze bazy danych.
+                Zastępowany symbol jest używany przez wielu producentów baz danych do oznaczenia
+                pozycyjnych parametrów wiązanych ale metoda <methodname>quoteInto()</methodname>
+                jedynie emuluje takie parametry. W wyniku jej działania wartość zmiennej jest
+                zwyczajnie umieszczana w łańcuchu z zapytaniem, po wstępnym uniknięciu specjalnych
+                znaków i umieszczeniu w cudzysłowie. Prawdziwa implementacja parametrów wiązanych
+                zakłada separację łańcucha znaków polecenia <acronym>SQL</acronym> od samych
+                parametrów oraz wstępne parsowanie polecenia na serwerze bazy danych.
             </para>
 
             <example id="zend.db.adapter.quoting.quote-into.example">
@@ -1366,9 +1420,11 @@ echo $sql;
             </example>
 
             <para>
-            	Można użyć opcjonalnego, trzeciego parametru metody <methodname>quoteInto()</methodname>
-            	aby określić typ danych <acronym>SQL</acronym>. Numeryczne typy danych (w przeciwieństwie
-            	do innych typów) nie podlegają umieszczaniu w cudzysłowie.
+                Można użyć opcjonalnego, trzeciego parametru metody
+                <methodname>quoteInto()</methodname>
+                aby określić typ danych <acronym>SQL</acronym>.
+                Numeryczne typy danych (w przeciwieństwie
+                do innych typów) nie podlegają umieszczaniu w cudzysłowie.
             </para>
 
             <example id="zend.db.adapter.quoting.quote-into.example-2">
@@ -1388,35 +1444,40 @@ echo $sql;
             <title>Użycie quoteIdentifier()</title>
 
             <para>
-            	Wartości nie są jedyną częścią składni polecenia <acronym>SQL</acronym>, która może
-            	być zmienna. W przypadku użycia zmiennych <acronym>PHP</acronym> do określenia
-            	tabel, kolumn lub innych identyfikatorów zapytania <acronym>SQL</acronym>, może zajść
-            	potrzeba umieszczenia również tych elementów w cudzysłowie. Domyślnie identyfikatory
-            	<acronym>SQL</acronym> muszą przestrzegać określonych reguł - podobnie jak w
-            	<acronym>PHP</acronym> oraz większości innych języków programowania. Przykładem takiej
-            	reguły jest zakaz używania spacji lub określonych znaków interpunkcyjnych, specjalnych
-            	ani też znaków spoza ASCII. Poza tym istnieje lista określonych słów, które służą
-            	do tworzenia zapytań - ich też nie powinno się używać jako identyfikatorów.
+                Wartości nie są jedyną częścią składni polecenia <acronym>SQL</acronym>, która może
+                być zmienna. W przypadku użycia zmiennych <acronym>PHP</acronym> do określenia
+                tabel, kolumn lub innych identyfikatorów zapytania <acronym>SQL</acronym>,
+                może zajść potrzeba umieszczenia również tych elementów w cudzysłowie.
+                Domyślnie identyfikatory <acronym>SQL</acronym> muszą przestrzegać określonych
+                reguł - podobnie jak w <acronym>PHP</acronym> oraz większości innych
+                języków programowania. Przykładem takiej reguły jest zakaz używania spacji
+                lub określonych znaków interpunkcyjnych, specjalnych ani też znaków spoza ASCII.
+                Poza tym istnieje lista określonych słów, które służą
+                do tworzenia zapytań - ich też nie powinno się używać jako identyfikatorów.
             </para>
 
             <para>
-            	Mimo to <acronym>SQL</acronym> posiada <emphasis>ograniczone identyfikatory</emphasis>
-            	(delimited identifiers), dzięki którym można skorzystać z większego wachlarza znaków
-            	do nazywania obiektów. Jeśli określony identyfikator zostanie ograniczony odpowiednim
-            	rodzajem cudzysłowu to będzie można użyć znaków, które bez tego ograniczenia 
-            	spowodowałyby błąd. Identyfikatory ograniczone mogą zawierać spacje, znaki interpunkcyjne
-            	czy lokalne litery. Można nawet używać zarezerwowanych słów <acronym>SQL</acronym> jeśli
-            	zostaną otoczone odpowiednimi znakami ograniczającymi.
+                Mimo to <acronym>SQL</acronym> posiada
+                <emphasis>ograniczone identyfikatory</emphasis> (delimited identifiers),
+                dzięki którym można skorzystać z większego wachlarza znaków
+                do nazywania obiektów.
+                Jeśli określony identyfikator zostanie ograniczony odpowiednim
+                rodzajem cudzysłowu to będzie można użyć znaków, które bez tego ograniczenia 
+                spowodowałyby błąd. Identyfikatory ograniczone mogą zawierać spacje,
+                znaki interpunkcyjne czy lokalne litery.
+                Można nawet używać zarezerwowanych słów <acronym>SQL</acronym> jeśli
+                zostaną otoczone odpowiednimi znakami ograniczającymi.
             </para>
 
             <para>
-            	Metoda <methodname>quoteIdentifier()</methodname> zachowuje się podobnie jak
-            	<methodname>quote()</methodname> ale otacza podany łańcuch znaków za pomocą
-            	znaków ograniczających zgodnie z rodzajem używanego adaptera. Standardowy <acronym>SQL</acronym>
-            	używa podwójnego cudzysłowu (") jako znaku ograniczającego a większość systemów
-            	zarządzania bazą danych podąża za tym przykładem. MySQL domyślnie używa znaków 
-            	back-tick (`). Metoda <methodname>quoteIdentifier()</methodname> dokonuje również
-            	unikania znaków specjalnych znajdujących się w przekazanym argumencie.
+                Metoda <methodname>quoteIdentifier()</methodname> zachowuje się podobnie jak
+                <methodname>quote()</methodname> ale otacza podany łańcuch znaków za pomocą
+                znaków ograniczających zgodnie z rodzajem używanego adaptera.
+                Standardowy <acronym>SQL</acronym>
+                używa podwójnego cudzysłowu (") jako znaku ograniczającego a większość systemów
+                zarządzania bazą danych podąża za tym przykładem. MySQL domyślnie używa znaków 
+                back-tick (`). Metoda <methodname>quoteIdentifier()</methodname> dokonuje również
+                unikania znaków specjalnych znajdujących się w przekazanym argumencie.
             </para>
 
             <example id="zend.db.adapter.quoting.quote-identifier.example">
@@ -1433,18 +1494,21 @@ echo $sql
             </example>
 
             <para>
-            	W <acronym>SQL</acronym> identyfikatory ograniczone są wrażliwe na wielkość liter,
-            	w przeciwieństwie do zwykłych identyfikatorów. Przez to, należy upewnić się, że
-            	pisownia identyfikatora w 100% odpowiada pisowni zapisanej w schemacie, włącznie
-            	z wielkością liter.
+                W <acronym>SQL</acronym> identyfikatory ograniczone są wrażliwe na wielkość liter,
+                w przeciwieństwie do zwykłych identyfikatorów. Przez to, należy upewnić się, że
+                pisownia identyfikatora w 100% odpowiada pisowni zapisanej w schemacie, włącznie
+                z wielkością liter.
             </para>
 
             <para>
-            	W większości przypadków gdzie polecenie <acronym>SQL</acronym> jest generowane wewnątrz
-            	klas <classname>Zend_Db</classname>, domyślnym zachowaniem jest automatyczne ograniczanie 
-            	identyfikatorów. Można to zmienić poprzez opcję
-            	<constant>Zend_Db::AUTO_QUOTE_IDENTIFIERS</constant> wywoływaną podczas inicjalizacji
-            	adaptera. Więcej informacji: <xref linkend="zend.db.adapter.connecting.parameters.example2" />.
+                W większości przypadków gdzie polecenie <acronym>SQL</acronym> jest
+                generowane wewnątrz klas <classname>Zend_Db</classname>,
+                domyślnym zachowaniem jest automatyczne ograniczanie 
+                identyfikatorów. Można to zmienić poprzez opcję
+                <constant>Zend_Db::AUTO_QUOTE_IDENTIFIERS</constant> wywoływaną
+                podczas inicjalizacji adaptera.
+                Więcej informacji:
+                <xref linkend="zend.db.adapter.connecting.parameters.example2" />.
             </para>
 
         </sect3>
@@ -1456,44 +1520,48 @@ echo $sql
         <title>Kontrolowanie transakcji bazy danych</title>
 
         <para>
-        	W świecie baz danych transakcja to zbiór operacji, który może zostać zapisany
-        	bądź cofnięty za pomocą jednej instrukcji, nawet jeśli zmiany wynikające z tych operacji
-        	dotyczyły wielu tabel. Wszystkie zapytania do bazy danych są przeprowadzane w 
-        	kontekście transakcji. Jeśli nie są zarządzane jawnie to sterownik bazy danych używa ich
-        	w sposób przezroczysty dla użytkownika. Takie podejście nazywa się trybem 
-        	<emphasis>auto-commit</emphasis> - sterownik bazy danych tworzy transakcje dla każdego
-        	tworzonego polecenia i zapisuje efekty jego działania po każdym wywołaniu polecenia 
-        	<acronym>SQL</acronym>. Domyślnie wszystkie adaptery <classname>Zend_Db</classname>
-        	działają w trybie <emphasis>auto-commit</emphasis>.
+            W świecie baz danych transakcja to zbiór operacji, który może zostać zapisany
+            bądź cofnięty za pomocą jednej instrukcji, nawet jeśli zmiany wynikające z tych operacji
+            dotyczyły wielu tabel. Wszystkie zapytania do bazy danych są przeprowadzane w 
+            kontekście transakcji. Jeśli nie są zarządzane jawnie to sterownik bazy danych używa ich
+            w sposób przezroczysty dla użytkownika. Takie podejście nazywa się trybem 
+            <emphasis>auto-commit</emphasis> - sterownik bazy danych tworzy transakcje dla każdego
+            tworzonego polecenia i zapisuje efekty jego działania po każdym wywołaniu polecenia 
+            <acronym>SQL</acronym>. Domyślnie wszystkie adaptery <classname>Zend_Db</classname>
+            działają w trybie <emphasis>auto-commit</emphasis>.
         </para>
 
         <para>
-        	Można również bezpośrednio wskazać początek i koniec transakcji i w ten sposób 
-        	kontrolować ilość zapytań <acronym>SQL</acronym> jakie trafiają do zapisania (bądź 
-        	cofnięcia) jako pojedyncza operacja. Aby rozpocząć transakcję należy wywołać metodę
-        	<methodname>beginTransaction()</methodname>. Następujące po niej polecenia
-        	<acronym>SQL</acronym> są wykonywane w kontekście wspólnej transakcji do momentu
-        	zasygnalizowania jej końca.
+            Można również bezpośrednio wskazać początek i koniec transakcji i w ten sposób 
+            kontrolować ilość zapytań <acronym>SQL</acronym> jakie trafiają do zapisania (bądź 
+            cofnięcia) jako pojedyncza operacja. Aby rozpocząć transakcję należy wywołać metodę
+            <methodname>beginTransaction()</methodname>. Następujące po niej polecenia
+            <acronym>SQL</acronym> są wykonywane w kontekście wspólnej transakcji do momentu
+            zasygnalizowania jej końca.
         </para>
 
         <para>
-        	Aby zakończyć transakcję należy użyć metody <methodname>commit()</methodname> lub
-            <methodname>rollBack()</methodname>. Pierwsza z nich powoduje zapisanie zmian wynikających
-            z operacji przeprowadzonych w czasie transakcji. Oznacza to, że efekty tych zmian będą
+            Aby zakończyć transakcję należy użyć metody <methodname>commit()</methodname> lub
+            <methodname>rollBack()</methodname>.
+            Pierwsza z nich powoduje zapisanie zmian wynikających
+            z operacji przeprowadzonych w czasie transakcji.
+            Oznacza to, że efekty tych zmian będą
             widoczne w wynikach zapytań wywołanych w ramach innych transakcji.
         </para>
 
         <para>
-        	Metoda <methodname>rollBack()</methodname> dokonuje odwrotnej operacji: cofa zmiany
-        	dokonane podczas transakcji. W efekcie wszystkie dane zmienione podczas transakcji zostają
-        	cofnięte do wartości z momentu przed jej rozpoczęciem. Cofnięcie zmian jednej transakcji nie
-        	ma wpływu na zmiany dokonane przez inną transakcję trwającą nawet w tym samym czasie.
+            Metoda <methodname>rollBack()</methodname> dokonuje odwrotnej operacji: cofa zmiany
+            dokonane podczas transakcji.
+            W efekcie wszystkie dane zmienione podczas transakcji zostają cofnięte do
+            wartości z momentu przed jej rozpoczęciem. Cofnięcie zmian jednej transakcji nie
+            ma wpływu na zmiany dokonane przez inną transakcję trwającą nawet w tym samym czasie.
         </para>
 
         <para>
-        	Po skończonej transakcji <classname>Zend_Db_Adapter</classname> wraca do trybu auto-commit
-        	do momentu ponownego wywołania metody <methodname>beginTransaction()</methodname> i ręcznego
-        	rozpoczęcia nowej transakcji.
+            Po skończonej transakcji <classname>Zend_Db_Adapter</classname> wraca
+            do trybu auto-commit do momentu ponownego wywołania metody
+            <methodname>beginTransaction()</methodname> i ręcznego
+            rozpoczęcia nowej transakcji.
         </para>
 
         <example id="zend.db.adapter.transactions.example">
@@ -1513,9 +1581,9 @@ try {
     $db->commit();
 
 } catch (Exception $e) {
-	// Jeśli któreś z zapytań zakończyło się niepowodzeniem i został wyrzucony wyjątek, należy
-	// cofnąć całą transakcję odwracając zmiany w niej dokonane (nawet te które zakończyły się
-	// sukcesem). Przez to albo wszystkie zmiany zostają zapisane albo żadna.
+    // Jeśli któreś z zapytań zakończyło się niepowodzeniem i został wyrzucony wyjątek, należy
+    // cofnąć całą transakcję odwracając zmiany w niej dokonane (nawet te które zakończyły się
+    // sukcesem). Przez to albo wszystkie zmiany zostają zapisane albo żadna.
     $db->rollBack();
     echo $e->getMessage();
 }
@@ -1529,19 +1597,20 @@ try {
         <title>Uzyskiwanie listy i opisu tabel</title>
 
         <para>
-        	Metoda <methodname>listTables()</methodname> zwraca tablicę łańcuchów znakowych,
-        	zawierającą wszystkie tabele w bieżącej bazie danych.
+            Metoda <methodname>listTables()</methodname> zwraca tablicę łańcuchów znakowych,
+            zawierającą wszystkie tabele w bieżącej bazie danych.
         </para>
 
         <para>
-        	Metoda <methodname>describeTable()</methodname> zwraca tablicę asocjacyjną metadanych
-        	tabeli. Jako argument należy podać nazwę tabeli. Drugi argument jest opcjonalny - wskazuje
-        	nazwę schematu w którym tabela się znajduje.
+            Metoda <methodname>describeTable()</methodname> zwraca tablicę asocjacyjną metadanych
+            tabeli. Jako argument należy podać nazwę tabeli.
+            Drugi argument jest opcjonalny - wskazuje
+            nazwę schematu w którym tabela się znajduje.
         </para>
 
         <para>
-        	Kluczami zwracanej tablicy asocjacyjnej są nazwy kolumn tabeli. Wartość przy każdej 
-        	kolumnie to następna tablica asocjacyjna z następującymi kluczami i wartościami:
+            Kluczami zwracanej tablicy asocjacyjnej są nazwy kolumn tabeli. Wartość przy każdej 
+            kolumnie to następna tablica asocjacyjna z następującymi kluczami i wartościami:
         </para>
 
         <table frame="all" cellpadding="5" id="zend.db.adapter.list-describe.metadata">
@@ -1589,8 +1658,10 @@ try {
                         <entry><constant>NULLABLE</constant></entry>
                         <entry>(boolean)</entry>
                         <entry>
-                            <constant>TRUE</constant> jeśli columna dopuszcza wartości <acronym>SQL</acronym>
-                            <constant>NULL</constant>, <constant>FALSE</constant> jeśli kolumna zawiera 
+                            <constant>TRUE</constant> jeśli columna dopuszcza wartości
+                            <acronym>SQL</acronym>
+                            <constant>NULL</constant>, <constant>FALSE</constant>
+                            jeśli kolumna zawiera 
                             ograniczenie <constant>NOT</constant> <constant>NULL</constant>.
                         </entry>
                     </row>
@@ -1598,21 +1669,24 @@ try {
                         <entry><constant>LENGTH</constant></entry>
                         <entry>(integer)</entry>
                         <entry>
-                        	Dopuszczalny rozmiar kolumny, w formie zgłoszonej przez serwer bazy danych.
+                            Dopuszczalny rozmiar kolumny, w formie zgłoszonej przez serwer
+                            bazy danych.
                         </entry>
                     </row>
                     <row>
                         <entry><constant>SCALE</constant></entry>
                         <entry>(integer)</entry>
                         <entry>
-                        	Skala typów <acronym>SQL</acronym> NUMERIC lub <constant>DECIMAL</constant>.
+                            Skala typów <acronym>SQL</acronym> NUMERIC lub
+                            <constant>DECIMAL</constant>.
                         </entry>
                     </row>
                     <row>
                         <entry><constant>PRECISION</constant></entry>
                         <entry>(integer)</entry>
                         <entry>
-                        	Precyzja typów <acronym>SQL</acronym> NUMERIC lub <constant>DECIMAL</constant>.
+                            Precyzja typów <acronym>SQL</acronym> NUMERIC
+                            lub <constant>DECIMAL</constant>.
                         </entry>
                     </row>
                     <row>
@@ -1629,14 +1703,16 @@ try {
                         <entry>(boolean)</entry>
 
                         <entry>
-                            <constant>TRUE</constant> jeśli kolumna jest częścią klucza pierwotnego tabeli.
+                            <constant>TRUE</constant> jeśli kolumna jest częścią
+                            klucza pierwotnego tabeli.
                         </entry>
                     </row>
                     <row>
                         <entry><constant>PRIMARY_POSITION</constant></entry>
                         <entry>(integer)</entry>
                         <entry>
-                        	Liczba porządkowa (min. 1) oznaczająca pozycję kolumny w kluczu pierwotnym.
+                            Liczba porządkowa (min. 1) oznaczająca pozycję
+                            kolumny w kluczu pierwotnym.
                         </entry>
                     </row>
                     <row>
@@ -1644,7 +1720,8 @@ try {
                         <entry>(boolean)</entry>
 
                         <entry>
-                            <constant>TRUE</constant> jeśli kolumna korzysta z wartości automatycznie generowanych.
+                            <constant>TRUE</constant> jeśli kolumna korzysta
+                            z wartości automatycznie generowanych.
                         </entry>
                     </row>
                 </tbody>
@@ -1654,8 +1731,9 @@ try {
         <note>
             <title>Pole metadanych IDENTITY w różnych systemach zarządzania bazą danych</title>
             <para>
-            	Pole metadanych IDENTITY zostało wybrane jako ogólny
-            	termin określający relację do klucza tabeli. Może być znany pod następującymi nazwami:
+                Pole metadanych IDENTITY zostało wybrane jako ogólny
+                termin określający relację do klucza tabeli. Może być znany
+                pod następującymi nazwami:
             </para>
             <itemizedlist>
                 <listitem>
@@ -1682,8 +1760,8 @@ try {
         </note>
 
         <para>
-        	Jeśli w bazie danych nie istnieje tabela i schemat o podanych nazwach to
-        	<methodname>describeTable()</methodname> zwraca pustą tablicę. 
+            Jeśli w bazie danych nie istnieje tabela i schemat o podanych nazwach to
+            <methodname>describeTable()</methodname> zwraca pustą tablicę. 
         </para>
 
     </sect2>
@@ -1693,27 +1771,31 @@ try {
         <title>Zamykanie połączenia</title>
 
         <para>
-        	Najczęściej nie ma potrzeby zamykać połączenia z bazą danych. <acronym>PHP</acronym>
-        	automatycznie czyści wszystkie zasoby pod koniec działania. Rozszerzenia bazy danych są
-        	zaprojektowane w taki sposób aby połączenie zostało zamknięte w momencie usunięcia 
-        	referencji do obiektu zasobu.
+            Najczęściej nie ma potrzeby zamykać połączenia z bazą danych. <acronym>PHP</acronym>
+            automatycznie czyści wszystkie zasoby pod koniec działania. Rozszerzenia bazy danych są
+            zaprojektowane w taki sposób aby połączenie zostało zamknięte w momencie usunięcia 
+            referencji do obiektu zasobu.
         </para>
 
         <para>
-        	Jednak w przypadku skryptu <acronym>PHP</acronym>, którego czas wykonania jest znaczący, 
-        	który inicjuje wiele połączeń z bazą danych, może zajść potrzeba ręcznego zamknięcia połączenia
-        	aby ograniczyć wykorzystanie zasobów serwera bazy danych. Aby wymusić zamknięcie połączenia
-        	z bazą danych należy użyć metody adaptera <methodname>closeConnection()</methodname>.
+            Jednak w przypadku skryptu <acronym>PHP</acronym>, którego czas wykonania jest znaczący, 
+            który inicjuje wiele połączeń z bazą danych, może zajść potrzeba
+            ręcznego zamknięcia połączenia aby ograniczyć wykorzystanie
+            zasobów serwera bazy danych. Aby wymusić zamknięcie połączenia
+            z bazą danych należy użyć metody adaptera <methodname>closeConnection()</methodname>.
         </para>
 
         <para>
-        	Od wersji 1.7.2 istnieje możliwość sprawdzenia czy w obecnej chwili połączenie z serwerem
-        	bazy danych występuje za pomocą metody <methodname>isConnected()</methodname>. Jej rezultat
-        	oznacza czy zasób połączenia został ustanowiony i nie został zamknięty. Ta metoda nie jest
-        	zdolna sprawdzić zamknięcia połączenia od strony serwera bazy danych. Dzięki użyciu jej
-        	w wewnętrznych metodach zamykających połączenie można dokonywać wielokrotnego zamknięcia
-        	połączenia bez ryzyka wystąpienia błędów. Przed wersją 1.7.2 było to możliwe jedynie w
-        	przypadku adapterów <acronym>PDO</acronym>.
+            Od wersji 1.7.2 istnieje możliwość sprawdzenia czy w obecnej chwili
+            połączenie z serwerem bazy danych występuje za pomocą metody
+            <methodname>isConnected()</methodname>.
+            Jej rezultat oznacza czy zasób połączenia został ustanowiony i nie został zamknięty.
+            Ta metoda nie jest zdolna sprawdzić zamknięcia połączenia od strony
+            serwera bazy danych.
+            Dzięki użyciu jej w wewnętrznych metodach zamykających połączenie
+            można dokonywać wielokrotnego zamknięcia połączenia bez ryzyka wystąpienia błędów.
+            Przed wersją 1.7.2 było to możliwe jedynie w
+            przypadku adapterów <acronym>PDO</acronym>.
         </para>
 
         <example id="zend.db.adapter.closing.example">
@@ -1726,9 +1808,9 @@ $db->closeConnection();
         <note>
             <title>Czy Zend_Db wspiera stałe połączenia (Persistent Connections)?</title>
             <para>
-            	Tak, trwałe połączenia są wspierane poprzez flagę <property>persistent</property>
-            	ustawioną na wartość <constant>TRUE</constant> w konfiguracji
-            	adaptera <classname>Zend_Db</classname> (a nie sterownika bazy danych).
+                Tak, trwałe połączenia są wspierane poprzez flagę <property>persistent</property>
+                ustawioną na wartość <constant>TRUE</constant> w konfiguracji
+                adaptera <classname>Zend_Db</classname> (a nie sterownika bazy danych).
             </para>
 
             <example id="zend.db.adapter.connecting.persistence.example">
@@ -1745,25 +1827,25 @@ $db = Zend_Db::factory('Oracle', array(
             </example>
 
             <para>
-            	Należy zwrócić uwagę, że używanie połączeń stałych może zwiększyć ilość
-            	nieużywanych połączeń na serwerze bazy danych. Przez to, korzyści
-            	w wydajności (wynikające z wykluczenia potrzeby nawiązywania połączenia
-            	przy każdym żądaniu) mogą zostać skutecznie przeważone przez problemy
-            	spowodowane przez tą technikę.
+                Należy zwrócić uwagę, że używanie połączeń stałych może zwiększyć ilość
+                nieużywanych połączeń na serwerze bazy danych. Przez to, korzyści
+                w wydajności (wynikające z wykluczenia potrzeby nawiązywania połączenia
+                przy każdym żądaniu) mogą zostać skutecznie przeważone przez problemy
+                spowodowane przez tą technikę.
             </para>
             <para>
-            	Połączenia z bazą danych mają stany. Oznacza to, że pewne obiekty na serwerze
-            	bazy danych istnieją w kontekście sesji. Chodzi o blokady, zmienne użytkownika,
-            	tabele tymczasowe, informacje o ostatnio wykonanym zapytaniu - takie jak
-            	ilość pobranych wierszy, ostatnia wygenerowana wartość identyfikatora. W 
-            	przypadku użycia połączeń stałych istnieje ryzyko, że aplikacja uzyska
-            	dostęp do niepoprawnych bądź zastrzeżonych danych, które zostały utworzone
-            	podczas poprzedniego żądania.
+                Połączenia z bazą danych mają stany. Oznacza to, że pewne obiekty na serwerze
+                bazy danych istnieją w kontekście sesji. Chodzi o blokady, zmienne użytkownika,
+                tabele tymczasowe, informacje o ostatnio wykonanym zapytaniu - takie jak
+                ilość pobranych wierszy, ostatnia wygenerowana wartość identyfikatora. W 
+                przypadku użycia połączeń stałych istnieje ryzyko, że aplikacja uzyska
+                dostęp do niepoprawnych bądź zastrzeżonych danych, które zostały utworzone
+                podczas poprzedniego żądania.
             </para>
             <para>
-            	W obecnym stanie jedynie adaptery Oracle, DB2 oraz <acronym>PDO</acronym> 
-            	(zgodnie z dokumentacją <acronym>PHP</acronym>) wspierają połączenia stałe
-            	w <classname>Zend_Db</classname>.
+                W obecnym stanie jedynie adaptery Oracle, DB2 oraz <acronym>PDO</acronym> 
+                (zgodnie z dokumentacją <acronym>PHP</acronym>) wspierają połączenia stałe
+                w <classname>Zend_Db</classname>.
             </para>
         </note>
 
@@ -1774,28 +1856,28 @@ $db = Zend_Db::factory('Oracle', array(
         <title>Wykonywanie innych poleceń na bazie danych</title>
 
         <para>
-        	Podczas tworzenia kodu może zajść potrzeba uzyskania dostępu bezpośrednio do 
-        	obiektu połączenia tak jak udostępnia to używane rozszerzenie bazy danych 
-        	<acronym>PHP</acronym>. Niektóre rozszerzenia mogą oferować funkcje nieodzwierciedlone
-        	w metodach klasy <classname>Zend_Db_Adapter_Abstract</classname>.
+            Podczas tworzenia kodu może zajść potrzeba uzyskania dostępu bezpośrednio do 
+            obiektu połączenia tak jak udostępnia to używane rozszerzenie bazy danych 
+            <acronym>PHP</acronym>. Niektóre rozszerzenia mogą oferować funkcje nieodzwierciedlone
+            w metodach klasy <classname>Zend_Db_Adapter_Abstract</classname>.
         </para>
 
         <para>
-        	Wszystkie polecenia <acronym>SQL</acronym> w <classname>Zend_Db</classname>
-        	są wywoływane poprzez instrukcje preparowane (prepared statement). Jednak niektóre
-        	funkcje bazy danych są z nimi niekompatybilne. Polecenia <acronym>DDL</acronym> takie 
-        	jak CREATE czy ALTER nie mogą być wywoływane w ten sposób w MySQL. Dodatkowo polecenia
-        	<acronym>SQL</acronym> nie korzystają z 
-        	<ulink url="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">cache'u zapytań
-        	MySQL (MySQL Query Cache)</ulink> dla wersji wcześniejszej niż MySQL 5.1.17.
+            Wszystkie polecenia <acronym>SQL</acronym> w <classname>Zend_Db</classname>
+            są wywoływane poprzez instrukcje preparowane (prepared statement). Jednak niektóre
+            funkcje bazy danych są z nimi niekompatybilne. Polecenia <acronym>DDL</acronym> takie 
+            jak CREATE czy ALTER nie mogą być wywoływane w ten sposób w MySQL. Dodatkowo polecenia
+            <acronym>SQL</acronym> nie korzystają z 
+            <ulink url="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">cache'u zapytań
+            MySQL (MySQL Query Cache)</ulink> dla wersji wcześniejszej niż MySQL 5.1.17.
         </para>
 
         <para>
-        	Większość rozszerzeń baz danych <acronym>PHP</acronym> umożliwia wywoływanie poleceń
-        	<acronym>SQL</acronym> bez preparowania. W przypadku <acronym>PDO</acronym> jest to
-        	możliwe poprzez metodę <methodname>exec()</methodname>. Aby uzyskać dostęp do obiektu
-        	połączenia odpowiedniego rozszerzenia <acronym>PHP</acronym> należy wywołać metodę
-        	<methodname>getConnection()</methodname>.
+            Większość rozszerzeń baz danych <acronym>PHP</acronym> umożliwia wywoływanie poleceń
+            <acronym>SQL</acronym> bez preparowania. W przypadku <acronym>PDO</acronym> jest to
+            możliwe poprzez metodę <methodname>exec()</methodname>. Aby uzyskać dostęp do obiektu
+            połączenia odpowiedniego rozszerzenia <acronym>PHP</acronym> należy wywołać metodę
+            <methodname>getConnection()</methodname>.
         </para>
 
         <example id="zend.db.adapter.other-statements.example">
@@ -1806,17 +1888,17 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
         </example>
 
         <para>
-        	W podobny sposób można korzystać z innych metod szczególnych dla konkretnego
-        	rozszerzenia <acronym>PHP</acronym>. Należy jednak mieć w pamięci, iż w ten
-        	sposób ogranicza się tworzoną aplikację do współpracy z interfejsem oferowanym
-        	jedynie przez konkretne rozszerzenie konkretnej bazy danych.
+            W podobny sposób można korzystać z innych metod szczególnych dla konkretnego
+            rozszerzenia <acronym>PHP</acronym>. Należy jednak mieć w pamięci, iż w ten
+            sposób ogranicza się tworzoną aplikację do współpracy z interfejsem oferowanym
+            jedynie przez konkretne rozszerzenie konkretnej bazy danych.
         </para>
 
         <para>
-        	W przyszłych wersjach <classname>Zend_Db</classname> planowane jest umieszczanie 
-        	dodatkowych metod służących do obejmowania funkcjonalności wspólnych dla wielu
-        	rozszerzeń baz danych <acronym>PHP</acronym> ale wsteczna kompatybilność zostanie
-        	zachowana.
+            W przyszłych wersjach <classname>Zend_Db</classname> planowane jest umieszczanie 
+            dodatkowych metod służących do obejmowania funkcjonalności wspólnych dla wielu
+            rozszerzeń baz danych <acronym>PHP</acronym> ale wsteczna kompatybilność zostanie
+            zachowana.
         </para>
 
     </sect2>
@@ -1825,10 +1907,10 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
         <title>Pobranie wersji serwera</title>
 
         <para>
-        	Począwszy od wersji 1.7.2 można pobrać wersję serwera bazy danych w formie podobnej do
-        	numeru wersji <acronym>PHP</acronym> tak aby można było skorzystać z funkcji
-        	<methodname>version_compare()</methodname>. Jeśli taka informacja nie jest dostępna
-        	to zostanie zwrócona wartość <constant>NULL</constant>.
+            Począwszy od wersji 1.7.2 można pobrać wersję serwera bazy danych w formie podobnej do
+            numeru wersji <acronym>PHP</acronym> tak aby można było skorzystać z funkcji
+            <methodname>version_compare()</methodname>. Jeśli taka informacja nie jest dostępna
+            to zostanie zwrócona wartość <constant>NULL</constant>.
         </para>
 
         <example id="zend.db.adapter.server-version.example">
@@ -1853,8 +1935,8 @@ if (!is_null($version)) {
         <title>Informacje o konkretnych adapterach</title>
 
         <para>
-        	Ten akapit wymienia różnice pomiędzy klasami adapterów, z istnienia których
-        	należy sobie zdawać sprawę.
+            Ten akapit wymienia różnice pomiędzy klasami adapterów, z istnienia których
+            należy sobie zdawać sprawę.
         </para>
 
         <sect3 id="zend.db.adapter.adapter-notes.ibm-db2">
@@ -1862,24 +1944,24 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                    	Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
-                    	należy użyć nazwy 'Db2'.
+                        Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
+                        należy użyć nazwy 'Db2'.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Ten adapter używa rozszerzenia <acronym>PHP</acronym> ibm_db2.
+                        Ten adapter używa rozszerzenia <acronym>PHP</acronym> ibm_db2.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	IBM DB2 wspiera sekwencje oraz klucze automatycznie zwiększające.
-                    	Przez to argumenty dla <methodname>lastInsertId()</methodname> są
-                    	opcjonalne. Jeśli nie poda się argumentów adapter zwróci ostatnią
-                    	wartość wygenerowaną dla klucza automatycznego. Jeśli argumenty zostaną
-                    	podane to adapter zwróci ostatnią wartość wygenerowaną przez sekwencję
-                    	o nazwie zgodnej z konwencją 
-                    	'<emphasis>tabela</emphasis>_<emphasis>kolumna</emphasis>_seq'.
+                        IBM DB2 wspiera sekwencje oraz klucze automatycznie zwiększające.
+                        Przez to argumenty dla <methodname>lastInsertId()</methodname> są
+                        opcjonalne. Jeśli nie poda się argumentów adapter zwróci ostatnią
+                        wartość wygenerowaną dla klucza automatycznego. Jeśli argumenty zostaną
+                        podane to adapter zwróci ostatnią wartość wygenerowaną przez sekwencję
+                        o nazwie zgodnej z konwencją 
+                        '<emphasis>tabela</emphasis>_<emphasis>kolumna</emphasis>_seq'.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1890,20 +1972,20 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                    	Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
-                    	należy użyć nazwy 'Mysqli'.
+                        Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
+                        należy użyć nazwy 'Mysqli'.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Ten adapter używa rozszerzenia <acronym>PHP</acronym> mysqli.
+                        Ten adapter używa rozszerzenia <acronym>PHP</acronym> mysqli.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	MySQL nie wspiera sekwencji więc <methodname>lastInsertId()</methodname>
-                    	ignoruje argumenty i zwraca ostatnią wartość wygenerowaną dla klucza
-                    	automatycznego. Metoda <methodname>lastSequenceId()</methodname>
+                        MySQL nie wspiera sekwencji więc <methodname>lastInsertId()</methodname>
+                        ignoruje argumenty i zwraca ostatnią wartość wygenerowaną dla klucza
+                        automatycznego. Metoda <methodname>lastSequenceId()</methodname>
                         zwraca <constant>NULL</constant>.
                     </para>
                 </listitem>
@@ -1915,43 +1997,43 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                    	Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
-                    	należy użyć nazwy 'Oracle'.
+                        Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
+                        należy użyć nazwy 'Oracle'.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Ten adapter używa rozszerzenia <acronym>PHP</acronym> oci8.
+                        Ten adapter używa rozszerzenia <acronym>PHP</acronym> oci8.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Oracle nie wspiera kluczy automatycznych więc należy podać nazwę
-                    	sekwencji w metodzie <methodname>lastInsertId()</methodname> lub
+                        Oracle nie wspiera kluczy automatycznych więc należy podać nazwę
+                        sekwencji w metodzie <methodname>lastInsertId()</methodname> lub
                         <methodname>lastSequenceId()</methodname>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Rozszerzenie Oracle nie wspiera parametrów pozycyjnych. Należy
-                    	używać nazwanych parametrów.
+                        Rozszerzenie Oracle nie wspiera parametrów pozycyjnych. Należy
+                        używać nazwanych parametrów.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Obecnie, opcja <constant>Zend_Db::CASE_FOLDING</constant> nie jest
-                    	zaimplementowana w tym adapterze. Aby użyć tej opcji z Oracle zalecane
-                    	jest korzystanie z adaptera <acronym>PDO</acronym> OCI.
+                        Obecnie, opcja <constant>Zend_Db::CASE_FOLDING</constant> nie jest
+                        zaimplementowana w tym adapterze. Aby użyć tej opcji z Oracle zalecane
+                        jest korzystanie z adaptera <acronym>PDO</acronym> OCI.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Domyślnie pola LOB są zwracane jako obiekty OCI-Lob. Można ustawić
-                    	pobieranie ich w formie łańcuchów znakowych dla wszystkich żądań
-                    	poprzez opcję sterownika '<property>lob_as_string</property>'. Aby
-                    	jednorazowo pobrać obiekt Lob jako string należy użyć metody
-                    	<methodname>setLobAsString(boolean)</methodname>  na adapterze lub
-                    	na obiekcie zapytania.
+                        Domyślnie pola LOB są zwracane jako obiekty OCI-Lob. Można ustawić
+                        pobieranie ich w formie łańcuchów znakowych dla wszystkich żądań
+                        poprzez opcję sterownika '<property>lob_as_string</property>'. Aby
+                        jednorazowo pobrać obiekt Lob jako string należy użyć metody
+                        <methodname>setLobAsString(boolean)</methodname>  na adapterze lub
+                        na obiekcie zapytania.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1962,28 +2044,28 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                    	Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
-                    	należy użyć nazwy 'Sqlsrv'.
+                        Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
+                        należy użyć nazwy 'Sqlsrv'.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Ten adapter używa rozszerzenia <acronym>PHP</acronym> sqlsrv.
+                        Ten adapter używa rozszerzenia <acronym>PHP</acronym> sqlsrv.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Microsoft <acronym>SQL</acronym> Server nie wspiera sekwencji więc
-                    	<methodname>lastInsertId()</methodname> ignoruje argument określający
-                    	klucz pierwotny i zwraca ostatnią wartość wygenerowaną przez automatyczny
-                    	klucz (jeśli jest podana nazwa tabeli) lub identyfikator zwrócony przez
-                    	ostatnie polecenie INSERT. Metoda <methodname>lastSequenceId()</methodname> 
-                    	zwraca <constant>NULL</constant>.
+                        Microsoft <acronym>SQL</acronym> Server nie wspiera sekwencji więc
+                        <methodname>lastInsertId()</methodname> ignoruje argument określający
+                        klucz pierwotny i zwraca ostatnią wartość wygenerowaną przez automatyczny
+                        klucz (jeśli jest podana nazwa tabeli) lub identyfikator zwrócony przez
+                        ostatnie polecenie INSERT. Metoda <methodname>lastSequenceId()</methodname> 
+                        zwraca <constant>NULL</constant>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	<classname>Zend_Db_Adapter_Sqlsrv</classname> ustawia opcję
+                        <classname>Zend_Db_Adapter_Sqlsrv</classname> ustawia opcję
                         <constant>QUOTED_IDENTIFIER ON</constant> bezpośrednio po połączeniu się
                         z bazą danych <acronym>SQL</acronym> Server. To powoduje, że sterownik
                         zaczyna używać standardowego znaku cudzysłowu (<emphasis>"</emphasis>) jako
@@ -1993,17 +2075,20 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                    	Jednym z kluczy podawanych do tablicy opcji może być <property>driver_options</property>
-                    	dzięki czemu można skorzystać z wartości podanych w dokumentacji <acronym>SQL</acronym> Server
-                    	<ulink url="http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx">
-                    	http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx</ulink>. 
+                        Jednym z kluczy podawanych do tablicy opcji może być
+                        <property>driver_options</property>
+                        dzięki czemu można skorzystać z wartości podanych w dokumentacji
+                        <acronym>SQL</acronym> Server
+                        <ulink url="http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx">
+                        http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx</ulink>. 
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Dzięki metodzie <methodname>setTransactionIsolationLevel()</methodname> można
-                    	ustawić poziom izolacji transakcji dla bieżącego połączenia. Rozpoznawane wartości
-                    	to <constant>SQLSRV_TXN_READ_UNCOMMITTED</constant>,
+                        Dzięki metodzie <methodname>setTransactionIsolationLevel()</methodname>
+                        można ustawić poziom izolacji transakcji dla bieżącego połączenia.
+                        Rozpoznawane wartości
+                        to <constant>SQLSRV_TXN_READ_UNCOMMITTED</constant>,
                         <constant>SQLSRV_TXN_READ_COMMITTED</constant>,
                         <constant>SQLSRV_TXN_REPEATABLE_READ</constant>,
                         <constant>SQLSRV_TXN_SNAPSHOT</constant> or
@@ -2012,9 +2097,9 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                    	Począwszy od Zend Framework 1.9 minimalną wspieraną wersją rozszerzenia
-                    	<acronym>PHP</acronym> Microsoft <acronym>SQL</acronym> Server jest
-                    	1.0.1924.0. a dla <acronym>MSSQL</acronym> Server Native
+                        Począwszy od Zend Framework 1.9 minimalną wspieraną wersją rozszerzenia
+                        <acronym>PHP</acronym> Microsoft <acronym>SQL</acronym> Server jest
+                        1.0.1924.0. a dla <acronym>MSSQL</acronym> Server Native
                         Client - wersja 9.00.3042.00.
                     </para>
                 </listitem>
@@ -2026,19 +2111,19 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                    	Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
-                    	należy użyć nazwy '<classname>Pdo_Ibm</classname>'.
+                        Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
+                        należy użyć nazwy '<classname>Pdo_Ibm</classname>'.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Ten adapter używa rozszerzeń <acronym>PHP</acronym> pdo and pdo_ibm.
+                        Ten adapter używa rozszerzeń <acronym>PHP</acronym> pdo and pdo_ibm.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Należy używać wersji 1.2.2 lub wyższej rozszerzenia PDO_IBM. Zaleca się
-                    	uaktualnienie wcześniejszych wersji poprzez <acronym>PECL</acronym>.
+                        Należy używać wersji 1.2.2 lub wyższej rozszerzenia PDO_IBM. Zaleca się
+                        uaktualnienie wcześniejszych wersji poprzez <acronym>PECL</acronym>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2049,38 +2134,39 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                    	Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
-                    	należy użyć nazwy '<classname>Pdo_Mssql</classname>'.
+                        Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
+                        należy użyć nazwy '<classname>Pdo_Mssql</classname>'.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Ten adapter używa rozszerzeń <acronym>PHP</acronym> pdo and pdo_dblib.
+                        Ten adapter używa rozszerzeń <acronym>PHP</acronym> pdo and pdo_dblib.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Microsoft <acronym>SQL</acronym> Server nie wspiera sekwencji więc
-                    	<methodname>lastInsertId()</methodname> ignoruje argument określający
-                    	klucz pierwotny i zwraca ostatnią wartość wygenerowaną przez automatyczny
-                    	klucz (jeśli jest podana nazwa tabeli) lub identyfikator zwrócony przez
-                    	ostatnie polecenie INSERT. Metoda <methodname>lastSequenceId()</methodname> 
-                    	zwraca <constant>NULL</constant>.
+                        Microsoft <acronym>SQL</acronym> Server nie wspiera sekwencji więc
+                        <methodname>lastInsertId()</methodname> ignoruje argument określający
+                        klucz pierwotny i zwraca ostatnią wartość wygenerowaną przez automatyczny
+                        klucz (jeśli jest podana nazwa tabeli) lub identyfikator zwrócony przez
+                        ostatnie polecenie INSERT. Metoda <methodname>lastSequenceId()</methodname> 
+                        zwraca <constant>NULL</constant>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	W przypadku pracy z łańcuchami znaków unicode zakodowanych w sposób inny
-                    	niż UCS-2 (czyli również w formie UTF-8), może zajść potrzeba dokonania 
-                    	konwersji w kodzie aplikacji lub przechowywania danych w kolumnach binarnych.
-                    	Aby uzyskać więcej informacji można skorzystać z
-                    	<ulink url="http://support.microsoft.com/kb/232580">Microsoft's Knowledge
+                        W przypadku pracy z łańcuchami znaków unicode zakodowanych w sposób inny
+                        niż UCS-2 (czyli również w formie UTF-8), może zajść potrzeba dokonania 
+                        konwersji w kodzie aplikacji lub przechowywania
+                        danych w kolumnach binarnych.
+                        Aby uzyskać więcej informacji można skorzystać z
+                        <ulink url="http://support.microsoft.com/kb/232580">Microsoft's Knowledge
                         Base</ulink>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	<classname>Zend_Db_Adapter_Pdo_Mssql</classname> ustawia opcję
+                        <classname>Zend_Db_Adapter_Pdo_Mssql</classname> ustawia opcję
                         <constant>QUOTED_IDENTIFIER ON</constant> bezpośrednio po połączeniu się
                         z bazą danych <acronym>SQL</acronym> Server. To powoduje, że sterownik
                         zaczyna używać standardowego znaku cudzysłowu (<emphasis>"</emphasis>) jako
@@ -2090,13 +2176,15 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                    	Adapter rozpoznaje klucz <property>pdoType</property> w tablicy opcji. Jego
-                    	wartość może wynosić "mssql" (domyślnie), "dblib", "freetds", lub "sybase".
-                    	To wpływa na prefiks <acronym>DSN</acronym> używany przez adapter do utworzenia
-                    	łańcucha połączenia. "freetds" oraz "sybase" powodują utworzenie prefiksu
+                        Adapter rozpoznaje klucz <property>pdoType</property> w tablicy opcji. Jego
+                        wartość może wynosić "mssql" (domyślnie), "dblib", "freetds", lub "sybase".
+                        To wpływa na prefiks <acronym>DSN</acronym> używany przez
+                        adapter do utworzenia łańcucha połączenia.
+                        Wartości "freetds" oraz "sybase" powodują utworzenie prefiksu
                         "sybase:" używanego przez biblioteki 
                         <ulink url="http://www.freetds.org/">FreeTDS</ulink>.
-                        Należy zapoznać się z informacjami dotyczącymi prefiksów <acronym>DSN</acronym>
+                        Należy zapoznać się z informacjami dotyczącymi prefiksów
+                        <acronym>DSN</acronym>
                         używanymi przez ten sterownik pod adresem
                         <ulink url="http://www.php.net/manual/en/ref.pdo-dblib.connection.php">
                         http://www.php.net/manual/en/ref.pdo-dblib.connection.php</ulink>
@@ -2110,20 +2198,20 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                    	Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
-                    	należy użyć nazwy '<classname>Pdo_Mysql</classname>'.
+                        Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
+                        należy użyć nazwy '<classname>Pdo_Mysql</classname>'.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Ten adapter używa rozszerzeń <acronym>PHP</acronym> pdo and pdo_mysql.
+                        Ten adapter używa rozszerzeń <acronym>PHP</acronym> pdo and pdo_mysql.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	MySQL nie wspiera sekwencji więc <methodname>lastInsertId()</methodname>
-                    	ignoruje argumenty i zwraca ostatnią wartość wygenerowaną dla klucza
-                    	automatycznego. Metoda <methodname>lastSequenceId()</methodname>
+                        MySQL nie wspiera sekwencji więc <methodname>lastInsertId()</methodname>
+                        ignoruje argumenty i zwraca ostatnią wartość wygenerowaną dla klucza
+                        automatycznego. Metoda <methodname>lastSequenceId()</methodname>
                         zwraca <constant>NULL</constant>.
                     </para>
                 </listitem>
@@ -2135,19 +2223,19 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                    	Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
-                    	należy użyć nazwy '<classname>Pdo_Oci</classname>'.
+                        Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
+                        należy użyć nazwy '<classname>Pdo_Oci</classname>'.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Ten adapter używa rozszerzeń <acronym>PHP</acronym> pdo and pdo_oci.
+                        Ten adapter używa rozszerzeń <acronym>PHP</acronym> pdo and pdo_oci.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Oracle nie wspiera kluczy automatycznych więc należy podać nazwę
-                    	sekwencji w metodzie <methodname>lastInsertId()</methodname> lub
+                        Oracle nie wspiera kluczy automatycznych więc należy podać nazwę
+                        sekwencji w metodzie <methodname>lastInsertId()</methodname> lub
                         <methodname>lastSequenceId()</methodname>.
                     </para>
                 </listitem>
@@ -2159,24 +2247,24 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                    	Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
-                    	należy użyć nazwy '<classname>Pdo_Pgsql</classname>'.
+                        Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
+                        należy użyć nazwy '<classname>Pdo_Pgsql</classname>'.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Ten adapter używa rozszerzeń <acronym>PHP</acronym> pdo and pdo_pgsql.
+                        Ten adapter używa rozszerzeń <acronym>PHP</acronym> pdo and pdo_pgsql.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	PostgreSQL wspiera sekwencje oraz klucze automatyczne. Przez to
-                    	podawanie argumentów w <methodname>lastInsertId()</methodname> jest
-                    	opcjonalne. Jeśli nie poda się argumentów adapter zwróci ostatnią
-                    	wartość wygenerowaną dla klucza automatycznego. Jeśli argumenty zostaną
-                    	podane to adapter zwróci ostatnią wartość wygenerowaną przez sekwencję
-                    	o nazwie zgodnej z konwencją 
-                    	'<emphasis>tabela</emphasis>_<emphasis>kolumna</emphasis>_seq'. 
+                        PostgreSQL wspiera sekwencje oraz klucze automatyczne. Przez to
+                        podawanie argumentów w <methodname>lastInsertId()</methodname> jest
+                        opcjonalne. Jeśli nie poda się argumentów adapter zwróci ostatnią
+                        wartość wygenerowaną dla klucza automatycznego. Jeśli argumenty zostaną
+                        podane to adapter zwróci ostatnią wartość wygenerowaną przez sekwencję
+                        o nazwie zgodnej z konwencją 
+                        '<emphasis>tabela</emphasis>_<emphasis>kolumna</emphasis>_seq'. 
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2187,47 +2275,47 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                    	Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
-                    	należy użyć nazwy '<classname>Pdo_Sqlite</classname>'.
+                        Aby uzyskać ten adapter poprzez metodę <methodname>factory()</methodname> 
+                        należy użyć nazwy '<classname>Pdo_Sqlite</classname>'.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Ten adapter używa rozszerzeń <acronym>PHP</acronym> pdo and pdo_sqlite.
+                        Ten adapter używa rozszerzeń <acronym>PHP</acronym> pdo and pdo_sqlite.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	SQLite nie wspiera sekwencji więc <methodname>lastInsertId()</methodname>
-                    	ignoruje argumenty i zwraca ostatnią wartość wygenerowaną dla klucza
-                    	automatycznego. Metoda <methodname>lastSequenceId()</methodname>
+                        SQLite nie wspiera sekwencji więc <methodname>lastInsertId()</methodname>
+                        ignoruje argumenty i zwraca ostatnią wartość wygenerowaną dla klucza
+                        automatycznego. Metoda <methodname>lastSequenceId()</methodname>
                         zwraca <constant>NULL</constant>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Aby połączyć się z bazą danych SQLite2 należy podać 
-                    	<command>'sqlite2' => true</command> jako jeden z elementów
-                    	tablicy parametrów podczas tworzenia instancji adaptera
-                    	<classname>Pdo_Sqlite</classname>.
+                        Aby połączyć się z bazą danych SQLite2 należy podać 
+                        <command>'sqlite2' => true</command> jako jeden z elementów
+                        tablicy parametrów podczas tworzenia instancji adaptera
+                        <classname>Pdo_Sqlite</classname>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Aby połączyć się z bazą danych SQLite rezydującą w pamięci
-                    	należy podać <command>'dbname' => ':memory:'</command> jako
-                    	jeden z elementów tablicy parametrów podczas tworzenia instancji adaptera
-                    	<classname>Pdo_Sqlite</classname>.
+                        Aby połączyć się z bazą danych SQLite rezydującą w pamięci
+                        należy podać <command>'dbname' => ':memory:'</command> jako
+                        jeden z elementów tablicy parametrów podczas tworzenia instancji adaptera
+                        <classname>Pdo_Sqlite</classname>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Starsze wersje sterownika <acronym>PHP</acronym> SQLite nie wspierają
-                    	poleceń PRAGMA niezbędnych dla zachowania krótkich nazw kolumn w 
-                    	wynikach zapytania. W przypadku wystąpienia problemów z zapytaniami JOIN
-                    	polegających na zwracaniu wyników z nazwami kolumn w postaci 
-                    	"tabela.kolumna" zaleca się aktualizację <acronym>PHP</acronym> do 
-                    	najnowszej wersji.
+                        Starsze wersje sterownika <acronym>PHP</acronym> SQLite nie wspierają
+                        poleceń PRAGMA niezbędnych dla zachowania krótkich nazw kolumn w 
+                        wynikach zapytania. W przypadku wystąpienia problemów z zapytaniami JOIN
+                        polegających na zwracaniu wyników z nazwami kolumn w postaci 
+                        "tabela.kolumna" zaleca się aktualizację <acronym>PHP</acronym> do 
+                        najnowszej wersji.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2238,42 +2326,42 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                    	Ten adapter używa rozszerzenia <acronym>PHP</acronym> php_interbase.
+                        Ten adapter używa rozszerzenia <acronym>PHP</acronym> php_interbase.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Firebird/Interbase nie wspiera kluczy automatycznych więc należy podać nazwę
-                    	sekwencji w metodzie <methodname>lastInsertId()</methodname> lub
+                        Firebird/Interbase nie wspiera kluczy automatycznych więc należy podać nazwę
+                        sekwencji w metodzie <methodname>lastInsertId()</methodname> lub
                         <methodname>lastSequenceId()</methodname>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	Obecnie, opcja <constant>Zend_Db::CASE_FOLDING</constant> nie jest
-                    	zaimplementowana w tym adapterze. Identyfikatory bez znaków ograniczających
-                    	są zwracane w postaci wielkich liter.
+                        Obecnie, opcja <constant>Zend_Db::CASE_FOLDING</constant> nie jest
+                        zaimplementowana w tym adapterze. Identyfikatory bez znaków ograniczających
+                        są zwracane w postaci wielkich liter.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                    	Nazwa adaptera to <classname>ZendX_Db_Adapter_Firebird</classname>.
+                        Nazwa adaptera to <classname>ZendX_Db_Adapter_Firebird</classname>.
                     </para>
                     <para>
-                    	Należy pamiętać o użyciu parametru adapterNamespace z wartością
+                        Należy pamiętać o użyciu parametru adapterNamespace z wartością
                         <classname>ZendX_Db_Adapter</classname>.
                     </para>
                     <para>
-                    	Zaleca się aktualizację pliku <filename>gds32.dll</filename> (lub 
-                    	odpowiednika wersji linux) dostarczanym z php do wersji odpowiadającej
-                    	serwerowi bazy danych. Dla Firebird odpowiednikiem 
-                    	<filename>gds32.dll</filename> jest
+                        Zaleca się aktualizację pliku <filename>gds32.dll</filename> (lub 
+                        odpowiednika wersji linux) dostarczanym z php do wersji odpowiadającej
+                        serwerowi bazy danych. Dla Firebird odpowiednikiem 
+                        <filename>gds32.dll</filename> jest
                         <filename>fbclient.dll</filename>.
                     </para>
                     <para>
-                    	Domyślnie wszystkie identyfikatory (nazwy tabel, kolumn) są zwracane 
-                    	wielkimi literami.
+                        Domyślnie wszystkie identyfikatory (nazwy tabel, kolumn) są zwracane 
+                        wielkimi literami.
                     </para>
                 </listitem>
             </itemizedlist>

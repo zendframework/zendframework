@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 21485
+ * EN-Revision: 21573
  */
 return array(
     // Zend_Validate_Alnum
@@ -239,6 +239,7 @@ return array(
     // Zend_Validate_Regex
     "Invalid type given, value should be string, integer or float" => "Invalid type given, value should be string, integer or float",
     "'%value%' does not match against pattern '%pattern%'" => "'%value%' does not match against pattern '%pattern%'",
+    "There was an internal error while using the pattern '%pattern%'" => "There was an internal error while using the pattern '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
     "'%value%' is no valid sitemap changefreq" => "'%value%' is no valid sitemap changefreq",

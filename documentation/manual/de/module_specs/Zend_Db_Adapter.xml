@@ -1220,7 +1220,7 @@ $n = $db->update('bugs', $data, $where);
                 Bezeichner in diesem Argument werden nicht escaped quotiert. An dieser Stelle muss
                 darauf geachtet werden das sichergestellt ist, das dynamischer Inhalt sicher in
                 diesen String eingefügt wird. In <link linkend="zend.db.adapter.quoting">diesem
-                    Abschnitt</link sind Methoden beschrieben die dabei helfen können.
+                    Abschnitt</link> sind Methoden beschrieben die dabei helfen können.
             </para>
 
             <para>

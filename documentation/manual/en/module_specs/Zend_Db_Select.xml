@@ -50,12 +50,13 @@
         </itemizedlist>
 
         <para>
-            Using <classname>Zend_Db_Select</classname> is not mandatory. For very simple SELECT
-            queries, it is usually simpler to specify the entire <acronym>SQL</acronym> query as a
-            string and execute it using Adapter methods like <methodname>query()</methodname> or
-            <methodname>fetchAll()</methodname>. Using
-            <classname>Zend_Db_Select</classname> is helpful if you need to assemble a SELECT query
-            procedurally, or based on conditional logic in your application.
+            Using <classname>Zend_Db_Select</classname> is not mandatory. For very simple
+            <acronym>SELECT</acronym> queries, it is usually simpler to specify the entire
+            <acronym>SQL</acronym> query as a string and execute it using Adapter methods like
+            <methodname>query()</methodname> or <methodname>fetchAll()</methodname>. Using
+            <classname>Zend_Db_Select</classname> is helpful if you need to assemble a
+            <acronym>SELECT</acronym> query procedurally, or based on conditional logic in your
+            application.
         </para>
     </sect2>
 
@@ -190,7 +191,7 @@ $select = $db->select()
 
             <para>
                 Some <acronym>RDBMS</acronym> brands support a leading schema specifier for a table.
-                You can specify the table name as "<code>schemaName.tableName</code>", where
+                You can specify the table name as "<command>schemaName.tableName</command>", where
                 <classname>Zend_Db_Select</classname> quotes each part individually, or you may
                 specify the schema name separately. A schema name specified in the table name takes
                 precedence over a schema provided separately in the event that both are provided.
@@ -221,8 +222,8 @@ $select = $db->select()
             <para>
                 In the second argument of the <methodname>from()</methodname> method, you can
                 specify the columns to select from the respective table. If you specify no columns,
-                the default is "<code>*</code>", the <acronym>SQL</acronym> wildcard for "all
-                columns".
+                the default is "<emphasis>*</emphasis>", the <acronym>SQL</acronym> wildcard for
+                "all columns".
             </para>
 
             <para>
@@ -240,7 +241,7 @@ $select = $db->select()
             </para>
 
             <para>
-                You can specify the column name as "<code>correlationName.columnName</code>".
+                You can specify the column name as "<command>correlationName.columnName</command>".
                 <classname>Zend_Db_Select</classname> quotes each part individually. If you don't
                 specify a correlation name for a column, it uses the correlation name for the table
                 named in the current <methodname>from()</methodname> method.
@@ -389,12 +390,13 @@ $select = $db->select()
             <title>Adding columns to an existing FROM or JOIN table</title>
 
             <para>
-                There may be cases where you wish to add columns to an existing FROM or JOIN table
-                after those methods have been called. The <methodname>columns()</methodname> method
-                allows you to add specific columns at any point before the query is executed. You
-                can supply the columns as either a string or <classname>Zend_Db_Expr</classname> or
-                as an array of these elements. The second argument to this method can be omitted,
-                implying that the columns are to be added to the FROM table, otherwise an existing
+                There may be cases where you wish to add columns to an existing
+                <acronym>FROM</acronym> or <acronym>JOIN</acronym> table after those methods have
+                been called. The <methodname>columns()</methodname> method allows you to add
+                specific columns at any point before the query is executed. You can supply the
+                columns as either a string or <classname>Zend_Db_Expr</classname> or as an array of
+                these elements. The second argument to this method can be omitted, implying that the
+                columns are to be added to the <acronym>FROM</acronym> table, otherwise an existing
                 correlation name must be used.
             </para>
 
@@ -469,7 +471,7 @@ $select = $db->select()
             <para>
                 The third argument to <methodname>join()</methodname> is an array of column names,
                 like that used in the <methodname>from()</methodname> method. It defaults to
-                "<code>*</code>", supports correlation names, expressions, and
+                "<emphasis>*</emphasis>", supports correlation names, expressions, and
                 <classname>Zend_Db_Expr</classname> in the same way as the array of column names in
                 the <methodname>from()</methodname> method.
             </para>
@@ -596,8 +598,9 @@ $select = $db->select()
                         A cross join is a Cartesian product. Every row in the first table is
                         matched to every row in the second table. Therefore the number of rows in
                         the result set is equal to the product of the number of rows in each table.
-                        You can filter the result set using conditions in a WHERE clause; in this
-                        way a cross join is similar to the old SQL-89 join syntax.
+                        You can filter the result set using conditions in a <acronym>WHERE</acronym>
+                        clause; in this way a cross join is similar to the old
+                        <acronym>SQL</acronym>-89 join syntax.
                     </para>
 
                     <para>
@@ -614,8 +617,8 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        A natural join compares any column(s) that appear with the same name in
-                        both tables. The comparison is equality of all the column(s); comparing the
+                        A natural join compares any columns that appear with the same name in
+                        both tables. The comparison is equality of all the columns; comparing the
                         columns using inequality is not a natural join. Only natural inner joins
                         are supported by this <acronym>API</acronym>, even though
                         <acronym>SQL</acronym> permits natural outer joins as well.
@@ -725,8 +728,8 @@ $select = $db->select()
             <para>
                 The second argument to the <methodname>where()</methodname> method is optional. It
                 is a value to substitute into the expression. <classname>Zend_Db_Select</classname>
-                quotes the value and substitutes it for a question-mark ("<code>?</code>") symbol in
-                the expression.
+                quotes the value and substitutes it for a question-mark ("<emphasis>?</emphasis>")
+                symbol in the expression.
             </para>
 
             <example id="zend.db.select.building.where.example-param">
@@ -749,7 +752,8 @@ $select = $db->select()
 
             <para>
                 You can pass an array as the second parameter to the
-                <methodname>where()</methodname> method when using the SQL IN operator.
+                <methodname>where()</methodname> method when using the <acronym>SQL</acronym> IN
+                operator.
             </para>
 
             <example id="zend.db.select.building.where.example-array">
@@ -869,11 +873,11 @@ $select = $db->select()
             <para>
                 In <acronym>SQL</acronym>, the <command>GROUP BY</command> clause allows you to
                 reduce the rows of a query result set to one row per unique value found in the
-                column(s) named in the <command>GROUP BY</command> clause.
+                columns named in the <command>GROUP BY</command> clause.
             </para>
 
             <para>
-                In <classname>Zend_Db_Select</classname>, you can specify the column(s) to use for
+                In <classname>Zend_Db_Select</classname>, you can specify the columns to use for
                 calculating the groups of rows using the <methodname>group()</methodname> method.
                 The argument to this method is a column or an array of columns to use in the
                 <command>GROUP BY</command> clause.
@@ -927,8 +931,8 @@ $select = $db->select()
                 value that is used to replace a positional parameter placeholder in the
                 <acronym>SQL</acronym> expression. Expressions given in multiple invocations of the
                 <methodname>having()</methodname> method are combined using the Boolean
-                <constant>AND</constant> operator, or the <code>OR</code> operator if you use the
-                <methodname>orHaving()</methodname> method.
+                <acronym>AND</acronym> operator, or the <acronym>OR</acronym> operator if you
+                use the <methodname>orHaving()</methodname> method.
             </para>
 
             <example id="zend.db.select.building.having.example">
@@ -968,13 +972,13 @@ $select = $db->select()
             <title>Adding an ORDER BY Clause</title>
 
             <para>
-                In <acronym>SQL</acronym>, the <code>ORDER BY</code> clause specifies one or more
-                columns or expressions by which the result set of a query is sorted. If multiple
-                columns are listed, the secondary columns are used to resolve ties; the sort order
-                is determined by the secondary columns if the preceding columns contain identical
-                values. The default sorting is from least value to greatest value. You can also
-                sort by greatest value to least value for a given column in the list by specifying
-                the keyword <constant>DESC</constant> after that column.
+                In <acronym>SQL</acronym>, the <acronym>ORDER</acronym> BY clause specifies one or
+                more columns or expressions by which the result set of a query is sorted. If
+                multiple columns are listed, the secondary columns are used to resolve ties; the
+                sort order is determined by the secondary columns if the preceding columns contain
+                identical values. The default sorting is from least value to greatest value. You can
+                also sort by greatest value to least value for a given column in the list by
+                specifying the keyword <constant>DESC</constant> after that column.
             </para>
 
             <para>
@@ -1121,7 +1125,8 @@ $select = $db->select()
 
             <para>
                 The <methodname>forUpdate()</methodname> method enables you to add the
-                <code>FOR UPDATE</code> modifier to your <acronym>SQL</acronym> query.
+                <acronym>FOR</acronym> <acronym>UPDATE</acronym> modifier to your
+                <acronym>SQL</acronym> query.
             </para>
 
             <example id="zend.db.select.building.for-update.example">
@@ -1144,9 +1149,9 @@ $select = $db->select()
 
             <para>
                 You can build union queries with <classname>Zend_Db_Select</classname> by passing an
-                array of <classname>Zend_Db_Select</classname> or SQL Query strings into the
-                <methodname>union()</methodname> method. As second parameter you can pass the
-                <constant>Zend_Db_Select::SQL_UNION</constant> or
+                array of <classname>Zend_Db_Select</classname> or <acronym>SQL</acronym> Query
+                strings into the <methodname>union()</methodname> method. As second parameter you
+                can pass the <constant>Zend_Db_Select::SQL_UNION</constant> or
                 <constant>Zend_Db_Select::SQL_UNION_ALL</constant> constants to specify which type
                 of union you want to perform.
             </para>
@@ -1283,7 +1288,7 @@ echo "$sql\n";
             <para>
                 The single argument to the <methodname>getPart()</methodname> method is a string
                 that identifies which part of the Select query to return. For example, the string
-                <code>'from'</code> identifies the part of the Select object that stores
+                <command>'from'</command> identifies the part of the Select object that stores
                 information about the tables in the <constant>FROM</constant> clause, including
                 joined tables.
             </para>
@@ -1308,52 +1313,52 @@ echo "$sql\n";
                     <tbody>
                         <row>
                             <entry><constant>Zend_Db_Select::DISTINCT</constant></entry>
-                            <entry><code>'distinct'</code></entry>
+                            <entry><command>'distinct'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::FOR_UPDATE</constant></entry>
-                            <entry><code>'forupdate'</code></entry>
+                            <entry><command>'forupdate'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::COLUMNS</constant></entry>
-                            <entry><code>'columns'</code></entry>
+                            <entry><command>'columns'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::FROM</constant></entry>
-                            <entry><code>'from'</code></entry>
+                            <entry><command>'from'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::WHERE</constant></entry>
-                            <entry><code>'where'</code></entry>
+                            <entry><command>'where'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::GROUP</constant></entry>
-                            <entry><code>'group'</code></entry>
+                            <entry><command>'group'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::HAVING</constant></entry>
-                            <entry><code>'having'</code></entry>
+                            <entry><command>'having'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::ORDER</constant></entry>
-                            <entry><code>'order'</code></entry>
+                            <entry><command>'order'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::LIMIT_COUNT</constant></entry>
-                            <entry><code>'limitcount'</code></entry>
+                            <entry><command>'limitcount'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::LIMIT_OFFSET</constant></entry>
-                            <entry><code>'limitoffset'</code></entry>
+                            <entry><command>'limitoffset'</command></entry>
                         </row>
                     </tbody>
                 </tgroup>

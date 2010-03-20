@@ -23,22 +23,22 @@ echo $entry->saveXML();
 ]]></programlisting>
 
         <para>
-            This will output a full (includes <code>&lt;?xml ... &gt;</code> prologue)
+            This will output a full (includes <command>&lt;?xml ... &gt;</command> prologue)
             <acronym>XML</acronym> representation of the new entry, including any necessary
             <acronym>XML</acronym> namespaces.
         </para>
 
         <para>
             Note that the above will work even if the existing entry does not already have an author
-            tag. You can use as many levels of <code>-&gt;</code> access as you like before getting
-            to an assignment; all of the intervening levels will be created for you automatically if
-            necessary.
+            tag. You can use as many levels of <command>-&gt;</command> access as you like before
+            getting to an assignment; all of the intervening levels will be created for you
+            automatically if necessary.
         </para>
     </example>
 
     <para>
-        If you want to use a namespace other than <code>atom:</code>, <code>rss:</code>, or
-        <code>osrss:</code> in your entry, you need to register the namespace with
+        If you want to use a namespace other than <command>atom:</command>, <command>rss:</command>,
+        or <command>osrss:</command> in your entry, you need to register the namespace with
         <classname>Zend_Feed</classname> using
         <methodname>Zend_Feed::registerNamespace()</methodname>. When you are modifying an existing
         element, it will always maintain its original namespace. When adding a new element, it will

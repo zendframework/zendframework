@@ -713,15 +713,15 @@ $labels = $categories->getValues();
             will fall back on alternative elements during its search. For
             example, searching an <acronym>RSS</acronym> feed for a modification date is more
             complicated than it looks. <acronym>RSS</acronym> 2.0 feeds should include a
-            <code>&lt;lastBuildDate&gt;</code> tag and/or a
-            <code>&lt;pubDate&gt;</code> element. But what if it doesn't, maybe
+            <command>&lt;lastBuildDate&gt;</command> tag and (or) a
+            <command>&lt;pubDate&gt;</command> element. But what if it doesn't, maybe
             this is an <acronym>RSS</acronym> 1.0 feed? Perhaps it instead has an
-            <code>&lt;atom:updated&gt;</code> element with identical information
+            <command>&lt;atom:updated&gt;</command> element with identical information
             (Atom may be used to supplement <acronym>RSS</acronym>'s syntax)? Failing that, we
             could simply look at the entries, pick the most recent, and use its
-            <code>&lt;pubDate&gt;</code> element. Assuming it exists... Many
-            feeds also use Dublin Core 1.0/1.1 <code>&lt;dc:date&gt;</code>
-            elements for feeds/entries. Or we could find Atom lurking again.
+            <command>&lt;pubDate&gt;</command> element. Assuming it exists... Many
+            feeds also use Dublin Core 1.0/1.1 <command>&lt;dc:date&gt;</command>
+            elements for feeds and entries. Or we could find Atom lurking again.
         </para>
 
         <para>
@@ -1214,17 +1214,16 @@ $labels = $categories->getValues();
         <para>
             There are two types of Extensions possible, those which retrieve
             information from elements which are immediate children of the root
-            element (e.g. <code>&lt;channel&gt;</code> for <acronym>RSS</acronym> or
-            <code>&lt;feed&gt;</code> for Atom) and those who retrieve
+            element (e.g. <command>&lt;channel&gt;</command> for <acronym>RSS</acronym> or
+            <command>&lt;feed&gt;</command> for Atom) and those who retrieve
             information from child elements of an entry (e.g.
-            <code>&lt;item&gt;</code> for <acronym>RSS</acronym> or <code>&lt;entry&gt;</code> for
-            Atom). On the filesystem these are grouped as classes within
-            a namespace based on the extension standard's name. For
-            example, internally we have
-            <classname>Zend_Feed_Reader_Extension_DublinCore_Feed</classname>
+            <command>&lt;item&gt;</command> for <acronym>RSS</acronym> or
+            <command>&lt;entry&gt;</command> for Atom). On the filesystem these are grouped as
+            classes within a namespace based on the extension standard's name. For example,
+            internally we have <classname>Zend_Feed_Reader_Extension_DublinCore_Feed</classname>
             and <classname>Zend_Feed_Reader_Extension_DublinCore_Entry</classname>
             classes which are two Extensions implementing Dublin Core
-            1.0/1.1 support.
+            1.0 and 1.1 support.
         </para>
 
         <para>
@@ -1403,7 +1402,7 @@ $updatePeriod = $syndication->getUpdatePeriod();
                 new element per entry supplying the <acronym>ISBN</acronym>-10 or
                 <acronym>ISBN</acronym>-13 number of
                 the publication the entry concerns. They define the new
-                <code>&lt;isbn&gt;</code> element quite simply with a standard
+                <command>&lt;isbn&gt;</command> element quite simply with a standard
                 name and namespace <acronym>URI</acronym>:
             </para>
 
@@ -1482,7 +1481,7 @@ class My_FeedReader_Extension_JungleBooks_Entry
                 This extension is easy enough to follow. It creates a new method
                 <methodname>getIsbn()</methodname> which runs an XPath query on
                 the current entry to extract the <acronym>ISBN</acronym> number enclosed by the
-                <code>&lt;jungle:isbn&gt;</code> element. It can optionally
+                <command>&lt;jungle:isbn&gt;</command> element. It can optionally
                 store this to the internal non-persistent cache (no need to keep
                 querying the <acronym>DOM</acronym> if it's called again on the same entry). The
                 value is returned to the caller. At the end we have a protected
@@ -1519,7 +1518,7 @@ $firstIsbn = $feed->current()->getIsbn();
             <para>
                 Writing a feed level Extension is not much different. The
                 example feed from earlier included an unmentioned
-                <code>&lt;jungle:dayPopular&gt;</code> element which Jungle
+                <command>&lt;jungle:dayPopular&gt;</command> element which Jungle
                 Books have added to their standard to include a link to the
                 day's most popular book (in terms of visitor traffic). Here's
                 an Extension which adds a

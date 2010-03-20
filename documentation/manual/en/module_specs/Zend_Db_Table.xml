@@ -135,8 +135,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 The schema and table names may also be specified via constructor configuration
                 directives, which override any default values specified with the
                 <varname>$_name</varname> and <varname>$_schema</varname> properties. A schema
-                specification given with the <code>name</code> directive overrides any value
-                provided with the <code>schema</code> option.
+                specification given with the <property>name</property> directive overrides any value
+                provided with the <property>schema</property> option.
             </para>
 
             <example id="zend.db.table.defining.table-schema.example.constructor">
@@ -284,8 +284,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 If application-specific logic needs to be initialized when a Table class is
                 constructed, you can select to move your tasks to the
                 <methodname>init()</methodname> method, which is called after all Table metadata has
-                been processed. This is recommended over the <code>__construct</code> method if you
-                do not need to alter the metadata in any programmatic way.
+                been processed. This is recommended over the <methodname>__construct()</methodname>
+                method if you do not need to alter the metadata in any programmatic way.
             </para>
 
             <example id="zend.db.table.defining.init.usage.example">
@@ -323,7 +323,7 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 The first way to provide a database adapter to a Table class is by passing it as an
                 object of type <classname>Zend_Db_Adapter_Abstract</classname> in the options array,
-                identified by the key <code>'db'</code>.
+                identified by the key '<property>db</property>'.
             </para>
 
             <example id="zend.db.table.constructing.adapter.example">
@@ -376,9 +376,9 @@ $table = new Bugs();
 
             <para>
                 The third way to provide a database adapter to a Table class is by passing a string
-                in the options array, also identified by the <code>'db'</code> key. The string is
-                used as a key to the static <classname>Zend_Registry</classname> instance, where the
-                entry at that key is an object of type
+                in the options array, also identified by the '<property>db</property>' key. The
+                string is used as a key to the static <classname>Zend_Registry</classname> instance,
+                where the entry at that key is an object of type
                 <classname>Zend_Db_Adapter_Abstract</classname>.
             </para>
 
@@ -592,11 +592,11 @@ class BugStatus extends Zend_Db_Table_Abstract
         <title>Updating Rows in a Table</title>
 
         <para>
-            You can update rows in a database table using the <code>update</code> method of a Table
-            class. This method takes two arguments: an associative array of columns to change and
-            new values to assign to these columns; and an <acronym>SQL</acronym> expression that is
-            used in a <constant>WHERE</constant> clause, as criteria for the rows to change in the
-            <constant>UPDATE</constant> operation.
+            You can update rows in a database table using the <methodname>update()</methodname>
+            method of a Table class. This method takes two arguments: an associative array of
+            columns to change and new values to assign to these columns; and an
+            <acronym>SQL</acronym> expression that is used in a <constant>WHERE</constant> clause,
+            as criteria for the rows to change in the <constant>UPDATE</constant> operation.
         </para>
 
         <example id="zend.db.table.update.example">
@@ -933,10 +933,10 @@ $rows = $table->fetchAll($select);
             </example>
 
             <para>
-                You may also pass sorting criteria in an <code>ORDER BY</code> clause, as well as
-                count and offset integer values, used to make the query return a specific subset of
-                rows. These values are used in a <constant>LIMIT</constant> clause, or in equivalent
-                logic for <acronym>RDBMS</acronym> brands that do not support the
+                You may also pass sorting criteria in an <constant>ORDER</constant> BY clause, as
+                well as count and offset integer values, used to make the query return a specific
+                subset of rows. These values are used in a <constant>LIMIT</constant> clause, or in
+                equivalent logic for <acronym>RDBMS</acronym> brands that do not support the
                 <constant>LIMIT</constant> syntax.
             </para>
 
@@ -1341,8 +1341,9 @@ $bugs = new Bugs(array('metadataCache' => $cache));
             <title>Automatic Serialization with the Cache Frontend</title>
 
             <para>
-                Since the information returned from the adapter's describeTable() method is an
-                array, ensure that the <code>automatic_serialization</code> option is set to
+                Since the information returned from the adapter's
+                <methodname>describeTable()</methodname> method is an array, ensure that the
+                <property>automatic_serialization</property> option is set to
                 <constant>TRUE</constant> for the <classname>Zend_Cache_Core</classname> frontend.
             </para>
         </note>
@@ -1397,7 +1398,7 @@ protected $_metadata = array(
 
             <para>
                 You can disable this optimization by turning of the
-                <code>metadataCacheInClass</code> flag:
+                <property>metadataCacheInClass</property> flag:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1433,8 +1434,8 @@ $bugs->setMetadataCacheInClass(false);
 
             <para>
                 You can specify Row and Rowset classes using the Table constructor's options array,
-                in keys <code>'rowClass'</code> and <code>'rowsetClass'</code> respectively.
-                Specify the names of the classes using strings.
+                in keys '<property>rowClass</property>' and '<property>rowsetClass</property>'
+                respectively. Specify the names of the classes using strings.
             </para>
 
             <example id="zend.db.table.extending.row-rowset.example">
@@ -1586,8 +1587,8 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                For example, if your table class name is "<code>BugsProducts</code>", it would
-                match the physical table in the database called "<code>bugs_products</code>," if
+                For example, if your table class name is "BugsProducts", it would
+                match the physical table in the database called "bugs_products", if
                 you omit the explicit declaration of the <varname>$_name</varname> class property.
                 In this inflection mapping, the class name spelled in "CamelCase" format would be
                 transformed to lower case, and words are separated with an underscore.

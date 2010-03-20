@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21501 -->
+<!-- EN-Revision: 21562 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Standard Prüfklassen</title>
@@ -98,77 +98,10 @@
     <xi:include href="Zend_Validate-GreaterThan.xml" />
     <xi:include href="Zend_Validate-Hex.xml" />
     <xi:include href="Zend_Validate-Hostname.xml" />
-
-    <sect2 id="zend.validate.set.iban">
-        <title>Iban</title>
-
-        <para>
-            Gibe nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> eine
-            gültige IBAN (Internationale Bank Account Nummer) enthält. IBAN Nummern werden gegen ein
-            Land geprüft in dem Sie verwendet werden und durch eine Checksumme.
-        </para>
-
-        <para>
-            Es gibt zwei Wege um IBAN Nummern zu prüfen. Als ersten Weg kann man ein Gebietsschema
-            angeben welches das Land repräsentiert. Jede angegebene IBAN Nummer wird das gegen
-            dieses Land geprüft.
-        </para>
-
-        <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Iban('de_AT');
-$iban = 'AT611904300234573201';
-if ($validator->isValid($iban)) {
-    // IBAN scheint gültig zu sein
-} else {
-    // IBAN ist ungültig
-    foreach ($validator->getMessages() as $message) {
-        echo "$message\n";
-    }
-}
-]]></programlisting>
-
-        <para>
-            Das sollte man tun wenn man IBAN Nummern gegen ein einzelnes Land prüfen will. Der
-            einfachere Weg der Prüfung ist es kein Gebietsschema anzugeben wie im nächsten Beispiel
-            gezeigt.
-        </para>
-
-        <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Iban();
-$iban = 'AT611904300234573201';
-if ($validator->isValid($iban)) {
-    // IBAN scheint gültig zu sein
-} else {
-    // IBAN ist ungültig
-}
-]]></programlisting>
-
-        <para>
-            Aber das zeigt ein großes Problem: Wenn man nur IBAN Nummern von einem einzelnen Land
-            akzeptieren darf, zum Beispiel Frankreich, sind auch die IBAN Nummer von anderen Ländern
-            gültig. Deshalb als Erinnerung: Wenn man IBAN Nummern gegen ein definiertes Land zu
-            prüfen hat, sollte man ein Gebietsschema angeben. Und wenn man alle IBAN Nummern
-            akzeptieren will unabhängig von irgendeinem Land kann der Einfachheit halber das
-            Gebietsschema unterdrückt werden.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Iban.xml" />
     <xi:include href="Zend_Validate-Identical.xml" />
     <xi:include href="Zend_Validate-InArray.xml" />
-
-    <sect2 id="zend.validate.set.int">
-        <title>Int</title>
-
-        <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> ein
-            gültiger Integer ist. Seit Zend Framework 1.8 verwendet diese Prüfung auch das aktuelle
-            Gebietsschema des Browsers, der Umgebung oder eines anwendungsweit gesetzten
-            Gebietsschemas. Man kann natürlich die Zugriffsmethoden get/setLocale verwenden um das
-            verwendete Gebietsschema zu verändern oder es bei der Erstellung einer Instanz dieser
-            Prüfung angeben.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Int.xml" />
     <xi:include href="Zend_Validate-Isbn.xml" />
     <xi:include href="Zend_Validate-Ip.xml" />
     <xi:include href="Zend_Validate-LessThan.xml" />

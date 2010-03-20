@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21259 -->
+<!-- EN-Revision: 21501 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Standard Prüfklassen</title>
@@ -174,34 +174,7 @@ if ($validator->isValid($iban)) {
     <xi:include href="Zend_Validate-LessThan.xml" />
     <xi:include href="Zend_Validate-NotEmpty.xml" />
     <xi:include href="Zend_Validate-PostCode.xml" />
-
-    <sect2 id="zend.validate.set.regex">
-        <title>Regex</title>
-
-        <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> mit einem
-            Regular Expression Pattern geprüft werden kann.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Regex.xml" />
     <xi:include href="Zend_Validate-Sitemap.xml" />
-
-    <sect2 id="zend.validate.set.string_length">
-        <title>StringLength</title>
-
-        <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn die Länge des Strings von
-            <varname>$value</varname> mindstens ein Minimum und nicht größer als ein Maximum ist
-            (wenn die max Option nicht <constant>NULL</constant> ist). Wirft die
-            <methodname>setMin()</methodname> Methode eine Ausnahme wenn die minimale Länge auf
-            einen größeren Wert gesetzt wird als die maximale Länge, und die
-            <methodname>setMax()</methodname> Methode wirft eine Ausnahme wenn die maximale Länge
-            auf einen kleineren Wert als die minimale Länge gesetzt wird. Seit Version 1.0.2
-            unterstützt diese Klasse UTF-8 und andere Zeichensätze, basierend auf dem aktuellen Wert
-            von <ulink
-                url="http://www.php.net/manual/de/ref.iconv.php#iconv.configuration">iconv.internal_encoding</ulink>.
-            Wenn man ein anderes Encoding benötigt kann man es mit den Zugriffsmethoden getEncoding
-            und setEncoding setzen.
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-StringLength.xml" />
 </sect1>

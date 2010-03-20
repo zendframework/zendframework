@@ -48,7 +48,7 @@ $validator->isValid("Pest"); // Gibt false zurück
             Wie man sehen kann hat das Pattern welches anzugeben ist die gleiche Syntax wie für
             <methodname>preg_match</methodname>. Für Details über Regular Expressions sollte man
             einen Blick in <ulink
-                linkend="http://php.net/manual/en/reference.pcre.pattern.syntax.php">PHP's Handbuch
+                url="http://php.net/manual/en/reference.pcre.pattern.syntax.php">PHP's Handbuch
                 über die PCRE Pattern Syntax</ulink> werfen.
         </para>
     </sect3>

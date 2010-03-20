@@ -9,11 +9,19 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>Specifying either a CDN or a local path to a Dojo install.</para></listitem>
+        <listitem>
+            <para>
+                Specifying either a <acronym>CDN</acronym> or a local path to a Dojo install.
+            </para>
+        </listitem>
+
         <listitem><para>Specifying paths to custom Dojo modules.</para></listitem>
-        <listitem><para>Specifying dojo.require statements.</para></listitem>
+        <listitem><para>Specifying <command>dojo.require</command> statements.</para></listitem>
         <listitem><para>Specifying dijit stylesheet themes to use.</para></listitem>
-        <listitem><para>Specifying dojo.addOnLoad() events.</para></listitem>
+
+        <listitem>
+            <para>Specifying <command>dojo.addOnLoad()</command> events.</para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -116,7 +124,7 @@ $this->dojo()->enable()
             By default, Zend Framework uses <acronym>UTF-8</acronym> as its default encoding, and,
             specific to this case, <classname>Zend_View</classname> does as well. Character encoding
             can be set differently on the view object itself using the
-            <methodname>setEncoding()</methodname> method (or the the <varname>encoding</varname>
+            <methodname>setEncoding()</methodname> method (or the <property>encoding</property>
             instantiation parameter). However, since <classname>Zend_View_Interface</classname> does
             not define accessors for encoding, it's possible that if you are using a custom view
             implementation with the Dojo view helper, you will not have a
@@ -137,7 +145,7 @@ $this->dojo()->enable()
         <para>
             Dojo allows both <emphasis>declarative</emphasis> and
             <emphasis>programmatic</emphasis> usage of many of its features.
-            <emphasis>Declarative</emphasis> usage uses standard HTML elements
+            <emphasis>Declarative</emphasis> usage uses standard <acronym>HTML</acronym> elements
             with non-standard attributes that are parsed when the page is
             loaded. While this is a powerful and simple syntax to utilize, for
             many developers this can cause issues with page validation.
@@ -147,7 +155,7 @@ $this->dojo()->enable()
             <emphasis>Programmatic</emphasis> usage allows the developer to
             decorate existing elements by pulling them by ID or <acronym>CSS</acronym> selectors
             and passing them to the appropriate object constructors in Dojo.
-            Because no non-standard HTML attributes are used, pages continue to
+            Because no non-standard <acronym>HTML</acronym> attributes are used, pages continue to
             validate.
         </para>
 
@@ -223,7 +231,7 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
             directory separator and using the last value in the list as the name
             of the <acronym>CSS</acronym> file in that theme directory to use; in the example
             above, Dojo will look for the theme in
-            'dijit/themes/tundra/tundra.css'.
+            '<filename>dijit/themes/tundra/tundra.css</filename>'.
         </para>
 
         <para>
@@ -241,7 +249,7 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
         <title>Using Layers (Custom Builds)</title>
 
         <para>
-            By default, when you use a dojo.require statement, dojo will make a
+            By default, when you use a <command>dojo.require</command> statement, dojo will make a
             request back to the server to grab the appropriate javascript file.
             If you have many dijits in place, this results in many requests to
             the server -- which is not optimal.
@@ -335,7 +343,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
             <listitem>
                 <para>
                     <methodname>requireModule($module)</methodname>: setup a
-                    <property>dojo.require</property> statement.
+                    <command>dojo.require</command> statement.
                 </para>
             </listitem>
 
@@ -384,7 +392,8 @@ $view->dojo()->addLayer('/js/foo/foo.js');
             <listitem>
                 <para>
                     <methodname>setCdnBase($url)</methodname>: set the base <acronym>URL</acronym>
-                    for a CDN; typically, one of the <constant>Zend_Dojo::CDN_BASE_AOL</constant> or
+                    for a <acronym>CDN</acronym>; typically, one of the
+                    <constant>Zend_Dojo::CDN_BASE_AOL</constant> or
                     <constant>Zend_Dojo::CDN_BASE_GOOGLE</constant>, but it only needs
                     to be the <acronym>URL</acronym> string prior to the version number.
                 </para>
@@ -392,29 +401,31 @@ $view->dojo()->addLayer('/js/foo/foo.js');
 
             <listitem>
                 <para>
-                    <methodname>getCdnBase()</methodname>: retrieve the base CDN url to utilize.
+                    <methodname>getCdnBase()</methodname>: retrieve the base <acronym>CDN</acronym>
+                    url to utilize.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>setCdnVersion($version = null)</methodname>: set
-                    which version of Dojo to utilize from the CDN.
+                    which version of Dojo to utilize from the <acronym>CDN</acronym>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>getCdnVersion()</methodname>: retrieve what
-                    version of Dojo from the CDN will be used.
+                    version of Dojo from the <acronym>CDN</acronym> will be used.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>setCdnDojoPath($path)</methodname>: set the relative
-                    path to the dojo.js or dojo.xd.js file on a CDN; typically,
-                    one of the <constant>Zend_Dojo::CDN_DOJO_PATH_AOL</constant> or
+                    path to the <filename>dojo.js</filename> or <filename>dojo.xd.js</filename>
+                    file on a <acronym>CDN</acronym>; typically, one of the
+                    <constant>Zend_Dojo::CDN_DOJO_PATH_AOL</constant> or
                     <constant>Zend_Dojo::CDN_DOJO_PATH_GOOGLE</constant>, but it only
                     needs to be the path string following the version number.
                 </para>
@@ -422,15 +433,15 @@ $view->dojo()->addLayer('/js/foo/foo.js');
 
             <listitem>
                 <para>
-                    <methodname>getCdnDojoPath()</methodname>: retrieve the last
-                    path segment of the CDN url pointing to the dojo.js file.
+                    <methodname>getCdnDojoPath()</methodname>: retrieve the last path segment of the
+                    <acronym>CDN</acronym> url pointing to the <filename>dojo.js</filename> file.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>useCdn()</methodname>: tell the container to
-                    utilize the CDN; implicitly enables integration.
+                    utilize the <acronym>CDN</acronym>; implicitly enables integration.
                 </para>
             </listitem>
 
@@ -438,7 +449,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                 <para>
                     <methodname>setLocalPath($path)</methodname>: tell the container
                     the path to a local Dojo install (should be a path relative
-                    to the server, and contain the dojo.js file itself);
+                    to the server, and contain the <filename>dojo.js</filename> file itself);
                     implicitly enables integration.
                 </para>
             </listitem>
@@ -460,27 +471,28 @@ $view->dojo()->addLayer('/js/foo/foo.js');
             <listitem>
                 <para>
                     <methodname>setDjConfig(array $config)</methodname>: set
-                    dojo/dijit configuration values (expects assoc array).
+                    dojo or dijit configuration values (expects assoc array).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>setDjConfigOption($option, $value)</methodname>: set
-                    a single dojo/dijit configuration value.
+                    a single dojo or dijit configuration value.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>getDjConfig()</methodname>: get all dojo/dijit configuration values.
+                    <methodname>getDjConfig()</methodname>: get all dojo or dijit configuration
+                    values.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>getDjConfigOption($option, $default = null)</methodname>: get a
-                    single dojo/dijit configuration value.
+                    single dojo or dijit configuration value.
                 </para>
             </listitem>
 
@@ -512,7 +524,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
             <listitem>
                 <para>
                     <methodname>addOnLoad($spec, $function = null)</methodname>: add
-                    a lambda for dojo.onLoad to call. If one argument is passed,
+                    a lambda for <command>dojo.onLoad</command> to call. If one argument is passed,
                     it is assumed to be either a function name or a javascript
                     closure. If two arguments are passed, the first is assumed
                     to be the name of an object instance variable and the second
@@ -532,7 +544,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
             <listitem>
                 <para>
                     <methodname>getOnLoadActions()</methodname>: retrieve all
-                    dojo.onLoad actions registered with the container. This will
+                    <command>dojo.onLoad</command> actions registered with the container. This will
                     be an array of arrays.
                 </para>
             </listitem>
@@ -540,16 +552,16 @@ $view->dojo()->addLayer('/js/foo/foo.js');
             <listitem>
                 <para>
                     <methodname>onLoadCaptureStart($obj = null)</methodname>:
-                    capture data to be used as a lambda for dojo.onLoad(). If
-                    $obj is provided, the captured JS code will be considered a
-                    closure to use with that Javascript object.
+                    capture data to be used as a lambda for <command>dojo.onLoad()</command>.
+                    If <varname>$obj</varname> is provided, the captured JS code will be considered
+                    a closure to use with that Javascript object.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>onLoadCaptureEnd($obj = null)</methodname>: finish
-                    capturing data for use with dojo.onLoad().
+                    capturing data for use with <command>dojo.onLoad()</command>.
                 </para>
             </listitem>
 
@@ -570,7 +582,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
             <listitem>
                 <para>
                     <methodname>__toString()</methodname>: cast the container to a
-                    string; renders all HTML style and script elements.
+                    string; renders all <acronym>HTML</acronym> style and script elements.
                 </para>
             </listitem>
         </itemizedlist>

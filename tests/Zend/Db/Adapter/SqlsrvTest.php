@@ -61,7 +61,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
      * Test AUTO_QUOTE_IDENTIFIERS option
      * Case: Zend_Db::AUTO_QUOTE_IDENTIFIERS = true
      */
-    public function t1estAdapterAutoQuoteIdentifiersTrue()
+    public function testAdapterAutoQuoteIdentifiersTrue()
     {
         $params = $this->_util->getParams();
 
@@ -84,7 +84,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
      * Test the Adapter's insert() method.
      * This requires providing an associative array of column=>value pairs.
      */
-    public function t1estAdapterInsert()
+    public function testAdapterInsert()
     {
         $row = array (
             'bug_description' => 'New bug',
@@ -114,7 +114,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
      * This requires providing an associative array of column=>value pairs.
      * Multiple rows are insert in one query
      */
-    public function t1estAdapterMultipleInsert()
+    public function testAdapterMultipleInsert()
     {
         $row = array (
             'bug_description' => 'New bug',
@@ -145,7 +145,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
         $this->assertEquals(3, $rowsAffected);
     }
 
-    public function t1estAdapterDescribeTableAttributeColumn()
+    public function testAdapterDescribeTableAttributeColumn()
     {
         $desc = $this->_db->describeTable('zfproducts');
 
@@ -164,7 +164,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
         $this->assertFalse($desc['product_name']['IDENTITY'], 'Expected product_name to return false for IDENTITY');
     }
 
-    public function t1estAdapterDescribeTablePrimaryKeyColumn()
+    public function testAdapterDescribeTablePrimaryKeyColumn()
     {
         $desc = $this->_db->describeTable('zfproducts');
 
@@ -183,7 +183,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
      * Test that quote() takes an array and returns
      * an imploded string of comma-separated, quoted elements.
      */
-    public function t1estAdapterQuoteArray()
+    public function testAdapterQuoteArray()
     {
         $array = array("it's", 'all', 'right!');
         $value = $this->_db->quote($array);
@@ -194,7 +194,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
      * test that quote() escapes a double-quote
      * character in a string.
      */
-    public function t1estAdapterQuoteDoubleQuote()
+    public function testAdapterQuoteDoubleQuote()
     {
         $string = 'St John"s Wort';
         $value  = $this->_db->quote($string);
@@ -205,7 +205,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
      * test that quote() escapes a single-quote
      * character in a string.
      */
-    public function t1estAdapterQuoteSingleQuote()
+    public function testAdapterQuoteSingleQuote()
     {
         $string = "St John's Wort";
         $value  = $this->_db->quote($string);
@@ -216,7 +216,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
      * test that quoteInto() escapes a double-quote
      * character in a string.
      */
-    public function t1estAdapterQuoteIntoDoubleQuote()
+    public function testAdapterQuoteIntoDoubleQuote()
     {
         $string = 'id=?';
         $param  = 'St John"s Wort';
@@ -228,7 +228,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
      * test that quoteInto() escapes a single-quote
      * character in a string.
      */
-    public function t1estAdapterQuoteIntoSingleQuote()
+    public function testAdapterQuoteIntoSingleQuote()
     {
         $string = 'id = ?';
         $param  = 'St John\'s Wort';
@@ -236,12 +236,12 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
         $this->assertEquals("id = 'St John''s Wort'", $value);
     }
 
-    public function t1estAdapterInsertSequence()
+    public function testAdapterInsertSequence()
     {
         $this->markTestSkipped($this->getDriver() . ' does not support sequences.');
     }
 
-    public function t1estAdapterInsertDbExpr()
+    public function testAdapterInsertDbExpr()
     {
         $bugs   = $this->_db->quoteIdentifier('zfbugs');
         $bug_id = $this->_db->quoteIdentifier('bug_id');
@@ -272,7 +272,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
     /**
      * @group ZF-1541
      */
-    public function t1estCharacterSetUtf8()
+    public function testCharacterSetUtf8()
     {
         // Create a new adapter
         $params = $this->_util->getParams();
@@ -322,7 +322,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
         $util->dropTable($tableName);
     }
 
-    public function t1estAdapterTransactionCommit()
+    public function testAdapterTransactionCommit()
     {
         $bugs   = $this->_db->quoteIdentifier('zfbugs');
         $bug_id = $this->_db->quoteIdentifier('bug_id');
@@ -366,7 +366,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
         $this->assertEquals(2, $count);
     }
 
-    public function t1estAdapterTransactionRollback()
+    public function testAdapterTransactionRollback()
     {
         $bugs   = $this->_db->quoteIdentifier('zfbugs');
         $bug_id = $this->_db->quoteIdentifier('bug_id');
@@ -411,7 +411,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
         $this->assertEquals(3, $count, 'Expecting to see 3 rows in bugs table after DELETE (step 4)');
     }
 
-    public function t1estCanChangeIsolationLevel()
+    public function testCanChangeIsolationLevel()
     {
         $db = $this->_db;
 
@@ -477,40 +477,5 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
     public function getDriver()
     {
         return 'Sqlsrv';
-    }
-    
-    /**
-     * @group ZF-9252
-     */
-    public function testAdapterLimit()
-    {
-        $params = $this->_util->getParams();
-
-        $params['options'] = array(
-            Zend_Db::AUTO_QUOTE_IDENTIFIERS => true
-        );
-        $db = Zend_Db::factory($this->getDriver(), $params);
-        $db->getConnection();
-        DBG($db);exit;
-        
-        $products = $this->_db->quoteIdentifier('zfproducts');
-        $product_id = $this->_db->quoteIdentifier('product_id');
-
-        $sql = $this->_db->limit("SELECT * FROM $products ORDER BY $product_id", 1);
-        DBG($sql);
-
-        $stmt = $this->_db->query($sql);
-        $result = $stmt->fetchAll();
-        $this->assertEquals(1, count($result),
-            'Expecting row count to be 1');
-        $this->assertEquals(2, count($result[0]),
-            'Expecting column count to be 2');
-        $this->assertEquals(1, $result[0]['product_id'],
-            'Expecting to get product_id 1');
-
-        // Check that extra field ZEND_DB_ROWNUM isn't present
-        // (particulary with Db2 & Oracle)
-        $this->assertArrayNotHasKey('zend_db_rownum', $result[0]);
-        $this->assertArrayNotHasKey('ZEND_DB_ROWNUM', $result[0]);
     }
 }

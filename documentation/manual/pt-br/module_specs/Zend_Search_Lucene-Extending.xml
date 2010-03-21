@@ -20,7 +20,7 @@
 
         <para>
             Você pode estipular o seu próprio analisador de textos ou selecioná-lo dentre uma lista
-            de analisadores prédefinidos:
+            de analisadores pré-definidos:
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text</classname> e
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname>
             (padrão). Ambos interpretam os "tokens" como sequencias de letras.
@@ -294,7 +294,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         <para>
             queryNorm(q) - o valor de normalização para uma consulta dado a soma das relevâncias ao
             quadrado de cada termo da consulta. Este valor é então multiplicado pela relevância de
-            cada ítem da consulta.
+            cada item da consulta.
         </para>
 
         <para>
@@ -374,7 +374,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
         </para>
 
         <para>
-            Você pode definir a sua própria implementação de diretório extendendo a classe
+            Você pode definir a sua própria implementação de diretório estendendo a classe
             <classname>Zend_Search_Lucene_Storage_Directory</classname>.
         </para>
 
@@ -472,7 +472,7 @@ abstract function getFileObject($filename);
         </para>
 
         <para>
-            Se fizer isso, você também terá que extender
+            Se fizer isso, você também terá que estender
             <classname>Zend_Search_Lucene_Storage_File</classname> para a sua implementação de
             diretório.
         </para>

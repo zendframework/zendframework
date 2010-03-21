@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 21586 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.exception.previous">
     <title>Exceções Anteriores</title>
 
     <para>
         Desde o Zend Framework 1.10, <classname>Zend_Exception</classname> implementa as exceções
-        anteriores do PHP 5.3. Simplificando, em um bloco <methodname>catch</methodname>, você pode
-        lançar uma nova exceção que faz referência a exceção original, ajudando a fornecer contexto
-        adicional na depuração. Ao fornecer este suporte no Zend Framework, seu código agora poderá
-        avançar na compatibilidade com o PHP 5.3.
+        anteriores do <acronym>PHP</acronym> 5.3. Simplificando, em um bloco
+        <methodname>catch()</methodname>, você pode lançar uma nova exceção que faz referência a
+        exceção original, ajudando a fornecer contexto adicional na depuração. Ao fornecer este
+        suporte no Zend Framework, seu código agora poderá avançar na compatibilidade com o
+        <acronym>PHP</acronym> 5.3.
     </para>
 
     <para>

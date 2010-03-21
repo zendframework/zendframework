@@ -31,7 +31,7 @@ class SimpleExchange implements Zend_Currency_CurrencyInterface
 
         switch ($to) {
             case 'EUR':
-                return 0.5;
+                return 2;
             case 'JPE':
                 return 0.7;
        }

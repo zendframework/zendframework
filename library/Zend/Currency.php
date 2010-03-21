@@ -91,14 +91,15 @@ class Zend_Currency
     public function __construct($options = null, $locale = null)
     {
         if (is_array($options)) {
+            $this->setLocale($locale);
             $this->setFormat($options);
         } else if (Zend_Locale::isLocale($options, false, false)) {
-            $temp    = $locale;
-            $locale  = $options;
-            $options = $temp;
+            $this->setLocale($options);
+            $options = $locale;
+        } else {
+            $this->setLocale($locale);
         }
 
-        $this->setLocale($locale);
         // Get currency details
         if (!isset($this->_options['currency']) || !is_array($options)) {
             $this->_options['currency'] = self::getShortName($options, $this->_options['locale']);
@@ -745,11 +746,13 @@ class Zend_Currency
     protected function _exchangeCurrency($value, $currency)
     {
         if ($value instanceof Zend_Currency) {
-            $value = $value->getValue();
+            $currency = $value->getShortName();
+            $value    = $value->getValue();
+        } else {
+            $currency = $this->getShortName($currency);
         }
 
-        $currency = $this->getShortName($currency);
-        $rate     = 1;
+        $rate = 1;
         if ($currency !== $this->getShortName()) {
             $service = $this->getService();
             if (!($service instanceof Zend_Currency_CurrencyInterface)) {

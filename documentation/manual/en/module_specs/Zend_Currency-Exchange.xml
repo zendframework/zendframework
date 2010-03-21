@@ -79,7 +79,7 @@ $service  = new SimpleExchange();
 // attach the exchange service
 $currency->setService($service);
 
-$currency_2 = new Zend_Currency(
+$currency2 = new Zend_Currency(
     array(
         'value'    => 1000,
         'currency' => 'EUR',

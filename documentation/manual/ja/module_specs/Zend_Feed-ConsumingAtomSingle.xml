@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21586 -->
 <sect1 id="zend.feed.consuming-atom-single-entry">
     <title>単一の Atom エントリの処理</title>
 
     <para>
-        Atom の個々の <code>&lt;entry&gt;</code> 要素は、それ単体でも有効です。通常、
-        エントリの <acronym>URL</acronym> はフィードの <acronym>URL</acronym> に <code>/&lt;エントリId&gt;</code>
+        Atom の個々の <command>&lt;entry&gt;</command> 要素は、それ単体でも有効です。通常、
+        エントリの <acronym>URL</acronym> はフィードの <acronym>URL</acronym> に <command>/&lt;エントリId&gt;</command>
         を続けたものになります。先に使用した例の場合は、
-        <code>http://atom.example.com/feed/1</code> となります。
+        <filename>http://atom.example.com/feed/1</filename> となります。
     </para>
 
     <para>
@@ -29,7 +29,7 @@ $entry = $feed->current();
     </example>
 
     <para>
-        <code>&lt;entry&gt;</code> のみのドキュメントにアクセスすることがわかっている場合は、
+        <command>&lt;entry&gt;</command> のみのドキュメントにアクセスすることがわかっている場合は、
         エントリオブジェクトを直接作成することもできます。
     </para>
 

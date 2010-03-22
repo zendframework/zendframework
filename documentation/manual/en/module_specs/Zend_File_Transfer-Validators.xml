@@ -1183,7 +1183,7 @@ $upload->addValidator('MimeType',
 
             <para>
                 You should be aware of possible security problems when you have whether
-                <classname>FileInfo</classname> nor <classname>mime_content_type()</methodname>
+                <classname>FileInfo</classname> nor <methodname>mime_content_type()</methodname>
                 available. The <acronym>MIME</acronym> type given by <acronym>HTTP</acronym> is not
                 secure and can be easily manipulated.
             </para>

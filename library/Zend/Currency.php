@@ -843,10 +843,12 @@ class Zend_Currency
 
                 case 'format':
                     if ((empty($value) === false) and (Zend_Locale::isLocale($value, null, false) === false)) {
-                        require_once 'Zend/Currency/Exception.php';
-                        throw new Zend_Currency_Exception("'" .
-                            ((gettype($value) === 'object') ? get_class($value) : $value)
-                            . "' is not a known locale.");
+                        if (!is_string($value) || (strpos($value, '0') === false)) {
+                            require_once 'Zend/Currency/Exception.php';
+                            throw new Zend_Currency_Exception("'" .
+                                ((gettype($value) === 'object') ? get_class($value) : $value)
+                                . "' is no format token");
+                        }
                     }
                     break;
 

@@ -388,7 +388,7 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
             $USD->setFormat(array('format' => 'unknown'));
             $this->fail("Exception expected");
         } catch (Zend_Currency_Exception $e) {
-            $this->assertContains("is not a known locale", $e->getMessage());
+            $this->assertContains("is no format token", $e->getMessage());
         }
 
         try {
@@ -785,9 +785,18 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
     /**
      * IsLess values
      */
-    public function testContructingPrecisionValues()
+    public function testConstructingPrecisionValues()
     {
         $currency  = new Zend_Currency(array('value' => 100.5));
         $this->assertEquals('€ 100,50', $currency->toString('de_AT'));
+    }
+
+    /**
+     * @ZF-9491
+     */
+    public function testCurrencyWithSelfPattern()
+    {
+        $currency  = new Zend_Currency(array('value' => 10000, 'format' => '#,#0', 'locale' => 'de_DE'));
+        $this->assertEquals('1.00.00', $currency->toString());
     }
 }

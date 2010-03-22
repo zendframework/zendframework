@@ -48,7 +48,7 @@ $filtered = $inflector->filter(array('page' => $string));
             An inflector requires a <emphasis>target</emphasis> and one or more
             <emphasis>rules</emphasis>. A target is basically a string that
             defines placeholders for variables you wish to substitute. These are
-            specified by prefixing with a ':': <code>:script</code>.
+            specified by prefixing with a ':': <emphasis>:script</emphasis>.
         </para>
 
         <para>
@@ -146,7 +146,7 @@ $inflector->setTargetReplacementIdentifier('#');
             Typically, you will set the target via the constructor. However, you
             may want to re-set the target later (for instance, to modify the
             default inflector in core components, such as the
-            <code>ViewRenderer</code> or <classname>Zend_Layout</classname>).
+            <classname>ViewRenderer</classname> or <classname>Zend_Layout</classname>).
             <methodname>setTarget()</methodname> can be used for this purpose:
         </para>
 
@@ -461,20 +461,20 @@ $inflector->addRules(array(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>target</code> specifies the inflection target.
+                    <property>target</property> specifies the inflection target.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>filterPrefixPath</code> specifies one or more filter
+                    <property>filterPrefixPath</property> specifies one or more filter
                     prefix/path pairs for use with the inflector.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>throwTargetExceptionsOn</code> should be a boolean
+                    <property>throwTargetExceptionsOn</property> should be a boolean
                     indicating whether or not to throw exceptions when a
                     replacement identifier is still present after inflection.
                 </para>
@@ -482,7 +482,7 @@ $inflector->addRules(array(
 
             <listitem>
                 <para>
-                    <code>targetReplacementIdentifier</code> specifies the
+                    <property>targetReplacementIdentifier</property> specifies the
                     character to use when identifying replacement variables in
                     the target string.
                 </para>
@@ -490,7 +490,7 @@ $inflector->addRules(array(
 
             <listitem>
                 <para>
-                    <code>rules</code> specifies an array of inflection rules;
+                    <property>rules</property> specifies an array of inflection rules;
                     it should consist of keys that specify either values or
                     arrays of values, consistent with <methodname>addRules()</methodname>.
                 </para>

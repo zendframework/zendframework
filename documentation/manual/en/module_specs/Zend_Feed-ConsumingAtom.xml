@@ -36,104 +36,100 @@ foreach ($feed as $entry) {
         In an Atom feed you can expect to find the following feed properties:
     </para>
 
-    <para>
-        <itemizedlist>
-            <listitem>
-                <para>
-                    <property>title</property> - The feed's title, same as <acronym>RSS</acronym>'s
-                    channel title
-                </para>
-            </listitem>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <property>title</property> - The feed's title, same as <acronym>RSS</acronym>'s
+                 channel title
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>id</property> - Every feed and entry in Atom has a unique identifier
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>id</property> - Every feed and entry in Atom has a unique identifier
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>link</property> - Feeds can have multiple links, which are
-                    distinguished by a <property>type</property> attribute
-                </para>
+        <listitem>
+            <para>
+                <property>link</property> - Feeds can have multiple links, which are
+                distinguished by a <property>type</property> attribute
+            </para>
 
-                <para>
-                    The equivalent to <acronym>RSS</acronym>'s channel link would be
-                    <command>type="text/html"</command>. if the link is to an alternate version of
-                    the same content that's in the feed, it would have a
-                    <command>rel="alternate"</command> attribute.
-                </para>
-            </listitem>
+            <para>
+                The equivalent to <acronym>RSS</acronym>'s channel link would be
+                <command>type="text/html"</command>. if the link is to an alternate version of
+                the same content that's in the feed, it would have a
+                <command>rel="alternate"</command> attribute.
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>subtitle</property> - The feed's description, equivalent to
-                    <acronym>RSS</acronym>' channel description
-                </para>
+        <listitem>
+            <para>
+                <property>subtitle</property> - The feed's description, equivalent to
+                <acronym>RSS</acronym>' channel description
+            </para>
 
-                <para><command>author->name()</command> - The feed author's name</para>
-                <para><command>author->email()</command> - The feed author's email address</para>
-            </listitem>
-        </itemizedlist>
-    </para>
+            <para><property>author->name()</property> - The feed author's name</para>
+            <para><property>author->email()</property> - The feed author's email address</para>
+        </listitem>
+    </itemizedlist>
 
     <para>
         Atom entries commonly have the following properties:
     </para>
 
-    <para>
-        <itemizedlist>
-            <listitem>
-                <para><property>id</property> - The entry's unique identifier</para>
-            </listitem>
+    <itemizedlist>
+        <listitem>
+            <para><property>id</property> - The entry's unique identifier</para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>title</property> - The entry's title, same as <acronym>RSS</acronym>
-                    item titles
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>title</property> - The entry's title, same as <acronym>RSS</acronym>
+                item titles
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>link</property> - A link to another format or an alternate view of
-                    this entry
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>link</property> - A link to another format or an alternate view of
+                this entry
+            </para>
+        </listitem>
 
-            <listitem>
-                <para><property>summary</property> - A summary of this entry's content</para>
-            </listitem>
+        <listitem>
+            <para><property>summary</property> - A summary of this entry's content</para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>content</property> - The full content of the entry; can be skipped if
-                    the feed just contains summaries
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>content</property> - The full content of the entry; can be skipped if
+                the feed just contains summaries
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>author</property> - with <property>name</property> and
-                    <property>email</property> sub-tags like feeds have
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>author</property> - with <property>name</property> and
+                <property>email</property> sub-tags like feeds have
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>published</property> - the date the entry was published, in
-                    <acronym>RFC</acronym> 3339 format
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>published</property> - the date the entry was published, in
+                <acronym>RFC</acronym> 3339 format
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>updated</property> - the date the entry was last updated, in
-                    <acronym>RFC</acronym> 3339 format
-                </para>
-            </listitem>
-        </itemizedlist>
-    </para>
+        <listitem>
+            <para>
+                <property>updated</property> - the date the entry was last updated, in
+                <acronym>RFC</acronym> 3339 format
+            </para>
+        </listitem>
+    </itemizedlist>
 
     <para>
         For more information on Atom and plenty of resources, see

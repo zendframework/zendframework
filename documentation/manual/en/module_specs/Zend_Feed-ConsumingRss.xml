@@ -51,8 +51,8 @@ echo $channel->category['domain'];
     <para>
         Most commonly you'll want to loop through the feed and do something with its entries.
         <classname>Zend_Feed_Abstract</classname> implements <acronym>PHP</acronym>'s
-        <code>Iterator</code> interface, so printing all titles of articles in a channel is just a
-        matter of:
+        <classname>Iterator</classname> interface, so printing all titles of articles in a channel
+        is just a matter of:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -74,18 +74,20 @@ foreach ($channel as $item) {
     <para>
         <itemizedlist>
             <listitem>
-                <para><code>title</code> - The name of the channel</para>
+                <para><property>title</property> - The name of the channel</para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>link</code> - The <acronym>URL</acronym> of the web site corresponding to
-                    the channel
+                    <property>link</property> - The <acronym>URL</acronym> of the web site
+                    corresponding to the channel
                 </para>
             </listitem>
 
             <listitem>
-                <para><code>description</code> - A sentence or several describing the channel</para>
+                <para>
+                    <property>description</property> - A sentence or several describing the channel
+                </para>
             </listitem>
         </itemizedlist>
     </para>
@@ -98,27 +100,28 @@ foreach ($channel as $item) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>pubDate</code> - The publication date of this set of content, in
+                    <property>pubDate</property> - The publication date of this set of content, in
                     <acronym>RFC</acronym> 822 date format
                 </para>
             </listitem>
 
             <listitem>
-                <para><code>language</code> - The language the channel is written in</para>
+                <para><property>language</property> - The language the channel is written in</para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>category</code> - One or more (specified by multiple tags) categories the
-                    channel belongs to
+                    <property>category</property> - One or more (specified by multiple tags)
+                    categories the channel belongs to
                 </para>
             </listitem>
         </itemizedlist>
     </para>
 
     <para>
-        <acronym>RSS</acronym> <code>&lt;item&gt;</code> elements do not have any strictly required
-        elements. However, either <code>title</code> or <code>description</code> must be present.
+        <acronym>RSS</acronym> <emphasis>&lt;item&gt;</emphasis> elements do not have any strictly
+        required elements. However, either <property>title</property> or
+        <property>description</property> must be present.
     </para>
 
     <para>
@@ -128,36 +131,37 @@ foreach ($channel as $item) {
     <para>
         <itemizedlist>
             <listitem>
-                <para><code>title</code> - The title of the item</para>
+                <para><property>title</property> - The title of the item</para>
             </listitem>
 
             <listitem>
-                <para><code>link</code> - The <acronym>URL</acronym> of the item</para>
+                <para><property>link</property> - The <acronym>URL</acronym> of the item</para>
             </listitem>
 
             <listitem>
-                <para><code>description</code> - A synopsis of the item</para>
+                <para><property>description</property> - A synopsis of the item</para>
             </listitem>
 
             <listitem>
-                <para><code>author</code> - The author's email address</para>
+                <para><property>author</property> - The author's email address</para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>category</code> - One more categories that the item belongs to
+                    <property>category</property> - One more categories that the item belongs to
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>comments</code> - <acronym>URL</acronym> of comments relating to this item
+                    <property>comments</property> - <acronym>URL</acronym> of comments relating to
+                    this item
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>pubDate</code> - The date the item was published, in
+                    <property>pubDate</property> - The date the item was published, in
                     <acronym>RFC</acronym> 822 date format
                 </para>
             </listitem>

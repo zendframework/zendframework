@@ -5,8 +5,8 @@
 
     <para>
         This filter will encrypt any given string with the provided setting. Therefor it makes use
-        of Adapters. Actually there are adapters for the <code>Mcrypt</code> and
-        <code>OpenSSL</code> extensions from php.
+        of Adapters. Actually there are adapters for the <classname>Mcrypt</classname> and
+        <classname>OpenSSL</classname> extensions from php.
     </para>
 
     <para>
@@ -35,8 +35,8 @@ $filter->setAdapter('openssl');
 
     <note>
         <para>
-            When you do not supply the <code>adapter</code> option or do not use setAdapter, then
-            the <code>Mcrypt</code> adapter will be used per default.
+            When you do not supply the <property>adapter</property> option or do not use setAdapter,
+            then the <classname>Mcrypt</classname> adapter will be used per default.
         </para>
     </note>
 
@@ -44,8 +44,9 @@ $filter->setAdapter('openssl');
         <title>Encryption with Mcrypt</title>
 
         <para>
-            When you have installed the <code>Mcrypt</code> extension you can use the
-            <code>Mcrypt</code> adapter. This adapter supports the following options at initiation:
+            When you have installed the <classname>Mcrypt</classname> extension you can use the
+            <classname>Mcrypt</classname> adapter. This adapter supports the following options at
+            initiation:
         </para>
 
         <itemizedlist>
@@ -61,7 +62,7 @@ $filter->setAdapter('openssl');
                     <emphasis>algorithm</emphasis>: The algorithm which has to be used. It should be
                     one of the algorithm ciphers which can be found under
                     <ulink url="http://php.net/mcrypt">PHP's mcrypt ciphers</ulink>. If not set it
-                    defaults to <code>blowfish</code>.
+                    defaults to 'blowfish'.
                 </para>
             </listitem>
 
@@ -77,14 +78,15 @@ $filter->setAdapter('openssl');
                     <emphasis>mode</emphasis>: The encryption mode which has to be used. It should
                     be one of the modes which can be found under
                     <ulink url="http://php.net/mcrypt">PHP's mcrypt modes</ulink>. If not set it
-                    defaults to <code>cbc</code>.
+                    defaults to 'cbc'.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <emphasis>mode_directory</emphasis>: The directory where the mode can be found.
-                    If not set it defaults to the path set within the <code>mcrypt</code> extension.
+                    If not set it defaults to the path set within the <classname>Mcrypt</classname>
+                    extension.
                 </para>
             </listitem>
 
@@ -171,8 +173,9 @@ print $encrypted;
         <title>Encryption with OpenSSL</title>
 
         <para>
-            When you have installed the <code>OpenSSL</code> extension you can use the
-            <code>OpenSSL</code> adapter. This adapter supports the following options at initiation:
+            When you have installed the <classname>OpenSSL</classname> extension you can use the
+            <classname>OpenSSL</classname> adapter. This adapter supports the following options at
+            initiation:
         </para>
 
         <itemizedlist>
@@ -232,8 +235,8 @@ $filter->setPublicKey(array(
 
         <note>
             <para>
-                Note that the <code>OpenSSL</code> adapter will not work when you do not provide
-                valid keys.
+                Note that the <classname>OpenSSL</classname> adapter will not work when you do not
+                provide valid keys.
             </para>
         </note>
 
@@ -270,7 +273,8 @@ $filter->setPassphrase('mypassphrase');
         </para>
 
         <para>
-            So our complete example for encrypting content with <code>OpenSSL</code> look like this.
+            So our complete example for encrypting content with <classname>OpenSSL</classname> look
+            like this.
         </para>
 
         <programlisting language="php"><![CDATA[

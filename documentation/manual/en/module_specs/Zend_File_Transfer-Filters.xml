@@ -17,32 +17,34 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>Decrypt</code>: This filter can decrypt a encrypted file.
+                <classname>Decrypt</classname>: This filter can decrypt a encrypted file.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Encrypt</code>: This filter can encrypt a file.
+                <classname>Encrypt</classname>: This filter can encrypt a file.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>LowerCase</code>: This filter can lowercase the content of a textfile.
+                <classname>LowerCase</classname>: This filter can lowercase the content of a
+                textfile.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Rename</code>: This filter can rename files, change the location and even
-                force overwriting of existing files.
+                <classname>Rename</classname>: This filter can rename files, change the location and
+                even force overwriting of existing files.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>UpperCase</code>: This filter can uppercase the content of a textfile.
+                <classname>UpperCase</classname>: This filter can uppercase the content of a
+                textfile.
             </para>
         </listitem>
     </itemizedlist>
@@ -58,8 +60,8 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>addFilter($filter, $options = null, $files =
-                    null)</code>: Adds the given filter to the filter
+                    <methodname>addFilter($filter, $options = null, $files =
+                        null)</methodname>: Adds the given filter to the filter
                     stack (optionally only to the file(s) specified).
                     <varname>$filter</varname> may be either an actual filter
                     instance, or a short name specifying the filter type
@@ -69,8 +71,8 @@
 
             <listitem>
                 <para>
-                    <code>addFilters(array $filters, $files =
-                        null)</code>: Adds the given filters to the stack of
+                    <methodname>addFilters(array $filters, $files =
+                        null)</methodname>: Adds the given filters to the stack of
                     filters. Each entry may be either a filter
                     type/options pair, or an array with the key 'filter'
                     specifying the filter (all other options will be
@@ -80,8 +82,8 @@
 
             <listitem>
                 <para>
-                    <code>setFilters(array $filters, $files =
-                        null)</code>: Overwrites any existing filters with
+                    <methodname>setFilters(array $filters, $files =
+                        null)</methodname>: Overwrites any existing filters with
                     the filters specified. The filters should follow the
                     syntax for <methodname>addFilters()</methodname>.
                 </para>
@@ -197,21 +199,21 @@ $upload->addFilter('Rename', 'C:\picture\newjpg', 'file1')
         <title>Decrypt filter</title>
 
         <para>
-            The <code>Decrypt</code> filter allows to decrypt a encrypted file.
+            The <classname>Decrypt</classname> filter allows to decrypt a encrypted file.
         </para>
 
         <para>
             This filter makes use of <classname>Zend_Filter_Decrypt</classname>. It supports the
-            <code>Mcrypt</code> and <code>OpenSSL</code> extensions from <acronym>PHP</acronym>.
-            Please read the related section for details about how to set the options for decryption
-            and which options are supported.
+            <classname>Mcrypt</classname> and <classname>OpenSSL</classname> extensions from
+            <acronym>PHP</acronym>. Please read the related section for details about how to set the
+            options for decryption and which options are supported.
         </para>
 
         <para>
             This filter supports one additional option which can be used to save the decrypted file
-            with another filename. Set the <code>filename</code> option to change the filename where
-            the decrypted file will be stored. If you suppress this option, the decrypted file will
-            overwrite the original encrypted file.
+            with another filename. Set the <property>filename</property> option to change the
+            filename where the decrypted file will be stored. If you suppress this option, the
+            decrypted file will overwrite the original encrypted file.
         </para>
 
         <example id="zend.file.transfer.filters.decrypt.example1">
@@ -247,21 +249,21 @@ $upload->addFilter('Decrypt',
         <title>Encrypt filter</title>
 
         <para>
-            The <code>Encrypt</code> filter allows to encrypt a file.
+            The <classname>Encrypt</classname> filter allows to encrypt a file.
         </para>
 
         <para>
             This filter makes use of <classname>Zend_Filter_Encrypt</classname>. It supports the
-            <code>Mcrypt</code> and <code>OpenSSL</code> extensions from <acronym>PHP</acronym>.
-            Please read the related section for details about how to set the options for encryption
-            and which options are supported.
+            <classname>Mcrypt</classname> and <classname>OpenSSL</classname> extensions from
+            <acronym>PHP</acronym>. Please read the related section for details about how to set the
+            options for encryption and which options are supported.
         </para>
 
         <para>
             This filter supports one additional option which can be used to save the encrypted file
-            with another filename. Set the <code>filename</code> option to change the filename where
-            the encrypted file will be stored. If you suppress this option, the encrypted file will
-            overwrite the original file.
+            with another filename. Set the <property>filename</property> option to change the
+            filename where the encrypted file will be stored. If you suppress this option, the
+            encrypted file will overwrite the original file.
         </para>
 
         <example id="zend.file.transfer.filters.encrypt.example1">
@@ -296,8 +298,8 @@ $upload->addFilter('Encrypt',
         <title>LowerCase filter</title>
 
         <para>
-            The <code>LowerCase</code> filter allows to change the content of a file to lowercase.
-            You should use this filter only on textfiles.
+            The <classname>LowerCase</classname> filter allows to change the content of a file to
+            lowercase. You should use this filter only on textfiles.
         </para>
 
         <para>
@@ -336,28 +338,28 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
         <title>Rename filter</title>
 
         <para>
-            The <code>Rename</code> filter allows to change the destination of the upload, the
-            filename and also to overwrite existing files. It supports the following options:
+            The <classname>Rename</classname> filter allows to change the destination of the upload,
+            the filename and also to overwrite existing files. It supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>source</code>: The name and destination of the old file which shall be
-                    renamed.
+                    <property>source</property>: The name and destination of the old file which
+                    shall be renamed.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>target</code>: The new directory, or filename of the file.
+                    <property>target</property>: The new directory, or filename of the file.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>overwrite</code>: Sets if the old file overwrites the new one if it
-                    already exists. The default value is <constant>FALSE</constant>.
+                    <property>overwrite</property>: Sets if the old file overwrites the new one if
+                    it already exists. The default value is <constant>FALSE</constant>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -475,8 +477,8 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
         <title>UpperCase filter</title>
 
         <para>
-            The <code>UpperCase</code> filter allows to change the content of a file to uppercase.
-            You should use this filter only on textfiles.
+            The <classname>UpperCase</classname> filter allows to change the content of a file to
+            uppercase. You should use this filter only on textfiles.
         </para>
 
         <para>

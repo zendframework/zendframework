@@ -979,7 +979,7 @@ $this->addDecorators(array(
 <dd>
     <input type="text" name="foo" id="foo" value="123" />
     <ul class="errors">
-        <li>"123" ist kein alphanummerischer Wert</li>
+        <li>"123" ist kein alphanumerischer Wert</li>
     </ul>
     <p class="description">
         Das ist etwas beschreibender Text betreffend dem Element.

@@ -814,6 +814,6 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
 
         $currency->setValue(100, 'USD');
         $this->assertEquals(200, $currency->getValue());
-        $this->assertEquals('USD', $currency->getShortName());
+        $this->assertEquals('RUB', $currency->getShortName());
     }
 }

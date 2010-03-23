@@ -799,4 +799,21 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         $currency  = new Zend_Currency(array('value' => 10000, 'format' => '#,#0', 'locale' => 'de_DE'));
         $this->assertEquals('1.00.00', $currency->toString());
     }
+
+    /**
+     * @ZF-9519
+     */
+    public function testSetValueWithoutLocale()
+    {
+        $currency = new Zend_Currency('RUB', 'ru_RU');
+        require_once 'Currency/ExchangeTest.php';
+
+        $this->assertEquals(null, $currency->getService());
+        $currency->setService(new ExchangeTest());
+        $this->assertTrue($currency->getService() instanceof Zend_Currency_CurrencyInterface);
+
+        $currency->setValue(100, 'USD');
+        $this->assertEquals(200, $currency->getValue());
+        $this->assertEquals('USD', $currency->getShortName());
+    }
 }

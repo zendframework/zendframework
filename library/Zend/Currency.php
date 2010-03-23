@@ -749,7 +749,7 @@ class Zend_Currency
             $currency = $value->getShortName();
             $value    = $value->getValue();
         } else {
-            $currency = $this->getShortName($currency);
+            $currency = $this->getShortName($currency, $this->getLocale());
         }
 
         $rate = 1;

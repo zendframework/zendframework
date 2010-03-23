@@ -268,7 +268,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                 <listitem>
                     <para>
                         const <constant>Zend_Locale::FRAMEWORK</constant> - Wenn Zend Framework
-                        einen standartisierten Weg zur Verfügung stellt um für Komponenten
+                        einen standardisierten Weg zur Verfügung stellt um für Komponenten
                         Standardwerte zu definieren (das ist geplant aber noch nicht realisiert),
                         dann wird die Verwendung dieser Konstante das Gebietsschema anhand dieser
                         Standardwerte auswählen. Wenn kein passendes Gebietsschema gefunden wurde,

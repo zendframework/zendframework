@@ -3797,6 +3797,57 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(array('sub' => array('valid' => 1234)), $this->form->getValidValues($data));
     }
+        
+    /**
+     * @group ZF-9494
+     */
+    public function testElementTranslatorNotOveriddenbyFormTranslator()
+    {
+        $translations = array(
+            'isEmpty' => 'Element message',
+        );
+        $translate = new Zend_Translate('array', $translations);
+        $this->form->addElement('text', 'foo', array('required'=>true, 'translator'=>$translate));
+        $this->assertFalse($this->form->isValid(array('foo'=>'')));
+        $messages = $this->form->getMessages();
+        $this->assertEquals(1, count($messages));
+        $this->assertEquals('Element message', $messages['foo']['isEmpty']);
+        
+        $this->assertFalse($this->form->isValidPartial(array('foo'=>'')));
+        $messages = $this->form->getMessages();
+        $this->assertEquals(1, count($messages));
+        $this->assertEquals('Element message', $messages['foo']['isEmpty']);
+    }  
+    
+    /**
+     * @group ZF-9364
+     */
+    public function testElementTranslatorPreferredOverFormTranslator()
+    {
+        $formTanslations = array(
+            'isEmpty' => 'Form message',
+        );
+        $elementTanslations = array(
+            'isEmpty' => 'Element message',
+        );
+        $formTranslate = new Zend_Translate('array', $formTanslations);
+        $elementTranslate = new Zend_Translate('array', $elementTanslations);
+        $this->form->setTranslator($formTranslate);
+        $this->form->addElement('text', 'foo', array('required'=>true, 'translator'=>$elementTranslate));
+        $this->form->addElement('text', 'bar', array('required'=>true));
+
+        $this->assertFalse($this->form->isValid(array('foo'=>'', 'bar'=>'')));
+        $messages = $this->form->getMessages();
+        $this->assertEquals(2, count($messages));
+        $this->assertEquals('Element message', $messages['foo']['isEmpty']);
+        $this->assertEquals('Form message', $messages['bar']['isEmpty']);
+        
+        $this->assertFalse($this->form->isValidPartial(array('foo'=>'', 'bar'=>'')));
+        $messages = $this->form->getMessages();
+        $this->assertEquals(2, count($messages));
+        $this->assertEquals('Element message', $messages['foo']['isEmpty']);
+        $this->assertEquals('Form message', $messages['bar']['isEmpty']);
+    }    
 
     /**
      * Used by test methods susceptible to ZF-2794, marks a test as incomplete

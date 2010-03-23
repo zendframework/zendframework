@@ -143,7 +143,7 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
             <code>setMaxResults:</code> Spezifiziert die maximale Anzahl an Ergebnissen die
             im Ergebnisset enthalten sein sollen. Dieser Parameter arbeitet in Verbindung
             mit dem start-index Parameter um festzustellen welche Ergebnisse zurückgegeben
-            werden sollen. Der Standartwert dieses Parameters ist <code>10</code> und der
+            werden sollen. Der Standardwert dieses Parameters ist <code>10</code> und der
             Maximalwert ist <code>20</code>.
         </para>
 

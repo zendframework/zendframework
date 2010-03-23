@@ -70,6 +70,23 @@ class Zend_Log
      */
     protected $_defaultFilterNamespace = 'Zend_Log_Filter';
 
+    /**
+     *
+     * @var callback
+     */
+    protected $_origErrorHandler       = null;
+    
+    /**
+     *
+     * @var boolean
+     */
+    protected $_registeredErrorHandler = false;
+    
+    /**
+     *
+     * @var array
+     */
+    protected $_errorHandlerMap        = false;
 
     /**
      * Class constructor.  Create a new logger
@@ -436,5 +453,85 @@ class Zend_Log
      */
     public function setEventItem($name, $value) {
         $this->_extras = array_merge($this->_extras, array($name => $value));
+    }
+    
+    /**
+     * Register Logging system as an error handler to log php errors
+     * Note: it still calls the original error handler if set_error_handler is able to return it.
+     *
+     * Errors will be mapped as:
+     *   E_NOTICE, E_USER_NOTICE => NOTICE
+     *   E_WARNING, E_CORE_WARNING, E_USER_WARNING => WARN
+     *   E_ERROR, E_USER_ERROR, E_CORE_ERROR, E_RECOVERABLE_ERROR => ERR
+     *   E_DEPRECATED, E_STRICT, E_USER_DEPRECATED => DEBUG
+     *   (unknown/other) => INFO
+     *
+     * @link http://www.php.net/manual/en/function.set-error-handler.php Custom error handler
+     *
+     * @return Zend_Log
+     */
+    public function registerErrorHandler()
+    {
+        // Only register once.  Avoids loop issues if it gets registered twice.
+        if ($this->_registeredErrorHandler) { 
+        	return $this; 
+        }
+        
+        $this->_origErrorHandler = set_error_handler(array($this, 'errorHandler'));
+        
+        // Contruct a default map of phpErrors to Zend_Log priorities.
+        // Some of the errors are uncatchable, but are included for completeness
+        $this->_errorHandlerMap = array(
+            E_NOTICE            => Zend_Log::NOTICE,
+            E_USER_NOTICE       => Zend_Log::NOTICE,
+            E_WARNING           => Zend_Log::WARN,
+            E_CORE_WARNING      => Zend_Log::WARN,
+            E_USER_WARNING      => Zend_Log::WARN,
+            E_ERROR             => Zend_Log::ERR,
+            E_USER_ERROR        => Zend_Log::ERR,
+            E_CORE_ERROR        => Zend_Log::ERR,
+            E_RECOVERABLE_ERROR => Zend_Log::ERR,
+            E_STRICT            => Zend_Log::DEBUG,
+        );
+        // PHP 5.3.0+
+        if (defined('E_DEPRECATED')) {
+            $this->_errorHandlerMap['E_DEPRECATED'] = Zend_Log::DEBUG;
+        }
+        if (defined('E_USER_DEPRECATED')) {
+            $this->_errorHandlerMap['E_USER_DEPRECATED'] = Zend_Log::DEBUG;
+        }
+        
+        $this->_registeredErrorHandler = true;
+        return $this;
+    }
+    
+    /**
+     * Error Handler will convert error into log message, and then call the original error handler
+     *
+     * @link http://www.php.net/manual/en/function.set-error-handler.php Custom error handler
+     * @param int $errno
+     * @param string $errstr
+     * @param string $errfile
+     * @param int $errline
+     * @param array $errcontext
+     * @return boolean
+     */
+    public function errorHandler($errno, $errstr, $errfile, $errline, $errcontext)
+    {
+        $errorLevel = error_reporting();
+        
+        if ($errorLevel && $errno) {
+            if (isset($this->_errorHandlerMap[$errno])) {
+                $priority = $this->_errorHandlerMap[$errno];
+            } else {
+                $priority = Zend_Log::INFO;
+            }
+            $this->log($errstr, $priority, array('errno'=>$errno, 'file'=>$errfile, 'line'=>$errline, 'context'=>$errcontext));
+        }
+        
+        if ($this->_origErrorHandler !== null) {
+            return call_user_func($this->_origErrorHandler, $errno, $errstr, $errfile, $errline, $errcontext);
+        }
+        return false;
     }
 }

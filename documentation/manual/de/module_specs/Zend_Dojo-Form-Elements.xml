@@ -807,7 +807,7 @@ $editor->degrade = true;
         <title>HorizontalSlider</title>
 
         <para>
-            HorizontalSlider bietet ein Schieber UI Widget für die Auswahl eines nummerischen Wertes
+            HorizontalSlider bietet ein Schieber UI Widget für die Auswahl eines numerischen Wertes
             in einem Bereich. Intern, setzt es den Wert eines versteckten Elements welches vom
             Formular übermittelt wird.
         </para>
@@ -938,7 +938,7 @@ $form->addElement(
         <title>NumberSpinner</title>
 
         <para>
-            Ein Nummernkreisel (Number Spinner) ist ein Textelement für die Eingabe von nummerischen
+            Ein Nummernkreisel (Number Spinner) ist ein Textelement für die Eingabe von numerischen
             Werten; es enthält auch Elemente für das inkrementieren und dekrementieren des Wertes
             mit einer gesetzten Anzahl.
         </para>
@@ -970,7 +970,7 @@ $form->addElement(
                 <para>
                     <methodname>setLargeDelta($delta)</methodname> und
                     <methodname>getLargeDelta()</methodname>: Setzt und gibt die Menge zurück mit
-                    welcher der nummerische Wert geändert werden soll wenn ein Button gedrückt
+                    welcher der numerische Wert geändert werden soll wenn ein Button gedrückt
                     gehalten wird.
                 </para>
             </listitem>
@@ -1043,7 +1043,7 @@ $form->addElement(
         <title>NumberTextBox</title>
 
         <para>
-            Eine NumberTextBox ist ein Textelement für die Eingabe von nummerischen Werten; anders
+            Eine NumberTextBox ist ein Textelement für die Eingabe von numerischen Werten; anders
             als beim NummerSpinner, werden Nummern manuell eingegeben. Prüfungen und Abhängigkeiten
             können angegeben werden um sicherzustellen das die Nummer immer in einem bestimmten
             Bereich oder Format ist.
@@ -1080,7 +1080,7 @@ $form->addElement(
             <listitem>
                 <para>
                     <methodname>setType($type)</methodname> und <methodname>getType()</methodname>:
-                    Setzt und gibt eine nummerischen Formattyp zurück der verwendet wird (sollte
+                    Setzt und gibt eine numerischen Formattyp zurück der verwendet wird (sollte
                     'decimal', 'percent' oder 'currency' sein).
                 </para>
             </listitem>
@@ -1098,7 +1098,7 @@ $form->addElement(
                     <methodname>setStrict($flag)</methodname> und
                     <methodname>getStrict()</methodname>: Setzt und gibt den Wert des Strictflags
                     zurück, welches anzeigt wieviel Ungenauigkeit in Bezug auf Leerzeichen und
-                    nicht-nummerische Zeichen erlaubt ist.
+                    nicht-numerische Zeichen erlaubt ist.
                 </para>
             </listitem>
         </itemizedlist>
@@ -1155,7 +1155,7 @@ $form->addElement(
         'lowercase'      => true,
         'regExp'         => '^[a-z0-9]{6,}$',
         'invalidMessage' => 'Ungültiges Passwort; muß mindestens 6 '
-                          . 'alphanummerische Zeichen lang sein',
+                          . 'alphanumerische Zeichen lang sein',
     )
 );
 ]]></programlisting>

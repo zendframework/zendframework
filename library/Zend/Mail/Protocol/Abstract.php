@@ -111,6 +111,7 @@ abstract class Zend_Mail_Protocol_Abstract
     /**
      * String template for parsing server responses using sscanf (default: 3 digit code and response string)
      * @var resource
+     * @deprecated Since 1.10.3
      */
     protected $_template = '%d%s';
 
@@ -378,8 +379,9 @@ abstract class Zend_Mail_Protocol_Abstract
     protected function _expect($code, $timeout = null)
     {
         $this->_response = array();
-        $cmd = '';
-        $msg = '';
+        $cmd  = '';
+        $more = '';
+        $msg  = '';
         $errMsg = '';
 
         if (!is_array($code)) {
@@ -388,15 +390,15 @@ abstract class Zend_Mail_Protocol_Abstract
 
         do {
             $this->_response[] = $result = $this->_receive($timeout);
-            sscanf($result, $this->_template, $cmd, $msg);
+            list($cmd, $more, $msg) = preg_split('/([\s-]+)/', $result, 2, PREG_SPLIT_DELIM_CAPTURE);
 
             if ($errMsg !== '') {
-                $errMsg .= $msg;
+                $errMsg .= ' ' . $msg;
             } elseif ($cmd === null || !in_array($cmd, $code)) {
                 $errMsg =  $msg;
             }
 
-        } while (strpos($msg, '-') === 0); // The '-' message prefix indicates an information string instead of a response string.
+        } while (strpos($more, '-') === 0); // The '-' message prefix indicates an information string instead of a response string.
 
         if ($errMsg !== '') {
             /**

@@ -331,6 +331,16 @@ class Zend_Search_Lucene_Search_QueryParser extends Zend_Search_Lucene_FSM
     }
 
 
+    /**
+     * Escape keyword to force it to be parsed as one term
+     *
+     * @param string $keyword
+     * @return string
+     */
+    public static function escape($keyword)
+    {
+        return '\\' . implode('\\', str_split($keyword));
+    }
 
     /**
      * Parses a query string

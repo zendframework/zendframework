@@ -302,6 +302,21 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
     }
 
     /**
+     * Get generation number associated with this index instance
+     *
+     * The same generation number in pair with document number or query string
+     * guarantees to give the same result while index retrieving.
+     * So it may be used for search result caching.
+     *
+     * @return integer
+     */
+    public function getGeneration()
+    {
+        return $this->_generation;
+    }
+
+
+    /**
      * Get segments file name
      *
      * @param integer $generation

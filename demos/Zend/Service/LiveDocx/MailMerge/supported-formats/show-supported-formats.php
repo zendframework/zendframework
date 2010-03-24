@@ -13,20 +13,20 @@ print(Demos_Zend_Service_LiveDocx_Helper::wrapLine(
     PHP_EOL)
 );
 
-$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+$mailMerge = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
-            ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
+$mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+          ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
 
 printf("Supported TEMPLATE file formats (input)  : %s%s",
-    Demos_Zend_Service_LiveDocx_Helper::arrayDecorator($phpLiveDocx->getTemplateFormats()), PHP_EOL);
+    Demos_Zend_Service_LiveDocx_Helper::arrayDecorator($mailMerge->getTemplateFormats()), PHP_EOL);
 
 printf("Supported DOCUMENT file formats (output) : %s%s",
-    Demos_Zend_Service_LiveDocx_Helper::arrayDecorator($phpLiveDocx->getDocumentFormats()), PHP_EOL);
+    Demos_Zend_Service_LiveDocx_Helper::arrayDecorator($mailMerge->getDocumentFormats()), PHP_EOL);
 
 printf("Supported IMAGE file formats (output)    : %s%s",
-    Demos_Zend_Service_LiveDocx_Helper::arrayDecorator($phpLiveDocx->getImageFormats()), PHP_EOL);
+    Demos_Zend_Service_LiveDocx_Helper::arrayDecorator($mailMerge->getImageFormats()), PHP_EOL);
 
 print PHP_EOL;
     
-unset($phpLiveDocx);
+unset($mailMerge);

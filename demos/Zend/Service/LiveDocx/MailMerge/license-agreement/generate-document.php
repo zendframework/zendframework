@@ -3,20 +3,20 @@
 require_once dirname(__FILE__) . '/../../common.php';
 
 
-$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+$mailMerge = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
-            ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
+$mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+          ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
 
-$phpLiveDocx->setLocalTemplate('template.docx');
+$mailMerge->setLocalTemplate('template.docx');
 
-$phpLiveDocx->assign('software', 'Magic Graphical Compression Suite v1.9')
-            ->assign('licensee', 'Henry Döner-Meyer')
-            ->assign('company',  'Co-Operation')
-            ->assign('date',     Zend_Date::now()->toString(Zend_Date::DATE_LONG))
-            ->assign('time',     Zend_Date::now()->toString(Zend_Date::TIME_LONG))
-            ->assign('city',     'Berlin')
-            ->assign('country',  'Germany');
+$mailMerge->assign('software', 'Magic Graphical Compression Suite v1.9')
+          ->assign('licensee', 'Henry Döner-Meyer')
+          ->assign('company',  'Co-Operation')
+          ->assign('date',     Zend_Date::now()->toString(Zend_Date::DATE_LONG))
+          ->assign('time',     Zend_Date::now()->toString(Zend_Date::TIME_LONG))
+          ->assign('city',     'Berlin')
+          ->assign('country',  'Germany');
 
 /**
  * ALTERNATIVE: Concatenating PDF files locally - basic
@@ -54,12 +54,12 @@ $fieldValues = array (
     )    
 );
 
-$phpLiveDocx->assign($fieldValues);
+$mailMerge->assign($fieldValues);
 */
 
-$phpLiveDocx->createDocument();
+$mailMerge->createDocument();
 
-$document = $phpLiveDocx->retrieveDocument('pdf');
+$document = $mailMerge->retrieveDocument('pdf');
 
 file_put_contents('document.pdf', $document);
 
@@ -72,11 +72,11 @@ file_put_contents('document.pdf', $document);
  * application, you would probably decide on one or the other format.
  */
 /*
-foreach ($phpLiveDocx->getDocumentFormats() as $format) {
-    $document = $phpLiveDocx->retrieveDocument($format);
+foreach ($mailMerge->getDocumentFormats() as $format) {
+    $document = $mailMerge->retrieveDocument($format);
     file_put_contents('document.' . $format, $document);
 }
 
 */
 
-unset($phpLiveDocx);
+unset($mailMerge);

@@ -413,6 +413,16 @@ class Zend_Form_Element implements Zend_Validate_Interface
         }
         return $this->_translator;
     }
+    
+    /**
+     * Does this element have its own specific translator?
+     * 
+     * @return bool
+     */
+    public function hasTranslator()
+    {
+        return (bool)$this->_translator;
+    }
 
     /**
      * Indicate whether or not translation should be disabled

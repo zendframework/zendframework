@@ -2031,7 +2031,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
         }
 
         foreach ($this->getElements() as $key => $element) {
-            if (null !== $translator && !$element->getTranslator()) {
+            if (null !== $translator && !$element->hasTranslator()) {
                 $element->setTranslator($translator);
             }
             if (!isset($data[$key])) {
@@ -2079,7 +2079,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
 
         foreach ($data as $key => $value) {
             if (null !== ($element = $this->getElement($key))) {
-                if (null !== $translator && !$element->getTranslator()) {
+                if (null !== $translator && !$element->hasTranslator()) {
                     $element->setTranslator($translator);
                 }
                 $valid = $element->isValid($value, $data) && $valid;

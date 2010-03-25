@@ -760,7 +760,7 @@ class Zend_Currency
                 throw new Zend_Currency_Exception('No exchange service applied');
             }
 
-            $rate = $service->getRate($this->getShortName(), $currency);
+            $rate = $service->getRate($currency, $this->getShortName());
         }
 
         $value *= $rate;

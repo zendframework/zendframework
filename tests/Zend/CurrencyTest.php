@@ -813,7 +813,7 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($currency->getService() instanceof Zend_Currency_CurrencyInterface);
 
         $currency->setValue(100, 'USD');
-        $this->assertEquals(200, $currency->getValue());
+        $this->assertEquals(50, $currency->getValue());
         $this->assertEquals('RUB', $currency->getShortName());
     }
 }

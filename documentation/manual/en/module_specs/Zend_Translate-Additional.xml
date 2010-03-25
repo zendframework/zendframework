@@ -625,6 +625,68 @@ $translate = new Zend_Translate(
         </sect3>
     </sect2>
 
+    <sect2 id="zend.translate.additional.combination">
+        <title>Combining multiple translation sources</title>
+
+        <para>
+            When you are working with multiple translations you may come into a situation where you
+            want to use different source types. For example the resource files which are provided
+            by the framework and your own translations which are available by using the gettext
+            adapter.
+        </para>
+
+        <para>
+            By combining multiple translation adapters you can use them within one instance. See
+            the following example:
+        </para>
+
+        <programlisting><![CDATA[
+$translate = new Zend_Translate(
+    'gettext',
+    '\path\to\translation.mo',
+    'en'
+);
+
+$translate_second = new Zend_Translate(
+    'array',
+    '\resources\languages\en\Zend_Validate.php',
+    'en'
+);
+
+$translate->addTranslation($translate_second);
+]]></programlisting>
+
+        <para>
+            Now the first instance holds all translations from the second instance and you can use
+            it within the application even if you used different source types.
+        </para>
+
+        <note>
+            <title>Memory savings</title>
+
+            <para>
+                As you may have noted the second instance is no longer used as soon as it has been
+                added to the first instance. To save some memory you may want to unset it.
+            </para>
+        </note>
+
+        <para>
+            When you are scanning for directories you may additionally want to use only one defined
+            language. The predefined resources for example are available in more than 10 languages.
+            But your application is not available in all of those language. Therefor you can also
+            add only one language from the second adapter.
+        </para>
+
+        <programlisting><![CDATA[
+$translate->addTranslation($translate_second, 'en');
+]]></programlisting>
+
+        <para>
+            This allows you still to scan through the directories and still add only those languages
+            which are relevant for your application.
+        </para>
+    </sect2>
+
     <sect2 id="zend.translate.additional.istranslated">
         <title>Checking for translations</title>
 

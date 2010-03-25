@@ -665,6 +665,38 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('plural_1 (en)', $lang->plural('singular', 'plural', 0));
     }
 
+
+    /**
+     * @group ZF-9489
+     */
+    public function testAddingAdapterToSourcealsUsingOwnRule()
+    {
+print "\n=============================================";
+        $translate = new Zend_Translate(
+            Zend_Translate::AN_ARRAY,
+            array('singular' =>
+                array('plural_0 (en)',
+                    'plural_1 (en)',
+                    'plural_2 (en)',
+                    'plural_3 (en)'),
+                'plural' => ''), 'en'
+        );
+
+        $this->assertFalse($translate->isTranslated('Message 1'));
+        $adapter = new Zend_Translate_Adapter_Gettext(dirname(__FILE__) . '/Translate/Adapter/_files/translation_en.mo', 'en');
+        $translate->addTranslation($adapter);
+
+        $this->assertTrue($adapter->isTranslated('Message 1'));
+
+        $adapter2 = new Zend_Translate_Adapter_Gettext(dirname(__FILE__) . '/Translate/Adapter/_files/testmo/de_AT/LC_TEST/translation-de_DE.mo', 'de_AT');
+        $adapter2->addTranslation(dirname(__FILE__) . '/Translate/Adapter/_files/translation_en2.mo', 'fr');
+        $translate->addTranslation($adapter2, 'fr');
+
+        $languages = $translate->getList();
+        $this->assertFalse(array_key_exists('de_AT', $languages));
+        $this->assertTrue(array_key_exists('fr', $languages));
+    }
+
     /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *

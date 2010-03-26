@@ -34,8 +34,8 @@ class Util
 ]]></programlisting>
 
         <para>
-            This callback would be specified as <code>array('Util',
-                'label')</code>, and would generate some (bad) HTML markup
+            This callback would be specified as <methodname>array('Util',
+                'label')</methodname>, and would generate some (bad) <acronym>HTML</acronym> markup
             for the label. The Callback decorator would then either replace,
             append, or prepend the original content with the return value of
             this.
@@ -81,8 +81,8 @@ class Util
 
         <para>
             By default, if no description is present, no output is generated. If
-            the description is present, then it is wrapped in an HTML
-            <code>p</code> tag by default, though you may specify a tag by
+            the description is present, then it is wrapped in an <acronym>HTML</acronym>
+            <emphasis>p</emphasis> tag by default, though you may specify a tag by
             passing a <code>tag</code> option when creating the decorator, or
             calling <methodname>setTag()</methodname>. You may additionally specify a class
             for the tag using the <code>class</code> option or by calling

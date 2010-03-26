@@ -918,8 +918,8 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
 
                         <listitem>
                             <para>
-                                <code>addElement($typeOrElement, $name, array $options =
-                                    array())</code>
+                                <methodname>addElement($typeOrElement, $name, array $options =
+                                    array())</methodname>
                             </para>
                         </listitem>
 
@@ -1023,8 +1023,8 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     <itemizedlist>
                         <listitem>
                             <para>
-                                <code>setTranslator(Zend_Translate_Adapter $translator =
-                                    null)</code>
+                                <methodname>setTranslator(Zend_Translate_Adapter $translator =
+                                    null)</methodname>
                             </para>
                         </listitem>
 
@@ -1252,7 +1252,7 @@ $form->setAction('/user/login')
         </note>
 
         <para>
-            <classname>Zend_Form</classname> implements the <code>Countable</code>
+            <classname>Zend_Form</classname> implements the <classname>Countable</classname>
             interface, allowing you to pass it as an argument to count:
         </para>
 
@@ -1334,7 +1334,7 @@ $form->setDecorators(array(
 
         <para>
             Any attributes set on the form object will be used as HTML
-            attributes of the <code>&lt;form&gt;</code> tag.
+            attributes of the <emphasis>&lt;form&gt;</emphasis> tag.
         </para>
 
         <note>
@@ -1721,8 +1721,8 @@ $validValues = $form->getValidValues($_POST);
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type
-                                = null)</code>
+                            <methodname>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader,
+                                $type = null)</methodname>
                         </para>
                     </listitem>
 
@@ -1731,7 +1731,9 @@ $validValues = $form->getValidValues($_POST);
                     </listitem>
 
                     <listitem>
-                        <para><code>addPrefixPath($prefix, $path, $type = null) </code></para>
+                        <para>
+                            <methodname>addPrefixPath($prefix, $path, $type = null) </methodname>
+                        </para>
                     </listitem>
 
                     <listitem>
@@ -2034,21 +2036,21 @@ $validValues = $form->getValidValues($_POST);
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>prefixPaths</code> will be passed to
+                    <property>prefixPaths</property> will be passed to
                     <methodname>addPrefixPaths()</methodname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>elementPrefixPaths</code> will be passed to
+                    <property>elementPrefixPaths</property> will be passed to
                     <methodname>addElementPrefixPaths()</methodname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>displayGroupPrefixPaths</code> will be passed to
+                    <property>displayGroupPrefixPaths</property> will be passed to
                     <methodname>addDisplayGroupPrefixPaths()</methodname>
                 </para>
             </listitem>
@@ -2058,16 +2060,16 @@ $validValues = $form->getValidValues($_POST);
 
                 <itemizedlist>
                     <listitem>
-                        <para><code>setAttrib (though setAttribs *will* work)</code></para>
+                        <para><property>setAttrib</property> (though setAttribs *will* work)</para>
                     </listitem>
 
-                    <listitem><para><code>setConfig</code></para></listitem>
-                    <listitem><para><code>setDefault</code></para></listitem>
-                    <listitem><para><code>setOptions</code></para></listitem>
-                    <listitem><para><code>setPluginLoader</code></para></listitem>
-                    <listitem><para><code>setSubForms</code></para></listitem>
-                    <listitem><para><code>setTranslator</code></para></listitem>
-                    <listitem><para><code>setView</code></para></listitem>
+                    <listitem><para><property>setConfig</property></para></listitem>
+                    <listitem><para><property>setDefault</property></para></listitem>
+                    <listitem><para><property>setOptions</property></para></listitem>
+                    <listitem><para><property>setPluginLoader</property></para></listitem>
+                    <listitem><para><property>setSubForms</property></para></listitem>
+                    <listitem><para><property>setTranslator</property></para></listitem>
+                    <listitem><para><property>setView</property></para></listitem>
                 </itemizedlist>
             </listitem>
         </itemizedlist>

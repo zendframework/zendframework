@@ -19,7 +19,7 @@
                 jest ważniejsze od samej treści i idei standardu. Przewodnik
                 po standardach kodowania Zend Framework pokazuje
                 najlepsze praktyki jakie mogą być stosowane w projekcie ZF.
-                Możesz modyfikowaćte standardy lub użyć ich w takiej postaci w
+                Możesz modyfikować te standardy lub użyć ich w takiej postaci w
                 jakiej są, ale musisz to zrobić zgodnie z
                 <ulink url="http://framework.zend.com/license">licencją</ulink>
             </para>
@@ -53,7 +53,7 @@
                 Standardy kodowania są ważne w każdym projekcie
                 programistycznym, a szczególnie gdy przy tym samym projekcie
                 pracuje większa ilość programistów. Standardy
-                kodowania pomagają zapewnić wysokoą jakość kodu, mniejszą ilość
+                kodowania pomagają zapewnić wysoką jakość kodu, mniejszą ilość
                 błędów i łatwe zarządzanie.
             </para>
         </sect2>
@@ -84,7 +84,7 @@
         <sect2 id="coding-standard.php-file-formatting.indentation">
             <title>Wcięcie</title>
 
-            <para>Wcięcia powiny składać się z 4 spacji. Znaki tabulatora są niedozwolone.</para>
+            <para>Wcięcia powinny składać się z 4 spacji. Znaki tabulatora są niedozwolone.</para>
         </sect2>
 
         <sect2 id="coding-standard.php-file-formatting.max-line-length">
@@ -128,7 +128,7 @@
                 Zend Framework używa takiej konwencji nazewnictwa, w której
                 nazwy klas bezpośrednio odpowiadają katalogom, w których się
                 znajdują. Głównym katalogiem standardowej biblioteki ZF jest
-                katalog "Zend/", a głownym katalogiem dodatkowej
+                katalog "Zend/", a głównym katalogiem dodatkowej
                 biblioteki ZF jest katalog "ZendX". Wszystkie klasy Zend
                 Framework są przechowywanie hierarchicznie w tych katalogach.
             </para>
@@ -144,7 +144,7 @@
             <para>
                 Jeśli nazwa klasy składa się z więcej niż jednego słowa, pierwsza
                 litera każdego kolejnego słowa powinna być wielka. Zapisanie
-                wyrazów w całości wielkimi literai jest niedozwolone, przykładowo
+                wyrazów w całości wielkimi literami jest niedozwolone, przykładowo
                 nazwa klasy "Zend_PDF"  jest niedozwolona, a nazwa "Zend_Pdf"
                 jest już akceptowalna.
             </para>
@@ -152,7 +152,7 @@
             <para>
                 Te konwencje określają mechanizm pseudo-przestrzeni nazw dla
                 Zend Framework. Zend Framework będzie używać funkcjonalności
-                przestrzeni nazw PHP gdy będą już dostęne dla programistów do
+                przestrzeni nazw PHP gdy będą już dostępne dla programistów do
                 użycia w swoich aplikacjach.
             </para>
 
@@ -161,7 +161,7 @@
                 bibliotece aby zobaczyć przykłady konwencji nazewnictwa klas.
 
                 <emphasis>WAŻNE:</emphasis> Kod który musi być rozwijany wraz
-                biliotekami ZF, a nie jest cześcią standardowych lub dodatkowych
+                bibliotekami ZF, a nie jest częścią standardowych lub dodatkowych
                 bibliotek (np. kod aplikacji lub biblioteki nie rozpowszechniane
                 przez firmę Zend) nigdy nie może zaczynać się przedrostkiem
                 "Zend_" oraz "ZendX_".
@@ -174,7 +174,7 @@
 
             <para>
                 W nazwach innych plików dozwolone jest użycie jedynie znaków
-                alfanumerycznych, znaków podkreślnika ("_") oraz myślnika  ("-").
+                alfanumerycznych, znaków podkreślenia ("_") oraz myślnika  ("-").
                 Użycie spacji jest zabronione.
             </para>
 
@@ -268,8 +268,8 @@ widgetFactory()
 
             <para>
                 Nazwy zmiennych instancji, które są zadeklarowane używając modyfikatora
-                "private" lub "protected", powinny zaczynac się od znaku
-                podkreślenia. Jets to jedyny dozwolony przypadek użycia znaków
+                "private" lub "protected", powinny zaczynać się od znaku
+                podkreślenia. Jest to jedyny dozwolony przypadek użycia znaków
                 podkreślenia w nazwach funkcji. Zmienne klas zadeklarowane jako
                 "public" nie mogą nigdy zaczynac się od znaku podkreślenia.
             </para>
@@ -296,7 +296,7 @@ widgetFactory()
 
             <para>
                 Nazwy stałych mogą zawierać znaki alfanumeryczne oraz znaki
-                podkreślnika. Liczby są dozwolone w nazwach stałych.
+                podkreślenia. Liczby są dozwolone w nazwach stałych.
             </para>
 
             <para>
@@ -305,7 +305,7 @@ widgetFactory()
 
             <para>
                 Aby zwiększyć czytelność, słowa w nazwach stałych muszą być
-                oddzielone znakiem podkreślnika. Na przykład, nazwa stałej
+                oddzielone znakiem podkreślenia. Na przykład, nazwa stałej
                 <code>EMBED_SUPPRESS_EMBED_EXCEPTION</code> jest dozwolona, a
                 nazwa <code>EMBED_SUPPRESSEMBEDEXCEPTION</code> nie jest.
             </para>
@@ -338,7 +338,7 @@ widgetFactory()
             </para>
 
             <para>
-                Użycie skróconej wersji znacznikow jest niedozwolone. Pliki,
+                Użycie skróconej wersji znaczników jest niedozwolone. Pliki,
                 które zawierają tylko kod PHP, nie powinny nigdy być zakończone
                 znacznikiem zamykającym (Zobacz
                 <xref linkend="coding-standard.php-file-formatting.general" />).
@@ -353,7 +353,7 @@ widgetFactory()
 
                 <para>
                     Kiedy łańcuch znaków jest prosty (nie zawiera podstawienia
-                    zmienych), do jego odgraniczenia powinien zostać użyty
+                    zmiennych), do jego odgraniczenia powinien zostać użyty
                     pojedynczy cudzysłów (apostrof):
 
                     <programlisting role="php"><![CDATA[
@@ -369,7 +369,7 @@ $a = 'Example String';
                 <para>
                     Kiedy prosty łańcuch znaków zawiera wewnątrz apostrofy,
                     dozwolone jest odgraniczenie łańcucha za pomocą cudzysłowów
-                    (podwójnych). Jest to szczegółnie przydatne w wyrażeniach SQL:
+                    (podwójnych). Jest to szczególnie przydatne w wyrażeniach SQL:
 
                     <programlisting role="php"><![CDATA[
 $sql = "SELECT `id`, `name` from `people` WHERE `name`='Fred' OR `name`='Susan'";
@@ -548,7 +548,7 @@ class SampleClass
                     Zawsze deklarujemy widoczność zmiennych klas za pomocą jednej
                     z konstrukcji: <code>private</code>, <code>protected</code>, lub
                     <code>public</code>.
-                    Uzyskianie dostępu do zmiennych klas bezpośrednio poprzez
+                    Uzyskiwanie dostępu do zmiennych klas bezpośrednio poprzez
                     ustawienie ich jako publicznych jest dozwolone, ale odradzane
                     na rzecz metod dostępowych (set/get).
                 </para>
@@ -566,14 +566,14 @@ class SampleClass
                 </para>
                 <para>
                     Funkcje wewnątrz klas zawsze muszą mieć zadeklarowaną
-                    dostępność za pomocą konstrukji <code>private</code>,
+                    dostępność za pomocą konstrukcji <code>private</code>,
                     <code>protected</code>, lub <code>public</code>.
                 </para>
                 <para>
                     Tak jak w klasach, klamra otwierająca powinna zawsze znajdować
                     się w linii pod nazwą funkcji (styl "one true brace").
 
-                    Nie powinno być odstępu między nazwą fuinkcji a otwierającym
+                    Nie powinno być odstępu między nazwą funkcji a otwierającym
                     nawiasem argumentów.
                 </para>
                 <para>
@@ -665,7 +665,7 @@ class Foo
 
                 <para>
                     Argumenty funkcji powinny być oddzielone jednym znakiem
-                    odstępu po przecinku. To jest przyklad poprawnego wywołania
+                    odstępu po przecinku. To jest przykład poprawnego wywołania
                     funkcji przyjmującej trzy argumenty:
 
                     <programlisting role="php"><![CDATA[
@@ -801,13 +801,15 @@ switch ($numPeople) {
                 </para>
 
                 <para>
-                    <emphasis>UWAGA:</emphasis> It is sometimes useful to write
-                    a <code>case</code> statement which falls through to the
-                    next case by not including a <code>break</code> or
-                    <code>return</code> in that case. To distinguish these cases
-                    from bugs, any <code>case</code> statement where <code>break</code>
-                    or <code>return</code> are omitted must contain the comment
-                    "// break intentionally omitted".
+                	<emphasis>UWAGA:</emphasis> W niektórych przypadkach przydatne
+                	jest zapisanie jednej klauzuli <code>case</code>, po której
+                	sterowanie powinno przejść do następnej klauzuli <code>case</code>
+                	poprzez nie umieszczanie polecenia <code>break</code> lub 
+                	<code>return</code> w wyjściowym <code>case</code>.
+                	Aby odróżnić takie sytuacje od niezamierzonych błędów, 
+                	wszystkie instrukcje <code>case</code> których intencjonalnie
+                	pozbawiono <code>break</code> lub <code>return</code> muszą
+                	zawierać komentarz: "// break intentionally omitted".
                 </para>
             </sect3>
         </sect2>
@@ -821,7 +823,7 @@ switch ($numPeople) {
                 <para>
                     Wszystkie bloki dokumentacji muszą być kompatybilne z
                     formatem phpDocumentor. Opisywanie formatu phpDocumentor
-                    jest poza zakresem teog dokumentu. Aby uzyskać więcej
+                    jest poza zakresem tego dokumentu. Aby uzyskać więcej
                     informacji, odwiedź: <ulink url="http://phpdoc.org/">http://phpdoc.org/</ulink>
                 </para>
 

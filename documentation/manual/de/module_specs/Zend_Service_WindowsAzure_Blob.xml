@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20922 -->
+<!-- EN-Revision: 21541 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.service.windowsazure.storage.blob">
     <title>Zend_Service_WindowsAzure_Storage_Blob</title>
@@ -287,7 +287,7 @@ http://phpstorage.blob.core.windows.net/phpazuretestshared1?st=2009-08-17T09%3A0
 
                 <programlisting language="php"><![CDATA[
 $storageClient   = new Zend_Service_WindowsAzure_Storage_Blob();
-$sharedAccessUrl = storageClient->generateSharedAccessUrl(
+$sharedAccessUrl = $storageClient->generateSharedAccessUrl(
     'container1',
     '',
     'c',
@@ -309,7 +309,7 @@ $sharedAccessUrl = storageClient->generateSharedAccessUrl(
 
                 <programlisting language="php"><![CDATA[
 $storageClient   = new Zend_Service_WindowsAzure_Storage_Blob();
-$sharedAccessUrl = storageClient->generateSharedAccessUrl(
+$sharedAccessUrl = $storageClient->generateSharedAccessUrl(
     'container1',
     'test.txt',
     'b',

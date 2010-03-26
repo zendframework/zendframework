@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19419 -->
+<!-- EN-Revision: 21241 -->
 <sect2 id="zend.validate.set.email_address">
     <title>メールアドレス</title>
 
@@ -51,7 +51,7 @@ if ($validator->isValid($email)) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>allow</emphasis>: ドメイン名のいずれのタイプを受付可能か定義します。
+                    <emphasis><property>allow</property></emphasis>: ドメイン名のいずれのタイプを受付可能か定義します。
                     このオプションは、ホスト名バリデータをセットするために
                     hostname オプションとともに使われます。
                     このオプションで可能な値について詳しくは、
@@ -63,23 +63,7 @@ if ($validator->isValid($email)) {
 
             <listitem>
                 <para>
-                    <emphasis>hostname</emphasis>: 検証される電子メール・アドレスのドメインパートで
-                    ホスト名バリデータをセットします。
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>mx</emphasis>: サーバから MX レコードが検出されるべきかどうか定義します。
-                    もしこのオプションが <constant>TRUE</constant> と定義されると、
-                    サーバがメールを受け付けるかどうか検証するために MX レコードが使われます。
-                    このオプションの既定値は <constant>FALSE</constant> です。
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>deep</emphasis>: サーバの MX レコードを強度のチェックで検証するべきかどうか定義します。
+                    <emphasis><property>deep</property></emphasis>: サーバの MX レコードを強度のチェックで検証するべきかどうか定義します。
                     このオプションが <constant>TRUE</constant> に設定されると、
                     サーバがメールを受け付けるかどうか検証するために、
                     MX レコードに加えて A , A6 及び <constant>AAAA</constant> レコードも使われます。
@@ -89,11 +73,27 @@ if ($validator->isValid($email)) {
 
             <listitem>
                 <para>
-                    <emphasis>domain</emphasis>: ドメインパートをチェックすべきかどうか定義します。
+                    <emphasis><property>domain</property></emphasis>: ドメインパートをチェックすべきかどうか定義します。
                     このオプションが <constant>FALSE</constant> に設定されると、
                     メールアドレスのローカルパートのみがチェックされます。
                     この場合、ホスト名バリデータは呼ばれません。
                     このオプションの既定値は <constant>TRUE</constant> です。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>hostname</property></emphasis>: 検証される電子メール・アドレスのドメインパートで
+                    ホスト名バリデータをセットします。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>mx</property></emphasis>: サーバから MX レコードが検出されるべきかどうか定義します。
+                    もしこのオプションが <constant>TRUE</constant> と定義されると、
+                    サーバがメールを受け付けるかどうか検証するために MX レコードが使われます。
+                    このオプションの既定値は <constant>FALSE</constant> です。
                 </para>
             </listitem>
         </itemizedlist>
@@ -225,7 +225,7 @@ $validator = new Zend_Validate_EmailAddress(
         </para>
 
         <para>
-            しばしば MX レコードの検証は、メールが受け付けられたとしても false を返します。
+            しばしば MX レコードの検証は、メールが受け付けられたとしても <constant>FALSE</constant> を返します。
             この振る舞いの背後にある理由は、サーバが MX レコードを提供しなくてもサーバはメールを受付できることです。
             この場合、サーバは A, A6 または <constant>AAAA</constant> レコードを提供します。
             それらのほかのレコードでも <classname>Zend_Validate_EmailAddress</classname> がチェックできるようにするためには、

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19661 -->
+<!-- EN-Revision: 21586 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.exception.basic">
     <title>Uso básico</title>
@@ -7,7 +7,7 @@
     <para>
         <classname>Zend_Exception</classname> é a classe base para todas as exceções
         lançadas pelo Zend Framework. Esta classe estende a parte essencial da classe
-        <classname>Exception</classname> do PHP.
+        <classname>Exception</classname> do <acronym>PHP</acronym>.
     </para>
 
     <example id="zend.exception.catchall.example">

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
+<!-- EN-Revision: 21357 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.data">
     <title>Zend_Dojo_Data: dojo.data Envelopes</title>
 
     <para>
-        Dojo bietet Datenabstraktionen für daten-aktivierte Widgets über seie dojo.data Komponente.
-        Diese Komponente bietet die Möglichkeit einen Datenspeicher hinzuzufügen, einige Metadaten
-        betreffend dem Identifikatorfeld zu liefern und optional ein Labelfeld, und eine
-        <acronym>API</acronym> für das Abfragen, Sortieren und Empfangen von Einträgen und Sets von
-        Einträgen von der Datenquelle.
+        Dojo bietet Datenabstraktionen für daten-aktivierte Widgets über seine
+        <command>dojo.data</command> Komponente. Diese Komponente bietet die Möglichkeit einen
+        Datenspeicher hinzuzufügen, einige Metadaten betreffend dem Identifikatorfeld zu liefern und
+        optional ein Labelfeld, und eine <acronym>API</acronym> für das Abfragen, Sortieren und
+        Empfangen von Einträgen und Sets von Einträgen von der Datenquelle.
     </para>
 
     <para>
-        dojo.data wird oft mit XmlHttpRequest verwendet um dynamisch Daten vom Server zu holen. Der
-        primäre Mechanismus hierfür ist die Erweiterung von QueryReadStore um auf eine
-        <acronym>URL</acronym> zu zeigen und die Anfrageinformation zu spezifizieren. Die
+        <command>dojo.data</command> wird oft mit XmlHttpRequest verwendet um dynamisch Daten vom
+        Server zu holen. Der primäre Mechanismus hierfür ist die Erweiterung von QueryReadStore um
+        auf eine <acronym>URL</acronym> zu zeigen und die Anfrageinformation zu spezifizieren. Die
         Serverseite gibt dann Daten im folgenden <acronym>JSON</acronym> Format zurück:
     </para>
 
@@ -40,9 +40,9 @@
         <title>Verwendung von Zend_Dojo_Data</title>
 
         <para>
-            In seiner einfachsten Form, verlangt dojo.data das der Name des Identifikatorfelds in
-            jedem Element angegeben wird, und ein Set von Elementen (Daten). Man kann diese entweder
-            über den Konstruktor übergeben, oder über Mutatoren:
+            In seiner einfachsten Form, verlangt <command>dojo.data</command> dass der Name des
+            Identifikatorfelds in jedem Element angegeben wird, und ein Set von Elementen (Daten).
+            Man kann diese entweder über den Konstruktor übergeben, oder über Mutatoren:
         </para>
 
         <example id="zend.dojo.data.usage.constructor">
@@ -84,10 +84,10 @@ $data->addItems($someMoreItems);
             <title>Immer einen Identifikator verwenden!</title>
 
             <para>
-                Für jeden dojo.data Datenspeicher muß die Identifikatorspalte als
-                Metadaten angegeben werden, inklusive <classname>Zend_Dojo_Data</classname>.
-                Fakt ist das, wenn man versucht Elemente ohne
-                Identifikator hinzuzufügen, eine Ausnahme geworfen wird.
+                Für jeden <command>dojo.data</command> Datenspeicher muß die Identifikatorspalte
+                als Metadaten angegeben werden, inklusive <classname>Zend_Dojo_Data</classname>.
+                Fakt ist das, wenn man versucht Elemente ohne Identifikator hinzuzufügen, eine
+                Ausnahme geworfen wird.
             </para>
         </note>
 
@@ -110,7 +110,8 @@ $data->addItems($someMoreItems);
 
             <listitem>
                 <para>
-                    Jedes andere Objekt (wird über get_object_vars() serialisiert)
+                    Jedes andere Objekt (wird über <methodname>get_object_vars()</methodname>
+                    serialisiert)
                 </para>
             </listitem>
         </itemizedlist>
@@ -152,7 +153,7 @@ $data->setLabel('name');
 
         <para>
             Letztendlich kann man auch ein <classname>Zend_Dojo_Data</classname> Element von einem
-            dojo.data <acronym>JSON</acronym> Array geladen werden, indem die
+            <command>dojo.data</command> <acronym>JSON</acronym> Array geladen werden, indem die
             <methodname>fromJson()</methodname> Methode verwendet wird.
         </para>
 
@@ -170,7 +171,7 @@ $data->fromJson($json);
 
         <para>
             Einige Dojo Komponenten benötigen zusätzliche Metadaten zusammen mit dem
-            dojo.data Payload zurückgegeben werden. Als Beispiel kann
+            <command>dojo.data</command> Payload zurückgegeben werden. Als Beispiel kann
             <command>dojox.grid.Grid</command> Daten dynamisch von einem
             <command>dojox.data.QueryReadStore</command> herausziehen. Damit die
             Seitenweise Darstellung richtig funktioniert, sollte jeder zurückgegebene

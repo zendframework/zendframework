@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21251 -->
+<!-- EN-Revision: 21554 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.between">
     <title>Between</title>
@@ -37,14 +37,14 @@
 
             <listitem>
                 <para>
-                    <emphasis><property>min</property></emphasis>: Setzt die minimale grenze für die
+                    <emphasis><property>max</property></emphasis>: Setzt die maximale Grenze für die
                     Prüfung.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><property>max</property></emphasis>: Setzt die maximale Grenze für die
+                    <emphasis><property>min</property></emphasis>: Setzt die minimale Grenze für die
                     Prüfung.
                 </para>
             </listitem>

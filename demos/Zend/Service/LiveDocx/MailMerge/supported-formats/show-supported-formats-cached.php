@@ -32,20 +32,20 @@ if (! $formats = $cache->load($cacheId)) {
     
     // Cache miss. Connect to backend service (expensive).
     
-    $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+    $mailMerge = new Zend_Service_LiveDocx_MailMerge();
     
-    $phpLiveDocx->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
-                ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
+    $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+              ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
     
     $formats = new StdClass();
     
-    $formats->template = $phpLiveDocx->getTemplateFormats();
-    $formats->document = $phpLiveDocx->getDocumentFormats();
-    $formats->image    = $phpLiveDocx->getImageFormats();
+    $formats->template = $mailMerge->getTemplateFormats();
+    $formats->document = $mailMerge->getDocumentFormats();
+    $formats->image    = $mailMerge->getImageFormats();
     
     $cache->save($formats, $cacheId);
     
-    unset($phpLiveDocx);
+    unset($mailMerge);
     
 } else {
     

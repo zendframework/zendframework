@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21474 -->
+<!-- EN-Revision: 21562 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -109,74 +109,18 @@
     </xi:include>
     <xi:include href="Zend_Validate-Hostname.xml" />
 
-    <sect2 id="zend.validate.set.iban">
-        <title>Iban</title>
-
-        <para>
-            <code>$value</code> が正しい IBAN
-            (International Bank Account Number) を含む場合にのみ <constant>TRUE</constant> を返します。
-            IBAN 番号の検証は、使用している国に対して行い、チェックサムを使用します。
-        </para>
-
-        <para>
-            IBAN 番号の検証方法は 2 通りあります。最初の方法では、国を表すロケールを指定します。
-            その国に対して、指定した IBAN 番号の検証を行います。
-        </para>
-
-        <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Iban('de_AT');
-$iban = 'AT611904300234573201';
-if ($validator->isValid($iban)) {
-    // IBAN は有効なようです
-} else {
-    // IBAN は無効です
-    foreach ($validator->getMessages() as $message) {
-        echo "$message\n";
-    }
-}
-]]></programlisting>
-
-        <para>
-            これは、IBAN 番号をひとつの国に対して検証したい場合に使用します。
-            もっとシンプルな方法としては、この例のようにロケールを指定しないものもあります。
-        </para>
-
-        <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Iban();
-$iban = 'AT611904300234573201';
-if ($validator->isValid($iban)) {
-    // IBAN は有効なようです
-} else {
-    // IBAN は無効です
-}
-]]></programlisting>
-
-        <para>
-            しかしこれには大きな問題がひとつあります。
-            たとえばフランスならフランスなど 1 か国だけの IBAN 番号を許可したいときに、
-            他の国の IBAN 番号も有効となってしまいます。
-            したがって、特定の国の IBAN 番号を検証したい場合はロケールを指定しなければなりません。
-            国にこだわらずすべての IBAN 番号を許可したい場合は、
-            ロケールを省略してシンプルに書くことができます。
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-Iban.xml">
+                <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Iban.xml" /></xi:fallback>
+    </xi:include>
 
     <xi:include href="Zend_Validate-Identical.xml">
                 <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Identical.xml" /></xi:fallback>
     </xi:include>
     <xi:include href="Zend_Validate-InArray.xml" />
 
-    <sect2 id="zend.validate.set.int">
-        <title>Int</title>
-
-        <para>
-            <code>$value</code> が整数値である場合にのみ <constant>TRUE</constant> を返します。
-            Zend Framework 1.8 以降では、このバリデータは
-            ブラウザや環境変数あるいはアプリケーションで設定されたロケールを考慮するようになります。
-            もちろん、アクセサ get/setLocale を使用して、
-            バリデータのインスタンスを作成する際に使用するロケールを変更することもできます。
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-Int.xml">
+                <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Int.xml" /></xi:fallback>
+    </xi:include>
 
     <xi:include href="Zend_Validate-Ip.xml">
         <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Ip.xml" /></xi:fallback>
@@ -196,13 +140,9 @@ if ($validator->isValid($iban)) {
         <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-PostCode.xml" /></xi:fallback>
     </xi:include>
 
-    <sect2 id="zend.validate.set.regex">
-        <title>Regex</title>
-
-        <para>
-            <code>$value</code> が正規表現パターンにマッチする場合にのみ <constant>TRUE</constant> を返します。
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-Regex.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Regex.xml" /></xi:fallback>
+    </xi:include>
 
     <xi:include href="Zend_Validate-Sitemap.xml" />
 

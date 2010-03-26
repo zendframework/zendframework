@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21129 -->
 <sect2 id="zend.filter.set.realpath">
     <title>RealPath</title>
 
     <para>
         このフィルタは与えられたリンクとパス名を解決して、正規化された絶対パス名を返します。
-        <filename>'/./'</filename>や<filename>'/../'</filename>への参照、
-        及び、入力パスの余分な<filename>'/'</filename>記号は取り除かれます。
+        '<filename>/./</filename>' や '<filename>/../</filename>' への参照、
+        及び、入力パスの余分な '<filename>/</filename>' 記号は取り除かれます。
         結果のパスにはいかなるシンボリックリンクも無く、
-        <filename>'/./'</filename>や<filename>'/../'</filename>文字もありません。
+        '<filename>/./</filename>' や '<filename>/../</filename>' 文字もありません。
     </para>
 
     <para>
         たとえばファイルが存在しない場合、
         <classname>Zend_Filter_RealPath</classname>は失敗すると<constant>FALSE</constant>を返します。
         もし最後のパスのコンポーネントだけが存在しない場合、
-        BSDシステムでは<classname>Zend_Filter_RealPath</classname>は失敗しますが、
+        <acronym>BSD</acronym> システムでは<classname>Zend_Filter_RealPath</classname>は失敗しますが、
         他のシステムでは<constant>FALSE</constant>を返します。
     </para>
 

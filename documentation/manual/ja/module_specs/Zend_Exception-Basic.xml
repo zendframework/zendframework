@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19661 -->
+<!-- EN-Revision: 21586 -->
 <sect1 id="zend.exception.basic">
     <title>基本的な使用法</title>
 
     <para>
         <classname>Zend_Exception</classname> はZend Framework でスローされる例外全ての基底クラスです。
-        このクラスは、 PHP の基本的な <classname>Exception</classname> クラスを拡張します。
+        このクラスは、 <acronym>PHP</acronym> の基本的な <classname>Exception</classname> クラスを拡張します。
     </para>
 
     <example id="zend.exception.catchall.example">

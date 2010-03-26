@@ -13,7 +13,7 @@
         "http://www.example.com/user/edit". Jeśli rozszerzenie mod_rewrite nie
         jest aktywne, ZF może być skonfigurowany w taki sposób aby obsłużyć
         adresy URL w postaci "http://www.example.com?controller=user&amp;action=edit".
-        Przyjazen URL mogą być użyte aby skrócić adresy w celu polepszenia ich
+        Przyjazne URL mogą być użyte aby skrócić adresy w celu polepszenia ich
         czytelności lub dla potrzeb optymalizacji pod kątem wyszukiwarek
         internetowych (SEO), jednak nie mają one bezpośredniego wpływu na
         funkcjonalność aplikacji.
@@ -376,12 +376,12 @@
                     <row>
                         <entry><emphasis role="strong"><ulink url="http://www.php.net/manual/en/ref.pcre.php"><code>pcre</code></ulink></emphasis></entry>
                         <entry>Silna</entry>
-                        <entry>wirtualnie wszystkie komponenty</entry>
+                        <entry>Praktycznie wszystkie komponenty</entry>
                     </row>
                     <row>
                         <entry><emphasis role="strong"><ulink url="http://www.php.net/manual/en/ref.pdo.php"><code>pdo</code></ulink></emphasis></entry>
                         <entry>Silna</entry>
-                        <entry>All PDO database adapters</entry>
+                        <entry>Wszystkie adaptery baz danych PDO</entry>
                     </row>
                     <row>
                         <entry><emphasis role="strong"><ulink url="http://www.php.net/manual/en/ref.pdo-dblib.php"><code>pdo_dblib</code></ulink></emphasis></entry>
@@ -738,7 +738,7 @@
                     <row>
                         <entry morerows="8" valign="middle"><emphasis role="strong"><ulink url="http://framework.zend.com/manual/en/zend.db.html"><code>Zend_Db</code></ulink></emphasis></entry>
                         <entry morerows="8" valign="middle">Silna</entry>
-                        <entry>All PDO Adapters</entry>
+                        <entry>Wszystkie adaptery baz danych PDO</entry>
                         <entry><ulink url="http://www.php.net/manual/en/ref.pdo.php"><code>pdo</code></ulink></entry>
                     </row>
                     <row>

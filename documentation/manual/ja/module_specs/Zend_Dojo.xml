@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20766 -->
+<!-- EN-Revision: 21358 -->
 <sect1 id="zend.dojo.introduction">
     <title>導入</title>
 
@@ -13,8 +13,8 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>JSON-RPC のサポート</para></listitem>
-        <listitem><para>dojo.data との互換性</para></listitem>
+        <listitem><para><acronym>JSON-RPC</acronym> のサポート</para></listitem>
+        <listitem><para><command>dojo.data</command> との互換性</para></listitem>
         <listitem><para>Dojo 環境を準備するためのビューヘルパー</para></listitem>
         <listitem><para>Dijit 固有の <classname>Zend_View</classname> ヘルパー</para></listitem>
 
@@ -32,7 +32,8 @@
         コピーしたり、あるいはビルドツールで独自のビルドを作成したりして
         プロジェクトに組み込むことができます。
         あるいは、Dojo が提供するコンテンツ配信ネットワークを使うこともできます
-        (Zend Framework は、公式の AOL CDN だけでなく Google CDN もサポートしています)。
+        (Zend Framework は、公式の <acronym>AOL</acronym> <acronym>CDN</acronym>
+        だけでなく Google <acronym>CDN</acronym> もサポートします)。
     </para>
 </sect1>
 <!--

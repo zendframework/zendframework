@@ -7,7 +7,7 @@
     <para>
         Die Komponente <classname>Zend_Rest</classname> enthält eine RESTvolle Route für
         <classname>Zend_Controller_Router_Rewrite</classname>. Diese Route bietet ein
-        standartisiertes Routing Schema das Routinganfragen durch Übersetzung der
+        standardisiertes Routing Schema das Routinganfragen durch Übersetzung der
         <acronym>HTTP</acronym> Methode und der <acronym>URI</acronym> zu einem Modul,
         Controller und einer Action. Die unten stehende Tabelle bietet eine Übersicht darüber
         wie Anfragemethoden und <acronym>URI</acronym>'s geroutet werden.

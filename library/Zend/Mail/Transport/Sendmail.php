@@ -69,14 +69,14 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
      */
     public function __construct($parameters = null)
     {
-		if ($parameters instanceof Zend_Config) { 
-			$parameters = $parameters->toArray(); 
-		}
+        if ($parameters instanceof Zend_Config) { 
+            $parameters = $parameters->toArray(); 
+        }
 
-		if (is_array($parameters)) { 
-			$parameters = implode(' ', $parameters);
-		}
-		
+        if (is_array($parameters)) { 
+            $parameters = implode(' ', $parameters);
+        }
+        
         $this->parameters = $parameters;
     }
 
@@ -92,13 +92,14 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
      */
     public function _sendMail()
     {
-        set_error_handler(array($this, '_handleMailErrors'));
         if ($this->parameters === null) {
+            set_error_handler(array($this, '_handleMailErrors'));
             $result = mail(
                 $this->recipients,
                 $this->_mail->getSubject(),
                 $this->body,
                 $this->header);
+            restore_error_handler();
         } else {
         	if(!is_string($this->parameters)) {
 	            /**
@@ -108,16 +109,17 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
                 throw new Zend_Mail_Transport_Exception(
                     'Parameters were set but are not a string'
                 );
-        	}
+            }
 
+            set_error_handler(array($this, '_handleMailErrors'));
             $result = mail(
                 $this->recipients,
                 $this->_mail->getSubject(),
                 $this->body,
                 $this->header,
                 $this->parameters);
+            restore_error_handler();
         }
-        restore_error_handler();
 
         if ($this->_errstr !== null || !$result) {
             throw new Zend_Mail_Transport_Exception('Unable to send mail. ' . $this->_errstr);

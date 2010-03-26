@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 21586 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.exception.previous">
-    <title>Exceções Anteriores</title>
+    <title>Exceções Precedentes</title>
 
     <para>
-        Desde o Zend Framework 1.10, <classname>Zend_Exception</classname> implementa as exceções
-        anteriores do PHP 5.3. Simplificando, em um bloco <methodname>catch</methodname>, você pode
-        lançar uma nova exceção que faz referência a exceção original, ajudando a fornecer contexto
-        adicional na depuração. Ao fornecer este suporte no Zend Framework, seu código agora poderá
-        avançar na compatibilidade com o PHP 5.3.
+        Desde o Zend Framework 1.10, <classname>Zend_Exception</classname> implementa às exceções
+        precedentes do <acronym>PHP</acronym> 5.3. Simplificando, em um bloco
+        <methodname>catch()</methodname>, você pode lançar uma nova exceção que faz referência à
+        exceção original, ajudando a fornecer contexto adicional na depuração. Ao fornecer este
+        suporte no Zend Framework, seu código agora poderá avançar na compatibilidade com o
+        <acronym>PHP</acronym> 5.3.
     </para>
 
     <para>
-        Exceções anteriores são indicadas como o terceiro argumento para um construtor de exceção.
+        Exceções precedentes são indicadas como o terceiro argumento para um construtor de exceção.
     </para>
 
     <example id="zend.exception.previous.example">
-        <title>Exceções anteriores</title>
+        <title>Exceções precedentes</title>
 
         <programlisting language="php"><![CDATA[
 try {
@@ -25,12 +26,12 @@ try {
 } catch (Zend_Db_Statement_Exception $e) {
     if ($e->getPrevious()) {
         echo '[' . get_class($e)
-            . '] has the previous exception of ['
+            . '] possui a exceção precedente de ['
             . get_class($e->getPrevious())
             . ']' . PHP_EOL;
     } else {
         echo '[' . get_class($e)
-            . '] does not have a previous exception'
+            . '] não possui uma exceção precedente'
             . PHP_EOL;
     }
 

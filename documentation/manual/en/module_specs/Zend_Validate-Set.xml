@@ -95,73 +95,10 @@
     <xi:include href="Zend_Validate-GreaterThan.xml" />
     <xi:include href="Zend_Validate-Hex.xml" />
     <xi:include href="Zend_Validate-Hostname.xml" />
-
-    <sect2 id="zend.validate.set.iban">
-        <title>Iban</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> contains a
-            valid IBAN (International Bank Account Number). IBAN numbers are validated against the
-            country where they are used and by a checksum.
-        </para>
-
-        <para>
-            There are two ways to validate IBAN numbers. As first way you can give a locale which
-            represents a country. Any given IBAN number will then be validated against this country.
-        </para>
-
-        <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Iban('de_AT');
-$iban = 'AT611904300234573201';
-if ($validator->isValid($iban)) {
-    // IBAN appears to be valid
-} else {
-    // IBAN is invalid
-    foreach ($validator->getMessages() as $message) {
-        echo "$message\n";
-    }
-}
-]]></programlisting>
-
-        <para>
-            This should be done when you want to validate IBAN numbers for a single countries. The
-            simpler way of validation is not to give a locale like shown in the next example.
-        </para>
-
-        <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Iban();
-$iban = 'AT611904300234573201';
-if ($validator->isValid($iban)) {
-    // IBAN appears to be valid
-} else {
-    // IBAN is invalid
-}
-]]></programlisting>
-
-        <para>
-            But this shows one big problem: When you have to accept only IBAN numbers from one
-            single country, for example france, then IBAN numbers from other countries would also be
-            valid. Therefor just remember: When you have to validate a IBAN number against a defined
-            country you should give the locale. And when you accept all IBAN numbers regardless of
-            any country omit the locale for simplicity.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Iban.xml" />
     <xi:include href="Zend_Validate-Identical.xml" />
     <xi:include href="Zend_Validate-InArray.xml" />
-
-    <sect2 id="zend.validate.set.int">
-        <title>Int</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> is a valid
-            integer. Since Zend Framework 1.8 this validator takes into account the actual locale
-            from browser, environment or application wide set locale. You can of course use the
-            get/setLocale accessors to change the used locale or give it while creating a instance
-            of this validator.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Int.xml" />
     <xi:include href="Zend_Validate-Ip.xml" />
     <xi:include href="Zend_Validate-Isbn.xml" />
     <xi:include href="Zend_Validate-LessThan.xml" />

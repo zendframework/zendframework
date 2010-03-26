@@ -3,17 +3,17 @@
 require_once dirname(__FILE__) . '/../../common.php';
 
 
-$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+$mailMerge = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
-            ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
+$mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+          ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
 
 /*
  * ALTERNATIVE: Specify username and password in constructor
  */
             
 /*
-$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge(
+$mailMerge = new Zend_Service_LiveDocx_MailMerge(
     array (
         'username' => DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME,
         'password' => DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD
@@ -21,12 +21,12 @@ $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge(
 );
 */
 
-$phpLiveDocx->setLocalTemplate('template.doc');
+$mailMerge->setLocalTemplate('template.doc');
 
 
-$phpLiveDocx->assign('customer_number', sprintf("#%'10s",  rand(0,1000000000)))
-            ->assign('invoice_number',  sprintf("#%'10s",  rand(0,1000000000)))
-            ->assign('account_number',  sprintf("#%'10s",  rand(0,1000000000)));
+$mailMerge->assign('customer_number', sprintf("#%'10s",  rand(0,1000000000)))
+          ->assign('invoice_number',  sprintf("#%'10s",  rand(0,1000000000)))
+          ->assign('account_number',  sprintf("#%'10s",  rand(0,1000000000)));
 
 
 $billData = array (  
@@ -44,7 +44,7 @@ $billData = array (
     'total'         =>  '23.32'
 );
 
-$phpLiveDocx->assign($billData);
+$mailMerge->assign($billData);
 
 
 $billConnections = array(
@@ -70,13 +70,13 @@ $billConnections = array(
     )
 );
 
-$phpLiveDocx->assign('connection', $billConnections);
+$mailMerge->assign('connection', $billConnections);
 
 
-$phpLiveDocx->createDocument();
+$mailMerge->createDocument();
 
-$document = $phpLiveDocx->retrieveDocument('pdf');
+$document = $mailMerge->retrieveDocument('pdf');
 
-unset($phpLiveDocx);
+unset($mailMerge);
 
 file_put_contents('document.pdf', $document);

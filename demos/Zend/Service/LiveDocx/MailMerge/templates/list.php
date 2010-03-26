@@ -13,11 +13,11 @@ print(Demos_Zend_Service_LiveDocx_Helper::wrapLine(
     PHP_EOL)
 );
 
-$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+$mailMerge = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
-            ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
+$mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+          ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
 
-print(Demos_Zend_Service_LiveDocx_Helper::listDecorator($phpLiveDocx->listTemplates()));
+print(Demos_Zend_Service_LiveDocx_Helper::listDecorator($mailMerge->listTemplates()));
 
-unset($phpLiveDocx);
+unset($mailMerge);

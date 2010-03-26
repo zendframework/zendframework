@@ -1470,7 +1470,7 @@ $form->addElement(
                 <para>
                     <methodname>setVisibleIncrement($format)</methodname> and
                     <methodname>getVisibleIncrement()</methodname>: set the increment visible
-                    in the time chooser; must follow <acronym>ISO_8601</acronym> formats.
+                    in the time chooser; must follow <constant>ISO_8601</constant> formats.
                 </para>
             </listitem>
 
@@ -1479,7 +1479,7 @@ $form->addElement(
                     <methodname>setVisibleRange($format)</methodname> and
                     <methodname>getVisibleRange()</methodname>: set and retrieve the range of
                     time visible in the time chooser at any given moment; must
-                    follow <acronym>ISO_8601</acronym> formats.
+                    follow <constant>ISO_8601</constant> formats.
                 </para>
             </listitem>
         </itemizedlist>

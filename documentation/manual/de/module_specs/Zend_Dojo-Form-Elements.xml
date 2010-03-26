@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
+<!-- EN-Revision: 21358 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.elements">
     <title>Dijit-Specifische Fomularelemente</title>
@@ -248,11 +248,11 @@ $form->addElement(
 
         <para>
             Das ComboBox und FilteringSelect Formularelemente bietet Zugriffsmethoden und Mutatoren
-            für das Ermitteln und Setzen von Selectoptionen sowie das Spezifizieren des dojo.data
-            Datenspeichers (wenn er verwendet wird). Sie erweitern DijitMulti, welches es erlaubt
-            Selectoptionen über die Methoden <methodname>setMultiOptions()</methodname> und
-            <methodname>setMultiOption()</methodname> zu spezifizieren. Zusätzlich stehen die
-            folgenden Methoden zur Verfügung:
+            für das Ermitteln und Setzen von Selectoptionen sowie das Spezifizieren des
+            <command>dojo.data</command> Datenspeichers (wenn er verwendet wird). Sie erweitern
+            DijitMulti, welches es erlaubt Selectoptionen über die Methoden
+            <methodname>setMultiOptions()</methodname> und <methodname>setMultiOption()</methodname>
+            zu spezifizieren. Zusätzlich stehen die folgenden Methoden zur Verfügung:
         </para>
 
         <itemizedlist>
@@ -283,7 +283,8 @@ $form->addElement(
             <listitem>
                 <para>
                     <methodname>setStoreType($dojoType)</methodname>: Setzt die Datenspeicherklasse
-                    die verwendet werden soll; z.B., "dojo.data.ItemFileReadStore".
+                    die verwendet werden soll; z.B.,
+                    "<command>dojo.data.ItemFileReadStore</command>".
                 </para>
             </listitem>
 
@@ -298,8 +299,9 @@ $form->addElement(
                 <para>
                     <methodname>setStoreParams(array $params)</methodname>: Setzt jeden verwendeten
                     Parameter um das Datenspeicherobjekt zu konfigurieren. Als Beispiel würde der
-                    dojo.data.ItemFileReadStore Datenspeicher einen 'url' Parameter erwarten der
-                    auf einen Ort zeigt der das dojo.data Objekt zurückgibt.
+                    <command>dojo.data.ItemFileReadStore</command> Datenspeicher einen 'url'
+                    Parameter erwarten der auf einen Ort zeigt der das <command>dojo.data</command>
+                    Objekt zurückgibt.
                 </para>
             </listitem>
 
@@ -327,11 +329,11 @@ $form->addElement(
         </itemizedlist>
 
         <para>
-            Standardmäßig, wenn kein dojo.data Speicher im Element registriert wurde, registriert
-            dieses Element eine <classname>InArray</classname> Prüfung welche die Arrayschlüssel
-            gegen registrierte Optionen prüft. Dieses Verhalten kann deaktiviert werden indem
-            entweder <methodname>setRegisterInArrayValidator(false)</methodname> ausgerufen, oder
-            ein <constant>FALSE</constant> Wert an den Registrierungsschlüssel
+            Standardmäßig, wenn kein <command>dojo.data</command> Speicher im Element registriert
+            wurde, registriert dieses Element eine <classname>InArray</classname> Prüfung welche die
+            Arrayschlüssel gegen registrierte Optionen prüft. Dieses Verhalten kann deaktiviert
+            werden indem entweder <methodname>setRegisterInArrayValidator(false)</methodname>
+            ausgerufen, oder ein <constant>FALSE</constant> Wert an den Registrierungsschlüssel
             <property>registerInArrayValidator</property> übergeben wird.
         </para>
 
@@ -489,7 +491,7 @@ $form->addElement(
             <listitem>
                 <para>
                     <methodname>setAmPm($flag)</methodname> and <methodname>getAmPm()</methodname>:
-                    Ob in der Zeit AM/PM Strings verwendet werden sollen oder nicht.
+                    Ob in der Zeit AM oder PM Strings verwendet werden sollen oder nicht.
                 </para>
             </listitem>
 
@@ -559,9 +561,10 @@ $form->addElement(
         <title>Editor</title>
 
         <para>
-            Editor bietet einen WYSIWYG Editor der verwendet werden kann um Rich HTML Inhalte sowohl
-            zu erstellen als auch zu bearbeiten. dijit.Editor ist pluggable und kann mit eigenen
-            Plugins erweitert werden wenn das gewünscht ist; siehe <ulink
+            Editor bietet einen <acronym>WYSIWYG</acronym> Editor der verwendet werden kann um Rich
+            <acronym>HTML</acronym> Inhalte sowohl zu erstellen als auch zu bearbeiten.
+            <command>dijit.Editor</command> ist pluggable und kann mit eigenen Plugins erweitert
+            werden wenn das gewünscht ist; siehe <ulink
                 url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">die
                 dijit.Editor Dokumentation</ulink> für weitere Details.
         </para>
@@ -604,9 +607,9 @@ $form->addElement(
 
             <listitem>
                 <para>
-                    <emphasis>events</emphasis> sind Standard DOM Events, wie onClick, onKeyUp, usw.
-                    Die folgenden Zugriffsmethoden und Mutatoren sind für die Manipulation von
-                    Events vorhanden:
+                    <emphasis>events</emphasis> sind Standard <acronym>DOM</acronym> Events, wie
+                    onClick, onKeyUp, usw. Die folgenden Zugriffsmethoden und Mutatoren sind für die
+                    Manipulation von Events vorhanden:
                 </para>
 
                 <itemizedlist>
@@ -771,15 +774,15 @@ $form->addElement('editor', 'content', array(
             <para>
                 Das Editor dijit verwendet standardmäßig ein <acronym>HTML</acronym>
                 <acronym>DIV</acronym>. Die Dokumentation für
-                <classname>dijit._editor.RichText</classname> zeigt dass es potentielle Sicherheits
-                Probleme bereiten kann wenn man es auf ein HTML <acronym>TEXTAREA</acronym>
-                erstellt.
+                <command>dijit._editor.RichText</command> zeigt dass es potentielle Sicherheits
+                Probleme bereiten kann wenn man es auf ein <acronym>HTML</acronym>
+                <acronym>TEXTAREA</acronym> erstellt.
             </para>
 
             <para>
                 Deshalb kann es Zeiten geben in denen man ein Editor Widget benötigt das korrekt zu
                 einer <acronym>TEXTAREA</acronym> degradiert. In solchen Situationen kann man dass
-                durchführen indem die Eigenschaft <varname>degrade</varname> auf
+                durchführen indem die Eigenschaft <property>degrade</property> auf
                 <constant>TRUE</constant> gesetzt wird:
             </para>
 
@@ -804,7 +807,7 @@ $editor->degrade = true;
         <title>HorizontalSlider</title>
 
         <para>
-            HorizontalSlider bietet ein Schieber UI Widget für die Auswahl eines nummerischen Wertes
+            HorizontalSlider bietet ein Schieber UI Widget für die Auswahl eines numerischen Wertes
             in einem Bereich. Intern, setzt es den Wert eines versteckten Elements welches vom
             Formular übermittelt wird.
         </para>
@@ -857,9 +860,9 @@ $editor->degrade = true;
             <listitem>
                 <para>
                     <methodname>setTopDecorationAttribs(array $attribs)</methodname> und
-                    <methodname>setBottomDecorationAttribs(array $attribs)</methodname>: HTML
-                    Attribute die für die gegebene Rule oder RuleLabels HTML Elementcontainer
-                    spezifiziert werden.
+                    <methodname>setBottomDecorationAttribs(array $attribs)</methodname>:
+                    <acronym>HTML</acronym> Attribute die für die gegebene Rule oder RuleLabels
+                    <acronym>HTML</acronym> Elementcontainer spezifiziert werden.
                 </para>
             </listitem>
 
@@ -935,7 +938,7 @@ $form->addElement(
         <title>NumberSpinner</title>
 
         <para>
-            Ein Nummernkreisel (Number Spinner) ist ein Textelement für die Eingabe von nummerischen
+            Ein Nummernkreisel (Number Spinner) ist ein Textelement für die Eingabe von numerischen
             Werten; es enthält auch Elemente für das inkrementieren und dekrementieren des Wertes
             mit einer gesetzten Anzahl.
         </para>
@@ -967,7 +970,7 @@ $form->addElement(
                 <para>
                     <methodname>setLargeDelta($delta)</methodname> und
                     <methodname>getLargeDelta()</methodname>: Setzt und gibt die Menge zurück mit
-                    welcher der nummerische Wert geändert werden soll wenn ein Button gedrückt
+                    welcher der numerische Wert geändert werden soll wenn ein Button gedrückt
                     gehalten wird.
                 </para>
             </listitem>
@@ -1040,7 +1043,7 @@ $form->addElement(
         <title>NumberTextBox</title>
 
         <para>
-            Eine NumberTextBox ist ein Textelement für die Eingabe von nummerischen Werten; anders
+            Eine NumberTextBox ist ein Textelement für die Eingabe von numerischen Werten; anders
             als beim NummerSpinner, werden Nummern manuell eingegeben. Prüfungen und Abhängigkeiten
             können angegeben werden um sicherzustellen das die Nummer immer in einem bestimmten
             Bereich oder Format ist.
@@ -1077,7 +1080,7 @@ $form->addElement(
             <listitem>
                 <para>
                     <methodname>setType($type)</methodname> und <methodname>getType()</methodname>:
-                    Setzt und gibt eine nummerischen Formattyp zurück der verwendet wird (sollte
+                    Setzt und gibt eine numerischen Formattyp zurück der verwendet wird (sollte
                     'decimal', 'percent' oder 'currency' sein).
                 </para>
             </listitem>
@@ -1095,7 +1098,7 @@ $form->addElement(
                     <methodname>setStrict($flag)</methodname> und
                     <methodname>getStrict()</methodname>: Setzt und gibt den Wert des Strictflags
                     zurück, welches anzeigt wieviel Ungenauigkeit in Bezug auf Leerzeichen und
-                    nicht-nummerische Zeichen erlaubt ist.
+                    nicht-numerische Zeichen erlaubt ist.
                 </para>
             </listitem>
         </itemizedlist>
@@ -1152,7 +1155,7 @@ $form->addElement(
         'lowercase'      => true,
         'regExp'         => '^[a-z0-9]{6,}$',
         'invalidMessage' => 'Ungültiges Passwort; muß mindestens 6 '
-                          . 'alphanummerische Zeichen lang sein',
+                          . 'alphanumerische Zeichen lang sein',
     )
 );
 ]]></programlisting>
@@ -1207,10 +1210,10 @@ $form->addElement(
         <title>SimpleTextarea</title>
 
         <para>
-            SimpleTextarea arbeitet primär wie ein Standard HTML Textarea. Trotzdem unterstützt es
-            weder die rows noch die cols Einstellung. Stattdessen, sollte die Breite von Textarea
-            durch die Verwendung von standard <acronym>CSS</acronym> Maßeinheiten definiert werden.
-            Anders als Textarea wird er nicht automatisch wachsen
+            SimpleTextarea arbeitet primär wie ein Standard <acronym>HTML</acronym> Textarea.
+            Trotzdem unterstützt es weder die rows noch die cols Einstellung. Stattdessen, sollte
+            die Breite von Textarea durch die Verwendung von standard <acronym>CSS</acronym>
+            Maßeinheiten definiert werden. Anders als Textarea wird er nicht automatisch wachsen
         </para>
 
         <example id="zend.dojo.form.elements.simpletextarea.example">
@@ -1361,7 +1364,8 @@ $form->addElement(
                 <para>
                     <methodname>setUppercase($flag)</methodname> und
                     <methodname>getUppercase()</methodname>: Setzt und retourniert das Flag das
-                    anzeigt ob die Eingabe auf Großschreibung (UPPERCASE) geändert wird oder nicht.
+                    anzeigt ob die Eingabe auf Großschreibung (<acronym>UPPERCASE</acronym>)
+                    geändert wird oder nicht.
                 </para>
             </listitem>
 
@@ -1404,11 +1408,11 @@ $form->addElement(
         <title>Textarea</title>
 
         <para>
-            Textarea funktioniert primär wie eine standard HTML Textarea. Trotzdem unterstützt es
-            weder die Zeilen- noch die Spalteneinstellungen. Stattdessen sollte die Breite von
-            Textarea durch Verwendung von <acronym>CSS</acronym> Maßeinheiten spezifiziert werden;
-            Zeilen sollten komplett vermieden werden. Die Textarea wird dann vertikal wachsen wenn
-            Text hinzugefügt wird.
+            Textarea funktioniert primär wie eine standard <acronym>HTML</acronym> Textarea.
+            Trotzdem unterstützt es weder die Zeilen- noch die Spalteneinstellungen. Stattdessen
+            sollte die Breite von Textarea durch Verwendung von <acronym>CSS</acronym> Maßeinheiten
+            spezifiziert werden; Zeilen sollten komplett vermieden werden. Die Textarea wird dann
+            vertikal wachsen wenn Text hinzugefügt wird.
         </para>
 
         <example id="zend.dojo.form.elements.textarea.example">
@@ -1460,7 +1464,7 @@ $form->addElement(
                 <para>
                     <methodname>setClickableIncrement($format)</methodname> und
                     <methodname>getClickableIncrement()</methodname>: Setzt den <ulink
-                        url="http://en.wikipedia.org/wiki/ISO_8601">ISO-8601</ulink>
+                        url="http://en.wikipedia.org/wiki/ISO_8601">ISO_8601</ulink>
                     String der die Anzahl repräsentiert mit dem jedes anklickbare Element der
                     Zeitauswahl inkrementiert wird.
                 </para>
@@ -1470,7 +1474,7 @@ $form->addElement(
                 <para>
                     <methodname>setVisibleIncrement($format)</methodname> und
                     <methodname>getVisibleIncrement()</methodname>: Definiert das der Inkrement in
-                    der Zeitauswahl sichtbar ist; muß dem ISO-8601 Format
+                    der Zeitauswahl sichtbar ist; muß dem <acronym>ISO_8601</acronym> Format
                     entsprechen.
                 </para>
             </listitem>
@@ -1480,7 +1484,7 @@ $form->addElement(
                     <methodname>setVisibleRange($format)</methodname> und
                     <methodname>getVisibleRange()</methodname>: Setzt und retorniert den
                     Zeitbereich der in der Zeitauswahl zu jedem Zeitpunkt sichtbar ist; muß dem
-                    ISO-8601 Format entsprechen.
+                    <acronym>ISO_8601</acronym> Format entsprechen.
                 </para>
             </listitem>
         </itemizedlist>

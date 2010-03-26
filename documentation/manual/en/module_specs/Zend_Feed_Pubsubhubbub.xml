@@ -456,7 +456,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                 example, you can set a different lease seconds value using
                 <methodname>Zend_Pubsubhubbub_Subscriber::setLeaseSeconds()</methodname> or show a
                 preference for the async verify mode by using
-                <code>setPreferredVerificationMode(Zend_Feed_Pubsubhubbub::VERIFICATION_MODE_ASYNC)</code>.
+                <methodname>setPreferredVerificationMode(Zend_Feed_Pubsubhubbub::VERIFICATION_MODE_ASYNC)</methodname>.
                 However the Hubs retain the capability to enforce their own preferences and for this
                 reason the component is deliberately designed to work across almost any set of
                 options with minimum end-user configuration required. Conventions are great when

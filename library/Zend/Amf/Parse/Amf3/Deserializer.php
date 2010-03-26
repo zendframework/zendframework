@@ -25,7 +25,7 @@
  *
  * @todo       readObject to handle Typed Objects
  * @todo       readXMLStrimg to be implemented.
- * @todo       Class could be implmented as Factory Class with each data type it's own class.
+ * @todo       Class could be implemented as Factory Class with each data type it's own class.
  * @uses       Zend_Amf_Constants
  * @uses       Zend_Amf_Exception
  * @uses       Zend_Amf_Parse_Deserializer

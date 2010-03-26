@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 21358 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dom.introduction">
     <title>Introduction</title>
 
     <para>
         <classname>Zend_Dom</classname> fournit les outils pour travailler avec les documents
-        et les structures de types DOM. Actuellement, il existe
+        et les structures de types <acronym>DOM</acronym>. Actuellement, il existe
         <classname>Zend_Dom_Query</classname>, qui offre une interface unifiée pour requêter dans
-        les documents DOM en utilisant à la fois XPath et les sélecteurs <acronym>CSS</acronym>.
+        les documents <acronym>DOM</acronym> en utilisant à la fois XPath et les sélecteurs
+        <acronym>CSS</acronym>.
     </para>
 </sect1>

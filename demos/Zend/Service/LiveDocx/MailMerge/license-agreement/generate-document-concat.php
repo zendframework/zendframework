@@ -89,34 +89,34 @@ mkdir($tempDirectory);
 
 $tempFilenames = array();
 
-$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+$mailMerge = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
-            ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
+$mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+          ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
 
-$phpLiveDocx->setLocalTemplate('template.docx');
+$mailMerge->setLocalTemplate('template.docx');
 
 for ($iteration = 1; $iteration <= $iterations; $iteration ++) {
     
     $tempFilename = sprintf('%s/%010s.pdf', $tempDirectory, $iteration);
     $tempFilenames[] = $tempFilename;
     
-    $phpLiveDocx->assign('software', randomString())
-                ->assign('licensee', randomString())
-                ->assign('company',  randomString())
-                ->assign('date',     Zend_Date::now()->toString(Zend_Date::DATE_LONG))
-                ->assign('time',     Zend_Date::now()->toString(Zend_Date::TIME_LONG))
-                ->assign('city',     randomString())
-                ->assign('country',  randomString());
+    $mailMerge->assign('software', randomString())
+              ->assign('licensee', randomString())
+              ->assign('company',  randomString())
+              ->assign('date',     Zend_Date::now()->toString(Zend_Date::DATE_LONG))
+              ->assign('time',     Zend_Date::now()->toString(Zend_Date::TIME_LONG))
+              ->assign('city',     randomString())
+              ->assign('country',  randomString());
         
-    $phpLiveDocx->createDocument();
+    $mailMerge->createDocument();
     
-    file_put_contents($tempFilename, $phpLiveDocx->retrieveDocument('pdf'));
+    file_put_contents($tempFilename, $mailMerge->retrieveDocument('pdf'));
     
     $logger->log(sprintf('Generating temporary document %s.', $tempFilename), Zend_Log::INFO);
 }
 
-unset($phpLiveDocx);
+unset($mailMerge);
 
 // -----------------------------------------------------------------------------
 

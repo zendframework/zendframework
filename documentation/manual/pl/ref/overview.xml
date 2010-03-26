@@ -8,7 +8,7 @@
         zaimplementowany w 100% za pomocą kodu zorientowanego obiektowo.
         Komponentowa struktura ZF jest nieco wyjątkowa; każdy komponent został
         zaprojektowany z niewielkimi zależnościami od innych komponentów.
-        Ta luźno połączona architektura sprawa że programiści mogą używać
+        Ta luźno połączona architektura sprawia że programiści mogą używać
         pojedynczych komponentów. Nazywamy to często architekturą "use-at-will".
     </para>
     <para>
@@ -43,7 +43,7 @@
         dostępni na
         <ulink url="http://framework.zend.com/archives">listach dyskusyjnych</ulink>,
         <ulink url="http://www.zftalk.com">kanałach IRC</ulink> oraz na innych forach.
-        Jeśli masz pytania odnośie ZF, najlepiej będzie skierować je do społeczności.
+        Jeśli masz pytania odnośnie ZF, najlepiej będzie skierować je do społeczności.
     </para>
 </sect1>
 <!--

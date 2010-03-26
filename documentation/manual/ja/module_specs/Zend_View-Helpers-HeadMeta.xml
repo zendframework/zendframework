@@ -51,7 +51,7 @@
 
         <listitem>
             <para>
-                <commande>offsetSetHttpEquiv($index, $keyValue, $content, $conditionalHttpEquiv)</commande>
+                <command>offsetSetHttpEquiv($index, $keyValue, $content, $conditionalHttpEquiv)</command>
             </para>
         </listitem>
 

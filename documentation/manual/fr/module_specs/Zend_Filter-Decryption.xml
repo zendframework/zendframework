@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21212 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.decrypt">
     <title>Decrypt</title>
@@ -71,15 +71,24 @@ print $decrypted;
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>private</emphasis>: Votre clé privée. Ce peut être un nom de fichier
+                    <emphasis>private</emphasis>: votre clé privée. Ce peut être un nom de fichier
                     ou juste le contenu de ce fichier : la clé.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>envelope</emphasis>: La clé enveloppe cryptée de l'utilisateur qui
+                    <emphasis>envelope</emphasis>: la clé enveloppe cryptée de l'utilisateur qui
                     a crypté le document. Un chemin de fichier ou une chaine peuvent être utilisés.
+                    Lorsque l'option <property>package</property> est paramétrée, vous pouvez
+                    omettre ce paramètre.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>package</emphasis>: si la clé enveloppe a été empaqueté avec la valeur
+                    encryptée. Par défaut vaut <constant>FALSE</constant>.
                 </para>
             </listitem>
         </itemizedlist>

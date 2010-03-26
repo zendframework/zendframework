@@ -24,9 +24,9 @@
         <para>
             Define classes for each of your tables, extending the abstract class
             <classname>Zend_Db_Table_Abstract</classname>, as described in
-            <xref linkend="zend.db.table.defining" />. Also
-            see <xref linkend="zend.db.adapter.example-database" /> for a description of the
-            example database for which the following example code is designed.
+            <link linkend="zend.db.table.defining">this chapter</link>. Also see
+            <link linkend="zend.db.adapter.example-database">this chapter</link> for a description
+            of the example database for which the following example code is designed.
         </para>
 
         <para>
@@ -92,7 +92,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
 ]]></programlisting>
 
         <para>
-            If you use <classname>Zend_Db_Table</classname> to emulate cascading UPDATE and DELETE
+            If you use <classname>Zend_Db_Table</classname> to emulate cascading
+            <constant>UPDATE</constant> and <constant>DELETE</constant>
             operations, declare the <varname>$_dependentTables</varname> array in the class for the
             parent table. List the class name for each dependent table. Use the class name, not the
             physical name of the <acronym>SQL</acronym> table.
@@ -102,8 +103,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <para>
                 Skip declaration of <varname>$_dependentTables</varname> if you use referential
                 integrity constraints in the <acronym>RDBMS</acronym> server to implement cascading
-                operations. See <xref linkend="zend.db.table.relationships.cascading" /> for more
-                information.
+                operations. See <link linkend="zend.db.table.relationships.cascading">this
+                    chapter</link> for more information.
             </para>
         </note>
 
@@ -123,8 +124,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
         <para>
             In the example <acronym>PHP</acronym> code above, the rule keys in the Bugs table class
-            are: <code>'Reporter'</code>, <code>'Engineer'</code>, <code>'Verifier'</code>, and
-            <code>'Product'</code>.
+            are: <command>'Reporter'</command>, <command>'Engineer'</command>,
+            <command>'Verifier'</command>, and <command>'Product'</command>.
         </para>
 
         <para>
@@ -136,7 +137,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <listitem>
                 <para>
                     <emphasis>columns</emphasis> => A string or an array of strings
-                    naming the foreign key column name(s) in the dependent table.
+                    naming the foreign key column names in the dependent table.
                 </para>
 
                 <para>
@@ -154,30 +155,30 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 <para>
                     It's common for a dependent table to have only one reference to its parent
                     table, but some tables have multiple references to the same parent table. In
-                    the example database, there is one reference from the <code>bugs</code> table
-                    to the <code>products</code> table, but three references from the
-                    <code>bugs</code> table to the <code>accounts</code> table. Put each reference
-                    in a separate entry in the <varname>$_referenceMap</varname> array.
+                    the example database, there is one reference from the <command>bugs</command>
+                    table to the <command>products</command> table, but three references from the
+                    <command>bugs</command> table to the <command>accounts</command> table. Put each
+                    reference in a separate entry in the <varname>$_referenceMap</varname> array.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <emphasis>refColumns</emphasis> => A string or an array of
-                    strings naming the primary key column name(s) in the parent table.
+                    strings naming the primary key column names in the parent table.
                 </para>
 
                 <para>
                     It's common for this to be a single column, but some tables have multi-column
                     keys. If the reference uses a multi-column key, the order of columns in the
-                    <code>'columns'</code> entry must match the order of columns in the
-                    <code>'refColumns'</code> entry.
+                    <command>'columns'</command> entry must match the order of columns in the
+                    <command>'refColumns'</command> entry.
                 </para>
 
                 <para>
                     It is optional to specify this element. If you don't specify the
-                    <code>refColumns</code>, the column(s) reported as the primary key columns of
-                    the parent table are used by default.
+                    <property>refColumns</property>, the columns reported as the primary key columns
+                    of the parent table are used by default.
                 </para>
             </listitem>
 
@@ -185,7 +186,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 <para>
                     <emphasis>onDelete</emphasis> => The rule for an action to
                     execute if a row is deleted in the parent table. See
-                    <xref linkend="zend.db.table.relationships.cascading" /> for more information.
+                    <link linkend="zend.db.table.relationships.cascading">this chapter</link> for
+                    more information.
                 </para>
             </listitem>
 
@@ -193,7 +195,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 <para>
                     <emphasis>onUpdate</emphasis> => The rule for an action to
                     execute if values in primary key columns are updated in the parent table. See
-                    <xref linkend="zend.db.table.relationships.cascading" /> for more information.
+                    <link linkend="zend.db.table.relationships.cascading">this chapter</link> for
+                    more information.
                 </para>
             </listitem>
         </itemizedlist>
@@ -227,8 +230,8 @@ $row->findDependentRowset($table, [$rule]);
             <title>Fetching a Dependent Rowset</title>
 
             <para>
-                This example shows getting a Row object from the table <code>Accounts</code>, and
-                finding the <code>Bugs</code> reported by that account.
+                This example shows getting a Row object from the table <command>Accounts</command>,
+                and finding the <command>Bugs</command> reported by that account.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -250,17 +253,17 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
         <para>
             In the example code above, the rule key is not specified, so the rule used by default
             is the first one that matches the parent table. This is the rule
-            <code>'Reporter'</code>.
+            <command>'Reporter'</command>.
         </para>
 
         <example id="zend.db.table.relationships.fetching.dependent.example-by">
             <title>Fetching a Dependent Rowset By a Specific Rule</title>
 
             <para>
-                This example shows getting a Row object from the table <code>Accounts</code>, and
-                finding the <code>Bugs</code> assigned to be fixed by the user of that account. The
-                rule key string that corresponds to this reference relationship in this example is
-                <code>'Engineer'</code>.
+                This example shows getting a Row object from the table <command>Accounts</command>,
+                and finding the <command>Bugs</command> assigned to be fixed by the user of that
+                account. The rule key string that corresponds to this reference relationship in this
+                example is <command>'Engineer'</command>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -277,17 +280,17 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
             row's select object.
         </para>
 
-        <para>
-            <example id="zend.db.table.relationships.fetching.dependent.example-by-select">
-                <title>Fetching a Dependent Rowset using a Zend_Db_Table_Select</title>
+        <example id="zend.db.table.relationships.fetching.dependent.example-by-select">
+            <title>Fetching a Dependent Rowset using a Zend_Db_Table_Select</title>
 
-                <para>
-                    This example shows getting a Row object from the table <code>Accounts</code>,
-                    and finding the <code>Bugs</code> assigned to be fixed by the user of that
-                    account, limited only to 3 rows and ordered by name.
-                </para>
+            <para>
+                This example shows getting a Row object from the table
+                <command>Accounts</command>, and finding the <command>Bugs</command> assigned to
+                be fixed by the user of that account, limited only to 3 rows and ordered by
+                name.
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
 $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
@@ -298,8 +301,9 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
                                                      'Engineer',
                                                      $select);
 ]]></programlisting>
-            </example>
+        </example>
 
+        <para>
             Alternatively, you can query rows from a dependent table using a special mechanism
             called a "magic method". <classname>Zend_Db_Table_Row_Abstract</classname> invokes the
             method: <methodname>findDependentRowset('&lt;TableClass&gt;',
@@ -310,21 +314,21 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$row->find&lt;TableClass&gt;()</code>
+                    <command>$row->find&lt;TableClass&gt;()</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$row->find&lt;TableClass&gt;By&lt;Rule&gt;()</code>
+                    <command>$row->find&lt;TableClass&gt;By&lt;Rule&gt;()</command>
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            In the patterns above, <code>&lt;TableClass&gt;</code> and <code>&lt;Rule&gt;</code> are
-            strings that correspond to the class name of the dependent table, and the dependent
-            table's rule key that references the parent table.
+            In the patterns above, <command>&lt;TableClass&gt;</command> and
+            <command>&lt;Rule&gt;</command> are strings that correspond to the class name of the
+            dependent table, and the dependent table's rule key that references the parent table.
         </para>
 
         <note>
@@ -387,9 +391,9 @@ $row->findParentRow($table, [$rule]);
             <title>Fetching the Parent Row</title>
 
             <para>
-                This example shows getting a Row object from the table <code>Bugs</code> (for
+                This example shows getting a Row object from the table <command>Bugs</command> (for
                 example one of those bugs with status 'NEW'), and finding the row in the
-                <code>Accounts</code> table for the user who reported the bug.
+                <command>Accounts</command> table for the user who reported the bug.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -410,17 +414,17 @@ $reporter = $bug1->findParentRow('Accounts');
 
         <para>
             In the example above, the rule key is not specified, so the rule used by default is the
-            first one that matches the parent table. This is the rule <code>'Reporter'</code>.
+            first one that matches the parent table. This is the rule <command>'Reporter'</command>.
         </para>
 
         <example id="zend.db.table.relationships.fetching.parent.example-by">
             <title>Fetching a Parent Row By a Specific Rule</title>
 
             <para>
-                This example shows getting a Row object from the table <code>Bugs</code>, and
+                This example shows getting a Row object from the table <command>Bugs</command>, and
                 finding the account for the engineer assigned to fix that bug. The rule key string
                 that corresponds to this reference relationship in this example is
-                <code>'Engineer'</code>.
+                <command>'Engineer'</command>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -442,22 +446,23 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$row->findParent&lt;TableClass&gt;([Zend_Db_Table_Select $select])</code>
+                    <command>$row->findParent&lt;TableClass&gt;([Zend_Db_Table_Select
+                        $select])</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$row->findParent&lt;TableClass&gt;By&lt;Rule&gt;([Zend_Db_Table_Select
-                    $select])</code>
+                    <command>$row->findParent&lt;TableClass&gt;By&lt;Rule&gt;([Zend_Db_Table_Select
+                       $select])</command>
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            In the patterns above, <code>&lt;TableClass&gt;</code> and <code>&lt;Rule&gt;</code>
-            are strings that correspond to the class name of the parent table, and the dependent
-            table's rule key that references the parent table.
+            In the patterns above, <command>&lt;TableClass&gt;</command> and
+            <command>&lt;Rule&gt;</command> are strings that correspond to the class name of the
+            parent table, and the dependent table's rule key that references the parent table.
         </para>
 
         <note>
@@ -535,8 +540,8 @@ $row->findManyToManyRowset($table,
 
             <para>
                 This example shows getting a Row object from the origin table
-                <code>Bugs</code>, and finding rows from the destination table
-                <code>Products</code>, representing products related to that bug.
+                <command>Bugs</command>, and finding rows from the destination table
+                <command>Products</command>, representing products related to that bug.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -558,13 +563,13 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         <para>
             The <varname>$rule1</varname> key names the rule for the relationship from the
             intersection table to the origin table. In this example, this is the relationship from
-            <code>BugsProducts</code> to <code>Bugs</code>.
+            <command>BugsProducts</command> to <command>Bugs</command>.
         </para>
 
         <para>
             The <varname>$rule2</varname> key names the rule for the relationship from the
             intersection table to the destination table. In this example, this is the relationship
-            from <code>Bugs</code> to <code>Products</code>.
+            from <command>Bugs</command> to <command>Products</command>.
         </para>
 
         <para>
@@ -577,7 +582,8 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         <para>
             In the example code above, the rule key is not specified, so the rules used by default
             are the first ones that match. In this case, <varname>$rule1</varname> is
-            <code>'Reporter'</code> and <varname>$rule2</varname> is <code>'Product'</code>.
+            <command>'Reporter'</command> and <varname>$rule2</varname> is
+            <command>'Product'</command>.
         </para>
 
         <example id="zend.db.table.relationships.fetching.many-to-many.example-by">
@@ -585,8 +591,8 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
 
             <para>
                 This example shows geting a Row object from the origin table
-                <code>Bugs</code>, and finding rows from the destination table
-                <code>Products</code>, representing products related to that bug.
+                <command>Bugs</command>, and finding rows from the destination table
+                <command>Products</command>, representing products related to that bug.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -603,41 +609,41 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         <para>
             Alternatively, you can query rows from the destination table in a many-to-many
             relationship using a "magic method." <classname>Zend_Db_Table_Row_Abstract</classname>
-            invokes the method: <code>findManyToManyRowset('&lt;TableClass&gt;',
-            '&lt;IntersectionTableClass&gt;', '&lt;Rule1&gt;', '&lt;Rule2&gt;')</code> if you invoke
-            a method matching any of the following patterns:
+            invokes the method: <command>findManyToManyRowset('&lt;TableClass&gt;',
+                '&lt;IntersectionTableClass&gt;', '&lt;Rule1&gt;', '&lt;Rule2&gt;')</command> if you
+            invoke a method matching any of the following patterns:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;
-                    ([Zend_Db_Table_Select $select])</code>
+                    <command>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;
+                        ([Zend_Db_Table_Select $select])</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;
-                        ([Zend_Db_Table_Select $select])</code>
+                    <command>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;
+                        ([Zend_Db_Table_Select $select])</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;And&lt;Rule2&gt;
-                        ([Zend_Db_Table_Select $select])</code>
+                    <command>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;And&lt;Rule2&gt;
+                        ([Zend_Db_Table_Select $select])</command>
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            In the patterns above, <code>&lt;TableClass&gt;</code> and
-            <code>&lt;IntersectionTableClass&gt;</code> are strings that correspond to the class
-            names of the destination table and the intersection table, respectively.
-            <code>&lt;Rule1&gt;</code> and <code>&lt;Rule2&gt;</code> are strings that correspond
-            to the rule keys in the intersection table that reference the origin table and the
-            destination table, respectively.
+            In the patterns above, <command>&lt;TableClass&gt;</command> and
+            <command>&lt;IntersectionTableClass&gt;</command> are strings that correspond to the
+            class names of the destination table and the intersection table, respectively.
+            <command>&lt;Rule1&gt;</command> and <command>&lt;Rule2&gt;</command> are strings that
+            correspond to the rule keys in the intersection table that reference the origin table
+            and the destination table, respectively.
         </para>
 
         <note>
@@ -678,22 +684,22 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             <para>
                 Declaring cascading operations in <classname>Zend_Db_Table</classname> is intended
                 <emphasis>only</emphasis> for <acronym>RDBMS</acronym> brands that do not support
-                declarative referential integrity (DRI).
+                declarative referential integrity (<acronym>DRI</acronym>).
             </para>
 
             <para>
                 For example, if you use MySQL's MyISAM storage engine, or SQLite, these solutions
-                do not support DRI. You may find it helpful to declare the cascading operations
-                with <classname>Zend_Db_Table</classname>.
+                do not support <acronym>DRI</acronym>. You may find it helpful to declare the
+                cascading operations with <classname>Zend_Db_Table</classname>.
             </para>
 
             <para>
-                If your <acronym>RDBMS</acronym> implements DRI and the <code>ON DELETE</code> and
-                <code>ON UPDATE</code> clauses, you should declare these clauses in your database
-                schema, instead of using the cascading feature in
-                <classname>Zend_Db_Table</classname>. Declaring cascading DRI rules in the
-                <acronym>RDBMS</acronym> is better for database performance, consistency, and
-                integrity.
+                If your <acronym>RDBMS</acronym> implements <acronym>DRI</acronym> and the
+                ON <constant>DELETE</constant> and ON <constant>UPDATE</constant> clauses, you
+                should declare these clauses in your database schema, instead of using the cascading
+                feature in <classname>Zend_Db_Table</classname>. Declaring cascading
+                <acronym>DRI</acronym> rules in the <acronym>RDBMS</acronym> is better for database
+                performance, consistency, and integrity.
             </para>
 
             <para>
@@ -712,8 +718,9 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             <title>Example of a Cascading Delete</title>
 
             <para>
-                This example shows deleting a row in the <code>Products</code> table, which is
-                configured to automatically delete dependent rows in the <code>Bugs</code> table.
+                This example shows deleting a row in the <command>Products</command> table, which is
+                configured to automatically delete dependent rows in the <command>Bugs</command>
+                table.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -744,27 +751,27 @@ $product1234->delete();
         <para>
             To declare a cascading relationship in the <classname>Zend_Db_Table</classname>, edit
             the rules in the <varname>$_referenceMap</varname>. Set the associative array keys
-            <code>'onDelete'</code> and <code>'onUpdate'</code> to the string 'cascade' (or the
-            constant <constant>self::CASCADE</constant>). Before a row is deleted from the parent
-            table, or its primary key values updated, any rows in the dependent table that refer to
-            the parent's row are deleted or updated first.
+            <command>'onDelete'</command> and <command>'onUpdate'</command> to the string 'cascade'
+            (or the constant <constant>self::CASCADE</constant>). Before a row is deleted from the
+            parent table, or its primary key values updated, any rows in the dependent table that
+            refer to the parent's row are deleted or updated first.
         </para>
 
         <example id="zend.db.table.relationships.cascading.example-declaration">
             <title>Example Declaration of Cascading Operations</title>
 
             <para>
-                In the example below, rows in the <code>Bugs</code> table are automatically deleted
-                if the row in the <code>Products</code> table to which they refer is deleted. The
-                <code>'onDelete'</code> element of the reference map entry is set to
-                <constant>self::CASCADE</constant>.
+                In the example below, rows in the <command>Bugs</command> table are automatically
+                deleted if the row in the <command>Products</command> table to which they refer is
+                deleted. The <command>'onDelete'</command> element of the reference map entry is set
+                to <constant>self::CASCADE</constant>.
             </para>
 
             <para>
                 No cascading update is done in the example below if the primary key value in the
-                parent class is changed. The <code>'onUpdate'</code> element of the reference map
-                entry is <constant>self::RESTRICT</constant>. You can get the same result by
-                omitting the <code>'onUpdate'</code> entry.
+                parent class is changed. The <command>'onUpdate'</command> element of the reference
+                map entry is <constant>self::RESTRICT</constant>. You can get the same result by
+                omitting the <command>'onUpdate'</command> entry.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -848,7 +855,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <para>
                 There is no support for a cascading <constant>INSERT</constant>. You must insert a
-                row to a parent table in one operation, and insert row(s) to a dependent table in a
+                row to a parent table in one operation, and insert rows to a dependent table in a
                 separate operation.
             </para>
         </sect3>

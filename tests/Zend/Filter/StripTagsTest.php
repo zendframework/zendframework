@@ -454,7 +454,7 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
     public function testSpecifyingCommentsAllowedShouldStillStripNestedComments()
     {
         $input    = '<a> <!-- <b> <!-- <c> --> <d> --> <e>';
-        $expected = '   ';
+        $expected = '  ';
         $this->_filter->setCommentsAllowed(true);
         $this->assertEquals($expected, $this->_filter->filter($input));
     }
@@ -560,6 +560,17 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
         $expected = 'äöüäöü';
         $this->assertEquals($expected, $this->_filter->filter($input));
     }
+
+    /**
+     * @group ZF-9434
+     */
+    public function testCommentWithTagInSameLine()
+    {
+        $input    = 'test <!-- testcomment --> test <div>div-content</div>';
+        $expected = 'test  test div-content';
+        $this->assertEquals($expected, $this->_filter->filter($input));
+    }
+
 }
 
 // Call Zend_Filter_StripTagsTest::main() if this source file is executed directly.

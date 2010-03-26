@@ -135,8 +135,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 The schema and table names may also be specified via constructor configuration
                 directives, which override any default values specified with the
                 <varname>$_name</varname> and <varname>$_schema</varname> properties. A schema
-                specification given with the <code>name</code> directive overrides any value
-                provided with the <code>schema</code> option.
+                specification given with the <property>name</property> directive overrides any value
+                provided with the <property>schema</property> option.
             </para>
 
             <example id="zend.db.table.defining.table-schema.example.constructor">
@@ -199,8 +199,8 @@ class Bugs extends Zend_Db_Table_Abstract
 
             <note>
                 <para>
-                    Every table class must know which column(s) can be used to address rows
-                    uniquely. If no primary key column(s) are specified in the table class
+                    Every table class must know which columns can be used to address rows
+                    uniquely. If no primary key columns are specified in the table class
                     definition or the table constructor arguments, or discovered in the table
                     metadata provided by <methodname>describeTable()</methodname>, then the table
                     cannot be used with <classname>Zend_Db_Table</classname>.
@@ -258,7 +258,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 <listitem>
                     <para>
                         <methodname>_setupMetadata()</methodname> sets the schema if the table name
-                        contains the pattern "schema.table"; calls
+                        contains the pattern "<command>schema.table</command>"; calls
                         <methodname>describeTable()</methodname> to get metadata information;
                         defaults the <varname>$_cols</varname> array to the columns reported by
                         <methodname>describeTable()</methodname>. By overriding this method, you can
@@ -284,8 +284,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 If application-specific logic needs to be initialized when a Table class is
                 constructed, you can select to move your tasks to the
                 <methodname>init()</methodname> method, which is called after all Table metadata has
-                been processed. This is recommended over the <code>__construct</code> method if you
-                do not need to alter the metadata in any programmatic way.
+                been processed. This is recommended over the <methodname>__construct()</methodname>
+                method if you do not need to alter the metadata in any programmatic way.
             </para>
 
             <example id="zend.db.table.defining.init.usage.example">
@@ -323,7 +323,7 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 The first way to provide a database adapter to a Table class is by passing it as an
                 object of type <classname>Zend_Db_Adapter_Abstract</classname> in the options array,
-                identified by the key <code>'db'</code>.
+                identified by the key '<property>db</property>'.
             </para>
 
             <example id="zend.db.table.constructing.adapter.example">
@@ -376,9 +376,9 @@ $table = new Bugs();
 
             <para>
                 The third way to provide a database adapter to a Table class is by passing a string
-                in the options array, also identified by the <code>'db'</code> key. The string is
-                used as a key to the static <classname>Zend_Registry</classname> instance, where the
-                entry at that key is an object of type
+                in the options array, also identified by the '<property>db</property>' key. The
+                string is used as a key to the static <classname>Zend_Registry</classname> instance,
+                where the entry at that key is an object of type
                 <classname>Zend_Db_Adapter_Abstract</classname>.
             </para>
 
@@ -498,11 +498,11 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 PostgreSQL has a <constant>SERIAL</constant> notation that implicitly defines a
                 sequence based on the table and column name, and uses the sequence to generate key
-                values for new rows. IBM DB2 has an <constant>IDENTITY</constant> notation that
-                works similarly. If you use either of these notations, treat your
-                <classname>Zend_Db_Table</classname> class as having an auto-incrementing column
-                with respect to declaring the <varname>$_sequence</varname> member as
-                <constant>TRUE</constant>.
+                values for new rows. <acronym>IBM</acronym> <acronym>DB2</acronym> has an
+                <constant>IDENTITY</constant> notation that works similarly. If you use either of
+                these notations, treat your <classname>Zend_Db_Table</classname> class as having an
+                auto-incrementing column with respect to declaring the <varname>$_sequence</varname>
+                member as <constant>TRUE</constant>.
             </para>
         </sect3>
 
@@ -535,15 +535,16 @@ class Bugs extends Zend_Db_Table_Abstract
             </example>
 
             <para>
-                Oracle, PostgreSQL, and IBM DB2 are examples of <acronym>RDBMS</acronym> brands that
-                support sequence objects in the database.
+                Oracle, PostgreSQL, and <acronym>IBM</acronym> <acronym>DB2</acronym> are examples
+                of <acronym>RDBMS</acronym> brands that support sequence objects in the database.
             </para>
 
             <para>
-                PostgreSQL and IBM DB2 also have syntax that defines sequences implicitly and
-                associated with columns. If you use this notation, treat the table as having an
-                auto-incrementing key column. Define the sequence name as a string only in cases
-                where you would invoke the sequence explicitly to get the next key value.
+                PostgreSQL and <acronym>IBM</acronym> <acronym>DB2</acronym> also have syntax that
+                defines sequences implicitly and associated with columns. If you use this notation,
+                treat the table as having an auto-incrementing key column. Define the sequence name
+                as a string only in cases where you would invoke the sequence explicitly to get the
+                next key value.
             </para>
         </sect3>
 
@@ -592,11 +593,11 @@ class BugStatus extends Zend_Db_Table_Abstract
         <title>Updating Rows in a Table</title>
 
         <para>
-            You can update rows in a database table using the <code>update</code> method of a Table
-            class. This method takes two arguments: an associative array of columns to change and
-            new values to assign to these columns; and an <acronym>SQL</acronym> expression that is
-            used in a <constant>WHERE</constant> clause, as criteria for the rows to change in the
-            <constant>UPDATE</constant> operation.
+            You can update rows in a database table using the <methodname>update()</methodname>
+            method of a Table class. This method takes two arguments: an associative array of
+            columns to change and new values to assign to these columns; and an
+            <acronym>SQL</acronym> expression that is used in a <constant>WHERE</constant> clause,
+            as criteria for the rows to change in the <constant>UPDATE</constant> operation.
         </para>
 
         <example id="zend.db.table.update.example">
@@ -764,24 +765,22 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
         <sect3 id="zend.db.table.fetch-all.select">
             <title>Select API</title>
 
-            <para>
-                <warning>
-                    <para>
-                        The <acronym>API</acronym> for fetch operations has been superseded to allow
-                        a <classname>Zend_Db_Table_Select</classname> object to modify the query.
-                        However, the deprecated usage of the <methodname>fetchRow()</methodname> and
-                        <methodname>fetchAll()</methodname> methods will continue to work without
-                        modification.
-                    </para>
+            <warning>
+                <para>
+                    The <acronym>API</acronym> for fetch operations has been superseded to allow
+                    a <classname>Zend_Db_Table_Select</classname> object to modify the query.
+                    However, the deprecated usage of the <methodname>fetchRow()</methodname> and
+                    <methodname>fetchAll()</methodname> methods will continue to work without
+                    modification.
+                </para>
 
-                    <para>
-                        The following statements are all legal and functionally identical, however
-                        it is recommended to update your code to take advantage of the new usage
-                        where possible.
-                    </para>
+                <para>
+                    The following statements are all legal and functionally identical, however
+                    it is recommended to update your code to take advantage of the new usage
+                    where possible.
+                </para>
 
-                    <para>
-                        <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * Fetching a rowset
  */
@@ -826,9 +825,7 @@ $row = $table->fetchRow(
         ->order('bug_id ASC')
     );
 ]]></programlisting>
-                    </para>
-                </warning>
-            </para>
+            </warning>
 
             <para>
                 The <classname>Zend_Db_Table_Select</classname> object is an extension of the
@@ -849,8 +846,9 @@ $row = $table->fetchRow(
                     <para>
                         You <emphasis>can</emphasis> specify columns that evaluate expressions from
                         within the selected table. However this will mean that the returned row or
-                        rowset will be <property>readOnly</property> and cannot be used for save()
-                        operations. A <classname>Zend_Db_Table_Row</classname> with
+                        rowset will be <property>readOnly</property> and cannot be used for
+                        <methodname>save()</methodname> operations. A
+                        <classname>Zend_Db_Table_Row</classname> with
                         <property>readOnly</property> status will throw an exception if a
                         <methodname>save()</methodname> operation is attempted.
                     </para>
@@ -858,15 +856,15 @@ $row = $table->fetchRow(
 
                 <listitem>
                     <para>
-                        You <emphasis>can</emphasis> allow JOIN clauses on a select to allow
-                        multi-table lookups.
+                        You <emphasis>can</emphasis> allow <constant>JOIN</constant> clauses on a
+                        select to allow multi-table lookups.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         You <emphasis>can not</emphasis> specify columns from a JOINed tabled to be
-                        returned in a row/rowset. Doing so will trigger a <acronym>PHP</acronym>
+                        returned in a row or rowset. Doing so will trigger a <acronym>PHP</acronym>
                         error. This was done to ensure the integrity of the
                         <classname>Zend_Db_Table</classname> is retained. i.e. A
                         <classname>Zend_Db_Table_Row</classname> should only reference columns
@@ -875,11 +873,10 @@ $row = $table->fetchRow(
                 </listitem>
             </itemizedlist>
 
-            <para>
-                <example id="zend.db.table.qry.rows.set.simple.usage.example">
-                    <title>Simple usage</title>
+            <example id="zend.db.table.qry.rows.set.simple.usage.example">
+                <title>Simple usage</title>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select();
@@ -887,27 +884,23 @@ $select->where('bug_status = ?', 'NEW');
 
 $rows = $table->fetchAll($select);
 ]]></programlisting>
-                </example>
-            </para>
+            </example>
 
             <para>
                 Fluent interfaces are implemented across the component, so this can be rewritten
                 this in a more abbreviated form.
             </para>
 
-            <para>
+            <example id="zend.db.table.qry.rows.set.fluent.interface.example">
+                <title>Example of fluent interface</title>
 
-                <example id="zend.db.table.qry.rows.set.fluent.interface.example">
-                    <title>Example of fluent interface</title>
-
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $rows =
     $table->fetchAll($table->select()->where('bug_status = ?', 'NEW'));
 ]]></programlisting>
-                </example>
-            </para>
+            </example>
         </sect3>
 
         <sect3 id="zend.db.table.fetch-all.usage">
@@ -933,10 +926,10 @@ $rows = $table->fetchAll($select);
             </example>
 
             <para>
-                You may also pass sorting criteria in an <code>ORDER BY</code> clause, as well as
-                count and offset integer values, used to make the query return a specific subset of
-                rows. These values are used in a <constant>LIMIT</constant> clause, or in equivalent
-                logic for <acronym>RDBMS</acronym> brands that do not support the
+                You may also pass sorting criteria in an <constant>ORDER</constant> BY clause, as
+                well as count and offset integer values, used to make the query return a specific
+                subset of rows. These values are used in a <constant>LIMIT</constant> clause, or in
+                equivalent logic for <acronym>RDBMS</acronym> brands that do not support the
                 <constant>LIMIT</constant> syntax.
             </para>
 
@@ -961,9 +954,10 @@ $rows = $table->fetchAll($select);
             </example>
 
             <para>
-                All of the arguments above are optional. If you omit the ORDER clause, the result
-                set includes rows from the table in an unpredictable order. If no LIMIT clause is
-                set, you retrieve every row in the table that matches the WHERE clause.
+                All of the arguments above are optional. If you omit the <constant>ORDER</constant>
+                clause, the result set includes rows from the table in an unpredictable order. If
+                no <constant>LIMIT</constant> clause is set, you retrieve every row in the table
+                that matches the <constant>WHERE</constant> clause.
             </para>
         </sect3>
 
@@ -972,18 +966,18 @@ $rows = $table->fetchAll($select);
 
             <para>
                 For more specific and optimized requests, you may wish to limit the number of
-                columns returned in a row/rowset. This can be achieved by passing a FROM clause to
-                the select object. The first argument in the FROM clause is identical to that of a
+                columns returned in a row or rowset. This can be achieved by passing a
+                <constant>FROM</constant> clause to the select object. The first argument in the
+                <constant>FROM</constant> clause is identical to that of a
                 <classname>Zend_Db_Select</classname> object with the addition of being able to pass
                 an instance of <classname>Zend_Db_Table_Abstract</classname> and have it
                 automatically determine the table name.
             </para>
 
-            <para>
-                <example id="zend.db.table.qry.rows.set.retrieving.a.example">
-                    <title>Retrieving specific columns</title>
+            <example id="zend.db.table.qry.rows.set.retrieving.a.example">
+                <title>Retrieving specific columns</title>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select();
@@ -992,30 +986,30 @@ $select->from($table, array('bug_id', 'bug_description'))
 
 $rows = $table->fetchAll($select);
 ]]></programlisting>
-                </example>
-            </para>
+            </example>
+
+            <important>
+                <para>
+                    The rowset contains rows that are still 'valid' - they simply contain a
+                    subset of the columns of a table. If a <methodname>save()</methodname>
+                    method is called on a partial row then only the fields available will be
+                    modified.
+                </para>
+            </important>
 
             <para>
-                <important>
-                    <para>
-                        The rowset contains rows that are still 'valid' - they simply contain a
-                        subset of the columns of a table. If a save() method is called on a partial
-                        row then only the fields available will be modified.
-                    </para>
-                </important>
-
-                You can also specify expressions within a FROM clause and have these returned as a
-                readOnly row/rowset. In this example we will return a rows from the bugs table that
-                show an aggregate of the number of new bugs reported by individuals. Note the GROUP
-                clause. The 'count' column will be made available to the row for evaluation and can
-                be accessed as if it were part of the schema.
+                You can also specify expressions within a <constant>FROM</constant> clause and have
+                these returned as a readOnly row or rowset. In this example we will return a rows
+                from the bugs table that show an aggregate of the number of new bugs reported by
+                individuals. Note the <constant>GROUP</constant> clause. The 'count' column will be
+                made available to the row for evaluation and can be accessed as if it were part of
+                the schema.
             </para>
 
-            <para>
-                <example id="zend.db.table.qry.rows.set.retrieving.b.example">
-                    <title>Retrieving expressions as columns</title>
+            <example id="zend.db.table.qry.rows.set.retrieving.b.example">
+                <title>Retrieving expressions as columns</title>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select();
@@ -1026,18 +1020,18 @@ $select->from($table,
 
 $rows = $table->fetchAll($select);
 ]]></programlisting>
-                </example>
+            </example>
 
+            <para>
                 You can also use a lookup as part of your query to further refine your fetch
                 operations. In this example the accounts table is queried as part of a search for
                 all new bugs reported by 'Bob'.
             </para>
 
-            <para>
-                <example id="zend.db.table.qry.rows.set.refine.example">
-                    <title>Using a lookup table to refine the results of fetchAll()</title>
+            <example id="zend.db.table.qry.rows.set.refine.example">
+                <title>Using a lookup table to refine the results of fetchAll()</title>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 // retrieve with from part set, important when joining
@@ -1049,18 +1043,19 @@ $select->setIntegrityCheck(false)
 
 $rows = $table->fetchAll($select);
 ]]></programlisting>
-                </example>
-            </para>
+            </example>
 
             <para>
                 The <classname>Zend_Db_Table_Select</classname> is primarily used to constrain and
-                validate so that it may enforce the criteria for a legal SELECT query. However
-                there may be certain cases where you require the flexibility of the
+                validate so that it may enforce the criteria for a legal <constant>SELECT</constant>
+                query. However there may be certain cases where you require the flexibility of the
                 <classname>Zend_Db_Table_Row</classname> component and do not require a writable or
-                deletable row. for this specific user case, it is possible to retrieve a row/rowset
-                by passing a <constant>FALSE</constant> value to setIntegrityCheck. The resulting
-                row/rowset will be returned as a 'locked' row (meaning the save(), delete() and any
-                field-setting methods will throw an exception).
+                deletable row. for this specific user case, it is possible to retrieve a row or
+                rowset by passing a <constant>FALSE</constant> value to
+                <methodname>setIntegrityCheck()</methodname>. The resulting row or rowset will be
+                returned as a 'locked' row (meaning the <methodname>save()</methodname>,
+                <methodname>delete()</methodname> and any field-setting methods will throw an
+                exception).
             </para>
 
             <example id="zend.db.table.qry.rows.set.integrity.example">
@@ -1149,14 +1144,14 @@ echo "The table name is " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis>cols</emphasis> => an array, naming the column(s) of
+                    <emphasis>cols</emphasis> => an array, naming the columns of
                     the table.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>primary</emphasis> => an array, naming the column(s) in
+                    <emphasis>primary</emphasis> => an array, naming the columns in
                     the primary key.
                 </para>
             </listitem>
@@ -1189,7 +1184,7 @@ echo "The table name is " . $info['name'] . "\n";
                 <para>
                     <emphasis>referenceMap</emphasis> => an associative array, with
                     information about references from this table to any parent tables. See
-                    <xref linkend="zend.db.table.relationships.defining" />.
+                    <link linkend="zend.db.table.relationships.defining">this chapter</link>.
                 </para>
             </listitem>
 
@@ -1197,7 +1192,7 @@ echo "The table name is " . $info['name'] . "\n";
                 <para>
                     <emphasis>dependentTables</emphasis> => an array of class names
                     of tables that reference this table. See
-                    <xref linkend="zend.db.table.relationships.defining" />.
+                    <link linkend="zend.db.table.relationships.defining">this chapter</link>.
                 </para>
             </listitem>
 
@@ -1238,27 +1233,29 @@ echo "The table name is " . $info['name'] . "\n";
         <para>
             There are two primary ways in which a user may take advantage of table metadata
             caching:
+        </para>
 
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        <emphasis>Call
-                        <methodname>Zend_Db_Table_Abstract::setDefaultMetadataCache()</methodname></emphasis>
-                        - This allows a developer to once set the default cache object to be used
-                        for all table classes.
-                    </para>
-                </listitem>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Call
+                    <methodname>Zend_Db_Table_Abstract::setDefaultMetadataCache()</methodname></emphasis>
+                    - This allows a developer to once set the default cache object to be used
+                    for all table classes.
+                </para>
+            </listitem>
 
-                <listitem>
-                    <para>
-                        <emphasis>Configure
-                        <methodname>Zend_Db_Table_Abstract::__construct()</methodname></emphasis> -
-                        This allows a developer to set the cache object to be used for a particular
-                        table class instance.
-                    </para>
-                </listitem>
-            </itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Configure
+                    <methodname>Zend_Db_Table_Abstract::__construct()</methodname></emphasis> -
+                    This allows a developer to set the cache object to be used for a particular
+                    table class instance.
+                </para>
+            </listitem>
+        </itemizedlist>
 
+        <para>
             In both cases, the cache specification must be either <constant>NULL</constant> (i.e.,
             no cache used) or an instance of
             <link linkend="zend.cache.frontends.core"><classname>Zend_Cache_Core</classname></link>.
@@ -1341,8 +1338,9 @@ $bugs = new Bugs(array('metadataCache' => $cache));
             <title>Automatic Serialization with the Cache Frontend</title>
 
             <para>
-                Since the information returned from the adapter's describeTable() method is an
-                array, ensure that the <code>automatic_serialization</code> option is set to
+                Since the information returned from the adapter's
+                <methodname>describeTable()</methodname> method is an array, ensure that the
+                <property>automatic_serialization</property> option is set to
                 <constant>TRUE</constant> for the <classname>Zend_Cache_Core</classname> frontend.
             </para>
         </note>
@@ -1397,7 +1395,7 @@ protected $_metadata = array(
 
             <para>
                 You can disable this optimization by turning of the
-                <code>metadataCacheInClass</code> flag:
+                <property>metadataCacheInClass</property> flag:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1433,8 +1431,8 @@ $bugs->setMetadataCacheInClass(false);
 
             <para>
                 You can specify Row and Rowset classes using the Table constructor's options array,
-                in keys <code>'rowClass'</code> and <code>'rowsetClass'</code> respectively.
-                Specify the names of the classes using strings.
+                in keys '<property>rowClass</property>' and '<property>rowsetClass</property>'
+                respectively. Specify the names of the classes using strings.
             </para>
 
             <example id="zend.db.table.extending.row-rowset.example">
@@ -1498,7 +1496,8 @@ $rowsCustom = $table->fetchAll($where);
 
             <para>
                 For more information on the Row and Rowset classes, see
-                <xref linkend="zend.db.table.row" /> and <xref linkend="zend.db.table.rowset" />.
+                <link linkend="zend.db.table.row">this chapter</link> and <link
+                    linkend="zend.db.table.rowset">this one</link>.
             </para>
         </sect3>
 
@@ -1586,8 +1585,8 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                For example, if your table class name is "<code>BugsProducts</code>", it would
-                match the physical table in the database called "<code>bugs_products</code>," if
+                For example, if your table class name is "BugsProducts", it would
+                match the physical table in the database called "bugs_products", if
                 you omit the explicit declaration of the <varname>$_name</varname> class property.
                 In this inflection mapping, the class name spelled in "CamelCase" format would be
                 transformed to lower case, and words are separated with an underscore.

@@ -158,9 +158,11 @@ $out = $feed->export('atom');
     </author>
     <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
     <entry>
-        <title type="html"><![CDATA[All Your Base Are Belong To Us]]]]><![CDATA[></title>
+        <title type="html"><![CDATA[All Your Base Are Belong To
+            Us]]]]><![CDATA[></title>
         <summary type="html">
-            <![CDATA[Exposing the difficultly of porting games to English.]]]]><![CDATA[>
+            <![CDATA[Exposing the difficultly of porting games to
+                English.]]]]><![CDATA[>
         </summary>
         <published>2009-12-14T20:28:18+00:00</published>
         <updated>2009-12-14T20:28:18+00:00</updated>

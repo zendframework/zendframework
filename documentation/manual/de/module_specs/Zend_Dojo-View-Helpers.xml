@@ -7,7 +7,7 @@
     <para>
         Aus dem Dojo Handbuch: "Dijit ist ein Widget System das über Dojo gelegt wurde.". Dijit
         enthält eine Vielzahl von Layout und Formular Widgets die erstellt wurden um
-        Zugriffsfeatures, Lokalisation, und standardtisiertes (und themenbasierendes) Look-and-Feel
+        Zugriffsfeatures, Lokalisation, und standardisiertes (und themenbasierendes) Look-and-Feel
         zu bieten.
     </para>
 
@@ -887,7 +887,7 @@ echo $view->horizontalSlider(
             <listitem>
                 <para>
                     <emphasis>NumberSpinner</emphasis>: dijit.form.NumberSpinner. Eine Textbox für
-                    nummerische Eingaben mit Buttons für das Inkrementieren und Dekrementieren.
+                    numerische Eingaben mit Buttons für das Inkrementieren und Dekrementieren.
                 </para>
 
                 <para>
@@ -1144,7 +1144,7 @@ echo $view->validationTextBox(
         'regExp'   => '[\w]+',
         'invalidMessage' => 'Keine Leerzeichen oder nicht-Wort Zeichen erlaubt',
         'promptMessage'  => 'Nur ein einzelnes Wort das aus ' .
-                            'alphanummerischen Zeichen und Unterstrichen besteht',
+                            'alphanumerischen Zeichen und Unterstrichen besteht',
     ),
     array(
         'maxlength' => 20,

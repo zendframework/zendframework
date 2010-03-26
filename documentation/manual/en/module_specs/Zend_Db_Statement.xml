@@ -5,10 +5,10 @@
 
     <para>
         In addition to convenient methods such as <methodname>fetchAll()</methodname> and
-        <methodname>insert()</methodname> documented in <xref linkend="zend.db.adapter" />,
-        you can use a statement object to gain more options for running
-        queries and fetching result sets. This section describes how to get an
-        instance of a statement object, and how to use its methods.
+        <methodname>insert()</methodname> documented in <link
+            linkend="zend.db.adapter">Zend_Db_Adapter</link>, you can use a statement object to gain
+        more options for running queries and fetching result sets. This section describes how to get
+        an instance of a statement object, and how to use its methods.
     </para>
 
     <para>
@@ -42,7 +42,7 @@ $stmt = $db->query(
         <para>
             The statement object corresponds to a <acronym>SQL</acronym> statement that has been
             prepared, and executed once with the bind-values specified.
-            If the statement was a SELECT query or other type of statement
+            If the statement was a <acronym>SELECT</acronym> query or other type of statement
             that returns a result set, it is now ready to fetch results.
         </para>
 
@@ -128,10 +128,11 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
         <para>
             You can call methods on the statement object to retrieve rows from
-            <acronym>SQL</acronym> statements that produce result set. SELECT, SHOW, DESCRIBE and
-            EXPLAIN are examples of statements that produce a result set.
-            INSERT, UPDATE, and DELETE are examples of statements that don't
-            produce a result set. You can execute the latter <acronym>SQL</acronym> statements
+            <acronym>SQL</acronym> statements that produce result set. <acronym>SELECT</acronym>,
+            <acronym>SHOW</acronym>, <acronym>DESCRIBE</acronym> and <acronym>EXPLAIN</acronym> are
+            examples of statements that produce a result set. <acronym>INSERT</acronym>,
+            <acronym>UPDATE</acronym>, and <acronym>DELETE</acronym> are examples of statements that
+            don't produce a result set. You can execute the latter <acronym>SQL</acronym> statements
             using <classname>Zend_Db_Statement</classname>, but you cannot call methods to fetch
             rows of results from them.
         </para>
@@ -151,7 +152,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                         <emphasis>Fetch style</emphasis> is the
                         first argument. This controls the structure in which
                         the row is returned.
-                        See <xref linkend="zend.db.adapter.select.fetch-mode" />
+                        See <link linkend="zend.db.adapter.select.fetch-mode">this chapter</link>
                         for a description of the valid values and the
                         corresponding data formats.
                     </para>
@@ -161,7 +162,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                     <para>
                         <emphasis>Cursor orientation</emphasis>
                         is the second argument. The default is
-                        Zend_Db::FETCH_ORI_NEXT, which simply means that each
+                        <constant>Zend_Db::FETCH_ORI_NEXT</constant>, which simply means that each
                         call to <methodname>fetch()</methodname> returns the next row in
                         the result set, in the order returned by the <acronym>RDBMS</acronym>.
                     </para>
@@ -171,10 +172,9 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                     <para>
                         <emphasis>Offset</emphasis> is the third
                         argument.
-                        If the cursor orientation is Zend_Db::FETCH_ORI_ABS,
-                        then the offset number is the ordinal number of the row
-                        to return.
-                        If the cursor orientation is Zend_Db::FETCH_ORI_REL,
+                        If the cursor orientation is <constant>Zend_Db::FETCH_ORI_ABS</constant>,
+                        then the offset number is the ordinal number of the row to return.
+                        If the cursor orientation is <constant>Zend_Db::FETCH_ORI_REL</constant>,
                         then the offset number is relative to the cursor
                         position before <methodname>fetch()</methodname> was called.
                     </para>
@@ -214,7 +214,7 @@ while ($row = $stmt->fetch()) {
                 the rows in an array. The <methodname>fetchAll()</methodname> method accepts
                 two arguments. The first is the fetch style, as described above,
                 and the second indicates the number of the column to return,
-                when the fetch style is Zend_Db::FETCH_COLUMN.
+                when the fetch style is <constant>Zend_Db::FETCH_COLUMN</constant>.
             </para>
 
             <example id="zend.db.statement.fetching.fetchall.example">
@@ -245,12 +245,13 @@ echo $rows[0]['bug_description'];
                 return rows, just as you can in the Adapter class. You can use
                 the <methodname>setFetchMode()</methodname> method of the statement object
                 to specify the fetch mode. Specify the fetch mode using
-                <classname>Zend_Db</classname> class constants FETCH_ASSOC, FETCH_NUM, FETCH_BOTH,
-                FETCH_COLUMN, and FETCH_OBJ.
-                See <xref linkend="zend.db.adapter.select.fetch-mode" />
-                for more information on these modes.
-                Subsequent calls to the statement methods <methodname>fetch()</methodname>
-                or <methodname>fetchAll()</methodname> use the fetch mode that you specify.
+                <classname>Zend_Db</classname> class constants <constant>FETCH_ASSOC</constant>,
+                <constant>FETCH_NUM</constant>, <constant>FETCH_BOTH</constant>,
+                <constant>FETCH_COLUMN</constant>, and <constant>FETCH_OBJ</constant>.
+                See <link linkend="zend.db.adapter.select.fetch-mode">this chapter</link>
+                for more information on these modes. Subsequent calls to the statement methods
+                <methodname>fetch()</methodname> or <methodname>fetchAll()</methodname> use the
+                fetch mode that you specify.
             </para>
 
             <example id="zend.db.statement.fetching.fetch-mode.example">
@@ -358,7 +359,8 @@ echo $obj->bug_description;
         </example>
 
         <para>
-            See also <ulink url="http://www.php.net/PDOStatement-bindParam">PDOStatement::bindParam()</ulink>.
+            See also <ulink
+                url="http://www.php.net/PDOStatement-bindParam">PDOStatement::bindParam()</ulink>.
         </para>
 
     </sect2>
@@ -380,7 +382,8 @@ echo $obj->bug_description;
         </example>
 
         <para>
-            See also <ulink url="http://www.php.net/PDOStatement-bindColumn">PDOStatement::bindColumn()</ulink>.
+            See also <ulink
+                url="http://www.php.net/PDOStatement-bindColumn">PDOStatement::bindColumn()</ulink>.
         </para>
 
     </sect2>

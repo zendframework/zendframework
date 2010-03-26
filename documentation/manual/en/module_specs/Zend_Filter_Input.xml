@@ -190,7 +190,7 @@ $validators = array(
         </note>
 
         <para>
-            You can use a special "wildcard" rule key <code>'*'</code> in
+            You can use a special "wildcard" rule key <emphasis>'*'</emphasis> in
             either the filters array or the validators array. This means that
             the filters or validators declared in this rule will be applied to
             all input data fields. Note that the order of entries in the
@@ -311,7 +311,7 @@ if ($input->isValid('month')) {
                         <emphasis>Missing</emphasis> fields are
                         those that are not present in the input data, but were
                         declared with the metacommand
-                        <code>'presence'=>'required'</code> (see the
+                        <command>'presence'=>'required'</command> (see the
                         <link linkend="zend.filter.input.metacommands.presence">later section</link>
                         on metacommands).
                     </para>
@@ -605,10 +605,9 @@ $validators = array(
 ]]></programlisting>
 
             <para>
-                If the validation of this rule fails, the rule key
-                (<code>'password'</code>) is used in the return value of
-                <methodname>getInvalid()</methodname>, not any of the fields named in
-                the 'fields' metacommand.
+                If the validation of this rule fails, the rule key ('password') is used in the
+                return value of <methodname>getInvalid()</methodname>, not any of the fields named
+                in the 'fields' metacommand.
             </para>
         </sect3>
 
@@ -703,7 +702,7 @@ echo $input->month; // echoes 1
             <para>
                 By default, if a field exists in the input data, then
                 validators are applied to it, even if the value of the field is
-                an empty string (<code>''</code>). This is likely to result in
+                an empty string (<emphasis>''</emphasis>). This is likely to result in
                 a failure to validate. For example, if the validator checks
                 for digit characters, and there are none because a zero-length
                 string has no characters, then the validator reports the data
@@ -1041,10 +1040,10 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
             <para>
                 As of version 1.5 the function <methodname>addNamespace($namespace)</methodname>
                 was deprecated and exchanged with the plugin loader and the
-                <code>addFilterPrefixPath</code> and <code>addValidatorPrefixPath</code> were
-                added. Also the constant <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant>
-                is now deprecated. The constants
-                <constant>Zend_Filter_Input::VALIDATOR_NAMESPACE</constant> and
+                <methodname>addFilterPrefixPath()</methodname> and
+                <methodname>addValidatorPrefixPath()</methodname> were added. Also the constant
+                <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant> is now deprecated. The
+                constants <constant>Zend_Filter_Input::VALIDATOR_NAMESPACE</constant> and
                 <constant>Zend_Filter_Input::FILTER_NAMESPACE</constant> are available in releases
                 after 1.7.0.
             </para>
@@ -1053,10 +1052,11 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
         <note>
             <para>
                 As of version 1.0.4, <constant>Zend_Filter_Input::NAMESPACE</constant>, having
-                value <code>namespace</code>, was changed to
+                value <property>namespace</property>, was changed to
                 <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant>, having value
-                <code>inputNamespace</code>, in order to comply with the <acronym>PHP</acronym> 5.3
-                reservation of the keyword <code>namespace</code>.
+                <property>inputNamespace</property>, in order to comply with the
+                <acronym>PHP</acronym> 5.3 reservation of the keyword
+                <property>namespace</property>.
             </para>
         </note>
     </sect2>

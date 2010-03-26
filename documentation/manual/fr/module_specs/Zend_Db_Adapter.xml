@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
+<!-- EN-Revision: 21358 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
     <title>Zend_Db_Adapter</title>
@@ -96,7 +96,7 @@
 
         <listitem>
             <para>
-                Firebird/Interbase, utilisant l'extension <acronym>PHP</acronym> <ulink
+                Firebird (Interbase), utilisant l'extension <acronym>PHP</acronym> <ulink
                 url="http://www.php.net/ibase">php_interbase</ulink>
             </para>
         </listitem>
@@ -732,8 +732,9 @@ echo $result[0]->bug_description;
             <title>Récupérer un enregistrement comme tableau associatif</title>
 
             <para>
-                La méthode <methodname>fetchAssoc()</methodname> retourne des enregistrements sous forme
-                de tableau de tableaux associatifs, quelque soit la valeur de "fetch mode".
+                La méthode <methodname>fetchAssoc()</methodname> retourne des enregistrements sous
+                forme de tableau de tableaux associatifs, quelque soit la valeur de "fetch mode"
+                en utilisant la première colonne comme index.
             </para>
 
             <example id="zend.db.adapter.select.fetchassoc.example">
@@ -742,10 +743,11 @@ echo $result[0]->bug_description;
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
-$result = $db->fetchAssoc('SELECT * FROM bugs WHERE bug_id = ?', 2);
+$result = $db->fetchAssoc('SELECT bug_id, bug_description, bug_status FROM bugs');
 
 // $result est un tableau de tableaux associatifs
-echo $result[0]['bug_description'];
+echo $result[2]['bug_description']; // Description du bug #2
+echo $result[1]['bug_description']; // Description du bug #1
 ]]></programlisting>
             </example>
         </sect3>
@@ -2188,7 +2190,7 @@ if (!is_null($version)) {
         </sect3>
 
         <sect3 id="zend.db.adapter.adapter-notes.firebird">
-            <title>Firebird/Interbase</title>
+            <title>Firebird (Interbase)</title>
 
             <itemizedlist>
                 <listitem>
@@ -2197,7 +2199,7 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
-                        Firebird/interbase ne supporte pas les clé auto-incrémentées, donc
+                        Firebird (Interbase) ne supporte pas les clé auto-incrémentées, donc
                         vous devez spécifier un paramètre de séquence à <methodname>lastInsertId()</methodname>
                         ou <methodname>lastSequenceId()</methodname>.
                     </para>
@@ -2206,7 +2208,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Pour l'instant l'option <classname>Zend_Db::CASE_FOLDING</classname>
-                        n'est pas supportée par l'adaptateur Firebird/interbase. Tout identificateur
+                        n'est pas supportée par l'adaptateur Firebird (Interbase). Tout identificateur
                         non échappé sera automatiquement retourné en majuscules.
                     </para>
                 </listitem>

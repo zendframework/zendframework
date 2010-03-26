@@ -36,8 +36,8 @@
             HTML entities operates within the scope of the first definition of
             filter - an operator that produces a subset of the input. A filter
             that escapes the HTML entities, however, transforms the input
-            (e.g., "<code>&amp;</code>" is transformed to
-            "<code>&amp;amp;</code>"). Supporting such use cases for web
+            (e.g., "&amp;" is transformed to
+            "&amp;amp;"). Supporting such use cases for web
             developers is important, and "to filter," in the context of using
             <classname>Zend_Filter</classname>, means to perform some transformations upon input
             data.
@@ -56,8 +56,8 @@
 
         <para>
             Following is a basic example of using a filter upon two input data,
-            the ampersand (<code>&amp;</code>) and double quote
-            (<code>&quot;</code>) characters:
+            the ampersand (<emphasis>&amp;</emphasis>) and double quote
+            (<emphasis>&quot;</emphasis>) characters:
 
             <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();

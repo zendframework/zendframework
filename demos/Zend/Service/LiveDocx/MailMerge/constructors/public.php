@@ -13,46 +13,46 @@ print(Demos_Zend_Service_LiveDocx_Helper::wrapLine(
     PHP_EOL)
 );
 
-$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+$mailMerge = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
-            ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
+$mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+          ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
 
-$phpLiveDocx->getTemplateFormats(); // then call methods as usual
+$mailMerge->getTemplateFormats(); // then call methods as usual
 
 printf('Username : %s%sPassword : %s%s    WSDL : %s%s%s',
-    $phpLiveDocx->getUsername(),
+    $mailMerge->getUsername(),
     PHP_EOL,
-    $phpLiveDocx->getPassword(),
+    $mailMerge->getPassword(),
     PHP_EOL,
-    $phpLiveDocx->getWsdl(),
+    $mailMerge->getWsdl(),
     PHP_EOL,
     PHP_EOL
 );
 
-unset($phpLiveDocx);
+unset($mailMerge);
 
 // -----------------------------------------------------------------------------
 
 // Alternatively, you can pass username and password in the constructor.
 
-$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge(
+$mailMerge = new Zend_Service_LiveDocx_MailMerge(
     array (
         'username' => DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME,
         'password' => DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD,
     )
 );
 
-$phpLiveDocx->getTemplateFormats(); // then call methods as usual
+$mailMerge->getTemplateFormats(); // then call methods as usual
 
 printf('Username : %s%sPassword : %s%s    WSDL : %s%s%s',
-    $phpLiveDocx->getUsername(),
+    $mailMerge->getUsername(),
     PHP_EOL,
-    $phpLiveDocx->getPassword(),
+    $mailMerge->getPassword(),
     PHP_EOL,
-    $phpLiveDocx->getWsdl(),
+    $mailMerge->getWsdl(),
     PHP_EOL,
     PHP_EOL
 );
 
-unset($phpLiveDocx);
+unset($mailMerge);

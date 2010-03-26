@@ -220,13 +220,13 @@ $errorMessage = null;
 
 try {
     $microtime = microtime(true);
-    $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge(
+    $mailMerge = new Zend_Service_LiveDocx_MailMerge(
         array (
             'username' => DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME,
             'password' => DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD
         )
     );
-    $phpLiveDocx->logIn();
+    $mailMerge->logIn();
     $duration = microtime(true) - $microtime;
 } catch (Zend_Service_LiveDocx_Exception $e) {
     $duration = -1;

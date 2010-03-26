@@ -89,14 +89,15 @@ class Zend_Currency
     public function __construct($options = null, $locale = null)
     {
         if (is_array($options)) {
+            $this->setLocale($locale);
             $this->setFormat($options);
         } else if (Zend_Locale::isLocale($options, false, false)) {
-            $temp    = $locale;
-            $locale  = $options;
-            $options = $temp;
+            $this->setLocale($options);
+            $options = $locale;
+        } else {
+            $this->setLocale($locale);
         }
 
-        $this->setLocale($locale);
         // Get currency details
         if (!isset($this->_options['currency']) || !is_array($options)) {
             $this->_options['currency'] = self::getShortName($options, $this->_options['locale']);
@@ -736,18 +737,20 @@ class Zend_Currency
     protected function _exchangeCurrency($value, $currency)
     {
         if ($value instanceof Zend_Currency) {
-            $value = $value->getValue();
+            $currency = $value->getShortName();
+            $value    = $value->getValue();
+        } else {
+            $currency = $this->getShortName($currency, $this->getLocale());
         }
 
-        $currency = $this->getShortName($currency);
-        $rate     = 1;
+        $rate = 1;
         if ($currency !== $this->getShortName()) {
             $service = $this->getService();
             if (!($service instanceof Zend_Currency_CurrencyInterface)) {
                 throw new Zend_Currency_Exception('No exchange service applied');
             }
 
-            $rate = $service->getRate($this->getShortName(), $currency);
+            $rate = $service->getRate($currency, $this->getShortName());
         }
 
         $value *= $rate;
@@ -827,9 +830,11 @@ class Zend_Currency
 
                 case 'format':
                     if ((empty($value) === false) and (Zend_Locale::isLocale($value, null, false) === false)) {
-                        throw new Zend_Currency_Exception("'" .
-                            ((gettype($value) === 'object') ? get_class($value) : $value)
-                            . "' is not a known locale.");
+                        if (!is_string($value) || (strpos($value, '0') === false)) {
+                            throw new Zend_Currency_Exception("'" .
+                                ((gettype($value) === 'object') ? get_class($value) : $value)
+                                . "' is no format token");
+                        }
                     }
                     break;
 

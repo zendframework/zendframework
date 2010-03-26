@@ -38,6 +38,11 @@
 require_once 'Zend/Translate.php';
 
 /**
+ * @see Zend_Translate
+ */
+require_once 'Zend/Translate.php';
+
+/**
  * @category   Zend
  * @package    Zend_Validate
  * @subpackage UnitTests

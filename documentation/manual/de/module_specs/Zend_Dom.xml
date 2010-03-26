@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
-<!-- Reviewed: 17175 -->
+<!-- EN-Revision: 21358 -->
+<!-- Reviewed: 21358 -->
 <sect1 id="zend.dom.introduction">
     <title>Einführung</title>
 
     <para>
-        <classname>Zend_Dom</classname> bietet Werkzeuge für das Arbeiten mit DOM Dokumenten und
-        Strukturen. Aktuell bieten wir <classname>Zend_Dom_Query</classname> an, welche ein
-        vereinheitlichtes Interface für das Abfragen von DOM Dokumenten anbietet und beide, XPath
-        und <acronym>CSS</acronym> Selektoren verwendet.
+        <classname>Zend_Dom</classname> bietet Werkzeuge für das Arbeiten mit <acronym>DOM</acronym>
+        Dokumenten und Strukturen. Aktuell bieten wir <classname>Zend_Dom_Query</classname> an,
+        welche ein vereinheitlichtes Interface für das Abfragen von <acronym>DOM</acronym>
+        Dokumenten anbietet und beide, XPath und <acronym>CSS</acronym> Selektoren verwendet.
     </para>
 </sect1>

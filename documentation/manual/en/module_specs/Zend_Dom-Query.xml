@@ -5,7 +5,7 @@
 
     <para>
         <classname>Zend_Dom_Query</classname> provides mechanisms for querying
-        <acronym>XML</acronym> and (X)HTML documents utilizing either XPath or
+        <acronym>XML</acronym> and (X)<acronym>HTML</acronym> documents utilizing either XPath or
         <acronym>CSS</acronym> selectors. It was developed to aid with functional testing of
         <acronym>MVC</acronym> applications, but could also be used for rapid development of screen
         scrapers.
@@ -52,7 +52,8 @@
             <listitem>
                 <para>
                     <emphasis>style attributes</emphasis>: <acronym>CSS</acronym> style attributes
-                    to match: '.error', 'div.error', 'label.required', etc. If an
+                    to match: '<command>.error</command>', '<command>div.error</command>',
+                    '<command>label.required</command>', etc. If an
                     element defines more than one style, this will match as long as
                     the named style is present anywhere in the style declaration.
                 </para>
@@ -116,7 +117,7 @@
                 <para>
                     <emphasis>descendents</emphasis>: string together
                     multiple selectors to indicate a hierarchy along which
-                    to search. 'div .foo span #one' would select an element
+                    to search. '<command>div .foo span #one</command>' would select an element
                     of id 'one' that is a descendent of arbitrary depth
                     beneath a 'span' element, which is in turn a descendent
                     of arbitrary depth beneath an element with a class of
@@ -150,10 +151,10 @@
             Once you've performed your query, you can then work with the result
             object to determine information about the nodes, as well as to pull
             them and/or their content directly for examination and manipulation.
-            <classname>Zend_Dom_Query_Result</classname> implements <code>Countable</code>
-            and <code>Iterator</code>, and store the results internally as
-            DOMNodes/DOMElements. As an example, consider the following call,
-            that selects against the HTML above:
+            <classname>Zend_Dom_Query_Result</classname> implements <classname>Countable</classname>
+            and <classname>Iterator</classname>, and store the results internally as
+            DOMNodes and DOMElements. As an example, consider the following call,
+            that selects against the <acronym>HTML</acronym> above:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -207,8 +208,8 @@ foreach ($results as $result) {
 
                 <listitem>
                     <para>
-                        <methodname>setDocumentHtml($document)</methodname>: specify an HTML
-                        string to query against.
+                        <methodname>setDocumentHtml($document)</methodname>: specify an
+                        <acronym>HTML</acronym> string to query against.
                     </para>
                 </listitem>
 
@@ -257,9 +258,9 @@ foreach ($results as $result) {
 
             <para>
                 As mentioned previously, <classname>Zend_Dom_Query_Result</classname>
-                implements both <code>Iterator</code> and
-                <code>Countable</code>, and as such can be used in a
-                <code>foreach</code> loop as well as with the
+                implements both <classname>Iterator</classname> and
+                <classname>Countable</classname>, and as such can be used in a
+                <methodname>foreach()</methodname> loop as well as with the
                 <methodname>count()</methodname> function. Additionally, it exposes the
                 following methods:
             </para>

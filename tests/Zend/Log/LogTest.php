@@ -240,47 +240,103 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
     
     // Factory
 
-    public function testLogConstructFromConfigStream() 
+    public function testLogConstructFromConfigStream()
     {
         $cfg = array('log' => array('memory' => array(
-            'writerName'      => "Stream", 
-            'writerNamespace' => "Zend_Log_Writer", 
+            'writerName'      => "Stream",
+            'writerNamespace' => "Zend_Log_Writer",
             'writerParams'    => array(
                 'stream'      => "php://memory"
-            )        
+            )
         )));
 
         $logger = Zend_Log::factory($cfg['log']);
         $this->assertTrue($logger instanceof Zend_Log);
     }
 
-    public function testLogConstructFromConfigStreamAndFilter() 
+    public function testLogConstructFromConfigStreamAndFilter()
     {
         $cfg = array('log' => array('memory' => array(
-            'writerName'      => "Stream", 
-            'writerNamespace' => "Zend_Log_Writer", 
+            'writerName'      => "Stream",
+            'writerNamespace' => "Zend_Log_Writer",
             'writerParams'    => array(
                 'stream'      => "php://memory"
-            ), 
-            'filterName'   => "Priority", 
+            ),
+            'filterName'   => "Priority",
             'filterParams' => array(
-                'priority' => "Zend_Log::CRIT", 
+                'priority' => "Zend_Log::CRIT",
                 'operator' => "<="
-             ),        
+             ),
         )));
 
         $logger = Zend_Log::factory($cfg['log']);
         $this->assertTrue($logger instanceof Zend_Log);
     }
 
-    public function testFactoryUsesNameAndNamespaceWithoutModifications() 
+    public function testFactoryUsesNameAndNamespaceWithoutModifications()
     {
         $cfg = array('log' => array('memory' => array(
-            'writerName'      => "ZendMonitor", 
-            'writerNamespace' => "Zend_Log_Writer", 
+            'writerName'      => "ZendMonitor",
+            'writerNamespace' => "Zend_Log_Writer",
         )));
 
         $logger = Zend_Log::factory($cfg['log']);
         $this->assertTrue($logger instanceof Zend_Log);
+    }
+
+    /**
+     * @group ZF-9192
+     */
+    public function testUsingWithErrorHandler()
+    {
+        $writer = new Zend_Log_Writer_Mock();
+
+        $logger = new Zend_Log();
+        $logger->addWriter($writer);
+        $this->errWriter = $writer;
+        
+        
+        $oldErrorLevel = error_reporting();
+        
+        $this->expectingLogging = true;
+        error_reporting(E_ALL | E_STRICT);
+        
+        $oldHandler = set_error_handler(array($this, 'verifyHandlerData'));
+        $logger->registerErrorHandler();
+        
+        trigger_error("Testing notice shows up in logs", E_USER_NOTICE);
+        trigger_error("Testing warning shows up in logs", E_USER_WARNING);
+        trigger_error("Testing error shows up in logs", E_USER_ERROR);
+        
+        $this->expectingLogging = false;
+        error_reporting(0);
+        
+        trigger_error("Testing notice misses logs", E_USER_NOTICE);
+        trigger_error("Testing warning misses logs", E_USER_WARNING);
+        trigger_error("Testing error misses logs", E_USER_ERROR);
+        
+        restore_error_handler(); // Pop off the Logger
+        restore_error_handler(); // Pop off the verifyHandlerData
+        error_reporting($oldErrorLevel); // Restore original reporting level
+        unset($this->errWriter);
+    }
+    
+    /**
+     * @group ZF-9192
+     * Used by testUsingWithErrorHandler - 
+     * verifies that the data written to the original logger is the same as the data written in Zend_Log
+     */
+    public function verifyHandlerData($errno, $errstr, $errfile, $errline, $errcontext)
+    {
+        if ($this->expectingLogging) {
+            $this->assertFalse(empty($this->errWriter->events));
+            $event = array_shift($this->errWriter->events);
+            $this->assertEquals($errstr, $event['message']);
+            $this->assertEquals($errno, $event['errno']);
+            $this->assertEquals($errfile, $event['file']);
+            $this->assertEquals($errline, $event['line']);
+        } else {
+            $this->assertTrue(empty($this->errWriter->events));
+        }
     }
 }

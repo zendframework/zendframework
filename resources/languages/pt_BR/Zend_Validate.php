@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 21362
+ * EN-Revision: 21573
  */
 return array(
     // Zend_Validate_Alnum
@@ -233,12 +233,13 @@ return array(
     "Value is required and can't be empty" => "O valor é obrigatório e não pode estar vazio",
 
     // Zend_Validate_PostCode
-    "Invalid type given, value should be string or integer" => "Tipo especificado inválido, o valor deve ser string ou inteiro",
-    "'%value%' does not appear to be an postal code" => "'%value%' não parece ser um código postal",
+    "Invalid type given. The value should be a string or a integer" => "Tipo especificado inválido. O valor deve ser uma string ou um inteiro",
+    "'%value%' does not appear to be a postal code" => "'%value%' não parece ser um código postal",
 
     // Zend_Validate_Regex
     "Invalid type given, value should be string, integer or float" => "Tipo especificado inválido, o valor deve ser string, inteiro ou float",
     "'%value%' does not match against pattern '%pattern%'" => "'%value%' não corresponde ao padrão '%pattern%'",
+    "There was an internal error while using the pattern '%pattern%'" => "Houve um erro interno durante o uso do padrão '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
     "'%value%' is no valid sitemap changefreq" => "'%value%' não é um changefreq de sitemap válido",

@@ -598,7 +598,7 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
         <para>
             Validators are processed in order. Each validator is processed,
             unless a validator created with a <constant>TRUE</constant>
-            <code>breakChainOnFailure</code> value fails its validation. Be
+            <varname>$breakChainOnFailure</varname> value fails its validation. Be
             sure to specify your validators in a reasonable order.
         </para>
 
@@ -643,7 +643,7 @@ $messages = $element->getMessages();
                     By default, if an element is required but does not contain
                     a 'NotEmpty' validator, <methodname>isValid()</methodname> will add one
                     to the top of the stack, with the
-                    <code>breakChainOnFailure</code> flag set. This behavior lends
+                    <varname>$breakChainOnFailure</varname> flag set. This behavior lends
                     required flag semantic meaning: if no value is passed,
                     we immediately invalidate the submission and notify the
                     user, and prevent other validators from running on what we
@@ -733,8 +733,8 @@ $messages = $element->getMessages();
 
             <listitem>
                 <para>
-                    <code>addValidator($nameOrValidator, $breakChainOnFailure = false, array
-                        $options = null)</code>
+                    <methodname>addValidator($nameOrValidator, $breakChainOnFailure = false, array
+                        $options = null)</methodname>
                 </para>
             </listitem>
 
@@ -1389,8 +1389,8 @@ $element->class = 'text;
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader,
-                                $type)</code>
+                            <methodname>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader,
+                                $type)</methodname>
                         </para>
                     </listitem>
 
@@ -1416,8 +1416,8 @@ $element->class = 'text;
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>addValidator($validator, $breakChainOnFailure = false, $options =
-                                array())</code>
+                            <methodname>addValidator($validator, $breakChainOnFailure = false,
+                                $options = array())</methodname>
                         </para>
                     </listitem>
 
@@ -1548,7 +1548,7 @@ $element->class = 'text;
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>prefixPath</code> will be passed to
+                    <property>prefixPath</property> will be passed to
                     <methodname>addPrefixPaths()</methodname>
                 </para>
             </listitem>
@@ -1561,16 +1561,16 @@ $element->class = 'text;
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>setAttrib</code> (though
-                            <code>setAttribs</code> <emphasis>will</emphasis> work)
+                            <property>setAttrib</property> (though
+                            <property>setAttribs</property> <emphasis>will</emphasis> work)
                         </para>
                     </listitem>
 
-                    <listitem><para><code>setConfig</code></para></listitem>
-                    <listitem><para><code>setOptions</code></para></listitem>
-                    <listitem><para><code>setPluginLoader</code></para></listitem>
-                    <listitem><para><code>setTranslator</code></para></listitem>
-                    <listitem><para><code>setView</code></para></listitem>
+                    <listitem><para><property>setConfig</property></para></listitem>
+                    <listitem><para><property>setOptions</property></para></listitem>
+                    <listitem><para><property>setPluginLoader</property></para></listitem>
+                    <listitem><para><property>setTranslator</property></para></listitem>
+                    <listitem><para><property>setView</property></para></listitem>
                 </itemizedlist>
             </listitem>
         </itemizedlist>
@@ -1643,7 +1643,7 @@ decorators.label.decorator = "Label"
 
         <para>
             As an example, let's say that all text elements in a form you are
-            creating need to be filtered with <code>StringTrim</code>,
+            creating need to be filtered with <classname>StringTrim</classname>,
             validated with a common regular expression, and that you want to
             use a custom decorator you've created for displaying them,
             'My_Decorator_TextItem'. In addition, you have a number of standard

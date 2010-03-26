@@ -10,9 +10,9 @@
     </para>
 
     <para>
-        Instalowanie Zend Framework jest ekstremalnie proste. Po pobraniu i
+        Instalacja Zend Framework jest ekstremalnie prosta. Po pobraniu i
         rozpakowaniu frameworka powinieneś dodać katalog /library na początek
-        dyrektywy include_path. Możesz także przenieść katalog /library w innej
+        dyrektywy include_path. Możesz także przenieść katalog /library w inne
         miejsce np. współdzielone między aplikacjami.
 
         <itemizedlist>
@@ -37,7 +37,7 @@
             </listitem>
             <listitem>
                 <para>
-                    Używając klienta <ulink url="http://subversion.tigris.org">Subversion</ulink>
+                    Użycie klienta <ulink url="http://subversion.tigris.org">Subversion</ulink>
                     (SVN). Zend Framework jest oprogramowaniem o otwartym kodzie
                     źródłówym i repozytorium Subversion używane to jego tworzenia
                     jest publicznie dostępne. Rozważ użycie SVN do pobrania
@@ -74,10 +74,10 @@
     </para>
 
     <para>
-        Kiedy już posiadasz kopię Zend Framework, twoja aplikacja musi być w
-        stanie uzyskać dostęp do klas frameworka. O ile jest kilka sposobów
+        Kiedy już pobierzesz kopię Zend Framework, twoja aplikacja będzie musiała być w
+        stanie uzyskać dostęp do klas frameworka. Jest kilka sposobów
         <ulink url="http://www.php.net/manual/en/configuration.changes.php">
-        osiągnięcia tego</ulink>, wartość dyrektywy PHP
+        osiągnięcia tego</ulink> ale obojętnie od wybranego sposobu wartość dyrektywy PHP
         <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path"><code>include_path</code></ulink>
         musi zawierać ścieżkę do biblioteki Zend Framework.
     </para>
@@ -85,12 +85,12 @@
     <para>
         Zend zapewnia <ulink url="http://framework.zend.com/docs/quickstart">poradnik Szybki Start</ulink>
         który pozwoli ci na możliwie szybkie zapoznanie się z frameworkiem. Jest to
-        niesamowity sposób rozpoczęcia nauki frameworka, wraz z
+        znakomity sposób rozpoczęcia nauki frameworka, wraz z
         realnymi przykładami zastosowania, które możesz wykorzystać.
     </para>
 
     <para>
-        Z tego względu, że komponenty Zend Framework są raczej ze sobą luźno
+        Ze względu na to, że komponenty Zend Framework są ze sobą luźno
         związane, możesz ich użyć w swoich aplikacjach w przeróżnych kombinacjach.
         Kolejne rozdziały w wyczerpujący sposób opiszą cały framework, komponent
         po komponencie.

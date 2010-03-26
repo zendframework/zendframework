@@ -245,6 +245,16 @@ class Zend_Validate_CreditCardTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array('Zend_Validate_CreditCardTest', 'staticCallback'), $validator->getService());
     }
 
+    /**
+     * @group ZF-9477
+     */
+    public function testMultiInstitute() {
+        $validator      = new Zend_Validate_CreditCard(array('type' => Zend_Validate_CreditCard::MASTERCARD));
+        $this->assertFalse($validator->isValid('4111111111111111'));
+        $message = $validator->getMessages();
+        $this->assertContains('not from an allowed institute', current($message));
+    }
+
     public static function staticCallback($value)
     {
         return false;

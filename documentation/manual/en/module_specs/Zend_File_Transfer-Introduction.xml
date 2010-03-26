@@ -69,8 +69,8 @@
 
         <para>
             The next step is to create the receiver of the upload. In our example the receiver is
-            located at <code>/file/upload</code>. So next we will create the <code>file</code>
-            controller and the <code>upload</code> action.
+            located at <filename>/file/upload</filename>. So next we will create the 'file'
+            controller and the <methodname>upload()</methodname> action.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -87,8 +87,9 @@ if (!$adapter->receive()) {
         <para>
             This code listing demonstrates the simplest usage of
             <classname>Zend_File_Transfer</classname>. A local destination is set with the
-            <code>setDestination</code> method, then the <methodname>receive()</methodname> method
-            is called. if there are any upload errors, an error will be returned.
+            <methodname>setDestination()</methodname> method, then the
+            <methodname>receive()</methodname> method is called. if there are any upload errors, an
+            error will be returned.
         </para>
     </example>
 
@@ -154,8 +155,8 @@ if (!$adapter->receive()) {
                     If no files are specified, all files will be checked. You can call
                     <methodname>isValid()</methodname> before calling
                     <methodname>receive()</methodname>; in this case,
-                    <methodname>receive()</methodname> will not call <code>isValid</code> internally
-                    again when receiving the file.
+                    <methodname>receive()</methodname> will not call
+                    <methodname>isValid()</methodname> internally again when receiving the file.
                 </para>
             </listitem>
 
@@ -288,9 +289,9 @@ $names = $upload->getFileName('foo');
 
         <para>
             <methodname>getFileSize()</methodname> returns per default the real filesize in SI
-            notation which means you will get <code>2kB</code> instead of <code>2048</code>. If you
-            need only the plain size set the <code>useByteString</code> option to
-            <constant>FALSE</constant>.
+            notation which means you will get <emphasis>2kB</emphasis> instead of
+            <emphasis>2048</emphasis>. If you need only the plain size set the
+            <property>useByteString</property> option to <constant>FALSE</constant>.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example.getfilesize">
@@ -323,7 +324,7 @@ $size = $upload->getFileSize();
             <methodname>getHash()</methodname> accepts the name of a hash algorithm as first
             parameter. For a list of known algorithms refer to
             <ulink url="http://php.net/hash_algos">PHP's hash_algos method</ulink>. If you don't
-            specify an algorithm, the <code>crc32</code> algorithm will be used by default.
+            specify an algorithm, the <emphasis>crc32</emphasis> algorithm will be used by default.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example2">
@@ -413,14 +414,14 @@ $names = $upload->getMimeType('foo');
             <classname>Zend_File_Transfer</classname> can give you the actual state of a fileupload
             in progress. To use this feature you need either the <acronym>APC</acronym> extension
             which is provided with most default <acronym>PHP</acronym> installations, or the
-            <code>uploadprogress</code> extension. Both extensions are detected and used
+            <classname>UploadProgress</classname> extension. Both extensions are detected and used
             automatically. To be able to get the progress you need to meet some prerequisites.
         </para>
 
         <para>
-            First, you need to have either <acronym>APC</acronym> or <code>uploadprogress</code> to
-            be enabled. Note that you can disable this feature of <acronym>APC</acronym> within your
-            php.ini.
+            First, you need to have either <acronym>APC</acronym> or
+            <classname>UploadProgress</classname> to be enabled. Note that you can disable this
+            feature of <acronym>APC</acronym> within your <filename>php.ini</filename>.
         </para>
 
         <para>
@@ -431,8 +432,8 @@ $names = $upload->getMimeType('foo');
 
         <para>
             When the above two points are provided then you are able to get the actual progress of
-            the file upload by using the <code>getProgress</code> method. Actually there are 2
-            official ways to handle this.
+            the file upload by using the <methodname>getProgress()</methodname> method. Actually
+            there are 2 official ways to handle this.
         </para>
 
         <sect3 id="zend.file.transfer.introduction.uploadprogress.progressadapter">

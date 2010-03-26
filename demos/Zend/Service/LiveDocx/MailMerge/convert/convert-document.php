@@ -18,19 +18,19 @@ require_once dirname(__FILE__) . '/../../common.php';
  * made available.
  */
 
-$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+$mailMerge = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
-            ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
+$mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+          ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
 
-$phpLiveDocx->setLocalTemplate('document.doc');
+$mailMerge->setLocalTemplate('document.doc');
 
-$phpLiveDocx->assign('dummyFieldName', 'dummyFieldValue'); // necessary as of LiveDocx 1.2
+$mailMerge->assign('dummyFieldName', 'dummyFieldValue'); // necessary as of LiveDocx 1.2
 
-$phpLiveDocx->createDocument();
+$mailMerge->createDocument();
 
-$document = $phpLiveDocx->retrieveDocument('pdf');
+$document = $mailMerge->retrieveDocument('pdf');
 
 file_put_contents('document.pdf', $document);
 
-unset($phpLiveDocx);
+unset($mailMerge);

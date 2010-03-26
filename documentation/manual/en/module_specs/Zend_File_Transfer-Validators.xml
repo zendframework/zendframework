@@ -15,52 +15,54 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>Count</code>: This validator checks for the number of files. A minimum and
-                maximum range can be specified. An error will be thrown if either limit is crossed.
+                <classname>Count</classname>: This validator checks for the number of files. A
+                minimum and maximum range can be specified. An error will be thrown if either limit
+                is crossed.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Crc32</code>: This validator checks for the crc32 hash value of the content
-                from a file. It is based on the <code>Hash</code> validator and provides a
-                convenient and simple validator that only supports Crc32.
+                <classname>Crc32</classname>: This validator checks for the crc32 hash value of the
+                content from a file. It is based on the <classname>Hash</classname> validator and
+                provides a convenient and simple validator that only supports Crc32.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>ExcludeExtension</code>: This validator checks the extension of files. It will
-                throw an error when an given file has a defined extension. With this validator, you
-                can exclude defined extensions from being validated.
+                <classname>ExcludeExtension</classname>: This validator checks the extension of
+                files. It will throw an error when an given file has a defined extension. With this
+                validator, you can exclude defined extensions from being validated.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>ExcludeMimeType</code>: This validator validates the <acronym>MIME</acronym>
-                type of files. It can also validate <acronym>MIME</acronym> types and will throw an
-                error if the <acronym>MIME</acronym> type of specified file matches.
+                <classname>ExcludeMimeType</classname>: This validator validates the
+                <acronym>MIME</acronym> type of files. It can also validate <acronym>MIME</acronym>
+                types and will throw an error if the <acronym>MIME</acronym> type of specified file
+                matches.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Exists</code>: This validator checks for the existence of files. It will throw
-                an error when a specified file does not exist.
+                <classname>Exists</classname>: This validator checks for the existence of files. It
+                will throw an error when a specified file does not exist.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Extension</code>: This validator checks the extension of files. It will throw
-                an error when a specified file has an undefined extension.
+                <classname>Extension</classname>: This validator checks the extension of files. It
+                will throw an error when a specified file has an undefined extension.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>FilesSize</code>: This validator checks the size of validated files.
+                <classname>FilesSize</classname>: This validator checks the size of validated files.
                 It remembers internally the size of all checked files and throws an error when the
                 sum of all specified files exceed the defined size. It also provides minimum and
                 maximum values.
@@ -69,77 +71,79 @@
 
         <listitem>
             <para>
-                <code>ImageSize</code>: This validator checks the size of image. It validates the
-                width and height and enforces minimum and maximum dimensions.
+                <classname>ImageSize</classname>: This validator checks the size of image. It
+                validates the width and height and enforces minimum and maximum dimensions.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>IsCompressed</code>: This validator checks whether the file is compressed. It
-                is based on the <code>MimeType</code> validator and validates for compression
-                archives like zip or arc. You can also limit it to other archives.
+                <classname>IsCompressed</classname>: This validator checks whether the file is
+                compressed. It is based on the <classname>MimeType</classname> validator and
+                validates for compression archives like zip or arc. You can also limit it to other
+                archives.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>IsImage</code>: This validator checks whether the file is an image. It is
-                based on the <code>MimeType</code> validator and validates for image files like jpg
-                or gif. You can also limit it to other image types.
+                <classname>IsImage</classname>: This validator checks whether the file is an image.
+                It is based on the <classname>MimeType</classname> validator and validates for image
+                files like jpg or gif. You can also limit it to other image types.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Hash</code>: This validator checks the hash value of the content from a file.
-                It supports multiple algorithms.
+                <classname>Hash</classname>: This validator checks the hash value of the content
+                from a file. It supports multiple algorithms.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Md5</code>: This validator checks for the md5 hash value of the content from a
-                file. It is based on the <code>Hash</code> validator and provides a convenient and
-                simple validator that only supports Md5.
+                <classname>Md5</classname>: This validator checks for the md5 hash value of the
+                content from a file. It is based on the <classname>Hash</classname> validator and
+                provides a convenient and simple validator that only supports Md5.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>MimeType</code>: This validator validates the <acronym>MIME</acronym> type of
-                files. It can also validate <acronym>MIME</acronym> types and will throw an error if
-                the <acronym>MIME</acronym> type of a specified file does not match.
+                <classname>MimeType</classname>: This validator validates the
+                <acronym>MIME</acronym> type of files. It can also validate <acronym>MIME</acronym>
+                types and will throw an error if the <acronym>MIME</acronym> type of a specified
+                file does not match.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>NotExists</code>: This validator checks for the existence of files. It will
-                throw an error when an given file does exist.
+                <classname>NotExists</classname>: This validator checks for the existence of files.
+                It will throw an error when an given file does exist.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Sha1</code>: This validator checks for the sha1 hash value of the content from
-                a file. It is based on the <code>Hash</code> validator and provides a convenient and
-                simple validator that only supports sha1.
+                <classname>Sha1</classname>: This validator checks for the sha1 hash value of the
+                content from a file. It is based on the <classname>Hash</classname> validator and
+                provides a convenient and simple validator that only supports sha1.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Size</code>: This validator is able to check files for its file size. It
-                provides a minimum and maximum size range and will throw an error when either of
-                these thesholds are crossed.
+                <classname>Size</classname>: This validator is able to check files for its file
+                size. It provides a minimum and maximum size range and will throw an error when
+                either of these thesholds are crossed.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Upload</code>: This validator is internal. It checks if an upload has
-                resulted in an error. You must not set it, as it's automatically set by
+                <classname>Upload</classname>: This validator is internal. It checks if an upload
+                has resulted in an error. You must not set it, as it's automatically set by
                 <classname>Zend_File_Transfer</classname> itself. So you do not use this validator
                 directly. You should only know that it exists.
             </para>
@@ -147,9 +151,9 @@
 
         <listitem>
             <para>
-                <code>WordCount</code>: This validator is able to check the number of words within
-                files. It provides a minimum and maximum count and will throw an error when either
-                of these thresholds are crossed.
+                <classname>WordCount</classname>: This validator is able to check the number of
+                words within files. It provides a minimum and maximum count and will throw an error
+                when either of these thresholds are crossed.
             </para>
         </listitem>
     </itemizedlist>
@@ -173,8 +177,8 @@
 
             <listitem>
                 <para>
-                    <code>addValidator($validator, $breakChainOnFailure, $options = null, $files =
-                    null)</code>: Adds the specified validator to the validator
+                    <methodname>addValidator($validator, $breakChainOnFailure, $options = null,
+                        $files = null)</methodname>: Adds the specified validator to the validator
                     stack (optionally only to the file(s) specified).
                     <varname>$validator</varname> may be either an actual validator
                     instance or a short name specifying the validator type (e.g., 'Count').
@@ -183,8 +187,8 @@
 
             <listitem>
                 <para>
-                    <code>addValidators(array $validators, $files =
-                        null)</code>: Adds the specified validators to the stack of
+                    <methodname>addValidators(array $validators, $files =
+                        null)</methodname>: Adds the specified validators to the stack of
                     validators. Each entry may be either a validator
                     type/options pair or an array with the key 'validator'
                     specifying the validator. All other options will be
@@ -194,8 +198,8 @@
 
             <listitem>
                 <para>
-                    <code>setValidators(array $validators, $files =
-                        null)</code>: Overwrites any existing validators with
+                    <methodname>setValidators(array $validators, $files =
+                        null)</methodname>: Overwrites any existing validators with
                     the validators specified. The validators should follow the
                     syntax for <methodname>addValidators()</methodname>.
                 </para>
@@ -361,14 +365,14 @@ if ($upload->isValid()) {
         <title>Count Validator</title>
 
         <para>
-            The <code>Count</code> validator checks for the number of files which are provided. It
-            supports the following option keys:
+            The <classname>Count</classname> validator checks for the number of files which are
+            provided. It supports the following option keys:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>min</code>: Sets the minimum number of files to transfer.
+                    <property>min</property>: Sets the minimum number of files to transfer.
                 </para>
 
                 <note>
@@ -387,7 +391,7 @@ if ($upload->isValid()) {
 
             <listitem>
                 <para>
-                    <code>max</code>: Sets the maximum number of files to transfer.
+                    <property>max</property>: Sets the maximum number of files to transfer.
                 </para>
 
                 <para>
@@ -399,10 +403,10 @@ if ($upload->isValid()) {
 
         <para>
             If you initiate this validator with a string or integer, the value will be used as
-            <code>max</code>. Or you can also use the methods <methodname>setMin()</methodname> and
-            <methodname>setMax()</methodname> to set both options afterwards and
-            <methodname>getMin()</methodname> and <methodname>getMax()</methodname> to retrieve
-            the actual set values.
+            <property>max</property>. Or you can also use the methods
+            <methodname>setMin()</methodname> and <methodname>setMax()</methodname> to set both
+            options afterwards and <methodname>getMin()</methodname> and
+            <methodname>getMax()</methodname> to retrieve the actual set values.
         </para>
 
         <example id="zend.file.transfer.validators.count.example">
@@ -431,7 +435,7 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
         <title>Crc32 Validator</title>
 
         <para>
-            The <code>Crc32</code> validator checks the content of a transferred file by hashing it.
+            The <classname>Crc32</classname> validator checks the content of a transferred file by hashing it.
             This validator uses the hash extension from <acronym>PHP</acronym> with the crc32
             algorithm. It supports the following options:
         </para>
@@ -439,7 +443,7 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>*</code>: Sets any key or use a numeric array. The values will be used
+                    <property>*</property>: Sets any key or use a numeric array. The values will be used
                     as hash to validate against.
                 </para>
 
@@ -469,22 +473,22 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
         <title>ExcludeExtension Validator</title>
 
         <para>
-            The <code>ExcludeExtension</code> validator checks the file extension of the specified
-            files. It supports the following options:
+            The <classname>ExcludeExtension</classname> validator checks the file extension of the
+            specified files. It supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>*</code>: Sets any key or use a numeric array. The values will be used
-                    to check whether the given file does not use this file extension.
+                    <property>*</property>: Sets any key or use a numeric array. The values will be
+                    used to check whether the given file does not use this file extension.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>case</code>: Sets a boolean indicating whether validation should be
-                    case-sensitive. The default is not case sensitive. Note that this key can be
+                    <property>case</property>: Sets a boolean indicating whether validation should
+                    be case-sensitive. The default is not case sensitive. Note that this key can be
                     applied to for all available extensions.
                 </para>
             </listitem>
@@ -538,15 +542,15 @@ $upload->addValidator('ExcludeExtension',
         <title>ExcludeMimeType Validator</title>
 
         <para>
-            The <code>ExcludeMimeType</code> validator checks the <acronym>MIME</acronym> type of
-            transferred files. It supports the following options:
+            The <classname>ExcludeMimeType</classname> validator checks the <acronym>MIME</acronym>
+            type of transferred files. It supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>*</code>: Sets any key individually or use a numeric array. Sets the
-                    <acronym>MIME</acronym> type to validate against.
+                    <property>*</property>: Sets any key individually or use a numeric array. Sets
+                    the <acronym>MIME</acronym> type to validate against.
                 </para>
 
                 <para>
@@ -557,10 +561,11 @@ $upload->addValidator('ExcludeExtension',
 
             <listitem>
                 <para>
-                    <code>headerCheck</code>: If set to <constant>TRUE</constant> this option will
-                    check the <acronym>HTTP</acronym> Information for the file type when the
-                    <emphasis>fileInfo</emphasis> or <emphasis>mimeMagic</emphasis> extensions can
-                    not be found. The default value for this option is <constant>FALSE</constant>.
+                    <property>headerCheck</property>: If set to <constant>TRUE</constant> this
+                    option will check the <acronym>HTTP</acronym> Information for the file type when
+                    the <emphasis>fileInfo</emphasis> or <emphasis>mimeMagic</emphasis> extensions
+                    can not be found. The default value for this option is
+                    <constant>FALSE</constant>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -613,15 +618,15 @@ $upload->addValidator('ExcludeMimeType', false, 'image');
         <title>Exists Validator</title>
 
         <para>
-            The <code>Exists</code> validator checks for the existence of specified files. It
-            supports the following options:
+            The <classname>Exists</classname> validator checks for the existence of specified
+            files. It supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>*</code>: Sets any key or use a numeric array to check if the specific
-                    file exists in the given directory.
+                    <property>*</property>: Sets any key or use a numeric array to check if the
+                    specific file exists in the given directory.
                 </para>
             </listitem>
         </itemizedlist>
@@ -662,23 +667,23 @@ $upload->addValidator('Exists',
         <title>Extension Validator</title>
 
         <para>
-            The <code>Extension</code> validator checks the file extension of the specified files.
-            It supports the following options:
+            The <classname>Extension</classname> validator checks the file extension of the
+            specified files. It supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>*</code>: Sets any key or use a numeric array to check whether the
+                    <property>*</property>: Sets any key or use a numeric array to check whether the
                     specified file has this file extension.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>case</code>: Sets whether validation should be done in a case-sensitive
-                    fashion. The default is no case sensitivity. Note the this key is used for all
-                    given extensions.
+                    <property>case</property>: Sets whether validation should be done in a
+                    case-sensitive fashion. The default is no case sensitivity. Note the this key is
+                    used for all given extensions.
                 </para>
             </listitem>
         </itemizedlist>
@@ -728,21 +733,21 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
         <title>FilesSize Validator</title>
 
         <para>
-            The <code>FilesSize</code> validator checks for the aggregate size of all transferred
-            files. It supports the following options:
+            The <classname>FilesSize</classname> validator checks for the aggregate size of all
+            transferred files. It supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>min</code>: Sets the minimum aggregate file size.
+                    <property>min</property>: Sets the minimum aggregate file size.
                     This option defines the minimum aggregate file size to be transferred.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>max</code>: Sets the maximum aggregate file size.
+                    <property>max</property>: Sets the maximum aggregate file size.
                 </para>
 
                 <para>
@@ -753,8 +758,8 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
 
             <listitem>
                 <para>
-                    <code>bytestring</code>: Defines whether a failure is to return a user-friendly
-                    number or the plain file size.
+                    <property>bytestring</property>: Defines whether a failure is to return a
+                    user-friendly number or the plain file size.
                 </para>
 
                 <para>
@@ -767,19 +772,20 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
 
         <para>
             You can initialize this validator with a string, which will then be used to set the
-            <code>max</code> option. You can also use the methods <methodname>setMin()</methodname>
-            and <methodname>setMax()</methodname> to set both options after construction, along with
-            <methodname>getMin()</methodname> and <methodname>getMax()</methodname> to retrieve the
-            values that have been set previously.
+            <property>max</property> option. You can also use the methods
+            <methodname>setMin()</methodname> and <methodname>setMax()</methodname> to set both
+            options after construction, along with <methodname>getMin()</methodname> and
+            <methodname>getMax()</methodname> to retrieve the values that have been set previously.
         </para>
 
         <para>
             The size itself is also accepted in SI notation as handled by most operating systems.
             That is, instead of specifying <emphasis>20000 bytes</emphasis>,
             <emphasis>20kB</emphasis> may be given. All file sizes are converted using 1024 as the
-            base value. The following Units are accepted: <code>kB</code>, <code>MB</code>,
-            <code>GB</code>, <code>TB</code>, <code>PB</code> and <code>EB</code>. Note that 1kB is
-            equal to 1024 bytes, 1MB is equal to 1024kB, and so on.
+            base value. The following Units are accepted: <emphasis>kB</emphasis>,
+            <emphasis>MB</emphasis>, <emphasis>GB</emphasis>, <emphasis>TB</emphasis>,
+            <emphasis>PB</emphasis> and <emphasis>EB</emphasis>. Note that 1kB is equal to 1024
+            bytes, 1MB is equal to 1024kB, and so on.
         </para>
 
         <example id="zend.file.transfer.validators.filessize.example">
@@ -817,32 +823,32 @@ $upload->addValidator('FilesSize',
         <title>ImageSize Validator</title>
 
         <para>
-            The <code>ImageSize</code> validator checks the size of image files.
+            The <classname>ImageSize</classname> validator checks the size of image files.
             It supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>minheight</code>: Sets the minimum image height.
+                    <property>minheight</property>: Sets the minimum image height.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>maxheight</code>: Sets the maximum image height.
+                    <property>maxheight</property>: Sets the maximum image height.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>minwidth</code>: Sets the minimum image width.
+                    <property>minwidth</property>: Sets the minimum image width.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>maxwidth</code>: Sets the maximum image width.
+                    <property>maxwidth</property>: Sets the maximum image width.
                 </para>
             </listitem>
         </itemizedlist>
@@ -892,10 +898,11 @@ $upload->setImageWidth(array('minwidth' => 20, 'maxwidth' => 200));
         <title>IsCompressed Validator</title>
 
         <para>
-            The <code>IsCompressed</code> validator checks if a transferred file is a compressed
-            archive, such as zip or arc. This validator is based on the <code>MimeType</code>
-            validator and supports the same methods and options. You may also limit this validator
-            to particular compression types with the methods described there.
+            The <classname>IsCompressed</classname> validator checks if a transferred file is a
+            compressed archive, such as zip or arc. This validator is based on the
+            <classname>MimeType</classname> validator and supports the same methods and options.
+            You may also limit this validator to particular compression types with the methods
+            described there.
         </para>
 
         <example id="zend.file.transfer.validators.iscompressed.example">
@@ -929,10 +936,10 @@ $upload->addValidator('IsCompressed', false, 'zip');
         <title>IsImage Validator</title>
 
         <para>
-            The <code>IsImage</code> validator checks if a transferred file is a image file, such as
-            gif or jpeg. This validator is based on the <code>MimeType</code> validator and supports
-            the same methods and options. You can limit this validator to particular image types
-            with the methods described there.
+            The <classname>IsImage</classname> validator checks if a transferred file is a image
+            file, such as gif or jpeg. This validator is based on the
+            <classname>MimeType</classname> validator and supports the same methods and options.
+            You can limit this validator to particular image types with the methods described there.
         </para>
 
         <example id="zend.file.transfer.validators.isimage.example">
@@ -966,16 +973,16 @@ $upload->addValidator('IsImage', false, 'jpeg');
         <title>Hash Validator</title>
 
         <para>
-            The <code>Hash</code> validator checks the content of a transferred file by hashing it.
-            This validator uses the hash extension from <acronym>PHP</acronym>. It supports the
-            following options:
+            The <classname>Hash</classname> validator checks the content of a transferred file by
+            hashing it. This validator uses the hash extension from <acronym>PHP</acronym>. It
+            supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>*</code>: Takes any key or use a numeric array. Sets the hash to validate
-                    against.
+                    <property>*</property>: Takes any key or use a numeric array. Sets the hash to
+                    validate against.
                 </para>
 
                 <para>
@@ -986,7 +993,8 @@ $upload->addValidator('IsImage', false, 'jpeg');
 
             <listitem>
                 <para>
-                    <code>algorithm</code>: Sets the algorithm to use for hashing the content.
+                    <property>algorithm</property>: Sets the algorithm to use for hashing the
+                    content.
                 </para>
 
                 <para>
@@ -1030,15 +1038,15 @@ $upload->addValidator('Hash',
         <title>Md5 Validator</title>
 
         <para>
-            The <code>Md5</code> validator checks the content of a transferred file by hashing it.
-            This validator uses the hash extension for <acronym>PHP</acronym> with the md5
-            algorithm. It supports the following options:
+            The <classname>Md5</classname> validator checks the content of a transferred file by
+            hashing it. This validator uses the hash extension for <acronym>PHP</acronym> with the
+            md5 algorithm. It supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>*</code>: Takes any key or use a numeric array.
+                    <property>*</property>: Takes any key or use a numeric array.
                 </para>
 
                 <para>
@@ -1070,14 +1078,14 @@ $upload->addValidator('Md5',
         <title>MimeType Validator</title>
 
         <para>
-            The <code>MimeType</code> validator checks the <acronym>MIME</acronym> type of
+            The <classname>MimeType</classname> validator checks the <acronym>MIME</acronym> type of
             transferred files. It supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>*</code>: Sets any key or use a numeric array. Sets the
+                    <property>*</property>: Sets any key or use a numeric array. Sets the
                     <acronym>MIME</acronym> type to validate against.
                 </para>
 
@@ -1088,16 +1096,17 @@ $upload->addValidator('Md5',
 
             <listitem>
                 <para>
-                    <code>headerCheck</code>: If set to <constant>TRUE</constant> this option will
-                    check the <acronym>HTTP</acronym> Information for the file type when the
-                    <emphasis>fileInfo</emphasis> or <emphasis>mimeMagic</emphasis> extensions can
-                    not be found. The default value for this option is <constant>FALSE</constant>.
+                    <property>headerCheck</property>: If set to <constant>TRUE</constant> this
+                    option will check the <acronym>HTTP</acronym> Information for the file type when
+                    the <emphasis>fileInfo</emphasis> or <emphasis>mimeMagic</emphasis> extensions
+                    can not be found. The default value for this option is
+                    <constant>FALSE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>magicfile</code>: The magicfile to be used.
+                    <property>magicfile</property>: The magicfile to be used.
                 </para>
 
                 <para>
@@ -1165,17 +1174,18 @@ $upload->addValidator('MimeType',
 
         <note>
             <para>
-                This component will use the <code>fileinfo</code> extension if it is available. If
-                it's not, it will degrade to the <code>mime_content_type</code> function. And if the
-                function call fails it will use the <acronym>MIME</acronym> type which is given by
+                This component will use the <classname>FileInfo</classname> extension if it is
+                available. If it's not, it will degrade to the
+                <methodname>mime_content_type()</methodname> function. And if the function call
+                fails it will use the <acronym>MIME</acronym> type which is given by
                 <acronym>HTTP</acronym>.
             </para>
 
             <para>
                 You should be aware of possible security problems when you have whether
-                <code>fileinfo</code> nor <code>mime_content_type</code> available. The
-                <acronym>MIME</acronym> type given by <acronym>HTTP</acronym> is not secure and can
-                be easily manipulated.
+                <classname>FileInfo</classname> nor <methodname>mime_content_type()</methodname>
+                available. The <acronym>MIME</acronym> type given by <acronym>HTTP</acronym> is not
+                secure and can be easily manipulated.
             </para>
         </note>
     </sect2>
@@ -1184,15 +1194,15 @@ $upload->addValidator('MimeType',
         <title>NotExists Validator</title>
 
         <para>
-            The <code>NotExists</code> validator checks for the existence of the provided files. It
-            supports the following options:
+            The <classname>NotExists</classname> validator checks for the existence of the provided
+            files. It supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>*</code>: Set any key or use a numeric array. Checks whether the file
-                    exists in the given directory.
+                    <property>*</property>: Set any key or use a numeric array. Checks whether the
+                    file exists in the given directory.
                 </para>
             </listitem>
         </itemizedlist>
@@ -1234,15 +1244,15 @@ $upload->addValidator('NotExists', false,
         <title>Sha1 Validator</title>
 
         <para>
-            The <code>Sha1</code> validator checks the content of a transferred file by hashing it.
-            This validator uses the hash extension for <acronym>PHP</acronym> with the sha1
-            algorithm. It supports the following options:
+            The <classname>Sha1</classname> validator checks the content of a transferred file by
+            hashing it. This validator uses the hash extension for <acronym>PHP</acronym> with the
+            sha1 algorithm. It supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>*</code>: Takes any key or use a numeric array.
+                    <property>*</property>: Takes any key or use a numeric array.
                 </para>
 
                 <para>
@@ -1273,26 +1283,26 @@ $upload->addValidator('Sha1',
         <title>Size Validator</title>
 
         <para>
-            The <code>Size</code> validator checks for the size of a single file. It
+            The <classname>Size</classname> validator checks for the size of a single file. It
             supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>min</code>: Sets the minimum file size.
+                    <property>min</property>: Sets the minimum file size.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>max</code>: Sets the maximum file size.
+                    <property>max</property>: Sets the maximum file size.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>bytestring</code>: Defines whether a failure is returned with a
+                    <property>bytestring</property>: Defines whether a failure is returned with a
                     user-friendly number, or with the plain file size.
                 </para>
 
@@ -1305,19 +1315,20 @@ $upload->addValidator('Sha1',
 
         <para>
             You can initialize this validator with a string, which will then be used to set the
-            <code>max</code> option. You can also use the methods <methodname>setMin()</methodname>
-            and <methodname>setMax()</methodname> to set both options after construction, along with
-            <methodname>getMin()</methodname> and <methodname>getMax()</methodname> to retrieve the
-            values that have been set previously.
+            <property>max</property> option. You can also use the methods
+            <methodname>setMin()</methodname> and <methodname>setMax()</methodname> to set both
+            options after construction, along with <methodname>getMin()</methodname> and
+            <methodname>getMax()</methodname> to retrieve the values that have been set previously.
         </para>
 
         <para>
             The size itself is also accepted in SI notation as handled by most operating systems.
             That is, instead of specifying <emphasis>20000 bytes</emphasis>,
             <emphasis>20kB</emphasis> may be given. All file sizes are converted using 1024 as the
-            base value. The following Units are accepted: <code>kB</code>, <code>MB</code>,
-            <code>GB</code>, <code>TB</code>, <code>PB</code> and <code>EB</code>. Note that 1kB is
-            equal to 1024 bytes, 1MB is equal to 1024kB, and so on.
+            base value. The following Units are accepted: <emphasis>kB</emphasis>,
+            <emphasis>MB</emphasis>, <emphasis>GB</emphasis>, <emphasis>TB</emphasis>,
+            <emphasis>PB</emphasis> and <emphasis>EB</emphasis>. Note that 1kB is equal to 1024
+            bytes, 1MB is equal to 1024kB, and so on.
         </para>
 
         <example id="zend.file.transfer.validators.size.example">
@@ -1345,30 +1356,30 @@ $upload->addValidator('Size',
         <title>WordCount Validator</title>
 
         <para>
-            The <code>WordCount</code> validator checks for the number of words within provided
-            files. It supports the following option keys:
+            The <classname>WordCount</classname> validator checks for the number of words within
+            provided files. It supports the following option keys:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>min</code>: Sets the minimum number of words to be found.
+                    <property>min</property>: Sets the minimum number of words to be found.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>max</code>: Sets the maximum number of words to be found.
+                    <property>max</property>: Sets the maximum number of words to be found.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
             If you initiate this validator with a string or integer, the value will be used as
-            <code>max</code>. Or you can also use the methods <methodname>setMin()</methodname> and
-            <methodname>setMax()</methodname> to set both options afterwards and
-            <methodname>getMin()</methodname> and <methodname>getMax()</methodname> to retrieve the
-            actual set values.
+            <property>max</property>. Or you can also use the methods
+            <methodname>setMin()</methodname> and <methodname>setMax()</methodname> to set both
+            options afterwards and <methodname>getMin()</methodname> and
+            <methodname>getMax()</methodname> to retrieve the actual set values.
         </para>
 
         <example id="zend.file.transfer.validators.wordcount.example">

@@ -67,6 +67,7 @@ abstract class Zend_Translate_Adapter {
     /**
      * Array with all options, each adapter can have own additional options
      *   'clear'           => when true, clears already loaded data when adding new files
+     *   'content'         => content to translate or file or directory with content
      *   'disableNotices'  => when true, omits notices from being displayed
      *   'ignore'          => a prefix for files and directories which are not being added
      *   'locale'          => the actual set locale to use
@@ -80,6 +81,7 @@ abstract class Zend_Translate_Adapter {
      */
     protected $_options = array(
         'clear'           => false,
+        'content'         => null,
         'disableNotices'  => false,
         'ignore'          => '.',
         'locale'          => 'auto',
@@ -99,14 +101,14 @@ abstract class Zend_Translate_Adapter {
     /**
      * Generates the adapter
      *
-     * @param  string|array       $data    OPTIONAL Translation data or filename for this adapter
+     * @param  string|array       $content OPTIONAL Translation content or filename for this adapter
      * @param  string|Zend_Locale $locale  OPTIONAL Locale/Language to set, identical with Locale
      *                                     identifiers see Zend_Locale for more information
      * @param  array              $options OPTIONAL Options for the adaptor
      * @throws Zend_Translate_Exception
      * @return void
      */
-    public function __construct($data = null, $locale = null, array $options = array())
+    public function __construct($content = null, $locale = null, array $options = array())
     {
         if (isset(self::$_cache)) {
             $id = 'Zend_Translate_' . $this->toString() . '_Options';
@@ -123,8 +125,8 @@ abstract class Zend_Translate_Adapter {
         }
 
         $this->setOptions($options);
-        if ($data !== null) {
-            $this->addTranslation($data, $locale, $options);
+        if ($content !== null) {
+            $this->addTranslation($content, $locale, $options);
         }
 
         if ($this->getLocale() !== (string) $locale) {
@@ -178,9 +180,23 @@ abstract class Zend_Translate_Adapter {
                      new RecursiveDirectoryIterator($data, RecursiveDirectoryIterator::KEY_AS_PATHNAME),
                      RecursiveIteratorIterator::SELF_FIRST) as $directory => $info) {
                 $file = $info->getFilename();
-                if (strpos($directory, DIRECTORY_SEPARATOR . $options['ignore']) !== false) {
-                    // ignore files matching first characters from option 'ignore' and all files below
-                    continue;
+                if (is_array($options['ignore'])) {
+                    foreach ($options['ignore'] as $key => $ignore) {
+                        if (strpos($key, 'regex') !== false) {
+                            if (preg_match($ignore, $directory)) {
+                                // ignore files matching the given regex from option 'ignore' and all files below
+                                continue 2;
+                            }
+                        } else if (strpos($directory, DIRECTORY_SEPARATOR . $ignore) !== false) {
+                            // ignore files matching first characters from option 'ignore' and all files below
+                            continue 2;
+                        }
+                    }
+                } else {
+                    if (strpos($directory, DIRECTORY_SEPARATOR . $options['ignore']) !== false) {
+                        // ignore files matching first characters from option 'ignore' and all files below
+                        continue;
+                    }
                 }
 
                 if ($info->isDir()) {

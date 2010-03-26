@@ -102,7 +102,8 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             files will be ignored. Setting this value to <code>'tmp'</code> would
                             mean that directories and files like <code>'tmpImages'</code> and
                             <code>'tmpFiles'</code> would be ignored as well as all subsequent
-                            directories
+                            directories. This option also accepts an array which can be used when
+                            you want to ignore more than one prefix.
                         </entry>
 
                         <entry><emphasis>.</emphasis></entry>
@@ -621,6 +622,104 @@ $translate = new Zend_Translate(
 /languages/view-en_it.mo -> detects italian because '_' will be used before '-'
 /languages/view_en.it.mo -> detects italian because '.' will be used before '_'
 ]]></programlisting>
+            </sect4>
+        </sect3>
+
+        <sect3 id="zend.translate.additional.detection.ignore">
+            <title>Ignoring special files and directories</title>
+
+            <para>
+                Sometimes it is useful to exclude files or even directories from being added
+                automatically. Therefor you can use the <property>ignore</property> option which
+                accepts 3 possible usages.
+            </para>
+
+            <sect4 id="zend.translate.additional.detection.ignore.string">
+                <title>Ignore a special directory or file</title>
+
+                <para>
+                    Per default <classname>Zend_Translate</classname> is set to ignore all
+                    files and directories beginning with <emphasis>'/.'</emphasis>. This means that
+                    all <acronym>SVN</acronym> files will be ignored.
+                </para>
+
+                <para>
+                    You can set your own syntax by giving a string for the
+                    <property>ignore</property> option. The directory separator will be attached
+                    automatically and has to be omitted.
+                </para>
+
+                <programlisting><![CDATA[
+$options   = array('ignore' => 'test');
+$translate = new Zend_Translate($adapter, $content, $locale, $options);
+]]></programlisting>
+
+                <para>
+                    The above example will ignore all files and directories beginning with
+                    <emphasis>test</emphasis>. This means for example
+                    <filename>/test/en.mo</filename>, <filename>/testing/en.mo</filename> and
+                    <filename>/dir/test_en.mo</filename>. But it would still add
+                    <filename>/mytest/en.mo</filename> or <filename>/dir/atest.mo</filename>.
+                </para>
+
+                <note>
+                    <title>Prevent SVN files from being searched</title>
+
+                    <para>
+                        When you set this option, then the default <emphasis>'/.'</emphasis> will
+                        be erased. This means that <classname>Zend_Translate</classname> will then
+                        add all files from the hidden <acronym>SVN</acronym> directories. When you
+                        are working with <acronym>SVN</acronym>, then you should use the array
+                        syntax described in the next section.
+                    </para>
+                </note>
+            </sect4>
+
+            <sect4 id="zend.translate.additional.detection.ignore.array">
+                <title>Ignore several directories or files</title>
+
+                <para>
+                    You can also ignore several files and directories. Instead of a string,
+                    you can simply give an array with all wished names which will be ignored.
+                </para>
+
+                <programlisting><![CDATA[
+$options = array('ignore' => array('.', 'test', 'old'));
+$translate = new Zend_Translate($adapter, $content, $locale, $options);
+]]></programlisting>
+
+                <para>
+                    In the above case all 3 syntax will be ignored. But still they have to
+                    begin with the syntax to be detected and ignored.
+                </para>
+            </sect4>
+
+            <sect4 id="zend.translate.additional.detection.ignore.array">
+                <title>Ignore specific names</title>
+
+                <para>
+                    To ignore files and directories which are not beginning with a defined syntax
+                    but have a special syntax anywhere within their name you can use a regular
+                    expression.
+                </para>
+
+                <para>
+                    To use a regular expression the array key of the <property>ignore</property>
+                    option has to begin with <emphasis>regex</emphasis>.
+                </para>
+
+                <programlisting><![CDATA[
+$options = array('ignore' => array('regex' => '/test/u', 'regex_2' => '/deleted$/u'));
+$translate = new Zend_Translate($adapter, $content, $locale, $options);
+]]></programlisting>
+
+                <para>
+                    In the above case we defined 2 regular expressions. The files and directories
+                    will always being searched with all given regular expressions. In our example
+                    this means that any files which contains <emphasis>test</emphasis> anywhere in
+                    their name will be ignored. Additionally all files and directories which end
+                    with <emphasis>deleted</emphasis> will not be added as translation.
+                </para>
             </sect4>
         </sect3>
     </sect2>

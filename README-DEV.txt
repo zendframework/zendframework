@@ -13,7 +13,7 @@ First pass
 [X] Zend_Version
 [X] Zend_Loader
     [X] Including pluginloader, resource loader, etc.
-[ ] Zend_Registry
+[X] Zend_Registry
 [ ] Zend_Config
 [ ] Zend_Debug
 [ ] Zend_Log

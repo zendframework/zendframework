@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Loader;
+
+use Zend\Loader\Autoloader;
+
 /**
  * @category   Zend
  * @package    Zend_Loader
@@ -28,7 +32,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Loader
  */
-class Zend_Loader_AutoloaderMultiVersionTest extends PHPUnit_Framework_TestCase
+class AutoloaderMultiVersionTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -47,13 +51,13 @@ class Zend_Loader_AutoloaderMultiVersionTest extends PHPUnit_Framework_TestCase
         // Store original include_path
         $this->includePath = get_include_path();
 
-        Zend_Loader_Autoloader::resetInstance();
+        Autoloader::resetInstance();
         $this->path        = constant('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_PATH');
         $this->latest      = constant('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST');
         $this->latestMajor = constant('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST_MAJOR');
         $this->latestMinor = constant('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST_MINOR');
         $this->specific    = constant('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_SPECIFIC');
-        $this->autoloader  = Zend_Loader_Autoloader::getInstance();
+        $this->autoloader  = Autoloader::getInstance();
     }
 
     public function tearDown()
@@ -72,8 +76,8 @@ class Zend_Loader_AutoloaderMultiVersionTest extends PHPUnit_Framework_TestCase
         set_include_path($this->includePath);
 
         // Reset autoloader instance so it doesn't affect other tests
-        Zend_Loader_Autoloader::resetInstance();
-        Zend_Loader_Autoloader::getInstance();
+        Autoloader::resetInstance();
+        Autoloader::getInstance();
     }
 
     public function testZfPathIsNullByDefault()

@@ -20,27 +20,9 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Application_Module_AutoloaderTest::main');
-}
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Loader_Autoloader
- */
-
-/**
- * @see Zend_Application_Module_Autoloader
- */
-
-/**
- * @see Zend_Loader_Autoloader_Interface
- */
-
-/** Zend_Config */
+namespace ZendTest\Application\Module;
+use \Zend\Application\Module\Autoloader as ModuleAutoloader,
+    \Zend\Loader\Autoloader;
 
 /**
  * @category   Zend
@@ -50,14 +32,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
+class AutoloaderTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         // Store original autoloaders
@@ -71,13 +47,13 @@ class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
         // Store original include_path
         $this->includePath = get_include_path();
 
-        Zend_Loader_Autoloader::resetInstance();
-        $this->autoloader = Zend_Loader_Autoloader::getInstance();
+        Autoloader::resetInstance();
+        $this->autoloader = Autoloader::getInstance();
 
         // initialize 'error' member for tests that utilize error handling
         $this->error = null;
 
-        $this->loader = new Zend_Application_Module_Autoloader(array(
+        $this->loader = new ModuleAutoloader(array(
             'namespace' => 'FooBar',
             'basePath'  => realpath(dirname(__FILE__) . '/_files'),
         ));
@@ -99,7 +75,7 @@ class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
         set_include_path($this->includePath);
 
         // Reset autoloader instance so it doesn't affect other tests
-        Zend_Loader_Autoloader::resetInstance();
+        Autoloader::resetInstance();
     }
 
     public function testDbTableResourceTypeShouldBeLoadedByDefault()
@@ -183,8 +159,4 @@ class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals('model', $this->loader->getDefaultResourceType());
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_Module_AutoloaderTest::main') {
-    Zend_Application_Module_AutoloaderTest::main();
 }

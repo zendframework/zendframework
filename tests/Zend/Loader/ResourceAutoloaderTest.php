@@ -20,27 +20,9 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Loader_Autoloader_ResourceTest::main');
-}
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Loader_Autoloader
- */
-
-/**
- * @see Zend_Loader_Autoloader_Resource
- */
-
-/**
- * @see Zend_Loader_Autoloader_Interface
- */
-
-/** Zend_Config */
+namespace ZendTest\Loader;
+use \Zend\Loader\Autoloader,
+    \Zend\Loader\ResourceAutoloader;
 
 /**
  * @category   Zend
@@ -50,14 +32,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Loader
  */
-class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
+class ResourceAutoloaderTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         // Store original autoloaders
@@ -71,15 +47,15 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
         // Store original include_path
         $this->includePath = get_include_path();
 
-        Zend_Loader_Autoloader::resetInstance();
-        $this->autoloader = Zend_Loader_Autoloader::getInstance();
+        Autoloader::resetInstance();
+        $this->autoloader = Autoloader::getInstance();
 
         // initialize 'error' member for tests that utilize error handling
         $this->error = null;
 
-        $this->loader = new Zend_Loader_Autoloader_Resource(array(
+        $this->loader = new ResourceAutoloader(array(
             'namespace' => 'FooBar',
-            'basePath'  => realpath(dirname(__FILE__) . '/_files'),
+            'basePath'  => realpath(__DIR__ . '/_files/ResourceAutoloader'),
         ));
     }
 
@@ -99,37 +75,31 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
         set_include_path($this->includePath);
 
         // Reset autoloader instance so it doesn't affect other tests
-        Zend_Loader_Autoloader::resetInstance();
+        Autoloader::resetInstance();
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testAutoloaderInstantiationShouldRaiseExceptionWithoutNamespace()
     {
-        $loader = new Zend_Loader_Autoloader_Resource(array('basePath' => dirname(__FILE__)));
+        $this->setExpectedException('\\Zend\\Loader\\InvalidArgumentException');
+        $loader = new ResourceAutoloader(array('basePath' => __DIR__));
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testAutoloaderInstantiationShouldRaiseExceptionWithoutBasePath()
     {
-        $loader = new Zend_Loader_Autoloader_Resource(array('namespace' => 'Foo'));
+        $this->setExpectedException('\\Zend\\Loader\\InvalidArgumentException');
+        $loader = new ResourceAutoloader(array('namespace' => 'Foo'));
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testAutoloaderInstantiationShouldRaiseExceptionWhenInvalidOptionsTypeProvided()
     {
-        $loader = new Zend_Loader_Autoloader_Resource('foo');
+        $this->setExpectedException('\\Zend\\Loader\\InvalidArgumentException');
+        $loader = new ResourceAutoloader('foo');
     }
 
     public function testAutoloaderConstructorShouldAcceptZendConfigObject()
     {
-        $config = new Zend_Config(array('namespace' => 'Foo', 'basePath' => dirname(__FILE__)));
-        $loader = new Zend_Loader_Autoloader_Resource($config);
+        $config = new \Zend_Config(array('namespace' => 'Foo', 'basePath' => __DIR__));
+        $loader = new ResourceAutoloader($config);
     }
 
     public function testAutoloaderShouldAllowRetrievingNamespace()
@@ -139,7 +109,7 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
 
     public function testAutoloaderShouldAllowRetrievingBasePath()
     {
-        $this->assertEquals(realpath(dirname(__FILE__) . '/_files'), $this->loader->getBasePath());
+        $this->assertEquals(realpath(__DIR__ . '/_files/ResourceAutoloader'), $this->loader->getBasePath());
     }
 
     public function testNoResourceTypesShouldBeRegisteredByDefault()
@@ -149,19 +119,15 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(empty($resourceTypes));
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testInitialResourceTypeDefinitionShouldRequireNamespace()
     {
+        $this->setExpectedException('\\Zend\\Loader\\MissingResourceNamespaceException');
         $this->loader->addResourceType('foo', 'foo');
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testPassingNonStringPathWhenAddingResourceTypeShouldRaiseAnException()
     {
+        $this->setExpectedException('\\Zend\\Loader\\InvalidPathException');
         $this->loader->addResourceType('foo', array('foo'), 'Foo');
     }
 
@@ -170,7 +136,18 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
         $this->loader->addResourceType('models', 'models', 'Model');
         $resources = $this->loader->getResourceTypes();
         $this->assertTrue(array_key_exists('models', $resources));
-        $this->assertEquals($this->loader->getNamespace() . '_Model', $resources['models']['namespace']);
+        $this->assertEquals($this->loader->getNamespace() . '\\Model', $resources['models']['namespace']);
+        $this->assertContains('/models', $resources['models']['path']);
+    }
+
+    public function testAutoloaderShouldAllowAddingArbitraryResourceTypesUsingPrefixes()
+    {
+        $this->loader->setNamespace(null)
+                     ->setPrefix('FooBar');
+        $this->loader->addResourceType('models', 'models', 'Model');
+        $resources = $this->loader->getResourceTypes();
+        $this->assertTrue(array_key_exists('models', $resources));
+        $this->assertEquals($this->loader->getPrefix() . '_Model', $resources['models']['namespace']);
         $this->assertContains('/models', $resources['models']['path']);
     }
 
@@ -194,19 +171,28 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
         $this->assertContains('form', array_keys($resources));
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
+    public function testAutoloaderShouldSupportAddingMultipleResourceTypesAtOnceUsingPrefixes()
+    {
+        $this->loader->setNamespace(null)
+                     ->setPrefix('FooBar');
+        $this->loader->addResourceTypes(array(
+            'model' => array('path' => 'models', 'namespace' => 'Model'),
+            'form'  => array('path' => 'forms', 'namespace' => 'Form'),
+        ));
+        $resources = $this->loader->getResourceTypes();
+        $this->assertContains('model', array_keys($resources));
+        $this->assertContains('form', array_keys($resources));
+    }
+
     public function testAddingMultipleResourceTypesShouldRaiseExceptionWhenReceivingNonArrayItem()
     {
+        $this->setExpectedException('\\Zend\\Loader\\InvalidArgumentException', 'expects an array');
         $this->loader->addResourceTypes(array('foo' => 'bar'));
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testAddingMultipleResourceTypesShouldRaiseExceptionWhenMissingResourcePath()
     {
+        $this->setExpectedException('\\Zend\\Loader\\InvalidArgumentException', 'include a paths');
         $this->loader->addResourceTypes(array('model' => array('namespace' => 'Model')));
     }
 
@@ -270,19 +256,15 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
         $this->assertNull($this->loader->getDefaultResourceType());
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testLoadShouldRaiseExceptionWhenNotTypePassedAndNoDefaultSpecified()
     {
+        $this->setExpectedException('\\Zend\\Loader\\InvalidArgumentException', 'No resource type');
         $this->loader->load('Foo');
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testLoadShouldRaiseExceptionWhenResourceTypeDoesNotExist()
     {
+        $this->setExpectedException('\\Zend\\Loader\\InvalidArgumentException', 'Invalid resource type');
         $this->loader->load('Foo', 'model');
     }
 
@@ -292,7 +274,20 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
             'model' => array('path' => 'models', 'namespace' => 'Model'),
         ));
         $object = $this->loader->load('ZendLoaderAutoloaderResourceTest', 'model');
-        $this->assertTrue($object instanceof FooBar_Model_ZendLoaderAutoloaderResourceTest);
+        $this->assertTrue($object instanceof \FooBar\Model\ZendLoaderAutoloaderResourceTest);
+    }
+
+    public function testLoadShouldReturnObjectOfExpectedClassUsingPrefixes()
+    {
+        $loader = new ResourceAutoloader(array(
+            'prefix' => 'FooBar',
+            'basePath' => realpath(__DIR__ . '/_files/ResourceAutoloader'),
+        ));
+        $loader->addResourceTypes(array(
+            'model' => array('path' => 'models', 'namespace' => 'Model'),
+        ));
+        $object = $loader->load('ZendLoaderAutoloaderResourcePrefixTest', 'model');
+        $this->assertTrue($object instanceof \FooBar_Model_ZendLoaderAutoloaderResourcePrefixTest);
     }
 
     public function testSuccessiveCallsToLoadSameResourceShouldReturnSameObject()
@@ -301,60 +296,81 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
             'form' => array('path' => 'forms', 'namespace' => 'Form'),
         ));
         $object = $this->loader->load('ZendLoaderAutoloaderResourceTest', 'form');
-        $this->assertTrue($object instanceof FooBar_Form_ZendLoaderAutoloaderResourceTest);
+        $this->assertTrue($object instanceof \FooBar\Form\ZendLoaderAutoloaderResourceTest);
         $test   = $this->loader->load('ZendLoaderAutoloaderResourceTest', 'form');
         $this->assertSame($object, $test);
     }
 
     public function testAutoloadShouldAllowEmptyNamespacing()
     {
-        $loader = new Zend_Loader_Autoloader_Resource(array(
+        $loader = new ResourceAutoloader(array(
             'namespace' => '',
-            'basePath'  => realpath(dirname(__FILE__) . '/_files'),
+            'basePath'  => realpath(__DIR__ . '/_files/ResourceAutoloader'),
         ));
         $loader->addResourceTypes(array(
             'service' => array('path' => 'services', 'namespace' => 'Service'),
         ));
         $test = $loader->load('ZendLoaderAutoloaderResourceTest', 'service');
-        $this->assertTrue($test instanceof Service_ZendLoaderAutoloaderResourceTest);
+        $this->assertTrue($test instanceof \Service\ZendLoaderAutoloaderResourceTest);
     }
 
     public function testPassingClassOfDifferentNamespaceToAutoloadShouldReturnFalse()
     {
-        $this->assertFalse($this->loader->autoload('Foo_Bar_Baz'));
+        $this->assertFalse($this->loader->autoload('Foo\Bar\Baz'));
+    }
+
+    public function testPassingClassOfDifferentPrefixToAutoloadShouldReturnFalse()
+    {
+        $loader = new ResourceAutoloader(array(
+            'prefix'   => 'FooBar',
+            'basePath' => realpath(__DIR__ . '/_files/ResourceAutoloader'),
+        ));
+        $this->assertFalse($loader->autoload('Foo_Bar_Baz'));
     }
 
     public function testPassingClassWithoutBothComponentAndClassSegmentsToAutoloadShouldReturnFalse()
     {
-        $this->assertFalse($this->loader->autoload('FooBar_Baz'));
+        $this->assertFalse($this->loader->autoload('FooBar\Baz'));
+    }
+
+    public function testPassingPrefixedClassWithoutBothComponentAndClassSegmentsToAutoloadShouldReturnFalse()
+    {
+        $loader = new ResourceAutoloader(array(
+            'prefix'   => 'FooBar',
+            'basePath' => realpath(__DIR__ . '/_files/ResourceAutoloader'),
+        ));
+        $this->assertFalse($loader->autoload('FooBar_Baz'));
     }
 
     public function testPassingClassWithUnmatchedResourceTypeToAutoloadShouldReturnFalse()
     {
-        $this->assertFalse($this->loader->autoload('FooBar_Baz_Bat'));
+        $this->assertFalse($this->loader->autoload('FooBar\Baz\Bat'));
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
+    public function testPassingPrefixedClassWithUnmatchedResourceTypeToAutoloadShouldReturnFalse()
+    {
+        $loader = new ResourceAutoloader(array(
+            'prefix'   => 'FooBar',
+            'basePath' => realpath(__DIR__ . '/_files/ResourceAutoloader'),
+        ));
+        $this->assertFalse($loader->autoload('FooBar_Baz_Bat'));
+    }
+
     public function testMethodOverloadingShouldRaiseExceptionForNonGetterMethodCalls()
     {
+        $this->setExpectedException('\\Zend\\Loader\\BadMethodCallException');
         $this->loader->lalalalala();
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testMethodOverloadingShouldRaiseExceptionWhenRequestedResourceDoesNotExist()
     {
+        $this->setExpectedException('\\Zend\\Loader\\InvalidArgumentException', 'Invalid resource');
         $this->loader->getModel('Foo');
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testMethodOverloadingShouldRaiseExceptionWhenNoArgumentPassed()
     {
+        $this->setExpectedException('\\Zend\\Loader\\InvalidArgumentException', 'no resourc');
         $this->loader->addResourceTypes(array(
             'model' => array('path' => 'models', 'namespace' => 'Model'),
         ));
@@ -367,7 +383,7 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
             'model' => array('path' => 'models', 'namespace' => 'Model'),
         ));
         $test = $this->loader->getModel('ZendLoaderAutoloaderResourceMethodOverloading');
-        $this->assertTrue($test instanceof FooBar_Model_ZendLoaderAutoloaderResourceMethodOverloading);
+        $this->assertTrue($test instanceof \FooBar\Model\ZendLoaderAutoloaderResourceMethodOverloading);
     }
 
     /**
@@ -375,7 +391,11 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
      */
     public function testAutoloaderShouldReceiveNamespaceWithTrailingUnderscore()
     {
-        $al = Zend_Loader_Autoloader::getInstance();
+        $this->loader = new ResourceAutoloader(array(
+            'prefix'    => 'FooBar',
+            'basePath'  => realpath(__DIR__ . '/_files/ResourceAutoloader'),
+        ));
+        $al = Autoloader::getInstance();
         $loaders = $al->getPrefixAutoloaders('FooBar');
         $this->assertTrue(empty($loaders));
         $loaders = $al->getPrefixAutoloaders('FooBar_');
@@ -402,7 +422,7 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
         $this->loader->addResourceTypes(array(
             'model' => array('path' => 'models', 'namespace' => 'Model'),
         ));
-        $path = $this->loader->getClassPath('FooBar_Model_Class_Model');
+        $path = $this->loader->getClassPath('FooBar\Model\Class\Model');
         // if true we have // in path
         $this->assertFalse(strpos($path, '//'));
     }
@@ -411,16 +431,29 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
      * @group ZF-8364
      * @group ZF-6727
      */
-    public function testAuloaderResourceGetClassPathReturnFalse()
+    public function testAutoloaderResourceGetClassPathReturnFalse()
     {
         $this->loader->addResourceTypes(array(
             'model' => array('path' => 'models', 'namespace' => 'Model'),
         ));
-        $path = $this->loader->autoload('Something_Totally_Wrong');
+        $path = $this->loader->autoload('Something\\Totally\\Wrong');
         $this->assertFalse($path);
     }
-}
 
-if (PHPUnit_MAIN_METHOD == 'Zend_Loader_Autoloader_ResourceTest::main') {
-    Zend_Loader_Autoloader_ResourceTest::main();
+    /**
+     * @group ZF-8364
+     * @group ZF-6727
+     */
+    public function testAutoloaderResourceGetClassPathReturnFalseForPrefixedClass()
+    {
+        $loader = new ResourceAutoloader(array(
+            'prefix'   => 'FooBar',
+            'basePath' => realpath(__DIR__ . '/_files/ResourceAutoloader'),
+        ));
+        $loader->addResourceTypes(array(
+            'model' => array('path' => 'models', 'namespace' => 'Model'),
+        ));
+        $path = $loader->autoload('Something_Totally_Wrong');
+        $this->assertFalse($path);
+    }
 }

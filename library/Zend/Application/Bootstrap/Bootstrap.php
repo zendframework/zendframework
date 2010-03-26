@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+use \Zend\Loader\ResourceAutoloader;
+use \Zend\Application\Module\Autoloader as ModuleAutoloader;
+
 /**
  * Concrete base class for bootstrap classes
  *
@@ -108,7 +111,7 @@ class Zend_Application_Bootstrap_Bootstrap
      * @param  Zend_Loader_Autoloader_Resource $loader
      * @return Zend_Application_Module_Bootstrap
      */
-    public function setResourceLoader(Zend_Loader_Autoloader_Resource $loader)
+    public function setResourceLoader(ResourceAutoloader $loader)
     {
         $this->_resourceLoader = $loader;
         return $this;
@@ -126,7 +129,7 @@ class Zend_Application_Bootstrap_Bootstrap
         ) {
             $r    = new ReflectionClass($this);
             $path = $r->getFileName();
-            $this->setResourceLoader(new Zend_Application_Module_Autoloader(array(
+            $this->setResourceLoader(new ModuleAutoloader(array(
                 'namespace' => $namespace,
                 'basePath'  => dirname($path),
             )));

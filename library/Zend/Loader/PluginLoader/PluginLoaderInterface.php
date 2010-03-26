@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Loader\PluginLoader;
+
+/**
  * Plugin class loader interface
  *
  * @category   Zend
@@ -29,14 +34,14 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Loader_PluginLoader_Interface
+interface PluginLoaderInterface
 {
     /**
      * Add prefixed paths to the registry of paths
      *
      * @param string $prefix
      * @param string $path
-     * @return Zend_Loader_PluginLoader
+     * @return \Zend\Loader\PluginLoader\PluginLoaderInterface
      */
     public function addPrefixPath($prefix, $path);
 
@@ -45,7 +50,7 @@ interface Zend_Loader_PluginLoader_Interface
      *
      * @param string $prefix
      * @param string $path OPTIONAL
-     * @return Zend_Loader_PluginLoader
+     * @return \Zend\Loader\PluginLoader\PluginLoaderInterface
      */
     public function removePrefixPath($prefix, $path = null);
 
@@ -53,7 +58,7 @@ interface Zend_Loader_PluginLoader_Interface
      * Whether or not a Helper by a specific name
      *
      * @param string $name
-     * @return Zend_Loader_PluginLoader
+     * @return \Zend\Loader\PluginLoader\PluginLoaderInterface
      */
     public function isLoaded($name);
 

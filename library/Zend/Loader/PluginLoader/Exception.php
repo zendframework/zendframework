@@ -21,15 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Loader\PluginLoader;
+
+/**
  * Plugin class loader exceptions
  *
- * @uses       Zend_Loader_Exception
+ * @uses       \Zend\Loader\Exception
  * @category   Zend
  * @package    Zend_Loader
  * @subpackage PluginLoader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Loader_PluginLoader_Exception extends Zend_Loader_Exception
+class Exception extends \DomainException implements \Zend\Loader\Exception
 {
 }

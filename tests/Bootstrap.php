@@ -50,7 +50,7 @@ set_include_path(implode(PATH_SEPARATOR, $path));
  * Setup autoloading
  */
 require_once 'Zend/Loader/Autoloader.php';
-$autoloader = Zend_Loader_Autoloader::getInstance();
+$autoloader = \Zend\Loader\Autoloader::getInstance();
 $autoloader->registerPrefix('PHPUnit_');
 
 

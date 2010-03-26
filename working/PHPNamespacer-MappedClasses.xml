@@ -8035,26 +8035,26 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader/Autoloader/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Loader_Autoloader_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Loader/Autoloader/AutoloaderInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Loader\Autoloader</newNamespace>
+      <newRelativeFilePath>Zend/Loader/AutoloaderInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\Loader</newNamespace>
       <newClassName>AutoloaderInterface</newClassName>
-      <newFullyQualifiedName>Zend\Loader\Autoloader\AutoloaderInterface</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Loader\AutoloaderInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader/Autoloader/Resource.php</originalRelativeFilePath>
       <originalClassName>Zend_Loader_Autoloader_Resource</originalClassName>
-      <newRelativeFilePath>Zend/Loader/Autoloader/Resource.php</newRelativeFilePath>
-      <newNamespace>Zend\Loader\Autoloader</newNamespace>
-      <newClassName>Resource</newClassName>
-      <newFullyQualifiedName>Zend\Loader\Autoloader\Resource</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Loader/ResourceAutoloader.php</newRelativeFilePath>
+      <newNamespace>Zend\Loader</newNamespace>
+      <newClassName>ResourceAutoloader</newClassName>
+      <newFullyQualifiedName>Zend\Loader\ResourceAutoloader</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader/Autoloader.php</originalRelativeFilePath>
       <originalClassName>Zend_Loader_Autoloader</originalClassName>
-      <newRelativeFilePath>Zend/Loader/Autoloader/Autoloader.php</newRelativeFilePath>
-      <newNamespace>Zend\Loader\Autoloader</newNamespace>
+      <newRelativeFilePath>Zend/Loader/Autoloader.php</newRelativeFilePath>
+      <newNamespace>Zend\Loader</newNamespace>
       <newClassName>Autoloader</newClassName>
-      <newFullyQualifiedName>Zend\Loader\Autoloader\Autoloader</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Loader\Autoloader</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader/Exception.php</originalRelativeFilePath>
@@ -8091,10 +8091,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader.php</originalRelativeFilePath>
       <originalClassName>Zend_Loader</originalClassName>
-      <newRelativeFilePath>Zend/Loader/Loader.php</newRelativeFilePath>
-      <newNamespace>Zend\Loader</newNamespace>
+      <newRelativeFilePath>Zend/Loader.php</newRelativeFilePath>
+      <newNamespace>Zend</newNamespace>
       <newClassName>Loader</newClassName>
-      <newFullyQualifiedName>Zend\Loader\Loader</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Loader</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Locale/Data/Translation.php</originalRelativeFilePath>

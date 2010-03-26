@@ -21,19 +21,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Loader\PluginLoader;
+
+/**
  * Generic plugin class loader
  *
  * @uses       ReflectionClass
- * @uses       Zend_Loader
- * @uses       Zend_Loader_PluginLoader_Exception
- * @uses       Zend_Loader_PluginLoader_Interface
+ * @uses       \Zend\Loader
+ * @uses       \Zend\Loader\PluginLoader\Exception
+ * @uses       \Zend\Loader\PluginLoader\PluginLoaderInterface
  * @category   Zend
  * @package    Zend_Loader
  * @subpackage PluginLoader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
+class PluginLoader implements PluginLoaderInterface
 {
     /**
      * Class map cache file
@@ -138,12 +143,12 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
      *
      * @param string $prefix
      * @param string $path
-     * @return Zend_Loader_PluginLoader
+     * @return \Zend\Loader\PluginLoader\PluginLoader
      */
     public function addPrefixPath($prefix, $path)
     {
         if (!is_string($prefix) || !is_string($path)) {
-            throw new Zend_Loader_PluginLoader_Exception('Zend_Loader_PluginLoader::addPrefixPath() method only takes strings for prefix and path.');
+            throw new Exception('Zend\\Loader\\PluginLoader::addPrefixPath() method only takes strings for prefix and path.');
         }
 
         $prefix = $this->_formatPrefix($prefix);
@@ -235,7 +240,7 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
      *
      * @param string $prefix
      * @param string $path OPTIONAL
-     * @return Zend_Loader_PluginLoader
+     * @return \Zend\Loader\PluginLoader\PluginLoader
      */
     public function removePrefixPath($prefix, $path = null)
     {
@@ -247,13 +252,13 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
         }
 
         if (!isset($registry[$prefix])) {
-            throw new Zend_Loader_PluginLoader_Exception('Prefix ' . $prefix . ' was not found in the PluginLoader.');
+            throw new Exception('Prefix ' . $prefix . ' was not found in the PluginLoader.');
         }
 
         if ($path != null) {
             $pos = array_search($path, $registry[$prefix]);
-            if ($pos === null) {
-                throw new Zend_Loader_PluginLoader_Exception('Prefix ' . $prefix . ' / Path ' . $path . ' was not found in the PluginLoader.');
+            if (in_array($pos, array(null, false))) {
+                throw new Exception('Prefix ' . $prefix . ' / Path ' . $path . ' was not found in the PluginLoader.');
             }
             unset($registry[$prefix][$pos]);
         } else {
@@ -278,7 +283,7 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
      * Whether or not a Plugin by a specific name is loaded
      *
      * @param string $name
-     * @return Zend_Loader_PluginLoader
+     * @return \Zend\Loader\PluginLoader\PluginLoader
      */
     public function isLoaded($name)
     {
@@ -329,7 +334,7 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
 
         if ($this->isLoaded($name)) {
             $class = $this->getClassName($name);
-            $r     = new ReflectionClass($class);
+            $r     = new \ReflectionClass($class);
             $path  = $r->getFileName();
             if ($this->_useStaticRegistry) {
                 self::$_staticLoadedPluginPaths[$this->_useStaticRegistry][$name] = $path;
@@ -350,7 +355,7 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
      * class is not resolved
      * @return string|false Class name of loaded class; false if $throwExceptions
      * if false and no class found
-     * @throws Zend_Loader_Exception if class not found
+     * @throws \Zend\Loader\Exception if class not found
      */
     public function load($name, $throwExceptions = true)
     {
@@ -381,7 +386,7 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
 
             foreach ($paths as $path) {
                 $loadFile = $path . $classFile;
-                if (Zend_Loader::isReadable($loadFile)) {
+                if (\Zend\Loader::isReadable($loadFile)) {
                     include_once $loadFile;
                     if (class_exists($className, false)) {
                         if (null !== $incFile) {
@@ -403,7 +408,7 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
             foreach ($registry as $prefix => $paths) {
                 $message .= "\n$prefix: " . implode(PATH_SEPARATOR, $paths);
             }
-            throw new Zend_Loader_PluginLoader_Exception($message);
+            throw new Exception($message);
        }
 
         if ($this->_useStaticRegistry) {
@@ -422,7 +427,7 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
      *
      * @param  string $file
      * @return void
-     * @throws Zend_Loader_PluginLoader_Exception if file is not writeable or path does not exist
+     * @throws \Zend\Loader\PluginLoader\Exception if file is not writeable or path does not exist
      */
     public static function setIncludeFileCache($file)
     {
@@ -432,13 +437,13 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
         }
 
         if (!file_exists($file) && !file_exists(dirname($file))) {
-            throw new Zend_Loader_PluginLoader_Exception('Specified file does not exist and/or directory does not exist (' . $file . ')');
+            throw new Exception('Specified file does not exist and/or directory does not exist (' . $file . ')');
         }
         if (file_exists($file) && !is_writable($file)) {
-            throw new Zend_Loader_PluginLoader_Exception('Specified file is not writeable (' . $file . ')');
+            throw new Exception('Specified file is not writeable (' . $file . ')');
         }
         if (!file_exists($file) && file_exists(dirname($file)) && !is_writable(dirname($file))) {
-            throw new Zend_Loader_PluginLoader_Exception('Specified file is not writeable (' . $file . ')');
+            throw new Exception('Specified file is not writeable (' . $file . ')');
         }
 
         self::$_includeFileCache = $file;

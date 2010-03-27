@@ -8187,10 +8187,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Log/Filter/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Log_Filter_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Log/Filter/FilterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Log\Filter</newNamespace>
-      <newClassName>FilterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Log\Filter\FilterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Log/Filter.php</newRelativeFilePath>
+      <newNamespace>Zend\Log</newNamespace>
+      <newClassName>Filter</newClassName>
+      <newFullyQualifiedName>Zend\Log\Filter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Log/Filter/Message.php</originalRelativeFilePath>
@@ -8211,10 +8211,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Log/Filter/Suppress.php</originalRelativeFilePath>
       <originalClassName>Zend_Log_Filter_Suppress</originalClassName>
-      <newRelativeFilePath>Zend/Log/Filter/Suppress.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Log/Filter/SuppressFilter.php</newRelativeFilePath>
       <newNamespace>Zend\Log\Filter</newNamespace>
-      <newClassName>Suppress</newClassName>
-      <newFullyQualifiedName>Zend\Log\Filter\Suppress</newFullyQualifiedName>
+      <newClassName>SuppressFilter</newClassName>
+      <newFullyQualifiedName>Zend\Log\Filter\SuppressFilter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Log/Formatter/Firebug.php</originalRelativeFilePath>
@@ -8227,10 +8227,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Log/Formatter/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Log_Formatter_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Log/Formatter/FormatterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Log\Formatter</newNamespace>
-      <newClassName>FormatterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Log\Formatter\FormatterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Log/Formatter.php</newRelativeFilePath>
+      <newNamespace>Zend\Log</newNamespace>
+      <newClassName>Formatter</newClassName>
+      <newFullyQualifiedName>Zend\Log\Formatter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Log/Formatter/Simple.php</originalRelativeFilePath>
@@ -8323,10 +8323,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Log.php</originalRelativeFilePath>
       <originalClassName>Zend_Log</originalClassName>
-      <newRelativeFilePath>Zend/Log/Log.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Log/Logger.php</newRelativeFilePath>
       <newNamespace>Zend\Log</newNamespace>
-      <newClassName>Log</newClassName>
-      <newFullyQualifiedName>Zend\Log\Log</newFullyQualifiedName>
+      <newClassName>Logger</newClassName>
+      <newFullyQualifiedName>Zend\Log\Logger</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Exception.php</originalRelativeFilePath>

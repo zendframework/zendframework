@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Formatter
+ * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,32 +23,41 @@
 /**
  * @namespace
  */
-namespace Zend\Log\Formatter;
-use \Zend\Log\Formatter;
+namespace Zend\Log\Filter;
+use Zend\Log\Factory,
+    Zend\Log\Filter;
 
 /**
- * @uses       \Zend\Log\Formatter\FormatterInterface
+ * @uses       \Zend\Log\Exception
+ * @uses       \Zend\Log\Filter\FilterInterface
+ * @uses       \Zend\Log\FactoryInterface
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Formatter
+ * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
-class Firebug implements Formatter
+abstract class AbstractFilter 
+    implements Filter, Factory
 {
     /**
-     * This method formats the event for the firebug writer.
-     *
-     * The default is to just send the message parameter, but through
-     * extension of this class and calling the
-     * {@see Zend_Log_Writer_Firebug::setFormatter()} method you can
-     * pass as much of the event data as you are interested in.
-     *
-     * @param  array    $event    event data
-     * @return mixed              event message
+     * Validate and optionally convert the config to array
+     * 
+     * @param  array|\Zend\Config\Config $config \Zend\Config\Config or Array
+     * @return array
+     * @throws \Zend\Log\Exception
      */
-    public function format($event)
+    static protected function _parseConfig($config)
     {
-        return $event['message'];
+        if ($config instanceof \Zend\Config\Config) {
+            $config = $config->toArray();
+        }
+
+        if (!is_array($config)) {
+            throw new \Zend\Log\Exception('Configuration must be an array or instance of Zend\\Config\\Config');
+        }
+
+        return $config;
     }
 }

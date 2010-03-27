@@ -21,8 +21,14 @@
  */
 
 /**
- * @uses       Zend_Log_Exception
- * @uses       Zend_Log_Writer_Abstract
+ * @namespace
+ */
+namespace Zend\Log\Writer;
+use Zend\Log;
+
+/**
+ * @uses       \Zend\Log\Exception
+ * @uses       \Zend\Log\Writer\AbstractWriter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
@@ -30,7 +36,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Log_Writer_Db extends Zend_Log_Writer_Abstract
+class Db extends AbstractWriter
 {
     /**
      * Database adapter instance
@@ -60,19 +66,19 @@ class Zend_Log_Writer_Db extends Zend_Log_Writer_Abstract
      */
     public function __construct($db, $table, $columnMap = null)
     {
-        $this->_db    = $db;
-        $this->_table = $table;
+        $this->_db        = $db;
+        $this->_table     = $table;
         $this->_columnMap = $columnMap;
     }
 
     /**
      * Create a new instance of Zend_Log_Writer_Db
      * 
-     * @param  array|Zend_Config $config
-     * @return Zend_Log_Writer_Db
-     * @throws Zend_Log_Exception
+     * @param  array|\Zend\Config\Config $config
+     * @return \Zend\Log\Writer\Db
+     * @throws \Zend\Log\Exception
      */
-    static public function factory($config)
+    static public function factory($config = array())
     {
         $config = self::_parseConfig($config);
         $config = array_merge(array(
@@ -97,7 +103,7 @@ class Zend_Log_Writer_Db extends Zend_Log_Writer_Abstract
      */
     public function setFormatter($formatter)
     {
-        throw new Zend_Log_Exception(get_class() . ' does not support formatting');
+        throw new Log\Exception(get_class() . ' does not support formatting');
     }
 
     /**
@@ -119,7 +125,7 @@ class Zend_Log_Writer_Db extends Zend_Log_Writer_Abstract
     protected function _write($event)
     {
         if ($this->_db === null) {
-            throw new Zend_Log_Exception('Database adapter is null');
+            throw new Log\Exception('Database adapter is null');
         }
 
         if ($this->_columnMap === null) {

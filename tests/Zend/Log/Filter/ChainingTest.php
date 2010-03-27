@@ -20,9 +20,10 @@
  * @version    $Id$
  */
 
-/** PHPUnit_Framework_TestCase */
+namespace ZendTest\Log\Filter;
 
-/** Zend_Log */
+use \Zend\Log\Logger,
+    \Zend\Log\Writer;
 
 /**
  * @category   Zend
@@ -32,13 +33,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Filter_ChainingTest extends PHPUnit_Framework_TestCase
+class ChainingTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
         $this->log = fopen('php://memory', 'w');
-        $this->logger = new Zend_Log();
-        $this->logger->addWriter(new Zend_Log_Writer_Stream($this->log));
+        $this->logger = new Logger();
+        $this->logger->addWriter(new Writer\Stream($this->log));
     }
 
     public function tearDown()
@@ -49,7 +50,7 @@ class Zend_Log_Filter_ChainingTest extends PHPUnit_Framework_TestCase
     public function testFilterAllWriters()
     {
         // filter out anything above a WARNing for all writers
-        $this->logger->addFilter(Zend_Log::WARN);
+        $this->logger->addFilter(Logger::WARN);
 
         $this->logger->info($ignored = 'info-message-ignored');
         $this->logger->warn($logged  = 'warn-message-logged');
@@ -64,8 +65,8 @@ class Zend_Log_Filter_ChainingTest extends PHPUnit_Framework_TestCase
     public function testFilterOnSpecificWriter()
     {
         $log2 = fopen('php://memory', 'w');
-        $writer2 = new Zend_Log_Writer_Stream($log2);
-        $writer2->addFilter(Zend_Log::ERR);
+        $writer2 = new Writer\Stream($log2);
+        $writer2->addFilter(Logger::ERR);
 
         $this->logger->addWriter($writer2);
 
@@ -82,5 +83,4 @@ class Zend_Log_Filter_ChainingTest extends PHPUnit_Framework_TestCase
         $this->assertContains($err, $logdata);
         $this->assertNotContains($warn, $logdata);
     }
-
 }

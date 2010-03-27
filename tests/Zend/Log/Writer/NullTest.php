@@ -20,9 +20,10 @@
  * @version    $Id$
  */
 
-/** PHPUnit_Framework_TestCase */
+namespace ZendTest\Log\Writer;
 
-/** Zend_Log_Writer_Null */
+use \Zend\Log\Writer\Null as NullWriter,
+    \Zend\Log\Logger;
 
 /**
  * @category   Zend
@@ -32,11 +33,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Writer_NullTest extends PHPUnit_Framework_TestCase
+class NullTest extends \PHPUnit_Framework_TestCase
 {
     public function testWrite()
     {
-        $writer = new Zend_Log_Writer_Null();
+        $writer = new NullWriter();
         $writer->write(array('message' => 'foo', 'priority' => 42));
     }
 
@@ -46,7 +47,7 @@ class Zend_Log_Writer_NullTest extends PHPUnit_Framework_TestCase
             'writerName' => "Null"
         )));
 
-        $logger = Zend_Log::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Zend_Log);
+        $logger = Logger::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Logger);
     }
 }

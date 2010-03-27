@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Log;
 
-/** Zend_Log */
-
-/** Zend_Log_Writer_Mock */
-
-/** Zend_Log_Writer_Stream */
+use \Zend\Log\Logger,
+    \Zend\Log;
 
 /**
  * @category   Zend
@@ -35,20 +33,20 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
+class LoggerTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
         $this->log = fopen('php://memory', 'w+');
-        $this->writer = new Zend_Log_Writer_Stream($this->log);
+        $this->writer = new Log\Writer\Stream($this->log);
     }
 
     // Writers
 
     public function testWriterCanBeAddedWithConstructor()
     {
-        $logger = new Zend_Log($this->writer);
-        $logger->log($message = 'message-to-log', Zend_Log::INFO);
+        $logger = new Logger($this->writer);
+        $logger->log($message = 'message-to-log', Logger::INFO);
 
         rewind($this->log);
         $this->assertContains($message, stream_get_contents($this->log));
@@ -56,9 +54,9 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
 
     public function testAddWriter()
     {
-        $logger = new Zend_Log();
+        $logger = new Logger();
         $logger->addWriter($this->writer);
-        $logger->log($message = 'message-to-log', Zend_Log::INFO);
+        $logger->log($message = 'message-to-log', Logger::INFO);
 
         rewind($this->log);
         $this->assertContains($message, stream_get_contents($this->log));
@@ -66,20 +64,20 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
 
     public function testAddWriterAddsMultipleWriters()
     {
-        $logger = new Zend_Log();
+        $logger = new Logger();
 
         // create writers for two separate streams of temporary memory
         $log1    = fopen('php://memory', 'w+');
-        $writer1 = new Zend_Log_Writer_Stream($log1);
+        $writer1 = new Log\Writer\Stream($log1);
         $log2    = fopen('php://memory', 'w+');
-        $writer2 = new Zend_Log_Writer_Stream($log2);
+        $writer2 = new Log\Writer\Stream($log2);
 
         // add the writers
         $logger->addWriter($writer1);
         $logger->addWriter($writer2);
 
         // log to both writers
-        $logger->log($message = 'message-sent-to-both-logs', Zend_Log::INFO);
+        $logger->log($message = 'message-sent-to-both-logs', Logger::INFO);
 
         // verify both writers were called by the logger
         rewind($log1);
@@ -95,21 +93,17 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
 
     public function testLoggerThrowsWhenNoWriters()
     {
-        $logger = new Zend_Log();
-        try {
-            $logger->log('message', Zend_Log::INFO);
-            $this->fail();
-        } catch (Zend_Log_Exception $e) {
-            $this->assertRegexp('/no writer/i', $e->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Log\\Exception', 'No writers');
+        $logger = new Logger();
+        $logger->log('message', Logger::INFO);
     }
 
     public function testDestructorCallsShutdownOnEachWriter()
     {
-        $writer1 = new Zend_Log_Writer_Mock();
-        $writer2 = new Zend_Log_Writer_Mock();
+        $writer1 = new Log\Writer\Mock();
+        $writer2 = new Log\Writer\Mock();
 
-        $logger = new Zend_Log();
+        $logger = new Logger();
         $logger->addWriter($writer1);
         $logger->addWriter($writer2);
 
@@ -126,44 +120,30 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
 
     public function testLogThrowsOnBadLogPriority()
     {
-        $logger = new Zend_Log($this->writer);
-        try {
-            $logger->log('foo', 42);
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertType('Zend_Log_Exception', $e);
-            $this->assertRegExp('/bad log priority/i', $e->getMessage());
-        }
+        $logger = new Logger($this->writer);
+
+        $this->setExpectedException('\\Zend\\Log\\Exception', 'Bad log priority');
+        $logger->log('foo', 42);
     }
 
     public function testLogThrough__callThrowsOnBadLogPriority()
     {
-        $logger = new Zend_Log($this->writer);
-        try {
-            $logger->nonexistantPriority('');
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertType('Zend_Log_Exception', $e);
-            $this->assertRegExp('/bad log priority/i', $e->getMessage());
-        }
+        $logger = new Logger($this->writer);
+
+        $this->setExpectedException('\\Zend\\Log\\Exception', 'Bad log priority');
+        $logger->nonexistantPriority('');
     }
 
     public function testAddingPriorityThrowsWhenOverridingBuiltinLogPriority()
     {
-        try {
-            $logger = new Zend_Log($this->writer);
-            $logger->addPriority('BOB', 0);
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertType('Zend_Log_Exception', $e);
-            $this->assertRegExp('/existing priorities/i', $e->getMessage());
-        }
-
+        $this->setExpectedException('\\Zend\\Log\\Exception', 'Existing priorities');
+        $logger = new Logger($this->writer);
+        $logger->addPriority('BOB', 0);
     }
 
     public function testAddLogPriority()
     {
-        $logger = new Zend_Log($this->writer);
+        $logger = new Logger($this->writer);
         $logger->addPriority('EIGHT', $priority = 8);
 
         $logger->eight($message = 'eight message');
@@ -176,8 +156,9 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
 
     // Fields
 
-    public function testLogWritesStandardFields() {
-        $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
+    public function testLogWritesStandardFields() 
+    {
+        $logger = new Logger($mock = new Log\Writer\Mock);
         $logger->info('foo');
 
         $this->assertEquals(1, count($mock->events));
@@ -187,8 +168,9 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(), array_diff_key($event, $standardFields));
     }
 
-    public function testLogWritesAndOverwritesExtraFields() {
-        $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
+    public function testLogWritesAndOverwritesExtraFields() 
+    {
+        $logger = new Logger($mock = new Log\Writer\Mock);
         $logger->setEventItem('foo', 42);
         $logger->setEventItem($field = 'bar', $value = 43);
         $logger->info('foo');
@@ -205,7 +187,7 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
      */
     public function testLogAcceptsExtrasParameterAsArrayAndPushesIntoEvent()
     {
-        $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
+        $logger = new Logger($mock = new Log\Writer\Mock);
         $logger->info('foo', array('content' => 'nonesuch'));
         $event = array_shift($mock->events);
         $this->assertContains('content', array_keys($event));
@@ -217,7 +199,7 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
      */
     public function testLogNumericKeysInExtrasArrayArePassedToInfoKeyOfEvent()
     {
-        $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
+        $logger = new Logger($mock = new Log\Writer\Mock);
         $logger->info('foo', array('content' => 'nonesuch', 'bar'));
         $event = array_shift($mock->events);
         $this->assertContains('content', array_keys($event));
@@ -230,7 +212,7 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
      */
     public function testLogAcceptsExtrasParameterAsScalarAndAddsAsInfoKeyToEvent()
     {
-        $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
+        $logger = new Logger($mock = new Log\Writer\Mock);
         $logger->info('foo', 'nonesuch');
         $event = array_shift($mock->events);
         $this->assertContains('info', array_keys($event));
@@ -244,44 +226,44 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
     {
         $cfg = array('log' => array('memory' => array(
             'writerName'      => "Stream",
-            'writerNamespace' => "Zend_Log_Writer",
+            'writerNamespace' => "\\Zend\\Log\\Writer",
             'writerParams'    => array(
                 'stream'      => "php://memory"
             )
         )));
 
-        $logger = Zend_Log::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Zend_Log);
+        $logger = Logger::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Logger);
     }
 
     public function testLogConstructFromConfigStreamAndFilter()
     {
         $cfg = array('log' => array('memory' => array(
             'writerName'      => "Stream",
-            'writerNamespace' => "Zend_Log_Writer",
+            'writerNamespace' => "\\Zend\\Log\\Writer",
             'writerParams'    => array(
                 'stream'      => "php://memory"
             ),
             'filterName'   => "Priority",
             'filterParams' => array(
-                'priority' => "Zend_Log::CRIT",
+                'priority' => "\\Zend\\Log\\Logger::CRIT",
                 'operator' => "<="
              ),
         )));
 
-        $logger = Zend_Log::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Zend_Log);
+        $logger = Logger::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Logger);
     }
 
     public function testFactoryUsesNameAndNamespaceWithoutModifications()
     {
         $cfg = array('log' => array('memory' => array(
             'writerName'      => "ZendMonitor",
-            'writerNamespace' => "Zend_Log_Writer",
+            'writerNamespace' => "\\Zend\\Log\\Writer",
         )));
 
-        $logger = Zend_Log::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Zend_Log);
+        $logger = Logger::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Logger);
     }
 
     /**
@@ -289,9 +271,9 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
      */
     public function testUsingWithErrorHandler()
     {
-        $writer = new Zend_Log_Writer_Mock();
+        $writer = new Log\Writer\Mock();
 
-        $logger = new Zend_Log();
+        $logger = new Logger();
         $logger->addWriter($writer);
         $this->errWriter = $writer;
         

@@ -21,31 +21,37 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Log\Writer;
+use Zend\Log;
+
+/**
  * Writes log messages to syslog
  *
- * @uses       Zend_Log
- * @uses       Zend_Log_Writer_Abstract
+ * @uses       \Zend\Log\Log
+ * @uses       \Zend\Log\Writer\AbstractWriter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Log_Writer_Syslog extends Zend_Log_Writer_Abstract
+class Syslog extends AbstractWriter
 {
     /**
      * Maps Zend_Log priorities to PHP's syslog priorities
      * @var array
      */
     protected $_priorities = array(
-        Zend_Log::EMERG  => LOG_EMERG,
-        Zend_Log::ALERT  => LOG_ALERT,
-        Zend_Log::CRIT   => LOG_CRIT,
-        Zend_Log::ERR    => LOG_ERR,
-        Zend_Log::WARN   => LOG_WARNING,
-        Zend_Log::NOTICE => LOG_NOTICE,
-        Zend_Log::INFO   => LOG_INFO,
-        Zend_Log::DEBUG  => LOG_DEBUG,
+        Log\Logger::EMERG  => LOG_EMERG,
+        Log\Logger::ALERT  => LOG_ALERT,
+        Log\Logger::CRIT   => LOG_CRIT,
+        Log\Logger::ERR    => LOG_ERR,
+        Log\Logger::WARN   => LOG_WARNING,
+        Log\Logger::NOTICE => LOG_NOTICE,
+        Log\Logger::INFO   => LOG_INFO,
+        Log\Logger::DEBUG  => LOG_DEBUG,
     );
 
     /**
@@ -98,11 +104,11 @@ class Zend_Log_Writer_Syslog extends Zend_Log_Writer_Abstract
     /**
      * Create a new instance of Zend_Log_Writer_Syslog
      * 
-     * @param  array|Zend_Config $config
-     * @return Zend_Log_Writer_Syslog
-     * @throws Zend_Log_Exception
+     * @param  array|\Zend\Config\Config $config
+     * @return \Zend\Log\Writer\Syslog
+     * @throws \Zend\Log\Exception
      */
-    static public function factory($config)
+    static public function factory($config = array())
     {
         return new self(self::_parseConfig($config));
     }

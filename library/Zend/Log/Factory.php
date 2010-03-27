@@ -14,43 +14,30 @@
  *
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * @uses       Zend_Log_Exception
- * @uses       Zend_Log_Filter_Interface
- * @uses       Zend_Log_FactoryInterface
+ * @namespace
+ */
+namespace Zend\Log;
+
+/**
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-abstract class Zend_Log_Filter_Abstract 
-    implements Zend_Log_Filter_Interface, Zend_Log_FactoryInterface
+interface Factory
 {
     /**
-     * Validate and optionally convert the config to array
+     * Construct a Zend_Log driver
      * 
-     * @param  array|Zend_Config $config Zend_Config or Array
-     * @return array
-     * @throws Zend_Log_Exception
+     * @param  array|\Zend\Config\Config $config
+     * @return \Zend\Log\Factory
      */
-    static protected function _parseConfig($config)
-    {
-        if ($config instanceof Zend_Config) {
-            $config = $config->toArray();
-        }
-
-        if (!is_array($config)) {
-            throw new Zend_Log_Exception('Configuration must be an array or instance of Zend_Config');
-        }
-
-        return $config;
-    }
+    static public function factory($config = array());
 }

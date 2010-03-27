@@ -20,27 +20,6 @@
  * @version    $Id$
  */
 
-// Call Zend_Log_Writer_MailTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Log_Writer_MailTest::main");
-}
-
-/**
- * Test helper
- */
-
-/** Zend_Layout */
-
-/** Zend_Log */
-
-/** Zend_Log_Writer_Mail */
-
-/** Zend_Mail */
-
-/** Zend_Mail_Transport_Exception */
-
-/** Zend_View_Exception */
-
 /**
  * @category   Zend
  * @package    Zend_Log
@@ -51,15 +30,9 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class Zend_Log_Writer_MailTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
+    public function setUp()
     {
-        $suite = new PHPUnit_Framework_TestSuite("Zend_Log_Writer_MailTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $this->markTestIncomplete('Skipping testing until Zend_Mail and Zend_View are migrated to namespaces');
     }
 
     /**
@@ -303,9 +276,4 @@ class Zend_Log_Writer_MailTest extends PHPUnit_Framework_TestCase
 
         return array($mail, $writer, $log, $layout);
     }
-}
-
-// Call Zend_Log_Writer_MailTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Log_Writer_MailTest::main") {
-    Zend_Log_Writer_MailTest::main();
 }

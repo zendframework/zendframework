@@ -20,11 +20,10 @@
  * @version    $Id$
  */
 
-/** PHPUnit_Framework_TestCase */
+namespace ZendTest\Log\Filter;
 
-/** Zend_Log */
-
-/** Zend_Log_Filter_Suppress */
+use \Zend\Log\Filter\SuppressFilter,
+    \Zend\Log\Logger;
 
 /**
  * @category   Zend
@@ -34,11 +33,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Filter_SuppressTest extends PHPUnit_Framework_TestCase
+class SuppressFilterTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->filter = new Zend_Log_Filter_Suppress();
+        $this->filter = new SuppressFilter();
     }
 
     public function testSuppressIsInitiallyOff()
@@ -74,10 +73,10 @@ class Zend_Log_Filter_SuppressTest extends PHPUnit_Framework_TestCase
     {
         $cfg = array('log' => array('memory' => array(
             'writerName' => "Mock", 
-            'filterName' => "Suppress"
+            'filterName' => "SuppressFilter"
         )));
 
-        $logger = Zend_Log::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Zend_Log);
+        $logger = Logger::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Logger);
     }
 }

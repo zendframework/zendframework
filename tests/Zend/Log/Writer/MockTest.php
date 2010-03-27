@@ -20,9 +20,10 @@
  * @version    $Id$
  */
 
-/** PHPUnit_Framework_TestCase */
+namespace ZendTest\Log\Writer;
 
-/** Zend_Log_Writer_Mock */
+use \Zend\Log\Writer\Mock as MockWriter,
+    \Zend\Log\Logger;
 
 /**
  * @category   Zend
@@ -32,11 +33,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Writer_MockTest extends PHPUnit_Framework_TestCase
+class MockTest extends \PHPUnit_Framework_TestCase
 {
     public function testWrite()
     {
-        $writer = new Zend_Log_Writer_Mock();
+        $writer = new MockWriter();
         $this->assertSame(array(), $writer->events);
 
         $fields = array('foo' => 'bar');
@@ -50,7 +51,7 @@ class Zend_Log_Writer_MockTest extends PHPUnit_Framework_TestCase
             'writerName' => "Mock"
         )));
 
-        $logger = Zend_Log::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Zend_Log);
+        $logger = Logger::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Logger);
     }
 }

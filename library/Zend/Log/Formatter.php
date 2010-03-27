@@ -14,25 +14,32 @@
  *
  * @category   Zend
  * @package    Zend_Log
+ * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Log;
+
+/**
  * @category   Zend
  * @package    Zend_Log
+ * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-interface Zend_Log_FactoryInterface
+interface Formatter
 {
     /**
-     * Construct a Zend_Log driver
-     * 
-     * @param  array|Zen_Config $config
-     * @return Zend_Log_FactoryInterface
+     * Formats data into a single line to be written by the writer.
+     *
+     * @param  array    $event    event data
+     * @return string             formatted line to write to the log
      */
-    static public function factory($config);
+    public function format($event);
 }

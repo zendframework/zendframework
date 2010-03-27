@@ -20,10 +20,11 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Log\Filter;
 
-/** Zend_Log */
-
-/** Zend_Log_Filter_Message */
+use \Zend\Log\Logger,
+    \Zend\Log\Filter\Message,
+    \Zend\Config\Config;
 
 /**
  * @category   Zend
@@ -33,22 +34,17 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Filter_MessageTest extends PHPUnit_Framework_TestCase
+class MessageTest extends \PHPUnit_Framework_TestCase
 {
     public function testMessageFilterRecognizesInvalidRegularExpression()
     {
-        try {
-            $filter = new Zend_Log_Filter_Message('invalid regexp');
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertType('Zend_Log_Exception', $e);
-            $this->assertRegexp('/invalid reg/i', $e->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Log\\Exception', 'invalid reg');
+        $filter = new Message('invalid regexp');
     }
 
     public function testMessageFilter()
     {
-        $filter = new Zend_Log_Filter_Message('/accept/');
+        $filter = new Message('/accept/');
         $this->assertTrue($filter->accept(array('message' => 'foo accept bar')));
         $this->assertFalse($filter->accept(array('message' => 'foo reject bar')));
     }
@@ -63,13 +59,13 @@ class Zend_Log_Filter_MessageTest extends PHPUnit_Framework_TestCase
              ),        
         )));
 
-        $logger = Zend_Log::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Zend_Log);
+        $logger = Logger::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Logger);
     }
 
     public function testFactoryWithConfig()
     {
-        $config = new Zend_Config(array('log' => array('memory' => array(
+        $config = new Config(array('log' => array('memory' => array(
             'writerName'   => "Mock", 
             'filterName'   => "Message", 
             'filterParams' => array(
@@ -77,7 +73,7 @@ class Zend_Log_Filter_MessageTest extends PHPUnit_Framework_TestCase
              ),        
         ))));
 
-        $filter = Zend_Log_Filter_Message::factory($config->log->memory->filterParams);
-        $this->assertTrue($filter instanceof Zend_Log_Filter_Message);
+        $filter = Message::factory($config->log->memory->filterParams);
+        $this->assertTrue($filter instanceof Message);
     }
 }

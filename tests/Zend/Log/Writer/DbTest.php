@@ -20,9 +20,10 @@
  * @version    $Id$
  */
 
-/** PHPUnit_Framework_TestCase */
+namespace ZendTest\Log\Writer;
 
-/** Zend_Log_Writer_Mock */
+use \Zend\Log\Writer\Db as DbWriter,
+    \Zend\Log\Logger;
 
 /**
  * @category   Zend
@@ -32,25 +33,20 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Writer_DbTest extends PHPUnit_Framework_TestCase
+class DbTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
         $this->tableName = 'db-table-name';
 
-        $this->db     = new Zend_Log_Writer_DbTest_MockDbAdapter();
-        $this->writer = new Zend_Log_Writer_Db($this->db, $this->tableName);
+        $this->db     = new DbTest_MockDbAdapter();
+        $this->writer = new DbWriter($this->db, $this->tableName);
     }
 
     public function testFormattingIsNotSupported()
     {
-        try {
-            $this->writer->setFormatter(new stdclass);
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertType('Zend_Log_Exception', $e);
-            $this->assertRegExp('/does not support formatting/i', $e->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Log\\Exception', 'does not support formatting');
+        $this->writer->setFormatter(new \stdclass);
     }
 
     public function testWriteWithDefaults()
@@ -74,8 +70,8 @@ class Zend_Log_Writer_DbTest extends PHPUnit_Framework_TestCase
 
     public function testWriteUsesOptionalCustomColumnNames()
     {
-        $this->writer = new Zend_Log_Writer_Db($this->db, $this->tableName,
-                                                array('new-message-field'  => 'message',
+        $this->writer = new DbWriter($this->db, $this->tableName,
+                                                array('new-message-field' => 'message',
                                                       'new-message-field' => 'priority'));
 
         // log to the mock db adapter
@@ -99,13 +95,8 @@ class Zend_Log_Writer_DbTest extends PHPUnit_Framework_TestCase
         $this->writer->write(array('message' => 'this should not fail'));
         $this->writer->shutdown();
 
-        try {
-            $this->writer->write(array('message' => 'this should fail'));
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertType('Zend_Log_Exception', $e);
-            $this->assertEquals('Database adapter is null', $e->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Log\\Exception', 'Database adapter is null');
+        $this->writer->write(array('message' => 'this should fail'));
     }
     
     public function testFactory()
@@ -118,13 +109,13 @@ class Zend_Log_Writer_DbTest extends PHPUnit_Framework_TestCase
             ),
         )));
 
-        $logger = Zend_Log::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Zend_Log);
+        $logger = Logger::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Logger);
     }
 }
 
 
-class Zend_Log_Writer_DbTest_MockDbAdapter
+class DbTest_MockDbAdapter
 {
     public $calls = array();
 

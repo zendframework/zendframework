@@ -21,9 +21,17 @@
  */
 
 /**
- * @uses       Zend_Log_Exception
- * @uses       Zend_Log_FactoryInterface
- * @uses       Zend_Log_Filter_Priority
+ * @namespace
+ */
+namespace Zend\Log\Writer;
+
+use \Zend\Log\Factory,
+    \Zend\Log\Writer;
+
+/**
+ * @uses       \Zend\Log\Exception
+ * @uses       \Zend\Log\Factory
+ * @uses       \Zend\Log\Filter\Priority
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
@@ -31,29 +39,29 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
+abstract class AbstractWriter implements Writer, Factory
 {
     /**
-     * @var array of Zend_Log_Filter_Interface
+     * @var array of \Zend\Log\Filter
      */
     protected $_filters = array();
 
     /**
      * Formats the log message before writing.
-     * @var Zend_Log_Formatter_Interface
+     * @var \Zend\Log\Formatter
      */
     protected $_formatter;
 
     /**
      * Add a filter specific to this writer.
      *
-     * @param  Zend_Log_Filter_Interface  $filter
+     * @param  \Zend\Log\Filter  $filter
      * @return void
      */
     public function addFilter($filter)
     {
         if (is_integer($filter)) {
-            $filter = new Zend_Log_Filter_Priority($filter);
+            $filter = new \Zend\Log\Filter\Priority($filter);
         }
 
         $this->_filters[] = $filter;
@@ -80,7 +88,7 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
     /**
      * Set a new formatter for this writer
      *
-     * @param  Zend_Log_Formatter_Interface $formatter
+     * @param  \Zend\Log\Formatter $formatter
      * @return void
      */
     public function setFormatter($formatter)
@@ -107,19 +115,19 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
     /**
      * Validate and optionally convert the config to array
      * 
-     * @param  array|Zend_Config $config Zend_Config or Array
+     * @param  array|\Zend\Config\Config $config \Zend\Config\Config or Array
      * @return array
-     * @throws Zend_Log_Exception
+     * @throws \Zend\Log\Exception
      */
     static protected function _parseConfig($config)
     {
-        if ($config instanceof Zend_Config) {
+        if ($config instanceof \Zend\Config\Config) {
             $config = $config->toArray();
         }
 
         if (!is_array($config)) {
-            throw new Zend_Log_Exception(
-				'Configuration must be an array or instance of Zend_Config'
+            throw new \Zend\Log\Exception(
+				'Configuration must be an array or instance of Zend\\Config\\Config'
 			);
         }
 

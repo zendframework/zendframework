@@ -14,28 +14,58 @@
  *
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Formatter
+ * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Log;
+
+/**
+ * @uses       \Zend\Log\Exception
+ * @uses       \Zend\Log\FactoryInterface
+ * @uses       \Zend\Log\Filter\Priority
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Formatter
+ * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-interface Zend_Log_Formatter_Interface
+interface Writer
 {
     /**
-     * Formats data into a single line to be written by the writer.
-     *
-     * @param  array    $event    event data
-     * @return string             formatted line to write to the log
+     * Add a log filter to the writer
+     * 
+     * @param  int|\Zend\Log\Filter $filter 
+     * @return Writer
      */
-    public function format($event);
+    public function addFilter($filter);
 
+    /**
+     * Set a message formatter for the writer
+     * 
+     * @param  \Zend\Log\Formatter|Callable $formatter 
+     * @return Writer
+     */
+    public function setFormatter($formatter);
+
+    /**
+     * Write a log message
+     * 
+     * @param  array|mixed $event 
+     * @return Writer
+     */
+    public function write($event);
+
+    /**
+     * Perform shutdown activities
+     * 
+     * @return void
+     */
+    public function shutdown();
 }

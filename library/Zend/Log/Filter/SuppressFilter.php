@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Log\Filter;
+
+/**
+ * @uses       \Zend\Log\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Filter
@@ -28,13 +34,47 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-interface Zend_Log_Filter_Interface
+class SuppressFilter extends AbstractFilter
 {
+    /**
+     * @var boolean
+     */
+    protected $_accept = true;
+
+    /**
+     * This is a simple boolean filter.
+     *
+     * Call suppress(true) to suppress all log events.
+     * Call suppress(false) to accept all log events.
+     *
+     * @param  boolean  $suppress  Should all log events be suppressed?
+     * @return  void
+     */
+    public function suppress($suppress)
+    {
+        $this->_accept = (! $suppress);
+    }
+
     /**
      * Returns TRUE to accept the message, FALSE to block it.
      *
      * @param  array    $event    event data
      * @return boolean            accepted?
      */
-    public function accept($event);
+    public function accept($event)
+    {
+        return $this->_accept;
+    }
+
+    /**
+     * Create a new instance of Zend_Log_Filter_Suppress
+     * 
+     * @param  array|\Zend\Config\Config $config
+     * @return \Zend\Log\Filter\Suppress
+     * @throws \Zend\Log\Exception
+     */
+    static public function factory($config = array())
+    {
+        return new self();
+    }
 }

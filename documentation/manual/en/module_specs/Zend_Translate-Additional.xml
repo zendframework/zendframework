@@ -675,7 +675,7 @@ $translate = new Zend_Translate($adapter, $content, $locale, $options);
                 </note>
             </sect4>
 
-            <sect4 id="zend.translate.additional.detection.ignore.array">
+            <sect4 id="zend.translate.additional.detection.ignore.array.files">
                 <title>Ignore several directories or files</title>
 
                 <para>
@@ -694,7 +694,7 @@ $translate = new Zend_Translate($adapter, $content, $locale, $options);
                 </para>
             </sect4>
 
-            <sect4 id="zend.translate.additional.detection.ignore.array">
+            <sect4 id="zend.translate.additional.detection.ignore.array.names">
                 <title>Ignore specific names</title>
 
                 <para>

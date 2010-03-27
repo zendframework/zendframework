@@ -90,7 +90,6 @@ class Zend_Validate_FloatTest extends PHPUnit_Framework_TestCase
             array(1.00, true),
             array(0.01, true),
             array(-0.1, true),
-            array('10.1', true),
             array(1, true),
             array('not a float', false),
             );
@@ -145,6 +144,7 @@ class Zend_Validate_FloatTest extends PHPUnit_Framework_TestCase
         setlocale(LC_ALL, 'de');
         $valid = new Zend_Validate_Float();
         $this->assertTrue($valid->isValid(123,456));
+        $this->assertTrue($valid->isValid('123,456'));
     }
 
     /**
@@ -165,5 +165,15 @@ class Zend_Validate_FloatTest extends PHPUnit_Framework_TestCase
         setlocale(LC_ALL, 'de');
         $valid = new Zend_Validate_Float();
         $this->assertTrue($valid->isValid(10.5));
+    }
+
+    /**
+     * @ZF-8919
+     */
+    public function testPhpLocaleDeStringType()
+    {
+        setlocale(LC_NUMERIC, 'de_AT');
+        $valid = new Zend_Validate_Float();
+        $this->assertTrue($valid->isValid('1,3'));
     }
 }

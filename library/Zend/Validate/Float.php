@@ -76,9 +76,7 @@ class Zend_Validate_Float extends Zend_Validate_Abstract
             }
         }
 
-        if ($locale !== null) {
-            $this->setLocale($locale);
-        }
+        $this->setLocale($locale);
     }
 
     /**
@@ -121,27 +119,14 @@ class Zend_Validate_Float extends Zend_Validate_Abstract
         }
 
         $this->_setValue($value);
-        if ($this->_locale === null) {
-            $locale        = localeconv();
-            $valueFiltered = str_replace($locale['thousands_sep'], '', (string) $value);
-            $valueFiltered = str_replace($locale['decimal_point'], '.', $valueFiltered);
-
-            if (strval(floatval($valueFiltered)) != $valueFiltered) {
+        try {
+            if (!Zend_Locale_Format::isFloat($value, array('locale' => $this->_locale))) {
                 $this->_error(self::NOT_FLOAT);
                 return false;
             }
-
-        } else {
-            try {
-                if (!Zend_Locale_Format::isFloat($value, array('locale' => 'en')) &&
-                    !Zend_Locale_Format::isFloat($value, array('locale' => $this->_locale))) {
-                    $this->_error(self::NOT_FLOAT);
-                    return false;
-                }
-            } catch (Zend_Locale_Exception $e) {
-                $this->_error(self::NOT_FLOAT);
-                return false;
-            }
+        } catch (Zend_Locale_Exception $e) {
+            $this->_error(self::NOT_FLOAT);
+            return false;
         }
 
         return true;

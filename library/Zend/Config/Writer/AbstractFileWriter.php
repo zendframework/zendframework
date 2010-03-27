@@ -20,17 +20,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Config\Writer;
+use Zend\Config;
+
+/**
  * Abstract File Writer
  *
- * @uses       Zend_Config_Exception
- * @uses       Zend_Config_Writer
+ * @uses       \Zend\Config\Exception
+ * @uses       \Zend\Config\Writer\Writer
  * @category   Zend
  * @package    Zend_package
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
+class AbstractFileWriter extends AbstractWriter
 {
     /**
      * Filename to write to
@@ -40,7 +46,7 @@ class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
     protected $_filename = null;
 
     /**
-     * Wether to exclusively lock the file or not
+     * Whether to exclusively lock the file or not
      *
      * @var boolean
      */
@@ -50,7 +56,7 @@ class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
      * Set the target filename
      *
      * @param  string $filename
-     * @return Zend_Config_Writer_Array
+     * @return \Zend\Config\Writer\AbstractFileWriter
      */
     public function setFilename($filename)
     {
@@ -63,7 +69,7 @@ class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
      * Set wether to exclusively lock the file or not
      *
      * @param  boolean     $exclusiveLock
-     * @return Zend_Config_Writer_Array
+     * @return \Zend\Config\Writer\AbstractFileWriter
      */
     public function setExclusiveLock($exclusiveLock)
     {
@@ -76,11 +82,11 @@ class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
      * Write configuration to file.
      *
      * @param string $filename
-     * @param Zend_Config $config
+     * @param \Zend\Config\Config $config
      * @param bool $exclusiveLock
      * @return void
      */
-    public function write($filename = null, Zend_Config $config = null, $exclusiveLock = null)
+    public function write($filename = null, Config\Config $config = null, $exclusiveLock = null)
     {
         if ($filename !== null) {
             $this->setFilename($filename);
@@ -95,11 +101,11 @@ class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
         }
 
         if ($this->_filename === null) {
-            throw new Zend_Config_Exception('No filename was set');
+            throw new Config\Exception('No filename was set');
         }
 
         if ($this->_config === null) {
-            throw new Zend_Config_Exception('No config was set');
+            throw new Config\Exception('No config was set');
         }
 
         $configString = $this->render();
@@ -113,7 +119,7 @@ class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
         $result = @file_put_contents($this->_filename, $configString, $flags);
 
         if ($result === false) {
-            throw new Zend_Config_Exception('Could not write to file "' . $this->_filename . '"');
+            throw new Config\Exception('Could not write to file "' . $this->_filename . '"');
         }
     }
 

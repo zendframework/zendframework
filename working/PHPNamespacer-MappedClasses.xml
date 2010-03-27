@@ -1355,18 +1355,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Config/Writer/Array.php</originalRelativeFilePath>
       <originalClassName>Zend_Config_Writer_Array</originalClassName>
-      <newRelativeFilePath>Zend/Config/Writer/Array.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Config/Writer/ArrayWriter.php</newRelativeFilePath>
       <newNamespace>Zend\Config\Writer</newNamespace>
-      <newClassName>Array</newClassName>
-      <newFullyQualifiedName>Zend\Config\Writer\Array</newFullyQualifiedName>
+      <newClassName>ArrayWriter</newClassName>
+      <newFullyQualifiedName>Zend\Config\Writer\ArrayWriter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Config/Writer/FileAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Config_Writer_FileAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Config/Writer/FileAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Config/Writer/AbstractFileWriter.php</newRelativeFilePath>
       <newNamespace>Zend\Config\Writer</newNamespace>
-      <newClassName>FileAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Config\Writer\FileAbstract</newFullyQualifiedName>
+      <newClassName>AbstractFileWriter</newClassName>
+      <newFullyQualifiedName>Zend\Config\Writer\AbstractFileWriter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Config/Writer/Ini.php</originalRelativeFilePath>
@@ -1387,10 +1387,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Config/Writer.php</originalRelativeFilePath>
       <originalClassName>Zend_Config_Writer</originalClassName>
-      <newRelativeFilePath>Zend/Config/Writer/Writer.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Config/Writer/AbstractWriter.php</newRelativeFilePath>
       <newNamespace>Zend\Config\Writer</newNamespace>
-      <newClassName>Writer</newClassName>
-      <newFullyQualifiedName>Zend\Config\Writer\Writer</newFullyQualifiedName>
+      <newClassName>AbstractWriter</newClassName>
+      <newFullyQualifiedName>Zend\Config\Writer\AbstractWriter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Config/Xml.php</originalRelativeFilePath>

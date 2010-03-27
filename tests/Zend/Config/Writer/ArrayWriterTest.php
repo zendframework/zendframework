@@ -20,17 +20,10 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
+namespace ZendTest\Config\Writer;
 
-/**
- * Zend_Config
- */
-
-/**
- * Zend_Config_Writer_Array
- */
+use \Zend\Config\Writer\ArrayWriter,
+    \Zend\Config\Config;
 
 /**
  * @category   Zend
@@ -40,7 +33,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class Zend_Config_Writer_ArrayTest extends PHPUnit_Framework_TestCase
+class ArrayWriterTest extends \PHPUnit_Framework_TestCase
 {
     protected $_tempName;
 
@@ -56,61 +49,42 @@ class Zend_Config_Writer_ArrayTest extends PHPUnit_Framework_TestCase
 
     public function testNoFilenameSet()
     {
-        $writer = new Zend_Config_Writer_Array(array('config' => new Zend_Config(array())));
-
-        try {
-            $writer->write();
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('No filename was set', $expected->getMessage());
-        }
+        $writer = new ArrayWriter(array('config' => new Config(array())));
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'No filename was set');
+        $writer->write();
     }
 
     public function testNoConfigSet()
     {
-        $writer = new Zend_Config_Writer_Array(array('filename' => $this->_tempName));
-
-        try {
-            $writer->write();
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('No config was set', $expected->getMessage());
-        }
+        $writer = new ArrayWriter(array('filename' => $this->_tempName));
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'No config was set');
+        $writer->write();
     }
 
     public function testFileNotWritable()
     {
-        $writer = new Zend_Config_Writer_Array(array('config' => new Zend_Config(array()), 'filename' => '/../../../'));
-
-        try {
-            $writer->write();
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('Could not write to file', $expected->getMessage());
-        }
+        $writer = new ArrayWriter(array('config' => new Config(array()), 'filename' => '/../../../'));
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'Could not write to file');
+        $writer->write();
     }
 
     public function testWriteAndRead()
     {
-        $config = new Zend_Config(array('test' => 'foo'));
-
-        $writer = new Zend_Config_Writer_Array(array('config' => $config, 'filename' => $this->_tempName));
+        $config = new Config(array('test' => 'foo'));
+        $writer = new ArrayWriter(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
 
-        $config = new Zend_Config(include $this->_tempName);
-
+        $config = new Config(include $this->_tempName);
         $this->assertEquals('foo', $config->test);
     }
 
     public function testArgumentOverride()
     {
-        $config = new Zend_Config(array('test' => 'foo'));
-
-        $writer = new Zend_Config_Writer_Array();
+        $config = new Config(array('test' => 'foo'));
+        $writer = new ArrayWriter();
         $writer->write($this->_tempName, $config);
 
-        $config = new Zend_Config(include $this->_tempName);
-
+        $config = new Config(include $this->_tempName);
         $this->assertEquals('foo', $config->test);
     }
 
@@ -119,9 +93,9 @@ class Zend_Config_Writer_ArrayTest extends PHPUnit_Framework_TestCase
      */
     public function testRender()
     {
-        $config = new Zend_Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
+        $config = new Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
 
-        $writer = new Zend_Config_Writer_Array();
+        $writer = new ArrayWriter();
         $configString = $writer->setConfig($config)->render();
 
 

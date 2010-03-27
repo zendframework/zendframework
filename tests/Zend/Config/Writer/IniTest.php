@@ -20,21 +20,11 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
+namespace ZendTest\Config\Writer;
 
-/**
- * Zend_Config
- */
-
-/**
- * Zend_Config_Ini
- */
-
-/**
- * Zend_Config_Writer_Ini
- */
+use \Zend\Config\Writer\Ini,
+    \Zend\Config\Config,
+    \Zend\Config\Ini as IniConfig;
 
 /**
  * @category   Zend
@@ -44,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class Zend_Config_Writer_IniTest extends PHPUnit_Framework_TestCase
+class IniTest extends \PHPUnit_Framework_TestCase
 {
     protected $_tempName;
 
@@ -60,60 +50,46 @@ class Zend_Config_Writer_IniTest extends PHPUnit_Framework_TestCase
 
     public function testNoFilenameSet()
     {
-        $writer = new Zend_Config_Writer_Ini(array('config' => new Zend_Config(array())));
-
-        try {
-            $writer->write();
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('No filename was set', $expected->getMessage());
-        }
+        $writer = new Ini(array('config' => new Config(array())));
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'No filename was set');
+        $writer->write();
     }
 
     public function testNoConfigSet()
     {
-        $writer = new Zend_Config_Writer_Ini(array('filename' => $this->_tempName));
-
-        try {
-            $writer->write();
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('No config was set', $expected->getMessage());
-        }
+        $writer = new Ini(array('filename' => $this->_tempName));
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'No config was set');
+        $writer->write();
     }
 
     public function testFileNotWritable()
     {
-        $writer = new Zend_Config_Writer_Ini(array('config' => new Zend_Config(array()), 'filename' => '/../../../'));
+        $writer = new Ini(array('config' => new Config(array()), 'filename' => '/../../../'));
 
-        try {
-            $writer->write();
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('Could not write to file', $expected->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'Could not write to file');
+        $writer->write();
     }
 
     public function testWriteAndRead()
     {
-        $config = new Zend_Config(array('default' => array('test' => 'foo')));
+        $config = new Config(array('default' => array('test' => 'foo')));
 
-        $writer = new Zend_Config_Writer_Ini(array('config' => $config, 'filename' => $this->_tempName));
+        $writer = new Ini(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
 
-        $config = new Zend_Config_Ini($this->_tempName, null);
+        $config = new IniConfig($this->_tempName, null);
 
         $this->assertEquals('foo', $config->default->test);
     }
 
     public function testNoSection()
     {
-        $config = new Zend_Config(array('test' => 'foo', 'test2' => array('test3' => 'bar')));
+        $config = new Config(array('test' => 'foo', 'test2' => array('test3' => 'bar')));
 
-        $writer = new Zend_Config_Writer_Ini(array('config' => $config, 'filename' => $this->_tempName));
+        $writer = new Ini(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
 
-        $config = new Zend_Config_Ini($this->_tempName, null);
+        $config = new IniConfig($this->_tempName, null);
 
         $this->assertEquals('foo', $config->test);
         $this->assertEquals('bar', $config->test2->test3);
@@ -121,27 +97,27 @@ class Zend_Config_Writer_IniTest extends PHPUnit_Framework_TestCase
 
     public function testWriteAndReadOriginalFile()
     {
-        $config = new Zend_Config_Ini(dirname(__FILE__) . '/files/allsections.ini', null, array('skipExtends' => true));
+        $config = new IniConfig(dirname(__FILE__) . '/files/allsections.ini', null, array('skipExtends' => true));
 
-        $writer = new Zend_Config_Writer_Ini(array('config' => $config, 'filename' => $this->_tempName));
+        $writer = new Ini(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
 
-        $config = new Zend_Config_Ini($this->_tempName, null);
+        $config = new IniConfig($this->_tempName, null);
         $this->assertEquals('multi', $config->staging->one->two->three);
 
-        $config = new Zend_Config_Ini($this->_tempName, null, array('skipExtends' => true));
+        $config = new IniConfig($this->_tempName, null, array('skipExtends' => true));
         $this->assertFalse(isset($config->staging->one));
     }
 
 
     public function testWriteAndReadSingleSection()
     {
-        $config = new Zend_Config_Ini(dirname(__FILE__) . '/files/allsections.ini', 'staging', array('skipExtends' => true));
+        $config = new IniConfig(dirname(__FILE__) . '/files/allsections.ini', 'staging', array('skipExtends' => true));
 
-        $writer = new Zend_Config_Writer_Ini(array('config' => $config, 'filename' => $this->_tempName));
+        $writer = new Ini(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
 
-        $config = new Zend_Config_Ini($this->_tempName, null);
+        $config = new IniConfig($this->_tempName, null);
 
         $this->assertEquals('staging', $config->staging->hostname);
         $this->assertEquals('', $config->staging->debug);
@@ -150,12 +126,12 @@ class Zend_Config_Writer_IniTest extends PHPUnit_Framework_TestCase
 
     public function testArgumentOverride()
     {
-        $config = new Zend_Config(array('default' => array('test' => 'foo')));
+        $config = new Config(array('default' => array('test' => 'foo')));
 
-        $writer = new Zend_Config_Writer_Ini();
+        $writer = new Ini();
         $writer->write($this->_tempName, $config);
 
-        $config = new Zend_Config_Ini($this->_tempName, null);
+        $config = new IniConfig($this->_tempName, null);
 
         $this->assertEquals('foo', $config->default->test);
     }
@@ -165,9 +141,9 @@ class Zend_Config_Writer_IniTest extends PHPUnit_Framework_TestCase
      */
     public function testRender()
     {
-        $config = new Zend_Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
+        $config = new Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
 
-        $writer = new Zend_Config_Writer_Ini();
+        $writer = new Ini();
         $iniString = $writer->setConfig($config)->render();
 
         $expected = <<<ECS
@@ -183,9 +159,9 @@ ECS;
 
     public function testRenderWithoutSections()
     {
-        $config = new Zend_Config(array('test' => 'foo', 'test2' => array('test3' => 'bar')));
+        $config = new Config(array('test' => 'foo', 'test2' => array('test3' => 'bar')));
 
-        $writer = new Zend_Config_Writer_Ini();
+        $writer = new Ini();
         $writer->setRenderWithoutSections();
         $iniString = $writer->setConfig($config)->render();
 
@@ -199,9 +175,9 @@ ECS;
 
     public function testRenderWithoutSections2()
     {
-        $config = new Zend_Config_Ini(dirname(__FILE__) . '/files/allsections.ini', null, array('skipExtends' => true));
+        $config = new IniConfig(dirname(__FILE__) . '/files/allsections.ini', null, array('skipExtends' => true));
 
-        $writer = new Zend_Config_Writer_Ini();
+        $writer = new Ini();
         $writer->setRenderWithoutSections();
         $iniString = $writer->setConfig($config)->render();
 
@@ -230,16 +206,15 @@ ECS;
         $this->assertEquals($expected, $iniString);
     }
 
-    public function testZF6521_NoDoubleQuoutesInValue()
+    /**
+     * @group ZF-6521
+     */
+    public function testNoDoubleQuoutesInValue()
     {
-        $config = new Zend_Config(array('default' => array('test' => 'fo"o')));
+        $config = new Config(array('default' => array('test' => 'fo"o')));
 
-        try {
-            $writer = new Zend_Config_Writer_Ini(array('config' => $config, 'filename' => $this->_tempName));
-            $writer->write();
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('Value can not contain double quotes "', $expected->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'Value can not contain double quotes');
+        $writer = new Ini(array('config' => $config, 'filename' => $this->_tempName));
+        $writer->write();
     }
 }

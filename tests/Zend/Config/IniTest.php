@@ -20,13 +20,9 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
+namespace ZendTest\Config;
 
-/**
- * Zend_Config_Ini
- */
+use \Zend\Config\Ini;
 
 /**
  * @category   Zend
@@ -36,7 +32,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
+class IniTest extends \PHPUnit_Framework_TestCase
 {
     protected $_iniFileConfig;
     protected $_iniFileAllSectionsConfig;
@@ -56,7 +52,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
 
     public function testLoadSingleSection()
     {
-        $config = new Zend_Config_Ini($this->_iniFileConfig, 'all');
+        $config = new Ini($this->_iniFileConfig, 'all');
 
         $this->assertEquals('all', $config->hostname);
         $this->assertEquals('live', $config->db->name);
@@ -66,7 +62,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
 
     public function testSectionInclude()
     {
-        $config = new Zend_Config_Ini($this->_iniFileConfig, 'staging');
+        $config = new Ini($this->_iniFileConfig, 'staging');
 
         $this->assertEquals('', $config->debug); // only in staging
         $this->assertEquals('thisname', $config->name); // only in all
@@ -77,7 +73,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
 
     public function testTrueValues()
     {
-        $config = new Zend_Config_Ini($this->_iniFileConfig, 'debug');
+        $config = new Ini($this->_iniFileConfig, 'debug');
 
         $this->assertType('string', $config->debug);
         $this->assertEquals('1', $config->debug);
@@ -87,7 +83,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
 
     public function testEmptyValues()
     {
-        $config = new Zend_Config_Ini($this->_iniFileConfig, 'debug');
+        $config = new Ini($this->_iniFileConfig, 'debug');
 
         $this->assertType('string', $config->special->no);
         $this->assertEquals('', $config->special->no);
@@ -99,7 +95,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
 
     public function testMultiDepthExtends()
     {
-        $config = new Zend_Config_Ini($this->_iniFileConfig, 'other_staging');
+        $config = new Ini($this->_iniFileConfig, 'other_staging');
 
         $this->assertEquals('otherStaging', $config->only_in); // only in other_staging
         $this->assertEquals('', $config->debug); // 1 level down: only in staging
@@ -112,12 +108,8 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
 
     public function testErrorNoExtendsSection()
     {
-        try {
-            $config = new Zend_Config_Ini($this->_iniFileConfig, 'extendserror');
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'cannot be found');
+        $config = new Ini($this->_iniFileConfig, 'extendserror');
     }
 
     public function testInvalidKeys()
@@ -125,9 +117,9 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
         $sections = array('leadingdot', 'onedot', 'twodots', 'threedots', 'trailingdot');
         foreach ($sections as $section) {
             try {
-                $config = new Zend_Config_Ini($this->_iniFileConfig, $section);
-                $this->fail('An expected Zend_Config_Exception has not been raised');
-            } catch (Zend_Config_Exception $expected) {
+                $config = new Ini($this->_iniFileConfig, $section);
+                $this->fail('An expected Zend\\Config\\Exception has not been raised');
+            } catch (\Zend\Config\Exception $expected) {
                 $this->assertContains('Invalid key', $expected->getMessage());
             }
         }
@@ -135,17 +127,13 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
 
     public function testZF426()
     {
-        try {
-            $config = new Zend_Config_Ini($this->_iniFileConfig, 'zf426');
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('Cannot create sub-key for', $expected->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'Cannot create sub-key for');
+        $config = new Ini($this->_iniFileConfig, 'zf426');
     }
 
     public function testZF413_MultiSections()
     {
-        $config = new Zend_Config_Ini($this->_iniFileAllSectionsConfig, array('staging','other_staging'));
+        $config = new Ini($this->_iniFileAllSectionsConfig, array('staging','other_staging'));
 
         $this->assertEquals('otherStaging', $config->only_in);
         $this->assertEquals('staging', $config->hostname);
@@ -154,92 +142,60 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
 
     public function testZF413_AllSections()
     {
-        $config = new Zend_Config_Ini($this->_iniFileAllSectionsConfig, null);
+        $config = new Ini($this->_iniFileAllSectionsConfig, null);
         $this->assertEquals('otherStaging', $config->other_staging->only_in);
         $this->assertEquals('staging', $config->staging->hostname);
     }
 
     public function testZF414()
     {
-        $config = new Zend_Config_Ini($this->_iniFileAllSectionsConfig, null);
+        $config = new Ini($this->_iniFileAllSectionsConfig, null);
         $this->assertEquals(null, $config->getSectionName());
         $this->assertEquals(true, $config->areAllSectionsLoaded());
 
-        $config = new Zend_Config_Ini($this->_iniFileAllSectionsConfig, 'all');
+        $config = new Ini($this->_iniFileAllSectionsConfig, 'all');
         $this->assertEquals('all', $config->getSectionName());
         $this->assertEquals(false, $config->areAllSectionsLoaded());
 
-        $config = new Zend_Config_Ini($this->_iniFileAllSectionsConfig, array('staging','other_staging'));
+        $config = new Ini($this->_iniFileAllSectionsConfig, array('staging','other_staging'));
         $this->assertEquals(array('staging','other_staging'), $config->getSectionName());
         $this->assertEquals(false, $config->areAllSectionsLoaded());
     }
 
     public function testZF415()
     {
-        try {
-            $config = new Zend_Config_Ini($this->_iniFileCircularConfig, null);
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('circular inheritance', $expected->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'circular inheritance');
+        $config = new Ini($this->_iniFileCircularConfig, null);
     }
 
     public function testErrorNoFile()
     {
-        try {
-            $config = new Zend_Config_Ini('','');
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('Filename is not set', $expected->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'Filename is not set');
+        $config = new Ini('','');
     }
 
     public function testErrorMultipleExensions()
     {
-        try {
-            $config = new Zend_Config_Ini($this->_iniFileMultipleInheritanceConfig, 'three');
-            zend::dump($config);
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('may not extend multiple sections', $expected->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'may not extend multiple sections');
+        $config = new Ini($this->_iniFileMultipleInheritanceConfig, 'three');
+        zend::dump($config);
     }
 
     public function testErrorNoSectionFound()
     {
-        try {
-            $config = new Zend_Config_Ini($this->_iniFileConfig,array('all', 'notthere'));
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
-        }
-
-        try {
-            $config = new Zend_Config_Ini($this->_iniFileConfig,'notthere');
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
-        }
-
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'cannot be found');
+        $config = new Ini($this->_iniFileConfig,'notthere');
     }
 
-    public function testZF739()
+    public function testErrorNoSectionFoundWhenMultipleSectionsProvided()
     {
-        if (version_compare('5.3.0', PHP_VERSION) < 1) {
-            $this->markTestSkipped('PHP >= 5.3.0 does not allow : as a nest separator');
-            return;
-        }
-
-        $config = new Zend_Config_Ini($this->_iniFileSeparatorConfig, 'all', array('nestSeparator'=>':'));
-
-        $this->assertEquals('all', $config->hostname);
-        $this->assertEquals('live', $config->db->name);
-        $this->assertEquals('multi', $config->one->two->three);
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'cannot be found');
+        $config = new Ini($this->_iniFileConfig,array('all', 'notthere'));
     }
 
     public function testZF2508NoSections()
     {
-        $config = new Zend_Config_Ini($this->_iniFileNoSectionsConfig);
+        $config = new Ini($this->_iniFileNoSectionsConfig);
 
         $this->assertEquals('all', $config->hostname);
         $this->assertEquals('two', $config->one->two);
@@ -250,7 +206,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
     public function testZF2843NoSectionNoTree()
     {
         $filename = dirname(__FILE__) . '/_files/zf2843.ini';
-        $config = new Zend_Config_Ini($filename, null, array('nestSeparator' => '.'));
+        $config = new Ini($filename, null, array('nestSeparator' => '.'));
 
         $this->assertEquals('123', $config->abc);
         $this->assertEquals('jkl', $config->ghi);
@@ -259,9 +215,9 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
     public function testZF3196_InvalidIniFile()
     {
         try {
-            $config = new Zend_Config_Ini($this->_iniFileInvalid);
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
+            $config = new Ini($this->_iniFileInvalid);
+            $this->fail('An expected Zend\Config\Exception has not been raised');
+        } catch (\Zend\Config\Exception $expected) {
             $this->assertRegexp('/(Error parsing|syntax error, unexpected)/', $expected->getMessage());
         }
 
@@ -272,7 +228,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
      */
     public function testZF8159()
     {
-        $config = new Zend_Config_Ini(
+        $config = new Ini(
             dirname(__FILE__) . '/_files/zf8159.ini',
             array('first', 'second')
         );
@@ -294,7 +250,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
     public function testArraysOfKeysCreatedUsingAttributesAndKeys()
     {
         $filename = dirname(__FILE__) . '/_files/zf5800.ini';
-        $config = new Zend_Config_Ini($filename, 'dev');
+        $config = new Ini($filename, 'dev');
         $this->assertEquals('nice.guy@company.com', $config->receiver->{0}->mail);
         $this->assertEquals('1', $config->receiver->{0}->html);
         $this->assertNull($config->receiver->mail);
@@ -306,7 +262,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
     public function testPreservationOfIntegerKeys()
     {
         $filename = dirname(__FILE__) . '/_files/zf6508.ini';
-        $config = new Zend_Config_Ini($filename, 'all');
+        $config = new Ini($filename, 'all');
         $this->assertEquals(true, isset($config->{1002}));
         
     }

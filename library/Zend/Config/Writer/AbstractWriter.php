@@ -20,12 +20,17 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Config\Writer;
+
+/**
  * @category   Zend
  * @package    Zend_Config
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Config_Writer
+abstract class AbstractWriter
 {
     /**
      * Option keys to skip when calling setOptions()
@@ -39,7 +44,7 @@ abstract class Zend_Config_Writer
     /**
      * Config object to write
      *
-     * @var Zend_Config
+     * @var \Zend\Config\Config
      */
     protected $_config = null;
 
@@ -60,10 +65,10 @@ abstract class Zend_Config_Writer
     /**
      * Set options via a Zend_Config instance
      *
-     * @param  Zend_Config $config
-     * @return Zend_Config_Writer
+     * @param  \Zend\Config\Config $config
+     * @return \Zend\Config\Writer\Writer
      */
-    public function setConfig(Zend_Config $config)
+    public function setConfig(\Zend\Config\Config $config)
     {
         $this->_config = $config;
 
@@ -74,7 +79,7 @@ abstract class Zend_Config_Writer
      * Set options via an array
      *
      * @param  array $options
-     * @return Zend_Config_Writer
+     * @return \Zend\Config\Writer\Writer
      */
     public function setOptions(array $options)
     {

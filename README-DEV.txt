@@ -14,7 +14,7 @@ First pass
 [X] Zend_Loader
     [X] Including pluginloader, resource loader, etc.
 [X] Zend_Registry
-[ ] Zend_Config
+[X] Zend_Config
 [ ] Zend_Debug
 [ ] Zend_Log
     Would need to ignore Firebug writer for now, and potentially Db writer

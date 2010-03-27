@@ -126,6 +126,7 @@ class Zend_Translate_Adapter_XliffTest extends PHPUnit_Framework_TestCase
             array(
                 'testoption'      => 'testkey',
                 'clear'           => false,
+                'content'         => dirname(__FILE__) . '/_files/translation_en.xliff',
                 'scan'            => null,
                 'locale'          => 'en',
                 'ignore'          => '.',

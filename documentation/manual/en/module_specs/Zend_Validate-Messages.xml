@@ -79,10 +79,12 @@ $validator->setMessage('Please enter a lower value', Zend_Validate_GreaterThan::
 
         <programlisting language="php"><![CDATA[
 $translator = new Zend_Translate(
-    'array',
-    '/resources/languages',
-    $language,
-    array('scan' => Zend_Translate::LOCALE_DIRECTORY)
+    array(
+        'adapter' => 'array',
+        'content' => '/resources/languages',
+        'locale'  => $language,
+        'scan' => Zend_Translate::LOCALE_DIRECTORY
+    )
 );
 Zend_Validate_Abstract::setDefaultTranslator($translator);
 ]]></programlisting>

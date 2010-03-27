@@ -131,6 +131,7 @@ class Zend_Translate_Adapter_CsvTest extends PHPUnit_Framework_TestCase
                 'delimiter'       => ';',
                 'testoption'      => 'testkey',
                 'clear'           => false,
+                'content'         => dirname(__FILE__) . '/_files/translation_en.csv',
                 'scan'            => null,
                 'locale'          => 'en',
                 'length'          => 0,

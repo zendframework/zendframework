@@ -99,7 +99,7 @@ class Zend_Translate_Adapter_ArrayTest extends PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $adapter = new Zend_Translate_Adapter_Array(array('msg1' => 'Message 1 (en)', 'msg2' => 'Message 2 (en)', 'msg3' => 'Message 3 (en)'));
+        $adapter = new Zend_Translate_Adapter_Array(array('msg1' => 'Message 1 (en)', 'msg2' => 'Message 2 (en)', 'msg3' => 'Message 3 (en)'), 'en');
         $this->assertEquals('Array', $adapter->toString());
     }
 
@@ -156,6 +156,7 @@ class Zend_Translate_Adapter_ArrayTest extends PHPUnit_Framework_TestCase
             array(
                 'testoption'      => 'testkey',
                 'clear'           => false,
+                'content'         => dirname(__FILE__) . '/_files/translation_en.php',
                 'scan'            => null,
                 'locale'          => 'en',
                 'ignore'          => '.',

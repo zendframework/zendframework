@@ -13,9 +13,10 @@
     </para>
 
     <para>
-        We need <ulink url="http://en.wikipedia.org/wiki/L10n">Localization</ulink> and
-        complementary <ulink url="http://en.wikipedia.org/wiki/L10n">Internationalization</ulink>.
-        Both are often abbreviated to <code>L10n</code> and <code>I18n</code>. Internationalization
+        We need <ulink
+            url="http://en.wikipedia.org/wiki/Internationalization_and_localization">Localization
+            and complementary Internationalization</ulink>. Both are often abbreviated to
+        <emphasis>L10n</emphasis> and <emphasis>I18n</emphasis>. Internationalization
         refers more to support for use of systems, regardless of special needs unique to groups of
         users related by language, region, number format conventions, financial conventions, time
         and date conventions, etc. Localization involves adding explicit support to systems for

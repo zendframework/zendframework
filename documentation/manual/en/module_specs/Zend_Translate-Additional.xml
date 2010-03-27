@@ -21,9 +21,9 @@
         </para>
 
         <para>
-            You can set options temporarily when using <code>addTranslation($data, $locale, array
-            $options = array())</code> as third and optional parameter. And you can use the method
-            <methodname>setOptions()</methodname> to set the options permanently.
+            You can set options temporarily by giving them to
+            <methodname>addTranslation()</methodname>. And you can use the method
+            <methodname>setOptions()</methodname> to set options permanent.
         </para>
 
         <example id="zend.translate..additional.options.example">
@@ -31,18 +31,25 @@
 
             <programlisting language="php"><![CDATA[
 // define ':' as separator for the translation source files
-$options = array('delimiter' => ':');
 $translate = new Zend_Translate(
-    'csv',
-    '/path/to/mytranslation.csv',
-    'de',
-    $options);
+    array(
+        'adapter' => 'csv',
+        'content' => '/path/to/mytranslation.csv',
+        'locale'  => 'de',
+        'delimiter' => ':'
+    )
+);
 
 ...
 
 // clear the defined language and use new translation data
-$options = array('clear' => true);
-$translate->addTranslation('/path/to/new.csv', 'fr', $options);
+$translate->addTranslation(
+    array(
+        'content' => '/path/to/new.csv',
+        'locale'  => 'fr',
+        'clear'   => true
+    )
+);
 ]]></programlisting>
         </example>
 
@@ -66,6 +73,20 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
                 <tbody>
                     <row>
+                        <entry>adapter</entry>
+                        <entry>Zend_Translate only</entry>
+
+                        <entry>
+                            Defines the adapter which will be used for the translation. This option
+                            can only be given when a new instance of
+                            <classname>Zend_Translate</classname> is created. When it is set
+                            afterwards, then it will be ignored
+                        </entry>
+
+                        <entry><emphasis>Must be set as it has no default value</emphasis></entry>
+                    </row>
+
+                    <row>
                         <entry>clear</entry>
                         <entry>all</entry>
 
@@ -76,6 +97,21 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         </entry>
 
                         <entry><emphasis><constant>FALSE</constant></emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>content</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            Sets the content for the translation adapter. This could be an array,
+                            a filename or a directory. Which type of content is supported depends
+                            on the used adapter
+                        </entry>
+
+                        <entry>
+                            <emphasis>The default value depends on the used adapter</emphasis>
+                        </entry>
                     </row>
 
                     <row>
@@ -329,36 +365,48 @@ if ($translate->isAvailable("fr")) {
 // Example 1:
 // When no fitting language is found, the message ID is returned
 $translate = new Zend_Translate(
-    'gettext',
-    'my_it.mo',
-    'auto',
-    array('scan' => Zend_Translate::LOCALE_FILENAME));
+    array(
+        'adapter' => 'gettext',
+        'content' => 'my_it.mo',
+        'locale'  => 'auto',
+        'scan' => Zend_Translate::LOCALE_FILENAME
+    )
+);
 
 // Example 2:
 // Best found fitting language is 'fr'
 $translate = new Zend_Translate(
-    'gettext',
-    'my_fr.mo',
-    'auto',
-    array('scan' => Zend_Translate::LOCALE_FILENAME));
+    array(
+        'adapter' => 'gettext',
+        'content' => 'my_fr.mo',
+        'locale'  => 'auto',
+        'scan' => Zend_Translate::LOCALE_FILENAME
+    )
+);
 
 // Example 3:
 // Best found fitting language is 'de' ('de_AT' will be degraded)
 $translate = new Zend_Translate(
-    'gettext',
-    'my_de.mo',
-    'auto',
-    array('scan' => Zend_Translate::LOCALE_FILENAME));
+    array(
+        'adapter' => 'gettext',
+        'content' => 'my_de.mo',
+        'locale'  => 'auto',
+        'scan' => Zend_Translate::LOCALE_FILENAME
+    )
+);
 
 // Example 4:
 // Returns 'it' as translation source and overrides the automatic settings
 $translate = new Zend_Translate(
-    'gettext',
-    'my_it.mo',
-    'auto',
-    array('scan' => Zend_Translate::LOCALE_FILENAME));
+    array(
+        'adapter' => 'gettext',
+        'content' => 'my_it.mo',
+        'locale'  => 'auto',
+        'scan' => Zend_Translate::LOCALE_FILENAME
+    )
+);
 
-$translate->addTranslation('my_ru.mo', 'ru');
+$translate->addTranslation(array('content' => 'my_ru.mo', 'locale' => 'ru'));
 $translate->setLocale('it_IT');
 ]]></programlisting>
             </example>
@@ -391,7 +439,9 @@ Zend_Registry::set('Zend_Locale', $locale);
 $defaultlanguage = 'en';
 
 // somewhere in your application
-$translate = new Zend_Translate('gettext', 'my_de.mo');
+$translate = new Zend_Translate(
+    array('adapter' => 'gettext', 'content' => 'my_de.mo')
+);
 
 if (!$translate->isAvailable($locale->getLanguage())) {
     // not available languages are rerouted to another language
@@ -435,7 +485,9 @@ $translate->getLocale();
 //  /language/error/loginerror.tmx
 //  /language/error/logouterror.tmx
 
-$translate = new Zend_Translate('tmx', '/language');
+$translate = new Zend_Translate(
+    array('adapter' => 'tmx', 'content' => '/language')
+);
 ]]></programlisting>
         </example>
 
@@ -490,10 +542,12 @@ $translate = new Zend_Translate('tmx', '/language');
 //  /language/en/error/loginerror.mo
 
 $translate = new Zend_Translate(
-    'gettext',
-    '/language',
-    null,
-    array('scan' => Zend_Translate::LOCALE_DIRECTORY));
+    array(
+        'adapter' => 'gettext',
+        'content' => '/language',
+        'scan' => Zend_Translate::LOCALE_DIRECTORY
+    )
+);
 ]]></programlisting>
             </example>
 
@@ -541,10 +595,12 @@ $translate = new Zend_Translate(
 //  /language/error/loginerror_de.mo
 
 $translate = new Zend_Translate(
-    'gettext',
-    '/language',
-    null,
-    array('scan' => Zend_Translate::LOCALE_FILENAME));
+    array(
+        'adapter' => 'gettext',
+        'content' => '/language',
+        'scan' => Zend_Translate::LOCALE_FILENAME
+    )
+);
 ]]></programlisting>
             </example>
 
@@ -651,7 +707,14 @@ $translate = new Zend_Translate(
 
                 <programlisting><![CDATA[
 $options   = array('ignore' => 'test');
-$translate = new Zend_Translate($adapter, $content, $locale, $options);
+$translate = new Zend_Translate(
+    array(
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'ignore'  => 'test'
+    )
+);
 ]]></programlisting>
 
                 <para>
@@ -685,7 +748,14 @@ $translate = new Zend_Translate($adapter, $content, $locale, $options);
 
                 <programlisting><![CDATA[
 $options = array('ignore' => array('.', 'test', 'old'));
-$translate = new Zend_Translate($adapter, $content, $locale, $options);
+$translate = new Zend_Translate(
+    array(
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'ignore'  => array('.', 'test', 'old')
+    )
+);
 ]]></programlisting>
 
                 <para>
@@ -710,7 +780,14 @@ $translate = new Zend_Translate($adapter, $content, $locale, $options);
 
                 <programlisting><![CDATA[
 $options = array('ignore' => array('regex' => '/test/u', 'regex_2' => '/deleted$/u'));
-$translate = new Zend_Translate($adapter, $content, $locale, $options);
+$translate = new Zend_Translate(
+    array(
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'ignore'  => array('regex' => '/test/u', 'regex_2' => '/deleted$/u')
+    )
+);
 ]]></programlisting>
 
                 <para>
@@ -741,18 +818,22 @@ $translate = new Zend_Translate($adapter, $content, $locale, $options);
 
         <programlisting><![CDATA[
 $translate = new Zend_Translate(
-    'gettext',
-    '\path\to\translation.mo',
-    'en'
+    array(
+        'adapter' => 'gettext',
+        'content' => '\path\to\translation.mo',
+        'locale'  => 'en'
+    )
 );
 
 $translate_second = new Zend_Translate(
-    'array',
-    '\resources\languages\en\Zend_Validate.php',
-    'en'
+    array(
+        'adapter' => 'array',
+        'content' => '\resources\languages\en\Zend_Validate.php',
+        'locale'  => 'en'
+    )
 );
 
-$translate->addTranslation($translate_second);
+$translate->addTranslation(array('content' => $translate_second));
 ]]></programlisting>
 
         <para>
@@ -777,7 +858,12 @@ $translate->addTranslation($translate_second);
         </para>
 
         <programlisting><![CDATA[
-$translate->addTranslation($translate_second, 'en');
+$translate->addTranslation(
+    array(
+        'content' => $translate_second,
+        'locale'  => 'en'
+    )
+);
 ]]></programlisting>
 
         <para>
@@ -815,7 +901,13 @@ $english = array(
     'message2' => 'Nachricht 2',
     'message3' => 'Nachricht 3');
 
-$translate = new Zend_Translate('array', $english, 'de_AT');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => $english,
+        'locale' => 'de_AT'
+    )
+);
 
 if ($translate->isTranslated('message1')) {
     print "'message1' can be translated";
@@ -852,16 +944,25 @@ if ($translate->isTranslated('message1', false, 'de')) {
             <title>Log translations</title>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('gettext', $path, 'de');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => $path,
+        'locale' => 'de'
+    )
+);
 
 // Create a log instance
 $writer = new Zend_Log_Writer_Stream('/path/to/file.log');
 $log    = new Zend_Log($writer);
 
 // Attach it to the translation instance
-$translate->setOptions(array(
-    'log'             => $log,
-    'logUntranslated' => true));
+$translate->setOptions(
+    array(
+        'log'             => $log,
+        'logUntranslated' => true
+    )
+);
 
 $translate->translate('unknown string');
 ]]></programlisting>
@@ -899,17 +1000,26 @@ $translate->translate('unknown string');
             <title>Self defined log messages</title>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('gettext', $path, 'de');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => $path,
+        'locale'  => 'de'
+    )
+);
 
 // Create a log instance
 $writer = new Zend_Log_Writer_Stream('/path/to/file.log');
 $log    = new Zend_Log($writer);
 
 // Attach it to the translation instance
-$translate->setOptions(array(
-    'log'             => $log,
-    'logMessage'      => "Missing '%message%' within locale '%locale%'",
-    'logUntranslated' => true));
+$translate->setOptions(
+    array(
+        'log'             => $log,
+        'logMessage'      => "Missing '%message%' within locale '%locale%'",
+        'logUntranslated' => true
+    )
+);
 
 $translate->translate('unknown string');
 ]]></programlisting>

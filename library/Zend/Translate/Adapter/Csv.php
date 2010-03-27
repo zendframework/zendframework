@@ -40,17 +40,34 @@ class Zend_Translate_Adapter_Csv extends Zend_Translate_Adapter
     /**
      * Generates the adapter
      *
-     * @param  string              $data     OPTIONAL Translation data
-     * @param  string|Zend_Locale  $locale   OPTIONAL Locale/Language to set, identical with locale identifier,
-     *                                       see Zend_Locale for more information
-     * @param  array               $options  OPTIONAL Options for this adapter
+     * @param  array|Zend_Config $options Translation content
      */
-    public function __construct($data = null, $locale = null, array $options = array())
+    public function __construct($options = array())
     {
         $this->_options['delimiter'] = ";";
         $this->_options['length']    = 0;
         $this->_options['enclosure'] = '"';
-        parent::__construct($data, $locale, $options);
+
+        if ($options instanceof Zend_Config) {
+            $options = $options->toArray();
+        } else if (func_num_args() > 1) {
+            $args               = func_get_args();
+            $options            = array();
+            $options['content'] = array_shift($args);
+
+            if (!empty($args)) {
+                $options['locale'] = array_shift($args);
+            }
+
+            if (!empty($args)) {
+                $opt     = array_shift($args);
+                $options = array_merge($opt, $options);
+            }
+        } else if (!is_array($options)) {
+            $options = array('content' => $options);
+        }
+
+        parent::__construct($options);
     }
 
     /**

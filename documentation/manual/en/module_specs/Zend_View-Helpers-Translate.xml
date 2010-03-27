@@ -68,7 +68,13 @@
 
         <programlisting language="php"><![CDATA[
 // our example adapter
-$adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
+$adapter = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => array('simple' => 'einfach'),
+        'locale'  => 'de'
+    )
+);
 Zend_Registry::set('Zend_Translate', $adapter);
 
 // within your view
@@ -94,7 +100,13 @@ echo $this->translate('simple');
 
         <programlisting language="php"><![CDATA[
 // within your view
-$adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
+$adapter = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => array('simple' => 'einfach'),
+        'locale'  => 'de'
+    )
+);
 $this->translate()->setTranslator($adapter)->translate('simple');
 // this returns 'einfach'
 ]]></programlisting>
@@ -110,7 +122,13 @@ $this->translate()->setTranslator($adapter)->translate('simple');
 
         <programlisting language="php"><![CDATA[
 // our example adapter
-$adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
+$adapter = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => array('simple' => 'einfach'),
+        'locale'  => 'de'
+    )
+);
 
 // initiate the adapter
 $translate = new Zend_View_Helper_Translate($adapter);

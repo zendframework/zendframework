@@ -240,7 +240,9 @@ $authors = $feed->getAuthors()->getValues();
             </para>
 
             <programlisting language="php"><![CDATA[
-$trans = new Zend_Translate('xliff', '/path/to/source', $locale, array('useId' => false));
+$trans = new Zend_Translate(
+    'xliff', '/path/to/source', $locale, array('useId' => false)
+);
 ]]></programlisting>
         </sect3>
     </sect2>

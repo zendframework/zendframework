@@ -36,8 +36,19 @@ print "Here is line two\n";
         <title>Example of multi-lingual PHP code</title>
 
         <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('gettext', '/my/path/source-de.mo', 'de');
-$translate->addTranslation('/path/to/translation/fr-source.mo', 'fr');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/my/path/source-de.mo',
+        'locale'  => 'de'
+    )
+);
+$translate->addTranslation(
+    array(
+        'content' => '/path/to/translation/fr-source.mo',
+        'locale'  => 'fr'
+    )
+);
 
 print $translate->_("Example") . "\n";
 print "=======\n";
@@ -60,9 +71,11 @@ print $translate->_("Here is line two") . "\n";
 
         <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate
-    'gettext',
-    '/path/to/translation/source-de.mo',
-    'de'
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translation/source-de.mo',
+        'locale'  => 'de'
+    )
 );
 ]]></programlisting>
 

@@ -3883,7 +3883,32 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($messages));
         $this->assertEquals('Element message', $messages['foo']['isEmpty']);
         $this->assertEquals('Form message', $messages['bar']['isEmpty']);
-    }    
+    }
+
+    /**
+     * @group ZF-9540
+     */
+    public function testSubFormTranslatorPreferredOverDefaultTranslator()
+    {
+        $defaultTranslations = array('isEmpty' => 'Default message');
+        $subformTranslations = array('isEmpty' => 'SubForm message');
+                
+        $defaultTranslate = new Zend_Translate('array', $defaultTranslations);
+        $subformTranslate = new Zend_Translate('array', $subformTranslations);
+        
+        Zend_Registry::set('Zend_Translate', $defaultTranslate);
+        $this->form->addSubForm(new Zend_Form_SubForm(), 'subform');
+        $this->form->subform->setTranslator($subformTranslate);
+        $this->form->subform->addElement('text', 'foo', array('required'=>true));
+
+        $this->assertFalse($this->form->isValid(array('subform' => array('foo'=>''))));
+        $messages = $this->form->getMessages();
+        $this->assertEquals('SubForm message', $messages['subform']['foo']['isEmpty']);
+        
+        $this->assertFalse($this->form->isValidPartial(array('subform' => array('foo'=>''))));
+        $messages = $this->form->getMessages();
+        $this->assertEquals('SubForm message', $messages['subform']['foo']['isEmpty']);
+    }
 
     /**
      * Used by test methods susceptible to ZF-2794, marks a test as incomplete

@@ -2041,7 +2041,9 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             }
         }
         foreach ($this->getSubForms() as $key => $form) {
-            $form->setTranslator($translator);
+            if (null !== $translator && !$form->hasTranslator()) {
+                $form->setTranslator($translator);
+            }
             if (isset($data[$key])) {
                 $valid = $form->isValid($data[$key]) && $valid;
             } else {
@@ -2084,7 +2086,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                 }
                 $valid = $element->isValid($value, $data) && $valid;
             } elseif (null !== ($subForm = $this->getSubForm($key))) {
-                if (null !== $translator) {
+                if (null !== $translator && !$subForm->hasTranslator()) {
                     $subForm->setTranslator($translator);
                 }
                 $valid = $subForm->isValidPartial($data[$key]) && $valid;
@@ -2093,7 +2095,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
         }
         foreach ($this->getSubForms() as $key => $subForm) {
             if (!in_array($key, $validatedSubForms)) {
-                if (null !== $translator) {
+                if (null !== $translator && !$subForm->hasTranslator()) {
                     $subForm->setTranslator($translator);
                 }
 
@@ -2741,6 +2743,16 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
 
         return $this->_translator;
     }
+    
+    /**
+     * Does this form have its own specific translator?
+     * 
+     * @return bool
+     */
+    public function hasTranslator()
+    {
+        return (bool)$this->_translator;
+    }    
 
     /**
      * Get global default translator object

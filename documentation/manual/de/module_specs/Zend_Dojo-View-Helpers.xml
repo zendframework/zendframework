@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
+<!-- EN-Revision: 21585 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.view.dijit">
     <title>Dijit-Spezifische View Helfer</title>
@@ -22,14 +22,15 @@
                 <emphasis>Layout Container</emphasis>: Diese wurden erstellt um in View Skripten
                 verwendet, oder von Formular Dekoratoren für Formulare, Unterformulare oder
                 Anzeigegruppen konsumiert zu werden. Sie hüllen die verschiedenen angebotenen
-                Klassen in dijit.layout ein. Jeder Dijit Layout Viewhelfer erwartet die folgenden
-                Argumente:
+                Klassen in <command>dijit.layout</command> ein. Jeder Dijit Layout Viewhelfer
+                erwartet die folgenden Argumente:
             </para>
 
             <itemizedlist>
                 <listitem>
                     <para>
-                        <varname>$id</varname>: Der Name des Containers oder die DOM ID.
+                        <varname>$id</varname>: Der Name des Containers oder die
+                        <acronym>DOM</acronym> ID.
                     </para>
                 </listitem>
 
@@ -50,11 +51,11 @@
 
                 <listitem>
                     <para>
-                        <varname>$attribs</varname> (Optional): Jedes zusätzliche HTML Attribut das
-                        verwendet werden soll um den Container DIV darzustellen. Wenn der Schlüssel
-                        'id' an dieses Array übergeben wird, wird es für die ID des DOM Formular
-                        Elements verwendet und <varname>$id</varname> wird für seinen Namen
-                        verwendet.
+                        <varname>$attribs</varname> (Optional): Jedes zusätzliche
+                        <acronym>HTML</acronym> Attribut das verwendet werden soll um den Container
+                        Div darzustellen. Wenn der Schlüssel 'id' an dieses Array übergeben wird,
+                        wird es für die ID des <acronym>DOM</acronym> Formular Elements verwendet
+                        und <varname>$id</varname> wird für seinen Namen verwendet.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -69,10 +70,10 @@
 
         <listitem>
             <para>
-                <emphasis>Form Dijit</emphasis>: Auch wen das dijit.form.Form Dijit für die
-                Verwendung von Dijit Form Elementen nicht vollständig notwendig ist, stellt es
-                sicher das, wenn ein Versuch unternommen wird ein Formular zu übertragen das die
-                Client-seitigen Prüfungen nicht besteht, die Übertragung angehalten und eine
+                <emphasis>Form Dijit</emphasis>: Auch wen das <command>dijit.form.Form</command>
+                Dijit für die Verwendung von Dijit Form Elementen nicht vollständig notwendig ist,
+                stellt es sicher das, wenn ein Versuch unternommen wird ein Formular zu übertragen
+                das die Client-seitigen Prüfungen nicht besteht, die Übertragung angehalten und eine
                 Prüffehlermeldung geworfen wird. Der Form Dijit Viewhelfer erwartet die folgenden
                 Argumente:
             </para>
@@ -80,14 +81,16 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <varname>$id</varname>: Der Name des Containers oder der DOM ID.
+                        <varname>$id</varname>: Der Name des Containers oder der
+                        <acronym>DOM</acronym> ID.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <varname>$attribs</varname> (Optional): Alle zusätzliche HTML Attribute die
-                        verwendet werden sollten um das Container DIV darzustellen.
+                        <varname>$attribs</varname> (Optional): Alle zusätzliche
+                        <acronym>HTML</acronym> Attribute die verwendet werden sollten um das
+                        Container Div darzustellen.
                     </para>
                 </listitem>
 
@@ -117,7 +120,8 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <varname>$id</varname>: Der Name des Elements oder die DOM ID.
+                        <varname>$id</varname>: Der Name des Elements oder die
+                        <acronym>DOM</acronym> ID.
                     </para>
                 </listitem>
 
@@ -137,10 +141,11 @@
 
                 <listitem>
                     <para>
-                        <varname>$attribs</varname> (Optional): Jedes zusätzliche HTML Attribut das
-                        verwendet werden soll um das Dijit darzustellen. Wenn der Schlüssel 'id' an
-                        dieses Array übergeben wird, wird es für die ID des DOM Formular Elements
-                        verwendet und <varname>$id</varname> wird für seinen Namen verwendet.
+                        <varname>$attribs</varname> (Optional): Jedes zusätzliche
+                        <acronym>HTML</acronym> Attribut das verwendet werden soll um das Dijit
+                        darzustellen. Wenn der Schlüssel 'id' an dieses Array übergeben wird, wird
+                        es für die ID des <acronym>DOM</acronym> Formular Elements verwendet und
+                        <varname>$id</varname> wird für seinen Namen verwendet.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -169,8 +174,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
         <title>Dijit Layout Elemente</title>
 
         <para>
-            Die Familie der dijit.layout Elemente sind für die Erstellung von eigenen,
-            vorhersagbaren Layouts für die eigene Site. Für alle Fragen über die generelle
+            Die Familie der <command>dijit.layout</command> Elemente sind für die Erstellung von
+            eigenen, vorhersagbaren Layouts für die eigene Site. Für alle Fragen über die generelle
             Verwendung <ulink
                 url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/layout">lesen Sie
                 hierüber im Dojo Handbuch nach</ulink>.
@@ -188,7 +193,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>AccordionContainer</emphasis>: dijit.layout.AccordionContainer. Fügt
+                    <emphasis>AccordionContainer</emphasis>:
+                    <command>dijit.layout.AccordionContainer</command>. Fügt
                     alle Ausschnitte vertikal zusallen; das Klicken auf die Überschrift eines
                     Ausschnittes expandiert diesen und zeigt den betreffenden Ausschnitt an.
                 </para>
@@ -209,7 +215,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 
             <listitem>
                 <para>
-                    <emphasis>AccordionPane</emphasis>: dijit.layout.AccordionPane. Für die
+                    <emphasis>AccordionPane</emphasis>:
+                    <command>dijit.layout.AccordionPane</command>. Für die
                     Verwendung im AccordionContainer.
                 </para>
 
@@ -229,7 +236,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 
             <listitem>
                 <para>
-                    <emphasis>BorderContainer</emphasis>: dijit.layout.BorderContainer. Ermöglicht
+                    <emphasis>BorderContainer</emphasis>:
+                    <command>dijit.layout.BorderContainer</command>. Ermöglicht
                     Layouts mit optional größenveränderbaren Ausschnitten wie man Sie in
                     traditionellen Anwendungen oft sieht.
                 </para>
@@ -250,7 +258,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 
             <listitem>
                 <para>
-                    <emphasis>ContentPane</emphasis>: dijit.layout.ContentPane. Wird in allen
+                    <emphasis>ContentPane</emphasis>:
+                    <command>dijit.layout.ContentPane</command>. Wird in allen
                     Containern ausser AccordionContainer verwendet.
                 </para>
 
@@ -271,7 +280,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 
             <listitem>
                 <para>
-                    <emphasis>SplitContainer</emphasis>: dijit.layout.SplitContainer. Erlaubt
+                    <emphasis>SplitContainer</emphasis>:
+                    <command>dijit.layout.SplitContainer</command>. Erlaubt
                     Ausschnitte mit größenveränderbarem Inhalt; sollte in Dojo nicht mehr verwendet
                     werden, stattdessen BorderContainer.
                 </para>
@@ -294,7 +304,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 
             <listitem>
                 <para>
-                    <emphasis>StackContainer</emphasis>: dijit.layout.StackContainer. Alle
+                    <emphasis>StackContainer</emphasis>:
+                    <command>dijit.layout.StackContainer</command>. Alle
                     Ausschnitte eines StackContainers werden in einem Stack platziert; erstelle
                     Buttons oder Funktionalität um einen auf einmal zu erhalten.
                 </para>
@@ -313,7 +324,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 
             <listitem>
                 <para>
-                    <emphasis>TabContainer</emphasis>: dijit.layout.TabContainer. Alle Ausschnitte
+                    <emphasis>TabContainer</emphasis>:
+                    <command>dijit.layout.TabContainer</command>. Alle Ausschnitte
                     eines TabContainers werden in einem Stack platziert, wobei Tabs auf einer Seite
                     positioniert werden um zwischen Ihnen zu wählen.
                 </para>
@@ -342,8 +354,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                         array())</command>: Beginnt die Erfassung von Inhalt um Ihn in einem
                     Container einzufügen. <varname>$params</varname> referiert auf die Dijit
                     Parameters die mit dem Container verwendet werden, wärend
-                    <varname>$attribs</varname> auf alle generellen HTML Attribute die verwendet
-                    werden, zeigt.
+                    <varname>$attribs</varname> auf alle generellen <acronym>HTML</acronym>
+                    Attribute die verwendet werden, zeigt.
                 </para>
 
                 <para>
@@ -413,9 +425,9 @@ echo $view->borderContainer()->captureEnd('masterLayout');
         <title>Dijit Formularelemente</title>
 
         <para>
-            Dojo's Formularprüfung und Eingabe Dijits sind im dijit.form Baum. Für zusätzliche
-            Informationen über die generelle Verwendung dieser Elemente, sowie der akzeptierten
-            Parameter <ulink
+            Dojo's Formularprüfung und Eingabe Dijits sind im <command>dijit.form</command> Baum.
+            Für zusätzliche Informationen über die generelle Verwendung dieser Elemente, sowie der
+            akzeptierten Parameter <ulink
                 url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/form-validation-specialized-input">besuchen
                 Sie bitte die dijit.form Dokumentation</ulink>.
         </para>
@@ -429,7 +441,8 @@ echo $view->borderContainer()->captureEnd('masterLayout');
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Button</emphasis>: dijit.form.Button. Zeigt einen Formular Button.
+                    <emphasis>Button</emphasis>: <command>dijit.form.Button</command>. Zeigt einen
+                    Formular Button.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -443,8 +456,8 @@ echo $view->borderContainer()->captureEnd('masterLayout');
 
             <listitem>
                 <para>
-                    <emphasis>CheckBox</emphasis>: dijit.form.CheckBox. Zeigt eine Checkbox an.
-                    Akzeptiert ein optionales fünftes Argument, das Array
+                    <emphasis>CheckBox</emphasis>: <command>dijit.form.CheckBox</command>. Zeigt
+                    eine Checkbox an. Akzeptiert ein optionales fünftes Argument, das Array
                     <varname>$checkedOptions</varname>, welches das folgende enthalten kann:
                 </para>
 
@@ -482,23 +495,24 @@ echo $view->borderContainer()->captureEnd('masterLayout');
 
             <listitem>
                 <para>
-                    <emphasis>ComboBox</emphasis>: dijit.layout.ComboBox. Komboboxen sind ein Hybrid
-                    zwischen einem Select und einer Textbox mit automatischer Vervollständigung. Der
-                    grundsätzliche Unterschied ist das man eine Option eingeben kann die nicht in
-                    der Liste der vorhandenen Optionen ist, und trotzdem eine gültige Eingabe
-                    angenommen wird. Sie akzeptiert ein optionales fünftes Argument, ein
-                    assoziatives Array <varname>$options</varname>; wenn es angegeben wird, wird
-                    ComboBox als <emphasis>select</emphasis> dargestellt. Es ist auch zu beachten
-                    dass die verschiedenen <emphasis>Labelwerte</emphasis> des
+                    <emphasis>ComboBox</emphasis>: <command>dijit.layout.ComboBox</command>.
+                    Comboboxen sind ein Hybrid zwischen einem Select und einer Textbox mit
+                    automatischer Vervollständigung. Der grundsätzliche Unterschied ist das man eine
+                    Option eingeben kann die nicht in der Liste der vorhandenen Optionen ist, und
+                    trotzdem eine gültige Eingabe angenommen wird. Sie akzeptiert ein optionales
+                    fünftes Argument, ein assoziatives Array <varname>$options</varname>; wenn es
+                    angegeben wird, wird ComboBox als <emphasis>select</emphasis> dargestellt. Es
+                    ist auch zu beachten dass die verschiedenen <emphasis>Labelwerte</emphasis> des
                     <varname>$options</varname> Arrays im Formular zurückgegeben werden -- nicht
                     die Werte selbst.
                 </para>
 
                 <para>
-                    Alternativ kann eine Information übergeben werden die einen dojo.data
-                    Datenspeicher bezeichnet der mit diesem Element zu verwenden ist. Wenn er
-                    angegeben wird, wird die ComboBox als Texteingabe (<emphasis>input</emphasis>)
-                    dargestellt, und wird seine Optionen über den Datenspeicher holen.
+                    Alternativ kann eine Information übergeben werden die einen
+                    <command>dojo.data</command> Datenspeicher bezeichnet der mit diesem Element zu
+                    verwenden ist. Wenn er angegeben wird, wird die ComboBox als Texteingabe
+                    (<emphasis>input</emphasis>) dargestellt, und wird seine Optionen über den
+                    Datenspeicher holen.
                 </para>
 
                 <para>
@@ -525,14 +539,15 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                             <listitem>
                                 <para>
                                     <emphasis>type</emphasis>: Der Typ des Datenspeichers der
-                                    verwendet werden soll; z.B., 'dojo.data.ItemFileReadStore'.
+                                    verwendet werden soll; z.B.,
+                                    '<command>dojo.data.ItemFileReadStore</command>'.
                                 </para>
                             </listitem>
 
                             <listitem>
                                 <para>
                                     <emphasis>params</emphasis> (Optional): Ein assoziatives Array
-                                    von Schlüssel/Werte Paaren die zu verwenden sind um den
+                                    von Schlüssel und Werte Paaren die zu verwenden sind um den
                                     Datenspeicher zu konfigurieren. Der 'url' Parameter ist ein
                                     typisches Beispiel.
                                 </para>
@@ -556,16 +571,17 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                             <listitem>
                                 <para>
                                     <emphasis>storeType</emphasis>: Ein String der den
-                                    dojo.data.type des Datenspeichers anzeigt der zu verwenden ist
-                                    (z.B. 'dojo.data.ItemFileReadStore').
+                                    <command>dojo.data</command> Typ des Datenspeichers anzeigt der
+                                    zu verwenden ist
+                                    (z.B. '<command>dojo.data.ItemFileReadStore</commmand>').
                                 </para>
                             </listitem>
 
                             <listitem>
                                 <para>
                                     <emphasis>storeParams</emphasis>: Ein assoziatives Array von
-                                    Schlüssel/Wertepaaren mit denen der Datenspeicher konfiguriert
-                                    wird.
+                                    Schlüssel und Wertepaaren mit denen der Datenspeicher
+                                    konfiguriert wird.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -604,7 +620,8 @@ echo $view->comboBox(
 
             <listitem>
                 <para>
-                    <emphasis>CurrencyTextBox</emphasis>: dijit.form.CurrencyTextBox. Abgeleitet von
+                    <emphasis>CurrencyTextBox</emphasis>:
+                    <command>dijit.form.CurrencyTextBox</command>. Abgeleitet von
                     ValidationTextBox, und bietet Clientseitige Prüfung von Wärgungen. Es erwartet
                     das der Dijit Parameter 'currency' mit einem entsprechenden 3-zeichen
                     Währungscode angegeben wird. Man kann auch anderen Dijit Parameter spezifizieren
@@ -647,11 +664,11 @@ $view->headMeta()->appendHttpEquiv('Content-Type',
 
             <listitem>
                 <para>
-                    <emphasis>DateTextBox</emphasis>: dijit.form.DateTextBox. Wird von
-                    ValidationTextBox abgeleitet, und bietet sowohl Client-seitige Prüfungen von
-                    Daten, als auch einen Dropdown Kalender für die Auswahl von Daten. Man kann
-                    jeden Dijit Parameter spezifizieren der für ValidationTextBox oder TextBox
-                    vorhanden ist.
+                    <emphasis>DateTextBox</emphasis>: <command>dijit.form.DateTextBox</command>.
+                    Wird von ValidationTextBox abgeleitet, und bietet sowohl Client-seitige
+                    Prüfungen von Daten, als auch einen Dropdown Kalender für die Auswahl von Daten.
+                    Man kann jeden Dijit Parameter spezifizieren der für ValidationTextBox oder
+                    TextBox vorhanden ist.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -665,11 +682,11 @@ echo $view->dateTextBox(
 
             <listitem>
                 <para>
-                    <emphasis>Editor</emphasis>: dijit.Editor. Bietet einen WYSIGYG Editor über den
-                    Benutzer Inhalte erstellen oder bearbieten können.
-                    <command>dijit.Editor</command> ist ein pluginfähiger, erweiterbarer Editor mit
-                    einer Vielzahl an Parametern die für die Anpassung verwendet werden können;
-                    siehe <ulink
+                    <emphasis>Editor</emphasis>: <command>dijit.Editor</command>. Bietet einen
+                    <acronym>WYSIGYG</acronym> Editor über den Benutzer Inhalte erstellen oder
+                    bearbeiten können. <command>dijit.Editor</command> ist ein pluginfähiger,
+                    erweiterbarer Editor mit einer Vielzahl an Parametern die für die Anpassung
+                    verwendet werden können; siehe <ulink
                         url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">in
                         die dijit.Editor Dokumentation</ulink> für weitere Details.
                 </para>
@@ -685,16 +702,16 @@ echo $view->editor('foo');
                         Das Editor dijit verwendet standardmäßig ein <acronym>HTML</acronym>
                         <acronym>DIV</acronym>. Die <ulink
                             url="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText">Dokumentation</ulink>
-                        für <classname>dijit._editor.RichText</classname> zeigt dass es potentielle
-                        Sicherheits Probleme bereiten kann wenn man es auf ein HTML
-                        <acronym>TEXTAREA</acronym> erstellt.
+                        für <command>dijit._editor.RichText</command> zeigt dass es potentielle
+                        Sicherheits Probleme bereiten kann wenn man es auf ein
+                        <acronym>HTML</acronym> <acronym>TEXTAREA</acronym> erstellt.
                     </para>
 
                     <para>
                         Um eine sanfte Degration in Umgebungen zu erlauben in denen Javascript nicht
                         vorhanden ist, umhüllt <classname>Zend_Dojo_View_Helper_Editor</classname>
-                        auch eine <acronym>textarea</acronym> in einem <acronym>noscript</acronym>
-                        Tag; der Inhalt dieser <acronym>textarea</acronym> wird richtig escaped
+                        auch eine <acronym>TEXTAREA</acronym> in einem <acronym>NOSCRIPT</acronym>
+                        Tag; der Inhalt dieser <acronym>TEXTAREA</acronym> wird richtig escaped
                         um sicherheitsproblematische Vektoren zu vermeiden.
                     </para>
                 </note>
@@ -702,13 +719,14 @@ echo $view->editor('foo');
 
             <listitem>
                 <para>
-                    <emphasis>FilteringSelect</emphasis>: dijit.form.FilteringSelect. Wie die
-                    ComboBox ist das ein Select/Text Hybrid der entweder eine angegebenen Liste von
-                    Optionen darstellen kann, oder jene vom dojo.data Datenspeicher. Anders als
-                    ComboBox, erlaubt FilteringSelect keine Eingabe einer Option die nicht in seiner
-                    Liste vorhanden ist. Zusätzlich funktioniert es Sie ein Standatrd Select in dem
-                    die Optionswerte, nicht die Label, zurückgegeben werden wenn das Formular
-                    übertragen wird.
+                    <emphasis>FilteringSelect</emphasis>:
+                    <command>dijit.form.FilteringSelect</command>. Wie die ComboBox ist das ein
+                    Select und Text Hybrid der entweder eine angegebenen Liste von Optionen
+                    darstellen kann, oder jene vom <command>dojo.data</command> Datenspeicher.
+                    Anders als ComboBox, erlaubt FilteringSelect keine Eingabe einer Option die
+                    nicht in seiner Liste vorhanden ist. Zusätzlich funktioniert es Sie ein Standard
+                    Select in dem die Optionswerte, nicht die Label, zurückgegeben werden wenn das
+                    Formular übertragen wird.
                 </para>
 
                 <para>
@@ -720,7 +738,8 @@ echo $view->editor('foo');
             <listitem>
                 <para>
                     <emphasis>HorizontalSlider</emphasis> und <emphasis>VerticalSlider</emphasis>:
-                    dijit.form.HorizontalSlider und dijit.form.VerticalSlider. Schieber sind UI
+                    <command>dijit.form.HorizontalSlider</command> und
+                    <command>dijit.form.VerticalSlider</command>. Schieber sind UI
                     Widgets für die Auswahl von Zahlen in einem gegebenen Bereich; es gibt eine
                     horizontale und eine vertikale Variante.
                 </para>
@@ -748,8 +767,8 @@ echo $view->editor('foo');
 
                     <listitem>
                         <para>
-                            'pageIncrement' kann den Wert spezifizieren mit dem addiert/subtrahiert
-                            wird wenn pageUp und pageDown verwendet werden.
+                            'pageIncrement' kann den Wert spezifizieren mit dem addiert oder
+                            subtrahiert wird wenn pageUp und pageDown verwendet werden.
                         </para>
                     </listitem>
 
@@ -763,8 +782,8 @@ echo $view->editor('foo');
                 </itemizedlist>
 
                 <para>
-                    Die Zend Framework Implementation erstellt ein verstecktes Element um den Wert
-                    des Schiebers zu speichern.
+                    Die Implementation von Zend Framework erstellt ein verstecktes Element um den
+                    Wert des Schiebers zu speichern.
                 </para>
 
                 <para>
@@ -809,15 +828,15 @@ echo $view->editor('foo');
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    <emphasis>container</emphasis> (Optional): Ein Array von Parametern
-                                    und Attributen für den Rule Container.
+                                    <emphasis>container</emphasis> (Optional): Ein Array von
+                                    Parametern und Attributen für den Rule Container.
                                 </para>
                             </listitem>
 
                             <listitem>
                                 <para>
-                                    <emphasis>labels</emphasis> (Optional): Ein Array von Parametern und
-                                    Attributen für die Labels des Containers.
+                                    <emphasis>labels</emphasis> (Optional): Ein Array von Parametern
+                                    und Attributen für die Labels des Containers.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -825,10 +844,11 @@ echo $view->editor('foo');
 
                     <listitem>
                         <para>
-                            <emphasis>attribs</emphasis> (Optional): HTML Attribute die mit den
-                            Maßstäben/Labels verwendet werden. Diese sollten dem Format der
-                            <property>params</property> Option folgen und können ein assoziatives
-                            Array mit den Schlüsseln 'container' und 'labels' sein.
+                            <emphasis>attribs</emphasis> (Optional): <acronym>HTML</acronym>
+                            Attribute die mit den Maßstäben und Labels verwendet werden. Diese
+                            sollten dem Format der <property>params</property> Option folgen und
+                            können ein assoziatives Array mit den Schlüsseln 'container' und
+                            'labels' sein.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -886,8 +906,9 @@ echo $view->horizontalSlider(
 
             <listitem>
                 <para>
-                    <emphasis>NumberSpinner</emphasis>: dijit.form.NumberSpinner. Eine Textbox für
-                    numerische Eingaben mit Buttons für das Inkrementieren und Dekrementieren.
+                    <emphasis>NumberSpinner</emphasis>: <command>dijit.form.NumberSpinner</command>.
+                    Eine Textbox für numerische Eingaben mit Buttons für das Inkrementieren und
+                    Dekrementieren.
                 </para>
 
                 <para>
@@ -915,9 +936,9 @@ echo $view->numberSpinner(
 
             <listitem>
                 <para>
-                    <emphasis>NumberTextBox</emphasis>: dijit.form.NumberTextBox. NumberTextBox
-                    bietet die Möglichkeit die Nummerneinträge auf lokalisiertem Weg zu formatieren
-                    und anzuzeigen, optional gegen angegebene Abhängigkeiten.
+                    <emphasis>NumberTextBox</emphasis>: <command>dijit.form.NumberTextBox</command>.
+                    NumberTextBox bietet die Möglichkeit die Nummerneinträge auf lokalisiertem Weg
+                    zu formatieren und anzuzeigen, optional gegen angegebene Abhängigkeiten.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -937,7 +958,8 @@ echo $view->numberTextBox(
 
             <listitem>
                 <para>
-                    <emphasis>PasswordTextBox</emphasis>: dijit.form.ValidationTextBox bindet eine
+                    <emphasis>PasswordTextBox</emphasis>:
+                    <command>dijit.form.ValidationTextBox</command> bindet eine
                     Passworteingabe. PasswordTextBox bietet die Möglichkeit Passworteingaben zu
                     erstellen die das aktuelle Dijitthema verwenden, sowie Clientseitige Prüfungen
                     erlauben.
@@ -959,16 +981,16 @@ echo $view->passwordTextBox(
 
             <listitem>
                 <para>
-                    <emphasis>RadioButton</emphasis>: dijit.form.RadioButton. Ein Set von Optionen
-                    von denen nur eine ausgewählt werden kann. Dieses Verhalten entspricht auf jedem
-                    Fall dem normaler Radio Buttons, hat aber das Look-and-Feel das mit dem anderer
-                    Dijit konsistent ist.
+                    <emphasis>RadioButton</emphasis>: <command>dijit.form.RadioButton</command>. Ein
+                    Set von Optionen von denen nur eine ausgewählt werden kann. Dieses Verhalten
+                    entspricht auf jedem Fall dem normaler Radio Buttons, hat aber das Look-and-Feel
+                    das mit dem anderer Dijit konsistent ist.
                 </para>
 
                 <para>
                     RadioButton akzeptiert ein optionales fünftes Argument,
-                    <varname>$options</varname>, ein assoziatives Array von Werte/Label Paaren das
-                    als Radiooptionen verwendet wird. Diese können auch als
+                    <varname>$options</varname>, ein assoziatives Array von Werte und Label Paaren
+                    das als Radiooptionen verwendet wird. Diese können auch als
                     <varname>$attribs</varname> Schlüssel <property>options</property> angegeben
                     werden.
                 </para>
@@ -990,11 +1012,11 @@ echo $view->radioButton(
 
             <listitem>
                 <para>
-                    <emphasis>SimpleTextarea</emphasis>: dijit.form.SimpleTextarea. Diese
-                    funktionieren wie normale Textareas, werden aber gestylt indem das aktuelle
-                    dijit Thema verwendet wird. Es müssen weder die rows noch die columns Attribute
-                    spezifiziert werden; verwende stattdessen <property>ems</property> oder Prozente
-                    für die Breite und Höhe.
+                    <emphasis>SimpleTextarea</emphasis>:
+                    <command>dijit.form.SimpleTextarea</command>. Diese funktionieren wie normale
+                    Textareas, werden aber gestylt indem das aktuelle dijit Thema verwendet wird. Es
+                    müssen weder die rows noch die columns Attribute spezifiziert werden; verwende
+                    stattdessen <property>ems</property> oder Prozente für die Breite und Höhe.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -1009,19 +1031,19 @@ echo $view->simpleTextarea(
 
             <listitem>
                 <para>
-                    <emphasis>SubmitButton</emphasis>: Ein dijit.form.Button bindet ein Submit
-                    Eingabeelement. Siehe den Button Viewhelfer für weitere Details; der
-                    grundsätzliche Unterschied ist der, das dieser Button ein Formular übertragen
-                    kann.
+                    <emphasis>SubmitButton</emphasis>: Ein <command>dijit.form.Button</command>
+                    bindet ein Submit Eingabeelement. Siehe den Button Viewhelfer für weitere
+                    Details; der grundsätzliche Unterschied ist der, das dieser Button ein Formular
+                    übertragen kann.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>Textarea</emphasis>: dijit.form.Textarea. Diese funktionieren wie
-                    normale Textareas, ausgenommen das Sie statt dem Setzen einer Anzahl von Reihen
-                    als Benutzertypen expandieren. Die Breite sollte über Styleeinstellungen
-                    spezifiziert werden.
+                    <emphasis>Textarea</emphasis>: <command>dijit.form.Textarea</command>. Diese
+                    funktionieren wie normale Textareas, ausgenommen das Sie statt dem Setzen einer
+                    Anzahl von Reihen als Benutzertypen expandieren. Die Breite sollte über
+                    Styleeinstellungen spezifiziert werden.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -1036,19 +1058,19 @@ echo $view->textarea(
 
             <listitem>
                 <para>
-                    <emphasis>TextBox</emphasis>: dijit.form.TextBox. Diese Element ist primär
-                    vorhanden um das übliche Look-and-Feel zwischen den verschiedenen Dijit
-                    Elementen zu bieten, und um die Basisfunktionalität der anderen von TextBox
-                    abgeleiteten Klassen (ValidationTextBox, NumberTextBox, CurrencyTextBox,
-                    DateTextBox, und TimeTextBox) zu bieten.
+                    <emphasis>TextBox</emphasis>: <command>dijit.form.TextBox</command>. Diese
+                    Element ist primär vorhanden um das übliche Look-and-Feel zwischen den
+                    verschiedenen Dijit Elementen zu bieten, und um die Basisfunktionalität der
+                    anderen von TextBox abgeleiteten Klassen (ValidationTextBox, NumberTextBox,
+                    CurrencyTextBox, DateTextBox, und TimeTextBox) zu bieten.
                 </para>
 
                 <para>
-                    Übliche Dijitparameter enthalten 'lowercase' (Casten auf kleinschreibung),
-                    'uppercase' (Casten auf GROßSCHREIBUNG), 'propercase' (Casten auf ProperCase),
-                    und 'trim' (entferne führende und schließende Leerezeichen); alle akzeptieren
-                    boolsche Werte. Zusätzlich kann es gewünscht sein die Parameter 'size' und
-                    'maxLength' zu spezifizieren.
+                    Übliche Dijitparameter enthalten 'lowercase' (Casten auf lowercase),
+                    'uppercase' (Casten auf <acronym>UPPERCASE</acronym>), 'propercase' (Casten auf
+                    ProperCase), und 'trim' (entferne führende und schließende Leerezeichen); alle
+                    akzeptieren boolsche Werte. Zusätzlich kann es gewünscht sein die Parameter
+                    'size' und 'maxLength' zu spezifizieren.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -1069,11 +1091,11 @@ echo $view->textBox(
 
             <listitem>
                 <para>
-                    <emphasis>TimeTextBox</emphasis>: dijit.form.TimeTextBox. Auch aus der TextBox
-                    Familie, bietet TimeTextBox eine Drop Down Auswahl für Zeiten die verschiebbar
-                    ist und die vom Benutzer ausgewählt werden kann. Dijit Parameter erlaubes es die
-                    Zeit zu spezifizieren die im Select vorhanden ist sowie auch den sichtbaren
-                    Bereich der Zeiten.
+                    <emphasis>TimeTextBox</emphasis>: <command>dijit.form.TimeTextBox</command>.
+                    Auch aus der TextBox Familie, bietet TimeTextBox eine Drop Down Auswahl für
+                    Zeiten die verschiebbar ist und die vom Benutzer ausgewählt werden kann. Dijit
+                    Parameter erlaubes es die Zeit zu spezifizieren die im Select vorhanden ist
+                    sowie auch den sichtbaren Bereich der Zeiten.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -1094,8 +1116,9 @@ echo $view->timeTextBox(
 
             <listitem>
                 <para>
-                    <emphasis>ValidationTextBox</emphasis>: dijit.form.ValidateTextBox. Bietet
-                    Client-seitige Prüfungen für Textelemente. Ist von TextBox abgeleitet.
+                    <emphasis>ValidationTextBox</emphasis>:
+                    <command>dijit.form.ValidateTextBox</command>. Bietet Client-seitige Prüfungen
+                    für Textelemente. Ist von TextBox abgeleitet.
                 </para>
 
                 <para>
@@ -1128,9 +1151,9 @@ echo $view->timeTextBox(
                     <listitem>
                         <para>
                             <emphasis>required</emphasis>: Ob das Element benötigt wird oder nicht.
-                            Wenn das der Fall ist, und das Element in einem dijit.form.Form
-                            eingebettet ist, wird es als ungültig markiert und die Übertragung
-                            verhindert.
+                            Wenn das der Fall ist, und das Element in einem
+                            <command>dijit.form.Form</command> eingebettet ist, wird es als ungültig
+                            markiert und die Übertragung verhindert.
                         </para>
                     </listitem>
                 </itemizedlist>

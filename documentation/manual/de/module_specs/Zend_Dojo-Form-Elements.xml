@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21358 -->
+<!-- EN-Revision: 21585 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.elements">
     <title>Dijit-Specifische Fomularelemente</title>
@@ -1474,7 +1474,7 @@ $form->addElement(
                 <para>
                     <methodname>setVisibleIncrement($format)</methodname> und
                     <methodname>getVisibleIncrement()</methodname>: Definiert das der Inkrement in
-                    der Zeitauswahl sichtbar ist; muß dem <acronym>ISO_8601</acronym> Format
+                    der Zeitauswahl sichtbar ist; muß dem <constant>ISO_8601</constant> Format
                     entsprechen.
                 </para>
             </listitem>
@@ -1484,7 +1484,7 @@ $form->addElement(
                     <methodname>setVisibleRange($format)</methodname> und
                     <methodname>getVisibleRange()</methodname>: Setzt und retorniert den
                     Zeitbereich der in der Zeitauswahl zu jedem Zeitpunkt sichtbar ist; muß dem
-                    <acronym>ISO_8601</acronym> Format entsprechen.
+                    <constant>ISO_8601</constant> Format entsprechen.
                 </para>
             </listitem>
         </itemizedlist>

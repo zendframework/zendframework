@@ -16,7 +16,7 @@ First pass
 [X] Zend_Registry
 [X] Zend_Config
 [X] Zend_Debug
-[ ] Zend_Log
+[X] Zend_Log
     Would need to ignore Firebug writer for now, and potentially Db writer
 [ ] Zend_Cache
     [ ] Zend_Locale

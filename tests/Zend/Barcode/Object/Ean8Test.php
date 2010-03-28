@@ -114,7 +114,9 @@ class Zend_Barcode_Object_Ean8Test extends Zend_Barcode_Object_TestCommon
     public function testGetKnownWidthWithoutOrientation()
     {
         $this->_object->setText('123456');
-        $this->assertEquals(82, $this->_object->getWidth());
+        $this->assertEquals(87, $this->_object->getWidth());
+        $this->_object->setWithQuietZones(false);
+        $this->assertEquals(67, $this->_object->getWidth(true));
     }
 
     public function testCompleteGeneration()

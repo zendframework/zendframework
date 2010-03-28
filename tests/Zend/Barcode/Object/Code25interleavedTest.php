@@ -170,6 +170,8 @@ class Zend_Barcode_Object_Code25interleavedTest extends Zend_Barcode_Object_Test
     {
         $this->_object->setText('0123456789');
         $this->assertEquals(119, $this->_object->getWidth());
+        $this->_object->setWithQuietZones(false);
+        $this->assertEquals(99, $this->_object->getWidth(true));
     }
 
     public function testCompleteGeneration()

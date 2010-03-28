@@ -117,6 +117,8 @@ class Zend_Barcode_Object_PostnetTest extends Zend_Barcode_Object_TestCommon
     {
         $this->_object->setText('012345');
         $this->assertEquals(186, $this->_object->getWidth());
+        $this->_object->setWithQuietZones(false);
+        $this->assertEquals(146, $this->_object->getWidth(true));
     }
 
     public function testCompleteGeneration()

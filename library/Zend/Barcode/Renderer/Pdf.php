@@ -166,7 +166,7 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
     }
 
     /**
-     * Draw a polygon in the rendering resource
+     * Draw a text in the rendering resource
      * @param string $text
      * @param float $size
      * @param array $position

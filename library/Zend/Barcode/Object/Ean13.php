@@ -82,6 +82,7 @@ class Zend_Barcode_Object_Ean13 extends Zend_Barcode_Object_ObjectAbstract
     {
         $this->_barcodeLength = 13;
         $this->_mandatoryChecksum = true;
+        $this->_mandatoryQuietZones = true;
     }
 
     /**

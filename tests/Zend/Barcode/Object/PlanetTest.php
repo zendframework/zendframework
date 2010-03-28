@@ -117,6 +117,8 @@ class Zend_Barcode_Object_PlanetTest extends Zend_Barcode_Object_TestCommon
     {
         $this->_object->setText('00000012345');
         $this->assertEquals(286, $this->_object->getWidth());
+        $this->_object->setWithQuietZones(false);
+        $this->assertEquals(246, $this->_object->getWidth(true));
     }
 
     public function testCompleteGeneration()

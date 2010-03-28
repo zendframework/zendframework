@@ -49,6 +49,7 @@ class Zend_Barcode_Object_Upca extends Zend_Barcode_Object_Ean13
     {
         $this->_barcodeLength = 12;
         $this->_mandatoryChecksum = true;
+        $this->_mandatoryQuietZones = true;
     }
 
     /**

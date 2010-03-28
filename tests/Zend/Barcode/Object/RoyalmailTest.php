@@ -109,6 +109,8 @@ class Zend_Barcode_Object_RoyalmailTest extends Zend_Barcode_Object_TestCommon
     {
         $this->_object->setText('012345');
         $this->assertEquals(158, $this->_object->getWidth());
+        $this->_object->setWithQuietZones(false);
+        $this->assertEquals(118, $this->_object->getWidth(true));
     }
 
     public function testCompleteGeneration()

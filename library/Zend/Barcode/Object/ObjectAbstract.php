@@ -104,6 +104,18 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     protected $_withBorder = false;
 
     /**
+     * Activate/deactivate drawing of quiet zones
+     * @var boolean
+     */
+    protected $_withQuietZones = true;
+
+    /**
+     * Force quiet zones even if
+     * @var boolean
+     */
+    protected $_mandatoryQuietZones = false;
+
+    /**
      * Orientation of the barcode in degrees
      * @var float
      */
@@ -479,6 +491,26 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     }
 
     /**
+     * Activate/deactivate drawing of the quiet zones
+     * @param boolean $value
+     * @return Zend_Barcode_Object
+     */
+    public function setWithQuietZones($value)
+    {
+        $this->_withQuietZones = (bool) $value;
+        return $this;
+    }
+
+    /**
+     * Retrieve if quiet zones are draw or not
+     * @return boolean
+     */
+    public function getWithQuietZones()
+    {
+        return $this->_withQuietZones;
+    }
+
+    /**
      * Allow fast inversion of font/bars color and background color
      * @return Zend_Barcode_Object
      */
@@ -770,7 +802,11 @@ abstract class Zend_Barcode_Object_ObjectAbstract
      */
     public function getQuietZone()
     {
-        return 10 * $this->_barThinWidth * $this->_factor;
+        if ($this->_withQuietZones || $this->_mandatoryQuietZones) {
+            return 10 * $this->_barThinWidth * $this->_factor;
+        } else {
+            return 0;
+        }
     }
 
     /**

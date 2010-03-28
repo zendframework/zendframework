@@ -123,6 +123,8 @@ class Zend_Barcode_Object_UpceTest extends Zend_Barcode_Object_TestCommon
     {
         $this->_object->setText('1234567');
         $this->assertEquals(71, $this->_object->getWidth());
+        $this->_object->setWithQuietZones(false);
+        $this->assertEquals(71, $this->_object->getWidth(true));
     }
 
     public function testCompleteGeneration()

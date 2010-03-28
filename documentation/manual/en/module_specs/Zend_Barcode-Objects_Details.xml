@@ -340,6 +340,10 @@
                 <classname>Zend_Barcode_Object_Ean13</classname> will automatically
                 prepend the missing zero to the barcode text.
             </para>
+
+            <para>
+                The option <property>withQuietZones</property> has no effect with this barcode.
+            </para>
         </note>
     </sect3>
 
@@ -717,6 +721,10 @@
                 <classname>Zend_Barcode_Object_Upca</classname> will automatically
                 prepend missing zeros to the barcode text.
             </para>
+
+            <para>
+                The option <property>withQuietZones</property> has no effect with this barcode.
+            </para>
         </note>
     </sect3>
 
@@ -778,6 +786,10 @@
                 If the first character of the text to encode is not 0 or 1,
                 <classname>Zend_Barcode_Object_Upce</classname> will automatically
                 replace it by 0.
+            </para>
+
+            <para>
+                The option <property>withQuietZones</property> has no effect with this barcode.
             </para>
         </note>
     </sect3>

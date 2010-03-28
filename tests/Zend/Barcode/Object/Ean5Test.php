@@ -105,6 +105,8 @@ class Zend_Barcode_Object_Ean5Test extends Zend_Barcode_Object_TestCommon
     {
         $this->_object->setText('45678');
         $this->assertEquals(68, $this->_object->getWidth());
+        $this->_object->setWithQuietZones(false);
+        $this->assertEquals(48, $this->_object->getWidth(true));
     }
 
     public function testCompleteGeneration()

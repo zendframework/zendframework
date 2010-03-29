@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 21586 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.exception.previous">
     <title>Vorherige Exceptions</title>
 
     <para>
         Seit Zend Framework 1.10 implementiert <classname>Zend_Exception</classname> die
-        Unterstützung von PHP 5.3 für vorgerige Exceptions. Einfach gesagt, wenn man in einem
-        <methodname>catch</methodname> ist, kann man eine neue Exception werfen welche auf die
-        vorherige Exception referenziert, was wiederum hilft indem zusätzlicher Kontext angeboten
-        wird wenn man debuggt. Indem diese Unterstützung im Zend Framework angeboten wird, ist der
-        eigene Code jetzt vorwärts kompatibel mit PHP 5.3.
+        Unterstützung von <acronym>PHP</acronym> 5.3 für vorgerige Exceptions. Einfach gesagt, wenn
+        man in einem <methodname>catch</methodname> ist, kann man eine neue Exception werfen welche
+        auf die vorherige Exception referenziert, was wiederum hilft indem zusätzlicher Kontext
+        angeboten wird wenn man debuggt. Indem diese Unterstützung im Zend Framework angeboten wird,
+        ist der eigene Code jetzt vorwärts kompatibel mit <acronym>PHP</acronym> 5.3.
     </para>
 
     <para>

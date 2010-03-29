@@ -67,7 +67,8 @@ function ZendTest_Autoloader($class_name) {
     }
     return false;
 }
-$autoloader->unshiftAutoloader('ZendTest_Autoloader');
+spl_autoload_register('ZendTest_Autoloader', true, true);
+// $autoloader->unshiftAutoloader('ZendTest_Autoloader');
 
 /*
  * Load the user-defined test configuration file, if it exists; otherwise, load

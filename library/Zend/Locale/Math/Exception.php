@@ -19,15 +19,19 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace Zend\Locale\Math;
 
 /**
- * @uses       Zend_Locale_Exception
+ * @uses       \Zend\Locale\Exception
  * @category   Zend
  * @package    Zend_Locale
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Locale_Math_Exception extends Zend_Locale_Exception
+class Exception extends \Zend\Locale\Exception
 {
     protected $op1 = null;
     protected $op2 = null;

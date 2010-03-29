@@ -21,18 +21,28 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Locale\Data;
+
+use \Zend\Locale\Exception,
+    \Zend\Locale\Locale,
+    \Zend\Cache\Cache,
+    \Zend\Cache\Core as CacheCore;
+
+/**
  * Locale data reader, handles the CLDR
  *
- * @uses       Zend_Cache
- * @uses       Zend_Locale
- * @uses       Zend_Locale_Exception
+ * @uses       \Zend\Cache\Cache
+ * @uses       \Zend\Locale
+ * @uses       \Zend\Exception
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage Data
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Locale_Data
+class Data
 {
     /**
      * Locale files
@@ -53,7 +63,7 @@ class Zend_Locale_Data
     /**
      * Internal cache for ldml values
      *
-     * @var Zend_Cache_Core
+     * @var \Zend\Cache\Core
      * @access private
      */
     private static $_cache = null;
@@ -135,7 +145,7 @@ class Zend_Locale_Data
      * @param  string $attribute
      * @param  string $value
      * @param  array  $temp
-     * @throws Zend_Locale_Exception
+     * @throws \Zend\Exception
      * @access private
      */
     private static function _findRoute($locale, $path, $attribute, $value, &$temp)
@@ -143,9 +153,9 @@ class Zend_Locale_Data
         // load locale file if not already in cache
         // needed for alias tag when referring to other locale
         if (empty(self::$_ldml[(string) $locale])) {
-            $filename = dirname(__FILE__) . '/Data/' . $locale . '.xml';
+            $filename = __DIR__ . '/resources/' . $locale . '.xml';
             if (!file_exists($filename)) {
-                throw new Zend_Locale_Exception("Missing locale file '$filename' for '$locale' locale.");
+                throw new Exception("Missing locale file '$filename' for '$locale' locale.");
             }
 
             self::$_ldml[(string) $locale] = simplexml_load_file($filename);
@@ -265,17 +275,17 @@ class Zend_Locale_Data
     /**
      * Internal function for checking the locale
      *
-     * @param string|Zend_Locale $locale Locale to check
+     * @param string|\Zend\Locale $locale Locale to check
      * @return string
      */
     private static function _checkLocale($locale)
     {
         if (empty($locale)) {
-            $locale = new Zend_Locale();
+            $locale = new Locale();
         }
 
-        if (!(Zend_Locale::isLocale((string) $locale, null, false))) {
-            throw new Zend_Locale_Exception("Locale (" . (string) $locale . ") is a unknown locale");
+        if (!(Locale::isLocale((string) $locale, null, false))) {
+            throw new Exception("Locale (" . (string) $locale . ") is a unknown locale");
         }
 
         return (string) $locale;
@@ -295,7 +305,7 @@ class Zend_Locale_Data
         $locale = self::_checkLocale($locale);
 
         if (!isset(self::$_cache) && !self::$_cacheDisabled) {
-            self::$_cache = Zend_Cache::factory(
+            self::$_cache = Cache::factory(
                 'Core',
                 'File',
                 array('automatic_serialization' => true),
@@ -890,7 +900,7 @@ class Zend_Locale_Data
                 break;
 
             default :
-                throw new Zend_Locale_Exception("Unknown list ($path) for parsing locale data.");
+                throw new Exception("Unknown list ($path) for parsing locale data.");
                 break;
         }
 
@@ -915,7 +925,7 @@ class Zend_Locale_Data
         $locale = self::_checkLocale($locale);
 
         if (!isset(self::$_cache) && !self::$_cacheDisabled) {
-            self::$_cache = Zend_Cache::factory(
+            self::$_cache = Cache::factory(
                 'Core',
                 'File',
                 array('automatic_serialization' => true),
@@ -1388,7 +1398,7 @@ class Zend_Locale_Data
                 break;
 
             default :
-                throw new Zend_Locale_Exception("Unknown detail ($path) for parsing locale data.");
+                throw new Exception("Unknown detail ($path) for parsing locale data.");
                 break;
         }
 
@@ -1405,7 +1415,7 @@ class Zend_Locale_Data
     /**
      * Returns the set cache
      *
-     * @return Zend_Cache_Core The set cache
+     * @return \Zend\Cache\Core The set cache
      */
     public static function getCache()
     {
@@ -1415,9 +1425,9 @@ class Zend_Locale_Data
     /**
      * Set a cache for Zend_Locale_Data
      *
-     * @param Zend_Cache_Core $cache A cache frontend
+     * @param \Zend\Cache\Core $cache A cache frontend
      */
-    public static function setCache(Zend_Cache_Core $cache)
+    public static function setCache(CacheCore $cache)
     {
         self::$_cache = $cache;
     }

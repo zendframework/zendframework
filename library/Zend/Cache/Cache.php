@@ -131,9 +131,9 @@ abstract class Cache
         }
         if (in_array($backend, Cache::$standardBackends)) {
             // we use a standard backend
-            $backendClass = 'Zend_Cache_Backend_' . $backend;
+            $backendClass = 'Zend\\Cache\\Backend\\' . $backend;
             // security controls are explicit
-            require_once str_replace('_', DIRECTORY_SEPARATOR, $backendClass) . '.php';
+            require_once str_replace('\\', DIRECTORY_SEPARATOR, $backendClass) . '.php';
         } else {
             // we use a custom backend
             if (!preg_match('~^[\w]+$~D', $backend)) {
@@ -141,12 +141,12 @@ abstract class Cache
             }
             if (!$customBackendNaming) {
                 // we use this boolean to avoid an API break
-                $backendClass = 'Zend_Cache_Backend_' . $backend;
+                $backendClass = 'Zend\\Cache\\Backend\\' . $backend;
             } else {
                 $backendClass = $backend;
             }
             if (!$autoload) {
-                $file = str_replace('_', DIRECTORY_SEPARATOR, $backendClass) . '.php';
+                $file = str_replace('\\', DIRECTORY_SEPARATOR, $backendClass) . '.php';
                 if (!(self::_isReadable($file))) {
                     self::throwException("file $file not found in include_path");
                 }
@@ -173,9 +173,9 @@ abstract class Cache
         if (in_array($frontend, self::$standardFrontends)) {
             // we use a standard frontend
             // For perfs reasons, with frontend == 'Core', we can interact with the Core itself
-            $frontendClass = 'Zend_Cache_' . ($frontend != 'Core' ? 'Frontend_' : '') . $frontend;
+            $frontendClass = 'Zend\\Cache\\' . ($frontend != 'Core' ? 'Frontend\\' : '') . $frontend;
             // security controls are explicit
-            require_once str_replace('_', DIRECTORY_SEPARATOR, $frontendClass) . '.php';
+            require_once str_replace('\\', DIRECTORY_SEPARATOR, $frontendClass) . '.php';
         } else {
             // we use a custom frontend
             if (!preg_match('~^[\w]+$~D', $frontend)) {
@@ -183,12 +183,12 @@ abstract class Cache
             }
             if (!$customFrontendNaming) {
                 // we use this boolean to avoid an API break
-                $frontendClass = 'Zend_Cache_Frontend_' . $frontend;
+                $frontendClass = 'Zend\\Cache\\Frontend\\' . $frontend;
             } else {
                 $frontendClass = $frontend;
             }
             if (!$autoload) {
-                $file = str_replace('_', DIRECTORY_SEPARATOR, $frontendClass) . '.php';
+                $file = str_replace('\\', DIRECTORY_SEPARATOR, $frontendClass) . '.php';
                 if (!(self::_isReadable($file))) {
                     self::throwException("file $file not found in include_path");
                 }

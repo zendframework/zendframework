@@ -61,6 +61,7 @@ require_once 'Zend/Barcode/Object/ErrorTest.php';
 
 require_once 'Zend/Barcode/Renderer/ImageTest.php';
 require_once 'Zend/Barcode/Renderer/PdfTest.php';
+require_once 'Zend/Barcode/Renderer/SvgTest.php';
 
 /**
  * @category   Zend
@@ -105,6 +106,7 @@ class Zend_Barcode_AllTests
 
         $suite->addTestSuite('Zend_Barcode_Renderer_ImageTest');
         $suite->addTestSuite('Zend_Barcode_Renderer_PdfTest');
+        $suite->addTestSuite('Zend_Barcode_Renderer_SvgTest');
 
         return $suite;
     }

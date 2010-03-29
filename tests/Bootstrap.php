@@ -54,16 +54,22 @@ $autoloader = \Zend\Loader\Autoloader::getInstance();
 $autoloader->registerPrefix('PHPUnit_');
 
 // temporary fix for ZendTest namespace until we can migrate files into ZendTest dir
-spl_autoload_register(
+$autoloader->pushAutoloader(
     function ($class_name) {
         if (strpos($class_name, 'ZendTest\\') !== 0) {
             return;
         }
-        include_once dirname(__FILE__)  . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, preg_replace('#^ZendTest\\\\#', 'Zend\\', $class_name)) . '.php';
-    }, 
-    false, // throw exceptions
-    true  // prepend autoloader
-    );
+        $segments = explode('\\', $class_name);
+        array_shift($segments);
+        $file = __DIR__  . DIRECTORY_SEPARATOR . 'Zend' . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $segments) . '.php';
+        if (file_exists($file)) {
+            echo "Resolved $class_name\n";
+            return include_once $file;
+        }
+        return false;
+    },
+    'ZendTest'
+);
 
 /*
  * Load the user-defined test configuration file, if it exists; otherwise, load

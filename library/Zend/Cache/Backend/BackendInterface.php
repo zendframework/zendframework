@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Cache\Backend;
-use Zend\Cache;
+use \Zend\Cache;
 
 /**
  * @package    Zend_Cache

@@ -59,6 +59,7 @@
         </para>
 
         <note>
+            <title/>
             <para>
                 O analisador padrão não trata os números como parte de termos. Utilize o analisador
                 'Num' correspondente se você não quer que palavras sejam quebradas por números.
@@ -88,6 +89,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         </para>
 
         <warning>
+            <title/>
             <para>
                 Os analisadores compatíveis com UTF-8 foram melhorados no Zend Framework 1.5. As
                 primeiras versões dos analisadores assumiam como sendo letras todos os caracteres

@@ -21,15 +21,20 @@
  */
 
 /**
- * @uses       Zend_Date
- * @uses       Zend_Loader
- * @uses       Zend_TimeSync_Exception
+ * @namespace
+ */
+namespace Zend\TimeSync;
+
+/**
+ * @uses       \Zend\Date\Date
+ * @uses       \Zend\Loader
+ * @uses       \Zend\TimeSync\Exception
  * @category   Zend
  * @package    Zend_TimeSync
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_TimeSync implements IteratorAggregate
+class TimeSync implements \IteratorAggregate
 {
     /**
      * Set the default timeserver protocol to "Ntp". This will be called
@@ -58,7 +63,7 @@ class Zend_TimeSync implements IteratorAggregate
      */
     protected $_allowedSchemes = array(
         'Ntp',
-        'Sntp'
+        'Sntp',
     );
 
     /**
@@ -93,7 +98,7 @@ class Zend_TimeSync implements IteratorAggregate
      */
     public function getIterator()
     {
-        return new ArrayObject($this->_timeservers);
+        return new \ArrayObject($this->_timeservers);
     }
 
     /**
@@ -124,7 +129,7 @@ class Zend_TimeSync implements IteratorAggregate
      *
      * @param  string|array $target - Single timeserver, or an array of timeservers.
      * @param  string       $alias  - OPTIONAL an alias for this timeserver
-     * @throws Zend_TimeSync_Exception
+     * @throws \Zend\TimeSync\Exception
      */
     public function addServer($target, $alias = null)
     {
@@ -147,7 +152,7 @@ class Zend_TimeSync implements IteratorAggregate
     public static function setOptions(array $options)
     {
         foreach ($options as $key => $value) {
-            Zend_TimeSync::$options[$key] = $value;
+            self::$options[$key] = $value;
         }
     }
 
@@ -155,14 +160,14 @@ class Zend_TimeSync implements IteratorAggregate
      * Marks a nameserver as current
      *
      * @param   string|integer $alias - The alias from the timeserver to set as current
-     * @throws  Zend_TimeSync_Exception
+     * @throws  \Zend\TimeSync\Exception
      */
     public function setServer($alias)
     {
         if (isset($this->_timeservers[$alias]) === true) {
             $this->_current = $this->_timeservers[$alias];
         } else {
-            throw new Zend_TimeSync_Exception("'$alias' does not point to valid timeserver");
+            throw new Exception("'$alias' does not point to valid timeserver");
         }
     }
 
@@ -171,18 +176,18 @@ class Zend_TimeSync implements IteratorAggregate
      *
      * @param   string $key - The option's identifier
      * @return  mixed
-     * @throws  Zend_TimeSync_Exception
+     * @throws  \Zend\TimeSync\Exception
      */
     public static function getOptions($key = null)
     {
         if ($key == null) {
-            return Zend_TimeSync::$options;
+            return self::$options;
         }
 
-        if (isset(Zend_TimeSync::$options[$key]) === true) {
-            return Zend_TimeSync::$options[$key];
+        if (isset(self::$options[$key]) === true) {
+            return self::$options[$key];
         } else {
-            throw new Zend_TimeSync_Exception("'$key' does not point to valid option");
+            throw new Exception("'$key' does not point to valid option");
         }
     }
 
@@ -192,7 +197,7 @@ class Zend_TimeSync implements IteratorAggregate
      *
      * @param   string|integer $alias - The alias from the timeserver to return
      * @return  object
-     * @throws  Zend_TimeSync_Exception
+     * @throws  \Zend\TimeSync\Exception
      */
     public function getServer($alias = null)
     {
@@ -200,13 +205,13 @@ class Zend_TimeSync implements IteratorAggregate
             if (isset($this->_current) && $this->_current !== false) {
                 return $this->_current;
             } else {
-                throw new Zend_TimeSync_Exception('there is no timeserver set');
+                throw new Exception('there is no timeserver set');
             }
         }
         if (isset($this->_timeservers[$alias]) === true) {
             return $this->_timeservers[$alias];
         } else {
-            throw new Zend_TimeSync_Exception("'$alias' does not point to valid timeserver");
+            throw new Exception("'$alias' does not point to valid timeserver");
         }
     }
 
@@ -229,7 +234,7 @@ class Zend_TimeSync implements IteratorAggregate
      *
      * @param   $locale - OPTIONAL locale
      * @return  object
-     * @throws  Zend_TimeSync_Exception
+     * @throws  \Zend\TimeSync\Exception
      */
     public function getDate($locale = null)
     {
@@ -237,9 +242,9 @@ class Zend_TimeSync implements IteratorAggregate
             $this->_current = $server;
             try {
                 return $server->getDate($locale);
-            } catch (Zend_TimeSync_Exception $e) {
+            } catch (Exception $e) {
                 if (!isset($masterException)) {
-                    $masterException = new Zend_TimeSync_Exception('all timeservers are bogus');
+                    $masterException = new Exception('all timeservers are bogus');
                 }
                 $masterException->addException($e);
             }
@@ -258,20 +263,20 @@ class Zend_TimeSync implements IteratorAggregate
     {
         if ($pos = strpos($target, '://')) {
             $protocol = substr($target, 0, $pos);
-            $adress = substr($target, $pos + 3);
+            $address = substr($target, $pos + 3);
         } else {
-            $adress = $target;
+            $address = $target;
             $protocol = self::DEFAULT_PROTOCOL;
         }
 
-        if ($pos = strrpos($adress, ':')) {
-            $posbr = strpos($adress, ']');
+        if ($pos = strrpos($address, ':')) {
+            $posbr = strpos($address, ']');
             if ($posbr and ($pos > $posbr)) {
-                $port = substr($adress, $pos + 1);
-                $adress = substr($adress, 0, $pos);
+                $port = substr($address, $pos + 1);
+                $address = substr($address, 0, $pos);
             } else if (!$posbr and $pos) {
-                $port = substr($adress, $pos + 1);
-                $adress = substr($adress, 0, $pos);
+                $port = substr($address, $pos + 1);
+                $address = substr($address, 0, $pos);
             } else {
                 $port = null;
             }
@@ -281,14 +286,14 @@ class Zend_TimeSync implements IteratorAggregate
 
         $protocol = ucfirst(strtolower($protocol));
         if (!in_array($protocol, $this->_allowedSchemes)) {
-            throw new Zend_TimeSync_Exception("'$protocol' is not a supported protocol");
+            throw new Exception("'$protocol' is not a supported protocol");
         }
 
-        $className = 'Zend_TimeSync_' . $protocol;
+        $className = 'Zend\\TimeSync\\' . $protocol;
         if (!class_exists($className)) {
-            Zend_Loader::loadClass($className);
+            \Zend\Loader::loadClass($className);
         }
-        $timeServerObj = new $className($adress, $port);
+        $timeServerObj = new $className($address, $port);
 
         $this->_timeservers[$alias] = $timeServerObj;
     }

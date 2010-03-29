@@ -20,17 +20,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\TimeSync;
+
+/**
  * NTP Protocol handling class
  *
- * @uses      Zend_TimeSync
- * @uses      Zend_TimeSync_Exception
- * @uses      Zend_TimeSync_Protocol
+ * @uses      \Zend\TimeSync\TimeSync
+ * @uses      \Zend\TimeSync\Exception
+ * @uses      \Zend\TimeSync\Protocol
  * @category  Zend
  * @package   Zend_TimeSync
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol
+class Ntp extends Protocol
 {
     /**
      * NTP port number (123) assigned by the Internet Assigned Numbers Authority
@@ -197,7 +202,7 @@ class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol
      * This will return an array with binary data listing:
      *
      * @return array
-     * @throws Zend_TimeSync_Exception When timeserver can not be connected
+     * @throws \Zend\TimeSync\Exception When timeserver can not be connected
      */
     protected function _read()
     {
@@ -206,7 +211,7 @@ class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol
 
         if ($info['timed_out'] === true) {
             fclose($this->_socket);
-            throw new Zend_TimeSync_Exception('could not connect to ' .
+            throw new Exception('could not connect to ' .
                 "'$this->_timeserver' on port '$this->_port', reason: 'server timed out'");
         }
 
@@ -240,7 +245,7 @@ class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol
         $this->_connect();
 
         fwrite($this->_socket, $data);
-        stream_set_timeout($this->_socket, Zend_TimeSync::$options['timeout']);
+        stream_set_timeout($this->_socket, TimeSync::$options['timeout']);
     }
 
     /**

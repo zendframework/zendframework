@@ -20,15 +20,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\TimeSync;
+
+/**
  * Exception class for Zend_TimeSync
  *
- * @uses      Zend_Exception
+ * @uses      \Zend\Exception
  * @category  Zend
  * @package   Zend_TimeSync
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_TimeSync_Exception extends Zend_Exception
+class Exception extends \Zend\Exception
 {
     /**
      * Contains array of exceptions thrown in queried server
@@ -40,10 +45,10 @@ class Zend_TimeSync_Exception extends Zend_Exception
     /**
      * Adds an exception to the exception list
      *
-     * @param  Zend_TimeSync_Exception $exception New exteption to throw
+     * @param  \Zend\TimeSync\Exception $exception New exteption to throw
      * @return void
      */
-    public function addException(Zend_TimeSync_Exception $exception)
+    public function addException(Exception $exception)
     {
         $this->_exceptions[] = $exception;
     }

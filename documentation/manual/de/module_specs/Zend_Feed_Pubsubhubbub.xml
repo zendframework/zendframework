@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21588 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.pubsubhubbub.introduction">
     <title>Zend_Feed_Pubsubhubbub</title>
@@ -483,7 +483,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                 Zum Beispiel kann man eine anderen Wert der Gültigkeit in Sekunden setzen indem man
                 <methodname>Zend_Pubsubhubbub_Subscriber::setLeaseSeconds()</methodname> verwendet,
                 oder eine Vorliebe für eine asynchrone Prüfung zeigen indem
-                <code>setPreferredVerificationMode(Zend_Feed_Pubsubhubbub::VERIFICATION_MODE_ASYNC)</code>
+                <methodname>setPreferredVerificationMode(Zend_Feed_Pubsubhubbub::VERIFICATION_MODE_ASYNC)</methodname>
                 verwendet wird. Trotzdem bleiben die Hubs in der Lage Ihre eigenen Vorlieben zu
                 erzwingen, und aus diesem Grund wurde die Komponente so designt dass Sie mit fast
                 jedem Set an Optionen arbeitet und eine minimale Konfiguration des End-Benutzers

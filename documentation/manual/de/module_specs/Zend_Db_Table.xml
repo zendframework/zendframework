@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
+<!-- EN-Revision: 21588 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table">
     <title>Zend_Db_Table</title>
@@ -137,9 +137,9 @@ class Bugs extends Zend_Db_Table_Abstract
                 Die Schema und Tabellennamen können auch mit Konstruktor Konfigurationsdirektiven
                 angegeben werden, welche jegliche Standardwerte, angegeben in den
                 <varname>$_name</varname> und <varname>$_schema</varname> Eigenschaften,
-                überschreiben. Eine Schema Angabe welche mit der <code>name</code> Directive
-                angegeben wurde überschreibt jeglichen Wert welcher von der <code>schema</code>
-                Option bereitgestellt ist.
+                überschreiben. Eine Schema Angabe welche mit der <property>name</property> Directive
+                angegeben wurde überschreibt jeglichen Wert welcher von der
+                <property>schema</property> Option bereitgestellt ist.
             </para>
 
             <example id="zend.db.table.defining.table-schema.example.constructor">
@@ -293,8 +293,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 Tabellenklasse erstellt wird, kann man entscheiden die Aufgaben in die
                 <methodname>init()</methodname> Methode zu verschieben, die aufgerufen wird nachdem
                 alle Tabellen Metadaten bearbeitet wurden. Das ist besser als die
-                <code>__construct</code> Methode wenn die Metadaten nicht programmtechnisch
-                verändert werden sollen.
+                <methodname>__construct()</methodname> Methode wenn die Metadaten nicht
+                programmtechnisch verändert werden sollen.
             </para>
 
             <example id="zend.db.table.defining.init.usage.example">
@@ -332,7 +332,7 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 Der erste Weg einen Datenbankadapter an eine Table Klasse bereitzustellen ist, ein
                 Objekt des Typs <classname>Zend_Db_Adapter_Abstract</classname> im Options Array,
-                bezeichnet mit dem Schlüssel <code>'db'</code>, zu übergeben.
+                bezeichnet mit dem Schlüssel '<property>db</property>', zu übergeben.
             </para>
 
             <example id="zend.db.table.constructing.adapter.example">
@@ -388,10 +388,11 @@ $table = new Bugs();
 
             <para>
                 Der dritte Weg einer Table Klasse einen Datenbankadapter bereit zu stellen ist es
-                einen String in dem Optionsarray zu übergeben, auch mit dem <code>'db'</code>
-                Schlüssel identifiziert. Der String wird als Schlüssel der statischen
-                <classname>Zend_Registry</classname> Instanz verwendet, wo der Eintrag mit dem
-                Schlüssel ein Objekt des Typs <classname>Zend_Db_Adapter_Abstract</classname> ist.
+                einen String in dem Optionsarray zu übergeben, auch mit dem
+                '<property>db</property>' Schlüssel identifiziert. Der String wird als Schlüssel der
+                statischen <classname>Zend_Registry</classname> Instanz verwendet, wo der Eintrag
+                mit dem Schlüssel ein Objekt des Typs
+                <classname>Zend_Db_Adapter_Abstract</classname> ist.
             </para>
 
             <example id="zend.db.table.constructing.registry.example">
@@ -618,12 +619,12 @@ class BugStatus extends Zend_Db_Table_Abstract
         <title>Zeilen in einer Tabelle aktualisieren</title>
 
         <para>
-            Spalten können in der Datenbanktabelle aktualisiert werden indem die <code>update</code>
-            Methode der Table Klasse verwendet wird. Diese Methode nimmt zwei Argumente: ein
-            assoziatives Array von Spalten die geändert werden sollen und neue Werte die diesen
-            Spalten hinzugefügt werden; und einen <acronym>SQL</acronym> Ausdruck der in der
-            <constant>WHERE</constant> Klausel verwendet wird, als Kriterium für die Zeilen die in
-            der <constant>UPDATE</constant> Operation geändert werden sollen.
+            Spalten können in der Datenbanktabelle aktualisiert werden indem die
+            <methodname>update()</methodname> Methode der Table Klasse verwendet wird. Diese Methode
+            nimmt zwei Argumente: ein assoziatives Array von Spalten die geändert werden sollen und
+            neue Werte die diesen Spalten hinzugefügt werden; und einen <acronym>SQL</acronym>
+            Ausdruck der in der <constant>WHERE</constant> Klausel verwendet wird, als Kriterium für
+            die Zeilen die in der <constant>UPDATE</constant> Operation geändert werden sollen.
         </para>
 
         <example id="zend.db.table.update.example">
@@ -975,9 +976,9 @@ $rows = $table->fetchAll($select);
             </example>
 
             <para>
-                Der <code>ORDER BY</code> kann auch ein Sortier-Kriterium übergeben werden, genauso
-                wie auch Count und Offset Integer Werte, verwendet werden können damit die Abfrage
-                ein spezielles Subset von Zeilen zurück gibt. Diese Werte werden in einer
+                Der <constant>ORDER</constant> BY kann auch ein Sortier-Kriterium übergeben werden,
+                genauso wie auch Count und Offset Integer Werte, verwendet werden können damit die
+                Abfrage ein spezielles Subset von Zeilen zurück gibt. Diese Werte werden in einer
                 <constant>LIMIT</constant> Klausel verwendet oder in einer ähnlichen Logik für
                 <acronym>RDBMS</acronym> Marken welche die <constant>LIMIT</constant> Syntax nicht
                 unterstützen.
@@ -1394,9 +1395,9 @@ $bugs = new Bugs(array('metadataCache' => $cache));
             <title>Automatische Serialisierung mit dem Cache Frontend</title>
 
             <para>
-                Da die Information die von der describeTable() Methode des Adapters zurückgegeben
-                wird, ein Array ist, muß sichergestellt werden das die
-                <code>automatic_serialization</code> Option für das
+                Da die Information die von der <methodname>describeTable()</methodname> Methode des
+                Adapters zurückgegeben wird, ein Array ist, muß sichergestellt werden das die
+                <property>automatic_serialization</property> Option für das
                 <classname>Zend_Cache_Core</classname> Frontend auf <constant>TRUE</constant>
                 gesetzt wird.
             </para>
@@ -1452,7 +1453,7 @@ protected $_metadata = array(
 
             <para>
                 Diese Optimierung kann ausgeschaltet werden indem das
-                <code>metadataCacheInClass</code> Flag ausgeschaltet wird:
+                <property>metadataCacheInClass</property> Flag ausgeschaltet wird:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1488,9 +1489,9 @@ $bugs->setMetadataCacheInClass(false);
 
             <para>
                 Es können Zeilen und Rowset Klassen definiert werden indem das Optionsarray des
-                Table Konstruktors verwendet wird, respektiv die Schlüssel <code>'rowClass'</code>
-                und <code>'rowsetClass'</code>. Die Namen der Klassen müssen spezifiziert werden
-                indem Strings verwendet werden.
+                Table Konstruktors verwendet wird, respektiv die Schlüssel
+                '<property>rowClass</property>' und '<property>rowsetClass</property>'. Die Namen
+                der Klassen müssen spezifiziert werden indem Strings verwendet werden.
             </para>
 
             <example id="zend.db.table.extending.row-rowset.example">
@@ -1647,9 +1648,9 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                Wenn zum Beispiel der Name der Table Klasse "<code>BugsProducts</code>" ist, würde
+                Wenn zum Beispiel der Name der Table Klasse "BugsProducts" ist, würde
                 Sie der physikalischen Tabelle in der Datenbank entsprechen die
-                "<code>bugs_products</code>" heißt, wenn die explizite Definition der
+                "bugs_products" heißt, wenn die explizite Definition der
                 <varname>$_name</varname> Eigenschaft der Klasse unterdrückt wird. In dieser
                 Übereinstimmung der Beugung, wird der Klassenname im "CamelCase" Format geschrieben
                 und in Kleinschreibung transformiert, und Wörter mit einem Unterstrich seperiert.

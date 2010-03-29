@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21588 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -714,15 +714,16 @@ $labels = $categories->getValues();
             <classname>Zend_Feed_Reader</classname> wärend der Suche auf alternative Elemente
             zurück greifen. Zum Beispiel ist das Durchsuchen eines <acronym>RSS</acronym> Feeds
             nach einem Modifikations Datum komplizierter als es aussieht. <acronym>RSS</acronym>
-            Feeds sollten ein <code>&lt;lastBuildDate&gt;</code> Tag und/oder ein
-            <code>&lt;pubDate&gt;</code> Element enthalten. Aber was wenn Sie es nicht tun, weil es
-            z.B. ein <acronym>RSS</acronym> 1.0 Feed ist? Vielleicht ist stattdessen ein
-            <code>&lt;atom:updated&gt;</code> Element mit identischen Informationen vorhanden (Atom
-            kann verwendet werden um die <acronym>RSS</acronym> Syntax anzubieten)? Bei einem
+            Feeds sollten ein <command>&lt;lastBuildDate&gt;</command> Tag und (oder) ein
+            <command>&lt;pubDate&gt;</command> Element enthalten. Aber was wenn Sie es nicht tun,
+            weil es z.B. ein <acronym>RSS</acronym> 1.0 Feed ist? Vielleicht ist stattdessen ein
+            <command>&lt;atom:updated&gt;</command> Element mit identischen Informationen vorhanden
+            (Atom kann verwendet werden um die <acronym>RSS</acronym> Syntax anzubieten)? Bei einem
             Fehlschlag können wir einfach auf die Einträge sehen, den aktuellsten herausholen, und
-            sein <code>&lt;pubDate&gt;</code> Element verwenden. In der Annahme das es existiert...
-            viele Feeds verwenden auch Dublin Core 1.0/1.1 <code>&lt;dc:date&gt;</code> Elemente für
-            Feeds und Einträge. Oder wir können wieder ein Atom finden das herumliegt.
+            sein <command>&lt;pubDate&gt;</command> Element verwenden. In der Annahme das es
+            existiert... viele Feeds verwenden auch Dublin Core 1.0/1.1
+            <command>&lt;dc:date&gt;</command> Elemente für Feeds und Einträge. Oder wir können
+            wieder ein Atom finden das herumliegt.
         </para>
 
         <para>
@@ -1216,13 +1217,13 @@ $labels = $categories->getValues();
 
         <para>
             Es gibt zwei Typen von Erweiterungen, jene welche Informationen von Elementen empfangen
-            die unmittelbare Kunder des Root Elements sind (z.B. <code>&lt;channel&gt;</code> für
-            <acronym>RSS</acronym> oder <code>&lt;feed&gt;</code> für Atom), und jene die
+            die unmittelbare Kunder des Root Elements sind (z.B. <command>&lt;channel&gt;</command>
+            für <acronym>RSS</acronym> oder <command>&lt;feed&gt;</command> für Atom), und jene die
             Informationen von Kind-Elementen eines Eintrags empfangen (z.B.
-            <code>&lt;item&gt;</code> für <acronym>RSS</acronym> oder <code>&lt;entry&gt;</code>
-            für Atom). Auf dem Filesystem sind Sie als Klassen in einem Namespace gruppiert,
-            basierend auf dem Standardnamen der Erweiterung. Zum Beispiel haben wir intern
-            <classname>Zend_Feed_Reader_Extension_DublinCore_Feed</classname> und
+            <command>&lt;item&gt;</command> für <acronym>RSS</acronym> oder
+            <command>&lt;entry&gt;</command> für Atom). Auf dem Filesystem sind Sie als Klassen in
+            einem Namespace gruppiert, basierend auf dem Standardnamen der Erweiterung. Zum Beispiel
+            haben wir intern <classname>Zend_Feed_Reader_Extension_DublinCore_Feed</classname> und
             <classname>Zend_Feed_Reader_Extension_DublinCore_Entry</classname> Klassen welche zwei
             Klassen sind welche die Unterstützung für Dublin Core 1.0/1.1 implementieren.
         </para>
@@ -1405,8 +1406,8 @@ $updatePeriod = $syndication->getUpdatePeriod();
                 Streber Abteilung <acronym>RSS</acronym> 2.0 erweitern muß um ein neues Element
                 pro Eintrag hinzuzufügen das die <acronym>ISBN</acronym>-10 oder
                 <acronym>ISBN</acronym>-13 Zahl der Veröffentlichung die der Eintrag betrifft
-                unterstützt. Sie definieren das neue <code>&lt;isbn&gt;</code> Element recht einfach
-                mit dem standardmäßigen Namen und Namespace <acronym>URI</acronym>:
+                unterstützt. Sie definieren das neue <command>&lt;isbn&gt;</command> Element recht
+                einfach mit dem standardmäßigen Namen und Namespace <acronym>URI</acronym>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1484,7 +1485,7 @@ class My_FeedReader_Extension_JungleBooks_Entry
                 Diese Erweiterung ist einfach genug um Ihr zu folgen. Sie erstellt eine neue Methode
                 <methodname>getIsbn()</methodname>, welche eine XPath Abfrage auf dem aktuellen
                 Eintrag durchführt, um die <acronym>ISBN</acronym> Nummer welche vom
-                <code>&lt;jungle:isbn&gt;</code> Element umhüllt ist, zu extrahieren. Das kann
+                <command>&lt;jungle:isbn&gt;</command> Element umhüllt ist, zu extrahieren. Das kann
                 optional auch im internen nicht-persistenten Cache gespeichert werden (keine
                 Notwendigkeit den <acronym>DOM</acronym> abzufragen wenn es auf dem gleichen
                 Eintrag nochmals aufgerufen wird). Der Wert wird dem Anrufer zurückgegeben.
@@ -1521,10 +1522,10 @@ $firstIsbn = $feed->current()->getIsbn();
             <para>
                 Das Schreiben einer Feed Level Erweiterung unterscheidet sich nicht sehr. Der
                 Beispiel Feed von vorher enthält ein nicht erwähntes
-                <code>&lt;jungle:dayPopular&gt;</code> Element das Jungle Books bei Ihrem Standard
-                hinzugefügt haben um einen Link zum beliebtesten Buch des Tages hinzuzufügen
-                (im Sinne von Verkehr der Besucher). Hier ist eine Erweiterung welche eine
-                <methodname>getDaysPopularBookLink()</methodname> Methode bei der Feed Level
+                <command>&lt;jungle:dayPopular&gt;</command> Element das Jungle Books bei Ihrem
+                Standard hinzugefügt haben um einen Link zum beliebtesten Buch des Tages
+                hinzuzufügen (im Sinne von Verkehr der Besucher). Hier ist eine Erweiterung welche
+                eine <methodname>getDaysPopularBookLink()</methodname> Methode bei der Feed Level
                 <acronym>API</acronym> hinzufügt.
             </para>
 

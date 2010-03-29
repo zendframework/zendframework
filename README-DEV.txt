@@ -19,10 +19,10 @@ First pass
 [X] Zend_Log
     Would need to ignore Firebug writer for now, and potentially Db writer
 [ ] Zend_Cache
-    [ ] Zend_Locale
-        [ ] Zend_Date
+    [X] Zend_Locale
+        [X] Zend_Date
         [ ] Zend_Translate
-        [ ] Zend_TimeSync
+        [X] Zend_TimeSync
         [ ] Zend_Measure
         [ ] Zend_Currency
 

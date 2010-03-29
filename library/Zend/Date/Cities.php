@@ -20,19 +20,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Date;
+
+/**
  * Additional data for sunset/sunrise calculations
  *
  * Holds the geographical data for all capital cities and many others worldwide
  * Original data from http://www.fallingrain.com/world/
  *
- * @uses       Zend_Date_Exception
+ * @uses       \Zend\Date\Exception
  * @category   Zend
  * @package    Zend_Date
  * @subpackage Zend_Date_Cities
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Date_Cities
+class Cities
 {
     /**
      * Array Collection of known cities
@@ -296,7 +301,7 @@ class Zend_Date_Cities
      *                         default: effective
      *                         others are civil, nautic, astronomic
      * @return array
-     * @throws Zend_Date_Exception When city is unknown
+     * @throws \Zend\Date\Exception When city is unknown
      */
     public static function City($city, $horizon = false)
     {
@@ -307,7 +312,7 @@ class Zend_Date_Cities
                 return $return;
             }
         }
-        throw new Zend_Date_Exception('unknown city');
+        throw new Exception('unknown city');
     }
 
     /**

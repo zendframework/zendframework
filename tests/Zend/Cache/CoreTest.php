@@ -22,8 +22,9 @@
 
 namespace ZendTest\Cache;
 
-use Zend\Cache;
-use Zend\Config\Config as ZendConfig;
+use Zend\Cache,
+    Zend\Config\Config as ZendConfig,
+    Zend\Cache\Backend\TestBackend;
 
 /**
  * @category   Zend
@@ -41,7 +42,7 @@ class CoreTest extends \PHPUnit_Framework_TestCase
     {
         if (!$this->_instance) {
             $this->_instance = new Cache\Core(array());
-            $this->_backend = new Cache\Backend\Test();
+            $this->_backend = new TestBackend();
             $this->_instance->setBackend($this->_backend);
         }
     }
@@ -111,7 +112,7 @@ class CoreTest extends \PHPUnit_Framework_TestCase
 
     public function testSetBackendCorrectCall2()
     {
-        $backend = new Cache\Backend\Test(array());
+        $backend = new TestBackend(array());
         $this->_instance->setBackend($backend);
         $log = $backend->getLastLog();
         $this->assertEquals('setDirectives', $log['methodName']);

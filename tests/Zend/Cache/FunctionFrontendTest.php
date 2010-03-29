@@ -21,7 +21,9 @@
  */
 
 namespace ZendTest\Cache;
-use Zend\Cache;
+
+use Zend\Cache,
+    Zend\Cache\Backend\TestBackend;
 
 function foobar($param1, $param2) {
     echo "foobar_output($param1, $param2)";
@@ -45,7 +47,7 @@ class FunctionFrontendTest extends \PHPUnit_Framework_TestCase
     {
         if (!$this->_instance) {
             $this->_instance = new Cache\Frontend\FunctionFrontend(array());
-            $this->_backend = new Cache\Backend\Test();
+            $this->_backend = new TestBackend();
             $this->_instance->setBackend($this->_backend);
         }
     }

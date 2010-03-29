@@ -21,7 +21,9 @@
  */
 
 namespace ZendTest\Cache;
-use Zend\Cache;
+
+use Zend\Cache,
+    Zend\Cache\Backend\TestBackend;
 
 /**
  * @category   Zend
@@ -56,27 +58,27 @@ class FileFrontendTest extends \PHPUnit_Framework_TestCase {
         if (!$this->_instance1) {
             touch($this->_masterFile, 123455);
             $this->_instance1 = new Cache\Frontend\File(array('master_file' => $this->_masterFile));
-            $this->_backend = new Cache\Backend\Test();
+            $this->_backend = new TestBackend();
             $this->_instance1->setBackend($this->_backend);
         }
         if (!$this->_instance2) {
             touch($this->_masterFile);
             $this->_instance2 = new Cache\Frontend\File(array('master_file' => $this->_masterFile));
-            $this->_backend = new Cache\Backend\Test();
+            $this->_backend = new TestBackend();
             $this->_instance2->setBackend($this->_backend);
         }
         if (!$this->_instance3) {
             touch($this->_masterFile1, 123455);
             touch($this->_masterFile2, 123455);
             $this->_instance3 = new Cache\Frontend\File(array('master_files' => array($this->_masterFile1, $this->_masterFile2)));
-            $this->_backend = new Cache\Backend\Test();
+            $this->_backend = new TestBackend();
             $this->_instance3->setBackend($this->_backend);
         }
         if (!$this->_instance4) {
             touch($this->_masterFile1);
             touch($this->_masterFile2);
             $this->_instance4 = new Cache\Frontend\File(array('master_files' => array($this->_masterFile1, $this->_masterFile2)));
-            $this->_backend = new Cache\Backend\Test();
+            $this->_backend = new TestBackend();
             $this->_instance4->setBackend($this->_backend);
         }
     }

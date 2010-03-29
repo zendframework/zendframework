@@ -144,10 +144,8 @@ class Autoloader
                 if ($autoloader($class)) {
                     return true;
                 }
-            } elseif (is_array($autoloader)) {
-                $object = array_shift($autoloader);
-                $method = array_shift($autoloader);
-                if (call_user_func(array($object, $method), $class)) {
+            } elseif (is_callable($autoloader)) {
+                if (call_user_func($autoloader, $class)) {
                     return true;
                 }
             }

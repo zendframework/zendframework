@@ -22,6 +22,9 @@
 
 namespace ZendTest\Cache;
 
+use Zend\Cache,
+    Zend\Cache\Backend\TestBackend;
+
 /**
  * @category   Zend
  * @package    Zend_Cache
@@ -38,7 +41,7 @@ class Zend_Cache_OutputFrontendTest extends \PHPUnit_Framework_TestCase {
     {
         if (!$this->_instance) {
             $this->_instance = new Cache\Frontend\Output(array());
-            $this->_backend = new Cache\Backend\Test();
+            $this->_backend = new TestBackend();
             $this->_instance->setBackend($this->_backend);
         }
     }

@@ -573,7 +573,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                                     <emphasis>storeType</emphasis>: Ein String der den
                                     <command>dojo.data</command> Typ des Datenspeichers anzeigt der
                                     zu verwenden ist
-                                    (z.B. '<command>dojo.data.ItemFileReadStore</commmand>').
+                                    (z.B. '<command>dojo.data.ItemFileReadStore</command>').
                                 </para>
                             </listitem>
 

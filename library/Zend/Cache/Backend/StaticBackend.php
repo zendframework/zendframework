@@ -376,7 +376,7 @@ class StaticBackend
      * @param  array  $tags Array of tags
      * @return boolean true if no problem
      */
-    public function clean($mode = Cache\CacheCache\Cache::CLEANING_MODE_ALL, $tags = array())
+    public function clean($mode = Cache\Cache::CLEANING_MODE_ALL, $tags = array())
     {
         $result = false;
         switch ($mode) {
@@ -459,7 +459,7 @@ class StaticBackend
      * @param  \Zend\Cache\Core
      * @return void
      */
-    public function setInnerCache(end\Cache\Core $cache)
+    public function setInnerCache(Cache\Core $cache)
     {
         $this->_tagCache = $cache;
         $this->_options['tag_cache'] = $cache;

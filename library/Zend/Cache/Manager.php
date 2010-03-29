@@ -94,7 +94,7 @@ class Manager
                 ),
             ),
             'backend' => array(
-                'name'    => 'Static',
+                'name'    => 'StaticBackend',
                 'options' => array(
                     'public_dir' => '../public',
                 ),
@@ -173,7 +173,10 @@ class Manager
                 $this->_optionTemplates[$name]['frontend']['name'],
                 $this->_optionTemplates[$name]['backend']['name'],
                 isset($this->_optionTemplates[$name]['frontend']['options']) ? $this->_optionTemplates[$name]['frontend']['options'] : array(),
-                isset($this->_optionTemplates[$name]['backend']['options']) ? $this->_optionTemplates[$name]['backend']['options'] : array()
+                isset($this->_optionTemplates[$name]['backend']['options']) ? $this->_optionTemplates[$name]['backend']['options'] : array(),
+                false,
+                false,
+                true
             );
             return $this->_caches[$name];
         }

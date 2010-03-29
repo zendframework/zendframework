@@ -11,7 +11,7 @@ use Zend\Cache;
  * @package    Zend_Cache
  * @subpackage UnitTests
  */
-class Zend_Cache_StaticBackendTest extends TestCommonBackend 
+class StaticBackendTest extends TestCommonBackend 
 {
 
     protected $_instance;
@@ -22,7 +22,7 @@ class Zend_Cache_StaticBackendTest extends TestCommonBackend
 
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
-        parent::__construct('\Zend\Cache\Backend\Static', $data, $dataName);
+        parent::__construct('\Zend\Cache\Backend\StaticBackend', $data, $dataName);
     }
 
     public function setUp($notag = false)

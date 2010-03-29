@@ -213,7 +213,7 @@ class Sqlite extends Backend implements ExtendedInterface
      * @param  array  $tags Array of tags
      * @return boolean True if no problem
      */
-    public function clean($mode = Cache\CacheCache\Cache::CLEANING_MODE_ALL, $tags = array())
+    public function clean($mode = Cache\Cache::CLEANING_MODE_ALL, $tags = array())
     {
         $this->_checkAndBuildStructure();
         $return = $this->_clean($mode, $tags);
@@ -610,7 +610,7 @@ class Sqlite extends Backend implements ExtendedInterface
      * @param  array  $tags Array of tags
      * @return boolean True if no problem
      */
-    private function _clean($mode = Cache\CacheCache\Cache::CLEANING_MODE_ALL, $tags = array())
+    private function _clean($mode = Cache\Cache::CLEANING_MODE_ALL, $tags = array())
     {
         switch ($mode) {
             case Cache\Cache::CLEANING_MODE_ALL:

@@ -21,6 +21,7 @@
  */
 
 namespace ZendTest\Cache;
+use Zend\Cache;
 
 /**
  * PHPUnit test case

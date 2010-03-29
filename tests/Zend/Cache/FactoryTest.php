@@ -23,11 +23,7 @@
 namespace ZendTest\Cache;
 use Zend\Cache;
 
-class Zend_Cache_Backend_FooBarTest extends \Zend\Cache\Backend\File { }
-class FooBarTestBackend extends \Zend\Cache\Backend\File { }
-
-class Zend_Cache_Frontend_FooBarTest extends \Zend\Cache\Core { }
-class FooBarTestFrontend extends \Zend\Cache\Core { }
+require_once 'FactoryClasses.php';
 
 /**
  * @category   Zend
@@ -42,6 +38,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->markTestSkipped('Skipping test that duplicated Loader or PluginLoader efforts.');
     }
 
     public function tearDown()
@@ -51,31 +48,31 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryCorrectCall()
     {
         $generated_frontend = Cache\Cache::factory('Core', 'File');
-        $this->assertEquals('Cache\Cache_Core', get_class($generated_frontend));
+        $this->assertEquals('Zend\Cache\Core', get_class($generated_frontend));
     }
 
     public function testFactoryCorrectCallWithCustomBackend()
     {
         $generated_frontend = Cache\Cache::factory('Core', 'FooBarTest', array(), array(), false, false, true);
-        $this->assertEquals('Cache\Cache_Core', get_class($generated_frontend));
+        $this->assertEquals('Zend\Cache\Core', get_class($generated_frontend));
     }
 
     public function testFactoryCorrectCallWithCustomBackend2()
     {
-        $generated_frontend = Cache\Cache::factory('Core', 'FooBarTestBackend', array(), array(), false, true, true);
-        $this->assertEquals('Cache\Cache_Core', get_class($generated_frontend));
+        $generated_frontend = Cache\Cache::factory('Core', '\ZendTest\Cache\FooBarTestBackend', array(), array(), false, true, true);
+        $this->assertEquals('Zend\Cache\Core', get_class($generated_frontend));
     }
 
     public function testFactoryCorrectCallWithCustomFrontend()
     {
-        $generated_frontend = Cache\Cache::factory('FooBarTest', 'File', array(), array(), false, false, true);
-        $this->assertEquals('Cache\Cache_Frontend_FooBarTest', get_class($generated_frontend));
+        $generated_frontend = Cache\Cache::factory('\FooBarTest', 'File', array(), array(), false, false, true);
+        $this->assertEquals('ZendTest\Cache\Zend_Cache_Frontend_FooBarTest', get_class($generated_frontend));
     }
 
     public function testFactoryCorrectCallWithCustomFrontend2()
     {
-        $generated_frontend = Cache\Cache::factory('FooBarTestFrontend', 'File', array(), array(), true, false, true);
-        $this->assertEquals('FooBarTestFrontend', get_class($generated_frontend));
+        $generated_frontend = Cache\Cache::factory('\FooBarTestFrontend', 'File', array(), array(), true, false, true);
+        $this->assertEquals('ZendTest\Cache\FooBarTestFrontend', get_class($generated_frontend));
     }
     public function testFactoryLoadsPlatformBackend()
     {

@@ -96,7 +96,7 @@ class FunctionFrontendTest extends \PHPUnit_Framework_TestCase
     {
         ob_start();
         ob_implicit_flush(false);
-        $return = $this->_instance->call('foobar', array('param3', 'param4'));
+        $return = $this->_instance->call('\ZendTest\Cache\foobar', array('param3', 'param4'));
         $data = ob_get_contents();
         ob_end_clean();
         ob_implicit_flush(true);
@@ -110,7 +110,7 @@ class FunctionFrontendTest extends \PHPUnit_Framework_TestCase
         $this->_instance->setOption('cache_by_default', false);
         ob_start();
         ob_implicit_flush(false);
-        $return = $this->_instance->call('foobar', array('param1', 'param2'));
+        $return = $this->_instance->call('\ZendTest\Cache\foobar', array('param1', 'param2'));
         $data = ob_get_contents();
         ob_end_clean();
         ob_implicit_flush(true);
@@ -142,7 +142,7 @@ class FunctionFrontendTest extends \PHPUnit_Framework_TestCase
         $this->_instance->setOption('non_cached_functions', array('foobar'));
         ob_start();
         ob_implicit_flush(false);
-        $return = $this->_instance->call('foobar', array('param1', 'param2'));
+        $return = $this->_instance->call('\ZendTest\Cache\foobar', array('param1', 'param2'));
         $data = ob_get_contents();
         ob_end_clean();
         ob_implicit_flush(true);

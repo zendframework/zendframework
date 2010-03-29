@@ -279,7 +279,7 @@ class File extends Backend implements ExtendedInterface
      * @param tags array $tags array of tags
      * @return boolean true if no problem
      */
-    public function clean($mode = Cache\CacheCache\Cache::CLEANING_MODE_ALL, $tags = array())
+    public function clean($mode = Cache\Cache::CLEANING_MODE_ALL, $tags = array())
     {
         // We use this protected method to hide the recursive stuff
         clearstatcache();
@@ -636,7 +636,7 @@ class File extends Backend implements ExtendedInterface
      * @throws \Zend\Cache\Exception
      * @return boolean True if no problem
      */
-    protected function _clean($dir, $mode = Cache\CacheCache\Cache::CLEANING_MODE_ALL, $tags = array())
+    protected function _clean($dir, $mode = Cache\Cache::CLEANING_MODE_ALL, $tags = array())
     {
         if (!is_dir($dir)) {
             return false;

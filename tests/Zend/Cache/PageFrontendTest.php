@@ -60,7 +60,7 @@ class PageFrontendTest extends \PHPUnit_Framework_TestCase {
     {
         try {
             $test = new Cache\Frontend\Page(array('http_conditional' => true));
-        } catch (Exception $e) {
+        } catch (Cache\Exception $e) {
             return;
         }
         $this->fail('Cache\Exception was expected but not thrown');
@@ -70,7 +70,7 @@ class PageFrontendTest extends \PHPUnit_Framework_TestCase {
     {
         try {
             $test = new Cache\Frontend\Page(array('default_options' => 'foo'));
-        } catch (Exception $e) {
+        } catch (Cache\Exception $e) {
             return;
         }
         $this->fail('Cache\Exception was expected but not thrown');
@@ -84,7 +84,7 @@ class PageFrontendTest extends \PHPUnit_Framework_TestCase {
     {
         try {
             $test = new Cache\Frontend\Page(array('default_options' => array('cache' => true, 1 => 'bar')));
-        } catch (Exception $e) {
+        } catch (Cache\Exception $e) {
             return;
         }
         $this->fail('Cache\Exception was expected but not thrown');
@@ -94,7 +94,7 @@ class PageFrontendTest extends \PHPUnit_Framework_TestCase {
     {
         try {
             $test = new Cache\Frontend\Page(array('regexps' => 'foo'));
-        } catch (Exception $e) {
+        } catch (Cache\Exception $e) {
             return;
         }
         $this->fail('Cache\Exception was expected but not thrown');
@@ -104,7 +104,7 @@ class PageFrontendTest extends \PHPUnit_Framework_TestCase {
     {
         try {
             $test = new Cache\Frontend\Page(array('regexps' => array('foo', 'bar')));
-        } catch (Exception $e) {
+        } catch (Cache\Exception $e) {
             return;
         }
         $this->fail('Cache\Exception was expected but not thrown');
@@ -128,7 +128,7 @@ class PageFrontendTest extends \PHPUnit_Framework_TestCase {
         );
         try {
             $test = new Cache\Frontend\Page(array('regexps' => $array));
-        } catch (Exception $e) {
+        } catch (Cache\Exception $e) {
             return;
         }
         $this->fail('Cache\Exception was expected but not thrown');

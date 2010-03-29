@@ -31,7 +31,7 @@ use Zend\Cache;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_SqliteBackendTest extends TestCommonExtendedBackend 
+class SqliteBackendTest extends TestCommonExtendedBackend 
 {
 
     protected $_instance;
@@ -39,7 +39,7 @@ class Zend_Cache_SqliteBackendTest extends TestCommonExtendedBackend
 
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
-        parent::__construct('Zend_Cache_Backend_Sqlite', $data, $dataName);
+        parent::__construct('Zend\Cache\Backend\Sqlite', $data, $dataName);
     }
 
     public function setUp($notag = false)

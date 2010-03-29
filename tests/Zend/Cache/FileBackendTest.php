@@ -40,7 +40,7 @@ class FileBackendTest extends TestCommonExtendedBackend
 
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
-        parent::__construct('Zend\Cache\Backend\File', $data, $dataName);
+        parent::__construct('\Zend\Cache\Backend\File', $data, $dataName);
     }
 
     public function setUp($notag = false)

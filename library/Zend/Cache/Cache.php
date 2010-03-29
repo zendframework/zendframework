@@ -96,7 +96,7 @@ abstract class Cache
         if (is_string($backend)) {
             $backendObject = self::_makeBackend($backend, $backendOptions, $customBackendNaming, $autoload);
         } else {
-            if ((is_object($backend)) && (in_array('Zend_Cache_Backend_Interface', class_implements($backend)))) {
+            if ((is_object($backend)) && (in_array('Zend\\Cache\\Backend\\BackendInterface', class_implements($backend)))) {
                 $backendObject = $backend;
             } else {
                 self::throwException('backend must be a backend name (string) or an object which implements Zend_Cache_Backend_Interface');
@@ -141,7 +141,7 @@ abstract class Cache
             }
             if (!$customBackendNaming) {
                 // we use this boolean to avoid an API break
-                $backendClass = 'Zend\\Cache\\Backend\\' . $backend;
+                $backendClass = '\\Zend\\Cache\\Backend\\' . $backend;
             } else {
                 $backendClass = $backend;
             }
@@ -183,7 +183,7 @@ abstract class Cache
             }
             if (!$customFrontendNaming) {
                 // we use this boolean to avoid an API break
-                $frontendClass = 'Zend\\Cache\\Frontend\\' . $frontend;
+                $frontendClass = '\\Zend\\Cache\\Frontend\\' . $frontend;
             } else {
                 $frontendClass = $frontend;
             }
@@ -207,8 +207,6 @@ abstract class Cache
      */
     public static function throwException($msg, \Exception $e = null)
     {
-        // For perfs reasons, we use this dynamic inclusion
-        require_once 'Zend/Cache/Exception.php';
         throw new Exception($msg, 0, $e);
     }
 

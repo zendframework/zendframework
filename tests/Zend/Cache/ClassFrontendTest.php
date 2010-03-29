@@ -67,10 +67,10 @@ class ClassFrontendTest extends \PHPUnit_Framework_TestCase {
     {
         if (!$this->_instance1) {
             $options1 = array(
-                'cached_entity' => 'test'
+                'cached_entity' => '\ZendTest\Cache\test'
             );
             $this->_instance1 = new Cache\Frontend\ClassFrontend($options1);
-            $this->_backend1 = new Cache\Backend\Test();
+            $this->_backend1 = new Cache\Backend\TestBackend();
             $this->_instance1->setBackend($this->_backend1);
         }
         if (!$this->_instance2) {
@@ -78,7 +78,7 @@ class ClassFrontendTest extends \PHPUnit_Framework_TestCase {
                 'cached_entity' => new test()
             );
             $this->_instance2 = new Cache\Frontend\ClassFrontend($options2);
-            $this->_backend2 = new Cache\Backend\Test();
+            $this->_backend2 = new Cache\Backend\TestBackend();
             $this->_instance2->setBackend($this->_backend2);
         }
     }

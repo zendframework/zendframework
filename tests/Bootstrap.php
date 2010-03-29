@@ -113,8 +113,3 @@ if (defined('TESTS_ZEND_OB_ENABLED') && constant('TESTS_ZEND_OB_ENABLED')) {
  * Unset global variables that are no longer needed.
  */
 unset($zfRoot, $zfCoreLibrary, $zfCoreTests, $path);
-
-function tmp_zendtest_autoload($class_name) {
-
-    
-}

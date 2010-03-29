@@ -20,7 +20,7 @@
             <ulink url="http://framework.zend.com/about/components">components overview</ulink>.
             Wprowadzenie "QuickStart" stanowi wstęp do poznania najczęściej używanych komponentów
             Zend Framework, takich jak:
-            <classname>Zend_Controller</classname>, 
+            <classname>Zend_Controller</classname>,
             <classname>Zend_Layout</classname>,
             <classname>Zend_Config</classname>,
             <classname>Zend_Db</classname>,
@@ -29,7 +29,7 @@
         </para>
 
         <para>
-            Za pomocą tych komponentów w ciągu kilkudziesięciu minut zostanie utworzona 
+            Za pomocą tych komponentów w ciągu kilkudziesięciu minut zostanie utworzona
             prosta aplikacja oparta na bazie danych - księga gości (guest book). Pełny kod
             źródłowy tej aplikacji jest dostępny w następujących archiwach:
         </para>
@@ -37,7 +37,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <ulink 
+                    <ulink
                     url="http://framework.zend.com/demos/ZendFrameworkQuickstart.zip">zip</ulink>
                 </para>
             </listitem>
@@ -69,7 +69,7 @@
             W efekcie kod prezentacji może zostać umieszczony w jednej części aplikacji,
             logika biznesowa w drugiej a dostęp do danych w trzeciej.
             Wielu deweloperów przekonało się, że dobrze zdefiniowane odseparowanie jest
-            nieodzowne dla utrzymania kodu w zorganizowanej 
+            nieodzowne dla utrzymania kodu w zorganizowanej
             strukturze, zwłaszcza przy projektach wieloosobowych.
         </para>
 
@@ -106,7 +106,7 @@
 
                 <listitem>
                     <para>
-                        <emphasis>Controller (Kontroler)</emphasis> - Ten składnik łączy cały 
+                        <emphasis>Controller (Kontroler)</emphasis> - Ten składnik łączy cały
                         wzorzec razem. Kontrolery manipulują modelami, decydują o widoku, jaki
                         zostanie zaprezentowany (na podstawie interakcji z użytkownikiem).
                         Odpowiadają także za przekazanie danych do widoków lub przekazanie

@@ -11,14 +11,15 @@
     </para>
 
     <para>
-        Teraz należy umieścić generowaną treść w pełnoprawnej stronie HTML. Przydatne jest również 
+        Teraz należy umieścić generowaną treść w pełnoprawnej stronie HTML. Przydatne jest również
         nadanie całej aplikacji jednolitego, zwięzłego wyglądu. Aby to osiągnąć zostanie użyty
         globalny layout (wzór) strony.
     </para>
 
     <para>
         Zend Framework używa dwóch wzorów projektowych przy implementacji layoutów: <ulink
-        url="http://martinfowler.com/eaaCatalog/twoStepView.html">Widok dwustopniowy (Two Step View)</ulink> and
+        url="http://martinfowler.com/eaaCatalog/twoStepView.html">Widok dwustopniowy
+        (Two Step View)</ulink> oraz
         <ulink
         url="http://java.sun.com/blueprints/corej2eepatterns/Patterns/CompositeView.html">Widok
         złożony (Composite View)</ulink>.
@@ -38,14 +39,15 @@
     </para>
 
     <para>
-        Mogą powstać sytuacje, w których niezbędne okaże się umieszczenie globalnych elementów w 
+        Mogą powstać sytuacje, w których niezbędne okaże się umieszczenie globalnych elementów w
         pojedynczym widoku. W tym celu Zend Framework udostępnia szereg
         <emphasis>pojemników (placeholders)</emphasis>, które umożliwiają dostęp do takich
         elementów z poziomu lokalnego skryptu widoku.
     </para>
 
     <para>
-        Aby rozpocząć korzystanie z Zend_Layout należy najpierw poinstruować bootstrap aby
+        Aby rozpocząć korzystanie z <classname>Zend_Layout</classname> należy
+        najpierw poinstruować bootstrap aby
         włączył zasób <classname>Layout</classname>. Można to osiągnąć za pomocą komendy
         <command>zf enable layout</command> (w katalogu tworzonego projektu):
     </para>
@@ -107,7 +109,7 @@ phpSettings.display_errors = 1
     </para>
 
     <para>
-        Następną przydatną rzeczą będzie upewnienie się, że deklaracja XHTML DocType jest 
+        Następną przydatną rzeczą będzie upewnienie się, że deklaracja XHTML DocType jest
         umieszczona i poprawnie sformułowana. Aby to osiągnąć należy dodać zasób do bootstrapa.
     </para>
 

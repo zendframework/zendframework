@@ -5,9 +5,9 @@
     <title>Utworzenie modelu oraz tabeli w bazie danych</title>
 
     <para>
-        Przed rozpoczęciem należy zastanowić się nad następującym zagadnieniem: gdzie tworzone 
+        Przed rozpoczęciem należy zastanowić się nad następującym zagadnieniem: gdzie tworzone
         klasy będą przechowywane i w jaki sposób będzie można je odnaleźć? Utworzony właśnie
-        domyślny projekt, używa automatycznego dołączania plików (autoloader). Możliwe jest 
+        domyślny projekt, używa automatycznego dołączania plików (autoloader). Możliwe jest
         dołączenie do niego kolejnych autoloaderów tak by umożliwić odnajdywanie tworzonych
         klas. Typowym rozwiązaniem jest umieszczenie różnych klas w głównym katalogu - w tym
         wypadku nazwanego <filename>application/</filename> - i nazywanie ich z zachowaniem
@@ -17,7 +17,7 @@
     <para>
         Klasa <classname>Zend_Controller_Front</classname> umożliwia tworzenie modułów (modules)
         - odrębnych części, które same są mini-aplikacjami. W ramach każdego modułu odwzorowywana
-        jest taka sama struktura katalogów jaka jest tworzona przez 
+        jest taka sama struktura katalogów jaka jest tworzona przez
         narzędzie <command>zf</command> w katalogu  głównym aplikacji. Nazwy wszystkich
         klas w jednym module muszą rozpoczynać się od wspólnego prefiksu - nazwy modułu.
         Katalog główny - <filename>application/</filename> również jest modułem (domyślnym)
@@ -34,7 +34,7 @@
     </para>
 
     <para>
-        Teraz należy się zastanowić co składa sie na książkę odwiedzin. Typowo będzie w niej
+        Teraz należy się zastanowić co składa się na książkę odwiedzin. Typowo będzie w niej
         lista wpisów z <emphasis>komentarzem</emphasis>, <emphasis>czasem zapisu</emphasis>
         oraz <emphasis>adresem email</emphasis>. Zakładając użycie bazy danych, pole
         <emphasis>unikalny identyfikator</emphasis> może również być przydatne. Aplikacja
@@ -77,9 +77,9 @@ class Application_Model_GuestbookMapper
 ]]></programlisting>
 
     <para>
-        <methodname>__get()</methodname> and <methodname>__set()</methodname> stanowią mechanizmy 
+        <methodname>__get()</methodname> and <methodname>__set()</methodname> stanowią mechanizmy
         ułatwiające dostęp do poszczególnych właściwości oraz pośredniczą w dostępie do innych
-        getterów i setterów. Dziękim nim, można również upewnić się, że jedynie pożądane
+        getterów i setterów. Dzięki nim, można również upewnić się, że jedynie pożądane
         właściwości będą dostępne.
     </para>
 
@@ -180,8 +180,7 @@ resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-dev.db"
         Należy zauważyć, iż baza (bazy) danych będzie przechowywana w
         <filename>data/db/</filename>.
         Te katalogi powinny zostać utworzone i udostępnione wszystkim. Na systemach unix można
-        tego dokonać następująco: 
-    </para>
+        tego dokonać następująco:    </para>
 
     <programlisting language="shell"><![CDATA[
 % mkdir -p data/db; chmod -R a+rwX data
@@ -343,7 +342,7 @@ return true;
 ]]></programlisting>
 
     <para>
-        Teraz należy wywołać powyższy skypt. Można to zrobić z poziomu terminala lub
+        Teraz należy wywołać powyższy skrypt. Można to zrobić z poziomu terminala lub
         wiersza poleceń poprzez wpisanie następującej komendy:
     </para>
 
@@ -365,7 +364,7 @@ Data Loaded.
 
     <para>
         Po zdefiniowaniu bazy danych aplikacji książka odwiedzin można przystąpić do budowy kodu
-        samej aplikacji. W następnych krokach zostanie zbudowana klasa dostępu do danych 
+        samej aplikacji. W następnych krokach zostanie zbudowana klasa dostępu do danych
         (poprzez <classname>Zend_Db_Table</classname>), oraz klasa mapująca - służąca do
         połączenia z wcześniej opisanym modelem.
         Na koniec utworzony zostanie kontroler zarządzający modelem, którego zadaniem będzie

@@ -95,10 +95,10 @@ class Application_Form_Guestbook extends Zend_Form
 
     <programlisting language="shell"><![CDATA[
 % zf create action sign Guestbook
-Creating an action named sign inside controller 
+Creating an action named sign inside controller
     at application/controllers/GuestbookController.php
 Updating project profile '.zfproject.xml'
-Creating a view script for the sign action method 
+Creating a view script for the sign action method
     at application/views/scripts/guestbook/sign.phtml
 Updating project profile '.zfproject.xml'
 ]]></programlisting>
@@ -111,7 +111,7 @@ Updating project profile '.zfproject.xml'
     <para>
         Teraz należy zapisać logikę aplikacji w treści nowej akcji. Na początek należy sprawdzić
         czy żądanie zostało otrzymane metodą <acronym>POST</acronym> czy <acronym>GET</acronym>.
-        W przypadku metody <acronym>GET</acronym> zostanie po prostu pokazany formularz do
+        W drugim przypadku zostanie po prostu pokazany formularz do
         wypełnienia. Jednak dla metody <acronym>POST</acronym> niezbędne będzie sprawdzenie
         poprawności przesyłanych danych oraz, w przypadku pozytywnej weryfikacji, utworzenie
         nowego rekordu i zapisanie go w bazie danych. Logika może wyglądać następująco:
@@ -146,7 +146,7 @@ class GuestbookController extends Zend_Controller_Action
     <para>
         Niezbędna jest również zmiana skryptu widoku
         <filename>application/views/scripts/guestbook/sign.phtml</filename>
-        tak aby zawierał nastęującą treść:
+        tak aby zawierał następującą treść:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -169,7 +169,7 @@ echo $this->form;
         </para>
 
         <para>
-            Dodatkowo przydatny może się okazać 
+            Dodatkowo przydatny może się okazać
             <link linkend="learning.form.decorators.intro">tutorial dekoratorów formularzy</link>.
         </para>
     </note>

@@ -162,7 +162,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                 <listitem>
                     <para>
                         <emphasis>Cursor Ausrichtung</emphasis> ist das zweite Argument. Standard
-                        ist <constant>Zend_Db::FETCH_ORI_NEXT<constant>, was einfach bedeutet das
+                        ist <constant>Zend_Db::FETCH_ORI_NEXT</constant>, was einfach bedeutet das
                         für jeden Aufruf von <methodname>fetch()</methodname> die nächste Zeile des
                         Ergebnissatzes, in der Reihenfolge des <acronym>RDBMS</acronym>, zurück
                         gegeben wird.

@@ -20,8 +20,7 @@
  * @version    $Id$
  */
 
-
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
+namespace ZendTest\Cache;
 
 /**
  * @category   Zend
@@ -31,7 +30,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_TestCommonExtendedBackend extends Zend_Cache_TestCommonBackend 
+class TestCommonExtendedBackend extends TestCommonBackend 
 {
 
     private $_capabilities;
@@ -58,7 +57,7 @@ class Zend_Cache_TestCommonExtendedBackend extends Zend_Cache_TestCommonBackend
     public function testGetFillingPercentageOnEmptyBackend()
     {
         $this->_instance->setDirectives(array('logging' => false)); // ???
-        $this->_instance->clean(Zend_Cache::CLEANING_MODE_ALL);
+        $this->_instance->clean(Cache\Cache::CLEANING_MODE_ALL);
         $res = $this->_instance->getFillingPercentage();
         $this->_instance->setDirectives(array('logging' => true)); // ???
         $this->assertTrue(is_integer($res));

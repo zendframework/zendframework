@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Cache;
+use Zend\Cache;
+
 /**
  * @category   Zend
  * @package    Zend_Cache
@@ -28,7 +31,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_FileBackendTest extends Zend_Cache_TestCommonExtendedBackend 
+class FileBackendTest extends TestCommonExtendedBackend 
 {
 
     protected $_instance;
@@ -37,18 +40,18 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_TestCommonExtendedBackend
 
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
-        parent::__construct('Zend_Cache_Backend_File', $data, $dataName);
+        parent::__construct('Zend\Cache\Backend\File', $data, $dataName);
     }
 
     public function setUp($notag = false)
     {
         $this->mkdir();
         $this->_cache_dir = $this->getTmpDir() . DIRECTORY_SEPARATOR;
-        $this->_instance = new Zend_Cache_Backend_File(array(
+        $this->_instance = new Cache\Backend\File(array(
             'cache_dir' => $this->_cache_dir,
         ));
 
-        $logger = new Zend_Log(new Zend_Log_Writer_Null());
+        $logger = new \Zend\Log\Logger(new \Zend\Log\Writer\Null());
         $this->_instance->setDirectives(array('logger' => $logger));
 
         parent::setUp($notag);
@@ -62,19 +65,19 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_TestCommonExtendedBackend
 
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Backend_File(array());
+        $test = new Cache\Backend\File(array());
     }
 
     public function testConstructorWithABadFileNamePrefix()
     {
         try {
-            $class = new Zend_Cache_Backend_File(array(
+            $class = new Cache\Backend\File(array(
                 'file_name_prefix' => 'foo bar'
             ));
-        } catch (Zend_Cache_Exception $e) {
+        } catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testGetWithANonExistingCacheIdAndANullLifeTime()

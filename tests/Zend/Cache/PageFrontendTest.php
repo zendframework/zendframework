@@ -20,13 +20,8 @@
  * @version    $Id$
  */
 
-/**
- * Zend_Cache
- */
-
-/**
- * PHPUnit test case
- */
+namespace ZendTest\Cache;
+use Zend\Cache;
 
 /**
  * @category   Zend
@@ -36,15 +31,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
+class PageFrontendTest extends \PHPUnit_Framework_TestCase {
 
     private $_instance;
 
     public function setUp()
     {
         if (!$this->_instance) {
-            $this->_instance = new Zend_Cache_Frontend_Page(array());
-            $this->_backend = new Zend_Cache_Backend_Test();
+            $this->_instance = new Cache\Frontend\Page(array());
+            $this->_backend = new Cache\Backend\Test();
             $this->_instance->setBackend($this->_backend);
         }
     }
@@ -56,27 +51,27 @@ class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
 
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Frontend_Page(array('lifetime' => 3600, 'caching' => true));
+        $test = new Cache\Frontend\Page(array('lifetime' => 3600, 'caching' => true));
     }
 
     public function testConstructorUnimplementedOption()
     {
         try {
-            $test = new Zend_Cache_Frontend_Page(array('http_conditional' => true));
+            $test = new Cache\Frontend\Page(array('http_conditional' => true));
         } catch (Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testConstructorWithBadDefaultOptions()
     {
         try {
-            $test = new Zend_Cache_Frontend_Page(array('default_options' => 'foo'));
+            $test = new Cache\Frontend\Page(array('default_options' => 'foo'));
         } catch (Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     /**
@@ -86,31 +81,31 @@ class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
     public function testConstructorWithBadDefaultOptions2()
     {
         try {
-            $test = new Zend_Cache_Frontend_Page(array('default_options' => array('cache' => true, 1 => 'bar')));
+            $test = new Cache\Frontend\Page(array('default_options' => array('cache' => true, 1 => 'bar')));
         } catch (Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testConstructorWithBadRegexps()
     {
         try {
-            $test = new Zend_Cache_Frontend_Page(array('regexps' => 'foo'));
+            $test = new Cache\Frontend\Page(array('regexps' => 'foo'));
         } catch (Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testConstructorWithBadRegexps2()
     {
         try {
-            $test = new Zend_Cache_Frontend_Page(array('regexps' => array('foo', 'bar')));
+            $test = new Cache\Frontend\Page(array('regexps' => array('foo', 'bar')));
         } catch (Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     /**
@@ -130,11 +125,11 @@ class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
            )
         );
         try {
-            $test = new Zend_Cache_Frontend_Page(array('regexps' => $array));
+            $test = new Cache\Frontend\Page(array('regexps' => $array));
         } catch (Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testConstructorWithGoodRegexps()
@@ -149,12 +144,12 @@ class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
                'make_id_with_post_variables' => true,
            )
         );
-        $test = new Zend_Cache_Frontend_Page(array('regexps' => $array));
+        $test = new Cache\Frontend\Page(array('regexps' => $array));
     }
 
     public function testConstructorWithGoodDefaultOptions()
     {
-        $test = new Zend_Cache_Frontend_Page(array('default_options' => array('cache' => true)));
+        $test = new Cache\Frontend\Page(array('default_options' => array('cache' => true)));
     }
 
     public function testStartEndCorrectCall1()

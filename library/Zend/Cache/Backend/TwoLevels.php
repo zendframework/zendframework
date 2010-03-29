@@ -21,15 +21,21 @@
  */
 
 /**
- * @uses       Zend_Cache
- * @uses       Zend_Cache_Backend
- * @uses       Zend_Cache_Backend_ExtendedInterface
+ * @namespace
+ */
+namespace Zend\Cache\Backend;
+use Zend\Cache;
+
+/**
+ * @uses       \Zend\Cache\Cache
+ * @uses       \Zend\Cache\Backend\Backend
+ * @uses       \Zend\Cache\Backend\ExtendedInterface
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Cache_Backend_ExtendedInterface
+class TwoLevels extends Backend implements ExtendedInterface
 {
     /**
      * Available options
@@ -83,14 +89,14 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
     /**
      * Slow Backend
      *
-     * @var Zend_Cache_Backend
+     * @var \Zend\Cache\Backend\Backend
      */
     protected $_slowBackend;
 
     /**
      * Fast Backend
      *
-     * @var Zend_Cache_Backend
+     * @var \Zend\Cache\Backend\Backend
      */
     protected $_fastBackend;
 
@@ -105,25 +111,25 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
      * Constructor
      *
      * @param  array $options Associative array of options
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      * @return void
      */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
         if ($this->_options['slow_backend'] === null) {
-            Zend_Cache::throwException('slow_backend option has to set');
+            Cache\Cache::throwException('slow_backend option has to set');
         }
         if ($this->_options['fast_backend'] === null) {
-            Zend_Cache::throwException('fast_backend option has to set');
+            Cache\Cache::throwException('fast_backend option has to set');
         }
-        $this->_slowBackend = Zend_Cache::_makeBackend($this->_options['slow_backend'], $this->_options['slow_backend_options'], $this->_options['slow_backend_custom_naming'], $this->_options['slow_backend_autoload']);
-        $this->_fastBackend = Zend_Cache::_makeBackend($this->_options['fast_backend'], $this->_options['fast_backend_options'], $this->_options['fast_backend_custom_naming'], $this->_options['fast_backend_autoload']);
+        $this->_slowBackend = Cache\Cache::_makeBackend($this->_options['slow_backend'], $this->_options['slow_backend_options'], $this->_options['slow_backend_custom_naming'], $this->_options['slow_backend_autoload']);
+        $this->_fastBackend = Cache\Cache::_makeBackend($this->_options['fast_backend'], $this->_options['fast_backend_options'], $this->_options['fast_backend_custom_naming'], $this->_options['fast_backend_autoload']);
         if (!in_array('Zend_Cache_Backend_ExtendedInterface', class_implements($this->_slowBackend))) {
-            Zend_Cache::throwException('slow_backend must implement the Zend_Cache_Backend_ExtendedInterface interface');
+            Cache\Cache::throwException('slow_backend must implement the Zend_Cache_Backend_ExtendedInterface interface');
         }
         if (!in_array('Zend_Cache_Backend_ExtendedInterface', class_implements($this->_fastBackend))) {
-            Zend_Cache::throwException('fast_backend must implement the Zend_Cache_Backend_ExtendedInterface interface');
+            Cache\Cache::throwException('fast_backend must implement the Zend_Cache_Backend_ExtendedInterface interface');
         }
         $this->_slowBackend->setDirectives($this->_directives);
         $this->_fastBackend->setDirectives($this->_directives);
@@ -238,20 +244,20 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
      *
      * @param  string $mode Clean mode
      * @param  array  $tags Array of tags
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      * @return boolean true if no problem
      */
-    public function clean($mode = Zend_Cache::CLEANING_MODE_ALL, $tags = array())
+    public function clean($mode = Cache\CacheCache\Cache::CLEANING_MODE_ALL, $tags = array())
     {
         switch($mode) {
-            case Zend_Cache::CLEANING_MODE_ALL:
-                $boolFast = $this->_fastBackend->clean(Zend_Cache::CLEANING_MODE_ALL);
-                $boolSlow = $this->_slowBackend->clean(Zend_Cache::CLEANING_MODE_ALL);
+            case Cache\Cache::CLEANING_MODE_ALL:
+                $boolFast = $this->_fastBackend->clean(Cache\Cache::CLEANING_MODE_ALL);
+                $boolSlow = $this->_slowBackend->clean(Cache\Cache::CLEANING_MODE_ALL);
                 return $boolFast && $boolSlow;
                 break;
-            case Zend_Cache::CLEANING_MODE_OLD:
-                return $this->_slowBackend->clean(Zend_Cache::CLEANING_MODE_OLD);
-            case Zend_Cache::CLEANING_MODE_MATCHING_TAG:
+            case Cache\Cache::CLEANING_MODE_OLD:
+                return $this->_slowBackend->clean(Cache\Cache::CLEANING_MODE_OLD);
+            case Cache\Cache::CLEANING_MODE_MATCHING_TAG:
                 $ids = $this->_slowBackend->getIdsMatchingTags($tags);
                 $res = true;
                 foreach ($ids as $id) {
@@ -260,7 +266,7 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
                 }
                 return $res;
                 break;
-            case Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG:
+            case Cache\Cache::CLEANING_MODE_NOT_MATCHING_TAG:
                 $ids = $this->_slowBackend->getIdsNotMatchingTags($tags);
                 $res = true;
                 foreach ($ids as $id) {
@@ -269,7 +275,7 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
                 }
                 return $res;
                 break;
-            case Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG:
+            case Cache\Cache::CLEANING_MODE_MATCHING_ANY_TAG:
                 $ids = $this->_slowBackend->getIdsMatchingAnyTags($tags);
                 $res = true;
                 foreach ($ids as $id) {
@@ -279,7 +285,7 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
                 return $res;
                 break;
             default:
-                Zend_Cache::throwException('Invalid mode for clean() method');
+                Cache\Cache::throwException('Invalid mode for clean() method');
                 break;
         }
     }

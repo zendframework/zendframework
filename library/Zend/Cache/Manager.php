@@ -20,14 +20,20 @@
  */
 
 /**
- * @uses       Zend_Cache
- * @uses       Zend_Cache_Exception
+ * @namespace
+ */
+namespace Zend\Cache;
+use Zend\Config;
+
+/**
+ * @uses       \Zend\Cache\Cache
+ * @uses       \Zend\Cache\Exception
  * @category   Zend
  * @package    Zend_Cache
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cache_Manager
+class Manager
 {
     /**
      * Constant holding reserved name for default Page Cache
@@ -117,10 +123,10 @@ class Zend_Cache_Manager
      * Set a new cache for the Cache Manager to contain
      *
      * @param  string $name
-     * @param  Zend_Cache_Core $cache
-     * @return Zend_Cache_Manager
+     * @param  \Zend\Cache\Core $cache
+     * @return \Zend\Cache\Manager
      */
-    public function setCache($name, Zend_Cache_Core $cache)
+    public function setCache($name, Core $cache)
     {
         $this->_caches[$name] = $cache;
         return $this;
@@ -148,7 +154,7 @@ class Zend_Cache_Manager
      * using a named configuration template
      *
      * @param  string $name
-     * @return Zend_Cache_Core
+     * @return \Zend\Cache\Core
      */
     public function getCache($name)
     {
@@ -158,12 +164,12 @@ class Zend_Cache_Manager
         if (isset($this->_optionTemplates[$name])) {
             if ($name == self::PAGECACHE 
                 && (!isset($this->_optionTemplates[$name]['backend']['options']['tag_cache']) 
-                || !$this->_optionTemplates[$name]['backend']['options']['tag_cache'] instanceof Zend_Cache_Core)
+                || !$this->_optionTemplates[$name]['backend']['options']['tag_cache'] instanceof Core)
             ) {
                 $this->_optionTemplates[$name]['backend']['options']['tag_cache']
                     = $this->getCache(self::PAGETAGCACHE );
             }
-            $this->_caches[$name] = Zend_Cache::factory(
+            $this->_caches[$name] = Cache::factory(
                 $this->_optionTemplates[$name]['frontend']['name'],
                 $this->_optionTemplates[$name]['backend']['name'],
                 isset($this->_optionTemplates[$name]['frontend']['options']) ? $this->_optionTemplates[$name]['frontend']['options'] : array(),
@@ -179,14 +185,14 @@ class Zend_Cache_Manager
      *
      * @param  string $name
      * @param  array $options
-     * @return Zend_Cache_Manager
+     * @return \Zend\Cache\Manager
      */
     public function setCacheTemplate($name, $options)
     {
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof Config\Config) {
             $options = $options->toArray();
         } elseif (!is_array($options)) {
-            throw new Zend_Cache_Exception('Options passed must be in'
+            throw new Exception('Options passed must be in'
                 . ' an associative array or instance of Zend_Config');
         }
         $this->_optionTemplates[$name] = $options;
@@ -227,19 +233,19 @@ class Zend_Cache_Manager
      *
      * @param  string $name
      * @param  array $options
-     * @return Zend_Cache_Manager
-     * @throws Zend_Cache_Exception for invalid options format or if option templates do not have $name
+     * @return \Zend\Cache\Manager
+     * @throws \Zend\Cache\Exception for invalid options format or if option templates do not have $name
      */
     public function setTemplateOptions($name, $options)
     {
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof Config\Config) {
             $options = $options->toArray();
         } elseif (!is_array($options)) {
-            throw new Zend_Cache_Exception('Options passed must be in'
+            throw new Exception('Options passed must be in'
                 . ' an associative array or instance of Zend_Config');
         }
         if (!isset($this->_optionTemplates[$name])) {
-            throw new Zend_Cache_Exception('A cache configuration template'
+            throw new Exception('A cache configuration template'
                 . ' does not exist with the name "' . $name . '"');
         }
         $this->_optionTemplates[$name]

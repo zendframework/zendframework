@@ -19,13 +19,17 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace Zend\Cache;
 
 /**
  * @package    Zend_Cache
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Cache
+abstract class Cache
 {
 
     /**
@@ -84,7 +88,7 @@ abstract class Zend_Cache
      * @param boolean $customFrontendNaming if true, the frontend argument is used as a complete class name ; if false, the frontend argument is used as the end of "Zend_Cache_Frontend_[...]" class name
      * @param boolean $customBackendNaming if true, the backend argument is used as a complete class name ; if false, the backend argument is used as the end of "Zend_Cache_Backend_[...]" class name
      * @param boolean $autoload if true, there will no require_once for backend and frontend (useful only for custom backends/frontends)
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      * @return Zend_Cache_Core|Zend_Cache_Frontend
      */
     public static function factory($frontend, $backend, $frontendOptions = array(), $backendOptions = array(), $customFrontendNaming = false, $customBackendNaming = false, $autoload = false)
@@ -118,14 +122,14 @@ abstract class Zend_Cache
      * @param array   $backendOptions
      * @param boolean $customBackendNaming
      * @param boolean $autoload
-     * @return Zend_Cache_Backend
+     * @return \Zend\Cache\Backend\Backend
      */
     public static function _makeBackend($backend, $backendOptions, $customBackendNaming = false, $autoload = false)
     {
         if (!$customBackendNaming) {
             $backend  = self::_normalizeName($backend);
         }
-        if (in_array($backend, Zend_Cache::$standardBackends)) {
+        if (in_array($backend, Cache::$standardBackends)) {
             // we use a standard backend
             $backendClass = 'Zend_Cache_Backend_' . $backend;
             // security controls are explicit
@@ -133,7 +137,7 @@ abstract class Zend_Cache
         } else {
             // we use a custom backend
             if (!preg_match('~^[\w]+$~D', $backend)) {
-                Zend_Cache::throwException("Invalid backend name [$backend]");
+                Cache::throwException("Invalid backend name [$backend]");
             }
             if (!$customBackendNaming) {
                 // we use this boolean to avoid an API break
@@ -175,7 +179,7 @@ abstract class Zend_Cache
         } else {
             // we use a custom frontend
             if (!preg_match('~^[\w]+$~D', $frontend)) {
-                Zend_Cache::throwException("Invalid frontend name [$frontend]");
+                Cache::throwException("Invalid frontend name [$frontend]");
             }
             if (!$customFrontendNaming) {
                 // we use this boolean to avoid an API break
@@ -199,13 +203,13 @@ abstract class Zend_Cache
      *
      * Note : for perf reasons, the "load" of Zend/Cache/Exception is dynamic
      * @param  string $msg  Message for the exception
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      */
-    public static function throwException($msg, Exception $e = null)
+    public static function throwException($msg, \Exception $e = null)
     {
         // For perfs reasons, we use this dynamic inclusion
         require_once 'Zend/Cache/Exception.php';
-        throw new Zend_Cache_Exception($msg, 0, $e);
+        throw new Exception($msg, 0, $e);
     }
 
     /**

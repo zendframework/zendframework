@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Cache;
+use Zend\Cache;
+
 /**
  * @category   Zend
  * @package    Zend_Cache
@@ -28,14 +31,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_XcacheBackendTest extends Zend_Cache_TestCommonBackend 
+class XcacheBackendTest extends TestCommonBackend 
 {
 
     protected $_instance;
 
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
-        parent::__construct('Zend_Cache_Backend_Xcache', $data, $dataName);
+        parent::__construct('Zend\Cache\Backend\Xcache', $data, $dataName);
     }
 
     public function setUp($notag = true)
@@ -43,7 +46,7 @@ class Zend_Cache_XcacheBackendTest extends Zend_Cache_TestCommonBackend
         if (!constant('TESTS_ZEND_CACHE_XCACHE_ENABLED')) {
             $this->markTestSkipped('Zend_Cache XCache tests not enabled');
         }
-        $this->_instance = new Zend_Cache_Backend_Xcache(array(
+        $this->_instance = new Cache\Backend\Xcache(array(
             'user' => TESTS_ZEND_CACHE_XCACHE_USER,
             'password' => TESTS_ZEND_CACHE_XCACHE_PASSWORD
         ));
@@ -58,7 +61,7 @@ class Zend_Cache_XcacheBackendTest extends Zend_Cache_TestCommonBackend
 
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Backend_Xcache();
+        $test = new Cache\Backend\Xcache();
     }
 
     public function testCleanModeOld() {

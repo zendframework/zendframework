@@ -53,6 +53,17 @@ require_once 'Zend/Loader/Autoloader.php';
 $autoloader = \Zend\Loader\Autoloader::getInstance();
 $autoloader->registerPrefix('PHPUnit_');
 
+// temporary fix for ZendTest namespace until we can migrate files into ZendTest dir
+spl_autoload_register(
+    function ($class_name) {
+        if (strpos($class_name, 'ZendTest\\') !== 0) {
+            return;
+        }
+        include_once dirname(__FILE__)  . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, preg_replace('#^ZendTest\\\\#', 'Zend\\', $class_name)) . '.php';
+    }, 
+    false, // throw exceptions
+    true  // prepend autoloader
+    );
 
 /*
  * Load the user-defined test configuration file, if it exists; otherwise, load
@@ -97,3 +108,8 @@ if (defined('TESTS_ZEND_OB_ENABLED') && constant('TESTS_ZEND_OB_ENABLED')) {
  * Unset global variables that are no longer needed.
  */
 unset($zfRoot, $zfCoreLibrary, $zfCoreTests, $path);
+
+function tmp_zendtest_autoload($class_name) {
+
+    
+}

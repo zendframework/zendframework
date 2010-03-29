@@ -21,13 +21,19 @@
  */
 
 /**
- * @uses       Zend_Cache_Core
+ * @namespace
+ */
+namespace Zend\Cache\Frontend;
+use Zend\Cache;
+
+/**
+ * @uses       \Zend\Cache\Core
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Frontend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cache_Frontend_Page extends Zend_Cache_Core
+class Page extends Cache\Core
 {
     /**
      * This frontend specific options
@@ -118,7 +124,7 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
      *
      * @param  array   $options                Associative array of options
      * @param  boolean $doNotTestCacheValidity If set to true, the cache validity won't be tested
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      * @return void
      */
     public function __construct(array $options = array())
@@ -141,7 +147,7 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
         }
         if (isset($this->_specificOptions['http_conditional'])) {
             if ($this->_specificOptions['http_conditional']) {
-                Zend_Cache::throwException('http_conditional is not implemented for the moment !');
+                Cache\Cache::throwException('http_conditional is not implemented for the moment !');
             }
         }
         $this->setOption('automatic_serialization', true);
@@ -151,17 +157,17 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
      * Specific setter for the 'default_options' option (with some additional tests)
      *
      * @param  array $options Associative array
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      * @return void
      */
     protected function _setDefaultOptions($options)
     {
         if (!is_array($options)) {
-            Zend_Cache::throwException('default_options must be an array !');
+            Cache\Cache::throwException('default_options must be an array !');
         }
         foreach ($options as $key=>$value) {
             if (!is_string($key)) {
-                Zend_Cache::throwException("invalid option [$key] !");
+                Cache\Cache::throwException("invalid option [$key] !");
             }
             $key = strtolower($key);
             if (isset($this->_specificOptions['default_options'][$key])) {
@@ -200,22 +206,22 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
      * Specific setter for the 'regexps' option (with some additional tests)
      *
      * @param  array $options Associative array
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      * @return void
      */
     protected function _setRegexps($regexps)
     {
         if (!is_array($regexps)) {
-            Zend_Cache::throwException('regexps option must be an array !');
+            Cache\Cache::throwException('regexps option must be an array !');
         }
         foreach ($regexps as $regexp=>$conf) {
             if (!is_array($conf)) {
-                Zend_Cache::throwException('regexps option must be an array of arrays !');
+                Cache\Cache::throwException('regexps option must be an array of arrays !');
             }
             $validKeys = array_keys($this->_specificOptions['default_options']);
             foreach ($conf as $key=>$value) {
                 if (!is_string($key)) {
-                    Zend_Cache::throwException("unknown option [$key] !");
+                    Cache\Cache::throwException("unknown option [$key] !");
                 }
                 $key = strtolower($key);
                 if (!in_array($key, $validKeys)) {

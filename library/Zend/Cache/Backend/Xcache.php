@@ -21,15 +21,21 @@
  */
 
 /**
- * @uses       Zend_Cache
- * @uses       Zend_Cache_Backend
- * @uses       Zend_Cache_Backend_Interface
+ * @namespace
+ */
+namespace Zend\Cache\Backend;
+use Zend\Cache;
+
+/**
+ * @uses       \Zend\Cache\Cache
+ * @uses       \Zend\Cache\Backend\Backend
+ * @uses       \Zend\Cache\Backend\BackendInterface
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cache_Backend_Xcache extends Zend_Cache_Backend implements Zend_Cache_Backend_Interface
+class Xcache extends Backend implements BackendInterface
 {
 
     /**
@@ -58,13 +64,13 @@ class Zend_Cache_Backend_Xcache extends Zend_Cache_Backend implements Zend_Cache
      * Constructor
      *
      * @param  array $options associative array of options
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      * @return void
      */
     public function __construct(array $options = array())
     {
         if (!extension_loaded('xcache')) {
-            Zend_Cache::throwException('The xcache extension must be loaded for using this backend !');
+            Cache\Cache::throwException('The xcache extension must be loaded for using this backend !');
         }
         parent::__construct($options);
     }
@@ -152,13 +158,13 @@ class Zend_Cache_Backend_Xcache extends Zend_Cache_Backend implements Zend_Cache
      *
      * @param  string $mode clean mode
      * @param  array  $tags array of tags
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      * @return boolean true if no problem
      */
-    public function clean($mode = Zend_Cache::CLEANING_MODE_ALL, $tags = array())
+    public function clean($mode = Cache\CacheCache\Cache::CLEANING_MODE_ALL, $tags = array())
     {
         switch ($mode) {
-            case Zend_Cache::CLEANING_MODE_ALL:
+            case Cache\Cache::CLEANING_MODE_ALL:
                 // Necessary because xcache_clear_cache() need basic authentification
                 $backup = array();
                 if (isset($_SERVER['PHP_AUTH_USER'])) {
@@ -180,16 +186,16 @@ class Zend_Cache_Backend_Xcache extends Zend_Cache_Backend implements Zend_Cache
                 }
                 return true;
                 break;
-            case Zend_Cache::CLEANING_MODE_OLD:
+            case Cache\Cache::CLEANING_MODE_OLD:
                 $this->_log("Zend_Cache_Backend_Xcache::clean() : CLEANING_MODE_OLD is unsupported by the Xcache backend");
                 break;
-            case Zend_Cache::CLEANING_MODE_MATCHING_TAG:
-            case Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG:
-            case Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG:
+            case Cache\Cache::CLEANING_MODE_MATCHING_TAG:
+            case Cache\Cache::CLEANING_MODE_NOT_MATCHING_TAG:
+            case Cache\Cache::CLEANING_MODE_MATCHING_ANY_TAG:
                 $this->_log(self::TAGS_UNSUPPORTED_BY_CLEAN_OF_XCACHE_BACKEND);
                 break;
             default:
-                Zend_Cache::throwException('Invalid mode for clean() method');
+                Cache\Cache::throwException('Invalid mode for clean() method');
                 break;
         }
     }

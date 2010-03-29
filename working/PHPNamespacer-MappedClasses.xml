@@ -971,10 +971,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Backend/Static.php</originalRelativeFilePath>
       <originalClassName>Zend_Cache_Backend_Static</originalClassName>
-      <newRelativeFilePath>Zend/Cache/Backend/Static.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Cache/Backend/StaticBackend.php</newRelativeFilePath>
       <newNamespace>Zend\Cache\Backend</newNamespace>
-      <newClassName>Static</newClassName>
-      <newFullyQualifiedName>Zend\Cache\Backend\Static</newFullyQualifiedName>
+      <newClassName>StaticBackend</newClassName>
+      <newFullyQualifiedName>Zend\Cache\Backend\StaticBackend</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Backend/Test.php</originalRelativeFilePath>
@@ -1067,10 +1067,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Frontend/Class.php</originalRelativeFilePath>
       <originalClassName>Zend_Cache_Frontend_Class</originalClassName>
-      <newRelativeFilePath>Zend/Cache/Frontend/Class.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Cache/Frontend/ClassFrontend.php</newRelativeFilePath>
       <newNamespace>Zend\Cache\Frontend</newNamespace>
-      <newClassName>Class</newClassName>
-      <newFullyQualifiedName>Zend\Cache\Frontend\Class</newFullyQualifiedName>
+      <newClassName>ClassFrontend</newClassName>
+      <newFullyQualifiedName>Zend\Cache\Frontend\ClassFrontend</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Frontend/File.php</originalRelativeFilePath>
@@ -1083,10 +1083,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Frontend/Function.php</originalRelativeFilePath>
       <originalClassName>Zend_Cache_Frontend_Function</originalClassName>
-      <newRelativeFilePath>Zend/Cache/Frontend/Function.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Cache/Frontend/FunctionFrontend.php</newRelativeFilePath>
       <newNamespace>Zend\Cache\Frontend</newNamespace>
-      <newClassName>Function</newClassName>
-      <newFullyQualifiedName>Zend\Cache\Frontend\Function</newFullyQualifiedName>
+      <newClassName>FunctionFrontend</newClassName>
+      <newFullyQualifiedName>Zend\Cache\Frontend\FunctionFrontend</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Frontend/Output.php</originalRelativeFilePath>

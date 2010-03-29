@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Cache;
+use Zend\Cache;
+
 /**
  * @category   Zend
  * @package    Zend_Cache
@@ -28,14 +31,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_MemcachedBackendTest extends Zend_Cache_TestCommonExtendedBackend 
+class MemcachedBackendTest extends TestCommonExtendedBackend 
 {
 
     protected $_instance;
 
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
-        parent::__construct('Zend_Cache_Backend_Memcached', $data, $dataName);
+        parent::__construct('Zend\Cache\Backend\Memcached', $data, $dataName);
     }
 
     public function setUp($notag = true)
@@ -56,7 +59,7 @@ class Zend_Cache_MemcachedBackendTest extends Zend_Cache_TestCommonExtendedBacke
         $options = array(
             'servers' => array($serverValid, $serverFail)
         );
-        $this->_instance = new Zend_Cache_Backend_Memcached($options);
+        $this->_instance = new Cache\Backend\Memcached($options);
         parent::setUp($notag);
     }
 
@@ -70,7 +73,7 @@ class Zend_Cache_MemcachedBackendTest extends Zend_Cache_TestCommonExtendedBacke
 
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Backend_Memcached();
+        $test = new Cache\Backend\Memcached();
     }
 
     public function testCleanModeOld()
@@ -113,7 +116,7 @@ class Zend_Cache_MemcachedBackendTest extends Zend_Cache_TestCommonExtendedBacke
         $options = array(
             'servers' => $server
         );
-        $this->_instance = new Zend_Cache_Backend_Memcached($options);
+        $this->_instance = new Cache\Backend\Memcached($options);
         $this->testGetWithAnExistingCacheIdAndUTFCharacters();
     }
 

@@ -20,13 +20,8 @@
  * @version    $Id$
  */
 
-/**
- * Zend_Cache
- */
-
-/**
- * PHPUnit test case
- */
+namespace ZendTest\Cache;
+use Zend\Cache;
 
 /**
  * @todo: Should this class be named Zend_Cache_Something?
@@ -63,7 +58,7 @@ class test {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_ClassFrontendTest extends PHPUnit_Framework_TestCase {
+class ClassFrontendTest extends \PHPUnit_Framework_TestCase {
 
     private $_instance1;
     private $_instance2;
@@ -74,16 +69,16 @@ class Zend_Cache_ClassFrontendTest extends PHPUnit_Framework_TestCase {
             $options1 = array(
                 'cached_entity' => 'test'
             );
-            $this->_instance1 = new Zend_Cache_Frontend_Class($options1);
-            $this->_backend1 = new Zend_Cache_Backend_Test();
+            $this->_instance1 = new Cache\Frontend\ClassFrontend($options1);
+            $this->_backend1 = new Cache\Backend\Test();
             $this->_instance1->setBackend($this->_backend1);
         }
         if (!$this->_instance2) {
             $options2 = array(
                 'cached_entity' => new test()
             );
-            $this->_instance2 = new Zend_Cache_Frontend_Class($options2);
-            $this->_backend2 = new Zend_Cache_Backend_Test();
+            $this->_instance2 = new Cache\Frontend\ClassFrontend($options2);
+            $this->_backend2 = new Cache\Backend\Test();
             $this->_instance2->setBackend($this->_backend2);
         }
     }
@@ -100,7 +95,7 @@ class Zend_Cache_ClassFrontendTest extends PHPUnit_Framework_TestCase {
             'cache_by_default' => false,
             'cached_entity' => 'test'
         );
-        $test = new Zend_Cache_Frontend_Class($options);
+        $test = new Cache\Frontend\ClassFrontend($options);
     }
 
     public function testConstructorCorrectCall2()
@@ -109,7 +104,7 @@ class Zend_Cache_ClassFrontendTest extends PHPUnit_Framework_TestCase {
             'cache_by_default' => false,
             'cached_entity' => new test()
         );
-        $test = new Zend_Cache_Frontend_Class($options);
+        $test = new Cache\Frontend\ClassFrontend($options);
     }
 
     public function testConstructorBadCall()
@@ -119,11 +114,11 @@ class Zend_Cache_ClassFrontendTest extends PHPUnit_Framework_TestCase {
             0 => true,
         );
         try {
-            $test = new Zend_Cache_Frontend_Class($options);
-        } catch (Zend_Cache_Exception $e) {
+            $test = new Cache\Frontend\ClassFrontend($options);
+        } catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testCallCorrectCall1()
@@ -226,11 +221,11 @@ class Zend_Cache_ClassFrontendTest extends PHPUnit_Framework_TestCase {
             $options = array(
                 'cached_entity' => array()
             );
-            $instance = new Zend_Cache_Frontend_Class($options);
-        } catch (Zend_Cache_Exception $e) {
+            $instance = new Cache\Frontend\ClassFrontend($options);
+        } catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     /**
@@ -242,7 +237,7 @@ class Zend_Cache_ClassFrontendTest extends PHPUnit_Framework_TestCase {
             'cached_entity' => new test(),
             'this_key_does_not_exist' => true
         );
-        $test = new Zend_Cache_Frontend_Class($options);
+        $test = new Cache\Frontend\ClassFrontend($options);
     }
 }
 

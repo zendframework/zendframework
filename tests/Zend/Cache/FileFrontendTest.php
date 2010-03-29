@@ -20,13 +20,8 @@
  * @version    $Id$
  */
 
-/**
- * Zend_Cache
- */
-
-/**
- * PHPUnit test case
- */
+namespace ZendTest\Cache;
+use Zend\Cache;
 
 /**
  * @category   Zend
@@ -36,7 +31,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_FileFrontendTest extends PHPUnit_Framework_TestCase {
+class FileFrontendTest extends \PHPUnit_Framework_TestCase {
 
     private $_instance1;
     private $_instance2;
@@ -60,28 +55,28 @@ class Zend_Cache_FileFrontendTest extends PHPUnit_Framework_TestCase {
         }
         if (!$this->_instance1) {
             touch($this->_masterFile, 123455);
-            $this->_instance1 = new Zend_Cache_Frontend_File(array('master_file' => $this->_masterFile));
-            $this->_backend = new Zend_Cache_Backend_Test();
+            $this->_instance1 = new Cache\Frontend\File(array('master_file' => $this->_masterFile));
+            $this->_backend = new Cache\Backend\Test();
             $this->_instance1->setBackend($this->_backend);
         }
         if (!$this->_instance2) {
             touch($this->_masterFile);
-            $this->_instance2 = new Zend_Cache_Frontend_File(array('master_file' => $this->_masterFile));
-            $this->_backend = new Zend_Cache_Backend_Test();
+            $this->_instance2 = new Cache\Frontend\File(array('master_file' => $this->_masterFile));
+            $this->_backend = new Cache\Backend\Test();
             $this->_instance2->setBackend($this->_backend);
         }
         if (!$this->_instance3) {
             touch($this->_masterFile1, 123455);
             touch($this->_masterFile2, 123455);
-            $this->_instance3 = new Zend_Cache_Frontend_File(array('master_files' => array($this->_masterFile1, $this->_masterFile2)));
-            $this->_backend = new Zend_Cache_Backend_Test();
+            $this->_instance3 = new Cache\Frontend\File(array('master_files' => array($this->_masterFile1, $this->_masterFile2)));
+            $this->_backend = new Cache\Backend\Test();
             $this->_instance3->setBackend($this->_backend);
         }
         if (!$this->_instance4) {
             touch($this->_masterFile1);
             touch($this->_masterFile2);
-            $this->_instance4 = new Zend_Cache_Frontend_File(array('master_files' => array($this->_masterFile1, $this->_masterFile2)));
-            $this->_backend = new Zend_Cache_Backend_Test();
+            $this->_instance4 = new Cache\Frontend\File(array('master_files' => array($this->_masterFile1, $this->_masterFile2)));
+            $this->_backend = new Cache\Backend\Test();
             $this->_instance4->setBackend($this->_backend);
         }
     }
@@ -136,29 +131,29 @@ class Zend_Cache_FileFrontendTest extends PHPUnit_Framework_TestCase {
 
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Frontend_File(array('master_file' => $this->_masterFile, 'lifetime' => 3600, 'caching' => true));
+        $test = new Cache\Frontend\File(array('master_file' => $this->_masterFile, 'lifetime' => 3600, 'caching' => true));
     }
 
     public function testConstructorBadCall1()
     {
         # no masterfile
         try {
-            $test = new Zend_Cache_Frontend_File(array('lifetime' => 3600, 'caching' => true));
-        } catch (Zend_Cache_Exception $e) {
+            $test = new Cache\Frontend\File(array('lifetime' => 3600, 'caching' => true));
+        } catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testConstructorBadCall2()
     {
         # incorrect option
         try {
-            $test = new Zend_Cache_Frontend_File(array('master_file' => $this->_masterFile, 0 => 3600));
-        } catch (Zend_Cache_Exception $e) {
+            $test = new Cache\Frontend\File(array('master_file' => $this->_masterFile, 0 => 3600));
+        } catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testTestCorrectCall1()
@@ -204,11 +199,11 @@ class Zend_Cache_FileFrontendTest extends PHPUnit_Framework_TestCase {
     public function testConstructorWithABadMasterFile()
     {
         try {
-            $instance = new Zend_Cache_Frontend_File(array('master_file' => '/foo/bar/ljhfdjh/qhskldhqjk'));
-        } catch (Zend_Cache_Exception $e) {
+            $instance = new Cache\Frontend\File(array('master_file' => '/foo/bar/ljhfdjh/qhskldhqjk'));
+        } catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testGetWithDoNotTestCacheValidity()

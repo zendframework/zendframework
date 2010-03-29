@@ -21,13 +21,18 @@
  */
 
 /**
- * @uses       Zend_Cache_Core
+ * @namespace
+ */
+namespace Zend\Cache\Frontend;
+
+/**
+ * @uses       \Zend\Cache\Core
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Frontend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cache_Frontend_Capture extends Zend_Cache_Core
+class Capture extends \Zend\Cache\Core
 {
     /**
      * Page identifiers
@@ -70,7 +75,7 @@ class Zend_Cache_Frontend_Capture extends Zend_Cache_Core
     {
         $id = array_pop($this->_idStack);
         if (is_null($id)) {
-            Zend_Cache::throwException('use of _flush() without a start()');
+            \Zend\Cache\Cache::throwException('use of _flush() without a start()');
         }
         if ($this->_extension) {
             $this->save(serialize(array($data, $this->_extension)), $id, $this->_tags);

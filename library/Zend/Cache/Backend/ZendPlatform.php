@@ -21,17 +21,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Cache\Backend;
+use Zend\Cache;
+
+/**
  * Impementation of Zend Cache Backend using the Zend Platform (Output Content Caching)
  *
- * @uses       Zend_Cache
- * @uses       Zend_Cache_Backend
- * @uses       Zend_Cache_Backend_Interface
+ * @uses       \Zend\Cache\Cache
+ * @uses       \Zend\Cache\Backend\Backend
+ * @uses       \Zend\Cache\Backend\BackendInterface
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cache_Backend_ZendPlatform extends Zend_Cache_Backend implements Zend_Cache_Backend_Interface
+class ZendPlatform extends Backend implements BackendInterface
 {
     /**
      * internal ZP prefix
@@ -43,27 +49,27 @@ class Zend_Cache_Backend_ZendPlatform extends Zend_Cache_Backend implements Zend
      * Validate that the Zend Platform is loaded and licensed
      *
      * @param  array $options Associative array of options
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      * @return void
      */
     public function __construct(array $options = array())
     {
         if (!function_exists('accelerator_license_info')) {
-            Zend_Cache::throwException('The Zend Platform extension must be loaded for using this backend !');
+            Cache\Cache::throwException('The Zend Platform extension must be loaded for using this backend !');
         }
         if (!function_exists('accelerator_get_configuration')) {
             $licenseInfo = accelerator_license_info();
-            Zend_Cache::throwException('The Zend Platform extension is not loaded correctly: '.$licenseInfo['failure_reason']);
+            Cache\Cache::throwException('The Zend Platform extension is not loaded correctly: '.$licenseInfo['failure_reason']);
         }
         $accConf = accelerator_get_configuration();
         if (@!$accConf['output_cache_licensed']) {
-            Zend_Cache::throwException('The Zend Platform extension does not have the proper license to use content caching features');
+            Cache\Cache::throwException('The Zend Platform extension does not have the proper license to use content caching features');
         }
         if (@!$accConf['output_cache_enabled']) {
-            Zend_Cache::throwException('The Zend Platform content caching feature must be enabled for using this backend, set the \'zend_accelerator.output_cache_enabled\' directive to On !');
+            Cache\Cache::throwException('The Zend Platform content caching feature must be enabled for using this backend, set the \'zend_accelerator.output_cache_enabled\' directive to On !');
         }
         if (!is_writable($accConf['output_cache_dir'])) {
-            Zend_Cache::throwException('The cache copies directory \''. ini_get('zend_accelerator.output_cache_dir') .'\' must be writable !');
+            Cache\Cache::throwException('The cache copies directory \''. ini_get('zend_accelerator.output_cache_dir') .'\' must be writable !');
         }
         parent:: __construct($options);
     }
@@ -171,14 +177,14 @@ class Zend_Cache_Backend_ZendPlatform extends Zend_Cache_Backend implements Zend
      *
      * @param  string $mode Clean mode
      * @param  array  $tags Array of tags
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      * @return boolean True if no problem
      */
-    public function clean($mode = Zend_Cache::CLEANING_MODE_ALL, $tags = array())
+    public function clean($mode = Cache\CacheCache\Cache::CLEANING_MODE_ALL, $tags = array())
     {
         switch ($mode) {
-            case Zend_Cache::CLEANING_MODE_ALL:
-            case Zend_Cache::CLEANING_MODE_OLD:
+            case Cache\Cache::CLEANING_MODE_ALL:
+            case Cache\Cache::CLEANING_MODE_OLD:
                 $cache_dir = ini_get('zend_accelerator.output_cache_dir');
                 if (!$cache_dir) {
                     return false;
@@ -186,7 +192,7 @@ class Zend_Cache_Backend_ZendPlatform extends Zend_Cache_Backend implements Zend
                 $cache_dir .= '/.php_cache_api/';
                 return $this->_clean($cache_dir, $mode);
                 break;
-            case Zend_Cache::CLEANING_MODE_MATCHING_TAG:
+            case Cache\Cache::CLEANING_MODE_MATCHING_TAG:
                 $idlist = null;
                 foreach ($tags as $tag) {
                     $next_idlist = output_cache_get(self::TAGS_PREFIX.$tag, $this->_directives['lifetime']);
@@ -208,11 +214,11 @@ class Zend_Cache_Backend_ZendPlatform extends Zend_Cache_Backend implements Zend
                 }
                 return true;
                 break;
-            case Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG:
+            case Cache\Cache::CLEANING_MODE_NOT_MATCHING_TAG:
                 $this->_log("Zend_Cache_Backend_ZendPlatform::clean() : CLEANING_MODE_NOT_MATCHING_TAG is not supported by the Zend Platform backend");
                 return false;
                 break;
-            case Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG:
+            case Cache\Cache::CLEANING_MODE_MATCHING_ANY_TAG:
                 $idlist = null;
                 foreach ($tags as $tag) {
                     $next_idlist = output_cache_get(self::TAGS_PREFIX.$tag, $this->_directives['lifetime']);
@@ -235,7 +241,7 @@ class Zend_Cache_Backend_ZendPlatform extends Zend_Cache_Backend implements Zend
                 return true;
                 break;
             default:
-                Zend_Cache::throwException('Invalid mode for clean() method');
+                Cache\Cache::throwException('Invalid mode for clean() method');
                 break;
         }
     }
@@ -246,7 +252,7 @@ class Zend_Cache_Backend_ZendPlatform extends Zend_Cache_Backend implements Zend
      * Remove all the cached files that need to be cleaned (according to mode and files mtime)
      *
      * @param  string $dir  Path of directory ot clean
-     * @param  string $mode The same parameter as in Zend_Cache_Backend_ZendPlatform::clean()
+     * @param  string $mode The same parameter as in \Zend\Cache\Backend\ZendPlatform::clean()
      * @return boolean True if ok
      */
     private function _clean($dir, $mode)
@@ -264,9 +270,9 @@ class Zend_Cache_Backend_ZendPlatform extends Zend_Cache_Backend implements Zend
             if (is_dir($file)) {
                 $result = ($this->_clean($file .'/', $mode)) && ($result);
             } else {
-                if ($mode == Zend_Cache::CLEANING_MODE_ALL) {
+                if ($mode == Cache\Cache::CLEANING_MODE_ALL) {
                     $result = ($this->_remove($file)) && ($result);
-                } else if ($mode == Zend_Cache::CLEANING_MODE_OLD) {
+                } else if ($mode == Cache\Cache::CLEANING_MODE_OLD) {
                     // Files older than lifetime get deleted from cache
                     if ($this->_directives['lifetime'] !== null) {
                         if ((time() - @filemtime($file)) > $this->_directives['lifetime']) {

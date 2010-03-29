@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Cache;
+use Zend\Cache;
+
 /**
  * @category   Zend
  * @package    Zend_Cache
@@ -28,14 +31,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_ApcBackendTest extends Zend_Cache_TestCommonExtendedBackend 
+class ApcBackendTest extends \ZendTest\Cache\TestCommonExtendedBackend 
 {
 
     protected $_instance;
 
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
-        parent::__construct('Zend_Cache_Backend_Apc', $data, $dataName);
+        parent::__construct('Zend\Cache\Backend\Apc', $data, $dataName);
     }
 
     public function setUp($notag = true)
@@ -43,7 +46,7 @@ class Zend_Cache_ApcBackendTest extends Zend_Cache_TestCommonExtendedBackend
         if (!constant('TESTS_ZEND_CACHE_APC_ENABLED')) {
             $this->markTestSkipped('Zend_Cache APC tests not enabled');
         }
-        $this->_instance = new Zend_Cache_Backend_Apc(array());
+        $this->_instance = new Cache\Backend\Apc(array());
         parent::setUp($notag);
     }
 
@@ -55,7 +58,7 @@ class Zend_Cache_ApcBackendTest extends Zend_Cache_TestCommonExtendedBackend
 
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Backend_Apc();
+        $test = new Cache\Backend\Apc();
     }
 
     public function testCleanModeOld() {

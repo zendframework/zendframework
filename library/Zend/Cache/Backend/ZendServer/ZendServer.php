@@ -21,15 +21,21 @@
  */
 
 /**
- * @uses       Zend_Cache
- * @uses       Zend_Cache_Backend
- * @uses       Zend_Cache_Backend_Interface
+ * @namespace
+ */
+namespace Zend\Cache\Backend\ZendServer;
+use Zend\Cache;
+
+/**
+ * @uses       \Zend\Cache\Cache
+ * @uses       \Zend\Cache\Backend\Backend
+ * @uses       \Zend\Cache\Backend\BackendInterface
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Cache_Backend_ZendServer extends Zend_Cache_Backend implements Zend_Cache_Backend_Interface
+abstract class ZendServer extends Cache\Backend\Backend implements Cache\Backend\BackendInterface
 {
     /**
      * Available options
@@ -49,7 +55,7 @@ abstract class Zend_Cache_Backend_ZendServer extends Zend_Cache_Backend implemen
      * @param mixed  $data        Object to store
      * @param string $id          Cache id
      * @param int    $timeToLive  Time to live in seconds
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      */
     abstract protected function _store($data, $id, $timeToLive);
 
@@ -57,7 +63,7 @@ abstract class Zend_Cache_Backend_ZendServer extends Zend_Cache_Backend implemen
      * Fetch data
      *
      * @param string $id          Cache id
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      */
     abstract protected function _fetch($id);
 
@@ -94,14 +100,14 @@ abstract class Zend_Cache_Backend_ZendServer extends Zend_Cache_Backend implemen
      *
      * @param  string $id cache id
      * @return mixed false (a cache is not available) or "last modified" timestamp (int) of the available cache record
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      */
     public function test($id)
     {
         $tmp = $this->_fetch('internal-metadatas---' . $id);
         if ($tmp !== false) {
             if (!is_array($tmp) || !isset($tmp['mtime'])) {
-                Zend_Cache::throwException('Cache metadata for \'' . $id . '\' id is corrupted' );
+                Cache\Cache::throwException('Cache metadata for \'' . $id . '\' id is corrupted' );
             }
             return $tmp['mtime'];
         }
@@ -175,27 +181,27 @@ abstract class Zend_Cache_Backend_ZendServer extends Zend_Cache_Backend implemen
      *
      * @param  string $mode clean mode
      * @param  array  $tags array of tags
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      * @return boolean true if no problem
      */
-    public function clean($mode = Zend_Cache::CLEANING_MODE_ALL, $tags = array())
+    public function clean($mode = Cache\CacheCache\Cache::CLEANING_MODE_ALL, $tags = array())
     {
         switch ($mode) {
-            case Zend_Cache::CLEANING_MODE_ALL:
+            case Cache\Cache::CLEANING_MODE_ALL:
                 $this->_clear();
                 return true;
                 break;
-            case Zend_Cache::CLEANING_MODE_OLD:
+            case Cache\Cache::CLEANING_MODE_OLD:
                 $this->_log("Zend_Cache_Backend_ZendServer::clean() : CLEANING_MODE_OLD is unsupported by the Zend Server backends.");
                 break;
-            case Zend_Cache::CLEANING_MODE_MATCHING_TAG:
-            case Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG:
-            case Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG:
+            case Cache\Cache::CLEANING_MODE_MATCHING_TAG:
+            case Cache\Cache::CLEANING_MODE_NOT_MATCHING_TAG:
+            case Cache\Cache::CLEANING_MODE_MATCHING_ANY_TAG:
                 $this->_clear();
                 $this->_log('Zend_Cache_Backend_ZendServer::clean() : tags are unsupported by the Zend Server backends.');
                 break;
             default:
-                Zend_Cache::throwException('Invalid mode for clean() method');
+                Cache\Cache::throwException('Invalid mode for clean() method');
                 break;
         }
     }

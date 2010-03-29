@@ -54,7 +54,8 @@
 
         <para>
             Używanie <classname>Zend_Db_Select</classname> nie jest obowiązkowe. Dla najprostszych
-            zapytań SELECT z reguły łatwiej jest zapisać całe polecenie <acronym>SQL</acronym> w 
+            zapytań <acronym>SELECT</acronym> z reguły łatwiej jest zapisać
+            całe polecenie <acronym>SQL</acronym> w 
             postaci łańcucha znaków i wywołać je za pomocą metod Adaptera takich jak 
             <methodname>query()</methodname> lub <methodname>fetchAll()</methodname>. Użycie
             <classname>Zend_Db_Select</classname> jest przydatne jeśli zajdzie potrzeba połączenia 
@@ -215,7 +216,8 @@ $select = $db->select()
             <para>
                 Niektóre silniki bazy danych (<acronym>RDBMS</acronym>) wspierają podawanie 
                 nazw schematu przed nazwą tabeli. W takim przypadku należy podać nazwę tabeli jako 
-                "<code>nazwaSchematu.nazwaTabeli</code>" a <classname>Zend_Db_Select</classname>
+                "<command>nazwaSchematu.nazwaTabeli</command>" a
+                <classname>Zend_Db_Select</classname>
                 umieści w cudzysłowach każdą z części takiej nazwy indywidualnie. Można też podać
                 nazwę schematu oddzielnie. Nazwa schematu podana przy nazwie tabeli ma pierwszeństwo
                 wobec nazwy schematu podanej osobno (jeśli obie występują). 
@@ -250,7 +252,7 @@ $select = $db->select()
             <para>
                 Drugi argument metody <methodname>from()</methodname> może zawierać kolumny, które
                 mają zostać pobrane z odpowiedniej tabeli. Jeśli nie poda się tego 
-                argumentu domyślną wartością jest "<code>*</code>" czyli znak 
+                argumentu domyślną wartością jest "<emphasis>*</emphasis>" czyli znak 
                 specjalny <acronym>SQL</acronym> odpowiadający wszystkim kolumnom.
             </para>
 
@@ -268,7 +270,7 @@ $select = $db->select()
             </para>
 
             <para>
-                Nazwę kolumny można podać w formie "<code>nazwaAliasu.nazwaKolumny</code>".
+                Nazwę kolumny można podać w formie "<command>nazwaAliasu.nazwaKolumny</command>".
                 <classname>Zend_Db_Select</classname> umieści każdą z części nazwy oddzielnie
                 w cudzysłowach, używając aliasu wcześniej ustalonego w metodzie 
                 <methodname>from()</methodname> (jeśli nie został podany bezpośrednio). 
@@ -430,13 +432,14 @@ $select = $db->select()
 
             <para>
                 Może powstać sytuacja w której niezbędne okazuje się dodanie kolumn do klauzuli
-                FROM lub JOIN, która została utworzona wcześniej (za pomocą odpowiedniej metody).
+                <acronym>FROM</acronym> lub <acronym>JOIN</acronym>,
+                która została utworzona wcześniej (za pomocą odpowiedniej metody).
                 Metoda <methodname>columns()</methodname> pozwala na dodanie kolumn w dowolnym
                 momencie przed wykonaniem zapytania. Kolumny można podać jako łańcuchy znaków,
                 obiekty <classname>Zend_Db_Expr</classname> lub jako tablice tych elementów. Drugi
                 argument tej metody może zostać pominięty co oznacza, że kolumny powinny zostać 
-                dodane do tabeli z klauzuli FROM. W przeciwnym razie należy podać alias lub nazwę
-                tabeli.
+                dodane do tabeli z klauzuli <acronym>FROM</acronym>.
+                W przeciwnym razie należy podać alias lub nazwę tabeli.
             </para>
 
             <example id="zend.db.select.building.columns-atomic.example">
@@ -519,7 +522,7 @@ $select = $db->select()
             <para>
                 Trzeci argument metody <methodname>join()</methodname> to tablica nazw kolumn (tak 
                 jak przy metodzie <methodname>from()</methodname>). Domyślną wartością jest 
-                "<code>*</code>". Można w nim podawać aliasy kolumn, wyrażenia lub obiekty
+                "<emphasis>*</emphasis>". Można w nim podawać aliasy kolumn, wyrażenia lub obiekty
                 <classname>Zend_Db_Expr</classname> w taki sam sposób jak w metodzie
                 <methodname>from()</methodname>.
             </para>
@@ -654,15 +657,17 @@ $select = $db->select()
                         Cross join to iloczyn kartezjański tabel. Każdy wiersz z pierwszej tabeli 
                         zostaje połączony z każdym wierszem z tabeli drugiej. Ilość wierszy
                         w zbiorze wynikowym jest równa iloczynowi ilości wierszy w obu tabelach. 
-                        Poprzez użycie warunku WHERE można ograniczyć wiersze wynikowe przez 
-                        co cross join może być podobny do składni polecenia join 
-                        ze standardu SQL-89.
+                        Poprzez użycie warunku <acronym>WHERE</acronym> można ograniczyć
+                        wiersze wynikowe przez co cross join może być podobny
+                        do składni polecenia join 
+                        ze standardu <acronym>SQL</acronym>-89.
                     </para>
 
                     <para>
                         Metoda <methodname>joinCross()</methodname> nie ma parametru odnoszącego się
                         do warunku połączenia. Niektóre systemy zarządzania bazą danych 
-                        (<acronym>RDBMS</acronym>) nie wspierają tego typu polecenia JOIN.
+                        (<acronym>RDBMS</acronym>) nie wspierają tego typu
+                        polecenia <acronym>JOIN</acronym>.
                     </para>
                 </listitem>
 
@@ -794,7 +799,7 @@ $select = $db->select()
                 Drugi argument metody <methodname>where()</methodname> jest opcjonalny. Stanowi on
                 wartość umieszczaną w warunku. <classname>Zend_Db_Select</classname> ogranicza tą 
                 wartość cudzysłowami i za jej pomocą podmienia symbol znaku zapytania 
-                ("<code>?</code>") w warunku.
+                ("<emphasis>?</emphasis>") w warunku.
             </para>
 
             <example id="zend.db.select.building.where.example-param">
@@ -1012,7 +1017,7 @@ $select = $db->select()
                 drugi argument to wartość używana do zamienienia pozycyjnych parametrów w 
                 wyrażeniu <acronym>SQL</acronym>. Wyrażenia umieszczone w wielu wywołaniach 
                 metody <methodname>having()</methodname> są łączone za pomocą operatora
-                <constant>AND</constant> lub <code>OR</code> - jeśli zostanie użyta metoda
+                <acronym>AND</acronym> lub <acronym>OR</acronym> - jeśli zostanie użyta metoda
                 <methodname>orHaving()</methodname>.
             </para>
 
@@ -1059,7 +1064,8 @@ $select = $db->select()
             <title>Dodanie klauzuli ORDER BY</title>
 
             <para>
-                W <acronym>SQL</acronym>, klauzula <code>ORDER BY</code> określa jedną bądź więcej
+                W <acronym>SQL</acronym>, klauzula <acronym>ORDER BY</acronym>
+                określa jedną bądź więcej
                 kolumn lub wyrażeń według których zbiór wynikowy jest posortowany. Jeśli poda się
                 wiele kolumn to sortowanie odbywa się w pierwszej kolejności na podstawie wcześniej
                 podanej kolumny. Jeśli istnieją wiersze o takiej samej wartości w danej kolumnie 
@@ -1232,7 +1238,7 @@ $select = $db->select()
 
             <para>
                 Metoda <methodname>forUpdate()</methodname> pozwala na dodanie słowa 
-                kluczowego <code>FOR UPDATE</code> do zapytania <acronym>SQL</acronym>.
+                kluczowego <acronym>FOR UPDATE</acronym> do zapytania <acronym>SQL</acronym>.
             </para>
 
             <example id="zend.db.select.building.for-update.example">
@@ -1259,7 +1265,8 @@ $select = $db->select()
             <para>
                 Z <classname>Zend_Db_Select</classname> można łączyć zapytania poprzez
                 przekazanie tablicy obiektów <classname>Zend_Db_Select</classname>
-                lub łańcuchów zapytań do metody <methodname>union()</methodname>.
+                lub łańcuchów zapytań <acronym>SQL</acronym>
+                do metody <methodname>union()</methodname>.
                 Jako drugi parametr można podać stałe 
                 <constant>Zend_Db_Select::SQL_UNION</constant>
                 lub <constant>Zend_Db_Select::SQL_UNION_ALL</constant>
@@ -1416,7 +1423,8 @@ echo "$sql\n";
 
             <para>
                 Jedynym argumentem metody <methodname>getPart()</methodname> jest łańcuch znaków
-                identyfikujący żądaną część zapytania. String <code>'from'</code> odpowiada części
+                identyfikujący żądaną część zapytania. String <command>'from'</command>
+                odpowiada części
                 obiektu <classname>Zend_Db_Select</classname>, która przechowuje informacje
                 o tabelach (włączając w to tabele połączone) w klauzuli <constant>FROM</constant>.
             </para>
@@ -1442,52 +1450,52 @@ echo "$sql\n";
                     <tbody>
                         <row>
                             <entry><constant>Zend_Db_Select::DISTINCT</constant></entry>
-                            <entry><code>'distinct'</code></entry>
+                            <entry><command>'distinct'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::FOR_UPDATE</constant></entry>
-                            <entry><code>'forupdate'</code></entry>
+                            <entry><command>'forupdate'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::COLUMNS</constant></entry>
-                            <entry><code>'columns'</code></entry>
+                            <entry><command>'columns'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::FROM</constant></entry>
-                            <entry><code>'from'</code></entry>
+                            <entry><command>'from'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::WHERE</constant></entry>
-                            <entry><code>'where'</code></entry>
+                            <entry><command>'where'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::GROUP</constant></entry>
-                            <entry><code>'group'</code></entry>
+                            <entry><command>'group'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::HAVING</constant></entry>
-                            <entry><code>'having'</code></entry>
+                            <entry><command>'having'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::ORDER</constant></entry>
-                            <entry><code>'order'</code></entry>
+                            <entry><command>'order'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::LIMIT_COUNT</constant></entry>
-                            <entry><code>'limitcount'</code></entry>
+                            <entry><command>'limitcount'</command></entry>
                         </row>
 
                         <row>
                             <entry><constant>Zend_Db_Select::LIMIT_OFFSET</constant></entry>
-                            <entry><code>'limitoffset'</code></entry>
+                            <entry><command>'limitoffset'</command></entry>
                         </row>
                     </tbody>
                 </tgroup>

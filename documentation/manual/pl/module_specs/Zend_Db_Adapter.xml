@@ -1806,7 +1806,7 @@ $db->closeConnection();
         </example>
 
         <note>
-            <title>Czy Zend_Db wspiera stałe połączenia (Persistent Connections)?</title>
+            <title>Czy Zend_Db wspiera połączenia trwałe (Persistent Connections)?</title>
             <para>
                 Tak, trwałe połączenia są wspierane poprzez flagę <property>persistent</property>
                 ustawioną na wartość <constant>TRUE</constant> w konfiguracji

@@ -20,18 +20,9 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
+namespace ZendTest\Filter;
 
-/**
- * @see Zend_Filter_Input
- */
-
-/**
- * @see Zend_Loader
- */
-
+use \Zend\Filter;
 
 /**
  * @category   Zend
@@ -41,8 +32,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
+class InputTest extends \PHPUnit_Framework_TestCase
 {
+
+    public function setUp()
+    {
+        $this->markTestIncomplete('Zend\\Filter\\Input has not been migrated to namespaces');
+    }
 
     public function testFilterDeclareSingle()
     {
@@ -1946,14 +1942,16 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class MyZend_Filter_Date implements Zend_Filter_Interface
+class MyZend_Filter_Date implements Filter\Filter
 {
-    public function filter($value)
+    public function __invoke($value)
     {
         return "2000-01-01";
     }
 }
 
+/*
+ * Uncomment once Zend\Filter\Input is implemented and ready to test
 class MyZend_Validate_Date implements Zend_Validate_Interface
 {
     public function isValid($value)
@@ -1971,3 +1969,4 @@ class MyZend_Validate_Date implements Zend_Validate_Interface
         return array();
     }
 }
+ */

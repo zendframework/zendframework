@@ -20,13 +20,9 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
+namespace ZendTest\Filter;
 
-/**
- * @see Zend_Filter_HtmlEntities
- */
+use Zend\Filter\HtmlEntities as HtmlEntitiesFilter;
 
 /**
  * @category   Zend
@@ -36,7 +32,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_HtmlEntitiesTest extends PHPUnit_Framework_TestCase
+class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Zend_Filter_HtmlEntities object
@@ -52,7 +48,7 @@ class Zend_Filter_HtmlEntitiesTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_filter = new Zend_Filter_HtmlEntities();
+        $this->_filter = new HtmlEntitiesFilter();
     }
 
     /**
@@ -70,8 +66,9 @@ class Zend_Filter_HtmlEntitiesTest extends PHPUnit_Framework_TestCase
             '"'      => '&quot;',
             '&'      => '&amp;'
             );
+        $filter = $this->_filter;
         foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals($output, $this->_filter->filter($input));
+            $this->assertEquals($output, $filter($input));
         }
     }
 
@@ -147,7 +144,7 @@ class Zend_Filter_HtmlEntitiesTest extends PHPUnit_Framework_TestCase
     public function testFluentInterface()
     {
         $instance = $this->_filter->setCharSet('UTF-8')->setQuoteStyle(ENT_QUOTES)->setDoubleQuote(false);
-        $this->assertTrue($instance instanceof Zend_Filter_HtmlEntities);
+        $this->assertTrue($instance instanceof HtmlEntitiesFilter);
     }
 
     /**
@@ -156,9 +153,9 @@ class Zend_Filter_HtmlEntitiesTest extends PHPUnit_Framework_TestCase
     public function testConfigObject()
     {
         $options = array('quotestyle' => 5, 'encoding' => 'ISO-8859-1');
-        $config  = new Zend_Config($options);
+        $config  = new \Zend\Config\Config($options);
 
-        $filter = new Zend_Filter_HtmlEntities(
+        $filter = new HtmlEntitiesFilter(
             $config
         );
 

@@ -20,15 +20,9 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Filter;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Filter_Int
- */
-
+use Zend\Filter\Int as IntFilter;
 
 /**
  * @category   Zend
@@ -38,25 +32,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_IntTest extends PHPUnit_Framework_TestCase
+class IntTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Zend_Filter_Int object
-     *
-     * @var Zend_Filter_Int
-     */
-    protected $_filter;
-
-    /**
-     * Creates a new Zend_Filter_Int object for each test method
-     *
-     * @return void
-     */
-    public function setUp()
-    {
-        $this->_filter = new Zend_Filter_Int();
-    }
-
     /**
      * Ensures that the filter follows expected behavior
      *
@@ -64,6 +41,7 @@ class Zend_Filter_IntTest extends PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
+        $filter = new IntFilter();
         $valuesExpected = array(
             'string' => 0,
             '1'      => 1,
@@ -74,7 +52,7 @@ class Zend_Filter_IntTest extends PHPUnit_Framework_TestCase
             '-0.9'   => 0
             );
         foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals($output, $this->_filter->filter($input));
+            $this->assertEquals($output, $filter($input));
         }
     }
 }

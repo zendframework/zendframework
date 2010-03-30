@@ -20,19 +20,29 @@
  */
 
 /**
- * @uses       Zend_Filter_Word_Separator_Abstract
+ * @namespace
+ */
+namespace Zend\Filter\Word;
+
+/**
+ * @uses       \Zend\Filter\Word\Separator\AbstractSeparator
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_Word_DashToSeparator extends Zend_Filter_Word_Separator_Abstract
+class DashToSeparator extends AbstractSeparator
 {
-
-    public function filter($value)
+    /**
+     * Defined by Zend\Filter\Filter
+     * 
+     * @param  string $value 
+     * @return string
+     */
+    public function __invoke($value)
     {
         $this->setMatchPattern('#-#');
         $this->setReplacement($this->_separator);
-        return parent::filter($value);
+        return parent::__invoke($value);
     }
 }

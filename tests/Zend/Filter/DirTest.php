@@ -20,15 +20,9 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Filter;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Filter_Dir
- */
-
+use Zend\Filter\Dir as DirFilter;
 
 /**
  * @category   Zend
@@ -38,25 +32,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_DirTest extends PHPUnit_Framework_TestCase
+class DirTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Zend_Filter_Dir object
-     *
-     * @var Zend_Filter_Dir
-     */
-    protected $_filter;
-
-    /**
-     * Creates a new Zend_Filter_Dir object for each test method
-     *
-     * @return void
-     */
-    public function setUp()
-    {
-        $this->_filter = new Zend_Filter_Dir();
-    }
-
     /**
      * Ensures that the filter follows expected behavior
      *
@@ -64,13 +41,14 @@ class Zend_Filter_DirTest extends PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
+        $filter = new DirFilter();
         $valuesExpected = array(
             'filename'              => '.',
             '/path/to/filename'     => '/path/to',
             '/path/to/filename.ext' => '/path/to'
             );
         foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals($output, $this->_filter->filter($input));
+            $this->assertEquals($output, $filter($input));
         }
     }
 }

@@ -20,17 +20,9 @@
  * @version    $Id: $
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Filter_CompressTest::main');
-}
+namespace ZendTest\Filter;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Filter_Compress
- */
+use Zend\Filter\Compress as CompressFilter;
 
 /**
  * @category   Zend
@@ -40,19 +32,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_CompressTest extends PHPUnit_Framework_TestCase
+class CompressTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs this test suite
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Filter_CompressTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         if (!extension_loaded('bz2')) {
@@ -62,8 +43,8 @@ class Zend_Filter_CompressTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        if (file_exists(dirname(__FILE__) . '/../_files/compressed.bz2')) {
-            unlink(dirname(__FILE__) . '/../_files/compressed.bz2');
+        if (file_exists(__DIR__ . '/../_files/compressed.bz2')) {
+            unlink(__DIR__ . '/../_files/compressed.bz2');
         }
     }
 
@@ -74,10 +55,10 @@ class Zend_Filter_CompressTest extends PHPUnit_Framework_TestCase
      */
     public function testBasicUsage()
     {
-        $filter  = new Zend_Filter_Compress('bz2');
+        $filter  = new CompressFilter('bz2');
 
         $text     = 'compress me';
-        $compressed = $filter->filter($text);
+        $compressed = $filter($text);
         $this->assertNotEquals($text, $compressed);
 
         $decompressed = $filter->decompress($compressed);
@@ -91,7 +72,7 @@ class Zend_Filter_CompressTest extends PHPUnit_Framework_TestCase
      */
     public function testGetSetAdapterOptionsInConstructor()
     {
-        $filter = new Zend_Filter_Compress(array(
+        $filter = new CompressFilter(array(
             'adapter' => 'bz2',
             'options' => array(
                 'blocksize' => 6,
@@ -116,7 +97,7 @@ class Zend_Filter_CompressTest extends PHPUnit_Framework_TestCase
      */
     public function testGetSetAdapterOptions()
     {
-        $filter = new Zend_Filter_Compress('bz2');
+        $filter = new CompressFilter('bz2');
         $filter->setAdapterOptions(array(
             'blocksize' => 6,
             'archive'   => 'test.txt',
@@ -137,7 +118,7 @@ class Zend_Filter_CompressTest extends PHPUnit_Framework_TestCase
      */
     public function testGetSetBlocksize()
     {
-        $filter = new Zend_Filter_Compress('bz2');
+        $filter = new CompressFilter('bz2');
         $this->assertEquals(4, $filter->getBlocksize());
         $filter->setBlocksize(6);
         $this->assertEquals(6, $filter->getOptions('blocksize'));
@@ -145,7 +126,7 @@ class Zend_Filter_CompressTest extends PHPUnit_Framework_TestCase
         try {
             $filter->setBlocksize(15);
             $this->fail('Exception expected');
-        } catch(Zend_Filter_Exception $e) {
+        } catch(\Zend\Filter\Exception $e) {
             $this->assertContains('must be between', $e->getMessage());
         }
     }
@@ -157,7 +138,7 @@ class Zend_Filter_CompressTest extends PHPUnit_Framework_TestCase
      */
     public function testGetSetArchive()
     {
-        $filter = new Zend_Filter_Compress('bz2');
+        $filter = new CompressFilter('bz2');
         $this->assertEquals(null, $filter->getArchive());
         $filter->setArchive('Testfile.txt');
         $this->assertEquals('Testfile.txt', $filter->getArchive());
@@ -171,18 +152,18 @@ class Zend_Filter_CompressTest extends PHPUnit_Framework_TestCase
      */
     public function testCompressToFile()
     {
-        $filter   = new Zend_Filter_Compress('bz2');
+        $filter   = new CompressFilter('bz2');
         $archive = dirname(__FILE__) . '/../_files/compressed.bz2';
         $filter->setArchive($archive);
 
-        $content = $filter->filter('compress me');
+        $content = $filter('compress me');
         $this->assertTrue($content);
 
-        $filter2  = new Zend_Filter_Compress('bz2');
+        $filter2  = new CompressFilter('bz2');
         $content2 = $filter2->decompress($archive);
         $this->assertEquals('compress me', $content2);
 
-        $filter3 = new Zend_Filter_Compress('bz2');
+        $filter3 = new CompressFilter('bz2');
         $filter3->setArchive($archive);
         $content3 = $filter3->decompress(null);
         $this->assertEquals('compress me', $content3);
@@ -195,7 +176,7 @@ class Zend_Filter_CompressTest extends PHPUnit_Framework_TestCase
      */
     public function testToString()
     {
-        $filter = new Zend_Filter_Compress('bz2');
+        $filter = new CompressFilter('bz2');
         $this->assertEquals('Bz2', $filter->toString());
     }
 
@@ -206,9 +187,9 @@ class Zend_Filter_CompressTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdapter()
     {
-        $filter = new Zend_Filter_Compress('bz2');
+        $filter = new CompressFilter('bz2');
         $adapter = $filter->getAdapter();
-        $this->assertTrue($adapter instanceof Zend_Filter_Compress_CompressInterface);
+        $this->assertTrue($adapter instanceof \Zend\Filter\Compress\CompressionAlgorithm);
         $this->assertEquals('Bz2', $filter->getAdapterName());
     }
 
@@ -223,14 +204,14 @@ class Zend_Filter_CompressTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('This filter is tested with the zlib extension');
         }
 
-        $filter = new Zend_Filter_Compress();
+        $filter = new CompressFilter();
         $this->assertEquals('Gz', $filter->getAdapterName());
 
         try {
-            $filter->setAdapter('Zend_Filter');
+            $filter->setAdapter('\\Zend\\Filter\\Alnum');
             $adapter = $filter->getAdapter();
             $this->fail('Invalid adapter should fail when retrieved');
-        } catch (Zend_Filter_Exception $e) {
+        } catch (\Zend\Filter\Exception $e) {
             $this->assertContains('does not implement', $e->getMessage());
         }
     }
@@ -242,14 +223,14 @@ class Zend_Filter_CompressTest extends PHPUnit_Framework_TestCase
      */
     public function testDecompressArchive()
     {
-        $filter   = new Zend_Filter_Compress('bz2');
+        $filter   = new CompressFilter('bz2');
         $archive = dirname(__FILE__) . '/../_files/compressed.bz2';
         $filter->setArchive($archive);
 
-        $content = $filter->filter('compress me');
+        $content = $filter('compress me');
         $this->assertTrue($content);
 
-        $filter2  = new Zend_Filter_Compress('bz2');
+        $filter2  = new CompressFilter('bz2');
         $content2 = $filter2->decompress($archive);
         $this->assertEquals('compress me', $content2);
     }
@@ -261,16 +242,12 @@ class Zend_Filter_CompressTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidMethod()
     {
-        $filter = new Zend_Filter_Compress();
+        $filter = new CompressFilter();
         try {
             $filter->invalidMethod();
             $this->fail('Exception expected');
-        } catch (Zend_Exception $e) {
+        } catch (\Zend\Filter\Exception $e) {
             $this->assertContains('Unknown method', $e->getMessage());
         }
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Filter_CompressTest::main') {
-    Zend_Filter_CompressTest::main();
 }

@@ -20,19 +20,9 @@
  * @version    $Id$
  */
 
-// Call Zend_Filter_StripTagsTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Filter_StripTagsTest::main');
-}
+namespace ZendTest\Filter;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Filter_StripTags
- */
-
+use Zend\Filter\StripTags as StripTagsFilter;
 
 /**
  * @category   Zend
@@ -42,7 +32,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
+class StripTagsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Zend_Filter_StripTags object
@@ -52,25 +42,13 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
     protected $_filter;
 
     /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
      * Creates a new Zend_Filter_StripTags object for each test method
      *
      * @return void
      */
     public function setUp()
     {
-        $this->_filter = new Zend_Filter_StripTags();
+        $this->_filter = new StripTagsFilter();
     }
 
     /**
@@ -165,9 +143,10 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterTagUnclosed1()
     {
+        $filter   = $this->_filter;
         $input    = '<a href="http://example.com" Some Text';
         $expected = '';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -177,9 +156,10 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterTag1()
     {
+        $filter   = $this->_filter;
         $input    = '<a href="example.com">foo</a>';
         $expected = 'foo';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -189,9 +169,10 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterTagNest1()
     {
+        $filter   = $this->_filter;
         $input    = '<a href="example.com"><b>foo</b></a>';
         $expected = 'foo';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -201,9 +182,10 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterTag2()
     {
+        $filter   = $this->_filter;
         $input    = '<a href="example.com">foo</a><b>bar</b>';
         $expected = 'foobar';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -213,10 +195,11 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterTagAllowedBackwardCompatible()
     {
+        $filter   = $this->_filter;
         $input    = '<BR><Br><bR><br/><br  /><br / ></br></bR>';
         $expected = '<br><br><br><br /><br /><br></br></br>';
         $this->_filter->setTagsAllowed('br');
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -226,9 +209,10 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterTagPrefixGt()
     {
+        $filter   = $this->_filter;
         $input    = '2 > 1 === true<br/>';
         $expected = '2  1 === true';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -238,9 +222,10 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterGt()
     {
+        $filter   = $this->_filter;
         $input    = '2 > 1 === true ==> $object->property';
         $expected = '2  1 === true == $object-property';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -250,9 +235,10 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterTagWrappedGt()
     {
+        $filter   = $this->_filter;
         $input    = '2 > 1 === true <==> $object->property';
         $expected = '2  1 === true  $object-property';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -262,11 +248,12 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterTagAllowedAttribute()
     {
+        $filter = $this->_filter;
         $tagsAllowed = 'img';
         $this->_filter->setTagsAllowed($tagsAllowed);
         $input    = '<IMG alt="foo" />';
         $expected = '<img />';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -276,13 +263,14 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterTagAllowedAttributeAllowed()
     {
+        $filter = $this->_filter;
         $tagsAllowed = array(
             'img' => 'alt'
             );
         $this->_filter->setTagsAllowed($tagsAllowed);
         $input    = '<IMG ALT="FOO" />';
         $expected = '<img alt="FOO" />';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -294,13 +282,14 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterTagAllowedAttributeAllowedGt()
     {
+        $filter = $this->_filter;
         $tagsAllowed = array(
             'img' => 'alt'
             );
         $this->_filter->setTagsAllowed($tagsAllowed);
         $input    = '<img alt="$object->property" />';
         $expected = '<img>property" /';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -310,13 +299,14 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterTagAllowedAttributeAllowedGtEscaped()
     {
+        $filter = $this->_filter;
         $tagsAllowed = array(
             'img' => 'alt'
             );
         $this->_filter->setTagsAllowed($tagsAllowed);
         $input    = '<img alt="$object-&gt;property" />';
         $expected = '<img alt="$object-&gt;property" />';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -327,13 +317,14 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterTagAllowedAttributeAllowedValueUnclosed()
     {
+        $filter = $this->_filter;
         $tagsAllowed = array(
             'img' => array('alt', 'height', 'src', 'width')
             );
         $this->_filter->setTagsAllowed($tagsAllowed);
         $input    = '<img src="image.png" alt="square height="100" width="100" />';
         $expected = '<img src="image.png" alt="square height=" width="100" />';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -343,13 +334,14 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterTagAllowedAttributeAllowedValueMissing()
     {
+        $filter = $this->_filter;
         $tagsAllowed = array(
             'input' => array('checked', 'name', 'type')
             );
         $this->_filter->setTagsAllowed($tagsAllowed);
         $input    = '<input name="foo" type="checkbox" checked />';
         $expected = '<input name="foo" type="checkbox" />';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -360,6 +352,7 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilter20070526()
     {
+        $filter = $this->_filter;
         $tagsAllowed = array(
             'object' => array('width', 'height'),
             'param'  => array('name', 'value'),
@@ -374,7 +367,7 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
                . '</param><param name="wmode" value="transparent"></param><embed '
                . 'src="http://www.example.com/path/to/movie" type="application/x-shockwave-flash" '
                . 'wmode="transparent" width="425" height="350"></embed></object>';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -384,9 +377,10 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterComment()
     {
+        $filter = $this->_filter;
         $input    = '<!-- a comment -->';
         $expected = '';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -396,9 +390,10 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterCommentWrapped()
     {
+        $filter = $this->_filter;
         $input    = 'foo<!-- a comment -->bar';
         $expected = 'foobar';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -409,10 +404,11 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testSpecifyingCommentsAllowedStillStripsComments()
     {
+        $filter = $this->_filter;
         $input    = '<!-- a comment -->';
         $expected = '';
         $this->_filter->setCommentsAllowed(true);
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -423,10 +419,11 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testSpecifyingCommentsAllowedStripsCommentsContainingTags()
     {
+        $filter = $this->_filter;
         $input    = '<!-- a comment <br /> <h1>SuperLarge</h1> -->';
         $expected = '';
-        $this->_filter->setCommentsAllowed(true);
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $filter->setCommentsAllowed(true);
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -439,10 +436,11 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testSpecifyingCommentsAllowedFiltersCommentsContainingTagsAndLinebreaks()
     {
+        $filter = $this->_filter;
         $input    = "<br> test <p> text </p> with <!-- comments --> and <!-- hidd\n\nen <br> -->";
         $expected = " test  text  with  and ";
-        $this->_filter->setCommentsAllowed(true);
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $filter->setCommentsAllowed(true);
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -453,10 +451,11 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testSpecifyingCommentsAllowedShouldStillStripNestedComments()
     {
+        $filter = $this->_filter;
         $input    = '<a> <!-- <b> <!-- <c> --> <d> --> <e>';
         $expected = '  ';
-        $this->_filter->setCommentsAllowed(true);
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $filter->setCommentsAllowed(true);
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -468,10 +467,11 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterCommentsAllowedDelimiterEndingWhiteSpace()
     {
+        $filter = $this->_filter;
         $input    = '<a> <!-- <b> --  > <c>';
         $expected = '  ';
-        $this->_filter->setCommentsAllowed(true);
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $filter->setCommentsAllowed(true);
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -482,13 +482,14 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testClosingAngleBracketInAllowedAttributeValue()
     {
+        $filter = $this->_filter;
         $tagsAllowed = array(
             'a' => 'href'
             );
-        $this->_filter->setTagsAllowed($tagsAllowed);
+        $filter->setTagsAllowed($tagsAllowed);
         $input    = '<a href="Some &gt; Text">';
         $expected = '<a href="Some &gt; Text">';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -499,12 +500,13 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testAllowedAttributeValueMayEndWithEquals()
     {
+        $filter = $this->_filter;
         $tagsAllowed = array(
             'element' => 'attribute'
         );
-        $this->_filter->setTagsAllowed($tagsAllowed);
+        $filter->setTagsAllowed($tagsAllowed);
         $input = '<element attribute="a=">contents</element>';
-        $this->assertEquals($input, $this->_filter->filter($input));
+        $this->assertEquals($input, $filter($input));
     }
 
     /**
@@ -512,12 +514,13 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testDisallowedAttributesSplitOverMultipleLinesShouldBeStripped()
     {
+        $filter = $this->_filter;
         $tagsAllowed = array('a' => 'href');
-        $this->_filter->setTagsAllowed($tagsAllowed);
+        $filter->setTagsAllowed($tagsAllowed);
         $input = '<a href="http://framework.zend.com/issues" onclick
 =
     "alert(&quot;Gotcha&quot;); return false;">http://framework.zend.com/issues</a>';
-        $filtered = $this->_filter->filter($input);
+        $filtered = $filter($input);
         $this->assertNotContains('onclick', $filtered);
     }
 
@@ -526,13 +529,14 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterIsoChars()
     {
+        $filter = $this->_filter;
         $input    = 'äöü<!-- a comment -->äöü';
         $expected = 'äöüäöü';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
 
         $input    = 'äöü<!-- a comment -->äöü';
         $input    = iconv("UTF-8", "ISO-8859-1", $input);
-        $output   = $this->_filter->filter($input);
+        $output   = $filter($input);
         $this->assertFalse(empty($output));
     }
 
@@ -541,13 +545,14 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterIsoCharsInComment()
     {
+        $filter = $this->_filter;
         $input    = 'äöü<!--üßüßüß-->äöü';
         $expected = 'äöüäöü';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
 
         $input    = 'äöü<!-- a comment -->äöü';
         $input    = iconv("UTF-8", "ISO-8859-1", $input);
-        $output   = $this->_filter->filter($input);
+        $output   = $filter($input);
         $this->assertFalse(empty($output));
     }
 
@@ -556,9 +561,10 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterSplitCommentTags()
     {
+        $filter = $this->_filter;
         $input    = 'äöü<!-->üßüßüß<-->äöü';
         $expected = 'äöüäöü';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
     /**
@@ -566,14 +572,10 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public function testCommentWithTagInSameLine()
     {
+        $filter = $this->_filter;
         $input    = 'test <!-- testcomment --> test <div>div-content</div>';
         $expected = 'test  test div-content';
-        $this->assertEquals($expected, $this->_filter->filter($input));
+        $this->assertEquals($expected, $filter($input));
     }
 
-}
-
-// Call Zend_Filter_StripTagsTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD === 'Zend_Filter_StripTagsTest::main') {
-    Zend_Filter_StripTagsTest::main();
 }

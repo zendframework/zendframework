@@ -20,13 +20,9 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
+namespace ZendTest\Filter\Encrypt;
 
-/**
- * @see Zend_Filter_Encrypt_Mcrypt
- */
+use Zend\Filter\Encrypt\Mcrypt as McryptEncryption;
 
 /**
  * @category   Zend
@@ -36,7 +32,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
+class McryptTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -52,7 +48,7 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
      */
     public function testBasicMcrypt()
     {
-        $filter = new Zend_Filter_Encrypt_Mcrypt(array('key' => 'testkey'));
+        $filter = new McryptEncryption(array('key' => 'testkey'));
         $valuesExpected = array(
             'STRING' => 'STRING',
             'ABC1@3' => 'ABC1@3',
@@ -74,14 +70,14 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
      */
     public function testGetSetVector()
     {
-        $filter = new Zend_Filter_Encrypt_Mcrypt(array('key' => 'testkey'));
+        $filter = new McryptEncryption(array('key' => 'testkey'));
         $filter->setVector('testvect');
         $this->assertEquals('testvect', $filter->getVector());
 
         try {
             $filter->setVector('1');
             $this->fail();
-        } catch (Zend_Filter_Exception $e) {
+        } catch (\Zend\Filter\Exception $e) {
             $this->assertContains('wrong size', $e->getMessage());
         }
     }
@@ -93,7 +89,7 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
      */
     public function testDefaultEncryption()
     {
-        $filter = new Zend_Filter_Encrypt_Mcrypt(array('key' => 'testkey'));
+        $filter = new McryptEncryption(array('key' => 'testkey'));
         $filter->setVector('testvect');
         $this->assertEquals(
             array('key' => 'testkey',
@@ -114,7 +110,7 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
      */
     public function testGetSetEncryption()
     {
-        $filter = new Zend_Filter_Encrypt_Mcrypt(array('key' => 'testkey'));
+        $filter = new McryptEncryption(array('key' => 'testkey'));
         $filter->setVector('testvect');
         $filter->setEncryption(
             array('mode' => MCRYPT_MODE_ECB,
@@ -138,7 +134,7 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
      */
     public function testEncryptionWithDecryptionMcrypt()
     {
-        $filter = new Zend_Filter_Encrypt_Mcrypt(array('key' => 'testkey'));
+        $filter = new McryptEncryption(array('key' => 'testkey'));
         $filter->setVector('testvect');
         $output = $filter->encrypt('teststring');
 
@@ -153,7 +149,7 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructionWithStringKey()
     {
-        $filter = new Zend_Filter_Encrypt_Mcrypt('testkey');
+        $filter = new McryptEncryption('testkey');
         $data = $filter->getEncryption();
         $this->assertEquals('testkey', $data['key']);
     }
@@ -164,9 +160,9 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
     public function testConstructionWithInteger()
     {
         try {
-            $filter = new Zend_Filter_Encrypt_Mcrypt(1234);
+            $filter = new McryptEncryption(1234);
             $this->fail();
-        } catch (Zend_Filter_Exception $e) {
+        } catch (\Zend\Filter\Exception $e) {
             $this->assertContains('Invalid options argument', $e->getMessage());
         }
     }
@@ -176,7 +172,7 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
      */
     public function testToString()
     {
-        $filter = new Zend_Filter_Encrypt_Mcrypt('testkey');
+        $filter = new McryptEncryption('testkey');
         $this->assertEquals('Mcrypt', $filter->toString());
     }
 
@@ -185,7 +181,7 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
      */
     public function testSettingEncryptionOptions()
     {
-        $filter = new Zend_Filter_Encrypt_Mcrypt('testkey');
+        $filter = new McryptEncryption('testkey');
         $filter->setEncryption('newkey');
         $test = $filter->getEncryption();
         $this->assertEquals('newkey', $test['key']);
@@ -193,21 +189,21 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
         try {
             $filter->setEncryption(1234);
             $filter->fail();
-        } catch (Zend_Filter_Exception $e) {
+        } catch (\Zend\Filter\Exception $e) {
             $this->assertContains('Invalid options argument', $e->getMessage());
         }
 
         try {
             $filter->setEncryption(array('algorithm' => 'unknown'));
             $filter->fail();
-        } catch (Zend_Filter_Exception $e) {
+        } catch (\Zend\Filter\Exception $e) {
             $this->assertContains('The algorithm', $e->getMessage());
         }
 
         try {
             $filter->setEncryption(array('mode' => 'unknown'));
             $filter->fail();
-        } catch (Zend_Filter_Exception $e) {
+        } catch (\Zend\Filter\Exception $e) {
             $this->assertContains('The mode', $e->getMessage());
         }
     }
@@ -217,7 +213,7 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
      */
     public function testSettingEmptyVector()
     {
-        $filter = new Zend_Filter_Encrypt_Mcrypt('newkey');
+        $filter = new McryptEncryption('newkey');
         $filter->setVector();
     }
 
@@ -232,7 +228,7 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('This adapter needs the bz2 extension');
         }
 
-        $filter = new Zend_Filter_Encrypt_Mcrypt(array('key' => 'testkey'));
+        $filter = new McryptEncryption(array('key' => 'testkey'));
         $filter->setVector('testvect');
         $filter->setCompression('bz2');
         $output = $filter->encrypt('teststring');

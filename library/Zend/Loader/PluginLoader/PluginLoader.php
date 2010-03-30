@@ -135,7 +135,7 @@ class PluginLoader implements PluginLoaderInterface
             return $prefix;
         }
 
-        return rtrim($prefix, '_') . '_';
+        return rtrim($prefix, '\\') . '\\';
     }
 
     /**
@@ -372,7 +372,7 @@ class PluginLoader implements PluginLoaderInterface
 
         $registry  = array_reverse($registry, true);
         $found     = false;
-        $classFile = str_replace('_', DIRECTORY_SEPARATOR, $name) . '.php';
+        $classFile = str_replace('\\', DIRECTORY_SEPARATOR, $name) . '.php';
         $incFile   = self::getIncludeFileCache();
         foreach ($registry as $prefix => $paths) {
             $className = $prefix . $name;

@@ -20,14 +20,19 @@
  */
 
 /**
- * @uses       Zend_Filter_Exception
- * @uses       Zend_Filter_Interface
+ * @namespace
+ */
+namespace Zend\Filter;
+
+/**
+ * @uses       \Zend\Filter\Exception
+ * @uses       \Zend\Filter\Filter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_Callback implements Zend_Filter_Interface
+class Callback implements Filter
 {
     /**
      * Callback in a call_user_func format
@@ -51,7 +56,7 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
      */
     public function __construct($options)
     {
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         } else if (!is_array($options) || !array_key_exists('callback', $options)) {
             $options          = func_get_args();
@@ -64,7 +69,7 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
         }
 
         if (!array_key_exists('callback', $options)) {
-            throw new Zend_Filter_Exception('Missing callback to use');
+            throw new Exception('Missing callback to use');
         }
 
         $this->setCallback($options['callback']);
@@ -92,7 +97,7 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
     public function setCallback($callback, $options = null)
     {
         if (!is_callable($callback)) {
-            throw new Zend_Filter_Exception('Callback can not be accessed');
+            throw new Exception('Callback can not be accessed');
         }
 
         $this->_callback = $callback;
@@ -114,7 +119,7 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
      * Sets new default options to the callback filter
      *
      * @param mixed $options Default options to set
-     * @return Zend_Filter_Callback
+     * @return \Zend\Filter\Callback
      */
     public function setOptions($options)
     {
@@ -128,7 +133,7 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
      * @param $value mixed Options for the set callback
      * @return mixed       Result from the filter which was callbacked
      */
-    public function filter($value)
+    public function __invoke($value)
     {
         $options = array();
 

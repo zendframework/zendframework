@@ -20,13 +20,18 @@
  */
 
 /**
- * @uses       Zend_Filter_Interface
+ * @namespace
+ */
+namespace Zend\Filter;
+
+/**
+ * @uses       \Zend\Filter\Filter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_Digits implements Zend_Filter_Interface
+class Digits implements Filter
 {
     /**
      * Is PCRE is compiled with UTF-8 and Unicode support
@@ -57,7 +62,7 @@ class Zend_Filter_Digits implements Zend_Filter_Interface
      * @param  string $value
      * @return string
      */
-    public function filter($value)
+    public function __invoke($value)
     {
         if (!self::$_unicodeEnabled) {
             // POSIX named classes are not supported, use alternative 0-9 match

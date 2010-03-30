@@ -20,15 +20,20 @@
  */
 
 /**
- * @uses       Zend_Filter_Exception
- * @uses       Zend_Filter_PregReplace
+ * @namespace
+ */
+namespace Zend\Filter\Word;
+
+/**
+ * @uses       \Zend\Filter\Exception
+ * @uses       \Zend\Filter\PregReplace
  * @category   Zend
  * @package    Zend_Filter
- * @uses       Zend_Filter_PregReplace
+ * @uses       \Zend\Filter\PregReplace
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Filter_Word_Separator_Abstract extends Zend_Filter_PregReplace
+abstract class AbstractSeparator extends \Zend\Filter\PregReplace
 {
 
     protected $_separator = null;
@@ -53,7 +58,7 @@ abstract class Zend_Filter_Word_Separator_Abstract extends Zend_Filter_PregRepla
     public function setSeparator($separator)
     {
         if ($separator == null) {
-            throw new Zend_Filter_Exception('"' . $separator . '" is not a valid separator.');
+            throw new \Zend\Filter\Exception('"' . $separator . '" is not a valid separator.');
         }
         $this->_separator = $separator;
         return $this;
@@ -68,5 +73,4 @@ abstract class Zend_Filter_Word_Separator_Abstract extends Zend_Filter_PregRepla
     {
         return $this->_separator;
     }
-
 }

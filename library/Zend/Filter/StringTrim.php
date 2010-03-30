@@ -20,13 +20,18 @@
  */
 
 /**
- * @uses       Zend_Filter_Interface
+ * @namespace
+ */
+namespace Zend\Filter;
+
+/**
+ * @uses       \Zend\Filter\Filter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_StringTrim implements Zend_Filter_Interface
+class StringTrim implements Filter
 {
     /**
      * List of characters provided to the trim() function
@@ -41,12 +46,12 @@ class Zend_Filter_StringTrim implements Zend_Filter_Interface
     /**
      * Sets filter options
      *
-     * @param  string|array|Zend_Config $charList
+     * @param  string|array|\Zend\Config\Config $charList
      * @return void
      */
     public function __construct($charList = null)
     {
-        if ($charList instanceof Zend_Config) {
+        if ($charList instanceof \Zend\Config\Config) {
             $charList = $charList->toArray();
         } else if (!is_array($charList)) {
             $options          = func_get_args();
@@ -73,7 +78,7 @@ class Zend_Filter_StringTrim implements Zend_Filter_Interface
      * Sets the charList option
      *
      * @param  string|null $charList
-     * @return Zend_Filter_StringTrim Provides a fluent interface
+     * @return \Zend\Filter\StringTrim Provides a fluent interface
      */
     public function setCharList($charList)
     {
@@ -89,13 +94,13 @@ class Zend_Filter_StringTrim implements Zend_Filter_Interface
      * @param  string $value
      * @return string
      */
-    public function filter($value)
+    public function __invoke($value)
     {
         if (null === $this->_charList) {
             return $this->_unicodeTrim((string) $value);
-        } else {
-            return $this->_unicodeTrim((string) $value, $this->_charList);
         }
+
+        return $this->_unicodeTrim((string) $value, $this->_charList);
     }
 
     /**

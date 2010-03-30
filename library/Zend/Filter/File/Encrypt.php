@@ -20,16 +20,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Filter\File;
+use Zend\Filter;
+
+/**
  * Encrypts a given file and stores the encrypted file content
  *
- * @uses       Zend_Filter_Encrypt
- * @uses       Zend_Filter_Exception
+ * @uses       \Zend\Filter\Encrypt\Encrypt
+ * @uses       \Zend\Filter\Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_File_Encrypt extends Zend_Filter_Encrypt
+class Encrypt extends Filter\Encrypt
 {
     /**
      * New filename to set
@@ -61,17 +67,17 @@ class Zend_Filter_File_Encrypt extends Zend_Filter_Encrypt
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\Filter
      *
      * Encrypts the file $value with the defined settings
      *
      * @param  string $value Full path of file to change
      * @return string The filename which has been set, or false when there were errors
      */
-    public function filter($value)
+    public function _invoke($value)
     {
         if (!file_exists($value)) {
-            throw new Zend_Filter_Exception("File '$value' not found");
+            throw new Filter\Exception("File '$value' not found");
         }
 
         if (!isset($this->_filename)) {
@@ -79,19 +85,19 @@ class Zend_Filter_File_Encrypt extends Zend_Filter_Encrypt
         }
 
         if (file_exists($this->_filename) and !is_writable($this->_filename)) {
-            throw new Zend_Filter_Exception("File '{$this->_filename}' is not writable");
+            throw new Filter\Exception("File '{$this->_filename}' is not writable");
         }
 
         $content = file_get_contents($value);
         if (!$content) {
-            throw new Zend_Filter_Exception("Problem while reading file '$value'");
+            throw new Filter\Exception("Problem while reading file '$value'");
         }
 
-        $encrypted = parent::filter($content);
+        $encrypted = parent::__invoke($content);
         $result    = file_put_contents($this->_filename, $encrypted);
 
         if (!$result) {
-            throw new Zend_Filter_Exception("Problem while writing file '{$this->_filename}'");
+            throw new Filter\Exception("Problem while writing file '{$this->_filename}'");
         }
 
         return $this->_filename;

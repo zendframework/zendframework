@@ -20,24 +20,29 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Filter\Compress;
+
+/**
  * Abstract compression adapter
  *
- * @uses       Zend_Filter_Compress_CompressInterface
+ * @uses       \Zend\Filter\Compress\CompressInterface
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Filter_Compress_CompressAbstract implements Zend_Filter_Compress_CompressInterface
+abstract class AbstractCompressionAlgorithm implements CompressionAlgorithm
 {
     /**
      * Class constructor
      *
-     * @param array|Zend_Config $options (Optional) Options to set
+     * @param array|\Zend\Config\Config $options (Optional) Options to set
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         }
 
@@ -69,7 +74,7 @@ abstract class Zend_Filter_Compress_CompressAbstract implements Zend_Filter_Comp
      * Sets all or one option
      *
      * @param  array $options
-     * @return Zend_Filter_Compress_Bz2
+     * @return \Zend\Filter\Compress\Bz2
      */
     public function setOptions(array $options)
     {

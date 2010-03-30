@@ -20,15 +20,10 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Filter;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Filter_Alpha
- */
-
+use Zend\Filter\Alpha as AlphaFilter,
+    Zend\Locale\Locale;
 
 /**
  * @category   Zend
@@ -38,12 +33,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_AlphaTest extends PHPUnit_Framework_TestCase
+class AlphaTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Filter_Alpha object
+     * AlphaFilter object
      *
-     * @var Zend_Filter_Alpha
+     * @var AlphaFilter
      */
     protected $_filter;
 
@@ -69,18 +64,18 @@ class Zend_Filter_AlphaTest extends PHPUnit_Framework_TestCase
     protected static $_meansEnglishAlphabet;
 
     /**
-     * Creates a new Zend_Filter_Alpha object for each test method
+     * Creates a new AlphaFilter object for each test method
      *
      * @return void
      */
     public function setUp()
     {
-        $this->_filter = new Zend_Filter_Alpha();
+        $this->_filter = new AlphaFilter();
         if (null === self::$_unicodeEnabled) {
             self::$_unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
         }
         if (null === self::$_meansEnglishAlphabet) {
-            $this->_locale = new Zend_Locale('auto');
+            $this->_locale = new Locale('auto');
             self::$_meansEnglishAlphabet = in_array($this->_locale->getLanguage(),
                                                     array('ja')
                                                     );
@@ -106,7 +101,7 @@ class Zend_Filter_AlphaTest extends PHPUnit_Framework_TestCase
             //The Alphabet means english alphabet.
             /**
              * The first element contains multibyte alphabets.
-             *  But , Zend_Filter_Alpha is expected to return only singlebyte alphabets.
+             *  But , AlphaFilter is expected to return only singlebyte alphabets.
              * The second contains multibyte or singlebyte space.
              * The third  contains multibyte or singlebyte digits.
              * The forth  contains various multibyte or singlebyte characters.
@@ -133,10 +128,11 @@ class Zend_Filter_AlphaTest extends PHPUnit_Framework_TestCase
                 );
         }
 
+        $filter = $this->_filter;
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals(
                 $output,
-                $result = $this->_filter->filter($input),
+                $result = $filter($input),
                 "Expected '$input' to filter to '$output', but received '$result' instead"
                 );
         }
@@ -182,10 +178,11 @@ class Zend_Filter_AlphaTest extends PHPUnit_Framework_TestCase
                 );
         }
 
+        $filter = $this->_filter;
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals(
                 $output,
-                $result = $this->_filter->filter($input),
+                $result = $filter($input),
                 "Expected '$input' to filter to '$output', but received '$result' instead"
                 );
         }

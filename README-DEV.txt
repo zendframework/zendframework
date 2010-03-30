@@ -27,7 +27,7 @@ First pass
         [ ] Zend_Currency
 
 Second pass:
-[ ] Zend_Filter
+[X] Zend_Filter
     skip Input at first
 [ ] Zend_Validate
     skip Validate_Db at first

@@ -20,16 +20,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Filter;
+use Zend\Locale\Format;
+
+/**
  * Normalizes given localized input
  *
- * @uses       Zend_Filter_Interface
- * @uses       Zend_Locale_Format
+ * @uses       \Zend\Filter\Filter
+ * @uses       \Zend\Locale\Format
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_LocalizedToNormalized implements Zend_Filter_Interface
+class LocalizedToNormalized implements Filter
 {
     /**
      * Set options
@@ -44,11 +50,11 @@ class Zend_Filter_LocalizedToNormalized implements Zend_Filter_Interface
     /**
      * Class constructor
      *
-     * @param string|Zend_Locale $locale (Optional) Locale to set
+     * @param string|\Zend\Locale\Locale $locale (Optional) Locale to set
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         }
 
@@ -71,7 +77,7 @@ class Zend_Filter_LocalizedToNormalized implements Zend_Filter_Interface
      * Sets options to use
      *
      * @param  array $options (Optional) Options to use
-     * @return Zend_Filter_LocalizedToNormalized
+     * @return \Zend\Filter\LocalizedToNormalized
      */
     public function setOptions(array $options = null)
     {
@@ -87,16 +93,16 @@ class Zend_Filter_LocalizedToNormalized implements Zend_Filter_Interface
      * @param  string $value Value to normalized
      * @return string|array The normalized value
      */
-    public function filter($value)
+    public function __invoke($value)
     {
-        if (Zend_Locale_Format::isNumber($value, $this->_options)) {
-            return Zend_Locale_Format::getNumber($value, $this->_options);
+        if (Format::isNumber($value, $this->_options)) {
+            return Format::getNumber($value, $this->_options);
         } else if (($this->_options['date_format'] === null) && (strpos($value, ':') !== false)) {
             // Special case, no date format specified, detect time input
-            return Zend_Locale_Format::getTime($value, $this->_options);
-        } else if (Zend_Locale_Format::checkDateFormat($value, $this->_options)) {
+            return Format::getTime($value, $this->_options);
+        } else if (Format::checkDateFormat($value, $this->_options)) {
             // Detect date or time input
-            return Zend_Locale_Format::getDate($value, $this->_options);
+            return Format::getDate($value, $this->_options);
         }
 
         return $value;

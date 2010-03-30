@@ -20,13 +20,18 @@
  */
 
 /**
- * @uses       Zend_Filter_Interface
+ * @namespace
+ */
+namespace Zend\Filter;
+
+/**
+ * @uses       \Zend\Filter\Filter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_Dir implements Zend_Filter_Interface
+class Dir implements Filter
 {
     /**
      * Defined by Zend_Filter_Interface
@@ -36,7 +41,7 @@ class Zend_Filter_Dir implements Zend_Filter_Interface
      * @param  string $value
      * @return string
      */
-    public function filter($value)
+    public function __invoke($value)
     {
         return dirname((string) $value);
     }

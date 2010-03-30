@@ -20,12 +20,9 @@
  * @version    $Id$
  */
 
-// Call Zend_Filter_CamelCaseToDashTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Filter_Word_CamelCaseToDashTest::main");
-}
+namespace ZendTest\Filter\Word;
 
-
+use Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter;
 
 /**
  * Test class for Zend_Filter_Word_CamelCaseToDash.
@@ -37,33 +34,15 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_Word_CamelCaseToDashTest extends PHPUnit_Framework_TestCase
+class CamelCaseToDashTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Filter_Word_CamelCaseToDashTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testFilterSeparatesCamelCasedWordsWithDashes()
     {
         $string   = 'CamelCasedWords';
-        $filter   = new Zend_Filter_Word_CamelCaseToDash();
-        $filtered = $filter->filter($string);
+        $filter   = new CamelCaseToDashFilter();
+        $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('Camel-Cased-Words', $filtered);
     }
-}
-
-// Call Zend_Filter_Word_CamelCaseToDashTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Filter_Word_CamelCaseToDashTest::main") {
-    Zend_Filter_Word_CamelCaseToDashTest::main();
 }

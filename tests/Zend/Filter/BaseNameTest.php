@@ -20,15 +20,9 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Filter;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Filter_BaseName
- */
-
+use Zend\Filter\BaseName as BaseNameFilter;
 
 /**
  * @category   Zend
@@ -38,25 +32,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_BaseNameTest extends PHPUnit_Framework_TestCase
+class BaseNameTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Zend_Filter_BaseName object
-     *
-     * @var Zend_Filter_BaseName
-     */
-    protected $_filter;
-
-    /**
-     * Creates a new Zend_Filter_BaseName object for each test method
-     *
-     * @return void
-     */
-    public function setUp()
-    {
-        $this->_filter = new Zend_Filter_BaseName();
-    }
-
     /**
      * Ensures that the filter follows expected behavior
      *
@@ -64,12 +41,13 @@ class Zend_Filter_BaseNameTest extends PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
+        $filter = new BaseNameFilter();
         $valuesExpected = array(
             '/path/to/filename'     => 'filename',
             '/path/to/filename.ext' => 'filename.ext'
             );
         foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals($output, $this->_filter->filter($input));
+            $this->assertEquals($output, $filter($input));
         }
     }
 }

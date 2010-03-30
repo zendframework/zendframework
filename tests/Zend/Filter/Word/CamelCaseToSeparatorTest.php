@@ -20,12 +20,9 @@
  * @version    $Id$
  */
 
-// Call Zend_Filter_CamelCaseToSeparatorTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Filter_Word_CamelCaseToSeparatorTest::main");
-}
+namespace ZendTest\Filter\Word;
 
-
+use Zend\Filter\Word\CamelCaseToSeparator as CamelCaseToSeparatorFilter;
 
 /**
  * Test class for Zend_Filter_Word_CamelCaseToSeparator.
@@ -37,25 +34,13 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_Word_CamelCaseToSeparatorTest extends PHPUnit_Framework_TestCase
+class CamelCaseToSeparatorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main() {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Filter_Word_CamelCaseToSeparatorTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testFilterSeparatesCamelCasedWordsWithSpacesByDefault()
     {
         $string   = 'CamelCasedWords';
-        $filter   = new Zend_Filter_Word_CamelCaseToSeparator();
-        $filtered = $filter->filter($string);
+        $filter   = new CamelCaseToSeparatorFilter();
+        $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('Camel Cased Words', $filtered);
@@ -64,15 +49,10 @@ class Zend_Filter_Word_CamelCaseToSeparatorTest extends PHPUnit_Framework_TestCa
     public function testFilterSeparatesCamelCasedWordsWithProvidedSeparator()
     {
         $string   = 'CamelCasedWords';
-        $filter   = new Zend_Filter_Word_CamelCaseToSeparator(':-#');
-        $filtered = $filter->filter($string);
+        $filter   = new CamelCaseToSeparatorFilter(':-#');
+        $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('Camel:-#Cased:-#Words', $filtered);
     }
-}
-
-// Call Zend_Filter_Word_CamelCaseToSeparatorTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Filter_Word_CamelCaseToSeparatorTest::main") {
-    Zend_Filter_Word_CamelCaseToSeparatorTest::main();
 }

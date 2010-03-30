@@ -20,16 +20,26 @@
  */
 
 /**
- * @uses       Zend_Filter_Word_Separator_Abstract
+ * @namespace
+ */
+namespace Zend\Filter\Word;
+
+/**
+ * @uses       \Zend\Filter\Word\Separator\AbstractSeparator
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_Word_CamelCaseToSeparator extends Zend_Filter_Word_Separator_Abstract
+class CamelCaseToSeparator extends AbstractSeparator
 {
-
-    public function filter($value)
+    /**
+     * Defined by Zend\Filter\Filter
+     * 
+     * @param  string $value 
+     * @return string
+     */
+    public function __invoke($value)
     {
         if (self::isUnicodeSupportEnabled()) {
             parent::setMatchPattern(array('#(?<=(?:\p{Lu}))(\p{Lu}\p{Ll})#','#(?<=(?:\p{Ll}|\p{Nd}))(\p{Lu})#'));
@@ -39,7 +49,6 @@ class Zend_Filter_Word_CamelCaseToSeparator extends Zend_Filter_Word_Separator_A
             parent::setReplacement(array('\1' . $this->_separator . '\2', $this->_separator . '\1'));
         }
 
-        return parent::filter($value);
+        return parent::__invoke($value);
     }
-
 }

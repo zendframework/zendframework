@@ -20,15 +20,10 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Filter;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Filter_Alnum
- */
-
+use Zend\Filter\Alnum as AlnumFilter,
+    Zend\Locale\Locale;
 
 /**
  * @category   Zend
@@ -38,12 +33,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_AlnumTest extends PHPUnit_Framework_TestCase
+class AlnumTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Filter_Alnum object
+     * AlnumFilter object
      *
-     * @var Zend_Filter_Alnum
+     * @var AlnumFilter
      */
     protected $_filter;
 
@@ -69,18 +64,18 @@ class Zend_Filter_AlnumTest extends PHPUnit_Framework_TestCase
     protected static $_meansEnglishAlphabet;
 
     /**
-     * Creates a new Zend_Filter_Alnum object for each test method
+     * Creates a new AlnumFilter object for each test method
      *
      * @return void
      */
     public function setUp()
     {
-        $this->_filter = new Zend_Filter_Alnum();
+        $this->_filter = new AlnumFilter();
         if (null === self::$_unicodeEnabled) {
             self::$_unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
         }
         if (null === self::$_meansEnglishAlphabet) {
-            $this->_locale = new Zend_Locale('auto');
+            $this->_locale = new Locale('auto');
             self::$_meansEnglishAlphabet = in_array($this->_locale->getLanguage(),
                                                     array('ja')
                                                     );
@@ -107,7 +102,7 @@ class Zend_Filter_AlnumTest extends PHPUnit_Framework_TestCase
             //The Alphabet means english alphabet.
             /**
              * The first element contains multibyte alphabets and digits.
-             *  But , Zend_Filter_Alnum is expected to return only singlebyte alphabets and digits.
+             *  But , AlnumFilter is expected to return only singlebyte alphabets and digits.
              *
              * The second contains multibyte or singebyte space.
              * The third  contains various multibyte or singebyte characters.
@@ -129,10 +124,11 @@ class Zend_Filter_AlnumTest extends PHPUnit_Framework_TestCase
                 ''        => ''
                 );
         }
+        $filter = $this->_filter;
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals(
                 $output,
-                $result = $this->_filter->filter($input),
+                $result = $filter($input),
                 "Expected '$input' to filter to '$output', but received '$result' instead"
                 );
         }
@@ -176,10 +172,11 @@ class Zend_Filter_AlnumTest extends PHPUnit_Framework_TestCase
                 ''        => '',
             );
         }
+        $filter = $this->_filter;
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals(
                 $output,
-                $result = $this->_filter->filter($input),
+                $result = $filter($input),
                 "Expected '$input' to filter to '$output', but received '$result' instead"
                 );
         }

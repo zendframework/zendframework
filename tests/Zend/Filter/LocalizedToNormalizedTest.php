@@ -20,13 +20,9 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
+namespace ZendTest\Filter;
 
-/**
- * @see Zend_Filter_LocalizedToNormalized
- */
+use Zend\Filter\LocalizedToNormalized as LocalizedToNormalizedFilter;
 
 /**
  * @category   Zend
@@ -36,7 +32,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_LocalizedToNormalizedTest extends PHPUnit_Framework_TestCase
+class LocalizedToNormalizedTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Ensures that the filter follows expected behavior
@@ -45,7 +41,7 @@ class Zend_Filter_LocalizedToNormalizedTest extends PHPUnit_Framework_TestCase
      */
     public function testNumberNormalization()
     {
-        $filter = new Zend_Filter_LocalizedToNormalized(array('locale' => 'de'));
+        $filter = new LocalizedToNormalizedFilter(array('locale' => 'de'));
         $valuesExpected = array(
             '0'         => '0',
             '1.234'     => '1234',
@@ -56,7 +52,7 @@ class Zend_Filter_LocalizedToNormalizedTest extends PHPUnit_Framework_TestCase
         );
 
         foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals($output, $filter->filter($input), 'failed filter of ' . var_export($input, 1));
+            $this->assertEquals($output, $filter($input), 'failed filter of ' . var_export($input, 1));
         }
     }
 
@@ -67,7 +63,7 @@ class Zend_Filter_LocalizedToNormalizedTest extends PHPUnit_Framework_TestCase
      */
     public function testDateNormalizationWithoutParameters()
     {
-        $filter = new Zend_Filter_LocalizedToNormalized(array('locale' => 'de'));
+        $filter = new LocalizedToNormalizedFilter(array('locale' => 'de'));
         $valuesExpected = array(
             '11:22:33' => array(
                 'date_format' => 'HH:mm:ss',
@@ -102,7 +98,7 @@ class Zend_Filter_LocalizedToNormalizedTest extends PHPUnit_Framework_TestCase
         );
 
         foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals($output, $filter->filter($input), 'failed filter of ' . var_export($input, 1));
+            $this->assertEquals($output, $filter($input), 'failed filter of ' . var_export($input, 1));
         }
     }
 
@@ -113,7 +109,7 @@ class Zend_Filter_LocalizedToNormalizedTest extends PHPUnit_Framework_TestCase
      */
     public function testDateNormalizationWithParameters()
     {
-        $filter = new Zend_Filter_LocalizedToNormalized(array('locale' => 'de', 'date_format' => 'yyyy.dd.MM'));
+        $filter = new LocalizedToNormalizedFilter(array('locale' => 'de', 'date_format' => 'yyyy.dd.MM'));
         $valuesExpected = array(
             '2009.20.April' => array(
                 'date_format' => 'yyyy.dd.MM',
@@ -142,7 +138,7 @@ class Zend_Filter_LocalizedToNormalizedTest extends PHPUnit_Framework_TestCase
         );
 
         foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals($output, $filter->filter($input), 'failed filter of ' . var_export($input, 1));
+            $this->assertEquals($output, $filter($input), 'failed filter of ' . var_export($input, 1));
         }
     }
 
@@ -153,7 +149,7 @@ class Zend_Filter_LocalizedToNormalizedTest extends PHPUnit_Framework_TestCase
      */
     public function testNormalizationToInteger()
     {
-        $filter = new Zend_Filter_LocalizedToNormalized(array('locale' => 'de', 'precision' => 0));
+        $filter = new LocalizedToNormalizedFilter(array('locale' => 'de', 'precision' => 0));
         $valuesExpected = array(
             '1.234,56' => '1234',
             '1,234'    => '1',
@@ -161,7 +157,7 @@ class Zend_Filter_LocalizedToNormalizedTest extends PHPUnit_Framework_TestCase
         );
 
         foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals($output, $filter->filter($input), 'failed filter of ' . var_export($input, 1));
+            $this->assertEquals($output, $filter($input), 'failed filter of ' . var_export($input, 1));
         }
     }
 
@@ -172,7 +168,7 @@ class Zend_Filter_LocalizedToNormalizedTest extends PHPUnit_Framework_TestCase
      */
     public function testNormalizationToFloat()
     {
-        $filter = new Zend_Filter_LocalizedToNormalized(array('locale' => 'de', 'precision' => 2));
+        $filter = new LocalizedToNormalizedFilter(array('locale' => 'de', 'precision' => 2));
         $valuesExpected = array(
             '1.234,5678' => '1234.56',
             '1,234'    => '1.23',
@@ -180,7 +176,7 @@ class Zend_Filter_LocalizedToNormalizedTest extends PHPUnit_Framework_TestCase
         );
 
         foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals($output, $filter->filter($input), 'failed filter of ' . var_export($input, 1));
+            $this->assertEquals($output, $filter($input), 'failed filter of ' . var_export($input, 1));
         }
     }
 
@@ -189,15 +185,15 @@ class Zend_Filter_LocalizedToNormalizedTest extends PHPUnit_Framework_TestCase
      */
     public function testLongNumbers()
     {
-        $filter = new Zend_Filter_LocalizedToNormalized(array('locale' => 'de', 'precision' => 0));
-        $this->assertEquals('1000000', $filter->filter('1.000.000,00'));
-        $this->assertEquals('10000', $filter->filter(10000));
+        $filter = new LocalizedToNormalizedFilter(array('locale' => 'de', 'precision' => 0));
+        $this->assertEquals('1000000', $filter('1.000.000,00'));
+        $this->assertEquals('10000', $filter(10000));
 
         $this->assertEquals(array(
             'date_format' => 'dd.MM.yyyy',
             'locale' => 'de',
             'day' => '1',
             'month' => '2',
-            'year' => '4'), $filter->filter('1,2.4'));
+            'year' => '4'), $filter('1,2.4'));
     }
 }

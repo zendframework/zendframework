@@ -20,14 +20,20 @@
  */
 
 /**
- * @uses       Zend_Filter_Exception
- * @uses       Zend_Filter_StringToLower
+ * @namespace
+ */
+namespace Zend\Filter\File;
+use Zend\Filter;
+
+/**
+ * @uses       \Zend\Filter\Exception
+ * @uses       \Zend\Filter\StringToLower
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_File_LowerCase extends Zend_Filter_StringToLower
+class LowerCase extends Filter\StringToLower
 {
     /**
      * Adds options to the filter at initiation
@@ -42,34 +48,34 @@ class Zend_Filter_File_LowerCase extends Zend_Filter_StringToLower
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\Filter
      *
      * Does a lowercase on the content of the given file
      *
      * @param  string $value Full path of file to change
      * @return string The given $value
-     * @throws Zend_Filter_Exception
+     * @throws \Zend\Filter\Exception
      */
-    public function filter($value)
+    public function __invoke($value)
     {
         if (!file_exists($value)) {
-            throw new Zend_Filter_Exception("File '$value' not found");
+            throw new Filter\Exception("File '$value' not found");
         }
 
         if (!is_writable($value)) {
-            throw new Zend_Filter_Exception("File '$value' is not writable");
+            throw new Filter\Exception("File '$value' is not writable");
         }
 
         $content = file_get_contents($value);
         if (!$content) {
-            throw new Zend_Filter_Exception("Problem while reading file '$value'");
+            throw new Filter\Exception("Problem while reading file '$value'");
         }
 
-        $content = parent::filter($content);
+        $content = parent::__invoke($content);
         $result  = file_put_contents($value, $content);
 
         if (!$result) {
-            throw new Zend_Filter_Exception("Problem while writing file '$value'");
+            throw new Filter\Exception("Problem while writing file '$value'");
         }
 
         return $value;

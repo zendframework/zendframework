@@ -3859,18 +3859,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Filter/Compress/CompressAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Filter_Compress_CompressAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Filter/Compress/CompressAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Filter/Compress/AbstractCompressionAlgorithm.php</newRelativeFilePath>
       <newNamespace>Zend\Filter\Compress</newNamespace>
-      <newClassName>CompressAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Filter\Compress\CompressAbstract</newFullyQualifiedName>
+      <newClassName>AbstractCompressionAlgorithm</newClassName>
+      <newFullyQualifiedName>Zend\Filter\Compress\AbstractCompressionAlgorithm</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Filter/Compress/CompressInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Filter_Compress_CompressInterface</originalClassName>
-      <newRelativeFilePath>Zend/Filter/Compress/CompressInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Filter/Compress/CompressionAlgorithm.php</newRelativeFilePath>
       <newNamespace>Zend\Filter\Compress</newNamespace>
-      <newClassName>CompressInterface</newClassName>
-      <newFullyQualifiedName>Zend\Filter\Compress\CompressInterface</newFullyQualifiedName>
+      <newClassName>CompressionAlgorithm</newClassName>
+      <newFullyQualifiedName>Zend\Filter\Compress\CompressionAlgorithm</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Filter/Compress/Gz.php</originalRelativeFilePath>
@@ -3915,10 +3915,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Filter/Compress.php</originalRelativeFilePath>
       <originalClassName>Zend_Filter_Compress</originalClassName>
-      <newRelativeFilePath>Zend/Filter/Compress/Compress.php</newRelativeFilePath>
-      <newNamespace>Zend\Filter\Compress</newNamespace>
+      <newRelativeFilePath>Zend/Filter/Compress.php</newRelativeFilePath>
+      <newNamespace>Zend\Filter</newNamespace>
       <newClassName>Compress</newClassName>
-      <newFullyQualifiedName>Zend\Filter\Compress\Compress</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Filter\Compress</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Filter/Decompress.php</originalRelativeFilePath>
@@ -3955,10 +3955,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Filter/Encrypt/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Filter_Encrypt_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Filter/Encrypt/EncryptInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Filter/Encrypt/EncryptionAlgorithm.php</newRelativeFilePath>
       <newNamespace>Zend\Filter\Encrypt</newNamespace>
-      <newClassName>EncryptInterface</newClassName>
-      <newFullyQualifiedName>Zend\Filter\Encrypt\EncryptInterface</newFullyQualifiedName>
+      <newClassName>EncryptionAlgorithm</newClassName>
+      <newFullyQualifiedName>Zend\Filter\Encrypt\EncryptionAlgorithm</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Filter/Encrypt/Mcrypt.php</originalRelativeFilePath>
@@ -3979,10 +3979,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Filter/Encrypt.php</originalRelativeFilePath>
       <originalClassName>Zend_Filter_Encrypt</originalClassName>
-      <newRelativeFilePath>Zend/Filter/Encrypt/Encrypt.php</newRelativeFilePath>
-      <newNamespace>Zend\Filter\Encrypt</newNamespace>
+      <newRelativeFilePath>Zend/Filter/Encrypt.php</newRelativeFilePath>
+      <newNamespace>Zend\Filter</newNamespace>
       <newClassName>Encrypt</newClassName>
-      <newFullyQualifiedName>Zend\Filter\Encrypt\Encrypt</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Filter\Encrypt</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Filter/Exception.php</originalRelativeFilePath>
@@ -4067,10 +4067,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Filter/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Filter_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Filter/FilterInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Filter/Filter.php</newRelativeFilePath>
       <newNamespace>Zend\Filter</newNamespace>
-      <newClassName>FilterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Filter\FilterInterface</newFullyQualifiedName>
+      <newClassName>Filter</newClassName>
+      <newFullyQualifiedName>Zend\Filter\Filter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Filter/LocalizedToNormalized.php</originalRelativeFilePath>
@@ -4203,10 +4203,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Filter/Word/Separator/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Filter_Word_Separator_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Filter/Word/Separator/AbstractSeparator.php</newRelativeFilePath>
-      <newNamespace>Zend\Filter\Word\Separator</newNamespace>
+      <newRelativeFilePath>Zend/Filter/Word/AbstractSeparator.php</newRelativeFilePath>
+      <newNamespace>Zend\Filter\Word</newNamespace>
       <newClassName>AbstractSeparator</newClassName>
-      <newFullyQualifiedName>Zend\Filter\Word\Separator\AbstractSeparator</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Filter\Word\AbstractSeparator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Filter/Word/SeparatorToCamelCase.php</originalRelativeFilePath>
@@ -4259,10 +4259,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Filter.php</originalRelativeFilePath>
       <originalClassName>Zend_Filter</originalClassName>
-      <newRelativeFilePath>Zend/Filter/Filter.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Filter/FilterChain.php</newRelativeFilePath>
       <newNamespace>Zend\Filter</newNamespace>
-      <newClassName>Filter</newClassName>
-      <newFullyQualifiedName>Zend\Filter\Filter</newFullyQualifiedName>
+      <newClassName>FilterChain</newClassName>
+      <newFullyQualifiedName>Zend\Filter\FilterChain</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Form/Decorator/Abstract.php</originalRelativeFilePath>

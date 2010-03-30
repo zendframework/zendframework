@@ -20,17 +20,9 @@
  * @version    $Id: $
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Filter_Compress_GzTest::main');
-}
+namespace ZendTest\Filter\Compress;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Filter_Compress_Gz
- */
+use Zend\Filter\Compress\Gz as GzCompression;
 
 /**
  * @category   Zend
@@ -40,19 +32,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_Compress_GzTest extends PHPUnit_Framework_TestCase
+class GzTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs this test suite
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Filter_Compress_GzTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         if (!extension_loaded('zlib')) {
@@ -62,8 +43,8 @@ class Zend_Filter_Compress_GzTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        if (file_exists(dirname(__FILE__) . '/../_files/compressed.gz')) {
-            unlink(dirname(__FILE__) . '/../_files/compressed.gz');
+        if (file_exists(__DIR__ . '/../_files/compressed.gz')) {
+            unlink(__DIR__ . '/../_files/compressed.gz');
         }
     }
 
@@ -74,7 +55,7 @@ class Zend_Filter_Compress_GzTest extends PHPUnit_Framework_TestCase
      */
     public function testBasicUsage()
     {
-        $filter  = new Zend_Filter_Compress_Gz();
+        $filter  = new GzCompression();
 
         $content = $filter->compress('compress me');
         $this->assertNotEquals('compress me', $content);
@@ -90,7 +71,7 @@ class Zend_Filter_Compress_GzTest extends PHPUnit_Framework_TestCase
      */
     public function testGzGetSetOptions()
     {
-        $filter = new Zend_Filter_Compress_Gz();
+        $filter = new GzCompression();
         $this->assertEquals(array('mode' => 'compress', 'level' => 9, 'archive' => null), $filter->getOptions());
 
         $this->assertEquals(9, $filter->getOptions('level'));
@@ -116,7 +97,7 @@ class Zend_Filter_Compress_GzTest extends PHPUnit_Framework_TestCase
      */
     public function testGzGetSetOptionsInConstructor()
     {
-        $filter2= new Zend_Filter_Compress_Gz(array('level' => 8));
+        $filter2= new GzCompression(array('level' => 8));
         $this->assertEquals(array('mode' => 'compress', 'level' => 8, 'archive' => null), $filter2->getOptions());
     }
 
@@ -127,7 +108,7 @@ class Zend_Filter_Compress_GzTest extends PHPUnit_Framework_TestCase
      */
     public function testGzGetSetLevel()
     {
-        $filter = new Zend_Filter_Compress_Gz();
+        $filter = new GzCompression();
         $this->assertEquals(9, $filter->getLevel());
         $filter->setLevel(6);
         $this->assertEquals(6, $filter->getOptions('level'));
@@ -135,7 +116,7 @@ class Zend_Filter_Compress_GzTest extends PHPUnit_Framework_TestCase
         try {
             $filter->setLevel(15);
             $this->fail('Exception expected');
-        } catch(Zend_Filter_Exception $e) {
+        } catch(\Zend\Filter\Exception $e) {
             $this->assertContains('must be between', $e->getMessage());
         }
     }
@@ -147,7 +128,7 @@ class Zend_Filter_Compress_GzTest extends PHPUnit_Framework_TestCase
      */
     public function testGzGetSetMode()
     {
-        $filter = new Zend_Filter_Compress_Gz();
+        $filter = new GzCompression();
         $this->assertEquals('compress', $filter->getMode());
         $filter->setMode('deflate');
         $this->assertEquals('deflate', $filter->getOptions('mode'));
@@ -155,7 +136,7 @@ class Zend_Filter_Compress_GzTest extends PHPUnit_Framework_TestCase
         try {
             $filter->setMode('unknown');
             $this->fail('Exception expected');
-        } catch(Zend_Filter_Exception $e) {
+        } catch(\Zend\Filter\Exception $e) {
             $this->assertContains('mode not supported', $e->getMessage());
         }
     }
@@ -167,7 +148,7 @@ class Zend_Filter_Compress_GzTest extends PHPUnit_Framework_TestCase
      */
     public function testGzGetSetArchive()
     {
-        $filter = new Zend_Filter_Compress_Gz();
+        $filter = new GzCompression();
         $this->assertEquals(null, $filter->getArchive());
         $filter->setArchive('Testfile.txt');
         $this->assertEquals('Testfile.txt', $filter->getArchive());
@@ -181,18 +162,18 @@ class Zend_Filter_Compress_GzTest extends PHPUnit_Framework_TestCase
      */
     public function testGzCompressToFile()
     {
-        $filter   = new Zend_Filter_Compress_Gz();
+        $filter   = new GzCompression();
         $archive = dirname(__FILE__) . '/../_files/compressed.gz';
         $filter->setArchive($archive);
 
         $content = $filter->compress('compress me');
         $this->assertTrue($content);
 
-        $filter2  = new Zend_Filter_Compress_Gz();
+        $filter2  = new GzCompression();
         $content2 = $filter2->decompress($archive);
         $this->assertEquals('compress me', $content2);
 
-        $filter3 = new Zend_Filter_Compress_Gz();
+        $filter3 = new GzCompression();
         $filter3->setArchive($archive);
         $content3 = $filter3->decompress(null);
         $this->assertEquals('compress me', $content3);
@@ -205,7 +186,7 @@ class Zend_Filter_Compress_GzTest extends PHPUnit_Framework_TestCase
      */
     public function testGzDeflate()
     {
-        $filter  = new Zend_Filter_Compress_Gz(array('mode' => 'deflate'));
+        $filter  = new GzCompression(array('mode' => 'deflate'));
 
         $content = $filter->compress('compress me');
         $this->assertNotEquals('compress me', $content);
@@ -221,11 +202,7 @@ class Zend_Filter_Compress_GzTest extends PHPUnit_Framework_TestCase
      */
     public function testGzToString()
     {
-        $filter = new Zend_Filter_Compress_Gz();
+        $filter = new GzCompression();
         $this->assertEquals('Gz', $filter->toString());
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Filter_Compress_GzTest::main') {
-    Zend_Filter_Compress_GzTest::main();
 }

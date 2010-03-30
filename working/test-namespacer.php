@@ -250,7 +250,9 @@ function generate() {
                 $consumed_class_info = get_map_by_new_fully_qualified_name($consumed_class_name);
                 //var_dump($consumed_class_name, $consumed_class_info);
                 if ($consumed_class_info) {
-                    $uses['declarations'][] = $ccn = $consumed_class_info['new_namespace'];
+                    if (strpos($consumed_class_info['new_namespace'], '\\')) {
+                        $uses['declarations'][] = $ccn = $consumed_class_info['new_namespace'];
+                    }
                     $uses['translations'][$consumed_class_name] = substr($ccn, strrpos($ccn, '\\')+1) . '\\'
                         . str_replace($ccn . '\\', '', $consumed_class_info['new_fully_qualified_name']);
                 }
@@ -297,6 +299,13 @@ function generate() {
                     
                     if ($consumed_class_token_info) {
                         $new_consumed_class_name = $consumed_class_token_info['new_fully_qualified_name'];
+                        
+                        $new_consumed_class_name_namespace = substr($new_consumed_class_name, 0, strrpos($new_consumed_class_name, '\\'));
+                        if (in_array($new_consumed_class_name_namespace, $uses['declarations'])) {
+                            $new_consumed_class_name = substr($new_consumed_class_name_namespace, strrpos($new_consumed_class_name_namespace, '\\')+1)
+                                . substr($new_consumed_class_name, strrpos($new_consumed_class_name, '\\'));
+                        }
+                        
                     } else {
                         $new_consumed_class_name = '\\' . $test_token_consumed_class_name;
                     }

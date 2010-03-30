@@ -16,7 +16,7 @@
         <title>Automatyczne rozpoznawanie szerokości konsoli</title>
 
         <para>
-            W przypadku systemów *nix niezbędny dla tej fukncjonalności jest
+            W przypadku systemów *nix niezbędny dla tej funkcjonalności jest
             <code>shell_exec</code>. Na maszynach Windows szerokość terminala jest stała
             (wynosi 80 znaków) więc automatyczne rozpoznawanie szerokości nie jest potrzebne.
         </para>

@@ -64,7 +64,7 @@ $progressBar->finish();
         <para>
             Jeśli zajdzie potrzeba utrzymania paska postępu przez wiele żądań, można w tym celu
             podać łańcuch znaków z przestrzenią nazw sesji
-            jako czwary argument konstruktora. W tym przypadku
+            jako czwarty argument konstruktora. W tym przypadku
             pasek postępu nie uaktualni adaptera w momencie konstruowania - niezbędne będzie
             wywołanie metody <methodname>update()</methodname>
             lub <methodname>finish()</methodname>.

@@ -24,16 +24,17 @@
  * @namespace
  */
 namespace Zend\Cache\Frontend;
-use Zend\Cache;
+use Zend\Cache\Cache;
 
 /**
- * @uses       \Zend\Cache\Core
+ * @uses       \Zend\Cache\Cache
+ * @uses       \Zend\Cache\Frontend\Core
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Frontend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ClassFrontend extends Cache\Core
+class ClassFrontend extends Core
 {
     /**
      * Available options
@@ -112,7 +113,7 @@ class ClassFrontend extends Cache\Core
             $this->setOption($name, $value);
         }
         if ($this->_specificOptions['cached_entity'] === null) {
-            Cache\Cache::throwException('cached_entity must be set !');
+            Cache::throwException('cached_entity must be set !');
         }
         $this->setCachedEntity($this->_specificOptions['cached_entity']);
         $this->setOption('automatic_serialization', true);
@@ -169,7 +170,7 @@ class ClassFrontend extends Cache\Core
     public function setCachedEntity($cachedEntity)
     {
         if (!is_string($cachedEntity) && !is_object($cachedEntity)) {
-            Cache\Cache::throwException('cached_entity must be an object or a class name');
+            Cache::throwException('cached_entity must be an object or a class name');
         }
         $this->_cachedEntity = $cachedEntity;
         $this->_specificOptions['cached_entity'] = $cachedEntity;

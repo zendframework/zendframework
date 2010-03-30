@@ -24,16 +24,17 @@
  * @namespace
  */
 namespace Zend\Cache\Frontend;
-use Zend\Cache;
+use Zend\Cache\Cache;
 
 /**
- * @uses       \Zend\Cache\Core
+ * @uses       \Zend\Cache\Cache
+ * @uses       \Zend\Cache\Frontend\Core
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Frontend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class File extends Cache\Core
+class File extends Core
 {
 
     /**
@@ -92,7 +93,7 @@ class File extends Cache\Core
             $this->setOption($name, $value);
         }
         if (!isset($this->_specificOptions['master_files'])) {
-            Cache\Cache::throwException('master_files option must be set');
+            Cache::throwException('master_files option must be set');
         }
     }
 
@@ -111,7 +112,7 @@ class File extends Cache\Core
         foreach ($masterFiles as $masterFile) {
             $this->_masterFile_mtimes[$i] = @filemtime($masterFile);
             if ((!($this->_specificOptions['ignore_missing_master_files'])) && (!($this->_masterFile_mtimes[$i]))) {
-                Cache\Cache::throwException('Unable to read master_file : '.$masterFile);
+                Cache::throwException('Unable to read master_file : '.$masterFile);
             }
             $i++;
         }

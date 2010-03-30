@@ -28,20 +28,20 @@ use Zend\Cache;
 
 /**
  * @uses       \Zend\Cache\Cache
- * @uses       \Zend\Cache\Backend\Backend
- * @uses       \Zend\Cache\Backend\ExtendedInterface
+ * @uses       \Zend\Cache\Backend\AbstractBackend
+ * @uses       \Zend\Cache\Backend\ExtendedBackend
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Apc extends Backend implements ExtendedInterface
+class Apc extends AbstractBackend implements ExtendedBackend
 {
     /**
      * Log message
      */
-    const TAGS_UNSUPPORTED_BY_CLEAN_OF_APC_BACKEND = 'Zend_Cache_Backend_Apc::clean() : tags are unsupported by the Apc backend';
-    const TAGS_UNSUPPORTED_BY_SAVE_OF_APC_BACKEND =  'Zend_Cache_Backend_Apc::save() : tags are unsupported by the Apc backend';
+    const TAGS_UNSUPPORTED_BY_CLEAN_OF_APC_BACKEND = 'Zend\\Cache\\Backend\\Apc::clean() : tags are unsupported by the Apc backend';
+    const TAGS_UNSUPPORTED_BY_SAVE_OF_APC_BACKEND =  'Zend\\Cache\\Backend\\Apc::save() : tags are unsupported by the Apc backend';
 
     /**
      * Constructor

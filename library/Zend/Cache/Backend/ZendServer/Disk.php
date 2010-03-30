@@ -24,17 +24,19 @@
  * @namespace
  */
 namespace Zend\Cache\Backend\ZendServer;
+use Zend\Cache,
+    Zend\Cache\Backend;
 
 /**
  * @uses       \Zend\Cache\Cache
- * @uses       \Zend\Cache\Backend\BackendInterface
- * @uses       \Zend\Cache\Backend\ZendServer\ZendServer
+ * @uses       \Zend\Cache\Backend
+ * @uses       \Zend\Cache\Backend\ZendServer\AbstractZendServer
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Disk extends ZendServer implements \Zend\Cache\Backend\BackendInterface
+class Disk extends AbstractZendServer implements Backend
 {
     /**
      * Constructor
@@ -45,7 +47,7 @@ class Disk extends ZendServer implements \Zend\Cache\Backend\BackendInterface
     public function __construct(array $options = array())
     {
         if (!function_exists('zend_disk_cache_store')) {
-            \Zend\Cache\Cache::throwException('Zend_Cache_ZendServer_Disk backend has to be used within Zend Server environment.');
+            Cache\Cache::throwException('Zend_Cache_ZendServer_Disk backend has to be used within Zend Server environment.');
         }
         parent::__construct($options);
     }

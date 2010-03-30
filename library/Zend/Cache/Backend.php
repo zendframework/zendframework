@@ -23,8 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Cache\Backend;
-use \Zend\Cache;
+namespace Zend\Cache;
 
 /**
  * @package    Zend_Cache
@@ -32,7 +31,7 @@ use \Zend\Cache;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface BackendInterface
+interface Backend
 {
     /**
      * Set the frontend directives
@@ -86,19 +85,18 @@ interface BackendInterface
      * Clean some cache records
      *
      * Available modes are :
-     * Zend_Cache::CLEANING_MODE_ALL (default)    => remove all cache entries ($tags is not used)
-     * Zend_Cache::CLEANING_MODE_OLD              => remove too old cache entries ($tags is not used)
-     * Zend_Cache::CLEANING_MODE_MATCHING_TAG     => remove cache entries matching all given tags
+     * Cache::CLEANING_MODE_ALL (default)    => remove all cache entries ($tags is not used)
+     * Cache::CLEANING_MODE_OLD              => remove too old cache entries ($tags is not used)
+     * Cache::CLEANING_MODE_MATCHING_TAG     => remove cache entries matching all given tags
      *                                               ($tags can be an array of strings or a single string)
-     * Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG => remove cache entries not {matching one of the given tags}
+     * Cache::CLEANING_MODE_NOT_MATCHING_TAG => remove cache entries not {matching one of the given tags}
      *                                               ($tags can be an array of strings or a single string)
-     * Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG => remove cache entries matching any given tags
+     * Cache::CLEANING_MODE_MATCHING_ANY_TAG => remove cache entries matching any given tags
      *                                               ($tags can be an array of strings or a single string)
      *
      * @param  string $mode Clean mode
      * @param  array  $tags Array of tags
      * @return boolean true if no problem
      */
-    public function clean($mode = Cache\CacheCache\Cache::CLEANING_MODE_ALL, $tags = array());
-
+    public function clean($mode = Cache::CLEANING_MODE_ALL, $tags = array());
 }

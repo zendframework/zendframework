@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Cache\Frontend;
+use Zend\Cache\Cache;
 
 /**
  * @uses       \Zend\Cache\Core
@@ -32,7 +33,7 @@ namespace Zend\Cache\Frontend;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Output extends \Zend\Cache\Core
+class Output extends Core
 {
 
     private $_idStack = array();
@@ -94,7 +95,7 @@ class Output extends \Zend\Cache\Core
         }
         $id = array_pop($this->_idStack);
         if ($id === null) {
-            \Zend\Cache\Cache::throwException('use of end() without a start()');
+            Cache::throwException('use of end() without a start()');
         }
         $this->save($data, $id, $tags, $specificLifetime, $priority);
         if ($echoData) {

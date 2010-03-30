@@ -24,20 +24,21 @@
  * @namespace
  */
 namespace Zend\Cache\Backend;
-use Zend\Cache;
+use Zend\Cache,
+    Zend\Cache\Backend;
 
 /**
  * Impementation of Zend Cache Backend using the Zend Platform (Output Content Caching)
  *
  * @uses       \Zend\Cache\Cache
- * @uses       \Zend\Cache\Backend\Backend
- * @uses       \Zend\Cache\Backend\BackendInterface
+ * @uses       \Zend\Cache\Backend
+ * @uses       \Zend\Cache\Backend\AbstractBackend
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendPlatform extends Backend implements BackendInterface
+class ZendPlatform extends AbstractBackend implements Backend
 {
     /**
      * internal ZP prefix

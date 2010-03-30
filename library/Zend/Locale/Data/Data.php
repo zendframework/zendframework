@@ -28,7 +28,7 @@ namespace Zend\Locale\Data;
 use \Zend\Locale\Exception,
     \Zend\Locale\Locale,
     \Zend\Cache\Cache,
-    \Zend\Cache\Core as CacheCore;
+    \Zend\Cache\Frontend as CacheFrontend;
 
 /**
  * Locale data reader, handles the CLDR
@@ -1425,9 +1425,9 @@ class Data
     /**
      * Set a cache for Zend_Locale_Data
      *
-     * @param \Zend\Cache\Core $cache A cache frontend
+     * @param \Zend\Cache\Frontend $cache A cache frontend
      */
-    public static function setCache(CacheCore $cache)
+    public static function setCache(CacheFrontend $cache)
     {
         self::$_cache = $cache;
     }

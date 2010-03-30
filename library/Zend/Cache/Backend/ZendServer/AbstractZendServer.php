@@ -24,18 +24,19 @@
  * @namespace
  */
 namespace Zend\Cache\Backend\ZendServer;
-use Zend\Cache;
+use Zend\Cache\Backend,
+    Zend\Cache;
 
 /**
  * @uses       \Zend\Cache\Cache
- * @uses       \Zend\Cache\Backend\Backend
- * @uses       \Zend\Cache\Backend\BackendInterface
+ * @uses       \Zend\Cache\Backend
+ * @uses       \Zend\Cache\Backend\AbstractBackend
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class ZendServer extends Cache\Backend\Backend implements Cache\Backend\BackendInterface
+abstract class AbstractZendServer extends Cache\Backend\AbstractBackend implements Backend
 {
     /**
      * Available options
@@ -148,7 +149,7 @@ abstract class ZendServer extends Cache\Backend\Backend implements Cache\Backend
         );
 
         if (count($tags) > 0) {
-            $this->_log('Zend_Cache_Backend_ZendServer::save() : tags are unsupported by the ZendServer backends');
+            $this->_log('Zend\\Cache\\Backend\\ZendServer::save() : tags are unsupported by the ZendServer backends');
         }
 
         return  $this->_store($data, $id, $lifetime) &&
@@ -184,7 +185,7 @@ abstract class ZendServer extends Cache\Backend\Backend implements Cache\Backend
      * @throws \Zend\Cache\Exception
      * @return boolean true if no problem
      */
-    public function clean($mode = Cache\CacheCache\Cache::CLEANING_MODE_ALL, $tags = array())
+    public function clean($mode = Cache\Cache::CLEANING_MODE_ALL, $tags = array())
     {
         switch ($mode) {
             case Cache\Cache::CLEANING_MODE_ALL:

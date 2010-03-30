@@ -856,10 +856,10 @@ class Locale
     /**
      * Sets a cache
      *
-     * @param  \Zend\Cache\Core $cache Cache to set
+     * @param  \Zend\Cache\Frontend $cache Cache to set
      * @return void
      */
-    public static function setCache(\Zend\Cache\Core $cache)
+    public static function setCache(\Zend\Cache\Frontend $cache)
     {
         Data\Data::setCache($cache);
     }

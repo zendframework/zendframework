@@ -28,14 +28,14 @@ use Zend\Cache;
 
 /**
  * @uses       \Zend\Cache\Cache
- * @uses       \Zend\Cache\Backend\Backend
- * @uses       \Zend\Cache\Backend\BackendInterface
+ * @uses       \Zend\Cache\Backend\AbstractBackend
+ * @uses       \Zend\Cache\Backend\ExtendedBackend
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TestBackend extends Backend implements ExtendedInterface
+class TestBackend extends AbstractBackend implements ExtendedBackend
 {
     /**
      * Available options

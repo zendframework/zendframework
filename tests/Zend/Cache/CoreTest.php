@@ -41,7 +41,7 @@ class CoreTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!$this->_instance) {
-            $this->_instance = new Cache\Core(array());
+            $this->_instance = new Cache\Frontend\Core(array());
             $this->_backend = new TestBackend();
             $this->_instance->setBackend($this->_backend);
         }
@@ -54,7 +54,7 @@ class CoreTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorCorrectCall()
     {
-        $test = new Cache\Core(array('lifetime' => 3600, 'caching' => true));
+        $test = new Cache\Frontend\Core(array('lifetime' => 3600, 'caching' => true));
     }
 
     /**
@@ -62,7 +62,7 @@ class CoreTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructorCorrectCallWithZendConfig()
     {
-        $test = new Cache\Core(
+        $test = new Cache\Frontend\Core(
             new ZendConfig(array('lifetime' => 3600, 'caching' => true))
         );
     }
@@ -73,7 +73,7 @@ class CoreTest extends \PHPUnit_Framework_TestCase
     public function testSettingOptionsWithZendConfig()
     {
         $config = new ZendConfig(array('lifetime' => 3600, 'caching' => true));
-        $test = new Cache\Core();
+        $test = new Cache\Frontend\Core();
         $test->setConfig($config);
         $this->assertEquals(3600, $test->getOption('lifetime'));
     }
@@ -84,7 +84,7 @@ class CoreTest extends \PHPUnit_Framework_TestCase
     public function testSettingLifetimeAsEmptyIsInterpretedAsNull()
     {
         $config = new ZendConfig(array('lifetime' => '', 'caching' => true));
-        $test = new Cache\Core();
+        $test = new Cache\Frontend\Core();
         $test->setConfig($config);
         $this->assertSame(NULL, $test->getOption('lifetime'));
     }
@@ -92,7 +92,7 @@ class CoreTest extends \PHPUnit_Framework_TestCase
     public function testConstructorBadOption()
     {
         try {
-            $test = new Cache\Core(array(0 => 'bar', 'lifetime' => 3600));
+            $test = new Cache\Frontend\Core(array(0 => 'bar', 'lifetime' => 3600));
         } catch (Cache\Exception $e) {
             return;
         }

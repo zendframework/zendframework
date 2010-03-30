@@ -81,35 +81,33 @@ abstract class Cache
     /**
      * Factory
      *
-     * @param mixed  $frontend        frontend name (string) or Zend_Cache_Frontend_ object
-     * @param mixed  $backend         backend name (string) or Zend_Cache_Backend_ object
+     * @param mixed  $frontend        frontend name (string) or Frontend object
+     * @param mixed  $backend         backend name (string) or Backend object
      * @param array  $frontendOptions associative array of options for the corresponding frontend constructor
      * @param array  $backendOptions  associative array of options for the corresponding backend constructor
      * @param boolean $customFrontendNaming if true, the frontend argument is used as a complete class name ; if false, the frontend argument is used as the end of "Zend_Cache_Frontend_[...]" class name
      * @param boolean $customBackendNaming if true, the backend argument is used as a complete class name ; if false, the backend argument is used as the end of "Zend_Cache_Backend_[...]" class name
      * @param boolean $autoload if true, there will no require_once for backend and frontend (useful only for custom backends/frontends)
      * @throws \Zend\Cache\Exception
-     * @return Zend_Cache_Core|Zend_Cache_Frontend
+     * @return Zend\Cache\Frontend
      */
     public static function factory($frontend, $backend, $frontendOptions = array(), $backendOptions = array(), $customFrontendNaming = false, $customBackendNaming = false, $autoload = false)
     {
         if (is_string($backend)) {
             $backendObject = self::_makeBackend($backend, $backendOptions, $customBackendNaming, $autoload);
         } else {
-            if ((is_object($backend)) && (in_array('Zend\\Cache\\Backend\\BackendInterface', class_implements($backend)))) {
-                $backendObject = $backend;
-            } else {
-                self::throwException('backend must be a backend name (string) or an object which implements Zend_Cache_Backend_Interface');
+            if (!is_object($backend) || !in_array('Zend\\Cache\\Backend', class_implements($backend))) {
+                self::throwException('backend must be a backend name (string) or an object which implements Zend\\Cache\\Backend');
             }
+            $backendObject = $backend;
         }
         if (is_string($frontend)) {
             $frontendObject = self::_makeFrontend($frontend, $frontendOptions, $customFrontendNaming, $autoload);
         } else {
-            if (is_object($frontend)) {
-                $frontendObject = $frontend;
-            } else {
+            if (!is_object($frontend) || !in_array('Zend\\Cache\\Frontend', class_implements($frontend))) {
                 self::throwException('frontend must be a frontend name (string) or an object');
             }
+            $frontendObject = $frontend;
         }
         $frontendObject->setBackend($backendObject);
         return $frontendObject;
@@ -122,14 +120,14 @@ abstract class Cache
      * @param array   $backendOptions
      * @param boolean $customBackendNaming
      * @param boolean $autoload
-     * @return \Zend\Cache\Backend\Backend
+     * @return \Zend\Cache\Backend
      */
     public static function _makeBackend($backend, $backendOptions, $customBackendNaming = false, $autoload = false)
     {
         if (!$customBackendNaming) {
             $backend  = self::_normalizeName($backend);
         }
-        if (in_array($backend, Cache::$standardBackends)) {
+        if (in_array($backend, self::$standardBackends)) {
             // we use a standard backend
             $backendClass = 'Zend\\Cache\\Backend\\' . $backend;
             // security controls are explicit
@@ -137,7 +135,7 @@ abstract class Cache
         } else {
             // we use a custom backend
             if (!preg_match('~^[\w]+$~D', $backend)) {
-                Cache::throwException("Invalid backend name [$backend]");
+                self::throwException("Invalid backend name [$backend]");
             }
             if (!$customBackendNaming) {
                 // we use this boolean to avoid an API break
@@ -153,7 +151,11 @@ abstract class Cache
                 require_once $file;
             }
         }
-        return new $backendClass($backendOptions);
+        $backend = new $backendClass($backendOptions);
+        if (!$backend instanceof Backend) {
+            self::throwException('Backend must implement Zend\\Cache\\Backend');
+        }
+        return $backend;
     }
 
     /**
@@ -173,13 +175,13 @@ abstract class Cache
         if (in_array($frontend, self::$standardFrontends)) {
             // we use a standard frontend
             // For perfs reasons, with frontend == 'Core', we can interact with the Core itself
-            $frontendClass = 'Zend\\Cache\\' . ($frontend != 'Core' ? 'Frontend\\' : '') . $frontend;
+            $frontendClass = 'Zend\\Cache\\Frontend\\' . $frontend;
             // security controls are explicit
             require_once str_replace('\\', DIRECTORY_SEPARATOR, $frontendClass) . '.php';
         } else {
             // we use a custom frontend
             if (!preg_match('~^[\w]+$~D', $frontend)) {
-                Cache::throwException("Invalid frontend name [$frontend]");
+                self::throwException("Invalid frontend name [$frontend]");
             }
             if (!$customFrontendNaming) {
                 // we use this boolean to avoid an API break
@@ -195,7 +197,11 @@ abstract class Cache
                 require_once $file;
             }
         }
-        return new $frontendClass($frontendOptions);
+        $frontend = new $frontendClass($frontendOptions);
+        if (!$frontend instanceof Frontend) {
+            self::throwException('Frontend must be implement Zend\\Cache\\Frontend');
+        }
+        return $frontend;
     }
 
     /**

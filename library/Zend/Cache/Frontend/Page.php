@@ -24,16 +24,17 @@
  * @namespace
  */
 namespace Zend\Cache\Frontend;
-use Zend\Cache;
+use Zend\Cache\Cache;
 
 /**
- * @uses       \Zend\Cache\Core
+ * @uses       \Zend\Cache\Cache
+ * @uses       \Zend\Cache\Frontend\Core
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Frontend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Page extends Cache\Core
+class Page extends Core
 {
     /**
      * This frontend specific options
@@ -147,7 +148,7 @@ class Page extends Cache\Core
         }
         if (isset($this->_specificOptions['http_conditional'])) {
             if ($this->_specificOptions['http_conditional']) {
-                Cache\Cache::throwException('http_conditional is not implemented for the moment !');
+                Cache::throwException('http_conditional is not implemented for the moment !');
             }
         }
         $this->setOption('automatic_serialization', true);
@@ -163,11 +164,11 @@ class Page extends Cache\Core
     protected function _setDefaultOptions($options)
     {
         if (!is_array($options)) {
-            Cache\Cache::throwException('default_options must be an array !');
+            Cache::throwException('default_options must be an array !');
         }
         foreach ($options as $key=>$value) {
             if (!is_string($key)) {
-                Cache\Cache::throwException("invalid option [$key] !");
+                Cache::throwException("invalid option [$key] !");
             }
             $key = strtolower($key);
             if (isset($this->_specificOptions['default_options'][$key])) {
@@ -212,16 +213,16 @@ class Page extends Cache\Core
     protected function _setRegexps($regexps)
     {
         if (!is_array($regexps)) {
-            Cache\Cache::throwException('regexps option must be an array !');
+            Cache::throwException('regexps option must be an array !');
         }
         foreach ($regexps as $regexp=>$conf) {
             if (!is_array($conf)) {
-                Cache\Cache::throwException('regexps option must be an array of arrays !');
+                Cache::throwException('regexps option must be an array of arrays !');
             }
             $validKeys = array_keys($this->_specificOptions['default_options']);
             foreach ($conf as $key=>$value) {
                 if (!is_string($key)) {
-                    Cache\Cache::throwException("unknown option [$key] !");
+                    Cache::throwException("unknown option [$key] !");
                 }
                 $key = strtolower($key);
                 if (!in_array($key, $validKeys)) {

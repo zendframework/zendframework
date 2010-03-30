@@ -931,10 +931,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Backend/ExtendedInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Cache_Backend_ExtendedInterface</originalClassName>
-      <newRelativeFilePath>Zend/Cache/Backend/ExtendedInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Cache/Backend/ExtendedBackend.php</newRelativeFilePath>
       <newNamespace>Zend\Cache\Backend</newNamespace>
-      <newClassName>ExtendedInterface</newClassName>
-      <newFullyQualifiedName>Zend\Cache\Backend\ExtendedInterface</newFullyQualifiedName>
+      <newClassName>ExtendedBackend</newClassName>
+      <newFullyQualifiedName>Zend\Cache\Backend\ExtendedBackend</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Backend/File.php</originalRelativeFilePath>
@@ -947,10 +947,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Backend/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Cache_Backend_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Cache/Backend/BackendInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Cache\Backend</newNamespace>
-      <newClassName>BackendInterface</newClassName>
-      <newFullyQualifiedName>Zend\Cache\Backend\BackendInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Cache/Backend.php</newRelativeFilePath>
+      <newNamespace>Zend\Cache</newNamespace>
+      <newClassName>Backend</newClassName>
+      <newFullyQualifiedName>Zend\Cache\Backend</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Backend/Memcached.php</originalRelativeFilePath>
@@ -979,10 +979,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Backend/Test.php</originalRelativeFilePath>
       <originalClassName>Zend_Cache_Backend_Test</originalClassName>
-      <newRelativeFilePath>Zend/Cache/Backend/Test.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Cache/Backend/TestBackend.php</newRelativeFilePath>
       <newNamespace>Zend\Cache\Backend</newNamespace>
-      <newClassName>Test</newClassName>
-      <newFullyQualifiedName>Zend\Cache\Backend\Test</newFullyQualifiedName>
+      <newClassName>TestBackend</newClassName>
+      <newFullyQualifiedName>Zend\Cache\Backend\TestBackend</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Backend/TwoLevels.php</originalRelativeFilePath>
@@ -1027,26 +1027,26 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Backend/ZendServer.php</originalRelativeFilePath>
       <originalClassName>Zend_Cache_Backend_ZendServer</originalClassName>
-      <newRelativeFilePath>Zend/Cache/Backend/ZendServer/ZendServer.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Cache/Backend/ZendServer/AbstractZendServer.php</newRelativeFilePath>
       <newNamespace>Zend\Cache\Backend\ZendServer</newNamespace>
-      <newClassName>ZendServer</newClassName>
-      <newFullyQualifiedName>Zend\Cache\Backend\ZendServer\ZendServer</newFullyQualifiedName>
+      <newClassName>AbstractZendServer</newClassName>
+      <newFullyQualifiedName>Zend\Cache\Backend\ZendServer\AbstractZendServer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Backend.php</originalRelativeFilePath>
       <originalClassName>Zend_Cache_Backend</originalClassName>
-      <newRelativeFilePath>Zend/Cache/Backend/Backend.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Cache/Backend.php</newRelativeFilePath>
       <newNamespace>Zend\Cache\Backend</newNamespace>
       <newClassName>Backend</newClassName>
-      <newFullyQualifiedName>Zend\Cache\Backend\Backend</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Cache\Backend</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Core.php</originalRelativeFilePath>
       <originalClassName>Zend_Cache_Core</originalClassName>
-      <newRelativeFilePath>Zend/Cache/Core.php</newRelativeFilePath>
-      <newNamespace>Zend\Cache</newNamespace>
+      <newRelativeFilePath>Zend/Cache/Frontend/Core.php</newRelativeFilePath>
+      <newNamespace>Zend\Cache\Frontend</newNamespace>
       <newClassName>Core</newClassName>
-      <newFullyQualifiedName>Zend\Cache\Core</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Cache\Frontend\Core</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Cache/Exception.php</originalRelativeFilePath>

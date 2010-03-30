@@ -22,9 +22,11 @@
 /**
  * @namespace
  */
-namespace Zend\Cache;
-use Zend\Config;
-use Zend\Log;
+namespace Zend\Cache\Frontend;
+use Zend\Cache\Cache,
+    Zend\Cache\Frontend,
+    Zend\Config,
+    Zend\Log;
 
 /**
  * @uses       \Zend\Cache\Cache
@@ -34,13 +36,13 @@ use Zend\Log;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Core
+class Core implements Frontend
 {
     /**
      * Messages
      */
-    const BACKEND_NOT_SUPPORTS_TAG = 'tags are not supported by the current backend';
-    const BACKEND_NOT_IMPLEMENTS_EXTENDED_IF = 'Current backend doesn\'t implement the Zend_Cache_Backend_ExtendedInterface, so this method is not available';
+    const BACKEND_NOT_SUPPORTS_TAG           = 'tags are not supported by the current backend';
+    const BACKEND_NOT_IMPLEMENTS_EXTENDED_IF = 'Current backend doesn\'t implement the Zend\\Cache\\Backend\\ExtendedBackend, so this method is not available';
 
     /**
      * Backend Object
@@ -123,14 +125,14 @@ class Core
     private $_lastId = null;
 
     /**
-     * True if the backend implements Zend_Cache_Backend_ExtendedInterface
+     * True if the backend implements Zend\Cache\Backend\ExtendedBackend
      *
      * @var boolean $_extendedBackend
      */
     protected $_extendedBackend = false;
 
     /**
-     * Array of capabilities of the backend (only if it implements Zend_Cache_Backend_ExtendedInterface)
+     * Array of capabilities of the backend (only if it implements Zend\Cache\Backend\ExtendedBackend)
      *
      * @var array
      */
@@ -162,7 +164,7 @@ class Core
      * Set options using an instance of type Zend_Config
      *
      * @param \Zend\Config\Config $config
-     * @return \Zend\Cache\Core
+     * @return \Zend\Cache\Frontend\Core
      */
     public function setConfig(Config\Config $config)
     {
@@ -180,7 +182,7 @@ class Core
      * @throws \Zend\Cache\Exception
      * @return void
      */
-    public function setBackend(Backend\Backend $backendObject)
+    public function setBackend(\Zend\Cache\Backend $backendObject)
     {
         $this->_backend= $backendObject;
         // some options (listed in $_directivesList) have to be given
@@ -190,7 +192,7 @@ class Core
             $directives[$directive] = $this->_options[$directive];
         }
         $this->_backend->setDirectives($directives);
-        if (in_array('Zend\Cache\Backend\ExtendedInterface', class_implements($this->_backend))) {
+        if (in_array('Zend\\Cache\\Backend\\ExtendedBackend', class_implements($this->_backend))) {
             $this->_extendedBackend = true;
             $this->_backendCapabilities = $this->_backend->getCapabilities();
         }
@@ -378,14 +380,14 @@ class Core
                     if ($this->_backendCapabilities['automatic_cleaning']) {
                         $this->clean(Cache::CLEANING_MODE_OLD);
                     } else {
-                        $this->_log('Zend_Cache_Core::save() / automatic cleaning is not available/necessary with this backend');
+                        $this->_log('Zend\\Cache\\Frontend\\Core::save() / automatic cleaning is not available/necessary with this backend');
                     }
                 } else {
                     // Deprecated way (will be removed in next major version)
                     if (method_exists($this->_backend, 'isAutomaticCleaningAvailable') && ($this->_backend->isAutomaticCleaningAvailable())) {
                         $this->clean(Cache::CLEANING_MODE_OLD);
                     } else {
-                        $this->_log('Zend_Cache_Core::save() / automatic cleaning is not available/necessary with this backend');
+                        $this->_log('Zend\\Cache\\Frontend\\Core::save() / automatic cleaning is not available/necessary with this backend');
                     }
                 }
             }
@@ -404,7 +406,7 @@ class Core
         if (!$result) {
             // maybe the cache is corrupted, so we remove it !
             if ($this->_options['logging']) {
-                $this->_log("Zend_Cache_Core::save() : impossible to save cache (id=$id)");
+                $this->_log("Zend\Cache\Frontend\Core::save() : impossible to save cache (id=$id)");
             }
             $this->remove($id);
             return false;
@@ -412,7 +414,7 @@ class Core
         if ($this->_options['write_control']) {
             $data2 = $this->_backend->load($id, true);
             if ($data!=$data2) {
-                $this->_log('Zend_Cache_Core::save() / write_control : written and read data do not match');
+                $this->_log('Zend\Cache\Frontend\Core::save() / write_control : written and read data do not match');
                 $this->_backend->remove($id);
                 return false;
             }

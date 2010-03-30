@@ -25,7 +25,7 @@ namespace ZendTest\Locale;
 use \Zend\Locale\Locale,
     \Zend\Locale\Exception as LocaleException,
     \Zend\Cache\Cache,
-    \Zend\Cache\Core as CacheCore;
+    \Zend\Cache\Frontend\Core as CacheCore;
 
 /**
  * @category   Zend

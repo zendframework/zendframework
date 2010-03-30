@@ -51,7 +51,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
     {
         $manager = new Cache\Manager;
         $manager->setCache('cache1', $this->_cache);
-        $this->assertTrue($manager->getCache('cache1') instanceof Cache\Core);
+        $this->assertTrue($manager->getCache('cache1') instanceof Cache\Frontend);
     }
 
     public function testLazyLoadsDefaultPageCache()
@@ -65,7 +65,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
             )
         ));
         $cache = $manager->getCache('page');
-        $this->assertTrue($cache instanceof Cache\Core);
+        $this->assertTrue($cache instanceof Cache\Frontend);
     }
 
     public function testCanOverrideCacheFrontendNameConfiguration()
@@ -220,7 +220,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $pagetagConfig['backend']['options']['cache_dir'] = $this->getTmpDir();
         $manager->setCacheTemplate('pagetag', $pagetagConfig);
         $pagetag = $manager->getCache('page')->getBackend()->getOption('tag_cache');
-        $this->assertTrue($pagetag instanceof Cache\Core);
+        $this->assertTrue($pagetag instanceof Cache\Frontend);
     }
 
     // Helper Methods

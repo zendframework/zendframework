@@ -24,20 +24,21 @@
  * @namespace
  */
 namespace Zend\Cache\Backend;
-use Zend\Cache;
+use Zend\Cache,
+    Zend\Cache\Backend;
 
 /**
  * @uses       \Zend\Cache\Cache
- * @uses       \Zend\Cache\Backend\Backend
- * @uses       \Zend\Cache\Backend\BackendInterface
+ * @uses       \Zend\Cache\Backend
+ * @uses       \Zend\Cache\Backend\AbstractBackend
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class StaticBackend
-    extends Backend
-    implements BackendInterface
+    extends AbstractBackend
+    implements Backend
 {
     const INNER_CACHE_NAME = 'zend_cache_backend_static_tagcache';
 
@@ -60,7 +61,7 @@ class StaticBackend
 
     /**
      * Cache for handling tags
-     * @var \Zend\Cache\Core
+     * @var \Zend\Cache\Frontend
      */
     protected $_tagCache = null;
 
@@ -456,10 +457,10 @@ class StaticBackend
      * should be completely cleaned as the mapping of tags to caches will
      * have been irrevocably lost.
      *
-     * @param  \Zend\Cache\Core
+     * @param  \Zend\Cache\Frontend
      * @return void
      */
-    public function setInnerCache(Cache\Core $cache)
+    public function setInnerCache(Cache\Frontend $cache)
     {
         $this->_tagCache = $cache;
         $this->_options['tag_cache'] = $cache;
@@ -468,7 +469,7 @@ class StaticBackend
     /**
      * Get the Inner Cache if set
      *
-     * @return \Zend\Cache\Core
+     * @return \Zend\Cache\Frontend
      */
     public function getInnerCache()
     {

@@ -28,16 +28,16 @@ use Zend\Cache;
 
 /**
  * @uses       \Zend\Cache\Cache
- * @uses       \Zend\Cache\Backend\Backend
- * @uses       \Zend\Cache\Backend\ExtendedInterface
+ * @uses       \Zend\Cache\Backend\AbstractBackend
+ * @uses       \Zend\Cache\Backend\ExtendedBackend
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class BlackHole 
-    extends Backend 
-    implements ExtendedInterface
+    extends AbstractBackend 
+    implements ExtendedBackend
 {
     /**
      * Test if a cache is available for the given id and (if yes) return it (false else)

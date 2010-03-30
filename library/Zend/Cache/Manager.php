@@ -94,7 +94,7 @@ class Manager
                 ),
             ),
             'backend' => array(
-                'name'    => 'StaticBackend',
+                'name'    => 'Static-Backend',
                 'options' => array(
                     'public_dir' => '../public',
                 ),
@@ -123,10 +123,10 @@ class Manager
      * Set a new cache for the Cache Manager to contain
      *
      * @param  string $name
-     * @param  \Zend\Cache\Core $cache
+     * @param  \Zend\Cache\Frontend $cache
      * @return \Zend\Cache\Manager
      */
-    public function setCache($name, Core $cache)
+    public function setCache($name, Frontend $cache)
     {
         $this->_caches[$name] = $cache;
         return $this;

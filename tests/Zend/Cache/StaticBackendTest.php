@@ -77,7 +77,7 @@ class StaticBackendTest extends TestCommonBackend
     public function testOptionsSetTagCache()
     {
         $test = new Cache\Backend\StaticBackend(array('tag_cache'=>$this->_innerCache));
-        $this->assertTrue($test->getInnerCache() instanceof Cache\Core);
+        $this->assertTrue($test->getInnerCache() instanceof Cache\Frontend);
     }
 
     public function testSaveCorrectCall()

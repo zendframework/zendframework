@@ -1,17 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15854 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.form.introduction">
     <title>Zend_Form</title>
 
     <para>
-        Komponent Zend_Form upraszcza tworzenie i obsługę formularzy w twojej
+        Komponent Zend_Form upraszcza tworzenie i obsługę formularzy w 
         aplikacji. Zapewnia realizację następujących zadań:
     </para>
 
     <itemizedlist>
-        <listitem><para>Filtrowanie i weryfikację wprowadzonych informacji</para></listitem>
+        <listitem><para>Filtrowanie i weryfikacja wprowadzonych informacji</para></listitem>
         <listitem><para>Ustalanie kolejności elementów</para></listitem>
         <listitem><para>Renderowanie elementów i formularzy</para></listitem>
         <listitem><para>Grupowanie elementów i formularzy</para></listitem>
-        <listitem><para>Konfigurację elementów i formularzy</para></listitem>
+        <listitem><para>Konfiguracja elementów i formularzy</para></listitem>
     </itemizedlist>
 
     <para>

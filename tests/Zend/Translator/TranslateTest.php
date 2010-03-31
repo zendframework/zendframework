@@ -658,7 +658,6 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddingAdapterToSourcealsUsingOwnRule()
     {
-print "\n=============================================";
         $translate = new Translator\Translator(
             Translator\Translator::AN_ARRAY,
             array('singular' =>

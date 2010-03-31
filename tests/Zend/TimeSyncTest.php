@@ -21,15 +21,14 @@
  */
 
 /**
+ * Test helper
+ */
+require_once dirname(__FILE__ ) . '/../TestHelper.php';
+
+/**
  * Zend_timeSync
  */
 require_once 'Zend/TimeSync.php';
-
-/**
- * PHPUnit test case
- */
-require_once 'PHPUnit/Framework/TestCase.php';
-
 
 /**
  * @category   Zend

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21213 -->
+<!-- EN-Revision: 21661 -->
 <sect1 id="zend.validate.messages">
 
     <title>検証メッセージ</title>
@@ -8,7 +8,6 @@
     <para>
         <classname>Zend_Validate</classname> を継承したバリデータには、
         検証に失敗したときに使用するメッセージが用意されています。
-        <!-- TODO : to be translated -->
         You can use this information to set your own messages,
         or to translate existing messages which a validator could return to something different.
     </para>
@@ -82,10 +81,12 @@ $validator->setMessage('Please enter a lower value', Zend_Validate_GreaterThan::
 
         <programlisting language="php"><![CDATA[
 $translator = new Zend_Translate(
-    'array',
-    '/resources/languages',
-    $language,
-    array('scan' => Zend_Translate::LOCALE_DIRECTORY)
+    array(
+        'adapter' => 'array',
+        'content' => '/resources/languages',
+        'locale'  => $language,
+        'scan' => Zend_Translate::LOCALE_DIRECTORY
+    )
 );
 Zend_Validate_Abstract::setDefaultTranslator($translator);
 ]]></programlisting>

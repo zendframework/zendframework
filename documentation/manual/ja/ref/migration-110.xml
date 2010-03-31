@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21076 -->
+<!-- EN-Revision: 21661 -->
 <sect1 id="migration.110">
     <title>Zend Framework 1.10</title>
 
@@ -244,7 +244,9 @@ $authors = $feed->getAuthors()->getValues();
             </para>
 
             <programlisting language="php"><![CDATA[
-$trans = new Zend_Translate('xliff', '/path/to/source', $locale, array('useId' => false));
+$trans = new Zend_Translate(
+    'xliff', '/path/to/source', $locale, array('useId' => false)
+);
 ]]></programlisting>
         </sect3>
     </sect2>

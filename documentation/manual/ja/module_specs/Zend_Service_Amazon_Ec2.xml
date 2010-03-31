@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20818 -->
 <sect1 id="zend.service.amazon.ec2" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Service_Amazon_Ec2</title>
 
     <sect2 id="zend.service.amazon.ec2.introduction">
         <title>導入</title>
+
         <para>
             <classname>Zend_Service_Amazon_Ec2</classname>は融通性のあるクランドコンピューティング(EC2)へのインターフェイスを提供します。
         </para>
     </sect2>
+
     <sect2 id="zend.service.amazon.ec2.whatis">
         <title>Amazon Ec2とは？</title>
+
         <para>
             Amazon EC2は、<acronym>API</acronym>や役に立つツールやユーティリティーを使って、
             Amazonのデータセンターにあるサーバインスタンスを起動したり管理したりできるWebサービスです。
             あなたはいつでも必要なだけ、合法な限り、Amazon EC2サーバインスタンスを使うことができます。
         </para>
     </sect2>
+
     <sect2 id="zend.service.amazon.ec2.staticmethods">
         <title>静的メソッド</title>
+
         <para>
             Ec2 クラスの使い勝手をよくするために、ふたつの静的メソッドが用意されています。
             これは、Ec2 の任意の要素から実行することができます。
@@ -28,12 +33,15 @@
             新しいオブジェクトを作成する際に、
             コンストラクタにキーを渡す必要がなくなります。
         </para>
+
         <example id="zend.service.amazon.ec2.staticmethods.setkeys">
             <title>setKeys() の例</title>
+
             <programlisting language="php"><![CDATA[
 Zend_Service_Amazon_Ec2_Ebs::setKeys('aws_key','aws_secret_key');
 ]]></programlisting>
         </example>
+
         <para>
             作業するリージョンを設定するには、<code>setRegion</code>
             をコールして Amazon Ec2 リージョンを設定します。
@@ -41,14 +49,18 @@ Zend_Service_Amazon_Ec2_Ebs::setKeys('aws_key','aws_secret_key');
             と eu-west-1 のふたつだけです。
             無効な値を渡した場合は例外をスローします。
         </para>
+
         <example id="zend.service.amazon.ec2.staticmethods.setregion">
             <title>setRegion() の例</title>
+
             <programlisting language="php"><![CDATA[
 Zend_Service_Amazon_Ec2_Ebs::setRegion('us-east-1');
 ]]></programlisting>
         </example>
+
         <note id="zend.service.amazon.ec2.staticmethods.setregion.note">
             <title>Amazon Ec2 リージョンの設定</title>
+
             <para>
                 別の方法として、各クラスを作成する際のコンストラクタの
                 3 番目の引数としてリージョンを設定することもできます。

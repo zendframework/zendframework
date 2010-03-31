@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21194 -->
+<!-- EN-Revision: 21661 -->
 <sect1 id="zend.translate.using">
 
     <title>翻訳アダプタの使用法</title>
@@ -38,8 +38,19 @@ print "Here is line two\n";
     <example id="zend.translate.using.example2">
         <title>多言語対応の PHP コードの例</title>
         <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('gettext', '/my/path/source-de.mo', 'de');
-$translate->addTranslation('/path/to/translation/fr-source.mo', 'fr');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/my/path/source-de.mo',
+        'locale'  => 'de'
+    )
+);
+$translate->addTranslation(
+    array(
+        'content' => '/path/to/translation/fr-source.mo',
+        'locale'  => 'fr'
+    )
+);
 
 print $translate->_("Example") . "\n";
 print "=======\n";
@@ -62,10 +73,12 @@ print $translate->_("Here is line two") . "\n";
         新しい <classname>Zend_Translate</classname> オブジェクトを作成し、もととなるアダプタを定義します。
 
         <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate
-    'gettext',
-    '/path/to/translation/source-de.mo',
-    'de'
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translation/source-de.mo',
+        'locale'  => 'de'
+    )
 );
 ]]></programlisting>
 

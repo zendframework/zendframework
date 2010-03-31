@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19433 -->
+<!-- EN-Revision: 21661 -->
 <sect3 id="zend.view.helpers.initial.translate">
 
     <title>翻訳ヘルパー</title>
@@ -66,7 +66,13 @@
 
         <programlisting language="php"><![CDATA[
 // サンプルアダプタ
-$adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
+$adapter = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => array('simple' => 'einfach'),
+        'locale'  => 'de'
+    )
+);
 Zend_Registry::set('Zend_Translate', $adapter);
 
 // ビューの中で
@@ -94,7 +100,13 @@ echo $this->translate('simple');
 
         <programlisting language="php"><![CDATA[
 // ビューの中で
-$adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
+$adapter = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => array('simple' => 'einfach'),
+        'locale'  => 'de'
+    )
+);
 $this->translate()->setTranslator($adapter)->translate('simple');
 // これは 'einfach' を返します
 ]]></programlisting>
@@ -112,7 +124,13 @@ $this->translate()->setTranslator($adapter)->translate('simple');
 
         <programlisting language="php"><![CDATA[
 // サンプルアダプタ
-$adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
+$adapter = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => array('simple' => 'einfach'),
+        'locale'  => 'de'
+    )
+);
 
 // アダプタを初期化します
 $translate = new Zend_View_Helper_Translate($adapter);

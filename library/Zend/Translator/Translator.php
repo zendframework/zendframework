@@ -38,7 +38,7 @@ class Translator
     /**
      * Adapter names constants
      */
-    const AN_ARRAY   = 'Array';
+    const AN_ARRAY   = 'ArrayAdapter';
     const AN_CSV     = 'Csv';
     const AN_GETTEXT = 'Gettext';
     const AN_INI     = 'Ini';
@@ -85,12 +85,10 @@ class Translator
      */
     public function setAdapter($adapter, $data = null, $locale = null, array $options = array())
     {
-        if (\Zend\Loader::isReadable('Zend/Translator/Adapter/' . ucfirst($adapter). '.php')) {
-            $adapter = 'Zend\\Translator\\Adapter\\' . ucfirst($adapter);
-        }
+        $adapter = 'Zend\\Translator\\Adapter\\' . ucfirst($adapter);
 
-        if (!class_exists($adapter)) {
-            \Zend\Loader::loadClass($adapter);
+        if (!class_exists($adapter, true)) {
+            throw new Exception("Adapter " . $adapter . " does not exist and cannot be loaded.");
         }
 
         if (self::$_cache !== null) {

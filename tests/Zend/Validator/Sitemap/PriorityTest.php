@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Validate\Sitemap;
+namespace ZendTest\Validator\Sitemap;
 
 /**
  * Tests Zend_Validate_Sitemap_Priority

@@ -26,10 +26,7 @@
 namespace Zend\Translator\Adapter;
 use Zend\Log;
 use Zend\Translator;
-use Zend\Translator;
 use Zend\Locale;
-use Zend\Locale;
-use Zend\Translator;
 
 /**
  * Basic adapter class for each translation source adapter

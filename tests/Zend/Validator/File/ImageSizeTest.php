@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Validate\File;
+namespace ZendTest\Validator\File;
 use Zend\Validator\File;
 use Zend\Validator;
 

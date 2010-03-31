@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Validate\File;
+namespace ZendTest\Validator\File;
 use Zend\Validator\File;
 
 // Call Zend_Validate_File_Md5Test::main() if this source file is executed directly.

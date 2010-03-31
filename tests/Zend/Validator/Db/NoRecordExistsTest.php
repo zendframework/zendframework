@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Validate\Db;
+namespace ZendTest\Validator\Db;
 use Zend\Db\Table;
 use Zend\Validator\Db;
 

@@ -195,7 +195,7 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
             $this->markTestSkipped('Mcrypt extension not installed');
         }
 
-        $filter = new Zend_Filter_Encrypt(array('adapter' => 'Mcrypt', 'key' => 'testkey'));
+        $filter = new EncryptFilter(array('adapter' => 'Mcrypt', 'key' => 'testkey'));
         $filter->setVector('testvect');
         $output = $filter('teststring');
 

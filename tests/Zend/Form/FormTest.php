@@ -1509,6 +1509,25 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->form->isValidPartial($foo));
     } 
 
+    public function testPopulateWithElementsBelongTo()
+    {
+        $this->form->addSubForm(new Zend_Form_SubForm(), 'foo')
+                   ->foo->setElementsBelongTo('foo[foo]')
+                        ->addSubForm(new Zend_Form_SubForm(), 'foo')
+                        ->foo->setIsArray(false)
+                             ->addElement('text', 'foo');
+
+        $foo = array('foo' =>
+                     array('foo' =>
+                           array('foo' =>
+                                 array('foo' => 'foo Value'))));
+
+        $this->form->setView($this->getView())
+                   ->populate($foo);
+
+        $this->assertRegexp('/value=.foo Value./', $this->form->render());
+    }
+
 
     // Display groups
 

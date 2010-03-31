@@ -1226,13 +1226,16 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      */
     public function setDefaults(array $defaults)
     {
+        if ($this->isArray()) {
+            $defaults = $this->_dissolveArrayValue($defaults, $this->getElementsBelongTo());
+        }
         foreach ($this->getElements() as $name => $element) {
             if (array_key_exists($name, $defaults)) {
                 $this->setDefault($name, $defaults[$name]);
             }
         }
         foreach ($this->getSubForms() as $name => $form) {
-            if (array_key_exists($name, $defaults)) {
+            if (!$form->isArray() && array_key_exists($name, $defaults)) {
                 $form->setDefaults($defaults[$name]);
             } else {
                 $form->setDefaults($defaults);

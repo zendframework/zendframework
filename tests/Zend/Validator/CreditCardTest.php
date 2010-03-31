@@ -61,7 +61,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
             'ABCDEF'           => false
             );
         foreach ($valuesExpected as $input => $result) {
-            $this->assertEquals($result, $validator->isValid($input), 'Test failed at ' . $input);
+            $this->assertEquals($result, $validator->isValid((string)$input), 'Test failed at ' . $input);
         }
     }
 
@@ -132,7 +132,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
             'ABCDEF'           => false
             );
         foreach ($valuesExpected as $input => $result) {
-            $this->assertEquals($result, $validator->isValid($input));
+            $this->assertEquals($result, $validator->isValid((string)$input));
         }
     }
 
@@ -156,7 +156,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Validator\CreditCard();
         $this->assertEquals(null, $validator->getService());
-        $validator->setService(array('Zend_Validate_CreditCardTest', 'staticCallback'));
+        $validator->setService(array('\ZendTest\Validator\CreditCardTest', 'staticCallback'));
         $valuesExpected = array(
             '4111111111111111' => false,
             '5404000000000001' => false,
@@ -179,7 +179,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
         $validator = new Validator\CreditCard(
             array(
                 'type' => Validator\CreditCard::VISA,
-                'service' => array('Zend_Validate_CreditCardTest', 'staticCallback')
+                'service' => array('\ZendTest\Validator\CreditCardTest', 'staticCallback')
             )
         );
 
@@ -191,7 +191,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
             'ABCDEF'           => false
             );
         foreach ($valuesExpected as $input => $result) {
-            $this->assertEquals($result, $validator->isValid($input));
+            $this->assertEquals($result, $validator->isValid((string)$input));
         }
     }
 
@@ -205,7 +205,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
         $validator = new Validator\CreditCard();
         $this->assertEquals(null, $validator->getService());
         try {
-            $validator->setService(array('Zend_Validate_CreditCardTest', 'nocallback'));
+            $validator->setService(array('\ZendTest\Validator\CreditCardTest', 'nocallback'));
             $this->fail('Exception expected');
         } catch(\Zend\Exception $e) {
             $this->assertContains('Invalid callback given', $e->getMessage());
@@ -233,11 +233,11 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
      */
     public function testOptionalConstructorParameterByConfigObject()
     {
-        $config = new Config\Config(array('type' => 'Visa', 'service' => array('Zend_Validate_CreditCardTest', 'staticCallback')));
+        $config = new Config\Config(array('type' => 'Visa', 'service' => array('\ZendTest\Validator\CreditCardTest', 'staticCallback')));
 
         $validator = new Validator\CreditCard($config);
         $this->assertEquals(array('Visa'), $validator->getType());
-        $this->assertEquals(array('Zend_Validate_CreditCardTest', 'staticCallback'), $validator->getService());
+        $this->assertEquals(array('\ZendTest\Validator\CreditCardTest', 'staticCallback'), $validator->getService());
     }
 
     /**
@@ -247,9 +247,9 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
      */
     public function testOptionalConstructorParameter()
     {
-        $validator = new Validator\CreditCard('Visa', array('Zend_Validate_CreditCardTest', 'staticCallback'));
+        $validator = new Validator\CreditCard('Visa', array('\ZendTest\Validator\CreditCardTest', 'staticCallback'));
         $this->assertEquals(array('Visa'), $validator->getType());
-        $this->assertEquals(array('Zend_Validate_CreditCardTest', 'staticCallback'), $validator->getService());
+        $this->assertEquals(array('\ZendTest\Validator\CreditCardTest', 'staticCallback'), $validator->getService());
     }
 
     /**

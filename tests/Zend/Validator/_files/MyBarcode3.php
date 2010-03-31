@@ -1,4 +1,5 @@
 <?php
+namespace Zend\Validator\Barcode;
 class MyBarcode3 extends \Zend\Validator\Barcode\AdapterAbstract
 {
     protected $_length     = array(1,3,6, -1);

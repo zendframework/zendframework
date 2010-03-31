@@ -26,18 +26,6 @@
 namespace ZendTest\Validator;
 use Zend\Validator;
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Validate_CallbackTest::main');
-}
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validate_Callback
- */
-
 /**
  * @category   Zend
  * @package    Zend_Validate
@@ -73,7 +61,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testStaticCallback()
     {
         $valid = new Validator\Callback(
-            array('Zend_Validate_CallbackTest', 'staticCallback')
+            array('\ZendTest\Validator\CallbackTest', 'staticCallback')
         );
         $this->assertTrue($valid->isValid('test'));
     }
@@ -133,8 +121,4 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('something', $args);
         return $args;
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Validate_CallbackTest::main') {
-    \Zend_Validate_CallbackTest::main();
 }

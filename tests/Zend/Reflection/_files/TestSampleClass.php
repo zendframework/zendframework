@@ -56,7 +56,7 @@ class Zend_Reflection_TestSampleClass2 implements IteratorAggregate
  * Blah Blah
  *
  */
-abstract class Zend_Reflection_TestSampleClass3 extends ArrayObject implements Iterator, Traversable
+abstract class Zend_Reflection_TestSampleClass3 extends ArrayObject
 {
 
 

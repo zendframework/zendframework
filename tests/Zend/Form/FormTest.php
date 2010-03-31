@@ -1528,6 +1528,57 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->assertRegexp('/value=.foo Value./', $this->form->render());
     }
 
+    public function _setup9350()
+    {
+        $this->form->addSubForm(new Zend_Form_SubForm(), 'foo')
+                   ->foo->setElementsBelongTo('foo[foo]')
+                        ->addSubForm(new Zend_Form_SubForm(), 'foo')
+                        ->foo->setIsArray(false)
+                             ->addElement('text', 'foo')
+                             ->foo->addValidator('Identical',
+                                                 false,
+                                                 array('foo Value'));
+
+        $this->form->foo->addSubForm(new Zend_Form_SubForm(), 'baz')
+                   ->baz->setIsArray(false)
+                        ->addSubForm(new Zend_Form_SubForm(), 'baz')
+                        ->baz->setElementsBelongTo('baz[baz]')
+                             ->addElement('text', 'baz')
+                             ->baz->addValidator('Identical',
+                                                 false,
+                                                 array('baz Value'));
+
+        $data = array('valid' => array('foo' =>
+                                       array('foo' =>
+                                             array('foo' =>
+                                                   array('foo' => 'foo Value'),
+                                                   'baz' => 
+                                                   array('baz' => 
+                                                         array('baz' =>
+                                                               array('baz' => 'baz Value')))))),
+                      'invalid' => array('foo' =>
+                                         array('foo' =>
+                                               array('foo' =>
+                                                     array('foo' => 'foo Invalid'),
+                                                     'baz' => 
+                                                     array('baz' => 
+                                                           array('baz' =>
+                                                                 array('baz' => 'baz Value')))))),
+                      'partial' => array('foo' =>
+                                       array('foo' =>
+                                             array('baz' => 
+                                                   array('baz' => 
+                                                         array('baz' =>
+                                                               array('baz' => 'baz Value')))))));
+        return $data;
+    }
+
+    public function testGetValidValuesWithElementsBelongTo()
+    {
+        $data = $this->_setup9350();
+        $this->assertSame($this->form->getValidValues($data['invalid']), $data['partial']);
+    }
+
 
     // Display groups
 

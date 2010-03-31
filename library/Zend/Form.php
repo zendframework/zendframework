@@ -1326,10 +1326,14 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      * values to persist them.
      *
      * @param  array $data
+     * @param  bool $suppressArrayNotation
      * @return array
      */
-    public function getValidValues($data)
+    public function getValidValues($data, $suppressArrayNotation = false)
     {
+        if ($this->isArray()) {
+            $data = $this->_dissolveArrayValue($data, $this->getElementsBelongTo());
+        }
         $values = array();
         foreach ($this->getElements() as $key => $element) {
             if (isset($data[$key])) {
@@ -1339,9 +1343,21 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             }
         }
         foreach ($this->getSubForms() as $key => $form) {
-            if (isset($data[$key])) {
-                $values[$key] = $form->getValidValues($data[$key]);
+            if (isset($data[$key]) && !$form->isArray()) {
+                $tmp = $form->getValidValues($data[$key]);
+                if (!empty($tmp)) {
+                    $values[$key] = $tmp;
+                }
+            } else {
+                $tmp = $form->getValidValues($data, true);
+                if (!empty($tmp)) {
+                    $fValues = $this->_attachToArray($tmp, $form->getElementsBelongTo());
+                    $values = array_merge($values, $fValues);
+                }
             }
+        }
+        if (!$suppressArrayNotation && $this->isArray() && !empty($values)) {
+            $values = $this->_attachToArray($values, $this->getElementsBelongTo());
         }
 
         return $values;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21606 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.consuming-rss">
     <title>Einen RSS Feed konsumieren</title>
@@ -52,9 +52,9 @@ echo $channel->category['domain'];
 
     <para>
         Meistens möchtest Du einen Feed durchlaufen und etwas mit seinen Einträgen machen.
-        <classname>Zend_Feed_Abstract</classname> implementiert das <code>Iterator</code> Interface
-        von <acronym>PHP</acronym>, so dass die Ausgabe aller Artikelüberschriften eines Channels
-        nur dies erfordert:
+        <classname>Zend_Feed_Abstract</classname> implementiert das <classname>Iterator</classname>
+        Interface von <acronym>PHP</acronym>, so dass die Ausgabe aller Artikelüberschriften eines
+        Channels nur dies erfordert:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -76,19 +76,20 @@ foreach ($channel as $item) {
     <para>
         <itemizedlist>
             <listitem>
-                <para><code>title</code> - Der Name des Channels</para>
+                <para><property>title</property> - Der Name des Channels</para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>link</code> - Die <acronym>URL</acronym> einer Website, die dem Channel
-                    entspricht
+                    <property>link</property> - Die <acronym>URL</acronym> einer Website, die dem
+                    Channel entspricht
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>description</code> - Ein oder mehr Sätze, die den Channel beschreiben
+                    <property>description</property> - Ein oder mehr Sätze, die den Channel
+                    beschreiben
                 </para>
             </listitem>
         </itemizedlist>
@@ -102,28 +103,30 @@ foreach ($channel as $item) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>pubDate</code> - Das Erscheinungsdatum dieses Informationssatzes, im
-                    <acronym>RFC</acronym> 822 Datumsformat
+                    <property>pubDate</property> - Das Erscheinungsdatum dieses Informationssatzes,
+                    im <acronym>RFC</acronym> 822 Datumsformat
                 </para>
             </listitem>
 
             <listitem>
-                <para><code>language</code> - Die Sprache, in der dieser Channel verfasst ist</para>
+                <para>
+                    <property>language</property> - Die Sprache, in der dieser Channel verfasst ist
+                </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>category</code> - Eine oder mehrere Kategorien (durch mehrfache Tags
-                    spezifiziert), zu denen der Channel gehört
+                    <property>category</property> - Eine oder mehrere Kategorien (durch mehrfache
+                    Tags spezifiziert), zu denen der Channel gehört
                 </para>
             </listitem>
         </itemizedlist>
     </para>
 
     <para>
-        <acronym>RSS</acronym> <code>&lt;item&gt;</code> Elemente haben keine strikt erforderlichen
-        Elemente. Dennoch müssen entweder <code>title</code> oder <code>description</code> vorhanden
-        sein.
+        <acronym>RSS</acronym> <emphasis>&lt;item&gt;</emphasis> Elemente haben keine strikt
+        erforderlichen Elemente. Dennoch müssen entweder <property>title</property> oder
+        <property>description</property> vorhanden sein.
     </para>
 
     <para>
@@ -133,38 +136,39 @@ foreach ($channel as $item) {
     <para>
         <itemizedlist>
             <listitem>
-                <para><code>title</code> - Die Überschrift des Eintrags</para>
+                <para><property>title</property> - Die Überschrift des Eintrags</para>
             </listitem>
 
             <listitem>
-                <para><code>link</code> - Die <acronym>URL</acronym> des Eintrags</para>
+                <para><property>link</property> - Die <acronym>URL</acronym> des Eintrags</para>
             </listitem>
 
             <listitem>
-                <para><code>description</code> - Eine Zusammenfassung des Eintrags</para>
+                <para><property>description</property> - Eine Zusammenfassung des Eintrags</para>
             </listitem>
 
             <listitem>
-                <para><code>author</code> - Die E-Mail Adresse des Autoren</para>
+                <para><property>author</property> - Die E-Mail Adresse des Autoren</para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>category</code> - Eine oder mehrere Kategorien, zu denen der Eintrag
-                    gehört
+                    <property>category</property> - Eine oder mehrere Kategorien, zu denen der
+                    Eintrag gehört
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>comments</code> - <acronym>URL</acronym> der Kommentare zu diesem Eintrag
+                    <property>comments</property> - <acronym>URL</acronym> der Kommentare zu diesem
+                    Eintrag
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>pubDate</code> - Das Datum, an dem der Eintrag veröffentlicht wurde,
-                    im <acronym>RFC</acronym> 822 Datumsformat
+                    <property>pubDate</property> - Das Datum, an dem der Eintrag veröffentlicht
+                    wurde, im <acronym>RFC</acronym> 822 Datumsformat
                 </para>
             </listitem>
         </itemizedlist>

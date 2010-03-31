@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21606 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.elements">
     <title>Erstellen von Form Elementen mit Hilfe von Zend_Form_Element</title>
@@ -584,8 +584,8 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
         <para>
             Prüfungen werden in der Reihenfolge ausgeführt. Jede Prüfung wird ausgeführt solange bis
             eine Prüfung die mit einem <constant>TRUE</constant> Wert für
-            <code>breakChainOnFailure</code> bei Ihrer Prüfung fehlschlägt. Man sollte sichergehen,
-            dass Prüfungen in einer begründeten Reihenfolge definiert werden.
+            <varname>$breakChainOnFailure</varname> bei Ihrer Prüfung fehlschlägt. Man sollte
+            sichergehen, dass Prüfungen in einer begründeten Reihenfolge definiert werden.
         </para>
 
         <para>
@@ -628,11 +628,11 @@ $messages = $element->getMessages();
                 <para>
                     Standardmäßig, wenn ein Element benötigt wird, es aber keine 'NotEmpty'
                     Prüfung hat, wird <methodname>isValid()</methodname> eine an oberster Stelle im
-                    Stack platzieren. Das heißt, dass das Flag folgende semantische Bedeutung
-                    bekommt: Wenn kein Wert übergeben wird, wird die Übertragung sofort ungülig und
-                    der Benutzer wird informiert, was die anderen Prüfungen davon abhält,
-                    ausgeführt zu werden, auf Daten, von denen wir bereits wissen, dass sie
-                    ungültig sind.
+                    Stack platzieren, mit gesetztem <varname>$breakChainOnFailure</varname> Flag.
+                    Das heißt, dass das Flag folgende semantische Bedeutung bekommt: Wenn kein Wert
+                    übergeben wird, wird die Übertragung sofort ungülig und der Benutzer wird
+                    informiert, was die anderen Prüfungen davon abhält, ausgeführt zu werden, auf
+                    Daten, von denen wir bereits wissen, dass sie ungültig sind.
                 </para>
 
                 <para>
@@ -717,8 +717,8 @@ $messages = $element->getMessages();
 
             <listitem>
                 <para>
-                    <code>addValidator($nameOrValidator, $breakChainOnFailure = false, array
-                        $options = null)</code>
+                    <methodname>addValidator($nameOrValidator, $breakChainOnFailure = false, array
+                        $options = null)</methodname>
                 </para>
             </listitem>
 
@@ -1365,8 +1365,8 @@ $element->class = 'text;
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader,
-                            $type)</code>
+                            <methodname>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader,
+                                $type)</methodname>
                         </para>
                     </listitem>
 
@@ -1392,8 +1392,8 @@ $element->class = 'text;
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>addValidator($validator, $breakChainOnFailure = false, $options =
-                            array())</code>
+                            <methodname>addValidator($validator, $breakChainOnFailure = false,
+                                $options = array())</methodname>
                         </para>
                     </listitem>
 
@@ -1524,8 +1524,8 @@ $element->class = 'text;
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>prefixPath</code> wird an <methodname>addPrefixPaths()</methodname>
-                    übergeben
+                    <property>prefixPath</property> wird an
+                    <methodname>addPrefixPaths()</methodname> übergeben
                 </para>
             </listitem>
 
@@ -1537,16 +1537,16 @@ $element->class = 'text;
                 <itemizedlist>
                     <listitem>
                         <para>
-                                <code>setAttrib</code> (über <code>setAttribs</code>
+                                <property>setAttrib</property> (über <property>setAttribs</property>
                                 <emphasis>wird</emphasis> es funktionieren)
                         </para>
                     </listitem>
 
-                    <listitem><para><code>setConfig</code></para></listitem>
-                    <listitem><para><code>setOptions</code></para></listitem>
-                    <listitem><para><code>setPluginLoader</code></para></listitem>
-                    <listitem><para><code>setTranslator</code></para></listitem>
-                    <listitem><para><code>setView</code></para></listitem>
+                    <listitem><para><property>setConfig</property></para></listitem>
+                    <listitem><para><property>setOptions</property></para></listitem>
+                    <listitem><para><property>setPluginLoader</property></para></listitem>
+                    <listitem><para><property>setTranslator</property></para></listitem>
+                    <listitem><para><property>setView</property></para></listitem>
                 </itemizedlist>
             </listitem>
         </itemizedlist>
@@ -1615,11 +1615,11 @@ decorators.label.decorator = "Label"
 
         <para>
             Als Beispiel nehmen wir an, dass alle Text Elemente eines Formulars die erstellt werden
-            mit <code>StringTrim</code> gefiltert werden müssen, mit einem gemeinsamen Regulären
-            Ausdruck und das ein eigener Dekorator 'My_Decorator_TextItem' verwendet werden soll,
-            der für die Darstellung von ihnen erstellt wurde; zusätzlich gibt es eine Anzahl an
-            Standardattributen, wie 'size', 'maxLength', und 'class', die spezifiziert werden
-            sollen. So ein Element könnte wie folgt definiert werden:
+            mit <classname>StringTrim</classname> gefiltert werden müssen, mit einem gemeinsamen
+            Regulären Ausdruck und das ein eigener Dekorator 'My_Decorator_TextItem' verwendet
+            werden soll, der für die Darstellung von ihnen erstellt wurde; zusätzlich gibt es eine
+            Anzahl an Standardattributen, wie 'size', 'maxLength', und 'class', die spezifiziert
+            werden sollen. So ein Element könnte wie folgt definiert werden:
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21606 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -171,12 +171,12 @@ $validators = array(
         </note>
 
         <para>
-            Es kann ein spezieller "Wildcard" Regelschlüssel <code>'*'</code>, entweder im Array des
-            Filters oder im Array des Prüfers, verwendet werden. Das bedeutet das der Filter oder
-            Prüfer der in dieser Regel deklariert wird allen Feldern der Eingabedaten zugewiesen
-            wird. Es gilt zu beachten das die Reihenfolge der Einträge im Array des Filters oder im
-            Array des Prüfers bedeutend ist; die Regeln werden in der gleichen Reihenfolge
-            zugewiesen in dem diese deklariert wurden.
+            Es kann ein spezieller "Wildcard" Regelschlüssel <emphasis>'*'</emphasis>, entweder im
+            Array des Filters oder im Array des Prüfers, verwendet werden. Das bedeutet das der
+            Filter oder Prüfer der in dieser Regel deklariert wird allen Feldern der Eingabedaten
+            zugewiesen wird. Es gilt zu beachten das die Reihenfolge der Einträge im Array des
+            Filters oder im Array des Prüfers bedeutend ist; die Regeln werden in der gleichen
+            Reihenfolge zugewiesen in dem diese deklariert wurden.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -288,7 +288,7 @@ if ($input->isValid('month')) {
                     <para>
                         <emphasis>Fehlende</emphasis> Felder sind jene die nicht in den
                         Eingabedaten vorhanden sind, aber im Metakommando
-                        <code>'presence'=>'required'</code> (Siehe die <link
+                        <command>'presence'=>'required'</command> (Siehe die <link
                             linkend="zend.filter.input.metacommands.presence">spätere Sektion</link>
                         über Metakommandos) deklariert wurden.
                     </para>
@@ -576,7 +576,7 @@ $validators = array(
 
             <para>
                 Wenn die Prüfung dieser Regel fehlschlägt wird der Schlüssel der Regel
-                (<code>'password'</code>) im Rückgabewert von <methodname>getInvalid()</methodname>
+                ('password') im Rückgabewert von <methodname>getInvalid()</methodname>
                 verwendet und nicht eine der benannten Felder im 'fields' Metakommando.
             </para>
         </sect3>
@@ -666,10 +666,10 @@ echo $input->month; // gibt 1 aus
 
             <para>
                 Standardmäßig, wenn ein Feld in den Eingabedaten existiert, wird Ihm der Prüfer
-                zugeordnet selbst wenn der Wert des Feldes ein leerer String ist (<code>''</code>).
-                Das kann zu einem Fehler in der Prüfung führen. Zum Beispiel, wenn ein Prüfer auf
-                Ziffern prüft und es keine gibt weil ein leerer String keine Zeichen hat, weil der
-                Prüfer dann die Daten als fehlerhaft meldet.
+                zugeordnet selbst wenn der Wert des Feldes ein leerer String ist
+                (<emphasis>''</emphasis>). Das kann zu einem Fehler in der Prüfung führen. Zum
+                Beispiel, wenn ein Prüfer auf Ziffern prüft und es keine gibt weil ein leerer String
+                keine Zeichen hat, weil der Prüfer dann die Daten als fehlerhaft meldet.
             </para>
 
             <para>
@@ -999,10 +999,11 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
             <para>
                 Ab der Version 1.5 sollte die Funktion
                 <methodname>addNamespace($namespace)</methodname> nicht mehr verwendet werden und
-                wurde durch den Plugin Lader getauscht. Und <code>addFilterPrefixPath</code> sowie
-                <code>addValidatorPrefixPath</code> wurden hinzugefügt. Auch die Konstante
-                <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant> sollte jetzt nicht mehr
-                verwendet werden. Die Konstanten
+                wurde durch den Plugin Lader getauscht. Und
+                <methodname>addFilterPrefixPath()</methodname> sowie
+                <methodname>addValidatorPrefixPath()</methodname> wurden hinzugefügt. Auch die
+                Konstante <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant> sollte jetzt nicht
+                mehr verwendet werden. Die Konstanten
                 <constant>Zend_Filter_Input::VALIDATOR_NAMESPACE</constant> und
                 <constant>Zend_Filter_Input::FILTER_NAMESPACE</constant> sind seit den Releases
                 nach 1.7.0 vorhanden.
@@ -1012,10 +1013,11 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
         <note>
             <para>
                 Seit Version 1.0.4 wurde <constant>Zend_Filter_Input::NAMESPACE</constant>, der
-                den Wert <code>namespace</code> hatte, auf
+                den Wert <property>namespace</property> hatte, auf
                 <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant>, mit dem Wert
-                <code>inputNamespace</code> geändert, um der Reservierung des Schlüsselwortes
-                <code>namespace</code> ab <acronym>PHP</acronym> 5.3 gerecht zu werden.
+                <property>inputNamespace</property> geändert, um der Reservierung des
+                Schlüsselwortes <property>namespace</property> ab <acronym>PHP</acronym> 5.3 gerecht
+                zu werden.
             </para>
         </note>
     </sect2>

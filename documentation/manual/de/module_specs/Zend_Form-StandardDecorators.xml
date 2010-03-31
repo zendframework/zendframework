@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21614 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardDecorators">
     <title>Standard Formular Dekoratoren die mit dem Zend Framework ausgeliefert werden</title>
@@ -34,10 +34,10 @@ class Util
 ]]></programlisting>
 
         <para>
-            Dieser Callback kann mit <code>array('Util', 'label')</code> spezifiziert werden, und
-            würde einige (falsche) HTML Markups für das Label erzeugen. Der Callback Dekorator würde
-            entweder ersetzen, voranstellen, oder dem originalen Inhalt den zurückgegebenen Wert
-            anhängen.
+            Dieser Callback kann mit <methodname>array('Util', 'label')</methodname> spezifiziert
+            werden, und würde einige (falsche) <acronym>HTML</acronym> Markups für das Label
+            erzeugen. Der Callback Dekorator würde entweder ersetzen, voranstellen, oder dem
+            originalen Inhalt den zurückgegebenen Wert anhängen.
         </para>
 
         <para>
@@ -79,8 +79,8 @@ class Util
 
         <para>
             Standardmäßig, wenn keine Beschreibung vorhanden ist, wird keine Ausgabe erzeugt. Wenn
-            die Beschreibung vorhanden ist, wird sie standardmäßig in ein HTML
-            <code>&lt;p&gt;</code> Tag eingebunden, es kann aber ein Tag durch die Übergabe einer
+            die Beschreibung vorhanden ist, wird sie standardmäßig in ein <acronym>HTML</acronym>
+            <emphasis>p</emphasis> Tag eingebunden, es kann aber ein Tag durch die Übergabe einer
             <code>tag</code> Option spezifiziert werden, bei der Erstellung des Dekorators, oder
             durch Aufruf von <methodname>setTag()</methodname>. Zusätzlich kann eine Klasse für das
             Tag spezifiziert werden, indem die <code>class</code> Option verwendet wird, oder durch

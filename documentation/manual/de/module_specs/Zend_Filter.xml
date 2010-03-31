@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21193 -->
+<!-- EN-Revision: 21606 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
     <title>Einführung</title>
@@ -35,11 +35,10 @@
             Situation ab welcher Weg mehr zutrifft. Ein Filter der HTML Entititäten entfernt
             operiert innerhalb der Beschreibung der ersten Definition von Filter - ein Operator der
             ein Subset von einer Eingabe produziert. Ein Filter der HTML Entititäten auskommentiert,
-            wandelt die Eingabe um (z.B. "<code>&amp;</code>" wird umgewandelt in
-            "<code>&amp;amp;</code>"). Solche Fälle zu unterstützen ist für Web Entwickler sehr
-            wichtig und "zu filtern", im Kontext der Verwendung von
-            <classname>Zend_Filter</classname>, bedeutet einige Umwandlungen über Eingabedaten
-            durchzuführen.
+            wandelt die Eingabe um (z.B. "&amp;" wird umgewandelt in "&amp;amp;"). Solche Fälle zu
+            unterstützen ist für Web Entwickler sehr wichtig und "zu filtern", im Kontext der
+            Verwendung von <classname>Zend_Filter</classname>, bedeutet einige Umwandlungen über
+            Eingabedaten durchzuführen.
         </para>
     </sect2>
 
@@ -55,8 +54,8 @@
 
         <para>
             Nachfolgend ist ein grundsätzliches Beispiel der Verwendung eines Filters über zwei
-            Eingabedaten, einem Undzeichen (<code>&amp;</code>) und einem Hochkommazeichen
-            (<code>&quot;</code>):
+            Eingabedaten, einem Und-Zeichen (<emphasis>&amp;</emphasis>) und einem Hochkommazeichen
+            (<emphasis>&quot;</emphasis>):
 
             <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();

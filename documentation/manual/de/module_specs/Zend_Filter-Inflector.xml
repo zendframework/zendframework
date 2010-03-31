@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21217 -->
+<!-- EN-Revision: 21606 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.inflector">
     <title>Zend_Filter_Inflector</title>
@@ -49,7 +49,7 @@ $filtered = $inflector->filter(array('page' => $string));
             Eine Beugung benötigt ein <emphasis>Ziel</emphasis> (target) und ein oder mehrere
             <emphasis>Regeln</emphasis> (rules). Ein Ziel ist grundsätzlich ein String der
             Platzhalter für Variablen definiert die ersetzt werden sollen. Sie werden durch das
-            Voranstellen eines ':' spezifiziert: <code>:script</code>.
+            Voranstellen eines ':' spezifiziert: <emphasis>:script</emphasis>.
         </para>
 
         <para>
@@ -146,8 +146,8 @@ $inflector->setTargetReplacementIdentifier('#');
         <para>
             Typischerweise wird das Ziel über den Konstruktor gesetzt. Trotzdem kann es Ziel später
             geändert werden (zum Beispiel, um die Standardbeugung in Kernkomponenten die dem
-            <code>ViewRenderer</code> oder <classname>Zend_Layout</classname> zu verändern).
-            <methodname>setTarget()</methodname> kann für diese Zwecke verwendet werden:
+            <classname>ViewRenderer</classname> oder <classname>Zend_Layout</classname> zu
+            verändern). <methodname>setTarget()</methodname> kann für diese Zwecke verwendet werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -451,20 +451,20 @@ $inflector->addRules(array(
 
         <itemizedlist>
             <listitem>
-                <para><code>target</code> spezifiziert das Beugungsziel.</para>
+                <para><property>target</property> spezifiziert das Beugungsziel.</para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>filterPrefixPath</code> spezifiziert ein oder mehrere Filter Präfix/Pfad
-                    Paare für die Verwendung mit dem Beugungsmechanismus.
+                    <property>filterPrefixPath</property> spezifiziert ein oder mehrere Filter
+                    Präfix/Pfad Paare für die Verwendung mit dem Beugungsmechanismus.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>throwTargetExceptionsOn</code> sollte ein Boolscher Wert sein der anzeigt
-                    ob eine Ausnahme geworfen wird, oder nicht geworfen wird, wenn ein
+                    <property>throwTargetExceptionsOn</property> sollte ein Boolscher Wert sein der
+                    anzeigt ob eine Ausnahme geworfen wird, oder nicht geworfen wird, wenn ein
                     Idenzifizierer der ersetzt werden soll nach der Beugung noch immer vorhanden
                     ist.
                 </para>
@@ -472,16 +472,16 @@ $inflector->addRules(array(
 
             <listitem>
                 <para>
-                    <code>targetReplacementIdentifier</code> spezifiziert das Zeichen das verwendet
-                    wird wenn Ersetzungsvariablen im Zielstring identifiziert werden.
+                    <property>targetReplacementIdentifier</property> spezifiziert das Zeichen das
+                    verwendet wird wenn Ersetzungsvariablen im Zielstring identifiziert werden.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>rules</code> spezifiziert ein Array von Beugungsregeln; es sollte aus
-                    Schlüsseln bestehen die entweder Werte oder Arrays von Werten spezifizieren, die
-                    mit <methodname>addRules()</methodname> übereinstimmen.
+                    <property>rules</property> spezifiziert ein Array von Beugungsregeln; es sollte
+                    aus Schlüsseln bestehen die entweder Werte oder Arrays von Werten spezifizieren,
+                    die mit <methodname>addRules()</methodname> übereinstimmen.
                 </para>
             </listitem>
         </itemizedlist>

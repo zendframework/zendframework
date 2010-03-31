@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21606 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.decorators">
     <title>Erstellen von eigenem Form Markup durch Zend_Form_Decorator</title>
@@ -56,17 +56,17 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>placement</code>: Die Platzierung kann entweder 'append' oder 'prepend'
-                    sein (unabhängig von der Schreibweise), und definiert ob der Inhalt der
-                    <methodname>render()</methodname> übergeben wird, angehängt oder vorangestellt
-                    wird. Im Fall das ein Dekorator den Inhalt ersetzt wird diese Einstellung
-                    ignoriert. Der Standardwert ist anhängen (append).
+                    <property>placement</property>: Die Platzierung kann entweder 'append' oder
+                    'prepend' sein (unabhängig von der Schreibweise), und definiert ob der Inhalt
+                    der <methodname>render()</methodname> übergeben wird, angehängt oder
+                    vorangestellt wird. Im Fall das ein Dekorator den Inhalt ersetzt wird diese
+                    Einstellung ignoriert. Der Standardwert ist anhängen (append).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>separator</code>: Der Separator wird zwischen dem Inhalt der an
+                    <property>separator</property>: Der Separator wird zwischen dem Inhalt der an
                     <methodname>render()</methodname> übergeben wird und durch den Dekorator neu
                     erstelltem Inhalt verwendet, oder zwischen Teilen die durch den Dekorator
                     dargestellt werden (z.B. FormElements verwenden Separatoren zwischen jedem
@@ -183,7 +183,7 @@ interface Zend_Form_Decorator_Interface
         <para>
             Als Beispiel nehmen wir an, dass wir die Anzahl an verwendeten Dekoratoren verringern
             wollen, und einen "gemeinsamen" Dekorator erstellen der die Darstellung von Label,
-            Element, jeglicher Fehlermeldungen, und Beschreibung in einem HTML <code>div</code>
+            Element, jeglicher Fehlermeldungen, und Beschreibung in einem HTML 'div'
             übernimmt. So ein 'gemeinsamer' Dekorator kann wie folgt erstellt werden:
         </para>
 
@@ -358,9 +358,9 @@ class My_Decorator_Errors
         </para>
 
         <para>
-            Um das zu tun muss einfach <code>render[DecoratorName]()</code> aufgerufen werden, wobei
-            "[DecoratorName]" der "Kurzname" des eigenen Dekorators ist; optional kann Inhalt
-            eingefügt werden der dargestellt werden soll. Zum Beispiel:
+            Um das zu tun muss einfach <methodname>render[DecoratorName]()</methodname> aufgerufen
+            werden, wobei "[DecoratorName]" der "Kurzname" des eigenen Dekorators ist; optional kann
+            Inhalt eingefügt werden der dargestellt werden soll. Zum Beispiel:
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21613 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.overview">
     <title>Übersicht</title>
@@ -233,5 +233,79 @@ $logger->setEventItem('pid', getmypid());
             die Writer nicht wissen was zu tun ist solange das Formatter Objekt nicht über das neue
             Element informiert wurde. Siehe in die Sektion über Formatter um mehr darüber zu lernen.
         </para>
+    </sect2>
+
+    <sect2 id="zend.log.overview.as-errorHandler">
+        <title>PHP Fehler loggen</title>
+
+        <para>
+            Zend_Log kann auch verwendet werden um PHP Fehler zu loggen. Der Aufruf von
+            <methodname>registerErrorHandler()</methodname> fügt Zend_Log vor dem aktuellen Error
+            Handler hinzu, und gibt den Fehler genauso weiter.
+        </para>
+
+        <table id="zend.log.overview.as-errorHandler.properties.table-1">
+            <title>Zend_Log Events für PHP Fehler haben ein zusätzliches Feld welches
+            <methodname>handler (int $errno ,string $errstr [,string $errfile [,int $errline [,array
+                $errcontext]]])</methodname> von <ulink
+                url="http://us3.php.net/manual/en/function.set-error-handler.php">set_error_handler</ulink>
+            entspricht</title>
+
+            <tgroup cols="3">
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Parameter für den Error Handler</entry>
+                        <entry>Beschreibung</entry>
+                    </row>
+                </thead>
+
+                <tbody>
+                    <row>
+                        <entry>message</entry>
+                        <entry>errstr</entry>
+                        <entry>Enthält die Fehlermeldung als String.</entry>
+                    </row>
+
+                    <row>
+                        <entry>errno</entry>
+                        <entry>errno</entry>
+                        <entry>Enthält das Level des geworfenen Fehlers als Integer.</entry>
+                    </row>
+
+                    <row>
+                        <entry>file</entry>
+                        <entry>errfile</entry>
+
+                        <entry>
+                            Enthält den Dateinamen in dem der Fehler geworfen wurde als String
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry>line</entry>
+                        <entry>errline</entry>
+
+                        <entry>
+                            Enthält die Zeilennummer in welcher der Fehler geworfen wurde als
+                            Integer
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry>context</entry>
+                        <entry>errcontext</entry>
+
+                        <entry>
+                            (Optional) Ein Array welches auf eine aktive Symboltabelle zeigt in
+                            welcher der Fehler aufgetreten ist. In anderen Worden, enthält
+                            errcontext ein Array jeder Variable welche in dem Scope existiert hat
+                            in welchem der Fehler geworfen wurde. Benutzerdefinierte Error Handler
+                            müssen den Error Context nicht verändern.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
     </sect2>
 </sect1>

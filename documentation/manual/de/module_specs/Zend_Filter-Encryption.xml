@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21212 -->
+<!-- EN-Revision: 21606 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
 
     <para>
         Dieser Filter verschlüsselt beliebige Strings mit den angegebenen Einstellungen. Hierfür
-        verwendet er Adapter. Aktuell gibt es Adapter für die <code>Mcrypt</code> und
-        <code>OpenSSL</code> Erweiterungen von php.
+        verwendet er Adapter. Aktuell gibt es Adapter für die <classname>Mcrypt</classname> und
+        <classname>OpenSSL</classname> Erweiterungen von php.
     </para>
 
     <para>
@@ -38,8 +38,8 @@ $filter->setAdapter('openssl');
 
     <note>
         <para>
-            Wenn man die <code>adapter</code> Option nicht angibt oder setAdapter nicht verwendet,
-            dann wird standardmäßig der <code>Mcrypt</code> Adapter verwendet.
+            Wenn man die <property>adapter</property> Option nicht angibt oder setAdapter nicht
+            verwendet, dann wird standardmäßig der <classname>Mcrypt</classname> Adapter verwendet.
         </para>
     </note>
 
@@ -47,8 +47,8 @@ $filter->setAdapter('openssl');
         <title>Verschlüsselung mit Mcrypt</title>
 
         <para>
-            Wenn man die <code>Mcrypt</code> Erweiterung installiert hat, kann man den
-            <code>Mcrypt</code> Adapter verwenden. Dieser Adapter unterstützt bei der
+            Wenn man die <classname>Mcrypt</classname> Erweiterung installiert hat, kann man den
+            <classname>Mcrypt</classname> Adapter verwenden. Dieser Adapter unterstützt bei der
             Initialisierung die folgenden Optionen:
         </para>
 
@@ -65,7 +65,7 @@ $filter->setAdapter('openssl');
                     <emphasis>algorithm</emphasis>: Der Algorithmus der verwendet werden soll. Das
                     sollte einer der Algorithmus Cipher sein die man unter <ulink
                         url="http://php.net/mcrypt">PHP's Mcrypt Cipers</ulink> finden kann. Wenn er
-                    nicht gesetzt wird, ist er standardmäßig <code>blowfish</code>.
+                    nicht gesetzt wird, ist er standardmäßig 'blowfish'.
                 </para>
             </listitem>
 
@@ -82,7 +82,7 @@ $filter->setAdapter('openssl');
                     <emphasis>mode</emphasis>: Der Verschlüsselungs Modus der verwendet werden soll.
                     Es sollte einer der Modi sein der unter <ulink url="http://php.net/mcrypt">PHP's
                     Mcrypt Modi</ulink> gefunden werden kann. Wenn er nicht gesetzt wird, ist er
-                    standardmäßig <code>cbc</code>.
+                    standardmäßig 'cbc'.
                 </para>
             </listitem>
 
@@ -90,7 +90,7 @@ $filter->setAdapter('openssl');
                 <para>
                     <emphasis>mode_directory</emphasis>: Der Verzeichnis in dem der Modus gefunden
                     werden kann. Wenn es nicht gesetzt wird, ist es standardmäßig der Pfad der in
-                    der <code>mcrypt</code> Erweiterung gesetzt wurde.
+                    der <classname>Mcrypt</classname> Erweiterung gesetzt wurde.
                 </para>
             </listitem>
 
@@ -180,8 +180,8 @@ print $encrypted;
         <title>Verschlüsselung mit OpenSSL</title>
 
         <para>
-            Wenn man die <code>OpenSSL</code> Erweiterung installiert hat, kann man den
-            <code>OpenSSL</code> Adapter verwenden. Dieser Adapter unterstützt bei der
+            Wenn man die <classname>OpenSSL</classname> Erweiterung installiert hat, kann man den
+            <classname>OpenSSL</classname> Adapter verwenden. Dieser Adapter unterstützt bei der
             Instanziierung die folgenden Optionen:
         </para>
 
@@ -245,8 +245,8 @@ $filter->setPublicKey(array(
 
         <note>
             <para>
-                Es ist zu beachten das der <code>OpenSSL</code> Adapter nicht funktionieren wird
-                wenn keine gültigen Schlüsseln angegeben werden.
+                Es ist zu beachten das der <classname>OpenSSL</classname> Adapter nicht
+                funktionieren wird wenn keine gültigen Schlüsseln angegeben werden.
             </para>
         </note>
 
@@ -286,8 +286,8 @@ $filter->setPassphrase('mypassphrase');
         </para>
 
         <para>
-            Unser komplettes Beispiel für die Verschlüsselung von Inhalten mit <code>OpenSSL</code>
-            schaut wie folgt aus.
+            Unser komplettes Beispiel für die Verschlüsselung von Inhalten mit
+            <classname>OpenSSL</classname> schaut wie folgt aus.
         </para>
 
         <programlisting language="php"><![CDATA[

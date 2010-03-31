@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21049 -->
+<!-- EN-Revision: 21643 -->
 <!-- Reviewed: 21049 -->
 <sect1 id="zend.translate.additional">
     <title>Zusätzliche Features für Übersetzungen</title>
@@ -643,6 +643,70 @@ $translate = new Zend_Translate(
 ]]></programlisting>
             </sect4>
         </sect3>
+    </sect2>
+
+    <sect2 id="zend.translate.additional.combination">
+        <title>Mehrere Übersetzungs-Quellen kombinieren</title>
+
+        <para>
+            Wenn man mit mehreren Übersetzungen arbeitet kann es zu Situationen kommen in denen man
+            unterschiedliche Quell-Typen verwenden will. Zum Beispiel die Ressource Dateien welche
+            vom Framework angeboten werden und eigene Übersetzungen welche durch Verwendung des
+            Gettext Adapters vorhanden sind.
+        </para>
+
+        <para>
+            Durch Kombination mehrerer Übersetzungs-Adapter kann man diese in einer Instanz
+            verwenden. Siehe das folgende Beispiel:
+        </para>
+
+        <programlisting><![CDATA[
+$translate = new Zend_Translate(
+    'gettext',
+    '\path\to\translation.mo',
+    'en'
+);
+
+$translate_second = new Zend_Translate(
+    'array',
+    '\resources\languages\en\Zend_Validate.php',
+    'en'
+);
+
+$translate->addTranslation($translate_second);
+]]></programlisting>
+
+        <para>
+            Jetzt enthält die erste Instanz alle Übersetzungen der zweiten Instanz und man kann Sie
+            in der Anwendung sogar dann verwenden wenn unterschiedliche Quell-Typen verwendet
+            werden.
+        </para>
+
+        <note>
+            <title>Speicher sparen</title>
+
+            <para>
+                Wie man sehen kann wird die zweite Instanz nicht länger verwendet sobald man Sie der
+                ersten Instanz hinzugefügt hat. Um etwas Speicher zu sparen kan man Sie entfernen
+                (unset).
+            </para>
+        </note>
+
+        <para>
+            Wenn man Verzeichnisse scannt kann es sein dass man nur eine definierte Sprache
+            verwenden will. Die vordefinierten Ressourcen zum Beispiel sind in mehr als 10 Sprachen
+            vorhanden. Aber die eigene Sprache ist nicht in allen dieser Sprachen erhältlich.
+            Deshalb kann man auch nur eine Sprache vom zweiten Adapter hinzufügen.
+        </para>
+
+        <programlisting><![CDATA[
+$translate->addTranslation($translate_second, 'en');
+]]></programlisting>
+
+        <para>
+            Das erlaubt es trotzdem durch die Verzeichnisse zu scannen und nur jene Sprachen hinzu
+            zu fügen welche für die eigene Anwendung relevant sind.
+        </para>
     </sect2>
 
     <sect2 id="zend.translate.additional.istranslated">

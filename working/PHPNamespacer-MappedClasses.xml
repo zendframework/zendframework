@@ -16003,106 +16003,106 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Translate/Adapter/Array.php</originalRelativeFilePath>
       <originalClassName>Zend_Translate_Adapter_Array</originalClassName>
-      <newRelativeFilePath>Zend/Translate/Adapter/Array.php</newRelativeFilePath>
-      <newNamespace>Zend\Translate\Adapter</newNamespace>
-      <newClassName>Array</newClassName>
-      <newFullyQualifiedName>Zend\Translate\Adapter\Array</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Translator/Adapter/ArrayAdapter.php</newRelativeFilePath>
+      <newNamespace>Zend\Translator\AdapterAdapter</newNamespace>
+      <newClassName>ArrayAdapter</newClassName>
+      <newFullyQualifiedName>Zend\Translator\Adapter\ArrayAdapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Translate/Adapter/Csv.php</originalRelativeFilePath>
       <originalClassName>Zend_Translate_Adapter_Csv</originalClassName>
-      <newRelativeFilePath>Zend/Translate/Adapter/Csv.php</newRelativeFilePath>
-      <newNamespace>Zend\Translate\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Translator/Adapter/Csv.php</newRelativeFilePath>
+      <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Csv</newClassName>
-      <newFullyQualifiedName>Zend\Translate\Adapter\Csv</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Translator\Adapter\Csv</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Translate/Adapter/Gettext.php</originalRelativeFilePath>
       <originalClassName>Zend_Translate_Adapter_Gettext</originalClassName>
-      <newRelativeFilePath>Zend/Translate/Adapter/Gettext.php</newRelativeFilePath>
-      <newNamespace>Zend\Translate\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Translator/Adapter/Gettext.php</newRelativeFilePath>
+      <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Gettext</newClassName>
-      <newFullyQualifiedName>Zend\Translate\Adapter\Gettext</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Translator\Adapter\Gettext</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Translate/Adapter/Ini.php</originalRelativeFilePath>
       <originalClassName>Zend_Translate_Adapter_Ini</originalClassName>
-      <newRelativeFilePath>Zend/Translate/Adapter/Ini.php</newRelativeFilePath>
-      <newNamespace>Zend\Translate\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Translator/Adapter/Ini.php</newRelativeFilePath>
+      <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Ini</newClassName>
-      <newFullyQualifiedName>Zend\Translate\Adapter\Ini</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Translator\Adapter\Ini</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Translate/Adapter/Qt.php</originalRelativeFilePath>
       <originalClassName>Zend_Translate_Adapter_Qt</originalClassName>
-      <newRelativeFilePath>Zend/Translate/Adapter/Qt.php</newRelativeFilePath>
-      <newNamespace>Zend\Translate\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Translator/Adapter/Qt.php</newRelativeFilePath>
+      <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Qt</newClassName>
-      <newFullyQualifiedName>Zend\Translate\Adapter\Qt</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Translator\Adapter\Qt</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Translate/Adapter/Tbx.php</originalRelativeFilePath>
       <originalClassName>Zend_Translate_Adapter_Tbx</originalClassName>
-      <newRelativeFilePath>Zend/Translate/Adapter/Tbx.php</newRelativeFilePath>
-      <newNamespace>Zend\Translate\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Translator/Adapter/Tbx.php</newRelativeFilePath>
+      <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Tbx</newClassName>
-      <newFullyQualifiedName>Zend\Translate\Adapter\Tbx</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Translator\Adapter\Tbx</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Translate/Adapter/Tmx.php</originalRelativeFilePath>
       <originalClassName>Zend_Translate_Adapter_Tmx</originalClassName>
-      <newRelativeFilePath>Zend/Translate/Adapter/Tmx.php</newRelativeFilePath>
-      <newNamespace>Zend\Translate\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Translator/Adapter/Tmx.php</newRelativeFilePath>
+      <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Tmx</newClassName>
-      <newFullyQualifiedName>Zend\Translate\Adapter\Tmx</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Translator\Adapter\Tmx</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Translate/Adapter/Xliff.php</originalRelativeFilePath>
       <originalClassName>Zend_Translate_Adapter_Xliff</originalClassName>
-      <newRelativeFilePath>Zend/Translate/Adapter/Xliff.php</newRelativeFilePath>
-      <newNamespace>Zend\Translate\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Translator/Adapter/Xliff.php</newRelativeFilePath>
+      <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Xliff</newClassName>
-      <newFullyQualifiedName>Zend\Translate\Adapter\Xliff</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Translator\Adapter\Xliff</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Translate/Adapter/XmlTm.php</originalRelativeFilePath>
       <originalClassName>Zend_Translate_Adapter_XmlTm</originalClassName>
-      <newRelativeFilePath>Zend/Translate/Adapter/XmlTm.php</newRelativeFilePath>
-      <newNamespace>Zend\Translate\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Translator/Adapter/XmlTm.php</newRelativeFilePath>
+      <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>XmlTm</newClassName>
-      <newFullyQualifiedName>Zend\Translate\Adapter\XmlTm</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Translator\Adapter\XmlTm</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Translate/Adapter.php</originalRelativeFilePath>
       <originalClassName>Zend_Translate_Adapter</originalClassName>
-      <newRelativeFilePath>Zend/Translate/Adapter/Adapter.php</newRelativeFilePath>
-      <newNamespace>Zend\Translate\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Translator/Adapter/Adapter.php</newRelativeFilePath>
+      <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Adapter</newClassName>
-      <newFullyQualifiedName>Zend\Translate\Adapter\Adapter</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Translator\Adapter\Adapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Translate/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Translate_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Translate/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Translate</newNamespace>
+      <newRelativeFilePath>Zend/Translator/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\Translator</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Translate\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Translator\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Translate/Plural.php</originalRelativeFilePath>
       <originalClassName>Zend_Translate_Plural</originalClassName>
-      <newRelativeFilePath>Zend/Translate/Plural.php</newRelativeFilePath>
-      <newNamespace>Zend\Translate</newNamespace>
+      <newRelativeFilePath>Zend/Translator/Plural.php</newRelativeFilePath>
+      <newNamespace>Zend\Translator</newNamespace>
       <newClassName>Plural</newClassName>
-      <newFullyQualifiedName>Zend\Translate\Plural</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Translator\Plural</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Translate.php</originalRelativeFilePath>
       <originalClassName>Zend_Translate</originalClassName>
-      <newRelativeFilePath>Zend/Translate/Translate.php</newRelativeFilePath>
-      <newNamespace>Zend\Translate</newNamespace>
-      <newClassName>Translate</newClassName>
-      <newFullyQualifiedName>Zend\Translate\Translate</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Translator/Translator.php</newRelativeFilePath>
+      <newNamespace>Zend\Translator</newNamespace>
+      <newClassName>Translator</newClassName>
+      <newFullyQualifiedName>Zend\Translator\Translator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Uri/Exception.php</originalRelativeFilePath>
@@ -16131,698 +16131,698 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Validate/AbstractValidate.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
-      <newClassName>AbstractValidate</newClassName>
-      <newFullyQualifiedName>Zend\Validate\AbstractValidate</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Validator/AbstractValidator.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
+      <newClassName>AbstractValidator</newClassName>
+      <newFullyQualifiedName>Zend\Validator\AbstractValidator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Alnum.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Alnum</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Alnum.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Alnum.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Alnum</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Alnum</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Alnum</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Alpha.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Alpha</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Alpha.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Alpha.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Alpha</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Alpha</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Alpha</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/AdapterAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_AdapterAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/AdapterAbstract.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/AdapterAbstract.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>AdapterAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\AdapterAbstract</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\AdapterAbstract</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/AdapterInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_AdapterInterface</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/AdapterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/AdapterInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>AdapterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\AdapterInterface</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\AdapterInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Code25.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Code25</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Code25.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Code25.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Code25</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Code25</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Code25</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Code25interleaved.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Code25interleaved</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Code25interleaved.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Code25interleaved.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Code25interleaved</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Code25interleaved</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Code25interleaved</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Code39.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Code39</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Code39.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Code39.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Code39</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Code39</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Code39</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Code39ext.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Code39ext</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Code39ext.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Code39ext.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Code39ext</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Code39ext</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Code39ext</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Code93.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Code93</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Code93.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Code93.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Code93</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Code93</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Code93</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Code93ext.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Code93ext</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Code93ext.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Code93ext.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Code93ext</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Code93ext</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Code93ext</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Ean12.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Ean12</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Ean12.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Ean12.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Ean12</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Ean12</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Ean12</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Ean13.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Ean13</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Ean13.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Ean13.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Ean13</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Ean13</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Ean13</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Ean14.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Ean14</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Ean14.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Ean14.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Ean14</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Ean14</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Ean14</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Ean18.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Ean18</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Ean18.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Ean18.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Ean18</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Ean18</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Ean18</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Ean2.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Ean2</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Ean2.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Ean2.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Ean2</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Ean2</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Ean2</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Ean5.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Ean5</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Ean5.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Ean5.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Ean5</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Ean5</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Ean5</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Ean8.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Ean8</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Ean8.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Ean8.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Ean8</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Ean8</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Ean8</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Gtin12.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Gtin12</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Gtin12.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Gtin12.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Gtin12</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Gtin12</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Gtin12</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Gtin13.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Gtin13</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Gtin13.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Gtin13.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Gtin13</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Gtin13</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Gtin13</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Gtin14.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Gtin14</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Gtin14.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Gtin14.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Gtin14</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Gtin14</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Gtin14</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Identcode.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Identcode</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Identcode.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Identcode.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Identcode</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Identcode</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Identcode</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Intelligentmail.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Intelligentmail</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Intelligentmail.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Intelligentmail.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Intelligentmail</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Intelligentmail</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Intelligentmail</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Issn.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Issn</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Issn.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Issn.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Issn</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Issn</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Issn</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Itf14.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Itf14</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Itf14.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Itf14.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Itf14</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Itf14</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Itf14</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Leitcode.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Leitcode</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Leitcode.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Leitcode.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Leitcode</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Leitcode</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Leitcode</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Planet.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Planet</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Planet.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Planet.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Planet</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Planet</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Planet</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Postnet.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Postnet</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Postnet.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Postnet.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Postnet</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Postnet</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Postnet</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Royalmail.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Royalmail</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Royalmail.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Royalmail.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Royalmail</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Royalmail</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Royalmail</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Sscc.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Sscc</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Sscc.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Sscc.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Sscc</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Sscc</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Sscc</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Upca.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Upca</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Upca.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Upca.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Upca</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Upca</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Upca</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Upce.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_Upce</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Upce.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Upce.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Upce</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Upce</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Upce</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Barcode/Barcode.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Barcode</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Barcode/Barcode.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Barcode</newNamespace>
       <newClassName>Barcode</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Barcode\Barcode</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Barcode</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Between.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Between</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Between.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Between.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Between</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Between</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Between</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Callback.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Callback</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Callback.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Callback.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Callback</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Callback</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Callback</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Ccnum.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Ccnum</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Ccnum.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Ccnum.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Ccnum</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Ccnum</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Ccnum</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/CreditCard.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_CreditCard</originalClassName>
-      <newRelativeFilePath>Zend/Validate/CreditCard.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/CreditCard.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>CreditCard</newClassName>
-      <newFullyQualifiedName>Zend\Validate\CreditCard</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\CreditCard</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Date.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Date</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Date.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Date.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Date</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Date</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Date</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Db/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Db_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Db/AbstractDb.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Db</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Db/AbstractDb.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Db</newNamespace>
       <newClassName>AbstractDb</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Db\AbstractDb</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Db\AbstractDb</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Db/NoRecordExists.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Db_NoRecordExists</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Db/NoRecordExists.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Db</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Db/NoRecordExists.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Db</newNamespace>
       <newClassName>NoRecordExists</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Db\NoRecordExists</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Db\NoRecordExists</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Db/RecordExists.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Db_RecordExists</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Db/RecordExists.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Db</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Db/RecordExists.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Db</newNamespace>
       <newClassName>RecordExists</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Db\RecordExists</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Db\RecordExists</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Digits.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Digits</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Digits.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Digits.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Digits</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Digits</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Digits</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/EmailAddress.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_EmailAddress</originalClassName>
-      <newRelativeFilePath>Zend/Validate/EmailAddress.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/EmailAddress.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>EmailAddress</newClassName>
-      <newFullyQualifiedName>Zend\Validate\EmailAddress</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\EmailAddress</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/Count.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_Count</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/Count.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/Count.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>Count</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\Count</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\Count</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/Crc32.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_Crc32</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/Crc32.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/Crc32.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>Crc32</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\Crc32</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\Crc32</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/ExcludeExtension.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_ExcludeExtension</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/ExcludeExtension.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/ExcludeExtension.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>ExcludeExtension</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\ExcludeExtension</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\ExcludeExtension</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/ExcludeMimeType.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_ExcludeMimeType</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/ExcludeMimeType.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/ExcludeMimeType.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>ExcludeMimeType</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\ExcludeMimeType</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\ExcludeMimeType</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/Exists.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_Exists</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/Exists.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/Exists.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>Exists</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\Exists</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\Exists</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/Extension.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_Extension</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/Extension.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/Extension.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>Extension</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\Extension</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\Extension</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/FilesSize.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_FilesSize</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/FilesSize.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/FilesSize.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>FilesSize</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\FilesSize</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\FilesSize</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/Hash.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_Hash</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/Hash.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/Hash.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>Hash</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\Hash</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\Hash</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/ImageSize.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_ImageSize</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/ImageSize.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/ImageSize.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>ImageSize</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\ImageSize</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\ImageSize</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/IsCompressed.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_IsCompressed</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/IsCompressed.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/IsCompressed.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>IsCompressed</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\IsCompressed</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\IsCompressed</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/IsImage.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_IsImage</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/IsImage.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/IsImage.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>IsImage</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\IsImage</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\IsImage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/Md5.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_Md5</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/Md5.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/Md5.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>Md5</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\Md5</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\Md5</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/MimeType.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_MimeType</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/MimeType.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/MimeType.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>MimeType</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\MimeType</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\MimeType</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/NotExists.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_NotExists</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/NotExists.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/NotExists.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>NotExists</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\NotExists</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\NotExists</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/Sha1.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_Sha1</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/Sha1.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/Sha1.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>Sha1</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\Sha1</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\Sha1</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/Size.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_Size</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/Size.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/Size.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>Size</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\Size</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\Size</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/Upload.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_Upload</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/Upload.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/Upload.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>Upload</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\Upload</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\Upload</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/File/WordCount.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_File_WordCount</originalClassName>
-      <newRelativeFilePath>Zend/Validate/File/WordCount.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\File</newNamespace>
+      <newRelativeFilePath>Zend/Validator/File/WordCount.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\File</newNamespace>
       <newClassName>WordCount</newClassName>
-      <newFullyQualifiedName>Zend\Validate\File\WordCount</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\File\WordCount</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Float.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Float</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Float.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Float.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Float</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Float</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Float</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/GreaterThan.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_GreaterThan</originalClassName>
-      <newRelativeFilePath>Zend/Validate/GreaterThan.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/GreaterThan.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>GreaterThan</newClassName>
-      <newFullyQualifiedName>Zend\Validate\GreaterThan</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\GreaterThan</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Hex.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Hex</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Hex.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Hex.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Hex</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Hex</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Hex</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Hostname/Biz.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Hostname_Biz</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Hostname/Biz.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Hostname</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Hostname/Biz.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Hostname</newNamespace>
       <newClassName>Biz</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Hostname\Biz</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Hostname\Biz</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Hostname/Cn.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Hostname_Cn</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Hostname/Cn.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Hostname</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Hostname/Cn.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Hostname</newNamespace>
       <newClassName>Cn</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Hostname\Cn</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Hostname\Cn</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Hostname/Com.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Hostname_Com</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Hostname/Com.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Hostname</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Hostname/Com.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Hostname</newNamespace>
       <newClassName>Com</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Hostname\Com</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Hostname\Com</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Hostname/Jp.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Hostname_Jp</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Hostname/Jp.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Hostname</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Hostname/Jp.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Hostname</newNamespace>
       <newClassName>Jp</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Hostname\Jp</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Hostname\Jp</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Hostname.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Hostname</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Hostname/Hostname.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Hostname</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Hostname/Hostname.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Hostname</newNamespace>
       <newClassName>Hostname</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Hostname\Hostname</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Hostname\Hostname</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Iban.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Iban</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Iban.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Iban.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Iban</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Iban</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Iban</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Identical.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Identical</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Identical.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Identical.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Identical</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Identical</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Identical</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/InArray.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_InArray</originalClassName>
-      <newRelativeFilePath>Zend/Validate/InArray.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/InArray.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>InArray</newClassName>
-      <newFullyQualifiedName>Zend\Validate\InArray</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\InArray</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Int.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Int</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Int.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Int.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Int</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Int</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Int</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Validate/ValidateInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
-      <newClassName>ValidateInterface</newClassName>
-      <newFullyQualifiedName>Zend\Validate\ValidateInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Validator/Validator.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
+      <newClassName>Validator</newClassName>
+      <newFullyQualifiedName>Zend\Validator\Validator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Ip.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Ip</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Ip.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Ip.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Ip</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Ip</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Ip</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Isbn.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Isbn</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Isbn.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Isbn.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Isbn</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Isbn</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Isbn</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/LessThan.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_LessThan</originalClassName>
-      <newRelativeFilePath>Zend/Validate/LessThan.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/LessThan.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>LessThan</newClassName>
-      <newFullyQualifiedName>Zend\Validate\LessThan</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\LessThan</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/NotEmpty.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_NotEmpty</originalClassName>
-      <newRelativeFilePath>Zend/Validate/NotEmpty.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/NotEmpty.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>NotEmpty</newClassName>
-      <newFullyQualifiedName>Zend\Validate\NotEmpty</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\NotEmpty</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/PostCode.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_PostCode</originalClassName>
-      <newRelativeFilePath>Zend/Validate/PostCode.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/PostCode.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>PostCode</newClassName>
-      <newFullyQualifiedName>Zend\Validate\PostCode</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\PostCode</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Regex.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Regex</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Regex.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Regex.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>Regex</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Regex</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Regex</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Sitemap/Changefreq.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Sitemap_Changefreq</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Sitemap/Changefreq.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Sitemap</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Sitemap/Changefreq.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Sitemap</newNamespace>
       <newClassName>Changefreq</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Sitemap\Changefreq</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Sitemap\Changefreq</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Sitemap/Lastmod.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Sitemap_Lastmod</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Sitemap/Lastmod.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Sitemap</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Sitemap/Lastmod.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Sitemap</newNamespace>
       <newClassName>Lastmod</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Sitemap\Lastmod</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Sitemap\Lastmod</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Sitemap/Loc.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Sitemap_Loc</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Sitemap/Loc.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Sitemap</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Sitemap/Loc.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Sitemap</newNamespace>
       <newClassName>Loc</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Sitemap\Loc</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Sitemap\Loc</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Sitemap/Priority.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Sitemap_Priority</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Sitemap/Priority.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate\Sitemap</newNamespace>
+      <newRelativeFilePath>Zend/Validator/Sitemap/Priority.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator\Sitemap</newNamespace>
       <newClassName>Priority</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Sitemap\Priority</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\Sitemap\Priority</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/StringLength.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_StringLength</originalClassName>
-      <newRelativeFilePath>Zend/Validate/StringLength.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
+      <newRelativeFilePath>Zend/Validator/StringLength.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
       <newClassName>StringLength</newClassName>
-      <newFullyQualifiedName>Zend\Validate\StringLength</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Validator\StringLength</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate</originalClassName>
-      <newRelativeFilePath>Zend/Validate/Validate.php</newRelativeFilePath>
-      <newNamespace>Zend\Validate</newNamespace>
-      <newClassName>Validate</newClassName>
-      <newFullyQualifiedName>Zend\Validate\Validate</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Validator/ValidatorChain.php</newRelativeFilePath>
+      <newNamespace>Zend\Validator</newNamespace>
+      <newClassName>ValidatorChain</newClassName>
+      <newFullyQualifiedName>Zend\Validator\ValidatorChain</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Version.php</originalRelativeFilePath>

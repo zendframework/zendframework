@@ -25,7 +25,6 @@
 namespace Zend\Filter;
 use Zend\Translate\Adapter;
 use Zend\Translate;
-use Zend;
 use Zend\Validate;
 
 /**
@@ -233,7 +232,7 @@ class Input
      * @return \Zend\Filter\Input
      * @throws \Zend\Filter\Exception on invalid type
      */
-    public function setPluginLoader(end\Loader\PluginLoader\PluginLoaderInterface $loader, $type)
+    public function setPluginLoader(\Zend\Loader\PluginLoader\PluginLoaderInterface $loader, $type)
     {
         $type = strtolower($type);
         switch ($type) {
@@ -279,7 +278,7 @@ class Input
                     throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
             }
 
-            $this->_loaders[$type] = new end\Loader\PluginLoader\PluginLoader(
+            $this->_loaders[$type] = new \Zend\Loader\PluginLoader\PluginLoader(
                 array($prefixSegment => $pathSegment)
             );
         }
@@ -594,8 +593,8 @@ class Input
         }
 
         if ($this->_translator === null) {
-            if (end\Registry::isRegistered('Zend_Translate')) {
-                $translator = end\Registry::get('Zend_Translate');
+            if (\Zend\Registry::isRegistered('Zend_Translate')) {
+                $translator = \Zend\Registry::get('Zend_Translate');
                 if ($translator instanceof Adapter\Adapter) {
                     return $translator;
                 } elseif ($translator instanceof Translate\Translate) {

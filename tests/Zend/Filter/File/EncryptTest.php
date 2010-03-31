@@ -60,7 +60,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
-        $filter = new EncryptFilter();
+        $filter = new FileEncrypt();
         $filter->setFilename(dirname(__DIR__).'/_files/newencryption.txt');
 
         $this->assertEquals(
@@ -82,7 +82,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
 
     public function testEncryptionWithDecryption()
     {
-        $filter = new EncryptFilter();
+        $filter = new FileEncrypt();
         $filter->setFilename(dirname(__DIR__).'/_files/newencryption.txt');
         $filter->setVector('testvect');
         $this->assertEquals(dirname(__DIR__).'/_files/newencryption.txt',
@@ -92,7 +92,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
             'Encryption',
             file_get_contents(dirname(__DIR__).'/_files/newencryption.txt'));
 
-        $filter = new DecryptFilter();
+        $filter = new FileDecrypt();
         $filter->setVector('testvect');
         $input = $filter(dirname(__DIR__).'/_files/newencryption.txt');
         $this->assertEquals(dirname(__DIR__).'/_files/newencryption.txt', $input);
@@ -107,7 +107,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
      */
     public function testNonExistingFile()
     {
-        $filter = new EncryptFilter();
+        $filter = new FileEncrypt();
         $filter->setVector('testvect');
 
         $this->setExpectedException('\\Zend\\Filter\\Exception', 'not found');
@@ -119,7 +119,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncryptionInSameFile()
     {
-        $filter = new EncryptFilter();
+        $filter = new FileEncrypt();
         $filter->setVector('testvect');
 
         copy(dirname(__DIR__).'/_files/encryption.txt', dirname(__DIR__).'/_files/newencryption.txt');

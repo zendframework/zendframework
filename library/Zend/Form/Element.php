@@ -1332,6 +1332,21 @@ class Zend_Form_Element implements Zend_Validate_Interface
             array_unshift($validators, $notEmpty);
             $this->setValidators($validators);
         }
+        
+        // Find the correct translator. Zend_Validate_Abstract::getDefaultTranslator()
+        // will get either the static translator attached to Zend_Validate_Abstract
+        // or the 'Zend_Translate' from Zend_Registry. 
+        if (Zend_Validate_Abstract::hasDefaultTranslator() && 
+            !Zend_Form::hasDefaultTranslator()) 
+        {
+            $translator = Zend_Validate_Abstract::getDefaultTranslator();
+            if ($this->hasTranslator()) {
+                // only pick up this element's translator if it was attached directly.
+                $translator = $this->getTranslator();
+            }
+        } else {
+            $translator = $this->getTranslator();
+        }
 
         $this->_messages = array();
         $this->_errors   = array();
@@ -1339,7 +1354,13 @@ class Zend_Form_Element implements Zend_Validate_Interface
         $isArray         = $this->isArray();
         foreach ($this->getValidators() as $key => $validator) {
             if (method_exists($validator, 'setTranslator')) {
-                $validator->setTranslator($this->getTranslator());
+                if (method_exists($validator, 'hasTranslator')) {
+                    if (!$validator->hasTranslator()) {                    
+                        $validator->setTranslator($translator);
+                    }
+                } else {
+                    $validator->setTranslator($translator);
+                }
             }
 
             if (method_exists($validator, 'setDisableTranslator')) {

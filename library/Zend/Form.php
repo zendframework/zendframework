@@ -2789,6 +2789,16 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     }
 
     /**
+     * Is there a default translation object set?
+     * 
+     * @return boolean
+     */
+    public static function hasDefaultTranslator()
+    { 
+        return (bool)self::$_translatorDefault;
+    }
+    
+    /**
      * Indicate whether or not translation should be disabled
      *
      * @param  bool $flag

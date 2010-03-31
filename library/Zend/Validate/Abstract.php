@@ -353,6 +353,16 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     }
 
     /**
+     * Does this validator have its own specific translator?
+     * 
+     * @return bool
+     */
+    public function hasTranslator()
+    {
+        return (bool)$this->_translator;
+    }  
+    
+    /**
      * Set default translation object for all validate objects
      *
      * @param  Zend_Translate|Zend_Translate_Adapter|null $translator
@@ -392,6 +402,16 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
         return self::$_defaultTranslator;
     }
 
+    /**
+     * Is there a default translation object set?
+     * 
+     * @return boolean
+     */
+    public static function hasDefaultTranslator()
+    { 
+        return (bool)self::$_defaultTranslator;
+    }
+    
     /**
      * Indicate whether or not translation should be disabled
      *

@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Validator\Sitemap;
+namespace ZendTest\Validate\Sitemap;
 
 /**
  * Tests Zend_Validate_Sitemap_Loc

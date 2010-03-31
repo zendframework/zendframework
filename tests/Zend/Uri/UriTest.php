@@ -20,6 +20,12 @@
  * @version    $Id $
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Uri;
+use Zend\Uri;
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_UriTest::main');
 }
@@ -44,12 +50,12 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Uri
  */
-class Zend_UriTest extends PHPUnit_Framework_TestCase
+class UriTest extends \PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_UriTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite("Zend_UriTest");
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     public function setUp()
@@ -105,7 +111,7 @@ class Zend_UriTest extends PHPUnit_Framework_TestCase
      */
     public function testSetConfigWithArray()
     {
-        Zend_Uri::setConfig(array('allow_unwise' => true));
+        Uri\Uri::setConfig(array('allow_unwise' => true));
     }
 
     /**
@@ -115,7 +121,7 @@ class Zend_UriTest extends PHPUnit_Framework_TestCase
      */
     public function testSetConfigWithZendConfig()
     {
-        Zend_Uri::setConfig(new Zend_Config(array('allow_unwise' => true)));
+        Uri\Uri::setConfig(new \Zend\Config\Config(array('allow_unwise' => true)));
     }
 
     /**
@@ -123,11 +129,11 @@ class Zend_UriTest extends PHPUnit_Framework_TestCase
      * nor Zend_Config is given as first parameter
      *
      * @group ZF-5578
-     * @expectedException Zend_Uri_Exception
+     * @expectedException Zend\Uri\Exception
      */
     public function testSetConfigInvalid()
     {
-        Zend_Uri::setConfig('This should cause an exception');
+        Uri\Uri::setConfig('This should cause an exception');
     }
 
     /**
@@ -141,8 +147,8 @@ class Zend_UriTest extends PHPUnit_Framework_TestCase
     {
         $e = null;
         try {
-            $uri = Zend_Uri::factory($uri);
-        } catch (Zend_Uri_Exception $e) {
+            $uri = Uri\Uri::factory($uri);
+        } catch (Uri\Exception $e) {
             $this->assertRegExp($regex, $e->getMessage());
             return;
         }
@@ -156,13 +162,13 @@ class Zend_UriTest extends PHPUnit_Framework_TestCase
      */
     protected function _testValidUri($uri)
     {
-        $uri = Zend_Uri::factory($uri);
-        $this->assertTrue($uri instanceof Zend_Uri, 'Zend_Uri object not returned.');
+        $uri = Uri\Uri::factory($uri);
+        $this->assertTrue($uri instanceof Uri\Uri, 'Zend_Uri object not returned.');
     }
 
 }
 
 // Call Zend_UriTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_UriTest::main") {
-    Zend_UriTest::main();
+    \Zend_UriTest::main();
 }

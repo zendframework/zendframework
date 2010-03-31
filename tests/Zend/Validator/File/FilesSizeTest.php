@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Validator\File;
+namespace ZendTest\Validate\File;
 use Zend\Validator\File;
 use Zend\Validator;
 
@@ -213,17 +213,21 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->isValid(array(
             dirname(__FILE__) . '/_files/testsize.mo',
             dirname(__FILE__) . '/_files/testsize.mo',
-            dirname(__FILE__) . '/_files/testsize2.mo')));
-        $this->assertContains('9.76kB', current($validator->getMessages()));
-        $this->assertContains('1.55kB', current($validator->getMessages()));
+            dirname(__FILE__) . '/_files/testsize2.mo'))
+            );
+        $messages = $validator->getMessages();
+        $this->assertContains('9.76kB', current($messages));
+        $this->assertContains('1.55kB', current($messages));
 
         $validator = new File\FilesSize(array('min' => 9999, 'max' => 10000, 'bytestring' => false));
         $this->assertFalse($validator->isValid(array(
             dirname(__FILE__) . '/_files/testsize.mo',
             dirname(__FILE__) . '/_files/testsize.mo',
-            dirname(__FILE__) . '/_files/testsize2.mo')));
-        $this->assertContains('9999', current($validator->getMessages()));
-        $this->assertContains('1588', current($validator->getMessages()));
+            dirname(__FILE__) . '/_files/testsize2.mo'))
+            );
+        $messages = $validator->getMessages();
+        $this->assertContains('9999', current($messages));
+        $this->assertContains('1588', current($messages));
     }
 
     public function errorHandler($errno, $errstr)

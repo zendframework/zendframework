@@ -64,3 +64,13 @@ Zend_Filter:
      classes accordingly
  * "Word_Separator_Abstract" renamed to "Word\AbstractSeparator"; please update
    extending classes accordingly.
+
+Zend_Validate:
+ * "Validate" broken into "ValidatorChain" and "StaticValidator"
+ * "Zend_Validate" prefix now becomes "Zend\Validator" namespace
+ * "ValidatorInterface" moved to "Zend\Validator\Validator"
+ 
+Zend_Translate
+ * "Zend_Translate" prefix now becomes "Zend\Translator" namespace
+ * "Zend_Translate" becomes "Zend\Translator\Translator"
+ * "Zend\Translator\Adapter\Array" renamed to "Zend\Translator\Adapter\ArrayAdapter"

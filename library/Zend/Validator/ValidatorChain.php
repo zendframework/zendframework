@@ -23,7 +23,6 @@
  * @namespace
  */
 namespace Zend\Validator;
-use Zend;
 
 /**
  * @uses       \Zend\Loader
@@ -50,13 +49,6 @@ class ValidatorChain implements Validator
      * @var array
      */
     protected $_messages = array();
-
-    /**
-     * Default Namespaces
-     *
-     * @var array
-     */
-    protected static $_defaultNamespaces = array();
 
     /**
      * Array of validation failure message codes
@@ -139,153 +131,4 @@ class ValidatorChain implements Validator
         return $this->_errors;
     }
 
-    /**
-     * Returns the set default namespaces
-     *
-     * @return array
-     */
-    public static function getDefaultNamespaces()
-    {
-        return self::$_defaultNamespaces;
-    }
-
-    /**
-     * Sets new default namespaces
-     *
-     * @param array|string $namespace
-     * @return null
-     */
-    public static function setDefaultNamespaces($namespace)
-    {
-        if (!is_array($namespace)) {
-            $namespace = array((string) $namespace);
-        }
-
-        self::$_defaultNamespaces = $namespace;
-    }
-
-    /**
-     * Adds a new default namespace
-     *
-     * @param array|string $namespace
-     * @return null
-     */
-    public static function addDefaultNamespaces($namespace)
-    {
-        if (!is_array($namespace)) {
-            $namespace = array((string) $namespace);
-        }
-
-        self::$_defaultNamespaces = array_unique(array_merge(self::$_defaultNamespaces, $namespace));
-    }
-
-    /**
-     * Returns true when defaultNamespaces are set
-     *
-     * @return boolean
-     */
-    public static function hasDefaultNamespaces()
-    {
-        return (!empty(self::$_defaultNamespaces));
-    }
-
-    /**
-     * @param  mixed    $value
-     * @param  string   $classBaseName
-     * @param  array    $args          OPTIONAL
-     * @param  mixed    $namespaces    OPTIONAL
-     * @return boolean
-     * @throws \Zend\Validator\Exception
-     */
-    public static function is($value, $classBaseName, array $args = array(), $namespaces = array())
-    {
-        $namespaces = array_merge((array) $namespaces, self::$_defaultNamespaces, array('Zend_Validate'));
-        $className  = ucfirst($classBaseName);
-        try {
-            if (!class_exists($className, false)) {
-                foreach($namespaces as $namespace) {
-                    $class = $namespace . '_' . $className;
-                    $file  = str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
-                    if (\Zend\Loader::isReadable($file)) {
-                        \Zend\Loader::loadClass($class);
-                        $className = $class;
-                        break;
-                    }
-                }
-            }
-
-            $class = new \ReflectionClass($className);
-            if ($class->implementsInterface('Zend\Validator\Validator')) {
-                if ($class->hasMethod('__construct')) {
-                    $keys    = array_keys($args);
-                    $numeric = false;
-                    foreach($keys as $key) {
-                        if (is_numeric($key)) {
-                            $numeric = true;
-                            break;
-                        }
-                    }
-
-                    if ($numeric) {
-                        $object = $class->newInstanceArgs($args);
-                    } else {
-                        $object = $class->newInstance($args);
-                    }
-                } else {
-                    $object = $class->newInstance();
-                }
-
-                return $object->isValid($value);
-            }
-        } catch (Exception $ze) {
-            // if there is an exception while validating throw it
-            throw $ze;
-        } catch (\Exception $e) {
-            // fallthrough and continue for missing validation classes
-        }
-
-        throw new Exception("Validate class not found from basename '$classBaseName'");
-    }
-
-    /**
-     * Returns the maximum allowed message length
-     *
-     * @return integer
-     */
-    public static function getMessageLength()
-    {
-        return AbstractValidator::getMessageLength();
-    }
-
-    /**
-     * Sets the maximum allowed message length
-     *
-     * @param integer $length
-     */
-    public static function setMessageLength($length = -1)
-    {
-        AbstractValidator::setMessageLength($length);
-    }
-
-    /**
-     * Returns the default translation object
-     *
-     * @return \Zend\Translate\Adapter\Adapter|null
-     */
-    public static function getDefaultTranslator($translator = null)
-    {
-        require_once 'Zend/Validate/Abstract.php';
-        return AbstractValidator::getDefaultTranslator();
-    }
-
-    /**
-     * Sets a default translation object for all validation objects
-     *
-     * @param Zend_Translate|\Zend\Translate\Adapter\Adapter|null $translator
-     */
-    public static function setDefaultTranslator($translator = null)
-    {
-        require_once 'Zend/Validate/Abstract.php';
-        AbstractValidator::setDefaultTranslator($translator);
-    }
 }

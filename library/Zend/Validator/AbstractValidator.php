@@ -23,8 +23,8 @@
  * @namespace
  */
 namespace Zend\Validator;
-use Zend\Translate\Adapter;
-use Zend\Translate;
+use Zend\Translator\Adapter;
+use Zend\Translator;
 
 /**
  * @uses       \Zend\Registry
@@ -325,7 +325,7 @@ abstract class AbstractValidator implements Validator
     {
         if ((null === $translator) || ($translator instanceof Adapter\Adapter)) {
             $this->_translator = $translator;
-        } elseif ($translator instanceof Translate\Translate) {
+        } elseif ($translator instanceof Translator\Translator) {
             $this->_translator = $translator->getAdapter();
         } else {
             throw new Exception('Invalid translator specified');
@@ -361,7 +361,7 @@ abstract class AbstractValidator implements Validator
     {
         if ((null === $translator) || ($translator instanceof Adapter\Adapter)) {
             self::$_defaultTranslator = $translator;
-        } elseif ($translator instanceof Translate\Translate) {
+        } elseif ($translator instanceof Translate\Translator) {
             self::$_defaultTranslator = $translator->getAdapter();
         } else {
             throw new Exception('Invalid translator specified');

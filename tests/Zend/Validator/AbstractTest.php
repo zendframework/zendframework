@@ -48,13 +48,6 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function clearRegistry()
-    {
-        if (\Zend\Registry::isRegistered('Zend_Translate')) {
-            $registry = \Zend\Registry::getInstance();
-            unset($registry['Zend_Translate']);
-        }
-    }
 
     /**
      * Creates a new validation object for each test method
@@ -63,16 +56,11 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->clearRegistry();
-        Validator\AbstractValidator::setDefaultTranslator(null);
         $this->validator = new Concrete();
     }
 
     public function tearDown()
     {
-        $this->clearRegistry();
-        Validator\AbstractValidator::setDefaultTranslator(null);
-        Validator\AbstractValidator::setMessageLength(-1);
     }
 
     public function testTranslatorNullByDefault()
@@ -84,7 +72,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $this->testTranslatorNullByDefault();
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translator = new Translator\Translator('array', array(), 'en');
+        $translator = new Translator\Translator('ArrayAdapter', array(), 'en');
         restore_error_handler();
         $this->validator->setTranslator($translator);
         $this->assertSame($translator->getAdapter(), $this->validator->getTranslator());
@@ -104,45 +92,12 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertNull(Validator\AbstractValidator::getDefaultTranslator());
     }
 
-    public function testCanSetGlobalDefaultTranslator()
-    {
-        $this->testGlobalDefaultTranslatorNullByDefault();
-        set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translator = new Translator\Translator('array', array(), 'en');
-        restore_error_handler();
-        Validator\AbstractValidator::setDefaultTranslator($translator);
-        $this->assertSame($translator->getAdapter(), Validator\AbstractValidator::getDefaultTranslator());
-    }
 
-    public function testGlobalDefaultTranslatorUsedWhenNoLocalTranslatorSet()
-    {
-        $this->testCanSetGlobalDefaultTranslator();
-        $this->assertSame(Validator\AbstractValidator::getDefaultTranslator(), $this->validator->getTranslator());
-    }
-
-    public function testGlobalTranslatorFromRegistryUsedWhenNoLocalTranslatorSet()
-    {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translate = new Translator\Translator('array', array());
-        restore_error_handler();
-        \Zend\Registry::set('Zend_Translate', $translate);
-        $this->assertSame($translate->getAdapter(), $this->validator->getTranslator());
-    }
-
-    public function testLocalTranslatorPreferredOverGlobalTranslator()
-    {
-        $this->testCanSetGlobalDefaultTranslator();
-        set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translator = new Translator\Translator('array', array(), 'en');
-        restore_error_handler();
-        $this->validator->setTranslator($translator);
-        $this->assertNotSame(Validator\AbstractValidator::getDefaultTranslator(), $this->validator->getTranslator());
-    }
 
     public function testErrorMessagesAreTranslatedWhenTranslatorPresent()
     {
         $translator = new Translator\Translator(
-            'array',
+            'ArrayAdapter',
             array('fooMessage' => 'This is the translated message for %value%'),
             'en'
         );
@@ -157,7 +112,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testCanTranslateMessagesInsteadOfKeys()
     {
         $translator = new Translator\Translator(
-            'array',
+            'ArrayAdapter',
             array('%value% was passed' => 'This is the translated message for %value%'),
             'en'
         );
@@ -207,7 +162,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testTranslatorEnabledPerDefault()
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translator = new Translator\Translator('array', array(), 'en');
+        $translator = new Translator\Translator('ArrayAdapter', array(), 'en');
         restore_error_handler();
         $this->validator->setTranslator($translator);
         $this->assertFalse($this->validator->translatorIsDisabled());
@@ -217,7 +172,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $translator = new Translator\Translator(
-            'array',
+            'ArrayAdapter',
             array('fooMessage' => 'This is the translated message for %value%'),
             'en'
         );
@@ -250,24 +205,6 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
             array(Concrete::FOO_MESSAGE => '%value% was passed'),
             $messages
             );
-    }
-
-    public function testMaximumErrorMessageLength()
-    {
-        $this->assertEquals(-1, Validator\ValidatorChain::getMessageLength());
-        Validator\AbstractValidator::setMessageLength(10);
-        $this->assertEquals(10, Validator\ValidatorChain::getMessageLength());
-
-        $translator = new Translator\Translator(
-            'array',
-            array('fooMessage' => 'This is the translated message for %value%'),
-            'en'
-        );
-        $this->validator->setTranslator($translator);
-        $this->assertFalse($this->validator->isValid('bar'));
-        $messages = $this->validator->getMessages();
-        $this->assertTrue(array_key_exists('fooMessage', $messages));
-        $this->assertEquals('This is...', $messages['fooMessage']);
     }
 
     /**

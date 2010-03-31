@@ -20,16 +20,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Uri;
+
+/**
  * Abstract class for all Zend_Uri handlers
  *
- * @uses      Zend_Loader
- * @uses      Zend_Uri_Exception
+ * @uses      \Zend\Loader
+ * @uses      \Zend\Uri\Exception
  * @category  Zend
  * @package   Zend_Uri
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Uri
+abstract class Uri
 {
     /**
      * Scheme of this URI (http, ftp, etc.)
@@ -70,7 +75,7 @@ abstract class Zend_Uri
     {
         try {
             $uri = self::factory($uri);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
 
@@ -81,11 +86,11 @@ abstract class Zend_Uri
      * Create a new Zend_Uri object for a URI.  If building a new URI, then $uri should contain
      * only the scheme (http, ftp, etc).  Otherwise, supply $uri with the complete URI.
      *
-     * @param  string $uri The URI form which a Zend_Uri instance is created
-     * @throws Zend_Uri_Exception When an empty string was supplied for the scheme
-     * @throws Zend_Uri_Exception When an illegal scheme is supplied
-     * @throws Zend_Uri_Exception When the scheme is not supported
-     * @return Zend_Uri
+     * @param  string $uri The URI form which a \Zend\Uri\Uri instance is created
+     * @throws \Zend\Uri\Exception When an empty string was supplied for the scheme
+     * @throws \Zend\Uri\Exception When an illegal scheme is supplied
+     * @throws \Zend\Uri\Exception When the scheme is not supported
+     * @return \Zend\Uri\Uri
      * @link   http://www.faqs.org/rfcs/rfc2396.html
      */
     public static function factory($uri = 'http')
@@ -96,12 +101,12 @@ abstract class Zend_Uri
         $schemeSpecific = isset($uri[1]) === true ? $uri[1] : '';
 
         if (strlen($scheme) === 0) {
-            throw new Zend_Uri_Exception('An empty string was supplied for the scheme');
+            throw new Exception('An empty string was supplied for the scheme');
         }
 
         // Security check: $scheme is used to load a class file, so only alphanumerics are allowed.
         if (ctype_alnum($scheme) === false) {
-            throw new Zend_Uri_Exception('Illegal scheme supplied, only alphanumeric characters are permitted');
+            throw new Exception('Illegal scheme supplied, only alphanumeric characters are permitted');
         }
 
         /**
@@ -112,18 +117,18 @@ abstract class Zend_Uri
             case 'http':
                 // Break intentionally omitted
             case 'https':
-                $className = 'Zend_Uri_Http';
+                $className = '\Zend\Uri\Http';
                 break;
 
             case 'mailto':
                 // TODO
             default:
-                throw new Zend_Uri_Exception("Scheme \"$scheme\" is not supported");
+                throw new Exception("Scheme \"$scheme\" is not supported");
                 break;
         }
 
         if (!class_exists($className)) {
-            Zend_Loader::loadClass($className);
+            \Zend\Loader::loadClass($className);
         }
         $schemeHandler = new $className($scheme, $schemeSpecific);
 
@@ -147,14 +152,14 @@ abstract class Zend_Uri
     /**
      * Set global configuration options
      *
-     * @param Zend_Config|array $config
+     * @param \Zend\Config\Config|array $config
      */
     static public function setConfig($config)
     {
-        if ($config instanceof Zend_Config) {
+        if ($config instanceof \Zend\Config\Config) {
             $config = $config->toArray();
         } elseif (!is_array($config)) {
-            throw new Zend_Uri_Exception("Config must be an array or an instance of Zend_Config.");
+            throw new Exception("Config must be an array or an instance of Zend_Config.");
         }
 
         foreach ($config as $k => $v) {

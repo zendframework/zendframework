@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Validator\File;
+namespace ZendTest\Validate\File;
 use Zend\Validator\File;
 use Zend\Validator;
 
@@ -213,13 +213,15 @@ class SizeTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new File\Size(array('min' => 9999, 'max' => 10000));
         $this->assertFalse($validator->isValid(dirname(__FILE__) . '/_files/testsize.mo'));
-        $this->assertContains('9.76kB', current($validator->getMessages()));
-        $this->assertContains('794B', current($validator->getMessages()));
+        $messages = $validator->getMessages();
+        $this->assertContains('9.76kB', current($messages));
+        $this->assertContains('794B', current($messages));
 
         $validator = new File\Size(array('min' => 9999, 'max' => 10000, 'bytestring' => false));
         $this->assertFalse($validator->isValid(dirname(__FILE__) . '/_files/testsize.mo'));
-        $this->assertContains('9999', current($validator->getMessages()));
-        $this->assertContains('794', current($validator->getMessages()));
+        $messages = $validator->getMessages();
+        $this->assertContains('9999', current($messages));
+        $this->assertContains('794', current($messages));
     }
 }
 

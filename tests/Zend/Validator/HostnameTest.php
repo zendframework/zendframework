@@ -50,7 +50,6 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->markTestSkipped('Skipped until operands can be figured out.');
         $this->_origEncoding = iconv_get_encoding('internal_encoding');
         $this->_validator = new Hostname\Hostname();
     }
@@ -283,7 +282,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $translations = array(
             'hostnameInvalidLocalName' => 'this is the IP error message',
         );
-        $translator = new \Zend\Translate\Translate('array', $translations);
+        $translator = new \Zend\Translator\Translator('ArrayAdapter', $translations);
         $this->_validator->setTranslator($translator);
 
         $this->_validator->isValid('0.239,512.777');

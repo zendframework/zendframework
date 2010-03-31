@@ -91,7 +91,8 @@ class Royalmail extends AdapterAbstract
 
         $rowchkvalue = array_keys($this->_rows, $rowvalue);
         $colchkvalue = array_keys($this->_columns, $colvalue);
-        $chkvalue    = current(array_intersect($rowchkvalue, $colchkvalue));
+        $intersect = array_intersect($rowchkvalue, $colchkvalue);
+        $chkvalue    = current($intersect);
         if ($chkvalue == $checksum) {
             return true;
         }

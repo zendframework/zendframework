@@ -29,10 +29,10 @@ First pass
 Second pass:
 [X] Zend_Filter
     skip Input at first
-[ ] Zend_Validate
+[X] Zend_Validate
     skip Validate_Db at first
     do [ ] Zend_Filter_Input at this time
-[ ] Zend_Uri
+[X] Zend_Uri
 
 Third pass:
 [ ] Zend_Server

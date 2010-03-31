@@ -2044,7 +2044,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             if (null !== $translator && !$form->hasTranslator()) {
                 $form->setTranslator($translator);
             }
-            if (isset($data[$key])) {
+            if (isset($data[$key]) && !$form->isArray()) {
                 $valid = $form->isValid($data[$key]) && $valid;
             } else {
                 $valid = $form->isValid($data) && $valid;

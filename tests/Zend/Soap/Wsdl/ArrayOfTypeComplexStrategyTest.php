@@ -227,7 +227,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends PHPUnit_Framework_Te
             $return = $this->wsdl->addComplexType("Zend_Soap_AutoDiscover_Recursion");
         } catch(Exception $e) {
             $this->assertTrue($e instanceof Zend_Soap_Wsdl_Exception);
-            $this->assertEquals("Infinite recursion, cannot nest 'Zend_Soap_AutoDiscover_Recursion' into itsself.", $e->getMessage());
+            $this->assertEquals("Infinite recursion, cannot nest 'Zend_Soap_AutoDiscover_Recursion' into itself.", $e->getMessage());
         }
     }
 }

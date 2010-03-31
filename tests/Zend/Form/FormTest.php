@@ -1491,6 +1491,24 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->form->isValid($foo));
     } 
 
+    public function testIsValidPartialEqualSubFormAndElementName()
+    {
+        $this->form->addSubForm(new Zend_Form_SubForm(), 'foo')
+                   ->foo->addElement('text', 'foo')
+                        ->foo->setRequired(true)
+                             ->addValidator('Identical',
+                                            false,
+                                            array('Foo Value'));
+        $foo = array('foo' =>
+                     array('foo' => 'Foo Value'));
+
+        $this->assertTrue($this->form->isValidPartial($foo));
+
+        $this->form->foo->setIsArray(false);
+
+        $this->assertTrue($this->form->isValidPartial($foo));
+    } 
+
 
     // Display groups
 

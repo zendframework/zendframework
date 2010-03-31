@@ -2077,29 +2077,23 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
 
         $translator        = $this->getTranslator();
         $valid             = true;
-        $validatedSubForms = array();
 
-        foreach ($data as $key => $value) {
-            if (null !== ($element = $this->getElement($key))) {
+        foreach ($this->getElements() as $key => $element) {
+            if (isset($data[$key])) {
                 if (null !== $translator && !$element->hasTranslator()) {
                     $element->setTranslator($translator);
                 }
-                $valid = $element->isValid($value, $data) && $valid;
-            } elseif (null !== ($subForm = $this->getSubForm($key))) {
-                if (null !== $translator && !$subForm->hasTranslator()) {
-                    $subForm->setTranslator($translator);
-                }
-                $valid = $subForm->isValidPartial($data[$key]) && $valid;
-                $validatedSubForms[] = $key;
+                $valid = $element->isValid($data[$key], $data) && $valid;
             }
         }
-        foreach ($this->getSubForms() as $key => $subForm) {
-            if (!in_array($key, $validatedSubForms)) {
-                if (null !== $translator && !$subForm->hasTranslator()) {
-                    $subForm->setTranslator($translator);
-                }
-
-                $valid = $subForm->isValidPartial($data) && $valid;
+        foreach ($this->getSubForms() as $key => $form) {
+            if (null !== $translator && !$form->hasTranslator()) {
+                $form->setTranslator($translator);
+            }
+            if (isset($data[$key]) && !$form->isArray()) {
+                $valid = $form->isValidPartial($data[$key]) && $valid;
+            } else {
+                $valid = $form->isValidPartial($data) && $valid;
             }
         }
 

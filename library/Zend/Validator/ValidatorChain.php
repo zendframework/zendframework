@@ -215,7 +215,7 @@ class ValidatorChain implements Validator
             }
 
             $class = new \ReflectionClass($className);
-            if ($class->implementsInterface('Zend_Validate_Interface')) {
+            if ($class->implementsInterface('Zend\Validator\Validator')) {
                 if ($class->hasMethod('__construct')) {
                     $keys    = array_keys($args);
                     $numeric = false;

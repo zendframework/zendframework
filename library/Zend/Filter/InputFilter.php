@@ -23,23 +23,26 @@
  * @namespace
  */
 namespace Zend\Filter;
-use Zend\Translate\Adapter;
-use Zend\Translate;
-use Zend\Validate;
+
+use Zend\Loader\PluginLoader,
+    Zend\Registry,
+    Zend\Translator\Adapter as TranslationAdapter,
+    Zend\Translator\Translator as Translator,
+    Zend\Validator;
 
 /**
  * @uses       ReflectionClass
- * @uses       \Zend\Filter\Filter
- * @uses       \Zend\Filter\Exception
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
- * @uses       \Zend\Registry
- * @uses       \Zend\Validate\Validate
+ * @uses       Zend\Filter\Filter
+ * @uses       Zend\Filter\Exception
+ * @uses       Zend\Loader\PluginLoader\PluginLoader
+ * @uses       Zend\Registry
+ * @uses       Zend\Validator\Validator
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Input
+class InputFilter
 {
 
     const ALLOW_EMPTY           = 'allowEmpty';
@@ -60,7 +63,6 @@ class Input
     const PRESENCE_REQUIRED     = 'required';
     const RULE                  = 'rule';
     const RULE_WILDCARD         = '*';
-    const VALIDATE              = 'validate';
     const VALIDATOR             = 'validator';
     const VALIDATOR_CHAIN       = 'validatorChain';
     const VALIDATOR_CHAIN_COUNT = 'validatorChainCount';
@@ -114,7 +116,7 @@ class Input
     protected $_unknownFields = array();
 
     /**
-     * @var \Zend\Filter\FilterInterface The filter object that is run on values
+     * @var Zend\Filter\Filter The filter object that is run on values
      * returned by the getEscaped() method.
      */
     protected $_defaultEscapeFilter = null;
@@ -145,7 +147,7 @@ class Input
 
     /**
      * Translation object
-     * @var \Zend\Translate\Translate
+     * @var Zend\Translate\Translate
      */
     protected $_translator;
 
@@ -177,7 +179,7 @@ class Input
 
     /**
      * @param mixed $namespaces
-     * @return \Zend\Filter\Input
+     * @return Zend\Filter\InputFilter
      * @deprecated since 1.5.0RC1 - use addFilterPrefixPath() or addValidatorPrefixPath instead.
      */
     public function addNamespace($namespaces)
@@ -188,7 +190,7 @@ class Input
 
         foreach ($namespaces as $namespace) {
             $prefix = $namespace;
-            $path = str_replace('_', DIRECTORY_SEPARATOR, $prefix);
+            $path = str_replace('\\', DIRECTORY_SEPARATOR, $prefix);
             $this->addFilterPrefixPath($prefix, $path);
             $this->addValidatorPrefixPath($prefix, $path);
         }
@@ -201,7 +203,7 @@ class Input
      *
      * @param  string $prefix
      * @param  string $path
-     * @return \Zend\Filter\Input
+     * @return Zend\Filter\InputFilter
      */
     public function addFilterPrefixPath($prefix, $path)
     {
@@ -215,11 +217,11 @@ class Input
      *
      * @param  string $prefix
      * @param  string $path
-     * @return \Zend\Filter\Input
+     * @return Zend\Filter\InputFilter
      */
     public function addValidatorPrefixPath($prefix, $path)
     {
-        $this->getPluginLoader(self::VALIDATE)->addPrefixPath($prefix, $path);
+        $this->getPluginLoader(self::VALIDATOR)->addPrefixPath($prefix, $path);
 
         return $this;
     }
@@ -227,17 +229,17 @@ class Input
     /**
      * Set plugin loaders for use with decorators and elements
      *
-     * @param  \Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  Zend\Loader\PluginLoader\PluginLoaderInterface $loader
      * @param  string $type 'filter' or 'validate'
-     * @return \Zend\Filter\Input
-     * @throws \Zend\Filter\Exception on invalid type
+     * @return Zend\Filter\InputFilter
+     * @throws Zend\Filter\Exception on invalid type
      */
-    public function setPluginLoader(\Zend\Loader\PluginLoader\PluginLoaderInterface $loader, $type)
+    public function setPluginLoader(PluginLoader\PluginLoaderInterface $loader, $type)
     {
         $type = strtolower($type);
         switch ($type) {
             case self::FILTER:
-            case self::VALIDATE:
+            case self::VALIDATOR:
                 $this->_loaders[$type] = $loader;
                 return $this;
             default:
@@ -258,8 +260,8 @@ class Input
      * created.
      *
      * @param  string $type 'filter' or 'validate'
-     * @return \Zend\Loader\PluginLoader\PluginLoaderInterface
-     * @throws \Zend\Filter\Exception on invalid type
+     * @return Zend\Loader\PluginLoader\PluginLoaderInterface
+     * @throws Zend\Filter\Exception on invalid type
      */
     public function getPluginLoader($type)
     {
@@ -267,18 +269,18 @@ class Input
         if (!isset($this->_loaders[$type])) {
             switch ($type) {
                 case self::FILTER:
-                    $prefixSegment = 'Zend_Filter_';
+                    $prefixSegment = 'Zend\\Filter\\';
                     $pathSegment   = 'Zend/Filter/';
                     break;
-                case self::VALIDATE:
-                    $prefixSegment = 'Zend_Validate_';
-                    $pathSegment   = 'Zend/Validate/';
+                case self::VALIDATOR:
+                    $prefixSegment = 'Zend\\Validator\\';
+                    $pathSegment   = 'Zend/Validator/';
                     break;
                 default:
                     throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
             }
 
-            $this->_loaders[$type] = new \Zend\Loader\PluginLoader\PluginLoader(
+            $this->_loaders[$type] = new PluginLoader\PluginLoader(
                 array($prefixSegment => $pathSegment)
             );
         }
@@ -360,7 +362,8 @@ class Input
         }
 
         if (!is_array($data)) {
-            return $this->_getDefaultEscapeFilter()->filter($data);
+            $filter = $this->_getDefaultEscapeFilter();
+            return $filter($data);
         }
         foreach ($data as &$element) {
             $element = $this->_escapeRecursive($element);
@@ -453,8 +456,8 @@ class Input
     }
 
     /**
-     * @return \Zend\Filter\Input
-     * @throws \Zend\Filter\Exception
+     * @return Zend\Filter\InputFilter
+     * @throws Zend\Filter\Exception
      */
     public function process()
     {
@@ -471,7 +474,7 @@ class Input
 
     /**
      * @param array $data
-     * @return \Zend\Filter\Input
+     * @return Zend\Filter\InputFilter
      */
     public function setData(array $data)
     {
@@ -493,15 +496,15 @@ class Input
 
     /**
      * @param mixed $escapeFilter
-     * @return \Zend\Filter\FilterInterface
+     * @return Zend\Filter\Filter
      */
     public function setDefaultEscapeFilter($escapeFilter)
     {
         if (is_string($escapeFilter) || is_array($escapeFilter)) {
             $escapeFilter = $this->_getFilter($escapeFilter);
         }
-        if (!$escapeFilter instanceof FilterInterface) {
-            throw new Exception('Escape filter specified does not implement Zend_Filter_Interface');
+        if (!$escapeFilter instanceof Filter) {
+            throw new Exception('Escape filter specified does not implement Zend\\Filter\\Filter');
         }
         $this->_defaultEscapeFilter = $escapeFilter;
         return $escapeFilter;
@@ -509,8 +512,8 @@ class Input
 
     /**
      * @param array $options
-     * @return \Zend\Filter\Input
-     * @throws \Zend\Filter\Exception if an unknown option is given
+     * @return Zend\Filter\InputFilter
+     * @throws Zend\Filter\Exception if an unknown option is given
      */
     public function setOptions(array $options)
     {
@@ -530,7 +533,7 @@ class Input
                     foreach($value AS $prefix) {
                         $this->addValidatorPrefixPath(
                                 $prefix,
-                                str_replace('_', DIRECTORY_SEPARATOR, $prefix)
+                                str_replace('\\', DIRECTORY_SEPARATOR, $prefix)
                         );
                     }
                     break;
@@ -542,7 +545,7 @@ class Input
                     foreach($value AS $prefix) {
                         $this->addFilterPrefixPath(
                                 $prefix,
-                                str_replace('_', DIRECTORY_SEPARATOR, $prefix)
+                                str_replace('\\', DIRECTORY_SEPARATOR, $prefix)
                         );
                     }
                     break;
@@ -565,17 +568,17 @@ class Input
     /**
      * Set translation object
      *
-     * @param  Zend_Translate|\Zend\Translate\Adapter\Adapter|null $translator
-     * @return \Zend\Filter\Input
+     * @param  Zend_Translate|Zend\Translate\Adapter\Adapter|null $translator
+     * @return Zend\Filter\InputFilter
      */
     public function setTranslator($translator = null)
     {
-        if ((null === $translator) || ($translator instanceof Adapter\Adapter)) {
+        if ((null === $translator) || ($translator instanceof TranslationAdapter)) {
             $this->_translator = $translator;
-        } elseif ($translator instanceof Translate\Translate) {
+        } elseif ($translator instanceof Translator) {
             $this->_translator = $translator->getAdapter();
         } else {
-            throw new Validate\Exception('Invalid translator specified');
+            throw new Validator\Exception('Invalid translator specified');
         }
 
         return $this;
@@ -584,7 +587,7 @@ class Input
     /**
      * Return translation object
      *
-     * @return \Zend\Translate\Adapter\Adapter|null
+     * @return Zend\Translate\Adapter\Adapter|null
      */
     public function getTranslator()
     {
@@ -595,9 +598,9 @@ class Input
         if ($this->_translator === null) {
             if (\Zend\Registry::isRegistered('Zend_Translate')) {
                 $translator = \Zend\Registry::get('Zend_Translate');
-                if ($translator instanceof Adapter\Adapter) {
+                if ($translator instanceof TranslationAdapter) {
                     return $translator;
-                } elseif ($translator instanceof Translate\Translate) {
+                } elseif ($translator instanceof Translator) {
                     return $translator->getAdapter();
                 }
             }
@@ -610,7 +613,7 @@ class Input
      * Indicate whether or not translation should be disabled
      *
      * @param  bool $flag
-     * @return \Zend\Filter\Input
+     * @return Zend\Filter\InputFilter
      */
     public function setDisableTranslator($flag)
     {
@@ -640,7 +643,7 @@ class Input
         foreach ($this->_filterRules as $ruleName => &$filterRule) {
             /**
              * Make sure we have an array representing this filter chain.
-             * Don't typecast to (array) because it might be a Zend_Filter object
+             * Don't typecast to (array) because it might be a Zend\Filter\Filter object
              */
             if (!is_array($filterRule)) {
                 $filterRule = array($filterRule);
@@ -669,7 +672,7 @@ class Input
              * Load all the filter classes and add them to the chain.
              */
             if (!isset($filterRule[self::FILTER_CHAIN])) {
-                $filterRule[self::FILTER_CHAIN] = new Filter();
+                $filterRule[self::FILTER_CHAIN] = new FilterChain();
                 foreach ($filterList as $filter) {
                     if (is_string($filter) || is_array($filter)) {
                         $filter = $this->_getFilter($filter);
@@ -705,16 +708,17 @@ class Input
         }
         if (is_array($this->_data[$field])) {
             foreach ($this->_data[$field] as $key => $value) {
-                $this->_data[$field][$key] = $filterRule[self::FILTER_CHAIN]->filter($value);
+                $filterChain = $filterRule[self::FILTER_CHAIN];
+                $this->_data[$field][$key] = $filterChain($value);
             }
         } else {
-            $this->_data[$field] =
-                $filterRule[self::FILTER_CHAIN]->filter($this->_data[$field]);
+            $filterChain = $filterRule[self::FILTER_CHAIN];
+            $this->_data[$field] = $filterChain($this->_data[$field]);
         }
     }
 
     /**
-     * @return \Zend\Filter\FilterInterface
+     * @return Zend\Filter\Filter
      */
     protected function _getDefaultEscapeFilter()
     {
@@ -795,7 +799,7 @@ class Input
         foreach ($this->_validatorRules as $ruleName => &$validatorRule) {
             /**
              * Make sure we have an array representing this validator chain.
-             * Don't typecast to (array) because it might be a Zend_Validate object
+             * Don't typecast to (array) because it might be a Zend_Validator object
              */
             if (!is_array($validatorRule)) {
                 $validatorRule = array($validatorRule);
@@ -850,7 +854,7 @@ class Input
              * Load all the validator classes and add them to the chain.
              */
             if (!isset($validatorRule[self::VALIDATOR_CHAIN])) {
-                $validatorRule[self::VALIDATOR_CHAIN] = new Validate\Validate();
+                $validatorRule[self::VALIDATOR_CHAIN] = new Validator\ValidatorChain();
 
                 foreach ($validatorList as $key => $validator) {
                     if (is_string($validator) || is_array($validator)) {
@@ -865,7 +869,7 @@ class Input
                             $validator->setMessage($value);
                         }
 
-                        if ($validator instanceof Validate\NotEmpty) {
+                        if ($validator instanceof Validator\NotEmpty) {
                             $this->_defaults[self::NOT_EMPTY_MESSAGE] = $value;
                         }
                     }
@@ -1006,7 +1010,7 @@ class Input
             if ($validatorRule[self::ALLOW_EMPTY]) {
                 $validatorChain = $validatorRule[self::VALIDATOR_CHAIN];
             } else {
-                $validatorChain = new Validate\Validate();
+                $validatorChain = new Validator\ValidatorChain();
                 $validatorChain->addValidator($notEmptyValidator, true /* Always break on failure */);
                 $validatorChain->addValidator($validatorRule[self::VALIDATOR_CHAIN]);
             }
@@ -1063,7 +1067,7 @@ class Input
 
     /**
      * @param mixed $classBaseName
-     * @return \Zend\Filter\FilterInterface
+     * @return Zend\Filter\Filter
      */
     protected function _getFilter($classBaseName)
     {
@@ -1072,18 +1076,18 @@ class Input
 
     /**
      * @param mixed $classBaseName
-     * @return \Zend\Validate\ValidateInterface
+     * @return Zend\Validator\Validator
      */
     protected function _getValidator($classBaseName)
     {
-        return $this->_getFilterOrValidator(self::VALIDATE, $classBaseName);
+        return $this->_getFilterOrValidator(self::VALIDATOR, $classBaseName);
     }
 
     /**
      * @param string $type
      * @param mixed $classBaseName
-     * @return Zend_Filter_Interface|\Zend\Validate\ValidateInterface
-     * @throws \Zend\Filter\Exception
+     * @return Zend\Filter\Filter|Zend\Validator\Validator
+     * @throws Zend\Filter\Exception
      */
     protected function _getFilterOrValidator($type, $classBaseName)
     {
@@ -1094,7 +1098,8 @@ class Input
             $classBaseName = array_shift($args);
         }
 
-        $interfaceName = 'Zend_' . ucfirst($type) . '_Interface';
+        $interfaceType = ucfirst($type);
+        $interfaceName = '\\Zend\\' . $interfaceType . '\\' . $interfaceType;
         $className = $this->getPluginLoader($type)->load(ucfirst($classBaseName));
 
         $class = new \ReflectionClass($className);

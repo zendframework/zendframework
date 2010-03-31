@@ -54,7 +54,7 @@ class Translator
     /**
      * Adapter
      *
-     * @var \Zend\Translator\Adapter\Adapter
+     * @var \Zend\Translator\Adapter
      */
     private $_adapter;
     private static $_cache = null;
@@ -96,7 +96,7 @@ class Translator
         }
 
         $this->_adapter = new $adapter($data, $locale, $options);
-        if (!$this->_adapter instanceof Adapter\Adapter) {
+        if (!$this->_adapter instanceof Adapter) {
             throw new Exception("Adapter " . $adapter . " does not extend Zend_Translate_Adapter");
         }
     }
@@ -104,7 +104,7 @@ class Translator
     /**
      * Returns the adapters name and it's options
      *
-     * @return \Zend\Translator\Adapter\Adapter
+     * @return \Zend\Translator\Adapter
      */
     public function getAdapter()
     {

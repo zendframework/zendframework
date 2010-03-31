@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Translator\Adapter;
+namespace Zend\Translator;
 use Zend\Log;
 use Zend\Translator;
 use Zend\Locale;

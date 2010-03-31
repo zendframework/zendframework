@@ -23,8 +23,9 @@
  * @namespace
  */
 namespace Zend\Translator\Adapter;
-use Zend\Translator;
-use Zend\Locale;
+use Zend\Translator\Adapter as TranslationAdapter,
+    Zend\Translator,
+    Zend\Locale;
 
 /**
  * @uses       \Zend\Locale\Locale
@@ -35,7 +36,7 @@ use Zend\Locale;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Tmx extends Adapter 
+class Tmx extends TranslationAdapter 
 {
     // Internal variables
     private $_file    = false;

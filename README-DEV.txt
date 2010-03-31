@@ -21,7 +21,7 @@ First pass
 [X] Zend_Cache
     [X] Zend_Locale
         [X] Zend_Date
-        [ ] Zend_Translate
+        [X] Zend_Translate
         [X] Zend_TimeSync
         [ ] Zend_Measure
         [ ] Zend_Currency
@@ -31,7 +31,7 @@ Second pass:
     skip Input at first
 [X] Zend_Validate
     skip Validate_Db at first
-    do [ ] Zend_Filter_Input at this time
+    do [X] Zend_Filter_Input at this time
 [X] Zend_Uri
 
 Third pass:

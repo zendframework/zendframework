@@ -20,9 +20,14 @@
  * @version    $Id$
  */
 
-namespace ZendTest\Filter;
+namespace ZendTest\Filter
+{
 
-use \Zend\Filter;
+use Zend\Filter\InputFilter,
+    Zend\Filter,
+    Zend\Validator,
+    Zend\Loader\PluginLoader\PluginLoader,
+    Zend\Translator;
 
 /**
  * @category   Zend
@@ -32,14 +37,8 @@ use \Zend\Filter;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class InputTest extends \PHPUnit_Framework_TestCase
+class InputFilterTest extends \PHPUnit_Framework_TestCase
 {
-
-    public function setUp()
-    {
-        $this->markTestIncomplete('Zend\\Filter\\Input has not been migrated to namespaces');
-    }
-
     public function testFilterDeclareSingle()
     {
         $data = array(
@@ -48,7 +47,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $filters = array(
             'month' => 'digits'
         );
-        $input = new Zend_Filter_Input($filters, null, $data);
+        $input = new InputFilter($filters, null, $data);
 
         $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
 
@@ -61,11 +60,10 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'month' => '6abc '
         );
-        Zend_Loader::loadClass('Zend_Filter_Digits');
         $filters = array(
-            'month' => array(new Zend_Filter_Digits())
+            'month' => array(new Filter\Digits())
         );
-        $input = new Zend_Filter_Input($filters, null, $data);
+        $input = new InputFilter($filters, null, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -86,7 +84,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
                 array('StringTrim', '_')
             )
         );
-        $input = new Zend_Filter_Input($filters, null, $data);
+        $input = new InputFilter($filters, null, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -105,7 +103,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $filters = array(
             'field1' => array('StringTrim', 'StringToLower')
         );
-        $input = new Zend_Filter_Input($filters, null, $data);
+        $input = new InputFilter($filters, null, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -125,7 +123,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
             '*'       => 'stringTrim',
             'field1'  => 'digits'
         );
-        $input = new Zend_Filter_Input($filters, null, $data);
+        $input = new InputFilter($filters, null, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -144,7 +142,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $filters = array(
             'field1' => 'StringToLower'
         );
-        $input = new Zend_Filter_Input($filters, null, $data);
+        $input = new InputFilter($filters, null, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -164,7 +162,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $validators = array(
             'month' => 'digits'
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -183,7 +181,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $validators = array(
             'month' => 'digits'
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -208,13 +206,12 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'month' => '6'
         );
-        Zend_Loader::loadClass('Zend_Validate_Digits');
         $validators = array(
             'month' => array(
-                new Zend_Validate_Digits()
+                new Validator\Digits()
             )
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -241,7 +238,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
                 array('Between', 1, 12)
             )
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -264,14 +261,13 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field2' => 'abc123',
             'field3' => 150,
         );
-        Zend_Loader::loadClass('Zend_Validate_Between');
-        $btw = new Zend_Validate_Between(1, 100);
+        $btw = new Validator\Between(1, 100);
         $validators = array(
             'field1' => array('digits', $btw),
             'field2' => array('digits', $btw),
             'field3' => array('digits', $btw)
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -294,18 +290,17 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'field2' => 'abc123',
         );
-        Zend_Loader::loadClass('Zend_Validate_Between');
         $validators = array(
             'field2a' => array(
                 'digits',
                 'fields' => 'field2'
             ),
             'field2b' => array(
-                new Zend_Validate_Between(1, 100),
+                new Validator\Between(1, 100),
                 'fields' => 'field2'
             )
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -333,7 +328,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
             '*'       => 'alnum',
             'field1'  => 'digits'
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -354,7 +349,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field1' => 'alpha',
             'field2' => 'alpha'
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -386,15 +381,15 @@ class InputTest extends \PHPUnit_Framework_TestCase
             )
         );
         $options = array(
-            Zend_Filter_Input::INPUT_NAMESPACE => 'TestNamespace'
+            InputFilter::INPUT_NAMESPACE => 'TestNamespace'
         );
 
-        $ip = get_include_path();
-        $dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files';
+        $ip    = get_include_path();
+        $dir   = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files';
         $newIp = $dir . PATH_SEPARATOR . $ip;
         set_include_path($newIp);
 
-        $input = new Zend_Filter_Input(null, $validators, $data, $options);
+        $input = new InputFilter(null, $validators, $data, $options);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -411,7 +406,6 @@ class InputTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-6711
-     *
      */
     public function testValidatorMultiFieldAllowEmptyProcessing()
     {
@@ -427,26 +421,26 @@ class InputTest extends \PHPUnit_Framework_TestCase
                 'fields' => array('password1', 'password2')
             ),
             'rule2' => array(
-                Zend_Filter_Input::ALLOW_EMPTY => false,
+                InputFilter::ALLOW_EMPTY => false,
                 'StringEquals',
                 'fields' => array('password1', 'password3')
             ),
             'rule3' => array(
-                Zend_Filter_Input::ALLOW_EMPTY => false,
+                InputFilter::ALLOW_EMPTY => false,
                 'StringEquals',
                 'fields' => array('password3', 'password4')
             )
         );
         $options = array(
-            Zend_Filter_Input::INPUT_NAMESPACE => 'TestNamespace'
+            InputFilter::INPUT_NAMESPACE => 'TestNamespace'
         );
 
-        $ip = get_include_path();
-        $dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files';
+        $ip    = get_include_path();
+        $dir   = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files';
         $newIp = $dir . PATH_SEPARATOR . $ip;
         set_include_path($newIp);
 
-        $input = new Zend_Filter_Input(null, $validators, $data, $options);
+        $input = new InputFilter(null, $validators, $data, $options);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -472,19 +466,16 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field2' => '150'
         );
 
-        Zend_Loader::loadClass('Zend_Validate_Between');
-
-        $btw1 = new Zend_Validate_Between(1, 100);
-
-        $btw2 = new Zend_Validate_Between(1, 125);
+        $btw1 = new Validator\Between(1, 100);
+        $btw2 = new Validator\Between(1, 125);
         $messageUserDefined = 'Something other than the default message';
-        $btw2->setMessage($messageUserDefined, Zend_Validate_Between::NOT_BETWEEN);
+        $btw2->setMessage($messageUserDefined, Validator\Between::NOT_BETWEEN);
 
         $validators = array(
             'field1' => array($btw1, $btw2),
-            'field2' => array($btw1, $btw2, Zend_Filter_Input::BREAK_CHAIN => true)
+            'field2' => array($btw1, $btw2, InputFilter::BREAK_CHAIN => true)
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -515,14 +506,14 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $validators = array(
             'field1' => array(
                 'alpha',
-                Zend_Filter_Input::ALLOW_EMPTY => false
+                InputFilter::ALLOW_EMPTY => false
             ),
             'field2' => array(
                 'alpha',
-                Zend_Filter_Input::ALLOW_EMPTY => true
+                InputFilter::ALLOW_EMPTY => true
             )
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -549,10 +540,10 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $validators = array(
             'field1' => array(
                 'alpha',
-                Zend_Filter_Input::ALLOW_EMPTY => false
+                InputFilter::ALLOW_EMPTY => false
             ),
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -580,7 +571,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'offset' => 0,
         );
 
-        $input = new Zend_Filter_Input(null, $validation, $data);
+        $input = new InputFilter(null, $validation, $data);
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
         $this->assertFalse($input->hasUnknown(), 'Expected hasUnknown() to return false');
@@ -592,36 +583,32 @@ class InputTest extends \PHPUnit_Framework_TestCase
 
     public function testValidatorAllowEmptyNoValidatorChain()
     {
-        Zend_Loader::loadClass('Zend_Filter_StringTrim');
-        Zend_Loader::loadClass('Zend_Filter_StripTags');
-        Zend_Loader::loadClass('Zend_Validate_EmailAddress');
-
         $data = array(
             'nick'    => '',
             'email'   => 'someemail@server.com'
         );
 
         $filters = array(
-            '*'       => new Zend_Filter_StringTrim(),
-            'nick'    => new Zend_Filter_StripTags()
+            '*'       => new Filter\StringTrim(),
+            'nick'    => new Filter\StripTags()
         );
 
         $validators = array(
             'email'   => array(
-                new Zend_Validate_EmailAddress(),
-                Zend_Filter_Input::ALLOW_EMPTY => true
+                new Validator\EmailAddress(),
+                InputFilter::ALLOW_EMPTY => true
             ),
             /*
              * This is the case we're testing - when presense is required,
              * but there are no validators besides disallowing empty values.
              */
             'nick'    => array(
-                Zend_Filter_Input::PRESENCE    => Zend_Filter_Input::PRESENCE_REQUIRED,
-                Zend_Filter_Input::ALLOW_EMPTY => false
+                InputFilter::PRESENCE    => InputFilter::PRESENCE_REQUIRED,
+                InputFilter::ALLOW_EMPTY => false
             )
         );
 
-        $input = new Zend_Filter_Input($filters, $validators, $data);
+        $input = new InputFilter($filters, $validators, $data);
 
         if ($input->hasInvalid()) {
             $input->getMessages();
@@ -645,16 +632,16 @@ class InputTest extends \PHPUnit_Framework_TestCase
         );
         $validators = array(
             'field1Rule' => array(
-                Zend_Filter_Input::ALLOW_EMPTY => false,
+                InputFilter::ALLOW_EMPTY => false,
                 'fields' => 'field1'
             )
         );
 
         $options = array(
-            Zend_Filter_Input::NOT_EMPTY_MESSAGE => "You cannot give an empty value for field '%field%', according to rule '%rule%'"
+            InputFilter::NOT_EMPTY_MESSAGE => "You cannot give an empty value for field '%field%', according to rule '%rule%'"
         );
 
-        $input = new Zend_Filter_Input(null, $validators, $data, $options);
+        $input = new InputFilter(null, $validators, $data, $options);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -682,7 +669,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field8'   => array('presence' => 'optional', 'allowEmpty' => true, 'default' => array('field8default', 'field8default2')),
         );
         $data = array();
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -715,7 +702,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
                                'default'  => array('field1default'))
         );
         $data = array();
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -742,7 +729,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field3' => 'ABCD',
             'field4' => 'ABCD'
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -771,7 +758,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field1' => 'asd1', // Valid data
             'field2' => '$'     // Invalid data
         );
-        $input = new Zend_Filter_Input($filters, $validators, $data);
+        $input = new InputFilter($filters, $validators, $data);
 
         $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -795,7 +782,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
                 'messages' => $digitsMesg
             )
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -814,18 +801,17 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array('month' => '13abc');
         $digitsMesg = 'Month should consist of digits';
         $betweenMesg = 'Month should be between 1 and 12';
-        Zend_Loader::loadClass('Zend_Validate_Between');
         $validators = array(
             'month' => array(
                 'digits',
-                new Zend_Validate_Between(1, 12),
+                new Validator\Between(1, 12),
                 'messages' => array(
                     $digitsMesg,
                     $betweenMesg
                 )
             )
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -845,18 +831,17 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array('field1' => array('13abc', '234'));
         $digitsMesg = 'Field1 should consist of digits';
         $betweenMesg = 'Field1 should be between 1 and 12';
-        Zend_Loader::loadClass('Zend_Validate_Between');
         $validators = array(
             'field1' => array(
                 'digits',
-                new Zend_Validate_Between(1, 12),
+                new Validator\Between(1, 12),
                 'messages' => array(
                     $digitsMesg,
                     $betweenMesg
                 )
             )
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -875,17 +860,16 @@ class InputTest extends \PHPUnit_Framework_TestCase
     {
         $data = array('month' => '13abc');
         $betweenMesg = 'Month should be between 1 and 12';
-        Zend_Loader::loadClass('Zend_Validate_Between');
         $validators = array(
             'month' => array(
                 'digits',
-                new Zend_Validate_Between(1, 12),
+                new Validator\Between(1, 12),
                 'messages' => array(
                     1 => $betweenMesg
                 )
             )
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -912,7 +896,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
                 'messages' => array('notDigits' => $digitsMesg)
             )
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -923,7 +907,6 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $this->assertType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
         $this->assertEquals(1, count($messages['month']));
-        // $this->assertEquals($digitsMesg, $messages['month'][0]);
     }
 
     public function testValidatorMessagesMultipleWithKeys()
@@ -931,18 +914,17 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array('month' => '13abc');
         $digitsMesg = 'Month should consist of digits';
         $betweenMesg = 'Month should be between 1 and 12';
-        Zend_Loader::loadClass('Zend_Validate_Between');
         $validators = array(
             'month' => array(
                 'digits',
-                new Zend_Validate_Between(1, 12),
+                new Validator\Between(1, 12),
                 'messages' => array(
                     array('notDigits' => $digitsMesg),
                     array('notBetween' => $betweenMesg)
                 )
             )
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -962,18 +944,17 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array('month' => '13abc');
         $digitsMesg = 'Month should consist of digits';
         $betweenMesg = 'Month should be between 1 and 12';
-        Zend_Loader::loadClass('Zend_Validate_Between');
         $validators = array(
             'month' => array(
                 'digits',
-                new Zend_Validate_Between(1, 12),
+                new Validator\Between(1, 12),
                 'messages' => array(
                     $digitsMesg,
                     array('notBetween' => $betweenMesg)
                 )
             )
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -994,10 +975,10 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $validators = array(
             'month' => array(
                 'digits',
-                Zend_Filter_Input::PRESENCE => Zend_Filter_Input::PRESENCE_REQUIRED
+                InputFilter::PRESENCE => InputFilter::PRESENCE_REQUIRED
             )
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1011,10 +992,10 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $validators = array(
             'month' => array(
                 'digits',
-                Zend_Filter_Input::PRESENCE => Zend_Filter_Input::PRESENCE_OPTIONAL
+                InputFilter::PRESENCE => InputFilter::PRESENCE_OPTIONAL
             )
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1028,10 +1009,10 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $validators = array(
             'month' => array(
                 'digits',
-                Zend_Filter_Input::PRESENCE => Zend_Filter_Input::PRESENCE_REQUIRED
+                InputFilter::PRESENCE => InputFilter::PRESENCE_REQUIRED
             )
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1050,14 +1031,14 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $validators = array(
             'monthRule' => array(
                 'digits',
-                Zend_Filter_Input::PRESENCE => Zend_Filter_Input::PRESENCE_REQUIRED,
+                InputFilter::PRESENCE => InputFilter::PRESENCE_REQUIRED,
                 'fields' => 'month'
             )
         );
         $options = array(
-            Zend_Filter_Input::MISSING_MESSAGE => 'I looked for %field% but I did not find it; it is required by rule %rule%'
+            InputFilter::MISSING_MESSAGE => 'I looked for %field% but I did not find it; it is required by rule %rule%'
         );
-        $input = new Zend_Filter_Input(null, $validators, $data, $options);
+        $input = new InputFilter(null, $validators, $data, $options);
 
         $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1078,7 +1059,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $validators = array(
             'month' => 'digits'
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expecting hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expecting hasInvalid() to return false');
@@ -1094,7 +1075,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $validators = array(
             'month' => 'digits'
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1115,7 +1096,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'month' => 'digits',
             'field2' => array('digits', 'presence' => 'required')
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -1145,7 +1126,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field1' => 'alpha',
             'field2' => 'alpha'
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -1181,12 +1162,12 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field3' => 'digits'
         );
 
-        $ip = get_include_path();
-        $dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files';
+        $ip    = get_include_path();
+        $dir   = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files';
         $newIp = $dir . PATH_SEPARATOR . $ip;
         set_include_path($newIp);
 
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
         $input->addNamespace('TestNamespace');
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
@@ -1206,48 +1187,33 @@ class InputTest extends \PHPUnit_Framework_TestCase
 
     public function testGetPluginLoader()
     {
-        $input = new Zend_Filter_Input(null, null);
+        $input = new InputFilter(null, null);
 
-        $loader = $input->getPluginLoader(Zend_Filter_Input::VALIDATE);
-        $this->assertType('Zend_Loader_PluginLoader', $loader,
-            'Expected object of type Zend_Loader_PluginLoader, got ' , get_class($loader));
+        $loader = $input->getPluginLoader(InputFilter::VALIDATOR);
+        $this->assertType('\\Zend\\Loader\\PluginLoader\\PluginLoader', $loader,
+            'Expected object of type Zend\\Loader\\PluginLoader\\PluginLoader, got ' , get_class($loader));
 
-        try {
-            $loader = $input->getPluginLoader('foo');
-            $this->fail('Expected to catch Zend_Filter_Exception');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Filter_Exception', $e,
-                'Expected object of type Zend_Filter_Exception, got '.get_class($e));
-            $this->assertEquals('Invalid type "foo" provided to getPluginLoader()',
-                $e->getMessage());
-        }
-
+        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Invalid type');
+        $loader = $input->getPluginLoader('foo');
     }
 
     public function testSetPluginLoader()
     {
-        $input = new Zend_Filter_Input(null, null);
+        $input = new InputFilter(null, null);
 
-        $loader = new Zend_Loader_PluginLoader();
+        $loader = new PluginLoader();
 
-        $input->setPluginLoader($loader, Zend_Filter_Input::VALIDATE);
+        $input->setPluginLoader($loader, InputFilter::VALIDATOR);
     }
 
     public function testSetPluginLoaderInvalidType()
     {
-        $input = new Zend_Filter_Input(null, null);
+        $input = new InputFilter(null, null);
 
-        $loader = new Zend_Loader_PluginLoader();
+        $loader = new PluginLoader();
 
-        try {
-            $input->setPluginLoader($loader, 'foo');
-            $this->fail('Expected to catch Zend_Filter_Exception');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Filter_Exception', $e,
-                'Expected object of type Zend_Filter_Exception, got '.get_class($e));
-            $this->assertEquals('Invalid type "foo" provided to setPluginLoader()',
-                $e->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Invalid type');
+        $input->setPluginLoader($loader, 'foo');
     }
 
     public function testNamespaceExceptionClassNotFound()
@@ -1259,15 +1225,10 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field1' => 'MyDigits'
         );
         // Do not add namespace on purpose, so MyDigits will not be found
-        $input = new Zend_Filter_Input(null, $validators, $data);
-        try {
-            $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
-            $this->fail('Expected to catch Zend_Filter_Exception');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Loader_PluginLoader_Exception', $e,
-                'Expected object of type Zend_Filter_Exception, got '.get_class($e));
-            $this->assertContains("not found in the registry", $e->getMessage());
-        }
+        $input = new InputFilter(null, $validators, $data);
+
+        $this->setExpectedException('\\Zend\\Loader\\Exception', 'not found');
+        $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
     }
 
     public function testNamespaceExceptionInvalidClass()
@@ -1280,17 +1241,10 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field1' => 'Exception'
         );
 
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
-        try {
-            $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
-            $this->fail('Expected to catch Zend_Filter_Exception');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Filter_Exception', $e,
-                'Expected object of type Zend_Filter_Exception, got '.get_class($e));
-            $this->assertEquals("Class 'Zend_Validate_Exception' based on basename 'Exception' must implement the 'Zend_Validate_Interface' interface",
-                $e->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Filter\\Exception', 'must implement');
+        $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
     }
 
     public function testSetDefaultEscapeFilter()
@@ -1298,7 +1252,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'field1' => ' ab&c '
         );
-        $input = new Zend_Filter_Input(null, null, $data);
+        $input = new InputFilter(null, null, $data);
         $input->setDefaultEscapeFilter('StringTrim');
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
@@ -1311,15 +1265,10 @@ class InputTest extends \PHPUnit_Framework_TestCase
 
     public function testSetDefaultEscapeFilterExceptionWrongClassType()
     {
-        $input = new Zend_Filter_Input(null, null);
-        try {
-            $input->setDefaultEscapeFilter(new StdClass());
-            $this->fail('Expected to catch Zend_Filter_Exception');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Filter_Exception', $e,
-                'Expected object of type Zend_Filter_Exception, got '.get_class($e));
-            $this->assertEquals("Escape filter specified does not implement Zend_Filter_Interface", $e->getMessage());
-        }
+        $input = new InputFilter(null, null);
+
+        $this->setExpectedException('\\Zend\\Filter\\Exception', 'does not implement');
+        $input->setDefaultEscapeFilter(new \StdClass());
     }
 
     public function testOptionAllowEmpty()
@@ -1331,9 +1280,9 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field1' => 'alpha'
         );
         $options = array(
-            Zend_Filter_Input::ALLOW_EMPTY => true
+            InputFilter::ALLOW_EMPTY => true
         );
-        $input = new Zend_Filter_Input(null, $validators, $data, $options);
+        $input = new InputFilter(null, $validators, $data, $options);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1349,16 +1298,15 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'field1' => '150'
         );
-        Zend_Loader::loadClass('Zend_Validate_Between');
-        $btw1 = new Zend_Validate_Between(1, 100);
-        $btw2 = new Zend_Validate_Between(1, 125);
+        $btw1 = new Validator\Between(1, 100);
+        $btw2 = new Validator\Between(1, 125);
         $validators = array(
             'field1' => array($btw1, $btw2),
         );
         $options = array(
-            Zend_Filter_Input::BREAK_CHAIN => true
+            InputFilter::BREAK_CHAIN => true
         );
-        $input = new Zend_Filter_Input(null, $validators, $data, $options);
+        $input = new InputFilter(null, $validators, $data, $options);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -1379,9 +1327,9 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field1' => ' ab&c '
         );
         $options = array(
-            Zend_Filter_Input::ESCAPE_FILTER => 'StringTrim'
+            InputFilter::ESCAPE_FILTER => 'StringTrim'
         );
-        $input = new Zend_Filter_Input(null, null, $data, $options);
+        $input = new InputFilter(null, null, $data, $options);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1404,15 +1352,15 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field3' => 'digits'
         );
         $options = array(
-            Zend_Filter_Input::INPUT_NAMESPACE => 'TestNamespace'
+            InputFilter::INPUT_NAMESPACE => 'TestNamespace'
         );
 
-        $ip = get_include_path();
-        $dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files';
+        $ip    = get_include_path();
+        $dir   = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files';
         $newIp = $dir . PATH_SEPARATOR . $ip;
         set_include_path($newIp);
 
-        $input = new Zend_Filter_Input(null, $validators, $data, $options);
+        $input = new InputFilter(null, $validators, $data, $options);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -1440,9 +1388,9 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field2' => 'Digits'
         );
         $options = array(
-            Zend_Filter_Input::PRESENCE => true
+            InputFilter::PRESENCE => true
         );
-        $input = new Zend_Filter_Input(null, $validators, $data, $options);
+        $input = new InputFilter(null, $validators, $data, $options);
 
         $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1460,14 +1408,9 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $options = array(
             'unknown' => 'xxx'
         );
-        try {
-            $input = new Zend_Filter_Input(null, null, null, $options);
-            $this->fail('Expected to catch Zend_Filter_Exception');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Filter_Exception', $e,
-                'Expected object of type Zend_Filter_Exception, got '.get_class($e));
-            $this->assertEquals("Unknown option 'unknown'", $e->getMessage());
-        }
+
+        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Unknown option');
+        $input = new InputFilter(null, null, null, $options);
     }
 
     public function testGetEscaped()
@@ -1475,7 +1418,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'field1' => 'ab&c'
         );
-        $input = new Zend_Filter_Input(null, null, $data);
+        $input = new InputFilter(null, null, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1491,7 +1434,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'field1' => 'ab&c'
         );
-        $input = new Zend_Filter_Input(null, null, $data);
+        $input = new InputFilter(null, null, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1506,7 +1449,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'field1' => 'ab&c'
         );
-        $input = new Zend_Filter_Input(null, null, $data);
+        $input = new InputFilter(null, null, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1522,7 +1465,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'multiSelect' => array('C&H', 'B&O', 'AT&T')
         );
-        $input = new Zend_Filter_Input(null, null, $data);
+        $input = new InputFilter(null, null, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1540,7 +1483,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'field1' => 'ab&c'
         );
-        $input = new Zend_Filter_Input(null, null, $data);
+        $input = new InputFilter(null, null, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1556,7 +1499,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'field1' => 'ab&c'
         );
-        $input = new Zend_Filter_Input(null, null, $data);
+        $input = new InputFilter(null, null, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1571,7 +1514,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'field1' => 'ab&c'
         );
-        $input = new Zend_Filter_Input(null, null, $data);
+        $input = new InputFilter(null, null, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1593,22 +1536,18 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field2' => 'digits'
         );
         $validators = array(
-            'field1' => array(Zend_Filter_Input::PRESENCE => Zend_Filter_Input::PRESENCE_OPTIONAL),
+            'field1' => array(InputFilter::PRESENCE => InputFilter::PRESENCE_OPTIONAL),
             'field2' => array(
                 'digits',
-                Zend_Filter_Input::PRESENCE => Zend_Filter_Input::PRESENCE_REQUIRED
+                InputFilter::PRESENCE => InputFilter::PRESENCE_REQUIRED
             )
         );
-        $input = new Zend_Filter_Input($filters, $validators, $data);
-        try {
-            $input->process();
-            $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
-            $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
-            $this->assertFalse($input->hasUnknown(), 'Expected hasUnknown() to return false');
-            $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
-        } catch (Zend_Exception $e) {
-            $this->fail('Received Zend_Exception where none was expected');
-        }
+        $input = new InputFilter($filters, $validators, $data);
+        $input->process();
+        $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
+        $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
+        $this->assertFalse($input->hasUnknown(), 'Expected hasUnknown() to return false');
+        $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
     }
 
     public function testProcessUnknownThrowsNoException()
@@ -1623,22 +1562,18 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field2' => 'digits'
         );
         $validators = array(
-            'field1' => array(Zend_Filter_Input::PRESENCE => Zend_Filter_Input::PRESENCE_OPTIONAL),
+            'field1' => array(InputFilter::PRESENCE => InputFilter::PRESENCE_OPTIONAL),
             'field2' => array(
                 'digits',
-                Zend_Filter_Input::PRESENCE => Zend_Filter_Input::PRESENCE_REQUIRED
+                InputFilter::PRESENCE => InputFilter::PRESENCE_REQUIRED
             )
         );
-        $input = new Zend_Filter_Input($filters, $validators, $data);
-        try {
-            $input->process();
-            $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
-            $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
-            $this->assertTrue($input->hasUnknown(), 'Expected hasUnknown() to retrun true');
-            $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
-        } catch (Zend_Exception $e) {
-            $this->fail('Received Zend_Exception where none was expected');
-        }
+        $input = new InputFilter($filters, $validators, $data);
+        $input->process();
+        $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
+        $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
+        $this->assertTrue($input->hasUnknown(), 'Expected hasUnknown() to retrun true');
+        $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
     }
 
     public function testProcessInvalidThrowsException()
@@ -1652,19 +1587,17 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'field2' => 'digits'
         );
         $validators = array(
-            'field1' => array(Zend_Filter_Input::PRESENCE => Zend_Filter_Input::PRESENCE_OPTIONAL),
+            'field1' => array(InputFilter::PRESENCE => InputFilter::PRESENCE_OPTIONAL),
             'field2' => array(
                 'digits',
-                Zend_Filter_Input::PRESENCE => Zend_Filter_Input::PRESENCE_REQUIRED
+                InputFilter::PRESENCE => InputFilter::PRESENCE_REQUIRED
             )
         );
-        $input = new Zend_Filter_Input($filters, $validators, $data);
+        $input = new InputFilter($filters, $validators, $data);
         try {
             $input->process();
             $this->fail('Expected to catch Zend_Filter_Exception');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Filter_Exception', $e,
-                'Expected object of type Zend_Filter_Exception, got '.get_class($e));
+        } catch (\Zend\Filter\Exception $e) {
             $this->assertEquals("Input has invalid fields", $e->getMessage());
             $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
             $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -1685,20 +1618,18 @@ class InputTest extends \PHPUnit_Framework_TestCase
         );
         $validators = array(
             'field1' => array(
-                Zend_Filter_Input::PRESENCE => Zend_Filter_Input::PRESENCE_OPTIONAL
+                InputFilter::PRESENCE => InputFilter::PRESENCE_OPTIONAL
             ),
             'field2' => array(
                 'digits',
-                Zend_Filter_Input::PRESENCE => Zend_Filter_Input::PRESENCE_REQUIRED
+                InputFilter::PRESENCE => InputFilter::PRESENCE_REQUIRED
             )
         );
-        $input = new Zend_Filter_Input($filters, $validators, $data);
+        $input = new InputFilter($filters, $validators, $data);
         try {
             $input->process();
             $this->fail('Expected to catch Zend_Filter_Exception');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Filter_Exception', $e,
-                'Expected object of type Zend_Filter_Exception, got '.get_class($e));
+        } catch (\Zend\Filter\Exception $e) {
             $this->assertEquals("Input has missing fields", $e->getMessage());
             $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
             $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1712,7 +1643,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
      */
     public function testInsertingNullDoesNotGetEscapedWithDefaultEscapeMethod()
     {
-        $input = new Zend_Filter_Input(null, null, array('test' => null));
+        $input = new InputFilter(null, null, array('test' => null));
         $input->process();
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
@@ -1740,19 +1671,12 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'date1' => '1990-01-01'
         );
         $options = array(
-            'inputNamespace' => array('MyZend_Filter', 'MyZend_Validate'),
+            'inputNamespace' => array('\\ZendTest\\Filter\\TestClasses\\Filter', '\\ZendTest\\Filter\\TestClasses\\Validator'),
         );
-        $filter = new Zend_Filter_Input($filters, $validators, $data, $options);
+        $filter = new InputFilter($filters, $validators, $data, $options);
 
-        try {
-            $filter->process();
-            $this->fail();
-        } catch(Zend_Filter_Exception $e) {
-            $this->assertEquals(
-                "Class 'MyZend_Validate_Date' based on basename 'Date' must implement the 'Zend_Filter_Interface' interface",
-                $e->getMessage()
-            );
-        }
+        $this->setExpectedException('\\Zend\\Filter\\Exception', 'must implement');
+        $filter->process();
     }
 
     /**
@@ -1771,31 +1695,23 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'date1' => '1990-01-01'
         );
         $options = array(
-            'filterNamespace' => array('MyZend_Filter'),
-            'validatorNamespace' => array('MyZend_Validate'),
+            'filterNamespace' => array('\\ZendTest\\Filter\\TestClasses\\Filter'),
+            'validatorNamespace' => array('\\ZendTest\\Filter\\TestClasses\\Validator'),
         );
-        $filter = new Zend_Filter_Input($filters, $validators, $data, $options);
+        $filter = new InputFilter($filters, $validators, $data, $options);
 
-        try {
-            $filter->process();
-            $this->assertEquals("2000-01-01", $filter->date1);
-        } catch(Zend_Filter_Exception $e) {
-            $this->fail();
-        }
+        $filter->process();
+        $this->assertEquals("2000-01-01", $filter->date1);
 
         // String notation
         $options = array(
-            'filterNamespace' => 'MyZend_Filter',
-            'validatorNamespace' => 'MyZend_Validate',
+            'filterNamespace' => '\\ZendTest\\Filter\\TestClasses\\Filter',
+            'validatorNamespace' => '\\ZendTest\\Filter\\TestClasses\\Validate',
         );
-        $filter = new Zend_Filter_Input($filters, $validators, $data, $options);
+        $filter = new InputFilter($filters, $validators, $data, $options);
 
-        try {
-            $filter->process();
-            $this->assertEquals("2000-01-01", $filter->date1);
-        } catch(Zend_Filter_Exception $e) {
-            $this->fail();
-        }
+        $filter->process();
+        $this->assertEquals("2000-01-01", $filter->date1);
     }
 
     /**
@@ -1811,7 +1727,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
                 'notEmpty'
             )
         );
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -1830,33 +1746,33 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $filters = array( );
         $validators = array(
             'street' => array (
-                new Zend_Validate_NotEmpty (),
-                new Zend_Validate_Regex ( '/^[a-zA-Z0-9]{1,30}$/u' ),
-                new Zend_Validate_StringLength ( 0, 10 ),
-                Zend_Filter_Input::PRESENCE => Zend_Filter_Input::PRESENCE_REQUIRED,
-                Zend_Filter_Input::DEFAULT_VALUE => '',
-                Zend_Filter_Input::BREAK_CHAIN => true,
+                new Validator\NotEmpty (),
+                new Validator\Regex ( '/^[a-zA-Z0-9]{1,30}$/u' ),
+                new Validator\StringLength ( 0, 10 ),
+                InputFilter::PRESENCE => InputFilter::PRESENCE_REQUIRED,
+                InputFilter::DEFAULT_VALUE => '',
+                InputFilter::BREAK_CHAIN => true,
                 'messages' => array (
                     0 => 'Bitte geben Sie Ihre Straße ein.',
                     'Verwenden Sie bitte keine Sonderzeichen bei der Eingabe.',
                     array (
-                        Zend_Validate_StringLength::TOO_LONG => 'Bitte beschränken Sie sich auf %max% Zeichen'
+                        Validator\StringLength::TOO_LONG => 'Bitte beschränken Sie sich auf %max% Zeichen'
                     )
                 )
             )
         );
 
-        $filter = new Zend_Filter_Input($filters, $validators, array('street' => ''));
+        $filter = new InputFilter($filters, $validators, array('street' => ''));
         $this->assertFalse($filter->isValid());
         $message = $filter->getMessages();
         $this->assertContains('Bitte geben Sie Ihre Straße ein.', $message['street']['isEmpty']);
 
-        $filter2 = new Zend_Filter_Input($filters, $validators, array('street' => 'Str!!'));
+        $filter2 = new InputFilter($filters, $validators, array('street' => 'Str!!'));
         $this->assertFalse($filter2->isValid());
         $message = $filter2->getMessages();
         $this->assertContains('Verwenden Sie bitte keine Sonderzeichen', $message['street']['regexNotMatch']);
 
-        $filter3 = new Zend_Filter_Input($filters, $validators, array('street' => 'Str1234567890'));
+        $filter3 = new InputFilter($filters, $validators, array('street' => 'Str1234567890'));
         $this->assertFalse($filter3->isValid());
         $message = $filter3->getMessages();
         $this->assertContains('Bitte beschränken Sie sich auf', $message['street']['stringLengthTooLong']);
@@ -1882,7 +1798,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
             'content' => ''
         );
 
-        $filter = new Zend_Filter_Input($filters, $validators, $data);
+        $filter = new InputFilter($filters, $validators, $data);
         $this->assertFalse($filter->isValid());
         $message = $filter->getMessages();
         $this->assertContains('Please enter your name', $message['name']['isEmpty']);
@@ -1895,7 +1811,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
      */
     public function testTranslateNotEmptyMessages()
     {
-        $translator = new Zend_Translate_Adapter_Array(array('missingMessage' => 'Still missing'));
+        $translator = new Translator\Adapter\ArrayAdapter(array('missingMessage' => 'Still missing'));
 
         $validators = array(
             'rule1'   => array('presence' => 'required',
@@ -1903,7 +1819,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
                                'default'  => array('field1default'))
         );
         $data = array();
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
         $input->setTranslator($translator);
 
         $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
@@ -1919,8 +1835,8 @@ class InputTest extends \PHPUnit_Framework_TestCase
      */
     public function testTranslateNotEmptyMessagesByUsingRegistry()
     {
-        $translator = new Zend_Translate_Adapter_Array(array('missingMessage' => 'Still missing'));
-        Zend_Registry::set('Zend_Translate', $translator);
+        $translator = new Translator\Adapter\ArrayAdapter(array('missingMessage' => 'Still missing'));
+        \Zend\Registry::set('Zend_Translate', $translator);
 
         $validators = array(
             'rule1'   => array('presence' => 'required',
@@ -1928,7 +1844,7 @@ class InputTest extends \PHPUnit_Framework_TestCase
                                'default'  => array('field1default'))
         );
         $data = array();
-        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input = new InputFilter(null, $validators, $data);
 
         $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
         $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1942,31 +1858,40 @@ class InputTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class MyZend_Filter_Date implements Filter\Filter
+} // end namespace declaration
+
+namespace ZendTest\Filter\TestClasses\Filter
 {
-    public function __invoke($value)
+    use Zend\Filter\Filter;
+
+    class Date implements Filter
     {
-        return "2000-01-01";
+        public function __invoke($value)
+        {
+            return "2000-01-01";
+        }
     }
 }
 
-/*
- * Uncomment once Zend\Filter\Input is implemented and ready to test
-class MyZend_Validate_Date implements Zend_Validate_Interface
+namespace ZendTest\Filter\TestClasses\Validator
 {
-    public function isValid($value)
-    {
-        return true;
-    }
+    use Zend\Validator\Validator;
 
-    public function getMessages()
+    class Date implements Validator
     {
-        return array();
-    }
+        public function isValid($value)
+        {
+            return true;
+        }
 
-    public function getErrors()
-    {
-        return array();
+        public function getMessages()
+        {
+            return array();
+        }
+
+        public function getErrors()
+        {
+            return array();
+        }
     }
 }
- */

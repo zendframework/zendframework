@@ -24,6 +24,8 @@
  */
 namespace Zend\Translator\Adapter;
 
+use Zend\Translator\Adapter as TranslationAdapter;
+
 /**
  * @uses       \Zend\Locale\Locale
  * @uses       \Zend\Translator\Adapter\Adapter
@@ -33,7 +35,7 @@ namespace Zend\Translator\Adapter;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Ini extends Adapter
+class Ini extends TranslationAdapter
 {
     private $_data = array();
 

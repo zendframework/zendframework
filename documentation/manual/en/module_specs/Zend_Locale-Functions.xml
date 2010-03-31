@@ -133,9 +133,7 @@ print_r($found2);
         <para>
             A new locale can be set with the function <methodname>setLocale()</methodname>. This
             function takes a locale string as parameter. If no locale is given, a locale is
-            <link linkend="zend.locale.selection">automatically selected</link>. Since
-            <classname>Zend_Locale</classname> objects are "light", this method exists primarily to
-            cause side-effects for code that have references to the existing instance object.
+            <link linkend="zend.locale.selection">automatically selected</link>.
         </para>
 
         <example id="zend.locale.setlocale.example-1">

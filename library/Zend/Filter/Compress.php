@@ -27,15 +27,15 @@ namespace Zend\Filter;
 /**
  * Compresses a given string
  *
- * @uses       \Zend\Filter\Exception
- * @uses       \Zend\Filter\FilterInterface
- * @uses       \Zend\Loader
+ * @uses       Zend\Filter\Exception
+ * @uses       Zend\Filter\AbstractFilter
+ * @uses       Zend\Loader
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Compress implements Filter
+class Compress extends AbstractFilter
 {
     /**
      * Compression adapter
@@ -189,7 +189,7 @@ class Compress implements Filter
      * @param  string $value Content to compress
      * @return string The compressed content
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         return $this->getAdapter()->compress($value);
     }

@@ -25,15 +25,15 @@
 namespace Zend\Filter;
 
 /**
- * @uses       \Zend\Filter\Exception
- * @uses       \Zend\Filter\FilterInterface
- * @uses       \Zend\Loader
+ * @uses       Zend\Filter\Exception
+ * @uses       Zend\Filter\AbstractFilter
+ * @uses       Zend\Loader
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FilterChain implements Filter
+class FilterChain extends AbstractFilter
 {
     const CHAIN_APPEND  = 'append';
     const CHAIN_PREPEND = 'prepend';
@@ -102,11 +102,11 @@ class FilterChain implements Filter
      * @param  mixed $value
      * @return mixed
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         $valueFiltered = $value;
         foreach ($this->_filters as $filter) {
-            $valueFiltered = $filter($valueFiltered);
+            $valueFiltered = $filter->filter($valueFiltered);
         }
         return $valueFiltered;
     }

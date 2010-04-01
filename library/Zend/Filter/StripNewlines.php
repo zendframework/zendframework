@@ -25,13 +25,13 @@
 namespace Zend\Filter;
 
 /**
- * @uses       \Zend\Filter\Filter
+ * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class StripNewlines implements Filter
+class StripNewlines extends AbstractFilter
 {
 
     /**
@@ -42,7 +42,7 @@ class StripNewlines implements Filter
      * @param  string $value
      * @return string
      */
-    public function __invoke ($value)
+    public function filter ($value)
     {
         return str_replace(array("\n", "\r"), '', $value);
     }

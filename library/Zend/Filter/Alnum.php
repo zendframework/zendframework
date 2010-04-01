@@ -26,14 +26,14 @@ namespace Zend\Filter;
 use Zend\Locale\Locale;
 
 /**
- * @uses       \Zend\Filter\Filter
- * @uses       \Zend\Locale\Locale
+ * @uses       Zend\Filter\AbstractFilter
+ * @uses       Zend\Locale\Locale
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Alnum implements Filter
+class Alnum extends AbstractFilter
 {
     /**
      * Whether to allow white space characters; off by default
@@ -126,7 +126,7 @@ class Alnum implements Filter
      * @param  string $value
      * @return string
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         $whiteSpace = $this->allowWhiteSpace ? '\s' : '';
         if (!self::$_unicodeEnabled) {

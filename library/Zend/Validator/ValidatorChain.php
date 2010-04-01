@@ -131,4 +131,14 @@ class ValidatorChain implements Validator
         return $this->_errors;
     }
 
+    /**
+     * Invoke chain as command
+     * 
+     * @param  mixed $value 
+     * @return boolean
+     */
+    public function __invoke($value)
+    {
+        return $this->isValid($value);
+    }
 }

@@ -27,15 +27,15 @@ namespace Zend\Filter;
 /**
  * Encrypts a given string
  *
- * @uses       \Zend\Filter\Exception
- * @uses       \Zend\Filter\FilterInterface
- * @uses       \Zend\Loader
+ * @uses       Zend\Filter\Exception
+ * @uses       Zend\Filter\AbstractFilter
+ * @uses       Zend\Loader
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Encrypt implements Filter
+class Encrypt extends AbstractFilter
 {
     /**
      * Encryption adapter
@@ -127,7 +127,7 @@ class Encrypt implements Filter
      * @param  string $value Content to encrypt
      * @return string The encrypted content
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         return $this->_adapter->encrypt($value);
     }

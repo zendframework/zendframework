@@ -207,6 +207,13 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
             );
     }
 
+    public function testInvokeProxiesToIsValid()
+    {
+        $validator = new Concrete;
+        $this->assertFalse($validator('foo'));
+        $this->assertContains("foo was passed", $validator->getMessages());
+    }
+
     /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *

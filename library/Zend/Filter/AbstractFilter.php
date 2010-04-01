@@ -25,24 +25,24 @@
 namespace Zend\Filter;
 
 /**
- * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class BaseName extends AbstractFilter
+abstract class AbstractFilter implements Filter
 {
     /**
-     * Defined by Zend_Filter_Interface
+     * Invoke filter as a command
      *
-     * Returns basename($value)
+     * Proxies to {@link filter()}
      *
-     * @param  string $value
-     * @return string
+     * @param  mixed $value
+     * @throws Zend\Filter\Exception If filtering $value is impossible
+     * @return mixed
      */
-    public function filter($value)
+    public function __invoke($value)
     {
-        return basename((string) $value);
+        return $this->filter($value);
     }
 }

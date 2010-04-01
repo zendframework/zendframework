@@ -1862,11 +1862,11 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
 
 namespace ZendTest\Filter\TestClasses\Filter
 {
-    use Zend\Filter\Filter;
+    use Zend\Filter\AbstractFilter;
 
-    class Date implements Filter
+    class Date extends AbstractFilter
     {
-        public function __invoke($value)
+        public function filter($value)
         {
             return "2000-01-01";
         }
@@ -1882,6 +1882,11 @@ namespace ZendTest\Filter\TestClasses\Validator
         public function isValid($value)
         {
             return true;
+        }
+
+        public function __invoke($value)
+        {
+            return $this->isValid($value);
         }
 
         public function getMessages()

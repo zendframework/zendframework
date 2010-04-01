@@ -29,15 +29,15 @@ use Zend\Locale\Format,
 /**
  * Localizes given normalized input
  *
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Filter\Filter
- * @uses       \Zend\Locale\Format
+ * @uses       Zend\Date\Date
+ * @uses       Zend\Filter\AbstractFilter
+ * @uses       Zend\Locale\Format
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class NormalizedToLocalized implements Filter
+class NormalizedToLocalized extends AbstractFilter
 {
     /**
      * Set options
@@ -94,7 +94,7 @@ class NormalizedToLocalized implements Filter
      * @param  string $value Value to normalized
      * @return string|array The normalized value
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         if (is_array($value)) {
             $date = new Date($value, $this->_options['locale']);

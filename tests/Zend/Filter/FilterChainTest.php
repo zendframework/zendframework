@@ -23,7 +23,7 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\FilterChain,
-    Zend\Filter\Filter;
+    Zend\Filter\AbstractFilter;
 
 /**
  * @category   Zend
@@ -78,18 +78,18 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 }
 
 
-class LowerCase implements Filter
+class LowerCase extends AbstractFilter
 {
-    public function __invoke($value)
+    public function filter($value)
     {
         return strtolower($value);
     }
 }
 
 
-class StripUpperCase implements Filter
+class StripUpperCase extends AbstractFilter
 {
-    public function __invoke($value)
+    public function filter($value)
     {
         return preg_replace('/[A-Z]/', '', $value);
     }

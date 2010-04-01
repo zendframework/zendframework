@@ -25,13 +25,13 @@
 namespace Zend\Filter;
 
 /**
- * @uses       \Zend\Filter\Filter
+ * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Digits implements Filter
+class Digits extends AbstractFilter
 {
     /**
      * Is PCRE is compiled with UTF-8 and Unicode support
@@ -62,7 +62,7 @@ class Digits implements Filter
      * @param  string $value
      * @return string
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         if (!self::$_unicodeEnabled) {
             // POSIX named classes are not supported, use alternative 0-9 match

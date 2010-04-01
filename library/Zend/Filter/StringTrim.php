@@ -25,13 +25,13 @@
 namespace Zend\Filter;
 
 /**
- * @uses       \Zend\Filter\Filter
+ * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class StringTrim implements Filter
+class StringTrim extends AbstractFilter
 {
     /**
      * List of characters provided to the trim() function
@@ -94,7 +94,7 @@ class StringTrim implements Filter
      * @param  string $value
      * @return string
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         if (null === $this->_charList) {
             return $this->_unicodeTrim((string) $value);

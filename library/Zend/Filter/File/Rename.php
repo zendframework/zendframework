@@ -26,14 +26,14 @@ namespace Zend\Filter\File;
 use Zend\Filter;
 
 /**
- * @uses       \Zend\Filter\Exception
- * @uses       \Zend\Filter\Filter
+ * @uses       Zend\Filter\Exception
+ * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Rename implements Filter\Filter
+class Rename extends Filter\AbstractFilter
 {
     /**
      * Internal array of array(source, target, overwrite)
@@ -176,7 +176,7 @@ class Rename implements Filter\Filter
      * @throws \Zend\Filter\Exception
      * @return string The new filename which has been set, or false when there were errors
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         $file   = $this->getNewName($value, true);
         if (is_string($file)) {

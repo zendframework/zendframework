@@ -18,6 +18,11 @@ Zend_Config:
  * "Writer_FileAbstract" renamed to "Writer\AbstractFileWriter"
  * "Writer_Array" renamed to "Writer\ArrayWriter"
 
+Zend_Currency:
+ * "Zend_Currency" prefix now becomes "Zend\Currency" namespace
+ * "Zend_Currency" becomes "Zend\Currency\Currency"
+ * "CurrencyInterface" is renamed to "CurrencyServiceInterface"
+
 Zend_Log:
  * "Log" becomes "Logger"
  * "FactoryInterface" becomes "Factory"

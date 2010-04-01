@@ -21,8 +21,9 @@
  */
 
 /**
- * Zend_Date
+ * @namespace
  */
+namespace ZendTest\Currency;
 
 /**
  * @category   Zend
@@ -32,7 +33,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Currency
  */
-class ExchangeTest implements Zend_Currency_CurrencyInterface
+class ExchangeTest implements Zend\Currency\CurrencyServiceInterface
 {
     /**
      * Test method for exchange rate

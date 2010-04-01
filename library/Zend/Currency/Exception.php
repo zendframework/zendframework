@@ -20,14 +20,17 @@
  */
 
 /**
- * Exception class for Zend_Currency
- *
- * @uses      Zend_Exception
- * @category  Zend
- * @package   Zend_Currency
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @namespace
  */
-class Zend_Currency_Exception extends Zend_Exception
+namespace Zend\Currency;
+
+/**
+ * @uses       \Zend\Exception
+ * @category   Zend
+ * @package    Zend_Currency
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class Exception extends \Zend\Exception
 {
 }

@@ -25,14 +25,14 @@
 namespace Zend\Filter;
 
 /**
- * @uses       \Zend\Filter\Exception
- * @uses       \Zend\Filter\Filter
+ * @uses       Zend\Filter\Exception
+ * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class StringToLower implements Filter
+class StringToLower extends AbstractFilter
 {
     /**
      * Encoding for the input string
@@ -106,7 +106,7 @@ class StringToLower implements Filter
      * @param  string $value
      * @return string
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         if ($this->_encoding !== null) {
             return mb_strtolower((string) $value, $this->_encoding);

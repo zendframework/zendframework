@@ -29,15 +29,15 @@ use Zend\Loader\PluginLoader;
 /**
  * Filter chain for string inflection
  *
- * @uses       \Zend\Filter\Exception
- * @uses       \Zend\Filter\Filter
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
+ * @uses       Zend\Filter\Exception
+ * @uses       Zend\Filter\AbstractFilter
+ * @uses       Zend\Loader\PluginLoader\PluginLoader
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Inflector implements Filter
+class Inflector extends AbstractFilter
 {
     /**
      * @var \Zend\Loader\PluginLoader\PluginLoaderInterface
@@ -452,7 +452,7 @@ class Inflector implements Filter
      * @param  string|array $source
      * @return string
      */
-    public function __invoke($source)
+    public function filter($source)
     {
         // clean source
         foreach ( (array) $source as $sourceName => $sourceValue) {

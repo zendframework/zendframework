@@ -116,6 +116,17 @@ abstract class AbstractValidator implements Validator
     }
 
     /**
+     * Invoke as command
+     * 
+     * @param  mixed $value 
+     * @return boolean
+     */
+    public function __invoke($value)
+    {
+        return $this->isValid($value);
+    }
+
+    /**
      * Returns an array of the names of variables that are used in constructing validation failure messages
      *
      * @return array

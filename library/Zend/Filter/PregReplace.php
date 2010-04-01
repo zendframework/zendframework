@@ -25,14 +25,14 @@
 namespace Zend\Filter;
 
 /**
- * @uses       \Zend\Filter\Exception
- * @uses       \Zend\Filter\Filter
+ * @uses       Zend\Filter\Exception
+ * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PregReplace implements Filter
+class PregReplace extends AbstractFilter
 {
     /**
      * Pattern to match
@@ -163,7 +163,7 @@ class PregReplace implements Filter
      * @param  string $value
      * @return string
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         if ($this->_matchPattern == null) {
             throw new Exception(get_class($this) . ' does not have a valid MatchPattern set.');

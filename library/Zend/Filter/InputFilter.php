@@ -363,7 +363,7 @@ class InputFilter
 
         if (!is_array($data)) {
             $filter = $this->_getDefaultEscapeFilter();
-            return $filter($data);
+            return $filter->filter($data);
         }
         foreach ($data as &$element) {
             $element = $this->_escapeRecursive($element);

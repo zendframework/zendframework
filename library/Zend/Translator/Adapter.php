@@ -24,9 +24,9 @@
  * @namespace
  */
 namespace Zend\Translator;
-use Zend\Log;
-use Zend\Translator;
-use Zend\Locale;
+
+use Zend\Log,
+    Zend\Locale;
 
 /**
  * Basic adapter class for each translation source adapter

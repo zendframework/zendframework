@@ -25,14 +25,14 @@
 namespace Zend\Filter;
 
 /**
- * @uses       \Zend\Filter\Exception
- * @uses       \Zend\Filter\Filter
+ * @uses       Zend\Filter\Exception
+ * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Callback implements Filter
+class Callback extends AbstractFilter
 {
     /**
      * Callback in a call_user_func format
@@ -133,7 +133,7 @@ class Callback implements Filter
      * @param $value mixed Options for the set callback
      * @return mixed       Result from the filter which was callbacked
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         $options = array();
 

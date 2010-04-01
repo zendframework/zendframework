@@ -25,17 +25,17 @@
  */
 namespace Zend\Locale\Data;
 
-use \Zend\Locale\Exception,
-    \Zend\Locale\Locale,
-    \Zend\Cache\Cache,
-    \Zend\Cache\Frontend as CacheFrontend;
+use Zend\Locale\Exception,
+    Zend\Locale\Locale,
+    Zend\Cache\Cache,
+    Zend\Cache\Frontend as CacheFrontend;
 
 /**
  * Locale data reader, handles the CLDR
  *
- * @uses       \Zend\Cache\Cache
- * @uses       \Zend\Locale
- * @uses       \Zend\Exception
+ * @uses       Zend\Cache\Cache
+ * @uses       Zend\Locale
+ * @uses       Zend\Exception
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage Data

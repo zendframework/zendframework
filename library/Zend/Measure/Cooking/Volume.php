@@ -20,15 +20,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Measure\Cooking;
+use Zend\Measure;
+
+/**
  * Class for handling cooking volume conversions
  *
+ * @uses       Zend\Measure\AbstractMeasure
  * @category   Zend
  * @package    Zend_Measure
- * @subpackage Zend_Measure_Cooking_Volume
+ * @subpackage Zend_Measure_Cooking
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Measure_Cooking_Volume extends Zend_Measure_Abstract
+class Volume extends Measure\AbstractMeasure
 {
     const STANDARD = 'CUBIC_METER';
 

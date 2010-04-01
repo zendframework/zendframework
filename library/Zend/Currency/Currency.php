@@ -29,11 +29,9 @@ use Zend\Locale\Data;
 /**
  * Class for handling currency notations
  *
- * @uses      \Zend\Currency\CurrencyServiceInterface
- * @uses      \Zend\Currency\Exception
- * @uses      \Zend\Locale
- * @uses      \Zend\Locale\Format
- * @uses      \Zend\Locale\Data\Data
+ * @uses      Zend\Locale
+ * @uses      Zend\Locale\Format
+ * @uses      Zend\Locale\Data
  * @category  Zend
  * @package   Zend_Currency
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

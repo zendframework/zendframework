@@ -553,7 +553,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     public function testRegistryLocale()
     {
         $locale = new Locale\Locale('de_AT');
-        Zend_Registry::set('Zend_Locale', $locale);
+        Zend\Registry::set('Zend_Locale', $locale);
 
         $currency = new Currency\Currency('EUR');
         $this->assertSame('de_AT', $currency->getLocale());

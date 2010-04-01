@@ -20,15 +20,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Measure;
+
+/**
  * Class for handling density conversions
  *
+ * @uses       Zend\Measure\Abstract
  * @category   Zend
  * @package    Zend_Measure
- * @subpackage Zend_Measure_Density
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Measure_Density extends Zend_Measure_Abstract
+class Density extends AbstractMeasure
 {
     const STANDARD = 'KILOGRAM_PER_CUBIC_METER';
 

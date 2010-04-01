@@ -24,7 +24,7 @@ First pass
         [X] Zend_Translate
         [X] Zend_TimeSync
         [ ] Zend_Measure
-        [ ] Zend_Currency
+        [X] Zend_Currency
 
 Second pass:
 [X] Zend_Filter

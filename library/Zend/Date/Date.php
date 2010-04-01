@@ -33,7 +33,7 @@ use Zend\Locale\Math\Math;
  * @uses      \Zend\Date\DateObject
  * @uses      \Zend\Date\Exception
  * @uses      \Zend\Locale\Locale
- * @uses      \Zend\Format
+ * @uses      \Zend\Locale\Format
  * @uses      \Zend\Locale\Math
  * @category  Zend
  * @package   Zend_Date

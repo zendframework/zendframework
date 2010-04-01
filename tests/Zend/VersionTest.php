@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+use Zend\Version;
+
 /**
  * @category   Zend
  * @package    Zend_Version
@@ -28,7 +30,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Version
  */
-class Zend_VersionTest extends PHPUnit_Framework_TestCase
+class Zend_VersionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Tests that version_compare() and its "proxy"
@@ -42,7 +44,7 @@ class Zend_VersionTest extends PHPUnit_Framework_TestCase
                 for ($k=0; $k < 20; $k++) {
                     foreach (array('dev', 'pr', 'PR', 'alpha', 'a1', 'a2', 'beta', 'b1', 'b2', 'RC', 'RC1', 'RC2', 'RC3', '', 'pl1', 'PL1') as $rel) {
                         $ver = "$i.$j.$k$rel";
-                        $normalizedVersion = strtolower(Zend_Version::VERSION);
+                        $normalizedVersion = strtolower(Version::VERSION);
                         if (strtolower($ver) === $normalizedVersion
                             || strtolower("$i.$j.$k-$rel") === $normalizedVersion
                             || strtolower("$i.$j.$k.$rel") === $normalizedVersion
@@ -53,10 +55,10 @@ class Zend_VersionTest extends PHPUnit_Framework_TestCase
                             }
                         } else {
                             $this->assertSame(
-                                Zend_Version::compareVersion($ver),
+                                Version::compareVersion($ver),
                                 $expect,
                                 "For version '$ver' and Zend_Version::VERSION = '"
-                                . Zend_Version::VERSION . "': result=" . (Zend_Version::compareVersion($ver))
+                                . Version::VERSION . "': result=" . (Version::compareVersion($ver))
                                 . ', but expected ' . $expect);
                         }
                     }

@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Cache;
+use Zend\Cache;
+
 /**
  * @category   Zend
  * @package    Zend_Cache
@@ -28,7 +31,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_SqliteBackendTest extends Zend_Cache_TestCommonExtendedBackend 
+class SqliteBackendTest extends TestCommonExtendedBackend 
 {
 
     protected $_instance;
@@ -36,14 +39,14 @@ class Zend_Cache_SqliteBackendTest extends Zend_Cache_TestCommonExtendedBackend
 
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
-        parent::__construct('Zend_Cache_Backend_Sqlite', $data, $dataName);
+        parent::__construct('Zend\Cache\Backend\Sqlite', $data, $dataName);
     }
 
     public function setUp($notag = false)
     {
         @mkdir($this->getTmpDir());
         $this->_cache_dir = $this->getTmpDir() . DIRECTORY_SEPARATOR;
-        $this->_instance = new Zend_Cache_Backend_Sqlite(array(
+        $this->_instance = new Cache\Backend\Sqlite(array(
             'cache_db_complete_path' => $this->_cache_dir . 'cache.db'
         ));
         parent::setUp($notag);
@@ -59,22 +62,22 @@ class Zend_Cache_SqliteBackendTest extends Zend_Cache_TestCommonExtendedBackend
 
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Backend_Sqlite(array('cache_db_complete_path' => $this->_cache_dir . 'cache.db'));
+        $test = new Cache\Backend\Sqlite(array('cache_db_complete_path' => $this->_cache_dir . 'cache.db'));
     }
 
     public function testConstructorWithABadDBPath()
     {
         try {
-            $test = new Zend_Cache_Backend_Sqlite(array('cache_db_complete_path' => '/foo/bar/lfjlqsdjfklsqd/cache.db'));
-        } catch (Zend_Cache_Exception $e) {
+            $test = new Cache\Backend\Sqlite(array('cache_db_complete_path' => '/foo/bar/lfjlqsdjfklsqd/cache.db'));
+        } catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testCleanModeAllWithVacuum()
     {
-        $this->_instance = new Zend_Cache_Backend_Sqlite(array(
+        $this->_instance = new Cache\Backend\Sqlite(array(
             'cache_db_complete_path' => $this->_cache_dir . 'cache.db',
             'automatic_vacuum_factor' => 1
         ));
@@ -86,7 +89,7 @@ class Zend_Cache_SqliteBackendTest extends Zend_Cache_TestCommonExtendedBackend
 
     public function testRemoveCorrectCallWithVacuum()
     {
-        $this->_instance = new Zend_Cache_Backend_Sqlite(array(
+        $this->_instance = new Cache\Backend\Sqlite(array(
             'cache_db_complete_path' => $this->_cache_dir . 'cache.db',
             'automatic_vacuum_factor' => 1
         ));

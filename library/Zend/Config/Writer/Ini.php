@@ -20,14 +20,20 @@
  */
 
 /**
- * @uses       Zend_Config_Exception
- * @uses       Zend_Config_Writer_FileAbstract
+ * @namespace
+ */
+namespace Zend\Config\Writer;
+use Zend\Config;
+
+/**
+ * @uses       \Zend\Config\Exception
+ * @uses       \Zend\Config\Writer\FileAbstract
  * @category   Zend
  * @package    Zend_Config
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Config_Writer_Ini extends Zend_Config_Writer_FileAbstract
+class Ini extends AbstractFileWriter
 {
     /**
      * String that separates nesting levels of configuration data identifiers
@@ -47,7 +53,7 @@ class Zend_Config_Writer_Ini extends Zend_Config_Writer_FileAbstract
      * Set the nest separator
      *
      * @param  string $filename
-     * @return Zend_Config_Writer_Ini
+     * @return \Zend\Config\Writer\Ini
      */
     public function setNestSeparator($separator)
     {
@@ -63,7 +69,7 @@ class Zend_Config_Writer_Ini extends Zend_Config_Writer_FileAbstract
      * into the global namespace of the INI file.
      *
      * @param  bool $withoutSections
-     * @return Zend_Config_Writer_Ini
+     * @return \Zend\Config\Writer\Ini
      */
     public function setRenderWithoutSections($withoutSections=true)
     {
@@ -91,7 +97,7 @@ class Zend_Config_Writer_Ini extends Zend_Config_Writer_FileAbstract
                        .  "\n";
         } else {
             foreach ($this->_config as $sectionName => $data) {
-                if (!($data instanceof Zend_Config)) {
+                if (!($data instanceof Config\Config)) {
                     $iniString .= $sectionName
                                .  ' = '
                                .  $this->_prepareValue($data)
@@ -114,17 +120,17 @@ class Zend_Config_Writer_Ini extends Zend_Config_Writer_FileAbstract
     /**
      * Add a branch to an INI string recursively
      *
-     * @param  Zend_Config $config
+     * @param  \Zend\Config\Config $config
      * @return void
      */
-    protected function _addBranch(Zend_Config $config, $parents = array())
+    protected function _addBranch(Config\Config $config, $parents = array())
     {
         $iniString = '';
 
         foreach ($config as $key => $value) {
             $group = array_merge($parents, array($key));
 
-            if ($value instanceof Zend_Config) {
+            if ($value instanceof Config\Config) {
                 $iniString .= $this->_addBranch($value, $group);
             } else {
                 $iniString .= implode($this->_nestSeparator, $group)
@@ -152,7 +158,7 @@ class Zend_Config_Writer_Ini extends Zend_Config_Writer_FileAbstract
         } elseif (strpos($value, '"') === false) {
             return '"' . $value .  '"';
         } else {
-            throw new Zend_Config_Exception('Value can not contain double quotes "');
+            throw new Config\Exception('Value can not contain double quotes "');
         }
     }
 }

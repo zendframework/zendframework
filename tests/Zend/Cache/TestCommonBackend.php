@@ -20,8 +20,8 @@
  * @version    $Id$
  */
 
-
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
+namespace ZendTest\Cache;
+use Zend\Cache;
 
 /**
  * PHPUnit test case
@@ -35,7 +35,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-abstract class Zend_Cache_TestCommonBackend extends PHPUnit_Framework_TestCase 
+abstract class TestCommonBackend extends \PHPUnit_Framework_TestCase 
 {
 
     protected $_instance;
@@ -113,10 +113,10 @@ abstract class Zend_Cache_TestCommonBackend extends PHPUnit_Framework_TestCase
         try {
             $class = $this->_className;
             $test = new $class(array(1 => 'bar'));
-        } catch (Zend_Cache_Exception $e) {
+        } catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testSetDirectivesCorrectCall()
@@ -128,10 +128,10 @@ abstract class Zend_Cache_TestCommonBackend extends PHPUnit_Framework_TestCase
     {
         try {
             $this->_instance->setDirectives('foo');
-        } catch (Zend_Cache_Exception $e) {
+        } catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testSetDirectivesBadDirective()
@@ -145,10 +145,10 @@ abstract class Zend_Cache_TestCommonBackend extends PHPUnit_Framework_TestCase
     {
         try {
             $this->_instance->setDirectives(array('foo' => true, 12 => 3600));
-        } catch (Zend_Cache_Exception $e) {
+        } catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testSaveCorrectCall()

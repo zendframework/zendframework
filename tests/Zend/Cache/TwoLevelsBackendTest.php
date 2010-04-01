@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Cache;
+use Zend\Cache;
+
 /**
  * @category   Zend
  * @package    Zend_Cache
@@ -28,7 +31,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_TestCommonExtendedBackend 
+class TwoLevelsBackendTest extends TestCommonExtendedBackend 
 {
 
     protected $_instance;
@@ -36,7 +39,7 @@ class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_TestCommonExtendedBacke
 
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
-        parent::__construct('Zend_Cache_Backend_TwoLevels', $data, $dataName);
+        parent::__construct('Zend\Cache\Backend\TwoLevels', $data, $dataName);
     }
 
     public function setUp($notag = false)
@@ -53,7 +56,7 @@ class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_TestCommonExtendedBacke
         );
         $fastBackendOptions = array(
         );
-        $this->_instance = new Zend_Cache_Backend_TwoLevels(array(
+        $this->_instance = new Cache\Backend\TwoLevels(array(
             'fast_backend' => $fastBackend,
             'slow_backend' => $slowBackend,
             'fast_backend_options' => $fastBackendOptions,
@@ -77,7 +80,7 @@ class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_TestCommonExtendedBacke
         );
         $fastBackendOptions = array(
         );
-        $test = new Zend_Cache_Backend_TwoLevels(array(
+        $test = new Cache\Backend\TwoLevels(array(
             'fast_backend' => $fastBackend,
             'slow_backend' => $slowBackend,
             'fast_backend_options' => $fastBackendOptions,

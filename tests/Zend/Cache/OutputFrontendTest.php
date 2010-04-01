@@ -20,13 +20,10 @@
  * @version    $Id$
  */
 
-/**
- * Zend_Cache
- */
+namespace ZendTest\Cache;
 
-/**
- * PHPUnit test case
- */
+use Zend\Cache,
+    Zend\Cache\Backend\TestBackend;
 
 /**
  * @category   Zend
@@ -36,15 +33,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_OutputFrontendTest extends PHPUnit_Framework_TestCase {
+class Zend_Cache_OutputFrontendTest extends \PHPUnit_Framework_TestCase {
 
     private $_instance;
 
     public function setUp()
     {
         if (!$this->_instance) {
-            $this->_instance = new Zend_Cache_Frontend_Output(array());
-            $this->_backend = new Zend_Cache_Backend_Test();
+            $this->_instance = new Cache\Frontend\Output(array());
+            $this->_backend = new TestBackend();
             $this->_instance->setBackend($this->_backend);
         }
     }
@@ -56,7 +53,7 @@ class Zend_Cache_OutputFrontendTest extends PHPUnit_Framework_TestCase {
 
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Frontend_Output(array('lifetime' => 3600, 'caching' => true));
+        $test = new Cache\Frontend\Output(array('lifetime' => 3600, 'caching' => true));
     }
 
     public function testStartEndCorrectCall1()

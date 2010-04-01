@@ -20,13 +20,18 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Filter\Word;
+
+/**
  * @uses       Zend_Filter_SeperatorToSeparator
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_Word_SeparatorToDash extends Zend_Filter_Word_SeparatorToSeparator
+class SeparatorToDash extends SeparatorToSeparator
 {
     /**
      * Constructor
@@ -38,5 +43,4 @@ class Zend_Filter_Word_SeparatorToDash extends Zend_Filter_Word_SeparatorToSepar
     {
         parent::__construct($searchSeparator, '-');
     }
-
 }

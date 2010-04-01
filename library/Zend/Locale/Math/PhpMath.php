@@ -19,6 +19,10 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace Zend\Locale\Math;
 
 /**
  * Utility class for proxying math function to bcmath functions, if present,
@@ -26,26 +30,26 @@
  * Sampling of PHP environments and platforms suggests that at least 80% to 90% support bcmath.
  * This file should only be loaded for the 10% to 20% lacking access to the bcmath extension.
  *
- * @uses       Zend_Locale_Math_Exception
+ * @uses       \Zend\Locale\Math\Exception
  * @category   Zend
  * @package    Zend_Locale
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Locale_Math_PhpMath extends Zend_Locale_Math
+class PhpMath extends Math
 {
     public static function disable()
     {
         self::$_bcmathDisabled = true;
-        self::$add   = array('Zend_Locale_Math_PhpMath', 'Add');
-        self::$sub   = array('Zend_Locale_Math_PhpMath', 'Sub');
-        self::$pow   = array('Zend_Locale_Math_PhpMath', 'Pow');
-        self::$mul   = array('Zend_Locale_Math_PhpMath', 'Mul');
-        self::$div   = array('Zend_Locale_Math_PhpMath', 'Div');
-        self::$comp  = array('Zend_Locale_Math_PhpMath', 'Comp');
-        self::$sqrt  = array('Zend_Locale_Math_PhpMath', 'Sqrt');
-        self::$mod   = array('Zend_Locale_Math_PhpMath', 'Mod');
-        self::$scale = array('Zend_Locale_Math_PhpMath', 'Scale');
+        self::$add   = 'Zend\\Locale\\Math\\PhpMath::Add';
+        self::$sub   = 'Zend\\Locale\\Math\\PhpMath::Sub';
+        self::$pow   = 'Zend\\Locale\\Math\\PhpMath::Pow';
+        self::$mul   = 'Zend\\Locale\\Math\\PhpMath::Mul';
+        self::$div   = 'Zend\\Locale\\Math\\PhpMath::Div';
+        self::$comp  = 'Zend\\Locale\\Math\\PhpMath::Comp';
+        self::$sqrt  = 'Zend\\Locale\\Math\\PhpMath::Sqrt';
+        self::$mod   = 'Zend\\Locale\\Math\\PhpMath::Mod';
+        self::$scale = 'Zend\\Locale\\Math\\PhpMath::Scale';
 
         self::$defaultScale     = 0;
         self::$defaultPrecision = 1;
@@ -71,7 +75,7 @@ class Zend_Locale_Math_PhpMath extends Zend_Locale_Math
         $op2 = self::normalize($op2);
         $result = $op1 + $op2;
         if (is_infinite($result)  or  (abs($result - $op2 - $op1) > $precision)) {
-            throw new Zend_Locale_Math_Exception("addition overflow: $op1 + $op2 != $result", $op1, $op2, $result);
+            throw new Exception("addition overflow: $op1 + $op2 != $result", $op1, $op2, $result);
         }
 
         return self::round(self::normalize($result), $scale);
@@ -93,7 +97,7 @@ class Zend_Locale_Math_PhpMath extends Zend_Locale_Math
         $op2  = self::normalize($op2);
         $result = $op1 - $op2;
         if (is_infinite($result)  or  (abs($result + $op2 - $op1) > $precision)) {
-            throw new Zend_Locale_Math_Exception("subtraction overflow: $op1 - $op2 != $result", $op1, $op2, $result);
+            throw new Exception("subtraction overflow: $op1 - $op2 != $result", $op1, $op2, $result);
         }
 
         return self::round(self::normalize($result), $scale);
@@ -114,7 +118,7 @@ class Zend_Locale_Math_PhpMath extends Zend_Locale_Math
 
         $result = pow($op1, $op2);
         if (is_infinite($result)  or  is_nan($result)) {
-            throw new Zend_Locale_Math_Exception("power overflow: $op1 ^ $op2", $op1, $op2, $result);
+            throw new Exception("power overflow: $op1 ^ $op2", $op1, $op2, $result);
         }
 
         return self::round(self::normalize($result), $scale);
@@ -133,7 +137,7 @@ class Zend_Locale_Math_PhpMath extends Zend_Locale_Math
         $op2 = self::normalize($op2);
         $result = $op1 * $op2;
         if (is_infinite($result)  or  is_nan($result)) {
-            throw new Zend_Locale_Math_Exception("multiplication overflow: $op1 * $op2 != $result", $op1, $op2, $result);
+            throw new Exception("multiplication overflow: $op1 * $op2 != $result", $op1, $op2, $result);
         }
 
         return self::round(self::normalize($result), $scale);
@@ -146,7 +150,7 @@ class Zend_Locale_Math_PhpMath extends Zend_Locale_Math
         }
 
         if (empty($op2)) {
-            throw new Zend_Locale_Math_Exception("can not divide by zero", $op1, $op2, null);
+            throw new Exception("can not divide by zero", $op1, $op2, null);
         }
         if (empty($op1)) {
             $op1 = 0;
@@ -155,7 +159,7 @@ class Zend_Locale_Math_PhpMath extends Zend_Locale_Math
         $op2 = self::normalize($op2);
         $result = $op1 / $op2;
         if (is_infinite($result)  or  is_nan($result)) {
-            throw new Zend_Locale_Math_Exception("division overflow: $op1 / $op2 != $result", $op1, $op2, $result);
+            throw new Exception("division overflow: $op1 / $op2 != $result", $op1, $op2, $result);
         }
 
         return self::round(self::normalize($result), $scale);
@@ -194,7 +198,7 @@ class Zend_Locale_Math_PhpMath extends Zend_Locale_Math
         }
         $result = $op1 % $op2;
         if (is_nan($result)  or  (($op1 - $result) % $op2 != 0)) {
-            throw new Zend_Locale_Math_Exception("modulus calculation error: $op1 % $op2 != $result", $op1, $op2, $result);
+            throw new Exception("modulus calculation error: $op1 % $op2 != $result", $op1, $op2, $result);
         }
 
         return self::normalize($result);
@@ -229,7 +233,7 @@ class Zend_Locale_Math_PhpMath extends Zend_Locale_Math
     public static function Scale($scale)
     {
         if ($scale > 9) {
-            throw new Zend_Locale_Math_Exception("can not scale to precision $scale", $scale, null, null);
+            throw new Exception("can not scale to precision $scale", $scale, null, null);
         }
         self::$defaultScale     = $scale;
         self::$defaultPrecision = pow(10, -$scale);

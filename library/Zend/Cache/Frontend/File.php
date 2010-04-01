@@ -21,13 +21,20 @@
  */
 
 /**
- * @uses       Zend_Cache_Core
+ * @namespace
+ */
+namespace Zend\Cache\Frontend;
+use Zend\Cache\Cache;
+
+/**
+ * @uses       \Zend\Cache\Cache
+ * @uses       \Zend\Cache\Frontend\Core
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Frontend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cache_Frontend_File extends Zend_Cache_Core
+class File extends Core
 {
 
     /**
@@ -77,7 +84,7 @@ class Zend_Cache_Frontend_File extends Zend_Cache_Core
      * Constructor
      *
      * @param  array $options Associative array of options
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      * @return void
      */
     public function __construct(array $options = array())
@@ -86,7 +93,7 @@ class Zend_Cache_Frontend_File extends Zend_Cache_Core
             $this->setOption($name, $value);
         }
         if (!isset($this->_specificOptions['master_files'])) {
-            Zend_Cache::throwException('master_files option must be set');
+            Cache::throwException('master_files option must be set');
         }
     }
 
@@ -105,7 +112,7 @@ class Zend_Cache_Frontend_File extends Zend_Cache_Core
         foreach ($masterFiles as $masterFile) {
             $this->_masterFile_mtimes[$i] = @filemtime($masterFile);
             if ((!($this->_specificOptions['ignore_missing_master_files'])) && (!($this->_masterFile_mtimes[$i]))) {
-                Zend_Cache::throwException('Unable to read master_file : '.$masterFile);
+                Cache::throwException('Unable to read master_file : '.$masterFile);
             }
             $i++;
         }
@@ -131,7 +138,7 @@ class Zend_Cache_Frontend_File extends Zend_Cache_Core
      *
      * @param  string $name  Name of the option
      * @param  mixed  $value Value of the option
-     * @throws Zend_Cache_Exception
+     * @throws \Zend\Cache\Exception
      * @return void
      */
     public function setOption($name, $value)

@@ -21,7 +21,12 @@
  */
 
 /**
- * @uses       Zend_Log_Writer_Abstract
+ * @namespace
+ */
+namespace Zend\Log\Writer;
+
+/**
+ * @uses       \Zend\Log\Writer\AbstractWriter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
@@ -29,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Log_Writer_ZendMonitor extends Zend_Log_Writer_Abstract
+class ZendMonitor extends AbstractWriter
 {
     /**
      * Is Zend Monitor enabled?
@@ -38,7 +43,7 @@ class Zend_Log_Writer_ZendMonitor extends Zend_Log_Writer_Abstract
     protected $_isEnabled = true;
 
     /**
-     * @throws Zend_Log_Exception if Zend Monitor extension not present
+     * @throws \Zend\Log\Exception if Zend Monitor extension not present
      */
     public function __construct()
     {
@@ -50,11 +55,11 @@ class Zend_Log_Writer_ZendMonitor extends Zend_Log_Writer_Abstract
     /**
      * Create a new instance of Zend_Log_Writer_ZendMonitor
      * 
-     * @param  array|Zend_Config $config
-     * @return Zend_Log_Writer_Syslog
-     * @throws Zend_Log_Exception
+     * @param  array|\Zend\Config\Config $config
+     * @return \Zend\Log\Writer\Syslog
+     * @throws \Zend\Log\Exception
      */
-    static public function factory($config)
+    static public function factory($config = array())
     {
         return new self();
     }

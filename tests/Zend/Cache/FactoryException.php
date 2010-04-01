@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Cache;
+use Zend\Cache;
 
 /**
  * @category   Zend
@@ -28,34 +30,34 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cache_FactoryException extends PHPUnit_Extensions_ExceptionTestCase
+class FactoryException extends \PHPUnit_Extensions_ExceptionTestCase
 {
     function setUp(){
-        $this->setExpectedException('Zend_Cache_Exception');
+        $this->setExpectedException('Cache\Exception');
     }
 
     public function testBadFrontend()
     {
-        Zend_Cache::factory('badFrontend', 'File');
+        Cache\Cache::factory('badFrontend', 'File');
     }
 
     public function testBadBackend()
     {
-        Zend_Cache::factory('Output', 'badBackend');
+        Cache\Cache::factory('Output', 'badBackend');
     }
 
     public function testFrontendBadParam()
     {
-        Zend_Cache::factory('badFrontend', 'File', array('badParam'=>true));
+        Cache\Cache::factory('badFrontend', 'File', array('badParam'=>true));
     }
 
     public function testBackendBadParam()
     {
-        Zend_Cache::factory('Output', 'badBackend', array(), array('badParam'=>true));
+        Cache\Cache::factory('Output', 'badBackend', array(), array('badParam'=>true));
     }
 
     public function testThrowMethod()
     {
-        Zend_Cache::throwException('test');
+        Cache\Cache::throwException('test');
     }
 }

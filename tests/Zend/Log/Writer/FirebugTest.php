@@ -20,22 +20,6 @@
  * @version    $Id$
  */
 
-/** PHPUnit_Framework_TestCase */
-
-/** Zend_Log */
-
-/** Zend_Log_Writer_Firebug */
-
-/** Zend_Log_Formatter_Firebug */
-
-/** Zend_Wildfire_Channel_HttpHeaders */
-
-/** Zend_Wildfire_Plugin_FirePhp */
-
-/** Zend_Controller_Request_Http */
-
-/** Zend_Controller_Response_Http */
-
 /**
  * @category   Zend
  * @package    Zend_Log
@@ -54,21 +38,11 @@ class Zend_Log_Writer_FirebugTest extends PHPUnit_Framework_TestCase
     protected $_writer = null;
     protected $_logger = null;
 
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Log_Writer_FirebugTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
+        $this->markTestIncomplete('Not testing until MVC converted to namespaces');
+        /*
+
         date_default_timezone_set('America/Los_Angeles');
 
         // Reset front controller to reset registered plugins and
@@ -91,12 +65,15 @@ class Zend_Log_Writer_FirebugTest extends PHPUnit_Framework_TestCase
         $this->_logger = new Zend_Log($this->_writer);
 
         Zend_Wildfire_Plugin_FirePhp::getInstance()->setOption('includeLineNumbers', false);
+         */
     }
 
     public function tearDown()
     {
+        /*
         Zend_Wildfire_Channel_HttpHeaders::destroyInstance();
         Zend_Wildfire_Plugin_FirePhp::destroyInstance();
+         */
     }
 
 
@@ -288,6 +265,7 @@ class Zend_Log_Writer_FirebugTest extends PHPUnit_Framework_TestCase
     }
 }
 
+/*
 class Zend_Log_Writer_FirebugTest_Formatter extends Zend_Log_Formatter_Firebug
 {
     public function format($event)
@@ -358,3 +336,4 @@ class Zend_Log_Writer_FirebugTest_Response extends Zend_Controller_Response_Http
     }
 
 }
+ */

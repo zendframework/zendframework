@@ -20,14 +20,11 @@
  * @version    $Id$
  */
 
-/**
- * Zend_Locale_Format
- */
+namespace ZendTest\Locale;
 
-/**
- * PHPUnit test case
- */
-
+use \Zend\Locale\Math\Math,
+    \Zend\Locale\Math\PhpMath,
+    \Zend\Locale\Math\Exception as MathException;
 
 /**
  * @category   Zend
@@ -37,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Locale
  */
-class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
+class MathTest extends \PHPUnit_Framework_TestCase
 {
     private static $savedLocale = 'C';
 
@@ -73,22 +70,22 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
      */
     public function testRound()
     {
-        $this->assertEquals(               '3', Zend_Locale_Math::round('3.4'));
-        $this->assertEquals(        round(3.4), Zend_Locale_Math::round('3.4'));
-        $this->assertEquals(               '4', Zend_Locale_Math::round('3.5'));
-        $this->assertEquals(        round(3.5), Zend_Locale_Math::round('3.5'));
-        $this->assertEquals(               '4', Zend_Locale_Math::round('3.6'));
-        $this->assertEquals(        round(3.6), Zend_Locale_Math::round('3.6'));
-        $this->assertEquals(               '4', Zend_Locale_Math::round('3.6', 0));
-        $this->assertEquals(      round(3.6,0), Zend_Locale_Math::round('3.6', 0));
-        $this->assertEquals(            '1.96', Zend_Locale_Math::round('1.95583', 2), '', 0.02);
-        $this->assertEquals(  round(1.95583,2), Zend_Locale_Math::round('1.95583', 2), '', 0.02);
-        $this->assertEquals(           1242000, Zend_Locale_Math::round('1241757', -3), '', 250);
-        $this->assertEquals(round(1241757, -3), Zend_Locale_Math::round('1241757', -3), '', 250);
-        $this->assertEquals(              5.05, Zend_Locale_Math::round('5.045', 2), '', 0.02);
-        $this->assertEquals(   round(5.045, 2), Zend_Locale_Math::round('5.045', 2), '', 0.02);
-        $this->assertEquals(              5.06, Zend_Locale_Math::round('5.055', 2), '', 0.02);
-        $this->assertEquals(   round(5.055, 2), Zend_Locale_Math::round('5.055', 2), '', 0.02);
+        $this->assertEquals(               '3', Math::round('3.4'));
+        $this->assertEquals(        round(3.4), Math::round('3.4'));
+        $this->assertEquals(               '4', Math::round('3.5'));
+        $this->assertEquals(        round(3.5), Math::round('3.5'));
+        $this->assertEquals(               '4', Math::round('3.6'));
+        $this->assertEquals(        round(3.6), Math::round('3.6'));
+        $this->assertEquals(               '4', Math::round('3.6', 0));
+        $this->assertEquals(      round(3.6,0), Math::round('3.6', 0));
+        $this->assertEquals(            '1.96', Math::round('1.95583', 2), '', 0.02);
+        $this->assertEquals(  round(1.95583,2), Math::round('1.95583', 2), '', 0.02);
+        $this->assertEquals(           1242000, Math::round('1241757', -3), '', 250);
+        $this->assertEquals(round(1241757, -3), Math::round('1241757', -3), '', 250);
+        $this->assertEquals(              5.05, Math::round('5.045', 2), '', 0.02);
+        $this->assertEquals(   round(5.045, 2), Math::round('5.045', 2), '', 0.02);
+        $this->assertEquals(              5.06, Math::round('5.055', 2), '', 0.02);
+        $this->assertEquals(   round(5.055, 2), Math::round('5.055', 2), '', 0.02);
     }
 
     /**
@@ -1341,27 +1338,27 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
             '40.49'         =>  -2, '691.776'       =>  -2, '0.66820'       => -10, '1373687051'    =>  -6,
             '184194.472342' =>   1, '800.551'       =>  -4, '0.210012'      =>  10, '1640724691'    =>  10
         );
-        if (!Zend_Locale_Math::isBcmathDisabled()) {
+        if (!Math::isBcmathDisabled()) {
             // If no BCMath extension, the round below falls through to PHP's round(),
             // which actually produces incorrect results, and fails these tests.
             // There are many such examples ...
-            $this->assertEquals('56055.1812', Zend_Locale_Math::round('56055.18115', 4));
-            $this->assertEquals(    '639.80', Zend_Locale_Math::round('639.795',     2));
-            $this->assertEquals(    '267.84', Zend_Locale_Math::round('267.835',     2));
-            $this->assertEquals(   '0.30252', Zend_Locale_Math::round('0.302515',    5));
-            $this->assertEquals(    '0.3667', Zend_Locale_Math::round('0.36665',     4));
+            $this->assertEquals('56055.1812', Math::round('56055.18115', 4));
+            $this->assertEquals(    '639.80', Math::round('639.795',     2));
+            $this->assertEquals(    '267.84', Math::round('267.835',     2));
+            $this->assertEquals(   '0.30252', Math::round('0.302515',    5));
+            $this->assertEquals(    '0.3667', Math::round('0.36665',     4));
         }
 
         foreach ($rounder as $val => $precision) {
-//            $this->assertEquals((string) round($val, $precision), (string)Zend_Locale_Math::round($val, $precision));
+//            $this->assertEquals((string) round($val, $precision), (string)Math::round($val, $precision));
         }
     }
 
     public function testAdd()
     {
-        Zend_Locale_Math_PhpMath::disable();
-        $this->assertEquals(3, Zend_Locale_Math_PhpMath::Add(1, 2   ));
-        $this->assertEquals(2, Zend_Locale_Math_PhpMath::Add(null, 2));
+        PhpMath::disable();
+        $this->assertEquals(3, PhpMath::Add(1, 2   ));
+        $this->assertEquals(2, PhpMath::Add(null, 2));
         /**
          * BCMath extension doesn't actually operatest with a scientific notation (e.g. 1.2e+100)
          * So we shouldn't test numbers such as -9E+100, but probably should care about correct
@@ -1370,22 +1367,22 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
          * @todo provide correct behavior
          */
         //try {
-        //    $this->assertEquals(9E+200, Zend_Locale_Math_PhpMath::Add(9E+100, 9E+200));
+        //    $this->assertEquals(9E+200, PhpMath::Add(9E+100, 9E+200));
         //    $this->fail("exception expected");
-        //} catch (Zend_Locale_Math_Exception $e) {
+        //} catch (MathException $e) {
         //    $this->assertEquals(array(9E+100, 9E+200, 9E+200), $e->getResults());
         //    // success
         //}
-        $this->assertEquals(15,  Zend_Locale_Math_PhpMath::Add( 10.4444,  4.5556, 2));
-        $this->assertEquals(15,  Zend_Locale_Math_PhpMath::Add( 10.4444,  4.5556, 0));
-        $this->assertEquals(-15, Zend_Locale_Math_PhpMath::Add(-10.4444, -4.5556, 0));
+        $this->assertEquals(15,  PhpMath::Add( 10.4444,  4.5556, 2));
+        $this->assertEquals(15,  PhpMath::Add( 10.4444,  4.5556, 0));
+        $this->assertEquals(-15, PhpMath::Add(-10.4444, -4.5556, 0));
     }
 
     public function testSub()
     {
-        Zend_Locale_Math_PhpMath::disable();
-        $this->assertEquals(-1, Zend_Locale_Math_PhpMath::Sub(   1, 2));
-        $this->assertEquals(-2, Zend_Locale_Math_PhpMath::Sub(null, 2));
+        PhpMath::disable();
+        $this->assertEquals(-1, PhpMath::Sub(   1, 2));
+        $this->assertEquals(-2, PhpMath::Sub(null, 2));
         /**
          * BCMath extension doesn't actually operatest with a scientific notation (e.g. 1.2e+100)
          * So we shouldn't test numbers such as -9E+100, but probably should care about correct
@@ -1393,18 +1390,18 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
          *
          * @todo provide correct behavior
          */
-        // $this->assertEquals(9E+300, Zend_Locale_Math_PhpMath::Sub(-9E+100, -9E+300));
-        $this->assertEquals( 5.89, Zend_Locale_Math_PhpMath::Sub( 10.4444,  4.5556, 2));
-        $this->assertEquals( 6,    Zend_Locale_Math_PhpMath::Sub( 10.4444,  4.5556, 0));
-        $this->assertEquals(-6,    Zend_Locale_Math_PhpMath::Sub(-10.4444, -4.5556, 0));
-        $this->assertEquals(-1,    Zend_Locale_Math_PhpMath::Sub( 10,      11,      2));
+        // $this->assertEquals(9E+300, PhpMath::Sub(-9E+100, -9E+300));
+        $this->assertEquals( 5.89, PhpMath::Sub( 10.4444,  4.5556, 2));
+        $this->assertEquals( 6,    PhpMath::Sub( 10.4444,  4.5556, 0));
+        $this->assertEquals(-6,    PhpMath::Sub(-10.4444, -4.5556, 0));
+        $this->assertEquals(-1,    PhpMath::Sub( 10,      11,      2));
     }
 
     public function testPow()
     {
-        Zend_Locale_Math_PhpMath::disable();
-        $this->assertEquals(1, Zend_Locale_Math_PhpMath::Pow(   1, 2));
-        $this->assertEquals(0, Zend_Locale_Math_PhpMath::Pow(null, 2));
+        PhpMath::disable();
+        $this->assertEquals(1, PhpMath::Pow(   1, 2));
+        $this->assertEquals(0, PhpMath::Pow(null, 2));
         /**
          * BCMath extension doesn't actually operatest with a scientific notation (e.g. 1.2e+100)
          * So we shouldn't test numbers such as -9E+100, but probably should care about correct
@@ -1413,22 +1410,22 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
          * @todo provide correct behavior
          */
         //try {
-        //    $this->assertEquals(0, Zend_Locale_Math_PhpMath::Pow(9E+300, 9E+200));
+        //    $this->assertEquals(0, PhpMath::Pow(9E+300, 9E+200));
         //    $this->fail("exception expected");
-        //} catch (Zend_Locale_Math_Exception $e) {
+        //} catch (MathException $e) {
         //    // success
         //}
-        $this->assertEquals(    11899.64, Zend_Locale_Math_PhpMath::Pow( 10.4444, 4.5556, 2));
-        $this->assertEquals(       11900, Zend_Locale_Math_PhpMath::Pow( 10.4444, 4.5556, 0));
-        $this->assertEquals(       11900, Zend_Locale_Math_PhpMath::Pow(-10.4444, 4,      0));
-        $this->assertEquals(100000000000, Zend_Locale_Math_PhpMath::Pow( 10,     11,      2));
+        $this->assertEquals(    11899.64, PhpMath::Pow( 10.4444, 4.5556, 2));
+        $this->assertEquals(       11900, PhpMath::Pow( 10.4444, 4.5556, 0));
+        $this->assertEquals(       11900, PhpMath::Pow(-10.4444, 4,      0));
+        $this->assertEquals(100000000000, PhpMath::Pow( 10,     11,      2));
     }
 
     public function testMul()
     {
-        Zend_Locale_Math_PhpMath::disable();
-        $this->assertEquals(2, Zend_Locale_Math_PhpMath::Mul(   1, 2));
-        $this->assertEquals(0, Zend_Locale_Math_PhpMath::Mul(null, 2));
+        PhpMath::disable();
+        $this->assertEquals(2, PhpMath::Mul(   1, 2));
+        $this->assertEquals(0, PhpMath::Mul(null, 2));
         /**
          * BCMath extension doesn't actually operatest with a scientific notation (e.g. 1.2e+100)
          * So we shouldn't test numbers such as -9E+100, but probably should care about correct
@@ -1437,26 +1434,26 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
          * @todo provide correct behavior
          */
         //try {
-        //    $this->assertEquals(0, Zend_Locale_Math_PhpMath::Mul(9E+300, 9E+200));
+        //    $this->assertEquals(0, PhpMath::Mul(9E+300, 9E+200));
         //    $this->fail("exception expected");
-        //} catch (Zend_Locale_Math_Exception $e) {
+        //} catch (MathException $e) {
         //    // success
         //}
-        $this->assertEquals( 47.58, Zend_Locale_Math_PhpMath::Mul( 10.4444, 4.5556, 2));
-        $this->assertEquals( 48,    Zend_Locale_Math_PhpMath::Mul( 10.4444, 4.5556, 0));
-        $this->assertEquals(-42,    Zend_Locale_Math_PhpMath::Mul(-10.4444, 4,      0));
-        $this->assertEquals(110,    Zend_Locale_Math_PhpMath::Mul( 10,     11,      2));
+        $this->assertEquals( 47.58, PhpMath::Mul( 10.4444, 4.5556, 2));
+        $this->assertEquals( 48,    PhpMath::Mul( 10.4444, 4.5556, 0));
+        $this->assertEquals(-42,    PhpMath::Mul(-10.4444, 4,      0));
+        $this->assertEquals(110,    PhpMath::Mul( 10,     11,      2));
     }
 
     public function testDiv()
     {
-        Zend_Locale_Math_PhpMath::disable();
-        $this->assertEquals(1, Zend_Locale_Math_PhpMath::Div(   1, 2));
-        $this->assertEquals(0, Zend_Locale_Math_PhpMath::Div(null, 2));
+        PhpMath::disable();
+        $this->assertEquals(1, PhpMath::Div(   1, 2));
+        $this->assertEquals(0, PhpMath::Div(null, 2));
         try {
-            $this->assertEquals(0, Zend_Locale_Math_PhpMath::Div(10, null));
+            $this->assertEquals(0, PhpMath::Div(10, null));
             $this->fail("exception expected");
-        } catch (Zend_Locale_Math_Exception $e) {
+        } catch (MathException $e) {
             // success
         }
 
@@ -1467,18 +1464,18 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
          *
          * @todo provide correct behavior
          */
-        // $this->assertEquals(0, Zend_Locale_Math_PhpMath::Div(9E-300, 9E+200));
-        $this->assertEquals( 2.29, Zend_Locale_Math_PhpMath::Div( 10.4444, 4.5556, 2));
-        $this->assertEquals( 2,    Zend_Locale_Math_PhpMath::Div( 10.4444, 4.5556, 0));
-        $this->assertEquals(-3,    Zend_Locale_Math_PhpMath::Div(-10.4444, 4,      0));
-        $this->assertEquals( 0.91, Zend_Locale_Math_PhpMath::Div( 10,     11,      2));
+        // $this->assertEquals(0, PhpMath::Div(9E-300, 9E+200));
+        $this->assertEquals( 2.29, PhpMath::Div( 10.4444, 4.5556, 2));
+        $this->assertEquals( 2,    PhpMath::Div( 10.4444, 4.5556, 0));
+        $this->assertEquals(-3,    PhpMath::Div(-10.4444, 4,      0));
+        $this->assertEquals( 0.91, PhpMath::Div( 10,     11,      2));
     }
 
     public function testComp()
     {
-        Zend_Locale_Math_PhpMath::disable();
-        $this->assertEquals(-1, Zend_Locale_Math_PhpMath::Comp(       1,  2        ));
-        $this->assertEquals(-1, Zend_Locale_Math_PhpMath::Comp(    null,  2        ));
+        PhpMath::disable();
+        $this->assertEquals(-1, PhpMath::Comp(       1,  2        ));
+        $this->assertEquals(-1, PhpMath::Comp(    null,  2        ));
         /**
          * BCMath extension doesn't actually operatest with a scientific notation (e.g. 1.2e+100)
          * So we shouldn't test numbers such as -9E+100, but probably should care about correct
@@ -1486,28 +1483,28 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
          *
          * @todo provide correct behavior
          */
-        // $this->assertEquals(-1, Zend_Locale_Math_PhpMath::Comp(  9E+100, 9E+200    ));
-        $this->assertEquals( 1, Zend_Locale_Math_PhpMath::Comp( 10.5556, 10.4444, 2));
-        $this->assertEquals( 0, Zend_Locale_Math_PhpMath::Comp( 10.5556, 10.4444, 0));
-        $this->assertEquals(-1, Zend_Locale_Math_PhpMath::Comp(-10.4444, -4.5556, 0));
+        // $this->assertEquals(-1, PhpMath::Comp(  9E+100, 9E+200    ));
+        $this->assertEquals( 1, PhpMath::Comp( 10.5556, 10.4444, 2));
+        $this->assertEquals( 0, PhpMath::Comp( 10.5556, 10.4444, 0));
+        $this->assertEquals(-1, PhpMath::Comp(-10.4444, -4.5556, 0));
     }
 
     public function testSqrt()
     {
-        Zend_Locale_Math_PhpMath::disable();
-        $this->assertEquals(1,    Zend_Locale_Math_PhpMath::Sqrt(     1));
-        $this->assertEquals(0,    Zend_Locale_Math_PhpMath::Sqrt(  null));
-        $this->assertEquals(3.25, Zend_Locale_Math_PhpMath::Sqrt(10.5556, 2));
-        $this->assertEquals(3,    Zend_Locale_Math_PhpMath::Sqrt(10.5556, 0));
-        $this->assertEquals(NULL, Zend_Locale_Math_PhpMath::Sqrt(-10.4444));
+        PhpMath::disable();
+        $this->assertEquals(1,    PhpMath::Sqrt(     1));
+        $this->assertEquals(0,    PhpMath::Sqrt(  null));
+        $this->assertEquals(3.25, PhpMath::Sqrt(10.5556, 2));
+        $this->assertEquals(3,    PhpMath::Sqrt(10.5556, 0));
+        $this->assertEquals(NULL, PhpMath::Sqrt(-10.4444));
     }
 
     public function testMod()
     {
-        Zend_Locale_Math_PhpMath::disable();
-        $this->assertEquals(1, Zend_Locale_Math_PhpMath::Mod(   1, 2));
-        $this->assertEquals(0, Zend_Locale_Math_PhpMath::Mod(null, 2));
-        $this->assertEquals(null, Zend_Locale_Math_PhpMath::Mod(10, null));
+        PhpMath::disable();
+        $this->assertEquals(1, PhpMath::Mod(   1, 2));
+        $this->assertEquals(0, PhpMath::Mod(null, 2));
+        $this->assertEquals(null, PhpMath::Mod(10, null));
         /**
          * BCMath extension doesn't actually operatest with a scientific notation (e.g. 1.2e+100)
          * So we shouldn't test numbers such as -9E+100, but probably should care about correct
@@ -1515,26 +1512,26 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
          *
          * @todo provide correct behavior
          */
-        //$this->assertEquals(0, Zend_Locale_Math_PhpMath::Mod(9E-300, 9E+200));
-        $this->assertEquals(2,  Zend_Locale_Math_PhpMath::Mod( 10.4444, 4.5556));
-        $this->assertEquals(2,  Zend_Locale_Math_PhpMath::Mod( 10.4444, 4.5556));
-        $this->assertEquals(-2, Zend_Locale_Math_PhpMath::Mod(-10.4444, 4     ));
-        $this->assertEquals(10, Zend_Locale_Math_PhpMath::Mod( 10,     11     ));
+        //$this->assertEquals(0, PhpMath::Mod(9E-300, 9E+200));
+        $this->assertEquals(2,  PhpMath::Mod( 10.4444, 4.5556));
+        $this->assertEquals(2,  PhpMath::Mod( 10.4444, 4.5556));
+        $this->assertEquals(-2, PhpMath::Mod(-10.4444, 4     ));
+        $this->assertEquals(10, PhpMath::Mod( 10,     11     ));
     }
 
     public function testScale()
     {
-        Zend_Locale_Math_PhpMath::disable();
-        $this->assertTrue(Zend_Locale_Math_PhpMath::Scale(3));
+        PhpMath::disable();
+        $this->assertTrue(PhpMath::Scale(3));
         try {
-            $this->assertTrue(Zend_Locale_Math_PhpMath::Scale(10));
+            $this->assertTrue(PhpMath::Scale(10));
             $this->fail("exception expected");
-        } catch (Zend_Locale_Math_Exception $e) {
+        } catch (MathException $e) {
             // success
         }
-        $this->assertEquals(1, Zend_Locale_Math_PhpMath::Comp(10.5556, 10.4444));
-        $this->assertTrue(Zend_Locale_Math_PhpMath::Scale(0));
-        $this->assertEquals(0, Zend_Locale_Math_PhpMath::Comp(10.5556, 10.4444));
+        $this->assertEquals(1, PhpMath::Comp(10.5556, 10.4444));
+        $this->assertTrue(PhpMath::Scale(0));
+        $this->assertEquals(0, PhpMath::Comp(10.5556, 10.4444));
     }
 
     public function testExponent()
@@ -1544,13 +1541,13 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $this->assertEquals('1000', Zend_Locale_Math::exponent('1e3'));
-        $this->assertEquals('10320', Zend_Locale_Math::exponent('1.032e4'));
-        $this->assertEquals('10320', Zend_Locale_Math::exponent('10.32e3'));
-        $this->assertEquals('1000', Zend_Locale_Math::exponent('1e+3'));
-        $this->assertEquals('0.001', Zend_Locale_Math::exponent('1e-3', 3));
-        $this->assertEquals('0.0001032', Zend_Locale_Math::exponent('1.032e-4', 7));
-        $this->assertEquals('0.01032', Zend_Locale_Math::exponent('10.32e-3', 5));
+        $this->assertEquals('1000', Math::exponent('1e3'));
+        $this->assertEquals('10320', Math::exponent('1.032e4'));
+        $this->assertEquals('10320', Math::exponent('10.32e3'));
+        $this->assertEquals('1000', Math::exponent('1e+3'));
+        $this->assertEquals('0.001', Math::exponent('1e-3', 3));
+        $this->assertEquals('0.0001032', Math::exponent('1.032e-4', 7));
+        $this->assertEquals('0.01032', Math::exponent('10.32e-3', 5));
     }
 
     public function testAddingWithBCMathAndExponent()
@@ -1560,8 +1557,8 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $this->assertEquals('1300', Zend_Locale_Math::Add('1e3', 300));
-        $this->assertEquals('1300', Zend_Locale_Math::Add(300, '1e3'));
+        $this->assertEquals('1300', Math::Add('1e3', 300));
+        $this->assertEquals('1300', Math::Add(300, '1e3'));
     }
 
     public function testSubbingWithBCMathAndExponent()
@@ -1571,7 +1568,7 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $this->assertEquals('700', Zend_Locale_Math::Sub(1000, '0.3e3'));
+        $this->assertEquals('700', Math::Sub(1000, '0.3e3'));
     }
 
     public function testPowerWithBCMathAndExponent()
@@ -1581,7 +1578,7 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $this->assertEquals('1000000', Zend_Locale_Math::Pow('1e3', 2));
+        $this->assertEquals('1000000', Math::Pow('1e3', 2));
     }
 
     public function testMultiplyingWithBCMathAndExponent()
@@ -1591,8 +1588,8 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $this->assertEquals('2000', Zend_Locale_Math::Mul('1e3', 2));
-        $this->assertEquals('2000', Zend_Locale_Math::Mul(2, '1e3'));
+        $this->assertEquals('2000', Math::Mul('1e3', 2));
+        $this->assertEquals('2000', Math::Mul(2, '1e3'));
     }
 
     public function testDivisionWithBCMathAndExponent()
@@ -1602,7 +1599,7 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $this->assertEquals('500', Zend_Locale_Math::Div('1e3', 2));
+        $this->assertEquals('500', Math::Div('1e3', 2));
     }
 
     public function testSqrtWithBCMathAndExponent()
@@ -1612,7 +1609,7 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $this->assertEquals('31.62', Zend_Locale_Math::Sqrt('1e3', 2));
+        $this->assertEquals('31.62', Math::Sqrt('1e3', 2));
     }
 
     public function testModuloWithBCMathAndExponent()
@@ -1622,7 +1619,7 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $this->assertEquals('0', Zend_Locale_Math::Mod('1e3', 2));
+        $this->assertEquals('0', Math::Mod('1e3', 2));
     }
 
     public function testComparisonWithBCMathAndExponent()
@@ -1632,28 +1629,28 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $this->assertEquals('1', Zend_Locale_Math::Comp('1e3', 2));
-        $this->assertEquals('-1', Zend_Locale_Math::Comp(2, '1e3'));
-        $this->assertEquals('0', Zend_Locale_Math::Comp('1e3', '1e3'));
+        $this->assertEquals('1', Math::Comp('1e3', 2));
+        $this->assertEquals('-1', Math::Comp(2, '1e3'));
+        $this->assertEquals('0', Math::Comp('1e3', '1e3'));
     }
 
     public function testNegativeRounding()
     {
-        $this->assertEquals(               '-3', Zend_Locale_Math::round('-3.4'));
-        $this->assertEquals(        round(-3.4), Zend_Locale_Math::round('-3.4'));
-        $this->assertEquals(               '-4', Zend_Locale_Math::round('-3.5'));
-        $this->assertEquals(        round(-3.5), Zend_Locale_Math::round('-3.5'));
-        $this->assertEquals(               '-4', Zend_Locale_Math::round('-3.6'));
-        $this->assertEquals(        round(-3.6), Zend_Locale_Math::round('-3.6'));
-        $this->assertEquals(               '-4', Zend_Locale_Math::round('-3.6', 0));
-        $this->assertEquals(      round(-3.6,0), Zend_Locale_Math::round('-3.6', 0));
-        $this->assertEquals(            '-1.96', Zend_Locale_Math::round('-1.95583', 2), '', 0.02);
-        $this->assertEquals(  round(-1.95583,2), Zend_Locale_Math::round('-1.95583', 2), '', 0.02);
-        $this->assertEquals(           -1242000, Zend_Locale_Math::round('-1241757', -3), '', 250);
-        $this->assertEquals(round(-1241757, -3), Zend_Locale_Math::round('-1241757', -3), '', 250);
-        $this->assertEquals(              -5.05, Zend_Locale_Math::round('-5.045', 2), '', 0.02);
-        $this->assertEquals(   round(-5.045, 2), Zend_Locale_Math::round('-5.045', 2), '', 0.02);
-        $this->assertEquals(              -5.06, Zend_Locale_Math::round('-5.055', 2), '', 0.02);
-        $this->assertEquals(   round(-5.055, 2), Zend_Locale_Math::round('-5.055', 2), '', 0.02);
+        $this->assertEquals(               '-3', Math::round('-3.4'));
+        $this->assertEquals(        round(-3.4), Math::round('-3.4'));
+        $this->assertEquals(               '-4', Math::round('-3.5'));
+        $this->assertEquals(        round(-3.5), Math::round('-3.5'));
+        $this->assertEquals(               '-4', Math::round('-3.6'));
+        $this->assertEquals(        round(-3.6), Math::round('-3.6'));
+        $this->assertEquals(               '-4', Math::round('-3.6', 0));
+        $this->assertEquals(      round(-3.6,0), Math::round('-3.6', 0));
+        $this->assertEquals(            '-1.96', Math::round('-1.95583', 2), '', 0.02);
+        $this->assertEquals(  round(-1.95583,2), Math::round('-1.95583', 2), '', 0.02);
+        $this->assertEquals(           -1242000, Math::round('-1241757', -3), '', 250);
+        $this->assertEquals(round(-1241757, -3), Math::round('-1241757', -3), '', 250);
+        $this->assertEquals(              -5.05, Math::round('-5.045', 2), '', 0.02);
+        $this->assertEquals(   round(-5.045, 2), Math::round('-5.045', 2), '', 0.02);
+        $this->assertEquals(              -5.06, Math::round('-5.055', 2), '', 0.02);
+        $this->assertEquals(   round(-5.055, 2), Math::round('-5.055', 2), '', 0.02);
     }
 }

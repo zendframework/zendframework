@@ -20,14 +20,11 @@
  * @version    $Id$
  */
 
-/**
- * Zend_Cache
- */
+namespace ZendTest\Cache;
 
-/**
- * PHPUnit test case
- */
-
+use Zend\Cache,
+    Zend\Config\Config as ZendConfig,
+    Zend\Cache\Backend\TestBackend;
 
 /**
  * @category   Zend
@@ -37,15 +34,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
+class CoreTest extends \PHPUnit_Framework_TestCase
 {
     private $_instance;
 
     public function setUp()
     {
         if (!$this->_instance) {
-            $this->_instance = new Zend_Cache_Core(array());
-            $this->_backend = new Zend_Cache_Backend_Test();
+            $this->_instance = new Cache\Frontend\Core(array());
+            $this->_backend = new TestBackend();
             $this->_instance->setBackend($this->_backend);
         }
     }
@@ -57,7 +54,7 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Core(array('lifetime' => 3600, 'caching' => true));
+        $test = new Cache\Frontend\Core(array('lifetime' => 3600, 'caching' => true));
     }
 
     /**
@@ -65,8 +62,8 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorCorrectCallWithZendConfig()
     {
-        $test = new Zend_Cache_Core(
-            new Zend_Config(array('lifetime' => 3600, 'caching' => true))
+        $test = new Cache\Frontend\Core(
+            new ZendConfig(array('lifetime' => 3600, 'caching' => true))
         );
     }
 
@@ -75,8 +72,8 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
      */
     public function testSettingOptionsWithZendConfig()
     {
-        $config = new Zend_Config(array('lifetime' => 3600, 'caching' => true));
-        $test = new Zend_Cache_Core();
+        $config = new ZendConfig(array('lifetime' => 3600, 'caching' => true));
+        $test = new Cache\Frontend\Core();
         $test->setConfig($config);
         $this->assertEquals(3600, $test->getOption('lifetime'));
     }
@@ -86,8 +83,8 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
      */
     public function testSettingLifetimeAsEmptyIsInterpretedAsNull()
     {
-        $config = new Zend_Config(array('lifetime' => '', 'caching' => true));
-        $test = new Zend_Cache_Core();
+        $config = new ZendConfig(array('lifetime' => '', 'caching' => true));
+        $test = new Cache\Frontend\Core();
         $test->setConfig($config);
         $this->assertSame(NULL, $test->getOption('lifetime'));
     }
@@ -95,11 +92,11 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
     public function testConstructorBadOption()
     {
         try {
-            $test = new Zend_Cache_Core(array(0 => 'bar', 'lifetime' => 3600));
-        } catch (Zend_Cache_Exception $e) {
+            $test = new Cache\Frontend\Core(array(0 => 'bar', 'lifetime' => 3600));
+        } catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testSetLifeTime()
@@ -109,13 +106,13 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
 
     public function testSetBackendCorrectCall1()
     {
-        $backend = new Zend_Cache_Backend_File(array());
+        $backend = new Cache\Backend\File(array());
         $this->_instance->setBackend($backend);
     }
 
     public function testSetBackendCorrectCall2()
     {
-        $backend = new Zend_Cache_Backend_Test(array());
+        $backend = new TestBackend(array());
         $this->_instance->setBackend($backend);
         $log = $backend->getLastLog();
         $this->assertEquals('setDirectives', $log['methodName']);
@@ -131,10 +128,10 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
     {
         try {
             $this->_instance->setOption(array('lifetime'), 1200);
-        } catch (Zend_Cache_Exception $e) {
+        } catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     /**
@@ -147,14 +144,14 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
     {
         try {
             $this->_instance->setOption(0, 1200);
-            $this->fail('Zend_Cache_Exception was expected but not thrown');
-        } catch (Zend_Cache_Exception $e) {
+            $this->fail('Cache\Exception was expected but not thrown');
+        } catch (Cache\Exception $e) {
         }
 
         try {
             $this->_instance->setOption('foo', 1200);
-        } catch (Zend_Cache_Exception $e) {
-            $this->fail('Zend_Cache_Exception was thrown but should not have been');
+        } catch (Cache\Exception $e) {
+            $this->fail('Cache\Exception was thrown but should not have been');
         }
     }
 
@@ -162,60 +159,60 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
     {
         try {
             $this->_instance->save('data', 'foo bar');
-        }  catch (Zend_Cache_Exception $e) {
+        }  catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testSaveCorrectBadCall2()
     {
         try {
             $this->_instance->save('data', 'foobar', array('tag1', 'foo bar'));
-        }  catch (Zend_Cache_Exception $e) {
+        }  catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testSaveCorrectBadCall3()
     {
         try {
             $this->_instance->save(array('data'), 'foobar');
-        }  catch (Zend_Cache_Exception $e) {
+        }  catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testSaveWithABadCacheId()
     {
         try {
             $this->_instance->save(array('data'), true);
-        }  catch (Zend_Cache_Exception $e) {
+        }  catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testSaveWithABadCacheId2()
     {
         try {
             $this->_instance->save(array('data'), 'internal_foo');
-        }  catch (Zend_Cache_Exception $e) {
+        }  catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testSaveWithABadTags()
     {
         try {
             $this->_instance->save(array('data'), 'foo', 'foobar');
-        }  catch (Zend_Cache_Exception $e) {
+        }  catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testSaveCorrectCallNoCaching()
@@ -337,10 +334,10 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
     {
         try {
             $this->_instance->test('foo bar');
-        }  catch (Zend_Cache_Exception $e) {
+        }  catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testTestCorrectCall1()
@@ -377,10 +374,10 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
     {
         try {
             $res = $this->_instance->load('foo bar');
-        }  catch (Zend_Cache_Exception $e) {
+        }  catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testGetCorrectCall1()
@@ -406,10 +403,10 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
     {
         try {
             $res = $this->_instance->remove('foo bar');
-        }  catch (Zend_Cache_Exception $e) {
+        }  catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testRemoveCorrectCallNoCaching()
@@ -440,20 +437,20 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
     {
         try {
             $res = $this->_instance->clean('matchingTag', array('foo bar', 'foo'));
-        }  catch (Zend_Cache_Exception $e) {
+        }  catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testCleanBadCall2()
     {
         try {
             $res = $this->_instance->clean('foo');
-        }  catch (Zend_Cache_Exception $e) {
+        }  catch (Cache\Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');
+        $this->fail('Cache\Exception was expected but not thrown');
     }
 
     public function testCleanCorrectCallNoCaching()

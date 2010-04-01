@@ -20,9 +20,9 @@
  * @version    $Id$
  */
 
-/** PHPUnit_Framework_TestCase */
+namespace ZendTest\Log\Formatter;
 
-/** Zend_Log_Formatter_Simple */
+use \Zend\Log\Formatter\Simple;
 
 /**
  * @category   Zend
@@ -32,17 +32,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Formatter_SimpleTest extends PHPUnit_Framework_TestCase
+class SimpleTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructorThrowsOnBadFormatString()
     {
-        try {
-            new Zend_Log_Formatter_Simple(1);
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertType('Zend_Log_Exception', $e);
-            $this->assertRegExp('/must be a string/i', $e->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Log\\Exception', 'must be a string');
+        new Simple(1);
     }
 
     public function testDefaultFormat()
@@ -52,7 +47,7 @@ class Zend_Log_Formatter_SimpleTest extends PHPUnit_Framework_TestCase
                         'priority'     => 42,
                         'priorityName' => 'bar');
 
-        $f = new Zend_Log_Formatter_Simple();
+        $f = new Simple();
         $line = $f->format($fields);
 
         $this->assertContains((string)$fields['timestamp'], $line);
@@ -67,7 +62,7 @@ class Zend_Log_Formatter_SimpleTest extends PHPUnit_Framework_TestCase
                         'priority'     => 42,
                         'priorityName' => 'bar');
 
-        $f = new Zend_Log_Formatter_Simple();
+        $f = new Simple();
 
         $fields['message'] = 'Foo';
         $line = $f->format($fields);
@@ -94,23 +89,24 @@ class Zend_Log_Formatter_SimpleTest extends PHPUnit_Framework_TestCase
         $line = $f->format($fields);
         $this->assertContains('array', $line);
 
-        $fields['message'] = new Zend_Log_Formatter_SimpleTest_TestObject1();
+        $fields['message'] = new SimpleTest_TestObject1();
         $line = $f->format($fields);
         $this->assertContains($fields['message']->__toString(), $line);
 
-        $fields['message'] = new Zend_Log_Formatter_SimpleTest_TestObject2();
+        $fields['message'] = new SimpleTest_TestObject2();
         $line = $f->format($fields);
         $this->assertContains('object', $line);
     }
 }
 
-class Zend_Log_Formatter_SimpleTest_TestObject1 {
-
+class SimpleTest_TestObject1 
+{
     public function __toString()
     {
         return 'Hello World';
     }
 }
 
-class Zend_Log_Formatter_SimpleTest_TestObject2 {
+class SimpleTest_TestObject2 
+{
 }

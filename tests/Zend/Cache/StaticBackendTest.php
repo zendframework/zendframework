@@ -4,11 +4,14 @@
  * @subpackage UnitTests
  */
 
+namespace ZendTest\Cache;
+use Zend\Cache;
+
 /**
  * @package    Zend_Cache
  * @subpackage UnitTests
  */
-class Zend_Cache_StaticBackendTest extends Zend_Cache_TestCommonBackend 
+class StaticBackendTest extends TestCommonBackend 
 {
 
     protected $_instance;
@@ -19,7 +22,7 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_TestCommonBackend
 
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
-        parent::__construct('Zend_Cache_Backend_Static', $data, $dataName);
+        parent::__construct('\Zend\Cache\Backend\StaticBackend', $data, $dataName);
     }
 
     public function setUp($notag = false)
@@ -28,15 +31,15 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_TestCommonBackend
         $this->_cache_dir = $this->mkdir();
         @mkdir($this->_cache_dir.'/tags');
 
-        $this->_innerCache = Zend_Cache::factory('Core','File',
+        $this->_innerCache = Cache\Cache::factory('Core','File',
             array('automatic_serialization'=>true), array('cache_dir'=>$this->_cache_dir.'/tags')
         );
-        $this->_instance = new Zend_Cache_Backend_Static(array(
+        $this->_instance = new Cache\Backend\StaticBackend(array(
             'public_dir' => $this->_cache_dir,
             'tag_cache' => $this->_innerCache
         ));
 
-        $logger = new Zend_Log(new Zend_Log_Writer_Null());
+        $logger = new \Zend\Log\Logger(new \Zend\Log\Writer\Null());
         $this->_instance->setDirectives(array('logger' => $logger));
 
         $this->_requestUriOld =
@@ -60,7 +63,7 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_TestCommonBackend
 
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Backend_Static(array());
+        $test = new Cache\Backend\StaticBackend(array());
     }
 
     public function testRemoveCorrectCall()
@@ -73,8 +76,8 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_TestCommonBackend
 
     public function testOptionsSetTagCache()
     {
-        $test = new Zend_Cache_Backend_Static(array('tag_cache'=>$this->_innerCache));
-        $this->assertTrue($test->getInnerCache() instanceof Zend_Cache_Core);
+        $test = new Cache\Backend\StaticBackend(array('tag_cache'=>$this->_innerCache));
+        $this->assertTrue($test->getInnerCache() instanceof Cache\Frontend);
     }
 
     public function testSaveCorrectCall()

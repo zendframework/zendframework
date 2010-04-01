@@ -20,15 +20,9 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Filter;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Filter_StringToLower
- */
-
+use Zend\Filter\StringToLower as StringToLowerFilter;
 
 /**
  * @category   Zend
@@ -38,7 +32,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_StringToLowerTest extends PHPUnit_Framework_TestCase
+class StringToLowerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Zend_Filter_StringToLower object
@@ -54,7 +48,7 @@ class Zend_Filter_StringToLowerTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_filter = new Zend_Filter_StringToLower();
+        $this->_filter = new StringToLowerFilter();
     }
 
     /**
@@ -64,6 +58,7 @@ class Zend_Filter_StringToLowerTest extends PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
+        $filter = $this->_filter;
         $valuesExpected = array(
             'string' => 'string',
             'aBc1@3' => 'abc1@3',
@@ -71,7 +66,7 @@ class Zend_Filter_StringToLowerTest extends PHPUnit_Framework_TestCase
         );
 
         foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals($output, $this->_filter->filter($input));
+            $this->assertEquals($output, $filter($input));
         }
     }
 
@@ -83,6 +78,7 @@ class Zend_Filter_StringToLowerTest extends PHPUnit_Framework_TestCase
      */
     public function testWithEncoding()
     {
+        $filter = $this->_filter;
         $valuesExpected = array(
             'Ü'     => 'ü',
             'Ñ'     => 'ñ',
@@ -90,11 +86,11 @@ class Zend_Filter_StringToLowerTest extends PHPUnit_Framework_TestCase
         );
 
         try {
-            $this->_filter->setEncoding('UTF-8');
+            $filter->setEncoding('UTF-8');
             foreach ($valuesExpected as $input => $output) {
-                $this->assertEquals($output, $this->_filter->filter($input));
+                $this->assertEquals($output, $filter($input));
             }
-        } catch (Zend_Filter_Exception $e) {
+        } catch (\Zend\Filter\Exception $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }
@@ -108,12 +104,8 @@ class Zend_Filter_StringToLowerTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('mbstring required');
         }
 
-        try {
-            $this->_filter->setEncoding('aaaaa');
-            $this->fail();
-        } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('is not supported', $e->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Filter\\Exception', 'is not supported');
+        $this->_filter->setEncoding('aaaaa');
     }
 
     /**
@@ -128,11 +120,11 @@ class Zend_Filter_StringToLowerTest extends PHPUnit_Framework_TestCase
         );
 
         try {
-            $filter = new Zend_Filter_StringToLower(array('encoding' => 'UTF-8'));
+            $filter = new StringToLowerFilter(array('encoding' => 'UTF-8'));
             foreach ($valuesExpected as $input => $output) {
-                $this->assertEquals($output, $filter->filter($input));
+                $this->assertEquals($output, $filter($input));
             }
-        } catch (Zend_Filter_Exception $e) {
+        } catch (\Zend\Filter\Exception $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }
@@ -142,6 +134,7 @@ class Zend_Filter_StringToLowerTest extends PHPUnit_Framework_TestCase
      */
     public function testCaseInsensitiveEncoding()
     {
+        $filter = $this->_filter;
         $valuesExpected = array(
             'Ü'     => 'ü',
             'Ñ'     => 'ñ',
@@ -149,21 +142,21 @@ class Zend_Filter_StringToLowerTest extends PHPUnit_Framework_TestCase
         );
 
         try {
-            $this->_filter->setEncoding('UTF-8');
+            $filter->setEncoding('UTF-8');
             foreach ($valuesExpected as $input => $output) {
-                $this->assertEquals($output, $this->_filter->filter($input));
+                $this->assertEquals($output, $filter($input));
             }
 
             $this->_filter->setEncoding('utf-8');
             foreach ($valuesExpected as $input => $output) {
-                $this->assertEquals($output, $this->_filter->filter($input));
+                $this->assertEquals($output, $filter($input));
             }
 
             $this->_filter->setEncoding('UtF-8');
             foreach ($valuesExpected as $input => $output) {
-                $this->assertEquals($output, $this->_filter->filter($input));
+                $this->assertEquals($output, $filter($input));
             }
-        } catch (Zend_Filter_Exception $e) {
+        } catch (\Zend\Filter\Exception $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }

@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Loader;
+
+use \Zend\Loader\Autoloader,
+    \Zend\Loader\PluginLoader\PluginLoader;
+
 /**
  * Test class for Zend_Loader_PluginLoader.
  *
@@ -30,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Loader
  */
-class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
+class PluginLoaderTest extends \PHPUnit_Framework_TestCase
 {
     protected $_includeCache;
 
@@ -47,13 +52,13 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
         }
 
         // Possible for previous tests to remove autoloader 
-        Zend_Loader_Autoloader::resetInstance();
-        $al = Zend_Loader_Autoloader::getInstance();
+        Autoloader::resetInstance();
+        $al = Autoloader::getInstance();
         $al->registerPrefix('PHPUnit_');
 
-        Zend_Loader_PluginLoader::setIncludeFileCache(null);
-        $this->_includeCache = dirname(__FILE__) . '/_files/includeCache.inc.php';
-        $this->libPath = realpath(dirname(__FILE__) . '/../../../library');
+        PluginLoader::setIncludeFileCache(null);
+        $this->_includeCache = __DIR__ . '/_files/includeCache.inc.php';
+        $this->libPath = realpath(__DIR__ . '/../../../library');
         $this->key = null;
     }
 
@@ -66,7 +71,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->clearStaticPaths();
-        Zend_Loader_PluginLoader::setIncludeFileCache(null);
+        PluginLoader::setIncludeFileCache(null);
         if (file_exists($this->_includeCache)) {
             unlink($this->_includeCache);
         }
@@ -75,14 +80,14 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
     public function clearStaticPaths()
     {
         if (null !== $this->key) {
-            $loader = new Zend_Loader_PluginLoader(array(), $this->key);
+            $loader = new PluginLoader(array(), $this->key);
             $loader->clearPaths();
         }
     }
 
     public function testAddPrefixPathNonStatically()
     {
-        $loader = new Zend_Loader_PluginLoader();
+        $loader = new PluginLoader();
         $loader->addPrefixPath('Zend_View', $this->libPath . '/Zend/View')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend/Loader')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend');
@@ -96,7 +101,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testAddPrefixPathMultipleTimes()
     {
-        $loader = new Zend_Loader_PluginLoader();
+        $loader = new PluginLoader();
         $loader->addPrefixPath('Zend_Loader', $this->libPath . '/Zend/Loader')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend/Loader');
         $paths = $loader->getPaths();
@@ -108,7 +113,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
     public function testAddPrefixPathStatically()
     {
         $this->key = 'foobar';
-        $loader = new Zend_Loader_PluginLoader(array(), $this->key);
+        $loader = new PluginLoader(array(), $this->key);
         $loader->addPrefixPath('Zend_View', $this->libPath . '/Zend/View')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend/Loader')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend');
@@ -122,27 +127,21 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testAddPrefixPathThrowsExceptionWithNonStringPrefix()
     {
-        $loader = new Zend_Loader_PluginLoader();
-        try {
-            $loader->addPrefixPath(array(), $this->libPath);
-            $this->fail('addPrefixPath() should throw exception with non-string prefix');
-        } catch (Exception $e) {
-        }
+        $this->setExpectedException('\\Zend\\Loader\\PluginLoader\\Exception', 'only takes strings');
+        $loader = new PluginLoader();
+        $loader->addPrefixPath(array(), $this->libPath);
     }
 
     public function testAddPrefixPathThrowsExceptionWithNonStringPath()
     {
-        $loader = new Zend_Loader_PluginLoader();
-        try {
-            $loader->addPrefixPath('Foo_Bar', array());
-            $this->fail('addPrefixPath() should throw exception with non-string path');
-        } catch (Exception $e) {
-        }
+        $this->setExpectedException('\\Zend\\Loader\\PluginLoader\\Exception', 'only takes strings');
+        $loader = new PluginLoader();
+        $loader->addPrefixPath('Foo_Bar', array());
     }
 
     public function testRemoveAllPathsForGivenPrefixNonStatically()
     {
-        $loader = new Zend_Loader_PluginLoader();
+        $loader = new PluginLoader();
         $loader->addPrefixPath('Zend_View', $this->libPath . '/Zend/View')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend/Loader')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend');
@@ -155,7 +154,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
     public function testRemoveAllPathsForGivenPrefixStatically()
     {
         $this->key = 'foobar';
-        $loader = new Zend_Loader_PluginLoader(array(), $this->key);
+        $loader = new PluginLoader(array(), $this->key);
         $loader->addPrefixPath('Zend_View', $this->libPath . '/Zend/View')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend/Loader')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend');
@@ -167,30 +166,27 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testRemovePrefixPathThrowsExceptionIfPrefixNotRegistered()
     {
-        $loader = new Zend_Loader_PluginLoader();
-        try {
-            $loader->removePrefixPath('Foo_Bar');
-            $this->fail('Removing non-existent prefix should throw an exception');
-        } catch (Exception $e) {
-        }
+        $this->setExpectedException('\\Zend\\Loader\\PluginLoader\\Exception', 'not found');
+        $loader = new PluginLoader();
+        $loader->removePrefixPath('Foo_Bar');
     }
 
     public function testRemovePrefixPathThrowsExceptionIfPrefixPathPairNotRegistered()
     {
-        $loader = new Zend_Loader_PluginLoader();
-        $loader->addPrefixPath('Foo_Bar', realpath(dirname(__FILE__)));
+        $loader = new PluginLoader();
+        $loader->addPrefixPath('Foo_Bar', realpath(__DIR__));
         $paths = $loader->getPaths();
         $this->assertTrue(isset($paths['Foo_Bar_']));
         try {
             $loader->removePrefixPath('Foo_Bar', $this->libPath);
-            $this->fail('Removing non-existent prefix/path pair should throw an exception');
-        } catch (Exception $e) {
+            $this->fail('Removing non-existent prefix/path pair should throw an exception' . "\n" . var_export($loader->getPaths('Foo_Bar'), 1));
+        } catch (\Zend\Loader\PluginLoader\Exception $e) {
         }
     }
 
     public function testClearPathsNonStaticallyClearsPathArray()
     {
-        $loader = new Zend_Loader_PluginLoader();
+        $loader = new PluginLoader();
         $loader->addPrefixPath('Zend_View', $this->libPath . '/Zend/View')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend/Loader')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend');
@@ -204,7 +200,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
     public function testClearPathsStaticallyClearsPathArray()
     {
         $this->key = 'foobar';
-        $loader = new Zend_Loader_PluginLoader(array(), $this->key);
+        $loader = new PluginLoader(array(), $this->key);
         $loader->addPrefixPath('Zend_View', $this->libPath . '/Zend/View')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend/Loader')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend');
@@ -217,7 +213,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testClearPathsWithPrefixNonStaticallyClearsPathArray()
     {
-        $loader = new Zend_Loader_PluginLoader();
+        $loader = new PluginLoader();
         $loader->addPrefixPath('Zend_View', $this->libPath . '/Zend/View')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend/Loader')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend');
@@ -231,7 +227,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
     public function testClearPathsWithPrefixStaticallyClearsPathArray()
     {
         $this->key = 'foobar';
-        $loader = new Zend_Loader_PluginLoader(array(), $this->key);
+        $loader = new PluginLoader(array(), $this->key);
         $loader->addPrefixPath('Zend_View', $this->libPath . '/Zend/View')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend/Loader')
                ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend');
@@ -244,7 +240,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testGetClassNameNonStaticallyReturnsFalseWhenClassNotLoaded()
     {
-        $loader = new Zend_Loader_PluginLoader();
+        $loader = new PluginLoader();
         $loader->addPrefixPath('Zend_View_Helper', $this->libPath . '/Zend/View/Helper');
         $this->assertFalse($loader->getClassName('FormElement'));
     }
@@ -252,14 +248,14 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
     public function testGetClassNameStaticallyReturnsFalseWhenClassNotLoaded()
     {
         $this->key = 'foobar';
-        $loader = new Zend_Loader_PluginLoader(array(), $this->key);
+        $loader = new PluginLoader(array(), $this->key);
         $loader->addPrefixPath('Zend_View_Helper', $this->libPath . '/Zend/View/Helper');
         $this->assertFalse($loader->getClassName('FormElement'));
     }
 
     public function testLoadPluginNonStaticallyLoadsClass()
     {
-        $loader = new Zend_Loader_PluginLoader();
+        $loader = new PluginLoader();
         $loader->addPrefixPath('Zend_View_Helper', $this->libPath . '/Zend/View/Helper');
         try {
             $className = $loader->load('FormButton');
@@ -275,7 +271,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
     public function testLoadPluginStaticallyLoadsClass()
     {
         $this->key = 'foobar';
-        $loader = new Zend_Loader_PluginLoader(array(), $this->key);
+        $loader = new PluginLoader(array(), $this->key);
         $loader->addPrefixPath('Zend_View_Helper', $this->libPath . '/Zend/View/Helper');
         try {
             $className = $loader->load('FormRadio');
@@ -290,29 +286,23 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testLoadThrowsExceptionIfFileFoundInPrefixButClassNotLoaded()
     {
-        $loader = new Zend_Loader_PluginLoader();
+        $this->setExpectedException('\\Zend\\Loader\\PluginLoader\\Exception', 'not found in the registry');
+        $loader = new PluginLoader();
         $loader->addPrefixPath('Foo_Helper', $this->libPath . '/Zend/View/Helper');
-        try {
-            $className = $loader->load('Doctype');
-            $this->fail('Invalid prefix for a path should throw an exception');
-        } catch (Exception $e) {
-        }
+        $className = $loader->load('Doctype');
     }
 
     public function testLoadThrowsExceptionIfNoHelperClassLoaded()
     {
-        $loader = new Zend_Loader_PluginLoader();
+        $this->setExpectedException('\\Zend\\Loader\\PluginLoader\\Exception', 'not found in the registry');
+        $loader = new PluginLoader();
         $loader->addPrefixPath('Foo_Helper', $this->libPath . '/Zend/View/Helper');
-        try {
-            $className = $loader->load('FooBarBazBat');
-            $this->fail('Not finding a helper should throw an exception');
-        } catch (Exception $e) {
-        }
+        $className = $loader->load('FooBarBazBat');
     }
 
     public function testGetClassAfterNonStaticLoadReturnsResolvedClassName()
     {
-        $loader = new Zend_Loader_PluginLoader();
+        $loader = new PluginLoader();
         $loader->addPrefixPath('Zend_View_Helper', $this->libPath . '/Zend/View/Helper');
         try {
             $className = $loader->load('FormSelect');
@@ -327,7 +317,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
     public function testGetClassAfterStaticLoadReturnsResolvedClassName()
     {
         $this->key = 'foobar';
-        $loader = new Zend_Loader_PluginLoader(array(), $this->key);
+        $loader = new PluginLoader(array(), $this->key);
         $loader->addPrefixPath('Zend_View_Helper', $this->libPath . '/Zend/View/Helper');
         try {
             $className = $loader->load('FormCheckbox');
@@ -341,7 +331,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testClassFilesAreSearchedInLifoOrder()
     {
-        $loader = new Zend_Loader_PluginLoader(array());
+        $loader = new PluginLoader(array());
         $loader->addPrefixPath('Zend_View_Helper', $this->libPath . '/Zend/View/Helper');
         $loader->addPrefixPath('ZfTest', dirname(__FILE__) . '/_files/ZfTest');
         try {
@@ -359,7 +349,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
      */
     public function testWin32UnderscoreSpacedShortNamesWillLoad()
     {
-        $loader = new Zend_Loader_PluginLoader(array());
+        $loader = new PluginLoader(array());
         $loader->addPrefixPath('Zend_Filter', $this->libPath . '/Zend/Filter');
         try {
             // Plugin loader will attempt to load "c:\path\to\library/Zend/Filter/Word\UnderscoreToDash.php"
@@ -376,7 +366,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
      */
     public function testIncludeCacheShouldBeNullByDefault()
     {
-        $this->assertNull(Zend_Loader_PluginLoader::getIncludeFileCache());
+        $this->assertNull(PluginLoader::getIncludeFileCache());
     }
 
     /**
@@ -386,20 +376,19 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
     {
         $cacheFile = $this->_includeCache;
         $this->testIncludeCacheShouldBeNullByDefault();
-        Zend_Loader_PluginLoader::setIncludeFileCache($cacheFile);
-        $this->assertEquals($cacheFile, Zend_Loader_PluginLoader::getIncludeFileCache());
+        PluginLoader::setIncludeFileCache($cacheFile);
+        $this->assertEquals($cacheFile, PluginLoader::getIncludeFileCache());
     }
 
     /**
      * @group ZF-4670
-     * @expectedException Zend_Loader_PluginLoader_Exception
      */
     public function testPluginLoaderShouldThrowExceptionWhenPathDoesNotExist()
     {
+        $this->setExpectedException('\\Zend\\Loader\\PluginLoader\\Exception', 'file does not exist');
         $cacheFile = dirname(__FILE__) . '/_filesDoNotExist/includeCache.inc.php';
         $this->testIncludeCacheShouldBeNullByDefault();
-        Zend_Loader_PluginLoader::setIncludeFileCache($cacheFile);
-        $this->fail('Should not allow specifying invalid cache file path');
+        PluginLoader::setIncludeFileCache($cacheFile);
     }
 
     /**
@@ -408,8 +397,8 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
     public function testPluginLoaderShouldAppendIncludeCacheWhenClassIsFound()
     {
         $cacheFile = $this->_includeCache;
-        Zend_Loader_PluginLoader::setIncludeFileCache($cacheFile);
-        $loader = new Zend_Loader_PluginLoader(array());
+        PluginLoader::setIncludeFileCache($cacheFile);
+        $loader = new PluginLoader(array());
         $loader->addPrefixPath('Zend_View_Helper', $this->libPath . '/Zend/View/Helper');
         $loader->addPrefixPath('ZfTest', dirname(__FILE__) . '/_files/ZfTest');
         try {
@@ -428,10 +417,10 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
      */
     public function testStaticRegistryNamePersistsInDifferentLoaderObjects()
     {
-        $loader1 = new Zend_Loader_PluginLoader(array(), "PluginLoaderStaticNamespace");
+        $loader1 = new PluginLoader(array(), "PluginLoaderStaticNamespace");
         $loader1->addPrefixPath("Zend_View_Helper", "Zend/View/Helper");
 
-        $loader2 = new Zend_Loader_PluginLoader(array(), "PluginLoaderStaticNamespace");
+        $loader2 = new PluginLoader(array(), "PluginLoaderStaticNamespace");
         $this->assertEquals(array(
             "Zend_View_Helper_" => array("Zend/View/Helper/"),
         ), $loader2->getPaths());
@@ -442,10 +431,10 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
      */
     public function testClassFilesGrabCorrectPathForLoadedClasses()
     {
-        $reflection = new ReflectionClass('Zend_View_Helper_DeclareVars');
+        $reflection = new \ReflectionClass('Zend_View_Helper_DeclareVars');
         $expected   = $reflection->getFileName();
         
-        $loader = new Zend_Loader_PluginLoader(array());
+        $loader = new PluginLoader(array());
         $loader->addPrefixPath('Zend_View_Helper', $this->libPath . '/Zend/View/Helper');
         $loader->addPrefixPath('ZfTest', dirname(__FILE__) . '/_files/ZfTest');
         try {
@@ -465,7 +454,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
      */
     public function testPrefixesEndingInBackslashDenoteNamespacedClasses()
     {
-        $loader = new Zend_Loader_PluginLoader(array());
+        $loader = new PluginLoader(array());
         $loader->addPrefixPath('Zfns\\', dirname(__FILE__) . '/_files/Zfns');
         try {
             $className = $loader->load('Foo');

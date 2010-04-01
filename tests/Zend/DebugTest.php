@@ -20,13 +20,9 @@
  * @version    $Id $
  */
 
-/**
- * Test helper
- */
+namespace ZendTest;
 
-/**
- * Zend_Debug
- */
+use \Zend\Debug;
 
 /**
  * @category   Zend
@@ -36,23 +32,23 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Debug
  */
-class Zend_DebugTest extends PHPUnit_Framework_TestCase
+class DebugTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testDebugDefaultSapi()
     {
         $sapi = php_sapi_name();
-        Zend_Debug::setSapi(null);
+        Debug::setSapi(null);
         $data = 'string';
-        $result = Zend_Debug::Dump($data, null, false);
-        $this->assertEquals($sapi, Zend_Debug::getSapi());
+        $result = Debug::Dump($data, null, false);
+        $this->assertEquals($sapi, Debug::getSapi());
     }
 
     public function testDebugDump()
     {
-        Zend_Debug::setSapi('cli');
+        Debug::setSapi('cli');
         $data = 'string';
-        $result = Zend_Debug::Dump($data, null, false);
+        $result = Debug::Dump($data, null, false);
         $result = str_replace(array(PHP_EOL, "\n"), '_', $result);
         $expected = "__string(6) \"string\"__";
         $this->assertEquals($expected, $result);
@@ -60,9 +56,9 @@ class Zend_DebugTest extends PHPUnit_Framework_TestCase
 
     public function testDebugCgi()
     {
-        Zend_Debug::setSapi('cgi');
+        Debug::setSapi('cgi');
         $data = 'string';
-        $result = Zend_Debug::Dump($data, null, false);
+        $result = Debug::Dump($data, null, false);
 
         // Has to check for two strings, because xdebug internally handles CLI vs Web
         $this->assertContains($result,
@@ -75,11 +71,11 @@ class Zend_DebugTest extends PHPUnit_Framework_TestCase
 
     public function testDebugDumpEcho()
     {
-        Zend_Debug::setSapi('cli');
+        Debug::setSapi('cli');
         $data = 'string';
 
         ob_start();
-        $result1 = Zend_Debug::Dump($data, null, true);
+        $result1 = Debug::Dump($data, null, true);
         $result2 = ob_get_contents();
         ob_end_clean();
 
@@ -89,10 +85,10 @@ class Zend_DebugTest extends PHPUnit_Framework_TestCase
 
     public function testDebugDumpLabel()
     {
-        Zend_Debug::setSapi('cli');
+        Debug::setSapi('cli');
         $data = 'string';
         $label = 'LABEL';
-        $result = Zend_Debug::Dump($data, $label, false);
+        $result = Debug::Dump($data, $label, false);
         $result = str_replace(array(PHP_EOL, "\n"), '_', $result);
         $expected = "_{$label} _string(6) \"string\"__";
         $this->assertEquals($expected, $result);
@@ -108,10 +104,10 @@ class Zend_DebugTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped("This test only works in combination with xdebug.");
         }
 
-        Zend_Debug::setSapi('apache');
+        Debug::setSapi('apache');
         $a = array("a" => "b");
 
-        $result = Zend_Debug::dump($a, "LABEL", false);
+        $result = Debug::dump($a, "LABEL", false);
         $this->assertContains("<pre>", $result);
         $this->assertContains("</pre>", $result);
     }

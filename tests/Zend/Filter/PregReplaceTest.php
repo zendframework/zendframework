@@ -20,20 +20,9 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Filter;
 
-// Call Zend_Filter_PregReplaceTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Filter_PregReplaceTest::main');
-}
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Filter_PregReplace
- */
-
+use Zend\Filter\PregReplace as PregReplaceFilter;
 
 /**
  * Test class for Zend_Filter_PregReplace.
@@ -45,35 +34,24 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_PregReplaceTest extends PHPUnit_Framework_TestCase
+class PregReplaceTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Filter_PregReplaceTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
-        $this->filter = new Zend_Filter_PregReplace();
+        $this->filter = new PregReplaceFilter();
     }
 
     public function testPassingMatchPatternToConstructorSetsMatchPattern()
     {
         $pattern = '#^controller/(?P<action>[a-z_-]+)#';
-        $filter  = new Zend_Filter_PregReplace($pattern);
+        $filter  = new PregReplaceFilter($pattern);
         $this->assertEquals($pattern, $filter->getMatchPattern());
     }
 
     public function testPassingReplacementToConstructorSetsReplacement()
     {
         $replace = 'foo/bar';
-        $filter  = new Zend_Filter_PregReplace(null, $replace);
+        $filter  = new PregReplaceFilter(null, $replace);
         $this->assertEquals($replace, $filter->getReplacement());
     }
 
@@ -110,23 +88,22 @@ class Zend_Filter_PregReplaceTest extends PHPUnit_Framework_TestCase
 
     public function testFilterPerformsRegexReplacement()
     {
+        $filter = $this->filter;
         $string = 'controller/action';
-        $this->filter->setMatchPattern('#^controller/(?P<action>[a-z_-]+)#')
-             ->setReplacement('foo/bar');
-        $filtered = $this->filter->filter($string);
+        $filter->setMatchPattern('#^controller/(?P<action>[a-z_-]+)#')
+               ->setReplacement('foo/bar');
+        $filtered = $filter($string);
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('foo/bar', $filtered);
     }
 
     public function testFilterThrowsExceptionWhenNoMatchPatternPresent()
     {
+        $filter = $this->filter;
         $string = 'controller/action';
-        $this->filter->setReplacement('foo/bar');
-        try {
-            $filtered = $this->filter->filter($string);
-            $this->fail('Replacement should fail when no match pattern present');
-        } catch (Exception $e) {
-        }
+        $filter->setReplacement('foo/bar');
+        $this->setExpectedException('\\Zend\\Filter\\Exception');
+        $filtered = $filter($string);
     }
 
     /**
@@ -143,12 +120,7 @@ class Zend_Filter_PregReplaceTest extends PHPUnit_Framework_TestCase
 /**
  * @group ZF-9202
  */
-class XPregReplace extends Zend_Filter_PregReplace
+class XPregReplace extends PregReplaceFilter
 {
     protected $_matchPattern = '~(&gt;){3,}~i';
-}
-
-// Call Zend_Filter_PregReplaceTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Filter_PregReplaceTest::main') {
-    Zend_Filter_PregReplaceTest::main();
 }

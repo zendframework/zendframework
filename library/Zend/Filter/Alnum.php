@@ -20,14 +20,20 @@
  */
 
 /**
- * @uses       Zend_Filter_Interface
- * @uses       Zend_Locale
+ * @namespace
+ */
+namespace Zend\Filter;
+use Zend\Locale\Locale;
+
+/**
+ * @uses       Zend\Filter\AbstractFilter
+ * @uses       Zend\Locale\Locale
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_Alnum implements Zend_Filter_Interface
+class Alnum extends AbstractFilter
 {
     /**
      * Whether to allow white space characters; off by default
@@ -47,7 +53,7 @@ class Zend_Filter_Alnum implements Zend_Filter_Interface
     /**
      * Locale in browser.
      *
-     * @var Zend_Locale object
+     * @var \Zend\Locale\Locale object
      */
     protected $_locale;
 
@@ -66,7 +72,7 @@ class Zend_Filter_Alnum implements Zend_Filter_Interface
      */
     public function __construct($allowWhiteSpace = false)
     {
-        if ($allowWhiteSpace instanceof Zend_Config) {
+        if ($allowWhiteSpace instanceof \Zend\Config\Config) {
             $allowWhiteSpace = $allowWhiteSpace->toArray();
         } else if (is_array($allowWhiteSpace)) {
             if (array_key_exists('allowwhitespace', $allowWhiteSpace)) {
@@ -82,7 +88,7 @@ class Zend_Filter_Alnum implements Zend_Filter_Interface
         }
 
         if (null === self::$_meansEnglishAlphabet) {
-            $this->_locale = new Zend_Locale('auto');
+            $this->_locale = new Locale('auto');
             self::$_meansEnglishAlphabet = in_array($this->_locale->getLanguage(),
                                                     array('ja', 'ko', 'zh')
                                                     );
@@ -104,7 +110,7 @@ class Zend_Filter_Alnum implements Zend_Filter_Interface
      * Sets the allowWhiteSpace option
      *
      * @param boolean $allowWhiteSpace
-     * @return Zend_Filter_Alnum Provides a fluent interface
+     * @return \Zend\Filter\Alnum Provides a fluent interface
      */
     public function setAllowWhiteSpace($allowWhiteSpace)
     {

@@ -20,13 +20,10 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
+namespace ZendTest\Filter\File;
 
-/**
- * @see Zend_Filter_Encrypt
- */
+use Zend\Filter\File\Encrypt as FileEncrypt,
+    Zend\Filter\File\Decrypt as FileDecrypt;
 
 /**
  * @category   Zend
@@ -36,7 +33,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_File_EncryptTest extends PHPUnit_Framework_TestCase
+class EncryptTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -44,15 +41,15 @@ class Zend_Filter_File_EncryptTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('This filter needs the mcrypt extension');
         }
 
-        if (file_exists(dirname(__FILE__).'/../_files/newencryption.txt')) {
-            unlink(dirname(__FILE__).'/../_files/newencryption.txt');
+        if (file_exists(dirname(__DIR__).'/_files/newencryption.txt')) {
+            unlink(dirname(__DIR__).'/_files/newencryption.txt');
         }
     }
 
     public function tearDown()
     {
-        if (file_exists(dirname(__FILE__).'/../_files/newencryption.txt')) {
-            unlink(dirname(__FILE__).'/../_files/newencryption.txt');
+        if (file_exists(dirname(__DIR__).'/_files/newencryption.txt')) {
+            unlink(dirname(__DIR__).'/_files/newencryption.txt');
         }
     }
 
@@ -63,46 +60,46 @@ class Zend_Filter_File_EncryptTest extends PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
-        $filter = new Zend_Filter_File_Encrypt();
-        $filter->setFilename(dirname(__FILE__).'/../_files/newencryption.txt');
+        $filter = new FileEncrypt();
+        $filter->setFilename(dirname(__DIR__).'/_files/newencryption.txt');
 
         $this->assertEquals(
-            dirname(__FILE__).'/../_files/newencryption.txt',
+            dirname(__DIR__).'/_files/newencryption.txt',
             $filter->getFilename());
 
         $filter->setVector('testvect');
-        $this->assertEquals(dirname(__FILE__).'/../_files/newencryption.txt',
-            $filter->filter(dirname(__FILE__).'/../_files/encryption.txt'));
+        $this->assertEquals(dirname(__DIR__).'/_files/newencryption.txt',
+            $filter(dirname(__DIR__).'/_files/encryption.txt'));
 
         $this->assertEquals(
             'Encryption',
-            file_get_contents(dirname(__FILE__).'/../_files/encryption.txt'));
+            file_get_contents(dirname(__DIR__).'/_files/encryption.txt'));
 
         $this->assertNotEquals(
             'Encryption',
-            file_get_contents(dirname(__FILE__).'/../_files/newencryption.txt'));
+            file_get_contents(dirname(__DIR__).'/_files/newencryption.txt'));
     }
 
     public function testEncryptionWithDecryption()
     {
-        $filter = new Zend_Filter_File_Encrypt();
-        $filter->setFilename(dirname(__FILE__).'/../_files/newencryption.txt');
+        $filter = new FileEncrypt();
+        $filter->setFilename(dirname(__DIR__).'/_files/newencryption.txt');
         $filter->setVector('testvect');
-        $this->assertEquals(dirname(__FILE__).'/../_files/newencryption.txt',
-            $filter->filter(dirname(__FILE__).'/../_files/encryption.txt'));
+        $this->assertEquals(dirname(__DIR__).'/_files/newencryption.txt',
+            $filter(dirname(__DIR__).'/_files/encryption.txt'));
 
         $this->assertNotEquals(
             'Encryption',
-            file_get_contents(dirname(__FILE__).'/../_files/newencryption.txt'));
+            file_get_contents(dirname(__DIR__).'/_files/newencryption.txt'));
 
-        $filter = new Zend_Filter_File_Decrypt();
+        $filter = new FileDecrypt();
         $filter->setVector('testvect');
-        $input = $filter->filter(dirname(__FILE__).'/../_files/newencryption.txt');
-        $this->assertEquals(dirname(__FILE__).'/../_files/newencryption.txt', $input);
+        $input = $filter(dirname(__DIR__).'/_files/newencryption.txt');
+        $this->assertEquals(dirname(__DIR__).'/_files/newencryption.txt', $input);
 
         $this->assertEquals(
             'Encryption',
-            trim(file_get_contents(dirname(__FILE__).'/../_files/newencryption.txt')));
+            trim(file_get_contents(dirname(__DIR__).'/_files/newencryption.txt')));
     }
 
     /**
@@ -110,15 +107,11 @@ class Zend_Filter_File_EncryptTest extends PHPUnit_Framework_TestCase
      */
     public function testNonExistingFile()
     {
-        $filter = new Zend_Filter_File_Encrypt();
+        $filter = new FileEncrypt();
         $filter->setVector('testvect');
 
-        try {
-            $filter->filter(dirname(__FILE__).'/../_files/nofile.txt');
-            $this->fail();
-        } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('not found', $e->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Filter\\Exception', 'not found');
+        $filter(dirname(__DIR__).'/_files/nofile.txt');
     }
 
     /**
@@ -126,14 +119,14 @@ class Zend_Filter_File_EncryptTest extends PHPUnit_Framework_TestCase
      */
     public function testEncryptionInSameFile()
     {
-        $filter = new Zend_Filter_File_Encrypt();
+        $filter = new FileEncrypt();
         $filter->setVector('testvect');
 
-        copy(dirname(__FILE__).'/../_files/encryption.txt', dirname(__FILE__).'/../_files/newencryption.txt');
-        $filter->filter(dirname(__FILE__).'/../_files/newencryption.txt');
+        copy(dirname(__DIR__).'/_files/encryption.txt', dirname(__DIR__).'/_files/newencryption.txt');
+        $filter(dirname(__DIR__).'/_files/newencryption.txt');
 
         $this->assertNotEquals(
             'Encryption',
-            trim(file_get_contents(dirname(__FILE__).'/../_files/newencryption.txt')));
+            trim(file_get_contents(dirname(__DIR__).'/_files/newencryption.txt')));
     }
 }

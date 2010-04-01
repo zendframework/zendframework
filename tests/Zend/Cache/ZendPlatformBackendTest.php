@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Cache;
+use Zend\Cache;
+
 /**
  * @category   Zend
  * @package    Zend_Cache
@@ -28,14 +31,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_ZendPlatformBackendTest extends Zend_Cache_TestCommonBackend 
+class ZendPlatformBackendTest extends TestCommonBackend 
 {
 
     protected $_instance;
 
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
-        parent::__construct('Zend_Cache_Backend_ZendPlatform', $data, $dataName);
+        parent::__construct('Zend\Cache\Backend\ZendPlatform', $data, $dataName);
     }
 
     public function setUp($notag = false)
@@ -44,7 +47,7 @@ class Zend_Cache_ZendPlatformBackendTest extends Zend_Cache_TestCommonBackend
             $this->markTestSkipped('Zend Platform is not installed, skipping test');
             return;
         }
-        $this->_instance = new Zend_Cache_Backend_ZendPlatform(array());
+        $this->_instance = new Cache\Backend\ZendPlatform(array());
         parent::setUp($notag);
     }
 
@@ -56,7 +59,7 @@ class Zend_Cache_ZendPlatformBackendTest extends Zend_Cache_TestCommonBackend
 
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Backend_ZendPlatform();
+        $test = new Cache\Backend\ZendPlatform();
     }
 
     public function testRemoveCorrectCall()

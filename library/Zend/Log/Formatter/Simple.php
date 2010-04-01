@@ -21,8 +21,14 @@
  */
 
 /**
- * @uses       Zend_Log_Exception
- * @uses       Zend_Log_Formatter_Interface
+ * @namespace
+ */
+namespace Zend\Log\Formatter;
+use \Zend\Log\Formatter;
+
+/**
+ * @uses       \Zend\Log\Exception
+ * @uses       \Zend\Log\Formatter\FormatterInterface
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter
@@ -30,7 +36,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Log_Formatter_Simple implements Zend_Log_Formatter_Interface
+class Simple implements Formatter
 {
     /**
      * @var string
@@ -43,7 +49,7 @@ class Zend_Log_Formatter_Simple implements Zend_Log_Formatter_Interface
      * Class constructor
      *
      * @param  null|string  $format  Format specifier for log messages
-     * @throws Zend_Log_Exception
+     * @throws \Zend\Log\Exception
      */
     public function __construct($format = null)
     {
@@ -52,7 +58,7 @@ class Zend_Log_Formatter_Simple implements Zend_Log_Formatter_Interface
         }
 
         if (! is_string($format)) {
-            throw new Zend_Log_Exception('Format must be a string');
+            throw new \Zend\Log\Exception('Format must be a string');
         }
 
         $this->_format = $format;
@@ -79,5 +85,4 @@ class Zend_Log_Formatter_Simple implements Zend_Log_Formatter_Interface
         }
         return $output;
     }
-
 }

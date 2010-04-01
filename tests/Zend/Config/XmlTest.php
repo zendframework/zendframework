@@ -20,13 +20,9 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
+namespace ZendTest\Config;
 
-/**
- * Zend_Config_Xml
- */
+use \Zend\Config\Xml;
 
 /**
  * @category   Zend
@@ -36,7 +32,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
+class XmlTest extends \PHPUnit_Framework_TestCase
 {
     protected $_xmlFileConfig;
     protected $_xmlFileAllSectionsConfig;
@@ -59,7 +55,7 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testLoadSingleSection()
     {
-        $config = new Zend_Config_Xml($this->_xmlFileConfig, 'all');
+        $config = new Xml($this->_xmlFileConfig, 'all');
         $this->assertEquals('all', $config->hostname);
         $this->assertEquals('live', $config->db->name);
         $this->assertEquals('multi', $config->one->two->three);
@@ -68,7 +64,7 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testSectionInclude()
     {
-        $config = new Zend_Config_Xml($this->_xmlFileConfig, 'staging');
+        $config = new Xml($this->_xmlFileConfig, 'staging');
         $this->assertEquals('false', $config->debug); // only in staging
         $this->assertEquals('thisname', $config->name); // only in all
         $this->assertEquals('username', $config->db->user); // only in all (nested version)
@@ -78,7 +74,7 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testMultiDepthExtends()
     {
-        $config = new Zend_Config_Xml($this->_xmlFileConfig, 'other_staging');
+        $config = new Xml($this->_xmlFileConfig, 'other_staging');
 
         $this->assertEquals('otherStaging', $config->only_in); // only in other_staging
         $this->assertEquals('false', $config->debug); // 1 level down: only in staging
@@ -91,34 +87,25 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testErrorNoInitialSection()
     {
-        try {
-            $config = @new Zend_Config_Xml($this->_xmlFileConfig, 'notthere');
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found in', $expected->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'cannot be found in');
+        $config = @new Xml($this->_xmlFileConfig, 'notthere');
+    }
 
-        try {
-            $config = @new Zend_Config_Xml($this->_xmlFileConfig, array('notthere', 'all'));
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found in', $expected->getMessage());
-        }
+    public function testErrorNoInitialSectionWhenArrayOfSectionsSpecified()
+    {
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'cannot be found in');
+        $config = @new Xml($this->_xmlFileConfig, array('notthere', 'all'));
     }
 
     public function testErrorNoExtendsSection()
     {
-        try {
-            $config = new Zend_Config_Xml($this->_xmlFileConfig, 'extendserror');
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'cannot be found');
+        $config = new Xml($this->_xmlFileConfig, 'extendserror');
     }
 
     public function testZF413_MultiSections()
     {
-        $config = new Zend_Config_Xml($this->_xmlFileAllSectionsConfig, array('staging','other_staging'));
+        $config = new Xml($this->_xmlFileAllSectionsConfig, array('staging','other_staging'));
 
         $this->assertEquals('otherStaging', $config->only_in);
         $this->assertEquals('staging', $config->hostname);
@@ -126,64 +113,56 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testZF413_AllSections()
     {
-        $config = new Zend_Config_Xml($this->_xmlFileAllSectionsConfig, null);
+        $config = new Xml($this->_xmlFileAllSectionsConfig, null);
         $this->assertEquals('otherStaging', $config->other_staging->only_in);
         $this->assertEquals('staging', $config->staging->hostname);
     }
 
     public function testZF414()
     {
-        $config = new Zend_Config_Xml($this->_xmlFileAllSectionsConfig, null);
+        $config = new Xml($this->_xmlFileAllSectionsConfig, null);
         $this->assertEquals(null, $config->getSectionName());
         $this->assertEquals(true, $config->areAllSectionsLoaded());
 
-        $config = new Zend_Config_Xml($this->_xmlFileAllSectionsConfig, 'all');
+        $config = new Xml($this->_xmlFileAllSectionsConfig, 'all');
         $this->assertEquals('all', $config->getSectionName());
         $this->assertEquals(false, $config->areAllSectionsLoaded());
 
-        $config = new Zend_Config_Xml($this->_xmlFileAllSectionsConfig, array('staging','other_staging'));
+        $config = new Xml($this->_xmlFileAllSectionsConfig, array('staging','other_staging'));
         $this->assertEquals(array('staging','other_staging'), $config->getSectionName());
         $this->assertEquals(false, $config->areAllSectionsLoaded());
     }
 
     public function testZF415()
     {
-        try {
-            $config = new Zend_Config_Xml($this->_xmlFileCircularConfig, null);
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('circular inheritance', $expected->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'circular inheritance');
+        $config = new Xml($this->_xmlFileCircularConfig, null);
     }
 
     public function testErrorNoFile()
     {
-        try {
-            $config = new Zend_Config_Xml('',null);
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('Filename is not set', $expected->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'Filename is not set');
+        $config = new Xml('',null);
     }
 
     public function testZF2162_TopLevelString()
     {
-        $config = new Zend_Config_Xml($this->_xmlFileTopLevelStringConfig, null);
+        $config = new Xml($this->_xmlFileTopLevelStringConfig, null);
         $this->assertEquals('one', $config->one);
         $this->assertEquals('three', $config->two->three);
         $this->assertEquals('five', $config->two->four->five);
         $this->assertEquals('three', $config->six->three);
 
-        $config = new Zend_Config_Xml($this->_xmlFileOneTopLevelStringConfig);
+        $config = new Xml($this->_xmlFileOneTopLevelStringConfig);
         $this->assertEquals('one', $config->one);
-        $config = new Zend_Config_Xml($this->_xmlFileOneTopLevelStringConfig, 'one');
+        $config = new Xml($this->_xmlFileOneTopLevelStringConfig, 'one');
         $this->assertEquals('one', $config->one);
 
     }
 
     public function testZF2285_MultipleKeysOfTheSameName()
     {
-        $config = new Zend_Config_Xml($this->_xmlFileSameNameKeysConfig, null);
+        $config = new Xml($this->_xmlFileSameNameKeysConfig, null);
         $this->assertEquals('2a', $config->one->two->{0});
         $this->assertEquals('2b', $config->one->two->{1});
         $this->assertEquals('4', $config->three->four->{1});
@@ -192,7 +171,7 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testZF2437_ArraysWithMultipleChildren()
     {
-        $config = new Zend_Config_Xml($this->_xmlFileSameNameKeysConfig, null);
+        $config = new Xml($this->_xmlFileSameNameKeysConfig, null);
         $this->assertEquals('1', $config->six->seven->{0}->eight);
         $this->assertEquals('2', $config->six->seven->{1}->eight);
         $this->assertEquals('3', $config->six->seven->{2}->eight);
@@ -201,25 +180,27 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('3', $config->six->seven->{2}->nine);
     }
 
-    public function testZF3578_InvalidOrMissingfXmlFile()
+    /**
+     * @group ZF-3578
+     */
+    public function testInvalidXmlFile()
     {
-        try {
-            $config = new Zend_Config_Xml($this->_xmlFileInvalid);
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('parser error', $expected->getMessage());
-        }
-        try {
-            $config = new Zend_Config_Xml('I/dont/exist');
-            $this->fail('An expected Zend_Config_Exception has not been raised');
-        } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('failed to load', $expected->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'parser error');
+        $config = new Xml($this->_xmlFileInvalid);
+    }
+
+    /**
+     * @group ZF-3578
+     */
+    public function testMissingXmlFile()
+    {
+        $this->setExpectedException('\\Zend\\Config\\Exception', 'failed to load');
+        $config = new Xml('I/dont/exist');
     }
 
     public function testShortParamsOne()
     {
-        $config = new Zend_Config_Xml($this->_xmlFileShortParamsOneConfig, 'all');
+        $config = new Xml($this->_xmlFileShortParamsOneConfig, 'all');
         $this->assertEquals('all', $config->hostname);
         $this->assertEquals('thisname', $config->name);
         $this->assertEquals('username', $config->db->user);
@@ -229,7 +210,7 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testShortParamsTwo()
     {
-        $config = new Zend_Config_Xml($this->_xmlFileShortParamsTwoConfig, 'all');
+        $config = new Xml($this->_xmlFileShortParamsTwoConfig, 'all');
         $this->assertEquals('all', $config->hostname);
         $this->assertEquals('thisname', $config->name);
         $this->assertEquals('username', $config->db->user);
@@ -253,7 +234,7 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
 </config>
 EOT;
 
-        $config = new Zend_Config_Xml($string, 'all');
+        $config = new Xml($string, 'all');
 
         $this->assertEquals('foo-test-bar-test', $config->foo);
         $this->assertEquals('ZEND_CONFIG_XML_TEST_CONSTANT', $config->bar->const->name);
@@ -270,12 +251,8 @@ EOT;
 </config>
 EOT;
 
-        try {
-            $config = new Zend_Config_Xml($string, 'all');
-            $this->fail('An expected Zend_Config_Exception was not raised');
-        } catch (Zend_Config_Exception $e) {
-            $this->assertEquals("Constant with name 'ZEND_CONFIG_XML_TEST_NON_EXISTENT_CONSTANT' was not defined", $e->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Config\\Exception', "Constant with name 'ZEND_CONFIG_XML_TEST_NON_EXISTENT_CONSTANT' was not defined");
+        $config = new Xml($string, 'all');
     }
 
     public function testNamespacedExtends()
@@ -290,7 +267,7 @@ EOT;
 </config>
 EOT;
 
-        $config = new Zend_Config_Xml($string);
+        $config = new Xml($string);
 
         $this->assertEquals('bar', $config->staging->foo);
     }
@@ -324,7 +301,7 @@ EOT;
 </config>
 EOT;
 
-        $config = new Zend_Config_Xml($string, 'staging');
+        $config = new Xml($string, 'staging');
         $this->assertEquals('staging', $config->hostname);
 
     }
@@ -352,7 +329,7 @@ EOT;
 </config>
 EOT;
 
-        $config = new Zend_Config_Xml($string, 'dev');
+        $config = new Xml($string, 'dev');
         $this->assertEquals('nice.guy@company.com', $config->receiver->{0}->mail);
         $this->assertEquals('1', $config->receiver->{0}->html);
         $this->assertNull($config->receiver->mail);

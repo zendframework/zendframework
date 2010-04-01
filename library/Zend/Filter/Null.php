@@ -20,14 +20,19 @@
  */
 
 /**
- * @uses       Zend_Filter_Exception
- * @uses       Zend_Filter_Interface
+ * @namespace
+ */
+namespace Zend\Filter;
+
+/**
+ * @uses       Zend\Filter\Exception
+ * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_Null implements Zend_Filter_Interface
+class Null extends AbstractFilter
 {
     const BOOLEAN      = 1;
     const INTEGER      = 2;
@@ -42,7 +47,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
         self::EMPTY_ARRAY => 'array',
         self::STRING      => 'string',
         self::ZERO        => 'zero',
-        self::ALL         => 'all'
+        self::ALL         => 'all',
     );
 
     /**
@@ -55,20 +60,20 @@ class Zend_Filter_Null implements Zend_Filter_Interface
     /**
      * Constructor
      *
-     * @param string|array|Zend_Config $options OPTIONAL
+     * @param string|array|\Zend\Config\Config $options OPTIONAL
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();
             if (!empty($options)) {
                 $temp = array_shift($options);
             }
             $options = $temp;
-        } else if (is_array($options) && array_key_exists('type', $options)) {
+        } elseif (is_array($options) && array_key_exists('type', $options)) {
             $options = $options['type'];
         }
 
@@ -91,8 +96,8 @@ class Zend_Filter_Null implements Zend_Filter_Interface
      * Set the null types
      *
      * @param  integer|array $type
-     * @throws Zend_Filter_Exception
-     * @return Zend_Filter_Null
+     * @throws \Zend\Filter\Exception
+     * @return \Zend\Filter\Null
      */
     public function setType($type = null)
     {
@@ -114,7 +119,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
         }
 
         if (!is_int($type) || ($type < 0) || ($type > self::ALL)) {
-            throw new Zend_Filter_Exception('Unknown type');
+            throw new Exception('Unknown type');
         }
 
         $this->_type = $type;

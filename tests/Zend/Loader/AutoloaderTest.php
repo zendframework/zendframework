@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Loader;
+
+use \stdClass,
+    \Zend\Loader\Autoloader as ZendAutoloader;
+
 /**
  * @category   Zend
  * @package    Zend_Loader
@@ -28,7 +33,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Loader
  */
-class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
+class AutoloaderTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -43,8 +48,8 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
         // Store original include_path
         $this->includePath = get_include_path();
 
-        Zend_Loader_Autoloader::resetInstance();
-        $this->autoloader = Zend_Loader_Autoloader::getInstance();
+        ZendAutoloader::resetInstance();
+        $this->autoloader = ZendAutoloader::getInstance();
 
         // initialize 'error' member for tests that utilize error handling
         $this->error = null;
@@ -66,20 +71,20 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
         set_include_path($this->includePath);
 
         // Reset autoloader instance so it doesn't affect other tests
-        Zend_Loader_Autoloader::resetInstance();
-        Zend_Loader_Autoloader::getInstance();
+        ZendAutoloader::resetInstance();
+        ZendAutoloader::getInstance();
     }
 
     public function testAutoloaderShouldBeSingleton()
     {
-        $autoloader = Zend_Loader_Autoloader::getInstance();
+        $autoloader = ZendAutoloader::getInstance();
         $this->assertSame($this->autoloader, $autoloader);
     }
 
     public function testSingletonInstanceShouldAllowReset()
     {
-        Zend_Loader_Autoloader::resetInstance();
-        $autoloader = Zend_Loader_Autoloader::getInstance();
+        ZendAutoloader::resetInstance();
+        $autoloader = ZendAutoloader::getInstance();
         $this->assertNotSame($this->autoloader, $autoloader);
     }
 
@@ -100,7 +105,7 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
 
     public function testDefaultAutoloaderShouldBeZendLoader()
     {
-        $this->assertSame(array('Zend_Loader', 'loadClass'), $this->autoloader->getDefaultAutoloader());
+        $this->assertSame(array('\\Zend\\Loader', 'loadClass'), $this->autoloader->getDefaultAutoloader());
     }
 
     public function testDefaultAutoloaderShouldBeMutable()
@@ -109,11 +114,9 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
         $this->assertSame(array($this, 'autoload'), $this->autoloader->getDefaultAutoloader());
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testSpecifyingInvalidDefaultAutoloaderShouldRaiseException()
     {
+        $this->setExpectedException('\\Zend\\Loader\\InvalidCallbackException');
         $this->autoloader->setDefaultAutoloader(uniqid());
     }
 
@@ -139,11 +142,9 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
         $this->assertContains('Solar', $namespaces);
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testRegisteringInvalidNamespaceSpecShouldRaiseException()
     {
+        $this->setExpectedException('\\Zend\\Loader\\InvalidNamespaceException');
         $o = new stdClass;
         $this->autoloader->registerNamespace($o);
     }
@@ -163,11 +164,9 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
         $this->assertNotContains('ZendX', $namespaces);
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testUnregisteringInvalidNamespaceSpecShouldRaiseException()
     {
+        $this->setExpectedException('\\Zend\\Loader\\InvalidNamespaceException');
         $o = new stdClass;
         $this->autoloader->unregisterNamespace($o);
     }
@@ -194,11 +193,9 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
         $this->assertContains('Solar_', $prefixes);
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testRegisteringInvalidPrefixSpecShouldRaiseException()
     {
+        $this->setExpectedException('\\Zend\\Loader\\InvalidPrefixException');
         $o = new stdClass;
         $this->autoloader->registerPrefix($o);
     }
@@ -218,11 +215,9 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
         $this->assertNotContains('ZendX', $prefixes);
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testUnregisteringInvalidPrefixSpecShouldRaiseException()
     {
+        $this->setExpectedException('\\Zend\\Loader\\InvalidPrefixException');
         $o = new stdClass;
         $this->autoloader->unregisterPrefix($o);
     }
@@ -358,20 +353,20 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
 
     public function testAutoloadShouldReturnFalseWhenNamespaceIsNotRegistered()
     {
-        $this->assertFalse(Zend_Loader_Autoloader::autoload('Foo_Bar'));
+        $this->assertFalse(ZendAutoloader::autoload('Foo_Bar'));
     }
 
     public function testAutoloadShouldReturnFalseWhenNamespaceIsNotRegisteredButClassfileExists()
     {
         $this->addTestIncludePath();
-        $this->assertFalse(Zend_Loader_Autoloader::autoload('ZendLoaderAutoloader_Foo'));
+        $this->assertFalse(ZendAutoloader::autoload('ZendLoaderAutoloader_Foo'));
     }
 
     public function testAutoloadShouldLoadClassWhenNamespaceIsRegisteredAndClassfileExists()
     {
         $this->addTestIncludePath();
         $this->autoloader->registerPrefix('ZendLoaderAutoloader');
-        $result = Zend_Loader_Autoloader::autoload('ZendLoaderAutoloader_Foo');
+        $result = ZendAutoloader::autoload('ZendLoaderAutoloader_Foo');
         $this->assertFalse($result === false);
         $this->assertTrue(class_exists('ZendLoaderAutoloader_Foo', false));
     }
@@ -382,27 +377,27 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
         $this->autoloader->suppressNotFoundWarnings(false);
         $this->autoloader->registerPrefix('ZendLoaderAutoloader');
         set_error_handler(array($this, 'handleErrors'));
-        $this->assertFalse(Zend_Loader_Autoloader::autoload('ZendLoaderAutoloader_Bar'));
+        $this->assertFalse(ZendAutoloader::autoload('ZendLoaderAutoloader_Bar'));
         restore_error_handler();
         $this->assertNotNull($this->error);
     }
 
     public function testAutoloadShouldReturnTrueIfFunctionBasedAutoloaderMatchesAndReturnsNonFalseValue()
     {
-        $this->autoloader->pushAutoloader('ZendLoaderAutoloader_Autoload');
-        $this->assertTrue(Zend_Loader_Autoloader::autoload('ZendLoaderAutoloader_Foo_Bar'));
+        $this->autoloader->pushAutoloader('\\ZendTest\\Loader\\testAutoload');
+        $this->assertTrue(ZendAutoloader::autoload('ZendLoaderAutoloader_Foo_Bar'));
     }
 
     public function testAutoloadShouldReturnTrueIfMethodBasedAutoloaderMatchesAndReturnsNonFalseValue()
     {
         $this->autoloader->pushAutoloader(array($this, 'autoload'));
-        $this->assertTrue(Zend_Loader_Autoloader::autoload('ZendLoaderAutoloader_Foo_Bar'));
+        $this->assertTrue(ZendAutoloader::autoload('ZendLoaderAutoloader_Foo_Bar'));
     }
 
     public function testAutoloadShouldReturnTrueIfAutoloaderImplementationReturnsNonFalseValue()
     {
-        $this->autoloader->pushAutoloader(new Zend_Loader_AutoloaderTest_Autoloader());
-        $this->assertTrue(Zend_Loader_Autoloader::autoload('ZendLoaderAutoloader_Foo_Bar'));
+        $this->autoloader->pushAutoloader(new TestAutoloader());
+        $this->assertTrue(ZendAutoloader::autoload('ZendLoaderAutoloader_Foo_Bar'));
     }
 
     public function testUsingAlternateDefaultLoaderShouldOverrideUsageOfZendLoader()
@@ -429,12 +424,12 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
     }
 }
 
-function ZendLoaderAutoloader_Autoload($class)
+function testAutoload($class)
 {
     return $class;
 }
 
-class Zend_Loader_AutoloaderTest_Autoloader implements Zend_Loader_Autoloader_Interface
+class TestAutoloader implements \Zend\Loader\AutoloaderInterface
 {
     public function autoload($class)
     {

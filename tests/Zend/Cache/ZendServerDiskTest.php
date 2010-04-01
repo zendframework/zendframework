@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Cache;
+use Zend\Cache;
+
 /**
  * @category   Zend
  * @package    Zend_Cache
@@ -28,14 +31,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_ZendServerDiskTest extends Zend_Cache_TestCommonBackend 
+class ZendServerDiskTest extends TestCommonBackend 
 {
 
     protected $_instance;
 
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
-        parent::__construct('Zend_Cache_Backend_ZendServer_Disk', $data, $dataName);
+        parent::__construct('Zend\Cache\Backend\ZendServer\Disk', $data, $dataName);
     }
 
     public function setUp($notag = true)
@@ -43,7 +46,7 @@ class Zend_Cache_ZendServerDiskTest extends Zend_Cache_TestCommonBackend
         if (!function_exists('zend_disk_cache_store')) {
             $this->markTestSkipped('Zend_Cache Zend Server disk backend tests not enabled');
         }
-        $this->_instance = new Zend_Cache_Backend_ZendServer_Disk();
+        $this->_instance = new Cache\Backend\ZendServer\Disk();
         parent::setUp(true);
     }
 
@@ -55,7 +58,7 @@ class Zend_Cache_ZendServerDiskTest extends Zend_Cache_TestCommonBackend
 
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Backend_ZendServer_Disk();
+        $test = new Cache\Backend\ZendServer\Disk();
     }
 
     public function testCleanModeOld() {

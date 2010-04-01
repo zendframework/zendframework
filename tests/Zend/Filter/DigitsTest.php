@@ -20,15 +20,9 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Filter;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Filter_Digits
- */
-
+use Zend\Filter\Digits as DigitsFilter;
 
 /**
  * @category   Zend
@@ -38,15 +32,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_DigitsTest extends PHPUnit_Framework_TestCase
+class DigitsTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Zend_Filter_Digits object extended for checking whether Unicode PCRE is enabled
-     *
-     * @var Zend_Filter_Digits
-     */
-    protected $_filter;
-
     /**
      * Is PCRE is compiled with UTF-8 and Unicode support
      *
@@ -61,7 +48,6 @@ class Zend_Filter_DigitsTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_filter = new Zend_Filter_Digits();
         if (null === self::$_unicodeEnabled) {
             self::$_unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
         }
@@ -74,6 +60,8 @@ class Zend_Filter_DigitsTest extends PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
+        $filter = new DigitsFilter();
+
         if (self::$_unicodeEnabled && extension_loaded('mbstring')) {
             // Filter for the value with mbstring
             /**
@@ -106,7 +94,7 @@ class Zend_Filter_DigitsTest extends PHPUnit_Framework_TestCase
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals(
                 $output,
-                $result = $this->_filter->filter($input),
+                $result = $filter($input),
                 "Expected '$input' to filter to '$output', but received '$result' instead"
                 );
         }

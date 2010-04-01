@@ -49,10 +49,35 @@ set_include_path(implode(PATH_SEPARATOR, $path));
 /**
  * Setup autoloading
  */
-require_once 'Zend/Loader/Autoloader.php';
-$autoloader = Zend_Loader_Autoloader::getInstance();
-$autoloader->registerPrefix('PHPUnit_');
+function ZendTest_Autoloader($class) {
+    $class = ltrim($class, '\\');
 
+    if (!preg_match('#^Zend(Test)?\\\\#', $class)) {
+        return false;
+    }
+
+    $segments = explode('\\', $class);
+    $ns       = array_shift($segments);
+
+    switch ($ns) {
+        case 'Zend':
+            $file = dirname(__DIR__) . '/library/Zend/';
+            break;
+        case 'ZendTest':
+            // temporary fix for ZendTest namespace until we can migrate files 
+            // into ZendTest dir
+            $file = __DIR__ . '/Zend/';
+            break;
+        default:
+            return false;
+    }
+    $file .= implode('/', $segments) . '.php';
+    if (file_exists($file)) {
+        return include_once $file;
+    }
+    return false;
+}
+spl_autoload_register('ZendTest_Autoloader', true, true);
 
 /*
  * Load the user-defined test configuration file, if it exists; otherwise, load

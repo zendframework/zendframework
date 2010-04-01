@@ -20,16 +20,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Filter\Compress;
+use Zend\Filter\Exception;
+
+/**
  * Compression adapter for Lzf
  *
- * @uses       Zend_Filter_Compress_CompressInterface
- * @uses       Zend_Filter_Exception
+ * @uses       \Zend\Filter\Compress\CompressionAlgorithm
+ * @uses       \Zend\Filter\Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
+class Lzf implements CompressionAlgorithm
 {
     /**
      * Class constructor
@@ -37,7 +43,7 @@ class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
     public function __construct()
     {
         if (!extension_loaded('lzf')) {
-            throw new Zend_Filter_Exception('This filter needs the lzf extension');
+            throw new Exception('This filter needs the lzf extension');
         }
     }
 
@@ -51,7 +57,7 @@ class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
     {
         $compressed = lzf_compress($content);
         if (!$compressed) {
-            throw new Zend_Filter_Exception('Error during compression');
+            throw new Exception('Error during compression');
         }
 
         return $compressed;
@@ -67,7 +73,7 @@ class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
     {
         $compressed = lzf_decompress($content);
         if (!$compressed) {
-            throw new Zend_Filter_Exception('Error during compression');
+            throw new Exception('Error during compression');
         }
 
         return $compressed;

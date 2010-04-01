@@ -20,6 +20,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Loader;
+
 /** Zend_Loader */
 require_once 'Zend/Loader.php';
 
@@ -32,7 +34,7 @@ require_once 'Zend/Loader.php';
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Loader_Autoloader
+class Autoloader
 {
     /**
      * @var Namespace separator
@@ -52,7 +54,7 @@ class Zend_Loader_Autoloader
     /**
      * @var array Default autoloader callback
      */
-    protected $_defaultAutoloader = array('Zend_Loader', 'loadClass');
+    protected $_defaultAutoloader = array('\\Zend\\Loader', 'loadClass');
 
     /**
      * @var bool Whether or not to act as a fallback autoloader
@@ -134,7 +136,7 @@ class Zend_Loader_Autoloader
         $self = self::getInstance();
 
         foreach ($self->getClassAutoloaders($class) as $autoloader) {
-            if ($autoloader instanceof Zend_Loader_Autoloader_Interface) {
+            if ($autoloader instanceof AutoloaderInterface) {
                 if ($autoloader->autoload($class)) {
                     return true;
                 }
@@ -142,10 +144,8 @@ class Zend_Loader_Autoloader
                 if ($autoloader($class)) {
                     return true;
                 }
-            } elseif (is_array($autoloader)) {
-                $object = array_shift($autoloader);
-                $method = array_shift($autoloader);
-                if (call_user_func(array($object, $method), $class)) {
+            } elseif (is_callable($autoloader)) {
+                if (call_user_func($autoloader, $class)) {
                     return true;
                 }
             }
@@ -163,7 +163,7 @@ class Zend_Loader_Autoloader
     public function setDefaultAutoloader($callback)
     {
         if (!is_callable($callback)) {
-            throw new Zend_Loader_Exception('Invalid callback specified for default autoloader');
+            throw new InvalidCallbackException('Invalid callback specified for default autoloader');
         }
 
         $this->_defaultAutoloader = $callback;
@@ -228,7 +228,7 @@ class Zend_Loader_Autoloader
         if (is_string($prefix)) {
             $prefix = (array) $prefix;
         } elseif (!is_array($prefix)) {
-            throw new Zend_Loader_Exception('Invalid prefix provided');
+            throw new InvalidPrefixException();
         }
 
         foreach ($prefix as $ns) {
@@ -250,7 +250,7 @@ class Zend_Loader_Autoloader
         if (is_string($prefix)) {
             $prefix = (array) $prefix;
         } elseif (!is_array($prefix)) {
-            throw new Zend_Loader_Exception('Invalid prefix provided');
+            throw new InvalidPrefixException();
         }
 
         foreach ($prefix as $ns) {
@@ -297,7 +297,7 @@ class Zend_Loader_Autoloader
         if (is_string($namespace)) {
             $namespace = (array) $namespace;
         } elseif (!is_array($namespace)) {
-            throw new Zend_Loader_Exception('Invalid namespace provided');
+            throw new InvalidNamespaceException();
         }
 
         foreach ($namespace as $ns) {
@@ -319,7 +319,7 @@ class Zend_Loader_Autoloader
         if (is_string($namespace)) {
             $namespace = (array) $namespace;
         } elseif (!is_array($namespace)) {
-            throw new Zend_Loader_Exception('Invalid namespace provided');
+            throw new InvalidNamespaceException();
         }
 
         foreach ($namespace as $ns) {
@@ -345,7 +345,7 @@ class Zend_Loader_Autoloader
         $path = $spec;
         if (is_array($spec)) {
             if (!isset($spec['path'])) {
-                throw new Zend_Loader_Exception('No path specified for ZF');
+                throw new InvalidPathException('No path specified for ZF');
             }
             $path = $spec['path'];
             if (isset($spec['version'])) {
@@ -603,7 +603,7 @@ class Zend_Loader_Autoloader
                 call_user_func($callback, $class);
             }
             return $class;
-        } catch (Zend_Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
     }
@@ -653,7 +653,7 @@ class Zend_Loader_Autoloader
 
         $availableVersions = $this->_getAvailableVersions($path, $version);
         if (empty($availableVersions)) {
-            throw new Zend_Loader_Exception('No valid ZF installations discovered');
+            throw new InvalidPathException('No valid ZF installations discovered');
         }
 
         $matchedVersion = array_pop($availableVersions);
@@ -682,7 +682,7 @@ class Zend_Loader_Autoloader
             return 'minor';
         }
         if (3 < $count) {
-            throw new Zend_Loader_Exception('Invalid version string provided');
+            throw new InvalidVersionException();
         }
         return 'specific';
     }
@@ -697,7 +697,7 @@ class Zend_Loader_Autoloader
     protected function _getAvailableVersions($path, $version)
     {
         if (!is_dir($path)) {
-            throw new Zend_Loader_Exception('Invalid ZF path provided');
+            throw new InvalidPathException();
         }
 
         $path       = rtrim($path, '/');

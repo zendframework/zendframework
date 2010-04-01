@@ -20,17 +20,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Filter;
+use Zend\Locale\Format,
+    Zend\Date\Date;
+
+/**
  * Localizes given normalized input
  *
- * @uses       Zend_Date
- * @uses       Zend_Filter_Interface
- * @uses       Zend_Locale_Format
+ * @uses       Zend\Date\Date
+ * @uses       Zend\Filter\AbstractFilter
+ * @uses       Zend\Locale\Format
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_NormalizedToLocalized implements Zend_Filter_Interface
+class NormalizedToLocalized extends AbstractFilter
 {
     /**
      * Set options
@@ -44,11 +51,11 @@ class Zend_Filter_NormalizedToLocalized implements Zend_Filter_Interface
     /**
      * Class constructor
      *
-     * @param string|Zend_Locale $locale (Optional) Locale to set
+     * @param string|\Zend\Locale\Locale $locale (Optional) Locale to set
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         }
 
@@ -71,7 +78,7 @@ class Zend_Filter_NormalizedToLocalized implements Zend_Filter_Interface
      * Sets options to use
      *
      * @param  array $options (Optional) Options to use
-     * @return Zend_Filter_LocalizedToNormalized
+     * @return \Zend\Filter\LocalizedToNormalized
      */
     public function setOptions(array $options = null)
     {
@@ -90,14 +97,14 @@ class Zend_Filter_NormalizedToLocalized implements Zend_Filter_Interface
     public function filter($value)
     {
         if (is_array($value)) {
-            $date = new Zend_Date($value, $this->_options['locale']);
+            $date = new Date($value, $this->_options['locale']);
             return $date->toString($this->_options['date_format']);
         } else if ($this->_options['precision'] === 0) {
-            return Zend_Locale_Format::toInteger($value, $this->_options);
+            return Format::toInteger($value, $this->_options);
         } else if ($this->_options['precision'] === null) {
-            return Zend_Locale_Format::toFloat($value, $this->_options);
+            return Format::toFloat($value, $this->_options);
         }
 
-        return Zend_Locale_Format::toNumber($value, $this->_options);
+        return Format::toNumber($value, $this->_options);
     }
 }

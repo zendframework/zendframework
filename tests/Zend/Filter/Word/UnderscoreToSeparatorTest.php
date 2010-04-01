@@ -20,12 +20,9 @@
  * @version    $Id$
  */
 
-// Call Zend_Filter_Word_UnderscoreToSeparatorTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Filter_Word_UnderscoreToSeparatorTest::main");
-}
+namespace ZendTest\Filter\Word;
 
-
+use Zend\Filter\Word\UnderscoreToSeparator as UnderscoreToSeparatorFilter;
 
 /**
  * Test class for Zend_Filter_Word_UnderscoreToSeparator.
@@ -37,26 +34,13 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_Word_UnderscoreToSeparatorTest extends PHPUnit_Framework_TestCase
+class UnderscoreToSeparatorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Filter_Word_UnderscoreToSeparatorTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testFilterSeparatesCamelCasedWordsDefaultSeparator()
     {
         $string   = 'underscore_separated_words';
-        $filter   = new Zend_Filter_Word_UnderscoreToSeparator();
-        $filtered = $filter->filter($string);
+        $filter   = new UnderscoreToSeparatorFilter();
+        $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('underscore separated words', $filtered);
@@ -65,16 +49,11 @@ class Zend_Filter_Word_UnderscoreToSeparatorTest extends PHPUnit_Framework_TestC
     public function testFilterSeparatesCamelCasedWordsProvidedSeparator()
     {
         $string   = 'underscore_separated_words';
-        $filter   = new Zend_Filter_Word_UnderscoreToSeparator(':=:');
-        $filtered = $filter->filter($string);
+        $filter   = new UnderscoreToSeparatorFilter(':=:');
+        $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('underscore:=:separated:=:words', $filtered);
     }
 
-}
-
-// Call Zend_Filter_Word_UnderscoreToSeparatorTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Filter_Word_UnderscoreToSeparatorTest::main") {
-    Zend_Filter_Word_UnderscoreToSeparatorTest::main();
 }

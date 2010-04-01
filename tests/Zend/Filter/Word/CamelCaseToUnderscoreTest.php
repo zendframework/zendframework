@@ -20,15 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_Filter_CamelCaseToUnderscoreTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Filter_Word_CamelCaseToUnderscoreTest::main");
-}
+namespace ZendTest\Filter\Word;
 
-
+use Zend\Filter\Word\CamelCaseToUnderscore as CamelCaseToUnderscoreFilter;
 
 /**
- * Test class for Zend_Filter_Word_CamelCaseToUnderscore.
+ * Test class for CamelCaseToUnderscoreFilter.
  *
  * @category   Zend
  * @package    Zend_Filter
@@ -37,25 +34,13 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_Word_CamelCaseToUnderscoreTest extends PHPUnit_Framework_TestCase
+class CamelCaseToUnderscoreTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main() {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Filter_Word_CamelCaseToUnderscoreTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testFilterSeparatesCamelCasedWordsWithUnderscores()
     {
         $string   = 'CamelCasedWords';
-        $filter   = new Zend_Filter_Word_CamelCaseToUnderscore();
-        $filtered = $filter->filter($string);
+        $filter   = new CamelCaseToUnderscoreFilter();
+        $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('Camel_Cased_Words', $filtered);
@@ -64,29 +49,24 @@ class Zend_Filter_Word_CamelCaseToUnderscoreTest extends PHPUnit_Framework_TestC
     public function testFilterSeperatingNumbersToUnterscore()
     {
         $string = 'PaTitle';
-        $filter   = new Zend_Filter_Word_CamelCaseToUnderscore();
-        $filtered = $filter->filter($string);
+        $filter   = new CamelCaseToUnderscoreFilter();
+        $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('Pa_Title', $filtered);
 
         $string = 'Pa2Title';
-        $filter   = new Zend_Filter_Word_CamelCaseToUnderscore();
-        $filtered = $filter->filter($string);
+        $filter   = new CamelCaseToUnderscoreFilter();
+        $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('Pa2_Title', $filtered);
 
         $string = 'Pa2aTitle';
-        $filter   = new Zend_Filter_Word_CamelCaseToUnderscore();
-        $filtered = $filter->filter($string);
+        $filter   = new CamelCaseToUnderscoreFilter();
+        $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('Pa2a_Title', $filtered);
     }
-}
-
-// Call Zend_Filter_Word_CamelCaseToUnderscoreTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Filter_Word_CamelCaseToUnderscoreTest::main") {
-    Zend_Filter_Word_CamelCaseToUnderscoreTest::main();
 }

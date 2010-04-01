@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Uri;
+use Zend\Uri;
+
+/**
  * Test helper
  */
 
@@ -45,12 +51,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Uri
  */
-class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
+class HttpTest extends \PHPUnit_Framework_TestCase
 {
     
     public function setup()
     {
-        Zend_Uri::setConfig(array('allow_unwise' => false));
+        Uri\Uri::setConfig(array('allow_unwise' => false));
     }
     
     /**
@@ -75,7 +81,7 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
         );
 
         foreach ($tests as $uri) {
-            $obj = Zend_Uri_Http::fromString($uri);
+            $obj = Uri\Http::fromString($uri);
             $this->assertEquals($uri, $obj->getUri(),
                 "getUri() returned value that differs from input for $uri");
         }
@@ -87,11 +93,11 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
      *
      * @see http://framework.zend.com/issues/browse/ZF-4395
      *
-     * @expectedException Zend_Uri_Exception
+     * @expectedException Zend\Uri\Exception
      */
     public function testFromStringInvalidScheme()
     {
-        Zend_Uri_Http::fromString('ftp://example.com/file');
+        Uri\Http::fromString('ftp://example.com/file');
     }
 
     /**
@@ -101,8 +107,8 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
      */
     public function testFromStringWithInvalidVariableType()
     {
-        $this->setExpectedException('Zend_Uri_Exception');
-        Zend_Uri_Http::fromString(0);
+        $this->setExpectedException('Zend\Uri\Exception');
+        Uri\Http::fromString(0);
     }
 
     public function testAllParts()
@@ -210,12 +216,12 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
      */
     public function testUnencodedQueryParameters()
     {
-         $uri = Zend_Uri::factory('http://foo.com/bar');
+         $uri = Uri\Uri::factory('http://foo.com/bar');
 
          // First, make sure no exceptions are thrown
          try {
              $uri->setQuery('id=123&url=http://example.com/?bar=foo baz');
-         } catch (Exception $e) {
+         } catch (\Exception $e) {
              $this->fail('setQuery() was expected to handle unencoded parameters, but failed');
          }
 
@@ -240,7 +246,7 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
         );
         
         foreach ($unwise as $uri) {
-            $this->assertFalse(Zend_Uri::check($uri), "failed for URI $uri");
+            $this->assertFalse(Uri\Uri::check($uri), "failed for URI $uri");
         }
     }
 
@@ -260,13 +266,13 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
             'http://example.com/?q=`',
         );
 
-        Zend_Uri::setConfig(array('allow_unwise' => true));
+        Uri\Uri::setConfig(array('allow_unwise' => true));
 
         foreach ($unwise as $uri) {
-            $this->assertTrue(Zend_Uri::check($uri), "failed for URI $uri");
+            $this->assertTrue(Uri\Uri::check($uri), "failed for URI $uri");
         }
 
-        Zend_Uri::setConfig(array('allow_unwise' => false));
+        Uri\Uri::setConfig(array('allow_unwise' => false));
     }
 
     /**
@@ -293,7 +299,7 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
      */
     protected function _testValidUri($uri)
     {
-        $obj = Zend_Uri::factory($uri);
+        $obj = Uri\Uri::factory($uri);
         $this->assertEquals($uri, $obj->getUri(), 'getUri() returned value that differs from input');
     }
 
@@ -305,15 +311,15 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
     protected function _testInvalidUri($uri)
     {
         try {
-            $obj = Zend_Uri::factory($uri);
+            $obj = Uri\Uri::factory($uri);
             $this->fail('Zend_Uri_Exception was expected but not thrown');
-        } catch (Zend_Uri_Exception $e) {
+        } catch (Uri\Exception $e) {
         }
     }
 
     public function testSetGetUsername()
     {
-        $uri = Zend_Uri::factory('http://example.com');
+        $uri = Uri\Uri::factory('http://example.com');
         $username = 'alice';
         $this->assertFalse($uri->getUsername());
         $uri->setUsername($username);
@@ -322,7 +328,7 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
 
     public function testSetGetPassword()
     {
-        $uri = Zend_Uri::factory('http://example.com');
+        $uri = Uri\Uri::factory('http://example.com');
         $username = 'alice';
         $password = 'secret';
         $this->assertFalse($uri->getPassword());
@@ -333,7 +339,7 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
 
     public function testUriWithAllParts()
     {
-        $uri = Zend_Uri::factory('http://alice:secret@example.com:8080/path/script.php?foo=bar&bar=foo#123');
+        $uri = Uri\Uri::factory('http://alice:secret@example.com:8080/path/script.php?foo=bar&bar=foo#123');
 
         $this->assertSame('http', $uri->getScheme());
         $this->assertSame('alice', $uri->getUsername());
@@ -347,7 +353,7 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
 
     public function testBuildCompleteUriFromScratch()
     {
-        $uri = Zend_Uri::factory('http');
+        $uri = Uri\Uri::factory('http');
 
         $uri->setUsername('alice');
         $uri->setPassword('secret');
@@ -362,32 +368,32 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
 
     public function testSetInvalidUsername()
     {
-        $uri = Zend_Uri::factory('http://example.com');
-        $this->setExpectedException('Zend_Uri_Exception');
+        $uri = Uri\Uri::factory('http://example.com');
+        $this->setExpectedException('Zend\Uri\Exception');
         $uri->setUsername('alice?');
     }
 
     public function testSetInvalidPassword()
     {
-        $uri = Zend_Uri::factory('http://example.com');
-        $this->setExpectedException('Zend_Uri_Exception');
+        $uri = Uri\Uri::factory('http://example.com');
+        $this->setExpectedException('Zend\Uri\Exception');
         $uri->setUsername('alice');
         $uri->setPassword('secret?');
     }
 
     public function testSetEmptyHost()
     {
-        $uri = Zend_Uri::factory('http://example.com');
+        $uri = Uri\Uri::factory('http://example.com');
         $host = '';
-        $this->setExpectedException('Zend_Uri_Exception');
+        $this->setExpectedException('Zend\Uri\Exception');
         $uri->setHost($host);
     }
 
     public function testSetInvalidHost()
     {
-        $uri = Zend_Uri::factory('http://example.com');
+        $uri = Uri\Uri::factory('http://example.com');
         $host = 'example,com';
-        $this->setExpectedException('Zend_Uri_Exception');
+        $this->setExpectedException('Zend\Uri\Exception');
         $uri->setHost($host);
     }
 
@@ -396,7 +402,7 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
      */
     public function testGetQueryAsArrayReturnsCorrectArray()
     {
-        $uri = Zend_Uri_Http::fromString('http://example.com/foo/?test=a&var[]=1&var[]=2&some[thing]=3');
+        $uri = Uri\Http::fromString('http://example.com/foo/?test=a&var[]=1&var[]=2&some[thing]=3');
         $this->assertEquals(array(
             'test' => 'a',
             'var'  => array(1, 2),
@@ -409,7 +415,7 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
      */
     public function testAddReplaceQueryParametersModifiesQueryAndReturnsOldQuery()
     {
-        $uri = Zend_Uri_Http::fromString('http://example.com/foo/?a=1&b=2&c=3');
+        $uri = Uri\Http::fromString('http://example.com/foo/?a=1&b=2&c=3');
         $this->assertEquals('a=1&b=2&c=3', $uri->addReplaceQueryParameters(array(
             'b' => 4,
             'd' => -1
@@ -428,7 +434,7 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
      */
     public function testRemoveQueryParametersModifiesQueryAndReturnsOldQuery()
     {
-        $uri = Zend_Uri_Http::fromString('http://example.com/foo/?a=1&b=2&c=3&d=4');
+        $uri = Uri\Http::fromString('http://example.com/foo/?a=1&b=2&c=3&d=4');
         $this->assertEquals('a=1&b=2&c=3&d=4', $uri->removeQueryParameters(array('b', 'd', 'e')));
         $this->assertEquals(array(
             'a' => 1,

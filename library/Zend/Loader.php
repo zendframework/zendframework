@@ -19,17 +19,18 @@
  * @version    $Id$
  */
 
+namespace Zend;
+
 /**
  * Static methods for loading classes and files.
  *
  * @uses       Zend_Exception
- * @uses       Zend_Loader_Autoloader
  * @category   Zend
  * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Loader
+class Loader
 {
     /**
      * Loads a class from a PHP file.  The filename must be formatted
@@ -58,7 +59,8 @@ class Zend_Loader
         }
 
         if ((null !== $dirs) && !is_string($dirs) && !is_array($dirs)) {
-            throw new Zend_Exception('Directory argument must be a string or an array');
+            require_once __DIR__ . '/Loader/InvalidDirectoryArgumentException.php';
+            throw new \Zend\Loader\InvalidDirectoryArgumentException('Directory argument must be a string or an array');
         }
 
         // Autodiscover the path from the class name
@@ -96,7 +98,8 @@ class Zend_Loader
         }
 
         if (!class_exists($class, false) && !interface_exists($class, false)) {
-            throw new Zend_Exception("File \"$file\" does not exist or class \"$class\" was not found in the file");
+            require_once __DIR__ . '/Loader/ClassNotFoundException.php';
+            throw new \Zend\Loader\ClassNotFoundException("File \"$file\" does not exist or class \"$class\" was not found in the file");
         }
     }
 
@@ -221,62 +224,6 @@ class Zend_Loader
     }
 
     /**
-     * spl_autoload() suitable implementation for supporting class autoloading.
-     *
-     * Attach to spl_autoload() using the following:
-     * <code>
-     * spl_autoload_register(array('Zend_Loader', 'autoload'));
-     * </code>
-     *
-     * @deprecated Since 1.8.0
-     * @param  string $class
-     * @return string|false Class name on success; false on failure
-     */
-    public static function autoload($class)
-    {
-        trigger_error(__CLASS__ . '::' . __METHOD__ . ' is deprecated as of 1.8.0 and will be removed with 2.0.0; use Zend_Loader_Autoloader instead', E_USER_NOTICE);
-        try {
-            @self::loadClass($class);
-            return $class;
-        } catch (Exception $e) {
-            return false;
-        }
-    }
-
-    /**
-     * Register {@link autoload()} with spl_autoload()
-     *
-     * @deprecated Since 1.8.0
-     * @param string $class (optional)
-     * @param boolean $enabled (optional)
-     * @return void
-     * @throws Zend_Exception if spl_autoload() is not found
-     * or if the specified class does not have an autoload() method.
-     */
-    public static function registerAutoload($class = 'Zend_Loader', $enabled = true)
-    {
-        trigger_error(__CLASS__ . '::' . __METHOD__ . ' is deprecated as of 1.8.0 and will be removed with 2.0.0; use Zend_Loader_Autoloader instead', E_USER_NOTICE);
-        $autoloader = Zend_Loader_Autoloader::getInstance();
-        $autoloader->setFallbackAutoloader(true);
-
-        if ('Zend_Loader' != $class) {
-            self::loadClass($class);
-            $methods = get_class_methods($class);
-            if (!in_array('autoload', (array) $methods)) {
-                throw new Zend_Exception("The class \"$class\" does not have an autoload() method");
-            }
-
-            $callback = array($class, 'autoload');
-
-            if ($enabled) {
-                $autoloader->pushAutoloader($callback);
-            } else {
-                $autoloader->removeAutoloader($callback);
-            }
-        }
-    }
-
-    /**
      * Ensure that filename does not contain exploits
      *
      * @param  string $filename
@@ -289,7 +236,8 @@ class Zend_Loader
          * Security check
          */
         if (preg_match('/[^a-z0-9\\/\\\\_.:-]/i', $filename)) {
-            throw new Zend_Exception('Security check: Illegal character in filename');
+            require_once __DIR__ . '/Loader/SecurityException.php';
+            throw new \Zend\Loader\SecurityException('Illegal character in filename');
         }
     }
 

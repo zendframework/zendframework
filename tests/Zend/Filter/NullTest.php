@@ -20,13 +20,9 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
+namespace ZendTest\Filter;
 
-/**
- * @see Zend_Filter_Int
- */
+use Zend\Filter\Null as NullFilter;
 
 /**
  * @category   Zend
@@ -36,7 +32,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
+class NullTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Zend_Filter_Null object
@@ -52,7 +48,7 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_filter = new Zend_Filter_Null();
+        $this->_filter = new NullFilter();
     }
 
     /**
@@ -62,13 +58,14 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
-        $this->assertEquals(null, $this->_filter->filter('0'));
-        $this->assertEquals(null, $this->_filter->filter(''));
-        $this->assertEquals(null, $this->_filter->filter(0));
-        $this->assertEquals(null, $this->_filter->filter(array()));
-        $this->assertEquals(null, $this->_filter->filter(false));
-        $this->assertEquals('test', $this->_filter->filter('test'));
-        $this->assertEquals(true, $this->_filter->filter(true));
+        $filter = $this->_filter;
+        $this->assertEquals(null, $filter('0'));
+        $this->assertEquals(null, $filter(''));
+        $this->assertEquals(null, $filter(0));
+        $this->assertEquals(null, $filter(array()));
+        $this->assertEquals(null, $filter(false));
+        $this->assertEquals('test', $filter('test'));
+        $this->assertEquals(true, $filter(true));
     }
 
     /**
@@ -78,14 +75,15 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
      */
     public function testOnlyBoolean()
     {
-        $this->_filter->setType(Zend_Filter_Null::BOOLEAN);
-        $this->assertEquals('0', $this->_filter->filter('0'));
-        $this->assertEquals('', $this->_filter->filter(''));
-        $this->assertEquals(0, $this->_filter->filter(0));
-        $this->assertEquals(array(), $this->_filter->filter(array()));
-        $this->assertEquals(null, $this->_filter->filter(false));
-        $this->assertEquals('test', $this->_filter->filter('test'));
-        $this->assertEquals(true, $this->_filter->filter(true));
+        $filter = $this->_filter;
+        $filter->setType(NullFilter::BOOLEAN);
+        $this->assertEquals('0', $filter('0'));
+        $this->assertEquals('', $filter(''));
+        $this->assertEquals(0, $filter(0));
+        $this->assertEquals(array(), $filter(array()));
+        $this->assertEquals(null, $filter(false));
+        $this->assertEquals('test', $filter('test'));
+        $this->assertEquals(true, $filter(true));
     }
 
     /**
@@ -95,14 +93,15 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
      */
     public function testOnlyInteger()
     {
-        $this->_filter->setType(Zend_Filter_Null::INTEGER);
-        $this->assertEquals('0', $this->_filter->filter('0'));
-        $this->assertEquals('', $this->_filter->filter(''));
-        $this->assertEquals(null, $this->_filter->filter(0));
-        $this->assertEquals(array(), $this->_filter->filter(array()));
-        $this->assertEquals(false, $this->_filter->filter(false));
-        $this->assertEquals('test', $this->_filter->filter('test'));
-        $this->assertEquals(true, $this->_filter->filter(true));
+        $filter = $this->_filter;
+        $filter->setType(NullFilter::INTEGER);
+        $this->assertEquals('0', $filter('0'));
+        $this->assertEquals('', $filter(''));
+        $this->assertEquals(null, $filter(0));
+        $this->assertEquals(array(), $filter(array()));
+        $this->assertEquals(false, $filter(false));
+        $this->assertEquals('test', $filter('test'));
+        $this->assertEquals(true, $filter(true));
     }
 
     /**
@@ -112,14 +111,15 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
      */
     public function testOnlyArray()
     {
-        $this->_filter->setType(Zend_Filter_Null::EMPTY_ARRAY);
-        $this->assertEquals('0', $this->_filter->filter('0'));
-        $this->assertEquals('', $this->_filter->filter(''));
-        $this->assertEquals(0, $this->_filter->filter(0));
-        $this->assertEquals(null, $this->_filter->filter(array()));
-        $this->assertEquals(false, $this->_filter->filter(false));
-        $this->assertEquals('test', $this->_filter->filter('test'));
-        $this->assertEquals(true, $this->_filter->filter(true));
+        $filter = $this->_filter;
+        $filter->setType(NullFilter::EMPTY_ARRAY);
+        $this->assertEquals('0', $filter('0'));
+        $this->assertEquals('', $filter(''));
+        $this->assertEquals(0, $filter(0));
+        $this->assertEquals(null, $filter(array()));
+        $this->assertEquals(false, $filter(false));
+        $this->assertEquals('test', $filter('test'));
+        $this->assertEquals(true, $filter(true));
     }
 
     /**
@@ -129,14 +129,15 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
      */
     public function testOnlyString()
     {
-        $this->_filter->setType(Zend_Filter_Null::STRING);
-        $this->assertEquals('0', $this->_filter->filter('0'));
-        $this->assertEquals(null, $this->_filter->filter(''));
-        $this->assertEquals(0, $this->_filter->filter(0));
-        $this->assertEquals(array(), $this->_filter->filter(array()));
-        $this->assertEquals(false, $this->_filter->filter(false));
-        $this->assertEquals('test', $this->_filter->filter('test'));
-        $this->assertEquals(true, $this->_filter->filter(true));
+        $filter = $this->_filter;
+        $filter->setType(NullFilter::STRING);
+        $this->assertEquals('0', $filter('0'));
+        $this->assertEquals(null, $filter(''));
+        $this->assertEquals(0, $filter(0));
+        $this->assertEquals(array(), $filter(array()));
+        $this->assertEquals(false, $filter(false));
+        $this->assertEquals('test', $filter('test'));
+        $this->assertEquals(true, $filter(true));
     }
 
     /**
@@ -146,14 +147,15 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
      */
     public function testOnlyZero()
     {
-        $this->_filter->setType(Zend_Filter_Null::ZERO);
-        $this->assertEquals(null, $this->_filter->filter('0'));
-        $this->assertEquals('', $this->_filter->filter(''));
-        $this->assertEquals(0, $this->_filter->filter(0));
-        $this->assertEquals(array(), $this->_filter->filter(array()));
-        $this->assertEquals(false, $this->_filter->filter(false));
-        $this->assertEquals('test', $this->_filter->filter('test'));
-        $this->assertEquals(true, $this->_filter->filter(true));
+        $filter = $this->_filter;
+        $filter->setType(NullFilter::ZERO);
+        $this->assertEquals(null, $filter('0'));
+        $this->assertEquals('', $filter(''));
+        $this->assertEquals(0, $filter(0));
+        $this->assertEquals(array(), $filter(array()));
+        $this->assertEquals(false, $filter(false));
+        $this->assertEquals('test', $filter('test'));
+        $this->assertEquals(true, $filter(true));
     }
 
     /**
@@ -163,21 +165,21 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
      */
     public function testArrayConstantNotation()
     {
-        $filter = new Zend_Filter_Null(
+        $filter = new NullFilter(
             array(
-                Zend_Filter_Null::ZERO,
-                Zend_Filter_Null::STRING,
-                Zend_Filter_Null::BOOLEAN
+                NullFilter::ZERO,
+                NullFilter::STRING,
+                NullFilter::BOOLEAN,
             )
         );
 
-        $this->assertEquals(null, $filter->filter('0'));
-        $this->assertEquals(null, $filter->filter(''));
-        $this->assertEquals(0, $filter->filter(0));
-        $this->assertEquals(array(), $filter->filter(array()));
-        $this->assertEquals(null, $filter->filter(false));
-        $this->assertEquals('test', $filter->filter('test'));
-        $this->assertEquals(true, $filter->filter(true));
+        $this->assertEquals(null, $filter('0'));
+        $this->assertEquals(null, $filter(''));
+        $this->assertEquals(0, $filter(0));
+        $this->assertEquals(array(), $filter(array()));
+        $this->assertEquals(null, $filter(false));
+        $this->assertEquals('test', $filter('test'));
+        $this->assertEquals(true, $filter(true));
     }
 
     /**
@@ -187,23 +189,23 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
      */
     public function testArrayConfigNotation()
     {
-        $filter = new Zend_Filter_Null(
+        $filter = new NullFilter(
             array(
                 'type' => array(
-                    Zend_Filter_Null::ZERO,
-                    Zend_Filter_Null::STRING,
-                    Zend_Filter_Null::BOOLEAN),
+                    NullFilter::ZERO,
+                    NullFilter::STRING,
+                    NullFilter::BOOLEAN),
                 'test' => false
             )
         );
 
-        $this->assertEquals(null, $filter->filter('0'));
-        $this->assertEquals(null, $filter->filter(''));
-        $this->assertEquals(0, $filter->filter(0));
-        $this->assertEquals(array(), $filter->filter(array()));
-        $this->assertEquals(null, $filter->filter(false));
-        $this->assertEquals('test', $filter->filter('test'));
-        $this->assertEquals(true, $filter->filter(true));
+        $this->assertEquals(null, $filter('0'));
+        $this->assertEquals(null, $filter(''));
+        $this->assertEquals(0, $filter(0));
+        $this->assertEquals(array(), $filter(array()));
+        $this->assertEquals(null, $filter(false));
+        $this->assertEquals('test', $filter('test'));
+        $this->assertEquals(true, $filter(true));
     }
 
     /**
@@ -213,17 +215,17 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
      */
     public function testMultiConstantNotation()
     {
-        $filter = new Zend_Filter_Null(
-            Zend_Filter_Null::ZERO + Zend_Filter_Null::STRING + Zend_Filter_Null::BOOLEAN
+        $filter = new NullFilter(
+            NullFilter::ZERO + NullFilter::STRING + NullFilter::BOOLEAN
         );
 
-        $this->assertEquals(null, $filter->filter('0'));
-        $this->assertEquals(null, $filter->filter(''));
-        $this->assertEquals(0, $filter->filter(0));
-        $this->assertEquals(array(), $filter->filter(array()));
-        $this->assertEquals(null, $filter->filter(false));
-        $this->assertEquals('test', $filter->filter('test'));
-        $this->assertEquals(true, $filter->filter(true));
+        $this->assertEquals(null, $filter('0'));
+        $this->assertEquals(null, $filter(''));
+        $this->assertEquals(0, $filter(0));
+        $this->assertEquals(array(), $filter(array()));
+        $this->assertEquals(null, $filter(false));
+        $this->assertEquals('test', $filter('test'));
+        $this->assertEquals(true, $filter(true));
     }
 
     /**
@@ -233,19 +235,19 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
      */
     public function testStringNotation()
     {
-        $filter = new Zend_Filter_Null(
+        $filter = new NullFilter(
             array(
                 'zero', 'string', 'boolean'
             )
         );
 
-        $this->assertEquals(null, $filter->filter('0'));
-        $this->assertEquals(null, $filter->filter(''));
-        $this->assertEquals(0, $filter->filter(0));
-        $this->assertEquals(array(), $filter->filter(array()));
-        $this->assertEquals(null, $filter->filter(false));
-        $this->assertEquals('test', $filter->filter('test'));
-        $this->assertEquals(true, $filter->filter(true));
+        $this->assertEquals(null, $filter('0'));
+        $this->assertEquals(null, $filter(''));
+        $this->assertEquals(0, $filter(0));
+        $this->assertEquals(array(), $filter(array()));
+        $this->assertEquals(null, $filter(false));
+        $this->assertEquals('test', $filter('test'));
+        $this->assertEquals(true, $filter(true));
     }
 
     /**
@@ -255,17 +257,17 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
      */
     public function testSingleStringNotation()
     {
-        $filter = new Zend_Filter_Null(
+        $filter = new NullFilter(
             'boolean'
         );
 
-        $this->assertEquals('0', $filter->filter('0'));
-        $this->assertEquals(null, $filter->filter(''));
-        $this->assertEquals(0, $filter->filter(0));
-        $this->assertEquals(array(), $filter->filter(array()));
-        $this->assertEquals(false, $filter->filter(false));
-        $this->assertEquals('test', $filter->filter('test'));
-        $this->assertEquals(true, $filter->filter(true));
+        $this->assertEquals('0', $filter('0'));
+        $this->assertEquals(null, $filter(''));
+        $this->assertEquals(0, $filter(0));
+        $this->assertEquals(array(), $filter(array()));
+        $this->assertEquals(false, $filter(false));
+        $this->assertEquals('test', $filter('test'));
+        $this->assertEquals(true, $filter(true));
     }
 
     /**
@@ -275,12 +277,8 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
      */
     public function testSettingFalseType()
     {
-        try {
-            $this->_filter->setType(true);
-            $this->fail();
-        } catch (Zend_Exception $e) {
-            $this->assertContains('Unknown', $e->getMessage());
-        }
+        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Unknown');
+        $this->_filter->setType(true);
     }
 
     /**

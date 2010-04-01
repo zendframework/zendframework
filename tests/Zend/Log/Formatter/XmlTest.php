@@ -20,10 +20,9 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Log\Formatter;
 
-/** PHPUnit_Framework_TestCase */
-
-/** Zend_Log_Formatter_Xml */
+use \Zend\Log\Formatter\Xml as XmlFormatter;
 
 /**
  * @category   Zend
@@ -33,11 +32,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
+class XmlTest extends \PHPUnit_Framework_TestCase
 {
     public function testDefaultFormat()
     {
-        $f = new Zend_Log_Formatter_Xml();
+        $f = new XmlFormatter();
         $line = $f->format(array('message' => 'foo', 'priority' => 42));
 
         $this->assertContains('foo', $line);
@@ -46,14 +45,14 @@ class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testConfiguringElementMapping()
     {
-        $f = new Zend_Log_Formatter_Xml('log', array('foo' => 'bar'));
+        $f = new XmlFormatter('log', array('foo' => 'bar'));
         $line = $f->format(array('bar' => 'baz'));
         $this->assertContains('<log><foo>baz</foo></log>', $line);
     }
 
     public function testXmlDeclarationIsStripped()
     {
-        $f = new Zend_Log_Formatter_Xml();
+        $f = new XmlFormatter();
         $line = $f->format(array('message' => 'foo', 'priority' => 42));
 
         $this->assertNotContains('<\?xml version=', $line);
@@ -61,7 +60,7 @@ class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testXmlValidates()
     {
-        $f = new Zend_Log_Formatter_Xml();
+        $f = new XmlFormatter();
         $line = $f->format(array('message' => 'foo', 'priority' => 42));
 
         $sxml = @simplexml_load_string($line);
@@ -74,7 +73,7 @@ class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
      */
     public function testHtmlSpecialCharsInMessageGetEscapedForValidXml()
     {
-        $f = new Zend_Log_Formatter_Xml();
+        $f = new XmlFormatter();
         $line = $f->format(array('message' => '&key1=value1&key2=value2', 'priority' => 42));
 
         $this->assertContains("&amp;", $line);
@@ -87,7 +86,7 @@ class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
      */
     public function testFixingBrokenCharsSoXmlIsValid()
     {
-        $f = new Zend_Log_Formatter_Xml();
+        $f = new XmlFormatter();
         $line = $f->format(array('message' => '&amp', 'priority' => 42));
 
         $this->assertContains('&amp;amp', $line);

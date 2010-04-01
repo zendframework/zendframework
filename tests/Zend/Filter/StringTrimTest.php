@@ -20,13 +20,9 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
+namespace ZendTest\Filter;
 
-/**
- * @see Zend_Filter_StringTrim
- */
+use Zend\Filter\StringTrim as StringTrimFilter;
 
 /**
  * @category   Zend
@@ -36,7 +32,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_StringTrimTest extends PHPUnit_Framework_TestCase
+class StringTrimTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Zend_Filter_StringTrim object
@@ -52,7 +48,7 @@ class Zend_Filter_StringTrimTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_filter = new Zend_Filter_StringTrim();
+        $this->_filter = new StringTrimFilter();
     }
 
     /**
@@ -62,13 +58,14 @@ class Zend_Filter_StringTrimTest extends PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
+        $filter = $this->_filter;
         $valuesExpected = array(
             'string' => 'string',
             ' str '  => 'str',
             "\ns\t"  => 's'
             );
         foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals($output, $this->_filter->filter($input));
+            $this->assertEquals($output, $filter($input));
         }
     }
 
@@ -100,8 +97,9 @@ class Zend_Filter_StringTrimTest extends PHPUnit_Framework_TestCase
      */
     public function testCharList()
     {
-        $this->_filter->setCharList('&');
-        $this->assertEquals('a&b', $this->_filter->filter('&&a&b&&'));
+        $filter = $this->_filter;
+        $filter->setCharList('&');
+        $this->assertEquals('a&b', $filter('&&a&b&&'));
     }
 
     /**
@@ -109,7 +107,8 @@ class Zend_Filter_StringTrimTest extends PHPUnit_Framework_TestCase
      */
     public function testZF7183()
     {
-        $this->assertEquals('Зенд', $this->_filter->filter('Зенд'));
+        $filter = $this->_filter;
+        $this->assertEquals('Зенд', $filter('Зенд'));
     }
 
     /**
@@ -117,5 +116,7 @@ class Zend_Filter_StringTrimTest extends PHPUnit_Framework_TestCase
      */
     public function testZF7902()
     {
-        $this->assertEquals('/', $this->_filter->filter('/'));
-    }}
+        $filter = $this->_filter;
+        $this->assertEquals('/', $filter('/'));
+    }
+}

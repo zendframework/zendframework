@@ -20,6 +20,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Application\Module;
+
+use \Zend\Loader\ResourceAutoloader;
+
 /**
  * Resource loader for application module classes
  *
@@ -30,7 +34,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Module_Autoloader extends Zend_Loader_Autoloader_Resource
+class Autoloader extends ResourceAutoloader
 {
     /**
      * Constructor
@@ -54,11 +58,11 @@ class Zend_Application_Module_Autoloader extends Zend_Loader_Autoloader_Resource
         $basePath = $this->getBasePath();
         $this->addResourceTypes(array(
             'dbtable' => array(
-                'namespace' => 'Model_DbTable',
+                'namespace' => 'Model\\DbTable',
                 'path'      => 'models/DbTable',
             ),
             'mappers' => array(
-                'namespace' => 'Model_Mapper',
+                'namespace' => 'Model\\Mapper',
                 'path'      => 'models/mappers',
             ),
             'form'    => array(
@@ -78,11 +82,11 @@ class Zend_Application_Module_Autoloader extends Zend_Loader_Autoloader_Resource
                 'path'      => 'services',
             ),
             'viewhelper' => array(
-                'namespace' => 'View_Helper',
+                'namespace' => 'View\\Helper',
                 'path'      => 'views/helpers',
             ),
             'viewfilter' => array(
-                'namespace' => 'View_Filter',
+                'namespace' => 'View\\Filter',
                 'path'      => 'views/filters',
             ),
         ));

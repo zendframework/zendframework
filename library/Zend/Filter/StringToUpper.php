@@ -20,14 +20,19 @@
  */
 
 /**
- * @uses       Zend_Filter_Exception
- * @uses       Zend_Filter_Interface
+ * @namespace
+ */
+namespace Zend\Filter;
+
+/**
+ * @uses       Zend\Filter\Exception
+ * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_StringToUpper implements Zend_Filter_Interface
+class StringToUpper extends AbstractFilter
 {
     /**
      * Encoding for the input string
@@ -43,7 +48,7 @@ class Zend_Filter_StringToUpper implements Zend_Filter_Interface
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
             $options = func_get_args();
@@ -73,19 +78,19 @@ class Zend_Filter_StringToUpper implements Zend_Filter_Interface
      * Set the input encoding for the given string
      *
      * @param  string $encoding
-     * @return Zend_Filter_StringToUpper Provides a fluent interface
-     * @throws Zend_Filter_Exception
+     * @return \Zend\Filter\StringToUpper Provides a fluent interface
+     * @throws \Zend\Filter\Exception
      */
     public function setEncoding($encoding = null)
     {
         if ($encoding !== null) {
             if (!function_exists('mb_strtoupper')) {
-                throw new Zend_Filter_Exception('mbstring is required for this feature');
+                throw new Exception('mbstring is required for this feature');
             }
 
             $encoding = (string) $encoding;
             if (!in_array(strtolower($encoding), array_map('strtolower', mb_list_encodings()))) {
-                throw new Zend_Filter_Exception("The given encoding '$encoding' is not supported by mbstring");
+                throw new Exception("The given encoding '$encoding' is not supported by mbstring");
             }
         }
 

@@ -20,12 +20,11 @@
  * @version    $Id$
  */
 
+namespace TestNamespace;
 
-/**
- * @see Zend_Validate_Abstract
- */
+use Zend\Validator\AbstractValidator;
 
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
+\PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
 /**
  * Mock file for testbed
@@ -36,7 +35,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TestNamespace_StringEquals extends Zend_Validate_Abstract
+class StringEquals extends AbstractValidator
 {
 
     const NOT_EQUALS = 'stringNotEquals';

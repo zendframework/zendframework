@@ -20,10 +20,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @see Zend_Application_Bootstrap_Bootstrap
- */
-require_once 'Zend/Application/Bootstrap/Bootstrap.php';
+namespace Zend\Application\Module;
+
+use \Zend_Application_Bootstrap_Bootstrap;
 
 /**
  * Base bootstrap class for modules
@@ -56,7 +55,7 @@ abstract class Zend_Application_Module_Bootstrap
         $this->setApplication($application);
 
         // Use same plugin loader as parent bootstrap
-        if ($application instanceof Zend_Application_Bootstrap_ResourceBootstrapper) {
+        if ($application instanceof \Zend_Application_Bootstrap_ResourceBootstrapper) {
             $this->setPluginLoader($application->getPluginLoader());
         }
 

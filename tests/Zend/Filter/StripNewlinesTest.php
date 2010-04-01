@@ -20,13 +20,9 @@
  * @version    $Id $
  */
 
-/**
- * Test helper
- */
+namespace ZendTest\Filter;
 
-/**
- * @see Zend_Filter_StripNewlines
- */
+use Zend\Filter\StripNewlines as StripNewlinesFilter;
 
 /**
  * @category   Zend
@@ -36,25 +32,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_StripNewlinesTest extends PHPUnit_Framework_TestCase
+class StripNewlinesTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Zend_Filter_StripNewlines object
-     *
-     * @var Zend_Filter_StripNewlines
-     */
-    protected $_filter;
-
-    /**
-     * Creates a new Zend_Filter_StripNewlines object for each test method
-     *
-     * @return void
-     */
-    public function setUp ()
-    {
-        $this->_filter = new Zend_Filter_StripNewlines();
-    }
-
     /**
      * Ensures that the filter follows expected behavior
      *
@@ -62,6 +41,7 @@ class Zend_Filter_StripNewlinesTest extends PHPUnit_Framework_TestCase
      */
     public function testBasic ()
     {
+        $filter = new StripNewLinesFilter();
         $valuesExpected = array(
             '' => '',
             "\n" => '',
@@ -73,7 +53,7 @@ class Zend_Filter_StripNewlinesTest extends PHPUnit_Framework_TestCase
             "Some text\nthat we have\r\nstuff in" => 'Some textthat we havestuff in'
         );
         foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals($output, $this->_filter->filter($input));
+            $this->assertEquals($output, $filter($input));
         }
     }
 }

@@ -56,14 +56,4 @@ interface Validator
      * @return array
      */
     public function getMessages();
-
-    /**
-     * Invoke validator as command
-     *
-     * Typically, should proxy to isValid()
-     * 
-     * @param  mixed $value 
-     * @return boolean
-     */
-    public function __invoke($value);
 }

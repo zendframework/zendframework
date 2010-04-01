@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: 20799 -->
+<!-- EN-Revision: 21661 -->
+<!-- Reviewed: 21661 -->
 <sect1 id="zend.translate.adapter">
     <title>Adapter für Zend_Translate</title>
 
@@ -368,10 +368,14 @@
 
         <programlisting language="php"><![CDATA[
 try {
-    $translate = new Zend_Translate('Firma_Translate_Adapter_MeinFormat',
-                                    '/path/to/translate.xx',
-                                    'en',
-                                    array('meineoption' => 'myvalue'));
+    $translate = new Zend_Translate(
+        array(
+            'adapter' => 'Firma_Translate_Adapter_MeinFormat',
+            'content' => '/path/to/translate.xx',
+            'locale'  => 'en',
+            'meineoption' => 'myvalue'
+        )
+    );
 } catch (Exception $e) {
     // Datei nicht gefunden, keine Adapter Klasse...
     // Genereller Fehler
@@ -406,9 +410,13 @@ $cache = Zend_Cache::factory('Core',
                              $frontendOptions,
                              $backendOptions);
 Zend_Translate::setCache($cache);
-$translate = new Zend_Translate('gettext',
-                                '/path/to/translate.mo',
-                                'en');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translate.mo',
+        'locale'  => 'en'
+    )
+);
 ]]></programlisting>
 
         <note>

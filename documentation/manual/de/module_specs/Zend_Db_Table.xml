@@ -1094,7 +1094,7 @@ $rows = $table->fetchAll($select);
 
             <para>
                 <classname>Zend_Db_Table_Select</classname> wird primär verwendet um zu verbinden
-                und zu prüfen um die Kriterien für einen legalen <costant>SELECT</constant> Query
+                und zu prüfen um die Kriterien für einen legalen <constant>SELECT</constant> Query
                 sicherzustellen. Trotzdem gibt es viele Fälle in denen man die Flexibilität der
                 <classname>Zend_Db_Table_Row</classname> benötigt und Zeilen nicht geschrieben oder
                 gelöscht werden müssen. Für diesen speziellen Fall ist es möglich Zeilen/-sets durch

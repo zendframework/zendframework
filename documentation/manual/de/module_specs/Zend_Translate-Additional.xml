@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21643 -->
+<!-- EN-Revision: 21661 -->
 <!-- Reviewed: 21049 -->
 <sect1 id="zend.translate.additional">
     <title>Zusätzliche Features für Übersetzungen</title>
@@ -23,9 +23,8 @@
         </para>
 
         <para>
-            Man kann Optionen temporär setzen, indem man die Funktion
-            <methodname>addTranslation($data, $locale, array $options = array())</methodname> als
-            dritten und optionalen Parameter benutzt. Ausserdem kann die Methode
+            Man kann Optionen temporär setzen, indem man Sie an die Funktion
+            <methodname>addTranslation()</methodname> übergibt. Ausserdem kann die Methode
             <methodname>setOptions()</methodname> benutzt werden, um Optionen permanent zu setzen.
         </para>
 
@@ -34,18 +33,25 @@
 
             <programlisting language="php"><![CDATA[
 // Definiere ':' als Trenner für die Quelldatei der Übersetzung
-$options = array('delimiter' => ':');
 $translate = new Zend_Translate(
-    'csv',
-    '/path/to/mytranslation.csv',
-    'de',
-    $options);
+    array(
+        'adapter' => 'csv',
+        'content' => '/path/to/mytranslation.csv',
+        'locale'  => 'de',
+        'delimiter' => ':'
+    )
+);
 
 ...
 
 // Lösche die definierte Sprache und verwende die neuen Übersetzungsdaten
-$options = array('clear' => true);
-$translate->addTranslation('/path/to/new.csv', 'fr', $options);
+$translate->addTranslation(
+    array(
+        'content' => '/path/to/new.csv',
+        'locale'  => 'fr',
+        'clear'   => true
+    )
+);
 ]]></programlisting>
         </example>
 
@@ -69,8 +75,24 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
                 <tbody>
                     <row>
+                        <entry>adapter</entry>
+                        <entry>nur Zend_Translate</entry>
+
+                        <entry>
+                            Definiert den Adapter der für die Übersetzung verwendet wird. Diese
+                            Option kann nur angegeben werden wenn eine neue Instanz von
+                            <classname>Zend_Translate</classname> erstellt wird. Wenn Sie im
+                            Nachhinein gesetzt wird, dann wird Sie ignoriert
+                        </entry>
+
+                        <entry>
+                            <emphasis>Muss gesetzt werden da es keinen Standardwert gibt</emphasis>
+                        </entry>
+                    </row>
+
+                    <row>
                         <entry>clear</entry>
-                        <entry>all</entry>
+                        <entry>Alle</entry>
 
                         <entry>
                             Wenn <constant>TRUE</constant> gesetzt wird, werden bereits gelesene
@@ -82,8 +104,23 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                     </row>
 
                     <row>
+                        <entry>content</entry>
+                        <entry>Alle</entry>
+
+                        <entry>
+                            Setzt den Inhalt für den Übersetzungs-Adapter. Das könnte ein Array,
+                            ein Dateiname oder ein Verzeichnis sein. Welche Art an Inhalt
+                            unterstützt wird hängt vom verwendeten Adapter ab.
+                        </entry>
+
+                        <entry>
+                            <emphasis>Der Standardwert hängt vom verwendeten Adapter ab</emphasis>
+                        </entry>
+                    </row>
+
+                    <row>
                         <entry>disableNotices</entry>
-                        <entry>all</entry>
+                        <entry>Alle</entry>
 
                         <entry>
                             Wenn es auf <constant>TRUE</constant> gesetzt wird, werden alle Notizen
@@ -97,7 +134,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
                     <row>
                         <entry>ignore</entry>
-                        <entry>all</entry>
+                        <entry>Alle</entry>
 
                         <entry>
                             Alle Verzeichnisse und Dateien, die mit diesem Präfix beginnen, werden
@@ -106,14 +143,17 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             alle versteckten Dateien ignoriert werden. Wenn dieser Wert auf
                             <code>'tmp'</code> gesetzt wird, werden Verzeichnisse und
                             Dateien wie z.B. <code>'tmpImages'</code> und <code>'tmpFiles'</code>,
-                            sowie alle darunter liegenden Verzeichnisse ignoriert.
+                            sowie alle darunter liegenden Verzeichnisse ignoriert. Diese Option
+                            akzeptiert auch ein Array welches verwendet werden kann wenn man mehr
+                            als einen Präfix ignorieren will.
                         </entry>
+
                         <entry><emphasis>.</emphasis></entry>
                     </row>
 
                     <row>
                         <entry>log</entry>
-                        <entry>all</entry>
+                        <entry>Alle</entry>
 
                         <entry>
                             Eine Instanz von <classname>Zend_Log</classname>, wohin nicht
@@ -125,7 +165,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
                     <row>
                         <entry>logMessage</entry>
-                        <entry>all</entry>
+                        <entry>Alle</entry>
                         <entry>Die Nachricht, die in das Log geschrieben werden soll</entry>
 
                         <entry>
@@ -135,7 +175,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
                     <row>
                         <entry>logUntranslated</entry>
-                        <entry>all</entry>
+                        <entry>Alle</entry>
 
                         <entry>
                             Wenn diese Option auf <constant>TRUE</constant> gesetzt wird, werden
@@ -148,7 +188,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
                     <row>
                         <entry>reload</entry>
-                        <entry>all</entry>
+                        <entry>Alle</entry>
 
                         <entry>
                             Wenn diese Option auf <constant>TRUE</constant> gesetzt wird, werden die
@@ -162,7 +202,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
                     <row>
                         <entry>scan</entry>
-                        <entry>all</entry>
+                        <entry>Alle</entry>
 
                         <entry>
                             Wenn <constant>NULL</constant> gesetzt wird, wird die Verzechnisstruktur
@@ -337,37 +377,49 @@ if ($translate->isAvailable("fr")) {
 // Beispiel 1:
 // Wenn keine passende Sprache gefunden wird, wird die MessageID zurückgegeben
 $translate = new Zend_Translate(
-    'gettext',
-    'my_it.mo',
-    'auto',
-    array('scan' => Zend_Translate::LOCALE_FILENAME));
+    array(
+        'adapter' => 'gettext',
+        'content' => 'my_it.mo',
+        'locale'  => 'auto',
+        'scan'    => Zend_Translate::LOCALE_FILENAME
+    )
+);
 
 // Beispiel 2:
 // Die am besten passende Sprache ist 'fr'
 $translate = new Zend_Translate(
-    'gettext',
-    'my_fr.mo',
-    'auto',
-    array('scan' => Zend_Translate::LOCALE_FILENAME));
+    array(
+        'adapter' => 'gettext',
+        'content' => 'my_fr.mo',
+        'locale'  => 'auto',
+        'scan'    => Zend_Translate::LOCALE_FILENAME
+    )
+);
 
 // Beispiel 3:
 // Die am besten passende Sprache ist 'de' ('de_AT' wird degradiert)
 $translate = new Zend_Translate(
-    'gettext',
-    'my_de.mo',
-    'auto',
-    array('scan' => Zend_Translate::LOCALE_FILENAME));
+    array(
+        'adapter' => 'gettext',
+        'content' => 'my_de.mo',
+        'locale'  => 'auto',
+        'scan'    => Zend_Translate::LOCALE_FILENAME
+    )
+);
 
 // Beispiel 4:
 // Gibt 'it' als Übersetzungsquelle zurück und überschreibt
 // die automatischen Eigenschaften
 $translate = new Zend_Translate(
-    'gettext',
-    'my_it.mo',
-    'auto',
-    array('scan' => Zend_Translate::LOCALE_FILENAME));
+    array(
+        'adapter' => 'gettext',
+        'content' => 'my_it.mo',
+        'locale'  => 'auto',
+        'scan'    => Zend_Translate::LOCALE_FILENAME
+    )
+);
 
-$translate->addTranslation('my_ru.mo', 'ru');
+$translate->addTranslation(array('content' => 'my_ru.mo', 'locale' => 'ru'));
 $translate->setLocale('it_IT');
 ]]></programlisting>
             </example>
@@ -402,7 +454,7 @@ Zend_Registry::set('Zend_Locale', $locale);
 $defaultlanguage = 'en';
 
 // Irgendwo in der Anwendung
-$translate = new Zend_Translate('gettext', 'my_de.mo');
+$translate = new Zend_Translate(array('adapter' => 'gettext', 'content' => 'my_de.mo'));
 
 if (!$translate->isAvailable($locale->getLanguage())) {
     // Nicht vorhandene Sprache werden auf eine andere Sprache geroutet
@@ -447,7 +499,9 @@ $translate->getLocale();
 //  /language/error/loginerror.tmx
 //  /language/error/logouterror.tmx
 
-$translate = new Zend_Translate('tmx', '/language');
+$translate = new Zend_Translate(
+    array('adapter' => 'tmx', 'content' => '/language')
+);
 ]]></programlisting>
         </example>
 
@@ -505,10 +559,12 @@ $translate = new Zend_Translate('tmx', '/language');
 //  /language/en/error/loginerror.mo
 
 $translate = new Zend_Translate(
-    'gettext',
-    '/language',
-    null,
-    array('scan' => Zend_Translate::LOCALE_DIRECTORY));
+    array(
+        'adapter' => 'gettext',
+        'content' => '/language',
+        'scan'    => Zend_Translate::LOCALE_DIRECTORY
+    )
+);
 ]]></programlisting>
             </example>
 
@@ -557,10 +613,12 @@ $translate = new Zend_Translate(
 //  /language/error/loginerror_de.mo
 
 $translate = new Zend_Translate(
-    'gettext',
-    '/language',
-    null,
-    array('scan' => Zend_Translate::LOCALE_FILENAME));
+    array(
+        'adapter' => 'gettext',
+        'content' => '/language',
+        'scan'    => Zend_Translate::LOCALE_FILENAME
+    )
+);
 ]]></programlisting>
             </example>
 
@@ -643,6 +701,128 @@ $translate = new Zend_Translate(
 ]]></programlisting>
             </sect4>
         </sect3>
+
+        <sect3 id="zend.translate.additional.detection.ignore">
+            <title>Spezielle Dateien und Verzeichnisse ignorieren</title>
+
+            <para>
+                Manchmal ist es nützlich Dateien oder sogar Verzeichnisse davon auszunehmen das Sie
+                automatisch hinzugefügt werden. Hierfür kann man die Option
+                <property>ignore</property> verwenden welche 3 mögliche Verwendungen anbietet.
+            </para>
+
+            <sect4 id="zend.translate.additional.detection.ignore.string">
+                <title>Ein spezielles Verzeichnis oder eine Datei ignorieren</title>
+
+                <para>
+                    Standardmäßig ist <classname>Zend_Translate</classname> so gesetzt dass alle
+                    Dateien und Verzeichnisse welche mit <emphasis>'/.'</emphasis> beginnen
+                    ignoriert werden. Dies bedeutet dass <acronym>SVN</acronym> Dateien ignoriert
+                    werden.
+                </para>
+
+                <para>
+                    Man kann eine eigene Syntax setzen indem ein String für die Option
+                    <property>ignore</property> angegeben wird. Der Verzeichnis Separator wird
+                    automatisch angehängt wenn er nicht angegeben wurde.
+                </para>
+
+                <programlisting><![CDATA[
+$translate = new Zend_Translate(
+    array(
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'ignore'  => 'test'
+    )
+);
+]]></programlisting>
+
+                <para>
+                    Das obige Beispiel ignoriert alle Dateien und Verzeichnisse welche mit
+                    <emphasis>test</emphasis> beginnen. Das bedeutet zum Beispiel
+                    <filename>/test/en.mo</filename>, <filename>/testing/en.mo</filename> und
+                    <filename>/dir/test_en.mo</filename>. Aber es würde trotzdem
+                    <filename>/mytest/en.mo</filename> oder <filename>/dir/atest.mo</filename>
+                    hinzufügen.
+                </para>
+
+                <note>
+                    <title>Verhindern das SVN Dateien gesucht werden</title>
+
+                    <para>
+                        Wenn man diese Option setzt dann wird das Standardmäßige
+                        <emphasis>'/.'</emphasis> gelöscht. Dies bedeutet dass
+                        <classname>Zend_Translate</classname> dann alle Dateien von den versteckten
+                        <acronym>SVN</acronym> Verzeichnissen hinzugefügt werden. Wenn man mit
+                        <acronym>SVN</acronym> arbeitet, dann sollte man die Array Syntax verwenden
+                        welche im nächsten Abschnitt beschrieben wird.
+                    </para>
+                </note>
+            </sect4>
+
+            <sect4 id="zend.translate.additional.detection.ignore.array.files">
+                <title>Verschiedene Verzeichnisse oder Dateien ignorieren</title>
+
+                <para>
+                    Man kann auch verschiedene Dateien und Verzeichnisse ignorieren. Statt eines
+                    Strings muss man einfach ein Array mit den gewünschten Namen angeben welche
+                    ignoriert werden sollen.
+                </para>
+
+                <programlisting><![CDATA[
+$translate = new Zend_Translate(
+    array(
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'ignore'  => array('.', 'test', 'old')
+    )
+);
+]]></programlisting>
+
+                <para>
+                    Im obigen Fall werden alle 3 Syntax ignoriert. Aber trotzdem müssen Sie mit der
+                    Syntax beginnen um erkannt und ignoriert zu werden.
+                </para>
+            </sect4>
+
+            <sect4 id="zend.translate.additional.detection.ignore.array.names">
+                <title>Spezifische Namen ignorieren</title>
+
+                <para>
+                    Um Dateien und Verzeichnisse zu ignorieren welche nicht mit einer definierten
+                    Syntax beginnen, aber eine spezielle Syntax irgendwo in Ihrem Namen haben, kann
+                    man einen regulären Ausdruck verwenden.
+                </para>
+
+                <para>
+                    Um einen regulären Ausdruck zu verwenden muss der Array-Schlüssel der Option
+                    <property>ignore</property> mit <emphasis>regex</emphasis> beginnen.
+                </para>
+
+                <programlisting><![CDATA[
+$options = array('ignore' => array('regex' => '/test/u', 'regex_2' => '/deleted$/u'));
+$translate = new Zend_Translate(
+    array(
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'ignore'  => array('regex' => '/test/u', 'regex_2' => '/deleted$/u')
+    )
+);
+]]></programlisting>
+
+                <para>
+                    Im obigen Fall haben wir 2 reguläre Ausdrücke definiert. Die Dateien und
+                    Verzeichnisse werden immer mit allen angegebenen regulären Ausdrücken gesucht.
+                    In unserem Fall bedeutet dies dass jede Datei welche irgendwo in Ihrem Namen
+                    <emphasis>test</emphasis> enthält ignoriert wird. Zusätzlich werden alle Dateien
+                    und Verzeichnisse welche mit <emphasis>deleted</emphasis> enden nicht als
+                    Übersetzung hinzugefügt.
+                </para>
+            </sect4>
+        </sect3>
     </sect2>
 
     <sect2 id="zend.translate.additional.combination">
@@ -662,18 +842,22 @@ $translate = new Zend_Translate(
 
         <programlisting><![CDATA[
 $translate = new Zend_Translate(
-    'gettext',
-    '\path\to\translation.mo',
-    'en'
+    array(
+        'adapter' => 'gettext',
+        'content' => '\path\to\translation.mo',
+        'locale'  => 'en'
+    )
 );
 
 $translate_second = new Zend_Translate(
-    'array',
-    '\resources\languages\en\Zend_Validate.php',
-    'en'
+    array(
+        'adapter' => 'array',
+        'content' => '\resources\languages\en\Zend_Validate.php',
+        'locale'  => 'en'
+    )
 );
 
-$translate->addTranslation($translate_second);
+$translate->addTranslation(array('content' => $translate_second));
 ]]></programlisting>
 
         <para>
@@ -700,7 +884,12 @@ $translate->addTranslation($translate_second);
         </para>
 
         <programlisting><![CDATA[
-$translate->addTranslation($translate_second, 'en');
+$translate->addTranslation(
+    array(
+        'content' => $translate_second,
+        'locale' => 'en'
+    )
+);
 ]]></programlisting>
 
         <para>
@@ -740,7 +929,13 @@ $english = array(
     'message2' => 'Nachricht 2',
     'message3' => 'Nachricht 3');
 
-$translate = new Zend_Translate('array', $english, 'de_AT');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => $english,
+        'locale'  => 'de_AT'
+    )
+);
 
 if ($translate->isTranslated('message1')) {
     print "'message1' kann übersetzt werden";
@@ -778,7 +973,13 @@ if ($translate->isTranslated('message1', false, 'de')) {
             <title>Übersetzungen loggen</title>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('gettext', $path, 'de');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => $path,
+        'locale'  => 'de'
+    )
+);
 
 // Eine Log Instanz erstellen
 $writer = new Zend_Log_Writer_Stream('/path/to/file.log');
@@ -827,17 +1028,26 @@ $translate->translate('unbekannter String');
             <title>Selbstdefinierte Logmeldungen</title>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('gettext', $path, 'de');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => $path,
+        'locale'  => 'de'
+    )
+);
 
 // Eine Loginstanz erstellen
 $writer = new Zend_Log_Writer_Stream('/path/to/file.log');
 $log    = new Zend_Log($writer);
 
 // Diese der Übersetzungsinstanz hinzufügen
-$translate->setOptions(array(
-    'log'             => $log,
-    'logMessage'      => "Fehlende '%message%' im Gebietsschema '%locale%'",
-    'logUntranslated' => true));
+$translate->setOptions(
+    array(
+        'log'             => $log,
+        'logMessage'      => "'%message%' fehlt im Gebietsschema '%locale%'",
+        'logUntranslated' => true
+    )
+);
 
 $translate->translate('unknown string');
 ]]></programlisting>

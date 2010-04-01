@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21606 -->
+<!-- EN-Revision: 21661 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -375,7 +375,9 @@ $input->setOptions($options);
 
             <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate_Adapter_Array(array(
-    Zend_Filter_Input::MISSING_MESSAGE => "Wo ist das Feld?"
+    'content' => array(
+        Zend_Filter_Input::MISSING_MESSAGE => "Wo ist das Feld?"
+    )
 );
 
 $input = new Zend_Filter_Input($filters, $validators, $data);

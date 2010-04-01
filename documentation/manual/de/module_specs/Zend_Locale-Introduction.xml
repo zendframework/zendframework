@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21661 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.introduction">
     <title>Einführung</title>
@@ -14,11 +14,11 @@
     </para>
 
     <para>
-        Was wir benötigen ist <ulink url="http://en.wikipedia.org/wiki/L10n">Lokalisierung</ulink>
-        und die vergleichbare <ulink
-            url="http://en.wikipedia.org/wiki/L10n">Internationalisierung</ulink>. Beide werden oft
-        abgekürzt zu <code>L10n</code> und <code>I18n</code>. Internationalisierung bezeichnet mehr
-        die Benutzung von Systemen für die spezielle Benutzung durch eindeutige Gruppen wie zum
+        Was wir benötigen ist <ulink
+            url="http://en.wikipedia.org/wiki/Internationalization_and_localization">Lokalisierung
+            und die vergleichbare Internationalisierung</ulink>. Beide werden oft abgekürzt zu
+        <emphasis>L10n</emphasis> und <emphasis>I18n</emphasis>. Internationalisierung bezeichnet
+        mehr die Benutzung von Systemen für die spezielle Benutzung durch eindeutige Gruppen wie zum
         Beispiel Sprachübersetzung, Unterstützung von lokalen Konventionen für Plurale, Daten,
         Zeiten, Währungen, Namen, Symbolen, Sortierungen, Reihungen und viele mehr.
         <code>L10n</code> und <code>I18n</code> sind einander sehr ähnlich. Zend Framework bietet

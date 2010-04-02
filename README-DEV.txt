@@ -23,7 +23,7 @@ First pass
         [X] Zend_Date
         [X] Zend_Translate
         [X] Zend_TimeSync
-        [ ] Zend_Measure
+        [X] Zend_Measure
         [X] Zend_Currency
 
 Second pass:

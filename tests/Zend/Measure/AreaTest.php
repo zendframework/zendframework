@@ -21,12 +21,10 @@
  */
 
 /**
- * Zend_Measure_Area
+ * @namespace
  */
-
-/**
- * PHPUnit test case
- */
+namespace ZendTest\Measure;
+use Zend\Measure;
 
 /**
  * @category   Zend
@@ -36,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
-class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
+class AreaTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * test for area initialisation
@@ -44,8 +42,8 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaInit()
     {
-        $value = new Zend_Measure_Area('100',Zend_Measure_Area::STANDARD,'de');
-        $this->assertTrue($value instanceof Zend_Measure_Area,'Zend_Measure_Area Object not returned');
+        $value = new Measure\Area('100',Measure\Area::STANDARD,'de');
+        $this->assertTrue($value instanceof Measure\Area,'Zend\Measure\Area Object not returned');
     }
 
     /**
@@ -55,9 +53,9 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
     public function testAreaUnknownType()
     {
         try {
-            $value = new Zend_Measure_Area('100','Area::UNKNOWN','de');
+            $value = new Measure\Area('100','Area::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -69,9 +67,9 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
     public function testAreaUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Area('novalue',Zend_Measure_Area::STANDARD,'de');
+            $value = new Measure\Area('novalue',Measure\Area::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -83,9 +81,9 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
     public function testAreaUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Area('100',Zend_Measure_Area::STANDARD,'nolocale');
+            $value = new Measure\Area('100',Measure\Area::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -96,8 +94,8 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaNoLocale()
     {
-        $value = new Zend_Measure_Area('100',Zend_Measure_Area::STANDARD);
-        $this->assertEquals(100, $value->getValue(),'Zend_Measure_Area value expected');
+        $value = new Measure\Area('100',Measure\Area::STANDARD);
+        $this->assertEquals(100, $value->getValue(),'Zend\Measure\Area value expected');
     }
 
     /**
@@ -106,8 +104,8 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaValuePositive()
     {
-        $value = new Zend_Measure_Area('100',Zend_Measure_Area::STANDARD,'de');
-        $this->assertEquals(100, $value->getValue(), 'Zend_Measure_Area value expected to be a positive integer');
+        $value = new Measure\Area('100',Measure\Area::STANDARD,'de');
+        $this->assertEquals(100, $value->getValue(), 'Zend\Measure\Area value expected to be a positive integer');
     }
 
     /**
@@ -116,8 +114,8 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaValueNegative()
     {
-        $value = new Zend_Measure_Area('-100',Zend_Measure_Area::STANDARD,'de');
-        $this->assertEquals(-100, $value->getValue(), 'Zend_Measure_Area value expected to be a negative integer');
+        $value = new Measure\Area('-100',Measure\Area::STANDARD,'de');
+        $this->assertEquals(-100, $value->getValue(), 'Zend\Measure\Area value expected to be a negative integer');
     }
 
     /**
@@ -126,8 +124,8 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaValueDecimal()
     {
-        $value = new Zend_Measure_Area('-100,200',Zend_Measure_Area::STANDARD,'de');
-        $this->assertEquals(-100.200, $value->getValue(), 'Zend_Measure_Area value expected to be a decimal value');
+        $value = new Measure\Area('-100,200',Measure\Area::STANDARD,'de');
+        $this->assertEquals(-100.200, $value->getValue(), 'Zend\Measure\Area value expected to be a decimal value');
     }
 
     /**
@@ -136,8 +134,8 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaValueDecimalSeperated()
     {
-        $value = new Zend_Measure_Area('-100.100,200',Zend_Measure_Area::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Area Object not returned');
+        $value = new Measure\Area('-100.100,200',Measure\Area::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend\Measure\Area Object not returned');
     }
 
     /**
@@ -146,8 +144,8 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaValueString()
     {
-        $value = new Zend_Measure_Area('-100.100,200',Zend_Measure_Area::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Area Object not returned');
+        $value = new Measure\Area('-100.100,200',Measure\Area::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend\Measure\Area Object not returned');
     }
 
     /**
@@ -156,9 +154,9 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaEquality()
     {
-        $value = new Zend_Measure_Area('-100.100,200',Zend_Measure_Area::STANDARD,'de');
-        $newvalue = new Zend_Measure_Area('-100.100,200',Zend_Measure_Area::STANDARD,'de');
-        $this->assertTrue($value->equals($newvalue),'Zend_Measure_Area Object should be equal');
+        $value = new Measure\Area('-100.100,200',Measure\Area::STANDARD,'de');
+        $newvalue = new Measure\Area('-100.100,200',Measure\Area::STANDARD,'de');
+        $this->assertTrue($value->equals($newvalue),'Zend\Measure\Area Object should be equal');
     }
 
     /**
@@ -167,9 +165,9 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaNoEquality()
     {
-        $value = new Zend_Measure_Area('-100.100,200',Zend_Measure_Area::STANDARD,'de');
-        $newvalue = new Zend_Measure_Area('-100,200',Zend_Measure_Area::STANDARD,'de');
-        $this->assertFalse($value->equals($newvalue),'Zend_Measure_Area Object should be not equal');
+        $value = new Measure\Area('-100.100,200',Measure\Area::STANDARD,'de');
+        $newvalue = new Measure\Area('-100,200',Measure\Area::STANDARD,'de');
+        $this->assertFalse($value->equals($newvalue),'Zend\Measure\Area Object should be not equal');
     }
 
     /**
@@ -178,9 +176,9 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaSetPositive()
     {
-        $value = new Zend_Measure_Area('100',Zend_Measure_Area::STANDARD,'de');
-        $value->setValue('200',Zend_Measure_Area::STANDARD,'de');
-        $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Area value expected to be a positive integer');
+        $value = new Measure\Area('100',Measure\Area::STANDARD,'de');
+        $value->setValue('200',Measure\Area::STANDARD,'de');
+        $this->assertEquals(200, $value->getValue(), 'Zend\Measure\Area value expected to be a positive integer');
     }
 
     /**
@@ -189,9 +187,9 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaSetNegative()
     {
-        $value = new Zend_Measure_Area('-100',Zend_Measure_Area::STANDARD,'de');
-        $value->setValue('-200',Zend_Measure_Area::STANDARD,'de');
-        $this->assertEquals(-200, $value->getValue(), 'Zend_Measure_Area value expected to be a negative integer');
+        $value = new Measure\Area('-100',Measure\Area::STANDARD,'de');
+        $value->setValue('-200',Measure\Area::STANDARD,'de');
+        $this->assertEquals(-200, $value->getValue(), 'Zend\Measure\Area value expected to be a negative integer');
     }
 
     /**
@@ -200,9 +198,9 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaSetDecimal()
     {
-        $value = new Zend_Measure_Area('-100,200',Zend_Measure_Area::STANDARD,'de');
-        $value->setValue('-200,200',Zend_Measure_Area::STANDARD,'de');
-        $this->assertEquals(-200.200, $value->getValue(), 'Zend_Measure_Area value expected to be a decimal value');
+        $value = new Measure\Area('-100,200',Measure\Area::STANDARD,'de');
+        $value->setValue('-200,200',Measure\Area::STANDARD,'de');
+        $this->assertEquals(-200.200, $value->getValue(), 'Zend\Measure\Area value expected to be a decimal value');
     }
 
     /**
@@ -211,9 +209,9 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaSetDecimalSeperated()
     {
-        $value = new Zend_Measure_Area('-100.100,200',Zend_Measure_Area::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Area::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Area Object not returned');
+        $value = new Measure\Area('-100.100,200',Measure\Area::STANDARD,'de');
+        $value->setValue('-200.200,200',Measure\Area::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend\Measure\Area Object not returned');
     }
 
     /**
@@ -222,9 +220,9 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaSetString()
     {
-        $value = new Zend_Measure_Area('-100.100,200',Zend_Measure_Area::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Area::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Area Object not returned');
+        $value = new Measure\Area('-100.100,200',Measure\Area::STANDARD,'de');
+        $value->setValue('-200.200,200',Measure\Area::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend\Measure\Area Object not returned');
     }
 
     /**
@@ -234,10 +232,10 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
     public function testAreaSetUnknownType()
     {
         try {
-            $value = new Zend_Measure_Area('100',Zend_Measure_Area::STANDARD,'de');
+            $value = new Measure\Area('100',Measure\Area::STANDARD,'de');
             $value->setValue('-200.200,200','Area::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -249,10 +247,10 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
     public function testAreaSetUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Area('100',Zend_Measure_Area::STANDARD,'de');
-            $value->setValue('novalue',Zend_Measure_Area::STANDARD,'de');
+            $value = new Measure\Area('100',Measure\Area::STANDARD,'de');
+            $value->setValue('novalue',Measure\Area::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -264,10 +262,10 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
     public function testAreaSetUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Area('100',Zend_Measure_Area::STANDARD,'de');
-            $value->setValue('200',Zend_Measure_Area::STANDARD,'nolocale');
+            $value = new Measure\Area('100',Measure\Area::STANDARD,'de');
+            $value->setValue('200',Measure\Area::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -278,9 +276,9 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaSetWithNoLocale()
     {
-        $value = new Zend_Measure_Area('100', Zend_Measure_Area::STANDARD, 'de');
-        $value->setValue('200', Zend_Measure_Area::STANDARD);
-        $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Area value expected to be a positive integer');
+        $value = new Measure\Area('100', Measure\Area::STANDARD, 'de');
+        $value->setValue('200', Measure\Area::STANDARD);
+        $this->assertEquals(200, $value->getValue(), 'Zend\Measure\Area value expected to be a positive integer');
     }
 
     /**
@@ -289,9 +287,9 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaSetType()
     {
-        $value = new Zend_Measure_Area('-100',Zend_Measure_Area::STANDARD,'de');
-        $value->setType(Zend_Measure_Area::MORGEN);
-        $this->assertEquals(Zend_Measure_Area::MORGEN, $value->getType(), 'Zend_Measure_Area type expected');
+        $value = new Measure\Area('-100',Measure\Area::STANDARD,'de');
+        $value->setType(Measure\Area::MORGEN);
+        $this->assertEquals(Measure\Area::MORGEN, $value->getType(), 'Zend\Measure\Area type expected');
     }
 
     /**
@@ -300,9 +298,9 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaSetComputedType1()
     {
-        $value = new Zend_Measure_Area('-100',Zend_Measure_Area::SQUARE_MILE,'de');
-        $value->setType(Zend_Measure_Area::SQUARE_INCH);
-        $this->assertEquals(Zend_Measure_Area::SQUARE_INCH, $value->getType(), 'Zend_Measure_Area type expected');
+        $value = new Measure\Area('-100',Measure\Area::SQUARE_MILE,'de');
+        $value->setType(Measure\Area::SQUARE_INCH);
+        $this->assertEquals(Measure\Area::SQUARE_INCH, $value->getType(), 'Zend\Measure\Area type expected');
     }
 
     /**
@@ -311,9 +309,9 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaSetComputedType2()
     {
-        $value = new Zend_Measure_Area('-100',Zend_Measure_Area::SQUARE_INCH,'de');
-        $value->setType(Zend_Measure_Area::SQUARE_MILE);
-        $this->assertEquals(Zend_Measure_Area::SQUARE_MILE, $value->getType(), 'Zend_Measure_Area type expected');
+        $value = new Measure\Area('-100',Measure\Area::SQUARE_INCH,'de');
+        $value->setType(Measure\Area::SQUARE_MILE);
+        $this->assertEquals(Measure\Area::SQUARE_MILE, $value->getType(), 'Zend\Measure\Area type expected');
     }
 
     /**
@@ -323,10 +321,10 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
     public function testAreaSetTypeFailed()
     {
         try {
-            $value = new Zend_Measure_Area('-100',Zend_Measure_Area::STANDARD,'de');
+            $value = new Measure\Area('-100',Measure\Area::STANDARD,'de');
             $value->setType('Area::UNKNOWN');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -337,7 +335,7 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaToString()
     {
-        $value = new Zend_Measure_Area('-100',Zend_Measure_Area::STANDARD,'de');
+        $value = new Measure\Area('-100',Measure\Area::STANDARD,'de');
         $this->assertEquals('-100 m²', $value->toString(), 'Value -100 m² expected');
     }
 
@@ -347,7 +345,7 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testArea_ToString()
     {
-        $value = new Zend_Measure_Area('-100',Zend_Measure_Area::STANDARD,'de');
+        $value = new Measure\Area('-100',Measure\Area::STANDARD,'de');
         $this->assertEquals('-100 m²', $value->__toString(), 'Value -100 m² expected');
     }
 
@@ -357,7 +355,7 @@ class Zend_Measure_AreaTest extends PHPUnit_Framework_TestCase
      */
     public function testAreaConversionList()
     {
-        $value = new Zend_Measure_Area('-100',Zend_Measure_Area::STANDARD,'de');
+        $value = new Measure\Area('-100',Measure\Area::STANDARD,'de');
         $unit  = $value->getConversionList();
         $this->assertTrue(is_array($unit), 'Array expected');
     }

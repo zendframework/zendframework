@@ -20,14 +20,11 @@
  * @version    $Id$
  */
 
-
 /**
- * Zend_Measure_Angle
+ * @namespace
  */
-
-/**
- * PHPUnit test case
- */
+namespace ZendTest\Measure;
+use Zend\Measure;
 
 /**
  * @category   Zend
@@ -37,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
-class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
+class AngleTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * test for Angle initialisation
@@ -45,8 +42,8 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleInit()
     {
-        $value = new Zend_Measure_Angle('100',Zend_Measure_Angle::STANDARD,'de');
-        $this->assertTrue($value instanceof Zend_Measure_Angle,'Zend_Measure_Angle Object not returned');
+        $value = new Measure\Angle('100',Measure\Angle::STANDARD,'de');
+        $this->assertTrue($value instanceof Measure\Angle,'Zend\Measure\Angle Object not returned');
     }
 
 
@@ -57,9 +54,9 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
     public function testAngleUnknownType()
     {
         try {
-            $value = new Zend_Measure_Angle('100','Angle::UNKNOWN','de');
+            $value = new Measure\Angle('100','Angle::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -72,9 +69,9 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
     public function testAngleUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Angle('novalue',Zend_Measure_Angle::STANDARD,'de');
+            $value = new Measure\Angle('novalue',Measure\Angle::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -87,9 +84,9 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
     public function testAngleUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Angle('100',Zend_Measure_Angle::STANDARD,'nolocale');
+            $value = new Measure\Angle('100',Measure\Angle::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -101,8 +98,8 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleNoLocale()
     {
-        $value = new Zend_Measure_Angle('100',Zend_Measure_Angle::STANDARD);
-        $this->assertEquals(100, $value->getValue(),'Zend_Measure_Angle value expected');
+        $value = new Measure\Angle('100',Measure\Angle::STANDARD);
+        $this->assertEquals(100, $value->getValue(),'Zend\Measure\Angle value expected');
     }
 
 
@@ -112,8 +109,8 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleValuePositive()
     {
-        $value = new Zend_Measure_Angle('100',Zend_Measure_Angle::STANDARD,'de');
-        $this->assertEquals(100, $value->getValue(), 'Zend_Measure_Angle value expected to be a positive integer');
+        $value = new Measure\Angle('100',Measure\Angle::STANDARD,'de');
+        $this->assertEquals(100, $value->getValue(), 'Zend\Measure\Angle value expected to be a positive integer');
     }
 
 
@@ -123,8 +120,8 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleValueNegative()
     {
-        $value = new Zend_Measure_Angle('-100',Zend_Measure_Angle::STANDARD,'de');
-        $this->assertEquals(-100, $value->getValue(), 'Zend_Measure_Angle value expected to be a negative integer');
+        $value = new Measure\Angle('-100',Measure\Angle::STANDARD,'de');
+        $this->assertEquals(-100, $value->getValue(), 'Zend\Measure\Angle value expected to be a negative integer');
     }
 
 
@@ -134,8 +131,8 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleValueDecimal()
     {
-        $value = new Zend_Measure_Angle('-100,200',Zend_Measure_Angle::STANDARD,'de');
-        $this->assertEquals(-100.200, $value->getValue(), 'Zend_Measure_Angle value expected to be a decimal value');
+        $value = new Measure\Angle('-100,200',Measure\Angle::STANDARD,'de');
+        $this->assertEquals(-100.200, $value->getValue(), 'Zend\Measure\Angle value expected to be a decimal value');
     }
 
 
@@ -145,8 +142,8 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleValueDecimalSeperated()
     {
-        $value = new Zend_Measure_Angle('-100.100,200',Zend_Measure_Angle::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Angle Object not returned');
+        $value = new Measure\Angle('-100.100,200',Measure\Angle::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend\Measure\Angle Object not returned');
     }
 
 
@@ -156,8 +153,8 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleValueString()
     {
-        $value = new Zend_Measure_Angle('-100.100,200',Zend_Measure_Angle::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Angle Object not returned');
+        $value = new Measure\Angle('-100.100,200',Measure\Angle::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend\Measure\Angle Object not returned');
     }
 
 
@@ -167,9 +164,9 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleEquality()
     {
-        $value = new Zend_Measure_Angle('-100.100,200',Zend_Measure_Angle::STANDARD,'de');
-        $newvalue = new Zend_Measure_Angle('-100.100,200',Zend_Measure_Angle::STANDARD,'de');
-        $this->assertTrue($value->equals($newvalue),'Zend_Measure_Angle Object should be equal');
+        $value = new Measure\Angle('-100.100,200',Measure\Angle::STANDARD,'de');
+        $newvalue = new Measure\Angle('-100.100,200',Measure\Angle::STANDARD,'de');
+        $this->assertTrue($value->equals($newvalue),'Zend\Measure\Angle Object should be equal');
     }
 
 
@@ -179,9 +176,9 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleNoEquality()
     {
-        $value = new Zend_Measure_Angle('-100.100,200',Zend_Measure_Angle::STANDARD,'de');
-        $newvalue = new Zend_Measure_Angle('-100,200',Zend_Measure_Angle::STANDARD,'de');
-        $this->assertFalse($value->equals($newvalue),'Zend_Measure_Angle Object should be not equal');
+        $value = new Measure\Angle('-100.100,200',Measure\Angle::STANDARD,'de');
+        $newvalue = new Measure\Angle('-100,200',Measure\Angle::STANDARD,'de');
+        $this->assertFalse($value->equals($newvalue),'Zend\Measure\Angle Object should be not equal');
     }
 
 
@@ -191,9 +188,9 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleSetPositive()
     {
-        $value = new Zend_Measure_Angle('100',Zend_Measure_Angle::STANDARD,'de');
-        $value->setValue('200',Zend_Measure_Angle::STANDARD,'de');
-        $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Angle value expected to be a positive integer');
+        $value = new Measure\Angle('100',Measure\Angle::STANDARD,'de');
+        $value->setValue('200',Measure\Angle::STANDARD,'de');
+        $this->assertEquals(200, $value->getValue(), 'Zend\Measure\Angle value expected to be a positive integer');
     }
 
 
@@ -203,9 +200,9 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleSetNegative()
     {
-        $value = new Zend_Measure_Angle('-100',Zend_Measure_Angle::STANDARD,'de');
-        $value->setValue('-200',Zend_Measure_Angle::STANDARD,'de');
-        $this->assertEquals(-200, $value->getValue(), 'Zend_Measure_Angle value expected to be a negative integer');
+        $value = new Measure\Angle('-100',Measure\Angle::STANDARD,'de');
+        $value->setValue('-200',Measure\Angle::STANDARD,'de');
+        $this->assertEquals(-200, $value->getValue(), 'Zend\Measure\Angle value expected to be a negative integer');
     }
 
 
@@ -215,9 +212,9 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleSetDecimal()
     {
-        $value = new Zend_Measure_Angle('-100,200',Zend_Measure_Angle::STANDARD,'de');
-        $value->setValue('-200,200',Zend_Measure_Angle::STANDARD,'de');
-        $this->assertEquals(-200.200, $value->getValue(), 'Zend_Measure_Angle value expected to be a decimal value');
+        $value = new Measure\Angle('-100,200',Measure\Angle::STANDARD,'de');
+        $value->setValue('-200,200',Measure\Angle::STANDARD,'de');
+        $this->assertEquals(-200.200, $value->getValue(), 'Zend\Measure\Angle value expected to be a decimal value');
     }
 
 
@@ -227,9 +224,9 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleSetDecimalSeperated()
     {
-        $value = new Zend_Measure_Angle('-100.100,200',Zend_Measure_Angle::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Angle::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Angle Object not returned');
+        $value = new Measure\Angle('-100.100,200',Measure\Angle::STANDARD,'de');
+        $value->setValue('-200.200,200',Measure\Angle::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend\Measure\Angle Object not returned');
     }
 
 
@@ -239,9 +236,9 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleSetString()
     {
-        $value = new Zend_Measure_Angle('-100.100,200',Zend_Measure_Angle::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Angle::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Angle Object not returned');
+        $value = new Measure\Angle('-100.100,200',Measure\Angle::STANDARD,'de');
+        $value->setValue('-200.200,200',Measure\Angle::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend\Measure\Angle Object not returned');
     }
 
 
@@ -252,10 +249,10 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
     public function testAngleSetUnknownType()
     {
         try {
-            $value = new Zend_Measure_Angle('100',Zend_Measure_Angle::STANDARD,'de');
+            $value = new Measure\Angle('100',Measure\Angle::STANDARD,'de');
             $value->setValue('-200.200,200','Angle::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -268,10 +265,10 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
     public function testAngleSetUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Angle('100',Zend_Measure_Angle::STANDARD,'de');
-            $value->setValue('novalue',Zend_Measure_Angle::STANDARD,'de');
+            $value = new Measure\Angle('100',Measure\Angle::STANDARD,'de');
+            $value->setValue('novalue',Measure\Angle::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -284,10 +281,10 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
     public function testAngleSetUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Angle('100',Zend_Measure_Angle::STANDARD,'de');
-            $value->setValue('200',Zend_Measure_Angle::STANDARD,'nolocale');
+            $value = new Measure\Angle('100',Measure\Angle::STANDARD,'de');
+            $value->setValue('200',Measure\Angle::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -299,9 +296,9 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleSetWithNoLocale()
     {
-        $value = new Zend_Measure_Angle('100', Zend_Measure_Angle::STANDARD, 'de');
-        $value->setValue('200', Zend_Measure_Angle::STANDARD);
-        $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Angle value expected to be a positive integer');
+        $value = new Measure\Angle('100', Measure\Angle::STANDARD, 'de');
+        $value->setValue('200', Measure\Angle::STANDARD);
+        $this->assertEquals(200, $value->getValue(), 'Zend\Measure\Angle value expected to be a positive integer');
     }
 
 
@@ -311,9 +308,9 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleSetType()
     {
-        $value = new Zend_Measure_Angle('-100',Zend_Measure_Angle::STANDARD,'de');
-        $value->setType(Zend_Measure_Angle::GRAD);
-        $this->assertEquals(Zend_Measure_Angle::GRAD, $value->getType(), 'Zend_Measure_Angle type expected');
+        $value = new Measure\Angle('-100',Measure\Angle::STANDARD,'de');
+        $value->setType(Measure\Angle::GRAD);
+        $this->assertEquals(Measure\Angle::GRAD, $value->getType(), 'Zend\Measure\Angle type expected');
     }
 
 
@@ -323,9 +320,9 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleSetComputedType1()
     {
-        $value = new Zend_Measure_Angle('-100',Zend_Measure_Angle::RADIAN,'de');
-        $value->setType(Zend_Measure_Angle::MINUTE);
-        $this->assertEquals(Zend_Measure_Angle::MINUTE, $value->getType(), 'Zend_Measure_Angle type expected');
+        $value = new Measure\Angle('-100',Measure\Angle::RADIAN,'de');
+        $value->setType(Measure\Angle::MINUTE);
+        $this->assertEquals(Measure\Angle::MINUTE, $value->getType(), 'Zend\Measure\Angle type expected');
     }
 
 
@@ -335,9 +332,9 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleSetComputedType2()
     {
-        $value = new Zend_Measure_Angle('-100',Zend_Measure_Angle::MINUTE,'de');
-        $value->setType(Zend_Measure_Angle::RADIAN);
-        $this->assertEquals(Zend_Measure_Angle::RADIAN, $value->getType(), 'Zend_Measure_Angle type expected');
+        $value = new Measure\Angle('-100',Measure\Angle::MINUTE,'de');
+        $value->setType(Measure\Angle::RADIAN);
+        $this->assertEquals(Measure\Angle::RADIAN, $value->getType(), 'Zend\Measure\Angle type expected');
     }
 
 
@@ -348,10 +345,10 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
     public function testAngleSetTypeFailed()
     {
         try {
-            $value = new Zend_Measure_Angle('-100',Zend_Measure_Angle::STANDARD,'de');
+            $value = new Measure\Angle('-100',Measure\Angle::STANDARD,'de');
             $value->setType('Angle::UNKNOWN');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -363,7 +360,7 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleToString()
     {
-        $value = new Zend_Measure_Angle('-100',Zend_Measure_Angle::STANDARD,'de');
+        $value = new Measure\Angle('-100',Measure\Angle::STANDARD,'de');
         $this->assertEquals('-100 rad', $value->toString(), 'Value -100 rad expected');
     }
 
@@ -374,7 +371,7 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngle_ToString()
     {
-        $value = new Zend_Measure_Angle('-100',Zend_Measure_Angle::STANDARD,'de');
+        $value = new Measure\Angle('-100',Measure\Angle::STANDARD,'de');
         $this->assertEquals('-100 rad', $value->__toString(), 'Value -100 rad expected');
     }
 
@@ -385,7 +382,7 @@ class Zend_Measure_AngleTest extends PHPUnit_Framework_TestCase
      */
     public function testAngleConversionList()
     {
-        $value = new Zend_Measure_Angle('-100',Zend_Measure_Angle::STANDARD,'de');
+        $value = new Measure\Angle('-100',Measure\Angle::STANDARD,'de');
         $unit  = $value->getConversionList();
         $this->assertTrue(is_array($unit), 'Array expected');
     }

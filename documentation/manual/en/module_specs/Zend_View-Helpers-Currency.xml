@@ -6,7 +6,7 @@
     <para>
         Displaying localized currency values is a common task; the
         <classname>Zend_Currency</classname> view helper is intended to simply this task.  See the
-        <link linkend="zend.currency.introduction">Zend Currency documentation</link> for specifics
+        <link linkend="zend.currency.introduction">Zend_Currency documentation</link> for specifics
         on this localization feature. In this section, we will focus simply on usage of the view
         helper.
     </para>

@@ -27,7 +27,7 @@ print "Here is line two\n";
     </para>
 
     <para>
-        The next step is to integrate Zend Translate into your existing code.
+        The next step is to integrate <classname>Zend_Translate</classname> into your existing code.
         Of course it is much easier if you had already written your code with
         translation in mind, than changing your code afterwards.
     </para>

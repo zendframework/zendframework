@@ -420,10 +420,10 @@ C:\WAMP\PHP\bin
             </para>
 
             <sect4 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading">
-                <title>How Zend Tool finds your Providers</title>
+                <title>How Zend_Tool finds your Providers</title>
 
                 <para>
-                    By default Zend Tool uses the BasicLoader to find all
+                    By default <classname>Zend_Tool</classname> uses the BasicLoader to find all
                     the providers that you can run. It recursivly iterates all
                     include path directories and opens all files that end
                     with "Manifest.php" or "Provider.php". All classes in these
@@ -479,8 +479,8 @@ C:\WAMP\PHP\bin
                     <title>Exposing Your Providers with a Manifest</title>
 
                     <para>
-                        You can expose your providers to Zend Tool by offering a manifest
-                        with a special filename ending with "Manifest.php".
+                        You can expose your providers to <classname>Zend_Tool</classname> by
+                        offering a manifest with a special filename ending with "Manifest.php".
                         A Provider Manifest is an implementation of the
                         <interface>Zend_Tool_Framework_Manifest_ProviderManifestable</interface>
                         and requires the <methodname>getProviders()</methodname> method to return
@@ -546,11 +546,12 @@ Hello from my provider!
                 <title>The response object</title>
 
                 <para>
-                    As discussed in the architecture section Zend Tool allows to hook different
-                    clients for using your Zend Tool providers. To keep compliant with different
-                    clients you should use the response object to return messages from your
-                    providers instead of using <methodname>echo()</methodname> or a similiar output
-                    mechanism. Rewritting our hello provider with this knowledge it looks like:
+                    As discussed in the architecture section <classname>Zend_Tool</classname> allows
+                    to hook different clients for using your <classname>Zend_Tool</classname>
+                    providers. To keep compliant with different clients you should use the response
+                    object to return messages from your providers instead of using
+                    <methodname>echo()</methodname> or a similiar output mechanism. Rewritting our
+                    hello provider with this knowledge it looks like:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -736,8 +737,8 @@ class My_Component_HelloProvider
                     <para>
                         Using the Enviroment variable <property>ZF_CONFIG_FILE</property> or the
                         .zf.ini in your home directory you can inject configuration parameters into
-                        any Zend Tool provider. Access to this configuration is available via the
-                        registry that is passed to your provider if you extend
+                        any <classname>Zend_Tool</classname> provider. Access to this configuration
+                        is available via the registry that is passed to your provider if you extend
                         <classname>Zend_Tool_Framework_Provider_Abstract</classname>.
                     </para>
 

@@ -6,8 +6,8 @@
     <para>
         Often web sites are available in several languages. To translate the
         content of a site you should simply use <link
-            linkend="zend.translate.introduction">Zend Translate</link> and to
-        integrate <classname>Zend Translate</classname> within your view you should use
+            linkend="zend.translate.introduction">Zend_Translate</link> and to
+        integrate <classname>Zend_Translate</classname> within your view you should use
         the <emphasis>Translate</emphasis> View Helper.
     </para>
 

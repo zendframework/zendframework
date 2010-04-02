@@ -42,11 +42,11 @@ Fourth pass:
 THE FOLLOWING IN ANY ORDER (except where indicated):
 [ ] Zend_Json
 [ ] Zend_Crypt -> [ ] Zend_Oauth, [ ] Zend_XmlRpc
-[ ] Zend_Acl
+[X] Zend_Acl
 [ ] Zend_Reflection
 [ ] Zend_CodeGenerator
-[ ] Zend_Console
-[ ] Zend_Dom
+[ ] Zend_Console (Matthew)
+[ ] Zend_Dom (Matthew)
 [ ] Zend_Gdata
 [ ] Zend_InfoCard
 [ ] Zend_Ldap

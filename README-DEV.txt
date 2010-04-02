@@ -45,7 +45,7 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 [X] Zend_Acl
 [ ] Zend_Reflection
 [ ] Zend_CodeGenerator
-[ ] Zend_Console (Matthew)
+[X] Zend_Console
 [ ] Zend_Dom (Matthew)
 [ ] Zend_Gdata
 [ ] Zend_InfoCard

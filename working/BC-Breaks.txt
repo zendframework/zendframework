@@ -99,3 +99,6 @@ Zend_Acl
    * "remove()" renamed to "removeResource()"
    * "removeAll()" renamed to "removeResourceAll()"
    * Removed "getRegisteredResources()" method (marked as deprecated)
+
+Zend_Console
+ * "Zend_Console_Getopt_Exception" becomes "Zend\Console\GetoptException"

@@ -1411,18 +1411,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Console/Getopt/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Console_Getopt_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Console/Getopt/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Console\Getopt</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Console\Getopt\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Console/GetoptException.php</newRelativeFilePath>
+      <newNamespace>Zend\Console</newNamespace>
+      <newClassName>GetoptException</newClassName>
+      <newFullyQualifiedName>Zend\Console\GetoptException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Console/Getopt.php</originalRelativeFilePath>
       <originalClassName>Zend_Console_Getopt</originalClassName>
-      <newRelativeFilePath>Zend/Console/Getopt/Getopt.php</newRelativeFilePath>
-      <newNamespace>Zend\Console\Getopt</newNamespace>
+      <newRelativeFilePath>Zend/Console/Getopt.php</newRelativeFilePath>
+      <newNamespace>Zend\Console</newNamespace>
       <newClassName>Getopt</newClassName>
-      <newFullyQualifiedName>Zend\Console\Getopt\Getopt</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Console\Getopt</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/Exception.php</originalRelativeFilePath>

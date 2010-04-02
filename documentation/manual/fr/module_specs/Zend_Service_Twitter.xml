@@ -718,7 +718,11 @@ $response2 = $twitter->block->blocking(2, true);
             </listitem>
         </itemizedlist>
     </sect2>
-    <xi:include href="Zend_Service_Twitter_Search.xml" />
+    <xi:include href="Zend_Service_Twitter_Search.xml">
+        <xi:fallback>
+            <xi:include href="../../en/module_specs/Zend_Service_Twitter_Search.xml" />
+        </xi:fallback>
+    </xi:include>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

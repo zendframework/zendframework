@@ -20,29 +20,57 @@
  */
 
 /**
- * @uses       Zend_Acl
- * @uses       Zend_Acl_Resource_Interface
- * @uses       Zend_Acl_Role_Interface
+ * @namespace
+ */
+namespace Zend\Acl\Role;
+
+use Zend\Acl\Role;
+
+/**
+ * @uses       Zend\Acl\Role
  * @category   Zend
  * @package    Zend_Acl
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Acl_Assert_Interface
+class GenericRole implements Role
 {
     /**
-     * Returns true if and only if the assertion conditions are met
+     * Unique id of Role
      *
-     * This method is passed the ACL, Role, Resource, and privilege to which the authorization query applies. If the
-     * $role, $resource, or $privilege parameters are null, it means that the query applies to all Roles, Resources, or
-     * privileges, respectively.
-     *
-     * @param  Zend_Acl                    $acl
-     * @param  Zend_Acl_Role_Interface     $role
-     * @param  Zend_Acl_Resource_Interface $resource
-     * @param  string                      $privilege
-     * @return boolean
+     * @var string
      */
-    public function assert(Zend_Acl $acl, Zend_Acl_Role_Interface $role = null, Zend_Acl_Resource_Interface $resource = null,
-                           $privilege = null);
+    protected $_roleId;
+
+    /**
+     * Sets the Role identifier
+     *
+     * @param  string $id
+     * @return void
+     */
+    public function __construct($roleId)
+    {
+        $this->_roleId = (string) $roleId;
+    }
+
+    /**
+     * Defined by Zend\Acl\Role; returns the Role identifier
+     *
+     * @return string
+     */
+    public function getRoleId()
+    {
+        return $this->_roleId;
+    }
+
+    /**
+     * Defined by Zend\Acl\Role; returns the Role identifier
+     * Proxies to getRoleId()
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getRoleId();
+    }
 }

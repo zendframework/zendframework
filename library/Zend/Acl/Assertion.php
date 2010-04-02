@@ -20,11 +20,33 @@
  */
 
 /**
- * @uses       Zend_Acl_Exception
+ * @namespace
+ */
+namespace Zend\Acl;
+
+/**
+ * @uses       Zend\Acl\Acl
+ * @uses       Zend\Acl\Resource
+ * @uses       Zend\Acl\Role
  * @category   Zend
  * @package    Zend_Acl
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Acl_Role_Registry_Exception extends Zend_Acl_Exception
-{}
+interface Assertion
+{
+    /**
+     * Returns true if and only if the assertion conditions are met
+     *
+     * This method is passed the ACL, Role, Resource, and privilege to which the authorization query applies. If the
+     * $role, $resource, or $privilege parameters are null, it means that the query applies to all Roles, Resources, or
+     * privileges, respectively.
+     *
+     * @param  Zend\Acl\Acl      $acl
+     * @param  Zend\Acl\Role     $role
+     * @param  Zend\Acl\Resource $resource
+     * @param  string            $privilege
+     * @return boolean
+     */
+    public function assert(Acl $acl, Role $role = null, Resource $resource = null, $privilege = null);
+}

@@ -84,3 +84,18 @@ Zend_Translate
  * "Zend_Translate" becomes "Zend\Translator\Translator"
  * "Zend\Translator\Adapter\Array" renamed to "Zend\Translator\Adapter\ArrayAdapter"
  * Translation adapter interface is now "Zend\Translate\Adapter"
+
+Zend_Acl
+ * "Zend_Acl_Role_Interface" becomes "Zend\Acl\Role"
+ * "Zend_Acl_Role" becomes "Zend\Acl\Role\GenericRole"
+ * "Zend_Acl_Resource_Interface" becomes "Zend\Acl\Resource"
+ * "Zend_Acl_Resource" becomes "Zend\Acl\Resource\GenericResource"
+ * "Zend_Acl_Assert_Interface" becomes "Zend\Acl\Assertion"
+ * Acl class:
+   * "add()" removed
+   * "get()" renamed to "getResource()"
+   * "has()" renamed to "hasResource()"
+   * "inherits()" renamed to "resourceInherits()"
+   * "remove()" renamed to "removeResource()"
+   * "removeAll()" renamed to "removeResourceAll()"
+   * Removed "getRegisteredResources()" method (marked as deprecated)

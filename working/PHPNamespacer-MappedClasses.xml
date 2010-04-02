@@ -3,10 +3,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Assert/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Acl_Assert_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Acl/Assert/AssertInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Acl\Assert</newNamespace>
-      <newClassName>AssertInterface</newClassName>
-      <newFullyQualifiedName>Zend\Acl\Assert\AssertInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Acl/Assertion.php</newRelativeFilePath>
+      <newNamespace>Zend\Acl</newNamespace>
+      <newClassName>Assertion</newClassName>
+      <newFullyQualifiedName>Zend\Acl\Assertion</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Exception.php</originalRelativeFilePath>
@@ -19,50 +19,50 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Resource/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Acl_Resource_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Acl/Resource/ResourceInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Acl\Resource</newNamespace>
-      <newClassName>ResourceInterface</newClassName>
-      <newFullyQualifiedName>Zend\Acl\Resource\ResourceInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Acl/Resource.php</newRelativeFilePath>
+      <newNamespace>Zend\Acl</newNamespace>
+      <newClassName>Resource</newClassName>
+      <newFullyQualifiedName>Zend\Acl\Resource</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Resource.php</originalRelativeFilePath>
       <originalClassName>Zend_Acl_Resource</originalClassName>
-      <newRelativeFilePath>Zend/Acl/Resource/Resource.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Acl/Resource/GenericResource.php</newRelativeFilePath>
       <newNamespace>Zend\Acl\Resource</newNamespace>
-      <newClassName>Resource</newClassName>
-      <newFullyQualifiedName>Zend\Acl\Resource\Resource</newFullyQualifiedName>
+      <newClassName>GenericResource</newClassName>
+      <newFullyQualifiedName>Zend\Acl\Resource\GenericResource</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Role/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Acl_Role_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Acl/Role/RoleInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Acl\Role</newNamespace>
-      <newClassName>RoleInterface</newClassName>
-      <newFullyQualifiedName>Zend\Acl\Role\RoleInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Acl/Role.php</newRelativeFilePath>
+      <newNamespace>Zend\Acl</newNamespace>
+      <newClassName>Role</newClassName>
+      <newFullyQualifiedName>Zend\Acl\Role</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Role/Registry/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Acl_Role_Registry_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Acl/Role/Registry/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Acl\Role\Registry</newNamespace>
+      <newRelativeFilePath>Zend/Acl/Role/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\Acl\Role</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Acl\Role\Registry\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Acl\Role\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Role/Registry.php</originalRelativeFilePath>
       <originalClassName>Zend_Acl_Role_Registry</originalClassName>
-      <newRelativeFilePath>Zend/Acl/Role/Registry/Registry.php</newRelativeFilePath>
-      <newNamespace>Zend\Acl\Role\Registry</newNamespace>
+      <newRelativeFilePath>Zend/Acl/Role/Registry.php</newRelativeFilePath>
+      <newNamespace>Zend\Acl\Role</newNamespace>
       <newClassName>Registry</newClassName>
-      <newFullyQualifiedName>Zend\Acl\Role\Registry\Registry</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Acl\Role\Registry</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Role.php</originalRelativeFilePath>
       <originalClassName>Zend_Acl_Role</originalClassName>
-      <newRelativeFilePath>Zend/Acl/Role/Role.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Acl/Role/GenericRole.php</newRelativeFilePath>
       <newNamespace>Zend\Acl\Role</newNamespace>
-      <newClassName>Role</newClassName>
-      <newFullyQualifiedName>Zend\Acl\Role\Role</newFullyQualifiedName>
+      <newClassName>GenericRole</newClassName>
+      <newFullyQualifiedName>Zend\Acl\Role\GenericRole</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl.php</originalRelativeFilePath>

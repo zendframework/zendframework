@@ -8,7 +8,7 @@ if (!$component) {
 
 $path       = realpath(__DIR__ . '/../tests/Zend/' . $component . '/');
 $tests_path = realpath(__DIR__ . '/../tests/');
-$output     = __DIR__ . '/tmp';
+$output     = __DIR__ . '/tmp/tests';
 
 if (!is_dir($output)) {
     echo "Attempting to create output directory '$output'\n";

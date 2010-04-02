@@ -19,7 +19,12 @@
  */
 
 /**
- * Results for DOM XPath query
+ * @namespace
+ */
+namespace Zend\Dom;
+
+/**
+ * Nodelist for DOM XPath query
  *
  * @uses       Iterator
  * @uses       Countable
@@ -29,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Dom_Query_Result implements Iterator,Countable
+class NodeList implements \Iterator,\Countable
 {
     /**
      * Number of results
@@ -79,7 +84,7 @@ class Zend_Dom_Query_Result implements Iterator,Countable
      * @param  DOMNodeList $nodeList
      * @return void
      */
-    public function  __construct($cssQuery, $xpathQuery, DOMDocument $document, DOMNodeList $nodeList)
+    public function  __construct($cssQuery, $xpathQuery, \DOMDocument $document, \DOMNodeList $nodeList)
     {
         $this->_cssQuery   = $cssQuery;
         $this->_xpathQuery = $xpathQuery;

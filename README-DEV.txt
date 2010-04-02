@@ -2,7 +2,7 @@ During the namespace conversion, do the following:
 
  % cd working
  % php ../tools/phptools/bin/php-namespacer.php \
- > -m./ -l=../library/ -p=Zend -o=./output -d=Zend/<component name>
+ > -m./ -l=../library/ -p=Zend -o=./tmp/library -d=Zend/<component name>
 
 Check the changes, and merge them into the trunk. Then make the unit
 tests pass.
@@ -46,7 +46,7 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 [ ] Zend_Reflection
 [ ] Zend_CodeGenerator
 [X] Zend_Console
-[ ] Zend_Dom (Matthew)
+[X] Zend_Dom
 [ ] Zend_Gdata
 [ ] Zend_InfoCard
 [ ] Zend_Ldap

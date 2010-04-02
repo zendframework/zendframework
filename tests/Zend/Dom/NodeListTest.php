@@ -20,13 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_Dom_Query_Css2XpathTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dom_Query_Css2XpathTest::main");
-}
+/**
+ * @namespace
+ */
+namespace ZendTest\Dom;
 
-
-/** Zend_Dom_Query_Result */
+use Zend\Dom\NodeList;
 
 /**
  * @category   Zend
@@ -36,22 +35,17 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dom
  */
-class Zend_Dom_Query_ResultTest extends PHPUnit_Framework_TestCase
+class NodeListTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @group ZF-4631
      */
     public function testEmptyResultDoesNotReturnIteratorValidTrue()
     {
-        $dom = new DOMDocument();
+        $dom = new \DOMDocument();
         $emptyNodeList = $dom->getElementsByTagName("a");
-        $result = new Zend_Dom_Query_Result("", "", $dom, $emptyNodeList);
+        $result = new NodeList("", "", $dom, $emptyNodeList);
 
         $this->assertFalse($result->valid());
     }
-}
-
-// Call Zend_Dom_Query_Css2XpathTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dom_Query_Css2XpathTest::main") {
-    Zend_Dom_Query_Css2XpathTest::main();
 }

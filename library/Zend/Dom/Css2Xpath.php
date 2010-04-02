@@ -19,6 +19,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dom;
+
+/**
  * Transform CSS selectors to XPath
  *
  * @package    Zend_Dom
@@ -27,7 +32,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Dom_Query_Css2Xpath
+class Css2Xpath
 {
     /**
      * Transform CSS expression to XPath
@@ -58,14 +63,14 @@ class Zend_Dom_Query_Css2Xpath
         foreach ($segments as $key => $segment) {
             $pathSegment = self::_tokenize($segment);
             if (0 == $key) {
-                if (0 === strpos($pathSegment, '[contains(@class')) {
+                if (0 === strpos($pathSegment, '[contains(')) {
                     $paths[0] .= '*' . $pathSegment;
                 } else {
                     $paths[0] .= $pathSegment;
                 }
                 continue;
             }
-            if (0 === strpos($pathSegment, '[contains(@class')) {
+            if (0 === strpos($pathSegment, '[contains(')) {
                 foreach ($paths as $key => $xpath) {
                     $paths[$key] .= '//*' . $pathSegment;
                     $paths[]      = $xpath . $pathSegment;
@@ -102,10 +107,9 @@ class Zend_Dom_Query_Css2Xpath
         if (preg_match('|([a-z]+)\[([a-z0-9_-]+)=[\'"]([^\'"]+)[\'"]\]|i', $expression)) {
             $expression = preg_replace_callback(
                 '|([a-z]+)\[([a-z0-9_-]+)=[\'"]([^\'"]+)[\'"]\]|i',
-                create_function(
-                    '$matches',
-                    'return $matches[1] . "[@" . strtolower($matches[2]) . "=\'" . $matches[3] . "\']";'
-                ),
+                function($matches) {
+                    return $matches[1] . '[@' . strtolower($matches[2]) . "='" . $matches[3] . "']";
+                },
                 $expression
             );
         }
@@ -114,10 +118,11 @@ class Zend_Dom_Query_Css2Xpath
         if (preg_match('|([a-z]+)\[([a-z0-9_-]+)~=[\'"]([^\'"]+)[\'"]\]|i', $expression)) {
             $expression = preg_replace_callback(
                 '|([a-z]+)\[([a-z0-9_-]+)~=[\'"]([^\'"]+)[\'"]\]|i',
-                create_function(
-                    '$matches',
-                    'return $matches[1] . "[contains(@" . strtolower($matches[2]) . ", \' $matches[3] \')]";'
-                ),
+                function ($matches) {
+                    return $matches[1] 
+                        . "[contains(concat(' ', normalize-space(@" . strtolower($matches[2]) . "), ' '), ' " 
+                        . $matches[3] . " ')]";
+                },
                 $expression
             );
         }
@@ -126,16 +131,21 @@ class Zend_Dom_Query_Css2Xpath
         if (preg_match('|([a-z]+)\[([a-z0-9_-]+)\*=[\'"]([^\'"]+)[\'"]\]|i', $expression)) {
             $expression = preg_replace_callback(
                 '|([a-z]+)\[([a-z0-9_-]+)\*=[\'"]([^\'"]+)[\'"]\]|i',
-                create_function(
-                    '$matches',
-                    'return $matches[1] . "[contains(@" . strtolower($matches[2]) . ", \'" . $matches[3] . "\')]";'
-                ),
+                function ($matches) {
+                    return $matches[1] 
+                        . "[contains(@" . strtolower($matches[2]) . ", '" 
+                        . $matches[3] . "')]";
+                },
                 $expression
             );
         }
 
         // Classes
-        $expression = preg_replace('|\.([a-z][a-z0-9_-]*)|i', "[contains(@class, ' \$1 ')]", $expression);
+        $expression = preg_replace(
+            '|\.([a-z][a-z0-9_-]*)|i', 
+            "[contains(concat(' ', normalize-space(@class), ' '), ' \$1 ')]", 
+            $expression
+        );
 
         return $expression;
     }

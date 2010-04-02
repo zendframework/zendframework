@@ -102,3 +102,8 @@ Zend_Acl
 
 Zend_Console
  * "Zend_Console_Getopt_Exception" becomes "Zend\Console\GetoptException"
+
+Zend_Dom
+ * "Zend_Dom_Query_Result" becomes "Zend\Dom\NodeList"
+ * "Zend_Dom_Query_Css2Xpath" becomes "Zend\Dom\Css2Xpath"
+ * "Zend_Dom_Query::query()" becomes "Zend\Dom\Query::execute()"

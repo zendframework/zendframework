@@ -3067,26 +3067,26 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Dom/Query/Css2Xpath.php</originalRelativeFilePath>
       <originalClassName>Zend_Dom_Query_Css2Xpath</originalClassName>
-      <newRelativeFilePath>Zend/Dom/Query/Css2Xpath.php</newRelativeFilePath>
-      <newNamespace>Zend\Dom\Query</newNamespace>
+      <newRelativeFilePath>Zend/Dom/Css2Xpath.php</newRelativeFilePath>
+      <newNamespace>Zend\Dom</newNamespace>
       <newClassName>Css2Xpath</newClassName>
-      <newFullyQualifiedName>Zend\Dom\Query\Css2Xpath</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Dom\Css2Xpath</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Dom/Query/Result.php</originalRelativeFilePath>
       <originalClassName>Zend_Dom_Query_Result</originalClassName>
-      <newRelativeFilePath>Zend/Dom/Query/Result.php</newRelativeFilePath>
-      <newNamespace>Zend\Dom\Query</newNamespace>
-      <newClassName>Result</newClassName>
-      <newFullyQualifiedName>Zend\Dom\Query\Result</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Dom/NodeList.php</newRelativeFilePath>
+      <newNamespace>Zend\Dom</newNamespace>
+      <newClassName>NodeList</newClassName>
+      <newFullyQualifiedName>Zend\Dom\NodeList</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Dom/Query.php</originalRelativeFilePath>
       <originalClassName>Zend_Dom_Query</originalClassName>
-      <newRelativeFilePath>Zend/Dom/Query/Query.php</newRelativeFilePath>
-      <newNamespace>Zend\Dom\Query</newNamespace>
+      <newRelativeFilePath>Zend/Dom/Query.php</newRelativeFilePath>
+      <newNamespace>Zend\Dom</newNamespace>
       <newClassName>Query</newClassName>
-      <newFullyQualifiedName>Zend\Dom\Query\Query</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Dom\Query</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Exception.php</originalRelativeFilePath>

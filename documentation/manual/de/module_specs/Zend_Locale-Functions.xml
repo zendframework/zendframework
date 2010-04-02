@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21718 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.functions">
     <title>Zend_Locale verwenden</title>
@@ -125,9 +125,6 @@ print_r($found2);
             gesetzt werden. Diese Funktion nimmt eine Gebietsschema Zeichenkette als Parameter an.
             Wenn kein Gebietsschema angegeben wurde, wird ein <link
                 linkend="zend.locale.selection">automatisch gewähltes</link> Gebietsschema benutzt.
-            Da <classname>Zend_Locale</classname> Objekte sehr "leicht" sind, existiert diese
-            Methode hauptsächlich um Nebeneffekte auszuschließen, für Klassen die ein existierendes
-            angelegtes Objekt referenzieren.
         </para>
 
         <example id="zend.locale.setlocale.example-1">

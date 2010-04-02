@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21586 -->
+<!-- EN-Revision: 21676 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.writer">
     <title>Zend_Feed_Writer</title>
@@ -30,11 +30,11 @@
 
         <para>
             Als Ergebnis dieses Designs, ist der Rest sogar einleuchtend. Dahinter, wird jedes
-            Datenset eines <classname>Zend_Feed_Reader</classname> Objekts wärend der
+            Datenset eines <classname>Zend_Feed_Writer</classname> Daten Container wärend der
             Darstellungszeit in ein DOMDocument Objekt übersetzt indem die
             notwendigen Feed Elemente verwendet werden. Für jeden unterstützten Feed Typen gibt es
             beide, sowohl einen Atom 1.0 als auch einen <acronym>RSS</acronym> 2.0 Renderer. Die
-            Verwendung von DOMDocument statt einer Template Lösung hat viele Vorteile.
+            Verwendung der DOMDocument Klasse statt einer Template Lösung hat viele Vorteile.
             Der offensichtlichste ist die Möglichkeit das DOMDocument zu
             exportieren um es weiter zu bearbeiten und auf <acronym>PHP</acronym>
             <acronym>DOM</acronym> für die Korrakturen und richtige Darstellung zu setzen.
@@ -53,31 +53,52 @@
 
         <para>
             Die Architektur von <classname>Zend_Feed_Writer</classname> ist sehr einfach. Es hat
-            zwei Kernsets von Klassen: Container und Renderer.
+            zwei Kernsets von Klassen: Daten Container und Renderer.
         </para>
 
         <para>
             Der Container enthält die Klassen <classname>Zend_Feed_Writer_Feed</classname> und
             <classname>Zend_Feed_Writer_Entry</classname>. Die Einstiegsklassen können bei jeder
             Feed Klasse angehängt werden. Der einzige Zweck dieses Containers ist es Daten über den
-            zu erstellenden Feed zu sammelnindem ein einfaches Interface von Setter Methoden
+            zu erstellenden Feed zu sammeln, indem ein einfaches Interface von Setter Methoden
             verwendet wird. Diese Methode führen einige Test zur Datenprüfung durch. Zum Beispiel
             prüft er übergebene <acronym>URI</acronym>s, Datum, usw. Diese Checks sind nicht an
-            einen der Feed Standards gebunden. Das Container Objekt enthält auch Methoden welche die
-            schnelle Darstellung und den Export des endgültigen Feeds erlauben, und Sie können auf
-            Wunsch wiederverwendet werden.
+            eine der Feed Standard Definitionen gebunden. Das Container Objekt enthält auch Methoden
+            welche die schnelle Darstellung und den Export des endgültigen Feeds erlauben, und Sie
+            können auf Wunsch wiederverwendet werden.
         </para>
 
         <para>
-            Wärend es zwei Daten Container gibt, gibt es vier Renderer - zwei passende Container
-            Renderer pro unterstütztem Feed Typ. Der Renderer akzeptiert einen Container, und
-            basierend auf seinem Container versucht er einen gültigen Feed zu erstellen. Wenn der
-            Renderer nicht in der Lage ist einen gültigen Feed zu erstellen, möglicherweise weil dem
-            Container ein obligatorischer Datenpunkt fehlt, dann wird er dies melden indem eine
-            <classname>Exception</classname> geworfen wird. Wärend es möglich ist
-            <classname>Exception</classname>s zu ignorieren, würde das diese alle standardmäßigen
-            Sicherheiten entfernen welche sicherstellen das gültige Daten gesetzt wurden um einen
-            komplett gültigen Feed darzustellen.
+            Zusätzlich zu den hauptsächlichen Daten Container Klassen gibt es zwei Atom 2.0
+            spezifische Klassen. <classname>Zend_Feed_Writer_Source</classname> und
+            <classname>Zend_Feed_Writer_Deleted</classname>. Die erstere implementiert Atom 2.0
+            Quell-Elemente welche Feed Metadaten der Quelle für spezielle Einträge im verwendeten
+            Feed enthalten (z.B. wenn der aktuelle Feed nicht die Originale Quelle des Eintrags
+            enthält). Die letztere implementiert Atom Timbstones RFC und erlaubt es Feeds Referenzen
+            zu Einträgen zu haben welche bereits gelöscht wurden.
+        </para>
+
+        <para>
+            Wärend es zwei hauptsächliche Datencontainer-Typen gibt, gibt es vier Renderer - zwei
+            passende Container Renderer pro unterstütztem Feed Typ. Jeder Renderer akzeptiert einen
+            Container, und basierend auf seinem Container versucht er ein gültiges Feed-Markup zu
+            erstellen. Wenn der Renderer nicht in der Lage ist ein gültiges Feed-Markup zu
+            erstellen, möglicherweise weil dem Container ein obligatorischer Datenpunkt fehlt, dann
+            wird er dies melden indem eine <classname>Exception</classname> geworfen wird. Wärend es
+            möglich ist <classname>Exception</classname>s zu ignorieren, würde das diese alle
+            standardmäßigen Sicherheiten entfernen welche sicherstellen das gültige Daten gesetzt
+            wurden um einen komplett gültigen Feed darzustellen.
+        </para>
+
+        <para>
+            Um dies etwas genauer zu erklären, kann man ein Set von Daten Containern für einen Feed
+            erstellen wobei es einen Feed Container gibt in dem einige Entry Container hinzugefügt
+            wurden und ein Deleted (gelöschter) Container. Dies formt eine Daten Hierarchie die
+            einen normalen Feed nachstellt. Wenn die Darstellung durchgeführt wird, dann übergibt
+            diese Hierarchie Ihre Teile den betreffenden Darstellern und die partiellen Feeds (alle
+            DOMDocuments) werden dann zusammen geworfen um einen kompletten Feed zu erstellen. Im
+            Falle von Source oder Deleted (Tomestone) Containern werden diese nur für Atom 2.0
+            dargestellt und für RSS ignoriert.
         </para>
 
         <para>
@@ -97,7 +118,8 @@
         <para>
             Die Verwendung von <classname>Zend_Feed_Reader</classname> ist so einfach wie das Setzen
             von Daten und dem Ausführen des Renderers. Hier ist ein Beispiel um einen minimalen Atom
-            1.0 Feed zu erstellen.
+            1.0 Feed zu erstellen. Dies demonstriert dass jeder Feed oder Eintrag einen eigenen
+            Container verwendet.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -201,7 +223,9 @@ $out = $feed->export('atom');
             sich zwischen beiden Standards unterscheiden abhängig vom Renderer der Verwendet wird.
             Vom Design her wird <classname>Zend_Feed_Writer</classname> einen ungültigen Feed für
             keinen Standard darstellen solange der End-Benutzer nicht definiert das alle Exceptions
-            ignoriert werden sollen.
+            ignoriert werden sollen. Diese eingebaute Sicherheit wurde hinzugefügt um
+            sicherzustellen dass sich Benutzer ohne tiefe Kenntnisse der betreffenden
+            Spezifikationen keine Sorgen machen muss.
         </para>
     </sect2>
 
@@ -217,10 +241,19 @@ $out = $feed->export('atom');
             Unklarheiten und Unsicherheiten zu vermeiden.
         </para>
 
+        <note>
+            <para>
+                Benutzer haben angemerkt dass das nicht Vorhandensein einer einfachen Array
+                Schreibweise für Eingabedaten zu langen Codeabschnitten führt. Das wird in
+                zukünftigen Versionen behoben.
+            </para>
+        </note>
+
         <para>
             <classname>Zend_Feed_Writer</classname> bietet diese <acronym>API</acronym> über seine
             Datencontainer Klassen <classname>Zend_Feed_Writer_Feed</classname> und
-            <classname>Zend_Feed_Writer_Entry</classname> an. Diese Klassen speichern nahezu alle
+            <classname>Zend_Feed_Writer_Entry</classname> an (nicht zu erwähnen die Atom 2.0
+            spezifischen Erweiterungsklassen). Diese Klassen speichern nahezu alle
             Feed Daten in einer vom Typ unabhängigen Art, was bedeutet das man jeden Datencontainer
             mit jedem Renderer wiederverwenden kann ohne das zusätzliche Arbeit notwendig ist. Beide
             Klassen sind auch offen für Erweiterungen, was bedeutet das eine Erweiterung seine
@@ -237,6 +270,13 @@ $out = $feed->export('atom');
             Methoden ist recht generisch - alle Erweiterungs Methoden arbeiten auf dem gleichen
             Level wie die Kern <acronym>API</acronym> da wir es erlauben jedes Erweiterungs Objekt
             seperat zu empfangen wenn das notwendig ist.
+        </para>
+
+        <para>
+            Die API für Daten auf Level des Feeds ist in
+            <classname>Zend_Feed_Writer_Feed</classname> enthalten. Zusätzlich zu der anbei
+            beschriebenen API, implementiert die Klasse auch die Interfaces
+            <classname>Countable</classname> und <classname>Iterator</classname>.
         </para>
 
         <table>
@@ -289,14 +329,12 @@ $out = $feed->export('atom');
                             dem Client erlaubt Änderungen des Orts mitzubekommen ohne das dauernde
                             Umleitungen notwendig sind. Dieser Parameter ist ein Array von Arrays,
                             wobei jedes Unter-Array die Schlüssel "type" und "uri" enthält. Der Type
-                            sollte "atom", "rss" oder "rdf" sein. Wenn ein Typ unterdrückt wird, ist
-                            er standardmäßig mit dem Typ identisch mit dem der Feed dargestellt
-                            wird.
+                            sollte "atom", "rss" oder "rdf" sein.
                         </entry>
                     </row>
 
                     <row>
-                        <entry><methodname>setAuthors()</methodname></entry>
+                        <entry><methodname>addAuthors()</methodname></entry>
 
                         <entry>
                             Setzt die Daten für Autoren. Der Parameter ist ein Array von Arrays
@@ -311,11 +349,11 @@ $out = $feed->export('atom');
                     </row>
 
                     <row>
-                        <entry><methodname>setAuthor()</methodname></entry>
+                        <entry><methodname>addAuthor()</methodname></entry>
 
                         <entry>
-                            Setzt die Daten für einen einzelnen Autor und folgt dem selben Format
-                            wie vorher für ein einzelnes Unter-Array beschrieben.
+                            Setzt die Daten für einen einzelnen Autor und folgt dem selben Array
+                            Format wie vorher für ein einzelnes Unter-Array beschrieben.
                         </entry>
                     </row>
 
@@ -332,7 +370,7 @@ $out = $feed->export('atom');
                     </row>
 
                     <row>
-                        <entry><methodname>getDateModified()</methodname></entry>
+                        <entry><methodname>setDateModified()</methodname></entry>
 
                         <entry>
                             Setzt das Datum zu dem dieser Feed das letzte Mal geändert wurde. Der
@@ -368,7 +406,7 @@ $out = $feed->export('atom');
                     </row>
 
                     <row>
-                        <entry><methodname>setHubs()</methodname></entry>
+                        <entry><methodname>addHubs()</methodname></entry>
 
                         <entry>
                             Akzeptiert ein Array von Pubsubhubbub Hub Endpunkten die im Feed als
@@ -377,11 +415,13 @@ $out = $feed->export('atom');
                             Herausgeber implementieren muss damit Real-Time Updates ermöglicht
                             werden. Ein Herausgeber kann implementiert werden indem
                             <classname>Zend_Feed_Pubsubhubbub_Publisher</classname> verwendet wird.
+                            Die Methode <methodname>addHub()</methodname> erlaubt es gleichzeitig
+                            nur einen Hub hinzuzufügen.
                         </entry>
                     </row>
 
                     <row>
-                        <entry><methodname>setCategories()</methodname></entry>
+                        <entry><methodname>addCategories()</methodname></entry>
 
                         <entry>
                             Akzepziert ein Array an Kategorien für die Darstellung, wobei jedes
@@ -392,12 +432,87 @@ $out = $feed->export('atom');
                             der spezielle Zeichen unterstützt (er wird wärend der Darstellung
                             kodiert) und ist ein benötigter Schlüssel. "scheme" (im
                             <acronym>RSS</acronym> auch die Domain genannt) ist optional muss aber
-                            eine gültige <acronym>URI</acronym> sein.
+                            eine gültige <acronym>URI</acronym> sein. Die Methode
+                            <methodname>addCategory()</methodname> erlaubt es gleichzeitig nur eine
+                            Kategorie hinzuzufügen.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>createEntry()</methodname></entry>
+
+                        <entry>
+                            Gibt eine neue Instanz von <classname>Zend_Feed_Writer_Entry</classname>
+                            zurück. Das ist der Daten Container auf Level des Eintrags. Neue
+                            Einträge müssen <methodname>addEntry()</methodname> explizit aufrufen um
+                            Einträge für die Darstellung hinzuzufügen.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>addEntry()</methodname></entry>
+
+                        <entry>
+                            Fügt eine Instanz von <classname>Zend_Feed_Writer_Entry</classname> zum
+                            aktuellen Feed Container für die Darstellung hinzu.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>createTombstone()</methodname></entry>
+
+                        <entry>
+                            Gibt eine neue Instanz von
+                            <classname>Zend_Feed_Writer_Deleted</classname> zurück. Das ist der
+                            Daten Container auf Level des Atom 2.0 Tombstone. Neue Einträge werden
+                            dem aktuellen Feed nicht automatisch zugeordnet. Man muss also
+                            <methodname>addTombstone()</methodname> explizit aufrufen um den
+                            gelöschten Eintrag für die Darstellung hinzuzufügen.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>addTombstone()</methodname></entry>
+
+                        <entry>
+                            Fügt dem aktuellen Feed Container eine Instanz von
+                            <classname>Zend_Feed_Writer_Deleted</classname> für die Darstellung
+                            hinzu.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>removeEntry()</methodname></entry>
+
+                        <entry>
+                            Akzeptiert einen Parameter welche des Array Index eines Eintrags
+                            anzeigt welche vom Feed zu entfernen ist.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>export()</methodname></entry>
+
+                        <entry>
+                            Exportiert die komplette Datenhierarchie in einen XML Feed. Die Methode
+                            has zwei Parameter. Der erste ist der Feedtyp, entweder "atom" oder
+                            "rss". Der zweite in ein optionaler Boolean der zeigt ob Exceptions
+                            geworfen werden oder nicht. Er ist Standardmäßig TRUE.
                         </entry>
                     </row>
                 </tbody>
             </tgroup>
         </table>
+
+        <note>
+            <para>
+                Zusätzlich zu diesen Settern gibt es passende Getter um Daten von den
+                Eintrags-Daten-Containern zu erhalten.
+            </para>
+        </note>
+
+        <!-- remaining feed stuff -->
+
     </sect2>
 
     <sect2 id="zend.feed.writer.setting.entry.data.points">
@@ -413,6 +528,11 @@ $out = $feed->export('atom');
             seperat zu empfangen wenn das notwendig ist.
         </para>
 
+        <para>
+            Die API auf Level des Eintrags ist in <classname>Zend_Feed_Writer_Entry</classname>
+            enthalten.
+        </para>
+
         <table>
             <title>API Methoden auf Eintrags Level</title>
 
@@ -422,7 +542,7 @@ $out = $feed->export('atom');
                         <entry><methodname>setId()</methodname></entry>
 
                         <entry>
-                            Setzt eine eindeutige ID die mit diesem Feed assoziiert ist. Für Atom
+                            Setzt eine eindeutige ID die mit diesem Eintrag assoziiert ist. Für Atom
                             1.0 ist das ein atom:id Element, und für <acronym>RSS</acronym> 2.0 wird
                             es als guid Element hinzugefügt. Diese sind optional solange ein Link
                             hinzugefügt wird, wenn z.B. der Link als ID gesetzt ist.
@@ -431,12 +551,17 @@ $out = $feed->export('atom');
 
                     <row>
                         <entry><methodname>setTitle()</methodname></entry>
-                        <entry>Setzt den Titel des Feeds.</entry>
+                        <entry>Setzt den Titel des Eintrags.</entry>
                     </row>
 
                     <row>
                         <entry><methodname>setDescription()</methodname></entry>
-                        <entry>Setzt die textuelle Beschreibung des Feeds.</entry>
+                        <entry>Setzt die textuelle Beschreibung des Eintrags.</entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setContent()</methodname></entry>
+                        <entry>Setzt den Inhalt des Eintrags.</entry>
                     </row>
 
                     <row>
@@ -444,10 +569,10 @@ $out = $feed->export('atom');
 
                         <entry>
                             Setzt eine <acronym>URI</acronym> zur <acronym>HTML</acronym> Website
-                            welche die gleichen oder ähnliche Informationen wie dieser Feed
+                            welche die gleichen oder ähnliche Informationen wie dieser Eintrag
                             enthält (z.B. wenn der Feed von einem Blog ist, sollte er die
-                            <acronym>URI</acronym> des Blogs anbieten unter welche die
-                            <acronym>HTML</acronym> Version der Einträge gelesen werden können).
+                            <acronym>URI</acronym> des Blog Artikels anbieten unter welche die
+                            <acronym>HTML</acronym> Version des Eintrags gelesen werden kann).
                         </entry>
                     </row>
 
@@ -470,7 +595,7 @@ $out = $feed->export('atom');
                     </row>
 
                     <row>
-                        <entry><methodname>setAuthors()</methodname></entry>
+                        <entry><methodname>addAuthors()</methodname></entry>
 
                         <entry>
                             Setzt die Daten für Autoren. Der Parameter ist ein Array von Arrays
@@ -485,7 +610,7 @@ $out = $feed->export('atom');
                     </row>
 
                     <row>
-                        <entry><methodname>setAuthor()</methodname></entry>
+                        <entry><methodname>addAuthor()</methodname></entry>
 
                         <entry>
                             Setzt die Daten für einen einzelnen Autor und folgt dem selben Format
@@ -501,7 +626,9 @@ $out = $feed->export('atom');
                             für Atom anwendbar wo es das Datum beschreibt zu der die Ressource,
                             die von dem Atom 1.0 Dokument beschrieben wird, erstellt wurde. Der
                             erwartete Parameter muss ein <acronym>UNIX</acronym> Timestamp oder ein
-                            <classname>Zend_Date</classname> Objekt sein.
+                            <classname>Zend_Date</classname> Objekt sein. Wenn es nicht angegeben
+                            wird, dann wird das verwendete Datum das aktuelle Datum und die aktuelle
+                            Zeit sein.
                         </entry>
                     </row>
 
@@ -511,46 +638,17 @@ $out = $feed->export('atom');
                         <entry>
                             Setzt das Datum zu dem dieser Feed das letzte Mal geändert wurde. Der
                             erwartete Parameter muss ein <acronym>UNIX</acronym> Timestamp oder ein
-                            <classname>Zend_Date</classname> Objekt sein.
-                        </entry>
-                    </row>
-
-                    <row>
-                        <entry><methodname>setLanguage()</methodname></entry>
-
-                        <entry>
-                            Setzt die Sprache des Feeds. Diese wird unterdrückt solange Sie nicht
-                            gesetzt ist.
-                        </entry>
-                    </row>
-
-                    <row>
-                        <entry><methodname>getGenerator()</methodname></entry>
-
-                        <entry>
-                            Erlaubt es einen Generator zu setzen. Der Parameter sollte ein Array
-                            sein welche die Schlüssel "name", "version" und "uri" enthält. Wenn er
-                            unterdrückt wird, wird ein standardmäßiger Generator hinzugefügt welcher
-                            auf <classname>Zend_Feed_Writer</classname>, die aktuelle Version vom
-                            Zend Framework und die <acronym>URI</acronym> des Frameworks verweist.
+                            <classname>Zend_Date</classname> Objekt sein. Wenn es nicht angegeben
+                            wird, dann wird das verwendete Datum das aktuelle Datum und die aktuelle
+                            Zeit sein.
                         </entry>
                     </row>
 
                     <row>
                         <entry><methodname>setCopyright()</methodname></entry>
-                        <entry>Setzt eine Copyright Notiz die mit dem Feed assoziiert ist.</entry>
-                    </row>
-
-                    <row>
-                        <entry><methodname>setHubs()</methodname></entry>
 
                         <entry>
-                            Akzeptiert ein Array von Pubsubhubbub Hub Endpunkten die im Feed als
-                            Atom Links dargestellt werden damit PuSH Abonnenten den eigenen Feed
-                            abbonieren können. Es ist zu beachten das man einen Pubsubhubbub
-                            Herausgeber implementieren muss damit Real-Time Updates ermöglicht
-                            werden. Ein Herausgeber kann implementiert werden indem
-                            <classname>Zend_Feed_Pubsubhubbub_Publisher</classname> verwendet wird.
+                            Setzt eine Copyright Notiz welche mit dem Feed assoziiert wird.
                         </entry>
                     </row>
 
@@ -569,8 +667,65 @@ $out = $feed->export('atom');
                             eine gültige <acronym>URI</acronym> sein.
                         </entry>
                     </row>
+
+                    <row>
+                        <entry><methodname>setCommentCount()</methodname></entry>
+
+                        <entry>
+                            Setzt die Anzahl an Kommentaren welche mit diesem Eintrag assoziiert
+                            sind. Die Darstellung unterscheidet sich zwischen <acronym>RSS</acronym>
+                            und Atom 2.0 abhängig vom benötigten Element oder Attribut.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setCommentLink()</methodname></entry>
+
+                        <entry>
+                            Setzt einen Link zu einer HTML Seite welche Kommentare enthält die mit
+                            diesem Eintrag assoziiert sind.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setCommentFeedLink()</methodname></entry>
+
+                        <entry>
+                            Setzt einen Link zu einem XML Feed welcher Kommentare enthält welche mit
+                            diesem Eintrag assoziiert sind. Der Parameter ist ein Array welches die
+                            Schlüssel "uri" und "type" enthält, wobei der Typ entweder "rdf", "rss"
+                            oder "atom" ist.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setCommentFeedLinks()</methodname></entry>
+
+                        <entry>
+                            Gleich wie <methodname>setCommentFeedLink()</methodname> ausser das Sie
+                            ein Array von Array akzeptiert wobei jedes Unterarray die von
+                            <methodname>setCommentFeedLink()</methodname> erwarteten Parameter
+                            enthält.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setEncoding()</methodname></entry>
+
+                        <entry>
+                            Setzt die Kodierung des Textes des Eintrags. Diese ist standardmäßig
+                            UTF-8 welche auch die bevorzugte Kodierung ist.
+                        </entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
+
+        <note>
+            <para>
+                Zusätzlich zu diesen Settern gibt es passende Getter um Daten von den
+                Eintrags-Daten-Containern zu erhalten.
+            </para>
+        </note>
     </sect2>
 </sect1>

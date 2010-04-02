@@ -21,12 +21,10 @@
  */
 
 /**
- * Zend_Measure_Capacitance
+ * @namespace
  */
-
-/**
- * PHPUnit test case
- */
+namespace ZendTest\Measure;
+use Zend\Measure;
 
 /**
  * @category   Zend
@@ -36,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
-class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
+class CapacitanceTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * test for Capacitance initialisation
@@ -44,8 +42,8 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceInit()
     {
-        $value = new Zend_Measure_Capacitance('100',Zend_Measure_Capacitance::STANDARD,'de');
-        $this->assertTrue($value instanceof Zend_Measure_Capacitance,'Zend_Measure_Capacitance Object not returned');
+        $value = new Measure\Capacitance('100',Measure\Capacitance::STANDARD,'de');
+        $this->assertTrue($value instanceof Measure\Capacitance,'Zend\Measure\Capacitance Object not returned');
     }
 
 
@@ -56,9 +54,9 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
     public function testCapacitanceUnknownType()
     {
         try {
-            $value = new Zend_Measure_Capacitance('100','Capacitance::UNKNOWN','de');
+            $value = new Measure\Capacitance('100','Capacitance::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -71,9 +69,9 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
     public function testCapacitanceUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Capacitance('novalue',Zend_Measure_Capacitance::STANDARD,'de');
+            $value = new Measure\Capacitance('novalue',Measure\Capacitance::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -86,9 +84,9 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
     public function testCapacitanceUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Capacitance('100',Zend_Measure_Capacitance::STANDARD,'nolocale');
+            $value = new Measure\Capacitance('100',Measure\Capacitance::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -100,8 +98,8 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceNoLocale()
     {
-        $value = new Zend_Measure_Capacitance('100',Zend_Measure_Capacitance::STANDARD);
-        $this->assertEquals(100, $value->getValue(),'Zend_Measure_Capacitance value expected');
+        $value = new Measure\Capacitance('100',Measure\Capacitance::STANDARD);
+        $this->assertEquals(100, $value->getValue(),'Zend\Measure\Capacitance value expected');
     }
 
 
@@ -111,8 +109,8 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceValuePositive()
     {
-        $value = new Zend_Measure_Capacitance('100',Zend_Measure_Capacitance::STANDARD,'de');
-        $this->assertEquals(100, $value->getValue(), 'Zend_Measure_Capacitance value expected to be a positive integer');
+        $value = new Measure\Capacitance('100',Measure\Capacitance::STANDARD,'de');
+        $this->assertEquals(100, $value->getValue(), 'Zend\Measure\Capacitance value expected to be a positive integer');
     }
 
 
@@ -122,8 +120,8 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceValueNegative()
     {
-        $value = new Zend_Measure_Capacitance('-100',Zend_Measure_Capacitance::STANDARD,'de');
-        $this->assertEquals(-100, $value->getValue(), 'Zend_Measure_Capacitance value expected to be a negative integer');
+        $value = new Measure\Capacitance('-100',Measure\Capacitance::STANDARD,'de');
+        $this->assertEquals(-100, $value->getValue(), 'Zend\Measure\Capacitance value expected to be a negative integer');
     }
 
 
@@ -133,8 +131,8 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceValueDecimal()
     {
-        $value = new Zend_Measure_Capacitance('-100,200',Zend_Measure_Capacitance::STANDARD,'de');
-        $this->assertEquals(-100.200, $value->getValue(), 'Zend_Measure_Capacitance value expected to be a decimal value');
+        $value = new Measure\Capacitance('-100,200',Measure\Capacitance::STANDARD,'de');
+        $this->assertEquals(-100.200, $value->getValue(), 'Zend\Measure\Capacitance value expected to be a decimal value');
     }
 
 
@@ -144,8 +142,8 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceValueDecimalSeperated()
     {
-        $value = new Zend_Measure_Capacitance('-100.100,200',Zend_Measure_Capacitance::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Capacitance Object not returned');
+        $value = new Measure\Capacitance('-100.100,200',Measure\Capacitance::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend\Measure\Capacitance Object not returned');
     }
 
 
@@ -155,8 +153,8 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceValueString()
     {
-        $value = new Zend_Measure_Capacitance('-100.100,200',Zend_Measure_Capacitance::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Capacitance Object not returned');
+        $value = new Measure\Capacitance('-100.100,200',Measure\Capacitance::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend\Measure\Capacitance Object not returned');
     }
 
 
@@ -166,9 +164,9 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceEquality()
     {
-        $value = new Zend_Measure_Capacitance('-100.100,200',Zend_Measure_Capacitance::STANDARD,'de');
-        $newvalue = new Zend_Measure_Capacitance('-100.100,200',Zend_Measure_Capacitance::STANDARD,'de');
-        $this->assertTrue($value->equals($newvalue),'Zend_Measure_Capacitance Object should be equal');
+        $value = new Measure\Capacitance('-100.100,200',Measure\Capacitance::STANDARD,'de');
+        $newvalue = new Measure\Capacitance('-100.100,200',Measure\Capacitance::STANDARD,'de');
+        $this->assertTrue($value->equals($newvalue),'Zend\Measure\Capacitance Object should be equal');
     }
 
 
@@ -178,9 +176,9 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceNoEquality()
     {
-        $value = new Zend_Measure_Capacitance('-100.100,200',Zend_Measure_Capacitance::STANDARD,'de');
-        $newvalue = new Zend_Measure_Capacitance('-100,200',Zend_Measure_Capacitance::STANDARD,'de');
-        $this->assertFalse($value->equals($newvalue),'Zend_Measure_Capacitance Object should be not equal');
+        $value = new Measure\Capacitance('-100.100,200',Measure\Capacitance::STANDARD,'de');
+        $newvalue = new Measure\Capacitance('-100,200',Measure\Capacitance::STANDARD,'de');
+        $this->assertFalse($value->equals($newvalue),'Zend\Measure\Capacitance Object should be not equal');
     }
 
 
@@ -190,9 +188,9 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceSetPositive()
     {
-        $value = new Zend_Measure_Capacitance('100',Zend_Measure_Capacitance::STANDARD,'de');
-        $value->setValue('200',Zend_Measure_Capacitance::STANDARD,'de');
-        $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Capacitance value expected to be a positive integer');
+        $value = new Measure\Capacitance('100',Measure\Capacitance::STANDARD,'de');
+        $value->setValue('200',Measure\Capacitance::STANDARD,'de');
+        $this->assertEquals(200, $value->getValue(), 'Zend\Measure\Capacitance value expected to be a positive integer');
     }
 
 
@@ -202,9 +200,9 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceSetNegative()
     {
-        $value = new Zend_Measure_Capacitance('-100',Zend_Measure_Capacitance::STANDARD,'de');
-        $value->setValue('-200',Zend_Measure_Capacitance::STANDARD,'de');
-        $this->assertEquals(-200, $value->getValue(), 'Zend_Measure_Capacitance value expected to be a negative integer');
+        $value = new Measure\Capacitance('-100',Measure\Capacitance::STANDARD,'de');
+        $value->setValue('-200',Measure\Capacitance::STANDARD,'de');
+        $this->assertEquals(-200, $value->getValue(), 'Zend\Measure\Capacitance value expected to be a negative integer');
     }
 
 
@@ -214,9 +212,9 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceSetDecimal()
     {
-        $value = new Zend_Measure_Capacitance('-100,200',Zend_Measure_Capacitance::STANDARD,'de');
-        $value->setValue('-200,200',Zend_Measure_Capacitance::STANDARD,'de');
-        $this->assertEquals(-200.200, $value->getValue(), 'Zend_Measure_Capacitance value expected to be a decimal value');
+        $value = new Measure\Capacitance('-100,200',Measure\Capacitance::STANDARD,'de');
+        $value->setValue('-200,200',Measure\Capacitance::STANDARD,'de');
+        $this->assertEquals(-200.200, $value->getValue(), 'Zend\Measure\Capacitance value expected to be a decimal value');
     }
 
 
@@ -226,9 +224,9 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceSetDecimalSeperated()
     {
-        $value = new Zend_Measure_Capacitance('-100.100,200',Zend_Measure_Capacitance::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Capacitance::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Capacitance Object not returned');
+        $value = new Measure\Capacitance('-100.100,200',Measure\Capacitance::STANDARD,'de');
+        $value->setValue('-200.200,200',Measure\Capacitance::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend\Measure\Capacitance Object not returned');
     }
 
 
@@ -238,9 +236,9 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceSetString()
     {
-        $value = new Zend_Measure_Capacitance('-100.100,200',Zend_Measure_Capacitance::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Capacitance::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Capacitance Object not returned');
+        $value = new Measure\Capacitance('-100.100,200',Measure\Capacitance::STANDARD,'de');
+        $value->setValue('-200.200,200',Measure\Capacitance::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend\Measure\Capacitance Object not returned');
     }
 
 
@@ -251,10 +249,10 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
     public function testCapacitanceSetUnknownType()
     {
         try {
-            $value = new Zend_Measure_Capacitance('100',Zend_Measure_Capacitance::STANDARD,'de');
+            $value = new Measure\Capacitance('100',Measure\Capacitance::STANDARD,'de');
             $value->setValue('-200.200,200','Capacitance::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -267,10 +265,10 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
     public function testCapacitanceSetUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Capacitance('100',Zend_Measure_Capacitance::STANDARD,'de');
-            $value->setValue('novalue',Zend_Measure_Capacitance::STANDARD,'de');
+            $value = new Measure\Capacitance('100',Measure\Capacitance::STANDARD,'de');
+            $value->setValue('novalue',Measure\Capacitance::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -283,10 +281,10 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
     public function testCapacitanceSetUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Capacitance('100',Zend_Measure_Capacitance::STANDARD,'de');
-            $value->setValue('200',Zend_Measure_Capacitance::STANDARD,'nolocale');
+            $value = new Measure\Capacitance('100',Measure\Capacitance::STANDARD,'de');
+            $value->setValue('200',Measure\Capacitance::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -298,9 +296,9 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceSetWithNoLocale()
     {
-        $value = new Zend_Measure_Capacitance('100', Zend_Measure_Capacitance::STANDARD, 'de');
-        $value->setValue('200', Zend_Measure_Capacitance::STANDARD);
-        $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Capacitance value expected to be a positive integer');
+        $value = new Measure\Capacitance('100', Measure\Capacitance::STANDARD, 'de');
+        $value->setValue('200', Measure\Capacitance::STANDARD);
+        $this->assertEquals(200, $value->getValue(), 'Zend\Measure\Capacitance value expected to be a positive integer');
     }
 
 
@@ -310,9 +308,9 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceSetType()
     {
-        $value = new Zend_Measure_Capacitance('-100',Zend_Measure_Capacitance::STANDARD,'de');
-        $value->setType(Zend_Measure_Capacitance::NANOFARAD);
-        $this->assertEquals(Zend_Measure_Capacitance::NANOFARAD, $value->getType(), 'Zend_Measure_Capacitance type expected');
+        $value = new Measure\Capacitance('-100',Measure\Capacitance::STANDARD,'de');
+        $value->setType(Measure\Capacitance::NANOFARAD);
+        $this->assertEquals(Measure\Capacitance::NANOFARAD, $value->getType(), 'Zend\Measure\Capacitance type expected');
     }
 
 
@@ -323,10 +321,10 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
     public function testCapacitanceSetTypeFailed()
     {
         try {
-            $value = new Zend_Measure_Capacitance('-100',Zend_Measure_Capacitance::STANDARD,'de');
+            $value = new Measure\Capacitance('-100',Measure\Capacitance::STANDARD,'de');
             $value->setType('Capacitance::UNKNOWN');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -338,7 +336,7 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceToString()
     {
-        $value = new Zend_Measure_Capacitance('-100',Zend_Measure_Capacitance::STANDARD,'de');
+        $value = new Measure\Capacitance('-100',Measure\Capacitance::STANDARD,'de');
         $this->assertEquals('-100 F', $value->toString(), 'Value -100 F expected');
     }
 
@@ -349,7 +347,7 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitance_ToString()
     {
-        $value = new Zend_Measure_Capacitance('-100',Zend_Measure_Capacitance::STANDARD,'de');
+        $value = new Measure\Capacitance('-100',Measure\Capacitance::STANDARD,'de');
         $this->assertEquals('-100 F', $value->__toString(), 'Value -100 F expected');
     }
 
@@ -360,7 +358,7 @@ class Zend_Measure_CapacitanceTest extends PHPUnit_Framework_TestCase
      */
     public function testCapacitanceConversionList()
     {
-        $value = new Zend_Measure_Capacitance('-100',Zend_Measure_Capacitance::STANDARD,'de');
+        $value = new Measure\Capacitance('-100',Measure\Capacitance::STANDARD,'de');
         $unit  = $value->getConversionList();
         $this->assertTrue(is_array($unit), 'Array expected');
     }

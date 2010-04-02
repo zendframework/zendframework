@@ -20,14 +20,11 @@
  * @version    $Id$
  */
 
-
 /**
- * Zend_Measure_Lightness
+ * @namespace
  */
-
-/**
- * PHPUnit test case
- */
+namespace ZendTest\Measure;
+use Zend\Measure;
 
 /**
  * @category   Zend
@@ -37,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
-class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
+class LightnessTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * test for Lightness initialisation
@@ -45,8 +42,8 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessInit()
     {
-        $value = new Zend_Measure_Lightness('100',Zend_Measure_Lightness::STANDARD,'de');
-        $this->assertTrue($value instanceof Zend_Measure_Lightness,'Zend_Measure_Lightness Object not returned');
+        $value = new Measure\Lightness('100',Measure\Lightness::STANDARD,'de');
+        $this->assertTrue($value instanceof Measure\Lightness,'Zend\Measure\Lightness Object not returned');
     }
 
 
@@ -57,9 +54,9 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
     public function testLightnessUnknownType()
     {
         try {
-            $value = new Zend_Measure_Lightness('100','Lightness::UNKNOWN','de');
+            $value = new Measure\Lightness('100','Lightness::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -72,9 +69,9 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
     public function testLightnessUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Lightness('novalue',Zend_Measure_Lightness::STANDARD,'de');
+            $value = new Measure\Lightness('novalue',Measure\Lightness::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -87,9 +84,9 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
     public function testLightnessUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Lightness('100',Zend_Measure_Lightness::STANDARD,'nolocale');
+            $value = new Measure\Lightness('100',Measure\Lightness::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -101,8 +98,8 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessNoLocale()
     {
-        $value = new Zend_Measure_Lightness('100',Zend_Measure_Lightness::STANDARD);
-        $this->assertEquals(100, $value->getValue(),'Zend_Measure_Lightness value expected');
+        $value = new Measure\Lightness('100',Measure\Lightness::STANDARD);
+        $this->assertEquals(100, $value->getValue(),'Zend\Measure\Lightness value expected');
     }
 
 
@@ -112,8 +109,8 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessValuePositive()
     {
-        $value = new Zend_Measure_Lightness('100',Zend_Measure_Lightness::STANDARD,'de');
-        $this->assertEquals(100, $value->getValue(), 'Zend_Measure_Lightness value expected to be a positive integer');
+        $value = new Measure\Lightness('100',Measure\Lightness::STANDARD,'de');
+        $this->assertEquals(100, $value->getValue(), 'Zend\Measure\Lightness value expected to be a positive integer');
     }
 
 
@@ -123,8 +120,8 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessValueNegative()
     {
-        $value = new Zend_Measure_Lightness('-100',Zend_Measure_Lightness::STANDARD,'de');
-        $this->assertEquals(-100, $value->getValue(), 'Zend_Measure_Lightness value expected to be a negative integer');
+        $value = new Measure\Lightness('-100',Measure\Lightness::STANDARD,'de');
+        $this->assertEquals(-100, $value->getValue(), 'Zend\Measure\Lightness value expected to be a negative integer');
     }
 
 
@@ -134,8 +131,8 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessValueDecimal()
     {
-        $value = new Zend_Measure_Lightness('-100,200',Zend_Measure_Lightness::STANDARD,'de');
-        $this->assertEquals(-100.200, $value->getValue(), 'Zend_Measure_Lightness value expected to be a decimal value');
+        $value = new Measure\Lightness('-100,200',Measure\Lightness::STANDARD,'de');
+        $this->assertEquals(-100.200, $value->getValue(), 'Zend\Measure\Lightness value expected to be a decimal value');
     }
 
 
@@ -145,8 +142,8 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessValueDecimalSeperated()
     {
-        $value = new Zend_Measure_Lightness('-100.100,200',Zend_Measure_Lightness::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Lightness Object not returned');
+        $value = new Measure\Lightness('-100.100,200',Measure\Lightness::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend\Measure\Lightness Object not returned');
     }
 
 
@@ -156,8 +153,8 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessValueString()
     {
-        $value = new Zend_Measure_Lightness('-100.100,200',Zend_Measure_Lightness::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Lightness Object not returned');
+        $value = new Measure\Lightness('-100.100,200',Measure\Lightness::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend\Measure\Lightness Object not returned');
     }
 
 
@@ -167,9 +164,9 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessEquality()
     {
-        $value = new Zend_Measure_Lightness('-100.100,200',Zend_Measure_Lightness::STANDARD,'de');
-        $newvalue = new Zend_Measure_Lightness('-100.100,200',Zend_Measure_Lightness::STANDARD,'de');
-        $this->assertTrue($value->equals($newvalue),'Zend_Measure_Lightness Object should be equal');
+        $value = new Measure\Lightness('-100.100,200',Measure\Lightness::STANDARD,'de');
+        $newvalue = new Measure\Lightness('-100.100,200',Measure\Lightness::STANDARD,'de');
+        $this->assertTrue($value->equals($newvalue),'Zend\Measure\Lightness Object should be equal');
     }
 
 
@@ -179,9 +176,9 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessNoEquality()
     {
-        $value = new Zend_Measure_Lightness('-100.100,200',Zend_Measure_Lightness::STANDARD,'de');
-        $newvalue = new Zend_Measure_Lightness('-100,200',Zend_Measure_Lightness::STANDARD,'de');
-        $this->assertFalse($value->equals($newvalue),'Zend_Measure_Lightness Object should be not equal');
+        $value = new Measure\Lightness('-100.100,200',Measure\Lightness::STANDARD,'de');
+        $newvalue = new Measure\Lightness('-100,200',Measure\Lightness::STANDARD,'de');
+        $this->assertFalse($value->equals($newvalue),'Zend\Measure\Lightness Object should be not equal');
     }
 
 
@@ -191,9 +188,9 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessSetPositive()
     {
-        $value = new Zend_Measure_Lightness('100',Zend_Measure_Lightness::STANDARD,'de');
-        $value->setValue('200',Zend_Measure_Lightness::STANDARD,'de');
-        $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Lightness value expected to be a positive integer');
+        $value = new Measure\Lightness('100',Measure\Lightness::STANDARD,'de');
+        $value->setValue('200',Measure\Lightness::STANDARD,'de');
+        $this->assertEquals(200, $value->getValue(), 'Zend\Measure\Lightness value expected to be a positive integer');
     }
 
 
@@ -203,9 +200,9 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessSetNegative()
     {
-        $value = new Zend_Measure_Lightness('-100',Zend_Measure_Lightness::STANDARD,'de');
-        $value->setValue('-200',Zend_Measure_Lightness::STANDARD,'de');
-        $this->assertEquals(-200, $value->getValue(), 'Zend_Measure_Lightness value expected to be a negative integer');
+        $value = new Measure\Lightness('-100',Measure\Lightness::STANDARD,'de');
+        $value->setValue('-200',Measure\Lightness::STANDARD,'de');
+        $this->assertEquals(-200, $value->getValue(), 'Zend\Measure\Lightness value expected to be a negative integer');
     }
 
 
@@ -215,9 +212,9 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessSetDecimal()
     {
-        $value = new Zend_Measure_Lightness('-100,200',Zend_Measure_Lightness::STANDARD,'de');
-        $value->setValue('-200,200',Zend_Measure_Lightness::STANDARD,'de');
-        $this->assertEquals(-200.200, $value->getValue(), 'Zend_Measure_Lightness value expected to be a decimal value');
+        $value = new Measure\Lightness('-100,200',Measure\Lightness::STANDARD,'de');
+        $value->setValue('-200,200',Measure\Lightness::STANDARD,'de');
+        $this->assertEquals(-200.200, $value->getValue(), 'Zend\Measure\Lightness value expected to be a decimal value');
     }
 
 
@@ -227,9 +224,9 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessSetDecimalSeperated()
     {
-        $value = new Zend_Measure_Lightness('-100.100,200',Zend_Measure_Lightness::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Lightness::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Lightness Object not returned');
+        $value = new Measure\Lightness('-100.100,200',Measure\Lightness::STANDARD,'de');
+        $value->setValue('-200.200,200',Measure\Lightness::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend\Measure\Lightness Object not returned');
     }
 
 
@@ -239,9 +236,9 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessSetString()
     {
-        $value = new Zend_Measure_Lightness('-100.100,200',Zend_Measure_Lightness::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Lightness::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Lightness Object not returned');
+        $value = new Measure\Lightness('-100.100,200',Measure\Lightness::STANDARD,'de');
+        $value->setValue('-200.200,200',Measure\Lightness::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend\Measure\Lightness Object not returned');
     }
 
 
@@ -252,10 +249,10 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
     public function testLightnessSetUnknownType()
     {
         try {
-            $value = new Zend_Measure_Lightness('100',Zend_Measure_Lightness::STANDARD,'de');
+            $value = new Measure\Lightness('100',Measure\Lightness::STANDARD,'de');
             $value->setValue('-200.200,200','Lightness::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -268,10 +265,10 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
     public function testLightnessSetUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Lightness('100',Zend_Measure_Lightness::STANDARD,'de');
-            $value->setValue('novalue',Zend_Measure_Lightness::STANDARD,'de');
+            $value = new Measure\Lightness('100',Measure\Lightness::STANDARD,'de');
+            $value->setValue('novalue',Measure\Lightness::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -284,10 +281,10 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
     public function testLightnessSetUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Lightness('100',Zend_Measure_Lightness::STANDARD,'de');
-            $value->setValue('200',Zend_Measure_Lightness::STANDARD,'nolocale');
+            $value = new Measure\Lightness('100',Measure\Lightness::STANDARD,'de');
+            $value->setValue('200',Measure\Lightness::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -299,9 +296,9 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessSetWithNoLocale()
     {
-        $value = new Zend_Measure_Lightness('100', Zend_Measure_Lightness::STANDARD, 'de');
-        $value->setValue('200', Zend_Measure_Lightness::STANDARD);
-        $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Lightness value expected to be a positive integer');
+        $value = new Measure\Lightness('100', Measure\Lightness::STANDARD, 'de');
+        $value->setValue('200', Measure\Lightness::STANDARD);
+        $this->assertEquals(200, $value->getValue(), 'Zend\Measure\Lightness value expected to be a positive integer');
     }
 
 
@@ -311,9 +308,9 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessSetType()
     {
-        $value = new Zend_Measure_Lightness('-100',Zend_Measure_Lightness::STANDARD,'de');
-        $value->setType(Zend_Measure_Lightness::STILB);
-        $this->assertEquals(Zend_Measure_Lightness::STILB, $value->getType(), 'Zend_Measure_Lightness type expected');
+        $value = new Measure\Lightness('-100',Measure\Lightness::STANDARD,'de');
+        $value->setType(Measure\Lightness::STILB);
+        $this->assertEquals(Measure\Lightness::STILB, $value->getType(), 'Zend\Measure\Lightness type expected');
     }
 
 
@@ -324,10 +321,10 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
     public function testLightnessSetTypeFailed()
     {
         try {
-            $value = new Zend_Measure_Lightness('-100',Zend_Measure_Lightness::STANDARD,'de');
+            $value = new Measure\Lightness('-100',Measure\Lightness::STANDARD,'de');
             $value->setType('Lightness::UNKNOWN');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -339,7 +336,7 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessToString()
     {
-        $value = new Zend_Measure_Lightness('-100',Zend_Measure_Lightness::STANDARD,'de');
+        $value = new Measure\Lightness('-100',Measure\Lightness::STANDARD,'de');
         $this->assertEquals('-100 cd/m²', $value->toString(), 'Value -100 cd/m² expected');
     }
 
@@ -350,7 +347,7 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightness_ToString()
     {
-        $value = new Zend_Measure_Lightness('-100',Zend_Measure_Lightness::STANDARD,'de');
+        $value = new Measure\Lightness('-100',Measure\Lightness::STANDARD,'de');
         $this->assertEquals('-100 cd/m²', $value->__toString(), 'Value -100 cd/m² expected');
     }
 
@@ -361,7 +358,7 @@ class Zend_Measure_LightnessTest extends PHPUnit_Framework_TestCase
      */
     public function testLightnessConversionList()
     {
-        $value = new Zend_Measure_Lightness('-100',Zend_Measure_Lightness::STANDARD,'de');
+        $value = new Measure\Lightness('-100',Measure\Lightness::STANDARD,'de');
         $unit  = $value->getConversionList();
         $this->assertTrue(is_array($unit), 'Array expected');
     }

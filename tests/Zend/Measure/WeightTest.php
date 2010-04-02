@@ -20,14 +20,11 @@
  * @version    $Id$
  */
 
-
 /**
- * Zend_Measure_Weight
+ * @namespace
  */
-
-/**
- * PHPUnit test case
- */
+namespace ZendTest\Measure;
+use Zend\Measure;
 
 /**
  * @category   Zend
@@ -37,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
-class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
+class WeightTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * test for Weight initialisation
@@ -45,8 +42,8 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightInit()
     {
-        $value = new Zend_Measure_Weight('100',Zend_Measure_Weight::STANDARD,'de');
-        $this->assertTrue($value instanceof Zend_Measure_Weight,'Zend_Measure_Weight Object not returned');
+        $value = new Measure\Weight('100',Measure\Weight::STANDARD,'de');
+        $this->assertTrue($value instanceof Measure\Weight,'Zend\Measure\Weight Object not returned');
     }
 
 
@@ -57,9 +54,9 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
     public function testWeightUnknownType()
     {
         try {
-            $value = new Zend_Measure_Weight('100','Weight::UNKNOWN','de');
+            $value = new Measure\Weight('100','Weight::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -72,9 +69,9 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
     public function testWeightUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Weight('novalue',Zend_Measure_Weight::STANDARD,'de');
+            $value = new Measure\Weight('novalue',Measure\Weight::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -87,9 +84,9 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
     public function testWeightUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Weight('100',Zend_Measure_Weight::STANDARD,'nolocale');
+            $value = new Measure\Weight('100',Measure\Weight::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -101,8 +98,8 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightNoLocale()
     {
-        $value = new Zend_Measure_Weight('100',Zend_Measure_Weight::STANDARD);
-        $this->assertEquals(100, $value->getValue(),'Zend_Measure_Weight value expected');
+        $value = new Measure\Weight('100',Measure\Weight::STANDARD);
+        $this->assertEquals(100, $value->getValue(),'Zend\Measure\Weight value expected');
     }
 
 
@@ -112,8 +109,8 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightValuePositive()
     {
-        $value = new Zend_Measure_Weight('100',Zend_Measure_Weight::STANDARD,'de');
-        $this->assertEquals(100, $value->getValue(), 'Zend_Measure_Weight value expected to be a positive integer');
+        $value = new Measure\Weight('100',Measure\Weight::STANDARD,'de');
+        $this->assertEquals(100, $value->getValue(), 'Zend\Measure\Weight value expected to be a positive integer');
     }
 
 
@@ -123,8 +120,8 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightValueNegative()
     {
-        $value = new Zend_Measure_Weight('-100',Zend_Measure_Weight::STANDARD,'de');
-        $this->assertEquals(-100, $value->getValue(), 'Zend_Measure_Weight value expected to be a negative integer');
+        $value = new Measure\Weight('-100',Measure\Weight::STANDARD,'de');
+        $this->assertEquals(-100, $value->getValue(), 'Zend\Measure\Weight value expected to be a negative integer');
     }
 
 
@@ -134,8 +131,8 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightValueDecimal()
     {
-        $value = new Zend_Measure_Weight('-100,200',Zend_Measure_Weight::STANDARD,'de');
-        $this->assertEquals(-100.200, $value->getValue(), 'Zend_Measure_Weight value expected to be a decimal value');
+        $value = new Measure\Weight('-100,200',Measure\Weight::STANDARD,'de');
+        $this->assertEquals(-100.200, $value->getValue(), 'Zend\Measure\Weight value expected to be a decimal value');
     }
 
 
@@ -145,8 +142,8 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightValueDecimalSeperated()
     {
-        $value = new Zend_Measure_Weight('-100.100,200',Zend_Measure_Weight::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Weight Object not returned');
+        $value = new Measure\Weight('-100.100,200',Measure\Weight::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend\Measure\Weight Object not returned');
     }
 
 
@@ -156,8 +153,8 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightValueString()
     {
-        $value = new Zend_Measure_Weight('-100.100,200',Zend_Measure_Weight::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Weight Object not returned');
+        $value = new Measure\Weight('-100.100,200',Measure\Weight::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend\Measure\Weight Object not returned');
     }
 
 
@@ -167,9 +164,9 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightEquality()
     {
-        $value = new Zend_Measure_Weight('-100.100,200',Zend_Measure_Weight::STANDARD,'de');
-        $newvalue = new Zend_Measure_Weight('-100.100,200',Zend_Measure_Weight::STANDARD,'de');
-        $this->assertTrue($value->equals($newvalue),'Zend_Measure_Weight Object should be equal');
+        $value = new Measure\Weight('-100.100,200',Measure\Weight::STANDARD,'de');
+        $newvalue = new Measure\Weight('-100.100,200',Measure\Weight::STANDARD,'de');
+        $this->assertTrue($value->equals($newvalue),'Zend\Measure\Weight Object should be equal');
     }
 
 
@@ -179,9 +176,9 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightNoEquality()
     {
-        $value = new Zend_Measure_Weight('-100.100,200',Zend_Measure_Weight::STANDARD,'de');
-        $newvalue = new Zend_Measure_Weight('-100,200',Zend_Measure_Weight::STANDARD,'de');
-        $this->assertFalse($value->equals($newvalue),'Zend_Measure_Weight Object should be not equal');
+        $value = new Measure\Weight('-100.100,200',Measure\Weight::STANDARD,'de');
+        $newvalue = new Measure\Weight('-100,200',Measure\Weight::STANDARD,'de');
+        $this->assertFalse($value->equals($newvalue),'Zend\Measure\Weight Object should be not equal');
     }
 
 
@@ -191,9 +188,9 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightSetPositive()
     {
-        $value = new Zend_Measure_Weight('100',Zend_Measure_Weight::STANDARD,'de');
-        $value->setValue('200',Zend_Measure_Weight::STANDARD,'de');
-        $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Weight value expected to be a positive integer');
+        $value = new Measure\Weight('100',Measure\Weight::STANDARD,'de');
+        $value->setValue('200',Measure\Weight::STANDARD,'de');
+        $this->assertEquals(200, $value->getValue(), 'Zend\Measure\Weight value expected to be a positive integer');
     }
 
 
@@ -203,9 +200,9 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightSetNegative()
     {
-        $value = new Zend_Measure_Weight('-100',Zend_Measure_Weight::STANDARD,'de');
-        $value->setValue('-200',Zend_Measure_Weight::STANDARD,'de');
-        $this->assertEquals(-200, $value->getValue(), 'Zend_Measure_Weight value expected to be a negative integer');
+        $value = new Measure\Weight('-100',Measure\Weight::STANDARD,'de');
+        $value->setValue('-200',Measure\Weight::STANDARD,'de');
+        $this->assertEquals(-200, $value->getValue(), 'Zend\Measure\Weight value expected to be a negative integer');
     }
 
 
@@ -215,9 +212,9 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightSetDecimal()
     {
-        $value = new Zend_Measure_Weight('-100,200',Zend_Measure_Weight::STANDARD,'de');
-        $value->setValue('-200,200',Zend_Measure_Weight::STANDARD,'de');
-        $this->assertEquals(-200.200, $value->getValue(), 'Zend_Measure_Weight value expected to be a decimal value');
+        $value = new Measure\Weight('-100,200',Measure\Weight::STANDARD,'de');
+        $value->setValue('-200,200',Measure\Weight::STANDARD,'de');
+        $this->assertEquals(-200.200, $value->getValue(), 'Zend\Measure\Weight value expected to be a decimal value');
     }
 
 
@@ -227,9 +224,9 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightSetDecimalSeperated()
     {
-        $value = new Zend_Measure_Weight('-100.100,200',Zend_Measure_Weight::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Weight::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Weight Object not returned');
+        $value = new Measure\Weight('-100.100,200',Measure\Weight::STANDARD,'de');
+        $value->setValue('-200.200,200',Measure\Weight::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend\Measure\Weight Object not returned');
     }
 
 
@@ -239,9 +236,9 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightSetString()
     {
-        $value = new Zend_Measure_Weight('-100.100,200',Zend_Measure_Weight::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Weight::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Weight Object not returned');
+        $value = new Measure\Weight('-100.100,200',Measure\Weight::STANDARD,'de');
+        $value->setValue('-200.200,200',Measure\Weight::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend\Measure\Weight Object not returned');
     }
 
 
@@ -252,10 +249,10 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
     public function testWeightSetUnknownType()
     {
         try {
-            $value = new Zend_Measure_Weight('100',Zend_Measure_Weight::STANDARD,'de');
+            $value = new Measure\Weight('100',Measure\Weight::STANDARD,'de');
             $value->setValue('-200.200,200','Weight::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -268,10 +265,10 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
     public function testWeightSetUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Weight('100',Zend_Measure_Weight::STANDARD,'de');
-            $value->setValue('novalue',Zend_Measure_Weight::STANDARD,'de');
+            $value = new Measure\Weight('100',Measure\Weight::STANDARD,'de');
+            $value->setValue('novalue',Measure\Weight::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -284,10 +281,10 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
     public function testWeightSetUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Weight('100',Zend_Measure_Weight::STANDARD,'de');
-            $value->setValue('200',Zend_Measure_Weight::STANDARD,'nolocale');
+            $value = new Measure\Weight('100',Measure\Weight::STANDARD,'de');
+            $value->setValue('200',Measure\Weight::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -299,9 +296,9 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testMeasureSetWithNoLocale()
     {
-        $value = new Zend_Measure_Weight('100', Zend_Measure_Weight::STANDARD, 'de');
-        $value->setValue('200', Zend_Measure_Weight::STANDARD);
-        $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Weight value expected to be a positive integer');
+        $value = new Measure\Weight('100', Measure\Weight::STANDARD, 'de');
+        $value->setValue('200', Measure\Weight::STANDARD);
+        $this->assertEquals(200, $value->getValue(), 'Zend\Measure\Weight value expected to be a positive integer');
     }
 
 
@@ -311,9 +308,9 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightSetType()
     {
-        $value = new Zend_Measure_Weight('-100',Zend_Measure_Weight::STANDARD,'de');
-        $value->setType(Zend_Measure_Weight::GRAM);
-        $this->assertEquals(Zend_Measure_Weight::GRAM, $value->getType(), 'Zend_Measure_Weight type expected');
+        $value = new Measure\Weight('-100',Measure\Weight::STANDARD,'de');
+        $value->setType(Measure\Weight::GRAM);
+        $this->assertEquals(Measure\Weight::GRAM, $value->getType(), 'Zend\Measure\Weight type expected');
     }
 
 
@@ -323,9 +320,9 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightSetComputedType1()
     {
-        $value = new Zend_Measure_Weight('-100',Zend_Measure_Weight::DRAM,'de');
-        $value->setType(Zend_Measure_Weight::OUNCE);
-        $this->assertEquals(Zend_Measure_Weight::OUNCE, $value->getType(), 'Zend_Measure_Weight type expected');
+        $value = new Measure\Weight('-100',Measure\Weight::DRAM,'de');
+        $value->setType(Measure\Weight::OUNCE);
+        $this->assertEquals(Measure\Weight::OUNCE, $value->getType(), 'Zend\Measure\Weight type expected');
     }
 
 
@@ -335,9 +332,9 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightSetComputedType2()
     {
-        $value = new Zend_Measure_Weight('-100',Zend_Measure_Weight::OUNCE,'de');
-        $value->setType(Zend_Measure_Weight::DRAM);
-        $this->assertEquals(Zend_Measure_Weight::DRAM, $value->getType(), 'Zend_Measure_Weight type expected');
+        $value = new Measure\Weight('-100',Measure\Weight::OUNCE,'de');
+        $value->setType(Measure\Weight::DRAM);
+        $this->assertEquals(Measure\Weight::DRAM, $value->getType(), 'Zend\Measure\Weight type expected');
     }
 
 
@@ -348,10 +345,10 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
     public function testWeightSetTypeFailed()
     {
         try {
-            $value = new Zend_Measure_Weight('-100',Zend_Measure_Weight::STANDARD,'de');
+            $value = new Measure\Weight('-100',Measure\Weight::STANDARD,'de');
             $value->setType('Weight::UNKNOWN');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -363,7 +360,7 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightToString()
     {
-        $value = new Zend_Measure_Weight('-100',Zend_Measure_Weight::STANDARD,'de');
+        $value = new Measure\Weight('-100',Measure\Weight::STANDARD,'de');
         $this->assertEquals('-100 kg', $value->toString(), 'Value -100 kg expected');
     }
 
@@ -374,7 +371,7 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeight_ToString()
     {
-        $value = new Zend_Measure_Weight('-100',Zend_Measure_Weight::STANDARD,'de');
+        $value = new Measure\Weight('-100',Measure\Weight::STANDARD,'de');
         $this->assertEquals('-100 kg', $value->__toString(), 'Value -100 kg expected');
     }
 
@@ -385,7 +382,7 @@ class Zend_Measure_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testWeightConversionList()
     {
-        $value = new Zend_Measure_Weight('-100',Zend_Measure_Weight::STANDARD,'de');
+        $value = new Measure\Weight('-100',Measure\Weight::STANDARD,'de');
         $unit  = $value->getConversionList();
         $this->assertTrue(is_array($unit), 'Array expected');
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21194 -->
-<!-- Reviewed: 21194 -->
+<!-- EN-Revision: 21661 -->
+<!-- Reviewed: 21661 -->
 <sect1 id="zend.translate.using">
     <title>Verwendung der Übersetzungsadapter</title>
 
@@ -38,11 +38,18 @@ print "Hier ist Zeile zwei\n";
 
         <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
-    'gettext',
-    '/path/to/translation/source-de.mo',
-    'de'
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translation/source-de.mo',
+        'locale'  => 'de'
+    )
 );
-$translate->addTranslation('//my/path/fr-source.mo', 'fr');
+$translate->addTranslation(
+    array(
+        'content' => '//my/path/fr-source.mo',
+        'locale   => 'fr'
+    )
+);
 
 print $translate->_("Beispiel") . "\n";
 print "========\n";
@@ -66,9 +73,11 @@ print $translate->_("Hier ist Zeile zwei") . "\n";
 
         <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
-    'gettext',
-    '/path/to/translation/source-de.mo',
-    'de'
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translation/source-de.mo',
+        'locale'  => 'de'
+    )
 );
 ]]></programlisting>
 

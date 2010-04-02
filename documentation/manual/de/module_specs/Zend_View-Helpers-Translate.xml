@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19433 -->
+<!-- EN-Revision: 21661 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.translate">
     <title>Übersetzungs Helfer</title>
@@ -67,7 +67,13 @@
 
         <programlisting language="php"><![CDATA[
 // unser Beispieladapter
-$adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
+$adapter = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => array('simple' => 'einfach'),
+        'locale'  => 'de'
+    )
+);
 Zend_Registry::set('Zend_Translate', $adapter);
 
 // In der View
@@ -93,7 +99,13 @@ echo $this->translate('simple');
 
         <programlisting language="php"><![CDATA[
 // in der View
-$adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
+$adapter = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => array('simple' => 'einfach'),
+        'locale'  => 'de'
+    )
+);
 $this->translate()->setTranslator($adapter)->translate('simple');
 // das gibt 'einfach' zurück
 ]]></programlisting>
@@ -109,7 +121,13 @@ $this->translate()->setTranslator($adapter)->translate('simple');
 
         <programlisting language="php"><![CDATA[
 // unser Beispieladapter
-$adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
+$adapter = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => array('simple' => 'einfach'),
+        'locale'  => 'de'
+    )
+);
 
 // den Helfer initiieren
 $translate = new Zend_View_Helper_Translate($adapter);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21213 -->
+<!-- EN-Revision: 21661 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.messages">
     <title>Prüfungsmeldungen</title>
@@ -85,10 +85,12 @@ $validator->setMessage('Bitte einen kleineren Wert angeben', Zend_Validate_Great
 
         <programlisting language="php"><![CDATA[
 $translator = new Zend_Translate(
-    'array',
-    '/resources/languages',
-    $language,
-    array('scan' => Zend_Translate::LOCALE_DIRECTORY)
+    array(
+        'adapter' => 'array',
+        'content' => '/resources/languages',
+        'locale'  => $language,
+        'scan'    => Zend_Translate::LOCALE_DIRECTORY
+    )
 );
 Zend_Validate_Abstract::setDefaultTranslator($translator);
 ]]></programlisting>

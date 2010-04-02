@@ -2433,8 +2433,8 @@ if (!is_null($version)) {
 
                     <para>
                         We recommend to update the <filename>gds32.dll</filename> (or linux
-                        equivalent) bundled with php, to the same version of the server. For
-                        Firebird the equivalent <filename>gds32.dll</filename> is
+                        equivalent) bundled with <acronym>PHP</acronym>, to the same version of the
+                        server. For Firebird the equivalent <filename>gds32.dll</filename> is
                         <filename>fbclient.dll</filename>.
                     </para>
 

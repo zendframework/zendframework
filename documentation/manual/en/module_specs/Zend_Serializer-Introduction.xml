@@ -5,7 +5,8 @@
 
     <para>
         <classname>Zend_Serializer</classname> provides an adapter based interface to simply
-        generate storable representation of php types by different facilities, and recover.
+        generate storable representation of <acronym>PHP</acronym> types by different facilities,
+        and recover.
     </para>
 
     <example id="zend.serializer.introduction.example.dynamic">

@@ -536,10 +536,10 @@ Updating project profile '.zfproject.xml'
 ]]></programlisting>
 
     <para>
-        We'll modify this empty PHP class to make it easy to populate the model by passing an array
-        of data either to the constructor or a <methodname>setOptions()</methodname> method. The
-        final model class, located in <filename>application/models/Guestbook.php</filename>, should
-        look like this:
+        We'll modify this empty <acronym>PHP</acronym> class to make it easy to populate the model
+        by passing an array of data either to the constructor or a
+        <methodname>setOptions()</methodname> method. The final model class, located in
+        <filename>application/models/Guestbook.php</filename>, should look like this:
     </para>
 
     <programlisting language="php"><![CDATA[

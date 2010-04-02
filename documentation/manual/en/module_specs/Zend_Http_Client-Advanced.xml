@@ -243,7 +243,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
 ]]></programlisting>
             </example>
 
-            The data should be available on the server side through PHP's
+            The data should be available on the server side through <acronym>PHP</acronym>'s
             $HTTP_RAW_POST_DATA variable or through the php://input stream.
         </para>
 
@@ -394,11 +394,11 @@ $_SESSION['cookiejar'] = $client->getCookieJar();
         <title>Data Streaming</title>
 
         <para>
-            By default, <classname>Zend_Http_Client</classname> accepts and returns data as PHP
-            strings. However, in many cases there are big files to be sent or received, thus keeping
-            them in memory might be unnecessary or too expensive. For these cases,
-            <classname>Zend_Http_Client</classname> supports reading data from files (and in
-            general, PHP streams) and writing data to files (streams).
+            By default, <classname>Zend_Http_Client</classname> accepts and returns data as
+            <acronym>PHP</acronym> strings. However, in many cases there are big files to be sent or
+            received, thus keeping them in memory might be unnecessary or too expensive. For these
+            cases, <classname>Zend_Http_Client</classname> supports reading data from files (and in
+            general, <acronym>PHP</acronym> streams) and writing data to files (streams).
         </para>
 
         <para>

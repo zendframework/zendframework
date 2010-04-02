@@ -1087,8 +1087,8 @@ $labels = $categories->getValues();
                 follow <acronym>RFC</acronym> 822 or <acronym>RFC</acronym> 2822
                 which is also common. Date methods
                 will throw an exception if <classname>Zend_Date</classname>
-                cannot load the date string using one of the above standards, or
-                the PHP recognised possibilities for <acronym>RSS</acronym> dates.
+                cannot load the date string using one of the above standards, or the
+                <acronym>PHP</acronym> recognised possibilities for <acronym>RSS</acronym> dates.
             </para>
         </caution>
 

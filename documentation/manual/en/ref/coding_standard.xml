@@ -192,12 +192,12 @@
 
                 <para>
                     The rationale for the change is due to namespace usage. As we look towards Zend
-                    Framework 2.0 and usage of PHP 5.3, we will be using namespaces. The easiest way
-                    to automate conversion to namespaces is to simply convert underscores to the
-                    namespace separator -- but under the old naming conventions, this leaves the
-                    classname as simply "Abstract" or "Interface" -- both of which are reserved
-                    keywords in PHP. If we prepend the (sub)component name to the classname, we can
-                    avoid these issues.
+                    Framework 2.0 and usage of <acronym>PHP</acronym> 5.3, we will be using
+                    namespaces. The easiest way to automate conversion to namespaces is to simply
+                    convert underscores to the namespace separator -- but under the old naming
+                    conventions, this leaves the classname as simply "Abstract" or "Interface" --
+                    both of which are reserved keywords in <acronym>PHP</acronym>. If we prepend the
+                    (sub)component name to the classname, we can avoid these issues.
                 </para>
 
                 <para>

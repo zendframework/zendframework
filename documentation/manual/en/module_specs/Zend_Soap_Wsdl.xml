@@ -429,7 +429,7 @@
 
             <para>
                 <methodname>getType($type)</methodname> method may be used to get mapping for a
-                specified PHP type:
+                specified <acronym>PHP</acronym> type:
 
                <programlisting language="php"><![CDATA[
 ...

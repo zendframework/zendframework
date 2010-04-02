@@ -724,7 +724,7 @@ $server = new Zend_XmlRpc_Server();
             <para>
                 Performance is determined by a lot of parameters and
                 benchmarks only apply for the specific test case. Differences
-                come from PHP version, installed extensions, webserver and
+                come from <acronym>PHP</acronym> version, installed extensions, webserver and
                 operating system just to name a few. Please make sure to
                 benchmark your application on your own and decide which
                 generator to use based on <emphasis>your</emphasis> numbers.

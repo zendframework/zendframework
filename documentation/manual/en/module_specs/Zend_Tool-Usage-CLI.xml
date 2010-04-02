@@ -30,7 +30,8 @@
                 it on your system.  The next step is to make the zf command available to your
                 system. The easiest way to do this, is to copy the proper files from the bin/
                 directory of the download, and place these files within the
-                <emphasis>same</emphasis> directory as the location of the php cli binary.
+                <emphasis>same</emphasis> directory as the location of the <acronym>PHP</acronym>
+                cli binary.
             </para>
         </sect3>
 
@@ -562,7 +563,11 @@ zf --setup config-file
                             <para>original behavior:</para>
 
                             <itemizedlist>
-                                <listitem><para>use php's include_path to find ZF</para></listitem>
+                                <listitem>
+                                    <para>
+                                        use <acronym>PHP</acronym>'s include_path to find ZF
+                                    </para>
+                                </listitem>
 
                                 <listitem>
                                     <para>use the ZF_INCLUDE_PATH environment variable</para>

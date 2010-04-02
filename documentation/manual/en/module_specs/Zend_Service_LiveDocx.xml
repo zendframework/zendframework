@@ -8,11 +8,12 @@
 
         <para>
             LiveDocx is a <acronym>SOAP</acronym> service that allows developers to generate word
-            processing documents by combining structured data from PHP with a template, created in a
-            word processor. The resulting document can be saved as a <acronym>PDF</acronym>,
-            <acronym>DOCX</acronym>, <acronym>DOC</acronym>, <acronym>HTML</acronym> or
-            <acronym>RTF</acronym> file. LiveDocx implements <ulink
-                    url="http://en.wikipedia.org/wiki/Mail_merge">mail-merge</ulink> in PHP.
+            processing documents by combining structured data from <acronym>PHP</acronym> with a
+            template, created in a word processor. The resulting document can be saved as a
+            <acronym>PDF</acronym>, <acronym>DOCX</acronym>, <acronym>DOC</acronym>,
+            <acronym>HTML</acronym> or <acronym>RTF</acronym> file. LiveDocx implements <ulink
+                url="http://en.wikipedia.org/wiki/Mail_merge">mail-merge</ulink> in
+            <acronym>PHP</acronym>.
         </para>
 
         <para>
@@ -346,7 +347,7 @@
 
             <para>
                  In the next step, we are going to populate the merge fields with textual data from
-                 PHP.
+                 <acronym>PHP</acronym>.
             </para>
 
             <para>
@@ -457,8 +458,8 @@ blockEnd_block1
 
             <para>
                 The content of a block is repeated, until all data assigned in the block fields has
-                been injected into the template. The data for block fields is specified in PHP as a
-                multi-assoc array.
+                been injected into the template. The data for block fields is specified in
+                <acronym>PHP</acronym> as a multi-assoc array.
             </para>
 
             <para>
@@ -623,7 +624,7 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
             <para>
                 This produces two files (<filename>documentPage1.png</filename> and
                 <filename>documentPage2.png</filename>) and writes them to disk in the same
-                directory as the executable PHP file.
+                directory as the executable <acronym>PHP</acronym> file.
             </para>
 
             <para>

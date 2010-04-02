@@ -208,7 +208,7 @@ $logger = Zend_Log::factory(array(
 
                     <listitem>
                         <para>
-                            A valid PHP stream identifier to which to log.
+                            A valid <acronym>PHP</acronym> stream identifier to which to log.
                         </para>
                     </listitem>
                 </varlistentry>

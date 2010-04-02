@@ -233,8 +233,8 @@ var_dump($paginator->getPageItemCache());
             "has-an adapter" relationship, rather than the "is-an adapter" relationsship that
             <classname>Zend_Paginator_Adapter_Abstract</classname> promotes. For this cases you can
             use the <classname>Zend_Paginator_AdapterAggregate</classname> interface that behaves
-            much like the <classname>IteratorAggregate</classname> interface of the PHP SPL
-            extension.
+            much like the <classname>IteratorAggregate</classname> interface of the
+            <acronym>PHP</acronym> SPL extension.
         </para>
 
         <para>

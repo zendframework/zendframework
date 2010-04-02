@@ -64,8 +64,8 @@ if ($validator->isValid($ip)) {
 
             <para>
                 <classname>Zend_Validate_Ip</classname> validates IPv6 addresses with regex. The
-                reason is that the filters and methods from PHP itself don't follow the RFC. Many
-                other available classes also don't follow it.
+                reason is that the filters and methods from <acronym>PHP</acronym> itself don't
+                follow the RFC. Many other available classes also don't follow it.
             </para>
         </note>
     </sect3>

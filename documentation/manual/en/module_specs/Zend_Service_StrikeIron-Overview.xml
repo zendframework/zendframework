@@ -205,7 +205,7 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
         <para>
             Once you have used the <methodname>getService()</methodname> method to get a client
             for a particular StrikeIron service, you can utilize that client
-            by calling methods on it just like any other PHP object.
+            by calling methods on it just like any other <acronym>PHP</acronym> object.
 
             <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
@@ -260,7 +260,8 @@ echo $rateInfo->GST;
 
         <para>
             The simplest way to examine a result from the service is to use the built-in
-            PHP functions like <ulink url="http://www.php.net/print_r">print_r()</ulink>:
+            <acronym>PHP</acronym> functions like <ulink
+                url="http://www.php.net/print_r">print_r()</ulink>:
 
             <programlisting language="php"><![CDATA[
 <?php

@@ -113,8 +113,8 @@ $log->info('Exception occurred', array(
         </para>
 
         <para>
-            As noted previously, if the Monitor API is not detected in your PHP installation, the
-            logger will simply act as a <constant>NULL</constant> logger.
+            As noted previously, if the Monitor API is not detected in your <acronym>PHP</acronym>
+            installation, the logger will simply act as a <constant>NULL</constant> logger.
         </para>
     </note>
 </sect2>

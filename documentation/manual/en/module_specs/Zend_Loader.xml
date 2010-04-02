@@ -120,9 +120,9 @@ Zend_Loader::loadClass('Container_Tree',
             <title>Loading Classes from PHP Namespaces</title>
 
             <para>
-                Starting in version 1.10.0, Zend Framework now allows loading classes from PHP
-                namespaces. This support follows the same guidelines and implementation as that
-                found in the <ulink
+                Starting in version 1.10.0, Zend Framework now allows loading classes from
+                <acronym>PHP</acronym> namespaces. This support follows the same guidelines and
+                implementation as that found in the <ulink
                     url="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PHP
                 Framework Interop Group PSR-0</ulink> reference implementation.
             </para>

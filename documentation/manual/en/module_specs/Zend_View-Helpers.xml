@@ -633,7 +633,7 @@ $view->registerHelper($helper, 'foo');
                 The second argument to <methodname>registerHelper()</methodname> is the name of the
                 helper. A corresponding method name should exist in the helper; otherwise,
                 <classname>Zend_View</classname> will call a non-existent method when invoking the
-                helper, raising a fatal PHP error.
+                helper, raising a fatal <acronym>PHP</acronym> error.
             </para>
         </note>
     </sect2>

@@ -126,11 +126,12 @@ $mail->send();
             <title>Sendmail Transport and Windows</title>
 
             <para>
-                As the PHP manual states the <methodname>mail()</methodname> function has different
-                behaviour on Windows and on *nix based systems. Using the Sendmail Transport
-                on Windows will not work in combination with <methodname>addBcc()</methodname>.
-                The <methodname>mail()</methodname> function will sent to the BCC recipient such
-                that all the other recipients can see him as recipient!
+                As the <acronym>PHP</acronym> manual states the <methodname>mail()</methodname>
+                function has different behaviour on Windows and on *nix based systems. Using the
+                Sendmail Transport on Windows will not work in combination with
+                <methodname>addBcc()</methodname>. The <methodname>mail()</methodname> function will
+                sent to the BCC recipient such that all the other recipients can see him as
+                recipient!
             </para>
 
             <para>

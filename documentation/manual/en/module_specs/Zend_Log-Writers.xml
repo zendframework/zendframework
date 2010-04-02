@@ -17,9 +17,9 @@
         </para>
 
         <para>
-            To write log data to the PHP output buffer, use the URL <code>php://output</code>.
-            Alternatively, you can send log data directly to a stream like
-            <constant>STDERR</constant> (<code>php://stderr</code>).
+            To write log data to the <acronym>PHP</acronym> output buffer, use the URL
+            <code>php://output</code>. Alternatively, you can send log data directly to a stream
+            like <constant>STDERR</constant> (<code>php://stderr</code>).
 
             <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');

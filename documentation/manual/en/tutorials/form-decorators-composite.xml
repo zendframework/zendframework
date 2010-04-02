@@ -196,10 +196,10 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 
         <para>
             Revisiting the example from the last section, let's assume that we want users to input
-            each of the year, month, and day separately. PHP fortunately allows us to use array
-            notation when creating elements, so it's still possible to capture these three entities
-            into a single value -- and we've now created a <classname>Zend_Form</classname> element
-            that can handle such an array value.
+            each of the year, month, and day separately. <acronym>PHP</acronym> fortunately allows
+            us to use array notation when creating elements, so it's still possible to capture these
+            three entities into a single value -- and we've now created a
+            <classname>Zend_Form</classname> element that can handle such an array value.
         </para>
 
         <para>

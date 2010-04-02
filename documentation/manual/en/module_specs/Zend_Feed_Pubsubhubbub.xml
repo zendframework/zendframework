@@ -6,7 +6,7 @@
     <para>
         <classname>Zend_Feed_Pubsubhubbub</classname> is an implementation of the PubSubHubbub Core
         0.2 Specification (Working Draft). It offers implementations of a Pubsubhubbub Publisher and
-        Subscriber suited to Zend Framework and other PHP applications.
+        Subscriber suited to Zend Framework and other <acronym>PHP</acronym> applications.
     </para>
 
     <sect2 id="zend.feed.pubsubhubbub.what.is.pubsubhubbub">
@@ -544,11 +544,11 @@ if ($callback->hasFeedUpdate()) {
                     It should be noted that
                     <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> may
                     independently parse any incoming query string and other parameters.  This is
-                    necessary since PHP alters the structure and keys of a query string when it is
-                    parsed into the <varname>$_GET</varname> or <varname>$_POST</varname>
-                    superglobals.  For example, all duplicate keys are ignored and periods are
-                    converted to underscores. Pubsubhubbub features both of these in the query
-                    strings it generates.
+                    necessary since <acronym>PHP</acronym> alters the structure and keys of a query
+                    string when it is parsed into the <varname>$_GET</varname> or
+                    <varname>$_POST</varname> superglobals.  For example, all duplicate keys are
+                    ignored and periods are converted to underscores. Pubsubhubbub features both of
+                    these in the query strings it generates.
                 </para>
             </note>
 

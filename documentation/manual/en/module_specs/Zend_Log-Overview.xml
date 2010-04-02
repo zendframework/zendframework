@@ -121,7 +121,7 @@ $logger = null;
 ]]></programlisting>
 
             Explicitly destroying the log in this way is optional and is performed
-            automatically at PHP shutdown.
+            automatically at <acronym>PHP</acronym> shutdown.
         </para>
     </sect2>
 
@@ -235,12 +235,13 @@ $logger->setEventItem('pid', getmypid());
         <title>Log PHP Errors</title>
 
         <para>
-            Zend_Log can also be used to log php errors.  Calling <methodname>registerErrorHandler()</methodname> will
-            add Zend_Log before the current error handler, and will pass the error along as well.
+            Zend_Log can also be used to log <acronym>PHP</acronym> errors.  Calling
+            <methodname>registerErrorHandler()</methodname> will add Zend_Log before the current
+            error handler, and will pass the error along as well.
         </para>
-        
+
         <table id="zend.log.overview.as-errorHandler.properties.table-1">
-            <title>Zend_Log events from php errors have the additional fields matching 
+            <title>Zend_Log events from PHP errors have the additional fields matching
             <methodname>handler  ( int $errno  , string $errstr  [, string $errfile  [, int $errline  [, array $errcontext  ]]] )</methodname>
             from <ulink url="http://us3.php.net/manual/en/function.set-error-handler.php">set_error_handler</ulink></title>
 

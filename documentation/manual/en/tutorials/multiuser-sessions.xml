@@ -22,11 +22,11 @@
         </para>
 
         <para>
-            In PHP, the session problem is solved by the session extension which utilizes some state
-            tracking, typically cookies, and some form of local storage which is exposed via the
-            $_SESSION superglobal.  In Zend Framework, the component Zend_Session adds value to the
-            php session extension making it easier to use and depend on inside object-oriented
-            applications.
+            In <acronym>PHP</acronym>, the session problem is solved by the session extension which
+            utilizes some state tracking, typically cookies, and some form of local storage which is
+            exposed via the $_SESSION superglobal.  In Zend Framework, the component Zend_Session
+            adds value to the <acronym>PHP</acronym> session extension making it easier to use and
+            depend on inside object-oriented applications.
         </para>
     </sect2>
 
@@ -61,10 +61,10 @@ resources.session.remember_me_seconds = 864000
 
         <para>
             As you can see, the options passed in are the same options that you'd expect to find
-            in the ext/session extension in PHP.  Those options setup the path to the session
-            files where data will be stored within the project.  Since ini files can additionally
-            use constants, the above will use the APPLICATION_PATH constant and relatively point
-            to a data session directory.
+            in the ext/session extension in <acronym>PHP</acronym>.  Those options setup the path
+            to the session files where data will be stored within the project.  Since ini files can
+            additionally use constants, the above will use the APPLICATION_PATH constant and
+            relatively point to a data session directory.
         </para>
 
         <para>

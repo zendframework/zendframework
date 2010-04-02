@@ -11,10 +11,11 @@
         <title>Install Zend Framework</title>
 
         <para>
-            The easiest way to get Zend Framework along with a complete PHP stack is by installing
-            <ulink url="http://www.zend.com/en/products/server-ce/downloads">Zend Server</ulink>.
-            Zend Server has native installers for Mac OSX, Windows, Fedora Core, and Ubuntu, as well
-            as a universal installation package compatible with most Linux distributions.
+            The easiest way to get Zend Framework along with a complete <acronym>PHP</acronym> stack
+            is by installing <ulink url="http://www.zend.com/en/products/server-ce/downloads">Zend
+                Server</ulink>. Zend Server has native installers for Mac OSX, Windows, Fedora Core,
+            and Ubuntu, as well as a universal installation package compatible with most Linux
+            distributions.
         </para>
 
         <para>
@@ -171,9 +172,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             While Zend Framework is itself configurationless, you often need to configure your
             application. The default configuration is placed in
             <filename>application/configs/application.ini</filename>, and contains some basic
-            directives for setting your PHP environment (for instance, turning error reporting on
-            and off), indicating the path to your bootstrap class (as well as its class name), and
-            the path to your action controllers. It looks as follows:
+            directives for setting your <acronym>PHP</acronym> environment (for instance, turning
+            error reporting on and off), indicating the path to your bootstrap class (as well as its
+            class name), and the path to your action controllers. It looks as follows:
         </para>
 
         <programlisting language="ini"><![CDATA[
@@ -303,9 +304,9 @@ class ErrorController extends Zend_Controller_Action
         <title>Views</title>
 
         <para>
-            Views in Zend Framework are written in plain old PHP. View scripts are placed in
-            <filename>application/views/scripts/</filename>, where they are further categorized
-            using the controller names. In our case, we have an
+            Views in Zend Framework are written in plain old <acronym>PHP</acronym>. View scripts
+            are placed in <filename>application/views/scripts/</filename>, where they are further
+            categorized using the controller names. In our case, we have an
             <classname>IndexController</classname> and an <classname>ErrorController</classname>,
             and thus we have corresponding <filename>index/</filename> and
             <filename>error/</filename> subdirectories within our view scripts directory. Within
@@ -316,7 +317,7 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             View scripts may contain any markup you want, and use the <code>&lt;?php</code> opening
-            tag and <code>?&gt;</code> closing tag to insert PHP directives.
+            tag and <code>?&gt;</code> closing tag to insert <acronym>PHP</acronym> directives.
         </para>
 
         <para>
@@ -377,7 +378,7 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             The <filename>error/error.phtml</filename> view script is slightly more interesting as
-            it uses some PHP conditionals:
+            it uses some <acronym>PHP</acronym> conditionals:
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -319,8 +319,8 @@ PHP framework
 PHP^4 framework
 ]]></programlisting>
 
-            This will make documents with the term PHP appear more relevant. You can also boost
-            phrase terms and subqueries as in the example:
+            This will make documents with the term <acronym>PHP</acronym> appear more relevant. You
+            can also boost phrase terms and subqueries as in the example:
 
             <programlisting language="querystring"><![CDATA[
 "PHP framework"^4 "Zend Framework"

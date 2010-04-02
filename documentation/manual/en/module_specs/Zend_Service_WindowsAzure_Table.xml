@@ -10,7 +10,7 @@
     <para>
         Table Storage is offered by Windows Azure as a REST API which is wrapped by the
         <classname>Zend_Service_WindowsAzure_Storage_Table</classname> class in order to provide a
-        native PHP interface to the storage account.
+        native <acronym>PHP</acronym> interface to the storage account.
     </para>
 
     <para>
@@ -673,17 +673,19 @@ $batch->commit();
         <title>Table storage session handler</title>
 
         <para>
-            When running a PHP application on the Windows Azure platform in a load-balanced mode
-            (running 2 Web Role instances or more), it is important that PHP session data can be
-            shared between multiple Web Role instances. The Windows Azure SDK for PHP provides the
+            When running a <acronym>PHP</acronym> application on the Windows Azure platform in a
+            load-balanced mode (running 2 Web Role instances or more), it is important that
+            <acronym>PHP</acronym> session data can be shared between multiple Web Role instances.
+            The Windows Azure SDK for <acronym>PHP</acronym> provides the
             <classname>Zend_Service_WindowsAzure_SessionHandler</classname> class, which uses
-            Windows Azure Table Storage as a session handler for PHP applications.
+            Windows Azure Table Storage as a session handler for <acronym>PHP</acronym>
+            applications.
         </para>
 
         <para>
             To use the <classname>Zend_Service_WindowsAzure_SessionHandler</classname> session
-            handler, it should be registered as the default session handler for your PHP
-            application:
+            handler, it should be registered as the default session handler for your
+            <acronym>PHP</acronym> application:
         </para>
 
         <example id="zend.service.windowsazure.storage.table.api.sessionhandler-register">
@@ -710,7 +712,8 @@ $sessionHandler->register();
         <para>
             After registration of the
             <classname>Zend_Service_WindowsAzure_SessionHandler</classname> session handler,
-            sessions can be started and used in the same way as a normal PHP session:
+            sessions can be started and used in the same way as a normal <acronym>PHP</acronym>
+            session:
         </para>
 
         <example id="zend.service.windowsazure.storage.table.api.sessionhandler-usage">

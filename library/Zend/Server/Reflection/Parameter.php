@@ -14,24 +14,30 @@
  *
  * @category   Zend
  * @package    Zend_Server
+ * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
+
+/**
+ * @namespace
+ */
+namespace Zend\Server\Reflection;
 
 /**
  * Parameter Reflection
  *
  * Decorates a ReflectionParameter to allow setting the parameter type
  *
- * @uses       Zend_Server_Reflection_Exception
+ * @uses       \Zend\Server\Reflection\Exception
  * @category   Zend
  * @package    Zend_Server
- * @subpackage Reflection
+ * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
-class Zend_Server_Reflection_Parameter
+class Parameter
 {
     /**
      * @var ReflectionParameter
@@ -63,7 +69,7 @@ class Zend_Server_Reflection_Parameter
      * @param string $type Parameter type
      * @param string $description Parameter description
      */
-    public function __construct(ReflectionParameter $r, $type = 'mixed', $description = '')
+    public function __construct(\ReflectionParameter $r, $type = 'mixed', $description = '')
     {
         $this->_reflection = $r;
         $this->setType($type);
@@ -83,7 +89,7 @@ class Zend_Server_Reflection_Parameter
             return call_user_func_array(array($this->_reflection, $method), $args);
         }
 
-        throw new Zend_Server_Reflection_Exception('Invalid reflection method');
+        throw new Exception('Invalid reflection method');
     }
 
     /**
@@ -105,7 +111,7 @@ class Zend_Server_Reflection_Parameter
     public function setType($type)
     {
         if (!is_string($type) && (null !== $type)) {
-            throw new Zend_Server_Reflection_Exception('Invalid parameter type');
+            throw new Exception('Invalid parameter type');
         }
 
         $this->_type = $type;
@@ -130,7 +136,7 @@ class Zend_Server_Reflection_Parameter
     public function setDescription($description)
     {
         if (!is_string($description) && (null !== $description)) {
-            throw new Zend_Server_Reflection_Exception('Invalid parameter description');
+            throw new Exception('Invalid parameter description');
         }
 
         $this->_description = $description;

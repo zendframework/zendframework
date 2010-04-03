@@ -14,25 +14,31 @@
  *
  * @category   Zend
  * @package    Zend_Server
+ * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
+
+/**
+ * @namespace
+ */
+namespace Zend\Server\Reflection;
 
 /**
  * Method Reflection
  *
  * @uses       ReflectionClass
  * @uses       ReflectionMethod
- * @uses       Zend_Server_Reflection_Class
- * @uses       Zend_Server_Reflection_Function_Abstract
+ * @uses       \Zend\Server\Reflection\ClassReflection
+ * @uses       \Zend\Server\Reflection\AbstractFunction
  * @category   Zend
  * @package    Zend_Server
- * @subpackage Reflection
+ * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
-class Zend_Server_Reflection_Method extends Zend_Server_Reflection_Function_Abstract
+class Method extends AbstractFunction
 {
     /**
      * Parent class name
@@ -42,20 +48,20 @@ class Zend_Server_Reflection_Method extends Zend_Server_Reflection_Function_Abst
 
     /**
      * Parent class reflection
-     * @var Zend_Server_Reflection_Class
+     * @var \Zend\Server\Reflection\ClassReflection
      */
     protected $_classReflection;
 
     /**
      * Constructor
      *
-     * @param Zend_Server_Reflection_Class $class
+     * @param \Zend\Server\Reflection\ClassReflection $class
      * @param ReflectionMethod $r
      * @param string $namespace
      * @param array $argv
      * @return void
      */
-    public function __construct(Zend_Server_Reflection_Class $class, ReflectionMethod $r, $namespace = null, $argv = array())
+    public function __construct(ClassReflection $class, \ReflectionMethod $r, $namespace = null, $argv = array())
     {
         $this->_classReflection = $class;
         $this->_reflection      = $r;
@@ -84,7 +90,7 @@ class Zend_Server_Reflection_Method extends Zend_Server_Reflection_Function_Abst
     /**
      * Return the reflection for the class that defines this method
      *
-     * @return Zend_Server_Reflection_Class
+     * @return \Zend\Server\Reflection\ClassReflection
      */
     public function getDeclaringClass()
     {
@@ -101,8 +107,8 @@ class Zend_Server_Reflection_Method extends Zend_Server_Reflection_Function_Abst
      */
     public function __wakeup()
     {
-        $this->_classReflection = new Zend_Server_Reflection_Class(new ReflectionClass($this->_class), $this->getNamespace(), $this->getInvokeArguments());
-        $this->_reflection = new ReflectionMethod($this->_classReflection->getName(), $this->getName());
+        $this->_classReflection = new ClassReflection(new \ReflectionClass($this->_class), $this->getNamespace(), $this->getInvokeArguments());
+        $this->_reflection = new \ReflectionMethod($this->_classReflection->getName(), $this->getName());
     }
 
 }

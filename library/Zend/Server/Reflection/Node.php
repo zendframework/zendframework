@@ -14,21 +14,27 @@
  *
  * @category   Zend
  * @package    Zend_Server
+ * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
+
+/**
+ * @namespace
+ */
+namespace Zend\Server\Reflection;
 
 /**
  * Node Tree class for Zend_Server reflection operations
  *
  * @category   Zend
  * @package    Zend_Server
- * @subpackage Reflection
+ * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
-class Zend_Server_Reflection_Node
+class Node
 {
     /**
      * Node value
@@ -44,7 +50,7 @@ class Zend_Server_Reflection_Node
 
     /**
      * Parent node (if any)
-     * @var Zend_Server_Reflection_Node
+     * @var \Zend\Server\Reflection\Node
      */
     protected $_parent = null;
 
@@ -52,10 +58,10 @@ class Zend_Server_Reflection_Node
      * Constructor
      *
      * @param mixed $value
-     * @param Zend_Server_Reflection_Node $parent Optional
-     * @return Zend_Server_Reflection_Node
+     * @param \Zend\Server\Reflection\Node $parent Optional
+     * @return \Zend\Server\Reflection\Node
      */
-    public function __construct($value, Zend_Server_Reflection_Node $parent = null)
+    public function __construct($value, Node $parent = null)
     {
         $this->_value = $value;
         if (null !== $parent) {
@@ -68,12 +74,12 @@ class Zend_Server_Reflection_Node
     /**
      * Set parent node
      *
-     * @param Zend_Server_Reflection_Node $node
+     * @param \Zend\Server\Reflection\Node $node
      * @param boolean $new Whether or not the child node is newly created
      * and should always be attached
      * @return void
      */
-    public function setParent(Zend_Server_Reflection_Node $node, $new = false)
+    public function setParent(Node $node, $new = false)
     {
         $this->_parent = $node;
 
@@ -88,11 +94,11 @@ class Zend_Server_Reflection_Node
      *
      * @param mixed $value
      * @access public
-     * @return Zend_Server_Reflection_Node New child node
+     * @return \Zend\Server\Reflection\Node New child node
      */
     public function createChild($value)
     {
-        $child = new self($value, $this);
+        $child = new \self($value, $this);
 
         return $child;
     }
@@ -100,10 +106,10 @@ class Zend_Server_Reflection_Node
     /**
      * Attach a child node
      *
-     * @param Zend_Server_Reflection_Node $node
+     * @param \Zend\Server\Reflection\Node $node
      * @return void
      */
-    public function attachChild(Zend_Server_Reflection_Node $node)
+    public function attachChild(Node $node)
     {
         $this->_children[] = $node;
 
@@ -135,7 +141,7 @@ class Zend_Server_Reflection_Node
     /**
      * Return the parent node
      *
-     * @return null|Zend_Server_Reflection_Node
+     * @return null|\Zend\Server\Reflection\Node
      */
     public function getParent()
     {

@@ -19,23 +19,28 @@
  */
 
 /**
- * Zend_Server_Abstract
+ * @namespace
+ */
+namespace Zend\Server;
+
+/**
+ * Abstract Server implementation
  *
  * @uses       ReflectionClass
- * @uses       Zend_Server_Definition
- * @uses       Zend_Server_Exception
- * @uses       Zend_Server_Interface
- * @uses       Zend_Server_Method_Callback
- * @uses       Zend_Server_Method_Definition
- * @uses       Zend_Server_Method_Parameter
- * @uses       Zend_Server_Method_Prototype
+ * @uses       \Zend\Server\Definition
+ * @uses       \Zend\Server\Exception
+ * @uses       \Zend\Server\ServerInterface
+ * @uses       \Zend\Server\Method\Callback
+ * @uses       \Zend\Server\Method\Definition
+ * @uses       \Zend\Server\Method\Parameter
+ * @uses       \Zend\Server\Method\Prototype
  * @category   Zend
  * @package    Zend_Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-abstract class Zend_Server_Abstract implements Zend_Server_Interface
+abstract class AbstractServer implements ServerInterface
 {
     /**
      * @deprecated
@@ -62,7 +67,7 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
     protected $_overwriteExistingMethods = false;
 
     /**
-     * @var Zend_Server_Definition
+     * @var \Zend\Server\Definition
      */
     protected $_table;
 
@@ -75,7 +80,7 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
      */
     public function __construct()
     {
-        $this->_table = new Zend_Server_Definition();
+        $this->_table = new Definition();
         $this->_table->setOverwriteExistingMethods($this->_overwriteExistingMethods);
     }
 
@@ -84,7 +89,7 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
      *
      * Returns an array of method definitions.
      *
-     * @return Zend_Server_Definition
+     * @return \Zend\Server\Definition
      */
     public function getFunctions()
     {
@@ -110,17 +115,17 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
     /**
      * Build callback for method signature
      *
-     * @param  Zend_Server_Reflection_Function_Abstract $reflection
-     * @return Zend_Server_Method_Callback
+     * @param  \Zend\Server\Reflection\AbstractFunction $reflection
+     * @return \Zend\Server\Method\Callback
      */
-    protected function _buildCallback(Zend_Server_Reflection_Function_Abstract $reflection)
+    protected function _buildCallback(Reflection\AbstractFunction $reflection)
     {
-        $callback = new Zend_Server_Method_Callback();
-        if ($reflection instanceof Zend_Server_Reflection_Method) {
+        $callback = new Method\Callback();
+        if ($reflection instanceof Reflection\Method) {
             $callback->setType($reflection->isStatic() ? 'static' : 'instance')
                      ->setClass($reflection->getDeclaringClass()->getName())
                      ->setMethod($reflection->getName());
-        } elseif ($reflection instanceof Zend_Server_Reflection_Function) {
+        } elseif ($reflection instanceof Reflection\FunctionReflection) {
             $callback->setType('function')
                      ->setFunction($reflection->getName());
         }
@@ -130,32 +135,32 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
     /**
      * Build a method signature
      *
-     * @param  Zend_Server_Reflection_Function_Abstract $reflection
+     * @param  \Zend\Server\Reflection\AbstractFunction $reflection
      * @param  null|string|object $class
-     * @return Zend_Server_Method_Definition
-     * @throws Zend_Server_Exception on duplicate entry
+     * @return \Zend\Server\Method\Definition
+     * @throws \Zend\Server\Exception on duplicate entry
      */
-    protected function _buildSignature(Zend_Server_Reflection_Function_Abstract $reflection, $class = null)
+    protected function _buildSignature(Reflection\AbstractFunction $reflection, $class = null)
     {
         $ns         = $reflection->getNamespace();
         $name       = $reflection->getName();
         $method     = empty($ns) ? $name : $ns . '.' . $name;
 
         if (!$this->_overwriteExistingMethods && $this->_table->hasMethod($method)) {
-            throw new Zend_Server_Exception('Duplicate method registered: ' . $method);
+            throw new Exception('Duplicate method registered: ' . $method);
         }
 
-        $definition = new Zend_Server_Method_Definition();
+        $definition = new Method\Definition();
         $definition->setName($method)
                    ->setCallback($this->_buildCallback($reflection))
                    ->setMethodHelp($reflection->getDescription())
                    ->setInvokeArguments($reflection->getInvokeArguments());
 
         foreach ($reflection->getPrototypes() as $proto) {
-            $prototype = new Zend_Server_Method_Prototype();
+            $prototype = new Method\Prototype();
             $prototype->setReturnType($this->_fixType($proto->getReturnType()));
             foreach ($proto->getParameters() as $parameter) {
-                $param = new Zend_Server_Method_Parameter(array(
+                $param = new Method\Parameter(array(
                     'type'     => $this->_fixType($parameter->getType()),
                     'name'     => $parameter->getName(),
                     'optional' => $parameter->isOptional(),
@@ -177,11 +182,11 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
     /**
      * Dispatch method
      *
-     * @param  Zend_Server_Method_Definition $invocable
+     * @param  \Zend\Server\Method\Definition $invocable
      * @param  array $params
      * @return mixed
      */
-    protected function _dispatch(Zend_Server_Method_Definition $invocable, array $params)
+    protected function _dispatch(Method\Definition $invocable, array $params)
     {
         $callback = $invocable->getCallback();
         $type     = $callback->getType();
@@ -202,7 +207,7 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
         if (!is_object($object)) {
             $invokeArgs = $invocable->getInvokeArguments();
             if (!empty($invokeArgs)) {
-                $reflection = new ReflectionClass($class);
+                $reflection = new \ReflectionClass($class);
                 $object     = $reflection->newInstanceArgs($invokeArgs);
             } else {
                 $object = new $class;

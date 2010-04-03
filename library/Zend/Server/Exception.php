@@ -16,16 +16,23 @@
  * @package    Zend_Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
- * Zend_Server_Reflection exceptions
- *
- * @uses       Zend_Exception
- * @package    Zend_Server
- * @subpackage Reflection
- * @version    $Id$
+ * @namespace
  */
-class Zend_Server_Exception extends Zend_Exception
+namespace Zend\Server;
+
+/**
+ * Zend_Server exceptions
+ *
+ * @uses       \Zend\Exception
+ * @category   Zend
+ * @package    Zend_Server
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class Exception extends Zend\Exception
 {
 }

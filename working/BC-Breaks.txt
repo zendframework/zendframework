@@ -53,6 +53,10 @@ Zend_Cache:
 Zend_Locale:
  * Locale data resources moved from Locale/Data/ to Locale/Data/resources/
 
+Zend_Measure:
+ * "Zend_Measure" prefix now becomes "Zend\Measure" namespace
+ * "Zend_Measure_Abstract" becomes "Zend\Measure\AbstractMeasure"
+
 Zend_Filter:
  * "Filter" broken into "FilterChain" and "StaticFilter"
    * For filter chains, use the new FilterChain class
@@ -78,6 +82,15 @@ Zend_Validate:
  * "Validate" broken into "ValidatorChain" and "StaticValidator"
  * "Zend_Validate" prefix now becomes "Zend\Validator" namespace
  * "ValidatorInterface" moved to "Zend\Validator\Validator"
+
+Zend_Server:
+ * "Zend_Server" prefix now becomes "Zend\Server" namespace
+ * "Zend_Server_Method" prefix now becomes "Zend\Server\Method" namespace
+ * "Zend_Server_Reflection" prefix now becomes "Zend\Server\Reflection" namespace
+ * "Zend_Server_Reflection" becomes "Zend\Server\Reflection\Reflection"
+ * "Zend_Server_Reflection_Class" becomes "Zend\Server\Reflection\ClassReflection"
+ * "Zend_Server_Reflection_Function_Abstract" becomes "Zend\Server\Reflection\AbstractFunction"
+ * "Zend_Server_Reflection_Function" becomes "Zend\Server\Reflection\FunctionReflection"
  
 Zend_Translate
  * "Zend_Translate" prefix now becomes "Zend\Translator" namespace

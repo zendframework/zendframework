@@ -11803,10 +11803,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Class.php</originalRelativeFilePath>
       <originalClassName>Zend_Server_Reflection_Class</originalClassName>
-      <newRelativeFilePath>Zend/Server/Reflection/Class.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Server/Reflection/ClassReflection.php</newRelativeFilePath>
       <newNamespace>Zend\Server\Reflection</newNamespace>
-      <newClassName>Class</newClassName>
-      <newFullyQualifiedName>Zend\Server\Reflection\Class</newFullyQualifiedName>
+      <newClassName>ClassReflection</newClassName>
+      <newFullyQualifiedName>Zend\Server\Reflection\ClassReflection</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Exception.php</originalRelativeFilePath>
@@ -11819,18 +11819,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Function/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Server_Reflection_Function_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Server/Reflection/Function/AbstractFunction.php</newRelativeFilePath>
-      <newNamespace>Zend\Server\Reflection\Function</newNamespace>
+      <newRelativeFilePath>Zend/Server/Reflection/AbstractFunction.php</newRelativeFilePath>
+      <newNamespace>Zend\Server\Reflection</newNamespace>
       <newClassName>AbstractFunction</newClassName>
-      <newFullyQualifiedName>Zend\Server\Reflection\Function\AbstractFunction</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Server\Reflection\AbstractFunction</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Function.php</originalRelativeFilePath>
       <originalClassName>Zend_Server_Reflection_Function</originalClassName>
-      <newRelativeFilePath>Zend/Server/Reflection/Function/Function.php</newRelativeFilePath>
-      <newNamespace>Zend\Server\Reflection\Function</newNamespace>
-      <newClassName>Function</newClassName>
-      <newFullyQualifiedName>Zend\Server\Reflection\Function\Function</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Server/Reflection/FunctionReflection.php</newRelativeFilePath>
+      <newNamespace>Zend\Server\Reflection</newNamespace>
+      <newClassName>FunctionReflection</newClassName>
+      <newFullyQualifiedName>Zend\Server\Reflection\FunctionReflection</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Method.php</originalRelativeFilePath>

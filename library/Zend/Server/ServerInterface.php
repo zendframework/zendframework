@@ -16,18 +16,23 @@
  * @package    Zend_Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
- * Zend_Server_Interface
+ * @namespace
+ */
+namespace Zend\Server;
+
+/**
+ * Server Interface
  *
  * @category   Zend
  * @package    Zend_Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
-interface Zend_Server_Interface
+interface ServerInterface
 {
     /**
      * Attach a function as a server method
@@ -89,7 +94,7 @@ interface Zend_Server_Interface
      * Return a server definition array
      *
      * Returns a server definition array as created using
-     * {@link * Zend_Server_Reflection}. Can be used for server introspection,
+     * {@link * \Zend\Server\Reflection\Reflection}. Can be used for server introspection,
      * documentation, or persistence.
      *
      * @access public

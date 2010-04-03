@@ -14,21 +14,27 @@
  *
  * @category   Zend
  * @package    Zend_Server
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-
-/**
- * Function Reflection
- *
- * @uses       Zend_Server_Reflection_Function_Abstract
- * @category   Zend
- * @package    Zend_Server
- * @subpackage Reflection
+ * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Server_Reflection_Function extends Zend_Server_Reflection_Function_Abstract
+
+/**
+ * @namespace
+ */
+namespace Zend\Server\Reflection;
+
+/**
+ * Function Reflection
+ *
+ * @uses       \Zend\Server\Reflection\AbstractFunction
+ * @category   Zend
+ * @package    Zend_Server
+ * @subpackage Zend_Server_Reflection
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class FunctionReflection extends AbstractFunction
 {
 }

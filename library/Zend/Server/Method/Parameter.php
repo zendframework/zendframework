@@ -14,22 +14,27 @@
  *
  * @category   Zend
  * @package    Zend_Server
- * @subpackage Method
+ * @subpackage Zend_Server_Method
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Server\Method;
+
+/**
  * Method parameter metadata
  *
  * @category   Zend
  * @package    Zend_Server
- * @subpackage Method
+ * @subpackage Zend_Server_Method
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Server_Method_Parameter
+class Parameter
 {
     /**
      * @var mixed Default parameter value
@@ -73,7 +78,7 @@ class Zend_Server_Method_Parameter
      * Set object state from array of options
      *
      * @param  array $options
-     * @return Zend_Server_Method_Parameter
+     * @return \Zend\Server\Method\Parameter
      */
     public function setOptions(array $options)
     {
@@ -90,7 +95,7 @@ class Zend_Server_Method_Parameter
      * Set default value
      *
      * @param  mixed $defaultValue
-     * @return Zend_Server_Method_Parameter
+     * @return \Zend\Server\Method\Parameter
      */
     public function setDefaultValue($defaultValue)
     {
@@ -112,7 +117,7 @@ class Zend_Server_Method_Parameter
      * Set description
      *
      * @param  string $description
-     * @return Zend_Server_Method_Parameter
+     * @return \Zend\Server\Method\Parameter
      */
     public function setDescription($description)
     {
@@ -134,7 +139,7 @@ class Zend_Server_Method_Parameter
      * Set name
      *
      * @param  string $name
-     * @return Zend_Server_Method_Parameter
+     * @return \Zend\Server\Method\Parameter
      */
     public function setName($name)
     {
@@ -156,7 +161,7 @@ class Zend_Server_Method_Parameter
      * Set optional flag
      *
      * @param  bool $flag
-     * @return Zend_Server_Method_Parameter
+     * @return \Zend\Server\Method\Parameter
      */
     public function setOptional($flag)
     {
@@ -178,7 +183,7 @@ class Zend_Server_Method_Parameter
      * Set parameter type
      *
      * @param  string $type
-     * @return Zend_Server_Method_Parameter
+     * @return \Zend\Server\Method\Parameter
      */
     public function setType($type)
     {

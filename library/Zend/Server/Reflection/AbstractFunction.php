@@ -14,9 +14,16 @@
  *
  * @category   Zend
  * @package    Zend_Server
+ * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
+
+/**
+ * @namespace
+ */
+namespace Zend\Server\Reflection;
 
 /**
  * Function/Method Reflection
@@ -26,24 +33,23 @@
  * setting and retrieving the description (originally set using the docblock
  * contents), retrieving the callback and callback type, retrieving additional
  * method invocation arguments, and retrieving the
- * method {@link Zend_Server_Reflection_Prototype prototypes}.
+ * method {@link \Zend\Server\Reflection\Prototype prototypes}.
  *
  * @uses       ReflectionClass
  * @uses       ReflectionFunction
  * @uses       ReflectionMethod
- * @uses       Zend_Server_Reflection_Exception
- * @uses       Zend_Server_Reflection_Node
- * @uses       Zend_Server_Reflection_Parameter
- * @uses       Zend_Server_Reflection_Prototype
- * @uses       Zend_Server_Reflection_ReturnValue
+ * @uses       \Zend\Server\Reflection\Exception
+ * @uses       \Zend\Server\Reflection\Node
+ * @uses       \Zend\Server\Reflection\Parameter
+ * @uses       \Zend\Server\Reflection\Prototype
+ * @uses       \Zend\Server\Reflection\ReturnValue
  * @category   Zend
  * @package    Zend_Server
- * @subpackage Reflection
+ * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
-abstract class Zend_Server_Reflection_Function_Abstract
+abstract class AbstractFunction
 {
     /**
      * @var ReflectionFunction
@@ -100,15 +106,15 @@ abstract class Zend_Server_Reflection_Function_Abstract
      *
      * @param ReflectionFunction $r
      */
-    public function __construct(Reflector $r, $namespace = null, $argv = array())
+    public function __construct(\Reflector $r, $namespace = null, $argv = array())
     {
         // In PHP 5.1.x, ReflectionMethod extends ReflectionFunction. In 5.2.x,
         // both extend ReflectionFunctionAbstract. So, we can't do normal type
         // hinting in the prototype, but instead need to do some explicit
         // testing here.
-        if ((!$r instanceof ReflectionFunction)
-            && (!$r instanceof ReflectionMethod)) {
-            throw new Zend_Server_Reflection_Exception('Invalid reflection class');
+        if ((!$r instanceof \ReflectionFunction)
+            && (!$r instanceof \ReflectionMethod)) {
+            throw new Exception('Invalid reflection class');
         }
         $this->_reflection = $r;
 
@@ -123,7 +129,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
         }
 
         // If method call, need to store some info on the class
-        if ($r instanceof ReflectionMethod) {
+        if ($r instanceof \ReflectionMethod) {
             $this->_class = $r->getDeclaringClass()->getName();
         }
 
@@ -138,18 +144,18 @@ abstract class Zend_Server_Reflection_Function_Abstract
      * each array in {@link $_sigParams}, adding every value of the next level
      * to the current value (unless the current value is null).
      *
-     * @param Zend_Server_Reflection_Node $parent
+     * @param \Zend\Server\Reflection\Node $parent
      * @param int $level
      * @return void
      */
-    protected function _addTree(Zend_Server_Reflection_Node $parent, $level = 0)
+    protected function _addTree(Node $parent, $level = 0)
     {
         if ($level >= $this->_sigParamsDepth) {
             return;
         }
 
         foreach ($this->_sigParams[$level] as $value) {
-            $node = new Zend_Server_Reflection_Node($value, $parent);
+            $node = new Node($value, $parent);
             if ((null !== $value) && ($this->_sigParamsDepth > $level + 1)) {
                 $this->_addTree($node, $level + 1);
             }
@@ -161,7 +167,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
      *
      * Builds a signature tree starting at the return values and descending
      * through each method argument. Returns an array of
-     * {@link Zend_Server_Reflection_Node}s.
+     * {@link \Zend\Server\Reflection\Node}s.
      *
      * @return array
      */
@@ -169,7 +175,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
     {
         $returnTree = array();
         foreach ((array) $this->_return as $value) {
-            $node = new Zend_Server_Reflection_Node($value);
+            $node = new Node($value);
             $this->_addTree($node);
             $returnTree[] = $node;
         }
@@ -210,7 +216,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
         }
 
         foreach ($endPoints as $node) {
-            if (!$node instanceof Zend_Server_Reflection_Node) {
+            if (!$node instanceof Node) {
                 continue;
             }
 
@@ -218,7 +224,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
             do {
                 array_unshift($signature, $node->getValue());
                 $node = $node->getParent();
-            } while ($node instanceof Zend_Server_Reflection_Node);
+            } while ($node instanceof Node);
 
             $signatures[] = $signature;
         }
@@ -226,15 +232,15 @@ abstract class Zend_Server_Reflection_Function_Abstract
         // Build prototypes
         $params = $this->_reflection->getParameters();
         foreach ($signatures as $signature) {
-            $return = new Zend_Server_Reflection_ReturnValue(array_shift($signature), $this->_returnDesc);
+            $return = new ReturnValue(array_shift($signature), $this->_returnDesc);
             $tmp    = array();
             foreach ($signature as $key => $type) {
-                $param = new Zend_Server_Reflection_Parameter($params[$key], $type, (isset($this->_paramDesc[$key]) ? $this->_paramDesc[$key] : null));
+                $param = new Parameter($params[$key], $type, (isset($this->_paramDesc[$key]) ? $this->_paramDesc[$key] : null));
                 $param->setPosition($key);
                 $tmp[] = $param;
             }
 
-            $this->_prototypes[] = new Zend_Server_Reflection_Prototype($return, $tmp);
+            $this->_prototypes[] = new Prototype($return, $tmp);
         }
     }
 
@@ -328,7 +334,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
         }
 
         if (count($paramTypesTmp) != $paramCount) {
-            throw new Zend_Server_Reflection_Exception(
+            throw new Exception(
                'Variable number of arguments is not supported for services (except optional parameters). '
              . 'Number of function arguments must correspond to actual number of arguments described in a docblock.');
         }
@@ -359,7 +365,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
             return call_user_func_array(array($this->_reflection, $method), $args);
         }
 
-        throw new Zend_Server_Reflection_Exception('Invalid reflection method ("' .$method. '")');
+        throw new Exception('Invalid reflection method ("' .$method. '")');
     }
 
     /**
@@ -408,7 +414,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
         }
 
         if (!is_string($namespace) || !preg_match('/[a-z0-9_\.]+/i', $namespace)) {
-            throw new Zend_Server_Reflection_Exception('Invalid namespace');
+            throw new Exception('Invalid namespace');
         }
 
         $this->_namespace = $namespace;
@@ -433,7 +439,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
     public function setDescription($string)
     {
         if (!is_string($string)) {
-            throw new Zend_Server_Reflection_Exception('Invalid description');
+            throw new Exception('Invalid description');
         }
 
         $this->_description = $string;
@@ -451,7 +457,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
 
     /**
      * Retrieve all prototypes as array of
-     * {@link Zend_Server_Reflection_Prototype Zend_Server_Reflection_Prototypes}
+     * {@link \Zend\Server\Reflection\Prototype}s
      *
      * @return array
      */
@@ -480,11 +486,11 @@ abstract class Zend_Server_Reflection_Function_Abstract
      */
     public function __wakeup()
     {
-        if ($this->_reflection instanceof ReflectionMethod) {
-            $class = new ReflectionClass($this->_class);
-            $this->_reflection = new ReflectionMethod($class->newInstance(), $this->getName());
+        if ($this->_reflection instanceof \ReflectionMethod) {
+            $class = new \ReflectionClass($this->_class);
+            $this->_reflection = new \ReflectionMethod($class->newInstance(), $this->getName());
         } else {
-            $this->_reflection = new ReflectionFunction($this->getName());
+            $this->_reflection = new \ReflectionFunction($this->getName());
         }
     }
 }

@@ -839,6 +839,20 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @ZF-9488
+     */
+    public function testTerritoryToGetLocale() {
+        $value = Zend_Locale::findLocale('US');
+        $this->assertEquals('en_US', $value);
+
+        $value = new Zend_Locale('US');
+        $this->assertEquals('en_US', $value->toString());
+
+        $value = new Zend_Locale('TR');
+        $this->assertEquals('tr_TR', $value->toString());
+    }
+
+    /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno

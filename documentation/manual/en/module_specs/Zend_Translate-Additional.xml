@@ -451,6 +451,52 @@ if (!$translate->isAvailable($locale->getLanguage())) {
 $translate->getLocale();
 ]]></programlisting>
         </sect3>
+
+        <sect3 id="zend.translate.additional.languages.territory">
+            <title>Using a country as language</title>
+
+            <para>
+                You can also use a country as locale parameter. This could be useful when you
+                provide your user with flags, which represent the country in which he lives, and
+                when he selects his flag, he would automatically get the default language for this
+                country.
+            </para>
+
+            <para>
+                For example, when the user selected <emphasis>US</emphasis> then you would get
+                <emphasis>en_US</emphasis> in return as locale which is being used. This leads
+                automatically to the language <emphasis>en</emphasis> which is the default language
+                for the country <emphasis>US</emphasis>.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => 'my_de.mo',
+        'locale'  => 'US'
+    )
+);
+]]></programlisting>
+
+            <note>
+                <title>Always uppercase countries</title>
+
+                <para>
+                    Using this syntax you should always uppercase the input when you know that it's
+                    a country. The reason is that there are also languages which have the same
+                    letters as a country. Take for example <emphasis>om</emphasis>. You could expect
+                    to get <emphasis>ar_OM</emphasis> when you mean the country "Oman", or you could
+                    expect the language "Oromo" which is spoken in Kenia for example.
+                </para>
+
+                <para>
+                    As <classname>Zend_Translate</classname> is related to languages it will always
+                    use the language in this case. Therefor always uppercase the locale when you
+                    want it to be recognised as country.
+                </para>
+            </note>
+        </sect3>
     </sect2>
 
     <sect2 id="zend.translate.additional.detection">

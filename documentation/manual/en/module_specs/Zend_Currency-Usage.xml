@@ -122,6 +122,6 @@ $currency = new Zend_Currency('US');
             <para>
                 Therefor always uppercase the input when you know that a territory is meant.
             </para>
-        <note>
+        </note>
     </sect2>
 </sect1>

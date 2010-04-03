@@ -235,7 +235,7 @@ abstract class Zend_Date_DateObject {
 
                     for ($mcount = 11; $mcount > ($month - 1); $mcount--) {
                         $date += self::$_monthTable[$mcount];
-                        if (($leapyear === true) and ($mcount == 1)) {
+                        if (($leapyear === true) and ($mcount == 2)) {
                             $date++;
                         }
 

@@ -188,7 +188,7 @@ print $locale->getRegion();
             been found.
         </para>
 
-        <example id="zend.locale.setlocale.example-1">
+        <example id="zend.locale.getlocaletoterritory.example-1">
             <title>getLocaleToTerritory</title>
 
             <programlisting language="php"><![CDATA[

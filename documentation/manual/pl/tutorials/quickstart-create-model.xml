@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 20879 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: yes -->
 <sect1 id="learning.quickstart.create-model">
     <title>Utworzenie modelu oraz tabeli w bazie danych</title>
 
@@ -16,9 +16,9 @@
 
     <para>
         Klasa <classname>Zend_Controller_Front</classname> umożliwia tworzenie modułów (modules)
-        - odrębnych części, które same są mini-aplikacjami. W ramach każdego modułu odwzorowywana
-        jest taka sama struktura katalogów jaka jest tworzona przez
-        narzędzie <command>zf</command> w katalogu  głównym aplikacji. Nazwy wszystkich
+        - odrębnych części, które same w sobie są mini-aplikacjami. W ramach każdego 
+        modułu odwzorowywana jest taka sama struktura katalogów jaka jest tworzona przez
+        narzędzie <command>zf</command> w katalogu głównym aplikacji. Nazwy wszystkich
         klas w jednym module muszą rozpoczynać się od wspólnego prefiksu - nazwy modułu.
         Katalog główny - <filename>application/</filename> również jest modułem (domyślnym)
         dlatego też jego zasoby zostaną uwzględnione w procesie automatycznego dołączania plików.
@@ -34,11 +34,11 @@
     </para>
 
     <para>
-        Teraz należy się zastanowić co składa się na książkę odwiedzin. Typowo będzie w niej
+        Teraz należy się zastanowić co składa się na księgę gości. Typowo będzie w niej
         lista wpisów z <emphasis>komentarzem</emphasis>, <emphasis>czasem zapisu</emphasis>
         oraz <emphasis>adresem email</emphasis>. Zakładając użycie bazy danych, pole
         <emphasis>unikalny identyfikator</emphasis> może również być przydatne. Aplikacja
-        powinna umożliwiać zapis danych, pobranie wpisów pojedynczo oraz wszystkich na raz.
+        powinna umożliwiać zapis danych, pobieranie wpisów pojedynczo oraz wszystkich na raz.
         Prosty model oferujący opisaną funkcjonalność może przedstawiać się następująco:
     </para>
 
@@ -77,10 +77,10 @@ class Application_Model_GuestbookMapper
 ]]></programlisting>
 
     <para>
-        <methodname>__get()</methodname> and <methodname>__set()</methodname> stanowią mechanizmy
-        ułatwiające dostęp do poszczególnych właściwości oraz pośredniczą w dostępie do innych
-        getterów i setterów. Dzięki nim, można również upewnić się, że jedynie pożądane
-        właściwości będą dostępne.
+        Metody <methodname>__get()</methodname> oraz <methodname>__set()</methodname> 
+        stanowią mechanizmy ułatwiające dostęp do poszczególnych właściwości oraz 
+        pośredniczą w dostępie do innych getterów i setterów. Dzięki nim, można 
+        również upewnić się, że jedynie pożądane właściwości będą dostępne.
     </para>
 
     <para>
@@ -177,24 +177,25 @@ resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-dev.db"
 ]]></programlisting>
 
     <para>
-        Należy zauważyć, iż baza (bazy) danych będzie przechowywana w
+        Należy zauważyć, iż baza (bazy) danych będzie przechowywana w katalogu
         <filename>data/db/</filename>.
-        Te katalogi powinny zostać utworzone i udostępnione wszystkim. Na systemach unix można
-        tego dokonać następująco:    </para>
+        Te katalogi powinny zostać utworzone i udostępnione wszystkim. W systemach 
+        unix można tego dokonać następująco:
+    </para>
 
     <programlisting language="shell"><![CDATA[
 % mkdir -p data/db; chmod -R a+rwX data
 ]]></programlisting>
 
     <para>
-        Na systemach Windows należy utworzyć odpowiednie katalogi w eksploratorze oraz ustawić
-        uprawnienia w taki sposób aby każdy użytkownik miał prawo zapisu.
+        W systemach Windows należy utworzyć odpowiednie katalogi w eksploratorze 
+        oraz ustawić uprawnienia w taki sposób aby każdy użytkownik miał prawo zapisu.
     </para>
 
     <para>
         Połączenie z bazą danych zostało utworzone - w tym przypadku bazą jest Sqlite
         znajdująca się w katalogu <filename>application/data/</filename>. Następnym krokiem jest
-        utworzenie tabeli przechowującej rekordy książki adresowej.
+        utworzenie tabeli przechowującej rekordy księgi gości.
     </para>
 
     <programlisting language="sql"><![CDATA[
@@ -363,7 +364,7 @@ Data Loaded.
 ]]></programlisting>
 
     <para>
-        Po zdefiniowaniu bazy danych aplikacji książka odwiedzin można przystąpić do budowy kodu
+        Po zdefiniowaniu bazy danych aplikacji księgi gości można przystąpić do budowy kodu
         samej aplikacji. W następnych krokach zostanie zbudowana klasa dostępu do danych
         (poprzez <classname>Zend_Db_Table</classname>), oraz klasa mapująca - służąca do
         połączenia z wcześniej opisanym modelem.
@@ -426,7 +427,7 @@ class Application_Model_DbTable_Guestbook extends Zend_Db_Table_Abstract
         <ulink url="http://martinfowler.com/eaaCatalog/dataMapper.html">Data Mapper</ulink>.
         Obiektem w bazie danych jest <classname>Application_Model_Guestbook</classname> natomiast
         za obiekt bazy danych odpowiada <classname>Application_Model_DbTable_Guestbook</classname>.
-        Typowy API takiej klasy wygląda następująco:
+        Typowe API takiej klasy wygląda następująco:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -530,8 +531,8 @@ class Application_Model_GuestbookMapper
 ]]></programlisting>
 
     <para>
-        W obecnym momencie można przystąpić do utworzenia klasy modelu używając polecenia
-        <command>zf create model</command>:
+        W obecnym momencie można przystąpić do utworzenia klasy modelu używając 
+        polecenia <command>zf create model</command>:
     </para>
 
     <programlisting language="shell"><![CDATA[
@@ -541,8 +542,8 @@ Updating project profile '.zfproject.xml'
 ]]></programlisting>
 
     <para>
-        Nowo utworzoną klasę można zmodyfikować tak aby ułatwić umieszczanie danych w modelu
-        poprzez przekazanie tablicy do konstruktora lub do metody
+        Nowo utworzoną klasę można zmodyfikować tak aby ułatwić umieszczanie danych 
+        w modelu poprzez przekazanie tablicy do konstruktora lub do metody
         <methodname>setOptions()</methodname>. Ostatecznie model znajdujący się w
         <filename>application/models/Guestbook.php</filename> powinien wyglądać następująco:
     </para>
@@ -641,13 +642,13 @@ class Application_Model_Guestbook
 ]]></programlisting>
 
     <para>
-    W ostatnim kroku, aby połączyć wszystkie elementy, należy utworzyć kontroler,
+        W ostatnim kroku, aby połączyć wszystkie elementy, należy utworzyć kontroler,
         którego zadaniem będzie zaprezentowanie listy zapisanych rekordów oraz obsługa
-        dopisania nowych danych.
+        dodawania nowych danych.
     </para>
 
     <para>
-    Aby to osiągnąć należy użyć polecenia <command>zf create controller</command>:
+        Aby to osiągnąć należy użyć polecenia <command>zf create controller</command>:
     </para>
 
     <programlisting language="shell"><![CDATA[
@@ -667,8 +668,8 @@ Updating project profile '.zfproject.xml'
         w pliku <filename>application/controllers/GuestbookController.php</filename> zawierający
         jedną akcję - <methodname>indexAction()</methodname>.
         Na użytek tego kontrolera utworzony zostaje również katalog widoków:
-        <filename>application/views/scripts/guestbook/</filename> zawierający view skrypt dla
-        akcji index.
+        <filename>application/views/scripts/guestbook/</filename> zawierający skrypt 
+        widoku dla akcji index.
     </para>
 
     <para>
@@ -755,7 +756,7 @@ Usage: load.sqlite.php [ options ]
 
         <para>
             Parametr "-e" pozwala na nadanie wartości stałej <constant>APPLICATION_ENV</constant>
-            określającej środowisko co, z kolei, umożliwia utworzenie bazy danych SQLite dla
+            określającej środowisko, co z kolei umożliwia utworzenie bazy danych SQLite dla
             każdego środowiska oddzielnie. Należy się upewnić, że skrypt jest uruchamiany z
             odpowiednią wartością tego parametru dla każdego ze środowisk.
         </para>

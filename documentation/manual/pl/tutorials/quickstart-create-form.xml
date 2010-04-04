@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 20879 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: yes -->
 <sect1 id="learning.quickstart.create-form">
     <title>Tworzenie formularza</title>
 
     <para>
-        Aby aplikacja książka gości była użyteczna należy umieścić w niej formularz
-        umożliwiający zapis nowych gości.
+        Aby aplikacja księgi gości była użyteczna należy umieścić w niej formularz
+        umożliwiający dodawanie nowych wpisów.
     </para>
 
     <para>
-        W pierwszej kolejności należy utworzyć klasę formularza. Można to osiągnąć poprzez
-        polecenie:
+        W pierwszej kolejności należy utworzyć klasę formularza. Można to osiągnąć 
+        poprzez polecenie:
     </para>
 
     <programlisting language="shell"><![CDATA[
@@ -22,8 +22,8 @@ Updating project profile '.zfproject.xml'
 
     <para>
         Powyższe polecenie utworzy katalog <filename>application/forms/</filename>
-        zawierający plik <filename>Guestbook.php</filename>. Należy umieścić w nim następującą
-        treść:
+        zawierający plik <filename>Guestbook.php</filename>. Należy umieścić w 
+        nim następującą treść:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -81,16 +81,17 @@ class Application_Form_Guestbook extends Zend_Form
 ]]></programlisting>
 
     <para>
-        Powyższy formularz definiuje pięć elementów: pole adresu e-mail, pole komentarza, pole
-        <acronym>CAPTCHA</acronym> dla zabezpieczenia przed spamem, guzik wysłania komentarza
-        oraz żeton bezpieczeństwa (przed <acronym>CSRF</acronym>).
+        Powyższy formularz definiuje pięć elementów: pole adresu e-mail, pole 
+        komentarza, pole <acronym>CAPTCHA</acronym> dla zabezpieczenia przed spamem, 
+        przycisk wysłania komentarza oraz żeton bezpieczeństwa (przed <acronym>CSRF</acronym>).
     </para>
 
     <para>
-        Następnie należy zdefiniować nową akcję <methodname>signAction()</methodname> w kontrolerze
-        <classname>GuestbookController</classname>, która będzie odpowiedzialna za odbiór danych
-        wysłanych przez formularz. Aby utworzyć nową akcję oraz związany z nią view script
-        należy uruchomić następujące polecenie:
+        Następnie należy zdefiniować nową akcję <methodname>signAction()</methodname> 
+        w kontrolerze <classname>GuestbookController</classname>, która będzie 
+        odpowiedzialna za odbiór danych wysłanych przez formularz. Aby utworzyć 
+        nową akcję oraz związany z nią skrypt widoku należy uruchomić następujące 
+        polecenie:
     </para>
 
     <programlisting language="shell"><![CDATA[
@@ -113,7 +114,7 @@ Updating project profile '.zfproject.xml'
         czy żądanie zostało otrzymane metodą <acronym>POST</acronym> czy <acronym>GET</acronym>.
         W drugim przypadku zostanie po prostu pokazany formularz do
         wypełnienia. Jednak dla metody <acronym>POST</acronym> niezbędne będzie sprawdzenie
-        poprawności przesyłanych danych oraz, w przypadku pozytywnej weryfikacji, utworzenie
+        poprawności przesyłanych danych oraz w przypadku pozytywnej weryfikacji, utworzenie
         nowego rekordu i zapisanie go w bazie danych. Logika może wyglądać następująco:
     </para>
 
@@ -163,14 +164,15 @@ echo $this->form;
         <title>Lepszy wygląd formularzy</title>
 
         <para>
-            Tak powstały formularz nie stanowi wzoru piękna ale należy pamiętać, iż wygląd
+            Tak powstały formularz nie stanowi wzoru piękna, ale należy pamiętać, iż wygląd
             jest w pełni edytowalny. Więcej informacji można zasięgnąć w
             <link linkend="zend.form.decorators">rozdziale dotyczącym dekoratorów formularzy</link>.
         </para>
 
         <para>
             Dodatkowo przydatny może się okazać
-            <link linkend="learning.form.decorators.intro">tutorial dekoratorów formularzy</link>.
+            <link linkend="learning.form.decorators.intro">samouczek tworzenia 
+            dekoratorów formularzy</link>.
         </para>
     </note>
 
@@ -178,8 +180,8 @@ echo $this->form;
         <title>Punkt kontrolny</title>
 
         <para>
-            Po wejściu pod adres "http://localhost/guestbook/sign" powinien się pokazać formularz
-            książki adresowej:
+            Po wejściu pod adres "http://localhost/guestbook/sign" powinien się 
+            pokazać formularz księgi gości:
         </para>
 
         <para>

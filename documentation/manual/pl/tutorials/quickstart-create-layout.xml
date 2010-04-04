@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 20977 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: yes -->
 <sect1 id="learning.quickstart.create-layout">
     <title>Utworzenie layoutu</title>
 
     <para>
         Jak nie trudno zauważyć, skrypty widoków z poprzedniej części zawierały jedynie fragmenty
-        kodu HTML a nie całe strony. Jest to intencjonalne i ma na celu przygotowanie akcji tak aby
-        zwracały jedynie zawartość związaną z samą akcją a nie aplikacją jako taką.
+        kodu HTML, a nie całe strony. Jest to zamierzone i ma na celu przygotowanie akcji tak, aby
+        zwracały jedynie zawartość związaną z samą akcją, a nie aplikacją jako taką.
     </para>
 
     <para>
@@ -132,9 +132,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
     <para>
-        W ciele metody należy powiadomić zasób widoku aby użył odpowiedni DocType. Tylko skąd
-        wziąć obiekt widoku? Najłatwiejszym rozwiązaniem jest zainicjalizowanie zasobu
-        <classname>View</classname>. Potem można pobrać obiekt i go użyć.
+        W ciele metody należy powiadomić zasób widoku aby użył odpowiedniego DocType. 
+        Tylko skąd wziąć obiekt widoku? Najłatwiejszym rozwiązaniem jest 
+        zainicjalizowanie zasobu <classname>View</classname>. Potem można pobrać 
+        obiekt i go użyć.
     </para>
 
     <para>
@@ -151,15 +152,16 @@ resources.view[] =
 ]]></programlisting>
 
     <para>
-        Ten zapis inicjalizuje widok bez żadnych opcji (pisownia '[]' oznacza, że "view" jest
-        tablicą bez żadnych kluczy ani wartości).
+        Ten zapis inicjalizuje widok bez żadnych opcji (pisownia '[]' oznacza, 
+        że "view" jest tablicą bez żadnych kluczy ani wartości).
     </para>
 
     <para>
         Teraz, skoro widok jest skonfigurowany, można wrócić do metody
         <methodname>_initDoctype()</methodname>.
-        W niej należy upewnić się, że zasób <classname>View</classname> został zainicjowany (na
-        podstawie zapisów w pliku konfiguracyjnym), pobrać obiekt widoku i go skonfigurować:
+        W niej należy upewnić się, że zasób <classname>View</classname> został 
+        zainicjowany (na podstawie zapisów w pliku konfiguracyjnym), pobrać obiekt 
+        widoku i go skonfigurować:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -177,8 +179,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
     <para>
-        Po zainicjalizowaniu <classname>Zend_Layout</classname> i ustawieniu deklaracji Doctype,
-        należy utworzyć główny layout strony:
+        Po zainicjalizowaniu <classname>Zend_Layout</classname> i ustawieniu 
+        deklaracji Doctype, należy utworzyć główny layout strony:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -219,7 +221,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Należy zwrócić uwagę na użycie view helpera <methodname>headLink()</methodname>. Jest to
         prosty sposób na zachowanie kontroli nad elementami &lt;link&gt; dodawanymi w
         różnych miejscach aplikacji oraz na wygenerowanie kodu HTML dla tych elementów
-        w pliku layoutu bądź innego view scriptu.
+        w pliku layoutu bądź innego skryptu widoku.
         Jeśli zajdzie potrzeba dodania dodatkowego arkusza CSS w pojedynczej akcji to
         można to zrobić używając <methodname>headLink()</methodname>(na generowanej
         stronie pojawi się automatycznie).
@@ -230,7 +232,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         <para>
             Teraz należy udać się pod adres "http://localhost" i sprawdzić efekty oraz
-            wytworzony kod. Powinien pojawić się nagłówek XHTML, elementy head, title oraz body.
+            wygenerowany kod. Powinien pojawić się nagłówek XHTML, elementy head, title oraz body.
         </para>
     </note>
 </sect1>

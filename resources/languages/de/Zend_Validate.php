@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 21573
+ * EN-Revision: 21759
  */
 return array(
     // Zend_Validate_Alnum
@@ -223,6 +223,7 @@ return array(
     "'%value%' does not appear to be a valid IP address" => "'%value%' scheint keine gültige IP Adresse zu sein",
 
     // Zend_Validate_Isbn
+    "Invalid type given, value should be string or integer" => "Invalid type given, value should be string or integer",
     "'%value%' is no valid ISBN number" => "'%value%' ist keine gültige ISBN Nummer",
 
     // Zend_Validate_LessThan

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 20106 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: yes -->
 <sect1 id="learning.quickstart.intro">
     <title>Zend Framework &amp; wprowadzenie do MVC</title>
 
@@ -10,14 +10,14 @@
         <para>
             Zend Framework to otwarty, zorientowany obiektowo framework aplikacji webowych
             przeznaczony dla <acronym>PHP</acronym> 5. ZF jest często określany mianem 'biblioteki
-            komponentów' ponieważ składa się z wielu, luźno powiązanych komponentów, których można
+            komponentów' ponieważ składa się z wielu, luźno powiązanych części, których można
             używać niezależnie od siebie.
             Dodatkowo Zend Framework oferuje zaawansowaną implementację
             wzorca projektowego Model-Widok-Kontroler
             (Model-View-Controller - <acronym>MVC</acronym>),
             która może zostać użyta do skonstruowania podstawowej struktury aplikacji.
             Pełna lista komponentów Zend Framework razem z krótkim opisem znajduje się w dziale
-            <ulink url="http://framework.zend.com/about/components">components overview</ulink>.
+            <ulink url="http://framework.zend.com/about/components">omówienie komponentów</ulink>.
             Wprowadzenie "QuickStart" stanowi wstęp do poznania najczęściej używanych komponentów
             Zend Framework, takich jak:
             <classname>Zend_Controller</classname>,
@@ -58,7 +58,7 @@
             Tak więc, czym dokładnie jest ten będący na ustach wszystkich wzorzec
             <acronym>MVC</acronym>? I dlaczego miałoby to mnie obchodzić?
             <acronym>MVC</acronym> to o wiele więcej niż kolejny skrót,
-            który można mimowolnie wplątać w wypowiedź aby spróbować wywrzeć wrażenie na innych;
+            który można mimowolnie wplatać w wypowiedź aby spróbować wywrzeć wrażenie na innych;
             z biegiem czasu <acronym>MVC</acronym> nie bez przyczyny stał się standardem
             projektowania nowoczesnych aplikacji webowych.
             Większość aplikacji sieciowych opiera się w znacznej mierze
@@ -67,8 +67,8 @@
             Wzorzec <acronym>MVC</acronym> ułatwia zaprojektowanie oprogramowania z
             zachowaniem odrębności każdej z tych warstw.
             W efekcie kod prezentacji może zostać umieszczony w jednej części aplikacji,
-            logika biznesowa w drugiej a dostęp do danych w trzeciej.
-            Wielu deweloperów przekonało się, że dobrze zdefiniowane odseparowanie jest
+            logika biznesowa w drugiej, a dostęp do danych w trzeciej.
+            Wielu programistów przekonało się, że dobrze zdefiniowane odseparowanie jest
             nieodzowne dla utrzymania kodu w zorganizowanej
             strukturze, zwłaszcza przy projektach wieloosobowych.
         </para>
@@ -89,7 +89,7 @@
                 <listitem>
                     <para>
                         <emphasis>Model</emphasis> - Ta część aplikacji definiuje jej podstawowe
-                        funkcjonalności w sposób mniej bądź bardziej abstrakcyjny. Sposób dostępu
+                        funkcjonalności w sposób mniej lub bardziej abstrakcyjny. Sposób dostępu
                         do danych oraz logika biznesowa również mogą być zdefiniowane w tym miejscu.
                     </para>
                 </listitem>

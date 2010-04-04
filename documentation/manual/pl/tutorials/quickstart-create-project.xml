@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 20996 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: yes -->
 <sect1 id="learning.quickstart.create-project">
     <title>Utworzenie projektu</title>
 
@@ -15,14 +15,14 @@
             Najprostszym sposobem pobrania Zend Framework razem z całym środowiskiem PHP jest
             zainstalowanie
             <ulink url="http://www.zend.com/en/products/server-ce/downloads">Zend Server</ulink>.
-            Zend Server zawiera instalatory dla Mac OSX, Windows, Fedora Core oraz Ubuntu.
+            Zend Server zawiera instalatory dla Mac OS X, Windows, Fedora Core oraz Ubuntu.
             Oprócz tego dostępna jest uniwersalna paczka instalacyjna kompatybilna z większością
             dystrybucji Linux.
         </para>
 
         <para>
             Po zainstalowaniu Zend Server, pliki frameworka są dostępne w katalogu
-            <filename>/usr/local/zend/share/ZendFramework</filename> dla Mac OSX oraz Linux,
+            <filename>/usr/local/zend/share/ZendFramework</filename> dla Mac OS X oraz Linux,
             lub <filename>C:\Program Files\Zend\ZendServer\share\ZendFramework</filename> dla
             Windows. Zmienna <constant>include_path</constant> będzie automatycznie ustawiona
             tak aby obejmowała Zend Framework.
@@ -120,9 +120,9 @@ quickstart
 
         <para>
             W tym momencie, jeśli Zend Framework nie jest umieszczony w zmiennej
-            <constant>include_path</constant>, zaleca się przekopiowanie lub umieszczenie
+            <constant>include_path</constant>, zaleca się skopiowanie lub umieszczenie
             linku symbolicznego do podkatalogu <filename>library/</filename> projektu.
-            Najistotniejszy jest aby zawartość katalogu <filename>library/Zend/</filename>
+            Najistotniejsze jest aby zawartość katalogu <filename>library/Zend/</filename>
             instalacji Zend Framework była dostępna w katalogu <filename>library/</filename>
             projektu. Na systemach Unix można tego dokonać za pomocą następujących poleceń:
         </para>
@@ -150,7 +150,7 @@ quickstart
 
         <para>
             Klasa <classname>Bootstrap</classname> definiuje zasoby i komponenty do inicjalizacji.
-            Domyślnie uruchamiany jest <link linkend="zend.controller.front">Front Controller</link>
+            Domyślnie uruchamiany jest <link linkend="zend.controller.front">kontroler frontowy</link>
             ze standardowym katalogiem w którym szukane są kontrolery akcji (o których mowa później)
             ustawionym na <filename>application/controllers/</filename>. Klasa przedstawia się
             następująco:
@@ -165,7 +165,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
         <para>
-            Jak widać, na początek wymagane jest nie wiele.
+            Jak widać, na początek wymagane jest niewiele.
         </para>
     </sect2>
 
@@ -227,7 +227,7 @@ phpSettings.display_errors = 1
         <para>
             Kontroler akcji powinien posiadać co najmniej jedną metodę o nazwie zakończonej na
             "Action". Te metody stają się dostępne dla użytkowników. Domyślnie URLe w Zend
-            Framework stosują się do schematu <constant>/kontroler/akcja</constant>, gdzie
+            Framework stosują schemat <constant>/kontroler/akcja</constant>, gdzie
             "kontroler" jest odwzorowany na nazwę kontrolera akcji
             (z pominięciem sufiksu "Controller")
             a "akcja" jest odwzorowana na metodę w tym kontrolerze
@@ -312,7 +312,7 @@ class ErrorController extends Zend_Controller_Action
         <para>
             Widoki (view scripts) w Zend Framework są napisane w starym dobrym PHP. Domyślnie
             znajdują się w <filename>application/views/scripts/</filename>, gdzie są w dalszym
-            stopniu dzielone wg. kontrolerów do których należą. W obecnym przypadku istnieją
+            stopniu dzielone wg kontrolerów do których należą. W obecnym przypadku istnieją
             dwa kontrolery: <classname>IndexController</classname> oraz
             <classname>ErrorController</classname>. Oznacza to, że w katalogu widoków powinny się
             znaleźć dwa podkatalogi: <filename>index/</filename> oraz <filename>error/</filename>.
@@ -427,7 +427,7 @@ class ErrorController extends Zend_Controller_Action
             Na potrzeby tego wprowadzenia, założono użycie <ulink url="http://httpd.apache.org/">
             web serwera Apache</ulink>. Zend Framework działa równie dobrze z innymi
             serwerami - włączając Microsoft Internet Information Services, lighttpd, nginx i
-            wiele innych. Większość deweloperów jednak jest najbardziej zaznajomiona z Apache, który
+            wiele innych. Większość programistów jednak jest najbardziej zaznajomiona z Apache, który
             ułatwia zrozumienie struktury katalogów Zend Framework i posiada szerokie możliwości
             przepisywania linków (mod_rewrite).
         </para>

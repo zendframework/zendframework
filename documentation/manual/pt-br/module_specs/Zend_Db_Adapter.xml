@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21358 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
     <title>Zend_Db_Adapter</title>
@@ -2453,8 +2453,8 @@ if (!is_null($version)) {
                     </para>
 
                     <para>
-                        Recomendamos a atualização de <filename>gds32.dll</filename> (ou
-                        equivalente Linux) empacotado junto com PHP, para a mesma versão do
+                        Recomendamos a atualização de <filename>gds32.dll</filename> (ou equivalente
+                        Linux) empacotado junto com <acronym>PHP</acronym>, para a mesma versão do
                         servidor. Para Firebird o equivalente de <filename>gds32.dll</filename> é
                         <filename>fbclient.dll</filename>.
                     </para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.introduction">
     <title>Introdução</title>
@@ -199,8 +199,8 @@ base/path/
             hosts -- making their use not terribly portable. If you use template
             <acronym>XML</acronym> in view scripts, short open tags will cause the templates to fail
             validation. Finally, if you use short tags when <constant>short_open_tag</constant> is
-            off, the view scripts will either cause errors or simply echo PHP code back to the
-            viewer.
+            off, the view scripts will either cause errors or simply echo <acronym>PHP</acronym>
+            code back to the viewer.
         </para>
 
         <para>

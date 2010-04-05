@@ -202,6 +202,10 @@ abstract class Zend_Translate_Adapter {
 
         try {
             if (!($options['content'] instanceof Zend_Translate) && !($options['content'] instanceof Zend_Translate_Adapter)) {
+                if (empty($options['locale'])) {
+                    $options['locale'] = null;
+                }
+
                 $options['locale'] = Zend_Locale::findLocale($options['locale']);
             }
         } catch (Zend_Locale_Exception $e) {

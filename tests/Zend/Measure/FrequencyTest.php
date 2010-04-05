@@ -20,14 +20,11 @@
  * @version    $Id$
  */
 
-
 /**
- * Zend_Measure_Frequency
+ * @namespace
  */
-
-/**
- * PHPUnit test case
- */
+namespace ZendTest\Measure;
+use Zend\Measure;
 
 /**
  * @category   Zend
@@ -37,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
-class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
+class FrequencyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * test for Frequency initialisation
@@ -45,8 +42,8 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencyInit()
     {
-        $value = new Zend_Measure_Frequency('100',Zend_Measure_Frequency::STANDARD,'de');
-        $this->assertTrue($value instanceof Zend_Measure_Frequency,'Zend_Measure_Frequency Object not returned');
+        $value = new Measure\Frequency('100',Measure\Frequency::STANDARD,'de');
+        $this->assertTrue($value instanceof Measure\Frequency,'Zend\Measure\Frequency Object not returned');
     }
 
 
@@ -57,9 +54,9 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
     public function testFrequencyUnknownType()
     {
         try {
-            $value = new Zend_Measure_Frequency('100','Frequency::UNKNOWN','de');
+            $value = new Measure\Frequency('100','Frequency::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -72,9 +69,9 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
     public function testFrequencyUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Frequency('novalue',Zend_Measure_Frequency::STANDARD,'de');
+            $value = new Measure\Frequency('novalue',Measure\Frequency::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -87,9 +84,9 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
     public function testFrequencyUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Frequency('100',Zend_Measure_Frequency::STANDARD,'nolocale');
+            $value = new Measure\Frequency('100',Measure\Frequency::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -101,8 +98,8 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencyNoLocale()
     {
-        $value = new Zend_Measure_Frequency('100',Zend_Measure_Frequency::STANDARD);
-        $this->assertEquals(100, $value->getValue(),'Zend_Measure_Frequency value expected');
+        $value = new Measure\Frequency('100',Measure\Frequency::STANDARD);
+        $this->assertEquals(100, $value->getValue(),'Zend\Measure\Frequency value expected');
     }
 
 
@@ -112,8 +109,8 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencyValuePositive()
     {
-        $value = new Zend_Measure_Frequency('100',Zend_Measure_Frequency::STANDARD,'de');
-        $this->assertEquals(100, $value->getValue(), 'Zend_Measure_Frequency value expected to be a positive integer');
+        $value = new Measure\Frequency('100',Measure\Frequency::STANDARD,'de');
+        $this->assertEquals(100, $value->getValue(), 'Zend\Measure\Frequency value expected to be a positive integer');
     }
 
 
@@ -123,8 +120,8 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencyValueNegative()
     {
-        $value = new Zend_Measure_Frequency('-100',Zend_Measure_Frequency::STANDARD,'de');
-        $this->assertEquals(-100, $value->getValue(), 'Zend_Measure_Frequency value expected to be a negative integer');
+        $value = new Measure\Frequency('-100',Measure\Frequency::STANDARD,'de');
+        $this->assertEquals(-100, $value->getValue(), 'Zend\Measure\Frequency value expected to be a negative integer');
     }
 
 
@@ -134,8 +131,8 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencyValueDecimal()
     {
-        $value = new Zend_Measure_Frequency('-100,200',Zend_Measure_Frequency::STANDARD,'de');
-        $this->assertEquals(-100.200, $value->getValue(), 'Zend_Measure_Frequency value expected to be a decimal value');
+        $value = new Measure\Frequency('-100,200',Measure\Frequency::STANDARD,'de');
+        $this->assertEquals(-100.200, $value->getValue(), 'Zend\Measure\Frequency value expected to be a decimal value');
     }
 
 
@@ -145,8 +142,8 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencyValueDecimalSeperated()
     {
-        $value = new Zend_Measure_Frequency('-100.100,200',Zend_Measure_Frequency::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Frequency Object not returned');
+        $value = new Measure\Frequency('-100.100,200',Measure\Frequency::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend\Measure\Frequency Object not returned');
     }
 
 
@@ -156,8 +153,8 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencyValueString()
     {
-        $value = new Zend_Measure_Frequency('-100.100,200',Zend_Measure_Frequency::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Frequency Object not returned');
+        $value = new Measure\Frequency('-100.100,200',Measure\Frequency::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend\Measure\Frequency Object not returned');
     }
 
 
@@ -167,9 +164,9 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencyEquality()
     {
-        $value = new Zend_Measure_Frequency('-100.100,200',Zend_Measure_Frequency::STANDARD,'de');
-        $newvalue = new Zend_Measure_Frequency('-100.100,200',Zend_Measure_Frequency::STANDARD,'de');
-        $this->assertTrue($value->equals($newvalue),'Zend_Measure_Frequency Object should be equal');
+        $value = new Measure\Frequency('-100.100,200',Measure\Frequency::STANDARD,'de');
+        $newvalue = new Measure\Frequency('-100.100,200',Measure\Frequency::STANDARD,'de');
+        $this->assertTrue($value->equals($newvalue),'Zend\Measure\Frequency Object should be equal');
     }
 
 
@@ -179,9 +176,9 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencyNoEquality()
     {
-        $value = new Zend_Measure_Frequency('-100.100,200',Zend_Measure_Frequency::STANDARD,'de');
-        $newvalue = new Zend_Measure_Frequency('-100,200',Zend_Measure_Frequency::STANDARD,'de');
-        $this->assertFalse($value->equals($newvalue),'Zend_Measure_Frequency Object should be not equal');
+        $value = new Measure\Frequency('-100.100,200',Measure\Frequency::STANDARD,'de');
+        $newvalue = new Measure\Frequency('-100,200',Measure\Frequency::STANDARD,'de');
+        $this->assertFalse($value->equals($newvalue),'Zend\Measure\Frequency Object should be not equal');
     }
 
 
@@ -191,9 +188,9 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencySetPositive()
     {
-        $value = new Zend_Measure_Frequency('100',Zend_Measure_Frequency::STANDARD,'de');
-        $value->setValue('200',Zend_Measure_Frequency::STANDARD,'de');
-        $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Frequency value expected to be a positive integer');
+        $value = new Measure\Frequency('100',Measure\Frequency::STANDARD,'de');
+        $value->setValue('200',Measure\Frequency::STANDARD,'de');
+        $this->assertEquals(200, $value->getValue(), 'Zend\Measure\Frequency value expected to be a positive integer');
     }
 
 
@@ -203,9 +200,9 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencySetNegative()
     {
-        $value = new Zend_Measure_Frequency('-100',Zend_Measure_Frequency::STANDARD,'de');
-        $value->setValue('-200',Zend_Measure_Frequency::STANDARD,'de');
-        $this->assertEquals(-200, $value->getValue(), 'Zend_Measure_Frequency value expected to be a negative integer');
+        $value = new Measure\Frequency('-100',Measure\Frequency::STANDARD,'de');
+        $value->setValue('-200',Measure\Frequency::STANDARD,'de');
+        $this->assertEquals(-200, $value->getValue(), 'Zend\Measure\Frequency value expected to be a negative integer');
     }
 
 
@@ -215,9 +212,9 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencySetDecimal()
     {
-        $value = new Zend_Measure_Frequency('-100,200',Zend_Measure_Frequency::STANDARD,'de');
-        $value->setValue('-200,200',Zend_Measure_Frequency::STANDARD,'de');
-        $this->assertEquals(-200.200, $value->getValue(), 'Zend_Measure_Frequency value expected to be a decimal value');
+        $value = new Measure\Frequency('-100,200',Measure\Frequency::STANDARD,'de');
+        $value->setValue('-200,200',Measure\Frequency::STANDARD,'de');
+        $this->assertEquals(-200.200, $value->getValue(), 'Zend\Measure\Frequency value expected to be a decimal value');
     }
 
 
@@ -227,9 +224,9 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencySetDecimalSeperated()
     {
-        $value = new Zend_Measure_Frequency('-100.100,200',Zend_Measure_Frequency::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Frequency::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Frequency Object not returned');
+        $value = new Measure\Frequency('-100.100,200',Measure\Frequency::STANDARD,'de');
+        $value->setValue('-200.200,200',Measure\Frequency::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend\Measure\Frequency Object not returned');
     }
 
 
@@ -239,9 +236,9 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencySetString()
     {
-        $value = new Zend_Measure_Frequency('-100.100,200',Zend_Measure_Frequency::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Frequency::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Frequency Object not returned');
+        $value = new Measure\Frequency('-100.100,200',Measure\Frequency::STANDARD,'de');
+        $value->setValue('-200.200,200',Measure\Frequency::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend\Measure\Frequency Object not returned');
     }
 
 
@@ -252,10 +249,10 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
     public function testFrequencySetUnknownType()
     {
         try {
-            $value = new Zend_Measure_Frequency('100',Zend_Measure_Frequency::STANDARD,'de');
+            $value = new Measure\Frequency('100',Measure\Frequency::STANDARD,'de');
             $value->setValue('-200.200,200','Frequency::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -268,10 +265,10 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
     public function testFrequencySetUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Frequency('100',Zend_Measure_Frequency::STANDARD,'de');
-            $value->setValue('novalue',Zend_Measure_Frequency::STANDARD,'de');
+            $value = new Measure\Frequency('100',Measure\Frequency::STANDARD,'de');
+            $value->setValue('novalue',Measure\Frequency::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -284,10 +281,10 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
     public function testFrequencySetUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Frequency('100',Zend_Measure_Frequency::STANDARD,'de');
-            $value->setValue('200',Zend_Measure_Frequency::STANDARD,'nolocale');
+            $value = new Measure\Frequency('100',Measure\Frequency::STANDARD,'de');
+            $value->setValue('200',Measure\Frequency::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -299,9 +296,9 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencySetWithNoLocale()
     {
-        $value = new Zend_Measure_Frequency('100', Zend_Measure_Frequency::STANDARD, 'de');
-        $value->setValue('200', Zend_Measure_Frequency::STANDARD);
-        $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Frequency value expected to be a positive integer');
+        $value = new Measure\Frequency('100', Measure\Frequency::STANDARD, 'de');
+        $value->setValue('200', Measure\Frequency::STANDARD);
+        $this->assertEquals(200, $value->getValue(), 'Zend\Measure\Frequency value expected to be a positive integer');
     }
 
 
@@ -311,9 +308,9 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencySetType()
     {
-        $value = new Zend_Measure_Frequency('-100',Zend_Measure_Frequency::STANDARD,'de');
-        $value->setType(Zend_Measure_Frequency::KILOHERTZ);
-        $this->assertEquals(Zend_Measure_Frequency::KILOHERTZ, $value->getType(), 'Zend_Measure_Frequency type expected');
+        $value = new Measure\Frequency('-100',Measure\Frequency::STANDARD,'de');
+        $value->setType(Measure\Frequency::KILOHERTZ);
+        $this->assertEquals(Measure\Frequency::KILOHERTZ, $value->getType(), 'Zend\Measure\Frequency type expected');
     }
 
 
@@ -323,9 +320,9 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencySetComputedType1()
     {
-        $value = new Zend_Measure_Frequency('-100',Zend_Measure_Frequency::RADIAN_PER_HOUR,'de');
-        $value->setType(Zend_Measure_Frequency::RPM);
-        $this->assertEquals(Zend_Measure_Frequency::RPM, $value->getType(), 'Zend_Measure_Frequency type expected');
+        $value = new Measure\Frequency('-100',Measure\Frequency::RADIAN_PER_HOUR,'de');
+        $value->setType(Measure\Frequency::RPM);
+        $this->assertEquals(Measure\Frequency::RPM, $value->getType(), 'Zend\Measure\Frequency type expected');
     }
 
 
@@ -335,9 +332,9 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencySetComputedType2()
     {
-        $value = new Zend_Measure_Frequency('-100',Zend_Measure_Frequency::RPM,'de');
-        $value->setType(Zend_Measure_Frequency::RADIAN_PER_HOUR);
-        $this->assertEquals(Zend_Measure_Frequency::RADIAN_PER_HOUR, $value->getType(), 'Zend_Measure_Frequency type expected');
+        $value = new Measure\Frequency('-100',Measure\Frequency::RPM,'de');
+        $value->setType(Measure\Frequency::RADIAN_PER_HOUR);
+        $this->assertEquals(Measure\Frequency::RADIAN_PER_HOUR, $value->getType(), 'Zend\Measure\Frequency type expected');
     }
 
 
@@ -348,10 +345,10 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
     public function testFrequencySetTypeFailed()
     {
         try {
-            $value = new Zend_Measure_Frequency('-100',Zend_Measure_Frequency::STANDARD,'de');
+            $value = new Measure\Frequency('-100',Measure\Frequency::STANDARD,'de');
             $value->setType('Frequency::UNKNOWN');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -363,7 +360,7 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencyToString()
     {
-        $value = new Zend_Measure_Frequency('-100',Zend_Measure_Frequency::STANDARD,'de');
+        $value = new Measure\Frequency('-100',Measure\Frequency::STANDARD,'de');
         $this->assertEquals('-100 Hz', $value->toString(), 'Value -100 Hz expected');
     }
 
@@ -374,7 +371,7 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequency_ToString()
     {
-        $value = new Zend_Measure_Frequency('-100',Zend_Measure_Frequency::STANDARD,'de');
+        $value = new Measure\Frequency('-100',Measure\Frequency::STANDARD,'de');
         $this->assertEquals('-100 Hz', $value->__toString(), 'Value -100 Hz expected');
     }
 
@@ -385,7 +382,7 @@ class Zend_Measure_FrequencyTest extends PHPUnit_Framework_TestCase
      */
     public function testFrequencyConversionList()
     {
-        $value = new Zend_Measure_Frequency('-100',Zend_Measure_Frequency::STANDARD,'de');
+        $value = new Measure\Frequency('-100',Measure\Frequency::STANDARD,'de');
         $unit  = $value->getConversionList();
         $this->assertTrue(is_array($unit), 'Array expected');
     }

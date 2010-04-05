@@ -2,7 +2,7 @@ During the namespace conversion, do the following:
 
  % cd working
  % php ../tools/phptools/bin/php-namespacer.php \
- > -m./ -l=../library/ -p=Zend -o=./output -d=Zend/<component name>
+ > -m./ -l=../library/ -p=Zend -o=./tmp/library -d=Zend/<component name>
 
 Check the changes, and merge them into the trunk. Then make the unit
 tests pass.
@@ -23,7 +23,7 @@ First pass
         [X] Zend_Date
         [X] Zend_Translate
         [X] Zend_TimeSync
-        [ ] Zend_Measure
+        [X] Zend_Measure
         [X] Zend_Currency
 
 Second pass:
@@ -35,18 +35,18 @@ Second pass:
 [X] Zend_Uri
 
 Third pass:
-[ ] Zend_Server
+[X] Zend_Server
 [ ] Zend_Http
 
 Fourth pass:
 THE FOLLOWING IN ANY ORDER (except where indicated):
 [ ] Zend_Json
-[ ] Zend_Crypt -> [ ] Zend_Oauth, [ ] Zend_XmlRpc
-[ ] Zend_Acl
+[X] Zend_Crypt -> [ ] Zend_Oauth, [ ] Zend_XmlRpc
+[X] Zend_Acl
 [ ] Zend_Reflection
 [ ] Zend_CodeGenerator
-[ ] Zend_Console
-[ ] Zend_Dom
+[X] Zend_Console
+[X] Zend_Dom
 [ ] Zend_Gdata
 [ ] Zend_InfoCard
 [ ] Zend_Ldap

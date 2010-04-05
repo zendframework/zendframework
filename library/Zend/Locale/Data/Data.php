@@ -1463,7 +1463,9 @@ class Data
      */
     public static function clearCache()
     {
-        self::$_cache->clean();
+        if (self::$_cache !== null) {
+            self::$_cache->clean();
+        }
     }
 
     /**

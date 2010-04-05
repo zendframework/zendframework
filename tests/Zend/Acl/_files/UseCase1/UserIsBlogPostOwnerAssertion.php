@@ -1,6 +1,11 @@
 <?php
 
-class Zend_Acl_UseCase1_UserIsBlogPostOwnerAssertion implements Zend_Acl_Assert_Interface
+namespace ZendTest\Acl\UseCase1;
+
+use Zend\Acl\Assertion,
+    Zend\Acl as ZendAcl;
+
+class UserIsBlogPostOwnerAssertion implements Assertion
 {
 
     public $lastAssertRole = null;
@@ -8,10 +13,10 @@ class Zend_Acl_UseCase1_UserIsBlogPostOwnerAssertion implements Zend_Acl_Assert_
     public $lastAssertPrivilege = null;
     public $assertReturnValue = true;
 
-    public function assert(Zend_Acl $acl, Zend_Acl_Role_Interface $user = null, Zend_Acl_Resource_Interface $blogPost = null, $privilege = null)
+    public function assert(ZendAcl\Acl $acl, ZendAcl\Role $user = null, ZendAcl\Resource $blogPost = null, $privilege = null)
     {
-        $this->lastAssertRole = $user;
-        $this->lastAssertResource = $blogPost;
+        $this->lastAssertRole      = $user;
+        $this->lastAssertResource  = $blogPost;
         $this->lastAssertPrivilege = $privilege;
         return $this->assertReturnValue;
     }

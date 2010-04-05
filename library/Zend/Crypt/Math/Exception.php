@@ -21,12 +21,17 @@
  */
 
 /**
- * @uses       Zend_Crypt_Exception
+ * @namespace
+ */
+namespace Zend\Crypt\Math;
+
+/**
+ * @uses       \Zend\Crypt\Exception
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Crypt_Math_Exception extends Zend_Crypt_Exception
+class Exception extends \Zend\Crypt\Exception
 {
 }

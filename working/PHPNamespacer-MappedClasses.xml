@@ -3,10 +3,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Assert/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Acl_Assert_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Acl/Assert/AssertInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Acl\Assert</newNamespace>
-      <newClassName>AssertInterface</newClassName>
-      <newFullyQualifiedName>Zend\Acl\Assert\AssertInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Acl/Assertion.php</newRelativeFilePath>
+      <newNamespace>Zend\Acl</newNamespace>
+      <newClassName>Assertion</newClassName>
+      <newFullyQualifiedName>Zend\Acl\Assertion</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Exception.php</originalRelativeFilePath>
@@ -19,50 +19,50 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Resource/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Acl_Resource_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Acl/Resource/ResourceInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Acl\Resource</newNamespace>
-      <newClassName>ResourceInterface</newClassName>
-      <newFullyQualifiedName>Zend\Acl\Resource\ResourceInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Acl/Resource.php</newRelativeFilePath>
+      <newNamespace>Zend\Acl</newNamespace>
+      <newClassName>Resource</newClassName>
+      <newFullyQualifiedName>Zend\Acl\Resource</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Resource.php</originalRelativeFilePath>
       <originalClassName>Zend_Acl_Resource</originalClassName>
-      <newRelativeFilePath>Zend/Acl/Resource/Resource.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Acl/Resource/GenericResource.php</newRelativeFilePath>
       <newNamespace>Zend\Acl\Resource</newNamespace>
-      <newClassName>Resource</newClassName>
-      <newFullyQualifiedName>Zend\Acl\Resource\Resource</newFullyQualifiedName>
+      <newClassName>GenericResource</newClassName>
+      <newFullyQualifiedName>Zend\Acl\Resource\GenericResource</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Role/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Acl_Role_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Acl/Role/RoleInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Acl\Role</newNamespace>
-      <newClassName>RoleInterface</newClassName>
-      <newFullyQualifiedName>Zend\Acl\Role\RoleInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Acl/Role.php</newRelativeFilePath>
+      <newNamespace>Zend\Acl</newNamespace>
+      <newClassName>Role</newClassName>
+      <newFullyQualifiedName>Zend\Acl\Role</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Role/Registry/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Acl_Role_Registry_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Acl/Role/Registry/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Acl\Role\Registry</newNamespace>
+      <newRelativeFilePath>Zend/Acl/Role/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\Acl\Role</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Acl\Role\Registry\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Acl\Role\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Role/Registry.php</originalRelativeFilePath>
       <originalClassName>Zend_Acl_Role_Registry</originalClassName>
-      <newRelativeFilePath>Zend/Acl/Role/Registry/Registry.php</newRelativeFilePath>
-      <newNamespace>Zend\Acl\Role\Registry</newNamespace>
+      <newRelativeFilePath>Zend/Acl/Role/Registry.php</newRelativeFilePath>
+      <newNamespace>Zend\Acl\Role</newNamespace>
       <newClassName>Registry</newClassName>
-      <newFullyQualifiedName>Zend\Acl\Role\Registry\Registry</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Acl\Role\Registry</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl/Role.php</originalRelativeFilePath>
       <originalClassName>Zend_Acl_Role</originalClassName>
-      <newRelativeFilePath>Zend/Acl/Role/Role.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Acl/Role/GenericRole.php</newRelativeFilePath>
       <newNamespace>Zend\Acl\Role</newNamespace>
-      <newClassName>Role</newClassName>
-      <newFullyQualifiedName>Zend\Acl\Role\Role</newFullyQualifiedName>
+      <newClassName>GenericRole</newClassName>
+      <newFullyQualifiedName>Zend\Acl\Role\GenericRole</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Acl.php</originalRelativeFilePath>
@@ -1411,18 +1411,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Console/Getopt/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Console_Getopt_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Console/Getopt/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Console\Getopt</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Console\Getopt\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Console/GetoptException.php</newRelativeFilePath>
+      <newNamespace>Zend\Console</newNamespace>
+      <newClassName>GetoptException</newClassName>
+      <newFullyQualifiedName>Zend\Console\GetoptException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Console/Getopt.php</originalRelativeFilePath>
       <originalClassName>Zend_Console_Getopt</originalClassName>
-      <newRelativeFilePath>Zend/Console/Getopt/Getopt.php</newRelativeFilePath>
-      <newNamespace>Zend\Console\Getopt</newNamespace>
+      <newRelativeFilePath>Zend/Console/Getopt.php</newRelativeFilePath>
+      <newNamespace>Zend\Console</newNamespace>
       <newClassName>Getopt</newClassName>
-      <newFullyQualifiedName>Zend\Console\Getopt\Getopt</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Console\Getopt</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/Exception.php</originalRelativeFilePath>
@@ -1843,18 +1843,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/DiffieHellman/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_DiffieHellman_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/DiffieHellman/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\DiffieHellman</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\DiffieHellman\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Crypt/DiffieHellmanException.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt</newNamespace>
+      <newClassName>DiffieHellmanException</newClassName>
+      <newFullyQualifiedName>Zend\Crypt\DiffieHellmanException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/DiffieHellman.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_DiffieHellman</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/DiffieHellman/DiffieHellman.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\DiffieHellman</newNamespace>
+      <newRelativeFilePath>Zend/Crypt/DiffieHellman.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt</newNamespace>
       <newClassName>DiffieHellman</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\DiffieHellman\DiffieHellman</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Crypt\DiffieHellman</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Exception.php</originalRelativeFilePath>
@@ -1867,18 +1867,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Hmac/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_Hmac_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/Hmac/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\Hmac</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\Hmac\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Crypt/HMACException.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt</newNamespace>
+      <newClassName>HMACException</newClassName>
+      <newFullyQualifiedName>Zend\Crypt\HMACException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Hmac.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_Hmac</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/Hmac/Hmac.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\Hmac</newNamespace>
-      <newClassName>Hmac</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\Hmac\Hmac</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Crypt/HMAC.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt</newNamespace>
+      <newClassName>HMAC</newClassName>
+      <newFullyQualifiedName>Zend\Crypt\HMAC</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Math/BigInteger/Bcmath.php</originalRelativeFilePath>
@@ -1907,10 +1907,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Math/BigInteger/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_Math_BigInteger_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/Math/BigInteger/BigIntegerInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Crypt/Math/BigInteger/BigIntegerCapable.php</newRelativeFilePath>
       <newNamespace>Zend\Crypt\Math\BigInteger</newNamespace>
-      <newClassName>BigIntegerInterface</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\Math\BigInteger\BigIntegerInterface</newFullyQualifiedName>
+      <newClassName>BigIntegerCapable</newClassName>
+      <newFullyQualifiedName>Zend\Crypt\Math\BigInteger\BigIntegerCapable</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Math/BigInteger.php</originalRelativeFilePath>
@@ -1939,34 +1939,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Rsa/Key/Private.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_Rsa_Key_Private</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/Rsa/Key/Private.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\Rsa\Key</newNamespace>
-      <newClassName>Private</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\Rsa\Key\Private</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Crypt/RSA/PrivateKey.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt\RSA</newNamespace>
+      <newClassName>PrivateKey</newClassName>
+      <newFullyQualifiedName>Zend\Crypt\RSA\PrivateKey</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Rsa/Key/Public.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_Rsa_Key_Public</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/Rsa/Key/Public.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\Rsa\Key</newNamespace>
-      <newClassName>Public</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\Rsa\Key\Public</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Crypt/Rsa/PublicKey.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt\RSA</newNamespace>
+      <newClassName>PublicKey</newClassName>
+      <newFullyQualifiedName>Zend\Crypt\RSA\PublicKey</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Rsa/Key.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_Rsa_Key</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/Rsa/Key/Key.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\Rsa\Key</newNamespace>
+      <newRelativeFilePath>Zend/Crypt/RSA/Key.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt\RSA</newNamespace>
       <newClassName>Key</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\Rsa\Key\Key</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Crypt\RSA\Key</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Rsa.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_Rsa</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/Rsa/Rsa.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\Rsa</newNamespace>
-      <newClassName>Rsa</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\Rsa\Rsa</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Crypt/RSA.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt</newNamespace>
+      <newClassName>RSA</newClassName>
+      <newFullyQualifiedName>Zend\Crypt\RSA</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt.php</originalRelativeFilePath>
@@ -3067,26 +3067,26 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Dom/Query/Css2Xpath.php</originalRelativeFilePath>
       <originalClassName>Zend_Dom_Query_Css2Xpath</originalClassName>
-      <newRelativeFilePath>Zend/Dom/Query/Css2Xpath.php</newRelativeFilePath>
-      <newNamespace>Zend\Dom\Query</newNamespace>
+      <newRelativeFilePath>Zend/Dom/Css2Xpath.php</newRelativeFilePath>
+      <newNamespace>Zend\Dom</newNamespace>
       <newClassName>Css2Xpath</newClassName>
-      <newFullyQualifiedName>Zend\Dom\Query\Css2Xpath</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Dom\Css2Xpath</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Dom/Query/Result.php</originalRelativeFilePath>
       <originalClassName>Zend_Dom_Query_Result</originalClassName>
-      <newRelativeFilePath>Zend/Dom/Query/Result.php</newRelativeFilePath>
-      <newNamespace>Zend\Dom\Query</newNamespace>
-      <newClassName>Result</newClassName>
-      <newFullyQualifiedName>Zend\Dom\Query\Result</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Dom/NodeList.php</newRelativeFilePath>
+      <newNamespace>Zend\Dom</newNamespace>
+      <newClassName>NodeList</newClassName>
+      <newFullyQualifiedName>Zend\Dom\NodeList</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Dom/Query.php</originalRelativeFilePath>
       <originalClassName>Zend_Dom_Query</originalClassName>
-      <newRelativeFilePath>Zend/Dom/Query/Query.php</newRelativeFilePath>
-      <newNamespace>Zend\Dom\Query</newNamespace>
+      <newRelativeFilePath>Zend/Dom/Query.php</newRelativeFilePath>
+      <newNamespace>Zend\Dom</newNamespace>
       <newClassName>Query</newClassName>
-      <newFullyQualifiedName>Zend\Dom\Query\Query</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Dom\Query</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Exception.php</originalRelativeFilePath>
@@ -11803,10 +11803,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Class.php</originalRelativeFilePath>
       <originalClassName>Zend_Server_Reflection_Class</originalClassName>
-      <newRelativeFilePath>Zend/Server/Reflection/Class.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Server/Reflection/ClassReflection.php</newRelativeFilePath>
       <newNamespace>Zend\Server\Reflection</newNamespace>
-      <newClassName>Class</newClassName>
-      <newFullyQualifiedName>Zend\Server\Reflection\Class</newFullyQualifiedName>
+      <newClassName>ClassReflection</newClassName>
+      <newFullyQualifiedName>Zend\Server\Reflection\ClassReflection</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Exception.php</originalRelativeFilePath>
@@ -11819,18 +11819,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Function/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Server_Reflection_Function_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Server/Reflection/Function/AbstractFunction.php</newRelativeFilePath>
-      <newNamespace>Zend\Server\Reflection\Function</newNamespace>
+      <newRelativeFilePath>Zend/Server/Reflection/AbstractFunction.php</newRelativeFilePath>
+      <newNamespace>Zend\Server\Reflection</newNamespace>
       <newClassName>AbstractFunction</newClassName>
-      <newFullyQualifiedName>Zend\Server\Reflection\Function\AbstractFunction</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Server\Reflection\AbstractFunction</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Function.php</originalRelativeFilePath>
       <originalClassName>Zend_Server_Reflection_Function</originalClassName>
-      <newRelativeFilePath>Zend/Server/Reflection/Function/Function.php</newRelativeFilePath>
-      <newNamespace>Zend\Server\Reflection\Function</newNamespace>
-      <newClassName>Function</newClassName>
-      <newFullyQualifiedName>Zend\Server\Reflection\Function\Function</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Server/Reflection/FunctionReflection.php</newRelativeFilePath>
+      <newNamespace>Zend\Server\Reflection</newNamespace>
+      <newClassName>FunctionReflection</newClassName>
+      <newFullyQualifiedName>Zend\Server\Reflection\FunctionReflection</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Method.php</originalRelativeFilePath>

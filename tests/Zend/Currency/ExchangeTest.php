@@ -33,7 +33,7 @@ namespace ZendTest\Currency;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Currency
  */
-class ExchangeTest implements Zend\Currency\CurrencyServiceInterface
+class ExchangeTest implements \Zend\Currency\CurrencyServiceInterface
 {
     /**
      * Test method for exchange rate

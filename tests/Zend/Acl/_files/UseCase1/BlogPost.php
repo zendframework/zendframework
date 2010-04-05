@@ -1,6 +1,10 @@
 <?php
 
-class Zend_Acl_UseCase1_BlogPost implements Zend_Acl_Resource_Interface
+namespace ZendTest\Acl\UseCase1;
+
+use Zend\Acl\Resource;
+
+class BlogPost implements Resource
 {
     public $owner = null;
     public function getResourceId()

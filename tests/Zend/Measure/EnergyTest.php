@@ -20,10 +20,11 @@
  * @version    $Id$
  */
 
-
 /**
- * Zend_Measure_Energy
+ * @namespace
  */
+namespace ZendTest\Measure;
+use Zend\Measure;
 
 /**
  * @category   Zend
@@ -33,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
-class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
+class EnergyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * test for Energy initialisation
@@ -41,8 +42,8 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergyInit()
     {
-        $value = new Zend_Measure_Energy('100',Zend_Measure_Energy::STANDARD,'de');
-        $this->assertTrue($value instanceof Zend_Measure_Energy,'Zend_Measure_Energy Object not returned');
+        $value = new Measure\Energy('100',Measure\Energy::STANDARD,'de');
+        $this->assertTrue($value instanceof Measure\Energy,'Zend\Measure\Energy Object not returned');
     }
 
 
@@ -53,9 +54,9 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
     public function testEnergyUnknownType()
     {
         try {
-            $value = new Zend_Measure_Energy('100','Energy::UNKNOWN','de');
+            $value = new Measure\Energy('100','Energy::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -68,9 +69,9 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
     public function testEnergyUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Energy('novalue',Zend_Measure_Energy::STANDARD,'de');
+            $value = new Measure\Energy('novalue',Measure\Energy::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -83,9 +84,9 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
     public function testEnergyUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Energy('100',Zend_Measure_Energy::STANDARD,'nolocale');
+            $value = new Measure\Energy('100',Measure\Energy::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -97,8 +98,8 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergyNoLocale()
     {
-        $value = new Zend_Measure_Energy('100',Zend_Measure_Energy::STANDARD);
-        $this->assertEquals(100, $value->getValue(),'Zend_Measure_Energy value expected');
+        $value = new Measure\Energy('100',Measure\Energy::STANDARD);
+        $this->assertEquals(100, $value->getValue(),'Zend\Measure\Energy value expected');
     }
 
 
@@ -108,8 +109,8 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergyValuePositive()
     {
-        $value = new Zend_Measure_Energy('100',Zend_Measure_Energy::STANDARD,'de');
-        $this->assertEquals(100, $value->getValue(), 'Zend_Measure_Energy value expected to be a positive integer');
+        $value = new Measure\Energy('100',Measure\Energy::STANDARD,'de');
+        $this->assertEquals(100, $value->getValue(), 'Zend\Measure\Energy value expected to be a positive integer');
     }
 
 
@@ -119,8 +120,8 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergyValueNegative()
     {
-        $value = new Zend_Measure_Energy('-100',Zend_Measure_Energy::STANDARD,'de');
-        $this->assertEquals(-100, $value->getValue(), 'Zend_Measure_Energy value expected to be a negative integer');
+        $value = new Measure\Energy('-100',Measure\Energy::STANDARD,'de');
+        $this->assertEquals(-100, $value->getValue(), 'Zend\Measure\Energy value expected to be a negative integer');
     }
 
 
@@ -130,8 +131,8 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergyValueDecimal()
     {
-        $value = new Zend_Measure_Energy('-100,200',Zend_Measure_Energy::STANDARD,'de');
-        $this->assertEquals(-100.200, $value->getValue(), 'Zend_Measure_Energy value expected to be a decimal value');
+        $value = new Measure\Energy('-100,200',Measure\Energy::STANDARD,'de');
+        $this->assertEquals(-100.200, $value->getValue(), 'Zend\Measure\Energy value expected to be a decimal value');
     }
 
 
@@ -141,8 +142,8 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergyValueDecimalSeperated()
     {
-        $value = new Zend_Measure_Energy('-100.100,200',Zend_Measure_Energy::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Energy Object not returned');
+        $value = new Measure\Energy('-100.100,200',Measure\Energy::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend\Measure\Energy Object not returned');
     }
 
 
@@ -152,8 +153,8 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergyValueString()
     {
-        $value = new Zend_Measure_Energy('-100.100,200',Zend_Measure_Energy::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Energy Object not returned');
+        $value = new Measure\Energy('-100.100,200',Measure\Energy::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend\Measure\Energy Object not returned');
     }
 
 
@@ -163,9 +164,9 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergyEquality()
     {
-        $value = new Zend_Measure_Energy('-100.100,200',Zend_Measure_Energy::STANDARD,'de');
-        $newvalue = new Zend_Measure_Energy('-100.100,200',Zend_Measure_Energy::STANDARD,'de');
-        $this->assertTrue($value->equals($newvalue),'Zend_Measure_Energy Object should be equal');
+        $value = new Measure\Energy('-100.100,200',Measure\Energy::STANDARD,'de');
+        $newvalue = new Measure\Energy('-100.100,200',Measure\Energy::STANDARD,'de');
+        $this->assertTrue($value->equals($newvalue),'Zend\Measure\Energy Object should be equal');
     }
 
 
@@ -175,9 +176,9 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergyNoEquality()
     {
-        $value = new Zend_Measure_Energy('-100.100,200',Zend_Measure_Energy::STANDARD,'de');
-        $newvalue = new Zend_Measure_Energy('-100,200',Zend_Measure_Energy::STANDARD,'de');
-        $this->assertFalse($value->equals($newvalue),'Zend_Measure_Energy Object should be not equal');
+        $value = new Measure\Energy('-100.100,200',Measure\Energy::STANDARD,'de');
+        $newvalue = new Measure\Energy('-100,200',Measure\Energy::STANDARD,'de');
+        $this->assertFalse($value->equals($newvalue),'Zend\Measure\Energy Object should be not equal');
     }
 
 
@@ -187,9 +188,9 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergySetPositive()
     {
-        $value = new Zend_Measure_Energy('100',Zend_Measure_Energy::STANDARD,'de');
-        $value->setValue('200',Zend_Measure_Energy::STANDARD,'de');
-        $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Energy value expected to be a positive integer');
+        $value = new Measure\Energy('100',Measure\Energy::STANDARD,'de');
+        $value->setValue('200',Measure\Energy::STANDARD,'de');
+        $this->assertEquals(200, $value->getValue(), 'Zend\Measure\Energy value expected to be a positive integer');
     }
 
 
@@ -199,9 +200,9 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergySetNegative()
     {
-        $value = new Zend_Measure_Energy('-100',Zend_Measure_Energy::STANDARD,'de');
-        $value->setValue('-200',Zend_Measure_Energy::STANDARD,'de');
-        $this->assertEquals(-200, $value->getValue(), 'Zend_Measure_Energy value expected to be a negative integer');
+        $value = new Measure\Energy('-100',Measure\Energy::STANDARD,'de');
+        $value->setValue('-200',Measure\Energy::STANDARD,'de');
+        $this->assertEquals(-200, $value->getValue(), 'Zend\Measure\Energy value expected to be a negative integer');
     }
 
 
@@ -211,9 +212,9 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergySetDecimal()
     {
-        $value = new Zend_Measure_Energy('-100,200',Zend_Measure_Energy::STANDARD,'de');
-        $value->setValue('-200,200',Zend_Measure_Energy::STANDARD,'de');
-        $this->assertEquals(-200.200, $value->getValue(), 'Zend_Measure_Energy value expected to be a decimal value');
+        $value = new Measure\Energy('-100,200',Measure\Energy::STANDARD,'de');
+        $value->setValue('-200,200',Measure\Energy::STANDARD,'de');
+        $this->assertEquals(-200.200, $value->getValue(), 'Zend\Measure\Energy value expected to be a decimal value');
     }
 
 
@@ -223,9 +224,9 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergySetDecimalSeperated()
     {
-        $value = new Zend_Measure_Energy('-100.100,200',Zend_Measure_Energy::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Energy::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Energy Object not returned');
+        $value = new Measure\Energy('-100.100,200',Measure\Energy::STANDARD,'de');
+        $value->setValue('-200.200,200',Measure\Energy::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend\Measure\Energy Object not returned');
     }
 
 
@@ -235,9 +236,9 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergySetString()
     {
-        $value = new Zend_Measure_Energy('-100.100,200',Zend_Measure_Energy::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Energy::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Energy Object not returned');
+        $value = new Measure\Energy('-100.100,200',Measure\Energy::STANDARD,'de');
+        $value->setValue('-200.200,200',Measure\Energy::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend\Measure\Energy Object not returned');
     }
 
 
@@ -248,10 +249,10 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
     public function testEnergySetUnknownType()
     {
         try {
-            $value = new Zend_Measure_Energy('100',Zend_Measure_Energy::STANDARD,'de');
+            $value = new Measure\Energy('100',Measure\Energy::STANDARD,'de');
             $value->setValue('-200.200,200','Energy::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -264,10 +265,10 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
     public function testEnergySetUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Energy('100',Zend_Measure_Energy::STANDARD,'de');
-            $value->setValue('novalue',Zend_Measure_Energy::STANDARD,'de');
+            $value = new Measure\Energy('100',Measure\Energy::STANDARD,'de');
+            $value->setValue('novalue',Measure\Energy::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -280,10 +281,10 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
     public function testEnergySetUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Energy('100',Zend_Measure_Energy::STANDARD,'de');
-            $value->setValue('200',Zend_Measure_Energy::STANDARD,'nolocale');
+            $value = new Measure\Energy('100',Measure\Energy::STANDARD,'de');
+            $value->setValue('200',Measure\Energy::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -295,9 +296,9 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergySetWithNoLocale()
     {
-        $value = new Zend_Measure_Energy('100', Zend_Measure_Energy::STANDARD, 'de');
-        $value->setValue('200', Zend_Measure_Energy::STANDARD);
-        $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Energy value expected to be a positive integer');
+        $value = new Measure\Energy('100', Measure\Energy::STANDARD, 'de');
+        $value->setValue('200', Measure\Energy::STANDARD);
+        $this->assertEquals(200, $value->getValue(), 'Zend\Measure\Energy value expected to be a positive integer');
     }
 
 
@@ -307,9 +308,9 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergySetType()
     {
-        $value = new Zend_Measure_Energy('-100',Zend_Measure_Energy::STANDARD,'de');
-        $value->setType(Zend_Measure_Energy::ERG);
-        $this->assertEquals(Zend_Measure_Energy::ERG, $value->getType(), 'Zend_Measure_Energy type expected');
+        $value = new Measure\Energy('-100',Measure\Energy::STANDARD,'de');
+        $value->setType(Measure\Energy::ERG);
+        $this->assertEquals(Measure\Energy::ERG, $value->getType(), 'Zend\Measure\Energy type expected');
     }
 
 
@@ -320,9 +321,9 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergySetComputedType1()
     {
-        $value = new Zend_Measure_Energy('-100',Zend_Measure_Energy::ERG,'de');
-        $value->setType(Zend_Measure_Energy::KILOTON);
-        $this->assertEquals(Zend_Measure_Energy::KILOTON, $value->getType(), 'Zend_Measure_Energy type expected');
+        $value = new Measure\Energy('-100',Measure\Energy::ERG,'de');
+        $value->setType(Measure\Energy::KILOTON);
+        $this->assertEquals(Measure\Energy::KILOTON, $value->getType(), 'Zend\Measure\Energy type expected');
     }
 
 
@@ -332,9 +333,9 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergySetComputedType2()
     {
-        $value = new Zend_Measure_Energy('-100',Zend_Measure_Energy::KILOTON,'de');
-        $value->setType(Zend_Measure_Energy::ERG);
-        $this->assertEquals(Zend_Measure_Energy::ERG, $value->getType(), 'Zend_Measure_Energy type expected');
+        $value = new Measure\Energy('-100',Measure\Energy::KILOTON,'de');
+        $value->setType(Measure\Energy::ERG);
+        $this->assertEquals(Measure\Energy::ERG, $value->getType(), 'Zend\Measure\Energy type expected');
     }
 
 
@@ -345,10 +346,10 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
     public function testEnergySetTypeFailed()
     {
         try {
-            $value = new Zend_Measure_Energy('-100',Zend_Measure_Energy::STANDARD,'de');
+            $value = new Measure\Energy('-100',Measure\Energy::STANDARD,'de');
             $value->setType('Energy::UNKNOWN');
             $this->fail('Exception expected because of unknown type');
-        } catch (Zend_Measure_Exception $e) {
+        } catch (Measure\Exception $e) {
             // success
         }
     }
@@ -360,7 +361,7 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergyToString()
     {
-        $value = new Zend_Measure_Energy('-100',Zend_Measure_Energy::STANDARD,'de');
+        $value = new Measure\Energy('-100',Measure\Energy::STANDARD,'de');
         $this->assertEquals('-100 J', $value->toString(), 'Value -100 J expected');
     }
 
@@ -371,7 +372,7 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergy_ToString()
     {
-        $value = new Zend_Measure_Energy('-100',Zend_Measure_Energy::STANDARD,'de');
+        $value = new Measure\Energy('-100',Measure\Energy::STANDARD,'de');
         $this->assertEquals('-100 J', $value->__toString(), 'Value -100 J expected');
     }
 
@@ -382,7 +383,7 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergyConversionList()
     {
-        $value = new Zend_Measure_Energy('-100',Zend_Measure_Energy::STANDARD,'de');
+        $value = new Measure\Energy('-100',Measure\Energy::STANDARD,'de');
         $unit  = $value->getConversionList();
         $this->assertTrue(is_array($unit), 'Array expected');
     }

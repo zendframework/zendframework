@@ -20,9 +20,14 @@
  * @version $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Server\Reflection;
+use Zend\Server\Reflection;
 
 /**
- * Test case for Zend_Server_Reflection_Node
+ * Test case for \Zend\Server\Reflection\Node
  *
  * @category   Zend
  * @package    Zend_Server
@@ -31,22 +36,22 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class Zend_Server_Reflection_NodeTest extends PHPUnit_Framework_TestCase
+class NodeTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * __construct() test
      */
     public function test__construct()
     {
-        $node = new Zend_Server_Reflection_Node('string');
-        $this->assertTrue($node instanceof Zend_Server_Reflection_Node);
+        $node = new Reflection\Node('string');
+        $this->assertTrue($node instanceof Reflection\Node);
         $this->assertEquals('string', $node->getValue());
         $this->assertTrue(null === $node->getParent());
         $children = $node->getChildren();
         $this->assertTrue(empty($children));
 
-        $child = new Zend_Server_Reflection_Node('array', $node);
-        $this->assertTrue($child instanceof Zend_Server_Reflection_Node);
+        $child = new Reflection\Node('array', $node);
+        $this->assertTrue($child instanceof Reflection\Node);
         $this->assertEquals('array', $child->getValue());
         $this->assertTrue($node === $child->getParent());
         $children = $child->getChildren();
@@ -61,8 +66,8 @@ class Zend_Server_Reflection_NodeTest extends PHPUnit_Framework_TestCase
      */
     public function testSetParent()
     {
-        $parent = new Zend_Server_Reflection_Node('string');
-        $child  = new Zend_Server_Reflection_Node('array');
+        $parent = new Reflection\Node('string');
+        $child  = new Reflection\Node('array');
 
         $child->setParent($parent);
 
@@ -74,10 +79,10 @@ class Zend_Server_Reflection_NodeTest extends PHPUnit_Framework_TestCase
      */
     public function testCreateChild()
     {
-        $parent = new Zend_Server_Reflection_Node('string');
+        $parent = new Reflection\Node('string');
         $child = $parent->createChild('array');
 
-        $this->assertTrue($child instanceof Zend_Server_Reflection_Node);
+        $this->assertTrue($child instanceof Reflection\Node);
         $this->assertTrue($parent === $child->getParent());
         $children = $parent->getChildren();
         $this->assertTrue($child === $children[0]);
@@ -88,8 +93,8 @@ class Zend_Server_Reflection_NodeTest extends PHPUnit_Framework_TestCase
      */
     public function testAttachChild()
     {
-        $parent = new Zend_Server_Reflection_Node('string');
-        $child  = new Zend_Server_Reflection_Node('array');
+        $parent = new Reflection\Node('string');
+        $child  = new Reflection\Node('array');
 
         $parent->attachChild($child);
         $this->assertTrue($parent === $child->getParent());
@@ -102,7 +107,7 @@ class Zend_Server_Reflection_NodeTest extends PHPUnit_Framework_TestCase
      */
     public function testGetChildren()
     {
-        $parent = new Zend_Server_Reflection_Node('string');
+        $parent = new Reflection\Node('string');
         $child = $parent->createChild('array');
 
         $children = $parent->getChildren();
@@ -120,7 +125,7 @@ class Zend_Server_Reflection_NodeTest extends PHPUnit_Framework_TestCase
      */
     public function testHasChildren()
     {
-        $parent = new Zend_Server_Reflection_Node('string');
+        $parent = new Reflection\Node('string');
 
         $this->assertFalse($parent->hasChildren());
         $parent->createChild('array');
@@ -132,7 +137,7 @@ class Zend_Server_Reflection_NodeTest extends PHPUnit_Framework_TestCase
      */
     public function testGetParent()
     {
-        $parent = new Zend_Server_Reflection_Node('string');
+        $parent = new Reflection\Node('string');
         $child = $parent->createChild('array');
 
         $this->assertTrue(null === $parent->getParent());
@@ -144,7 +149,7 @@ class Zend_Server_Reflection_NodeTest extends PHPUnit_Framework_TestCase
      */
     public function testGetValue()
     {
-        $parent = new Zend_Server_Reflection_Node('string');
+        $parent = new Reflection\Node('string');
         $this->assertEquals('string', $parent->getValue());
     }
 
@@ -153,7 +158,7 @@ class Zend_Server_Reflection_NodeTest extends PHPUnit_Framework_TestCase
      */
     public function testSetValue()
     {
-        $parent = new Zend_Server_Reflection_Node('string');
+        $parent = new Reflection\Node('string');
         $this->assertEquals('string', $parent->getValue());
         $parent->setValue('array');
         $this->assertEquals('array', $parent->getValue());
@@ -164,7 +169,7 @@ class Zend_Server_Reflection_NodeTest extends PHPUnit_Framework_TestCase
      */
     public function testGetEndPoints()
     {
-        $root = new Zend_Server_Reflection_Node('root');
+        $root = new Reflection\Node('root');
         $child1 = $root->createChild('child1');
         $child2 = $root->createChild('child2');
         $child1grand1 = $child1->createChild(null);

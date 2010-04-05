@@ -27,7 +27,7 @@ namespace ZendTest\Server\Reflection;
 use Zend\Server\Reflection;
 
 /**
- * Test case for \Zend\Server\Reflection\ReturnValue
+ * Test case for \Zend\Server\Reflection\ReflectionReturnValue
  *
  * @category   Zend
  * @package    Zend_Server
@@ -36,7 +36,7 @@ use Zend\Server\Reflection;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class ReturnValueTest extends \PHPUnit_Framework_TestCase
+class ReflectionReturnValueTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * __construct() test
@@ -51,8 +51,8 @@ class ReturnValueTest extends \PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $obj = new Reflection\ReturnValue();
-        $this->assertTrue($obj instanceof Reflection\ReturnValue);
+        $obj = new Reflection\ReflectionReturnValue();
+        $this->assertTrue($obj instanceof Reflection\ReflectionReturnValue);
     }
 
     /**
@@ -64,7 +64,7 @@ class ReturnValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetType()
     {
-        $obj = new Reflection\ReturnValue();
+        $obj = new Reflection\ReflectionReturnValue();
         $this->assertEquals('mixed', $obj->getType());
 
         $obj->setType('array');
@@ -83,7 +83,7 @@ class ReturnValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetType()
     {
-        $obj = new Reflection\ReturnValue();
+        $obj = new Reflection\ReflectionReturnValue();
 
         $obj->setType('array');
         $this->assertEquals('array', $obj->getType());
@@ -98,7 +98,7 @@ class ReturnValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDescription()
     {
-        $obj = new Reflection\ReturnValue('string', 'Some description');
+        $obj = new Reflection\ReflectionReturnValue('string', 'Some description');
         $this->assertEquals('Some description', $obj->getDescription());
 
         $obj->setDescription('New Description');
@@ -117,7 +117,7 @@ class ReturnValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetDescription()
     {
-        $obj = new Reflection\ReturnValue();
+        $obj = new Reflection\ReflectionReturnValue();
 
         $obj->setDescription('New Description');
         $this->assertEquals('New Description', $obj->getDescription());

@@ -11803,10 +11803,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Class.php</originalRelativeFilePath>
       <originalClassName>Zend_Server_Reflection_Class</originalClassName>
-      <newRelativeFilePath>Zend/Server/Reflection/ClassReflection.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Server/Reflection/ReflectionClass.php</newRelativeFilePath>
       <newNamespace>Zend\Server\Reflection</newNamespace>
-      <newClassName>ClassReflection</newClassName>
-      <newFullyQualifiedName>Zend\Server\Reflection\ClassReflection</newFullyQualifiedName>
+      <newClassName>ReflectionClass</newClassName>
+      <newFullyQualifiedName>Zend\Server\Reflection\ReflectionClass</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Exception.php</originalRelativeFilePath>
@@ -11827,18 +11827,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Function.php</originalRelativeFilePath>
       <originalClassName>Zend_Server_Reflection_Function</originalClassName>
-      <newRelativeFilePath>Zend/Server/Reflection/FunctionReflection.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Server/Reflection/ReflectionFunction.php</newRelativeFilePath>
       <newNamespace>Zend\Server\Reflection</newNamespace>
-      <newClassName>FunctionReflection</newClassName>
-      <newFullyQualifiedName>Zend\Server\Reflection\FunctionReflection</newFullyQualifiedName>
+      <newClassName>ReflectionFunction</newClassName>
+      <newFullyQualifiedName>Zend\Server\Reflection\ReflectionFunction</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Method.php</originalRelativeFilePath>
       <originalClassName>Zend_Server_Reflection_Method</originalClassName>
-      <newRelativeFilePath>Zend/Server/Reflection/Method.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Server/Reflection/ReflectionMethod.php</newRelativeFilePath>
       <newNamespace>Zend\Server\Reflection</newNamespace>
-      <newClassName>Method</newClassName>
-      <newFullyQualifiedName>Zend\Server\Reflection\Method</newFullyQualifiedName>
+      <newClassName>ReflectionMethod</newClassName>
+      <newFullyQualifiedName>Zend\Server\Reflection\ReflectionMethod</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Node.php</originalRelativeFilePath>
@@ -11851,10 +11851,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Parameter.php</originalRelativeFilePath>
       <originalClassName>Zend_Server_Reflection_Parameter</originalClassName>
-      <newRelativeFilePath>Zend/Server/Reflection/Parameter.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Server/Reflection/ReflectionParameter.php</newRelativeFilePath>
       <newNamespace>Zend\Server\Reflection</newNamespace>
-      <newClassName>Parameter</newClassName>
-      <newFullyQualifiedName>Zend\Server\Reflection\Parameter</newFullyQualifiedName>
+      <newClassName>ReflectionParameter</newClassName>
+      <newFullyQualifiedName>Zend\Server\Reflection\ReflectionParameter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/Prototype.php</originalRelativeFilePath>
@@ -11867,10 +11867,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection/ReturnValue.php</originalRelativeFilePath>
       <originalClassName>Zend_Server_Reflection_ReturnValue</originalClassName>
-      <newRelativeFilePath>Zend/Server/Reflection/ReturnValue.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Server/Reflection/ReflectionReturnValue.php</newRelativeFilePath>
       <newNamespace>Zend\Server\Reflection</newNamespace>
-      <newClassName>ReturnValue</newClassName>
-      <newFullyQualifiedName>Zend\Server\Reflection\ReturnValue</newFullyQualifiedName>
+      <newClassName>ReflectionReturnValue</newClassName>
+      <newFullyQualifiedName>Zend\Server\Reflection\ReflectionReturnValue</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection.php</originalRelativeFilePath>

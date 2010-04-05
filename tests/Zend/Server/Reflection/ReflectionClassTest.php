@@ -36,7 +36,7 @@ use Zend\Server\Reflection;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class ClassReflectionTest extends \PHPUnit_Framework_TestCase
+class ReflectionClassTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * __construct() test
@@ -52,17 +52,17 @@ class ClassReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $r = new Reflection\ClassReflection(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
-        $this->assertTrue($r instanceof Reflection\ClassReflection);
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
+        $this->assertTrue($r instanceof Reflection\ReflectionClass);
         $this->assertEquals('', $r->getNamespace());
 
         $methods = $r->getMethods();
         $this->assertTrue(is_array($methods));
         foreach ($methods as $m) {
-            $this->assertTrue($m instanceof Reflection\Method);
+            $this->assertTrue($m instanceof Reflection\ReflectionMethod);
         }
 
-        $r = new Reflection\ClassReflection(new \ReflectionClass('\Zend\Server\Reflection\Reflection'), 'namespace');
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection\Reflection'), 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
     }
 
@@ -79,7 +79,7 @@ class ClassReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function test__call()
     {
-        $r = new Reflection\ClassReflection(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
         $this->assertTrue(is_string($r->getName()));
         $this->assertEquals('Zend\Server\Reflection\Reflection', $r->getName());
     }
@@ -89,7 +89,7 @@ class ClassReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSet()
     {
-        $r = new Reflection\ClassReflection(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
         $r->system = true;
         $this->assertTrue($r->system);
     }
@@ -103,12 +103,12 @@ class ClassReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMethods()
     {
-        $r = new Reflection\ClassReflection(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
 
         $methods = $r->getMethods();
         $this->assertTrue(is_array($methods));
         foreach ($methods as $m) {
-            $this->assertTrue($m instanceof Reflection\Method);
+            $this->assertTrue($m instanceof Reflection\ReflectionMethod);
         }
     }
 
@@ -117,7 +117,7 @@ class ClassReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetNamespace()
     {
-        $r = new Reflection\ClassReflection(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
         $this->assertEquals('', $r->getNamespace());
         $r->setNamespace('namespace');
         $this->assertEquals('namespace', $r->getNamespace());
@@ -132,11 +132,11 @@ class ClassReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function test__wakeup()
     {
-        $r = new Reflection\ClassReflection(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
         $s = serialize($r);
         $u = unserialize($s);
 
-        $this->assertTrue($u instanceof Reflection\ClassReflection);
+        $this->assertTrue($u instanceof Reflection\ReflectionClass);
         $this->assertEquals('', $u->getNamespace());
         $this->assertEquals($r->getName(), $u->getName());
         $rMethods = $r->getMethods();

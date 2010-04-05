@@ -26,9 +26,9 @@
 namespace Zend\Server\Reflection;
 
 /**
- * Parameter Reflection
+ * Return value reflection
  *
- * Decorates a ReflectionParameter to allow setting the parameter type
+ * Stores the return value type and description
  *
  * @uses       \Zend\Server\Reflection\Exception
  * @category   Zend
@@ -37,27 +37,16 @@ namespace Zend\Server\Reflection;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Parameter
+class ReflectionReturnValue
 {
     /**
-     * @var ReflectionParameter
-     */
-    protected $_reflection;
-
-    /**
-     * Parameter position
-     * @var int
-     */
-    protected $_position;
-
-    /**
-     * Parameter type
+     * Return value type
      * @var string
      */
     protected $_type;
 
     /**
-     * Parameter description
+     * Return value description
      * @var string
      */
     protected $_description;
@@ -65,31 +54,13 @@ class Parameter
     /**
      * Constructor
      *
-     * @param ReflectionParameter $r
-     * @param string $type Parameter type
-     * @param string $description Parameter description
+     * @param string $type Return value type
+     * @param string $description Return value type
      */
-    public function __construct(\ReflectionParameter $r, $type = 'mixed', $description = '')
+    public function __construct($type = 'mixed', $description = '')
     {
-        $this->_reflection = $r;
         $this->setType($type);
         $this->setDescription($description);
-    }
-
-    /**
-     * Proxy reflection calls
-     *
-     * @param string $method
-     * @param array $args
-     * @return mixed
-     */
-    public function __call($method, $args)
-    {
-        if (method_exists($this->_reflection, $method)) {
-            return call_user_func_array(array($this->_reflection, $method), $args);
-        }
-
-        throw new Exception('Invalid reflection method');
     }
 
     /**
@@ -140,26 +111,5 @@ class Parameter
         }
 
         $this->_description = $description;
-    }
-
-    /**
-     * Set parameter position
-     *
-     * @param int $index
-     * @return void
-     */
-    public function setPosition($index)
-    {
-        $this->_position = (int) $index;
-    }
-
-    /**
-     * Return parameter position
-     *
-     * @return int
-     */
-    public function getPosition()
-    {
-        return $this->_position;
     }
 }

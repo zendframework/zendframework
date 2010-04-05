@@ -68,11 +68,11 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
 
         $fParameters = array();
         foreach ($parameters as $p) {
-            $fParameters[] = new Reflection\Parameter($p);
+            $fParameters[] = new Reflection\ReflectionParameter($p);
         }
         $this->_parameters = $fParameters;
 
-        $this->_r = new Reflection\Prototype(new Reflection\ReturnValue('void', 'No return'));
+        $this->_r = new Reflection\Prototype(new Reflection\ReflectionReturnValue('void', 'No return'));
     }
 
     /**
@@ -132,11 +132,11 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
      *
      * Call as method call
      *
-     * Returns: \Zend\Server\Reflection\ReturnValue
+     * Returns: \Zend\Server\Reflection\ReflectionReturnValue
      */
     public function testGetReturnValue()
     {
-        $this->assertTrue($this->_r->getReturnValue() instanceof Reflection\ReturnValue);
+        $this->assertTrue($this->_r->getReturnValue() instanceof Reflection\ReflectionReturnValue);
     }
 
     /**
@@ -153,7 +153,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue(is_array($p));
         foreach ($p as $parameter) {
-            $this->assertTrue($parameter instanceof Reflection\Parameter);
+            $this->assertTrue($parameter instanceof Reflection\ReflectionParameter);
         }
 
         $this->assertTrue($p === $this->_parameters);

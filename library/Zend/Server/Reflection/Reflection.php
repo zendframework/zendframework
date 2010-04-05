@@ -72,7 +72,7 @@ class Reflection
             throw new Exception('Invalid argv argument passed to reflectClass');
         }
 
-        return new ClassReflection($reflection, $namespace, $argv);
+        return new ReflectionClass($reflection, $namespace, $argv);
     }
 
     /**
@@ -103,6 +103,6 @@ class Reflection
             throw new Exception('Invalid argv argument passed to reflectClass');
         }
 
-        return new FunctionReflection(new \ReflectionFunction($function), $namespace, $argv);
+        return new ReflectionFunction(new \ReflectionFunction($function), $namespace, $argv);
     }
 }

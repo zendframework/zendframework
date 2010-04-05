@@ -24,10 +24,10 @@
  * @namespace
  */
 namespace ZendTest\Server\Reflection;
-use Zend\Server\Reflection;
+use Zend\Server\Reflection\Node;
 
 /**
- * Test case for \Zend\Server\Reflection\Node
+ * Test case for \Zend\Server\Node
  *
  * @category   Zend
  * @package    Zend_Server
@@ -43,15 +43,15 @@ class NodeTest extends \PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $node = new Reflection\Node('string');
-        $this->assertTrue($node instanceof Reflection\Node);
+        $node = new Node('string');
+        $this->assertTrue($node instanceof Node);
         $this->assertEquals('string', $node->getValue());
         $this->assertTrue(null === $node->getParent());
         $children = $node->getChildren();
         $this->assertTrue(empty($children));
 
-        $child = new Reflection\Node('array', $node);
-        $this->assertTrue($child instanceof Reflection\Node);
+        $child = new Node('array', $node);
+        $this->assertTrue($child instanceof Node);
         $this->assertEquals('array', $child->getValue());
         $this->assertTrue($node === $child->getParent());
         $children = $child->getChildren();
@@ -66,8 +66,8 @@ class NodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetParent()
     {
-        $parent = new Reflection\Node('string');
-        $child  = new Reflection\Node('array');
+        $parent = new Node('string');
+        $child  = new Node('array');
 
         $child->setParent($parent);
 
@@ -79,10 +79,10 @@ class NodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateChild()
     {
-        $parent = new Reflection\Node('string');
+        $parent = new Node('string');
         $child = $parent->createChild('array');
 
-        $this->assertTrue($child instanceof Reflection\Node);
+        $this->assertTrue($child instanceof Node);
         $this->assertTrue($parent === $child->getParent());
         $children = $parent->getChildren();
         $this->assertTrue($child === $children[0]);
@@ -93,8 +93,8 @@ class NodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testAttachChild()
     {
-        $parent = new Reflection\Node('string');
-        $child  = new Reflection\Node('array');
+        $parent = new Node('string');
+        $child  = new Node('array');
 
         $parent->attachChild($child);
         $this->assertTrue($parent === $child->getParent());
@@ -107,7 +107,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetChildren()
     {
-        $parent = new Reflection\Node('string');
+        $parent = new Node('string');
         $child = $parent->createChild('array');
 
         $children = $parent->getChildren();
@@ -125,7 +125,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testHasChildren()
     {
-        $parent = new Reflection\Node('string');
+        $parent = new Node('string');
 
         $this->assertFalse($parent->hasChildren());
         $parent->createChild('array');
@@ -137,7 +137,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetParent()
     {
-        $parent = new Reflection\Node('string');
+        $parent = new Node('string');
         $child = $parent->createChild('array');
 
         $this->assertTrue(null === $parent->getParent());
@@ -149,7 +149,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetValue()
     {
-        $parent = new Reflection\Node('string');
+        $parent = new Node('string');
         $this->assertEquals('string', $parent->getValue());
     }
 
@@ -158,7 +158,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValue()
     {
-        $parent = new Reflection\Node('string');
+        $parent = new Node('string');
         $this->assertEquals('string', $parent->getValue());
         $parent->setValue('array');
         $this->assertEquals('array', $parent->getValue());
@@ -169,7 +169,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetEndPoints()
     {
-        $root = new Reflection\Node('root');
+        $root = new Node('root');
         $child1 = $root->createChild('child1');
         $child2 = $root->createChild('child2');
         $child1grand1 = $child1->createChild(null);

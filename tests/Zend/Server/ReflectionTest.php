@@ -45,14 +45,14 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $reflection = Reflection\Reflection::reflectClass('ZendTest\Server\ReflectionTestClass');
-            $this->assertTrue($reflection instanceof Reflection\ClassReflection);
+            $this->assertTrue($reflection instanceof Reflection\ReflectionClass);
         } catch (\Exception $e) {
             $this->fail('Failed to perform class reflection: ' . $e->getMessage());
         }
 
         try {
             $reflection = Reflection\Reflection::reflectClass(new ReflectionTestClass());
-            $this->assertTrue($reflection instanceof Reflection\ClassReflection);
+            $this->assertTrue($reflection instanceof Reflection\ReflectionClass);
         } catch (\Exception $e) {
             $this->fail('Failed to perform object reflection: ' . $e->getMessage());
         }
@@ -88,7 +88,7 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $reflection = Reflection\Reflection::reflectFunction('ZendTest\Server\reflectionTestFunction');
-            $this->assertTrue($reflection instanceof Reflection\FunctionReflection);
+            $this->assertTrue($reflection instanceof Reflection\ReflectionFunction);
         } catch (\Exception $e) {
             $this->fail('Function reflection failed: ' . $e->getMessage());
         }

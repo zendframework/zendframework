@@ -40,9 +40,9 @@ namespace Zend\Server\Reflection;
  * @uses       ReflectionMethod
  * @uses       \Zend\Server\Reflection\Exception
  * @uses       \Zend\Server\Reflection\Node
- * @uses       \Zend\Server\Reflection\Parameter
+ * @uses       \Zend\Server\Reflection\ReflectionParameter
  * @uses       \Zend\Server\Reflection\Prototype
- * @uses       \Zend\Server\Reflection\ReturnValue
+ * @uses       \Zend\Server\Reflection\ReflectionReturnValue
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Reflection
@@ -232,10 +232,10 @@ abstract class AbstractFunction
         // Build prototypes
         $params = $this->_reflection->getParameters();
         foreach ($signatures as $signature) {
-            $return = new ReturnValue(array_shift($signature), $this->_returnDesc);
+            $return = new ReflectionReturnValue(array_shift($signature), $this->_returnDesc);
             $tmp    = array();
             foreach ($signature as $key => $type) {
-                $param = new Parameter($params[$key], $type, (isset($this->_paramDesc[$key]) ? $this->_paramDesc[$key] : null));
+                $param = new ReflectionParameter($params[$key], $type, (isset($this->_paramDesc[$key]) ? $this->_paramDesc[$key] : null));
                 $param->setPosition($key);
                 $tmp[] = $param;
             }

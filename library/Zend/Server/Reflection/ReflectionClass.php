@@ -40,7 +40,7 @@ namespace Zend\Server\Reflection;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ClassReflection
+class ReflectionClass
 {
     /**
      * Optional configuration parameters; accessible via {@link __get} and
@@ -71,7 +71,7 @@ class ClassReflection
      * Constructor
      *
      * Create array of dispatchable methods, each a
-     * {@link \Zend\Server\Reflection\Method}. Sets reflection object property.
+     * {@link Zend\Server\Reflection\ReflectionMethod}. Sets reflection object property.
      *
      * @param ReflectionClass $reflection
      * @param string $namespace
@@ -91,7 +91,7 @@ class ClassReflection
 
             if ($method->isPublic()) {
                 // Get signatures and description
-                $this->_methods[] = new Method($this, $method, $this->getNamespace(), $argv);
+                $this->_methods[] = new ReflectionMethod($this, $method, $this->getNamespace(), $argv);
             }
         }
     }

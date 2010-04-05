@@ -36,27 +36,27 @@ use Zend\Server\Reflection;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
+class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
 {
     public function test__construct()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
-        $r = new Reflection\FunctionReflection($function);
-        $this->assertTrue($r instanceof Reflection\FunctionReflection);
+        $r = new Reflection\ReflectionFunction($function);
+        $this->assertTrue($r instanceof Reflection\ReflectionFunction);
         $this->assertTrue($r instanceof Reflection\AbstractFunction);
         $params = $r->getParameters();
         try {
-            $r = new Reflection\FunctionReflection($params[0]);
+            $r = new Reflection\ReflectionFunction($params[0]);
             $this->fail('Should not be able to construct with non-function');
         } catch (\Exception $e) {
             // do nothing
         }
 
-        $r = new Reflection\FunctionReflection($function, 'namespace');
+        $r = new Reflection\ReflectionFunction($function, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
 
         $argv = array('string1', 'string2');
-        $r = new Reflection\FunctionReflection($function, 'namespace', $argv);
+        $r = new Reflection\ReflectionFunction($function, 'namespace', $argv);
         $this->assertTrue(is_array($r->getInvokeArguments()));
         $this->assertTrue($argv === $r->getInvokeArguments());
 
@@ -68,7 +68,7 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
     public function test__getSet()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
-        $r = new Reflection\FunctionReflection($function);
+        $r = new Reflection\ReflectionFunction($function);
 
         $r->system = true;
         $this->assertTrue($r->system);
@@ -78,7 +78,7 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
     public function testNamespace()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
-        $r = new Reflection\FunctionReflection($function, 'namespace');
+        $r = new Reflection\ReflectionFunction($function, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
         $r->setNamespace('framework');
         $this->assertEquals('framework', $r->getNamespace());
@@ -87,7 +87,7 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
     public function testDescription()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
-        $r = new Reflection\FunctionReflection($function);
+        $r = new Reflection\ReflectionFunction($function);
         $this->assertContains('function for reflection', $r->getDescription());
         $r->setDescription('Testing setting descriptions');
         $this->assertEquals('Testing setting descriptions', $r->getDescription());
@@ -96,7 +96,7 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
     public function testGetPrototypes()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
-        $r = new Reflection\FunctionReflection($function);
+        $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
         $this->assertTrue(is_array($prototypes));
@@ -111,7 +111,7 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
     public function testGetPrototypes2()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function2');
-        $r = new Reflection\FunctionReflection($function);
+        $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
         $this->assertTrue(is_array($prototypes));
@@ -127,13 +127,13 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
     public function testGetInvokeArguments()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
-        $r = new Reflection\FunctionReflection($function);
+        $r = new Reflection\ReflectionFunction($function);
         $args = $r->getInvokeArguments();
         $this->assertTrue(is_array($args));
         $this->assertEquals(0, count($args));
 
         $argv = array('string1', 'string2');
-        $r = new Reflection\FunctionReflection($function, null, $argv);
+        $r = new Reflection\ReflectionFunction($function, null, $argv);
         $args = $r->getInvokeArguments();
         $this->assertTrue(is_array($args));
         $this->assertEquals(2, count($args));
@@ -143,17 +143,17 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
     public function test__wakeup()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
-        $r = new Reflection\FunctionReflection($function);
+        $r = new Reflection\ReflectionFunction($function);
         $s = serialize($r);
         $u = unserialize($s);
-        $this->assertTrue($u instanceof Reflection\FunctionReflection);
+        $this->assertTrue($u instanceof Reflection\ReflectionFunction);
         $this->assertEquals('', $u->getNamespace());
     }
 
     public function testMultipleWhitespaceBetweenDoctagsAndTypes()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function3');
-        $r = new Reflection\FunctionReflection($function);
+        $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
         $this->assertTrue(is_array($prototypes));
@@ -173,7 +173,7 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
     public function testParameterReflectionShouldReturnTypeAndVarnameAndDescription()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
-        $r = new Reflection\FunctionReflection($function);
+        $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
         $prototype  = $prototypes[0];

@@ -27,7 +27,7 @@ namespace ZendTest\Server\Reflection;
 use Zend\Server\Reflection;
 
 /**
- * Test case for \Zend\Server\Reflection\Method
+ * Test case for \Zend\Server\Reflection\ReflectionMethod
  *
  * @category   Zend
  * @package    Zend_Server
@@ -36,7 +36,7 @@ use Zend\Server\Reflection;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class MethodTest extends \PHPUnit_Framework_TestCase
+class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
 {
     protected $_classRaw;
     protected $_class;
@@ -46,7 +46,7 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     {
         $this->_classRaw = new \ReflectionClass('\Zend\Server\Reflection\Reflection');
         $this->_method   = $this->_classRaw->getMethod('reflectClass');
-        $this->_class    = new Reflection\ClassReflection($this->_classRaw);
+        $this->_class    = new Reflection\ReflectionClass($this->_classRaw);
     }
 
     /**
@@ -64,11 +64,11 @@ class MethodTest extends \PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $r = new Reflection\Method($this->_class, $this->_method);
-        $this->assertTrue($r instanceof Reflection\Method);
+        $r = new Reflection\ReflectionMethod($this->_class, $this->_method);
+        $this->assertTrue($r instanceof Reflection\ReflectionMethod);
         $this->assertTrue($r instanceof Reflection\AbstractFunction);
 
-        $r = new Reflection\Method($this->_class, $this->_method, 'namespace');
+        $r = new Reflection\ReflectionMethod($this->_class, $this->_method, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
     }
 
@@ -77,15 +77,15 @@ class MethodTest extends \PHPUnit_Framework_TestCase
      *
      * Call as method call
      *
-     * Returns: \Zend\Server\Reflection\ClassReflection
+     * Returns: \Zend\Server\Reflection\ReflectionClass
      */
     public function testGetDeclaringClass()
     {
-        $r = new Reflection\Method($this->_class, $this->_method);
+        $r = new Reflection\ReflectionMethod($this->_class, $this->_method);
 
         $class = $r->getDeclaringClass();
 
-        $this->assertTrue($class instanceof Reflection\ClassReflection);
+        $this->assertTrue($class instanceof Reflection\ReflectionClass);
         $this->assertTrue($this->_class === $class);
     }
 
@@ -98,11 +98,11 @@ class MethodTest extends \PHPUnit_Framework_TestCase
      */
     public function test__wakeup()
     {
-        $r = new Reflection\Method($this->_class, $this->_method);
+        $r = new Reflection\ReflectionMethod($this->_class, $this->_method);
         $s = serialize($r);
         $u = unserialize($s);
 
-        $this->assertTrue($u instanceof Reflection\Method);
+        $this->assertTrue($u instanceof Reflection\ReflectionMethod);
         $this->assertTrue($u instanceof Reflection\AbstractFunction);
         $this->assertEquals($r->getName(), $u->getName());
         $this->assertEquals($r->getDeclaringClass()->getName(), $u->getDeclaringClass()->getName());

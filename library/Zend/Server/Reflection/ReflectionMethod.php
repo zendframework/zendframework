@@ -38,7 +38,7 @@ namespace Zend\Server\Reflection;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Method extends AbstractFunction
+class ReflectionMethod extends AbstractFunction
 {
     /**
      * Parent class name
@@ -48,20 +48,20 @@ class Method extends AbstractFunction
 
     /**
      * Parent class reflection
-     * @var \Zend\Server\Reflection\ClassReflection
+     * @var Zend\Server\Reflection\ReflectionClass
      */
     protected $_classReflection;
 
     /**
      * Constructor
      *
-     * @param \Zend\Server\Reflection\ClassReflection $class
+     * @param \Zend\Server\Reflection\ReflectionClass $class
      * @param ReflectionMethod $r
      * @param string $namespace
      * @param array $argv
      * @return void
      */
-    public function __construct(ClassReflection $class, \ReflectionMethod $r, $namespace = null, $argv = array())
+    public function __construct(ReflectionClass $class, \ReflectionMethod $r, $namespace = null, $argv = array())
     {
         $this->_classReflection = $class;
         $this->_reflection      = $r;
@@ -90,7 +90,7 @@ class Method extends AbstractFunction
     /**
      * Return the reflection for the class that defines this method
      *
-     * @return \Zend\Server\Reflection\ClassReflection
+     * @return \Zend\Server\Reflection\ReflectionClass
      */
     public function getDeclaringClass()
     {
@@ -107,7 +107,7 @@ class Method extends AbstractFunction
      */
     public function __wakeup()
     {
-        $this->_classReflection = new ClassReflection(new \ReflectionClass($this->_class), $this->getNamespace(), $this->getInvokeArguments());
+        $this->_classReflection = new ReflectionClass(new \ReflectionClass($this->_class), $this->getNamespace(), $this->getInvokeArguments());
         $this->_reflection = new \ReflectionMethod($this->_classReflection->getName(), $this->getName());
     }
 

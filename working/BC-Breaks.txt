@@ -83,6 +83,15 @@ Zend_Validate:
  * "Zend_Validate" prefix now becomes "Zend\Validator" namespace
  * "ValidatorInterface" moved to "Zend\Validator\Validator"
 
+Zend_Uri
+ * "Zend_Uri" removed
+ * "Zend_Uri_Adapter_Http" becomes "Zend\URI\URL"
+ * "Zend_Uri::factory()" should be replaced with "new Zend\URI\URL()"
+ * Zend\URI\URL can handle any URL scheme, not just Http & Https
+
+Zend_Http
+ * "Zend_Http_*" becomes Zend\HTTP\*
+
 Zend_Server:
  * "Zend_Server" prefix now becomes "Zend\Server" namespace
  * "Zend_Server_Method" prefix now becomes "Zend\Server\Method" namespace

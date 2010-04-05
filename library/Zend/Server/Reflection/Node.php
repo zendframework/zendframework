@@ -98,7 +98,7 @@ class Node
      */
     public function createChild($value)
     {
-        $child = new \self($value, $this);
+        $child = new self($value, $this);
 
         return $child;
     }

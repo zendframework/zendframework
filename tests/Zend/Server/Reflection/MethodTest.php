@@ -20,10 +20,14 @@
  * @version $Id$
  */
 
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Server\Reflection;
+use Zend\Server\Reflection;
 
 /**
- * Test case for Zend_Server_Reflection_Method
+ * Test case for \Zend\Server\Reflection\Method
  *
  * @category   Zend
  * @package    Zend_Server
@@ -32,7 +36,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class Zend_Server_Reflection_MethodTest extends PHPUnit_Framework_TestCase
+class MethodTest extends \PHPUnit_Framework_TestCase
 {
     protected $_classRaw;
     protected $_class;
@@ -40,9 +44,9 @@ class Zend_Server_Reflection_MethodTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->_classRaw = new ReflectionClass('Zend_Server_Reflection');
+        $this->_classRaw = new \ReflectionClass('\Zend\Server\Reflection\Reflection');
         $this->_method   = $this->_classRaw->getMethod('reflectClass');
-        $this->_class    = new Zend_Server_Reflection_Class($this->_classRaw);
+        $this->_class    = new Reflection\ClassReflection($this->_classRaw);
     }
 
     /**
@@ -60,11 +64,11 @@ class Zend_Server_Reflection_MethodTest extends PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $r = new Zend_Server_Reflection_Method($this->_class, $this->_method);
-        $this->assertTrue($r instanceof Zend_Server_Reflection_Method);
-        $this->assertTrue($r instanceof Zend_Server_Reflection_Function_Abstract);
+        $r = new Reflection\Method($this->_class, $this->_method);
+        $this->assertTrue($r instanceof Reflection\Method);
+        $this->assertTrue($r instanceof Reflection\AbstractFunction);
 
-        $r = new Zend_Server_Reflection_Method($this->_class, $this->_method, 'namespace');
+        $r = new Reflection\Method($this->_class, $this->_method, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
     }
 
@@ -73,15 +77,15 @@ class Zend_Server_Reflection_MethodTest extends PHPUnit_Framework_TestCase
      *
      * Call as method call
      *
-     * Returns: Zend_Server_Reflection_Class
+     * Returns: \Zend\Server\Reflection\ClassReflection
      */
     public function testGetDeclaringClass()
     {
-        $r = new Zend_Server_Reflection_Method($this->_class, $this->_method);
+        $r = new Reflection\Method($this->_class, $this->_method);
 
         $class = $r->getDeclaringClass();
 
-        $this->assertTrue($class instanceof Zend_Server_Reflection_Class);
+        $this->assertTrue($class instanceof Reflection\ClassReflection);
         $this->assertTrue($this->_class === $class);
     }
 
@@ -94,12 +98,12 @@ class Zend_Server_Reflection_MethodTest extends PHPUnit_Framework_TestCase
      */
     public function test__wakeup()
     {
-        $r = new Zend_Server_Reflection_Method($this->_class, $this->_method);
+        $r = new Reflection\Method($this->_class, $this->_method);
         $s = serialize($r);
         $u = unserialize($s);
 
-        $this->assertTrue($u instanceof Zend_Server_Reflection_Method);
-        $this->assertTrue($u instanceof Zend_Server_Reflection_Function_Abstract);
+        $this->assertTrue($u instanceof Reflection\Method);
+        $this->assertTrue($u instanceof Reflection\AbstractFunction);
         $this->assertEquals($r->getName(), $u->getName());
         $this->assertEquals($r->getDeclaringClass()->getName(), $u->getDeclaringClass()->getName());
     }

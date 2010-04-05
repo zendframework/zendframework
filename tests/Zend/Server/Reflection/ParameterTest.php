@@ -20,9 +20,14 @@
  * @version $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Server\Reflection;
+use Zend\Server\Reflection;
 
 /**
- * Test case for Zend_Server_Reflection_Parameter
+ * Test case for \Zend\Server\Reflection\Parameter
  *
  * @category   Zend
  * @package    Zend_Server
@@ -31,11 +36,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
+class ParameterTest extends \PHPUnit_Framework_TestCase
 {
     protected function _getParameter()
     {
-        $method = new ReflectionMethod('Zend_Server_Reflection_Parameter', 'setType');
+        $method = new \ReflectionMethod('\Zend\Server\Reflection\Parameter', 'setType');
         $parameters = $method->getParameters();
         return $parameters[0];
     }
@@ -56,8 +61,8 @@ class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
     {
         $parameter = $this->_getParameter();
 
-        $reflection = new Zend_Server_Reflection_Parameter($parameter);
-        $this->assertTrue($reflection instanceof Zend_Server_Reflection_Parameter);
+        $reflection = new Reflection\Parameter($parameter);
+        $this->assertTrue($reflection instanceof Reflection\Parameter);
     }
 
     /**
@@ -73,7 +78,7 @@ class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
      */
     public function test__call()
     {
-        $r = new Zend_Server_Reflection_Parameter($this->_getParameter());
+        $r = new Reflection\Parameter($this->_getParameter());
 
         // just test a few call proxies...
         $this->assertTrue(is_bool($r->allowsNull()));
@@ -85,7 +90,7 @@ class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
      */
     public function testGetSetType()
     {
-        $r = new Zend_Server_Reflection_Parameter($this->_getParameter());
+        $r = new Reflection\Parameter($this->_getParameter());
         $this->assertEquals('mixed', $r->getType());
 
         $r->setType('string');
@@ -97,7 +102,7 @@ class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
      */
     public function testGetDescription()
     {
-        $r = new Zend_Server_Reflection_Parameter($this->_getParameter());
+        $r = new Reflection\Parameter($this->_getParameter());
         $this->assertEquals('', $r->getDescription());
 
         $r->setDescription('parameter description');
@@ -109,7 +114,7 @@ class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
      */
     public function testSetPosition()
     {
-        $r = new Zend_Server_Reflection_Parameter($this->_getParameter());
+        $r = new Reflection\Parameter($this->_getParameter());
         $this->assertEquals(null, $r->getPosition());
 
         $r->setPosition(3);

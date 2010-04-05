@@ -35,7 +35,7 @@ Second pass:
 [X] Zend_Uri
 
 Third pass:
-[ ] Zend_Server
+[X] Zend_Server
 [ ] Zend_Http
 
 Fourth pass:

@@ -120,3 +120,11 @@ Zend_Dom
  * "Zend_Dom_Query_Result" becomes "Zend\Dom\NodeList"
  * "Zend_Dom_Query_Css2Xpath" becomes "Zend\Dom\Css2Xpath"
  * "Zend_Dom_Query::query()" becomes "Zend\Dom\Query::execute()"
+
+Zend_Url
+ * Component renamed to Zend\URI, with class URL
+ * Zend\URI\URL now provides comprehensive support for URLs, via parse_url()
+ * Removed Zend_Url::factory(), and Zend_Url_Http as unnecessary.
+
+Zend_HTTP
+ * Component renamed to Zend_HTTP

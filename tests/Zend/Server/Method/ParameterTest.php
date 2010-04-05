@@ -20,16 +20,14 @@
  * @version    $Id$
  */
 
-// Call Zend_Server_Method_ParameterTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Server_Method_ParameterTest::main");
-}
-
-
-/** Zend_Server_Method_Parameter */
+/**
+ * @namespace
+ */
+namespace ZendTest\Server\Method;
+use Zend\Server\Method;
 
 /**
- * Test class for Zend_Server_Method_Parameter
+ * Test class for \Zend\Server\Method\Parameter
  *
  * @category   Zend
  * @package    Zend_Server
@@ -38,19 +36,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class Zend_Server_Method_ParameterTest extends PHPUnit_Framework_TestCase
+class ParameterTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Server_Method_ParameterTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -59,7 +46,7 @@ class Zend_Server_Method_ParameterTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->parameter = new Zend_Server_Method_Parameter();
+        $this->parameter = new Method\Parameter();
     }
 
     /**
@@ -187,13 +174,8 @@ class Zend_Server_Method_ParameterTest extends PHPUnit_Framework_TestCase
         $defaultValue = 'bar';
         $description  = 'Foo bar!';
         $options      = compact('type', 'name', 'optional', 'defaultValue', 'description');
-        $parameter    = new Zend_Server_Method_Parameter($options);
+        $parameter    = new Method\Parameter($options);
         $test         = $parameter->toArray();
         $this->assertEquals($options, $test);
     }
-}
-
-// Call Zend_Server_Method_ParameterTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Server_Method_ParameterTest::main") {
-    Zend_Server_Method_ParameterTest::main();
 }

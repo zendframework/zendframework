@@ -20,16 +20,14 @@
  * @version    $Id$
  */
 
-// Call Zend_Server_Method_CallbackTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Server_Method_CallbackTest::main");
-}
-
-
-/** Zend_Server_Method_Callback */
+/**
+ * @namespace
+ */
+namespace ZendTest\Server\Method;
+use Zend\Server\Method;
 
 /**
- * Test class for Zend_Server_Method_Callback
+ * Test class for \Zend\Server\Method\Callback
  *
  * @category   Zend
  * @package    Zend_Server
@@ -38,19 +36,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class Zend_Server_Method_CallbackTest extends PHPUnit_Framework_TestCase
+class CallbackTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Server_Method_CallbackTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -59,7 +46,7 @@ class Zend_Server_Method_CallbackTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->callback = new Zend_Server_Method_Callback();
+        $this->callback = new Method\Callback();
     }
 
     /**
@@ -121,7 +108,7 @@ class Zend_Server_Method_CallbackTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Server_Exception
+     * @expectedException \Zend\Server\Exception
      */
     public function testSettingTypeShouldThrowExceptionWhenInvalidTypeProvided()
     {
@@ -147,7 +134,7 @@ class Zend_Server_Method_CallbackTest extends PHPUnit_Framework_TestCase
             'class'  => 'Foo',
             'method' => 'bar',
         );
-        $callback = new Zend_Server_Method_Callback($options);
+        $callback = new Method\Callback($options);
         $test = $callback->toArray();
         $this->assertSame($options, $test);
     }
@@ -158,9 +145,4 @@ class Zend_Server_Method_CallbackTest extends PHPUnit_Framework_TestCase
         $this->callback->setFunction('foo');
         $this->assertEquals('function', $this->callback->getType());
     }
-}
-
-// Call Zend_Server_Method_CallbackTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Server_Method_CallbackTest::main") {
-    Zend_Server_Method_CallbackTest::main();
 }

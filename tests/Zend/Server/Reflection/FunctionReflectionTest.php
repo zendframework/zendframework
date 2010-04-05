@@ -20,6 +20,11 @@
  * @version $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Server\Reflection;
+use Zend\Server\Reflection;
 
 /**
  * Test case for Zend_Server_Reflection_Function
@@ -31,27 +36,27 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
+class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
 {
     public function test__construct()
     {
-        $function = new ReflectionFunction('Zend_Server_Reflection_FunctionTest_function');
-        $r = new Zend_Server_Reflection_Function($function);
-        $this->assertTrue($r instanceof Zend_Server_Reflection_Function);
-        $this->assertTrue($r instanceof Zend_Server_Reflection_Function_Abstract);
+        $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $r = new Reflection\FunctionReflection($function);
+        $this->assertTrue($r instanceof Reflection\FunctionReflection);
+        $this->assertTrue($r instanceof Reflection\AbstractFunction);
         $params = $r->getParameters();
         try {
-            $r = new Zend_Server_Reflection_Function($params[0]);
+            $r = new Reflection\FunctionReflection($params[0]);
             $this->fail('Should not be able to construct with non-function');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // do nothing
         }
 
-        $r = new Zend_Server_Reflection_Function($function, 'namespace');
+        $r = new Reflection\FunctionReflection($function, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
 
         $argv = array('string1', 'string2');
-        $r = new Zend_Server_Reflection_Function($function, 'namespace', $argv);
+        $r = new Reflection\FunctionReflection($function, 'namespace', $argv);
         $this->assertTrue(is_array($r->getInvokeArguments()));
         $this->assertTrue($argv === $r->getInvokeArguments());
 
@@ -62,8 +67,8 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
 
     public function test__getSet()
     {
-        $function = new ReflectionFunction('Zend_Server_Reflection_FunctionTest_function');
-        $r = new Zend_Server_Reflection_Function($function);
+        $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $r = new Reflection\FunctionReflection($function);
 
         $r->system = true;
         $this->assertTrue($r->system);
@@ -72,8 +77,8 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
 
     public function testNamespace()
     {
-        $function = new ReflectionFunction('Zend_Server_Reflection_FunctionTest_function');
-        $r = new Zend_Server_Reflection_Function($function, 'namespace');
+        $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $r = new Reflection\FunctionReflection($function, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
         $r->setNamespace('framework');
         $this->assertEquals('framework', $r->getNamespace());
@@ -81,8 +86,8 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
 
     public function testDescription()
     {
-        $function = new ReflectionFunction('Zend_Server_Reflection_FunctionTest_function');
-        $r = new Zend_Server_Reflection_Function($function);
+        $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $r = new Reflection\FunctionReflection($function);
         $this->assertContains('function for reflection', $r->getDescription());
         $r->setDescription('Testing setting descriptions');
         $this->assertEquals('Testing setting descriptions', $r->getDescription());
@@ -90,8 +95,8 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
 
     public function testGetPrototypes()
     {
-        $function = new ReflectionFunction('Zend_Server_Reflection_FunctionTest_function');
-        $r = new Zend_Server_Reflection_Function($function);
+        $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $r = new Reflection\FunctionReflection($function);
 
         $prototypes = $r->getPrototypes();
         $this->assertTrue(is_array($prototypes));
@@ -99,14 +104,14 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(8, count($prototypes));
 
         foreach ($prototypes as $p) {
-            $this->assertTrue($p instanceof Zend_Server_Reflection_Prototype);
+            $this->assertTrue($p instanceof Reflection\Prototype);
         }
     }
 
     public function testGetPrototypes2()
     {
-        $function = new ReflectionFunction('Zend_Server_Reflection_FunctionTest_function2');
-        $r = new Zend_Server_Reflection_Function($function);
+        $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function2');
+        $r = new Reflection\FunctionReflection($function);
 
         $prototypes = $r->getPrototypes();
         $this->assertTrue(is_array($prototypes));
@@ -114,21 +119,21 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($prototypes));
 
         foreach ($prototypes as $p) {
-            $this->assertTrue($p instanceof Zend_Server_Reflection_Prototype);
+            $this->assertTrue($p instanceof Reflection\Prototype);
         }
     }
 
 
     public function testGetInvokeArguments()
     {
-        $function = new ReflectionFunction('Zend_Server_Reflection_FunctionTest_function');
-        $r = new Zend_Server_Reflection_Function($function);
+        $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $r = new Reflection\FunctionReflection($function);
         $args = $r->getInvokeArguments();
         $this->assertTrue(is_array($args));
         $this->assertEquals(0, count($args));
 
         $argv = array('string1', 'string2');
-        $r = new Zend_Server_Reflection_Function($function, null, $argv);
+        $r = new Reflection\FunctionReflection($function, null, $argv);
         $args = $r->getInvokeArguments();
         $this->assertTrue(is_array($args));
         $this->assertEquals(2, count($args));
@@ -137,18 +142,18 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
 
     public function test__wakeup()
     {
-        $function = new ReflectionFunction('Zend_Server_Reflection_FunctionTest_function');
-        $r = new Zend_Server_Reflection_Function($function);
+        $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $r = new Reflection\FunctionReflection($function);
         $s = serialize($r);
         $u = unserialize($s);
-        $this->assertTrue($u instanceof Zend_Server_Reflection_Function);
+        $this->assertTrue($u instanceof Reflection\FunctionReflection);
         $this->assertEquals('', $u->getNamespace());
     }
 
     public function testMultipleWhitespaceBetweenDoctagsAndTypes()
     {
-        $function = new ReflectionFunction('Zend_Server_Reflection_FunctionTest_function3');
-        $r = new Zend_Server_Reflection_Function($function);
+        $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function3');
+        $r = new Reflection\FunctionReflection($function);
 
         $prototypes = $r->getPrototypes();
         $this->assertTrue(is_array($prototypes));
@@ -167,8 +172,8 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
      */
     public function testParameterReflectionShouldReturnTypeAndVarnameAndDescription()
     {
-        $function = new ReflectionFunction('Zend_Server_Reflection_FunctionTest_function');
-        $r = new Zend_Server_Reflection_Function($function);
+        $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $r = new Reflection\FunctionReflection($function);
 
         $prototypes = $r->getPrototypes();
         $prototype  = $prototypes[0];
@@ -179,7 +184,7 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
 }
 
 /**
- * Zend_Server_Reflection_FunctionTest_function
+ * \ZendTest\Server\Reflection\function1
  *
  * Test function for reflection unit tests
  *
@@ -188,26 +193,26 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
  * @param array $var3
  * @return null|array
  */
-function Zend_Server_Reflection_FunctionTest_function($var1, $var2, $var3 = null)
+function function1($var1, $var2, $var3 = null)
 {
 }
 
 /**
- * Zend_Server_Reflection_FunctionTest_function2
+ * \ZendTest\Server\Reflection\function2
  *
  * Test function for reflection unit tests; test what happens when no return
  * value or params specified in docblock.
  */
-function Zend_Server_Reflection_FunctionTest_function2()
+function function2()
 {
 }
 
 /**
- * Zend_Server_Reflection_FunctionTest_function3
+ * \ZendTest\Server\Reflection\function3
  *
  * @param  string $var1
  * @return void
  */
-function Zend_Server_Reflection_FunctionTest_function3($var1)
+function function3($var1)
 {
 }

@@ -20,16 +20,14 @@
  * @version    $Id$
  */
 
-// Call Zend_Server_Method_PrototypeTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Server_Method_PrototypeTest::main");
-}
-
-
-/** Zend_Server_Method_Prototype */
+/**
+ * @namespace
+ */
+namespace ZendTest\Server\Method;
+use Zend\Server\Method;
 
 /**
- * Test class for Zend_Server_Method_Prototype
+ * Test class for \Zend\Server\Method\Prototype
  *
  * @category   Zend
  * @package    Zend_Server
@@ -38,19 +36,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class Zend_Server_Method_PrototypeTest extends PHPUnit_Framework_TestCase
+class PrototypeTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Server_Method_PrototypeTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -59,7 +46,7 @@ class Zend_Server_Method_PrototypeTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->prototype = new Zend_Server_Method_Prototype();
+        $this->prototype = new Method\Prototype();
     }
 
     /**
@@ -109,7 +96,7 @@ class Zend_Server_Method_PrototypeTest extends PHPUnit_Framework_TestCase
 
     public function testPrototypeShouldAllowAddingParameterObjects()
     {
-        $parameter = new Zend_Server_Method_Parameter(array(
+        $parameter = new Method\Parameter(array(
             'type' => 'string',
             'name' => 'foo',
         ));
@@ -119,7 +106,7 @@ class Zend_Server_Method_PrototypeTest extends PHPUnit_Framework_TestCase
 
     public function testPrototypeShouldAllowFetchingParameterByNameOrIndex()
     {
-        $parameter = new Zend_Server_Method_Parameter(array(
+        $parameter = new Method\Parameter(array(
             'type' => 'string',
             'name' => 'foo',
         ));
@@ -136,7 +123,7 @@ class Zend_Server_Method_PrototypeTest extends PHPUnit_Framework_TestCase
         $this->prototype->addParameters(array('string', 'array'));
         $parameters = $this->prototype->getParameterObjects();
         foreach ($parameters as $parameter) {
-            $this->assertTrue($parameter instanceof Zend_Server_Method_Parameter);
+            $this->assertTrue($parameter instanceof Method\Parameter);
         }
     }
 
@@ -190,13 +177,8 @@ class Zend_Server_Method_PrototypeTest extends PHPUnit_Framework_TestCase
                 'struct',
             ),
         );
-        $prototype = new Zend_Server_Method_Prototype($options);
+        $prototype = new Method\Prototype($options);
         $test = $prototype->toArray();
         $this->assertSame($options, $test);
     }
-}
-
-// Call Zend_Server_Method_PrototypeTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Server_Method_PrototypeTest::main") {
-    Zend_Server_Method_PrototypeTest::main();
 }

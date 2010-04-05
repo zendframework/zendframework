@@ -20,9 +20,14 @@
  * @version $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Server\Reflection;
+use Zend\Server\Reflection;
 
 /**
- * Test case for Zend_Server_Reflection_ReturnValue
+ * Test case for \Zend\Server\Reflection\ReturnValue
  *
  * @category   Zend
  * @package    Zend_Server
@@ -31,7 +36,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class Zend_Server_Reflection_ReturnValueTest extends PHPUnit_Framework_TestCase
+class ReturnValueTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * __construct() test
@@ -46,8 +51,8 @@ class Zend_Server_Reflection_ReturnValueTest extends PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $obj = new Zend_Server_Reflection_ReturnValue();
-        $this->assertTrue($obj instanceof Zend_Server_Reflection_ReturnValue);
+        $obj = new Reflection\ReturnValue();
+        $this->assertTrue($obj instanceof Reflection\ReturnValue);
     }
 
     /**
@@ -59,7 +64,7 @@ class Zend_Server_Reflection_ReturnValueTest extends PHPUnit_Framework_TestCase
      */
     public function testGetType()
     {
-        $obj = new Zend_Server_Reflection_ReturnValue();
+        $obj = new Reflection\ReturnValue();
         $this->assertEquals('mixed', $obj->getType());
 
         $obj->setType('array');
@@ -78,7 +83,7 @@ class Zend_Server_Reflection_ReturnValueTest extends PHPUnit_Framework_TestCase
      */
     public function testSetType()
     {
-        $obj = new Zend_Server_Reflection_ReturnValue();
+        $obj = new Reflection\ReturnValue();
 
         $obj->setType('array');
         $this->assertEquals('array', $obj->getType());
@@ -93,7 +98,7 @@ class Zend_Server_Reflection_ReturnValueTest extends PHPUnit_Framework_TestCase
      */
     public function testGetDescription()
     {
-        $obj = new Zend_Server_Reflection_ReturnValue('string', 'Some description');
+        $obj = new Reflection\ReturnValue('string', 'Some description');
         $this->assertEquals('Some description', $obj->getDescription());
 
         $obj->setDescription('New Description');
@@ -112,7 +117,7 @@ class Zend_Server_Reflection_ReturnValueTest extends PHPUnit_Framework_TestCase
      */
     public function testSetDescription()
     {
-        $obj = new Zend_Server_Reflection_ReturnValue();
+        $obj = new Reflection\ReturnValue();
 
         $obj->setDescription('New Description');
         $this->assertEquals('New Description', $obj->getDescription());

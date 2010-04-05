@@ -115,6 +115,9 @@ class URLTest extends \PHPUnit_Framework_TestCase
      */
     public function testVeryLongUrl()
     {
+        if (!constant('TESTS_ZEND_URI_CRASH_TEST_ENABLED')) {
+            $this->markTestSkipped('Skipping test for "very long URLs" due to potential to crash on 32-bit systems');
+        }
         $urlString = file_get_contents(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR .
            '_files' . DIRECTORY_SEPARATOR . 'testVeryLongUriZF3712.txt');
         $url = new URL($urlString);

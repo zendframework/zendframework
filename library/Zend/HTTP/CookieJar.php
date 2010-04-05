@@ -192,8 +192,13 @@ class CookieJar implements \Countable, \IteratorAggregate
             throw new Exception("Invalid URI string or object passed");
         }
 
+        $host = $uri->getHost();
+        if (empty($host)) {
+            throw new Exception('Invalid URI specified; does not contain a host');
+        }
+
         // First, reduce the array of cookies to only those matching domain and path
-        $cookies = $this->_matchDomain($uri->getHost());
+        $cookies = $this->_matchDomain($host);
         $cookies = $this->_matchPath($cookies, $uri->getPath());
         $cookies = $this->_flattenCookiesArray($cookies, self::COOKIE_OBJECT);
 
@@ -225,6 +230,11 @@ class CookieJar implements \Countable, \IteratorAggregate
 
         if (! $uri instanceof URI\URL) {
             throw new Exception('Invalid URI specified');
+        }
+
+        $host = $uri->getHost();
+        if (empty($host)) {
+            throw new Exception('Invalid URI specified; host missing');
         }
 
         // Get correct cookie path

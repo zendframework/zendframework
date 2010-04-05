@@ -247,7 +247,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         }
 
         try {
-            $jar->getCookie(\Zend\URI\URI::factory('mailto:nobody@dev.null.com'), 'foo');
+            $jar->getCookie(new \Zend\URI\URL('mailto:nobody@dev.null.com'), 'foo');
             $this->fail('Expected getCookie to throw exception, invalid URI object passed');
         } catch (\Zend\Exception $e) {
             // We are ok!

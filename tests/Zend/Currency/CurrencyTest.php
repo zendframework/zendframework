@@ -492,7 +492,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         // look if locale is detectable
         try {
             $locale = new Locale\Locale();
-        } catch (Zend_Locale_Exception $e) {
+        } catch (Locale\Exception $e) {
             $this->markTestSkipped('Autodetection of locale failed');
             return;
         }
@@ -526,7 +526,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         // look if locale is detectable
         try {
             $locale = new Locale\Locale();
-        } catch (Zend_Locale_Exception $e) {
+        } catch (Locale\Exception $e) {
             $this->markTestSkipped('Autodetection of locale failed');
             return;
         }
@@ -553,7 +553,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     public function testRegistryLocale()
     {
         $locale = new Locale\Locale('de_AT');
-        Zend\Registry::set('Zend_Locale', $locale);
+        \Zend\Registry::set('Zend_Locale', $locale);
 
         $currency = new Currency\Currency('EUR');
         $this->assertSame('de_AT', $currency->getLocale());
@@ -565,7 +565,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     public function testCaching()
     {
         $cache = Currency\Currency::getCache();
-        $this->assertTrue($cache instanceof Zend_Cache_Core);
+        $this->assertTrue($cache instanceof Cache\Frontend);
         $this->assertTrue(Currency\Currency::hasCache());
 
         Currency\Currency::clearCache();
@@ -773,13 +773,13 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         $currency  = new Currency\Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 100));
         $currency2 = new Currency\Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 100));
 
-        require_once 'ExchangeTest.php';
+        require_once __DIR__ . '/ExchangeTest.php';
 
         $this->assertEquals(null, $currency->getService());
         $currency->setService(new ExchangeTest());
         $this->assertTrue($currency->getService() instanceof Currency\CurrencyServiceInterface);
 
-        $currency->setService('ExchangeTest');
+        $currency->setService('ZendTest\Currency\ExchangeTest');
         $this->assertTrue($currency->getService() instanceof Currency\CurrencyServiceInterface);
     }
 
@@ -807,7 +807,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     public function testSetValueWithoutLocale()
     {
         $currency = new Currency\Currency('RUB', 'ru_RU');
-        require_once 'Currency/ExchangeTest.php';
+        require_once __DIR__ . '/ExchangeTest.php';
 
         $this->assertEquals(null, $currency->getService());
         $currency->setService(new ExchangeTest());

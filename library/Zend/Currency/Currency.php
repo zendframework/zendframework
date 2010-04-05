@@ -23,12 +23,14 @@
  * @namespace
  */
 namespace Zend\Currency;
+use Zend\Cache\Frontend;
 use Zend\Locale;
 use Zend\Locale\Data;
 
 /**
  * Class for handling currency notations
  *
+ * @uses      Zend\Cache\Frontend;
  * @uses      Zend\Locale
  * @uses      Zend\Locale\Format
  * @uses      Zend\Locale\Data
@@ -491,7 +493,7 @@ class Currency
      * @param  Zend\Cache\Frontend $cache Cache to set
      * @return void
      */
-    public static function setCache(Zend\Cache\Frontend $cache)
+    public static function setCache(Frontend $cache)
     {
         Data\Data::setCache($cache);
     }

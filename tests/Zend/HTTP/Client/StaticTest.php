@@ -20,8 +20,13 @@
  * @version    $Id$
  */
 
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\HTTP\Client;
+use Zend\URI;
+use Zend\HTTP\Client;
+use Zend\HTTP;
 
 /**
  * This Testsuite includes all Zend_Http_Client tests that do not rely
@@ -37,7 +42,7 @@
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
-class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
+class StaticTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Common HTTP client
@@ -52,7 +57,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_client = new Zend_Http_Client_StaticTest_Mock('http://www.example.com');
+        $this->_client = new MockClient('http://www.example.com');
     }
 
     /**
@@ -79,7 +84,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
         $this->_client->setUri($uristr);
 
         $uri = $this->_client->getUri();
-        $this->assertTrue($uri instanceof Zend_Uri_Http, 'Returned value is not a Uri object as expected');
+        $this->assertTrue($uri instanceof URI\URL, 'Returned value is not a Uri object as expected');
         $this->assertEquals($uri->__toString(), $uristr, 'Returned Uri object does not hold the expected URI');
 
         $uri = $this->_client->getUri(true);
@@ -93,19 +98,19 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      */
     public function testSetGetUriObject()
     {
-        $uriobj = Zend_Uri::factory('http://www.zend.com:80/');
+        $uriobj = new URI\URL('http://www.zend.com:80/');
 
         $this->_client->setUri($uriobj);
 
         $uri = $this->_client->getUri();
-        $this->assertTrue($uri instanceof Zend_Uri_Http, 'Returned value is not a Uri object as expected');
+        $this->assertTrue($uri instanceof URI\URL, 'Returned value is not a Uri object as expected');
         $this->assertEquals($uri, $uriobj, 'Returned object is not the excepted Uri object');
     }
 
     /**
      * Test that passing an invalid URI string throws an exception
      *
-     * @expectedException Zend_Uri_Exception
+     * @expectedException Zend\URI\Exception
      */
     public function testInvalidUriStringException()
     {
@@ -119,12 +124,12 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     public function testInvalidUriObjectException()
     {
         try {
-            $uri = Zend_Uri::factory('mailto:nobody@example.com');
+            $uri = new URI\URL('mailto:nobody@example.com');
             $this->_client->setUri($uri);
             $this->fail('Excepted invalid URI object exception was not thrown');
-        } catch (Zend_Http_Client_Exception $e) {
+        } catch (Client\Exception $e) {
             // We're good
-        } catch (Zend_Uri_Exception $e) {
+        } catch (\Zend\Uri\Exception $e) {
             // URI is currently unimplemented
             $this->markTestIncomplete('Zend_Uri_Mailto is not implemented yet');
         }
@@ -140,7 +145,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
         $qstr = 'foo=bar&foo=baz';
 
         $this->_client->setUri('http://example.com/test/?' . $qstr);
-        $this->_client->setAdapter('Zend_Http_Client_Adapter_Test');
+        $this->_client->setAdapter('Zend\HTTP\Client\Adapter\Test');
 
         $res = $this->_client->request('GET');
         $this->assertContains($qstr, $this->_client->getLastRequest(),
@@ -154,7 +159,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     /**
      * Make sure an exception is thrown if an invalid header name is used
      *
-     * @expectedException Zend_Http_Client_Exception
+     * @expectedException Zend\HTTP\Client\Exception
      */
     public function testInvalidHeaderExcept()
     {
@@ -172,7 +177,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
 
         try {
             $this->_client->setHeaders('Ina_lid* Hea%der', 'is not good');
-        } catch (Zend_Http_Client_Exception $e) {
+        } catch (Client\Exception $e) {
             $this->fail('Invalid header names should be allowed in non-strict mode');
         }
     }
@@ -207,7 +212,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      * Test setAuth (dynamic method) fails when trying to use an unsupported
      * authentication scheme
      *
-     * @expectedException Zend_Http_Client_Exception
+     * @expectedException Zend\HTTP\Client\Exception
      */
     public function testExceptUnsupportedAuthDynamic()
     {
@@ -218,11 +223,11 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      * Test encodeAuthHeader (static method) fails when trying to use an
      * unsupported authentication scheme
      *
-     * @expectedException Zend_Http_Client_Exception
+     * @expectedException Zend\HTTP\Client\Exception
      */
     public function testExceptUnsupportedAuthStatic()
     {
-        Zend_Http_Client::encodeAuthHeader('shahar', '1234', 'SuperStrongAlgo');
+        Client\Client::encodeAuthHeader('shahar', '1234', 'SuperStrongAlgo');
     }
 
     /**
@@ -241,7 +246,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
         $jar = $this->_client->getCookieJar();
 
         // Check we got the right cookiejar
-        $this->assertTrue($jar instanceof Zend_Http_CookieJar, '$jar is not an instance of Zend_Http_CookieJar as expected');
+        $this->assertTrue($jar instanceof HTTP\CookieJar, '$jar is not an instance of Zend_Http_CookieJar as expected');
         $this->assertEquals(count($jar->getAllCookies()), 2, '$jar does not contain 2 cookies as expected');
     }
 
@@ -251,7 +256,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      */
     public function testSetReadyCookieJar()
     {
-        $jar = new Zend_Http_CookieJar();
+        $jar = new HTTP\CookieJar();
         $jar->addCookie('cookie=value', 'http://www.example.com');
         $jar->addCookie('chocolate=chips; path=/foo', 'http://www.example.com');
 
@@ -282,7 +287,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     /**
      * Make sure using an invalid cookie jar object throws an exception
      *
-     * @expectedException Zend_Http_Client_Exception
+     * @expectedException Zend\HTTP\Client\Exception
      */
     public function testSetInvalidCookieJar()
     {
@@ -320,7 +325,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     public function testConfigSetAsZendConfig()
     {
 
-        $config = new Zend_Config(array(
+        $config = new \Zend\Config\Config(array(
             'timeout'  => 400,
             'nested'   => array(
                 'item' => 'value',
@@ -338,7 +343,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      * Test that passing invalid variables to setConfig() causes an exception
      *
      * @dataProvider      invalidConfigProvider
-     * @expectedException Zend_Http_Client_Exception
+     * @expectedException Zend\HTTP\Client\Exception
      */
     public function testConfigSetInvalid($config)
     {
@@ -353,7 +358,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      */
     public function testConfigPassToAdapterZF4557()
     {
-        $adapter = new Zend_Http_Client_StaticTest_TestAdapter_Mock();
+        $adapter = new MockAdapter();
 
         // test that config passes when we set the adapter
         $this->_client->setConfig(array('param' => 'value1'));
@@ -383,7 +388,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
 
         // Now, test we get a proper response after the request
         $this->_client->setUri('http://example.com/foo/bar');
-        $this->_client->setAdapter('Zend_Http_Client_Adapter_Test');
+        $this->_client->setAdapter('Zend\HTTP\Client\Adapter\Test');
 
         $response = $this->_client->request();
         $this->assertTrue(($response === $this->_client->getLastResponse()),
@@ -398,7 +403,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     {
         // Now, test we get a proper response after the request
         $this->_client->setUri('http://example.com/foo/bar');
-        $this->_client->setAdapter('Zend_Http_Client_Adapter_Test');
+        $this->_client->setAdapter('Zend\HTTP\Client\Adapter\Test');
         $this->_client->setConfig(array('storeresponse' => false));
 
         $response = $this->_client->request();
@@ -411,7 +416,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      * Check we get an exception when trying to send a POST request with an
      * invalid content-type header
      *
-     * @expectedException Zend_Http_Client_Exception
+     * @expectedException Zend\HTTP\Client\Exception
      */
     public function testInvalidPostContentType()
     {
@@ -425,7 +430,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     /**
      * Check we get an exception if there's an error in the socket
      *
-     * @expectedException Zend_Http_Client_Adapter_Exception
+     * @expectedException Zend\HTTP\Client\Adapter\Exception
      */
     public function testSocketErrorException()
     {
@@ -448,7 +453,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     {
         try {
             $this->_client->setMethod($method);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->fail("An unexpected exception was thrown when setting request method to '{$method}'");
         }
     }
@@ -458,7 +463,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      * the request method.
      *
      * @dataProvider invalidMethodProvider
-     * @expectedException Zend_Http_Client_Exception
+     * @expectedException Zend\HTTP\Client\Exception
      */
     public function testSettingInvalidMethodThrowsException($method)
     {
@@ -472,9 +477,9 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      */
     public function testFormDataEncodingWithMultiArrayZF7038()
     {
-        $this->_client->setAdapter('Zend_Http_Client_Adapter_Test');
+        $this->_client->setAdapter('Zend\HTTP\Client\Adapter\Test');
         $this->_client->setUri('http://example.com');
-        $this->_client->setEncType(Zend_Http_Client::ENC_FORMDATA);
+        $this->_client->setEncType(Client\Client::ENC_FORMDATA);
 
         $this->_client->setParameterPost('test', array(
             'v0.1',
@@ -513,7 +518,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      */
     public function testMultibyteRawPostDataZF2098()
     {
-        $this->_client->setAdapter('Zend_Http_Client_Adapter_Test');
+        $this->_client->setAdapter('Zend\HTTP\Client\Adapter\Test');
         $this->_client->setUri('http://example.com');
 
         $bodyFile = dirname(__FILE__) . '/_files/ZF2098-multibytepostdata.txt';
@@ -534,7 +539,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      */
     public function testSetDisabledAuthBeforSettingUriBug()
     {
-        $client = new Zend_Http_Client_StaticTest_Mock();
+        $client = new MockClient();
         // if the bug exists this call should creates a fatal error
         $client->setAuth(false);
     }
@@ -586,20 +591,20 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
             array(false),
             array('foo => bar'),
             array(null),
-            array(new stdClass),
+            array(new \stdClass),
             array(55)
         );
     }
 }
 
-class Zend_Http_Client_StaticTest_Mock extends Zend_Http_Client
+class MockClient extends Client\Client
 {
     public $config = array(
         'maxredirects'    => 5,
         'strictredirects' => false,
         'useragent'       => 'Zend_Http_Client',
         'timeout'         => 10,
-        'adapter'         => 'Zend_Http_Client_Adapter_Socket',
+        'adapter'         => 'Zend\HTTP\Client\Adapter\Socket',
         'httpversion'     => self::HTTP_1,
         'keepalive'       => false,
         'storeresponse'   => true,
@@ -609,7 +614,7 @@ class Zend_Http_Client_StaticTest_Mock extends Zend_Http_Client
     );
 }
 
-class Zend_Http_Client_StaticTest_TestAdapter_Mock extends Zend_Http_Client_Adapter_Test
+class MockAdapter extends \Zend\HTTP\Client\Adapter\Test
 {
     public $config = array();
 }

@@ -22,29 +22,36 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\HTTP\Client;
+use Zend\URI;
+use Zend\HTTP;
+
+/**
  * Zend_Http_Client is an implemetation of an HTTP client in PHP. The client
  * supports basic features like sending different HTTP requests and handling
  * redirections, as well as more advanced features like proxy settings, HTTP
  * authentication and cookie persistence (using a Zend_Http_CookieJar object)
  *
  * @todo Implement proxy settings
- * @uses       Zend_Http_Client_Adapter_Interface
- * @uses       Zend_Http_Client_Exception
- * @uses       Zend_Http_Cookie
- * @uses       Zend_Http_CookieJar
- * @uses       Zend_Http_Response
- * @uses       Zend_Http_Response_Stream
- * @uses       Zend_Loader
- * @uses       Zend_Uri
- * @uses       Zend_Uri_Http
+ * @uses       \Zend\HTTP\Client\Adapter\AdapterInterface
+ * @uses       \Zend\HTTP\Client\Exception
+ * @uses       \Zend\HTTP\Cookie
+ * @uses       \Zend\HTTP\CookieJar
+ * @uses       \Zend\HTTP\Response\Response
+ * @uses       \Zend\HTTP\Response\Stream
+ * @uses       \Zend\Loader
+ * @uses       \Zend\URI\URI
+ * @uses       \Zend\URI\URL
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client
- * @throws     Zend_Http_Client_Exception
+ * @throws     \Zend\HTTP\Client\Exception
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Http_Client
+class Client
 {
     /**
      * HTTP request methods
@@ -105,14 +112,14 @@ class Zend_Http_Client
     /**
      * The adapter used to perform the actual connection to the server
      *
-     * @var Zend_Http_Client_Adapter_Interface
+     * @var \Zend\HTTP\Client\Adapter\AdapterInterface
      */
     protected $adapter = null;
 
     /**
      * Request URI
      *
-     * @var Zend_Uri_Http
+     * @var \Zend\URI\URL
      */
     protected $uri = null;
 
@@ -185,7 +192,7 @@ class Zend_Http_Client
     /**
      * The client's cookie jar
      *
-     * @var Zend_Http_CookieJar
+     * @var \Zend\HTTP\CookieJar
      */
     protected $cookiejar = null;
 
@@ -199,7 +206,7 @@ class Zend_Http_Client
     /**
      * The last HTTP response received by the client
      *
-     * @var Zend_Http_Response
+     * @var \Zend\HTTP\Response\Response
      */
     protected $last_response = null;
 
@@ -224,7 +231,7 @@ class Zend_Http_Client
      * Constructor method. Will create a new HTTP client. Accepts the target
      * URL and optionally configuration array.
      *
-     * @param Zend_Uri_Http|string $uri
+     * @param \Zend\URI\URL|string $uri
      * @param array $config Configuration key-value pairs.
      */
     public function __construct($uri = null, $config = null)
@@ -240,18 +247,18 @@ class Zend_Http_Client
     /**
      * Set the URI for the next request
      *
-     * @param  Zend_Uri_Http|string $uri
-     * @return Zend_Http_Client
-     * @throws Zend_Http_Client_Exception
+     * @param  \Zend\URI\URL|string $uri
+     * @return \Zend\HTTP\Client\Client
+     * @throws \Zend\HTTP\Client\Exception
      */
     public function setUri($uri)
     {
         if (is_string($uri)) {
-            $uri = Zend_Uri::factory($uri);
-        }
-
-        if (!$uri instanceof Zend_Uri_Http) {
-            throw new Zend_Http_Client_Exception('Passed parameter is not a valid HTTP URI.');
+            try {
+                $uri = new URI\URL($uri);
+            } catch (URI\Exception $e) {
+                throw new Exception('Passed parameter is not a valid HTTP URI.');
+            } 
         }
 
         // Set auth if username and password has been specified in the uri
@@ -273,11 +280,11 @@ class Zend_Http_Client
      * Get the URI for the next request
      *
      * @param boolean $as_string If true, will return the URI as a string
-     * @return Zend_Uri_Http|string
+     * @return \Zend\URI\URL|string
      */
     public function getUri($as_string = false)
     {
-        if ($as_string && $this->uri instanceof Zend_Uri_Http) {
+        if ($as_string && $this->uri instanceof URI\URL) {
             return $this->uri->__toString();
         } else {
             return $this->uri;
@@ -287,17 +294,17 @@ class Zend_Http_Client
     /**
      * Set configuration parameters for this HTTP client
      *
-     * @param  Zend_Config | array $config
-     * @return Zend_Http_Client
-     * @throws Zend_Http_Client_Exception
+     * @param  \Zend\Config\Config | array $config
+     * @return \Zend\HTTP\Client\Client
+     * @throws \Zend\HTTP\Client\Exception
      */
     public function setConfig($config = array())
     {
-        if ($config instanceof Zend_Config) {
+        if ($config instanceof \Zend\Config\Config) {
             $config = $config->toArray();
 
         } elseif (! is_array($config)) {
-            throw new Zend_Http_Client_Exception('Array or Zend_Config object expected, got ' . gettype($config));
+            throw new Exception('Array or Zend_Config object expected, got ' . gettype($config));
         }
 
         foreach ($config as $k => $v) {
@@ -305,7 +312,7 @@ class Zend_Http_Client
         }
 
         // Pass configuration options to the adapter if it exists
-        if ($this->adapter instanceof Zend_Http_Client_Adapter_Interface) {
+        if ($this->adapter instanceof Adapter\AdapterInterface) {
             $this->adapter->setConfig($config);
         }
 
@@ -320,13 +327,13 @@ class Zend_Http_Client
      * dropped.
      *
      * @param string $method
-     * @return Zend_Http_Client
-     * @throws Zend_Http_Client_Exception
+     * @return \Zend\HTTP\Client\Client
+     * @throws \Zend\HTTP\Client\Exception
      */
     public function setMethod($method = self::GET)
     {
         if (! preg_match('/^[^\x00-\x1f\x7f-\xff\(\)<>@,;:\\\\"\/\[\]\?={}\s]+$/', $method)) {
-            throw new Zend_Http_Client_Exception("'{$method}' is not a valid HTTP request method.");
+            throw new Exception("'{$method}' is not a valid HTTP request method.");
         }
 
         if ($method == self::POST && $this->enctype === null) {
@@ -354,8 +361,8 @@ class Zend_Http_Client
      * @param string|array $name Header name, full header string ('Header: value')
      *     or an array of headers
      * @param mixed $value Header value or null
-     * @return Zend_Http_Client
-     * @throws Zend_Http_Client_Exception
+     * @return \Zend\HTTP\Client\Client
+     * @throws \Zend\HTTP\Client\Exception
      */
     public function setHeaders($name, $value = null)
     {
@@ -376,7 +383,7 @@ class Zend_Http_Client
 
             // Make sure the name is valid if we are in strict mode
             if ($this->config['strict'] && (! preg_match('/^[a-zA-Z0-9-]+$/', $name))) {
-                throw new Zend_Http_Client_Exception("{$name} is not a valid HTTP header name");
+                throw new Exception("{$name} is not a valid HTTP header name");
             }
 
             $normalized_name = strtolower($name);
@@ -422,7 +429,7 @@ class Zend_Http_Client
      *
      * @param string|array $name
      * @param string $value
-     * @return Zend_Http_Client
+     * @return \Zend\HTTP\Client\Client
      */
     public function setParameterGet($name, $value = null)
     {
@@ -441,7 +448,7 @@ class Zend_Http_Client
      *
      * @param string|array $name
      * @param string $value
-     * @return Zend_Http_Client
+     * @return \Zend\HTTP\Client\Client
      */
     public function setParameterPost($name, $value = null)
     {
@@ -513,8 +520,8 @@ class Zend_Http_Client
      * @param string|false $user User name or false disable authentication
      * @param string $password Password
      * @param string $type Authentication type
-     * @return Zend_Http_Client
-     * @throws Zend_Http_Client_Exception
+     * @return \Zend\HTTP\Client\Client
+     * @throws \Zend\HTTP\Client\Exception
      */
     public function setAuth($user, $password = '', $type = self::AUTH_BASIC)
     {
@@ -523,7 +530,7 @@ class Zend_Http_Client
             $this->auth = null;
 
             // Clear the auth information in the uri instance as well
-            if ($this->uri instanceof Zend_Uri_Http) {
+            if ($this->uri instanceof URI\URL) {
                 $this->getUri()->setUsername('');
                 $this->getUri()->setPassword('');
             }
@@ -531,7 +538,7 @@ class Zend_Http_Client
         } else {
             // Check we got a proper authentication type
             if (! defined('self::AUTH_' . strtoupper($type))) {
-                throw new Zend_Http_Client_Exception("Invalid or not supported authentication type: '$type'");
+                throw new Exception("Invalid or not supported authentication type: '$type'");
             }
 
             $this->auth = array(
@@ -550,20 +557,20 @@ class Zend_Http_Client
      * A cookie jar is an object that holds and maintains cookies across HTTP requests
      * and responses.
      *
-     * @param Zend_Http_CookieJar|boolean $cookiejar Existing cookiejar object, true to create a new one, false to disable
-     * @return Zend_Http_Client
-     * @throws Zend_Http_Client_Exception
+     * @param \Zend\HTTP\CookieJar|boolean $cookiejar Existing cookiejar object, true to create a new one, false to disable
+     * @return \Zend\HTTP\Client\Client
+     * @throws \Zend\HTTP\Client\Exception
      */
     public function setCookieJar($cookiejar = true)
     {
-        if ($cookiejar instanceof Zend_Http_CookieJar) {
+        if ($cookiejar instanceof HTTP\CookieJar) {
             $this->cookiejar = $cookiejar;
         } elseif ($cookiejar === true) {
-            $this->cookiejar = new Zend_Http_CookieJar();
+            $this->cookiejar = new HTTP\CookieJar();
         } elseif (! $cookiejar) {
             $this->cookiejar = null;
         } else {
-            throw new Zend_Http_Client_Exception('Invalid parameter type passed as CookieJar');
+            throw new Exception('Invalid parameter type passed as CookieJar');
         }
 
         return $this;
@@ -572,7 +579,7 @@ class Zend_Http_Client
     /**
      * Return the current cookie jar or null if none.
      *
-     * @return Zend_Http_CookieJar|null
+     * @return \Zend\HTTP\CookieJar|null
      */
     public function getCookieJar()
     {
@@ -583,10 +590,10 @@ class Zend_Http_Client
      * Add a cookie to the request. If the client has no Cookie Jar, the cookies
      * will be added directly to the headers array as "Cookie" headers.
      *
-     * @param Zend_Http_Cookie|string $cookie
+     * @param \Zend\HTTP\Cookie|string $cookie
      * @param string|null $value If "cookie" is a string, this is the cookie value.
-     * @return Zend_Http_Client
-     * @throws Zend_Http_Client_Exception
+     * @return \Zend\HTTP\Client\Client
+     * @throws \Zend\HTTP\Client\Exception
      */
     public function setCookie($cookie, $value = null)
     {
@@ -607,23 +614,23 @@ class Zend_Http_Client
         }
 
         if (isset($this->cookiejar)) {
-            if ($cookie instanceof Zend_Http_Cookie) {
+            if ($cookie instanceof HTTP\Cookie) {
                 $this->cookiejar->addCookie($cookie);
             } elseif (is_string($cookie) && $value !== null) {
-                $cookie = Zend_Http_Cookie::fromString("{$cookie}={$value}",
+                $cookie = HTTP\Cookie::fromString("{$cookie}={$value}",
                                                        $this->uri,
                                                        $this->config['encodecookies']);
                 $this->cookiejar->addCookie($cookie);
             }
         } else {
-            if ($cookie instanceof Zend_Http_Cookie) {
+            if ($cookie instanceof HTTP\Cookie) {
                 $name = $cookie->getName();
                 $value = $cookie->getValue();
                 $cookie = $name;
             }
 
             if (preg_match("/[=,; \t\r\n\013\014]/", $cookie)) {
-                throw new Zend_Http_Client_Exception("Cookie name cannot contain these characters: =,; \t\r\n\013\014 ({$cookie})");
+                throw new Exception("Cookie name cannot contain these characters: =,; \t\r\n\013\014 ({$cookie})");
             }
 
             $value = addslashes($value);
@@ -654,14 +661,14 @@ class Zend_Http_Client
      * @param string $data Data to send (if null, $filename is read and sent)
      * @param string $ctype Content type to use (if $data is set and $ctype is
      *     null, will be application/octet-stream)
-     * @return Zend_Http_Client
-     * @throws Zend_Http_Client_Exception
+     * @return \Zend\HTTP\Client\Client
+     * @throws \Zend\HTTP\Client\Exception
      */
     public function setFileUpload($filename, $formname, $data = null, $ctype = null)
     {
         if ($data === null) {
             if (($data = @file_get_contents($filename)) === false) {
-                throw new Zend_Http_Client_Exception("Unable to read file '{$filename}' for upload");
+                throw new Exception("Unable to read file '{$filename}' for upload");
             }
 
             if (! $ctype) {
@@ -686,7 +693,7 @@ class Zend_Http_Client
      * Set the encoding type for POST data
      *
      * @param string $enctype
-     * @return Zend_Http_Client
+     * @return \Zend\HTTP\Client\Client
      */
     public function setEncType($enctype = self::ENC_URLENCODED)
     {
@@ -707,7 +714,7 @@ class Zend_Http_Client
      *
      * @param string|resource $data
      * @param string $enctype
-     * @return Zend_Http_Client
+     * @return \Zend\HTTP\Client\Client
      */
     public function setRawData($data, $enctype = null)
     {
@@ -733,7 +740,7 @@ class Zend_Http_Client
      * headers and last_*
      *
      * @param bool $clearAll Should all data be cleared?
-     * @return Zend_Http_Client
+     * @return \Zend\HTTP\Client\Client
      */
     public function resetParameters($clearAll = false)
     {
@@ -776,7 +783,7 @@ class Zend_Http_Client
      * If $config['storeresponse'] is set to false, or no response was
      * stored yet, will return null
      *
-     * @return Zend_Http_Response or null if none
+     * @return \Zend\HTTP\Response\Response or null if none
      */
     public function getLastResponse()
     {
@@ -789,26 +796,26 @@ class Zend_Http_Client
      * While this method is not called more than one for a client, it is
      * seperated from ->request() to preserve logic and readability
      *
-     * @param Zend_Http_Client_Adapter_Interface|string $adapter
+     * @param \Zend\HTTP\Client\Adapter\AdapterInterface|string $adapter
      * @return null
-     * @throws Zend_Http_Client_Exception
+     * @throws \Zend\HTTP\Client\Exception
      */
     public function setAdapter($adapter)
     {
         if (is_string($adapter)) {
-            if (!class_exists($adapter)) {
-                try {
-                    Zend_Loader::loadClass($adapter);
-                } catch (Zend_Exception $e) {
-                    throw new Zend_Http_Client_Exception("Unable to load adapter '$adapter': {$e->getMessage()}", 0, $e);
-                }
-            }
+//            if (!class_exists($adapter)) {
+//                try {
+//                    \Zend\Loader::loadClass($adapter);
+//                } catch (\Zend\Exception $e) {
+//                    throw new Exception("Unable to load adapter '$adapter': {$e->getMessage()}", 0, $e);
+//                }
+//            }
 
             $adapter = new $adapter;
         }
 
-        if (! $adapter instanceof Zend_Http_Client_Adapter_Interface) {
-            throw new Zend_Http_Client_Exception('Passed adapter is not a HTTP connection adapter');
+        if (! $adapter instanceof Adapter\AdapterInterface) {
+            throw new Exception('Passed adapter is not a HTTP connection adapter');
         }
 
         $this->adapter = $adapter;
@@ -820,7 +827,7 @@ class Zend_Http_Client
     /**
      * Load the connection adapter
      *
-     * @return Zend_Http_Client_Adapter_Interface $adapter
+     * @return \Zend\HTTP\Client\Adapter\AdapterInterface $adapter
      */
     public function getAdapter()
     {
@@ -831,7 +838,7 @@ class Zend_Http_Client
      * Set streaming for received data
      *
      * @param string|boolean $streamfile Stream file, true for temp file, false/null for no streaming
-     * @return Zend_Http_Client
+     * @return \Zend\HTTP\Client\Client
      */
     public function setStream($streamfile = true)
     {
@@ -865,7 +872,7 @@ class Zend_Http_Client
         $fp = fopen($this->_stream_name, "w+b");
         if(!$fp) {
                 $this->close();
-                throw new Zend_Http_Client_Exception("Could not open temp file $name");
+                throw new Exception("Could not open temp file $name");
 
         }
         return $fp;
@@ -875,13 +882,13 @@ class Zend_Http_Client
      * Send the HTTP request and return an HTTP response object
      *
      * @param string $method
-     * @return Zend_Http_Response
-     * @throws Zend_Http_Client_Exception
+     * @return \Zend\HTTP\Response\Response
+     * @throws \Zend\HTTP\Client\Exception
      */
     public function request($method = null)
     {
-        if (! $this->uri instanceof Zend_Uri_Http) {
-            throw new Zend_Http_Client_Exception('No valid URI has been passed to the client');
+        if (! $this->uri instanceof URI\URL) {
+            throw new Exception('No valid URI has been passed to the client');
         }
 
         if ($method) {
@@ -913,8 +920,8 @@ class Zend_Http_Client
             $headers = $this->_prepareHeaders();
 
             // check that adapter supports streaming before using it
-            if(is_resource($body) && !($this->adapter instanceof Zend_Http_Client_Adapter_Stream)) {
-                throw new Zend_Http_Client_Exception('Adapter does not support streaming');
+            if(is_resource($body) && !($this->adapter instanceof Adapter\Stream)) {
+                throw new Exception('Adapter does not support streaming');
             }
 
             // Open the connection, send the request and read the response
@@ -922,11 +929,11 @@ class Zend_Http_Client
                 ($uri->getScheme() == 'https' ? true : false));
 
             if($this->config['output_stream']) {
-                if($this->adapter instanceof Zend_Http_Client_Adapter_Stream) {
+                if($this->adapter instanceof Adapter\Stream) {
                     $stream = $this->_openTempStream();
                     $this->adapter->setOutputStream($stream);
                 } else {
-                    throw new Zend_Http_Client_Exception('Adapter does not support streaming');
+                    throw new Exception('Adapter does not support streaming');
                 }
             }
 
@@ -935,21 +942,21 @@ class Zend_Http_Client
 
             $response = $this->adapter->read();
             if (! $response) {
-                throw new Zend_Http_Client_Exception('Unable to read response, or response is empty');
+                throw new Exception('Unable to read response, or response is empty');
             }
 
             if($this->config['output_stream']) {
                 rewind($stream);
                 // cleanup the adapter
                 $this->adapter->setOutputStream(null);
-                $response = Zend_Http_Response_Stream::fromStream($response, $stream);
+                $response = HTTP\Response\Stream::fromStream($response, $stream);
                 $response->setStreamName($this->_stream_name);
                 if(!is_string($this->config['output_stream'])) {
                     // we used temp name, will need to clean up
                     $response->setCleanup(true);
                 }
             } else {
-                $response = Zend_Http_Response::fromString($response);
+                $response = HTTP\Response\Response::fromString($response);
             }
 
             if ($this->config['storeresponse']) {
@@ -975,7 +982,9 @@ class Zend_Http_Client
                 }
 
                 // If we got a well formed absolute URI
-                if (Zend_Uri_Http::check($location)) {
+                $url = new URI\URL($location);
+                
+                if ($url->isValid()) {
                     $this->setHeaders('host', null);
                     $this->setUri($location);
 
@@ -1073,7 +1082,7 @@ class Zend_Http_Client
         // Load cookies from cookie jar
         if (isset($this->cookiejar)) {
             $cookstr = $this->cookiejar->getMatchingCookies($this->uri,
-                true, Zend_Http_CookieJar::COOKIE_STRING_CONCAT);
+                true, HTTP\CookieJar::COOKIE_STRING_CONCAT);
 
             if ($cookstr) {
                 $headers[] = "Cookie: {$cookstr}";
@@ -1097,7 +1106,7 @@ class Zend_Http_Client
      * Prepare the request body (for POST and PUT requests)
      *
      * @return string
-     * @throws Zend_Http_Client_Exception
+     * @throws \Zend\HTTP\Client\Exception
      */
     protected function _prepareBody()
     {
@@ -1169,7 +1178,7 @@ class Zend_Http_Client
                         mb_internal_encoding($mbIntEnc);
                     }
 
-                    throw new Zend_Http_Client_Exception("Cannot handle content type '{$this->enctype}' automatically." .
+                    throw new Exception("Cannot handle content type '{$this->enctype}' automatically." .
                         " Please use Zend_Http_Client::setRawData to send this kind of content.");
                     break;
             }
@@ -1318,7 +1327,7 @@ class Zend_Http_Client
      * @param string $password
      * @param string $type
      * @return string
-     * @throws Zend_Http_Client_Exception
+     * @throws \Zend\HTTP\Client\Exception
      */
     public static function encodeAuthHeader($user, $password, $type = self::AUTH_BASIC)
     {
@@ -1328,7 +1337,7 @@ class Zend_Http_Client
             case self::AUTH_BASIC:
                 // In basic authentication, the user name cannot contain ":"
                 if (strpos($user, ':') !== false) {
-                    throw new Zend_Http_Client_Exception("The user name cannot contain ':' in 'Basic' HTTP authentication");
+                    throw new Exception("The user name cannot contain ':' in 'Basic' HTTP authentication");
                 }
 
                 $authHeader = 'Basic ' . base64_encode($user . ':' . $password);
@@ -1341,7 +1350,7 @@ class Zend_Http_Client
             //    break;
 
             default:
-                throw new Zend_Http_Client_Exception("Not a supported HTTP authentication type: '$type'");
+                throw new Exception("Not a supported HTTP authentication type: '$type'");
         }
 
         return $authHeader;

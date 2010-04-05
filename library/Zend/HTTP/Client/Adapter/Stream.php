@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\HTTP\Client\Adapter;
+
+/**
  * An interface description for Zend_Http_Client_Adapter_Stream classes.
  *
  * This interface decribes Zend_Http_Client_Adapter which supports streaming.
@@ -31,7 +36,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Http_Client_Adapter_Stream
+interface Stream
 {
     /**
      * Set output stream

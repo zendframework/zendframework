@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\HTTP;
+use Zend\HTTP;
+use Zend\URI;
 
 /**
  * Zend_Http_Cookie unit tests
@@ -32,7 +38,7 @@
  * @group      Zend_Http
  * @group      Zend_Http_Cookie
  */
-class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
+class CookieTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Cookie creation and data accessors tests
@@ -42,11 +48,11 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
      * Make sure we can't set invalid names
      *
      * @dataProvider invalidCookieNameCharProvider
-     * @expectedException Zend_Http_Exception
+     * @expectedException Zend\HTTP\Exception
      */
     public function testSetInvalidName($char)
     {
-        $cookie = new Zend_Http_Cookie("cookie_$char", 'foo', 'example.com');
+        $cookie = new HTTP\Cookie("cookie_$char", 'foo', 'example.com');
     }
 
     /**
@@ -56,8 +62,8 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
      */
     public function testGetName($cStr, $cInfo)
     {
-        $cookie = Zend_Http_Cookie::fromString($cStr);
-        if (! $cookie instanceof Zend_Http_Cookie) {
+        $cookie = HTTP\Cookie::fromString($cStr);
+        if (! $cookie instanceof HTTP\Cookie) {
             $this->fail("Failed creating a cookie object from '$cStr'");
         }
 
@@ -74,7 +80,7 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
      */
     public function testGetValueConstructor($val)
     {
-        $cookie = new Zend_Http_Cookie('cookie', $val, 'example.com', time(), '/', true);
+        $cookie = new HTTP\Cookie('cookie', $val, 'example.com', time(), '/', true);
         $this->assertEquals($val, $cookie->getValue());
     }
 
@@ -86,7 +92,7 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
      */
     public function testGetValueFromString($val)
     {
-        $cookie = Zend_Http_Cookie::fromString('cookie=' . urlencode($val) . '; domain=example.com');
+        $cookie = HTTP\Cookie::fromString('cookie=' . urlencode($val) . '; domain=example.com');
         $this->assertEquals($val, $cookie->getValue());
     }
 
@@ -100,7 +106,7 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
     {
         // Because ';' has special meaning in the cookie, strip it out for this test.
         $val = str_replace(';', '', $val);
-        $cookie = Zend_Http_Cookie::fromString('cookie=' . $val . '; domain=example.com', null, false);
+        $cookie = HTTP\Cookie::fromString('cookie=' . $val . '; domain=example.com', null, false);
         $this->assertEquals($val, $cookie->getValue());
     }
 
@@ -114,7 +120,7 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
     {
         // Because ';' has special meaning in the cookie, strip it out for this test.
         $val = str_replace(';', '', $val);
-        $cookie = Zend_Http_Cookie::fromString('cookie=' . $val . '; domain=example.com', null, false);
+        $cookie = HTTP\Cookie::fromString('cookie=' . $val . '; domain=example.com', null, false);
         $this->assertEquals('cookie=' . $val . ';', (string)$cookie);
     }
 
@@ -128,7 +134,7 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
     {
         // Because ';' has special meaning in the cookie, strip it out for this test.
         $val = str_replace(';', '', $val);
-        $cookie = Zend_Http_Cookie::fromString('cookie=' . $val . '; domain=example.com', null, true);
+        $cookie = HTTP\Cookie::fromString('cookie=' . $val . '; domain=example.com', null, true);
         $this->assertEquals('cookie=' . urlencode($val) . ';', (string)$cookie);
     }
 
@@ -139,8 +145,8 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
      */
     public function testGetDomainInStr($cStr, $cInfo)
     {
-        $cookie = Zend_Http_Cookie::fromString($cStr);
-        if (! $cookie instanceof Zend_Http_Cookie) {
+        $cookie = HTTP\Cookie::fromString($cStr);
+        if (! $cookie instanceof HTTP\Cookie) {
             $this->fail("Failed creating a cookie object from '$cStr'");
         }
 
@@ -154,11 +160,11 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider refUrlProvider
      */
-    public function testGetDomainInRefUrl(Zend_Uri $uri)
+    public function testGetDomainInRefUrl(URI\URI $uri)
     {
         $domain = $uri->getHost();
-        $cookie = Zend_Http_Cookie::fromString('foo=baz; path=/', 'http://' . $domain);
-        if (! $cookie instanceof Zend_Http_Cookie) {
+        $cookie = HTTP\Cookie::fromString('foo=baz; path=/', 'http://' . $domain);
+        if (! $cookie instanceof HTTP\Cookie) {
             $this->fail("Failed creating a cookie object with URL '$uri'");
         }
 
@@ -172,8 +178,8 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPathInStr($cStr, $cInfo)
     {
-        $cookie = Zend_Http_Cookie::fromString($cStr);
-        if (! $cookie instanceof Zend_Http_Cookie) {
+        $cookie = HTTP\Cookie::fromString($cStr);
+        if (! $cookie instanceof HTTP\Cookie) {
             $this->fail("Failed creating a cookie object from '$cStr'");
         }
 
@@ -187,7 +193,7 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider refUrlProvider
      */
-    public function testGetPathInRefUrl(Zend_Uri $uri)
+    public function testGetPathInRefUrl(URI\URI $uri)
     {
         $path = $uri->getPath();
         if (substr($path, -1, 1) == '/') $path .= 'x';
@@ -196,8 +202,8 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
             $path = '/';
         }
 
-        $cookie = Zend_Http_Cookie::fromString('foo=bar', (string) $uri);
-        if (! $cookie instanceof Zend_Http_Cookie) {
+        $cookie = HTTP\Cookie::fromString('foo=bar', (string) $uri);
+        if (! $cookie instanceof HTTP\Cookie) {
             $this->fail("Failed creating a cookie object with URL '$uri'");
         }
 
@@ -211,8 +217,8 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
      */
     public function testGetExpiryTime($cStr, $cInfo)
     {
-        $cookie = Zend_Http_Cookie::fromString($cStr);
-        if (! $cookie instanceof Zend_Http_Cookie) {
+        $cookie = HTTP\Cookie::fromString($cStr);
+        if (! $cookie instanceof HTTP\Cookie) {
             $this->fail("Failed creating a cookie object from '$cStr'");
         }
 
@@ -228,8 +234,8 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
      */
     public function testIsSecure($cStr, $cInfo)
     {
-        $cookie = Zend_Http_Cookie::fromString($cStr);
-        if (! $cookie instanceof Zend_Http_Cookie) {
+        $cookie = HTTP\Cookie::fromString($cStr);
+        if (! $cookie instanceof HTTP\Cookie) {
             $this->fail("Failed creating a cookie object from '$cStr'");
         }
 
@@ -249,7 +255,7 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
      */
     public function testIsExpired($cStr, $expired)
     {
-        $cookie = Zend_Http_Cookie::fromString($cStr);
+        $cookie = HTTP\Cookie::fromString($cStr);
         if (! $cookie) {
             $this->fail("Failed creating a cookie object from '$cStr'");
         }
@@ -272,7 +278,7 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
 
         // Make sure all cookies are expired
         foreach ($cookies as $cstr) {
-            $cookie = Zend_Http_Cookie::fromString($cstr);
+            $cookie = HTTP\Cookie::fromString($cstr);
             if (! $cookie) $this->fail('Got no cookie object from a valid cookie string');
             $this->assertTrue($cookie->isExpired($now), 'Cookie is expected to be expired');
         }
@@ -280,7 +286,7 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
         // Make sure all cookies are not expired
         $now = time() - 7200;
         foreach ($cookies as $cstr) {
-            $cookie = Zend_Http_Cookie::fromString($cstr);
+            $cookie = HTTP\Cookie::fromString($cstr);
             if (! $cookie) $this->fail('Got no cookie object from a valid cookie string');
             $this->assertFalse($cookie->isExpired($now), 'Cookie is expected not to be expired');
         }
@@ -293,8 +299,8 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
      */
     public function testIsSessionCookie($cStr, $cInfo)
     {
-        $cookie = Zend_Http_Cookie::fromString($cStr);
-        if (! $cookie instanceof Zend_Http_Cookie) {
+        $cookie = HTTP\Cookie::fromString($cStr);
+        if (! $cookie instanceof HTTP\Cookie) {
             $this->fail("Failed creating a cookie object from '$cStr'");
         }
 
@@ -311,8 +317,8 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
      */
     public function testToString($cStr, $cInfo)
     {
-        $cookie = Zend_Http_Cookie::fromString($cStr);
-        if (! $cookie instanceof Zend_Http_Cookie) {
+        $cookie = HTTP\Cookie::fromString($cStr);
+        if (! $cookie instanceof HTTP\Cookie) {
             $this->fail("Failed creating a cookie object from '$cStr'");
         }
 
@@ -329,7 +335,7 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
         );
 
         foreach ($cookies as $cstr) {
-            $cookie = Zend_Http_Cookie::fromString($cstr);
+            $cookie = HTTP\Cookie::fromString($cstr);
             if (! $cookie) $this->fail('Got no cookie object from a valid cookie string');
             $this->assertEquals('value', $cookie->getValue(), 'Value is not as expected');
             $this->assertEquals('foo.com', $cookie->getDomain(), 'Domain is not as expected');
@@ -344,13 +350,13 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
      */
     public function testMatchDomain($cookieStr, $uri, $match)
     {
-        $cookie = Zend_Http_Cookie::fromString($cookieStr);
+        $cookie = HTTP\Cookie::fromString($cookieStr);
         $this->assertEquals($match, $cookie->match($uri));
     }
 
     static public function domainMatchTestProvider()
     {
-        $uri = Zend_Uri::factory('http://www.foo.com/some/file.txt');
+        $uri = new URI\URL('http://www.foo.com/some/file.txt');
 
         return array(
             array('foo=bar; domain=.example.com;', 'http://www.example.com/foo/bar.php', true),
@@ -369,11 +375,11 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
      */
     public function testMatchPath()
     {
-        $cookie = Zend_Http_Cookie::fromString('foo=bar; domain=.example.com; path=/foo');
+        $cookie = HTTP\Cookie::fromString('foo=bar; domain=.example.com; path=/foo');
         $this->assertTrue($cookie->match('http://www.example.com/foo/bar.php'), 'Cookie expected to match, but didn\'t');
         $this->assertFalse($cookie->match('http://www.example.com/bar.php'), 'Cookie expected not to match, but did');
 
-        $cookie = Zend_Http_Cookie::fromString('cookie=value; domain=www.foo.com; path=/some/long/path');
+        $cookie = HTTP\Cookie::fromString('cookie=value; domain=www.foo.com; path=/some/long/path');
         $this->assertTrue($cookie->match('http://www.foo.com/some/long/path/file.txt'), 'Cookie expected to match, but didn\'t');
         $this->assertTrue($cookie->match('http://www.foo.com/some/long/path/and/even/more'), 'Cookie expected to match, but didn\'t');
         $this->assertFalse($cookie->match('http://www.foo.com/some/long/file.txt'), 'Cookie expected not to match, but did');
@@ -387,12 +393,12 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
     public function testMatchSecure()
     {
         // A non secure cookie, should match both
-        $cookie = Zend_Http_Cookie::fromString('foo=bar; domain=.example.com;');
+        $cookie = HTTP\Cookie::fromString('foo=bar; domain=.example.com;');
         $this->assertTrue($cookie->match('http://www.example.com/foo/bar.php'), 'Cookie expected to match, but didn\'t');
         $this->assertTrue($cookie->match('https://www.example.com/bar.php'), 'Cookie expected to match, but didn\'t');
 
         // A secure cookie, should match secure connections only
-        $cookie = Zend_Http_Cookie::fromString('foo=bar; domain=.example.com; secure');
+        $cookie = HTTP\Cookie::fromString('foo=bar; domain=.example.com; secure');
         $this->assertFalse($cookie->match('http://www.example.com/foo/bar.php'), 'Cookie expected not to match, but it did');
         $this->assertTrue($cookie->match('https://www.example.com/bar.php'), 'Cookie expected to match, but didn\'t');
     }
@@ -404,7 +410,7 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
     public function testMatchExpire()
     {
         // A session cookie - should always be valid
-        $cookie = Zend_Http_Cookie::fromString('foo=bar; domain=.example.com;');
+        $cookie = HTTP\Cookie::fromString('foo=bar; domain=.example.com;');
         $this->assertTrue($cookie->match('http://www.example.com/'), 'Cookie expected to match, but didn\'t');
         $this->assertTrue($cookie->match('http://www.example.com/', true, time() + 3600), 'Cookie expected to match, but didn\'t');
 
@@ -413,25 +419,25 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($cookie->match('https://www.example.com/', false, time() - 3600), 'Cookie expected not to match, but it did');
 
         // A cookie with expiry time in the future
-        $cookie = Zend_Http_Cookie::fromString('foo=bar; domain=.example.com; expires=' . date(DATE_COOKIE, time() + 3600));
+        $cookie = HTTP\Cookie::fromString('foo=bar; domain=.example.com; expires=' . date(DATE_COOKIE, time() + 3600));
         $this->assertTrue($cookie->match('http://www.example.com/'), 'Cookie expected to match, but didn\'t');
         $this->assertFalse($cookie->match('https://www.example.com/', true, time() + 7200), 'Cookie expected not to match, but it did');
 
         // A cookie with expiry time in the past
-        $cookie = Zend_Http_Cookie::fromString('foo=bar; domain=.example.com; expires=' . date(DATE_COOKIE, time() - 3600));
+        $cookie = HTTP\Cookie::fromString('foo=bar; domain=.example.com; expires=' . date(DATE_COOKIE, time() - 3600));
         $this->assertFalse($cookie->match('http://www.example.com/'), 'Cookie expected not to match, but it did');
         $this->assertTrue($cookie->match('https://www.example.com/', true, time() - 7200), 'Cookie expected to match, but didn\'t');
     }
 
     public function testFromStringFalse()
     {
-        $cookie = Zend_Http_Cookie::fromString('foo; domain=www.exmaple.com');
+        $cookie = HTTP\Cookie::fromString('foo; domain=www.exmaple.com');
         $this->assertEquals(false, $cookie, 'fromString was expected to fail and return false');
 
-        $cookie = Zend_Http_Cookie::fromString('=bar; secure; domain=foo.nl');
+        $cookie = HTTP\Cookie::fromString('=bar; secure; domain=foo.nl');
         $this->assertEquals(false, $cookie, 'fromString was expected to fail and return false');
 
-        $cookie = Zend_Http_Cookie::fromString('fo;o=bar; secure; domain=foo.nl');
+        $cookie = HTTP\Cookie::fromString('fo;o=bar; secure; domain=foo.nl');
         $this->assertEquals(false, $cookie, 'fromString was expected to fail and return false');
     }
 
@@ -444,7 +450,7 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
     public function testZF5690OverflowingExpiryDate()
     {
         $expTime = "Sat, 29-Jan-2039 00:54:42 GMT";
-        $cookie = Zend_Http_Cookie::fromString("foo=bar; domain=.example.com; expires=$expTime");
+        $cookie = HTTP\Cookie::fromString("foo=bar; domain=.example.com; expires=$expTime");
         $this->assertFalse($cookie->isExpired(), 'Expiry: ' . $cookie->getExpiryTime());
     }
 
@@ -498,11 +504,11 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
     static public function refUrlProvider()
     {
         return array(
-            array(Zend_Uri::factory('http://example.com/')),
-            array(Zend_Uri::factory('http://www.example.com/foo/bar/')),
-            array(Zend_Uri::factory('http://some.really.deep.domain.com')),
-            array(Zend_Uri::factory('http://localhost/path/to/very/deep/file.php')),
-            array(Zend_Uri::factory('http://arr.gr/some%20path/text%2Ffile'))
+            array(new URI\URL('http://example.com/')),
+            array(new URI\URL('http://www.example.com/foo/bar/')),
+            array(new URI\URL('http://some.really.deep.domain.com')),
+            array(new URI\URL('http://localhost/path/to/very/deep/file.php')),
+            array(new URI\URL('http://arr.gr/some%20path/text%2Ffile'))
         );
     }
 

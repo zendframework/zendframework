@@ -20,7 +20,10 @@
  * @version    $Id$
  */
 
-
+/**
+ * @namespace
+ */
+namespace ZendTest\HTTP\Client;
 
 /**
  * Zend_Http_Client_Adapter_Proxy test suite.
@@ -38,7 +41,7 @@
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
-class Zend_Http_Client_ProxyAdapterTest extends Zend_Http_Client_SocketTest
+class ProxyAdapterTest extends SocketTest
 {
     /**
      * Configuration array
@@ -100,7 +103,7 @@ class Zend_Http_Client_ProxyAdapterTest extends Zend_Http_Client_SocketTest
         ));
 
         $this->client->setUri($this->baseuri . 'testGetLastRequest.php');
-        $res = $this->client->request(Zend_Http_Client::TRACE);
+        $res = $this->client->request(\Zend\HTTP\Client\Client::TRACE);
         if ($res->getStatus() == 405 || $res->getStatus() == 501) {
             $this->markTestSkipped("Server does not allow the TRACE method");
         }

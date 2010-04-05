@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\HTTP\Client\Adapter;
+
+/**
  * An interface description for Zend_Http_Client_Adapter classes.
  *
  * These classes are used as connectors for Zend_Http_Client, performing the
@@ -32,7 +37,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Http_Client_Adapter_Interface
+interface AdapterInterface
 {
     /**
      * Set the configuration array for the adapter
@@ -54,7 +59,7 @@ interface Zend_Http_Client_Adapter_Interface
      * Send request to the remote server
      *
      * @param string        $method
-     * @param Zend_Uri_Http $url
+     * @param \Zend\URI\URL $url
      * @param string        $http_ver
      * @param array         $headers
      * @param string        $body

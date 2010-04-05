@@ -20,7 +20,11 @@
  * @version    $Id$
  */
 
-
+/**
+ * @namespace
+ */
+namespace ZendTest\HTTP\Client;
+use Zend\HTTP\Client\Adapter;
 
 /**
  * This Testsuite includes all Zend_Http_Client that require a working web
@@ -43,7 +47,7 @@
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
-class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
+class SocketTest extends CommonHttpTests
 {
     /**
      * Configuration array
@@ -51,7 +55,7 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
      * @var array
      */
     protected $config = array(
-        'adapter' => 'Zend_Http_Client_Adapter_Socket'
+        'adapter' => 'Zend\Http\Client\Adapter\Socket'
     );
 
     /**
@@ -85,7 +89,7 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
     public function testConfigSetAsZendConfig()
     {
 
-        $config = new Zend_Config(array(
+        $config = new \Zend\Config\Config(array(
             'timeout'  => 400,
             'nested'   => array(
                 'item' => 'value',
@@ -102,7 +106,7 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
     /**
      * Check that an exception is thrown when trying to set invalid config
      *
-     * @expectedException Zend_Http_Client_Adapter_Exception
+     * @expectedException Zend\HTTP\Client\Adapter\Exception
      * @dataProvider invalidConfigProvider
      */
     public function testSetConfigInvalidConfig($config)
@@ -154,7 +158,7 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
      * Test that setting invalid options / context causes an exception
      *
      * @dataProvider      invalidContextProvider
-     * @expectedException Zend_Http_Client_Adapter_Exception
+     * @expectedException Zend\HTTP\Client\Adapter\Exception
      */
     public function testSetInvalidContextOptions($invalid)
     {
@@ -199,8 +203,8 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
         try {
             $this->client->request();
             $this->fail("Expected a timeout Zend_Http_Client_Adapter_Exception");
-        } catch (Zend_Http_Client_Adapter_Exception $e) {
-            $this->assertEquals(Zend_Http_Client_Adapter_Exception::READ_TIMEOUT, $e->getCode());
+        } catch (Adapter\Exception $e) {
+            $this->assertEquals(Adapter\Exception::READ_TIMEOUT, $e->getCode());
         }
 
         $time = (microtime(true) - $start);
@@ -238,7 +242,7 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
     static public function invalidContextProvider()
     {
         return array(
-            array(new stdClass()),
+            array(new \stdClass()),
             array(fopen('data://text/plain,', 'r')),
             array(false),
             array(null)

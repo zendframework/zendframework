@@ -20,14 +20,14 @@
  * @version    $Id$
  */
 
-// Read local configuration
-if (! defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') &&
-    is_readable('TestConfiguration.php')) {
-
-}
-
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\HTTP\Client;
+use Zend\HTTP\Client;
+use Zend\HTTP;
+use Zend\HTTP\Client\Adapter;
+use Zend\HTTP\Response;
 
 
 /**
@@ -51,7 +51,7 @@ if (! defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') &&
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
-abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCase
+abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 {
     /**
      * The bast URI for this test, containing all files in the _files directory
@@ -81,7 +81,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
      * @var array
      */
     protected $config = array(
-        'adapter'     => 'Zend_Http_Client_Adapter_Socket'
+        'adapter'     => 'Zend\HTTP\Client\Adapter\Socket'
     );
 
     /**
@@ -90,8 +90,8 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
      */
     protected function setUp()
     {
-        if (defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') &&
-            Zend_Uri_Http::check(TESTS_ZEND_HTTP_CLIENT_BASEURI)) {
+        if (defined('TESTS_ZEND_HTTP_CLIENT_BASEURI')
+            && (TESTS_ZEND_HTTP_CLIENT_BASEURI != false)) {
 
             $this->baseuri = TESTS_ZEND_HTTP_CLIENT_BASEURI;
             if (substr($this->baseuri, -1) != '/') $this->baseuri .= '/';
@@ -104,7 +104,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
             $uri = $this->baseuri . $name . '.php';
 
             $this->_adapter = new $this->config['adapter'];
-            $this->client = new Zend_Http_Client($uri, $this->config);
+            $this->client = new Client\Client($uri, $this->config);
             $this->client->setAdapter($this->_adapter);
 
         } else {
@@ -153,7 +153,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
             'X-Powered-By' => 'My Glorious Golden Ass',
         ));
 
-        $res = $this->client->request(Zend_Http_Client::TRACE);
+        $res = $this->client->request(Client\Client::TRACE);
         if ($res->getStatus() == 405 || $res->getStatus() == 501) {
             $this->markTestSkipped("Server does not allow the TRACE method");
         }
@@ -188,7 +188,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     public function testPostDataUrlEncoded($params)
     {
         $this->client->setUri($this->baseuri . 'testPostData.php');
-        $this->client->setEncType(Zend_Http_Client::ENC_URLENCODED);
+        $this->client->setEncType(Client\Client::ENC_URLENCODED);
         $this->client->setParameterPost($params);
         $res = $this->client->request('POST');
         $this->assertEquals(serialize($params), $res->getBody(), "POST data integrity test failed");
@@ -203,7 +203,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     public function testPostDataMultipart($params)
     {
         $this->client->setUri($this->baseuri . 'testPostData.php');
-        $this->client->setEncType(Zend_Http_Client::ENC_FORMDATA);
+        $this->client->setEncType(Client\Client::ENC_FORMDATA);
         $this->client->setParameterPost($params);
         $res = $this->client->request('POST');
         $this->assertEquals(serialize($params), $res->getBody(), "POST data integrity test failed");
@@ -639,8 +639,8 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $refuri = $this->client->getUri();
 
         $cookies = array(
-            Zend_Http_Cookie::fromString('chocolate=chips', $refuri),
-            Zend_Http_Cookie::fromString('crumble=apple', $refuri)
+            HTTP\Cookie::fromString('chocolate=chips', $refuri),
+            HTTP\Cookie::fromString('crumble=apple', $refuri)
         );
 
         $strcookies = array();
@@ -663,9 +663,9 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $refuri = $this->client->getUri();
 
         $cookies = array(
-            Zend_Http_Cookie::fromString('chocolate=chips', $refuri),
-            Zend_Http_Cookie::fromString('crumble=apple', $refuri),
-            Zend_Http_Cookie::fromString('another=cookie', $refuri)
+            HTTP\Cookie::fromString('chocolate=chips', $refuri),
+            HTTP\Cookie::fromString('crumble=apple', $refuri),
+            HTTP\Cookie::fromString('another=cookie', $refuri)
         );
 
         $this->client->setCookie($cookies);
@@ -710,8 +710,8 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $refuri = $this->client->getUri();
 
         $cookies = array(
-            Zend_Http_Cookie::fromString('chocolate=chips', $refuri),
-            Zend_Http_Cookie::fromString('crumble=apple', $refuri)
+            HTTP\Cookie::fromString('chocolate=chips', $refuri),
+            HTTP\Cookie::fromString('crumble=apple', $refuri)
         );
 
         $strcookies = array();
@@ -853,7 +853,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     
     public function testStreamResponse()
     {
-        if(!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+        if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;   
         }
@@ -862,7 +862,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
         $response = $this->client->request();
         
-        $this->assertTrue($response instanceof Zend_Http_Response_Stream, 'Request did not return stream response!');
+        $this->assertTrue($response instanceof Response\Stream, 'Request did not return stream response!');
         $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
         
         $stream_name = $response->getStreamName();
@@ -878,7 +878,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     
     public function testStreamResponseBody()
     {
-        if(!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+        if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;   
         }
@@ -887,7 +887,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
         $response = $this->client->request();
         
-        $this->assertTrue($response instanceof Zend_Http_Response_Stream, 'Request did not return stream response!');
+        $this->assertTrue($response instanceof Response\Stream, 'Request did not return stream response!');
         $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
         
         $body = $response->getBody();
@@ -898,7 +898,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     
     public function testStreamResponseNamed()
     {
-        if(!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+        if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;   
         }
@@ -908,7 +908,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
         $response = $this->client->request();
         
-        $this->assertTrue($response instanceof Zend_Http_Response_Stream, 'Request did not return stream response!');
+        $this->assertTrue($response instanceof Response\Stream, 'Request did not return stream response!');
         $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
         
         $this->assertEquals($outfile, $response->getStreamName());
@@ -924,7 +924,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
        
     public function testStreamRequest()
     {
-        if(!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+        if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;   
         }
@@ -998,7 +998,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
             array(false),
             array('foo => bar'),
             array(null),
-            array(new stdClass),
+            array(new \stdClass),
             array(55)
         );
     }

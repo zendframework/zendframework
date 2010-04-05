@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\HTTP\Client;
 
 /**
  * This Testsuite includes all Zend_Http_Client that require a working web
@@ -42,7 +46,7 @@
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
-class Zend_Http_Client_SocketPersistentTest extends Zend_Http_Client_SocketTest
+class SocketPersistentTest extends SocketTest
 {
     /**
      * Configuration array
@@ -50,7 +54,7 @@ class Zend_Http_Client_SocketPersistentTest extends Zend_Http_Client_SocketTest
      * @var array
      */
     protected $config = array(
-        'adapter'    => 'Zend_Http_Client_Adapter_Socket',
+        'adapter'    => 'Zend\Http\Client\Adapter\Socket',
         'persistent' => true,
         'keepalive'  => true
     );

@@ -20,7 +20,10 @@
  * @version    $Id$
  */
 
-
+/**
+ * @namespace
+ */
+namespace ZendTest\HTTP\Client;
 
 /**
  * Exercises Zend_Http_Client_Adapter_Test
@@ -33,7 +36,7 @@
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
-class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
+class TestAdapterTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Test adapter
@@ -48,7 +51,7 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->adapter = new Zend_Http_Client_Adapter_Test();
+        $this->adapter = new \Zend\HTTP\Client\Adapter\Test();
     }
 
     /**
@@ -63,7 +66,7 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
     /**
      * Make sure an exception is thrown on invalid cofiguration
      *
-     * @expectedException Zend_Http_Client_Adapter_Exception
+     * @expectedException Zend\HTTP\Client\Adapter\Exception
      */
     public function testSetConfigThrowsOnInvalidConfig()
     {
@@ -93,7 +96,7 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
             // Make a connection that will fail
             $this->adapter->connect('http://foo');
             $this->fail();
-        } catch (Zend_Http_Client_Adapter_Exception $e) {
+        } catch (\Zend\HTTP\Client\Adapter\Exception $e) {
             // Connect again to see that the next request does not fail
             $this->adapter->connect('http://foo');
         }
@@ -149,7 +152,7 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
     {
         $this->adapter->read(); // pop out first response
 
-        $respObj = Zend_Http_Response::fromString($testResponse);
+        $respObj = \Zend\HTTP\Response\Response::fromString($testResponse);
 
         $this->adapter->addResponse($respObj);
         $this->assertEquals($testResponse, $this->adapter->read());
@@ -189,8 +192,8 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
             try {
                 $this->adapter->setResponseIndex($i);
                 $this->fail();
-            } catch (Exception $e) {
-                $class = 'Zend_Http_Client_Adapter_Exception';
+            } catch (\Exception $e) {
+                $class = 'Zend\HTTP\Client\Adapter\Exception';
                 $this->assertType($class, $e);
                 $this->assertRegexp('/out of range/i', $e->getMessage());
             }

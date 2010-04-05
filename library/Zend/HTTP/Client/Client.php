@@ -261,6 +261,11 @@ class Client
             } 
         }
 
+        $scheme = strtolower($uri->getScheme());
+        if (!empty($scheme) && !in_array($scheme, array('http', 'https'))) {
+            throw new Exception('Passed parameter is not a valid HTTP URI.');
+        }
+
         // Set auth if username and password has been specified in the uri
         if ($uri->getUsername() && $uri->getPassword()) {
             $this->setAuth($uri->getUsername(), $uri->getPassword());

@@ -109,11 +109,10 @@ class StaticTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test that passing an invalid URI string throws an exception
-     *
-     * @expectedException Zend\URI\Exception
      */
     public function testInvalidUriStringException()
     {
+        $this->setExpectedException('Zend\\HTTP\\Exception');
         $this->_client->setUri('httpp://__invalid__.com');
     }
 
@@ -493,7 +492,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
 
         $this->_client->request('POST');
 
-        $expectedLines = file(dirname(__FILE__) . '/_files/ZF7038-multipartarrayrequest.txt');
+        $expectedLines = file(__DIR__ . '/_files/ZF7038-multipartarrayrequest.txt');
         $gotLines = explode("\n", $this->_client->getLastRequest());
 
         $this->assertEquals(count($expectedLines), count($gotLines));

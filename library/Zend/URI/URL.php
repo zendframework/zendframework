@@ -330,7 +330,7 @@ class URL implements URI
     public function parse($url)
     {
         // use PHP's parse_url
-        $parts = @parse_url($url);
+        $parts = parse_url($url);
         
         if ($parts === false) {
             throw new Exception('The url provided ' . $url . ' is not parsable.');

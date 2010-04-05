@@ -20,8 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Crypt\Math\BigInteger;
 
-
+use Zend\Crypt\Math\BigInteger\Gmp;
 
 /**
  * @category   Zend
@@ -31,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Crypt
  */
-class Zend_Crypt_Math_BigInteger_GmpTest extends PHPUnit_Framework_TestCase
+class GmpTest extends \PHPUnit_Framework_TestCase
 {
 
     private $_math = null;
@@ -42,7 +46,7 @@ class Zend_Crypt_Math_BigInteger_GmpTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('Skipped: Zend_Crypt_Math_BigInteger_GmpTest due to ext/gmp being unavailable');
             return;
         }
-        $this->_math = new Zend_Crypt_Math_BigInteger_Gmp;
+        $this->_math = new Gmp;
     }
 
     public function testAdd()

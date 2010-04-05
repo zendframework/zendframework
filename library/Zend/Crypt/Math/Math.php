@@ -21,15 +21,19 @@
  */
 
 /**
- * @uses       Zend_Crypt_Math_BigInteger
+ * @namespace
+ */
+namespace Zend\Crypt\Math;
+
+/**
+ * @uses       Zend\Crypt\Math\BigInteger\BigInteger
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
+class Math extends BigInteger\BigInteger
 {
-
     /**
      * Generate a pseudorandom number within the given range.
      * Will attempt to read from a systems RNG if it exists or else utilises
@@ -67,7 +71,8 @@ class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
      * @param string $long
      * @return string
      */
-    public function btwoc($long) {
+    public function btwoc($long) 
+    {
         if (ord($long[0]) > 127) {
             return "\x00" . $long;
         }
@@ -80,7 +85,8 @@ class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
      * @param string $binary
      * @return string
      */
-    public function fromBinary($binary) {
+    public function fromBinary($binary) 
+    {
         return $this->_math->binaryToInteger($binary);
     }
 
@@ -94,5 +100,4 @@ class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
     {
         return $this->_math->integerToBinary($integer);
     }
-
 }

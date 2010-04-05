@@ -21,14 +21,19 @@
  */
 
 /**
- * @uses       Zend_Crypt_Exception
- * @uses       Zend_Crypt_Rsa_Key
+ * @namespace
+ */
+namespace Zend\Crypt\RSA;
+
+/**
+ * @uses       Zend\Crypt\Exception
+ * @uses       Zend\Crypt\RSA\Key
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Crypt_Rsa_Key_Public extends Zend_Crypt_Rsa_Key
+class PublicKey extends Key
 {
 
     protected $_certificateString = null;
@@ -40,7 +45,7 @@ class Zend_Crypt_Rsa_Key_Public extends Zend_Crypt_Rsa_Key
 
     /**
      * @param string $string
-     * @throws Zend_Crypt_Exception
+     * @throws Zend\Crypt\Exception
      */
     protected function _parse($string)
     {
@@ -49,12 +54,12 @@ class Zend_Crypt_Rsa_Key_Public extends Zend_Crypt_Rsa_Key
         } else {
             $this->_pemString = $string;
         }
+
         $result = openssl_get_publickey($string);
         if (!$result) {
-            throw new Zend_Crypt_Exception('Unable to load public key');
+            throw new \Zend\Crypt\Exception('Unable to load public key');
         }
-        //openssl_pkey_export($result, $public);
-        //$this->_pemString = $public;
+
         $this->_opensslKeyResource = $result;
         $this->_details = openssl_pkey_get_details($this->_opensslKeyResource);
     }

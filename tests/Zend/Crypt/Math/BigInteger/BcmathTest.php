@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Crypt\Math\BigInteger;
+
+use Zend\Crypt\Math\BigInteger\Bcmath;
 
 /**
  * @category   Zend
@@ -29,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Crypt
  */
-class Zend_Crypt_Math_BigInteger_BcmathTest extends PHPUnit_Framework_TestCase
+class BcmathTest extends \PHPUnit_Framework_TestCase
 {
 
     private $_math = null;
@@ -40,7 +46,7 @@ class Zend_Crypt_Math_BigInteger_BcmathTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('Skipped: Zend_Crypt_Math_BigInteger_BcmathTest due to ext/bcmath being unavailable');
             return;
         }
-        $this->_math = new Zend_Crypt_Math_BigInteger_Bcmath;
+        $this->_math = new Bcmath;
     }
 
     public function testAdd()

@@ -14,19 +14,24 @@
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @subpackage DiffieHellman
+ * @subpackage Hmac
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * @uses       Zend_Crypt_Exception
+ * @namespace
+ */
+namespace Zend\Crypt;
+
+/**
+ * @uses       Zend\Crypt\Exception
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Crypt_DiffieHellman_Exception extends Zend_Crypt_Exception
+class HMACException extends Exception
 {
 }

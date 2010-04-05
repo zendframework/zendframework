@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Crypt\Math\BigInteger;
+
+/**
  * Support for arbitrary precision mathematics in PHP.
  *
  * Interface for a wrapper across any PHP extension supporting arbitrary
@@ -31,9 +36,8 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Crypt_Math_BigInteger_Interface
+interface BigIntegerCapable
 {
-
     public function init($operand, $base = 10);
     public function add($left_operand, $right_operand);
     public function subtract($left_operand, $right_operand);
@@ -47,5 +51,4 @@ interface Zend_Crypt_Math_BigInteger_Interface
     public function binaryToInteger($operand);
     public function integerToBinary($operand);
     public function hexToDecimal($operand);
-
 }

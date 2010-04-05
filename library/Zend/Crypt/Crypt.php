@@ -20,18 +20,22 @@
  */
 
 /**
- * @uses       Zend_Crypt_Exception
+ * @namespace
+ */
+namespace Zend\Crypt;
+
+/**
+ * @uses       Zend\Crypt\Exception
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Crypt
+class Crypt
 {
-
     const TYPE_OPENSSL = 'openssl';
-    const TYPE_HASH = 'hash';
-    const TYPE_MHASH = 'mhash';
+    const TYPE_HASH    = 'hash';
+    const TYPE_MHASH   = 'mhash';
 
     protected static $_type = null;
 
@@ -48,7 +52,7 @@ class Zend_Crypt
         'sha224',
         'sha256',
         'sha384',
-        'sha512'
+        'sha512',
     );
 
     /**
@@ -70,14 +74,14 @@ class Zend_Crypt
         'sha256',
         'tiger',
         'tiger128',
-        'tiger160'
+        'tiger160',
     );
 
     /**
-     * @param string $algorithm
-     * @param string $data
-     * @param bool $binaryOutput
-     * @return unknown
+     * @param  string $algorithm
+     * @param  string $data
+     * @param  bool $binaryOutput
+     * @return void
      */
     public static function hash($algorithm, $data, $binaryOutput = false)
     {
@@ -91,8 +95,8 @@ class Zend_Crypt
     }
 
     /**
-     * @param string $algorithm
-     * @throws Zend_Crypt_Exception
+     * @param  string $algorithm
+     * @throws Zend\Crypt\Exception
      */
     protected static function _detectHashSupport($algorithm)
     {
@@ -117,13 +121,13 @@ class Zend_Crypt
                return;
             }
         }
-        throw new Zend_Crypt_Exception('\'' . $algorithm . '\' is not supported by any available extension or native function');
+        throw new Exception('\'' . $algorithm . '\' is not supported by any available extension or native function');
     }
 
     /**
-     * @param string $algorithm
-     * @param string $data
-     * @param bool $binaryOutput
+     * @param  string $algorithm
+     * @param  string $data
+     * @param  bool $binaryOutput
      * @return string
      */
     protected static function _digestHash($algorithm, $data, $binaryOutput)
@@ -132,9 +136,9 @@ class Zend_Crypt
     }
 
     /**
-     * @param string $algorithm
-     * @param string $data
-     * @param bool $binaryOutput
+     * @param  string $algorithm
+     * @param  string $data
+     * @param  bool $binaryOutput
      * @return string
      */
     protected static function _digestMhash($algorithm, $data, $binaryOutput)
@@ -148,9 +152,9 @@ class Zend_Crypt
     }
 
     /**
-     * @param string $algorithm
-     * @param string $data
-     * @param bool $binaryOutput
+     * @param  string $algorithm
+     * @param  string $data
+     * @param  bool $binaryOutput
      * @return string
      */
     protected static function _digestOpenssl($algorithm, $data, $binaryOutput)
@@ -160,5 +164,4 @@ class Zend_Crypt
         }
         return openssl_digest($data, $algorithm, $binaryOutput);
     }
-
 }

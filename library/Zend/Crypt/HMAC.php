@@ -14,11 +14,15 @@
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @subpackage Hmac
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+
+/**
+ * @namespace
+ */
+namespace Zend\Crypt;
 
 /**
  * PHP implementation of the RFC 2104 Hash based Message Authentication Code
@@ -26,14 +30,14 @@
  *
  * @todo  Patch for refactoring failed tests (key block sizes >80 using internal algo)
  * @todo       Check if mhash() is a required alternative (will be PECL-only soon)
- * @uses       Zend_Crypt
- * @uses       Zend_Crypt_Hmac_Exception
+ * @uses       Zend\Crypt\Crypt
+ * @uses       Zend\Crypt\HMACException
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Crypt_Hmac extends Zend_Crypt
+class HMAC extends Crypt
 {
 
     /**
@@ -63,9 +67,24 @@ class Zend_Crypt_Hmac extends Zend_Crypt
      *
      * @var array
      */
-    protected static $_supportedMhashAlgorithms = array('adler32',' crc32', 'crc32b', 'gost',
-            'haval128', 'haval160', 'haval192', 'haval256', 'md4', 'md5', 'ripemd160',
-            'sha1', 'sha256', 'tiger', 'tiger128', 'tiger160');
+    protected static $_supportedMhashAlgorithms = array(
+        'adler32',
+        'crc32',
+        'crc32b',
+        'gost',
+        'haval128',
+        'haval160',
+        'haval192',
+        'haval256',
+        'md4',
+        'md5',
+        'ripemd160',
+        'sha1',
+        'sha256',
+        'tiger',
+        'tiger128',
+        'tiger160',
+    );
 
     /**
      * Constants representing the output mode of the hash algorithm
@@ -78,18 +97,18 @@ class Zend_Crypt_Hmac extends Zend_Crypt
      * algorithm, the data to compute MAC of, and an output format of String,
      * Binary notation or BTWOC.
      *
-     * @param string $key
-     * @param string $hash
-     * @param string $data
-     * @param string $output
-     * @param boolean $internal
+     * @param  string $key
+     * @param  string $hash
+     * @param  string $data
+     * @param  string $output
+     * @param  boolean $internal
      * @return string
      */
     public static function compute($key, $hash, $data, $output = self::STRING)
     {
         // set the key
         if (!isset($key) || empty($key)) {
-            throw new Zend_Crypt_Hmac_Exception('provided key is null or empty');
+            throw new HMACException('provided key is null or empty');
         }
         self::$_key = $key;
 
@@ -103,13 +122,13 @@ class Zend_Crypt_Hmac extends Zend_Crypt
     /**
      * Setter for the hash method.
      *
-     * @param string $hash
-     * @return Zend_Crypt_Hmac
+     * @param  string $hash
+     * @return void
      */
     protected static function _setHashAlgorithm($hash)
     {
         if (!isset($hash) || empty($hash)) {
-            throw new Zend_Crypt_Hmac_Exception('provided hash string is null or empty');
+            throw new HMACException('provided hash string is null or empty');
         }
 
         $hash = strtolower($hash);
@@ -124,7 +143,7 @@ class Zend_Crypt_Hmac extends Zend_Crypt
         }
 
         if ($hashSupported === false) {
-            throw new Zend_Crypt_Hmac_Exception('hash algorithm provided is not supported on this PHP installation; please enable the hash or mhash extensions');
+            throw new HMACException('hash algorithm provided is not supported on this PHP installation; please enable the hash or mhash extensions');
         }
         self::$_hashAlgorithm = $hash;
     }
@@ -165,11 +184,9 @@ class Zend_Crypt_Hmac extends Zend_Crypt
      */
     protected static function _getMhashDefinition($hashAlgorithm)
     {
-        for ($i = 0; $i <= mhash_count(); $i++)
-        {
+        for ($i = 0; $i <= mhash_count(); $i++) {
             $types[mhash_get_hash_name($i)] = $i;
         }
         return $types[strtoupper($hashAlgorithm)];
     }
-
 }

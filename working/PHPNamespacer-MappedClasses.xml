@@ -1843,18 +1843,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/DiffieHellman/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_DiffieHellman_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/DiffieHellman/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\DiffieHellman</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\DiffieHellman\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Crypt/DiffieHellmanException.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt</newNamespace>
+      <newClassName>DiffieHellmanException</newClassName>
+      <newFullyQualifiedName>Zend\Crypt\DiffieHellmanException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/DiffieHellman.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_DiffieHellman</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/DiffieHellman/DiffieHellman.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\DiffieHellman</newNamespace>
+      <newRelativeFilePath>Zend/Crypt/DiffieHellman.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt</newNamespace>
       <newClassName>DiffieHellman</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\DiffieHellman\DiffieHellman</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Crypt\DiffieHellman</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Exception.php</originalRelativeFilePath>
@@ -1867,18 +1867,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Hmac/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_Hmac_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/Hmac/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\Hmac</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\Hmac\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Crypt/HMACException.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt</newNamespace>
+      <newClassName>HMACException</newClassName>
+      <newFullyQualifiedName>Zend\Crypt\HMACException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Hmac.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_Hmac</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/Hmac/Hmac.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\Hmac</newNamespace>
-      <newClassName>Hmac</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\Hmac\Hmac</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Crypt/HMAC.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt</newNamespace>
+      <newClassName>HMAC</newClassName>
+      <newFullyQualifiedName>Zend\Crypt\HMAC</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Math/BigInteger/Bcmath.php</originalRelativeFilePath>
@@ -1907,10 +1907,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Math/BigInteger/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_Math_BigInteger_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/Math/BigInteger/BigIntegerInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Crypt/Math/BigInteger/BigIntegerCapable.php</newRelativeFilePath>
       <newNamespace>Zend\Crypt\Math\BigInteger</newNamespace>
-      <newClassName>BigIntegerInterface</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\Math\BigInteger\BigIntegerInterface</newFullyQualifiedName>
+      <newClassName>BigIntegerCapable</newClassName>
+      <newFullyQualifiedName>Zend\Crypt\Math\BigInteger\BigIntegerCapable</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Math/BigInteger.php</originalRelativeFilePath>
@@ -1939,34 +1939,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Rsa/Key/Private.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_Rsa_Key_Private</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/Rsa/Key/Private.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\Rsa\Key</newNamespace>
-      <newClassName>Private</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\Rsa\Key\Private</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Crypt/RSA/PrivateKey.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt\RSA</newNamespace>
+      <newClassName>PrivateKey</newClassName>
+      <newFullyQualifiedName>Zend\Crypt\RSA\PrivateKey</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Rsa/Key/Public.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_Rsa_Key_Public</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/Rsa/Key/Public.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\Rsa\Key</newNamespace>
-      <newClassName>Public</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\Rsa\Key\Public</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Crypt/Rsa/PublicKey.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt\RSA</newNamespace>
+      <newClassName>PublicKey</newClassName>
+      <newFullyQualifiedName>Zend\Crypt\RSA\PublicKey</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Rsa/Key.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_Rsa_Key</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/Rsa/Key/Key.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\Rsa\Key</newNamespace>
+      <newRelativeFilePath>Zend/Crypt/RSA/Key.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt\RSA</newNamespace>
       <newClassName>Key</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\Rsa\Key\Key</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Crypt\RSA\Key</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt/Rsa.php</originalRelativeFilePath>
       <originalClassName>Zend_Crypt_Rsa</originalClassName>
-      <newRelativeFilePath>Zend/Crypt/Rsa/Rsa.php</newRelativeFilePath>
-      <newNamespace>Zend\Crypt\Rsa</newNamespace>
-      <newClassName>Rsa</newClassName>
-      <newFullyQualifiedName>Zend\Crypt\Rsa\Rsa</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Crypt/RSA.php</newRelativeFilePath>
+      <newNamespace>Zend\Crypt</newNamespace>
+      <newClassName>RSA</newClassName>
+      <newFullyQualifiedName>Zend\Crypt\RSA</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Crypt.php</originalRelativeFilePath>

@@ -7163,114 +7163,114 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/Client/Adapter/Curl.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_Client_Adapter_Curl</originalClassName>
-      <newRelativeFilePath>Zend/Http/Client/Adapter/Curl.php</newRelativeFilePath>
-      <newNamespace>Zend\Http\Client\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/HTTP/Client/Adapter/Curl.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP\Client\Adapter</newNamespace>
       <newClassName>Curl</newClassName>
-      <newFullyQualifiedName>Zend\Http\Client\Adapter\Curl</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\HTTP\Client\Adapter\Curl</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/Client/Adapter/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_Client_Adapter_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Http/Client/Adapter/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Http\Client\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/HTTP/Client/Adapter/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP\Client\Adapter</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Http\Client\Adapter\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\HTTP\Client\Adapter\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/Client/Adapter/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_Client_Adapter_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Http/Client/Adapter/AdapterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Http\Client\Adapter</newNamespace>
-      <newClassName>AdapterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Http\Client\Adapter\AdapterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/HTTP/Client/Adapter.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP\Client</newNamespace>
+      <newClassName>Adapter</newClassName>
+      <newFullyQualifiedName>Zend\HTTP\Client\Adapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/Client/Adapter/Proxy.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_Client_Adapter_Proxy</originalClassName>
-      <newRelativeFilePath>Zend/Http/Client/Adapter/Proxy.php</newRelativeFilePath>
-      <newNamespace>Zend\Http\Client\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/HTTP/Client/Adapter/Proxy.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP\Client\Adapter</newNamespace>
       <newClassName>Proxy</newClassName>
-      <newFullyQualifiedName>Zend\Http\Client\Adapter\Proxy</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\HTTP\Client\Adapter\Proxy</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/Client/Adapter/Socket.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_Client_Adapter_Socket</originalClassName>
-      <newRelativeFilePath>Zend/Http/Client/Adapter/Socket.php</newRelativeFilePath>
-      <newNamespace>Zend\Http\Client\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/HTTP/Client/Adapter/Socket.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP\Client\Adapter</newNamespace>
       <newClassName>Socket</newClassName>
-      <newFullyQualifiedName>Zend\Http\Client\Adapter\Socket</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\HTTP\Client\Adapter\Socket</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/Client/Adapter/Stream.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_Client_Adapter_Stream</originalClassName>
-      <newRelativeFilePath>Zend/Http/Client/Adapter/Stream.php</newRelativeFilePath>
-      <newNamespace>Zend\Http\Client\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/HTTP/Client/Adapter/Stream.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP\Client\Adapter</newNamespace>
       <newClassName>Stream</newClassName>
-      <newFullyQualifiedName>Zend\Http\Client\Adapter\Stream</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\HTTP\Client\Adapter\Stream</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/Client/Adapter/Test.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_Client_Adapter_Test</originalClassName>
-      <newRelativeFilePath>Zend/Http/Client/Adapter/Test.php</newRelativeFilePath>
-      <newNamespace>Zend\Http\Client\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/HTTP/Client/Adapter/Test.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP\Client\Adapter</newNamespace>
       <newClassName>Test</newClassName>
-      <newFullyQualifiedName>Zend\Http\Client\Adapter\Test</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\HTTP\Client\Adapter\Test</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/Client/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_Client_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Http/Client/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Http\Client</newNamespace>
+      <newRelativeFilePath>Zend/HTTP/Client/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP\Client</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Http\Client\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\HTTP\Client\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/Client.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_Client</originalClassName>
-      <newRelativeFilePath>Zend/Http/Client/Client.php</newRelativeFilePath>
-      <newNamespace>Zend\Http\Client</newNamespace>
+      <newRelativeFilePath>Zend/HTTP/Client.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP</newNamespace>
       <newClassName>Client</newClassName>
-      <newFullyQualifiedName>Zend\Http\Client\Client</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\HTTP\Client</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/Cookie.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_Cookie</originalClassName>
-      <newRelativeFilePath>Zend/Http/Cookie.php</newRelativeFilePath>
-      <newNamespace>Zend\Http</newNamespace>
+      <newRelativeFilePath>Zend/HTTP/Cookie.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP</newNamespace>
       <newClassName>Cookie</newClassName>
-      <newFullyQualifiedName>Zend\Http\Cookie</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\HTTP\Cookie</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/CookieJar.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_CookieJar</originalClassName>
-      <newRelativeFilePath>Zend/Http/CookieJar.php</newRelativeFilePath>
-      <newNamespace>Zend\Http</newNamespace>
+      <newRelativeFilePath>Zend/HTTP/CookieJar.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP</newNamespace>
       <newClassName>CookieJar</newClassName>
-      <newFullyQualifiedName>Zend\Http\CookieJar</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\HTTP\CookieJar</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Http/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Http</newNamespace>
+      <newRelativeFilePath>Zend/HTTP/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Http\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\HTTP\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/Response/Stream.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_Response_Stream</originalClassName>
-      <newRelativeFilePath>Zend/Http/Response/Stream.php</newRelativeFilePath>
-      <newNamespace>Zend\Http\Response</newNamespace>
+      <newRelativeFilePath>Zend/HTTP/Response/Stream.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP\Response</newNamespace>
       <newClassName>Stream</newClassName>
-      <newFullyQualifiedName>Zend\Http\Response\Stream</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\HTTP\Response\Stream</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/Response.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_Response</originalClassName>
-      <newRelativeFilePath>Zend/Http/Response/Response.php</newRelativeFilePath>
-      <newNamespace>Zend\Http\Response</newNamespace>
+      <newRelativeFilePath>Zend/HTTP/Response/Response.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP\Response</newNamespace>
       <newClassName>Response</newClassName>
-      <newFullyQualifiedName>Zend\Http\Response\Response</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\HTTP\Response\Response</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Adapter/Default.php</originalRelativeFilePath>

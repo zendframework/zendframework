@@ -25,7 +25,8 @@
  * @namespace
  */
 namespace Zend\HTTP\Client\Adapter;
-use Zend\HTTP\Response;
+use Zend\HTTP\Client\Adapter as HTTPAdapter,
+    Zend\HTTP\Response;
 
 /**
  * A sockets based (stream_socket_client) adapter class for Zend_Http_Client. Can be used
@@ -33,7 +34,7 @@ use Zend\HTTP\Response;
  *
  * @uses       \Zend\HTTP\Client\Client
  * @uses       \Zend\HTTP\Client\Adapter\Exception
- * @uses       \Zend\HTTP\Client\Adapter\AdapterInterface
+ * @uses       \Zend\HTTP\Client\Adapter
  * @uses       \Zend\HTTP\Client\Adapter\Stream
  * @uses       \Zend\HTTP\Response\Response
  * @uses       \Zend\URI\URL
@@ -44,7 +45,7 @@ use Zend\HTTP\Response;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Socket 
-    implements AdapterInterface, Stream
+    implements HTTPAdapter, Stream
 {
     /**
      * The socket for server connection

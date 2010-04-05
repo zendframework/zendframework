@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20855 -->
 <sect1 id="zend.service.slideshare">
-
-    <title>導入</title>
+    <title>Zend_Service_SlideShare</title>
 
     <para>
         <classname>Zend_Service_SlideShare</classname> コンポーネントは、
@@ -12,7 +11,7 @@
         これは、スライドショーをオンラインで公開するためのサービスです。
         このコンポーネントを使用すると、
         公開されているスライドをウェブサイトに埋め込んだり
-        新しいスライドショーを自分のアカウントにアップロードしたりすることができます。
+        新しいスライドショーを自分のアカウントにアップロードしたりできます。
     </para>
 
     <sect2 id="zend.service.slideshare.basicusage">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21661 -->
+<!-- EN-Revision: 21741 -->
 <sect1 id="zend.translate.using">
 
     <title>翻訳アダプタの使用法</title>
@@ -30,7 +30,7 @@ print "Here is line two\n";
     </para>
 
     <para>
-        次のステップは、既存のコードに Zend Translate を組み込むことです。
+        次のステップは、既存のコードに <classname>Zend Translate</classname> を組み込むことです。
         もちろん、あとからコードを変更するよりも
         最初から翻訳を意識したコードを書くほうがずっと簡単です。
     </para>

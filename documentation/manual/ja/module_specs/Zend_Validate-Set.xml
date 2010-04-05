@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21562 -->
+<!-- EN-Revision: 21762 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -79,13 +79,9 @@
 
     <xi:include href="Zend_Validate-Db.xml" />
 
-    <sect2 id="zend.validate.set.digits">
-        <title>Digits</title>
-
-        <para>
-            <code>$value</code> が数字のみで構成されている場合にのみ <constant>TRUE</constant> を返します。
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-Digits.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Digits.xml" /></xi:fallback>
+    </xi:include>
 
     <xi:include href="Zend_Validate-EmailAddress.xml" />
 

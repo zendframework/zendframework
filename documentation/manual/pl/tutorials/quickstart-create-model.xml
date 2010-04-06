@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20879 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: yes -->
 <sect1 id="learning.quickstart.create-model">
     <title>Utworzenie modelu oraz tabeli w bazie danych</title>
@@ -542,7 +542,8 @@ Updating project profile '.zfproject.xml'
 ]]></programlisting>
 
     <para>
-        Nowo utworzoną klasę można zmodyfikować tak aby ułatwić umieszczanie danych 
+        Nowo utworzoną klasę <acronym>PHP</acronym> można zmodyfikować tak aby
+        ułatwić umieszczanie danych 
         w modelu poprzez przekazanie tablicy do konstruktora lub do metody
         <methodname>setOptions()</methodname>. Ostatecznie model znajdujący się w
         <filename>application/models/Guestbook.php</filename> powinien wyglądać następująco:

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20996 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: yes -->
 <sect1 id="learning.quickstart.create-project">
     <title>Utworzenie projektu</title>
@@ -12,8 +12,8 @@
         <title>Instalacja Zend Framework</title>
 
         <para>
-            Najprostszym sposobem pobrania Zend Framework razem z całym środowiskiem PHP jest
-            zainstalowanie
+            Najprostszym sposobem pobrania Zend Framework razem z całym środowiskiem
+            <acronym>PHP</acronym> jest zainstalowanie
             <ulink url="http://www.zend.com/en/products/server-ce/downloads">Zend Server</ulink>.
             Zend Server zawiera instalatory dla Mac OS X, Windows, Fedora Core oraz Ubuntu.
             Oprócz tego dostępna jest uniwersalna paczka instalacyjna kompatybilna z większością
@@ -176,7 +176,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             Sam Zend Framework nie wymaga konfiguracji ale tworzona aplikacja - najczęściej tak.
             Standardowo plik konfiguracyjny umieszczony jest w
             <filename>application/configs/application.ini</filename>. Zawiera on podstawowe
-            instrukcje ustawienia środowiska PHP (np. włączanie/wyłączanie raportowania błędów),
+            instrukcje ustawienia środowiska <acronym>PHP</acronym>
+            (np. włączanie/wyłączanie raportowania błędów),
             wskazanie ścieżki i klasy <classname>Bootstrap</classname> oraz ścieżkę do katalogu
             kontrolerów akcji. Domyślny plik wygląda następująco:
         </para>
@@ -310,7 +311,8 @@ class ErrorController extends Zend_Controller_Action
         <title>Widoki (views)</title>
 
         <para>
-            Widoki (view scripts) w Zend Framework są napisane w starym dobrym PHP. Domyślnie
+            Widoki (view scripts) w Zend Framework są napisane w starym dobrym
+            <acronym>PHP</acronym>. Domyślnie
             znajdują się w <filename>application/views/scripts/</filename>, gdzie są w dalszym
             stopniu dzielone wg kontrolerów do których należą. W obecnym przypadku istnieją
             dwa kontrolery: <classname>IndexController</classname> oraz
@@ -322,8 +324,9 @@ class ErrorController extends Zend_Controller_Action
         </para>
 
         <para>
-            Skrypty widoków mogą zawierać dowolny kod HTML i używać <code>&lt;?php</code> jako tagów
-            otwarcia i <code>?&gt;</code> jako tagów zamknięcia dla poleceń PHP.
+            Skrypty widoków mogą zawierać dowolny kod <acronym>HTML</acronym>
+            i używać <code>&lt;?php</code> jako tagów
+            otwarcia i <code>?&gt;</code> jako tagów zamknięcia dla poleceń <acronym>PHP</acronym>.
         </para>
 
         <para>
@@ -383,7 +386,7 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             Skrypt <filename>error/error.phtml</filename> jest nieco bardziej interesujący - używa
-            instrukcji warunkowych PHP:
+            instrukcji warunkowych <acronym>PHP</acronym>:
         </para>
 
         <programlisting language="php"><![CDATA[

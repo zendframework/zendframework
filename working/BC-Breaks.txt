@@ -125,6 +125,9 @@ Zend_Url
  * Component renamed to Zend\URI, with class URL
  * Zend\URI\URL now provides comprehensive support for URLs, via parse_url()
  * Removed Zend_Url::factory(), and Zend_Url_Http as unnecessary.
+ * "getUri()" becomes "generate()"
+ * "check()" becomes "isValid()", and is no longer static
+ * "fromString()" has been removed; simply pass to the constructor
 
 Zend_HTTP
  * Component renamed to Zend_HTTP

@@ -25,7 +25,7 @@
 namespace Zend\Validator\Hostname;
 
 /**
- * Ressource file for com and net idn validation
+ * Resource file for com and net idn validation
  *
  * @category   Zend
  * @package    Zend_Validate

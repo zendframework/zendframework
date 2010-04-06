@@ -103,7 +103,7 @@ class ProxyAdapterTest extends SocketTest
         ));
 
         $this->client->setUri($this->baseuri . 'testGetLastRequest.php');
-        $res = $this->client->request(\Zend\HTTP\Client\Client::TRACE);
+        $res = $this->client->request(\Zend\HTTP\Client::TRACE);
         if ($res->getStatus() == 405 || $res->getStatus() == 501) {
             $this->markTestSkipped("Server does not allow the TRACE method");
         }

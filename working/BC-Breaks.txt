@@ -57,6 +57,15 @@ Zend_Measure:
  * "Zend_Measure" prefix now becomes "Zend\Measure" namespace
  * "Zend_Measure_Abstract" becomes "Zend\Measure\AbstractMeasure"
 
+Zend_Memory:
+ * "Zend_Memory" prefix now becomes "Zend\Memory" namespace
+ * "Zend_Memory" class and "Zend_Memory::factory()" method are removed,
+   "new Zend\Memory\MemoryManager(Zend\Cache\Frontend $cache = null)" has to be used 
+   directly now.
+ * "Zend_Memory_Container" prefix now becomes "Zend\Memory\Container" namespace
+ * "Zend_Memory_Manager" becomes "Zend\Memory\MemoryManager"
+
+
 Zend_Filter:
  * "Filter" broken into "FilterChain" and "StaticFilter"
    * For filter chains, use the new FilterChain class
@@ -97,9 +106,12 @@ Zend_Server:
  * "Zend_Server_Method" prefix now becomes "Zend\Server\Method" namespace
  * "Zend_Server_Reflection" prefix now becomes "Zend\Server\Reflection" namespace
  * "Zend_Server_Reflection" becomes "Zend\Server\Reflection\Reflection"
- * "Zend_Server_Reflection_Class" becomes "Zend\Server\Reflection\ClassReflection"
+ * "Zend_Server_Reflection_Class"       becomes "Zend\Server\Reflection\ReflectionClass"
+ * "Zend_Server_Reflection_Function"    becomes "Zend\Server\Reflection\FunctionReflection"
+ * "Zend_Server_Reflection_Method"      becomes "Zend\Server\Reflection\ReflectionMethod"
+ * "Zend_Server_Reflection_Parameter"   becomes "Zend\Server\Reflection\ReflectionParameter"
+ * "Zend_Server_Reflection_ReturnValue" becomes "Zend\Server\Reflection\ReflectionReturnValue"
  * "Zend_Server_Reflection_Function_Abstract" becomes "Zend\Server\Reflection\AbstractFunction"
- * "Zend_Server_Reflection_Function" becomes "Zend\Server\Reflection\FunctionReflection"
  
 Zend_Translate
  * "Zend_Translate" prefix now becomes "Zend\Translator" namespace
@@ -129,3 +141,11 @@ Zend_Dom
  * "Zend_Dom_Query_Result" becomes "Zend\Dom\NodeList"
  * "Zend_Dom_Query_Css2Xpath" becomes "Zend\Dom\Css2Xpath"
  * "Zend_Dom_Query::query()" becomes "Zend\Dom\Query::execute()"
+
+Zend_Url
+ * Component renamed to Zend\URI, with class URL
+ * Zend\URI\URL now provides comprehensive support for URLs, via parse_url()
+ * Removed Zend_Url::factory(), and Zend_Url_Http as unnecessary.
+
+Zend_HTTP
+ * Component renamed to Zend_HTTP

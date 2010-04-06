@@ -142,7 +142,7 @@ class CurlTest extends CommonHttpTests
             'adapter'     => 'Zend\Http\Client\Adapter\Curl',
             'curloptions' => array(CURLOPT_CLOSEPOLICY => true),
         );
-        $this->client = new \Zend\HTTP\Client\Client($this->client->getUri(true), $config);
+        $this->client = new \Zend\HTTP\Client($this->client->getUri(true), $config);
 
         $this->client->request('GET');
         $this->fail();

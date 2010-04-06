@@ -25,7 +25,8 @@
  * @namespace
  */
 namespace Zend\HTTP\Client\Adapter;
-use Zend\HTTP\Client;
+use Zend\HTTP\Client\Adapter as HTTPAdapter,
+    Zend\HTTP\Client;
 
 /**
  * An adapter class for Zend_Http_Client based on the curl extension.
@@ -34,7 +35,7 @@ use Zend\HTTP\Client;
  * @uses       \Zend\HTTP\Client\Client
  * @uses       \Zend\HTTP\Client\Exception
  * @uses       \Zend\HTTP\Client\Adapter\Exception
- * @uses       \Zend\HTTP\Client\Adapter\AdapterInterface
+ * @uses       \Zend\HTTP\Client\Adapter
  * @uses       \Zend\HTTP\Client\Adapter\Stream
  * @uses       \Zend\URI\URL
  * @category   Zend
@@ -44,7 +45,7 @@ use Zend\HTTP\Client;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Curl 
-    implements AdapterInterface, Stream
+    implements HTTPAdapter, Stream
 {
     /**
      * Parameters array

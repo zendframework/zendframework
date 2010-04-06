@@ -24,7 +24,8 @@
  * @namespace
  */
 namespace Zend\HTTP\Client\Adapter;
-use Zend\HTTP\Response;
+use Zend\HTTP\Client\Adapter as HTTPAdapter,
+    Zend\HTTP\Response;
 
 /**
  * A testing-purposes adapter.
@@ -35,7 +36,7 @@ use Zend\HTTP\Response;
  * set the expected response using the setResponse() method.
  *
  * @uses       \Zend\HTTP\Client\Adapter\Exception
- * @uses       \Zend\HTTP\Client\Adapter\AdapterInterface
+ * @uses       \Zend\HTTP\Client\Adapter
  * @uses       \Zend\HTTP\Response\Response
  * @uses       \Zend\URI\URL
  * @category   Zend
@@ -44,7 +45,7 @@ use Zend\HTTP\Response;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Test implements AdapterInterface
+class Test implements HTTPAdapter
 {
     /**
      * Parameters array

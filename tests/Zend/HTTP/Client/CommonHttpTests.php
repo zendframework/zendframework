@@ -24,10 +24,10 @@
  * @namespace
  */
 namespace ZendTest\HTTP\Client;
-use Zend\HTTP\Client;
-use Zend\HTTP;
-use Zend\HTTP\Client\Adapter;
-use Zend\HTTP\Response;
+use Zend\HTTP\Client as HTTPClient,
+    Zend\HTTP,
+    Zend\HTTP\Client\Adapter,
+    Zend\HTTP\Response;
 
 
 /**
@@ -104,7 +104,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
             $uri = $this->baseuri . $name . '.php';
 
             $this->_adapter = new $this->config['adapter'];
-            $this->client = new Client\Client($uri, $this->config);
+            $this->client = new HTTPClient($uri, $this->config);
             $this->client->setAdapter($this->_adapter);
 
         } else {
@@ -153,7 +153,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
             'X-Powered-By' => 'My Glorious Golden Ass',
         ));
 
-        $res = $this->client->request(Client\Client::TRACE);
+        $res = $this->client->request(HTTPClient::TRACE);
         if ($res->getStatus() == 405 || $res->getStatus() == 501) {
             $this->markTestSkipped("Server does not allow the TRACE method");
         }
@@ -188,7 +188,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     public function testPostDataUrlEncoded($params)
     {
         $this->client->setUri($this->baseuri . 'testPostData.php');
-        $this->client->setEncType(Client\Client::ENC_URLENCODED);
+        $this->client->setEncType(HTTPClient::ENC_URLENCODED);
         $this->client->setParameterPost($params);
         $res = $this->client->request('POST');
         $this->assertEquals(serialize($params), $res->getBody(), "POST data integrity test failed");
@@ -203,7 +203,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     public function testPostDataMultipart($params)
     {
         $this->client->setUri($this->baseuri . 'testPostData.php');
-        $this->client->setEncType(Client\Client::ENC_FORMDATA);
+        $this->client->setEncType(HTTPClient::ENC_FORMDATA);
         $this->client->setParameterPost($params);
         $res = $this->client->request('POST');
         $this->assertEquals(serialize($params), $res->getBody(), "POST data integrity test failed");

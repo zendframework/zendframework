@@ -20,15 +20,14 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Memory_MemoryManagerTest::main');
-}
-
 /**
- * Test helper
+ * @namespace
  */
+namespace ZendTest\Memory;
+use Zend\Cache\Cache;
+use Zend\Memory;
+use Zend\Memory\Container;
 
-/** Zend_Memory */
 
 /**
  * @category   Zend
@@ -38,65 +37,43 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Memory
  */
-class Zend_Memory_MemoryManagerTest extends PHPUnit_Framework_TestCase
+class MemoryManagerTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
+    /**
+     * Cache object
+     *
+     * @var \Zend\Cache\Frontend
+     */
+    private $_cache = null;
 
     public function setUp()
     {
-        $tmpDir = sys_get_temp_dir() . '/zend_memory';
-        $this->_removeCacheDir($tmpDir);
-        mkdir($tmpDir);
-        $this->cacheDir = $tmpDir;
+        $this->_cache = Cache::factory('Core', 'File',
+                 array('lifetime' => 1, 'automatic_serialization' => true),
+                 array('cache_dir' => __DIR__ . '/_files/'));
     }
 
-    protected function _removeCacheDir($dir)
+
+    public function tearDown()
     {
-        if (!file_exists($dir)) {
-            return true;
-        }
-
-        if (!is_dir($dir) || is_link($dir)) {
-            return unlink($dir);
-        }
-
-        foreach (scandir($dir) as $item) {
-            if ($item == '.' || $item == '..') {
-                continue;
-            }
-            $this->_removeCacheDir($dir . '/' . $item);
-        }
-
-        return rmdir($dir);
+        $this->_cache->clean(Cache::CLEANING_MODE_ALL);
+        $this->_cache = null;
     }
 
     /**
      * tests the Memory Manager creation
-     *
      */
     public function testCreation()
     {
-        /** 'File' backend */
-        $backendOptions = array('cache_dir' => $this->cacheDir); // Directory where to put the cache files
-        $memoryManager = Zend_Memory::factory('File', $backendOptions);
-        $this->assertTrue($memoryManager instanceof Zend_Memory_Manager);
-    }
+        /** Without caching */
+        $memoryManager = new Memory\MemoryManager();
+        $this->assertTrue($memoryManager instanceof Memory\MemoryManager);
+        unset($memoryManager);
 
-
-    /**
-     * tests the Memory Manager backends naming processing
-     *
-     * @group ZF-9023
-     */
-    public function testBackendNamingProcessing()
-    {
-        /** 'File' backend */
-        $backendOptions = array('cache_dir' => $this->cacheDir); // Directory where to put the cache files
-        $memoryManager = Zend_Memory::factory('fIlE', $backendOptions);
+        /** Caching using 'File' backend */
+        $memoryManager = new Memory\MemoryManager($this->_cache);
+        $this->assertTrue($memoryManager instanceof Memory\MemoryManager);
+        unset($memoryManager);
     }
 
     /**
@@ -104,9 +81,7 @@ class Zend_Memory_MemoryManagerTest extends PHPUnit_Framework_TestCase
      */
     public function testSettings()
     {
-        /** 'File' backend */
-        $backendOptions = array('cache_dir' => $this->cacheDir); // Directory where to put the cache files
-        $memoryManager = Zend_Memory::factory('File', $backendOptions);
+        $memoryManager = new Memory\MemoryManager($this->_cache);
 
         // MemoryLimit
         $memoryManager->setMemoryLimit(2*1024*1024 /* 2Mb */);
@@ -124,24 +99,22 @@ class Zend_Memory_MemoryManagerTest extends PHPUnit_Framework_TestCase
      */
     public function testCreate()
     {
-        /** 'File' backend */
-        $backendOptions = array('cache_dir' => $this->cacheDir); // Directory where to put the cache files
-        $memoryManager = Zend_Memory::factory('File', $backendOptions);
+        $memoryManager = new Memory\MemoryManager($this->_cache);
 
         $memObject1 = $memoryManager->create('Value of object 1');
-        $this->assertTrue($memObject1 instanceof Zend_Memory_AccessController);
+        $this->assertTrue($memObject1 instanceof Container\AccessController);
         $this->assertEquals($memObject1->getRef(), 'Value of object 1');
 
         $memObject2 = $memoryManager->create();
-        $this->assertTrue($memObject2 instanceof Zend_Memory_AccessController);
+        $this->assertTrue($memObject2 instanceof Container\AccessController);
         $this->assertEquals($memObject2->getRef(), '');
 
         $memObject3 = $memoryManager->createLocked('Value of object 3');
-        $this->assertTrue($memObject3 instanceof Zend_Memory_Container_Locked);
+        $this->assertTrue($memObject3 instanceof Container\Locked);
         $this->assertEquals($memObject3->getRef(), 'Value of object 3');
 
         $memObject4 = $memoryManager->createLocked();
-        $this->assertTrue($memObject4 instanceof Zend_Memory_Container_Locked);
+        $this->assertTrue($memObject4 instanceof Container\Locked);
         $this->assertEquals($memObject4->getRef(), '');
     }
 
@@ -151,9 +124,7 @@ class Zend_Memory_MemoryManagerTest extends PHPUnit_Framework_TestCase
      */
     public function testProcessing()
     {
-        /** 'File' backend */
-        $backendOptions = array('cache_dir' => $this->cacheDir); // Directory where to put the cache files
-        $memoryManager = Zend_Memory::factory('File', $backendOptions);
+        $memoryManager = new Memory\MemoryManager($this->_cache);
 
         $memoryManager->setMinSize(256);
         $memoryManager->setMemoryLimit(1024*32);
@@ -191,8 +162,4 @@ class Zend_Memory_MemoryManagerTest extends PHPUnit_Framework_TestCase
             }
         }
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Memory_MemoryManagerTest::main') {
-    Zend_Memory_MemoryManagerTest::main();
 }

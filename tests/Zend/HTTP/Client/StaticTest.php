@@ -24,9 +24,9 @@
  * @namespace
  */
 namespace ZendTest\HTTP\Client;
-use Zend\URI;
-use Zend\HTTP\Client;
-use Zend\HTTP;
+use Zend\URI,
+    Zend\HTTP\Client as HTTPClient,
+    Zend\HTTP;
 
 /**
  * This Testsuite includes all Zend_Http_Client tests that do not rely
@@ -144,7 +144,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $qstr = 'foo=bar&foo=baz';
 
         $this->_client->setUri('http://example.com/test/?' . $qstr);
-        $this->_client->setAdapter('Zend\HTTP\Client\Adapter\Test');
+        $this->_client->setAdapter('\\Zend\\HTTP\\Client\\Adapter\\Test');
 
         $res = $this->_client->request('GET');
         $this->assertContains($qstr, $this->_client->getLastRequest(),
@@ -226,7 +226,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testExceptUnsupportedAuthStatic()
     {
-        Client\Client::encodeAuthHeader('shahar', '1234', 'SuperStrongAlgo');
+        HTTPClient::encodeAuthHeader('shahar', '1234', 'SuperStrongAlgo');
     }
 
     /**
@@ -478,7 +478,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     {
         $this->_client->setAdapter('Zend\HTTP\Client\Adapter\Test');
         $this->_client->setUri('http://example.com');
-        $this->_client->setEncType(Client\Client::ENC_FORMDATA);
+        $this->_client->setEncType(HTTPClient::ENC_FORMDATA);
 
         $this->_client->setParameterPost('test', array(
             'v0.1',
@@ -596,14 +596,14 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class MockClient extends Client\Client
+class MockClient extends HTTPClient
 {
     public $config = array(
         'maxredirects'    => 5,
         'strictredirects' => false,
         'useragent'       => 'Zend_Http_Client',
         'timeout'         => 10,
-        'adapter'         => 'Zend\HTTP\Client\Adapter\Socket',
+        'adapter'         => 'Zend\\HTTP\\Client\\Adapter\\Socket',
         'httpversion'     => self::HTTP_1,
         'keepalive'       => false,
         'storeresponse'   => true,

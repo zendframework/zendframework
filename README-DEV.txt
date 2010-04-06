@@ -52,7 +52,7 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 [ ] Zend_Ldap
 [ ] Zend_Mime -> [ ] Zend_Mail
 [ ] Zend_Markup
-[ ] Zend_Memory -> [ ] Zend_Pdf -> [ ] Zend_Barcode
+[X] Zend_Memory -> [ ] Zend_Pdf -> [ ] Zend_Barcode
 [ ] Zend_Db (except Firebug profiler) -> [ ] Zend_Feed, [ ] Zend_Queue
 [X] Zend_Text -> [ ] Zend_ProgressBar -> [ ] Zend_File
 [ ] Zend_Search

@@ -21,30 +21,35 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\XmlRpc\Server;
+
+/**
  * XML-RPC system.* methods
  *
- * @uses       Zend_XmlRpc_Request
- * @uses       Zend_XmlRpc_Server_Exception
+ * @uses       Zend\XmlRpc\Request
+ * @uses       Zend\XmlRpc\Server\Exception
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_XmlRpc_Server_System
+class System
 {
     /**
-     * @var Zend_XmlRpc_Server
+     * @var \Zend\XmlRpc\Server
      */
     protected $_server;
 
     /**
      * Constructor
      *
-     * @param  Zend_XmlRpc_Server $server
+     * @param  \Zend\XmlRpc\Server\Server $server
      * @return void
      */
-    public function __construct(Zend_XmlRpc_Server $server)
+    public function __construct(\Zend\XmlRpc\Server $server)
     {
         $this->_server = $server;
     }
@@ -72,7 +77,7 @@ class Zend_XmlRpc_Server_System
     {
         $table = $this->_server->getDispatchTable();
         if (!$table->hasMethod($method)) {
-            throw new Zend_XmlRpc_Server_Exception('Method "' . $method . '" does not exist', 640);
+            throw new Exception('Method "' . $method . '" does not exist', 640);
         }
 
         return $table->getMethod($method)->getMethodHelp();
@@ -88,7 +93,7 @@ class Zend_XmlRpc_Server_System
     {
         $table = $this->_server->getDispatchTable();
         if (!$table->hasMethod($method)) {
-            throw new Zend_XmlRpc_Server_Exception('Method "' . $method . '" does not exist', 640);
+            throw new Exception('Method "' . $method . '" does not exist', 640);
         }
         $method = $table->getMethod($method)->toArray();
         return $method['prototypes'];
@@ -133,18 +138,18 @@ class Zend_XmlRpc_Server_System
 
             if (!$fault) {
                 try {
-                    $request = new Zend_XmlRpc_Request();
+                    $request = new \Zend\XmlRpc\Request();
                     $request->setMethod($method['methodName']);
                     $request->setParams($method['params']);
                     $response = $this->_server->handle($request);
-                    if ($response instanceof Zend_XmlRpc_Fault
+                    if ($response instanceof \Zend\XmlRpc\Fault
                         || $response->isFault()
                     ) {
                         $fault = $response;
                     } else {
                         $responses[] = $response->getReturnValue();
                     }
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     $fault = $this->_server->fault($e);
                 }
             }

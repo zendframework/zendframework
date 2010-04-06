@@ -21,9 +21,18 @@
  */
 
 /**
- * Abstract XML generator adapter
+ * @namespace
  */
-abstract class Zend_XmlRpc_Generator_GeneratorAbstract
+namespace Zend\XmlRpc\Generator;
+
+use Zend\XmlRpc\Generator as GeneratorAdapter;
+
+/**
+ * Abstract XML generator adapter
+ *
+ * @uses Zend\XmlRpc\Generator
+ */
+abstract class AbstractGenerator implements GeneratorAdapter
 {
     /**
      * XML encoding string
@@ -39,9 +48,16 @@ abstract class Zend_XmlRpc_Generator_GeneratorAbstract
      */
     public function __construct($encoding = 'UTF-8')
     {
-        $this->_encoding = $encoding;
+        $this->setEncoding($encoding);
         $this->_init();
     }
+
+    /**
+     * Initialize internal objects
+     * 
+     * @return void
+     */
+    abstract protected function _init();
 
     /**
      * Start XML element
@@ -78,13 +94,6 @@ abstract class Zend_XmlRpc_Generator_GeneratorAbstract
     }
 
     /**
-     * Return XML as a string
-     *
-     * @return string
-     */
-    abstract public function saveXml();
-
-    /**
      * Return encoding
      * 
      * @return string
@@ -92,6 +101,18 @@ abstract class Zend_XmlRpc_Generator_GeneratorAbstract
     public function getEncoding()
     {
         return $this->_encoding;
+    }
+
+    /**
+     * Set XML encoding
+     * 
+     * @param  string $encoding 
+     * @return Zend\XmlRpc\Generator\AbstractGenerator
+     */
+    public function setEncoding($encoding)
+    {
+        $this->_encoding = $encoding;
+        return $this;
     }
 
     /**
@@ -119,7 +140,7 @@ abstract class Zend_XmlRpc_Generator_GeneratorAbstract
     /**
      * Removes XML declaration from a string
      *
-     * @param string $xml
+     * @param  string $xml
      * @return string
      */
     public function stripDeclaration($xml)

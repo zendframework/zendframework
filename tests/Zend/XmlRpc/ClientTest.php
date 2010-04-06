@@ -20,9 +20,16 @@
  * @version $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\XmlRpc;
 
-
-
+use Zend\HTTP\Client\Adapter,
+    Zend\HTTP,
+    Zend\XmlRpc\Client,
+    Zend\XmlRpc\Value,
+    Zend\XmlRpc;
 
 /**
  * Test case for Zend_XmlRpc_Value
@@ -34,7 +41,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
-class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
+class ClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_Http_Client_Adapter_Abstract
@@ -53,11 +60,11 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->httpAdapter = new Zend_Http_Client_Adapter_Test();
-        $this->httpClient = new Zend_Http_Client('http://foo',
+        $this->httpAdapter = new Adapter\Test();
+        $this->httpClient = new HTTP\Client('http://foo',
                                     array('adapter' => $this->httpAdapter));
 
-        $this->xmlrpcClient = new Zend_XmlRpc_Client('http://foo');
+        $this->xmlrpcClient = new Client('http://foo');
         $this->xmlrpcClient->setHttpClient($this->httpClient);
     }
 
@@ -65,16 +72,16 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testGettingDefaultHttpClient()
     {
-        $xmlrpcClient = new Zend_XmlRpc_Client('http://foo');
+        $xmlrpcClient = new Client('http://foo');
         $httpClient = $xmlrpcClient->getHttpClient();
-        $this->assertType('Zend_Http_Client', $httpClient);
+        $this->assertType('Zend\\HTTP\\Client', $httpClient);
         $this->assertSame($httpClient, $xmlrpcClient->getHttpClient());
     }
 
     public function testSettingAndGettingHttpClient()
     {
-        $xmlrpcClient = new Zend_XmlRpc_Client('http://foo');
-        $httpClient = new Zend_Http_Client('http://foo');
+        $xmlrpcClient = new Client('http://foo');
+        $httpClient = new HTTP\Client('http://foo');
         $this->assertNotSame($httpClient, $xmlrpcClient->getHttpClient());
 
         $xmlrpcClient->setHttpClient($httpClient);
@@ -83,7 +90,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testSettingHttpClientViaContructor()
     {
-        $xmlrpcClient = new Zend_XmlRpc_Client('http://foo', $this->httpClient);
+        $xmlrpcClient = new Client('http://foo', $this->httpClient);
         $httpClient   = $xmlrpcClient->getHttpClient();
         $this->assertSame($this->httpClient, $httpClient);
     }
@@ -101,8 +108,8 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         $this->setServerResponseTo(true);
         $this->xmlrpcClient->call('foo');
 
-        $this->assertType('Zend_XmlRpc_Request', $this->xmlrpcClient->getLastRequest());
-        $this->assertType('Zend_XmlRpc_Response', $this->xmlrpcClient->getLastResponse());
+        $this->assertType('Zend\\XmlRpc\\Request', $this->xmlrpcClient->getLastRequest());
+        $this->assertType('Zend\\XmlRpc\\Response', $this->xmlrpcClient->getLastResponse());
     }
 
     public function testSuccessfulRpcMethodCallWithNoParameters()
@@ -180,7 +187,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         $expectedMethod = 'foo.bar';
         $expectedParams = array(
             'username',
-            new Zend_XmlRpc_Value_DateTime($time)
+            new Value\DateTime($time)
         );
         $expectedReturn = array('username', $time);
 
@@ -208,9 +215,9 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     {
         $time   = time();
         $params = array(
-            new Zend_XmlRpc_Value_Boolean(true),
-            new Zend_XmlRpc_Value_Integer(4),
-            new Zend_XmlRpc_Value_String('foo')
+            new Value\Boolean(true),
+            new Value\Integer(4),
+            new Value\String('foo')
         );
         $expect = array(true, 4, 'foo');
 
@@ -275,7 +282,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
         $expects = 'date.method response';
         $this->setServerResponseTo($expects);
-        $this->assertSame($expects, $this->xmlrpcClient->call('date.method', array(Zend_XmlRpc_Value::getXmlRpcValue(time(), Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME), 'foo')));
+        $this->assertSame($expects, $this->xmlrpcClient->call('date.method', array(Value::getXmlRpcValue(time(), Value::XMLRPC_TYPE_DATETIME), 'foo')));
     }
 
     public function testAllowsSkippingSystemCallForArrayStructLookup()
@@ -309,14 +316,8 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         $response = $this->makeHttpResponseFrom($body, $status, $message);
         $this->httpAdapter->setResponse($response);
 
-        try {
-            $this->xmlrpcClient->call('foo');
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertType('Zend_XmlRpc_Client_HttpException', $e);
-            $this->assertEquals($message, $e->getMessage());
-            $this->assertEquals($status, $e->getCode());
-        }
+        $this->setExpectedException('Zend\\XmlRpc\\Client\\HTTPException', $message, $status);
+        $this->xmlrpcClient->call('foo');
     }
 
     public function testRpcMethodCallThrowsOnXmlRpcFault()
@@ -324,27 +325,21 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         $code = 9;
         $message = 'foo';
 
-        $fault = new Zend_XmlRpc_Fault($code, $message);
+        $fault = new XmlRpc\Fault($code, $message);
         $xml = $fault->saveXml();
 
         $response = $this->makeHttpResponseFrom($xml);
         $this->httpAdapter->setResponse($response);
 
-        try {
-            $this->xmlrpcClient->call('foo');
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertType('Zend_XmlRpc_Client_FaultException', $e);
-            $this->assertEquals($message, $e->getMessage());
-            $this->assertEquals($code, $e->getCode());
-        }
+        $this->setExpectedException('Zend\\XmlRpc\\Client\\FaultException', $message, $code);
+        $this->xmlrpcClient->call('foo');
     }
 
     // Server Proxy
 
     public function testGetProxyReturnsServerProxy()
     {
-        $class = 'Zend_XmlRpc_Client_ServerProxy';
+        $class = 'Zend\\XmlRpc\\Client\\ServerProxy';
         $this->assertType($class, $this->xmlrpcClient->getProxy());
     }
 
@@ -396,16 +391,16 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testGettingDefaultIntrospector()
     {
-        $xmlrpcClient = new Zend_XmlRpc_Client('http://foo');
+        $xmlrpcClient = new Client('http://foo');
         $introspector = $xmlrpcClient->getIntrospector();
-        $this->assertType('Zend_XmlRpc_Client_ServerIntrospection', $introspector);
+        $this->assertType('Zend\\XmlRpc\\Client\\ServerIntrospection', $introspector);
         $this->assertSame($introspector, $xmlrpcClient->getIntrospector());
     }
 
     public function testSettingAndGettingIntrospector()
     {
-        $xmlrpcClient = new Zend_XmlRpc_Client('http://foo');
-        $introspector = new Zend_XmlRpc_Client_ServerIntrospection($xmlrpcClient);
+        $xmlrpcClient = new Client('http://foo');
+        $introspector = new Client\ServerIntrospection($xmlrpcClient);
         $this->assertNotSame($introspector, $xmlrpcClient->getIntrospector());
 
         $xmlrpcClient->setIntrospector($introspector);
@@ -516,7 +511,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
         try {
             $i->getSignatureForEachMethodByMulticall();
-        } catch (Zend_XmlRpc_Client_IntrospectException $e) {
+        } catch (Client\IntrospectException $e) {
             $this->assertRegexp('/bad number/i', $e->getMessage());
         }
     }
@@ -538,7 +533,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
         try {
             $i->getSignatureForEachMethodByMulticall();
-        } catch (Zend_XmlRpc_Client_IntrospectException $e) {
+        } catch (Client\IntrospectException $e) {
             $this->assertRegexp('/got integer/i', $e->getMessage());
         }
     }
@@ -575,7 +570,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         $this->httpAdapter->setResponse($response);
 
         // system.multicall() will return a fault
-        $fault = new Zend_XmlRpc_Fault(7, 'bad method');
+        $fault = new XmlRpc\Fault(7, 'bad method');
         $xml = $fault->saveXml();
         $response = $this->makeHttpResponseFrom($xml);
         $this->httpAdapter->addResponse($response);
@@ -621,10 +616,10 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     public function testSettingNoHttpClientUriForcesClientToSetUri()
     {
         $baseUri = "http://foo:80";
-        $this->httpAdapter = new Zend_Http_Client_Adapter_Test();
-        $this->httpClient = new Zend_Http_Client(null, array('adapter' => $this->httpAdapter));
+        $this->httpAdapter = new Adapter\Test();
+        $this->httpClient = new HTTP\Client(null, array('adapter' => $this->httpAdapter));
 
-        $this->xmlrpcClient = new Zend_XmlRpc_Client($baseUri);
+        $this->xmlrpcClient = new Client($baseUri);
         $this->xmlrpcClient->setHttpClient($this->httpClient);
 
         $this->setServerResponseTo(array());
@@ -667,8 +662,8 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     {
         try
         {
-        	$introspector = new Zend_XmlRpc_Client_ServerIntrospection(
-                new Test_XmlRpc_Client('http://localhost/')
+        	$introspector = new Client\ServerIntrospection(
+                new TestClient('http://localhost/')
             );
             
             $signature = $introspector->getMethodSignature('add');
@@ -676,7 +671,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
                 $this->fail('Expected exception has not been thrown');
             }
         }
-        catch (Zend_XmlRpc_Client_IntrospectException $e) {
+        catch (Client\IntrospectException $e) {
             $this->assertEquals('Invalid signature for method "add"', $e->getMessage());
         }
     }
@@ -690,7 +685,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
     public function getServerResponseFor($nativeVars)
     {
-        $response = new Zend_XmlRpc_Response();
+        $response = new XmlRpc\Response();
         $response->setReturnValue($nativeVars);
         $xml = $response->saveXml();
 
@@ -711,13 +706,13 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     public function makeHttpResponseFor($nativeVars)
     {
         $response = $this->getServerResponseFor($nativeVars);
-        return Zend_Http_Response::fromString($response);
+        return \Zend\HTTP\Response\Response::fromString($response);
     }
 
     public function mockIntrospector()
     {
         $this->mockedIntrospector = $this->getMock(
-            'Zend_XmlRpc_Client_ServerIntrospection',
+            'Zend\\XmlRpc\\Client\\ServerIntrospection',
             array(),
             array(),
             '',
@@ -729,13 +724,13 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
     public function mockHttpClient()
     {
-        $this->mockedHttpClient = $this->getMock('Zend_Http_Client');
+        $this->mockedHttpClient = $this->getMock('Zend\\HTTP\\Client');
         $this->xmlrpcClient->setHttpClient($this->mockedHttpClient);
     }
 }
 
 /** related to ZF-8478 */
-class Python_SimpleXMLRPCServerWithUnsupportedIntrospection extends Zend_XmlRpc_Client_ServerProxy {
+class PythonSimpleXMLRPCServerWithUnsupportedIntrospection extends Client\ServerProxy {
     public function __call($method, $args) {
         if ($method == 'methodSignature') {
             return 'signatures not supported';
@@ -745,16 +740,11 @@ class Python_SimpleXMLRPCServerWithUnsupportedIntrospection extends Zend_XmlRpc_
 }
 
 /** related to ZF-8478 */
-class Test_XmlRpc_Client extends Zend_XmlRpc_Client {
+class TestClient extends Client {
     public function getProxy($namespace = '') {
     	if (empty($this->_proxyCache[$namespace])) {
-    	    $this->_proxyCache[$namespace] = new Python_SimpleXMLRPCServerWithUnsupportedIntrospection($this, $namespace);
+    	    $this->_proxyCache[$namespace] = new PythonSimpleXMLRPCServerWithUnsupportedIntrospection($this, $namespace);
     	}
         return parent::getProxy($namespace);
     }
-}
-
-// Call Zend_XmlRpc_ClientTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_XmlRpc_ClientTest::main") {
-    Zend_XmlRpc_ClientTest::main();
 }

@@ -20,22 +20,28 @@
  * @version $Id: ValueTest.php 18442 2009-09-30 13:17:48Z lars $
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\XmlRpc;
 
-abstract class Zend_XmlRpc_TestProvider
+use Zend\XmlRpc\Generator;
+
+abstract class TestProvider
 {
     public static function provideGenerators()
     {
         return array(
-            array(new Zend_XmlRpc_Generator_DomDocument()),
-            array(new Zend_XmlRpc_Generator_XmlWriter()),
+            array(new Generator\DomDocument()),
+            array(new Generator\XmlWriter()),
         );
     }
 
     public static function provideGeneratorsWithAlternateEncodings()
     {
         return array(
-            array(new Zend_XmlRpc_Generator_DomDocument('ISO-8859-1')),
-            array(new Zend_XmlRpc_Generator_XmlWriter('ISO-8859-1')),
+            array(new Generator\DomDocument('ISO-8859-1')),
+            array(new Generator\XmlWriter('ISO-8859-1')),
         );
     }
 }

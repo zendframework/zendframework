@@ -41,7 +41,7 @@ Third pass:
 Fourth pass:
 THE FOLLOWING IN ANY ORDER (except where indicated):
 [P] Zend_Json
-[X] Zend_Crypt -> [ ] Zend_Oauth, [ ] Zend_XmlRpc
+[X] Zend_Crypt -> [X] Zend_Oauth, [X] Zend_XmlRpc
 [X] Zend_Acl
 [ ] Zend_Reflection
 [ ] Zend_CodeGenerator

@@ -21,36 +21,38 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\XmlRpc;
+use Zend\Server\AbstractServer,
+    Zend\Server\Definition,
+    Zend\Server\Reflection;
+
+/**
  * An XML-RPC server implementation
  *
  * Example:
  * <code>
- * require_once 'Zend/XmlRpc/Server.php';
- * require_once 'Zend/XmlRpc/Server/Cache.php';
- * require_once 'Zend/XmlRpc/Server/Fault.php';
- * require_once 'My/Exception.php';
- * require_once 'My/Fault/Observer.php';
+ * use Zend\XmlRpc;
  *
  * // Instantiate server
- * $server = new Zend_XmlRpc_Server();
+ * $server = new XmlRpc\Server();
  *
  * // Allow some exceptions to report as fault responses:
- * Zend_XmlRpc_Server_Fault::attachFaultException('My_Exception');
- * Zend_XmlRpc_Server_Fault::attachObserver('My_Fault_Observer');
+ * XmlRpc\Server\Fault::attachFaultException('My\\Exception');
+ * XmlRpc\Server\Fault::attachObserver('My\\Fault\\Observer');
  *
  * // Get or build dispatch table:
- * if (!Zend_XmlRpc_Server_Cache::get($filename, $server)) {
- *     require_once 'Some/Service/Class.php';
- *     require_once 'Another/Service/Class.php';
+ * if (!XmlRpc\Server\Cache::get($filename, $server)) {
  *
  *     // Attach Some_Service_Class in 'some' namespace
- *     $server->setClass('Some_Service_Class', 'some');
+ *     $server->setClass('Some\\Service\\Class', 'some');
  *
  *     // Attach Another_Service_Class in 'another' namespace
- *     $server->setClass('Another_Service_Class', 'another');
+ *     $server->setClass('Another\\Service\\Class', 'another');
  *
  *     // Create dispatch table cache file
- *     Zend_XmlRpc_Server_Cache::save($filename, $server);
+ *     XmlRpc\Server\Cache::save($filename, $server);
  * }
  *
  * $response = $server->handle();
@@ -58,26 +60,26 @@
  * </code>
  *
  * @uses       ReflectionClass
- * @uses       Zend_Server_Abstract
- * @uses       Zend_Server_Definition
- * @uses       Zend_Server_Reflection
- * @uses       Zend_Server_Reflection_Function_Abstract
- * @uses       Zend_Server_Reflection_Method
- * @uses       Zend_XmlRpc_Request
- * @uses       Zend_XmlRpc_Request_Http
- * @uses       Zend_XmlRpc_Response
- * @uses       Zend_XmlRpc_Response_Http
- * @uses       Zend_XmlRpc_Server_Exception
- * @uses       Zend_XmlRpc_Server_Fault
- * @uses       Zend_XmlRpc_Server_System
- * @uses       Zend_XmlRpc_Value
+ * @uses       Zend\Server\AbstractServer
+ * @uses       Zend\Server\Definition
+ * @uses       Zend\Server\Reflection\Reflection
+ * @uses       Zend\Server\Reflection\AbstractFunction
+ * @uses       Zend\Server\Reflection\ReflectionMethod
+ * @uses       Zend\XmlRpc\Request
+ * @uses       Zend\XmlRpc\Request\HTTP
+ * @uses       Zend\XmlRpc\Response
+ * @uses       Zend\XmlRpc\Response\HTTP
+ * @uses       Zend\XmlRpc\Server\Exception
+ * @uses       Zend\XmlRpc\Server\Fault
+ * @uses       Zend\XmlRpc\Server\System
+ * @uses       Zend\XmlRpc\Value
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_XmlRpc_Server extends Zend_Server_Abstract
+class Server extends AbstractServer
 {
     /**
      * Character encoding
@@ -87,19 +89,19 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
 
     /**
      * Request processed
-     * @var null|Zend_XmlRpc_Request
+     * @var null|\Zend\XmlRpc\Request
      */
     protected $_request = null;
 
     /**
-     * Class to use for responses; defaults to {@link Zend_XmlRpc_Response_Http}
+     * Class to use for responses; defaults to {@link Zend\XmlRpc\Response\HTTP}
      * @var string
      */
-    protected $_responseClass = 'Zend_XmlRpc_Response_Http';
+    protected $_responseClass = 'Zend\\XmlRpc\\Response\\HTTP';
 
     /**
      * Dispatch table of name => method pairs
-     * @var Zend_Server_Definition
+     * @var \Zend\Server\Definition
      */
     protected $_table;
 
@@ -155,7 +157,7 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
      */
     public function __construct()
     {
-        $this->_table = new Zend_Server_Definition();
+        $this->_table = new Definition();
         $this->_registerSystemMethods();
     }
 
@@ -165,13 +167,13 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
      * @param  string $method
      * @param  array $params
      * @return mixed
-     * @throws Zend_XmlRpc_Server_Exception
+     * @throws Zend\XmlRpc\Server\Exception
      */
     public function __call($method, $params)
     {
         $system = $this->getSystem();
         if (!method_exists($system, $method)) {
-            throw new Zend_XmlRpc_Server_Exception('Unknown instance method called on server: ' . $method);
+            throw new Server\Exception('Unknown instance method called on server: ' . $method);
         }
         return call_user_func_array(array($system, $method), $params);
     }
@@ -190,12 +192,12 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
      * @param string|array $function Valid callback
      * @param string $namespace Optional namespace prefix
      * @return void
-     * @throws Zend_XmlRpc_Server_Exception
+     * @throws Zend\XmlRpc\Server\Exception
      */
     public function addFunction($function, $namespace = '')
     {
         if (!is_string($function) && !is_array($function)) {
-            throw new Zend_XmlRpc_Server_Exception('Unable to attach function; invalid', 611);
+            throw new Server\Exception('Unable to attach function; invalid', 611);
         }
 
         $argv = null;
@@ -207,9 +209,9 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
         $function = (array) $function;
         foreach ($function as $func) {
             if (!is_string($func) || !function_exists($func)) {
-                throw new Zend_XmlRpc_Server_Exception('Unable to attach function; invalid', 611);
+                throw new Server\Exception('Unable to attach function; invalid', 611);
             }
-            $reflection = Zend_Server_Reflection::reflectFunction($func, $argv, $namespace);
+            $reflection = Reflection\Reflection::reflectFunction($func, $argv, $namespace);
             $this->_buildSignature($reflection);
         }
     }
@@ -229,12 +231,12 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
      * @param string $namespace Optional
      * @param mixed $argv Optional arguments to pass to methods
      * @return void
-     * @throws Zend_XmlRpc_Server_Exception on invalid input
+     * @throws Zend\XmlRpc\Server\Exception on invalid input
      */
     public function setClass($class, $namespace = '', $argv = null)
     {
         if (is_string($class) && !class_exists($class)) {
-            throw new Zend_XmlRpc_Server_Exception('Invalid method class', 610);
+            throw new Server\Exception('Invalid method class', 610);
         }
 
         $argv = null;
@@ -243,7 +245,7 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
             $argv = array_slice($argv, 2);
         }
 
-        $dispatchable = Zend_Server_Reflection::reflectClass($class, $argv, $namespace);
+        $dispatchable = Reflection\Reflection::reflectClass($class, $argv, $namespace);
         foreach ($dispatchable->getMethods() as $reflection) {
             $this->_buildSignature($reflection, $class);
         }
@@ -254,34 +256,34 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
      *
      * @param string|Exception $fault
      * @param int $code
-     * @return Zend_XmlRpc_Server_Fault
+     * @return Zend\XmlRpc\Server\Fault
      */
     public function fault($fault = null, $code = 404)
     {
-        if (!$fault instanceof Exception) {
+        if (!$fault instanceof \Exception) {
             $fault = (string) $fault;
             if (empty($fault)) {
                 $fault = 'Unknown Error';
             }
-            $fault = new Zend_XmlRpc_Server_Exception($fault, $code);
+            $fault = new Server\Exception($fault, $code);
         }
 
-        return Zend_XmlRpc_Server_Fault::getInstance($fault);
+        return Server\Fault::getInstance($fault);
     }
 
     /**
      * Handle an xmlrpc call
      *
-     * @param Zend_XmlRpc_Request $request Optional
-     * @return Zend_XmlRpc_Response|Zend_XmlRpc_Fault
+     * @param Zend\XmlRpc\Request $request Optional
+     * @return Zend\XmlRpc\Response|Zend\XmlRpc\Fault
      */
     public function handle($request = false)
     {
         // Get request
-        if ((!$request || !$request instanceof Zend_XmlRpc_Request)
+        if ((!$request || !$request instanceof Request)
             && (null === ($request = $this->getRequest()))
         ) {
-            $request = new Zend_XmlRpc_Request_Http();
+            $request = new Request\HTTP();
             $request->setEncoding($this->getEncoding());
         }
 
@@ -292,7 +294,7 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
         } else {
             try {
                 $response = $this->_handle($request);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $response = $this->fault($e);
             }
         }
@@ -309,25 +311,25 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
      * Typically, you will not use this method; it will be called using the
      * results pulled from {@link Zend_XmlRpc_Server_Cache::get()}.
      *
-     * @param  array|Zend_Server_Definition $definition
+     * @param  array|Zend\Server\Definition $definition
      * @return void
-     * @throws Zend_XmlRpc_Server_Exception on invalid input
+     * @throws Zend\XmlRpc\Server\Exception on invalid input
      */
     public function loadFunctions($definition)
     {
-        if (!is_array($definition) && (!$definition instanceof Zend_Server_Definition)) {
+        if (!is_array($definition) && (!$definition instanceof Definition)) {
             if (is_object($definition)) {
                 $type = get_class($definition);
             } else {
                 $type = gettype($definition);
             }
-            throw new Zend_XmlRpc_Server_Exception('Unable to load server definition; must be an array or Zend_Server_Definition, received ' . $type, 612);
+            throw new Server\Exception('Unable to load server definition; must be an array or Zend_Server_Definition, received ' . $type, 612);
         }
 
         $this->_table->clearMethods();
         $this->_registerSystemMethods();
 
-        if ($definition instanceof Zend_Server_Definition) {
+        if ($definition instanceof Definition) {
             $definition = $definition->getMethods();
         }
 
@@ -343,12 +345,12 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
      * Set encoding
      *
      * @param string $encoding
-     * @return Zend_XmlRpc_Server
+     * @return Zend\XmlRpc\Server
      */
     public function setEncoding($encoding)
     {
         $this->_encoding = $encoding;
-        Zend_XmlRpc_Value::setEncoding($encoding);
+        Value::setEncoding($encoding);
         return $this;
     }
 
@@ -363,7 +365,7 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
     }
 
     /**
-     * Do nothing; persistence is handled via {@link Zend_XmlRpc_Server_Cache}
+     * Do nothing; persistence is handled via {@link Zend\XmlRpc\Server\Cache}
      *
      * @param  mixed $mode
      * @return void
@@ -375,20 +377,20 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
     /**
      * Set the request object
      *
-     * @param string|Zend_XmlRpc_Request $request
-     * @return Zend_XmlRpc_Server
-     * @throws Zend_XmlRpc_Server_Exception on invalid request class or object
+     * @param string|Zend\XmlRpc\Request $request
+     * @return Zend\XmlRpc\Server
+     * @throws Zend\XmlRpc\Server\Exception on invalid request class or object
      */
     public function setRequest($request)
     {
         if (is_string($request) && class_exists($request)) {
             $request = new $request();
-            if (!$request instanceof Zend_XmlRpc_Request) {
-                throw new Zend_XmlRpc_Server_Exception('Invalid request class');
+            if (!$request instanceof Request) {
+                throw new Server\Exception('Invalid request class');
             }
             $request->setEncoding($this->getEncoding());
-        } elseif (!$request instanceof Zend_XmlRpc_Request) {
-            throw new Zend_XmlRpc_Server_Exception('Invalid request object');
+        } elseif (!$request instanceof Request) {
+            throw new Server\Exception('Invalid request object');
         }
 
         $this->_request = $request;
@@ -398,7 +400,7 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
     /**
      * Return currently registered request object
      *
-     * @return null|Zend_XmlRpc_Request
+     * @return null|Zend\XmlRpc\Request
      */
     public function getRequest()
     {
@@ -414,9 +416,9 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
     public function setResponseClass($class)
     {
         if (!class_exists($class) or
-            ($c = new ReflectionClass($class) and !$c->isSubclassOf('Zend_XmlRpc_Response'))) {
+            ($c = new \ReflectionClass($class) and !$c->isSubclassOf('Zend\\XmlRpc\\Response'))) {
 
-            throw new Zend_XmlRpc_Server_Exception('Invalid response class');
+            throw new Server\Exception('Invalid response class');
         }
         $this->_responseClass = $class;
         return true;
@@ -445,8 +447,8 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
     /**
      * Returns a list of registered methods
      *
-     * Returns an array of dispatchables (Zend_Server_Reflection_Function,
-     * _Method, and _Class items).
+     * Returns an array of dispatchables (Zend\Server\Reflection\ReflectionFunction,
+     * ReflectionMethod, and ReflectionClass items).
      *
      * @return array
      */
@@ -458,7 +460,7 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
     /**
      * Retrieve system object
      *
-     * @return Zend_XmlRpc_Server_System
+     * @return \Zend\XmlRpc\Server\System
      */
     public function getSystem()
     {
@@ -500,19 +502,19 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
     /**
      * Handle an xmlrpc call (actual work)
      *
-     * @param Zend_XmlRpc_Request $request
-     * @return Zend_XmlRpc_Response
-     * @throws Zend_XmlRpcServer_Exception|Exception
-     * Zend_XmlRpcServer_Exceptions are thrown for internal errors; otherwise,
+     * @param  Zend\XmlRpc\Request $request
+     * @return Zend\XmlRpc\Response
+     * @throws Zend\XmlRpc\Server\Exception|Exception
+     * Zend\XmlRpc\Server\Exceptions are thrown for internal errors; otherwise,
      * any other exception may be thrown by the callback
      */
-    protected function _handle(Zend_XmlRpc_Request $request)
+    protected function _handle(Request $request)
     {
         $method = $request->getMethod();
 
         // Check for valid method
         if (!$this->_table->hasMethod($method)) {
-            throw new Zend_XmlRpc_Server_Exception('Method "' . $method . '" does not exist', 620);
+            throw new Server\Exception('Method "' . $method . '" does not exist', 620);
         }
 
         $info     = $this->_table->getMethod($method);
@@ -530,7 +532,7 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
         $paramsLen  = count($params);
         if ($sigLength < $paramsLen) {
             for ($i = $sigLength; $i < $paramsLen; ++$i) {
-                $xmlRpcValue = Zend_XmlRpc_Value::getXmlRpcValue($params[$i]);
+                $xmlRpcValue = Value::getXmlRpcValue($params[$i]);
                 $sigCalled[] = $xmlRpcValue->getType();
             }
         }
@@ -544,7 +546,7 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
             }
         }
         if (!$matched) {
-            throw new Zend_XmlRpc_Server_Exception('Calling parameters do not match signature', 623);
+            throw new Server\Exception('Calling parameters do not match signature', 623);
         }
 
         $return        = $this->_dispatch($info, $params);
@@ -559,7 +561,7 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
      */
     protected function _registerSystemMethods()
     {
-        $system = new Zend_XmlRpc_Server_System($this);
+        $system = new Server\System($this);
         $this->_system = $system;
         $this->setClass($system, 'system');
     }

@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+namespace ZendTest\AllTests\StreamWrapper;
+
 /**
  * Class for mocking php://input
  *
@@ -28,18 +30,18 @@
  * {
  *     public function setUp()
  *     {
- *         Zend_AllTests_StreamWrapper_PhpInput::mockInput('expected string');
+ *         Zend\AllTests\StreamWrapper\PHPInput::mockInput('expected string');
  *     }
  *
  *     public function testReadingFromPhpInput()
  *     {
  *         $this->assertSame('expected string', file_get_contents('php://input'));
- *         $this->assertSame('php://input', Zend_AllTests_StreamWrapper_PhpInput::getCurrentPath());
+ *         $this->assertSame('php://input', Zend\AllTests\StreamWrapper\PHPInput::getCurrentPath());
  *     }
  *
  *     public function tearDown()
  *     {
- *         Zend_AllTests_StreamWrapper_PhpInput::restoreDefault();
+ *         Zend\AllTests\StreamWrapper\PHPInput::restoreDefault();
  *     }
  * }
 *
@@ -49,7 +51,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_AllTests_StreamWrapper_PhpInput
+class PHPInput
 {
     protected static $_data;
 
@@ -62,7 +64,7 @@ class Zend_AllTests_StreamWrapper_PhpInput
     public static function mockInput($data)
     {
         stream_wrapper_unregister('php');
-        stream_wrapper_register('php', 'Zend_AllTests_StreamWrapper_PhpInput');
+        stream_wrapper_register('php', 'ZendTest\\AllTests\\StreamWrapper\\PHPInput');
         self::$_data = $data;
     }
 

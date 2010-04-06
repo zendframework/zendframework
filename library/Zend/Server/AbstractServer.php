@@ -121,11 +121,11 @@ abstract class AbstractServer implements ServerInterface
     protected function _buildCallback(Reflection\AbstractFunction $reflection)
     {
         $callback = new Method\Callback();
-        if ($reflection instanceof Reflection\Method) {
+        if ($reflection instanceof Reflection\ReflectionMethod) {
             $callback->setType($reflection->isStatic() ? 'static' : 'instance')
                      ->setClass($reflection->getDeclaringClass()->getName())
                      ->setMethod($reflection->getName());
-        } elseif ($reflection instanceof Reflection\FunctionReflection) {
+        } elseif ($reflection instanceof Reflection\ReflectionFunction) {
             $callback->setType('function')
                      ->setFunction($reflection->getName());
         }

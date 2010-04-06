@@ -21,14 +21,19 @@
  */
 
 /**
- * @uses       Zend_XmlRpc_Value_Collection
+ * @namespace
+ */
+namespace Zend\XmlRpc\Value;
+
+/**
+ * @uses       Zend\XmlRpc\Value\Collection
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Value
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_XmlRpc_Value_Array extends Zend_XmlRpc_Value_Collection
+class ArrayValue extends Collection
 {
     /**
      * Set the value of an array native type

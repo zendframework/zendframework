@@ -21,14 +21,19 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\XmlRpc\Client;
+
+/**
  * Base class for all Zend_XmlRpc_Client_* exceptions
  *
- * @uses       Zend_XmlRpc_Exception
+ * @uses       Zend\XmlRpc\Exception
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Client
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_XmlRpc_Client_Exception extends Zend_XmlRpc_Exception
+class Exception extends \Zend\XmlRpc\Exception
 {}

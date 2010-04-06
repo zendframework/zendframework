@@ -98,9 +98,9 @@ class Client
     protected $config = array(
         'maxredirects'    => 5,
         'strictredirects' => false,
-        'useragent'       => 'Zend\\Http\\Client',
+        'useragent'       => 'Zend\\HTTP\\Client',
         'timeout'         => 10,
-        'adapter'         => 'Zend\\Http\\Client\\Adapter\\Socket',
+        'adapter'         => 'Zend\\HTTP\\Client\\Adapter\\Socket',
         'httpversion'     => self::HTTP_1,
         'keepalive'       => false,
         'storeresponse'   => true,

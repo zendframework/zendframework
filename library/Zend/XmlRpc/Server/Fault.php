@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\XmlRpc\Server;
+
+/**
  * XMLRPC Server Faults
  *
  * Encapsulates an exception for use as an XMLRPC fault response. Valid
@@ -35,14 +40,14 @@
  * To allow method chaining, you may use the {@link getInstance()} factory
  * to instantiate a Zend_XmlRpc_Server_Fault.
  *
- * @uses       Zend_XmlRpc_Fault
+ * @uses       Zend\XmlRpc\Fault
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
+class Fault extends \Zend\XmlRpc\Fault
 {
     /**
      * @var Exception
@@ -52,7 +57,7 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
     /**
      * @var array Array of exception classes that may define xmlrpc faults
      */
-    protected static $_faultExceptionClasses = array('Zend_XmlRpc_Server_Exception' => true);
+    protected static $_faultExceptionClasses = array('Zend\\XmlRpc\\Server\\Exception' => true);
 
     /**
      * @var array Array of fault observers
@@ -62,10 +67,10 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
     /**
      * Constructor
      *
-     * @param Exception $e
-     * @return Zend_XmlRpc_Server_Fault
+     * @param  Exception $e
+     * @return Zend\XmlRpc\Server\Fault
      */
-    public function __construct(Exception $e)
+    public function __construct(\Exception $e)
     {
         $this->_exception = $e;
         $code             = 404;
@@ -91,12 +96,12 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
     }
 
     /**
-     * Return Zend_XmlRpc_Server_Fault instance
+     * Return Zend\XmlRpc\Server\Fault instance
      *
      * @param Exception $e
-     * @return Zend_XmlRpc_Server_Fault
+     * @return Zend\XmlRpc\Server\Fault
      */
-    public static function getInstance(Exception $e)
+    public static function getInstance(\Exception $e)
     {
         return new self($e);
     }

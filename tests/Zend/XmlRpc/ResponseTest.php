@@ -20,6 +20,13 @@
  * @version $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\XmlRpc;
+
+use Zend\XmlRpc\Response,
+    Zend\XmlRpc\Value;
 
 /**
  * Test case for Zend_XmlRpc_Response
@@ -31,7 +38,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
-class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
+class ResponseTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Zend_XmlRpc_Response object
@@ -49,7 +56,7 @@ class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_response = new Zend_XmlRpc_Response();
+        $this->_response = new Response();
     }
 
     /**
@@ -65,7 +72,7 @@ class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $this->assertTrue($this->_response instanceof Zend_XmlRpc_Response);
+        $this->assertTrue($this->_response instanceof Response);
     }
 
     /**
@@ -101,7 +108,7 @@ class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertNull($this->_response->getFault());
         $this->_response->loadXml('foo');
-        $this->assertType('Zend_XmlRpc_Fault', $this->_response->getFault());
+        $this->assertType('Zend\\XmlRpc\\Fault', $this->_response->getFault());
     }
 
     /**
@@ -116,7 +123,7 @@ class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
      */
     public function testLoadXml()
     {
-        $dom = new DOMDocument('1.0', 'UTF-8');
+        $dom = new \DOMDocument('1.0', 'UTF-8');
         $response = $dom->appendChild($dom->createElement('methodResponse'));
         $params   = $response->appendChild($dom->createElement('params'));
         $param    = $params->appendChild($dom->createElement('param'));
@@ -132,7 +139,7 @@ class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testLoadXmlWithInvalidValue()
     {
-        $this->assertFalse($this->_response->loadXml(new stdClass()));
+        $this->assertFalse($this->_response->loadXml(new \stdClass()));
         $this->assertTrue($this->_response->isFault());
         $this->assertSame(650, $this->_response->getFault()->getCode());
     }
@@ -144,7 +151,7 @@ class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
     {
         set_error_handler(array($this, 'trackError'));
         $invalidResponse = 'foo';
-        $response = new Zend_XmlRpc_Response();
+        $response = new Response();
         $this->assertFalse($this->_errorOccured);
         $this->assertFalse($response->loadXml($invalidResponse));
         $this->assertFalse($this->_errorOccured);
@@ -159,9 +166,9 @@ class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
 <methodResponse><params><param><value><array><data><value><struct><member><name>id</name><value><string>1</string></value></member><member><name>name</name><value><string>birdy num num!</string></value></member><member><name>description</name><value><nil/></value></member></struct></value></data></array></value></param></params></methodResponse>
 EOD;
         try {
-            $response = new Zend_XmlRpc_Response();
+            $response = new Response();
             $ret      = $response->loadXml($rawResponse);
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             $this->fail("Parsing the response should not throw an exception.");
         }
 
@@ -184,8 +191,8 @@ EOD;
     protected function _testXmlResponse($xml)
     {
         try {
-            $sx = new SimpleXMLElement($xml);
-        } catch (Exception $e) {
+            $sx = new \SimpleXMLElement($xml);
+        } catch (\Exception $e) {
             $this->fail('Invalid XML returned');
         }
 
@@ -222,19 +229,19 @@ EOD;
     public function testSetGetEncoding()
     {
         $this->assertEquals('UTF-8', $this->_response->getEncoding());
-        $this->assertEquals('UTF-8', Zend_XmlRpc_Value::getGenerator()->getEncoding());
+        $this->assertEquals('UTF-8', Value::getGenerator()->getEncoding());
         $this->assertSame($this->_response, $this->_response->setEncoding('ISO-8859-1'));
         $this->assertEquals('ISO-8859-1', $this->_response->getEncoding());
-        $this->assertEquals('ISO-8859-1', Zend_XmlRpc_Value::getGenerator()->getEncoding());
+        $this->assertEquals('ISO-8859-1', Value::getGenerator()->getEncoding());
     }
 
     public function testLoadXmlThrowsExceptionWithMissingNodes()
     {
-        $sxl = new SimpleXMLElement('<?xml version="1.0"?><methodResponse><params><param>foo</param></params></methodResponse>');
+        $sxl = new \SimpleXMLElement('<?xml version="1.0"?><methodResponse><params><param>foo</param></params></methodResponse>');
         $this->_loadXml($sxl->asXML());
-        $sxl = new SimpleXMLElement('<?xml version="1.0"?><methodResponse><params>foo</params></methodResponse>');
+        $sxl = new \SimpleXMLElement('<?xml version="1.0"?><methodResponse><params>foo</params></methodResponse>');
         $this->_loadXml($sxl->asXML());
-        $sxl = new SimpleXMLElement('<?xml version="1.0"?><methodResponse><bar>foo</bar></methodResponse>');
+        $sxl = new \SimpleXMLElement('<?xml version="1.0"?><methodResponse><bar>foo</bar></methodResponse>');
         $this->_loadXml($sxl->asXML());
     }
 
@@ -243,7 +250,7 @@ EOD;
         try {
             $this->_response->loadXml($xml);
             $this->fail('Invalid XML-RPC response should raise an exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 

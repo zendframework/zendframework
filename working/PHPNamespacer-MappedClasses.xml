@@ -17459,10 +17459,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Client/HttpException.php</originalRelativeFilePath>
       <originalClassName>Zend_XmlRpc_Client_HttpException</originalClassName>
-      <newRelativeFilePath>Zend/XmlRpc/Client/HttpException.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/XmlRpc/Client/HTTPException.php</newRelativeFilePath>
       <newNamespace>Zend\XmlRpc\Client</newNamespace>
-      <newClassName>HttpException</newClassName>
-      <newFullyQualifiedName>Zend\XmlRpc\Client\HttpException</newFullyQualifiedName>
+      <newClassName>HTTPException</newClassName>
+      <newFullyQualifiedName>Zend\XmlRpc\Client\HTTPException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Client/IntrospectException.php</originalRelativeFilePath>
@@ -17491,10 +17491,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Client.php</originalRelativeFilePath>
       <originalClassName>Zend_XmlRpc_Client</originalClassName>
-      <newRelativeFilePath>Zend/XmlRpc/Client/Client.php</newRelativeFilePath>
-      <newNamespace>Zend\XmlRpc\Client</newNamespace>
+      <newRelativeFilePath>Zend/XmlRpc/Client.php</newRelativeFilePath>
+      <newNamespace>Zend\XmlRpc</newNamespace>
       <newClassName>Client</newClassName>
-      <newFullyQualifiedName>Zend\XmlRpc\Client\Client</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\XmlRpc\Client</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Exception.php</originalRelativeFilePath>
@@ -17523,10 +17523,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Generator/GeneratorAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_XmlRpc_Generator_GeneratorAbstract</originalClassName>
-      <newRelativeFilePath>Zend/XmlRpc/Generator/GeneratorAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/XmlRpc/Generator/AbstractGenerator.php</newRelativeFilePath>
       <newNamespace>Zend\XmlRpc\Generator</newNamespace>
-      <newClassName>GeneratorAbstract</newClassName>
-      <newFullyQualifiedName>Zend\XmlRpc\Generator\GeneratorAbstract</newFullyQualifiedName>
+      <newClassName>AbstractGenerator</newClassName>
+      <newFullyQualifiedName>Zend\XmlRpc\Generator\AbstractGenerator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Generator/XmlWriter.php</originalRelativeFilePath>
@@ -17539,10 +17539,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Request/Http.php</originalRelativeFilePath>
       <originalClassName>Zend_XmlRpc_Request_Http</originalClassName>
-      <newRelativeFilePath>Zend/XmlRpc/Request/Http.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/XmlRpc/Request/HTTP.php</newRelativeFilePath>
       <newNamespace>Zend\XmlRpc\Request</newNamespace>
-      <newClassName>Http</newClassName>
-      <newFullyQualifiedName>Zend\XmlRpc\Request\Http</newFullyQualifiedName>
+      <newClassName>HTTP</newClassName>
+      <newFullyQualifiedName>Zend\XmlRpc\Request\HTTP</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Request/Stdin.php</originalRelativeFilePath>
@@ -17555,26 +17555,26 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Request.php</originalRelativeFilePath>
       <originalClassName>Zend_XmlRpc_Request</originalClassName>
-      <newRelativeFilePath>Zend/XmlRpc/Request/Request.php</newRelativeFilePath>
-      <newNamespace>Zend\XmlRpc\Request</newNamespace>
+      <newRelativeFilePath>Zend/XmlRpc/Request.php</newRelativeFilePath>
+      <newNamespace>Zend\XmlRpc</newNamespace>
       <newClassName>Request</newClassName>
-      <newFullyQualifiedName>Zend\XmlRpc\Request\Request</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\XmlRpc\Request</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Response/Http.php</originalRelativeFilePath>
       <originalClassName>Zend_XmlRpc_Response_Http</originalClassName>
-      <newRelativeFilePath>Zend/XmlRpc/Response/Http.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/XmlRpc/Response/HTTP.php</newRelativeFilePath>
       <newNamespace>Zend\XmlRpc\Response</newNamespace>
-      <newClassName>Http</newClassName>
-      <newFullyQualifiedName>Zend\XmlRpc\Response\Http</newFullyQualifiedName>
+      <newClassName>HTTP</newClassName>
+      <newFullyQualifiedName>Zend\XmlRpc\Response\HTTP</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Response.php</originalRelativeFilePath>
       <originalClassName>Zend_XmlRpc_Response</originalClassName>
-      <newRelativeFilePath>Zend/XmlRpc/Response/Response.php</newRelativeFilePath>
-      <newNamespace>Zend\XmlRpc\Response</newNamespace>
+      <newRelativeFilePath>Zend/XmlRpc/Response.php</newRelativeFilePath>
+      <newNamespace>Zend\XmlRpc</newNamespace>
       <newClassName>Response</newClassName>
-      <newFullyQualifiedName>Zend\XmlRpc\Response\Response</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\XmlRpc\Response</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Server/Cache.php</originalRelativeFilePath>
@@ -17611,18 +17611,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Server.php</originalRelativeFilePath>
       <originalClassName>Zend_XmlRpc_Server</originalClassName>
-      <newRelativeFilePath>Zend/XmlRpc/Server/Server.php</newRelativeFilePath>
-      <newNamespace>Zend\XmlRpc\Server</newNamespace>
+      <newRelativeFilePath>Zend/XmlRpc/Server.php</newRelativeFilePath>
+      <newNamespace>Zend\XmlRpc</newNamespace>
       <newClassName>Server</newClassName>
-      <newFullyQualifiedName>Zend\XmlRpc\Server\Server</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\XmlRpc\Server</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Value/Array.php</originalRelativeFilePath>
       <originalClassName>Zend_XmlRpc_Value_Array</originalClassName>
-      <newRelativeFilePath>Zend/XmlRpc/Value/Array.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/XmlRpc/Value/ArrayValue.php</newRelativeFilePath>
       <newNamespace>Zend\XmlRpc\Value</newNamespace>
-      <newClassName>Array</newClassName>
-      <newFullyQualifiedName>Zend\XmlRpc\Value\Array</newFullyQualifiedName>
+      <newClassName>ArrayValue</newClassName>
+      <newFullyQualifiedName>Zend\XmlRpc\Value\ArrayValue</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Value/Base64.php</originalRelativeFilePath>
@@ -17723,9 +17723,9 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Value.php</originalRelativeFilePath>
       <originalClassName>Zend_XmlRpc_Value</originalClassName>
-      <newRelativeFilePath>Zend/XmlRpc/Value/Value.php</newRelativeFilePath>
-      <newNamespace>Zend\XmlRpc\Value</newNamespace>
+      <newRelativeFilePath>Zend/XmlRpc/Value.php</newRelativeFilePath>
+      <newNamespace>Zend\XmlRpc</newNamespace>
       <newClassName>Value</newClassName>
-      <newFullyQualifiedName>Zend\XmlRpc\Value\Value</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\XmlRpc\Value</newFullyQualifiedName>
    </mappedClass>
 </mappedClasses>

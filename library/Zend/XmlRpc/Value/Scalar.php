@@ -21,14 +21,21 @@
  */
 
 /**
- * @uses       Zend_XmlRpc_Value
+ * @namespace
+ */
+namespace Zend\XmlRpc\Value;
+
+use Zend\XmlRpc\Value as XmlRpcValue;
+
+/**
+ * @uses       Zend\XmlRpc\Value
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Value
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_XmlRpc_Value_Scalar extends Zend_XmlRpc_Value
+abstract class Scalar extends XmlRpcValue
 {
     /**
      * Generate the XML code that represent a scalar native MXL-RPC value

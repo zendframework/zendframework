@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_XmlRpc
- * @subpackage Value
+ * @subpackage Client
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,37 +23,18 @@
 /**
  * @namespace
  */
-namespace Zend\XmlRpc\Value;
+namespace Zend\XmlRpc\Client;
 
 /**
- * @uses       \Zend\XmlRpc\Value\Scalar
+ * Thrown by Zend_XmlRpc_Client when an HTTP error occurs during an
+ * XML-RPC method call.
+ *
+ * @uses       Zend\XmlRpc\Client\Exception
  * @category   Zend
  * @package    Zend_XmlRpc
- * @subpackage Value
+ * @subpackage Client
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Nil extends Scalar
-{
-
-    /**
-     * Set the value of a nil native type
-     *
-     */
-    public function __construct()
-    {
-        $this->_type = self::XMLRPC_TYPE_NIL;
-        $this->_value = null;
-    }
-
-    /**
-     * Return the value of this object, convert the XML-RPC native nill value into a PHP NULL
-     *
-     * @return null
-     */
-    public function getValue()
-    {
-        return null;
-    }
-}
-
+class HTTPException extends Exception
+{}

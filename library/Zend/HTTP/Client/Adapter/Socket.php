@@ -29,15 +29,15 @@ use Zend\HTTP\Client\Adapter as HTTPAdapter,
     Zend\HTTP\Response;
 
 /**
- * A sockets based (stream_socket_client) adapter class for Zend_Http_Client. Can be used
+ * A sockets based (stream\socket\client) adapter class for Zend\Http\Client. Can be used
  * on almost every PHP environment, and does not require any special extensions.
  *
- * @uses       \Zend\HTTP\Client\Client
- * @uses       \Zend\HTTP\Client\Adapter\Exception
- * @uses       \Zend\HTTP\Client\Adapter
- * @uses       \Zend\HTTP\Client\Adapter\Stream
- * @uses       \Zend\HTTP\Response\Response
- * @uses       \Zend\URI\URL
+ * @uses       Zend\HTTP\Client
+ * @uses       Zend\HTTP\Client\Adapter\Exception
+ * @uses       Zend\HTTP\Client\Adapter
+ * @uses       Zend\HTTP\Client\Adapter\Stream
+ * @uses       Zend\HTTP\Response\Response
+ * @uses       Zend\URI\URL
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
@@ -333,7 +333,7 @@ class Socket
          * to have a body - stop reading here
          */
         if ($statusCode == 304 || $statusCode == 204 ||
-            $this->method == \Zend\HTTP\Client\Client::HEAD) {
+            $this->method == \Zend\HTTP\Client::HEAD) {
 
             // Close the connection if requested to do so by the server
             if (isset($headers['connection']) && $headers['connection'] == 'close') {

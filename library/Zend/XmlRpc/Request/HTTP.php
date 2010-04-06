@@ -19,21 +19,29 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\XmlRpc\Request;
+
+use Zend\XmlRpc\Request as XmlRpcRequest,
+    Zend\XmlRpc\Fault;
+
+/**
  * XmlRpc Request object -- Request via HTTP
  *
  * Extends {@link Zend_XmlRpc_Request} to accept a request via HTTP. Request is
  * built at construction time using a raw POST; if no data is available, the
  * request is declared a fault.
  *
- * @uses       Zend_XmlRpc_Fault
- * @uses       Zend_XmlRpc_Request
+ * @uses       Zend\XmlRpc\Fault
+ * @uses       Zend\XmlRpc\Request
  * @category   Zend
  * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_XmlRpc_Request_Http extends Zend_XmlRpc_Request
+class HTTP extends XmlRpcRequest
 {
     /**
      * Array of headers
@@ -60,7 +68,7 @@ class Zend_XmlRpc_Request_Http extends Zend_XmlRpc_Request
     {
         $xml = @file_get_contents('php://input');
         if (!$xml) {
-            $this->_fault = new Zend_XmlRpc_Fault(630);
+            $this->_fault = new Fault(630);
             return;
         }
 

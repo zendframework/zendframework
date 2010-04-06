@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 21740 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: yes -->
 <appendix id="coding-standard">
   <title>Standardy kodowania Zend Framework</title>
     <sect1 id="coding-standard.overview">

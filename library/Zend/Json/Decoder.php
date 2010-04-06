@@ -20,17 +20,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Json;
+
+/**
  * Decode JSON encoded string to PHP variable constructs
  *
  * @uses       stdClass
- * @uses       Zend_Json
- * @uses       Zend_Json_Exception
+ * @uses       \Zend\Json\Json
+ * @uses       \Zend\Json\Exception
  * @category   Zend
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Json_Decoder
+class Decoder
 {
     /**
      * Parse tokens used to decode the JSON object. These are not
@@ -101,9 +106,9 @@ class Zend_Json_Decoder
         $this->_offset       = 0;
 
         // Normalize and set $decodeType
-        if (!in_array($decodeType, array(Zend_Json::TYPE_ARRAY, Zend_Json::TYPE_OBJECT)))
+        if (!in_array($decodeType, array(Json::TYPE_ARRAY, Json::TYPE_OBJECT)))
         {
-            $decodeType = Zend_Json::TYPE_ARRAY;
+            $decodeType = Json::TYPE_ARRAY;
         }
         $this->_decodeType   = $decodeType;
 
@@ -137,14 +142,14 @@ class Zend_Json_Decoder
      * either or {@link Zend_Json::TYPE_ARRAY} or
      * {@link Zend_Json::TYPE_OBJECT}; defaults to TYPE_ARRAY
      * @return mixed
-     * @throws Zend_Json_Exception
+     * @throws \Zend\Json\Exception
      */
-    public static function decode($source = null, $objectDecodeType = Zend_Json::TYPE_ARRAY)
+    public static function decode($source = null, $objectDecodeType = Json::TYPE_ARRAY)
     {
         if (null === $source) {
-            throw new Zend_Json_Exception('Must specify JSON encoded source for decoding');
+            throw new Exception('Must specify JSON encoded source for decoding');
         } elseif (!is_string($source)) {
-            throw new Zend_Json_Exception('Can only decode JSON encoded strings');
+            throw new Exception('Can only decode JSON encoded strings');
         }
 
         $decoder = new self($source, $objectDecodeType);
@@ -199,14 +204,14 @@ class Zend_Json_Decoder
 
         while ($tok && $tok != self::RBRACE) {
             if ($tok != self::DATUM || ! is_string($this->_tokenValue)) {
-                throw new Zend_Json_Exception('Missing key in object encoding: ' . $this->_source);
+                throw new Exception('Missing key in object encoding: ' . $this->_source);
             }
 
             $key = $this->_tokenValue;
             $tok = $this->_getNextToken();
 
             if ($tok != self::COLON) {
-                throw new Zend_Json_Exception('Missing ":" in object encoding: ' . $this->_source);
+                throw new Exception('Missing ":" in object encoding: ' . $this->_source);
             }
 
             $tok = $this->_getNextToken();
@@ -218,21 +223,21 @@ class Zend_Json_Decoder
             }
 
             if ($tok != self::COMMA) {
-                throw new Zend_Json_Exception('Missing "," in object encoding: ' . $this->_source);
+                throw new Exception('Missing "," in object encoding: ' . $this->_source);
             }
 
             $tok = $this->_getNextToken();
         }
 
         switch ($this->_decodeType) {
-            case Zend_Json::TYPE_OBJECT:
+            case Json::TYPE_OBJECT:
                 // Create new StdClass and populate with $members
-                $result = new stdClass();
+                $result = new \stdClass();
                 foreach ($members as $key => $value) {
                     $result->$key = $value;
                 }
                 break;
-            case Zend_Json::TYPE_ARRAY:
+            case Json::TYPE_ARRAY:
             default:
                 $result = $members;
                 break;
@@ -264,7 +269,7 @@ class Zend_Json_Decoder
             }
 
             if ($tok != self::COMMA) {
-                throw new Zend_Json_Exception('Missing "," in array encoding: ' . $this->_source);
+                throw new Exception('Missing "," in array encoding: ' . $this->_source);
             }
 
             $tok = $this->_getNextToken();
@@ -377,7 +382,7 @@ class Zend_Json_Decoder
                                 $result .= '\'';
                                 break;
                             default:
-                                throw new Zend_Json_Exception("Illegal escape "
+                                throw new Exception("Illegal escape "
                                     .  "sequence '" . $chr . "'");
                         }
                     } elseif($chr == '"') {
@@ -428,21 +433,21 @@ class Zend_Json_Decoder
 
                 if (is_numeric($datum)) {
                     if (preg_match('/^0\d+$/', $datum)) {
-                        throw new Zend_Json_Exception("Octal notation not supported by JSON (value: $datum)");
+                        throw new Exception("Octal notation not supported by JSON (value: $datum)");
                     } else {
                         $val  = intval($datum);
                         $fVal = floatval($datum);
                         $this->_tokenValue = ($val == $fVal ? $val : $fVal);
                     }
                 } else {
-                    throw new Zend_Json_Exception("Illegal number format: $datum");
+                    throw new Exception("Illegal number format: $datum");
                 }
 
                 $this->_token = self::DATUM;
                 $this->_offset = $start + strlen($datum);
             }
         } else {
-            throw new Zend_Json_Exception('Illegal Token');
+            throw new Exception('Illegal Token');
         }
 
         return($this->_token);

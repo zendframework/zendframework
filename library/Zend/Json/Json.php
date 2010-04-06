@@ -20,18 +20,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Json;
+
+/**
  * Class for encoding to and decoding from JSON.
  *
- * @uses       Zend_Json_Decoder
- * @uses       Zend_Json_Encoder
- * @uses       Zend_Json_Exception
- * @uses       Zend_Json_Expr
+ * @uses       \Zend\Json\Decoder
+ * @uses       \Zend\Json\Encoder
+ * @uses       \Zend\Json\Exception
+ * @uses       \Zend\Json\Expr
  * @category   Zend
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Json
+class Json
 {
     /**
      * How objects should be encoded -- arrays or as StdClass. TYPE_ARRAY is 1
@@ -64,7 +69,7 @@ class Zend_Json
      * objects. See {@link Zend_Json_Decoder::decode()} for details.
      * @return mixed
      */
-    public static function decode($encodedValue, $objectDecodeType = Zend_Json::TYPE_ARRAY)
+    public static function decode($encodedValue, $objectDecodeType = Json::TYPE_ARRAY)
     {
         $encodedValue = (string) $encodedValue;
         if (function_exists('json_decode') && self::$useBuiltinEncoderDecoder !== true) {
@@ -73,26 +78,26 @@ class Zend_Json
             // php < 5.3
             if (!function_exists('json_last_error')) {
                 if ($decode === $encodedValue) {
-                    throw new Zend_Json_Exception('Decoding failed');
+                    throw new Exception('Decoding failed');
                 }
             // php >= 5.3
             } elseif (($jsonLastErr = json_last_error()) != JSON_ERROR_NONE) {
                 switch ($jsonLastErr) {
                     case JSON_ERROR_DEPTH:
-                        throw new Zend_Json_Exception('Decoding failed: Maximum stack depth exceeded');
+                        throw new Exception('Decoding failed: Maximum stack depth exceeded');
                     case JSON_ERROR_CTRL_CHAR:
-                        throw new Zend_Json_Exception('Decoding failed: Unexpected control character found');
+                        throw new Exception('Decoding failed: Unexpected control character found');
                     case JSON_ERROR_SYNTAX:
-                        throw new Zend_Json_Exception('Decoding failed: Syntax error');
+                        throw new Exception('Decoding failed: Syntax error');
                     default:
-                        throw new Zend_Json_Exception('Decoding failed');
+                        throw new Exception('Decoding failed');
                 }
             }
 
             return $decode;
         }
 
-        return Zend_Json_Decoder::decode($encodedValue, $objectDecodeType);
+        return Decoder::decode($encodedValue, $objectDecodeType);
     }
 
     /**
@@ -133,7 +138,7 @@ class Zend_Json
         if (function_exists('json_encode') && self::$useBuiltinEncoderDecoder !== true) {
             $encodedResult = json_encode($valueToEncode);
         } else {
-            $encodedResult = Zend_Json_Encoder::encode($valueToEncode, $cycleCheck, $options);
+            $encodedResult = Encoder::encode($valueToEncode, $cycleCheck, $options);
         }
 
         //only do post-proccessing to revert back the Zend_Json_Expr if any.
@@ -172,13 +177,13 @@ class Zend_Json
     protected static function _recursiveJsonExprFinder(
         &$value, array &$javascriptExpressions, $currentKey = null
     ) {
-         if ($value instanceof Zend_Json_Expr) {
+         if ($value instanceof Expr) {
             // TODO: Optimize with ascii keys, if performance is bad
             $magicKey = "____" . $currentKey . "_" . (count($javascriptExpressions));
             $javascriptExpressions[] = array(
 
                 //if currentKey is integer, encodeUnicodeString call is not required.
-                "magicKey" => (is_int($currentKey)) ? $magicKey : Zend_Json_Encoder::encodeUnicodeString($magicKey),
+                "magicKey" => (is_int($currentKey)) ? $magicKey : Encoder::encodeUnicodeString($magicKey),
                 "value"    => $value->__toString(),
             );
             $value = $magicKey;
@@ -218,7 +223,7 @@ class Zend_Json
      * @param boolean $ignoreXmlAttributes Include or exclude XML attributes in
      * the xml2json conversion process.
      * @return mixed - JSON formatted string on success
-     * @throws Zend_Json_Exception
+     * @throws \Zend\Json\Exception
      */
     public static function fromXml ($xmlStringContents, $ignoreXmlAttributes=true) {
         // Load the XML formatted string into a Simple XML Element object.
@@ -226,7 +231,7 @@ class Zend_Json
 
         // If it is not a valid XML content, throw an exception.
         if ($simpleXmlElementObject == null) {
-            throw new Zend_Json_Exception('Function fromXml was called with an invalid XML formatted string.');
+            throw new Exception('Function fromXml was called with an invalid XML formatted string.');
         } // End of if ($simpleXmlElementObject == null)
 
         $resultArray = null;
@@ -263,13 +268,13 @@ class Zend_Json
      * the xml2json conversion process.
      * @param int $recursionDepth Current recursion depth of this function
      * @return mixed - On success, a PHP associative array of traversed XML elements
-     * @throws Zend_Json_Exception
+     * @throws \Zend\Json\Exception
      */
     protected static function _processXml ($simpleXmlElementObject, $ignoreXmlAttributes, $recursionDepth=0) {
         // Keep an eye on how deeply we are involved in recursion.
         if ($recursionDepth > self::$maxRecursionDepthAllowed) {
             // XML tree is too deep. Exit now by throwing an exception.
-            throw new Zend_Json_Exception(
+            throw new Exception(
                 "Function _processXml exceeded the allowed recursion depth of " .
                 self::$maxRecursionDepthAllowed);
         } // End of if ($recursionDepth > self::$maxRecursionDepthAllowed)
@@ -280,7 +285,7 @@ class Zend_Json
             $callerProvidedSimpleXmlElementObject = $simpleXmlElementObject;
         } // End of if ($recursionDepth == 0)
 
-        if ($simpleXmlElementObject instanceof SimpleXMLElement) {
+        if ($simpleXmlElementObject instanceof \SimpleXMLElement) {
             // Get a copy of the simpleXmlElementObject
             $copyOfSimpleXmlElementObject = $simpleXmlElementObject;
             // Get the object variables in the SimpleXmlElement object for us to iterate.
@@ -338,7 +343,7 @@ class Zend_Json
             $matchings = array();
             $match = preg_match ($pattern, $simpleXmlElementObject, $matchings);
             if ($match) {
-                return new Zend_Json_Expr($matchings[1]);
+                return new Expr($matchings[1]);
             } else {
                 return (trim(strval($simpleXmlElementObject)));
             }

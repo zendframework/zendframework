@@ -20,6 +20,13 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Json\Server;
+use Zend\Json\Server;
+use Zend\Json;
+
 // Call Zend_Json_Server_ErrorTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Json_Server_ErrorTest::main");
@@ -38,7 +45,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Json
  * @group      Zend_Json_Server
  */
-class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
+class ErrorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -48,8 +55,8 @@ class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Json_Server_ErrorTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Json_Server_ErrorTest");
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
@@ -60,7 +67,7 @@ class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->error = new Zend_Json_Server_Error();
+        $this->error = new Server\Error();
     }
 
     /**
@@ -75,7 +82,7 @@ class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
 
     public function testCodeShouldBeErrOtherByDefault()
     {
-        $this->assertEquals(Zend_Json_Server_Error::ERROR_OTHER, $this->error->getCode());
+        $this->assertEquals(Server\Error::ERROR_OTHER, $this->error->getCode());
     }
 
     public function testSetCodeShouldCastToInteger()
@@ -86,9 +93,9 @@ class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
 
     public function testCodeShouldBeLimitedToStandardIntegers()
     {
-        foreach (array(true, 'foo', array(), new stdClass, 2.0, 25) as $code) {
+        foreach (array(true, 'foo', array(), new \stdClass, 2.0, 25) as $code) {
             $this->error->setCode($code);
-            $this->assertEquals(Zend_Json_Server_Error::ERROR_OTHER, $this->error->getCode());
+            $this->assertEquals(Server\Error::ERROR_OTHER, $this->error->getCode());
         }
     }
 
@@ -115,7 +122,7 @@ class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
 
     public function testSetMessageToNonScalarShouldSilentlyFail()
     {
-        foreach (array(array(), new stdClass) as $message) {
+        foreach (array(array(), new \stdClass) as $message) {
             $this->error->setMessage($message);
             $this->assertNull($this->error->getMessage());
         }
@@ -128,7 +135,7 @@ class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
 
     public function testShouldAllowArbitraryData()
     {
-        foreach (array(true, 'foo', 2, 2.0, array(), new stdClass) as $datum) {
+        foreach (array(true, 'foo', 2, 2.0, array(), new \stdClass) as $datum) {
             $this->error->setData($datum);
             $this->assertEquals($datum, $this->error->getData());
         }
@@ -145,19 +152,19 @@ class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
     {
         $this->setupError();
         $json = $this->error->toJson();
-        $this->validateArray(Zend_Json::decode($json));
+        $this->validateArray(Json\Json::decode($json));
     }
 
     public function testCastingToStringShouldCastToJson()
     {
         $this->setupError();
         $json = $this->error->__toString();
-        $this->validateArray(Zend_Json::decode($json));
+        $this->validateArray(Json\Json::decode($json));
     }
 
     public function setupError()
     {
-        $this->error->setCode(Zend_Json_Server_Error::ERROR_OTHER)
+        $this->error->setCode(Server\Error::ERROR_OTHER)
                     ->setMessage('Unknown Error')
                     ->setData(array('foo' => 'bar'));
     }
@@ -181,5 +188,5 @@ class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
 
 // Call Zend_Json_Server_ErrorTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_Json_Server_ErrorTest::main") {
-    Zend_Json_Server_ErrorTest::main();
+    \Zend_Json_Server_ErrorTest::main();
 }

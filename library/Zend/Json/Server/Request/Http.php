@@ -20,13 +20,18 @@
  */
 
 /**
- * @uses       Zend_Json_Server_Request
+ * @namespace
+ */
+namespace Zend\Json\Server\Request;
+
+/**
+ * @uses       \Zend\Json\Server\Request\Request
  * @category   Zend
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Json_Server_Request_Http extends Zend_Json_Server_Request
+class Http extends Request
 {
     /**
      * Raw JSON pulled from POST body

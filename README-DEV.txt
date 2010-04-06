@@ -40,7 +40,7 @@ Third pass:
 
 Fourth pass:
 THE FOLLOWING IN ANY ORDER (except where indicated):
-[ ] Zend_Json
+[P] Zend_Json
 [X] Zend_Crypt -> [ ] Zend_Oauth, [ ] Zend_XmlRpc
 [X] Zend_Acl
 [ ] Zend_Reflection
@@ -54,7 +54,7 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 [ ] Zend_Markup
 [X] Zend_Memory -> [ ] Zend_Pdf -> [ ] Zend_Barcode
 [ ] Zend_Db (except Firebug profiler) -> [ ] Zend_Feed, [ ] Zend_Queue
-[X] Zend_Text -> [ ] Zend_ProgressBar -> [ ] Zend_File
+[X] Zend_Text -> [X] Zend_ProgressBar -> [ ] Zend_File
 [ ] Zend_Search
 [ ] Zend_Service_Abstract -> [ ] Zend_Rest_Client, [ ] Zend_Service_ReCaptcha -> [ ] Zend_Captcha
 [ ] Zend_Soap

@@ -20,6 +20,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\ProgressBar\Adapter;
+use Zend\Config;
+
+/**
  * Abstract class for Zend_ProgressBar_Adapters
  *
  * @category  Zend
@@ -27,7 +33,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_ProgressBar_Adapter
+abstract class Adapter
 {
     /**
      * Option keys to skip when calling setOptions()
@@ -45,13 +51,13 @@ abstract class Zend_ProgressBar_Adapter
      * $options may be either be an array or a Zend_Config object which
      * specifies adapter related options.
      *
-     * @param null|array|Zend_Config $options
+     * @param null|array|\Zend\Config\Config $options
      */
     public function __construct($options = null)
     {
         if (is_array($options)) {
             $this->setOptions($options);
-        } elseif ($options instanceof Zend_Config) {
+        } elseif ($options instanceof Config\Config) {
             $this->setConfig($options);
         }
     }
@@ -59,10 +65,10 @@ abstract class Zend_ProgressBar_Adapter
     /**
      * Set options via a Zend_Config instance
      *
-     * @param  Zend_Config $config
-     * @return Zend_ProgressBar_Adapter
+     * @param  \Zend\Config\Config $config
+     * @return \Zend\ProgressBar\Adapter\Adapter
      */
-    public function setConfig(Zend_Config $config)
+    public function setConfig(Config\Config $config)
     {
         $this->setOptions($config->toArray());
 
@@ -73,7 +79,7 @@ abstract class Zend_ProgressBar_Adapter
      * Set options via an array
      *
      * @param  array $options
-     * @return Zend_ProgressBar_Adapter
+     * @return \Zend\ProgressBar\Adapter\Adapter
      */
     public function setOptions(array $options)
     {

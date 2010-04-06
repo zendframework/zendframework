@@ -20,6 +20,13 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Json\Server;
+use Zend\Json\Server;
+use Zend\Json;
+
 // Call Zend_Json_Server_ResponseTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Json_Server_ResponseTest::main");
@@ -38,7 +45,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Json
  * @group      Zend_Json_Server
  */
-class Zend_Json_Server_ResponseTest extends PHPUnit_Framework_TestCase
+class ResponseTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -48,8 +55,8 @@ class Zend_Json_Server_ResponseTest extends PHPUnit_Framework_TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Json_Server_ResponseTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Json_Server_ResponseTest");
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
@@ -60,7 +67,7 @@ class Zend_Json_Server_ResponseTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->response = new Zend_Json_Server_Response();
+        $this->response = new \Zend\Json\Server\Response\Response();
     }
 
     /**
@@ -93,14 +100,14 @@ class Zend_Json_Server_ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testSettingErrorShouldMarkRequestAsError()
     {
-        $error = new Zend_Json_Server_Error();
+        $error = new Server\Error();
         $this->response->setError($error);
         $this->assertTrue($this->response->isError());
     }
 
     public function testShouldBeAbleToRetrieveErrorObject()
     {
-        $error = new Zend_Json_Server_Error();
+        $error = new Server\Error();
         $this->response->setError($error);
         $this->assertSame($error, $this->response->getError());
     }
@@ -137,7 +144,7 @@ class Zend_Json_Server_ResponseTest extends PHPUnit_Framework_TestCase
                        ->setId('foo')
                        ->setVersion('2.0');
         $json = $this->response->toJson();
-        $test = Zend_Json::decode($json);
+        $test = Json\Json::decode($json);
 
         $this->assertTrue(is_array($test));
         $this->assertTrue(array_key_exists('result', $test));
@@ -152,14 +159,14 @@ class Zend_Json_Server_ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testResponseShouldCastErrorToJsonIfIsError()
     {
-        $error = new Zend_Json_Server_Error();
-        $error->setCode(Zend_Json_Server_Error::ERROR_INTERNAL)
+        $error = new Server\Error();
+        $error->setCode(Server\Error::ERROR_INTERNAL)
               ->setMessage('error occurred');
         $this->response->setId('foo')
                        ->setResult(true)
                        ->setError($error);
         $json = $this->response->toJson();
-        $test = Zend_Json::decode($json);
+        $test = Json\Json::decode($json);
 
         $this->assertTrue(is_array($test));
         $this->assertTrue(array_key_exists('result', $test));
@@ -176,7 +183,7 @@ class Zend_Json_Server_ResponseTest extends PHPUnit_Framework_TestCase
         $this->response->setResult(true)
                        ->setId('foo');
         $json = $this->response->__toString();
-        $test = Zend_Json::decode($json);
+        $test = Json\Json::decode($json);
 
         $this->assertTrue(is_array($test));
         $this->assertTrue(array_key_exists('result', $test));
@@ -191,5 +198,5 @@ class Zend_Json_Server_ResponseTest extends PHPUnit_Framework_TestCase
 
 // Call Zend_Json_Server_ResponseTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_Json_Server_ResponseTest::main") {
-    Zend_Json_Server_ResponseTest::main();
+    \Zend_Json_Server_ResponseTest::main();
 }

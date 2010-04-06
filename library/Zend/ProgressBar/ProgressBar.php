@@ -18,16 +18,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\ProgressBar;
+
+/**
  * Zend_ProgressBar offers an interface for multiple enviroments.
  *
- * @uses      Zend_ProgressBar_Exception
- * @uses      Zend_Session_Namespace
+ * @uses      \Zend\ProgressBar\Exception
+ * @uses      \Zend\Session\Namespace
  * @category  Zend
  * @package   Zend_ProgressBar
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_ProgressBar
+class ProgressBar
 {
     /**
      * Min value
@@ -67,7 +72,7 @@ class Zend_ProgressBar
     /**
      * Adapter for the output
      *
-     * @var Zend_ProgressBar_Adapter
+     * @var \Zend\ProgressBar\Adapter\Adapter
      */
     protected $_adapter;
 
@@ -81,17 +86,17 @@ class Zend_ProgressBar
     /**
      * Create a new progressbar backend.
      *
-     * @param  Zend_ProgressBar_Adapter $adapter
+     * @param  \Zend\ProgressBar\Adapter\Adapter $adapter
      * @param  float                    $min
      * @param  float                    $max
      * @param  string                   $persistenceNamespace
-     * @throws Zend_ProgressBar_Exception When $min is greater than $max
+     * @throws \Zend\ProgressBar\Exception When $min is greater than $max
      */
-    public function __construct(Zend_ProgressBar_Adapter $adapter, $min = 0, $max = 100, $persistenceNamespace = null)
+    public function __construct(Adapter\Adapter $adapter, $min = 0, $max = 100, $persistenceNamespace = null)
     {
         // Check min/max values and set them
         if ($min > $max) {
-            throw new Zend_ProgressBar_Exception('$max must be greater than $min');
+            throw new Exception('$max must be greater than $min');
         }
 
         $this->_min     = (float) $min;
@@ -100,7 +105,7 @@ class Zend_ProgressBar
 
         // See if we have to open a session namespace
         if ($persistenceNamespace !== null) {
-            $this->_persistenceNamespace = new Zend_Session_Namespace($persistenceNamespace);
+            $this->_persistenceNamespace = new \Zend\Session\SessionNamespace($persistenceNamespace);
         }
 
         // Set adapter
@@ -129,7 +134,7 @@ class Zend_ProgressBar
     /**
      * Get the current adapter
      *
-     * @return Zend_ProgressBar_Adapter
+     * @return \Zend\ProgressBar\Adapter\Adapter
      */
     public function getAdapter()
     {

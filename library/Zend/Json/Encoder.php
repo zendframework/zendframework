@@ -20,16 +20,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Json;
+
+/**
  * Encode PHP constructs to JSON
  *
  * @uses       ReflectionClass
- * @uses       Zend_Json_Exception
+ * @uses       \Zend\Json\Exception
  * @category   Zend
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Json_Encoder
+class Encoder
 {
     /**
      * Whether or not to check for possible cycling
@@ -112,7 +117,7 @@ class Zend_Json_Encoder
      *
      * @param $value object
      * @return string
-     * @throws Zend_Json_Exception If recursive checks are enabled and the object has been serialized previously
+     * @throws \Zend\Json\Exception If recursive checks are enabled and the object has been serialized previously
      */
     protected function _encodeObject(&$value)
     {
@@ -125,7 +130,7 @@ class Zend_Json_Encoder
                     return '"* RECURSION (' . get_class($value) . ') *"';
 
                 } else {
-                    throw new Zend_Json_Exception(
+                    throw new Exception(
                         'Cycles not supported in JSON encoding, cycle introduced by '
                         . 'class "' . get_class($value) . '"'
                     );
@@ -137,7 +142,7 @@ class Zend_Json_Encoder
 
         $props = '';
 
-        if ($value instanceof Iterator) {
+        if ($value instanceof \Iterator) {
             $propCollection = $value;
         } else {
             $propCollection = get_object_vars($value);
@@ -274,7 +279,7 @@ class Zend_Json_Encoder
      * @param $cls ReflectionClass
      * @return string Encoded constant block in class2 format
      */
-    private static function _encodeConstants(ReflectionClass $cls)
+    private static function _encodeConstants(\ReflectionClass $cls)
     {
         $result    = "constants : {";
         $constants = $cls->getConstants();
@@ -300,7 +305,7 @@ class Zend_Json_Encoder
      * @return string Encoded method fragment
      *
      */
-    private static function _encodeMethods(ReflectionClass $cls)
+    private static function _encodeMethods(\ReflectionClass $cls)
     {
         $methods = $cls->getMethods();
         $result = 'methods:{';
@@ -364,7 +369,7 @@ class Zend_Json_Encoder
      * @return string Encode properties list
      *
      */
-    private static function _encodeVariables(ReflectionClass $cls)
+    private static function _encodeVariables(\ReflectionClass $cls)
     {
         $properties = $cls->getProperties();
         $propValues = get_class_vars($cls->getName());
@@ -397,13 +402,13 @@ class Zend_Json_Encoder
      * @param $package string Optional package name appended to JavaScript
      * proxy class name
      * @return string The class2 (JavaScript) encoding of the class
-     * @throws Zend_Json_Exception
+     * @throws \Zend\Json\Exception
      */
     public static function encodeClass($className, $package = '')
     {
-        $cls = new ReflectionClass($className);
+        $cls = new \ReflectionClass($className);
         if (! $cls->isInstantiable()) {
-            throw new Zend_Json_Exception("$className must be instantiable");
+            throw new Exception("$className must be instantiable");
         }
 
         return "Class.create('$package$className',{"

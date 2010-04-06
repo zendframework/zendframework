@@ -18,25 +18,30 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\ProgressBar\Adapter;
+
+/**
  * Zend_ProgressBar_Adapter_JsPush offers a simple method for updating a
  * progressbar in a browser.
  *
- * @uses      Zend_Json
- * @uses      Zend_ProgressBar_Adapter
+ * @uses      \Zend\Json\Json
+ * @uses      \Zend\ProgressBar\Adapter\Adapter
  * @category  Zend
  * @package   Zend_ProgressBar
  * @uses      Zend_ProgressBar_Adapter_Interface
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_ProgressBar_Adapter_JsPush extends Zend_ProgressBar_Adapter
+class JsPush extends Adapter
 {
     /**
      * Name of the JavaScript method to call on update
      *
      * @var string
      */
-    protected $_updateMethodName = 'Zend_ProgressBar_Update';
+    protected $_updateMethodName = 'Zend\ProgressBar\ProgressBar\Update';
 
     /**
      * Name of the JavaScript method to call on finish
@@ -49,7 +54,7 @@ class Zend_ProgressBar_Adapter_JsPush extends Zend_ProgressBar_Adapter
      * Set the update method name
      *
      * @param  string $methodName
-     * @return Zend_ProgressBar_Adapter_JsPush
+     * @return \Zend\ProgressBar\Adapter\JsPush
      */
     public function setUpdateMethodName($methodName)
     {
@@ -62,7 +67,7 @@ class Zend_ProgressBar_Adapter_JsPush extends Zend_ProgressBar_Adapter
      * Set the finish method name
      *
      * @param  string $methodName
-     * @return Zend_ProgressBar_Adapter_JsPush
+     * @return \Zend\ProgressBar\Adapter\JsPush
      */
     public function setFinishMethodName($methodName)
     {
@@ -94,7 +99,7 @@ class Zend_ProgressBar_Adapter_JsPush extends Zend_ProgressBar_Adapter
         );
 
         $data = '<script type="text/javascript">'
-              . 'parent.' . $this->_updateMethodName . '(' . Zend_Json::encode($arguments) . ');'
+              . 'parent.' . $this->_updateMethodName . '(' . \Zend\Json\Json::encode($arguments) . ');'
               . '</script>';
 
         // Output the data

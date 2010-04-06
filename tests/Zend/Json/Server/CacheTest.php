@@ -20,12 +20,11 @@
  * @version    $Id$
  */
 
-// Call Zend_Json_Server_CacheTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Json_Server_CacheTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Json\Server;
+use Zend\Json\Server;
 
 /**
  * Test class for Zend_Json_Server_Cache
@@ -38,19 +37,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Json
  * @group      Zend_Json_Server
  */
-class Zend_Json_Server_CacheTest extends PHPUnit_Framework_TestCase
+class CacheTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Json_Server_CacheTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -60,8 +48,8 @@ class Zend_Json_Server_CacheTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->server = new Zend_Json_Server();
-        $this->server->setClass('Zend_Json_Server_CacheTest_Foo', 'foo');
+        $this->server = new Server\Server();
+        $this->server->setClass('ZendTest\Json\Server\Foo', 'foo');
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zjs');
 
         // if (!is_writeable(dirname(__FILE__))) {
@@ -89,38 +77,38 @@ class Zend_Json_Server_CacheTest extends PHPUnit_Framework_TestCase
 
     public function testRetrievingSmdCacheShouldReturnFalseIfCacheDoesNotExist()
     {
-        $this->assertFalse(Zend_Json_Server_Cache::getSmd($this->cacheFile));
+        $this->assertFalse(Server\Cache::getSmd($this->cacheFile));
     }
 
     public function testSavingSmdCacheShouldReturnTrueOnSuccess()
     {
-        $this->assertTrue(Zend_Json_Server_Cache::saveSmd($this->cacheFile, $this->server));
+        $this->assertTrue(Server\Cache::saveSmd($this->cacheFile, $this->server));
     }
 
     public function testSavedCacheShouldMatchGeneratedCache()
     {
         $this->testSavingSmdCacheShouldReturnTrueOnSuccess();
         $json = $this->server->getServiceMap()->toJson();
-        $test = Zend_Json_Server_Cache::getSmd($this->cacheFile);
+        $test = Server\Cache::getSmd($this->cacheFile);
         $this->assertSame($json, $test);
     }
 
     public function testDeletingSmdShouldReturnFalseOnFailure()
     {
-        $this->assertFalse(Zend_Json_Server_Cache::deleteSmd($this->cacheFile));
+        $this->assertFalse(Server\Cache::deleteSmd($this->cacheFile));
     }
 
     public function testDeletingSmdShouldReturnTrueOnSuccess()
     {
         $this->testSavingSmdCacheShouldReturnTrueOnSuccess();
-        $this->assertTrue(Zend_Json_Server_Cache::deleteSmd($this->cacheFile));
+        $this->assertTrue(Server\Cache::deleteSmd($this->cacheFile));
     }
 }
 
 /**
  * Class for testing JSON-RPC server caching
  */
-class Zend_Json_Server_CacheTest_Foo
+class Foo
 {
     /**
      * Bar
@@ -142,12 +130,12 @@ class Zend_Json_Server_CacheTest_Foo
      */
     public function baz()
     {
-        throw new Exception('application error');
+        throw new \Exception('application error');
     }
 }
 
 
 // Call Zend_Json_Server_CacheTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_Json_Server_CacheTest::main") {
-    Zend_Json_Server_CacheTest::main();
+    \Zend_Json_Server_CacheTest::main();
 }

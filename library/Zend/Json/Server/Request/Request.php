@@ -21,14 +21,20 @@
  */
 
 /**
- * @uses       Zend_Json
+ * @namespace
+ */
+namespace Zend\Json\Server\Request;
+use Zend\Json;
+
+/**
+ * @uses       \Zend\Json\Json
  * @category   Zend
  * @package    Zend_Json
  * @subpackage Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Json_Server_Request
+class Request
 {
     /**
      * Request ID
@@ -70,7 +76,7 @@ class Zend_Json_Server_Request
      * Set request state
      *
      * @param  array $options
-     * @return Zend_Json_Server_Request
+     * @return \Zend\Json\Server\Request\Request
      */
     public function setOptions(array $options)
     {
@@ -91,7 +97,7 @@ class Zend_Json_Server_Request
      *
      * @param  mixed $value
      * @param  string $key
-     * @return Zend_Json_Server_Request
+     * @return \Zend\Json\Server\Request\Request
      */
     public function addParam($value, $key = null)
     {
@@ -109,7 +115,7 @@ class Zend_Json_Server_Request
      * Add many params
      *
      * @param  array $params
-     * @return Zend_Json_Server_Request
+     * @return \Zend\Json\Server\Request\Request
      */
     public function addParams(array $params)
     {
@@ -123,7 +129,7 @@ class Zend_Json_Server_Request
      * Overwrite params
      *
      * @param  array $params
-     * @return Zend_Json_Server_Request
+     * @return \Zend\Json\Server\Request\Request
      */
     public function setParams(array $params)
     {
@@ -160,7 +166,7 @@ class Zend_Json_Server_Request
      * Set request method
      *
      * @param  string $name
-     * @return Zend_Json_Server_Request
+     * @return \Zend\Json\Server\Request\Request
      */
     public function setMethod($name)
     {
@@ -196,7 +202,7 @@ class Zend_Json_Server_Request
      * Set request identifier
      *
      * @param  mixed $name
-     * @return Zend_Json_Server_Request
+     * @return \Zend\Json\Server\Request\Request
      */
     public function setId($name)
     {
@@ -218,7 +224,7 @@ class Zend_Json_Server_Request
      * Set JSON-RPC version
      *
      * @param  string $version
-     * @return Zend_Json_Server_Request
+     * @return \Zend\Json\Server\Request\Request
      */
     public function setVersion($version)
     {
@@ -248,7 +254,7 @@ class Zend_Json_Server_Request
      */
     public function loadJson($json)
     {
-        $options = Zend_Json::decode($json);
+        $options = Json\Json::decode($json);
         $this->setOptions($options);
     }
 
@@ -273,7 +279,7 @@ class Zend_Json_Server_Request
             $jsonArray['jsonrpc'] = '2.0';
         }
 
-        return Zend_Json::encode($jsonArray);
+        return Json\Json::encode($jsonArray);
     }
 
     /**

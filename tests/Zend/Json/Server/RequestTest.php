@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Json\Server;
+use Zend\Json;
+
 // Call Zend_Json_Server_RequestTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Json_Server_RequestTest::main");
@@ -36,7 +42,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Json
  * @group      Zend_Json_Server
  */
-class Zend_Json_Server_RequestTest extends PHPUnit_Framework_TestCase
+class RequestTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -46,8 +52,8 @@ class Zend_Json_Server_RequestTest extends PHPUnit_Framework_TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Json_Server_RequestTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Json_Server_RequestTest");
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
@@ -58,7 +64,7 @@ class Zend_Json_Server_RequestTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->request = new Zend_Json_Server_Request();
+        $this->request = new \Zend\Json\Server\Request\Request();
     }
 
     /**
@@ -98,7 +104,7 @@ class Zend_Json_Server_RequestTest extends PHPUnit_Framework_TestCase
     public function testInvalidKeysShouldBeIgnored()
     {
         $count = 0;
-        foreach (array(array('foo', true), array('foo', new stdClass), array('foo', array())) as $spec) {
+        foreach (array(array('foo', true), array('foo', new \stdClass), array('foo', array())) as $spec) {
             $this->request->addParam($spec[0], $spec[1]);
             $this->assertNull($this->request->getParam('foo'));
             $params = $this->request->getParams();
@@ -220,7 +226,7 @@ class Zend_Json_Server_RequestTest extends PHPUnit_Framework_TestCase
     public function testShouldBeAbleToLoadRequestFromJsonString()
     {
         $options = $this->getOptions();
-        $json    = Zend_Json::encode($options);
+        $json    = Json\Json::encode($options);
         $this->request->loadJson($json);
 
         $this->assertEquals('foo', $this->request->getMethod());
@@ -232,7 +238,7 @@ class Zend_Json_Server_RequestTest extends PHPUnit_Framework_TestCase
     {
         $options = $this->getOptions();
         $options['jsonrpc'] = '2.0';
-        $json    = Zend_Json::encode($options);
+        $json    = Json\Json::encode($options);
         $this->request->loadJson($json);
         $this->assertEquals('2.0', $this->request->getVersion());
     }
@@ -277,7 +283,7 @@ class Zend_Json_Server_RequestTest extends PHPUnit_Framework_TestCase
 
     public function validateJson($json, array $options)
     {
-        $test = Zend_Json::decode($json);
+        $test = Json\Json::decode($json);
         $this->assertTrue(is_array($test), var_export($json, 1));
 
         $this->assertTrue(array_key_exists('id', $test));
@@ -296,5 +302,5 @@ class Zend_Json_Server_RequestTest extends PHPUnit_Framework_TestCase
 
 // Call Zend_Json_Server_RequestTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_Json_Server_RequestTest::main") {
-    Zend_Json_Server_RequestTest::main();
+    \Zend_Json_Server_RequestTest::main();
 }

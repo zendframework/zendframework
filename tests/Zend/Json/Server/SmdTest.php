@@ -20,6 +20,14 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Json\Server;
+use Zend\Json\Server\Smd;
+use Zend\Json\Server;
+use Zend\Json;
+
 // Call Zend_Json_Server_SmdTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Json_Server_SmdTest::main");
@@ -38,7 +46,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Json
  * @group      Zend_Json_Server
  */
-class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
+class SmdTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -48,8 +56,8 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Json_Server_SmdTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Json_Server_SmdTest");
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
@@ -60,7 +68,7 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->smd = new Zend_Json_Server_Smd();
+        $this->smd = new Smd\Smd();
     }
 
     /**
@@ -90,7 +98,7 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
             try {
                 $this->smd->setTransport($transport);
                 $this->fail('Invalid transport should throw exception');
-            } catch (Zend_Json_Server_Exception $e) {
+            } catch (Server\Exception $e) {
                 $this->assertContains('Invalid transport', $e->getMessage());
             }
         }
@@ -98,16 +106,16 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
 
     public function testEnvelopeShouldDefaultToJsonRpcVersion1()
     {
-        $this->assertEquals(Zend_Json_Server_Smd::ENV_JSONRPC_1, $this->smd->getEnvelope());
+        $this->assertEquals(Smd\Smd::ENV_JSONRPC_1, $this->smd->getEnvelope());
     }
 
     public function testEnvelopeAccessorsShouldWorkUnderNormalInput()
     {
         $this->testEnvelopeShouldDefaultToJsonRpcVersion1();
-        $this->smd->setEnvelope(Zend_Json_Server_Smd::ENV_JSONRPC_2);
-        $this->assertEquals(Zend_Json_Server_Smd::ENV_JSONRPC_2, $this->smd->getEnvelope());
-        $this->smd->setEnvelope(Zend_Json_Server_Smd::ENV_JSONRPC_1);
-        $this->assertEquals(Zend_Json_Server_Smd::ENV_JSONRPC_1, $this->smd->getEnvelope());
+        $this->smd->setEnvelope(Smd\Smd::ENV_JSONRPC_2);
+        $this->assertEquals(Smd\Smd::ENV_JSONRPC_2, $this->smd->getEnvelope());
+        $this->smd->setEnvelope(Smd\Smd::ENV_JSONRPC_1);
+        $this->assertEquals(Smd\Smd::ENV_JSONRPC_1, $this->smd->getEnvelope());
     }
 
     public function testEnvelopeShouldBeLimitedToJsonRpcVersions()
@@ -116,7 +124,7 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
             try {
                 $this->smd->setEnvelope($env);
                 $this->fail('Invalid envelope type should throw exception');
-            } catch (Zend_Json_Server_Exception $e) {
+            } catch (Server\Exception $e) {
                 $this->assertContains('Invalid envelope', $e->getMessage());
             }
         }
@@ -141,7 +149,7 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
             try {
                 $this->smd->setContentType($type);
                 $this->fail('Invalid content type should raise exception');
-            } catch (Zend_Json_Server_Exception $e) {
+            } catch (Server\Exception $e) {
                 $this->assertContains('Invalid content type', $e->getMessage());
             }
         }
@@ -206,7 +214,7 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
 
     public function testShouldBeAbleToUseServiceObjectToAddService()
     {
-        $service = new Zend_Json_Server_Smd_Service('foo');
+        $service = new Smd\Service('foo');
         $this->smd->addService($service);
         $this->assertSame($service, $this->smd->getService('foo'));
     }
@@ -218,19 +226,19 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
         );
         $this->smd->addService($service);
         $foo = $this->smd->getService('foo');
-        $this->assertTrue($foo instanceof Zend_Json_Server_Smd_Service);
+        $this->assertTrue($foo instanceof Smd\Service);
         $this->assertEquals('foo', $foo->getName());
     }
 
     public function testAddingServiceWithExistingServiceNameShouldThrowException()
     {
-        $service = new Zend_Json_Server_Smd_Service('foo');
+        $service = new Smd\Service('foo');
         $this->smd->addService($service);
-        $test    = new Zend_Json_Server_Smd_Service('foo');
+        $test    = new Smd\Service('foo');
         try {
             $this->smd->addService($test);
             $this->fail('Adding service with existing service name should throw exception');
-        } catch (Zend_Json_Server_Exception $e) {
+        } catch (Server\Exception $e) {
             $this->assertContains('already register', $e->getMessage());
         }
     }
@@ -241,7 +249,7 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
             try {
                 $this->smd->addService($service);
                 $this->fail('Attempt to register invalid service should throw exception');
-            } catch (Zend_Json_Server_Exception $e) {
+            } catch (Server\Exception $e) {
                 $this->assertContains('Invalid service', $e->getMessage());
             }
         }
@@ -249,9 +257,9 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
 
     public function testShouldBeAbleToAddManyServicesAtOnceWithArrayOfServiceObjects()
     {
-        $one   = new Zend_Json_Server_Smd_Service('one');
-        $two   = new Zend_Json_Server_Smd_Service('two');
-        $three = new Zend_Json_Server_Smd_Service('three');
+        $one   = new Smd\Service('one');
+        $two   = new Smd\Service('two');
+        $three = new Smd\Service('three');
         $services = array($one, $two, $three);
         $this->smd->addServices($services);
         $test = $this->smd->getServices();
@@ -272,7 +280,7 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
 
     public function testShouldBeAbleToAddManyServicesAtOnceWithMixedArrayOfObjectsAndArrays()
     {
-        $two = new Zend_Json_Server_Smd_Service('two');
+        $two = new Smd\Service('two');
         $services = array(
             array('name' => 'one'),
             $two,
@@ -287,7 +295,7 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
     public function testSetServicesShouldOverwriteExistingServices()
     {
         $this->testShouldBeAbleToAddManyServicesAtOnceWithMixedArrayOfObjectsAndArrays();
-        $five = new Zend_Json_Server_Smd_Service('five');
+        $five = new Smd\Service('five');
         $services = array(
             array('name' => 'four'),
             $five,
@@ -360,7 +368,7 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
         $options = $this->getOptions();
         $this->smd->setOptions($options);
         $json = $this->smd->toJson();
-        $smd  = Zend_Json::decode($json);
+        $smd  = Json\Json::decode($json);
         $this->validateServiceArray($smd, $options);
     }
 
@@ -369,7 +377,7 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
         $options = $this->getOptions();
         $this->smd->setOptions($options);
         $json = $this->smd->__toString();
-        $smd  = Zend_Json::decode($json);
+        $smd  = Json\Json::decode($json);
         $this->validateServiceArray($smd, $options);
     }
 
@@ -409,7 +417,7 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('contentType', $smd));
         $this->assertTrue(array_key_exists('services', $smd));
 
-        $this->assertEquals(Zend_Json_Server_Smd::SMD_VERSION, $smd['SMDVersion']);
+        $this->assertEquals(Smd\Smd::SMD_VERSION, $smd['SMDVersion']);
         $this->assertEquals($options['target'], $smd['target']);
         $this->assertEquals($options['id'], $smd['id']);
         $this->assertEquals($this->smd->getTransport(), $smd['transport']);
@@ -424,5 +432,5 @@ class Zend_Json_Server_SmdTest extends PHPUnit_Framework_TestCase
 
 // Call Zend_Json_Server_SmdTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_Json_Server_SmdTest::main") {
-    Zend_Json_Server_SmdTest::main();
+    \Zend_Json_Server_SmdTest::main();
 }

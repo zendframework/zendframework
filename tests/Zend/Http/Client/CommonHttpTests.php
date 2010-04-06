@@ -844,7 +844,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
      * Test that lines that might be evaluated as boolean false do not break
      * the reading prematurely.
      *
-     * @see http://framework.zend.com/issues/browse/ZF-4238
+     * @link http://framework.zend.com/issues/browse/ZF-4238
      */
     public function testZF4238FalseLinesInResponse()
     {
@@ -936,6 +936,29 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $res = $this->client->setRawData($data, 'image/jpeg')->request('PUT');
         $expected = $this->_getTestFileContents('staticFile.jpg');
         $this->assertEquals($expected, $res->getBody(), 'Response body does not contain the expected data');
+    }
+    
+    /**
+     * Test that we can deal with double Content-Length headers
+     * 
+     * @link http://framework.zend.com/issues/browse/ZF-9404
+     */
+    public function testZF9404DoubleContentLengthHeader()
+    {
+        $this->client->setUri($this->baseuri . 'ZF9404-doubleContentLength.php');
+        $expect = filesize(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'ZF9404-doubleContentLength.php');
+        
+        $response = $this->client->request();
+        if (! $response->isSuccessful()) {
+            throw new ErrorException("Error requesting test URL");
+        }
+        
+        $clen = $response->getHeader('content-length');
+        if (! (is_array($clen))) {
+            $this->markTestSkipped("Didn't get multiple Content-length headers");
+        }
+        
+        $this->assertEquals($expect, strlen($response->getBody()));
     }
     
     /**

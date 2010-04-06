@@ -417,10 +417,18 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
         // Else, if we got the content-length header, read this number of bytes
         } elseif (isset($headers['content-length'])) {
 
+            // If we got more than one Content-Length header (see ZF-9404) use
+            // the last value sent
+            if (is_array($headers['content-length'])) {
+                $contentLength = $headers['content-length'][count($headers['content-length']) - 1]; 
+            } else {
+                $contentLength = $headers['content-length'];
+            }
+            
             $current_pos = ftell($this->socket);
             $chunk = '';
 
-            for ($read_to = $current_pos + $headers['content-length'];
+            for ($read_to = $current_pos + $contentLength;
                  $read_to > $current_pos;
                  $current_pos = ftell($this->socket)) {
 

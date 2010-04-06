@@ -378,7 +378,7 @@ class URL implements URI
      */
     public function setScheme($scheme)
     {
-        $this->_scheme = $scheme;
+        $this->_scheme = strtolower($scheme);
         return $this;
     }
     

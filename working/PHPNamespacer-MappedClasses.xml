@@ -9139,154 +9139,154 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Client.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Client</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Client.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth</newNamespace>
+      <newRelativeFilePath>Zend/OAuth/Client.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth</newNamespace>
       <newClassName>Client</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Client</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OAuth\Client</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Config/ConfigInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Config_ConfigInterface</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Config/ConfigInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth\Config</newNamespace>
-      <newClassName>ConfigInterface</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Config\ConfigInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/OAuth/Config.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth</newNamespace>
+      <newClassName>Config</newClassName>
+      <newFullyQualifiedName>Zend\OAuth\Config</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Config.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Config</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Config/Config.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth\Config</newNamespace>
-      <newClassName>Config</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Config\Config</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/OAuth/Config/StandardConfig.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth\Config</newNamespace>
+      <newClassName>StandardConfig</newClassName>
+      <newFullyQualifiedName>Zend\OAuth\Config\StandardConfig</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Consumer.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Consumer</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Consumer.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth</newNamespace>
+      <newRelativeFilePath>Zend/OAuth/Consumer.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth</newNamespace>
       <newClassName>Consumer</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Consumer</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OAuth\Consumer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth</newNamespace>
+      <newRelativeFilePath>Zend/OAuth/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OAuth\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Http/AccessToken.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Http_AccessToken</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Http/AccessToken.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth\Http</newNamespace>
+      <newRelativeFilePath>Zend/OAuth/HTTP/AccessToken.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth\HTTP</newNamespace>
       <newClassName>AccessToken</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Http\AccessToken</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OAuth\HTTP\AccessToken</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Http/RequestToken.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Http_RequestToken</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Http/RequestToken.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth\Http</newNamespace>
+      <newRelativeFilePath>Zend/OAuth/HTTP/RequestToken.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth\HTTP</newNamespace>
       <newClassName>RequestToken</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Http\RequestToken</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OAuth\HTTP\RequestToken</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Http/UserAuthorization.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Http_UserAuthorization</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Http/UserAuthorization.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth\Http</newNamespace>
+      <newRelativeFilePath>Zend/OAuth/HTTP/UserAuthorization.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth\HTTP</newNamespace>
       <newClassName>UserAuthorization</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Http\UserAuthorization</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OAuth\HTTP\UserAuthorization</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Http/Utility.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Http_Utility</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Http/Utility.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth\Http</newNamespace>
+      <newRelativeFilePath>Zend/OAuth/HTTP/Utility.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth\HTTP</newNamespace>
       <newClassName>Utility</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Http\Utility</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OAuth\HTTP\Utility</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Http.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Http</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Http/Http.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth\Http</newNamespace>
-      <newClassName>Http</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Http\Http</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/OAuth/HTTP.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth</newNamespace>
+      <newClassName>HTTP</newClassName>
+      <newFullyQualifiedName>Zend\OAuth\HTTP</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Signature/Hmac.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Signature_Hmac</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Signature/Hmac.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth\Signature</newNamespace>
-      <newClassName>Hmac</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Signature\Hmac</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/OAuth/Signature/HMAC.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth\Signature</newNamespace>
+      <newClassName>HMAC</newClassName>
+      <newFullyQualifiedName>Zend\OAuth\Signature\HMAC</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Signature/Plaintext.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Signature_Plaintext</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Signature/Plaintext.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth\Signature</newNamespace>
+      <newRelativeFilePath>Zend/OAuth/Signature/Plaintext.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth\Signature</newNamespace>
       <newClassName>Plaintext</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Signature\Plaintext</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OAuth\Signature\Plaintext</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Signature/Rsa.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Signature_Rsa</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Signature/Rsa.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth\Signature</newNamespace>
-      <newClassName>Rsa</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Signature\Rsa</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/OAuth/Signature/RSA.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth\Signature</newNamespace>
+      <newClassName>RSA</newClassName>
+      <newFullyQualifiedName>Zend\OAuth\Signature\RSA</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Signature/SignatureAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Signature_SignatureAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Signature/SignatureAbstract.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth\Signature</newNamespace>
-      <newClassName>SignatureAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Signature\SignatureAbstract</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/OAuth/Signature/AbstractSignature.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth\Signature</newNamespace>
+      <newClassName>AbstractSignature</newClassName>
+      <newFullyQualifiedName>Zend\OAuth\Signature\AbstractSignature</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Token/Access.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Token_Access</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Token/Access.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth\Token</newNamespace>
+      <newRelativeFilePath>Zend/OAuth/Token/Access.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth\Token</newNamespace>
       <newClassName>Access</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Token\Access</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OAuth\Token\Access</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Token/AuthorizedRequest.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Token_AuthorizedRequest</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Token/AuthorizedRequest.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth\Token</newNamespace>
+      <newRelativeFilePath>Zend/OAuth/Token/AuthorizedRequest.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth\Token</newNamespace>
       <newClassName>AuthorizedRequest</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Token\AuthorizedRequest</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OAuth\Token\AuthorizedRequest</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Token/Request.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Token_Request</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Token/Request.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth\Token</newNamespace>
+      <newRelativeFilePath>Zend/OAuth/Token/Request.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth\Token</newNamespace>
       <newClassName>Request</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Token\Request</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OAuth\Token\Request</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth/Token.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth_Token</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Token/Token.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth\Token</newNamespace>
-      <newClassName>Token</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Token\Token</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/OAuth/Token/AbstractToken.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth\Token</newNamespace>
+      <newClassName>AbstractToken</newClassName>
+      <newFullyQualifiedName>Zend\OAuth\Token\AbstractToken</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Oauth.php</originalRelativeFilePath>
       <originalClassName>Zend_Oauth</originalClassName>
-      <newRelativeFilePath>Zend/Oauth/Oauth.php</newRelativeFilePath>
-      <newNamespace>Zend\Oauth</newNamespace>
-      <newClassName>Oauth</newClassName>
-      <newFullyQualifiedName>Zend\Oauth\Oauth</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/OAuth/OAuth.php</newRelativeFilePath>
+      <newNamespace>Zend\OAuth</newNamespace>
+      <newClassName>OAuth</newClassName>
+      <newFullyQualifiedName>Zend\OAuth\OAuth</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/OpenId/Consumer/Storage/File.php</originalRelativeFilePath>

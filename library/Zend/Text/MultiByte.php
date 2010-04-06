@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Text;
+
+/**
  * Zend_Text_MultiByte contains multibyte safe string methods
  *
  * @category  Zend
@@ -27,7 +32,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Text_MultiByte
+class MultiByte
 {
     /**
      * Word wrap
@@ -111,7 +116,7 @@ class Zend_Text_MultiByte
      * @param  string  $charset
      * @return string
      */
-    public static function strPad($input, $padLength, $padString = ' ', $padType = STR_PAD_RIGHT, $charset = 'UTF-8')
+    public static function strPad($input, $padLength, $padString = ' ', $padType = \STR\PAD\RIGHT, $charset = 'UTF-8')
     {
         $return          = '';
         $lengthOfPadding = $padLength - iconv_strlen($input, $charset);

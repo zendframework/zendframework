@@ -20,18 +20,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Text\Table;
+use Zend\Config;
+
+/**
  * Zend_Text_Table enables developers to create tables out of characters
  *
- * @uses      Zend_Loader_PluginLoader
- * @uses      Zend_Text_Table_Exception
- * @uses      Zend_Text_Table_Column
- * @uses      Zend_Text_Table_Row
+ * @uses      \Zend\Loader\PluginLoader\PluginLoader
+ * @uses      \Zend\Text\Table\Exception
+ * @uses      \Zend\Text\Table\Column
+ * @uses      \Zend\Text\Table\Row
  * @category  Zend
  * @package   Zend_Text_Table
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Text_Table
+class Table
 {
     /**
      * Auto seperator settings
@@ -44,7 +50,7 @@ class Zend_Text_Table
     /**
      * Decorator used for the table borders
      *
-     * @var Zend_Text_Table_Decorator_Interface
+     * @var \Zend\Text\Table\Decorator\DecoratorInterface
      */
     protected $_decorator = null;
 
@@ -119,22 +125,22 @@ class Zend_Text_Table
      * Create a basic table object
      *
      * @param  array             $columnsWidths List of all column widths
-     * @param  Zend_Config|array $options       Configuration options
-     * @throws Zend_Text_Table_Exception When no columns widths were set
+     * @param  \Zend\Config\Config|array $options       Configuration options
+     * @throws \Zend\Text\Table\Exception When no columns widths were set
      */
     public function __construct($options = null)
     {
         // Set options
         if (is_array($options)) {
             $this->setOptions($options);
-        } else if ($options instanceof Zend_Config) {
+        } else if ($options instanceof Config\Config) {
             $this->setConfig($options);
         }
 
         // Check if column widths were set
         // @todo When column widths were not set, assume auto-sizing
         if ($this->_columnWidths === null) {
-            throw new Zend_Text_Table_Exception('You must define the column widths');
+            throw new Exception('You must define the column widths');
         }
 
         // If no decorator was given, use default unicode decorator
@@ -150,8 +156,8 @@ class Zend_Text_Table
     /**
      * Set options from array
      *
-     * @param  array $options Configuration for Zend_Text_Table
-     * @return Zend_Text_Table
+     * @param  array $options Configuration for \Zend\Text\Table\Table
+     * @return \Zend\Text\Table\Table
      */
     public function setOptions(array $options)
     {
@@ -172,10 +178,10 @@ class Zend_Text_Table
     /**
      * Set options from config object
      *
-     * @param  Zend_Config $config Configuration for Zend_Text_Table
-     * @return Zend_Text_Table
+     * @param  Zend_Config $config Configuration for \Zend\Text\Table\Table
+     * @return \Zend\Text\Table\Table
      */
-    public function setConfig(Zend_Config $config)
+    public function setConfig(Config\Config $config)
     {
         return $this->setOptions($config->toArray());
     }
@@ -184,19 +190,19 @@ class Zend_Text_Table
      * Set column widths
      *
      * @param  array $columnWidths Widths of all columns
-     * @throws Zend_Text_Table_Exception When no columns were supplied
-     * @throws Zend_Text_Table_Exception When a column has an invalid width
-     * @return Zend_Text_Table
+     * @throws \Zend\Text\Table\Exception When no columns were supplied
+     * @throws \Zend\Text\Table\Exception When a column has an invalid width
+     * @return \Zend\Text\Table\Table
      */
     public function setColumnWidths(array $columnWidths)
     {
         if (count($columnWidths) === 0) {
-            throw new Zend_Text_Table_Exception('You must supply at least one column');
+            throw new Exception('You must supply at least one column');
         }
 
         foreach ($columnWidths as $columnNum => $columnWidth) {
             if (is_int($columnWidth) === false or $columnWidth < 1) {
-                throw new Zend_Text_Table_Exception('Column ' . $columnNum . ' has an invalid'
+                throw new Exception('Column ' . $columnNum . ' has an invalid'
                                                     . ' column width');
             }
         }
@@ -210,7 +216,7 @@ class Zend_Text_Table
      * Set auto separation mode
      *
      * @param  integer $autoSeparate Auto separation mode
-     * @return Zend_Text_Table
+     * @return \Zend\Text\Table\Table
      */
     public function setAutoSeparate($autoSeparate)
     {
@@ -221,12 +227,12 @@ class Zend_Text_Table
     /**
      * Set decorator
      *
-     * @param  Zend_Text_Table_Decorator_Interface|string $decorator Decorator to use
-     * @return Zend_Text_Table
+     * @param  \Zend\Text\Table\Decorator\DecoratorInterface|string $decorator Decorator to use
+     * @return \Zend\Text\Table\Table
      */
     public function setDecorator($decorator)
     {
-        if ($decorator instanceof Zend_Text_Table_Decorator_Interface) {
+        if ($decorator instanceof Decorator\DecoratorInterface) {
             $this->_decorator = $decorator;
         } else {
             $classname        = $this->getPluginLoader()->load($decorator);
@@ -240,7 +246,7 @@ class Zend_Text_Table
      * Set the column padding
      *
      * @param  integer $padding The padding for the columns
-     * @return Zend_Text_Table
+     * @return \Zend\Text\Table\Table
      */
     public function setPadding($padding)
     {
@@ -251,14 +257,14 @@ class Zend_Text_Table
     /**
      * Get the plugin loader for decorators
      *
-     * @return Zend_Loader_PluginLoader
+     * @return \Zend\Loader\PluginLoader\PluginLoader
      */
     public function getPluginLoader()
     {
         if ($this->_pluginLoader === null) {
-            $prefix     = 'Zend_Text_Table_Decorator_';
+            $prefix     = 'Zend\Text\Table\Decorator\\';
             $pathPrefix = 'Zend/Text/Table/Decorator/';
-            $this->_pluginLoader = new Zend_Loader_PluginLoader(array($prefix => $pathPrefix));
+            $this->_pluginLoader = new \Zend\Loader\PluginLoader\PluginLoader(array($prefix => $pathPrefix));
         }
 
         return $this->_pluginLoader;
@@ -269,7 +275,7 @@ class Zend_Text_Table
      *
      * @param  integer $columnNum
      * @param  string  $align
-     * @return Zend_Text_Table
+     * @return \Zend\Text\Table\Table
      */
     public function setDefaultColumnAlign($columnNum, $align)
     {
@@ -321,24 +327,24 @@ class Zend_Text_Table
     /**
      * Append a row to the table
      *
-     * @param  array|Zend_Text_Table_Row $row The row to append to the table
+     * @param  array|\Zend\Text\Table\Row $row The row to append to the table
      * @throws Zend_Text_Table_Exception When $row is neither an array nor Zend_Zext_Table_Row
-     * @throws Zend_Text_Table_Exception When a row contains too many columns
-     * @return Zend_Text_Table
+     * @throws \Zend\Text\Table\Exception When a row contains too many columns
+     * @return \Zend\Text\Table\Table
      */
     public function appendRow($row)
     {
-        if (!is_array($row) && !($row instanceof Zend_Text_Table_Row)) {
-            throw new Zend_Text_Table_Exception('$row must be an array or instance of Zend_Text_Table_Row');
+        if (!is_array($row) && !($row instanceof Row)) {
+            throw new Exception('$row must be an array or instance of Zend_Text_Table_Row');
         }
 
         if (is_array($row)) {
             if (count($row) > count($this->_columnWidths)) {
-                throw new Zend_Text_Table_Exception('Row contains too many columns');
+                throw new Exception('Row contains too many columns');
             }
 
             $data   = $row;
-            $row    = new Zend_Text_Table_Row();
+            $row    = new Row();
             $colNum = 0;
             foreach ($data as $columnData) {
                 if (isset($this->_defaultColumnAligns[$colNum])) {
@@ -347,7 +353,7 @@ class Zend_Text_Table
                     $align = null;
                 }
 
-                $row->appendColumn(new Zend_Text_Table_Column($columnData, $align));
+                $row->appendColumn(new Column($columnData, $align));
                 $colNum++;
             }
         }
@@ -360,14 +366,14 @@ class Zend_Text_Table
     /**
      * Render the table
      *
-     * @throws Zend_Text_Table_Exception When no rows were added to the table
+     * @throws \Zend\Text\Table\Exception When no rows were added to the table
      * @return string
      */
     public function render()
     {
         // There should be at least one row
         if (count($this->_rows) === 0) {
-            throw new Zend_Text_Table_Exception('No rows were added to the table yet');
+            throw new Exception('No rows were added to the table yet');
         }
 
         // Initiate the result variable
@@ -518,7 +524,7 @@ class Zend_Text_Table
     {
         try {
             return $this->render();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             trigger_error($e->getMessage(), E_USER_ERROR);
         }
 

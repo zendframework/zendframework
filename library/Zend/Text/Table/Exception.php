@@ -20,15 +20,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Text\Table;
+
+/**
  * Exception class for Zend_Text_Table
  *
- * @uses      Zend_Text_Exception
+ * @uses      \Zend\Text\Exception
  * @category  Zend
  * @package   Zend_Text_Table
- * @uses      Zend_Text_Exception
+ * @uses      \Zend\Text\Exception
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Text_Table_Exception extends Zend_Text_Exception
+class Exception extends \Zend\Text\Exception
 {
 }

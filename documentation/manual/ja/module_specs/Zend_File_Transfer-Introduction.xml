@@ -475,7 +475,6 @@ $names = $upload->getMimeType('foo');
             </para>
 
             <example id="zend.file.transfer.introduction.uploadprogress.progressadapter.example1">
-
                 <title>progressbar アダプタを使用した実際の状態の取得</title>
 
                 <programlisting language="php"><![CDATA[
@@ -497,7 +496,6 @@ while (!$upload['done']) {
         </sect3>
 
         <sect3 id="zend.file.transfer.introduction.uploadprogress.manually">
-
             <title>getProgress() を手動で使用する</title>
 
             <para>
@@ -590,7 +588,6 @@ while (!$upload['done']) {
             </para>
 
             <example id="zend.file.transfer.introduction.uploadprogress.manually.example1">
-
                 <title>手動での進捗状況表示の使用法</title>
 
                 <programlisting language="php"><![CDATA[
@@ -606,9 +603,7 @@ while (!$upload['done']) {
             </example>
 
         </sect3>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 tw=80 et:

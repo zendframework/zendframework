@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20174 -->
+<!-- EN-Revision: 21606 -->
 <sect1 id="zend.file.transfer.introduction">
-
     <title>Zend_File_Transfer</title>
 
     <para>
@@ -16,6 +15,7 @@
 
     <note>
         <title>制限</title>
+
         <para>
             現在の <classname>Zend_File_Transfer</classname>
             の実装では、<acronym>HTTP</acronym> Post によるアップロードにしか対応していません。
@@ -30,6 +30,7 @@
 
     <note>
         <title>フォーム</title>
+
         <para>
             <classname>Zend_Form</classname> を使う場合は <classname>Zend_Form</classname>
             の <acronym>API</acronym> を使うようにし、<classname>Zend_File_Transfer</classname>
@@ -50,11 +51,13 @@
 
     <example id="zend.file.transfer.introduction.example">
         <title>シンプルなファイルアップロードフォーム</title>
+
         <para>
             これは、基本的なファイルアップロード処理の例です。
             まずはファイルアップロードフォームから。
             今回の例では。アップロードしたいファイルはひとつです。
         </para>
+
         <programlisting language="xml"><![CDATA[
 <form enctype="multipart/form-data" action="/file/upload" method="POST">
     <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
@@ -63,17 +66,20 @@
     <input type="submit" value="アップロード" />
 </form>
 ]]></programlisting>
+
         <para>
             HTML を直接作成するのではなく、利便性を考慮して
             <link linkend="zend.form.standardElements.file">Zend_Form_Element_File</link>
             を使っていることに注意しましょう。
         </para>
+
         <para>
             次はアップロードしたファイルを受け取る側です。
-            今回の例では、受け取る側は <code>/file/upload</code>
-            となります。そこで、<code>file</code> コントローラにアクション
-            <code>upload</code> を作成します。
+            今回の例では、受け取る側は <filename>/file/upload</filename>
+            となります。そこで、 'file' コントローラにアクション
+            <methodname>upload()</methodname> を作成します。
         </para>
+
         <programlisting language="php"><![CDATA[
 $adapter = new Zend_File_Transfer_Adapter_Http();
 
@@ -84,9 +90,10 @@ if (!$adapter->receive()) {
     echo implode("\n", $messages);
 }
 ]]></programlisting>
+
         <para>
             このコードは <classname>Zend_File_Transfer</classname> のもっともシンプルな使用法を示すものです。
-            ローカルの保存先を <code>setDestination</code> メソッドで指定して
+            ローカルの保存先を <methodname>setDestination()</methodname> メソッドで指定して
             <methodname>receive()</methodname> メソッドをコールします。
             アップロード時に何らかのエラーが発生した場合は、
             返された例外の中でその情報を取得できます。
@@ -96,6 +103,7 @@ if (!$adapter->receive()) {
 
     <note>
         <title>注意</title>
+
         <para>
             この例は、<classname>Zend_File_Transfer</classname> の基本的な <acronym>API</acronym> を説明するためだけのものです。
             これをそのまま実際の環境で使用しては
@@ -106,7 +114,6 @@ if (!$adapter->receive()) {
     </note>
 
     <sect2 id="zend.file.transfer.introduction.adapters">
-
         <title>Zend_File_Transfer がサポートするアダプタ</title>
 
         <para>
@@ -121,7 +128,6 @@ if (!$adapter->receive()) {
     </sect2>
 
     <sect2 id="zend.file.transfer.introduction.options">
-
         <title>Zend_File_Transfer のオプション</title>
 
         <para>
@@ -145,7 +151,6 @@ if (!$adapter->receive()) {
     </sect2>
 
     <sect2 id="zend.file.transfer.introduction.checking">
-
         <title>ファイルのチェック</title>
 
         <para>
@@ -162,7 +167,7 @@ if (!$adapter->receive()) {
                     ファイル名を省略した場合はすべてのファイルをチェックします。
                     <methodname>isValid()</methodname> を <methodname>receive()</methodname> の前にコールすることもできます。
                     この場合、<methodname>receive()</methodname> がファイルを受信する際に内部的に
-                    <code>isValid</code> をコールすることはありません。
+                    <methodname>isValid()</methodname> をコールすることはありません。
                 </para>
             </listitem>
 
@@ -214,7 +219,6 @@ $upload->receive();
     </sect2>
 
     <sect2 id="zend.file.transfer.introduction.informations">
-
         <title>さらなるファイル情報</title>
 
         <para>
@@ -300,9 +304,9 @@ $names = $upload->getFileName('foo');
 
         <para>
             <methodname>getFileSize()</methodname> は、デフォルトではファイルサイズを SI 記法で返します。
-            つまり、たとえば <code>2048</code> ではなく <code>2kB</code>
+            つまり、たとえば <emphasis>2048</emphasis> ではなく <emphasis>2kB</emphasis>
             のようになるということです。単にサイズだけが知りたい場合は、オプション
-            <code>useByteString</code> を <constant>FALSE</constant> に設定してください。
+            <property>useByteString</property> を <constant>FALSE</constant> に設定してください。
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example.getfilesize">
@@ -322,7 +326,6 @@ $size = $upload->getFileSize();
 
         </example>
 
-        <!-- TODO : to be translated -->
         <note>
             <title>Client given filesize</title>
 
@@ -338,7 +341,7 @@ $size = $upload->getFileSize();
             使用できるアルゴリズムについては
             <ulink url="http://php.net/hash_algos">PHP の hash_algos メソッド</ulink>
             を参照ください。アルゴリズムを省略した場合は
-            <code>crc32</code> をデフォルトのアルゴリズムとして使用します。
+            <emphasis>crc32</emphasis> をデフォルトのアルゴリズムとして使用します。
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example2">
@@ -359,6 +362,7 @@ $names = $upload->getHash('crc32', 'foo');
 
         <note>
             <title>返り値</title>
+
             <para>
                 複数のファイルを指定した場合は、返される結果が配列となることに注意しましょう。
             </para>
@@ -384,7 +388,6 @@ $names = $upload->getMimeType('foo');
 
         </example>
 
-        <!-- TODO : to be translated -->
         <note>
             <title>Client given mimetype</title>
 
@@ -405,7 +408,6 @@ $names = $upload->getMimeType('foo');
             </para>
         </warning>
 
-        <!-- TODO : to be translated -->
         <warning>
             <title>Original data within $_FILES</title>
 
@@ -425,22 +427,21 @@ $names = $upload->getMimeType('foo');
     </sect2>
 
     <sect2 id="zend.file.transfer.introduction.uploadprogress">
-
         <title>ファイルアップロードの進捗</title>
 
         <para>
             <classname>Zend_File_Transfer</classname> では、ファイルアップロードの進捗状況を知ることができます。
-            この機能を使用するには、<code>APC</code> 拡張モジュール
+            この機能を使用するには、<acronym>APC</acronym> 拡張モジュール
             (ほとんどの <acronym>PHP</acronym> 環境においてデフォルトで提供されています)
-            あるいは <code>uploadprogress</code> 拡張モジュールが必要です。
+            あるいは <classname>uploadprogress</classname> 拡張モジュールが必要です。
             これらの拡張モジュールがインストールされていれば、自動検出してそれを使用します。
             進捗状況を取得するには、いくつかの事前条件があります。
         </para>
 
         <para>
-            まず、<code>APC</code> あるいは <code>uploadprogress</code>
-            のいずれかを有効にする必要があります。<code>APC</code>
-            の機能は php.ini で無効化できることに注意しましょう。
+            まず、<acronym>APC</acronym> あるいは <classname>uploadprogress</classname>
+            のいずれかを有効にする必要があります。<acronym>APC</acronym>
+            の機能は <filename>php.ini</filename> で無効化できることに注意しましょう。
         </para>
 
         <para>

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19426 -->
+<!-- EN-Revision: 21661 -->
 <sect1 id="zend.translate.adapter">
-
     <title>Zend_Translate のアダプタ</title>
 
     <para>
@@ -13,6 +12,7 @@
 
     <table id="zend.translate.adapter.table">
         <title><classname>Zend_Translate</classname> のアダプタ</title>
+
         <tgroup cols="3">
             <thead>
                 <row>
@@ -21,52 +21,62 @@
                     <entry>備考</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry>Array</entry>
                     <entry><acronym>PHP</acronym> の配列</entry>
                     <entry>小さめのページ。簡単に使用できる。プログラマしかさわれない。</entry>
                 </row>
+
                 <row>
                     <entry>Csv</entry>
                     <entry>カンマ区切りファイル (*.csv/*.txt)</entry>
                     <entry>シンプルなテキスト形式。高速。Unicode 文字で問題が発生する可能性がある。</entry>
                 </row>
+
                 <row>
                     <entry>Gettext</entry>
                     <entry>gettext のバイナリファイル (*.mo)</entry>
                     <entry>linux における GNU の標準形式。スレッドセーフ。翻訳用ツールが必要。</entry>
                 </row>
+
                 <row>
                     <entry>Ini</entry>
                     <entry>シンプルな ini ファイル (*.ini)</entry>
                     <entry>シンプルなテキスト形式。高速。Unicode 文字で問題が発生する可能性がある。</entry>
                 </row>
+
                 <row>
                     <entry>Tbx</entry>
                     <entry>termbase 変換ファイル (*.tbx/*.xml)</entry>
                     <entry>アプリケーション間で専門用語を変換するための業界標準。<acronym>XML</acronym> フォーマット。</entry>
                 </row>
+
                 <row>
                     <entry>Tmx</entry>
                     <entry>tmx ファイル (*.tmx/*.xml)</entry>
                     <entry>アプリケーション間での翻訳の業界標準。<acronym>XML</acronym> フォーマット。可読形式。</entry>
                 </row>
+
                 <row>
                     <entry>Qt</entry>
                     <entry>qt 言語ファイル (*.ts)</entry>
                     <entry>クロスプラットフォームなアプリケーションフレームワーク。<acronym>XML</acronym> フォーマット。可読形式。</entry>
                 </row>
+
                 <row>
                     <entry>Xliff</entry>
                     <entry>xliff ファイル (*.xliff/*.xml)</entry>
                     <entry><acronym>TMX</acronym> に似ているが、よりシンプル。<acronym>XML</acronym> フォーマット。可読形式。</entry>
                 </row>
+
                 <row>
                     <entry>XmlTm</entry>
                     <entry>xmltm ファイル (*.xml)</entry>
                     <entry><acronym>XML</acronym> ドキュメントの翻訳メモリの業界標準。<acronym>XML</acronym> フォーマット。可読形式。</entry>
                 </row>
+
                 <row>
                     <entry>その他</entry>
                     <entry>*.sql</entry>
@@ -77,7 +87,6 @@
     </table>
 
     <sect2 id="zend.translate.adapter.decision">
-
         <title>使用するアダプタを決める方法</title>
 
         <para>
@@ -112,7 +121,6 @@
         </note>
 
         <sect3 id="zend.translate.adapter.array">
-
             <title>Zend_Translate_Adapter_Array</title>
 
             <para>
@@ -131,7 +139,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.csv">
-
             <title>Zend_Translate_Adapter_Csv</title>
 
             <para>
@@ -158,7 +165,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.gettext">
-
             <title>Zend_Translate_Adapter_Gettext</title>
 
             <para>
@@ -184,7 +190,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.ini">
-
             <title>Zend_Translate_Adapter_Ini</title>
 
             <para>
@@ -217,7 +222,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.tbx">
-
             <title>Zend_Translate_Adapter_Tbx</title>
 
             <para>
@@ -238,7 +242,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.tmx">
-
             <title>Zend_Translate_Adapter_Tmx</title>
 
             <para>
@@ -256,7 +259,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.qt">
-
             <title>Zend_Translate_Adapter_Qt</title>
 
             <para>
@@ -274,7 +276,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.xliff">
-
             <title>Zend_Translate_Adapter_Xliff</title>
 
             <para>
@@ -293,7 +294,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.xmltm">
-
             <title>Zend_Translate_Adapter_XmlTm</title>
 
             <para>
@@ -313,7 +313,6 @@
     </sect2>
 
     <sect2 id="zend.translate.adapter.selfwritten">
-
         <title>自作のアダプタの組み込み</title>
 
         <para>
@@ -337,10 +336,14 @@
 
         <programlisting language="php"><![CDATA[
 try {
-    $translate = new Zend_Translate('Company_Translate_Adapter_MyFormat',
-                                    '/path/to/translate.xx',
-                                    'en',
-                                    array('myoption' => 'myvalue'));
+    $translate = new Zend_Translate(
+        array(
+            'adapter' => 'Company_Translate_Adapter_MyFormat',
+            'content' => '/path/to/translate.xx',
+            'locale'  => 'en',
+            'myoption' => 'myvalue'
+        )
+    );
 } catch (Exception $e) {
     // ファイルが見つからない、アダプタクラスが存在しない、……
     // などの一般的なエラー
@@ -350,7 +353,6 @@ try {
     </sect2>
 
     <sect2 id="zend.translate.adapter.caching">
-
         <title>全アダプタの高速化</title>
 
         <para>
@@ -378,9 +380,13 @@ $cache = Zend_Cache::factory('Core',
                              $frontendOptions,
                              $backendOptions);
 Zend_Translate::setCache($cache);
-$translate = new Zend_Translate('gettext',
-                                '/path/to/translate.mo',
-                                'en');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translate.mo',
+        'locale'  => 'en'
+    )
+);
 ]]></programlisting>
 
         <note>
@@ -393,9 +399,7 @@ $translate = new Zend_Translate('gettext',
                 翻訳ソースのキャッシュは行われません。
             </para>
         </note>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

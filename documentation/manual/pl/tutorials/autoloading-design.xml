@@ -104,7 +104,7 @@
                     Celem tego założenia jest pozwolenie na określenie przez dewelopera dodatkowych
                     funkcji oferujących funkcjonalność autoloadera - np. dla funkcje ładujące
                     zasoby dla klas, które nie mają relacji 1:1 z plikami - aby były zarejestrowane
-                    przed lub po domyślnym mechaniźmie autoloadera Zend Framework. 
+                    przed lub po domyślnym mechanizmie autoloadera Zend Framework. 
                 </para>
             </listitem>
         </itemizedlist>

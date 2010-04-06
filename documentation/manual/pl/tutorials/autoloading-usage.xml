@@ -29,7 +29,7 @@ Zend_Loader_Autoloader::getInstance();
     </para>
 
     <para>
-        Co sie dzieje w przypadku gdy wymagane jest użycie innych przestrzeni nazw? Najlepszym i
+        Co się dzieje w przypadku gdy wymagane jest użycie innych przestrzeni nazw? Najlepszym i
         najłatwiejszym sposobem jest wywołanie metody <methodname>registerNamespace()</methodname>.
         Można do niej przekazać pojedynczy prefiks przestrzeni nazw lub ich całą tablicę:
     </para>
@@ -95,7 +95,7 @@ $loader->setFallbackAutoloader(true);
     </warning>
 
     <note>
-        <title>Prefiksy przestrzeni nazw a przestrznie nazw PHP</title>
+        <title>Prefiksy przestrzeni nazw a przestrzenie nazw PHP</title>
 
         <para>
             W momencie powstawania tego dokumentu istnieje stabilna wersja
@@ -131,7 +131,7 @@ $loader->setFallbackAutoloader(true);
         <listitem>
             <para>
                 Każda z tych metod przyjmuje drugi, opcjonalny argument - prefiks przestrzeni nazw.
-                Można go użyć do wskazania aby podany autoloader był uzywany jedynie do dołączania
+                Można go użyć do wskazania aby podany autoloader był używany jedynie do dołączania
                 klas zawierających podany prefiks. Jeśli dana klasa go nie posiada to autoloader nie
                 zostanie uruchomiony - takie podejście może znacznie zwiększyć wydajność. 
             </para>
@@ -151,8 +151,6 @@ $loader->setFallbackAutoloader(true);
 
     <para>
         W powyższy sposób można użyć każdego poprawnego odwołania do funkcji <acronym>PHP</acronym>
-        
-        Autoloaders managed this way may be any valid <acronym>PHP</acronym> callback.
     </para>
 
     <programlisting language="php"><![CDATA[

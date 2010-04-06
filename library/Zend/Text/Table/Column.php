@@ -20,17 +20,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Text\Table;
+use Zend\Text;
+
+/**
  * Column class for Zend_Text_Table_Row
  *
- * @uses      Zend_Text_MultiByte
- * @uses      Zend_Text_Table
- * @uses      Zend_Text_Table_Exception
+ * @uses      \Zend\Text\MultiByte
+ * @uses      \Zend\Text\Table\Table
+ * @uses      \Zend\Text\Table\Exception
  * @category  Zend
  * @package   Zend_Text_Table
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Text_Table_Column
+class Column
 {
     /**
      * Aligns for columns
@@ -99,22 +105,22 @@ class Zend_Text_Table_Column
      *
      * @param  string $content  Content of the column
      * @param  string $charset  The charset of the content
-     * @throws Zend_Text_Table_Exception When $content is not a string
-     * @return Zend_Text_Table_Column
+     * @throws \Zend\Text\Table\Exception When $content is not a string
+     * @return \Zend\Text\Table\Column
      */
     public function setContent($content, $charset = null)
     {
         if (is_string($content) === false) {
-            throw new Zend_Text_Table_Exception('$content must be a string');
+            throw new Exception('$content must be a string');
         }
 
         if ($charset === null) {
-            $inputCharset = Zend_Text_Table::getInputCharset();
+            $inputCharset = Table::getInputCharset();
         } else {
             $inputCharset = strtolower($charset);
         }
 
-        $outputCharset = Zend_Text_Table::getOutputCharset();
+        $outputCharset = Table::getOutputCharset();
 
         if ($inputCharset !== $outputCharset) {
             if (PHP_OS !== 'AIX') {
@@ -133,13 +139,13 @@ class Zend_Text_Table_Column
      * Set the align
      *
      * @param  string $align Align of the column
-     * @throws Zend_Text_Table_Exception When supplied align is invalid
-     * @return Zend_Text_Table_Column
+     * @throws \Zend\Text\Table\Exception When supplied align is invalid
+     * @return \Zend\Text\Table\Column
      */
     public function setAlign($align)
     {
         if (in_array($align, $this->_allowedAligns) === false) {
-            throw new Zend_Text_Table_Exception('Invalid align supplied');
+            throw new Exception('Invalid align supplied');
         }
 
         $this->_align = $align;
@@ -151,13 +157,13 @@ class Zend_Text_Table_Column
      * Set the colspan
      *
      * @param  int $colSpan
-     * @throws Zend_Text_Table_Exception When $colSpan is smaller than 1
-     * @return Zend_Text_Table_Column
+     * @throws \Zend\Text\Table\Exception When $colSpan is smaller than 1
+     * @return \Zend\Text\Table\Column
      */
     public function setColSpan($colSpan)
     {
         if (is_int($colSpan) === false or $colSpan < 1) {
-            throw new Zend_Text_Table_Exception('$colSpan must be an integer and greater than 0');
+            throw new Exception('$colSpan must be an integer and greater than 0');
         }
 
         $this->_colSpan = $colSpan;
@@ -180,20 +186,20 @@ class Zend_Text_Table_Column
      *
      * @param  integer $columnWidth The width of the column
      * @param  integer $padding     The padding for the column
-     * @throws Zend_Text_Table_Exception When $columnWidth is lower than 1
-     * @throws Zend_Text_Table_Exception When padding is greater than columnWidth
+     * @throws \Zend\Text\Table\Exception When $columnWidth is lower than 1
+     * @throws \Zend\Text\Table\Exception When padding is greater than columnWidth
      * @return string
      */
     public function render($columnWidth, $padding = 0)
     {
         if (is_int($columnWidth) === false or $columnWidth < 1) {
-            throw new Zend_Text_Table_Exception('$columnWidth must be an integer and greater than 0');
+            throw new Exception('$columnWidth must be an integer and greater than 0');
         }
 
         $columnWidth -= ($padding * 2);
 
         if ($columnWidth < 1) {
-            throw new Zend_Text_Table_Exception('Padding (' . $padding . ') is greater than column width');
+            throw new Exception('Padding (' . $padding . ') is greater than column width');
         }
 
         switch ($this->_align) {
@@ -214,13 +220,13 @@ class Zend_Text_Table_Column
                 break;
         }
 
-        $outputCharset = Zend_Text_Table::getOutputCharset();
-        $lines         = explode("\n", Zend_Text_MultiByte::wordWrap($this->_content, $columnWidth, "\n", true, $outputCharset));
+        $outputCharset = Table::getOutputCharset();
+        $lines         = explode("\n", Text\MultiByte::wordWrap($this->_content, $columnWidth, "\n", true, $outputCharset));
         $paddedLines   = array();
 
         foreach ($lines AS $line) {
             $paddedLines[] = str_repeat(' ', $padding)
-                           . Zend_Text_MultiByte::strPad($line, $columnWidth, ' ', $padMode, $outputCharset)
+                           . Text\MultiByte::strPad($line, $columnWidth, ' ', $padMode, $outputCharset)
                            . str_repeat(' ', $padding);
         }
 

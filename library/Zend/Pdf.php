@@ -169,7 +169,7 @@ class Zend_Pdf
     /**
      * Memory manager for stream objects
      *
-     * @var Zend_Memory_Manager|null
+     * @var \Zend\Memory\MemoryManager|null
      */
     protected static $_memoryManager = null;
 
@@ -192,12 +192,12 @@ class Zend_Pdf
     /**
      * Request used memory manager
      *
-     * @return Zend_Memory_Manager
+     * @return Zend\Memory\MemoryManager
      */
     static public function getMemoryManager()
     {
         if (self::$_memoryManager === null) {
-            self::$_memoryManager = Zend_Memory::factory('none');
+            self::$_memoryManager = new \Zend\Memory\MemoryManager();
         }
 
         return self::$_memoryManager;
@@ -206,9 +206,9 @@ class Zend_Pdf
     /**
      * Set user defined memory manager
      *
-     * @param Zend_Memory_Manager $memoryManager
+     * @param Zend\Memory\MemoryManager $memoryManager
      */
-    static public function setMemoryManager(Zend_Memory_Manager $memoryManager)
+    static public function setMemoryManager(Zend_Memory_MemoryManager $memoryManager)
     {
         self::$_memoryManager = $memoryManager;
     }

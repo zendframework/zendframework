@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Memory\Container;
+
+/**
  * Memory object container access controller.
  *
  * Memory manager stores a list of generated objects to control them.
@@ -31,18 +36,19 @@
  *
  * Class also provides Zend_Memory_Container_Interface interface and works as proxy for such cases.
  *
- * @uses       Zend_Memory_Container_Interface
+ * @uses       \Zend\Memory\Container\ContainerInterface
+ * @uses       \Zend\Memory\Container\Movable
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Memory_AccessController implements Zend_Memory_Container_Interface
+class AccessController implements ContainerInterface
 {
     /**
      * Memory container object
      *
-     * @var Zend_Memory_Container
+     * @var \Zend\Memory\Container\AbstractContainer
      */
     private $_memContainer;
 
@@ -50,9 +56,9 @@ class Zend_Memory_AccessController implements Zend_Memory_Container_Interface
     /**
      * Object constructor
      *
-     * @param Zend_Memory_Container_Movable $memoryManager
+     * @param \Zend\Memory\Container\Movable $memContainer
      */
-    public function __construct(Zend_Memory_Container_Movable $memContainer)
+    public function __construct(Movable $memContainer)
     {
         $this->_memContainer = $memContainer;
     }
@@ -124,7 +130,7 @@ class Zend_Memory_AccessController implements Zend_Memory_Container_Interface
      *
      * @param string $property
      * @return string
-     * @throws Zend_Memory_Exception
+     * @throws \Zend\Memory\Exception
      */
     public function __get($property)
     {
@@ -136,7 +142,7 @@ class Zend_Memory_AccessController implements Zend_Memory_Container_Interface
      *
      * @param string $property
      * @param  string $value
-     * @throws Zend_Exception
+     * @throws \Zend\Exception
      */
     public function __set($property, $value)
     {

@@ -20,16 +20,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Text\Figlet;
+use Zend\Config;
+
+/**
  * Zend_Text_Figlet is a PHP implementation of FIGlet
  *
  * @uses      InvalidArgumentException
- * @uses      Zend_Text_Figlet_Exception
+ * @uses      \Zend\Text\Figlet\Exception
  * @category  Zend
  * @package   Zend_Text_Figlet
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Text_Figlet
+class Figlet
 {
     /**
      * Smush2 layout modes
@@ -273,28 +279,28 @@ class Zend_Text_Figlet
      * the $options variable, which can either be an array or an instance of
      * Zend_Config.
      *
-     * @param array|Zend_Config $options Options for the output
+     * @param array|\Zend\Config\Config $options Options for the output
      */
     public function __construct($options = null)
     {
         // Set options
         if (is_array($options)) {
             $this->setOptions($options);
-        } else if ($options instanceof Zend_Config) {
+        } else if ($options instanceof Config\Config) {
             $this->setConfig($options);
         }
 
         // If no font was defined, load default font
         if (!$this->_fontLoaded) {
-            $this->_loadFont(dirname(__FILE__) . '/Figlet/zend-framework.flf');
+            $this->_loadFont(__DIR__ . '/zend-framework.flf');
         }
     }
 
     /**
      * Set options from array
      *
-     * @param  array $options Configuration for Zend_Text_Figlet
-     * @return Zend_Text_Figlet
+     * @param  array $options Configuration for \Zend\Text\Figlet\Figlet
+     * @return \Zend\Text\Figlet\Figlet
      */
     public function setOptions(array $options)
     {
@@ -314,10 +320,10 @@ class Zend_Text_Figlet
     /**
      * Set options from config object
      *
-     * @param  Zend_Config $config Configuration for Zend_Text_Figlet
-     * @return Zend_Text_Figlet
+     * @param  Zend_Config $config Configuration for \Zend\Text\Figlet\Figlet
+     * @return \Zend\Text\Figlet\Figlet
      */
-    public function setConfig(Zend_Config $config)
+    public function setConfig(Config\Config $config)
     {
         return $this->setOptions($config->toArray());
     }
@@ -326,7 +332,7 @@ class Zend_Text_Figlet
      * Set a font to use
      *
      * @param  string $font Path to the font
-     * @return Zend_Text_Figlet
+     * @return \Zend\Text\Figlet\Figlet
      */
     public function setFont($font)
     {
@@ -338,7 +344,7 @@ class Zend_Text_Figlet
      * Set handling of paragraphs
      *
      * @param  boolean $handleParagraphs Wether to handle paragraphs or not
-     * @return Zend_Text_Figlet
+     * @return \Zend\Text\Figlet\Figlet
      */
     public function setHandleParagraphs($handleParagraphs)
     {
@@ -351,7 +357,7 @@ class Zend_Text_Figlet
      * for right aligned.
      *
      * @param  integer $justification Justification of the output text
-     * @return Zend_Text_Figlet
+     * @return \Zend\Text\Figlet\Figlet
      */
     public function setJustification($justification)
     {
@@ -364,7 +370,7 @@ class Zend_Text_Figlet
      *
      * @param  integer $outputWidth Output with which should be used for word
      *                              wrapping and justification
-     * @return Zend_Text_Figlet
+     * @return \Zend\Text\Figlet\Figlet
      */
     public function setOutputWidth($outputWidth)
     {
@@ -378,7 +384,7 @@ class Zend_Text_Figlet
      * use Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT.
      *
      * @param  integer $rightToLeft Right-to-left mode
-     * @return Zend_Text_Figlet
+     * @return \Zend\Text\Figlet\Figlet
      */
     public function setRightToLeft($rightToLeft)
     {
@@ -392,7 +398,7 @@ class Zend_Text_Figlet
      * Use one of the constants of Zend_Text_Figlet::SM_*, you may combine them.
      *
      * @param  integer $smushMode Smush mode to use for generating text
-     * @return Zend_Text_Figlet
+     * @return \Zend\Text\Figlet\Figlet
      */
     public function setSmushMode($smushMode)
     {
@@ -423,13 +429,13 @@ class Zend_Text_Figlet
      * @param  string $text     Text to convert to a figlet text
      * @param  string $encoding Encoding of the input string
      * @throws InvalidArgumentException When $text is not a string
-     * @throws Zend_Text_Figlet_Exception    When $text it not properly encoded
+     * @throws \Zend\Text\Figlet\Exception    When $text it not properly encoded
      * @return string
      */
     public function render($text, $encoding = 'UTF-8')
     {
         if (!is_string($text)) {
-            throw new InvalidArgumentException('$text must be a string');
+            throw new \InvalidArgumentException('$text must be a string');
         }
 
         if ($encoding !== 'UTF-8') {
@@ -449,7 +455,7 @@ class Zend_Text_Figlet
         $textLength     = @iconv_strlen($text, 'UTF-8');
 
         if ($textLength === false) {
-            throw new Zend_Text_Figlet_Exception('$text is not encoded with ' . $encoding);
+            throw new Exception('$text is not encoded with ' . $encoding);
         }
 
         for ($charNum = 0; $charNum < $textLength; $charNum++) {
@@ -960,22 +966,22 @@ class Zend_Text_Figlet
      * Load the specified font
      *
      * @param  string $fontFile Font file to load
-     * @throws Zend_Text_Figlet_Exception When font file was not found
-     * @throws Zend_Text_Figlet_Exception When GZIP library is required but not found
-     * @throws Zend_Text_Figlet_Exception When font file is not readable
+     * @throws \Zend\Text\Figlet\Exception When font file was not found
+     * @throws \Zend\Text\Figlet\Exception When GZIP library is required but not found
+     * @throws \Zend\Text\Figlet\Exception When font file is not readable
      * @return void
      */
     protected function _loadFont($fontFile)
     {
         // Check if the font file exists
         if (!file_exists($fontFile)) {
-            throw new Zend_Text_Figlet_Exception($fontFile . ': Font file not found');
+            throw new Exception($fontFile . ': Font file not found');
         }
 
         // Check if gzip support is required
         if (substr($fontFile, -3) === '.gz') {
             if (!function_exists('gzcompress')) {
-                throw new Zend_Text_Figlet_Exception('GZIP library is required for '
+                throw new Exception('GZIP library is required for '
                                                      . 'gzip compressed font files');
             }
 
@@ -988,7 +994,7 @@ class Zend_Text_Figlet
         // Try to open the file
         $fp = fopen($fontFile, 'rb');
         if ($fp === false) {
-            throw new Zend_Text_Figlet_Exception($fontFile . ': Could not open file');
+            throw new Exception($fontFile . ': Could not open file');
         }
 
         // If the file is not compressed, lock the stream
@@ -1011,7 +1017,7 @@ class Zend_Text_Figlet
                            $this->_fontSmush);
 
         if ($magic !== self::FONTFILE_MAGIC_NUMBER || $numsRead < 5) {
-            throw new Zend_Text_Figlet_Exception($fontFile . ': Not a FIGlet 2 font file');
+            throw new Exception($fontFile . ': Not a FIGlet 2 font file');
         }
 
         // Set default right to left

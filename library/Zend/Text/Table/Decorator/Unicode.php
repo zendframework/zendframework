@@ -20,15 +20,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Text\Table\Decorator;
+
+/**
  * Unicode Decorator for Zend_Text_Table
  *
- * @uses      Zend_Text_Table_Decorator_Interface
+ * @uses      \Zend\Text\Table\Decorator\DecoratorInterface
  * @category  Zend
  * @package   Zend_Text_Table
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Text_Table_Decorator_Unicode implements Zend_Text_Table_Decorator_Interface
+class Unicode implements DecoratorInterface
 {
     /**
      * Defined by Zend_Text_Table_Decorator_Interface

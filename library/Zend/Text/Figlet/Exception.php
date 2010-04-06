@@ -20,14 +20,19 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Text\Figlet;
+
+/**
  * Exception class for Zend_Figlet
  *
- * @uses      Zend_Text_Exception
+ * @uses      \Zend\Text\Exception
  * @category  Zend
  * @package   Zend_Text_Figlet
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Text_Figlet_Exception extends Zend_Text_Exception
+class Exception extends \Zend\Text\Exception
 {
 }

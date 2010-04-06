@@ -413,10 +413,10 @@ class Zend_Form_Element implements Zend_Validate_Interface
         }
         return $this->_translator;
     }
-    
+
     /**
      * Does this element have its own specific translator?
-     * 
+     *
      * @return bool
      */
     public function hasTranslator()
@@ -1332,12 +1332,12 @@ class Zend_Form_Element implements Zend_Validate_Interface
             array_unshift($validators, $notEmpty);
             $this->setValidators($validators);
         }
-        
+
         // Find the correct translator. Zend_Validate_Abstract::getDefaultTranslator()
         // will get either the static translator attached to Zend_Validate_Abstract
-        // or the 'Zend_Translate' from Zend_Registry. 
-        if (Zend_Validate_Abstract::hasDefaultTranslator() && 
-            !Zend_Form::hasDefaultTranslator()) 
+        // or the 'Zend_Translate' from Zend_Registry.
+        if (Zend_Validate_Abstract::hasDefaultTranslator() &&
+            !Zend_Form::hasDefaultTranslator())
         {
             $translator = Zend_Validate_Abstract::getDefaultTranslator();
             if ($this->hasTranslator()) {
@@ -1355,7 +1355,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
         foreach ($this->getValidators() as $key => $validator) {
             if (method_exists($validator, 'setTranslator')) {
                 if (method_exists($validator, 'hasTranslator')) {
-                    if (!$validator->hasTranslator()) {                    
+                    if (!$validator->hasTranslator()) {
                         $validator->setTranslator($translator);
                     }
                 } else {
@@ -2099,7 +2099,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
         }
 
         $messages = false;
-        if (isset($validator['options']['messages'])) {
+        if (isset($validator['options']) && array_key_exists('messages', (array)$validator['options'])) {
             $messages = $validator['options']['messages'];
             unset($validator['options']['messages']);
         }

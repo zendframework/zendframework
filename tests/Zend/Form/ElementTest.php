@@ -2174,6 +2174,27 @@ class Zend_Form_ElementTest_ArrayFilter implements Zend_Filter_Interface
         $form = new Zend_Form(array('elements' => array($username)));
         $this->assertTrue($form->isValid(array('username' => 'abcde')));
     }
+
+    /**
+     * @see ZF-6822
+     */
+    public function testValidatorByUsingStringNotation()
+    {
+        $this->_checkZf2794();
+
+        $username = new Zend_Form_Element('username');
+        $username->addValidator('stringLength', true, array(5, 20))
+                 ->addValidator('regex', true, '/^[a-zA-Z0-9_]*$/')
+                 ->addFilter('StringToLower')
+                 ->setRequired(true);
+        $form = new Zend_Form(array('elements' => array($username)));
+        $form->isValid(array('username' => '#'));
+
+        $validator = $username->getValidator('stringLength');
+        $this->assertTrue($validator->zfBreakChainOnFailure);
+        $validator = $username->getValidator('regex');
+        $this->assertTrue($validator->zfBreakChainOnFailure);
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Form_ElementTest::main') {

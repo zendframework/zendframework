@@ -8979,10 +8979,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Memory/AccessController.php</originalRelativeFilePath>
       <originalClassName>Zend_Memory_AccessController</originalClassName>
-      <newRelativeFilePath>Zend/Memory/AccessController.php</newRelativeFilePath>
-      <newNamespace>Zend\Memory</newNamespace>
+      <newRelativeFilePath>Zend/Memory/Container/AccessController.php</newRelativeFilePath>
+      <newNamespace>Zend\Memory\Container</newNamespace>
       <newClassName>AccessController</newClassName>
-      <newFullyQualifiedName>Zend\Memory\AccessController</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Memory\Container\AccessController</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Memory/Container/Interface.php</originalRelativeFilePath>
@@ -9011,10 +9011,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Memory/Container.php</originalRelativeFilePath>
       <originalClassName>Zend_Memory_Container</originalClassName>
-      <newRelativeFilePath>Zend/Memory/Container/Container.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Memory/Container/AbstractContainer.php</newRelativeFilePath>
       <newNamespace>Zend\Memory\Container</newNamespace>
-      <newClassName>Container</newClassName>
-      <newFullyQualifiedName>Zend\Memory\Container\Container</newFullyQualifiedName>
+      <newClassName>AbstractContainer</newClassName>
+      <newFullyQualifiedName>Zend\Memory\Container\AbstractContainer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Memory/Exception.php</originalRelativeFilePath>
@@ -9027,10 +9027,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Memory/Manager.php</originalRelativeFilePath>
       <originalClassName>Zend_Memory_Manager</originalClassName>
-      <newRelativeFilePath>Zend/Memory/Manager.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Memory/MemoryManager.php</newRelativeFilePath>
       <newNamespace>Zend\Memory</newNamespace>
-      <newClassName>Manager</newClassName>
-      <newFullyQualifiedName>Zend\Memory\Manager</newFullyQualifiedName>
+      <newClassName>MemoryManager</newClassName>
+      <newFullyQualifiedName>Zend\Memory\MemoryManager</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Memory/Value.php</originalRelativeFilePath>

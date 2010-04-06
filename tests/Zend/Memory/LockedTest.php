@@ -21,10 +21,10 @@
  */
 
 /**
- * Test helper
+ * @namespace
  */
-
-/** Zend_Memory */
+namespace ZendTest\Memory;
+use Zend\Memory\Container;
 
 /**
  * @category   Zend
@@ -34,16 +34,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Memory
  */
-class Zend_Memory_Container_LockedTest extends PHPUnit_Framework_TestCase
+class LockedTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * tests the Movable memory container object creation
      */
     public function testCreation()
     {
-        $memObject = new Zend_Memory_Container_Locked('0123456789');
+        $memObject = new Container\Locked('0123456789');
 
-        $this->assertTrue($memObject instanceof Zend_Memory_Container_Locked);
+        $this->assertTrue($memObject instanceof Container\Locked);
     }
 
 
@@ -52,7 +52,7 @@ class Zend_Memory_Container_LockedTest extends PHPUnit_Framework_TestCase
      */
     public function testValueAccess()
     {
-        $memObject = new Zend_Memory_Container_Locked('0123456789');
+        $memObject = new Container\Locked('0123456789');
 
         // getRef() method
         $this->assertEquals($memObject->getRef(), '0123456789');
@@ -77,7 +77,7 @@ class Zend_Memory_Container_LockedTest extends PHPUnit_Framework_TestCase
      */
     public function testLock()
     {
-        $memObject = new Zend_Memory_Container_Locked('0123456789');
+        $memObject = new Container\Locked('0123456789');
 
         // It's always locked
         $this->assertTrue((boolean)$memObject->isLocked());
@@ -95,7 +95,7 @@ class Zend_Memory_Container_LockedTest extends PHPUnit_Framework_TestCase
      */
     public function testTouch()
     {
-        $memObject = new Zend_Memory_Container_Locked('0123456789');
+        $memObject = new Container\Locked('0123456789');
 
         $memObject->touch();
 

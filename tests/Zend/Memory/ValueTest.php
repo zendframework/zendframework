@@ -21,37 +21,11 @@
  */
 
 /**
- * Test helper
+ * @namespace
  */
-
-/** Zend_Memory */
-
-/**
- * @category   Zend
- * @package    Zend_Memory
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Memory_Container_Movable_Dummy extends Zend_Memory_Container_Movable
-{
-    /**
-     * Dummy object constructor
-     */
-    public function __construct()
-    {
-        // Do nothing
-    }
-
-    /**
-     * Dummy value update callback method
-     */
-    public function processUpdate()
-    {
-        // Do nothing
-    }
-}
-
+namespace ZendTest\Memory;
+use Zend\Memory;
+use Zend\Memory\Container;
 
 /**
  * @category   Zend
@@ -61,15 +35,15 @@ class Zend_Memory_Container_Movable_Dummy extends Zend_Memory_Container_Movable
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Memory
  */
-class Zend_Memory_ValueTest extends PHPUnit_Framework_TestCase
+class ValueTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * tests the Value object creation
      */
     public function testCreation()
     {
-        $valueObject = new Zend_Memory_Value('data data data ...', new Zend_Memory_Container_Movable_Dummy());
-        $this->assertTrue($valueObject instanceof Zend_Memory_Value);
+        $valueObject = new Memory\Value('data data data ...', new DummyMovableContainer());
+        $this->assertTrue($valueObject instanceof Memory\Value);
         $this->assertEquals($valueObject->getRef(), 'data data data ...');
     }
 
@@ -79,7 +53,7 @@ class Zend_Memory_ValueTest extends PHPUnit_Framework_TestCase
      */
     public function testGetRef()
     {
-        $valueObject = new Zend_Memory_Value('0123456789', new Zend_Memory_Container_Movable_Dummy());
+        $valueObject = new Memory\Value('0123456789', new DummyMovableContainer());
         $valueRef = &$valueObject->getRef();
         $valueRef[3] = '_';
 
@@ -92,13 +66,8 @@ class Zend_Memory_ValueTest extends PHPUnit_Framework_TestCase
      */
     public function testToString()
     {
-        $valueObject = new Zend_Memory_Value('0123456789', new Zend_Memory_Container_Movable_Dummy());
+        $valueObject = new Memory\Value('0123456789', new DummyMovableContainer());
         $this->assertEquals($valueObject->__toString(), '0123456789');
-
-        if (version_compare(PHP_VERSION, '5.2') < 0) {
-            // Skip following tests for PHP versions before 5.2
-            return;
-        }
 
         $this->assertEquals(strlen($valueObject), 10);
         $this->assertEquals((string)$valueObject, '0123456789');
@@ -109,12 +78,7 @@ class Zend_Memory_ValueTest extends PHPUnit_Framework_TestCase
      */
     public function testArrayAccess()
     {
-        if (version_compare(PHP_VERSION, '5.2') < 0) {
-            // Skip following tests for PHP versions before 5.2
-            return;
-        }
-
-        $valueObject = new Zend_Memory_Value('0123456789', new Zend_Memory_Container_Movable_Dummy());
+        $valueObject = new Memory\Value('0123456789', new DummyMovableContainer());
         $this->assertEquals($valueObject[8], '8');
 
         $valueObject[2] = '_';
@@ -126,5 +90,24 @@ class Zend_Memory_ValueTest extends PHPUnit_Framework_TestCase
         $valueObject[10] = '_';
         $this->assertEquals((string)$valueObject, '01_3456789_');
         error_reporting($error_level);
+    }
+}
+
+class DummyMovableContainer extends Container\Movable
+{
+    /**
+     * Empty constructor
+     */
+    public function __construct()
+    {
+        // Do nothing
+    }
+
+    /**
+     * Dummy value update callback method
+     */
+    public function processUpdate()
+    {
+        // Do nothing
     }
 }

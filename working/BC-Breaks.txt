@@ -57,6 +57,15 @@ Zend_Measure:
  * "Zend_Measure" prefix now becomes "Zend\Measure" namespace
  * "Zend_Measure_Abstract" becomes "Zend\Measure\AbstractMeasure"
 
+Zend_Memory:
+ * "Zend_Memory" prefix now becomes "Zend\Memory" namespace
+ * "Zend_Memory" class and "Zend_Memory::factory()" method are removed,
+   "new Zend\Memory\MemoryManager(Zend\Cache\Frontend $cache = null)" has to be used 
+   directly now.
+ * "Zend_Memory_Container" prefix now becomes "Zend\Memory\Container" namespace
+ * "Zend_Memory_Manager" becomes "Zend\Memory\MemoryManager"
+
+
 Zend_Filter:
  * "Filter" broken into "FilterChain" and "StaticFilter"
    * For filter chains, use the new FilterChain class

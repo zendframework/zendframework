@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20792 -->
 <sect1 id="zend.layout.advanced">
     <title>Zend_Layout の高度な使用法</title>
 
@@ -17,7 +17,7 @@
         <listitem><para>
                 <emphasis>ビューオブジェクトのカスタマイズ</emphasis>。
                 <classname>Zend_Layout</classname> は、
-                <classname>Zend_View_Interface</classname> を実装した任意のクラスを使用することができます。
+                <classname>Zend_View_Interface</classname> を実装した任意のクラスを使用できます。
         </para></listitem>
 
         <listitem><para>
@@ -50,7 +50,7 @@
             <classname>Zend_Layout</classname> では、
             <classname>Zend_View_Interface</classname> を実装した任意のクラスや
             <classname>Zend_View_Abstract</classname> を継承した任意のクラスを用いて
-            レイアウトスクリプトをレンダリングすることができます。
+            レイアウトスクリプトをレンダリングできます。
             独自のビューオブジェクトを単純に
             コンストラクタ/<methodname>startMvc()</methodname> のパラメータとして渡すか、
             あるいはアクセサ <methodname>setView()</methodname> で設定します。
@@ -92,7 +92,7 @@ $layout->setView($view);
                 'Zend_Layout' プレースホルダ経由で
                 <link linkend="zend.view.helpers.initial.placeholder">
                 プレースホルダヘルパー</link>
-                を使用して変数にアクセスすることができます。
+                を使用して変数にアクセスできます。
             </para>
 
             <programlisting language="php"><![CDATA[

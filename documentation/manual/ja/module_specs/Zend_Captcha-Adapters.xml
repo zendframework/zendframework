@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16674 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.captcha.adapters">
     <title>CAPTCHA アダプタ</title>
 
@@ -228,14 +228,14 @@
                 <methodname>setPrivKey($key)</methodname> と <methodname>getPrivKey()</methodname>
                 で、ReCaptcha サービスで使用する秘密鍵を指定します。
                 これはオブジェクトの作成時に指定する必要がありますが、
-                その後いつでも上書きすることができます。
+                その後いつでも上書きできます。
             </para></listitem>
 
             <listitem><para>
                 <methodname>setPubKey($key)</methodname> と <methodname>getPubKey()</methodname>
                 で、ReCaptcha サービスで使用する公開鍵を指定します。
                 これはオブジェクトの作成時に指定する必要がありますが、
-                その後いつでも上書きすることができます。
+                その後いつでも上書きできます。
             </para></listitem>
 
             <listitem><para>

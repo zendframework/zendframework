@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20792 -->
 <sect1 id="zend.locale.introduction">
 
     <title>導入</title>
@@ -458,7 +458,7 @@ $temp = new Zend_Measure_Temperature('100,10',
         <para>
             多くのオブジェクトですべて同一のデフォルトロケールを使用することがわかっている場合は、
             それを明示的に指定すると、毎回デフォルトロケールを検索することによる
-            オーバーヘッドを回避することができます。
+            オーバーヘッドを回避できます。
         </para>
 
         <example id="zend.locale.interoperate.example-3">
@@ -522,7 +522,7 @@ echo $date->getDate();
         </para>
 
         <para>
-            'date_format' オプションでデフォルトの日付書式文字列を指定することができます。
+            'date_format' オプションでデフォルトの日付書式文字列を指定できます。
             しかし、setOptions() で 'date_format' を指定した後で getDate() や
             checkdateFormat() そして getTime() を使用する際には十分注意しましょう。
             これらのメソッドをそのロケールのデフォルトの日付書式で使用するには

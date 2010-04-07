@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 20827 -->
 <sect1 id="zend.measure.edit">
 
     <title>計測値の操作</title>
@@ -10,7 +10,7 @@
         さまざまなロケールのユーザがデータにアクセスできるようになります。
         <classname>Zend_Measure_*</classname> コンポーネントには
         それ以外にもさまざまなメソッドがあり、
-        正規化されたデータを操作することができます。
+        正規化されたデータを操作できます。
     </para>
 
     <itemizedlist>
@@ -68,7 +68,7 @@
 
         <para>
             <methodname>convertTo</methodname> メソッドには、オプションのパラメータ
-            '<code>round</code>' を指定することができます。
+            '<code>round</code>' を指定できます。
             これは、出力結果の精度を設定するものです。標準の精度は
             '<code>2</code>' です。
         </para>

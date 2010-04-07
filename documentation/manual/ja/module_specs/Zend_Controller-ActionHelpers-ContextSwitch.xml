@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17597 -->
+<!-- EN-Revision: 20765 -->
 <sect3 id="zend.controller.actionhelpers.contextswitch">
     <title>ContextSwitch および AjaxContext</title>
 
@@ -75,7 +75,7 @@ class NewsController extends Zend_Controller_Action
         ここで、<methodname>listAction()</methodname>
         の結果を <acronym>XML</acronym> 形式でも返せるようにしたくなったとしましょう。
         わざわざ別のアクションを作らなくても、
-        <acronym>XML</acronym> でレスポンスを返すように指示することができます。
+        <acronym>XML</acronym> でレスポンスを返すように指示できます。
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -134,7 +134,7 @@ class NewsController extends Zend_Controller_Action
     </itemizedlist>
 
     <para>
-        <emphasis>ContextSwitch</emphasis> では任意のコンテキストを指定することができます。
+        <emphasis>ContextSwitch</emphasis> では任意のコンテキストを指定できます。
         つまり (もし存在するなら) サフィックスを自由に変更したり
         送信するレスポンスヘッダを任意のものに変更したり、
         任意のコールバックで初期化や後処理を行ったりができるということです。
@@ -219,14 +219,14 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
                 <para>初期化コールバックは、<emphasis>ContextSwitch</emphasis> が
                 コンテキストを検出した場合に実行されます。
-                これを使用して、任意のロジックを実行することができます。
+                これを使用して、任意のロジックを実行できます。
                 たとえば <acronym>JSON</acronym> コンテキストでは、
                 このコールバックを使用して
                 自動 <acronym>JSON</acronym> シリアライズが有効な場合に ViewRenderer
                 を無効化しています。</para>
 
                 <para>後処理はアクションの <methodname>postDispatch()</methodname>
-                で発生します。これを使用して、任意のロジックを実行することができます。
+                で発生します。これを使用して、任意のロジックを実行できます。
                 たとえば <acronym>JSON</acronym> コンテキストでは、このコールバックを使用して
                 自動 <acronym>JSON</acronym> シリアライズ機能が有効か無効かを調べています。
                 有効な場合はビュー変数を <acronym>JSON</acronym> にシリアライズしてレスポンスに送信し、
@@ -486,7 +486,7 @@ $contextSwitch->initContext('xml');
 
         <para>
             さまざまなメソッドを使用することで、
-            <emphasis>ContextSwitch</emphasis> ヘルパーの挙動を変更することができます。
+            <emphasis>ContextSwitch</emphasis> ヘルパーの挙動を変更できます。
             たとえば次のようなメソッドが存在します。
         </para>
 
@@ -519,7 +519,7 @@ $contextSwitch->initContext();
                     別のサフィックスを設定します。
                     3 番目の引数を使用すると、
                     ViewRenderer のサフィックスの前に
-                    新しいサフィックスをつけるのかどうかを指定することができます。
+                    新しいサフィックスをつけるのかどうかを指定できます。
                     このフラグはデフォルトで有効になっています。
                 </para>
 
@@ -654,12 +654,12 @@ $contextSwitch->initContext();
                     <methodname>setContextParam($name)</methodname>:
                     コンテキストスイッチが要求されたかどうかを調べるための
                     リクエストパラメータを設定します。デフォルトは
-                    'format' ですが、このアクセサを使用することで変更することができます。
+                    'format' ですが、このアクセサを使用することで変更できます。
                 </para>
 
                 <para>
                     <methodname>getContextParam()</methodname>
-                    で、現在の値を取得することができます。
+                    で、現在の値を取得できます。
                 </para>
             </listitem>
 
@@ -687,7 +687,7 @@ $contextSwitch->initContext();
             <listitem>
                 <para>
                     <methodname>getCurrentContext()</methodname> を使うと、
-                    現在のコンテキストを取得することができます。
+                    現在のコンテキストを取得できます。
                     コンテキストスイッチが発生していない場合や
                     <methodname>initContext()</methodname> の起動前にコールした場合は
                     <constant>NULL</constant> を返します。
@@ -702,7 +702,7 @@ $contextSwitch->initContext();
         <para>
             <emphasis>AjaxContext</emphasis> ヘルパーは
             <emphasis>ContextSwitch</emphasis> を継承したものです。
-            <emphasis>ContextSwitch</emphasis> の機能はすべて使用することができます。
+            <emphasis>ContextSwitch</emphasis> の機能はすべて使用できます。
             しかし、いくつか重要な違いがあります。
         </para>
 

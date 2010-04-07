@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17597 -->
+<!-- EN-Revision: 20765 -->
 <sect3 id="zend.controller.actionhelpers.viewrenderer">
     <title>ViewRenderer</title>
 
@@ -135,17 +135,17 @@ Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
             アクションコントローラのインスタンスが最初に作成されたときに、
             <emphasis>ViewRenderer</emphasis> がビューオブジェクトのインスタンスを作成します。
             コントローラのインスタンスが作成されるたびに、<emphasis>ViewRenderer</emphasis>
-            の <methodname>init()</methodname> がコールされます。
+            の <methodname>init()</methodname> が呼び出されます。
             ここでアクションコントローラのビュープロパティを設定し、
             現在のモジュールからの相対パスを指定して
-            <methodname>addScriptPath()</methodname> をコールします。
-            これは現在のモジュール名に基づいたプレフィックスをクラス名の先頭につけてコールされるので、
-            ヘルパーやフィルタのクラスをモジュール内で効率的に管理することができます。
+            <methodname>addScriptPath()</methodname> を呼び出します。
+            これは現在のモジュール名に基づいたプレフィックスをクラス名の先頭につけて呼び出されるので、
+            ヘルパーやフィルタのクラスをモジュール内で効率的に管理できます。
         </para>
 
         <para>
-            <methodname>postDispatch()</methodname> がコールされるたびに、現在のアクションの
-            <methodname>render()</methodname> を自動的にコールします。
+            <methodname>postDispatch()</methodname> が呼び出されるたびに、現在のアクションの
+            <methodname>render()</methodname> を自動的に呼び出します。
         </para>
 
         <para>
@@ -172,7 +172,7 @@ class Foo_BarController extends Zend_Controller_Action
 ...
 
 // ビュースクリプトの中では、たとえば次のように書きます
-$this->foo(); // Foo_View_Helper_Foo::foo() をコールします
+$this->foo(); // Foo_View_Helper_Foo::foo() を呼び出します
 ]]></programlisting>
 
         <para>
@@ -195,7 +195,7 @@ $this->foo(); // Foo_View_Helper_Foo::foo() をコールします
                     を使用すると、自動レンダリング機能を全体的に
                     （すべてのコントローラに対して）無効にしたり有効にしたりできます。
                     <constant>TRUE</constant> を指定すると、そのコントローラの <methodname>postDispatch()</methodname>
-                    では <methodname>render()</methodname> をコールしなくなります。
+                    では <methodname>render()</methodname> を呼び出さなくなります。
                     <methodname>getNeverRender()</methodname> は、現在の設定を取得します。
                 </para>
             </listitem>
@@ -205,9 +205,9 @@ $this->foo(); // Foo_View_Helper_Foo::foo() をコールします
                     <methodname>setNoRender($flag = true)</methodname>
                     を使用すると、自動レンダリングを無効にしたり有効にしたりできます。
                     <constant>TRUE</constant> を指定すると、現在のコントローラの <methodname>postDispatch()</methodname>
-                    では <methodname>render()</methodname> をコールしなくなります。
+                    では <methodname>render()</methodname> を呼び出さなくなります。
                     この設定は、<methodname>preDispatch()</methodname>
-                    がコールされるたびにいったんリセットされます
+                    が呼び出されるたびにいったんリセットされます
                     (つまり、自動レンダリングを無効にしたいすべてのコントローラで
                     個々にこれを設定する必要があるということです)。
                     <methodname>getNoRender()</methodname> は、現在の設定を取得します。
@@ -219,7 +219,7 @@ $this->foo(); // Foo_View_Helper_Foo::foo() をコールします
                     <methodname>setNoController($flag = true)</methodname>
                     を使用すると、<methodname>render()</methodname>
                     がコントローラ名のサブディレクトリにあるアクションスクリプトを
-                    読みにいかなくすることができます (デフォルトでは読みにいきます)。
+                    読みにいかなくできます (デフォルトでは読みにいきます)。
                     <methodname>getNoController()</methodname> は、現在の設定を取得します。
                 </para>
             </listitem>
@@ -237,7 +237,7 @@ $this->foo(); // Foo_View_Helper_Foo::foo() をコールします
             <listitem>
                 <para>
                     <methodname>setScriptAction($name)</methodname>
-                    を使用すると、レンダリングするアクションスクリプトを指定することができます。
+                    を使用すると、レンダリングするアクションスクリプトを指定できます。
                     <varname>$name</varname> は、スクリプト名から拡張子を除いたもの
                     (そして、<emphasis>noController</emphasis> が指定されていない限り、
                     コントローラのディレクトリ名も除いたもの) となります。
@@ -251,7 +251,7 @@ $this->foo(); // Foo_View_Helper_Foo::foo() をコールします
                 <para>
                     <methodname>setResponseSegment($name)</methodname>
                     を使用すると、レンダリング結果を出力する
-                    レスポンスオブジェクトのセグメント名を指定することができます。
+                    レスポンスオブジェクトのセグメント名を指定できます。
                     指定しなかった場合は、デフォルトのセグメントにレンダリングします。
                     <methodname>getResponseSegment()</methodname> は、現在の設定を取得します。
                 </para>
@@ -277,8 +277,8 @@ $this->foo(); // Foo_View_Helper_Foo::foo() をコールします
                         = false)</methodname>
                     を使用すると、<emphasis>scriptAction</emphasis> や <emphasis>responseSegment</emphasis>
                     そして <emphasis>noController</emphasis> のいずれかまたは複数を
-                    一度に指定することができます。<methodname>direct()</methodname>
-                    はこのメソッドのエイリアスで、コントローラ内から簡単にコールすることができます。
+                    一度に指定できます。<methodname>direct()</methodname>
+                    はこのメソッドのエイリアスで、コントローラ内から簡単にコールできます。
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -303,7 +303,7 @@ $this->_helper->viewRenderer('form', 'html', true);
         <para>
             コンストラクタのオプションとして、
             ビューオブジェクトを渡したり <emphasis>ViewRenderer</emphasis>
-            のオプションを渡したりすることができます。
+            のオプションを渡したりできます。
             このオプションで指定できるのは、<methodname>initView()</methodname>
             で説明したフラグと同じものです。
         </para>
@@ -317,8 +317,8 @@ $viewRenderer =
 
         <para>
             さらに追加のメソッドがあり、
-            ビューオブジェクトで使用するビューの基底パスを変更することができます。
-            また、ビュースクリプトが自動レンダリングを行う際に使用するパスも変更することができます。
+            ビューオブジェクトで使用するビューの基底パスを変更できます。
+            また、ビュースクリプトが自動レンダリングを行う際に使用するパスも変更できます。
             これらのメソッドでは、以下のプレースホルダのいずれかあるいは複数が使用できます。
         </para>
 
@@ -746,7 +746,7 @@ class Bar_BatController extends Zend_Controller_Action
                 そこに設定する値が異なります。
                 そんな場合に、それぞれでスクリプト名を変えるのは簡単です。
                 <methodname>setScriptAction()</methodname> や <methodname>setRender()</methodname>
-                を使用するか、あるいはヘルパーをメソッドとしてコールします。
+                を使用するか、あるいはヘルパーをメソッドとして呼び出します。
                 これは <methodname>setRender()</methodname> を起動します。
             </para>
 

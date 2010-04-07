@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20763 -->
 <sect1 id="zend.auth.adapter.dbtable">
     <title>データベースのテーブルでの認証</title>
     <sect2 id="zend.auth.adapter.dbtable.introduction">
@@ -11,7 +11,7 @@
             <classname>Zend_Auth_Adapter_DbTable</classname> のコンストラクタには
             <classname>Zend_Db_Adapter_Abstract</classname> のインスタンスを渡す必要があるので、
             各インスタンスは特定のデータベース接続に関連付けられます。
-            コンストラクタではその他の設定オプションも指定することができます。
+            コンストラクタではその他の設定オプションも指定できます。
             これらは個別にインスタンスメソッドで指定することもできます。
         </para>
 

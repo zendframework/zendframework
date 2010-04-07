@@ -239,9 +239,9 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                         const <constant>Zend_Locale::BROWSER</constant> - The user's Web browser
                         provides information with each request, which is published by
                         <acronym>PHP</acronym> in the global variable
-                        <constant>HTTP_ACCEPT_LANGUAGE</constant>. if no matching locale can be
-                        found, then preference is given to <constant>ENVIRONMENT</constant> and
-                        lastly <constant>FRAMEWORK</constant>.
+                        <varname>$_SERVER['HTTP_ACCEPT_LANGUAGE']</varname>. if no matching locale
+                        can be found, then preference is given to <constant>ENVIRONMENT</constant>
+                        and lastly <constant>FRAMEWORK</constant>.
                     </para>
                 </listitem>
 

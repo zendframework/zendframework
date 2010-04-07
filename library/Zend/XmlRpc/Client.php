@@ -283,7 +283,7 @@ class Client
             $success = true;
             try {
                 $signatures = $this->getIntrospector()->getMethodSignature($method);
-            } catch (Zend\XmlRpc\Exception $e) {
+            } catch (\Zend\XmlRpc\Exception $e) {
                 $success = false;
             }
             if ($success) {

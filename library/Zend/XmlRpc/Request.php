@@ -136,7 +136,7 @@ class Request
      */
     public function setMethod($method)
     {
-        if (!is_string($method) || !preg_match('/^[a-z0-9_.:\/]+$/i', $method)) {
+        if (!is_string($method) || !preg_match('/^[a-z0-9_.:\\\\\/]+$/i', $method)) {
             $this->_fault = new Fault(634, 'Invalid method name ("' . $method . '")');
             $this->_fault->setEncoding($this->getEncoding());
             return false;

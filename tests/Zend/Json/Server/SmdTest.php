@@ -24,16 +24,9 @@
  * @namespace
  */
 namespace ZendTest\Json\Server;
-use Zend\Json\Server\Smd;
-use Zend\Json\Server;
-use Zend\Json;
-
-// Call Zend_Json_Server_SmdTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Json_Server_SmdTest::main");
-}
-
-
+use Zend\Json\Server\SMD,
+    Zend\Json\Server,
+    Zend\Json;
 
 /**
  * Test class for Zend_Json_Server_Smd
@@ -49,18 +42,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 class SmdTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Json_Server_SmdTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      *
@@ -68,17 +49,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->smd = new Smd\Smd();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
+        $this->smd = new SMD();
     }
 
     public function testTransportShouldDefaultToPost()
@@ -106,16 +77,16 @@ class SmdTest extends \PHPUnit_Framework_TestCase
 
     public function testEnvelopeShouldDefaultToJsonRpcVersion1()
     {
-        $this->assertEquals(Smd\Smd::ENV_JSONRPC_1, $this->smd->getEnvelope());
+        $this->assertEquals(SMD::ENV_JSONRPC_1, $this->smd->getEnvelope());
     }
 
     public function testEnvelopeAccessorsShouldWorkUnderNormalInput()
     {
         $this->testEnvelopeShouldDefaultToJsonRpcVersion1();
-        $this->smd->setEnvelope(Smd\Smd::ENV_JSONRPC_2);
-        $this->assertEquals(Smd\Smd::ENV_JSONRPC_2, $this->smd->getEnvelope());
-        $this->smd->setEnvelope(Smd\Smd::ENV_JSONRPC_1);
-        $this->assertEquals(Smd\Smd::ENV_JSONRPC_1, $this->smd->getEnvelope());
+        $this->smd->setEnvelope(SMD::ENV_JSONRPC_2);
+        $this->assertEquals(SMD::ENV_JSONRPC_2, $this->smd->getEnvelope());
+        $this->smd->setEnvelope(SMD::ENV_JSONRPC_1);
+        $this->assertEquals(SMD::ENV_JSONRPC_1, $this->smd->getEnvelope());
     }
 
     public function testEnvelopeShouldBeLimitedToJsonRpcVersions()
@@ -417,7 +388,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('contentType', $smd));
         $this->assertTrue(array_key_exists('services', $smd));
 
-        $this->assertEquals(Smd\Smd::SMD_VERSION, $smd['SMDVersion']);
+        $this->assertEquals(SMD::SMD_VERSION, $smd['SMDVersion']);
         $this->assertEquals($options['target'], $smd['target']);
         $this->assertEquals($options['id'], $smd['id']);
         $this->assertEquals($this->smd->getTransport(), $smd['transport']);
@@ -428,9 +399,4 @@ class SmdTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('foo', $services));
         $this->assertTrue(array_key_exists('bar', $services));
     }
-}
-
-// Call Zend_Json_Server_SmdTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Json_Server_SmdTest::main") {
-    \Zend_Json_Server_SmdTest::main();
 }

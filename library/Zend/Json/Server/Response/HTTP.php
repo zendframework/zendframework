@@ -24,6 +24,8 @@
  */
 namespace Zend\Json\Server\Response;
 
+use Zend\Json\Server\Response as JsonResponse;
+
 /**
  * @uses       \Zend\Json\Server\Response\Response
  * @category   Zend
@@ -31,7 +33,7 @@ namespace Zend\Json\Server\Response;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Http extends Response
+class HTTP extends JsonResponse
 {
     /**
      * Emit JSON

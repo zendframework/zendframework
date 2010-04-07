@@ -24,15 +24,8 @@
  * @namespace
  */
 namespace ZendTest\Json\Server;
-use Zend\Json\Server;
-use Zend\Json;
-
-// Call Zend_Json_Server_ResponseTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Json_Server_ResponseTest::main");
-}
-
-
+use Zend\Json\Server,
+    Zend\Json;
 
 /**
  * Test class for Zend_Json_Server_Response
@@ -48,18 +41,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 class ResponseTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Json_Server_ResponseTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      *
@@ -67,17 +48,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->response = new \Zend\Json\Server\Response\Response();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
+        $this->response = new \Zend\Json\Server\Response();
     }
 
     public function testResultShouldBeNullByDefault()
@@ -194,9 +165,4 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($test['result']);
         $this->assertEquals($this->response->getId(), $test['id']);
     }
-}
-
-// Call Zend_Json_Server_ResponseTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Json_Server_ResponseTest::main") {
-    \Zend_Json_Server_ResponseTest::main();
 }

@@ -28,6 +28,7 @@ use Zend\XmlRpc\Server,
     Zend\XmlRpc\Request,
     Zend\XmlRpc\Response,
     Zend\XmlRpc\Value,
+    Zend\XmlRpc\Fault,
     Zend\XmlRpc;
 
 /**
@@ -97,13 +98,13 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testAddFunction()
     {
         try {
-            $this->_server->addFunction('Zend_XmlRpc_Server_testFunction', 'zsr');
+            $this->_server->addFunction('ZendTest\\XmlRpc\\testFunction', 'zsr');
         } catch (XmlRpc\Exception $e) {
             $this->fail('Attachment should have worked');
         }
 
         $methods = $this->_server->listMethods();
-        $this->assertTrue(in_array('zsr.Zend_XmlRpc_Server_testFunction', $methods));
+        $this->assertTrue(in_array('zsr.ZendTest\\XmlRpc\\testFunction', $methods), var_export($methods, 1));
 
         try {
             $this->_server->addFunction('nosuchfunction');
@@ -116,8 +117,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         try {
             $server->addFunction(
                 array(
-                    'Zend_XmlRpc_Server_testFunction',
-                    'Zend_XmlRpc_Server_testFunction2',
+                    'ZendTest\\XmlRpc\\testFunction',
+                    'ZendTest\\XmlRpc\\testFunction2',
                 ),
                 'zsr'
             );
@@ -125,8 +126,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             $this->fail('Error attaching array of functions: ' . $e->getMessage());
         }
         $methods = $server->listMethods();
-        $this->assertTrue(in_array('zsr.Zend_XmlRpc_Server_testFunction', $methods));
-        $this->assertTrue(in_array('zsr.Zend_XmlRpc_Server_testFunction2', $methods));
+        $this->assertTrue(in_array('zsr.ZendTest\\XmlRpc\\testFunction', $methods));
+        $this->assertTrue(in_array('zsr.ZendTest\\XmlRpc\\testFunction2', $methods));
     }
 
     /**
@@ -137,8 +138,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_server->addFunction(
                 array(
-                    'Zend_XmlRpc_Server_testFunction',
-                    'Zend_XmlRpc_Server_testFunction2',
+                    'ZendTest\\XmlRpc\\testFunction',
+                    'ZendTest\\XmlRpc\\testFunction2',
                 ),
                 'zsr'
             );
@@ -481,7 +482,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_server->loadFunctions($o);
             $this->fail('loadFunctions() should not allow non-reflection objects in an array');
-        } catch (Server\Exception $e) {
+        } catch (\Zend\Server\Exception $e) {
             $this->assertSame('Invalid method provided', $e->getMessage());
         }
     }
@@ -565,7 +566,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $request->setMethod('ZendTest\\XmlRpc\\testFunction');
         $request->setParams(array(array('value1'), 'key'));
         $response = $this->_server->handle($request);
-        $this->assertFalse($response instanceof XmlRpc\Fault);
+        $this->assertFalse($response instanceof Fault);
         $this->assertEquals('key: value1', $response->getReturnValue());
     }
 

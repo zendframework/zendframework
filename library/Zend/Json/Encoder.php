@@ -127,7 +127,7 @@ class Encoder
                 if (isset($this->_options['silenceCyclicalExceptions'])
                     && $this->_options['silenceCyclicalExceptions']===true) {
 
-                    return '"* RECURSION (' . get_class($value) . ') *"';
+                    return '"* RECURSION (' . str_replace('\\', '\\\\', get_class($value)) . ') *"';
 
                 } else {
                     throw new Exception(
@@ -157,8 +157,9 @@ class Encoder
             }
         }
 
-        return '{"__className":"' . get_class($value) . '"'
-                . $props . '}';
+        return '{"__className":"' 
+            . str_replace('\\', '\\\\', get_class($value)) . '"'
+            . $props . '}';
     }
 
 

@@ -23,16 +23,9 @@
 /**
  * @namespace
  */
-namespace ZendTest\Json\Server\Smd;
-use Zend\Json\Server\Smd;
+namespace ZendTest\Json\Server\SMD;
+use Zend\Json\Server\SMD\Service;
 use Zend\Json\Server;
-
-// Call Zend_Json_Server_Smd_ServiceTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Json_Server_Smd_ServiceTest::main");
-}
-
-
 
 /**
  * Test class for Zend_Json_Server_Smd_Service
@@ -48,18 +41,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 class ServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Json_Server_Smd_ServiceTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      *
@@ -67,30 +48,20 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->service = new Smd\Service('foo');
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
+        $this->service = new Service('foo');
     }
 
     public function testConstructorShouldThrowExceptionWhenNoNameSet()
     {
         try {
-            $service = new Smd\Service(null);
+            $service = new Service(null);
             $this->fail('Should throw exception when no name set');
         } catch (Server\Exception $e) {
             $this->assertContains('requires a name', $e->getMessage());
         }
 
         try {
-            $service = new Smd\Service(array());
+            $service = new Service(array());
             $this->fail('Should throw exception when no name set');
         } catch (Server\Exception $e) {
             $this->assertContains('requires a name', $e->getMessage());
@@ -170,16 +141,16 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testEnvelopeShouldBeJsonRpc1CompliantByDefault()
     {
-        $this->assertEquals(Smd\Smd::ENV_JSONRPC_1, $this->service->getEnvelope());
+        $this->assertEquals(Server\SMD::ENV_JSONRPC_1, $this->service->getEnvelope());
     }
 
     public function testEnvelopeShouldOnlyComplyWithJsonRpc1And2()
     {
         $this->testEnvelopeShouldBeJsonRpc1CompliantByDefault();
-        $this->service->setEnvelope(Smd\Smd::ENV_JSONRPC_2);
-        $this->assertEquals(Smd\Smd::ENV_JSONRPC_2, $this->service->getEnvelope());
-        $this->service->setEnvelope(Smd\Smd::ENV_JSONRPC_1);
-        $this->assertEquals(Smd\Smd::ENV_JSONRPC_1, $this->service->getEnvelope());
+        $this->service->setEnvelope(Server\SMD::ENV_JSONRPC_2);
+        $this->assertEquals(Server\SMD::ENV_JSONRPC_2, $this->service->getEnvelope());
+        $this->service->setEnvelope(Server\SMD::ENV_JSONRPC_1);
+        $this->assertEquals(Server\SMD::ENV_JSONRPC_1, $this->service->getEnvelope());
         try {
             $this->service->setEnvelope('JSON-P');
             $this->fail('Should not be able to set non-JSON-RPC spec envelopes');
@@ -350,7 +321,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $this->service->setName('foo')
                       ->setTransport('POST')
                       ->setTarget('/foo')
-                      ->setEnvelope(Smd\Smd::ENV_JSONRPC_2)
+                      ->setEnvelope(Server\SMD::ENV_JSONRPC_2)
                       ->addParam('boolean')
                       ->addParam('array')
                       ->addParam('object')
@@ -363,7 +334,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('POST', $smd['transport']);
 
         $this->assertTrue(array_key_exists('envelope', $smd));
-        $this->assertEquals(Smd\Smd::ENV_JSONRPC_2, $smd['envelope']);
+        $this->assertEquals(Server\SMD::ENV_JSONRPC_2, $smd['envelope']);
 
         $this->assertTrue(array_key_exists('parameters', $smd));
         $params = $smd['parameters'];
@@ -378,9 +349,4 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('returns', $smd));
         $this->assertEquals('boolean', $smd['returns']);
     }
-}
-
-// Call Zend_Json_Server_Smd_ServiceTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Json_Server_Smd_ServiceTest::main") {
-    \Zend_Json_Server_Smd_ServiceTest::main();
 }

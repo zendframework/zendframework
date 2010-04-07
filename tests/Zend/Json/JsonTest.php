@@ -381,9 +381,9 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
         Json\Json::$useBuiltinEncoderDecoder = true;
         $encoded = Json\Json::encode($everything, true, $options);
-        $json = '{"allItems":[{"__className":"ZendTest\Json\Item"},{"__className":"ZendTest\Json\Item"}],"currentItem":"* RECURSION (ZendTest\Json\Item) *"}';
+        $json = '{"allItems":[{"__className":"ZendTest\\\\Json\\\\Item"},{"__className":"ZendTest\\\\Json\\\\Item"}],"currentItem":"* RECURSION (ZendTest\\\\Json\\\\Item) *"}';
 
-        $this->assertEquals($encoded,$json);
+        $this->assertEquals($json, $encoded);
     }
 
     public function testEncodeObject()
@@ -573,7 +573,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $result = Json\Json::encode($data);
 
         $this->assertEquals(
-            '[{"alpha":{"__className":"Zend\Json\Expr"},"beta":"gamma"}]',
+            '[{"alpha":{"__className":"Zend\\\\Json\\\\Expr"},"beta":"gamma"}]',
             $result
         );
     }

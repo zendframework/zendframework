@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20779 -->
 <sect1 id="zend.gdata.photos">
     <title>Picasa Web Albums の使用法</title>
 
@@ -58,7 +58,7 @@
             <title>認証</title>
             <para>
                 Google Picasa <acronym>API</acronym> を使用すると、公開カレンダーだけでなく
-                プライベートカレンダーのフィードにもアクセスすることができます。
+                プライベートカレンダーのフィードにもアクセスできます。
                 公開フィードには認証は不要ですが、
                 認証しない場合は読み込み専用となり、機能が制限されます。
                 プライベートフィードでは完全な機能が使用できますが、
@@ -232,7 +232,7 @@ function getAuthSubHttpClient()
 $service = new Zend_Gdata_Photos(getAuthSubHttpClient());
 ]]></programlisting>
 
-            <para>未認証のサーバを作成して、公開フィードへのアクセスに使用することができます。</para>
+            <para>未認証のサーバを作成して、公開フィードへのアクセスに使用できます。</para>
             <programlisting language="php"><![CDATA[
 // サービスのインスタンスを、未認証の HTTP クライアントで作成します
 $service = new Zend_Gdata_Photos();

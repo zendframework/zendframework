@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20779 -->
 <sect1 id="zend.infocard.basics">
     <title>導入</title>
 
@@ -253,7 +253,7 @@ if (isset($_POST['xmlToken'])) {
             一般論として、<classname>Zend_InfoCard</classname>
             コンポーネントがデフォルトで設定する claim 用 <acronym>URI</acronym>
             は情報カードの中で最もよく用いられるものです。
-            この場合は単純にプロパティを使用してアクセスすることができます。
+            この場合は単純にプロパティを使用してアクセスできます。
         </para>
 
         <para>

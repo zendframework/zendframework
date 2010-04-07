@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20779 -->
 <sect1 id="zend.gdata.clientlogin">
     <title>ClientLogin による認証</title>
 
@@ -109,7 +109,7 @@ $cal = new Zend_Gdata_Calendar($client);
             ClientLogin 認証を解除する方法はありません。というのは、これは
             AuthSub のようにトークンを使用した認証ではないからです。
             ClientLogin 認証に使用する情報は Google アカウントのユーザ名とパスワードであり、
-            これらは将来も繰り返し使用することができます。
+            これらは将来も繰り返し使用できます。
         </para>
 
     </sect2>

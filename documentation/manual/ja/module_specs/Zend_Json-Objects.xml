@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20792 -->
 <sect1 id="zend.json.advanced">
     <title>Zend_Json の高度な使用法</title>
 
@@ -17,7 +17,7 @@
             再帰に関する問題が発生しないよう、
             <methodname>Zend_Json::encode()</methodname> および
             <methodname>Zend_Json_Encoder::encode()</methodname>
-            のオプションの二番目のパラメータで再帰をチェックすることができます。
+            のオプションの二番目のパラメータで再帰をチェックできます。
             オブジェクトが二度シリアライズされると、例外がスローされるようになります。
         </para>
         <para>
@@ -98,14 +98,14 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
             これが動作するのはダブルクォートの中で返されていない場合のみであり、
             <classname>Zend_Json</classname> は当然そのようにします。
             <classname>Zend_Json</classname> の式サポートを使用すれば、<acronym>JSON</acronym> オブジェクトを
-            javascript コールバックとして正しい形式でエンコードすることができます。
+            javascript コールバックとして正しい形式でエンコードできます。
             これは、<methodname>json_encode()</methodname> と内部エンコーダの両方で動作します。
         </para>
 
         <para>
             javascript コールバックは <classname>Zend_Json_Expr</classname> オブジェクトで表されます。
             これは value object パターンを実装しており、不変 (immutable) です。
-            javascript の式を、コンストラクタの最初の引数として指定することができます。
+            javascript の式を、コンストラクタの最初の引数として指定できます。
             デフォルトでは <classname>Zend_Json::encode</classname> は javascript
             コールバックをエンコードしません。エンコードするには、
             オプション <code>'enableJsonExprFinder' = true</code> を

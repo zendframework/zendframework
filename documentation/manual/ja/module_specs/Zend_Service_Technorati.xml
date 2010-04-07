@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20818 -->
 <sect1 id="zend.service.technorati">
     <title>Zend_Service_Technorati</title>
 
@@ -112,7 +112,7 @@ $topTags = $technorati->topTags();
     <sect2 id="zend.service.technorati.consuming-results">
         <title>結果の取得</title>
         <para>
-            クエリの結果は、二種類の結果オブジェクトのうちのいずれかの形式で取得することができます。
+            クエリの結果は、二種類の結果オブジェクトのうちのいずれかの形式で取得できます。
         </para>
         <para>
             まず最初の形式は <classname>Zend_Service_Technorati_*ResultSet</classname>
@@ -514,7 +514,7 @@ echo "</ol>";
             以下のクラスは、Technorati の各種クエリから返されるものです。
             <classname>Zend_Service_Technorati_*ResultSet</classname> 系のクラスは、
             それぞれの形式にあわせた結果セットを保持します。
-            その中身は形式にあわせた結果オブジェクトであり、容易に処理することができます。
+            その中身は形式にあわせた結果オブジェクトであり、容易に処理できます。
             これらの結果セットクラスはすべて
             <classname>Zend_Service_Technorati_ResultSet</classname> クラスを継承しており、かつ
             <code>SeekableIterator</code> インターフェイスを実装しています。
@@ -572,7 +572,7 @@ echo "</ol>";
             <para>
                 <classname>Zend_Service_Technorati_ResultSet</classname> は <acronym>PHP</acronym> の <code>SeekableIterator</code>
                 インターフェイスを実装しており、<code>foreach</code>
-                文で結果を処理することができます。
+                文で結果を処理できます。
             </para>
             <example id="zend.service.technorati.classes.resultset.example-1">
                 <title>結果セットコレクション内の結果オブジェクトの反復処理</title>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21740 -->
 <sect1 id="zend.json.advanced">
     <title>Zend_Json の高度な使用法</title>
 
@@ -74,7 +74,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
             関数を使用して <acronym>JSON</acronym> のエンコード/デコードを行います。
             ext/json がインストールされていない場合は、<acronym>PHP</acronym> コードによる
             Zend Framework の実装を用いてエンコード/デコードを行います。
-            これは拡張モジュールを使う場合にくらべて相当遅くなりますが、
+            これは <acronym>PHP</acronym> 拡張モジュールを使う場合にくらべて相当遅くなりますが、
             まったく同じ挙動になります。
         </para>
 

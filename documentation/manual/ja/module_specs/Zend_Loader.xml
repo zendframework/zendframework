@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21740 -->
 <sect1 id="zend.loader.load">
 
     <title>ファイルやクラスの動的な読み込み</title>
@@ -115,12 +115,11 @@ Zend_Loader::loadClass('Container_Tree',
             英数字とハイフン ('-')、アンダースコア ('_') そしてピリオド ('.') だけです。
         </para>
 
-        <!-- TODO : to be translated -->
         <note>
             <title>Loading Classes from PHP Namespaces</title>
 
             <para>
-                Starting in version 1.10.0, Zend Framework now allows loading classes from PHP
+                Starting in version 1.10.0, Zend Framework now allows loading classes from <acronym>PHP</acronym>
                 namespaces. This support follows the same guidelines and implementation as that
                 found in the <ulink
                     url="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PHP

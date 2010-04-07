@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20810 -->
 <sect1 id="zend.session.global_session_management">
 
     <title>グローバルセッションの管理</title>
@@ -470,7 +470,7 @@ if (!isset($defaultNamespace->initialized)) {
             しかし、アプリケーション側で、ブラウザを閉じた後でもユーザセッションを有効にしておくこともできます。
             この機能を実現するには、持続クッキーを使用します。
             セッションの開始前に <methodname>Zend_Session::rememberMe()</methodname>
-            を使用すると、セッションクッキーの有効期限を制御することができます。
+            を使用すると、セッションクッキーの有効期限を制御できます。
             秒数を指定しなかった場合は、セッションクッキーの持続期間はデフォルトの
             <code>remember_me_seconds</code> となります。このデフォルト値は
             <methodname>Zend_Session::setOptions()</methodname> で設定します。
@@ -649,7 +649,7 @@ if (!isset($defaultNamespace->initialized)) {
 
         <para>
             <methodname>Zend_Session::namespaceUnset($namespace)</methodname> を使用すると、
-            名前空間全体およびその内容を効率的に削除することができます。
+            名前空間全体およびその内容を効率的に削除できます。
             PHP のすべての配列と同様、
             配列を含む変数を初期化しても配列の中身のオブジェクトまでは初期化されません。
             もしそのオブジェクトへの参照が別の配列/オブジェクトにも格納されていたとすると、

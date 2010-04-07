@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 20766 -->
 <sect1 id="zend.dom.query">
     <title>Zend_Dom_Query</title>
 
@@ -33,7 +33,7 @@
             をオプションで渡すことができます。
             ドキュメントを用意すれば、
             <methodname>query()</methodname> メソッドあるいは <methodname>queryXpath()</methodname>
-            メソッドを使用することができます。どちらのメソッドも、
+            メソッドを使用できます。どちらのメソッドも、
             マッチしたノードを含む <classname>Zend_Dom_Query_Result</classname>
             オブジェクトを返します。
         </para>
@@ -42,7 +42,7 @@
             <classname>Zend_Dom_Query</classname> を使うことと
             DOMDocument + DOMXPath を使うことの最大の違いは、
             <acronym>CSS</acronym> セレクタによる選択が可能かどうかということです。
-            以下の内容を、任意の組み合わせで使用することができます。
+            以下の内容を、任意の組み合わせで使用できます。
         </para>
 
         <itemizedlist>
@@ -107,7 +107,7 @@
                 <para>
                     <emphasis>子孫</emphasis>:
                     複数のセレクタをひとつの文字列にまとめると、
-                    探す階層を指定することができます。
+                    探す階層を指定できます。
                     'div .foo span #one' が探すのは id が 'one'
                     である要素です。その要素は、'span'
                     要素の子孫 (その間の階層の数は問わない) であり、
@@ -142,7 +142,7 @@
 
         <para>
             問い合わせを実行したら、その結果のオブジェクトを用いてノードの情報を取得したり、
-            そのノード (あるいはノードの内容) を取り出して操作したりすることができます。
+            そのノード (あるいはノードの内容) を取り出して操作したりできます。
             <classname>Zend_Dom_Query_Result</classname> は <code>Countable</code>
             と <code>Iterator</code> を実装しており、内部では結果を
             DOMNodes/DOMElements で保持しています。
@@ -237,7 +237,7 @@ foreach ($results as $result) {
                 は <code>Iterator</code> と
                 <code>Countable</code> を実装しており、
                 <code>foreach</code> ループで使用したり
-                <methodname>count()</methodname> 関数を利用したりすることができます。
+                <methodname>count()</methodname> 関数を利用したりできます。
                 さらに、次のメソッドを公開しています。
             </para>
 

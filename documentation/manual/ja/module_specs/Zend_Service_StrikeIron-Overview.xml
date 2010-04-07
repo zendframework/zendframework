@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20818 -->
 <sect1 id="zend.service.strikeiron">
     <title>Zend_Service_StrikeIron</title>
 
@@ -156,7 +156,7 @@
 
       <para>
         <classname>Zend_Service_StrikeIron</classname> クラスには、
-        そのコンストラクタで StrikeIron アカウント情報やその他のオプションを設定することができます。
+        そのコンストラクタで StrikeIron アカウント情報やその他のオプションを設定できます。
         また、StrikeIron の各種サービス用のクライアントを帰すファクトリメソッドも用意しています。
 
         <programlisting language="php"><![CDATA[
@@ -192,7 +192,7 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
 
       <para>
         <methodname>getService()</methodname> で StrikeIron サービス用のクライアントを取得したら、
-        あとは普通の <acronym>PHP</acronym> オブジェクトと同様にそのメソッドをコールすることができます。
+        あとは普通の <acronym>PHP</acronym> オブジェクトと同様にそのメソッドをコールできます。
 
         <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
@@ -408,7 +408,7 @@ echo $subscription->remainingHits;
         残りの使用可能回数は減りません。
         サービスのメソッドをコールする際にはいつも残りの回数を自動的に取得します。
         この値は、サービスに接続しなくても
-        <methodname>getSubscriptionInfo()</methodname> で取得することができます。
+        <methodname>getSubscriptionInfo()</methodname> で取得できます。
         キャッシュを使用せずにもう一度情報を問い合わせるよう
         <methodname>getSubscriptionInfo()</methodname> に指示するには、
         <methodname>getSubscriptionInfo(true)</methodname> とします。

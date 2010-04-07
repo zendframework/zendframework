@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20810 -->
 <sect1 id="zend.session.basic_usage">
 
     <title>基本的な使用法</title>
@@ -75,7 +75,7 @@ echo "このセッションでページがリクエストされた回数: ",
             のインスタンスを使用するようにすると、各モジュールのデータをセッション内でカプセル化できます。
             <classname>Zend_Session_Namespace</classname> のコンストラクタでオプションの引数
             <code>$namespace</code> を指定すると、
-            セッションデータを個別の名前空間に分割することができます。
+            セッションデータを個別の名前空間に分割できます。
             名前空間は、セッションデータで名前の衝突による事故を防ぐための方法として、
             効率的で人気のある方法です。
         </para>

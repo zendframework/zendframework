@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20143 -->
+<!-- EN-Revision: 20766 -->
 <sect2 id="zend.dojo.view.dojo">
     <title>dojo() ビューヘルパー</title>
 
@@ -23,7 +23,7 @@
         <methodname>dojo()</methodname> ビューヘルパーの実装は、
         プレースホルダの実装の一例です。
         中で扱うデータセットはビューオブジェクトを超えて永続化され、
-        レイアウトスクリプトから直接 echo することができます。
+        レイアウトスクリプトから直接 echo できます。
     </para>
 
     <example id="zend.dojo.view.dojo.usage">
@@ -140,7 +140,7 @@ $this->dojo()->enable()
         <para>
             Dojo の機能の多くは、<emphasis>宣言的 (declarative)</emphasis>
             な方法および <emphasis>プログラム的 (programmatic)</emphasis>
-            な方法の両方で使用することができます。
+            な方法の両方で使用できます。
             <emphasis>宣言的</emphasis> な使用法とは、
             標準の HTML 要素に対して非標準の属性を指定し、
             ページの読み込み時にそれをパースするというものです。
@@ -173,7 +173,7 @@ $this->dojo()->enable()
 
         <para>
             そのために、宣言的な構文の機能以外にも多くの静的メソッドが用意されており、
-            全体の振る舞いを設定することができます。
+            全体の振る舞いを設定できます。
         </para>
 
         <example id="zend.dojo.view.dojo.declarative.usage">
@@ -214,7 +214,7 @@ Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
         <title>テーマ</title>
 
         <para>
-            Dojo では、dijits (widgets) 用のテーマを作成することができます。
+            Dojo では、dijits (widgets) 用のテーマを作成できます。
             テーマを選択するにはモジュールパスにそれを渡します。
         </para>
 
@@ -280,7 +280,7 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
             ビルドの際にリリース用のディレクトリが作成され、
             レイヤーファイルとその他のすべてのファイルが格納されます。
             これにより、あなたの作成するサイトやアプリケーションが
-            必要とするだけの内容に最適化した内容を配布することができます。
+            必要とするだけの内容に最適化した内容を配布できます。
         </para>
 
         <para>

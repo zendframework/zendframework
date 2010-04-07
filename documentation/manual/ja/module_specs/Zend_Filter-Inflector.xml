@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 20774 -->
 <sect1 id="zend.filter.inflector">
     <title>Zend_Filter_Inflector</title>
 
@@ -246,7 +246,7 @@ $inflector->setStaticRule('suffix', 'php');
 ]]></programlisting>
 
             <para>
-                ターゲットと同様、静的ルールも参照で指定することができます。
+                ターゲットと同様、静的ルールも参照で指定できます。
                 これにより、メソッドコールをせずに変数を更新するだけでルールを変更できるようになります。
                 これは、クラスの中で内部的にインフレクタを使用している場合に便利です。
                 ユーザにいちいちインフレクタを取得させる必要がなくなります。
@@ -352,7 +352,7 @@ $inflector->setFilterRule('script', array(
                 一括してルールを設定できたほうが楽でしょう。
                 <classname>Zend_Filter_Inflector</classname> の <methodname>addRules()</methodname>
                 メソッドや <methodname>setRules()</methodname> メソッドを使用すると、
-                一括設定することができます。
+                一括設定できます。
             </para>
 
             <para>
@@ -445,7 +445,7 @@ $inflector->addRules(array(
 
         <para>
             <classname>Zend_Config</classname> を使用してルールを設定したり、
-            フィルタのプレフィックスのパスやその他のインフレクタの状態を設定することができます。
+            フィルタのプレフィックスのパスやその他のインフレクタの状態を設定できます。
             そのためには、<classname>Zend_Config</classname> オブジェクトをコンストラクタあるいは
             <methodname>setConfig()</methodname> に渡します。
             設定可能な項目は以下のとおりです。

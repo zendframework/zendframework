@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
+<!-- EN-Revision: 21130 -->
 <sect1 id="zend.cache.frontends">
     <title><classname>Zend_Cache</classname> のフロントエンド</title>
 
@@ -600,10 +600,10 @@ $result = $cache->foobar2('1', '2');
                     correctly, it must be the final output buffer in the request. To guarantee
                     this, the output buffering used by the Dispatcher needs to be disabled by
                     calling <classname>Zend_Controller_Front</classname>'s <methodname>setParam()
-                    </methodname> method, for example, $front->setParam('disableOutputBuffering',
-                    true) or adding
+                    </methodname> method, for example,
+                    <command>$front->setParam('disableOutputBuffering', true);</command> or adding
                     "resources.frontcontroller.params.disableOutputBuffering = true"
-                    to your bootstrap configuration file (assumed INI) if using
+                    to your bootstrap configuration file (assumed <acronym>INI</acronym>) if using
                     <classname>Zend_Application</classname>.
                 </para>
             </note>

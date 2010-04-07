@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20807 -->
 <sect2 id="zend.test.phpunit.examples">
     <title>例</title>
 
@@ -308,7 +308,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             テスト時と実運用時には別のデータベースを使用することを推奨します。
             また、特に (ファイルあるいはインメモリ形式の) SQLite
             を使うことを推奨します。どちらも別のサーバを必要とせず、
-            大半の <acronym>SQL</acronym> 構文を使用することができます。
+            大半の <acronym>SQL</acronym> 構文を使用できます。
         </para>
     </example>
 </sect2>

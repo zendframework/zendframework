@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21740 -->
 <sect1 id="zend.log.writers" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>ライター</title>
   <para>
@@ -18,7 +18,7 @@
     </para>
 
     <para>
-      ログのデータを PHP の出力バッファに書き出すには、URL <code>php://output</code>
+      ログのデータを <acronym>PHP</acronym> の出力バッファに書き出すには、URL <code>php://output</code>
       を使用します。一方、ログのデータを直接 <constant>STDERR</constant>
       のようなストリームに送ることもできます (<code>php://stderr</code>)。
 

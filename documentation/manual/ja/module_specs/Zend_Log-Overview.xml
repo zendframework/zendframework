@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21740 -->
 <sect1 id="zend.log.overview">
     <title>概要</title>
 
@@ -118,7 +118,7 @@ $logger = null;
 ]]></programlisting>
 
       このように明示的にログを破棄することは必須ではありません。
-      PHP の終了時に、この処理が自動的に行われます。
+      <acronym>PHP</acronym> の終了時に、この処理が自動的に行われます。
     </para>
   </sect2>
 
@@ -224,4 +224,67 @@ $logger->setEventItem('pid', getmypid());
       さらに詳しく学ぶには、フォーマッタの節を参照ください。
     </para>
   </sect2>
+
+    <!-- TODO : to be translated -->
+    <sect2 id="zend.log.overview.as-errorHandler">
+        <title>Log PHP Errors</title>
+
+        <para>
+            Zend_Log can also be used to log <acronym>PHP</acronym> errors.  Calling
+            <methodname>registerErrorHandler()</methodname> will add Zend_Log before the current
+            error handler, and will pass the error along as well.
+        </para>
+
+        <table id="zend.log.overview.as-errorHandler.properties.table-1">
+            <title>Zend_Log events from PHP errors have the additional fields matching
+            <methodname>handler  ( int $errno  , string $errstr  [, string $errfile  [, int $errline  [, array $errcontext  ]]] )</methodname>
+            from <ulink url="http://us3.php.net/manual/en/function.set-error-handler.php">set_error_handler</ulink></title>
+
+            <tgroup cols="3">
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Error Handler Paramater</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+
+                <tbody>
+                    <row>
+                        <entry>message</entry>
+                        <entry>errstr</entry>
+                        <entry>Contains the error message, as a string.</entry>
+                    </row>
+
+                    <row>
+                        <entry>errno</entry>
+                        <entry>errno</entry>
+                        <entry>Contains the level of the error raised, as an integer.</entry>
+                    </row>
+
+                    <row>
+                        <entry>file</entry>
+                        <entry>errfile</entry>
+                        <entry>Contains the filename that the error was raised in, as a string.</entry>
+                    </row>
+
+                    <row>
+                        <entry>line</entry>
+                        <entry>errline</entry>
+                        <entry>Contains the line number the error was raised at, as an integer. </entry>
+                    </row>
+
+                    <row>
+                        <entry>context</entry>
+                        <entry>errcontext</entry>
+                        <entry>(optional) An array that points to the active symbol table at the point the
+                        error occurred. In other words, errcontext  will contain an array of every variable
+                        that existed in the scope the error was triggered in. User error handler must not
+                        modify error context.</entry>
+                    </row>
+
+                </tbody>
+            </tgroup>
+        </table>
+    </sect2>
 </sect1>

@@ -317,7 +317,7 @@
 
         <para>
             <classname>Zend_Translate</classname> に、自作のアダプタクラスを組み込むこともできます。
-            これは、<classname>Zend_Translate</classname> に組み込まれている標準のアダプタクラスと同様に使うことができます。
+            これは、<classname>Zend_Translate</classname> に組み込まれている標準のアダプタクラスと同様に使用できます。
         </para>
 
         <para>

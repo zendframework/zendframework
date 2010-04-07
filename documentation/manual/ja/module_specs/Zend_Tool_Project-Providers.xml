@@ -5,7 +5,7 @@
     <title>Zend_Tool プロジェクトプロバイダー</title>
 
     <para>
-        下記は<classname>Zend_Tool_Project</classname>とともに出荷されたプロバイダーすべての一覧です。
+        下記は <classname>Zend_Tool_Project</classname> とともに出荷されたプロバイダーすべての一覧です。
     </para>
 
     <table id="zend.tool.project.project-provider">

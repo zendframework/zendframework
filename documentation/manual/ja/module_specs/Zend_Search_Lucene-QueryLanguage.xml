@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20872 -->
+<!-- EN-Revision: 21740 -->
 <sect1 id="zend.search.lucene.query-language">
     <title>クエリ言語</title>
 
@@ -291,7 +291,7 @@ PHP framework
             <programlisting language="querystring"><![CDATA[
 PHP^4 framework
 ]]></programlisting>
-            のようにします。これにより、PHP という単語を含むドキュメントがより重視されるようになります。
+            のようにします。これにより、 <acronym>PHP</acronym> という単語を含むドキュメントがより重視されるようになります。
             フレーズやサブクエリを強調することも可能です。たとえば
             <programlisting language="querystring"><![CDATA[
 "PHP framework"^4 "Zend Framework"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20810 -->
+<!-- EN-Revision: 21740 -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDLアクセッサ</title>
 
@@ -334,7 +334,7 @@
         <sect3 id="zend.soap.wsdl.types.retrieve">
             <title>型情報の取得</title>
             <para>
-                <methodname>getType($type)</methodname>メソッドは、指定された<acronym>PHP</acronym>型をマップするために用いられるかもしれません:
+                <methodname>getType($type)</methodname>メソッドは、指定された <acronym>PHP</acronym> 型をマップするために用いられるかもしれません:
 
             <programlisting language="php"><![CDATA[
 ...

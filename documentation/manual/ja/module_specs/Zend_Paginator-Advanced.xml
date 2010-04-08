@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20843 -->
+<!-- EN-Revision: 21740 -->
 <sect1 id="zend.paginator.advanced">
     <title>高度な使用法</title>
 
@@ -233,7 +233,7 @@ var_dump($paginator->getPageItemCache());
             が提供するような「オブジェクト "is-a" アダプタ」形式ではなく
             「オブジェクト "has-a" アダプタ」形式であることもあるでしょう。
             そんな場合は <classname>Zend_Paginator_AdapterAggregate</classname>
-            インターフェイスを使用します。これは、PHP の SPL 拡張モジュールにある
+            インターフェイスを使用します。これは、 <acronym>PHP</acronym> の SPL 拡張モジュールにある
             <classname>IteratorAggregate</classname> と同じ動きをします。
         </para>
 

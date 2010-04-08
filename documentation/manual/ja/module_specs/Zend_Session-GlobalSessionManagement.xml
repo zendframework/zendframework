@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20810 -->
+<!-- EN-Revision: 21305 -->
 <sect1 id="zend.session.global_session_management">
 
     <title>グローバルセッションの管理</title>
@@ -247,13 +247,7 @@ Zend_Session::setOptions($config->toArray());
                     バッファサイズをこえた時点で断続的に問題が発生することでしょう。
                 </para>
             </listitem>
-            <listitem>
-                <para>
-                    別の方法としては、アプリケーションのロジックを見直して
-                    ヘッダを操作するアクションを
-                    あらゆる出力の前に済ませてしまうことがあります。
-                </para>
-            </listitem>
+
             <listitem>
                 <para>
                     もし <classname>Zend_Session</classname> のメソッドでエラーが発生しているのなら、

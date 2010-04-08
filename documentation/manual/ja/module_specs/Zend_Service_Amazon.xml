@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20872 -->
+<!-- EN-Revision: 21154 -->
 <sect1 id="zend.service.amazon">
     <title>Zend_Service_Amazon</title>
     <sect2 id="zend.service.amazon.introduction">
@@ -589,6 +589,11 @@ foreach ($results as $result) {
                                 <entry>MerchantId</entry>
                                 <entry>string</entry>
                                 <entry>出品者の Amazon ID</entry>
+                            </row>
+                            <row>
+                                <entry>MerchantName</entry>
+                                <entry>string</entry>
+                                <entry>Merchants Amazon Name.  Requires setting the <code>ResponseGroup</code> option to <code>OfferFull</code> to retrieve.</entry>
                             </row>
                             <row>
                                 <entry>GlancePage</entry>

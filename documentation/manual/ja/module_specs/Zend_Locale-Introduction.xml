@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21790 -->
 <sect1 id="zend.locale.introduction">
 
     <title>導入</title>
@@ -17,10 +17,8 @@
     </para>
 
     <para>
-        <ulink url="http://en.wikipedia.org/wiki/L10n">地域化 (Localization)</ulink>
-        だけでなく、
-        <ulink url="http://en.wikipedia.org/wiki/L10n">国際化 (Internationalization)</ulink>
-        も必要となります。これらは、それぞれ <code>L10n</code> および <code>I18n</code>
+        <ulink url="http://en.wikipedia.org/wiki/Internationalization_and_localization">地域化だけでなく国際化</ulink>
+        も必要となります。これらは、それぞれ <emphasis>L10n</emphasis> および <emphasis>I18n</emphasis>
         と略されることもあります。国際化とは、そのシステムを特定のユーザ集団の
         (言語、地域、数値書式、財務規約、日付時刻書式などの)
         ニーズにかかわらず使用できるようにすることを言います。
@@ -242,7 +240,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                     <para>
                         const <constant>Zend_Locale::BROWSER</constant> -
                         ユーザのウェブブラウザは、リクエストの際に情報を送信します。これは、
-                        <acronym>PHP</acronym> のグローバル変数 <constant>HTTP_ACCEPT_LANGUAGE</constant> で取得できます。
+                        <acronym>PHP</acronym> のグローバル変数 <varname>$_SERVER['HTTP_ACCEPT_LANGUAGE']</varname> で取得できます。
                         対応するロケールが見つからない場合は <constant>ENVIRONMENT</constant>
                         による検索を行い、それでもだめなら最後は
                         <constant>FRAMEWORK</constant> を使用します。

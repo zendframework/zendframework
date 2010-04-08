@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21606 -->
 <sect1 id="zend.form.decorators">
     <title>Zend_Form_Decorator による独自のフォームマークアップの作成</title>
 
@@ -56,7 +56,7 @@
 
         <itemizedlist>
             <listitem><para>
-                    <code>placement</code>: 配置方法を 'append' あるいは
+                    <property>placement</property>: 配置方法を 'append' あるいは
                     'prepend' (大文字小文字は区別しません) で指定します。
                     これは、<methodname>render()</methodname> に渡されたコンテンツを
                     先頭に追加するのか末尾に追加するのかを表します。
@@ -65,7 +65,7 @@
             </para></listitem>
 
             <listitem><para>
-                    <code>separator</code>: 区切り文字を指定します。
+                    <property>separator</property>: 区切り文字を指定します。
                     これは、<methodname>render()</methodname> に渡されたコンテンツと
                     デコレータが新たに作成したコンテンツの区切りとして使用します。
                     あるいはデコレータがレンダリングする各項目の区切りにも使用します
@@ -174,7 +174,7 @@ interface Zend_Form_Decorator_Interface
             たとえば、使用するデコレータの数を減らすために
             "複合" デコレータを作成することにしましょう。
             このデコレータでは、ラベルや要素、エラーメッセージ、
-            そして説明を HTML の <code>div</code> でレンダリングします。
+            そして説明を HTML の 'div' でレンダリングします。
             この 'Composite' デコレータは、次のようになります。
         </para>
 
@@ -350,7 +350,7 @@ class My_Decorator_Errors
         </para>
 
         <para>
-            そのためには <code>render[DecoratorName]()</code> をコールします。
+            そのためには <methodname>render[DecoratorName]()</methodname> をコールします。
             ここで、"[DecoratorName]" の部分はデコレータの "短い名前"
             となります。オプションで、デコレートしたいコンテンツを渡すこともできます。
             たとえば次のようになります。

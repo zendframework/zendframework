@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21614 -->
 <sect1 id="zend.form.quickstart">
     <title>Zend_Form クイックスタート</title>
 
@@ -41,15 +41,15 @@ $form->setAction('/resource/process')
 
         <para>
             このコードは、フォームのアクションをパーシャル <acronym>URL</acronym>
-            "/resource/process" に設定し、メソッドに <acronym>HTTP</acronym> POST
+            "<filename>/resource/process</filename>" に設定し、メソッドに <acronym>HTTP</acronym> <acronym>POST</acronym>
             を指定します。これは、最終的なレンダリングの際に反映されます。
         </para>
 
         <para>
-            さらに、<code>&lt;form&gt;</code>
+            さらに、<emphasis>&lt;form&gt;</emphasis>
             タグ用のその他の HTML 属性を設定することもできます。
-            その場合は setAttrib() メソッドあるいは setAttribs() メソッド使用します。
-            たとえば id を指定したい場合は、"id" 属性を使用します。
+            その場合は <methodname>setAttrib()</methodname> メソッドあるいは <methodname>setAttribs()</methodname> メソッド使用します。
+            たとえば id を指定したい場合は、"<property>id</property>" 属性を使用します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -274,7 +274,7 @@ echo $form;
         <para>
             デフォルトでは、<classname>Zend_Form</classname> と
             <classname>Zend_Form_Element</classname> は
-            <code>ViewRenderer</code> が初期化したビューオブジェクトを使おうと試みます。
+            <classname>ViewRenderer</classname> が初期化したビューオブジェクトを使おうと試みます。
             つまり、Zend Framework の <acronym>MVC</acronym>
             を使用している場合は、自分でビューを設定する必要はないということです。
             フォームをビュースクリプト内でレンダリングするには、
@@ -338,9 +338,9 @@ $element->addDecorators(array(
 
         <para>
             フォームオブジェクトが各要素を順に処理し、
-            HTML <code>&lt;form&gt;</code> タグの中に出力していきます。
+            <acronym>HTML</acronym> <emphasis>&lt;form&gt;</emphasis> タグの中に出力していきます。
             フォームを設定した際に指定したアクションとメソッドが
-            <code>&lt;form&gt;</code> タグに設定されます。
+            <emphasis>&lt;form&gt;</emphasis> タグに設定されます。
             また同時に、<methodname>setAttribs()</methodname>
             系のメソッドで設定した属性もここで設定されます。
         </para>

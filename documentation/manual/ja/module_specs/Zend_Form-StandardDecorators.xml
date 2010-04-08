@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21614 -->
 <sect1 id="zend.form.standardDecorators">
     <title>Zend Framework に同梱されている標準のデコレータ</title>
 
@@ -37,9 +37,8 @@ class Util
 ]]></programlisting>
 
         <para>
-            このコールバックは <code>array('Util',
-                'label')</code> のように指定します。
-            そして、ラベル用の (間違った) HTML マークアップを生成します。
+            このコールバックは <methodname>array('Util', 'label')</methodname> のように指定します。
+            そして、ラベル用の (間違った) <acronym>HTML</acronym> マークアップを生成します。
             Callback デコレータはコンテンツの内容を書き換えることもできますし、
             コンテンツの前後に文字列を追加することもできます。
         </para>
@@ -85,8 +84,8 @@ class Util
 
         <para>
             デフォルトでは、説明が存在しない場合は何も出力を生成しません。
-            説明が存在する場合は、デフォルトではそれを HTML の
-            <code>p</code> タグで囲んで表示します。このタグを変更するには、
+            説明が存在する場合は、デフォルトではそれを <acronym>HTML</acronym> の
+            <emphasis>p</emphasis> タグで囲んで表示します。このタグを変更するには、
             デコレータを作成する際にオプション <code>tag</code>
             を渡すか、あるいは <methodname>setTag()</methodname> をコールします。
             さらに、そのタグにクラスを指定することもできます。これは、オプション

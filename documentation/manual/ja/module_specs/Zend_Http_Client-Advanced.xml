@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20779 -->
+<!-- EN-Revision: 21740 -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - 高度な使用法</title>
 
@@ -215,7 +215,7 @@ $client->setRawData($xml, 'text/xml')->request('POST');
 $client->setRawData($xml)->setEncType('text/xml')->request('POST');
 ]]></programlisting>
             </example>
-            このデータをサーバ側で使用するには、PHP の変数
+            このデータをサーバ側で使用するには、 <acronym>PHP</acronym> の変数
             $HTTP_RAW_POST_DATA あるいは php://input ストリームを使用します。
         </para>
         <note>
@@ -343,11 +343,11 @@ $_SESSION['cookiejar'] = $client->getCookieJar();
     <sect2 id="zend.http.client.streaming">
         <title>データ・ストリーミング</title>
         <para>
-            <!-- TODO : to be translated -->
-            By default, <classname>Zend_Http_Client</classname> accepts and returns data as PHP strings.
-            However, in many cases there are big files to be sent or received, thus keeping them
-            in memory might be unnecessary or too expensive. For these cases, <classname>Zend_Http_Client</classname>
-            supports reading data from files (and in general, PHP streams) and writing data to files (streams).  
+            By default, <classname>Zend_Http_Client</classname> accepts and returns data as
+            <acronym>PHP</acronym> strings. However, in many cases there are big files to be sent or
+            received, thus keeping them in memory might be unnecessary or too expensive. For these
+            cases, <classname>Zend_Http_Client</classname> supports reading data from files (and in
+            general, <acronym>PHP</acronym> streams) and writing data to files (streams).
         </para>
         <para>
             In order to use stream to pass data to <classname>Zend_Http_Client</classname>,
@@ -385,7 +385,7 @@ $client->setRawData($fp, 'application/zip')->request('PUT');
         <example id="zend.http.client.streaming.example-2">
                 <title>ストリーミングでHTTP サーバからファイルを受信</title>
                 <programlisting language="php"><![CDATA[
-$client->setStreaming(); // 一時ファイルを使用
+$client->setStream(); // 一時ファイルを使用
 $response = $client->request('GET');
 // ファイルをコピー
 copy($response->getStreamName(), "my/downloads/file");
@@ -393,7 +393,7 @@ copy($response->getStreamName(), "my/downloads/file");
 $fp = fopen("my/downloads/file2", "w");
 stream_copy_to_stream($response->getStream(), $fp);
 // 既知のファイルに書き出すこともできます
-$client->setStreaming("my/downloads/myfile)->request('GET');
+$client->setStream("my/downloads/myfile)->request('GET');
 ]]></programlisting>
             </example>
         </para>

@@ -41,13 +41,21 @@
             </listitem>
 
             <listitem>
+				<para>
+					<methodname>setTimeout($ttl)</methodname> and 
+					<methodname>getTimeout()</methodname> allow you to specify the time-to-live of
+					the session token, and to retrieve the current value. <varname>$ttl</varname>
+					should be specified in seconds.
+				</para>
+			</listitem>
+
+            <listitem>
                 <para>
-                    <methodname>setTimeout($ttl)</methodname> and
-                    <methodname>getTimeout()</methodname> allow you to specify the time-to-live of
-                    the session token, and to retrieve the current value. <varname>$ttl</varname>
-                    should be specified in seconds.
-                </para>
-            </listitem>
+					<methodname>setUseNumbers($numbers)</methodname> and
+					<methodname>getUseNumbers()</methodname> allow you to specify if numbers will be
+					considered as possible characters for the random work or only letters would be used.
+				</para>
+			</listitem>
 
             <listitem>
                 <para>
@@ -233,7 +241,17 @@
                     of the generated image.
                 </para>
             </listitem>
-        </itemizedlist>
+
+            <listitem><para>
+                <methodname>setDotNoiseLevel($level)</methodname> and <methodname>getDotNoiseLevel()</methodname>,
+				along with <methodname>setLineNoiseLevel($level)</methodname> and 
+				<methodname>getLineNoiseLevel()</methodname>,
+				allow you to control how much "noise" in the form of random dots and lines the image 
+				would contain. Each unit of <varname>$level</varname> produces one random dot or line. 
+				The default is 100 dots and 5 lines. The noise is added twice - before and after
+				the image distortion transformation.
+            </para></listitem>
+			</itemizedlist>
 
         <para>
             All of the above options may be passed to the

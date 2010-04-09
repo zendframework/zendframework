@@ -1507,10 +1507,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/Helper/Json.php</originalRelativeFilePath>
       <originalClassName>Zend_Controller_Action_Helper_Json</originalClassName>
-      <newRelativeFilePath>Zend/Controller/Action/Helper/Json.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Controller/Action/Helper/JSON.php</newRelativeFilePath>
       <newNamespace>Zend\Controller\Action\Helper</newNamespace>
-      <newClassName>Json</newClassName>
-      <newFullyQualifiedName>Zend\Controller\Action\Helper\Json</newFullyQualifiedName>
+      <newClassName>JSON</newClassName>
+      <newFullyQualifiedName>Zend\Controller\Action\Helper\JSON</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/Helper/Redirector.php</originalRelativeFilePath>
@@ -7603,122 +7603,122 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Json/Decoder.php</originalRelativeFilePath>
       <originalClassName>Zend_Json_Decoder</originalClassName>
-      <newRelativeFilePath>Zend/Json/Decoder.php</newRelativeFilePath>
-      <newNamespace>Zend\Json</newNamespace>
+      <newRelativeFilePath>Zend/JSON/Decoder.php</newRelativeFilePath>
+      <newNamespace>Zend\JSON</newNamespace>
       <newClassName>Decoder</newClassName>
-      <newFullyQualifiedName>Zend\Json\Decoder</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\JSON\Decoder</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Json/Encoder.php</originalRelativeFilePath>
       <originalClassName>Zend_Json_Encoder</originalClassName>
-      <newRelativeFilePath>Zend/Json/Encoder.php</newRelativeFilePath>
-      <newNamespace>Zend\Json</newNamespace>
+      <newRelativeFilePath>Zend/JSON/Encoder.php</newRelativeFilePath>
+      <newNamespace>Zend\JSON</newNamespace>
       <newClassName>Encoder</newClassName>
-      <newFullyQualifiedName>Zend\Json\Encoder</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\JSON\Encoder</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Json/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Json_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Json/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Json</newNamespace>
+      <newRelativeFilePath>Zend/JSON/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\JSON</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Json\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\JSON\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Json/Expr.php</originalRelativeFilePath>
       <originalClassName>Zend_Json_Expr</originalClassName>
-      <newRelativeFilePath>Zend/Json/Expr.php</newRelativeFilePath>
-      <newNamespace>Zend\Json</newNamespace>
+      <newRelativeFilePath>Zend/JSON/Expr.php</newRelativeFilePath>
+      <newNamespace>Zend\JSON</newNamespace>
       <newClassName>Expr</newClassName>
-      <newFullyQualifiedName>Zend\Json\Expr</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\JSON\Expr</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Json/Server/Cache.php</originalRelativeFilePath>
       <originalClassName>Zend_Json_Server_Cache</originalClassName>
-      <newRelativeFilePath>Zend/Json/Server/Cache.php</newRelativeFilePath>
-      <newNamespace>Zend\Json\Server</newNamespace>
+      <newRelativeFilePath>Zend/JSON/Server/Cache.php</newRelativeFilePath>
+      <newNamespace>Zend\JSON\Server</newNamespace>
       <newClassName>Cache</newClassName>
-      <newFullyQualifiedName>Zend\Json\Server\Cache</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\JSON\Server\Cache</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Json/Server/Error.php</originalRelativeFilePath>
       <originalClassName>Zend_Json_Server_Error</originalClassName>
-      <newRelativeFilePath>Zend/Json/Server/Error.php</newRelativeFilePath>
-      <newNamespace>Zend\Json\Server</newNamespace>
+      <newRelativeFilePath>Zend/JSON/Server/Error.php</newRelativeFilePath>
+      <newNamespace>Zend\JSON\Server</newNamespace>
       <newClassName>Error</newClassName>
-      <newFullyQualifiedName>Zend\Json\Server\Error</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\JSON\Server\Error</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Json/Server/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Json_Server_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Json/Server/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Json\Server</newNamespace>
+      <newRelativeFilePath>Zend/JSON/Server/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\JSON\Server</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Json\Server\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\JSON\Server\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Json/Server/Request/Http.php</originalRelativeFilePath>
       <originalClassName>Zend_Json_Server_Request_Http</originalClassName>
-      <newRelativeFilePath>Zend/Json/Server/Request/HTTP.php</newRelativeFilePath>
-      <newNamespace>Zend\Json\Server\Request</newNamespace>
+      <newRelativeFilePath>Zend/JSON/Server/Request/HTTP.php</newRelativeFilePath>
+      <newNamespace>Zend\JSON\Server\Request</newNamespace>
       <newClassName>HTTP</newClassName>
-      <newFullyQualifiedName>Zend\Json\Server\Request\HTTP</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\JSON\Server\Request\HTTP</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Json/Server/Request.php</originalRelativeFilePath>
       <originalClassName>Zend_Json_Server_Request</originalClassName>
-      <newRelativeFilePath>Zend/Json/Server/Request.php</newRelativeFilePath>
-      <newNamespace>Zend\Json\Server</newNamespace>
+      <newRelativeFilePath>Zend/JSON/Server/Request.php</newRelativeFilePath>
+      <newNamespace>Zend\JSON\Server</newNamespace>
       <newClassName>Request</newClassName>
-      <newFullyQualifiedName>Zend\Json\Server\Request</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\JSON\Server\Request</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Json/Server/Response/Http.php</originalRelativeFilePath>
       <originalClassName>Zend_Json_Server_Response_Http</originalClassName>
-      <newRelativeFilePath>Zend/Json/Server/Response/HTTP.php</newRelativeFilePath>
-      <newNamespace>Zend\Json\Server\Response</newNamespace>
+      <newRelativeFilePath>Zend/JSON/Server/Response/HTTP.php</newRelativeFilePath>
+      <newNamespace>Zend\JSON\Server\Response</newNamespace>
       <newClassName>HTTP</newClassName>
-      <newFullyQualifiedName>Zend\Json\Server\Response\HTTP</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\JSON\Server\Response\HTTP</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Json/Server/Response.php</originalRelativeFilePath>
       <originalClassName>Zend_Json_Server_Response</originalClassName>
-      <newRelativeFilePath>Zend/Json/Server/Response.php</newRelativeFilePath>
-      <newNamespace>Zend\Json\Server</newNamespace>
+      <newRelativeFilePath>Zend/JSON/Server/Response.php</newRelativeFilePath>
+      <newNamespace>Zend\JSON\Server</newNamespace>
       <newClassName>Response</newClassName>
-      <newFullyQualifiedName>Zend\Json\Server\Response</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\JSON\Server\Response</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Json/Server/Smd/Service.php</originalRelativeFilePath>
       <originalClassName>Zend_Json_Server_Smd_Service</originalClassName>
-      <newRelativeFilePath>Zend/Json/Server/SMD/Service.php</newRelativeFilePath>
-      <newNamespace>Zend\Json\Server\SMD</newNamespace>
+      <newRelativeFilePath>Zend/JSON/Server/SMD/Service.php</newRelativeFilePath>
+      <newNamespace>Zend\JSON\Server\SMD</newNamespace>
       <newClassName>Service</newClassName>
-      <newFullyQualifiedName>Zend\Json\Server\SMD\Service</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\JSON\Server\SMD\Service</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Json/Server/Smd.php</originalRelativeFilePath>
       <originalClassName>Zend_Json_Server_Smd</originalClassName>
-      <newRelativeFilePath>Zend/Json/Server/Smd.php</newRelativeFilePath>
-      <newNamespace>Zend\Json\Server</newNamespace>
+      <newRelativeFilePath>Zend/JSON/Server/Smd.php</newRelativeFilePath>
+      <newNamespace>Zend\JSON\Server</newNamespace>
       <newClassName>SMD</newClassName>
-      <newFullyQualifiedName>Zend\Json\Server\SMD</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\JSON\Server\SMD</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Json/Server.php</originalRelativeFilePath>
       <originalClassName>Zend_Json_Server</originalClassName>
-      <newRelativeFilePath>Zend/Json/Server/Server.php</newRelativeFilePath>
-      <newNamespace>Zend\Json\Server</newNamespace>
+      <newRelativeFilePath>Zend/JSON/Server/Server.php</newRelativeFilePath>
+      <newNamespace>Zend\JSON\Server</newNamespace>
       <newClassName>Server</newClassName>
-      <newFullyQualifiedName>Zend\Json\Server\Server</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\JSON\Server\Server</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Json.php</originalRelativeFilePath>
       <originalClassName>Zend_Json</originalClassName>
-      <newRelativeFilePath>Zend/Json/Json.php</newRelativeFilePath>
-      <newNamespace>Zend\Json</newNamespace>
-      <newClassName>Json</newClassName>
-      <newFullyQualifiedName>Zend\Json\Json</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/JSON/JSON.php</newRelativeFilePath>
+      <newNamespace>Zend\JSON</newNamespace>
+      <newClassName>JSON</newClassName>
+      <newFullyQualifiedName>Zend\JSON\JSON</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Layout/Controller/Action/Helper/Layout.php</originalRelativeFilePath>
@@ -11675,10 +11675,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Serializer/Adapter/Json.php</originalRelativeFilePath>
       <originalClassName>Zend_Serializer_Adapter_Json</originalClassName>
-      <newRelativeFilePath>Zend/Serializer/Adapter/Json.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Serializer/Adapter/JSON.php</newRelativeFilePath>
       <newNamespace>Zend\Serializer\Adapter</newNamespace>
-      <newClassName>Json</newClassName>
-      <newFullyQualifiedName>Zend\Serializer\Adapter\Json</newFullyQualifiedName>
+      <newClassName>JSON</newClassName>
+      <newFullyQualifiedName>Zend\Serializer\Adapter\JSON</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Serializer/Adapter/PhpCode.php</originalRelativeFilePath>
@@ -17163,10 +17163,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/Json.php</originalRelativeFilePath>
       <originalClassName>Zend_View_Helper_Json</originalClassName>
-      <newRelativeFilePath>Zend/View/Helper/Json.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/View/Helper/JSON.php</newRelativeFilePath>
       <newNamespace>Zend\View\Helper</newNamespace>
-      <newClassName>Json</newClassName>
-      <newFullyQualifiedName>Zend\View\Helper\Json</newFullyQualifiedName>
+      <newClassName>JSON</newClassName>
+      <newFullyQualifiedName>Zend\View\Helper\JSON</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/Layout.php</originalRelativeFilePath>
@@ -17435,10 +17435,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Wildfire/Protocol/JsonStream.php</originalRelativeFilePath>
       <originalClassName>Zend_Wildfire_Protocol_JsonStream</originalClassName>
-      <newRelativeFilePath>Zend/Wildfire/Protocol/JsonStream.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Wildfire/Protocol/JSONStream.php</newRelativeFilePath>
       <newNamespace>Zend\Wildfire\Protocol</newNamespace>
-      <newClassName>JsonStream</newClassName>
-      <newFullyQualifiedName>Zend\Wildfire\Protocol\JsonStream</newFullyQualifiedName>
+      <newClassName>JSONStream</newClassName>
+      <newFullyQualifiedName>Zend\Wildfire\Protocol\JSONStream</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/XmlRpc/Client/Exception.php</originalRelativeFilePath>

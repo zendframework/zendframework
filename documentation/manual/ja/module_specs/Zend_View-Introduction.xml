@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19425 -->
+<!-- EN-Revision: 21740 -->
 <sect1 id="zend.view.introduction">
 
     <title>導入</title>
@@ -128,7 +128,7 @@ echo $view->render('booklist.php');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>basePath</code> は
+                    <property>basePath</property> は
                     スクリプトやヘルパー、そしてフィルタを配置する基底パスを指定します。
                     次のようなディレクトリ構成を想定しています。
                 </para>
@@ -143,38 +143,46 @@ base/path/
                 <para>
                     これを設定するには <methodname>setBasePath()</methodname> か
                     <methodname>addBasePath()</methodname>、あるいはコンストラクタのオプション
-                    <code>basePath</code> を使用します。
+                    <property>basePath</property> を使用します。
                 </para>
             </listitem>
 
-            <listitem><para>
-                <code>encoding</code> は <methodname>htmlentities()</methodname> や
-                <methodname>htmlspecialchars()</methodname> などで使用する文字エンコーディングを表します。
-                デフォルトは ISO-8859-1 (latin1) です。
-                <methodname>setEncoding()</methodname> か、コンストラクタのオプション
-                <code>encoding</code> で設定します。
-            </para></listitem>
+            <listitem>
+                <para>
+                    <property>encoding</property> は <methodname>htmlentities()</methodname> や
+                    <methodname>htmlspecialchars()</methodname> などで使用する文字エンコーディングを表します。
+                    デフォルトは ISO-8859-1 (latin1) です。
+                    <methodname>setEncoding()</methodname> か、コンストラクタのオプション
+                    <property>encoding</property> で設定します。
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>escape</code> は <methodname>escape()</methodname>
-                で使用するコールバックを表します。<methodname>setEscape()</methodname>
-                か、コンストラクタのオプション <code>escape</code>
-                で設定します。
-            </para></listitem>
+            <listitem>
+                <para>
+                    <property>escape</property> は <methodname>escape()</methodname>
+                    で使用するコールバックを表します。<methodname>setEscape()</methodname>
+                    か、コンストラクタのオプション <property>escape</property>
+                    で設定します。
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>filter</code> は、ビュースクリプトをレンダリングした後で使用するフィルタを表します。
-                <methodname>setFilter()</methodname> か <methodname>addFilter()</methodname>、
-                あるいはコンストラクタのオプション <code>filter</code>
-                で設定します。
-            </para></listitem>
+            <listitem>
+                <para>
+                    <property>filter</property> は、ビュースクリプトをレンダリングした後で使用するフィルタを表します。
+                    <methodname>setFilter()</methodname> か <methodname>addFilter()</methodname>、
+                    あるいはコンストラクタのオプション <property>filter</property>
+                    で設定します。
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>strictVars:</code> は、初期化していない変数に <classname>Zend_View</classname>
-                からアクセスしようとした際に notice や warning を発生させるようにします。
-                <methodname>strictVars(true)</methodname> か、あるいはコンストラクタのオプション
-                <code>strictVars</code> で設定します。
-            </para></listitem>
+            <listitem>
+                <para>
+                    <property>strictVars:</property> は、初期化していない変数に <classname>Zend_View</classname>
+                    からアクセスしようとした際に notice や warning を発生させるようにします。
+                    <methodname>strictVars(true)</methodname> か、あるいはコンストラクタのオプション
+                    <property>strictVars</property> で設定します。
+                </para>
+            </listitem>
         </itemizedlist>
     </sect2>
 
@@ -183,7 +191,7 @@ base/path/
 
         <para>
             我々が用意する例では、<acronym>PHP</acronym> の長いタグ
-            <code>&lt;?php</code> を用います。
+            <emphasis>&lt;?php</emphasis> を用います。
             我々はまた、<ulink
                 url="http://www.php.net/manual/ja/control-structures.alternative-syntax.php">
                 制御構造に関する別の構文</ulink>の使用に賛成します。
@@ -194,14 +202,14 @@ base/path/
 
         <para>
             以前の版では、ビュー・スクリプトをわずかにより冗長にしないように、
-            我々はしばしば短いタグ (<code>&lt;?</code> 及び <code>&lt;?=</code>)を使うことを推奨しました。
+            我々はしばしば短いタグ (<emphasis>&lt;?</emphasis> 及び <emphasis>&lt;?=</emphasis>)を使うことを推奨しました。
             しかしながら、 <filename>php.ini</filename> の <constant>short_open_tag</constant>
             設定のデフォルト値は製品において、または共有ホストでは一般的にオフです。
             その結果、それらの使用は全く移植可能ではありません。
             もしビュースクリプト内で <acronym>XML</acronym> のテンプレート、
             短い形式の開始タグは検証エラーの元となります。
             結局、 <constant>short_open_tag</constant> がオフの時に短いタグを使うと、
-            ビュー・スクリプトはエラーを起こすか、または単純にビューアーに PHP コードを返します。
+            ビュー・スクリプトはエラーを起こすか、または単純にビューアーに <acronym>PHP</acronym> コードを返します。
         </para>
 
         <para>
@@ -212,7 +220,7 @@ base/path/
         <itemizedlist>
             <listitem>
                 <para>
-                    短いタグを、<code>.htaccess</code> ファイルで有効にします。
+                    短いタグを、<filename>.htaccess</filename> ファイルで有効にします。
                 </para>
 
                 <programlisting language="apache"><![CDATA[
@@ -220,9 +228,9 @@ php_value "short_open_tag" "on"
 ]]></programlisting>
 
                 <para>
-                    これは、<code>.htaccess</code>
+                    これは、<filename>.htaccess</filename>
                     ファイルの作成と使用を許可されている場合にのみ可能です。
-                    この項目は、<code>httpd.conf</code> ファイルに記述することもできます。
+                    この項目は、<filename>httpd.conf</filename> ファイルに記述することもできます。
                 </para>
             </listitem>
 

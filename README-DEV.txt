@@ -36,11 +36,11 @@ Second pass:
 
 Third pass:
 [X] Zend_Server
-[ ] Zend_Http
+[X] Zend_Http
 
 Fourth pass:
 THE FOLLOWING IN ANY ORDER (except where indicated):
-[P] Zend_Json
+[X] Zend_Json
 [X] Zend_Crypt -> [X] Zend_Oauth, [X] Zend_XmlRpc
 [X] Zend_Acl
 [ ] Zend_Reflection

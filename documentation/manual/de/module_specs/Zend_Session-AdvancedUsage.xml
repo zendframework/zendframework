@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20810 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.advanced_usage">
     <title>Fortgeschrittene Benutzung</title>
@@ -43,7 +43,7 @@ Zend_Session::start();
         <orderedlist>
             <listitem>
                 <para>
-                    Falsch: PHP's <ulink
+                    Falsch: <acronym>PHP</acronym>'s <ulink
                         url="http://www.php.net/manual/de/ref.session.php#ini.session.auto-start"><code>session.auto_start</code>
                         Einstellung</ulink> darf nicht eingeschaltet werden. Wenn keine Möglichkeit
                     besteht diese Einstellung in php.ini zu deaktivieren, und mod_php (oder

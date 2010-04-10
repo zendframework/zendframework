@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21718 -->
+<!-- EN-Revision: 21751 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.functions">
     <title>Zend_Locale verwenden</title>
@@ -166,6 +166,47 @@ print $locale->getLanguage();
 print $locale->getRegion();
 ]]></programlisting>
         </example>
+    </sect2>
+
+    <sect2 id="zend.locale.getlocaletoterritory">
+        <title>Ein Gebietsschema durch die Angabe eines Territoriums erhalten</title>
+
+        <para>
+            Wenn man nur ein Territorium oder ein Land hat, dann ist es auch möglich aus diesen
+            Informationen ein Gebietsschema zu erhalten. Man kann manuell suchen ob es ein
+            Gebietsschema für dieses Territorium gibt, indem man
+            <methodname>getLocaleToTerritory()</methodname> verwendet. Diese Methode gibt ein
+            Gebietsschema für das angegebene Territorium zurück, oder <constant>NULL</constant>
+            wenn kein Gebietsschema gefunden werden konnte.
+        </para>
+
+        <example id="zend.locale.getlocaletoterritory.example-1">
+            <title>getLocaleToTerritory</title>
+
+            <programlisting language="php"><![CDATA[
+$locale = Zend_Locale::getLocaleToTerritory('US');
+// Gibt 'en_US' zurück
+]]></programlisting>
+        </example>
+
+        <note>
+            <title>Großgeschriebene Territorien</title>
+
+            <para>
+                Wenn man weiß dass man ein Territorium verwendet dann sollte es großgeschrieben
+                werden. Andernfalls könnte man der Meinung sein ein falsches Gebietsschema zu
+                erhalten wenn man andere Methoden verwendet. Beispiel: Wenn man "om" angibt, dann
+                gibt <methodname>getLocaleToTerritory()</methodname> "ar_OM" zurück da es weiß
+                dass man ein Territorium meint. Aber alle anderen Methoden werden "om" zurückgeben
+                da dies auch eine Sprache ist.
+            </para>
+
+            <para>
+                Wenn man also weiß dass ein angegebener String ein Territorium ist, dann sollte man
+                entweder <methodname>getLocaleToTerritory()</methodname> selbst verwenden bevor man
+                ein Gebietsschema erstellt, oder die Eingabe groß schreiben.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.locale.getdata">
@@ -2021,6 +2062,12 @@ if ($locale instanceof Zend_Locale) {
             <listitem>
                 <para>
                     Degradiert das Gebietsschema wenn es in der angegebenen Region nicht existiert
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Erweitert das Gebietsschema wenn dieses als Region ohne Sprache erkannt wurde
                 </para>
             </listitem>
 

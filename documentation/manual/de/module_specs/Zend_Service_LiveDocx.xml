@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20850 -->
-<!-- Reviewed: 20850 -->
+<!-- EN-Revision: 21740 -->
+<!-- Reviewed: 21740 -->
 <sect1 id="zend.service.livedocx">
     <title>Zend_Service_LiveDocx</title>
 
@@ -9,12 +9,13 @@
 
         <para>
             LiveDocx ist ein <acronym>SOAP</acronym>-Service, der es Entwicklern erlaubt, MS Word
-            Dokumente zu erstellen, indem strukturierte Daten von PHP mit einem Template kombiniert
-            werden, die in einer MS Word-kompatiblen Anwendung erstellt wurden. Das resultierende
-            Dokument kann als <acronym>PDF</acronym>, <acronym>DOCX</acronym>,
+            Dokumente zu erstellen, indem strukturierte Daten von <acronym>PHP</acronym> mit einem
+            Template kombiniert werden, die in einer MS Word-kompatiblen Anwendung erstellt wurden.
+            Das resultierende Dokument kann als <acronym>PDF</acronym>, <acronym>DOCX</acronym>,
             <acronym>DOC</acronym>, <acronym>HTML</acronym> oder <acronym>RTF</acronym> Datei
             gespeichert werden. LiveDocx implementiert <ulink
-                url="http://en.wikipedia.org/wiki/Mail_merge">Mail-Merge</ulink> in PHP.
+                url="http://en.wikipedia.org/wiki/Mail_merge">Mail-Merge</ulink> in
+            <acronym>PHP</acronym>.
         </para>
 
         <para>
@@ -355,7 +356,7 @@
 
             <para>
                 Im nächsten Schritt vereinen wir die Merge-Felder mit textuellen Daten von
-                PHP.
+                <acronym>PHP</acronym>.
             </para>
 
             <para>
@@ -469,8 +470,8 @@ blockEnd_block1
 
             <para>
                 Der Inhalt eines Blocks wird wiederholt, bis alle zugeordneten Daten in Blockfeldern
-                des Templates eingefügt wurden. Die Daten der Blockfelder werden in PHP als
-                mehrfach-assoziatives Array spezifiziert.
+                des Templates eingefügt wurden. Die Daten der Blockfelder werden in
+                <acronym>PHP</acronym> als mehrfach-assoziatives Array spezifiziert.
             </para>
 
             <para>
@@ -637,7 +638,7 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
             <para>
                 Das produziert zwei Bilder (<filename>documentPage1.png</filename> und
                 <filename>documentPage2.png</filename>) und schreibt diese auf die Festplatte
-                in das gleiche Verzeichnis wie die ausführbare PHP-Datei.
+                in das gleiche Verzeichnis wie die ausführbare <acronym>PHP</acronym>-Datei.
             </para>
 
             <para>

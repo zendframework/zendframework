@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20810 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDL Zugriffsmethoden</title>
@@ -370,29 +370,30 @@
 
             <itemizedlist>
                 <listitem>
-                    <para>PHP Strings &lt;-&gt; <code>xsd:string</code>.</para>
+                    <para><acronym>PHP</acronym> Strings &lt;-&gt; <code>xsd:string</code>.</para>
                 </listitem>
 
                 <listitem>
-                    <para>PHP Integer &lt;-&gt; <code>xsd:int</code>.</para>
+                    <para><acronym>PHP</acronym> Integer &lt;-&gt; <code>xsd:int</code>.</para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        PHP Float (Fliesskomma) und Double &lt;-&gt; <code>xsd:float</code>.
+                        <acronym>PHP</acronym> Float (Fliesskomma) und Double &lt;-&gt;
+                        <code>xsd:float</code>.
                     </para>
                 </listitem>
 
                 <listitem>
-                    <para>PHP Boolean &lt;-&gt; <code>xsd:boolean</code>.</para>
+                    <para><acronym>PHP</acronym> Boolean &lt;-&gt; <code>xsd:boolean</code>.</para>
                 </listitem>
 
                 <listitem>
-                    <para>PHP Arrays &lt;-&gt; <code>soap-enc:Array</code>.</para>
+                    <para><acronym>PHP</acronym> Arrays &lt;-&gt; <code>soap-enc:Array</code>.</para>
                 </listitem>
 
                 <listitem>
-                    <para>PHP Objekt &lt;-&gt; <code>xsd:struct</code>.</para>
+                    <para><acronym>PHP</acronym> Objekt &lt;-&gt; <code>xsd:struct</code>.</para>
                 </listitem>
 
                 <listitem>
@@ -441,7 +442,7 @@
 
             <para>
                 Die <methodname>getType($type)</methodname> Methode kann verwendet werden um ein
-                Mapping für einen spezifizierten PHP Typ zu erhalten:
+                Mapping für einen spezifizierten <acronym>PHP</acronym> Typ zu erhalten:
 
                 <programlisting language="php"><![CDATA[
 ...

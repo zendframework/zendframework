@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21541 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.service.windowsazure.storage.blob">
     <title>Zend_Service_WindowsAzure_Storage_Blob</title>
@@ -13,7 +13,7 @@
     <para>
         Blog Speicher wird von Windows Azure als <acronym>REST</acronym> API angeboten welcher von
         der Klasse <classname>Zend_Service_WindowsAzure_Storage_Blob</classname> umhüllt ist um ein
-        natives PHP Interface zum Speicher Account zu bieten.
+        natives <acronym>PHP</acronym> Interface zum Speicher Account zu bieten.
     </para>
 
     <sect3 id="zend.service.windowsazure.storage.blob.api">
@@ -192,11 +192,12 @@ $storageClient->setContainerAcl('testcontainer', Zend_Service_WindowsAzure_Stora
         <title>Blob Speicher Stream Wrapper</title>
 
         <para>
-            Die Windows Azure SDK für PHP bietet Unterstützung für die Registrierung eines Blob
-            Speicher Clients als PHP File Stream Wrapper. Der Blob Speicher Stream Wrapper bietet
-            Unterstützung für die Verwendung von regulären Datei Operationen auf dem Windows Azure
-            Blob Speicher. Zum Beispiel kan eine Datei vom Windows Azure Blob Speicher aus mit der
-            Funktion <methodname>fopen()</methodname> geöffnet werden:
+            Die Windows Azure SDK für <acronym>PHP</acronym> bietet Unterstützung für die
+            Registrierung eines Blob Speicher Clients als <acronym>PHP</acronym> File Stream
+            Wrapper. Der Blob Speicher Stream Wrapper bietet Unterstützung für die Verwendung von
+            regulären Datei Operationen auf dem Windows Azure Blob Speicher. Zum Beispiel kann eine
+            Datei vom Windows Azure Blob Speicher aus mit der Funktion
+            <methodname>fopen()</methodname> geöffnet werden:
         </para>
 
         <example id="zend.service.windowsazure.storage.blob.wrapper.sample">
@@ -212,8 +213,8 @@ fclose($fileHandle);
         </example>
 
         <para>
-            Um das zu tun muss die Windows Azure SDK für den PHP Blob Speicher Client als Stream
-            Wrapper registriert werden. Das kann getan werden indem die Methode
+            Um das zu tun muss die Windows Azure SDK für den <acronym>PHP</acronym> Blob Speicher
+            Client als Stream Wrapper registriert werden. Das kann getan werden indem die Methode
             <methodname>registerStreamWrapper()</methodname> aufgerufen wird:
         </para>
 
@@ -326,9 +327,9 @@ $sharedAccessUrl = $storageClient->generateSharedAccessUrl(
 
             <para>
                 Wenn  man eine Shared Access Signatur von jemandem anderen erhält kann man die
-                Windows Azure SDK für PHP verwenden um mit der adressierten Ressource zu arbeiten.
-                Zum Beispiel kann man die folgende Signatur vom Eigentümer eines Speicher Accounts
-                erhalten:
+                Windows Azure SDK für <acronym>PHP</acronym> verwenden um mit der adressierten
+                Ressource zu arbeiten. Zum Beispiel kann man die folgende Signatur vom Eigentümer
+                eines Speicher Accounts erhalten:
             </para>
 
             <literallayout>
@@ -363,11 +364,12 @@ $storageClient->putBlob(
 
             <para>
                 Es ist zu beachten das es keine explizite Erlaubnis für das Schreiben eines
-                spezifischen Blobs gab. Stattdessen hat die Windows Azure SDK für PHP festgestellt
-                das eine Erlaubnis benötigt wurde um entweder an den spezifischen Blob zu schreiben,
-                oder an seinen Container zu schreiben. Da nur eine Signatur für das letztere
-                vorhanden war, hat die Windows Azure SDK für PHP diese Zugriffsrechte ausgewählt um
-                die Anfrage auf den Windows Azure Blob Speicher durchzuführen.
+                spezifischen Blobs gab. Stattdessen hat die Windows Azure SDK für
+                <acronym>PHP</acronym> festgestellt das eine Erlaubnis benötigt wurde um entweder an
+                den spezifischen Blob zu schreiben, oder an seinen Container zu schreiben. Da nur
+                eine Signatur für das letztere vorhanden war, hat die Windows Azure SDK für
+                <acronym>PHP</acronym> diese Zugriffsrechte ausgewählt um die Anfrage auf den
+                Windows Azure Blob Speicher durchzuführen.
             </para>
         </sect4>
     </sect3>

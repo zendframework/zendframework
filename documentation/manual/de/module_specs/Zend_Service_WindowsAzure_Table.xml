@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20922 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.service.windowsazure.storage.table">
     <title>Zend_Service_WindowsAzure_Storage_Table</title>
@@ -11,7 +11,7 @@
     <para>
         Tabellen Speicher wird von Windows Azure als REST API angeboten die von der Klasse
         <classname>Zend_Service_WindowsAzure_Storage_Table</classname> umhüllt ist um ein natives
-        PHP Interface zum Speicher Konto zu bieten.
+        <acronym>PHP</acronym> Interface zum Speicher Konto zu bieten.
     </para>
 
     <para>
@@ -677,18 +677,19 @@ $batch->commit();
         <title>Session Handler für Tabellen Speicher</title>
 
         <para>
-            Wenn eine PHP Anwendung auf der Windows Azure Plattform in einem Load-Balanced Modus
-            läuft (wenn 2 oder mehr Web Rollen Instanzen laufen), ist es wichtig das PHP
-            Session Daten zwischen mehreren Web Rollen Instanzen verwendet werden können. Die
-            Windows Azure SDK von PHP bietet die Klasse
-            <classname>Zend_Service_WindowsAzure_SessionHandler</classname> an welche den Windows
-            Azure Tabellen Speicher als Session Handler für PHP Anwendungen verwendet.
+            Wenn eine <acronym>PHP</acronym> Anwendung auf der Windows Azure Plattform in einem
+            Load-Balanced Modus läuft (wenn 2 oder mehr Web Rollen Instanzen laufen), ist es
+            wichtig dass <acronym>PHP</acronym> Session Daten zwischen mehreren Web Rollen Instanzen
+            verwendet werden können. Die Windows Azure SDK von <acronym>PHP</acronym> bietet die
+            Klasse <classname>Zend_Service_WindowsAzure_SessionHandler</classname> an welche den
+            Windows Azure Tabellen Speicher als Session Handler für <acronym>PHP</acronym>
+            Anwendungen verwendet.
         </para>
 
         <para>
             Um den <classname>Zend_Service_WindowsAzure_SessionHandler</classname> Session Handler
-            zu verwenden sollte er als Default Session Handler für die PHP Anwendung registriert
-            sein:
+            zu verwenden sollte er als Default Session Handler für die <acronym>PHP</acronym>
+            Anwendung registriert sein:
         </para>
 
         <example id="zend.service.windowsazure.storage.table.api.sessionhandler-register">
@@ -715,8 +716,8 @@ $sessionHandler->register();
         <para>
             Nach der Registrierung des
             <classname>Zend_Service_WindowsAzure_SessionHandler</classname> Session Handlers
-            können Session gestartet und auf dem gleichen Weg wie normale PHP Sessions verwendet
-            werden:
+            können Session gestartet und auf dem gleichen Weg wie normale <acronym>PHP</acronym>
+            Sessions verwendet werden:
         </para>
 
         <example id="zend.service.windowsazure.storage.table.api.sessionhandler-usage">

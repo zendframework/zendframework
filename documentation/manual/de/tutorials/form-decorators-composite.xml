@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.form.decorators.composite">
     <title>Erstellung und Darstellung von kombinierten Elementen</title>
@@ -190,11 +190,11 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 
         <para>
             Bei der erneuten Betrachtung des Beispiels im letzten Abschnitt, nehmen wir wir an dass
-            wir wollen das unsere Benutzer Jahr, Monat und Tag separat eingeben. PHP erlaubt es uns
-            glücklicherweise die Array Schreibweise zu verwenden wenn Elemente erstellt werden,
-            deshalb ist es möglich diese drei Entitäten in einem einzelnen Wert zu fangen -- und wir
-            erstellen jetzt ein <classname>Zend_Form</classname> Element das solch einen Array Wert
-            verarbeiten kann.
+            wir wollen das unsere Benutzer Jahr, Monat und Tag separat eingeben.
+            <acronym>PHP</acronym> erlaubt es uns glücklicherweise die Array Schreibweise zu
+            verwenden wenn Elemente erstellt werden, deshalb ist es möglich diese drei Entitäten in
+            einem einzelnen Wert zu fangen -- und wir erstellen jetzt ein
+            <classname>Zend_Form</classname> Element das solch einen Array Wert verarbeiten kann.
         </para>
 
         <para>

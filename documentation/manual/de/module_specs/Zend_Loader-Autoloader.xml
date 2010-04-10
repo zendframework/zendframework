@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader">
     <title>Der Autoloader</title>
@@ -135,9 +135,9 @@ $autoloader->setFallbackAutoloader(true);
             <title>Klassen von PHP Namespaces laden</title>
 
             <para>
-                Beginnend mit Version 1.10.0 erlaubt Zend Framework das Laden von Klassen aus PHP
-                Namespaces. Diese Unterstützung folgt den gleichen Richtlinien und Implementationen
-                wie Sie in der <ulink
+                Beginnend mit Version 1.10.0 erlaubt Zend Framework das Laden von Klassen aus
+                <acronym>PHP</acronym> Namespaces. Diese Unterstützung folgt den gleichen
+                Richtlinien und Implementationen wie Sie in der <ulink
                     url="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PHP
                 Framework Interop Group PSR-0</ulink> Referenz Implementation gefunden werden
                 können.

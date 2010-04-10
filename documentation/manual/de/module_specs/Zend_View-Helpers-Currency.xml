@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20234 -->
+<!-- EN-Revision: 21741 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.currency">
     <title>Currency Helfer</title>
@@ -7,7 +7,7 @@
     <para>
         Das anzeigen von lokalisierten Währungswerten ist eine übliche Aufgabe; der View Helfer
         <classname>Zend_Currency</classname> dient dazu diese Aufgabe zu vereinfachen. Siehe auch
-        die <link linkend="zend.currency.introduction">Dokumentation von Zend Currency</link> für
+        die <link linkend="zend.currency.introduction">Dokumentation von Zend_Currency</link> für
         Details über dieses Lokalisierungs-Feature. In diesem Abschnitt fokusieren wir uns nur auf
         die Verwendung des View Helfers.
     </para>

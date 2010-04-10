@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.log.writers.zendmonitor">
     <title>Auf den Zend Server Montior schreiben</title>
@@ -117,8 +117,9 @@ $log->info('Exception gefunden', array(
         </para>
 
         <para>
-            Wie vorher erwähnt fungiert der Logger, wenn die Monitor API in der eigenen PHP
-            Anwendung nicht erkannt wurde, als <constant>NULL</constant> Logger.
+            Wie vorher erwähnt fungiert der Logger, wenn die Monitor API in der eigenen
+            <acronym>PHP</acronym> Anwendung nicht erkannt wurde, als <constant>NULL</constant>
+            Logger.
         </para>
     </note>
 </sect2>

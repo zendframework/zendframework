@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron">
     <title>Zend_Service_StrikeIron</title>
@@ -207,7 +207,8 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
         <para>
             Sobald die <methodname>getService()</methodname> Methode verwendet wurde um einen
             Clienten für ein gewünschtes StrikeIron Service zu erhalten, kann dieser Client
-            verwendet werden durch Aufruf seiner Methoden ganz wie jedes andere PHP Objekt.
+            verwendet werden durch Aufruf seiner Methoden ganz wie jedes andere
+            <acronym>PHP</acronym> Objekt.
 
             <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
@@ -263,7 +264,8 @@ echo $rateInfo->GST;
 
         <para>
             Der einfachste Weg ein Ergebnis vom Service zu betrachten ist die Verwendung der
-            eingebauten PHP Methode <ulink url="http://www.php.net/print_r">print_r()</ulink>:
+            eingebauten <acronym>PHP</acronym> Methode <ulink
+                url="http://www.php.net/print_r">print_r()</ulink>:
 
             <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',

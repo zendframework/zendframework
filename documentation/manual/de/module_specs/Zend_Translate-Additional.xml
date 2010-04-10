@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21661 -->
+<!-- EN-Revision: 21745 -->
 <!-- Reviewed: 21049 -->
 <sect1 id="zend.translate.additional">
     <title>Zusätzliche Features für Übersetzungen</title>
@@ -463,6 +463,54 @@ if (!$translate->isAvailable($locale->getLanguage())) {
 
 $translate->getLocale();
 ]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.translate.additional.languages.territory">
+            <title>Ein Land als Sprache verwenden</title>
+
+            <para>
+                Man kann auch ein Land als "locale" Parameter verwenden. Dass kann nützlich sein
+                wenn man seinem Benutzer Fahnen anbieten will, welche das Land repräsentieren in dem
+                er lebt. Wenn er seine Fahne auswählt, würde er automatisch die Standardsprache für
+                dieses Land erhalten.
+            </para>
+
+            <para>
+                Wenn der Benutzer, zum Beispiel, <emphasis>US</emphasis> auswählt, dann würde er
+                <emphasis>en_US</emphasis> als Gebietsschema erhalten welches dann verwendet wird.
+                Das führt automatisch zur Sprache <emphasis>en</emphasis> welche die Standardsprache
+                für das Land <emphasis>US</emphasis> ist.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => 'my_de.mo',
+        'locale'  => 'US'
+    )
+);
+]]></programlisting>
+
+            <note>
+                <title>Länder immer groß schreiben</title>
+
+                <para>
+                    Wenn man diese Syntax verwendet sollte man die Eingaben immer groß schreiben
+                    wenn man weiß das es ein Land ist. Der Grund hierfür ist, das es auch Sprachen
+                    gibt welche die gleichen Buchstaben wie ein Land verwenden. Nehmen wir zum
+                    Beispiel <emphasis>om</emphasis>. Man könnte erwarten
+                    <emphasis>ar_OM</emphasis> zu erhalten wenn man das Land "Oman" meint, oder man
+                    könnte die Sprache "Oromo" erwarten welche zum Beispiel in Kenia gesprochen
+                    wird.
+                </para>
+
+                <para>
+                    Da <classname>Zend_Translate</classname> auf Sprachen bezogen ist würde es in
+                    so einem Fall immer die Sprache wählen. Deshalb sollte das Gebietsschema immer
+                    groß geschrieben werden kann man es will das es als Land erkannt wird.
+                </para>
+            </note>
         </sect3>
     </sect2>
 

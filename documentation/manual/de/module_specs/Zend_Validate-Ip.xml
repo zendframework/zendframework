@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21243 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.ip">
     <title>Ip</title>
@@ -65,8 +65,8 @@ if ($validator->isValid($ip)) {
 
             <para>
                 <classname>Zend_Validate_Ip</classname> prüft IPv6 Adressen mit einer Regex. Der
-                Grund ist, dass die Filter und Methoden von PHP der RFC nicht folgen. Viele andere
-                vorhandene Klassen folgen Ihr auch nicht.
+                Grund ist, dass die Filter und Methoden von <acronym>PHP</acronym> der RFC nicht
+                folgen. Viele andere vorhandene Klassen folgen Ihr auch nicht.
             </para>
         </note>
     </sect3>

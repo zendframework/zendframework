@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21613 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.overview">
     <title>Übersicht</title>
@@ -125,7 +125,7 @@ $logger = null;
 ]]></programlisting>
 
             Das explizite entfernen des Logs auf diesem Weg ist optional und wird automatisch
-            durchgeführt wenn PHP herunterfährt.
+            durchgeführt wenn <acronym>PHP</acronym> herunterfährt.
         </para>
     </sect2>
 
@@ -239,9 +239,9 @@ $logger->setEventItem('pid', getmypid());
         <title>PHP Fehler loggen</title>
 
         <para>
-            Zend_Log kann auch verwendet werden um PHP Fehler zu loggen. Der Aufruf von
-            <methodname>registerErrorHandler()</methodname> fügt Zend_Log vor dem aktuellen Error
-            Handler hinzu, und gibt den Fehler genauso weiter.
+            Zend_Log kann auch verwendet werden um <acronym>PHP</acronym> Fehler zu loggen. Der
+            Aufruf von <methodname>registerErrorHandler()</methodname> fügt Zend_Log vor dem
+            aktuellen Error Handler hinzu, und gibt den Fehler genauso weiter.
         </para>
 
         <table id="zend.log.overview.as-errorHandler.properties.table-1">

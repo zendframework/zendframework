@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20819 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.introduction">
     <title>Einführung</title>
@@ -131,12 +131,12 @@ $mail->send();
             <title>Sendmail Transport und Windows</title>
 
             <para>
-                Das Handbuch von PHP sagt aus dass die <methodname>mail()</methodname> ein
-                unterschiedliches Verhalten auf Windows und auf *nix basierten Systemen zeigt. Die
-                Verwendung von Sendmail Transport wird auf Windows nicht in Verbindung mit
-                <methodname>addBcc()</methodname> funktionieren. Die <methodname>mail()</methodname>
-                Funktion sendet auf eine Art und Weise an den BCC Empfänger, das alle anderen
-                Empfänger diesen als Empfänger sehen!
+                Das Handbuch von <acronym>PHP</acronym> sagt aus dass die Methode
+                <methodname>mail()</methodname> ein unterschiedliches Verhalten auf Windows und auf
+                *nix basierten Systemen zeigt. Die Verwendung von Sendmail Transport wird auf
+                Windows nicht in Verbindung mit <methodname>addBcc()</methodname> funktionieren. Die
+                <methodname>mail()</methodname> Funktion sendet auf eine Art und Weise an den BCC
+                Empfänger, das alle anderen Empfänger diesen als Empfänger sehen!
             </para>
 
             <para>

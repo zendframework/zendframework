@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21588 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -1091,9 +1091,9 @@ $labels = $categories->getValues();
                 <acronym>ISO</acronym> 86001 folgen und <acronym>RSS</acronym> Daten sollten
                 <acronym>RFC</acronym> 822 oder <acronym>RFC</acronym> 2822 folgen welche auch
                 üblicherweise verwendet werden. Datumsmethoden werfen eine Exception wenn
-                <classname>Zend_Date</classname>, oder die PHP basierenden Möglichkeiten für
-                <acronym>RSS</acronym> Daten, das Datum durch Verwendung der obigen Standards
-                nicht laden kann.
+                <classname>Zend_Date</classname>, oder die <acronym>PHP</acronym> basierenden
+                Möglichkeiten für <acronym>RSS</acronym> Daten, das Datum durch Verwendung der
+                obigen Standards nicht laden kann.
             </para>
         </caution>
 

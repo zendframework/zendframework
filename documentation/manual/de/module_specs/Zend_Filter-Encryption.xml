@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21606 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
@@ -7,7 +7,7 @@
     <para>
         Dieser Filter verschlüsselt beliebige Strings mit den angegebenen Einstellungen. Hierfür
         verwendet er Adapter. Aktuell gibt es Adapter für die <classname>Mcrypt</classname> und
-        <classname>OpenSSL</classname> Erweiterungen von php.
+        <classname>OpenSSL</classname> Erweiterungen von <acronym>PHP</acronym>.
     </para>
 
     <para>

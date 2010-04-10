@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
+<!-- EN-Revision: 21741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.writing-providers">
     <title>Erstellen von Providern für die Verwendung mit Zend_Tool_Framework</title>
@@ -12,13 +12,13 @@
     </para>
 
     <sect2 id="zend.tool.framework.writing-providers.loading">
-        <title>Wie Zend Took eigene Provider findet</title>
+        <title>Wie Zend_Tool eigene Provider findet</title>
 
         <para>
-            Standardmäßig verwendet Zend Tool den IncludePathLoader um alle Provider zu finden die
-            man ausführen kann. Er iteriert rekursiv alle Verzeichnisse des Include Pfads und öffnet
-            alle Dateien die mit "Manifest.php" oder "Provider.php" enden. Alle Klassen in diesen
-            Dateien werden angeschaut ob Sie entweder
+            Standardmäßig verwendet <classname>Zend_Tool</classname> den IncludePathLoader um alle
+            Provider zu finden die man ausführen kann. Er iteriert rekursiv alle Verzeichnisse des
+            Include Pfads und öffnet alle Dateien die mit "Manifest.php" oder "Provider.php" enden.
+            Alle Klassen in diesen Dateien werden angeschaut ob Sie entweder
             <classname>Zend_Tool_Framework_Provider_Interface</classname> oder
             <classname>Zend_Tool_Framework_Manifest_ProviderManifestable</classname> implementieren.
             Instanzen des Provider Interfaces machen die wirkliche Funtionalität aus und auf alle
@@ -70,9 +70,9 @@
             <title>Eigene Provider mit einem Manifest bekanntmachen</title>
 
             <para>
-                Man kann eigene Provider bei Zend Tool bekannt machen indem man ein Manifest mit
-                einem speziellen Dateinamen anbietet der mit "Manifest.php" endet. Ein Provider
-                Manifest ist eine Implementation von
+                Man kann eigene Provider bei <classname>Zend_Tool</classname> bekannt machen indem
+                man ein Manifest mit einem speziellen Dateinamen anbietet der mit "Manifest.php"
+                endet. Ein Provider Manifest ist eine Implementation von
                 <interface>Zend_Tool_Framework_Manifest_ProviderManifestable</interface> und
                 benötigt die Methode <methodname>getProviders()</methodname> welche ein Array von
                 instanziierten Providern zurückgibt. Anders als unser erster eigener Provider
@@ -135,12 +135,13 @@ Hello from my provider!
         <title>Das Antwort Objekt</title>
 
         <para>
-            Wie in der Archikektur Sektion diskutiert erlaubt Zend Tool unterschiedliche Clients für
-            die Verwendung in Zend Tool Providern zu verwenden. Um mit den unterschiedlichen Clients
-            kompatibel zu bleiben sollte man das Antwort Objekt verwenden um Nachrichten von eigenen
-            Providern zurückzugeben, statt <methodname>echo()</methodname> oder ähnliche Ausgabe
-            Mechanismen zu verwenden. Unser umgeschriebener Hallo Provider sieht mit dem jetzt
-            bekannten wie folgt aus:
+            Wie in der Archikektur Sektion diskutiert erlaubt <classname>Zend_Tool</classname>
+            unterschiedliche Clients für die Verwendung in <classname>Zend_Tool</classname>
+            Providern zu verwenden. Um mit den unterschiedlichen Clients kompatibel zu bleiben
+            sollte man das Antwort Objekt verwenden um Nachrichten von eigenen Providern
+            zurückzugeben, statt <methodname>echo()</methodname> oder ähnliche Ausgabe Mechanismen
+            zu verwenden. Unser umgeschriebener Hallo Provider sieht mit dem jetzt bekannten wie
+            folgt aus:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -317,9 +318,9 @@ class My_Component_HelloProvider
             <para>
                 Wenn man die Umgebungsvariable <property>ZF_CONFIG_FILE</property> oder
                 .zf.ini im Home Verzeichnis verwendet kann man Konfigurationsparameter in jedem
-                Zend Tool Provider injizieren. Zugriff auf diese Konfiguration ist über die
-                Registry möglich die dem Provider übergeben wird, wenn man
-                <classname>Zend_Tool_Framework_Provider_Abstract</classname> erweitert.
+                <classname>Zend_Tool</classname> Provider injizieren. Zugriff auf diese
+                Konfiguration ist über die Registry möglich die dem Provider übergeben wird, wenn
+                man <classname>Zend_Tool_Framework_Provider_Abstract</classname> erweitert.
             </para>
 
             <programlisting language="php"><![CDATA[

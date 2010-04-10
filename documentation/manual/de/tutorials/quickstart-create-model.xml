@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20879 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-model">
     <title>Ein Modell und eine Datenbank Tabelle erstellen</title>
@@ -463,7 +463,7 @@ class Application_Model_GuestbookMapper
 Creating a model at application/models/GuestbookMapper.php
 Updating project profile '.zfproject.xml'
 ]]></programlisting>
-       
+
     <para>
         Jetzt muss die Klasse <classname>Application_Model_GuestbookMapper</classname> welche in
         <filename>application/models/GuestbookMapper.php</filename> gefunden werden kann so
@@ -553,9 +553,9 @@ class Application_Model_GuestbookMapper
 Creating a model at application/models/Guestbook.php
 Updating project profile '.zfproject.xml'
 ]]></programlisting>
-  
+
    <para>
-        Wir verändern diese leere PHP Klasse um es einfach zu machen das Modell
+        Wir verändern diese leere <acronym>PHP</acronym> Klasse um es einfach zu machen das Modell
         bekanntzugeben indem ein Array an Daten entweder an den Constructor oder an die
         <methodname>setOptions()</methodname> Methode übergeben wird. Das endgültige Modell, welches
         in <filename>application/models/Guestbook.php</filename> ist, sollte wie folgt aussehen:

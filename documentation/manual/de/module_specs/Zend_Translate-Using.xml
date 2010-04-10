@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21661 -->
-<!-- Reviewed: 21661 -->
+<!-- EN-Revision: 21741 -->
+<!-- Reviewed: 21741 -->
 <sect1 id="zend.translate.using">
     <title>Verwendung der Übersetzungsadapter</title>
 
@@ -28,8 +28,8 @@ print "Hier ist Zeile zwei\n";
     </para>
 
     <para>
-        Der nächste Schritt ist also die Integration von Zend_Translate in den eigenen Code.
-        Natürlich ist es viel einfacher, wenn bei der Erstellung des Codes bereits
+        Der nächste Schritt ist also die Integration von <classname>Zend_Translate</classname> in
+        den eigenen Code. Natürlich ist es viel einfacher, wenn bei der Erstellung des Codes bereits
         an die Übersetzung gedacht wurde, anstatt ihn im Nachhinein dafür zu ändern.
     </para>
 

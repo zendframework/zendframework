@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21588 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.pubsubhubbub.introduction">
     <title>Zend_Feed_Pubsubhubbub</title>
@@ -7,7 +7,8 @@
     <para>
         <classname>Zend_Feed_Pubsubhubbub</classname> ist eine Implementation der PubSubHubbub Core
         0.2 Spezifikation (Working Draft). Sie bietet eine Implementation eines Pubsubhubbub
-        Publizisten und Abonnenten geeignet für den Zend Framework und andere PHP Anwendungen.
+        Publizisten und Abonnenten geeignet für den Zend Framework und andere <acronym>PHP</acronym>
+        Anwendungen.
     </para>
 
     <sect2 id="zend.feed.pubsubhubbub.what.is.pubsubhubbub">
@@ -576,9 +577,9 @@ if ($callback->hasFeedUpdate()) {
                     Es sollte beachtet werden dass
                     <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> jeden
                     hereinkommenden Anfragestring und andere Parameter unabhängig parsen kann. Dies
-                    ist notwendig da PHP die Struktur und Schlüssel eines Abfragestrings ändert wenn
-                    diese in die Superglobals <varname>$_GET</varname> oder
-                    <varname>$_POST</varname> geparst wird. Zum Beispiel werden alle doppelten
+                    ist notwendig da <acronym>PHP</acronym> die Struktur und Schlüssel eines
+                    Abfragestrings ändert wenn diese in die Superglobals <varname>$_GET</varname>
+                    oder <varname>$_POST</varname> geparst wird. Zum Beispiel werden alle doppelten
                     Schlüssel ignoriert und Punkte werden in Unterstriche konvertiert.
                     Pubsubhubbub unterstützt beide in den Abfragestring die es erzeugt.
                 </para>

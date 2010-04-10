@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.introduction">
     <title>Einführung</title>
@@ -198,7 +198,7 @@ base/path/
             werden Short Open Tags dazu führen das die Prüfung der Templates fehlschlägt.
             Letztendlich, wenn man Short Tags verwendet, wärend <constant>short_open_tag</constant>
             ausgeschaltet ist, werden die View Skripte entweder Fehler verursachen oder einfach den
-            PHP Code an den Betrachter zurücksenden.
+            <acronym>PHP</acronym> Code an den Betrachter zurücksenden.
         </para>
 
         <para>

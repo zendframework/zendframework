@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-language">
     <title>Abfragesprache</title>
@@ -333,8 +333,8 @@ PHP framework
 PHP^4 framework
 ]]></programlisting>
 
-            Das macht Dokumente in denen der Ausdruck PHP vorkommt relevanter. Man kann genauso
-            Phrasenausdrücke boosten und Unterabfragen wie im Beispiel gezeigt:
+            Das macht Dokumente in denen der Ausdruck <acronym>PHP</acronym> vorkommt relevanter.
+            Man kann genauso Phrasenausdrücke boosten und Unterabfragen wie im Beispiel gezeigt:
 
             <programlisting language="querystring"><![CDATA[
 "PHP framework"^4 "Zend Framework"

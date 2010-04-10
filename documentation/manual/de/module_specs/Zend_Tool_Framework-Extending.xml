@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.extending">
     <title>Extending and Configuring Zend_Tool_Framework</title>
@@ -133,8 +133,8 @@
                 Umgebungsvariable tun. Wenn die Umgebungsvariable
                 <constant>ZF_CONFIG_FILE</constant> gesetzt ist, dann wird dieser Wert als Ort der
                 Konfigurationsdatei verwendet die mit dem Konsolen Client zu verwenden ist.
-                <constant>ZF_CONFIG_FILE</constant> kann auf irgendeine INI, XML oder PHP Datei
-                zeigen die Zend_Config lesen kann.
+                <constant>ZF_CONFIG_FILE</constant> kann auf irgendeine INI, XML oder
+                <acronym>PHP</acronym> Datei zeigen die Zend_Config lesen kann.
             </para>
 
             <para>
@@ -163,8 +163,8 @@ project.profile = irgendein/pfad/zu/irgendeinem-verzeichnis
 
             <para>
                 Der einzige reservierte Ini Präfix ist der Wert "php". Der "php" Präfix für Werte
-                ist reserviert um Namen und Werte, von wärend der Laufzeit setzbaren Php Werte, zu
-                setzen, wie <property>include_path</property> oder
+                ist reserviert um Namen und Werte, von wärend der Laufzeit setzbaren
+                <acronym>PHP</acronym> Werte, zu setzen, wie <property>include_path</property> oder
                 <property>error_reporting</property>. Um <property>include_path</property> oder
                 <property>error_reporting</property> mit einem Ini Wert zu überschreiben, würde ein
                 Entwickler folgendes setzen:
@@ -177,8 +177,9 @@ php.error_reporting = 1
 
             <important>
                 <para>
-                    Der reservierte Prefix "php" funktioniert nur mit INI Dateien. Man kann PHP INI
-                    Werte nicht in PHP oder XML Konfigurationen setzen.
+                    Der reservierte Prefix "php" funktioniert nur mit INI Dateien. Man kann
+                    <acronym>PHP</acronym> INI Werte nicht in <acronym>PHP</acronym> oder XML
+                    Konfigurationen setzen.
                 </para>
             </important>
         </sect3>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19555 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.factory">
     <title>Die Factory verwenden um ein Log zu erstellen</title>
@@ -213,8 +213,8 @@ $logger = Zend_Log::factory(array(
 
                     <listitem>
                         <para>
-                            Ein gültiger Identifikator eines PHP Streams auf den geloggt werden
-                            soll.
+                            Ein gültiger Identifikator eines <acronym>PHP</acronym> Streams auf den
+                            geloggt werden soll.
                         </para>
                     </listitem>
                 </varlistentry>

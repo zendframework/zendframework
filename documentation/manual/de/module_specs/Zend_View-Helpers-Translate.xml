@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21661 -->
+<!-- EN-Revision: 21741 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.translate">
     <title>Übersetzungs Helfer</title>
@@ -7,8 +7,8 @@
     <para>
         Oft sind Webseiten in verschiedenen Sprachen vorhanden. Um den Inhalt einer Site zu
         übersetzen sollte ganz einfach <link
-            linkend="zend.translate.introduction">Zend Translate</link> verwendet werden, und um
-        <classname>Zend Translate</classname> in der eigenen View zu integrieren sollte der
+            linkend="zend.translate.introduction">Zend_Translate</link> verwendet werden, und um
+        <classname>Zend_Translate</classname> in der eigenen View zu integrieren sollte der
         <emphasis>Translate</emphasis> View Helfer verwendet werden.
     </para>
 

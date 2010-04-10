@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>View Helfer</title>
@@ -628,7 +628,7 @@ $view->registerHelper($helper, 'foo');
                 Das zweite Argument von <methodname>registerHelper()</methodname> ist der Name des
                 Helfers. Eine entsprechender Methodenname sollte im Helfer existieren; andernfalls
                 ruft <classname>Zend_View</classname> eine nicht existierende Methode aus wenn der
-                Helfer ausgeführt wird, was einen fatalen PHP Fehler verursacht.
+                Helfer ausgeführt wird, was einen fatalen <acronym>PHP</acronym> Fehler verursacht.
             </para>
         </note>
     </sect2>

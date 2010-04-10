@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.writers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Writer</title>
@@ -18,7 +18,7 @@
         </para>
 
         <para>
-            Um Log Daten in den PHP Ausgabebuffer zu schreiben, muß die URL
+            Um Log Daten in den <acronym>PHP</acronym> Ausgabebuffer zu schreiben, muß die URL
             <code>php://output</code> verwendet werden. Alternativ können Log Daten direkt an einen
             Stream wie z.B. <constant>STDERR</constant> (<code>php://stderr</code>) gesendet werden.
 

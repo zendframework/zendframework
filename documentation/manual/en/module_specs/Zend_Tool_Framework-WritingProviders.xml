@@ -370,7 +370,7 @@ class My_Component_HelloProvider
 ]]></programlisting>
 
             <para>
-                The API of the storage is very simple:
+                The <acronym>API</acronym> of the storage is very simple:
             </para>
 
             <programlisting language="php"><![CDATA[

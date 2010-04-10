@@ -34,10 +34,11 @@
         <title>Basic Usage of Zend_Session</title>
 
         <para>
-            The Zend_Session component is both a session manager as well as an API for
-            storing data into a session object for long-term persistence. The Zend_Session API is
-            for managing the options and behavior of a session, like options, starting and stopping
-            a session, whereas Zend_Session_Namespace is the actual object used to store data.
+            The Zend_Session component is both a session manager as well as an
+            <acronym>API</acronym> for storing data into a session object for long-term persistence.
+            The Zend_Session <acronym>API</acronym> is for managing the options and behavior of a
+            session, like options, starting and stopping a session, whereas Zend_Session_Namespace
+            is the actual object used to store data.
         </para>
 
         <para>
@@ -74,12 +75,12 @@ resources.session.remember_me_seconds = 864000
         </para>
 
         <para>
-            Zend_Session_Namespace is a simple class that proxies data via an easy to use API
-            into the Zend_Session managed $_SESSION superglobal. The reason it is called
-            Zend_Session_Namespace is that it effectively namespaces the data inside $_SESSION, thus
-            allowing multiple components and objects to safely store and retrieve data. In the
-            following code, we'll explore how to build a simple session incrementing counter,
-            starting at 1000 and resetting itself after 1999.
+            Zend_Session_Namespace is a simple class that proxies data via an easy to use
+            <acronym>API</acronym> into the Zend_Session managed $_SESSION superglobal. The reason
+            it is called Zend_Session_Namespace is that it effectively namespaces the data inside
+            $_SESSION, thus allowing multiple components and objects to safely store and retrieve
+            data. In the following code, we'll explore how to build a simple session incrementing
+            counter, starting at 1000 and resetting itself after 1999.
         </para>
 
         <programlisting language="php"><![CDATA[

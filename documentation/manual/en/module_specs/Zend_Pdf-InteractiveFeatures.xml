@@ -805,9 +805,9 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
 
             <para>
                 <methodname>Zend_Pdf_Action_URI::create($uri[, $isMap])</methodname> method has
-                to be used to create a URI action (see API documentation for the details).
-                Optional <varname>$isMap</varname> parameter is set to <constant>FALSE</constant>
-                by default.
+                to be used to create a URI action (see <acronym>API</acronym> documentation for the
+                details). Optional <varname>$isMap</varname> parameter is set to
+                <constant>FALSE</constant> by default.
             </para>
 
             <para>

@@ -17,8 +17,9 @@
     </para>
 
     <para>
-        Queue Storage is offered by Windows Azure as a <acronym>REST</acronym> API which is wrapped
-        by the <classname>Zend_Service_WindowsAzure_Storage_Queue</classname> class in order to
+        Queue Storage is offered by Windows Azure as a <acronym>REST</acronym>
+        <acronym>API</acronym> which is wrapped by the
+        <classname>Zend_Service_WindowsAzure_Storage_Queue</classname> class in order to
         provide a native <acronym>PHP</acronym> interface to the storage account.
     </para>
 
@@ -28,8 +29,8 @@
         <para>
             This topic lists some examples of using the
             <classname>Zend_Service_WindowsAzure_Storage_Queue</classname> class. Other features
-            are available in the download package, as well as a detailed API documentation of those
-            features.
+            are available in the download package, as well as a detailed <acronym>API</acronym>
+            documentation of those features.
         </para>
 
         <sect4 id="zend.service.windowsazure.storage.queue.api.create-queue">

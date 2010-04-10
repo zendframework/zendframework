@@ -205,7 +205,7 @@
 
         <para>
             The first one is to attach some class to the <classname>Zend_Soap_Server</classname>
-            object which has to completely describe Web Service API:
+            object which has to completely describe Web Service <acronym>API</acronym>:
 
             <programlisting language="php"><![CDATA[
 ...
@@ -254,9 +254,9 @@ $server->handle();
         </para>
 
         <para>
-            The second method of defining Web Service API is using set of functions and
-            <methodname>addFunction()</methodname> or <methodname>loadFunctions()</methodname>
-            methods:
+            The second method of defining Web Service <acronym>API</acronym> is using set of
+            functions and <methodname>addFunction()</methodname> or
+            <methodname>loadFunctions()</methodname> methods:
 
             <programlisting language="php"><![CDATA[
 ...

@@ -256,9 +256,9 @@ $out = $feed->export('atom');
         </para>
 
         <para>
-            The Feed Level API for data is contained in
-            <classname>Zend_Feed_Writer_Feed</classname>. In addition to the API detailed below, the
-            class also implements the <classname>Countable</classname> and
+            The Feed Level <acronym>API</acronym> for data is contained in
+            <classname>Zend_Feed_Writer_Feed</classname>. In addition to the <acronym>API</acronym>
+            detailed below, the class also implements the <classname>Countable</classname> and
             <classname>Iterator</classname> interfaces.
         </para>
 
@@ -489,7 +489,7 @@ $out = $feed->export('atom');
         </para>
 
         <para>
-            The Entry Level API for data is contained in
+            The Entry Level <acronym>API</acronym> for data is contained in
             <classname>Zend_Feed_Writer_Entry</classname>.
         </para>
 

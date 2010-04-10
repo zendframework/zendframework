@@ -89,7 +89,7 @@
             <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname>. In addition, the Subscriber
             implementation may handle any feed updates forwarded from a Hub by using
             <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname>. These classes, their
-            use cases, and APIs are covered in subsequent sections.
+            use cases, and <acronym>API</acronym>s are covered in subsequent sections.
         </para>
     </sect2>
 
@@ -99,12 +99,12 @@
         <para>
             In Pubsubhubbub, the Publisher is the party who publishes a live feed and frequently
             updates it with new content. This may be a blog, an aggregator, or even a web service
-            with a public feed based API. In order for these updates to be pushed to Subscribers,
-            the Publisher must notify all of its supported Hubs that an update has occured using a
-            simple HTTP POST request containing the URI or the updated Topic (i.e the updated RSS or
-            Atom feed). The Hub will confirm receipt of the notification, fetch the updated feed,
-            and forward any updates to any Subscribers who have subscribed to that Hub for updates
-            from the relevant feed.
+            with a public feed based <acronym>API</acronym>. In order for these updates to be pushed
+            to Subscribers, the Publisher must notify all of its supported Hubs that an update has
+            occured using a simple HTTP POST request containing the URI or the updated Topic (i.e
+            the updated RSS or Atom feed). The Hub will confirm receipt of the notification, fetch
+            the updated feed, and forward any updates to any Subscribers who have subscribed to that
+            Hub for updates from the relevant feed.
         </para>
 
         <para>

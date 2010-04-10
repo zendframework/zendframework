@@ -35,7 +35,7 @@
         <emphasis>email address</emphasis>. Assuming we store them in a database, we may also want a
         <emphasis>unique identifier</emphasis> for each entry. We'll likely want to be able to save
         an entry, fetch individual entries, and retrieve all entries. As such, a simple guestbook
-        model API might look something like this:
+        model <acronym>API</acronym> might look something like this:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -420,8 +420,8 @@ class Application_Model_DbTable_Guestbook extends Zend_Db_Table_Abstract
         Now let's create a <ulink url="http://martinfowler.com/eaaCatalog/dataMapper.html">Data
             Mapper</ulink>. A <emphasis>Data Mapper</emphasis> maps a domain object to the database.
         In our case, it will map our model, <classname>Application_Model_Guestbook</classname>, to
-        our data source, <classname>Application_Model_DbTable_Guestbook</classname>. A typical API
-        for a data mapper is as follows:
+        our data source, <classname>Application_Model_DbTable_Guestbook</classname>. A typical
+        <acronym>API</acronym> for a data mapper is as follows:
     </para>
 
     <programlisting language="php"><![CDATA[

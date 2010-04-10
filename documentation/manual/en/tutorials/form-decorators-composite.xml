@@ -377,8 +377,8 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
         </para>
 
         <para>
-            In the end, you get a uniform element API you can use to describe an element
-            representing a composite value.
+            In the end, you get a uniform element <acronym>API</acronym> you can use to describe an
+            element representing a composite value.
         </para>
     </sect2>
 </sect1>

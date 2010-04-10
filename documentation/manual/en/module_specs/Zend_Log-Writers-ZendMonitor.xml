@@ -5,16 +5,18 @@
 
     <para>
         <classname>Zend_Log_Writer_ZendMonitor</classname> allows you to log events via Zend
-        Server's Monitor API. This allows you to aggregate log messages for your entire application
-        environment in a single location. Internally, it simply uses the
-        <methodname>monitor_custom_event()</methodname> function from the Zend Monitor API.
+        Server's Monitor <acronym>API</acronym>. This allows you to aggregate log messages for your
+        entire application environment in a single location. Internally, it simply uses the
+        <methodname>monitor_custom_event()</methodname> function from the Zend Monitor
+        <acronym>API</acronym>.
     </para>
 
     <para>
-        One particularly useful feature of the Monitor API is that it allows you to specify
-        arbitrary custom information alongside the log message. For instance, if you wish to log an
-        exception, you can log not just the exception message, but pass the entire exception object
-        to the function, and then inspect the object within the Zend Server event monitor.
+        One particularly useful feature of the Monitor <acronym>API</acronym> is that it allows you
+        to specify arbitrary custom information alongside the log message. For instance, if you wish
+        to log an exception, you can log not just the exception message, but pass the entire
+        exception object to the function, and then inspect the object within the Zend Server event
+        monitor.
     </para>
 
     <note>
@@ -113,8 +115,9 @@ $log->info('Exception occurred', array(
         </para>
 
         <para>
-            As noted previously, if the Monitor API is not detected in your <acronym>PHP</acronym>
-            installation, the logger will simply act as a <constant>NULL</constant> logger.
+            As noted previously, if the Monitor <acronym>API</acronym> is not detected in your
+            <acronym>PHP</acronym> installation, the logger will simply act as a
+            <constant>NULL</constant> logger.
         </para>
     </note>
 </sect2>

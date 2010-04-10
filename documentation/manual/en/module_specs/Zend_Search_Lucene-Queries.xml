@@ -9,8 +9,8 @@
     </para>
 
     <para>
-        User queries can be combined with queries created through the query API. Simply use the
-        query parser to construct a query from a string:
+        User queries can be combined with queries created through the query <acronym>API</acronym>.
+        Simply use the query parser to construct a query from a string:
 
         <programlisting language="php"><![CDATA[
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
@@ -376,7 +376,7 @@ $hits  = $index->find($query);
 
         <para>
             Each query which uses boolean operators can be rewritten using signs notation and
-            constructed using API. For example:
+            constructed using <acronym>API</acronym>. For example:
 
             <programlisting language="querystring"><![CDATA[
 word1 AND (word2 AND word3 AND NOT word4) OR word5
@@ -415,7 +415,7 @@ field1:test*
         <para>or</para>
 
         <para>
-            Query construction by API:
+            Query construction by <acronym>API</acronym>:
 
             <programlisting language="php"><![CDATA[
 $pattern = new Zend_Search_Lucene_Index_Term('test*', 'field1');
@@ -457,7 +457,7 @@ field1:test~
         <para>or</para>
 
         <para>
-            Query construction by API:
+            Query construction by <acronym>API</acronym>:
 
             <programlisting language="php"><![CDATA[
 $term = new Zend_Search_Lucene_Index_Term('test', 'field1');
@@ -481,7 +481,7 @@ field1:test~0.4
         <para>or</para>
 
         <para>
-            Query construction by API:
+            Query construction by <acronym>API</acronym>:
 
             <programlisting language="php"><![CDATA[
 $term = new Zend_Search_Lucene_Index_Term('test', 'field1');
@@ -732,7 +732,7 @@ title:{Aida TO Carmen}
         <para>or</para>
 
         <para>
-            Query construction by API:
+            Query construction by <acronym>API</acronym>:
 
             <programlisting language="php"><![CDATA[
 $from = new Zend_Search_Lucene_Index_Term('20020101', 'mod_date');

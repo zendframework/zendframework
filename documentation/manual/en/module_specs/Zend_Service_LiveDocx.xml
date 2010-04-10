@@ -87,8 +87,8 @@
             <para>
                 LiveDocx differentiates between the following terms: 1)
                 <emphasis>template</emphasis> and 2) <emphasis>document</emphasis>. In order to
-                fully understand the documentation and indeed the actual API, it is important that
-                any programmer deploying LiveDocx understands the difference.
+                fully understand the documentation and indeed the actual <acronym>API</acronym>, it
+                is important that any programmer deploying LiveDocx understands the difference.
             </para>
 
             <para>

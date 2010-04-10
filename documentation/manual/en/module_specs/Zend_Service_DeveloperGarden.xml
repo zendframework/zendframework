@@ -10,7 +10,7 @@
             Developer Garden is the name of Deutsche Telekom’s developer community.
             Developer Garden offers you  access to core services of Deutsche Telekom,
             such as voice connections (Voice Call) or sending text messages (Send SMS)
-            via open interfaces (Open APIs). You can access the Developer Garden
+            via open interfaces (Open <acronym>API</acronym>s). You can access the Developer Garden
             services directly via <acronym>SOAP</acronym> or <acronym>REST</acronym>.
         </para>
 
@@ -26,7 +26,7 @@
                 <para>
                     <link
                         linkend="zend.service.developergarden.baseuserservice">BaseUserService</link>:
-                    Class to manage API quota and user accounting details.
+                    Class to manage <acronym>API</acronym> quota and user accounting details.
                 </para>
             </listitem>
 
@@ -78,7 +78,7 @@
         </itemizedlist>
 
         <para>
-            The backend <acronym>SOAP</acronym> API is documented
+            The backend <acronym>SOAP</acronym> <acronym>API</acronym> is documented
             <ulink url="http://www.developergarden.com/openapi/dokumentation/">here</ulink>.
         </para>
 
@@ -86,8 +86,9 @@
             <title>Sign Up for an Account</title>
 
             <para>
-                Before you can start using the DeveloperGarden API, you first have to
-                <ulink url="http://www.developergarden.com/register">sign up</ulink> for an account.
+                Before you can start using the DeveloperGarden <acronym>API</acronym>, you first
+                have to <ulink url="http://www.developergarden.com/register">sign up</ulink> for an
+                account.
             </para>
         </sect3>
 
@@ -95,8 +96,8 @@
             <title>The Environment</title>
 
             <para>
-                With the DeveloperGarden API you have the possibility to choose between 3 different
-                development environments.
+                With the DeveloperGarden <acronym>API</acronym> you have the possibility to choose
+                between 3 different development environments.
             </para>
 
             <itemizedlist>
@@ -119,8 +120,9 @@
                 <listitem>
                     <para>
                         <emphasis>mock</emphasis>: The Mock environment allows you to build your
-                        application and have results but you do not initiate any action on the API
-                        side. This environment is intended for testing during development.
+                        application and have results but you do not initiate any action on the
+                        <acronym>API</acronym> side. This environment is intended for testing during
+                        development.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -143,13 +145,15 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis>username</emphasis>: Your DeveloperGarden API username.
+                        <emphasis>username</emphasis>: Your DeveloperGarden <acronym>API</acronym>
+                        username.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>password</emphasis>: Your DeveloperGarden API password.
+                        <emphasis>password</emphasis>: Your DeveloperGarden <acronym>API</acronym>
+                        password.
                     </para>
                 </listitem>
 
@@ -651,7 +655,7 @@ $service->tearDownCall($sessionId);
         </itemizedlist>
 
         <para>
-            Here is a list of currently implemented API methods:
+            Here is a list of currently implemented <acronym>API</acronym> methods:
         </para>
 
         <itemizedlist>

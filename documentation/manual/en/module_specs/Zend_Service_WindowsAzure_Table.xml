@@ -8,22 +8,22 @@
     </para>
 
     <para>
-        Table Storage is offered by Windows Azure as a REST API which is wrapped by the
-        <classname>Zend_Service_WindowsAzure_Storage_Table</classname> class in order to provide a
-        native <acronym>PHP</acronym> interface to the storage account.
+        Table Storage is offered by Windows Azure as a REST <acronym>API</acronym> which is wrapped
+        by the <classname>Zend_Service_WindowsAzure_Storage_Table</classname> class in order to
+        provide a native <acronym>PHP</acronym> interface to the storage account.
     </para>
 
     <para>
         This topic lists some examples of using the
         <classname>Zend_Service_WindowsAzure_Storage_Table</classname> class. Other features are
-        available in the download package, as well as a detailed API documentation of those
-        features.
+        available in the download package, as well as a detailed <acronym>API</acronym>
+        documentation of those features.
     </para>
 
     <para>
         Note that development table storage (in the Windows Azure SDK) does not support all features
-        provided by the API. Therefore, the examples listed on this page are to be used on Windows
-        Azure production table storage.
+        provided by the <acronym>API</acronym>. Therefore, the examples listed on this page are to
+        be used on Windows Azure production table storage.
     </para>
 
     <sect3 id="zend.service.windowsazure.storage.table.api">

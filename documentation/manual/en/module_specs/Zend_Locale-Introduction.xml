@@ -273,7 +273,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
         <title>Usage of automatic Locales</title>
 
         <para>
-            <classname>Zend_Locale</classname> provides three additionally locales. These locales do
+            <classname>Zend_Locale</classname> provides three additional locales. These locales do
             not belong to any language or region. They are "automatic" locales which means that they
             have the same effect as the method <methodname>getDefault()</methodname> but without the
             negative effects like creating an instance. These "automatic" locales can be used
@@ -291,7 +291,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                         <code>'browser'</code> - <classname>Zend_Locale</classname> should work with
                         the information which is provided by the user's Web browser. It is published
                         by <acronym>PHP</acronym> in the global variable
-                        <constant>HTTP_ACCEPT_LANGUAGE</constant>.
+                        <constant>$_SERVER['HTTP_ACCEPT_LANGUAGE']</constant>.
                     </para>
 
                     <para>
@@ -391,7 +391,7 @@ $date = new Zend_Date($locale);
         <para>
             Since Zend Framework Release 1.5 there is a much better way to handle this. You can set
             a default locale which the static <methodname>setDefault()</methodname> method. Of
-            course, every unknown or not full qualified locale will also throw an exception.
+            course, every unknown or not fully qualified locale will also throw an exception.
             <methodname>setDefault()</methodname> should be the first call before you initiate any
             class using <classname>Zend_Locale</classname>. See the following example for details:
         </para>
@@ -560,11 +560,11 @@ Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
         <title>Speed up Zend_Locale and its subclasses</title>
 
         <para>
-            <classname>Zend_Locale</classname> and its subclasses can be speed up by the usage of
+            <classname>Zend_Locale</classname> and its subclasses can be speeded up by the usage of
             <classname>Zend_Cache</classname>. Use the static method
             <methodname>Zend_Locale::setCache($cache)</methodname> if you are using
             <classname>Zend_Locale</classname>. <classname>Zend_Locale_Format</classname> can be
-            speed up the using the option <code>cache</code> within
+            speeded up the using the option <code>cache</code> within
             <classname>Zend_Locale_Format::setOptions(array('cache' => $adapter));</classname>.
             If you are using both classes you should only set the cache for
             <classname>Zend_Locale</classname>, otherwise the last set cache will overwrite the

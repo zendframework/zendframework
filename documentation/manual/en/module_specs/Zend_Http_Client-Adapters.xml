@@ -129,7 +129,7 @@
                             <entry>string</entry>
                             <entry><constant>NULL</constant></entry>
                         </row>
-                        
+
                         <row>
                             <entry>sslusecontext</entry>
 

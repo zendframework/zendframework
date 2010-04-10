@@ -61,7 +61,7 @@
             objects also contain methods to allow for fast rendering and export of the final feed,
             and these can be reused at will.
         </para>
-        
+
         <para>
             In addition to the main data container classes, there are two additional Atom 2.0 specific
             classes. <classname>Zend_Feed_Writer_Source</classname> and <classname>
@@ -80,7 +80,7 @@
             <classname>Exception</classname>s, this removes the default safeguard of ensuring you
             have sufficient data set to render a wholly valid feed.
         </para>
-        
+
         <para>
             To explain this more clearly, you may construct a set of data containers for a feed where
             there is a Feed container, into which has been added some Entry containers and a Deleted
@@ -224,12 +224,12 @@ $out = $feed->export('atom');
             <acronym>API</acronym> closely matches that for <classname>Zend_Feed_Reader</classname>
             to avoid undue confusion and uncertainty.
         </para>
-        
+
         <note>
             <para>Users have commented that the lack of a simple array based notation for input data
             gives rise to lengthy tracts of code. This will be addressed in a future release.</para>
         </note>
-        
+
         <para>
             <classname>Zend_Feed_Writer</classname> offers this <acronym>API</acronym> via its data
             container classes <classname>Zend_Feed_Writer_Feed</classname> and
@@ -252,7 +252,7 @@ $out = $feed->export('atom');
             methods operate at the same level as the Core <acronym>API</acronym> though we do allow
             you to retrieve any specific Extension object separately if required.
         </para>
-        
+
         <para>
             The Feed Level API for data is contained in <classname>Zend_Feed_Writer_Feed</classname>.
             In addition to the API detailed below, the class also implements the <classname>Countable
@@ -413,7 +413,7 @@ $out = $feed->export('atom');
                             a single category at a time.
                         </entry>
                     </row>
-                    
+
                     <row>
                         <entry><methodname>createEntry()</methodname></entry>
                         <entry>Returns a new instance of <classname>Zend_Feed_Writer_Entry
@@ -422,13 +422,13 @@ $out = $feed->export('atom');
                         must explicitly call <methodname>addEntry()</methodname>
                         to add the entry for rendering.</entry>
                     </row>
-                    
+
                     <row>
                         <entry><methodname>addEntry()</methodname></entry>
                         <entry>Adds an instance of <classname>Zend_Feed_Writer_Entry
                         </classname> to the current feed container for rendering.</entry>
                     </row>
-                    
+
                     <row>
                         <entry><methodname>createTombstone()</methodname></entry>
                         <entry>Returns a new instance of <classname>Zend_Feed_Writer_Deleted
@@ -437,19 +437,19 @@ $out = $feed->export('atom');
                         must explicitly call <methodname>addTombstone()</methodname>
                         to add the deleted entry for rendering.</entry>
                     </row>
-                    
+
                     <row>
                         <entry><methodname>addTombstone()</methodname></entry>
                         <entry>Adds an instance of <classname>Zend_Feed_Writer_Deleted
                         </classname> to the current feed container for rendering.</entry>
                     </row>
-                    
+
                     <row>
                         <entry><methodname>removeEntry()</methodname></entry>
                         <entry>Accepts a parameter indicating an array index of the
                         entry to remove from the feed.</entry>
                     </row>
-                    
+
                     <row>
                         <entry><methodname>export()</methodname></entry>
                         <entry>Exports the entire data hierarchy to an XML feed. The method
@@ -460,14 +460,14 @@ $out = $feed->export('atom');
                 </tbody>
             </tgroup>
         </table>
-        
+
         <note>
             <para>In addition to these setters, there are also matching getters to retrieve data from the
             Entry data container.</para>
         </note>
-        
+
         <!-- remaining feed stuff -->
-        
+
     </sect2>
 
     <sect2 id="zend.feed.writer.setting.entry.data.points">
@@ -482,7 +482,7 @@ $out = $feed->export('atom');
             methods operate at the same level as the Core <acronym>API</acronym> though we do allow
             you to retrieve any specific Extension object separately if required.
         </para>
-        
+
         <para>
             The Entry Level API for data is contained in <classname>Zend_Feed_Writer_Entry</classname>.
         </para>
@@ -512,7 +512,7 @@ $out = $feed->export('atom');
                         <entry><methodname>setDescription()</methodname></entry>
                         <entry>Set the text description of the entry.</entry>
                     </row>
-                    
+
                     <row>
                         <entry><methodname>setContent()</methodname></entry>
                         <entry>Set the content of the entry.</entry>
@@ -612,7 +612,7 @@ $out = $feed->export('atom');
                             <acronym>URI</acronym>.
                         </entry>
                     </row>
-                    
+
                     <row>
                         <entry><methodname>setCommentCount()</methodname></entry>
 
@@ -622,7 +622,7 @@ $out = $feed->export('atom');
                             on the element/attribute needed.
                         </entry>
                     </row>
-                    
+
                     <row>
                         <entry><methodname>setCommentLink()</methodname></entry>
 
@@ -630,7 +630,7 @@ $out = $feed->export('atom');
                             Seta a link to a HTML page containing comments associated with this entry.
                         </entry>
                     </row>
-                    
+
                     <row>
                         <entry><methodname>setCommentFeedLink()</methodname></entry>
 
@@ -640,7 +640,7 @@ $out = $feed->export('atom');
                             the type is one of "rdf", "rss" or "atom".
                         </entry>
                     </row>
-                    
+
                     <row>
                         <entry><methodname>setCommentFeedLinks()</methodname></entry>
 
@@ -650,7 +650,7 @@ $out = $feed->export('atom');
                             expected parameters of <methodname>setCommentFeedLink()</methodname>.
                         </entry>
                     </row>
-                    
+
                     <row>
                         <entry><methodname>setEncoding()</methodname></entry>
 
@@ -662,7 +662,7 @@ $out = $feed->export('atom');
                 </tbody>
             </tgroup>
         </table>
-        
+
         <note>
             <para>In addition to these setters, there are also matching getters to retrieve data from the
             Entry data container.</para>

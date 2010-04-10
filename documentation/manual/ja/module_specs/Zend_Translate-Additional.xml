@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19457 -->
+<!-- EN-Revision: 21049 -->
 <sect1 id="zend.translate.additional">
 
     <title>翻訳用の追加機能</title>
@@ -73,20 +73,20 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>clear</entry>
                         <entry>すべて</entry>
                         <entry>
-                            true にすると、既に読み込んでいる翻訳を消去します。
+                            <constant>TRUE</constant> にすると、既に読み込んでいる翻訳を消去します。
                             新しい翻訳データを読み込む際に、
                             新しいインスタンスを作成する代わりに使用します。
                         </entry>
-                        <entry><emphasis>false</emphasis></entry>
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>disableNotices</entry>
                         <entry>すべて</entry>
                         <entry>
-                            true に設定すると、翻訳が存在しないことについての注意メッセージを無効にします。
-                            実運用環境ではこのオプションを true に設定しなければなりません。
+                            <constant>TRUE</constant> に設定すると、翻訳が存在しないことについての注意メッセージを無効にします。
+                            実運用環境ではこのオプションを <constant>TRUE</constant> に設定しなければなりません。
                         </entry>
-                        <entry><emphasis>false</emphasis></entry>
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>ignore</entry>
@@ -109,7 +109,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             未翻訳のメッセージや注意が書き込まれる
                             <classname>Zend_Log</classname> のインスタンス
                         </entry>
-                        <entry><emphasis>null</emphasis></entry>
+                        <entry><emphasis><constant>NULL</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>logMessage</entry>
@@ -125,27 +125,27 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>logUntranslated</entry>
                         <entry>すべて</entry>
                         <entry>
-                            このオプションを true に設定すると、翻訳できなかったすべてのメッセージ ID
+                            このオプションを <constant>TRUE</constant> に設定すると、翻訳できなかったすべてのメッセージ ID
                             が添付のログに書き込まれます。
                         </entry>
-                        <entry><emphasis>false</emphasis></entry>
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>reload</entry>
                         <entry>すべて</entry>
                         <entry>
-                            このオプションを true に設定すると、ファイルはキャッシュに再読み込みされます。
+                            このオプションを <constant>TRUE</constant> に設定すると、ファイルはキャッシュに再読み込みされます。
                             このオプションはキャッシュの再作成や、
                             キャッシュが既に作成された後で、キャッシュ済みのデータに翻訳を追加するために
                             使えます。
                         </entry>
-                        <entry><emphasis>false</emphasis></entry>
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>scan</entry>
                         <entry>すべて</entry>
                         <entry>
-                            null にすると、ディレクトリ構造のスキャンを行いません。
+                            <constant>NULL</constant> にすると、ディレクトリ構造のスキャンを行いません。
                             <constant>Zend_Translate::LOCALE_DIRECTORY</constant> にすると、
                             ディレクトリからロケールを検出します。
                             <constant>Zend_Translate::LOCALE_FILENAME</constant> にすると、
@@ -153,7 +153,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             詳細は <xref linkend="zend.translate.additional.detection" />
                             を参照ください。
                         </entry>
-                        <entry><emphasis>null</emphasis></entry>
+                        <entry><emphasis><constant>NULL</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>delimiter</entry>
@@ -181,14 +181,14 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                     </row>
                     <row>
                         <entry>useId</entry>
-                        <entry>Xliff</entry>
+                        <entry>Xliff 及び Tmx</entry>
                         <entry>
                             もしこのオプションを <constant>FALSE</constant> に設定すると、
                             ソースの文字列はメッセージ Id として使われます。
                             このオプションの既定値は <constant>TRUE</constant> で、
                             それは, 翻訳単位要素からの Id がメッセージ Id として使われることを意味します。
                         </entry>
-                        <entry><emphasis>true</emphasis></entry>
+                        <entry><emphasis><constant>TRUE</constant></emphasis></entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -626,6 +626,8 @@ $translate = new Zend_Translate(
 
     </sect2>
 
+
+
     <sect2 id="zend.translate.additional.istranslated">
 
         <title>翻訳の確認</title>
@@ -644,7 +646,7 @@ $translate = new Zend_Translate(
             その言語に完全に一致した翻訳があるのか、あるいはもう少し広い範囲の翻訳を使用するのかという内容です。
             たとえば、あるテキストについて 'en' の翻訳はあるが 'en_US' の翻訳はないといった場合、
             通常は 'en' の翻訳を取得することになるでしょう。しかし <varname>$original</varname>
-            を true にしておくと、このような場合は <methodname>isTranslated()</methodname> は false を返すようになります。
+            を <constant>TRUE</constant> にしておくと、このような場合は <methodname>isTranslated()</methodname> は <constant>FALSE</constant> を返すようになります。
         </para>
 
         <example id="zend.translate.additional.istranslated.example">

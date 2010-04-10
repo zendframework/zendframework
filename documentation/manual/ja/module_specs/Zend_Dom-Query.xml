@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20766 -->
+<!-- EN-Revision: 21585 -->
 <sect1 id="zend.dom.query">
     <title>Zend_Dom_Query</title>
 
     <para>
-        <classname>Zend_Dom_Query</classname> を使用すると、<acronym>XML</acronym> や (X)HTML ドキュメントに対して
+        <classname>Zend_Dom_Query</classname> を使用すると、<acronym>XML</acronym> や (X)<acronym>HTML</acronym> ドキュメントに対して
         XPath あるいは <acronym>CSS</acronym> セレクタを用いた問い合わせができるようになります。
         <acronym>MVC</acronym> アプリケーションの機能テストを支援するために作られたものですが、
         スクリーンスクレイパーを手早く作成するためにも使うことができます。
@@ -53,7 +53,7 @@
 
             <listitem><para>
                 <emphasis>style 属性</emphasis>: マッチさせたい <acronym>CSS</acronym> style
-                属性を指定します。'.error', 'div.error', 'label.required'
+                属性を指定します。'<command>.error</command>', '<command>div.error</command>', '<command>label.required</command>'
                 などです。ひとつの要素に複数のスタイルが定義されている場合は
                 指定したスタイルがスタイル宣言のどこかに存在すればマッチします。
             </para></listitem>
@@ -108,7 +108,7 @@
                     <emphasis>子孫</emphasis>:
                     複数のセレクタをひとつの文字列にまとめると、
                     探す階層を指定できます。
-                    'div .foo span #one' が探すのは id が 'one'
+                    '<command>div .foo span #one</command>' が探すのは id が 'one'
                     である要素です。その要素は、'span'
                     要素の子孫 (その間の階層の数は問わない) であり、
                     さらにその 'span' 要素はクラス 'foo' の要素の子孫
@@ -143,10 +143,10 @@
         <para>
             問い合わせを実行したら、その結果のオブジェクトを用いてノードの情報を取得したり、
             そのノード (あるいはノードの内容) を取り出して操作したりできます。
-            <classname>Zend_Dom_Query_Result</classname> は <code>Countable</code>
-            と <code>Iterator</code> を実装しており、内部では結果を
-            DOMNodes/DOMElements で保持しています。
-            たとえば、次のようなコードを上の HTML に対して実行することを考えてみましょう。
+            <classname>Zend_Dom_Query_Result</classname> は <classname>Countable</classname>
+            と <classname>Iterator</classname> を実装しており、内部では結果を
+            DOMNodes および DOMElements で保持しています。
+            たとえば、次のようなコードを上の <acronym>HTML</acronym> に対して実行することを考えてみましょう。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -196,7 +196,7 @@ foreach ($results as $result) {
 
                 <listitem><para>
                     <methodname>setDocumentHtml($document)</methodname>:
-                    対象となる HTML 文字列を指定します。
+                    対象となる <acronym>HTML</acronym> 文字列を指定します。
                 </para></listitem>
 
                 <listitem><para>
@@ -234,9 +234,9 @@ foreach ($results as $result) {
 
             <para>
                 先ほど説明したように、<classname>Zend_Dom_Query_Result</classname>
-                は <code>Iterator</code> と
-                <code>Countable</code> を実装しており、
-                <code>foreach</code> ループで使用したり
+                は <classname>Iterator</classname> と
+                <classname>Countable</classname> を実装しており、
+                <classname>foreach</classname> ループで使用したり
                 <methodname>count()</methodname> 関数を利用したりできます。
                 さらに、次のメソッドを公開しています。
             </para>

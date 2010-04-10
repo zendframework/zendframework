@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19554 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.form.elements">
     <title>Zend_Form_Element を用いたフォーム要素の作成</title>
 
@@ -83,7 +83,7 @@
                 <code>addPrefixPath($prefix, $path, $type = null)</code>:
                 プレフィックスとパスの関連を、
                 <code>$type</code> で指定したローダーに追加します。
-                <code>$type</code> が null の場合は、すべてのローダーにパスを追加します。
+                <code>$type</code> が <constant>NULL</constant> の場合は、すべてのローダーにパスを追加します。
                 その際には、それぞれプレフィックスに
                 "_Validate"、"_Filter" そして "_Decorator" を追加し、
                 パスには "Validate/"、"Filter/" そして
@@ -593,7 +593,7 @@ $messages = $element->getMessages();
         <para>
             バリデータに加えて、ある要素が必須である場合は
             <code>setRequired(true)</code> を使用できます。
-            デフォルトではこのフラグは false です。
+            デフォルトではこのフラグは <constant>FALSE</constant> です。
             この場合は、<code>isValid()</code>
             に何も値が渡されなかった場合はバリデーションチェインをスキップします。
             この振る舞いを変更するにはいくつかの方法があります。
@@ -603,10 +603,10 @@ $messages = $element->getMessages();
             <listitem>
                 <para>
                     デフォルトでは、要素が必須の場合は 'allowEmpty' フラグも
-                    true です。この場合、もし空の値が <code>isValid()</code>
+                    <constant>TRUE</constant> です。この場合、もし空の値が <code>isValid()</code>
                     に渡されるとバリデータはスキップされます。
                     このフラグを切り替えるには <code>setAllowEmpty($flag)</code>
-                    を使用します。フラグを false にすると、
+                    を使用します。フラグを <constant>FALSE</constant> にすると、
                     値が空の場合でもバリデータが実行されるようになります。
                 </para>
             </listitem>
@@ -626,7 +626,7 @@ $messages = $element->getMessages();
                 <para>
                     この振る舞いが気に入らない場合は、
                     <code>setAutoInsertNotEmptyValidator($flag)</code>
-                    に false を渡せばこの機能を無効にできます。
+                    に <constant>FALSE</constant> を渡せばこの機能を無効にできます。
                     この場合、 <code>isValid()</code>
                     がバリデータチェインに勝手に
                     'NotEmpty' バリデータを追加することはなくなります。
@@ -686,8 +686,8 @@ $messages = $element->getMessages();
             <listitem><para>
                     <code>setAllowEmpty($flag)</code> および
                     <code>getAllowEmpty()</code> は、オプション要素
-                    (required フラグが false に設定されている要素)
-                    の挙動を変更します。'allow empty' フラグが true の場合、
+                    (required フラグが <constant>FALSE</constant> に設定されている要素)
+                    の挙動を変更します。'allow empty' フラグが <constant>TRUE</constant> の場合、
                     値が未入力のときはバリデータチェインに渡しません。
             </para></listitem>
 
@@ -695,7 +695,7 @@ $messages = $element->getMessages();
                     <code>setAutoInsertNotEmptyValidator($flag)</code> は、
                     その要素が必須項目であるときに
                     'NotEmpty' バリデータをバリデータチェインの先頭に追加するかどうかを指定します。
-                    デフォルトでは、このフラグは true です。
+                    デフォルトでは、このフラグは <constant>TRUE</constant> です。
             </para></listitem>
 
             <listitem><para>
@@ -1097,23 +1097,23 @@ echo $element->renderHtmlTag("This is the html tag content");
                 <emphasis>required</emphasis>:
                 バリデーション時にその要素を必須とみなすかどうか。
                 <code>setRequired()</code> および <code>getRequired()</code>
-                でアクセスします。このフラグはデフォルトでは false です。
+                でアクセスします。このフラグはデフォルトでは <constant>FALSE</constant> です。
             </para></listitem>
 
             <listitem><para>
                 <emphasis>allowEmpty</emphasis>:
                 必須でない (オプションの) 要素が未入力のときに検証を行うかどうか。
-                このフラグが true で required フラグが false の場合は、
+                このフラグが <constant>TRUE</constant> で required フラグが <constant>FALSE</constant> の場合は、
                 値が未入力ならバリデータチェインにその要素を渡さず、
                 検証に成功したものとみなします。
                 <code>setAllowEmpty()</code> および <code>getAllowEmpty()</code>
-                でアクセスします。このフラグはデフォルトでは true です。
+                でアクセスします。このフラグはデフォルトでは <constant>TRUE</constant> です。
             </para></listitem>
 
             <listitem><para>
                 <emphasis>autoInsertNotEmptyValidator</emphasis>:
                 要素が必須であるときに 'NotEmpty' バリデータを追加するかどうかを表すフラグ。
-                デフォルトではこのフラグは true です。フラグを設定するには
+                デフォルトではこのフラグは <constant>TRUE</constant> です。フラグを設定するには
                 <code>setAutoInsertNotEmptyValidator($flag)</code>、
                 値を調べるには <code>autoInsertNotEmptyValidator()</code> を使用します。
             </para></listitem>

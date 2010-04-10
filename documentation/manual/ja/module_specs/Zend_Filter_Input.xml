@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21661 -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
 
@@ -191,7 +191,7 @@ $validators = array(
         </note>
 
         <para>
-            ルールのキーとして、特別な "ワイルドカード" 文字 <code>'*'</code>
+            ルールのキーとして、特別な "ワイルドカード" 文字 <emphasis>'*'</emphasis>
             を使用してフィルタ配列やバリデータ配列を作成できます。
             このルールで宣言したフィルタやバリデータは、
             すべての入力フィールドに適用されます。
@@ -318,7 +318,7 @@ if ($input->isValid('month')) {
                     <para>
                         <emphasis>存在しない (missing)</emphasis>
                         フィールドとは、入力データ中には存在しないが
-                        メタコマンドでは <code>'presence'=>'required'</code>
+                        メタコマンドでは <command>'presence'=>'required'</command>
                         のように定義されているフィールドのことです
                         (メタコマンドについては
                         <link linkend="zend.filter.input.metacommands.presence">後のセクション</link>
@@ -405,7 +405,9 @@ $input->setOptions($options);
 
             <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate_Adapter_Array(array(
-    Zend_Filter_Input::MISSING_MESSAGE => "Where is the field?"
+    'content' => array(
+        Zend_Filter_Input::MISSING_MESSAGE => "Where is the field?"
+    )
 );
 
 $input = new Zend_Filter_Input($filters, $validators, $data);
@@ -621,7 +623,7 @@ $validators = array(
             <para>
                 このルールのバリデーションに失敗した場合は、
                 <methodname>getInvalid()</methodname> の返り値はルールのキー
-                (<code>'password'</code>) となります。'fields'
+                ('password') となります。'fields'
                 メタコマンドのフィールド名は用いられません。
             </para>
 
@@ -718,7 +720,7 @@ echo $input->month; // 1 を出力します
 
             <para>
                 デフォルトでは、入力データ中にフィールドが存在すれば、
-                たとえそれが空文字列 (<code>''</code>)
+                たとえそれが空文字列 (<emphasis>''</emphasis>)
                 であったとしてもバリデータを適用します。
                 その結果、検証に失敗することもありえます。
                 たとえば、数値かどうかを調べるバリデータは、
@@ -1056,8 +1058,8 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
         <note>
             <para>
                 バージョン 1.5 で関数 <methodname>addNamespace($namespace)</methodname> は非推奨となり、
-                代わりにプラグインローダと <code>addFilterPrefixPath</code> および
-                <code>addValidatorPrefixPath</code> が追加されました。
+                代わりにプラグインローダと <methodname>addFilterPrefixPath</methodname> および
+                <methodname>addValidatorPrefixPath</methodname> が追加されました。
                 また、定数 <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant> も非推奨となりました。
                 定数 <constant>Zend_Filter_Input::VALIDATOR_NAMESPACE</constant> および
                 <constant>Zend_Filter_Input::FILTER_NAMESPACE</constant> が 1.7.0
@@ -1067,11 +1069,11 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
 
         <note>
             <para>
-                バージョン 1.0.4 で、値 <code>namespace</code>
+                バージョン 1.0.4 で、値 <property>namespace</property>
                 をもつ定数 <constant>Zend_Filter_Input::NAMESPACE</constant>
-                が値 <code>inputNamespace</code> を持つ定数
+                が値 <property>inputNamespace</property> を持つ定数
                 <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant> に変わりました。
-                これは、<acronym>PHP</acronym> 5.3 以降の予約語 <code>namespace</code>
+                これは、<acronym>PHP</acronym> 5.3 以降の予約語 <property>namespace</property>
                 に対応させるためです。
             </para>
         </note>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19143 -->
+<!-- EN-Revision: 20766 -->
 <sect2 id="zend.dojo.form.elements">
     <title>Dijit固有のフォーム要素</title>
 
@@ -25,14 +25,14 @@
 
         <listitem><para>
                 <methodname>hasDijitParam($key)</methodname>:
-                与えられたdijitパラメータが定義されたか存在している場合はtrueを返します。
-                それ以外はfalseを返します。
+                与えられたdijitパラメータが定義されたか存在している場合は<constant>TRUE</constant>を返します。
+                それ以外は<constant>FALSE</constant>を返します。
         </para></listitem>
 
         <listitem><para>
                 <methodname>getDijitParam($key)</methodname>:
                 与えられたdijitパラメータを返します。
-                利用できない場合は null値を返します。
+                利用できない場合は <constant>NULL</constant>値を返します。
         </para></listitem>
 
         <listitem><para>
@@ -52,7 +52,7 @@
     </itemizedlist>
 
     <para>
-        Dijitパラメータは、<code>dijitParams</code> public プロパティに保存されます。
+        Dijitパラメータは、<property>dijitParams</property> public プロパティに保存されます。
         このように、あなたは単にこのプロパティを要素の上に置くことによって、
         既存のフォーム要素をdijit使用可能にすることができます;
         あなたは、単にパラメータを操作するのを容易にするために、
@@ -80,7 +80,7 @@ $element->addDecorator('DijitElement')
     </para>
 
     <para>
-        Dijit要素、DijitMultiの変化は<code>Multi</code> abstract フォーム要素の機能を提供します。
+        Dijit要素、DijitMultiの変化は<classname>Multi</classname> abstract フォーム要素の機能を提供します。
         そして、開発者が 'multiOptions' を指定できるようにします。
          - 一般的に select の option またはラジオ のoptionです。
     </para>
@@ -110,14 +110,14 @@ $element->addDecorator('DijitElement')
             <listitem><para>
                 <methodname>isChecked()</methodname>は、
                 提出される値がラベルにマッチするかどうか決定します;
-                もしマッチするなら、それはtrueを返します。
+                もしマッチするなら、それは<constant>TRUE</constant>を返します。
                 これは、フォームが提出されたとき、どのボタンが使われたかについて決定することに役立ちます。
             </para></listitem>
         </itemizedlist>
 
         <para>
-            さらに、デコレーターの<code>DijitElement</code>及び
-            <code>DtDdWrapper</code>だけがボタン要素のために使われます。
+            さらに、デコレーターの<classname>DijitElement</classname>及び
+            <classname>DtDdWrapper</classname>だけがボタン要素のために使われます。
         </para>
 
         <example id="zend.dojo.form.elements.button.example">
@@ -212,7 +212,7 @@ $form->addElement(
             <para>
                 コンボボックスはラベル値を返します。
                 期待に反するオプション値は返しません。
-                この理由から、コンボボックスは<code>InArray</code>バリデーターを自動登録しません。
+                この理由から、コンボボックスは<classname>InArray</classname>バリデーターを自動登録しません。
                 （FilteringSelectsがそうするけれども）
             </para>
         </note>
@@ -283,10 +283,10 @@ $form->addElement(
 
         <para>
             dojo.dataストアが要素で登録されなければ、
-            登録された選択肢の配列のキーを検証する<code>InArray</code>バリデーターを
+            登録された選択肢の配列のキーを検証する<classname>InArray</classname>バリデーターを
             この要素はデフォルトで登録します。
             <methodname>setRegisterInArrayValidator(false)</methodname>を呼び出すことでも、
-            <code>registerInArrayValidator</code>設定キーにfalse値を渡すことでも、
+            <property>registerInArrayValidator</property>設定キーに<constant>FALSE</constant>値を渡すことでも、
             このふるまいを抑制できます。
         </para>
 
@@ -337,8 +337,8 @@ $form->addElement(
         </example>
 
         <para>
-            前述の例は<code>ComboBox</code>の代わりに
-            <code>FilteringSelect</code>を使用します。
+            前述の例は<classname>ComboBox</classname>の代わりに
+            <classname>FilteringSelect</classname>を使用します。
         </para>
     </sect3>
 
@@ -440,7 +440,7 @@ $form->addElement(
             <listitem><para>
                 <methodname>setStrict($flag)</methodname>及び<methodname>getStrict()</methodname>:
                 入力を確認した時にマッチする厳しい正規表現を使うかどうか。
-                デフォルトはfalseですが、空白文字やいくつかの省略形を許します。
+                デフォルトは<constant>FALSE</constant>ですが、空白文字やいくつかの省略形を許します。
             </para></listitem>
 
             <listitem><para>
@@ -578,7 +578,7 @@ $form->addElement(
                     <emphasis>focusOnLoad</emphasis>は、
                     ページが読み込まれたとき、
                     この指定のエディタがフォーカスを受けるかどうか判断するために使われます。
-                    デフォルトでこれはfalseです。
+                    デフォルトでこれは<constant>FALSE</constant>です。
                     メソッド<methodname>setFocusOnLoad($flag)</methodname>が値を設定するために使われるかもしれません。
                     一方で、<methodname>getFocusOnLoad()</methodname>が値を取得します。
                 </para>
@@ -597,7 +597,7 @@ $form->addElement(
                 <para>
                     <emphasis>inheritWidth</emphasis>は、
                     エディタが親コンテナの幅と単純にデフォルトの100%幅のどちらを使うか決定するために使われます。
-                    デフォルトでこれはfalseです。
+                    デフォルトでこれは<constant>FALSE</constant>です。
                     (すなわち、画面の幅一杯を満たします)
                     メソッド<methodname>setInheritWidth($flag)</methodname>が値を設定するために使われるかもしれません。
                     一方で、<methodname>getInheritWidth()</methodname>が値を取得します。
@@ -665,7 +665,7 @@ $form->addElement('editor', 'content', array(
             <para>
                 言うことには、<acronym>TEXTAREA</acronym>に上品に退化できる
                 エディタ・ウィジェットを望む機会があるかもしれません。
-                そのような場面では、 <varname>degrade</varname> プロパティを <constant>true</constant>
+                そのような場面では、 <varname>degrade</varname> プロパティを <constant>TRUE</constant>
                 に設定することによってそうすることができます。
             </para>
 
@@ -1034,10 +1034,10 @@ $form->addElement(
 
         <para>
             デフォルトでこの要素は、
-            配列に対して登録された選択肢のキーを確認する<code>InArray</code>バリデーターを登録します。
+            配列に対して登録された選択肢のキーを確認する<classname>InArray</classname>バリデーターを登録します。
             <methodname>setRegisterInArrayValidator(false)</methodname>または
-            <code>registerInArrayValidator</code>のどちらを呼び出しても、
-            設定キーにfalse値を渡すことによってこのふるまいを抑制できます。
+            <property>registerInArrayValidator</property>のどちらを呼び出しても、
+            設定キーに<constant>FALSE</constant>値を渡すことによってこのふるまいを抑制できます。
         </para>
 
         <example id="zend.dojo.form.elements.radioButton.example">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20766 -->
+<!-- EN-Revision: 21588 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -151,8 +151,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 スキーマ名とテーブル名は、コンストラクタの設定ディレクティブでも指定できます。
                 これは、<varname>$_name</varname> や <varname>$_schema</varname>
                 といったプロパティで設定したデフォルト値を上書きします。
-                <code>name</code> ディレクティブで指定したスキーマ名は、
-                <code>schema</code> オプションで指定したスキーマ名より優先されます。
+                <property>name</property> ディレクティブで指定したスキーマ名は、
+                <property>schema</property> オプションで指定したスキーマ名より優先されます。
             </para>
 
             <example id="zend.db.table.defining.table-schema.example.constructor">
@@ -319,7 +319,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 テーブルクラスの作成時にアプリケーション固有のロジックを初期化したい場合は、
                 その作業を <methodname>init()</methodname> メソッドで行います。
                 これは、テーブルのメタデータがすべて処理された後にコールされます。
-                メタデータを変更するつもりがないのなら、<code>__construct</code>
+                メタデータを変更するつもりがないのなら、<methodname>__construct</methodname>
                 メソッドよりもこちらを使用することを推奨します。
             </para>
 
@@ -366,7 +366,7 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 データベースアダプタをテーブルクラスに指定する最初の方法は、
                 <classname>Zend_Db_Adapter_Abstract</classname> 型のオブジェクトをオプションの配列で渡すことです。
-                配列のキーは <code>'db'</code> となります。
+                配列のキーは '<property>db</property>' となります。
             </para>
 
             <example id="zend.db.table.constructing.adapter.example">
@@ -429,7 +429,7 @@ $table = new Bugs();
             <para>
                 データベースアダプタをテーブルクラスに指定する三番目の方法は、
                 文字列ををオプションの配列で渡すことです。
-                配列のキーは、この場合も <code>'db'</code> となります。
+                配列のキーは、この場合も '<property>db</property>' となります。
                 この文字列は、静的な <classname>Zend_Registry</classname> インスタンスのキーとして使用します。
                 このキーのエントリが <classname>Zend_Db_Adapter_Abstract</classname> 型のオブジェクトとなります。
             </para>
@@ -675,7 +675,7 @@ class BugStatus extends Zend_Db_Table_Abstract
 
         <para>
             データベースのテーブルの行を更新するには、テーブルクラスの
-            <code>update</code> メソッドを使用します。
+            <methodname>update</methodname> メソッドを使用します。
             このメソッドには二つの引数を指定します。変更するカラムと
             それらのカラムに代入する新しい値を表す連想配列、
             そして <constant>UPDATE</constant> 操作の対象となる行を指定する
@@ -1058,7 +1058,7 @@ $rows = $table->fetchAll($select);
             </example>
 
             <para>
-                <code>ORDER BY</code> での並べ替えの条件句やオフセットを表す整数値を指定して、
+                <constant>ORDER BY</constant> での並べ替えの条件句やオフセットを表す整数値を指定して、
                 クエリの返す結果を絞りこむことができます。
                 これらの値は <constant>LIMIT</constant> 句で用いられます。
                 <constant>LIMIT</constant> 構文をサポートしていない <acronym>RDBMS</acronym>
@@ -1503,9 +1503,9 @@ $bugs = new Bugs(array('metadataCache' => $cache));
             <title>キャッシュのフロントエンドにおける自動シリアライズ</title>
 
             <para>
-                アダプタの describeTable() メソッドの返す内容は配列なので、
+                アダプタの <methodname>describeTable()</methodname> メソッドの返す内容は配列なので、
                 <classname>Zend_Cache_Core</classname> フロントエンドのオプション
-                <code>automatic_serialization</code> は <constant>TRUE</constant> と設定しましょう。
+                <property>automatic_serialization</property> は <constant>TRUE</constant> と設定しましょう。
             </para>
 
         </note>
@@ -1561,7 +1561,7 @@ protected $_metadata = array(
 
             <para>
                 この最適化を無効にするには、
-                <code>metadataCacheInClass</code> フラグをオフにします。
+                <property>metadataCacheInClass</property> フラグをオフにします。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1602,8 +1602,8 @@ $bugs->setMetadataCacheInClass(false);
                 行クラスおよび行セットクラスを指定するには、
                 テーブルのコンストラクタのオプション配列を使用します。
                 対応するキーは、それぞれ
-                <code>'rowClass'</code> および
-                <code>'rowsetClass'</code> となります。
+                '<property>rowClass</property>' および
+                '<property>rowsetClass</property>' となります。
                 ここには、クラスの名前を文字列で指定します。
             </para>
 
@@ -1775,10 +1775,10 @@ class Bugs extends Zend_Db_Table_Abstract
 
             <para>
                 たとえば、テーブルのクラス名が
-                "<code>BugsProducts</code>" だとすると、クラスのプロパティ
+                "BugsProducts" だとすると、クラスのプロパティ
                 <varname>$_name</varname> を明示的に宣言しなかった場合は
                 データベース内の物理的なテーブル
-                "<code>bugs_products</code>" にマッチします。この関連付けでは、
+                "bugs_products" にマッチします。この関連付けでは、
                 "CamelCase" 形式のクラス名が小文字に変換され、単語の区切りがアンダースコアに変わります。
             </para>
 

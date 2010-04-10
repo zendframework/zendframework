@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20760 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.cache.backends">
     <title><classname>Zend_Cache</classname> のバックエンド</title>
     <para>
@@ -493,7 +493,6 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
         </para>
     </sect2>
 
-    <!-- TODO : to be translated -->
     <sect2 id="zend.cache.backends.static">
         <title>Zend_Cache_Backend_Static</title>
         <para>
@@ -655,7 +654,7 @@ RewriteRule ^.*$ index.php [NC,L]
                               Umask for directories created within public_dir.
                         </entry>
                       </row>
-                      
+
                       <row>
                           <entry><emphasis>file_extension</emphasis></entry>
                           <entry><type>String</type></entry>

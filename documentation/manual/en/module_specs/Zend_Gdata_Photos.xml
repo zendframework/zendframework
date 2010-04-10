@@ -40,7 +40,8 @@
             The Picasa Web Albums <acronym>API</acronym>, like all GData <acronym>API</acronym>s, is
             based off of the Atom Publishing Protocol (APP), an <acronym>XML</acronym> based format
             for managing web-based resources. Traffic between a client and the servers occurs over
-            <acronym>HTTP</acronym> and allows for both authenticated and unauthenticated connections.
+            <acronym>HTTP</acronym> and allows for both authenticated and unauthenticated
+            connections.
         </para>
 
         <para>

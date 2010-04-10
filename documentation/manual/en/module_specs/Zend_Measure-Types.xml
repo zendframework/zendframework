@@ -357,7 +357,8 @@
             conputer conversion KIBIBYTE = 1024 - new notation KILO_BINARY_BYTE = 1024 - new</code>,
             or the notation, long format
             <code>KILOBYTE_SI = 1000 - SI notation for kilo (1000)</code>. DVDs for example are
-            marked with the SI-notation, but almost all harddisks are marked in computer binary notation.
+            marked with the SI-notation, but almost all harddisks are marked in computer binary
+            notation.
         </para>
     </sect2>
 

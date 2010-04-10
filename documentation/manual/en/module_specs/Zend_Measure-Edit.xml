@@ -32,14 +32,16 @@
         <listitem>
             <para>
                 <link
-                    linkend="zend.measure.edit.compare"><code>Compare to greater/smaller</code></link>
+                    linkend="zend.measure.edit.compare"><code>Compare to
+                    greater/smaller</code></link>
             </para>
         </listitem>
 
         <listitem>
             <para>
                 <link
-                    linkend="zend.measure.edit.changevalue"><code>Manually change values</code></link>
+                    linkend="zend.measure.edit.changevalue"><code>Manually change
+                    values</code></link>
             </para>
         </listitem>
 

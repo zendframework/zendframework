@@ -207,8 +207,8 @@ $logger->foo('Foo Message');
         </para>
 
         <para>
-            To add a new item to every future event, call the <methodname>setEventItem()</methodname>
-            method giving a key and a value:
+            To add a new item to every future event, call the
+            <methodname>setEventItem()</methodname> method giving a key and a value:
 
             <programlisting language="php"><![CDATA[
 $logger->setEventItem('pid', getmypid());
@@ -241,9 +241,12 @@ $logger->setEventItem('pid', getmypid());
         </para>
 
         <table id="zend.log.overview.as-errorHandler.properties.table-1">
-            <title>Zend_Log events from PHP errors have the additional fields matching
-            <methodname>handler  ( int $errno  , string $errstr  [, string $errfile  [, int $errline  [, array $errcontext  ]]] )</methodname>
-            from <ulink url="http://us3.php.net/manual/en/function.set-error-handler.php">set_error_handler</ulink></title>
+            <title>
+                Zend_Log events from PHP errors have the additional fields matching
+                <methodname>handler  ( int $errno  , string $errstr  [, string $errfile  [, int
+                    $errline  [, array $errcontext  ]]] )</methodname> from <ulink
+                    url="http://us3.php.net/manual/en/function.set-error-handler.php">set_error_handler</ulink>
+            </title>
 
             <tgroup cols="3">
                 <thead>
@@ -270,22 +273,31 @@ $logger->setEventItem('pid', getmypid());
                     <row>
                         <entry>file</entry>
                         <entry>errfile</entry>
-                        <entry>Contains the filename that the error was raised in, as a string.</entry>
+
+                        <entry>
+                            Contains the filename that the error was raised in, as a string.
+                        </entry>
                     </row>
 
                     <row>
                         <entry>line</entry>
                         <entry>errline</entry>
-                        <entry>Contains the line number the error was raised at, as an integer. </entry>
+
+                        <entry>
+                            Contains the line number the error was raised at, as an integer.
+                        </entry>
                     </row>
 
                     <row>
                         <entry>context</entry>
                         <entry>errcontext</entry>
-                        <entry>(optional) An array that points to the active symbol table at the point the
-                        error occurred. In other words, errcontext  will contain an array of every variable
-                        that existed in the scope the error was triggered in. User error handler must not
-                        modify error context.</entry>
+
+                        <entry>
+                            (optional) An array that points to the active symbol table at the point
+                            the error occurred. In other words, errcontext  will contain an array of
+                            every variable that existed in the scope the error was triggered in.
+                            User error handler must not modify error context.
+                        </entry>
                     </row>
 
                 </tbody>

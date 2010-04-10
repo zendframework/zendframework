@@ -249,7 +249,8 @@ public $<property name in PHP>;
                 storage:
             </para>
 
-            <example id="zend.service.windowsazure.storage.table.entities.enforced.schema-property-sample">
+            <example
+                id="zend.service.windowsazure.storage.table.entities.enforced.schema-property-sample">
                 <title>Sample enforced property</title>
 
                 <programlisting language="php"><![CDATA[

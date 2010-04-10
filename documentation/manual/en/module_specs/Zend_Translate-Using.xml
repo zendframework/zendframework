@@ -140,8 +140,8 @@ print $translate->_(2) . "\n";
     <para>
         Also you will have problems if some strings are not translated.
         You must always keep in mind how translation works.
-        First <classname>Zend_Translate</classname> checks whether the specified language has a translation
-        for the given message ID or string.
+        First <classname>Zend_Translate</classname> checks whether the specified language has a
+        translation for the given message ID or string.
         If no translation string has been found it refers to the next lower
         level language as defined within <classname>Zend_Locale</classname>.
         So "<emphasis>de_AT</emphasis>" becomes

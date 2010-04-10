@@ -21,7 +21,8 @@
         <title>Supported options for Zend_Validate_GreaterThan</title>
 
         <para>
-            The following options are supported for <classname>Zend_Validate_GreaterThan</classname>:
+            The following options are supported for
+            <classname>Zend_Validate_GreaterThan</classname>:
         </para>
 
         <itemizedlist>

@@ -27,8 +27,8 @@
 
         <para>
             As a result of this design, the rest may even be obvious. Behind the scenes, data set on
-            any <classname>Zend_Feed_Writer</classname> Data Container object is translated at render time onto a
-            DOMDocument object using the necessary feed elements. For each
+            any <classname>Zend_Feed_Writer</classname> Data Container object is translated at
+            render time onto a DOMDocument object using the necessary feed elements. For each
             supported feed type there is both an Atom 1.0 and <acronym>RSS</acronym> 2.0 renderer.
             Using a DOMDocument class rather than a templating solution has numerous advantages,
             the most obvious being the ability to export the DOMDocument for
@@ -57,37 +57,39 @@
             to any Feed class. The sole purpose of these containers is to collect data about the
             feed to generate using a simple interface of setter methods. These methods perform some
             data validity testing. For example, it will validate any passed <acronym>URI</acronym>s,
-            dates, etc. These checks are not tied to any of the feed standards definitions. The container
-            objects also contain methods to allow for fast rendering and export of the final feed,
-            and these can be reused at will.
+            dates, etc. These checks are not tied to any of the feed standards definitions. The
+            container objects also contain methods to allow for fast rendering and export of the
+            final feed, and these can be reused at will.
         </para>
 
         <para>
-            In addition to the main data container classes, there are two additional Atom 2.0 specific
-            classes. <classname>Zend_Feed_Writer_Source</classname> and <classname>
-            Zend_Feed_Writer_Deleted</classname>. The former implements Atom 2.0 source elements which
-            carry source feed metadata for a specific entry within an aggregate feed (i.e. the current feed
-            is not the entry's original source). The latter implements the Atom Tombstones RFC allowing
-            feeds to carry references to entries which have been deleted.
+            In addition to the main data container classes, there are two additional Atom 2.0
+            specific classes. <classname>Zend_Feed_Writer_Source</classname> and
+            <classname>Zend_Feed_Writer_Deleted</classname>. The former implements Atom 2.0 source
+            elements which carry source feed metadata for a specific entry within an aggregate feed
+            (i.e. the current feed is not the entry's original source). The latter implements the
+            Atom Tombstones RFC allowing feeds to carry references to entries which have been
+            deleted.
         </para>
 
         <para>
-            While there are two main data container types, there are four renderers - two matching container
-            renderers per supported feed type. Each renderer accepts a container, and based on its
-            content attempts to generate valid feed markup. If the renderer is unable to generate valid
-            feed markup, perhaps due to the container missing an obligatory data point, it will report this
-            by throwing an <classname>Exception</classname>. While it is possible to ignore
-            <classname>Exception</classname>s, this removes the default safeguard of ensuring you
-            have sufficient data set to render a wholly valid feed.
+            While there are two main data container types, there are four renderers - two matching
+            container renderers per supported feed type. Each renderer accepts a container, and
+            based on its content attempts to generate valid feed markup. If the renderer is unable
+            to generate valid feed markup, perhaps due to the container missing an obligatory data
+            point, it will report this by throwing an <classname>Exception</classname>. While it is
+            possible to ignore <classname>Exception</classname>s, this removes the default safeguard
+            of ensuring you have sufficient data set to render a wholly valid feed.
         </para>
 
         <para>
-            To explain this more clearly, you may construct a set of data containers for a feed where
-            there is a Feed container, into which has been added some Entry containers and a Deleted
-            container. This forms a data hierarchy resembling a normal feed. When rendering is performed,
-            this hierarchy has its pieces passed to relevant renderers and the partial feeds (all DOMDocuments)
-            are then pieced together to create a complete feed. In the case of Source or Deleted (Tomestone)
-            containers, these are rendered only for Atom 2.0 and ignored for RSS.
+            To explain this more clearly, you may construct a set of data containers for a feed
+            where there is a Feed container, into which has been added some Entry containers and a
+            Deleted container. This forms a data hierarchy resembling a normal feed. When rendering
+            is performed, this hierarchy has its pieces passed to relevant renderers and the partial
+            feeds (all DOMDocuments) are then pieced together to create a complete feed. In the case
+            of Source or Deleted (Tomestone) containers, these are rendered only for Atom 2.0 and
+            ignored for RSS.
         </para>
 
         <para>
@@ -254,9 +256,10 @@ $out = $feed->export('atom');
         </para>
 
         <para>
-            The Feed Level API for data is contained in <classname>Zend_Feed_Writer_Feed</classname>.
-            In addition to the API detailed below, the class also implements the <classname>Countable
-            </classname> and <classname>Iterator</classname> interfaces.
+            The Feed Level API for data is contained in
+            <classname>Zend_Feed_Writer_Feed</classname>. In addition to the API detailed below, the
+            class also implements the <classname>Countable</classname> and
+            <classname>Iterator</classname> interfaces.
         </para>
 
         <table>
@@ -432,8 +435,8 @@ $out = $feed->export('atom');
                     <row>
                         <entry><methodname>createTombstone()</methodname></entry>
                         <entry>Returns a new instance of <classname>Zend_Feed_Writer_Deleted
-                        </classname>. This is the Atom 2.0 Tombstone level data container. New entries
-                        are not automatically assigned to the current feed, so you
+                        </classname>. This is the Atom 2.0 Tombstone level data container. New
+                        entries are not automatically assigned to the current feed, so you
                         must explicitly call <methodname>addTombstone()</methodname>
                         to add the deleted entry for rendering.</entry>
                     </row>
@@ -462,8 +465,10 @@ $out = $feed->export('atom');
         </table>
 
         <note>
-            <para>In addition to these setters, there are also matching getters to retrieve data from the
-            Entry data container.</para>
+            <para>
+                In addition to these setters, there are also matching getters to retrieve data from
+                the Entry data container.
+            </para>
         </note>
 
         <!-- remaining feed stuff -->
@@ -484,7 +489,8 @@ $out = $feed->export('atom');
         </para>
 
         <para>
-            The Entry Level API for data is contained in <classname>Zend_Feed_Writer_Entry</classname>.
+            The Entry Level API for data is contained in
+            <classname>Zend_Feed_Writer_Entry</classname>.
         </para>
 
         <table>
@@ -627,7 +633,8 @@ $out = $feed->export('atom');
                         <entry><methodname>setCommentLink()</methodname></entry>
 
                         <entry>
-                            Seta a link to a HTML page containing comments associated with this entry.
+                            Seta a link to a HTML page containing comments associated with this
+                            entry.
                         </entry>
                     </row>
 
@@ -635,9 +642,9 @@ $out = $feed->export('atom');
                         <entry><methodname>setCommentFeedLink()</methodname></entry>
 
                         <entry>
-                            Sets a link to a XML feed containing comments associated with this entry.
-                            The parameter is an array containing the keys "uri" and "type", where
-                            the type is one of "rdf", "rss" or "atom".
+                            Sets a link to a XML feed containing comments associated with this
+                            entry. The parameter is an array containing the keys "uri" and "type",
+                            where the type is one of "rdf", "rss" or "atom".
                         </entry>
                     </row>
 
@@ -664,8 +671,10 @@ $out = $feed->export('atom');
         </table>
 
         <note>
-            <para>In addition to these setters, there are also matching getters to retrieve data from the
-            Entry data container.</para>
+            <para>
+                In addition to these setters, there are also matching getters to retrieve data from
+                from the Entry data container.
+            </para>
         </note>
     </sect2>
 </sect1>

@@ -300,7 +300,8 @@ echo "Daily Usage: " . $key->getApiQueries() . "/" .
         <title>Available Technorati Queries</title>
 
         <para>
-            <classname>Zend_Service_Technorati</classname> provides support for the following queries:
+            <classname>Zend_Service_Technorati</classname> provides support for the following
+            queries:
 
             <itemizedlist>
                 <listitem>
@@ -975,7 +976,7 @@ foreach ($resultSet as $result) {
                 <classname>Zend_Service_Technorati_TagsResult</classname> represents a single
                 Technorati TopTags or BlogPostTags query result object. It is never returned as a
                 standalone object, but it always belongs to a valid <link
-                    linkend="zend.service.technorati.classes.tagsresultset">Zend_Service_Technorati_TagsResultSet </link>
+                    linkend="zend.service.technorati.classes.tagsresultset">Zend_Service_Technorati_TagsResultSet</link>
                 object.
             </para>
 

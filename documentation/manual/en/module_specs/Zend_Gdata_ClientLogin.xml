@@ -11,7 +11,7 @@
 
     <para>
         See <ulink
-            url="http://code.google.com/apis/accounts/AuthForInstalledApps.html"> http://code.google.com/apis/accounts/AuthForInstalledApps.html </ulink>
+            url="http://code.google.com/apis/accounts/AuthForInstalledApps.html">http://code.google.com/apis/accounts/AuthForInstalledApps.html</ulink>
         for more information about Google Data ClientLogin authentication.
     </para>
 

@@ -93,10 +93,9 @@ $layout->setView($view);
             </para>
 
             <para>
-                Alternately, if your view implementation supports any sort of
-                plugin capability, you can access the variables via the
-                'Zend_Layout' placeholder, using the <link linkend="zend.view.helpers.initial.placeholder">placeholder
-                    helper</link>:
+                Alternately, if your view implementation supports any sort of plugin capability, you
+                can access the variables via the 'Zend_Layout' placeholder, using the <link
+                    linkend="zend.view.helpers.initial.placeholder">placeholder helper</link>:
             </para>
 
             <programlisting language="php"><![CDATA[

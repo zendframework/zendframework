@@ -49,7 +49,8 @@
                 <orderedlist>
                     <listitem>
                         <para>
-                            <varname>$wsdl</varname>, which is an <acronym>URI</acronym> of a WSDL file
+                            <varname>$wsdl</varname>, which is an <acronym>URI</acronym> of a WSDL
+                            file
 
                             <footnote>
                                 <para>

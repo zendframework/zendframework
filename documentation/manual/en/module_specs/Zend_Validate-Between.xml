@@ -95,7 +95,8 @@ $result = $valid->isValid($value);
 
         <para>
             The example is almost equal to our first example but we excluded the border value. Now
-            the values '0' and '10' are no longer allowed and will return <constant>FALSE</constant>.
+            the values '0' and '10' are no longer allowed and will return
+            <constant>FALSE</constant>.
         </para>
     </sect3>
 </sect2>

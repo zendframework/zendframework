@@ -13,9 +13,9 @@
 
         <para>
             By adding your own markups, you can add your own functionality to the
-            <classname>Zend_Markup</classname> renderers. With the markup structure, you can add about
-            any functionality you want. From simple markups, to complicated markup structures. A simple
-            example for a 'foo' markup:
+            <classname>Zend_Markup</classname> renderers. With the markup structure, you can add
+            about any functionality you want. From simple markups, to complicated markup structures.
+            A simple example for a 'foo' markup:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -43,9 +43,9 @@ echo $bbcode->render('my [foo]markup[/foo]');
 ]]></programlisting>
 
         <para>
-            Please note that creating your own markups only makes sense when your parser also supports
-            it with a markup structure. Currently, only BBCode supports this. Textile doesn't have
-            support for custom markups.
+            Please note that creating your own markups only makes sense when your parser also
+            supports it with a markup structure. Currently, only BBCode supports this. Textile
+            doesn't have support for custom markups.
         </para>
 
         <para>

@@ -453,10 +453,11 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
         <para>
             cURL is a standard <acronym>HTTP</acronym> client library that is distributed with many
             operating systems and can be used in <acronym>PHP</acronym> via the cURL extension. It
-            offers functionality for many special cases which can occur for a <acronym>HTTP</acronym>
-            client and make it a perfect choice for a <acronym>HTTP</acronym> adapter. It supports
-            secure connections, proxy, all sorts of authentication mechanisms
-            and shines in applications that move large files around between servers.
+            offers functionality for many special cases which can occur for a
+            <acronym>HTTP</acronym> client and make it a perfect choice for a
+            <acronym>HTTP</acronym> adapter. It supports secure connections, proxy, all sorts of
+            authentication mechanisms and shines in applications that move large files around
+            between servers.
         </para>
 
         <example id="zend.http.client.adapters.curl.example-1">

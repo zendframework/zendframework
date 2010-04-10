@@ -421,10 +421,10 @@ class ErrorController extends Zend_Controller_Action
         <para>
             For purposes of this quick start, we will assume you are using the <ulink
                 url="http://httpd.apache.org/">Apache web server</ulink>. Zend Framework works
-            perfectly well with other web servers -- including Microsoft Internet Information Server,
-            lighttpd, nginx, and more -- but most developers should be famililar with Apache at the
-            minimum, and it provides an easy introduction to Zend Framework's directory structure
-            and rewrite capabilities.
+            perfectly well with other web servers -- including Microsoft Internet Information
+            Server, lighttpd, nginx, and more -- but most developers should be famililar with Apache
+            at the minimum, and it provides an easy introduction to Zend Framework's directory
+            structure and rewrite capabilities.
         </para>
 
         <para>

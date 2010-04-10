@@ -12,7 +12,7 @@
         Every adapter has different pros and cons. In some cases, not every <acronym>PHP</acronym>
         datatype (e.g., objects) can be converted to a string representation. In most such cases,
         the type will be converted to a similar type that is serializable -- as an example,
-        <acronym>PHP</acronym> objects will often be cast to arrays.  If this fails, a
+        <acronym>PHP</acronym> objects will often be cast to arrays. If this fails, a
         <classname>Zend_Serializer_Exception</classname> will be thrown.
     </para>
 
@@ -183,7 +183,7 @@
         <para>
             This adapter converts <acronym>PHP</acronym> types to a <ulink
                 url="http://docs.python.org/library/pickle.html">Python Pickle</ulink> string
-            representation.  With it, you can read the serialized data with Python and read Pickled
+            representation. With it, you can read the serialized data with Python and read Pickled
             data of Python with <acronym>PHP</acronym>.
         </para>
 

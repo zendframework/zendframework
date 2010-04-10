@@ -106,7 +106,7 @@ $element->addValidator('NotEmpty')
             For example, let's consider <classname>Zend_View_Helper_FormButton</classname> (view
             helpers are one form of plugin). This view helper accepts three arguments, an element
             name (also used as the element's DOM identifier), a value (used as the button label),
-            and an optional array of attributes.  The helper then generates HTML markup for a form
+            and an optional array of attributes. The helper then generates HTML markup for a form
             input element.
         </para>
 

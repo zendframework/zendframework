@@ -91,7 +91,7 @@ $logger = Zend_Log::factory(array(
                 <para>
                     The "short" name of a filter to use with the given log writer; the name of the
                     filter minus the leading class prefix/namespace. See the "filterNamespace" entry
-                    below for more details.  Examples: "Message", "Priority".
+                    below for more details. Examples: "Message", "Priority".
                 </para>
             </listitem>
         </varlistentry>

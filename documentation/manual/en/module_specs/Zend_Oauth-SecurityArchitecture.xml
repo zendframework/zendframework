@@ -48,7 +48,7 @@
         RSA-SHA1 operates on similar principles except that the shared secret is, as you would
         expect, each parties' RSA private key. Both sides would have the other's public key with
         which to verify digital signatures. This does pose a level of risk compared to HMAC-SHA1
-        since the RSA method does not use the Access Key as part of the shared secret.  This means
+        since the RSA method does not use the Access Key as part of the shared secret. This means
         that if the RSA private key of any Consumer is compromised, then all Access Tokens assigned
         to that Consumer are also. RSA imposes an all or nothing scheme. In general, the majority of
         service providers offering OAuth authorization have therefore tended to use HMAC-SHA1 by
@@ -58,7 +58,7 @@
     <para>
         While digital signatures add to OAuth's security they are still vulnerable to other forms of
         attack, such as replay attacks which copy earlier requests which were intercepted and
-        validly signed at that time.  An attacker can now resend the exact same request to a
+        validly signed at that time. An attacker can now resend the exact same request to a
         Provider at will at any time and intercept its results. This poses a significant risk but it
         is quiet simple to defend against - add a unique string (i.e. a nonce) to all requests which
         changes per request (thus continually changing the signature string) but which can never be

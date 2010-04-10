@@ -5,7 +5,7 @@
 
     <para>
         Displaying localized currency values is a common task; the
-        <classname>Zend_Currency</classname> view helper is intended to simply this task.  See the
+        <classname>Zend_Currency</classname> view helper is intended to simply this task. See the
         <link linkend="zend.currency.introduction">Zend_Currency documentation</link> for specifics
         on this localization feature. In this section, we will focus simply on usage of the view
         helper.
@@ -44,7 +44,7 @@
 
     <para>
         There are several ways to select the desired currency. First, you may simply provide a
-        currency string; alternately, you may specify a locale.  The preferred way is to use a
+        currency string; alternately, you may specify a locale. The preferred way is to use a
         locale as this information is automatically detected and selected via the HTTP client
         headers provided when a user accesses your application, and ensures the currency provided
         will match their locale.
@@ -123,7 +123,7 @@ echo $helper->currency(1234.56); // this returns '€ 1.234,56'
 
     <para>
         As already seen, the <methodname>currency()</methodname> method is used to return the
-        currency string. Just call it with the value you want to display as a currency.  It also
+        currency string. Just call it with the value you want to display as a currency. It also
         accepts some options which may be used to change the behaviour and output of the helper.
     </para>
 

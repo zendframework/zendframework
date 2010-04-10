@@ -269,7 +269,7 @@ echo 'Quota Level: ', $result->getQuotaLevel(), '<br />';
 
             <para>
                 To change the current quota use one of the <methodname>changeQuotaPool</methodname>
-                methods.  First parameter is the new pool value and the second one is the
+                methods. First parameter is the new pool value and the second one is the
                 environment.
             </para>
 

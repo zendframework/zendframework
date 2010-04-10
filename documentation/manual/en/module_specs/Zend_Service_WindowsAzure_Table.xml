@@ -15,7 +15,7 @@
 
     <para>
         This topic lists some examples of using the
-        <classname>Zend_Service_WindowsAzure_Storage_Table</classname> class.  Other features are
+        <classname>Zend_Service_WindowsAzure_Storage_Table</classname> class. Other features are
         available in the download package, as well as a detailed API documentation of those
         features.
     </para>
@@ -83,7 +83,7 @@ foreach ($result as $table) {
         <title>Operations on entities</title>
 
         <para>
-            Tables store data as collections of entities. Entities are similar to rows.  An entity
+            Tables store data as collections of entities. Entities are similar to rows. An entity
             has a primary key and a set of properties. A property is a named, typed-value pair,
             similar to a column.
         </para>
@@ -154,7 +154,7 @@ class SampleEntity extends Zend_Service_WindowsAzure_Storage_TableEntity
                 To enforce a schema on the client side using the
                 <classname>Zend_Service_WindowsAzure_Storage_Table</classname> class, you can create
                 a class which inherits
-                <classname>Zend_Service_WindowsAzure_Storage_TableEntity</classname>.  This class
+                <classname>Zend_Service_WindowsAzure_Storage_TableEntity</classname>. This class
                 provides some basic functionality for the
                 <classname>Zend_Service_WindowsAzure_Storage_Table</classname> class to work with a
                 client-side schema.
@@ -432,7 +432,7 @@ $target->setAzurePropertyType('Age', 'Edm.Int64');
 
                 <para>
                     Using the following code, an entity can be inserted into a table named
-                    "testtable".  Note that the table has already been created before.
+                    "testtable". Note that the table has already been created before.
                 </para>
 
                 <example id="zend.service.windowsazure.storage.table.api.entities.insert.example">
@@ -461,7 +461,7 @@ echo 'Etag: ' . $result->getEtag() . "\n";
 
                 <para>
                     Using the following code, an entity can be retrieved by partition key and row
-                    key.  Note that the table and entity have already been created before.
+                    key. Note that the table and entity have already been created before.
                 </para>
 
                 <example
@@ -534,7 +534,7 @@ $result = $storageClient->updateEntity('testtable', $entity, true);
                 <title>Deleting an entity</title>
 
                 <para>
-                    Using the following code, an entity can be deleted.  Note that the table and
+                    Using the following code, an entity can be deleted. Note that the table and
                     entity have already been created before.
                 </para>
 
@@ -579,7 +579,7 @@ $result = $storageClient->deleteEntity('testtable', $entity);
             </itemizedlist>
 
             <para>
-                Using the following code, a table can be queried using a filter condition.  Note
+                Using the following code, a table can be queried using a filter condition. Note
                 that the table and entities have already been created before.
             </para>
 
@@ -603,7 +603,7 @@ foreach ($entities as $entity) {
             </example>
 
             <para>
-                Using the following code, a table can be queried using a fluent interface.  Note
+                Using the following code, a table can be queried using a fluent interface. Note
                 that the table and entities have already been created before.
             </para>
 

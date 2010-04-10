@@ -8,8 +8,8 @@
         without being forced to disclose your username or password. If you think about it, the
         practice of handing over your username and password for sites like Yahoo Mail or Twitter has
         been endemic for quite a while. This has raised some serious concerns because there's
-        nothing to prevent other applications from misusing this data.  Yes, some services may
-        appear trustworthy but that is never guaranteed.  OAuth resolves this problem by eliminating
+        nothing to prevent other applications from misusing this data. Yes, some services may
+        appear trustworthy but that is never guaranteed. OAuth resolves this problem by eliminating
         the need for any username and password sharing, replacing it with a user controlled
         authorization process.
     </para>

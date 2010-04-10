@@ -184,7 +184,7 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 
         <para>
             This class gives some nice flexibility -- we can set default values from our database,
-            and be certain that the value will be stored and represented correctly.  Additionally,
+            and be certain that the value will be stored and represented correctly. Additionally,
             we can allow for the value to be set from an array passed via form input. Finally, we
             have discrete accessors for each date segment, which we can now use in a decorator to
             create a composite element.

@@ -27,7 +27,7 @@
 
         <para>
             This topic lists some examples of using the
-            <classname>Zend_Service_WindowsAzure_Storage_Queue</classname> class.  Other features
+            <classname>Zend_Service_WindowsAzure_Storage_Queue</classname> class. Other features
             are available in the download package, as well as a detailed API documentation of those
             features.
         </para>
@@ -114,7 +114,7 @@ foreach ($messages as $message) {
             <para>
                 The messages that are read using <methodname>getMessages()</methodname> will be
                 invisible in the queue for 30 seconds, after which the messages will re-appear in
-                the queue.  To mark a message as processed and remove it from the queue, use the
+                the queue. To mark a message as processed and remove it from the queue, use the
                 <methodname>deleteMessage()</methodname> method.
             </para>
 
@@ -141,7 +141,7 @@ foreach ($messages as $message) {
             <title>Check if there are messages in a queue</title>
 
             <para>
-                Using the following code, a queue can be checked for new messages.  Note that the
+                Using the following code, a queue can be checked for new messages. Note that the
                 queue and message have already been created before.
             </para>
 
@@ -163,7 +163,7 @@ foreach ($messages as $message) {
             <para>
                 Note that messages that are read using <methodname>peekMessages()</methodname> will
                 not become invisible in the queue, nor can they be marked as processed using the
-                <methodname>deleteMessage()</methodname> method.  To do this, use
+                <methodname>deleteMessage()</methodname> method. To do this, use
                 <methodname>getMessages()</methodname> instead.
             </para>
         </sect4>

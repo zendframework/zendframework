@@ -5,7 +5,7 @@
 
     <para>
         Blob Storage stores sets of binary data. Blob storage offers the following three
-        resources: the storage account, containers, and blobs.  Within your storage account,
+        resources: the storage account, containers, and blobs. Within your storage account,
         containers provide a way to organize sets of blobs within your storage account.
     </para>
 
@@ -20,7 +20,7 @@
 
         <para>
             This topic lists some examples of using the
-            <classname>Zend_Service_WindowsAzure_Storage_Blob</classname> class.  Other features are
+            <classname>Zend_Service_WindowsAzure_Storage_Blob</classname> class. Other features are
             available in the download package, as well as a detailed API documentation of those
             features.
         </para>
@@ -91,7 +91,7 @@ echo 'Blob name is: ' . $result->Name;
             <title>Copying a blob</title>
 
             <para>
-                Using the following code, a blob can be copied from inside the storage account.  The
+                Using the following code, a blob can be copied from inside the storage account. The
                 advantage of using this method is that the copy operation occurs in the Azure cloud
                 and does not involve downloading the blob. Note that the container has already been
                 created before.
@@ -176,7 +176,7 @@ $storageClient->setContainerAcl('testcontainer', Zend_Service_WindowsAzure_Stora
         <para>
             In order to work with the root container, it should first be created using the
             <methodname>createContainer()</methodname> method, naming the container
-            <varname>$root</varname>.  All other operations on the root container should be issued
+            <varname>$root</varname>. All other operations on the root container should be issued
             with the container name set to <varname>$root</varname>.
         </para>
     </sect3>

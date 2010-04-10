@@ -80,7 +80,7 @@ echo $element->renderSimpleInput();
     <para>
         First, let's define a form. Our form will capture a user's demographic details. The markup
         will be highly customized, and in some cases use view helpers directly instead of form
-        elements in order to achieve its goals.  Here is the basic form definition:
+        elements in order to achieve its goals. Here is the basic form definition:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -128,7 +128,7 @@ class My_Form_UserDemographics extends Zend_Form
     <para>
         With that out of the way, let's consider how we might want to display this form. One common
         idiom with first/last names is to display them on a single line; when a title is provided,
-        that is often on the same line as well.  Dates, when not using a JavaScript date chooser,
+        that is often on the same line as well. Dates, when not using a JavaScript date chooser,
         will often be separated into three fields displayed side by side.
     </para>
 

@@ -52,7 +52,7 @@
         TweetExpress' callback URL will trigger an examination of the response to determine whether
         the User has granted their approval to Twitter. Assuming so, it may now exchange it's
         unauthorized Request Token for a fully authorized Access Token by sending a request back to
-        Twitter including the Request Token and the received verification code.  Twitter should now
+        Twitter including the Request Token and the received verification code. Twitter should now
         send back a response containing this Access Token which must be used in all requests used to
         access Twitter's API on behalf of the User. Twitter will only do this once they have
         confirmed the attached Request Token has not already been used to retrieve another Access
@@ -69,7 +69,7 @@
 
     <para>
         Although Twitter do not currently expire Access Tokens, the User is free to deauthorize
-        TweetExpress from their Twitter account settings.  Once deauthorized, TweetExpress' access
+        TweetExpress from their Twitter account settings. Once deauthorized, TweetExpress' access
         will be cut off and their Access Token rendered invalid.
     </para>
 </sect2>

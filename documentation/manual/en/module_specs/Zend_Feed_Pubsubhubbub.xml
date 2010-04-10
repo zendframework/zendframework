@@ -25,7 +25,7 @@
             Pubsubhubbub has garnered attention because it is a pubsub protocol which is easy to
             implement and which operates over HTTP. Its philosophy is to replace the traditional
             model where blog feeds have been polled at regular intervals to detect and retrieve
-            updates.  Depending on the frequency of polling, this can take a lot of time to
+            updates. Depending on the frequency of polling, this can take a lot of time to
             propagate updates to interested parties from planet aggregators to desktop readers. With
             a pubsub system in place, updates are not simply polled by Subscribers, they are pushed
             to Subscribers, elimenating any delay. For this reason, Pubsubhubbub forms part of what
@@ -35,7 +35,7 @@
         <para>
             The protocol does not exist in isolation. Pubsub systems have been around for a while,
             such as the familiar Jabber Publish-Subscribe protocol, XEP-0060, or the less well known
-            rssCloud (described in 2001).  However these have not achieved widespread adoption
+            rssCloud (described in 2001). However these have not achieved widespread adoption
             typically due to either their complexity, poor timing or lack of suitability for web
             applications. rssCloud, which was recently revived as a response to the appearance of
             Pubsubhubbub, has also seen its usage increase significantly though it lacks a formal
@@ -88,7 +88,7 @@
             classes <classname>Zend_Feed_Pubsubhubbub_Publisher</classname> and
             <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname>. In addition, the Subscriber
             implementation may handle any feed updates forwarded from a Hub by using
-            <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname>.  These classes, their
+            <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname>. These classes, their
             use cases, and APIs are covered in subsequent sections.
         </para>
     </sect2>
@@ -159,7 +159,7 @@ if (!$publisher->isSuccess()) {
             If you prefer having more concrete control over the Publisher, the methods
             <methodname>addHubUrls()</methodname> and <methodname>addUpdatedTopicUrls()</methodname>
             pass each array value to the singular <methodname>addHubUrl()</methodname> and
-            <methodname>addUpdatedTopicUrl()</methodname> public methods.  There are also matching
+            <methodname>addUpdatedTopicUrl()</methodname> public methods. There are also matching
             <methodname>removeUpdatedTopicUrl()</methodname> and
             <methodname>removeHubUrl()</methodname> methods.
         </para>
@@ -233,7 +233,7 @@ if (!$publisher->isSuccess()) {
             <para>
                 <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname> implements a full
                 Pubsubhubbub Subscriber capable of subscribing to, or unsubscribing from, any Topic
-                via any Hub advertised by that Topic.  It operates in conjunction with
+                via any Hub advertised by that Topic. It operates in conjunction with
                 <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> which accepts
                 requests from a Hub to confirm all subscription or unsubscription attempts (to
                 prevent third-party misuse).
@@ -343,7 +343,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                                     a query string parameter preserved by the Hub and resent with
                                     all Subscriber requests. Its purpose is to allow the Subscriber
                                     to identify and look up the subscription associated with any Hub
-                                    request in a backend storage medium.  This is a non-standard
+                                    request in a backend storage medium. This is a non-standard
                                     parameter used by this component in preference to encoding a
                                     subscription key in the URI path which is more difficult to
                                     implement in a Zend Framework application.
@@ -543,10 +543,10 @@ if ($callback->hasFeedUpdate()) {
                 <para>
                     It should be noted that
                     <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> may
-                    independently parse any incoming query string and other parameters.  This is
+                    independently parse any incoming query string and other parameters. This is
                     necessary since <acronym>PHP</acronym> alters the structure and keys of a query
                     string when it is parsed into the <varname>$_GET</varname> or
-                    <varname>$_POST</varname> superglobals.  For example, all duplicate keys are
+                    <varname>$_POST</varname> superglobals. For example, all duplicate keys are
                     ignored and periods are converted to underscores. Pubsubhubbub features both of
                     these in the query strings it generates.
                 </para>

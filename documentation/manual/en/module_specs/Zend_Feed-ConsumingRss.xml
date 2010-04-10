@@ -29,9 +29,9 @@ echo $channel->title();
     <para>
         Note the function syntax. <classname>Zend_Feed</classname> uses a convention of treating
         properties as <acronym>XML</acronym> object if they are requested with variable "getter"
-        syntax (<code>$obj->property</code>) and as strings if they are access with method syntax
-        (<code>$obj->property()</code>). This enables access to the full text of any individual node
-        while still allowing full access to all children.
+        syntax (<command>$obj->property</command>) and as strings if they are access with method
+        syntax (<command>$obj->property()</command>). This enables access to the full text of any
+        individual node while still allowing full access to all children.
     </para>
 
     <para>
@@ -71,52 +71,48 @@ foreach ($channel as $item) {
         Required channel elements:
     </para>
 
-    <para>
-        <itemizedlist>
-            <listitem>
-                <para><property>title</property> - The name of the channel</para>
-            </listitem>
+    <itemizedlist>
+        <listitem>
+            <para><property>title</property> - The name of the channel</para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>link</property> - The <acronym>URL</acronym> of the web site
-                    corresponding to the channel
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>link</property> - The <acronym>URL</acronym> of the web site
+                corresponding to the channel
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>description</property> - A sentence or several describing the channel
-                </para>
-            </listitem>
-        </itemizedlist>
-    </para>
+        <listitem>
+            <para>
+                <property>description</property> - A sentence or several describing the channel
+            </para>
+        </listitem>
+    </itemizedlist>
 
     <para>
         Common optional channel elements:
     </para>
 
-    <para>
-        <itemizedlist>
-            <listitem>
-                <para>
-                    <property>pubDate</property> - The publication date of this set of content, in
-                    <acronym>RFC</acronym> 822 date format
-                </para>
-            </listitem>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <property>pubDate</property> - The publication date of this set of content, in
+                <acronym>RFC</acronym> 822 date format
+            </para>
+        </listitem>
 
-            <listitem>
-                <para><property>language</property> - The language the channel is written in</para>
-            </listitem>
+        <listitem>
+            <para><property>language</property> - The language the channel is written in</para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>category</property> - One or more (specified by multiple tags)
-                    categories the channel belongs to
-                </para>
-            </listitem>
-        </itemizedlist>
-    </para>
+        <listitem>
+            <para>
+                <property>category</property> - One or more (specified by multiple tags)
+                categories the channel belongs to
+            </para>
+        </listitem>
+    </itemizedlist>
 
     <para>
         <acronym>RSS</acronym> <emphasis>&lt;item&gt;</emphasis> elements do not have any strictly
@@ -128,45 +124,43 @@ foreach ($channel as $item) {
         Common item elements:
     </para>
 
-    <para>
-        <itemizedlist>
-            <listitem>
-                <para><property>title</property> - The title of the item</para>
-            </listitem>
+    <itemizedlist>
+        <listitem>
+            <para><property>title</property> - The title of the item</para>
+        </listitem>
 
-            <listitem>
-                <para><property>link</property> - The <acronym>URL</acronym> of the item</para>
-            </listitem>
+        <listitem>
+            <para><property>link</property> - The <acronym>URL</acronym> of the item</para>
+        </listitem>
 
-            <listitem>
-                <para><property>description</property> - A synopsis of the item</para>
-            </listitem>
+        <listitem>
+            <para><property>description</property> - A synopsis of the item</para>
+        </listitem>
 
-            <listitem>
-                <para><property>author</property> - The author's email address</para>
-            </listitem>
+        <listitem>
+            <para><property>author</property> - The author's email address</para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>category</property> - One more categories that the item belongs to
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>category</property> - One more categories that the item belongs to
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>comments</property> - <acronym>URL</acronym> of comments relating to
-                    this item
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>comments</property> - <acronym>URL</acronym> of comments relating to
+                this item
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>pubDate</property> - The date the item was published, in
-                    <acronym>RFC</acronym> 822 date format
-                </para>
-            </listitem>
-        </itemizedlist>
-    </para>
+        <listitem>
+            <para>
+                <property>pubDate</property> - The date the item was published, in
+                <acronym>RFC</acronym> 822 date format
+            </para>
+        </listitem>
+    </itemizedlist>
 
     <para>
         In your code you can always test to see if an element is non-empty with:
@@ -179,8 +173,8 @@ if ($item->propname()) {
 ]]></programlisting>
 
     <para>
-        If you use <code>$item->propname</code> instead, you will always get an empty object which
-        will evaluate to <constant>TRUE</constant>, so your check will fail.
+        If you use <command>$item->propname</command> instead, you will always get an empty object
+        which will evaluate to <constant>TRUE</constant>, so your check will fail.
     </para>
 
     <para>

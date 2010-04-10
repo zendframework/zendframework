@@ -142,7 +142,7 @@ Zend_Loader::loadClass('Container_Tree',
                 <listitem>
                     <para>
                         Each "_" character in the <emphasis>CLASS NAME</emphasis> is converted to a
-                        <constant>DIRECTORY_SEPARATOR</constant>.  The "_" character has no special
+                        <constant>DIRECTORY_SEPARATOR</constant>. The "_" character has no special
                         meaning in the namespace.
                     </para>
                 </listitem>

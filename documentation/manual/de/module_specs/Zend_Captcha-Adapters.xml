@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
+<!-- EN-Revision: 21795 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.captcha.adapters">
     <title>CAPTCHA Adapter</title>
@@ -49,6 +49,15 @@
                     <methodname>getTimeout()</methodname> erlauben es die Lebenszeit des
                     Sessiontokens zu spezifizieren, und den aktuellen Wert er erhalten.
                     <varname>$ttl</varname> sollte in Sekunden spezifiziert sein.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setUseNumbers($numbers)</methodname> und
+                    <methodname>getUseNumbers()</methodname> erlauben es zu spezifizieren ob Nummern
+                    als mögliche Zeichen für den Zufall funktionieren oder ob nur Zeichen verwendet
+                    werden.
                 </para>
             </listitem>
 
@@ -241,6 +250,20 @@
                     das <acronym>CAPTCHA</acronym> Bild zu spezifizieren. Der Standardwert ist
                     "<filename>.png</filename>". Beachte: Das Ändern dieses Wertes wird den Typ des
                     erzeugten Bildes nicht ändern.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setDotNoiseLevel($level)</methodname> und
+                    <methodname>getDotNoiseLevel()</methodname> erlauben es zusammen mit
+                    <methodname>setLineNoiseLevel($level)</methodname> und
+                    <methodname>getLineNoiseLevel()</methodname> zu kontrollieren wieviel
+                    "Rauschen" in der Form von zufälligen Punkten und Linien im Bild enthalten sein
+                    sollen. Jede Einheit von <varname>$level</varname> erzeugt einen zufälligen
+                    Punkt oder eine Linie. Der Standard ist 100 Punkte und 5 Linien. Das Rauschen
+                    wird zweimal hinzugefügt - vor und nach der Umwandlung der Verzerrung des
+                    Bildes.
                 </para>
             </listitem>
         </itemizedlist>

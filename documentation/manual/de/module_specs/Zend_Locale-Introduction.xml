@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21661 -->
+<!-- EN-Revision: 21790 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.introduction">
     <title>Einführung</title>
@@ -247,8 +247,8 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                         const <constant>Zend_Locale::BROWSER</constant> - Der Webbrowser des
                         Benutzer welcher die Informationen mit jeder Anfrage schickt. Diese wird von
                         <acronym>PHP</acronym> durch die globale Variable
-                        <constant>HTTP_ACCEPT_LANGUAGE</constant> veröffentlicht. Wenn kein
-                        passendes Gebietsschema gefunden wurde, dann wird mit
+                        <constant>$_SERVER['HTTP_ACCEPT_LANGUAGE']</constant> veröffentlicht. Wenn
+                        kein passendes Gebietsschema gefunden wurde, dann wird mit
                         <constant>ENVIRONMENT</constant> gesucht und als letztes mit
                         <constant>FRAMEWORK</constant> gesucht.
                     </para>

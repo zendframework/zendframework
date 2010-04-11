@@ -20,15 +20,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\File\Transfer;
+
+/**
  * Exception class for Zend_File_Transfer
  *
- * @uses       Zend_Exception
+ * @uses       \Zend\Exception
  * @category   Zend
  * @package    Zend_File_Transfer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_File_Transfer_Exception extends Zend_Exception
+class Exception extends \Zend\Exception
 {
     protected $_fileerror = null;
 

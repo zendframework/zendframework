@@ -20,16 +20,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\File\Transfer;
+
+/**
  * Base class for all protocols supporting file transfers
  *
- * @uses      Zend_File_Transfer_Exception
- * @uses      Zend_Loader
+ * @uses      \Zend\File\Transfer\Exception
+ * @uses      \Zend\Loader
  * @category  Zend
  * @package   Zend_File_Transfer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_File_Transfer
+class Transfer
 {
     /**
      * Array holding all directions
@@ -44,7 +49,7 @@ class Zend_File_Transfer
      * @param  string  $adapter   Adapter to use
      * @param  boolean $direction OPTIONAL False means Download, true means upload
      * @param  array   $options   OPTIONAL Options to set for this adapter
-     * @throws Zend_File_Transfer_Exception
+     * @throws \Zend\File\Transfer\Exception
      */
     public function __construct($adapter = 'Http', $direction = false, $options = array())
     {
@@ -57,22 +62,22 @@ class Zend_File_Transfer
      * @param  string  $adapter   Adapter to use
      * @param  boolean $direction OPTIONAL False means Download, true means upload
      * @param  array   $options   OPTIONAL Options to set for this adapter
-     * @throws Zend_File_Transfer_Exception
+     * @throws \Zend\File\Transfer\Exception
      */
     public function setAdapter($adapter, $direction = false, $options = array())
     {
-        if (Zend_Loader::isReadable('Zend/File/Transfer/Adapter/' . ucfirst($adapter). '.php')) {
+        if (end\Loader::isReadable('Zend/File/Transfer/Adapter/' . ucfirst($adapter). '.php')) {
             $adapter = 'Zend_File_Transfer_Adapter_' . ucfirst($adapter);
         }
 
         if (!class_exists($adapter)) {
-            Zend_Loader::loadClass($adapter);
+            end\Loader::loadClass($adapter);
         }
 
         $direction = (integer) $direction;
         $this->_adapter[$direction] = new $adapter($options);
-        if (!$this->_adapter[$direction] instanceof Zend_File_Transfer_Adapter_Abstract) {
-            throw new Zend_File_Transfer_Exception("Adapter " . $adapter . " does not extend Zend_File_Transfer_Adapter_Abstract");
+        if (!$this->_adapter[$direction] instanceof Adapter\AbstractAdapter) {
+            throw new Exception("Adapter " . $adapter . " does not extend Zend_File_Transfer_Adapter_Abstract");
         }
 
         return $this;
@@ -115,6 +120,6 @@ class Zend_File_Transfer
             return call_user_func_array(array($this->_adapter[$direction], $method), $options);
         }
 
-        throw new Zend_File_Transfer_Exception("Unknown method '" . $method . "' called!");
+        throw new Exception("Unknown method '" . $method . "' called!");
     }
 }

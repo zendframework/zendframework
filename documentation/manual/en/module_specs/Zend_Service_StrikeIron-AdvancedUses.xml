@@ -109,6 +109,5 @@ $soapClient = $taxBasic->getSoapClient();
 echo $soapClient->__getLastRequest();
 echo $soapClient->__getLastResponse();
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

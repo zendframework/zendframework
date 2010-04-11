@@ -408,7 +408,6 @@ $taxBasic = $strikeIron->getService(array('class => 'SalesUseTaxBasic'));
 $subscription = $taxBasic->getSubscriptionInfo();
 echo $subscription->remainingHits;
 ]]></programlisting>
-        </para>
 
         <para>
             The <methodname>getSubscriptionInfo()</methodname> method will return an object

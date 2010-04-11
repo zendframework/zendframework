@@ -59,7 +59,7 @@
                 einen Kalendertag weniger hat, als erwartet. Um solche Problem zu verhindern, kann die
                 Option <property>fix_dst</property> verwendet werden, welche standardmäßig
                 <constant>TRUE</constant> ist. Das führt dazu, dass die <acronym>DST</acronym> keinen
-                Einfluß mehr bei Datumsberechnungen hat (<methodname>addMonth()</methodname>,
+                Einfluss mehr bei Datumsberechnungen hat (<methodname>addMonth()</methodname>,
                 <methodname>subMonth()</methodname>).
                 <methodname>Zend_Date::setOptions(array('fix_dst' => false))</methodname> kann
                 benutzt werden, um Hinzufügen oder Entfernen der <acronym>DST</acronym>-Anpassung zu
@@ -119,7 +119,7 @@
                 <constant>Zend_Date::DATE</constant> und <constant>Zend_Date::TIME</constant>
                 Konstanten akzeptieren. Um einen
                 <classname>Zend_Cache</classname>-Adapter für <classname>Zend_Date</classname> zu
-                verwenden, muß nur
+                verwenden, muss nur
                 <methodname>Zend_Date::setOptions(array('cache' => $adapter))</methodname>
                 aufgerufen werden.
             </para>
@@ -149,8 +149,8 @@
             Sobald die Eingabe durch die Erstellung eines <classname>Zend_Date</classname>-Objekts
             normalisiert wurde, hat es eine zugeordnete Zeitzone aber die interne Darstellung
             verwendet <ulink
-                url="http://en.wikipedia.org/wiki/Unix_Time">UNIX Zeitstempel</ulink>. Damit ein
-            Datum in einer lokalisierten Art und Weise durchsucht werden kann, muß zuerst eine
+                url="http://en.wikipedia.org/wiki/Unix_Time">UNIX-Zeitstempel</ulink>. Damit ein
+            Datum in einer lokalisierten Art und Weise durchsucht werden kann, muss zuerst eine
             Zeitzone bekannt sein. Die Standardzeitzone ist immer <acronym>GMT</acronym> oder
             <acronym>UTC</acronym>. Um die Zeitzone des Objekts zu inspizieren, kann
             <methodname>getTimeZone()</methodname> verwendet werden. Um die Zeitzone des Objekts zu
@@ -320,7 +320,7 @@ print $date;
                             </entry>
 
                             <entry>
-                                UNIX Zeitstempel, ausgedrückt in Sekunden die vergangen sind seit dem
+                                UNIX-Zeitstempel, ausgedrückt in Sekunden die vergangen sind seit dem
                                 1. Jänner, 1970 00:00:00 <acronym>GMT</acronym>.
                             </entry>
                         </row>
@@ -948,7 +948,7 @@ print $date;
 
                                 <listitem>
                                     <para>
-                                        Unix Zeitstempel als '<emphasis>timestamp</emphasis>'
+                                        Unix-Zeitstempel als '<emphasis>timestamp</emphasis>'
                                         (<constant>Zend_Date::TIMESTAMP</constant>)
                                     </para>
                                 </listitem>
@@ -1114,7 +1114,7 @@ print $date;
         </para>
 
         <table id="zend.date.other.sun.table">
-            <title>Gewöhliche Methoden</title>
+            <title>Gewöhnliche Methoden</title>
 
             <tgroup cols="2">
                 <thead>

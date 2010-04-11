@@ -226,8 +226,12 @@ session_start();
 // to the AuthSub server if necessary.
 $service = new Zend_Gdata_Gbase(getAuthSubHttpClient());
 ]]></programlisting>
-<para>Finally, an unauthenticated server can be created for use with snippets feeds:</para>
-<programlisting language="php"><![CDATA[
+
+            <para>
+                Finally, an unauthenticated server can be created for use with snippets feeds:
+            </para>
+
+            <programlisting language="php"><![CDATA[
 // Create an instance of the Base service using an unauthenticated HTTP client
 $service = new Zend_Gdata_Gbase();
 ]]></programlisting>

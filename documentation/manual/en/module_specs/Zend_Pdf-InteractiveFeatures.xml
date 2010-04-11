@@ -1064,8 +1064,9 @@ $pdf->save($path, true);
         <para>
             <classname>Zend_Pdf_Outline</classname> class implements RecursiveArray interface,
             so child outlines may be recursively iterated using RecursiveIteratorIterator:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($path);
 
 foreach ($pdf->outlines as $documentRootOutlineEntry) {
@@ -1094,7 +1095,6 @@ foreach ($pdf->outlines as $documentRootOutlineEntry) {
 
 $pdf->save($path, true);
 ]]></programlisting>
-        </para>
 
         <note>
             <para>

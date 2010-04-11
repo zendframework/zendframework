@@ -9,6 +9,7 @@
 
     <example id="zend.translate.using.example1">
         <title>Example of single-language PHP code</title>
+
         <programlisting language="php"><![CDATA[
 print "Example\n";
 print "=======\n";
@@ -68,8 +69,9 @@ print $translate->_("Here is line two") . "\n";
 
     <para>
         Create a new <classname>Zend_Translate</classname> object and define the base adapter:
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate
     array(
         'adapter' => 'gettext',
@@ -79,6 +81,7 @@ $translate = new Zend_Translate
 );
 ]]></programlisting>
 
+    <para>
         In this example we chose the
         <emphasis>Gettext Adapter</emphasis>.
         We place our file <emphasis>source-de.mo</emphasis>
@@ -91,13 +94,15 @@ $translate = new Zend_Translate
         The next step is to wrap all strings which are to be translated.
         The simplest approach is to have only simple strings or sentences
         like this:
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 print $translate->_("Example") . "\n";
 print "=======\n";
 print $translate->_("Here is line one") . "\n";
 ]]></programlisting>
 
+    <para>
         Some strings do not needed to be translated.
         The separating line is always a separating line,
         even in other languages.
@@ -106,11 +111,13 @@ print $translate->_("Here is line one") . "\n";
     <para>
         Having data values integrated into a translation string is also
         supported through the use of embedded parameters.
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 printf($translate->_("Today is the %1\$s") . "\n", date("d.m.Y"));
 ]]></programlisting>
 
+    <para>
         Instead of <methodname>print()</methodname>, use the <methodname>printf()</methodname>
         function and replace all parameters with <code>%1\$s</code> parts.
         The first is <code>%1\$s</code>, the second is <code>%2\$s</code>,
@@ -123,13 +130,15 @@ printf($translate->_("Today is the %1\$s") . "\n", date("d.m.Y"));
     <para>
         Each string is identified in the translation storage by a message ID.
         You can use message IDs instead of strings in your code, like this:
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 print $translate->_(1) . "\n";
 print "=======\n";
 print $translate->_(2) . "\n";
 ]]></programlisting>
 
+    <para>
         But doing this has several disadvantages:
     </para>
 

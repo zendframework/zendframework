@@ -49,10 +49,11 @@ Zend_Session::start();
                     equivalent), and the setting is already enabled in <code>php.ini</code>, then
                     add the following to your <code>.htaccess</code> file (usually in your
                     <acronym>HTML</acronym> document root directory):
-                    <programlisting language="httpd.conf"><![CDATA[
+                </para>
+
+                <programlisting language="httpd.conf"><![CDATA[
 php_value session.auto_start 0
 ]]></programlisting>
-                </para>
             </listitem>
 
             <listitem>

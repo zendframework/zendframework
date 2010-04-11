@@ -430,8 +430,9 @@
             <para>
                 <methodname>getType($type)</methodname> method may be used to get mapping for a
                 specified <acronym>PHP</acronym> type:
+            </para>
 
-               <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 $wsdl = new Zend_Soap_Wsdl('My_Web_Service', $myWebServiceUri);
 
@@ -445,7 +446,6 @@ class MyClass {
 ...
 $soapMyClassType = $wsdl->getType('MyClass');
 ]]></programlisting>
-            </para>
         </sect3>
 
         <sect3 id="zend.soap.wsdl.types.add_complex">

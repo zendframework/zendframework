@@ -189,7 +189,7 @@ class My_Component_HelloProvider
                 would probably do this in OO code:
             </para>
 
-        <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     implements Zend_Tool_Framework_Provider_Interface
 {

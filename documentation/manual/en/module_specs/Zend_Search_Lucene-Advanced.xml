@@ -113,8 +113,9 @@
         <para>
             Static object properties (see below) are destroyed <emphasis>after</emphasis> the last
             line of the executed script.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Searcher {
     private static $_index;
 
@@ -125,7 +126,6 @@ class Searcher {
 
 Searcher::initIndex();
 ]]></programlisting>
-        </para>
 
         <para>
             All the same, the destructor for static properties is correctly invoked at this point in
@@ -153,8 +153,9 @@ Searcher::initIndex();
             guarantees that if there are no document added or deleted after the call to
             <methodname>commit()</methodname>, then the <classname>Zend_Search_Lucene</classname>
             destructor has nothing to do and will not throw exception:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Searcher {
     private static $_index;
 
@@ -178,6 +179,5 @@ Searcher::initIndex();
 Searcher::commit();
 ...
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

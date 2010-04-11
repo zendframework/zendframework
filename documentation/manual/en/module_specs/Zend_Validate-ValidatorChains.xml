@@ -8,8 +8,9 @@
         following code demonstrates a way to solve the example from the
         <link linkend="zend.validate.introduction">introduction</link>, where a username must be
         between 6 and 12 alphanumeric characters:
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Create a validator chain and add validators to it
 $validatorChain = new Zend_Validate();
 $validatorChain->addValidator(
@@ -28,6 +29,7 @@ if ($validatorChain->isValid($username)) {
 }
 ]]></programlisting>
 
+    <para>
         Validators are run in the order they were added to <classname>Zend_Validate</classname>. In
         the above example, the username is first checked to ensure that its length is between 6 and
         12 characters, and then it is checked to ensure that it contains only alphanumeric
@@ -46,15 +48,15 @@ if ($validatorChain->isValid($username)) {
         are determined to be unnecessary or inappropriate for the situation. If the above example
         were written as follows, then the alphanumeric validation would not occur if the string
         length validation fails:
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $validatorChain->addValidator(
                     new Zend_Validate_StringLength(array('min' => 6,
                                                          'max' => 12)),
                     true)
                ->addValidator(new Zend_Validate_Alnum());
 ]]></programlisting>
-    </para>
 
     <para>
         Any object that implements <classname>Zend_Validate_Interface</classname> may be used in a

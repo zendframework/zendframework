@@ -206,8 +206,9 @@
         <para>
             The first one is to attach some class to the <classname>Zend_Soap_Server</classname>
             object which has to completely describe Web Service <acronym>API</acronym>:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 ...
 class MyClass {
     /**
@@ -243,22 +244,22 @@ $server->setObject(new MyClass());
 $server->handle();
 ]]></programlisting>
 
-            <note>
-                <title>Important!</title>
+        <note>
+            <title>Important!</title>
 
-                <para>
-                    You should completely describe each method using method docblock if you plan to
-                    use autodiscover functionality to prepare corresponding Web Service WSDL.
-                </para>
-            </note>
-        </para>
+            <para>
+                You should completely describe each method using method docblock if you plan to
+                use autodiscover functionality to prepare corresponding Web Service WSDL.
+            </para>
+        </note>
 
         <para>
             The second method of defining Web Service <acronym>API</acronym> is using set of
             functions and <methodname>addFunction()</methodname> or
             <methodname>loadFunctions()</methodname> methods:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 ...
 /**
  * This function ...
@@ -287,7 +288,6 @@ $server->addFunction('function2');
 ...
 $server->handle();
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.soap.server.request_response">
@@ -315,8 +315,9 @@ $server->handle();
                 standard input stream ('php://input'). It may be overridden either by supplying
                 optional parameter to the <methodname>handle()</methodname> method or by setting
                 request using <methodname>setRequest()</methodname> method:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
@@ -327,7 +328,6 @@ $server->handle($request);
 $server->setRequest();
 $server->handle();
 ]]></programlisting>
-            </para>
 
             <para>
                 Request object may be represented using any of the following:
@@ -370,15 +370,15 @@ $server->handle();
                 Last processed request may be retrieved using
                 <methodname>getLastRequest()</methodname> method as an <acronym>XML</acronym>
                 string:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
 $server->handle();
 $request = $server->getLastRequest();
 ]]></programlisting>
-            </para>
         </sect3>
 
         <sect3 id="zend.soap.server.request_response.response">
@@ -399,8 +399,9 @@ $request = $server->getLastRequest();
 
                 Generated response is returned by <methodname>handle()</methodname> method in this
                 case.
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
@@ -411,13 +412,13 @@ $server->setReturnResponse(true);
 $response = $server->handle();
 ...
 ]]></programlisting>
-            </para>
 
             <para>
                 Last response may be also retrieved by <methodname>getLastResponse()</methodname>
                 method for some post-processing:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
@@ -425,7 +426,6 @@ $server->handle();
 $response = $server->getLastResponse();
 ...
 ]]></programlisting>
-            </para>
         </sect3>
     </sect2>
 </sect1>

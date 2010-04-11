@@ -181,6 +181,7 @@ $client->setHeaders(array(
             type will be application/octet-stream.
             <example id="zend.http.client.file_uploads.example-1">
                 <title>Using setFileUpload to Upload Files</title>
+
                 <programlisting language="php"><![CDATA[
 // Uploading arbitrary data as a file
 $text = 'this is some plain text';

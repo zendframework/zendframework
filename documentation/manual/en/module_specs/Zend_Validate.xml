@@ -70,8 +70,9 @@
 
         <para>
             The following example illustrates validation of an e-mail address:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress();
 
 if ($validator->isValid($email)) {
@@ -83,7 +84,6 @@ if ($validator->isValid($email)) {
     }
 }
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.validate.introduction.messages">
@@ -116,8 +116,7 @@ if ($validator->isValid($email)) {
             which message template you are changing.
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8);
 
 $validator->setMessage(
@@ -132,13 +131,13 @@ if (!$validator->isValid('word')) {
     // "The string 'word' is too short; it must be at least 8 characters"
 }
 ]]></programlisting>
-        </para>
 
         <para>
             You can set multiple messages using the <methodname>setMessages()</methodname>
             method. Its argument is an array containing key/message pairs.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 
 $validator->setMessages( array(
@@ -148,7 +147,6 @@ $validator->setMessages( array(
         'The string \'%value%\' is too long'
 ));
 ]]></programlisting>
-        </para>
 
         <para>
             If your application requires even greater flexibility with which it
@@ -158,8 +156,9 @@ $validator->setMessages( array(
             it is the value you specified as the argument of
             <methodname>isValid()</methodname>. Other properties may be supported on a
             case-by-case basis in each validation class.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 
 if (!validator->isValid('word')) {
@@ -172,7 +171,6 @@ if (!validator->isValid('word')) {
         . "\n";
 }
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.validate.introduction.static">
@@ -189,24 +187,24 @@ if (!validator->isValid('word')) {
             namespace. The <methodname>is()</methodname> method automatically loads the
             class, creates an instance, and applies the <methodname>isValid()</methodname>
             method to the data input.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (Zend_Validate::is($email, 'EmailAddress')) {
     // Yes, email appears to be valid
 }
 ]]></programlisting>
-        </para>
 
         <para>
             You can also pass an array of constructor arguments, if they
             are needed for the validator.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
     // Yes, $value is between 1 and 12
 }
 ]]></programlisting>
-        </para>
 
         <para>
             The <methodname>is()</methodname> method returns a boolean value, the same as

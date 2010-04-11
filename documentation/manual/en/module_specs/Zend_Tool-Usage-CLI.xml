@@ -363,7 +363,6 @@ zf create form Comment -m Blog
                 The following will have to be run on the command line:
             </para>
 
-
             <programlisting language="text"><![CDATA[
 zf configure dbadapter "adapter=Pdo_Mysql&username=test&password=test&dbname=test"
 ]]></programlisting>

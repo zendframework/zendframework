@@ -660,6 +660,7 @@ $response   = $twitter->friendship->destroy('myoldfriend');
 
                 <example id="zend.service.twitter.friendship.exists">
                     <title>Checking friend existence</title>
+
                     <programlisting language="php"><![CDATA[
 $twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response   = $twitter->friendship->exists('myfriend');
@@ -718,6 +719,7 @@ $response   = $twitter->favorite->favorites();
 
                 <example id="zend.service.twitter.favorite.create">
                     <title>Creating favorites</title>
+
                     <programlisting language="php"><![CDATA[
 $twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response   = $twitter->favorite->create(12351);

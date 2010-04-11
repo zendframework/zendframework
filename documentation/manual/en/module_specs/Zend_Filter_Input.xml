@@ -137,12 +137,13 @@ $validators = array(
             <listitem>
                 <para>
                     A single string scalar, which is mapped to a class name.
-                    <programlisting language="php"><![CDATA[
+                </para>
+
+                <programlisting language="php"><![CDATA[
 $validators = array(
     'month'   => 'Digits',
 );
 ]]></programlisting>
-                </para>
             </listitem>
 
             <listitem>
@@ -150,14 +151,15 @@ $validators = array(
                     An object instance of one of the classes that implement
                     <classname>Zend_Filter_Interface</classname> or
                     <classname>Zend_Validate_Interface</classname>.
-                    <programlisting language="php"><![CDATA[
+                </para>
+
+                <programlisting language="php"><![CDATA[
 $digits = new Zend_Validate_Digits();
 
 $validators = array(
     'month'   => $digits
 );
 ]]></programlisting>
-                </para>
             </listitem>
 
             <listitem>
@@ -168,8 +170,9 @@ $validators = array(
                     described above. In addition, you can use a third choice:
                     an array containing a string mapping to the class name
                     followed by arguments to pass to its constructor.
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $validators = array(
     'month'   => array(
         'Digits',                // string
@@ -178,7 +181,6 @@ $validators = array(
     )
 );
 ]]></programlisting>
-                </para>
             </listitem>
         </itemizedlist>
 
@@ -468,7 +470,7 @@ $m = $input->getUnescaped('month'); // not escaped
                     fields.
                 </para>
 
-            <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $validators = array('*' => array());
 
 $input = new Zend_Filter_Input($filters, $validators, $data, $options);

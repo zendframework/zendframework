@@ -157,8 +157,9 @@
                         <constant>SOAP_COMPRESSION_GZIP</constant> and
                         <constant>SOAP_COMPRESSION_DEFLATE</constant> options which may be used like
                         this:
+                    </para>
 
-                        <programlisting language="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Accept response compression
 $client = new Zend_Soap_Client("some.wsdl",
   array('compression' => SOAP_COMPRESSION_ACCEPT));
@@ -173,7 +174,6 @@ $client = new Zend_Soap_Client("some.wsdl",
 $client = new Zend_Soap_Client("some.wsdl",
   array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_DEFLATE));
 ]]></programlisting>
-                    </para>
                 </listitem>
             </itemizedlist>
         </para>
@@ -194,8 +194,9 @@ $client = new Zend_Soap_Client("some.wsdl",
 
         <para>
             Use it like in the following example:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 //****************************************************************
 //                Server code
 //****************************************************************
@@ -243,6 +244,5 @@ $result1 = $client->method1(10);
 // $result2 is a float
 $result2 = $client->method2(22, 'some string');
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

@@ -58,14 +58,14 @@
             Following is a basic example of using a filter upon two input data,
             the ampersand (<emphasis>&amp;</emphasis>) and double quote
             (<emphasis>&quot;</emphasis>) characters:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
 echo $htmlEntities->filter('&'); // &amp;
 echo $htmlEntities->filter('"'); // &quot;
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.filter.introduction.static">
@@ -82,22 +82,22 @@ echo $htmlEntities->filter('"'); // &quot;
             <methodname>staticFilter()</methodname> method automatically loads the class, creates
             an instance, and applies the <methodname>filter()</methodname> method to the data
             input.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo Zend_Filter::filterStatic('&', 'HtmlEntities');
 ]]></programlisting>
-        </para>
 
         <para>
             You can also pass an array of constructor arguments, if they
             are needed for the filter class.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo Zend_Filter::filterStatic('"',
                                'HtmlEntities',
                                array('quotestyle' => ENT_QUOTES));
 ]]></programlisting>
-        </para>
 
         <para>
             The static usage can be convenient for invoking a filter ad hoc,

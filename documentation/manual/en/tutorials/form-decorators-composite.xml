@@ -8,7 +8,6 @@
         example showing a "date of birth element":
     </para>
 
-
     <programlisting language="php"><![CDATA[
 <div class="element">
     <?php echo $form->dateOfBirth->renderLabel() ?>

@@ -525,7 +525,7 @@ class UserController extends Zend_Controller_Action
             And a view script for displaying the form:
         </para>
 
-<programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <h2>Please login:</h2>
 <?php echo $this->form ?>
 ]]></programlisting>

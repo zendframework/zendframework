@@ -19,13 +19,15 @@
     <para>
         Each instance of <classname>Zend_Session_Namespace</classname> corresponds to an entry of
         the <varname>$_SESSION</varname> superglobal array, where the namespace is used as the key.
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $myNamespace = new Zend_Session_Namespace('myNamespace');
 
 // $myNamespace corresponds to $_SESSION['myNamespace']
 ]]></programlisting>
 
+    <para>
         It is possible to use <classname>Zend_Session</classname> in conjunction with other code
         that uses <varname>$_SESSION</varname> directly. To avoid problems, however, it is highly
         recommended that such code only uses parts of <varname>$_SESSION</varname> that do not

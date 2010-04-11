@@ -89,6 +89,7 @@
 
         <example id="zend.view.helpers.initial.headscript.conditional">
             <title>Headscript With Conditional Comments</title>
+
             <programlisting language="php"><![CDATA[
 // adding scripts
 $this->headScript()->appendFile(

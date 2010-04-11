@@ -473,7 +473,7 @@ $form->setElementDecorators(
                     elements; a common case is to <methodname>trim()</methodname> all values:
                 </para>
 
-        <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->setElementFilters(array('StringTrim'));
 ]]></programlisting>
             </example>

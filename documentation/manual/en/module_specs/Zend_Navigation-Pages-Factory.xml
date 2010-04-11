@@ -83,10 +83,10 @@ $page = Zend_Navigation_Page::factory(array(
     <example id="zend.navigation.pages.factory.example.custom">
         <title>Creating a custom page type using the page factory</title>
 
-         <para>
-             To create a custom page type using the factory, use the option
-             <code>type</code> to specify a class name to instantiate.
-         </para>
+        <para>
+            To create a custom page type using the factory, use the option
+            <code>type</code> to specify a class name to instantiate.
+        </para>
 
         <programlisting language="php"><![CDATA[
 class My_Navigation_Page extends Zend_Navigation_Page

@@ -232,7 +232,7 @@ php_value "short_open_tag" "on"
                     long tags on the fly:
                 </para>
 
-        <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $view->setUseStreamWrapper(true);
 ]]></programlisting>
 

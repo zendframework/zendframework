@@ -125,8 +125,8 @@
                 environment variable. If the environment variable
                 <constant>ZF_CONFIG_FILE</constant> is set, then its value will be used as the
                 location of the configuration file to use with the Console Client. The
-                <constant>ZF_CONFIG_FILE</constant> can point to any Zend_Config readable INI, XML
-                or <acronym>PHP</acronym> File.
+                <constant>ZF_CONFIG_FILE</constant> can point to any
+                <classname>Zend_Config</classname> readable INI, XML or <acronym>PHP</acronym> File.
             </para>
 
             <para>

@@ -41,8 +41,8 @@
     </para>
 
     <para>
-        To get started using Zend_Layout, first we need to inform our bootstrap to use the
-        <classname>Layout</classname> resource. This can be done using the
+        To get started using <classname>Zend_Layout</classname>, first we need to inform our
+        bootstrap to use the <classname>Layout</classname> resource. This can be done using the
         <command>zf enable layout</command> command:
     </para>
 

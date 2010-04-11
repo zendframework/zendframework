@@ -268,8 +268,8 @@ roam~0.8
         </para>
 
         <para>
-            So Zend_Search_Lucene sets a limit of matching terms per query (subquery). This limit
-            can be retrieved and set using
+            So <classname>Zend_Search_Lucene</classname> sets a limit of matching terms per query
+            (subquery). This limit can be retrieved and set using
             <code>Zend_Search_Lucene::getTermsPerQueryLimit()</code>/<code>Zend_Search_Lucene::setTermsPerQueryLimit($limit)</code>
             methods.
         </para>

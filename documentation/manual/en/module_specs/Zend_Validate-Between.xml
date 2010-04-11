@@ -12,8 +12,8 @@
         <title>Zend_Validate_Between supports only number validation</title>
 
         <para>
-            It should be noted that Zend_Validate_Between supports only the validation of numbers.
-            Strings or dates can not be validated with this validator.
+            It should be noted that <classname>Zend_Validate_Between</classname> supports only the
+            validation of numbers. Strings or dates can not be validated with this validator.
         </para>
     </note>
 

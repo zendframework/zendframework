@@ -235,9 +235,10 @@ $logger->setEventItem('pid', getmypid());
         <title>Log PHP Errors</title>
 
         <para>
-            Zend_Log can also be used to log <acronym>PHP</acronym> errors. Calling
-            <methodname>registerErrorHandler()</methodname> will add Zend_Log before the current
-            error handler, and will pass the error along as well.
+            <classname>Zend_Log</classname> can also be used to log <acronym>PHP</acronym> errors.
+            Calling <methodname>registerErrorHandler()</methodname> will add
+            <classname>Zend_Log</classname> before the current error handler, and will pass the
+            error along as well.
         </para>
 
         <table id="zend.log.overview.as-errorHandler.properties.table-1">

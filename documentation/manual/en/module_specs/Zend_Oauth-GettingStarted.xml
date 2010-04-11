@@ -14,8 +14,8 @@
     <para>
         Assuming we have obtained a key and secret, we can start the OAuth workflow
         by setting up a <classname>Zend_Oauth_Consumer</classname> instance as
-        follows passing it a configuration (either an array or <classname>
-        Zend_Config</classname> object).
+        follows passing it a configuration (either an array or <classname>Zend_Config</classname>
+        object).
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -57,8 +57,8 @@ $consumer = new Zend_Oauth_Consumer($config);
 
     <para>
         In addition, you should note several other configuration values not
-        explicitly used: requestMethod and requestScheme. By default, <classname>
-        Zend_Oauth_Consumer</classname> sends requests as POST (except for a
+        explicitly used: requestMethod and requestScheme. By default,
+        <classname>Zend_Oauth_Consumer</classname> sends requests as POST (except for a
         redirect which uses GET). The customised client (see later) also includes its
         authorization by way of a header. Some services may, at their discretion,
         require alternatives. You can reset the requestMethod (which defaults
@@ -175,9 +175,9 @@ if (!empty($_GET) && isset($_SESSION['TWITTER_REQUEST_TOKEN'])) {
     <para>
         Success! We have an authorized access token - so it's time to actually
         use the Twitter <acronym>API</acronym>. Since the access token must be included with every
-        single <acronym>API</acronym> request, Zend_Oauth_Consumer offers a ready-to-go HTTP client
-        (a subclass of <classname>Zend_Http_Client</classname>) to use either
-        by itself or by passing it as a custom HTTP Client to another library or
+        single <acronym>API</acronym> request, <classname>Zend_Oauth_Consumer</classname> offers a
+        ready-to-go HTTP client (a subclass of <classname>Zend_Http_Client</classname>) to use
+        either by itself or by passing it as a custom HTTP Client to another library or
         component. Here's an example of using it standalone. This can be done
         from anywhere in your application, so long as you can access the OAuth
         configuration and retrieve the final authorized access token.

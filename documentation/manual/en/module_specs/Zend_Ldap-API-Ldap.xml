@@ -142,8 +142,8 @@
                     <entry><code>Zend_Ldap disconnect()</code></entry>
 
                     <entry>
-                        Disconnects the Zend_Ldap instance from the <acronym>LDAP</acronym>
-                        server.
+                        Disconnects the <classname>Zend_Ldap</classname> instance from the
+                        <acronym>LDAP</acronym> server.
                     </entry>
                 </row>
 
@@ -154,10 +154,10 @@
                     </entry>
 
                     <entry>
-                        Connects the Zend_Ldap instance to the given <acronym>LDAP</acronym> server.
-                        All parameters are optional and will be taken from the
-                        <acronym>LDAP</acronym> connection and binding parameters passed to the
-                        instance via the construtor or via
+                        Connects the <classname>Zend_Ldap</classname> instance to the given
+                        <acronym>LDAP</acronym> server. All parameters are optional and will be
+                        taken from the <acronym>LDAP</acronym> connection and binding parameters
+                        passed to the instance via the construtor or via
                         <methodname>Zend_Ldap::setOptions()</methodname> when set to
                         <constant>NULL</constant>.
                     </entry>

@@ -818,9 +818,9 @@ class Zend_Tool_Framework_Client_Storage
         <title>Zend_Tool_Project Extensions</title>
 
         <para>
-            Zend_Tool_Project exposes a rich set of functionality and capabilities that make the
-            task of creating new providers, specficially those targetting project easier and more
-            manageable.
+            <classname>Zend_Tool_Project</classname> exposes a rich set of functionality and
+            capabilities that make the task of creating new providers, specficially those targetting
+            project easier and more manageable.
         </para>
 
         <sect3 id="zend.tool.extending.zend-tool-project.architecture">

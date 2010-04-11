@@ -17,7 +17,7 @@
             treated by the client by resending the same request to the
             specified location - using the same request method. However, most
             clients to not implement this and always use a GET request when
-            redirecting. By default, Zend_Http_Client does the same - when
+            redirecting. By default, <classname>Zend_Http_Client</classname> does the same - when
             redirecting on a 301 or 302 response, all GET and POST parameters
             are reset, and a GET request is sent to the new location. This
             behavior can be changed by setting the 'strictredirects' configuration
@@ -45,7 +45,7 @@ $client->setConfig(array('strictredirects' => false));
         <title>Adding Cookies and Using Cookie Persistence</title>
 
         <para>
-            Zend_Http_Client provides an easy interface for adding cookies
+            <classname>Zend_Http_Client</classname> provides an easy interface for adding cookies
             to your request, so that no direct header modification is
             required. This is done using the setCookie() method. This method
             can be used in several ways:
@@ -67,12 +67,12 @@ $client->setCookie($cookie);
 ]]></programlisting>
             </example>
 
-            For more information about Zend_Http_Cookie objects, see
+            For more information about <classname>Zend_Http_Cookie</classname> objects, see
             <xref linkend="zend.http.cookies" />.
         </para>
 
         <para>
-            Zend_Http_Client also provides the means for cookie stickiness -
+            <classname>Zend_Http_Client</classname> also provides the means for cookie stickiness -
             that is having the client internally store all sent and received
             cookies, and resend them automatically on subsequent requests. This
             is useful, for example when you need to log in to a remote site
@@ -102,7 +102,7 @@ $client->request('GET');
 ]]></programlisting>
             </example>
 
-            For more information about the Zend_Http_CookieJar class, see
+            For more information about the <classname>Zend_Http_CookieJar</classname> class, see
             <xref linkend="zend.http.cookies.cookiejar" />.
         </para>
     </sect2>
@@ -167,15 +167,15 @@ $client->setHeaders(array(
             This method takes a file name as the first parameter, a form name
             as the second parameter, and data as a third optional parameter.
             If the third data parameter is <constant>NULL</constant>, the first file name parameter
-            is considered to be a real file on disk, and Zend_Http_Client will
-            try to read this file and upload it. If the data parameter is not
+            is considered to be a real file on disk, and <classname>Zend_Http_Client</classname>
+            will try to read this file and upload it. If the data parameter is not
             <constant>NULL</constant>, the first file name parameter will be sent as the file name,
             but no actual file needs to exist on the disk.
             The second form name parameter is always required, and is equivalent
             to the "name" attribute of an &gt;input&lt; tag, if the file was to
             be uploaded through an HTML form.
             A fourth optional parameter provides the file's content-type. If
-            not specified, and Zend_Http_Client reads the file from the disk,
+            not specified, and <classname>Zend_Http_Client</classname> reads the file from the disk,
             the mime_content_type function will be used to guess the file's
             content type, if it is available. In any case, the default MIME
             type will be application/octet-stream.
@@ -219,7 +219,7 @@ $client->request('POST');
         <title>Sending Raw POST Data</title>
 
         <para>
-            You can use a Zend_Http_Client to send raw POST data using the
+            You can use a <classname>Zend_Http_Client</classname> to send raw POST data using the
             setRawData() method. This method takes two parameters: the first
             is the data to send in the request body. The second optional
             parameter is the content-type of the data. While this parameter is
@@ -263,8 +263,8 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
         <title>HTTP Authentication</title>
 
         <para>
-            Currently, Zend_Http_Client only supports basic HTTP authentication.
-            This feature is utilized using the <methodname>setAuth()</methodname>
+            Currently, <classname>Zend_Http_Client</classname> only supports basic HTTP
+            authentication. This feature is utilized using the <methodname>setAuth()</methodname>
             method, or by specifying a username and a password in the URI. The
             <methodname>setAuth()</methodname> method
             takes 3 parameters: The user name, the password and an optional

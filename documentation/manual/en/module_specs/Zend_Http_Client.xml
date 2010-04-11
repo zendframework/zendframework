@@ -18,9 +18,9 @@
 
         <para>
             The class constructor optionally accepts a URL as its first parameter
-            (can be either a string or a Zend_Uri_Http object), and an array or
-            Zend_Config object containing configuration options. Both can be left out,
-            and set later using the setUri() and setConfig() methods.
+            (can be either a string or a <classname>Zend_Uri_Http</classname> object), and an array
+            or <classname>Zend_Config</classname> object containing configuration options. Both can
+            be left out, and set later using the setUri() and setConfig() methods.
 
             <example id="zend.http.client.introduction.example-1">
                 <title>Instantiating a Zend_Http_Client Object</title>
@@ -45,11 +45,12 @@ $client->setConfig($config);
 
             <note>
                 <para>
-                    Zend_Http_Client uses Zend_Uri_Http to validate URLs. This means
+                    <classname>Zend_Http_Client</classname> uses
+                    <classname>Zend_Uri_Http</classname> to validate URLs. This means
                     that some special characters like the pipe symbol ('|') or the
                     caret symbol ('^') will not be accepted in the URL by default.
                     This can be modified by setting the 'allow_unwise' option of
-                    Zend_Uri to '<constant>TRUE</constant>'. See <xref
+                    <classname>Zend_Uri</classname> to '<constant>TRUE</constant>'. See <xref
                         linkend="zend.uri.validation.allowunwise" /> for more information.
                 </para>
             </note>

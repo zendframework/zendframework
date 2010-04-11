@@ -26,10 +26,10 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
 // $myNamespace corresponds to $_SESSION['myNamespace']
 ]]></programlisting>
 
-        It is possible to use Zend_Session in conjunction with other code that uses
-        <varname>$_SESSION</varname> directly. To avoid problems, however, it is highly recommended
-        that such code only uses parts of <varname>$_SESSION</varname> that do not correspond to
-        instances of <classname>Zend_Session_Namespace</classname>.
+        It is possible to use <classname>Zend_Session</classname> in conjunction with other code
+        that uses <varname>$_SESSION</varname> directly. To avoid problems, however, it is highly
+        recommended that such code only uses parts of <varname>$_SESSION</varname> that do not
+        correspond to instances of <classname>Zend_Session_Namespace</classname>.
     </para>
 
     <sect2 id="zend.session.basic_usage.basic_examples">

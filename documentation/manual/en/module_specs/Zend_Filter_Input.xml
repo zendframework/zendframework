@@ -148,7 +148,8 @@ $validators = array(
             <listitem>
                 <para>
                     An object instance of one of the classes that implement
-                    Zend_Filter_Interface or Zend_Validate_Interface.
+                    <classname>Zend_Filter_Interface</classname> or
+                    <classname>Zend_Validate_Interface</classname>.
                     <programlisting language="php"><![CDATA[
 $digits = new Zend_Validate_Digits();
 

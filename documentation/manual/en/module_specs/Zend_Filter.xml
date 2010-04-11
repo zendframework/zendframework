@@ -78,7 +78,7 @@ echo $htmlEntities->filter('"'); // &quot;
             The first argument of this method is a data input value, that you
             would pass to the <methodname>filter()</methodname> method. The second
             argument is a string, which corresponds to the basename of the
-            filter class, relative to the Zend_Filter namespace. The
+            filter class, relative to the <classname>Zend_Filter</classname> namespace. The
             <methodname>staticFilter()</methodname> method automatically loads the class, creates
             an instance, and applies the <methodname>filter()</methodname> method to the data
             input.

@@ -255,7 +255,7 @@ interface Zend_Paginator_AdapterAggregate
             The interface is fairly small and only expects you to return an instance of
             <classname>Zend_Paginator_Adapter_Abstract</classname>. An Adapter Aggregate instance is
             then recognized by both <code>Zend_Paginator::factory</code> and the constructor of
-            Zend_Paginator and handled accordingly.
+            <classname>Zend_Paginator</classname> and handled accordingly.
         </para>
     </sect2>
 </sect1>

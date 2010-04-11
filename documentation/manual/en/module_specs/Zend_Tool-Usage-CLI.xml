@@ -385,10 +385,10 @@ zf configure dbadapter "adapter=Pdo_Sqlite&dbname=../data/test.db" -s developmen
             <title>DbTable</title>
 
             <para>
-                The DbTable provider is responsible for creating Zend_Db_Table
-                model/data access files for your application to consume, with the proper
-                class name, and in the proper location in the application. The two
-                important pieces of information are the <emphasis>DbTable name</emphasis>,
+                The DbTable provider is responsible for creating
+                <classname>Zend_Db_Table</classname> model/data access files for your application to
+                consume, with the proper class name, and in the proper location in the application.
+                The two important pieces of information are the <emphasis>DbTable name</emphasis>,
                 and the <emphasis>actual database table name</emphasis>. For example:
             </para>
 

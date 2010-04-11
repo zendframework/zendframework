@@ -68,7 +68,7 @@ resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
 ]]></programlisting>
 
     <para>
-        The final INI file should look as follows:
+        The final <acronym>INI</acronym> file should look as follows:
     </para>
 
     <programlisting language="ini"><![CDATA[

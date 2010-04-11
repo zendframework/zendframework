@@ -202,13 +202,13 @@ phpSettings.display_errors = 1
 ]]></programlisting>
 
         <para>
-            Several things about this file should be noted. First, when using INI-style
-            configuration, you can reference constants directly and expand them;
-            <constant>APPLICATION_PATH</constant> is actually a constant. Additionally note that
-            there are several sections defined: production, staging, testing, and development. The
-            latter three inherit settings from the "production" environment. This is a useful way to
-            organize configuration to ensure that appropriate settings are available in each stage
-            of application development.
+            Several things about this file should be noted. First, when using
+            <acronym>INI</acronym>-style configuration, you can reference constants directly and
+            expand them; <constant>APPLICATION_PATH</constant> is actually a constant. Additionally
+            note that there are several sections defined: production, staging, testing, and
+            development. The latter three inherit settings from the "production" environment. This
+            is a useful way to organize configuration to ensure that appropriate settings are
+            available in each stage of application development.
         </para>
     </sect2>
 

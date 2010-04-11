@@ -376,16 +376,16 @@ $translate->addTranslation(
         </example>
 
         <para>
-            <acronym>INI</acronym> files have several restrictions. If a value in the ini file
-            contains any non-alphanumeric characters it needs to be enclosed in double-quotes
-            (<code>"</code>). There are also reserved words which must not be used as keys for ini
-            files. These include: <constant>NULL</constant>, <code>yes</code>, <code>no</code>,
-            <constant>TRUE</constant>, and <constant>FALSE</constant>. Values
-            <constant>NULL</constant>, <code>no</code> and <constant>FALSE</constant> results in
-            <code>""</code>, <code>yes</code> and <constant>TRUE</constant> results in
-            <code>1</code>. Characters <code>{}|&amp;~![()"</code> must not be used anywhere in the
-            key and have a special meaning in the value. Do not use them as it will produce
-            unexpected behaviour.
+            <acronym>INI</acronym> files have several restrictions. If a value in the
+            <acronym>INI</acronym> file contains any non-alphanumeric characters it needs to be
+            enclosed in double-quotes (<code>"</code>). There are also reserved words which must not
+            be used as keys for <acronym>INI</acronym> files. These include:
+            <constant>NULL</constant>, <code>yes</code>, <code>no</code>, <constant>TRUE</constant>,
+            and <constant>FALSE</constant>. Values <constant>NULL</constant>, <code>no</code> and
+            <constant>FALSE</constant> results in <code>""</code>, <code>yes</code> and
+            <constant>TRUE</constant> results in <code>1</code>. Characters
+            <code>{}|&amp;~![()"</code> must not be used anywhere in the key and have a special
+            meaning in the value. Do not use them as it will produce unexpected behaviour.
         </para>
     </sect2>
 </sect1>

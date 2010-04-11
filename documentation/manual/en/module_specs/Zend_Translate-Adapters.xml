@@ -46,7 +46,7 @@
 
                 <row>
                     <entry>Ini</entry>
-                    <entry>Use simple ini (*.ini) files</entry>
+                    <entry>Use simple <acronym>INI</acronym> (*.ini) files</entry>
 
                     <entry>
                         Simple text file format; fast; possible problems with unicode characters

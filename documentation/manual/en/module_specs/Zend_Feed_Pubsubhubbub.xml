@@ -648,8 +648,8 @@ class CallbackController extends Zend_Controller_Action
         <para>
             Actually adding the route which would map the path-appended key
             to a parameter for retrieval from a controller can be accomplished using
-            a Route configuration such as the INI formatted example below for use
-            with <classname>Zend_Application</classname> bootstrapping.
+            a Route configuration such as the <acronym>INI</acronym> formatted example below for
+            use with <classname>Zend_Application</classname> bootstrapping.
         </para>
 
         <programlisting language="dosini"><![CDATA[

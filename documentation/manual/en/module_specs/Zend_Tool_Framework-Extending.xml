@@ -126,7 +126,8 @@
                 <constant>ZF_CONFIG_FILE</constant> is set, then its value will be used as the
                 location of the configuration file to use with the Console Client. The
                 <constant>ZF_CONFIG_FILE</constant> can point to any
-                <classname>Zend_Config</classname> readable INI, XML or <acronym>PHP</acronym> File.
+                <classname>Zend_Config</classname> readable <acronym>INI</acronym>, XML or
+                <acronym>PHP</acronym> File.
             </para>
 
             <para>
@@ -141,11 +142,11 @@
 
             <para>
                 The configuration file should be structured as a <classname>Zend_Config</classname>
-                configuration file, in ini format, and without any sections being defined. First
-                level keys should be used by the provider searching for a specific value. For
-                example, if the "Project" provider is expecting a "profiles" directory, then it
-                should typically be understood that it will search for the following ini key value
-                pair:
+                configuration file, in <acronym>INI</acronym> format, and without any sections being
+                defined. First level keys should be used by the provider searching for a specific
+                value. For example, if the "Project" provider is expecting a "profiles" directory,
+                then it should typically be understood that it will search for the following
+                <acronym>INI</acronym> key value pair:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -153,12 +154,12 @@ project.profile = some/path/to/some-directory
 ]]></programlisting>
 
             <para>
-                The only reserved ini prefix is the value "php". The "php" prefix to values will be
-                reserved to store names and values of runtime settable <acronym>PHP</acronym>
-                values, such as <property>include_path</property> or
+                The only reserved <acronym>INI</acronym> prefix is the value "php". The "php" prefix
+                to values will be reserved to store names and values of runtime settable
+                <acronym>PHP</acronym> values, such as <property>include_path</property> or
                 <property>error_reporting</property>. To override the
                 <property>include_path</property> and <property>error_reporting</property> with an
-                ini value, a developer would set:
+                <acronym>INI</acronym> value, a developer would set:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -168,8 +169,9 @@ php.error_reporting = 1
 
             <important>
                 <para>
-                    The reserved prefix "php" only works with INI files. You can't set
-                    <acronym>PHP</acronym> INI values with <acronym>PHP</acronym> or XML config.
+                    The reserved prefix "php" only works with <acronym>INI</acronym> files. You
+                    can't set <acronym>PHP</acronym> <acronym>INI</acronym> values with
+                    <acronym>PHP</acronym> or XML config.
                 </para>
             </important>
         </sect3>

@@ -203,7 +203,7 @@ $pdf->save($pdfPath);
     </para>
 
     <para>
-        This XML document can be retrieved and attached to the PDF with
+        This <acronym>XML</acronym> document can be retrieved and attached to the PDF with
         <methodname>Zend_Pdf::getMetadata()</methodname> and
         <methodname>Zend_Pdf::setMetadata($metadata)</methodname> methods:
 

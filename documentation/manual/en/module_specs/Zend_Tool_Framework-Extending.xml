@@ -126,8 +126,8 @@
                 <constant>ZF_CONFIG_FILE</constant> is set, then its value will be used as the
                 location of the configuration file to use with the Console Client. The
                 <constant>ZF_CONFIG_FILE</constant> can point to any
-                <classname>Zend_Config</classname> readable <acronym>INI</acronym>, XML or
-                <acronym>PHP</acronym> File.
+                <classname>Zend_Config</classname> readable <acronym>INI</acronym>,
+                <acronym>XML</acronym> or <acronym>PHP</acronym> File.
             </para>
 
             <para>
@@ -171,7 +171,7 @@ php.error_reporting = 1
                 <para>
                     The reserved prefix "php" only works with <acronym>INI</acronym> files. You
                     can't set <acronym>PHP</acronym> <acronym>INI</acronym> values with
-                    <acronym>PHP</acronym> or XML config.
+                    <acronym>PHP</acronym> or <acronym>XML</acronym> config.
                 </para>
             </important>
         </sect3>

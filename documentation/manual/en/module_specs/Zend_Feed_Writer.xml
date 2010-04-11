@@ -455,10 +455,13 @@ $out = $feed->export('atom');
 
                     <row>
                         <entry><methodname>export()</methodname></entry>
-                        <entry>Exports the entire data hierarchy to an XML feed. The method
-                        has two parameters. The first is the feed type, one of "atom"
-                        or "rss". The second is an optional boolean to set whether
-                        Exceptions are thrown. The default is TRUE.</entry>
+
+                        <entry>
+                            Exports the entire data hierarchy to an <acronym>XML</acronym> feed. The
+                            method has two parameters. The first is the feed type, one of "atom"
+                            or "rss". The second is an optional boolean to set whether
+                            Exceptions are thrown. The default is <constant>TRUE</constant>.
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -642,9 +645,9 @@ $out = $feed->export('atom');
                         <entry><methodname>setCommentFeedLink()</methodname></entry>
 
                         <entry>
-                            Sets a link to a XML feed containing comments associated with this
-                            entry. The parameter is an array containing the keys "uri" and "type",
-                            where the type is one of "rdf", "rss" or "atom".
+                            Sets a link to a <acronym>XML</acronym> feed containing comments
+                            associated with this entry. The parameter is an array containing the
+                            keys "uri" and "type", where the type is one of "rdf", "rss" or "atom".
                         </entry>
                     </row>
 

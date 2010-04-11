@@ -368,7 +368,8 @@ $server->handle();
 
             <para>
                 Last processed request may be retrieved using
-                <methodname>getLastRequest()</methodname> method as an XML string:
+                <methodname>getLastRequest()</methodname> method as an <acronym>XML</acronym>
+                string:
 
                 <programlisting language="php"><![CDATA[
 ...

@@ -61,8 +61,9 @@ $logger->info('there');
         <title>Formatting to XML</title>
 
         <para>
-            <classname>Zend_Log_Formatter_Xml</classname> formats log data into XML strings.
-            By default, it automatically logs all items in the event data array:
+            <classname>Zend_Log_Formatter_Xml</classname> formats log data into
+            <acronym>XML</acronym> strings. By default, it automatically logs all items in the event
+            data array:
 
             <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');
@@ -77,7 +78,7 @@ $logger->info('informational message');
         </para>
 
         <para>
-            The code above outputs the following XML (space added for clarity):
+            The code above outputs the following <acronym>XML</acronym> (space added for clarity):
 
             <programlisting language="xml"><![CDATA[
 <logEntry>
@@ -91,7 +92,7 @@ $logger->info('informational message');
 
         <para>
             It's possible to customize the root element as well as specify a mapping
-            of XML elements to the items in the event data array. The constructor
+            of <acronym>XML</acronym> elements to the items in the event data array. The constructor
             of <classname>Zend_Log_Formatter_Xml</classname> accepts a string with the name of
             the root element as the first parameter and an associative array with
             the element mapping as the second parameter:

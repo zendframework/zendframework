@@ -101,6 +101,14 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $handle->call());
     }
 
+    public function testClosureCallbackShouldBeInvokedByCall()
+    {
+        $handle = new Handler(null, function () {
+            return 'foo';
+        });
+        $this->assertEquals('foo', $handle->call());
+    }
+
     public function handleCall()
     {
         $this->args = func_get_args();

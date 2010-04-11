@@ -24,17 +24,20 @@
 namespace Zend\Messenger;
 
 /**
- * Invalid callback exception
+ * Interface for global (static) message delivery
  *
- * @uses       Exception
- * @uses       Zend\Messenger\Exception
  * @category   Zend
  * @package    Zend_Messenger
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidCallbackException
-    extends \Exception
-    implements Exception
+interface StaticDelivery
 {
+    public static function notify($topic, $args = null);
+    public static function notifyUntil($callback, $topic, $args = null);
+    public static function attach($topic, $context, $handler = null);
+    public static function detach(Handler $handle);
+    public static function getTopics();
+    public static function getHandlers($topic);
+    public static function clearHandlers($topic);
 }

@@ -83,17 +83,29 @@ class GlobalMessengerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(Messenger::detach($handle1));
     }
 
-    public function testRetrievingAttachdHandlersShouldReturnEmptyArrayWhenTopicDoesNotExist()
+    public function testRetrievingAttachedHandlersShouldReturnEmptyArrayWhenTopicDoesNotExist()
     {
         $handles = Messenger::getHandlers('test');
         $this->assertTrue(empty($handles));
     }
 
-    public function testNotifyShouldNotifyAttachdHandlers()
+    public function testNotifyShouldNotifyAttachedHandlers()
     {
         $handle = Messenger::attach('test', $this, 'handleTestTopic');
         Messenger::notify('test', 'test message');
         $this->assertEquals('test message', $this->message);
+    }
+
+    public function testNotifyUntilShouldReturnAsSoonAsCallbackReturnsTrue()
+    {
+        Messenger::attach('foo.bar', 'strpos');
+        Messenger::attach('foo.bar', 'strstr');
+        $value = Messenger::notifyUntil(
+            function ($value) { return (!$value); },
+            'foo.bar',
+            'foo', 'f'
+        );
+        $this->assertSame(0, $value);
     }
 
     public function handleTestTopic($message)

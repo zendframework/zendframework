@@ -113,24 +113,6 @@ class MessengerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(0, $value);
     }
 
-    public function testFilterShouldPassReturnValueOfEachAttachrToNextAttachr()
-    {
-        $this->messenger->attach('string.transform', 'trim');
-        $this->messenger->attach('string.transform', 'str_rot13');
-        $value = $this->messenger->filter('string.transform', ' foo ');
-        $this->assertEquals(\str_rot13('foo'), $value);
-    }
-
-    public function testFilterShouldAllowMultipleArgumentsButFilterOnlyFirst()
-    {
-        $this->messenger->attach('filter.test', $this, 'filterTestCallback1');
-        $this->messenger->attach('filter.test', $this, 'filterTestCallback2');
-        $obj = (object) array('foo' => 'bar', 'bar' => 'baz');
-        $value = $this->messenger->filter('filter.test', '', $obj);
-        $this->assertEquals('foo:bar;bar:baz;', $value);
-        $this->assertEquals((object) array('foo' => 'bar', 'bar' => 'baz'), $obj);
-    }
-
     public function handleTestTopic($message)
     {
         $this->message = $message;
@@ -139,21 +121,5 @@ class MessengerTest extends \PHPUnit_Framework_TestCase
     public function evaluateStringCallback($value)
     {
         return (!$value);
-    }
-
-    public function filterTestCallback1($string, $object)
-    {
-        if (isset($object->foo)) {
-            $string .= 'foo:' . $object->foo . ';';
-        }
-        return $string;
-    }
-
-    public function filterTestCallback2($string, $object)
-    {
-        if (isset($object->bar)) {
-            $string .= 'bar:' . $object->bar . ';';
-        }
-        return $string;
     }
 }

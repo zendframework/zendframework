@@ -24,17 +24,18 @@
 namespace Zend\Messenger;
 
 /**
- * Invalid callback exception
+ * Interface for filters
  *
- * @uses       Exception
- * @uses       Zend\Messenger\Exception
  * @category   Zend
  * @package    Zend_Messenger
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidCallbackException
-    extends \Exception
-    implements Exception
+interface Filter
 {
+    public function filter($value);
+    public function attach($context, $handler = null);
+    public function detach(Handler $handle);
+    public function getHandlers();
+    public function clearHandlers();
 }

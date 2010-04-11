@@ -1,18 +1,35 @@
 <?php
 /**
- * Phly - PHp LibrarY
- * 
- * @category  Phly
- * @package   Phly_PubSub
- * @copyright Copyright (C) 2008 - Present, Matthew Weier O'Phinney
- * @author    Matthew Weier O'Phinney <mweierophinney@gmail.com> 
- * @license   New BSD {@link http://www.opensource.org/licenses/bsd-license.php}
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Messenger
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
 namespace Zend\Messenger;
 
 /**
- * Handle: unique handle subscribed to a given topic
+ * Handler: unique handler/callback subscribed to a given topic
+ *
+ * @category   Zend
+ * @package    Zend_Messenger
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Handler
 {

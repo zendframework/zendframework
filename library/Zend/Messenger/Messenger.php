@@ -1,21 +1,39 @@
 <?php
 /**
- * Phly - PHp LibrarY
- * 
- * @category  Phly
- * @package   Phly_PubSub
- * @copyright Copyright (C) 2008 - Present, Matthew Weier O'Phinney
- * @author    Matthew Weier O'Phinney <mweierophinney@gmail.com> 
- * @license   New BSD {@link http://www.opensource.org/licenses/bsd-license.php}
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Messenger
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
 namespace Zend\Messenger;
 
 /**
  * Messenger: per-instance message system
  *
- * Use Provider when you want to create a per-instance plugin 
- * system for your objects.
+ * Use Messenger when you want to create a per-instance plugin system for your 
+ * objects.
+ *
+ * @uses       Zend\Messenger\Delivery
+ * @category   Zend
+ * @package    Zend_Messenger
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Messenger implements Delivery
 {
@@ -62,7 +80,7 @@ class Messenger implements Delivery
     public function notifyUntil($callback, $topic, $argv = null)
     {
         if (!is_callable($callback)) {
-            throw new InvalidCallbackException('Invalid filter callback provided');
+            throw new InvalidCallbackException('Invalid callback provided');
         }
 
         if (empty($this->_topics[$topic])) {
@@ -79,34 +97,6 @@ class Messenger implements Delivery
             }
         }
         return $return;
-    }
-
-    /**
-     * Filter a value
-     *
-     * Notifies subscribers to the topic and passes the single value provided
-     * as an argument. Each subsequent subscriber is passed the return value
-     * of the previous subscriber, and the value of the last subscriber is 
-     * returned.
-     * 
-     * @param  string $topic 
-     * @param  mixed $value 
-     * @return mixed
-     */
-    public function filter($topic, $value)
-    {
-        if (empty($this->_topics[$topic])) {
-            return;
-        }
-
-        $args = func_get_args();
-        $args = array_slice($args, 2);
-        foreach ($this->_topics[$topic] as $handle) {
-            $callbackArgs = $args;
-            array_unshift($callbackArgs, $value);
-            $value = $handle->call($callbackArgs);
-        }
-        return $value;
     }
 
     /**

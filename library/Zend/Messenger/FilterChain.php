@@ -1,72 +1,43 @@
 <?php
 /**
- * Phly - PHp LibrarY
- * 
- * @package   Zend
- * @category  Zend
- * @package   Zend_Messenger
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Messenger
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
 namespace Zend\Messenger;
 
 /**
  * FilterChain: subject/observer filter chain system
+ *
+ * @uses       Zend\Messenger\Filter
+ * @category   Zend
+ * @package    Zend_Messenger
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FilterChain
+class FilterChain implements Filter
 {
     /**
      * @var array All subscribers
      */
     protected $_handlers = array();
-
-    /**
-     * Publish to all subscribers
-     *
-     * All arguments are passed to each subscriber
-     * 
-     * @param  mixed $argv Arguments to pass to subscribers (optional)
-     * @return void
-     */
-    public function notify($argv = null)
-    {
-        $return = null;
-        $argv   = func_get_args();
-        foreach ($this->_handlers as $handle) {
-            $return = $handle->call($argv);
-        }
-        return $return;
-    }
-
-    /**
-     * Notify subscribers until return value of one causes a callback to 
-     * evaluate to true
-     *
-     * Publishes subscribers until the provided callback evaluates the return 
-     * value of one as true, or until all subscribers have been executed.
-     * 
-     * @param  Callable $callback 
-     * @param  mixed $argv All arguments are passed to subscribers (optional)
-     * @return mixed
-     * @throws InvalidCallbackException if invalid callback provided
-     */
-    public function notifyUntil($callback, $argv = null)
-    {
-        if (!is_callable($callback)) {
-            throw new InvalidCallbackException('Invalid filter callback provided');
-        }
-
-        $return = null;
-        $argv   = func_get_args();
-        array_shift($argv);
-
-        foreach ($this->_handlers as $handle) {
-            $return = $handle->call($argv);
-            if (call_user_func($callback, $return)) {
-                break;
-            }
-        }
-        return $return;
-    }
 
     /**
      * Filter a value

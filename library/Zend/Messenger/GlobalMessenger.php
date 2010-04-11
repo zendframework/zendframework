@@ -1,20 +1,38 @@
 <?php
 /**
- * Phly - PHp LibrarY
- * 
- * @category  Phly
- * @package   \phly\PubSub
- * @copyright Copyright (C) 2008 - Present, Matthew Weier O'Phinney
- * @author    Matthew Weier O'Phinney <mweierophinney@gmail.com> 
- * @license   New BSD {@link http://www.opensource.org/licenses/bsd-license.php}
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Messenger
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
 namespace Zend\Messenger;
 
 /**
  * Static version of Messenger
+ *
+ * @uses       Zend\Messenger\StaticDelivery
+ * @category   Zend
+ * @package    Zend_Messenger
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GlobalMessenger
+class GlobalMessenger implements StaticDelivery
 {
     /**
      * @var Messenger
@@ -56,6 +74,26 @@ class GlobalMessenger
     {
         $messenger = self::getInstance();
         return $messenger->notify($topic, $args);
+    }
+
+    /**
+     * Notify subscribers until return value of one causes a callback to 
+     * evaluate to true
+     *
+     * Publishes subscribers until the provided callback evaluates the return 
+     * value of one as true, or until all subscribers have been executed.
+     * 
+     * @param  Callable $callback 
+     * @param  string $topic 
+     * @param  mixed $argv All arguments besides the topic are passed as arguments to the handler
+     * @return mixed
+     * @throws InvalidCallbackException if invalid callback provided
+     */
+    public static functiomespace \Zend\Filter;n notifyUntil($callback, $topic, $args = null)
+    {
+        $messenger = self::getInstance();
+        $args = func_get_args();
+        return call_user_func_array(array($messenger, 'notifyUntil'), $args);
     }
 
     /**

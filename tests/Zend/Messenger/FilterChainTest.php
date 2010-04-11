@@ -69,32 +69,6 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(empty($handles));
     }
 
-    public function testNotifyShouldNotifySubscribedHandlers()
-    {
-        $handle = $this->filterchain->attach($this, 'handleTestTopic');
-        $this->filterchain->notify('test message');
-        $this->assertEquals('test message', $this->message);
-    }
-
-    public function testNotifyShouldReturnTheReturnValueOfTheLastInvokedSubscriber()
-    {
-        $this->filterchain->attach('trim');
-        $this->filterchain->attach('str_rot13');
-        $value = $this->filterchain->notify(' foo ');
-        $this->assertEquals(\str_rot13(' foo '), $value);
-    }
-
-    public function testNotifyUntilShouldReturnAsSoonAsCallbackReturnsTrue()
-    {
-        $this->filterchain->attach('strpos');
-        $this->filterchain->attach('strstr');
-        $value = $this->filterchain->notifyUntil(
-            array($this, 'evaluateStringCallback'), 
-            'foo', 'f'
-        );
-        $this->assertSame(0, $value);
-    }
-
     public function testFilterShouldPassReturnValueOfEachSubscriberToNextSubscriber()
     {
         $this->filterchain->attach('trim');

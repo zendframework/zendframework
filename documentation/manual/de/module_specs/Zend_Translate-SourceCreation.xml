@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 21661 -->
-<!-- Reviewed: 20799 -->
+<!-- Reviewed: 21661 -->
 <sect1 id="zend.translate.sourcecreation">
     <title>Erstellen von Quelldateien</title>
 
@@ -12,7 +12,7 @@
     <note>
         <para>
             Es ist zu beachten, dass die meisten der beschriebenen Formate durch Verwendung eines
-            Tools oder eines Erzeugzungsprozesses erstellt werden sollten. Diese Tools und
+            Tools oder eines Erzeugungsprozesses erstellt werden sollten. Diese Tools und
             Prozesse sind nicht Teil von Zend Framework und für die meisten der beschriebenen
             Formate sind kostenlose Tools verfügbar.
         </para>
@@ -115,9 +115,9 @@ $translate->addTranslation(
             Offensichtlich wird dieser Adapter bis auf einen kleinen Unterschied auf exakt die gleiche
             Art und Weise verwendet: <emphasis>array</emphasis> wird geändert zu
             <emphasis>gettext</emphasis>. Alle anderen Punkte werden in jedem anderen
-            Adapter auf exakt die gleiche Weise verwendet. Mit diesem Gettext-Adapter muß nicht
+            Adapter auf exakt die gleiche Weise verwendet. Mit diesem Gettext-Adapter muss nicht
             mehr auf die Standardverzeichnisstruktur von Gettext oder die Verwendung von
-            bindtextdomain und textdomain geachtet werden. Nur der Pfad und der Dateiname muß dem Adapter
+            bindtextdomain und textdomain geachtet werden. Nur der Pfad und der Dateiname muss dem Adapter
             übergeben werden.
         </para>
 
@@ -212,7 +212,7 @@ $translate = new Zend_Translate(
         </para>
 
         <para>
-            Wenn man nur spezielle Sprache aus der Quelle übersetzen will, kann die Option
+            Wenn man nur spezielle Sprachen aus der Quelle übersetzen will, kann die Option
             '<code>defined_language</code>' auf <constant>TRUE</constant> gesetzt werden. Mit dieser
             Option können gewünschte Sprachen explizit mit <methodname>addLanguage()</methodname>
             hinzugefügt werden. Der Standardwert für diese Option fügt alle Sprachen hinzu.
@@ -222,9 +222,9 @@ $translate = new Zend_Translate(
             <title>Option useId</title>
 
             <para>
-                Wenn man die Option <emphasis>useId</emphasis> auf <constant>FALSE</constant> setzt
-                dann wird der <emphasis>srclang</emphasis> Header verwendet um die Sprache zu
-                definieren welche die Meldung setzt.
+                Wenn man die Option <emphasis>useId</emphasis> auf <constant>FALSE</constant> setzt,
+                dann wird der <emphasis>srclang</emphasis>-Header verwendet, um die Sprache zu
+                definieren, welche die Meldung setzt.
             </para>
 
             <para>
@@ -235,9 +235,9 @@ $translate = new Zend_Translate(
             </para>
 
             <para>
-                Es ist zu beachten dass der <emphasis>tuv</emphasis> Eintrag, welcher dem
-                <emphasis>srclang</emphasis> Eintrag entspricht, der erste <emphasis>tuv</emphasis>
-                Eintrag sin muss welcher gesetzt ist, wie im obigen Beispiel zu sehen ist.
+                Es ist zu beachten, dass der Eintrag <emphasis>tuv</emphasis>, welcher dem
+                Eintrag <emphasis>srclang</emphasis> entspricht, der erste <emphasis>tuv</emphasis>
+                Eintrag sein muss, welcher gesetzt wird, wie im obigen Beispiel zu sehen ist.
             </para>
         </note>
     </sect2>
@@ -283,7 +283,7 @@ $translate->addTranslation(
         </para>
 
         <para>
-            Das Standardtrennzeichen für CSV-Strings ist '<code>;</code>, aber es muß nicht dieses
+            Das Standardtrennzeichen für CSV-Strings ist '<code>;</code>, aber es muss nicht dieses
             Zeichen sein. Mit der Option '<code>delimiter</code>' kann ein anderes verwendet
             werden.
         </para>
@@ -378,7 +378,7 @@ $translate->addTranslation(
 
         <para>
             <acronym>INI</acronym>-Dateien haben verschiedene Einschränkungen. Wenn ein Wert in einer
-            INI-Datei irgendein nicht alphanumerisches Zeichen enthält, muß er in doppelte
+            INI-Datei irgendein nicht alphanumerisches Zeichen enthält, muss er in doppelte
             Anführungszeichen (<code>"</code>) eingeschlossen werden. Es gibt auch reservierte Wörter,
             welche nicht als Schlüssel für INI-Dateien verwendet werden dürfen.
             Diese enthalten: <constant>NULL</constant>, <code>yes</code>, <code>no</code>,

@@ -25,17 +25,17 @@
         <para>
             This basic definition of a filter may be extended to include
             generalized transformations upon input. A common transformation
-            applied in web applications is the escaping of HTML entities. For
+            applied in web applications is the escaping of <acronym>HTML</acronym> entities. For
             example, if a form field is automatically populated with untrusted
             input (e.g., from a web browser), this value should either be free
-            of HTML entities or contain only escaped HTML entities, in order to
-            prevent undesired behavior and security vulnerabilities. To meet
-            this requirement, HTML entities that appear in the input must
+            of <acronym>HTML</acronym> entities or contain only escaped <acronym>HTML</acronym>
+            entities, in order to prevent undesired behavior and security vulnerabilities. To meet
+            this requirement, <acronym>HTML</acronym> entities that appear in the input must
             either be removed or escaped. Of course, which approach is more
             appropriate depends on the situation. A filter that removes the
-            HTML entities operates within the scope of the first definition of
+            <acronym>HTML</acronym> entities operates within the scope of the first definition of
             filter - an operator that produces a subset of the input. A filter
-            that escapes the HTML entities, however, transforms the input
+            that escapes the <acronym>HTML</acronym> entities, however, transforms the input
             (e.g., "&amp;" is transformed to
             "&amp;amp;"). Supporting such use cases for web
             developers is important, and "to filter," in the context of using

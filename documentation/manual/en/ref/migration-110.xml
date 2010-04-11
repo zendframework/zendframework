@@ -212,13 +212,15 @@ $authors = $feed->getAuthors()->getValues();
         <para>
             <classname>Zend_Filter_StripTags</classname> contains a flag,
             <varname>commentsAllowed</varname>, that, in previous versions, allowed you to
-            optionally whitelist HTML comments in HTML text filtered by the class. However, this
-            opens code enabling the flag to <acronym>XSS</acronym> attacks, particularly in Internet
-            Explorer (which allows specifying conditional functionality via HTML comments). Starting
+            optionally whitelist <acronym>HTML</acronym> comments in <acronym>HTML</acronym> text
+            filtered by the class. However, this opens code enabling the flag to
+            <acronym>XSS</acronym> attacks, particularly in Internet Explorer (which allows
+            specifying conditional functionality via <acronym>HTML</acronym> comments). Starting
             in version 1.9.7 (and backported to versions 1.8.5 and 1.7.9), the
-            <varname>commentsAllowed</varname> flag no longer has any meaning, and all HTML
-            comments, including those containing other HTML tags or nested commments, will be
-            stripped from the final output of the filter.
+            <varname>commentsAllowed</varname> flag no longer has any meaning, and all
+            <acronym>HTML</acronym> comments, including those containing other
+            <acronym>HTML</acronym> tags or nested commments, will be stripped from the final output
+            of the filter.
         </para>
     </sect2>
 

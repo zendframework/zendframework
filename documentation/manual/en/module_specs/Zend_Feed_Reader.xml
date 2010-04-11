@@ -465,9 +465,9 @@ foreach ($links as $link) {
             contain, per category, three fields of data: term, scheme and label. The "term" is the
             basic category name, often machine readable (i.e. plays nice with URIs). The scheme
             represents a categorisation scheme (usually a URI identifier) also known as a "domain"
-            in RSS 2.0. The "label" is a human readable category name which supports html entities.
-            In RSS 2.0, there is no label attribute so it is always set to the same value as the
-            term for convenience.
+            in RSS 2.0. The "label" is a human readable category name which supports
+            <acronym>HTML</acronym> entities. In RSS 2.0, there is no label attribute so it is
+            always set to the same value as the term for convenience.
         </para>
 
         <para>
@@ -696,10 +696,10 @@ $labels = $categories->getValues();
                             object containing the details of any categories associated with the
                             overall feed. The supported fields include "term" (the machine readable
                             category name), "scheme" (the categorisation scheme/domain for this
-                            category), and "label" (a html decoded human readable category name).
-                            Where any of the three fields are absent from the field, they are either
-                            set to the closest available alternative or, in the case of "scheme",
-                            set to <constant>NULL</constant>.
+                            category), and "label" (a <acronym>HTML</acronym> decoded human readable
+                            category name). Where any of the three fields are absent from the field,
+                            they are either set to the closest available alternative or, in the case
+                            of "scheme", set to <constant>NULL</constant>.
                         </entry>
                     </row>
                 </tbody>
@@ -1042,10 +1042,10 @@ $labels = $categories->getValues();
                             object containing the details of any categories associated with the
                             entry. The supported fields include "term" (the machine readable
                             category name), "scheme" (the categorisation scheme/domain for this
-                            category), and "label" (a html decoded human readable category name).
-                            Where any of the three fields are absent from the field, they are either
-                            set to the closest available alternative or, in the case of "scheme",
-                            set to <constant>NULL</constant>.
+                            category), and "label" (a <acronym>HTML</acronym> decoded human readable
+                            category name). Where any of the three fields are absent from the field,
+                            they are either set to the closest available alternative or, in the case
+                            of "scheme", set to <constant>NULL</constant>.
                         </entry>
                     </row>
                 </tbody>

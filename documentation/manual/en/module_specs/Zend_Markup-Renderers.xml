@@ -49,7 +49,7 @@ echo $bbcode->render('my [foo]markup[/foo]');
         </para>
 
         <para>
-            Some renderers (like the HTML renderer) also have support for a
+            Some renderers (like the <acronym>HTML</acronym> renderer) also have support for a
             'markup' parameter. This replaces the 'start' and 'end' parameters, and
             it renders the markups including some default attributes and the
             closing markup.

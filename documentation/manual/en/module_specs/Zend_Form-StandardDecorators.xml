@@ -150,9 +150,9 @@ class Util
             fieldsets by default. The Fieldset decorator checks for either a
             'legend' option or a <methodname>getLegend()</methodname> method in the
             registered element, and uses that as a legend if non-empty. Any
-            content passed in is wrapped in the HTML fieldset, replacing the
+            content passed in is wrapped in the <acronym>HTML</acronym> fieldset, replacing the
             original content. Any attributes set in the decorated item are
-            passed to the fieldset as HTML attributes.
+            passed to the fieldset as <acronym>HTML</acronym> attributes.
         </para>
     </sect2>
 
@@ -172,11 +172,11 @@ class Util
         <title>Zend_Form_Decorator_Form</title>
 
         <para>
-            <classname>Zend_Form</classname> objects typically need to render an HTML
-            form tag. The Form decorator proxies to the Form view helper. It
-            wraps any provided content in an HTML form element, using the
+            <classname>Zend_Form</classname> objects typically need to render an
+            <acronym>HTML</acronym> form tag. The Form decorator proxies to the Form view helper. It
+            wraps any provided content in an <acronym>HTML</acronym> form element, using the
             <classname>Zend_Form</classname> object's action and method, and any
-            attributes as HTML attributes.
+            attributes as <acronym>HTML</acronym> attributes.
         </para>
     </sect2>
 
@@ -288,9 +288,9 @@ class Util
         <title>Zend_Form_Decorator_HtmlTag</title>
 
         <para>
-            The HtmlTag decorator allows you to utilize HTML tags to
+            The HtmlTag decorator allows you to utilize <acronym>HTML</acronym> tags to
             decorate content; the tag utilized is passed in the 'tag'
-            option, and any other options are used as HTML attributes to
+            option, and any other options are used as <acronym>HTML</acronym> attributes to
             that tag. The tag by default is assumed to be block level, and
             replaces the content by wrapping it in the given tag. However,
             you can specify a placement to append or prepend a tag as well.
@@ -301,9 +301,9 @@ class Util
         <title>Zend_Form_Decorator_Image</title>
 
         <para>
-            The Image decorator allows you to create an HTML image input
+            The Image decorator allows you to create an <acronym>HTML</acronym> image input
             (<code>&lt;input type="image" ... /&gt;</code>), and optionally
-            render it within another HTML tag.
+            render it within another <acronym>HTML</acronym> tag.
         </para>
 
         <para>
@@ -316,7 +316,7 @@ class Util
         </para>
 
         <para>
-            To specify an HTML tag with which to wrap the element, either pass a
+            To specify an <acronym>HTML</acronym> tag with which to wrap the element, either pass a
             'tag' option to the decorator, or explicitly call
             <methodname>setTag()</methodname>.
         </para>

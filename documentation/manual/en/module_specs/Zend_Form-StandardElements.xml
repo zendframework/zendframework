@@ -4,7 +4,7 @@
     <title>Standard Form Elements Shipped With Zend Framework</title>
 
     <para>
-        Zend Framework ships with concrete element classes covering most HTML
+        Zend Framework ships with concrete element classes covering most <acronym>HTML</acronym>
         form elements. Most simply specify a particular view helper for use when
         decorating the element, but several offer additional functionality. The
         following is a list of all such classes, as well as descriptions of the
@@ -15,7 +15,7 @@
         <title>Zend_Form_Element_Button</title>
 
         <para>
-            Used for creating HTML button elements,
+            Used for creating <acronym>HTML</acronym> button elements,
             <classname>Zend_Form_Element_Button</classname> extends <link
                 linkend="zend.form.standardElements.submit">Zend_Form_Element_Submit</link>,
             specifying some custom functionality. It specifies the 'formButton'
@@ -134,7 +134,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
         <title>Zend_Form_Element_Checkbox</title>
 
         <para>
-            HTML checkboxes allow you return a specific value, but basically
+            <acronym>HTML</acronym> checkboxes allow you return a specific value, but basically
             operate as booleans. When checked, the checkbox's value is submitted.
             When the checkbox is not checked, nothing is submitted. Internally,
             <classname>Zend_Form_Element_Checkbox</classname> enforces this state.

@@ -4,7 +4,7 @@
     <title>Creating Form Elements Using Zend_Form_Element</title>
 
     <para>
-        A form is made of elements that typically correspond to HTML form
+        A form is made of elements that typically correspond to <acronym>HTML</acronym> form
         input. <classname>Zend_Form_Element</classname> encapsulates single form elements, with the
         following areas of responsibility:
     </para>
@@ -205,7 +205,7 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
         <para>
             It's often useful and/or necessary to perform some normalization on
             input prior to validation. For example, you may want to strip out
-            all HTML, but run your validations on what remains to ensure the
+            all <acronym>HTML</acronym>, but run your validations on what remains to ensure the
             submission is valid. Or you may want to trim empty space surrounding input so that a
             StringLength validator will use the correct length of the input without counting leading
             or trailing whitespace characters. These operations may be performed using
@@ -928,7 +928,7 @@ $messages = $element->getMessages();
             <listitem>
                 <para>
                     <emphasis>HtmlTag</emphasis>: wraps the element and errors in
-                    an HTML &lt;dd&gt; tag.
+                    an <acronym>HTML</acronym> &lt;dd&gt; tag.
                 </para>
             </listitem>
 
@@ -991,9 +991,9 @@ $this->addDecorators(array(
             description is present, the 'Description' decorator will append a
             paragraph of class 'description' containing the descriptive text to
             the aggregated content. The next decorator, 'HtmlTag', wraps the
-            element, errors, and description in an HTML &lt;dd&gt; tag.
+            element, errors, and description in an <acronym>HTML</acronym> &lt;dd&gt; tag.
             Finally, the last decorator, 'label', retrieves the element's label
-            and passes it to the 'FormLabel' view helper, wrapping it in an HTML
+            and passes it to the 'FormLabel' view helper, wrapping it in an <acronym>HTML</acronym>
             &lt;dt&gt; tag; the value is prepended to the content by default.
             The resulting output looks basically like this:
         </para>
@@ -1273,7 +1273,7 @@ $element->class = 'text;
 
         <para>
             By default, all attributes are passed to the view helper used by
-            the element during rendering, and rendered as HTML attributes of
+            the element during rendering, and rendered as <acronym>HTML</acronym> attributes of
             the element tag.
         </para>
     </sect2>

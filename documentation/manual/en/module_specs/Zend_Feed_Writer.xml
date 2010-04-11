@@ -408,12 +408,12 @@ $out = $feed->export('atom');
                             itself an array whose possible keys include "term", "label" and
                             "scheme". The "term" is a typically a category name suitable for
                             inclusion in a <acronym>URI</acronym>. The "label" may be a human
-                            readable category name supporting special characters (it is HTML encoded
-                            during rendering) and is a required key. The "scheme" (called the domain
-                            in <acronym>RSS</acronym>) is optional but must be a valid
-                            <acronym>URI</acronym>.
-                            The method <methodname>addCategory()</methodname> allows adding
-                            a single category at a time.
+                            readable category name supporting special characters (it is
+                            <acronym>HTML</acronym> encoded during rendering) and is a required key.
+                            The "scheme" (called the domain in <acronym>RSS</acronym>) is optional
+                            but must be a valid <acronym>URI</acronym>. The method
+                            <methodname>addCategory()</methodname> allows adding a single category
+                            at a time.
                         </entry>
                     </row>
 
@@ -636,8 +636,8 @@ $out = $feed->export('atom');
                         <entry><methodname>setCommentLink()</methodname></entry>
 
                         <entry>
-                            Seta a link to a HTML page containing comments associated with this
-                            entry.
+                            Seta a link to a <acronym>HTML</acronym> page containing comments
+                            associated with this entry.
                         </entry>
                     </row>
 

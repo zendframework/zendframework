@@ -1081,7 +1081,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             A sub form may be a <classname>Zend_Form</classname> object, or, more
             typically, a <classname>Zend_Form_SubForm</classname> object. The latter
             contains decorators suitable for inclusion in a larger form (i.e.,
-            it does not render additional HTML form tags, but does group
+            it does not render additional <acronym>HTML</acronym> form tags, but does group
             elements). To attach a sub form, simply add it to the form and give
             it a name:
         </para>
@@ -1197,9 +1197,9 @@ $form->setSubFormDecorators(array(
         <para>
             While a form's usefulness primarily derives from the elements it
             contains, it can also contain other metadata, such as a name (often
-            used as a unique ID in the HTML markup); the form action and method;
+            used as a unique ID in the <acronym>HTML</acronym> markup); the form action and method;
             the number of elements, groups, and sub forms it contains; and
-            arbitrary metadata (usually used to set HTML attributes for the form
+            arbitrary metadata (usually used to set <acronym>HTML</acronym> attributes for the form
             tag itself).
         </para>
 
@@ -1333,7 +1333,7 @@ $form->setDecorators(array(
 ]]></programlisting>
 
         <para>
-            Any attributes set on the form object will be used as HTML
+            Any attributes set on the form object will be used as <acronym>HTML</acronym>
             attributes of the <emphasis>&lt;form&gt;</emphasis> tag.
         </para>
 
@@ -1407,8 +1407,8 @@ $fooBar  = $form->getDecorator('FooBar');
 
         <para>
             You may create your own decorators for generating the form. One
-            common use case is if you know the exact HTML you wish to use; your
-            decorator could create the exact HTML and simply return it,
+            common use case is if you know the exact <acronym>HTML</acronym> you wish to use; your
+            decorator could create the exact <acronym>HTML</acronym> and simply return it,
             potentially using the decorators from individual elements or display
             groups.
         </para>

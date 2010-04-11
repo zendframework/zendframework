@@ -38,7 +38,7 @@
     <para>
         The usage of this adapter is quite simple. First you create a progressbar
         in your browser, either with JavaScript or previously created with plain
-        HTML. Then you define the update method and optionally the finish method
+        <acronym>HTML</acronym>. Then you define the update method and optionally the finish method
         in JavaScript, both taking a json object as single argument. Then you
         call a webpage with the long-running process in a hidden
         <code>iframe</code> or <code>object</code> tag. While the process is
@@ -88,8 +88,8 @@
         <title>Basic example for the client-side stuff</title>
 
         <para>
-            This example illustrates a basic setup of HTML, <acronym>CSS</acronym> and JavaScript
-            for the JsPush adapter
+            This example illustrates a basic setup of <acronym>HTML</acronym>,
+            <acronym>CSS</acronym> and JavaScript for the JsPush adapter
         </para>
 
         <programlisting language="html"><![CDATA[

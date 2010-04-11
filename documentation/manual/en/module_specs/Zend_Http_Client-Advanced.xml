@@ -173,7 +173,7 @@ $client->setHeaders(array(
             but no actual file needs to exist on the disk.
             The second form name parameter is always required, and is equivalent
             to the "name" attribute of an &gt;input&lt; tag, if the file was to
-            be uploaded through an HTML form.
+            be uploaded through an <acronym>HTML</acronym> form.
             A fourth optional parameter provides the file's content-type. If
             not specified, and <classname>Zend_Http_Client</classname> reads the file from the disk,
             the mime_content_type function will be used to guess the file's

@@ -226,8 +226,8 @@ foreach ($form->getElements() as $element) {
 ]]></programlisting>
 
     <para>
-        If you use the above view script, you'll get approximately the following HTML (approximate,
-        as the HTML below is formatted):
+        If you use the above view script, you'll get approximately the following
+        <acronym>HTML</acronym> (approximate, as the <acronym>HTML</acronym> below is formatted):
     </para>
 
     <programlisting language="html"><![CDATA[

@@ -8,7 +8,7 @@
         multiple filters and validators, apply them to collections of data, and
         to retrieve input values after they have been processed by the filters
         and validators. Values are returned in escaped format by default for
-        safe HTML output.
+        safe <acronym>HTML</acronym> output.
     </para>
 
     <para>
@@ -52,10 +52,10 @@
                 <emphasis>Escapers</emphasis> transform a value
                 by removing magic behavior of certain characters. In some
                 output contexts, special characters have meaning. For example,
-                the characters '&lt;' and '&gt;' delimit HTML tags, and if a
-                string containing those characters is output in an HTML
+                the characters '&lt;' and '&gt;' delimit <acronym>HTML</acronym> tags, and if a
+                string containing those characters is output in an <acronym>HTML</acronym>
                 context, the content between them might affect the output or
-                functionality of the HTML presentation. Escaping the
+                functionality of the <acronym>HTML</acronym> presentation. Escaping the
                 characters removes the special meaning, so they are output as
                 literal characters.
             </para>
@@ -445,7 +445,7 @@ $m = $input->getUnescaped('month'); // not escaped
                 By default, when retrieving a value, it is filtered with the
                 <classname>Zend_Filter_HtmlEntities</classname>. This is the default because it is
                 considered the most common usage to output the value of a field
-                in HTML. The HtmlEntities filter helps prevent unintentional
+                in <acronym>HTML</acronym>. The HtmlEntities filter helps prevent unintentional
                 output of code, which can result in security problems.
             </para>
 

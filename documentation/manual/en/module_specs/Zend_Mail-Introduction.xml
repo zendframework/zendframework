@@ -39,7 +39,7 @@ $mail->send();
             <para>
                 In order to send an e-mail with <classname>Zend_Mail</classname> you have to specify
                 at least one recipient, a sender (e.g., with <methodname>setFrom()</methodname>),
-                and a message body (text and/or HTML).
+                and a message body (text and/or <acronym>HTML</acronym>).
             </para>
         </note>
 

@@ -4,10 +4,9 @@
     <title>HeadTitle Helper</title>
 
     <para>
-        The HTML <emphasis>&lt;title&gt;</emphasis> element is used to provide a title
-        for an HTML document. The <classname>HeadTitle</classname> helper allows you to
-        programmatically create and store the title for later retrieval and
-        output.
+        The <acronym>HTML</acronym> <emphasis>&lt;title&gt;</emphasis> element is used to provide a
+        title for an <acronym>HTML</acronym> document. The <classname>HeadTitle</classname> helper
+        allows you to programmatically create and store the title for later retrieval and output.
     </para>
 
     <para>

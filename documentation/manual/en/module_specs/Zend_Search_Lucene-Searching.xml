@@ -410,8 +410,9 @@ public function highlightExtended($words, $callback, $params = array())
 
             <footnote>
                 <para>
-                    The first is an HTML fragment for highlighting and others are callback behavior
-                    dependent. Returned value is a highlighted HTML fragment.
+                    The first is an <acronym>HTML</acronym> fragment for highlighting and others are
+                    callback behavior dependent. Returned value is a highlighted
+                    <acronym>HTML</acronym> fragment.
                 </para>
             </footnote>
             , or extend <classname>Zend_Search_Lucene_Document_Html</classname> class and redefine
@@ -420,8 +421,8 @@ public function highlightExtended($words, $callback, $params = array())
 
             <footnote>
                 <para>
-                    In both cases returned HTML is automatically transformed into valid
-                    <acronym>XHTML</acronym>.
+                    In both cases returned <acronym>HTML</acronym> is automatically transformed into
+                    valid <acronym>XHTML</acronym>.
                 </para>
             </footnote>
         </para>
@@ -476,8 +477,8 @@ $highlightedHTML = $query->highlightMatches($sourceHTML);
         </para>
 
         <para>
-            Optional second parameter is a default HTML document encoding. It's used if encoding is
-            not specified using Content-type HTTP-EQUIV meta tag.
+            Optional second parameter is a default <acronym>HTML</acronym> document encoding. It's
+            used if encoding is not specified using Content-type HTTP-EQUIV meta tag.
         </para>
 
         <para>
@@ -512,7 +513,7 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
 ]]></programlisting>
 
             Where <classname>Zend_Search_Lucene_Document_Html</classname> object is an object
-            constructed from the source HTML provided to the
+            constructed from the source <acronym>HTML</acronym> provided to the
             <classname>Zend_Search_Lucene_Search_Query->highlightMatches()</classname> method.
         </para>
 
@@ -534,9 +535,9 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
 
         <para>
             <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code> has similar
-            behavior. The only difference is that it takes as an input and returns HTML fragment
-            without &lt;>HTML>, &lt;HEAD>, &lt;BODY> tags. Nevertheless, fragment is automatically
-            transformed to valid <acronym>XHTML</acronym>.
+            behavior. The only difference is that it takes as an input and returns
+            <acronym>HTML</acronym> fragment without &lt;>HTML>, &lt;HEAD>, &lt;BODY> tags.
+            Nevertheless, fragment is automatically transformed to valid <acronym>XHTML</acronym>.
         </para>
     </sect2>
 </sect1>

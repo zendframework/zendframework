@@ -47,8 +47,8 @@ Zend_Session::start();
                         <code>session.auto_start</code> setting</ulink>. If you do not have the
                     ability to disable this setting in php.ini, you are using mod_php (or
                     equivalent), and the setting is already enabled in <code>php.ini</code>, then
-                    add the following to your <code>.htaccess</code> file (usually in your HTML
-                    document root directory):
+                    add the following to your <code>.htaccess</code> file (usually in your
+                    <acronym>HTML</acronym> document root directory):
                     <programlisting language="httpd.conf"><![CDATA[
 php_value session.auto_start 0
 ]]></programlisting>

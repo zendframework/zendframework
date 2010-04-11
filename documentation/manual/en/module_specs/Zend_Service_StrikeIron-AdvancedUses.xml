@@ -46,7 +46,8 @@ echo $result->listingName;
             <ulink url="http://janschneider.de">Jan Schneider</ulink> from the <ulink
                 url="http://horde.org">Horde project</ulink> has written a <ulink
                 url="http://janschneider.de/news/25/268">small <acronym>PHP</acronym>
-                routine</ulink> that will format a WSDL file into more readable HTML.
+                routine</ulink> that will format a WSDL file into more readable
+            <acronym>HTML</acronym>.
         </para>
 
         <para>

@@ -329,7 +329,7 @@
             <para>
                 The XmlTm Adapter is the Adapter which will be used by customers
                 which do their layout themself. XmlTm is a format which allows the
-                complete html source to be included in the translation source, so
+                complete <acronym>HTML</acronym> source to be included in the translation source, so
                 the translation is coupled with the layout.
                 XLIFF is a <acronym>XML</acronym> file based format, which is related to XLIFF but
                 its not as simple to read.

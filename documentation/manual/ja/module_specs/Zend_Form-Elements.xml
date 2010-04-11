@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 21606 -->
 <sect1 id="zend.form.elements">
     <title>Zend_Form_Element を用いたフォーム要素の作成</title>
 
@@ -570,7 +570,7 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
         <para>
             バリデータは、順番どおりに処理されます。
             すべてのバリデータが実行されますが、
-            <code>breakChainOnFailure</code> が true
+            <varname>$breakChainOnFailure</varname> が true
             の場合はどれかひとつのバリデータが検証に失敗した時点で処理を終了します。
             バリデータは、適切な順で指定するようにしましょう。
         </para>
@@ -616,7 +616,7 @@ $messages = $element->getMessages();
                     デフォルトで、もし要素が必須で 'NotEmpty'
                     バリデータが含まれていない場合は、<code>isValid()</code> は
                     スタックの最上位にこのバリデータを追加します。そして
-                    <code>breakChainOnFailure</code> フラグを設定します。
+                    <varname>$breakChainOnFailure</varname> フラグを設定します。
                     これにより、必須フラグがその意味どおりに動作するようになります。
                     入力が渡されなかった場合は検証がその時点で失敗し、
                     結果をユーザに返します。それ以降のバリデータは実行されません。
@@ -699,31 +699,31 @@ $messages = $element->getMessages();
             </para></listitem>
 
             <listitem><para>
-                <code>addValidator($nameOrValidator, $breakChainOnFailure = false, array $options = null)</code>
+                <methodname>addValidator($nameOrValidator, $breakChainOnFailure = false, array $options = null)</methodname>
             </para></listitem>
 
             <listitem><para>
-                <code>addValidators(array $validators)</code>
+                <methodname>addValidators(array $validators)</methodname>
             </para></listitem>
 
             <listitem><para>
-                <code>setValidators(array $validators)</code> (すべてのバリデータを上書きします)
+                <methodname>setValidators(array $validators)</methodname> (すべてのバリデータを上書きします)
             </para></listitem>
 
             <listitem><para>
-                <code>getValidator($name)</code> (指定した名前のバリデータオブジェクトを取得します)
+                <methodname>getValidator($name)</methodname> (指定した名前のバリデータオブジェクトを取得します)
             </para></listitem>
 
             <listitem><para>
-                <code>getValidators()</code> (すべてのバリデータを取得します)
+                <methodname>getValidators()</methodname> (すべてのバリデータを取得します)
             </para></listitem>
 
             <listitem><para>
-                <code>removeValidator($name)</code> (指定した名前のバリデータを削除します)
+                <methodname>removeValidator($name)</methodname> (指定した名前のバリデータを削除します)
             </para></listitem>
 
             <listitem><para>
-                <code>clearValidators()</code> (すべてのバリデータを削除します)
+                <methodname>clearValidators()</methodname> (すべてのバリデータを削除します)
             </para></listitem>
         </itemizedlist>
 
@@ -1184,97 +1184,97 @@ $element->class = 'text;
         <itemizedlist>
             <listitem><para>設定</para>
                 <itemizedlist>
-                    <listitem><para><code>setOptions(array $options)</code></para></listitem>
-                    <listitem><para><code>setConfig(Zend_Config $config)</code></para></listitem>
+                    <listitem><para><methodname>setOptions(array $options)</methodname></para></listitem>
+                    <listitem><para><methodname>setConfig(Zend_Config $config)</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>I18n</para>
                 <itemizedlist>
-                    <listitem><para><code>setTranslator(Zend_Translate_Adapter $translator = null)</code></para></listitem>
-                    <listitem><para><code>getTranslator()</code></para></listitem>
-                    <listitem><para><code>setDisableTranslator($flag)</code></para></listitem>
-                    <listitem><para><code>translatorIsDisabled()</code></para></listitem>
+                    <listitem><para><methodname>setTranslator(Zend_Translate_Adapter $translator = null)</methodname></para></listitem>
+                    <listitem><para><methodname>getTranslator()</methodname></para></listitem>
+                    <listitem><para><methodname>setDisableTranslator($flag)</methodname></para></listitem>
+                    <listitem><para><methodname>translatorIsDisabled()</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>プロパティ</para>
                 <itemizedlist>
-                    <listitem><para><code>setName($name)</code></para></listitem>
-                    <listitem><para><code>getName()</code></para></listitem>
-                    <listitem><para><code>setValue($value)</code></para></listitem>
-                    <listitem><para><code>getValue()</code></para></listitem>
-                    <listitem><para><code>getUnfilteredValue()</code></para></listitem>
-                    <listitem><para><code>setLabel($label)</code></para></listitem>
-                    <listitem><para><code>getLabel()</code></para></listitem>
-                    <listitem><para><code>setDescription($description)</code></para></listitem>
-                    <listitem><para><code>getDescription()</code></para></listitem>
-                    <listitem><para><code>setOrder($order)</code></para></listitem>
-                    <listitem><para><code>getOrder()</code></para></listitem>
-                    <listitem><para><code>setRequired($flag)</code></para></listitem>
-                    <listitem><para><code>getRequired()</code></para></listitem>
-                    <listitem><para><code>setAllowEmpty($flag)</code></para></listitem>
-                    <listitem><para><code>getAllowEmpty()</code></para></listitem>
-                    <listitem><para><code>setAutoInsertNotEmptyValidator($flag)</code></para></listitem>
-                    <listitem><para><code>autoInsertNotEmptyValidator()</code></para></listitem>
-                    <listitem><para><code>setIgnore($flag)</code></para></listitem>
-                    <listitem><para><code>getIgnore()</code></para></listitem>
-                    <listitem><para><code>getType()</code></para></listitem>
-                    <listitem><para><code>setAttrib($name, $value)</code></para></listitem>
-                    <listitem><para><code>setAttribs(array $attribs)</code></para></listitem>
-                    <listitem><para><code>getAttrib($name)</code></para></listitem>
-                    <listitem><para><code>getAttribs()</code></para></listitem>
+                    <listitem><para><methodname>setName($name)</methodname></para></listitem>
+                    <listitem><para><methodname>getName()</methodname></para></listitem>
+                    <listitem><para><methodname>setValue($value)</methodname></para></listitem>
+                    <listitem><para><methodname>getValue()</methodname></para></listitem>
+                    <listitem><para><methodname>getUnfilteredValue()</methodname></para></listitem>
+                    <listitem><para><methodname>setLabel($label)</methodname></para></listitem>
+                    <listitem><para><methodname>getLabel()</methodname></para></listitem>
+                    <listitem><para><methodname>setDescription($description)</methodname></para></listitem>
+                    <listitem><para><methodname>getDescription()</methodname></para></listitem>
+                    <listitem><para><methodname>setOrder($order)</methodname></para></listitem>
+                    <listitem><para><methodname>getOrder()</methodname></para></listitem>
+                    <listitem><para><methodname>setRequired($flag)</methodname></para></listitem>
+                    <listitem><para><methodname>getRequired()</methodname></para></listitem>
+                    <listitem><para><methodname>setAllowEmpty($flag)</methodname></para></listitem>
+                    <listitem><para><methodname>getAllowEmpty()</methodname></para></listitem>
+                    <listitem><para><methodname>setAutoInsertNotEmptyValidator($flag)</methodname></para></listitem>
+                    <listitem><para><methodname>autoInsertNotEmptyValidator()</methodname></para></listitem>
+                    <listitem><para><methodname>setIgnore($flag)</methodname></para></listitem>
+                    <listitem><para><methodname>getIgnore()</methodname></para></listitem>
+                    <listitem><para><methodname>getType()</methodname></para></listitem>
+                    <listitem><para><methodname>setAttrib($name, $value)</methodname></para></listitem>
+                    <listitem><para><methodname>setAttribs(array $attribs)</methodname></para></listitem>
+                    <listitem><para><methodname>getAttrib($name)</methodname></para></listitem>
+                    <listitem><para><methodname>getAttribs()</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>プラグインローダーとパス</para>
                 <itemizedlist>
-                    <listitem><para><code>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type)</code></para></listitem>
-                    <listitem><para><code>getPluginLoader($type)</code></para></listitem>
-                    <listitem><para><code>addPrefixPath($prefix, $path, $type = null)</code></para></listitem>
-                    <listitem><para><code>addPrefixPaths(array $spec)</code></para></listitem>
+                    <listitem><para><methodname>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type)</methodname></para></listitem>
+                    <listitem><para><methodname>getPluginLoader($type)</methodname></para></listitem>
+                    <listitem><para><methodname>addPrefixPath($prefix, $path, $type = null)</methodname></para></listitem>
+                    <listitem><para><methodname>addPrefixPaths(array $spec)</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>検証</para>
                 <itemizedlist>
-                    <listitem><para><code>addValidator($validator, $breakChainOnFailure = false, $options = array())</code></para></listitem>
-                    <listitem><para><code>addValidators(array $validators)</code></para></listitem>
-                    <listitem><para><code>setValidators(array $validators)</code></para></listitem>
-                    <listitem><para><code>getValidator($name)</code></para></listitem>
-                    <listitem><para><code>getValidators()</code></para></listitem>
-                    <listitem><para><code>removeValidator($name)</code></para></listitem>
-                    <listitem><para><code>clearValidators()</code></para></listitem>
-                    <listitem><para><code>isValid($value, $context = null)</code></para></listitem>
-                    <listitem><para><code>getErrors()</code></para></listitem>
-                    <listitem><para><code>getMessages()</code></para></listitem>
+                    <listitem><para><methodname>addValidator($validator, $breakChainOnFailure = false, $options = array())</methodname></para></listitem>
+                    <listitem><para><methodname>addValidators(array $validators)</methodname></para></listitem>
+                    <listitem><para><methodname>setValidators(array $validators)</methodname></para></listitem>
+                    <listitem><para><methodname>getValidator($name)</methodname></para></listitem>
+                    <listitem><para><methodname>getValidators()</methodname></para></listitem>
+                    <listitem><para><methodname>removeValidator($name)</methodname></para></listitem>
+                    <listitem><para><methodname>clearValidators()</methodname></para></listitem>
+                    <listitem><para><methodname>isValid($value, $context = null)</methodname></para></listitem>
+                    <listitem><para><methodname>getErrors()</methodname></para></listitem>
+                    <listitem><para><methodname>getMessages()</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>フィルタ</para>
                 <itemizedlist>
-                    <listitem><para><code>addFilter($filter, $options = array())</code></para></listitem>
-                    <listitem><para><code>addFilters(array $filters)</code></para></listitem>
-                    <listitem><para><code>setFilters(array $filters)</code></para></listitem>
-                    <listitem><para><code>getFilter($name)</code></para></listitem>
-                    <listitem><para><code>getFilters()</code></para></listitem>
-                    <listitem><para><code>removeFilter($name)</code></para></listitem>
-                    <listitem><para><code>clearFilters()</code></para></listitem>
+                    <listitem><para><methodname>addFilter($filter, $options = array())</methodname></para></listitem>
+                    <listitem><para><methodname>addFilters(array $filters)</methodname></para></listitem>
+                    <listitem><para><methodname>setFilters(array $filters)</methodname></para></listitem>
+                    <listitem><para><methodname>getFilter($name)</methodname></para></listitem>
+                    <listitem><para><methodname>getFilters()</methodname></para></listitem>
+                    <listitem><para><methodname>removeFilter($name)</methodname></para></listitem>
+                    <listitem><para><methodname>clearFilters()</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>レンダリング</para>
                 <itemizedlist>
-                    <listitem><para><code>setView(Zend_View_Interface $view = null)</code></para></listitem>
-                    <listitem><para><code>getView()</code></para></listitem>
-                    <listitem><para><code>addDecorator($decorator, $options = null)</code></para></listitem>
-                    <listitem><para><code>addDecorators(array $decorators)</code></para></listitem>
-                    <listitem><para><code>setDecorators(array $decorators)</code></para></listitem>
-                    <listitem><para><code>getDecorator($name)</code></para></listitem>
-                    <listitem><para><code>getDecorators()</code></para></listitem>
-                    <listitem><para><code>removeDecorator($name)</code></para></listitem>
-                    <listitem><para><code>clearDecorators()</code></para></listitem>
-                    <listitem><para><code>render(Zend_View_Interface $view = null)</code></para></listitem>
+                    <listitem><para><methodname>setView(Zend_View_Interface $view = null)</methodname></para></listitem>
+                    <listitem><para><methodname>getView()</methodname></para></listitem>
+                    <listitem><para><methodname>addDecorator($decorator, $options = null)</methodname></para></listitem>
+                    <listitem><para><methodname>addDecorators(array $decorators)</methodname></para></listitem>
+                    <listitem><para><methodname>setDecorators(array $decorators)</methodname></para></listitem>
+                    <listitem><para><methodname>getDecorator($name)</methodname></para></listitem>
+                    <listitem><para><methodname>getDecorators()</methodname></para></listitem>
+                    <listitem><para><methodname>removeDecorator($name)</methodname></para></listitem>
+                    <listitem><para><methodname>clearDecorators()</methodname></para></listitem>
+                    <listitem><para><methodname>render(Zend_View_Interface $view = null)</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
         </itemizedlist>
@@ -1286,8 +1286,8 @@ $element->class = 'text;
         <para>
             <classname>Zend_Form_Element</classname> のコンストラクタには、配列あるいは
             <classname>Zend_Config</classname> オブジェクトでオプションを指定できます。
-            また、<code>setOptions()</code> や
-            <code>setConfig()</code> で設定を変更することもできます。
+            また、<methodname>setOptions()</methodname> や
+            <methodname>setConfig()</methodname> で設定を変更することもできます。
             一般に、キーの名前は次のようになります。
         </para>
 
@@ -1308,8 +1308,8 @@ $element->class = 'text;
 
         <itemizedlist>
             <listitem><para>
-                <code>prefixPath</code> は
-                <code>addPrefixPaths()</code> に渡されます。
+                <property>prefixPath</property> は
+                <methodname>addPrefixPaths()</methodname> に渡されます。
             </para></listitem>
 
             <listitem>
@@ -1319,20 +1319,20 @@ $element->class = 'text;
 
                 <itemizedlist>
                     <listitem><para>
-                            <code>setAttrib</code> (ただし、
-                            <code>setAttribs</code> は
+                            <property>setAttrib</property> (ただし、
+                            <property>setAttribs</property> は
                             <emphasis>動作します</emphasis>)
                     </para></listitem>
 
-                    <listitem><para><code>setConfig</code></para></listitem>
+                    <listitem><para><property>setConfig</property></para></listitem>
 
-                    <listitem><para><code>setOptions</code></para></listitem>
+                    <listitem><para><property>setOptions</property></para></listitem>
 
-                    <listitem><para><code>setPluginLoader</code></para></listitem>
+                    <listitem><para><property>setPluginLoader</property></para></listitem>
 
-                    <listitem><para><code>setTranslator</code></para></listitem>
+                    <listitem><para><property>setTranslator</property></para></listitem>
 
-                    <listitem><para><code>setView</code></para></listitem>
+                    <listitem><para><property>setView</property></para></listitem>
                 </itemizedlist>
             </listitem>
         </itemizedlist>
@@ -1392,14 +1392,14 @@ decorators.label.decorator = "Label"
 
         <para>
             要素を継承する際に主に使用するメソッドは次の 2 つです。
-            <code>init()</code> で独自の初期化ロジックをあなたの要素に追加し、
-            <code>loadDefaultDecorators()</code>
+            <methodname>init()</methodname> で独自の初期化ロジックをあなたの要素に追加し、
+            <methodname>loadDefaultDecorators()</methodname>
             でデフォルトのデコレータのリストをあなたの要素に設定します。,
         </para>
 
         <para>
             たとえば、あなたが作成するフォーム上のテキストボックスでは、すべて
-            <code>StringTrim</code> フィルタが必要で、
+            <classname>StringTrim</classname> フィルタが必要で、
             かつ正規表現による入力検証を行うことになるとしましょう。
             ついでに、表示用に独自のデコレータ 'My_Decorator_TextItem'
             も使用するものとします。さらに、標準の属性
@@ -1440,7 +1440,7 @@ $form->addPrefixPath('My_Element', 'My/Element/', 'element')
 
         <para>
             <classname>Zend_Form_Element</classname> を継承したクラスでオーバーライドしたくなる
-            その他のメソッドとして、<code>loadDefaultDecorators()</code>
+            その他のメソッドとして、<methodname>loadDefaultDecorators()</methodname>
             があります。このメソッドは、条件付きで
             要素にデフォルトのデコレータセットを読み込みます。
             継承したクラスで、このデコレータ群を置き換えることができます。

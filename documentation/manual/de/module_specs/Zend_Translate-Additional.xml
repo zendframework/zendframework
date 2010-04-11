@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 21745 -->
-<!-- Reviewed: 21049 -->
+<!-- Reviewed: 21745 -->
 <sect1 id="zend.translate.additional">
     <title>Zusätzliche Features für Übersetzungen</title>
 
@@ -23,8 +23,8 @@
         </para>
 
         <para>
-            Man kann Optionen temporär setzen, indem man Sie an die Funktion
-            <methodname>addTranslation()</methodname> übergibt. Ausserdem kann die Methode
+            Man kann Optionen temporär setzen, indem man sie an die Funktion
+            <methodname>addTranslation()</methodname> übergibt. Außerdem kann die Methode
             <methodname>setOptions()</methodname> benutzt werden, um Optionen permanent zu setzen.
         </para>
 
@@ -79,14 +79,14 @@ $translate->addTranslation(
                         <entry>nur Zend_Translate</entry>
 
                         <entry>
-                            Definiert den Adapter der für die Übersetzung verwendet wird. Diese
-                            Option kann nur angegeben werden wenn eine neue Instanz von
-                            <classname>Zend_Translate</classname> erstellt wird. Wenn Sie im
-                            Nachhinein gesetzt wird, dann wird Sie ignoriert
+                            Definiert den Adapter, der für die Übersetzung verwendet wird. Diese
+                            Option kann nur angegeben werden, wenn eine neue Instanz von
+                            <classname>Zend_Translate</classname> erstellt wird. Wenn sie im
+                            Nachhinein gesetzt wird, dann wird sie ignoriert.
                         </entry>
 
                         <entry>
-                            <emphasis>Muss gesetzt werden da es keinen Standardwert gibt</emphasis>
+                            <emphasis>Muss gesetzt werden, da es keinen Standardwert gibt</emphasis>
                         </entry>
                     </row>
 
@@ -108,9 +108,9 @@ $translate->addTranslation(
                         <entry>Alle</entry>
 
                         <entry>
-                            Setzt den Inhalt für den Übersetzungs-Adapter. Das könnte ein Array,
+                            Setzt den Inhalt für den Übersetzungsadapter. Das könnte ein Array,
                             ein Dateiname oder ein Verzeichnis sein. Welche Art an Inhalt
-                            unterstützt wird hängt vom verwendeten Adapter ab.
+                            unterstützt wird, hängt vom verwendeten Adapter ab.
                         </entry>
 
                         <entry>
@@ -144,7 +144,7 @@ $translate->addTranslation(
                             <code>'tmp'</code> gesetzt wird, werden Verzeichnisse und
                             Dateien wie z.B. <code>'tmpImages'</code> und <code>'tmpFiles'</code>,
                             sowie alle darunter liegenden Verzeichnisse ignoriert. Diese Option
-                            akzeptiert auch ein Array welches verwendet werden kann wenn man mehr
+                            akzeptiert auch ein Array, welches verwendet werden kann, wenn man mehr
                             als einen Präfix ignorieren will.
                         </entry>
 
@@ -205,7 +205,7 @@ $translate->addTranslation(
                         <entry>Alle</entry>
 
                         <entry>
-                            Wenn <constant>NULL</constant> gesetzt wird, wird die Verzechnisstruktur
+                            Wenn <constant>NULL</constant> gesetzt wird, wird die Verzeichnisstruktur
                             nicht gescannt. Wenn
                             <constant>Zend_Translate::LOCALE_DIRECTORY</constant> gesetzt wird,
                             wird das Gebietsschema im Verzeichnis gesucht. Wenn
@@ -276,7 +276,7 @@ $translate->addTranslation(
             werden, um die eigene Option zu definieren. <methodname>setOptions()</methodname>
             benötigt ein Array mit den Optionen, die gesetzt werden sollen. Wenn eine angegebene
             Option bereits existiert, wird diese überschrieben. Es können beliebig viele Optionen
-            definiert werden, da diese nicht vom Adapter geprüft werden. Man muß nur sicherstellen,
+            definiert werden, da diese nicht vom Adapter geprüft werden. Man muss nur sicherstellen,
             dass keine existierende Option überschrieben wird, die von einem Adapter verwendet wird.
         </para>
 
@@ -305,7 +305,7 @@ $translate->addTranslation(
         <para>
             Die Methode <methodname>setLocale()</methodname> setzt eine neue Standardsprache für
             Übersetzungen. Das verhindert, dass der optionale Sprachparameter der
-            Methode <methodname>translate()</methodname> mehr als einmal gesetzt werden muß. Wenn
+            Methode <methodname>translate()</methodname> mehr als einmal gesetzt werden muss. Wenn
             die angegebene Sprache nicht existiert oder keine übersetzten Daten für diese Sprache
             vorhanden sind, versucht <methodname>setLocale()</methodname> auf die Sprache ohne
             Region downzugraden, wenn diese angegeben wurde. Die Sprache <code>en_US</code> würde zum
@@ -331,7 +331,7 @@ $translate->addTranslation(
 // gibt die aktuell gesetzte Sprache zurück
 $actual = $translate->getLocale();
 
-// der optionale Parameter kann wärend der Übersetzung verwendet werden
+// der optionale Parameter kann während der Übersetzung verwendet werden
 echo $translate->_("my_text", "fr");
 // oder setze eine neue Standardsprache
 $translate->setLocale("fr");
@@ -356,7 +356,7 @@ if ($translate->isAvailable("fr")) {
                 <methodname>addTranslation()</methodname> Methode hinzufügt,
                 <classname>Zend_Translate</classname> automatisch die am besten passende Sprache für
                 die eigene Umgebung auswählt, wenn man eine der automatischen Gebietsschemata
-                verwendet, die '<code>auto</code>' oder '<code>browser</code>' sein können. Man muß
+                verwendet, die '<code>auto</code>' oder '<code>browser</code>' sein können. Man muss
                 normalerweise also <methodname>setLocale()</methodname> nicht aufrufen. Das sollte
                 nur in Verbindung mit der automatischen Erkennung von Quellen verwendet werden.
             </para>
@@ -469,16 +469,16 @@ $translate->getLocale();
             <title>Ein Land als Sprache verwenden</title>
 
             <para>
-                Man kann auch ein Land als "locale" Parameter verwenden. Dass kann nützlich sein
+                Man kann auch ein Land als "locale"-Parameter verwenden. Dass kann nützlich sein,
                 wenn man seinem Benutzer Fahnen anbieten will, welche das Land repräsentieren in dem
                 er lebt. Wenn er seine Fahne auswählt, würde er automatisch die Standardsprache für
                 dieses Land erhalten.
             </para>
 
             <para>
-                Wenn der Benutzer, zum Beispiel, <emphasis>US</emphasis> auswählt, dann würde er
-                <emphasis>en_US</emphasis> als Gebietsschema erhalten welches dann verwendet wird.
-                Das führt automatisch zur Sprache <emphasis>en</emphasis> welche die Standardsprache
+                Wenn der Benutzer zum Beispiel <emphasis>US</emphasis> auswählt, dann würde er
+                <emphasis>en_US</emphasis> als Gebietsschema erhalten, welches dann verwendet wird.
+                Das führt automatisch zur Sprache <emphasis>en</emphasis>, welche die Standardsprache
                 für das Land <emphasis>US</emphasis> ist.
             </para>
 
@@ -496,19 +496,19 @@ $translate = new Zend_Translate(
                 <title>Länder immer groß schreiben</title>
 
                 <para>
-                    Wenn man diese Syntax verwendet sollte man die Eingaben immer groß schreiben
-                    wenn man weiß das es ein Land ist. Der Grund hierfür ist, das es auch Sprachen
-                    gibt welche die gleichen Buchstaben wie ein Land verwenden. Nehmen wir zum
+                    Wenn man diese Syntax verwendet, sollte man die Eingaben immer groß schreiben,
+                    wenn man weiß, dass es ein Land ist. Der Grund hierfür ist, dass es auch Sprachen
+                    gibt, welche die gleichen Buchstaben wie ein Land verwenden. Nehmen wir zum
                     Beispiel <emphasis>om</emphasis>. Man könnte erwarten
-                    <emphasis>ar_OM</emphasis> zu erhalten wenn man das Land "Oman" meint, oder man
-                    könnte die Sprache "Oromo" erwarten welche zum Beispiel in Kenia gesprochen
+                    <emphasis>ar_OM</emphasis> zu erhalten, wenn man das Land "Oman" meint oder man
+                    könnte die Sprache "Oromo" erwarten, welche zum Beispiel in Kenia gesprochen
                     wird.
                 </para>
 
                 <para>
-                    Da <classname>Zend_Translate</classname> auf Sprachen bezogen ist würde es in
+                    Da <classname>Zend_Translate</classname> auf Sprachen bezogen ist, würde es in
                     so einem Fall immer die Sprache wählen. Deshalb sollte das Gebietsschema immer
-                    groß geschrieben werden kann man es will das es als Land erkannt wird.
+                    groß geschrieben werden, wenn man will, dass es als Land erkannt wird.
                 </para>
             </note>
         </sect3>
@@ -519,7 +519,7 @@ $translate = new Zend_Translate(
 
         <para>
             <classname>Zend_Translate</classname> kann Übersetzungsquellen automatisch erkennen. Es
-            muß also nicht jede Quelldatei manuell deklariert werden. Man kann diesen Job
+            muss also nicht jede Quelldatei manuell deklariert werden. Man kann diesen Job
             <classname>Zend_Translate</classname> überlassen, welches die komplette
             Verzeichnisstruktur nach Quelldateien durchsucht.
         </para>
@@ -554,10 +554,10 @@ $translate = new Zend_Translate(
         </example>
 
         <para>
-            <classname>Zend_Translate</classname> muß also nicht nur das angegebene Verzeichnis
+            <classname>Zend_Translate</classname> muss also nicht nur das angegebene Verzeichnis
             nach Dateien für Übersetzungen durchsuchen, sondern auch alle Unterverzeichnisse. Das
             macht die Verwendung sehr einfach. Aber <classname>Zend_Translate</classname> wird alle
-            Dateien ignorieren, welche keine Quellen sind, oder wärend des Einlesens der
+            Dateien ignorieren, welche keine Quellen sind oder während des Einlesens der
             Übersetzungsdaten Fehler produzieren. Man sollte also sicherstellen, dass alle
             Übersetzungsquellen korrekt sind und gelesen werden können, weil man keinen Fehler erhält,
             wenn eine Datei fehlerhaft ist oder nicht gelesen werden kann.
@@ -643,8 +643,8 @@ $translate = new Zend_Translate(
 
             <para>
                 Ein anderer Weg um die Sprache automatisch zu erkennen ist die Verwendung von
-                speziellen Dateienamen. Man kann entweder die komplette Datei oder Teile der
-                Datei nach der verwendeten Sprache benennen. Um diese Option zu Verwenden muß die
+                speziellen Dateinamen. Man kann entweder die komplette Datei oder Teile der
+                Datei nach der verwendeten Sprache benennen. Um diese Option zu Verwenden muss die
                 '<code>scan</code>' Option beim Initiieren gesetzt werden. Es gibt verschiedene
                 Wege die Quelldateien zu benennen, welche im folgenden beschrieben werden:
             </para>
@@ -707,9 +707,9 @@ $translate = new Zend_Translate(
                 <title>Teile von Dateinamen</title>
 
                 <para>
-                    <classname>Zend_Translate</classname> kann die Sprache auch erkennen wenn sie im
-                    Dateinamen enthalten ist. Aber wenn man diesen Weg wählt, muß die Sprache mit
-                    einem Trennzeichen seperiert werden. Es gibt drei unterstützte Trennzeichen,
+                    <classname>Zend_Translate</classname> kann die Sprache auch erkennen, wenn sie im
+                    Dateinamen enthalten ist. Aber wenn man diesen Weg wählt, muss die Sprache mit
+                    einem Trennzeichen separiert werden. Es gibt drei unterstützte Trennzeichen,
                     welche verwendet werden können. Ein Punkt '.', ein Unterstrich '_', oder ein
                     Bindestrich '-'.
                 </para>
@@ -754,25 +754,25 @@ $translate = new Zend_Translate(
             <title>Spezielle Dateien und Verzeichnisse ignorieren</title>
 
             <para>
-                Manchmal ist es nützlich Dateien oder sogar Verzeichnisse davon auszunehmen das Sie
+                Manchmal ist es nützlich, Dateien oder sogar Verzeichnisse davon auszunehmen, dass diese
                 automatisch hinzugefügt werden. Hierfür kann man die Option
-                <property>ignore</property> verwenden welche 3 mögliche Verwendungen anbietet.
+                <property>ignore</property> verwenden, welche drei mögliche Verwendungen anbietet.
             </para>
 
             <sect4 id="zend.translate.additional.detection.ignore.string">
                 <title>Ein spezielles Verzeichnis oder eine Datei ignorieren</title>
 
                 <para>
-                    Standardmäßig ist <classname>Zend_Translate</classname> so gesetzt dass alle
-                    Dateien und Verzeichnisse welche mit <emphasis>'/.'</emphasis> beginnen
-                    ignoriert werden. Dies bedeutet dass <acronym>SVN</acronym> Dateien ignoriert
+                    Standardmäßig ist <classname>Zend_Translate</classname> so gesetzt, dass alle
+                    Dateien und Verzeichnisse, welche mit <emphasis>'/.'</emphasis> beginnen
+                    ignoriert werden. Dies bedeutet, dass <acronym>SVN</acronym>-Dateien ignoriert
                     werden.
                 </para>
 
                 <para>
-                    Man kann eine eigene Syntax setzen indem ein String für die Option
-                    <property>ignore</property> angegeben wird. Der Verzeichnis Separator wird
-                    automatisch angehängt wenn er nicht angegeben wurde.
+                    Man kann eine eigene Syntax setzen, indem ein String für die Option
+                    <property>ignore</property> angegeben wird. Der Verzeichnistrenner wird
+                    automatisch angehängt, wenn er nicht angegeben wurde.
                 </para>
 
                 <programlisting><![CDATA[
@@ -787,7 +787,7 @@ $translate = new Zend_Translate(
 ]]></programlisting>
 
                 <para>
-                    Das obige Beispiel ignoriert alle Dateien und Verzeichnisse welche mit
+                    Das obige Beispiel ignoriert alle Dateien und Verzeichnisse, welche mit
                     <emphasis>test</emphasis> beginnen. Das bedeutet zum Beispiel
                     <filename>/test/en.mo</filename>, <filename>/testing/en.mo</filename> und
                     <filename>/dir/test_en.mo</filename>. Aber es würde trotzdem
@@ -796,14 +796,14 @@ $translate = new Zend_Translate(
                 </para>
 
                 <note>
-                    <title>Verhindern das SVN Dateien gesucht werden</title>
+                    <title>Verhindern, dass SVN-Dateien gesucht werden</title>
 
                     <para>
-                        Wenn man diese Option setzt dann wird das Standardmäßige
-                        <emphasis>'/.'</emphasis> gelöscht. Dies bedeutet dass
+                        Wenn man diese Option setzt, dann wird das standardmäßige
+                        <emphasis>'/.'</emphasis> gelöscht. Dies bedeutet, dass
                         <classname>Zend_Translate</classname> dann alle Dateien von den versteckten
-                        <acronym>SVN</acronym> Verzeichnissen hinzugefügt werden. Wenn man mit
-                        <acronym>SVN</acronym> arbeitet, dann sollte man die Array Syntax verwenden
+                        <acronym>SVN</acronym>-Verzeichnissen hinzugefügt werden. Wenn man mit
+                        <acronym>SVN</acronym> arbeitet, dann sollte man die Array-Syntax verwenden,
                         welche im nächsten Abschnitt beschrieben wird.
                     </para>
                 </note>
@@ -814,7 +814,7 @@ $translate = new Zend_Translate(
 
                 <para>
                     Man kann auch verschiedene Dateien und Verzeichnisse ignorieren. Statt eines
-                    Strings muss man einfach ein Array mit den gewünschten Namen angeben welche
+                    Strings muss man einfach ein Array mit den gewünschten Namen angeben, welche
                     ignoriert werden sollen.
                 </para>
 
@@ -830,8 +830,9 @@ $translate = new Zend_Translate(
 ]]></programlisting>
 
                 <para>
-                    Im obigen Fall werden alle 3 Syntax ignoriert. Aber trotzdem müssen Sie mit der
-                    Syntax beginnen um erkannt und ignoriert zu werden.
+                    Im obigen Fall werden alle Dateien oder Verzeichnisse ignoriert, die auf
+                    eines der drei Muster passen. Aber sie müssen
+                    mit dem Muster beginnen, um erkannt und ignoriert zu werden.
                 </para>
             </sect4>
 
@@ -839,13 +840,13 @@ $translate = new Zend_Translate(
                 <title>Spezifische Namen ignorieren</title>
 
                 <para>
-                    Um Dateien und Verzeichnisse zu ignorieren welche nicht mit einer definierten
-                    Syntax beginnen, aber eine spezielle Syntax irgendwo in Ihrem Namen haben, kann
+                    Um Dateien und Verzeichnisse zu ignorieren, welche nicht mit einem definierten
+                    Muster beginnen, aber ein spezielles Muster irgendwo in ihrem Namen haben, kann
                     man einen regulären Ausdruck verwenden.
                 </para>
 
                 <para>
-                    Um einen regulären Ausdruck zu verwenden muss der Array-Schlüssel der Option
+                    Um einen regulären Ausdruck zu verwenden, muss der Array-Schlüssel der Option
                     <property>ignore</property> mit <emphasis>regex</emphasis> beginnen.
                 </para>
 
@@ -862,11 +863,11 @@ $translate = new Zend_Translate(
 ]]></programlisting>
 
                 <para>
-                    Im obigen Fall haben wir 2 reguläre Ausdrücke definiert. Die Dateien und
+                    Im obigen Fall haben wir zwei reguläre Ausdrücke definiert. Die Dateien und
                     Verzeichnisse werden immer mit allen angegebenen regulären Ausdrücken gesucht.
-                    In unserem Fall bedeutet dies dass jede Datei welche irgendwo in Ihrem Namen
+                    In unserem Fall bedeutet dies, dass jede Datei welche irgendwo in ihrem Namen
                     <emphasis>test</emphasis> enthält ignoriert wird. Zusätzlich werden alle Dateien
-                    und Verzeichnisse welche mit <emphasis>deleted</emphasis> enden nicht als
+                    und Verzeichnisse, welche mit <emphasis>deleted</emphasis> enden, nicht als
                     Übersetzung hinzugefügt.
                 </para>
             </sect4>
@@ -874,17 +875,17 @@ $translate = new Zend_Translate(
     </sect2>
 
     <sect2 id="zend.translate.additional.combination">
-        <title>Mehrere Übersetzungs-Quellen kombinieren</title>
+        <title>Mehrere Übersetzungsquellen kombinieren</title>
 
         <para>
-            Wenn man mit mehreren Übersetzungen arbeitet kann es zu Situationen kommen in denen man
-            unterschiedliche Quell-Typen verwenden will. Zum Beispiel die Ressource Dateien welche
-            vom Framework angeboten werden und eigene Übersetzungen welche durch Verwendung des
-            Gettext Adapters vorhanden sind.
+            Wenn man mit mehreren Übersetzungen arbeitet, kann es zu Situationen kommen, in denen man
+            unterschiedliche Quell-Typen verwenden will. Zum Beispiel die Ressource-Dateien, welche
+            vom Framework angeboten werden und eigene Übersetzungen, welche durch Verwendung des
+            Gettext-Adapters vorhanden sind.
         </para>
 
         <para>
-            Durch Kombination mehrerer Übersetzungs-Adapter kann man diese in einer Instanz
+            Durch Kombination mehrerer Übersetzungsadapter kann man diese in einer Instanz
             verwenden. Siehe das folgende Beispiel:
         </para>
 
@@ -909,8 +910,8 @@ $translate->addTranslation(array('content' => $translate_second));
 ]]></programlisting>
 
         <para>
-            Jetzt enthält die erste Instanz alle Übersetzungen der zweiten Instanz und man kann Sie
-            in der Anwendung sogar dann verwenden wenn unterschiedliche Quell-Typen verwendet
+            Jetzt enthält die erste Instanz alle Übersetzungen der zweiten Instanz und man kann sie
+            in der Anwendung sogar dann verwenden, wenn unterschiedliche Quell-Typen verwendet
             werden.
         </para>
 
@@ -918,15 +919,15 @@ $translate->addTranslation(array('content' => $translate_second));
             <title>Speicher sparen</title>
 
             <para>
-                Wie man sehen kann wird die zweite Instanz nicht länger verwendet sobald man Sie der
-                ersten Instanz hinzugefügt hat. Um etwas Speicher zu sparen kan man Sie entfernen
+                Wie man sehen kann wird die zweite Instanz nicht länger verwendet, sobald man sie der
+                ersten Instanz hinzugefügt hat. Um etwas Speicher zu sparen, kann man sie entfernen
                 (unset).
             </para>
         </note>
 
         <para>
-            Wenn man Verzeichnisse scannt kann es sein dass man nur eine definierte Sprache
-            verwenden will. Die vordefinierten Ressourcen zum Beispiel sind in mehr als 10 Sprachen
+            Wenn man Verzeichnisse scannt, kann es sein, dass man nur eine definierte Sprache
+            verwenden will. Die vordefinierten Ressourcen sind zum Beispiel in mehr als 10 Sprachen
             vorhanden. Aber die eigene Sprache ist nicht in allen dieser Sprachen erhältlich.
             Deshalb kann man auch nur eine Sprache vom zweiten Adapter hinzufügen.
         </para>
@@ -941,8 +942,8 @@ $translate->addTranslation(
 ]]></programlisting>
 
         <para>
-            Das erlaubt es trotzdem durch die Verzeichnisse zu scannen und nur jene Sprachen hinzu
-            zu fügen welche für die eigene Anwendung relevant sind.
+            Das erlaubt es trotzdem durch die Verzeichnisse zu scannen und nur jene Sprachen
+            hinzuzufügen, welche für die eigene Anwendung relevant sind.
         </para>
     </sect2>
 
@@ -1012,8 +1013,8 @@ if ($translate->isTranslated('message1', false, 'de')) {
         </para>
 
         <para>
-            Man muß den folgenden zwei oder drei einfachen Schritten folgen. Zuerst muß man eine
-            Instanz von <classname>Zend_Log</classname> erstellen. Anschliessend muß man diese Instanz an
+            Man muss den folgenden zwei oder drei einfachen Schritten folgen. Zuerst muss man eine
+            Instanz von <classname>Zend_Log</classname> erstellen. Anschließend muss man diese Instanz an
             <classname>Zend_Translate</classname> übergeben. Siehe das folgende Beispiel:
         </para>
 
@@ -1060,7 +1061,7 @@ $translate->translate('unbekannter String');
         <para>
             Dieses Feature kann nicht nur verwendet werden um Nachrichten zu Loggen sondern auch um
             diese nicht übersetzen Nachrichten in eine leere Übersetzungsdatei zu schreiben. Um das
-            zu ermöglichen, muß man seinen eigenen Log Writer erstellen, der das Format schreibt, das
+            zu ermöglichen, muss man seinen eigenen Log Writer erstellen, der das Format schreibt, das
             man haben will und das führende "Untranslated message" herausschneidet.
         </para>
 
@@ -1127,7 +1128,7 @@ $translate->translate('unknown string');
             zurückgibt. Wenn dieser Parameter nicht angegeben wird, wird die aktuell gesetzte
             Sprache verwendet. Es ist zu beachten, dass normalerweise alle Übersetzungen in allen
             Sprachen vorhanden sein sollten. Das bedeutet, dass man in einer normalen Situation diesen
-            Parameter nicht angeben muß.
+            Parameter nicht angeben muss.
         </para>
 
         <para>

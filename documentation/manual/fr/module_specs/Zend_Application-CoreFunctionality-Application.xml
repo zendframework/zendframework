@@ -112,18 +112,20 @@
                                         la section de configuration à charger depuis le fichier.
                                     </para>
                                     <para>
-                                        As of 1.10, you may also pass multiple paths containing
-                                        config files to be merged into a single configuration.
-                                        This assists in reducing config duplication across many
-                                        contexts which share common settings (e.g. configs for
-                                        <acronym>HTTP</acronym>, or <acronym>CLI</acronym>, each
-                                        sharing some characteristics but with their own
-                                        conflicting values for others) or merely splitting a
-                                        long configuration across many smaller categorised
-                                        files. The parameter in this case is an array with a
-                                        single key "configs" whose value is an array of the
-                                        files to merge. Note: this means you either pass a
-                                        literal path, or
+                                        A partir de la version 1.10, vous pouvez fournir de
+                                        multiples chemins contenant des fichiers de configuration
+                                        qui seront fusionnés en une seule configuration. Ceci
+                                        permet de diminuer les duplications de configuration suivant
+                                        les contextes en permettant le partage des réglages communs
+                                        (par ex., avec les configurations <acronym>HTTP</acronym>,
+                                        ou <acronym>CLI</acronym>, chacune partageant quelques
+                                        caractéristiques alors que d'autres entrent en conflit)
+                                        ou tout simplement pour découper de longs fichiers de
+                                        configuration en plus petits fichiers par catégorie.
+                                        Le paramètre dans ce cas est un tableau avec une clé unique
+                                        "configs", dont la valeur est un tableau des fichiers à
+                                        fusionner. Note : ceci veut dire que vous pouvez fournir
+                                        un chemin litéral ou 
                                         <command>array("configs"=>array("/path1","/path2"[,...]));</command>.
                                     </para>
                                 </listitem>

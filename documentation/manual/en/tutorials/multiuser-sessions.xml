@@ -7,11 +7,12 @@
         <title>Introduction to Sessions</title>
 
         <para>
-            The success of the web is deeply rooted in the protocol that drives the web: HTTP. HTTP
-            over TCP is by its very nature stateless, which means that inherently the web is also
-            stateless. While this very aspect is one of the dominating factors for why the web has
-            become such a popular medium, it also causes an interesting problem for developers that
-            want to use the web as an application platform.
+            The success of the web is deeply rooted in the protocol that drives the web:
+            <acronym>HTTP</acronym>. <acronym>HTTP</acronym> over TCP is by its very nature
+            stateless, which means that inherently the web is also stateless. While this very aspect
+            is one of the dominating factors for why the web has become such a popular medium, it
+            also causes an interesting problem for developers that want to use the web as an
+            application platform.
         </para>
 
         <para>

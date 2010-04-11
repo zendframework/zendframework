@@ -193,7 +193,7 @@ $client->setConfig($config);
         <title>Performing Basic HTTP Requests</title>
 
         <para>
-            Performing simple HTTP requests is very easily done using the
+            Performing simple <acronym>HTTP</acronym> requests is very easily done using the
             request() method, and rarely needs more than three lines of code:
 
             <example id="zend.http.client.basic-requests.example-1">
@@ -207,7 +207,7 @@ $response = $client->request();
 
             The request() method takes one optional parameter - the request method.
             This can be either GET, POST, PUT, HEAD, DELETE, TRACE, OPTIONS or
-            CONNECT as defined by the HTTP protocol
+            CONNECT as defined by the <acronym>HTTP</acronym> protocol
 
             <footnote>
               <para>
@@ -243,7 +243,7 @@ $response = $client->request();
         <title>Adding GET and POST parameters </title>
 
         <para>
-            Adding GET parameters to an HTTP request is quite simple, and can
+            Adding GET parameters to an <acronym>HTTP</acronym> request is quite simple, and can
             be done either by specifying them as part of the URL, or by using
             the setParameterGet() method.
             This method takes the GET parameter's name as its first parameter,

@@ -172,8 +172,8 @@ $cookie = Zend_Http_Cookie::fromString('foo=bar; secure;',
 
         <para>
             A cookie object can be transferred back into a string, using the __toString() magic
-            method. This method will produce a HTTP request "Cookie" header string, showing the
-            cookie's name and value, and terminated by a semicolon (';').
+            method. This method will produce a <acronym>HTTP</acronym> request "Cookie" header
+            string, showing the cookie's name and value, and terminated by a semicolon (';').
             The value will be URL encoded, as expected in a Cookie header:
             <example id="zend.http.cookies.cookie.instantiating.example-2">
                <title>Stringifying a Zend_Http_Cookie object</title>

@@ -4,24 +4,25 @@
     <title>Security Architecture</title>
 
     <para>
-        OAuth was designed specifically to operate over an insecure HTTP connection and so the use
-        of HTTPS is not required though obviously it would be desireable if available. Should a
-        HTTPS connection be feasible, OAuth offers a signature method implementation called
-        PLAINTEXT which may be utilised. Over a typical unsecured HTTP connection, the use of
-        PLAINTEXT must be avoided and an alternate scheme using. The OAuth specification defines two
-        such signature methods: HMAC-SHA1 and RSA-SHA1. Both are fully supported by
-        <classname>Zend_Oauth</classname>.
+        OAuth was designed specifically to operate over an insecure <acronym>HTTP</acronym>
+        connection and so the use of <acronym>HTTPS</acronym> is not required though obviously it
+        would be desireable if available. Should a <acronym>HTTPS</acronym> connection be feasible,
+        OAuth offers a signature method implementation called PLAINTEXT which may be utilised. Over
+        a typical unsecured <acronym>HTTP</acronym> connection, the use of PLAINTEXT must be avoided
+        and an alternate scheme using. The OAuth specification defines two such signature methods:
+        HMAC-SHA1 and RSA-SHA1. Both are fully supported by <classname>Zend_Oauth</classname>.
     </para>
 
     <para>
         These signature methods are quite easy to understand. As you can imagine, a PLAINTEXT
-        signature method does nothing that bears mentioning since it relies on HTTPS. If you were to
-        use PLAINTEXT over HTTP, you are left with a significant problem: there's no way to be sure
-        that the content of any OAuth enabled request (which would include the OAuth Access Token)
-        was altered en route. This is because unsecured HTTP requests are always at risk of
-        eavesdropping, Man In The Middle (MITM) attacks, or other risks whereby a request can be
-        retooled so to speak to perform tasks on behalf of the attacker by masquerading as the
-        origin application without being noticed by the service provider.
+        signature method does nothing that bears mentioning since it relies on
+        <acronym>HTTPS</acronym>. If you were to use PLAINTEXT over <acronym>HTTP</acronym>, you are
+        left with a significant problem: there's no way to be sure that the content of any OAuth
+        enabled request (which would include the OAuth Access Token) was altered en route. This is
+        because unsecured <acronym>HTTP</acronym> requests are always at risk of eavesdropping, Man
+        In The Middle (MITM) attacks, or other risks whereby a request can be retooled so to speak
+        to perform tasks on behalf of the attacker by masquerading as the origin application without
+        being noticed by the service provider.
     </para>
 
     <para>
@@ -71,9 +72,10 @@
 
     <para>
         As a final point, this is not an exhaustive look at the security architecture in OAuth. For
-        example, what if HTTP requests which contain both the Access Token and the Consumer Secret
-        are eavesdropped? The system relies on at one in the clear transmission of each unless HTTPS
-        is active, so the obvious conclusion is that where feasible HTTPS is to be preferred leaving
-        unsecured HTTP in place only where it is not possible or affordable to do so.
+        example, what if <acronym>HTTP</acronym> requests which contain both the Access Token and
+        the Consumer Secret are eavesdropped? The system relies on at one in the clear transmission
+        of each unless <acronym>HTTPS</acronym> is active, so the obvious conclusion is that where
+        feasible <acronym>HTTPS</acronym> is to be preferred leaving unsecured
+        <acronym>HTTP</acronym> in place only where it is not possible or affordable to do so.
     </para>
 </sect2>

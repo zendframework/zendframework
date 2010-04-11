@@ -13,8 +13,8 @@
         </para>
 
         <para>
-            According to the HTTP/1.1 RFC, HTTP 301 and 302 responses should be
-            treated by the client by resending the same request to the
+            According to the <acronym>HTTP</acronym>/1.1 RFC, <acronym>HTTP</acronym> 301 and 302
+            responses should be treated by the client by resending the same request to the
             specified location - using the same request method. However, most
             clients to not implement this and always use a GET request when
             redirecting. By default, <classname>Zend_Http_Client</classname> does the same - when
@@ -163,7 +163,7 @@ $client->setHeaders(array(
         <title>File Uploads</title>
 
         <para>
-            You can upload files through HTTP using the setFileUpload method.
+            You can upload files through <acronym>HTTP</acronym> using the setFileUpload method.
             This method takes a file name as the first parameter, a form name
             as the second parameter, and data as a third optional parameter.
             If the third data parameter is <constant>NULL</constant>, the first file name parameter
@@ -263,10 +263,10 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
         <title>HTTP Authentication</title>
 
         <para>
-            Currently, <classname>Zend_Http_Client</classname> only supports basic HTTP
-            authentication. This feature is utilized using the <methodname>setAuth()</methodname>
-            method, or by specifying a username and a password in the URI. The
-            <methodname>setAuth()</methodname> method
+            Currently, <classname>Zend_Http_Client</classname> only supports basic
+            <acronym>HTTP</acronym> authentication. This feature is utilized using the
+            <methodname>setAuth()</methodname> method, or by specifying a username and a password in
+            the URI. The <methodname>setAuth()</methodname> method
             takes 3 parameters: The user name, the password and an optional
             authentication type parameter. As mentioned, currently only basic
             authentication is supported (digest authentication support is
@@ -417,7 +417,7 @@ $client->setRawData($fp, 'application/zip')->request('PUT');
         </para>
 
         <para>
-            Only PUT requests currently support sending streams to HTTP server.
+            Only PUT requests currently support sending streams to <acronym>HTTP</acronym> server.
         </para>
 
         <para>

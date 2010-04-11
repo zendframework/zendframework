@@ -231,8 +231,9 @@ phpSettings.display_errors = 1
         <para>
             Typically, you always need an <classname>IndexController</classname>, which is a
             fallback controller and which also serves the home page of the site, and an
-            <classname>ErrorController</classname>, which is used to indicate things such as HTTP
-            404 errors (controller or action not found) and HTTP 500 errors (application errors).
+            <classname>ErrorController</classname>, which is used to indicate things such as
+            <acronym>HTTP</acronym> 404 errors (controller or action not found) and
+            <acronym>HTTP</acronym> 500 errors (application errors).
         </para>
 
         <para>

@@ -16,8 +16,9 @@
 
         <para>
             In most cases, a <classname>Zend_Http_Response</classname> object will be instantiated
-            using the fromString() method, which reads a string containing an HTTP
-            response message, and returns a new <classname>Zend_Http_Response</classname> object:
+            using the fromString() method, which reads a string containing a
+            <acronym>HTTP</acronym> response message, and returns a new
+            <classname>Zend_Http_Response</classname> object:
             <example id="zend.http.response.introduction.example-1">
                 <title>Instantiating a Zend_Http_Response Object Using the Factory Method</title>
 

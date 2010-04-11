@@ -23,13 +23,13 @@
 
         <para>
             Pubsubhubbub has garnered attention because it is a pubsub protocol which is easy to
-            implement and which operates over HTTP. Its philosophy is to replace the traditional
-            model where blog feeds have been polled at regular intervals to detect and retrieve
-            updates. Depending on the frequency of polling, this can take a lot of time to
-            propagate updates to interested parties from planet aggregators to desktop readers. With
-            a pubsub system in place, updates are not simply polled by Subscribers, they are pushed
-            to Subscribers, elimenating any delay. For this reason, Pubsubhubbub forms part of what
-            has been dubbed the real-time web.
+            implement and which operates over <acronym>HTTP</acronym>. Its philosophy is to replace
+            the traditional model where blog feeds have been polled at regular intervals to detect
+            and retrieve updates. Depending on the frequency of polling, this can take a lot of time
+            to propagate updates to interested parties from planet aggregators to desktop readers.
+            With a pubsub system in place, updates are not simply polled by Subscribers, they are
+            pushed to Subscribers, elimenating any delay. For this reason, Pubsubhubbub forms part
+            of what has been dubbed the real-time web.
         </para>
 
         <para>
@@ -101,10 +101,10 @@
             updates it with new content. This may be a blog, an aggregator, or even a web service
             with a public feed based <acronym>API</acronym>. In order for these updates to be pushed
             to Subscribers, the Publisher must notify all of its supported Hubs that an update has
-            occured using a simple HTTP POST request containing the URI or the updated Topic (i.e
-            the updated RSS or Atom feed). The Hub will confirm receipt of the notification, fetch
-            the updated feed, and forward any updates to any Subscribers who have subscribed to that
-            Hub for updates from the relevant feed.
+            occured using a simple <acronym>HTTP</acronym> POST request containing the URI or the
+            updated Topic (i.e the updated RSS or Atom feed). The Hub will confirm receipt of the
+            notification, fetch the updated feed, and forward any updates to any Subscribers who
+            have subscribed to that Hub for updates from the relevant feed.
         </para>
 
         <para>
@@ -125,10 +125,10 @@
             a pair of local RSS and Atom feeds. The class retains a collection of errors which
             include the Hub URLs, so the notification can be re-attempted later and/or logged if any
             notifications happen to fail. Each resulting error array also includes a "response" key
-            containing the related HTTP response object. In the event of any errors, it is strongly
-            recommended to attempt the operation for failed Hub Endpoints at least once more at a
-            future time. This may require the use of either a scheduled task for this purpose or
-            a job queue though such extra steps are optional.
+            containing the related <acronym>HTTP</acronym> response object. In the event of any
+            errors, it is strongly recommended to attempt the operation for failed Hub Endpoints at
+            least once more at a future time. This may require the use of either a scheduled task
+            for this purpose or a job queue though such extra steps are optional.
         </para>
 
         <programlisting language="php"><![CDATA[

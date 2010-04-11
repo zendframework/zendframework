@@ -28,12 +28,13 @@
 
     <para>
         In the meantime TweetExpress has been busy. Before gaining your approval from Twitter, it
-        has sent a HTTP request to Twitter's service asking for a new unauthorized Request Token.
-        This token is not User specific from Twitter's perspective, but TweetExpress may use it
-        specifically for the current User and should associate it with their account and store it
-        for future use. TweetExpress now redirects the User to Twitter so they can approve
-        TweetExpress' access. The URL for this redirect will be signed using TweetExpress' Consumer
-        Secret and it will contain the unauthorized Request Token as a parameter.
+        has sent a <acronym>HTTP</acronym> request to Twitter's service asking for a new
+        unauthorized Request Token. This token is not User specific from Twitter's perspective, but
+        TweetExpress may use it specifically for the current User and should associate it with their
+        account and store it for future use. TweetExpress now redirects the User to Twitter so they
+        can approve TweetExpress' access. The URL for this redirect will be signed using
+        TweetExpress' Consumer Secret and it will contain the unauthorized Request Token as a
+        parameter.
     </para>
 
     <para>

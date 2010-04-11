@@ -45,9 +45,9 @@
     <para>
         There are several ways to select the desired currency. First, you may simply provide a
         currency string; alternately, you may specify a locale. The preferred way is to use a
-        locale as this information is automatically detected and selected via the HTTP client
-        headers provided when a user accesses your application, and ensures the currency provided
-        will match their locale.
+        locale as this information is automatically detected and selected via the
+        <acronym>HTTP</acronym> client headers provided when a user accesses your application, and
+        ensures the currency provided will match their locale.
     </para>
 
     <note>

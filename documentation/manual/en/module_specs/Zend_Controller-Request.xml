@@ -192,7 +192,7 @@
                     <varname>$_SERVER['REQUEST_URI']</varname>. If you are using such
                     a setup and getting invalid routing, you should use the
                     <classname>Zend_Controller_Request_Apache404</classname> class instead
-                    of the default Http class for your request object:
+                    of the default <acronym>HTTP</acronym> class for your request object:
                 </para>
 
                 <programlisting language="php"><![CDATA[

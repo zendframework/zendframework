@@ -21,9 +21,9 @@
     </para>
 
     <para>
-        Note that development table storage (in the Windows Azure SDK) does not support all features
-        provided by the <acronym>API</acronym>. Therefore, the examples listed on this page are to
-        be used on Windows Azure production table storage.
+        Note that development table storage (in the Windows Azure <acronym>SDK</acronym>) does not
+        support all features provided by the <acronym>API</acronym>. Therefore, the examples listed
+        on this page are to be used on Windows Azure production table storage.
     </para>
 
     <sect3 id="zend.service.windowsazure.storage.table.api">
@@ -677,7 +677,7 @@ $batch->commit();
             When running a <acronym>PHP</acronym> application on the Windows Azure platform in a
             load-balanced mode (running 2 Web Role instances or more), it is important that
             <acronym>PHP</acronym> session data can be shared between multiple Web Role instances.
-            The Windows Azure SDK for <acronym>PHP</acronym> provides the
+            The Windows Azure <acronym>SDK</acronym> for <acronym>PHP</acronym> provides the
             <classname>Zend_Service_WindowsAzure_SessionHandler</classname> class, which uses
             Windows Azure Table Storage as a session handler for <acronym>PHP</acronym>
             applications.

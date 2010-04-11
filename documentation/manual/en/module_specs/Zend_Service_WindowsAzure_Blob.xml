@@ -185,11 +185,11 @@ $storageClient->setContainerAcl('testcontainer', Zend_Service_WindowsAzure_Stora
         <title>Blob storage stream wrapper</title>
 
         <para>
-            The Windows Azure SDK for <acronym>PHP</acronym> provides support for registering a blob
-            storage client as a <acronym>PHP</acronym> file stream wrapper. The blob storage stream
-            wrapper provides support for using regular file operations on Windows Azure Blob
-            Storage. For example, one can open a file from Windows Azure Blob Storage with
-            the <methodname>fopen()</methodname> function:
+            The Windows Azure <acronym>SDK</acronym> for <acronym>PHP</acronym> provides support for
+            registering a blob storage client as a <acronym>PHP</acronym> file stream wrapper. The
+            blob storage stream wrapper provides support for using regular file operations on
+            Windows Azure Blob Storage. For example, one can open a file from Windows Azure Blob
+            Storage with the <methodname>fopen()</methodname> function:
         </para>
 
         <example id="zend.service.windowsazure.storage.blob.wrapper.sample">
@@ -205,9 +205,9 @@ fclose($fileHandle);
         </example>
 
         <para>
-            In order to do this, the Windows Azure SDK for <acronym>PHP</acronym> blob storage
-            client must be registered as a stream wrapper. This can be done by calling the
-            <methodname>registerStreamWrapper()</methodname> method:
+            In order to do this, the Windows Azure <acronym>SDK</acronym> for <acronym>PHP</acronym>
+            blob storage client must be registered as a stream wrapper. This can be done by calling
+            the <methodname>registerStreamWrapper()</methodname> method:
         </para>
 
         <example id="zend.service.windowsazure.storage.blob.wrapper.register">
@@ -314,9 +314,9 @@ $sharedAccessUrl = $storageClient->generateSharedAccessUrl(
 
             <para>
                 When you receive a Shared Access Signature from someone else, you can use the
-                Windows Azure SDK for <acronym>PHP</acronym> to work with the addressed resource.
-                For example, the following signature can be retrieved from the owner of a storage
-                account:
+                Windows Azure <acronym>SDK</acronym> for <acronym>PHP</acronym> to work with the
+                addressed resource. For example, the following signature can be retrieved from the
+                owner of a storage account:
             </para>
 
             <literallayout>
@@ -350,11 +350,11 @@ $storageClient->putBlob(
 
             <para>
                 Note that there was no explicit permission to write to a specific blob. Instead, the
-                Windows Azure SDK for <acronym>PHP</acronym> determined that a permission was
-                required to either write to that specific blob, or to write to its container. Since
-                only a signature was available for the latter, the Windows Azure SDK for
-                <acronym>PHP</acronym> chose those credentials to perform the request on Windows
-                Azure blob storage.
+                Windows Azure <acronym>SDK</acronym> for <acronym>PHP</acronym> determined that a
+                permission was required to either write to that specific blob, or to write to its
+                container. Since only a signature was available for the latter, the Windows Azure
+                <acronym>SDK</acronym> for <acronym>PHP</acronym> chose those credentials to perform
+                the request on Windows Azure blob storage.
             </para>
         </sect4>
     </sect3>

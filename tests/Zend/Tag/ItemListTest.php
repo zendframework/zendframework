@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Tag;
+use Zend\Tag;
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Tag_ItemListTest::main');
 }
@@ -37,17 +43,17 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Tag
  */
-class Zend_Tag_ItemListTest extends PHPUnit_Framework_TestCase
+class ItemListTest extends \PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     public function testArrayAccessAndCount()
     {
-        $list = new Zend_Tag_ItemList();
+        $list = new Tag\ItemList();
 
         $list[] = $this->_getItem('foo');
         $list[] = $this->_getItem('bar');
@@ -65,7 +71,7 @@ class Zend_Tag_ItemListTest extends PHPUnit_Framework_TestCase
 
     public function testSeekableIterator()
     {
-        $list = new Zend_Tag_ItemList();
+        $list = new Tag\ItemList();
 
         $values = array('foo', 'bar', 'baz');
         foreach ($values as $value) {
@@ -82,26 +88,26 @@ class Zend_Tag_ItemListTest extends PHPUnit_Framework_TestCase
         try {
             $list->seek(3);
             $this->fail('An expected OutOfBoundsException was not raised');
-        } catch (OutOfBoundsException $e) {
+        } catch (\OutOfBoundsException $e) {
             $this->assertEquals($e->getMessage(), 'Invalid seek position');
         }
     }
 
     public function testInvalidItem()
     {
-        $list = new Zend_Tag_ItemList();
+        $list = new Tag\ItemList();
 
         try {
             $list[] = 'test';
             $this->fail('An expected Zend_Tag_Exception was not raised');
-        } catch (Zend_Tag_Exception $e) {
+        } catch (Tag\Exception $e) {
             $this->assertEquals($e->getMessage(), 'Item must implement Zend_Tag_Taggable');
         }
     }
 
     public function testSpreadWeightValues()
     {
-        $list = new Zend_Tag_ItemList();
+        $list = new Tag\ItemList();
 
         $list[] = $this->_getItem('foo', 1);
         $list[] = $this->_getItem('bar', 5);
@@ -121,7 +127,7 @@ class Zend_Tag_ItemListTest extends PHPUnit_Framework_TestCase
 
     public function testSpreadWeightValuesWithSingleValue()
     {
-        $list = new Zend_Tag_ItemList();
+        $list = new Tag\ItemList();
 
         $list[] = $this->_getItem('foo', 1);
         $list[] = $this->_getItem('bar', 5);
@@ -141,22 +147,22 @@ class Zend_Tag_ItemListTest extends PHPUnit_Framework_TestCase
 
     public function testSpreadWeightValuesWithEmptyValuesArray()
     {
-        $list = new Zend_Tag_ItemList();
+        $list = new Tag\ItemList();
 
         try {
             $list->spreadWeightValues(array());
             $this->fail('An expected Zend_Tag_Exception was not raised');
-        } catch (Zend_Tag_Exception $e) {
+        } catch (Tag\Exception $e) {
             $this->assertEquals($e->getMessage(), 'Value list may not be empty');
         }
     }
 
     protected function _getItem($title = 'foo', $weight = 1)
     {
-        return new Zend_Tag_Item(array('title' => $title, 'weight' => $weight));
+        return new Tag\Item(array('title' => $title, 'weight' => $weight));
     }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Tag_ItemListTest::main') {
-    Zend_Tag_ItemListTest::main();
+    \Zend_Tag_ItemListTest::main();
 }

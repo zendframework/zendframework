@@ -14379,10 +14379,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tag/Cloud.php</originalRelativeFilePath>
       <originalClassName>Zend_Tag_Cloud</originalClassName>
-      <newRelativeFilePath>Zend/Tag/Cloud/Cloud.php</newRelativeFilePath>
-      <newNamespace>Zend\Tag\Cloud</newNamespace>
+      <newRelativeFilePath>Zend/Tag/Cloud.php</newRelativeFilePath>
+      <newNamespace>Zend\Tag</newNamespace>
       <newClassName>Cloud</newClassName>
-      <newFullyQualifiedName>Zend\Tag\Cloud\Cloud</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tag\Cloud</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tag/Exception.php</originalRelativeFilePath>

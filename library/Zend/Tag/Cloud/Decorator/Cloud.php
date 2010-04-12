@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tag\Cloud\Decorator;
+
+/**
  * Abstract class for cloud decorators
  *
  * @category  Zend
@@ -28,7 +33,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Tag_Cloud_Decorator_Cloud
+abstract class Cloud
 {
     /**
      * Option keys to skip when calling setOptions()
@@ -47,7 +52,7 @@ abstract class Zend_Tag_Cloud_Decorator_Cloud
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         }
 
@@ -60,7 +65,7 @@ abstract class Zend_Tag_Cloud_Decorator_Cloud
      * Set options from array
      *
      * @param  array $options Configuration for the decorator
-     * @return Zend_Tag_Cloud
+     * @return \Zend\Tag\Cloud
      */
     public function setOptions(array $options)
     {

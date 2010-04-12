@@ -21,17 +21,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tag;
+
+/**
  * @uses       ArrayAccess
  * @uses       Countable
  * @uses       OutOfBoundsException
  * @uses       SeekableIterator
- * @uses       Zend_Tag_Exception
+ * @uses       \Zend\Tag\Exception
  * @category   Zend
  * @package    Zend_Tag
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
+class ItemList implements \Countable, \SeekableIterator, \ArrayAccess
 {
     /**
      * Items in this list
@@ -54,14 +59,14 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
      * Spread values in the items relative to their weight
      *
      * @param  array $values
-     * @throws Zend_Tag_Exception When value list is empty
+     * @throws \Zend\Tag\Exception When value list is empty
      * @return void
      */
     public function spreadWeightValues(array $values)
     {
         // Don't allow an empty value list
         if (count($values) === 0) {
-            throw new Zend_Tag_Exception('Value list may not be empty');
+            throw new Exception('Value list may not be empty');
         }
 
         // Re-index the array
@@ -128,7 +133,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
         }
 
         if (!$this->valid()) {
-            throw new OutOfBoundsException('Invalid seek position');
+            throw new \OutOfBoundsException('Invalid seek position');
         }
     }
 
@@ -196,7 +201,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
      * Get the value of an offset
      *
      * @param  mixed $offset
-     * @return Zend_Tag_Taggable
+     * @return \Zend\Tag\Taggable
      */
     public function offsetGet($offset) {
         return $this->_items[$offset];
@@ -206,15 +211,15 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
      * Append a new item
      *
      * @param  mixed          $offset
-     * @param  Zend_Tag_Taggable $item
-     * @throws OutOfBoundsException When item does not implement Zend_Tag_Taggable
+     * @param  \Zend\Tag\Taggable $item
+     * @throws OutOfBoundsException When item does not implement \Zend\Tag\Taggable
      * @return void
      */
     public function offsetSet($offset, $item) {
         // We need to make that check here, as the method signature must be
         // compatible with ArrayAccess::offsetSet()
-        if (!($item instanceof Zend_Tag_Taggable)) {
-            throw new Zend_Tag_Exception('Item must implement Zend_Tag_Taggable');
+        if (!($item instanceof Taggable)) {
+            throw new Exception('Item must implement Zend_Tag_Taggable');
         }
 
         if ($offset === null) {

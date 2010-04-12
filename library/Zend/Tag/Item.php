@@ -21,15 +21,20 @@
  */
 
 /**
- * @uses       Zend_Tag_Exception
- * @uses       Zend_Tag_Taggable
+ * @namespace
+ */
+namespace Zend\Tag;
+
+/**
+ * @uses       \Zend\Tag\Exception
+ * @uses       \Zend\Tag\Taggable
  * @category   Zend
  * @package    Zend_Tag
- * @uses       Zend_Tag_Taggable
+ * @uses       \Zend\Tag\Taggable
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tag_Item implements Zend_Tag_Taggable
+class Item implements Taggable
 {
     /**
      * Title of the tag
@@ -65,30 +70,30 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
     /**
      * Create a new tag according to the options
      *
-     * @param  array|Zend_Config $options
-     * @throws Zend_Tag_Exception When invalid options are provided
-     * @throws Zend_Tag_Exception When title was not set
-     * @throws Zend_Tag_Exception When weight was not set
+     * @param  array|\Zend\Config\Config $options
+     * @throws \Zend\Tag\Exception When invalid options are provided
+     * @throws \Zend\Tag\Exception When title was not set
+     * @throws \Zend\Tag\Exception When weight was not set
      * @return void
      */
     public function __construct($options)
     {
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         }
 
         if (!is_array($options)) {
-            throw new Zend_Tag_Exception('Invalid options provided to constructor');
+            throw new Exception('Invalid options provided to constructor');
         }
 
         $this->setOptions($options);
 
         if ($this->_title === null) {
-            throw new Zend_Tag_Exception('Title was not set');
+            throw new Exception('Title was not set');
         }
 
         if ($this->_weight === null) {
-            throw new Zend_Tag_Exception('Weight was not set');
+            throw new Exception('Weight was not set');
         }
     }
 
@@ -96,7 +101,7 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
      * Set options of the tag
      *
      * @param  array $options
-     * @return Zend_Tag_Item
+     * @return \Zend\Tag\Item
      */
     public function setOptions(array $options)
     {
@@ -128,13 +133,13 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
      * Set the title
      *
      * @param  string $title
-     * @throws Zend_Tag_Exception When title is no string
-     * @return Zend_Tag_Item
+     * @throws \Zend\Tag\Exception When title is no string
+     * @return \Zend\Tag\Item
      */
     public function setTitle($title)
     {
         if (!is_string($title)) {
-            throw new Zend_Tag_Exception('Title must be a string');
+            throw new Exception('Title must be a string');
         }
 
         $this->_title = (string) $title;
@@ -155,13 +160,13 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
      * Set the weight
      *
      * @param  float $weight
-     * @throws Zend_Tag_Exception When weight is not numeric
-     * @return Zend_Tag_Item
+     * @throws \Zend\Tag\Exception When weight is not numeric
+     * @return \Zend\Tag\Item
      */
     public function setWeight($weight)
     {
         if (!is_numeric($weight)) {
-            throw new Zend_Tag_Exception('Weight must be numeric');
+            throw new Exception('Weight must be numeric');
         }
 
         $this->_weight = (float) $weight;
@@ -172,7 +177,7 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
      * Set multiple params at once
      *
      * @param  array $params
-     * @return Zend_Tag_Item
+     * @return \Zend\Tag\Item
      */
     public function setParams(array $params)
     {
@@ -188,7 +193,7 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
      *
      * @param  string $name
      * @param  mixed  $value
-     * @return Zend_Tag_Item
+     * @return \Zend\Tag\Item
      */
     public function setParam($name, $value)
     {

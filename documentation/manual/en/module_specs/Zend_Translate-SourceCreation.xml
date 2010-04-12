@@ -46,7 +46,7 @@ $translate = new Zend_Translate(
         'locale'  => 'en'
     )
 );
-$translate->addTranslation(array('content' => $deutsch, 'locale' => 'de'));
+$translate->addTranslation(array('content' => $german, 'locale' => 'de'));
 ]]></programlisting>
 
         <para>

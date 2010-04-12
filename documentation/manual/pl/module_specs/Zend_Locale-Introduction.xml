@@ -34,7 +34,7 @@
 
         <para>
             W <ulink url="http://php.net/setlocale">dokumentacji PHP</ulink> można przeczytać, że
-            funkcja <methodname>setlocale()</methodname> nie jest bezpieczna wątkowo (threadsafe)
+            funkcja <methodname>setlocale()</methodname> nie jest bezpieczna wątkowo (thread-safe)
             ponieważ działa w zasięgu procesu a nie wątku. To oznacza, że w środowisku
             wielowątkowym może dojść do sytuacji w której locale ulegnie zmianie pomimo braku
             odwołań do funkcji <methodname>setlocale()</methodname> w skrypcie.
@@ -68,7 +68,7 @@
 
             <listitem>
                 <para>
-                    <classname>Zend_Translate</classname> - Tłumaczenie łąńcuchów znaków.
+                    <classname>Zend_Translate</classname> - Tłumaczenie łańcuchów znaków.
                 </para>
             </listitem>
 
@@ -439,7 +439,7 @@ $date = new Zend_Date('2006',Zend_Date::YEAR);
 
         <para>
             Aby zmienić domyślne zachowanie i zmusić komponenty Zend Framework "świadome" locale
-            do użytku określonego locale (obojętnie od ustawień przyglądarki użytkownika) należy
+            do użytku określonego locale (obojętnie od ustawień przeglądarki użytkownika) należy
             podać nazwę locale w trzecim argumencie konstruktora.
         </para>
 

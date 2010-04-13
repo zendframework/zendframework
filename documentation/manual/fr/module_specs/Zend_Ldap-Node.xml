@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21496 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.ldap.node">
     <title>Accès à l'arbre LDAP de manière orientée objet avec Zend_Ldap_Node</title>

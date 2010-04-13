@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19529 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.callback">
     <title>Callback (fonction de rappel)</title>
@@ -8,6 +8,31 @@
         <classname>Zend_Validate_Callback</classname> permet de fournir une fonction de rappel
         utilisée pour valider la valeur.
     </para>
+
+    <sect3 id="zend.validate.set.callback.options">
+        <title>Options supportées par Zend_Validate_Callback</title>
+
+        <para>
+            Les options suivantes sont supportées par
+            <classname>Zend_Validate_Callback</classname>&#160;:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>callback</property></emphasis>&#160;: spécifie la fonction
+                    de rappel qui sera utilisée pour la validation.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>options</property></emphasis>&#160;: spécifie les options
+                    additionnelles qui seront fournies à la fonction de rappel.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
 
     <sect3 id="zend.validate.set.callback.basic">
         <title>Utilisation classique</title>

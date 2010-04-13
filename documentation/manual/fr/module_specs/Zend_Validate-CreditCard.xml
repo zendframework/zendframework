@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
+<!-- EN-Revision: 21238 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.creditcard">
     <title>CreditCard</title>
@@ -98,6 +98,32 @@
             considérée comme non valide.
         </para>
     </note>
+
+    <sect3 id="zend.validate.set.creditcard.options">
+        <title>Options supportées par  Zend_Validate_CreditCard</title>
+
+        <para>
+            Les options suivantes sont supportées par
+            <classname>Zend_Validate_CreditCard</classname>&#160;:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>service</property></emphasis>&#160;: une fonction de rappel
+                    vers un service en ligne qui sera utilisé en plus pour la validation.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>type</property></emphasis>&#160;: le type de carte crédit
+                    qui sera validée. Voir ci-dessous la liste des institutions pour de plus
+                    amples détails.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
 
     <sect3 id="zend.validate.set.creditcard.basic">
         <title>Utilisation classique</title>

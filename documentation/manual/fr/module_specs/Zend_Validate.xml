@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
     <title>Introduction</title>
@@ -305,9 +305,13 @@ if (Zend_Validate::is($value, 'OtherValidator', array(array('min' => 1, 'max' =>
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 $translate = new Zend_Translate(
-    'array',
-    array(Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''),
-    'en'
+    array(
+        'adapter' => 'array',
+        'content' => array(
+            Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''
+        ),
+        'locale' => 'en'
+    )
 );
 
 $validator->setTranslator($translate);
@@ -323,9 +327,13 @@ $validator->setTranslator($translate);
 
         <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
-    'array',
-    array(Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''),
-    'en'
+    array(
+        'adapter' => 'array',
+        'content' => array(
+            Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''
+        ),
+        'locale' => 'en'
+    )
 );
 Zend_Validate::setDefaultTranslator($translate);
 ]]></programlisting>

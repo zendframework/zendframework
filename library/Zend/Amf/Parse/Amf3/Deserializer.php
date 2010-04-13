@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Amf_Constants */
-require_once 'Zend/Amf/Constants.php';
-
 /** Zend_Amf_Parse_Deserializer */
 require_once 'Zend/Amf/Parse/Deserializer.php';
 
@@ -34,7 +31,7 @@ require_once 'Zend/Amf/Parse/TypeLoader.php';
  *
  * @todo       readObject to handle Typed Objects
  * @todo       readXMLStrimg to be implemented.
- * @todo       Class could be implemented as Factory Class with each data type it's own class.
+ * @todo       Class could be implmented as Factory Class with each data type it's own class.
  * @package    Zend_Amf
  * @subpackage Parse_Amf3
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -397,13 +394,13 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
 
         }
 
-        if($returnObject instanceof Zend_Amf_Value_Messaging_ArrayCollection) {
-            if(isset($returnObject->externalizedData)) {
-                $returnObject = $returnObject->externalizedData;
-            } else {
-                $returnObject = get_object_vars($returnObject);
-            }
+       if($returnObject instanceof Zend_Amf_Value_Messaging_ArrayCollection) {
+        if(isset($returnObject->externalizedData)) {
+            $returnObject = $returnObject->externalizedData;
+        } else {
+            $returnObject = get_object_vars($returnObject);
         }
+       }
 
         return $returnObject;
     }

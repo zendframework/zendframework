@@ -125,7 +125,7 @@
                                         Le paramètre dans ce cas est un tableau avec une clé unique
                                         "configs", dont la valeur est un tableau des fichiers à
                                         fusionner. Note : ceci veut dire que vous pouvez fournir
-                                        un chemin litéral ou 
+                                        un chemin litéral ou
                                         <command>array("configs"=>array("/path1","/path2"[,...]));</command>.
                                     </para>
                                 </listitem>

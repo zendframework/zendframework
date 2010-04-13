@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21243 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.identical">
     <title>Identical</title>
@@ -8,6 +8,24 @@
         <classname>Zend_Validate_Identical</classname> vous permet de valider si une valeur donnée
         est identique à une valeur préalablement fournie.
     </para>
+ 
+    <sect3 id="zend.validate.set.identical.options">
+        <title>Options supportées parZend_Validate_Identical</title>
+
+        <para>
+            Les options suivantes sont supportées par
+            <classname>Zend_Validate_Identical</classname>&#160;:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>token</property></emphasis>&#160;: spécifie la valeur
+                    qui servira à la validation de l'entrée.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
 
     <sect3 id="zend.validate.set.identical.basic">
         <title>Utilisation de base</title>

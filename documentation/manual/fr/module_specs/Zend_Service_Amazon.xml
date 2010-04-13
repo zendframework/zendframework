@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
+<!-- EN-Revision: 21815 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon">
     <title>Zend_Service_Amazon</title>
@@ -752,6 +752,16 @@ foreach ($results as $result) {
                                 <entry>MerchantId</entry>
                                 <entry>string</entry>
                                 <entry>ID Amazon du fournisseur</entry>
+                            </row>
+ 
+                             <row>
+                                <entry>MerchantName</entry>
+                                <entry>string</entry>
+                                <entry>
+                                    Nom du fournisseur Amazon. Nécessite le réglage de 
+                                    <code>ResponseGroup</code> à <code>OfferFull</code>
+                                    pour la récupération.
+                                </entry>
                             </row>
 
                             <row>

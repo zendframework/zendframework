@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
+<!-- EN-Revision: 20976 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.multiuser.sessions">
     <title>Gérer les sessions dans ZF</title>
@@ -77,7 +77,7 @@ resources.session.remember_me_seconds = 864000
         </para>
 
         <programlisting language="php"><![CDATA[
-$mysession = Zend_Session_Namespace('mysession');
+$mysession = new Zend_Session_Namespace('mysession');
 
 if (!isset($mysession->counter)) {
     $mysession->counter = 1000;

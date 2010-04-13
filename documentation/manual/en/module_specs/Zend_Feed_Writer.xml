@@ -369,7 +369,7 @@ $out = $feed->export('atom');
                     </row>
 
                     <row>
-                        <entry><methodname>getGenerator()</methodname></entry>
+                        <entry><methodname>setGenerator()</methodname></entry>
 
                         <entry>
                             Allows the setting of a generator. The parameter should be an
@@ -592,7 +592,7 @@ $out = $feed->export('atom');
                     </row>
 
                     <row>
-                        <entry><methodname>getDateModified()</methodname></entry>
+                        <entry><methodname>setDateModified()</methodname></entry>
 
                         <entry>
                             Sets the date on which this feed was last modified. The expected

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21606 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.inflector">
     <title>Zend_Filter_Inflector</title>
@@ -433,7 +433,7 @@ $inflector->addRules(array(
             <classname>Zend_Config</classname> peut être utilisé pour spécifier les règles,
             les préfixes des filtres et d'autres choses dans vos inflecteurs. Passez un objet
             <classname>Zend_Config</classname> au constructeur ou à la méthode
-            <methodname>setConfig()</methodname>&#160;:
+            <methodname>setOptions()</methodname>&#160;:
         </para>
 
         <itemizedlist>
@@ -479,9 +479,9 @@ $inflector->addRules(array(
 $config    = new Zend_Config($options);
 $inflector = new Zend_Filter_Inflector($config);
 
-// Ou via setConfig() :
+// Ou via setOptions() :
 $inflector = new Zend_Filter_Inflector();
-$inflector->setConfig($config);
+$inflector->setOptions($config);
 ]]></programlisting>
         </example>
     </sect2>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20779 -->
+<!-- EN-Revision: 21815 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Adaptateurs de connexion</title>
@@ -100,9 +100,19 @@
                                 <entry>chaîne</entry>
                                 <entry>null</entry>
                             </row>
+                            <row>
+                                <entry>sslusecontext</entry>
+                                <entry>
+                                    Active l'utilisation de SSL aux niveaux des connexions proxiées
+                                    même si la connexion proxiée elle-même ne le fait pas.
+                                </entry>
+                                <entry>boolean</entry>
+                                <entry><constant>FALSE</constant></entry>
+                            </row>
                         </tbody>
                     </tgroup>
-                </table> <note>
+                        
+                    </table> <note>
                     <title>Connexions <acronym>TCP</acronym> persistantes</title>
 
                 <para>
@@ -581,7 +591,7 @@ $client = new Zend_Http_Client('http://www.example.com', array(
 ));
 
 // Force the next request to fail with an exception
-$adapter->nextRequestWillFail(true);
+$adapter->setNextRequestWillFail(true);
 
 try {
     // This call will result in a Zend_Http_Client_Adapter_Exception

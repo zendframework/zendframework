@@ -52,4 +52,21 @@ class SessionStorageTest extends \PHPUnit_Framework_TestCase
         $this->storage->__destruct();
         $this->assertSame(array('foo' => 'bar'), $_SESSION);
     }
+
+    public function testModifyingOneSessionObjectModifiesTheOther()
+    {
+        $this->storage->foo = 'bar';
+        $storage = new SessionStorage();
+        $storage->bar = 'foo';
+        $this->assertEquals('foo', $this->storage->bar);
+    }
+
+    public function testMarkingOneSessionObjectImmutableShouldMarkOtherInstancesImmutable()
+    {
+        $this->storage->foo = 'bar';
+        $storage = new SessionStorage();
+        $this->assertEquals('bar', $storage['foo']);
+        $this->storage->markImmutable();
+        $this->assertTrue($storage->isImmutable(), var_export($_SESSION, 1));
+    }
 }

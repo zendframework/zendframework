@@ -77,11 +77,22 @@ class SessionHandler implements HandlerDefinition
 
     public function writeClose()
     {
+        // The assumption is that we're using PHP's ext/session.
+        // session_write_close() will actually overwrite $_SESSION with an 
+        // empty array on completion -- which leads to a mismatch between what
+        // is in the storage object and $_SESSION. To get around this, we
+        // temporarily reset $_SESSION to an array, and then re-link it to 
+        // the storage object.
+        //
+        // Additionally, while you _can_ write to $_SESSION following a 
+        // session_write_close() operation, no changes made to it will be 
+        // flushed to the session handler. As such, we now mark the storage 
+        // object immutable.
         $storage  = $this->getStorage();
         $_SESSION = (array) $storage;
         session_write_close();
-        $storage->fromArray($_SESSION)
-                ->markImmutable();
+        $storage->fromArray($_SESSION);
+        $storage->markImmutable();
     }
 
     public function getName()

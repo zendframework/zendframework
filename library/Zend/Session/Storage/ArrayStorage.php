@@ -16,7 +16,7 @@ class ArrayStorage extends \ArrayObject implements Storable
 
     public function offsetSet($key, $value)
     {
-        if ($this->_immutable) {
+        if ($this->isImmutable()) {
             throw new SessionException('Cannot set key "' . $key . '" as storage is marked immutable');
         }
         if ($this->isLocked($key)) {
@@ -40,7 +40,7 @@ class ArrayStorage extends \ArrayObject implements Storable
 
     public function isLocked($key = null)
     {
-        if ($this->_immutable) {
+        if ($this->isImmutable()) {
             // immutable trumps all
             return true;
         }

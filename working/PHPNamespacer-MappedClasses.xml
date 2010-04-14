@@ -9507,1034 +9507,1034 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/GoTo.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_GoTo</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/GoTo.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
-      <newClassName>GoTo</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\GoTo</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Action/GoToAction.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
+      <newClassName>GoToAction</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Action\GoToAction</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/GoTo3DView.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_GoTo3DView</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/GoTo3DView.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/GoTo3DView.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>GoTo3DView</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\GoTo3DView</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\GoTo3DView</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/GoToE.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_GoToE</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/GoToE.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/GoToE.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>GoToE</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\GoToE</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\GoToE</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/GoToR.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_GoToR</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/GoToR.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/GoToR.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>GoToR</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\GoToR</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\GoToR</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/Hide.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_Hide</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/Hide.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/Hide.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>Hide</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\Hide</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\Hide</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/ImportData.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_ImportData</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/ImportData.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/ImportData.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>ImportData</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\ImportData</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\ImportData</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/JavaScript.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_JavaScript</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/JavaScript.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/JavaScript.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>JavaScript</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\JavaScript</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\JavaScript</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/Launch.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_Launch</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/Launch.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/Launch.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>Launch</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\Launch</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\Launch</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/Movie.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_Movie</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/Movie.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/Movie.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>Movie</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\Movie</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\Movie</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/Named.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_Named</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/Named.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/Named.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>Named</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\Named</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\Named</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/Rendition.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_Rendition</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/Rendition.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/Rendition.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>Rendition</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\Rendition</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\Rendition</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/ResetForm.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_ResetForm</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/ResetForm.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/ResetForm.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>ResetForm</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\ResetForm</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\ResetForm</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/SetOCGState.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_SetOCGState</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/SetOCGState.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/SetOCGState.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>SetOCGState</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\SetOCGState</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\SetOCGState</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/Sound.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_Sound</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/Sound.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/Sound.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>Sound</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\Sound</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\Sound</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/SubmitForm.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_SubmitForm</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/SubmitForm.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/SubmitForm.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>SubmitForm</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\SubmitForm</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\SubmitForm</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/Thread.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_Thread</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/Thread.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/Thread.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>Thread</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\Thread</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\Thread</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/Trans.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_Trans</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/Trans.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/Trans.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>Trans</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\Trans</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\Trans</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/Unknown.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_Unknown</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/Unknown.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/Unknown.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>Unknown</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\Unknown</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\Unknown</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action/URI.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action_URI</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/URI.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Action/URI.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
       <newClassName>URI</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\URI</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Action\URI</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Action.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Action</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Action/Action.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Action</newNamespace>
-      <newClassName>Action</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Action\Action</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Action/AbstractAction.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Action</newNamespace>
+      <newClassName>AbstractAction</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Action\AbstractAction</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Annotation/FileAttachment.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Annotation_FileAttachment</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Annotation/FileAttachment.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Annotation</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Annotation/FileAttachment.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Annotation</newNamespace>
       <newClassName>FileAttachment</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Annotation\FileAttachment</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Annotation\FileAttachment</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Annotation/Link.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Annotation_Link</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Annotation/Link.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Annotation</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Annotation/Link.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Annotation</newNamespace>
       <newClassName>Link</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Annotation\Link</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Annotation\Link</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Annotation/Markup.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Annotation_Markup</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Annotation/Markup.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Annotation</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Annotation/Markup.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Annotation</newNamespace>
       <newClassName>Markup</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Annotation\Markup</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Annotation\Markup</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Annotation/Text.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Annotation_Text</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Annotation/Text.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Annotation</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Annotation/Text.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Annotation</newNamespace>
       <newClassName>Text</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Annotation\Text</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Annotation\Text</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Annotation.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Annotation</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Annotation/Annotation.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Annotation</newNamespace>
-      <newClassName>Annotation</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Annotation\Annotation</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Annotation/AbstractAnnotation.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Annotation</newNamespace>
+      <newClassName>AbstractAnnotation</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Annotation\AbstractAnnotation</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Cmap/ByteEncoding/Static.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Cmap_ByteEncoding_Static</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Cmap/ByteEncoding/Static.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Cmap\ByteEncoding</newNamespace>
-      <newClassName>Static</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Cmap\ByteEncoding\Static</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/CMap/StaticByteEncoding.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\CMap</newNamespace>
+      <newClassName>StaticByteEncoding</newClassName>
+      <newFullyQualifiedName>Zend\PDF\CMap\StaticByteEncoding</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Cmap/ByteEncoding.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Cmap_ByteEncoding</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Cmap/ByteEncoding/ByteEncoding.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Cmap\ByteEncoding</newNamespace>
+      <newRelativeFilePath>Zend/PDF/CMap/ByteEncoding.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\CMap</newNamespace>
       <newClassName>ByteEncoding</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Cmap\ByteEncoding\ByteEncoding</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\CMap\ByteEncoding</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Cmap/SegmentToDelta.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Cmap_SegmentToDelta</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Cmap/SegmentToDelta.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Cmap</newNamespace>
+      <newRelativeFilePath>Zend/PDF/CMap/SegmentToDelta.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\CMap</newNamespace>
       <newClassName>SegmentToDelta</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Cmap\SegmentToDelta</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\CMap\SegmentToDelta</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Cmap/TrimmedTable.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Cmap_TrimmedTable</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Cmap/TrimmedTable.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Cmap</newNamespace>
+      <newRelativeFilePath>Zend/PDF/CMap/TrimmedTable.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\CMap</newNamespace>
       <newClassName>TrimmedTable</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Cmap\TrimmedTable</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\CMap\TrimmedTable</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Cmap.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Cmap</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Cmap/Cmap.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Cmap</newNamespace>
-      <newClassName>Cmap</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Cmap\Cmap</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/CMap/AbstractCMap.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\CMap</newNamespace>
+      <newClassName>AbstractCMap</newClassName>
+      <newFullyQualifiedName>Zend\PDF\CMap\AbstractCMap</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Color/Cmyk.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Color_Cmyk</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Color/Cmyk.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Color</newNamespace>
-      <newClassName>Cmyk</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Color\Cmyk</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Color/CMYK.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Color</newNamespace>
+      <newClassName>CMYK</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Color\CMYK</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Color/GrayScale.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Color_GrayScale</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Color/GrayScale.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Color</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Color/GrayScale.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Color</newNamespace>
       <newClassName>GrayScale</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Color\GrayScale</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Color\GrayScale</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Color/Html.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Color_Html</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Color/Html.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Color</newNamespace>
-      <newClassName>Html</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Color\Html</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Color/HTML.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Color</newNamespace>
+      <newClassName>HTML</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Color\HTML</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Color/Rgb.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Color_Rgb</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Color/Rgb.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Color</newNamespace>
-      <newClassName>Rgb</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Color\Rgb</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Color/RGB.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Color</newNamespace>
+      <newClassName>RGB</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Color\RGB</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Color.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Color</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Color/Color.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Color</newNamespace>
-      <newClassName>Color</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Color\Color</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Color/ColorInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Color</newNamespace>
+      <newClassName>ColorInterface</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Color\ColorInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Destination/Explicit.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Destination_Explicit</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Destination/Explicit.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Destination</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Destination/Explicit.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Destination</newNamespace>
       <newClassName>Explicit</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Destination\Explicit</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Destination\Explicit</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Destination/Fit.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Destination_Fit</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Destination/Fit.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Destination</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Destination/Fit.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Destination</newNamespace>
       <newClassName>Fit</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Destination\Fit</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Destination\Fit</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Destination/FitBoundingBox.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Destination_FitBoundingBox</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Destination/FitBoundingBox.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Destination</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Destination/FitBoundingBox.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Destination</newNamespace>
       <newClassName>FitBoundingBox</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Destination\FitBoundingBox</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Destination\FitBoundingBox</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Destination/FitBoundingBoxHorizontally.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Destination_FitBoundingBoxHorizontally</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Destination/FitBoundingBoxHorizontally.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Destination</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Destination/FitBoundingBoxHorizontally.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Destination</newNamespace>
       <newClassName>FitBoundingBoxHorizontally</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Destination\FitBoundingBoxHorizontally</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Destination\FitBoundingBoxHorizontally</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Destination/FitBoundingBoxVertically.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Destination_FitBoundingBoxVertically</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Destination/FitBoundingBoxVertically.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Destination</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Destination/FitBoundingBoxVertically.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Destination</newNamespace>
       <newClassName>FitBoundingBoxVertically</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Destination\FitBoundingBoxVertically</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Destination\FitBoundingBoxVertically</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Destination/FitHorizontally.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Destination_FitHorizontally</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Destination/FitHorizontally.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Destination</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Destination/FitHorizontally.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Destination</newNamespace>
       <newClassName>FitHorizontally</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Destination\FitHorizontally</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Destination\FitHorizontally</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Destination/FitRectangle.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Destination_FitRectangle</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Destination/FitRectangle.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Destination</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Destination/FitRectangle.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Destination</newNamespace>
       <newClassName>FitRectangle</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Destination\FitRectangle</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Destination\FitRectangle</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Destination/FitVertically.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Destination_FitVertically</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Destination/FitVertically.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Destination</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Destination/FitVertically.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Destination</newNamespace>
       <newClassName>FitVertically</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Destination\FitVertically</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Destination\FitVertically</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Destination/Named.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Destination_Named</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Destination/Named.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Destination</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Destination/Named.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Destination</newNamespace>
       <newClassName>Named</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Destination\Named</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Destination\Named</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Destination/Unknown.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Destination_Unknown</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Destination/Unknown.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Destination</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Destination/Unknown.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Destination</newNamespace>
       <newClassName>Unknown</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Destination\Unknown</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Destination\Unknown</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Destination/Zoom.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Destination_Zoom</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Destination/Zoom.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Destination</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Destination/Zoom.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Destination</newNamespace>
       <newClassName>Zoom</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Destination\Zoom</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Destination\Zoom</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Destination.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Destination</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Destination/Destination.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Destination</newNamespace>
-      <newClassName>Destination</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Destination\Destination</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Destination/AbstractDestination.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Destination</newNamespace>
+      <newClassName>AbstractDestination</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Destination\AbstractDestination</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Element/Array.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Element_Array</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Element/Array.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Element</newNamespace>
-      <newClassName>Array</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Element\Array</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/ArrayObject.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType</newNamespace>
+      <newClassName>ArrayObject</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\ArrayObject</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Element/Boolean.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Element_Boolean</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Element/Boolean.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Element</newNamespace>
-      <newClassName>Boolean</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Element\Boolean</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/BooleanObject.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType</newNamespace>
+      <newClassName>BooleanObject</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\BooleanObject</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Element/Dictionary.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Element_Dictionary</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Element/Dictionary.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Element</newNamespace>
-      <newClassName>Dictionary</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Element\Dictionary</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/DictionaryObject.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType</newNamespace>
+      <newClassName>DictionaryObject</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\DictionaryObject</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Element/Name.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Element_Name</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Element/Name.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Element</newNamespace>
-      <newClassName>Name</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Element\Name</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/NameObject.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType</newNamespace>
+      <newClassName>NameObject</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\NameObject</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Element/Null.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Element_Null</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Element/Null.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Element</newNamespace>
-      <newClassName>Null</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Element\Null</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/NullObject.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType</newNamespace>
+      <newClassName>NullObject</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\NullObject</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Element/Numeric.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Element_Numeric</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Element/Numeric.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Element</newNamespace>
-      <newClassName>Numeric</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Element\Numeric</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/NumericObject.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType</newNamespace>
+      <newClassName>NumericObject</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\NumericObject</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Element/Object/Stream.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Element_Object_Stream</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Element/Object/Stream.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Element\Object</newNamespace>
-      <newClassName>Stream</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Element\Object\Stream</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/StreamObject.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType</newNamespace>
+      <newClassName>StreamObject</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\StreamObject</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Element/Object.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Element_Object</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Element/Object/Object.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Element\Object</newNamespace>
-      <newClassName>Object</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Element\Object\Object</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/IndirectObject.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType</newNamespace>
+      <newClassName>IndirectObject</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\IndirectObject</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Element/Reference/Context.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Element_Reference_Context</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Element/Reference/Context.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Element\Reference</newNamespace>
+      <newRelativeFilePath>Zend/PDF/InternalType/IndirectObjectReference/Context.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType\IndirectObjectReference</newNamespace>
       <newClassName>Context</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Element\Reference\Context</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\IndirectObjectReference\Context</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Element/Reference/Table.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Element_Reference_Table</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Element/Reference/Table.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Element\Reference</newNamespace>
-      <newClassName>Table</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Element\Reference\Table</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/IndirectObjectReference/ReferenceTable.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType\IndirectObjectReference</newNamespace>
+      <newClassName>ReferenceTable</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\IndirectObjectReference\ReferenceTable</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Element/Reference.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Element_Reference</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Element/Reference/Reference.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Element\Reference</newNamespace>
-      <newClassName>Reference</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Element\Reference\Reference</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/IndirectObjectReference.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType</newNamespace>
+      <newClassName>IndirectObjectReference</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\IndirectObjectReference</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Element/Stream.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Element_Stream</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Element/Stream.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Element</newNamespace>
-      <newClassName>Stream</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Element\Stream</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/StreamContent.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType</newNamespace>
+      <newClassName>StreamContent</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\StreamContent</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Element/String/Binary.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Element_String_Binary</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Element/String/Binary.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Element\String</newNamespace>
-      <newClassName>Binary</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Element\String\Binary</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/BinaryStringObject.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType</newNamespace>
+      <newClassName>BinaryStringObject</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\BinaryStringObject</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Element/String.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Element_String</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Element/String/String.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Element\String</newNamespace>
-      <newClassName>String</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Element\String\String</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/StringObject.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType</newNamespace>
+      <newClassName>StringObject</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\StringObject</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Element.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Element</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Element/Element.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Element</newNamespace>
-      <newClassName>Element</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Element\Element</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/AbstractTypeObject.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType</newNamespace>
+      <newClassName>AbstractTypeObject</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\AbstractTypeObject</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/ElementFactory/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_ElementFactory_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/ElementFactory/ElementFactoryInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\ElementFactory</newNamespace>
-      <newClassName>ElementFactoryInterface</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\ElementFactory\ElementFactoryInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/ObjectFactory/ObjectFactoryInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\ObjectFactory</newNamespace>
+      <newClassName>ObjectFactoryInterface</newClassName>
+      <newFullyQualifiedName>Zend\PDF\ObjectFactory\ObjectFactoryInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/ElementFactory/Proxy.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_ElementFactory_Proxy</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/ElementFactory/Proxy.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\ElementFactory</newNamespace>
+      <newRelativeFilePath>Zend/PDF/ObjectFactory/Proxy.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\ObjectFactory</newNamespace>
       <newClassName>Proxy</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\ElementFactory\Proxy</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\ObjectFactory\Proxy</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/ElementFactory.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_ElementFactory</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/ElementFactory/ElementFactory.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\ElementFactory</newNamespace>
-      <newClassName>ElementFactory</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\ElementFactory\ElementFactory</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/ObjectFactory/ObjectFactory.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\ObjectFactory</newNamespace>
+      <newClassName>ObjectFactory</newClassName>
+      <newFullyQualifiedName>Zend\PDF\ObjectFactory\ObjectFactory</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/FileParser/Font/OpenType/TrueType.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_FileParser_Font_OpenType_TrueType</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/FileParser/Font/OpenType/TrueType.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\FileParser\Font\OpenType</newNamespace>
+      <newRelativeFilePath>Zend/PDF/BinaryParser/Font/OpenType/TrueType.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\BinaryParser\Font\OpenType</newNamespace>
       <newClassName>TrueType</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\FileParser\Font\OpenType\TrueType</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\BinaryParser\Font\OpenType\TrueType</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/FileParser/Font/OpenType.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_FileParser_Font_OpenType</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/FileParser/Font/OpenType/OpenType.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\FileParser\Font\OpenType</newNamespace>
-      <newClassName>OpenType</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\FileParser\Font\OpenType\OpenType</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/BinaryParser/Font/OpenType/AbstractOpenType.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\BinaryParser\Font\OpenType</newNamespace>
+      <newClassName>AbstractOpenType</newClassName>
+      <newFullyQualifiedName>Zend\PDF\BinaryParser\Font\OpenType\AbstractOpenType</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/FileParser/Font.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_FileParser_Font</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/FileParser/Font/Font.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\FileParser\Font</newNamespace>
-      <newClassName>Font</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\FileParser\Font\Font</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/BinaryParser/Font/AbstractFont.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\BinaryParser\Font</newNamespace>
+      <newClassName>AbstractFont</newClassName>
+      <newFullyQualifiedName>Zend\PDF\BinaryParser\Font\AbstractFont</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/FileParser/Image/Png.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_FileParser_Image_Png</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/FileParser/Image/Png.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\FileParser\Image</newNamespace>
-      <newClassName>Png</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\FileParser\Image\Png</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/BinaryParser/Image/PNG.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\BinaryParser\Image</newNamespace>
+      <newClassName>PNG</newClassName>
+      <newFullyQualifiedName>Zend\PDF\BinaryParser\Image\PNG</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/FileParser/Image.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_FileParser_Image</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/FileParser/Image/Image.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\FileParser\Image</newNamespace>
-      <newClassName>Image</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\FileParser\Image\Image</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/BinaryParser/Image/AbstractImage.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\BinaryParser\Image</newNamespace>
+      <newClassName>AbstractImage</newClassName>
+      <newFullyQualifiedName>Zend\PDF\BinaryParser\Image\AbstractImage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/FileParser.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_FileParser</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/FileParser/FileParser.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\FileParser</newNamespace>
-      <newClassName>FileParser</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\FileParser\FileParser</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/BinaryParser/AbstractBinaryParser.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\BinaryParser</newNamespace>
+      <newClassName>AbstractBinaryParser</newClassName>
+      <newFullyQualifiedName>Zend\PDF\BinaryParser\AbstractBinaryParser</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/FileParserDataSource/File.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_FileParserDataSource_File</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/FileParserDataSource/File.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\FileParserDataSource</newNamespace>
+      <newRelativeFilePath>Zend/PDF/BinaryParser/DataSource/File.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\BinaryParser\DataSource</newNamespace>
       <newClassName>File</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\FileParserDataSource\File</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\BinaryParser\DataSource\File</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/FileParserDataSource/String.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_FileParserDataSource_String</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/FileParserDataSource/String.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\FileParserDataSource</newNamespace>
+      <newRelativeFilePath>Zend/PDF/BinaryParser/DataSource/String.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\BinaryParser\DataSource</newNamespace>
       <newClassName>String</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\FileParserDataSource\String</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\BinaryParser\DataSource\String</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/FileParserDataSource.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_FileParserDataSource</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/FileParserDataSource/FileParserDataSource.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\FileParserDataSource</newNamespace>
-      <newClassName>FileParserDataSource</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\FileParserDataSource\FileParserDataSource</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/BinaryParser/DataSource/AbstractDataSource.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\BinaryParser\DataSource</newNamespace>
+      <newClassName>AbstractDataSource</newClassName>
+      <newFullyQualifiedName>Zend\PDF\BinaryParser\DataSource\AbstractDataSource</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Filter/Ascii85.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Filter_Ascii85</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Filter/Ascii85.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Filter</newNamespace>
-      <newClassName>Ascii85</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Filter\Ascii85</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/StreamFilter/ASCII85.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType\StreamFilter</newNamespace>
+      <newClassName>ASCII85</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\StreamFilter\ASCII85</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Filter/AsciiHex.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Filter_AsciiHex</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Filter/AsciiHex.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Filter</newNamespace>
-      <newClassName>AsciiHex</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Filter\AsciiHex</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/StreamFilter/ASCIIHex.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType\StreamFilter</newNamespace>
+      <newClassName>ASCIIHex</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\StreamFilter\ASCIIHex</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Filter/Compression/Flate.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Filter_Compression_Flate</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Filter/Compression/Flate.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Filter\Compression</newNamespace>
+      <newRelativeFilePath>Zend/PDF/InternalType/StreamFilter/Compression/Flate.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType\StreamFilter\Compression</newNamespace>
       <newClassName>Flate</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Filter\Compression\Flate</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\StreamFilter\Compression\Flate</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Filter/Compression/Lzw.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Filter_Compression_Lzw</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Filter/Compression/Lzw.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Filter\Compression</newNamespace>
-      <newClassName>Lzw</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Filter\Compression\Lzw</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/StreamFilter/Compression/LZW.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType\StreamFilter\Compression</newNamespace>
+      <newClassName>LZW</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\StreamFilter\Compression\LZW</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Filter/Compression.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Filter_Compression</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Filter/Compression/Compression.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Filter\Compression</newNamespace>
-      <newClassName>Compression</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Filter\Compression\Compression</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/StreamFilter/Compression/AbstractCompression.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType\StreamFilter\Compression</newNamespace>
+      <newClassName>AbstractCompression</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\StreamFilter\Compression\AbstractCompression</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Filter/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Filter_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Filter/FilterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Filter</newNamespace>
+      <newRelativeFilePath>Zend/PDF/InternalType/StreamFilter/FilterInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType\StreamFilter</newNamespace>
       <newClassName>FilterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Filter\FilterInterface</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\StreamFilter\FilterInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Filter/RunLength.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Filter_RunLength</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Filter/RunLength.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Filter</newNamespace>
+      <newRelativeFilePath>Zend/PDF/InternalType/StreamFilter/RunLength.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType\StreamFilter</newNamespace>
       <newClassName>RunLength</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Filter\RunLength</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\StreamFilter\RunLength</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Font.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Font</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Font.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Font.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF</newNamespace>
       <newClassName>Font</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Font</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Font</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Image.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Image</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Image.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Image.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF</newNamespace>
       <newClassName>Image</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Image</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Image</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/NameTree.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_NameTree</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/NameTree.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf</newNamespace>
+      <newRelativeFilePath>Zend/PDF/InternalStructure/NameTree.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalStructure</newNamespace>
       <newClassName>NameTree</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\NameTree</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\InternalStructure\NameTree</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Outline/Created.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Outline_Created</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Outline/Created.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Outline</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Outline/Created.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Outline</newNamespace>
       <newClassName>Created</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Outline\Created</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Outline\Created</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Outline/Loaded.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Outline_Loaded</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Outline/Loaded.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Outline</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Outline/Loaded.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Outline</newNamespace>
       <newClassName>Loaded</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Outline\Loaded</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Outline\Loaded</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Outline.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Outline</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Outline/Outline.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Outline</newNamespace>
-      <newClassName>Outline</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Outline\Outline</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Outline/AbstractOutline.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Outline</newNamespace>
+      <newClassName>AbstractOutline</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Outline\AbstractOutline</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Page.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Page</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Page.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Page.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF</newNamespace>
       <newClassName>Page</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Page</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Page</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Parser.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Parser</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Parser.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf</newNamespace>
-      <newClassName>Parser</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Parser</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/PDFParser/StructureParser.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\PDFParser</newNamespace>
+      <newClassName>StructureParser</newClassName>
+      <newFullyQualifiedName>Zend\PDF\PDFParser\StructureParser</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/RecursivelyIteratableObjectsContainer.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_RecursivelyIteratableObjectsContainer</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/RecursivelyIteratableObjectsContainer.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Util/RecursivelyIteratableObjectsContainer.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Util</newNamespace>
       <newClassName>RecursivelyIteratableObjectsContainer</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\RecursivelyIteratableObjectsContainer</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Util\RecursivelyIteratableObjectsContainer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/CidFont/TrueType.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_CidFont_TrueType</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/CidFont/TrueType.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\CidFont</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/CIDFont/TrueType.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\CIDFont</newNamespace>
       <newClassName>TrueType</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\CidFont\TrueType</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\CIDFont\TrueType</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/CidFont.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_CidFont</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/CidFont/CidFont.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\CidFont</newNamespace>
-      <newClassName>CidFont</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\CidFont\CidFont</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/CIDFont/AbstractCIDFont.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\CIDFont</newNamespace>
+      <newClassName>AbstractCIDFont</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\CIDFont\AbstractCIDFont</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Extracted.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Extracted</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Extracted.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Extracted.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font</newNamespace>
       <newClassName>Extracted</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Extracted</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Extracted</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/FontDescriptor.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_FontDescriptor</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/FontDescriptor.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/FontDescriptor.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font</newNamespace>
       <newClassName>FontDescriptor</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\FontDescriptor</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\FontDescriptor</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Parsed/TrueType.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Parsed_TrueType</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Parsed/TrueType.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Parsed</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Parsed/TrueType.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Parsed</newNamespace>
       <newClassName>TrueType</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Parsed\TrueType</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Parsed\TrueType</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Parsed.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Parsed</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Parsed/Parsed.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Parsed</newNamespace>
-      <newClassName>Parsed</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Parsed\Parsed</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Parsed/AbstractParsed.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Parsed</newNamespace>
+      <newClassName>AbstractParsed</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Parsed\AbstractParsed</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/Courier.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Standard_Courier</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/Courier.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Standard</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Standard/Courier.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Standard</newNamespace>
       <newClassName>Courier</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Standard\Courier</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Standard\Courier</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/CourierBold.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Standard_CourierBold</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/CourierBold.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Standard</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Standard/CourierBold.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Standard</newNamespace>
       <newClassName>CourierBold</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Standard\CourierBold</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Standard\CourierBold</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/CourierBoldOblique.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Standard_CourierBoldOblique</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/CourierBoldOblique.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Standard</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Standard/CourierBoldOblique.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Standard</newNamespace>
       <newClassName>CourierBoldOblique</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Standard\CourierBoldOblique</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Standard\CourierBoldOblique</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/CourierOblique.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Standard_CourierOblique</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/CourierOblique.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Standard</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Standard/CourierOblique.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Standard</newNamespace>
       <newClassName>CourierOblique</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Standard\CourierOblique</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Standard\CourierOblique</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/Helvetica.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Standard_Helvetica</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/Helvetica.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Standard</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Standard/Helvetica.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Standard</newNamespace>
       <newClassName>Helvetica</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Standard\Helvetica</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Standard\Helvetica</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/HelveticaBold.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Standard_HelveticaBold</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/HelveticaBold.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Standard</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Standard/HelveticaBold.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Standard</newNamespace>
       <newClassName>HelveticaBold</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Standard\HelveticaBold</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Standard\HelveticaBold</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/HelveticaBoldOblique.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Standard_HelveticaBoldOblique</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/HelveticaBoldOblique.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Standard</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Standard/HelveticaBoldOblique.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Standard</newNamespace>
       <newClassName>HelveticaBoldOblique</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Standard\HelveticaBoldOblique</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Standard\HelveticaBoldOblique</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/HelveticaOblique.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Standard_HelveticaOblique</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/HelveticaOblique.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Standard</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Standard/HelveticaOblique.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Standard</newNamespace>
       <newClassName>HelveticaOblique</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Standard\HelveticaOblique</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Standard\HelveticaOblique</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/Symbol.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Standard_Symbol</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/Symbol.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Standard</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Standard/Symbol.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Standard</newNamespace>
       <newClassName>Symbol</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Standard\Symbol</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Standard\Symbol</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/TimesBold.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Standard_TimesBold</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/TimesBold.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Standard</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Standard/TimesBold.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Standard</newNamespace>
       <newClassName>TimesBold</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Standard\TimesBold</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Standard\TimesBold</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/TimesBoldItalic.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Standard_TimesBoldItalic</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/TimesBoldItalic.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Standard</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Standard/TimesBoldItalic.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Standard</newNamespace>
       <newClassName>TimesBoldItalic</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Standard\TimesBoldItalic</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Standard\TimesBoldItalic</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/TimesItalic.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Standard_TimesItalic</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/TimesItalic.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Standard</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Standard/TimesItalic.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Standard</newNamespace>
       <newClassName>TimesItalic</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Standard\TimesItalic</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Standard\TimesItalic</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/TimesRoman.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Standard_TimesRoman</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/TimesRoman.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Standard</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Standard/TimesRoman.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Standard</newNamespace>
       <newClassName>TimesRoman</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Standard\TimesRoman</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Standard\TimesRoman</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/ZapfDingbats.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Standard_ZapfDingbats</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/ZapfDingbats.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Standard</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Standard/ZapfDingbats.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Standard</newNamespace>
       <newClassName>ZapfDingbats</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Standard\ZapfDingbats</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Standard\ZapfDingbats</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple_Standard</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Standard/Standard.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple\Standard</newNamespace>
-      <newClassName>Standard</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Standard\Standard</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/Standard/AbstractStandard.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple\Standard</newNamespace>
+      <newClassName>AbstractStandard</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\Standard\AbstractStandard</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Simple.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Simple</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Simple/Simple.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font\Simple</newNamespace>
-      <newClassName>Simple</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Simple\Simple</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Simple/AbstractSimple.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font\Simple</newNamespace>
+      <newClassName>AbstractSimple</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Simple\AbstractSimple</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font/Type0.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font_Type0</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Type0.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/Type0.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font</newNamespace>
       <newClassName>Type0</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Type0</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\Type0</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Font.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Font</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Font/Font.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Font</newNamespace>
-      <newClassName>Font</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Font\Font</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Resource/Font/AbstractFont.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Font</newNamespace>
+      <newClassName>AbstractFont</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Font\AbstractFont</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Image/Jpeg.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Image_Jpeg</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Image/Jpeg.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Image</newNamespace>
-      <newClassName>Jpeg</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Image\Jpeg</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Resource/Image/JPEG.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Image</newNamespace>
+      <newClassName>JPEG</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Image\JPEG</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Image/Png.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Image_Png</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Image/Png.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Image</newNamespace>
-      <newClassName>Png</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Image\Png</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Resource/Image/PNG.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Image</newNamespace>
+      <newClassName>PNG</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Image\PNG</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Image/Tiff.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Image_Tiff</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Image/Tiff.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Image</newNamespace>
-      <newClassName>Tiff</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Image\Tiff</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Resource/Image/TIFF.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Image</newNamespace>
+      <newClassName>TIFF</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Image\TIFF</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/Image.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_Image</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Image/Image.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource\Image</newNamespace>
-      <newClassName>Image</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Image\Image</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Resource/Image/AbstractImage.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Image</newNamespace>
+      <newClassName>AbstractImage</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Image\AbstractImage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource/ImageFactory.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource_ImageFactory</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/ImageFactory.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Resource/Image/ImageFactory.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource\Image</newNamespace>
       <newClassName>ImageFactory</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\ImageFactory</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Resource\Image\ImageFactory</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Resource.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Resource</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Resource/Resource.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Resource</newNamespace>
-      <newClassName>Resource</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Resource\Resource</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Resource/AbstractResource.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Resource</newNamespace>
+      <newClassName>AbstractResource</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Resource\AbstractResource</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/StringParser.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_StringParser</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/StringParser.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf</newNamespace>
-      <newClassName>StringParser</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\StringParser</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/PDFParser/DataParser.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\PDFParser</newNamespace>
+      <newClassName>DataParser</newClassName>
+      <newFullyQualifiedName>Zend\PDF\PDFParser\DataParser</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Style.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Style</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Style.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf</newNamespace>
+      <newRelativeFilePath>Zend/PDF/Style.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF</newNamespace>
       <newClassName>Style</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Style</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\Style</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Target.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Target</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Target.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf</newNamespace>
-      <newClassName>Target</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Target</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalStructure/NavigationTarget.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalStructure</newNamespace>
+      <newClassName>NavigationTarget</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalStructure\NavigationTarget</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Trailer/Generator.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Trailer_Generator</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Trailer/Generator.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Trailer</newNamespace>
-      <newClassName>Generator</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Trailer\Generator</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Trailer/Generated.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Trailer</newNamespace>
+      <newClassName>Generated</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Trailer\Generated</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Trailer/Keeper.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Trailer_Keeper</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Trailer/Keeper.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Trailer</newNamespace>
-      <newClassName>Keeper</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Trailer\Keeper</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Trailer/Parsed.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Trailer</newNamespace>
+      <newClassName>Parsed</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Trailer\Parsed</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Trailer.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Trailer</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Trailer/Trailer.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf\Trailer</newNamespace>
-      <newClassName>Trailer</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Trailer\Trailer</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Trailer/AbstractTrailer.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\Trailer</newNamespace>
+      <newClassName>AbstractTrailer</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Trailer\AbstractTrailer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/UpdateInfoContainer.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_UpdateInfoContainer</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/UpdateInfoContainer.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf</newNamespace>
+      <newRelativeFilePath>Zend/PDF/ObjectFactory/UpdateInfoContainer.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\ObjectFactory</newNamespace>
       <newClassName>UpdateInfoContainer</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\UpdateInfoContainer</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\PDF\ObjectFactory\UpdateInfoContainer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf</originalClassName>
-      <newRelativeFilePath>Zend/Pdf/Pdf.php</newRelativeFilePath>
-      <newNamespace>Zend\Pdf</newNamespace>
-      <newClassName>Pdf</newClassName>
-      <newFullyQualifiedName>Zend\Pdf\Pdf</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/PDFDocument.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF</newNamespace>
+      <newClassName>PDFDocument</newClassName>
+      <newFullyQualifiedName>Zend\PDF\PDFDocument</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/ProgressBar/Adapter/Console.php</originalRelativeFilePath>

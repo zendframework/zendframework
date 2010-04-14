@@ -140,3 +140,8 @@ Zend_Url
 
 Zend_HTTP
  * Component renamed to Zend_HTTP
+
+ Zend_Pdf
+ * "Zend_Pdf" prefix now becomes "Zend\PDF" namespace
+ * "Zend_Pdf" class becomes "Zend\PDF\PDFDocument
+ * "Zend_Pdf_Action_Goto" becomes "Zend\PDF\Action\GoToAction"

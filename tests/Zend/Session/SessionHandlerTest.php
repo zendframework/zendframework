@@ -226,17 +226,30 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testDestroyDoesNotClearSessionStorageByDefault()
     {
-        $this->markTestIncomplete('Waiting for Storage implementation');
+        $this->handler->start();
+        $storage = $this->handler->getStorage();
+        $storage['foo'] = 'bar';
+        $this->handler->destroy();
+        $this->handler->start();
+        $this->assertEquals('bar', $storage['foo']);
     }
 
     public function testPassingClearStorageOptionWhenCallingDestroyClearsStorage()
     {
-        $this->markTestIncomplete('Waiting for Storage implementation');
+        $this->handler->start();
+        $storage = $this->handler->getStorage();
+        $storage['foo'] = 'bar';
+        $this->handler->destroy(array('clear_storage' => true));
+        $this->assertSame(array(), (array) $storage);
     }
 
-    public function testCallingStopMarksStorageAsReadOnly()
+    public function testCallingWriteCloseMarksStorageAsImmutable()
     {
-        $this->markTestIncomplete('Waiting for Storage implementation');
+        $this->handler->start();
+        $storage = $this->handler->getStorage();
+        $storage['foo'] = 'bar';
+        $this->handler->writeClose();
+        $this->assertTrue($storage->isImmutable());
     }
 
     public function testCallingWriteCloseShouldNotAlterSessionExistsStatus()
@@ -413,7 +426,6 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testStartingSessionThatFailsAValidatorShouldRaiseException()
     {
-        $this->markTestIncomplete('Waiting to test until storage is in place');
         $this->setExpectedException('Zend\\Session\\Exception', 'failed');
         $chain = $this->handler->getValidatorChain();
         $chain->attach('session.validate', function() {

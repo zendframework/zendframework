@@ -7,6 +7,8 @@ use Zend\Session\Storage as Storable,
 
 class ArrayStorage extends \ArrayObject implements Storable
 {
+    protected $_immutable = false;
+
     public function __construct($input = array(), $flags = \ArrayObject::ARRAY_AS_PROPS, $iteratorClass = '\\ArrayIterator')
     {
         parent::__construct($input, $flags, $iteratorClass);
@@ -14,6 +16,9 @@ class ArrayStorage extends \ArrayObject implements Storable
 
     public function offsetSet($key, $value)
     {
+        if ($this->_immutable) {
+            throw new SessionException('Cannot set key "' . $key . '" as storage is marked immutable');
+        }
         if ($this->isLocked($key)) {
             throw new SessionException('Cannot set key "' . $key . '" due to locking');
         }
@@ -35,6 +40,11 @@ class ArrayStorage extends \ArrayObject implements Storable
 
     public function isLocked($key = null)
     {
+        if ($this->_immutable) {
+            // immutable trumps all
+            return true;
+        }
+
         if (null === $key) {
             // testing for global lock
             return $this->getMetadata('_READONLY');
@@ -84,8 +94,23 @@ class ArrayStorage extends \ArrayObject implements Storable
         return $this;
     }
 
+    public function markImmutable()
+    {
+        $this->_immutable = true;
+        return $this;
+    }
+
+    public function isImmutable()
+    {
+        return $this->_immutable;
+    }
+
     public function setMetadata($key, $value, $overwriteArray = false)
     {
+        if ($this->_immutable) {
+            throw new SessionException('Cannot set metadata key "' . $key . '" as storage is marked immutable');
+        }
+
         if (!isset($this['__ZF'])) {
             $this['__ZF'] = array();
         }
@@ -164,5 +189,11 @@ class ArrayStorage extends \ArrayObject implements Storable
             unset($values['__ZF']);
         }
         return $values;
+    }
+
+    public function fromArray(array $array)
+    {
+        $this->exchangeArray($array);
+        return $this;
     }
 }

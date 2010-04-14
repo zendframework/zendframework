@@ -51,6 +51,10 @@ class SessionHandler implements HandlerDefinition
 
     public function destroy(array $options = null)
     {
+        if (!$this->sessionExists()) {
+            return;
+        }
+
         if (null === $options) {
             $options = $this->_defaultDestroyOptions;
         } else {
@@ -61,6 +65,10 @@ class SessionHandler implements HandlerDefinition
         if ($options['send_expire_cookie']) {
             $this->expireSessionCookie();
         }
+
+        if ($options['clear_storage']) {
+            $this->getStorage()->clear();
+        }
     }
 
     public function stop()
@@ -69,7 +77,11 @@ class SessionHandler implements HandlerDefinition
 
     public function writeClose()
     {
+        $storage  = $this->getStorage();
+        $_SESSION = (array) $storage;
         session_write_close();
+        $storage->fromArray($_SESSION)
+                ->markImmutable();
     }
 
     public function getName()
@@ -130,8 +142,6 @@ class SessionHandler implements HandlerDefinition
     }
 
     /**
-     * @todo   Should this set the session cookie params?
-     * @todo   Should this do a regenerateId() when done?
      * @param  null|int $ttl 
      * @return SessionHandler
      */
@@ -166,18 +176,18 @@ class SessionHandler implements HandlerDefinition
     /**
      * Is this session valid?
      * 
-     * @todo   implement
      * @return bool
      */
     public function isValid()
     {
-        return true;
-        /*
         $validator = $this->getValidatorChain();
-        return $validator->notifyUntil(function($test) {
+        $return    = $validator->notifyUntil(function($test) {
             return !$test;
         }, 'session.validate');
-         */
+        if (null === $return) {
+            return true;
+        }
+        return (bool) $return;
     }
 
     public function expireSessionCookie()

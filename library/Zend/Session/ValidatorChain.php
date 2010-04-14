@@ -47,8 +47,11 @@ class ValidatorChain extends Messenger
     {
         $this->_storage = $storage;
 
-        foreach ($storage['VALID'] as $validator => $data) {
-            $this->attach('session.validate', new $validator($data), 'isValid');
+        $validators = $storage->getMetadata('_VALID');
+        if ($validators) {
+            foreach ($validators as $validator => $data) {
+                $this->attach('session.validate', new $validator($data), 'isValid');
+            }
         }
     }
 
@@ -65,7 +68,7 @@ class ValidatorChain extends Messenger
         if ($context instanceof Validator) {
             $data = $context->getData();
             $name = $context->getName();
-            $this->getStorage()->VALID[$name] = $data;
+            $this->getStorage()->setMetadata('_VALID', array($name => $data));
         }
 
         $handle = parent::attach($topic, $context, $handler);

@@ -20,22 +20,39 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__) . '/_files/TestSampleClass.php';
+/**
+ * @namespace
+ */
+namespace ZendTest\Reflection\TestAsset;
+
+function function1() {
+    return 'foo';
+}
+
 
 /**
- * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Reflection
- * @group      Zend_Reflection_Property
+ * Zend Function Two
+ *
+ * This is the long description for funciton two
+ *
+ * @param unknown_type $one
+ * @param unknown_type $two
+ * @return string
  */
-class Zend_Reflection_PropertyTest extends PHPUnit_Framework_TestCase
-{
-    public function testDeclaringClassReturn()
-    {
-        $property = new Zend_Reflection_Property('Zend_Reflection_TestSampleClass2', '_prop1');
-        $this->assertEquals(get_class($property->getDeclaringClass()), 'Zend_Reflection_Class');
-    }
+function function2($one, $two = 'two') {
+
+    return 'blah';
 }
+
+
+/**
+ * Enter description here...
+ *
+ * @param string $one
+ * @param int $two
+ * @return true
+ */
+function function6($one, $two = 2) {
+    return true;
+}
+

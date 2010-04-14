@@ -20,17 +20,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Reflection;
+
+/**
  * @uses       Reflector
- * @uses       Zend_Loader
- * @uses       Zend_Reflection_Class
- * @uses       Zend_Reflection_Exception
- * @uses       Zend_Reflection_Function
+ * @uses       \Zend\Loader
+ * @uses       \Zend\Reflection\ReflectionClass
+ * @uses       \Zend\Reflection\Exception
+ * @uses       \Zend\Reflection\ReflectionFunction
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Reflection_File implements Reflector
+class ReflectionFile implements \Reflector
 {
     /**
      * @var string
@@ -53,17 +58,22 @@ class Zend_Reflection_File implements Reflector
     protected $_endLine         = null;
 
     /**
+     * @var string
+     */
+    protected $_namespace       = null;
+    
+    /**
      * @var string[]
      */
     protected $_requiredFiles   = array();
 
     /**
-     * @var Zend_Reflection_Class[]
+     * @var \Zend\Reflection\ReflectionClass[]
      */
     protected $_classes         = array();
 
     /**
-     * @var Zend_Reflection_Function[]
+     * @var \Zend\Reflection\ReflectionFunction[]
      */
     protected $_functions       = array();
 
@@ -87,7 +97,7 @@ class Zend_Reflection_File implements Reflector
         }
 
         if (!$fileRealpath || !in_array($fileRealpath, get_included_files())) {
-            throw new Zend_Reflection_Exception('File ' . $file . ' must be required before it can be reflected');
+            throw new Exception('File ' . $file . ' must be required before it can be reflected');
         }
 
         $this->_fileName = $fileRealpath;
@@ -103,7 +113,7 @@ class Zend_Reflection_File implements Reflector
      */
     public static function findRealpathInIncludePath($fileName)
     {
-        $includePaths = Zend_Loader::explodeIncludePath();
+        $includePaths = \Zend\Loader::explodeIncludePath();
         while (count($includePaths) > 0) {
             $filePath = array_shift($includePaths) . DIRECTORY_SEPARATOR . $fileName;
 
@@ -174,11 +184,11 @@ class Zend_Reflection_File implements Reflector
      * @param  string $reflectionClass Reflection class to use
      * @return Zend_Reflection_Docblock
      */
-    public function getDocblock($reflectionClass = 'Zend_Reflection_Docblock')
+    public function getDocblock($reflectionClass = '\Zend\Reflection\ReflectionDocblock')
     {
         $instance = new $reflectionClass($this);
-        if (!$instance instanceof Zend_Reflection_Docblock) {
-            throw new Zend_Reflection_Exception('Invalid reflection class specified; must extend Zend_Reflection_Docblock');
+        if (!$instance instanceof ReflectionDocblock) {
+            throw new Exception('Invalid reflection class specified; must extend Zend_Reflection_Docblock');
         }
         return $instance;
     }
@@ -187,15 +197,15 @@ class Zend_Reflection_File implements Reflector
      * Return the reflection classes of the classes found inside this file
      *
      * @param  string $reflectionClass Name of reflection class to use for instances
-     * @return array Array of Zend_Reflection_Class instances
+     * @return array Array of \Zend\Reflection\ReflectionClass instances
      */
-    public function getClasses($reflectionClass = 'Zend_Reflection_Class')
+    public function getClasses($reflectionClass = '\Zend\Reflection\ReflectionClass')
     {
         $classes = array();
         foreach ($this->_classes as $class) {
             $instance = new $reflectionClass($class);
-            if (!$instance instanceof Zend_Reflection_Class) {
-                throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Zend_Reflection_Class');
+            if (!$instance instanceof ReflectionClass) {
+                throw new Exception('Invalid reflection class provided; must extend Zend\Reflection\ReflectionClass');
             }
             $classes[] = $instance;
         }
@@ -208,13 +218,13 @@ class Zend_Reflection_File implements Reflector
      * @param  string $reflectionClass Name of reflection class to use for instances
      * @return array Array of Zend_Reflection_Functions
      */
-    public function getFunctions($reflectionClass = 'Zend_Reflection_Function')
+    public function getFunctions($reflectionClass = '\Zend\Reflection\ReflectionFunction')
     {
         $functions = array();
         foreach ($this->_functions as $function) {
             $instance = new $reflectionClass($function);
-            if (!$instance instanceof Zend_Reflection_Function) {
-                throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Zend_Reflection_Function');
+            if (!$instance instanceof ReflectionFunction) {
+                throw new Exception('Invalid reflection class provided; must extend Zend\Reflection\ReflectionFunction');
             }
             $functions[] = $instance;
         }
@@ -226,30 +236,30 @@ class Zend_Reflection_File implements Reflector
      *
      * @param  null|string $name
      * @param  string $reflectionClass Reflection class to use when creating reflection instance
-     * @return Zend_Reflection_Class
-     * @throws Zend_Reflection_Exception for invalid class name or invalid reflection class
+     * @return \Zend\Reflection\ReflectionClass
+     * @throws \Zend\Reflection\Exception for invalid class name or invalid reflection class
      */
-    public function getClass($name = null, $reflectionClass = 'Zend_Reflection_Class')
+    public function getClass($name = null, $reflectionClass = '\Zend\Reflection\ReflectionClass')
     {
         if ($name === null) {
             reset($this->_classes);
             $selected = current($this->_classes);
             $instance = new $reflectionClass($selected);
-            if (!$instance instanceof Zend_Reflection_Class) {
-                throw new Zend_Reflection_Exception('Invalid reflection class given; must extend Zend_Reflection_Class');
+            if (!$instance instanceof ReflectionClass) {
+                throw new Exception('Invalid reflection class given; must extend Zend_Reflection_Class');
             }
             return $instance;
         }
 
         if (in_array($name, $this->_classes)) {
             $instance = new $reflectionClass($name);
-            if (!$instance instanceof Zend_Reflection_Class) {
-                throw new Zend_Reflection_Exception('Invalid reflection class given; must extend Zend_Reflection_Class');
+            if (!$instance instanceof ReflectionClass) {
+                throw new Exception('Invalid reflection class given; must extend Zend_Reflection_Class');
             }
             return $instance;
         }
 
-        throw new Zend_Reflection_Exception('Class by name ' . $name . ' not found.');
+        throw new Exception('Class by name ' . $name . ' not found.');
     }
 
     /**
@@ -290,6 +300,7 @@ class Zend_Reflection_File implements Reflector
         $functionTrapped = false;
         $classTrapped    = false;
         $requireTrapped  = false;
+        $namespaceTrapped = false;
         $openBraces      = 0;
 
         $this->_checkFileDocBlock($tokens);
@@ -316,22 +327,26 @@ class Zend_Reflection_File implements Reflector
                 // Maintain the count of open braces
                 if ($token == '{') {
                     $openBraces++;
-                } else if ($token == '}') {
+                } elseif ($token == '}') {
                     $openBraces--;
+                } elseif ($token == ';' && $namespaceTrapped == true) {
+                    $namespaceTrapped = false;
                 }
-
                 continue;
             }
 
             switch ($type) {
+
                 // Name of something
                 case T_STRING:
                     if ($functionTrapped) {
-                        $this->_functions[] = $value;
+                        $this->_functions[] = ($this->_namespace) ? $this->_namespace . $value : $value;;
                         $functionTrapped = false;
                     } elseif ($classTrapped) {
-                        $this->_classes[] = $value;
+                        $this->_classes[] = ($this->_namespace) ? $this->_namespace . $value : $value;
                         $classTrapped = false;
+                    } elseif ($namespaceTrapped) {
+                        $this->_namespace .= $value . '\\';
                     }
                     continue;
 
@@ -343,6 +358,12 @@ class Zend_Reflection_File implements Reflector
                     }
                     continue;
 
+                // namespace
+                case T_NAMESPACE:
+                    $namespaceTrapped = true;
+                    continue;
+                    
+                    
                 // Functions
                 case T_FUNCTION:
                     if ($openBraces == 0) {

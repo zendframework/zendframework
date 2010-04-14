@@ -21,10 +21,9 @@
  */
 
 /**
- * @see TestHelper
+ * @namespace
  */
-
-/** requires */
+namespace ZendTest\Reflection;
 
 /**
  * @category   Zend
@@ -33,23 +32,13 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Reflection
- * @group      Zend_Reflection_Extension
+ * @group      Zend_Reflection_Property
  */
-class Zend_Reflection_ExtensionTest extends PHPUnit_Framework_TestCase
+class ReflectionPropertyTest extends \PHPUnit_Framework_TestCase
 {
-
-    public function testClassReturn()
+    public function testDeclaringClassReturn()
     {
-        $extension = new Zend_Reflection_Extension('Reflection');
-        $extensionClasses = $extension->getClasses();
-        $this->assertEquals(get_class(array_shift($extensionClasses)), 'Zend_Reflection_Class');
-    }
-
-    public function testFunctionReturn()
-    {
-        $extension = new Zend_Reflection_Extension('Spl');
-        $extensionFunctions = $extension->getFunctions();
-        $this->assertEquals(get_class(array_shift($extensionFunctions)), 'Zend_Reflection_Function');
+        $property = new \Zend\Reflection\ReflectionProperty('ZendTest\Reflection\TestAsset\TestSampleClass2', '_prop1');
+        $this->assertEquals(get_class($property->getDeclaringClass()), 'Zend\Reflection\ReflectionClass');
     }
 }
-

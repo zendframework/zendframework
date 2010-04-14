@@ -20,33 +20,38 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Reflection;
+
+/**
  * @uses       ReflectionMethod
- * @uses       Zend_Reflection_Class
+ * @uses       \Zend\Reflection\ReflectionClass
  * @uses       Zend_Reflection_Docblock
- * @uses       Zend_Reflection_Exception
- * @uses       Zend_Reflection_Parameter
+ * @uses       \Zend\Reflection\Exception
+ * @uses       \Zend\Reflection\ReflectionParameter
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Reflection_Method extends ReflectionMethod
+class ReflectionMethod extends \ReflectionMethod
 {
     /**
      * Retrieve method docblock reflection
      *
      * @return Zend_Reflection_Docblock
-     * @throws Zend_Reflection_Exception
+     * @throws \Zend\Reflection\Exception
      */
-    public function getDocblock($reflectionClass = 'Zend_Reflection_Docblock')
+    public function getDocblock($reflectionClass = '\Zend\Reflection\ReflectionDocblock')
     {
         if ('' == $this->getDocComment()) {
-            throw new Zend_Reflection_Exception($this->getName() . ' does not have a docblock');
+            throw new Exception($this->getName() . ' does not have a docblock');
         }
 
         $instance = new $reflectionClass($this);
-        if (!$instance instanceof Zend_Reflection_Docblock) {
-            throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Zend_Reflection_Docblock');
+        if (!$instance instanceof ReflectionDocblock) {
+            throw new Exception('Invalid reflection class provided; must extend Zend\Reflection\ReflectionDocblock');
         }
         return $instance;
     }
@@ -72,14 +77,14 @@ class Zend_Reflection_Method extends ReflectionMethod
      * Get reflection of declaring class
      *
      * @param  string $reflectionClass Name of reflection class to use
-     * @return Zend_Reflection_Class
+     * @return \Zend\Reflection\ReflectionClass
      */
-    public function getDeclaringClass($reflectionClass = 'Zend_Reflection_Class')
+    public function getDeclaringClass($reflectionClass = '\Zend\Reflection\ReflectionClass')
     {
         $phpReflection  = parent::getDeclaringClass();
         $zendReflection = new $reflectionClass($phpReflection->getName());
-        if (!$zendReflection instanceof Zend_Reflection_Class) {
-            throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Zend_Reflection_Class');
+        if (!$zendReflection instanceof ReflectionClass) {
+            throw new Exception('Invalid reflection class provided; must extend Zend\Reflection\ReflectionClass');
         }
         unset($phpReflection);
         return $zendReflection;
@@ -89,16 +94,16 @@ class Zend_Reflection_Method extends ReflectionMethod
      * Get all method parameter reflection objects
      *
      * @param  string $reflectionClass Name of reflection class to use
-     * @return array of Zend_Reflection_Parameter objects
+     * @return array of \Zend\Reflection\ReflectionParameter objects
      */
-    public function getParameters($reflectionClass = 'Zend_Reflection_Parameter')
+    public function getParameters($reflectionClass = '\Zend\Reflection\ReflectionParameter')
     {
         $phpReflections  = parent::getParameters();
         $zendReflections = array();
         while ($phpReflections && ($phpReflection = array_shift($phpReflections))) {
             $instance = new $reflectionClass(array($this->getDeclaringClass()->getName(), $this->getName()), $phpReflection->getName());
-            if (!$instance instanceof Zend_Reflection_Parameter) {
-                throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Zend_Reflection_Parameter');
+            if (!$instance instanceof ReflectionParameter) {
+                throw new Exception('Invalid reflection class provided; must extend Zend\Reflection\ReflectionParameter');
             }
             $zendReflections[] = $instance;
             unset($phpReflection);

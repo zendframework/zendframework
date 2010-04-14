@@ -7,7 +7,12 @@
  * @author Ralph Schindler
  */
 
-interface Zend_Reflection_TestSampleInterface
+/**
+ * @namespace
+ */
+namespace ZendTest\Reflection\TestAsset;
+
+interface TestSampleInterface
 {
 
 }

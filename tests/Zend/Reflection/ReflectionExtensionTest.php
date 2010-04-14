@@ -20,7 +20,12 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__) . '/_files/TestSampleClass.php';
+/**
+ * @namespace
+ */
+namespace ZendTest\Reflection;
+use Zend\Reflection;
+
 
 /**
  * @category   Zend
@@ -29,21 +34,23 @@ require_once dirname(__FILE__) . '/_files/TestSampleClass.php';
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Reflection
- * @group      Zend_Reflection_Function
+ * @group      Zend_Reflection_Extension
  */
-class Zend_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
+class ReflectionExtensionTest extends \PHPUnit_Framework_TestCase
 {
-    public function testParemeterReturn()
+
+    public function testClassReturn()
     {
-        $function = new Zend_Reflection_Function('array_splice');
-        $parameters = $function->getParameters();
-        $this->assertEquals(count($parameters), 4);
-        $this->assertEquals(get_class(array_shift($parameters)), 'Zend_Reflection_Parameter');
+        $extension = new Reflection\ReflectionExtension('Reflection');
+        $extensionClasses = $extension->getClasses();
+        $this->assertEquals(get_class(array_shift($extensionClasses)), 'Zend\Reflection\ReflectionClass');
     }
 
-    public function testFunctionDocblockReturn()
+    public function testFunctionReturn()
     {
-        $function = new Zend_Reflection_Function('zend_reflection_test_sample_function6');
-        $this->assertEquals(get_class($function->getDocblock()), 'Zend_Reflection_Docblock');
+        $extension = new Reflection\ReflectionExtension('Spl');
+        $extensionFunctions = $extension->getFunctions();
+        $this->assertEquals(get_class(array_shift($extensionFunctions)), 'Zend\Reflection\ReflectionFunction');
     }
 }
+

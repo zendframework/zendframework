@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Reflection
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -22,16 +23,32 @@
 /**
  * @namespace
  */
-namespace Zend\Reflection;
+namespace ZendTest\Reflection;
+use Zend\Reflection;
 
 /**
- * @uses       \Zend\Exception
  * @category   Zend
  * @package    Zend_Reflection
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Reflection
+ * @group      Zend_Reflection_Function
  */
-class Exception extends \Zend\Exception
+class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
 {
+    public function testParemeterReturn()
+    {
+        $function = new Reflection\ReflectionFunction('array_splice');
+        $parameters = $function->getParameters();
+        $this->assertEquals(count($parameters), 4);
+        $this->assertEquals(get_class(array_shift($parameters)), 'Zend\Reflection\ReflectionParameter');
+    }
 
+    public function testFunctionDocblockReturn()
+    {
+        require_once __DIR__ . '/TestAsset/functions.php';
+        $function = new Reflection\ReflectionFunction('ZendTest\Reflection\TestAsset\function6');
+        $this->assertEquals(get_class($function->getDocblock()), 'Zend\Reflection\ReflectionDocblock');
+    }
 }

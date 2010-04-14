@@ -10755,10 +10755,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Reflection/Class.php</originalRelativeFilePath>
       <originalClassName>Zend_Reflection_Class</originalClassName>
-      <newRelativeFilePath>Zend/Reflection/Class.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Reflection/ReflectionClass.php</newRelativeFilePath>
       <newNamespace>Zend\Reflection</newNamespace>
-      <newClassName>Class</newClassName>
-      <newFullyQualifiedName>Zend\Reflection\Class</newFullyQualifiedName>
+      <newClassName>ReflectionClass</newClassName>
+      <newFullyQualifiedName>Zend\Reflection\ReflectionClass</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Reflection/Docblock/Tag/Param.php</originalRelativeFilePath>
@@ -10779,18 +10779,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Reflection/Docblock/Tag.php</originalRelativeFilePath>
       <originalClassName>Zend_Reflection_Docblock_Tag</originalClassName>
-      <newRelativeFilePath>Zend/Reflection/Docblock/Tag/Tag.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Reflection/ReflectionDocblockTag.php</newRelativeFilePath>
       <newNamespace>Zend\Reflection\Docblock\Tag</newNamespace>
-      <newClassName>Tag</newClassName>
-      <newFullyQualifiedName>Zend\Reflection\Docblock\Tag\Tag</newFullyQualifiedName>
+      <newClassName>ReflectionDocblockTag</newClassName>
+      <newFullyQualifiedName>Zend\Reflection\ReflectionDocblockTag</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Reflection/Docblock.php</originalRelativeFilePath>
-      <originalClassName>Zend_Reflection_Docblock</originalClassName>
-      <newRelativeFilePath>Zend/Reflection/Docblock/Docblock.php</newRelativeFilePath>
-      <newNamespace>Zend\Reflection\Docblock</newNamespace>
-      <newClassName>Docblock</newClassName>
-      <newFullyQualifiedName>Zend\Reflection\Docblock\Docblock</newFullyQualifiedName>
+      <originalClassName>Zend_Reflection_ReflectionDocblock</originalClassName>
+      <newRelativeFilePath>Zend/Reflection/ReflectionDocblock.php</newRelativeFilePath>
+      <newNamespace>Zend\Reflection</newNamespace>
+      <newClassName>ReflectionDocblock</newClassName>
+      <newFullyQualifiedName>Zend\Reflection\ReflectionDocblock</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Reflection/Exception.php</originalRelativeFilePath>
@@ -10803,50 +10803,50 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Reflection/Extension.php</originalRelativeFilePath>
       <originalClassName>Zend_Reflection_Extension</originalClassName>
-      <newRelativeFilePath>Zend/Reflection/Extension.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Reflection/ReflectionExtension.php</newRelativeFilePath>
       <newNamespace>Zend\Reflection</newNamespace>
-      <newClassName>Extension</newClassName>
-      <newFullyQualifiedName>Zend\Reflection\Extension</newFullyQualifiedName>
+      <newClassName>ReflectionExtension</newClassName>
+      <newFullyQualifiedName>Zend\Reflection\ReflectionExtension</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Reflection/File.php</originalRelativeFilePath>
       <originalClassName>Zend_Reflection_File</originalClassName>
-      <newRelativeFilePath>Zend/Reflection/File.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Reflection/ReflectionFile.php</newRelativeFilePath>
       <newNamespace>Zend\Reflection</newNamespace>
-      <newClassName>File</newClassName>
-      <newFullyQualifiedName>Zend\Reflection\File</newFullyQualifiedName>
+      <newClassName>ReflectionFile</newClassName>
+      <newFullyQualifiedName>Zend\Reflection\ReflectionFile</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Reflection/Function.php</originalRelativeFilePath>
       <originalClassName>Zend_Reflection_Function</originalClassName>
-      <newRelativeFilePath>Zend/Reflection/Function.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Reflection/ReflectionFunction.php</newRelativeFilePath>
       <newNamespace>Zend\Reflection</newNamespace>
-      <newClassName>Function</newClassName>
-      <newFullyQualifiedName>Zend\Reflection\Function</newFullyQualifiedName>
+      <newClassName>ReflectionFunction</newClassName>
+      <newFullyQualifiedName>Zend\Reflection\ReflectionFunction</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Reflection/Method.php</originalRelativeFilePath>
       <originalClassName>Zend_Reflection_Method</originalClassName>
-      <newRelativeFilePath>Zend/Reflection/Method.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Reflection/ReflectionMethod.php</newRelativeFilePath>
       <newNamespace>Zend\Reflection</newNamespace>
-      <newClassName>Method</newClassName>
-      <newFullyQualifiedName>Zend\Reflection\Method</newFullyQualifiedName>
+      <newClassName>ReflectionMethod</newClassName>
+      <newFullyQualifiedName>Zend\Reflection\ReflectionMethod</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Reflection/Parameter.php</originalRelativeFilePath>
       <originalClassName>Zend_Reflection_Parameter</originalClassName>
-      <newRelativeFilePath>Zend/Reflection/Parameter.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Reflection/ReflectionParameter.php</newRelativeFilePath>
       <newNamespace>Zend\Reflection</newNamespace>
-      <newClassName>Parameter</newClassName>
-      <newFullyQualifiedName>Zend\Reflection\Parameter</newFullyQualifiedName>
+      <newClassName>ReflectionParameter</newClassName>
+      <newFullyQualifiedName>Zend\Reflection\ReflectionParameter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Reflection/Property.php</originalRelativeFilePath>
       <originalClassName>Zend_Reflection_Property</originalClassName>
-      <newRelativeFilePath>Zend/Reflection/Property.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Reflection/ReflectionProperty.php</newRelativeFilePath>
       <newNamespace>Zend\Reflection</newNamespace>
-      <newClassName>Property</newClassName>
-      <newFullyQualifiedName>Zend\Reflection\Property</newFullyQualifiedName>
+      <newClassName>ReflectionProperty</newClassName>
+      <newFullyQualifiedName>Zend\Reflection\ReflectionProperty</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Registry.php</originalRelativeFilePath>

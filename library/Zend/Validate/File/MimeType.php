@@ -332,7 +332,7 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
         $mimefile = $this->getMagicFile();
         if (class_exists('finfo', false)) {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
-            if (!empty($mimefile) && !empty($this->_finfo)) {
+            if (!empty($mimefile) && empty($this->_finfo)) {
                 $this->_finfo = @finfo_open($const, $mimefile);
             }
 
@@ -340,11 +340,10 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
                 $this->_finfo = @finfo_open($const);
             }
 
+            $this->_type = null;
             if ($this->_finfo !== false) {
                 $this->_type = finfo_file($this->_finfo, $value);
             }
-
-            unset($this->_finfo);
         }
 
         if (empty($this->_type) &&

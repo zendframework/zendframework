@@ -163,6 +163,9 @@ class ArrayStorage extends \ArrayObject implements Storable
 
     public function clear($key = null)
     {
+        if ($this->isImmutable()) {
+            throw new SessionException('Cannot clear storage as it is marked immutable');
+        }
         if (null === $key) {
             $this->exchangeArray(array());
             return $this;

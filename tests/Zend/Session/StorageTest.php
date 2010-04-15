@@ -197,4 +197,13 @@ class StorageTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->storage->getMetadata('foo'));
         $this->assertEquals('baz', $this->storage->getMetadata('bar'));
     }
+
+    public function testClearWhenStorageMarkedImmutableRaisesException()
+    {
+        $this->storage->foo = 'bar';
+        $this->storage->bar = 'baz';
+        $this->storage->markImmutable();
+        $this->setExpectedException('Zend\\Session\\Exception', 'immutable');
+        $this->storage->clear();
+    }
 }

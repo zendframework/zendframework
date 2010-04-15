@@ -904,4 +904,38 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit_Framework_TestCase
             $wsdl
         );
     }
+
+    /**
+     * @group ZF-8948
+     * @group ZF-5766
+     */
+    public function testRecursiveWsdlDependencies()
+    {
+        $autodiscover = new Zend_Soap_AutoDiscover('Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex');
+        $autodiscover->setClass('Zend_Soap_AutoDiscover_Recursion');
+        $wsdl = $autodiscover->toXml();
+
+        //  <types>
+        //      <xsd:schema targetNamespace="http://localhost/my_script.php">
+        //          <xsd:complexType name="Zend_Soap_AutoDiscover_Recursion">
+        //              <xsd:all>
+        //                  <xsd:element name="recursion" type="tns:Zend_Soap_AutoDiscover_Recursion"/>
+
+
+        $path = '//wsdl:types/xsd:schema/xsd:complexType[@name="Zend_Soap_AutoDiscover_Recursion"]/xsd:all/xsd:element[@name="recursion" and @type="tns:Zend_Soap_AutoDiscover_Recursion"]';
+        $this->assertWsdlPathExists($wsdl, $path);
+    }
+
+    public function assertWsdlPathExists($xml, $path)
+    {
+        $doc = new DOMDocument('UTF-8');
+        $doc->loadXML($xml);
+
+        $xpath = new DOMXPath($doc);
+        $xpath->registerNamespace('wsdl', 'http://schemas.xmlsoap.org/wsdl/');
+
+        $nodes = $xpath->query($path);
+
+        $this->assertTrue($nodes->length >= 1, "Could not assert that XML Document contains a node that matches the XPath Expression: " . $path);
+    }
 }

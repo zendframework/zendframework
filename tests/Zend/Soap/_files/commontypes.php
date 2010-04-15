@@ -430,6 +430,11 @@ class Zend_Soap_AutoDiscover_Recursion
      * @var Zend_Soap_AutoDiscover_Recursion
      */
     public $recursion;
+
+    /**
+     * @return Zend_Soap_AutoDiscover_Recursion
+     */
+    public function create() {}
 }
 
 /**

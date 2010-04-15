@@ -46,9 +46,8 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex extends Zend_Soap_Wsdl_Strategy
      */
     public function addComplexType($type)
     {
-        if(in_array($type, $this->_inProcess)) {
-            require_once "Zend/Soap/Wsdl/Exception.php";
-            throw new Zend_Soap_Wsdl_Exception("Infinite recursion, cannot nest '".$type."' into itself.");
+        if (in_array($type, $this->_inProcess)) {
+            return "tns:" . $type;
         }
         $this->_inProcess[$type] = $type;
 

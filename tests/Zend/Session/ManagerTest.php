@@ -129,9 +129,9 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testCanPassStringHandlerNameToConstructor()
     {
-        $manager = new Manager(null, null, 'ZendTest\\Session\\TestHandler');
+        $manager = new Manager(null, null, 'ZendTest\\Session\\TestAsset\\TestHandler');
         $handler = $manager->getHandler();
-        $this->assertTrue($handler instanceof TestHandler);
+        $this->assertTrue($handler instanceof TestAsset\TestHandler);
     }
 
     public function testCanPassStorageClassToConfigurationOptions()
@@ -143,9 +143,9 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testCanPassHandlerClassToConfigurationOptions()
     {
-        $manager = new Manager(array('handler' => 'ZendTest\\Session\\TestHandler'));
+        $manager = new Manager(array('handler' => 'ZendTest\\Session\\TestAsset\\TestHandler'));
         $handler = $manager->getHandler();
-        $this->assertTrue($handler instanceof TestHandler);
+        $this->assertTrue($handler instanceof TestAsset\TestHandler);
     }
 
     public function testHandlerReceivesConfigurationAndStorageWhenPassingHandlerClassViaConfigurationOptions()
@@ -153,14 +153,14 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $manager = new Manager(array(
             'class'   => 'Zend\\Session\\Configuration\\StandardConfiguration',
             'storage' => 'Zend\\Session\\Storage\\ArrayStorage',
-            'handler' => 'ZendTest\\Session\\TestHandler',
+            'handler' => 'ZendTest\\Session\\TestAsset\\TestHandler',
         ));
         $config  = $manager->getConfig();
         $this->assertTrue($config instanceof Session\Configuration\StandardConfiguration);
         $storage = $manager->getStorage();
         $this->assertTrue($storage instanceof Session\Storage\ArrayStorage);
         $handler = $manager->getHandler();
-        $this->assertTrue($handler instanceof TestHandler);
+        $this->assertTrue($handler instanceof TestAsset\TestHandler);
         $this->assertSame($config, $handler->getConfiguration());
         $this->assertSame($storage, $handler->getStorage());
     }
@@ -171,94 +171,19 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $manager = new Manager(array(
             'class'   => 'Zend\\Session\\Configuration\\StandardConfiguration',
             'storage' => 'Zend\\Session\\Storage\\SessionStorage',
-            'handler' => 'ZendTest\\Session\\TestHandler',
+            'handler' => 'ZendTest\\Session\\TestAsset\\TestHandler',
         ), $storage);
         $this->assertSame($storage, $manager->getStorage());
     }
 
     public function testPassingHandlerViaParamOverridesHandlerInConfig()
     {
-        $handler = new TestHandler();
+        $handler = new TestAsset\TestHandler();
         $manager = new Manager(array(
             'class'   => 'Zend\\Session\\Configuration\\StandardConfiguration',
             'storage' => 'Zend\\Session\\Storage\\SessionStorage',
             'handler' => 'Zend\\Session\\Handler\\SessionHandler',
         ), null, $handler);
         $this->assertSame($handler, $manager->getHandler());
-    }
-}
-
-class TestHandler implements Session\Handler
-{
-    public function start()
-    {}
-
-    public function destroy()
-    {}
-
-    public function stop()
-    {}
-
-    public function writeClose()
-    {}
-
-
-    public function getName()
-    {}
-
-    public function setName($name)
-    {}
-
-    public function getId()
-    {}
-
-    public function setId($id)
-    {}
-
-    public function regenerateId()
-    {}
-
-    public function rememberMe($ttl = null)
-    {}
-
-    public function forgetMe()
-    {}
-
-
-    public function setValidatorChain(\Zend\Messenger\Delivery $chain)
-    {}
-
-    public function getValidatorChain()
-    {}
-
-    public function isValid()
-    {}
-
-
-    public function sessionExists()
-    {}
-
-    public function expireSessionCookie()
-    {}
-
-
-    public function setConfiguration(Session\Configuration $config)
-    {
-        $this->config = $config;
-    }
-
-    public function getConfiguration()
-    {
-        return $this->config;
-    }
-
-    public function setStorage(Session\Storage $storage)
-    {
-        $this->storage = $storage;
-    }
-
-    public function getStorage()
-    {
-        return $this->storage;
     }
 }

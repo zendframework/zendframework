@@ -126,7 +126,7 @@ class ArrayStorage extends \ArrayObject implements Storable
                 $this['__ZF'] = $array;
                 unset($array);
             } else {
-                $this['__ZF'][$key] = array_merge($this['__ZF'][$key], $value);
+                $this['__ZF'][$key] = array_merge_recursive($this['__ZF'][$key], $value);
             }
         } else {
             if ((null === $value) && isset($this['__ZF'][$key])) {

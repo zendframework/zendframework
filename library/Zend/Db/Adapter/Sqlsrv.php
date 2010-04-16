@@ -620,7 +620,7 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
             if (!$orderby) {
                 $over = 'ORDER BY (SELECT 0)';
             } else {
-                $over = preg_replace('/\".*\".\"(.*)\"/i', '"inner_tbl"."$1"', $orderby);
+                $over = preg_replace('/\"[^,]*\".\"([^,]*)\"/i', '"inner_tbl"."$1"', $orderby);
             }
             
             // Remove ORDER BY clause from $sql

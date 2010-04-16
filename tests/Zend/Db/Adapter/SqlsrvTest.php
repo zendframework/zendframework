@@ -535,7 +535,26 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
             'Expecting row count to be 1');
         $this->assertEquals(2, $result[0]['product_id'],
             'Expecting to get product_id 2');
-    }     
+    }  
+    
+    /**
+     * @group ZF-8901
+     */
+    public function testAdapterLimitOffsetWithMultipleOrderColumns()
+    {
+        $products = $this->_db->quoteIdentifier('zfproducts');
+        $product_id = $this->_db->quoteIdentifier('product_id');
+        $product_name = $this->_db->quoteIdentifier('product_name');
+
+        $sql = $this->_db->limit("SELECT * FROM $products ORDER BY $products.$product_id ASC, $products.$product_name DESC", 1, 1);
+
+        $stmt = $this->_db->query($sql);
+        $result = $stmt->fetchAll();
+        $this->assertEquals(1, count($result),
+            'Expecting row count to be 1');
+        $this->assertEquals(2, $result[0]['product_id'],
+            'Expecting to get product_id 2');
+    }    
 
     public function getDriver()
     {

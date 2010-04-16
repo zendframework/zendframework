@@ -74,6 +74,19 @@ class Container extends ArrayObject
             return true;
         }
 
+        if ($this->_expireByExpiryTime($storage, $name, $key)) {
+            return true;
+        }
+
+        if ($this->_expireByHops($storage, $name, $key)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected function _expireByExpiryTime(Storage $storage, $name, $key)
+    {
         $metadata = $storage->getMetadata($name);
         if (is_array($metadata) 
             && isset($metadata['EXPIRE']) 
@@ -94,6 +107,46 @@ class Container extends ArrayObject
             $storage->setMetadata($name, $metadata, true);
             unset($storage[$name][$key]);
             return true;
+        }
+
+        return false;
+    }
+
+    protected function _expireByHops(Storage $storage, $name, $key)
+    {
+        $ts       = $storage->getRequestAccessTime();
+        $metadata = $storage->getMetadata($name);
+        if (is_array($metadata) 
+            && isset($metadata['EXPIRE_HOPS']) 
+            && ($ts > $metadata['EXPIRE_HOPS']['ts'])
+        ) {
+            $metadata['EXPIRE_HOPS']['hops']--;
+            if (-1 === $metadata['EXPIRE_HOPS']['hops']) {
+                unset($metadata['EXPIRE_HOPS']);
+                $storage->setMetadata($name, $metadata, true);
+                $storage[$name] = $this->_createContainer();
+                return true;
+            }
+            $metadata['EXPIRE_HOPS']['ts'] = $ts;
+            $storage->setMetadata($name, $metadata, true);
+            return false;
+        }
+
+        if (is_array($metadata) 
+            && isset($metadata['EXPIRE_HOPS_KEYS']) 
+            && isset($metadata['EXPIRE_HOPS_KEYS'][$key]) 
+            && ($ts > $metadata['EXPIRE_HOPS_KEYS'][$key]['ts'])
+        ) {
+            $metadata['EXPIRE_HOPS_KEYS'][$key]['hops']--;
+            if (-1 === $metadata['EXPIRE_HOPS_KEYS'][$key]['hops']) {
+                unset($metadata['EXPIRE_HOPS_KEYS'][$key]);
+                $storage->setMetadata($name, $metadata, true);
+                unset($storage[$name][$key]);
+                return true;
+            }
+            $metadata['EXPIRE_HOPS_KEYS'][$key]['ts'] = $ts;
+            $storage->setMetadata($name, $metadata, true);
+            return false;
         }
 
         return false;
@@ -145,13 +198,12 @@ class Container extends ArrayObject
     {
         $storage = $this->_getStorage();
         $ts      = $_SERVER['REQUEST_TIME'] + $ttl;
+        if (is_scalar($vars) && null !== $vars) {
+            $vars = (array) $vars;
+        }
+
         if (null === $vars) {
             $data = array('EXPIRE' => $ts);
-        } elseif (is_scalar($vars)) {
-            if (!$this->offsetExists($vars)) {
-                return $this;
-            }
-            $data = array('EXPIRE_KEYS' => array($vars => $ts));
         } elseif (is_array($vars)) {
             // Cannot pass "$this" to a lambda
             $container = $this;
@@ -169,6 +221,45 @@ class Container extends ArrayObject
 
             // Create metadata array to merge in
             $data = array('EXPIRE_KEYS' => $expires);
+        } else {
+            throw new Exception('Unknown data provided as second argument to ' . __METHOD__);
+        }
+
+        $storage->setMetadata(
+            $this->getName(), 
+            $data
+        );
+        return $this;
+    }
+
+    public function setExpirationHops($hops, $vars = null)
+    {
+        $storage = $this->_getStorage();
+        $ts      = $storage->getRequestAccessTime();
+
+        if (is_scalar($vars) && (null !== $vars)) {
+            $vars = (array) $vars;
+        }
+
+        if (null === $vars) {
+            $data = array('EXPIRE_HOPS' => array('hops' => $hops, 'ts' => $ts));
+        } elseif (is_array($vars)) {
+            // Cannot pass "$this" to a lambda
+            $container = $this;
+
+            // Filter out any items not in our container
+            $expires   = array_filter($vars, function ($value) use ($container) {
+                return $container->offsetExists($value);
+            });
+
+            // Map item keys => timestamp
+            $expires   = array_flip($expires);
+            $expires   = array_map(function ($value) use ($hops, $ts) {
+                return array('hops' => $hops, 'ts' => $ts);
+            }, $expires);
+
+            // Create metadata array to merge in
+            $data = array('EXPIRE_HOPS_KEYS' => $expires);
         } else {
             throw new Exception('Unknown data provided as second argument to ' . __METHOD__);
         }

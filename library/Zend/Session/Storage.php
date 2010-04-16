@@ -4,6 +4,7 @@ namespace Zend\Session;
 
 interface Storage extends \Traversable, \ArrayAccess, \Serializable, \Countable
 {
+    public function getRequestAccessTime();
     public function lock($key = null);
     public function isLocked($key = null);
     public function unlock($key = null);

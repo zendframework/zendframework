@@ -12,6 +12,12 @@ class ArrayStorage extends \ArrayObject implements Storable
     public function __construct($input = array(), $flags = \ArrayObject::ARRAY_AS_PROPS, $iteratorClass = '\\ArrayIterator')
     {
         parent::__construct($input, $flags, $iteratorClass);
+        $this->setMetadata('_REQUEST_ACCESS_TIME', microtime(true));
+    }
+
+    public function getRequestAccessTime()
+    {
+        return $this->getMetadata('_REQUEST_ACCESS_TIME');
     }
 
     public function offsetSet($key, $value)

@@ -209,7 +209,135 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($metadata['EXPIRE_KEYS']['foo']));
     }
 
+    public function testSettingExpirationHopsWithNoVariablesMarksContainerByWritingToStorage()
+    {
+        $this->container->setExpirationHops(2);
+        $storage = $this->manager->getStorage();
+        $metadata = $storage->getMetadata('Default');
+        $this->assertTrue(array_key_exists('EXPIRE_HOPS', $metadata));
+        $this->assertEquals(
+            array('hops' => 2, 'ts' => $storage->getRequestAccessTime()), 
+            $metadata['EXPIRE_HOPS']
+        );
+    }
+
+    public function testSettingExpirationHopsWithSingleKeyMarksContainerByWritingToStorage()
+    {
+        $this->container->foo = 'bar';
+        $this->container->setExpirationHops(2, 'foo');
+        $storage = $this->manager->getStorage();
+        $metadata = $storage->getMetadata('Default');
+        $this->assertTrue(array_key_exists('EXPIRE_HOPS_KEYS', $metadata));
+        $this->assertTrue(array_key_exists('foo', $metadata['EXPIRE_HOPS_KEYS']));
+        $this->assertEquals(
+            array('hops' => 2, 'ts' => $storage->getRequestAccessTime()), 
+            $metadata['EXPIRE_HOPS_KEYS']['foo']
+        );
+    }
+
+    public function testSettingExpirationHopsWithMultipleKeysMarksContainerByWritingToStorage()
+    {
+        $this->container->foo = 'bar';
+        $this->container->bar = 'baz';
+        $this->container->baz = 'bat';
+        $this->container->setExpirationHops(2, array('foo', 'baz'));
+        $storage = $this->manager->getStorage();
+        $metadata = $storage->getMetadata('Default');
+        $this->assertTrue(array_key_exists('EXPIRE_HOPS_KEYS', $metadata));
+
+        $hops     = $metadata['EXPIRE_HOPS_KEYS'];
+        $ts       = $storage->getRequestAccessTime();
+        $expected = array(
+            'foo' => array(
+                'hops' => 2, 
+                'ts'   => $ts,
+            ),
+            'baz' => array(
+                'hops' => 2, 
+                'ts'   => $ts,
+            ),
+        );
+        $this->assertEquals($expected, $hops);
+    }
+
+    public function testContainerExpiresAfterSpecifiedHops()
+    {
+        $this->container->foo = 'bar';
+        $this->container->setExpirationHops(1);
+
+        $storage = $this->manager->getStorage();
+        $ts = $storage->getRequestAccessTime();
+
+        $storage->setMetadata('_REQUEST_ACCESS_TIME', $ts + 60);
+        $this->assertEquals('bar', $this->container->foo);
+
+        $storage->setMetadata('_REQUEST_ACCESS_TIME', $ts + 120);
+        $this->assertNull($this->container->foo);
+    }
+
+    public function testInstantiatingMultipleContainersInSameRequestDoesNotCreateExtraHops()
+    {
+        $this->container->foo = 'bar';
+        $this->container->setExpirationHops(1);
+
+        $container = new Container('Default', $this->manager);
+        $this->assertEquals('bar', $container->foo);
+        $this->assertEquals('bar', $this->container->foo);
+    }
+
+    public function testKeyExpiresAfterSpecifiedHops()
+    {
+        $this->container->foo = 'bar';
+        $this->container->bar = 'baz';
+        $this->container->setExpirationHops(1, 'foo');
+
+        $storage = $this->manager->getStorage();
+        $ts = $storage->getRequestAccessTime();
+
+        $storage->setMetadata('_REQUEST_ACCESS_TIME', $ts + 60);
+        $this->assertEquals('bar', $this->container->foo);
+        $this->assertEquals('baz', $this->container->bar);
+
+        $storage->setMetadata('_REQUEST_ACCESS_TIME', $ts + 120);
+        $this->assertNull($this->container->foo);
+        $this->assertEquals('baz', $this->container->bar);
+    }
+
+    public function testInstantiatingMultipleContainersInSameRequestDoesNotCreateExtraKeyHops()
+    {
+        $this->container->foo = 'bar';
+        $this->container->bar = 'baz';
+        $this->container->setExpirationHops(1, 'foo');
+
+        $container = new Container('Default', $this->manager);
+        $this->assertEquals('bar', $container->foo);
+        $this->assertEquals('bar', $this->container->foo);
+        $this->assertEquals('baz', $container->bar);
+        $this->assertEquals('baz', $this->container->bar);
+    }
+
+    public function testKeysExpireAfterSpecifiedHops()
+    {
+        $this->container->foo = 'bar';
+        $this->container->bar = 'baz';
+        $this->container->baz = 'bat';
+        $this->container->setExpirationHops(1, array('foo', 'baz'));
+
+        $storage = $this->manager->getStorage();
+        $ts = $storage->getRequestAccessTime();
+
+        $storage->setMetadata('_REQUEST_ACCESS_TIME', $ts + 60);
+        $this->assertEquals('bar', $this->container->foo);
+        $this->assertEquals('baz', $this->container->bar);
+        $this->assertEquals('bat', $this->container->baz);
+
+        $storage->setMetadata('_REQUEST_ACCESS_TIME', $ts + 120);
+        $this->assertNull($this->container->foo);
+        $this->assertEquals('baz', $this->container->bar);
+        $this->assertNull($this->container->baz);
+    }
+
     /**
-     * @todo expiration hops
+     * @todo default manager
      */
 }

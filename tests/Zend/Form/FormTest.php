@@ -1608,6 +1608,15 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->assertSame($this->form->getValues(), $data['valid']);
     }
 
+    public function testGetMessagesWithElementsBelongTo()
+    {
+        $data = $this->_setup9350();
+        $this->form->isValid($data['invalid']);
+        $msgs = $this->form->getMessages();
+        $this->assertTrue(isset($msgs['foo']['foo']['foo']['foo']));
+        $this->assertTrue(isset($msgs['foo']['zoo']['iek']));
+    }
+
 
     // Display groups
 

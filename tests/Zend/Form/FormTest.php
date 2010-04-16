@@ -1717,9 +1717,23 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
                                        false,
                                        'foo Value');
 
+        $this->form->addElement('text', 'quo')
+                   ->quo->setBelongsTo('bar[quo]')
+                        ->addValidator('Identical',
+                                       false,
+                                       'quo Value');
+
         $data = array('valid' => array('bar' =>
                                        array('quo' =>
-                                             array('foo' => 'foo Value'))));
+                                             array('foo' => 'foo Value',
+                                                   'quo' => 'quo Value'))),
+                      'invalid' => array('bar' =>
+                                         array('quo' =>
+                                               array('foo' => 'foo Invalid',
+                                                     'quo' => 'quo Value'))),
+                      'partial' => array('bar' =>
+                                         array('quo' =>
+                                               array('quo' => 'quo Value'))));
         return $data;
     }
 
@@ -1753,7 +1767,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testGetValidValuesWithBelongsTo()
     {
         $data = $this->_setup9607();
-        $this->assertSame($data['valid'], $this->form->getValidValues($data['valid']));
+        $this->assertSame($data['partial'], $this->form->getValidValues($data['invalid']));
     }
 
     // Display groups

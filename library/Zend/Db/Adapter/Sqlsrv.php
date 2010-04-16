@@ -659,10 +659,10 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
     public function getServerVersion()
     {
         $this->_connect();
-        $version = sqlsrv_client_info($this->_connection);
+        $serverInfo = sqlsrv_server_info($this->_connection);
 
-        if ($version !== false) {
-            return $version['DriverVer'];
+        if ($serverInfo !== false) {
+            return $serverInfo['SQLServerVersion'];
         }
 
         return null;

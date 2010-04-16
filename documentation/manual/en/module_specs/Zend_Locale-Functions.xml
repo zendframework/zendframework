@@ -221,7 +221,7 @@ $locale = Zend_Locale::getLocaleToTerritory('US');
         <title>Obtaining localized strings</title>
 
         <para>
-            <methodname>getTranslationList()</methodname> gives you access to localized informations
+            <methodname>getTranslationList()</methodname> gives you access to localized information
             of several types. These information are useful if you want to display localized data to
             a customer without the need of translating it. They are already available for your
             usage.
@@ -252,9 +252,9 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
         </example>
 
         <para>
-            You can receive this informations for all languages. But not all of the informations are
+            You can receive this information for all languages. But not all information is
             completely available for all languages. Some of these types are also available through
-            an own function for simplicity. See this list for detailed informations.
+            an own function for simplicity. See this list for detailed information.
         </para>
 
         <table id="zend.locale.getdata.table-1">
@@ -605,7 +605,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
                         <entry>
                             Returns a list of localized strings for acceptance ('yes') and
-                            negotation ('no'). Use <link
+                            negation ('no'). Use <link
                                 linkend="zend.locale.getquestion">Zend_Locale's getQuestion
                                 method</link> for simplicity
                         </entry>
@@ -912,7 +912,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
         <para>
             If you are in need of a single translated value, you can use the
-            <methodname>getTranslation()</methodname> method. It returns always a string but it
+            <methodname>getTranslation()</methodname> method. It always returns a string but it
             accepts some different types than the <methodname>getTranslationList()</methodname>
             method. Also value is the same as before with one difference. You have to give the
             detail you want to get returned as additional value.
@@ -1096,10 +1096,11 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Am</emphasis></entry>
 
                         <entry>
-                            Returns a translation for 'AM' in a expected locale. If you want to
-                            receive data for other calendars an string with the expected calendar.
-                            If you omit the value then the 'gregorian' calendar will be used. Use
-                            <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                            Returns translation for 'AM' in the expected locale. If you want to
+                            receive data for other calendars provide a string with the expected
+                            calendar. If you omit the value then the 'gregorian' calendar will be
+                            used. Use <link
+                                linkend="zend.date.introduction">Zend_Date</link> for simplicity
                         </entry>
                     </row>
 
@@ -1107,10 +1108,11 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Pm</emphasis></entry>
 
                         <entry>
-                            Returns a translation for 'PM' in a expected locale. If you want to
-                            receive data for other calendars an string with the expected calendar.
-                            If you omit the value then the 'gregorian' calendar will be used. Use
-                            <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                            Returns translation for 'PM' in the expected locale. If you want to
+                            receive data for other calendars provide a string with the expected
+                            calendar. If you omit the value then the 'gregorian' calendar will be
+                            used. Use <link linkend="zend.date.introduction">Zend_Date</link> for
+                            simplicity
                         </entry>
                     </row>
 
@@ -1123,7 +1125,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             calendars or formats, then you must give an array instead of the era
                             number with the expected values. The array has to look like this:
                             <methodname>array('calendar', 'format', 'era number')</methodname>. If
-                            you give only an string then the default values are the 'gregorian'
+                            you give only a string then the default values are the 'gregorian'
                             calendar and the 'abbr' format
                         </entry>
                     </row>
@@ -1143,7 +1145,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Date</emphasis></entry>
 
                         <entry>
-                            Returns the date format for an given calendar or format within a locale.
+                            Returns the date format for a given calendar or format within a locale.
                             If you omit the value then the 'gregorian' calendar will be used with
                             the 'medium' format. If you give a string then the 'gregorian' calendar
                             will be used with the given format. Or you can also give an array which
@@ -1167,7 +1169,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Time</emphasis></entry>
 
                         <entry>
-                            Returns the time format for an given calendar or format within a locale.
+                            Returns the time format for a given calendar or format within a locale.
                             If you omit the value then the 'gregorian' calendar will be used with
                             the 'medium' format. If you give a string then the 'gregorian' calendar
                             will be used with the given format. Or you can also give an array which
@@ -1308,7 +1310,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Question</emphasis></entry>
 
                         <entry>
-                            Returns a localized string for acceptance ('yes') and negotation ('no').
+                            Returns a localized string for acceptance ('yes') and negation ('no').
                             You have to give either 'yes' or 'no' as value to receive the expected
                             string. Use <link linkend="zend.locale.getquestion">Zend_Locale's
                                 getQuestion method</link> for simplicity
@@ -1756,7 +1758,7 @@ foreach($list as $language => $content) {
             Frequently, programs need to solicit a "yes" or "no" response from the user. Use
             <methodname>getQuestion()</methodname> to obtain an array containing the correct word(s)
             or regex strings to use for prompting the user in a particular $locale (defaults to the
-            current object's locale). The returned array will contain the following informations :
+            current object's locale). The returned array will contain the following information :
         </para>
 
         <itemizedlist>
@@ -1774,15 +1776,15 @@ foreach($list as $language => $content) {
                 </para>
 
                 <para>
-                    <emphasis>yesexpr and noexpr</emphasis>: An generated regex which allows you
+                    <emphasis>yesexpr and noexpr</emphasis>: A generated regex which allows you
                     to handle user response, and search for yes or no.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            All of this informations are of course localized and depend on the set locale. See the
-            following example for the informations you can receive:
+            All of this information are of course localized and depend on the set locale. See the
+            following example for the information you can receive:
         </para>
 
         <example id="zend.locale.getquestion.example-1">
@@ -1912,7 +1914,7 @@ if (Zend_Locale::isLocale($input, true)) {
 
         <para>
             Now that you are able to detect if a given string is a locale you could add locale aware
-            behaviour to your own classes. But you will soon detect that this will always leads to
+            behaviour to your own classes. But you will soon detect that this always leads to
             the same 15 lines of code. Something like the following example:
         </para>
 
@@ -1941,7 +1943,7 @@ if ($locale instanceof Zend_Locale) {
 
         <para>
             With Zend Framework 1.8 we added a static <methodname>findLocale()</methodname> method
-            which returns you a locale string which you can work with. It processes the following
+            which returns a locale string which you can work with. It processes the following
             tasks:
         </para>
 

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20977 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: yes -->
 <sect1 id="learning.quickstart.create-layout">
     <title>Utworzenie layoutu</title>
 
     <para>
         Jak nie trudno zauważyć, skrypty widoków z poprzedniej części zawierały jedynie fragmenty
-        kodu HTML, a nie całe strony. Jest to zamierzone i ma na celu przygotowanie akcji tak, aby
+        kodu <acronym>HTML</acronym>, a nie całe strony.
+        Jest to zamierzone i ma na celu przygotowanie akcji tak, aby
         zwracały jedynie zawartość związaną z samą akcją, a nie aplikacją jako taką.
     </para>
 
     <para>
-        Teraz należy umieścić generowaną treść w pełnoprawnej stronie HTML. Przydatne jest również
+        Teraz należy umieścić generowaną treść w pełnoprawnej stronie <acronym>HTML</acronym>.
+        Przydatne jest również
         nadanie całej aplikacji jednolitego, zwięzłego wyglądu. Aby to osiągnąć zostanie użyty
         globalny layout (wzór) strony.
     </para>
@@ -73,7 +75,7 @@ resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
 ]]></programlisting>
 
     <para>
-        W rezultacie plik INI powinien wyglądać następująco:
+        W rezultacie plik <acronym>INI</acronym> powinien wyglądać następująco:
     </para>
 
     <programlisting language="ini"><![CDATA[
@@ -109,8 +111,9 @@ phpSettings.display_errors = 1
     </para>
 
     <para>
-        Następną przydatną rzeczą będzie upewnienie się, że deklaracja XHTML DocType jest
-        umieszczona i poprawnie sformułowana. Aby to osiągnąć należy dodać zasób do bootstrapa.
+        Następną przydatną rzeczą będzie upewnienie się, że deklaracja <acronym>XHTML</acronym>
+        DocType jest umieszczona i poprawnie sformułowana.
+        Aby to osiągnąć należy dodać zasób do bootstrapa.
     </para>
 
     <para>
@@ -220,8 +223,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     <para>
         Należy zwrócić uwagę na użycie view helpera <methodname>headLink()</methodname>. Jest to
         prosty sposób na zachowanie kontroli nad elementami &lt;link&gt; dodawanymi w
-        różnych miejscach aplikacji oraz na wygenerowanie kodu HTML dla tych elementów
-        w pliku layoutu bądź innego skryptu widoku.
+        różnych miejscach aplikacji oraz na wygenerowanie kodu <acronym>HTML</acronym>
+        dla tych elementów w pliku layoutu bądź innego skryptu widoku.
         Jeśli zajdzie potrzeba dodania dodatkowego arkusza CSS w pojedynczej akcji to
         można to zrobić używając <methodname>headLink()</methodname>(na generowanej
         stronie pojawi się automatycznie).
@@ -232,7 +235,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         <para>
             Teraz należy udać się pod adres "http://localhost" i sprawdzić efekty oraz
-            wygenerowany kod. Powinien pojawić się nagłówek XHTML, elementy head, title oraz body.
+            wygenerowany kod. Powinien pojawić się nagłówek <acronym>XHTML</acronym>,
+            elementy head, title oraz body.
         </para>
     </note>
 </sect1>

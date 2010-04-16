@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21826 -->
 <!-- Reviewed: yes -->
 <sect1 id="learning.quickstart.create-project">
     <title>Utworzenie projektu</title>
@@ -208,8 +208,9 @@ phpSettings.display_errors = 1
 
         <para>
             Należy zwrócić uwagę na kilka cech tego pliku. Po pierwsze, używając konfiguracji
-            w pliku INI, można bezpośrednio używać stałych; <constant>APPLICATION_PATH</constant>
-            to stała PHP (opisana później). Dodatkowo, zdefiniowane zostały oddzielne sekcje:
+            w pliku <acronym>INI</acronym>, można bezpośrednio używać stałych;
+            <constant>APPLICATION_PATH</constant> to stała PHP (opisana później).
+            Dodatkowo, zdefiniowane zostały oddzielne sekcje:
             production, staging, testing oraz development. Ostatnie trzy dziedziczą ustawienia ze
             środowiska produkcyjnego (production). Podany sposób stanowi użyteczny przykład
             organizacji konfiguracji, dzięki której odpowiednie ustawienia są dostępne w
@@ -238,8 +239,9 @@ phpSettings.display_errors = 1
         <para>
             W typowym projekcie niezbędny jest kontroler <classname>IndexController</classname>,
             który jest początkowym punktem odniesienia i stanowi stronę początkową aplikacji,
-            oraz <classname>ErrorController</classname> czyli kontroler obsługujący błędy HTTP 404
-            (brak kontrolera i/lub akcji) lub HTTP 500 (błąd aplikacji).
+            oraz <classname>ErrorController</classname> czyli kontroler obsługujący błędy
+            <acronym>HTTP</acronym> 404 (brak kontrolera i/lub akcji) lub
+            <acronym>HTTP</acronym> 500 (błąd aplikacji).
         </para>
 
         <para>

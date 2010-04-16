@@ -2272,22 +2272,35 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      * @param  string $name
      * @return array
      */
-    public function getErrors($name = null)
+    public function getErrors($name = null, $suppressArrayNotation = false)
     {
         $errors = array();
-        if ((null !== $name) && isset($this->_elements[$name])) {
-            $errors = $this->getElement($name)->getErrors();
-        } elseif ((null !== $name) && isset($this->_subForms[$name])) {
-            $errors = $this->getSubForm($name)->getErrors();
-        } else {
-            foreach ($this->_elements as $key => $element) {
-                $errors[$key] = $element->getErrors();
-            }
-            foreach ($this->getSubForms() as $key => $subForm) {
-                $fErrors = $this->_attachToArray($subForm->getErrors(), $subForm->getElementsBelongTo());
-                $errors = array_merge($errors, $fErrors);
+        if (null !== $name) {
+            if (isset($this->_elements[$name])) {
+                return $this->getElement($name)->getErrors();
+            } else if (isset($this->_subForms[$name])) {
+                return $this->getSubForm($name)->getErrors(null, true);
             }
         }
+        
+        foreach ($this->_elements as $key => $element) {
+            $errors[$key] = $element->getErrors();
+        }
+        foreach ($this->getSubForms() as $key => $subForm) {
+            $merge = array();
+            if (!$subForm->isArray()) {
+                $merge[$key] = $subForm->getErrors();
+            } else {
+                $merge = $this->_attachToArray($subForm->getErrors(null, true),
+                                               $subForm->getElementsBelongTo());
+            }
+            $errors = array_merge_recursive($errors, $merge);
+        }
+
+        if (!$suppressArrayNotation && $this->isArray()) {
+            $errors = $this->_attachToArray($errors, $this->getElementsBelongTo());
+        }
+
         return $errors;
     }
 

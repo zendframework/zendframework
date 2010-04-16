@@ -1591,6 +1591,16 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->assertSame($this->form->getValidValues($data['invalid']), $data['partial']);
     }
 
+    public function testGetErrorsWithElementsBelongTo()
+    {
+        $data = $this->_setup9350();
+        $this->form->isValid($data['invalid']);
+        $errors = $this->form->getErrors();
+
+        $this->assertTrue(isset($errors['foo']['foo']['foo']['foo']));
+        $this->assertTrue(isset($errors['foo']['zoo']['iek']));
+    }
+
 
     // Display groups
 

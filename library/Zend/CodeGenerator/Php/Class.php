@@ -470,8 +470,8 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
 
         $output .= 'class ' . $this->getName();
 
-        if (null !== ($ec = $this->_extendedClass)) {
-            $output .= ' extends ' . $ec;
+        if ( !empty( $this->_extendedClass) ) {
+            $output .= ' extends ' . $this->_extendedClass;
         }
 
         $implemented = $this->getImplementedInterfaces();

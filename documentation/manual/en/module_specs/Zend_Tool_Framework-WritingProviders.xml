@@ -228,7 +228,7 @@ class My_Component_HelloProvider
         $nameResponse = $this->_registry
                              ->getClient()
                              ->promptInteractiveInput("Whats your name?");
-        $name = $name->getContent();
+        $name = $nameResponse->getContent();
 
         echo 'Hello' . $name . ', from my provider!';
     }

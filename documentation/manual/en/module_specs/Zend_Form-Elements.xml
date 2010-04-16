@@ -611,30 +611,37 @@ $messages = $element->getMessages();
 
         <para>
             In addition to validators, you can specify that an element is
-            required, using <methodname>setRequired(true)</methodname>. By default, this
-            flag is <constant>FALSE</constant>, meaning that your validator chain will be skipped if
-            no value is passed to <methodname>isValid()</methodname>. You can modify this
-            behavior in a number of ways:
+            required, using <methodname>setRequired($flag)</methodname>. By default, this
+            flag is <constant>FALSE</constant>. In combination with 
+            <methodname>setAllowEmpty($flag)</methodname> (<constant>TRUE</constant>
+            by default) and <methodname>setAutoInsertNotEmptyValidator($flag)</methodname>
+            (<constant>TRUE</constant> by default), the behavior of your validator chain
+            can be modified in a number of ways:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    By default, when an element is required, a flag,
-                    'allowEmpty', is also <constant>TRUE</constant>. This means that if a value
-                    evaluating to empty is passed to <methodname>isValid()</methodname>, the
-                    validators will be skipped. You can toggle this flag using
-                    the accessor <methodname>setAllowEmpty($flag)</methodname>; when the
-                    flag is <constant>FALSE</constant> and a value is passed, the validators
-                    will still run.
+                    Using the defaults, validating an Element without passing a value, or
+                    passing an empty string for it, skips all validators and validates to
+                    <constant>TRUE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    By default, if an element is required but does not contain
-                    a 'NotEmpty' validator, <methodname>isValid()</methodname> will add one
-                    to the top of the stack, with the
+                    <methodname>setAllowEmpty(false)</methodname> leaving the two other
+                    mentioned flags untouched, will validate against the validator chain
+                    you defined for this Element, regardless of the value passed
+                    to <methodname>isValid()</methodname>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setRequired(true)</methodname> leaving the two other
+                    mentioned flags untouched, will add a 'NotEmpty' validator
+                    on top of the validator chain (if none was already set)), with the
                     <varname>$breakChainOnFailure</varname> flag set. This behavior lends
                     required flag semantic meaning: if no value is passed,
                     we immediately invalidate the submission and notify the

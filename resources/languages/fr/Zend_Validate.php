@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 21135
+ * EN-Revision: 21760
  */
 return array(
     // Zend_Validate_Alnum
@@ -224,6 +224,7 @@ return array(
     "'%value%' does not appear to be a valid IP address" => "'%value%' n'est pas une IP valide",
 
     // Zend_Validate_Isbn
+    "Invalid type given, value should be string or integer" => "Type invalide : chaîne ou entier attendu",
     "'%value%' is no valid ISBN number" => "'%value%' n'est pas un ISBN valide",
 
     // Zend_Validate_LessThan
@@ -234,24 +235,29 @@ return array(
     "Value is required and can't be empty" => "Cette valeur est obligatoire et ne peut être vide",
 
     // Zend_Validate_PostCode
-    "Invalid type given, value should be string or integer" => "Type invalide : chaîne ou entier attendu",
-    "'%value%' does not appear to be an postal code" => "'%value%' ne semble pas être un code postal valide",
+    "Invalid type given. The value should be a string or a integer" => "Type invalide : chaîne ou entier attendu",
+    "'%value%' does not appear to be a postal code" => "'%value%' ne semble pas être un code postal valide",
 
     // Zend_Validate_Regex
     "Invalid type given, value should be string, integer or float" => "Type invalide : chaîne entier ou flottant attendu",
     "'%value%' does not match against pattern '%pattern%'" => "'%value%' n'a pas de correspondance avec le motif '%pattern%'",
+    "There was an internal error while using the pattern '%pattern%'" => "Il y a eu une erreur interne lors de l'utilisation du motif '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
     "'%value%' is no valid sitemap changefreq" => "'%value%' n'est pas une valeur de fréquence de sitemap valide",
+    "Invalid type given, value should be a string" => "Type de donnée non valide : chaîne attendue",
 
     // Zend_Validate_Sitemap_Lastmod
     "'%value%' is no valid sitemap lastmod" => "'%value%' n'est pas une date de modification de sitemap valide",
+    "Invalid type given, value should be a string" => "Type de donnée non valide : chaîne attendue",
 
     // Zend_Validate_Sitemap_Loc
     "'%value%' is no valid sitemap location" => "'%value%' n'est pas un emplacement valide pour une sitemap",
+    "Invalid type given, value should be a string" => "Type de donnée non valide : chaîne attendue",
 
     // Zend_Validate_Sitemap_Priority
     "'%value%' is no valid sitemap priority" => "'%value%' n'est pas une priorité sitemap valide",
+    "Invalid type given, the value should be a integer, a float or a numeric string" => "Type invalide : chaîne numérique, entier ou flottant attendu",
 
     // Zend_Validate_StringLength
     "Invalid type given, value should be a string" => "Type de donnée non valide : chaîne de caractères attendue",

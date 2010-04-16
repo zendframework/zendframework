@@ -164,6 +164,17 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
         $this->assertFalse($desc['product_name']['IDENTITY'], 'Expected product_name to return false for IDENTITY');
     }
 
+    /**
+     * test that describeTable() returns empty array on not existing table
+     * @group ZF-9079
+     */
+    public function testAdapterDescribeTableNotExistingTable()
+    {
+        $desc = $this->_db->describeTable('not_existing_table');
+
+        $this->assertEquals(0, count($desc), 'Expected to have empty result');
+    }
+
     public function testAdapterDescribeTablePrimaryKeyColumn()
     {
         $desc = $this->_db->describeTable('zfproducts');

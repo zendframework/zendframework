@@ -437,6 +437,10 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
         $sql    = "exec sp_columns @table_name = " . $this->quoteIdentifier($tableName, true);
         $stmt   = $this->query($sql);
         $result = $stmt->fetchAll(Zend_Db::FETCH_NUM);
+        
+        if (count($result) == 0) {
+            return array();
+        }
 
         $owner           = 1;
         $table_name      = 2;

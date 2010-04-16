@@ -1473,104 +1473,116 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->form->isValid($data));
     }
 
-    public function testIsValidEqualSubFormAndElementName()
-    {
-        $this->form->addSubForm(new Zend_Form_SubForm(), 'foo')
-                   ->foo->addElement('text', 'foo')
-                        ->foo->setRequired(true)
-                             ->addValidator('Identical',
-                                            false,
-                                            array('Foo Value'));
-        $foo = array('foo' =>
-                     array('foo' => 'Foo Value'));
-
-        $this->assertTrue($this->form->isValid($foo));
-
-        $this->form->foo->setIsArray(false);
-
-        $this->assertTrue($this->form->isValid($foo));
-    } 
-
-    public function testIsValidPartialEqualSubFormAndElementName()
-    {
-        $this->form->addSubForm(new Zend_Form_SubForm(), 'foo')
-                   ->foo->addElement('text', 'foo')
-                        ->foo->setRequired(true)
-                             ->addValidator('Identical',
-                                            false,
-                                            array('Foo Value'));
-        $foo = array('foo' =>
-                     array('foo' => 'Foo Value'));
-
-        $this->assertTrue($this->form->isValidPartial($foo));
-
-        $this->form->foo->setIsArray(false);
-
-        $this->assertTrue($this->form->isValidPartial($foo));
-    } 
-
-    public function testPopulateWithElementsBelongTo()
-    {
-        $this->form->addSubForm(new Zend_Form_SubForm(), 'foo')
-                   ->foo->setElementsBelongTo('foo[foo]')
-                        ->addSubForm(new Zend_Form_SubForm(), 'foo')
-                        ->foo->setIsArray(false)
-                             ->addElement('text', 'foo');
-
-        $foo = array('foo' =>
-                     array('foo' =>
-                           array('foo' =>
-                                 array('foo' => 'foo Value'))));
-
-        $this->form->setView($this->getView())
-                   ->populate($foo);
-
-        $this->assertRegexp('/value=.foo Value./', $this->form->render());
-    }
-
     public function _setup9350()
     {
         $this->form->addSubForm(new Zend_Form_SubForm(), 'foo')
-                   ->foo->setElementsBelongTo('foo[foo]')
-                        ->addSubForm(new Zend_Form_SubForm(), 'foo')
+                   ->foo->setElementsBelongTo('foo[foo]')            // foo[foo]
+                        ->addSubForm(new Zend_Form_SubForm(), 'foo') // foo[foo][foo]
                         ->foo->setIsArray(false)
-                             ->addElement('text', 'foo')
+                             ->addElement('text', 'foo')             // foo[foo][foo][foo]
                              ->foo->addValidator('Identical',
                                                  false,
                                                  array('foo Value'));
 
-        $this->form->foo->addSubForm(new Zend_Form_SubForm(), 'baz')
+        $this->form->foo->addSubForm(new Zend_Form_SubForm(), 'baz') // foo[foo][baz]
                    ->baz->setIsArray(false)
                         ->addSubForm(new Zend_Form_SubForm(), 'baz')
-                        ->baz->setElementsBelongTo('baz[baz]')
-                             ->addElement('text', 'baz')
+                        ->baz->setElementsBelongTo('baz[baz]')       // foo[foo][baz][baz][baz]
+                             ->addElement('text', 'baz')             // foo[foo][baz][baz][baz][baz]
                              ->baz->addValidator('Identical',
                                                  false,
                                                  array('baz Value'));
 
-        $data = array('valid' => array('foo' =>
-                                       array('foo' =>
-                                             array('foo' =>
-                                                   array('foo' => 'foo Value'),
-                                                   'baz' => 
-                                                   array('baz' => 
-                                                         array('baz' =>
-                                                               array('baz' => 'baz Value')))))),
-                      'invalid' => array('foo' =>
+        // This is appending a different named SubForm and setting
+        // elementsBelongTo to a !isArray() Subform name from same level
+        $this->form->foo->addSubForm(new Zend_Form_SubForm(), 'quo')
+                        ->quo->setElementsBelongTo('foo')            // foo[foo][foo] !!!!
+                             ->addElement('text', 'quo')             // foo[foo][foo][quo]
+                             ->quo->addValidator('Identical',
+                                                 false,
+                                                 array('quo Value'));
+        
+        // This is setting elementsBelongTo point into the middle of 
+        // a chain of another SubForms elementsBelongTo
+        $this->form->addSubForm(new Zend_Form_SubForm(), 'duh')
+                   ->duh->setElementsBelongTo('foo[zoo]')            // foo[zoo] !!!!
+                        ->addElement('text', 'zoo')                  // foo[zoo][zoo]
+                        ->zoo->addValidator('Identical',
+                                            false,
+                                            array('zoo Value'));
+
+        // This is !isArray SubForms Name equal to the last segment
+        // of another SubForms elementsBelongTo
+        $this->form->addSubForm(new Zend_Form_SubForm(), 'iek')
+                   ->iek->setElementsBelongTo('foo')                 // foo !!!!
+                        ->addSubForm(new Zend_Form_SubForm(), 'zoo') // foo[zoo] !!!!
+                        ->zoo->setIsArray(false)
+                             ->addElement('text', 'iek')             // foo[zoo][iek]
+                             ->iek->addValidator('Identical',
+                                                 false,
+                                                 array('iek Value'));
+
+        $data = array('valid'   => array('foo' =>
                                          array('foo' =>
                                                array('foo' =>
-                                                     array('foo' => 'foo Invalid'),
+                                                     array('foo' => 'foo Value',
+                                                           'quo' => 'quo Value'),
                                                      'baz' => 
                                                      array('baz' => 
                                                            array('baz' =>
-                                                                 array('baz' => 'baz Value')))))),
+                                                                 array('baz' => 'baz Value')))),
+                                               'zoo' =>
+                                               array('zoo' => 'zoo Value',
+                                                     'iek' => 'iek Value'))),
+                      'invalid' => array('foo' =>
+                                         array('foo' =>
+                                               array('foo' =>
+                                                     array('foo' => 'foo Invalid',
+                                                           'quo' => 'quo Value'),
+                                                     'baz' => 
+                                                     array('baz' => 
+                                                           array('baz' =>
+                                                                 array('baz' => 'baz Value')))),
+                                               'zoo' =>
+                                               array('zoo' => 'zoo Value',
+                                                     'iek' => 'iek Invalid'))),
                       'partial' => array('foo' =>
-                                       array('foo' =>
-                                             array('baz' => 
-                                                   array('baz' => 
-                                                         array('baz' =>
-                                                               array('baz' => 'baz Value')))))));
+                                         array('foo' =>
+                                               array('baz' => 
+                                                     array('baz' => 
+                                                           array('baz' =>
+                                                                 array('baz' => 'baz Value'))),
+                                                    'foo' => 
+                                                     array('quo' => 'quo Value')),
+                                               'zoo' =>
+                                               array('zoo' => 'zoo Value'))));
         return $data;
+    }
+
+    public function testIsValidEqualSubFormAndElementName()
+    {
+        $data = $this->_setup9350();
+        $this->assertTrue($this->form->isValid($data['valid']));
+    } 
+
+    public function testIsValidPartialEqualSubFormAndElementName()
+    {
+        $data = $this->_setup9350();
+        $this->assertTrue($this->form->isValidPartial($data['partial']));
+    } 
+
+    public function testPopulateWithElementsBelongTo()
+    {
+        $data = $this->_setup9350();
+
+        $this->form->setView($this->getView())->populate($data['valid']);
+        $html = $this->form->render();
+
+        $this->assertRegexp('/value=.foo Value./', $html);
+        $this->assertRegexp('/value=.baz Value./', $html);
+        $this->assertRegexp('/value=.quo Value./', $html);
+        $this->assertRegexp('/value=.zoo Value./', $html);
+        $this->assertRegexp('/value=.iek Value./', $html);
     }
 
     public function testGetValidValuesWithElementsBelongTo()

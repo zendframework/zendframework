@@ -27,6 +27,9 @@ require_once 'Zend/Form.php';
 /** @see Zend_Validate_Interface */
 require_once 'Zend/Validate/Interface.php';
 
+/** @see Zend_Validate_Abstract */
+require_once 'Zend/Validate/Abstract.php';
+
 /**
  * Zend_Form_Element
  *

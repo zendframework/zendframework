@@ -413,8 +413,8 @@ is inside your include_path.  There are a variety of ways that you can
 ensure that this zf command line tool knows where the Zend Framework
 library is on your system, but not all of them can be described here.
 
-The easiest way to get the zf command running is to allow is to give it
-the include path via an environment variable ZEND_TOOL_INCLUDE_PATH or
+The easiest way to get the zf command running is to give it the include 
+path via an environment variable ZEND_TOOL_INCLUDE_PATH or 
 ZEND_TOOL_INCLUDE_PATH_PREPEND with the proper include path to use,
 then run the command "zf --setup".  This command is designed to create
 a storage location for your user, as well as create the zf.ini file

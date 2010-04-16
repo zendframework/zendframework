@@ -408,4 +408,30 @@ class Zend_Db_Statement_Sqlsrv extends Zend_Db_Statement
 
         return $num_rows;
     }
+	
+	/**
+     * Returns an array containing all of the result set rows.
+     *
+     * @param int $style OPTIONAL Fetch mode.
+     * @param int $col   OPTIONAL Column number, if fetch mode is by column.
+     * @return array Collection of rows, each in a format by the fetch mode.
+     *
+     * Behaves like parent, but if limit()
+     * is used, the final result removes the extra column
+     * 'zend_db_rownum'
+     */
+    public function fetchAll($style = null, $col = null)
+    {
+        $data = parent::fetchAll($style, $col);
+        $results = array();
+        $remove = $this->_adapter->foldCase('ZEND_DB_ROWNUM');
+
+        foreach ($data as $row) {
+            if (is_array($row) && array_key_exists($remove, $row)) {
+                unset($row[$remove]);
+            }
+            $results[] = $row;
+        }
+        return $results;
+    }
 }

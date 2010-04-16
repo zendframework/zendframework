@@ -10,7 +10,7 @@
     </para>
  
     <sect3 id="zend.validate.set.identical.options">
-        <title>Options supportées parZend_Validate_Identical</title>
+        <title>Options supportées par Zend_Validate_Identical</title>
 
         <para>
             Les options suivantes sont supportées par

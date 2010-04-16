@@ -1473,6 +1473,35 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->form->isValid($data));
     }
 
+    /**
+     * @group ZF-9679
+     */
+    public function testIsValidDiscardsValidatedValues()
+    {
+        $this->form->addElement('text', 'foo');
+        $this->form->addSubForm(new Zend_Form_SubForm(), 'bar')
+                   ->bar->addElement('text', 'foo')
+                        ->foo->setAllowEmpty(true)
+                             ->addValidator('Identical', true, '');
+
+        $this->assertTrue($this->form->isValid(array('foo' => 'foo Value')));
+    }
+
+    /**
+     * @group ZF-9666
+     */
+    public function testSetDefaultsDiscardsPopulatedValues()
+    {
+        $this->form->addElement('text', 'foo');
+        $this->form->addSubForm(new Zend_Form_SubForm(), 'bar')
+                   ->bar->addElement('text', 'foo');
+
+        $this->form->populate(array('foo' => 'foo Value'));
+        $html = $this->form->setView($this->getView())
+                           ->render();
+        $this->assertEquals(1, preg_match_all('/foo Value/', $html, $matches));
+    }
+
     public function _setup9350()
     {
         $this->form->addSubForm(new Zend_Form_SubForm(), 'foo')
@@ -1679,6 +1708,53 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->form->getValidValues($data['invalid']), $data['partial']);
     }
 
+    public function _setup9607()
+    {
+        $this->form->addElement('text', 'foo')
+                   ->foo->setBelongsTo('bar[quo]')
+                        ->setRequired(true)
+                        ->addValidator('Identical',
+                                       false,
+                                       'foo Value');
+
+        $data = array('valid' => array('bar' =>
+                                       array('quo' =>
+                                             array('foo' => 'foo Value'))));
+        return $data;
+    }
+
+    public function testIsValidWithBelongsTo()
+    {
+        $data = $this->_setup9607();
+        $this->assertTrue($this->form->isValid($data['valid']));
+    }
+
+    public function testIsValidPartialWithBelongsTo()
+    {
+        $data = $this->_setup9607();
+        $this->assertTrue($this->form->isValidPartial($data['valid']));
+        $this->assertSame('foo Value', $this->form->foo->getValue());
+    }
+  
+    public function testPopulateWithBelongsTo()
+    {
+        $data = $this->_setup9607();
+        $this->form->populate($data['valid']);
+        $this->assertSame('foo Value', $this->form->foo->getValue());
+    }
+  
+    public function testGetValuesWithBelongsTo()
+    {
+        $data = $this->_setup9607();
+        $this->form->populate($data['valid']);
+        $this->assertSame($data['valid'], $this->form->getValues());
+    }
+  
+    public function testGetValidValuesWithBelongsTo()
+    {
+        $data = $this->_setup9607();
+        $this->assertSame($data['valid'], $this->form->getValidValues($data['valid']));
+    }
 
     // Display groups
 

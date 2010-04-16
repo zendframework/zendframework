@@ -19,14 +19,16 @@
  * @version    $Id$
  */
 
+namespace Zend\Session\SaveHandler;
+
 /**
  * Zend_Session_SaveHandler_Exception
  *
- * @uses       Zend_Session_Exception
+ * @uses       Zend\Session\Exception
  * @category   Zend
  * @package    Zend_Session
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Session_SaveHandler_Exception extends Zend_Session_Exception
+class Exception extends \Zend\Session\Exception
 {}

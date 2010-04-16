@@ -20,8 +20,10 @@
  * @since      Preview Release 0.2
  */
 
+namespace Zend\Session;
+
 /**
- * Zend_Session_SaveHandler_Interface
+ * SaveHandler Interface
  *
  * @category   Zend
  * @package    Zend_Session
@@ -30,8 +32,22 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://php.net/session_set_save_handler
  */
-interface Zend_Session_SaveHandler_Interface
+interface SaveHandler
 {
+    /**
+     * Set session manager
+     * 
+     * @param  Manager $manager 
+     * @return void
+     */
+    public function setManager(Manager $manager);
+
+    /**
+     * Retrieve session manager
+     * 
+     * @return Manager
+     */
+    public function getManager();
 
     /**
      * Open Session - retrieve resources
@@ -77,5 +93,4 @@ interface Zend_Session_SaveHandler_Interface
      * @param int $maxlifetime
      */
     public function gc($maxlifetime);
-
 }

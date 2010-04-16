@@ -14147,10 +14147,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/SaveHandler/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Session_SaveHandler_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Session/SaveHandler/SaveHandlerInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Session\SaveHandler</newNamespace>
-      <newClassName>SaveHandlerInterface</newClassName>
-      <newFullyQualifiedName>Zend\Session\SaveHandler\SaveHandlerInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Session/SaveHandler.php</newRelativeFilePath>
+      <newNamespace>Zend\Session</newNamespace>
+      <newClassName>SaveHandler</newClassName>
+      <newFullyQualifiedName>Zend\Session\SaveHandler</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/Validator/Abstract.php</originalRelativeFilePath>

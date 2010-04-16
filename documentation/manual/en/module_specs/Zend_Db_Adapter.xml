@@ -2098,6 +2098,12 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
+                        Only Microsoft <acronym>SQL</acronym> Server 2005 or greater is supported.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
                         Microsoft <acronym>SQL</acronym> Server does not support sequences, so
                         <methodname>lastInsertId()</methodname> ignores primary key argument and
                         returns the last value generated for an auto-increment key if a table name

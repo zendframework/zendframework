@@ -542,6 +542,49 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
         // if the bug exists this call should creates a fatal error
         $client->setAuth(false);
     }
+    
+	/**
+     * Testing if the connection isn't closed
+     * 
+     * @group ZF-9685
+     */
+    public function testOpenTempStreamWithValidFileDoesntThrowsException()
+    {
+    	$url = 'http://www.example.com';
+    	$config = array (
+			'output_stream' => realpath(dirname(__FILE__) . '/_files/zend_http_client_stream.file'),
+		);
+		$client = new Zend_Http_Client($url, $config);
+		try {
+			$result = $client->request();
+		} catch (Zend_Http_Client_Exception $e) {
+			$this->fail('Unexpected exception was thrown');
+		}
+		// we can safely return until we can verify link is still active
+		// @todo verify link is still active
+		return;
+    }
+    
+    /**
+     * Testing if the connection can be closed
+     * 
+     * @group ZF-9685
+     */
+    public function testOpenTempStreamWithBogusFileClosesTheConnection()
+    {
+    	$url = 'http://www.example.com';
+    	$config = array (
+			'output_stream' => '/path/to/bogus/file.ext',
+		);
+		$client = new Zend_Http_Client($url, $config);
+		try {
+			$result = $client->request();
+			$this->fail('Expected exception was not thrown');
+		} catch (Zend_Http_Client_Exception $e) {
+			// we return since we expect the exception
+			return;
+		}
+    }
 
     /**
      * Data providers

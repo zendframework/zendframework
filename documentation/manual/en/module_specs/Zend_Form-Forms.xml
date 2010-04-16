@@ -2036,21 +2036,21 @@ $validValues = $form->getValidValues($_POST);
         <itemizedlist>
             <listitem>
                 <para>
-                    <property>prefixPaths</property> will be passed to
+                    <property>prefixPath</property> will be passed to
                     <methodname>addPrefixPaths()</methodname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <property>elementPrefixPaths</property> will be passed to
+                    <property>elementPrefixPath</property> will be passed to
                     <methodname>addElementPrefixPaths()</methodname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <property>displayGroupPrefixPaths</property> will be passed to
+                    <property>displayGroupPrefixPath</property> will be passed to
                     <methodname>addDisplayGroupPrefixPaths()</methodname>
                 </para>
             </listitem>

@@ -311,7 +311,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>Delimiters</emphasis></entry>
                         <entry>Zwraca listę dozwolonych znaków służących do umieszczania
-                        w cudzysłowiu dla danego locale</entry>
+                        w cudzysłowu dla danego locale</entry>
                     </row>
 
                     <row>
@@ -480,7 +480,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Zwraca listę formatów daty i czasu, które są używane w przypadku
                             wyświetlania różnic dat. Zwracana lista to wielowymiarowa tablica,
-                            gdzie pierwszym wymiarem jest format, drugim - składnim formatu o
+                            gdzie pierwszym wymiarem jest format, drugim - składnik formatu o
                             największej różnicy.
                         </entry>
                     </row>
@@ -515,7 +515,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>NameToCurrency</emphasis></entry>
                         <entry>
                             Zwraca listę zlokalizowanych nazw walut. Kod waluty jest umieszczony w
-                            kluczu tablicy a przeyłumaczona nazwa - w wartości. Dla uproszczenia
+                            kluczu tablicy a przetłumaczona nazwa - w wartości. Dla uproszczenia
                             można korzystać z
                             <link linkend="zend.currency.introduction">Zend_Currency</link>
                         </entry>
@@ -643,8 +643,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>TimezoneToWindows</emphasis></entry>
                         <entry>
-                            Zwraca listę stref czasowych windows i odpowiadających im stref
-                            czasowych <acronym>ISO</acronym>. Strefa windows jest umieszczona w
+                            Zwraca listę stref czasowych Windows i odpowiadających im stref
+                            czasowych <acronym>ISO</acronym>. Strefa Windows jest umieszczona w
                             kluczu a strefa <acronym>ISO</acronym> - w wartości. 
                         </entry>
                     </row>
@@ -652,8 +652,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>WindowsToTimezone</emphasis></entry>
                         <entry>
                             Zwraca listę stref czasowych <acronym>ISO</acronym> i odpowiadających
-                            im stref czasowych windows. Strefa <acronym>ISO</acronym> jest
-                            umieszczona w kluczu a strefa windows - w wartości.
+                            im stref czasowych Windows. Strefa <acronym>ISO</acronym> jest
+                            umieszczona w kluczu a strefa Windows - w wartości.
                         </entry>
                     </row>
                     <row>
@@ -754,8 +754,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>FallbackToChar</emphasis></entry>
                         <entry>
-                            Zwraca listę znaków specjalnych i ich odpowiedników w unikode. Dzięki
-                            temu moża np. zamienić "©" na "(C)".
+                            Zwraca listę znaków specjalnych i ich odpowiedników w unicode. Dzięki
+                            temu można np. zamienić "©" na "(C)".
                         </entry>
                     </row>
                     <row>
@@ -1199,7 +1199,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Question</emphasis></entry>
 
                         <entry>
-                            Zwraca zlocalizowane łańcuchy znaków oznaczające potwierdzenie lub
+                            Zwraca zlokalizowane łańcuchy znaków oznaczające potwierdzenie lub
                             zaprzeczenie. Należy podać 'yes' lub 'no' jako parametr aby otrzymać
                             odpowiednie tłumaczenie. Dla uproszczenia można korzystać z
                             <link linkend="zend.locale.getquestion">Zend_Locale::getQuestion</link>
@@ -1427,7 +1427,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>TerritoryToAlpha3</emphasis></entry>
                         <entry>
-                            Zwraca terytorium (region) odpowiający danemu 3-znakowemu kodowi
+                            Zwraca terytorium (region) odpowiadający danemu 3-znakowemu kodowi
                         </entry>
                     </row>
 
@@ -1493,7 +1493,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
             <para>
                 Z nadejściem Zend Framework 1.5 wiele starszych typów zostało przemianowanych.
                 Zostało to wymuszone przez wprowadzenie szeregu nowych typów i występowanie błędów
-                w starych nazwach. Zmiany te zwiąkszają użyteczność powyższych metod. Poniżej
+                w starych nazwach. Zmiany te zwiększają użyteczność powyższych metod. Poniżej
                 znajduje się lista zmian:
             </para>
         </note>
@@ -1603,7 +1603,7 @@ print_r(Zend_Locale::getTranslationList('country', 'de'));
 
         <para>
             Następny przykład pokazuje sposób odnalezienia nazwy locale w innym języku, jeśli
-            nieznany jest kod iso kraju.
+            nieznany jest kod ISO kraju.
         </para>
 
         <example id="zend.locale.getdata.example-4">
@@ -1666,14 +1666,14 @@ foreach($list as $language => $content) {
             <listitem>
                 <para>
                     <emphasis>yes and no</emphasis>: Generyczny łańcuch znaków z odpowiedziami
-                    oznaczającymi zgodę oraz odmowę. Będzie to najprostrzy element tablicy
+                    oznaczającymi zgodę oraz odmowę. Będzie to najprostszy element tablicy
                     yesarray oraz noarray.
                 </para>
 
                 <para>
                     <emphasis>yesarray and noarray</emphasis>: Tablica ze wszystkimi znanymi
                     odpowiedziami oznaczającymi zgodę oraz odmowę. Wiele języków posiada więcej niż
-                    jeden zesttaw odpowiedzi. Generalnie zawarte są tu pełne odpowiedzi oraz skróty.
+                    jeden zestaw odpowiedzi. Generalnie zawarte są tu pełne odpowiedzi oraz skróty.
                 </para>
 
                 <para>
@@ -1871,19 +1871,20 @@ if ($locale instanceof Zend_Locale) {
 
             <listitem>
                 <para>
-                    Sprawdzenie locale pobranego z przeglądarki jeśli wzceśniejsze detekcje zawiodły
+                    Sprawdzenie locale pobranego z przeglądarki jeśli wcześniejsze detekcje
+                    zawiodły
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    Sprawdzenie locale środowiska serwera jeśli wzceśniejsze detekcje zawiodły
+                    Sprawdzenie locale środowiska serwera jeśli wcześniejsze detekcje zawiodły
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    Sprawdzenie locale frameworka jeśli wzceśniejsze detekcje zawiodły
+                    Sprawdzenie locale frameworka jeśli wcześniejsze detekcje zawiodły
                 </para>
             </listitem>
 

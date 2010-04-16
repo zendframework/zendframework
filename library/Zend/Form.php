@@ -1307,8 +1307,14 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             }
         }
         foreach ($this->getSubForms() as $key => $subForm) {
-            $fValues = $this->_attachToArray($subForm->getValues(true), $subForm->getElementsBelongTo());
-            $values = array_merge($values, $fValues);
+            $merge = array();
+            if (!$subForm->isArray()) {
+                $merge[$key] = $subForm->getValues();
+            } else {
+                $merge = $this->_attachToArray($subForm->getValues(true),
+                                               $subForm->getElementsBelongTo());
+            }
+            $values = array_merge_recursive($values, $merge);
         }
 
         if (!$suppressArrayNotation && $this->isArray()) {

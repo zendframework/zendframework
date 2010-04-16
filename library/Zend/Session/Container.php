@@ -8,6 +8,7 @@ class Container extends ArrayObject
 {
     protected $_name;
     protected $_manager;
+    protected static $_defaultManager;
 
     public function __construct($name = 'Default', $manager = null)
     {
@@ -17,6 +18,19 @@ class Container extends ArrayObject
         $this->_name = $name;
         $this->_setManager($manager);
         parent::__construct(array(), ArrayObject::ARRAY_AS_PROPS);
+    }
+
+    public static function setDefaultManager(Manager $manager = null)
+    {
+        self::$_defaultManager = $manager;
+    }
+
+    public static function getDefaultManager()
+    {
+        if (null === self::$_defaultManager) {
+            self::$_defaultManager = new Manager();
+        }
+        return self::$_defaultManager;
     }
 
     public function getName()
@@ -32,7 +46,7 @@ class Container extends ArrayObject
     protected function _setManager($manager)
     {
         if (null === $manager) {
-            $manager = new Manager();
+            $manager = self::getDefaultManager();
         }
         if (!$manager instanceof Manager) {
             throw new Exception('Manager provided is invalid; must extend Manager class');

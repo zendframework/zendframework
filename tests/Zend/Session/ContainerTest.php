@@ -11,6 +11,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $_SESSION = array();
+        Container::setDefaultManager(null);
         $this->manager = $manager = new Manager(array(
             'class'   => 'Zend\\Session\\Configuration\\StandardConfiguration',
             'storage' => 'Zend\\Session\\Storage\\ArrayStorage',
@@ -22,6 +23,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $_SESSION = array();
+        Container::setDefaultManager(null);
     }
 
     public function testInstantiatingContainerWithoutNameUsesDefaultAsName()
@@ -70,6 +72,34 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $this->container->foo);
         unset($this->container->foo);
         $this->assertFalse(isset($this->container->foo));
+    }
+
+    public function testDefaultManagerIsAlwaysPopulated()
+    {
+        $manager = Container::getDefaultManager();
+        $this->assertTrue($manager instanceof Manager);
+    }
+
+    public function testCanSetDefaultManager()
+    {
+        $manager = new Manager;
+        Container::setDefaultManager($manager);
+        $this->assertSame($manager, Container::getDefaultManager());
+    }
+
+    public function testCanSetDefaultManagerToNull()
+    {
+        $manager = new Manager;
+        Container::setDefaultManager($manager);
+        Container::setDefaultManager(null);
+        $this->assertNotSame($manager, Container::getDefaultManager());
+    }
+
+    public function testDefaultManagerUsedWhenNoManagerProvided()
+    {
+        $manager = Container::getDefaultManager();
+        $container = new Container();
+        $this->assertSame($manager, $container->getManager());
     }
 
     public function testContainerInstantiatesManagerWithDefaultsWhenNotInjected()
@@ -336,8 +366,4 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('baz', $this->container->bar);
         $this->assertNull($this->container->baz);
     }
-
-    /**
-     * @todo default manager
-     */
 }

@@ -90,6 +90,50 @@ class Zend_Db_Statement_SqlsrvTest extends Zend_Db_Statement_TestCommon
 
         $stmt->closeCursor();
     }
+    
+    /*
+     * @group ZF-8138
+     */
+    public function testStatementNextRowsetWithProcedure()
+    {
+        $products   = $this->_db->quoteIdentifier('zfproducts');
+        $product_id = $this->_db->quoteIdentifier('product_id');
+        $product_name = $this->_db->quoteIdentifier('product_name');
+        
+        $products_procedure   = $this->_db->quoteIdentifier('#InsertIntoProducts');
+        
+        $prodecure = "CREATE PROCEDURE $products_procedure
+                                    @ProductName varchar(100)
+                   AS
+                       BEGIN
+                             -- insert row (result set 1)
+                             INSERT INTO $products 
+                                         ($product_name)
+                                    VALUES
+                                         (@ProductName);
+                            
+                             -- Get results (result set 2)
+                             SELECT * FROM $products;
+                       END";
+        
+        // create procedure
+        $this->_db->query($prodecure);
+
+        $stmt  = $this->_db->query('{call ' . $products_procedure .'(?)}', array('Product'));
+
+        $result1 = $stmt->rowCount();
+        
+        $this->assertEquals(1, $result1, 'Expected 1 row to be inserted');
+        
+        $stmt->nextRowset();
+
+        $result2 = $stmt->fetchAll();
+
+        $this->assertEquals(4, count($result2), 'Expected 3 results from original data and one 1 row');
+        $this->assertEquals('Product', $result2[3]['product_name']);
+
+        $stmt->closeCursor();
+    }
 
     public function testStatementErrorInfo()
     {

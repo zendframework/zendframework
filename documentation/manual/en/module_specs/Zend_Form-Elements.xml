@@ -232,8 +232,7 @@ $filtered = $element->getValue();
 
             <listitem>
                 <para>
-                    providing a filter name – either a short name or fully
-                    qualified class name
+                    providing a short filter name
                 </para>
             </listitem>
         </itemizedlist>
@@ -245,9 +244,6 @@ $filtered = $element->getValue();
         <programlisting language="php"><![CDATA[
 // Concrete filter instance:
 $element->addFilter(new Zend_Filter_Alnum());
-
-// Fully qualified class name:
-$element->addFilter('Zend_Filter_Alnum');
 
 // Short filter name:
 $element->addFilter('Alnum');
@@ -368,8 +364,7 @@ $unfiltered = $element->getUnfilteredValue();
 
             <listitem>
                 <para>
-                    providing a validator name – either a short name or fully
-                    qualified class name
+                    providing a short validator name
                 </para>
             </listitem>
         </itemizedlist>
@@ -381,9 +376,6 @@ $unfiltered = $element->getUnfilteredValue();
         <programlisting language="php"><![CDATA[
 // Concrete validator instance:
 $element->addValidator(new Zend_Validate_Alnum());
-
-// Fully qualified class name:
-$element->addValidator('Zend_Validate_Alnum');
 
 // Short validator name:
 $element->addValidator('Alnum');

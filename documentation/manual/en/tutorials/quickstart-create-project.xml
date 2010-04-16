@@ -65,7 +65,7 @@
 
             <para>
                 If you have problems setting up the <command>zf</command> command-line tool, please
-                refer to <link linkend="zend.tool.framework.clitool.setup-general">the
+                refer to <link linkend="zend.tool.framework.clitool">the
                     manual</link>.
             </para>
         </note>

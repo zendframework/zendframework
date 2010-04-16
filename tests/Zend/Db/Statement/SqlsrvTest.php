@@ -134,6 +134,33 @@ class Zend_Db_Statement_SqlsrvTest extends Zend_Db_Statement_TestCommon
 
         $stmt->closeCursor();
     }
+	
+	/*
+     * @group ZF-7559
+     */
+    public function testStatementWithProcedure()
+    {
+        $products   = $this->_db->quoteIdentifier('zfproducts');
+        
+        $products_procedure   = $this->_db->quoteIdentifier('#GetProducts');
+        
+        $prodecure = "CREATE PROCEDURE $products_procedure
+                   AS
+                       BEGIN
+                             SELECT * FROM $products;
+                       END";
+        
+        // create procedure
+        $this->_db->query($prodecure);
+
+        $stmt  = $this->_db->query('EXECUTE ' . $products_procedure);
+
+        $result1 = $stmt->fetchAll();
+
+        $this->assertEquals(3, count($result1), 'Expected 3 results from original data');
+
+        $stmt->closeCursor();
+    }
 
     public function testStatementErrorInfo()
     {

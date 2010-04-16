@@ -842,7 +842,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     public function setName($name)
     {
         $name = $this->filterName($name);
-        if (('0' !== $name) && empty($name)) {
+        if ('' === (string)$name) {
             require_once 'Zend/Form/Exception.php';
             throw new Zend_Form_Exception('Invalid name provided; must contain only valid variable characters and be non-empty');
         }
@@ -1423,7 +1423,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     {
         $origName = $this->getElementsBelongTo();
         $name = $this->filterName($array, true);
-        if (empty($name)) {
+        if ('' === $name) {
             $name = null;
         }
         $this->_elementsBelongTo = $name;
@@ -1475,7 +1475,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     {
         if ((null === $this->_elementsBelongTo) && $this->isArray()) {
             $name = $this->getName();
-            if (!empty($name)) {
+            if ('' !== (string)$name) {
                 return $name;
             }
         }
@@ -1768,7 +1768,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     {
         if (null === $name) {
             $name = $group->getName();
-            if (empty($name)) {
+            if ('' === (string)$name) {
                 require_once 'Zend/Form/Exception.php';
                 throw new Zend_Form_Exception('Invalid display group added; requires name');
             }
@@ -1960,7 +1960,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      */
     protected function _getArrayName($value)
     {
-        if (empty($value) || !is_string($value)) {
+        if (!is_string($value) || '' === $value) {
             return $value;
         }
 

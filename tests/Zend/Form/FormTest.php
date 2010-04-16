@@ -1617,6 +1617,68 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(isset($msgs['foo']['zoo']['iek']));
     }
 
+    public function _setup9401()
+    {
+        $sub0 = 0;
+        $this->form->addSubForm(new Zend_Form_SubForm(), $sub0)
+                   ->$sub0->setElementsBelongTo('f[2]')
+                          ->addElement('text', 'foo')
+                          ->foo->addValidator('Identical',
+                                              false,
+                                              array('foo Value'));
+
+        $this->form->$sub0->addSubForm(new Zend_Form_SubForm(), $sub0)
+                          ->$sub0->addElement('text', 'quo')
+                                 ->quo->addValidator('Identical',
+                                                     false,
+                                                     array('quo Value'));
+
+        $data = array('valid' => array('f' =>
+                                       array(2 =>
+                                             array('foo' => 'foo Value',
+                                                   0 =>
+                                                   array('quo' => 'quo Value')))),
+                      'invalid' => array('f' =>
+                                         array(2 =>
+                                               array('foo' => 'foo Invalid',
+                                                     0 =>
+                                                     array('quo' => 'quo Value')))),
+                      'partial' => array('f' =>
+                                         array(2 =>
+                                               array(0 =>
+                                                     array('quo' => 'quo Value')))));
+        return $data;                      
+    }
+    
+    public function testGetErrorsNumericalSubForms()
+    {
+        $data = $this->_setup9401();
+        $this->form->isValid($data['invalid']);
+        $err = $this->form->getErrors();
+        $this->assertTrue(is_array($err['f'][2]['foo']) && !empty($err['f'][2]['foo']));
+    }
+    
+    public function testGetMessagesNumericalSubForms()
+    {
+        $data = $this->_setup9401();
+        $this->form->isValid($data['invalid']);
+        $msg = $this->form->getMessages();
+        $this->assertTrue(is_array($msg['f'][2]['foo']) && !empty($msg['f'][2]['foo']));
+    }
+
+    public function testGetValuesNumericalSubForms()
+    {
+        $data = $this->_setup9401();
+        $this->form->populate($data['valid']);
+        $this->assertEquals($this->form->getValues(), $data['valid']);
+    }
+
+    public function testGetValidValuesNumericalSubForms()
+    {
+        $data = $this->_setup9401();
+        $this->assertEquals($this->form->getValidValues($data['invalid']), $data['partial']);
+    }
+
 
     // Display groups
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21606 -->
+<!-- EN-Revision: 21818 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.consuming-rss">
     <title>Einen RSS Feed konsumieren</title>
@@ -30,10 +30,11 @@ echo $channel->title();
     <para>
         Beachte die Syntax der Funktion. <classname>Zend_Feed</classname> verwendet die Konvention,
         die Eigenschaften als <acronym>XML</acronym> Objekt zu behandeln, wenn sie durch die
-        "Getter" Syntax für Variablen (<code>$obj->property</code>) angefordert werden, und als
-        String zu behandeln, wenn sie durch die Methodensyntax (<code>$obj->property()</code>)
-        angefordert werden. Dies ermöglicht den Zugriff auf den kompletten Text jedes individuellen
-        Knotens, während weiterhin der komplette Zugriff auf alle Kindelemente erlaubt ist.
+        "Getter" Syntax für Variablen (<command>$obj->property</command>) angefordert werden, und
+        als String zu behandeln, wenn sie durch die Methodensyntax
+        (<command>$obj->property()</command>) angefordert werden. Dies ermöglicht den Zugriff auf
+        den kompletten Text jedes individuellen Knotens, während weiterhin der komplette Zugriff
+        auf alle Kindelemente erlaubt ist.
     </para>
 
     <para>
@@ -73,55 +74,51 @@ foreach ($channel as $item) {
         Erforderliche Elemente eines Channels:
     </para>
 
-    <para>
-        <itemizedlist>
-            <listitem>
-                <para><property>title</property> - Der Name des Channels</para>
-            </listitem>
+    <itemizedlist>
+        <listitem>
+            <para><property>title</property> - Der Name des Channels</para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>link</property> - Die <acronym>URL</acronym> einer Website, die dem
-                    Channel entspricht
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>link</property> - Die <acronym>URL</acronym> einer Website, die dem
+                Channel entspricht
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>description</property> - Ein oder mehr Sätze, die den Channel
-                    beschreiben
-                </para>
-            </listitem>
-        </itemizedlist>
-    </para>
+        <listitem>
+            <para>
+                <property>description</property> - Ein oder mehr Sätze, die den Channel
+                beschreiben
+            </para>
+        </listitem>
+    </itemizedlist>
 
     <para>
         Allgemeine optionale Elemente eines Channels:
     </para>
 
-    <para>
-        <itemizedlist>
-            <listitem>
-                <para>
-                    <property>pubDate</property> - Das Erscheinungsdatum dieses Informationssatzes,
-                    im <acronym>RFC</acronym> 822 Datumsformat
-                </para>
-            </listitem>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <property>pubDate</property> - Das Erscheinungsdatum dieses Informationssatzes,
+                im <acronym>RFC</acronym> 822 Datumsformat
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>language</property> - Die Sprache, in der dieser Channel verfasst ist
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>language</property> - Die Sprache, in der dieser Channel verfasst ist
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>category</property> - Eine oder mehrere Kategorien (durch mehrfache
-                    Tags spezifiziert), zu denen der Channel gehört
-                </para>
-            </listitem>
-        </itemizedlist>
-    </para>
+        <listitem>
+            <para>
+                <property>category</property> - Eine oder mehrere Kategorien (durch mehrfache
+                Tags spezifiziert), zu denen der Channel gehört
+            </para>
+        </listitem>
+    </itemizedlist>
 
     <para>
         <acronym>RSS</acronym> <emphasis>&lt;item&gt;</emphasis> Elemente haben keine strikt
@@ -133,46 +130,44 @@ foreach ($channel as $item) {
         Allgemeine Elements eines Eintrags:
     </para>
 
-    <para>
-        <itemizedlist>
-            <listitem>
-                <para><property>title</property> - Die Überschrift des Eintrags</para>
-            </listitem>
+    <itemizedlist>
+        <listitem>
+            <para><property>title</property> - Die Überschrift des Eintrags</para>
+        </listitem>
 
-            <listitem>
-                <para><property>link</property> - Die <acronym>URL</acronym> des Eintrags</para>
-            </listitem>
+        <listitem>
+            <para><property>link</property> - Die <acronym>URL</acronym> des Eintrags</para>
+        </listitem>
 
-            <listitem>
-                <para><property>description</property> - Eine Zusammenfassung des Eintrags</para>
-            </listitem>
+        <listitem>
+            <para><property>description</property> - Eine Zusammenfassung des Eintrags</para>
+        </listitem>
 
-            <listitem>
-                <para><property>author</property> - Die E-Mail Adresse des Autoren</para>
-            </listitem>
+        <listitem>
+            <para><property>author</property> - Die E-Mail Adresse des Autoren</para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>category</property> - Eine oder mehrere Kategorien, zu denen der
-                    Eintrag gehört
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>category</property> - Eine oder mehrere Kategorien, zu denen der
+                Eintrag gehört
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>comments</property> - <acronym>URL</acronym> der Kommentare zu diesem
-                    Eintrag
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>comments</property> - <acronym>URL</acronym> der Kommentare zu diesem
+                Eintrag
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <property>pubDate</property> - Das Datum, an dem der Eintrag veröffentlicht
-                    wurde, im <acronym>RFC</acronym> 822 Datumsformat
-                </para>
-            </listitem>
-        </itemizedlist>
-    </para>
+        <listitem>
+            <para>
+                <property>pubDate</property> - Das Datum, an dem der Eintrag veröffentlicht
+                wurde, im <acronym>RFC</acronym> 822 Datumsformat
+            </para>
+        </listitem>
+    </itemizedlist>
 
     <para>
         In deinem Code kannst du hiermit immer überprüfen, ob ein Element nicht leer ist:
@@ -185,7 +180,7 @@ if ($item->propname()) {
 ]]></programlisting>
 
     <para>
-        Wenn du stattdessen <code>$item->propname</code> verwendest, wirst du immer ein leeres
+        Wenn du stattdessen <command>$item->propname</command> verwendest, wirst du immer ein leeres
         Objekt erhalten, das mit <constant>TRUE</constant> evaluiert, so dass deine Prüfung
         fehlschlagen würde.
     </para>

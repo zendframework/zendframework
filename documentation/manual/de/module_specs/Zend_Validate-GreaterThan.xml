@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.greaterthan">
     <title>GreaterThan</title>
@@ -13,8 +13,9 @@
         <title>Zend_Validate_GreaterThan unterstützt nur die Überprüfung von Nummern</title>
 
         <para>
-            Es sollte beachtet werden das Zend_Validate_GreaterThan nur die Prüfung von Nummern
-            unterstützt. Strings oder ein Datum können mit dieser Prüfung nicht geprüft werden.
+            Es sollte beachtet werden das <classname>Zend_Validate_GreaterThan</classname> nur die
+            Prüfung von Nummern unterstützt. Strings oder ein Datum können mit dieser Prüfung nicht
+            geprüft werden.
         </para>
     </note>
 

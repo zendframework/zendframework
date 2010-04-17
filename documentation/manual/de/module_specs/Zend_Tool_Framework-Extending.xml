@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.extending">
     <title>Extending and Configuring Zend_Tool_Framework</title>
@@ -134,7 +134,8 @@
                 <constant>ZF_CONFIG_FILE</constant> gesetzt ist, dann wird dieser Wert als Ort der
                 Konfigurationsdatei verwendet die mit dem Konsolen Client zu verwenden ist.
                 <constant>ZF_CONFIG_FILE</constant> kann auf irgendeine INI, XML oder
-                <acronym>PHP</acronym> Datei zeigen die Zend_Config lesen kann.
+                <acronym>PHP</acronym> Datei zeigen die <classname>Zend_Config</classname> lesen
+                kann.
             </para>
 
             <para>

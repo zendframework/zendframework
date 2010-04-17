@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.paginator.advanced">
     <title>Advanced usage</title>
@@ -248,8 +248,8 @@ interface Zend_Paginator_AdapterAggregate
             Das Interface ist sehr klein und erwartet nur das eine Instanz von
             <classname>Zend_Paginator_Adapter_Abstract</classname> zurückgegeben wird. Eine
             Aggregate Instanz des Adapters wird dann von beiden erkannt, sowohl
-            <code>Zend_Paginator::factory</code> als auch dem Konstruktor von Zend_Paginator
-            und entsprechend behandelt.
+            <code>Zend_Paginator::factory</code> als auch dem Constructor von
+            <classname>Zend_Paginator</classname> und entsprechend behandelt.
         </para>
     </sect2>
 </sect1>

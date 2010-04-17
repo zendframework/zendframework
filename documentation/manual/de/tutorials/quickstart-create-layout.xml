@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20977 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-layout">
     <title>Ein Layout erstellen</title>
@@ -44,9 +44,9 @@
     </para>
 
     <para>
-        Um mit Zend_Layout zu beginnen müssen wir als erstes die Bootstrap informieren das Sie die
-        <classname>Layout</classname> Ressource verwenden soll. Das kann getan werden indem der
-        Befehl <command>zf enable layout</command> verwendet wird:
+        Um mit <classname>Zend_Layout</classname> zu beginnen müssen wir als erstes die Bootstrap
+        informieren das Sie die <classname>Layout</classname> Ressource verwenden soll. Das kann
+        getan werden indem der Befehl <command>zf enable layout</command> verwendet wird:
     </para>
 
     <programlisting language="shell"><![CDATA[

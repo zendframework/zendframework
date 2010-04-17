@@ -13,8 +13,9 @@
         <title>Zend_Validate_Between unterstützt nur die Prüfung von Nummern</title>
 
         <para>
-            Es ist zu beachten das Zend_Validate_Between nur die Prüfung von Nummern unterstützt.
-            Strings, oder ein Datum können mit dieser Prüfung nicht geprüft werden.
+            Es ist zu beachten das <classname>Zend_Validate_Between</classname> nur die Prüfung von
+            Nummern unterstützt. Strings, oder ein Datum können mit dieser Prüfung nicht geprüft
+            werden.
         </para>
     </note>
 

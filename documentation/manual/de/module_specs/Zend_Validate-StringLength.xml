@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.stringlength">
     <title>StringLength</title>
@@ -12,9 +12,9 @@
         <title>Zend_Validate_StringLength unterstützt nur die Prüfung von Strings</title>
 
         <para>
-            Es ist zu beachten das Zend_Validate_StringLength nur die Prüfung von Strings
-            unterstützt. Integer, Floats, Datumswerte oder Objekte können mit dieser Prüfung nicht
-            überprüft werden.
+            Es ist zu beachten das <classname>Zend_Validate_StringLength</classname> nur die Prüfung
+            von Strings unterstützt. Integer, Floats, Datumswerte oder Objekte können mit dieser
+            Prüfung nicht überprüft werden.
         </para>
     </note>
 

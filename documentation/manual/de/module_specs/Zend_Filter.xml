@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21606 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
     <title>Einführung</title>
@@ -75,9 +75,10 @@ echo $htmlEntities->filter('"'); // &quot;
             Methode als alternativer Aufrufstil verwendet werden. Das erste Argument dieser Methode
             ist der Eingabewert, der die <methodname>filter()</methodname> Methode passieren soll.
             Das zweite Argument ist ein String, der dem Basisnamen der Filterklasse, relativ zum
-            Zend_Filter Namensraum, entspricht. Die <methodname>filterStatic()</methodname> Methode
-            läde die Klasse automatisch, erstellt eine Instanz, und führt die Eingabedaten der
-            <methodname>filter()</methodname> Methode zu.
+            <classname>Zend_Filter</classname> Namensraum, entspricht. Die
+            <methodname>filterStatic()</methodname> Methode lädt die Klasse automatisch, erstellt
+            eine Instanz, und führt die Eingabedaten der <methodname>filter()</methodname> Methode
+            zu.
 
             <programlisting language="php"><![CDATA[
 echo Zend_Filter::filterStatic('&', 'HtmlEntities');

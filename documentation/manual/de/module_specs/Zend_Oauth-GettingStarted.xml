@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21819 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.oauth.introduction.getting-started">
     <title>Beginnen</title>
@@ -178,13 +178,13 @@ if (!empty($_GET) && isset($_SESSION['TWITTER_REQUEST_TOKEN'])) {
     <para>
         Erfolg! Wir haben einen authorisierten Zugriffstoken - zu dieser Zeit verwenden wir schon
         die <acronym>API</acronym> von Twitter. Da dieser Zugriffstoken bei jeder einzelnen
-        <acronym>API</acronym> Anfrage enthalten sein muss, bietet Zend_Oauth_Consumer einen
-        fix-fertigen HTTP Client an (eine Subklasse von <classname>Zend_Http_Client</classname>)
-        welcher entweder für sich verwendet werden, oder der als eigener HTTP Client an eine andere
-        Bibliothek oder Komponente übergeben werden kann. Hier ist ein Beispiel für die
-        eigenständige Verwendung. Das kann von überall aus der Anwendung heraus getan werden,
-        solange man Zugriff auf die OAuth Konfiguration hat, und den endgültigen authorisierten
-        Zugriffstoken empfangen kann.
+        <acronym>API</acronym> Anfrage enthalten sein muss, bietet
+        <classname>Zend_Oauth_Consumer</classname> einen fix-fertigen HTTP Client an (eine Subklasse
+        von <classname>Zend_Http_Client</classname>) welcher entweder für sich verwendet werden,
+        oder der als eigener HTTP Client an eine andere Bibliothek oder Komponente übergeben werden
+        kann. Hier ist ein Beispiel für die eigenständige Verwendung. Das kann von überall aus der
+        Anwendung heraus getan werden, solange man Zugriff auf die OAuth Konfiguration hat, und den
+        endgültigen authorisierten Zugriffstoken empfangen kann.
     </para>
 
     <programlisting language="php"><![CDATA[

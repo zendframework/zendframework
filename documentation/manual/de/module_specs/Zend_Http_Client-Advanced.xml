@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - Fortgeschrittende Nutzung</title>
@@ -18,9 +18,9 @@
             indem die selbe Anfrage erneut an die angebene Stelle versendet wird - unter Verwendung
             der selben Anfragemethode. Allerdings haben dies die meisten Clients nicht
             implementiert und verwenden beim Umleiten eine GET Anfrage. Standardmäßig macht
-            Zend_Http_Client genau dasselbe - beim Umleiten einer 301 oder 302 Antwort, werden alle
-            GET und POST Parameter zurückgesetzt und eine GET Anfrage wird an die neue Stelle
-            versandt. Dieses Verhalten kann durch Setzen des 'strictredirects'
+            <classname>Zend_Http_Client</classname> genau dasselbe - beim Umleiten einer 301 oder
+            302 Antwort, werden alle GET und POST Parameter zurückgesetzt und eine GET Anfrage wird
+            an die neue Stelle versandt. Dieses Verhalten kann durch Setzen des 'strictredirects'
             Konfigurationsparameters auf das boolesche <constant>TRUE</constant> geändert werden.
 
             <example id="zend.http.client.redirections.example-1">
@@ -46,10 +46,10 @@ $client->setConfig(array('strictredirects' => false);
         <title>Hinzufügen von Cookies und Verwendung von persistenten Cookies</title>
 
         <para>
-            Zend_Http_Client stellt eine einfache Schnittstelle zum Hinzufügen von Cookies zu einer
-            Anfrage bereit, so dass keine direkten Header Änderungen notwendig sind. Dies wird
-            durch Verwendung der setCookie() Methode erledigt. Diese Methode kann auf mehrere
-            Arten verwendet werden:
+            <classname>Zend_Http_Client</classname> stellt eine einfache Schnittstelle zum
+            Hinzufügen von Cookies zu einer Anfrage bereit, so dass keine direkten Header
+            Änderungen notwendig sind. Dies wird durch Verwendung der setCookie() Methode erledigt.
+            Diese Methode kann auf mehrere Arten verwendet werden:
 
             <example id="zend.http.client.cookies.example-1">
                 <title>Cookies setzen durch Verwendung von setCookie()</title>
@@ -68,16 +68,17 @@ $client->setCookie($cookie);
 ]]></programlisting>
             </example>
 
-            Für weitere Informationen über Zend_Http_Cookie Objekte, siehe
+            Für weitere Informationen über <classname>Zend_Http_Cookie</classname> Objekte, siehe
             <xref linkend="zend.http.cookies" />.
         </para>
 
         <para>
-            Zend_Http_Client stellt außerdem die Möglichkeiten für "Cookie Stickiness" bereit - das
-            bedeutet, dass der Client intern alle gesendeten und erhaltenen Cookies speichert und
-            bei nachfolgenden Anfragen automatisch wieder mit sendet. Dies ist z.B. nützlich, wenn
-            man sich bei einer entfernten Site zuerst einloggen muss und einen Authentifizierungs-
-            oder Session-Cookie erhält, bevor man weitere Anfragen versenden kann.
+            <classname>Zend_Http_Client</classname> stellt außerdem die Möglichkeiten für "Cookie
+            Stickiness" bereit - das bedeutet, dass der Client intern alle gesendeten und erhaltenen
+            Cookies speichert und bei nachfolgenden Anfragen automatisch wieder mit sendet. Dies ist
+            z.B. nützlich, wenn man sich bei einer entfernten Site zuerst einloggen muss und einen
+            Authentifizierungs- oder Session-Cookie erhält, bevor man weitere Anfragen versenden
+            kann.
 
             <example id="zend.http.client.cookies.example-2">
                 <title>Cookie Stickiness aktivieren</title>
@@ -102,8 +103,8 @@ $client->request('GET');
 ]]></programlisting>
             </example>
 
-            Für weitere Informationen über die Zend_Http_CookieJar Klasse, siehe
-            <xref linkend="zend.http.cookies.cookiejar" />.
+            Für weitere Informationen über die <classname>Zend_Http_CookieJar</classname> Klasse,
+            siehe <xref linkend="zend.http.cookies.cookiejar" />.
         </para>
     </sect2>
 
@@ -167,14 +168,15 @@ $client->setHeaders(array(
             Diese Methode nimmt einen Dateinamen als ersten Parameter, einen Formularnamen als
             zweiten Parameter und Daten als einen dritten, optionalen Parameter entgegen. Wenn der
             dritte Parameter <constant>NULL</constant> ist, wird angenommen, dass der erste
-            Dateinamen Parameter auf eine echte Datei auf der Platte verweist, und Zend_Http_Client
-            wird versuchen die Datei zu lesen und hochzuladen. Wenn der Daten Parameter nicht
-            <constant>NULL</constant> ist, wird der erste Dateinamen Parameter als der Dateiname
-            versendet, aber die Datei muss nicht wirklich auf der Platte existieren. Der zweite
-            Formularnamen Parameter wird immer benötigt und ist gleichbedeutend mit dem "name"
-            Attribut eines &gt;input&lt; Tags, wenn die Datei durch ein HTML Formular hochgeladen
-            worden ist. Ein vierter optionaler Parameter gibt den Content-type der Datei an. Wenn er
-            nicht angegeben wird, liest Zend_Http_Client die Datei von der Platte und verwendet die
+            Dateinamen Parameter auf eine echte Datei auf der Platte verweist, und
+            <classname>Zend_Http_Client</classname> wird versuchen die Datei zu lesen und
+            hochzuladen. Wenn der Daten Parameter nicht <constant>NULL</constant> ist, wird der
+            erste Dateinamen Parameter als der Dateiname versendet, aber die Datei muss nicht
+            wirklich auf der Platte existieren. Der zweite Formularnamen Parameter wird immer
+            benötigt und ist gleichbedeutend mit dem "name" Attribut eines &gt;input&lt; Tags, wenn
+            die Datei durch ein HTML Formular hochgeladen worden ist. Ein vierter optionaler
+            Parameter gibt den Content-type der Datei an. Wenn er nicht angegeben wird, liest
+            <classname>Zend_Http_Client</classname> die Datei von der Platte und verwendet die
             mime_content_type Funktion, um den Content-type der Datei zu erraten, wenn er verfügbar
             ist. Auf jeden Fall ist der Standard MIME Typ 'application/octet-stream'.
 
@@ -217,12 +219,12 @@ $client->request('POST');
         <title>Unverarbeitete POST Daten versenden</title>
 
         <para>
-            Man kann Zend_Http_Client verwenden, um mit der setRawData() Methode unverarbeitete POST
-            Daten zu versenden. Diese Methode nimmt zwei Parameter entgegen: der erste ist die im
-            Anfrage Hauptteil zu versendenen Daten. Der zweite optionale Parameter ist der
-            Content-type der Daten. Obwohl dieser Parameter optional ist, sollte man ihn
-            normalerweise vor dem Absenden der Anfrage setzen - entweder durch Verwendung von
-            setRawData() oder durch eine andere Methode: setEncType().
+            Man kann <classname>Zend_Http_Client</classname> verwenden, um mit der setRawData()
+            Methode unverarbeitete POST Daten zu versenden. Diese Methode nimmt zwei Parameter
+            entgegen: der erste ist die im Anfrage Hauptteil zu versendenen Daten. Der zweite
+            optionale Parameter ist der Content-type der Daten. Obwohl dieser Parameter optional
+            ist, sollte man ihn normalerweise vor dem Absenden der Anfrage setzen - entweder durch
+            Verwendung von setRawData() oder durch eine andere Methode: setEncType().
 
             <example id="zend.http.client.raw_post_data.example-1">
                 <title>Unverarbeitete POST Daten versenden</title>
@@ -261,13 +263,14 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
         <title>HTTP Authentifizierung</title>
 
         <para>
-            Derzeit unterstützt Zend_Http_Client nur die Basis HTTP Authentifizierung. Diese
-            Funktion kann durch Verwendung der <methodname>setAuth()</methodname> Methode oder durch
-            Spezifikation von Benutzername und Passwort in der URI genutzt werden. Die
-            <methodname>setAuth()</methodname> Methode nimmt 3 Parameter entgegen: den
-            Benutzernamen, das Passwort und einen optionalen Authentifizierungstyp Parameter. Wie
-            gesagt, wird derzeit nur die Basis Authentifizierung unterstützt (Unterstützung für eine
-            Digest Authentifizierung ist geplant).
+            Derzeit unterstützt <classname>Zend_Http_Client</classname> nur die Basis HTTP
+            Authentifizierung. Diese Funktion kann durch Verwendung der
+            <methodname>setAuth()</methodname> Methode oder durch Spezifikation von Benutzername und
+            Passwort in der URI genutzt werden. Die <methodname>setAuth()</methodname> Methode nimmt
+            3 Parameter entgegen: den Benutzernamen, das Passwort und einen optionalen
+            Authentifizierungstyp Parameter. Wie gesagt, wird derzeit nur die Basis
+            Authentifizierung unterstützt (Unterstützung für eine Digest Authentifizierung ist
+            geplant).
 
             <example id="zend.http.client.http_authentication.example-1">
                 <title>Setzen von Benutzer und Password für eine HTTP Authentifizierung</title>

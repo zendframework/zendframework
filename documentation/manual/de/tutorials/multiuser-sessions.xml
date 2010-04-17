@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21819 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.multiuser.sessions">
     <title>User Session im Zend Framework managen</title>
@@ -26,9 +26,9 @@
             In <acronym>PHP</acronym> wurde das Session Problem durch die Session Erweiterung gelöst
             welche eine Form der Statusverfolgung, typische Cookies und eine Form des lokalen
             Speichers verwendet der über die Superglobale $_SESSION bekanntgemacht wird. Im Zend
-            Framework fügt die Komponente Zend_Session zusätzliche Vorteile zu
-            <acronym>PHP</acronym>'s Session Erweiterung hinzu, welche es einfacher machen diese zu
-            verwenden und auf objekt-orientierten Anwendungen beruht.
+            Framework fügt die Komponente <classname>Zend_Session</classname> zusätzliche Vorteile
+            zu <acronym>PHP</acronym>'s Session Erweiterung hinzu, welche es einfacher machen diese
+            zu verwenden und auf objekt-orientierten Anwendungen beruht.
         </para>
     </sect2>
 
@@ -36,25 +36,28 @@
         <title>Grundsätzliche Verwendung von Zend_Session</title>
 
         <para>
-            Die Komponente Zend_Session ist sowohl ein Session Manager als auch eine
-            <acronym>API</acronym> für das Speichern von Daten im Session Objekt für eine
-            Langzeit-Verfügbarkeit. Die <acronym>API</acronym> von Zend_Session ist für das Managen
-            der Optionen und des Verhaltens einer Session, wie Optionen, Starten und Stoppen einer
-            Session, und Zend_Session_Namespace ist das aktuelle Objekt welches zum Speichern der
-            Daten verwendet wird.
+            Die Komponente <classname>Zend_Session</classname> ist sowohl ein Session Manager als
+            auch eine <acronym>API</acronym> für das Speichern von Daten im Session Objekt für eine
+            Langzeit-Verfügbarkeit. Die <acronym>API</acronym> von
+            <classname>Zend_Session</classname> ist für das Managen der Optionen und des Verhaltens
+            einer Session, wie Optionen, Starten und Stoppen einer Session, und
+            <classname>Zend_Session_Namespace</classname> ist das aktuelle Objekt welches zum
+            Speichern der Daten verwendet wird.
         </para>
 
         <para>
             Wärend es generell eine gute Praxis ist eine Session im Bootstrap Prozess zu starten,
             ist dies generell nicht notwendig da alle Sessions bei der ersten Erstellung eines
-            Zend_Session_Namespace Objekts automatisch gestartet werden.
+            <classname>Zend_Session_Namespace</classname> Objekts automatisch gestartet werden.
         </para>
 
         <para>
-            Zend_Application ist in der Lage Zend_Session als Teil des Zend_Application_Resource
-            Systems zu konfigurieren. Um das zu verwenden, nehmen wir an dass das Projekt
-            Zend_Application für das Bootstrappen verwendet. Man würde den folgenden Code in der
-            Datei application.ini hinzufügen:
+            <classname>Zend_Application</classname> ist in der Lage
+            <classname>Zend_Session</classname> als Teil des
+            <classname>Zend_Application_Resource</classname> Systems zu konfigurieren. Um das zu
+            verwenden, nehmen wir an dass das Projekt <classname>Zend_Application</classname> für
+            das Bootstrappen verwendet. Man würde den folgenden Code in der Datei application.ini
+            hinzufügen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -74,15 +77,17 @@ resources.session.remember_me_seconds = 864000
 
         <para>
             Die meisten Zend Framework Komponenten welche Sessions verwenden benötigen nichts
-            zusätzliches um Zend_Session zu verwenden. An diesem Punkt verwendet man entweder eine
-            Komponente welche Zend_Session verwendet, oder startet das Speichern eigener Daten in
-            einer Session mit Zend_Session_Namespace.
+            zusätzliches um <classname>Zend_Session</classname> zu verwenden. An diesem Punkt
+            verwendet man entweder eine Komponente welche <classname>Zend_Session</classname>
+            verwendet, oder startet das Speichern eigener Daten in einer Session mit
+            <classname>Zend_Session_Namespace</classname>.
         </para>
 
         <para>
-            Zend_Session_Namespace ist eine einfache Klasse welche auf Daten über eine einfach zu
-            verwendende <acronym>API</acronym> in der von Zend_Session gemanagten superglobalen
-            $_SESSION verweist. Der Grund warum es Zend_Session_Namespace genannt wird ist, das es
+            <classname>Zend_Session_Namespace</classname> ist eine einfache Klasse welche auf Daten
+            über eine einfach zu verwendende <acronym>API</acronym> in der von
+            <classname>Zend_Session</classname> gemanagten superglobalen $_SESSION verweist. Der
+            Grund warum es <classname>Zend_Session_Namespace</classname> genannt wird ist, das es
             die Daten in $_SESSION effektiv namespaced, und es so mehreren Komponenten und Objekten
             erlaubt Daten sicher zu speichern und zu empfangen. Im folgenden Code sehen wir wie ein
             einfacher hochzählender Counter für Sessions erstellt werden kann der bei 1000 anfängt
@@ -115,8 +120,8 @@ if ($mysession->counter > 1999) {
         <title>Gehobenere Verwendung von Zend_Session</title>
 
         <para>
-            Wenn man zusätzlich den DbTable Speicher Handler für Zend_Session verwenden will, dann
-            kann man den folgenden Code in der application.ini hinzufügen:
+            Wenn man zusätzlich den DbTable Speicher Handler für <classname>Zend_Session</classname>
+            verwenden will, dann kann man den folgenden Code in der application.ini hinzufügen:
         </para>
 
         <programlisting language="php"><![CDATA[

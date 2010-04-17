@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.basic_usage">
     <title>Grundsätzliche Verwendung</title>
@@ -29,10 +29,11 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
 // $myNamespace corresponds to $_SESSION['myNamespace']
 ]]></programlisting>
 
-        Es ist möglich Zend_Session in Verbindung mit anderem Code zu verwenden welche
-        <varname>$_SESSION</varname> direkt verwendet. Um Probleme zu vermeiden wird trotzdem
-        stärkstens empfohlen das solcher Code nur Teile von <varname>$_SESSION</varname> verwendet
-        die nicht mit Instanzen von <classname>Zend_Session_Namespace</classname> korrespondieren.
+        Es ist möglich <classname>Zend_Session</classname> in Verbindung mit anderem Code zu
+        verwenden welche <varname>$_SESSION</varname> direkt verwendet. Um Probleme zu vermeiden
+        wird trotzdem stärkstens empfohlen das solcher Code nur Teile von
+        <varname>$_SESSION</varname> verwendet die nicht mit Instanzen von
+        <classname>Zend_Session_Namespace</classname> korrespondieren.
     </para>
 
     <sect2 id="zend.session.basic_usage.basic_examples">

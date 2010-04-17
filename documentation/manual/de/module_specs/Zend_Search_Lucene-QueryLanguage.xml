@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-language">
     <title>Abfragesprache</title>
@@ -278,8 +278,8 @@ roam~0.8
         </para>
 
         <para>
-            Deshalb setzt Zend_Search_Lucene ein Limit der passenden Ausdrücke pro Abfrage
-            (Unterabfrage). Dieses Limit kann durch Verwendung der Methoden
+            Deshalb setzt <classname>Zend_Search_Lucene</classname> ein Limit der passenden
+            Ausdrücke pro Abfrage (Unterabfrage). Dieses Limit kann durch Verwendung der Methoden
             <code>Zend_Search_Lucene::getTermsPerQueryLimit()</code>/
             <code>Zend_Search_Lucene::setTermsPerQueryLimit($limit)</code> empfangen und gesetzt
             werden.

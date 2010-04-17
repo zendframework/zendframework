@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21247 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.hostname">
     <title>Hostname</title>
@@ -94,10 +94,11 @@ if ($validator->isValid($hostname)) {
         </para>
 
         <para>
-            Die Zend_Validate_Hostname Konstanten sind: <constant>ALLOW_DNS</constant> um nur
-            <acronym>DNS</acronym> Hostnamen zu erlauben, <constant>ALLOW_IP</constant> um IP
-            Adressen zu erlauben, <constant>ALLOW_LOCAL</constant> um lokale Hostnamen zu erlauben,
-            und <constant>ALLOW_ALL</constant> um alle drei Typen zu erlauben. Um nur IP Adressen zu
+            Die <classname>Zend_Validate_Hostname</classname> Konstanten sind:
+            <constant>ALLOW_DNS</constant> um nur <acronym>DNS</acronym> Hostnamen zu erlauben,
+            <constant>ALLOW_IP</constant> um IP Adressen zu erlauben,
+            <constant>ALLOW_LOCAL</constant> um lokale Hostnamen zu erlauben, und
+            <constant>ALLOW_ALL</constant> um alle drei Typen zu erlauben. Um nur IP Adressen zu
             prüfen kann das folgende Beispiel verwendet werden:
         </para>
 
@@ -116,8 +117,8 @@ if ($validator->isValid($hostname)) {
         <para>
             Genau wie die Verwendung von <constant>ALLOW_ALL</constant> alle Typen von Hostnamen
             akzeptiert, können diese Typen kombiniert werden um Kombinationen zu erlauben. Um zum
-            Beispiel DNS und lokale Hostnamen zu akzeptieren muß das Zend_Validate_Hostname Objekt
-            wie folgt initialisiert werden:
+            Beispiel DNS und lokale Hostnamen zu akzeptieren muß das
+            <classname>Zend_Validate_Hostname</classname> Objekt wie folgt initialisiert werden:
         </para>
 
         <programlisting language="php"><![CDATA[

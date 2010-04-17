@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21819 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.extending">
     <title>Zend_Tool erweitern</title>
@@ -832,9 +832,9 @@ class Zend_Tool_Framework_Client_Storage
         <title>Zend_Tool_Project Erweiterungen</title>
 
         <para>
-            Zend_Tool_Project bietet ein reiches Set an Funktionalitäten und Möglichkeiten welche
-            die Aufgabe der Erstellung neuer Provider, speziell jener welche auf ein Projekt
-            abzielen, einfacher und besser managebar.
+            <classname>Zend_Tool_Project</classname> bietet ein reiches Set an Funktionalitäten
+            und Möglichkeiten welche die Aufgabe der Erstellung neuer Provider, speziell jener
+            welche auf ein Projekt abzielen, einfacher und besser managebar.
         </para>
 
         <sect3 id="zend.tool.extending.zend-tool-project.architecture">

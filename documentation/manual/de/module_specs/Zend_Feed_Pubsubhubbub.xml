@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.pubsubhubbub.introduction">
     <title>Zend_Feed_Pubsubhubbub</title>
@@ -97,8 +97,8 @@
             Implementation des Abonnenten alle Feed Aktualisierungen behandeln die von einem Hub
             weitergeleitet werden indem
             <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> verwendet wird. Diese
-            Klassen, deren Verwendungszweck, und die APIs werden in den weiterführenden Abschnitten
-            behandelt.
+            Klassen, deren Verwendungszweck, und die <acronym>API</acronym>s werden in den
+            weiterführenden Abschnitten behandelt.
         </para>
     </sect2>
 
@@ -108,14 +108,14 @@
         <para>
             In Pubsubhubbub ist der Publizist der Teilnehmer welcher einen lebenden Feed
             veröffentlicht und Ihn regelmäßig mit neuem Inhalt aktualisiert. Das kann ein Blog, eine
-            Sammlung, oder sogar ein Webservice mit einer öffentlichen Feed basierenden API sein.
-            Damit diese Aktualisierungen zu den Abonnenten geschickt werden können, muss der
-            Publizist alle seine unterstützten Hubs darüber informieren das eine Aktualisierung
-            stattgefunden hat, indem eine einfache HTTP POST Anfrage verwendet wird, welche die URI
-            oder das aktualisierte Thema enthält (z.B. den aktualisierten RSS oder Atom Feed). Der
-            Hub bestätigt den Empfang der Benachrichtigung, holt den aktualisierten Feed, und leitet
-            alle Aktualisierungen an alle Abonnenten weiter welche sich bei diesem Hub für
-            Aktualisierungen für den relevanten Feed angemeldet haben.
+            Sammlung, oder sogar ein Webservice mit einer öffentlichen Feed basierenden
+            <acronym>API</acronym> sein. Damit diese Aktualisierungen zu den Abonnenten geschickt
+            werden können, muss der Publizist alle seine unterstützten Hubs darüber informieren das
+            eine Aktualisierung stattgefunden hat, indem eine einfache HTTP POST Anfrage verwendet
+            wird, welche die URI oder das aktualisierte Thema enthält (z.B. den aktualisierten RSS
+            oder Atom Feed). Der Hub bestätigt den Empfang der Benachrichtigung, holt den
+            aktualisierten Feed, und leitet alle Aktualisierungen an alle Abonnenten weiter welche
+            sich bei diesem Hub für Aktualisierungen für den relevanten Feed angemeldet haben.
         </para>
 
         <para>

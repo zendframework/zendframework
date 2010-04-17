@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
-<!-- Reviewed: 21740 -->
+<!-- EN-Revision: 21819 -->
+<!-- Reviewed: 21819 -->
 <sect1 id="zend.service.livedocx">
     <title>Zend_Service_LiveDocx</title>
 
@@ -93,8 +93,9 @@
             <para>
                 LiveDocx unterscheidet zwischen den folgenden Ausdrücken: 1)
                 <emphasis>Template</emphasis> und 2) <emphasis>Dokument</emphasis>. Um die
-                Dokumentation und auch die aktuelle API vollständig zu verstehen, ist es wichtig
-                dass jeder Programmierer der LiveDocx ausliefert, den Unterschied versteht.
+                Dokumentation und auch die aktuelle <acronym>API</acronym> vollständig zu verstehen,
+                ist es wichtig dass jeder Programmierer der LiveDocx ausliefert, den Unterschied
+                versteht.
             </para>
 
             <para>

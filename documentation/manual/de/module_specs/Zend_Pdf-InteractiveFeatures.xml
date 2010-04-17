@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.interactive-features">
     <title>Interaktive Features</title>
@@ -809,9 +809,10 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
 
             <para>
                 Die Methode <methodname>Zend_Pdf_Action_URI::create($uri[, $isMap])</methodname>
-                muss verwendet werden um eine URI Aktion zu erstellen (siehe die API Dokumentation
-                für Details). Der optionale <varname>$isMap</varname> Parameter wird
-                standardmäßig auf <constant>FALSE</constant> gesetzt.
+                muss verwendet werden um eine URI Aktion zu erstellen (siehe die
+                <acronym>API</acronym> Dokumentation für Details). Der optionale
+                <varname>$isMap</varname> Parameter wird standardmäßig auf
+                <constant>FALSE</constant> gesetzt.
             </para>
 
             <para>

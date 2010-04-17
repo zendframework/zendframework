@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.developergarden">
     <title>Zend_Service_DeveloperGarden</title>
@@ -11,7 +11,7 @@
             Developer Garden ist der Name für die Entwicker Community der Deutschen Telekom.
             Developer Garden erlaubt den Zugriff auf die zentralen Services der Deutschen Telekom,
             wie z.B. Sprache Verbindungen oder der Versand von SMS Nachrichten über die Open Apis.
-            Der Zugriff auf die API Services erfolgt über <acronym>SOAP</acronym>
+            Der Zugriff auf die <acronym>API</acronym> Services erfolgt über <acronym>SOAP</acronym>
             oder <acronym>REST</acronym>.
         </para>
 
@@ -27,7 +27,8 @@
                 <para>
                     <link
                         linkend="zend.service.developergarden.baseuserservice">BaseUserService</link>:
-                    Klasse um API Anteile sowie Details von Benutzerzugangsdaten zu managen.
+                    Klasse um <acronym>API</acronym> Anteile sowie Details von Benutzerzugangsdaten
+                    zu managen.
                 </para>
             </listitem>
 
@@ -80,7 +81,7 @@
         </itemizedlist>
 
         <para>
-            Die Backend SOAP API ist <ulink
+            Die Backend SOAP <acronym>API</acronym> ist <ulink
                 url="http://www.developergarden.com/openapi/dokumentation/">hier</ulink>
             dokumentiert.
         </para>
@@ -89,8 +90,8 @@
             <title>Für einen Zugang anmelden</title>
 
             <para>
-                Bevor man damit beginnen kann die DeveloperGarden API zu verwenden muss man sich
-                erst für einen Zugang <ulink
+                Bevor man damit beginnen kann die DeveloperGarden <acronym>API</acronym> zu
+                verwenden muss man sich erst für einen Zugang <ulink
                     url="http://www.developergarden.com/register">anmelden</ulink>.
             </para>
         </sect3>
@@ -99,8 +100,8 @@
             <title>Die Umgebung</title>
 
             <para>
-                Mit der DeveloperGarden API hat man die Möglichkeit zwischen 3 unterschiedlichen
-                Umgebungen zu wählen mit denen gearbeitet werden kann.
+                Mit der DeveloperGarden <acronym>API</acronym> hat man die Möglichkeit zwischen 3
+                unterschiedlichen Umgebungen zu wählen mit denen gearbeitet werden kann.
             </para>
 
             <itemizedlist>
@@ -124,7 +125,7 @@
                     <para>
                         <emphasis>mock</emphasis>: Die Mock Umgebung erlaubt es eigene Anwendungen
                         zu bauen und Ergebnisse zu erhlaten ohne das irgendeine Aktion auf Seiten
-                        der API ausgelöst wird.
+                        der <acronym>API</acronym> ausgelöst wird.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -149,14 +150,14 @@
                 <listitem>
                     <para>
                         <emphasis>username</emphasis>: Der eigene Benutzername für die
-                        DeveloperGarden API.
+                        DeveloperGarden <acronym>API</acronym>.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <emphasis>password</emphasis>: Das eigene Passwort für die DeveloperGarden
-                        API.
+                        <acronym>API</acronym>.
                     </para>
                 </listitem>
 
@@ -612,7 +613,7 @@ $service->tearDownCall($sessionId);
         </itemizedlist>
 
         <para>
-            Hier ist eine Liste der aktuell implementierten API Methoden:
+            Hier ist eine Liste der aktuell implementierten <acronym>API</acronym> Methoden:
         </para>
 
         <itemizedlist>

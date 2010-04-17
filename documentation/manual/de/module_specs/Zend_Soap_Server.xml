@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.server">
     <title>Zend_Soap_Server</title>
@@ -210,7 +210,7 @@
 
         <para>
             Der Erste ist das Anfügen einer Klasse zum <classname>Zend_Soap_Server</classname>
-            Objekt welche eine Web Service API komplett beschreibt:
+            Objekt welche eine Web Service <acronym>API</acronym> komplett beschreibt:
             <programlisting language="php"><![CDATA[
 ...
 class MyClass {
@@ -259,8 +259,8 @@ $server->handle();
         </para>
 
         <para>
-            Die zweite Methode der Definition einer Web Service API ist die Verwendung eines Sets
-            von Funktionen und <methodname>addFunction()</methodname> oder
+            Die zweite Methode der Definition einer Web Service <acronym>API</acronym> ist die
+            Verwendung eines Sets von Funktionen und <methodname>addFunction()</methodname> oder
             <methodname>loadFunctions()</methodname> Methoden:
 
             <programlisting language="php"><![CDATA[

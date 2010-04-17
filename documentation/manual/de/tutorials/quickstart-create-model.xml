@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-model">
     <title>Ein Modell und eine Datenbank Tabelle erstellen</title>
@@ -40,7 +40,8 @@
         Angenommen wir speichern diese in einer Datenbank, dann wollen wir auch einen
         <emphasis>eindeutigen Identifikator</emphasis> für jeden Eintrag. Wir wollen in der Lage
         sein einen Eintrag zu speichern, individuelle Einträge zu holen, und alle Einträge zu
-        empfangen. Als solches könnte das Modell einer einfachen Guestbook API wie folgt aussehen:
+        empfangen. Als solches könnte das Modell einer einfachen Guestbook <acronym>API</acronym>
+        wie folgt aussehen:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -438,7 +439,7 @@ class Application_Model_DbTable_Guestbook extends Zend_Db_Table_Abstract
         <emphasis>Daten Mapper</emphasis> bildet ein Domain Objekt in der Datenbank ab. In unserem
         Fall bildet es unser Modell <classname>Application_Model_Guestbook</classname> auf unsere
         Datenquelle, <classname>Application_Model_DbTable_Guestbook</classname>, ab. Eine typische
-        API für einen Daten Mapper ist wie folgt:
+        <acronym>API</acronym> für einen Daten Mapper ist wie folgt:
     </para>
 
     <programlisting language="php"><![CDATA[

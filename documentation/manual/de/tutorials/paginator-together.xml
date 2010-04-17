@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.paginator.together">
     <title>Alles zusammenfügen</title>
@@ -75,7 +75,8 @@ foreach ($this->paginator as $item) {
 
     <para>
         Jetzt zum Index des Projekts navigieren und Paginator in Aktion sehen. Was wir in diesem
-        Tutorial diskutiert haben ist nur die Spitze des Eisbergs. Das Referenz Handbuch und die API
-        Dokumentation können mehr darüber sagen das mit Zend_Paginator alles getan werden kann.
+        Tutorial diskutiert haben ist nur die Spitze des Eisbergs. Das Referenz Handbuch und die
+        <acronym>API</acronym> Dokumentation können mehr darüber sagen das mit Zend_Paginator alles
+        getan werden kann.
     </para>
 </sect1>

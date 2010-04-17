@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.oauth.introduction.protocol-workflow">
     <title>Workflow des Protokolls</title>
@@ -45,15 +45,15 @@
     <para>
         An diesem Punkt kann der Benutzer gefragt werden sich in Twitter anzumelden und wird jetzt
         mit einem Twitter Bildschirm konfrontiert welcher Ihn fragt ob er diese Anfrage von
-        TweetExpress für den Zugriff auf die API von Twitter im Auftrag des Benutzers gestattet.
-        Twitter speichert die Antwort von der wir annehmen das Sie positiv war. Basierend auf dem
-        Einverständnis des Benutzers speichert Twitter den aktuell unauthorisierten Anfrage Token
-        als vom Benutzer akzeptiert (was Ihn Benutzerspezifisch macht) und erzeugt einen neuen Wert
-        in der Form eines Überprüfungscodes. Der Benutzer wird jetzt auf eine spezifische Callback
-        URL zurückgeleitet welche von TweetExpress verwendet wird (diese Callback URL kann bei
-        Twitter registriert sein, oder dynamisch gesetzt werden indem bei den Anfragen ein
-        oauth_callback Parameter verwendet wird). Die Umleitungs-URL wird den neu erzeugten
-        Überprüfungscode enthalten.
+        TweetExpress für den Zugriff auf die <acronym>API</acronym> von Twitter im Auftrag des
+        Benutzers gestattet. Twitter speichert die Antwort von der wir annehmen das Sie positiv war.
+        Basierend auf dem Einverständnis des Benutzers speichert Twitter den aktuell
+        unauthorisierten Anfrage Token als vom Benutzer akzeptiert (was Ihn Benutzerspezifisch
+        macht) und erzeugt einen neuen Wert in der Form eines Überprüfungscodes. Der Benutzer wird
+        jetzt auf eine spezifische Callback URL zurückgeleitet welche von TweetExpress verwendet
+        wird (diese Callback URL kann bei Twitter registriert sein, oder dynamisch gesetzt werden
+        indem bei den Anfragen ein oauth_callback Parameter verwendet wird). Die Umleitungs-URL wird
+        den neu erzeugten Überprüfungscode enthalten.
     </para>
 
     <para>
@@ -63,18 +63,19 @@
         Anfrage Token getauscht werden indem eine Anfrage an Twitter zurückgesendet wird inklusive
         dem Anfrage Token und dem empfangenen Überprüfungscode. Twitter sollte jetzt eine Antwort
         zurücksenden welche diesen Zugriffstoken enthält welcher in allen Anfragen verwendet werden
-        muss um Zugriff auf die API von Twitter im Auftrag des Benutzers zu erhalten. Twitter macht
-        das nur einmal sobald bestätigt wurde das der angehängte Anfrage Token noch nicht verwendet
-        wurde um einen anderen Anfrage Token zu erhalten. Ab diesem Punkt kann TweetExpress dem
-        Benutzer die Anfrage der Akzeptanz bestätigen und den originalen Anfrage Token löschen da
-        er nicht länger benötigt wird.
+        muss um Zugriff auf die <acronym>API</acronym> von Twitter im Auftrag des Benutzers zu
+        erhalten. Twitter macht das nur einmal sobald bestätigt wurde das der angehängte Anfrage
+        Token noch nicht verwendet wurde um einen anderen Anfrage Token zu erhalten. Ab diesem Punkt
+        kann TweetExpress dem Benutzer die Anfrage der Akzeptanz bestätigen und den originalen
+        Anfrage Token löschen da er nicht länger benötigt wird.
     </para>
 
     <para>
-        Ab diesem Punkt kann TweetExpress die API von Twitter verwenden um neue Tweets im Sinne des
-        Benutzers zu schicken indem einfach auf die Endpunkte der API mit einer Anfrage zugegriffen
-        wird welche digital signiert wurde (über HMAC-SHA1) mit einer Kombination von dem
-        Konsumenten Geheimnis von TweetExpress und dem Zugriffsschlüssel der verwendet wird.
+        Ab diesem Punkt kann TweetExpress die <acronym>API</acronym> von Twitter verwenden um neue
+        Tweets im Sinne des Benutzers zu schicken indem einfach auf die Endpunkte der
+        <acronym>API</acronym> mit einer Anfrage zugegriffen wird welche digital signiert wurde
+        (über HMAC-SHA1) mit einer Kombination von dem Konsumenten Geheimnis von TweetExpress und
+        dem Zugriffsschlüssel der verwendet wird.
     </para>
 
     <para>

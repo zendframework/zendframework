@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.service.windowsazure.storage.table">
     <title>Zend_Service_WindowsAzure_Storage_Table</title>
@@ -9,22 +9,23 @@
     </para>
 
     <para>
-        Tabellen Speicher wird von Windows Azure als REST API angeboten die von der Klasse
-        <classname>Zend_Service_WindowsAzure_Storage_Table</classname> umhüllt ist um ein natives
-        <acronym>PHP</acronym> Interface zum Speicher Konto zu bieten.
+        Tabellen Speicher wird von Windows Azure als REST <acronym>API</acronym> angeboten die von
+        der Klasse <classname>Zend_Service_WindowsAzure_Storage_Table</classname> umhüllt ist um ein
+        natives <acronym>PHP</acronym> Interface zum Speicher Konto zu bieten.
     </para>
 
     <para>
         Dieses Thema zeigt einige Beispiele der Verwendung der Klasse
         <classname>Zend_Service_WindowsAzure_Storage_Table</classname>. Andere Features sind im
-        Download Paket enthalten sowie in den detailierten API Dokumentationen dieser Features.
+        Download Paket enthalten sowie in den detailierten <acronym>API</acronym> Dokumentationen
+        dieser Features.
     </para>
 
     <para>
         Es ist zu beachten das bei der Entwicklung der Tabellen Speicher (in der SDK von Windows
-        Azure) nicht alle Features unterstützt welche von dieser API angeboten werden. Deshalb sind
-        die Beispiele welche auf dieser Seite aufgeführt sind, dazu gedacht auf Windows Azure
-        Produktions Tabellen Speichern verwendet zu werden.
+        Azure) nicht alle Features unterstützt welche von dieser <acronym>API</acronym> angeboten
+        werden. Deshalb sind die Beispiele welche auf dieser Seite aufgeführt sind, dazu gedacht
+        auf Windows Azure Produktions Tabellen Speichern verwendet zu werden.
     </para>
 
     <sect3 id="zend.service.windowsazure.storage.table.api">

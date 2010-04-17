@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.log.writers.zendmonitor">
     <title>Auf den Zend Server Montior schreiben</title>
 
     <para>
         <classname>Zend_Log_Writer_ZendMonitor</classname> erlaubt es Events über Zend Server's
-        Monitor API zu loggen. Das erlaubt es die Log Nachrichten für die Umgebung einer komplette
-        Anwendung an einem einzelnen Ort zu sammeln. Intern verwendet es einfach die
-        <methodname>monitor_custom_event()</methodname> Funktion der Zend Monitor API.
+        Monitor <acronym>API</acronym> zu loggen. Das erlaubt es die Log Nachrichten für die
+        Umgebung einer komplette Anwendung an einem einzelnen Ort zu sammeln. Intern verwendet es
+        einfach die <methodname>monitor_custom_event()</methodname> Funktion der Zend Monitor
+        <acronym>API</acronym>.
     </para>
 
     <para>
-        Ein relativ nützlichen Feature der Monitor API ist das Sie es erlaubt beliebige eigene
-        Informationen zusammen mit der Log Nachricht zu spezifizieren. Wenn man zum Beispiel eine
-        Exception loggen will, kann man nicht nur die Exception Nachricht loggen, sondern auch das
-        komplette Exception Objekt an die Funktion übergeben, und das Objekt dann im Zend Server
-        Event Monitor inspizieren.
+        Ein relativ nützlichen Feature der Monitor <acronym>API</acronym> ist das Sie es erlaubt
+        beliebige eigene Informationen zusammen mit der Log Nachricht zu spezifizieren. Wenn man zum
+        Beispiel eine Exception loggen will, kann man nicht nur die Exception Nachricht loggen,
+        sondern auch das komplette Exception Objekt an die Funktion übergeben, und das Objekt dann
+        im Zend Server Event Monitor inspizieren.
     </para>
 
     <note>
@@ -117,9 +118,9 @@ $log->info('Exception gefunden', array(
         </para>
 
         <para>
-            Wie vorher erwähnt fungiert der Logger, wenn die Monitor API in der eigenen
-            <acronym>PHP</acronym> Anwendung nicht erkannt wurde, als <constant>NULL</constant>
-            Logger.
+            Wie vorher erwähnt fungiert der Logger, wenn die Monitor <acronym>API</acronym> in der
+            eigenen <acronym>PHP</acronym> Anwendung nicht erkannt wurde, als
+            <constant>NULL</constant> Logger.
         </para>
     </note>
 </sect2>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.service.windowsazure.storage.queue">
     <title>Zend_Service_WindowsAzure_Storage_Queue</title>
@@ -19,9 +19,10 @@
     </para>
 
     <para>
-        Der Queue Speicher wird von Windows Azure als <acronym>REST</acronym> API angeboten welche
-        von der <classname>Zend_Service_WindowsAzure_Storage_Queue</classname> Klasse umhüllt wird
-        um ein natives <acronym>PHP</acronym> Interface zum Speicher Account zu bieten.
+        Der Queue Speicher wird von Windows Azure als <acronym>REST</acronym> <acronym>API</acronym>
+        angeboten welche von der <classname>Zend_Service_WindowsAzure_Storage_Queue</classname>
+        Klasse umhüllt wird um ein natives <acronym>PHP</acronym> Interface zum Speicher Account zu
+        bieten.
     </para>
 
     <sect3 id="zend.service.windowsazure.storage.queue.api">
@@ -30,8 +31,8 @@
         <para>
             Dieses Thema listet einige Beispiele der Verwendung der
             <classname>Zend_Service_WindowsAzure_Storage_Queue</classname> Klasse auf. Andere
-            Features sind im Download Paket vorhanden, sowie eine detailierte API Dokumentation
-            dieser Features.
+            Features sind im Download Paket vorhanden, sowie eine detailierte <acronym>API</acronym>
+            Dokumentation dieser Features.
         </para>
 
         <sect4 id="zend.service.windowsazure.storage.queue.api.create-queue">

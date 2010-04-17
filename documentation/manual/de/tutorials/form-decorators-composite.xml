@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.form.decorators.composite">
     <title>Erstellung und Darstellung von kombinierten Elementen</title>
@@ -375,8 +375,9 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
         </para>
 
         <para>
-            Am Ende erhält man eine einheitliche API für ein Element welche man verwenden kann um
-            ein Element zu beschreiben welches einen kombinierten Wert repräsentiert.
+            Am Ende erhält man eine einheitliche <acronym>API</acronym> für ein Element welche man
+            verwenden kann um ein Element zu beschreiben welches einen kombinierten Wert
+            repräsentiert.
         </para>
     </sect2>
 </sect1>

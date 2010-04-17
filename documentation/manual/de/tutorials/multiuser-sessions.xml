@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818740 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.multiuser.sessions">
     <title>User Session im Zend Framework managen</title>
@@ -36,11 +36,12 @@
         <title>Grundsätzliche Verwendung von Zend_Session</title>
 
         <para>
-            Die Komponente Zend_Session ist sowohl ein Session Manager als auch eine API für das
-            Speichern von Daten im Session Objekt für eine Langzeit-Verfügbarkeit. Die API von
-            Zend_Session ist für das Managen der Optionen und des Verhaltens einer Session, wie
-            Optionen,, Starten und Stoppen einer Session, und Zend_Session_Namespace ist das
-            aktuelle Objekt welches zum Speichern der Daten verwendet wird.
+            Die Komponente Zend_Session ist sowohl ein Session Manager als auch eine
+            <acronym>API</acronym> für das Speichern von Daten im Session Objekt für eine
+            Langzeit-Verfügbarkeit. Die <acronym>API</acronym> von Zend_Session ist für das Managen
+            der Optionen und des Verhaltens einer Session, wie Optionen, Starten und Stoppen einer
+            Session, und Zend_Session_Namespace ist das aktuelle Objekt welches zum Speichern der
+            Daten verwendet wird.
         </para>
 
         <para>
@@ -80,12 +81,12 @@ resources.session.remember_me_seconds = 864000
 
         <para>
             Zend_Session_Namespace ist eine einfache Klasse welche auf Daten über eine einfach zu
-            verwendende API in der von Zend_Session gemanagten superglobalen $_SESSION verweist.
-            Der Grund warum es Zend_Session_Namespace genannt wird ist, das es die Daten in
-            $_SESSION effektiv namespaced, und es so mehreren Komponenten und Objekten erlaubt Daten
-            sicher zu speichern und zu empfangen. Im folgenden Code sehen wir wie ein einfacher
-            hochzählender Counter für Sessions erstellt werden kann der bei 1000 anfängt und sich
-            selbst nach 1999 zurücksetzt.
+            verwendende <acronym>API</acronym> in der von Zend_Session gemanagten superglobalen
+            $_SESSION verweist. Der Grund warum es Zend_Session_Namespace genannt wird ist, das es
+            die Daten in $_SESSION effektiv namespaced, und es so mehreren Komponenten und Objekten
+            erlaubt Daten sicher zu speichern und zu empfangen. Im folgenden Code sehen wir wie ein
+            einfacher hochzählender Counter für Sessions erstellt werden kann der bei 1000 anfängt
+            und sich selbst nach 1999 zurücksetzt.
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.writer">
     <title>Zend_Feed_Writer</title>
@@ -273,9 +273,9 @@ $out = $feed->export('atom');
         </para>
 
         <para>
-            Die API für Daten auf Level des Feeds ist in
+            Die <acronym>API</acronym> für Daten auf Level des Feeds ist in
             <classname>Zend_Feed_Writer_Feed</classname> enthalten. Zusätzlich zu der anbei
-            beschriebenen API, implementiert die Klasse auch die Interfaces
+            beschriebenen <acronym>API</acronym>, implementiert die Klasse auch die Interfaces
             <classname>Countable</classname> und <classname>Iterator</classname>.
         </para>
 
@@ -529,8 +529,8 @@ $out = $feed->export('atom');
         </para>
 
         <para>
-            Die API auf Level des Eintrags ist in <classname>Zend_Feed_Writer_Entry</classname>
-            enthalten.
+            Die <acronym>API</acronym> auf Level des Eintrags ist in
+            <classname>Zend_Feed_Writer_Entry</classname> enthalten.
         </para>
 
         <table>

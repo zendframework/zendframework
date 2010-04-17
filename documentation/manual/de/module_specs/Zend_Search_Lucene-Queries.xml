@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-api">
     <title>Abfrage Erzeugungs API</title>
@@ -10,8 +10,9 @@
     </para>
 
     <para>
-        Benutzerabfragen können mit Abfragen die durch die API erstellte wurden kombiniert werden.
-        Einfach den Abfrageparser verwenden um eine Abfrage von einem String zu erstellen:
+        Benutzerabfragen können mit Abfragen die durch die <acronym>API</acronym> erstellte wurden
+        kombiniert werden. Einfach den Abfrageparser verwenden um eine Abfrage von einem String zu
+        erstellen:
 
         <programlisting language="php"><![CDATA[
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
@@ -389,8 +390,8 @@ $hits  = $index->find($query);
 
         <para>
             Jede Abfrage die boolsche Operatoren verwendet kann, kann auch auch umgeschrieben werden
-            damit Sie die Vorzeichen-Schreibweise verwendet und mit Hilfe der API erstellt wird. Zum
-            Beispiel:
+            damit Sie die Vorzeichen-Schreibweise verwendet und mit Hilfe der <acronym>API</acronym>
+            erstellt wird. Zum Beispiel:
 
             <programlisting language="querystring"><![CDATA[
 word1 AND (word2 AND word3 AND NOT word4) OR word5
@@ -431,7 +432,7 @@ field1:test*
         <para>oder</para>
 
         <para>
-            Abfrageerstellung durch die API:
+            Abfrageerstellung durch die <acronym>API</acronym>:
 
             <programlisting language="php"><![CDATA[
 $pattern = new Zend_Search_Lucene_Index_Term('test*', 'field1');
@@ -474,7 +475,7 @@ field1:test~
         <para>oder</para>
 
         <para>
-            Abfrageerstellung durch die API:
+            Abfrageerstellung durch die <acronym>API</acronym>:
 
             <programlisting language="php"><![CDATA[
 $term = new Zend_Search_Lucene_Index_Term('test', 'field1');
@@ -498,7 +499,7 @@ field1:test~0.4
         <para>oder</para>
 
         <para>
-            Abfrageerstellung durch die API:
+            Abfrageerstellung durch die <acronym>API</acronym>:
 
             <programlisting language="php"><![CDATA[
 $term = new Zend_Search_Lucene_Index_Term('test', 'field1');
@@ -751,7 +752,7 @@ title:{Aida TO Carmen}
         <para>oder</para>
 
         <para>
-            Abfrageerstellung durch die API:
+            Abfrageerstellung durch die <acronym>API</acronym>:
 
             <programlisting language="php"><![CDATA[
 $from = new Zend_Search_Lucene_Index_Term('20020101', 'mod_date');

@@ -7,17 +7,25 @@ use Zend\Session\Handler as SessionHandler,
 
 class TestHandler implements SessionHandler
 {
+    public $started = false;
+
     public function start()
-    {}
+    {
+        $this->started = true;
+    }
 
     public function destroy()
-    {}
+    {
+        $this->started = false;
+    }
 
     public function stop()
     {}
 
     public function writeClose()
-    {}
+    {
+        $this->started = false;
+    }
 
 
     public function getName()

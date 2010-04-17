@@ -17,7 +17,12 @@ class Container extends ArrayObject
         }
         $this->_name = $name;
         $this->_setManager($manager);
+
+        // Create namespace
         parent::__construct(array(), ArrayObject::ARRAY_AS_PROPS);
+
+        // Start session
+        $this->getManager()->getHandler()->start();
     }
 
     public static function setDefaultManager(Manager $manager = null)

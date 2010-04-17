@@ -26,6 +26,14 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         Container::setDefaultManager(null);
     }
 
+    public function testInstantiationStartsSession()
+    {
+        $handler = $this->manager->getHandler();
+        $handler->destroy();
+        $container = new Container('Default', $this->manager);
+        $this->assertTrue($handler->started);
+    }
+
     public function testInstantiatingContainerWithoutNameUsesDefaultAsName()
     {
         $this->assertEquals('Default', $this->container->getName());

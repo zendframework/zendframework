@@ -19,7 +19,6 @@ class SessionHandler implements HandlerDefinition
     );
     protected $_destroyed;
     protected $_name;
-    protected $_rememberMe = 1209600; // 2 weeks
     protected $_sessionStarted;
     protected $_storage;
     protected $_validatorChain;
@@ -69,10 +68,6 @@ class SessionHandler implements HandlerDefinition
         if ($options['clear_storage']) {
             $this->getStorage()->clear();
         }
-    }
-
-    public function stop()
-    {
     }
 
     public function writeClose()
@@ -159,7 +154,7 @@ class SessionHandler implements HandlerDefinition
     public function rememberMe($ttl = null)
     {
         if (null === $ttl) {
-            $ttl = $this->_rememberMe;
+            $ttl = $this->getConfig()->getRememberMeSeconds();
         }
         $this->_setSessionCookieLifetime($ttl);
         return $this;
@@ -203,7 +198,7 @@ class SessionHandler implements HandlerDefinition
 
     public function expireSessionCookie()
     {
-        $config = $this->getConfiguration();
+        $config = $this->getConfig();
         if (!$config->getUseCookies()) {
             return;
         }
@@ -218,16 +213,16 @@ class SessionHandler implements HandlerDefinition
         );
     }
 
-    public function setConfiguration(Configuration $config)
+    public function setConfig(Configuration $config)
     {
         $this->_config = $config;
         return $this;
     }
 
-    public function getConfiguration()
+    public function getConfig()
     {
         if (null === $this->_config) {
-            $this->setConfiguration(new Configuration\SessionConfiguration());
+            $this->setConfig(new Configuration\SessionConfiguration());
         }
         return $this->_config;
     }
@@ -252,7 +247,7 @@ class SessionHandler implements HandlerDefinition
      */
     protected function _setSessionCookieLifetime($ttl)
     {
-        $config = $this->getConfiguration();
+        $config = $this->getConfig();
         if (!$config->getUseCookies()) {
             return;
         }

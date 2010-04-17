@@ -729,6 +729,19 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('a=href,fieldset=', ini_get('url_rewriter.tags'));
     }
 
+    // remember_me_seconds
+
+    public function testRememberMeSecondsDefaultsToTwoWeeks()
+    {
+        $this->assertEquals(1209600, $this->config->getRememberMeSeconds());
+    }
+
+    public function testRememberMeSecondsIsMutable()
+    {
+        $this->config->setRememberMeSeconds(604800);
+        $this->assertEquals(604800, $this->config->getRememberMeSeconds());
+    }
+
     // setOptions
 
     public function optionsProvider()

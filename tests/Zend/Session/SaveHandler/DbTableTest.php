@@ -83,6 +83,13 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped('Zend\\Session\\SaveHandler\\DbTable tests are not enabled due to missing PDO_Sqlite extension');
         }
+
+        $this->manager = $manager = new Manager(array(
+            'class'   => 'Zend\\Session\\Configuration\\StandardConfiguration',
+            'storage' => 'Zend\\Session\\Storage\\ArrayStorage',
+            'handler' => 'ZendTest\\Session\\TestAsset\\TestHandler',
+        ));
+        $this->_saveHandlerTableConfig['manager'] = $this->manager;
         $this->_setupDb($this->_saveHandlerTableConfig['primary']);
     }
 
@@ -342,7 +349,9 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
         $this->_usedSaveHandlers[] =
             $saveHandler = new DbTable($config);
-        $manager = new Manager();
+        $manager = new Manager(array(
+            'handler' => 'ZendTest\\Session\\TestAsset\\TestHandler',
+        ));
         $saveHandler->setManager($manager);
         $manager->getHandler()->start();
 
@@ -548,6 +557,9 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     protected function _dropTable()
     {
+        if (!$this->_db instanceof \Zend_Db_Adapter_Abstract) {
+            return;
+        }
         $this->_db->query('DROP TABLE Sessions');
     }
 }

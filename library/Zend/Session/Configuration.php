@@ -50,5 +50,7 @@ interface Configuration
     public function getHashBitsPerCharacter();
     public function setUrlRewriterTags($urlRewriterTags);
     public function getUrlRewriterTags();
+    public function setRememberMeSeconds($seconds);
+    public function getRememberMeSeconds();
     public function setOptions(array $options);
 }

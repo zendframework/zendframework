@@ -37,7 +37,13 @@ class SessionStorageTest extends \PHPUnit_Framework_TestCase
         $_SESSION['foo'] = 'bar';
         $array   = array('foo' => 'FOO');
         $storage = new SessionStorage($array);
-        $this->assertSame($array, (array) $_SESSION);
+        $expected = array(
+            'foo' => 'FOO',
+            '__ZF' => array(
+                '_REQUEST_ACCESS_TIME' => $storage->getRequestAccessTime(),
+            ),
+        );
+        $this->assertSame($expected, (array) $_SESSION);
     }
 
     public function testModifyingSessionSuperglobalDirectlyUpdatesStorage()
@@ -49,8 +55,14 @@ class SessionStorageTest extends \PHPUnit_Framework_TestCase
     public function testDestructorSetsSessionToArray()
     {
         $this->storage->foo = 'bar';
+        $expected = array(
+            '__ZF' => array(
+                '_REQUEST_ACCESS_TIME' => $this->storage->getRequestAccessTime(),
+            ),
+            'foo' => 'bar',
+        );
         $this->storage->__destruct();
-        $this->assertSame(array('foo' => 'bar'), $_SESSION);
+        $this->assertSame($expected, $_SESSION);
     }
 
     public function testModifyingOneSessionObjectModifiesTheOther()

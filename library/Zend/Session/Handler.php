@@ -8,7 +8,6 @@ interface Handler
 {
     public function start();
     public function destroy();
-    public function stop();
     public function writeClose();
 
     public function getName();
@@ -26,8 +25,8 @@ interface Handler
     public function sessionExists();
     public function expireSessionCookie();
 
-    public function setConfiguration(Configuration $config);
-    public function getConfiguration();
+    public function setConfig(Configuration $config);
+    public function getConfig();
     public function setStorage(Storage $storage);
     public function getStorage();
 }

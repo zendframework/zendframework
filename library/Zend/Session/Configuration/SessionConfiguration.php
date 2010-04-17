@@ -7,6 +7,8 @@ use Zend\Validator\Hostname\Hostname as HostnameValidator,
 
 class SessionConfiguration extends StandardConfiguration
 {
+    protected $_rememberMeSeconds = 1209600; // 2 weeks
+
     /**
      * Set storage option in backend configuration store
      *
@@ -21,7 +23,7 @@ class SessionConfiguration extends StandardConfiguration
     {
         $key = false;
         switch ($name) {
-            case 'strict':
+            case 'remember_me_seconds':
                 // do nothing; not an INI option
                 return;
             case 'url_rewriter_tags':
@@ -48,9 +50,9 @@ class SessionConfiguration extends StandardConfiguration
         $key       = false;
         $transform = false;
         switch ($name) {
-            case 'strict':
+            case 'remember_me_seconds':
                 // No remote storage option; just return the current value
-                return $this->_strict;
+                return $this->_rememberMeSeconds;
             case 'url_rewriter_tags':
                 $key = 'url_rewriter.tags';
                 break;

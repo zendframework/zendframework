@@ -67,12 +67,12 @@ class TestHandler implements SessionHandler
     {}
 
 
-    public function setConfiguration(SessionConfiguration $config)
+    public function setConfig(SessionConfiguration $config)
     {
         $this->config = $config;
     }
 
-    public function getConfiguration()
+    public function getConfig()
     {
         return $this->config;
     }

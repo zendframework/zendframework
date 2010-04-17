@@ -110,7 +110,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
     {
         $config  = $this->manager->getConfig();
         $handler = $this->manager->getHandler();
-        $this->assertSame($config, $handler->getConfiguration());
+        $this->assertSame($config, $handler->getConfig());
     }
 
     public function testManagerStorageIsInjectedIntoHandler()
@@ -161,7 +161,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($storage instanceof Session\Storage\ArrayStorage);
         $handler = $manager->getHandler();
         $this->assertTrue($handler instanceof TestAsset\TestHandler);
-        $this->assertSame($config, $handler->getConfiguration());
+        $this->assertSame($config, $handler->getConfig());
         $this->assertSame($storage, $handler->getStorage());
     }
 

@@ -41,7 +41,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingNameToConstructorInstantiatesContainerWithThatName()
     {
-        $container = new Container('foo');
+        $container = new Container('foo', $this->manager);
         $this->assertEquals('foo', $container->getName());
     }
 
@@ -103,6 +103,11 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertNotSame($manager, Container::getDefaultManager());
     }
 
+    /**
+     * Run in separate process due to usage of session_* methods
+     *
+     * @runInSeparateProcess
+     */
     public function testDefaultManagerUsedWhenNoManagerProvided()
     {
         $manager = Container::getDefaultManager();
@@ -110,6 +115,11 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($manager, $container->getManager());
     }
 
+    /**
+     * Run in separate process due to usage of session_* methods
+     *
+     * @runInSeparateProcess
+     */
     public function testContainerInstantiatesManagerWithDefaultsWhenNotInjected()
     {
         $container = new Container();

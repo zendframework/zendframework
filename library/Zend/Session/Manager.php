@@ -93,7 +93,7 @@ class Manager
             throw new Exception('Handler type provided is invalid; must implement Zend\\Session\\Handler');
         }
 
-        $handler->setConfiguration($this->getConfig());
+        $handler->setConfig($this->getConfig());
         $handler->setStorage($this->getStorage());
 
         $this->_handler = $handler;

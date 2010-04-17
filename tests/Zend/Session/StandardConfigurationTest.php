@@ -431,6 +431,31 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('a=href,form=action', $this->config->getUrlRewriterTags());
     }
 
+    // remember_me_seconds
+
+    public function testRememberMeSecondsIsMutable()
+    {
+        $this->config->setRememberMeSeconds(20);
+        $this->assertEquals(20, $this->config->getRememberMeSeconds());
+    }
+
+    public function testSettingInvalidRememberMeSecondsRaisesException()
+    {
+        try {
+            $this->config->setRememberMeSeconds('foobar_bogus');
+            $this->fail('Expected exception from string remember_me_seconds');
+        } catch (\Zend\Session\Exception $e) {
+            $this->assertContains('Invalid', $e->getMessage());
+        }
+
+        try {
+            $this->config->setRememberMeSeconds(-1);
+            $this->fail('Expected exception from negative remember_me_seconds');
+        } catch (\Zend\Session\Exception $e) {
+            $this->assertContains('Invalid', $e->getMessage());
+        }
+    }
+
     // setOptions
 
     public function optionsProvider()
@@ -562,16 +587,5 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
         $options = array($option => $value);
         $this->config->setOptions($options);
         $this->assertSame($value, $this->config->$getter());
-    }
-
-    public function testStrictOptionIsNullByDefault()
-    {
-        $this->assertNull($this->config->getStrict());
-    }
-
-    public function testStrictOptionIsMutable()
-    {
-        $this->config->setStrict(true);
-        $this->assertTrue($this->config->getStrict());
     }
 }

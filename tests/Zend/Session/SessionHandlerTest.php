@@ -181,7 +181,7 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testDestroyByDefaultSendsAnExpireCookie()
     {
-        $config = $this->handler->getConfiguration();
+        $config = $this->handler->getConfig();
         $config->setUseCookies(true);
         $this->handler->start();
         $this->handler->destroy();
@@ -203,7 +203,7 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSendingFalseToSendExpireCookieWhenCallingDestroyShouldNotSendCookie()
     {
-        $config = $this->handler->getConfiguration();
+        $config = $this->handler->getConfig();
         $config->setUseCookies(true);
         $this->handler->start();
         $this->handler->destroy(array('send_expire_cookie' => false));
@@ -224,6 +224,9 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testDestroyDoesNotClearSessionStorageByDefault()
     {
         $this->handler->start();
@@ -234,6 +237,9 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $storage['foo']);
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testPassingClearStorageOptionWhenCallingDestroyClearsStorage()
     {
         $this->handler->start();
@@ -243,6 +249,9 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(array(), (array) $storage);
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testCallingWriteCloseMarksStorageAsImmutable()
     {
         $this->handler->start();
@@ -252,6 +261,9 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($storage->isImmutable());
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testCallingWriteCloseShouldNotAlterSessionExistsStatus()
     {
         $this->handler->start();
@@ -295,7 +307,7 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingIdAfterSessionStartedShouldSendExpireCookie()
     {
-        $config = $this->handler->getConfiguration();
+        $config = $this->handler->getConfig();
         $config->setUseCookies(true);
         $this->handler->start();
         $origId = $this->handler->getId();
@@ -328,7 +340,7 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegeneratingIdAfterSessionStartedShouldSendExpireCookie()
     {
-        $config = $this->handler->getConfiguration();
+        $config = $this->handler->getConfig();
         $config->setUseCookies(true);
         $this->handler->start();
         $origId = $this->handler->getId();
@@ -350,7 +362,7 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRememberMeShouldSendNewSessionCookieWithUpdatedTimestamp()
     {
-        $config = $this->handler->getConfiguration();
+        $config = $this->handler->getConfig();
         $config->setUseCookies(true);
         $this->handler->start();
         $this->handler->rememberMe(18600);
@@ -375,10 +387,12 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testRememberMeShouldSetTimestampTwoWeeksInFutureByDefault()
+    public function testRememberMeShouldSetTimestampBasedOnConfigurationByDefault()
     {
-        $config = $this->handler->getConfiguration();
+        $config = $this->handler->getConfig();
         $config->setUseCookies(true);
+        $config->setRememberMeSeconds(3600);
+        $ttl = $config->getRememberMeSeconds();
         $this->handler->start();
         $this->handler->rememberMe();
         $headers = xdebug_get_headers();
@@ -396,8 +410,9 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
         if (!$ts) {
             $this->fail('Cookie did not contain expiry? ' . var_export($headers, true));
         }
-        $compare = $_SERVER['REQUEST_TIME'] + 1208600;
-        $this->assertGreaterThanOrEqual($compare, $ts->getTimestamp(), 'Session cookie: ' . var_export($headers, 1));
+        $compare = $_SERVER['REQUEST_TIME'] + $ttl;
+        $cookieTs = $ts->getTimestamp();
+        $this->assertTrue(in_array($cookieTs, range($compare, $compare + 10)), 'Session cookie: ' . var_export($headers, 1));
     }
 
     /**
@@ -405,7 +420,7 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testForgetMeShouldSendCookieWithZeroTimestamp()
     {
-        $config = $this->handler->getConfiguration();
+        $config = $this->handler->getConfig();
         $config->setUseCookies(true);
         $this->handler->start();
         $this->handler->forgetMe();

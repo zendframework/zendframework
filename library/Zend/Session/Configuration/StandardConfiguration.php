@@ -553,25 +553,34 @@ class StandardConfiguration implements Configurable
         return $this->_urlRewriterTags;
     }
 
-    // strict
+    // remember_me_seconds
 
-    protected $_strict;
+    protected $_rememberMeSeconds;
 
-    public function setStrict($flag)
+    public function setRememberMeSeconds($rememberMeSeconds)
     {
-        $this->_strict = (bool) $flag;
-        $this->setStorageOption('strict', $this->_strict);
+        if (!is_numeric($rememberMeSeconds)) {
+            throw new SessionException('Invalid remember_me_seconds; must be numeric');
+        }
+
+        $rememberMeSeconds = (int) $rememberMeSeconds;
+        if (1 > $rememberMeSeconds) {
+            throw new SessionException('Invalid remember_me_seconds; must be a positive integer');
+        }
+
+        $this->_rememberMeSeconds = $rememberMeSeconds;
+        $this->setStorageOption('remember_me_seconds', $rememberMeSeconds);
         return $this;
     }
 
-    public function getStrict()
+    public function getRememberMeSeconds()
     {
-        if (null === $this->_strict) {
-            $this->_strict = $this->getStorageOption('strict');
+        if (null === $this->_rememberMeSeconds) {
+            $this->_rememberMeSeconds = $this->getStorageOption('remember_me_seconds');
         }
-        return $this->_strict;
+        return $this->_rememberMeSeconds;
     }
-
+ 
     // set options
 
     public function setOptions(array $options)

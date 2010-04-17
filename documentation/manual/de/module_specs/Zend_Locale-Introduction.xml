@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21790 -->
+<!-- EN-Revision: 21816 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.introduction">
     <title>Einführung</title>
@@ -304,7 +304,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                         <code>'browser'</code> - <classname>Zend_Locale</classname> soll mit den
                         Informationen arbeiten die durch den Web Browser des Benutzers geliefert
                         werden. Sie werden von <acronym>PHP</acronym> in der globalen Variable
-                        <constant>HTTP_ACCEPT_LANGUAGE</constant> veröffentlicht.
+                        <constant>$_SERVER['HTTP_ACCEPT_LANGUAGE']</constant> veröffentlicht.
                     </para>
 
                     <para>

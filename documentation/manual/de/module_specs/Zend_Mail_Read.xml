@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21109 -->
+<!-- EN-Revision: 21815 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.read">
     <title>Lesen von Mail Nachrichten</title>
@@ -14,6 +14,7 @@
 
     <table id="zend.mail.read.table-1">
         <title>Übersicht der Lesefeatures für Mails</title>
+
         <tgroup cols="5">
             <thead>
                 <row>
@@ -24,6 +25,7 @@
                     <entry><constant>IMAP</constant></entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry>Speichertyp</entry>
@@ -32,6 +34,7 @@
                     <entry>entfernt</entry>
                     <entry>entfernt</entry>
                 </row>
+
                 <row>
                     <entry>Nachrichten holen</entry>
                     <entry>Yes</entry>
@@ -39,6 +42,7 @@
                     <entry>Yes</entry>
                     <entry>Yes</entry>
                 </row>
+
                 <row>
                     <entry><acronym>MIME</acronym>-Part holen</entry>
                     <entry>emulated</entry>
@@ -46,6 +50,7 @@
                     <entry>emulated</entry>
                     <entry>emulated</entry>
                 </row>
+
                 <row>
                     <entry>Ordner</entry>
                     <entry>Yes </entry>
@@ -53,6 +58,7 @@
                     <entry>No</entry>
                     <entry>Yes</entry>
                 </row>
+
                 <row>
                     <entry>Erstellen von Nachrichten/Ordnern</entry>
                     <entry>No</entry>
@@ -60,6 +66,7 @@
                     <entry>No</entry>
                     <entry>todo</entry>
                 </row>
+
                 <row>
                     <entry>Merker</entry>
                     <entry>No</entry>
@@ -67,6 +74,7 @@
                     <entry>No</entry>
                     <entry>Yes</entry>
                 </row>
+
                 <row>
                     <entry>Quote</entry>
                     <entry>No</entry>
@@ -91,8 +99,8 @@ foreach ($mail as $message) {
     echo "Mail von '{$message->from}': {$message->subject}\n";
 }
 ]]></programlisting>
-
     </sect2>
+
     <sect2 id="zend.mail.read-open-local">
         <title>Öffnen eines lokalen Speichers</title>
 
@@ -100,6 +108,7 @@ foreach ($mail as $message) {
             Mbox und Maildir sind zwei unterstützte Formate für lokale Mailspeicher, beide in Ihrem
             einfachsten Format.
         </para>
+
         <para>
             Wenn von einer Mbox Datei gelesen werden soll muß nur der Dateiname an den Konstruktor
             von <classname>Zend_Mail_Storage_Mbox</classname> übergeben werden:
@@ -121,8 +130,8 @@ $mail = new Zend_Mail_Storage_Maildir(array('dirname' =>
             Beide Konstruktoren werfen eine <classname>Zend_Mail_Exception</classname> Ausnahme
             wenn der Speicher nicht gelesen werden kann.
         </para>
-
     </sect2>
+
     <sect2 id="zend.mail.read-open-remote">
         <title>Öffnen eines entfernten Speichers</title>
 
@@ -180,8 +189,8 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
             <classname>Zend_Mail_Protocol_Exception</classname> werfen (erweitert
             <classname>Zend_Mail_Exception</classname>), abhängig vom Typ des Fehlers.
         </para>
-
     </sect2>
+
     <sect2 id="zend.mail.read-fetching">
         <title>Nachrichten holen und einfache Methoden</title>
 
@@ -228,8 +237,10 @@ $maxMessage = $mail->countMessages();
 $maxMessage = count($mail);
 ]]></programlisting>
 
-        <para>Um eine Mail zu entfernen kann die Methode <methodname>removeMessage()</methodname>
-        oder auch der Array Zugriff verwendet werden:</para>
+        <para>
+            Um eine Mail zu entfernen kann die Methode <methodname>removeMessage()</methodname>
+            oder auch der Array Zugriff verwendet werden:
+        </para>
 
         <programlisting language="php"><![CDATA[
 // Methode
@@ -238,8 +249,8 @@ $mail->removeMessage($messageNum);
 // Array Zugriff
 unset($mail[$messageNum]);
 ]]></programlisting>
-
     </sect2>
+
     <sect2 id="zend.mail.read-message">
         <title>Arbeiten mit Nachrichten</title>
 
@@ -381,8 +392,8 @@ if (!$foundPart) {
     echo "Reiner Text-Teil: \n" . $foundPart;
 }
 ]]></programlisting>
-
     </sect2>
+
     <sect2 id="zend.mail.read-flags">
         <title>Auf Flags prüfen</title>
 
@@ -434,10 +445,12 @@ foreach ($flags as $flag) {
 }
 ]]></programlisting>
 
-        <para>Da IMAP Benutzern oder auch Clients selbstdefinierte Flags erlaubt, können auch Flags
-        empfangen werden die keine Konstante in <classname>Zend_Mail_Storage</classname> haben.
-        Stattdessen werden sie als String zurückgegeben und können auf dem selben Weg mit
-        <methodname>hasFlag()</methodname> geprüft werden.</para>
+        <para>
+            Da IMAP Benutzern oder auch Clients selbstdefinierte Flags erlaubt, können auch Flags
+            empfangen werden die keine Konstante in <classname>Zend_Mail_Storage</classname> haben.
+            Stattdessen werden sie als String zurückgegeben und können auf dem selben Weg mit
+            <methodname>hasFlag()</methodname> geprüft werden.
+        </para>
 
         <programlisting language="php"><![CDATA[
 // Nachricht auf vom Client definierte Flags $IsSpam, $SpamTested prüfen
@@ -449,8 +462,8 @@ if (!$message->hasFlag('$SpamTested')) {
     echo 'Diese Nachricht ist Speck';
 }
 ]]></programlisting>
-
     </sect2>
+
     <sect2 id="zend.mail.read-folders">
         <title>Verwenden von Ordnern</title>
 
@@ -461,6 +474,7 @@ if (!$message->hasFlag('$SpamTested')) {
             auch einen zusätzlichen optionalen Parameter welcher <code>folder</code> heißt, was der
             ausgewählt Ordner nach dem Login, im Konstruktor ist.
         </para>
+
         <para>
             Für den lokalen Speicher müssen die eigenen Klassen
             <classname>Zend_Mail_Storage_Folder_Mbox</classname> oder
@@ -471,6 +485,7 @@ if (!$message->hasFlag('$SpamTested')) {
             im Mbox Basisverzeichnis keine Mbox Datei vorhanden ist die INBOX heißt, muß ein anderer
             Ordner im Konstruktor gesetzt werden.
         </para>
+
         <para>
             <classname>Zend_Mail_Storage_Imap</classname> unterstützt Ordner schon standardmäßig.
             Beispiele für das Öffnen solcher Speicher:
@@ -517,6 +532,7 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
 
         <table id="zend.mail.read-folders.table-1">
             <title>Namen für Nachrichtenordner</title>
+
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -524,15 +540,18 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
                         <entry>Lokaler Name</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>/INBOX</entry>
                         <entry>INBOX</entry>
                     </row>
+
                     <row>
                         <entry>/Archive/2005</entry>
                         <entry>2005</entry>
                     </row>
+
                     <row>
                         <entry>List.ZF.General</entry>
                         <entry>General</entry>
@@ -544,10 +563,11 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
         <para>
             Wenn der Iterator verwendet wird ist der lokale Name der Schlüssel des aktuellen
             Elements. Der globale Name wird auch durch die magische Methode
-            <methodname>__toString()</methodname> zurückgegeben. Gleiche Ordner können nicht ausgewählt werden,
-            was bedeutet das Sie keine Nachrichten speichern können und die Auswahl von Ergebnisses
-            führt zu einem Fehler. Das kann mit der Methode <methodname>isSelectable()</methodname> geprüft
-            werden. Es ist also sehr einfach den ganzen Baum in einer Ansicht auszugeben:
+            <methodname>__toString()</methodname> zurückgegeben. Gleiche Ordner können nicht
+            ausgewählt werden, was bedeutet das Sie keine Nachrichten speichern können und die
+            Auswahl von Ergebnisses führt zu einem Fehler. Das kann mit der Methode
+            <methodname>isSelectable()</methodname> geprüft werden. Es ist also sehr einfach den
+            ganzen Baum in einer Ansicht auszugeben:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -589,8 +609,8 @@ echo 'Der letzte Ordner war '
    . "neuer Ordner ist $folder\n";
 $mail->selectFolder($folder);
 ]]></programlisting>
-
     </sect2>
+
     <sect2 id="zend.mail.read-advanced">
         <title>Fortgeschrittene Verwendung</title>
 
@@ -614,8 +634,8 @@ foreach ($mail as $message) {
     $mail->noop(); // am Leben halten
 }
 ]]></programlisting>
-
         </sect3>
+
         <sect3 id="zend.mail.read-advanced.caching">
             <title>Instanzen cachen</title>
 
@@ -655,8 +675,8 @@ if (!$cache->isCached($cache_id) ||
 
 $cache->set($cache_id, $mail);
 ]]></programlisting>
-
         </sect3>
+
         <sect3 id="zend.mail.read-advanced.extending">
             <title>Prokoll Klassen erweitern</title>
 
@@ -751,8 +771,8 @@ $mail = new Example_Mail_Pop3_Knock(array('host'        => 'localhost',
                 sichergestellt werden dass das durchgeführt wird, da sonst die nächste Methode
                 fehlschlagen wird wenn der Server das im aktuellen Status nicht zulässt.
             </para>
-
         </sect3>
+
         <sect3 id="zend.mail.read-advanced.quota">
             <title>Quote verwenden (seit 1.5)</title>
 
@@ -841,7 +861,6 @@ class Example_Mail_Storage_Maildir extends Zend_Mail_Storage_Writable_Maildir {
     }
 }
 ]]></programlisting>
-
         </sect3>
     </sect2>
 </sect1>

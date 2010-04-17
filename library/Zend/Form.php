@@ -1365,17 +1365,17 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             $eBelongTo = $this->getElementsBelongTo();
             $data = $this->_dissolveArrayValue($data, $eBelongTo);
         }
-        
+        $context = $data;
         foreach ($this->getElements() as $key => $element) {
             $check = $data;
             if (($belongsTo = $element->getBelongsTo()) !== $eBelongTo) {
                 $check = $this->_dissolveArrayValue($data, $belongsTo);
             }
             if (isset($check[$key])) {
-                if($element->isValid($check[$key], $check)) {
+                if($element->isValid($check[$key], $context)) {
                     $merge = array();
                     if ($belongsTo !== $eBelongTo && '' !== (string)$belongsTo) {
-                            $key = $belongsTo . '[' . $key . ']';
+                        $key = $belongsTo . '[' . $key . ']';
                     }
                     $merge = $this->_attachToArray($element->getValue(), $key);
                     $values = array_merge_recursive($values, $merge);
@@ -2120,7 +2120,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             $eBelongTo = $this->getElementsBelongTo();
             $data = $this->_dissolveArrayValue($data, $eBelongTo);
         }
-
+        $context = $data;
         foreach ($this->getElements() as $key => $element) {
             if (null !== $translator && !$element->hasTranslator()) {
                 $element->setTranslator($translator);
@@ -2130,9 +2130,9 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                 $check = $this->_dissolveArrayValue($data, $belongsTo);
             }
             if (!isset($check[$key])) {
-                $valid = $element->isValid(null, $check) && $valid;
+                $valid = $element->isValid(null, $context) && $valid;
             } else {
-                $valid = $element->isValid($check[$key], $check) && $valid;
+                $valid = $element->isValid($check[$key], $context) && $valid;
                 $data = $this->_dissolveArrayUnsetKey($data, $belongsTo, $key);
             }
         }
@@ -2174,8 +2174,9 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             $data = $this->_dissolveArrayValue($data, $eBelongTo);
         }
 
-        $translator        = $this->getTranslator();
-        $valid             = true;
+        $translator = $this->getTranslator();
+        $valid      = true;
+        $context    = $data;
 
         foreach ($this->getElements() as $key => $element) {
             $check = $data;
@@ -2186,7 +2187,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                 if (null !== $translator && !$element->hasTranslator()) {
                     $element->setTranslator($translator);
                 }
-                $valid = $element->isValid($check[$key], $check) && $valid;
+                $valid = $element->isValid($check[$key], $context) && $valid;
                 $data = $this->_dissolveArrayUnsetKey($data, $belongsTo, $key);
             }
         }

@@ -2718,6 +2718,46 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         }
     }
 
+   /**
+    * @Group ZF-9697
+    */
+    public function _setup9697()
+    {
+        $callback = create_function('$value, $options',
+                                    'return (isset($options["bar"]["quo"]["foo"]) &&
+                                             "foo Value" === $options["bar"]["quo"]["foo"]);');
+
+        $this->form->addElement('text', 'foo')
+                   ->foo->setBelongsTo('bar[quo]');
+
+        $this->form->addElement('text', 'quo')
+                   ->quo->setBelongsTo('bar[quo]')
+                        ->addValidator('Callback',
+                                       false,
+                                       $callback);
+
+        return array('bar' => array('quo' => array('foo' => 'foo Value',
+                                                   'quo' => 'quo Value')));
+    }
+
+    public function testIsValidKeepsContext()
+    {
+        $data = $this->_setup9697();
+        $this->assertTrue($this->form->isValid($data));
+    }
+
+    public function testIsValidPartialKeepsContext()
+    {
+        $data = $this->_setup9697();
+        $this->assertTrue($this->form->isValidPartial($data));
+    }
+
+    public function testGetValidValuesKeepsContext()
+    {
+        $data = $this->_setup9697();
+        $this->assertSame($data, $this->form->getValidValues($data));
+    }
+
     /**#@+
      * @group ZF-2988
      */

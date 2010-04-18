@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 21823 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-project">
     <title>Das Projekt erstellen</title>
@@ -152,7 +152,7 @@ quickstart
         <para>
             Die <classname>Bootstrap</classname> Klasse definiert welche Ressourcen und Komponenten
             zu initialisieren sind. Standardmäßig wird Zend Framework's <link
-                linkend="zend.controller.front">Front Controller</link>initialisiert und er
+                linkend="zend.controller.front">Front Controller</link> initialisiert und er
             verwendet <filename>application/controllers/</filename> als Standardverzeichnis in dem
             nach Action Controllern nachgesehen wird (mehr davon später). Die Klasse sieht wie
             folgt aus:
@@ -210,13 +210,13 @@ phpSettings.display_errors = 1
 
         <para>
             Verschiedene Dinge sollten über diese Datei gesagt werden. Erstens kann man, wenn
-            INI-artige Konfigurationen verwendet werden, direkt auf Konstanten referenzieren und Sie
-            erweitern; <constant>APPLICATION_PATH</constant> selbst ist eine Konstante. Zusätzlich
-            ist zu beachten das es verschiedene definierte Sektionen gibt: production, staging,
-            testing, und development. Die letzten drei verweisen auf Einstellungen der
-            "production" Umgebung. Das ist ein nützlicher Weg die Konfiguration zu organisieren und
-            stellt sicher das die richtigen Einstellungen in jeder Stufe der Anwendungsentwicklung
-            vorhanden sind.
+            <acronym>INI</acronym>-artige Konfigurationen verwendet werden, direkt auf Konstanten
+            referenzieren und Sie erweitern; <constant>APPLICATION_PATH</constant> selbst ist eine
+            Konstante. Zusätzlich ist zu beachten das es verschiedene definierte Sektionen gibt:
+            production, staging, testing, und development. Die letzten drei verweisen auf
+            Einstellungen der "production" Umgebung. Das ist ein nützlicher Weg die Konfiguration zu
+            organisieren und stellt sicher das die richtigen Einstellungen in jeder Stufe der
+            Anwendungsentwicklung vorhanden sind.
         </para>
     </sect2>
 

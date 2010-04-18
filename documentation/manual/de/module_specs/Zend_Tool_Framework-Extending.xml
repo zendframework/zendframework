@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
+<!-- EN-Revision: 21823 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.extending">
     <title>Extending and Configuring Zend_Tool_Framework</title>
@@ -133,9 +133,9 @@
                 Umgebungsvariable tun. Wenn die Umgebungsvariable
                 <constant>ZF_CONFIG_FILE</constant> gesetzt ist, dann wird dieser Wert als Ort der
                 Konfigurationsdatei verwendet die mit dem Konsolen Client zu verwenden ist.
-                <constant>ZF_CONFIG_FILE</constant> kann auf irgendeine INI, XML oder
-                <acronym>PHP</acronym> Datei zeigen die <classname>Zend_Config</classname> lesen
-                kann.
+                <constant>ZF_CONFIG_FILE</constant> kann auf irgendeine <acronym>INI</acronym>, XML
+                oder <acronym>PHP</acronym> Datei zeigen die <classname>Zend_Config</classname>
+                lesen kann.
             </para>
 
             <para>
@@ -151,11 +151,12 @@
 
             <para>
                 Die Konfigurationdatei sollte als <classname>Zend_Config</classname>
-                Konfigurationdatei, im Ini format, strukturiert sein und ohne zusätzliche definierte
-                Sektionen. Schlüssel des ersten Levels sollten vom Provider verwendet werden um nach
-                einem speziellen Wert zu suchen. Wenn der "Project" Provider zum Beispiel ein
-                "profiles" Verzeichnis erwartet, dann sollte typischerweise darunter verstanden
-                werden das er im folgenden Schlüssel Wertpaar gesucht wird:
+                Konfigurationdatei, im <acronym>INI</acronym> format, strukturiert sein und ohne
+                zusätzliche definierte Sektionen. Schlüssel des ersten Levels sollten vom Provider
+                verwendet werden um nach einem speziellen Wert zu suchen. Wenn der "Project"
+                Provider zum Beispiel ein "profiles" Verzeichnis erwartet, dann sollte
+                typischerweise darunter verstanden werden das er im folgenden Schlüssel Wertpaar
+                gesucht wird:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -163,12 +164,13 @@ project.profile = irgendein/pfad/zu/irgendeinem-verzeichnis
 ]]></programlisting>
 
             <para>
-                Der einzige reservierte Ini Präfix ist der Wert "php". Der "php" Präfix für Werte
-                ist reserviert um Namen und Werte, von wärend der Laufzeit setzbaren
-                <acronym>PHP</acronym> Werte, zu setzen, wie <property>include_path</property> oder
-                <property>error_reporting</property>. Um <property>include_path</property> oder
-                <property>error_reporting</property> mit einem Ini Wert zu überschreiben, würde ein
-                Entwickler folgendes setzen:
+                Der einzige reservierte <acronym>INI</acronym> Präfix ist der Wert "php". Der "php"
+                Präfix für Werte ist reserviert um Namen und Werte, von wärend der Laufzeit
+                setzbaren <acronym>PHP</acronym> Werte, zu setzen, wie
+                <property>include_path</property> oder <property>error_reporting</property>. Um
+                <property>include_path</property> oder <property>error_reporting</property> mit
+                einem <acronym>INI</acronym> Wert zu überschreiben, würde ein Entwickler folgendes
+                setzen:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -178,9 +180,9 @@ php.error_reporting = 1
 
             <important>
                 <para>
-                    Der reservierte Prefix "php" funktioniert nur mit INI Dateien. Man kann
-                    <acronym>PHP</acronym> INI Werte nicht in <acronym>PHP</acronym> oder XML
-                    Konfigurationen setzen.
+                    Der reservierte Prefix "php" funktioniert nur mit <acronym>INI</acronym>
+                    Dateien. Man kann <acronym>PHP</acronym> <acronym>INI</acronym> Werte nicht in
+                    <acronym>PHP</acronym> oder XML Konfigurationen setzen.
                 </para>
             </important>
         </sect3>

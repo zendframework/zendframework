@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21661 -->
-<!-- Reviewed: 21661 -->
+<!-- EN-Revision: 21823 -->
+<!-- Reviewed: 21823 -->
 <sect1 id="zend.translate.sourcecreation">
     <title>Erstellen von Quelldateien</title>
 
@@ -377,12 +377,12 @@ $translate->addTranslation(
         </example>
 
         <para>
-            <acronym>INI</acronym>-Dateien haben verschiedene Einschränkungen. Wenn ein Wert in einer
-            INI-Datei irgendein nicht alphanumerisches Zeichen enthält, muss er in doppelte
-            Anführungszeichen (<code>"</code>) eingeschlossen werden. Es gibt auch reservierte Wörter,
-            welche nicht als Schlüssel für INI-Dateien verwendet werden dürfen.
-            Diese enthalten: <constant>NULL</constant>, <code>yes</code>, <code>no</code>,
-            <constant>TRUE</constant> und <constant>FALSE</constant>. Die Werte
+            <acronym>INI</acronym>-Dateien haben verschiedene Einschränkungen. Wenn ein Wert in
+            einer <acronym>INI</acronym>-Datei irgendein nicht alphanumerisches Zeichen enthält,
+            muss er in doppelte Anführungszeichen (<code>"</code>) eingeschlossen werden. Es gibt
+            auch reservierte Wörter, welche nicht als Schlüssel für <acronym>INI</acronym>-Dateien
+            verwendet werden dürfen. Diese enthalten: <constant>NULL</constant>, <code>yes</code>,
+            <code>no</code>, <constant>TRUE</constant> und <constant>FALSE</constant>. Die Werte
             <constant>NULL</constant>, <code>no</code> und <constant>FALSE</constant> führen zu
             <code>""</code>, <code>yes</code> und <constant>TRUE</constant> resultieren in
             <code>1</code>. Die Zeichen <code>{}|&amp;~![()"</code> dürfen nirgendwo im Schlüssel

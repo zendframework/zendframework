@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21819 -->
+<!-- EN-Revision: 21822 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.service.windowsazure.storage.table">
     <title>Zend_Service_WindowsAzure_Storage_Table</title>
@@ -22,10 +22,11 @@
     </para>
 
     <para>
-        Es ist zu beachten das bei der Entwicklung der Tabellen Speicher (in der SDK von Windows
-        Azure) nicht alle Features unterstützt welche von dieser <acronym>API</acronym> angeboten
-        werden. Deshalb sind die Beispiele welche auf dieser Seite aufgeführt sind, dazu gedacht
-        auf Windows Azure Produktions Tabellen Speichern verwendet zu werden.
+        Es ist zu beachten das bei der Entwicklung der Tabellen Speicher (in der
+        <acronym>SDK</acronym> von Windows Azure) nicht alle Features unterstützt welche von dieser
+        <acronym>API</acronym> angeboten werden. Deshalb sind die Beispiele welche auf dieser Seite
+        aufgeführt sind, dazu gedacht auf Windows Azure Produktions Tabellen Speichern verwendet zu
+        werden.
     </para>
 
     <sect3 id="zend.service.windowsazure.storage.table.api">
@@ -681,10 +682,11 @@ $batch->commit();
             Wenn eine <acronym>PHP</acronym> Anwendung auf der Windows Azure Plattform in einem
             Load-Balanced Modus läuft (wenn 2 oder mehr Web Rollen Instanzen laufen), ist es
             wichtig dass <acronym>PHP</acronym> Session Daten zwischen mehreren Web Rollen Instanzen
-            verwendet werden können. Die Windows Azure SDK von <acronym>PHP</acronym> bietet die
-            Klasse <classname>Zend_Service_WindowsAzure_SessionHandler</classname> an welche den
-            Windows Azure Tabellen Speicher als Session Handler für <acronym>PHP</acronym>
-            Anwendungen verwendet.
+            verwendet werden können. Die Windows Azure <acronym>SDK</acronym> von
+            <acronym>PHP</acronym> bietet die Klasse
+            <classname>Zend_Service_WindowsAzure_SessionHandler</classname> an welche den Windows
+            Azure Tabellen Speicher als Session Handler für <acronym>PHP</acronym> Anwendungen
+            verwendet.
         </para>
 
         <para>

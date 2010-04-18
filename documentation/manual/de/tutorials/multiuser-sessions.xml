@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
+<!-- EN-Revision: 21823 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.multiuser.sessions">
     <title>User Session im Zend Framework managen</title>
@@ -70,9 +70,9 @@ resources.session.remember_me_seconds = 864000
             Wie man sieht sind die übergebenen Optionen die gleichen Optionen welche man in der
             ext/session Erweiterung von <acronym>PHP</acronym> erwarten würde zu finden. Diese
             Optionen stellen den Pfad zu den Session Dateien ein in dem Daten des Projekts
-            gespeichert werden. Da Ini Dateien zusätzlich Konstanten verwenden können, wird das
-            obige die Konstante APPLICATION_PATH verwenden und relativ auf das Verzeichnis der
-            Sessiondaten zeigen.
+            gespeichert werden. Da <acronym>INI</acronym> Dateien zusätzlich Konstanten verwenden
+            können, wird das obige die Konstante APPLICATION_PATH verwenden und relativ auf das
+            Verzeichnis der Sessiondaten zeigen.
         </para>
 
         <para>

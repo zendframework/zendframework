@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21819 -->
+<!-- EN-Revision: 21823 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.pubsubhubbub.introduction">
     <title>Zend_Feed_Pubsubhubbub</title>
@@ -687,8 +687,8 @@ class CallbackController extends Zend_Controller_Action
         <para>
             Aktuell kann das Hinzufügen der Route zu einem Parameter welcher den Schlüssel der an
             den Pfad angehängt wird mappen würde durchgeführt werden indem eine Routenkonfiguration
-            wie im kommenden INI formatierten Beispiel für die Verwendung mit dem Bootstrapping von
-            <classname>Zend_Application</classname> verwendet wird.
+            wie im kommenden <acronym>INI</acronym> formatierten Beispiel für die Verwendung mit dem
+            Bootstrapping von <classname>Zend_Application</classname> verwendet wird.
         </para>
 
         <programlisting language="dosini"><![CDATA[

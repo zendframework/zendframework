@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
+<!-- EN-Revision: 21823 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-layout">
     <title>Ein Layout erstellen</title>
@@ -69,7 +69,7 @@ resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
 ]]></programlisting>
 
     <para>
-        Die endgültige INI Datei sollte wie folgt aussehen:
+        Die endgültige <acronym>INI</acronym> Datei sollte wie folgt aussehen:
     </para>
 
     <programlisting language="ini"><![CDATA[

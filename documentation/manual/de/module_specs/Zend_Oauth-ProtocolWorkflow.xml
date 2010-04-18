@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21819 -->
+<!-- EN-Revision: 21826 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.oauth.introduction.protocol-workflow">
     <title>Workflow des Protokolls</title>
@@ -32,13 +32,13 @@
 
     <para>
         In der Zwischenzeit was TweenExpress beschäftigt. Bevor das Einverständnis von Twitter
-        gegeben wird, hat es eine HTTP Anfrage an den Service von Twitter geschickt und nach einem
-        neuen unauthorisierten Anfrage Token gefragt. Dieser Token ist aus der Perspektive von
-        Twitter nicht Benutzerspezifisch, aber TweetExpress man Ihn spezifisch für den aktuellen
-        Benutzer verwenden und sollte Ihn mit seinem Account verknüpfen und Ihn für eine
-        künftige Verwendung speichern. TweetExpress leitet den Benutzer nun zu Twitter um damit er
-        den Zugriff von TweetExpress erlauben kann. Die URL für diese Umleitung wird signiert indem
-        das Konsumentengeheimnis von TweetExpress verwendet wird und Sie enthält den
+        gegeben wird, hat es eine <acronym>HTTP</acronym> Anfrage an den Service von Twitter
+        geschickt und nach einem neuen unauthorisierten Anfrage Token gefragt. Dieser Token ist aus
+        der Perspektive von Twitter nicht Benutzerspezifisch, aber TweetExpress man Ihn spezifisch
+        für den aktuellen Benutzer verwenden und sollte Ihn mit seinem Account verknüpfen und Ihn
+        für eine künftige Verwendung speichern. TweetExpress leitet den Benutzer nun zu Twitter um
+        damit er den Zugriff von TweetExpress erlauben kann. Die URL für diese Umleitung wird
+        signiert indem das Konsumentengeheimnis von TweetExpress verwendet wird und Sie enthält den
         unauthorisierten Anfrage Token als Parameter.
     </para>
 

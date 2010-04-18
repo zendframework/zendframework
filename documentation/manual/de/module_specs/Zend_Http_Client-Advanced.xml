@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 21826 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - Fortgeschrittende Nutzung</title>
@@ -14,14 +14,15 @@
         </para>
 
         <para>
-            Gemäß dem HTTP/1.1 RFC sollten HTTP 301 und 302 Antworten vom Client behandelt werden,
-            indem die selbe Anfrage erneut an die angebene Stelle versendet wird - unter Verwendung
-            der selben Anfragemethode. Allerdings haben dies die meisten Clients nicht
-            implementiert und verwenden beim Umleiten eine GET Anfrage. Standardmäßig macht
-            <classname>Zend_Http_Client</classname> genau dasselbe - beim Umleiten einer 301 oder
-            302 Antwort, werden alle GET und POST Parameter zurückgesetzt und eine GET Anfrage wird
-            an die neue Stelle versandt. Dieses Verhalten kann durch Setzen des 'strictredirects'
-            Konfigurationsparameters auf das boolesche <constant>TRUE</constant> geändert werden.
+            Gemäß dem <acronym>HTTP</acronym>/1.1 RFC sollten <acronym>HTTP</acronym> 301 und 302
+            Antworten vom Client behandelt werden, indem die selbe Anfrage erneut an die angebene
+            Stelle versendet wird - unter Verwendung der selben Anfragemethode. Allerdings haben
+            dies die meisten Clients nicht implementiert und verwenden beim Umleiten eine GET
+            Anfrage. Standardmäßig macht <classname>Zend_Http_Client</classname> genau dasselbe -
+            beim Umleiten einer 301 oder 302 Antwort, werden alle GET und POST Parameter
+            zurückgesetzt und eine GET Anfrage wird an die neue Stelle versandt. Dieses Verhalten
+            kann durch Setzen des 'strictredirects' Konfigurationsparameters auf das boolesche
+            <constant>TRUE</constant> geändert werden.
 
             <example id="zend.http.client.redirections.example-1">
                 <title>Strikte Umleitung von 301 und 302 Antworten nach RFC 2616 erzwingen</title>
@@ -164,11 +165,11 @@ $client->setHeaders(array(
         <title>Dateiuploads</title>
 
         <para>
-            Man kann Dateien über HTTP hochladen, indem man die setFileUpload Methode verwendet.
-            Diese Methode nimmt einen Dateinamen als ersten Parameter, einen Formularnamen als
-            zweiten Parameter und Daten als einen dritten, optionalen Parameter entgegen. Wenn der
-            dritte Parameter <constant>NULL</constant> ist, wird angenommen, dass der erste
-            Dateinamen Parameter auf eine echte Datei auf der Platte verweist, und
+            Man kann Dateien über <acronym>HTTP</acronym> hochladen, indem man die setFileUpload
+            Methode verwendet. Diese Methode nimmt einen Dateinamen als ersten Parameter, einen
+            Formularnamen als zweiten Parameter und Daten als einen dritten, optionalen Parameter
+            entgegen. Wenn der dritte Parameter <constant>NULL</constant> ist, wird angenommen, dass
+            der erste Dateinamen Parameter auf eine echte Datei auf der Platte verweist, und
             <classname>Zend_Http_Client</classname> wird versuchen die Datei zu lesen und
             hochzuladen. Wenn der Daten Parameter nicht <constant>NULL</constant> ist, wird der
             erste Dateinamen Parameter als der Dateiname versendet, aber die Datei muss nicht
@@ -263,8 +264,8 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
         <title>HTTP Authentifizierung</title>
 
         <para>
-            Derzeit unterstützt <classname>Zend_Http_Client</classname> nur die Basis HTTP
-            Authentifizierung. Diese Funktion kann durch Verwendung der
+            Derzeit unterstützt <classname>Zend_Http_Client</classname> nur die Basis
+            <acronym>HTTP</acronym> Authentifizierung. Diese Funktion kann durch Verwendung der
             <methodname>setAuth()</methodname> Methode oder durch Spezifikation von Benutzername und
             Passwort in der URI genutzt werden. Die <methodname>setAuth()</methodname> Methode nimmt
             3 Parameter entgegen: den Benutzernamen, das Passwort und einen optionalen
@@ -419,7 +420,8 @@ $client->setRawData($fp, 'application/zip')->request('PUT');
         </para>
 
         <para>
-            Aktuell unterstützen nur PUT Anfragen das Senden von Streams zum HTTP Server.
+            Aktuell unterstützen nur PUT Anfragen das Senden von Streams zum <acronym>HTTP</acronym>
+            Server.
         </para>
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
+<!-- EN-Revision: 21826 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.currency">
     <title>Currency Helfer</title>
@@ -47,9 +47,9 @@
         Es gibt verschiedene Wege die gewünschte Währung auszuwählen. Erstens kann man einfach einen
         Währungs-String übergeben; alternativ kann man ein Gebietsschema spezifizieren. Der
         vorgeschlagene Weg ist die Verwendung eines Gebietsschemas, da diese Information automatisch
-        erkannt und über den HTTP Client Header ausgewählt wird wenn ein Benutzer auf die Anwendung
-        zugreift. Und es stellt sicher das die angebotene Währung mit seinem Gebietsschema
-        übereinstimmt.
+        erkannt und über den <acronym>HTTP</acronym> Client Header ausgewählt wird wenn ein Benutzer
+        auf die Anwendung zugreift. Und es stellt sicher das die angebotene Währung mit seinem
+        Gebietsschema übereinstimmt.
     </para>
 
     <note>

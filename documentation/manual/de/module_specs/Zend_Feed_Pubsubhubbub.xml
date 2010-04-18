@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21823 -->
+<!-- EN-Revision: 21826 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.pubsubhubbub.introduction">
     <title>Zend_Feed_Pubsubhubbub</title>
@@ -27,14 +27,14 @@
 
         <para>
             Pubsubhubbub hat Aufmerksamkeit erlangt weil es ein Pubsub Protokoll ist das einfach zu
-            implementieren ist und über HTTP arbeitet. Seine Philosophie ist es das traditionelle
-            Modell zu ersetzen indem Blog Feeds mit einem regulären Interfall abgefragt werden um
-            Aktualisierungen zu erkennen und zu empfangen. Abhängig von der Frequenz der Abfrage
-            kann es viel Zeit in Anspruch nehmen Aktualisierungen an interessierte Menschen bei
-            Sammelstellen bis zu Desktop Lesern, bekannt zu machen. Mit der Verwendung eines
-            Pubsub Systems werden Aktualisierungen nicht einfach von Abonnenten abgefragt sondern
-            an die Abonnenten geschickt, was jegliche Verzögerung ausschaltet. Aus diesem Grund
-            fungiert Pubsubhubbub als Teil von dem was als Echt-Zeit Web bekannt ist.
+            implementieren ist und über <acronym>HTTP</acronym> arbeitet. Seine Philosophie ist es
+            das traditionelle Modell zu ersetzen indem Blog Feeds mit einem regulären Interfall
+            abgefragt werden um Aktualisierungen zu erkennen und zu empfangen. Abhängig von der
+            Frequenz der Abfrage kann es viel Zeit in Anspruch nehmen Aktualisierungen an
+            interessierte Menschen bei Sammelstellen bis zu Desktop Lesern, bekannt zu machen. Mit
+            der Verwendung eines Pubsub Systems werden Aktualisierungen nicht einfach von Abonnenten
+            abgefragt sondern an die Abonnenten geschickt, was jegliche Verzögerung ausschaltet. Aus
+            diesem Grund fungiert Pubsubhubbub als Teil von dem was als Echt-Zeit Web bekannt ist.
         </para>
 
         <para>
@@ -111,11 +111,12 @@
             Sammlung, oder sogar ein Webservice mit einer öffentlichen Feed basierenden
             <acronym>API</acronym> sein. Damit diese Aktualisierungen zu den Abonnenten geschickt
             werden können, muss der Publizist alle seine unterstützten Hubs darüber informieren das
-            eine Aktualisierung stattgefunden hat, indem eine einfache HTTP POST Anfrage verwendet
-            wird, welche die URI oder das aktualisierte Thema enthält (z.B. den aktualisierten RSS
-            oder Atom Feed). Der Hub bestätigt den Empfang der Benachrichtigung, holt den
-            aktualisierten Feed, und leitet alle Aktualisierungen an alle Abonnenten weiter welche
-            sich bei diesem Hub für Aktualisierungen für den relevanten Feed angemeldet haben.
+            eine Aktualisierung stattgefunden hat, indem eine einfache <acronym>HTTP</acronym> POST
+            Anfrage verwendet wird, welche die URI oder das aktualisierte Thema enthält (z.B. den
+            aktualisierten RSS oder Atom Feed). Der Hub bestätigt den Empfang der Benachrichtigung,
+            holt den aktualisierten Feed, und leitet alle Aktualisierungen an alle Abonnenten weiter
+            welche sich bei diesem Hub für Aktualisierungen für den relevanten Feed angemeldet
+            haben.
         </para>
 
         <para>
@@ -139,10 +140,11 @@
             enthält eine Anzahl von Fehlern welche die URLs des Hubs enthalten, damit
             Benachrichtigungen stäter wieder ausgeführt oder protokolliert werden können wenn
             irgendeine Benachrichtigung fehlschlägt. Jedes resultierende Fehlerarray enthält auch
-            einen "response" Schlüssel welche das betreffende HTTP Antwortobjekt enthält. In Falle
-            irgendeines Fehlers wird empfohlen die Operation für den fehlgeschlagenen Hub Endpunkt
-            in Zukunft zumindest noch einmal zu versuchen. Das kann die Verwendung einer geplanten
-            Aufgabe für diesen Zweck oder einer Job Queue wenn solche extra Schritte optional sind.
+            einen "response" Schlüssel welche das betreffende <acronym>HTTP</acronym> Antwortobjekt
+            enthält. In Falle irgendeines Fehlers wird empfohlen die Operation für den
+            fehlgeschlagenen Hub Endpunkt in Zukunft zumindest noch einmal zu versuchen. Das kann
+            die Verwendung einer geplanten Aufgabe für diesen Zweck oder einer Job Queue wenn solche
+            extra Schritte optional sind.
         </para>
 
         <programlisting language="php"><![CDATA[

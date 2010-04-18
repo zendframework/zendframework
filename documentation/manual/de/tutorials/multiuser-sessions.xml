@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21823 -->
+<!-- EN-Revision: 21826 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.multiuser.sessions">
     <title>User Session im Zend Framework managen</title>
@@ -8,11 +8,12 @@
         <title>Einführung in Sessions</title>
 
         <para>
-            Der Erfolg des Webs ist tief verwurzelt im Protokoll welches das Web antreibt: HTTP.
-            HTTP über TCP ist von seiner Natur her Statuslos, was bedeutet dass auch das Web selbst
-            Statuslos ist. Wärend dieser Aspekt einer der dominierenden Faktoren dafür ist warum das
-            Web ein so populäres Medium geworden ist, verursacht es auch einige interessante
-            Probleme für Entwickler welche das Web als Anwendungsplattform verwenden wollen.
+            Der Erfolg des Webs ist tief verwurzelt im Protokoll welches das Web antreibt:
+            <acronym>HTTP</acronym>. <acronym>HTTP</acronym> über TCP ist von seiner Natur her
+            Statuslos, was bedeutet dass auch das Web selbst Statuslos ist. Wärend dieser Aspekt
+            einer der dominierenden Faktoren dafür ist warum das Web ein so populäres Medium
+            geworden ist, verursacht es auch einige interessante Probleme für Entwickler welche das
+            Web als Anwendungsplattform verwenden wollen.
         </para>
 
         <para>

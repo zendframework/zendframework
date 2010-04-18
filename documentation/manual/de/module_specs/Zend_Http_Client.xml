@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
+<!-- EN-Revision: 21826 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client">
     <title>Einführung</title>
@@ -139,7 +139,8 @@ $client->setConfig($config);
                             <entry>httpversion</entry>
 
                             <entry>
-                                Version des HTTP Protokolls (normalerweise '1.1' oder '1.0')
+                                Version des <acronym>HTTP</acronym> Protokolls (normalerweise '1.1'
+                                oder '1.0')
                             </entry>
 
                             <entry>string</entry>
@@ -209,8 +210,9 @@ $client->setConfig($config);
         <title>Durchführen von einfachen HTTP Anfragen</title>
 
         <para>
-            Das Durchführen von einfachen HTTP Anfragen kann sehr leicht durch Verwendung der
-            request() Methode gemacht werden und benötigt selten mehr als drei Codezeilen:
+            Das Durchführen von einfachen <acronym>HTTP</acronym> Anfragen kann sehr leicht durch
+            Verwendung der request() Methode gemacht werden und benötigt selten mehr als drei
+            Codezeilen:
 
             <example id="zend.http.client.basic-requests.example-1">
                 <title>Durchführen einer einfache GET Anfrage</title>
@@ -222,8 +224,8 @@ $response = $client->request();
             </example>
 
             Die request() Methode akzeptiert einen optionalen Parameter - die Anfragemethode.
-            Diese kann GET, POST, PUT, HEAD, DELETE, TRACE, OPTIONS oder CONNECT sein, wie im HTTP
-            Protokoll definiert.
+            Diese kann GET, POST, PUT, HEAD, DELETE, TRACE, OPTIONS oder CONNECT sein, wie im
+            <acronym>HTTP</acronym> Protokoll definiert.
 
             <footnote>
                 <para>
@@ -260,14 +262,13 @@ $response = $client->request();
         <title>Hinzufügen von GET und POST Parametern</title>
 
         <para>
-            Das Hinzufügen von GET Parametern zu einer HTTP Anfrage ist recht einfach und kann
-            entweder über die Angabe als Teil der URL oder durch Verwendung der setParameterGet()
-            Methode erfolgen.
-            Diese Methode benötigt den Namen des GET Parameter als seinen ersten Parameter und den
-            Wert des GET Parameter als seinen zweiten Parameter. Zur Erleichterung akzeptiert die
-            setParameterGet() Methode auch ein einzelnes assoziatives Array mit GET Parameter als
-            Name => Wert Variablen, was beim setzen von mehreren GET Parametern komfortabler sein
-            kann.
+            Das Hinzufügen von GET Parametern zu einer <acronym>HTTP</acronym> Anfrage ist recht
+            einfach und kann entweder über die Angabe als Teil der URL oder durch Verwendung der
+            setParameterGet() Methode erfolgen. Diese Methode benötigt den Namen des GET Parameter
+            als seinen ersten Parameter und den Wert des GET Parameter als seinen zweiten Parameter.
+            Zur Erleichterung akzeptiert die setParameterGet() Methode auch ein einzelnes
+            assoziatives Array mit GET Parameter als Name => Wert Variablen, was beim setzen von
+            mehreren GET Parametern komfortabler sein kann.
 
             <example id="zend.http.client.parameters.example-1">
                 <title>Setzen von GET Parametern</title>

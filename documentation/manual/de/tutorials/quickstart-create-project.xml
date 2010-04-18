@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21823 -->
+<!-- EN-Revision: 21826 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-project">
     <title>Das Projekt erstellen</title>
@@ -239,9 +239,9 @@ phpSettings.display_errors = 1
         <para>
             Typischerweise benötigt man immer einen <classname>IndexController</classname>, der ein
             Fallback Controller ist und auch als Homepage der Site arbeitet, und einen
-            <classname>ErrorController</classname> der verwendet wird um Dinge wie HTTP 404 Fehler
-            zu zeigen (wenn der Controller oder die Action nicht gefunden wird) und HTTP 500 Fehler
-            (Anwendungsfehler).
+            <classname>ErrorController</classname> der verwendet wird um Dinge wie
+            <acronym>HTTP</acronym> 404 Fehler zu zeigen (wenn der Controller oder die Action nicht
+            gefunden wird) und <acronym>HTTP</acronym> 500 Fehler (Anwendungsfehler).
         </para>
 
         <para>

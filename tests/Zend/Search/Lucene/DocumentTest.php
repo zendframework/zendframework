@@ -55,6 +55,23 @@ require_once 'PHPUnit/Framework/TestCase.php';
  */
 class Zend_Search_Lucene_DocumentTest extends PHPUnit_Framework_TestCase
 {
+
+    private function _clearDirectory($dirName)
+    {
+        if (!file_exists($dirName) || !is_dir($dirName))  {
+            return;
+        }
+
+        // remove files from temporary direcytory
+        $dir = opendir($dirName);
+        while (($file = readdir($dir)) !== false) {
+            if (!is_dir($dirName . '/' . $file)) {
+                @unlink($dirName . '/' . $file);
+            }
+        }
+        closedir($dir);
+    }
+
     public function testCreate()
     {
         $document =  new Zend_Search_Lucene_Document();
@@ -169,6 +186,32 @@ class Zend_Search_Lucene_DocumentTest extends PHPUnit_Framework_TestCase
                                 'faq.translators-revision-tracking.html',
                                 'index.html',
                                 'contributing.html'));
+    }
+
+
+    /**
+     * @group ZF-4252
+     */
+    public function testHtmlInlineTagsIndexing()
+    {
+        $index = Zend_Search_Lucene::create(dirname(__FILE__) . '/_index/_files');
+
+        $htmlString = '<html><head><title>Hello World</title></head>'
+                    . '<body><b>Zend</b>Framework' . "\n" . ' <div>Foo</div>Bar ' . "\n"
+                    . ' <strong>Test</strong></body></html>';
+
+        $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
+
+        $index->addDocument($doc);
+
+        $hits = $index->find('FooBar');
+        $this->assertEquals(count($hits), 0);
+
+        $hits = $index->find('ZendFramework');
+        $this->assertEquals(count($hits), 1);
+        
+        unset($index);
+        $this->_clearDirectory(dirname(__FILE__) . '/_index/_files');
     }
 
     public function testHtmlNoFollowLinks()

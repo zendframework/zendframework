@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.overview">
     <title>Überblick</title>
@@ -86,7 +86,7 @@
             Es liegt in der Verantwortung deiner Anwendung, den Indexer zu kontrollieren. Das
             bedeutet, dass die Daten aus jeder Quelle indiziert werden können, die von deiner
             Anwendung aus ansprechbar ist. Zum Beispiel könnten dies das Dateisystem, eine
-            Datenbank, ein HTML Formular, usw. sein.
+            Datenbank, ein <acronym>HTML</acronym> Formular, usw. sein.
         </para>
 
         <para>
@@ -298,8 +298,9 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
         <title>HTML Dokumente</title>
 
         <para>
-            <classname>Zend_Search_Lucene</classname> bietet ein HTML Parsing Feature. Dokumente
-            können direkt von einer HTML Datei oder String erzeugt werden:
+            <classname>Zend_Search_Lucene</classname> bietet ein <acronym>HTML</acronym> Parsing
+            Feature. Dokumente können direkt von einer <acronym>HTML</acronym> Datei oder String
+            erzeugt werden:
 
             <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTMLFile($filename);
@@ -313,10 +314,10 @@ $index->addDocument($doc);
         <para>
             Die <classname>Zend_Search_Lucene_Document_Html</classname> Klasse verwendet die
             <methodname>DOMDocument::loadHTML()</methodname> und die
-            <methodname>DOMDocument::loadHTMLFile()</methodname> Methode um die HTML Quelle zu
-            analysieren, deswegen benötigt Sie kein gut geformtes HTML noch ein
-            <acronym>XHTML</acronym>. Auf der anderen Seite ist es abhängig von der angegebenen
-            Codierung im "meta http-equiv" Tag Header.
+            <methodname>DOMDocument::loadHTMLFile()</methodname> Methode um die
+            <acronym>HTML</acronym> Quelle zu analysieren, deswegen benötigt Sie kein gut
+            geformtes <acronym>HTML</acronym> noch ein <acronym>XHTML</acronym>. Auf der anderen
+            Seite ist es abhängig von der angegebenen Codierung im "meta http-equiv" Tag Header.
         </para>
 
         <para>
@@ -330,8 +331,8 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            Das 'body' Feld ist aktuell der Inhalt vom Body der HTML Datei oder des Strings. Er
-            enthält keine Skripte, Kommentare oder Attribute.
+            Das 'body' Feld ist aktuell der Inhalt vom Body der <acronym>HTML</acronym> Datei oder
+            des Strings. Er enthält keine Skripte, Kommentare oder Attribute.
         </para>
 
         <para>
@@ -346,8 +347,8 @@ $index->addDocument($doc);
         <para>
             Der dritte Parameter der <methodname>loadHTML()</methodname> und
             <methodname>loadHTMLFile()</methodname> Methoden spezifiziert optional die Kodierung des
-            Quell- HTML Dokuments. Er wird verwendet wenn die Kodierung nicht durch die Angabe des
-            Content-type MetaTags HTTP-EQUIV spezifiziert ist.
+            Quell- <acronym>HTML</acronym> Dokuments. Er wird verwendet wenn die Kodierung nicht
+            durch die Angabe des Content-type MetaTags HTTP-EQUIV spezifiziert ist.
         </para>
 
         <para>

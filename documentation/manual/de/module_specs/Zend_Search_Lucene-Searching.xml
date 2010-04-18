@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.searching">
     <title>Einen Index durchsuchen</title>
@@ -428,9 +428,9 @@ public function highlightExtended($words, $callback, $params = array())
 
             <footnote>
                 <para>
-                    Der erste ist ein HTML Fragment für das Highlighting und die anderen sind
-                    abhängig vom Verhalten des Callbacks. Der Rückgabewert ist ein highlighted
-                    HTML Fragment.
+                    Der erste ist ein <acronym>HTML</acronym> Fragment für das Highlighting und die
+                    anderen sind abhängig vom Verhalten des Callbacks. Der Rückgabewert ist ein
+                    highlighted <acronym>HTML</acronym> Fragment.
                 </para>
             </footnote>
 
@@ -440,8 +440,8 @@ public function highlightExtended($words, $callback, $params = array())
 
             <footnote>
                 <para>
-                    In beiden Fällen wird das zurückgegebene HTML automatisch in gültiges
-                    <acronym>XHTML</acronym> transformiert.
+                    In beiden Fällen wird das zurückgegebene <acronym>HTML</acronym> automatisch in
+                    gültiges <acronym>XHTML</acronym> transformiert.
                 </para>
             </footnote>
         </para>
@@ -498,9 +498,9 @@ highlightedHTML = $query->highlightMatches($sourceHTML);
         </para>
 
         <para>
-            Der optionale zweite Parameter ist die standardmäßige Kodierung des HTML Dokuments.
-            Er wird verwendet wenn die Kodierung nicht, durch die Verwendung des Content-type
-            MetaTags HTTP-EQUIV, spezifiziert ist.
+            Der optionale zweite Parameter ist die standardmäßige Kodierung des
+            <acronym>HTML</acronym> Dokuments. Er wird verwendet wenn die Kodierung nicht, durch
+            die Verwendung des Content-type MetaTags HTTP-EQUIV, spezifiziert ist.
         </para>
 
         <para>
@@ -562,8 +562,8 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
         <para>
             <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code>
             hat ein ähnliches Verhalten. Der einzige Unterschied besteht darin das er eine
-            Eingabe entgegen nimmt, und HTML Fragmente ohne die &lt;>HTML>, &lt;HEAD>, &lt;BODY>
-            Tags zurückgibt. Trotzdem werden Fragmente automatisch in gültiges
+            Eingabe entgegen nimmt, und <acronym>HTML</acronym> Fragmente ohne die &lt;>HTML>,
+            &lt;HEAD>, &lt;BODY> Tags zurückgibt. Trotzdem werden Fragmente automatisch in gültiges
             <acronym>XHTML</acronym> transformiert.
         </para>
     </sect2>

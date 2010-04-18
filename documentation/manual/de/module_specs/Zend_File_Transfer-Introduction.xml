@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21606 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.introduction">
     <title>Zend_File_Transfer</title>
@@ -65,7 +65,7 @@
         <para>
             Der Bequemlichkeit halber kann
             <link linkend="zend.form.standardElements.file">Zend_Form_Element_File</link> verwendet
-            werden statt das HTML manuell zu erstellen.
+            werden statt das <acronym>HTML</acronym> manuell zu erstellen.
         </para>
 
         <para>

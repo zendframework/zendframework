@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.form.decorators.individual">
     <title>Darstellung individueller Decorators</title>
@@ -238,8 +238,9 @@ foreach ($form->getElements() as $element) {
 ]]></programlisting>
 
     <para>
-        Wenn man obiges View Skript verwendet erhält man voraussichtlich das folgende HTML
-        (angenähert da das HTML von anbei formatiert ist):
+        Wenn man obiges View Skript verwendet erhält man voraussichtlich das folgende
+        <acronym>HTML</acronym> (angenähert da das <acronym>HTML</acronym> von anbei formatiert
+        ist):
     </para>
 
     <programlisting language="html"><![CDATA[

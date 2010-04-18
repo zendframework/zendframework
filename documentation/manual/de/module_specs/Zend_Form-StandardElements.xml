@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardElements">
     <title>Standard Form Elemente die mit dem Zend Framework ausgeliefert werden</title>
 
     <para>
-        Zend Framework wird mit konkreten Element Klassen ausgeliefert welche die meisten HTML
-        Form Elemente abdecken. Die meisten spezifizieren einfach einen speziellen View Helfer
-        zur Verwendung wenn das Element dekoriert wird, aber einige bieten zusätzliche
-        Funktionalitäten an. Nachfolgend ist eine Liste aller solcher Klassen, sowie eine
-        Beschreibung der Funktionalität die Sie anbieten.
+        Zend Framework wird mit konkreten Element Klassen ausgeliefert welche die meisten
+        <acronym>HTML</acronym> Form Elemente abdecken. Die meisten spezifizieren einfach einen
+        speziellen View Helfer zur Verwendung wenn das Element dekoriert wird, aber einige bieten
+        zusätzliche Funktionalitäten an. Nachfolgend ist eine Liste aller solcher Klassen, sowie
+        eine Beschreibung der Funktionalität die Sie anbieten.
     </para>
 
     <sect2 id="zend.form.standardElements.button">
         <title>Zend_Form_Element_Button</title>
 
         <para>
-            Wird für die Erstellung von HTML Button Elementen verwendet wobei
+            Wird für die Erstellung von <acronym>HTML</acronym> Button Elementen verwendet wobei
             <classname>Zend_Form_Element_Button</classname>
             <link linkend="zend.form.standardElements.submit">Zend_Form_Element_Submit</link>
             erweitert, und seine eigene Funktionalität hinzufügt. Sie spezifiziert den 'formButton'
@@ -132,8 +132,8 @@ $element = new Zend_Form_Element_Captcha('foo', array(
         <title>Zend_Form_Element_Checkbox</title>
 
         <para>
-            HTML Checkboxen erlauben es spezifische Werte zurückzugeben, arbeiten aber
-            grundsätzlich als Boolean. Wenn Sie angehackt sind, wird der Wert der Checkbox
+            <acronym>HTML</acronym> Checkboxen erlauben es spezifische Werte zurückzugeben, arbeiten
+            aber grundsätzlich als Boolean. Wenn Sie angehackt sind, wird der Wert der Checkbox
             übertragen. Wenn Sie nicht angehackt sind, wird nichts übertragen. Intern erzwingt
             <classname>Zend_Form_Element_Checkbox</classname> diesen Status.
         </para>

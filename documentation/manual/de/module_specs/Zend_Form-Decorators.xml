@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21606 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.decorators">
     <title>Erstellen von eigenem Form Markup durch Zend_Form_Decorator</title>
@@ -183,8 +183,8 @@ interface Zend_Form_Decorator_Interface
         <para>
             Als Beispiel nehmen wir an, dass wir die Anzahl an verwendeten Dekoratoren verringern
             wollen, und einen "gemeinsamen" Dekorator erstellen der die Darstellung von Label,
-            Element, jeglicher Fehlermeldungen, und Beschreibung in einem HTML 'div'
-            übernimmt. So ein 'gemeinsamer' Dekorator kann wie folgt erstellt werden:
+            Element, jeglicher Fehlermeldungen, und Beschreibung in einem <acronym>HTML</acronym>
+            'div' übernimmt. So ein 'gemeinsamer' Dekorator kann wie folgt erstellt werden:
         </para>
 
         <programlisting language="php"><![CDATA[

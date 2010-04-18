@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
     <title>Einführung</title>
@@ -26,19 +26,21 @@
         <para>
             Diese Basisdefinition eines Filter kann erweitert werden um generelle Umwandlungen über
             eine Eingabe zu beinhalten. Eine übliche Umwandlung die in Web Anwendungen durchgeführt
-            wird, ist das auskommentieren von HTML Entititäten. Zum Beispiel, wenn ein Formular Feld
-            automatisch mit einer unsicheren Eingabe übergeben wird (z.B. von einem Web Browser),
-            sollte dieser Wert entweder frei von HTML Entititäten sein oder nur auskommentierte HTML
-            Entititäten enthalten, um unerwünschtes Verhalten und Sicherheitslöcher zu vermeiden. Um
-            diesen Anforderungen gerecht zu werden müssen HTML Entititäten die in der Eingabe
+            wird, ist das auskommentieren von <acronym>HTML</acronym> Entititäten. Zum Beispiel,
+            wenn ein Formular Feld automatisch mit einer unsicheren Eingabe übergeben wird (z.B. von
+            einem Web Browser), sollte dieser Wert entweder frei von <acronym>HTML</acronym>
+            Entititäten sein oder nur auskommentierte <acronym>HTML</acronym> Entititäten enthalten,
+            um unerwünschtes Verhalten und Sicherheitslöcher zu vermeiden. Um diesen Anforderungen
+            gerecht zu werden müssen <acronym>HTML</acronym> Entititäten die in der Eingabe
             vorkommen entweder entfernt oder auskommentiert werden. Natürlich hängt es von der
-            Situation ab welcher Weg mehr zutrifft. Ein Filter der HTML Entititäten entfernt
-            operiert innerhalb der Beschreibung der ersten Definition von Filter - ein Operator der
-            ein Subset von einer Eingabe produziert. Ein Filter der HTML Entititäten auskommentiert,
-            wandelt die Eingabe um (z.B. "&amp;" wird umgewandelt in "&amp;amp;"). Solche Fälle zu
-            unterstützen ist für Web Entwickler sehr wichtig und "zu filtern", im Kontext der
-            Verwendung von <classname>Zend_Filter</classname>, bedeutet einige Umwandlungen über
-            Eingabedaten durchzuführen.
+            Situation ab welcher Weg mehr zutrifft. Ein Filter der <acronym>HTML</acronym>
+            Entititäten entfernt operiert innerhalb der Beschreibung der ersten Definition von
+            Filter - ein Operator der ein Subset von einer Eingabe produziert. Ein Filter der
+            <acronym>HTML</acronym> Entititäten auskommentiert, wandelt die Eingabe um (z.B. "&amp;"
+            wird umgewandelt in "&amp;amp;"). Solche Fälle zu unterstützen ist für Web Entwickler
+            sehr wichtig und "zu filtern", im Kontext der Verwendung von
+            <classname>Zend_Filter</classname>, bedeutet einige Umwandlungen über Eingabedaten
+            durchzuführen.
         </para>
     </sect2>
 

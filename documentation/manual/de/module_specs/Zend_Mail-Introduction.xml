@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.introduction">
     <title>Einführung</title>
@@ -42,7 +42,7 @@ $mail->send();
             <para>
                 Um eine E-Mail mit <classname>Zend_Mail</classname> zu versenden, muß mindestens ein
                 Empfänger, ein Versender (z.B., mit <methodname>setFrom()</methodname>) und ein
-                Nachrichtentext (Text und/oder HTML) angeben werden.
+                Nachrichtentext (Text und/oder <acronym>HTML</acronym>) angeben werden.
             </para>
         </note>
 

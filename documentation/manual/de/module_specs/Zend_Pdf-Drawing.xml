@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.drawing">
     <title>Zeichnen</title>
@@ -50,8 +50,8 @@ $color3 = new Zend_Pdf_Color_Cmyk($c, $m, $y, $k);
 ]]></programlisting>
 
         <para>
-            Die HTML Farben werden auch durch die Klasse <classname>Zend_Pdf_Color_Html</classname>
-            bereitgestellt:
+            Die <acronym>HTML</acronym> Farben werden auch durch die Klasse
+            <classname>Zend_Pdf_Color_Html</classname> bereitgestellt:
         </para>
 
         <programlisting language="php"><![CDATA[

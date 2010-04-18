@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.markup.renderers">
     <title>Zend_Markup Renderer</title>
@@ -50,9 +50,9 @@ echo $bbcode->render('my [foo]markup[/foo]');
         </para>
 
         <para>
-            Einige Renderer (wie der HTML Renderer) enthalten auch Unterstützung für einen 'markup'
-            Parameter. Dieser ersetzt die 'start' und 'end' Parameter, und er stellt die Markups
-            inklusive einiger Standardattribute und dem schließenden Markup dar.
+            Einige Renderer (wie der <acronym>HTML</acronym> Renderer) enthalten auch Unterstützung
+            für einen 'markup' Parameter. Dieser ersetzt die 'start' und 'end' Parameter, und er
+            stellt die Markups inklusive einiger Standardattribute und dem schließenden Markup dar.
         </para>
 
         <sect3 id="zend.markup.renderers.add.callback">

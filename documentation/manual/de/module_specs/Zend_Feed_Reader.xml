@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -455,9 +455,9 @@ foreach ($links as $link) {
             Objekt wird, für jede Kategorie, drei Felder an Daten enthalten: term, schema und label.
             "term" ist der grundsätzliche Name der Kategorie, oft Maschinen lesbar (normalerweise
             ein URI Identifikator) und in RSS 2.0 auch bekannt als "domain". "label" ist ein
-            menschlich lesbarer Kategorie Name welcher Html Entities unterstützt. In RSS 2.0 gibt es
-            kein Label Attribut deshalb wird es der Bequemlichkeit halber  immer auf den selben Wert
-            gesetzt wie der Ausdruck.
+            menschlich lesbarer Kategorie Name welcher <acronym>HTML</acronym> Entities unterstützt.
+            In RSS 2.0 gibt es kein Label Attribut deshalb wird es der Bequemlichkeit halber immer
+            auf den selben Wert gesetzt wie der Ausdruck.
         </para>
 
         <para>
@@ -697,10 +697,10 @@ $labels = $categories->getValues();
                             kompletten Feed enthalten sind. Die unterstützten Felder enthalten
                             "term" (den Maschinen lesbaren Namen der Kategorie), "scheme"
                             (dem Schema der Kategorisierung für diese Kategorie), und "label" (ein
-                            Html dekodierter menschlich lesbarer Kategoriename). Wenn irgendeines
-                            der drei Felder abwesend ist, werden Sie entweder auf die näheste
-                            vorhandene Alternative gesetzt, oder im Fall von "scheme", auf
-                            <constant>NULL</constant> gesetzt.
+                            <acronym>HTML</acronym> dekodierter menschlich lesbarer Kategoriename).
+                            Wenn irgendeines der drei Felder abwesend ist, werden Sie entweder auf
+                            die näheste vorhandene Alternative gesetzt, oder im Fall von "scheme",
+                            auf <constant>NULL</constant> gesetzt.
                         </entry>
                     </row>
                 </tbody>
@@ -1048,11 +1048,11 @@ $labels = $categories->getValues();
                             Objekt zurück welches die Details jeder Kategorie enthält welche mit dem
                             Eintrag assoziiert ist. Die unterstützten Felder sind "term" (der
                             Maschinen lesbare Name der Kategorie), "scheme" (der Name des Schemas
-                            der Kategorisierung für diese Kategorie), und "label" (ein Html
-                            dekodierter menschlich lesbarer Name der Kategorie). Wenn eines der drei
-                            Felder nicht vorhanden ist, werden Sie entweder auf den näheste
-                            vorhandene Alternative, oder im Fall von "scheme", auf
-                            <constant>NULL</constant> gesetzt.
+                            der Kategorisierung für diese Kategorie), und "label" (ein
+                            <acronym>HTML</acronym> dekodierter menschlich lesbarer Name der
+                            Kategorie). Wenn eines der drei Felder nicht vorhanden ist, werden Sie
+                            entweder auf den näheste vorhandene Alternative, oder im Fall von
+                            "scheme", auf <constant>NULL</constant> gesetzt.
                         </entry>
                     </row>
                 </tbody>

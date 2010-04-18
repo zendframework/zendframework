@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.progressbar.adapter.jspush">
     <title>Zend_ProgressBar_Adapter_JsPush</title>
@@ -37,12 +37,13 @@
 
     <para>
         Die Verwendung dieses Adapters ist recht einfach. Zuerst wird ein Fortschrittsbalken im
-        Browser erstellt, entweder mit JavaScript oder mit vorher erstelltem reinen HTML. Dann
-        definiert man die Update Methode und optional die Finish Methode in JavaScript, die beide
-        ein Json Objekt als einziges Argument nehmen. Das wird die Webseite mit einem lange
-        laufenden Prozess, in einem versteckten <code>iframe</code> oder <code>object</code> Tag,
-        aufgerufen. Wärend der Prozess läuft wird der Adapter die Update Methode bei jedem Update
-        mit einem Json Objekt aufgerufen, das die folgenden Parameter enthält:
+        Browser erstellt, entweder mit JavaScript oder mit vorher erstelltem reinen
+        <acronym>HTML</acronym>. Dann definiert man die Update Methode und optional die Finish
+        Methode in JavaScript, die beide ein Json Objekt als einziges Argument nehmen. Das wird die
+        Webseite mit einem lange laufenden Prozess, in einem versteckten <code>iframe</code> oder
+        <code>object</code> Tag, aufgerufen. Wärend der Prozess läuft wird der Adapter die Update
+        Methode bei jedem Update mit einem Json Objekt aufgerufen, das die folgenden Parameter
+        enthält:
     </para>
 
     <itemizedlist>
@@ -67,8 +68,8 @@
         <title>Grundsätzliches Beispiel für den Client-seitigen Teil</title>
 
         <para>
-            Dieses Beispiel zeigt ein grundsätzliches Setup von HTML, <acronym>CSS</acronym> und
-            JavaScript für den JsPush Adapter
+            Dieses Beispiel zeigt ein grundsätzliches Setup von <acronym>HTML</acronym>,
+            <acronym>CSS</acronym> und JavaScript für den JsPush Adapter
         </para>
 
         <programlisting language="html"><![CDATA[

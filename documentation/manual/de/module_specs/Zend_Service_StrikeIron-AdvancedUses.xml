@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron.advanced-uses">
     <title>Zend_Service_StrikeIron: Erweiterte Verwendung</title>
@@ -48,7 +48,8 @@ echo $result->listingName;
             Auch <ulink url="http://janschneider.de">Jan Schneider</ulink> vom
             <ulink url="http://horde.org">Horde Projekt</ulink> hat eine <ulink
                 url="http://janschneider.de/news/25/268">kleine <acronym>PHP</acronym>
-                Routine</ulink> geschrieben die eine WSDL Datei in lesbares HTML konvertiert.
+                Routine</ulink> geschrieben die eine WSDL Datei in lesbares <acronym>HTML</acronym>
+            konvertiert.
         </para>
 
         <para>

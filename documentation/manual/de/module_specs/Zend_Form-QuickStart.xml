@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21614 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.quickstart">
     <title>Schnellstart mit Zend_Form</title>
@@ -46,10 +46,11 @@ $form->setAction('/resource/process')
         </para>
 
         <para>
-            Man kann zusätzliche HTML Attribute für das <emphasis>&lt;form&gt;</emphasis> Tag
-            setzen, indem die <methodname>setAttrib()</methodname> oder
-            <methodname>setAttribs()</methodname> Methoden verwendet werden. Zum Beispiel wenn man
-            die ID setzen will, setzt man das "<property>id</property>" Attribut:
+            Man kann zusätzliche <acronym>HTML</acronym> Attribute für das
+            <emphasis>&lt;form&gt;</emphasis> Tag setzen, indem die
+            <methodname>setAttrib()</methodname> oder <methodname>setAttribs()</methodname> Methoden
+            verwendet werden. Zum Beispiel wenn man die ID setzen will, setzt man das
+            "<property>id</property>" Attribut:
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21824 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: 21661 -->
 <sect1 id="zend.translate.adapter">
     <title>Adapter für Zend_Translate</title>
@@ -330,10 +330,10 @@
 
             <para>
                 Der XmlTm Adapter ist ein Adapter der von Kunden verwendet wird, die das Layout
-                selbst ändern wollen. XmlTm ist ein Format, das es erlaubt den kompletten HTML Code
-                in die Übersetzungsquelle zu inkludieren, so dass die Übersetzung mit dem Layout
-                verknüpft ist. XmlTm ist ein <acronym>XML</acronym> Dateibasiertes Format, welches
-                ähnlich wie XLIFF, aber nicht so einfach lesbar ist.
+                selbst ändern wollen. XmlTm ist ein Format, das es erlaubt den kompletten
+                <acronym>HTML</acronym> Code in die Übersetzungsquelle zu inkludieren, so dass die
+                Übersetzung mit dem Layout verknüpft ist. XmlTm ist ein <acronym>XML</acronym>
+                Dateibasiertes Format, welches ähnlich wie XLIFF, aber nicht so einfach lesbar ist.
             </para>
 
             <para>

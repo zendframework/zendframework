@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>View Helfer</title>
@@ -60,8 +60,8 @@
             <classname>Zend_View</classname> enthält bereits einige vorhandene Helferklassen, die
             sich alle auf die Erstellung von Formularelementen beziehen und die notwendige
             Maskierung der Ausgaben automatisch vornehmen. Zusätzlich gibt es Helfer zum Erstellen
-            Routen-basierter <acronym>URL</acronym>S and HTML Listen, genauso wie für das
-            Deklarieren von Variablen. Die aktuell gelieferten Helfer beinhalten:
+            Routen-basierter <acronym>URL</acronym>S and <acronym>HTML</acronym> Listen, genauso wie
+            für das Deklarieren von Variablen. Die aktuell gelieferten Helfer beinhalten:
         </para>
 
         <itemizedlist>
@@ -254,9 +254,10 @@ echo $this->formCheckbox('foo',
                     <varname>$options</varname> sollte ein assoziatives Array sein und kann beliebig
                     tief werden. <varname>$value</varname> kann ein einzelner Wert oder ein Array
                     von ausgewählten Werten sein die Schlüsseln im <varname>$options</varname> Array
-                    entsprechen. <varname>$listsep</varname> ist standardmäßig ein HTML Break
-                    ("&lt;br /&gt;"). Standardmäßig wird dieses Element als Array behandelt; alle
-                    Checkboxen teilen den gleichen Namen, und werden als Array übertragen.
+                    entsprechen. <varname>$listsep</varname> ist standardmäßig ein
+                    <acronym>HTML</acronym> Break ("&lt;br /&gt;"). Standardmäßig wird dieses
+                    Element als Array behandelt; alle Checkboxen teilen den gleichen Namen, und
+                    werden als Array übertragen.
                 </para>
             </listitem>
 

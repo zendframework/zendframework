@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21824 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.writer">
     <title>Zend_Feed_Writer</title>
@@ -683,8 +683,8 @@ $out = $feed->export('atom');
                         <entry><methodname>setCommentLink()</methodname></entry>
 
                         <entry>
-                            Setzt einen Link zu einer HTML Seite welche Kommentare enthält die mit
-                            diesem Eintrag assoziiert sind.
+                            Setzt einen Link zu einer <acronym>HTML</acronym> Seite welche
+                            Kommentare enthält die mit diesem Eintrag assoziiert sind.
                         </entry>
                     </row>
 

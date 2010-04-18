@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headscript">
     <title>HeadScript Helfer</title>
 
     <para>
-        Das HTML <emphasis>&lt;script&gt;</emphasis> Element wird verwendet um entweder
-        Clientseitige Skriptelemente Inline zu ermöglichen oder um eine entfernte Ressource zu
-        verlinken die Clientseitigen Skriptcode enthält. Der <classname>HeadScript</classname>
+        Das <acronym>HTML</acronym> <emphasis>&lt;script&gt;</emphasis> Element wird verwendet um
+        entweder Clientseitige Skriptelemente Inline zu ermöglichen oder um eine entfernte Ressource
+        zu verlinken die Clientseitigen Skriptcode enthält. Der <classname>HeadScript</classname>
         Helfer erlaubt es beides zu Managen.
     </para>
 
@@ -138,10 +138,10 @@ $this->headScript()->appendFile(
         <para>
             <classname>HeadScript</classname>'s Schwester Helfer,
             <link linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>, sollte
-            verwendet werden wenn man Inline Skripte im HTML <emphasis>body</emphasis> inkludieren
-            will. Die Platzierung von Skripten am Ende des Dokuments ist eine gängige Praxis für die
-            schnellere Auslieferung von Seiten, speziell wenn 3rd Party Analyse Skripte verwendet
-            werden.
+            verwendet werden wenn man Inline Skripte im <acronym>HTML</acronym>
+            <emphasis>body</emphasis> inkludieren will. Die Platzierung von Skripten am Ende des
+            Dokuments ist eine gängige Praxis für die schnellere Auslieferung von Seiten, speziell
+            wenn 3rd Party Analyse Skripte verwendet werden.
         </para>
     </note>
 

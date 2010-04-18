@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21614 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardDecorators">
     <title>Standard Formular Dekoratoren die mit dem Zend Framework ausgeliefert werden</title>
@@ -147,9 +147,9 @@ class Util
             an. Der Fieldset Dekorator prüft, ob entweder eine 'legend' Option oder eine
             <methodname>getLegend()</methodname> Methode in dem registrierten Element vorhanden ist,
             und verwendet dieses als Legende, wenn es nicht leer ist. Jeder Inhalt der übergeben
-            wird, wird in ein HTML Fieldset eingebettet, wobei der originale Inhalt ersetzt wird.
-            Alle Attribute die in den angezeigten Elementen gesetzt sind, werden dem Fieldset als
-            HTML Attribute übergeben.
+            wird, wird in ein <acronym>HTML</acronym> Fieldset eingebettet, wobei der originale
+            Inhalt ersetzt wird. Alle Attribute die in den angezeigten Elementen gesetzt sind,
+            werden dem Fieldset als <acronym>HTML</acronym> Attribute übergeben.
         </para>
     </sect2>
 
@@ -169,11 +169,12 @@ class Util
         <title>Zend_Form_Decorator_Form</title>
 
         <para>
-            <classname>Zend_Form</classname> Objekte müssen typischerweise ein HTML
-            <code>&lt;form&gt;</code> Tag darstellen. Der Formular Dekorator verweist auf den
-            Formular View Helfer. Er bettet jeden angebotenen Inhalt in ein HTML Formular Element
-            ein, indem die Aktionen und Methoden des <classname>Zend_Form</classname> Objektes
-            verwendet werden, und jedes Attribut als HTML Attribut.
+            <classname>Zend_Form</classname> Objekte müssen typischerweise ein
+            <acronym>HTML</acronym> <code>&lt;form&gt;</code> Tag darstellen. Der Formular Dekorator
+            verweist auf den Formular View Helfer. Er bettet jeden angebotenen Inhalt in ein
+            <acronym>HTML</acronym> Formular Element ein, indem die Aktionen und Methoden des
+            <classname>Zend_Form</classname> Objektes verwendet werden, und jedes Attribut als
+            <acronym>HTML</acronym> Attribut.
         </para>
     </sect2>
 
@@ -284,12 +285,12 @@ class Util
         <title>Zend_Form_Decorator_HtmlTag</title>
 
         <para>
-            Der HtmlTag Dekorator erlaubt es HTML Tags anzupassen, um Inhalt zu dekorieren; das
-            angepasste Tag wird in der 'tag' Option übergeben, und jede andere Option wird als
-            HTML Attribut für dieses Tag verwendet. Das Tag nimmt standardmäßig an, dass es
-            Blocklevel ist, und ersetzt den Inhalt durch dessen Einbettung in das gegebene Tag.
-            Trotzdem kann eine Platzierung spezifiziert werden um das Tag genauso anzuhängen
-            oder voranzustellen.
+            Der HtmlTag Dekorator erlaubt es <acronym>HTML</acronym> Tags anzupassen, um Inhalt zu
+            dekorieren; das angepasste Tag wird in der 'tag' Option übergeben, und jede andere
+            Option wird als <acronym>HTML</acronym> Attribut für dieses Tag verwendet. Das Tag nimmt
+            standardmäßig an, dass es Blocklevel ist, und ersetzt den Inhalt durch dessen Einbettung
+            in das gegebene Tag. Trotzdem kann eine Platzierung spezifiziert werden um das Tag
+            genauso anzuhängen oder voranzustellen.
         </para>
     </sect2>
 
@@ -297,9 +298,9 @@ class Util
         <title>Zend_Form_Decorator_Image</title>
 
         <para>
-            Der Image Dekorator erlaubt es eine HTML Bildeingabe
+            Der Image Dekorator erlaubt es eine <acronym>HTML</acronym> Bildeingabe
             (<code>&lt;input type="image" ... /&gt;</code>) zu erstellen, und es optional in einem
-            anderen HTML Tag darzustellen.
+            anderen <acronym>HTML</acronym> Tag darzustellen.
         </para>
 
         <para>
@@ -312,9 +313,9 @@ class Util
         </para>
 
         <para>
-            Um ein HTML Tag zu spezifizieren, dass das Element einbetten soll, kann entweder die
-            'tag' Option an den Dekorator übergeben, oder explizit <methodname>setTag()</methodname>
-            aufgerufen werden.
+            Um ein <acronym>HTML</acronym> Tag zu spezifizieren, dass das Element einbetten soll,
+            kann entweder die 'tag' Option an den Dekorator übergeben, oder explizit
+            <methodname>setTag()</methodname> aufgerufen werden.
         </para>
     </sect2>
 

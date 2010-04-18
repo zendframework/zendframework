@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.doctype">
     <title>Doctype Helfer</title>
 
     <para>
-        Gültige HTML und <acronym>XHTML</acronym> Dokumente sollten eine
+        Gültige <acronym>HTML</acronym> und <acronym>XHTML</acronym> Dokumente sollten eine
         <constant>DOCTYPE</constant> Deklaration enthalten. Neben der Schwierigkeit sich diese zu
         merken, können Sie auch beeinflussen wie bestimmte Elemente im Dokument dargestellt werden
         sollen (zum Beispiel, CDATA Kommentierung in <emphasis>&lt;script&gt;</emphasis> und

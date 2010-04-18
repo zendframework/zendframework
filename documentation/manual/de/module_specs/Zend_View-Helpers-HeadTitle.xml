@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19436 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headtitle">
     <title>HeadTitle Helfer</title>
 
     <para>
-        Das HTML <emphasis>&lt;title&gt;</emphasis> Element wird verwendet um einen Titel für ein
-        HTML Dokument anzubieten. Der <classname>HeadTitle</classname> Helfer erlaubt es Titel für
-        späteren Empfang und Ausgabe programmtechnisch zu Erstellen und zu Speichern.
+        Das <acronym>HTML</acronym> <emphasis>&lt;title&gt;</emphasis> Element wird verwendet um
+        einen Titel für ein <acronym>HTML</acronym> Dokument anzubieten. Der
+        <classname>HeadTitle</classname> Helfer erlaubt es Titel für späteren Empfang und Ausgabe
+        programmtechnisch zu Erstellen und zu Speichern.
     </para>
 
     <para>

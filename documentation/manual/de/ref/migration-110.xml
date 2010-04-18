@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21661 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="migration.110">
     <title>Zend Framework 1.10</title>
@@ -137,13 +137,14 @@ $authors = $feed->getAuthors()->getValues();
 
         <para>
             <classname>Zend_Filter_StripTags</classname> enthielt in voehergehenden Versionen ein
-            <varname>commentsAllowed</varname> Flag, welches es erlaubt hat HTML Kommentare in von
-            dieser Klasse gefiltertem HTML Text als erlaubt zu markieren. Aber das öffnet den Weg
-            für <acronym>XSS</acronym> Attacken, speziell im Internet Explorer (der es erlaubt
-            konditionelle Funktionalität über HMTL Kommentare zu spezifizieren). Beginnend mit
-            Version 1.9.7 (und retour mit den Versionen 1.8.5 und 1.7.9), hat das
-            <varname>commentsAllowed</varname> Flag keine Bedeutung meht, und alle HTML Kommentare,
-            inklusive denen die andere HTML Tags oder untergeordnete Kommentare enthalten, werden
+            <varname>commentsAllowed</varname> Flag, welches es erlaubt hat <acronym>HTML</acronym>
+            Kommentare in von dieser Klasse gefiltertem <acronym>HTML</acronym> Text als erlaubt zu
+            markieren. Aber das öffnet den Weg für <acronym>XSS</acronym> Attacken, speziell im
+            Internet Explorer (der es erlaubt konditionelle Funktionalität über
+            <acronym>HTML</acronym> Kommentare zu spezifizieren). Beginnend mit Version 1.9.7 (und
+            retour mit den Versionen 1.8.5 und 1.7.9), hat das <varname>commentsAllowed</varname>
+            Flag keine Bedeutung meht, und alle <acronym>HTML</acronym> Kommentare, inklusive denen
+            die andere <acronym>HTML</acronym> Tags oder untergeordnete Kommentare enthalten, werden
             von der endgültigen Aufgabe des Filters entfernt.
         </para>
     </sect2>

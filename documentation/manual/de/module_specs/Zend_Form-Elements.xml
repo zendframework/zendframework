@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21606 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.elements">
     <title>Erstellen von Form Elementen mit Hilfe von Zend_Form_Element</title>
 
     <para>
-        Ein Formular ist aus Elementen gemacht, die typischerweise mit einer HTML Form Eingabe
-        korrespondieren. <classname>Zend_Form_Element</classname> kapselt einzelne Formularelemente
-        mit den folgenden Bereichen die erfüllt werden sollen:
+        Ein Formular ist aus Elementen gemacht, die typischerweise mit einer <acronym>HTML</acronym>
+        Form Eingabe korrespondieren. <classname>Zend_Form_Element</classname> kapselt einzelne
+        Formularelemente mit den folgenden Bereichen die erfüllt werden sollen:
     </para>
 
     <itemizedlist>
@@ -206,11 +206,12 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
 
         <para>
             Es ist oft nützlich und/oder notwendig einige Normalisierungen an Eingaben vorzunehmen,
-            bevor diese geprüft werden - zum Beispiel kann es gewünscht sein alles an HTML zu
-            entfernen, aber die Prüfungen auf dem verbleibenden durchzuführen um sicherzustellen,
-            dass die Übertragung gültig ist. Oder man will Leerzeichen bei Eingaben entfernen, damit
-            eine StringLength Prüfung kein falsches "Korrekt" zurückgibt. Diese Operationen können
-            durchgeführt werden indem <classname>Zend_Filter</classname> verwendet wird, und
+            bevor diese geprüft werden - zum Beispiel kann es gewünscht sein alles an
+            <acronym>HTML</acronym> zu entfernen, aber die Prüfungen auf dem verbleibenden
+            durchzuführen um sicherzustellen, dass die Übertragung gültig ist. Oder man will
+            Leerzeichen bei Eingaben entfernen, damit eine StringLength Prüfung kein falsches
+            "Korrekt" zurückgibt. Diese Operationen können durchgeführt werden indem
+            <classname>Zend_Filter</classname> verwendet wird, und
             <classname>Zend_Form_Element</classname> unterstützt Filterketten, was es erlaubt
             mehrere, sequentielle Filter zu spezifizieren und anzupassen. Das Filtern geschieht
             während der Prüfung und wenn der Wert des Elements über
@@ -906,8 +907,8 @@ $messages = $element->getMessages();
 
             <listitem>
                 <para>
-                    <emphasis>HtmlTag</emphasis>: Umschliesst das Element und Fehler in einem HTML
-                    &lt;dd&gt; Tag.
+                    <emphasis>HtmlTag</emphasis>: Umschliesst das Element und Fehler in einem
+                    <acronym>HTML</acronym> &lt;dd&gt; Tag.
                 </para>
             </listitem>
 
@@ -968,10 +969,11 @@ $this->addDecorators(array(
             zur Darstellung. Wenn eine Beschreibung vorhanden ist, wird der 'Description' Dekorator
             einen Paragraph der Klasse 'description' anhängen, der den beschreibenden Text für den
             betreffenden Inhalt enthält. Der nächste Dekorator, 'HtmlTag', umschliesst das Element
-            und die Fehler in ein HTML &lt;dd&gt; Tag. Letztendlich, empfängt der letzte Dekorator,
-            'label' das Label des Elements und übergibt es an den 'FormLabel' View Helfer, und
-            umschliesst es in einen HTML &lt;dt&gt; Tag; der Wert wird dem Inhalt standardmäßig
-            vorangestellt. Die resultierende Ausgabe sieht grundsätzlich wie folgt aus:
+            und die Fehler in ein <acronym>HTML</acronym> &lt;dd&gt; Tag. Letztendlich, empfängt der
+            letzte Dekorator, 'label' das Label des Elements und übergibt es an den 'FormLabel' View
+            Helfer, und umschliesst es in einen <acronym>HTML</acronym> &lt;dt&gt; Tag; der Wert
+            wird dem Inhalt standardmäßig vorangestellt. Die resultierende Ausgabe sieht
+            grundsätzlich wie folgt aus:
         </para>
 
         <programlisting language="html"><![CDATA[
@@ -1246,8 +1248,8 @@ $element->class = 'text;
 
         <para>
             Standardmäßig werden alle Attribute, die an den View Helfer übergeben werden, auch vom
-            Element während der Darstellung verwendet, und als HTML Attribute des Element Tags
-            dargestellt.
+            Element während der Darstellung verwendet, und als <acronym>HTML</acronym> Attribute des
+            Element Tags dargestellt.
         </para>
     </sect2>
 

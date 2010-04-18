@@ -1,6 +1,7 @@
 <?php
+namespace ZendTest\Barcode\Object\_files;
 
-class Zend_Barcode_Object_Test extends Zend_Barcode_Object_ObjectAbstract
+class BarcodeTest extends \Zend\Barcode\Object\AbstractObject
 {
 
     protected function _calculateBarcodeWidth()

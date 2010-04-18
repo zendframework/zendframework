@@ -20,14 +20,19 @@
  */
 
 /**
- * Zend_Barcode_Renderer_Exception
+ * @namespace
+ */
+namespace Zend\Barcode\Object;
+
+/**
+ * \Zend\Barcode\Object\Exception
  *
- * @uses       Zend_Barcode_Exception
+ * @uses       \Zend\Barcode\Exception
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Object_Exception extends Zend_Barcode_Exception
+class Exception extends \Zend\Barcode\Exception
 {
 }

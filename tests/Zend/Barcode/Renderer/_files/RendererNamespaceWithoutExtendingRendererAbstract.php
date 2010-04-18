@@ -1,4 +1,6 @@
 <?php
+namespace ZendTest\Barcode\Renderer\Namespace2;
 
-class My_Namespace_Other_Image
-{}
+class Image
+{
+}

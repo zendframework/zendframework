@@ -21,16 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Barcode\Object;
+
+/**
  * Class for generate UpcA barcode
  *
- * @uses       Zend_Barcode_Object_Ean13
- * @uses       Zend_Validate_Barcode
+ * @uses       \Zend\Barcode\Object\Ean13
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Object_Upca extends Zend_Barcode_Object_Ean13
+class Upca extends Ean13
 {
 
     /**

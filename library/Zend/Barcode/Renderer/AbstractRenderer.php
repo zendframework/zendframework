@@ -21,21 +21,29 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Barcode\Renderer;
+use Zend\Config;
+use Zend\Barcode;
+use Zend\Barcode\Object;
+
+/**
  * Class for rendering the barcode
  *
- * @uses       Zend_Barcode_Renderer_Exception
+ * @uses       \Zend\Barcode\Renderer\Exception
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Barcode_Renderer_RendererAbstract
+abstract class AbstractRenderer implements RendererInterface
 {
     /**
      * Namespace of the renderer for autoloading
      * @var string
      */
-    protected $_rendererNamespace = 'Zend_Barcode_Renderer';
+    protected $_rendererNamespace = '\Zend\Barcode\Renderer';
 
     /**
      * Renderer type
@@ -81,7 +89,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Barcode object
-     * @var Zend_Barcode_Object_ObjectAbstract
+     * @var \Zend\Barcode\Object\ObjectInterface
      */
     protected $_barcode;
 
@@ -92,27 +100,26 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Constructor
-     * @param array|Zend_Config $options
+     * @param array|\Zend\Config\Config $options
      * @return void
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof Config\Config) {
             $options = $options->toArray();
         }
         if (is_array($options)) {
             $this->setOptions($options);
         }
-        $this->_type = strtolower(substr(
-            get_class($this),
-            strlen($this->_rendererNamespace) + 1
-        ));
+        /** @todo check if conversion is correct */
+        // $this->_type = strtolower(substr(get_class($this), strlen($this->_rendererNamespace) + 1));
+        $this->_type = substr(strrchr(get_class($this), '\\'), 1);
     }
 
     /**
      * Set renderer state from options array
      * @param  array $options
-     * @return Zend_Renderer_Object
+     * @return \Zend\Barcode\Renderer\RendererInterface
      */
     public function setOptions($options)
     {
@@ -127,10 +134,10 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Set renderer state from config object
-     * @param Zend_Config $config
-     * @return Zend_Renderer_Object
+     * @param \Zend\Config\Config $config
+     * @return \Zend\Barcode\Renderer\RendererInterface
      */
-    public function setConfig(Zend_Config $config)
+    public function setConfig(Config\Config $config)
     {
         return $this->setOptions($config->toArray());
     }
@@ -139,7 +146,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
      * Set renderer namespace for autoloading
      *
      * @param string $namespace
-     * @return Zend_Renderer_Object
+     * @return \Zend\Barcode\Renderer\RendererInterface
      */
     public function setRendererNamespace($namespace)
     {
@@ -169,13 +176,13 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
     /**
      * Manually adjust top position
      * @param integer $value
-     * @return Zend_Barcode_Renderer
-     * @throw Zend_Barcode_Renderer_Exception
+     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @throw \Zend\Barcode\Renderer\Exception
      */
     public function setTopOffset($value)
     {
         if (!is_numeric($value) || intval($value) < 0) {
-            throw new Zend_Barcode_Renderer_Exception(
+            throw new Exception(
                 'Vertical position must be greater than or equals 0'
             );
         }
@@ -195,13 +202,13 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
     /**
      * Manually adjust left position
      * @param integer $value
-     * @return Zend_Barcode_Renderer
-     * @throw Zend_Barcode_Renderer_Exception
+     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @throw \Zend\Barcode\Renderer\Exception
      */
     public function setLeftOffset($value)
     {
         if (!is_numeric($value) || intval($value) < 0) {
-            throw new Zend_Barcode_Renderer_Exception(
+            throw new Exception(
                 'Horizontal position must be greater than or equals 0'
             );
         }
@@ -231,13 +238,13 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
     /**
      * Horizontal position of the barcode in the rendering resource
      * @param string $value
-     * @return Zend_Barcode_Renderer
-     * @throw Zend_Barcode_Renderer_Exception
+     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @throw \Zend\Barcode\Renderer\Exception
      */
     public function setHorizontalPosition($value)
     {
         if (!in_array($value, array('left' , 'center' , 'right'))) {
-            throw new Zend_Barcode_Renderer_Exception(
+            throw new Exception(
                 "Invalid barcode position provided must be 'left', 'center' or 'right'"
             );
         }
@@ -257,13 +264,13 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
     /**
      * Vertical position of the barcode in the rendering resource
      * @param string $value
-     * @return Zend_Barcode_Renderer
-     * @throw Zend_Barcode_Renderer_Exception
+     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @throw \Zend\Barcode\Renderer\Exception
      */
     public function setVerticalPosition($value)
     {
         if (!in_array($value, array('top' , 'middle' , 'bottom'))) {
-            throw new Zend_Barcode_Renderer_Exception(
+            throw new Exception(
                 "Invalid barcode position provided must be 'top', 'middle' or 'bottom'"
             );
         }
@@ -283,13 +290,13 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
     /**
      * Set the size of a module
      * @param float $value
-     * @return Zend_Barcode_Renderer
-     * @throw Zend_Barcode_Renderer_Exception
+     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @throw \Zend\Barcode\Renderer\Exception
      */
     public function setModuleSize($value)
     {
         if (!is_numeric($value) || floatval($value) <= 0) {
-            throw new Zend_Barcode_Renderer_Exception(
+            throw new Exception(
                 'Float size must be greater than 0'
             );
         }
@@ -318,13 +325,13 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Set the barcode object
-     * @param Zend_Barcode_Object $barcode
+     * @param \Zend\Barcode\Object\ObjectInterface $barcode
      * @return Zend_Barcode_Renderer
      */
     public function setBarcode($barcode)
     {
-        if (!$barcode instanceof Zend_Barcode_Object_ObjectAbstract) {
-            throw new Zend_Barcode_Renderer_Exception(
+        if (!$barcode instanceof Object\ObjectInterface) {
+            throw new Exception(
                 'Invalid barcode object provided to setBarcode()'
             );
         }
@@ -334,7 +341,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Retrieve the barcode object
-     * @return Zend_Barcode_Object
+     * \Zend\Barcode\Object\ObjectInterface
      */
     public function getBarcode()
     {
@@ -355,12 +362,12 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
     /**
      * Check if a barcode object is correctly provided
      * @return void
-     * @throw Zend_Barcode_Renderer_Exception
+     * @throw \Zend\Barcode\Renderer\Exception
      */
     protected function _checkBarcodeObject()
     {
         if ($this->_barcode === null) {
-            throw new Zend_Barcode_Renderer_Exception(
+            throw new Exception(
                 'No barcode object provided'
             );
         }
@@ -420,13 +427,13 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
             $this->checkParams();
             $this->_initRenderer();
             $this->_drawInstructionList();
-        } catch (Zend_Exception $e) {
+        } catch (\Zend\Exception $e) {
             $renderable = false;
-            if ($e instanceof Zend_Barcode_Exception) {
+            if ($e instanceof Barcode\Exception) {
                 $renderable = $e->isRenderable();
             }
             if ($this->_automaticRenderError && $renderable) {
-                $barcode = Zend_Barcode::makeBarcode(
+                $barcode = Barcode\Barcode::makeBarcode(
                     'error',
                     array('text' => $e->getMessage())
                 );
@@ -435,7 +442,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
                 $this->_initRenderer();
                 $this->_drawInstructionList();
             } else {
-                if ($e instanceof Zend_Barcode_Exception) {
+                if ($e instanceof Barcode\Exception) {
                     $e->setIsRenderable(false);
                 }
                 throw $e;
@@ -472,7 +479,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
                     );
                     break;
                 default:
-                    throw new Zend_Barcode_Renderer_Exception(
+                    throw new Exception(
                         'Unkown drawing command'
                     );
             }
@@ -484,12 +491,6 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
      * @return void
      */
     abstract protected function _checkParams();
-
-    /**
-     * Render the resource by sending headers and drawed resource
-     * @return mixed
-     */
-    abstract public function render();
 
     /**
      * Initialize the rendering resource
@@ -516,12 +517,12 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
      * @param float $orientation
      */
     abstract protected function _drawText(
-        $text, 
-        $size, 
-        $position, 
-        $font, 
-        $color, 
-        $alignment = 'center', 
+        $text,
+        $size,
+        $position,
+        $font,
+        $color,
+        $alignment = 'center',
         $orientation = 0
     );
 }

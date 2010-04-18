@@ -21,16 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Barcode\Object;
+
+/**
  * Class for generate Ean13 barcode
  *
- * @uses       Zend_Barcode_Object_ObjectAbstract
- * @uses       Zend_Validate_Barcode
+ * @uses       \Zend\Barcode\Object\AbstractObject
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Object_Ean13 extends Zend_Barcode_Object_ObjectAbstract
+class Ean13 extends AbstractObject
 {
 
     /**
@@ -172,7 +176,7 @@ class Zend_Barcode_Object_Ean13 extends Zend_Barcode_Object_ObjectAbstract
      */
     protected function _drawText()
     {
-        if (get_class($this) == 'Zend_Barcode_Object_Ean13') {
+        if (get_class($this) == 'Zend\Barcode\Object\Ean13') {
             $this->_drawEan13Text();
         } else {
             parent::_drawText();

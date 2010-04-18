@@ -21,16 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Barcode\Object;
+
+/**
  * Class for generate Ean2 barcode
  *
- * @uses       Zend_Barcode_Object_Ean5
- * @uses       Zend_Validate_Barcode
+ * @uses       \Zend\Barcode\Object\Ean5
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Object_Ean2 extends Zend_Barcode_Object_Ean5
+class Ean2 extends Ean5
 {
 
     protected $_parities = array(

@@ -827,10 +827,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Barcode/Object/ObjectAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Barcode_Object_ObjectAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Barcode/Object/ObjectAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Barcode/Object/AbstractObject.php</newRelativeFilePath>
       <newNamespace>Zend\Barcode\Object</newNamespace>
-      <newClassName>ObjectAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Barcode\Object\ObjectAbstract</newFullyQualifiedName>
+      <newClassName>AbstractObject</newClassName>
+      <newFullyQualifiedName>Zend\Barcode\Object\AbstractObject</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Barcode/Object/Planet.php</originalRelativeFilePath>
@@ -891,18 +891,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Barcode/Renderer/Pdf.php</originalRelativeFilePath>
       <originalClassName>Zend_Barcode_Renderer_Pdf</originalClassName>
-      <newRelativeFilePath>Zend/Barcode/Renderer/Pdf.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Barcode/Renderer/PDF.php</newRelativeFilePath>
       <newNamespace>Zend\Barcode\Renderer</newNamespace>
-      <newClassName>Pdf</newClassName>
-      <newFullyQualifiedName>Zend\Barcode\Renderer\Pdf</newFullyQualifiedName>
+      <newClassName>PDF</newClassName>
+      <newFullyQualifiedName>Zend\Barcode\Renderer\PDF</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Barcode/Renderer/RendererAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Barcode_Renderer_RendererAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Barcode/Renderer/RendererAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Barcode/Renderer/AbstractRenderer.php</newRelativeFilePath>
       <newNamespace>Zend\Barcode\Renderer</newNamespace>
-      <newClassName>RendererAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Barcode\Renderer\RendererAbstract</newFullyQualifiedName>
+      <newClassName>AbstractRenderer</newClassName>
+      <newFullyQualifiedName>Zend\Barcode\Renderer\AbstractRenderer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Barcode.php</originalRelativeFilePath>

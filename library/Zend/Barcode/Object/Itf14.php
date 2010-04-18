@@ -21,16 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Barcode\Object;
+
+/**
  * Class for generate Itf14 barcode
  *
- * @uses       Zend_Barcode_Object_Code25interleaved
- * @uses       Zend_Validate_Barcode
+ * @uses       \Zend\Barcode\Object\Code25interleaved
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Object_Itf14 extends Zend_Barcode_Object_Code25interleaved
+class Itf14 extends Code25interleaved
 {
 
     /**

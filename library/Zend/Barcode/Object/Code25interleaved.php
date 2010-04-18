@@ -21,16 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Barcode\Object;
+
+/**
  * Class for generate Interleaved 2 of 5 barcode
  *
- * @uses       Zend_Barcode_Object_Code25
- * @uses       Zend_Validate_Barcode
+ * @uses       \Zend\Barcode\Object\Code25
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Object_Code25interleaved extends Zend_Barcode_Object_Code25
+class Code25interleaved extends Code25
 {
     /**
      * Drawing of bearer bars
@@ -50,7 +54,7 @@ class Zend_Barcode_Object_Code25interleaved extends Zend_Barcode_Object_Code25
     /**
      * Activate/deactivate drawing of bearer bars
      * @param boolean $value
-     * @return Zend_Barcode_Object_Int25
+     * @return \Zend\Barcode\Object\Int25
      */
     public function setWithBearerBars($value)
     {

@@ -1,8 +1,8 @@
 <?php
+namespace ZendTest\Barcode\Renderer\Namespace1;
 
-class My_Namespace_Image extends Zend_Barcode_Renderer_Image
+class Image extends \Zend\Barcode\Renderer\Image
 {
-
     public function getType()
     {
         return $this->_type;

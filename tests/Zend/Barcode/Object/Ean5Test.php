@@ -20,8 +20,11 @@
  * @version    $Id$
  */
 
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Barcode\Object;
+use Zend\Barcode;
 
 /**
  * @category   Zend
@@ -31,17 +34,16 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Object_Ean5Test extends Zend_Barcode_Object_TestCommon
+class Ean5Test extends TestCommon
 {
-
     protected function _getBarcodeObject($options = null)
     {
-        return new Zend_Barcode_Object_Ean5($options);
+        return new Barcode\Object\Ean5($options);
     }
 
     public function testType()
     {
-        $this->assertSame('ean5', $this->_object->getType());
+        $this->assertSame('Ean5', $this->_object->getType());
     }
 
     public function testChecksum()

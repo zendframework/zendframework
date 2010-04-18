@@ -73,7 +73,7 @@ class Zend_Validate_File_ExcludeMimeType extends Zend_Validate_File_MimeType
                 $mime = new finfo($const);
             }
 
-            if ($mime !== false) {
+            if (!empty($mime)) {
                 $this->_type = $mime->file($value);
             }
             unset($mime);

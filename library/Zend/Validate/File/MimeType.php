@@ -197,7 +197,7 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
         } else {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
             $this->_finfo = @finfo_open($const, $file);
-            if ($this->_finfo === false) {
+            if (empty($this->_finfo)) {
                 $this->_finfo = null;
                 require_once 'Zend/Validate/Exception.php';
                 throw new Zend_Validate_Exception('The given magicfile is not accepted by finfo');
@@ -336,12 +336,12 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
                 $this->_finfo = @finfo_open($const, $mimefile);
             }
 
-            if ($this->_finfo === false) {
+            if (empty($this->_finfo)) {
                 $this->_finfo = @finfo_open($const);
             }
 
             $this->_type = null;
-            if ($this->_finfo !== false) {
+            if (!empty($this->_finfo)) {
                 $this->_type = finfo_file($this->_finfo, $value);
             }
         }

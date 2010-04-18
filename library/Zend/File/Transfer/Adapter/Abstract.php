@@ -1291,7 +1291,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                 $mime = @finfo_open($const);
             }
 
-            if ($mime !== false) {
+            if (!empty($mime)) {
                 $result = finfo_file($mime, $file);
             }
 

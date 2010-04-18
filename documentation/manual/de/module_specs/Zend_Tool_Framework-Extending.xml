@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21823 -->
+<!-- EN-Revision: 21824 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.extending">
     <title>Extending and Configuring Zend_Tool_Framework</title>
@@ -133,9 +133,9 @@
                 Umgebungsvariable tun. Wenn die Umgebungsvariable
                 <constant>ZF_CONFIG_FILE</constant> gesetzt ist, dann wird dieser Wert als Ort der
                 Konfigurationsdatei verwendet die mit dem Konsolen Client zu verwenden ist.
-                <constant>ZF_CONFIG_FILE</constant> kann auf irgendeine <acronym>INI</acronym>, XML
-                oder <acronym>PHP</acronym> Datei zeigen die <classname>Zend_Config</classname>
-                lesen kann.
+                <constant>ZF_CONFIG_FILE</constant> kann auf irgendeine <acronym>INI</acronym>,
+                <acronym>XML</acronym> oder <acronym>PHP</acronym> Datei zeigen die
+                <classname>Zend_Config</classname> lesen kann.
             </para>
 
             <para>
@@ -182,7 +182,7 @@ php.error_reporting = 1
                 <para>
                     Der reservierte Prefix "php" funktioniert nur mit <acronym>INI</acronym>
                     Dateien. Man kann <acronym>PHP</acronym> <acronym>INI</acronym> Werte nicht in
-                    <acronym>PHP</acronym> oder XML Konfigurationen setzen.
+                    <acronym>PHP</acronym> oder <acronym>XML</acronym> Konfigurationen setzen.
                 </para>
             </important>
         </sect3>

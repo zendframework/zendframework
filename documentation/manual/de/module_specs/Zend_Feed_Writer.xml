@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21819 -->
+<!-- EN-Revision: 21824 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.writer">
     <title>Zend_Feed_Writer</title>
@@ -494,10 +494,11 @@ $out = $feed->export('atom');
                         <entry><methodname>export()</methodname></entry>
 
                         <entry>
-                            Exportiert die komplette Datenhierarchie in einen XML Feed. Die Methode
-                            has zwei Parameter. Der erste ist der Feedtyp, entweder "atom" oder
-                            "rss". Der zweite in ein optionaler Boolean der zeigt ob Exceptions
-                            geworfen werden oder nicht. Er ist Standardmäßig TRUE.
+                            Exportiert die komplette Datenhierarchie in einen <acronym>XML</acronym>
+                            Feed. Die Methode has zwei Parameter. Der erste ist der Feedtyp,
+                            entweder "atom" oder "rss". Der zweite in ein optionaler Boolean der
+                            zeigt ob Exceptions geworfen werden oder nicht. Er ist Standardmäßig
+                            <constant>TRUE</constant>.
                         </entry>
                     </row>
                 </tbody>
@@ -691,10 +692,10 @@ $out = $feed->export('atom');
                         <entry><methodname>setCommentFeedLink()</methodname></entry>
 
                         <entry>
-                            Setzt einen Link zu einem XML Feed welcher Kommentare enthält welche mit
-                            diesem Eintrag assoziiert sind. Der Parameter ist ein Array welches die
-                            Schlüssel "uri" und "type" enthält, wobei der Typ entweder "rdf", "rss"
-                            oder "atom" ist.
+                            Setzt einen Link zu einem <acronym>XML</acronym> Feed welcher Kommentare
+                            enthält welche mit diesem Eintrag assoziiert sind. Der Parameter ist ein
+                            Array welches die Schlüssel "uri" und "type" enthält, wobei der Typ
+                            entweder "rdf", "rss" oder "atom" ist.
                         </entry>
                     </row>
 

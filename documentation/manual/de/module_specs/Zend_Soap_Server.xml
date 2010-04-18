@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21819 -->
+<!-- EN-Revision: 21824 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.server">
     <title>Zend_Soap_Server</title>
@@ -375,7 +375,8 @@ $server->handle();
 
             <para>
                 Die zuletzt bearbeitete Anfrage kann durch Verwendung der
-                <methodname>getLastRequest()</methodname> Methode als XML String empfangen werden:
+                <methodname>getLastRequest()</methodname> Methode als <acronym>XML</acronym> String
+                empfangen werden:
 
                 <programlisting language="php"><![CDATA[
 ...

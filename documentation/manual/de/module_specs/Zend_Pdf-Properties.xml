@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
+<!-- EN-Revision: 21824 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.info">
     <!-- @todo review and revise upon completion of refactoring -->
@@ -191,7 +191,7 @@ $pdf->save($pdfPath);
     </para>
 
     <para>
-        Dieses XML Dokument kann empfangen und dem PDF mit der
+        Dieses <acronym>XML</acronym> Dokument kann empfangen und dem PDF mit der
         <methodname>Zend_Pdf::getMetadata()</methodname> und der
         <methodname>Zend_Pdf::setMetadata($metadata)</methodname> Methode wieder hinzugefügt werden:
 

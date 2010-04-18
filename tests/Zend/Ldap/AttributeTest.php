@@ -418,6 +418,13 @@ class Zend_Ldap_AttributeTest extends PHPUnit_Framework_TestCase
             Zend_Ldap_Attribute::convertFromLdapDateTimeValue($ldap));
     }
 
+    public function testConvertFromLdapDateTimeValueActiveDirectory()
+    {
+        $ldap='20080625123030.0+0200';
+        $this->assertEquals(gmmktime(10, 30, 30, 6, 25, 2008),
+            Zend_Ldap_Attribute::convertFromLdapDateTimeValue($ldap));
+    }
+
     public function testConvertToLdapDateTimeValue()
     {
         $ts=mktime(12, 30, 30, 6, 25, 2008);

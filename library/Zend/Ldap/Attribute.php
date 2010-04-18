@@ -399,7 +399,7 @@ class Zend_Ldap_Attribute
     private static function _valueFromLdapDateTime($value)
     {
         $matches = array();
-        if (preg_match('/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})([+-]\d{4}|Z)$/', $value, $matches)) {
+        if (preg_match('/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(?:\.0)?([+-]\d{4}|Z)$/', $value, $matches)) {
             $year = $matches[1];
             $month = $matches[2];
             $day = $matches[3];

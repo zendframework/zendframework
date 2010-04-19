@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21824 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.formatters">
     <title>Formatter</title>
@@ -24,18 +24,19 @@
             <classname>Zend_Log_Formatter_Simple</classname> ist der Standard Formatter. Er ist
             automatisch konfiguriert wenn kein Formatter definiert wird. Die Standard Konfiguration
             ist identisch mit dem folgenden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $format = '%timestamp% %priorityName% (%priority%): %message%' . PHP_EOL;
 $formatter = new Zend_Log_Formatter_Simple($format);
 ]]></programlisting>
-        </para>
 
         <para>
             Ein Formatter wird einem individuellen Writer Objekt gesetzt durch Verwenden der
             <methodname>setFormatter()</methodname> Methode des Writer's:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');
 $formatter = new Zend_Log_Formatter_Simple('Hallo %message%' . PHP_EOL);
 $writer->setFormatter($formatter);
@@ -47,7 +48,6 @@ $logger->info('dort');
 
 // Gibt "Hallo dort" aus
 ]]></programlisting>
-        </para>
 
         <para>
             Der Konstruktor von <classname>Zend_Log_Formatter_Simple</classname> akzeptiert einen
@@ -66,8 +66,9 @@ $logger->info('dort');
             <classname>Zend_Log_Formatter_Xml</classname> formatiert Log Daten in einen
             <acronym>XML</acronym> String. Standardmäßig loggt er automatisch alle Elemente des
             Event Data Arrays:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');
 $formatter = new Zend_Log_Formatter_Xml();
 $writer->setFormatter($formatter);
@@ -77,13 +78,13 @@ $logger->addWriter($writer);
 
 $logger->info('Informative Nachricht');
 ]]></programlisting>
-        </para>
 
         <para>
             Der obige Code gibt das folgende <acronym>XML</acronym> aus (Leerzeichen werden für
             Klarstellung hinzugefügt):
+        </para>
 
-            <programlisting language="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <logEntry>
   <timestamp>2007-04-06T07:24:37-07:00</timestamp>
   <message>Informative Nachricht</message>
@@ -91,7 +92,6 @@ $logger->info('Informative Nachricht');
   <priorityName>INFO</priorityName>
 </logEntry>
 ]]></programlisting>
-        </para>
 
         <para>
             Es ist möglich das Root Element anzupassen sowie ein Mapping von <acronym>XML</acronym>
@@ -99,8 +99,9 @@ $logger->info('Informative Nachricht');
             <classname>Zend_Log_Formatter_Xml</classname> akzeptiert einen String mit dem Namen des
             Root Elements als ersten Parameter und ein assoziatives Array mit den gemappten
             Elementen als zweiten Parameter:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');
 $formatter = new Zend_Log_Formatter_Xml('log',
                                         array('msg' => 'message',
@@ -114,16 +115,17 @@ $logger->addWriter($writer);
 $logger->info('Informative Nachricht');
 ]]></programlisting>
 
+        <para>
             Der obige Code ändert das Root Element von seinem Standard <code>logEntry</code> zu
             <code>log</code>. Er mappt auch das Element <code>msg</code> zum Event Daten Element
             <code>message</code>. Das ergibt die folgende Ausgabe:
+        </para>
 
-            <programlisting language="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <log>
   <msg>Informative Nachricht</msg>
   <level>INFO</level>
 </log>
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
-<!-- Reviewed: 21815 -->
+<!-- EN-Revision: 21829 -->
+<!-- Reviewed: 21829 -->
 <sect1 id="zend.translate.using">
     <title>Verwendung der Übersetzungsadapter</title>
 
@@ -70,8 +70,9 @@ print $translate->_("Hier ist Zeile zwei") . "\n";
     <para>
         Erstelle ein neues <classname>Zend_Translate</classname> Objekt und definiere den
         Basisadapter:
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     array(
         'adapter' => 'gettext',
@@ -81,6 +82,7 @@ $translate = new Zend_Translate(
 );
 ]]></programlisting>
 
+    <para>
         In diesem Beispiel haben wir den <emphasis>Gettext-Adapter</emphasis>
         ausgewählt. Die Übersetzungsdatei <emphasis>source-de.mo</emphasis> wird im
         Verzeichnis <emphasis>/path/to/translation</emphasis> platziert. Diese
@@ -92,13 +94,15 @@ $translate = new Zend_Translate(
         Der nächste Schritt besteht darin, alle Strings zu ummanteln, die übersetzt werden sollen.
         Die einfachste Möglichkeit besteht, wenn nur einfache Strings oder Sätze vorhanden sind
         wie zum Beispiel:
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 print $translate->_("Beispiel") . "\n";
 print "========\n";
 print $translate->_("Hier ist die Zeile Eins") . "\n";
 ]]></programlisting>
 
+    <para>
         Einige Strings müssen nicht übersetzt werden. Die Trennlinie wird immer eine Trennlinie
         sein, auch in den anderen Sprachen.
     </para>
@@ -106,11 +110,13 @@ print $translate->_("Hier ist die Zeile Eins") . "\n";
     <para>
         Die Verwendung von variablen Werten in einer Übersetzung wird durch die Verwendung
         von eingebetteten Parametern auch unterstützt.
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 printf($translate->_("Today is the %1\$s") . "\n", date("d.m.Y"));
 ]]></programlisting>
 
+    <para>
         Statt <methodname>print()</methodname> wird die <methodname>printf()</methodname> Funktion
         benutzt und alle variablen Parameter mit <code>%1\$s</code> Blöcken ersetzt.
         Der erste ist <code>%1\$s</code>, der zweite ist <code>%2\$s</code>, und so weiter.
@@ -122,13 +128,15 @@ printf($translate->_("Today is the %1\$s") . "\n", date("d.m.Y"));
     <para>
         Jeder String wird im Übersetzungsspeicher durch seine Message ID identifiziert.
         Man könnte diese Message IDs statt des Strings im Code wie folgt verwenden:
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 print $translate->_(1) . "\n";
 print "=======\n";
 print $translate->_(2) . "\n";
 ]]></programlisting>
 
+    <para>
         Allerdings hat dies mehrere Nachteile:
     </para>
 

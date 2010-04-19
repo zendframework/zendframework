@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.searching">
     <title>Einen Index durchsuchen</title>
@@ -117,8 +117,9 @@ $index->find($query);
             <para>
                 Aktuell ist das in einigen Fällen der einzige Weg um nach einem Wert innerhalb eines
                 Feldes ohne Token zu suchen:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 
 $pathTerm  = new Zend_Search_Lucene_Index_Term(
@@ -132,18 +133,17 @@ $query->addSubquery($pathQuery, true /* required */);
 
 $hits = $index->find($query);
 ]]></programlisting>
-            </para>
 
             <para>
                 Die <methodname>Zend_Search_Lucene_Search_QueryParser::parse()</methodname> Methode
                 nimmt auch einen optionalen Encoding Parameter, welche die Codierung des Abfrage
                 Strings definieren kann:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
                                                           'iso-8859-5');
 ]]></programlisting>
-            </para>
 
             <para>
                 Wenn der Codierungs Parameter unterdrückt wurde, wird das aktuelle Gebietsschema
@@ -154,13 +154,13 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
                 Es ist auch möglich eine Standard Codierung für den Abfragestring mit der
                 <methodname>Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding()</methodname>
                 Methode zu definieren:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-5');
 ...
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 ]]></programlisting>
-            </para>
 
             <para>
                 <methodname>Zend_Search_Lucene_Search_QueryParser::getDefaultEncoding()</methodname>
@@ -257,13 +257,15 @@ foreach ($hits as $hit) {
             <classname>Zend_Search_Lucene</classname> bietet die Möglichkeit die Ergebnisse mit den
             <methodname>getResultSetLimit()</methodname> und
             <methodname>setResultSetLimit()</methodname> Methoden zu begrenzen:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $currentResultSetLimit = Zend_Search_Lucene::getResultSetLimit();
 
 Zend_Search_Lucene::setResultSetLimit($newLimit);
 ]]></programlisting>
 
+        <para>
             Der Standardwert von 0 bedeutet 'keine Grenze'.
         </para>
 
@@ -330,13 +332,13 @@ foreach ($hits as $hit) {
         <para>
             <code>$index->find()</code> Aufruf kann verschiedene optionale Parameter entgegen
             nehmen:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $index->find($query [, $sortField [, $sortType [, $sortOrder]]]
                     [, $sortField2 [, $sortType [, $sortOrder]]]
              ...);
 ]]></programlisting>
-        </para>
 
         <para>
             Ein Name von gespeicherten Feldern nach denen Ergebnisse sortiert werden sollen sollte
@@ -358,19 +360,19 @@ $index->find($query [, $sortField [, $sortType [, $sortOrder]]]
 
         <para>
             Beispiele:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $index->find($query, 'quantity', SORT_NUMERIC, SORT_DESC);
 ]]></programlisting>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $index->find($query, 'fname', SORT_STRING, 'lname', SORT_STRING);
 ]]></programlisting>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
 ]]></programlisting>
-        </para>
 
         <para>
             Beim Verwenden von nicht standardmäßigen Sortierreihenfolgen sollte man vorsichtig sein;
@@ -391,8 +393,9 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
             Die erste ist die Verwendung der <code>Zend_Search_Lucene_Document_Html</code> Klasse
             (siehe <link linkend="zend.search.lucene.index-creation.html-documents">das Kapitel
             über HTML Dokumente</link> für Details) mit den folgenden Methoden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Highlight text with specified color
  *
@@ -403,7 +406,7 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
 public function highlight($words, $colour = '#66ffff');
 ]]></programlisting>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Highlight text using specified View helper or callback function.
  *
@@ -419,7 +422,6 @@ public function highlight($words, $colour = '#66ffff');
  */
 public function highlightExtended($words, $callback, $params = array())
 ]]></programlisting>
-        </para>
 
         <para>
             Um das Verhalten beim Highlighting zu verändern kann die
@@ -449,11 +451,11 @@ public function highlightExtended($words, $callback, $params = array())
         <para>
             <link linkend="zend.view.helpers">View Helfer</link> können auch als Callbacks im
             Kontext von View Skripten verwendet werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
 ]]></programlisting>
-        </para>
 
         <para>
             Das Ergebnis der Highlighting Operation wird von der
@@ -490,12 +492,12 @@ $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
             <code>Zend_Search_Lucene_Search_Query->highlightMatches(string $inputHTML[,
             $defaultEncoding = 'UTF-8'[,
             Zend_Search_Lucene_Search_Highlighter_Interface $highlighter]])</code> Methode:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 query = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 highlightedHTML = $query->highlightMatches($sourceHTML);
 ]]></programlisting>
-        </para>
 
         <para>
             Der optionale zweite Parameter ist die standardmäßige Kodierung des
@@ -507,8 +509,9 @@ highlightedHTML = $query->highlightMatches($sourceHTML);
             Der optionale dritte Parameter ist ein Highlighter Objekt welches das
             <classname>Zend_Search_Lucene_Search_Highlighter_Interface</classname> Interface
             implementiert:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Search_Lucene_Search_Highlighter_Interface
 {
     /**
@@ -535,6 +538,7 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
 }
 ]]></programlisting>
 
+        <para>
             Wobei das <code>Zend_Search_Lucene_Document_Html</code> Objekt ein Objekt ist welches
             von der HMTL Quelle erzeugt wird, die wiederum von der
             <code>Zend_Search_Lucene_Search_Query->highlightMatches()</code> Methode geliefert

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.paginator.advanced">
     <title>Advanced usage</title>
@@ -47,11 +47,9 @@
             ein Array wurde das wie folgt funktionieren:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 return array_slice($this->_array, $offset, $itemCountPerPage);
 ]]></programlisting>
-        </para>
 
         <para>
             Man sollte einen Blick auf die mitgelieferten Adapter werfen (alle welche
@@ -69,11 +67,9 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
             eine einzelne Methode, <methodname>getPages()</methodname>, definiert. Speziell,
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public function getPages(Zend_Paginator $paginator, $pageRange = null);
 ]]></programlisting>
-        </para>
 
         <para>
             Diese Methode sollten eine untere und obere Grenze für die Seitenzahl innerhalb der
@@ -86,11 +82,9 @@ public function getPages(Zend_Paginator $paginator, $pageRange = null);
             Stil üblicherweise mit etwas ähnlichem sie der folgenden Codezeile enden:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 return $paginator->getPagesInRange($lowerBound, $upperBound);
 ]]></programlisting>
-        </para>
 
         <para>
             Es ist nichts speziellen an diesem Aufruf; es ist mehr eine übliche Methode um die
@@ -104,13 +98,11 @@ return $paginator->getPagesInRange($lowerBound, $upperBound);
             muß. Um das zu tun muß das folgende ausgeführt werden:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $prefix = 'My_Paginator_ScrollingStyle';
 $path   = 'My/Paginator/ScrollingStyle/';
 Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.paginator.advanced.caching">
@@ -124,15 +116,13 @@ Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
             Methode nur eine <classname>Zend_Cache_Core</classname> Instanz übergeben werden.
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($someData);
 $fO = array('lifetime' => 3600, 'automatic_serialization' => true);
 $bO = array('cache_dir'=>'/tmp');
 $cache = Zend_cache::factory('Core', 'File', $fO, $bO);
 Zend_Paginator::setCache($cache);
 ]]></programlisting>
-        </para>
 
         <para>
             Sobald <classname>Zend_Paginator</classname> eine <classname>Zend_Cache_Core</classname>
@@ -141,8 +131,7 @@ Zend_Paginator::setCache($cache);
             <methodname>setCacheEnable()</methodname> verwenden.
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($someData);
 // $cache ist eine Zend_Cache_Core Instanz
 Zend_Paginator::setCache($cache);
@@ -150,7 +139,6 @@ Zend_Paginator::setCache($cache);
 $paginator->setCacheEnable(false);
 // Der Cache ist nun ausgeschaltet
 ]]></programlisting>
-        </para>
 
         <para>
             Wenn ein Cache gesetzt ist, werden Daten automatisch in Ihm gespeichert und von Ihm
@@ -160,8 +148,7 @@ $paginator->setCacheEnable(false);
             Parameter übergeben werden der die Seitenanzahl repräsentiert die den Cache löschen :
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($someData);
 Zend_Paginator::setCache($cache);
 $items = $paginator->getCurrentItems();
@@ -175,15 +162,13 @@ $paginator->clearPageItemCache(3);
 // Alle Cachedaten löschen
 $paginator->clearPageItemCache();
 ]]></programlisting>
-        </para>
 
         <para>
             Das Ändern das Anzahl der Teile pro Seite wird den kompletten Cache leeren, das er
             ungültig geworden wäre :
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($someData);
 Zend_Paginator::setCache($cache);
 // Einige Teile holen
@@ -192,15 +177,13 @@ $items = $paginator->getCurrentItems();
 // Alle Cachedaten werden ausgegeben :
 $paginator->setItemCountPerPage(2);
 ]]></programlisting>
-        </para>
 
         <para>
             Es ist auch möglich zu sehen welche Daten im Cache sind und direkt nach Ihnen zu fragen.
             Hierfür kann <methodname>getPageItemCache()</methodname> verwendet werden:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($someData);
 $paginator->setItemCountPerPage(3);
 Zend_Paginator::setCache($cache);
@@ -212,7 +195,6 @@ $otherItems = $paginator->getItemsPerPage(4);
 // Die gecachten Teile als zwei-dimensionales Array sehen
 var_dump($paginator->getPageItemCache());
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.paginator.advanced.aggregator">
@@ -230,8 +212,7 @@ var_dump($paginator->getPageItemCache());
             Erweiterung von <acronym>PHP</acronym>.
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Paginator_AdapterAggregate
 {
     /**
@@ -242,7 +223,6 @@ interface Zend_Paginator_AdapterAggregate
     public function getPaginatorAdapter();
 }
 ]]></programlisting>
-        </para>
 
         <para>
             Das Interface ist sehr klein und erwartet nur das eine Instanz von

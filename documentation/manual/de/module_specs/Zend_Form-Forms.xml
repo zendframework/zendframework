@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 21905 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.forms">
     <title>Erstellen von Form durch Verwendung von Zend_Form</title>
@@ -1879,21 +1879,21 @@ $validValues = $form->getValidValues($_POST);
         <itemizedlist>
             <listitem>
                 <para>
-                    <property>prefixPaths</property> wird übergeben an
+                    <property>prefixPath</property> wird übergeben an
                     <methodname>addPrefixPaths()</methodname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <property>elementPrefixPaths</property> wird übergeben an
+                    <property>elementPrefixPath</property> wird übergeben an
                     <methodname>addElementPrefixPaths()</methodname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <property>displayGroupPrefixPaths</property> wird übergeben an
+                    <property>displayGroupPrefixPath</property> wird übergeben an
                     <methodname>addDisplayGroupPrefixPaths()</methodname>
                 </para>
             </listitem>

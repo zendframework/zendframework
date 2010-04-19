@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21824 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.info">
     <!-- @todo review and revise upon completion of refactoring -->
@@ -15,8 +15,9 @@
         gespeichert. Diese struktur kann als assoziatives Array mithilfe der öffentlichen
         <code>properties</code> Eigenschaft des <classname>Zend_Pdf</classname> Objektes gelesen und
         geschrieben werden:
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($pdfPath);
 
 echo $pdf->properties['Title'] . "\n";
@@ -25,7 +26,6 @@ echo $pdf->properties['Author'] . "\n";
 $pdf->properties['Title'] = 'Neuer Titel.';
 $pdf->save($pdfPath);
 ]]></programlisting>
-    </para>
 
     <para>
         Die folgenden Schlüssel sind im <acronym>PDF</acronym> v1.4 (Acrobat 5) Standard definiert:
@@ -194,8 +194,9 @@ $pdf->save($pdfPath);
         Dieses <acronym>XML</acronym> Dokument kann empfangen und dem PDF mit der
         <methodname>Zend_Pdf::getMetadata()</methodname> und der
         <methodname>Zend_Pdf::setMetadata($metadata)</methodname> Methode wieder hinzugefügt werden:
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($pdfPath);
 $metadata = $pdf->getMetadata();
 $metadataDOM = new DOMDocument();
@@ -215,7 +216,6 @@ $titleNode->nodeValue = 'New title';
 $pdf->setMetadata($metadataDOM->saveXML());
 $pdf->save($pdfPath);
 ]]></programlisting>
-    </para>
 
     <para>
         Übliche Eingenschaften von Dokumenten werden verdoppelt un din der Info Struktur und dem

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 21847 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.writer">
     <title>Zend_Feed_Writer</title>
@@ -389,7 +389,7 @@ $out = $feed->export('atom');
                     </row>
 
                     <row>
-                        <entry><methodname>getGenerator()</methodname></entry>
+                        <entry><methodname>setGenerator()</methodname></entry>
 
                         <entry>
                             Erlaubt es einen Generator zu setzen. Der Parameter sollte ein Array
@@ -634,7 +634,7 @@ $out = $feed->export('atom');
                     </row>
 
                     <row>
-                        <entry><methodname>getDateModified()</methodname></entry>
+                        <entry><methodname>setDateModified()</methodname></entry>
 
                         <entry>
                             Setzt das Datum zu dem dieser Feed das letzte Mal geändert wurde. Der

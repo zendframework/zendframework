@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21661 -->
-<!-- Reviewed: 21661 -->
+<!-- EN-Revision: 21829 -->
+<!-- Reviewed: 21829 -->
 <sect1 id="zend.validate.introduction">
     <title>Einführung</title>
 
@@ -72,7 +72,7 @@
             Das folgende Beispiel zeigt die Prüfung einer E-Mail Adresse:
         </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress();
 
 if ($validator->isValid($email)) {
@@ -87,7 +87,8 @@ if ($validator->isValid($email)) {
         echo "Validation failure '$messageId': $message\n";
     }
 }
-]]></programlisting></sect2>
+]]></programlisting>
+    </sect2>
 
     <sect2 id="zend.validate.introduction.messages">
         <title>Nachrichten anpassen</title>
@@ -141,7 +142,7 @@ if (!$validator->isValid('word')) {
             welches Schlüssel/Nachrichten Paare enthält.
         </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 
 $validator->setMessages( array(
@@ -173,7 +174,8 @@ if (!validator->isValid('word')) {
         . $validator->max
         . "\n";
 }
-]]></programlisting></sect2>
+]]></programlisting>
+    </sect2>
 
     <sect2 id="zend.validate.introduction.static">
         <title>Verwenden der statischen is() Methode</title>
@@ -202,7 +204,7 @@ if (Zend_Validate::is($email, 'EmailAddress')) {
             Prüfung benötigt werden.
         </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
     // Ja, $value ist zwischen 1 und 12
 }

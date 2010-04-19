@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.drawing">
     <title>Zeichnen</title>
@@ -608,6 +608,7 @@ $fontName = $font->getFontName(Zend_Pdf_Font::NAME_POSTSCRIPT,
 $pdf->save($docPath);
 ...
 ]]></programlisting>
+
             <programlisting language="php"><![CDATA[
 ...
 $pdf = Zend_Pdf::load($docPath);
@@ -642,8 +643,9 @@ $pdf->save($docPath, true /* aufsteigender Update Modus */);
                         extrahiert. Deswegen können extrahierte Schriften keine richtigen
                         Schriftmaße bieten und die originale Schrift wird für die Berechnung der
                         Breite verwendet:
+                    </para>
 
-                        <programlisting language="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 ...
 $font = $pdf->extractFont($fontName);
 $originalFont = Zend_Pdf_Font::fontWithPath($fontPath);
@@ -662,7 +664,6 @@ for ($charIndex = 0; $charIndex < strlen($text); $charIndex++) {
 }
 ...
 ]]></programlisting>
-                    </para>
                 </listitem>
             </itemizedlist>
         </para>
@@ -1235,8 +1236,9 @@ public function getFontSize();
         <para>
             Transparenz kann durch Verwendung der <methodname>Zend_Pdf_Page::setAlpha()</methodname>
             Methode gesetzt werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Setzt die Transparenz
  *
@@ -1254,6 +1256,5 @@ public function getFontSize();
  */
 public function setAlpha($alpha, $mode = 'Normal');
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

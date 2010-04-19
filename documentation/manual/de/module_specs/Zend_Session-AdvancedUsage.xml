@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.advanced_usage">
     <title>Fortgeschrittene Benutzung</title>
@@ -51,10 +51,11 @@ Zend_Session::start();
                     aktiviert ist, kann das folgende in der <code>.htaccess</code> Datei
                     (normalerweise im <acronym>HTML</acronym> Dokumenten Basisverzeichnis)
                     hinzugefügt werden:
-                    <programlisting language="httpd.conf"><![CDATA[
+                </para>
+
+                <programlisting language="httpd.conf"><![CDATA[
 php_value session.auto_start 0
 ]]></programlisting>
-                </para>
             </listitem>
 
             <listitem>

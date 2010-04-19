@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21819 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.form.decorators.composite">
     <title>Erstellung und Darstellung von kombinierten Elementen</title>
@@ -8,7 +8,6 @@
         Im <link linkend="learning.form.decorators.individual">letzten Abschnitt</link>, hatten wir
         ein Beispiel welches ein "Element für das Geburtsdatum" gezeigt hat:
     </para>
-
 
     <programlisting language="php"><![CDATA[
 <div class="element">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
     <title>Einführung</title>
@@ -58,14 +58,14 @@
             Nachfolgend ist ein grundsätzliches Beispiel der Verwendung eines Filters über zwei
             Eingabedaten, einem Und-Zeichen (<emphasis>&amp;</emphasis>) und einem Hochkommazeichen
             (<emphasis>&quot;</emphasis>):
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
 echo $htmlEntities->filter('&'); // &amp;
 echo $htmlEntities->filter('"'); // &quot;
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.filter.introduction.static">
@@ -81,22 +81,22 @@ echo $htmlEntities->filter('"'); // &quot;
             <methodname>filterStatic()</methodname> Methode lädt die Klasse automatisch, erstellt
             eine Instanz, und führt die Eingabedaten der <methodname>filter()</methodname> Methode
             zu.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo Zend_Filter::filterStatic('&', 'HtmlEntities');
 ]]></programlisting>
-        </para>
 
         <para>
             Es kann auch ein Array von Konstruktor Argumenten übergeben werden, wen diese für die
             Filterklasse benötigt werden.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo Zend_Filter::filterStatic('"',
                                'HtmlEntities',
                                array('quotestyle' => ENT_QUOTES));
 ]]></programlisting>
-        </para>
 
         <para>
             Die statische Verwendung kann für das Ad-Hoc aufrufen von Filtern bequem sein, aber wenn

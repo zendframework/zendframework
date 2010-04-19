@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21826 -->
+<!-- EN-Revision: 21917 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-project">
     <title>Das Projekt erstellen</title>
@@ -68,7 +68,7 @@
 
             <para>
                 Wenn man Probleme hat das <command>zf</command> Kommandozeilen Tool zu konfigurieren
-                sollte man in <link linkend="zend.tool.framework.clitool.setup-general">das
+                sollte man in <link linkend="zend.tool.framework.clitool">das
                     Handbuch</link> sehen.
             </para>
         </note>

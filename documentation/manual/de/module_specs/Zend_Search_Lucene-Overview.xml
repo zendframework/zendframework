@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.overview">
     <title>Überblick</title>
@@ -130,8 +130,9 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
         <para>
             Die Codierung kann für unterschiedliche Dokumente verschieden sein genauso wie für
             unterschiedliche Felder innerhalb eines Dokuments:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = new Zend_Search_Lucene_Document();
 $doc->addField(Zend_Search_Lucene_Field::Text('title',
                                               $title,
@@ -140,18 +141,17 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
                                                   $contents,
                                                   'utf-8'));
 ]]></programlisting>
-        </para>
 
         <para>
             Wenn der encoding Parameter nicht angegeben wurde, wird das aktuelle Gebietsschema
             wärend der Verarbeitungzeit verwendet. Zum Beispiel:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 setlocale(LC_ALL, 'de_DE.iso-8859-1');
 ...
 $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
 ]]></programlisting>
-        </para>
 
         <para>
             Felder werden immer gespeichert und vom Index in UTF-8 Codierung zurückgegeben. Jede
@@ -301,15 +301,15 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
             <classname>Zend_Search_Lucene</classname> bietet ein <acronym>HTML</acronym> Parsing
             Feature. Dokumente können direkt von einer <acronym>HTML</acronym> Datei oder String
             erzeugt werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTMLFile($filename);
 $index->addDocument($doc);
 ...
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
 
         <para>
             Die <classname>Zend_Search_Lucene_Document_Html</classname> Klasse verwendet die
@@ -361,8 +361,9 @@ $index->addDocument($doc);
         <para>
             Analysierte Dokumente können durch den Programmierer mit jedem anderen Feld ausgegeben
             werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed('created',
                                                    time()));
@@ -372,20 +373,19 @@ $doc->addField(Zend_Search_Lucene_Field::Text('annotation',
                                               'Document annotation text'));
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
 
         <para>
             Dokument-Links sind im erstellten Dokument nicht enthalten, können aber mit den
             <methodname>Zend_Search_Lucene_Document_Html::getLinks()</methodname> und
             <methodname>Zend_Search_Lucene_Document_Html::getHeaderLinks()</methodname> Methoden
             empfangen werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
 $linksArray = $doc->getLinks();
 $headerLinksArray = $doc->getHeaderLinks();
 ]]></programlisting>
-        </para>
 
         <para>
             Beginnend mit Zend Framework 1.6 ist es auch möglich Links mit dem <code>rel</code>
@@ -406,12 +406,12 @@ $headerLinksArray = $doc->getHeaderLinks();
         <para>
             <classname>Zend_Search_Lucene</classname> bietet ein Word 2007 Parsing Feature.
             Dokumente können direkt aus einer Word 2007 Datei heraus erstellt werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Docx::loadDocxFile($filename);
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
 
         <para>
             Die <classname>Zend_Search_Lucene_Document_Docx</classname> Klasse verwendet die
@@ -487,8 +487,9 @@ $index->addDocument($doc);
         <para>
             Eingelesene Dokumente können vom Programierer mit jedem anderen Feld argumentiert
             werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Docx::loadDocxFile($filename);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed(
     'indexTime',
@@ -500,7 +501,6 @@ $doc->addField(Zend_Search_Lucene_Field::Text(
 );
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.search.lucene.index-creation.pptx-documents">
@@ -509,12 +509,12 @@ $index->addDocument($doc);
         <para>
             <classname>Zend_Search_Lucene</classname> bietet ein Parsing Feature für Powerpoint
             2007. Dokumente können direkt auf einer Powerpoint 2007 Datei heraus erstellt werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Pptx::loadPptxFile($filename);
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
 
         <para>
             Die <classname>Zend_Search_Lucene_Document_Pptx</classname> Klasse verwendet die
@@ -590,8 +590,9 @@ $index->addDocument($doc);
         <para>
             Eingelesene Dokumente können vom Programierer mit jedem anderen Feld argumentiert
             werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Pptx::loadPptxFile($filename);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed(
     'indexTime',
@@ -601,7 +602,6 @@ $doc->addField(Zend_Search_Lucene_Field::Text(
     'Anmerkungstext des Dokuments'));
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.search.lucene.index-creation.xlsx-documents">
@@ -610,12 +610,12 @@ $index->addDocument($doc);
         <para>
             <classname>Zend_Search_Lucene</classname> bietet ein Parsing Feature für Excel 2007.
             Dokumente können direkt von einer Excel 2007 Datei erstellt werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($filename);
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
 
         <para>
             Die <classname>Zend_Search_Lucene_Document_Xlsx</classname> Klasse verwendet die
@@ -691,8 +691,9 @@ $index->addDocument($doc);
         <para>
             Eingelesene Dokumente können vom Programierer mit jedem anderen Feld argumentiert
             werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($filename);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed(
     'indexTime',
@@ -702,6 +703,5 @@ $doc->addField(Zend_Search_Lucene_Field::Text(
     'Anmerkungstext des Dokuments'));
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

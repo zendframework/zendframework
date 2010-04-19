@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21823 -->
-<!-- Reviewed: 21823 -->
+<!-- EN-Revision: 21843 -->
+<!-- Reviewed: 21843 -->
 <sect1 id="zend.translate.sourcecreation">
     <title>Erstellen von Quelldateien</title>
 
@@ -47,7 +47,7 @@ $translate = new Zend_Translate(
         'locale'  => 'en'
     )
 );
-$translate->addTranslation(array('content' => $deutsch, 'locale' => 'de'));
+$translate->addTranslation(array('content' => $german, 'locale' => 'de'));
 ]]></programlisting>
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21831 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron">
     <title>Zend_Service_StrikeIron</title>
@@ -174,14 +174,14 @@
             die eigenen Account Informationen von StrikeIron und andere Option im Konstruktor zu
             spezifizieren. Sie bietet auch eine Factory Methode die Clients für StrikeIron Services
             zurück gibt:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
 $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
 ]]></programlisting>
-        </para>
 
         <para>
             Die <methodname>getService()</methodname> Methode gibt einen Client für irgendein
@@ -209,8 +209,9 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
             Clienten für ein gewünschtes StrikeIron Service zu erhalten, kann dieser Client
             verwendet werden durch Aufruf seiner Methoden ganz wie jedes andere
             <acronym>PHP</acronym> Objekt.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -224,6 +225,7 @@ echo $rateInfo->abbreviation;
 echo $rateInfo->GST;
 ]]></programlisting>
 
+        <para>
             Im obigen Beispiel wird die <methodname>getService()</methodname> Methode verwendet um
             einen Client zum <link
                 linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Verkaufs-
@@ -266,8 +268,9 @@ echo $rateInfo->GST;
             Der einfachste Weg ein Ergebnis vom Service zu betrachten ist die Verwendung der
             eingebauten <acronym>PHP</acronym> Methode <ulink
                 url="http://www.php.net/print_r">print_r()</ulink>:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -291,7 +294,6 @@ Zend_Service_StrikeIron_Decorator Object
         )
 )
 ]]></programlisting>
-        </para>
 
         <para>
             In der obigen Ausgabe sehen wir das der Dekorator (<varname>$rateInfo</varname>) ein
@@ -337,8 +339,9 @@ Zend_Service_StrikeIron_Decorator Object
             Eine Ausnahme wird geworfen wenn solch ein Fehler auftritt. Man sollte das
             berücksichtigen und solche Ausnahmen fangen wenn man Methodenaufrufe zu einem Service
             durchführt:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -355,6 +358,7 @@ try {
 }
 ]]></programlisting>
 
+        <para>
             Die geworfenen Ausnahmen werden immer
             <classname>Zend_Service_StrikeIron_Exception</classname> sein.
         </para>
@@ -393,8 +397,9 @@ try {
             Jeder StrikeIron Client, der von der <code>getService</code> Methode zurückgegeben wird,
             hat die Möglichkeit den Account Status für diesen Service zu prüfen indem die
             <methodname>getSubscriptionInfo()</methodname> Methode dieses Clients verwendet wird:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Einen Client für das Verkaufs / Steuerbasis Service erhalten
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
@@ -405,7 +410,6 @@ $taxBasic = $strikeIron->getService(array('class => 'SalesUseTaxBasic'));
 $subscription = $taxBasic->getSubscriptionInfo();
 echo $subscription->remainingHits;
 ]]></programlisting>
-        </para>
 
         <para>
             Die <methodname>getSubscriptionInfo()</methodname> Methode gibt ein Objekt zurück, das

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.extending">
     <title>Zend_Tool erweitern</title>
@@ -505,7 +505,6 @@ class My_Component_Manifest
     }
 }
 ]]></programlisting>
-
                 </example>
             </sect4>
 
@@ -605,7 +604,7 @@ class My_Component_HelloProvider
                         will, würde man möglicherweise folgendes in OO Code machen:
                     </para>
 
-                <programlisting language="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     implements Zend_Tool_Framework_Provider_Interface
 {
@@ -899,8 +898,6 @@ class My_Component_HelloProvider
         <!--
         <sect3 id="zend.tool.extending.zend-tool-project.resources-and-contexts">
             <title>Creating Resources &amp; Contexts</title>
-
-
 
         </sect3>
         -->

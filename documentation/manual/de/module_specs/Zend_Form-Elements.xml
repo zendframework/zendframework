@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 21909 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.elements">
     <title>Erstellen von Form Elementen mit Hilfe von Zend_Form_Element</title>
@@ -231,8 +231,7 @@ $filtered = $element->getValue();
 
             <listitem>
                 <para>
-                    Angabe eines Filternamens - entweder ein Kurzname oder ein voll qualifizierter
-                    Klassenname
+                    Angabe eines kurzen Filternamens
                 </para>
             </listitem>
         </itemizedlist>
@@ -244,9 +243,6 @@ $filtered = $element->getValue();
         <programlisting language="php"><![CDATA[
 // Konkrete Filterinstanz:
 $element->addFilter(new Zend_Filter_Alnum());
-
-// Voll qualifizierter Klassenname:
-$element->addFilter('Zend_Filter_Alnum');
 
 // Kurzname des Filters:
 $element->addFilter('Alnum');
@@ -357,8 +353,7 @@ $unfiltered = $element->getUnfilteredValue();
 
             <listitem>
                 <para>
-                    Anbieten eines Prüfnamens - entweder ein Kurzname oder ein voll qualifizierter
-                    Klassenname
+                    Anbieten eines kurzen Prüfnamens
                 </para>
             </listitem>
         </itemizedlist>
@@ -370,9 +365,6 @@ $unfiltered = $element->getUnfilteredValue();
         <programlisting language="php"><![CDATA[
 // Konkrete Prüfinstanz:
 $element->addValidator(new Zend_Validate_Alnum());
-
-// Voll qualifizierter Klassenname:
-$element->addValidator('Zend_Validate_Alnum');
 
 // Kurzer Prüfname:
 $element->addValidator('Alnum');
@@ -606,34 +598,42 @@ $messages = $element->getMessages();
 
         <para>
             Zusätzlich zu Prüfungen, kann spezifiziert werden, dass ein Element benötigt wird,
-            indem <methodname>setRequired(true)</methodname> verwendet wird. Standardmäßig ist
-            dieses Flag <constant>FALSE</constant>, was bedeutet, dass die Prüfkette übersprungen
-            wird, wenn kein Wert an <methodname>isValid()</methodname> übergeben wird. Dieses
-            Verhalten kann auf verschiedene Weisen geändert werden:
+            indem <methodname>setRequired($flag)</methodname> verwendet wird. Standardmäßig ist
+            dieses Flag <constant>FALSE</constant>. In Kombination mit
+            <methodname>setAllowEmpty($flag)</methodname> (Standardmäßig <constant>TRUE</constant>)
+            und <methodname>setAutoInsertNotEmptyValidator($flag)</methodname> (standardmäßig
+            <constant>TRUE</constant>), kann das Verhalten der Prüfkette auf unterschiedliche Art
+            und Weise verändert werden:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    Standardmäßig, wenn ein Element benötigt wird, ist auch ein Flag 'allowEmpty'
-                    <constant>TRUE</constant>. Das bedeutet, dass, wenn ein Wert evaluiert wird,
-                    der leer ist, und an <methodname>isValid()</methodname> übergeben wird, die
-                    Prüfung übersprungen wird. Dieses Flag kann gewechselt werden mit Hilfe der
-                    Zugriffsmethode <methodname>setAllowEmpty($flag)</methodname>; Wenn das Flag
-                    <constant>FALSE</constant> ist, und ein Wert übergeben wird, werden die
-                    Prüfungen trotzdem durchlaufen.
+                    Bei Verwendung der Standardwerte werden beim Prüfen eines Elements ohne der
+                    Übergabe eines Werts, oder der Übergabe eines leeren Strings, alle Prüfungen
+                    übersprungen und <constant>TRUE</constant> zurückgegeben.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    Standardmäßig, wenn ein Element benötigt wird, es aber keine 'NotEmpty'
-                    Prüfung hat, wird <methodname>isValid()</methodname> eine an oberster Stelle im
-                    Stack platzieren, mit gesetztem <varname>$breakChainOnFailure</varname> Flag.
-                    Das heißt, dass das Flag folgende semantische Bedeutung bekommt: Wenn kein Wert
-                    übergeben wird, wird die Übertragung sofort ungülig und der Benutzer wird
-                    informiert, was die anderen Prüfungen davon abhält, ausgeführt zu werden, auf
-                    Daten, von denen wir bereits wissen, dass sie ungültig sind.
+                    <methodname>setAllowEmpty(false)</methodname> prüft, wenn die anderen zwei
+                    erwähnten Flags unberührt bleiben, gegen die Prüfkette welche für dieses Element
+                    definiert wurde, unabhängig von dem an <methodname>isValid()</methodname>
+                    übergebenen Wert.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setRequired(true)</methodname> fügt, wenn die anderen zwei
+                    erwähnten Flags unberührt bleiben, eine 'NotEmpty' Prüfung an den Beginn der
+                    Prüfkette (wenn nicht bereits eine gesetzt wurde) wobei das
+                    <varname>$breakChainOnFailure</varname> Flag gesetzt wird. Das heißt, dass das
+                    Flag folgende semantische Bedeutung bekommt: Wenn kein Wert übergeben wird, wird
+                    die Übertragung sofort ungülig und der Benutzer wird informiert, was die anderen
+                    Prüfungen davon abhält, ausgeführt zu werden, auf Daten, von denen wir bereits
+                    wissen, dass sie ungültig sind.
                 </para>
 
                 <para>

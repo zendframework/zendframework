@@ -467,7 +467,7 @@ class Zend_Service_Flickr
                               'max_upload_date', 'min_taken_date', 'max_taken_date', 'license', 'sort',
                               'privacy_filter', 'bbox', 'accuracy', 'safe_search', 'content_type', 'machine_tags',
                               'machine_tag_mode', 'group_id', 'contacts', 'woe_id', 'place_id', 'media', 'has_geo',
-                              'geo_context', 'lat'. 'lon', 'radius', 'radius_units', 'is_commons', 'is_gallery',
+                              'geo_context', 'lat', 'lon', 'radius', 'radius_units', 'is_commons', 'is_gallery',
                               'extras', 'per_page', 'page');
 
         $this->_compareOptions($options, $validOptions);

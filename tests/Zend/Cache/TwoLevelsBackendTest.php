@@ -97,6 +97,33 @@ class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_CommonExtendedBackendTe
         ));
     }
 
+    public function testSaveOverwritesIfFastIsFull()
+    {
+        $slowBackend = 'File';
+        $fastBackend = $this->getMock('Zend_Cache_Backend_Apc', array('getFillingPercentage'));
+        $fastBackend->expects($this->at(0))
+            ->method('getFillingPercentage')
+            ->will($this->returnValue(0));
+        $fastBackend->expects($this->at(1))
+            ->method('getFillingPercentage')
+            ->will($this->returnValue(90));
+        $slowBackendOptions = array(
+            'cache_dir' => $this->_cache_dir
+        );
+        $cache = new Zend_Cache_Backend_TwoLevels(array(
+            'fast_backend' => $fastBackend,
+            'slow_backend' => $slowBackend,
+            'slow_backend_options' => $slowBackendOptions,
+            'stats_update_factor' => 1
+        ));
+
+        $id = 'test'.uniqid();
+        $cache->save(10, $id); //fast usage at 0%
+
+        $cache->save(100, $id); //fast usage at 90%
+        $this->assertEquals(100, $cache->load($id));
+    }
+
 }
 
 

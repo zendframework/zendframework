@@ -24,7 +24,8 @@ namespace ZendTest\Session\SaveHandler;
 
 use Zend\Session\SaveHandler\DbTable,
     Zend\Session\SaveHandler\Exception as SaveHandlerException,
-    Zend\Session\Manager;
+    Zend\Session\Manager,
+    ZendTest\Session\TestAsset\TestManager;
 
 /**
  * Unit testing for DbTable include all tests for
@@ -84,11 +85,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Zend\\Session\\SaveHandler\\DbTable tests are not enabled due to missing PDO_Sqlite extension');
         }
 
-        $this->manager = $manager = new Manager(array(
-            'class'   => 'Zend\\Session\\Configuration\\StandardConfiguration',
-            'storage' => 'Zend\\Session\\Storage\\ArrayStorage',
-            'handler' => 'ZendTest\\Session\\TestAsset\\TestHandler',
-        ));
+        $this->manager = $manager = new TestManager();
         $this->_saveHandlerTableConfig['manager'] = $this->manager;
         $this->_setupDb($this->_saveHandlerTableConfig['primary']);
     }
@@ -131,7 +128,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         unset($config['name']);
         try {
             $savePath = ini_get('session.save_path');
-            ini_set('session.save_path', dirname(__FILE__));
+            $this->manager->getConfig()->setSavePath(__DIR__);
             $this->_usedSaveHandlers[] =
                 $saveHandler = new DbTable($config);
             $this->fail();
@@ -349,11 +346,9 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
         $this->_usedSaveHandlers[] =
             $saveHandler = new DbTable($config);
-        $manager = new Manager(array(
-            'handler' => 'ZendTest\\Session\\TestAsset\\TestHandler',
-        ));
+        $manager = new TestManager();
         $saveHandler->setManager($manager);
-        $manager->getHandler()->start();
+        $manager->start();
 
         /**
          * @see Zend_Session_Namespace
@@ -390,7 +385,8 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($saveHandler->write($id, serialize($config)));
 
-        $this->assertSame($config, unserialize($saveHandler->read($id)));
+        $data = unserialize($saveHandler->read($id));
+        $this->assertEquals($config, $data, 'Expected ' . var_export($config, 1) . "\nbut got: " . var_export($data, 1));
     }
 
     public function testReadWriteComplex()
@@ -405,7 +401,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($saveHandler->write($id, serialize($config)));
 
-        $this->assertSame($config, unserialize($saveHandler->read($id)));
+        $this->assertEquals($config, unserialize($saveHandler->read($id)));
     }
 
     public function testReadWriteTwice()
@@ -421,11 +417,11 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($saveHandler->write($id, serialize($config)));
 
-        $this->assertSame($config, unserialize($saveHandler->read($id)));
+        $this->assertEquals($config, unserialize($saveHandler->read($id)));
 
         $this->assertTrue($saveHandler->write($id, serialize($config)));
 
-        $this->assertSame($config, unserialize($saveHandler->read($id)));
+        $this->assertEquals($config, unserialize($saveHandler->read($id)));
     }
 
     public function testReadWriteTwiceAndExpire()
@@ -443,7 +439,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($saveHandler->write($id, serialize($config)));
 
-        $this->assertSame($config, unserialize($saveHandler->read($id)));
+        $this->assertEquals($config, unserialize($saveHandler->read($id)));
 
         $this->assertTrue($saveHandler->write($id, serialize($config)));
 
@@ -467,20 +463,20 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($saveHandler->write($id, serialize($config)));
 
-        $this->assertSame($config, unserialize($saveHandler->read($id)));
+        $this->assertEquals($config, unserialize($saveHandler->read($id)));
 
         $id++;
         $this->assertTrue($saveHandler->write($id, serialize($config)));
 
-        $this->assertSame($config, unserialize($saveHandler->read($id)));
+        $this->assertEquals($config, unserialize($saveHandler->read($id)));
 
         $id++;
         $this->assertTrue($saveHandler->write($id, serialize($config)));
 
-        $this->assertSame($config, unserialize($saveHandler->read($id)));
+        $this->assertEquals($config, unserialize($saveHandler->read($id)));
 
         foreach ($this->_db->query('SELECT * FROM Sessions')->fetchAll() as $row) {
-            $this->assertSame($config, unserialize($row['data']));
+            $this->assertEquals($config, unserialize($row['data']));
         }
 
         sleep(2);

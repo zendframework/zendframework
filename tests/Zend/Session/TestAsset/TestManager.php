@@ -1,13 +1,16 @@
 <?php
 namespace ZendTest\Session\TestAsset;
 
-use Zend\Session\Handler as SessionHandler,
+use Zend\Session\AbstractManager,
     Zend\Session\Configuration as SessionConfiguration,
     Zend\Session\Storage as SessionStorage;
 
-class TestHandler implements SessionHandler
+class TestManager extends AbstractManager
 {
     public $started = false;
+
+    protected $_configDefaultClass = 'Zend\\Session\\Configuration\\StandardConfiguration';
+    protected $_storageDefaultClass = 'Zend\\Session\\Storage\\ArrayStorage';
 
     public function start()
     {
@@ -26,7 +29,6 @@ class TestHandler implements SessionHandler
     {
         $this->started = false;
     }
-
 
     public function getName()
     {}
@@ -69,21 +71,11 @@ class TestHandler implements SessionHandler
 
     public function setConfig(SessionConfiguration $config)
     {
-        $this->config = $config;
-    }
-
-    public function getConfig()
-    {
-        return $this->config;
+        $this->_setConfig($config);
     }
 
     public function setStorage(SessionStorage $storage)
     {
-        $this->storage = $storage;
-    }
-
-    public function getStorage()
-    {
-        return $this->storage;
+        $this->_setStorage($storage);
     }
 }

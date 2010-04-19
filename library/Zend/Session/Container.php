@@ -8,6 +8,7 @@ class Container extends ArrayObject
 {
     protected $_name;
     protected $_manager;
+    protected static $_managerDefaultClass = 'Zend\\Session\\SessionManager';
     protected static $_defaultManager;
 
     public function __construct($name = 'Default', $manager = null)
@@ -22,7 +23,7 @@ class Container extends ArrayObject
         parent::__construct(array(), ArrayObject::ARRAY_AS_PROPS);
 
         // Start session
-        $this->getManager()->getHandler()->start();
+        $this->getManager()->start();
     }
 
     public static function setDefaultManager(Manager $manager = null)
@@ -33,7 +34,7 @@ class Container extends ArrayObject
     public static function getDefaultManager()
     {
         if (null === self::$_defaultManager) {
-            self::$_defaultManager = new Manager();
+            self::$_defaultManager = new self::$_managerDefaultClass();
         }
         return self::$_defaultManager;
     }
@@ -54,7 +55,7 @@ class Container extends ArrayObject
             $manager = self::getDefaultManager();
         }
         if (!$manager instanceof Manager) {
-            throw new Exception('Manager provided is invalid; must extend Manager class');
+            throw new Exception('Manager provided is invalid; must implement Manager interface');
         }
         $this->_manager = $manager;
         return $this;

@@ -12,10 +12,9 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         $_SESSION = array();
         Container::setDefaultManager(null);
-        $this->manager = $manager = new Manager(array(
+        $this->manager = $manager = new TestAsset\TestManager(array(
             'class'   => 'Zend\\Session\\Configuration\\StandardConfiguration',
             'storage' => 'Zend\\Session\\Storage\\ArrayStorage',
-            'handler' => 'ZendTest\\Session\\TestAsset\\TestHandler',
         ));
         $this->container = new Container('Default', $manager);
     }
@@ -28,10 +27,9 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testInstantiationStartsSession()
     {
-        $handler = $this->manager->getHandler();
-        $handler->destroy();
+        $this->manager->destroy();
         $container = new Container('Default', $this->manager);
-        $this->assertTrue($handler->started);
+        $this->assertTrue($this->manager->started);
     }
 
     public function testInstantiatingContainerWithoutNameUsesDefaultAsName()
@@ -90,14 +88,14 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetDefaultManager()
     {
-        $manager = new Manager;
+        $manager = new TestAsset\TestManager;
         Container::setDefaultManager($manager);
         $this->assertSame($manager, Container::getDefaultManager());
     }
 
     public function testCanSetDefaultManagerToNull()
     {
-        $manager = new Manager;
+        $manager = new TestAsset\TestManager;
         Container::setDefaultManager($manager);
         Container::setDefaultManager(null);
         $this->assertNotSame($manager, Container::getDefaultManager());
@@ -129,16 +127,13 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($config instanceof Session\Configuration\SessionConfiguration);
         $storage = $manager->getStorage();
         $this->assertTrue($storage instanceof Session\Storage\SessionStorage);
-        $handler = $manager->getHandler();
-        $this->assertTrue($handler instanceof Session\Handler\SessionHandler);
     }
 
     public function testContainerAllowsInjectingManagerViaConstructor()
     {
-        $manager = new Manager(array(
+        $manager = new TestAsset\TestManager(array(
             'class'   => 'Zend\\Session\\Configuration\\StandardConfiguration',
             'storage' => 'Zend\\Session\\Storage\\ArrayStorage',
-            'handler' => 'ZendTest\\Session\\TestAsset\\TestHandler',
         ));
         $container = new Container('Foo', $manager);
         $this->assertSame($manager, $container->getManager());

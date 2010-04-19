@@ -61,7 +61,7 @@ class DbTable
     const PRIMARY_TYPE_WHERECLAUSE = 'PRIMARY_TYPE_WHERECLAUSE';
 
     /**
-     * @var Zend\Session\Manager
+     * @var Zend\Session\Handler
      */
     protected $_manager;
 
@@ -232,7 +232,7 @@ class DbTable
      */
     public function __destruct()
     {
-        $this->getManager()->getHandler()->writeClose();
+        $this->getManager()->writeClose();
     }
 
     /**

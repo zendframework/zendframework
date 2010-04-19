@@ -1,18 +1,22 @@
 <?php
 
-namespace Zend\Session\Handler;
+namespace Zend\Session;
 
-use Zend\Session\Configuration,
-    Zend\Session\Exception as SessionException,
-    Zend\Session\Handler as HandlerDefinition,
-    Zend\Session\Storage,
-    Zend\Session\ValidatorChain,
-    Zend\Validator\Alnum as AlnumValidator,
+use Zend\Validator\Alnum as AlnumValidator,
     Zend\Messenger;
 
-class SessionHandler implements HandlerDefinition
+class SessionManager extends AbstractManager
 {
+    /**
+     * @var Configuration
+     */
     protected $_config;
+
+    /**
+     * @var Storage
+     */
+    protected $_storage;
+
     protected $_defaultDestroyOptions = array(
         'send_expire_cookie' => true,
         'clear_storage'      => false,
@@ -20,7 +24,6 @@ class SessionHandler implements HandlerDefinition
     protected $_destroyed;
     protected $_name;
     protected $_sessionStarted;
-    protected $_storage;
     protected $_validatorChain;
 
     /**
@@ -44,7 +47,7 @@ class SessionHandler implements HandlerDefinition
         }
         session_start();
         if (!$this->isValid()) {
-            throw new SessionException('Session failed validation');
+            throw new Exception('Session failed validation');
         }
     }
 
@@ -105,12 +108,12 @@ class SessionHandler implements HandlerDefinition
     public function setName($name)
     {
         if ($this->sessionExists()) {
-            throw new SessionException('Cannot set session name after a session has already started');
+            throw new Exception('Cannot set session name after a session has already started');
         }
 
         $validator = new AlnumValidator();
         if (!$validator->isValid($name)) {
-            throw new SessionException('Name provided contains invalid characters; must be alphanumeric only');
+            throw new Exception('Name provided contains invalid characters; must be alphanumeric only');
         }
 
         $this->_name = $name;
@@ -211,34 +214,6 @@ class SessionHandler implements HandlerDefinition
             $config->getCookieSecure(), 
             $config->getCookieHTTPOnly()
         );
-    }
-
-    public function setConfig(Configuration $config)
-    {
-        $this->_config = $config;
-        return $this;
-    }
-
-    public function getConfig()
-    {
-        if (null === $this->_config) {
-            $this->setConfig(new Configuration\SessionConfiguration());
-        }
-        return $this->_config;
-    }
-
-    public function setStorage(Storage $storage)
-    {
-        $this->_storage = $storage;
-        return $this;
-    }
-
-    public function getStorage()
-    {
-        if (null === $this->_storage) {
-            $this->setStorage(new Storage\SessionStorage());
-        }
-        return $this->_storage;
     }
 
     /**

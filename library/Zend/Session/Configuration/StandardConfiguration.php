@@ -1,13 +1,100 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-webat this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Session
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
+ */
 
+/**
+ * @namespace
+ */
 namespace Zend\Session\Configuration;
 
 use Zend\Session\Configuration as Configurable,
     Zend\Session\Exception as SessionException,
-    Zend\Validator\Hostname\Hostname as HostnameValidator;
+    Zend\Validator\Hostname\Hostname as HostnameValidator,
+    Zend\Filter\Word\CamelCaseToUnderscore as CamelCaseToUnderscoreFilter;
 
+/**
+ * Standard session configuration
+ *
+ * @category   Zend
+ * @package    Zend_Session
+ * @subpackage Configuration
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class StandardConfiguration implements Configurable
 {
+    /**
+     * @var Zend\Filter Filter to convert CamelCase to underscore_separated
+     */
+    protected $_camelCaseToUnderscoreFilter;
+    
+    /**
+     * @var string session.cookie_domain
+     */
+    protected $_cookieDomain;
+
+    /**
+     * @var bool session.cookie_httponly
+     */
+    protected $_cookieHTTPOnly;
+
+    /**
+     * @var int session.cookie_lifetime
+     */
+    protected $_cookieLifetime;
+
+    /**
+     * @var string session.cookie_path
+     */
+    protected $_cookiePath;
+
+    /**
+     * @var bool session.cookie_secure
+     */
+    protected $_cookieSecure;
+
+    /**
+     * @var string session.name
+     */
+    protected $_name;
+
+    /**
+     * @var array All options
+     */
+    protected $_options = array();
+
+    /**
+     * @var int remember_me_seconds
+     */
+    protected $_rememberMeSeconds;
+
+    /**
+     * @var string session.save_path
+     */
+    protected $_savePath;
+
+    /**
+     * @var bool session.use_cookies
+     */
+    protected $_useCookies;
+
     /**
      * Set storage option in backend configuration store
      *
@@ -35,10 +122,13 @@ class StandardConfiguration implements Configurable
         return null;
     }
 
-    // session.save_path
-
-    protected $_savePath;
-
+    /**
+     * Set session.save_path
+     * 
+     * @param  string $path 
+     * @return StandardConfiguration
+     * @throws SessionException on invalid path
+     */
     public function setSavePath($path)
     {
         if (!is_dir($path)) {
@@ -49,6 +139,11 @@ class StandardConfiguration implements Configurable
         return $this;
     }
 
+    /**
+     * Set session.save_path
+     * 
+     * @return string|null
+     */
     public function getSavePath()
     {
         if (null === $this->_savePath) {
@@ -57,17 +152,28 @@ class StandardConfiguration implements Configurable
         return $this->_savePath;
     }
 
-    // session.name
-
-    protected $_name;
-
+    /**
+     * Set session.name
+     * 
+     * @param  string $name 
+     * @return StandardConfiguration
+     * @throws SessionException
+     */
     public function setName($name)
     {
         $this->_name = (string) $name;
+        if (empty($this->_name)) {
+            throw new SessionException('Invalid session name; cannot be empty');
+        }
         $this->setStorageOption('name', $this->_name);
         return $this;
     }
 
+    /**
+     * Get session.name
+     * 
+     * @return null|string
+     */
     public function getName()
     {
         if (null === $this->_name) {
@@ -76,30 +182,13 @@ class StandardConfiguration implements Configurable
         return $this->_name;
     }
     
-    // session.save_handler
-
-    protected $_saveHandler;
-
-    public function setSaveHandler($saveHandler)
-    {
-        $saveHandler = (string) $saveHandler;
-        $this->_saveHandler = $saveHandler;
-        $this->setStorageOption('save_handler', $saveHandler);
-        return $this;
-    }
-
-    public function getSaveHandler()
-    {
-        if (null === $this->_saveHandler) {
-            $this->_saveHandler = $this->getStorageOption('save_handler');
-        }
-        return $this->_saveHandler;
-    }
-    
-    // session.gc_probability
-
-    protected $_gcProbability;
-
+    /**
+     * Set session.gc_probability
+     * 
+     * @param  int $gcProbability 
+     * @return StandardConfiguration
+     * @throws SessionException
+     */
     public function setGcProbability($gcProbability)
     {
         if (!is_numeric($gcProbability)) {
@@ -109,23 +198,18 @@ class StandardConfiguration implements Configurable
         if (1 > $gcProbability || 100 < $gcProbability) {
             throw new SessionException('Invalid gc_probability; must be a percentage');
         }
-        $this->_gcProbability = $gcProbability;
+        $this->setOption('gc_probability', $gcProbability);
         $this->setStorageOption('gc_probability', $gcProbability);
         return $this;
     }
 
-    public function getGcProbability()
-    {
-        if (null === $this->_gcProbability) {
-            $this->_gcProbability = $this->getStorageOption('gc_probability');
-        }
-        return $this->_gcProbability;
-    }
-    
-    // session.gc_divisor
-
-    protected $_gcDivisor;
-
+    /**
+     * Set session.gc_divisor
+     * 
+     * @param  int $gcDivisor 
+     * @return StandardConfiguration
+     * @throws SessionException
+     */
     public function setGcDivisor($gcDivisor)
     {
         if (!is_numeric($gcDivisor)) {
@@ -135,23 +219,18 @@ class StandardConfiguration implements Configurable
         if (1 > $gcDivisor) {
             throw new SessionException('Invalid gc_divisor; must be a positive integer');
         }
-        $this->_gcDivisor = $gcDivisor;
+        $this->setOption('gc_divisor', $gcDivisor);
         $this->setStorageOption('gc_divisor', $gcDivisor);
         return $this;
     }
 
-    public function getGcDivisor()
-    {
-        if (null === $this->_gcDivisor) {
-            $this->_gcDivisor = $this->getStorageOption('gc_divisor');
-        }
-        return $this->_gcDivisor;
-    }
-    
-    // session.gc_maxlifetime
-
-    protected $_gcMaxlifetime;
-
+    /**
+     * Set gc.maxlifetime
+     * 
+     * @param  int $gcMaxlifetime 
+     * @return StandardConfiguration
+     * @throws SessionException
+     */
     public function setGcMaxlifetime($gcMaxlifetime)
     {
         if (!is_numeric($gcMaxlifetime)) {
@@ -163,43 +242,18 @@ class StandardConfiguration implements Configurable
             throw new SessionException('Invalid gc_maxlifetime; must be a positive integer');
         }
 
-        $this->_gcMaxlifetime = $gcMaxlifetime;
+        $this->setOption('gc_maxlifetime', $gcMaxlifetime);
         $this->setStorageOption('gc_maxlifetime', $gcMaxlifetime);
         return $this;
     }
 
-    public function getGcMaxlifetime()
-    {
-        if (null === $this->_gcMaxlifetime) {
-            $this->_gcMaxlifetime = $this->getStorageOption('gc_maxlifetime');
-        }
-        return $this->_gcMaxlifetime;
-    }
-    
-    // session.serialize_handler
-
-    protected $_serializeHandler;
-
-    public function setSerializeHandler($serializeHandler)
-    {
-        $serializeHandler = (string) $serializeHandler;
-        $this->_serializeHandler = $serializeHandler;
-        $this->setStorageOption('serialize_handler', $serializeHandler);
-        return $this;
-    }
-
-    public function getSerializeHandler()
-    {
-        if (null === $this->_serializeHandler) {
-            $this->_serializeHandler = $this->getStorageOption('serialize_handler');
-        }
-        return $this->_serializeHandler;
-    }
-    
-    // session.cookie_lifetime
-
-    protected $_cookieLifetime;
-
+    /**
+     * Set session.cookie_lifetime
+     * 
+     * @param  int $cookieLifetime 
+     * @return StandardConfiguration
+     * @throws SessionException
+     */
     public function setCookieLifetime($cookieLifetime)
     {
         if (!is_numeric($cookieLifetime)) {
@@ -214,6 +268,11 @@ class StandardConfiguration implements Configurable
         return $this;
     }
 
+    /**
+     * Get session.cookie_lifetime
+     * 
+     * @return int
+     */
     public function getCookieLifetime()
     {
         if (null === $this->_cookieLifetime) {
@@ -222,10 +281,13 @@ class StandardConfiguration implements Configurable
         return $this->_cookieLifetime;
     }
     
-    // session.cookie_path
-
-    protected $_cookiePath;
-
+    /**
+     * Set session.cookie_path
+     * 
+     * @param  string $cookiePath 
+     * @return StandardConfiguration
+     * @throws SessionException
+     */
     public function setCookiePath($cookiePath)
     {
         $cookiePath = (string) $cookiePath;
@@ -240,6 +302,11 @@ class StandardConfiguration implements Configurable
         return $this;
     }
 
+    /**
+     * Get session.cookie_path
+     * 
+     * @return string
+     */
     public function getCookiePath()
     {
         if (null === $this->_cookiePath) {
@@ -248,10 +315,13 @@ class StandardConfiguration implements Configurable
         return $this->_cookiePath;
     }
     
-    // session.cookie_domain
-
-    protected $_cookieDomain;
-
+    /**
+     * Set session.cookie_domain
+     * 
+     * @param  string $cookieDomain 
+     * @return StandardConfiguration
+     * @throws SessionException
+     */
     public function setCookieDomain($cookieDomain)
     {
         if (!is_string($cookieDomain)) {
@@ -269,6 +339,11 @@ class StandardConfiguration implements Configurable
         return $this;
     }
 
+    /**
+     * Get session.cookie_domain
+     * 
+     * @return string
+     */
     public function getCookieDomain()
     {
         if (null === $this->_cookieDomain) {
@@ -277,10 +352,12 @@ class StandardConfiguration implements Configurable
         return $this->_cookieDomain;
     }
     
-    // session.cookie_secure
-
-    protected $_cookieSecure;
-
+    /**
+     * Set session.cookie_secure
+     * 
+     * @param  bool $cookieSecure 
+     * @return StandardConfiguration
+     */
     public function setCookieSecure($cookieSecure)
     {
         $this->_cookieSecure = (bool) $cookieSecure;
@@ -288,6 +365,11 @@ class StandardConfiguration implements Configurable
         return $this;
     }
 
+    /**
+     * Get session.cookie_secure
+     * 
+     * @return bool
+     */
     public function getCookieSecure()
     {
         if (null === $this->_cookieSecure) {
@@ -296,13 +378,14 @@ class StandardConfiguration implements Configurable
         return $this->_cookieSecure;
     }
     
-    // session.cookie_httponly
-
-    protected $_cookieHTTPOnly;
-
     /**
+     * Set session.cookie_httponly
+     *
      * case sensitive method lookups in setOptions means this method has an 
      * unusual casing
+     *
+     * @param  bool $cookieHTTPOnly
+     * @return StandardConfiguration
      */
     public function setCookieHttponly($cookieHTTPOnly)
     {
@@ -311,6 +394,11 @@ class StandardConfiguration implements Configurable
         return $this;
     }
 
+    /**
+     * Get session.cookie_httponly
+     * 
+     * @return bool
+     */
     public function getCookieHTTPOnly()
     {
         if (null === $this->_cookieHTTPOnly) {
@@ -319,10 +407,12 @@ class StandardConfiguration implements Configurable
         return $this->_cookieHTTPOnly;
     }
     
-    // session.use_cookies
-
-    protected $_useCookies;
-
+    /**
+     * Set session.use_cookies
+     * 
+     * @param  bool $flag 
+     * @return StandardConfiguration
+     */
     public function setUseCookies($flag)
     {
         $this->_useCookies = (bool) $flag;
@@ -330,6 +420,11 @@ class StandardConfiguration implements Configurable
         return $this;
     }
 
+    /**
+     * Get session.use_cookies
+     * 
+     * @return bool
+     */
     public function getUseCookies()
     {
         if (null === $this->_useCookies) {
@@ -338,70 +433,30 @@ class StandardConfiguration implements Configurable
         return $this->_useCookies;
     }
     
-    // session.use_only_cookies
-
-    protected $_useOnlyCookies;
-
-    public function setUseOnlyCookies($flag)
-    {
-        $this->_useOnlyCookies = (bool) $flag;
-        $this->setStorageOption('use_only_cookies', $this->_useOnlyCookies);
-        return $this;
-    }
-
-    public function getUseOnlyCookies()
-    {
-        if (null === $this->_useOnlyCookies) {
-            $this->_useOnlyCookies = $this->getStorageOption('use_only_cookies');
-        }
-        return $this->_useOnlyCookies;
-    }
-
-    // session.referer_check
-
-    protected $_refererCheck;
-
-    public function setRefererCheck($referer_check)
-    {
-        $this->_refererCheck = (string) $referer_check;
-        $this->setStorageOption('referer_check', $this->_refererCheck);
-        return $this;
-    }
-
-    public function getRefererCheck()
-    {
-        if (null === $this->_refererCheck) {
-            $this->_refererCheck = $this->getStorageOption('referer_check');
-        }
-        return $this->_refererCheck;
-    }
-
-    // session.entropy_file
-
-    protected $_entropyFile;
-
+    /**
+     * Set session.entropy_file
+     * 
+     * @param  string $path 
+     * @return StandardConfiguration
+     * @throws SessionException
+     */
     public function setEntropyFile($path)
     {
         if (!file_exists($path) || is_dir($path) || !is_readable($path)) {
             throw new SessionException('Invalid entropy_file provided');
         }
-        $this->_entropyFile = $path;
+        $this->setOption('entropy_file', $path);
         $this->setStorageOption('entropy_file', $path);
         return $this;
     }
 
-    public function getEntropyFile()
-    {
-        if (null === $this->_entropyFile) {
-            $this->_entropyFile = $this->getStorageOption('entropy_file');
-        }
-        return $this->_entropyFile;
-    }
-    
-    // session.entropy_length
-
-    protected $_entropyLength;
-
+    /**
+     * set session.entropy_length
+     * 
+     * @param  int $entropyLength 
+     * @return StandardConfiguration
+     * @throws SessionException
+     */
     public function setEntropyLength($entropyLength)
     {
         if (!is_numeric($entropyLength)) {
@@ -411,42 +466,18 @@ class StandardConfiguration implements Configurable
             throw new SessionException('Invalid entropy_length; must be a positive integer or zero');
         }
 
-        $this->_entropyLength = (int) $entropyLength;
-        $this->setStorageOption('entropy_length', $this->_entropyLength);
+        $this->setOption('entropy_length', $entropyLength);
+        $this->setStorageOption('entropy_length', $entropyLength);
         return $this;
     }
 
-    public function getEntropyLength()
-    {
-        if (null === $this->_entropyLength) {
-            $this->_entropyLength = $this->getStorageOption('entropy_length');
-        }
-        return $this->_entropyLength;
-    }
-
-    // session.cache_limiter
-
-    protected $_cacheLimiter;
-
-    public function setCacheLimiter($cacheLimiter)
-    {
-        $this->_cacheLimiter = (string) $cacheLimiter;
-        $this->setStorageOption('cache_limiter', $this->_cacheLimiter);
-        return $this;
-    }
-
-    public function getCacheLimiter()
-    {
-        if (null === $this->_cacheLimiter) {
-            $this->_cacheLimiter = $this->getStorageOption('cache_limiter');
-        }
-        return $this->_cacheLimiter;
-    }
-    
-    // session.cache_expire
-
-    protected $_cacheExpire;
-
+    /**
+     * Set session.cache_expire
+     * 
+     * @param  int $cacheExpire 
+     * @return StandardConfiguration
+     * @throws SessionException
+     */
     public function setCacheExpire($cacheExpire)
     {
         if (!is_numeric($cacheExpire)) {
@@ -458,105 +489,36 @@ class StandardConfiguration implements Configurable
             throw new SessionException('Invalid cache_expire; must be a positive integer');
         }
 
-        $this->_cacheExpire = $cacheExpire;
+        $this->setOption('cache_expire', $cacheExpire);
         $this->setStorageOption('cache_expire', $cacheExpire);
         return $this;
     }
 
-    public function getCacheExpire()
-    {
-        if (null === $this->_cacheExpire) {
-            $this->_cacheExpire = $this->getStorageOption('cache_expire');
-        }
-        return $this->_cacheExpire;
-    }
-    
-    // session.use_trans_sid
-
-    protected $_useTransSid;
-
-    public function setUseTransSid($flag)
-    {
-        $this->_useTransSid = (bool) $flag;
-        $this->setStorageOption('use_trans_sid', $this->_useTransSid);
-        return $this;
-    }
-
-    public function getUseTransSid()
-    {
-        if (null === $this->_useTransSid) {
-            $this->_useTransSid = $this->getStorageOption('use_trans_sid');
-        }
-        return $this->_useTransSid;
-    }
-
-    // session.hash_function
-
-    protected $_hashFunction;
-
-    public function setHashFunction($hashFunction)
-    {
-        $this->_hashFunction = (string) $hashFunction;
-        $this->setStorageOption('hash_function', $this->_hashFunction);
-        return $this;
-    }
-
-    public function getHashFunction()
-    {
-        if (null === $this->_hashFunction) {
-            $this->_hashFunction = $this->getStorageOption('hash_function');
-        }
-        return $this->_hashFunction;
-    }
-
-    // session.hash_bits_per_character
-
-    protected $_hashBitsPerCharacter;
-
+    /**
+     * Set session.hash_bits_per_character
+     * 
+     * @param  int $hashBitsPerCharacter 
+     * @return StandardConfiguration
+     * @throws SessionException
+     */
     public function setHashBitsPerCharacter($hashBitsPerCharacter)
     {
         if (!is_numeric($hashBitsPerCharacter)) {
             throw new SessionException('Invalid hash bits per character provided');
         }
-        $this->_hashBitsPerCharacter = (int) $hashBitsPerCharacter;
-        $this->setStorageOption('hash_bits_per_character', $this->_hashBitsPerCharacter);
+        $hashBitsPerCharacter = (int) $hashBitsPerCharacter;
+        $this->setOption('hash_bits_per_character', $hashBitsPerCharacter);
+        $this->setStorageOption('hash_bits_per_character', $hashBitsPerCharacter);
         return $this;
     }
-
-    public function getHashBitsPerCharacter()
-    {
-        if (null === $this->_hashBitsPerCharacter) {
-            $this->_hashBitsPerCharacter = $this->getStorageOption('hash_bits_per_character');
-        }
-        return $this->_hashBitsPerCharacter;
-    }
-
-    // url_rewriter.tags
-
-    protected $_urlRewriterTags;
 
     /**
-     * @todo Probably should add more robust validation
+     * Set remember_me_seconds
+     * 
+     * @param  int $rememberMeSeconds 
+     * @return StandardConfiguration
+     * @throws SessionException
      */
-    public function setUrlRewriterTags($urlRewriterTags)
-    {
-        $this->_urlRewriterTags = (string) $urlRewriterTags;
-        $this->setStorageOption('url_rewriter_tags', $this->_urlRewriterTags);
-        return $this;
-    }
-
-    public function getUrlRewriterTags()
-    {
-        if (null === $this->_urlRewriterTags) {
-            $this->_urlRewriterTags = $this->getStorageOption('url_rewriter_tags');
-        }
-        return $this->_urlRewriterTags;
-    }
-
-    // remember_me_seconds
-
-    protected $_rememberMeSeconds;
-
     public function setRememberMeSeconds($rememberMeSeconds)
     {
         if (!is_numeric($rememberMeSeconds)) {
@@ -573,6 +535,11 @@ class StandardConfiguration implements Configurable
         return $this;
     }
 
+    /**
+     * Get remember_me_seconds
+     * 
+     * @return int
+     */
     public function getRememberMeSeconds()
     {
         if (null === $this->_rememberMeSeconds) {
@@ -581,19 +548,165 @@ class StandardConfiguration implements Configurable
         return $this->_rememberMeSeconds;
     }
  
-    // set options
-
+    /**
+     * Set many options at once
+     *
+     * If a setter method exists for the key, that method will be called; 
+     * otherwise, a standard option will be set with the value provided via 
+     * {@link setOption()}.
+     * 
+     * @param  array $options 
+     * @return StandardConfiguration
+     */
     public function setOptions(array $options)
     {
         $methods = get_class_methods($this);
         foreach ($options as $key => $value) {
             // translate key from underscore_separated to TitleCased
-            $internalKey = str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-            $method = 'set' . $internalKey;
+            $methodKey = str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+            $method = 'set' . $methodKey;
             if (in_array($method, $methods)) {
                 $this->$method($value);
+            } else {
+                $this->setOption($key, $value);
             }
         }
         return $this;
+    }
+
+    /**
+     * Set an individual option
+     *
+     * Keys are normalized to lowercase. After setting internally, calls
+     * {@link setStorageOption()} to allow further processing.
+     * 
+     * 
+     * @param  string $option 
+     * @param  mixed $value 
+     * @return StandardConfiguration
+     */
+    public function setOption($option, $value)
+    {
+        $option = $this->_normalizeOption($option);
+        $this->_options[$option] = $value;
+        $this->setStorageOption($option, $value);
+        return $this;
+    }
+
+    /**
+     * Get an individual option
+     *
+     * Keys are normalized to lowercase. If the option is not found, attempts 
+     * to retrieve it via {@link getStorageOption()}; if a value is returned
+     * from that method, it will be set as the internal value and returned.
+     *
+     * Returns null for unfound options
+     * 
+     * @param  string $option 
+     * @return mixed
+     */
+    public function getOption($option)
+    {
+        $option = $this->_normalizeOption($option);
+        if (array_key_exists($option, $this->_options)) {
+            return $this->_options[$option];
+        }
+
+        $value = $this->getStorageOption($option);
+        if (null !== $value) {
+            $this->setOption($option, $value);
+            return $value;
+        }
+
+        return null;
+    }
+
+    /**
+     * Check to see if an internal option has been set for the key provided.
+     * 
+     * @param  string $option 
+     * @return bool
+     */
+    public function hasOption($option)
+    {
+        $option = $this->_normalizeOption($option);
+        return array_key_exists($option, $this->_options);
+    }
+
+    /**
+     * Cast configuration to an array
+     * 
+     * @return array
+     */
+    public function toArray()
+    {
+        $options = $this->_options;
+        $extraOpts = array(
+            'cookie_domain'       => $this->getCookieDomain(),
+            'cookie_httponly'     => $this->getCookieHTTPOnly(),
+            'cookie_lifetime'     => $this->getCookieLifetime(),
+            'cookie_path'         => $this->getCookiePath(),
+            'cookie_secure'       => $this->getCookieSecure(),
+            'name'                => $this->getName(),
+            'remember_me_seconds' => $this->getRememberMeSeconds(),
+            'save_path'           => $this->getSavePath(),
+            'use_cookies'         => $this->getUseCookies(),
+        );
+        return array_merge($options, $extraOpts);
+    }
+
+    /**
+     * Intercept get*() and set*() methods
+     *
+     * Intercepts getters and setters and passes them to getOption() and setOption(), 
+     * respectively.
+     * 
+     * @param  string $method 
+     * @param  array $args 
+     * @return mixed
+     * @throws BadMethodCallException on non-getter/setter method
+     */
+    public function __call($method, $args)
+    {
+        if ('get' == substr($method, 0, 3)) {
+            // Call to a getter; return matching option.
+            // Transform method from MixedCase to underscore_separated.
+            $option = substr($method, 3);
+            $key    = $this->_getCamelCaseToUnderscoreFilter()->filter($option);
+            return $this->getOption($key);
+        }
+        if ('set' == substr($method, 0, 3)) {
+            // Call to a setter; return matching option.
+            // Transform method from MixedCase to underscore_separated.
+            $option = substr($method, 3);
+            $key    = $this->_getCamelCaseToUnderscoreFilter()->filter($option);
+            $value  = array_shift($args);
+            return $this->setOption($key, $value);
+        }
+        throw new \BadMethodCallException(sprintf('Method "%s" does not exist', $method));
+    }
+
+    /**
+     * Normalize an option name to lowercase
+     * 
+     * @param  string $option 
+     * @return string
+     */
+    protected function _normalizeOption($option)
+    {
+        return strtolower((string) $option);
+    }
+
+    /**
+     * Retrieve the CamelCaseToUnderscoreFilter
+     * 
+     * @return CamelCaseToUnderscoreFilter
+     */
+    protected function _getCamelCaseToUnderscoreFilter()
+    {
+        if (null === $this->_camelCaseToUnderscoreFilter) {
+            $this->_camelCaseToUnderscoreFilter = new CamelCaseToUnderscoreFilter();
+        }
+        return $this->_camelCaseToUnderscoreFilter;
     }
 }

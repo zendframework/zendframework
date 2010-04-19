@@ -59,7 +59,7 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSaveHandlerDefaultsToIniSettings()
     {
-        $this->assertSame(ini_get('session.save_handler'), $this->config->getSaveHandler());
+        $this->assertSame(ini_get('session.save_handler'), $this->config->getSaveHandler(), var_export($this->config->toArray(), 1));
     }
 
     public function testSaveHandlerIsMutable()
@@ -422,14 +422,14 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
     public function testUseOnlyCookiesIsMutable()
     {
         $value = ini_get('session.use_only_cookies') ? false : true;
-        $this->config->setUseOnlyCookies($value);
-        $this->assertEquals($value, (bool) $this->config->getUseOnlyCookies());
+        $this->config->setOption('use_only_cookies', $value);
+        $this->assertEquals($value, (bool) $this->config->getOption('use_only_cookies'));
     }
 
     public function testUseOnlyCookiesAltersIniSetting()
     {
         $value = ini_get('session.use_only_cookies') ? false : true;
-        $this->config->setUseOnlyCookies($value);
+        $this->config->setOption('use_only_cookies', $value);
         $this->assertEquals($value, (bool) ini_get('session.use_only_cookies'));
     }
 
@@ -442,19 +442,19 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testRefererCheckIsMutable()
     {
-        $this->config->setRefererCheck('FOOBAR');
-        $this->assertEquals('FOOBAR', $this->config->getRefererCheck());
+        $this->config->setOption('referer_check', 'FOOBAR');
+        $this->assertEquals('FOOBAR', $this->config->getOption('referer_check'));
     }
 
     public function testRefererCheckMayBeEmpty()
     {
-        $this->config->setRefererCheck('');
-        $this->assertEquals('', $this->config->getRefererCheck());
+        $this->config->setOption('referer_check', '');
+        $this->assertEquals('', $this->config->getOption('referer_check'));
     }
 
     public function testRefererCheckAltersIniSetting()
     {
-        $this->config->setRefererCheck('BARBAZ');
+        $this->config->setOption('referer_check', 'BARBAZ');
         $this->assertEquals('BARBAZ', ini_get('session.referer_check'));
     }
 
@@ -618,14 +618,14 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
     public function testUseTransSidIsMutable()
     {
         $value = ini_get('session.use_trans_sid') ? false : true;
-        $this->config->setUseTransSid($value);
-        $this->assertEquals($value, (bool) $this->config->getUseTransSid());
+        $this->config->setOption('use_trans_sid', $value);
+        $this->assertEquals($value, (bool) $this->config->getOption('use_trans_sid'));
     }
 
     public function testUseTransSidAltersIniSetting()
     {
         $value = ini_get('session.use_trans_sid') ? false : true;
-        $this->config->setUseTransSid($value);
+        $this->config->setOption('use_trans_sid', $value);
         $this->assertEquals($value, (bool) ini_get('session.use_trans_sid'));
     }
 
@@ -759,7 +759,7 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'save_handler',
-                'getSaveHandler',
+                'getOption',
                 'user',
             ),
             array(
@@ -854,7 +854,7 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'hash_bits_per_character',
-                'getHashBitsPerCharacter',
+                'getOption',
                 5,
             ),
             array(
@@ -872,6 +872,10 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $options = array($option => $value);
         $this->config->setOptions($options);
-        $this->assertSame($value, $this->config->$getter());
+        if ('getOption' == $getter) {
+            $this->assertSame($value, $this->config->getOption($option));
+        } else {
+            $this->assertSame($value, $this->config->$getter());
+        }
     }
 }

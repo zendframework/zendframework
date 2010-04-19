@@ -16,47 +16,43 @@
  * @package    Zend_Session
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
- * @since      Preview Release 0.2
  */
 
 /**
- * Zend_Session_Validator_HttpUserAgent
+ * @namespace
+ */
+namespace Zend\Session;
+
+/**
+ * Session validator interface
  *
- * @uses       Zend_Session_Validator_Abstract
  * @category   Zend
  * @package    Zend_Session
- * @subpackage Validator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Session_Validator_HttpUserAgent extends Zend_Session_Validator_Abstract
+interface Validator
 {
+    /**
+     * This method will be called at the beginning of
+     * every session to determine if the current environment matches
+     * that which was store in the setup() procedure.
+     *
+     * @return boolean
+     */
+    public function isValid();
 
     /**
-     * Setup() - this method will get the current user agent and store it in the session
-     * as 'valid data'
-     *
-     * @return void
+     * Get data from validator to be used for validation comparisons
+     * 
+     * @return mixed
      */
-    public function setup()
-    {
-        $this->setValidData( (isset($_SERVER['HTTP_USER_AGENT'])
-            ? $_SERVER['HTTP_USER_AGENT'] : null) );
-    }
+    public function getData();
 
     /**
-     * Validate() - this method will determine if the current user agent matches the
-     * user agent we stored when we initialized this variable.
-     *
-     * @return bool
+     * Get validator name for use with storing validators between requests
+     * 
+     * @return string
      */
-    public function validate()
-    {
-        $currentBrowser = (isset($_SERVER['HTTP_USER_AGENT'])
-            ? $_SERVER['HTTP_USER_AGENT'] : null);
-
-        return $currentBrowser === $this->getValidData();
-    }
-
+    public function getName();
 }

@@ -14107,10 +14107,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Session_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Session/AbstractSession.php</newRelativeFilePath>
-      <newNamespace>Zend\Session</newNamespace>
-      <newClassName>AbstractSession</newClassName>
-      <newFullyQualifiedName>Zend\Session\AbstractSession</newFullyQualifiedName>
+      <newRelativeFilePath></newRelativeFilePath>
+      <newNamespace></newNamespace>
+      <newClassName>NOCLASSAVAILABLE</newClassName>
+      <newFullyQualifiedName>NOCLASSAVAILABLE</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/Exception.php</originalRelativeFilePath>
@@ -14123,10 +14123,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/Namespace.php</originalRelativeFilePath>
       <originalClassName>Zend_Session_Namespace</originalClassName>
-      <newRelativeFilePath>Zend/Session/Namespace.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Session/Container.php</newRelativeFilePath>
       <newNamespace>Zend\Session</newNamespace>
-      <newClassName>Namespace</newClassName>
-      <newFullyQualifiedName>Zend\Session\Namespace</newFullyQualifiedName>
+      <newClassName>Container</newClassName>
+      <newFullyQualifiedName>Zend\Session\Container</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/SaveHandler/DbTable.php</originalRelativeFilePath>
@@ -14147,42 +14147,42 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/SaveHandler/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Session_SaveHandler_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Session/SaveHandler/SaveHandlerInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Session\SaveHandler</newNamespace>
-      <newClassName>SaveHandlerInterface</newClassName>
-      <newFullyQualifiedName>Zend\Session\SaveHandler\SaveHandlerInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Session/SaveHandler.php</newRelativeFilePath>
+      <newNamespace>Zend\Session</newNamespace>
+      <newClassName>SaveHandler</newClassName>
+      <newFullyQualifiedName>Zend\Session\SaveHandler</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/Validator/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Session_Validator_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Session/Validator/AbstractValidator.php</newRelativeFilePath>
-      <newNamespace>Zend\Session\Validator</newNamespace>
-      <newClassName>AbstractValidator</newClassName>
-      <newFullyQualifiedName>Zend\Session\Validator\AbstractValidator</newFullyQualifiedName>
+      <newRelativeFilePath></newRelativeFilePath>
+      <newNamespace></newNamespace>
+      <newClassName>NOCLASSAVAILABLE</newClassName>
+      <newFullyQualifiedName>NOCLASSAVAILABLE</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/Validator/HttpUserAgent.php</originalRelativeFilePath>
       <originalClassName>Zend_Session_Validator_HttpUserAgent</originalClassName>
-      <newRelativeFilePath>Zend/Session/Validator/HttpUserAgent.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Session/Validator/HTTPUserAgent.php</newRelativeFilePath>
       <newNamespace>Zend\Session\Validator</newNamespace>
-      <newClassName>HttpUserAgent</newClassName>
-      <newFullyQualifiedName>Zend\Session\Validator\HttpUserAgent</newFullyQualifiedName>
+      <newClassName>HTTPUserAgent</newClassName>
+      <newFullyQualifiedName>Zend\Session\Validator\HTTPUserAgent</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/Validator/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Session_Validator_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Session/Validator/ValidatorInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Session\Validator</newNamespace>
-      <newClassName>ValidatorInterface</newClassName>
-      <newFullyQualifiedName>Zend\Session\Validator\ValidatorInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Session/Validator.php</newRelativeFilePath>
+      <newNamespace>Zend\Session</newNamespace>
+      <newClassName>Validator</newClassName>
+      <newFullyQualifiedName>Zend\Session\Validator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Session.php</originalRelativeFilePath>
       <originalClassName>Zend_Session</originalClassName>
-      <newRelativeFilePath>Zend/Session/Session.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Session/Manager.php</newRelativeFilePath>
       <newNamespace>Zend\Session</newNamespace>
-      <newClassName>Session</newClassName>
-      <newFullyQualifiedName>Zend\Session\Session</newFullyQualifiedName>
+      <newClassName>Manager</newClassName>
+      <newFullyQualifiedName>Zend\Session\Manager</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/AutoDiscover/Exception.php</originalRelativeFilePath>

@@ -49,10 +49,11 @@ set_include_path(implode(PATH_SEPARATOR, $path));
 /**
  * Setup autoloading
  */
-function ZendTest_Autoloader($class) {
+function ZendTest_Autoloader($class) 
+{
     $class = ltrim($class, '\\');
 
-    if (!preg_match('#^Zend(Test)?\\\\#', $class)) {
+    if (!preg_match('#^Zend(Test)?(\\\\|_)#', $class)) {
         return false;
     }
 
@@ -69,12 +70,32 @@ function ZendTest_Autoloader($class) {
             $file = __DIR__ . '/Zend/';
             break;
         default:
+            $file = false;
+            break;;
+    }
+
+    if ($file) {
+        $file .= implode('/', $segments) . '.php';
+        if (file_exists($file)) {
+            return include_once $file;
+        }
+    }
+
+    $segments = explode('_', $class);
+    $ns       = array_shift($segments);
+
+    switch ($ns) {
+        case 'Zend':
+            $file = dirname(__DIR__) . '/library/Zend/';
+            break;
+        default:
             return false;
     }
     $file .= implode('/', $segments) . '.php';
     if (file_exists($file)) {
         return include_once $file;
     }
+
     return false;
 }
 spl_autoload_register('ZendTest_Autoloader', true, true);

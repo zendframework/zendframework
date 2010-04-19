@@ -13,36 +13,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
+ * @package    Zend_Messenger
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend\Filter\Word;
+namespace Zend\Messenger;
 
 /**
- * @uses       \Zend\Filter\Word\Separator\AbstractSeparator
+ * Invalid callback exception
+ *
+ * @uses       Exception
+ * @uses       Zend\Messenger\Exception
  * @category   Zend
- * @package    Zend_Filter
+ * @package    Zend_Messenger
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DashToSeparator extends AbstractSeparator
+class InvalidCallbackException
+    extends \Exception
+    implements Exception
 {
-    /**
-     * Defined by Zend\Filter\Filter
-     * 
-     * @param  string $value 
-     * @return string
-     */
-    public function filter($value)
-    {
-        $this->setMatchPattern('#-#');
-        $this->setReplacement($this->_separator);
-        return parent::filter($value);
-    }
 }

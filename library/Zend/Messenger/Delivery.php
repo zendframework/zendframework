@@ -13,36 +13,31 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
+ * @package    Zend_Messenger
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend\Filter\Word;
+namespace Zend\Messenger;
 
 /**
- * @uses       \Zend\Filter\Word\Separator\AbstractSeparator
+ * Interface for messengers
+ *
  * @category   Zend
- * @package    Zend_Filter
+ * @package    Zend_Messenger
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DashToSeparator extends AbstractSeparator
+interface Delivery
 {
-    /**
-     * Defined by Zend\Filter\Filter
-     * 
-     * @param  string $value 
-     * @return string
-     */
-    public function filter($value)
-    {
-        $this->setMatchPattern('#-#');
-        $this->setReplacement($this->_separator);
-        return parent::filter($value);
-    }
+    public function notify($topic, $argv = null);
+    public function notifyUntil($callback, $topic, $argv = null);
+    public function attach($topic, $context, $handler = null);
+    public function detach(Handler $handle);
+    public function getTopics();
+    public function getHandlers($topic);
+    public function clearHandlers($topic);
 }

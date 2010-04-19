@@ -6,7 +6,7 @@
  *
  * This source file is subject to the new BSD license that is bundled
  * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
+ * It is also available through the world-wide-webat this URL:
  * http://framework.zend.com/license/new-bsd
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
@@ -19,17 +19,36 @@
  * @version    $Id$
  */
 
-namespace Zend\Session\SaveHandler;
+/**
+ * @namespace
+ */
+namespace Zend\Session;
 
 /**
- * Zend_Session_SaveHandler_Exception
+ * Session storage interface
  *
- * @uses       Zend\Session\Exception
+ * Defines the minimum requirements for handling userland, in-script session 
+ * storage (e.g., the $_SESSION superglobal array).
+ *
  * @category   Zend
  * @package    Zend_Session
- * @subpackage SaveHandler
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Session\Exception
-{}
+interface Storage extends \Traversable, \ArrayAccess, \Serializable, \Countable
+{
+    public function getRequestAccessTime();
+    public function lock($key = null);
+    public function isLocked($key = null);
+    public function unlock($key = null);
+    public function markImmutable();
+    public function isImmutable();
+
+    public function setMetadata($key, $value, $overwriteArray = false);
+    public function getMetadata($key = null);
+
+    public function clear($key = null);
+
+    public function toArray();
+    public function fromArray(array $array);
+}

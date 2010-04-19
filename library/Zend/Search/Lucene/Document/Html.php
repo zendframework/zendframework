@@ -166,6 +166,14 @@ class Zend_Search_Lucene_Document_Html extends Zend_Search_Lucene_Document
                 $this->_links[] = $href;
             }
         }
+        $linkNodes = $this->_doc->getElementsByTagName('area');
+        foreach ($linkNodes as $linkNode) {
+            if (($href = $linkNode->getAttribute('href')) != '' &&
+                (!self::$_excludeNoFollowLinks  ||  strtolower($linkNode->getAttribute('rel')) != 'nofollow' )
+               ) {
+                $this->_links[] = $href;
+            }
+        }
         $this->_links = array_unique($this->_links);
 
         $linkNodes = $xpath->query('/html/head/link');

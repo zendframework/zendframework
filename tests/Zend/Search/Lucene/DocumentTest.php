@@ -214,6 +214,34 @@ class Zend_Search_Lucene_DocumentTest extends PHPUnit_Framework_TestCase
         $this->_clearDirectory(dirname(__FILE__) . '/_index/_files');
     }
 
+    /**
+     * @group ZF-8740
+     */
+    public function testHtmlAreaTags()
+    {
+        $html = '<HTML>'
+                . '<HEAD><TITLE>Page title</TITLE></HEAD>'
+                . '<BODY>'
+                .   'Document body.'
+                .   '<img src="img.png" width="640" height="480" alt="some image" usemap="#some_map" />'
+                .   '<map name="some_map">'
+                .     '<area shape="rect" coords="0,0,100,100" href="link3.html" alt="Link 3" />'
+                .     '<area shape="rect" coords="200,200,300,300" href="link4.html" alt="Link 4" />'
+                .   '</map>'
+                .   '<a href="link1.html">Link 1</a>.'
+                .   '<a href="link2.html" rel="nofollow">Link 1</a>.'
+                . '</BODY>'
+              . '</HTML>';
+
+        $oldNoFollowValue = Zend_Search_Lucene_Document_Html::getExcludeNoFollowLinks();
+
+        Zend_Search_Lucene_Document_Html::setExcludeNoFollowLinks(false);
+        $doc1 = Zend_Search_Lucene_Document_Html::loadHTML($html);
+        $this->assertTrue($doc1 instanceof Zend_Search_Lucene_Document_Html);
+        $links = array('link1.html', 'link2.html', 'link3.html', 'link4.html');
+        $this->assertTrue(array_values($doc1->getLinks()) == $links);
+    }
+
     public function testHtmlNoFollowLinks()
     {
         $html = '<HTML>'

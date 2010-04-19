@@ -1,16 +1,75 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-webat this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Session
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
+ */
 
+/**
+ * @namespace
+ */
 namespace Zend\Session;
 
 use ArrayObject;
 
+/**
+ * Session storage container
+ *
+ * Allows for interacting with session storage in isolated containers, which 
+ * may have their own expiries, or even expiries per key in the container. 
+ * Additionally, expiries may be absolute TTLs or measured in "hops", which 
+ * are based on how many times the key or container were accessed.
+ *
+ * @category   Zend
+ * @package    Zend_Session
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Container extends ArrayObject
 {
+    /**
+     * @var string Container name
+     */
     protected $_name;
+
+    /**
+     * @var Manager
+     */
     protected $_manager;
+
+    /**
+     * @var string default manager class to use if no manager has been provided
+     */
     protected static $_managerDefaultClass = 'Zend\\Session\\SessionManager';
+
+    /**
+     * @var Manager Default manager to use when instantiating a container without providing a Manager
+     */
     protected static $_defaultManager;
 
+    /**
+     * Constructor
+     *
+     * Provide a name ('Default' if none provided) and a Manager instance.
+     * 
+     * @param  null|string $name 
+     * @param  null|Manager $manager 
+     * @return void
+     */
     public function __construct($name = 'Default', $manager = null)
     {
         if (!preg_match('/^[a-z][a-z0-9_]+$/i', $name)) {
@@ -26,29 +85,63 @@ class Container extends ArrayObject
         $this->getManager()->start();
     }
 
+    /**
+     * Set the default Manager instance to use when none provided to constructor
+     * 
+     * @param  Manager $manager 
+     * @return void
+     */
     public static function setDefaultManager(Manager $manager = null)
     {
         self::$_defaultManager = $manager;
     }
 
+    /**
+     * Get the default Manager instance
+     *
+     * If none provided, instantiates one of type {@link $_managerDefaultClass}
+     * 
+     * @return Manager
+     * @throws Exception if invalid manager default class provided
+     */
     public static function getDefaultManager()
     {
         if (null === self::$_defaultManager) {
-            self::$_defaultManager = new self::$_managerDefaultClass();
+            $manager = new self::$_managerDefaultClass();
+            if (!$manager instanceof Manager) {
+                throw new Exception('Invalid manager type provided; must implement Manager');
+            }
+            self::$_defaultManager = $manager;
         }
         return self::$_defaultManager;
     }
 
+    /**
+     * Get container name
+     * 
+     * @return string
+     */
     public function getName()
     {
         return $this->_name;
     }
 
+    /**
+     * Get manager instance
+     * 
+     * @return Manager
+     */
     public function getManager()
     {
         return $this->_manager;
     }
 
+    /**
+     * Set session manager
+     * 
+     * @param  null|string|Manager $manager 
+     * @return Container
+     */
     protected function _setManager($manager)
     {
         if (null === $manager) {
@@ -61,16 +154,39 @@ class Container extends ArrayObject
         return $this;
     }
 
+    /**
+     * Get session storage object
+     *
+     * Proxies to Manager::getStorage()
+     * 
+     * @return Storage
+     */
     protected function _getStorage()
     {
         return $this->getManager()->getStorage();
     }
 
+    /**
+     * Create a new container object on which to act
+     * 
+     * @return ArrayObject
+     */
     protected function _createContainer()
     {
         return new ArrayObject(array(), ArrayObject::ARRAY_AS_PROPS);
     }
 
+    /**
+     * Verify container namespace
+     *
+     * Checks to see if a container exists within the Storage object already. 
+     * If not, one is created; if so, checks to see if it's an ArrayObject.
+     * If not, it raises an exception; otherwise, it returns the Storage 
+     * object.
+     * 
+     * @return Storage
+     * @throws Exception
+     */
     protected function _verifyNamespace()
     {
         $storage = $this->_getStorage();
@@ -84,6 +200,14 @@ class Container extends ArrayObject
         return $storage;
     }
 
+    /**
+     * Determine whether a given key needs to be expired
+     *
+     * Returns true if the key has expired, false otherwise.
+     * 
+     * @param  string $key 
+     * @return bool
+     */
     protected function _expireKeys($key)
     {
         $storage = $this->_verifyNamespace();
@@ -105,6 +229,17 @@ class Container extends ArrayObject
         return false;
     }
 
+    /**
+     * Expire a key by expiry time
+     *
+     * Checks to see if the entire container has expired based on TTL setting, 
+     * or the individual key.
+     * 
+     * @param  Storage $storage 
+     * @param  string $name Container name
+     * @param  string $key Key in container to check
+     * @return bool
+     */
     protected function _expireByExpiryTime(Storage $storage, $name, $key)
     {
         $metadata = $storage->getMetadata($name);
@@ -132,6 +267,17 @@ class Container extends ArrayObject
         return false;
     }
 
+    /**
+     * Expire key by session hops
+     *
+     * Determines whether the container or an individual key within it has 
+     * expired based on session hops
+     * 
+     * @param  Storage $storage 
+     * @param  string $name 
+     * @param  string $key 
+     * @return bool
+     */
     protected function _expireByHops(Storage $storage, $name, $key)
     {
         $ts       = $storage->getRequestAccessTime();
@@ -172,6 +318,13 @@ class Container extends ArrayObject
         return false;
     }
 
+    /**
+     * Store a value within the container
+     * 
+     * @param  string $key 
+     * @param  mixed $value 
+     * @return void
+     */
     public function offsetSet($key, $value)
     {
         $this->_expireKeys($key);
@@ -180,6 +333,12 @@ class Container extends ArrayObject
         $storage[$name][$key] = $value;
     }
 
+    /**
+     * Determine if the key exists
+     * 
+     * @param  string $key 
+     * @return bool
+     */
     public function offsetExists($key)
     {
         $storage = $this->_verifyNamespace();
@@ -194,6 +353,12 @@ class Container extends ArrayObject
         return !$expired;
     }
 
+    /**
+     * Retrieve a specific key in the container
+     * 
+     * @param  string $key 
+     * @return mixed
+     */
     public function offsetGet($key)
     {
         if (!$this->offsetExists($key)) {
@@ -204,6 +369,12 @@ class Container extends ArrayObject
         return $storage[$name][$key];
     }
 
+    /**
+     * Unset a single key in the container
+     * 
+     * @param  string $key 
+     * @return void
+     */
     public function offsetUnset($key)
     {
         if (!$this->offsetExists($key)) {
@@ -214,6 +385,15 @@ class Container extends ArrayObject
         unset($storage[$name][$key]);
     }
 
+    /**
+     * Set expiration TTL
+     *
+     * Set the TTL for the entire container, a single key, or a set of keys.
+     * 
+     * @param  int $ttl TTL in seconds
+     * @param  null|string|array $vars 
+     * @return Container
+     */
     public function setExpirationSeconds($ttl, $vars = null)
     {
         $storage = $this->_getStorage();
@@ -252,6 +432,13 @@ class Container extends ArrayObject
         return $this;
     }
 
+    /**
+     * Set expiration hops for the container, a single key, or set of keys
+     * 
+     * @param  int $hops 
+     * @param  null|string|array $vars 
+     * @return Container
+     */
     public function setExpirationHops($hops, $vars = null)
     {
         $storage = $this->_getStorage();

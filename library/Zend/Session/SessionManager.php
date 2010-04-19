@@ -1,10 +1,40 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-webat this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Session
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
+ */
 
+/**
+ * @namespace
+ */
 namespace Zend\Session;
 
 use Zend\Validator\Alnum as AlnumValidator,
     Zend\Messenger;
 
+/**
+ * Session Manager implementation utilizing ext/session
+ *
+ * @category   Zend
+ * @package    Zend_Session
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class SessionManager extends AbstractManager
 {
     /**
@@ -17,13 +47,25 @@ class SessionManager extends AbstractManager
      */
     protected $_storage;
 
+    /**
+     * Default options when a call to {@link destroy()} is made
+     * - send_expire_cookie: whether or not to send a cookie expiring the current session cookie
+     * - clear_storage: whether or not to empty the storage object of any stored values
+     * @var array
+     */
     protected $_defaultDestroyOptions = array(
         'send_expire_cookie' => true,
         'clear_storage'      => false,
     );
-    protected $_destroyed;
+
+    /**
+     * @var string value returned by session_name()
+     */
     protected $_name;
-    protected $_sessionStarted;
+
+    /**
+     * @var Messenger\Delivery Validation chain to determine if session is valid
+     */
     protected $_validatorChain;
 
     /**
@@ -40,6 +82,16 @@ class SessionManager extends AbstractManager
         return false;
     }
 
+    /**
+     * Start session
+     *
+     * if No sesion currently exists, attempt to start it. Calls 
+     * {@link isValid()} once session_start() is called, and raises an 
+     * exception if validation fails.
+     * 
+     * @return void
+     * @throws Exception
+     */
     public function start()
     {
         if ($this->sessionExists()) {
@@ -51,6 +103,12 @@ class SessionManager extends AbstractManager
         }
     }
 
+    /**
+     * Destroy/end a session
+     * 
+     * @param  array $options See {@link $_defaultDestroyOptions}
+     * @return void
+     */
     public function destroy(array $options = null)
     {
         if (!$this->sessionExists()) {
@@ -73,6 +131,13 @@ class SessionManager extends AbstractManager
         }
     }
 
+    /**
+     * Write session to save handler and close
+     *
+     * Once done, the Storage object will be marked as immutable.
+     * 
+     * @return void
+     */
     public function writeClose()
     {
         // The assumption is that we're using PHP's ext/session.
@@ -93,6 +158,13 @@ class SessionManager extends AbstractManager
         $storage->markImmutable();
     }
 
+    /**
+     * Get session name
+     *
+     * Proxies to {@link session_name()}.
+     * 
+     * @return string
+     */
     public function getName()
     {
         if (null === $this->_name) {
@@ -105,6 +177,16 @@ class SessionManager extends AbstractManager
         return $this->_name;
     }
 
+    /**
+     * Attempt to set the session name
+     *
+     * If the session has already been started, or if the name provided fails 
+     * validation, an exception will be raised.
+     * 
+     * @param  string $name 
+     * @return SessionManager
+     * @throws Exception
+     */
     public function setName($name)
     {
         if ($this->sessionExists()) {
@@ -121,11 +203,26 @@ class SessionManager extends AbstractManager
         return $this;
     }
 
+    /**
+     * Get session ID
+     *
+     * Proxies to {@link session_id()}
+     * 
+     * @return string
+     */
     public function getId()
     {
         return session_id();
     }
 
+    /**
+     * Set session ID
+     *
+     * Can safely be called in the middle of a session.
+     * 
+     * @param  string $id 
+     * @return SessionManager
+     */
     public function setId($id)
     {
         if (!$this->sessionExists()) {
@@ -138,6 +235,13 @@ class SessionManager extends AbstractManager
         return $this;
     }
 
+    /**
+     * Regenerate the session ID, using session save handler's native ID generation
+     *
+     * Can safely be called in the middle of a session.
+     * 
+     * @return SessionManager
+     */
     public function regenerateId()
     {
         if (!$this->sessionExists()) {
@@ -151,8 +255,12 @@ class SessionManager extends AbstractManager
     }
 
     /**
+     * Set the TTL (in seconds) for the session cookie expiry
+     *
+     * Can safely be called in the middle of a session.
+     *
      * @param  null|int $ttl 
-     * @return SessionHandler
+     * @return SessionManager
      */
     public function rememberMe($ttl = null)
     {
@@ -163,17 +271,40 @@ class SessionManager extends AbstractManager
         return $this;
     }
 
+    /**
+     * Set a 0s TTL for the session cookie
+     *
+     * Can safely be called in the middle of a session.
+     * 
+     * @return SessionManager
+     */
     public function forgetMe()
     {
         $this->_setSessionCookieLifetime(0);
+        return $this;
     }
 
+    /**
+     * Set the validator chain to use when validating a session
+     *
+     * In most cases, you should use an instance of {@link ValidatorChain}.
+     * 
+     * @param  Messenger\Delivery $chain 
+     * @return SessionManager
+     */
     public function setValidatorChain(Messenger\Delivery $chain)
     {
         $this->_validatorChain = $chain;
         return $this;
     }
 
+    /**
+     * Get the validator chain to use when validating a session
+     *
+     * By default, uses an instance of {@link ValidatorChain}.
+     * 
+     * @return void
+     */
     public function getValidatorChain()
     {
         if (null === $this->_validatorChain) {
@@ -184,6 +315,9 @@ class SessionManager extends AbstractManager
 
     /**
      * Is this session valid?
+     *
+     * Notifies the Validator Chain until either all validators have returned 
+     * true or one has failed.
      * 
      * @return bool
      */
@@ -199,6 +333,13 @@ class SessionManager extends AbstractManager
         return (bool) $return;
     }
 
+    /**
+     * Expire the session cookie
+     *
+     * Sends a session cookie with no value, and with an expiry in the past.
+     * 
+     * @return void
+     */
     public function expireSessionCookie()
     {
         $config = $this->getConfig();
@@ -217,6 +358,11 @@ class SessionManager extends AbstractManager
     }
 
     /**
+     * Set the session cookie lifetime
+     *
+     * If a session already exists, destroys it (without sending an expiration 
+     * cookie), regenerates the session ID, and restarts the session.
+     *
      * @param  int $ttl 
      * @return void
      */

@@ -71,7 +71,6 @@ try {
             <methodname>Zend_Search_Lucene_Search_QueryParser::queryParsingExceptionsSuppressed()</methodname>
             Methoden sind auch dazu gedacht das Verhalten der Exceptionsbehandlung zu verwalten.
         </para>
-
     </sect2>
 
     <sect2 id="zend.search.lucene.queries.term-query">
@@ -731,7 +730,6 @@ $hits1 = $index->find($query);
 $query->setSlop(2);
 $hits2 = $index->find($query);
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.search.lucene.queries.range">
@@ -794,6 +792,5 @@ $query = new Zend_Search_Lucene_Search_Query_Range(
              );
 $hits  = $index->find($query);
 ]]></programlisting>
-        </para>
      </sect2>
 </sect1>

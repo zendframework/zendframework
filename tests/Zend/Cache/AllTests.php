@@ -68,6 +68,7 @@ class Zend_Cache_AllTests
         $suite->addTestSuite('Zend_Cache_FactoryTest');
         $suite->addTestSuite('Zend_Cache_CoreTest');
         $suite->addTestSuite('Zend_Cache_FileBackendTest');
+        $suite->addTestSuite('Zend_Cache_StaticBackendTest');
         $suite->addTestSuite('Zend_Cache_OutputFrontendTest');
         $suite->addTestSuite('Zend_Cache_FunctionFrontendTest');
         $suite->addTestSuite('Zend_Cache_ClassFrontendTest');

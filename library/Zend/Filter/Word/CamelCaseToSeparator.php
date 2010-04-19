@@ -39,7 +39,7 @@ class CamelCaseToSeparator extends AbstractSeparator
      * @param  string $value 
      * @return string
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         if (self::isUnicodeSupportEnabled()) {
             parent::setMatchPattern(array('#(?<=(?:\p{Lu}))(\p{Lu}\p{Ll})#','#(?<=(?:\p{Ll}|\p{Nd}))(\p{Lu})#'));
@@ -49,6 +49,6 @@ class CamelCaseToSeparator extends AbstractSeparator
             parent::setReplacement(array('\1' . $this->_separator . '\2', $this->_separator . '\1'));
         }
 
-        return parent::__invoke($value);
+        return parent::filter($value);
     }
 }

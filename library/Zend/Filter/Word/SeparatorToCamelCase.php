@@ -39,7 +39,7 @@ class SeparatorToCamelCase extends AbstractSeparator
      * @param  string $value 
      * @return string
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         // a unicode safe way of converting characters to \x00\x00 notation
         $pregQuotedSeparator = preg_quote($this->_separator, '#');
@@ -52,6 +52,6 @@ class SeparatorToCamelCase extends AbstractSeparator
             parent::setReplacement(array("strtoupper('\\2')","strtoupper('\\1')"));
         }
 
-        return parent::__invoke($value);
+        return parent::filter($value);
     }
 }

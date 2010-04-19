@@ -102,7 +102,7 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
      * @param  string $value
      * @return string
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         return $this->_separatorToSeparatorFilter($value);
     }
@@ -123,7 +123,7 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
 
         $this->setMatchPattern('#' . preg_quote($this->_searchSeparator, '#') . '#');
         $this->setReplacement($this->_replacementSeparator);
-        return parent::__invoke($value);
+        return parent::filter($value);
     }
 
 }

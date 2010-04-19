@@ -911,25 +911,16 @@ class Zend_Http_Client
         }
 
         if (false === ($fp = @fopen($this->_stream_name, "w+b"))) {
-                $this->close();
+                if ($this->adapter instanceof Zend_Http_Client_Adapter_Interface) {
+                    $this->adapter->close();
+                }
                 require_once 'Zend/Http/Client/Exception.php';
                 throw new Zend_Http_Client_Exception("Could not open temp file {$this->_stream_name}");
-
         }
+        
         return $fp;
     }
     
-    /**
-     * Closes the connection with the server
-     * 
-     * @return void
-     * @group ZF-9685
-     */
-    public function close()
-    {
-    	$this->getAdapter()->close();
-    }
-
     /**
      * Send the HTTP request and return an HTTP response object
      *

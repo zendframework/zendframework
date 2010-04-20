@@ -13,19 +13,46 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
+ * @package    Zend_OpenId
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * @uses       Zend_Exception
+ * @namespace
+ */
+namespace ZendTest\Authentication\Adapter\TestAsset;
+
+/**
+ * Zend_OpenId
+ */
+
+\Zend_OpenId::$exitOnRedirect = false;
+
+/**
  * @category   Zend
- * @package    Zend_Db
+ * @package    Zend_OpenId
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Db_Exception extends \Zend\Exception
+class OpenIdResponseHelper extends \Zend_Controller_Response_Abstract
 {
+    private $_canSendHeaders;
+
+    public function __construct($canSendHeaders)
+    {
+        $this->_canSendHeaders = $canSendHeaders;
+    }
+
+    public function canSendHeaders($throw = false)
+    {
+        return $this->_canSendHeaders;
+    }
+
+    public function sendResponse()
+    {
+    }
 }

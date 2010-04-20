@@ -13,19 +13,25 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
+ * @package    Zend_Authentication
+ * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * @uses       Zend_Exception
+ * @namespace
+ */
+namespace Zend\Authentication\Adapter;
+
+/**
+ * @uses       Zend\Authentication\Exception
  * @category   Zend
- * @package    Zend_Db
+ * @package    Zend_Authentication
+ * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Db_Exception extends \Zend\Exception
-{
-}
+class Exception extends \Zend\Authentication\Exception
+{}

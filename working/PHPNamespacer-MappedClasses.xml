@@ -579,146 +579,146 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/DbTable.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_DbTable</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/DbTable.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Adapter/DbTable.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter</newNamespace>
       <newClassName>DbTable</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\DbTable</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\DbTable</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Digest.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Digest</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/Digest.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Adapter/Digest.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter</newNamespace>
       <newClassName>Digest</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\Digest</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\Digest</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Adapter/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Http/Resolver/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Http_Resolver_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/Http/Resolver/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter\Http\Resolver</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Adapter/HTTP/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter\HTTP</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\Http\Resolver\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\HTTP\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Http/Resolver/File.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Http_Resolver_File</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/Http/Resolver/File.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter\Http\Resolver</newNamespace>
-      <newClassName>File</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\Http\Resolver\File</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Authentication/Adapter/HTTP/FileResolver.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter\HTTP</newNamespace>
+      <newClassName>FileResolver</newClassName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\HTTP\FileResolver</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Http/Resolver/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Http_Resolver_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/Http/Resolver/ResolverInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter\Http\Resolver</newNamespace>
-      <newClassName>ResolverInterface</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\Http\Resolver\ResolverInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Authentication/Adapter/HTTP/Resolver.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter\HTTP</newNamespace>
+      <newClassName>Resolver</newClassName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\HTTP\Resolver</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Http.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Http</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/Http/Http.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter\Http</newNamespace>
-      <newClassName>Http</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\Http\Http</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Authentication/Adapter/HTTP.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter</newNamespace>
+      <newClassName>HTTP</newClassName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\HTTP</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/InfoCard.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_InfoCard</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/InfoCard.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Adapter/InfoCard.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter</newNamespace>
       <newClassName>InfoCard</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\InfoCard</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\InfoCard</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/AdapterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter</newNamespace>
-      <newClassName>AdapterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\AdapterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Authentication/Adapter.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication</newNamespace>
+      <newClassName>Adapter</newClassName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Ldap.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Ldap</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/Ldap.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Adapter/Ldap.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter</newNamespace>
       <newClassName>Ldap</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\Ldap</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\Ldap</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/OpenId.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_OpenId</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/OpenId.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Adapter/OpenId.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter</newNamespace>
       <newClassName>OpenId</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\OpenId</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\OpenId</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Result.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Result</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Result.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Result.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication</newNamespace>
       <newClassName>Result</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Result</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Result</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Storage/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Storage_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Storage/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Storage</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Storage/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Storage</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Storage\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Storage\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Storage/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Storage_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Storage/StorageInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Storage</newNamespace>
-      <newClassName>StorageInterface</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Storage\StorageInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Authentication/Storage.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication</newNamespace>
+      <newClassName>Storage</newClassName>
+      <newFullyQualifiedName>Zend\Authentication\Storage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Storage/NonPersistent.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Storage_NonPersistent</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Storage/NonPersistent.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Storage</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Storage/NonPersistent.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Storage</newNamespace>
       <newClassName>NonPersistent</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Storage\NonPersistent</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Storage\NonPersistent</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Storage/Session.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Storage_Session</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Storage/Session.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Storage</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Storage/Session.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Storage</newNamespace>
       <newClassName>Session</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Storage\Session</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Storage\Session</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Auth.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth</newNamespace>
-      <newClassName>Auth</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Auth</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Authentication/AuthenticationService.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication</newNamespace>
+      <newClassName>AuthenticationService</newClassName>
+      <newFullyQualifiedName>Zend\Authentication\AuthenticationService</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Barcode/Exception.php</originalRelativeFilePath>

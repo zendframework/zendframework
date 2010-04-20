@@ -13,19 +13,32 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
+ * @package    Zend_Authentication
+ * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * @uses       Zend_Exception
+ * @namespace
+ */
+namespace Zend\Authentication;
+
+/**
  * @category   Zend
- * @package    Zend_Db
+ * @package    Zend_Authentication
+ * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Db_Exception extends \Zend\Exception
+interface Adapter
 {
+    /**
+     * Performs an authentication attempt
+     *
+     * @return Zend\Authentication\Result
+     * @throws Zend\Authentication\Adapter\Exception If authentication cannot be performed
+     */
+    public function authenticate();
 }

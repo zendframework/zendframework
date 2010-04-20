@@ -175,3 +175,7 @@ Zend_Barcode
    for subclassing
  * Barcode objects and renderers names are case sensitive now and must start with uppercase character
 
+Zend_Auth
+ * Renamed to Zend\Authentication
+ * Zend_Auth renamed to Zend\Authentication\AuthenticationService
+ * Singleton removed from Zend\Authentication\AuthenticationService

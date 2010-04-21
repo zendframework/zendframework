@@ -1112,16 +1112,25 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->form->isArray());
     }
 
-    /** @issue ZF-6741 */
+    /** 
+     * @group ZF-6741
+     */
     public function testUseIdForDdTagByDefault()
     {
-        $this->form->addElement('text', 'foo')
-                   ->addSubForm(new Zend_Form_SubForm(), 'bar')
+        $this->form->addSubForm(new Zend_Form_SubForm(), 'bar')
                    ->bar->addElement('text', 'foo');
 
         $html = $this->form->setView($this->getView())->render();
-        var_dump($html);
         $this->assertRegexp('/<dd.*?bar-foo.*?>/', $html);
+    }
+
+    public function testUseIdForDtTagByDefault()
+    {
+        $this->form->addSubForm(new Zend_Form_SubForm(), 'bar')
+                   ->bar->addElement('text', 'foo');
+
+        $html = $this->form->setView($this->getView())->render();
+        $this->assertRegexp('/<dt.*?bar-foo.*?>/', $html);
     }
 
     /**

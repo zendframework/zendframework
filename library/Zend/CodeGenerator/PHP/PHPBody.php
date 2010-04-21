@@ -23,67 +23,44 @@
 /**
  * @namespace
  */
-namespace Zend\CodeGenerator\PHP\Docblock\Tag;
+namespace Zend\CodeGenerator\PHP;
 
 /**
- * @uses       \Zend\CodeGenerator\PHP\PHPDocblockTag
+ * @uses       \Zend\CodeGenerator\AbstractCodeGenerator
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Return extends \Zend\CodeGenerator\PHP\PHPDocblockTag
+class PHPBody extends \Zend\CodeGenerator\AbstractCodeGenerator
 {
 
     /**
      * @var string
      */
-    protected $_datatype = null;
+    protected $_content = null;
 
     /**
-     * @var string
-     */
-    protected $_description = null;
-
-    /**
-     * fromReflection()
+     * setContent()
      *
-     * @param \Zend\Reflection\ReflectionDocblockTag $reflectionTagReturn
-     * @return \Zend\CodeGenerator\PHP\Docblock\Tag\Return
+     * @param string $content
+     * @return \Zend\CodeGenerator\PHP\PHPBody
      */
-    public static function fromReflection(\Zend\Reflection\ReflectionDocblockTag $reflectionTagReturn)
+    public function setContent($content)
     {
-        $returnTag = new \self();
-
-        $returnTag->setName('return');
-        $returnTag->setDatatype($reflectionTagReturn->getType()); // @todo rename
-        $returnTag->setDescription($reflectionTagReturn->getDescription());
-
-        return $returnTag;
-    }
-
-    /**
-     * setDatatype()
-     *
-     * @param string $datatype
-     * @return \Zend\CodeGenerator\PHP\Docblock\Tag\Return
-     */
-    public function setDatatype($datatype)
-    {
-        $this->_datatype = $datatype;
+        $this->_content = $content;
         return $this;
     }
 
     /**
-     * getDatatype()
+     * getContent()
      *
      * @return string
      */
-    public function getDatatype()
+    public function getContent()
     {
-        return $this->_datatype;
+        return (string) $this->_content;
     }
-
 
     /**
      * generate()
@@ -92,8 +69,6 @@ class Return extends \Zend\CodeGenerator\PHP\PHPDocblockTag
      */
     public function generate()
     {
-        $output = '@return ' . $this->_datatype . ' ' . $this->_description;
-        return $output;
+        return $this->getContent();
     }
-
 }

@@ -65,6 +65,11 @@ class ReflectionFile implements \Reflector
     /**
      * @var string[]
      */
+    protected $_uses            = array();
+    
+    /**
+     * @var string[]
+     */
     protected $_requiredFiles   = array();
 
     /**
@@ -194,6 +199,26 @@ class ReflectionFile implements \Reflector
     }
 
     /**
+     * getNamespace()
+     * 
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return $this->_namespace;
+    }
+    
+    /**
+     * getUses()
+     * 
+     * @return array
+     */
+    public function getUses()
+    {
+        return $this->_uses;
+    }
+    
+    /**
      * Return the reflection classes of the classes found inside this file
      *
      * @param  string $reflectionClass Name of reflection class to use for instances
@@ -301,7 +326,10 @@ class ReflectionFile implements \Reflector
         $classTrapped    = false;
         $requireTrapped  = false;
         $namespaceTrapped = false;
-        $openBraces      = 0;
+        $useTrapped = false;
+        $useAsTrapped = false;
+        $useIndex = 0;
+        $openBraces = 0;
 
         $this->_checkFileDocBlock($tokens);
 
@@ -331,6 +359,9 @@ class ReflectionFile implements \Reflector
                     $openBraces--;
                 } elseif ($token == ';' && $namespaceTrapped == true) {
                     $namespaceTrapped = false;
+                } elseif ($token == ';' && $useTrapped == true) {
+                    $useTrapped = $useAsTrapped = false;
+                    $useIndex++;
                 }
                 continue;
             }
@@ -347,6 +378,10 @@ class ReflectionFile implements \Reflector
                         $classTrapped = false;
                     } elseif ($namespaceTrapped) {
                         $this->_namespace .= $value . '\\';
+                    } elseif ($useAsTrapped) {
+                        $this->_uses[$useIndex]['as'] .= $value . '\\';
+                    } elseif ($useTrapped) {
+                        $this->_uses[$useIndex]['namespace'] .= $value . '\\';
                     }
                     continue;
 
@@ -363,6 +398,19 @@ class ReflectionFile implements \Reflector
                     $namespaceTrapped = true;
                     continue;
                     
+                // use
+                case T_USE:
+                    $useTrapped = true;
+                    $this->_uses[$useIndex] = array(
+                        'namespace' => '',
+                        'as' => ''
+                        );
+                    continue;
+                    
+                // use (as)
+                case T_AS:
+                    $useAsTrapped = true;
+                    continue;
                     
                 // Functions
                 case T_FUNCTION:
@@ -390,6 +438,24 @@ class ReflectionFile implements \Reflector
                     break;
             }
         }
+        
+        // cleanup uses
+        foreach ($this->_uses as $useIndex => $useInfo) {
+            $this->_uses[$useIndex]['namespace'] = rtrim($this->_uses[$useIndex]['namespace'], '\\');
+            $this->_uses[$useIndex]['as'] = rtrim($this->_uses[$useIndex]['as'], '\\');
+            
+            if ($this->_uses[$useIndex]['as'] == '') {
+                if (($lastSeparator = strrpos($this->_uses[$useIndex]['namespace'], '\\')) !== false) {
+                    $this->_uses[$useIndex]['asResolved'] = substr($this->_uses[$useIndex]['namespace'], $lastSeparator+1);
+                } else {
+                    $this->_uses[$useIndex]['asResolved'] = $this->_uses[$useIndex]['namespace'];
+                }
+            } else {
+                $this->_uses[$useIndex]['asResolved'] = $this->_uses[$useIndex]['as'];
+            }
+            
+        }
+        
 
         $this->_endLine = count(explode("\n", $this->_contents));
     }

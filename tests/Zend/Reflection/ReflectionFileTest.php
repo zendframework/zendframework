@@ -139,5 +139,18 @@ class ReflectionFileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ZendTest\Reflection\TestAsset\TestSampleInterface', $class->getName());
         $this->assertTrue($class->isInterface());
     }
+    
+    public function testFileCanReflectFileWithUses()
+    {
+        $fileToReflect = __DIR__ . '/TestAsset/TestSampleClass8.php';
+        include_once $fileToReflect;
+        $reflectionFile = new Reflection\ReflectionFile($fileToReflect);
+        $expected = array(
+            array('namespace' => 'Zend\Config', 'as' => 'ZendConfig', 'asResolved' => 'ZendConfig'),
+            array('namespace' => 'FooBar\Foo\Bar', 'as' => '', 'asResolved' => 'Bar'),
+            array('namespace' => 'One\Two\Three\Four\Five', 'as' => 'ottff', 'asResolved' => 'ottff')
+            );
+        $this->assertSame($expected, $reflectionFile->getUses());
+    }
 }
 

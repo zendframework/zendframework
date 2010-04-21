@@ -1203,138 +1203,138 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/AbstractPhp.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php</newNamespace>
-      <newClassName>AbstractPhp</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\AbstractPhp</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/AbstractPHP.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP</newNamespace>
+      <newClassName>AbstractPHP</newClassName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\AbstractPHP</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Body.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Body</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/Body.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php</newNamespace>
-      <newClassName>Body</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\Body</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/PHPBody.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP</newNamespace>
+      <newClassName>PHPBody</newClassName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\PHPBody</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Class.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Class</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/Class.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php</newNamespace>
-      <newClassName>Class</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\Class</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/PHPClass.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP</newNamespace>
+      <newClassName>PHPClass</newClassName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\PHPClass</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Docblock/Tag/License.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Docblock_Tag_License</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/Docblock/Tag/License.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php\Docblock\Tag</newNamespace>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/Docblock/Tag/License.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP\Docblock\Tag</newNamespace>
       <newClassName>License</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\Docblock\Tag\License</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\Docblock\Tag\License</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Docblock/Tag/Param.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Docblock_Tag_Param</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/Docblock/Tag/Param.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php\Docblock\Tag</newNamespace>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/Docblock/Tag/Param.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP\Docblock\Tag</newNamespace>
       <newClassName>Param</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\Docblock\Tag\Param</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\Docblock\Tag\Param</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Docblock/Tag/Return.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Docblock_Tag_Return</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/Docblock/Tag/Return.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php\Docblock\Tag</newNamespace>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/Docblock/Tag/Return.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP\Docblock\Tag</newNamespace>
       <newClassName>Return</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\Docblock\Tag\Return</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\Docblock\Tag\Return</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Docblock/Tag.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Docblock_Tag</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/Docblock/Tag/Tag.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php\Docblock\Tag</newNamespace>
-      <newClassName>Tag</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\Docblock\Tag\Tag</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/PHPDocblockTag.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP</newNamespace>
+      <newClassName>PHPDocblockTag</newClassName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\PHPDocblockTag</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Docblock.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Docblock</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/Docblock/Docblock.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php\Docblock</newNamespace>
-      <newClassName>Docblock</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\Docblock\Docblock</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/PHPDocblock.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP</newNamespace>
+      <newClassName>PHPDocblock</newClassName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\PHPDocblock</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Exception</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php</newNamespace>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/File.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_File</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/File.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php</newNamespace>
-      <newClassName>File</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\File</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/PHPFile.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP</newNamespace>
+      <newClassName>PHPFile</newClassName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\PHPFile</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Member/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Member_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/Member/AbstractMember.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php\Member</newNamespace>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/PHPMember/AbstractMember.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP\PHPMember</newNamespace>
       <newClassName>AbstractMember</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\Member\AbstractMember</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\PHPMember\AbstractMember</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Member/Container.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Member_Container</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/Member/Container.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php\Member</newNamespace>
-      <newClassName>Container</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\Member\Container</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/PHPMember/MemberContainer.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP\PHPMember</newNamespace>
+      <newClassName>MemberContainer</newClassName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\PHPMember\MemberContainer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Method.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Method</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/Method.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php</newNamespace>
-      <newClassName>Method</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\Method</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/PHPMethod.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP</newNamespace>
+      <newClassName>PHPMethod</newClassName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\PHPMethod</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Parameter/DefaultValue.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Parameter_DefaultValue</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/Parameter/DefaultValue.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php\Parameter</newNamespace>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/PHPDefaultValue.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP\Parameter</newNamespace>
       <newClassName>DefaultValue</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\Parameter\DefaultValue</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\Parameter\DefaultValue</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Parameter.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Parameter</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/Parameter/Parameter.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php\Parameter</newNamespace>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/Parameter/Parameter.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP\Parameter</newNamespace>
       <newClassName>Parameter</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\Parameter\Parameter</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\Parameter\Parameter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Property/DefaultValue.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Property_DefaultValue</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/Property/DefaultValue.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php\Property</newNamespace>
-      <newClassName>DefaultValue</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\Property\DefaultValue</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/PHPPropertyValue.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP</newNamespace>
+      <newClassName>PHPPropertyValue</newClassName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\PHPPropertyValue</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/CodeGenerator/Php/Property.php</originalRelativeFilePath>
       <originalClassName>Zend_CodeGenerator_Php_Property</originalClassName>
-      <newRelativeFilePath>Zend/CodeGenerator/Php/Property/Property.php</newRelativeFilePath>
-      <newNamespace>Zend\CodeGenerator\Php\Property</newNamespace>
-      <newClassName>Property</newClassName>
-      <newFullyQualifiedName>Zend\CodeGenerator\Php\Property\Property</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/CodeGenerator/PHP/PHPProperty.php</newRelativeFilePath>
+      <newNamespace>Zend\CodeGenerator\PHP</newNamespace>
+      <newClassName>PHPProperty</newClassName>
+      <newFullyQualifiedName>Zend\CodeGenerator\PHP\PHPProperty</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Config/Exception.php</originalRelativeFilePath>

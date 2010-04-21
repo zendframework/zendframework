@@ -44,7 +44,7 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 [X] Zend_Crypt -> [X] Zend_Oauth, [X] Zend_XmlRpc
 [X] Zend_Acl
 [X] Zend_Reflection
-[ ] Zend_CodeGenerator
+[X] Zend_CodeGenerator
 [X] Zend_Console
 [X] Zend_Dom
 [ ] Zend_Gdata

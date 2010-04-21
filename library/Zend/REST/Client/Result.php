@@ -21,15 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\REST\Client;
+
+/**
  * @uses       IteratorAggregate
- * @uses       Zend_Rest_Client_Result_Exception
+ * @uses       \Zend\REST\Client\ResultException
  * @category   Zend
  * @package    Zend_Rest
  * @subpackage Client
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Rest_Client_Result implements IteratorAggregate 
+class Result implements \IteratorAggregate 
 {
     /**
      * @var SimpleXMLElement
@@ -60,7 +65,7 @@ class Zend_Rest_Client_Result implements IteratorAggregate
                 $message = "REST Response Error: " . $this->_errstr;
                 $this->_errstr = null;
             }
-            throw new Zend_Rest_Client_Result_Exception($message);
+            throw new ResultException($message);
         }
     }
 
@@ -86,7 +91,7 @@ class Zend_Rest_Client_Result implements IteratorAggregate
      * @param SimpleXMLElement $value
      * @return mixed
      */
-    public function toValue(SimpleXMLElement $value)
+    public function toValue(\SimpleXMLElement $value)
     {
         $node = dom_import_simplexml($value);
         return $node->nodeValue;
@@ -96,7 +101,7 @@ class Zend_Rest_Client_Result implements IteratorAggregate
      * Get Property Overload
      *
      * @param string $name
-     * @return null|SimpleXMLElement|array Null if not found, SimpleXMLElement if only one value found, array of Zend_Rest_Client_Result objects otherwise
+     * @return null|SimpleXMLElement|array Null if not found, SimpleXMLElement if only one value found, array of \Zend\REST\Client\Result objects otherwise
      */
     public function __get($name)
     {

@@ -139,10 +139,10 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
      *
      * @param Zend_Config $config Configuration object
      */
-    public static function getInstance(Zend_Config $config)
+    public static function getInstance(\Zend\Config\Config $config)
     {
-        $reqs = ($config->reqs instanceof Zend_Config) ? $config->reqs->toArray() : array();
-        $defs = ($config->defaults instanceof Zend_Config) ? $config->defaults->toArray() : array();
+        $reqs = ($config->reqs instanceof \Zend\Config\Config) ? $config->reqs->toArray() : array();
+        $defs = ($config->defaults instanceof \Zend\Config\Config) ? $config->defaults->toArray() : array();
         return new self($config->route, $defs, $reqs);
     }
 

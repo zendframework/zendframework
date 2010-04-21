@@ -10859,74 +10859,74 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Client/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Client_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Client/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest\Client</newNamespace>
+      <newRelativeFilePath>Zend/REST/Client/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\REST\Client</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Client\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\REST\Client\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Client/Result/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Client_Result_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Client/Result/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest\Client\Result</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Client\Result\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/REST/Client/ResultException.php</newRelativeFilePath>
+      <newNamespace>Zend\REST\Client</newNamespace>
+      <newClassName>ResultException</newClassName>
+      <newFullyQualifiedName>Zend\REST\Client\ResultException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Client/Result.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Client_Result</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Client/Result/Result.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest\Client\Result</newNamespace>
+      <newRelativeFilePath>Zend/REST/Client/Result.php</newRelativeFilePath>
+      <newNamespace>Zend\REST\Client</newNamespace>
       <newClassName>Result</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Client\Result\Result</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\REST\Client\Result</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Client.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Client</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Client/Client.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest\Client</newNamespace>
-      <newClassName>Client</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Client\Client</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/REST/Client/RESTClient.php</newRelativeFilePath>
+      <newNamespace>Zend\REST\Client</newNamespace>
+      <newClassName>RESTClient</newClassName>
+      <newFullyQualifiedName>Zend\REST\Client\RESTClient</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Controller.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Controller</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Controller.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest</newNamespace>
+      <newRelativeFilePath>Zend/REST/Controller.php</newRelativeFilePath>
+      <newNamespace>Zend\REST</newNamespace>
       <newClassName>Controller</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Controller</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\REST\Controller</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest</newNamespace>
+      <newRelativeFilePath>Zend/REST/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\REST</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\REST\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Route.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Route</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Route.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest</newNamespace>
+      <newRelativeFilePath>Zend/REST/Route.php</newRelativeFilePath>
+      <newNamespace>Zend\REST</newNamespace>
       <newClassName>Route</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Route</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\REST\Route</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Server/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Server_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Server/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest\Server</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Server\Exception</newFullyQualifiedName>
+      <newRelativeFilePath></newRelativeFilePath>
+      <newNamespace></newNamespace>
+      <newClassName>NOCLASSAVAILABLE</newClassName>
+      <newFullyQualifiedName>NOCLASSAVAILABLE</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Server.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Server</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Server/Server.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest\Server</newNamespace>
-      <newClassName>Server</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Server\Server</newFullyQualifiedName>
+      <newRelativeFilePath></newRelativeFilePath>
+      <newNamespace></newNamespace>
+      <newClassName>NOCLASSAVAILABLE</newClassName>
+      <newFullyQualifiedName>NOCLASSAVAILABLE</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Exception.php</originalRelativeFilePath>

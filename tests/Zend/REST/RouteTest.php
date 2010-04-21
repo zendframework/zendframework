@@ -20,19 +20,12 @@
  * @version    $Id$
  */
 
-/** Test helper */
+/**
+ * @namespace
+ */
+namespace ZendTest\REST;
 
-
-/** Zend_Rest_Route */
-
-/** Zend_Controller_Front */
-
-/** Zend_Controller_Request_HttpTestCase */
-
-// Call Zend_Rest_RouteTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Rest_RouteTest::main");
-}
+use Zend\REST;
 
 /**
  * @category   Zend
@@ -42,29 +35,16 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Rest
  */
-class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
+class RouteTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_front;
     protected $_request;
     protected $_dispatcher;
 
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Rest_RouteTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
-        $this->_front = Zend_Controller_Front::getInstance();
+        $this->_front = \Zend_Controller_Front::getInstance();
         $this->_front->resetInstance();
         $this->_front->setParam('noErrorHandler', true)
         ->setParam('noViewRenderer', true);
@@ -72,11 +52,11 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->_dispatcher = $this->_front->getDispatcher();
 
         $this->_dispatcher->setControllerDirectory(array(
-            'default' => dirname(__FILE__) . DIRECTORY_SEPARATOR .
+            'default' => __DIR__ . DIRECTORY_SEPARATOR .
                 '..' . DIRECTORY_SEPARATOR .
                 'Controller' . DIRECTORY_SEPARATOR .
                 '_files',
-            'mod'     => dirname(__FILE__) . DIRECTORY_SEPARATOR .
+            'mod'     => __DIR__ . DIRECTORY_SEPARATOR .
                 '..' . DIRECTORY_SEPARATOR .
                 'Controller' . DIRECTORY_SEPARATOR .
                 '_files' . DIRECTORY_SEPARATOR .
@@ -86,17 +66,17 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
 
     public function test_getVersion()
     {
-        $route = new Zend_Rest_Route($this->_front);
+        $route = new REST\Route($this->_front);
         $this->assertEquals(2, $route->getVersion());
     }
     
     public function test_getInstance_fromINIConfig()
     {
-    	$config = new Zend_Config_Ini(dirname(__FILE__) . '/../Controller/_files/routes.ini', 'testing');
-    	$router = new Zend_Controller_Router_Rewrite();
+    	$config = new \Zend\Config\Ini(dirname(__FILE__) . '/../Controller/_files/routes.ini', 'testing');
+    	$router = new \Zend_Controller_Router_Rewrite();
     	$router->addConfig($config, 'routes');
     	$route = $router->getRoute('rest');
-    	$this->assertType('Zend_Rest_Route', $route);
+    	$this->assertType('Zend\\REST\\Route', $route);
     	$this->assertEquals('object', $route->getDefault('controller'));
     	
     	$request = $this->_buildRequest('GET', '/mod/project');
@@ -321,8 +301,8 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $router = $this->_front->getRouter();
         $router->removeDefaultRoutes();
 
-        $nonRESTRoute = new Zend_Controller_Router_Route('api');
-        $RESTRoute = new Zend_Rest_Route($this->_front);
+        $nonRESTRoute = new \Zend_Controller_Router_Route('api');
+        $RESTRoute = new REST\Route($this->_front);
         $router->addRoute("api", $nonRESTRoute->chain($RESTRoute));
 
         $routedRequest = $router->route($request);
@@ -523,7 +503,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
 
     public function test_assemble_plain_ignores_action()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
+        $route = new REST\Route($this->_front, array(), array());
         $params = array('module'=>'mod', 'controller'=>'user', 'action'=>'get');
         $url = $route->assemble($params);
         $this->assertEquals('mod/user', $url);
@@ -531,7 +511,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
 
     public function test_assemble_id_after_controller()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
+        $route = new REST\Route($this->_front, array(), array());
         $params = array('module'=>'mod', 'controller'=>'user', 'id'=>'lcrouch');
         $url = $route->assemble($params);
         $this->assertEquals('mod/user/lcrouch', $url);
@@ -539,7 +519,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
 
     public function test_assemble_index_after_controller_with_params()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
+        $route = new REST\Route($this->_front, array(), array());
         $params = array('module'=>'mod', 'controller'=>'user', 'index'=>true, 'foo'=>'bar');
         $url = $route->assemble($params);
         $this->assertEquals('mod/user/index/foo/bar', $url);
@@ -547,7 +527,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     
     public function test_assemble_encode_param_values()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
+        $route = new REST\Route($this->_front, array(), array());
         $params = array('module'=>'mod', 'controller'=>'user', 'index'=>true, 'foo'=>'bar is n!ice');
         $url = $route->assemble($params);
         $this->assertEquals('mod/user/index/foo/bar+is+n%21ice', $url);
@@ -555,7 +535,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
 
     public function test_assemble_does_NOT_encode_param_values()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
+        $route = new REST\Route($this->_front, array(), array());
         $params = array('module'=>'mod', 'controller'=>'user', 'index'=>true, 'foo'=>'bar is n!ice');
         $url = $route->assemble($params, false, false);
         $this->assertEquals('mod/user/index/foo/bar is n!ice', $url);
@@ -563,7 +543,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     
     private function _buildRequest($method, $uri)
     {
-        $request = new Zend_Controller_Request_HttpTestCase();
+        $request = new \Zend_Controller_Request_HttpTestCase();
         $request->setMethod($method)->setRequestUri($uri);
         return $request;
     }
@@ -572,13 +552,8 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     {
         $this->_front->setRequest($request);
         if ($route == null)
-        	$route = new Zend_Rest_Route($this->_front, array(), $config);
+        	$route = new REST\Route($this->_front, array(), $config);
         $values = $route->match($request);
         return $values;
     }
-}
-
-// Call Zend_Rest_RouteTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Rest_RouteTest::main") {
-    Zend_Rest_RouteTest::main();
 }

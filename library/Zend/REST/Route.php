@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\REST;
+
+/**
  * Rest Route
  *
  * Request-aware route for RESTful modular routing
@@ -34,7 +39,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
+class Route extends \Zend_Controller_Router_Route_Module
 {
     /**
      * Specific Modules to receive RESTful routes
@@ -60,7 +65,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      * @param array $defaults Defaults for map variables with keys as variable names
      * @param array $responders Modules or controllers to receive RESTful routes
      */
-    public function __construct(Zend_Controller_Front $front,
+    public function __construct(\Zend_Controller_Front $front,
         array $defaults = array(),
         array $responders = array()
     ) {
@@ -77,9 +82,9 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
     /**
      * Instantiates route based on passed Zend_Config structure
      */
-    public static function getInstance(Zend_Config $config)
+    public static function getInstance(\Zend\Config\Config $config)
     {
-        $frontController = Zend_Controller_Front::getInstance();
+        $frontController = \Zend_Controller_Front::getInstance();
         $defaultsArray = array();
         $restfulConfigArray = array();
         foreach ($config as $key => $values) {
@@ -103,12 +108,12 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      * setControllerName(), and setActionName() accessors to set those values.
      * Always returns the values as an array.
      *
-     * @param Zend_Controller_Request_Http $request Request used to match against this routing ruleset
+     * @param  Zend_Controller_Request_Http $request Request used to match against this routing ruleset
      * @return array An array of assigned values or a false on a mismatch
      */
     public function match($request, $partial = false)
     {
-        if (!$request instanceof Zend_Controller_Request_Http) {
+        if (!$request instanceof \Zend_Controller_Request_Http) {
             $request = $this->_front->getRequest();
         }
         $this->_request = $request;

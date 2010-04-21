@@ -317,7 +317,7 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
             require_once 'Zend/Form/Decorator/HtmlTag.php';
             $decorator = new Zend_Form_Decorator_HtmlTag();
             $decorator->setOptions(array('tag' => $tag,
-                                         'id'  => $this->getElement()->getName() . '-label'));
+                                         'id'  => $id . '-label'));
 
             $label = $decorator->render($label);
         }

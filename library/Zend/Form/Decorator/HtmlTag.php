@@ -84,7 +84,11 @@ class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
         foreach ((array) $attribs as $key => $val) {
             $key = htmlspecialchars($key, ENT_COMPAT, $enc);
             if (is_array($val)) {
-                $val = implode(' ', $val);
+                if (array_key_exists('callback', $val)) {
+                    $val = $val['callback']($this);
+                } else {
+                    $val = implode(' ', $val);
+                }
             }
             $val    = htmlspecialchars($val, ENT_COMPAT, $enc);
             $xhtml .= " $key=\"$val\"";

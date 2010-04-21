@@ -13363,18 +13363,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/ReCaptcha/MailHide/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Service_ReCaptcha_MailHide_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Service/ReCaptcha/MailHide/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Service\ReCaptcha\MailHide</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Service\ReCaptcha\MailHide\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Service/ReCaptcha/MailHideException.php</newRelativeFilePath>
+      <newNamespace>Zend\Service\ReCaptcha</newNamespace>
+      <newClassName>MailhideException</newClassName>
+      <newFullyQualifiedName>Zend\Service\ReCaptcha\MailHideException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/ReCaptcha/MailHide.php</originalRelativeFilePath>
       <originalClassName>Zend_Service_ReCaptcha_MailHide</originalClassName>
-      <newRelativeFilePath>Zend/Service/ReCaptcha/MailHide/MailHide.php</newRelativeFilePath>
-      <newNamespace>Zend\Service\ReCaptcha\MailHide</newNamespace>
+      <newRelativeFilePath>Zend/Service/ReCaptcha/MailHide.php</newRelativeFilePath>
+      <newNamespace>Zend\Service\ReCaptcha</newNamespace>
       <newClassName>MailHide</newClassName>
-      <newFullyQualifiedName>Zend\Service\ReCaptcha\MailHide\MailHide</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Service\ReCaptcha\MailHide</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/ReCaptcha/Response.php</originalRelativeFilePath>

@@ -20,9 +20,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\ReCaptcha;
+
+/**
  * Zend_Service_ReCaptcha_Exception
  *
- * @uses       Zend_Service_Exception
+ * @uses       \Zend\Service\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage ReCaptcha
@@ -30,5 +35,5 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Service_ReCaptcha_Exception extends Zend_Service_Exception
+class Exception extends \Zend\Service\Exception
 {}

@@ -21,6 +21,13 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Barcode\Object;
+use Zend\Barcode;
+use Zend\Config;
+
+/**
  * Test helper
  */
 
@@ -39,11 +46,10 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
+abstract class TestCommon extends \PHPUnit_Framework_TestCase
 {
-
     /**
-     * @var Zend_Barcode_Object
+     * @var \Zend\Barcode\Object\ObjectInterface
      */
     protected $_object = null;
 
@@ -51,7 +57,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
 
     protected function loadInstructionsFile($fileName)
     {
-        return include_once (dirname(__FILE__) . "/_files/$fileName.php");
+        return include_once (__DIR__ . "/_files/$fileName.php");
     }
 
     public function setUp()
@@ -66,21 +72,21 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
 
     public function testStaticFontAsString()
     {
-        Zend_Barcode_Object_ObjectAbstract::setBarcodeFont('my_static_font.ttf');
+        Barcode\Barcode::setBarcodeFont('my_static_font.ttf');
         $this->assertEquals('', $this->_object->getFont());
         $object = $this->_getBarcodeObject();
         $this->assertEquals('my_static_font.ttf', $object->getFont());
-        Zend_Barcode_Object_ObjectAbstract::setBarcodeFont('');
+        Barcode\Barcode::setBarcodeFont('');
     }
 
     public function testStaticFontAsNumber()
     {
         for ($i = 1; $i < 5; $i++) {
-            Zend_Barcode_Object_ObjectAbstract::setBarcodeFont($i);
+            Barcode\Barcode::setBarcodeFont($i);
             $this->assertEquals('', $this->_object->getFont());
             $object = $this->_getBarcodeObject();
             $this->assertEquals($i, $object->getFont());
-            Zend_Barcode_Object_ObjectAbstract::setBarcodeFont('');
+            Barcode\Barcode::setBarcodeFont('');
         }
     }
 
@@ -94,7 +100,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
 
     public function testConstructorWithZendConfig()
     {
-        $config = new Zend_Config(
+        $config = new Config\Config(
                 array('barHeight' => 150 ,
                         'unkownProperty' => 'aValue'));
         $object = $this->_getBarcodeObject($config);
@@ -111,7 +117,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
 
     public function testSetConfig()
     {
-        $config = new Zend_Config(
+        $config = new Config\Config(
                 array('barHeight' => 150 ,
                         'unkownProperty' => 'aValue'));
         $this->_object->setConfig($config);
@@ -135,7 +141,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testNegativeBarHeight()
     {
@@ -153,7 +159,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testNegativeBarThinWidth()
     {
@@ -171,7 +177,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testNegativeBarThickWidth()
     {
@@ -191,7 +197,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testNegativeFactor()
     {
@@ -207,7 +213,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testNegativeForeColor()
     {
@@ -215,7 +221,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testTooHighForeColor()
     {
@@ -231,7 +237,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testNegativeBackgroundColor()
     {
@@ -239,7 +245,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testTooHighBackgroundColor()
     {
@@ -325,7 +331,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testSetLowFontAsNumberForGdImage()
     {
@@ -333,7 +339,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testSetHighFontAsNumberForGdImage()
     {
@@ -347,7 +353,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testSetFontAsBoolean()
     {
@@ -360,7 +366,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
             $this->markTestSkipped(
                     'GD extension must not be loaded to run this test');
         }
-        $this->setExpectedException('Zend_Barcode_Object_Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception');
         $this->_object->setFont(1);
     }
 
@@ -382,7 +388,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testStringFontSize()
     {
@@ -398,7 +404,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
 
     public function testAddInstruction()
     {
-        $object = new Zend_Barcode_Object_Test();
+        $object = new _files\BarcodeTest();
         $instructions = array('type' => 'text' , 'text' => 'text' , 'size' => 10 ,
                 'position' => array(5 , 5) ,
                 'font' => 'my_font.ttf' ,
@@ -411,7 +417,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
 
     public function testAddPolygon()
     {
-        $object = new Zend_Barcode_Object_Test();
+        $object = new _files\BarcodeTest();
         $points = array();
         $color = '#123456';
         $filled = false;
@@ -423,7 +429,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
 
     public function testAddPolygonWithDefaultColor()
     {
-        $object = new Zend_Barcode_Object_Test();
+        $object = new _files\BarcodeTest();
         $points = array();
         $color = 123456;
         $object->setForeColor($color);
@@ -436,7 +442,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
 
     public function testAddText()
     {
-        $object = new Zend_Barcode_Object_Test();
+        $object = new _files\BarcodeTest();
         $size = 10;
         $text = 'foobar';
         $position = array();
@@ -456,7 +462,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
 
     public function testAddTextWithDefaultColor()
     {
-        $object = new Zend_Barcode_Object_Test();
+        $object = new _files\BarcodeTest();
         $size = 10;
         $text = 'foobar';
         $position = array();
@@ -475,7 +481,7 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testCheckParamsFontWithOrientation()
     {

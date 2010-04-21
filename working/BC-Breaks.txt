@@ -153,7 +153,29 @@ Zend_Url
 Zend_HTTP
  * Component renamed to Zend_HTTP
 
- Zend_Pdf
+Zend_PDF
  * "Zend_Pdf" prefix now becomes "Zend\PDF" namespace
  * "Zend_Pdf" class becomes "Zend\PDF\PDFDocument
  * "Zend_Pdf_Action_Goto" becomes "Zend\PDF\Action\GoToAction"
+
+Zend_Barcode
+ * "Zend_Barcode" prefix now becomes "Zend\Barcode" namespace
+ * "Zend_Barcode" class becomes "Zend\Barcode\Barcode"
+ * Barcode classes and renderers become case sensitive
+ * "Pdf" barcode renderer becomes "PDF"
+ * "Zend_Barcode_Object" return/parameter type is replaced with 
+   "Zend\Barcode\Object\ObjectInterface" interface
+   "Zend\Barcode\Object\AbstractObject implements this interface and can be used 
+   for subclassing
+ * Zend\Barcode\Object\ObjectInterface doesn't include static setBarcodeFont() method
+   which actually sets "default" font.
+ * "Zend_Barcode_Renderer" return/parameter type is replaced with 
+   "Zend\Barcode\Renderer\RendererInterface" interface
+   "Zend\Barcode\Renderer\AbstractRenderer implements this interface and can be used 
+   for subclassing
+ * Barcode objects and renderers names are case sensitive now and must start with uppercase character
+
+Zend_Auth
+ * Renamed to Zend\Authentication
+ * Zend_Auth renamed to Zend\Authentication\AuthenticationService
+ * Singleton removed from Zend\Authentication\AuthenticationService

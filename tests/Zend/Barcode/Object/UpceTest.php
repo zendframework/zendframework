@@ -20,8 +20,11 @@
  * @version    $Id$
  */
 
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Barcode\Object;
+use Zend\Barcode;
 
 /**
  * @category   Zend
@@ -31,17 +34,16 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Object_UpceTest extends Zend_Barcode_Object_TestCommon
+class UpceTest extends TestCommon
 {
-
     protected function _getBarcodeObject($options = null)
     {
-        return new Zend_Barcode_Object_Upce($options);
+        return new Barcode\Object\Upce($options);
     }
 
     public function testType()
     {
-        $this->assertSame('upce', $this->_object->getType());
+        $this->assertSame('Upce', $this->_object->getType());
     }
 
     public function testChecksum()
@@ -100,7 +102,7 @@ class Zend_Barcode_Object_UpceTest extends Zend_Barcode_Object_TestCommon
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testBadTextDetectedIfChecksumWished()
     {

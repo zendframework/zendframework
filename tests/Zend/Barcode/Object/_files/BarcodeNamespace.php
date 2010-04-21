@@ -1,8 +1,8 @@
 <?php
+namespace ZendTest\Barcode\Object\Namespace1;
 
-class My_Namespace_Error extends Zend_Barcode_Object_Error
+class Error extends \Zend\Barcode\Object\Error
 {
-
     public function getType()
     {
         return $this->_type;

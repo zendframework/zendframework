@@ -39,10 +39,10 @@ class DashToSeparator extends AbstractSeparator
      * @param  string $value 
      * @return string
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         $this->setMatchPattern('#-#');
         $this->setReplacement($this->_separator);
-        return parent::__invoke($value);
+        return parent::filter($value);
     }
 }

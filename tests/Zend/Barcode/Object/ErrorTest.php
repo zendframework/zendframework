@@ -20,8 +20,11 @@
  * @version    $Id$
  */
 
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Barcode\Object;
+use Zend\Barcode;
 
 /**
  * @category   Zend
@@ -31,17 +34,16 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Object_ErrorTest extends Zend_Barcode_Object_TestCommon
+class ErrorTest extends TestCommon
 {
-
     protected function _getBarcodeObject($options = null)
     {
-        return new Zend_Barcode_Object_Error($options);
+        return new Barcode\Object\Error($options);
     }
 
     public function testType()
     {
-        $this->assertSame('error', $this->_object->getType());
+        $this->assertSame('Error', $this->_object->getType());
     }
 
     public function testSetText()

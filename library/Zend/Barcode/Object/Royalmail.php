@@ -21,16 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Barcode\Object;
+
+/**
  * Class for generate Royal maim barcode
  *
- * @uses       Zend_Barcode_Object_ObjectAbstract
- * @uses       Zend_Validate_Barcode
+ * @uses       \Zend\Barcode\Object\AbstractObject
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Object_Royalmail extends Zend_Barcode_Object_ObjectAbstract
+class Royalmail extends AbstractObject
 {
 
     /**

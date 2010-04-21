@@ -1,4 +1,6 @@
 <?php
+namespace ZendTest\Barcode\Object\Namespace2;
 
-class My_Namespace_Other_Error
-{}
+class Error
+{
+}

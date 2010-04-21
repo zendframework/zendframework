@@ -75,290 +75,290 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Adobe/Auth.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Adobe_Auth</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Adobe/Auth.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Adobe</newNamespace>
-      <newClassName>Auth</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Adobe\Auth</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/AMF/Adobe/Authentication.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Adobe</newNamespace>
+      <newClassName>Authentication</newClassName>
+      <newFullyQualifiedName>Zend\AMF\Adobe\Authentication</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Adobe/DbInspector.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Adobe_DbInspector</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Adobe/DbInspector.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Adobe</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Adobe/DbInspector.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Adobe</newNamespace>
       <newClassName>DbInspector</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Adobe\DbInspector</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Adobe\DbInspector</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Adobe/Introspector.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Adobe_Introspector</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Adobe/Introspector.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Adobe</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Adobe/Introspector.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Adobe</newNamespace>
       <newClassName>Introspector</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Adobe\Introspector</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Adobe\Introspector</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Auth/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Auth_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Auth/AbstractAuth.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Auth</newNamespace>
-      <newClassName>AbstractAuth</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Auth\AbstractAuth</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/AMF/Authentication/AbstractAuthentication.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Authentication</newNamespace>
+      <newClassName>AbstractAuthentication</newClassName>
+      <newFullyQualifiedName>Zend\AMF\Authentication\AbstractAuthentication</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Constants.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Constants</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Constants.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Constants.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF</newNamespace>
       <newClassName>Constants</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Constants</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Constants</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Parse/Amf0/Deserializer.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Parse_Amf0_Deserializer</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Parse/Amf0/Deserializer.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Parse\Amf0</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Parser/AMF0/Deserializer.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Parser\AMF0</newNamespace>
       <newClassName>Deserializer</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Parse\Amf0\Deserializer</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Parser\AMF0\Deserializer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Parse/Amf0/Serializer.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Parse_Amf0_Serializer</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Parse/Amf0/Serializer.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Parse\Amf0</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Parser/AMF0/Serializer.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Parser\AMF0</newNamespace>
       <newClassName>Serializer</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Parse\Amf0\Serializer</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Parser\AMF0\Serializer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Parse/Amf3/Deserializer.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Parse_Amf3_Deserializer</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Parse/Amf3/Deserializer.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Parse\Amf3</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Parser/AMF3/Deserializer.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Parser\AMF3</newNamespace>
       <newClassName>Deserializer</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Parse\Amf3\Deserializer</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Parser\AMF3\Deserializer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Parse/Amf3/Serializer.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Parse_Amf3_Serializer</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Parse/Amf3/Serializer.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Parse\Amf3</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Parser/AMF3/Serializer.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Parser\AMF3</newNamespace>
       <newClassName>Serializer</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Parse\Amf3\Serializer</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Parser\AMF3\Serializer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Parse/Deserializer.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Parse_Deserializer</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Parse/Deserializer.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Parse</newNamespace>
-      <newClassName>Deserializer</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Parse\Deserializer</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/AMF/Parser/AbstractDeserializer.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Parser</newNamespace>
+      <newClassName>AbstractDeserializer</newClassName>
+      <newFullyQualifiedName>Zend\AMF\Parser\AbstractDeserializer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Parse/InputStream.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Parse_InputStream</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Parse/InputStream.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Parse</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Parser/InputStream.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Parser</newNamespace>
       <newClassName>InputStream</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Parse\InputStream</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Parser\InputStream</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Parse/OutputStream.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Parse_OutputStream</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Parse/OutputStream.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Parse</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Parser/OutputStream.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Parser</newNamespace>
       <newClassName>OutputStream</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Parse\OutputStream</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Parser\OutputStream</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Parse/Resource/MysqliResult.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Parse_Resource_MysqliResult</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Parse/Resource/MysqliResult.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Parse\Resource</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Parser/Resource/MysqliResult.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Parser\Resource</newNamespace>
       <newClassName>MysqliResult</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Parse\Resource\MysqliResult</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Parser\Resource\MysqliResult</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Parse/Resource/MysqlResult.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Parse_Resource_MysqlResult</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Parse/Resource/MysqlResult.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Parse\Resource</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Parser/Resource/MysqlResult.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Parser\Resource</newNamespace>
       <newClassName>MysqlResult</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Parse\Resource\MysqlResult</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Parser\Resource\MysqlResult</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Parse/Resource/Stream.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Parse_Resource_Stream</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Parse/Resource/Stream.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Parse\Resource</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Parser/Resource/Stream.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Parser\Resource</newNamespace>
       <newClassName>Stream</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Parse\Resource\Stream</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Parser\Resource\Stream</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Parse/Serializer.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Parse_Serializer</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Parse/Serializer.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Parse</newNamespace>
-      <newClassName>Serializer</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Parse\Serializer</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/AMF/Parser/AbstractSerializer.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Parser</newNamespace>
+      <newClassName>AbstractSerializer</newClassName>
+      <newFullyQualifiedName>Zend\AMF\Parser\AbstractSerializer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Parse/TypeLoader.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Parse_TypeLoader</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Parse/TypeLoader.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Parse</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Parser/TypeLoader.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Parser</newNamespace>
       <newClassName>TypeLoader</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Parse\TypeLoader</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Parser\TypeLoader</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Request/Http.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Request_Http</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Request/Http.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Request</newNamespace>
-      <newClassName>Http</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Request\Http</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/AMF/Request/HTTPRequest.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Request</newNamespace>
+      <newClassName>HTTPRequest</newClassName>
+      <newFullyQualifiedName>Zend\AMF\Request\HTTPRequest</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Request.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Request</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Request/Request.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Request</newNamespace>
-      <newClassName>Request</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Request\Request</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/AMF/Request/StreamRequest.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Request</newNamespace>
+      <newClassName>StreamRequest</newClassName>
+      <newFullyQualifiedName>Zend\AMF\Request\StreamRequest</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Response/Http.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Response_Http</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Response/Http.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Response</newNamespace>
-      <newClassName>Http</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Response\Http</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/AMF/Response/HTTPResponse.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Response</newNamespace>
+      <newClassName>HTTPResponse</newClassName>
+      <newFullyQualifiedName>Zend\AMF\Response\HTTPResponse</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Response.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Response</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Response/Response.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Response</newNamespace>
-      <newClassName>Response</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Response\Response</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/AMF/Response/StreamResponse.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Response</newNamespace>
+      <newClassName>StreamResponse</newClassName>
+      <newFullyQualifiedName>Zend\AMF\Response\StreamResponse</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Server/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Server_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Server/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Server</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Server/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Server</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Server\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Server\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Server.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Server</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Server/Server.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Server</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Server.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF</newNamespace>
       <newClassName>Server</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Server\Server</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Server</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Util/BinaryStream.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Util_BinaryStream</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Util/BinaryStream.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Util</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Util/BinaryStream.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Util</newNamespace>
       <newClassName>BinaryStream</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Util\BinaryStream</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Util\BinaryStream</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Value/ByteArray.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Value_ByteArray</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Value/ByteArray.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Value</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Value/ByteArray.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Value</newNamespace>
       <newClassName>ByteArray</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Value\ByteArray</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Value\ByteArray</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Value/MessageBody.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Value_MessageBody</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Value/MessageBody.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Value</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Value/MessageBody.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Value</newNamespace>
       <newClassName>MessageBody</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Value\MessageBody</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Value\MessageBody</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Value/MessageHeader.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Value_MessageHeader</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Value/MessageHeader.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Value</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Value/MessageHeader.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Value</newNamespace>
       <newClassName>MessageHeader</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Value\MessageHeader</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Value\MessageHeader</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Value/Messaging/AbstractMessage.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Value_Messaging_AbstractMessage</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Value/Messaging/AbstractMessage.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Value\Messaging</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Value/Messaging/AbstractMessage.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Value\Messaging</newNamespace>
       <newClassName>AbstractMessage</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Value\Messaging\AbstractMessage</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Value\Messaging\AbstractMessage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Value/Messaging/AcknowledgeMessage.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Value_Messaging_AcknowledgeMessage</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Value/Messaging/AcknowledgeMessage.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Value\Messaging</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Value/Messaging/AcknowledgeMessage.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Value\Messaging</newNamespace>
       <newClassName>AcknowledgeMessage</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Value\Messaging\AcknowledgeMessage</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Value\Messaging\AcknowledgeMessage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Value/Messaging/ArrayCollection.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Value_Messaging_ArrayCollection</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Value/Messaging/ArrayCollection.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Value\Messaging</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Value/Messaging/ArrayCollection.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Value\Messaging</newNamespace>
       <newClassName>ArrayCollection</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Value\Messaging\ArrayCollection</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Value\Messaging\ArrayCollection</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Value/Messaging/AsyncMessage.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Value_Messaging_AsyncMessage</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Value/Messaging/AsyncMessage.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Value\Messaging</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Value/Messaging/AsyncMessage.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Value\Messaging</newNamespace>
       <newClassName>AsyncMessage</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Value\Messaging\AsyncMessage</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Value\Messaging\AsyncMessage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Value/Messaging/CommandMessage.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Value_Messaging_CommandMessage</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Value/Messaging/CommandMessage.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Value\Messaging</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Value/Messaging/CommandMessage.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Value\Messaging</newNamespace>
       <newClassName>CommandMessage</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Value\Messaging\CommandMessage</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Value\Messaging\CommandMessage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Value/Messaging/ErrorMessage.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Value_Messaging_ErrorMessage</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Value/Messaging/ErrorMessage.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Value\Messaging</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Value/Messaging/ErrorMessage.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Value\Messaging</newNamespace>
       <newClassName>ErrorMessage</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Value\Messaging\ErrorMessage</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Value\Messaging\ErrorMessage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Value/Messaging/RemotingMessage.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Value_Messaging_RemotingMessage</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Value/Messaging/RemotingMessage.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Value\Messaging</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Value/Messaging/RemotingMessage.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Value\Messaging</newNamespace>
       <newClassName>RemotingMessage</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Value\Messaging\RemotingMessage</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Value\Messaging\RemotingMessage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Value/TraitsInfo.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Value_TraitsInfo</originalClassName>
-      <newRelativeFilePath>Zend/Amf/Value/TraitsInfo.php</newRelativeFilePath>
-      <newNamespace>Zend\Amf\Value</newNamespace>
+      <newRelativeFilePath>Zend/AMF/Value/TraitsInfo.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF\Value</newNamespace>
       <newClassName>TraitsInfo</newClassName>
-      <newFullyQualifiedName>Zend\Amf\Value\TraitsInfo</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\Value\TraitsInfo</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Bootstrap/Bootstrap.php</originalRelativeFilePath>
@@ -579,146 +579,146 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/DbTable.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_DbTable</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/DbTable.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Adapter/DbTable.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter</newNamespace>
       <newClassName>DbTable</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\DbTable</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\DbTable</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Digest.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Digest</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/Digest.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Adapter/Digest.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter</newNamespace>
       <newClassName>Digest</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\Digest</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\Digest</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Adapter/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Http/Resolver/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Http_Resolver_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/Http/Resolver/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter\Http\Resolver</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Adapter/HTTP/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter\HTTP</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\Http\Resolver\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\HTTP\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Http/Resolver/File.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Http_Resolver_File</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/Http/Resolver/File.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter\Http\Resolver</newNamespace>
-      <newClassName>File</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\Http\Resolver\File</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Authentication/Adapter/HTTP/FileResolver.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter\HTTP</newNamespace>
+      <newClassName>FileResolver</newClassName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\HTTP\FileResolver</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Http/Resolver/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Http_Resolver_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/Http/Resolver/ResolverInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter\Http\Resolver</newNamespace>
-      <newClassName>ResolverInterface</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\Http\Resolver\ResolverInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Authentication/Adapter/HTTP/Resolver.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter\HTTP</newNamespace>
+      <newClassName>Resolver</newClassName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\HTTP\Resolver</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Http.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Http</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/Http/Http.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter\Http</newNamespace>
-      <newClassName>Http</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\Http\Http</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Authentication/Adapter/HTTP.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter</newNamespace>
+      <newClassName>HTTP</newClassName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\HTTP</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/InfoCard.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_InfoCard</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/InfoCard.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Adapter/InfoCard.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter</newNamespace>
       <newClassName>InfoCard</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\InfoCard</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\InfoCard</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/AdapterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter</newNamespace>
-      <newClassName>AdapterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\AdapterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Authentication/Adapter.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication</newNamespace>
+      <newClassName>Adapter</newClassName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Ldap.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Ldap</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/Ldap.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Adapter/Ldap.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter</newNamespace>
       <newClassName>Ldap</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\Ldap</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\Ldap</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/OpenId.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_OpenId</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Adapter/OpenId.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Adapter/OpenId.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Adapter</newNamespace>
       <newClassName>OpenId</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Adapter\OpenId</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\OpenId</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Result.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Result</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Result.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Result.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication</newNamespace>
       <newClassName>Result</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Result</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Result</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Storage/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Storage_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Storage/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Storage</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Storage/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Storage</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Storage\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Storage\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Storage/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Storage_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Storage/StorageInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Storage</newNamespace>
-      <newClassName>StorageInterface</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Storage\StorageInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Authentication/Storage.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication</newNamespace>
+      <newClassName>Storage</newClassName>
+      <newFullyQualifiedName>Zend\Authentication\Storage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Storage/NonPersistent.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Storage_NonPersistent</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Storage/NonPersistent.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Storage</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Storage/NonPersistent.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Storage</newNamespace>
       <newClassName>NonPersistent</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Storage\NonPersistent</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Storage\NonPersistent</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Storage/Session.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Storage_Session</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Storage/Session.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth\Storage</newNamespace>
+      <newRelativeFilePath>Zend/Authentication/Storage/Session.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication\Storage</newNamespace>
       <newClassName>Session</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Storage\Session</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Authentication\Storage\Session</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth</originalClassName>
-      <newRelativeFilePath>Zend/Auth/Auth.php</newRelativeFilePath>
-      <newNamespace>Zend\Auth</newNamespace>
-      <newClassName>Auth</newClassName>
-      <newFullyQualifiedName>Zend\Auth\Auth</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Authentication/AuthenticationService.php</newRelativeFilePath>
+      <newNamespace>Zend\Authentication</newNamespace>
+      <newClassName>AuthenticationService</newClassName>
+      <newFullyQualifiedName>Zend\Authentication\AuthenticationService</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Barcode/Exception.php</originalRelativeFilePath>
@@ -827,10 +827,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Barcode/Object/ObjectAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Barcode_Object_ObjectAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Barcode/Object/ObjectAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Barcode/Object/AbstractObject.php</newRelativeFilePath>
       <newNamespace>Zend\Barcode\Object</newNamespace>
-      <newClassName>ObjectAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Barcode\Object\ObjectAbstract</newFullyQualifiedName>
+      <newClassName>AbstractObject</newClassName>
+      <newFullyQualifiedName>Zend\Barcode\Object\AbstractObject</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Barcode/Object/Planet.php</originalRelativeFilePath>
@@ -891,18 +891,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Barcode/Renderer/Pdf.php</originalRelativeFilePath>
       <originalClassName>Zend_Barcode_Renderer_Pdf</originalClassName>
-      <newRelativeFilePath>Zend/Barcode/Renderer/Pdf.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Barcode/Renderer/PDF.php</newRelativeFilePath>
       <newNamespace>Zend\Barcode\Renderer</newNamespace>
-      <newClassName>Pdf</newClassName>
-      <newFullyQualifiedName>Zend\Barcode\Renderer\Pdf</newFullyQualifiedName>
+      <newClassName>PDF</newClassName>
+      <newFullyQualifiedName>Zend\Barcode\Renderer\PDF</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Barcode/Renderer/RendererAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Barcode_Renderer_RendererAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Barcode/Renderer/RendererAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Barcode/Renderer/AbstractRenderer.php</newRelativeFilePath>
       <newNamespace>Zend\Barcode\Renderer</newNamespace>
-      <newClassName>RendererAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Barcode\Renderer\RendererAbstract</newFullyQualifiedName>
+      <newClassName>AbstractRenderer</newClassName>
+      <newFullyQualifiedName>Zend\Barcode\Renderer\AbstractRenderer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Barcode.php</originalRelativeFilePath>
@@ -14107,10 +14107,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Session_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Session/AbstractSession.php</newRelativeFilePath>
-      <newNamespace>Zend\Session</newNamespace>
-      <newClassName>AbstractSession</newClassName>
-      <newFullyQualifiedName>Zend\Session\AbstractSession</newFullyQualifiedName>
+      <newRelativeFilePath></newRelativeFilePath>
+      <newNamespace></newNamespace>
+      <newClassName>NOCLASSAVAILABLE</newClassName>
+      <newFullyQualifiedName>NOCLASSAVAILABLE</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/Exception.php</originalRelativeFilePath>
@@ -14123,10 +14123,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/Namespace.php</originalRelativeFilePath>
       <originalClassName>Zend_Session_Namespace</originalClassName>
-      <newRelativeFilePath>Zend/Session/Namespace.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Session/Container.php</newRelativeFilePath>
       <newNamespace>Zend\Session</newNamespace>
-      <newClassName>Namespace</newClassName>
-      <newFullyQualifiedName>Zend\Session\Namespace</newFullyQualifiedName>
+      <newClassName>Container</newClassName>
+      <newFullyQualifiedName>Zend\Session\Container</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/SaveHandler/DbTable.php</originalRelativeFilePath>
@@ -14147,42 +14147,42 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/SaveHandler/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Session_SaveHandler_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Session/SaveHandler/SaveHandlerInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Session\SaveHandler</newNamespace>
-      <newClassName>SaveHandlerInterface</newClassName>
-      <newFullyQualifiedName>Zend\Session\SaveHandler\SaveHandlerInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Session/SaveHandler.php</newRelativeFilePath>
+      <newNamespace>Zend\Session</newNamespace>
+      <newClassName>SaveHandler</newClassName>
+      <newFullyQualifiedName>Zend\Session\SaveHandler</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/Validator/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Session_Validator_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Session/Validator/AbstractValidator.php</newRelativeFilePath>
-      <newNamespace>Zend\Session\Validator</newNamespace>
-      <newClassName>AbstractValidator</newClassName>
-      <newFullyQualifiedName>Zend\Session\Validator\AbstractValidator</newFullyQualifiedName>
+      <newRelativeFilePath></newRelativeFilePath>
+      <newNamespace></newNamespace>
+      <newClassName>NOCLASSAVAILABLE</newClassName>
+      <newFullyQualifiedName>NOCLASSAVAILABLE</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/Validator/HttpUserAgent.php</originalRelativeFilePath>
       <originalClassName>Zend_Session_Validator_HttpUserAgent</originalClassName>
-      <newRelativeFilePath>Zend/Session/Validator/HttpUserAgent.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Session/Validator/HTTPUserAgent.php</newRelativeFilePath>
       <newNamespace>Zend\Session\Validator</newNamespace>
-      <newClassName>HttpUserAgent</newClassName>
-      <newFullyQualifiedName>Zend\Session\Validator\HttpUserAgent</newFullyQualifiedName>
+      <newClassName>HTTPUserAgent</newClassName>
+      <newFullyQualifiedName>Zend\Session\Validator\HTTPUserAgent</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Session/Validator/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Session_Validator_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Session/Validator/ValidatorInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Session\Validator</newNamespace>
-      <newClassName>ValidatorInterface</newClassName>
-      <newFullyQualifiedName>Zend\Session\Validator\ValidatorInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Session/Validator.php</newRelativeFilePath>
+      <newNamespace>Zend\Session</newNamespace>
+      <newClassName>Validator</newClassName>
+      <newFullyQualifiedName>Zend\Session\Validator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Session.php</originalRelativeFilePath>
       <originalClassName>Zend_Session</originalClassName>
-      <newRelativeFilePath>Zend/Session/Session.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Session/Manager.php</newRelativeFilePath>
       <newNamespace>Zend\Session</newNamespace>
-      <newClassName>Session</newClassName>
-      <newFullyQualifiedName>Zend\Session\Session</newFullyQualifiedName>
+      <newClassName>Manager</newClassName>
+      <newFullyQualifiedName>Zend\Session\Manager</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/AutoDiscover/Exception.php</originalRelativeFilePath>

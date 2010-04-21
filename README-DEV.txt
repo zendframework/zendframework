@@ -52,7 +52,7 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 [ ] Zend_Ldap
 [ ] Zend_Mime -> [ ] Zend_Mail
 [ ] Zend_Markup
-[X] Zend_Memory -> [X] Zend_Pdf -> [ ] Zend_Barcode
+[X] Zend_Memory -> [X] Zend_Pdf -> [X] Zend_Barcode
 [ ] Zend_Db (except Firebug profiler) -> [ ] Zend_Feed, [ ] Zend_Queue
 [X] Zend_Text -> [X] Zend_ProgressBar -> [X] Zend_File
 [ ] Zend_Search
@@ -60,7 +60,7 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 [ ] Zend_Soap
 [X] Zend_Tag
 [ ] Zend_Service_*
-[ ] Zend_Session -> [ ] Zend_Auth -> [ ] Zend_Amf -> [ ] Zend_Serializer
+[X] Zend_Session -> [X] Zend_Auth -> [X] Zend_Amf -> [ ] Zend_Serializer
 
 Fifth pass:
 All together:

@@ -21,16 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-/** @see Zend_Service_ReCaptcha */
-
-/** @see Zend_Http_Client_Adapter_Test */
-
-/** @see Zend_Config */
-
-/**
  * @category   Zend
  * @package    Zend_Service_ReCaptcha
  * @subpackage UnitTests
@@ -230,7 +220,7 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
             'adapter' => $adapter
         ));
 
-        Zend_Service_ReCaptcha::setHttpClient($client);
+        Zend_Service_ReCaptcha::setDefaultHTTPClient($client);
 
         $resp = $this->_reCaptcha->verify('challengeField', 'responseField');
 

@@ -21,12 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-
-
-/**
  * Zend_Service_Amazon_Ec2_Image test case.
  *
  * @category   Zend
@@ -60,7 +54,7 @@ class Zend_Service_Amazon_Ec2_ImageTest extends PHPUnit_Framework_TestCase
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Image::setHttpClient($client);
+        Zend_Service_Amazon_Ec2_Image::setDefaultHTTPClient($client);
     }
 
     protected function tearDown()

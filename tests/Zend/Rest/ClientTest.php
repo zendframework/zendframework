@@ -20,13 +20,6 @@
  * @version    $Id$
  */
 
-
-/** Zend_Rest_Client */
-
-/** Zend_Http_Client_Adapter_Test */
-
-/** PHPUnit Test Case */
-
 /**
  * Test cases for Zend_Rest_Client
  *
@@ -48,7 +41,7 @@ class Zend_Rest_ClientTest extends PHPUnit_Framework_TestCase
         $client        = new Zend_Http_Client(null, array(
             'adapter' => $this->adapter
         ));
-        Zend_Rest_Client::setHttpClient($client);
+        Zend_Rest_Client::setDefaultHTTPClient($client);
 
         $this->rest = new Zend_Rest_Client('http://framework.zend.com/');
     }

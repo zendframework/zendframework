@@ -21,11 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-
-/**
  * Zend_Service_Amazon_Ec2_Securitygroups test case.
  *
  * @category   Zend
@@ -59,7 +54,7 @@ class Zend_Service_Amazon_Ec2_SecuritygroupsTest extends PHPUnit_Framework_TestC
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Securitygroups::setHttpClient($client);
+        Zend_Service_Amazon_Ec2_Securitygroups::setDefaultHTTPClient($client);
 
     }
 

@@ -24,7 +24,7 @@
  *
  * @uses       Zend_Http_Client
  * @uses       Zend_Json
- * @uses       Zend_Service_Abstract
+ * @uses       Zend\Service\AbstractService
  * @uses       Zend_Service_ReCaptcha_Exception
  * @uses       Zend_Service_ReCaptcha_Response
  * @category   Zend
@@ -34,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Service_ReCaptcha extends Zend_Service_Abstract
+class Zend_Service_ReCaptcha extends \Zend\Service\AbstractService
 {
     /**
      * URI to the regular API
@@ -450,7 +450,7 @@ HTML;
         }
 
         /* Fetch an instance of the http client */
-        $httpClient = self::getHttpClient();
+        $httpClient = $this->getHTTPClient();
 
         $postParams = array('privatekey' => $this->_privateKey,
                             'remoteip'   => $this->_ip,

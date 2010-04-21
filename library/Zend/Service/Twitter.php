@@ -94,7 +94,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      */
     public function __construct($username = null, $password = null)
     {
-        $this->setLocalHttpClient(clone self::getHttpClient());
+        $this->setLocalHttpClient(clone $this->getHttpClient());
         if (is_array($username) && is_null($password)) {
             if (isset($username['username']) && isset($username['password'])) {
                 $this->setUsername($username['username']);

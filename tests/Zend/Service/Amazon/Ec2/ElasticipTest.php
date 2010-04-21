@@ -21,11 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-
-/**
  * Zend_Service_Amazon_Ec2_Elasticip test case.
  *
  * @category   Zend
@@ -59,7 +54,7 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Elasticip::setHttpClient($client);
+        Zend_Service_Amazon_Ec2_Elasticip::setDefaultHTTPClient($client);
 
     }
 

@@ -23,7 +23,7 @@
 /**
  * @uses       Zend_Rest_Client_Exception
  * @uses       Zend_Rest_Client_Result
- * @uses       Zend_Service_Abstract
+ * @uses       Zend\Service\AbstractService
  * @uses       Zend_Uri
  * @category   Zend
  * @package    Zend_Rest
@@ -31,7 +31,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Rest_Client extends Zend_Service_Abstract
+class Zend_Rest_Client extends \Zend\Service\AbstractService
 {
     /**
      * Data for the query
@@ -111,7 +111,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
          * Get the HTTP client and configure it for the endpoint URI.  Do this each time
          * because the Zend_Http_Client instance is shared among all Zend_Service_Abstract subclasses.
          */
-        self::getHttpClient()->resetParameters()->setUri($this->_uri);
+        $this->getHttpClient()->resetParameters()->setUri($this->_uri);
     }
 
     /**
@@ -125,7 +125,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
     final public function restGet($path, array $query = null)
     {
         $this->_prepareRest($path);
-        $client = self::getHttpClient();
+        $client = $this->getHttpClient();
         $client->setParameterGet($query);
         return $client->request('GET');
     }
@@ -143,7 +143,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
      */
     protected function _performPost($method, $data = null)
     {
-        $client = self::getHttpClient();
+        $client = $this->getHttpClient();
         if (is_string($data)) {
             $client->setRawData($data);
         } elseif (is_array($data) || is_object($data)) {
@@ -190,7 +190,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
     final public function restDelete($path)
     {
         $this->_prepareRest($path);
-        return self::getHttpClient()->request('DELETE');
+        return $this->getHttpClient()->request('DELETE');
     }
 
     /**

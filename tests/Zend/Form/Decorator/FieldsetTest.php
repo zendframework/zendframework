@@ -132,6 +132,20 @@ class Zend_Form_Decorator_FieldsetTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @see ZF-7054
+     */
+    public function testCustomIdSupersedesElementId()
+    {
+        $form = new Zend_Form_SubForm();
+        $form->setName('bar')
+             ->setView($this->getView());
+        $html = $this->decorator->setElement($form)
+                                ->setOption('id', 'foo-id')
+                                ->render('content');
+        $this->assertContains('foo-id', $html);
+    }
+
+    /**
      * @see ZF-2981
      */
     public function testActionAndMethodAttributesShouldNotBePresentInFieldsetTag()

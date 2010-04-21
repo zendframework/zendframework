@@ -116,63 +116,49 @@ abstract class Zend_View_Helper_FormElement extends Zend_View_Helper_HtmlElement
             }
         }
 
-        // force attribs to an array, per note from Orjan Persson.
-        settype($info['attribs'], 'array');
+        $attribs = (array)$attribs;
 
         // Normalize readonly tag
-        if (isset($info['attribs']['readonly'])
-            && $info['attribs']['readonly'] != 'readonly')
-        {
-            $info['attribs']['readonly'] = 'readonly';
+        if (array_key_exists('readonly', $attribs)) {
+            $attribs['readonly'] = 'readonly';
         }
 
         // Disable attribute
-        if (isset($info['attribs']['disable'])
-            && is_scalar($info['attribs']['disable']))
-        {
-            // disable the element
-            $info['disable'] = (bool)$info['attribs']['disable'];
-            unset($info['attribs']['disable']);
-        } elseif (isset($info['attribs']['disable'])
-            && is_array($info['attribs']['disable']))
-        {
-            $info['disable'] = $info['attribs']['disable'];
-            unset($info['attribs']['disable']);
+        if (array_key_exists('disable', $attribs)) {
+           if (is_scalar($attribs['disable'])) {
+                // disable the element
+                $info['disable'] = (bool)$attribs['disable'];
+            } else if (is_array($attribs['disable'])) {
+                $info['disable'] = $attribs['disable'];
+            }
         }
 
         // Set ID for element
-        if (isset($info['attribs']['id'])) {
-            $info['id'] = (string) $info['attribs']['id'];
-        } elseif (!isset($info['attribs']['id']) && !empty($info['name'])) {
-            $id = $info['name'];
-            if (substr($id, -2) == '[]') {
-                $id = substr($id, 0, strlen($id) - 2);
-            }
-            if (strstr($id, ']')) {
-                $id = trim($id, ']');
-                $id = str_replace('][', '-', $id);
-                $id = str_replace('[', '-', $id);
-            }
-            $info['id'] = $id;
+        if (array_key_exists('id', $attribs)) {
+            $info['id'] = (string)$attribs['id'];
+        } else if ('' !== $info['name']) {
+            $info['id'] = trim(strtr($info['name'],
+                                     array('[' => '-', ']' => '')), '-');
         }
 
         // Determine escaping from attributes
-        if (isset($info['attribs']['escape'])) {
-            $info['escape'] = (bool) $info['attribs']['escape'];
+        if (array_key_exists('escape', $attribs)) {
+            $info['escape'] = (bool)$attribs['escape'];
         }
 
         // Determine listsetp from attributes
-        if (isset($info['attribs']['listsep'])) {
-            $info['listsep'] = (string) $info['attribs']['listsep'];
+        if (array_key_exists('listsep', $attribs)) {
+            $info['listsep'] = (string)$attribs['listsep'];
         }
 
         // Remove attribs that might overwrite the other keys. We do this LAST
         // because we needed the other attribs values earlier.
         foreach ($info as $key => $val) {
-            if (isset($info['attribs'][$key])) {
-                unset($info['attribs'][$key]);
+            if (array_key_exists($key, $attribs)) {
+                unset($attribs[$key]);
             }
         }
+        $info['attribs'] = $attribs;
 
         // done!
         return $info;

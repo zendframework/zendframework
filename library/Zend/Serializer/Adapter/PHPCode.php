@@ -21,15 +21,22 @@
  */
 
 /**
- * @uses       Zend_Serializer_Adapter_AdapterAbstract
- * @uses       Zend_Serializer_Exception
+ * @namespace
+ */
+namespace Zend\Serializer\Adapter;
+
+use Zend\Serializer\Exception as SerializationException;
+
+/**
+ * @uses       Zend\Serializer\Adapter\AbstractAdapter
+ * @uses       Zend\Serializer\Exception
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Serializer_Adapter_PhpCode extends Zend_Serializer_Adapter_AdapterAbstract
+class PHPCode extends AbstractAdapter
 {
     /**
      * Serialize PHP using var_export
@@ -51,14 +58,14 @@ class Zend_Serializer_Adapter_PhpCode extends Zend_Serializer_Adapter_AdapterAbs
      * @param  string $code 
      * @param  array $opts 
      * @return mixed
-     * @throws Zend_Serializer_Exception on eval error
+     * @throws \Zend\Serializer\Exception on eval error
      */
     public function unserialize($code, array $opts = array())
     {
         $eval = @eval('$ret=' . $code . ';');
         if ($eval === false) {
-                $lastErr = error_get_last();
-                throw new Zend_Serializer_Exception('eval failed: ' . $lastErr['message']);
+            $lastErr = error_get_last();
+            throw new SerializationException('eval failed: ' . $lastErr['message']);
         }
         return $ret;
     }

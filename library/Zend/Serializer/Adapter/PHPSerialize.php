@@ -21,15 +21,22 @@
  */
 
 /**
- * @uses       Zend_Serializer_Adapter_AdapterAbstract
- * @uses       Zend_Serializer_Exception
+ * @namespace
+ */
+namespace Zend\Serializer\Adapter;
+
+use Zend\Serializer\Exception as SerializationException;
+
+/**
+ * @uses       Zend\Serializer\Adapter\AbstractAdapter
+ * @uses       Zend\Serializer\Exception
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Serializer_Adapter_PhpSerialize extends Zend_Serializer_Adapter_AdapterAbstract
+class PHPSerialize extends AbstractAdapter
 {
     /**
      *  @var null|string Serialized boolean false value
@@ -39,7 +46,7 @@ class Zend_Serializer_Adapter_PhpSerialize extends Zend_Serializer_Adapter_Adapt
     /**
      * Constructor
      * 
-     * @param  array|Zend_Config $opts 
+     * @param  array|Zend\Config\Config $opts 
      * @return void
      */
     public function __construct($opts = array()) 
@@ -57,14 +64,14 @@ class Zend_Serializer_Adapter_PhpSerialize extends Zend_Serializer_Adapter_Adapt
      * @param  mixed $value 
      * @param  array $opts 
      * @return string
-     * @throws Zend_Serializer_Exception On serialize error
+     * @throws Zend\Serializer\Exception On serialize error
      */
     public function serialize($value, array $opts = array())
     {
         $ret = serialize($value);
         if ($ret === false) {
             $lastErr = error_get_last();
-            throw new Zend_Serializer_Exception($lastErr['message']);
+            throw new SerializationException($lastErr['message']);
         }
         return $ret;
     }
@@ -76,7 +83,7 @@ class Zend_Serializer_Adapter_PhpSerialize extends Zend_Serializer_Adapter_Adapt
      * @param  string $serialized 
      * @param  array $opts 
      * @return mixed
-     * @throws Zend_Serializer_Exception on unserialize error
+     * @throws Zend\Serializer\Exception on unserialize error
      */
     public function unserialize($serialized, array $opts = array())
     {
@@ -84,7 +91,7 @@ class Zend_Serializer_Adapter_PhpSerialize extends Zend_Serializer_Adapter_Adapt
         $ret = @unserialize($serialized);
         if ($ret === false && $serialized !== self::$_serializedFalse) {
             $lastErr = error_get_last();
-            throw new Zend_Serializer_Exception($lastErr['message']);
+            throw new SerializationException($lastErr['message']);
         }
         return $ret;
     }

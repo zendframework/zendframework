@@ -21,19 +21,27 @@
  */
 
 /**
- * @uses       Zend_Amf_Parse_Amf0_Deserializer
- * @uses       Zend_Amf_Parse_Amf0_Serializer
- * @uses       Zend_Amf_Parse_InputStream
- * @uses       Zend_Amf_Parse_OutputStream
- * @uses       Zend_Serializer_Adapter_AdapterAbstract
- * @uses       Zend_Serializer_Exception
+ * @namespace
+ */
+namespace Zend\Serializer\Adapter;
+
+use Zend\Serializer\Exception as SerializationException,
+    Zend\AMF\Parser as AMFParser;
+
+/**
+ * @uses       Zend\AMF\Parser\AMF0\Deserializer
+ * @uses       Zend\AMF\Parser\AMF0\Serializer
+ * @uses       Zend\AMF\Parser\InputStream
+ * @uses       Zend\AMF\Parser\OutputStream
+ * @uses       Zend\Serializer\Adapter\AbstractAdapter
+ * @uses       Zend\Serializer\Exception
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Serializer_Adapter_Amf0 extends Zend_Serializer_Adapter_AdapterAbstract
+class AMF0 extends AbstractAdapter
 {
     /**
      * Serialize a PHP value to AMF0 format
@@ -41,17 +49,17 @@ class Zend_Serializer_Adapter_Amf0 extends Zend_Serializer_Adapter_AdapterAbstra
      * @param  mixed $value 
      * @param  array $opts 
      * @return string
-     * @throws Zend_Serializer_Exception
+     * @throws \Zend\Serializer\Exception
      */
     public function serialize($value, array $opts = array())
     {
         try  {
-            $stream     = new Zend_Amf_Parse_OutputStream();
-            $serializer = new Zend_Amf_Parse_Amf0_Serializer($stream);
+            $stream     = new AMFParser\OutputStream();
+            $serializer = new AMFParser\AMF0\Serializer($stream);
             $serializer->writeTypeMarker($value);
             return $stream->getStream();
-        } catch (Exception $e) {
-            throw new Zend_Serializer_Exception('Serialization failed by previous error', 0, $e);
+        } catch (\Exception $e) {
+            throw new SerializationException('Serialization failed by previous error', 0, $e);
         }
     }
 
@@ -61,17 +69,16 @@ class Zend_Serializer_Adapter_Amf0 extends Zend_Serializer_Adapter_AdapterAbstra
      * @param  mixed $value 
      * @param  array $opts 
      * @return void
-     * @throws Zend_Serializer_Exception
+     * @throws \Zend\Serializer\Exception
      */
     public function unserialize($value, array $opts = array())
     {
         try {
-            $stream       = new Zend_Amf_Parse_InputStream($value);
-            $deserializer = new Zend_Amf_Parse_Amf0_Deserializer($stream);
+            $stream       = new AMFParser\InputStream($value);
+            $deserializer = new AMFParser\AMF0\Deserializer($stream);
             return $deserializer->readTypeMarker();
-        } catch (Exception $e) {
-            throw new Zend_Serializer_Exception('Unserialization failed by previous error', 0, $e);
+        } catch (\Exception $e) {
+            throw new SerializationException('Unserialization failed by previous error', 0, $e);
         }
     }
-
 }

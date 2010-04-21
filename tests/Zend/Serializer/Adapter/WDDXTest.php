@@ -21,13 +21,18 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Serializer\Adapter;
+
+/**
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
+class WDDXTest extends \PHPUnit_Framework_TestCase
 {
 
     private $_adapter;
@@ -37,7 +42,7 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
         if (!constant('TESTS_ZEND_SERIALIZER_ADAPTER_WDDX_ENABLED')) {
             $this->markTestSkipped('Zend_Serializer WDDX tests are not enabled');
         }
-        $this->_adapter = new Zend_Serializer_Adapter_Wddx();
+        $this->_adapter = new \Zend\Serializer\Adapter\WDDX();
     }
 
     public function tearDown()
@@ -107,7 +112,7 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeObject()
     {
-        $value = new stdClass();
+        $value = new \stdClass();
         $value->test = "test";
         $expected = '<wddxPacket version=\'1.0\'><header/>'
                   . '<data><struct>'
@@ -191,7 +196,7 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
                   . '<var name=\'php_class_name\'><string>stdClass</string></var>'
                   . '<var name=\'test\'><string>test</string></var>'
                   . '</struct></data></wddxPacket>';
-        $expected = new stdClass();
+        $expected = new \stdClass();
         $expected->test = 'test';
 
         $data = $this->_adapter->unserialize($value);
@@ -201,7 +206,7 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
     public function testUnserialzeInvalid()
     {
         $value = 'not a serialized string';
-        $this->setExpectedException('Zend_Serializer_Exception');
+        $this->setExpectedException('Zend\\Serializer\\Exception');
         $this->_adapter->unserialize($value);
     }
 

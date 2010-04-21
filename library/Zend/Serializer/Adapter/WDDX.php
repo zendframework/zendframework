@@ -21,18 +21,25 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Serializer\Adapter;
+
+use Zend\Serializer\Exception as SerializationException;
+
+/**
  * @link       http://www.infoloom.com/gcaconfs/WEB/chicago98/simeonov.HTM
  * @link       http://en.wikipedia.org/wiki/WDDX
  * @uses       SimpleXMLElement
- * @uses       Zend_Serializer_Adapter_AdapterAbstract
- * @uses       Zend_Serializer_Exception
+ * @uses       Zend\Serializer\Adapter\AbstractAdapter
+ * @uses       Zend\Serializer\Exception
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Serializer_Adapter_Wddx extends Zend_Serializer_Adapter_AdapterAbstract
+class WDDX extends AbstractAdapter
 {
     /**
      * @var array Default options
@@ -46,12 +53,12 @@ class Zend_Serializer_Adapter_Wddx extends Zend_Serializer_Adapter_AdapterAbstra
      * 
      * @param  array $opts 
      * @return void
-     * @throws Zend_Serializer_Exception if wddx extension not found
+     * @throws Zend\Serializer\Exception if wddx extension not found
      */
     public function __construct($opts = array())
     {
         if (!extension_loaded('wddx')) {
-            throw new Zend_Serializer_Exception('PHP extension "wddx" is required for this adapter');
+            throw new SerializationException('PHP extension "wddx" is required for this adapter');
         }
 
         parent::__construct($opts);
@@ -63,7 +70,7 @@ class Zend_Serializer_Adapter_Wddx extends Zend_Serializer_Adapter_AdapterAbstra
      * @param  mixed $value 
      * @param  array $opts 
      * @return string
-     * @throws Zend_Serializer_Exception on wddx error
+     * @throws Zend\Serializer\Exception on wddx error
      */
     public function serialize($value, array $opts = array())
     {
@@ -77,7 +84,7 @@ class Zend_Serializer_Adapter_Wddx extends Zend_Serializer_Adapter_AdapterAbstra
 
         if ($wddx === false) {
             $lastErr = error_get_last();
-            throw new Zend_Serializer_Exception($lastErr['message']);
+            throw new SerializationException($lastErr['message']);
         }
         return $wddx;
     }
@@ -88,7 +95,7 @@ class Zend_Serializer_Adapter_Wddx extends Zend_Serializer_Adapter_AdapterAbstra
      * @param  string $wddx 
      * @param  array $opts 
      * @return mixed
-     * @throws Zend_Serializer_Exception on wddx error
+     * @throws Zend\Serializer\Exception on wddx error
      */
     public function unserialize($wddx, array $opts = array())
     {
@@ -98,16 +105,16 @@ class Zend_Serializer_Adapter_Wddx extends Zend_Serializer_Adapter_AdapterAbstra
             // check if the returned NULL is valid
             // or based on an invalid wddx string
             try {
-                $simpleXml = new SimpleXMLElement($wddx);
+                $simpleXml = new \SimpleXMLElement($wddx);
                 if (isset($simpleXml->data[0]->null[0])) {
                     return null; // valid null
                 }
                 $errMsg = 'Can\'t unserialize wddx string';
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $errMsg = $e->getMessage();
             }
 
-            throw new Zend_Serializer_Exception($errMsg);
+            throw new SerializationException($errMsg);
         }
 
         return $ret;

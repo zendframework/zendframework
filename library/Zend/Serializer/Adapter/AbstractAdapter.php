@@ -21,15 +21,22 @@
  */
 
 /**
- * @uses       Zend_Serializer_Adapter_AdapterInterface
- * @uses       Zend_Serializer_Exception
+ * @namespace
+ */
+namespace Zend\Serializer\Adapter;
+
+use Zend\Serializer\Adapter as SerializationAdapter;
+
+/**
+ * @uses       \Zend\Serializer\Adapter
+ * @uses       \Zend\Serializer\Exception
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Serializer_Adapter_AdapterAbstract implements Zend_Serializer_Adapter_AdapterInterface
+abstract class AbstractAdapter implements SerializationAdapter
 {
     /**
      * Serializer options
@@ -41,7 +48,7 @@ abstract class Zend_Serializer_Adapter_AdapterAbstract implements Zend_Serialize
     /**
      * Constructor
      *
-     * @param array|Zend_Config $opts Serializer options
+     * @param array|Zend\Config\Config $opts Serializer options
      */
     public function __construct($opts = array()) 
     {
@@ -51,12 +58,12 @@ abstract class Zend_Serializer_Adapter_AdapterAbstract implements Zend_Serialize
     /**
      * Set serializer options
      *
-     * @param  array|Zend_Config $opts Serializer options
-     * @return Zend_Serializer_Adapter_AdapterAbstract
+     * @param  array|Zend\Config\Config $opts Serializer options
+     * @return Zend\Serializer\Adapter\AbstractAdapter
      */
     public function setOptions($opts) 
     {
-        if ($opts instanceof Zend_Config) {
+        if ($opts instanceof \Zend\Config\Config) {
             $opts = $opts->toArray();
         } else {
             $opts = (array) $opts;
@@ -73,7 +80,7 @@ abstract class Zend_Serializer_Adapter_AdapterAbstract implements Zend_Serialize
      *
      * @param  string $name Option name
      * @param  mixed $value Option value
-     * @return Zend_Serializer_Adapter_AdapterAbstract
+     * @return Zend\Serializer\Adapter\AbstractAdapter
      */
     public function setOption($name, $value) 
     {
@@ -96,13 +103,13 @@ abstract class Zend_Serializer_Adapter_AdapterAbstract implements Zend_Serialize
      *
      * @param  string $name
      * @return mixed
-     * @throws Zend_Serializer_Exception
+     * @throws Zend\Serializer\Exception
      */
     public function getOption($name) 
     {
         $name = (string) $name;
         if (!array_key_exists($name, $this->_options)) {
-            throw new Zend_Serializer_Exception('Unknown option name "'.$name.'"');
+            throw new \Zend\Serializer\Exception('Unknown option name "'.$name.'"');
         }
 
         return $this->_options[$name];

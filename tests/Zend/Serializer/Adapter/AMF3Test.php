@@ -21,12 +21,9 @@
  */
 
 /**
- * @see Zend_Serializer_Adapter_Amf0
+ * @namespace
  */
-
-/**
- * PHPUnit test case
- */
+namespace ZendTest\Serializer\Adapter;
 
 /**
  * @category   Zend
@@ -35,14 +32,14 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Serializer_Adapter_Amf0Test extends PHPUnit_Framework_TestCase
+class AMF3Test extends \PHPUnit_Framework_TestCase
 {
 
     private $_adapter;
 
     public function setUp()
     {
-        $this->_adapter = new Zend_Serializer_Adapter_Amf0();
+        $this->_adapter = new \Zend\Serializer\Adapter\AMF3();
     }
 
     public function tearDown()
@@ -51,26 +48,26 @@ class Zend_Serializer_Adapter_Amf0Test extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Simple test to serialize a value using Zend_Amf_Parser_Amf0_Serializer
+     * Simple test to serialize a value using Zend_Amf_Parser_Amf3_Serializer
      * -> This only tests the usage of Zend_Amf @see Zend_Amf_AllTests
      */
     public function testSerialize()
     {
         $value    = true;
-        $expected = "\x01\x01"; // Amf0 -> true
+        $expected = "\x03"; // Amf3 -> true
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
     /**
-     * Simple test to serialize a value using Zend_Amf_Parser_Amf0_Deserializer
+     * Simple test to unserialize a value using Zend_Amf_Parser_Amf3_Deserializer
      * -> This only tests the usage of Zend_Amf @see Zend_Amf_AllTests
      */
     public function testUnserialize()
     {
         $expected   = true;
-        $value      = "\x01\x01"; // Amf0 -> true
+        $value      = "\x03"; // Amf3 -> true
 
         $data = $this->_adapter->unserialize($value);
         $this->assertEquals($expected, $data);

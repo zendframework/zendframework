@@ -60,7 +60,7 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 [ ] Zend_Soap
 [X] Zend_Tag
 [ ] Zend_Service_*
-[X] Zend_Session -> [X] Zend_Auth -> [X] Zend_Amf -> [ ] Zend_Serializer
+[X] Zend_Session -> [X] Zend_Auth -> [X] Zend_Amf -> [X] Zend_Serializer
 
 Fifth pass:
 All together:

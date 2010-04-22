@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Markup;
+use Zend\Markup;
 
 if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Markup_FactoryTest::main");
@@ -34,20 +39,20 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Markup_FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testFactory()
     {
-        Zend_Markup::addParserPath('Zend_Markup_Test_Parser', 'Zend/Markup/Test/Parser');
-        Zend_Markup::addRendererPath('Zend_Markup_Test_Renderer', 'Zend/Markup/Test/Renderer');
+        Markup\Markup::addParserPath('ZendTest\Markup\TestAsset\Parser', 'Zend/Markup/TestAsset/Parser');
+        Markup\Markup::addRendererPath('ZendTest\Markup\TestAsset\Renderer', 'Zend/Markup/TestAsset/Renderer');
 
-        Zend_Markup::factory('MockParser', 'MockRenderer');
+        Markup\Markup::factory('MockParser', 'MockRenderer');
     }
 
 }
 
 // Call Zend_Markup_BbcodeTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_Markup_FactoryTest::main") {
-    Zend_Markup_BbcodeTest::main();
+    \Zend_Markup_BbcodeTest::main();
 }

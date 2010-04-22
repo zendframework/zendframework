@@ -14,39 +14,57 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer
+ * @subpackage Renderer_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * @see Zend_Uri
+ * @namespace
  */
+namespace Zend\Markup\Renderer\HTML;
 
 /**
- * @see Zend_Markup_Renderer_RendererAbstract
- */
-
-/**
- * HTML renderer
+ * Tag interface
  *
+ * @uses       \Zend\Markup\Renderer\TokenConverterInterface
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer
+ * @subpackage Renderer_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Markup_Test_Renderer_MockRenderer extends Zend_Markup_Renderer_RendererAbstract
+abstract class HTMLAbstract implements \Zend\Markup\Renderer\TokenConverterInterface
 {
 
     /**
-     * Set the default filter
+     * The HTML renderer
      *
-     * @return void
+     * @var \Zend\Markup\Renderer\HTML
      */
-    public function addDefaultFilters()
+    protected $_renderer;
+
+
+    /**
+     * Set the HTML renderer instance
+     *
+     * @param \Zend\Markup\Renderer\HTML $renderer
+     *
+     * @return \Zend\Markup\Renderer\HTML\HTMLAbstract
+     */
+    public function setRenderer( $renderer)
     {
-        $this->_defaultFilter = new Zend_Filter();
+        $this->_renderer = $renderer;
+    }
+
+    /**
+     * Get the HTML renderer instance
+     *
+     * @return \Zend\Markup\Renderer\HTML
+     */
+    public function getRenderer()
+    {
+        return $this->_renderer;
     }
 }

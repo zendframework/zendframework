@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Markup\Renderer;
+
+/**
  * Tag interface
  *
  * @category   Zend
@@ -29,16 +34,16 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Markup_Renderer_TokenConverterInterface
+interface TokenConverterInterface
 {
 
     /**
      * Convert the token
      *
-     * @param Zend_Markup_Token $token
+     * @param \Zend\Markup\Token $token
      * @param string $text
      *
      * @return string
      */
-    public function convert(Zend_Markup_Token $token, $text);
+    public function convert(\Zend\Markup\Token $token, $text);
 }

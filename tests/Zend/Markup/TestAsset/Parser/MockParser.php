@@ -21,6 +21,13 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Markup\TestAsset\Parser;
+use Zend\Markup\Parser;
+use Zend\Markup;
+
+/**
  * @see Zend_Markup_TokenList
  */
 
@@ -35,7 +42,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Markup_Test_Parser_MockParser implements Zend_Markup_Parser_ParserInterface
+class MockParser implements Parser\ParserInterface
 {
 
     /**
@@ -50,29 +57,29 @@ class Zend_Markup_Test_Parser_MockParser implements Zend_Markup_Parser_ParserInt
             /**
              * @see Zend_Markup_Parser_Exception
              */
-            throw new Zend_Markup_Parser_Exception('Value to parse should be a string.');
+            throw new Parser\Exception('Value to parse should be a string.');
         }
 
         if (empty($value)) {
             /**
              * @see Zend_Markup_Parser_Exception
              */
-            throw new Zend_Markup_Parser_Exception('Value to parse cannot be left empty.');
+            throw new Parser\Exception('Value to parse cannot be left empty.');
         }
 
         // initialize variables
-        $tree    = new Zend_Markup_TokenList();
-        $current = new Zend_Markup_Token(
+        $tree    = new Markup\TokenList();
+        $current = new Markup\Token(
             '',
-            Zend_Markup_Token::TYPE_NONE,
+            Markup\Token::TYPE_NONE,
             'Zend_Markup_Root'
         );
 
         $tree->addChild($current);
 
-        $token = new Zend_Markup_Token(
+        $token = new Markup\Token(
             $value,
-            Zend_Markup_Token::TYPE_NONE,
+            Markup\Token::TYPE_NONE,
             '',
             array(),
             $current

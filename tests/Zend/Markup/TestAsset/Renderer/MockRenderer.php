@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Html
+ * @subpackage Renderer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,32 +23,27 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\HTML;
+namespace ZendTest\Markup\TestAsset\Renderer;
 
 /**
- * Tag interface
+ * HTML renderer
  *
- * @uses       \Zend\Markup\Renderer\HTML\HTMLAbstract
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Html
+ * @subpackage Renderer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Code extends HTMLAbstract
+class MockRenderer extends \Zend\Markup\Renderer\RendererAbstract
 {
 
     /**
-     * Convert the token
+     * Set the default filter
      *
-     * @param \Zend\Markup\Token $token
-     * @param string $text
-     *
-     * @return string
+     * @return void
      */
-    public function convert(\Zend\Markup\Token $token, $text)
+    public function addDefaultFilters()
     {
-        return highlight_string($text, true);
+        $this->_defaultFilter = new \Zend\Filter\FilterChain();
     }
-
 }

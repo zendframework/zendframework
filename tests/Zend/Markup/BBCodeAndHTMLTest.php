@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Markup;
+use Zend\Markup\Renderer;
+use Zend\Filter;
 
 if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Markup_BbcodeAndHtmlTest::main");
@@ -34,7 +40,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
+class BbcodeAndHtmlTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -53,8 +59,8 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Markup_MarkupTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Markup_MarkupTest");
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
@@ -65,7 +71,7 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_markup = Zend_Markup::factory('bbcode', 'html');
+        $this->_markup = \Zend\Markup\Markup::factory('bbcode', 'html');
     }
 
     /**
@@ -114,24 +120,20 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
     /**
      * Test input exceptions
      *
-     * @return void
+     * @expectedException Zend\Markup\Parser\Exception
      */
     public function testExceptionParserWrongInputType()
     {
-        $this->setExpectedException('Zend_Markup_Parser_Exception');
-
         $this->_markup->getParser()->parse(array());
     }
 
     /**
      * Test exception
      *
-     * @return void
+     * @expectedException Zend\Markup\Parser\Exception
      */
     public function testExceptionParserEmptyInput()
     {
-        $this->setExpectedException('Zend_Markup_Parser_Exception');
-
         $this->_markup->getParser()->parse('');
     }
 
@@ -143,30 +145,46 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
     public function testAddTags()
     {
         $this->_markup->getPluginLoader()->addPrefixPath(
-            'Zend_Markup_Test_Renderer_Html',
-            'Zend/Markup/Test/Renderer/Html'
+            'ZendTest\Markup\TestAsset\Renderer\HTML',
+            'Zend/Markup/TestAsset/Renderer/HTML'
         );
 
-        $this->_markup->addMarkup('bar',
-            Zend_Markup_Renderer_RendererAbstract::TYPE_CALLBACK,
-            array('group' => 'inline'));
-        $this->_markup->addMarkup('suppp',
-            Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
-            array('start' => '<sup>', 'end' => '</sup>', 'group' => 'inline'));
-        $this->_markup->addMarkup('zend',
-            Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
-            array('replace' => 'Zend Framework', 'group' => 'inline', 'empty' => true));
-        $this->_markup->addMarkup('line', Zend_Markup_Renderer_RendererAbstract::TYPE_ALIAS,
-            array('name' => 'hr'));
+        $this->_markup->addMarkup(
+            'bar',
+            Renderer\RendererAbstract::TYPE_CALLBACK,
+            array('group' => 'inline')
+            );
+            
+        $this->_markup->addMarkup(
+            'suppp',
+            Renderer\RendererAbstract::TYPE_REPLACE,
+            array('start' => '<sup>', 'end' => '</sup>', 'group' => 'inline')
+            );
+            
+        $this->_markup->addMarkup(
+            'zend',
+            Renderer\RendererAbstract::TYPE_REPLACE,
+            array('replace' => 'Zend Framework', 'group' => 'inline', 'empty' => true)
+            );
+            
+        $this->_markup->addMarkup(
+            'line',
+            Renderer\RendererAbstract::TYPE_ALIAS,
+            array('name' => 'hr')
+            );
 
-        $this->assertEquals('[foo=blaat]hell<sup>test</sup>blaat[/foo]',
-            $this->_markup->render('[bar="blaat"]hell[suppp]test[/suppp]blaat[/]'));
+        $this->assertEquals(
+            '[foo=blaat]hell<sup>test</sup>blaat[/foo]',
+            $this->_markup->render('[bar="blaat"]hell[suppp]test[/suppp]blaat[/]')
+            );
 
         $this->assertEquals('Zend Framework', $this->_markup->render('[zend]'));
         $this->assertEquals('<hr />', $this->_markup->render('[line]'));
 
-        $this->assertEquals('<sup>test aap</sup>test',
-            $this->_markup->render('[suppp]test aap[/suppp]test'));
+        $this->assertEquals(
+            '<sup>test aap</sup>test',
+            $this->_markup->render('[suppp]test aap[/suppp]test')
+            );
     }
 
     public function testHtmlUrlTitleIsRenderedCorrectly()
@@ -421,7 +439,7 @@ BBCODE;
     {
         $m = $this->_markup;
 
-        $m->addDefaultFilter(new Zend_Filter_StringToUpper());
+        $m->addDefaultFilter(new Filter\StringToUpper());
 
         $this->assertEquals('<strong>HELLO</strong>', $m->render('[b]hello[/b]'));
     }
@@ -430,10 +448,10 @@ BBCODE;
     {
         $m = $this->_markup;
 
-        $filter = new Zend_Filter_HtmlEntities();
+        $filter = new Filter\HtmlEntities();
 
         $this->_markup->addMarkup('suppp',
-            Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
+            Renderer\RendererAbstract::TYPE_REPLACE,
             array('start' => '<sup>', 'end' => '</sup>', 'group' => 'inline', 'filter' => $filter));
         $this->assertEquals("filter<br />\n<sup>filter\n&amp;\nfilter</sup>",
             $m->render("filter\n[suppp]filter\n&\nfilter[/suppp]"));
@@ -443,7 +461,7 @@ BBCODE;
     {
         $m = $this->_markup;
 
-        $filter = new Zend_Filter_StringToUpper();
+        $filter = new Filter\StringToUpper();
 
         $m->setFilter($filter, 'strong');
 
@@ -454,21 +472,21 @@ BBCODE;
     {
         $m = $this->_markup;
 
-        $filter = new Zend_Filter_StringToUpper();
+        $filter = new Filter\StringToUpper();
 
-        $m->addFilter($filter, 'i', Zend_Filter::CHAIN_PREPEND);
+        $m->addFilter($filter, 'i', Filter\FilterChain::CHAIN_PREPEND);
 
         $this->assertEquals('<em>FOO&amp;BAR</em>baz', $m->render('[i]foo&bar[/i]baz'));
     }
 
     public function testValidUri()
     {
-        $this->assertTrue(Zend_Markup_Renderer_Html::isValidUri("http://www.example.com"));
-        $this->assertTrue(!Zend_Markup_Renderer_Html::isValidUri("www.example.com"));
-        $this->assertTrue(!Zend_Markup_Renderer_Html::isValidUri("http:///test"));
-        $this->assertTrue(Zend_Markup_Renderer_Html::isValidUri("https://www.example.com"));
-        $this->assertTrue(Zend_Markup_Renderer_Html::isValidUri("magnet:?xt=urn:bitprint:XZBS763P4HBFYVEMU5OXQ44XK32OMLIN.HGX3CO3BVF5AG2G34MVO3OHQLRSUF4VJXQNLQ7A &xt=urn:ed2khash:aa52fb210465bddd679d6853b491ccce&"));
-        $this->assertTrue(!Zend_Markup_Renderer_Html::isValidUri("javascript:alert(1)"));
+        $this->assertTrue(Renderer\HTML::isValidUri("http://www.example.com"));
+        $this->assertTrue(!Renderer\HTML::isValidUri("www.example.com"));
+        $this->assertTrue(!Renderer\HTML::isValidUri("http:///test"));
+        $this->assertTrue(Renderer\HTML::isValidUri("https://www.example.com"));
+        $this->assertTrue(Renderer\HTML::isValidUri("magnet:?xt=urn:bitprint:XZBS763P4HBFYVEMU5OXQ44XK32OMLIN.HGX3CO3BVF5AG2G34MVO3OHQLRSUF4VJXQNLQ7A &xt=urn:ed2khash:aa52fb210465bddd679d6853b491ccce&"));
+        $this->assertTrue(!Renderer\HTML::isValidUri("javascript:alert(1)"));
     }
 
     public function testXssInImgAndUrl()
@@ -489,7 +507,7 @@ BBCODE;
 
         $m->addMarkup(
             'table',
-            Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
+            Renderer\RendererAbstract::TYPE_REPLACE,
             array(
                 'tag'   => 'table',
                 'group' => 'table'
@@ -497,7 +515,7 @@ BBCODE;
         );
         $m->addMarkup(
             'tr',
-            Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
+            Renderer\RendererAbstract::TYPE_REPLACE,
             array(
                 'tag'   => 'tr',
                 'group' => 'table-row'
@@ -505,7 +523,7 @@ BBCODE;
         );
         $m->addMarkup(
             'td',
-            Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
+            Renderer\RendererAbstract::TYPE_REPLACE,
             array(
                 'tag'   => 'td',
                 'group' => 'table-cell'
@@ -541,5 +559,5 @@ BBCODE;
 // Call Zend_Markup_BbcodeAndHtmlTest::main()
 // if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_Markup_BbcodeAndHtmlTest::main") {
-    Zend_Markup_BbcodeAndHtmlTest::main();
+    \Zend_Markup_BbcodeAndHtmlTest::main();
 }

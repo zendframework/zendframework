@@ -23,32 +23,37 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\HTML;
+namespace ZendTest\Markup\TestAsset\Renderer\HTML;
 
 /**
  * Tag interface
  *
- * @uses       \Zend\Markup\Renderer\HTML\HTMLAbstract
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Code extends HTMLAbstract
+class Bar implements \Zend\Markup\Renderer\TokenConverterInterface
 {
 
     /**
      * Convert the token
      *
-     * @param \Zend\Markup\Token $token
+     * @param Zend_Markup_Token $token
      * @param string $text
      *
      * @return string
      */
     public function convert(\Zend\Markup\Token $token, $text)
     {
-        return highlight_string($text, true);
+        $bar = $token->getAttribute('bar');
+
+        if (!empty($bar)) {
+            $bar = '=' . $bar;
+        }
+
+        return "[foo{$bar}]" . $text . '[/foo]';
     }
 
 }

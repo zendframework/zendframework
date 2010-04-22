@@ -21,13 +21,18 @@
  */
 
 /**
- * @uses       Zend_Markup_TokenList
+ * @namespace
+ */
+namespace Zend\Markup;
+
+/**
+ * @uses       \Zend\Markup\TokenList
  * @category   Zend
  * @package    Zend_Markup
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Markup_Token
+class Token
 {
     const TYPE_NONE    = 'none';
     const TYPE_TAG     = 'tag';
@@ -35,7 +40,7 @@ class Zend_Markup_Token
     /**
      * Children of this token
      *
-     * @var Zend_Markup_TokenList
+     * @var \Zend\Markup\TokenList
      */
     protected $_children;
 
@@ -77,7 +82,7 @@ class Zend_Markup_Token
     /**
      * The parent token
      *
-     * @var Zend_Markup_Token
+     * @var \Zend\Markup\Token
      */
     protected $_parent;
 
@@ -89,7 +94,7 @@ class Zend_Markup_Token
      * @param  string $type
      * @param  string $name
      * @param  array $attributes
-     * @param  Zend_Markup_Token $parent
+     * @param  \Zend\Markup\Token $parent
      * @return void
      */
     public function __construct(
@@ -97,7 +102,7 @@ class Zend_Markup_Token
         $type,
         $name = '',
         array $attributes = array(),
-        Zend_Markup_Token $parent = null
+        Token $parent = null
     ) {
         $this->_tag        = $tag;
         $this->_type       = $type;
@@ -112,7 +117,7 @@ class Zend_Markup_Token
      * Set the stopper
      *
      * @param string $stopper
-     * @return Zend_Markup_Token
+     * @return \Zend\Markup\Token
      */
     public function setStopper($stopper)
     {
@@ -198,7 +203,7 @@ class Zend_Markup_Token
     /**
      * Add an attribute
      *
-     * @return Zend_Markup_Token
+     * @return \Zend\Markup\Token
      */
     public function addAttribute($name, $value)
     {
@@ -226,7 +231,7 @@ class Zend_Markup_Token
      *
      * @return void
      */
-    public function addChild(Zend_Markup_Token $child)
+    public function addChild(Token $child)
     {
         $this->getChildren()->addChild($child);
     }
@@ -234,10 +239,10 @@ class Zend_Markup_Token
     /**
      * Set the children token list
      *
-     * @param  Zend_Markup_TokenList $children
-     * @return Zend_Markup_Token
+     * @param  \Zend\Markup\TokenList $children
+     * @return \Zend\Markup\Token
      */
-    public function setChildren(Zend_Markup_TokenList $children)
+    public function setChildren(TokenList $children)
     {
         $this->_children = $children;
         return $this;
@@ -246,12 +251,12 @@ class Zend_Markup_Token
     /**
      * Get the children for this token
      *
-     * @return Zend_Markup_TokenList
+     * @return \Zend\Markup\TokenList
      */
     public function getChildren()
     {
         if (null === $this->_children) {
-            $this->setChildren(new Zend_Markup_TokenList());
+            $this->setChildren(new TokenList());
         }
         return $this->_children;
     }
@@ -269,7 +274,7 @@ class Zend_Markup_Token
     /**
      * Get the parent token (if any)
      *
-     * @return Zend_Markup_Token
+     * @return \Zend\Markup\Token
      */
     public function getParent()
     {
@@ -279,10 +284,10 @@ class Zend_Markup_Token
     /**
      * Set a parent token
      *
-     * @param  Zend_Markup_Token $parent
-     * @return Zend_Markup_Token
+     * @param  \Zend\Markup\Token $parent
+     * @return \Zend\Markup\Token
      */
-    public function setParent(Zend_Markup_Token $parent)
+    public function setParent(Token $parent)
     {
         $this->_parent = $parent;
         return $this;

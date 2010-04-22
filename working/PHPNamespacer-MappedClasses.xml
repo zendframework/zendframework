@@ -8603,10 +8603,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Parser/Bbcode.php</originalRelativeFilePath>
       <originalClassName>Zend_Markup_Parser_Bbcode</originalClassName>
-      <newRelativeFilePath>Zend/Markup/Parser/Bbcode.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Markup/Parser/BBCode.php</newRelativeFilePath>
       <newNamespace>Zend\Markup\Parser</newNamespace>
-      <newClassName>Bbcode</newClassName>
-      <newFullyQualifiedName>Zend\Markup\Parser\Bbcode</newFullyQualifiedName>
+      <newClassName>BBCode</newClassName>
+      <newFullyQualifiedName>Zend\Markup\Parser\BBCode</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Parser/Exception.php</originalRelativeFilePath>
@@ -8643,50 +8643,50 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Renderer/Html/Code.php</originalRelativeFilePath>
       <originalClassName>Zend_Markup_Renderer_Html_Code</originalClassName>
-      <newRelativeFilePath>Zend/Markup/Renderer/Html/Code.php</newRelativeFilePath>
-      <newNamespace>Zend\Markup\Renderer\Html</newNamespace>
+      <newRelativeFilePath>Zend/Markup/Renderer/HTML/Code.php</newRelativeFilePath>
+      <newNamespace>Zend\Markup\Renderer\HTML</newNamespace>
       <newClassName>Code</newClassName>
-      <newFullyQualifiedName>Zend\Markup\Renderer\Html\Code</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Markup\Renderer\HTML\Code</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Renderer/Html/HtmlAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Markup_Renderer_Html_HtmlAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Markup/Renderer/Html/HtmlAbstract.php</newRelativeFilePath>
-      <newNamespace>Zend\Markup\Renderer\Html</newNamespace>
-      <newClassName>HtmlAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Markup\Renderer\Html\HtmlAbstract</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Markup/Renderer/HTML/HTMLAbstract.php</newRelativeFilePath>
+      <newNamespace>Zend\Markup\Renderer\HTML</newNamespace>
+      <newClassName>HTMLAbstract</newClassName>
+      <newFullyQualifiedName>Zend\Markup\Renderer\HTML\HTMLAbstract</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Renderer/Html/Img.php</originalRelativeFilePath>
       <originalClassName>Zend_Markup_Renderer_Html_Img</originalClassName>
-      <newRelativeFilePath>Zend/Markup/Renderer/Html/Img.php</newRelativeFilePath>
-      <newNamespace>Zend\Markup\Renderer\Html</newNamespace>
+      <newRelativeFilePath>Zend/Markup/Renderer/HTML/Img.php</newRelativeFilePath>
+      <newNamespace>Zend\Markup\Renderer\HTML</newNamespace>
       <newClassName>Img</newClassName>
-      <newFullyQualifiedName>Zend\Markup\Renderer\Html\Img</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Markup\Renderer\HTML\Img</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Renderer/Html/List.php</originalRelativeFilePath>
       <originalClassName>Zend_Markup_Renderer_Html_List</originalClassName>
-      <newRelativeFilePath>Zend/Markup/Renderer/Html/List.php</newRelativeFilePath>
-      <newNamespace>Zend\Markup\Renderer\Html</newNamespace>
-      <newClassName>List</newClassName>
-      <newFullyQualifiedName>Zend\Markup\Renderer\Html\List</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Markup/Renderer/HTML/ListItem.php</newRelativeFilePath>
+      <newNamespace>Zend\Markup\Renderer\HTML</newNamespace>
+      <newClassName>ListItem</newClassName>
+      <newFullyQualifiedName>Zend\Markup\Renderer\HTML\ListItem</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Renderer/Html/Url.php</originalRelativeFilePath>
       <originalClassName>Zend_Markup_Renderer_Html_Url</originalClassName>
-      <newRelativeFilePath>Zend/Markup/Renderer/Html/Url.php</newRelativeFilePath>
-      <newNamespace>Zend\Markup\Renderer\Html</newNamespace>
-      <newClassName>Url</newClassName>
-      <newFullyQualifiedName>Zend\Markup\Renderer\Html\Url</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Markup/Renderer/HTML/URL.php</newRelativeFilePath>
+      <newNamespace>Zend\Markup\Renderer\HTML</newNamespace>
+      <newClassName>URL</newClassName>
+      <newFullyQualifiedName>Zend\Markup\Renderer\HTML\URL</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Renderer/Html.php</originalRelativeFilePath>
       <originalClassName>Zend_Markup_Renderer_Html</originalClassName>
-      <newRelativeFilePath>Zend/Markup/Renderer/Html/Html.php</newRelativeFilePath>
-      <newNamespace>Zend\Markup\Renderer\Html</newNamespace>
-      <newClassName>Html</newClassName>
-      <newFullyQualifiedName>Zend\Markup\Renderer\Html\Html</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Markup/Renderer/HTML.php</newRelativeFilePath>
+      <newNamespace>Zend\Markup\Renderer</newNamespace>
+      <newClassName>HTML</newClassName>
+      <newFullyQualifiedName>Zend\Markup\Renderer\HTML</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Renderer/RendererAbstract.php</originalRelativeFilePath>

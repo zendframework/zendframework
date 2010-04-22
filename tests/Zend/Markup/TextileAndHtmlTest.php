@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Markup;
 
 if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Markup_TextileAndHtmlTest::main");
@@ -36,7 +40,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Markup_TextileAndHtmlTest extends PHPUnit_Framework_TestCase
+class TextileAndHtmlTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -55,8 +59,8 @@ class Zend_Markup_TextileAndHtmlTest extends PHPUnit_Framework_TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Markup_MarkupTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Markup_MarkupTest");
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
@@ -67,7 +71,7 @@ class Zend_Markup_TextileAndHtmlTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_markup = Zend_Markup::factory('Textile', 'html');
+        $this->_markup = \Zend\Markup\Markup::factory('Textile', 'html');
     }
 
     /**
@@ -188,5 +192,5 @@ TESTLIST;
 
 // Call Zend_Markup_BbcodeTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_Markup_TextileAndHtmlTest::main") {
-    Zend_Markup_TextileAndHtmlTest::main();
+    \Zend_Markup_TextileAndHtmlTest::main();
 }

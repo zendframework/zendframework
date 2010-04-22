@@ -20,12 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_Captcha_ReCaptchaTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Captcha_ReCaptchaTest::main");
-}
+/**
+ * @namespace
+ */
+namespace ZendTest\Captcha;
 
-
+use Zend\Captcha;
 
 /**
  * @category   Zend
@@ -35,19 +35,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Captcha
  */
-class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
+class ReCaptchaTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Captcha_ReCaptchaTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -60,26 +49,16 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
             unset($this->word);
         }
 
-        $this->element = new Zend_Form_Element_Captcha(
+        $this->element = new \Zend_Form_Element_Captcha(
             'captchaR',
             array(
                 'captcha' => array(
                     'ReCaptcha',
-                    'sessionClass' => 'Zend_Captcha_ReCaptchaTest_SessionContainer'
+                    'sessionClass' => 'ZendTest\\Captcha\\TestAsset\\SessionContainer'
                 )
             )
         );
         $this->captcha =  $this->element->getCaptcha();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
     }
 
     public function testConstructorShouldSetOptions()
@@ -90,7 +69,7 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
             'ssl'     => true,
             'xhtml'   => true,
         );
-        $captcha = new Zend_Captcha_ReCaptcha($options);
+        $captcha = new Captcha\ReCaptcha($options);
         $test    = $captcha->getOptions();
         $compare = array('privKey' => $options['privKey'], 'pubKey' => $options['pubKey']);
         $this->assertEquals($compare, $test);
@@ -106,8 +85,8 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
 
     public function testShouldAllowSpecifyingServiceObject()
     {
-        $captcha = new Zend_Captcha_ReCaptcha();
-        $try     = new Zend_Service_ReCaptcha();
+        $captcha = new Captcha\ReCaptcha();
+        $try     = new \Zend\Service\ReCaptcha\ReCaptcha();
         $this->assertNotSame($captcha->getService(), $try);
         $captcha->setService($try);
         $this->assertSame($captcha->getService(), $try);
@@ -115,7 +94,7 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
 
     public function testSetAndGetPublicAndPrivateKeys()
     {
-        $captcha = new Zend_Captcha_ReCaptcha();
+        $captcha = new Captcha\ReCaptcha();
         $pubKey = 'pubKey';
         $privKey = 'privKey';
         $captcha->setPubkey($pubKey)
@@ -128,87 +107,39 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertSame($privKey, $captcha->getService()->getPrivateKey());
     }
 
-    /**
+    /**@+
      * Regression tests for ZF-7654
      */
 
     public function testConstructorShouldAllowSettingLangOptionOnServiceObject()
     {
         $options = array('lang'=>'fr');
-        $captcha = new Zend_Captcha_ReCaptcha($options);
+        $captcha = new Captcha\ReCaptcha($options);
         $this->assertEquals('fr', $captcha->getService()->getOption('lang'));
     }
 
     public function testConstructorShouldAllowSettingThemeOptionOnServiceObject()
     {
         $options = array('theme'=>'black');
-        $captcha = new Zend_Captcha_ReCaptcha($options);
+        $captcha = new Captcha\ReCaptcha($options);
         $this->assertEquals('black', $captcha->getService()->getOption('theme'));
     }
 
     public function testAllowsSettingLangOptionOnServiceObject()
     {
-        $captcha = new Zend_Captcha_ReCaptcha;
+        $captcha = new Captcha\ReCaptcha;
         $captcha->setOption('lang', 'fr');
         $this->assertEquals('fr', $captcha->getService()->getOption('lang'));
     }
 
     public function testAllowsSettingThemeOptionOnServiceObject()
     {
-        $captcha = new Zend_Captcha_ReCaptcha;
+        $captcha = new Captcha\ReCaptcha;
         $captcha->setOption('theme', 'black');
         $this->assertEquals('black', $captcha->getService()->getOption('theme'));
     }
 
-    /**
+    /**@-
      * End ZF-7654 tests
-    */
-}
-
-class Zend_Captcha_ReCaptchaTest_SessionContainer
-{
-    protected static $_word;
-
-    public function __get($name)
-    {
-        if ('word' == $name) {
-            return self::$_word;
-        }
-
-        return null;
-    }
-
-    public function __set($name, $value)
-    {
-        if ('word' == $name) {
-            self::$_word = $value;
-        } else {
-            $this->$name = $value;
-        }
-    }
-
-    public function __isset($name)
-    {
-        if (('word' == $name) && (null !== self::$_word))  {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function __call($method, $args)
-    {
-        switch ($method) {
-            case 'setExpirationHops':
-            case 'setExpirationSeconds':
-                $this->$method = array_shift($args);
-                break;
-            default:
-        }
-    }
-}
-
-// Call Zend_Captcha_ReCaptchaTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Captcha_ReCaptchaTest::main") {
-    Zend_Captcha_ReCaptchaTest::main();
+     */
 }

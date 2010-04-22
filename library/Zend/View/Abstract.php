@@ -494,7 +494,7 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
                 default:
                     $prefix     .= $pType;
                     $pathPrefix .= $pType;
-                    $loader = new Zend_Loader_PluginLoader(array(
+                    $loader = new \Zend\Loader\PluginLoader\PluginLoader(array(
                         $prefix => $pathPrefix
                     ));
                     $this->_loaders[$type] = $loader;

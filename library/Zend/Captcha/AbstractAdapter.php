@@ -20,12 +20,19 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Captcha;
+
+use Zend\Config\Config;
+
+/**
  * Base class for Captcha adapters
  *
  * Provides some utility functionality to build on
  *
- * @uses       Zend_Captcha_Adapter
- * @uses       Zend_Validate_Abstract
+ * @uses       Zend\Captcha\Adapter
+ * @uses       Zend\Validator\AbstractValidator
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
@@ -33,7 +40,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-abstract class Zend_Captcha_Base extends Zend_Validate_Abstract implements Zend_Captcha_Adapter
+abstract class AbstractAdapter extends \Zend\Validator\AbstractValidator implements Adapter
 {
     /**
      * Element name
@@ -84,7 +91,7 @@ abstract class Zend_Captcha_Base extends Zend_Validate_Abstract implements Zend_
     /**
      * Constructor
      *
-     * @param  array|Zend_Config $options
+     * @param  array|Zend\Config\Config $options
      * @return void
      */
     public function __construct($options = null)
@@ -92,7 +99,7 @@ abstract class Zend_Captcha_Base extends Zend_Validate_Abstract implements Zend_
         // Set options
         if (is_array($options)) {
             $this->setOptions($options);
-        } else if ($options instanceof Zend_Config) {
+        } else if ($options instanceof Config) {
             $this->setConfig($options);
         }
     }
@@ -150,10 +157,10 @@ abstract class Zend_Captcha_Base extends Zend_Validate_Abstract implements Zend_
     /**
      * Set object state from config object
      *
-     * @param  Zend_Config $config
-     * @return Zend_Captcha_Base
+     * @param  Zend\Config\Config $config
+     * @return Zend\Captcha\AbstractAdapter
      */
-    public function setConfig(Zend_Config $config)
+    public function setConfig(Config $config)
     {
         return $this->setOptions($config->toArray());
     }

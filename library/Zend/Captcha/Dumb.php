@@ -20,11 +20,16 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Captcha;
+
+/**
  * Example dumb word-based captcha
  *
  * Note that only rendering is necessary for word-based captcha
  *
- * @uses       Zend_Captcha_Word
+ * @uses       Zend\Captcha\Word
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
@@ -32,7 +37,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
 */
-class Zend_Captcha_Dumb extends Zend_Captcha_Word
+class Dumb extends Word
 {
     /**
      * Render the captcha
@@ -41,7 +46,7 @@ class Zend_Captcha_Dumb extends Zend_Captcha_Word
      * @param  mixed $element
      * @return string
      */
-    public function render(Zend_View_Interface $view = null, $element = null)
+    public function render(\Zend_View_Interface $view = null, $element = null)
     {
         return 'Please type this word backwards: <b>'
              . strrev($this->getWord())

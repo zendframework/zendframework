@@ -20,12 +20,17 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Captcha;
+
+/**
  * Captcha based on figlet text rendering service
  *
  * Note that this engine seems not to like numbers
  *
- * @uses       Zend_Captcha_Word
- * @uses       Zend_Text_Figlet
+ * @uses       Zend\Captcha\Word
+ * @uses       Zend\Text\Figlet\Figlet
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
@@ -33,25 +38,25 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Captcha_Figlet extends Zend_Captcha_Word
+class Figlet extends Word
 {
     /**
      * Figlet text renderer
      *
-     * @var Zend_Text_Figlet
+     * @var \Zend\Text\Figlet\Figlet
      */
     protected $_figlet;
 
     /**
      * Constructor
      *
-     * @param  null|string|array|Zend_Config $options
+     * @param  null|string|array|\Zend\Config\Config $options
      * @return void
      */
     public function __construct($options = null)
     {
         parent::__construct($options);
-        $this->_figlet = new Zend_Text_Figlet($options);
+        $this->_figlet = new \Zend\Text\Figlet\Figlet($options);
     }
 
     /**
@@ -72,7 +77,7 @@ class Zend_Captcha_Figlet extends Zend_Captcha_Word
      * @param mixed $element
      * @return string
      */
-    public function render(Zend_View_Interface $view = null, $element = null)
+    public function render(\Zend_View_Interface $view = null, $element = null)
     {
         return '<pre>'
              . $this->_figlet->render($this->getWord())

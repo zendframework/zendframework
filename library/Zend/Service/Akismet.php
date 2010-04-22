@@ -24,7 +24,7 @@
  * Akismet REST service implementation
  *
  * @uses       Zend_Http_Client
- * @uses       Zend_Service_Abstract
+ * @uses       Zend\Service\AbstractService
  * @uses       Zend_Service_Exception
  * @uses       Zend_Uri
  * @uses       Zend_Version
@@ -34,7 +34,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Akismet extends Zend_Service_Abstract
+class Zend_Service_Akismet extends \Zend\Service\AbstractService
 {
     /**
      * Akismet API key
@@ -220,7 +220,7 @@ class Zend_Service_Akismet extends Zend_Service_Abstract
     protected function _post($host, $path, array $params)
     {
         $uri    = 'http://' . $host . ':' . $this->getPort() . $path;
-        $client = self::getHttpClient();
+        $client = $this->getHTTPClient();
         $client->setUri($uri);
         $client->setConfig(array(
             'useragent'    => $this->getUserAgent(),

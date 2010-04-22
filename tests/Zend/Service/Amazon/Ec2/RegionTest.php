@@ -21,11 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-
-/**
  * Zend_Service_Amazon_Ec2_Region test case.
  *
  * @category   Zend
@@ -59,7 +54,7 @@ class Zend_Service_Amazon_Ec2_RegionTest extends PHPUnit_Framework_TestCase
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Region::setHttpClient($client);
+        Zend_Service_Amazon_Ec2_Region::setDefaultHTTPClient($client);
 
     }
 

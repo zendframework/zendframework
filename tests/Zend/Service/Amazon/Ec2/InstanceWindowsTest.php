@@ -21,11 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-
-/**
  * Zend_Service_Amazon_Ec2_Instance_Windows test case.
  *
  * @todo: Should this class be named Zend_Service_Amazon_Ec2_Instance_WindowsTest?
@@ -60,7 +55,7 @@ class InstanceWindowsTest extends PHPUnit_Framework_TestCase
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Instance_Windows::setHttpClient($client);
+        Zend_Service_Amazon_Ec2_Instance_Windows::setDefaultHTTPClient($client);
     }
 
     /**

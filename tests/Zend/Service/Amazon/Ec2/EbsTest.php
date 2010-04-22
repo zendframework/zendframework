@@ -21,11 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-
-/**
  * Zend_Service_Amazon_Ec2_Ebs test case.
  *
  * @category   Zend
@@ -58,7 +53,7 @@ class Zend_Service_Amazon_Ec2_EbsTest extends PHPUnit_Framework_TestCase
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Ebs::setHttpClient($client);
+        Zend_Service_Amazon_Ec2_Ebs::setDefaultHTTPClient($client);
     }
 
     /**

@@ -314,7 +314,7 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_Abstract
             $queue_url = '/';
         }
 
-        $client = self::getHttpClient();
+        $client = $this->getHttpClient();
 
         switch ($action) {
             case 'ListQueues':

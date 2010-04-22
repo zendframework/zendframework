@@ -10859,74 +10859,74 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Client/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Client_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Client/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest\Client</newNamespace>
+      <newRelativeFilePath>Zend/REST/Client/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\REST\Client</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Client\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\REST\Client\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Client/Result/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Client_Result_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Client/Result/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest\Client\Result</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Client\Result\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/REST/Client/ResultException.php</newRelativeFilePath>
+      <newNamespace>Zend\REST\Client</newNamespace>
+      <newClassName>ResultException</newClassName>
+      <newFullyQualifiedName>Zend\REST\Client\ResultException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Client/Result.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Client_Result</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Client/Result/Result.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest\Client\Result</newNamespace>
+      <newRelativeFilePath>Zend/REST/Client/Result.php</newRelativeFilePath>
+      <newNamespace>Zend\REST\Client</newNamespace>
       <newClassName>Result</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Client\Result\Result</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\REST\Client\Result</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Client.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Client</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Client/Client.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest\Client</newNamespace>
-      <newClassName>Client</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Client\Client</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/REST/Client/RESTClient.php</newRelativeFilePath>
+      <newNamespace>Zend\REST\Client</newNamespace>
+      <newClassName>RESTClient</newClassName>
+      <newFullyQualifiedName>Zend\REST\Client\RESTClient</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Controller.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Controller</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Controller.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest</newNamespace>
+      <newRelativeFilePath>Zend/REST/Controller.php</newRelativeFilePath>
+      <newNamespace>Zend\REST</newNamespace>
       <newClassName>Controller</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Controller</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\REST\Controller</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest</newNamespace>
+      <newRelativeFilePath>Zend/REST/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\REST</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\REST\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Route.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Route</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Route.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest</newNamespace>
+      <newRelativeFilePath>Zend/REST/Route.php</newRelativeFilePath>
+      <newNamespace>Zend\REST</newNamespace>
       <newClassName>Route</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Route</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\REST\Route</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Server/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Server_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Server/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest\Server</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Server\Exception</newFullyQualifiedName>
+      <newRelativeFilePath></newRelativeFilePath>
+      <newNamespace></newNamespace>
+      <newClassName>NOCLASSAVAILABLE</newClassName>
+      <newFullyQualifiedName>NOCLASSAVAILABLE</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Rest/Server.php</originalRelativeFilePath>
       <originalClassName>Zend_Rest_Server</originalClassName>
-      <newRelativeFilePath>Zend/Rest/Server/Server.php</newRelativeFilePath>
-      <newNamespace>Zend\Rest\Server</newNamespace>
-      <newClassName>Server</newClassName>
-      <newFullyQualifiedName>Zend\Rest\Server\Server</newFullyQualifiedName>
+      <newRelativeFilePath></newRelativeFilePath>
+      <newNamespace></newNamespace>
+      <newClassName>NOCLASSAVAILABLE</newClassName>
+      <newFullyQualifiedName>NOCLASSAVAILABLE</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Exception.php</originalRelativeFilePath>
@@ -11635,34 +11635,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Serializer/Adapter/AdapterAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Serializer_Adapter_AdapterAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Serializer/Adapter/AdapterAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Serializer/Adapter/AbstractAdapter.php</newRelativeFilePath>
       <newNamespace>Zend\Serializer\Adapter</newNamespace>
-      <newClassName>AdapterAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Serializer\Adapter\AdapterAbstract</newFullyQualifiedName>
+      <newClassName>AbstractAdapter</newClassName>
+      <newFullyQualifiedName>Zend\Serializer\Adapter\AbstractAdapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Serializer/Adapter/AdapterInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Serializer_Adapter_AdapterInterface</originalClassName>
-      <newRelativeFilePath>Zend/Serializer/Adapter/AdapterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Serializer\Adapter</newNamespace>
-      <newClassName>AdapterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Serializer\Adapter\AdapterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Serializer/Adapter.php</newRelativeFilePath>
+      <newNamespace>Zend\Serializer</newNamespace>
+      <newClassName>Adapter</newClassName>
+      <newFullyQualifiedName>Zend\Serializer\Adapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Serializer/Adapter/Amf0.php</originalRelativeFilePath>
       <originalClassName>Zend_Serializer_Adapter_Amf0</originalClassName>
-      <newRelativeFilePath>Zend/Serializer/Adapter/Amf0.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Serializer/Adapter/AMF0.php</newRelativeFilePath>
       <newNamespace>Zend\Serializer\Adapter</newNamespace>
-      <newClassName>Amf0</newClassName>
-      <newFullyQualifiedName>Zend\Serializer\Adapter\Amf0</newFullyQualifiedName>
+      <newClassName>AMF0</newClassName>
+      <newFullyQualifiedName>Zend\Serializer\Adapter\AMF0</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Serializer/Adapter/Amf3.php</originalRelativeFilePath>
       <originalClassName>Zend_Serializer_Adapter_Amf3</originalClassName>
-      <newRelativeFilePath>Zend/Serializer/Adapter/Amf3.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Serializer/Adapter/AMF3.php</newRelativeFilePath>
       <newNamespace>Zend\Serializer\Adapter</newNamespace>
-      <newClassName>Amf3</newClassName>
-      <newFullyQualifiedName>Zend\Serializer\Adapter\Amf3</newFullyQualifiedName>
+      <newClassName>AMF3</newClassName>
+      <newFullyQualifiedName>Zend\Serializer\Adapter\AMF3</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Serializer/Adapter/Igbinary.php</originalRelativeFilePath>
@@ -11683,18 +11683,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Serializer/Adapter/PhpCode.php</originalRelativeFilePath>
       <originalClassName>Zend_Serializer_Adapter_PhpCode</originalClassName>
-      <newRelativeFilePath>Zend/Serializer/Adapter/PhpCode.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Serializer/Adapter/PHPCode.php</newRelativeFilePath>
       <newNamespace>Zend\Serializer\Adapter</newNamespace>
-      <newClassName>PhpCode</newClassName>
-      <newFullyQualifiedName>Zend\Serializer\Adapter\PhpCode</newFullyQualifiedName>
+      <newClassName>PHPCode</newClassName>
+      <newFullyQualifiedName>Zend\Serializer\Adapter\PHPCode</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Serializer/Adapter/PhpSerialize.php</originalRelativeFilePath>
       <originalClassName>Zend_Serializer_Adapter_PhpSerialize</originalClassName>
-      <newRelativeFilePath>Zend/Serializer/Adapter/PhpSerialize.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Serializer/Adapter/PHPSerialize.php</newRelativeFilePath>
       <newNamespace>Zend\Serializer\Adapter</newNamespace>
-      <newClassName>PhpSerialize</newClassName>
-      <newFullyQualifiedName>Zend\Serializer\Adapter\PhpSerialize</newFullyQualifiedName>
+      <newClassName>PHPSerialize</newClassName>
+      <newFullyQualifiedName>Zend\Serializer\Adapter\PHPSerialize</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Serializer/Adapter/PythonPickle.php</originalRelativeFilePath>
@@ -11707,10 +11707,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Serializer/Adapter/Wddx.php</originalRelativeFilePath>
       <originalClassName>Zend_Serializer_Adapter_Wddx</originalClassName>
-      <newRelativeFilePath>Zend/Serializer/Adapter/Wddx.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Serializer/Adapter/WDDX.php</newRelativeFilePath>
       <newNamespace>Zend\Serializer\Adapter</newNamespace>
-      <newClassName>Wddx</newClassName>
-      <newFullyQualifiedName>Zend\Serializer\Adapter\Wddx</newFullyQualifiedName>
+      <newClassName>WDDX</newClassName>
+      <newFullyQualifiedName>Zend\Serializer\Adapter\WDDX</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Serializer/Exception.php</originalRelativeFilePath>
@@ -13363,18 +13363,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/ReCaptcha/MailHide/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Service_ReCaptcha_MailHide_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Service/ReCaptcha/MailHide/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Service\ReCaptcha\MailHide</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Service\ReCaptcha\MailHide\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Service/ReCaptcha/MailHideException.php</newRelativeFilePath>
+      <newNamespace>Zend\Service\ReCaptcha</newNamespace>
+      <newClassName>MailhideException</newClassName>
+      <newFullyQualifiedName>Zend\Service\ReCaptcha\MailHideException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/ReCaptcha/MailHide.php</originalRelativeFilePath>
       <originalClassName>Zend_Service_ReCaptcha_MailHide</originalClassName>
-      <newRelativeFilePath>Zend/Service/ReCaptcha/MailHide/MailHide.php</newRelativeFilePath>
-      <newNamespace>Zend\Service\ReCaptcha\MailHide</newNamespace>
+      <newRelativeFilePath>Zend/Service/ReCaptcha/MailHide.php</newRelativeFilePath>
+      <newNamespace>Zend\Service\ReCaptcha</newNamespace>
       <newClassName>MailHide</newClassName>
-      <newFullyQualifiedName>Zend\Service\ReCaptcha\MailHide\MailHide</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Service\ReCaptcha\MailHide</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/ReCaptcha/Response.php</originalRelativeFilePath>

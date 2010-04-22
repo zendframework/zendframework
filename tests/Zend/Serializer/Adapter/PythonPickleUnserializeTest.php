@@ -21,12 +21,9 @@
  */
 
 /**
- * @see Zend_Serializer_Adapter_PythonPickle
+ * @namespace
  */
-
-/**
- * PHPUnit test case
- */
+namespace ZendTest\Serializer\Adapter;
 
 /**
  * @category   Zend
@@ -35,14 +32,14 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framework_TestCase
+class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
 {
 
     private $_adapter;
 
     public function setUp()
     {
-        $this->_adapter = new Zend_Serializer_Adapter_PythonPickle();
+        $this->_adapter = new \Zend\Serializer\Adapter\PythonPickle();
     }
 
     public function tearDown()
@@ -378,7 +375,7 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
     public function testUnserialzeInvalid()
     {
         $value = 'not a serialized string';
-        $this->setExpectedException('Zend_Serializer_Exception');
+        $this->setExpectedException('Zend\\Serializer\\Exception');
         $this->_adapter->unserialize($value);
     }
 

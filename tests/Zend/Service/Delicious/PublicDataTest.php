@@ -53,7 +53,7 @@ class Zend_Service_Delicious_PublicDataTest extends PHPUnit_Framework_TestCase
                 'useragent' => 'Zend_Service_Delicious - Unit tests/0.1',
                 'keepalive' => true
         ));
-        Zend_Rest_Client::setHttpClient($httpClient);
+        Zend_Rest_Client::setDefaultHTTPClient($httpClient);
 
         $this->_delicious = new Zend_Service_Delicious();
     }

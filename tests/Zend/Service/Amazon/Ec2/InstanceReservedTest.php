@@ -21,11 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-
-/**
  * Zend_Service_Amazon_Ec2_Instance_Reserved test case.
 
  * @todo Should this class be named Zend_Service_Amazon_Ec2_Instance_ReservedTest?
@@ -60,7 +55,7 @@ class InstanceReservedTest extends PHPUnit_Framework_TestCase
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Instance_Reserved::setHttpClient($client);
+        Zend_Service_Amazon_Ec2_Instance_Reserved::setDefaultHTTPClient($client);
 
     }
 

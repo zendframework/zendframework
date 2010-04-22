@@ -76,7 +76,7 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
     /**
      * Instantiates route based on passed Zend_Config structure
      */
-    public static function getInstance(Zend_Config $config)
+    public static function getInstance(\Zend\Config\Config $config)
     {
         $frontController = Zend_Controller_Front::getInstance();
 

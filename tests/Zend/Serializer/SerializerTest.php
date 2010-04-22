@@ -21,12 +21,13 @@
  */
 
 /**
- * Zend_Serializer
+ * @namespace
  */
+namespace ZendTest\Serializer;
 
-/**
- * PHPUnit test case
- */
+use Zend\Serializer\Serializer,
+    Zend\Loader\PluginLoader,
+    Zend\Serializer\Adapter;
 
 /**
  * @category   Zend
@@ -35,12 +36,11 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Serializer_SerializerTest extends PHPUnit_Framework_TestCase
+class SerializerTest extends \PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
-        Zend_Serializer::resetAdapterLoader();
+        Serializer::resetAdapterLoader();
     }
 
     public function tearDown()
@@ -49,87 +49,87 @@ class Zend_Serializer_SerializerTest extends PHPUnit_Framework_TestCase
 
     public function testGetDefaultAdapterLoader()
     {
-        $this->assertTrue(Zend_Serializer::getAdapterLoader() instanceof Zend_Loader_PluginLoader);
+        $this->assertTrue(Serializer::getAdapterLoader() instanceof PluginLoader\PluginLoader);
     }
 
     public function testChangeAdapterLoader()
     {
-        $newLoader = new Zend_Loader_PluginLoader();
-        Zend_Serializer::setAdapterLoader($newLoader);
-        $this->assertTrue(Zend_Serializer::getAdapterLoader() === $newLoader);
+        $newLoader = new PluginLoader\PluginLoader();
+        Serializer::setAdapterLoader($newLoader);
+        $this->assertTrue(Serializer::getAdapterLoader() === $newLoader);
     }
 
     public function testFactoryValidCall()
     {
-        $serializer = Zend_Serializer::factory('PhpSerialize');
-        $this->assertTrue($serializer instanceof Zend_Serializer_Adapter_PhpSerialize);
+        $serializer = Serializer::factory('PHPSerialize');
+        $this->assertTrue($serializer instanceof Adapter\PHPSerialize);
     }
 
     public function testFactoryUnknownAdapter()
     {
-        $this->setExpectedException('Zend_Serializer_Exception','Can\'t load serializer adapter');
-        Zend_Serializer::factory('unknown');
+        $this->setExpectedException('Zend\\Serializer\\Exception','Can\'t load serializer adapter');
+        Serializer::factory('unknown');
     }
     
     public function testFactoryOnADummyClassAdapter()
     {
-        $this->setExpectedException('Zend_Serializer_Exception','must implement Zend_Serializer_Adapter_AdapterInterface');
-        Zend_Serializer::setAdapterLoader(new Zend_Loader_PluginLoader(array('Zend_Serializer_Adapter' => dirname(__FILE__) . '/_files')));
-        Zend_Serializer::factory('dummy');
+        $this->setExpectedException('Zend\\Serializer\\Exception','must implement Zend\\Serializer\\Adapter');
+        Serializer::setAdapterLoader(new PluginLoader\PluginLoader(array('ZendTest\\Serializer\\TestAsset' => __DIR__ . '/TestAsset')));
+        Serializer::factory('dummy');
     }
 
     public function testDefaultAdapter()
     {
-        $adapter = Zend_Serializer::getDefaultAdapter();
-        $this->assertTrue($adapter instanceof Zend_Serializer_Adapter_AdapterInterface);
+        $adapter = Serializer::getDefaultAdapter();
+        $this->assertTrue($adapter instanceof Adapter);
     }
 
     public function testChangeDefaultAdapterWithString()
     {
-        $newAdapter = 'Json';
-        Zend_Serializer::setDefaultAdapter($newAdapter);
-        $this->assertTrue(Zend_Serializer::getDefaultAdapter() instanceof Zend_Serializer_Adapter_Json);
+        $newAdapter = 'JSON';
+        Serializer::setDefaultAdapter($newAdapter);
+        $this->assertTrue(Serializer::getDefaultAdapter() instanceof Adapter\JSON);
     }
 
     public function testChangeDefaultAdapterWithInstance()
     {
-        $newAdapter = new Zend_Serializer_Adapter_PhpSerialize();
+        $newAdapter = new Adapter\PHPSerialize();
 
-        Zend_Serializer::setDefaultAdapter($newAdapter);
-        $this->assertTrue($newAdapter === Zend_Serializer::getDefaultAdapter());
+        Serializer::setDefaultAdapter($newAdapter);
+        $this->assertTrue($newAdapter === Serializer::getDefaultAdapter());
     }
 
     public function testSerializeDefaultAdapter()
     {
         $value = 'test';
-        $adapter = Zend_Serializer::getDefaultAdapter();
+        $adapter = Serializer::getDefaultAdapter();
         $expected = $adapter->serialize($value);
-        $this->assertEquals($expected, Zend_Serializer::serialize($value));
+        $this->assertEquals($expected, Serializer::serialize($value));
     }
 
     public function testSerializeSpecificAdapter()
     {
         $value = 'test';
-        $adapter = new Zend_Serializer_Adapter_Json();
+        $adapter = new Adapter\JSON();
         $expected = $adapter->serialize($value);
-        $this->assertEquals($expected, Zend_Serializer::serialize($value, array('adapter' => $adapter)));
+        $this->assertEquals($expected, Serializer::serialize($value, array('adapter' => $adapter)));
     }
 
     public function testUnserializeDefaultAdapter()
     {
         $value = 'test';
-        $adapter = Zend_Serializer::getDefaultAdapter();
+        $adapter = Serializer::getDefaultAdapter();
         $value = $adapter->serialize($value);
         $expected = $adapter->unserialize($value);
-        $this->assertEquals($expected, Zend_Serializer::unserialize($value));
+        $this->assertEquals($expected, Serializer::unserialize($value));
     }
 
     public function testUnserializeSpecificAdapter()
     {
-        $adapter = new Zend_Serializer_Adapter_Json();
+        $adapter = new Adapter\JSON();
         $value = '"test"';
         $expected = $adapter->unserialize($value);
-        $this->assertEquals($expected, Zend_Serializer::unserialize($value, array('adapter' => $adapter)));
+        $this->assertEquals($expected, Serializer::unserialize($value, array('adapter' => $adapter)));
     }
 
 }

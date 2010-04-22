@@ -350,14 +350,14 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     public function getObjectStream($object, $streamfile = null, $paidobject=false)
     {
         $object = $this->_fixupObjectName($object);
-        self::getHttpClient()->setStream($streamfile?$streamfile:true);
+        $this->getHttpClient()->setStream($streamfile?$streamfile:true);
         if ($paidobject) {
             $response = $this->_makeRequest('GET', $object, null, array(self::S3_REQUESTPAY_HEADER => 'requester'));
         }
         else {
             $response = $this->_makeRequest('GET', $object);
         }
-        self::getHttpClient()->setStream(null);
+        $this->getHttpClient()->setStream(null);
 
         if ($response->getStatus() != 200 || !($response instanceof Zend_Http_Response_Stream)) {
             return false;
@@ -517,7 +517,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
 
         self::addSignature($method, $path, $headers);
 
-        $client = self::getHttpClient();
+        $client = $this->getHttpClient();
 
         $client->resetParameters();
         $client->setUri($endpoint);

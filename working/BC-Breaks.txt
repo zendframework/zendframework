@@ -179,3 +179,10 @@ Zend_Auth
  * Renamed to Zend\Authentication
  * Zend_Auth renamed to Zend\Authentication\AuthenticationService
  * Singleton removed from Zend\Authentication\AuthenticationService
+
+Zend_Service_Abstract
+ * Renamed to Zend\Service\AbstractService
+ * Made set/getHttpClient() methods non-static
+ * Added new set/getDefaultHTTPClient() static methods for setting global
+   clients; can accept either a class name or instance. getHttpClient() will
+   proxy to getDefaultHTTPClient() when no client is present.

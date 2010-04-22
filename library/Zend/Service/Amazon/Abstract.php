@@ -24,7 +24,7 @@
  * Abstract Amazon class that handles the credentials for any of the Web Services that
  * Amazon offers
  *
- * @uses       Zend_Service_Abstract
+ * @uses       Zend\Service\AbstractService
  * @uses       Zend_Service_Amazon_Exception
  * @category   Zend
  * @package    Zend_Service
@@ -32,7 +32,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Service_Amazon_Abstract extends Zend_Service_Abstract
+abstract class Zend_Service_Amazon_Abstract extends \Zend\Service\AbstractService
 {
     /**
      * @var string Amazon Access Key

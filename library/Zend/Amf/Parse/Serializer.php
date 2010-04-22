@@ -56,5 +56,5 @@ abstract class Zend_Amf_Parse_Serializer
      * @param  mixed $contentByVal
      * @return void
      */
-    public abstract function writeTypeMarker(&$content, $markerType=null, $contentByVal=false);
+    public abstract function writeTypeMarker(&$content, $markerType = null, $contentByVal = false);
 }

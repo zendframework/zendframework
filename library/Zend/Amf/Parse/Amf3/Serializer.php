@@ -40,8 +40,7 @@ require_once 'Zend/Amf/Parse/TypeLoader.php';
  */
 class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
 {
-
-     /**
+    /**
      * A constant empty string
      * @var string
      */
@@ -77,10 +76,11 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
      * @param  mixed $dataByVal
      * @return void
      */
-    public function writeTypeMarker(&$data, $markerType=null, $dataByVal=false)
+    public function writeTypeMarker(&$data, $markerType = null, $dataByVal = false)
     {
-        // Workaround for PHP5 with E_STRICT enabled complaining about "Only variables should be passed by reference"
-        if (is_null($data) && ($dataByVal !== false)) {
+        // Workaround for PHP5 with E_STRICT enabled complaining about "Only 
+        // variables should be passed by reference"
+        if ((null === $data) && ($dataByVal !== false)) {
             $data = &$dataByVal;
         }
         if (null !== $markerType) {
@@ -124,7 +124,7 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
             }
         } else {
             // Detect Type Marker
-            if(is_resource($data)) {
+            if (is_resource($data)) {
                 $data = Zend_Amf_Parse_TypeLoader::handleResource($data);
             }
             switch (true) {
@@ -254,12 +254,13 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
      * @param  string|Zend_Amf_Value_ByteArray  $data
      * @return Zend_Amf_Parse_Amf3_Serializer
      */
-    public function writeByteArray(&$data){
-        if($this->writeObjectReference($data)){
+    public function writeByteArray(&$data)
+    {
+        if ($this->writeObjectReference($data)) {
             return $this;
         }
 
-        if(is_string($data)) {
+        if (is_string($data)) {
             //nothing to do
         } else if ($data instanceof Zend_Amf_Value_ByteArray) {
             $data = $data->getData();
@@ -281,7 +282,7 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
      */
     public function writeXml($xml)
     {
-        if($this->writeObjectReference($xml)){
+        if ($this->writeObjectReference($xml)) {
             return $this;
         }
 
@@ -309,7 +310,7 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
      */
     public function writeDate($date)
     {
-        if($this->writeObjectReference($date)){
+        if ($this->writeObjectReference($date)) {
             return $this;
         }
 
@@ -377,16 +378,18 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
      * @param mixed $objectByVal object to check for reference
      * @return Boolean true, if the reference was written, false otherwise
      */
-    protected function writeObjectReference(&$object, $objectByVal=false)
+    protected function writeObjectReference(&$object, $objectByVal = false)
     {
-        // Workaround for PHP5 with E_STRICT enabled complaining about "Only variables should be passed by reference"
-        if (is_null($object) && ($objectByVal !== false)) {
+        // Workaround for PHP5 with E_STRICT enabled complaining about "Only 
+        // variables should be passed by reference"
+        if ((null === $object) && ($objectByVal !== false)) {
             $object = &$objectByVal;
         }
 
         $ref = array_search($object, $this->_referenceObjects,true);
-        //quickly handle object references
-        if($ref !== false){
+
+        // quickly handle object references
+        if ($ref !== false){
             $ref <<= 1;
             $this->writeInteger($ref);
             return true;

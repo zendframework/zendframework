@@ -61,16 +61,16 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
      * @return Zend_Amf_Parse_Amf0_Serializer
      * @throws Zend_Amf_Exception for unrecognized types or data
      */
-    public function writeTypeMarker(&$data, $markerType=null, $dataByVal=false)
+    public function writeTypeMarker(&$data, $markerType = null, $dataByVal = false)
     {
-        // Workaround for PHP5 with E_STRICT enabled complaining about "Only variables should be passed by reference" 
-        if (is_null($data) && ($dataByVal !== false)) {
+        // Workaround for PHP5 with E_STRICT enabled complaining about "Only 
+        // variables should be passed by reference" 
+        if ((null === $data) && ($dataByVal !== false)) {
             $data = &$dataByVal;
         }
         if (null !== $markerType) {
             //try to reference the given object
-            if( !$this->writeObjectReference($data, $markerType) ) {
-
+            if (!$this->writeObjectReference($data, $markerType)) {
                 // Write the Type Marker to denote the following action script data type
                 $this->_stream->writeByte($markerType);
                 switch($markerType) {
@@ -117,7 +117,7 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
                 }
             }
         } else {
-            if(is_resource($data)) {
+            if (is_resource($data)) {
                 $data = Zend_Amf_Parse_TypeLoader::handleResource($data);
             }
             switch (true) {
@@ -192,17 +192,19 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
      * @param mixed $objectByVal object to check for reference
      * @return Boolean true, if the reference was written, false otherwise
      */
-    protected function writeObjectReference(&$object, $markerType, $objectByVal=false) {
-        // Workaround for PHP5 with E_STRICT enabled complaining about "Only variables should be passed by reference"
-        if (is_null($object) && ($objectByVal !== false)) {
+    protected function writeObjectReference(&$object, $markerType, $objectByVal = false) 
+    {
+        // Workaround for PHP5 with E_STRICT enabled complaining about "Only 
+        // variables should be passed by reference"
+        if ((null === $object) && ($objectByVal !== false)) {
             $object = &$objectByVal;
         }
 
-        if( $markerType == Zend_Amf_Constants::AMF0_OBJECT ||
-            $markerType == Zend_Amf_Constants::AMF0_MIXEDARRAY ||
-            $markerType == Zend_Amf_Constants::AMF0_ARRAY ||
-            $markerType == Zend_Amf_Constants::AMF0_TYPEDOBJECT ) {
-
+        if ($markerType == Zend_Amf_Constants::AMF0_OBJECT 
+            || $markerType == Zend_Amf_Constants::AMF0_MIXEDARRAY 
+            || $markerType == Zend_Amf_Constants::AMF0_ARRAY 
+            || $markerType == Zend_Amf_Constants::AMF0_TYPEDOBJECT 
+        ) {
             $ref = array_search($object, $this->_referenceObjects, true);
             //handle object reference
             if($ref !== false){

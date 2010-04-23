@@ -221,7 +221,7 @@ abstract class Zend_Cache
         $name = str_replace(array('-', '_', '.'), ' ', $name);
         $name = ucwords($name);
         $name = str_replace(' ', '', $name);
-        if (strpos($name, 'ZendServer') === 0) {
+        if (stripos($name, 'ZendServer') === 0) {
             $name = 'ZendServer_' . substr($name, strlen('ZendServer'));
         }
 

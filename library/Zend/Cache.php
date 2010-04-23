@@ -40,7 +40,8 @@ abstract class Zend_Cache
      *
      * @var array
      */
-    public static $standardBackends = array('File', 'Sqlite', 'Memcached', 'Apc', 'ZendPlatform', 'Xcache', 'TwoLevels');
+    public static $standardBackends = array('File', 'Sqlite', 'Memcached', 'Apc', 'ZendPlatform',
+                                            'Xcache', 'TwoLevels', 'ZendServer_Disk', 'ZendServer_ShMem');
 
     /**
      * Standard backends which implement the ExtendedInterface
@@ -220,6 +221,10 @@ abstract class Zend_Cache
         $name = str_replace(array('-', '_', '.'), ' ', $name);
         $name = ucwords($name);
         $name = str_replace(' ', '', $name);
+        if (strpos($name, 'ZendServer') === 0) {
+            $name = 'ZendServer_' . substr($name, strlen('ZendServer'));
+        }
+
         return $name;
     }
 

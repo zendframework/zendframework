@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.introduction">
     <title>Introdução</title>
@@ -188,7 +188,7 @@ base/path/
                 url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">alternate
                 syntax for control structures</ulink>. These are convenient shorthands to use when
             writing view scripts, as they make the constructs more terse, keep statements on single
-            lines, and eliminate the need to hunt for brackets within HTML.
+            lines, and eliminate the need to hunt for brackets within <acronym>HTML</acronym>.
         </para>
 
         <para>
@@ -231,7 +231,7 @@ php_value "short_open_tag" "on"
                     long tags on the fly:
                 </para>
 
-        <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $view->setUseStreamWrapper(true);
 ]]></programlisting>
 

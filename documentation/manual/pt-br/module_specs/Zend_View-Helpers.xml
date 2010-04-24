@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Assistentes de Visualização</title>
@@ -59,8 +59,8 @@
             <classname>Zend_View</classname> vem com um conjunto padrão de assistentes, a maioria
             deles dedicados à geração de elementos de formulários e automaticamente escapar a saída
             apropriada. Além disso, existem assistentes para criar <acronym>URL</acronym>s baseadas
-            em rotas e listas de HTML, bem como declarar variáveis. Os assistentes atualmente
-            embarcados incluem:
+            em rotas e listas de <acronym>HTML</acronym>, bem como declarar variáveis. Os
+            assistentes atualmente embarcados incluem:
         </para>
 
         <itemizedlist>
@@ -254,9 +254,9 @@ echo $this->formCheckbox('foo',
                     <varname>$options</varname> should be an associative array, and may be
                     arbitrarily deep. <varname>$value</varname> may be a single value or
                     an array of selected values that match the keys in the
-                    <varname>$options</varname> array. <varname>$listsep</varname> is an HTML
-                    break ("&lt;br /&gt;") by default. By default, this element is
-                    treated as an array; all checkboxes share the same name, and are
+                    <varname>$options</varname> array. <varname>$listsep</varname> is an
+                    <acronym>HTML</acronym> break ("&lt;br /&gt;") by default. By default, this
+                    element is treated as an array; all checkboxes share the same name, and are
                     submitted as an array.
                 </para>
             </listitem>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21877 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
     <title>Zend_Db_Adapter</title>
@@ -2113,6 +2113,13 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Esse adaptador usa a extensão <acronym>PHP</acronym> sqlsrv.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Somente o Microsoft <acronym>SQL</acronym> Server 2005 ou superior é
+                        suportado.
                     </para>
                 </listitem>
 

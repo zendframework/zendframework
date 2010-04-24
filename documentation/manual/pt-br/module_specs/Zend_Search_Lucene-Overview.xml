@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.overview">
     <title>Resumo</title>
@@ -84,7 +84,7 @@
             Controlar o indexador é responsabilidade de sua aplicação. Este recurso garante que
             os dados possam ser indexados a partir de qualquer fonte que seja acessível à sua
             aplicação. Por exemplo, um sistema de arquivos, um banco de dados, um formulário
-            HTML, etc.
+            <acronym>HTML</acronym>, etc.
         </para>
 
         <para>
@@ -128,8 +128,9 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
         <para>
             A codificação pode divergir entre documentos diferentes, bem como para campos
             diferentes dentro de um mesmo documento:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = new Zend_Search_Lucene_Document();
 $doc->addField(Zend_Search_Lucene_Field::Text('title',
                                               $title,
@@ -138,18 +139,17 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
                                                   $contents,
                                                   'utf-8'));
 ]]></programlisting>
-        </para>
 
         <para>
             Se o parâmetro de codificação é omitido, então a localidade atual é usada em tempo
             de processamento. Por exemplo:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 setlocale(LC_ALL, 'de_DE.iso-8859-1');
 ...
 $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
 ]]></programlisting>
-        </para>
 
         <para>
             Os campos são sempre armazenados e devolvidos ao índice na codificação UTF-8.
@@ -296,24 +296,26 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
         <title>Documentos HTML</title>
 
         <para>
-            <classname>Zend_Search_Lucene</classname> oferece um recurso para análise de HTML.
-            Os documentos podem ser criados diretamente a partir de um arquivo ou string HTML:
+            <classname>Zend_Search_Lucene</classname> oferece um recurso para análise de
+            <acronym>HTML</acronym>. Os documentos podem ser criados diretamente a partir de um
+            arquivo ou string <acronym>HTML</acronym>:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTMLFile($filename);
 $index->addDocument($doc);
 ...
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
 
         <para>
             A classe <classname>Zend_Search_Lucene_Document_Html</classname> utiliza os métodos
             <methodname>DOMDocument::loadHTML()</methodname> e
-            <methodname>DOMDocument::loadHTMLFile()</methodname> para analisar o código HTML, por
-            isso não precisa de HTML bem formatado ou de <acronym>XHTML</acronym>. Por outro lado,
-            é dependente da codificação especificada pela tag de cabeçalho "meta http-equiv".
+            <methodname>DOMDocument::loadHTMLFile()</methodname> para analisar o código
+            <acronym>HTML</acronym>, por isso não precisa de <acronym>HTML</acronym> bem formatado
+            ou de <acronym>XHTML</acronym>. Por outro lado, é dependente da codificação especificada
+            pela tag de cabeçalho "meta http-equiv".
         </para>
 
         <para>
@@ -327,8 +329,8 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            O campo 'body' é o próprio conteúdo corpo do arquivo ou string HTML. Não inclui os
-            scripts, comentários ou atributos.
+            O campo 'body' é o próprio conteúdo corpo do arquivo ou string <acronym>HTML</acronym>.
+            Não inclui os scripts, comentários ou atributos.
         </para>
 
         <para>
@@ -343,8 +345,8 @@ $index->addDocument($doc);
         <para>
             O terceiro parâmetro dos métodos <methodname>loadHTML()</methodname> e
             <methodname>loadHTMLFile()</methodname> especifica opcionalmente a codificação do
-            código no documento HTML. É utilizado quando a codificação não é especificada usando a
-            meta tag Content-type HTTP-EQUIV.
+            código no documento <acronym>HTML</acronym>. É utilizado quando a codificação não é
+            especificada usando a meta tag Content-type HTTP-EQUIV.
         </para>
 
         <para>
@@ -356,8 +358,9 @@ $index->addDocument($doc);
 
         <para>
             Qualquer outro campo pode ser acrescentado pelo programador em documentos analisados:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed('created',
                                                    time()));
@@ -367,20 +370,19 @@ $doc->addField(Zend_Search_Lucene_Field::Text('annotation',
                                               'Document annotation text'));
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
 
         <para>
             Links nos documentos não estão incluídos no documento gerado,
             mas podem ser recuperados através dos métodos
             <methodname>Zend_Search_Lucene_Document_Html::getLinks()</methodname> e
             <methodname>Zend_Search_Lucene_Document_Html::getHeaderLinks()</methodname>:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
 $linksArray = $doc->getLinks();
 $headerLinksArray = $doc->getHeaderLinks();
 ]]></programlisting>
-        </para>
 
         <para>
             A partir do Zend Framework 1.6 é possível excluir os links com o atributo
@@ -402,12 +404,12 @@ $headerLinksArray = $doc->getHeaderLinks();
         <para>
             <classname>Zend_Search_Lucene</classname> oferece um recurso de análise para Word 2007.
             Os documentos podem ser criados diretamente de um arquivo do Word 2007:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Docx::loadDocxFile($filename);
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
 
         <para>
             A classe <classname>Zend_Search_Lucene_Document_Docx</classname> utiliza a classe
@@ -481,8 +483,9 @@ $index->addDocument($doc);
 
         <para>
             Qualquer outro campo pode ser acrescentado pelo programador em documentos analisados:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Docx::loadDocxFile($filename);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed(
     'indexTime',
@@ -494,7 +497,6 @@ $doc->addField(Zend_Search_Lucene_Field::Text(
 );
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.search.lucene.index-creation.pptx-documents">
@@ -503,12 +505,12 @@ $index->addDocument($doc);
         <para>
             <classname>Zend_Search_Lucene</classname> oferece um recurso de análise para Powerpoint
             2007. Os documentos podem ser criados diretamente de um arquivo do Powerpoint 2007:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Pptx::loadPptxFile($filename);
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
 
         <para>
             A classe <classname>Zend_Search_Lucene_Document_Pptx</classname> utiliza a classe
@@ -582,8 +584,9 @@ $index->addDocument($doc);
 
         <para>
             Qualquer outro campo pode ser acrescentado pelo programador em documentos analisados:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Pptx::loadPptxFile($filename);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed(
     'indexTime',
@@ -593,7 +596,6 @@ $doc->addField(Zend_Search_Lucene_Field::Text(
     'Document annotation text'));
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.search.lucene.index-creation.xlsx-documents">
@@ -602,12 +604,12 @@ $index->addDocument($doc);
         <para>
             <classname>Zend_Search_Lucene</classname> oferece um recurso de análise para Excel 2007.
             Os documentos podem ser criados diretamente de um arquivo do Excel 2007:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($filename);
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
 
         <para>
             A classe <classname>Zend_Search_Lucene_Document_Xlsx</classname> utiliza a classe
@@ -681,8 +683,9 @@ $index->addDocument($doc);
 
         <para>
             Qualquer outro campo pode ser acrescentado pelo programador em documentos analisados:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($filename);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed(
     'indexTime',
@@ -692,6 +695,5 @@ $doc->addField(Zend_Search_Lucene_Field::Text(
     'Document annotation text'));
 $index->addDocument($doc);
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

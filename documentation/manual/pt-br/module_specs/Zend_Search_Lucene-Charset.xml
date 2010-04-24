@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.charset">
     <title>Conjunto de Caracteres</title>
@@ -81,12 +81,12 @@
 
         <para>
             Qualquer um desses analisadores pode ser ativado como o código a seguir:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
 ]]></programlisting>
-        </para>
 
         <warning>
             <title/>
@@ -115,15 +115,15 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
         <para>
             Use o seguinte código para verificar, se o PCRE com suporte à UTF-8 está habilitado:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (@preg_match('/\pL/u', 'a') == 1) {
     echo "PCRE com suporte a Unicode está ativado.\n";
 } else {
     echo "PCRE com suporte a Unicode está desativado.\n";
 }
 ]]></programlisting>
-        </para>
 
         <para>
             Versões dos analisadores compatíveis com UTF-8 insensíveis a maiúsculas e minúsculas
@@ -135,8 +135,9 @@ if (@preg_match('/\pL/u', 'a') == 1) {
             Se você não quer ativar a extensão mbstring, mas precisa de buscas sem diferenciação de
             maiúsculas e minúsculas, pode-se usar a seguinte abordagem: normalizar os dados antes da
             indexação e a string de consulta antes de pesquisar, convertendo-os em minúsculas:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Indexando
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
@@ -160,7 +161,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('title',
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed('_title', $title));
 ]]></programlisting>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Buscando
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
@@ -173,6 +174,5 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
 $hits = $index->find(strtolower($query));
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

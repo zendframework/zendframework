@@ -94,6 +94,8 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
     {
         if ($this->_type == self::TYPE_AUTO) {
             $type = $this->_getAutoDeterminedType($this->_value);
+        } else {
+            $type = $this->_type;
         }
 
         // valid types for constants

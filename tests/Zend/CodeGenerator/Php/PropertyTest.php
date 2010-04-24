@@ -233,4 +233,21 @@ EOS;
 
         $this->assertEquals($code, $defaultValue->generate());
     }
+    
+    /**
+     * @group ZF-8849
+     */
+    public function testZF8849()
+    {
+        $property = new Zend_CodeGenerator_Php_Property(array(
+            'defaultValue' => array('value' => 1.337, 'type' => 'string'),
+            'name'         => 'ZF8849',
+            'const'        => true
+        ));
+        
+        $this->assertEquals(
+            $property->generate(),
+            "    const ZF8849 = '1.337';"
+        );
+    }
 }

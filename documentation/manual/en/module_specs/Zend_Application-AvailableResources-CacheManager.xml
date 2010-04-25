@@ -45,7 +45,7 @@ resources.cachemanager.database.frontendBackendAutoload = false
         </para>
 
         <para>
-            See <methodname>Zend_Cache::factory()</methodname> method to get default values 
+            See <methodname>Zend_Cache::factory()</methodname> method to get default values
             description.
         </para>
     </example>

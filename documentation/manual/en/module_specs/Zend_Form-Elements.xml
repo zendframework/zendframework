@@ -612,7 +612,7 @@ $messages = $element->getMessages();
         <para>
             In addition to validators, you can specify that an element is
             required, using <methodname>setRequired($flag)</methodname>. By default, this
-            flag is <constant>FALSE</constant>. In combination with 
+            flag is <constant>FALSE</constant>. In combination with
             <methodname>setAllowEmpty($flag)</methodname> (<constant>TRUE</constant>
             by default) and <methodname>setAutoInsertNotEmptyValidator($flag)</methodname>
             (<constant>TRUE</constant> by default), the behavior of your validator chain

@@ -23,6 +23,7 @@
                     characters are allowed. This option defaults to <constant>FALSE</constant>
                 </para>
             </listitem>
+        </itemizedlist>
     </sect3>
 
     <sect3 id="zend.validate.set.alnum.basic">

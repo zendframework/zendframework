@@ -120,7 +120,7 @@ $filter->setAdapter('openssl');
         </para>
 
         <para>
-            You can get/set the encryption values also afterwards with the
+            You can get and set the encryption values also afterwards with the
             <methodname>getEncryption()</methodname> and <methodname>setEncryption()</methodname>
             methods.
         </para>
@@ -135,13 +135,13 @@ $filter->setAdapter('openssl');
         <note>
             <para>
                 You should also note that all settings which be checked when you create the instance
-                or when you call setEncryption(). If mcrypt detects problem with your settings an
-                exception will be thrown.
+                or when you call <methodname>setEncryption()</methodname>. If mcrypt detects problem
+                with your settings an exception will be thrown.
             </para>
         </note>
 
         <para>
-            You can get/set the encryption vector by calling <methodname>getVector()</methodname>
+            You can get or set the encryption vector by calling <methodname>getVector()</methodname>
             and <methodname>setVector()</methodname>. A given string will be truncated or padded to
             the needed vector size of the used algorithm.
         </para>
@@ -212,7 +212,7 @@ print $encrypted;
         </itemizedlist>
 
         <para>
-            You can get/set the public keys also afterwards with the
+            You can get or set the public keys also afterwards with the
             <methodname>getPublicKey()</methodname> and <methodname>setPublicKey()</methodname>
             methods. The private key can also be get and set with the related
             <methodname>getPrivateKey()</methodname> and <methodname>setPrivateKey()</methodname>

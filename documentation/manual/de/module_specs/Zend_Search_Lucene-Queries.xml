@@ -397,9 +397,11 @@ $hits  = $index->find($query);
 word1 AND (word2 AND word3 AND NOT word4) OR word5
 ]]></programlisting>
 
+        <para>
             ist identisch mit
+        </para>
 
-            <programlisting language="querystring"><![CDATA[
+        <programlisting language="querystring"><![CDATA[
 (+(word1) +(+word2 +word3 -word4)) (word5)
 ]]></programlisting>
     </sect2>

@@ -14,11 +14,12 @@
 
         <para>
             Pubsubhubbub is an open, simple web-scale pubsub protocol. A common use case to enable
-            blogs (Publishers) to "push" updates from their RSS or Atom feeds (Topics) to end
-            Subscribers. These Subscribers will have subscribed to the blog's RSS or Atom feed via a
-            Hub, a central server which is notified of any updates by the Publisher and which then
-            distributes these updates to all Subscribers. Any feed may advertise that it supports
-            one or more Hubs using an Atom namespaced link element with a rel attribute of "hub".
+            blogs (Publishers) to "push" updates from their <acronym>RSS</acronym> or Atom feeds
+            (Topics) to end Subscribers. These Subscribers will have subscribed to the blog's
+            <acronym>RSS</acronym> or Atom feed via a Hub, a central server which is notified of any
+            updates by the Publisher and which then distributes these updates to all Subscribers.
+            Any feed may advertise that it supports one or more Hubs using an Atom namespaced link
+            element with a rel attribute of "hub".
         </para>
 
         <para>
@@ -34,12 +35,12 @@
 
         <para>
             The protocol does not exist in isolation. Pubsub systems have been around for a while,
-            such as the familiar Jabber Publish-Subscribe protocol, XEP-0060, or the less well known
-            rssCloud (described in 2001). However these have not achieved widespread adoption
-            typically due to either their complexity, poor timing or lack of suitability for web
-            applications. rssCloud, which was recently revived as a response to the appearance of
-            Pubsubhubbub, has also seen its usage increase significantly though it lacks a formal
-            specification and currently does not support Atom 1.0 feeds.
+            such as the familiar Jabber Publish-Subscribe protocol, <acronym>XEP-0060</acronym>, or
+            the less well known rssCloud (described in 2001). However these have not achieved
+            widespread adoption typically due to either their complexity, poor timing or lack of
+            suitability for web applications. rssCloud, which was recently revived as a response to
+            the appearance of Pubsubhubbub, has also seen its usage increase significantly though it
+            lacks a formal specification and currently does not support Atom 1.0 feeds.
         </para>
 
         <para>
@@ -60,12 +61,12 @@
 
         <para>
             A Publisher is responsible for notifying all supported Hubs (many can be supported to
-            add redundancy to the system) of any updates to its feeds, whether they be Atom or RSS
-            based. This is achieved by pinging the supported Hub Servers with the URL of the updated
-            feed. In Pubsubhubbub terminology, any updatable resource capable of being subscribed
-            to is referred to as a Topic. Once a ping is received, the Hub will request the updated
-            feed, process it for updated items, and forward all updates to all Subscribers
-            subscribed to that feed.
+            add redundancy to the system) of any updates to its feeds, whether they be Atom or
+            <acronym>RSS</acronym> based. This is achieved by pinging the supported Hub Servers with
+            the <acronym>URL</acronym> of the updated feed. In Pubsubhubbub terminology, any
+            updatable resource capable of being subscribed to is referred to as a Topic. Once a ping
+            is received, the Hub will request the updated feed, process it for updated items, and
+            forward all updates to all Subscribers subscribed to that feed.
         </para>
 
         <para>
@@ -73,7 +74,7 @@
             updates from a Topic hosted by a Publisher. The Subscriber never directly communicates
             with the Publisher since the Hub acts as an intermediary, accepting subscriptions and
             sending updates to subscribed Subscribers. The Subscriber therefore communicates only
-            with the Hub, either to subscribe/unsubscribe to Topics, or when it receives updates
+            with the Hub, either to subscribe or unsubscribe to Topics, or when it receives updates
             from the Hub. This communication design ("Fat Pings") effectively removes the
             possibility of a "Thundering Herd" issue. This occurs in a pubsub system where the Hub
             merely informs Subscribers that an update is available, prompting all Subscribers to
@@ -101,10 +102,11 @@
             updates it with new content. This may be a blog, an aggregator, or even a web service
             with a public feed based <acronym>API</acronym>. In order for these updates to be pushed
             to Subscribers, the Publisher must notify all of its supported Hubs that an update has
-            occured using a simple <acronym>HTTP</acronym> POST request containing the URI or the
-            updated Topic (i.e the updated RSS or Atom feed). The Hub will confirm receipt of the
-            notification, fetch the updated feed, and forward any updates to any Subscribers who
-            have subscribed to that Hub for updates from the relevant feed.
+            occured using a simple <acronym>HTTP</acronym> POST request containing the
+            <acronym>URI</acronym> or the updated Topic (i.e the updated <acronym>RSS</acronym> or
+            Atom feed). The Hub will confirm receipt of the notification, fetch the updated feed,
+            and forward any updates to any Subscribers who have subscribed to that Hub for updates
+            from the relevant feed.
         </para>
 
         <para>
@@ -116,19 +118,20 @@
         <para>
             <classname>Zend_Feed_Pubsubhubbub_Publisher</classname> implements a full Pubsubhubbub
             Publisher. Its setup for use is also simple, requiring mainly that it is configured with
-            the URI endpoint for all Hubs to be notified of updates, and the URIs of all Topics to
-            be included in the notifications.
+            the <acronym>URI</acronym> endpoint for all Hubs to be notified of updates, and the
+            <acronym>URI</acronym>s of all Topics to be included in the notifications.
         </para>
 
         <para>
             The following example shows a Publisher notifying a collection of Hubs about updates to
-            a pair of local RSS and Atom feeds. The class retains a collection of errors which
-            include the Hub URLs, so the notification can be re-attempted later and/or logged if any
-            notifications happen to fail. Each resulting error array also includes a "response" key
-            containing the related <acronym>HTTP</acronym> response object. In the event of any
-            errors, it is strongly recommended to attempt the operation for failed Hub Endpoints at
-            least once more at a future time. This may require the use of either a scheduled task
-            for this purpose or a job queue though such extra steps are optional.
+            a pair of local <acronym>RSS</acronym> and Atom feeds. The class retains a collection of
+            errors which include the Hub <acronym>URL</acronym>s, so the notification can be
+            re-attempted later and/or logged if any notifications happen to fail. Each resulting
+            error array also includes a "response" key containing the related
+            <acronym>HTTP</acronym> response object. In the event of any errors, it is strongly
+            recommended to attempt the operation for failed Hub Endpoints at least once more at a
+            future time. This may require the use of either a scheduled task for this purpose or a
+            job queue though such extra steps are optional.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -165,9 +168,9 @@ if (!$publisher->isSuccess()) {
         </para>
 
         <para>
-            You can also skip setting Hub URIs, and notify each in turn using the
-            <methodname>notifyHub()</methodname> method which accepts the URI of a Hub endpoint as
-            its only argument.
+            You can also skip setting Hub <acronym>URI</acronym>s, and notify each in turn using the
+            <methodname>notifyHub()</methodname> method which accepts the <acronym>URI</acronym> of
+            a Hub endpoint as its only argument.
         </para>
 
         <para>
@@ -177,7 +180,7 @@ if (!$publisher->isSuccess()) {
             (with a reasonable maximum number of retries) to ensure notifications reach all
             Subscribers. In many cases as a final alternative, Hubs may frequently poll your
             feeds to offer some additional tolerance for failures both in terms of their own
-            temporary downtime or Publisher errors/downtime.
+            temporary downtime or Publisher errors or downtime.
         </para>
     </sect2>
 
@@ -186,14 +189,15 @@ if (!$publisher->isSuccess()) {
 
         <para>
             In Pubsubhubbub, the Subscriber is the party who wishes to receive updates to any Topic
-            (RSS or Atom feed). They achieve this by subscribing to one or more of the Hubs
-            advertised by that Topic, usually as a set of one or more Atom 1.0 links with a rel
-            attribute of "hub". The Hub from that point forward will send an Atom or RSS feed
-            containing all updates to that Subscriber's Callback URL when it receives an update
-            notification from the Publisher. In this way, the Subscriber need never actually visit
-            the original feed (though it's still recommended at some level to ensure updates are
-            retrieved if ever a Hub goes offline). All subscription requests must contain the URI of
-            the Topic being subscribed and a Callback URL which the Hub will use to confirm the
+            (<acronym>RSS</acronym> or Atom feed). They achieve this by subscribing to one or more
+            of the Hubs advertised by that Topic, usually as a set of one or more Atom 1.0 links
+            with a rel attribute of "hub". The Hub from that point forward will send an Atom or
+            <acronym>RSS</acronym> feed containing all updates to that Subscriber's Callback
+            <acronym>URL</acronym> when it receives an update notification from the Publisher. In
+            this way, the Subscriber need never actually visit the original feed (though it's still
+            recommended at some level to ensure updates are retrieved if ever a Hub goes offline).
+            All subscription requests must contain the <acronym>URI</acronym> of the Topic being
+            subscribed and a Callback <acronym>URL</acronym> which the Hub will use to confirm the
             subscription and to forward updates.
         </para>
 
@@ -205,24 +209,25 @@ if (!$publisher->isSuccess()) {
         </para>
 
         <para>
-            The second role is to accept updates sent by a Hub to the Subscriber's Callback URL,
-            i.e. the URI the Subscriber has assigned to handle updates. The Callback URL also
-            handles events where the Hub contacts the Subscriber to confirm all subscriptions and
-            unsubscriptions. This is handled by using an instance of
-            <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> when the Callback URL
-            is accessed.
+            The second role is to accept updates sent by a Hub to the Subscriber's Callback
+            <acronym>URL</acronym>, i.e. the <acronym>URI</acronym> the Subscriber has assigned to
+            handle updates. The Callback <acronym>URL</acronym> also handles events where the Hub
+            contacts the Subscriber to confirm all subscriptions and unsubscriptions. This is
+            handled by using an instance of
+            <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> when the Callback
+            <acronym>URL</acronym> is accessed.
         </para>
 
         <important>
             <para>
                 <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname> implements the Pubsubhubbub
                 0.2 Specification. As this is a new specification version not all Hubs currently
-                implement it. The new specification allows the Callback URL to include a query
-                string which is used by this class, but not supported by all Hubs. In the interests
-                of maximising compatibility it is therefore recommended that the query string
-                component of the Subscriber Callback URI be presented as a path element, i.e.
-                recognised as a parameter in the route associated with the Callback URI and used by
-                the application's Router.
+                implement it. The new specification allows the Callback <acronym>URL</acronym> to
+                include a query string which is used by this class, but not supported by all Hubs.
+                In the interests of maximising compatibility it is therefore recommended that the
+                query string component of the Subscriber Callback <acronym>URI</acronym> be
+                presented as a path element, i.e. recognised as a parameter in the route associated
+                with the Callback <acronym>URI</acronym> and used by the application's Router.
             </para>
         </important>
 
@@ -241,11 +246,12 @@ if (!$publisher->isSuccess()) {
 
             <para>
                 Any subscription (or unsubscription) requires the relevant information before
-                proceeding, i.e. the URI of the Topic (Atom or RSS feed) to be subscribed to for
-                updates, and the URI of the endpoint for the Hub which will handle the subscription
-                and forwarding of the updates. The lifetime of a subscription may be determined by
-                the Hub but most Hubs should support automatic subscription refreshes by checking
-                with the Subscriber. This is supported by
+                proceeding, i.e. the <acronym>URI</acronym> of the Topic (Atom or
+                <acronym>RSS</acronym> feed) to be subscribed to for updates, and the
+                <acronym>URI</acronym> of the endpoint for the Hub which will handle the
+                subscription and forwarding of the updates. The lifetime of a subscription may
+                be determined by the Hub but most Hubs should support automatic subscription
+                refreshes by checking with the Subscriber. This is supported by
                 <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> and requires no
                 other work on your part. It is still strongly recommended that you use the Hub
                 sourced subscription time to live (ttl) to schedule the creation of new
@@ -336,17 +342,18 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                             <entry>
                                 <para>
-                                    The URI used by a Hub to contact the Subscriber and either
-                                    request confirmation of a (un)subscription request or send
-                                    updates from subscribed feeds. The appended query string
-                                    contains a custom parameter (hence the xhub designation). It is
-                                    a query string parameter preserved by the Hub and resent with
-                                    all Subscriber requests. Its purpose is to allow the Subscriber
-                                    to identify and look up the subscription associated with any Hub
-                                    request in a backend storage medium. This is a non-standard
-                                    parameter used by this component in preference to encoding a
-                                    subscription key in the URI path which is more difficult to
-                                    implement in a Zend Framework application.
+                                    The <acronym>URI</acronym> used by a Hub to contact the
+                                    Subscriber and either request confirmation of a (un)subscription
+                                    request or send updates from subscribed feeds. The appended
+                                    query string contains a custom parameter (hence the xhub
+                                    designation). It is a query string parameter preserved by the
+                                    Hub and resent with all Subscriber requests. Its purpose is to
+                                    allow the Subscriber to identify and look up the subscription
+                                    associated with any Hub request in a backend storage medium.
+                                    This is a non-standard parameter used by this component in
+                                    preference to encoding a subscription key in the
+                                    <acronym>URI</acronym> path which is more difficult to implement
+                                    in a Zend Framework application.
                                 </para>
 
                                 <para>
@@ -371,13 +378,14 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                             <entry>
                                 <para>
                                     The number of seconds for which the Subscriber would like a new
-                                    subscription to remain valid for (i.e. a TTL). Hubs may enforce
-                                    their own maximum subscription period. All subscriptions should
-                                    be renewed by simply re-subscribing before the subscription
-                                    period ends to ensure continuity of updates. Hubs should
-                                    additionally attempt to automatically refresh subscriptions
-                                    before they expire by contacting Subscribers (handled
-                                    automatically by the Callback class).
+                                    subscription to remain valid for (i.e. a
+                                    <acronym>TTL</acronym>). Hubs may enforce their own maximum
+                                    subscription period. All subscriptions should be renewed by
+                                    simply re-subscribing before the subscription period ends to
+                                    ensure continuity of updates. Hubs should additionally attempt
+                                    to automatically refresh subscriptions before they expire by
+                                    contacting Subscribers (handled automatically by the Callback
+                                    class).
                                 </para>
                             </entry>
                         </row>
@@ -400,8 +408,9 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                             <entry>
                                 <para>
-                                    The URI of the topic (i.e. Atom or RSS feed) which the
-                                    Subscriber wishes to subscribe to for updates.
+                                    The <acronym>URI</acronym> of the topic (i.e. Atom or
+                                    <acronym>RSS</acronym> feed) which the Subscriber wishes to
+                                    subscribe to for updates.
                                 </para>
                             </entry>
                         </row>
@@ -505,10 +514,11 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
             <para>
                 Whenever a subscription or unsubscription request is made, the Hub must verify the
-                request by forwarding a new verification request to the Callback URL set in the
-                subscription/unsubscription parameters. To handle these Hub requests, which will
-                include all future communications containing Topic (feed) updates, the Callback URL
-                should trigger the execution of an instance of
+                request by forwarding a new verification request to the Callback
+                <acronym>URL</acronym> set in the subscription or unsubscription parameters. To
+                handle these Hub requests, which will include all future communications containing
+                Topic (feed) updates, the Callback <acronym>URL</acronym> should trigger the
+                execution of an instance of
                 <classname>Zend_Pubsubhubbub_Subscriber_Callback</classname> to handle the request.
             </para>
 
@@ -560,7 +570,7 @@ if ($callback->hasFeedUpdate()) {
                     the Hub waiting for a response. Rather, any processing should be offloaded to
                     another process or deferred until after a response has been returned to the Hub.
                     One symptom of a failure to promptly complete Hub requests is that a Hub may
-                    continue to attempt delivery of the update/verification request leading to
+                    continue to attempt delivery of the update or verification request leading to
                     duplicated update attempts being processed by the Subscriber. This appears
                     problematic - but in reality a Hub may apply a timeout of just a few seconds,
                     and if no response is received within that time it may disconnect (assuming a
@@ -580,16 +590,18 @@ if ($callback->hasFeedUpdate()) {
                 As noted earlier, the
                 <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> class receives the
                 combined key associated with any subscription from the Hub via one of two methods.
-                The technically preferred method is to add this key to the Callback URL employed by
-                the Hub in all future requests using a query string parameter with the key
-                "xhub.subscription". However, for historical reasons, primarily that this was not
-                supported in Pubsubhubbub 0.1 (it was recently added in 0.2 only), it is strongly
-                recommended to use the most compatible means of adding this key to the Callback URL
-                by appending it to the URL's path.
+                The technically preferred method is to add this key to the Callback
+                <acronym>URL</acronym> employed by the Hub in all future requests using a query
+                string parameter with the key "xhub.subscription". However, for historical reasons,
+                primarily that this was not supported in Pubsubhubbub 0.1 (it was recently added in
+                0.2 only), it is strongly recommended to use the most compatible means of adding
+                this key to the Callback <acronym>URL</acronym> by appending it to the
+                <acronym>URL</acronym>'s path.
             </para>
 
             <para>
-                Thus the URL http://www.example.com/callback?xhub.subscription=key would become
+                Thus the <acronym>URL</acronym>
+                http://www.example.com/callback?xhub.subscription=key would become
                 http://www.example.com/callback/key.
             </para>
 
@@ -600,7 +612,7 @@ if ($callback->hasFeedUpdate()) {
             </para>
 
             <para>
-                The first step to to make the
+                The first step to make the
                 <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> class aware of the
                 path contained subscription key. It's manually injected therefore since it also
                 requires manually defining a route for this purpose. This is achieved simply by

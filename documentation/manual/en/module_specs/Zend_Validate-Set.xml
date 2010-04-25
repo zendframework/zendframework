@@ -8,35 +8,8 @@
         use.
     </para>
 
-    <sect2 id="zend.validate.set.alnum">
-        <title>Alnum</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> contains only
-            alphabetic and digit characters. This validator includes an option to also consider
-            white space characters as valid.
-        </para>
-
-        <note>
-            <para>
-                The alphabetic characters mean characters that makes up words in each language.
-                However, the English alphabet is treated as the alphabetic characters in following
-                languages: Chinese, Japanese, Korean. The language is specified by
-                <classname>Zend_Locale</classname>.
-            </para>
-        </note>
-    </sect2>
-
-    <sect2 id="zend.validate.set.alpha">
-        <title>Alpha</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> contains only
-            alphabetic characters. This validator includes an option to also consider white space
-            characters as valid.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Alnum.xml" />
+    <xi:include href="Zend_Validate-Alpha.xml" />
     <xi:include href="Zend_Validate-Barcode.xml" />
     <xi:include href="Zend_Validate-Between.xml" />
     <xi:include href="Zend_Validate-Callback.xml" />

@@ -149,7 +149,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
         </para>
 
         <para>
-            Additionally, setting the value sets the <code>checked</code>
+            Additionally, setting the value sets the <property>checked</property>
             property of the checkbox. You can query this using
             <methodname>isChecked()</methodname> or simply accessing the property. Using the
             <methodname>setChecked($flag)</methodname> method will both set the state of the
@@ -172,12 +172,12 @@ $element = new Zend_Form_Element_Captcha('foo', array(
             fields to your form. It utilizes <link
                 linkend="zend.file.transfer.introduction">Zend_File_Transfer</link>
             internally to provide this functionality, and the
-            <code>FormFile</code> view helper as also the <code>File</code>
+            <classname>FormFile</classname> view helper as also the <classname>File</classname>
             decorator to display the form element.
         </para>
 
         <para>
-            By default, it uses the <code>Http</code> transfer adapter, which
+            By default, it uses the <classname>Http</classname> transfer adapter, which
             introspects the <varname>$_FILES</varname> array and allows you to attach
             validators and filters. Validators and filters attached to the form
             element are in turn attached to the transfer adapter.
@@ -513,7 +513,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             accessor (or 'image' configuration key). You can also optionally specify a value to use
             when submitting the image using the <methodname>setImageValue()</methodname> accessor
             (or 'imageValue' configuration key). When the value set for the
-            element matches the <code>imageValue</code>, then the accessor
+            element matches the <property>imageValue</property>, then the accessor
             <methodname>isChecked()</methodname> will return <constant>TRUE</constant>.
         </para>
 
@@ -522,7 +522,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             <link linkend="zend.form.standardDecorators.image">Image
                 Decorator</link> for rendering, in addition to the standard Errors,
             HtmlTag, and Label decorators. You can optionally specify a tag to
-            the <code>Image</code> decorator that will then wrap the image
+            the <classname>Image</classname> decorator that will then wrap the image
             element.
         </para>
     </sect2>
@@ -547,11 +547,11 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         </para>
 
         <para>
-            By default, this element registers an <code>InArray</code> validator
+            By default, this element registers an <classname>InArray</classname> validator
             which validates against the array keys of registered options. You
             can disable this behavior by either calling
             <methodname>setRegisterInArrayValidator(false)</methodname>, or by passing a
-            <constant>FALSE</constant> value to the <code>registerInArrayValidator</code>
+            <constant>FALSE</constant> value to the <property>registerInArrayValidator</property>
             configuration key.
         </para>
 
@@ -610,12 +610,12 @@ $element->setValue(array('bar', 'bat'));
         <title>Zend_Form_Element_Multiselect</title>
 
         <para>
-            <acronym>XHTML</acronym> <code>select</code> elements allow a 'multiple' attribute,
-            indicating multiple options may be selected for submission, instead
+            <acronym>XHTML</acronym> <emphasis>select</emphasis> elements allow a 'multiple'
+            attribute, indicating multiple options may be selected for submission, instead
             of the usual one. <classname>Zend_Form_Element_Multiselect</classname> extends
             <link
                 linkend="zend.form.standardElements.select">Zend_Form_Element_Select</link>,
-            and sets the <code>multiple</code> attribute to 'multiple'. Like
+            and sets the <property>multiple</property> attribute to 'multiple'. Like
             other classes that inherit from the base
             <classname>Zend_Form_Element_Multi</classname> class, you can manipulate the
             options for the select using:
@@ -649,11 +649,11 @@ $element->setValue(array('bar', 'bat'));
         </para>
 
         <para>
-            By default, this element registers an <code>InArray</code> validator
+            By default, this element registers an <classname>InArray</classname> validator
             which validates against the array keys of registered options. You
             can disable this behavior by either calling
             <methodname>setRegisterInArrayValidator(false)</methodname>, or by passing a
-            <constant>FALSE</constant> value to the <code>registerInArrayValidator</code>
+            <constant>FALSE</constant> value to the <property>registerInArrayValidator</property>
             configuration key.
         </para>
     </sect2>
@@ -684,15 +684,15 @@ $element->setValue(array('bar', 'bat'));
             need a single value returned. <classname>Zend_Form_Element_Radio</classname>
             extends the base <classname>Zend_Form_Element_Multi</classname> class,
             allowing you to specify a number of options, and then uses the
-            <code>formRadio</code> view helper to display these.
+            <emphasis>formRadio</emphasis> view helper to display these.
         </para>
 
         <para>
-            By default, this element registers an <code>InArray</code> validator
+            By default, this element registers an <classname>InArray</classname> validator
             which validates against the array keys of registered options. You
             can disable this behavior by either calling
             <methodname>setRegisterInArrayValidator(false)</methodname>, or by passing a
-            <constant>FALSE</constant> value to the <code>registerInArrayValidator</code>
+            <constant>FALSE</constant> value to the <property>registerInArrayValidator</property>
             configuration key.
         </para>
 
@@ -754,11 +754,11 @@ $element->setValue(array('bar', 'bat'));
         </para>
 
         <para>
-            By default, this element registers an <code>InArray</code> validator
+            By default, this element registers an <classname>InArray</classname> validator
             which validates against the array keys of registered options. You
             can disable this behavior by either calling
             <methodname>setRegisterInArrayValidator(false)</methodname>, or by passing a
-            <constant>FALSE</constant> value to the <code>registerInArrayValidator</code>
+            <constant>FALSE</constant> value to the <property>registerInArrayValidator</property>
             configuration key.
         </para>
 

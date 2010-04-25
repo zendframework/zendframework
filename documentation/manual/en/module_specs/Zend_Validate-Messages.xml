@@ -44,7 +44,10 @@ $messages  = $validator->getMessageTemplates();
 
     <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_GreaterThan();
-$validator->setMessage('Please enter a lower value', Zend_Validate_GreaterThan::NOT_GREATER);
+$validator->setMessage(
+    'Please enter a lower value',
+    Zend_Validate_GreaterThan::NOT_GREATER
+);
 ]]></programlisting>
 
     <para>

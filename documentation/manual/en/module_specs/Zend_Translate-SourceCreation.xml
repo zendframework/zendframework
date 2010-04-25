@@ -272,7 +272,12 @@ $translate = new Zend_Translate(
         'locale'  => 'de'
     )
 );
-$translate->addTranslation(array('content' => 'path/to/other.csv', 'locale' => 'fr'));
+$translate->addTranslation(
+    array(
+        'content' => 'path/to/other.csv',
+        'locale' => 'fr'
+    )
+);
 ]]></programlisting>
         </example>
 

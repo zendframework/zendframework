@@ -71,7 +71,8 @@ echo $bbcode->render('my [foo]markup[/foo]');
             </para>
 
             <programlisting language="php"><![CDATA[
-class My_Markup_Renderer_Html_Upper implements Zend_Markup_Renderer_TokenConverterInterface
+class My_Markup_Renderer_Html_Upper
+    implements Zend_Markup_Renderer_TokenConverterInterface
 {
 
     public function convert(Zend_Markup_Token $token, $text)

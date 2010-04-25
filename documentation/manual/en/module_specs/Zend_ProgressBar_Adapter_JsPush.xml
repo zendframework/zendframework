@@ -129,7 +129,8 @@
         <programlisting language="javascript"><![CDATA[
 function Zend_ProgressBar_Update(data)
 {
-    document.getElementById('zend-progressbar-done').style.width = data.percent + '%';
+    document.getElementById('zend-progressbar-done').style.width =
+         data.percent + '%';
 }
 ]]></programlisting>
 

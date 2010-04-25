@@ -161,7 +161,10 @@ $config = array(
 $consumer = new Zend_Oauth_Consumer($config);
 
 if (!empty($_GET) && isset($_SESSION['TWITTER_REQUEST_TOKEN'])) {
-    $token = $consumer->getAccessToken($_GET, unserialize($_SESSION['TWITTER_REQUEST_TOKEN']));
+    $token = $consumer->getAccessToken(
+                 $_GET,
+                 unserialize($_SESSION['TWITTER_REQUEST_TOKEN'])
+             );
     $_SESSION['TWITTER_ACCESS_TOKEN'] = serialize($token);
 
     // Now that we have an Access Token, we can discard the Request Token

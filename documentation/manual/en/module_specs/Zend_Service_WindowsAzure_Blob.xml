@@ -158,7 +158,10 @@ $storageClient->getBlob(
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
 
 // make container publicly available
-$storageClient->setContainerAcl('testcontainer', Zend_Service_WindowsAzure_Storage_Blob::ACL_PUBLIC);
+$storageClient->setContainerAcl(
+    'testcontainer',
+    Zend_Service_WindowsAzure_Storage_Blob::ACL_PUBLIC
+);
 ]]></programlisting>
             </example>
         </sect4>
@@ -215,11 +218,14 @@ fclose($fileHandle);
 
             <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
-$storageClient->registerStreamWrapper(); // registers azure:// on this storage client
+// registers azure:// on this storage client
+$storageClient->registerStreamWrapper();
+
 
 // or:
 
-$storageClient->registerStreamWrapper('blob://'); // regiters blob:// on this storage client
+// regiters blob:// on this storage client
+$storageClient->registerStreamWrapper('blob://');
 ]]></programlisting>
         </example>
 

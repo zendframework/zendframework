@@ -808,11 +808,12 @@ $service->tearDownCall($sessionId);
             <programlisting language="php"><![CDATA[
 $client = new Zend_Service_DeveloperGarden_ConferenceCall($config);
 
-$conferenceDetails = new Zend_Service_DeveloperGarden_ConferenceCall_ConferenceDetail(
-    'Zend-Conference',                    // name for the conference
-    'this is my private zend conference', // description
-    60                                    // duration in seconds
-);
+$conferenceDetails =
+    new Zend_Service_DeveloperGarden_ConferenceCall_ConferenceDetail(
+        'Zend-Conference',                    // name for the conference
+        'this is my private zend conference', // description
+        60                                    // duration in seconds
+    );
 
 $conference = $client->createConference('MyName', $conferenceDetails);
 
@@ -848,7 +849,9 @@ $client->commitConference($conference->getConferenceId());
             <title>WSDL cache options</title>
 
             <programlisting language="php"><![CDATA[
-Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setWsdlCache([PHP CONSTANT]);
+Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setWsdlCache(
+    [PHP CONSTANT]
+);
 ]]></programlisting>
         </example>
 

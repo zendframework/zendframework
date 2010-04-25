@@ -630,9 +630,9 @@ class CallbackController extends Zend_Controller_Action
 
         /**
          * Check if the callback resulting in the receipt of a feed update.
-         * Otherwise it was either a (un)sub verification request or invalid request.
-         * Typically we need do nothing other than add feed update handling - the rest
-         * is handled internally by the class.
+         * Otherwise it was either a (un)sub verification request or invalid
+         * request. Typically we need do nothing other than add feed update
+         * handling - the rest is handled internally by the class.
          */
         if ($callback->hasFeedUpdate()) {
             $feedString = $callback->getFeedUpdate();

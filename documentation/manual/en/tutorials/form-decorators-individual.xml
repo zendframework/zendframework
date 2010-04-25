@@ -162,7 +162,7 @@ class My_Form_UserDemographics extends Zend_Form
         <listitem>
             <para>
                 <classname>HtmlTag</classname>: wrap the above three items in a
-                <code>&lt;dd&gt;</code> tag
+                <emphasis>&lt;dd&gt;</emphasis> tag
             </para>
         </listitem>
 
@@ -170,7 +170,7 @@ class My_Form_UserDemographics extends Zend_Form
             <para>
                 <classname>Label</classname>: render the element label using the
                 <classname>FormLabel</classname> view helper (and wrap it in a
-                <code>&lt;dt&gt;</code> tag)
+                <emphasis>&lt;dt&gt;</emphasis> tag)
             </para>
         </listitem>
     </itemizedlist>

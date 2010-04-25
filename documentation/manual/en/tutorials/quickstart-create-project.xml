@@ -317,8 +317,9 @@ class ErrorController extends Zend_Controller_Action
         </para>
 
         <para>
-            View scripts may contain any markup you want, and use the <code>&lt;?php</code> opening
-            tag and <code>?&gt;</code> closing tag to insert <acronym>PHP</acronym> directives.
+            View scripts may contain any markup you want, and use the <emphasis>&lt;?php</emphasis>
+            opening tag and <emphasis>?&gt;</emphasis> closing tag to insert <acronym>PHP</acronym>
+            directives.
         </para>
 
         <para>

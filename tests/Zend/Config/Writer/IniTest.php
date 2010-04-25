@@ -246,4 +246,39 @@ ECS;
             $this->assertContains('Value can not contain double quotes "', $expected->getMessage());
         }
     }
+    
+    /**
+     * @group ZF-6289
+     */
+    public function testZF6289_NonSectionElementsAndSectionJumbling()
+    {
+        $config = new Zend_Config(array(
+            'one'   => 'element',
+            'two'   => array('type' => 'section'),
+            'three' => 'element',
+            'four'  => array('type' => 'section'),
+            'five'  => 'element'
+        ));
+        
+        $writer = new Zend_Config_Writer_Ini;
+        $iniString = $writer->setConfig($config)->render($config);
+        
+        $expected = <<<ECS
+one = "element"
+three = "element"
+five = "element"
+[two]
+type = "section"
+
+[four]
+type = "section"
+
+
+ECS;
+        
+        $this->assertEquals(
+            $expected,
+            $iniString
+        );
+    }
 }

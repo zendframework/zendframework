@@ -536,6 +536,20 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-9263
+     * @group ZF-9166
+     * @group ZF-9306
+     */
+    public function testIsReadableShouldFailEarlyWhenProvidedInvalidWindowsAbsolutePath()
+    {
+        if (strtoupper(substr(PHP_OS, 0, 3)) != 'WIN') {
+            $this->markTestSkipped('Windows-only test');
+        }
+        $path = 'C:/this/file/should/not/exist.php';
+        $this->assertFalse(Zend_Loader::isReadable($path));
+    }
+
+    /**
      * In order to play nice with spl_autoload, an autoload callback should
      * *not* emit errors (exceptions are okay). ZF-2923 requests that this
      * behavior be applied, which counters the previous request in ZF-2463.

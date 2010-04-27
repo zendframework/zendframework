@@ -35,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Element implements Zend_Validate_Interface
+class Zend_Form_Element implements \Zend\Validator\Validator
 {
     /**
      * Element Constants
@@ -963,7 +963,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
      * @return Zend_Form_Element
      * @throws Zend_Form_Exception on invalid type
      */
-    public function setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type)
+    public function setPluginLoader(\Zend\Loader\PluginLoader\PluginLoaderInterface $loader, $type)
     {
         $type = strtoupper($type);
         switch ($type) {
@@ -1001,7 +1001,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
                     $pathSegment   = 'Form/Decorator';
                 }
                 if (!isset($this->_loaders[$type])) {
-                    $this->_loaders[$type] = new Zend_Loader_PluginLoader(
+                    $this->_loaders[$type] = new \Zend\Loader\PluginLoader\PluginLoader(
                         array('Zend_' . $prefixSegment . '_' => 'Zend/' . $pathSegment . '/')
                     );
                 }
@@ -1111,7 +1111,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
      */
     public function addValidator($validator, $breakChainOnFailure = false, $options = array())
     {
-        if ($validator instanceof Zend_Validate_Interface) {
+        if ($validator instanceof \Zend\Validator\Validator) {
             $name = get_class($validator);
 
             if (!isset($validator->zfBreakChainOnFailure)) {

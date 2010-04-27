@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-// Call Zend_Captcha_ImageTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Captcha_ImageTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Captcha;
 
 /**
  * @category   Zend
@@ -35,21 +33,9 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Captcha
  */
-class Zend_Captcha_ImageTest extends PHPUnit_Framework_TestCase
+class ImageTest extends \PHPUnit_Framework_TestCase
 {
     protected $_tmpDir;
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Captcha_ImageTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -77,11 +63,11 @@ class Zend_Captcha_ImageTest extends PHPUnit_Framework_TestCase
         if(!is_dir($this->testDir)) {
             @mkdir($this->testDir);
         }
-        $this->element = new Zend_Form_Element_Captcha('captchaI',
+        $this->element = new \Zend_Form_Element_Captcha('captchaI',
                     array('captcha' => array('Image',
-                                             'sessionClass' => 'Zend_Captcha_ImageTest_SessionContainer',
-                                             'imgDir' => $this->testDir,
-                                             'font' => dirname(__FILE__). '/../Pdf/_fonts/Vera.ttf')
+                                             'sessionClass' => 'ZendTest\\Captcha\\TestAsset\\SessionContainer',
+                                             'imgDir'       => $this->testDir,
+                                             'font'         => __DIR__. '/../PDF/_fonts/Vera.ttf')
                          ));
         $this->captcha =  $this->element->getCaptcha();
     }
@@ -95,12 +81,11 @@ class Zend_Captcha_ImageTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         // remove chaptcha images
-        foreach(new DirectoryIterator($this->testDir) as $file) {
+        foreach(new \DirectoryIterator($this->testDir) as $file) {
             if(!$file->isDot() && !$file->isDir()) {
                     unlink($file->getPathname());
             }
         }
-
     }
 
     /**
@@ -112,33 +97,15 @@ class Zend_Captcha_ImageTest extends PHPUnit_Framework_TestCase
     protected function _getTmpDir()
     {
         if (null === $this->_tmpDir) {
-            if (function_exists('sys_get_temp_dir')) {
-                $tmpdir = sys_get_temp_dir();
-            } elseif (!empty($_ENV['TMP'])) {
-                $tmpdir = realpath($_ENV['TMP']);
-            } elseif (!empty($_ENV['TMPDIR'])) {
-                $tmpdir = realpath($_ENV['TMPDIR']);
-            } else if (!empty($_ENV['TEMP'])) {
-                $tmpdir = realpath($_ENV['TEMP']);
-            } else {
-                // Attemp to detect by creating a temporary file
-                $tempFile = tempnam(md5(uniqid(rand(), TRUE)), '');
-                if ($tempFile) {
-                    $tmpdir = realpath(dirname($tempFile));
-                    unlink($tempFile);
-                } else {
-                    throw new Zend_File_Transfer_Exception('Could not determine temp directory');
-                }
-            }
-            $this->_tmpDir = rtrim($tmpdir, "/\\");
+            $this->_tmpDir = sys_get_temp_dir();
         }
         return $this->_tmpDir;
     }
 
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath(dirname(__FILE__) . '/../../../../library/Zend/View/Helper');
+        $view = new \Zend_View();
+        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
         return $view;
     }
 
@@ -324,50 +291,3 @@ class Zend_Captcha_ImageTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class Zend_Captcha_ImageTest_SessionContainer
-{
-    protected static $_word;
-
-    public function __get($name)
-    {
-        if ('word' == $name) {
-            return self::$_word;
-        }
-
-        return null;
-    }
-
-    public function __set($name, $value)
-    {
-        if ('word' == $name) {
-            self::$_word = $value;
-        } else {
-            $this->$name = $value;
-        }
-    }
-
-    public function __isset($name)
-    {
-        if (('word' == $name) && (null !== self::$_word))  {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function __call($method, $args)
-    {
-        switch ($method) {
-            case 'setExpirationHops':
-            case 'setExpirationSeconds':
-                $this->$method = array_shift($args);
-                break;
-            default:
-        }
-    }
-}
-
-// Call Zend_Captcha_ImageTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Captcha_ImageTest::main") {
-    Zend_Captcha_ImageTest::main();
-}

@@ -20,12 +20,17 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Captcha;
+
+/**
  * Word-based captcha adapter
  *
  * Generates random word which user should recognise
  *
- * @uses       Zend_Captcha_Base
- * @uses       Zend_Loader
+ * @uses       Zend\Captcha\AbstractAdapter
+ * @uses       Zend\Loader
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
@@ -33,7 +38,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-abstract class Zend_Captcha_Word extends Zend_Captcha_Base
+abstract class Word extends AbstractAdapter
 {
     /**#@+
      * @var array Character sets
@@ -61,7 +66,7 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
     /**
      * Session
      *
-     * @var Zend_Session_Namespace
+     * @var \Zend\Session\Container
      */
     protected $_session;
 
@@ -70,7 +75,7 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
      *
      * @var string
      */
-    protected $_sessionClass = 'Zend_Session_Namespace';
+    protected $_sessionClass = 'Zend\\Session\\Container';
 
     /**
      * Should the numbers be used or only letters
@@ -139,7 +144,7 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
      * Set session class for persistence
      *
      * @param  string $_sessionClass
-     * @return Zend_Captcha_Word
+     * @return \Zend\Captcha\Word
      */
     public function setSessionClass($_sessionClass)
     {
@@ -161,7 +166,7 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
      * Set word length of captcha
      *
      * @param integer $wordlen
-     * @return Zend_Captcha_Word
+     * @return \Zend\Captcha\Word
      */
     public function setWordlen($wordlen)
     {
@@ -198,7 +203,7 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
      * Set timeout for session token
      *
      * @param  int $ttl
-     * @return Zend_Captcha_Word
+     * @return \Zend\Captcha\Word
      */
     public function setTimeout($ttl)
     {
@@ -220,7 +225,7 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
 	 * Sets if session should be preserved on generate()
 	 * 
 	 * @param $keepSession Should session be kept on generate()?
-	 * @return Zend_Captcha_Word
+	 * @return \Zend\Captcha\Word
 	 */
 	public function setKeepSession($keepSession) 
 	{
@@ -231,14 +236,14 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
     /**
      * Get session object
      *
-     * @return Zend_Session_Namespace
+     * @return \Zend\Session\Container
      */
     public function getSession()
     {
         if (!isset($this->_session) || (null === $this->_session)) {
             $id = $this->getId();
             if (!class_exists($this->_sessionClass)) {
-                Zend_Loader::loadClass($this->_sessionClass);
+                \Zend\Loader::loadClass($this->_sessionClass);
             }
             $this->_session = new $this->_sessionClass('Zend_Form_Captcha_' . $id);
             $this->_session->setExpirationHops(1, null, true);
@@ -250,10 +255,10 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
     /**
      * Set session namespace object
      *
-     * @param  Zend_Session_Namespace $session
-     * @return Zend_Captcha_Word
+     * @param  \Zend\Session\Container $session
+     * @return \Zend\Captcha\Word
      */
-    public function setSession(Zend_Session_Namespace $session)
+    public function setSession(\Zend\Session\Container $session)
     {
         $this->_session = $session;
         if($session) {
@@ -280,7 +285,7 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
      * Set captcha word
      *
      * @param  string $word
-     * @return Zend_Captcha_Word
+     * @return \Zend\Captcha\Word
      */
     protected function _setWord($word)
     {
@@ -341,7 +346,7 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
     /**
      * Validate the word
      *
-     * @see    Zend_Validate_Interface::isValid()
+     * @see    Zend\Validator\Validator::isValid()
      * @param  mixed $value
      * @return boolean
      */

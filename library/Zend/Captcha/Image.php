@@ -21,19 +21,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Captcha;
+
+/**
  * Image-based captcha element
  *
  * Generates image displaying random word
  *
- * @uses       Zend_Captcha_Exception
- * @uses       Zend_Captcha_Word
+ * @uses       \Zend\Captcha\Exception
+ * @uses       \Zend\Captcha\Word
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Captcha_Image extends Zend_Captcha_Word
+class Image extends Word
 {
     /**
      * Directory for generated images
@@ -268,7 +273,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * Set captcha expiration
      *
      * @param int $expiration
-     * @return Zend_Captcha_Image
+     * @return \Zend\Captcha\Image
      */
     public function setExpiration($expiration)
     {
@@ -280,7 +285,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * Set garbage collection frequency
      *
      * @param int $gcFreq
-     * @return Zend_Captcha_Image
+     * @return \Zend\Captcha\Image
      */
     public function setGcFreq($gcFreq)
     {
@@ -292,7 +297,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * Set captcha font
      *
      * @param  string $font
-     * @return Zend_Captcha_Image
+     * @return \Zend\Captcha\Image
      */
     public function setFont($font)
     {
@@ -304,7 +309,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * Set captcha font size
      *
      * @param  int $fsize
-     * @return Zend_Captcha_Image
+     * @return \Zend\Captcha\Image
      */
     public function setFontSize($fsize)
     {
@@ -316,7 +321,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * Set captcha image height
      *
      * @param  int $height
-     * @return Zend_Captcha_Image
+     * @return \Zend\Captcha\Image
      */
     public function setHeight($height)
     {
@@ -328,7 +333,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * Set captcha image storage directory
      *
      * @param  string $imgDir
-     * @return Zend_Captcha_Image
+     * @return \Zend\Captcha\Image
      */
     public function setImgDir($imgDir)
     {
@@ -340,7 +345,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * Set captcha image base URL
      *
      * @param  string $imgUrl
-     * @return Zend_Captcha_Image
+     * @return \Zend\Captcha\Image
      */
     public function setImgUrl($imgUrl)
     {
@@ -360,7 +365,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * Set captch image filename suffix
      *
      * @param  string $suffix
-     * @return Zend_Captcha_Image
+     * @return \Zend\Captcha\Image
      */
     public function setSuffix($suffix)
     {
@@ -372,7 +377,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * Set captcha image width
      *
      * @param  int $width
-     * @return Zend_Captcha_Image
+     * @return \Zend\Captcha\Image
      */
     public function setWidth($width)
     {
@@ -445,21 +450,21 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
     protected function _generateImage($id, $word)
     {
         if (!extension_loaded("gd")) {
-            throw new Zend_Captcha_Exception("Image CAPTCHA requires GD extension");
+            throw new Exception("Image CAPTCHA requires GD extension");
         }
 
         if (!function_exists("imagepng")) {
-            throw new Zend_Captcha_Exception("Image CAPTCHA requires PNG support");
+            throw new Exception("Image CAPTCHA requires PNG support");
         }
 
         if (!function_exists("imageftbbox")) {
-            throw new Zend_Captcha_Exception("Image CAPTCHA requires FT fonts support");
+            throw new Exception("Image CAPTCHA requires FT fonts support");
         }
 
         $font = $this->getFont();
 
         if (empty($font)) {
-            throw new Zend_Captcha_Exception("Image CAPTCHA requires font");
+            throw new Exception("Image CAPTCHA requires font");
         }
 
         $w     = $this->getWidth();
@@ -472,7 +477,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
         } else {
             $img = imagecreatefrompng($this->_startImage);
             if(!$img) {
-                throw new Zend_Captcha_Exception("Can not load start image");
+                throw new Exception("Can not load start image");
             }
             $w = imagesx($img);
             $h = imagesy($img);
@@ -571,7 +576,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
             // safety guard
             return;
         }
-        foreach (new DirectoryIterator($imgdir) as $file) {
+        foreach (new \DirectoryIterator($imgdir) as $file) {
             if (!$file->isDot() && !$file->isDir()) {
                 if ($file->getMTime() < $expire) {
                     unlink($file->getPathname());
@@ -587,7 +592,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * @param mixed $element
      * @return string
      */
-    public function render(Zend_View_Interface $view = null, $element = null)
+    public function render(\Zend_View_Interface $view = null, $element = null)
     {
         return '<img width="'.$this->getWidth().'" height="'.$this->getHeight().'" alt="'.$this->getImgAlt().'" src="' . $this->getImgUrl() . $this->getId() . $this->getSuffix() . '"/><br/>';
     }

@@ -1131,10 +1131,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Captcha/Base.php</originalRelativeFilePath>
       <originalClassName>Zend_Captcha_Base</originalClassName>
-      <newRelativeFilePath>Zend/Captcha/Base.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Captcha/AbstractAdapter.php</newRelativeFilePath>
       <newNamespace>Zend\Captcha</newNamespace>
-      <newClassName>Base</newClassName>
-      <newFullyQualifiedName>Zend\Captcha\Base</newFullyQualifiedName>
+      <newClassName>AbstractAdapter</newClassName>
+      <newFullyQualifiedName>Zend\Captcha\AbstractAdapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Captcha/Dumb.php</originalRelativeFilePath>

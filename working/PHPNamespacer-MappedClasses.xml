@@ -651,10 +651,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/Ldap.php</originalRelativeFilePath>
       <originalClassName>Zend_Auth_Adapter_Ldap</originalClassName>
-      <newRelativeFilePath>Zend/Authentication/Adapter/Ldap.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Authentication/Adapter/LDAP.php</newRelativeFilePath>
       <newNamespace>Zend\Authentication\Adapter</newNamespace>
-      <newClassName>Ldap</newClassName>
-      <newFullyQualifiedName>Zend\Authentication\Adapter\Ldap</newFullyQualifiedName>
+      <newClassName>LDAP</newClassName>
+      <newFullyQualifiedName>Zend\Authentication\Adapter\LDAP</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Auth/Adapter/OpenId.php</originalRelativeFilePath>
@@ -7755,282 +7755,282 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Attribute.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Attribute</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Attribute.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Attribute.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP</newNamespace>
       <newClassName>Attribute</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Attribute</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Attribute</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Collection/Iterator/Default.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Collection_Iterator_Default</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Collection/Iterator/Default.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Collection\Iterator</newNamespace>
-      <newClassName>Default</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Collection\Iterator\Default</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/Collection/DefaultIterator.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Collection</newNamespace>
+      <newClassName>DefaultIterator</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Collection\DefaultIterator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Collection.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Collection</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Collection/Collection.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Collection</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Collection/Collection.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Collection</newNamespace>
       <newClassName>Collection</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Collection\Collection</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Collection\Collection</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Converter.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Converter</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Converter.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Converter.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP</newNamespace>
       <newClassName>Converter</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Converter</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Converter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Dn.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Dn</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Dn.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap</newNamespace>
-      <newClassName>Dn</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Dn</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/DN.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP</newNamespace>
+      <newClassName>DN</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\DN</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Filter/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Filter_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Filter/AbstractFilter.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Filter</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Filter/AbstractFilter.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Filter</newNamespace>
       <newClassName>AbstractFilter</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Filter\AbstractFilter</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Filter\AbstractFilter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Filter/And.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Filter_And</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Filter/And.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Filter</newNamespace>
-      <newClassName>And</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Filter\And</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/Filter/AndFilter.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Filter</newNamespace>
+      <newClassName>AndFilter</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Filter\AndFilter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Filter/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Filter_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Filter/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Filter</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Filter/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Filter</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Filter\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Filter\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Filter/Logical.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Filter_Logical</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Filter/Logical.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Filter</newNamespace>
-      <newClassName>Logical</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Filter\Logical</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/Filter/LogicalFilter.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Filter</newNamespace>
+      <newClassName>LogicalFilter</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Filter\LogicalFilter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Filter/Mask.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Filter_Mask</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Filter/Mask.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Filter</newNamespace>
-      <newClassName>Mask</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Filter\Mask</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/Filter/MaskFilter.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Filter</newNamespace>
+      <newClassName>MaskFilter</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Filter\MaskFilter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Filter/Not.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Filter_Not</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Filter/Not.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Filter</newNamespace>
-      <newClassName>Not</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Filter\Not</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/Filter/NotFilter.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Filter</newNamespace>
+      <newClassName>NotFilter</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Filter\NotFilter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Filter/Or.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Filter_Or</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Filter/Or.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Filter</newNamespace>
-      <newClassName>Or</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Filter\Or</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/Filter/OrFilter.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Filter</newNamespace>
+      <newClassName>OrFilter</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Filter\OrFilter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Filter/String.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Filter_String</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Filter/String.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Filter</newNamespace>
-      <newClassName>String</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Filter\String</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/Filter/StringFilter.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Filter</newNamespace>
+      <newClassName>StringFilter</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Filter\StringFilter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Filter.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Filter</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Filter/Filter.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Filter</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Filter/Filter.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Filter</newNamespace>
       <newClassName>Filter</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Filter\Filter</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Filter\Filter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Ldif/Encoder.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Ldif_Encoder</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Ldif/Encoder.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Ldif</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/LDIF/Encoder.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\LDIF</newNamespace>
       <newClassName>Encoder</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Ldif\Encoder</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\LDIF\Encoder</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/AbstractNode.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Node/AbstractNode.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node</newNamespace>
       <newClassName>AbstractNode</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\AbstractNode</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Node\AbstractNode</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/ChildrenIterator.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_ChildrenIterator</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/ChildrenIterator.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Node/ChildrenIterator.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node</newNamespace>
       <newClassName>ChildrenIterator</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\ChildrenIterator</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Node\ChildrenIterator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Collection.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_Collection</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/Collection.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Node/Collection.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node</newNamespace>
       <newClassName>Collection</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\Collection</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Node\Collection</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/RootDse/ActiveDirectory.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_RootDse_ActiveDirectory</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/RootDse/ActiveDirectory.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node\RootDse</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Node/RootDSE/ActiveDirectory.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\RootDSE</newNamespace>
       <newClassName>ActiveDirectory</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\RootDse\ActiveDirectory</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Node\RootDSE\ActiveDirectory</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/RootDse/eDirectory.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_RootDse_eDirectory</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/RootDse/eDirectory.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node\RootDse</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Node/RootDSE/eDirectory.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\RootDSE</newNamespace>
       <newClassName>eDirectory</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\RootDse\eDirectory</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Node\RootDSE\eDirectory</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/RootDse/OpenLdap.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_RootDse_OpenLdap</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/RootDse/OpenLdap.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node\RootDse</newNamespace>
-      <newClassName>OpenLdap</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\RootDse\OpenLdap</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/Node/RootDSE/OpenLDAP.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\RootDSE</newNamespace>
+      <newClassName>OpenLDAP</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Node\RootDSE\OpenLDAP</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/RootDse.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_RootDse</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/RootDse/RootDse.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node\RootDse</newNamespace>
-      <newClassName>RootDse</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\RootDse\RootDse</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/Node/RootDSE/RootDSE.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\RootDSE</newNamespace>
+      <newClassName>RootDSE</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Node\RootDSE\RootDSE</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Schema/ActiveDirectory.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_Schema_ActiveDirectory</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/Schema/ActiveDirectory.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node\Schema</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Node/Schema/ActiveDirectory.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\Schema</newNamespace>
       <newClassName>ActiveDirectory</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\Schema\ActiveDirectory</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Node\Schema\ActiveDirectory</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Schema/AttributeType/ActiveDirectory.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_Schema_AttributeType_ActiveDirectory</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/Schema/AttributeType/ActiveDirectory.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node\Schema\AttributeType</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Node/Schema/AttributeType/ActiveDirectory.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\Schema\AttributeType</newNamespace>
       <newClassName>ActiveDirectory</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\Schema\AttributeType\ActiveDirectory</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Node\Schema\AttributeType\ActiveDirectory</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Schema/AttributeType/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_Schema_AttributeType_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/Schema/AttributeType/AttributeTypeInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node\Schema\AttributeType</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Node/Schema/AttributeType/AttributeTypeInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\Schema\AttributeType</newNamespace>
       <newClassName>AttributeTypeInterface</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\Schema\AttributeType\AttributeTypeInterface</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Node\Schema\AttributeType\AttributeTypeInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Schema/AttributeType/OpenLdap.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_Schema_AttributeType_OpenLdap</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/Schema/AttributeType/OpenLdap.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node\Schema\AttributeType</newNamespace>
-      <newClassName>OpenLdap</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\Schema\AttributeType\OpenLdap</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/Node/Schema/AttributeType/OpenLDAP.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\Schema\AttributeType</newNamespace>
+      <newClassName>OpenLDAP</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Node\Schema\AttributeType\OpenLDAP</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Schema/Item.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_Schema_Item</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/Schema/Item.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node\Schema</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Node/Schema/Item.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\Schema</newNamespace>
       <newClassName>Item</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\Schema\Item</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Node\Schema\Item</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Schema/ObjectClass/ActiveDirectory.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_Schema_ObjectClass_ActiveDirectory</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/Schema/ObjectClass/ActiveDirectory.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node\Schema\ObjectClass</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Node/Schema/ObjectClass/ActiveDirectory.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\Schema\ObjectClass</newNamespace>
       <newClassName>ActiveDirectory</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\Schema\ObjectClass\ActiveDirectory</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Node\Schema\ObjectClass\ActiveDirectory</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Schema/ObjectClass/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_Schema_ObjectClass_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/Schema/ObjectClass/ObjectClassInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node\Schema\ObjectClass</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Node/Schema/ObjectClass/ObjectClassInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\Schema\ObjectClass</newNamespace>
       <newClassName>ObjectClassInterface</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\Schema\ObjectClass\ObjectClassInterface</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Node\Schema\ObjectClass\ObjectClassInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Schema/ObjectClass/OpenLdap.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_Schema_ObjectClass_OpenLdap</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/Schema/ObjectClass/OpenLdap.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node\Schema\ObjectClass</newNamespace>
-      <newClassName>OpenLdap</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\Schema\ObjectClass\OpenLdap</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/Node/Schema/ObjectClass/OpenLDAP.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\Schema\ObjectClass</newNamespace>
+      <newClassName>OpenLDAP</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Node\Schema\ObjectClass\OpenLDAP</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Schema/OpenLdap.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_Schema_OpenLdap</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/Schema/OpenLdap.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node\Schema</newNamespace>
-      <newClassName>OpenLdap</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\Schema\OpenLdap</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/Node/Schema/OpenLDAP.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\Schema</newNamespace>
+      <newClassName>OpenLDAP</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Node\Schema\OpenLDAP</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Schema.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_Schema</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/Schema/Schema.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node\Schema</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Node/Schema/Schema.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\Schema</newNamespace>
       <newClassName>Schema</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\Schema\Schema</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Node\Schema\Schema</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Node/Node.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap\Node</newNamespace>
+      <newRelativeFilePath>Zend/LDAP/Node/Node.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node</newNamespace>
       <newClassName>Node</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Node\Node</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\LDAP\Node\Node</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap</originalClassName>
-      <newRelativeFilePath>Zend/Ldap/Ldap.php</newRelativeFilePath>
-      <newNamespace>Zend\Ldap</newNamespace>
-      <newClassName>Ldap</newClassName>
-      <newFullyQualifiedName>Zend\Ldap\Ldap</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/LDAP.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP</newNamespace>
+      <newClassName>LDAP</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\LDAP</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader/Autoloader/Interface.php</originalRelativeFilePath>

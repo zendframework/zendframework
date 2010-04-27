@@ -49,7 +49,7 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 [X] Zend_Dom
 [ ] Zend_Gdata
 [ ] Zend_InfoCard
-[ ] Zend_Ldap
+[X] Zend_Ldap
 [ ] Zend_Mime -> [ ] Zend_Mail
 [X] Zend_Markup
 [X] Zend_Memory -> [X] Zend_Pdf -> [X] Zend_Barcode

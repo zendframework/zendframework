@@ -158,6 +158,7 @@ abstract class Zend_XmlRpc_Value
     {
         if (!$this->_xml) {
             $this->generateXml();
+            $this->_xml = (string) $this->getGenerator();
         }
         return $this->_xml;
     }
@@ -169,9 +170,7 @@ abstract class Zend_XmlRpc_Value
      */
     public function generateXml()
     {
-        if (!$this->_xml) {
-            $this->_generateXml();
-        }
+        $this->_generateXml();
     }
 
     /**

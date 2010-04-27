@@ -68,8 +68,6 @@ class Zend_XmlRpc_Value_Array extends Zend_XmlRpc_Value_Collection
         $generator->closeElement('data')
                   ->closeElement('array')
                   ->closeElement('value');
-
-        $this->_xml = (string)$generator;
     }
 }
 

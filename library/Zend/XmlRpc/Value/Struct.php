@@ -71,6 +71,5 @@ class Zend_XmlRpc_Value_Struct extends Zend_XmlRpc_Value_Collection
         }
         $generator->closeElement('struct')
                   ->closeElement('value');
-        $this->_xml = (string)$generator;
     }
 }

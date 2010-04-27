@@ -43,7 +43,7 @@
 
         <para>
             De qualquer modo, o analisador de texto padrão (que também é usado no analisador de
-            consulta) utiliza ctype_alpha() para a sinalização de texto e consultas.
+            consultas) utiliza ctype_alpha() para a separação de texto e consultas em tokens.
         </para>
 
         <para>
@@ -99,8 +99,8 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
             <para>
                 Isso pode exigir que você reconstrua o índice para ter os dados e as consultas de
-                pesquisa no mesmo formato, caso contrário o motor de busca pode retornar conjuntos
-                de resultados errados.
+                pesquisas separados em tokens do mesmo formato, caso contrário o motor de busca pode
+                retornar conjuntos de resultados errados.
             </para>
         </warning>
 

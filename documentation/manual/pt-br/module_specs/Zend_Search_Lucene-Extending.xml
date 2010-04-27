@@ -9,7 +9,7 @@
 
         <para>
             A classe <classname>Zend_Search_Lucene_Analysis_Analyzer</classname> é usada pelo
-            indexador para "tokenizar" campos de documentos de texto.
+            indexador para separar em tokens os campos de texto do documento.
         </para>
 
         <para>
@@ -19,13 +19,13 @@
         </para>
 
         <para>
-            Você pode estipular o seu próprio analisador de textos ou selecioná-lo dentre uma lista
+            Você pode atribuir o seu próprio analisador de textos ou selecioná-lo dentre uma lista
             de analisadores pré-definidos:
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text</classname> e
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname>
-            (padrão). Ambos interpretam os "tokens" como sequencias de letras.
+            (padrão). Ambos interpretam os tokens como sequências de letras.
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname>
-            converte todos os "tokens" para caixa baixa.
+            converte todos os tokens para minúsculas.
         </para>
 
         <para>
@@ -44,14 +44,14 @@ $index->addDocument($doc);
             projetada para ser um antepassado de todos os analisadores definidos pelo usuário. O
             usuário só precisa definir os métodos <methodname>reset()</methodname> e
             <methodname>nextToken()</methodname>, que receberá a string do membro $_input e
-            retornará os "tokens" um por um (um valor <constant>NULL</constant> indica o fim do
+            retornará os tokens um por um (um valor <constant>NULL</constant> indica o fim do
             fluxo).
         </para>
 
         <para>
             O método <methodname>nextToken()</methodname> deve chamar o método
-            <methodname>normalize()</methodname> em cada "token". Isso te permite usar filtros de
-            "token" junto com o seu analisador.
+            <methodname>normalize()</methodname> em cada token. Isso te permite usar filtros de
+            token junto com o seu analisador.
         </para>
 
         <para>
@@ -63,8 +63,8 @@ $index->addDocument($doc);
 
                 <programlisting language="php"><![CDATA[
 /**
- * Here is a custom text analyser, which treats words with digits as
- * one term
+ * Aqui está um analisador de texto personalizado, que trata as palavras com
+ * dígitos como um termo
  */
 
 class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
@@ -72,7 +72,7 @@ class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
     private $_position;
 
     /**
-     * Reset token stream
+     * Reinicia o fluxo do token
      */
     public function reset()
     {
@@ -80,9 +80,9 @@ class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
     }
 
     /**
-     * Tokenization stream API
-     * Get next token
-     * Returns null at the end of stream
+     * API do fluxo de separação de tokens
+     * Obtém o próximo token
+     * Retorna null no final do fluxo
      *
      * @return Zend_Search_Lucene_Analysis_Token|null
      */
@@ -93,7 +93,7 @@ class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
         }
 
         while ($this->_position < strlen($this->_input)) {
-            // skip white space
+            // ignora os espaços em branco
             while ($this->_position < strlen($this->_input) &&
                    !ctype_alnum( $this->_input[$this->_position] )) {
                 $this->_position++;
@@ -101,13 +101,13 @@ class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
 
             $termStartPosition = $this->_position;
 
-            // read token
+            // lê o token
             while ($this->_position < strlen($this->_input) &&
                    ctype_alnum( $this->_input[$this->_position] )) {
                 $this->_position++;
             }
 
-            // Empty token, end of stream.
+            // Token vazio, fim do fluxo.
             if ($this->_position == $termStartPosition) {
                 return null;
             }
@@ -123,7 +123,7 @@ class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
             if ($token !== null) {
                 return $token;
             }
-            // Continue if token is skipped
+            // Continua se o token for ignorado
         }
 
         return null;

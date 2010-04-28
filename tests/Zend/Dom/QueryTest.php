@@ -243,6 +243,34 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($errors));
         $this->assertTrue(0 < count($errors));
     }
+    
+    /**
+     * @group ZF-9765
+     */
+    public function testCssSelectorShouldFindNodesWhenMatchingMultipleAttributes()
+    {
+        $html = <<<EOF
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<body>
+  <form action="#" method="get">
+    <input type="hidden" name="foo" value="1" id="foo"/>
+    <input type="hidden" name="bar" value="0" id="bar"/>
+    <input type="hidden" name="baz" value="1" id="baz"/>
+  </form>
+</body>
+</html>
+EOF;
+
+        $this->query->setDocument($html);
+        $results = $this->query->query('input[type="hidden"][value="1"]');
+        $this->assertEquals(2, count($results), $results->getXpathQuery());
+        $results = $this->query->query('input[value="1"][type~="hidden"]');
+        $this->assertEquals(2, count($results), $results->getXpathQuery());
+        $results = $this->query->query('input[type="hidden"][value="0"]');
+        $this->assertEquals(1, count($results));
+    }
 }
 
 // Call Zend_Dom_QueryTest::main() if this source file is executed directly.

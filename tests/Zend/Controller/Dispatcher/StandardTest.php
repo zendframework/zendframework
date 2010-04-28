@@ -136,6 +136,30 @@ class Zend_Controller_Dispatcher_StandardTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_dispatcher->isDispatchable($request), var_export($this->_dispatcher->getControllerDirectory(), 1));
     }
 
+    /**
+     * @group ZF-8222
+     */
+    public function testIsDispatchableManuallyIncludedController()
+    {
+        require_once dirname(__FILE__) . '/../_files/ManuallyIncludedControllers.php';
+        $request = new Zend_Controller_Request_Http();
+
+
+        $this->_dispatcher->setParam('prefixDefaultModule', true);
+
+        $request->setControllerName('included');
+        $this->assertFalse($this->_dispatcher->isDispatchable($request));
+
+        $request->setControllerName('included-prefix');
+        $this->assertTrue($this->_dispatcher->isDispatchable($request));
+
+        $this->_dispatcher->setParam('prefixDefaultModule', false);
+
+        $request->setModuleName('admin');
+        $request->setControllerName('included-admin');
+        $this->assertTrue($this->_dispatcher->isDispatchable($request));
+    }
+
     public function testSetGetResponse()
     {
         $response = new Zend_Controller_Response_Cli();

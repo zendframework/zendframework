@@ -170,9 +170,9 @@ class Zend_Oauth_Client extends Zend_Http_Client
             $params = array();
             $query = $this->getUri()->getQuery();
             if ($query) {
-                $queryParts = split('&', $this->getUri()->getQuery());
+                $queryParts = explode('&', $this->getUri()->getQuery());
                 foreach ($queryParts as $queryPart) {
-                    $kvTuple = split('=', $queryPart);
+                    $kvTuple = explode('=', $queryPart);
                     $params[$kvTuple[0]] = 
                         (array_key_exists(1, $kvTuple) ? $kvTuple[1] : NULL);
                 }

@@ -427,7 +427,7 @@ class Zend_Feed_Reader
         } elseif(is_string($feed) && !empty($feed)) {
             @ini_set('track_errors', 1);
             $dom = new DOMDocument;
-            $status = @$doc->loadXML($string);
+            $status = @$dom->loadXML($feed);
             @ini_restore('track_errors');
             if (!$status) {
                 if (!isset($php_errormsg)) {

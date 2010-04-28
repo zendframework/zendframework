@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.validate.set.float">
+    <title>Float</title>
+
+    <para>
+        <classname>Zend_Validate_Float</classname> allows you to validate if a given value contains
+        a floating-point value. This validator validates also localized input.
+    </para>
+
+    <sect3 id="zend.validate.set.float.options">
+        <title>Supported options for Zend_Validate_Float</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Validate_Float</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>locale</property></emphasis>: Sets the locale which will be
+                    used to validate localized float values.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.validate.set.float.basic">
+        <title>Simple float validation</title>
+
+        <para>
+            The simplest way to validate a float is by using the system settings. When no option
+            is used, the environment locale is used for validation:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Float();
+
+$validator->isValid(1234.5);   // returns true
+$validator->isValid('10a01'); // returns false
+$validator->isValid('1,234.5'); // returns true
+]]></programlisting>
+
+        <para>
+            In the above example we expected that our environment is set to "en" as locale.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.validate.set.float.localized">
+        <title>Localized float validation</title>
+
+        <para>
+            Often it's useful to be able to validate also localized values. Float values are often
+            written different in other countries. For example using english you will write "1.5".
+            In german you may write "1,5" and in other languages you may use grouping.
+        </para>
+
+        <para>
+            <classname>Zend_Validate_Float</classname> is able to validate such notations. But it is
+            limited to the locale you set. See the following code:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Float(array('locale' => 'de'));
+
+$validator->isValid(1234.5); // returns true
+$validator->isValid("1 234,5"); // returns false
+$validator->isValid("1.234"); // returns true
+]]></programlisting>
+
+        <para>
+            As you can see, by using a locale, your input is validated localized. Using a different
+            notation you get a <constant>FALSE</constant> when the locale forces a different
+            notation.
+        </para>
+
+        <para>
+            The locale can also be set afterwards by using <methodname>setLocale()</methodname> and
+            retrieved by using <methodname>getLocale()</methodname>.
+        </para>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

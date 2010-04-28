@@ -21,19 +21,32 @@
  */
 
 /**
- * @uses       Zend_Search_Lucene_Analysis_Analyzer
- * @uses       Zend_Search_Lucene_Exception
- * @uses       Zend_Search_Lucene_Index_SegmentInfo
- * @uses       Zend_Search_Lucene_Index_SegmentWriter
- * @uses       Zend_Search_Lucene_Index_Term
- * @uses       Zend_Search_Lucene_Search_Similarity
+ * @namespace
+ */
+namespace Zend\Search\Lucene\Index\SegmentWriter;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Index;
+use Zend\Search\Lucene\Analysis\Analyzer;
+use Zend\Search\Lucene\Storage\Directory;
+use Zend\Search\Lucene\Document;
+use Zend\Search\Lucene\Search\Similarity;
+
+/**
+ * @uses       \Zend\Search\Lucene\Analysis\Analyzer
+ * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Index\SegmentInfo
+ * @uses       \Zend\Search\Lucene\Index\SegmentWriter\AbstractSegmentWriter
+ * @uses       \Zend\Search\Lucene\Index\Term
+ * @uses       \Zend\Search\Lucene\Search\Similarity\Similarity
+ * @uses       \Zend\Search\Lucene\Storage\Directory
+ * @uses       \Zend\Search\Lucene\Document;
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_Lucene_Index_SegmentWriter
+class DocumentWriter extends AbstractSegmentWriter
 {
     /**
      * Term Dictionary
@@ -54,10 +67,10 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
     /**
      * Object constructor.
      *
-     * @param Zend_Search_Lucene_Storage_Directory $directory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
      * @param string $name
      */
-    public function __construct(Zend_Search_Lucene_Storage_Directory $directory, $name)
+    public function __construct(Directory\DirectoryInterface $directory, $name)
     {
         parent::__construct($directory, $name);
 
@@ -69,14 +82,14 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
     /**
      * Adds a document to this segment.
      *
-     * @param Zend_Search_Lucene_Document $document
-     * @throws Zend_Search_Lucene_Exception
+     * @param \Zend\Search\Lucene\Document\Document $document
+     * @throws \Zend\Search\Lucene\Exception
      */
-    public function addDocument(Zend_Search_Lucene_Document $document)
+    public function addDocument(Document\Document $document)
     {
         $storedFields = array();
         $docNorms     = array();
-        $similarity   = Zend_Search_Lucene_Search_Similarity::getDefault();
+        $similarity   = Similarity\Similarity::getDefault();
 
         foreach ($document->getFieldNames() as $fieldName) {
             $field = $document->getField($fieldName);
@@ -85,12 +98,12 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
                 /**
                  * @todo term vector storing support
                  */
-                throw new Zend_Search_Lucene_Exception('Store term vector functionality is not supported yet.');
+                throw new Lucene\Exception('Store term vector functionality is not supported yet.');
             }
 
             if ($field->isIndexed) {
                 if ($field->isTokenized) {
-                    $analyzer = Zend_Search_Lucene_Analysis_Analyzer::getDefault();
+                    $analyzer = Analyzer\Analyzer::getDefault();
                     $analyzer->setInput($field->value, $field->encoding);
 
                     $position     = 0;
@@ -98,7 +111,7 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
                     while (($token = $analyzer->nextToken()) !== null) {
                         $tokenCounter++;
 
-                        $term = new Zend_Search_Lucene_Index_Term($token->getTermText(), $field->name);
+                        $term = new Index\Term($token->getTermText(), $field->name);
                         $termKey = $term->key();
 
                         if (!isset($this->_termDictionary[$termKey])) {
@@ -129,7 +142,7 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
                     $field = clone($field);
                     $field->isIndexed = $field->isTokenized = false;
                 } else {
-                    $term = new Zend_Search_Lucene_Index_Term($fieldUtf8Value, $field->name);
+                    $term = new Index\Term($fieldUtf8Value, $field->name);
                     $termKey = $term->key();
 
                     if (!isset($this->_termDictionary[$termKey])) {
@@ -197,7 +210,7 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
     /**
      * Close segment, write it to disk and return segment info
      *
-     * @return Zend_Search_Lucene_Index_SegmentInfo
+     * @return \Zend\Search\Lucene\Index\SegmentInfo
      */
     public function close()
     {
@@ -210,13 +223,13 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
 
         $this->_generateCFS();
 
-        return new Zend_Search_Lucene_Index_SegmentInfo($this->_directory,
-                                                        $this->_name,
-                                                        $this->_docCount,
-                                                        -1,
-                                                        null,
-                                                        true,
-                                                        true);
+        return new Index\SegmentInfo($this->_directory,
+                                     $this->_name,
+                                     $this->_docCount,
+                                     -1,
+                                     null,
+                                     true,
+                                     true);
     }
 
 }

@@ -21,26 +21,35 @@
  */
 
 /**
- * @uses       Zend_Search_Lucene_Search_Weight
+ * @namespace
+ */
+namespace Zend\Search\Lucene\Search\Weight;
+use Zend\Search\Lucene\Search\Query;
+use Zend\Search\Lucene;
+
+/**
+ * @uses       \Zend\Search\Lucene\Search\Weight\AbstractWeight
+ * @uses       \Zend\Search\Lucene\Search\Query\Phrase
+ * @uses       \Zend\Search\Lucene\IndexInterface
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_Search_Weight_Phrase extends Zend_Search_Lucene_Search_Weight
+class Phrase extends AbstractWeight
 {
     /**
      * IndexReader.
      *
-     * @var Zend_Search_Lucene_Interface
+     * @var \Zend\Search\Lucene\IndexInterface
      */
     private $_reader;
 
     /**
      * The query that this concerns.
      *
-     * @var Zend_Search_Lucene_Search_Query_Phrase
+     * @var \Zend\Search\Lucene\Search\Query\Phrase
      */
     private $_query;
 
@@ -54,11 +63,10 @@ class Zend_Search_Lucene_Search_Weight_Phrase extends Zend_Search_Lucene_Search_
     /**
      * Zend_Search_Lucene_Search_Weight_Phrase constructor
      *
-     * @param Zend_Search_Lucene_Search_Query_Phrase $query
-     * @param Zend_Search_Lucene_Interface           $reader
+     * @param \Zend\Search\Lucene\Search\Query\Phrase $query
+     * @param \Zend\Search\Lucene\IndexInterface      $reader
      */
-    public function __construct(Zend_Search_Lucene_Search_Query_Phrase $query,
-                                Zend_Search_Lucene_Interface           $reader)
+    public function __construct(Query\Phrase $query, Lucene\IndexInterface $reader)
     {
         $this->_query  = $query;
         $this->_reader = $reader;
@@ -98,5 +106,3 @@ class Zend_Search_Lucene_Search_Weight_Phrase extends Zend_Search_Lucene_Search_
         $this->_value = $this->_queryWeight * $this->_idf;
     }
 }
-
-

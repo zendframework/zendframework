@@ -186,3 +186,15 @@ Zend_Service_Abstract
  * Added new set/getDefaultHTTPClient() static methods for setting global
    clients; can accept either a class name or instance. getHttpClient() will
    proxy to getDefaultHTTPClient() when no client is present.
+
+Zend_Search_Lucene
+ * "Zend_Search_Lucene" prefix now becomes "Zend\Search\Lucene" namespace
+ * All "Zend\Search\Lucene\Lucene" methods except static create(), open(), 
+   setDefault*() and getDefault*() methods are moved into new class "Zend\Search\Lucene\Index"
+ * "Zend_Search_Lucene_Analysis_TokenFilter" abstract class becomes 
+   "\Zend\Search\Lucene\Analysis\TokenFilter\TokenFilterInterface" interface
+ * "Zend_Search_Lucene_Document" class becomes "Zend\Search\Lucene\Document\Document"
+ * "Zend_Search_Lucene_Field" class becomes "Zend\Search\Lucene\Document\Field"
+ * "Zend_Search_Lucene_Document_Html" class becomes "Zend\Search\Lucene\Document\HTML"
+ * "Zend_Search_Lucene_Search_Highlighter_Default" class becomes 
+   "\Zend\Search\Lucene\Search\Highlighter\DefaultHighlighter"

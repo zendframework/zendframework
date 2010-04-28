@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Search\Lucene\Storage;
+use Zend\Search\Lucene\Storage\File;
+
+/**
  * Zend_Search_Lucene_Storage_File_Filesystem
  */
 
@@ -40,12 +46,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-class Zend_Search_Lucene_Storage_FileTest extends PHPUnit_Framework_TestCase
+class FileTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilesystem()
     {
-        $file = new Zend_Search_Lucene_Storage_File_Filesystem(dirname(__FILE__) . '/_files/sample_data'); // open file object for reading
-        $this->assertTrue($file instanceof  Zend_Search_Lucene_Storage_File);
+        $file = new File\Filesystem(dirname(__FILE__) . '/_files/sample_data'); // open file object for reading
+        $this->assertTrue($file instanceof  File\FileInterface);
 
         $fileSize = filesize(dirname(__FILE__) . '/_files/sample_data');
 
@@ -79,7 +85,7 @@ class Zend_Search_Lucene_Storage_FileTest extends PHPUnit_Framework_TestCase
 
 
         $testFName = dirname(__FILE__) . '/_files/sample_data_1';
-        $file = new Zend_Search_Lucene_Storage_File_Filesystem($testFName, 'wb');
+        $file = new File\Filesystem($testFName, 'wb');
         $file->lock(LOCK_EX);
         $file->writeByte(10);
         $file->writeBytes("\xFF\x00\xAA\x11\xBB\x44\x66\x99");
@@ -101,13 +107,13 @@ class Zend_Search_Lucene_Storage_FileTest extends PHPUnit_Framework_TestCase
 
     public function testMemory()
     {
-        $file = new Zend_Search_Lucene_Storage_File_Filesystem(dirname(__FILE__) . '/_files/sample_data');
+        $file = new File\Filesystem(dirname(__FILE__) . '/_files/sample_data');
         $fileData = $file->readBytes($file->size());
         $file->close();
         unset($file);
 
-        $file = new Zend_Search_Lucene_Storage_File_Memory($fileData);
-        $this->assertTrue($file instanceof  Zend_Search_Lucene_Storage_File);
+        $file = new File\Memory($fileData);
+        $this->assertTrue($file instanceof  File\FileInterface);
 
         $fileSize = strlen($fileData);
 

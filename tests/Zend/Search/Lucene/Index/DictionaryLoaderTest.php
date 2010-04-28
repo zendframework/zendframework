@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Search\Lucene\Index;
+
+/**
  * Zend_Search_Lucene_Storage_Directory_Filesystem
  */
 
@@ -45,11 +50,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-class Zend_Search_Lucene_Index_DictionaryLoaderTest extends PHPUnit_Framework_TestCase
+class DictionaryLoaderTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreate()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new \Zend\Search\Lucene\Storage\Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
 
         $stiFile = $directory->getFileObject('_1.sti');
         $stiFileData = $stiFile->readBytes($directory->fileLength('_1.sti'));
@@ -58,13 +63,13 @@ class Zend_Search_Lucene_Index_DictionaryLoaderTest extends PHPUnit_Framework_Te
         list($termDictionary, $termDictionaryInfos) = unserialize($stiFileData);
 
 
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $segmentInfo = new \Zend\Search\Lucene\Index\SegmentInfo($directory, '_1', 2);
         $tiiFile = $segmentInfo->openCompoundFile('.tii');
         $tiiFileData = $tiiFile->readBytes($segmentInfo->compoundFileLength('.tii'));
 
         // Load dictionary index data
         list($loadedTermDictionary, $loadedTermDictionaryInfos) =
-                    Zend_Search_Lucene_Index_DictionaryLoader::load($tiiFileData);
+                    \Zend\Search\Lucene\Index\DictionaryLoader::load($tiiFileData);
 
         $this->assertTrue($termDictionary == $loadedTermDictionary);
         $this->assertTrue($termDictionaryInfos == $loadedTermDictionaryInfos);

@@ -21,14 +21,20 @@
  */
 
 /**
- * @uses       Zend_Search_Lucene_Exception
+ * @namespace
+ */
+namespace Zend\Search\Lucene\Search;
+use Zend\Search\Lucene;
+
+/**
+ * @uses       \Zend\Search\Lucene\Exception
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_Search_QueryToken
+class QueryToken
 {
     /**
      * Token types.
@@ -210,7 +216,7 @@ class Zend_Search_Lucene_Search_QueryToken
                         break;
 
                     default:
-                        throw new Zend_Search_Lucene_Exception('Unrecognized query syntax lexeme: \'' . $tokenText . '\'');
+                        throw new Lucene\Exception('Unrecognized query syntax lexeme: \'' . $tokenText . '\'');
                 }
                 break;
 
@@ -218,7 +224,7 @@ class Zend_Search_Lucene_Search_QueryToken
                 $this->type = self::TT_NUMBER;
 
             default:
-                throw new Zend_Search_Lucene_Exception('Unrecognized lexeme type: \'' . $tokenCategory . '\'');
+                throw new Lucene\Exception('Unrecognized lexeme type: \'' . $tokenCategory . '\'');
         }
     }
 }

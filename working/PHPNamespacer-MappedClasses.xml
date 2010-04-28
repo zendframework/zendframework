@@ -11003,10 +11003,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Analysis/Analyzer/Common.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Analysis_Analyzer_Common</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Analysis/Analyzer/Common/Common.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/Analysis/Analyzer/Common/AbstractCommon.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene\Analysis\Analyzer\Common</newNamespace>
-      <newClassName>Common</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Analysis\Analyzer\Common\Common</newFullyQualifiedName>
+      <newClassName>AbstractCommon</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Analysis\Analyzer\Common\AbstractCommon</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Analysis/Analyzer.php</originalRelativeFilePath>
@@ -11059,10 +11059,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Analysis/TokenFilter.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Analysis_TokenFilter</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Analysis/TokenFilter/TokenFilter.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/Analysis/TokenFilter/TokenFilterInterface.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene\Analysis\TokenFilter</newNamespace>
-      <newClassName>TokenFilter</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Analysis\TokenFilter\TokenFilter</newFullyQualifiedName>
+      <newClassName>TokenFilterInterface</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Analysis\TokenFilter\TokenFilterInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Document/Docx.php</originalRelativeFilePath>
@@ -11083,18 +11083,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Document/Html.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Document_Html</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Document/Html.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/Document/HTML.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene\Document</newNamespace>
-      <newClassName>Html</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Document\Html</newFullyQualifiedName>
+      <newClassName>HTML</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Document\HTML</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Document/OpenXml.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Document_OpenXml</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Document/OpenXml.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/Document/AbstractOpenXML.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene\Document</newNamespace>
-      <newClassName>OpenXml</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Document\OpenXml</newFullyQualifiedName>
+      <newClassName>AbstractOpenXMK</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Document\AbstractOpenXML</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Document/Pptx.php</originalRelativeFilePath>
@@ -11131,18 +11131,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Field.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Field</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Field.php</newRelativeFilePath>
-      <newNamespace>Zend\Search\Lucene</newNamespace>
+      <newRelativeFilePath>Zend/Search/Lucene/Document/Field.php</newRelativeFilePath>
+      <newNamespace>Zend\Search\Lucene\Document</newNamespace>
       <newClassName>Field</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Field</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Document\Field</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/FSM.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_FSM</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/FSM.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/AbstractFSM.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene</newNamespace>
-      <newClassName>FSM</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\FSM</newFullyQualifiedName>
+      <newClassName>AbstractFSM</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\AbstractFSM</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/FSMAction.php</originalRelativeFilePath>
@@ -11211,10 +11211,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Index/SegmentWriter.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Index_SegmentWriter</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Index/SegmentWriter/SegmentWriter.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/Index/SegmentWriter/AbstractSegmentWriter.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene\Index\SegmentWriter</newNamespace>
-      <newClassName>SegmentWriter</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Index\SegmentWriter\SegmentWriter</newFullyQualifiedName>
+      <newClassName>AbstractSegmentWriter</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Index\SegmentWriter\AbstractSegmentWriter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Index/Term.php</originalRelativeFilePath>
@@ -11259,10 +11259,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/LuceneInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/IndexInterface.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene</newNamespace>
-      <newClassName>LuceneInterface</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\LuceneInterface</newFullyQualifiedName>
+      <newClassName>IndexInterface</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\IndexInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/LockManager.php</originalRelativeFilePath>
@@ -11331,10 +11331,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/Query/Empty.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Search_Query_Empty</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Search/Query/Empty.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/Search/Query/EmptyResult.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene\Search\Query</newNamespace>
-      <newClassName>Empty</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Search\Query\Empty</newFullyQualifiedName>
+      <newClassName>EmptyResult</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Search\Query\EmptyResult</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/Query/Fuzzy.php</originalRelativeFilePath>
@@ -11395,10 +11395,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/Query/Preprocessing.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Search_Query_Preprocessing</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Search/Query/Preprocessing/Preprocessing.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/Search/Query/Preprocessing/PreprocessingAbstract.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene\Search\Query\Preprocessing</newNamespace>
-      <newClassName>Preprocessing</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Search\Query\Preprocessing\Preprocessing</newFullyQualifiedName>
+      <newClassName>PreprocessingAbstract</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Search\Query\Preprocessing\PreprocessingAbstract</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/Query/Range.php</originalRelativeFilePath>
@@ -11427,10 +11427,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/Query.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Search_Query</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Search/Query/Query.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/Search/Query/AbstractQuery.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene\Search\Query</newNamespace>
-      <newClassName>Query</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Search\Query\Query</newFullyQualifiedName>
+      <newClassName>AbstractQuery</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Search\Query\AbstractQuery</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/QueryEntry/Phrase.php</originalRelativeFilePath>
@@ -11459,10 +11459,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/QueryEntry.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Search_QueryEntry</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Search/QueryEntry/QueryEntry.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/Search/QueryEntry/AbstractQueryEntry.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene\Search\QueryEntry</newNamespace>
-      <newClassName>QueryEntry</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Search\QueryEntry\QueryEntry</newFullyQualifiedName>
+      <newClassName>AbstractQueryEntry</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Search\QueryEntry\AbstractQueryEntry</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/QueryHit.php</originalRelativeFilePath>
@@ -11515,10 +11515,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/Similarity/Default.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Search_Similarity_Default</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Search/Similarity/Default.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/Search/Similarity/DefaultSimilarity.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene\Search\Similarity</newNamespace>
-      <newClassName>Default</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Search\Similarity\Default</newFullyQualifiedName>
+      <newClassName>DefaultSimilarity</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Search\Similarity\DefaultSimilarity</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/Similarity.php</originalRelativeFilePath>
@@ -11539,10 +11539,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/Weight/Empty.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Search_Weight_Empty</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Search/Weight/Empty.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/Search/Weight/EmptyResultWeight.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene\Search\Weight</newNamespace>
-      <newClassName>Empty</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Search\Weight\Empty</newFullyQualifiedName>
+      <newClassName>EmptyResultWeight</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Search\Weight\EmptyResultWeight</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/Weight/MultiTerm.php</originalRelativeFilePath>
@@ -11571,10 +11571,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/Weight.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Search_Weight</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Search/Weight/Weight.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/Search/Weight/AbstractWeight.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene\Search\Weight</newNamespace>
-      <newClassName>Weight</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Search\Weight\Weight</newFullyQualifiedName>
+      <newClassName>AbstractWeight</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Search\Weight\AbstractWeight</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Storage/Directory/Filesystem.php</originalRelativeFilePath>
@@ -11587,10 +11587,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Storage/Directory.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Storage_Directory</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Storage/Directory/Directory.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/Storage/Directory/DirectoryInterface.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene\Storage\Directory</newNamespace>
-      <newClassName>Directory</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Storage\Directory\Directory</newFullyQualifiedName>
+      <newClassName>DirectoryInterface</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Storage\Directory\DirectoryInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Storage/File/Filesystem.php</originalRelativeFilePath>
@@ -11611,10 +11611,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Storage/File.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Storage_File</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Storage/File/File.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/Storage/File/FileInterface.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene\Storage\File</newNamespace>
-      <newClassName>File</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Storage\File\File</newFullyQualifiedName>
+      <newClassName>FileInterface</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Storage\File\FileInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/TermStreamsPriorityQueue.php</originalRelativeFilePath>

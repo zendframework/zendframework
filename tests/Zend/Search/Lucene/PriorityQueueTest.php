@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Search\Lucene;
+use Zend\Search\Lucene;
+
+/**
  * Zend_Search_Lucene_PriorityQueue
  */
 
@@ -36,18 +42,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-class Zend_Search_Lucene_PriorityQueueTest extends PHPUnit_Framework_TestCase
+class PriorityQueueTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreate()
     {
-        $queue = new Zend_Search_Lucene_PriorityQueue_testClass();
+        $queue = new testPriorityQueueClass();
 
-        $this->assertTrue($queue instanceof Zend_Search_Lucene_PriorityQueue);
+        $this->assertTrue($queue instanceof Lucene\AbstractPriorityQueue);
     }
 
     public function testPut()
     {
-        $queue = new Zend_Search_Lucene_PriorityQueue_testClass();
+        $queue = new testPriorityQueueClass();
 
         $queue->put(1);
         $queue->put(100);
@@ -61,7 +67,7 @@ class Zend_Search_Lucene_PriorityQueueTest extends PHPUnit_Framework_TestCase
 
     public function testPop()
     {
-        $queue = new Zend_Search_Lucene_PriorityQueue_testClass();
+        $queue = new testPriorityQueueClass();
 
         $queue->put( 1);
         $queue->put( 100);
@@ -100,7 +106,7 @@ class Zend_Search_Lucene_PriorityQueueTest extends PHPUnit_Framework_TestCase
 
     public function testClear()
     {
-        $queue = new Zend_Search_Lucene_PriorityQueue_testClass();
+        $queue = new testPriorityQueueClass();
 
         $queue->put( 1);
         $queue->put( 100);
@@ -126,7 +132,7 @@ class Zend_Search_Lucene_PriorityQueueTest extends PHPUnit_Framework_TestCase
 }
 
 
-class Zend_Search_Lucene_PriorityQueue_testClass extends Zend_Search_Lucene_PriorityQueue
+class testPriorityQueueClass extends Lucene\AbstractPriorityQueue
 {
     /**
      * Compare elements

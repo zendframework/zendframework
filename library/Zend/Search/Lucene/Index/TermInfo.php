@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Search\Lucene\Index;
+
+/**
  * A Zend_Search_Lucene_Index_TermInfo represents a record of information stored for a term.
  *
  * @category   Zend
@@ -29,7 +34,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_Index_TermInfo
+class TermInfo
 {
     /**
      * The number of documents which contain the term.

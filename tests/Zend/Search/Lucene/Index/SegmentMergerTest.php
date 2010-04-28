@@ -21,6 +21,13 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Search\Lucene\Index;
+use Zend\Search\Lucene\Storage\Directory;
+use Zend\Search\Lucene\Index;
+
+/**
  * Zend_Search_Lucene_Storage_Directory_Filesystem
  */
 
@@ -45,22 +52,22 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-class Zend_Search_Lucene_Index_SegmentMergerTest extends PHPUnit_Framework_TestCase
+class SegmentMergerTest extends \PHPUnit_Framework_TestCase
 {
     public function testMerge()
     {
-        $segmentsDirectory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
-        $outputDirectory   = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_files');
+        $segmentsDirectory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $outputDirectory   = new Directory\Filesystem(dirname(__FILE__) . '/_files');
         $segmentsList = array('_0', '_1', '_2', '_3', '_4');
 
-        $segmentMerger = new Zend_Search_Lucene_Index_SegmentMerger($outputDirectory, 'mergedSegment');
+        $segmentMerger = new Index\SegmentMerger($outputDirectory, 'mergedSegment');
 
         foreach ($segmentsList as $segmentName) {
-            $segmentMerger->addSource(new Zend_Search_Lucene_Index_SegmentInfo($segmentsDirectory, $segmentName, 2));
+            $segmentMerger->addSource(new Index\SegmentInfo($segmentsDirectory, $segmentName, 2));
         }
 
         $mergedSegment = $segmentMerger->merge();
-        $this->assertTrue($mergedSegment instanceof Zend_Search_Lucene_Index_SegmentInfo);
+        $this->assertTrue($mergedSegment instanceof Index\SegmentInfo);
         unset($mergedSegment);
 
         $mergedFile = $outputDirectory->getFileObject('mergedSegment.cfs');

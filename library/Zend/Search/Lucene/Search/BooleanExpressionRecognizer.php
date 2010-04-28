@@ -21,17 +21,23 @@
  */
 
 /**
- * @uses       Zend_Search_Lucene_Exception
- * @uses       Zend_Search_Lucene_FSM
- * @uses       Zend_Search_Lucene_FSMAction
- * @uses       Zend_Search_Lucene_Search_QueryParser
+ * @namespace
+ */
+namespace Zend\Search\Lucene\Search;
+use Zend\Search\Lucene;
+
+/**
+ * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\AbstractFSM
+ * @uses       \Zend\Search\Lucene\FSMAction
+ * @uses       \Zend\Search\Lucene\Search\QueryParser
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_Search_BooleanExpressionRecognizer extends Zend_Search_Lucene_FSM
+class BooleanExpressionRecognizer extends Lucene\AbstractFSM
 {
     /** State Machine states */
     const ST_START           = 0;
@@ -110,8 +116,8 @@ class Zend_Search_Lucene_Search_BooleanExpressionRecognizer extends Zend_Search_
                                    self::IN_AND_OPERATOR,
                                    self::IN_OR_OPERATOR));
 
-        $emptyOperatorAction    = new Zend_Search_Lucene_FSMAction($this, 'emptyOperatorAction');
-        $emptyNotOperatorAction = new Zend_Search_Lucene_FSMAction($this, 'emptyNotOperatorAction');
+        $emptyOperatorAction    = new Lucene\FSMAction($this, 'emptyOperatorAction');
+        $emptyNotOperatorAction = new Lucene\FSMAction($this, 'emptyNotOperatorAction');
 
         $this->addRules(array( array(self::ST_START,        self::IN_LITERAL,        self::ST_LITERAL),
                                array(self::ST_START,        self::IN_NOT_OPERATOR,   self::ST_NOT_OPERATOR),
@@ -130,9 +136,9 @@ class Zend_Search_Lucene_Search_BooleanExpressionRecognizer extends Zend_Search_
                                array(self::ST_OR_OPERATOR,  self::IN_NOT_OPERATOR,   self::ST_NOT_OPERATOR),
                              ));
 
-        $notOperatorAction     = new Zend_Search_Lucene_FSMAction($this, 'notOperatorAction');
-        $orOperatorAction      = new Zend_Search_Lucene_FSMAction($this, 'orOperatorAction');
-        $literalAction         = new Zend_Search_Lucene_FSMAction($this, 'literalAction');
+        $notOperatorAction     = new Lucene\FSMAction($this, 'notOperatorAction');
+        $orOperatorAction      = new Lucene\FSMAction($this, 'orOperatorAction');
+        $literalAction         = new Lucene\FSMAction($this, 'literalAction');
 
 
         $this->addEntryAction(self::ST_NOT_OPERATOR, $notOperatorAction);
@@ -189,12 +195,12 @@ class Zend_Search_Lucene_Search_BooleanExpressionRecognizer extends Zend_Search_
      *      ) // end of structure
      *
      * @return array
-     * @throws Zend_Search_Lucene_Exception
+     * @throws \Zend\Search\Lucene\Exception
      */
     public function finishExpression()
     {
         if ($this->getState() != self::ST_LITERAL) {
-            throw new Zend_Search_Lucene_Exception('Literal expected.');
+            throw new Lucene\Exception('Literal expected.');
         }
 
         $this->_conjunctions[] = $this->_currentConjunction;
@@ -213,7 +219,7 @@ class Zend_Search_Lucene_Search_BooleanExpressionRecognizer extends Zend_Search_
      */
     public function emptyOperatorAction()
     {
-        if (Zend_Search_Lucene_Search_QueryParser::getDefaultOperator() == Zend_Search_Lucene_Search_QueryParser::B_AND) {
+        if (QueryParser::getDefaultOperator() == QueryParser::B_AND) {
             // Do nothing
         } else {
             $this->orOperatorAction();
@@ -228,7 +234,7 @@ class Zend_Search_Lucene_Search_BooleanExpressionRecognizer extends Zend_Search_
      */
     public function emptyNotOperatorAction()
     {
-        if (Zend_Search_Lucene_Search_QueryParser::getDefaultOperator() == Zend_Search_Lucene_Search_QueryParser::B_AND) {
+        if (QueryParser::getDefaultOperator() == QueryParser::B_AND) {
             // Do nothing
         } else {
             $this->orOperatorAction();

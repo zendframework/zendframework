@@ -21,6 +21,13 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Search\Lucene;
+use Zend\Search\Lucene\Search\Query;
+use Zend\Search\Lucene\Search;
+
+/**
  * Zend_Search_Lucene
  */
 
@@ -36,7 +43,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
+class SearchHighlightTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Wildcard pattern minimum preffix
@@ -54,23 +61,23 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_wildcardMinPrefix = Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength();
-        Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength(0);
+        $this->_wildcardMinPrefix = Query\Wildcard::getMinPrefixLength();
+        Query\Wildcard::setMinPrefixLength(0);
 
-        $this->_defaultPrefixLength = Zend_Search_Lucene_Search_Query_Fuzzy::getDefaultPrefixLength();
-        Zend_Search_Lucene_Search_Query_Fuzzy::setDefaultPrefixLength(0);
+        $this->_defaultPrefixLength = Query\Fuzzy::getDefaultPrefixLength();
+        Query\Fuzzy::setDefaultPrefixLength(0);
     }
 
     public function tearDown()
     {
-        Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength($this->_wildcardMinPrefix);
-        Zend_Search_Lucene_Search_Query_Fuzzy::setDefaultPrefixLength($this->_defaultPrefixLength);
+        Query\Wildcard::setMinPrefixLength($this->_wildcardMinPrefix);
+        Query\Fuzzy::setDefaultPrefixLength($this->_defaultPrefixLength);
     }
 
 
     public function testHtmlFragmentHighlightMatches()
     {
-        $query = Zend_Search_Lucene_Search_QueryParser::parse('title:"The Right Way" AND text:go');
+        $query = Search\QueryParser::parse('title:"The Right Way" AND text:go');
 
         $highlightedHtmlFragment = $query->htmlFragmentHighlightMatches('Text highlighting using Zend_Search_Lucene is the right way to go!');
 
@@ -80,7 +87,7 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 
 //    public function testHtmlFragmentHighlightMatchesCyrillic()
 //    {
-//        $query = Zend_Search_Lucene_Search_QueryParser::parse('title:"некоторый текст" AND text:поехали');
+//        $query = Search\QueryParser::parse('title:"некоторый текст" AND text:поехали');
 //
 //        $highlightedHtmlFragment = $query->htmlFragmentHighlightMatches('Подсвечиваем некоторый текст с использованием Zend_Search_Lucene. Поехали!');
 //
@@ -90,7 +97,7 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 //
 //    public function testHtmlFragmentHighlightMatchesCyrillicWindows()
 //    {
-//        $query = Zend_Search_Lucene_Search_QueryParser::parse('title:"Некоторый текст" AND text:поехали');
+//        $query = Search\QueryParser::parse('title:"Некоторый текст" AND text:поехали');
 //
 //        $highlightedHtmlFragment =
 //                $query->htmlFragmentHighlightMatches(iconv('UTF-8',
@@ -104,7 +111,7 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 
     public function testHighlightPhrasePlusTerm()
     {
-        $query = Zend_Search_Lucene_Search_QueryParser::parse('title:"The Right Way" AND text:go');
+        $query = Search\QueryParser::parse('title:"The Right Way" AND text:go');
 
         $html = '<HTML>'
                 . '<HEAD><TITLE>Page title</TITLE></HEAD>'
@@ -123,7 +130,7 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 
     public function testHighlightMultitermWithProhibitedTerms()
     {
-        $query = Zend_Search_Lucene_Search_QueryParser::parse('+text +highlighting -using -right +go');
+        $query = Search\QueryParser::parse('+text +highlighting -using -right +go');
 
         $html = '<HTML>'
                 . '<HEAD><TITLE>Page title</TITLE></HEAD>'
@@ -142,7 +149,7 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 
     public function testHighlightWildcard1()
     {
-        $query = Zend_Search_Lucene_Search_QueryParser::parse('te?t');
+        $query = Search\QueryParser::parse('te?t');
 
         $html = '<HTML>'
                 . '<HEAD><TITLE>Page title</TITLE></HEAD>'
@@ -161,7 +168,7 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 
     public function testHighlightWildcard2()
     {
-        $query = Zend_Search_Lucene_Search_QueryParser::parse('te?t*');
+        $query = Search\QueryParser::parse('te?t*');
 
         $html = '<HTML>'
                 . '<HEAD><TITLE>Page title</TITLE></HEAD>'
@@ -180,7 +187,7 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 
     public function testHighlightFuzzy1()
     {
-        $query = Zend_Search_Lucene_Search_QueryParser::parse('test~');
+        $query = Search\QueryParser::parse('test~');
 
         $html = '<HTML>'
                 . '<HEAD><TITLE>Page title</TITLE></HEAD>'
@@ -201,7 +208,7 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 
     public function testHighlightFuzzy2()
     {
-        $query = Zend_Search_Lucene_Search_QueryParser::parse('test~0.4');
+        $query = Search\QueryParser::parse('test~0.4');
 
         $html = '<HTML>'
                 . '<HEAD><TITLE>Page title</TITLE></HEAD>'
@@ -225,7 +232,7 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 
     public function testHighlightRangeInclusive()
     {
-        $query = Zend_Search_Lucene_Search_QueryParser::parse('[business TO by]');
+        $query = Search\QueryParser::parse('[business TO by]');
 
         $html = '<HTML>'
                 . '<HEAD><TITLE>Page title</TITLE></HEAD>'
@@ -247,7 +254,7 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 
     public function testHighlightRangeNonInclusive()
     {
-        $query = Zend_Search_Lucene_Search_QueryParser::parse('{business TO by}');
+        $query = Search\QueryParser::parse('{business TO by}');
 
         $html = '<HTML>'
                 . '<HEAD><TITLE>Page title</TITLE></HEAD>'

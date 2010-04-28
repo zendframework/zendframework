@@ -21,6 +21,16 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Search\Lucene;
+use Zend\Search\Lucene\Analysis\Analyzer;
+use Zend\Search\Lucene\Analysis\Analyzer\Common\Text;
+use Zend\Search\Lucene\Analysis\Analyzer\Common\TextNum;
+use Zend\Search\Lucene\Analysis\Analyzer\Common\Utf8;
+use Zend\Search\Lucene\Analysis\Analyzer\Common\Utf8Num;
+
+/**
  * Zend_Search_Lucene
  */
 
@@ -36,28 +46,28 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
+class AnalysisTest extends \PHPUnit_Framework_TestCase
 {
     public function testAnalyzer()
     {
-        $currentAnalyzer = Zend_Search_Lucene_Analysis_Analyzer::getDefault();
-        $this->assertTrue($currentAnalyzer instanceof Zend_Search_Lucene_Analysis_Analyzer);
+        $currentAnalyzer = Analyzer\Analyzer::getDefault();
+        $this->assertTrue($currentAnalyzer instanceof Analyzer\AnalyzerInterface);
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num */
 
-        $newAnalyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num();
-        Zend_Search_Lucene_Analysis_Analyzer::setDefault($newAnalyzer);
-        $this->assertTrue(Zend_Search_Lucene_Analysis_Analyzer::getDefault() === $newAnalyzer);
+        $newAnalyzer = new Utf8Num\Utf8Num();
+        Analyzer\Analyzer::setDefault($newAnalyzer);
+        $this->assertTrue(Analyzer\Analyzer::getDefault() === $newAnalyzer);
 
         // Set analyzer to the default value (used in other tests)
-        Zend_Search_Lucene_Analysis_Analyzer::setDefault($currentAnalyzer);
+        Analyzer\Analyzer::setDefault($currentAnalyzer);
     }
 
     public function testText()
     {
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Text */
 
-        $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Text();
+        $analyzer = new Text\Text();
 
         $tokenList = $analyzer->tokenize('Word1 Word2 anotherWord');
 
@@ -83,7 +93,7 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
     {
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive */
 
-        $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive();
+        $analyzer = new Text\CaseInsensitive();
 
         $tokenList = $analyzer->tokenize('Word1 Word2 anotherWord');
 
@@ -109,7 +119,7 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
     {
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum */
 
-        $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum();
+        $analyzer = new TextNum\TextNum();
 
         $tokenList = $analyzer->tokenize('Word1 Word2 anotherWord');
 
@@ -135,7 +145,7 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
     {
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive */
 
-        $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive();
+        $analyzer = new TextNum\CaseInsensitive();
 
         $tokenList = $analyzer->tokenize('Word1 Word2 anotherWord');
 
@@ -166,7 +176,7 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8 */
 
-        $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8();
+        $analyzer = new Utf8\Utf8();
 
         // UTF-8 text with a cyrillic symbols
         $tokenList = $analyzer->tokenize('Слово1 Слово2 ДругоеСлово', 'UTF-8');
@@ -198,7 +208,7 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num */
 
-        $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num();
+        $analyzer = new Utf8Num\Utf8Num();
 
         // UTF-8 text with a cyrillic symbols
         $tokenList = $analyzer->tokenize('Слово1 Слово2 ДругоеСлово', 'UTF-8');
@@ -234,7 +244,7 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive */
 
-        $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive();
+        $analyzer = new Utf8\CaseInsensitive();
 
         // UTF-8 text with a cyrillic symbols
         $tokenList = $analyzer->tokenize('Слово1 Слово2 ДругоеСлово', 'UTF-8');
@@ -269,7 +279,7 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
         }
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num_CaseInsensitive */
-        $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num_CaseInsensitive();
+        $analyzer = new Utf8Num\CaseInsensitive();
 
         // UTF-8 text with a cyrillic symbols
         $tokenList = $analyzer->tokenize('Слово1 Слово2 ДругоеСлово', 'UTF-8');
@@ -300,7 +310,7 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8 */
 
-        $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8();
+        $analyzer = new Utf8\Utf8();
 
         // UTF-8 text with a cyrillic symbols
         $tokenList = $analyzer->tokenize(iconv('UTF-8', 'Windows-1251', 'Слово1 Слово2 ДругоеСлово'), 'Windows-1251');
@@ -329,8 +339,8 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
 
         /** Zend_Search_Lucene_Analysis_TokenFilter_StopWords */
 
-        $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive();
-        $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_StopWords(array('word', 'and', 'or'));
+        $analyzer = new Text\CaseInsensitive();
+        $stopWordsFilter = new \Zend\Search\Lucene\Analysis\TokenFilter\StopWords(array('word', 'and', 'or'));
 
         $analyzer->addFilter($stopWordsFilter);
 
@@ -350,8 +360,8 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
 
         /** Zend_Search_Lucene_Analysis_TokenFilter_ShortWords */
 
-        $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive();
-        $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_ShortWords(4 /* Minimal length */);
+        $analyzer = new Text\CaseInsensitive();
+        $stopWordsFilter = new \Zend\Search\Lucene\Analysis\TokenFilter\ShortWords(4 /* Minimal length */);
 
         $analyzer->addFilter($stopWordsFilter);
 

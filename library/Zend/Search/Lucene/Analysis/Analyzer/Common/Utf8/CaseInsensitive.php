@@ -21,22 +21,27 @@
  */
 
 /**
- * @uses       Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8
- * @uses       Zend_Search_Lucene_Analysis_TokenFilter_LowerCaseUtf8
+ * @namespace
+ */
+namespace Zend\Search\Lucene\Analysis\Analyzer\Common\Utf8;
+use Zend\Search\Lucene\Analysis\TokenFilter;
+
+/**
+ * @uses       \Zend\Search\Lucene\Analysis\Analyzer\Common\Utf8\Utf8
+ * @uses       \Zend\Search\Lucene\Analysis\TokenFilter\LowerCaseUtf8
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive 
-    extends Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8
+class CaseInsensitive extends Utf8
 {
     public function __construct()
     {
         parent::__construct();
 
-        $this->addFilter(new Zend_Search_Lucene_Analysis_TokenFilter_LowerCaseUtf8());
+        $this->addFilter(new TokenFilter\LowerCaseUtf8());
     }
 }
 

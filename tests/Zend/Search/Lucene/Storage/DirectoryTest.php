@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Search\Lucene\Storage;
+use Zend\Search\Lucene\Storage\Directory;
+
+/**
  * Zend_Search_Lucene_Storage_Directory_Filesystem
  */
 
@@ -36,7 +42,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-class Zend_Search_Lucene_Storage_DirectoryTest extends PHPUnit_Framework_TestCase
+class DirectoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilesystem()
     {
@@ -51,13 +57,13 @@ class Zend_Search_Lucene_Storage_DirectoryTest extends PHPUnit_Framework_TestCas
         }
         closedir($dir);
 
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem($tempPath);
+        $directory = new Directory\Filesystem($tempPath);
 
-        $this->assertTrue($directory instanceof Zend_Search_Lucene_Storage_Directory);
+        $this->assertTrue($directory instanceof Directory\DirectoryInterface);
         $this->assertEquals(count($directory->fileList()), 0);
 
         $fileObject = $directory->createFile('file1');
-        $this->assertTrue($fileObject instanceof Zend_Search_Lucene_Storage_File);
+        $this->assertTrue($fileObject instanceof \Zend\Search\Lucene\Storage\File\FileInterface);
         unset($fileObject);
         $this->assertEquals($directory->fileLength('file1'), 0);
 
@@ -105,8 +111,8 @@ class Zend_Search_Lucene_Storage_DirectoryTest extends PHPUnit_Framework_TestCas
 
     public function testFilesystemSubfoldersAutoCreation()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_tempFiles/_files/dir1/dir2/dir3');
-        $this->assertTrue($directory instanceof Zend_Search_Lucene_Storage_Directory);
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_tempFiles/_files/dir1/dir2/dir3');
+        $this->assertTrue($directory instanceof Directory\DirectoryInterface);
         $directory->close();
 
         rmdir(dirname(__FILE__) . '/_tempFiles/_files/dir1/dir2/dir3');

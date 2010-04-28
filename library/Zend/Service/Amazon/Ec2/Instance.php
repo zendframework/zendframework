@@ -282,9 +282,9 @@ class Zend_Service_Amazon_Ec2_Instance extends Zend_Service_Amazon_Ec2_Abstract
                 $item['amiLaunchIndex'] = $xpath->evaluate('string(ec2:amiLaunchIndex/text())', $is_node);
                 $item['monitoringState'] = $xpath->evaluate('string(ec2:monitoring/ec2:state/text())', $is_node);
 
+                $return['instances'][] = $item;
                 unset($is_node);
             }
-            $return['instances'][] = $item;
             unset($item);
             unset($is);
         }

@@ -240,21 +240,10 @@ class Zend_Oauth_Client extends Zend_Http_Client
         $requestMethod = $this->getRequestMethod();
         $query = null;
         if ($requestScheme == Zend_Oauth::REQUEST_SCHEME_HEADER) {
-            $params = array();
-            if (!empty($this->paramsGet)) {
-                $params = array_merge($params, $this->paramsGet);
-                $query  = $this->getToken()->toQueryString(
-                    $this->getUri(true), $this->_config, $params
-                );
-            }
-            if (!empty($this->paramsPost)) {
-                $params = array_merge($params, $this->paramsPost);
-                $query  = $this->getToken()->toQueryString(
-                    $this->getUri(true), $this->_config, $params
-                );
-            }
             $oauthHeaderValue = $this->getToken()->toHeader(
-                $this->getUri(true), $this->_config, $params
+                $this->getUri(true),
+                $this->_config,
+                $this->_getSignableParametersAsQueryString()
             );
             $this->setHeaders('Authorization', $oauthHeaderValue);
         } elseif ($requestScheme == Zend_Oauth::REQUEST_SCHEME_POSTBODY) {
@@ -267,7 +256,9 @@ class Zend_Oauth_Client extends Zend_Http_Client
                 );
             }
             $raw = $this->getToken()->toQueryString(
-                $this->getUri(true), $this->_config, $this->paramsPost
+                $this->getUri(true),
+                $this->_config,
+                $this->_getSignableParametersAsQueryString()
             );
             $this->setRawData($raw);
             $this->paramsPost = array();
@@ -282,7 +273,12 @@ class Zend_Oauth_Client extends Zend_Http_Client
                         (array_key_exists(1, $kvTuple) ? $kvTuple[1] : NULL);
                 }
             }
-
+            if (!empty($this->paramsPost)) {
+                $params = array_merge($params, $this->paramsPost);
+                $query  = $this->getToken()->toQueryString(
+                    $this->getUri(true), $this->_config, $params
+                );
+            }
             $query = $this->getToken()->toQueryString(
                 $this->getUri(true), $this->_config, $params
             );
@@ -292,6 +288,31 @@ class Zend_Oauth_Client extends Zend_Http_Client
             require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('Invalid request scheme: ' . $requestScheme);
         }
+    }
+
+    /**
+     * Collect all signable parameters into a single array across query string
+     * and POST body. These are returned as a properly formatted single
+     * query string.
+     *
+     * @return string
+     */
+    protected function _getSignableParametersAsQueryString()
+    {
+        $params = array();
+            if (!empty($this->paramsGet)) {
+                $params = array_merge($params, $this->paramsGet);
+                $query  = $this->getToken()->toQueryString(
+                    $this->getUri(true), $this->_config, $params
+                );
+            }
+            if (!empty($this->paramsPost)) {
+                $params = array_merge($params, $this->paramsPost);
+                $query  = $this->getToken()->toQueryString(
+                    $this->getUri(true), $this->_config, $params
+                );
+            }
+            return $params;
     }
 
     /**

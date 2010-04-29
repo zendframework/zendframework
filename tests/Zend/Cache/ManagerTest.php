@@ -218,7 +218,7 @@ class Zend_Cache_ManagerTest extends PHPUnit_Framework_TestCase
         $manager = new Zend_Cache_Manager;
         $tagCacheConfig = $manager->getCacheTemplate('tagCache');
         $tagCacheConfig['backend']['options']['cache_dir'] = $this->getTmpDir();
-        $manager->setCacheTemplate('pagetag', $tagCacheConfig);
+        $manager->setTemplateOptions('pagetag', $tagCacheConfig);
         $tagCache = $manager->getCache('page')->getBackend()->getOption('tag_cache');
         $this->assertTrue($tagCache instanceof Zend_Cache_Core);
     }

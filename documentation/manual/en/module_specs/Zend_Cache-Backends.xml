@@ -573,6 +573,22 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
             involvement of <acronym>PHP</acronym> or Zend Framework at all.
         </para>
 
+        <note>
+                <para>
+                    <classname>Zend_Cache_Frontend_Capture</classname> operates
+                    by registering a callback function to be called
+                    when the output buffering it uses is cleaned. In order for this to operate
+                    correctly, it must be the final output buffer in the request. To guarantee
+                    this, the output buffering used by the Dispatcher MUST be disabled by
+                    calling <classname>Zend_Controller_Front</classname>'s
+                    <methodname>setParam()</methodname> method, for example,
+                    <command>$front->setParam('disableOutputBuffering', true);</command> or adding
+                    "resources.frontcontroller.params.disableOutputBuffering = true"
+                    to your bootstrap configuration file (assumed <acronym>INI</acronym>) if using
+                    <classname>Zend_Application</classname>.
+                </para>
+            </note>
+
         <para>
             The benefits of this cache include a large throughput increase since
             all subsequent requests return the static file and don't need any

@@ -337,7 +337,8 @@ class Zend_Feed_Writer_Renderer_Entry_Atom
             $tidy = new tidy;
             $config = array(
                 'output-xhtml' => true,
-                'show-body-only' => true
+                'show-body-only' => true,
+                'quote-nbsp' => false
             );
             $encoding = str_replace('-', '', $this->getEncoding());
             $tidy->parseString($content, $config, $encoding);

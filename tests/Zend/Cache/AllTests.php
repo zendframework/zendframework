@@ -74,6 +74,7 @@ class Zend_Cache_AllTests
         $suite->addTestSuite('Zend_Cache_ClassFrontendTest');
         $suite->addTestSuite('Zend_Cache_FileFrontendTest');
         $suite->addTestSuite('Zend_Cache_PageFrontendTest');
+        $suite->addTestSuite('Zend_Cache_ManagerTest');
 
         /*
          * Check if SQLite tests are enabled, and if extension and driver are available.

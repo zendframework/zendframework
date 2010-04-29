@@ -133,4 +133,12 @@ class Zend_Crypt_DiffieHellmanTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expectedSharedSecret, $aliceSecretKey);
         $this->assertEquals($expectedSharedSecret, $bobSecretKey);
     }
+
+    public function testGenerateKeysWithUnsetPrivateKey()
+    {
+        $dh = new Zend_Crypt_DiffieHellman(563, 5);
+        $dh->generateKeys();
+        $privateKey = $dh->getPrivateKey();
+        $this->assertNotNull($privateKey);
+    }
 }

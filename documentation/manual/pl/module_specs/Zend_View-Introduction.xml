@@ -14,7 +14,7 @@
 
     <para>
         Zend_View jest bardzo prostym systemem; możesz użyć PHP jako
-        jezyka szablonów lub utworzyć instancje innych systemów szablonów,
+        języka szablonów lub utworzyć instancje innych systemów szablonów,
         a następnie manipulować nimi wewnątrz skryptu widoku.
     </para>
 
@@ -75,9 +75,9 @@ echo $view->render('booklist.php');
             Teraz potrzebujemy skryptu widoku "booklist.php". Jest
             to skrypt PHP jak każdy inny, z jednym wyjątkiem: jest on wykonywany
             w przestrzeni instancji Zend_View, co oznacza, że odnosi się on do
-            właściwości i metod klasy Zend_View za pomocą $this. (Zmienne
-            przekazane do tej instancji przez kontroler sa publicznymi
-            właściwościami instancji Zend_View.) Więc bardzo prosty skrypt
+            właściwości i metod klasy Zend_View za pomocą $this. Zmienne
+            przekazane do tej instancji przez kontroler są publicznymi
+            właściwościami instancji Zend_View) więc bardzo prosty skrypt
             mógłby wyglądać tak:
         </para>
 
@@ -166,7 +166,7 @@ base/path/
 
             <listitem><para>
                 <code>filter:</code> określa filtr, który ma być użyty po
-                zrenderowaniu skryptu widoku. Może być ustawiony za pomocą
+                renderowaniu skryptu widoku. Może być ustawiony za pomocą
                 metody <code>setFilter()</code>, metody <code>addFilter()</code>,
                 lub za pomocą opcji <code>filter</code> konstruktora.
             </para></listitem>
@@ -247,7 +247,7 @@ $view->setUseStreamWrapper(true);
 
                 <para>
                     Rejestruje to klasę <code>Zend_View_Stream</code> jako klasę
-                    obsługującą strumień daych dla skryptów widoków i umożliwia
+                    obsługującą strumień danych dla skryptów widoków i umożliwia
                     dalsze działanie skryptów widoków, tak jakby obsługa krótkich
                     znaczników była aktywna.
                 </para>

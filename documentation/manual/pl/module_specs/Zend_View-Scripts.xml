@@ -13,7 +13,7 @@
     </para>
 
     <para>
-        Zmienne przypisane do widoku przez kontroler odnoszszą się do właściwości
+        Zmienne przypisane do widoku przez kontroler odnoszą się do właściwości
         tej instancji. Na przykład, jeśli kontroler przypisał zmienną 'cos', w
         skrypcie widoku możesz odwołać się do niej za pomocą $this->cos.
         (To pozwala Ci na śledzenie zmiennych które zostały przypisane do skryptu
@@ -82,8 +82,8 @@ echo $this->escape($this->variable);
         <para>
             Domyślnie metoda escape() używa funkcji PHP htmlspecialchars() do
             filtrowania danych wyjściowych. Jakkolwiek, zależenie od Twojego
-            środowiska możesz chciec filtrować dane wyjściowe w inny sposób.
-            Użyj metody setEscape() na poziomie kontrolera by przekazać istancji
+            środowiska możesz chcieć filtrować dane wyjściowe w inny sposób.
+            Użyj metody setEscape() na poziomie kontrolera by przekazać instancji
             Zend_View informację o tym, jakiej metody filtrowania ma używać.
         </para>
 
@@ -254,7 +254,7 @@ public function render($name);
             <para>
                 Używając tego interfejsu, relatywnie proste staje się podpięcie
                 zewnętrznego systemu szablonów jako klasy kompatybilnej z
-                Zend_View. Przykładowo, poniższy przyklad to podpięcie systemu Smarty:
+                Zend_View. Przykładowo, poniższy przykład to podpięcie systemu Smarty:
             </para>
 
             <programlisting role="php"><![CDATA[

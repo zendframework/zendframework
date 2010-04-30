@@ -8,7 +8,7 @@
     <para>
         W skryptach widoków często potrzebne jest przeprowadzanie złożonych
         funkcji: na przykład formatowanie daty, generowanie elementów
-        formularzy, czy wyświetlanie odnośnikow akcji. Możesz użyć klas
+        formularzy, czy wyświetlanie odnośników akcji. Możesz użyć klas
         helperów w tym celu.
     </para>
 
@@ -61,7 +61,7 @@
         <para>
             <code>Zend_View</code> posiada wbudowany zbiór klas helperów, z
             których większość odnosi się do generowania formularzy, a każda z
-            nich autmatycznie filtruje dane wyjściowe. Dodatkowo dostępne są
+            nich automatycznie filtruje dane wyjściowe. Dodatkowo dostępne są
             klasy helperów służące do tworzenia adresów URL na podstawie tras,
             do tworzenia list HTML oraz do deklarowania zmiennych. Obecnie
             dostępne klasy helperów to:
@@ -91,10 +91,10 @@
             <listitem><para>
                 <code>form($name, $attribs, $content):</code> Generuje formularz.
                 Wszystkie atrybuty z tablicy <code>$attribs</code> będą
-                zabezpieczone i zrenderowane jako atrybuty XHTML znacznika form.
+                zabezpieczone i renderowane jako atrybuty XHTML znacznika form.
                 Jeśli przekazana jest zmienna <code>$content</code> i ma inną
                 wartość niż false, to zawartość tej zmiennej zostanie
-                zrenderowana wraz ze znacznikiem otwierającym i zamykającym
+                renderowana wraz ze znacznikiem otwierającym i zamykającym
                 formularz; jeśli zmienna <code>$content</code> ma wartość false
                 (domyślnie), zostanie zrenderowany tylko znacznik otwierający.
             </para></listitem>
@@ -132,7 +132,7 @@
                     Jeśli zmienna $options zostanie przekazana, a wartość
                     $value jest równa wartości określonej dla pola zaznaczonego,
                     to element zostanie zaznaczony. Możesz także określić czy
-                    element ma być zaznaczony przekazująć logiczną wartość dla
+                    element ma być zaznaczony przekazując logiczną wartość dla
                     atrybutu 'checked'.
                 </para>
 
@@ -200,7 +200,7 @@ echo $this->formCheckbox('foo',
                     nieuporządkowaną zawierająca informacje o błędach. Zmienna
                     <code>$errors</code> powinna być łańcuchem znaków lub
                     tablicą łańcuchów znaków; Zmienna <code>$options</code>
-                    powinna zawiierać atrybuty jakie chcesz umieścić w znaczniku
+                    powinna zawierać atrybuty jakie chcesz umieścić w znaczniku
                     otwierającym listę.
                 </para>
 
@@ -284,8 +284,8 @@ echo $this->formCheckbox('foo',
                 <code>formSelect($name, $value, $attribs, $options):</code>
                 Tworzy blok &lt;select&gt;...&lt;/select&gt;, z elementami
                 &lt;option&gt; po jednym dla każdego elementu tablicy $options.
-                W tablicy $options klucz jest wartościa elementu, a wartość
-                jest etykietą. Zmienna $value określa wartośc elementu (lub
+                W tablicy $options klucz jest wartością elementu, a wartość
+                jest etykietą. Zmienna $value określa wartość elementu (lub
                 elementów), który ma być początkowo zaznaczony.
             </para></listitem>
 
@@ -443,7 +443,7 @@ $view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
         </programlisting>
 
         <para>
-            Oczywiście możesz dodawać ścieżki na stos używająć metody
+            Oczywiście możesz dodawać ścieżki na stos używając metody
             <code>addHelperPath()</code>. Gdy dodajesz ścieżki na stos,
             <code>Zend_View</code> będzie szukać klasy helpera począwszy od
             ostatnio dodanej ścieżki. To pozwala na dodanie (lub nawet
@@ -501,7 +501,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
                 Nazwa klasy musi przynajmniej składać się z nazwy helpera,
                 używając formy MixedCaps. Np. jeśli tworzysz helper nazwany
                 "twojHelper", nazwą klasy musi być przynajmniej "TwojHelper".
-                Możesz, a nawet powinieneś dać nazwie klasy przedostek i jest
+                Możesz, a nawet powinieneś dać nazwie klasy przedrostek i jest
                 zalecane aby znalazła się w nim część 'View_Helper' aby cała
                 nazwa klasy wyglądała mniej więcej tak: "My_View_Helper_TwojHelper".
                 (Będziesz musiał przekazać ten przedrostek, ze końcowym znakiem
@@ -583,7 +583,7 @@ I have seen 'The Jerk' 3 time(s).
         <para>
             Czasem możesz potrzebować uzyskać dostęp do obiektu
             <code>Zend_View</code> -- na przykład, jeśli potrzebujesz użyć
-            zarejestrowanego kodowania, lub chcesz zrenderować inny skrypt
+            zarejestrowanego kodowania, lub chcesz renderować inny skrypt
             widoku jako część klasy helpera. Aby uzyskać dostęp do obiektu
             widoku, klasa helpera powinna posiadać metodę
             <code>setView($view)</code>, tak jak poniżej:

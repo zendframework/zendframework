@@ -27,19 +27,7 @@
         </note>
     </sect2>
 
-    <sect2 id="zend.validate.set.date">
-        <title>Date</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if <varname>$value</varname> is a valid date of the
-            format 'YYYY-MM-DD'. If the optional <property>locale</property> option is set then the
-            date will be validated according to the set locale. And if the optional
-            <property>format</property> option is set this format is used for the validation. for
-            details about the optional parameters see <link
-                linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link>.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Date.xml" />
     <xi:include href="Zend_Validate-Db.xml" />
     <xi:include href="Zend_Validate-Digits.xml" />
     <xi:include href="Zend_Validate-EmailAddress.xml" />

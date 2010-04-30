@@ -234,8 +234,12 @@ class Zend_Feed_Writer_Renderer_Entry_Atom
         }
         $enclosure = $this->_dom->createElement('link');
         $enclosure->setAttribute('rel', 'enclosure');
-        $enclosure->setAttribute('type', $data['type']);
-        $enclosure->setAttribute('length', $data['length']);
+        if (isset($data['type'])) {
+            $enclosure->setAttribute('type', $data['type']);
+        }
+        if (isset($data['length'])) {
+            $enclosure->setAttribute('length', $data['length']);
+        }
         $enclosure->setAttribute('href', $data['uri']);
         $root->appendChild($enclosure);
     }

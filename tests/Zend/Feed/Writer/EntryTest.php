@@ -188,62 +188,12 @@ class Zend_Feed_Writer_EntryTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException Zend_Feed_Exception
      */
-    public function testAddsEnclosureThrowsExceptionOnMissingType()
-    {
-        $entry = new Zend_Feed_Writer_Entry;
-        $entry->setEnclosure(array(
-            'uri' => 'http://example.com/audio.mp3',
-            'length' => '1337'
-        ));
-    }
-    
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testAddsEnclosureThrowsExceptionOnMissingUri()
     {
         $entry = new Zend_Feed_Writer_Entry;
         $entry->setEnclosure(array(
             'type' => 'audio/mpeg',
             'length' => '1337'
-        ));
-    }
-    
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
-    public function testAddsEnclosureThrowsExceptionOnMissingLength()
-    {
-        $entry = new Zend_Feed_Writer_Entry;
-        $entry->setEnclosure(array(
-            'type' => 'audio/mpeg',
-            'uri' => 'http://example.com/audio.mp3'
-        ));
-    }
-    
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
-    public function testAddsEnclosureThrowsExceptionOnNonNumericLength()
-    {
-        $entry = new Zend_Feed_Writer_Entry;
-        $entry->setEnclosure(array(
-            'type' => 'audio/mpeg',
-            'uri' => 'http://example.com/audio.mp3',
-            'length' => 'abc'
-        ));
-    }
-    
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
-    public function testAddsEnclosureThrowsExceptionOnNegativeLength()
-    {
-        $entry = new Zend_Feed_Writer_Entry;
-        $entry->setEnclosure(array(
-            'type' => 'audio/mpeg',
-            'uri' => 'http://example.com/audio.mp3',
-            'length' => -23
         ));
     }
     

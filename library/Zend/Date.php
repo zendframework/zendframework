@@ -4742,7 +4742,8 @@ class Zend_Date extends Zend_Date_DateObject
             return false;
         }
 
-        if (($format !== null) and (Zend_Locale::isLocale($format, null, false))) {
+        if (($format !== null) && ($format != 'ee') && ($format != 'ss') && ($format != 'GG') && ($format != 'MM') && ($format != 'EE') && ($format != 'TT')
+            && (Zend_Locale::isLocale($format, null, false))) {
             $locale = $format;
             $format = null;
         }
@@ -4901,19 +4902,19 @@ class Zend_Date extends Zend_Date_DateObject
                 return Zend_Locale_Data::getContent($locale, 'date', array('gregorian', 'short'));
                 break;
             case self::TIMES :
-                return Zend_Locale_Data::getContent($locale, 'date');
+                return Zend_Locale_Data::getContent($locale, 'time');
                 break;
             case self::TIME_FULL :
                 return Zend_Locale_Data::getContent($locale, 'time', array('gregorian', 'full'));
                 break;
             case self::TIME_LONG :
-                return Zend_Locale_Data::getContent($locale, 'date', array('gregorian', 'long'));
+                return Zend_Locale_Data::getContent($locale, 'time', array('gregorian', 'long'));
                 break;
             case self::TIME_MEDIUM :
-                return Zend_Locale_Data::getContent($locale, 'date', array('gregorian', 'medium'));
+                return Zend_Locale_Data::getContent($locale, 'time', array('gregorian', 'medium'));
                 break;
             case self::TIME_SHORT :
-                return Zend_Locale_Data::getContent($locale, 'date', array('gregorian', 'short'));
+                return Zend_Locale_Data::getContent($locale, 'time', array('gregorian', 'short'));
                 break;
             case self::DATETIME :
                 return Zend_Locale_Data::getContent($locale, 'datetime');

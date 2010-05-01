@@ -187,6 +187,6 @@ class Zend_Application_Resource_NavigationTest extends PHPUnit_Framework_TestCas
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_LocaleTest::main') {
-    Zend_Application_Resource_LocaleTest::main();
+if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_NavigationTest::main') {
+    Zend_Application_Resource_NavigationTest::main();
 }

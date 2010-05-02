@@ -1324,7 +1324,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                     }
                 }
                 $merge = $this->_attachToArray($element->getValue(), $key);
-                $values = array_merge_recursive($values, $merge);
+                $values = $this->_array_replace_recursive($values, $merge);
             }
         }
         foreach ($this->getSubForms() as $key => $subForm) {
@@ -1335,7 +1335,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                 $merge = $this->_attachToArray($subForm->getValues(true),
                                                $subForm->getElementsBelongTo());
             }
-            $values = array_merge_recursive($values, $merge);
+            $values = $this->_array_replace_recursive($values, $merge);
         }
 
         if (!$suppressArrayNotation && $this->isArray()) {
@@ -1378,7 +1378,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                         $key = $belongsTo . '[' . $key . ']';
                     }
                     $merge = $this->_attachToArray($element->getValue(), $key);
-                    $values = array_merge_recursive($values, $merge);
+                    $values = $this->_array_replace_recursive($values, $merge);
                 }
                 $data = $this->_dissolveArrayUnsetKey($data, $belongsTo, $key);
             }
@@ -1396,7 +1396,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                     $merge = $this->_attachToArray($tmp, $form->getElementsBelongTo());
                 }
             }
-            $values = array_merge_recursive($values, $merge);
+            $values = $this->_array_replace_recursive($values, $merge);
         }
         if (!$suppressArrayNotation && $this->isArray() && !empty($values)) {
             $values = $this->_attachToArray($values, $this->getElementsBelongTo());
@@ -2101,6 +2101,32 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     }
 
     /**
+     * This is a helper function until php 5.3 is widespreaded 
+     * 
+     * @param array $into
+     * @access protected
+     * @return void
+     */
+    protected function _array_replace_recursive(array $into)
+    {
+        $fromArrays = array_slice(func_get_args(),1);
+
+        foreach ($fromArrays as $from) {
+            foreach ($from as $key => $value) {
+                if (is_array($value)) {
+                    if (!isset($into[$key])) {
+                        $into[$key] = array();
+                    }
+                    $into[$key] = $this->_array_replace_recursive($into[$key], $from[$key]);
+                } else {
+                    $into[$key] = $value;
+                }
+            }
+        }
+        return $into;
+    }
+
+    /**
      * Validate the form
      *
      * @param  array $data
@@ -2379,7 +2405,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                 $merge = $this->_attachToArray($subForm->getErrors(null, true),
                                                $subForm->getElementsBelongTo());
             }
-            $errors = array_merge_recursive($errors, $merge);
+            $errors = $this->_array_replace_recursive($errors, $merge);
         }
 
         if (!$suppressArrayNotation && $this->isArray()) {
@@ -2437,7 +2463,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                     $merge = $this->_attachToArray($merge,
                                                    $subForm->getElementsBelongTo());
                 }
-                $messages = array_merge_recursive($messages, $merge);
+                $messages = $this->_array_replace_recursive($messages, $merge);
             }
         }
 

@@ -1791,6 +1791,38 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->assertSame($data['partial'], $this->form->getValidValues($data['invalid']));
     }
 
+    public function testZF9788_NumericArrayIndex()
+    {
+        $s = 2;
+        $e = 4;
+        $this->form->setName('f')
+                   ->setIsArray(true)
+                   ->addElement('text', (string)$e)
+                   ->$e->setRequired(true);
+        $this->form->addSubForm(new Zend_Form_SubForm(), $s)
+                   ->$s->addElement('text', (string)$e)
+                   ->$e->setRequired(true);
+
+        $valid = array('f' => array($e => 1,
+                                    $s => array($e => 1)));
+
+        $this->form->populate($valid);
+
+        $this->assertEquals($valid, $this->form->getValues());
+
+        $vv = $this->form->getValidValues(array('f' => array($e => 1,
+                                                             $s => array($e => 1))));
+        $this->assertEquals($valid, $vv);
+
+        $this->form->isValid(array());
+
+        $err = $this->form->getErrors();
+        $msg = $this->form->getMessages(); 
+        
+        $this->assertTrue(is_array($err['f'][$e]) && is_array($err['f'][$s][$e]));
+        $this->assertTrue(is_array($msg['f'][$e]) && is_array($msg['f'][$s][$e]));
+    }
+
     // Display groups
 
     public function testCanAddAndRetrieveSingleDisplayGroups()

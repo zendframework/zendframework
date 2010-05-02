@@ -18,6 +18,13 @@
         <itemizedlist>
             <listitem>
                 <para>
+                    <emphasis><property>strict</property></emphasis>: Defines if the validation
+                    should be done strict. The default value is <constant>TRUE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
                     <emphasis><property>token</property></emphasis>: Sets the token with which the
                     input will be validated against.
                 </para>
@@ -76,16 +83,67 @@ if ($valid->isValid($input)) {
             <para>
                 You should be aware that also the type of a variable is used for validation.
                 This means that the string <emphasis>'3'</emphasis> is not identical with the
-                integer <emphasis>3</emphasis>.
-            </para>
-
-            <para>
-                This is also the case for Form Elements. They are objects or arrays. So you can't
-                simply compare a Textfield which contains a password with an textual password
-                from another source. The Element itself is given as array which also contains
-                additional informations.
+                integer <emphasis>3</emphasis>. When you want such a non strict validation you
+                must set the <property>strict</property> option.
             </para>
         </note>
+    </sect3>
+
+    <sect3 id="zend.validate.set.identical.formelements">
+        <title>Form elements</title>
+
+        <para>
+            <classname>Zend_Validate_Identical</classname> supports also the comparison of form
+            elements. This can be done by using the element's name as <property>token</property>.
+            See the following example:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$form->addElement('password', 'elementOne');
+$form->addElement('password', 'elementTwo', array(
+    'validators' => array(
+        array('identical', false, array('token' => 'elementOne'))
+    )
+));
+]]></programlisting>
+
+        <para>
+            By using the elements name from the first element as <property>token</property> for the
+            second element, the validator validates if the second element is equal with the first
+            element. In the case your user does not enter two identical values, you will get an
+            validation error.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.validate.set.identical.strict">
+        <title>Strict validation</title>
+
+        <para>
+            As mentioned before <classname>Zend_Validate_Identical</classname> validates tokens
+            strict. You can change this behaviour by using the <property>strict</property> option.
+            The default value for this property is <constant>TRUE</constant>.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid = new Zend_Validate_Identical(array('token' => 123, 'strict' => FALSE));
+$input = '123';
+if ($valid->isValid($input)) {
+    // input appears to be valid
+} else {
+    // input is invalid
+}
+]]></programlisting>
+
+        <para>
+            The difference to the previous example is that the validation returns in this case
+            <constant>TRUE</constant>, even if you compare a integer with string value as long
+            as the content is identical but not the type.
+        </para>
+
+        <para>
+            For convinience you can also use <methodname>setStrict()</methodname> and
+            <methodname>getStrict()</methodname>.
+        </para>
     </sect3>
 
     <sect3 id="zend.validate.set.identical.configuration">

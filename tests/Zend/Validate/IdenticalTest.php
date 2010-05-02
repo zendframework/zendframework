@@ -145,6 +145,15 @@ class Zend_Validate_IdenticalTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid(123));
         $this->assertFalse($validator->isValid(array('token' => 123)));
     }
+
+    public function testValidatingNonStrictToken()
+    {
+        $validator = new Zend_Validate_Identical(array('token' => 123, 'strict' => false));
+        $this->assertTrue($validator->isValid('123'));
+
+        $validator->setStrict(true);
+        $this->assertFalse($validator->isValid(array('token' => '123')));
+    }
 }
 
 // Call Zend_Validate_IdenticalTest::main() if this source file is executed directly.

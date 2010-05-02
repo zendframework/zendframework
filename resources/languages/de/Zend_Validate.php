@@ -208,7 +208,7 @@ return array(
     "'%value%' has failed the IBAN check" => "Die IBAN Prüfung ist für '%value%' fehlgeschlagen",
 
     // Zend_Validate_Identical
-    "The token '%token%' does not match the given token '%value%'" => "Der Token '%token%' stimmt nicht mit dem angegebenen Token '%value%' überein",
+    "The two given tokens do not match" => "Die zwei angegebenen Token stimmen nicht überein",
     "No token was provided to match against" => "Es wurde kein Token angegeben gegen den geprüft werden kann",
 
     // Zend_Validate_InArray

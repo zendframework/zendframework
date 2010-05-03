@@ -53,8 +53,10 @@ class FilterChain implements Filter
      */
     public function filter($value, $argv = null)
     {
-        $argv = func_get_args();
-        array_shift($argv);
+        if (!is_array($argv)) {
+            $argv = func_get_args();
+            $argv = array_slice($argv, 1);
+        }
 
         foreach ($this->_handlers as $handle) {
             $callbackArgs = $argv;

@@ -157,12 +157,40 @@ class Zend_UriTest extends PHPUnit_Framework_TestCase
      *
      * @param string $uri
      */
-    protected function _testValidUri($uri)
+    protected function _testValidUri($uri, $className = null)
     {
-        $uri = Zend_Uri::factory($uri);
+        $uri = Zend_Uri::factory($uri, $className);
         $this->assertTrue($uri instanceof Zend_Uri, 'Zend_Uri object not returned.');
+        return $uri;
     }
 
+    public function testFactoryWithUnExistingClassThrowException()
+    {
+        $this->setExpectedException('Zend_Uri_Exception', '"This_Is_An_Unknown_Class" not found');
+        Zend_Uri::factory('http://example.net', 'This_Is_An_Unknown_Class');
+    }
+
+    public function testFactoryWithExistingClassButNotImplementingZendUriThrowException()
+    {
+        $this->setExpectedException('Zend_Uri_Exception', '"Fake_Zend_Uri" is not an instance of Zend_Uri');
+        Zend_Uri::factory('http://example.net', 'Fake_Zend_Uri');
+    }
+
+    public function testFactoryWithExistingClassReturnObject()
+    {
+        $uri = $this->_testValidUri('http://example.net', 'Zend_Uri_Mock');
+        $this->assertTrue($uri instanceof Zend_Uri_Mock, 'Zend_Uri_Mock object not returned.');
+    }
+
+}
+class Zend_Uri_Mock extends Zend_Uri
+{
+    protected function __construct($scheme, $schemeSpecific = '') { }
+    public function getUri() { }
+    public function valid() { }
+}
+class Fake_Zend_Uri
+{
 }
 
 // Call Zend_UriTest::main() if this source file is executed directly.

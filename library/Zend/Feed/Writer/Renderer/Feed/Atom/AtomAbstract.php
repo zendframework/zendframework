@@ -336,8 +336,8 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
             return;
         }
         $img = $dom->createElement('logo');
-        $root->appendChild($image);
-        $text = $img->createTextNode($image['uri']);
+        $root->appendChild($img);
+        $text = $dom->createTextNode($image['uri']);
         $img->appendChild($text);
     }
     

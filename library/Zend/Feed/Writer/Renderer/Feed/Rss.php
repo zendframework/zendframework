@@ -355,13 +355,13 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
         $img = $dom->createElement('image');
         $root->appendChild($image);
         $url = $dom->createElement('url');
-        $text = $url->createTextNode($image['uri']);
+        $text = $dom->createTextNode($image['uri']);
         $url->appendChild($text);
         $title = $dom->createElement('title');
-        $text = $title->createTextNode($image['title']);
+        $text = $dom->createTextNode($image['title']);
         $title->appendChild($text);
         $link = $dom->createElement('link');
-        $text = $link->createTextNode($image['link']);
+        $text = $dom->createTextNode($image['link']);
         $link->appendChild($text);
         $img->appendChild($url);
         $img->appendChild($title);
@@ -380,7 +380,7 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
                 }
             }
             $height = $dom->createElement('height');
-            $text = $height->createTextNode($image['height']);
+            $text = $dom->createTextNode($image['height']);
             $height->appendChild($text);
             $img->appendChild($height);
         }
@@ -398,7 +398,7 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
                 }
             }
             $width = $dom->createElement('width');
-            $text = $width->createTextNode($image['width']);
+            $text = $dom->createTextNode($image['width']);
             $width->appendChild($text);
             $img->appendChild($width);
         }
@@ -416,7 +416,7 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
                 }
             }
             $desc = $dom->createElement('description');
-            $text = $desc->createTextNode($image['description']);
+            $text = $dom->createTextNode($image['description']);
             $desc->appendChild($text);
             $img->appendChild($desc);
         }

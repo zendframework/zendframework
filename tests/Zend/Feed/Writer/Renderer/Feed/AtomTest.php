@@ -403,4 +403,18 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, (array) $feed->getHubs());
     }
 
+    public function testImageCanBeSet()
+    {
+        $this->_validWriter->setImage(
+            array('uri'=>'http://www.example.com/logo.gif')
+        );
+        $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
+        $atomFeed->render();
+        $feed = Zend_Feed_Reader::importString($atomFeed->saveXml());
+        $expected = array(
+            'uri' => 'http://www.example.com/logo.gif'
+        );
+        $this->assertEquals($expected, $feed->getImage());
+    }
+
 }

@@ -436,21 +436,21 @@ class Zend_Feed_Writer_FeedTest extends PHPUnit_Framework_TestCase
     public function testSetsGeneratorName()
     {
         $writer = new Zend_Feed_Writer_Feed;
-        $writer->setGenerator('ZFW');
+        $writer->setGenerator(array('name'=>'ZFW'));
         $this->assertEquals(array('name'=>'ZFW'), $writer->getGenerator());
     }
 
     public function testSetsGeneratorVersion()
     {
         $writer = new Zend_Feed_Writer_Feed;
-        $writer->setGenerator('ZFW', '1.0');
+        $writer->setGenerator(array('name'=>'ZFW', 'version' => '1.0'));
         $this->assertEquals(array('name'=>'ZFW', 'version' => '1.0'), $writer->getGenerator());
     }
 
     public function testSetsGeneratorUri()
     {
         $writer = new Zend_Feed_Writer_Feed;
-        $writer->setGenerator('ZFW', null, 'http://www.example.com');
+        $writer->setGenerator(array('name'=>'ZFW', 'uri'=>'http://www.example.com'));
         $this->assertEquals(array('name'=>'ZFW', 'uri' => 'http://www.example.com'), $writer->getGenerator());
     }
 
@@ -458,7 +458,7 @@ class Zend_Feed_Writer_FeedTest extends PHPUnit_Framework_TestCase
     {
         $writer = new Zend_Feed_Writer_Feed;
         try {
-            $writer->setGenerator('');
+            $writer->setGenerator(array());
             $this->fail();
         } catch (Zend_Feed_Exception $e) {
         }
@@ -468,13 +468,82 @@ class Zend_Feed_Writer_FeedTest extends PHPUnit_Framework_TestCase
     {
         $writer = new Zend_Feed_Writer_Feed;
         try {
-            $writer->addAuthor('ZFW', '');
-            $this->fail();
+            $writer->setGenerator(array('name'=>'ZFW', 'version'=>''));
+            $this->fail('Should have failed since version is empty');
         } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testSetsGeneratorThrowsExceptionOnInvalidUri()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        try {
+            $writer->setGenerator(array('name'=>'ZFW','uri'=>'notauri'));
+            $this->fail();
+        } catch (Zend_Feed_Exception $e) {
+        }
+    }
+
+    /**
+     * @deprecated
+     */
+    public function testSetsGeneratorName_Deprecated()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setGenerator('ZFW');
+        $this->assertEquals(array('name'=>'ZFW'), $writer->getGenerator());
+    }
+
+    /**
+     * @deprecated
+     */
+    public function testSetsGeneratorVersion_Deprecated()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setGenerator('ZFW', '1.0');
+        $this->assertEquals(array('name'=>'ZFW', 'version' => '1.0'), $writer->getGenerator());
+    }
+
+    /**
+     * @deprecated
+     */
+    public function testSetsGeneratorUri_Deprecated()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setGenerator('ZFW', null, 'http://www.example.com');
+        $this->assertEquals(array('name'=>'ZFW', 'uri' => 'http://www.example.com'), $writer->getGenerator());
+    }
+
+    /**
+     * @deprecated
+     */
+    public function testSetsGeneratorThrowsExceptionOnInvalidName_Deprecated()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        try {
+            $writer->setGenerator('');
+            $this->fail();
+        } catch (Zend_Feed_Exception $e) {
+        }
+    }
+
+    /**
+     * @deprecated
+     */
+    public function testSetsGeneratorThrowsExceptionOnInvalidVersion_Deprecated()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        try {
+            $writer->setGenerator('ZFW', '');
+            $this->fail();
+        } catch (Zend_Feed_Exception $e) {
+        }
+    }
+
+    /**
+     * @deprecated
+     */
+    public function testSetsGeneratorThrowsExceptionOnInvalidUri_Deprecated()
     {
         $writer = new Zend_Feed_Writer_Feed;
         try {

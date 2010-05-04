@@ -226,24 +226,47 @@ class Zend_Feed_Writer_Feed_FeedAbstract
      */
     public function setGenerator($name, $version = null, $uri = null)
     {
-        if (empty($name) || !is_string($name)) {
-            require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception('Invalid parameter: "name" must be a non-empty string');
-        }
-        $generator = array('name' => $name);
-        if (isset($version)) {
-            if (empty($version) || !is_string($version)) {
+        if (is_array($name)) {
+            $data = $name;
+            if (empty($data['name']) || !is_string($data['name'])) {
                 require_once 'Zend/Feed/Exception.php';
-                throw new Zend_Feed_Exception('Invalid parameter: "version" must be a non-empty string');
+                throw new Zend_Feed_Exception('Invalid parameter: "name" must be a non-empty string');
             }
-            $generator['version'] = $version;
-        }
-        if (isset($uri)) {
-            if (empty($uri) || !is_string($uri) || !Zend_Uri::check($uri)) {
+            $generator = array('name' => $data['name']);
+            if (isset($data['version'])) {
+                if (empty($data['version']) || !is_string($data['version'])) {
+                    require_once 'Zend/Feed/Exception.php';
+                    throw new Zend_Feed_Exception('Invalid parameter: "version" must be a non-empty string');
+                }
+                $generator['version'] = $data['version'];
+            }
+            if (isset($data['uri'])) {
+                if (empty($data['uri']) || !is_string($data['uri']) || !Zend_Uri::check($data['uri'])) {
+                    require_once 'Zend/Feed/Exception.php';
+                    throw new Zend_Feed_Exception('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
+                }
+                $generator['uri'] = $data['uri'];
+            }
+        } else {
+            if (empty($name) || !is_string($name)) {
                 require_once 'Zend/Feed/Exception.php';
-                throw new Zend_Feed_Exception('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
+                throw new Zend_Feed_Exception('Invalid parameter: "name" must be a non-empty string');
             }
-            $generator['uri'] = $uri;
+            $generator = array('name' => $name);
+            if (isset($version)) {
+                if (empty($version) || !is_string($version)) {
+                    require_once 'Zend/Feed/Exception.php';
+                    throw new Zend_Feed_Exception('Invalid parameter: "version" must be a non-empty string');
+                }
+                $generator['version'] = $version;
+            }
+            if (isset($uri)) {
+                if (empty($uri) || !is_string($uri) || !Zend_Uri::check($uri)) {
+                    require_once 'Zend/Feed/Exception.php';
+                    throw new Zend_Feed_Exception('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
+                }
+                $generator['uri'] = $uri;
+            }
         }
         $this->_data['generator'] = $generator;
     }

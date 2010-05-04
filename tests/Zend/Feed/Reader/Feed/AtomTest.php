@@ -390,6 +390,15 @@ class Zend_Feed_Reader_Feed_AtomTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('http://www.example.com/feed/atom', $feed->getFeedLink());
     }
 
+    public function testGetsOriginalSourceUriIfFeedLinkNotAvailableFromFeed()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/feedlink/plain/atom10_NoFeedLink.xml')
+        );
+        $feed->setOriginalSourceUri('http://www.example.com/feed/atom');
+        $this->assertEquals('http://www.example.com/feed/atom', $feed->getFeedLink());
+    }
+
     /**
      * Get Pubsubhubbub Hubs
      */

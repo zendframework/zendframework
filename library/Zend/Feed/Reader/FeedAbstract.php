@@ -80,6 +80,13 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
     protected $_extensions = array();
 
     /**
+     * Original Source URI (set if imported from a URI)
+     *
+     * @var string
+     */
+    protected $_originalSourceUri = null;
+
+    /**
      * Constructor
      *
      * @param DomDocument The DOM object for the feed's XML
@@ -98,6 +105,29 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
         $this->_registerNamespaces();
         $this->_indexEntries();
         $this->_loadExtensions();
+    }
+
+    /**
+     * Set an original source URI for the feed being parsed. This value
+     * is returned from getFeedLink() method if the feed does not carry
+     * a self-referencing URI.
+     *
+     * @param string $uri
+     */
+    public function setOriginalSourceUri($uri)
+    {
+        $this->_originalSourceUri = $uri;
+    }
+
+    /**
+     * Get an original source URI for the feed being parsed. Returns null if
+     * unset or the feed was not imported from a URI.
+     *
+     * @return string|null
+     */
+    public function getOriginalSourceUri()
+    {
+        return $this->_originalSourceUri;
     }
 
     /**

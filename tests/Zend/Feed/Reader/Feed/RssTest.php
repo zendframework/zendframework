@@ -1867,6 +1867,15 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('http://www.example.com/feed/rss', $feed->getFeedLink());
     }
 
+    public function testGetsOriginalSourceUriIfFeedLinkNotAvailableFromFeed()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/feedlink/plain/rss20_NoFeedLink.xml')
+        );
+        $feed->setOriginalSourceUri('http://www.example.com/feed/rss');
+        $this->assertEquals('http://www.example.com/feed/rss', $feed->getFeedLink());
+    }
+
     public function testGetsFeedLinkFromRss094()
     {
         $feed = Zend_Feed_Reader::importString(

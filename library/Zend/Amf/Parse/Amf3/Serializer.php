@@ -239,7 +239,7 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
         $ref = array_search($string, $this->_referenceStrings, true);
         if($ref === false){
             $this->_referenceStrings[] = $string;
-            $this->writeBinaryString(utf8_encode($string));
+            $this->writeBinaryString($string);
         } else {
             $ref <<= 1;
             $this->writeInteger($ref);

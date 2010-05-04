@@ -177,7 +177,7 @@ class Zend_Amf_Util_BinaryStream
     }
 
     /**
-     * Write a UTF-8 string to the outputstream
+     * Wite a UTF-8 string to the outputstream
      *
      * @param  string $stream
      * @return Zend_Amf_Util_BinaryStream

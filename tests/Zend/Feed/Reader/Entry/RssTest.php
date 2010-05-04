@@ -1896,6 +1896,24 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
+    /**
+     * @group ZF-8702
+     */
+    public function testParsesCorrectDateIfMissingOffsetWhenSystemUsesUSLocale()
+    {
+        $locale = new Zend_Locale('en_US');
+        Zend_Registry::set('Zend_Locale', $locale);
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/datemodified/plain/rss20_en_US.xml')
+        );
+        $entry = $feed->current();
+        $fdate = $entry->getDateModified();
+        $edate = new Zend_Date;
+        $edate->set('2010-01-04T08:14:00-0600', Zend_Date::ISO_8601);
+        Zend_Registry::getInstance()->offsetUnset('Zend_Locale');
+        $this->assertTrue($edate->equals($fdate));
+    }
+
     // DC 1.0
 
     public function testGetsDateModifiedFromRss20_Dc10()

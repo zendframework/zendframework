@@ -295,6 +295,30 @@ class Zend_Feed_Reader_Extension_Atom_Feed
     }
 
     /**
+     * Get the feed image
+     *
+     * @return array|null
+     */
+    public function getImage()
+    {
+        if (array_key_exists('image', $this->_data)) {
+            return $this->_data['image'];
+        }
+
+        $imageUrl = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:logo)');
+
+        if (!$imageUrl) {
+            $image = null;
+        } else {
+            $image = array('uri'=>$imageUrl);
+        }
+
+        $this->_data['image'] = $image;
+
+        return $this->_data['image'];
+    }
+
+    /**
      * Get the base URI of the feed (if set).
      *
      * @return string|null

@@ -79,6 +79,7 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
         $this->_setBaseUrl($this->_dom, $channel);
         $this->_setTitle($this->_dom, $channel);
         $this->_setDescription($this->_dom, $channel);
+        $this->_setImage($this->_dom, $channel);
         $this->_setDateCreated($this->_dom, $channel);
         $this->_setDateModified($this->_dom, $channel);
         $this->_setGenerator($this->_dom, $channel);
@@ -311,6 +312,114 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
         $root->appendChild($copy);
         $text = $dom->createTextNode($copyright);
         $copy->appendChild($text);
+    }
+
+    /**
+     * Set feed channel image
+     * 
+     * @param DOMDocument $dom 
+     * @param DOMElement $root 
+     * @return void
+     */
+    protected function _setImage(DOMDocument $dom, DOMElement $root)
+    {
+        $image = $this->getDataContainer()->getImage();
+        if (!$image) {
+            return;
+        }
+        if (!isset($image['title']) || empty($image['title'])
+        || !is_string($image['title'])) {
+            require_once 'Zend/Feed/Exception.php';
+            $message = 'RSS 2.0 feed images must include a title';
+            $exception = new Zend_Feed_Exception($message);
+            if (!$this->_ignoreExceptions) {
+                throw $exception;
+            } else {
+                $this->_exceptions[] = $exception;
+                return;
+            }
+        }
+        if (empty($data['link']) || !is_string($data['link'])
+        || !Zend_Uri::check($data['link'])) {
+            require_once 'Zend/Feed/Exception.php';
+            $message = 'Invalid parameter: parameter \'link\''
+            . 'must be a non-empty string and valid URI/IRI';
+            $exception = new Zend_Feed_Exception($message);
+            if (!$this->_ignoreExceptions) {
+                throw $exception;
+            } else {
+                $this->_exceptions[] = $exception;
+                return;
+            }
+        }
+        $img = $dom->createElement('image');
+        $root->appendChild($image);
+        $url = $dom->createElement('url');
+        $text = $url->createTextNode($image['uri']);
+        $url->appendChild($text);
+        $title = $dom->createElement('title');
+        $text = $title->createTextNode($image['title']);
+        $title->appendChild($text);
+        $link = $dom->createElement('link');
+        $text = $link->createTextNode($image['link']);
+        $link->appendChild($text);
+        $img->appendChild($url);
+        $img->appendChild($title);
+        $img->appendChild($link);
+        if (isset($image['height']) && is_numeric($image['height'])) {
+            if ($image['height'] > 400) {
+                require_once 'Zend/Feed/Exception.php';
+                $message = 'Invalid parameter: parameter \'height\''
+                . ' must be an integer not exceeding 400';
+                $exception = new Zend_Feed_Exception($message);
+                if (!$this->_ignoreExceptions) {
+                    throw $exception;
+                } else {
+                    $this->_exceptions[] = $exception;
+                    return;
+                }
+            }
+            $height = $dom->createElement('height');
+            $text = $height->createTextNode($image['height']);
+            $height->appendChild($text);
+            $img->appendChild($height);
+        }
+        if (isset($image['width']) && is_numeric($image['width'])) {
+            if ($image['width'] > 144) {
+                require_once 'Zend/Feed/Exception.php';
+                $message = 'Invalid parameter: parameter \'width\''
+                . ' must be an integer not exceeding 144';
+                $exception = new Zend_Feed_Exception($message);
+                if (!$this->_ignoreExceptions) {
+                    throw $exception;
+                } else {
+                    $this->_exceptions[] = $exception;
+                    return;
+                }
+            }
+            $width = $dom->createElement('width');
+            $text = $width->createTextNode($image['width']);
+            $width->appendChild($text);
+            $img->appendChild($width);
+        }
+        if (isset($image['description'])) {
+            if (empty($image['description']) || !is_string($image['description'])) {
+                require_once 'Zend/Feed/Exception.php';
+                $message = 'Invalid parameter: parameter \'description\''
+                . ' must be a non-empty string';
+                $exception = new Zend_Feed_Exception($message);
+                if (!$this->_ignoreExceptions) {
+                    throw $exception;
+                } else {
+                    $this->_exceptions[] = $exception;
+                    return;
+                }
+            }
+            $desc = $dom->createElement('description');
+            $text = $desc->createTextNode($image['description']);
+            $desc->appendChild($text);
+            $img->appendChild($desc);
+        }
     }
     
     /**

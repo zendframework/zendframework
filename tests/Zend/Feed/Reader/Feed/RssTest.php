@@ -2789,4 +2789,171 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(), array_values($feed->getCategories()->getValues()));
     }
 
+    /**
+     * Get Image data (Unencoded Text)
+     */
+    public function testGetsImageFromRss20()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/rss20.xml')
+        );
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/image.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image title',
+            'height' => '55',
+            'width' => '50',
+            'description' => 'Image description'
+        ), $feed->getImage());
+    }
+
+    public function testGetsImageFromRss094()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/rss094.xml')
+        );
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/image.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image title',
+            'height' => '55',
+            'width' => '50',
+            'description' => 'Image description'
+        ), $feed->getImage());
+    }
+
+    public function testGetsImageFromRss093()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/rss093.xml')
+        );
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/image.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image title',
+            'height' => '55',
+            'width' => '50',
+            'description' => 'Image description'
+        ), $feed->getImage());
+    }
+
+    public function testGetsImageFromRss092()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/rss092.xml')
+        );
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/image.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image title',
+            'height' => '55',
+            'width' => '50',
+            'description' => 'Image description'
+        ), $feed->getImage());
+    }
+
+    public function testGetsImageFromRss091()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/rss091.xml')
+        );
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/image.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image title',
+            'height' => '55',
+            'width' => '50',
+            'description' => 'Image description'
+        ), $feed->getImage());
+    }
+
+    public function testGetsImageFromRss10()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/rss10.xml')
+        );
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/image.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image title',
+            'height' => '55',
+            'width' => '50',
+            'description' => 'Image description'
+        ), $feed->getImage());
+    }
+
+    public function testGetsImageFromRss090()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/rss090.xml')
+        );
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/image.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image title',
+            'height' => '55',
+            'width' => '50',
+            'description' => 'Image description'
+        ), $feed->getImage());
+    }
+
+    /**
+     * Get Image data (Unencoded Text) Missing
+     */
+    public function testGetsImageFromRss20_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/none/rss20.xml')
+        );
+        $this->assertEquals(null, $feed->getImage());
+    }
+
+    public function testGetsImageFromRss094_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/none/rss094.xml')
+        );
+        $this->assertEquals(null, $feed->getImage());
+    }
+
+    public function testGetsImageFromRss093_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/none/rss093.xml')
+        );
+        $this->assertEquals(null, $feed->getImage());
+    }
+
+    public function testGetsImageFromRss092_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/none/rss092.xml')
+        );
+        $this->assertEquals(null, $feed->getImage());
+    }
+
+    public function testGetsImageFromRss091_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/none/rss091.xml')
+        );
+        $this->assertEquals(null, $feed->getImage());
+    }
+
+    public function testGetsImageFromRss10_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/none/rss10.xml')
+        );
+        $this->assertEquals(null, $feed->getImage());
+    }
+
+    public function testGetsImageFromRss090_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/none/rss090.xml')
+        );
+        $this->assertEquals(null, $feed->getImage());
+    }
+
 }

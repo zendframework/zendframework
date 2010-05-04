@@ -81,6 +81,7 @@ class Zend_Feed_Writer_Renderer_Feed_Atom
         $this->_setBaseUrl($this->_dom, $root);
         $this->_setTitle($this->_dom, $root);
         $this->_setDescription($this->_dom, $root);
+        $this->_setImage($this->_dom, $root);
         $this->_setDateCreated($this->_dom, $root);
         $this->_setDateModified($this->_dom, $root);
         $this->_setGenerator($this->_dom, $root);

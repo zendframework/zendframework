@@ -686,6 +686,115 @@ class Zend_Feed_Writer_FeedTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    // Image Tests
+
+    public function testSetsImageUri()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif'
+        ));
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/logo.gif'
+        ), $writer->getImage());
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testSetsImageUriThrowsExceptionOnEmptyUri()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => ''
+        ));
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testSetsImageUriThrowsExceptionOnMissingUri()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array());
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testSetsImageUriThrowsExceptionOnInvalidUri()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => 'http://'
+        ));
+    }
+
+    public function testSetsImageLink()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com'
+        ));
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com'
+        ), $writer->getImage());
+    }
+
+    public function testSetsImageTitle()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'title' => 'Image title'
+        ));
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'title' => 'Image title'
+        ), $writer->getImage());
+    }
+
+    public function testSetsImageHeight()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'height' => '88'
+        ));
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'height' => '88'
+        ), $writer->getImage());
+    }
+
+    public function testSetsImageWidth()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'width' => '88'
+        ));
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'width' => '88'
+        ), $writer->getImage());
+    }
+    
+    public function testSetsImageDescription()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'description' => 'Image description'
+        ));
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'description' => 'Image description'
+        ), $writer->getImage());
+    }
+
     public function testGetCategoriesReturnsNullIfNotSet()
     {
         $writer = new Zend_Feed_Writer_Feed;

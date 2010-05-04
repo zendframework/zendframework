@@ -274,7 +274,7 @@ class Zend_Feed_Writer_Feed_FeedAbstract
     /**
      * Set the feed ID - URI or URN (via PCRE pattern) supported
      *
-     * @return string|null
+     * @param string $id
      */
     public function setId($id)
     {
@@ -284,6 +284,25 @@ class Zend_Feed_Writer_Feed_FeedAbstract
             throw new Zend_Feed_Exception('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
         }
         $this->_data['id'] = $id;
+    }
+
+    /**
+     * Set a feed image (URI at minimum). Parameter is a single array with the
+     * required key 'uri'. When rendering as RSS, the required keys are 'uri',
+     * 'title' and 'link'. RSS also specifies three optional parameters 'width',
+     * 'height' and 'description'. Only 'uri' is required and used for Atom rendering.
+     *
+     * @param array $data
+     */
+    public function setImage(array $data)
+    {
+        if (empty($data['uri']) || !is_string($data['uri'])
+        || !Zend_Uri::check($data['uri'])) {
+            require_once 'Zend/Feed/Exception.php';
+            throw new Zend_Feed_Exception('Invalid parameter: parameter \'uri\''
+            . ' must be a non-empty string and valid URI/IRI');
+        }
+        $this->_data['image'] = $data;  
     }
 
     /**
@@ -303,7 +322,7 @@ class Zend_Feed_Writer_Feed_FeedAbstract
     /**
      * Set a link to the HTML source
      *
-     * @return string|null
+     * @param string $link
      */
     public function setLink($link)
     {
@@ -550,6 +569,19 @@ class Zend_Feed_Writer_Feed_FeedAbstract
             return null;
         }
         return $this->_data['id'];
+    }
+
+    /**
+     * Get the feed image URI
+     *
+     * @return array
+     */
+    public function getImage()
+    {
+        if (!array_key_exists('image', $this->_data)) {
+            return null;
+        }
+        return $this->_data['image'];
     }
 
     /**

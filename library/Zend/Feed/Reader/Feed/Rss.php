@@ -349,6 +349,60 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
     }
 
     /**
+     * Get the feed image data
+     *
+     * @return array|null
+     */
+    public function getImage()
+    {
+        if (array_key_exists('image', $this->_data)) {
+            return $this->_data['image'];
+        }
+
+        if ($this->getType() !== Zend_Feed_Reader::TYPE_RSS_10 &&
+            $this->getType() !== Zend_Feed_Reader::TYPE_RSS_090) {
+            $list = $this->_xpath->query('/rss/channel/image');
+            $prefix = '/rss/channel/image[1]';
+        } else {
+            $list = $this->_xpath->query('/rdf:RDF/rss:channel/rss:image');
+            $prefix = '/rdf:RDF/rss:channel/rss:image[1]';
+        }
+        if ($list->length > 0) {
+            $image = array();
+            $value = $this->_xpath->evaluate('string(' . $prefix . '/url)');
+            if ($value) {
+                $image['uri'] = $value;
+            }
+            $value = $this->_xpath->evaluate('string(' . $prefix . '/link)');
+            if ($value) {
+                $image['link'] = $value;
+            }
+            $value = $this->_xpath->evaluate('string(' . $prefix . '/title)');
+            if ($value) {
+                $image['title'] = $value;
+            }
+            $value = $this->_xpath->evaluate('string(' . $prefix . '/height)');
+            if ($value) {
+                $image['height'] = $value;
+            }
+            $value = $this->_xpath->evaluate('string(' . $prefix . '/width)');
+            if ($value) {
+                $image['width'] = $value;
+            }
+            $value = $this->_xpath->evaluate('string(' . $prefix . '/description)');
+            if ($value) {
+                $image['description'] = $value;
+            }
+        } else {
+            $image = null;
+        }
+
+        $this->_data['image'] = $image;
+
+        return $this->_data['image'];
+    }
+
+    /**
      * Get the feed language
      *
      * @return string|null

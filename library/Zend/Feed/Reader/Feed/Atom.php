@@ -278,6 +278,24 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
     }
 
     /**
+     * Get feed image data
+     *
+     * @return array|null
+     */
+    public function getImage()
+    {
+        if (array_key_exists('image', $this->_data)) {
+            return $this->_data['image'];
+        }
+
+        $link = $this->getExtension('Atom')->getImage();
+
+        $this->_data['image'] = $link;
+
+        return $this->_data['image'];
+    }
+
+    /**
      * Get a link to the feed's XML Url
      *
      * @return string|null

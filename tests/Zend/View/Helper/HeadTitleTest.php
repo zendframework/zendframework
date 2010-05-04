@@ -230,6 +230,14 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
         $this->helper->headTitle('0');
         $this->assertEquals('<title>0</title>', $this->helper->toString());
     }
+
+    public function testCanPrependTitlesUsingDefaultAttachOrder()
+    {
+        $this->helper->setDefaultAttachOrder('PREPEND');
+        $placeholder = $this->helper->headTitle('Foo');
+        $placeholder = $this->helper->headTitle('Bar');
+        $this->assertContains('BarFoo', $placeholder->toString());
+    }
 }
 
 // Call Zend_View_Helper_HeadTitleTest::main() if this source file is executed directly.

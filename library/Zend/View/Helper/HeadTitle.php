@@ -54,6 +54,13 @@ class Zend_View_Helper_HeadTitle extends Zend_View_Helper_Placeholder_Container_
     protected $_translator;
 
     /**
+     * Default title rendering order (i.e. order in which each title attached)
+     *
+     * @var string
+     */
+    protected $_defaultAttachOrder = null;
+
+    /**
      * Retrieve placeholder for title element and optionally set state
      *
      * @param  string $title
@@ -61,8 +68,13 @@ class Zend_View_Helper_HeadTitle extends Zend_View_Helper_Placeholder_Container_
      * @param  string $separator
      * @return Zend_View_Helper_HeadTitle
      */
-    public function headTitle($title = null, $setType = Zend_View_Helper_Placeholder_Container_Abstract::APPEND)
+    public function headTitle($title = null, $setType = null)
     {
+        if (is_null($setType) && is_null($this->getDefaultAttachOrder())) {
+            $setType = Zend_View_Helper_Placeholder_Container_Abstract::APPEND;
+        } elseif (is_null($setType) && !is_null($this->getDefaultAttachOrder())) {
+            $setType = $this->getDefaultAttachOrder();
+        }
         $title = (string) $title;
         if ($title !== '') {
             if ($setType == Zend_View_Helper_Placeholder_Container_Abstract::SET) {
@@ -75,6 +87,34 @@ class Zend_View_Helper_HeadTitle extends Zend_View_Helper_Placeholder_Container_
         }
 
         return $this;
+    }
+
+    /**
+     * Set a default order to add titles
+     *
+     * @param string $setType
+     */
+    public function setDefaultAttachOrder($setType)
+    {
+        if (!in_array($setType, array(
+            Zend_View_Helper_Placeholder_Container_Abstract::APPEND,
+            Zend_View_Helper_Placeholder_Container_Abstract::SET,
+            Zend_View_Helper_Placeholder_Container_Abstract::PREPEND
+        ))) {
+            require_once 'Zend/View/Exception.php';
+            throw new Zend_View_Exception("You must use a valid attach order: 'PREPEND', 'APPEND' or 'SET'");
+        }
+        $this->_defaultAttachOrder = $setType;
+    }
+
+    /**
+     * Get the default attach order, if any.
+     *
+     * @return mixed
+     */
+    public function getDefaultAttachOrder()
+    {
+        return $this->_defaultAttachOrder;
     }
 
     /**

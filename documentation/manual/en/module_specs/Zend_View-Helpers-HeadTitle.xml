@@ -16,10 +16,18 @@
         enforce generating a <emphasis>&lt;title&gt;</emphasis> element, and adds a
         <methodname>headTitle()</methodname> method for quick and easy setting and
         aggregation of title elements. The signature for that method is
-        <methodname>headTitle($title, $setType = 'APPEND')</methodname>; by default, the
-        value is appended to the stack (aggregating title segments), but you may
+        <methodname>headTitle($title, $setType = null)</methodname>; by default, the
+        value is appended to the stack (aggregating title segments) if left at null, but you may
         also specify either 'PREPEND' (place at top of stack) or 'SET'
         (overwrite stack).
+    </para>
+
+    <para>
+        Since setting the aggregating (attach) order on each call to <methodname>
+        headTitle</methodname> can be cumbersome, you can set a default attach order
+        by calling <methodname>setDefaultAttachOrder()</methodname> which is applied
+        to all <methodname>headTitle()</methodname> calls unless you explicitly
+        pass a different attach order as the second parameter.
     </para>
 
     <example id="zend.view.helpers.initial.headtitle.basicusage">

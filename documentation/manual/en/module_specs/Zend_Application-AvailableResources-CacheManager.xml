@@ -40,13 +40,28 @@ resources.cachemanager.database.frontendBackendAutoload = false
 
         <para>
             Actually retrieving this cache from the Cache Manager is as simple as
-            accessing an instance of the Manager and calling
-            <command>$cacheManager->getCache('database');</command>.
+            accessing an instance of the Manager (<classname>Zend_Cache_Manager</classname>)
+            retrieved from <classname>Zend_Application_Resource_Cachemanager</classname> and
+            calling <methodname>Zend_Cache_Manager::getCache('database')</methodname>. The example
+            below is taken from a controller where the bootstrap class can be accessed as
+            a Front Controller parameter (which is automatically assigned during bootstrapping).
+            As you can see, the Cache Manager Resource implements a <methodname>
+            getCacheManager()</methodname> method to retrieve the bootstrapped instance
+            of <classname>Zend_Cache_Manager</classname>.
         </para>
 
+        <programlisting language="php"><![CDATA[
+$manager = $this->getFrontController()
+            ->getParam('bootstrap')
+            ->getResource('cachemanager')
+            ->getCacheManager();
+$dbCache = $manager->getCache('database');
+]]></programlisting>
+
         <para>
-            See <methodname>Zend_Cache::factory()</methodname> method to get default values
-            description.
+            See <methodname>Zend_Cache::factory()</methodname> method to get a
+            description of the default values you can assign when configuring a
+            cache via a configuration file such as out example INI file above.
         </para>
     </example>
 </sect2>

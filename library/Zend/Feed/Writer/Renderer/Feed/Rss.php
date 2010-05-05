@@ -339,11 +339,11 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
                 return;
             }
         }
-        if (empty($data['link']) || !is_string($data['link'])
-        || !Zend_Uri::check($data['link'])) {
+        if (empty($image['link']) || !is_string($image['link'])
+        || !Zend_Uri::check($image['link'])) {
             require_once 'Zend/Feed/Exception.php';
             $message = 'Invalid parameter: parameter \'link\''
-            . 'must be a non-empty string and valid URI/IRI';
+            . ' must be a non-empty string and valid URI/IRI';
             $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
@@ -353,7 +353,7 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
             }
         }
         $img = $dom->createElement('image');
-        $root->appendChild($image);
+        $root->appendChild($img);
         $url = $dom->createElement('url');
         $text = $dom->createTextNode($image['uri']);
         $url->appendChild($text);
@@ -366,8 +366,8 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
         $img->appendChild($url);
         $img->appendChild($title);
         $img->appendChild($link);
-        if (isset($image['height']) && is_numeric($image['height'])) {
-            if ($image['height'] > 400) {
+        if (isset($image['height'])) {
+            if (!ctype_digit((string) $image['height']) || $image['height'] > 400) {
                 require_once 'Zend/Feed/Exception.php';
                 $message = 'Invalid parameter: parameter \'height\''
                 . ' must be an integer not exceeding 400';
@@ -384,8 +384,8 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
             $height->appendChild($text);
             $img->appendChild($height);
         }
-        if (isset($image['width']) && is_numeric($image['width'])) {
-            if ($image['width'] > 144) {
+        if (isset($image['width'])) {
+            if (!ctype_digit((string) $image['width']) || $image['width'] > 144) {
                 require_once 'Zend/Feed/Exception.php';
                 $message = 'Invalid parameter: parameter \'width\''
                 . ' must be an integer not exceeding 144';

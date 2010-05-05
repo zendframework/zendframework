@@ -352,4 +352,212 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, (array) $feed->getHubs());
     }
 
+    public function testImageCanBeSet()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => '400',
+            'width' => '144',
+            'description' => 'Image TITLE'
+        ));
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $expected = array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => '400',
+            'width' => '144',
+            'description' => 'Image TITLE'  
+        );
+        $this->assertEquals($expected, $feed->getImage()); 
+    }
+
+    public function testImageCanBeSetWithOnlyRequiredElements()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT'
+        ));
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $expected = array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT' 
+        );
+        $this->assertEquals($expected, $feed->getImage()); 
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testImageThrowsExceptionOnMissingLink()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'title' => 'Image ALT'
+        ));
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testImageThrowsExceptionOnMissingTitle()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com'
+        ));
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testImageThrowsExceptionOnMissingUri()
+    {
+        $this->_validWriter->setImage(array(
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT'
+        ));
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testImageThrowsExceptionIfOptionalDescriptionInvalid()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'description' => 2
+        ));
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testImageThrowsExceptionIfOptionalDescriptionEmpty()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'description' => ''
+        ));
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testImageThrowsExceptionIfOptionalHeightNotAnInteger()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => 'a',
+            'width' => 144
+        ));
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testImageThrowsExceptionIfOptionalHeightEmpty()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => '',
+            'width' => 144
+        ));
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testImageThrowsExceptionIfOptionalHeightGreaterThan400()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => '401',
+            'width' => 144
+        ));
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testImageThrowsExceptionIfOptionalWidthNotAnInteger()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => '400',
+            'width' => 'a'
+        ));
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testImageThrowsExceptionIfOptionalWidthEmpty()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => '400',
+            'width' => ''
+        ));
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testImageThrowsExceptionIfOptionalWidthGreaterThan144()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => '400',
+            'width' => '145'
+        ));
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+    }
+    
+
 }

@@ -655,6 +655,16 @@ $labels = $categories->getValues();
                     </row>
 
                     <row>
+                        <entry><methodname>getLastBuildDate()</methodname></entry>
+
+                        <entry>
+                            Returns the date on which this feed was last built. The returned date
+                            will be a <classname>Zend_Date</classname> object. This is only
+                            supported by RSS - Atom feeds will always return NULL.
+                        </entry>
+                    </row>
+
+                    <row>
                         <entry><methodname>getLanguage()</methodname></entry>
 
                         <entry>

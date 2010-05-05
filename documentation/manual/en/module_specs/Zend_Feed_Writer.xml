@@ -361,6 +361,18 @@ $out = $feed->export('atom');
                     </row>
 
                     <row>
+                        <entry><methodname>setLastBuildDate()</methodname></entry>
+
+                        <entry>
+                            Sets the date on which this feed was last build. The expected
+                            parameter may be a <acronym>UNIX</acronym> timestamp or a
+                            <classname>Zend_Date</classname> object. This will only be
+                            rendered for RSS 2.0 feeds and is automatically rendered as
+                            the current date by default when not explicity set.
+                        </entry>
+                    </row>
+
+                    <row>
                         <entry><methodname>setLanguage()</methodname></entry>
 
                         <entry>

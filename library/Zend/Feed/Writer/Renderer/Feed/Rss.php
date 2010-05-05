@@ -82,6 +82,7 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
         $this->_setImage($this->_dom, $channel);
         $this->_setDateCreated($this->_dom, $channel);
         $this->_setDateModified($this->_dom, $channel);
+        $this->_setLastBuildDate($this->_dom, $channel);
         $this->_setGenerator($this->_dom, $channel);
         $this->_setLink($this->_dom, $channel);
         $this->_setAuthors($this->_dom, $channel);
@@ -439,6 +440,27 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
                 $this->getDataContainer()->getDateCreated()
             );
         }
+    }
+
+    /**
+     * Set date feed last build date
+     * 
+     * @param DOMDocument $dom 
+     * @param DOMElement $root 
+     * @return void
+     */
+    protected function _setLastBuildDate(DOMDocument $dom, DOMElement $root)
+    {
+        if(!$this->getDataContainer()->getLastBuildDate()) {
+            return;
+        }
+
+        $lastBuildDate = $dom->createElement('lastBuildDate');
+        $root->appendChild($lastBuildDate);
+        $text = $dom->createTextNode(
+            $this->getDataContainer()->getLastBuildDate()->get(Zend_Date::RSS)
+        );
+        $lastBuildDate->appendChild($text);
     }
     
     /**

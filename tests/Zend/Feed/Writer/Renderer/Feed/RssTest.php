@@ -165,6 +165,15 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
         $rssFeed->render();
     }
 
+    public function testFeedLastBuildDateHasBeenSet()
+    {
+        $this->_validWriter->setLastBuildDate(1234567890);
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $this->assertEquals(1234567890, $feed->getLastBuildDate()->get(Zend_Date::TIMESTAMP));
+    }
+
     public function testFeedGeneratorHasBeenSet()
     {
         $this->_validWriter->setGenerator('FooFeedBuilder', '1.00', 'http://www.example.com');

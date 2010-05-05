@@ -223,6 +223,17 @@ class Zend_Feed_Reader_Feed_AtomTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Get Last Build Date (Unencoded Text)
+     */
+    public function testGetsLastBuildDateAlwaysReturnsNullForAtom()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10.xml')
+        );
+        $this->assertNull($feed->getLastBuildDate());
+    }
+
+    /**
      * Get Generator (Unencoded Text)
      */
     public function testGetsGeneratorFromAtom03()

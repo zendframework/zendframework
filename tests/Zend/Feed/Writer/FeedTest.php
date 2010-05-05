@@ -262,6 +262,46 @@ class Zend_Feed_Writer_FeedTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_null($writer->getDateModified()));
     }
 
+    public function testSetLastBuildDateDefaultsToCurrentTime()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setLastBuildDate();
+        $dateNow = new Zend_Date;
+        $this->assertTrue($dateNow->isLater($writer->getLastBuildDate()) || $dateNow->equals($writer->getLastBuildDate()));
+    }
+
+    public function testSetLastBuildDateUsesGivenUnixTimestamp()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setLastBuildDate(1234567890);
+        $myDate = new Zend_Date('1234567890', Zend_Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
+    }
+
+    public function testSetLastBuildDateUsesZendDateObject()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setLastBuildDate(new Zend_Date('1234567890', Zend_Date::TIMESTAMP));
+        $myDate = new Zend_Date('1234567890', Zend_Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
+    }
+
+    public function testSetLastBuildDateThrowsExceptionOnInvalidParameter()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        try {
+            $writer->setLastBuildDate('abc');
+            $this->fail();
+        } catch (Zend_Feed_Exception $e) {
+        }
+    }
+
+    public function testGetLastBuildDateReturnsNullIfDateNotSet()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $this->assertTrue(is_null($writer->getLastBuildDate()));
+    }
+
     public function testGetCopyrightReturnsNullIfDateNotSet()
     {
         $writer = new Zend_Feed_Writer_Feed;

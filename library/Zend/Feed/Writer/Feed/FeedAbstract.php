@@ -206,6 +206,27 @@ class Zend_Feed_Writer_Feed_FeedAbstract
     }
 
     /**
+     * Set the feed last-build date. Ignored for Atom 1.0.
+     *
+     * @param null|integer|Zend_Date
+     */
+    public function setLastBuildDate($date = null)
+    {
+        $zdate = null;
+        if (is_null($date)) {
+            $zdate = new Zend_Date;
+        } elseif (ctype_digit($date) && strlen($date) == 10) {
+            $zdate = new Zend_Date($date, Zend_Date::TIMESTAMP);
+        } elseif ($date instanceof Zend_Date) {
+            $zdate = $date;
+        } else {
+            require_once 'Zend/Feed/Exception.php';
+            throw new Zend_Feed_Exception('Invalid Zend_Date object or UNIX Timestamp passed as parameter');
+        }
+        $this->_data['lastBuildDate'] = $zdate;
+    }
+
+    /**
      * Set the feed description
      *
      * @return string|null
@@ -530,6 +551,19 @@ class Zend_Feed_Writer_Feed_FeedAbstract
             return null;
         }
         return $this->_data['dateModified'];
+    }
+
+    /**
+     * Get the feed last-build date
+     *
+     * @return string|null
+     */
+    public function getLastBuildDate()
+    {
+        if (!array_key_exists('lastBuildDate', $this->_data)) {
+            return null;
+        }
+        return $this->_data['lastBuildDate'];
     }
 
     /**

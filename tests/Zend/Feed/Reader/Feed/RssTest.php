@@ -2100,6 +2100,27 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Get Last Build Date (Unencoded Text)
+     */
+    public function testGetsLastBuildDateFromRss20()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/lastbuilddate/plain/rss20.xml')
+        );
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($feed->getLastBuildDate()));
+    }
+
+    public function testGetsLastBuildDateFromRss20_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/lastbuilddate/plain/none/rss20.xml')
+        );
+        $this->assertEquals(null, $feed->getLastBuildDate());
+    }
+
+    /**
      * Get Date Modified (Unencoded Text)
      */
     public function testGetsDateModifiedFromRss20()

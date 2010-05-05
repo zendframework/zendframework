@@ -702,6 +702,17 @@ $labels = $categories->getValues();
                             of "scheme", set to <constant>NULL</constant>.
                         </entry>
                     </row>
+
+                    <row>
+                        <entry><methodname>getImage()</methodname></entry>
+
+                        <entry>
+                            Returns an array containing data relating to any feed image or logo,
+                            or NULL if no image found. The resulting array may contain the following
+                            keys: uri, link, title, description, height, and width. Atom logos only
+                            contain a URI so the remaining metadata is drawn from RSS feeds only.
+                        </entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>

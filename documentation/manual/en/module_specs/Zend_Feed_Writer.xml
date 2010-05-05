@@ -418,6 +418,18 @@ $out = $feed->export('atom');
                     </row>
 
                     <row>
+                        <entry><methodname>setImage()</methodname></entry>
+                        <entry>
+                            Accepts an array of image metadata for an RSS image or Atom logo. Atom 1.0
+                            only requires a URI. RSS 2.0 requires a URI, HTML link, and an image title.
+                            RSS 2.0 optionally may send a width, height and image description. The array
+                            parameter may contain these using the keys: uri, link, title, description,
+                            height and width. The RSS 2.0 HTML link should point to the feed source's
+                            HTML page.
+                        </entry>
+                    </row>
+
+                    <row>
                         <entry><methodname>createEntry()</methodname></entry>
                         <entry>Returns a new instance of <classname>Zend_Feed_Writer_Entry
                         </classname>. This is the Entry level data container. New entries
@@ -470,7 +482,8 @@ $out = $feed->export('atom');
         <note>
             <para>
                 In addition to these setters, there are also matching getters to retrieve data from
-                the Entry data container.
+                the Entry data container. For example, <methodname>setImage()</methodname> is matched
+                with a <methodname>getImage()</methodname> method.
             </para>
         </note>
 

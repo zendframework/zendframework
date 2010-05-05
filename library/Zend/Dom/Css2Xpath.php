@@ -64,7 +64,7 @@ class Css2Xpath
             $pathSegment = self::_tokenize($segment);
             if (0 == $key) {
                 if (0 === strpos($pathSegment, '[contains(')) {
-                    $paths[0] .= '*' . $pathSegment;
+                    $paths[0] .= '*' . ltrim($pathSegment, '*');
                 } else {
                     $paths[0] .= $pathSegment;
                 }
@@ -72,7 +72,7 @@ class Css2Xpath
             }
             if (0 === strpos($pathSegment, '[contains(')) {
                 foreach ($paths as $key => $xpath) {
-                    $paths[$key] .= '//*' . $pathSegment;
+                    $paths[$key] .= '//*' . ltrim($pathSegment, '*');
                     $paths[]      = $xpath . $pathSegment;
                 }
             } else {
@@ -104,41 +104,33 @@ class Css2Xpath
         $expression = preg_replace('|(?<![a-z0-9_-])(\[@id=)|i', '*$1', $expression);
 
         // arbitrary attribute strict equality
-        if (preg_match('|([a-z]+)\[([a-z0-9_-]+)=[\'"]([^\'"]+)[\'"]\]|i', $expression)) {
-            $expression = preg_replace_callback(
-                '|([a-z]+)\[([a-z0-9_-]+)=[\'"]([^\'"]+)[\'"]\]|i',
-                function($matches) {
-                    return $matches[1] . '[@' . strtolower($matches[2]) . "='" . $matches[3] . "']";
-                },
-                $expression
-            );
-        }
+        $expression = preg_replace_callback(
+            '|\[([a-z0-9_-]+)=[\'"]([^\'"]+)[\'"]\]|i',
+            function($matches) {
+                return '[@' . strtolower($matches[1]) . "='" . $matches[2] . "']";
+            },
+            $expression
+        );
 
         // arbitrary attribute contains full word
-        if (preg_match('|([a-z]+)\[([a-z0-9_-]+)~=[\'"]([^\'"]+)[\'"]\]|i', $expression)) {
-            $expression = preg_replace_callback(
-                '|([a-z]+)\[([a-z0-9_-]+)~=[\'"]([^\'"]+)[\'"]\]|i',
-                function ($matches) {
-                    return $matches[1] 
-                        . "[contains(concat(' ', normalize-space(@" . strtolower($matches[2]) . "), ' '), ' " 
-                        . $matches[3] . " ')]";
-                },
-                $expression
-            );
-        }
+        $expression = preg_replace_callback(
+            '|\[([a-z0-9_-]+)~=[\'"]([^\'"]+)[\'"]\]|i',
+            function ($matches) {
+                return "[contains(concat(' ', normalize-space(@" . strtolower($matches[1]) . "), ' '), ' " 
+                     . $matches[2] . " ')]";
+            },
+            $expression
+        );
 
         // arbitrary attribute contains specified content
-        if (preg_match('|([a-z]+)\[([a-z0-9_-]+)\*=[\'"]([^\'"]+)[\'"]\]|i', $expression)) {
-            $expression = preg_replace_callback(
-                '|([a-z]+)\[([a-z0-9_-]+)\*=[\'"]([^\'"]+)[\'"]\]|i',
-                function ($matches) {
-                    return $matches[1] 
-                        . "[contains(@" . strtolower($matches[2]) . ", '" 
-                        . $matches[3] . "')]";
-                },
-                $expression
-            );
-        }
+        $expression = preg_replace_callback(
+            '|\[([a-z0-9_-]+)\*=[\'"]([^\'"]+)[\'"]\]|i',
+            function ($matches) {
+                return "[contains(@" . strtolower($matches[1]) . ", '" 
+                     . $matches[2] . "')]";
+            },
+            $expression
+        );
 
         // Classes
         $expression = preg_replace(
@@ -146,6 +138,9 @@ class Css2Xpath
             "[contains(concat(' ', normalize-space(@class), ' '), ' \$1 ')]", 
             $expression
         );
+
+        /** ZF-9764 -- remove double asterix */
+        $expression = str_replace('**', '*', $expression);
 
         return $expression;
     }

@@ -167,4 +167,22 @@ class Css2XpathTest extends \PHPUnit_Framework_TestCase
         $test = Css2Xpath::transform('child > leaf');
         $this->assertEquals("//child/leaf", $test);
     }
+
+    /**
+     * @group ZF-9764
+     */
+    public function testIdSelectorWithAttribute()
+    {
+        $test = Css2Xpath::transform('#id[attribute="value"]');
+        $this->assertEquals("//*[@id='id'][@attribute='value']", $test);
+    }
+
+    /**
+     * @group ZF-9764
+     */
+    public function testIdSelectorWithLeadingAsterix()
+    {
+        $test = Css2Xpath::transform('*#id');
+        $this->assertEquals("//*[@id='id']", $test);
+    }
 }

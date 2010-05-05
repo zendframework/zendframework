@@ -51,17 +51,13 @@ class Messenger implements Delivery
      */
     public function notify($topic, $argv = null)
     {
-        if (empty($this->_topics[$topic])) {
-            return;
+        if (!is_array($argv)) {
+            $argv = func_get_args();
+            $argv = array_slice($argv, 1);
         }
-
-        $return = null;
-        $argv   = func_get_args();
-        array_shift($argv);
-        foreach ($this->_topics[$topic] as $handle) {
-            $return = $handle->call($argv);
-        }
-        return $return;
+        return $this->notifyUntil(function(){
+            return false;
+        }, $topic, $argv);
     }
 
     /**
@@ -88,8 +84,10 @@ class Messenger implements Delivery
         }
 
         $return = null;
-        $argv   = func_get_args();
-        $argv   = array_slice($argv, 2);
+        if (!is_array($argv)) {
+            $argv   = func_get_args();
+            $argv   = array_slice($argv, 2);
+        }
         foreach ($this->_topics[$topic] as $handle) {
             $return = $handle->call($argv);
             if (call_user_func($callback, $return)) {

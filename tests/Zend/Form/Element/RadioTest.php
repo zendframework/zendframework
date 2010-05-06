@@ -168,7 +168,7 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
                 'test' => 'Test',
             ));
         $html = $this->element->render($this->getView());
-        $this->assertRegexp('#<dt[^>]*>&nbsp;</dt>.*?<dd#s', $html, $html);
+        $this->assertRegexp('#<dt[^>]*>&\#160;</dt>.*?<dd#s', $html, $html);
     }
 
     /**

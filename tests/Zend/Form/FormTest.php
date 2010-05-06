@@ -4040,7 +4040,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
         $html = $form->render();
 
-        $this->assertContains('<dt id="foo-label">&nbsp;</dt>', $html);
+        $this->assertContains('<dt id="foo-label">&#160;</dt>', $html);
         $this->assertContains('<dd id="foo-element">', $html);
     }
 
@@ -4056,7 +4056,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
         $html = $form->render();
 
-        $this->assertContains('<dt id="testform-label">&nbsp;</dt>', $html);
+        $this->assertContains('<dt id="testform-label">&#160;</dt>', $html);
         $this->assertContains('<dd id="testform-element">', $html);
     }
 

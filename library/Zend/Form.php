@@ -2136,7 +2136,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     {
         if (!is_array($data)) {
             require_once 'Zend/Form/Exception.php';
-            throw new Zend_Form_Exception(__CLASS__ . '::' . __METHOD__ . ' expects an array');
+            throw new Zend_Form_Exception(__METHOD__ . ' expects an array');
         }
         $translator = $this->getTranslator();
         $valid      = true;

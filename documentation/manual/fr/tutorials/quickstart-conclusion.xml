@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="learning.quickstart.conclusion">
+    <title>Félicitations!</title>
+
+    <para>
+        Vous venez de construire une application très simple en utilisant la plupart des composants
+        du Zend Framework. Zend Framework se compose de plein de composants très utiles pour le
+        développement web, comme les services webs, la recherches, la gestions des <acronym>PDF</acronym>
+        , l'authentication et les listes d'autorisation, etc.
+        Le <link linkend="reference">Guide de référence</link> possède plein d'informations sur les
+        composants que vous avez utilisé dans le guide de démarrage (QuickStart) et sur les autres composants
+        aussi. Nous espérons que vous trouverez le Zend Framework utile et plus important encore - fun!
+    </para>
+</sect1>

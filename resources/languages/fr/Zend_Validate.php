@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 21760
+ * EN-Revision: 22075
  */
 return array(
     // Zend_Validate_Alnum
@@ -209,7 +209,7 @@ return array(
     "'%value%' has failed the IBAN check" => "'%value%' n'a pas passé la validation IBAN",
 
     // Zend_Validate_Identical
-    "The token '%token%' does not match the given token '%value%'" => "Le jeton '%token%' n'a pas de correspondance avec '%value%'",
+    "The two given tokens do not match" => "Les deux jetons passés ne correspondent pas",
     "No token was provided to match against" => "Aucun jeton de correspondance n'a été donné",
 
     // Zend_Validate_InArray
@@ -261,6 +261,6 @@ return array(
 
     // Zend_Validate_StringLength
     "Invalid type given, value should be a string" => "Type de donnée non valide : chaîne de caractères attendue",
-    "'%value%' is less than %min% characters long" => "La taille de '%value%' est inférieur à %min% caractères",
-    "'%value%' is more than %max% characters long" => "La taille de '%value%' est supérieur à %max% caractères",
+    "'%value%' is less than %min% characters long" => "La taille de '%value%' est inférieure à %min% caractères",
+    "'%value%' is more than %max% characters long" => "La taille de '%value%' est supérieure à %max% caractères",
 );

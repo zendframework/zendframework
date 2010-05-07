@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+  <feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gm='http://base.google.com/ns-metadata/1.0' xmlns:g='http://base.google.com/ns/1.0' xmlns:batch='http://schemas.google.com/gdata/batch'>
+    <id>http://www.google.com/base/feeds/snippets</id>
+    <updated>2007-09-15T00:09:38.999Z</updated>
+    <title type='text'>Items matching query: [title:PHP book]</title>
+    <link rel='alternate' type='text/html' href='http://base.google.com'/>
+    <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://www.google.com/base/feeds/snippets'/>
+    <link rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='http://www.google.com/base/feeds/snippets/batch'/>
+    <link rel='self' type='application/atom+xml' href='http://www.google.com/base/feeds/snippets?start-index=1&amp;max-results=2&amp;bq=%5Btitle%3APHP+book%5D'/>
+    <link rel='next' type='application/atom+xml' href='http://www.google.com/base/feeds/snippets?start-index=3&amp;max-results=2&amp;bq=%5Btitle%3APHP+book%5D'/>
+    <author>
+      <name>Google Inc.</name>
+      <email>base@google.com</email>
+    </author>
+    <generator version='1.0' uri='http://base.google.com'>GoogleBase</generator>
+    <openSearch:totalResults>191</openSearch:totalResults>
+    <openSearch:startIndex>1</openSearch:startIndex>
+    <openSearch:itemsPerPage>2</openSearch:itemsPerPage>
+    <entry>
+      <id>http://www.google.com/base/feeds/snippets/12314974507194001735</id>
+      <published>2007-06-06T07:02:31.000Z</published>
+      <updated>2007-09-14T07:48:53.000Z</updated>
+      <category scheme='http://base.google.com/categories/itemtypes' term='Products'/>
+      <title type='text'>The Zend PHP Certification Practice Test Book: Practice Questions for the Zend Certified Engineer Exam</title>
+      <content type='html'>John Coggeshall, Marco Tabini,Paperback, English-language edition,Pages:152,Pub BY Marco Tabini &amp; Associates,</content>
+      <link rel='alternate' type='text/html' href='http://search.barnesandnoble.com/booksearch/isbninquiry.asp?sourceid=Q000000630&amp;ean=9780973589887'/>
+      <link rel='self' type='application/atom+xml' href='http://www.google.com/base/feeds/snippets/12314974507194001735'/>
+      <author>
+        <name>Barnes &amp; Noble.com</name>
+        <email>anon-h0z4ch9cz5h5@base.google.com</email>
+      </author>
+      <g:item_type type='text'>Products</g:item_type>
+      <g:image_link type='url'>http://images.barnesandnoble.com.edgesuite.net/images/8950000/8957260.gif</g:image_link>
+      <g:publisher type='text'>Marco Tabini &amp; Associates,</g:publisher>
+      <g:isbn type='text'>0973589884</g:isbn>
+      <g:condition type='text'>new</g:condition>
+      <g:id type='text'>9780973589887</g:id>
+      <g:product_type type='text'>books</g:product_type>
+      <g:item_language type='text'>EN</g:item_language>
+      <g:pages type='int'>152</g:pages>
+      <g:price type='floatUnit'>21.99 usd</g:price>
+      <g:target_country type='text'>US</g:target_country>
+      <g:customer_id type='int'>1165992</g:customer_id>
+      <g:genre type='text'>Computers</g:genre>
+      <g:binding type='text'>paperback</g:binding>
+      <g:author type='text'>Marco Tabini</g:author>
+      <g:author type='text'>John Coggeshall</g:author>
+      <g:expiration_date type='dateTime'>2007-10-14T07:48:53.000Z</g:expiration_date>
+    </entry>
+    <entry>
+      <id>http://www.google.com/base/feeds/snippets/17983316950426332176</id>
+      <published>2007-09-07T04:21:51.000Z</published>
+      <updated>2007-09-14T04:09:34.000Z</updated>
+      <category scheme='http://base.google.com/categories/itemtypes' term='Products'/>
+      <title type='text'>PHP 5 / MYSQL PROGRAMMING FOR THE ABSOLUTE - BOOK *NEW</title>
+      <content type='html'>Sysqsystems includes more than two million titles in its online database, with an inventory of 1.3 Million titles available for immediate delivery.</content>
+      <link rel='alternate' type='text/html' href='http://adfarm.mediaplex.com/ad/ck/711-5256-8196-2?loc=http%3A%2F%2Fcgi.ebay.com%2FPHP-5-MYSQL-PROGRAMMING-FOR-THE-ABSOLUTE-BOOK-NEW_W0QQitemZ200149840989QQcmdZViewItem'/>
+      <link rel='self' type='application/atom+xml' href='http://www.google.com/base/feeds/snippets/17983316950426332176'/>
+      <author>
+        <name>eBay</name>
+        <email>rcross@ebay.com</email>
+      </author>
+      <g:item_type type='text'>Products</g:item_type>
+      <g:item_language type='text'>EN</g:item_language>
+      <g:price type='floatUnit'>18.42 usd</g:price>
+      <g:target_country type='text'>US</g:target_country>
+      <g:image_link type='url'>http://thumbs.ebaystatic.com/pict/200149840989_1.jpg</g:image_link>
+      <g:category type='text'>Books&gt;Nonfiction Books</g:category>
+      <g:customer_id type='int'>11729</g:customer_id>
+      <g:id type='text'>200149840989</g:id>
+      <g:expiration_date type='dateTime'>2007-10-14T04:09:34.000Z</g:expiration_date>
+    </entry>
+  </feed>

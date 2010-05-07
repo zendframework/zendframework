@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AppsForYourDomainErrors>
+  <error errorCode="1301" invalidInput="ZF-4699719c8e74c" reason="EntityDoesNotExist" />
+  <error errorCode="9925" invalidInput="Foo" reason="Bar" />
+  <error errorCode="5235" invalidInput="HelloWorld" reason="Blah" />
+</AppsForYourDomainErrors>

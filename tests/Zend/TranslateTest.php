@@ -453,6 +453,18 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests getting of single message ids
+     */
+    public function testGettingSingleMessageIds()
+    {
+        $lang = new Zend_Translate(Zend_Translate::AN_ARRAY, array('msg1' => 'Message 1', 'msg2' => 'Message 2'), 'en');
+        $lang->addTranslation(array('msg1' => 'Message 1 (ru)'), 'ru');
+        $this->assertEquals('msg1', $lang->getMessageId('Message 1 (ru)'));
+        $this->assertEquals('msg2', $lang->getMessageId('Message 2', 'en'));
+        $this->assertFalse($lang->getMessageId('Message 5'));
+    }
+
+    /**
      * Tests getting of all messages
      */
     public function testGettingAllMessages()

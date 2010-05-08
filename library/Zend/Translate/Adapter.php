@@ -443,6 +443,23 @@ abstract class Zend_Translate_Adapter {
     }
 
     /**
+     * Returns the message id for a given translation
+     * If no locale is given, the actual language will be used
+     *
+     * @param  string             $message Message to get the key for
+     * @param  string|Zend_Locale $locale (optional) Language to return the message ids from
+     * @return string|array|false
+     */
+    public function getMessageId($message, $locale = null)
+    {
+        if (empty($locale) or !$this->isAvailable($locale)) {
+            $locale = $this->_options['locale'];
+        }
+
+        return array_search($message, $this->_translate[(string) $locale]);
+    }
+
+    /**
      * Returns all available message ids from this adapter
      * If no locale is given, the actual language will be used
      *

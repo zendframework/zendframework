@@ -7,24 +7,7 @@
         Zend Framework comes with a standard set of filters, which are ready for you to use.
     </para>
 
-    <sect2 id="zend.filter.set.alnum">
-        <title>Alnum</title>
-
-        <para>
-            Returns the string <varname>$value</varname>, removing all but alphabetic and digit
-            characters. This filter includes an option to also allow white space characters.
-        </para>
-
-        <note>
-            <para>
-                The alphabetic characters mean characters that makes up words in each language.
-                However, the english alphabet is treated as the alphabetic characters in following
-                languages: Chinese, Japanese, Korean. The language is specified by
-                <classname>Zend_Locale</classname>.
-            </para>
-        </note>
-
-    </sect2>
+    <xi:include href="Zend_Filter-Alnum.xml" />
 
     <sect2 id="zend.filter.set.alpha">
         <title>Alpha</title>

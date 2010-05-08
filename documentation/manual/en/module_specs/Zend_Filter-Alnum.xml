@@ -8,7 +8,7 @@
         characters and digits. All other characters are supressed.
     </para>
 
-    <sect3 id="zend.validate.set.alnum.options">
+    <sect3 id="zend.filter.set.alnum.options">
         <title>Supported options for Zend_Filter_Alnum</title>
 
         <para>

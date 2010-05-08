@@ -579,8 +579,8 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
                     by registering a callback function to be called
                     when the output buffering it uses is cleaned. In order for this to operate
                     correctly, it must be the final output buffer in the request. To guarantee
-                    this, the output buffering used by the Dispatcher MUST be disabled by
-                    calling <classname>Zend_Controller_Front</classname>'s
+                    this, the output buffering used by the Dispatcher <emphasis>must</emphasis> be
+                    disabled by calling <classname>Zend_Controller_Front</classname>'s
                     <methodname>setParam()</methodname> method, for example,
                     <command>$front->setParam('disableOutputBuffering', true);</command> or adding
                     "resources.frontcontroller.params.disableOutputBuffering = true"

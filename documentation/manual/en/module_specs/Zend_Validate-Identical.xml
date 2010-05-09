@@ -157,7 +157,7 @@ if ($valid->isValid($input)) {
 
         <para>
             But this adds one case which you have to be aware. When you are using an array as
-            haystack then you should wrap it within an <property>'token'</property> key when
+            haystack then you should wrap it within an '<property>token</property>' key when
             it could contain only one element.
         </para>
 
@@ -173,12 +173,12 @@ if ($valid->isValid($input)) {
         <para>
             The above example validates the integer 123. The reason for this special case is, that
             you can configure the token which has to be used by giving the
-            <property>'token'</property> key.
+            '<property>token</property>' key.
         </para>
 
         <para>
             So, when your haystack contains one element and this element is named
-            <property>'token'</property> then you have to wrap it like shown in the example below.
+            '<property>token</property>' then you have to wrap it like shown in the example below.
         </para>
 
         <programlisting language="php"><![CDATA[

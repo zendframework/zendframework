@@ -6,8 +6,9 @@
     <para>
         <classname>Zend_Validate_Hostname</classname> allows you to validate a hostname against a
         set of known specifications. It is possible to check for three different types of hostnames:
-        a DNS Hostname (i.e. domain.com), IP address (i.e. 1.2.3.4), and Local hostnames (i.e.
-        localhost). By default only DNS hostnames are matched.
+        a <acronym>DNS</acronym> Hostname (i.e. <filename>domain.com</filename>), IP address (i.e.
+        1.2.3.4), and Local hostnames (i.e. localhost). By default only <acronym>DNS</acronym>
+        hostnames are matched.
     </para>
 
     <sect3 id="zend.validate.set.hostname.options">
@@ -112,8 +113,9 @@ if ($validator->isValid($hostname)) {
 
         <para>
             As well as using <constant>ALLOW_ALL</constant> to accept all hostnames types you can
-            combine these types to allow for combinations. For example, to accept DNS and Local
-            hostnames instantiate your <classname>Zend_Validate_Hostname</classname> object as so:
+            combine these types to allow for combinations. For example, to accept
+            <acronym>DNS</acronym> and Local hostnames instantiate your
+            <classname>Zend_Validate_Hostname</classname> object as so:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -137,7 +139,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
             <title>IDN domains</title>
 
             <para>
-                Until now more than 50 ccTLDs support IDN domains.
+                Until now more than 50 ccTLDs support <acronym>IDN</acronym> domains.
             </para>
         </note>
 

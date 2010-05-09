@@ -343,16 +343,18 @@ $_SESSION['cookiejar'] = $client->getCookieJar();
     <sect2 id="zend.http.client.streaming">
         <title>データ・ストリーミング</title>
         <para>
-            By default, <classname>Zend_Http_Client</classname> accepts and returns data as
-            <acronym>PHP</acronym> strings. However, in many cases there are big files to be sent or
-            received, thus keeping them in memory might be unnecessary or too expensive. For these
-            cases, <classname>Zend_Http_Client</classname> supports reading data from files (and in
-            general, <acronym>PHP</acronym> streams) and writing data to files (streams).
+            <classname>Zend_Http_Client</classname> はデフォルトでデータを <acronym>PHP</acronym> 文字列として受け取り、
+            そして返します。しかしながら、巨大なファイルを送信または受信する多くのケースではこのような場合
+            メモリーは不必要に確保されたり、もしくはコストがかかります。
+            このようなケースのために、 <classname>Zend_Http_Client</classname>
+            はファイル(一般的には <acronym>PHP</acronym> ストリーム)からの読み込みと
+            ファイル(ストリーム)への書き込みをサポートします。
         </para>
         <para>
-            In order to use stream to pass data to <classname>Zend_Http_Client</classname>,
-            use <methodname>setRawData()</methodname> method with data argument being stream resource
-            (e.g., result of <methodname>fopen()</methodname>).
+            ストリームを用いて <classname>Zend_Http_Client</classname>
+            とデータの受け渡しを行うために、 <methodname>setRawData()</methodname> メソッドを
+            ストリームリソースであるデータ引数とともに使用します。
+            (例、 <methodname>fopen()</methodname> の戻り値).
             <example id="zend.http.client.streaming.example-1">
                 <title>ストリーミングでHTTP サーバにファイルを送信</title>
                 <programlisting language="php"><![CDATA[
@@ -362,26 +364,29 @@ $client->setRawData($fp, 'application/zip')->request('PUT');
             </example>
         </para>
         <para>
-        Only PUT requests currently support sending streams to HTTP server.
+            PUT リクエストだけが現在 HTTP サーバーへのストリームの送信をサポートしています。
         </para>
 
         <para>
-            In order to receive data from the server as stream, use <methodname>setStream()</methodname>.
-            Optional argument specifies the filename where the data will be stored. If the argument is just
-            <constant>TRUE</constant> (default), temporary file will be used and will be deleted once response object is destroyed.
-            Setting argument to <constant>FALSE</constant> disables the streaming functionality.
+            サーバーからストリームとしてデータを受信するために <methodname>setStream()</methodname> を使用します。
+            オプション引数にはデータがストアされるファイル名を指定します。
+            引数が(デフォルト値) <constant>TRUE</constant>
+            だった場合、テンポラリファイルが使用されレスポンスオブジェクと破棄された場合に消去されます。
+            <constant>FALSE</constant> を引数に設定するとストリーミング機能は無効になります。
         </para>
 
         <para>
-        When using streaming, <methodname>request()</methodname> method will return object of class
-        <classname>Zend_Http_Client_Response_Stream</classname>, which has two useful methods:
-        <methodname>getStreamName()</methodname> will return the name of the file where the response is stored,
-        and <methodname>getStream()</methodname> will return stream from which the response could be read.
+        ストリーミングを使用した際、<methodname>request()</methodname> メソッドは
+        <classname>Zend_Http_Client_Response_Stream</classname>
+        クラスのオブジェクトを返却するでしょう。これは二つの便利なメソッドを持っています：
+        <methodname>getStreamName()</methodname>
+        はレスポンスがストアされたファイルの場所名を返却します。
+        また <methodname>getStream()</methodname> はレスポンスを読み込めるストリームを返却します。
         </para>
 
         <para>
-        You can either write the response to pre-defined file, or use temporary file for storing it and
-        send it out or write it to another file using regular stream functions.
+        あなたは事前に定義したファイルへレスポンスを書き込んだり、
+        ストアしたり送出したりするためにテンポラリファイルを使用したり、通常のストリーム機能で使用される別のファイルへ書きだせます。
         <example id="zend.http.client.streaming.example-2">
                 <title>ストリーミングでHTTP サーバからファイルを受信</title>
                 <programlisting language="php"><![CDATA[

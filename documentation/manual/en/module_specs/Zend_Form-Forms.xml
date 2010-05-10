@@ -2181,7 +2181,7 @@ class My_Form_Login extends Zend_Form
 
         $password = new Zend_Form_Element_Password('password');
         $password->class = 'formtext';
-        $password->setLabel('Username:')
+        $password->setLabel('Password:')
                  ->setDecorators(array(
                      array('ViewHelper',
                            array('helper' => 'formPassword')),

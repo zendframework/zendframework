@@ -104,7 +104,7 @@
                         <listitem>
                             <para>
                             <varname>$cookieStr</varname>: a cookie string as represented in the
-                           'Set-Cookie' <acronym>HTTP</acronym> response header or 'Cookie' 
+                           'Set-Cookie' <acronym>HTTP</acronym> response header or 'Cookie'
                            <acronym>HTTP</acronym> request header (required)
                             </para>
                         </listitem>

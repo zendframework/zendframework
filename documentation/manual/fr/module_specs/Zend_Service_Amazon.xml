@@ -753,12 +753,12 @@ foreach ($results as $result) {
                                 <entry>string</entry>
                                 <entry>ID Amazon du fournisseur</entry>
                             </row>
- 
+
                              <row>
                                 <entry>MerchantName</entry>
                                 <entry>string</entry>
                                 <entry>
-                                    Nom du fournisseur Amazon. Nécessite le réglage de 
+                                    Nom du fournisseur Amazon. Nécessite le réglage de
                                     <code>ResponseGroup</code> à <code>OfferFull</code>
                                     pour la récupération.
                                 </entry>

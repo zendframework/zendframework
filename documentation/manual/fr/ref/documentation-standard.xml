@@ -3,57 +3,57 @@
 <!-- Reviewed: no -->
 <appendix id="doc-standard">
     <title>Recommandation sur la documentation de Zend Framework</title>
-    
+
     <sect1 id="doc-standard.overview">
         <title>Présentation</title>
-        
+
         <sect2 id="doc-standard.overview.scope">
             <title>Cadre</title>
-            
+
             <para>
-                Ce document fournit les lignes directrices pour la création de documentation pour 
-                Zend Framework. Il s'agit d'un guide pour les contributeurs, qui doivent écrire la 
-                documentation nécessaire lors de la contribution d'un composant, mais aussi pour 
-                les traducteurs. Les recommandations contenues dans le présent document ont pour 
-                objectif de faciliter la traduction de la documentation, de minimiser les 
-                différences visuelles et stylistiques entre les différents fichiers, et de 
+                Ce document fournit les lignes directrices pour la création de documentation pour
+                Zend Framework. Il s'agit d'un guide pour les contributeurs, qui doivent écrire la
+                documentation nécessaire lors de la contribution d'un composant, mais aussi pour
+                les traducteurs. Les recommandations contenues dans le présent document ont pour
+                objectif de faciliter la traduction de la documentation, de minimiser les
+                différences visuelles et stylistiques entre les différents fichiers, et de
                 faciliter la recherche de différences avec la commande <command>diff</command>.
             </para>
-            
+
             <para>
-                Vous pouvez adopter et/ou modifier ces recommandations tant que vous respectez 
+                Vous pouvez adopter et/ou modifier ces recommandations tant que vous respectez
                 les termes de notre <ulink url="http://framework.zend.com/license">license</ulink>.
             </para>
-            
+
             <para>
-                Les sujets couverts dans ce document incluent le format des fichiers ainsi que des 
+                Les sujets couverts dans ce document incluent le format des fichiers ainsi que des
                 recommandations sur le maintien de la qualité de la documentation.
             </para>
         </sect2>
     </sect1>
-    
+
     <sect1 id="doc-standard.file-formatting">
         <title>Format des fichiers de documentation</title>
 
         <sect2 id="doc-standard.file-formatting.xml-tags">
             <title>Balises XML</title>
-    
+
             <para>
-                Chaque fichier du manuel doit inclure la déclaration <acronym>XML</acronym> 
+                Chaque fichier du manuel doit inclure la déclaration <acronym>XML</acronym>
                 suivante à la première ligne du fichier&#160;:
             </para>
-            
+
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 ]]></programlisting>
 
             <para>
-                Les fichiers <acronym>XML</acronym> provenant des traductions doivent également 
+                Les fichiers <acronym>XML</acronym> provenant des traductions doivent également
                 inclure le tag de révision correspondant au fichier original en anglais duquel la
                 traduction est tirée.
             </para>
-            
+
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 14978 -->
@@ -63,10 +63,10 @@
 
         <sect2 id="doc-standard.file-formatting.max-line-length">
             <title>Longueur maximum d'une ligne</title>
-            
+
             <para>
-                La longueur maximum d'une ligne, incluant les balises, les attributs, 
-                l'indentation ne doit pas excéder 100 caractères. Il existe une seule exception à 
+                La longueur maximum d'une ligne, incluant les balises, les attributs,
+                l'indentation ne doit pas excéder 100 caractères. Il existe une seule exception à
                 cette règle, un couple attribut&#160;/&#160;valeur peut excéder 100 caractères
                 puisqu'il n'est pas autorisé de les séparer.
             </para>
@@ -74,13 +74,13 @@
 
         <sect2 id="doc-standard.file-formatting.indentation">
             <title>Indentation</title>
-            
+
             <para>
                 L'indentation est faite de 4 espaces. Les tabulations ne sont pas autorisées.
             </para>
-            
+
             <para>Les éléments qui sont aux même niveaux doivent avoir la même indentation.</para>
-            
+
             <programlisting language="xml"><![CDATA[
 <sect1>
 </sect1>
@@ -89,10 +89,10 @@
 ]]></programlisting>
 
             <para>
-                Les éléments qui sont un niveau en-dessous de l'élément précédent doivent être 
+                Les éléments qui sont un niveau en-dessous de l'élément précédent doivent être
                 indentés de 4 espaces supplémentaires.
             </para>
-            
+
             <programlisting language="xml"><![CDATA[
 <sect1>
     <sect2>
@@ -101,10 +101,10 @@
 ]]></programlisting>
 
             <para>
-                Plusieurs éléments bloc sur une même ligne ne sont pas autorisés&#160;; plusieurs 
+                Plusieurs éléments bloc sur une même ligne ne sont pas autorisés&#160;; plusieurs
                 éléments en-ligne le sont en revanche.
             </para>
-            
+
             <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ : -->
 <sect1><sect2>
@@ -115,32 +115,32 @@
 </para>
 ]]></programlisting>
         </sect2>
-        
+
         <sect2 id="doc-standard.file-formatting.line-termination">
             <title>Fin de ligne</title>
-            
+
             <para>
-                Les fins de ligne suivent les conventions de fichier Unix. Les lignes doivent 
-                être terminées par un seul saut de ligne (LF), le caractère de saut de ligne 
+                Les fins de ligne suivent les conventions de fichier Unix. Les lignes doivent
+                être terminées par un seul saut de ligne (LF), le caractère de saut de ligne
                 s'écrit 10 en notation ordinal 10, et 0x0A en hexadécimal.
             </para>
-            
+
             <para>
-                Note : N'utilisez pas les retours chariot (<acronym>CR</acronym>) comme c'est le 
-                cas sur les systèmes Apple, ni l'association d'un retour chariot avec un saut de 
-                ligne (<acronym>CRLF</acronym>) qui est le standard sur les systèmes Windows 
+                Note : N'utilisez pas les retours chariot (<acronym>CR</acronym>) comme c'est le
+                cas sur les systèmes Apple, ni l'association d'un retour chariot avec un saut de
+                ligne (<acronym>CRLF</acronym>) qui est le standard sur les systèmes Windows
                 (0X0D, 0x0A).
             </para>
         </sect2>
-        
+
         <sect2 id="doc-standard.file-formatting.empty-tags">
             <title>Éléments vides</title>
-            
+
             <para>
                 Les éléments vides ne sont pas autorisés, tous les éléments doivent
                 contenir du texte ou des éléments enfants.
             </para>
-            
+
             <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ : -->
 <para>
@@ -150,18 +150,18 @@
 </para>
 ]]></programlisting>
         </sect2>
-        
+
         <sect2 id="doc-standard.file-formatting.whitespace">
             <title>Utilisation des espaces dans les documents</title>
-            
+
             <sect3 id="doc-standard.file-formatting.whitespace.trailing">
                 <title>Espace entre les balises</title>
-                
+
                 <para>
-                    Les balises ouvrantes des éléments bloc ne devrait pas être suivi 
+                    Les balises ouvrantes des éléments bloc ne devrait pas être suivi
                     par autre chose qu'un saut de ligne (et l'indentation de la ligne suivante).
                 </para>
-                
+
                 <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ : -->
 <sect1>ESPACE
@@ -169,10 +169,10 @@
 ]]></programlisting>
 
                 <para>
-                    Les balises ouvrantes des éléments en-ligne ne devrait pas être suivi 
+                    Les balises ouvrantes des éléments en-ligne ne devrait pas être suivi
                     d'espace.
                 </para>
-                
+
                 <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ : -->
 C'est la classe <classname> Zend_Class</classname>.
@@ -182,10 +182,10 @@ C'est la classe <classname>Zend_Class</classname>.
 
                 <para>
                     Les balises des éléments bloc peuvent être précédés par des espaces,
-                    si ceux-ci sont équivalents aux nombres d'espaces nécessaires pour 
+                    si ceux-ci sont équivalents aux nombres d'espaces nécessaires pour
                     l'indentation, mais pas plus.
                 </para>
-                
+
                 <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ : -->
     <sect1>
@@ -198,7 +198,7 @@ C'est la classe <classname>Zend_Class</classname>.
                 <para>
                     Les balises des éléments en-ligne ne doivent pas être précédés d'espaces.
                 </para>
-                
+
                 <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ -->
 C'est la classe <classname>Zend_Class </classname>
@@ -206,15 +206,15 @@ C'est la classe <classname>Zend_Class </classname>
 C'est la classe  <classname>Zend_Class</classname>
 ]]></programlisting>
             </sect3>
-            
+
             <sect3 id="doc-standard.file-formatting.whitespace.multiple-line-breaks">
                 <title>Sauts de ligne multiples</title>
-                
+
                 <para>
-                    Les sauts de ligne multiples ne sont pas autorisés ni dans les balises, 
+                    Les sauts de ligne multiples ne sont pas autorisés ni dans les balises,
                     ni entre elles.
                 </para>
-                
+
                 <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ -->
 <para>
@@ -237,15 +237,15 @@ C'est la classe  <classname>Zend_Class</classname>
 </para>
 ]]></programlisting>
             </sect3>
-            
+
             <sect3 id="doc-standard.file-formatting.whitespace.tag-separation">
                 <title>Séparation entre les balises</title>
-                
+
                 <para>
                     Les éléments qui sont au même niveau doivent être séparés par une ligne vide
                     pour améliorer la lisibilité.
                 </para>
-                
+
                 <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ -->
 <para>
@@ -265,11 +265,11 @@ C'est la classe  <classname>Zend_Class</classname>
 ]]></programlisting>
 
                 <para>
-                    Le premier élément enfant devrait être ouvert directement après son parent, 
-                    sans ligne vide entre eux&#160;; le dernier élément enfant quant à lui, devrait être 
+                    Le premier élément enfant devrait être ouvert directement après son parent,
+                    sans ligne vide entre eux&#160;; le dernier élément enfant quant à lui, devrait être
                     fermé juste avant la balise fermante de son parent.
                 </para>
-                
+
                 <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ -->
 <sect1>
@@ -298,16 +298,16 @@ C'est la classe  <classname>Zend_Class</classname>
 ]]></programlisting>
             </sect3>
         </sect2>
-        
+
         <sect2 id="doc-standard.file-formatting.program-listing">
             <title>Exemple de code</title>
-            
+
             <para>
-                La balise ouvrante de l'élement <emphasis>&lt;programlisting&gt;</emphasis> doit 
-                indiquer l'attribut de langage (language) approprié et doit être indenté au même 
+                La balise ouvrante de l'élement <emphasis>&lt;programlisting&gt;</emphasis> doit
+                indiquer l'attribut de langage (language) approprié et doit être indenté au même
                 niveau que ces blocs frères.
             </para>
-            
+
             <programlisting language="xml"><![CDATA[
 <para>Paragraphe frère.</para>
 <programlisting language="php">]]>&lt;<![CDATA[![CDATA[
@@ -316,13 +316,13 @@ C'est la classe  <classname>Zend_Class</classname>
             <para>
                 <acronym>CDATA</acronym> devrait être utilisé autour de tous les exemples de code.
             </para>
-            
+
             <para>
-                Les sections <emphasis>&lt;programlisting&gt;</emphasis> ne doivent pas contenir de 
-                saut de ligne ou d'espace ni au début ni à la fin, étant donné qu'ils sont 
+                Les sections <emphasis>&lt;programlisting&gt;</emphasis> ne doivent pas contenir de
+                saut de ligne ou d'espace ni au début ni à la fin, étant donné qu'ils sont
                 représentés tels quels.
             </para>
-            
+
             <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ -->
 <programlisting language="php">]]>&lt;<![CDATA[![CDATA[
@@ -338,7 +338,7 @@ $render = "xxx";
                 La fermeture des éléments <acronym>CDATA</acronym> et <emphasis>&lt;programlisting&gt;</emphasis>
                 devrait être sur la même ligne, sans aucune indentation.
             </para>
-            
+
             <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ -->
     <programlisting language="php">]]>&lt;<![CDATA[![CDATA[
@@ -356,11 +356,11 @@ $render = "xxx";
 ]]></programlisting>
 
             <para>
-                L'élément <emphasis>&lt;programlisting&gt;</emphasis> devrait contenir l'attribut 
-                de langage avec la valeur appropriée au contenu. Les valeurs les plus courantes 
+                L'élément <emphasis>&lt;programlisting&gt;</emphasis> devrait contenir l'attribut
+                de langage avec la valeur appropriée au contenu. Les valeurs les plus courantes
                 sont "css", "html", "ini", "javascript", "text", et "xml".
             </para>
-            
+
             <programlisting language="xml"><![CDATA[
 <!-- PHP -->
 <programlisting language="php">]]>&lt;<![CDATA[![CDATA[
@@ -372,12 +372,12 @@ $render = "xxx";
 
             <para>
                 Pour les exemples contenant uniquement du code <acronym>PHP</acronym>,
-                Les balises <acronym>PHP</acronym> ("&lt;?php" et "?&gt;") ne sont pas requises, et 
-                ne devrait pas être utilisées. Elles compliquent la lisibilité du code, et sont 
-                implicites lors de l'utilisation de l'élément 
+                Les balises <acronym>PHP</acronym> ("&lt;?php" et "?&gt;") ne sont pas requises, et
+                ne devrait pas être utilisées. Elles compliquent la lisibilité du code, et sont
+                implicites lors de l'utilisation de l'élément
                 <emphasis>&lt;programlisting&gt;</emphasis>.
             </para>
-            
+
             <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ -->
 <programlisting language="php"]]>&lt;<![CDATA[![CDATA[<?php
@@ -391,62 +391,62 @@ $render = "xxx";
 ]]></programlisting>
 
             <para>
-                La longueur maximum des lignes pour les exemples de code devrait suivre les 
+                La longueur maximum des lignes pour les exemples de code devrait suivre les
                 recommandations de la <link linkend="coding-standard.php-file-formatting.max-line-length">
                 convention de codage</link>.
             </para>
-            
+
             <para>
                 Évitez d'utiliser <methodname>require_once()</methodname>,
-                <methodname>require()</methodname>, <methodname>include_once()</methodname>, et 
+                <methodname>require()</methodname>, <methodname>include_once()</methodname>, et
                 <methodname>include()</methodname> dans les exemples <acronym>PHP</acronym>.
-                Ils emcombrent la documentation, et sont la plupart du temps inutile si vous 
-                utilisez un autoloader. Utilisez-les uniquement lorsqu'ils sont essentiels à 
+                Ils emcombrent la documentation, et sont la plupart du temps inutile si vous
+                utilisez un autoloader. Utilisez-les uniquement lorsqu'ils sont essentiels à
                 la compréhension d'un exemple.
             </para>
-            
+
             <note>
                 <title>N'utilisez jamais les short tags</title>
-                
+
                 <para>
-                    Les short tags (e.g., "&lt;?", "&lt;?=")  ne devrait jamais être utilisés dans 
-                    l'élément <emphasis>programlisting</emphasis> ni dans le reste de la 
+                    Les short tags (e.g., "&lt;?", "&lt;?=")  ne devrait jamais être utilisés dans
+                    l'élément <emphasis>programlisting</emphasis> ni dans le reste de la
                     documentation.
                 </para>
             </note>
         </sect2>
-        
+
         <sect2 id="doc-standard.file-formatting.inline-tags">
             <title>Notes spécifiques sur les éléments en-ligne</title>
-            
+
             <sect3 id="doc-standard.file-formatting.inline-tags.classname">
                 <title>classname</title>
-                
+
                 <para>
-                    L'élément <emphasis>&lt;classname&gt;</emphasis> doit être utilisé chaque fois 
-                    que le nom d'une classe est mentionné&#160;; il ne doivent cependant pas être 
-                    utilisé lorsque celle-ci est associé au nom d'une méthode, d'un membre, ou 
+                    L'élément <emphasis>&lt;classname&gt;</emphasis> doit être utilisé chaque fois
+                    que le nom d'une classe est mentionné&#160;; il ne doivent cependant pas être
+                    utilisé lorsque celle-ci est associé au nom d'une méthode, d'un membre, ou
                     d'une constante, rien d'autre n'est autorisé dans cet élément.
                 </para>
-                
+
                 <programlisting language="xml"><![CDATA[
 <para>
     La classe <classname>Zend_Class</classname>.
 </para>
 ]]></programlisting>
             </sect3>
-            
+
             <sect3 id="doc-standard.file-formatting.inline-tags.varname">
                 <title>varname</title>
-                
+
                 <para>
                     Les variables doivent être entourées par les balises <emphasis>&lt;varname&gt;
                     </emphasis>.
-                    Les variables doivent être écrites en utilisant le symbole "$". Rien d'autre 
-                    n'est autorisé dans cet élément, excepté le nom d'une classe, s'il s'agit d'un 
+                    Les variables doivent être écrites en utilisant le symbole "$". Rien d'autre
+                    n'est autorisé dans cet élément, excepté le nom d'une classe, s'il s'agit d'un
                     membre de celle-ci.
                 </para>
-                
+
                 <programlisting language="xml"><![CDATA[
 <para>
     La variable <varname>$var</varname> et le membre de classe
@@ -454,18 +454,18 @@ $render = "xxx";
 </para>
 ]]></programlisting>
             </sect3>
-            
+
             <sect3 id="doc-standard.file-formatting.inline-tags.methodname">
                 <title>methodname</title>
-                
+
                 <para>
-                    Les méthodes doivent être entourées par les balises 
-                    <emphasis>&lt;methodname&gt;</emphasis>. Les méthodes doivent soit contenir 
-                    la signature complète, soit au moins une paire de parenthèses (ex : "()"). 
-                    Aucun autre contenu n'est autorisé dans cet élément, excepté le nom d'une 
+                    Les méthodes doivent être entourées par les balises
+                    <emphasis>&lt;methodname&gt;</emphasis>. Les méthodes doivent soit contenir
+                    la signature complète, soit au moins une paire de parenthèses (ex : "()").
+                    Aucun autre contenu n'est autorisé dans cet élément, excepté le nom d'une
                     classe, pour indiquer qu'il s'agit d'une méthode de celle-ci.
                 </para>
-                
+
                 <programlisting language="xml"><![CDATA[
 <para>
     La fonction <methodname>foo()</methodname> et la méthode
@@ -474,17 +474,17 @@ $render = "xxx";
 </para>
 ]]></programlisting>
             </sect3>
-            
+
             <sect3 id="doc-standard.file-formatting.inline-tags.constant">
                 <title>constant</title>
-                
+
                 <para>
-                    Utilisez l'élément <emphasis>&lt;constant&gt;</emphasis> pour indiquer 
-                    qu'il s'agit d'une constante. Les constantes doivent être écrites en 
-                    majuscules. Aucun autre contenu n'est autorisé, excepté le nom d'une classe, 
+                    Utilisez l'élément <emphasis>&lt;constant&gt;</emphasis> pour indiquer
+                    qu'il s'agit d'une constante. Les constantes doivent être écrites en
+                    majuscules. Aucun autre contenu n'est autorisé, excepté le nom d'une classe,
                     pour indiquer qu'il s'agit d'une constante de classe.
                 </para>
-                
+
                 <programlisting language="xml"><![CDATA[
 <para>
     La constante <constant>FOO</constant> et la constante de classe
@@ -492,59 +492,59 @@ $render = "xxx";
 </para>
 ]]></programlisting>
             </sect3>
-            
+
             <sect3 id="doc-standard.file-formatting.inline-tags.filename">
                 <title>filename</title>
-                
+
                 <para>
-                    Les noms de fichier et chemins doivent être entourés par les balises 
-                    <emphasis>&lt;filename&gt;</emphasis>. Aucun autre contenu n'est autorisé 
+                    Les noms de fichier et chemins doivent être entourés par les balises
+                    <emphasis>&lt;filename&gt;</emphasis>. Aucun autre contenu n'est autorisé
                     dans cet élément.
                 </para>
-                
+
                 <programlisting language="xml"><![CDATA[
 <para>
     Le nom de fichier <filename>application/Bootstrap.php</filename>.
 </para>
 ]]></programlisting>
             </sect3>
-            
+
             <sect3 id="doc-standard.file-formatting.inline-tags.command">
                 <title>command</title>
-                
+
                 <para>
-                    Les commandes, les scripts shell, ainsi que l'appel de programme doivent être 
-                    entourés par les balises <emphasis>&lt;command&gt;</emphasis>. Si la commande 
+                    Les commandes, les scripts shell, ainsi que l'appel de programme doivent être
+                    entourés par les balises <emphasis>&lt;command&gt;</emphasis>. Si la commande
                     nécessite des arguments, ceux-ci doivent également être présent.
                 </para>
-                
+
                 <programlisting language="xml"><![CDATA[
 <para>
     Executez <command>zf.sh create project</command> pour créer un projet.
 </para>
 ]]></programlisting>
             </sect3>
-            
+
             <sect3 id="doc-standard.file-formatting.inline-tags.code">
                 <title>code</title>
-                
+
                 <para>
-                    L'utilisation de l'élément <emphasis>&lt;code&gt;</emphasis> est déconseillée, 
+                    L'utilisation de l'élément <emphasis>&lt;code&gt;</emphasis> est déconseillée,
                     en faveur des autres éléments discutés précédement.
                 </para>
             </sect3>
         </sect2>
-        
+
         <sect2 id="doc-standard.file-formatting.block-tags">
             <title>Notes spécifiques sur les éléments bloc</title>
-            
+
             <sect3 id="doc-standard.file-formatting.block-tags.title">
                 <title>title</title>
-                
+
                 <para>
                     L'élément <emphasis>&lt;title&gt;</emphasis> ne peut pas contenir d'éléments enfants.
                 </para>
-                
+
                 <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ -->
 <title>Utilisation de <classname>Zend_Class</classname></title>
@@ -554,83 +554,83 @@ $render = "xxx";
             </sect3>
         </sect2>
     </sect1>
-    
+
     <sect1 id="doc-standard.recommendations">
         <title>Recommendations</title>
-        
+
         <sect2 id="doc-standard.recommendations.editors">
             <title>Utilisez un éditeur sans formatage automatique</title>
-            
+
             <para>
-                Pour éditer la documentation, vous ne devriez pas utiliser un éditeur 
-                <acronym>XML</acronym> classique. Ces éditeurs formattent pour la plupart 
-                automatiquement les documents pour s'adapter à leurs propres standards et/ou ne 
-                suivent pas strictement les recommandations du docbook. Par exemple, nous en 
-                avons vu certains d'entre eux supprimer l'élément <acronym>CDATA</acronym>, 
+                Pour éditer la documentation, vous ne devriez pas utiliser un éditeur
+                <acronym>XML</acronym> classique. Ces éditeurs formattent pour la plupart
+                automatiquement les documents pour s'adapter à leurs propres standards et/ou ne
+                suivent pas strictement les recommandations du docbook. Par exemple, nous en
+                avons vu certains d'entre eux supprimer l'élément <acronym>CDATA</acronym>,
                 remplacer 4 espaces par des tabulations, ou 2 espaces, etc.
             </para>
-            
+
             <para>
-                Ces recommandations ont été écrites en grande partie afin d'aider les traducteurs 
+                Ces recommandations ont été écrites en grande partie afin d'aider les traducteurs
                 à déterminer les changements en utilisant la commande <command>diff</command>.
                 Le formatage automatique rend cette opération plus difficile.
             </para>
         </sect2>
-        
+
         <sect2 id="doc-standard.recommendations.images">
             <title>Utilisez des images</title>
-            
+
             <para>
                 Les images et les diagrammes peuvent améliorer la lisibilité et la compréhension.
-                Utilisez les chaque fois qu'ils le permettent. Les images devrait être placées 
-                dans le répertoire <filename>documentation/manual/en/figures/</filename>, et 
+                Utilisez les chaque fois qu'ils le permettent. Les images devrait être placées
+                dans le répertoire <filename>documentation/manual/en/figures/</filename>, et
                 nommées juste après l'identifiant de la section qui les concerne.
             </para>
         </sect2>
-        
+
         <sect2 id="doc-standard.recommendations.examples">
             <title>Utilisez des cas d'utilisations</title>
-            
+
             <para>
                 Cherchez de bons cas d'utilisation soumis par la communauté, particulièrement
-                ceux des commentaires dans les propositions ou encore sur l'une des liste de 
+                ceux des commentaires dans les propositions ou encore sur l'une des liste de
                 discussion. Un exemple vaut mieux qu'un long discours.
             </para>
-            
+
             <para>
                 Lorsque vous écrivez des exemples à inclure dans le manuel, suivez les conventions
                 de codages ainsi que les recommandations pour la documentation.
             </para>
         </sect2>
-        
+
         <sect2 id="doc-standard.recommendations.phpdoc">
             <title>Évitez de répéter le contenu des phpdoc</title>
-            
+
             <para>
                 Ce manuel a pour objectif d'être une référence pour l'utilisateur final.
-                Recopier la documentation phpdoc pour expliquer le fonctionnenement interne des 
-                composants et des classes n'est pas souhaité, l'accent devrait être mis sur 
-                l'utilisation. Dans tous les cas, nous souhaiterions que l'équide de documentation 
-                se concentre sur la traduction du manuel anglais, et non pas les commentaires 
+                Recopier la documentation phpdoc pour expliquer le fonctionnenement interne des
+                composants et des classes n'est pas souhaité, l'accent devrait être mis sur
+                l'utilisation. Dans tous les cas, nous souhaiterions que l'équide de documentation
+                se concentre sur la traduction du manuel anglais, et non pas les commentaires
                 phpdoc.
             </para>
         </sect2>
-        
+
         <sect2 id="doc-standard.recommendations.links">
             <title>Utilisez des liens</title>
-            
+
             <para>
                 Créez des liens vers les autres sections ou des ressources externes plutôt que
                 de tout réécrire.
             </para>
-            
+
             <para>
                 Les liens vers d'autres sections du manuel peuvent aussi bien utiliser l'élement
-                <emphasis>&lt;xref&gt;</emphasis> (qui substitura le titre de la section pour 
-                créer le nom du lien) ou l'élément <emphasis>&lt;link&gt;</emphasis> (pour lequel 
+                <emphasis>&lt;xref&gt;</emphasis> (qui substitura le titre de la section pour
+                créer le nom du lien) ou l'élément <emphasis>&lt;link&gt;</emphasis> (pour lequel
                 vous devez fournir le nom du lien).
             </para>
-            
+
             <programlisting language="xml"><![CDATA[
 <para>
     "Xref" crée un lien vers la section : <xref
@@ -646,7 +646,7 @@ $render = "xxx";
                 Pour créer un lien vers une ressource externe utilisez l'élément
                 <emphasis>&lt;ulink&gt;</emphasis>&#160;:
             </para>
-            
+
             <programlisting language="xml"><![CDATA[
 <para>
     Le site du <ulink url="http://framework.zend.com/">Zend Framework</ulink>.

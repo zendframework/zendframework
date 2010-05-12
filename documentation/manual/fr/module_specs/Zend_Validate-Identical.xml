@@ -8,7 +8,7 @@
         <classname>Zend_Validate_Identical</classname> vous permet de valider si une valeur donnée
         est identique à une valeur préalablement fournie.
     </para>
- 
+
     <sect3 id="zend.validate.set.identical.options">
         <title>Options supportées par Zend_Validate_Identical</title>
 

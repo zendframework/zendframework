@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21762 -->
+<!-- EN-Revision: 21985 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Standard Prüfklassen</title>
@@ -9,35 +9,8 @@
         sind.
     </para>
 
-    <sect2 id="zend.validate.set.alnum">
-        <title>Alnum</title>
-
-        <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> nur
-            alphabetische und digitale Zeichen enthält. Dieser Prüfer enthält eine Option um
-            auszuwählen ob Leerzeichen als gültig anzusehen sind.
-        </para>
-
-        <note>
-            <para>
-                Alphabetische Zeichen bedeuten Zeichen die in jeder Spache Wörter bilden. Trotzdem
-                wird das englische Alphabet in den folgenden Sprachen für alphabethische Zeichen
-                verwendet: Chinesisch, Japanisch, Koreanisch. Die Sprache wurde von
-                <classname>Zend_Locale</classname> spezifiziert.
-            </para>
-        </note>
-    </sect2>
-
-    <sect2 id="zend.validate.set.alpha">
-        <title>Alpha</title>
-
-        <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> nur
-            alphabetische Zeichen enthält. Dieser Prüfer enthält eine Option um auszuwählen ob
-            Leerzeichen als gültig anzusehen sind.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Alnum.xml" />
+    <xi:include href="Zend_Validate-Alpha.xml" />
     <xi:include href="Zend_Validate-Barcode.xml" />
     <xi:include href="Zend_Validate-Between.xml" />
     <xi:include href="Zend_Validate-Callback.xml" />

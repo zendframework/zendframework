@@ -172,6 +172,21 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-9682
+     */
+    public function testCustomLabelDecorator()
+    {
+        $form = new Zend_Form();
+        $form->addElementPrefixPath('My_Decorator', dirname(__FILE__) . '/../_files/decorators/', 'decorator');
+
+        $form->addElement($this->element);
+
+        $element = $form->getElement('foo');
+
+        $this->assertType('My_Decorator_Label', $element->getDecorator('Label'));
+    }
+
+    /**
      * @group ZF-6426
      */
     public function testRenderingShouldCreateLabelWithoutForAttribute()

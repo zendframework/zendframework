@@ -95,11 +95,10 @@ print "Ton:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
 
         <para>
             Measurements can be added together using <methodname>add()</methodname> and subtracted
-            using <methodname>sub()</methodname>. Each addition will create a new object for the
-            result. The actual object will never be changed by the class. The new object will be of
-            the same type as the originating object. Dynamic objects support a fluid style of
-            programming, where complex sequences of operations can be nested without risk of
-            side-effects altering the input objects.
+            using <methodname>sub()</methodname>. The result will use the same type as the
+            originating object. Dynamic objects support a fluid style of programming, where complex
+            sequences of operations can be nested without risk of side-effects altering the input
+            objects.
         </para>
 
         <para>

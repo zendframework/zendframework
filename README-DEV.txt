@@ -47,7 +47,7 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 [X] Zend_CodeGenerator
 [X] Zend_Console
 [X] Zend_Dom
-[ ] Zend_Gdata
+[X] Zend_Gdata
 [ ] Zend_InfoCard
 [X] Zend_Ldap
 [ ] Zend_Mime -> [ ] Zend_Mail
@@ -55,7 +55,7 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 [X] Zend_Memory -> [X] Zend_Pdf -> [X] Zend_Barcode
 [ ] Zend_Db (except Firebug profiler) -> [ ] Zend_Feed, [ ] Zend_Queue
 [X] Zend_Text -> [X] Zend_ProgressBar -> [X] Zend_File
-[ ] Zend_Search
+[X] Zend_Search
 [X] Zend_Service_Abstract -> [X] Zend_Rest_Client, [X] Zend_Service_ReCaptcha -> [X] Zend_Captcha
 [ ] Zend_Soap
 [X] Zend_Tag

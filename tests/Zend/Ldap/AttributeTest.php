@@ -307,7 +307,7 @@ class Zend_Ldap_AttributeTest extends PHPUnit_Framework_TestCase
     {
         $data=array('ts' => array('dummy'));
         $retTs=Zend_Ldap_Attribute::getDateTimeAttribute($data, 'ts', 0);
-        $this->assertNull($retTs);
+        $this->assertEquals('dummy', $retTs);
     }
 
     public function testGetDateTimeValueNegativeOffet()

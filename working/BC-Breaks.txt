@@ -198,3 +198,10 @@ Zend_Search_Lucene
  * "Zend_Search_Lucene_Document_Html" class becomes "Zend\Search\Lucene\Document\HTML"
  * "Zend_Search_Lucene_Search_Highlighter_Default" class becomes 
    "\Zend\Search\Lucene\Search\Highlighter\DefaultHighlighter"
+
+Zend_Db
+ * Zend_Db becomes Zend\DB
+ * Zend\DB\Table becomes Zend\DB\Table\Table
+ * Various capitolization changes:
+    Mysql -> MySQL, Mysqli -> MySQLi, Pdo -> PDO, Pgsql -> PGSQL, Oci -> OCI, Ibm -> IBM
+    Mssql -> MSSQL, Sqlite -> SQLite, Sqlsrv -> SQLSRV

@@ -53,7 +53,7 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 [ ] Zend_Mime -> [ ] Zend_Mail
 [X] Zend_Markup
 [X] Zend_Memory -> [X] Zend_Pdf -> [X] Zend_Barcode
-[ ] Zend_Db (except Firebug profiler) -> [ ] Zend_Feed, [ ] Zend_Queue
+[X] Zend_Db (except Firebug profiler) -> [ ] Zend_Feed, [ ] Zend_Queue
 [X] Zend_Text -> [X] Zend_ProgressBar -> [X] Zend_File
 [X] Zend_Search
 [X] Zend_Service_Abstract -> [X] Zend_Rest_Client, [X] Zend_Service_ReCaptcha -> [X] Zend_Captcha

@@ -41,26 +41,41 @@ Third pass:
 Fourth pass:
 THE FOLLOWING IN ANY ORDER (except where indicated):
 [X] Zend_Json
-[X] Zend_Crypt -> [X] Zend_Oauth, [X] Zend_XmlRpc
+[X] Zend_Crypt 
+[X] `-> Zend_Oauth 
+[X] `-> Zend_XmlRpc
 [X] Zend_Acl
 [X] Zend_Reflection
 [X] Zend_CodeGenerator
 [X] Zend_Console
 [X] Zend_Dom
 [X] Zend_Gdata
-[ ] Zend_InfoCard
+[X] Zend_InfoCard
 [X] Zend_Ldap
-[ ] Zend_Mime -> [ ] Zend_Mail
+[ ] Zend_Mime 
+[ ] `-> Zend_Mail
 [X] Zend_Markup
-[X] Zend_Memory -> [X] Zend_Pdf -> [X] Zend_Barcode
-[X] Zend_Db (except Firebug profiler) -> [ ] Zend_Feed, [ ] Zend_Queue
-[X] Zend_Text -> [X] Zend_ProgressBar -> [X] Zend_File
+[X] Zend_Memory 
+[X] `-> Zend_Pdf
+[X]     `-> Zend_Barcode
+[X] Zend_Db (except Firebug profiler)
+[ ] `-> Zend_Feed
+[ ]     `-> Zend_Queue
+[X] Zend_Text
+[X] `-> Zend_ProgressBar
+[X]     `-> Zend_File
 [X] Zend_Search
-[X] Zend_Service_Abstract -> [X] Zend_Rest_Client, [X] Zend_Service_ReCaptcha -> [X] Zend_Captcha
+[X] Zend_Service_Abstract
+[X] `-> Zend_Rest_Client
+[X]     `-> Zend_Service_ReCaptcha
+[X]         `-> Zend_Captcha
 [ ] Zend_Soap
 [X] Zend_Tag
 [ ] Zend_Service_*
-[X] Zend_Session -> [X] Zend_Auth -> [X] Zend_Amf -> [X] Zend_Serializer
+[X] Zend_Session 
+[X] `-> Zend_Auth 
+[X]     `-> Zend_Amf 
+[X]         `-> Zend_Serializer
 
 Fifth pass:
 All together:

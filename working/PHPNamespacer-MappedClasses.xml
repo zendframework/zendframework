@@ -2035,434 +2035,434 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/AbstractAdapter.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/DB/Adapter/AbstractAdapter.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
       <newClassName>AbstractAdapter</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\AbstractAdapter</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Adapter\AbstractAdapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Db2/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Db2_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Db2/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Db2</newNamespace>
+      <newRelativeFilePath>Zend/DB/Adapter/DB2/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\DB2</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Db2\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Adapter\DB2\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Db2.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Db2</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Db2/Db2.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Db2</newNamespace>
-      <newClassName>Db2</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Db2\Db2</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/DB2/DB2.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\DB2</newNamespace>
+      <newClassName>DB2</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\DB2\DB2</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/DB/Adapter/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Adapter\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Mysqli/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Mysqli_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Mysqli/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Mysqli</newNamespace>
+      <newRelativeFilePath>Zend/DB/Adapter/MySQLi/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\MySQLi</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Mysqli\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Adapter\MySQLi\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Mysqli.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Mysqli</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Mysqli/Mysqli.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Mysqli</newNamespace>
-      <newClassName>Mysqli</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Mysqli\Mysqli</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/MySQLi/MySQLi.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\MySQLi</newNamespace>
+      <newClassName>MySQLi</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\MySQLi\MySQLi</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Oracle/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Oracle_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Oracle/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Oracle</newNamespace>
+      <newRelativeFilePath>Zend/DB/Adapter/Oracle/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\Oracle</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Oracle\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Adapter\Oracle\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Oracle.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Oracle</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Oracle/Oracle.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Oracle</newNamespace>
+      <newRelativeFilePath>Zend/DB/Adapter/Oracle/Oracle.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\Oracle</newNamespace>
       <newClassName>Oracle</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Oracle\Oracle</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Adapter\Oracle\Oracle</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Pdo/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Pdo_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Pdo/AbstractPdo.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Pdo</newNamespace>
-      <newClassName>AbstractPdo</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Pdo\AbstractPdo</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/PDO/AbstractPDO.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\PDO</newNamespace>
+      <newClassName>AbstractPDO</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\PDO\AbstractPDO</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Pdo/Ibm/Db2.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Pdo_Ibm_Db2</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Pdo/Ibm/Db2.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Pdo\Ibm</newNamespace>
-      <newClassName>Db2</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Pdo\Ibm\Db2</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/PDO/IBM/DB2.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\PDO\IBM</newNamespace>
+      <newClassName>DB2</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\PDO\IBM\DB2</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Pdo/Ibm/Ids.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Pdo_Ibm_Ids</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Pdo/Ibm/Ids.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Pdo\Ibm</newNamespace>
-      <newClassName>Ids</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Pdo\Ibm\Ids</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/PDO/IBM/IDS.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\PDO\IBM</newNamespace>
+      <newClassName>IDS</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\PDO\IBM\IDS</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Pdo/Ibm.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Pdo_Ibm</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Pdo/Ibm/Ibm.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Pdo\Ibm</newNamespace>
-      <newClassName>Ibm</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Pdo\Ibm\Ibm</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/PDO/IBM/IBM.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\PDO\IBM</newNamespace>
+      <newClassName>IBM</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\PDO\IBM\IBM</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Pdo/Mssql.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Pdo_Mssql</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Pdo/Mssql.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Pdo</newNamespace>
-      <newClassName>Mssql</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Pdo\Mssql</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/PDO/MSSQL.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\PDO</newNamespace>
+      <newClassName>MSSQL</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\PDO\MSSQL</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Pdo/Mysql.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Pdo_Mysql</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Pdo/Mysql.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Pdo</newNamespace>
-      <newClassName>Mysql</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Pdo\Mysql</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/PDO/MySQL.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\PDO</newNamespace>
+      <newClassName>MySQL</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\PDO\MySQL</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Pdo/Oci.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Pdo_Oci</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Pdo/Oci.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Pdo</newNamespace>
-      <newClassName>Oci</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Pdo\Oci</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/PDO/OCI.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\PDO</newNamespace>
+      <newClassName>OCI</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\PDO\OCI</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Pdo/Pgsql.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Pdo_Pgsql</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Pdo/Pgsql.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Pdo</newNamespace>
-      <newClassName>Pgsql</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Pdo\Pgsql</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/PDO/PGSQL.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\PDO</newNamespace>
+      <newClassName>PGSQL</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\PDO\PGSQL</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Pdo/Sqlite.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Pdo_Sqlite</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Pdo/Sqlite.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Pdo</newNamespace>
-      <newClassName>Sqlite</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Pdo\Sqlite</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/PDO/SQLite.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\PDO</newNamespace>
+      <newClassName>SQLite</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\PDO\SQLite</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Sqlsrv/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Sqlsrv_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Sqlsrv/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Sqlsrv</newNamespace>
+      <newRelativeFilePath>Zend/DB/Adapter/SQLSRV/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\SQLSRV</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Sqlsrv\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Adapter\SQLSRV\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Sqlsrv.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Sqlsrv</originalClassName>
-      <newRelativeFilePath>Zend/Db/Adapter/Sqlsrv/Sqlsrv.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Adapter\Sqlsrv</newNamespace>
-      <newClassName>Sqlsrv</newClassName>
-      <newFullyQualifiedName>Zend\Db\Adapter\Sqlsrv\Sqlsrv</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/SQLSRV/SQLSRV.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter\SQLSRV</newNamespace>
+      <newClassName>SQLSRV</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\SQLSRV\SQLSRV</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db</newNamespace>
+      <newRelativeFilePath>Zend/DB/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Expr.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Expr</originalClassName>
-      <newRelativeFilePath>Zend/Db/Expr.php</newRelativeFilePath>
-      <newNamespace>Zend\Db</newNamespace>
+      <newRelativeFilePath>Zend/DB/Expr.php</newRelativeFilePath>
+      <newNamespace>Zend\DB</newNamespace>
       <newClassName>Expr</newClassName>
-      <newFullyQualifiedName>Zend\Db\Expr</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Expr</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Profiler/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Profiler_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Profiler/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Profiler</newNamespace>
+      <newRelativeFilePath>Zend/DB/Profiler/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Profiler</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Profiler\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Profiler\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Profiler/Firebug.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Profiler_Firebug</originalClassName>
-      <newRelativeFilePath>Zend/Db/Profiler/Firebug.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Profiler</newNamespace>
+      <newRelativeFilePath>Zend/DB/Profiler/Firebug.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Profiler</newNamespace>
       <newClassName>Firebug</newClassName>
-      <newFullyQualifiedName>Zend\Db\Profiler\Firebug</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Profiler\Firebug</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Profiler/Query.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Profiler_Query</originalClassName>
-      <newRelativeFilePath>Zend/Db/Profiler/Query.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Profiler</newNamespace>
+      <newRelativeFilePath>Zend/DB/Profiler/Query.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Profiler</newNamespace>
       <newClassName>Query</newClassName>
-      <newFullyQualifiedName>Zend\Db\Profiler\Query</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Profiler\Query</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Profiler.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Profiler</originalClassName>
-      <newRelativeFilePath>Zend/Db/Profiler/Profiler.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Profiler</newNamespace>
+      <newRelativeFilePath>Zend/DB/Profiler/Profiler.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Profiler</newNamespace>
       <newClassName>Profiler</newClassName>
-      <newFullyQualifiedName>Zend\Db\Profiler\Profiler</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Profiler\Profiler</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Select/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Select_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Select/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Select</newNamespace>
+      <newRelativeFilePath>Zend/DB/Select/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Select</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Select\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Select\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Select.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Select</originalClassName>
-      <newRelativeFilePath>Zend/Db/Select/Select.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Select</newNamespace>
+      <newRelativeFilePath>Zend/DB/Select/Select.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Select</newNamespace>
       <newClassName>Select</newClassName>
-      <newFullyQualifiedName>Zend\Db\Select\Select</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Select\Select</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Db2/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Db2_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Statement/Db2/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Statement\Db2</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/DB2/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement\DB2</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Statement\Db2\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\DB2\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Db2.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Db2</originalClassName>
-      <newRelativeFilePath>Zend/Db/Statement/Db2/Db2.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Statement\Db2</newNamespace>
-      <newClassName>Db2</newClassName>
-      <newFullyQualifiedName>Zend\Db\Statement\Db2\Db2</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement/DB2/DB2.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement\DB2</newNamespace>
+      <newClassName>DB2</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\DB2\DB2</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Statement/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Statement</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Statement\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Db/Statement/StatementInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Statement</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/StatementInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
       <newClassName>StatementInterface</newClassName>
-      <newFullyQualifiedName>Zend\Db\Statement\StatementInterface</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\StatementInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Mysqli/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Mysqli_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Statement/Mysqli/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Statement\Mysqli</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/MySQLi/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement\MySQLi</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Statement\Mysqli\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\MySQLi\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Mysqli.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Mysqli</originalClassName>
-      <newRelativeFilePath>Zend/Db/Statement/Mysqli/Mysqli.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Statement\Mysqli</newNamespace>
-      <newClassName>Mysqli</newClassName>
-      <newFullyQualifiedName>Zend\Db\Statement\Mysqli\Mysqli</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement/MySQLi/MySQLi.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement\MySQLi</newNamespace>
+      <newClassName>MySQLi</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\MySQLi\MySQLi</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Oracle/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Oracle_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Statement/Oracle/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Statement\Oracle</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/Oracle/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement\Oracle</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Statement\Oracle\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\Oracle\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Oracle.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Oracle</originalClassName>
-      <newRelativeFilePath>Zend/Db/Statement/Oracle/Oracle.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Statement\Oracle</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/Oracle/Oracle.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement\Oracle</newNamespace>
       <newClassName>Oracle</newClassName>
-      <newFullyQualifiedName>Zend\Db\Statement\Oracle\Oracle</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\Oracle\Oracle</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Pdo/Ibm.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Pdo_Ibm</originalClassName>
-      <newRelativeFilePath>Zend/Db/Statement/Pdo/Ibm.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Statement\Pdo</newNamespace>
-      <newClassName>Ibm</newClassName>
-      <newFullyQualifiedName>Zend\Db\Statement\Pdo\Ibm</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement/PDO/IBM.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement\PDO</newNamespace>
+      <newClassName>IBM</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\PDO\IBM</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Pdo/Oci.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Pdo_Oci</originalClassName>
-      <newRelativeFilePath>Zend/Db/Statement/Pdo/Oci.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Statement\Pdo</newNamespace>
-      <newClassName>Oci</newClassName>
-      <newFullyQualifiedName>Zend\Db\Statement\Pdo\Oci</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement/PDO/OCI.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement\PDO</newNamespace>
+      <newClassName>OCI</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\PDO\OCI</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Pdo.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Pdo</originalClassName>
-      <newRelativeFilePath>Zend/Db/Statement/Pdo/Pdo.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Statement\Pdo</newNamespace>
-      <newClassName>Pdo</newClassName>
-      <newFullyQualifiedName>Zend\Db\Statement\Pdo\Pdo</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement/PDO/PDO.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement\PDO</newNamespace>
+      <newClassName>PDO</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\PDO\PDO</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Sqlsrv/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Sqlsrv_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Statement/Sqlsrv/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Statement\Sqlsrv</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/SQLSRV/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement\SQLSRV</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Statement\Sqlsrv\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\SQLSRV\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Sqlsrv.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Sqlsrv</originalClassName>
-      <newRelativeFilePath>Zend/Db/Statement/Sqlsrv/Sqlsrv.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Statement\Sqlsrv</newNamespace>
-      <newClassName>Sqlsrv</newClassName>
-      <newFullyQualifiedName>Zend\Db\Statement\Sqlsrv\Sqlsrv</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement/SQLSRV/SQLSRV.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement\SQLSRV</newNamespace>
+      <newClassName>SQLSRV</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\SQLSRV\SQLSRV</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement</originalClassName>
-      <newRelativeFilePath>Zend/Db/Statement/Statement.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Statement</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/Statement.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
       <newClassName>Statement</newClassName>
-      <newFullyQualifiedName>Zend\Db\Statement\Statement</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\Statement</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Db/Table/AbstractTable.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Table</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/AbstractTable.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
       <newClassName>AbstractTable</newClassName>
-      <newFullyQualifiedName>Zend\Db\Table\AbstractTable</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\AbstractTable</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Definition.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Definition</originalClassName>
-      <newRelativeFilePath>Zend/Db/Table/Definition.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Table</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Definition.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
       <newClassName>Definition</newClassName>
-      <newFullyQualifiedName>Zend\Db\Table\Definition</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Definition</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Table/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Table</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Table\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Row/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Row_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Db/Table/Row/AbstractRow.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Table\Row</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Row/AbstractRow.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table\Row</newNamespace>
       <newClassName>AbstractRow</newClassName>
-      <newFullyQualifiedName>Zend\Db\Table\Row\AbstractRow</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Row\AbstractRow</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Row/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Row_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Table/Row/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Table\Row</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Row/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table\Row</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Table\Row\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Row\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Row.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Row</originalClassName>
-      <newRelativeFilePath>Zend/Db/Table/Row/Row.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Table\Row</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Row/Row.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table\Row</newNamespace>
       <newClassName>Row</newClassName>
-      <newFullyQualifiedName>Zend\Db\Table\Row\Row</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Row\Row</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Rowset/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Rowset_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Db/Table/Rowset/AbstractRowset.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Table\Rowset</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Rowset/AbstractRowset.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table\Rowset</newNamespace>
       <newClassName>AbstractRowset</newClassName>
-      <newFullyQualifiedName>Zend\Db\Table\Rowset\AbstractRowset</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Rowset\AbstractRowset</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Rowset/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Rowset_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Table/Rowset/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Table\Rowset</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Rowset/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table\Rowset</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Table\Rowset\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Rowset\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Rowset.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Rowset</originalClassName>
-      <newRelativeFilePath>Zend/Db/Table/Rowset/Rowset.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Table\Rowset</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Rowset/Rowset.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table\Rowset</newNamespace>
       <newClassName>Rowset</newClassName>
-      <newFullyQualifiedName>Zend\Db\Table\Rowset\Rowset</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Rowset\Rowset</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Select/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Select_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Db/Table/Select/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Table\Select</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Select/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table\Select</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Db\Table\Select\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Select\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Select.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Select</originalClassName>
-      <newRelativeFilePath>Zend/Db/Table/Select/Select.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Table\Select</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Select/Select.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table\Select</newNamespace>
       <newClassName>Select</newClassName>
-      <newFullyQualifiedName>Zend\Db\Table\Select\Select</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Select\Select</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table</originalClassName>
-      <newRelativeFilePath>Zend/Db/Table/Table.php</newRelativeFilePath>
-      <newNamespace>Zend\Db\Table</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Table.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
       <newClassName>Table</newClassName>
-      <newFullyQualifiedName>Zend\Db\Table\Table</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Table</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db.php</originalRelativeFilePath>
       <originalClassName>Zend_Db</originalClassName>
-      <newRelativeFilePath>Zend/Db/Db.php</newRelativeFilePath>
-      <newNamespace>Zend\Db</newNamespace>
-      <newClassName>Db</newClassName>
-      <newFullyQualifiedName>Zend\Db\Db</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/DB.php</newRelativeFilePath>
+      <newNamespace>Zend\DB</newNamespace>
+      <newClassName>DB</newClassName>
+      <newFullyQualifiedName>Zend\DB\DB</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Debug.php</originalRelativeFilePath>
@@ -7307,34 +7307,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Pki/Adapter/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Cipher_Pki_Adapter_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Cipher/Pki/Adapter/AbstractAdapter.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Cipher\Pki\Adapter</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/Cipher/PKI/Adapter/AbstractAdapter.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\Cipher\PKI\Adapter</newNamespace>
       <newClassName>AbstractAdapter</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Cipher\Pki\Adapter\AbstractAdapter</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\Cipher\PKI\Adapter\AbstractAdapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Pki/Adapter/Rsa.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Cipher_Pki_Adapter_Rsa</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Cipher/Pki/Adapter/Rsa.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Cipher\Pki\Adapter</newNamespace>
-      <newClassName>Rsa</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Cipher\Pki\Adapter\Rsa</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/Cipher/PKI/Adapter/RSA.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\Cipher\PKI\Adapter</newNamespace>
+      <newClassName>RSA</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\Cipher\PKI\Adapter\RSA</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Pki/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Cipher_Pki_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Cipher/Pki/PkiInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Cipher\Pki</newNamespace>
-      <newClassName>PkiInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Cipher\Pki\PkiInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/Cipher/PKI/PKIInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\Cipher\PKI</newNamespace>
+      <newClassName>PKIInterface</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\Cipher\PKI\PKIInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Pki/Rsa/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Cipher_Pki_Rsa_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Cipher/Pki/Rsa/RsaInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Cipher\Pki\Rsa</newNamespace>
-      <newClassName>RsaInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Cipher\Pki\Rsa\RsaInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/Cipher/PKI/RSA/RSAInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\Cipher\PKI\RSA</newNamespace>
+      <newClassName>RSAInterface</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\Cipher\PKI\RSA\RSAInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/Adapter/Abstract.php</originalRelativeFilePath>
@@ -7347,34 +7347,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/Adapter/Aes128cbc.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Cipher_Symmetric_Adapter_Aes128cbc</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/Adapter/Aes128cbc.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/Adapter/AES128CBC.php</newRelativeFilePath>
       <newNamespace>Zend\InfoCard\Cipher\Symmetric\Adapter</newNamespace>
-      <newClassName>Aes128cbc</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Cipher\Symmetric\Adapter\Aes128cbc</newFullyQualifiedName>
+      <newClassName>AES128CBC</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\Cipher\Symmetric\Adapter\AES128CBC</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/Adapter/Aes256cbc.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Cipher_Symmetric_Adapter_Aes256cbc</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/Adapter/Aes256cbc.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/Adapter/AES256CBC.php</newRelativeFilePath>
       <newNamespace>Zend\InfoCard\Cipher\Symmetric\Adapter</newNamespace>
-      <newClassName>Aes256cbc</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Cipher\Symmetric\Adapter\Aes256cbc</newFullyQualifiedName>
+      <newClassName>AES256CBC</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\Cipher\Symmetric\Adapter\AES256CBC</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/Aes128cbc/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Cipher_Symmetric_Aes128cbc_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/Aes128cbc/Aes128cbcInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Cipher\Symmetric\Aes128cbc</newNamespace>
-      <newClassName>Aes128cbcInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Cipher\Symmetric\Aes128cbc\Aes128cbcInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/AES128CBC/AES128CBCInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\Cipher\Symmetric\AES128CBC</newNamespace>
+      <newClassName>AES128CBCInterface</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\Cipher\Symmetric\AES128CBC\AES128CBCInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/Aes256cbc/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Cipher_Symmetric_Aes256cbc_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/Aes256cbc/Aes256cbcInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Cipher\Symmetric\Aes256cbc</newNamespace>
-      <newClassName>Aes256cbcInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Cipher\Symmetric\Aes256cbc\Aes256cbcInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/AES256CBC/AES256CBCInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\Cipher\Symmetric\AES256CBC</newNamespace>
+      <newClassName>AES256CBCInterface</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\Cipher\Symmetric\AES256CBC\AES256CBCInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/Interface.php</originalRelativeFilePath>
@@ -7411,186 +7411,186 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Assertion/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Assertion_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/Assertion/AssertionInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\Assertion</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/Assertion/AssertionInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\Assertion</newNamespace>
       <newClassName>AssertionInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\Assertion\AssertionInterface</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Assertion\AssertionInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Assertion/Saml.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Assertion_Saml</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/Assertion/Saml.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\Assertion</newNamespace>
-      <newClassName>Saml</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\Assertion\Saml</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/XML/Assertion/SAML.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\Assertion</newNamespace>
+      <newClassName>SAML</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Assertion\SAML</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Assertion.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Assertion</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/Assertion/Assertion.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\Assertion</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/Assertion/Assertion.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\Assertion</newNamespace>
       <newClassName>Assertion</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\Assertion\Assertion</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Assertion\Assertion</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Element/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Element_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/Element/ElementInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\Element</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/Element/ElementInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\Element</newNamespace>
       <newClassName>ElementInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\Element\ElementInterface</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Element\ElementInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Element.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Element</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/Element/Element.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\Element</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/Element/Element.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\Element</newNamespace>
       <newClassName>Element</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\Element\Element</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Element\Element</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/EncryptedData/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_EncryptedData_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/EncryptedData/AbstractEncryptedData.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\EncryptedData</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/EncryptedData/AbstractEncryptedData.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\EncryptedData</newNamespace>
       <newClassName>AbstractEncryptedData</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\EncryptedData\AbstractEncryptedData</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\EncryptedData\AbstractEncryptedData</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/EncryptedData/XmlEnc.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_EncryptedData_XmlEnc</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/EncryptedData/XmlEnc.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\EncryptedData</newNamespace>
-      <newClassName>XmlEnc</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\EncryptedData\XmlEnc</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/XML/EncryptedData/XMLEnc.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\EncryptedData</newNamespace>
+      <newClassName>XMLEnc</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\EncryptedData\XMLEnc</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/EncryptedData.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_EncryptedData</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/EncryptedData/EncryptedData.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\EncryptedData</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/EncryptedData/EncryptedData.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\EncryptedData</newNamespace>
       <newClassName>EncryptedData</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\EncryptedData\EncryptedData</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\EncryptedData\EncryptedData</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/EncryptedKey.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_EncryptedKey</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/EncryptedKey.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/EncryptedKey.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML</newNamespace>
       <newClassName>EncryptedKey</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\EncryptedKey</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\EncryptedKey</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Exception</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/KeyInfo/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_KeyInfo_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/KeyInfo/AbstractKeyInfo.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\KeyInfo</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/KeyInfo/AbstractKeyInfo.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\KeyInfo</newNamespace>
       <newClassName>AbstractKeyInfo</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\KeyInfo\AbstractKeyInfo</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\KeyInfo\AbstractKeyInfo</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/KeyInfo/Default.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_KeyInfo_Default</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/KeyInfo/Default.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\KeyInfo</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/KeyInfo/Default.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\KeyInfo</newNamespace>
       <newClassName>Default</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\KeyInfo\Default</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\KeyInfo\Default</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/KeyInfo/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_KeyInfo_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/KeyInfo/KeyInfoInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\KeyInfo</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/KeyInfo/KeyInfoInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\KeyInfo</newNamespace>
       <newClassName>KeyInfoInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\KeyInfo\KeyInfoInterface</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\KeyInfo\KeyInfoInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/KeyInfo/XmlDSig.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_KeyInfo_XmlDSig</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/KeyInfo/XmlDSig.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\KeyInfo</newNamespace>
-      <newClassName>XmlDSig</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\KeyInfo\XmlDSig</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/XML/KeyInfo/XMLDSig.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\KeyInfo</newNamespace>
+      <newClassName>XMLDSig</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\KeyInfo\XMLDSig</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/KeyInfo.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_KeyInfo</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/KeyInfo/KeyInfo.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\KeyInfo</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/KeyInfo/KeyInfo.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\KeyInfo</newNamespace>
       <newClassName>KeyInfo</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\KeyInfo\KeyInfo</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\KeyInfo\KeyInfo</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Security/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Security_Exception</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/Security/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\Security</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/Security/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\Security</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\Security\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Security\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Security/Transform/EnvelopedSignature.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Security_Transform_EnvelopedSignature</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/Security/Transform/EnvelopedSignature.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\Security\Transform</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/Security/Transform/EnvelopedSignature.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\Security\Transform</newNamespace>
       <newClassName>EnvelopedSignature</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\Security\Transform\EnvelopedSignature</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Security\Transform\EnvelopedSignature</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Security/Transform/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Security_Transform_Exception</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/Security/Transform/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\Security\Transform</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/Security/Transform/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\Security\Transform</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\Security\Transform\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Security\Transform\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Security/Transform/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Security_Transform_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/Security/Transform/TransformInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\Security\Transform</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/Security/Transform/TransformInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\Security\Transform</newNamespace>
       <newClassName>TransformInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\Security\Transform\TransformInterface</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Security\Transform\TransformInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Security/Transform/XmlExcC14N.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Security_Transform_XmlExcC14N</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/Security/Transform/XmlExcC14N.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\Security\Transform</newNamespace>
-      <newClassName>XmlExcC14N</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\Security\Transform\XmlExcC14N</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/XML/Security/Transform/XMLExcC14N.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\Security\Transform</newNamespace>
+      <newClassName>XMLExcC14N</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Security\Transform\XMLExcC14N</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Security/Transform.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Security_Transform</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/Security/Transform/Transform.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\Security\Transform</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/Security/Transform/Transform.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\Security\Transform</newNamespace>
       <newClassName>Transform</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\Security\Transform\Transform</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Security\Transform\Transform</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Security.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Security</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/Security/Security.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml\Security</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/Security/Security.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\Security</newNamespace>
       <newClassName>Security</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\Security\Security</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Security\Security</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/SecurityTokenReference.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_SecurityTokenReference</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Xml/SecurityTokenReference.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Xml</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/SecurityTokenReference.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML</newNamespace>
       <newClassName>SecurityTokenReference</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Xml\SecurityTokenReference</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\SecurityTokenReference</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard.php</originalRelativeFilePath>

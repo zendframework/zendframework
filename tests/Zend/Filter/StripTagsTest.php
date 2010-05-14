@@ -585,6 +585,23 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
         $expected = 'test <a /> test div-content';
         $this->assertEquals($expected, $filter->filter($input));
     }
+
+    /**
+     * @group ZF-9828
+     */
+    public function testMultiQuoteInput()
+    {
+        $filter = new Zend_Filter_StripTags(
+            array(
+                'allowTags' => 'img',
+                'allowAttribs' => array('width', 'height', 'src')
+            )
+        );
+
+        $input    = '<img width="10" height="10" src=\'wont_be_matched.jpg\'>';
+        $expected = '<img width="10" height="10" src=\'wont_be_matched.jpg\'>';
+        $this->assertEquals($expected, $filter->filter($input));
+    }
 }
 
 // Call Zend_Filter_StripTagsTest::main() if this source file is executed directly.

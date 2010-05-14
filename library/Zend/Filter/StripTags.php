@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -254,6 +253,7 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
         // Parse the input data iteratively as regular pre-tag text followed by a
         // tag; either may be empty strings
         preg_match_all('/([^<]*)(<?[^>]*>?)/', (string) $value, $matches);
+
         // Iterate over each set of matches
         foreach ($matches[1] as $index => $preTag) {
             // If the pre-tag text is non-empty, strip any ">" characters from it
@@ -320,8 +320,8 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
             // Iterate over each matched attribute
             foreach ($matches[1] as $index => $attributeName) {
                 $attributeName      = strtolower($attributeName);
-                $attributeDelimiter = $matches[2][$index];
-                $attributeValue     = $matches[3][$index];
+                $attributeDelimiter = empty($matches[2][$index]) ? $matches[4][$index] : $matches[2][$index];
+                $attributeValue     = empty($matches[3][$index]) ? $matches[5][$index] : $matches[3][$index];
 
                 // If the attribute is not allowed, then remove it entirely
                 if (!array_key_exists($attributeName, $this->_tagsAllowed[$tagName])

@@ -24,13 +24,13 @@
  * @namespace
  */
 namespace Zend\InfoCard\XML\EncryptedData;
-use Zend\InfoCard\XML\Element;
 use Zend\InfoCard\XML;
 
 /**
- * An XmlEnc formatted EncryptedData XML block
+ * A factory class for producing Zend_InfoCard_Xml_EncryptedData objects based on
+ * the type of XML document provided
  *
- * @uses       \Zend\InfoCard\XML\EncryptedData\AbstractEncryptedData
+ * @uses       \Zend\InfoCard\XML\EncryptedData\XMLEnc
  * @uses       \Zend\InfoCard\XML\Exception
  * @category   Zend
  * @package    Zend_InfoCard
@@ -38,31 +38,43 @@ use Zend\InfoCard\XML;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class XMLEnc extends AbstractEncryptedData
+final class EncryptedData
 {
+    /**
+     * Constructor (disabled)
+     *
+     * @return void
+     */
+    private function __construct()
+    {
+    }
 
     /**
-     * Returns the Encrypted CipherValue block from the EncryptedData XML document
+     * Returns an instance of the class
      *
+     * @param string $xmlData The XML EncryptedData String
+     * @return \Zend\InfoCard\XML\EncryptedData\AbstractEncryptedData
      * @throws \Zend\InfoCard\XML\Exception
-     * @return string The value of the CipherValue block base64 encoded
      */
-    public function getCipherValue()
+    static public function getInstance($xmlData)
     {
-        $this->registerXPathNamespace('enc', 'http://www.w3.org/2001/04/xmlenc#');
 
-        list(,$cipherdata) = $this->xpath("//enc:CipherData");
-
-        if(!($cipherdata instanceof Element\Element)) {
-            throw new XML\Exception("Unable to find the enc:CipherData block");
+        if($xmlData instanceof XML\Element\Element) {
+            $strXmlData = $xmlData->asXML();
+        } else if (is_string($xmlData)) {
+            $strXmlData = $xmlData;
+        } else {
+            throw new XML\Exception("Invalid Data provided to create instance");
         }
 
-        list(,$ciphervalue) = $cipherdata->xpath("//enc:CipherValue");
+        $sxe = simplexml_load_string($strXmlData);
 
-        if(!($ciphervalue instanceof Element\Element)) {
-            throw new XML\Exception("Unable to fidn the enc:CipherValue block");
+        switch($sxe['Type']) {
+            case 'http://www.w3.org/2001/04/xmlenc#Element':
+                return simplexml_load_string($strXmlData, 'Zend\InfoCard\XML\EncryptedData\XMLEnc');
+            default:
+                throw new XML\Exception("Unknown EncryptedData type found");
+                break;
         }
-
-        return (string)$ciphervalue;
     }
 }

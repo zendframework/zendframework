@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_InfoCard
- * @subpackage Zend_InfoCard
+ * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,26 +23,27 @@
 /**
  * @namespace
  */
-namespace Zend\InfoCard;
-
-if (class_exists('\Zend\Exception')) {
-    class Exception extends \Zend\Exception
-    {
-    }
-} else {
-    class Exception extends \Exception
-    {
-    }
-}
+namespace Zend\InfoCard\XML\Element;
 
 /**
- * Base Exception class for the InfoCard component
+ * The Interface used to represent an XML Data Type
  *
  * @category   Zend
  * @package    Zend_InfoCard
+ * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-//class Exception extends \Zend\InfoCard\Exception\Abstract
-//{
-//}
+interface ElementInterface
+{
+    /**
+     * Return the data within the object as an XML document
+     */
+    public function asXML();
+
+    /**
+     * Magic function which allows us to treat the object as a string to return XML
+     * (same as the asXML() method)
+     */
+    public function __toString();
+}

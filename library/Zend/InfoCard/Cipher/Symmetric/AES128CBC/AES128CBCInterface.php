@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_InfoCard
- * @subpackage Zend_InfoCard
+ * @subpackage Zend_InfoCard_Cipher
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,26 +23,17 @@
 /**
  * @namespace
  */
-namespace Zend\InfoCard;
-
-if (class_exists('\Zend\Exception')) {
-    class Exception extends \Zend\Exception
-    {
-    }
-} else {
-    class Exception extends \Exception
-    {
-    }
-}
+namespace Zend\InfoCard\Cipher\Symmetric\AES128CBC;
 
 /**
- * Base Exception class for the InfoCard component
- *
+ * @uses       \Zend\InfoCard\Cipher\Symmetric\AES256CBC\AES256CBCInterface
  * @category   Zend
  * @package    Zend_InfoCard
+ * @subpackage Zend_InfoCard_Cipher
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-//class Exception extends \Zend\InfoCard\Exception\Abstract
-//{
-//}
+interface AES128CBCInterface
+    extends \Zend\InfoCard\Cipher\Symmetric\AES256CBC\AES256CBCInterface
+{
+}

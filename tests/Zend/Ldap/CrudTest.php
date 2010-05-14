@@ -383,4 +383,127 @@ class Zend_Ldap_CrudTest extends Zend_Ldap_OnlineTestCase
             $this->fail($e->getMessage());
         }
     }
+
+	/**
+     * @group ZF-9564
+     */
+    public function testAddingEntryWithMissingRdnAttribute() {
+        $dn   = $this->_createDn('ou=TestCreated,');
+        $data = array(
+            'objectClass' => array('organizationalUnit')
+        );
+        try {
+            $this->_getLdap()->add($dn, $data);
+            $entry = $this->_getLdap()->getEntry($dn);
+            $this->_getLdap()->delete($dn);
+            $this->assertEquals(array('TestCreated'), $entry['ou']);
+
+        } catch (Zend_Ldap_Exception $e) {
+            if ($this->_getLdap()->exists($dn)) {
+                $this->_getLdap()->delete($dn);
+            }
+            $this->fail($e->getMessage());
+        }
+    }
+
+	/**
+     * @group ZF-9564
+     */
+    public function testAddingEntryWithMissingRdnAttributeValue() {
+        $dn   = $this->_createDn('ou=TestCreated,');
+        $data = array(
+        	'ou' => array('SecondOu'),
+            'objectClass' => array('organizationalUnit')
+        );
+        try {
+            $this->_getLdap()->add($dn, $data);
+            $entry = $this->_getLdap()->getEntry($dn);
+            $this->_getLdap()->delete($dn);
+            $this->assertEquals(array('TestCreated', 'SecondOu'), $entry['ou']);
+
+        } catch (Zend_Ldap_Exception $e) {
+            if ($this->_getLdap()->exists($dn)) {
+                $this->_getLdap()->delete($dn);
+            }
+            $this->fail($e->getMessage());
+        }
+    }
+
+    /**
+     * @group ZF-9564
+     */
+    public function testAddingEntryThatHasMultipleValuesOnRdnAttribute() {
+        $dn   = $this->_createDn('ou=TestCreated,');
+        $data = array(
+            'ou' => array('TestCreated', 'SecondOu'),
+            'objectClass' => array('organizationalUnit')
+        );
+        try {
+            $this->_getLdap()->add($dn, $data);
+            $entry = $this->_getLdap()->getEntry($dn);
+            $this->_getLdap()->delete($dn);
+            $this->assertEquals(array('TestCreated', 'SecondOu'), $entry['ou']);
+
+        } catch (Zend_Ldap_Exception $e) {
+            if ($this->_getLdap()->exists($dn)) {
+                $this->_getLdap()->delete($dn);
+            }
+            $this->fail($e->getMessage());
+        }
+    }
+
+	/**
+     * @group ZF-9564
+     */
+    public function testUpdatingEntryWithAttributeThatIsAnRdnAttribute() {
+        $dn   = $this->_createDn('ou=TestCreated,');
+        $data = array(
+            'ou' => array('TestCreated'),
+            'objectClass' => array('organizationalUnit')
+        );
+        try {
+            $this->_getLdap()->add($dn, $data);
+            $entry = $this->_getLdap()->getEntry($dn);
+
+            $data = array('ou' => array_merge($entry['ou'], array('SecondOu')));
+            $this->_getLdap()->update($dn, $data);
+            $entry = $this->_getLdap()->getEntry($dn);
+            $this->_getLdap()->delete($dn);
+            $this->assertEquals(array('TestCreated', 'SecondOu'), $entry['ou']);
+
+        } catch (Zend_Ldap_Exception $e) {
+            if ($this->_getLdap()->exists($dn)) {
+                $this->_getLdap()->delete($dn);
+            }
+            $this->fail($e->getMessage());
+        }
+    }
+
+	/**
+     * @group ZF-9564
+     */
+    public function testUpdatingEntryWithRdnAttributeValueMissingInData() {
+        $dn   = $this->_createDn('ou=TestCreated,');
+        $data = array(
+            'ou' => array('TestCreated'),
+            'objectClass' => array('organizationalUnit')
+        );
+        try {
+            $this->_getLdap()->add($dn, $data);
+            $entry = $this->_getLdap()->getEntry($dn);
+
+            $data = array('ou' => 'SecondOu');
+            $this->_getLdap()->update($dn, $data);
+            $entry = $this->_getLdap()->getEntry($dn);
+            $this->_getLdap()->delete($dn);
+            $this->assertEquals(array('TestCreated', 'SecondOu'), $entry['ou']);
+
+        } catch (Zend_Ldap_Exception $e) {
+            if ($this->_getLdap()->exists($dn)) {
+                $this->_getLdap()->delete($dn);
+            }
+            $this->fail($e->getMessage());
+        }
+
+    }
 }

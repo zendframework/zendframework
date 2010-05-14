@@ -574,6 +574,17 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->_filter->filter($input));
     }
 
+    /**
+     * @group ZF-9833
+     */
+    public function testMultiParamArray()
+    {
+        $filter = new Zend_Filter_StripTags(array("a","b","hr"),array(),true);
+
+        $input    = 'test <a /> test <div>div-content</div>';
+        $expected = 'test <a /> test div-content';
+        $this->assertEquals($expected, $filter->filter($input));
+    }
 }
 
 // Call Zend_Filter_StripTagsTest::main() if this source file is executed directly.

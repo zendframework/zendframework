@@ -201,7 +201,7 @@ $translate->addTranslation(
                             This option allows to use reroute from non existing translations to
                             other languages. See the <link
                                 linkend="zend.translate.additional.rerouting">Rerouting
-                                Section</linkend> for details about this option.
+                                Section</link> for details about this option.
                         </entry>
 
                         <entry><emphasis><constant>NULL</constant></emphasis></entry>

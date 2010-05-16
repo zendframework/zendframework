@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21762 -->
+<!-- EN-Revision: 22066 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -9,33 +9,12 @@
         Zend Framework には、すぐに使える標準のバリデーションクラス群が同梱されています。
     </para>
 
-    <sect2 id="zend.validate.set.alnum">
-        <title>Alnum</title>
-
-        <para>
-            <code>$value</code> がアルファベットおよび数字のみで構成されているときにのみ <constant>TRUE</constant> を返します。
-            このバリデータでは、オプションとして空白文字を認めることもできます。
-        </para>
-
-        <note>
-            <para>
-             アルファベットとは各言語で単語を構成する文字を意味します。
-             ただし、以下の言語では英語のアルファベットをアルファベットとして扱います：中国語、日本語、韓国語。
-             言語は<classname>Zend_Locale</classname>で指定されます。
-            </para>
-        </note>
-
-    </sect2>
-
-    <sect2 id="zend.validate.set.alpha">
-        <title>Alpha</title>
-
-        <para>
-             <code>$value</code> がアルファベットのみで構成されているときにのみ <constant>TRUE</constant> を返します。
-            このバリデータでは、オプションとして空白文字を認めることもできます。
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Alnum.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Alnum.xml" /></xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Validate-Alpha.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Alpha.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Validate-Barcode.xml">
         <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Barcode.xml" /></xi:fallback>
     </xi:include>
@@ -63,20 +42,9 @@
         </note>
     </sect2>
 
-    <sect2 id="zend.validate.set.date">
-        <title>Date</title>
-
-        <para>
-            <code>$value</code> が 'YYYY-MM-DD' 形式の日付である場合にのみ
-            <constant>TRUE</constant> を返します。オプションの <property>locale</property>
-            を設定すると、そのロケールに応じた検証を行います。
-            オプションの <property>format</property> を設定すると、
-            そのフォーマットを使用して検証を行います。オプションパラメータの詳細は
-            <link linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link>
-            を参照ください。
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Date.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Date.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Validate-Db.xml" />
 
     <xi:include href="Zend_Validate-Digits.xml">
@@ -85,18 +53,9 @@
 
     <xi:include href="Zend_Validate-EmailAddress.xml" />
 
-    <sect2 id="zend.validate.set.float">
-        <title>Float</title>
-
-        <para>
-            <code>$value</code> が浮動小数点値である場合にのみ <constant>TRUE</constant> を返します。
-            Zend Framework 1.8 以降では、このバリデータは
-            ブラウザや環境変数あるいはアプリケーションで設定されたロケールを考慮するようになります。
-            もちろん、アクセサ get/setLocale を使用して、
-            バリデータのインスタンスを作成する際に使用するロケールを変更することもできます。
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Float.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Float.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Validate-GreaterThan.xml">
         <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-GreaterThan.xml" /></xi:fallback>
     </xi:include>

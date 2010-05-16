@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21129 -->
+<!-- EN-Revision: 22136 -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のフィルタクラス群</title>
@@ -9,24 +9,9 @@
         Zend Framework には、すぐに使える標準のフィルタ群が同梱されています。
     </para>
 
-    <sect2 id="zend.filter.set.alnum">
-        <title>Alnum</title>
-
-        <para>
-            文字列 <varname>$value</varname>
-            から、アルファベットおよび数字以外を取り除いたものを返します。
-            このフィルタでは、オプションとして空白文字を認めることもできます。
-        </para>
-
-        <note>
-            <para>
-             アルファベットとは各言語で単語を構成する文字を意味します。
-             ただし、以下の言語では英語のアルファベットをアルファベットとして扱います：中国語、日本語、韓国語。
-             言語は<classname>Zend_Locale</classname>で指定されます。
-            </para>
-        </note>
-
-    </sect2>
+    <xi:include href="Zend_Filter-Alnum.xml">
+        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Alnum.xml" /></xi:fallback>
+    </xi:include>
 
     <sect2 id="zend.filter.set.alpha">
         <title>Alpha</title>

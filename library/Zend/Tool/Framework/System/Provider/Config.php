@@ -180,6 +180,18 @@ class Zend_Tool_Framework_System_Provider_Config extends Zend_Tool_Framework_Pro
         return $tree;
     }
 
+    public function enable()
+    {
+        $resp = $this->_registry->getResponse();
+        $resp->appendContent('Use either "zf enable config.provider" or "zf enable config.manifest".');
+    }
+
+    public function disable()
+    {
+        $resp = $this->_registry->getResponse();
+        $resp->appendContent('Use either "zf disable config.provider" or "zf disable config.manifest".');
+    }
+
     /**
      * @param string $className
      */

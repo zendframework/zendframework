@@ -47,6 +47,12 @@ abstract class Zend_Translate_Adapter {
     private $_automatic = true;
 
     /**
+     * Internal value to see already routed languages
+     * @var array()
+     */
+    private $_routed = array();
+
+    /**
      * Internal cache for all adapters
      * @var Zend_Cache_Core
      */
@@ -89,6 +95,7 @@ abstract class Zend_Translate_Adapter {
         'logMessage'      => "Untranslated message within '%locale%': %message%",
         'logUntranslated' => false,
         'reload'          => false,
+        'route'           => null,
         'scan'            => null
     );
 
@@ -670,6 +677,17 @@ abstract class Zend_Translate_Adapter {
             if (!Zend_Locale::isLocale($locale, false, false)) {
                 // language does not exist, return original string
                 $this->_log($messageId, $locale);
+                // use rerouting when enabled
+                if (!empty($this->_options['route'])) {
+                    if (array_key_exists($locale, $this->_options['route']) &&
+                        !array_key_exists($locale, $this->_routed)) {
+                        $this->_routed[$locale] = true;
+                        return $this->translate($messageId, $this->_options['route'][$locale]);
+                    }
+
+                    $this->_routed = array();
+                }
+
                 if ($plural === null) {
                     return $messageId;
                 }
@@ -714,6 +732,17 @@ abstract class Zend_Translate_Adapter {
         }
 
         $this->_log($messageId, $locale);
+        // use rerouting when enabled
+        if (!empty($this->_options['route'])) {
+            if (array_key_exists($locale, $this->_options['route']) &&
+                !array_key_exists($locale, $this->_routed)) {
+                $this->_routed[$locale] = true;
+                return $this->translate($messageId, $this->_options['route'][$locale]);
+            }
+
+            $this->_routed = array();
+        }
+
         if ($plural === null) {
             return $messageId;
         }

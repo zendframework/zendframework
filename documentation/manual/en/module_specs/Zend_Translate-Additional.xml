@@ -194,6 +194,20 @@ $translate->addTranslation(
                     </row>
 
                     <row>
+                        <entry>route</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            This option allows to use reroute from non existing translations to
+                            other languages. See the <link
+                                linkend="zend.translate.additional.rerouting">Rerouting
+                                Section</linkend> for details about this option.
+                        </entry>
+
+                        <entry><emphasis><constant>NULL</constant></emphasis></entry>
+                    </row>
+
+                    <row>
                         <entry>scan</entry>
                         <entry>all</entry>
 
@@ -853,6 +867,45 @@ $translate = new Zend_Translate(
                 </para>
             </sect4>
         </sect3>
+    </sect2>
+
+    <sect2 id="zend.translate.additional.rerouting">
+        <title>Routing for translations</title>
+
+        <para>
+            Not every message ID can be translated. But sometimes is can be useful to output the
+            translation from another language instead of returning the message ID itself. You can
+            archive this by using the <property>route</property> option.
+        </para>
+
+        <para>
+            You can add one route for every language. See the following example:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$translate = new Zend_Translate(
+    array(
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'route'   => array('fr' => 'en', 'de' => 'fr')
+    )
+);
+]]></programlisting>
+
+        <para>
+            The above returns a english translation for all messages which can not be translated to
+            french. And it returns a french translation for all messages which can not be translated
+            to german. It will even return an english translation for all messages which can wether
+            be translated to german nor to french. So you can even define a complete translation
+            chain.
+        </para>
+
+        <para>
+            This feature seems ot be interesting for anyone. But be aware that returning
+            translations for wrong or other languages can be problematic when the user does not
+            understand this language. So you should always use this feature sparingly.
+        </para>
     </sect2>
 
     <sect2 id="zend.translate.additional.combination">

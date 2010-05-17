@@ -594,6 +594,7 @@ class Zend_Console_Getopt
     {
         $usage = "Usage: {$this->_progname} [ options ]\n";
         $maxLen = 20;
+        $lines = array();
         foreach ($this->_rules as $rule) {
             $flags = array();
             if (is_array($rule['alias'])) {

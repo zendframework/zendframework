@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
+<!-- EN-Revision: 21992 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.drawing">
     <title>Dessiner</title>
@@ -91,7 +91,8 @@ public function drawLine($x1, $y1, $x2, $y2);
  * Draw a rounded rectangle.
  *
  * Fill types:
- * Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE - fill rectangle and stroke (default)
+ * Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE - fill rectangle
+                                               and stroke (default)
  * Zend_Pdf_Page::SHAPE_DRAW_STROKE      - stroke rectangle
  * Zend_Pdf_Page::SHAPE_DRAW_FILL        - fill rectangle
  *

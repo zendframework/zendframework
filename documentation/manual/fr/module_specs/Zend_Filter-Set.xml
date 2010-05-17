@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21129 -->
+<!-- EN-Revision: 22136 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Classes de filtre standards</title>
@@ -9,24 +9,11 @@
         utilisables.
     </para>
 
-    <sect2 id="zend.filter.set.alnum">
-        <title>Alnum</title>
-
-        <para>
-            Retourne la chaîne <varname>$value</varname>, en retirant tout sauf les caractères
-            alphabétiques et numériques. Ce filtre inclue une option permettant d'autoriser ou non
-            les caractères espace.
-        </para>
-
-        <note>
-            <para>
-                Les caractères alphabétiques comprennent les caractères destinés à constituer
-                des mots dans chaque langue. Cependant l'alphabet anglais est aussi utilisé pour les
-                langues suivantes : chinois, japonais et coréen. La langue est spécifiée par
-                <classname>Zend_Locale</classname>.
-            </para>
-        </note>
-    </sect2>
+    <xi:include href="Zend_Filter-Alnum.xml">
+        <xi:fallback>
+            <xi:include href="../../en/module_specs/Zend_Filter-Alnum.xml" />
+        </xi:fallback>
+    </xi:include>
 
     <sect2 id="zend.filter.set.alpha">
         <title>Alpha</title>
@@ -47,11 +34,7 @@
         </para>
     </sect2>
 
-    <xi:include href="Zend_Filter-Boolean.xml">
-        <xi:fallback>
-            <xi:include href="../../en/module_specs/Zend_Filter-Boolean.xml" />
-        </xi:fallback>
-    </xi:include>
+    <xi:include href="Zend_Filter-Boolean.xml" />
     <xi:include href="Zend_Filter-Callback.xml" />
     <xi:include href="Zend_Filter-Compress.xml" />
     <xi:include href="Zend_Filter-Decryption.xml" />

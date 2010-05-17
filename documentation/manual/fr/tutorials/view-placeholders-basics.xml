@@ -112,13 +112,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view = $this->getResource('View');
 
         $view->placeholder('sidebar')
-             // "prefix" -> contenu à afficher une fois avant les données 
+             // "prefix" -> contenu à afficher une fois avant les données
              // dans la collection
              ->setPrefix("<div class=\"sidebar\">\n    <div class=\"block\">\n")
              // "separator" -> contenu à afficher entre chaque entité de
              // la collection
              ->setSeparator("</div>\n    <div class=\"block\">\n")
-             // "postfix" -> contenu à afficher une fois après les données 
+             // "postfix" -> contenu à afficher une fois après les données
              // dans la collection
              ->setPostfix("</div>\n</div>");
     }

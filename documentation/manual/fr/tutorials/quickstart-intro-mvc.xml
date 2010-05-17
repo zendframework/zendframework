@@ -52,7 +52,7 @@
         <para>
             Qu'est ce que <acronym>MVC</acronym> dont tout le monde parle et pourquoi se pencher
             dessus&#160;? <acronym>MVC</acronym> est bien plus qu'un acronyme de trois lettres
-            (<acronym>TLA</acronym>) que vous pouvez sortir pour faire "élégant"&#160;; c'est 
+            (<acronym>TLA</acronym>) que vous pouvez sortir pour faire "élégant"&#160;; c'est
             devenu un standard de conception des applications Web modernes, ceci pour de bonnes
             raisons. La plupart du code des application se retrouvent dans une de ces
             catégories&#160;: présentation, logique métier, accès aux données. Le pattern

@@ -19,7 +19,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><property>locale</property></emphasis>: Affecte la locale à utiliser lors de la 
+                    <emphasis><property>locale</property></emphasis>: Affecte la locale à utiliser lors de la
                     validation.
                 </para>
             </listitem>

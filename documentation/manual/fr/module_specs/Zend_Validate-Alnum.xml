@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 21987 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.alnum">
     <title>Alnum</title>
@@ -12,14 +13,16 @@
         <title>Options supportées par Zend_Validate_Alnum</title>
 
         <para>
-            Les options suivantes sont supportées par <classname>Zend_Validate_Alnum</classname>:
+            Les options suivantes sont supportées par
+            <classname>Zend_Validate_Alnum</classname>&#160;:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><property>allowWhiteSpace</property></emphasis>: Si le caractère
-                    d'espace doit êtyre accepté ou non. Par défaut <constant>FALSE</constant>
+                    <emphasis><property>allowWhiteSpace</property></emphasis>&#160;: Si le
+                    caractère d'espace doit être accepté ou non. Par défaut
+                    <constant>FALSE</constant>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -29,7 +32,7 @@
         <title>Utilisation de base</title>
 
         <para>
-            Voici un exemple:
+            Voici un exemple&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -46,15 +49,16 @@ if ($validator->isValid('Abcd12')) {
         <title>Utiliser les espaces</title>
 
         <para>
-            Par défaut les caractères espaces ne sont pas acceptés car il ne font pas partie de l'alphabet.
-            Cependant il existe un moyen de les accepter en entrée, ceci permet de valider des phrases
-            complètes.
+            Par défaut les caractères espaces ne sont pas acceptés car il ne font pas partie de
+            l'alphabet. Cependant il existe un moyen de les accepter en entrée, ceci permet de
+            valider des phrases complètes.
         </para>
 
         <para>
-            Pour autoriser les espaces blancs vous devez passer l'option <property>allowWhiteSpace</property>.
-            Ceci peut se faire à la création de l'objet ou après au moyen des méthodes
-            <methodname>setAllowWhiteSpace()</methodname> et <methodname>getAllowWhiteSpace()</methodname>.
+            Pour autoriser les espaces blancs vous devez passer l'option
+            <property>allowWhiteSpace</property>. Ceci peut se faire à la création de l'objet ou
+            ensuite au moyen des méthodes <methodname>setAllowWhiteSpace()</methodname> et
+            <methodname>getAllowWhiteSpace()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -71,11 +75,11 @@ if ($validator->isValid('Abcd and 12')) {
         <title>Utiliser des langues différentes</title>
 
         <para>
-            En utilisant <classname>Zend_Validate_Alnum</classname>, la langue que l'utilisateur précise
-            dans son navigateur sera utilisée pour autoriser ou non certains caractères. Ainsi si l'utilisateur
-            règle son navigateur sur <emphasis>de</emphasis> pour de l'allemand, alors les caractères comme
-            <emphasis>ä</emphasis>, <emphasis>ö</emphasis> et <emphasis>ü</emphasis> seront eux aussi
-            autorisés.
+            En utilisant <classname>Zend_Validate_Alnum</classname>, la langue que l'utilisateur
+            précise dans son navigateur sera utilisée pour autoriser ou non certains caractères.
+            Ainsi si l'utilisateur règle son navigateur sur <emphasis>de</emphasis> pour de
+            l'allemand, alors les caractères comme <emphasis>ä</emphasis>, <emphasis>ö</emphasis>
+            et <emphasis>ü</emphasis> seront eux aussi autorisés.
         </para>
 
         <para>
@@ -83,8 +87,8 @@ if ($validator->isValid('Abcd and 12')) {
         </para>
 
         <para>
-            Il existe actuellement 3 langues qui ne sont pas supportées pour ce validateur. Il s'agit
-            de <emphasis>coréen</emphasis>, <emphasis>japonais</emphasis> et
+            Il existe actuellement 3 langues qui ne sont pas supportées pour ce validateur. Il
+            s'agit du <emphasis>coréen</emphasis>, du <emphasis>japonais</emphasis> et du
             <emphasis>chinois</emphasis> car ces langues utilisent un alphabet dans lequel un seul
             caractère est fabriqué à base de multiples caractères.
         </para>
@@ -95,6 +99,3 @@ if ($validator->isValid('Abcd and 12')) {
         </para>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

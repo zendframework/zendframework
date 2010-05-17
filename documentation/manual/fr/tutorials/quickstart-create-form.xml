@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 21814 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-form">
     <title>Créer un formulaire</title>
@@ -9,7 +10,8 @@
     </para>
 
     <para>
-        Nous devons donc créer un formulaire. Pour créer un formulaire vierge, exécutez la commande:
+        Nous devons donc créer un formulaire. Pour créer un formulaire vierge, exécutez la
+        commande&#160;:
     </para>
 
     <programlisting language="shell"><![CDATA[
@@ -20,7 +22,7 @@ Updating project profile '.zfproject.xml'
 
     <para>
         Ceci créera le dossier <filename>application/forms/</filename> avec un fichier de classe
-        <filename>Guestbook.php</filename>. Ouvrez ce fichier et mettez le à jour comme suit:
+        <filename>Guestbook.php</filename>. Ouvrez ce fichier et mettez le à jour comme suit&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -78,15 +80,15 @@ class Application_Form_Guestbook extends Zend_Form
 ]]></programlisting>
 
     <para>
-        Le formulaire ci-dessus définit cinq éléments: une adresse email, un champ commentaire, un
-        <acronym>CAPTCHA</acronym> anti spam, un bouton d'envoi et une protection anti
-        <acronym>CSRF</acronym>.
+        Le formulaire ci-dessus définit cinq éléments&#160;: une adresse email, un champ
+        commentaire, un <acronym>CAPTCHA</acronym> anti spam, un bouton d'envoi et une protection
+        anti <acronym>CSRF</acronym>.
     </para>
 
     <para>
         Maintenant nous allons ajouter une action <methodname>signAction()</methodname> à notre
-        <classname>GuestbookController</classname> qui va s'occuper de la soumission du formulaire. Pour
-        créer cette action et son script de vue, éxécutez:
+        <classname>GuestbookController</classname> qui va s'occuper de la soumission du formulaire.
+        Pour créer cette action et son script de vue, éxécutez&#160;:
     </para>
 
     <programlisting language="shell"><![CDATA[
@@ -100,16 +102,18 @@ Updating project profile '.zfproject.xml'
 ]]></programlisting>
 
     <para>
-        Comme vous le voyez d'après l'affichage, ceci va créer une méthode <methodname>signAction()</methodname>
-        dans notre contrôleur, ainsi que le script de vue approprié.
+        Comme vous le voyez d'après l'affichage, ceci va créer une méthode
+        <methodname>signAction()</methodname> dans notre contrôleur, ainsi que le script de vue
+        approprié.
     </para>
 
     <para>
-        Ajoutons de la logique dans notre action. Nous devons d'abord vérifier le type de requête HTTP
-        <acronym>POST</acronym> ou <acronym>GET</acronym>; dans ce dernier cas nous affichons simplement
-        le formulaire. Cependant, si nous possédons une requête <acronym>POST</acronym>, nous allons vouloir
-        valider le formulaire par rapport aux données postées, et s'il est valide, créer une nouvelle entrée
-        et la sauvegarder. La logique ressemble à ceci:
+        Ajoutons de la logique dans notre action. Nous devons d'abord vérifier le type de requête
+        HTTP <acronym>POST</acronym> ou <acronym>GET</acronym>&#160;; dans ce dernier cas nous
+        affichons simplement le formulaire. Cependant, si nous recevons une requête
+        <acronym>POST</acronym>, nous allons vouloir valider le formulaire par rapport aux données
+        postées, et s'il est valide, créer une nouvelle entrée et la sauvegarder. La logique
+        ressemble à ceci&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -140,7 +144,7 @@ class GuestbookController extends Zend_Controller_Action
 
     <para>
         Bien sur, nous devons aussi éditer le script de vue. Editez
-        <filename>application/views/scripts/guestbook/sign.phtml</filename> avec ceci:
+        <filename>application/views/scripts/guestbook/sign.phtml</filename> avec ceci&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -157,15 +161,16 @@ echo $this->form;
         <title>Améliorer le rendu visuel du formulaire</title>
 
         <para>
-            Ce formulaire n'a pas un look terrible, peu importe : l'apparence d'un formulaire est entièrement
-            personnalisable! Voyez la <link
-                linkend="zend.form.decorators">section sur les décorateurs dans le guide de réference</link>
-            pour plus de détails.
+            Ce formulaire n'a pas un look terrible, peu importe&#160;: l'apparence d'un formulaire
+            est entièrement personnalisable&#160;! Voyez la <link
+                linkend="zend.form.decorators">section sur les décorateurs dans le guide de
+                réference</link> pour plus de détails.
         </para>
 
         <para>
             Aussi, vous pouvez être intéréssés par <link
-                linkend="learning.form.decorators.intro">notre tutoriel sur les décorateurs de formulaires</link>.
+                linkend="learning.form.decorators.intro">notre tutoriel sur les décorateurs de
+                formulaires</link>.
         </para>
     </note>
 
@@ -173,7 +178,8 @@ echo $this->form;
         <title>Checkpoint</title>
 
         <para>
-            Naviguez maintenant sur "http://localhost/guestbook/sign". Vous devriez voir ceci dans votre navigateur:
+            Naviguez maintenant sur "http://localhost/guestbook/sign". Vous devriez voir ceci dans
+            votre navigateur&#160;:
         </para>
 
         <para>

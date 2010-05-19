@@ -101,7 +101,12 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
             'Zend_Markup_Renderer_Html' => 'Zend/Markup/Renderer/Html/'
         ));
 
-        $this->_defineDefaultMarkups();
+        if (!isset($options['useDefaultMarkups']) && isset($options['useDefaultTags'])) {
+            $options['useDefaultMarkups'] = $options['useDefaultTags'];
+        }
+        if (isset($options['useDefaultMarkups']) && ($options['useDefaultMarkups'] !== false)) {
+            $this->_defineDefaultMarkups();
+        }
 
         parent::__construct($options);
     }

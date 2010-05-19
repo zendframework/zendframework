@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 22090 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headtitle">
     <title>L'aide de vue HeadTitle</title>
@@ -16,10 +16,18 @@
         méthode <methodname>toString()</methodname> pour forcer la génération d'un élément
         <code>&lt;title&gt;</code>, et ajoute une méthode <methodname>headTitle()</methodname> pour des réglages
         faciles et rapides et pour l'aggrégation des éléments du titre. La signature de la méthode
-        est <methodname>headTitle($title, $setType = 'APPEND')</methodname> ; par défaut, la valeur est ajoutée
-        en fin de pile (pour aggréger les segments du titre), mais vous pouvez aussi spécifier
+        est <methodname>headTitle($title, $setType = null)</methodname> ; par défaut, la valeur est ajoutée
+        en fin de pile (pour aggréger les segments du titre) si laissé à null, mais vous pouvez aussi spécifier
         "<constant>PREPEND</constant>" (pour l'ajouter en début de pile) ou "<constant>SET</constant>" (pour
         remplacer la pile existante).
+    </para>
+
+    <para>
+        Since setting the aggregating (attach) order on each call to <methodname>
+        headTitle</methodname> can be cumbersome, you can set a default attach order
+        by calling <methodname>setDefaultAttachOrder()</methodname> which is applied
+        to all <methodname>headTitle()</methodname> calls unless you explicitly
+        pass a different attach order as the second parameter.
     </para>
 
     <example id="zend.view.helpers.initial.headtitle.basicusage">

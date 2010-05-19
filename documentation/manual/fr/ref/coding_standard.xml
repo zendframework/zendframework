@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
     <title>Convention de codage PHP de Zend Framework</title>
@@ -179,6 +179,49 @@
                     that pre-date that version may not follow this rule, but will be renamed in
                     the future in order to comply.
                 </para>
+
+                <para>
+                    The rationale for the change is due to namespace usage. As we look towards Zend
+                    Framework 2.0 and usage of <acronym>PHP</acronym> 5.3, we will be using
+                    namespaces. The easiest way to automate conversion to namespaces is to simply
+                    convert underscores to the namespace separator -- but under the old naming
+                    conventions, this leaves the classname as simply "Abstract" or "Interface" --
+                    both of which are reserved keywords in <acronym>PHP</acronym>. If we prepend the
+                    (sub)component name to the classname, we can avoid these issues.
+                </para>
+
+                <para>
+                    To illustrate the situation, consider converting the class
+                    <classname>Zend_Controller_Request_Abstract</classname> to use namespaces:
+                </para>
+
+                <programlisting language="php"><![CDATA[
+namespace Zend\Controller\Request;
+
+abstract class Abstract
+{
+    // ...
+}
+]]></programlisting>
+
+                <para>
+                    Clearly, this will not work. Under the new naming conventions, however, this
+                    would become:
+                </para>
+
+                <programlisting language="php"><![CDATA[
+namespace Zend\Controller\Request;
+
+abstract class RequestAbstract
+{
+    // ...
+}
+]]></programlisting>
+
+                <para>
+                    We still retain the semantics and namespace separation, while omitting the
+                    keyword issues; simultaneously, it better describes the abstract class.
+                </para>
             </note>
         </sect2>
 
@@ -206,7 +249,9 @@
                 <para>
                     This naming convention is new with version 1.9.0 of Zend Framework. Classes
                     that pre-date that version may not follow this rule, but will be renamed in
-                    the future in order to comply.
+                    the future in order to comply. See <link
+                        linkend="coding-standard.naming-conventions.abstracts">the previous
+                        section</link> for more information on the rationale for this change.
                 </para>
             </note>
         </sect2>

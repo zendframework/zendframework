@@ -18,10 +18,10 @@
     </note>
 
     <sect3 id="zend.validate.set.greaterthan.options">
-        <title>Options gérées par Zend_Validate_GreaterThan</title>
+        <title>Options supportées par Zend_Validate_GreaterThan</title>
 
         <para>
-            Les options suivantes sont reconnues par <classname>Zend_Validate_GreaterThan</classname>:
+            Les options suivantes sont supportées par <classname>Zend_Validate_GreaterThan</classname>:
         </para>
 
         <itemizedlist>
@@ -53,6 +53,3 @@ $return = $valid->isValid($value);
         </para>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 22159 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.edit">
     <title>Manipuler des mesures</title>
@@ -19,15 +19,13 @@
 
         <listitem>
             <para>
-                <link linkend="zend.measure.edit.add"><code>Ajouter et
-                soustraire</code></link>
+                <link linkend="zend.measure.edit.add"><code>Ajouter et soustraire</code></link>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <link linkend="zend.measure.edit.equal"><code>Comparer avec un
-                booléen</code></link>
+                <link linkend="zend.measure.edit.equal"><code>Comparer avec un booléen</code></link>
             </para>
         </listitem>
 
@@ -98,10 +96,9 @@ print "Tonne :".$unit->convertTo(Zend_Measure_Weight::TON, 3);
         <title>Ajouter et soustraire</title>
 
         <para>
-            Les mesures peuvent être ajoutées en utilisant <methodname>add()</methodname> et soustraites
-            en utilisant <methodname>sub()</methodname>. Chaque addition créera un nouvel objet pour le
-            résultat. L'objet courant ne sera jamais changé par la classe. Le nouvel objet sera du
-            même type que l'objet de début. Les objets dynamiques supportent un modèle fluide de
+            Les mesures peuvent être ajoutées en utilisant <methodname>add()</methodname> et
+            soustraites en utilisant <methodname>sub()</methodname>. Le résultat sera du même type
+            que l'objet original. Les objets dynamiques supportent un interface fluide de
             programmation, où des ordres complexes d'opération peuvent être imbriqués sans risque
             d'effets secondaires changeant les objets d'entrée.
         </para>

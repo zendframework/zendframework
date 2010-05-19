@@ -25,6 +25,8 @@ namespace ZendTest\Session\SaveHandler;
 use Zend\Session\SaveHandler\DbTable,
     Zend\Session\SaveHandler\Exception as SaveHandlerException,
     Zend\Session\Manager,
+    Zend\DB\DB,
+    Zend\DB\Table\AbstractTable,
     ZendTest\Session\TestAsset\TestManager;
 
 /**
@@ -62,7 +64,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     );
 
     /**
-     * @var Zend_Db_Adapter_Abstract
+     * @var Zend\Db\Adapter\AbstractAdapter
      */
     protected $_db;
 
@@ -527,8 +529,8 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('The pdo_sqlite extension must be available and enabled for this test');
         }
 
-        $this->_db = \Zend_Db::factory('Pdo_Sqlite', array('dbname' => ':memory:'));
-        \Zend_Db_Table_Abstract::setDefaultAdapter($this->_db);
+        $this->_db = DB::factory('PDO\\SQLite', array('dbname' => ':memory:'));
+        AbstractTable::setDefaultAdapter($this->_db);
         $query = array();
         $query[] = 'CREATE TABLE `Sessions` ( ';
         $query[] = '`id` varchar(32) NOT NULL, ';

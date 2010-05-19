@@ -44,7 +44,7 @@ resources.cachemanager.database.frontendBackendAutoload = false
             Ensuite récupérer ce cache à partir du gestionnaire est aussi simple que d'accéder
             à une instance de gestionnaire (<classname>Zend_Cache_Manager</classname>) récupéré
             à partir de <classname>Zend_Application_Resource_Cachemanager</classname> et d'appeler
-            <methodname>$cacheManager->getCache('database');</methodname>. L'exemple ci-dessous
+            <methodname>$cacheManager->getCache('database')</methodname>. L'exemple ci-dessous
             est extrait d'un contrôleur dans lequel la classe de bootstrap est accessible via un
             paramètre du contrôleur frontal (qui est automatiquement assigné lors de l'amorçage).
             Comme vous pouvez le voir, la ressource de gestionnaire de cache implémente la méthode

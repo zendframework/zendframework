@@ -990,6 +990,12 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
             if (!empty($headers[$header])) {
                 return $headers[$header];
             }
+            $header = strtolower($header);
+            foreach ($headers as $key => $value) {
+                if (strtolower($key) == $header) {
+                    return $value;
+                }
+            }
         }
 
         return false;

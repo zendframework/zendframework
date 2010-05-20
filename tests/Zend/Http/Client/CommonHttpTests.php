@@ -739,6 +739,10 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
      */
     public function testUploadRawData()
     {
+        if (!ini_get('file_uploads')) {
+            $this->markTestSkipped('File uploads disabled.');
+        }
+        
         $this->client->setUri($this->baseuri. 'testUploads.php');
 
         $rawdata = file_get_contents(__FILE__);
@@ -755,6 +759,10 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
      */
     public function testUploadLocalFile()
     {
+        if (!ini_get('file_uploads')) {
+            $this->markTestSkipped('File uploads disabled.');
+        }
+        
         $this->client->setUri($this->baseuri. 'testUploads.php');
         $this->client->setFileUpload(__FILE__, 'uploadfile', null, 'text/x-foo-bar');
         $res = $this->client->request('POST');
@@ -767,6 +775,10 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     public function testUploadLocalDetectMime()
     {
+        if (!ini_get('file_uploads')) {
+            $this->markTestSkipped('File uploads disabled.');
+        }
+        
         $detect = null;
         if (function_exists('finfo_file')) {
             $f = @finfo_open(FILEINFO_MIME);
@@ -795,6 +807,10 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     public function testUploadNameWithSpecialChars()
     {
+        if (!ini_get('file_uploads')) {
+            $this->markTestSkipped('File uploads disabled.');
+        }
+        
         $this->client->setUri($this->baseuri. 'testUploads.php');
 
         $rawdata = file_get_contents(__FILE__);
@@ -823,6 +839,10 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
      */
     public function testMutipleFilesWithSameFormNameZF5744()
     {
+        if (!ini_get('file_uploads')) {
+            $this->markTestSkipped('File uploads disabled.');
+        }
+        
         $rawData = 'Some test raw data here...';
 
         $this->client->setUri($this->baseuri . 'testUploads.php');

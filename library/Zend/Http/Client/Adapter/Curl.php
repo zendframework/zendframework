@@ -72,7 +72,6 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
      * List of cURL options that should never be overwritten
      *
      * @var array
-     * @group ZF-9784
      */
     protected $_invalidOverwritableCurlOptions;
 
@@ -104,9 +103,6 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
             require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('cURL extension has to be loaded to use this Zend_Http_Client adapter.');
         }
-        /**
-         * @fix ZF-9784
-         */
         $this->_invalidOverwritableCurlOptions = array(
             CURLOPT_HTTPGET,
             CURLOPT_POST,

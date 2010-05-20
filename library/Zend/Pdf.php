@@ -286,7 +286,7 @@ class Zend_Pdf
      * from a file.
 
      * $revision used to roll back document to specified version
-     * (0 - currtent version, 1 - previous version, 2 - ...)
+     * (0 - current version, 1 - previous version, 2 - ...)
      *
      * @param string  $source - PDF file to load
      * @param integer $revision

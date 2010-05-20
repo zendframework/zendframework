@@ -151,7 +151,7 @@ function Zend_ProgressBar_Update(data)
             <listitem>
                 <para>
                     Dojo: <ulink
-                        url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/user-assistance-and-feedback/progress-bar"/>
+                        url="http://dojotoolkit.org/reference-guide/dijit/ProgressBar.html"/>
                 </para>
             </listitem>
 

@@ -1579,6 +1579,12 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             $form->setOrder($order);
         }
 
+        if (($oldName = $form->getName()) &&
+            $oldName !== $name &&
+            $oldName === $form->getElementsBelongTo()) {
+            $form->setElementsBelongTo($name);
+        }
+
         $form->setName($name);
         $this->_subForms[$name] = $form;
         $this->_order[$name]    = $order;

@@ -301,6 +301,18 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_CommonHttpTests
 
         $this->assertTrue(is_resource($adapter->getHandle()));
     }
+    
+    /**
+     * @group ZF-9857
+     */
+    public function testHeadRequest()
+    {
+        $this->client->setUri($this->baseuri . 'testRawPostData.php');
+        $adapter = new Zend_Http_Client_Adapter_Curl;
+        $this->client->setAdapter($adapter);
+        $this->client->request('HEAD');
+        $this->assertEquals('', $this->client->getLastResponse()->getBody());
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Http_Client_CurlTest::main') {

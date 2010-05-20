@@ -224,7 +224,7 @@ class Zend_Cache_Backend_Memcached extends Zend_Cache_Backend implements Zend_Ca
         $result = @$this->_memcache->set($id, array($data, time(), $lifetime), $flag, $lifetime);
 
         if (count($tags) > 0) {
-            $this->_log("Zend_Cache_Backend_Memcached::save() : tags are unsupported by the Memcached backend");
+            $this->_log(self::TAGS_UNSUPPORTED_BY_SAVE_OF_MEMCACHED_BACKEND);
         }
 
         return $result;

@@ -526,6 +526,37 @@ class Zend_Json_Server extends Zend_Server_Abstract
             $params = $this->_getDefaultParams($params, $serviceParams);
         }
 
+        //Make sure named parameters are passed in correct order
+        if ( is_string( key( $params ) ) ) {
+
+            $callback = $invocable->getCallback();
+            if ('function' == $callback->getType()) {
+                $reflection = new ReflectionFunction( $callback->getFunction() );
+                $refParams  = $reflection->getParameters();
+            } else {
+                
+                $reflection = new ReflectionMethod( 
+                    $callback->getClass(),
+                    $callback->getMethod()
+                );
+                $refParams = $reflection->getParameters();
+            }
+
+            $orderedParams = array();
+            foreach( $reflection->getParameters() as $refParam ) {
+                if( isset( $params[ $refParam->getName() ] ) ) {
+                    $orderedParams[ $refParam->getName() ] = $params[ $refParam->getName() ];
+                } elseif( $refParam->isOptional() ) {
+                    $orderedParams[ $refParam->getName() ] = null;
+                } else {
+                    throw new Zend_Server_Exception( 
+                        'Missing required parameter: ' . $refParam->getName() 
+                    ); 
+                }
+            }
+            $params = $orderedParams;
+        }
+
         try {
             $result = $this->_dispatch($invocable, $params);
         } catch (Exception $e) {

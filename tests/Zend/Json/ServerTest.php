@@ -322,6 +322,48 @@ class Zend_Json_ServerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $result[2]);
     }
 
+    public function testHandleShouldAllowNamedParamsInAnyOrder1()
+    {
+        $this->server->setClass('Zend_Json_ServerTest_Foo')
+                     ->setAutoEmitResponse( false );
+        $request = $this->server->getRequest();
+        $request->setMethod('bar')
+                ->setParams( array( 
+                    'three' => 3,
+                    'two'   => 2,
+                    'one'   => 1
+                ))
+                ->setId( 'foo' );
+        $response = $this->server->handle();
+        $result = $response->getResult();
+
+        $this->assertTrue( is_array( $result ) );
+        $this->assertEquals( 1, $result[0] );
+        $this->assertEquals( 2, $result[1] );
+        $this->assertEquals( 3, $result[2] );
+    }
+
+    public function testHandleShouldAllowNamedParamsInAnyOrder2()
+    {
+        $this->server->setClass('Zend_Json_ServerTest_Foo')
+                     ->setAutoEmitResponse( false );
+        $request = $this->server->getRequest();
+        $request->setMethod('bar')
+                ->setParams( array( 
+                    'three' => 3,
+                    'one'   => 1,
+                    'two'   => 2,
+                ) )
+                ->setId( 'foo' );
+        $response = $this->server->handle();
+        $result = $response->getResult();
+
+        $this->assertTrue( is_array( $result ) );
+        $this->assertEquals( 1, $result[0] );
+        $this->assertEquals( 2, $result[1] );
+        $this->assertEquals( 3, $result[2] );
+    }
+
     public function testHandleRequestWithErrorsShouldReturnErrorResponse()
     {
         $this->server->setClass('Zend_Json_ServerTest_Foo')

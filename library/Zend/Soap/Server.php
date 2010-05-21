@@ -210,6 +210,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
                     $this->setWsdl($value);
                     break;
                 case 'featues':
+                case 'features':
                     $this->setSoapFeatures($value);
                     break;
                 case 'cache_wsdl':

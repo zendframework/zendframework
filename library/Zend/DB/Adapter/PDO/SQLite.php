@@ -24,8 +24,9 @@
  * @namespace
  */
 namespace Zend\DB\Adapter\PDO;
-use Zend\DB;
-use Zend\DB\Adapter;
+use Zend\DB,
+    Zend\DB\Adapter,
+    Zend\DB\Adapter\AbstractPDOAdapter;
 
 /**
  * Class for connecting to SQLite2 and SQLite3 databases and performing common operations.
@@ -39,7 +40,7 @@ use Zend\DB\Adapter;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SQLite extends AbstractPDO
+class SQLite extends AbstractPDOAdapter
 {
 
     /**

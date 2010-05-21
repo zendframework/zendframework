@@ -254,6 +254,26 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function testRenderIsArrayForm()
+    {
+        $this->setupForm();
+        $this->form->setName('foo')
+                   ->setIsArray(true);
+        $content = 'test content';
+        $test = $this->decorator->render($content);
+        $this->assertContains($content, $test);
+        foreach ($this->form->getMessages() as $name => $messages) {
+            while (($message = current($messages))) {
+                if (is_string($message)) {
+                    $this->assertContains($message, $test, var_export($messages, 1));
+                }
+                if (false === next($messages) && is_array(prev($messages))) {
+                    $messages = current($messages);
+                }
+            }
+        }
+    }
+
     /**
      * @dataProvider markupOptionMethodsProvider
      */

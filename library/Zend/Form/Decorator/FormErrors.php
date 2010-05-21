@@ -366,9 +366,20 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
     protected function _recurseForm(Zend_Form $form, Zend_View_Interface $view)
     {
         $content = '';
-        $errors  = $form->getMessages();
-        if ($form instanceof Zend_Form_SubForm) {
-            $name = $form->getName();
+
+        $errors = $form->getMessages();
+        
+        if ($form->isArray()) {
+            $name = $form->getElementsBelongTo();
+            $path = trim(strtr((string)$name, array('[' => '/', ']' => '')), '/');
+            $segs = ('' !== $path) ? explode('/', $path) : array();
+            foreach ($segs as $seg) {
+                if (!array_key_exists($seg, (array)$errors)) {
+                    return '';
+                }
+                $errors = $errors[$seg];
+            }
+        } else if ($form instanceof Zend_Form_SubForm) {
             if ((1 == count($errors)) && array_key_exists($name, $errors)) {
                 $errors = $errors[$name];
             }

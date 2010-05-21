@@ -88,6 +88,21 @@ class Zend_Soap_ServerTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($server->getOptions() == $options);
     }
 
+    /**
+     * @group ZF-9816
+     */
+    public function testSetOptionsWithFeaturesOption()
+    {
+        $server = new Zend_Soap_Server(null, array(
+            'features' => SOAP_SINGLE_ELEMENT_ARRAYS
+        ));
+        
+        $this->assertEquals(
+            SOAP_SINGLE_ELEMENT_ARRAYS,
+            $server->getSoapFeatures()
+        );
+    }
+
     public function testSetWsdlViaOptionsArrayIsPossible()
     {
         $server = new Zend_Soap_Server();

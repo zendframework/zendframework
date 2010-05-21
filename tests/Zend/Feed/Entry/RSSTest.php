@@ -21,12 +21,11 @@
  */
 
 /**
- * Test helper
+ * @namespace
  */
+namespace ZendTest\Feed\Entry;
+use Zend\Feed;
 
-/**
- * @see Zend_Feed
- */
 
 /**
  * @category   Zend
@@ -36,16 +35,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Feed
  */
-class Zend_Feed_Entry_RssTest extends PHPUnit_Framework_TestCase
+class RSSTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testContentEncodedSupport()
     {
-        $feed = Zend_Feed::importFile(dirname(__FILE__) . '/../_files/TestFeedEntryRssContentEncoded.xml');
-        $this->assertType('Zend_Feed_Rss', $feed);
+        $feed = Feed\Feed::importFile(dirname(__FILE__) . '/../_files/TestFeedEntryRssContentEncoded.xml');
+        $this->assertType('Zend\Feed\RSS', $feed);
 
         $item = $feed->current();
-        $this->assertType('Zend_Feed_Entry_Rss', $item);
+        $this->assertType('Zend\Feed\Entry\RSS', $item);
 
         $this->assertTrue(isset($item->content));
         $this->assertContains(
@@ -62,12 +61,12 @@ class Zend_Feed_Entry_RssTest extends PHPUnit_Framework_TestCase
 
     public function testContentEncodedNullIfEmpty()
     {
-        $feed = Zend_Feed::importFile(dirname(__FILE__) . '/../_files/TestFeedEntryRssContentEncoded.xml');
-        $this->assertType('Zend_Feed_Rss', $feed);
+        $feed = Feed\Feed::importFile(dirname(__FILE__) . '/../_files/TestFeedEntryRssContentEncoded.xml');
+        $this->assertType('Zend\Feed\RSS', $feed);
 
         $feed->next();
         $item =  $feed->current();
-        $this->assertType('Zend_Feed_Entry_Rss', $item);
+        $this->assertType('Zend\Feed\Entry\RSS', $item);
         $this->assertFalse(isset($item->content));
         $this->assertNull($item->content());
         // $this->assertNull($item->content); // always return DOMElement Object

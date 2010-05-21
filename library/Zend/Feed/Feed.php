@@ -20,6 +20,13 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace Zend\Feed;
+use Zend\HTTP;
+use Zend\URI;
+use Zend;
 
 /**
  * Feed utility class
@@ -27,24 +34,24 @@
  * Base Zend_Feed class, containing constants and the Zend_Http_Client instance
  * accessor.
  *
- * @uses       Zend_Feed_Atom
- * @uses       Zend_Feed_Builder
- * @uses       Zend_Feed_Exception
- * @uses       Zend_Feed_Rss
- * @uses       Zend_Http_Client
- * @uses       Zend_Loader
+ * @uses       \Zend\Feed\Atom
+ * @uses       \Zend\Feed\Builder\Builder
+ * @uses       \Zend\Feed\Exception
+ * @uses       \Zend\Feed\RSS
+ * @uses       \Zend\HTTP\Client
+ * @uses       \Zend\Loader
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed
+class Feed
 {
 
     /**
      * HTTP client object to use for retrieving feeds
      *
-     * @var Zend_Http_Client
+     * @var \Zend\HTTP\Client
      */
     protected static $_httpClient = null;
 
@@ -70,10 +77,10 @@ class Zend_Feed
      *
      * Sets the HTTP client object to use for retrieving the feeds.
      *
-     * @param  Zend_Http_Client $httpClient
+     * @param  \Zend\HTTP\Client $httpClient
      * @return void
      */
-    public static function setHttpClient(Zend_Http_Client $httpClient)
+    public static function setHttpClient(HTTP\Client $httpClient)
     {
         self::$_httpClient = $httpClient;
     }
@@ -86,8 +93,8 @@ class Zend_Feed
      */
     public static function getHttpClient()
     {
-        if (!self::$_httpClient instanceof Zend_Http_Client) {
-            self::$_httpClient = new Zend_Http_Client();
+        if (!self::$_httpClient instanceof HTTP\Client) {
+            self::$_httpClient = new HTTP\Client();
         }
 
         return self::$_httpClient;
@@ -163,8 +170,8 @@ class Zend_Feed
      * Imports a feed located at $uri.
      *
      * @param  string $uri
-     * @throws Zend_Feed_Exception
-     * @return Zend_Feed_Abstract
+     * @throws \Zend\Feed\Exception
+     * @return \Zend\Feed\AbstractFeed
      */
     public static function import($uri)
     {
@@ -172,7 +179,7 @@ class Zend_Feed
         $client->setUri($uri);
         $response = $client->request('GET');
         if ($response->getStatus() !== 200) {
-            throw new Zend_Feed_Exception('Feed failed to load, got response code ' . $response->getStatus());
+            throw new Exception('Feed failed to load, got response code ' . $response->getStatus());
         }
         $feed = $response->getBody();
         return self::importString($feed);
@@ -183,16 +190,16 @@ class Zend_Feed
      * Imports a feed represented by $string.
      *
      * @param  string $string
-     * @throws Zend_Feed_Exception
-     * @return Zend_Feed_Abstract
+     * @throws \Zend\Feed\Exception
+     * @return \Zend\Feed\AbstractFeed
      */
     public static function importString($string)
     {
         // Load the feed as an XML DOMDocument object
         $libxml_errflag = libxml_use_internal_errors(true);
-        $doc = new DOMDocument;
+        $doc = new \DOMDocument;
         if (trim($string) == '') {
-            throw new Zend_Feed_Exception('Document/string being imported'
+            throw new Exception('Document/string being imported'
             . ' is an Empty string or comes from an empty HTTP response');
         }
         $status = $doc->loadXML($string);
@@ -209,24 +216,24 @@ class Zend_Feed
                 $errormsg = "DOMDocument cannot parse XML";
             }
 
-            throw new Zend_Feed_Exception($errormsg);
+            throw new Exception($errormsg);
         }
 
         // Try to find the base feed element or a single <entry> of an Atom feed
         if ($doc->getElementsByTagName('feed')->item(0) ||
             $doc->getElementsByTagName('entry')->item(0)) {
             // return a newly created Zend_Feed_Atom object
-            return new Zend_Feed_Atom(null, $string);
+            return new Atom(null, $string);
         }
 
         // Try to find the base feed element of an RSS feed
         if ($doc->getElementsByTagName('channel')->item(0)) {
             // return a newly created Zend_Feed_Rss object
-            return new Zend_Feed_Rss(null, $string);
+            return new RSS(null, $string);
         }
 
         // $string does not appear to be a valid feed of the supported types
-        throw new Zend_Feed_Exception('Invalid or unsupported feed format');
+        throw new Exception('Invalid or unsupported feed format');
     }
 
 
@@ -234,8 +241,8 @@ class Zend_Feed
      * Imports a feed from a file located at $filename.
      *
      * @param  string $filename
-     * @throws Zend_Feed_Exception
-     * @return Zend_Feed_Abstract
+     * @throws \Zend\Feed\Exception
+     * @return \Zend\Feed\AbstractFeed
      */
     public static function importFile($filename)
     {
@@ -243,7 +250,7 @@ class Zend_Feed
         $feed = @file_get_contents($filename);
         @ini_restore('track_errors');
         if ($feed === false) {
-            throw new Zend_Feed_Exception("File could not be loaded: $php_errormsg");
+            throw new Exception("File could not be loaded: $php_errormsg");
         }
         return self::importString($feed);
     }
@@ -256,7 +263,7 @@ class Zend_Feed
      * @todo Allow findFeeds() to follow one, but only one, code 302.
      *
      * @param  string $uri
-     * @throws Zend_Feed_Exception
+     * @throws \Zend\Feed\Exception
      * @return array
      */
     public static function findFeeds($uri)
@@ -266,7 +273,7 @@ class Zend_Feed
         $client->setUri($uri);
         $response = $client->request();
         if ($response->getStatus() !== 200) {
-            throw new Zend_Feed_Exception("Failed to access $uri, got response code " . $response->getStatus());
+            throw new Exception("Failed to access $uri, got response code " . $response->getStatus());
         }
         $contents = $response->getBody();
 
@@ -276,7 +283,7 @@ class Zend_Feed
         $result = @preg_match_all($pattern, $contents, $matches);
         @ini_restore('track_errors');
         if ($result === false) {
-            throw new Zend_Feed_Exception("Internal error: $php_errormsg");
+            throw new Exception("Internal error: $php_errormsg");
         }
 
         // Try to fetch a feed for each link tag that appears to refer to a feed
@@ -305,8 +312,8 @@ class Zend_Feed
                 try {
                     // checks if we need to canonize the given uri
                     try {
-                        $uri = Zend_Uri::factory((string) $attributes['href']);
-                    } catch (Zend_Uri_Exception $e) {
+                        $uri = URI\Zend\Uri\Uri::factory((string) $attributes['href']);
+                    } catch (end\URI\Exception $e) {
                         // canonize the uri
                         $path = (string) $attributes['href'];
                         $query = $fragment = '';
@@ -320,14 +327,14 @@ class Zend_Feed
                         if (strpos($query, '#') !== false) {
                             list($query, $fragment) = explode('#', $query, 2);
                         }
-                        $uri = Zend_Uri::factory($client->getUri(true));
+                        $uri = URI\Zend\Uri\Uri::factory($client->getUri(true));
                         $uri->setPath($path);
                         $uri->setQuery($query);
                         $uri->setFragment($fragment);
                     }
 
                     $feed = self::import($uri);
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     continue;
                 }
                 $feeds[$uri->getUri()] = $feed;
@@ -343,31 +350,36 @@ class Zend_Feed
      *
      * @param  array  $data
      * @param  string $format (rss|atom) the requested output format
-     * @return Zend_Feed_Abstract
+     * @return \Zend\Feed\AbstractFeed
      */
-    public static function importArray(array $data, $format = 'atom')
+    public static function importArray(array $data, $format = 'Atom')
     {
-        $obj = 'Zend_Feed_' . ucfirst(strtolower($format));
-        if (!class_exists($obj)) {
-            Zend_Loader::loadClass($obj);
+        if (strtolower($format) == 'rss') {
+            $format = 'RSS';
+        } else {
+            $format = ucfirst(strtolower($format));
         }
+        $obj = 'Zend\Feed\\' . $format;
 
-        return new $obj(null, null, new Zend_Feed_Builder($data));
+        return new $obj(null, null, new Builder\Builder($data));
     }
 
     /**
      * Construct a new Zend_Feed_Abstract object from a Zend_Feed_Builder_Interface data source
      *
-     * @param  Zend_Feed_Builder_Interface $builder this object will be used to extract the data of the feed
+     * @param  \Zend\Feed\Builder\BuilderInterface $builder this object will be used to extract the data of the feed
      * @param  string                      $format (rss|atom) the requested output format
-     * @return Zend_Feed_Abstract
+     * @return \Zend\Feed\AbstractFeed
      */
-    public static function importBuilder(Zend_Feed_Builder_Interface $builder, $format = 'atom')
+    public static function importBuilder(Builder\BuilderInterface $builder, $format = 'atom')
     {
-        $obj = 'Zend_Feed_' . ucfirst(strtolower($format));
-        if (!class_exists($obj)) {
-            Zend_Loader::loadClass($obj);
+        if (strtolower($format) == 'rss') {
+            $format = 'RSS';
+        } else {
+            $format = ucfirst(strtolower($format));
         }
+        $obj = 'Zend\Feed\\' . $format;
+
         return new $obj(null, null, $builder);
     }
 }

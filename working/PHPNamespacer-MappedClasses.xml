@@ -3131,10 +3131,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Builder/Header/Itunes.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Builder_Header_Itunes</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Builder/Header/Itunes.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Builder/Header/iTunes.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Builder\Header</newNamespace>
-      <newClassName>Itunes</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Builder\Header\Itunes</newFullyQualifiedName>
+      <newClassName>iTunes</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Builder\Header\iTunes</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Builder/Header.php</originalRelativeFilePath>
@@ -3187,10 +3187,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Entry/Rss.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Entry_Rss</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Entry/Rss.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Entry/RSS.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Entry</newNamespace>
-      <newClassName>Rss</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Entry\Rss</newFullyQualifiedName>
+      <newClassName>RSS</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Entry\RSS</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Exception.php</originalRelativeFilePath>
@@ -3203,90 +3203,90 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Pubsubhubbub/CallbackAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Pubsubhubbub_CallbackAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Pubsubhubbub/CallbackAbstract.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Pubsubhubbub</newNamespace>
+      <newRelativeFilePath>Zend/Feed/PubSubHubbub/CallbackAbstract.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\PubSubHubbub</newNamespace>
       <newClassName>CallbackAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Pubsubhubbub\CallbackAbstract</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Feed\PubSubHubbub\CallbackAbstract</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Pubsubhubbub/CallbackInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Pubsubhubbub_CallbackInterface</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Pubsubhubbub/CallbackInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Pubsubhubbub</newNamespace>
+      <newRelativeFilePath>Zend/Feed/PubSubHubbub/CallbackInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\PubSubHubbub</newNamespace>
       <newClassName>CallbackInterface</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Pubsubhubbub\CallbackInterface</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Feed\PubSubHubbub\CallbackInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Pubsubhubbub/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Pubsubhubbub_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Pubsubhubbub/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Pubsubhubbub</newNamespace>
+      <newRelativeFilePath>Zend/Feed/PubSubHubbub/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\PubSubHubbub</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Pubsubhubbub\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Feed\PubSubHubbub\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Pubsubhubbub/HttpResponse.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Pubsubhubbub_HttpResponse</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Pubsubhubbub/HttpResponse.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Pubsubhubbub</newNamespace>
+      <newRelativeFilePath>Zend/Feed/PubSubHubbub/HttpResponse.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\PubSubHubbub</newNamespace>
       <newClassName>HttpResponse</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Pubsubhubbub\HttpResponse</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Feed\PubSubHubbub\HttpResponse</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Pubsubhubbub/Model/ModelAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Pubsubhubbub_Model_ModelAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Pubsubhubbub/Model/ModelAbstract.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Pubsubhubbub\Model</newNamespace>
+      <newRelativeFilePath>Zend/Feed/PubSubHubbub/Model/ModelAbstract.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\PubSubHubbub\Model</newNamespace>
       <newClassName>ModelAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Pubsubhubbub\Model\ModelAbstract</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Feed\PubSubHubbub\Model\ModelAbstract</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Pubsubhubbub/Model/Subscription.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Pubsubhubbub_Model_Subscription</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Pubsubhubbub/Model/Subscription.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Pubsubhubbub\Model</newNamespace>
+      <newRelativeFilePath>Zend/Feed/PubSubHubbub/Model/Subscription.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\PubSubHubbub\Model</newNamespace>
       <newClassName>Subscription</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Pubsubhubbub\Model\Subscription</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Feed\PubSubHubbub\Model\Subscription</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Pubsubhubbub/Model/SubscriptionInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Pubsubhubbub/Model/SubscriptionInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Pubsubhubbub\Model</newNamespace>
+      <newRelativeFilePath>Zend/Feed/PubSubHubbub/Model/SubscriptionInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\PubSubHubbub\Model</newNamespace>
       <newClassName>SubscriptionInterface</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Pubsubhubbub\Model\SubscriptionInterface</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Feed\PubSubHubbub\Model\SubscriptionInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Pubsubhubbub/Publisher.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Pubsubhubbub_Publisher</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Pubsubhubbub/Publisher.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Pubsubhubbub</newNamespace>
+      <newRelativeFilePath>Zend/Feed/PubSubHubbub/Publisher.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\PubSubHubbub</newNamespace>
       <newClassName>Publisher</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Pubsubhubbub\Publisher</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Feed\PubSubHubbub\Publisher</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Pubsubhubbub/Subscriber/Callback.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Pubsubhubbub_Subscriber_Callback</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Pubsubhubbub/Subscriber/Callback.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Pubsubhubbub\Subscriber</newNamespace>
+      <newRelativeFilePath>Zend/Feed/PubSubHubbub/Subscriber/Callback.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\PubSubHubbub\Subscriber</newNamespace>
       <newClassName>Callback</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Pubsubhubbub\Subscriber\Callback</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Feed\PubSubHubbub\Subscriber\Callback</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Pubsubhubbub/Subscriber.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Pubsubhubbub_Subscriber</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Pubsubhubbub/Subscriber/Subscriber.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Pubsubhubbub\Subscriber</newNamespace>
+      <newRelativeFilePath>Zend/Feed/PubSubHubbub/Subscriber/Subscriber.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\PubSubHubbub\Subscriber</newNamespace>
       <newClassName>Subscriber</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Pubsubhubbub\Subscriber\Subscriber</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Feed\PubSubHubbub\Subscriber\Subscriber</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Pubsubhubbub.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Pubsubhubbub</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Pubsubhubbub/Pubsubhubbub.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Pubsubhubbub</newNamespace>
-      <newClassName>Pubsubhubbub</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Pubsubhubbub\Pubsubhubbub</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Feed/PubSubHubbub/PubSubHubbub.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\PubSubHubbub</newNamespace>
+      <newClassName>PubSubHubbub</newClassName>
+      <newFullyQualifiedName>Zend\Feed\PubSubHubbub\PubSubHubbub</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Reader/Collection/Author.php</originalRelativeFilePath>
@@ -3331,10 +3331,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Reader/Entry/Rss.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Reader_Entry_Rss</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Reader/Entry/Rss.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Reader/Entry/RSS.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Reader\Entry</newNamespace>
-      <newClassName>Rss</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Reader\Entry\Rss</newFullyQualifiedName>
+      <newClassName>RSS</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Reader\Entry\RSS</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Reader/EntryAbstract.php</originalRelativeFilePath>
@@ -3491,10 +3491,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Reader/Feed/Rss.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Reader_Feed_Rss</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Reader/Feed/Rss.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Reader/Feed/RSS.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Reader\Feed</newNamespace>
-      <newClassName>Rss</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Reader\Feed\Rss</newFullyQualifiedName>
+      <newClassName>RSS</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Reader\Feed\RSS</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Reader/FeedAbstract.php</originalRelativeFilePath>
@@ -3531,10 +3531,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Rss.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Rss</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Rss.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/RSS.php</newRelativeFilePath>
       <newNamespace>Zend\Feed</newNamespace>
-      <newClassName>Rss</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Rss</newFullyQualifiedName>
+      <newClassName>RSS</newClassName>
+      <newFullyQualifiedName>Zend\Feed\RSS</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Deleted.php</originalRelativeFilePath>
@@ -3699,10 +3699,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Renderer/Entry/Rss.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Writer_Renderer_Entry_Rss</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Writer/Renderer/Entry/Rss.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Writer/Renderer/Entry/RSS.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Writer\Renderer\Entry</newNamespace>
-      <newClassName>Rss</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Writer\Renderer\Entry\Rss</newFullyQualifiedName>
+      <newClassName>RSS</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Writer\Renderer\Entry\RSS</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Renderer/Feed/Atom/AtomAbstract.php</originalRelativeFilePath>
@@ -3731,10 +3731,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Renderer/Feed/Rss.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Writer_Renderer_Feed_Rss</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Writer/Renderer/Feed/Rss.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Writer/Renderer/Feed/RSS.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Writer\Renderer\Feed</newNamespace>
-      <newClassName>Rss</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Writer\Renderer\Feed\Rss</newFullyQualifiedName>
+      <newClassName>RSS</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Writer\Renderer\Feed\RSS</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Renderer/RendererAbstract.php</originalRelativeFilePath>
@@ -16107,24 +16107,24 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Uri/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Uri_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Uri/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Uri</newNamespace>
+      <newRelativeFilePath>Zend/URI/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\URI</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Uri\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\URI\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Uri/Http.php</originalRelativeFilePath>
       <originalClassName>Zend_Uri_Http</originalClassName>
-      <newRelativeFilePath>Zend/Uri/Http.php</newRelativeFilePath>
-      <newNamespace>Zend\Uri</newNamespace>
+      <newRelativeFilePath>Zend/URI/URL.php</newRelativeFilePath>
+      <newNamespace>Zend\URI</newNamespace>
       <newClassName>Http</newClassName>
-      <newFullyQualifiedName>Zend\Uri\Http</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\URI\URL</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Uri.php</originalRelativeFilePath>
       <originalClassName>Zend_Uri</originalClassName>
-      <newRelativeFilePath>Zend/Uri/Uri.php</newRelativeFilePath>
-      <newNamespace>Zend\Uri</newNamespace>
+      <newRelativeFilePath>Zend/URI/URL.php</newRelativeFilePath>
+      <newNamespace>Zend\URI</newNamespace>
       <newClassName>Uri</newClassName>
       <newFullyQualifiedName>Zend\Uri\Uri</newFullyQualifiedName>
    </mappedClass>

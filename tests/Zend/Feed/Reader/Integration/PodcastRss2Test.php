@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Feed\Reader\Integration;
+use Zend\Feed\Reader;
+use Zend\Date;
 
 /**
  * @category   Zend
@@ -30,27 +36,27 @@
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
-class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_TestCase
+class PodcastRss2Test extends \PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
 
     public function setup()
     {
-        Zend_Feed_Reader::reset();
+        Reader\Reader::reset();
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/podcast.xml';
-        $this->_options = Zend_Date::setOptions();
+        $this->_options = Date\Date::setOptions();
         foreach($this->_options as $k=>$v) {
             if (is_null($v)) {
                 unset($this->_options[$k]);
             }
         }
-        Zend_Date::setOptions(array('format_type'=>'iso'));
+        Date\Date::setOptions(array('format_type'=>'iso'));
     }
     
     public function teardown()
     {
-        Zend_Date::setOptions($this->_options);
+        Date\Date::setOptions($this->_options);
     }
 
     /**
@@ -59,7 +65,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsNewFeedUrl()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('http://newlocation.com/example.rss', $feed->getNewFeedUrl());
@@ -67,7 +73,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsOwner()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('john.doe@example.com (John Doe)', $feed->getOwner());
@@ -75,7 +81,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsCategories()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(array(
@@ -88,7 +94,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsTitle()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('All About Everything', $feed->getTitle());
@@ -96,7 +102,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsCastAuthor()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('John Doe', $feed->getCastAuthor());
@@ -104,7 +110,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsFeedBlock()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('no', $feed->getBlock());
@@ -112,7 +118,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsCopyright()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('℗ & © 2005 John Doe & Family', $feed->getCopyright());
@@ -120,7 +126,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsDescription()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('All About Everything is a show about everything.
@@ -131,7 +137,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsLanguage()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('en-us', $feed->getLanguage());
@@ -139,7 +145,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsLink()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('http://www.example.com/podcasts/everything/index.html', $feed->getLink());
@@ -147,7 +153,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsEncoding()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('UTF-8', $feed->getEncoding());
@@ -155,7 +161,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsFeedExplicit()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('yes', $feed->getExplicit());
@@ -163,7 +169,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsEntryCount()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(3, $feed->count());
@@ -171,7 +177,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsImage()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('http://example.com/podcasts/everything/AllAboutEverything.jpg', $feed->getImage());
@@ -183,7 +189,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsEntryBlock()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -192,7 +198,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsEntryId()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -201,7 +207,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsEntryTitle()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -210,7 +216,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsEntryCastAuthor()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -219,7 +225,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsEntryExplicit()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -228,7 +234,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsSubtitle()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -238,7 +244,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsSummary()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -250,7 +256,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsDuration()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -259,7 +265,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsKeywords()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -269,7 +275,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsEntryEncoding()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -278,12 +284,12 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
 
     public function testGetsEnclosure()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
 
-        $expected = new stdClass();
+        $expected = new \stdClass();
         $expected->url    = 'http://example.com/podcasts/everything/AllAboutEverythingEpisode3.m4a';
         $expected->length = '8727310';
         $expected->type   = 'audio/x-m4a';

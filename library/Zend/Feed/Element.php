@@ -20,19 +20,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed;
+
+/**
  * Wraps a DOMElement allowing for SimpleXML-like access to attributes.
  *
  * @uses       ArrayAccess
  * @uses       DOMDocument
- * @uses       Zend_Feed
- * @uses       Zend_Feed_Element
- * @uses       Zend_Feed_Exception
+ * @uses       \Zend\Feed\Feed
+ * @uses       \Zend\Feed\Element
+ * @uses       \Zend\Feed\Exception
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Element implements ArrayAccess
+class Element implements \ArrayAccess
 {
 
     /**
@@ -46,7 +51,7 @@ class Zend_Feed_Element implements ArrayAccess
     protected $_encoding = 'UTF-8';
 
     /**
-     * @var Zend_Feed_Element
+     * @var \Zend\Feed\Element
      */
     protected $_parentElement;
 
@@ -92,7 +97,7 @@ class Zend_Feed_Element implements ArrayAccess
      * @param  DOMElement $element
      * @return void
      */
-    public function setDOM(DOMElement $element)
+    public function setDOM(\DOMElement $element)
     {
         $this->_element = $this->_element->ownerDocument->importNode($element, true);
     }
@@ -101,10 +106,10 @@ class Zend_Feed_Element implements ArrayAccess
      * Set the parent element of this object to another
      * Zend_Feed_Element.
      *
-     * @param  Zend_Feed_Element $element
+     * @param  \Zend\Feed\Element $element
      * @return void
      */
-    public function setParent(Zend_Feed_Element $element)
+    public function setParent(Element $element)
     {
         $this->_parentElement = $element;
         $this->_appended = false;
@@ -137,7 +142,7 @@ class Zend_Feed_Element implements ArrayAccess
     public function saveXml()
     {
         // Return a complete document including XML prologue.
-        $doc = new DOMDocument($this->_element->ownerDocument->version,
+        $doc = new \DOMDocument($this->_element->ownerDocument->version,
                                $this->_element->ownerDocument->actualEncoding);
         $doc->appendChild($doc->importNode($this->_element, true));
         return $doc->saveXML();
@@ -170,7 +175,7 @@ class Zend_Feed_Element implements ArrayAccess
      * Set encoding
      *
      * @param  string $value Encoding to use
-     * @return Zend_Feed_Element
+     * @return \Zend\Feed\Element
      */
     public function setEncoding($value)
     {
@@ -194,9 +199,9 @@ class Zend_Feed_Element implements ArrayAccess
         $length = count($nodes);
 
         if ($length == 1) {
-            return new Zend_Feed_Element($nodes[0]);
+            return new Element($nodes[0]);
         } elseif ($length > 1) {
-            return array_map(create_function('$e', 'return new Zend_Feed_Element($e);'), $nodes);
+            return array_map(create_function('$e', 'return new \Zend\Feed\Element($e);'), $nodes);
         } else {
             // When creating anonymous nodes for __set chaining, don't
             // call appendChild() on them. Instead we pass the current
@@ -206,7 +211,7 @@ class Zend_Feed_Element implements ArrayAccess
             // a phantom "bar" element in our tree.
             if (strpos($var, ':') !== false) {
                 list($ns, $elt) = explode(':', $var, 2);
-                $node = $this->_element->ownerDocument->createElementNS(Zend_Feed::lookupNamespace($ns), $elt);
+                $node = $this->_element->ownerDocument->createElementNS(Feed::lookupNamespace($ns), $elt);
             } else {
                 $node = $this->_element->ownerDocument->createElement($var);
             }
@@ -223,7 +228,7 @@ class Zend_Feed_Element implements ArrayAccess
      * @param  string $var The property to change.
      * @param  string $val The property's new value.
      * @return void
-     * @throws Zend_Feed_Exception
+     * @throws \Zend\Feed\Exception
      */
     public function __set($var, $val)
     {
@@ -233,7 +238,7 @@ class Zend_Feed_Element implements ArrayAccess
         if (!$nodes) {
             if (strpos($var, ':') !== false) {
                 list($ns, $elt) = explode(':', $var, 2);
-                $node = $this->_element->ownerDocument->createElementNS(Zend_Feed::lookupNamespace($ns),
+                $node = $this->_element->ownerDocument->createElementNS(Feed::lookupNamespace($ns),
                     $var, htmlspecialchars($val, ENT_NOQUOTES, $this->getEncoding()));
                 $this->_element->appendChild($node);
             } else {
@@ -242,7 +247,7 @@ class Zend_Feed_Element implements ArrayAccess
                 $this->_element->appendChild($node);
             }
         } elseif (count($nodes) > 1) {
-            throw new Zend_Feed_Exception('Cannot set the value of multiple tags simultaneously.');
+            throw new Exception('Cannot set the value of multiple tags simultaneously.');
         } else {
             $nodes[0]->nodeValue = $val;
         }
@@ -372,7 +377,7 @@ class Zend_Feed_Element implements ArrayAccess
     {
         if (strpos($offset, ':') !== false) {
             list($ns, $attr) = explode(':', $offset, 2);
-            return $this->_element->hasAttributeNS(Zend_Feed::lookupNamespace($ns), $attr);
+            return $this->_element->hasAttributeNS(Feed::lookupNamespace($ns), $attr);
         } else {
             return $this->_element->hasAttribute($offset);
         }
@@ -389,7 +394,7 @@ class Zend_Feed_Element implements ArrayAccess
     {
         if (strpos($offset, ':') !== false) {
             list($ns, $attr) = explode(':', $offset, 2);
-            return $this->_element->getAttributeNS(Zend_Feed::lookupNamespace($ns), $attr);
+            return $this->_element->getAttributeNS(Feed::lookupNamespace($ns), $attr);
         } else {
             return $this->_element->getAttribute($offset);
         }
@@ -410,7 +415,7 @@ class Zend_Feed_Element implements ArrayAccess
         if (strpos($offset, ':') !== false) {
             list($ns, $attr) = explode(':', $offset, 2);
             // DOMElement::setAttributeNS() requires $qualifiedName to have a prefix
-            return $this->_element->setAttributeNS(Zend_Feed::lookupNamespace($ns), $offset, $value);
+            return $this->_element->setAttributeNS(Feed::lookupNamespace($ns), $offset, $value);
         } else {
             return $this->_element->setAttribute($offset, $value);
         }
@@ -427,7 +432,7 @@ class Zend_Feed_Element implements ArrayAccess
     {
         if (strpos($offset, ':') !== false) {
             list($ns, $attr) = explode(':', $offset, 2);
-            return $this->_element->removeAttributeNS(Zend_Feed::lookupNamespace($ns), $attr);
+            return $this->_element->removeAttributeNS(Feed::lookupNamespace($ns), $attr);
         } else {
             return $this->_element->removeAttribute($offset);
         }

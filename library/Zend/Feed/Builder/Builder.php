@@ -21,20 +21,25 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed\Builder;
+
+/**
  * A simple implementation of Zend_Feed_Builder_Interface.
  *
  * Users are encouraged to make their own classes to implement Zend_Feed_Builder_Interface
  *
- * @uses       Zend_Feed_Builder_Entry
- * @uses       Zend_Feed_Builder_Exception
- * @uses       Zend_Feed_Builder_Header
- * @uses       Zend_Feed_Builder_Interface
+ * @uses       \Zend\Feed\Builder\Entry
+ * @uses       \Zend\Feed\Builder\Exception
+ * @uses       \Zend\Feed\Builder\Header\Header
+ * @uses       \Zend\Feed\Builder\BuilderInterface
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
+class Builder implements BuilderInterface
 {
     /**
      * The data of the feed
@@ -46,7 +51,7 @@ class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
     /**
      * Header of the feed
      *
-     * @var $_header Zend_Feed_Builder_Header
+     * @var $_header \Zend\Feed\Builder\Header\Header
      */
     private $_header;
 
@@ -174,7 +179,7 @@ class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
      * Returns an instance of Zend_Feed_Builder_Header
      * describing the header of the feed
      *
-     * @return Zend_Feed_Builder_Header
+     * @return \Zend\Feed\Builder\Header\Header
      */
     public function getHeader()
     {
@@ -185,7 +190,7 @@ class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
      * Returns an array of Zend_Feed_Builder_Entry instances
      * describing the entries of the feed
      *
-     * @return array of Zend_Feed_Builder_Entry
+     * @return array of \Zend\Feed\Builder\Entry
      */
     public function getEntries()
     {
@@ -196,7 +201,7 @@ class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
      * Create the Zend_Feed_Builder_Header instance
      *
      * @param  array $data
-     * @throws Zend_Feed_Builder_Exception
+     * @throws \Zend\Feed\Builder\Exception
      * @return void
      */
     protected function _createHeader(array $data)
@@ -204,10 +209,10 @@ class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
         $mandatories = array('title', 'link', 'charset');
         foreach ($mandatories as $mandatory) {
             if (!isset($data[$mandatory])) {
-                throw new Zend_Feed_Builder_Exception("$mandatory key is missing");
+                throw new Exception("$mandatory key is missing");
             }
         }
-        $this->_header = new Zend_Feed_Builder_Header($data['title'], $data['link'], $data['charset']);
+        $this->_header = new Header\Header($data['title'], $data['link'], $data['charset']);
         if (isset($data['lastUpdate'])) {
             $this->_header->setLastUpdate($data['lastUpdate']);
         }
@@ -248,7 +253,7 @@ class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
             $mandatories = array('domain', 'path', 'registerProcedure', 'protocol');
             foreach ($mandatories as $mandatory) {
                 if (!isset($data['cloud'][$mandatory])) {
-                    throw new Zend_Feed_Builder_Exception("you have to define $mandatory property of your cloud");
+                    throw new Exception("you have to define $mandatory property of your cloud");
                 }
             }
             $uri_str = 'http://' . $data['cloud']['domain'] . $data['cloud']['path'];
@@ -258,7 +263,7 @@ class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
             $mandatories = array('title', 'description', 'name', 'link');
             foreach ($mandatories as $mandatory) {
                 if (!isset($data['textInput'][$mandatory])) {
-                    throw new Zend_Feed_Builder_Exception("you have to define $mandatory property of your textInput");
+                    throw new Exception("you have to define $mandatory property of your textInput");
                 }
             }
             $this->_header->setTextInput($data['textInput']['title'],
@@ -273,7 +278,7 @@ class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
             $this->_header->setSkipDays($data['skipDays']);
         }
         if (isset($data['itunes'])) {
-            $itunes = new Zend_Feed_Builder_Header_Itunes($data['itunes']['category']);
+            $itunes = new Header\iTunes($data['itunes']['category']);
             if (isset($data['itunes']['author'])) {
                 $itunes->setAuthor($data['itunes']['author']);
             }
@@ -312,7 +317,7 @@ class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
      * Create the array of article entries
      *
      * @param  array $data
-     * @throws Zend_Feed_Builder_Exception
+     * @throws \Zend\Feed\Builder\Exception
      * @return void
      */
     protected function _createEntries(array $data)
@@ -321,10 +326,10 @@ class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
             $mandatories = array('title', 'link', 'description');
             foreach ($mandatories as $mandatory) {
                 if (!isset($row[$mandatory])) {
-                    throw new Zend_Feed_Builder_Exception("$mandatory key is missing");
+                    throw new Exception("$mandatory key is missing");
                 }
             }
-            $entry = new Zend_Feed_Builder_Entry($row['title'], $row['link'], $row['description']);
+            $entry = new Entry($row['title'], $row['link'], $row['description']);
             if (isset($row['author'])) {
                 $entry->setAuthor($row['author']);
             }
@@ -347,7 +352,7 @@ class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
                 $mandatories = array('title', 'url');
                 foreach ($mandatories as $mandatory) {
                     if (!isset($row['source'][$mandatory])) {
-                        throw new Zend_Feed_Builder_Exception("$mandatory key of source property is missing");
+                        throw new Exception("$mandatory key of source property is missing");
                     }
                 }
                 $entry->setSource($row['source']['title'], $row['source']['url']);

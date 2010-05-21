@@ -20,31 +20,36 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed\Writer\Renderer\Feed\Atom;
+
+/**
  * @uses       DOMDocument
- * @uses       Zend_Feed_Writer
- * @uses       Zend_Feed_Writer_Feed
- * @uses       Zend_Feed_Writer_Renderer_Entry_Atom
- * @uses       Zend_Feed_Writer_Renderer_Entry_Atom_Deleted
- * @uses       Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
- * @uses       Zend_Feed_Writer_Renderer_RendererAbstract
- * @uses       Zend_Feed_Writer_Renderer_RendererInterface
- * @uses       Zend_Version
+ * @uses       \Zend\Feed\Writer\Writer
+ * @uses       \Zend\Feed\Writer\Feed\Feed
+ * @uses       \Zend\Feed\Writer\Renderer\Entry\Atom\Atom
+ * @uses       \Zend\Feed\Writer\Renderer\Entry\Atom\Deleted
+ * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom\AtomAbstract
+ * @uses       \Zend\Feed\Writer\Renderer\RendererAbstract
+ * @uses       \Zend\Feed\Writer\Renderer\RendererInterface
+ * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Renderer_Feed_Atom
-    extends Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
-    implements Zend_Feed_Writer_Renderer_RendererInterface
+class Atom
+    extends AtomAbstract
+    implements \Zend\Feed\Writer\Renderer\RendererInterface
 {
     /**
      * Constructor
      * 
-     * @param  Zend_Feed_Writer_Feed $container 
+     * @param  \Zend\Feed\Writer\Feed\Feed $container 
      * @return void
      */
-    public function __construct (Zend_Feed_Writer_Feed $container)
+    public function __construct (\Zend\Feed\Writer\Feed\Feed $container)
     {
         parent::__construct($container);
     }
@@ -52,17 +57,17 @@ class Zend_Feed_Writer_Renderer_Feed_Atom
     /**
      * Render Atom feed
      * 
-     * @return Zend_Feed_Writer_Renderer_Feed_Atom
+     * @return \Zend\Feed\Writer\Renderer\Feed\Atom\Atom
      */
     public function render()
     {
         if (!$this->_container->getEncoding()) {
             $this->_container->setEncoding('UTF-8');
         }
-        $this->_dom = new DOMDocument('1.0', $this->_container->getEncoding());
+        $this->_dom = new \DOMDocument('1.0', $this->_container->getEncoding());
         $this->_dom->formatOutput = true;
         $root = $this->_dom->createElementNS(
-            Zend_Feed_Writer::NAMESPACE_ATOM_10, 'feed'
+            \Zend\Feed\Writer\Writer::NAMESPACE_ATOM_10, 'feed'
         );
         $this->setRootElement($root);
         $this->_dom->appendChild($root);
@@ -92,15 +97,15 @@ class Zend_Feed_Writer_Renderer_Feed_Atom
             if ($this->getDataContainer()->getEncoding()) {
                 $entry->setEncoding($this->getDataContainer()->getEncoding());
             }
-            if ($entry instanceof Zend_Feed_Writer_Entry) {
-                $renderer = new Zend_Feed_Writer_Renderer_Entry_Atom($entry);
+            if ($entry instanceof \Zend\Feed\Writer\Entry) {
+                $renderer = new \Zend\Feed\Writer\Renderer\Entry\Atom\Atom($entry);
             } else {
                 if (!$this->_dom->documentElement->hasAttribute('xmlns:at')) {
                     $this->_dom->documentElement->setAttribute(
                         'xmlns:at', 'http://purl.org/atompub/tombstones/1.0'
                     );
                 }
-                $renderer = new Zend_Feed_Writer_Renderer_Entry_Atom_Deleted($entry);
+                $renderer = new \Zend\Feed\Writer\Renderer\Entry\Atom\Deleted($entry);
             }
             if ($this->_ignoreExceptions === true) {
                 $renderer->ignoreExceptions();

@@ -13,38 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed
+ * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * Input feed data interface
- *
- * Classes implementing this interface can be passe to Zend_Feed::importBuilder
- * as an input data source for the Zend_Feed construction
- *
+ * @namespace
+ */
+namespace Zend\Feed\PubSubHubbub;
+
+/**
+ * @uses       \Zend\Exception
  * @category   Zend
- * @package    Zend_Feed
+ * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Feed_Builder_Interface
-{
-    /**
-     * Returns an instance of Zend_Feed_Builder_Header
-     * describing the header of the feed
-     *
-     * @return Zend_Feed_Builder_Header
-     */
-    public function getHeader();
-
-    /**
-     * Returns an array of Zend_Feed_Builder_Entry instances
-     * describing the entries of the feed
-     *
-     * @return array of Zend_Feed_Builder_Entry
-     */
-    public function getEntries();
-}
+class Exception extends \Zend\Exception
+{}

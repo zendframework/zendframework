@@ -20,7 +20,13 @@
  * @version    $Id$
  */
 
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Feed\Writer\Renderer\Feed;
+use Zend\Feed\Writer\Feed;
+use Zend\Feed\Writer\Renderer\Feed as RendererFeed;
+use Zend\Feed\Reader;
 
 /**
  * @category   Zend
@@ -31,14 +37,14 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
+class RssTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_validWriter = null;
 
     public function setUp()
     {
-        $this->_validWriter = new Zend_Feed_Writer_Feed;
+        $this->_validWriter = new Feed\Feed;
         $this->_validWriter->setTitle('This is a test feed.');
         $this->_validWriter->setDescription('This is a test description.');
         $this->_validWriter->setLink('http://www.example.com');
@@ -53,17 +59,17 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     public function testSetsWriterInConstructor()
     {
-        $writer = new Zend_Feed_Writer_Feed;
-        $feed = new Zend_Feed_Writer_Renderer_Feed_Rss($writer);
-        $this->assertTrue($feed->getDataContainer() instanceof Zend_Feed_Writer_Feed);
+        $writer = new Feed\Feed;
+        $feed = new RendererFeed\RSS($writer);
+        $this->assertTrue($feed->getDataContainer() instanceof Feed\Feed);
     }
 
     public function testBuildMethodRunsMinimalWriterContainerProperlyBeforeICheckRssCompliance()
     {
-        $feed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = new RendererFeed\RSS($this->_validWriter);
         try {
             $feed->render();
-        } catch (Zend_Feed_Exception $e) {
+        } catch (\Zend\Feed\Exception $e) {
             $this->fail('Valid Writer object caused an exception when building which should never happen');
         }
     }
@@ -71,34 +77,32 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
     public function testFeedEncodingHasBeenSet()
     {
         $this->_validWriter->setEncoding('iso-8859-1');
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals('iso-8859-1', $feed->getEncoding());
     }
 
     public function testFeedEncodingDefaultIsUsedIfEncodingNotSetByHand()
     {
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals('UTF-8', $feed->getEncoding());
     }
 
     public function testFeedTitleHasBeenSet()
     {
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals('This is a test feed.', $feed->getTitle());
     }
     
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testFeedTitleIfMissingThrowsException()
     {
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $this->setExpectedException('Zend\Feed\Exception');
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $this->_validWriter->remove('title');
         $rssFeed->render();
     }
@@ -108,27 +112,25 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
      */
     public function testFeedTitleCharDataEncoding()
     {
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $this->_validWriter->setTitle('<>&\'"áéíóú');
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals('<>&\'"áéíóú', $feed->getTitle());
     }
 
     public function testFeedDescriptionHasBeenSet()
     {
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals('This is a test description.', $feed->getDescription());
     }
     
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testFeedDescriptionThrowsExceptionIfMissing()
     {
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $this->setExpectedException('Zend\Feed\Exception');
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $this->_validWriter->remove('description');
         $rssFeed->render();
     }
@@ -138,25 +140,25 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
      */
     public function testFeedDescriptionCharDataEncoding()
     {
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $this->_validWriter->setDescription('<>&\'"áéíóú');
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals('<>&\'"áéíóú', $feed->getDescription());
     }
 
     public function testFeedUpdatedDateHasBeenSet()
     {
         $this->_validWriter->setDateModified(1234567890);
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
-        $this->assertEquals(1234567890, $feed->getDateModified()->get(Zend_Date::TIMESTAMP));
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $this->assertEquals(1234567890, $feed->getDateModified()->get(\Zend\Date\Date::TIMESTAMP));
     }
     
     public function testFeedUpdatedDateIfMissingThrowsNoException()
     {
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $this->_validWriter->remove('dateModified');
         $rssFeed->render();
     }
@@ -164,65 +166,63 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
     public function testFeedGeneratorHasBeenSet()
     {
         $this->_validWriter->setGenerator('FooFeedBuilder', '1.00', 'http://www.example.com');
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals('FooFeedBuilder 1.00 (http://www.example.com)', $feed->getGenerator());
     }
     
     public function testFeedGeneratorIfMissingThrowsNoException()
     {
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $this->_validWriter->remove('generator');
         $rssFeed->render();
     }
 
     public function testFeedGeneratorDefaultIsUsedIfGeneratorNotSetByHand()
     {
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
-        $this->assertEquals('Zend_Feed_Writer ' . Zend_Version::VERSION . ' (http://framework.zend.com)', $feed->getGenerator());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $this->assertEquals('Zend_Feed_Writer ' . \Zend\Version::VERSION . ' (http://framework.zend.com)', $feed->getGenerator());
     }
 
     public function testFeedLanguageHasBeenSet()
     {
         $this->_validWriter->setLanguage('fr');
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals('fr', $feed->getLanguage());
     }
     
     public function testFeedLanguageIfMissingThrowsNoException()
     {
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $this->_validWriter->remove('language');
         $rssFeed->render();
     }
 
     public function testFeedLanguageDefaultIsUsedIfGeneratorNotSetByHand()
     {
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals(null, $feed->getLanguage());
     }
 
     public function testFeedIncludesLinkToHtmlVersionOfFeed()
     {
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals('http://www.example.com', $feed->getLink());
     }
     
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testFeedLinkToHtmlVersionOfFeedIfMissingThrowsException()
     {
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $this->setExpectedException('Zend\Feed\Exception');
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $this->_validWriter->remove('link');
         $rssFeed->render();
     }
@@ -230,15 +230,15 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
     public function testFeedIncludesLinkToXmlRssWhereTheFeedWillBeAvailable()
     {
         $this->_validWriter->setFeedLink('http://www.example.com/rss', 'rss');
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals('http://www.example.com/rss', $feed->getFeedLink());
     }
     
     public function testFeedLinkToXmlRssWhereTheFeedWillBeAvailableIfMissingThrowsNoException()
     {
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $this->_validWriter->remove('feedLinks');
         $rssFeed->render();
     }
@@ -246,9 +246,9 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
     public function testBaseUrlCanBeSet()
     {
         $this->_validWriter->setBaseUrl('http://www.example.com/base');
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals('http://www.example.com/base', $feed->getBaseUrl());
     }
     
@@ -258,9 +258,9 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
     public function testFeedHoldsAnyAuthorAdded()
     {
         $this->_validWriter->addAuthor('Joe', 'joe@example.com', 'http://www.example.com/joe');
-        $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $atomFeed = new RendererFeed\RSS($this->_validWriter);
         $atomFeed->render();
-        $feed = Zend_Feed_Reader::importString($atomFeed->saveXml());
+        $feed = Reader\Reader::importString($atomFeed->saveXml());
         $author = $feed->getAuthor();
         $this->assertEquals(array('name'=>'Joe'), $feed->getAuthor());
     }
@@ -271,9 +271,9 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
     public function testFeedAuthorCharDataEncoding()
     {   
         $this->_validWriter->addAuthor('<>&\'"áéíóú', 'joe@example.com', 'http://www.example.com/joe');
-        $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $atomFeed = new RendererFeed\RSS($this->_validWriter);
         $atomFeed->render();
-        $feed = Zend_Feed_Reader::importString($atomFeed->saveXml());
+        $feed = Reader\Reader::importString($atomFeed->saveXml());
         $author = $feed->getAuthor();
         $this->assertEquals(array('name'=>'<>&\'"áéíóú'), $feed->getAuthor());
     }
@@ -281,9 +281,9 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
     public function testCopyrightCanBeSet()
     {
         $this->_validWriter->setCopyright('Copyright © 2009 Paddy');
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals('Copyright © 2009 Paddy', $feed->getCopyright());
     }
     
@@ -293,9 +293,9 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
     public function testCopyrightCharDataEncoding()
     {
         $this->_validWriter->setCopyright('<>&\'"áéíóú');
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals('<>&\'"áéíóú', $feed->getCopyright());
     }
     
@@ -305,9 +305,9 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
             array('term'=>'cat_dog', 'label' => 'Cats & Dogs', 'scheme' => 'http://example.com/schema1'),
             array('term'=>'cat_dog2')
         ));
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $expected = array(
             array('term'=>'cat_dog', 'label' => 'cat_dog', 'scheme' => 'http://example.com/schema1'),
             array('term'=>'cat_dog2', 'label' => 'cat_dog2', 'scheme' => null)
@@ -324,9 +324,9 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
             array('term'=>'<>&\'"áéíóú', 'label' => 'Cats & Dogs', 'scheme' => 'http://example.com/schema1'),
             array('term'=>'cat_dog2')
         ));
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $expected = array(
             array('term'=>'<>&\'"áéíóú', 'label' => '<>&\'"áéíóú', 'scheme' => 'http://example.com/schema1'),
             array('term'=>'cat_dog2', 'label' => 'cat_dog2', 'scheme' => null)
@@ -339,9 +339,9 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->_validWriter->addHubs(
             array('http://www.example.com/hub', 'http://www.example.com/hub2')
         );
-        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
         $rssFeed->render();
-        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
         $expected = array(
             'http://www.example.com/hub', 'http://www.example.com/hub2'
         );

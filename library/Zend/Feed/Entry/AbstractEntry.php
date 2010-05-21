@@ -20,19 +20,25 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed\Entry;
+use Zend\Feed;
+
+/**
  * Zend_Feed_Entry_Abstract represents a single entry in an Atom or RSS
  * feed.
  *
  * @uses       DOMDocument
- * @uses       Zend_Feed
- * @uses       Zend_Feed_Element
- * @uses       Zend_Feed_Exception
+ * @uses       \Zend\Feed\Feed
+ * @uses       \Zend\Feed\Element
+ * @uses       \Zend\Feed\Exception
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Feed_Entry_Abstract extends Zend_Feed_Element
+abstract class AbstractEntry extends Feed\Element
 {
     /**
      * Root XML element for entries. Subclasses must define this to a
@@ -62,15 +68,15 @@ abstract class Zend_Feed_Entry_Abstract extends Zend_Feed_Element
      * @param  string $uri
      * @param  SimpleXMLElement|DOMNode|string  $element
      * @return void
-     * @throws Zend_Feed_Exception
+     * @throws \Zend\Feed\Exception
      */
     public function __construct($uri = null, $element = null)
     {
-        if (!($element instanceof DOMElement)) {
+        if (!($element instanceof \DOMElement)) {
             if ($element) {
                 // Load the feed as an XML DOMDocument object
                 @ini_set('track_errors', 1);
-                $doc = new DOMDocument();
+                $doc = new \DOMDocument();
                 $status = @$doc->loadXML($element);
                 @ini_restore('track_errors');
 
@@ -84,17 +90,17 @@ abstract class Zend_Feed_Entry_Abstract extends Zend_Feed_Element
                         }
                     }
 
-                    throw new Zend_Feed_Exception("DOMDocument cannot parse XML: $php_errormsg");
+                    throw new Feed\Exception("DOMDocument cannot parse XML: $php_errormsg");
                 }
 
                 $element = $doc->getElementsByTagName($this->_rootElement)->item(0);
                 if (!$element) {
-                    throw new Zend_Feed_Exception('No root <' . $this->_rootElement . '> element found, cannot parse feed.');
+                    throw new Feed\Exception('No root <' . $this->_rootElement . '> element found, cannot parse feed.');
                 }
             } else {
-                $doc = new DOMDocument('1.0', 'utf-8');
+                $doc = new \DOMDocument('1.0', 'utf-8');
                 if ($this->_rootNamespace !== null) {
-                    $element = $doc->createElementNS(Zend_Feed::lookupNamespace($this->_rootNamespace), $this->_rootElement);
+                    $element = $doc->createElementNS(Feed\Feed::lookupNamespace($this->_rootNamespace), $this->_rootElement);
                 } else {
                     $element = $doc->createElement($this->_rootElement);
                 }

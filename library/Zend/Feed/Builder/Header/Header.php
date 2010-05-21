@@ -20,24 +20,32 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed\Builder\Header;
+use Zend\Validator;
+use Zend\Feed\Builder;
+use Zend\URI;
+
+/**
  * Header of a custom build feed
  *
  * Classes implementing the Zend_Feed_Builder_Interface interface
  * uses this class to describe the header of a feed
  *
  * @uses       ArrayObject
- * @uses       Zend_Feed_Builder_Exception
- * @uses       Zend_Feed_Builder_Header_Itunes
- * @uses       Zend_Uri
- * @uses       Zend_Uri_Http
- * @uses       Zend_Validate_EmailAddress
- * @uses       Zend_Validate_Int
+ * @uses       \Zend\Feed\Builder\Exception
+ * @uses       \Zend\Feed\Builder\Header\iTunes
+ * @uses       \Zend\Uri\Uri
+ * @uses       \Zend\URI\URL
+ * @uses       \Zend\Validator\EmailAddress
+ * @uses       \Zend\Validator\Int
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Builder_Header extends ArrayObject
+class Header extends \ArrayObject
 {
     /**
      * Constructor
@@ -111,7 +119,7 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * Timestamp of the update date
      *
      * @param  int $lastUpdate
-     * @return Zend_Feed_Builder_Header
+     * @return \Zend\Feed\Builder\Header\Header
      */
     public function setLastUpdate($lastUpdate)
     {
@@ -123,7 +131,7 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * Timestamp of the publication date
      *
      * @param  int $published
-     * @return Zend_Feed_Builder_Header
+     * @return \Zend\Feed\Builder\Header\Header
      */
     public function setPublishedDate($published)
     {
@@ -135,7 +143,7 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * Short description of the feed
      *
      * @param  string $description
-     * @return Zend_Feed_Builder_Header
+     * @return \Zend\Feed\Builder\Header\Header
      */
     public function setDescription($description)
     {
@@ -147,7 +155,7 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * Sets the author of the feed
      *
      * @param  string $author
-     * @return Zend_Feed_Builder_Header
+     * @return \Zend\Feed\Builder\Header\Header
      */
     public function setAuthor($author)
     {
@@ -159,14 +167,14 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * Sets the author's email
      *
      * @param  string $email
-     * @return Zend_Feed_Builder_Header
-     * @throws Zend_Feed_Builder_Exception
+     * @return \Zend\Feed\Builder\Header\Header
+     * @throws \Zend\Feed\Builder\Exception
      */
     public function setEmail($email)
     {
-        $validate = new Zend_Validate_EmailAddress();
+        $validate = new Validator\EmailAddress();
         if (!$validate->isValid($email)) {
-            throw new Zend_Feed_Builder_Exception("you have to set a valid email address into the email property");
+            throw new Builder\Exception("you have to set a valid email address into the email property");
         }
         $this->offsetSet('email', $email);
         return $this;
@@ -176,7 +184,7 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * Sets the copyright notice
      *
      * @param  string $copyright
-     * @return Zend_Feed_Builder_Header
+     * @return \Zend\Feed\Builder\Header\Header
      */
     public function setCopyright($copyright)
     {
@@ -188,7 +196,7 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * Sets the image of the feed
      *
      * @param  string $image
-     * @return Zend_Feed_Builder_Header
+     * @return \Zend\Feed\Builder\Header\Header
      */
     public function setImage($image)
     {
@@ -200,7 +208,7 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * Sets the generator of the feed
      *
      * @param  string $generator
-     * @return Zend_Feed_Builder_Header
+     * @return \Zend\Feed\Builder\Header\Header
      */
     public function setGenerator($generator)
     {
@@ -212,7 +220,7 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * Sets the language of the feed
      *
      * @param  string $language
-     * @return Zend_Feed_Builder_Header
+     * @return \Zend\Feed\Builder\Header\Header
      */
     public function setLanguage($language)
     {
@@ -225,14 +233,14 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * Ignored if atom is used
      *
      * @param  string $webmaster
-     * @return Zend_Feed_Builder_Header
-     * @throws Zend_Feed_Builder_Exception
+     * @return \Zend\Feed\Builder\Header\Header
+     * @throws \Zend\Feed\Builder\Exception
      */
     public function setWebmaster($webmaster)
     {
-        $validate = new Zend_Validate_EmailAddress();
+        $validate = new Validator\EmailAddress();
         if (!$validate->isValid($webmaster)) {
-            throw new Zend_Feed_Builder_Exception("you have to set a valid email address into the webmaster property");
+            throw new Builder\Exception("you have to set a valid email address into the webmaster property");
         }
         $this->offsetSet('webmaster', $webmaster);
         return $this;
@@ -243,14 +251,14 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * Ignored if atom is used
      *
      * @param  int $ttl
-     * @return Zend_Feed_Builder_Header
-     * @throws Zend_Feed_Builder_Exception
+     * @return \Zend\Feed\Builder\Header\Header
+     * @throws \Zend\Feed\Builder\Exception
      */
     public function setTtl($ttl)
     {
-        $validate = new Zend_Validate_Int();
+        $validate = new Validator\Int();
         if (!$validate->isValid($ttl)) {
-            throw new Zend_Feed_Builder_Exception("you have to set an integer value to the ttl property");
+            throw new Builder\Exception("you have to set an integer value to the ttl property");
         }
         $this->offsetSet('ttl', $ttl);
         return $this;
@@ -261,7 +269,7 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * Ignored if atom is used
      *
      * @param  string $rating
-     * @return Zend_Feed_Builder_Header
+     * @return \Zend\Feed\Builder\Header\Header
      */
     public function setRating($rating)
     {
@@ -273,19 +281,19 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * Cloud to be notified of updates of the feed
      * Ignored if atom is used
      *
-     * @param  string|Zend_Uri_Http $uri
+     * @param  string|\Zend\URI\URL $uri
      * @param  string               $procedure procedure to call, e.g. myCloud.rssPleaseNotify
      * @param  string               $protocol  protocol to use, e.g. soap or xml-rpc
-     * @return Zend_Feed_Builder_Header
-     * @throws Zend_Feed_Builder_Exception
+     * @return \Zend\Feed\Builder\Header\Header
+     * @throws \Zend\Feed\Builder\Exception
      */
     public function setCloud($uri, $procedure, $protocol)
     {
-        if (is_string($uri) && Zend_Uri_Http::check($uri)) {
-            $uri = Zend_Uri::factory($uri);
+        if (is_string($uri)) {
+            $uri = new \Zend\URI\URL($uri);
         }
-        if (!$uri instanceof Zend_Uri_Http) {
-            throw new Zend_Feed_Builder_Exception('Passed parameter is not a valid HTTP URI');
+        if (!$uri instanceof URI\URL) {
+            throw new Builder\Exception('Passed parameter is not a valid HTTP URI');
         }
         if (!$uri->getPort()) {
             $uri->setPort(80);
@@ -304,7 +312,7 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * @param  string $description explains the text input area
      * @param  string $name        the name of the text object in the text input area
      * @param  string $link        the URL of the CGI script that processes text input requests
-     * @return Zend_Feed_Builder_Header
+     * @return \Zend\Feed\Builder\Header\Header
      */
     public function setTextInput($title, $description, $name, $link)
     {
@@ -320,17 +328,17 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * Ignored if atom is used
      *
      * @param  array $hours list of hours in 24 format
-     * @return Zend_Feed_Builder_Header
-     * @throws Zend_Feed_Builder_Exception
+     * @return \Zend\Feed\Builder\Header\Header
+     * @throws \Zend\Feed\Builder\Exception
      */
     public function setSkipHours(array $hours)
     {
         if (count($hours) > 24) {
-            throw new Zend_Feed_Builder_Exception("you can not have more than 24 rows in the skipHours property");
+            throw new Builder\Exception("you can not have more than 24 rows in the skipHours property");
         }
         foreach ($hours as $hour) {
             if ($hour < 0 || $hour > 23) {
-                throw new Zend_Feed_Builder_Exception("$hour has te be between 0 and 23");
+                throw new Builder\Exception("$hour has te be between 0 and 23");
             }
         }
         $this->offsetSet('skipHours', $hours);
@@ -342,18 +350,18 @@ class Zend_Feed_Builder_Header extends ArrayObject
      * Ignored if atom is used
      *
      * @param  array $days list of days to skip, e.g. Monday
-     * @return Zend_Feed_Builder_Header
-     * @throws Zend_Feed_Builder_Exception
+     * @return \Zend\Feed\Builder\Header\Header
+     * @throws \Zend\Feed\Builder\Exception
      */
     public function setSkipDays(array $days)
     {
         if (count($days) > 7) {
-            throw new Zend_Feed_Builder_Exception("you can not have more than 7 days in the skipDays property");
+            throw new Builder\Exception("you can not have more than 7 days in the skipDays property");
         }
         $valid = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
         foreach ($days as $day) {
             if (!in_array(strtolower($day), $valid)) {
-                throw new Zend_Feed_Builder_Exception("$day is not a valid day");
+                throw new Builder\Exception("$day is not a valid day");
             }
         }
         $this->offsetSet('skipDays', $days);
@@ -363,10 +371,10 @@ class Zend_Feed_Builder_Header extends ArrayObject
     /**
      * Sets the iTunes rss extension
      *
-     * @param  Zend_Feed_Builder_Header_Itunes $itunes
-     * @return Zend_Feed_Builder_Header
+     * @param  \Zend\Feed\Builder\Header\iTunes $itunes
+     * @return \Zend\Feed\Builder\Header\Header
      */
-    public function setITunes(Zend_Feed_Builder_Header_Itunes $itunes)
+    public function setITunes(iTunes $itunes)
     {
         $this->offsetSet('itunes', $itunes);
         return $this;

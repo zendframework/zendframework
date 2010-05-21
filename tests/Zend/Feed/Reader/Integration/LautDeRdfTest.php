@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Feed\Reader\Integration;
+use Zend\Feed\Reader;
+use Zend\Date;
 
 /**
  * @category   Zend
@@ -30,27 +36,27 @@
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
-class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestCase
+class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
 
     public function setup()
     {
-        Zend_Feed_Reader::reset();
+        Reader\Reader::reset();
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/laut.de-rdf.xml';
-        $this->_options = Zend_Date::setOptions();
+        $this->_options = Date\Date::setOptions();
         foreach($this->_options as $k=>$v) {
             if (is_null($v)) {
                 unset($this->_options[$k]);
             }
         }
-        Zend_Date::setOptions(array('format_type'=>'iso'));
+        Date\Date::setOptions(array('format_type'=>'iso'));
     }
     
     public function teardown()
     {
-        Zend_Date::setOptions($this->_options);
+        Date\Date::setOptions($this->_options);
     }
 
     /**
@@ -59,7 +65,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsTitle()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('laut.de - news', $feed->getTitle());
@@ -67,7 +73,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsAuthors()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(array(array('name'=>'laut.de')), (array) $feed->getAuthors());
@@ -75,7 +81,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsSingleAuthor()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(array('name'=>'laut.de'), $feed->getAuthor());
@@ -83,7 +89,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsCopyright()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('Copyright © 2004 laut.de', $feed->getCopyright());
@@ -91,7 +97,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsDescription()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('laut.de: aktuelle News', $feed->getDescription());
@@ -99,7 +105,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsLanguage()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(null, $feed->getLanguage());
@@ -107,7 +113,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsLink()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('http://www.laut.de', $feed->getLink());
@@ -115,7 +121,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsEncoding()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('ISO-8859-1', $feed->getEncoding());
@@ -129,7 +135,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsEntryId()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -138,7 +144,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsEntryTitle()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -147,7 +153,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsEntryAuthors()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -156,7 +162,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsEntrySingleAuthor()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -170,7 +176,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsEntryDescription()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -179,7 +185,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsEntryContent()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -188,7 +194,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsEntryLinks()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -197,7 +203,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsEntryLink()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -206,7 +212,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsEntryPermaLink()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -216,7 +222,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
 
     public function testGetsEntryEncoding()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();

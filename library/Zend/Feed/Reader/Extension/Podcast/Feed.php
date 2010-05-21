@@ -20,13 +20,18 @@
  */
 
 /**
- * @uses       Zend_Feed_Reader_Extension_FeedAbstract
+ * @namespace
+ */
+namespace Zend\Feed\Reader\Extension\Podcast;
+
+/**
+ * @uses       \Zend\Feed\Reader\Extension\FeedAbstract
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Reader_Extension_Podcast_Feed extends Zend_Feed_Reader_Extension_FeedAbstract
+class Feed extends \Zend\Feed\Reader\Extension\FeedAbstract
 {
     /**
      * Get the entry author
@@ -95,7 +100,7 @@ class Zend_Feed_Reader_Extension_Podcast_Feed extends Zend_Feed_Reader_Extension
                     $children = array();
 
                     foreach ($node->childNodes as $childNode) {
-                        if (!($childNode instanceof DOMText)) {
+                        if (!($childNode instanceof \DOMText)) {
                             $children[$childNode->getAttribute('text')] = null;
                         }
                     }

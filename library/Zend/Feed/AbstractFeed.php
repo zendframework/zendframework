@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed;
+
+/**
  * The Zend_Feed_Abstract class is an abstract class representing feeds.
  *
  * Zend_Feed_Abstract implements two core PHP 5 interfaces: ArrayAccess and
@@ -30,15 +35,15 @@
  *
  * @uses       Countable
  * @uses       Iterator
- * @uses       Zend_Feed
- * @uses       Zend_Feed_Element
- * @uses       Zend_Feed_Exception
+ * @uses       \Zend\Feed\Feed
+ * @uses       \Zend\Feed\Element
+ * @uses       \Zend\Feed\Exception
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator, Countable
+abstract class AbstractFeed extends Element implements \Iterator, \Countable
 {
     /**
      * Current index on the collection of feed entries for the
@@ -63,19 +68,19 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
      *
      * @param  string $uri The full URI of the feed to load, or NULL if not retrieved via HTTP or as an array.
      * @param  string $string The feed as a string, or NULL if retrieved via HTTP or as an array.
-     * @param  Zend_Feed_Builder_Interface $builder The feed as a builder instance or NULL if retrieved as a string or via HTTP.
+     * @param  \Zend\Feed\Builder\BuilderInterface $builder The feed as a builder instance or NULL if retrieved as a string or via HTTP.
      * @return void
-     * @throws Zend_Feed_Exception If loading the feed failed.
+     * @throws \Zend\Feed\Exception If loading the feed failed.
      */
-    public function __construct($uri = null, $string = null, Zend_Feed_Builder_Interface $builder = null)
+    public function __construct($uri = null, $string = null, Builder\BuilderInterface $builder = null)
     {
         if ($uri !== null) {
             // Retrieve the feed via HTTP
-            $client = Zend_Feed::getHttpClient();
+            $client = Feed::getHttpClient();
             $client->setUri($uri);
             $response = $client->request('GET');
             if ($response->getStatus() !== 200) {
-                throw new Zend_Feed_Exception('Feed failed to load, got response code ' . $response->getStatus());
+                throw new Exception('Feed failed to load, got response code ' . $response->getStatus());
             }
             $this->_element = $response->getBody();
             $this->__wakeup();
@@ -86,7 +91,7 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
         } else {
             // Generate the feed from the array
             $header = $builder->getHeader();
-            $this->_element = new DOMDocument('1.0', $header['charset']);
+            $this->_element = new \DOMDocument('1.0', $header['charset']);
             $root = $this->_mapFeedHeaders($header);
             $this->_mapFeedEntries($root, $builder->getEntries());
             $this->_element = $root;
@@ -99,12 +104,12 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
      * Load the feed as an XML DOMDocument object
      *
      * @return void
-     * @throws Zend_Feed_Exception
+     * @throws \Zend\Feed\Exception
      */
     public function __wakeup()
     {
         @ini_set('track_errors', 1);
-        $doc = new DOMDocument;
+        $doc = new \DOMDocument;
         $status = @$doc->loadXML($this->_element);
         @ini_restore('track_errors');
 
@@ -118,7 +123,7 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
                 }
             }
 
-            throw new Zend_Feed_Exception("DOMDocument cannot parse XML: $php_errormsg");
+            throw new Exception("DOMDocument cannot parse XML: $php_errormsg");
         }
 
         $this->_element = $doc;
@@ -184,9 +189,11 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
      */
     public function current()
     {
+        //$entryClassName = ;
         return new $this->_entryClassName(
             null,
-            $this->_entries[$this->_entryIndex]);
+            $this->_entries[$this->_entryIndex]
+            );
     }
 
 
@@ -237,12 +244,12 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
      * @param  array $array the data to use
      * @return DOMElement root node
      */
-    abstract protected function _mapFeedEntries(DOMElement $root, $array);
+    abstract protected function _mapFeedEntries(\DOMElement $root, $array);
 
     /**
      * Send feed to a http client with the correct header
      *
-     * @throws Zend_Feed_Exception if headers have already been sent
+     * @throws \Zend\Feed\Exception if headers have already been sent
      * @return void
      */
     abstract public function send();

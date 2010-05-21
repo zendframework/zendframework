@@ -20,25 +20,33 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed\Writer\Feed;
+use Zend\Feed\Writer;
+use Zend\Feed as ZendFeed;
+use Zend\Date;
+
+/**
  * @uses       Countable
  * @uses       Iterator
- * @uses       Zend_Date
- * @uses       Zend_Feed_Exception
- * @uses       Zend_Feed_Writer
- * @uses       Zend_Feed_Writer_Deleted
- * @uses       Zend_Feed_Writer_Entry
- * @uses       Zend_Feed_Writer_Feed_FeedAbstract
- * @uses       Zend_Feed_Writer_Renderer_Feed_Atom
- * @uses       Zend_Feed_Writer_Renderer_Feed_Rss
- * @uses       Zend_Uri
+ * @uses       \Zend\Date\Date
+ * @uses       \Zend\Feed\Exception
+ * @uses       \Zend\Feed\Writer\Writer
+ * @uses       \Zend\Feed\Writer\Deleted
+ * @uses       \Zend\Feed\Writer\Entry
+ * @uses       \Zend\Feed\Writer\Feed\FeedAbstract
+ * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom\Atom
+ * @uses       \Zend\Feed\Writer\Renderer\Feed\RSS
+ * @uses       \Zend\Uri\Uri
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Feed 
-    extends Zend_Feed_Writer_Feed_FeedAbstract
-    implements Iterator, Countable
+class Feed 
+    extends FeedAbstract
+    implements \Iterator, \Countable
 {
 
     /**
@@ -60,11 +68,11 @@ class Zend_Feed_Writer_Feed
      * added to the current feed automatically, but is necessary to create a
      * container with some initial values preset based on the current feed data.
      *
-     * @return Zend_Feed_Writer_Entry
+     * @return \Zend\Feed\Writer\Entry
      */
     public function createEntry()
     {
-        $entry = new Zend_Feed_Writer_Entry;
+        $entry = new Writer\Entry;
         if ($this->getEncoding()) {
             $entry->setEncoding($this->getEncoding());
         }
@@ -76,9 +84,9 @@ class Zend_Feed_Writer_Feed
      * Appends a Zend_Feed_Writer_Deleted object representing a new entry tombstone
      * to the feed data container's internal group of entries.
      *
-     * @param Zend_Feed_Writer_Deleted $entry
+     * @param \Zend\Feed\Writer\Deleted $entry
      */
-    public function addTombstone(Zend_Feed_Writer_Deleted $deleted)
+    public function addTombstone(Writer\Deleted $deleted)
     {
         $this->_entries[] = $deleted;
     }
@@ -88,11 +96,11 @@ class Zend_Feed_Writer_Feed
      * added to the current feed automatically, but is necessary to create a
      * container with some initial values preset based on the current feed data.
      *
-     * @return Zend_Feed_Writer_Deleted
+     * @return \Zend\Feed\Writer\Deleted
      */
     public function createTombstone()
     {
-        $deleted = new Zend_Feed_Writer_Deleted;
+        $deleted = new Writer\Deleted;
         if ($this->getEncoding()) {
             $deleted->setEncoding($this->getEncoding());
         }
@@ -104,9 +112,9 @@ class Zend_Feed_Writer_Feed
      * Appends a Zend_Feed_Writer_Entry object representing a new entry/item
      * the feed data container's internal group of entries.
      *
-     * @param Zend_Feed_Writer_Entry $entry
+     * @param \Zend\Feed\Writer\Entry $entry
      */
-    public function addEntry(Zend_Feed_Writer_Entry $entry)
+    public function addEntry(Writer\Entry $entry)
     {
         $this->_entries[] = $entry;
     }
@@ -122,7 +130,7 @@ class Zend_Feed_Writer_Feed
         if (isset($this->_entries[$index])) {
             unset($this->_entries[$index]);
         }
-        throw new Zend_Feed_Exception('Undefined index: ' . $index . '. Entry does not exist.');
+        throw new ZendFeed\Exception('Undefined index: ' . $index . '. Entry does not exist.');
     }
 
     /**
@@ -136,7 +144,7 @@ class Zend_Feed_Writer_Feed
         if (isset($this->_entries[$index])) {
             return $this->_entries[$index];
         }
-        throw new Zend_Feed_Exception('Undefined index: ' . $index . '. Entry does not exist.');
+        throw new ZendFeed\Exception('Undefined index: ' . $index . '. Entry does not exist.');
     }
 
     /**
@@ -157,9 +165,9 @@ class Zend_Feed_Writer_Feed
         $entries = array();
         foreach ($this->_entries as $entry) {
             if ($entry->getDateModified()) {
-                $timestamp = (int) $entry->getDateModified()->get(Zend_Date::TIMESTAMP);
+                $timestamp = (int) $entry->getDateModified()->get(Date\Date::TIMESTAMP);
             } elseif ($entry->getDateCreated()) {
-                $timestamp = (int) $entry->getDateCreated()->get(Zend_Date::TIMESTAMP);
+                $timestamp = (int) $entry->getDateCreated()->get(Date\Date::TIMESTAMP);
             }
             $entries[$timestamp] = $entry;
         }
@@ -239,7 +247,7 @@ class Zend_Feed_Writer_Feed
         $this->setType(strtolower($type));
         $type = ucfirst($this->getType());
         if ($type !== 'Rss' && $type !== 'Atom') {
-            throw new Zend_Feed_Exception('Invalid feed type specified: ' . $type . '.'
+            throw new ZendFeed\Exception('Invalid feed type specified: ' . $type . '.'
             . ' Should be one of "rss" or "atom".');
         }
         $renderClass = 'Zend_Feed_Writer_Renderer_Feed_' . $type;

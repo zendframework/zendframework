@@ -20,14 +20,20 @@
  */
 
 /**
- * @uses       Zend_Feed_Exception
- * @uses       Zend_Loader_PluginLoader
+ * @namespace
+ */
+namespace Zend\Feed\Writer;
+use Zend\Loader\PluginLoader;
+
+/**
+ * @uses       \Zend\Feed\Exception
+ * @uses       \Zend\Loader\PluginLoader\PluginLoader
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer
+class Writer
 {
 	/**
 	 * Namespace constants
@@ -59,7 +65,7 @@ class Zend_Feed_Writer
     /**
      * PluginLoader instance used by component
      *
-     * @var Zend_Loader_PluginLoader_Interface
+     * @var \Zend\Loader\PluginLoader\PluginLoaderInterface
      */
     protected static $_pluginLoader = null;
 
@@ -87,9 +93,9 @@ class Zend_Feed_Writer
     /**
      * Set plugin loader for use with Extensions
      *
-     * @param  Zend_Loader_PluginLoader_Interface
+     * @param  \Zend\Loader\PluginLoader\PluginLoaderInterface
      */
-    public static function setPluginLoader(Zend_Loader_PluginLoader_Interface $loader)
+    public static function setPluginLoader(PluginLoader\PluginLoaderInterface $loader)
     {
         self::$_pluginLoader = $loader;
     }
@@ -97,13 +103,13 @@ class Zend_Feed_Writer
     /**
      * Get plugin loader for use with Extensions
      *
-     * @return  Zend_Loader_PluginLoader_Interface
+     * @return  \Zend\Loader\PluginLoader\PluginLoaderInterface
      */
     public static function getPluginLoader()
     {
         if (!isset(self::$_pluginLoader)) {
-            self::$_pluginLoader = new Zend_Loader_PluginLoader(array(
-                'Zend_Feed_Writer_Extension_' => 'Zend/Feed/Writer/Extension/',
+            self::$_pluginLoader = new PluginLoader\PluginLoader(array(
+                'Zend\Feed\Writer\Extension\\' => 'Zend/Feed/Writer/Extension/',
             ));
         }
         return self::$_pluginLoader;
@@ -146,14 +152,14 @@ class Zend_Feed_Writer
      *
      * @param  string $name
      * @return void
-     * @throws Zend_Feed_Exception if unable to resolve Extension class
+     * @throws \Zend\Feed\Exception if unable to resolve Extension class
      */
     public static function registerExtension($name)
     {
-        $feedName  = $name . '_Feed';
-        $entryName = $name . '_Entry';
-        $feedRendererName  = $name . '_Renderer_Feed';
-        $entryRendererName = $name . '_Renderer_Entry';
+        $feedName  = $name . '\Feed';
+        $entryName = $name . '\Entry';
+        $feedRendererName  = $name . '\Renderer\Feed';
+        $entryRendererName = $name . '\Renderer\Entry';
         if (self::isRegistered($name)) {
             if (self::getPluginLoader()->isLoaded($feedName)
                 || self::getPluginLoader()->isLoaded($entryName)
@@ -166,29 +172,29 @@ class Zend_Feed_Writer
         try {
             self::getPluginLoader()->load($feedName);
             self::$_extensions['feed'][] = $feedName;
-        } catch (Zend_Loader_PluginLoader_Exception $e) {
+        } catch (PluginLoader\Exception $e) {
         }
         try {
             self::getPluginLoader()->load($entryName);
             self::$_extensions['entry'][] = $entryName;
-        } catch (Zend_Loader_PluginLoader_Exception $e) {
+        } catch (PluginLoader\Exception $e) {
         }
         try {
             self::getPluginLoader()->load($feedRendererName);
             self::$_extensions['feedRenderer'][] = $feedRendererName;
-        } catch (Zend_Loader_PluginLoader_Exception $e) {
+        } catch (PluginLoader\Exception $e) {
         }
         try {
             self::getPluginLoader()->load($entryRendererName);
             self::$_extensions['entryRenderer'][] = $entryRendererName;
-        } catch (Zend_Loader_PluginLoader_Exception $e) {
+        } catch (PluginLoader\Exception $e) {
         }
         if (!self::getPluginLoader()->isLoaded($feedName)
             && !self::getPluginLoader()->isLoaded($entryName)
             && !self::getPluginLoader()->isLoaded($feedRendererName)
             && !self::getPluginLoader()->isLoaded($entryRendererName)
         ) {
-            throw new Zend_Feed_Exception('Could not load extension: ' . $name
+            throw new \Zend\Feed\Exception('Could not load extension: ' . $name
                 . 'using Plugin Loader. Check prefix paths are configured and extension exists.');
         }
     }

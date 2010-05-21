@@ -20,16 +20,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed\Reader\Extension;
+
+/**
  * @uses       DOMXPath
- * @uses       Zend_Feed_Reader
- * @uses       Zend_Feed_Reader_Entry_Atom
- * @uses       Zend_Feed_Reader_Entry_Rss
+ * @uses       \Zend\Feed\Reader\Reader
+ * @uses       \Zend\Feed\Reader\Entry\Atom
+ * @uses       \Zend\Feed\Reader\Entry\RSS
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Feed_Reader_Extension_FeedAbstract
+abstract class FeedAbstract
 {
     /**
      * Parsed feed data
@@ -62,24 +67,24 @@ abstract class Zend_Feed_Reader_Extension_FeedAbstract
     /**
      * Constructor
      *
-     * @param  Zend_Feed_Abstract $feed The source Zend_Feed object
+     * @param  \Zend\Feed\Feed_Abstract $feed The source \Zend\Feed\Feed object
      * @param  string $type Feed type
      * @return void
      */
-    public function __construct(DomDocument $dom, $type = null, DOMXPath $xpath = null)
+    public function __construct(\DomDocument $dom, $type = null, \DOMXPath $xpath = null)
     {
         $this->_domDocument = $dom;
 
         if ($type !== null) {
             $this->_data['type'] = $type;
         } else {
-            $this->_data['type'] = Zend_Feed_Reader::detectType($dom);
+            $this->_data['type'] = \Zend\Feed\Reader\Reader::detectType($dom);
         }
 
         if ($xpath !== null) {
             $this->_xpath = $xpath;
         } else {
-            $this->_xpath = new DOMXPath($this->_domDocument);
+            $this->_xpath = new \DOMXPath($this->_domDocument);
         }
 
         $this->_registerNamespaces();
@@ -131,9 +136,9 @@ abstract class Zend_Feed_Reader_Extension_FeedAbstract
      * Set the XPath query
      *
      * @param  DOMXPath $xpath
-     * @return Zend_Feed_Reader_Extension_EntryAbstract
+     * @return \Zend\Feed\Reader\Extension\EntryAbstract
      */
-    public function setXpath(DOMXPath $xpath)
+    public function setXpath(\DOMXPath $xpath)
     {
         $this->_xpath = $xpath;
         $this->_registerNamespaces();
@@ -163,7 +168,7 @@ abstract class Zend_Feed_Reader_Extension_FeedAbstract
     /**
      * Set the XPath prefix
      *
-     * @return Zend_Feed_Reader_Feed_Atom
+     * @return \Zend\Feed\Reader\Feed\Atom\Atom
      */
     public function setXpathPrefix($prefix)
     {

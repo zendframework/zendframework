@@ -875,7 +875,27 @@ abstract class Zend_Db_Table_Row_TestCommon extends Zend_Db_Table_TestSetup
         }
     }
 
+    /**
+     * @group ZF-9836
+     */
+    public function testTableRowIsIterable()
+    {
+        $table = $this->_table['bugs'];
 
+        $rowset = $table->find(1);
+        $row = $rowset->current();
+        $this->assertTrue($row instanceof Traversable);
+        $this->assertTrue($row instanceof IteratorAggregate);
+        $this->assertType('ArrayIterator', $row->getIterator());
+        
+        $count=0;
+        foreach ($row as $columnValue) {
+            $count++;
+        }
+        
+        $this->assertEquals(8, $count, 'The row was iterated, there should be 8 columns iterated');
+    }
+    
 
     /**
      * Utility methods below

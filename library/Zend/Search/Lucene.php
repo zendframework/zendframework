@@ -707,6 +707,8 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
      */
     public function isDeleted($id)
     {
+        $this->commit();
+
         if ($id >= $this->_docCount) {
             require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Document id is out of the range.');

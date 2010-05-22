@@ -26,15 +26,7 @@
     <xi:include href="Zend_Filter-RealPath.xml" />
     <xi:include href="Zend_Filter-StringToLower.xml" />
     <xi:include href="Zend_Filter-StringToUpper.xml" />
-
-    <sect2 id="zend.filter.set.stringtrim">
-        <title>StringTrim</title>
-
-        <para>
-            Returns the string <varname>$value</varname> with characters stripped from the
-            beginning and end.
-        </para>
-    </sect2>
+    <xi:include href="Zend_Filter-StringTrim.xml" />
 
     <sect2 id="zend.filter.set.stripnewlines">
         <title>StripNewlines</title>

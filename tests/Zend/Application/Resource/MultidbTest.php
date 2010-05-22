@@ -54,7 +54,7 @@ class Zend_Application_Resource_MultidbTest extends PHPUnit_Framework_TestCase
 {
     protected $_dbOptions = array('db1' => array('adapter' => 'pdo_mysql','dbname' => 'db1','password' => 'XXXX','username' => 'webuser'),
                                 'db2' => array('adapter' => 'pdo_pgsql', 'dbname' => 'db2', 'password' => 'notthatpublic', 'username' => 'dba'));
-    
+
     public static function main()
     {
         $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
@@ -82,7 +82,7 @@ class Zend_Application_Resource_MultidbTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         Zend_Db_Table::setDefaultAdapter(null);
-        
+
         // Restore original autoloaders
         $loaders = spl_autoload_functions();
         foreach ($loaders as $loader) {
@@ -105,7 +105,7 @@ class Zend_Application_Resource_MultidbTest extends PHPUnit_Framework_TestCase
         $res = $resource->init();
         $this->assertTrue($res instanceof Zend_Application_Resource_Multidb);
     }
-    
+
     public function testDbsAreSetupCorrectlyObject()
     {
         $resource = new Zend_Application_Resource_Multidb(array());
@@ -115,12 +115,12 @@ class Zend_Application_Resource_MultidbTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($res->getDb('db1') instanceof Zend_Db_Adapter_Pdo_Mysql);
         $this->assertTrue($res->getDb('db2') instanceof Zend_Db_Adapter_Pdo_Pgsql);
     }
-    
+
     public function testGetDefaultIsSetAndReturnedObject()
     {
         $options = $this->_dbOptions;
         $options['db2']['default'] = true;
-        
+
         $resource = new Zend_Application_Resource_Multidb(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($options);
@@ -128,10 +128,10 @@ class Zend_Application_Resource_MultidbTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($res->getDb() instanceof Zend_Db_Adapter_Pdo_Pgsql);
         $this->assertTrue($res->isDefault($res->getDb('db2')));
         $this->assertTrue($res->isDefault('db2'));
-        
+
         $options = $this->_dbOptions;
         $options['db2']['isDefaultTableAdapter'] = true;
-        
+
         $resource = new Zend_Application_Resource_Multidb(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($options);
@@ -140,9 +140,9 @@ class Zend_Application_Resource_MultidbTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($res->isDefault($res->getDb('db2')));
         $this->assertTrue($res->isDefault('db2'));
         $this->assertTrue(Zend_Db_Table::getDefaultAdapter() instanceof Zend_Db_Adapter_Pdo_Pgsql);
-        
+
     }
-    
+
     public function testGetDefaultRandomWhenNoDefaultWasSetObject()
     {
         $resource = new Zend_Application_Resource_Multidb(array());
@@ -153,7 +153,7 @@ class Zend_Application_Resource_MultidbTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($res->getDefaultDb(true) instanceof Zend_Db_Adapter_Pdo_Mysql);
         $this->assertNull($res->getDefaultDb(false));
     }
-    
+
     public function testGetDbWithFaultyDbNameThrowsException()
     {
         $resource = new Zend_Application_Resource_Multidb(array());
@@ -168,7 +168,7 @@ class Zend_Application_Resource_MultidbTest extends PHPUnit_Framework_TestCase
             $this->assertEquals($e->getMessage(), 'A DB adapter was tried to retrieve, but was not configured');
         }
     }
-    
+
     /**
      * @group ZF-9131
      */
@@ -176,9 +176,11 @@ class Zend_Application_Resource_MultidbTest extends PHPUnit_Framework_TestCase
     {
         $resource = new Zend_Application_Resource_Multidb(array());
         $resource->setBootstrap($this->bootstrap);
-        $resource->setOptions($this->_dbOptions);
+        $options = $this->_dbOptions;
+        $options['db2']['isDefaultTableAdapter'] = true;
+        $resource->setOptions($options);
         $res = $resource->init();
-        
+
         $expected = array(
             'dbname' => 'db2',
             'password' => 'notthatpublic',
@@ -188,9 +190,15 @@ class Zend_Application_Resource_MultidbTest extends PHPUnit_Framework_TestCase
             'options' => array('caseFolding' => 0, 'autoQuoteIdentifiers' => true),
             'driver_options' => array());
         $this->assertEquals($expected, $res->getDb('db2')->getConfig());
+
+        $options = $this->_dbOptions;
+        $options['db2']['default'] = true;
+        $resource->setOptions($options);
+        $res = $resource->init();
+        $this->assertEquals($expected, $res->getDb('db2')->getConfig());
     }
 
-    
+
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_LogTest::main') {

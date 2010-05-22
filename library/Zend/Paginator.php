@@ -904,6 +904,8 @@ class Zend_Paginator implements Countable, IteratorAggregate
      */
     public function normalizeItemNumber($itemNumber)
     {
+        $itemNumber = (integer) $itemNumber;
+
         if ($itemNumber < 1) {
             $itemNumber = 1;
         }
@@ -923,6 +925,8 @@ class Zend_Paginator implements Countable, IteratorAggregate
      */
     public function normalizePageNumber($pageNumber)
     {
+        $pageNumber = (integer) $pageNumber;
+
         if ($pageNumber < 1) {
             $pageNumber = 1;
         }

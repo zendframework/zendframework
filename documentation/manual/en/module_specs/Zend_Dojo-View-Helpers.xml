@@ -349,7 +349,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
             <listitem>
                 <para>
                     <command>captureStart($id, array $params = array(), array $attribs =
-                        array())</command>: begin capturing content to include in a container.
+                        array());</command>: begin capturing content to include in a container.
                     <varname>$params</varname> refers to the dijit params to use with
                     the container, while <varname>$attribs</varname> refer to any
                     general <acronym>HTML</acronym> attributes to use.

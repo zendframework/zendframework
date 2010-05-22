@@ -7,7 +7,7 @@
         Returns the string <varname>$value</varname>, removing all but digits.
     </para>
 
-     <sect3 id="zend.filter.set.basename.options">
+     <sect3 id="zend.filter.set.digits.options">
         <title>Supported options for Zend_Filter_Digits</title>
 
         <para>
@@ -15,27 +15,25 @@
         </para>
     </sect3>
 
-     <sect3 id="zend.filter.set.basename.basic">
+     <sect3 id="zend.filter.set.digits.basic">
         <title>Basic usage</title>
 
         <para>
             A basic example of usage is below:
         </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Digits();
 
 print $filter->filter('October 2009');
 // returns "2009"
 ]]></programlisting>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Digits();
 
 print $filter->filter('HTML 5 for Dummies');
 // returns "5"
 ]]></programlisting>
-
     </sect3>
-
 </sect2>

@@ -27,7 +27,6 @@
         </itemizedlist>
     </sect3>
 
-
     <sect3 id="zend.filter.set.stringtrim.basic">
         <title>Basic usage</title>
 
@@ -48,12 +47,12 @@ print $filter->filter(' This is (my) content: ');
 
     </sect3>
 
-
     <sect3 id="zend.filter.set.stringtrim.types">
         <title>Default behaviour for Zend_Filter_StringTrim</title>
 
         <programlisting language="php"><![CDATA[
-$filter = new Zend_Filter_StringTrim(':'); // or new Zend_Filter_StringTrim(array('charlist' => ':'));
+$filter = new Zend_Filter_StringTrim(':');
+// or new Zend_Filter_StringTrim(array('charlist' => ':'));
 
 print $filter->filter(' This is (my) content:');
 ]]></programlisting>

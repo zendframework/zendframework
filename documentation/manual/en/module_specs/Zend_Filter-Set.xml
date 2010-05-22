@@ -18,15 +18,7 @@
     <xi:include href="Zend_Filter-Dir.xml" />
     <xi:include href="Zend_Filter-Encryption.xml" />
     <xi:include href="Zend_Filter-HtmlEntities.xml" />
-
-    <sect2 id="zend.filter.set.int">
-        <title>Int</title>
-
-        <para>
-            Returns (int) <varname>$value</varname>
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Filter-Int.xml" />
     <xi:include href="Zend_Filter-LocalizedToNormalized.xml" />
     <xi:include href="Zend_Filter-NormalizedToLocalized.xml" />
     <xi:include href="Zend_Filter-Null.xml" />

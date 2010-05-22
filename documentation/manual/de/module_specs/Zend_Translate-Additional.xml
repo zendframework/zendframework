@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21745 -->
-<!-- Reviewed: 21745 -->
+<!-- EN-Revision: 21992 -->
+<!-- Reviewed: 21992 -->
 <sect1 id="zend.translate.additional">
     <title>Zusätzliche Features für Übersetzungen</title>
 
@@ -851,7 +851,12 @@ $translate = new Zend_Translate(
                 </para>
 
                 <programlisting><![CDATA[
-$options = array('ignore' => array('regex' => '/test/u', 'regex_2' => '/deleted$/u'));
+$options = array(
+    'ignore' => array(
+        'regex' => '/test/u',
+        'regex_2' => '/deleted$/u'
+    )
+);
 $translate = new Zend_Translate(
     array(
         'adapter' => $adapter,

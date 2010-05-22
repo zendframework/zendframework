@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 21995 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardDecorators">
     <title>Standard Formular Dekoratoren die mit dem Zend Framework ausgeliefert werden</title>
@@ -81,11 +81,11 @@ class Util
             Standardmäßig, wenn keine Beschreibung vorhanden ist, wird keine Ausgabe erzeugt. Wenn
             die Beschreibung vorhanden ist, wird sie standardmäßig in ein <acronym>HTML</acronym>
             <emphasis>p</emphasis> Tag eingebunden, es kann aber ein Tag durch die Übergabe einer
-            <code>tag</code> Option spezifiziert werden, bei der Erstellung des Dekorators, oder
-            durch Aufruf von <methodname>setTag()</methodname>. Zusätzlich kann eine Klasse für das
-            Tag spezifiziert werden, indem die <code>class</code> Option verwendet wird, oder durch
-            den Aufruf von <methodname>setClass()</methodname>; standardmäßig wird die Klasse
-            'hint' verwendet.
+            <property>tag</property> Option spezifiziert werden, bei der Erstellung des Dekorators,
+            oder durch Aufruf von <methodname>setTag()</methodname>. Zusätzlich kann eine Klasse für
+            das Tag spezifiziert werden, indem die <property>class</property> Option verwendet wird,
+            oder durch den Aufruf von <methodname>setClass()</methodname>; standardmäßig wird die
+            Klasse 'hint' verwendet.
         </para>
 
         <para>
@@ -100,13 +100,13 @@ class Util
         <title>Zend_Form_Decorator_DtDdWrapper</title>
 
         <para>
-            Der Standarddekorator verwendet Definitionslisten (<code>&lt;dl&gt;</code>) um
+            Der Standarddekorator verwendet Definitionslisten (<emphasis>&lt;dl&gt;</emphasis>) um
             Formularelemente darzustellen. Da Formularelemente in jeder Reihenfolge vorkommen
             können, werden Gruppen und Unterformulare angezeigt und können mit anderen
             Formularelementen interagieren. Um diese speziellen Elementtypen in der Definitionsliste
             zu behalten, erstellt der DtDdWrapper einen neuen, leeren Definitionsausdruck
-            (<code>&lt;dt&gt;</code>) und bettet dessen Inhalt in ein neues Definitionsdatum
-            (<code>&lt;dd&gt;</code>) ein. Die Ausgabe sieht dann wie folgt aus:
+            (<emphasis>&lt;dt&gt;</emphasis>) und bettet dessen Inhalt in ein neues Definitionsdatum
+            (<emphasis>&lt;dd&gt;</emphasis>) ein. Die Ausgabe sieht dann wie folgt aus:
         </para>
 
         <programlisting language="html"><![CDATA[
@@ -119,7 +119,7 @@ class Util
 
         <para>
             Dieser Dekorator ersetzt den, ihm angebotenen, Inhalt durch dessen Einbettung in das
-            <code>&lt;dd&gt;</code> Element.
+            <emphasis>&lt;dd&gt;</emphasis> Element.
         </para>
     </sect2>
 
@@ -129,8 +129,8 @@ class Util
         <para>
             Element Fehler erhalten ihren eigenen Dekorator mit dem Errors Dekorator. Dieser
             Dekorator ruft den FormErrors View Helfer auf, welcher Fehlermeldungen in einer,
-            ungeordneten, Liste (<code>&lt;ul&gt;</code>) als Listenelement darstellt. Das
-            <code>&lt;ul&gt;</code> Element empfängt eine Klasse von "errors".
+            ungeordneten, Liste (<emphasis>&lt;ul&gt;</emphasis>) als Listenelement darstellt. Das
+            <emphasis>&lt;ul&gt;</emphasis> Element empfängt eine Klasse von "errors".
         </para>
 
         <para>
@@ -226,51 +226,51 @@ class Util
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>ignoreSubForms</code>: Ob die Rekursion im Unterformular ausgeschaltet
-                    werden soll oder nicht. Standardwert: <constant>FALSE</constant> (erlaubt
-                    Rekursion).
+                    <property>ignoreSubForms</property>: Ob die Rekursion im Unterformular
+                    ausgeschaltet werden soll oder nicht. Standardwert: <constant>FALSE</constant>
+                    (erlaubt Rekursion).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>markupElementLabelEnd</code>: Markup welcher der Elementüberschrift
-                    angehängt wird. Standardwert: '&lt;/b&gt;'
+                    <property>markupElementLabelEnd</property>: Markup welcher der
+                    Elementüberschrift angehängt wird. Standardwert: '&lt;/b&gt;'
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>markupElementLabelStart</code>: Markup welcher der Elementüberschrift
-                    vorangestellt wird. Standardwert: '&lt;b&gt;'
+                    <property>markupElementLabelStart</property>: Markup welcher der
+                    Elementüberschrift vorangestellt wird. Standardwert: '&lt;b&gt;'
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>markupListEnd</code>: Markup welcher der Nachrichtenliste angehängt wird.
-                    Standardwert: '&lt;/ul&gt;'.
+                    <property>markupListEnd</property>: Markup welcher der Nachrichtenliste
+                    angehängt wird. Standardwert: '&lt;/ul&gt;'.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>markupListItemEnd</code>: Markup der individuellen Fehlermeldungen
+                    <property>markupListItemEnd</property>: Markup der individuellen Fehlermeldungen
                     angehängt wird. Standardwert: '&lt;/li&gt;'
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>markupListItemStart</code>: Markup der individuellen Fehlermeldungen
-                    vorangestellt wird. Standardwert: '&lt;li&gt;'
+                    <property>markupListItemStart</property>: Markup der individuellen
+                    Fehlermeldungen vorangestellt wird. Standardwert: '&lt;li&gt;'
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>markupListStart</code>: Markup welcher der Nachrichtenliste vorangestellt
-                    wird. Standardwert: '&lt;ul class="form-errors"&gt;'
+                    <property>markupListStart</property>: Markup welcher der Nachrichtenliste
+                    vorangestellt wird. Standardwert: '&lt;ul class="form-errors"&gt;'
                 </para>
             </listitem>
         </itemizedlist>
@@ -299,17 +299,17 @@ class Util
 
         <para>
             Der Image Dekorator erlaubt es eine <acronym>HTML</acronym> Bildeingabe
-            (<code>&lt;input type="image" ... /&gt;</code>) zu erstellen, und es optional in einem
-            anderen <acronym>HTML</acronym> Tag darzustellen.
+            (<emphasis>&lt;input type="image" ... /&gt;</emphasis>) zu erstellen, und es optional in
+            einem anderen <acronym>HTML</acronym> Tag darzustellen.
         </para>
 
         <para>
             Standardmäßig verwendet der Dekorator die 'src' Eigenschaft des Elements als Bildquelle,
             welche mit der <methodname>setImage()</methodname> Methode als Bildquelle gesetzt werden
             kann. Zusätzlich wird das Label des Elements als 'alt' Attribute verwendet, und
-            <code>imageValue</code> (welches mit den <methodname>setImageValue()</methodname> und
-            <methodname>getImageValue()</methodname> Zugriffsmethoden des Bildes manipuliert werden
-            kann) wird für den Wert verwendet.
+            <property>imageValue</property> (welches mit den
+            <methodname>setImageValue()</methodname> und <methodname>getImageValue()</methodname>
+            Zugriffsmethoden des Bildes manipuliert werden kann) wird für den Wert verwendet.
         </para>
 
         <para>
@@ -350,8 +350,8 @@ class Util
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>optionalPrefix</code>: Setzt den Text, der dem Label vorangestellt wird,
-                    wenn das Element optional ist. Kann mit den Zugriffsmethoden
+                    <property>optionalPrefix</property>: Setzt den Text, der dem Label vorangestellt
+                    wird, wenn das Element optional ist. Kann mit den Zugriffsmethoden
                     <methodname>setOptionalPrefix()</methodname> und
                     <methodname>getOptionalPrefix()</methodname> manipuliert werden.
                 </para>
@@ -359,8 +359,8 @@ class Util
 
             <listitem>
                 <para>
-                    <code>optionalSuffix</code>: Setzt den Text, der dem Label angehängt wird,
-                    wenn das Element optional ist. Kann mit den Zugriffsmethoden
+                    <property>optionalSuffix</property>: Setzt den Text, der dem Label angehängt
+                    wird, wenn das Element optional ist. Kann mit den Zugriffsmethoden
                     <methodname>setOptionalSuffix()</methodname> und
                     <methodname>getOptionalSuffix()</methodname> manipuliert werden.
                 </para>
@@ -368,8 +368,8 @@ class Util
 
             <listitem>
                 <para>
-                    <code>requiredPrefix</code>: Setzt den Text, der dem Label vorangestellt wird,
-                    wenn das Element benötigt wird. Kann mit den Zugriffsmethoden
+                    <property>requiredPrefix</property>: Setzt den Text, der dem Label vorangestellt
+                    wird, wenn das Element benötigt wird. Kann mit den Zugriffsmethoden
                     <methodname>setRequiredPrefix()</methodname> und
                     <methodname>getRequiredPrefix()</methodname> manipuliert werden.
                 </para>
@@ -377,8 +377,8 @@ class Util
 
             <listitem>
                 <para>
-                    <code>requiredSuffix</code>: Setzt den Text, der dem Label angehängt wird,
-                    wenn das Element benötigt wird. Kann mit den Zugriffsmethoden
+                    <property>requiredSuffix</property>: Setzt den Text, der dem Label angehängt
+                    wird, wenn das Element benötigt wird. Kann mit den Zugriffsmethoden
                     <methodname>setRequiredSuffix()</methodname> und
                     <methodname>getRequiredSuffix()</methodname> manipuliert werden.
                 </para>
@@ -459,15 +459,17 @@ $form->setDecorators(array(
 
         <itemizedlist>
             <listitem>
-                <para><code>element</code>: Das Element, welches dekoriert wird</para>
+                <para><property>element</property>: Das Element, welches dekoriert wird</para>
             </listitem>
 
             <listitem>
-                <para><code>content</code>: Der Inhalt, der an den Dekorator übergeben wird</para>
+                <para>
+                    <property>content</property>: Der Inhalt, der an den Dekorator übergeben wird
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>decorator</code>: Das Dekorator Objekt selbst</para>
+                <para><property>decorator</property>: Das Dekorator Objekt selbst</para>
             </listitem>
 
             <listitem>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21661 -->
+<!-- EN-Revision: 21992 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.messages">
     <title>Prüfungsmeldungen</title>
@@ -48,7 +48,10 @@ $messages  = $validator->getMessageTemplates();
 
     <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_GreaterThan();
-$validator->setMessage('Bitte einen kleineren Wert angeben', Zend_Validate_GreaterThan::NOT_GREATER);
+$validator->setMessage(
+    'Bitte einen kleineren Wert angeben',
+    Zend_Validate_GreaterThan::NOT_GREATER
+);
 ]]></programlisting>
 
     <para>

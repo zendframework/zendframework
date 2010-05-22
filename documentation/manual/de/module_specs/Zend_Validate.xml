@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: 21829 -->
+<!-- EN-Revision: 21992 -->
+<!-- Reviewed: 21992 -->
 <sect1 id="zend.validate.introduction">
     <title>Einführung</title>
 
@@ -259,7 +259,9 @@ if (Zend_Validate::is($value, 'MyValidator', array('min' => 1, 'max' => 12)) {
     // Yes, $value is ok
 }
 
-if (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12)) {
+if (Zend_Validate::is($value,
+                      'OtherValidator',
+                      array('min' => 1, 'max' => 12)) {
     // Yes, $value is ok
 }
 ]]></programlisting>

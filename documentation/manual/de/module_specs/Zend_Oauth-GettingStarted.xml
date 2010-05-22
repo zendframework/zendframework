@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21826 -->
+<!-- EN-Revision: 21992 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.oauth.introduction.getting-started">
     <title>Beginnen</title>
@@ -164,7 +164,10 @@ $config = array(
 $consumer = new Zend_Oauth_Consumer($config);
 
 if (!empty($_GET) && isset($_SESSION['TWITTER_REQUEST_TOKEN'])) {
-    $token = $consumer->getAccessToken($_GET, unserialize($_SESSION['TWITTER_REQUEST_TOKEN']));
+    $token = $consumer->getAccessToken(
+                 $_GET,
+                 unserialize($_SESSION['TWITTER_REQUEST_TOKEN'])
+             );
     $_SESSION['TWITTER_ACCESS_TOKEN'] = serialize($token);
 
     // Jetzt da wir den Zugriffstoken haben können wir den Anfragetoken löschen

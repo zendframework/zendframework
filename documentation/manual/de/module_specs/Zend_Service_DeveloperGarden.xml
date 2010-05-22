@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21819 -->
+<!-- EN-Revision: 21992 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.developergarden">
     <title>Zend_Service_DeveloperGarden</title>
@@ -768,11 +768,12 @@ $service->tearDownCall($sessionId);
             <programlisting language="php"><![CDATA[
 $client = new Zend_Service_DeveloperGarden_ConferenceCall($config);
 
-$conferenceDetails = new Zend_Service_DeveloperGarden_ConferenceCall_ConferenceDetail(
-    'Zend-Conference',                    // Name der Konferenz
-    'this is my private zend conference', // Beschreibung
-    60                                    // Dauer in Sekunden
-);
+$conferenceDetails =
+    new Zend_Service_DeveloperGarden_ConferenceCall_ConferenceDetail(
+        'Zend-Conference',                    // Name der Konferenz
+        'this is my private zend conference', // Beschreibung
+        60                                    // Dauer in Sekunden
+    );
 
 $conference = $client->createConference('MeinName', $conferenceDetails);
 
@@ -808,7 +809,9 @@ $client->commitConference($conference->getConferenceId());
             <title>WSDL Cacheoptionen</title>
 
             <programlisting language="php"><![CDATA[
-Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setWsdlCache([PHP KONSTANTE]);
+Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setWsdlCache(
+    [PHP KONSTANTE]
+);
 ]]></programlisting>
         </example>
 

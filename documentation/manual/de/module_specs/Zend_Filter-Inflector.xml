@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21606 -->
+<!-- EN-Revision: 21994 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.inflector">
     <title>Zend_Filter_Inflector</title>
@@ -54,7 +54,7 @@ $filtered = $inflector->filter(array('page' => $string));
 
         <para>
             Wenn <methodname>filter()</methodname> aufgerufen wird, muß ein Array von
-            Schlüssel/Wert Paaren übergeben werden die den Variablen im Ziel entsprechen.
+            Schlüssel und Wert Paaren übergeben werden die den Variablen im Ziel entsprechen.
         </para>
 
         <para>
@@ -69,9 +69,11 @@ $filtered = $inflector->filter(array('page' => $string));
 
         <para>
             Als Beispiel kann jede konkrete <classname>Zend_Filter</classname> Implementierung
-            verwendet werden; trotzdem, statt auf diese als 'Zend_Filter_Alpha' oder
-            'Zend_Filter_StringToLower' zu verweisen kann einfach 'Alpha' oder 'StringToLower'
-            spezifiziert werden.
+            verwendet werden; trotzdem, statt auf diese als
+            '<classname>Zend_Filter_Alpha</classname>' oder
+            '<classname>Zend_Filter_StringToLower</classname>' zu verweisen kann einfach
+            '<classname>Alpha</classname>' oder '<classname>StringToLower</classname>' spezifiziert
+            werden.
         </para>
     </sect2>
 
@@ -305,8 +307,8 @@ class Foo
                     <para>
                         <emphasis>String</emphasis>. Der String kann ein Klassenname eines Filters,
                         oder ein Segment des Klassennamens ohne jeglichem Präfix sein der im
-                        Beugungs Plugin Lader gesetzt ist (standardmäßig, ohne den 'Zend_Filter'
-                        Präfix).
+                        Beugungs Plugin Lader gesetzt ist (standardmäßig, ohne den
+                        '<classname>Zend_Filter</classname>' Präfix).
                     </para>
                 </listitem>
 
@@ -354,8 +356,8 @@ $inflector->setFilterRule('script', array(
             </para>
 
             <para>
-                Jede Methode nimmt ein Array von Variable/Regel Paaren, wobei die Regel alles sein
-                kann was der Typ der Regel akzeptiert (String, Filterobjekt, oder Array).
+                Jede Methode nimmt ein Array von Variable und Regel Paaren, wobei die Regel alles
+                sein kann was der Typ der Regel akzeptiert (String, Filterobjekt, oder Array).
                 Variablennamen akzeptieren eine spezielle Schreibweise um das Setzen von statischen
                 Regeln und Filterregeln zu erlauben, entsprechend der folgenden Schreibweise:
             </para>
@@ -457,7 +459,7 @@ $inflector->addRules(array(
             <listitem>
                 <para>
                     <property>filterPrefixPath</property> spezifiziert ein oder mehrere Filter
-                    Präfix/Pfad Paare für die Verwendung mit dem Beugungsmechanismus.
+                    Präfix und Pfad Paare für die Verwendung mit dem Beugungsmechanismus.
                 </para>
             </listitem>
 

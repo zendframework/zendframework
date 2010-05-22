@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21994 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
@@ -140,15 +140,15 @@ $filter->setAdapter('openssl');
         <note>
             <para>
                 Man sollte auch beachten das alle Einstellungen geprüft werden wenn man eine Instanz
-                erstellt oder setEncryption() aufruft. Wenn mcrypt ein Problem mit diesen
-                Einstellungen erkennt wird eine Ausnahme geworfen.
+                erstellt oder <methodname>setEncryption()</methodname> aufruft. Wenn mcrypt ein
+                Problem mit diesen Einstellungen erkennt wird eine Ausnahme geworfen.
             </para>
         </note>
 
         <para>
             Man kann den Verschlüsselungs Vektor durch den Aufruf von
             <methodname>getVector()</methodname> und <methodname>setVector()</methodname>
-            erhalten/setzen. Ein engegebener String wird, je nach benötigter Vektorgröße des
+            erhalten und setzen. Ein engegebener String wird, je nach benötigter Vektorgröße des
             verwendeten Algorithmus, abgeschnitten oder aufgefüllt.
         </para>
 

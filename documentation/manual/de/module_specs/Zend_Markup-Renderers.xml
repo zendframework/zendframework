@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 21992 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.markup.renderers">
     <title>Zend_Markup Renderer</title>
@@ -71,7 +71,8 @@ echo $bbcode->render('my [foo]markup[/foo]');
             </para>
 
             <programlisting language="php"><![CDATA[
-class My_Markup_Renderer_Html_Upper implements Zend_Markup_Renderer_TokenConverterInterface
+class My_Markup_Renderer_Html_Upper
+    implements Zend_Markup_Renderer_TokenConverterInterface
 {
 
     public function convert(Zend_Markup_Token $token, $text)

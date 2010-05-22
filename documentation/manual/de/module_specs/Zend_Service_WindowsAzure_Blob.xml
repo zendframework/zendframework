@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21822 -->
+<!-- EN-Revision: 21992 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.service.windowsazure.storage.blob">
     <title>Zend_Service_WindowsAzure_Storage_Blob</title>
@@ -165,7 +165,10 @@ $storageClient->getBlob(
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
 
 // Den Container öffentlich zugänglich machen
-$storageClient->setContainerAcl('testcontainer', Zend_Service_WindowsAzure_Storage_Blob::ACL_PUBLIC);
+$storageClient->setContainerAcl(
+    'testcontainer',
+    Zend_Service_WindowsAzure_Storage_Blob::ACL_PUBLIC
+);
 ]]></programlisting>
             </example>
         </sect4>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21994 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.boolean">
     <title>Boolean</title>
@@ -233,55 +233,55 @@ $filter->filter('yes');
 
                 <tbody>
                     <row>
-                        <entry>Zend_Filter_Boolean::BOOLEAN</entry>
+                        <entry><constant>Zend_Filter_Boolean::BOOLEAN</constant></entry>
                         <entry><constant>TRUE</constant></entry>
                         <entry><constant>FALSE</constant></entry>
                     </row>
 
                     <row>
-                        <entry>Zend_Filter_Boolean::INTEGER</entry>
+                        <entry><constant>Zend_Filter_Boolean::INTEGER</constant></entry>
                         <entry>0</entry>
                         <entry>1</entry>
                     </row>
 
                     <row>
-                        <entry>Zend_Filter_Boolean::FLOAT</entry>
+                        <entry><constant>Zend_Filter_Boolean::FLOAT</constant></entry>
                         <entry>0.0</entry>
                         <entry>1.0</entry>
                     </row>
 
                     <row>
-                        <entry>Zend_Filter_Boolean::STRING</entry>
+                        <entry><constant>Zend_Filter_Boolean::STRING</constant></entry>
                         <entry>""</entry>
                         <entry />
                     </row>
 
                     <row>
-                        <entry>Zend_Filter_Boolean::ZERO</entry>
+                        <entry><constant>Zend_Filter_Boolean::ZERO</constant></entry>
                         <entry>"0"</entry>
                         <entry>"1"</entry>
                     </row>
 
                     <row>
-                        <entry>Zend_Filter_Boolean::EMPTY_ARRAY</entry>
-                        <entry>array()</entry>
+                        <entry><constant>Zend_Filter_Boolean::EMPTY_ARRAY</constant></entry>
+                        <entry><methodname>array()</methodname></entry>
                         <entry />
                     </row>
 
                     <row>
-                        <entry>Zend_Filter_Boolean::NULL</entry>
+                        <entry><constant>Zend_Filter_Boolean::NULL</constant></entry>
                         <entry><constant>NULL</constant></entry>
                         <entry />
                     </row>
 
                     <row>
-                        <entry>Zend_Filter_Boolean::FALSE_STRING</entry>
+                        <entry><constant>Zend_Filter_Boolean::FALSE_STRING</constant></entry>
                         <entry>"false" (unabhängig von der Schreibweise)</entry>
                         <entry>"true" (unabhängig von der Schreibweise)</entry>
                     </row>
 
                     <row>
-                        <entry>Zend_Filter_Boolean::YES</entry>
+                        <entry><constant>Zend_Filter_Boolean::YES</constant></entry>
                         <entry>localized "yes" (unabhängig von der Schreibweise)</entry>
                         <entry>localized "no" (unabhängig von der Schreibweise)</entry>
                     </row>

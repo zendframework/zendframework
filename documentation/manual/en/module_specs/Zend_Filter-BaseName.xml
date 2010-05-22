@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.basename">
+    <title>BaseName</title>
+
+    <para>
+        Given a string containing a path to a file, this filter will return the base name of the file.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_BaseName();
+
+print $filter->filter('/vol/tmp/filename');
+// returns "filename"
+]]></programlisting>
+
+    <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_BaseName();
+
+print $filter->filter('/vol/tmp/filename.txt');
+// returns "filename.txt"
+]]></programlisting>
+
+</sect2>

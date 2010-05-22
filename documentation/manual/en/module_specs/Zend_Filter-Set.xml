@@ -9,16 +9,7 @@
 
     <xi:include href="Zend_Filter-Alnum.xml" />
     <xi:include href="Zend_Filter-Alpha.xml" />
-
-    <sect2 id="zend.filter.set.basename">
-        <title>BaseName</title>
-
-        <para>
-            Given a string containing a path to a file, this filter will return the base
-            name of the file
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Filter-BaseName.xml" />
     <xi:include href="Zend_Filter-Boolean.xml" />
     <xi:include href="Zend_Filter-Callback.xml" />
     <xi:include href="Zend_Filter-Compress.xml" />

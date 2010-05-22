@@ -469,9 +469,12 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      *
      * Otherwise, the path prefix is set on the appropriate plugin loader.
      *
-     * If $type is 'decorators', sets the path in the decorator plugin loader
+     * If $type is 'decorator', sets the path in the decorator plugin loader
      * for all elements. Additionally, if no $type is provided,
-     * {@link Zend_Form_Element::addPrefixPath()} is called on each element.
+     * the prefix and path is added to both decorator and element
+     * plugin loader with following settings:
+     * $prefix . '_Decorator', $path . '/Decorator/'
+     * $prefix . '_Element', $path . '/Element/'
      *
      * @param  string $prefix
      * @param  string $path

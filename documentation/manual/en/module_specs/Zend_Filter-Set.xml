@@ -14,14 +14,8 @@
     <xi:include href="Zend_Filter-Callback.xml" />
     <xi:include href="Zend_Filter-Compress.xml" />
     <xi:include href="Zend_Filter-Decryption.xml" />
+    <xi:include href="Zend_Filter-Digits.xml" />
 
-    <sect2 id="zend.filter.set.digits">
-        <title>Digits</title>
-
-        <para>
-            Returns the string <varname>$value</varname>, removing all but digit characters.
-        </para>
-    </sect2>
 
     <sect2 id="zend.filter.set.dir">
         <title>Dir</title>

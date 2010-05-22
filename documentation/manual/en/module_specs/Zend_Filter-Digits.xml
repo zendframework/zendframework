@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.digits">
+    <title>BaseName</title>
+
+    <para>
+        Returns the string <varname>$value</varname>, removing all but digits.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Digits();
+
+print $filter->filter('October 2009');
+// returns "2009"
+]]></programlisting>
+
+    <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Digits();
+
+print $filter->filter('HTML 5 for Dummies');
+// returns "5"
+]]></programlisting>
+
+</sect2>

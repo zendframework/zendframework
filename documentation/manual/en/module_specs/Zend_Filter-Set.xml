@@ -8,15 +8,7 @@
     </para>
 
     <xi:include href="Zend_Filter-Alnum.xml" />
-
-    <sect2 id="zend.filter.set.alpha">
-        <title>Alpha</title>
-
-        <para>
-            Returns the string <varname>$value</varname>, removing all but alphabetic characters.
-            This filter includes an option to also allow white space characters.
-        </para>
-    </sect2>
+    <xi:include href="Zend_Filter-Alpha.xml" />
 
     <sect2 id="zend.filter.set.basename">
         <title>BaseName</title>

@@ -40,7 +40,7 @@ print $filter->filter('/vol/tmp/filename.txt');
 ]]></programlisting>
 
         <para>
-            This will return 'filename.txt'.
+            This will return '<filename>filename.txt</filename>'.
         </para>
     </sect3>
 </sect2>

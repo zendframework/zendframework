@@ -168,4 +168,49 @@ class Zend_Filter_HtmlEntitiesTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('ISO-8859-1', $filter->getEncoding());
         $this->assertEquals(5, $filter->getQuoteStyle());
     }
+
+    /**
+     * Ensures that when ENT_QUOTES is set, the filtered value has both 'single' and "double" quotes encoded
+     *
+     * @group  ZF-8962
+     * @return void
+     */
+    public function testQuoteStyleQuotesEncodeBoth()
+    {
+        $input  = "A 'single' and " . '"double"';
+        $result = 'A &#039;single&#039; and &quot;double&quot;';
+
+        $this->_filter->setQuoteStyle(ENT_QUOTES);
+        $this->assertEquals($result, $this->_filter->filter($input));
+    }
+
+    /**
+     * Ensures that when ENT_COMPAT is set, the filtered value has only "double" quotes encoded
+     *
+     * @group  ZF-8962
+     * @return void
+     */
+    public function testQuoteStyleQuotesEncodeDouble()
+    {
+        $input  = "A 'single' and " . '"double"';
+        $result = "A 'single' and &quot;double&quot;";
+        
+        $this->_filter->setQuoteStyle(ENT_COMPAT);
+        $this->assertEquals($result, $this->_filter->filter($input));
+    }
+
+    /**
+     * Ensures that when ENT_NOQUOTES is set, the filtered value leaves both "double" and 'single' quotes un-altered
+     *
+     * @group  ZF-8962
+     * @return void
+     */
+    public function testQuoteStyleQuotesEncodeNone()
+    {
+        $input  = "A 'single' and " . '"double"';
+        $result = "A 'single' and " . '"double"';
+
+        $this->_filter->setQuoteStyle(ENT_NOQUOTES);
+        $this->assertEquals($result, $this->_filter->filter($input));
+    }
 }

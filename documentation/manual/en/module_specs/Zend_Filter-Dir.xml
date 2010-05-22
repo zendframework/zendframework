@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.dir">
+    <title>Dir</title>
+
+    <para>
+         Given a string containing a path to a file, this function will return the name of the directory. 
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Dir();
+
+print $filter->filter('/etc/passwd');
+// returns "/etc"
+]]></programlisting>
+
+     <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Dir();
+
+print $filter->filter('c:/Temp/x');
+// returns "c:/Temp"
+]]></programlisting>
+
+</sect2>

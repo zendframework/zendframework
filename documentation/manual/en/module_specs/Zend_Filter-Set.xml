@@ -15,16 +15,7 @@
     <xi:include href="Zend_Filter-Compress.xml" />
     <xi:include href="Zend_Filter-Decryption.xml" />
     <xi:include href="Zend_Filter-Digits.xml" />
-
-
-    <sect2 id="zend.filter.set.dir">
-        <title>Dir</title>
-
-        <para>
-            Returns directory name component of path.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Filter-Dir.xml" />
     <xi:include href="Zend_Filter-Encryption.xml" />
 
     <sect2 id="zend.filter.set.htmlentities">

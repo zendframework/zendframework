@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.digits">
-    <title>BaseName</title>
+    <title>Digits</title>
 
     <para>
         Returns the string <varname>$value</varname>, removing all but digits.

@@ -216,6 +216,11 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     protected $_view;
 
     /**
+     * @var bool
+     */
+    protected $_isRendered = false;
+
+    /**
      * Constructor
      *
      * Registers form view helper as decorator
@@ -967,6 +972,25 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
         return $this->_formOrder;
     }
 
+    /**
+     * When calling renderFormElements or render this method
+     * is used to set $_isRendered member to prevent repeatedly
+     * merging belongsTo setting
+     */
+    protected function _setIsRendered()
+    {
+        $this->_isRendered = true;
+        return $this;
+    }
+
+    /**
+     * Get the value of $_isRendered member
+     */
+    protected function _getIsRendered()
+    {
+        return (bool)$this->_isRendered;
+    }
+
     // Element interaction:
 
     /**
@@ -1338,7 +1362,9 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             $values = $this->_array_replace_recursive($values, $merge);
         }
 
-        if (!$suppressArrayNotation && $this->isArray()) {
+        if (!$suppressArrayNotation &&
+            $this->isArray() &&
+            !$this->_getIsRendered()) {
             $values = $this->_attachToArray($values, $this->getElementsBelongTo());
         }
 
@@ -1398,7 +1424,10 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             }
             $values = $this->_array_replace_recursive($values, $merge);
         }
-        if (!$suppressArrayNotation && $this->isArray() && !empty($values)) {
+        if (!$suppressArrayNotation &&
+            $this->isArray() &&
+            !empty($values) &&
+            !$this->_getIsRendered()) {
             $values = $this->_attachToArray($values, $this->getElementsBelongTo());
         }
 
@@ -2414,7 +2443,9 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             $errors = $this->_array_replace_recursive($errors, $merge);
         }
 
-        if (!$suppressArrayNotation && $this->isArray()) {
+        if (!$suppressArrayNotation &&
+            $this->isArray() &&
+            !$this->_getIsRendered()) {
             $errors = $this->_attachToArray($errors, $this->getElementsBelongTo());
         }
 
@@ -2473,7 +2504,9 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             }
         }
 
-        if (!$suppressArrayNotation && $this->isArray()) {
+        if (!$suppressArrayNotation &&
+            $this->isArray() &&
+            !$this->_getIsRendered()) {
             $messages = $this->_attachToArray($messages, $this->getElementsBelongTo());
         }
 
@@ -2800,6 +2833,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             $decorator->setElement($this);
             $content = $decorator->render($content);
         }
+        $this->_setIsRendered();
         return $content;
     }
 
@@ -3052,6 +3086,10 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                 $seed = '';
                 if (0 < count($args)) {
                     $seed = array_shift($args);
+                }
+                if ($decoratorName === 'FormElements' ||
+                    $decoratorName === 'PrepareElements') {
+                        $this->_setIsRendered();
                 }
                 return $decorator->render($seed);
             }

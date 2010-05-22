@@ -4,15 +4,15 @@
     <title>BaseName</title>
 
     <para>
-        <classname>Zend_Filter_BaseName</classname> allows you to validate if a given value contains
-        a string containing a path to a file and it will return the base name of the file.
+        <classname>Zend_Filter_BaseName</classname> allows you to filter a string which contains
+        the path to a file and it will return the base name of this file.
     </para>
 
     <sect3 id="zend.filter.set.basename.options">
         <title>Supported options for Zend_Filter_BaseName</title>
 
         <para>
-            There are no additional options for <classname>Zend_Filter_BaseName</classname>:
+            There are no additional options for <classname>Zend_Filter_BaseName</classname>.
         </para>
     </sect3>
 
@@ -23,27 +23,24 @@
             A basic example of usage is below:
         </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_BaseName();
 
 print $filter->filter('/vol/tmp/filename');
-// returns "filename"
 ]]></programlisting>
 
         <para>
             This will return 'filename'.
         </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_BaseName();
 
 print $filter->filter('/vol/tmp/filename.txt');
-// returns "filename.txt"
 ]]></programlisting>
-    
+
         <para>
             This will return 'filename.txt'.
         </para>
-
     </sect3>
 </sect2>

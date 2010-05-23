@@ -343,4 +343,28 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
             $this->assertTrue(empty($this->errWriter->events));
         }
     }
+    
+    /**
+     * @group ZF-9870
+     */
+    public function testSetAndGetTimestampFormat()
+    {
+        $logger = new Zend_Log($this->writer);
+        $this->assertEquals('c', $logger->getTimestampFormat());
+        $this->assertSame($logger, $logger->setTimestampFormat('Y-m-d H:i:s'));
+        $this->assertEquals('Y-m-d H:i:s', $logger->getTimestampFormat());
+    }
+    
+    /**
+     * @group ZF-9870
+     */
+    public function testLogWritesWithModifiedTimestampFormat()
+    {
+        $logger = new Zend_Log($this->writer);
+        $logger->setTimestampFormat('Y-m-d');
+        $logger->debug('ZF-9870');
+        rewind($this->log);
+        $message = stream_get_contents($this->log);
+        $this->assertEquals(date('Y-m-d'), substr($message, 0, 10));
+    }
 }

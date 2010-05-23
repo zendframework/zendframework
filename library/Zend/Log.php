@@ -87,6 +87,12 @@ class Zend_Log
      * @var array
      */
     protected $_errorHandlerMap        = false;
+    
+    /**
+     *
+     * @var string
+     */
+    protected $_timestampFormat        = 'c';
 
     /**
      * Class constructor.  Create a new logger
@@ -253,7 +259,7 @@ class Zend_Log
     protected function _packEvent($message, $priority)
     {
         return array_merge(array(
-            'timestamp'    => date('c'),
+            'timestamp'    => date($this->_timestampFormat),
             'message'      => $message,
             'priority'     => $priority,
             'priorityName' => $this->_priorities[$priority]
@@ -533,5 +539,27 @@ class Zend_Log
             return call_user_func($this->_origErrorHandler, $errno, $errstr, $errfile, $errline, $errcontext);
         }
         return false;
+    }
+
+    /**
+     * Set timestamp format for log entries.
+     * 
+     * @param string $format
+     * @return Zend_Log
+     */
+    public function setTimestampFormat($format)
+    {
+        $this->_timestampFormat = $format;
+        return $this;
+    }
+
+    /**
+     * Get timestamp format used for log entries.
+     * 
+     * @return string
+     */
+    public function getTimestampFormat()
+    {
+        return $this->_timestampFormat;
     }
 }

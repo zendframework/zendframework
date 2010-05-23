@@ -162,6 +162,20 @@ class Zend_Http_ResponseTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($response->isRedirect(), 'Response is an error, but isRedirect() returned true');
     }
 
+    /**
+     * @group ZF-5520
+     */
+    public function test302LocationHeaderMatches()
+    {
+        $headerName  = 'Location';
+        $headerValue = 'http://www.google.com/ig?hl=en';
+        $response    = Zend_Http_Response::fromString($this->readResponse('response_302'));
+        $responseIis = Zend_Http_Response::fromString($this->readResponse('response_302_iis'));
+
+        $this->assertEquals($headerValue, $response->getHeader($headerName));
+        $this->assertEquals($headerValue, $responseIis->getHeader($headerName));
+    }
+
     public function test300isRedirect()
     {
         $response = Zend_Http_Response::fromString($this->readResponse('response_302'));

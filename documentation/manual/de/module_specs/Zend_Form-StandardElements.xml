@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 21996 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardElements">
     <title>Standard Form Elemente die mit dem Zend Framework ausgeliefert werden</title>
@@ -148,7 +148,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
         </para>
 
          <para>
-            Zusätzlich setzt, das Setzen des Werte, die <code>checked</code> Eigenschaft der
+            Zusätzlich setzt, das Setzen des Werte, die <property>checked</property> Eigenschaft der
             Checkbox. Das kann abgefragt werden indem <methodname>isChecked()</methodname> verwendet
             wird oder einfach auf die Eigenschaft zugegriffen wird. Das Verwenden der
             <methodname>setChecked($flag)</methodname> Methode setzt beides, den Status des Flags
@@ -170,12 +170,12 @@ $element = new Zend_Form_Element_Captcha('foo', array(
             Das File Formularelement bietet einen Mechanismus um File Upload-felder in eigenen
             Formularen zu Unterstützen. Es verwendet intern
             <link linkend="zend.file.transfer.introduction">Zend_File_Transfer</link> um diese
-            Funktionalität zu bieten, und den <code>FormFile</code> Viewhelfer sowie den
-            <code>File</code> Decorator um das Formularelement anzuzeigen.
+            Funktionalität zu bieten, und den <classname>FormFile</classname> Viewhelfer sowie den
+            <classname>File</classname> Decorator um das Formularelement anzuzeigen.
         </para>
 
         <para>
-            Standardmäßig verwendet es den <code>Http</code> Transferadapter, welcher das
+            Standardmäßig verwendet es den <classname>Http</classname> Transferadapter, welcher das
             <varname>$_FILES</varname> Array prüft und es erlaubt Prüfungen und Filter hinzuzufügen.
             Prüfungen und Filter die dem Formularelement hinzugefügt werden, werden dem
             Transferadapter hinzugefügt.
@@ -513,16 +513,16 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             Wert spezifiziert werden der zu verwenden ist wenn das Bild übertragen wird indem die
             Zugriffsmethode <methodname>setImageValue()</methodname> verwendet wird (oder der
             'imageValue Konfigurations Schlüssel). Wenn der Wert der für das Element gesetzt ist,
-            mit <code>imageValue</code> übereinstimmt, gibt <methodname>isChecked()</methodname>
-            <constant>TRUE</constant> zurück.
+            mit <property>imageValue</property> übereinstimmt, gibt
+            <methodname>isChecked()</methodname> <constant>TRUE</constant> zurück.
         </para>
 
         <para>
             Bild Elemente verwenden den
             <link linkend="zend.form.standardDecorators.image">Image Decorator</link> für die
             Darstellung, zusätzlich zu den Standard Error, HtmlTag und Label Dekoratoren. Es kann
-            optional ein Tag für den <code>Image</code> Dekorator spezifiziert werden der das
-            Bild einbettet.
+            optional ein Tag für den <classname>Image</classname> Dekorator spezifiziert werden der
+            das Bild einbettet.
         </para>
     </sect2>
 
@@ -545,11 +545,12 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         </para>
 
         <para>
-            Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
-            Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
-            werden indem entweder <methodname>setRegisterInArrayValidator(false)</methodname>
-            aufgerufen, oder indem ein <constant>FALSE</constant> Wert an den
-            <code>registerInArrayValidator</code> Konfigurationsschlüssel übergeben wird.
+            Standardmäßig registriert dieses Element die <classname>InArray</classname> Prüfung
+            welche gegen Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann
+            deaktiviert werden indem entweder
+            <methodname>setRegisterInArrayValidator(false)</methodname> aufgerufen, oder indem ein
+            <constant>FALSE</constant> Wert an den <property>registerInArrayValidator</property>
+            Konfigurationsschlüssel übergeben wird.
         </para>
 
         <para>
@@ -607,13 +608,14 @@ $element->setValue(array('bar', 'bat'));
         <title>Zend_Form_Element_Multiselect</title>
 
         <para>
-            <acronym>XHTML</acronym> <code>select</code> Elemente erlaube ein 'multiple' Attribut,
-            das zeigt das mehrere Optionen für die Übermittlung ausgewählt werden können, statt
-            normalerweise nur eines. <classname>Zend_Form_Element_Multiselect</classname> erweitert
-            <link linkend="zend.form.standardElements.select">Zend_Form_Element_Select</link> und
-            setzt das <code>multiple</code> Attribut auf 'multiple'. Wie andere Klassen die von der
-            Basisklasse <classname>Zend_Form_Element_Multi</classname> abgeleitet werden, können die
-            Optionen für die Auswahl wie folgt verändert werden:
+            <acronym>XHTML</acronym> <emphasis>select</emphasis> Elemente erlaube ein 'multiple'
+            Attribut, das zeigt das mehrere Optionen für die Übermittlung ausgewählt werden können,
+            statt normalerweise nur eines. <classname>Zend_Form_Element_Multiselect</classname>
+            erweitert <link
+                linkend="zend.form.standardElements.select">Zend_Form_Element_Select</link> und
+            setzt das <property>multiple</property> Attribut auf 'multiple'. Wie andere Klassen die
+            von der Basisklasse <classname>Zend_Form_Element_Multi</classname> abgeleitet werden,
+            können die Optionen für die Auswahl wie folgt verändert werden:
         </para>
 
         <itemizedlist>
@@ -644,11 +646,12 @@ $element->setValue(array('bar', 'bat'));
         </para>
 
         <para>
-            Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
-            Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
-            werden indem entweder <methodname>setRegisterInArrayValidator(false)</methodname>
-            aufgerufen, oder indem ein <constant>FALSE</constant> Wert an den
-            <code>registerInArrayValidator</code> Konfigurationsschlüssel übergeben wird.
+            Standardmäßig registriert dieses Element die <classname>InArray</classname> Prüfung
+            welche gegen Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann
+            deaktiviert werden indem entweder
+            <methodname>setRegisterInArrayValidator(false)</methodname> aufgerufen, oder indem ein
+            <constant>FALSE</constant> Wert an den <property>registerInArrayValidator</property>
+            Konfigurationsschlüssel übergeben wird.
         </para>
     </sect2>
 
@@ -676,16 +679,17 @@ $element->setValue(array('bar', 'bat'));
             Radio Elemente erlauben es verschiedene Optionen zu spezifizieren, von denen ein
             einzelner Wert zurückgegeben wird. <classname>Zend_Form_Element_Radio</classname>
             erweitert die Basisklasse <classname>Zend_Form_Element_Multi</classname> und erlaubt es
-            eine Anzahl von Optionen zu spezifizieren, und verwendet dann den <code>formRadio</code>
-            View Helfer um diese darzustellen.
+            eine Anzahl von Optionen zu spezifizieren, und verwendet dann den
+            <emphasis>formRadio</emphasis> View Helfer um diese darzustellen.
         </para>
 
         <para>
-            Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
-            Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
-            werden indem entweder <methodname>setRegisterInArrayValidator(false)</methodname>
-            aufgerufen, oder indem ein <constant>FALSE</constant> Wert an den
-            <code>registerInArrayValidator</code> Konfigurationsschlüssel übergeben wird.
+            Standardmäßig registriert dieses Element die <classname>InArray</classname> Prüfung
+            welche gegen Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann
+            deaktiviert werden indem entweder
+            <methodname>setRegisterInArrayValidator(false)</methodname> aufgerufen, oder indem ein
+            <constant>FALSE</constant> Wert an den <property>registerInArrayValidator</property>
+            Konfigurationsschlüssel übergeben wird.
         </para>
 
         <para>
@@ -746,11 +750,12 @@ $element->setValue(array('bar', 'bat'));
         </para>
 
         <para>
-            Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
-            Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
-            werden indem entweder <methodname>setRegisterInArrayValidator(false)</methodname>
-            aufgerufen, oder indem ein <constant>FALSE</constant> Wert an den
-            <code>registerInArrayValidator</code> Konfigurationsschlüssel übergeben wird.
+            Standardmäßig registriert dieses Element die <classname>InArray</classname> Prüfung
+            welche gegen Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann
+            deaktiviert werden indem entweder
+            <methodname>setRegisterInArrayValidator(false)</methodname> aufgerufen, oder indem ein
+            <constant>FALSE</constant> Wert an den <property>registerInArrayValidator</property>
+            Konfigurationsschlüssel übergeben wird.
         </para>
 
         <para>

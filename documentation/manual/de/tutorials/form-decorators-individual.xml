@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 21997 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.form.decorators.individual">
     <title>Darstellung individueller Decorators</title>
@@ -173,7 +173,7 @@ class My_Form_UserDemographics extends Zend_Form
         <listitem>
             <para>
                 <classname>HtmlTag</classname>: Umschließt die obigen drei Elemente mit einem
-                <code>&lt;dd&gt;</code> Tag
+                <emphasis>&lt;dd&gt;</emphasis> Tag
             </para>
         </listitem>
 
@@ -181,7 +181,7 @@ class My_Form_UserDemographics extends Zend_Form
             <para>
                 <classname>Label</classname>: Stellt die Überschrift des Elements dar indem es den
                 View Helfer <classname>FormLabel</classname> verwendet (und Ihn in ein
-                <code>&lt;dt&gt;</code> Tag umhüllt)
+                <emphasis>&lt;dt&gt;</emphasis> Tag umhüllt)
             </para>
         </listitem>
     </itemizedlist>

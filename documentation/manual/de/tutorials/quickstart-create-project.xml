@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21917 -->
+<!-- EN-Revision: 21997 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-project">
     <title>Das Projekt erstellen</title>
@@ -327,8 +327,8 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             View Skripte können jedes Markup enthalten das man haben will, und verwenden das
-            öffnende <code>&lt;?php</code> Tag und das schließende <code>?&gt;</code> Tag um
-            <acronym>PHP</acronym> Direktiven einzufügen.
+            öffnende <emphasis>&lt;?php</emphasis> Tag und das schließende
+            <emphasis>?&gt;</emphasis> Tag um <acronym>PHP</acronym> Direktiven einzufügen.
         </para>
 
         <para>

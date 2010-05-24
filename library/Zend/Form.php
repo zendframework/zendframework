@@ -2550,6 +2550,17 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
         return $messages;
     }
 
+    /**
+     * Retrieve translated custom error messages
+     * Proxies to {@link _getErrorMessages()}.
+     * 
+     * @return array
+     */
+    public function getCustomMessages()
+    {
+        return $this->_getErrorMessages();
+    }
+
 
     // Rendering
 

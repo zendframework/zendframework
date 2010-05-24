@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22040 -->
+<!-- EN-Revision: 22066 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Standard Prüfklassen</title>
@@ -28,20 +28,7 @@
         </note>
     </sect2>
 
-    <sect2 id="zend.validate.set.date">
-        <title>Date</title>
-
-        <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> ein
-            gültiges Datum im Format 'YYYY-MM-DD' ist. Wenn die optionale
-            <property>locale</property> Option gesetzt ist, dann wird das Datum entsprechend dem
-            gesetzten Gebietsschemas geprüft. Und wenn die optionale <property>format</property>
-            Option gesetzt wird, dann wird dieses Format für die Prüfung herangezogen. Für Details
-            über die optionalen Parametern siehe <link
-                linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link>.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Date.xml" />
     <xi:include href="Zend_Validate-Db.xml" />
     <xi:include href="Zend_Validate-Digits.xml" />
     <xi:include href="Zend_Validate-EmailAddress.xml" />

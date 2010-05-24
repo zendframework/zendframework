@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed\Reader;
+
+/**
  * @uses       Countable
  * @uses       Iterator
  * @category   Zend
@@ -27,7 +32,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Feed_Reader_FeedInterface extends Iterator, Countable
+interface FeedInterface extends \Iterator, \Countable
 {
     /**
      * Get a single author
@@ -117,7 +122,7 @@ interface Zend_Feed_Reader_FeedInterface extends Iterator, Countable
     /**
      * Get all categories
      *
-     * @return Zend_Feed_Reader_Collection_Category
+     * @return \Zend\Feed\Reader\Collection\Category
      */
     public function getCategories();
 

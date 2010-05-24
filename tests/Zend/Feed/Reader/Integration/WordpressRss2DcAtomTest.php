@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Feed\Reader\Integration;
+use Zend\Feed\Reader;
 
 /**
  * @category   Zend
@@ -30,14 +35,14 @@
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
-class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Framework_TestCase
+class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
 
     public function setup()
     {
-        Zend_Feed_Reader::reset();
+        Reader\Reader::reset();
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/wordpress-rss2-dc-atom.xml';
     }
 
@@ -47,7 +52,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsTitle()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('Norm 2782', $feed->getTitle());
@@ -55,7 +60,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsAuthors()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(array(
@@ -65,7 +70,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsSingleAuthor()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(array('name'=>'norm2782'), $feed->getAuthor());
@@ -73,7 +78,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsCopyright()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(null, $feed->getCopyright());
@@ -81,7 +86,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsDescription()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('Why are you here?', $feed->getDescription());
@@ -89,7 +94,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsLanguage()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('en', $feed->getLanguage());
@@ -97,7 +102,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsLink()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('http://www.norm2782.com', $feed->getLink());
@@ -105,7 +110,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsEncoding()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('UTF-8', $feed->getEncoding());
@@ -113,7 +118,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsEntryCount()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(10, $feed->count());
@@ -125,7 +130,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsEntryId()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -134,7 +139,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsEntryTitle()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -147,7 +152,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsEntryAuthors()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -156,7 +161,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsEntrySingleAuthor()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -165,7 +170,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsEntryDescription()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -177,7 +182,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsEntryContent()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -186,7 +191,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsEntryLinks()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -195,7 +200,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsEntryLink()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -204,7 +209,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsEntryPermaLink()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -214,7 +219,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
 
     public function testGetsEntryEncoding()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();

@@ -20,19 +20,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed\Builder;
+
+/**
  * An entry of a custom build feed
  *
  * Classes implementing the Zend_Feed_Builder_Interface interface
  * uses this class to describe an entry of a feed
  *
  * @uses       ArrayObject
- * @uses       Zend_Feed_Builder_Exception
+ * @uses       \Zend\Feed\Builder\Exception
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Builder_Entry extends ArrayObject
+class Entry extends \ArrayObject
 {
     /**
      * Create a new builder entry
@@ -105,7 +110,7 @@ class Zend_Feed_Builder_Entry extends ArrayObject
      * Sets the author of the entry
      *
      * @param  string $author
-     * @return Zend_Feed_Builder_Entry
+     * @return \Zend\Feed\Builder\Entry
      */
     public function setAuthor($author)
     {
@@ -117,7 +122,7 @@ class Zend_Feed_Builder_Entry extends ArrayObject
      * Sets the id/guid of the entry
      *
      * @param  string $id
-     * @return Zend_Feed_Builder_Entry
+     * @return \Zend\Feed\Builder\Entry
      */
     public function setId($id)
     {
@@ -129,7 +134,7 @@ class Zend_Feed_Builder_Entry extends ArrayObject
      * Sets the full html content of the entry
      *
      * @param  string $content
-     * @return Zend_Feed_Builder_Entry
+     * @return \Zend\Feed\Builder\Entry
      */
     public function setContent($content)
     {
@@ -141,7 +146,7 @@ class Zend_Feed_Builder_Entry extends ArrayObject
      * Timestamp of the update date
      *
      * @param  int $lastUpdate
-     * @return Zend_Feed_Builder_Entry
+     * @return \Zend\Feed\Builder\Entry
      */
     public function setLastUpdate($lastUpdate)
     {
@@ -153,7 +158,7 @@ class Zend_Feed_Builder_Entry extends ArrayObject
      * Sets the url of the commented page associated to the entry
      *
      * @param  string $comments
-     * @return Zend_Feed_Builder_Entry
+     * @return \Zend\Feed\Builder\Entry
      */
     public function setCommentsUrl($comments)
     {
@@ -165,7 +170,7 @@ class Zend_Feed_Builder_Entry extends ArrayObject
      * Sets the url of the comments feed link
      *
      * @param  string $commentRss
-     * @return Zend_Feed_Builder_Entry
+     * @return \Zend\Feed\Builder\Entry
      */
     public function setCommentsRssUrl($commentRss)
     {
@@ -178,7 +183,7 @@ class Zend_Feed_Builder_Entry extends ArrayObject
      *
      * @param  string $title
      * @param  string $url
-     * @return Zend_Feed_Builder_Entry
+     * @return \Zend\Feed\Builder\Entry
      */
     public function setSource($title, $url)
     {
@@ -201,7 +206,7 @@ class Zend_Feed_Builder_Entry extends ArrayObject
      * </code>
      *
      * @param  array $categories
-     * @return Zend_Feed_Builder_Entry
+     * @return \Zend\Feed\Builder\Entry
      */
     public function setCategories(array $categories)
     {
@@ -214,14 +219,14 @@ class Zend_Feed_Builder_Entry extends ArrayObject
     /**
      * Add a category to the entry
      *
-     * @param  array $category see Zend_Feed_Builder_Entry::setCategories() for format
-     * @return Zend_Feed_Builder_Entry
-     * @throws Zend_Feed_Builder_Exception
+     * @param  array $category see \Zend\Feed\Builder\Entry::setCategories() for format
+     * @return \Zend\Feed\Builder\Entry
+     * @throws \Zend\Feed\Builder\Exception
      */
     public function addCategory(array $category)
     {
         if (empty($category['term'])) {
-            throw new Zend_Feed_Builder_Exception("you have to define the name of the category");
+            throw new Exception("you have to define the name of the category");
         }
 
         if (!$this->offsetExists('category')) {
@@ -249,14 +254,14 @@ class Zend_Feed_Builder_Entry extends ArrayObject
      * </code>
      *
      * @param  array $enclosures
-     * @return Zend_Feed_Builder_Entry
-     * @throws Zend_Feed_Builder_Exception
+     * @return \Zend\Feed\Builder\Entry
+     * @throws \Zend\Feed\Builder\Exception
      */
     public function setEnclosures(array $enclosures)
     {
         foreach ($enclosures as $enclosure) {
             if (empty($enclosure['url'])) {
-                throw new Zend_Feed_Builder_Exception("you have to supply an url for your enclosure");
+                throw new Exception("you have to supply an url for your enclosure");
             }
             $type = isset($enclosure['type']) ? $enclosure['type'] : '';
             $length = isset($enclosure['length']) ? $enclosure['length'] : '';
@@ -271,7 +276,7 @@ class Zend_Feed_Builder_Entry extends ArrayObject
      * @param  string $url
      * @param  string $type
      * @param  string $length
-     * @return Zend_Feed_Builder_Entry
+     * @return \Zend\Feed\Builder\Entry
      */
     public function addEnclosure($url, $type = '', $length = '')
     {

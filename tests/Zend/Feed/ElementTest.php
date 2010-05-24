@@ -21,6 +21,13 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Feed;
+use Zend\Feed\Entry;
+use Zend\Feed;
+
+/**
  * Test helper
  */
 
@@ -36,12 +43,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Feed
  */
-class Zend_Feed_ElementTest extends PHPUnit_Framework_TestCase
+class ElementTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testIsInitialized()
     {
-        $e = new Zend_Feed_Entry_Atom();
+        $e = new Entry\Atom();
         $e->author->name['last'] = 'hagenbuch';
         $e->author->name['first'] = 'chuck';
         $e->author->name->{'chuck:url'} = 'marina.horde.org';
@@ -77,10 +84,10 @@ class Zend_Feed_ElementTest extends PHPUnit_Framework_TestCase
     <updated>2005-11-07T08:15:57-08:00</updated>
 </entry>";
 
-        $entry = new Zend_Feed_Entry_Atom('uri', $xml);
+        $entry = new Entry\Atom('uri', $xml);
 
-        $this->assertTrue($entry->summary instanceof Zend_Feed_Element, '__get access should return an Zend_Feed_Element instance');
-        $this->assertFalse($entry->summary() instanceof Zend_Feed_Element, 'method access should not return an Zend_Feed_Element instance');
+        $this->assertTrue($entry->summary instanceof Feed\Element, '__get access should return an Zend_Feed_Element instance');
+        $this->assertFalse($entry->summary() instanceof Feed\Element, 'method access should not return an Zend_Feed_Element instance');
         $this->assertTrue(is_string($entry->summary()), 'method access should return a string');
         $this->assertFalse(is_string($entry->summary), '__get access should not return a string');
     }
@@ -89,7 +96,7 @@ class Zend_Feed_ElementTest extends PHPUnit_Framework_TestCase
     {
         $value = 'value';
 
-        $e = new Zend_Feed_Entry_Atom();
+        $e = new Entry\Atom();
         $e->test['attr']            = $value;
         $e->test['namespace1:attr'] = $value;
         $e->test['namespace2:attr'] = $value;
@@ -103,7 +110,7 @@ class Zend_Feed_ElementTest extends PHPUnit_Framework_TestCase
     {
         $value = 'value';
 
-        $e = new Zend_Feed_Entry_Atom();
+        $e = new Entry\Atom();
         $e->test['attr']            = $value;
         $e->test['namespace1:attr'] = $value;
         $e->test['namespace2:attr'] = $value;
@@ -130,7 +137,7 @@ class Zend_Feed_ElementTest extends PHPUnit_Framework_TestCase
         $testLt  = '<';
         $testGt  = '>';
 
-        $e = new Zend_Feed_Entry_Atom();
+        $e = new Entry\Atom();
         $e->testAmp           = $testAmp;
         $e->{'namespace1:lt'} = $testLt;
         $e->{'namespace1:gt'} = $testGt;
@@ -151,7 +158,7 @@ class Zend_Feed_ElementTest extends PHPUnit_Framework_TestCase
         $testQuot  = '"';
         $testSquot = "'";
 
-        $e = new Zend_Feed_Entry_Atom();
+        $e = new Entry\Atom();
         $e->test['amp']              = $testAmp;
         $e->test['namespace1:lt']    = $testLt;
         $e->test['namespace1:gt']    = $testGt;

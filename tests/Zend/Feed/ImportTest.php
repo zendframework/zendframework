@@ -21,24 +21,13 @@
  */
 
 /**
- * Test helper
+ * @namespace
  */
-
-/**
- * @see Zend_Feed
- */
-
-/**
- * @see Zend_Feed_Builder
- */
-
-/**
- * @see Zend_Http_Client_Adapter_Test
- */
-
-/**
- * @see Zend_Http_Client
- */
+namespace ZendTest\Feed;
+use Zend\Feed;
+use Zend\HTTP;
+use Zend\Feed\Builder;
+use Zend\HTTP\Response;
 
 /**
  * @category   Zend
@@ -48,7 +37,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Feed
  */
-class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
+class ImportTest extends \PHPUnit_Framework_TestCase
 {
     protected $_client;
     protected $_feedDir;
@@ -62,9 +51,9 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_adapter = new Zend_Http_Client_Adapter_Test();
-        Zend_Feed::setHttpClient(new Zend_Http_Client(null, array('adapter' => $this->_adapter)));
-        $this->_client = Zend_Feed::getHttpClient();
+        $this->_adapter = new \Zend\HTTP\Client\Adapter\Test();
+        Feed\Feed::setHttpClient(new HTTP\Client(null, array('adapter' => $this->_adapter)));
+        $this->_client = Feed\Feed::getHttpClient();
         $this->_feedDir = dirname(__FILE__) . '/_files';
     }
 
@@ -211,8 +200,8 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
      */
     public function testRssImportFullArray()
     {
-        $feed = Zend_Feed::importArray($this->_getFullArray(), 'rss');
-        $this->assertType('Zend_Feed_Rss', $feed);
+        $feed = Feed\Feed::importArray($this->_getFullArray(), 'rss');
+        $this->assertType('Zend\Feed\RSS', $feed);
     }
     
     /**
@@ -221,7 +210,7 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
      */
     public function testRssImportSetsIsPermaLinkAsFalseIfGuidNotAUri()
     {
-        $feed = Zend_Feed::importArray($this->_getFullArray(), 'rss');
+        $feed = Feed\Feed::importArray($this->_getFullArray(), 'rss');
         $entry = $feed->current();
         $this->assertEquals('false', $entry->guid['isPermaLink']);
     }
@@ -231,7 +220,7 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
      */
     public function testAtomImportFullArray()
     {
-        $feed = Zend_Feed::importArray($this->_getFullArray(), 'atom');
+        $feed = Feed\Feed::importArray($this->_getFullArray(), 'atom');
     }
 
     /**
@@ -239,8 +228,8 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
      */
     public function testRssImportFullBuilder()
     {
-        $feed = Zend_Feed::importBuilder(new Zend_Feed_Builder($this->_getFullArray()), 'rss');
-        $this->assertType('Zend_Feed_Rss', $feed);
+        $feed = Feed\Feed::importBuilder(new Builder\Builder($this->_getFullArray()), 'rss');
+        $this->assertType('Zend\Feed\RSS', $feed);
     }
 
     /**
@@ -258,8 +247,8 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
         $array['itunes']['explicit'] = 'clean';
         $array['itunes']['block'] = 'no';
         $array['itunes']['new-feed-url'] = 'http://www.example/itunes.xml';
-        $feed = Zend_Feed::importBuilder(new Zend_Feed_Builder($array), 'rss');
-        $this->assertType('Zend_Feed_Rss', $feed);
+        $feed = Feed\Feed::importBuilder(new Builder\Builder($array), 'rss');
+        $this->assertType('Zend\Feed\RSS', $feed);
     }
 
     /**
@@ -267,7 +256,7 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
      */
     public function testAtomImportFullBuilder()
     {
-        $feed = Zend_Feed::importBuilder(new Zend_Feed_Builder($this->_getFullArray()), 'atom');
+        $feed = Feed\Feed::importBuilder(new Builder\Builder($this->_getFullArray()), 'atom');
 
     }
 
@@ -276,10 +265,10 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
      */
     public function testAtomImportFullBuilderValid()
     {
-        $feed = Zend_Feed::importBuilder(new Zend_Feed_Builder($this->_getFullArray()), 'atom');
+        $feed = Feed\Feed::importBuilder(new Builder\Builder($this->_getFullArray()), 'atom');
 
-        $feed = Zend_Feed::importString($feed->saveXml());
-        $this->assertType('Zend_Feed_Atom', $feed);
+        $feed = Feed\Feed::importString($feed->saveXml());
+        $this->assertType('Zend\Feed\Atom', $feed);
     }
 
     /**
@@ -287,10 +276,10 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
      */
     public function testRssImportFullBuilderValid()
     {
-        $feed = Zend_Feed::importBuilder(new Zend_Feed_Builder($this->_getFullArray()), 'rss');
-        $this->assertType('Zend_Feed_Rss', $feed);
-        $feed = Zend_Feed::importString($feed->saveXml());
-        $this->assertType('Zend_Feed_Rss', $feed);
+        $feed = Feed\Feed::importBuilder(new Builder\Builder($this->_getFullArray()), 'rss');
+        $this->assertType('Zend\Feed\RSS', $feed);
+        $feed = Feed\Feed::importString($feed->saveXml());
+        $this->assertType('Zend\Feed\RSS', $feed);
     }
 
     /**
@@ -298,10 +287,10 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
      */
     public function testAtomGetLink()
     {
-        $feed = Zend_Feed::importBuilder(new Zend_Feed_Builder($this->_getFullArray()), 'atom');
-        $this->assertType('Zend_Feed_Atom', $feed);
-        $feed = Zend_Feed::importString($feed->saveXml());
-        $this->assertType('Zend_Feed_Atom', $feed);
+        $feed = Feed\Feed::importBuilder(new Builder\Builder($this->_getFullArray()), 'atom');
+        $this->assertType('Zend\Feed\Atom', $feed);
+        $feed = Feed\Feed::importString($feed->saveXml());
+        $this->assertType('Zend\Feed\Atom', $feed);
         $href = $feed->link('self');
         $this->assertEquals('http://www.example.com', $href);
     }
@@ -316,14 +305,14 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
             $this->markTestIncomplete('XDebug not installed');
         }
 
-        $response = new Zend_Http_Response(200, array(), '');
+        $response = new Response\Response(200, array(), '');
         $this->_adapter->setResponse($response);
 
         try {
-            $feed = Zend_Feed::import('http://localhost');
+            $feed = Feed\Feed::import('http://localhost');
             $this->fail('Expected Zend_Feed_Exception not thrown');
-        } catch (Zend_Feed_Exception $e) {
-            $this->assertType('Zend_Feed_Exception', $e);
+        } catch (Feed\Exception $e) {
+            $this->assertType('Zend\Feed\Exception', $e);
             $this->assertRegExp('/(XDebug is running|Empty string)/', $e->getMessage());
         }
     }
@@ -412,11 +401,11 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
      */
     protected function _importAtomValid($filename)
     {
-        $response = new Zend_Http_Response(200, array(), file_get_contents("$this->_feedDir/$filename"));
+        $response = new Response\Response(200, array(), file_get_contents("$this->_feedDir/$filename"));
         $this->_adapter->setResponse($response);
 
-        $feed = Zend_Feed::import('http://localhost');
-        $this->assertType('Zend_Feed_Atom', $feed);
+        $feed = Feed\Feed::import('http://localhost');
+        $this->assertType('Zend\Feed\Atom', $feed);
     }
 
     /**
@@ -424,11 +413,11 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
      */
     protected function _importRssValid($filename)
     {
-        $response = new Zend_Http_Response(200, array(), file_get_contents("$this->_feedDir/$filename"));
+        $response = new Response\Response(200, array(), file_get_contents("$this->_feedDir/$filename"));
         $this->_adapter->setResponse($response);
 
-        $feed = Zend_Feed::import('http://localhost');
-        $this->assertType('Zend_Feed_Rss', $feed);
+        $feed = Feed\Feed::import('http://localhost');
+        $this->assertType('Zend\Feed\RSS', $feed);
         return $feed;
     }
 
@@ -437,14 +426,14 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
      */
     protected function _importInvalid($filename)
     {
-        $response = new Zend_Http_Response(200, array(), file_get_contents("$this->_feedDir/$filename"));
+        $response = new Response\Response(200, array(), file_get_contents("$this->_feedDir/$filename"));
         $this->_adapter->setResponse($response);
 
         try {
-            $feed = Zend_Feed::import('http://localhost');
+            $feed = Feed\Feed::import('http://localhost');
             $this->fail('Expected Zend_Feed_Exception not thrown');
-        } catch (Zend_Feed_Exception $e) {
-            $this->assertType('Zend_Feed_Exception', $e);
+        } catch (Feed\Exception $e) {
+            $this->assertType('Zend\Feed\Exception', $e);
         }
     }
 
@@ -459,8 +448,8 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('testFindFeedsIncludesUriAsArrayKey() requires a network connection');
             return;
         }
-        Zend_Feed::setHttpClient(new Zend_Http_Client);
-        $feeds = Zend_Feed::findFeeds('http://www.planet-php.net');
+        Feed\Feed::setHttpClient(new HTTP\Client);
+        $feeds = Feed\Feed::findFeeds('http://www.planet-php.net');
         $this->assertEquals(array(
             'http://www.planet-php.org:80/rss/', 'http://www.planet-php.org:80/rdf/'
         ), array_keys($feeds));

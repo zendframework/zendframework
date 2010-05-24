@@ -20,12 +20,17 @@
  * @version    $Id$
  */
 
-if (class_exists("Zend_Exception")) {
-    abstract class Zend_InfoCard_Exception_Abstract extends Zend_Exception
+/**
+ * @namespace
+ */
+namespace Zend\InfoCard;
+
+if (class_exists('\Zend\Exception')) {
+    class Exception extends \Zend\Exception
     {
     }
 } else {
-    abstract class Zend_InfoCard_Exception_Abstract extends Exception
+    class Exception extends \Exception
     {
     }
 }
@@ -38,6 +43,6 @@ if (class_exists("Zend_Exception")) {
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_InfoCard_Exception extends Zend_InfoCard_Exception_Abstract
-{
-}
+//class Exception extends \Zend\InfoCard\Exception\Abstract
+//{
+//}

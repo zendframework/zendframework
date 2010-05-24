@@ -20,18 +20,25 @@
  */
 
 /**
- * @uses       Zend_Date
- * @uses       Zend_Feed_Reader
- * @uses       Zend_Feed_Reader_Collection_Author
- * @uses       Zend_Feed_Reader_Collection_Category
- * @uses       Zend_Feed_Reader_Extension_FeedAbstract
+ * @namespace
+ */
+namespace Zend\Feed\Reader\Extension\DublinCore;
+use Zend\Date;
+use Zend\Feed\Reader\Collection;
+
+/**
+ * @uses       \Zend\Date\Date
+ * @uses       \Zend\Feed\Reader\Reader
+ * @uses       \Zend\Feed\Reader\Collection\Author
+ * @uses       \Zend\Feed\Reader\Collection\Category
+ * @uses       \Zend\Feed\Reader\Extension\FeedAbstract
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Reader_Extension_DublinCore_Feed
-    extends Zend_Feed_Reader_Extension_FeedAbstract
+class Feed
+    extends \Zend\Feed\Reader\Extension\FeedAbstract
 {
     /**
      * Get a single author
@@ -81,8 +88,8 @@ class Zend_Feed_Reader_Extension_DublinCore_Feed
                     'name' => $author->nodeValue
                 );
             }
-            $authors = new Zend_Feed_Reader_Collection_Author(
-                Zend_Feed_Reader::arrayUnique($authors)
+            $authors = new Collection\Author(
+                \Zend\Feed\Reader\Reader::arrayUnique($authors)
             );
         } else {
             $authors = null;
@@ -227,7 +234,7 @@ class Zend_Feed_Reader_Extension_DublinCore_Feed
     /**
      *
      *
-     * @return Zend_Date|null
+     * @return \Zend\Date\Date|null
      */
     public function getDate()
     {
@@ -243,8 +250,8 @@ class Zend_Feed_Reader_Extension_DublinCore_Feed
         }
 
         if ($date) {
-            $d = new Zend_Date;
-            $d->set($date, Zend_Date::ISO_8601);
+            $d = new Date\Date;
+            $d->set($date, Date\Date::ISO_8601);
         }
 
         $this->_data['date'] = $d;
@@ -255,7 +262,7 @@ class Zend_Feed_Reader_Extension_DublinCore_Feed
     /**
      * Get categories (subjects under DC)
      *
-     * @return Zend_Feed_Reader_Collection_Category
+     * @return \Zend\Feed\Reader\Collection\Category
      */
     public function getCategories()
     {
@@ -270,7 +277,7 @@ class Zend_Feed_Reader_Extension_DublinCore_Feed
         }
         
         if ($list->length) {
-            $categoryCollection = new Zend_Feed_Reader_Collection_Category;
+            $categoryCollection = new Collection\Category;
             foreach ($list as $category) {
                 $categoryCollection[] = array(
                     'term' => $category->nodeValue,
@@ -279,7 +286,7 @@ class Zend_Feed_Reader_Extension_DublinCore_Feed
                 );
             }
         } else {
-            $categoryCollection = new Zend_Feed_Reader_Collection_Category;
+            $categoryCollection = new Collection\Category;
         }
         
         $this->_data['categories'] = $categoryCollection;

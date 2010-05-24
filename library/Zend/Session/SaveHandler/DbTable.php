@@ -23,7 +23,9 @@ namespace Zend\Session\SaveHandler;
 
 use Zend\Session\SaveHandler as Savable,
     Zend\Session\Container,
-    Zend\Session\Manager;
+    Zend\Session\Manager,
+    Zend\DB\Table\AbstractTable,
+    Zend\DB\Table\Row\AbstractRow;
 
 /**
  * DB Table session save handler
@@ -40,7 +42,7 @@ use Zend\Session\SaveHandler as Savable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DbTable
-    extends \Zend_Db_Table_Abstract
+    extends AbstractTable
     implements Savable
 {
     const PRIMARY_ASSIGNMENT                   = 'primaryAssignment';
@@ -553,7 +555,7 @@ class DbTable
      * @param Zend_Db_Table_Row_Abstract $row
      * @return int
      */
-    protected function _getLifetime(\Zend_Db_Table_Row_Abstract $row)
+    protected function _getLifetime(AbstractRow $row)
     {
         $return = $this->_lifetime;
 
@@ -570,7 +572,7 @@ class DbTable
      * @param Zend_Db_Table_Row_Abstract $row
      * @return int
      */
-    protected function _getExpirationTime(\Zend_Db_Table_Row_Abstract $row)
+    protected function _getExpirationTime(AbstractRow $row)
     {
         return (int) $row->{$this->_modifiedColumn} + $this->_getLifetime($row);
     }

@@ -21,16 +21,13 @@
  */
 
 /**
- * Test helper
+ * @namespace
  */
+namespace ZendTest\Feed;
+use Zend\Feed;
+use Zend\HTTP;
+use Zend\Feed\Entry;
 
-/**
- * @see Zend_Feed_Entry_Atom
- */
-
-/**
- * @see Zend_Http_Client_File
- */
 
 /**
  * @category   Zend
@@ -40,7 +37,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Feed
  */
-class Zend_Feed_AtomPublishingTest extends PHPUnit_Framework_TestCase
+class AtomPublishingTest extends \PHPUnit_Framework_TestCase
 {
     protected $_uri;
 
@@ -51,14 +48,14 @@ class Zend_Feed_AtomPublishingTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        Zend_Feed::setHttpClient(new Zend_Http_Client());
+        Feed\Feed::setHttpClient(new HTTP\Client());
     }
 
     public function testPost()
     {
-        Zend_Feed::setHttpClient(new TestClient());
+        Feed\Feed::setHttpClient(new TestClient());
 
-        $entry = new Zend_Feed_Entry_Atom();
+        $entry = new Entry\Atom();
 
         /* Give the entry its initial values. */
         $entry->title = 'Entry 1';
@@ -81,12 +78,12 @@ class Zend_Feed_AtomPublishingTest extends PHPUnit_Framework_TestCase
 
     public function testEdit()
     {
-        Zend_Feed::setHttpClient(new TestClient());
+        Feed\Feed::setHttpClient(new TestClient());
         $contents = file_get_contents(dirname(__FILE__) .  '/_files/AtomPublishingTest-before-update.xml');
 
         /* The base feed URI is the same as the POST URI, so just supply the
          * Zend_Feed_Entry_Atom object with that. */
-        $entry = new Zend_Feed_Entry_Atom($this->_uri, $contents);
+        $entry = new Entry\Atom($this->_uri, $contents);
 
         /* Initial state. */
         $this->assertEquals('2005-05-23T16:26:00-08:00', $entry->updated(), 'Initial state of updated timestamp does not match');
@@ -110,7 +107,7 @@ class Zend_Feed_AtomPublishingTest extends PHPUnit_Framework_TestCase
  * the request.
  *
  */
-class TestClient extends Zend_Http_Client
+class TestClient extends HTTP\Client
 {
     public function request($method = null)
     {
@@ -124,9 +121,9 @@ class TestClient extends Zend_Http_Client
                 break;
 
             case self::PUT:
-                $doc1 = new DOMDocument();
+                $doc1 = new \DOMDocument();
                 $doc1->load(dirname(__FILE__) . '/_files/AtomPublishingTest-expected-update.xml');
-                $doc2 = new DOMDocument();
+                $doc2 = new \DOMDocument();
                 $doc2->loadXML($this->raw_post_data);
                 if ($doc1->saveXml() == $doc2->saveXml()) {
                     $code = 200;
@@ -138,6 +135,6 @@ class TestClient extends Zend_Http_Client
                 break;
         }
 
-        return new Zend_Http_Response($code, array(), $body);
+        return new \Zend\HTTP\Response\Response($code, array(), $body);
     }
 }

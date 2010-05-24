@@ -20,21 +20,27 @@
  */
 
 /**
- * @uses       Zend_Feed_Reader
+ * @namespace
+ */
+namespace Zend\Feed\Reader\Extension\Content;
+use Zend\Feed\Reader;
+
+/**
+ * @uses       \Zend\Feed\Reader\Reader
  * @uses       Zend_Feed_Reader_Entry_EntryAbstract
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Reader_Extension_Content_Entry
-    extends Zend_Feed_Reader_Extension_EntryAbstract
+class Entry
+    extends Reader\Extension\EntryAbstract
 {
 
     public function getContent()
     {
-        if ($this->getType() !== Zend_Feed_Reader::TYPE_RSS_10
-            && $this->getType() !== Zend_Feed_Reader::TYPE_RSS_090
+        if ($this->getType() !== Reader\Reader::TYPE_RSS_10
+            && $this->getType() !== Reader\Reader::TYPE_RSS_090
         ) {
             $content = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
         } else {

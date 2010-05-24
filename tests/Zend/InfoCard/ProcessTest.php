@@ -20,16 +20,13 @@
  * @version    $Id$
  */
 
-// Call Zend_InfoCard_ProcessTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_InfoCard_ProcessTest::main");
-}
-
 /**
- * Test helper
+ * @namespace
  */
-
-
+namespace ZendTest\InfoCard;
+use Zend\InfoCard;
+use Zend\InfoCard\Cipher;
+use Zend\InfoCard\Adapter;
 
 /**
  * @category   Zend
@@ -39,22 +36,11 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_InfoCard
  */
-class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
+class ProcessTest extends \PHPUnit_Framework_TestCase
 {
     protected $_xmlDocument;
 
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_InfoCard_ProcessTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function setUp()
     {
@@ -74,8 +60,8 @@ class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
     public function testCertificatePairs()
     {
         try {
-            $infoCard = new Zend_InfoCard();
-        } catch (Zend_InfoCard_Exception $e) {
+            $infoCard = new InfoCard\InfoCard();
+        } catch (InfoCard\Exception $e) {
             $message = $e->getMessage();
             if (preg_match('/requires.+mcrypt/', $message)) {
                 $this->markTestSkipped($message);
@@ -100,7 +86,7 @@ class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
 
         try {
             $key_pair = $infoCard->getCertificatePair($key_id);
-        } catch(Zend_InfoCard_Exception $e) {
+        } catch(InfoCard\Exception $e) {
             $failed = true;
         }
 
@@ -108,19 +94,19 @@ class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
 
         try {
             $infoCard->addCertificatePair("I don't exist", "I don't exist");
-        } catch(Zend_InfoCard_Exception $e) {
+        } catch(InfoCard\Exception $e) {
             $this->assertTrue(true);
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             $this->assertFalse(true);
         }
 
-        $key_id = $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, Zend_InfoCard_Cipher::ENC_RSA_OAEP_MGF1P, "foo");
+        $key_id = $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, Cipher\Cipher::ENC_RSA_OAEP_MGF1P, "foo");
 
         try {
-            $key_id = $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, Zend_InfoCard_Cipher::ENC_RSA_OAEP_MGF1P, "foo");
-        } catch(Zend_InfoCard_Exception $e) {
+            $key_id = $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, Cipher\Cipher::ENC_RSA_OAEP_MGF1P, "foo");
+        } catch(InfoCard\Exception $e) {
             $this->assertTrue(true);
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             $this->assertFalse(true);
         }
 
@@ -129,9 +115,9 @@ class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
         try {
             $infoCard->removeCertificatePair($key_id);
             $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, "Doesn't Exist", "foo");
-        } catch(Zend_InfoCard_Exception $e) {
+        } catch(InfoCard\Exception $e) {
             $this->assertTrue(true);
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             $this->assertFalse(true);
         }
     }
@@ -143,8 +129,8 @@ class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
         }
 
         try {
-            $infoCard = new Zend_InfoCard();
-        } catch (Zend_InfoCard_Exception $e) {
+            $infoCard = new InfoCard\InfoCard();
+        } catch (InfoCard\Exception $e) {
             $message = $e->getMessage();
             if (preg_match('/requires.+mcrypt/', $message)) {
                 $this->markTestSkipped($message);
@@ -157,7 +143,7 @@ class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
 
         $claims = $infoCard->process($this->_xmlDocument);
 
-        $this->assertTrue($claims instanceof Zend_InfoCard_Claims);
+        $this->assertTrue($claims instanceof InfoCard\Claims);
     }
 
     public function testPlugins()
@@ -166,11 +152,11 @@ class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('DOMDocument::C14N() not available until PHP 5.2.0');
         }
 
-        $adapter  = new _Zend_InfoCard_Test_Adapter();
+        $adapter  = new TestAsset\MockAdapter();
 
         try {
-            $infoCard = new Zend_InfoCard();
-        } catch (Zend_InfoCard_Exception $e) {
+            $infoCard = new InfoCard\InfoCard();
+        } catch (InfoCard\Exception $e) {
             $message = $e->getMessage();
             if (preg_match('/requires.+mcrypt/', $message)) {
                 $this->markTestSkipped($message);
@@ -181,22 +167,22 @@ class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
 
         $infoCard->setAdapter($adapter);
 
-        $result = $infoCard->getAdapter() instanceof Zend_InfoCard_Adapter_Interface;
+        $result = $infoCard->getAdapter() instanceof Adapter\AdapterInterface;
 
         $this->assertTrue($result);
-        $this->assertTrue($infoCard->getAdapter() instanceof _Zend_InfoCard_Test_Adapter);
+        $this->assertTrue($infoCard->getAdapter() instanceof TestAsset\MockAdapter);
 
         $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey);
 
         $claims = $infoCard->process($this->_xmlDocument);
 
-        $pki_object = new Zend_InfoCard_Cipher_Pki_Adapter_Rsa(Zend_InfoCard_Cipher_Pki_Adapter_Abstract::NO_PADDING);
+        $pki_object = new \Zend\InfoCard\Cipher\PKI\Adapter\RSA(\Zend\InfoCard\Cipher\PKI\Adapter\AbstractAdapter::NO_PADDING);
 
         $infoCard->setPkiCipherObject($pki_object);
 
         $this->assertTrue($pki_object === $infoCard->getPkiCipherObject());
 
-        $sym_object = new Zend_InfoCard_Cipher_Symmetric_Adapter_Aes256cbc();
+        $sym_object = new \Zend\InfoCard\Cipher\Symmetric\Adapter\AES256CBC();
 
         $infoCard->setSymCipherObject($sym_object);
 
@@ -210,8 +196,8 @@ class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
         }
 
         try {
-            $infoCard = new Zend_InfoCard();
-        } catch (Zend_InfoCard_Exception $e) {
+            $infoCard = new InfoCard\InfoCard();
+        } catch (InfoCard\Exception $e) {
             $message = $e->getMessage();
             if (preg_match('/requires.+mcrypt/', $message)) {
                 $this->markTestSkipped($message);
@@ -224,11 +210,11 @@ class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
 
         $claims = $infoCard->process($this->_xmlDocument);
 
-        $this->assertTrue($claims instanceof Zend_InfoCard_Claims);
+        $this->assertTrue($claims instanceof InfoCard\Claims);
 
         $this->assertFalse($claims->isValid());
 
-        $this->assertSame($claims->getCode(), Zend_InfoCard_Claims::RESULT_VALIDATION_FAILURE);
+        $this->assertSame($claims->getCode(), InfoCard\Claims::RESULT_VALIDATION_FAILURE);
 
         $errormsg = $claims->getErrorMsg();
         $this->assertTrue(!empty($errormsg));
@@ -247,18 +233,18 @@ class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
 
         try {
             unset($claims->givenname);
-        } catch(Zend_InfoCard_Exception $e) {
+        } catch(InfoCard\Exception $e) {
 
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             $this->assertFalse(true);
         }
 
 
         try {
             $claims->givenname = "Test";
-        } catch(Zend_InfoCard_Exception $e) {
+        } catch(InfoCard\Exception $e) {
 
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             $this->assertFalse(true);
         }
 
@@ -267,7 +253,7 @@ class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
 
     public function testDefaultAdapter()
     {
-        $adapter = new Zend_InfoCard_Adapter_Default();
+        $adapter = new Adapter\DefaultAdapter();
 
         $this->assertTrue($adapter->storeAssertion(1, 2, array(3)));
         $this->assertFalse($adapter->retrieveAssertion(1, 2));
@@ -276,12 +262,12 @@ class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
 
     public function testTransforms()
     {
-        $trans = new Zend_InfoCard_Xml_Security_Transform();
+        $trans = new \Zend\InfoCard\XML\Security\Transform\Transform();
 
         try {
             $trans->addTransform("foo");
             $this->fail("Expected Exception Not Thrown");
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             /* yay */
         }
 
@@ -290,33 +276,4 @@ class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class _Zend_InfoCard_Test_Adapter
-    extends PHPUnit_Framework_TestCase
-    implements Zend_InfoCard_Adapter_Interface
-{
-    public function storeAssertion($assertionURI, $assertionID, $conditions)
-    {
-        $this->assertTrue(!empty($assertionURI));
-        $this->assertTrue(!empty($assertionID));
-        $this->assertTrue(!empty($conditions));
-        return true;
-    }
 
-    public function retrieveAssertion($assertionURI, $assertionID)
-    {
-        $this->assertTrue(!empty($assertionURI));
-        $this->assertTrue(!empty($assertionID));
-        return false;
-    }
-
-    public function removeAssertion($asserionURI, $assertionID)
-    {
-        $this->assertTrue(!empty($assertionURI));
-        $this->asserTrue(!empty($assertionID));
-    }
-}
-
-// Call Zend_InfoCard_ProcessTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_InfoCard_ProcessTest::main") {
-    Zend_InfoCard_ProcessTest::main();
-}

@@ -20,15 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_InfoCard_ProcessTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_InfoCard_CipherTest::main");
-}
-
 /**
- * Test helper
+ * @namespace
  */
-
+namespace ZendTest\InfoCard;
+use Zend\InfoCard\Cipher\PKI\Adapter;
+use Zend\InfoCard\Cipher;
 
 
 /**
@@ -39,7 +36,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_InfoCard
  */
-class Zend_InfoCard_CipherTest extends PHPUnit_Framework_TestCase
+class CipherTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testPkiPadding()
@@ -49,24 +46,24 @@ class Zend_InfoCard_CipherTest extends PHPUnit_Framework_TestCase
         }
 
         try {
-            $obj = new Zend_InfoCard_Cipher_Pki_Adapter_Rsa("thiswillbreak");
+            $obj = new Adapter\RSA("thiswillbreak");
             $this->fail("Exception not thrown as expected");
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             /* yay */
         }
 
-        $obj = new Zend_InfoCard_Cipher_Pki_Adapter_Rsa();
+        $obj = new Adapter\RSA();
 
         $prv_key = file_get_Contents(dirname(__FILE__) . "/_files/ssl_private.cert");
 
         try {
             $obj->decrypt("Foo", $prv_key, null, "foo");
             $this->fail("Expected Exception Not Thrown");
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             /* yay */
         }
 
-        $result = $obj->decrypt("foo", $prv_key, null, Zend_InfoCard_Cipher_Pki_Adapter_Abstract::NO_PADDING);
+        $result = $obj->decrypt("foo", $prv_key, null, Adapter\AbstractAdapter::NO_PADDING);
 
         // This is sort of werid, but since we don't have a real PK-encrypted string to test against for NO_PADDING
         // mode we decrypt the string "foo" instead. Mathmatically we will always arrive at the same resultant
@@ -80,12 +77,12 @@ class Zend_InfoCard_CipherTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('The openssl extension is not loaded.');
         }
 
-        $obj = new Zend_InfoCard_Cipher_Pki_Adapter_Rsa();
+        $obj = new Adapter\RSA();
 
         try {
             $obj->decrypt("Foo", "bar");
             $this->fail("Exception not thrown as expected");
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             /* yay */
         }
 
@@ -97,15 +94,15 @@ class Zend_InfoCard_CipherTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('Use of the Zend_InfoCard component requires the mcrypt extension to be enabled in PHP');
         }
 
-        $this->assertTrue(Zend_InfoCard_Cipher::getInstanceByURI(Zend_InfoCard_Cipher::ENC_AES128CBC)
-                          instanceof Zend_InfoCard_Cipher_Symmetric_Adapter_Aes128cbc);
-        $this->assertTrue(Zend_InfoCard_Cipher::getInstanceByURI(Zend_InfoCard_Cipher::ENC_RSA)
-                          instanceof Zend_InfoCard_Cipher_Pki_Adapter_Rsa);
+        $this->assertTrue(Cipher\Cipher::getInstanceByURI(Cipher\Cipher::ENC_AES128CBC)
+                          instanceof \Zend\InfoCard\Cipher\Symmetric\Adapter\AES128CBC);
+        $this->assertTrue(Cipher\Cipher::getInstanceByURI(Cipher\Cipher::ENC_RSA)
+                          instanceof Adapter\RSA);
 
         try {
-            Zend_InfoCard_Cipher::getInstanceByURI("Broken");
+            Cipher\Cipher::getInstanceByURI("Broken");
             $this->fail("Exception not thrown as expected");
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             /* yay */
         }
     }

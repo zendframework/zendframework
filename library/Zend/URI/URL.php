@@ -128,6 +128,17 @@ class URL implements URI
         return $regex;
     }
 
+    public static function validate($url)
+    {
+        try {
+            $url = new self($url);
+            unset($url);
+            return true;
+        } catch (\Exception $exception) {
+        }
+        return false;
+    }
+    
     /**
      * validateUsername()
      * 

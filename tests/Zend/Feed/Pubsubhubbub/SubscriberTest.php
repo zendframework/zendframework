@@ -19,7 +19,15 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Feed\Pubsubhubbub;
+use Zend\DB\Adapter;
 
+use Zend\DB\Table;
+
+use Zend\Feed\PubSubHubbub;
 
 /**
  * @category   Zend
@@ -30,7 +38,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
+class SubscriberTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_subscriber = null;
@@ -41,14 +49,14 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $client = new Zend_Http_Client;
-        Zend_Feed_Pubsubhubbub::setHttpClient($client);
-        $this->_subscriber = new Zend_Feed_Pubsubhubbub_Subscriber;
+        $client = new \Zend\HTTP\Client;
+        PubSubHubbub\PubSubHubbub::setHttpClient($client);
+        $this->_subscriber = new \Zend\Feed\PubSubHubbub\Subscriber\Subscriber;
         $this->_adapter = $this->_getCleanMock(
-            'Zend_Db_Adapter_Abstract'
+            '\Zend\DB\Adapter\AbstractAdapter'
         );
         $this->_tableGateway = $this->_getCleanMock(
-            'Zend_Db_Table_Abstract'
+            '\Zend\DB\Table\AbstractTable'
         );
         $this->_tableGateway->expects($this->any())->method('getAdapter')
             ->will($this->returnValue($this->_adapter));
@@ -108,7 +116,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->addHubUrl('');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
+        } catch (PubSubHubbub\Exception $e) {}
     }
 
     public function testThrowsExceptionOnSettingNonStringHubServerUrl()
@@ -116,7 +124,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->addHubUrl(123);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
+        } catch (PubSubHubbub\Exception $e) {}
     }
 
     public function testThrowsExceptionOnSettingInvalidHubServerUrl()
@@ -124,7 +132,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->addHubUrl('http://');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
+        } catch (PubSubHubbub\Exception $e) {}
     }
 
     public function testAddsParameter()
@@ -196,7 +204,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setTopicUrl('');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
+        } catch (PubSubHubbub\Exception $e) {}
     }
 
 
@@ -205,7 +213,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setTopicUrl(123);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
+        } catch (PubSubHubbub\Exception $e) {}
     }
 
 
@@ -214,7 +222,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setTopicUrl('http://');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
+        } catch (PubSubHubbub\Exception $e) {}
     }
 
     public function testThrowsExceptionOnMissingTopicUrl()
@@ -222,7 +230,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->getTopicUrl();
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
+        } catch (PubSubHubbub\Exception $e) {}
     }
 
     public function testCanSetCallbackUrl()
@@ -236,7 +244,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setCallbackUrl('');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
+        } catch (PubSubHubbub\Exception $e) {}
     }
 
 
@@ -245,7 +253,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setCallbackUrl(123);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
+        } catch (PubSubHubbub\Exception $e) {}
     }
 
 
@@ -254,7 +262,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setCallbackUrl('http://');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
+        } catch (PubSubHubbub\Exception $e) {}
     }
 
     public function testThrowsExceptionOnMissingCallbackUrl()
@@ -262,7 +270,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->getCallbackUrl();
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
+        } catch (PubSubHubbub\Exception $e) {}
     }
 
     public function testCanSetLeaseSeconds()
@@ -276,7 +284,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setLeaseSeconds(0);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
+        } catch (PubSubHubbub\Exception $e) {}
     }
 
     public function testThrowsExceptionOnSettingLessThanZeroAsLeaseSeconds()
@@ -284,7 +292,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setLeaseSeconds(-1);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
+        } catch (PubSubHubbub\Exception $e) {}
     }
 
     public function testThrowsExceptionOnSettingAnyScalarTypeCastToAZeroOrLessIntegerAsLeaseSeconds()
@@ -292,13 +300,13 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setLeaseSeconds('0aa');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
+        } catch (PubSubHubbub\Exception $e) {}
     }
 
     public function testCanSetPreferredVerificationMode()
     {
-        $this->_subscriber->setPreferredVerificationMode(Zend_Feed_Pubsubhubbub::VERIFICATION_MODE_ASYNC);
-        $this->assertEquals(Zend_Feed_Pubsubhubbub::VERIFICATION_MODE_ASYNC, $this->_subscriber->getPreferredVerificationMode());
+        $this->_subscriber->setPreferredVerificationMode(PubSubHubbub\PubSubHubbub::VERIFICATION_MODE_ASYNC);
+        $this->assertEquals(PubSubHubbub\PubSubHubbub::VERIFICATION_MODE_ASYNC, $this->_subscriber->getPreferredVerificationMode());
     }
 
     public function testSetsPreferredVerificationModeThrowsExceptionOnSettingBadMode()
@@ -306,44 +314,43 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setPreferredVerificationMode('abc');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
+        } catch (PubSubHubbub\Exception $e) {}
     }
 
     public function testPreferredVerificationModeDefaultsToSync()
     {
-        $this->assertEquals(Zend_Feed_Pubsubhubbub::VERIFICATION_MODE_SYNC, $this->_subscriber->getPreferredVerificationMode());
+        $this->assertEquals(PubSubHubbub\PubSubHubbub::VERIFICATION_MODE_SYNC, $this->_subscriber->getPreferredVerificationMode());
     }
 
     public function testCanSetStorageImplementation()
     {
-	    $storage = new Zend_Feed_Pubsubhubbub_Model_Subscription($this->_tableGateway);
+	    $storage = new \Zend\Feed\PubSubHubbub\Model\Subscription($this->_tableGateway);
         $this->_subscriber->setStorage($storage);
         $this->assertThat($this->_subscriber->getStorage(), $this->identicalTo($storage));
     }
 
-    /**
-     * @expectedException Zend_Feed_Pubsubhubbub_Exception
-     */
+
     public function testGetStorageThrowsExceptionIfNoneSet()
     {
+        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception');
         $this->_subscriber->getStorage();
     }
     
     protected function _getCleanMock($className) {
-        $class = new ReflectionClass($className);
+        $class = new \ReflectionClass($className);
         $methods = $class->getMethods();
         $stubMethods = array();
         foreach ($methods as $method) {
             if ($method->isPublic() || ($method->isProtected()
-            && $method->isAbstract())) {
-            $stubMethods[] = $method->getName();
+                && $method->isAbstract())) {
+                $stubMethods[] = $method->getName();
             }
         }
         $mocked = $this->getMock(
             $className,
             $stubMethods,
             array(),
-            $className . '_PubsubSubscriberMock_' . uniqid(),
+            str_replace('\\', '_', ($className . '_PubsubSubscriberMock_' . uniqid())),
             false
         );
         return $mocked;

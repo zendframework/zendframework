@@ -20,14 +20,19 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed\Builder;
+
+/**
  * Zend_Feed_Builder exception class
  *
- * @uses       Zend_Feed_Exception
+ * @uses       \Zend\Feed\Exception
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Builder_Exception extends Zend_Feed_Exception
+class Exception extends \Zend\Feed\Exception
 {
 }

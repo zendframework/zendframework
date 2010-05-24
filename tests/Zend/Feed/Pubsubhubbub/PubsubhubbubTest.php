@@ -19,7 +19,11 @@
  * @version    $Id$
  */
 
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Feed\Pubsubhubbub;
+use Zend\Feed\PubSubHubbub;
 
 /**
  * @category   Zend
@@ -30,28 +34,28 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Pubsubhubbub_PubsubhubbubTest extends PHPUnit_Framework_TestCase
+class PubsubhubbubTest extends \PHPUnit_Framework_TestCase
 {
 
     public function teardown()
     {
-        Zend_Feed_Pubsubhubbub::clearHttpClient();
+        PubSubHubbub\PubSubHubbub::clearHttpClient();
     }
 
     public function testCanSetCustomHttpClient()
     {
-        Zend_Feed_Pubsubhubbub::setHttpClient(new Test_Http_Client_Pubsub());
-        $this->assertType('Test_Http_Client_Pubsub', Zend_Feed_Pubsubhubbub::getHttpClient());
+        PubSubHubbub\PubSubHubbub::setHttpClient(new Pubsub());
+        $this->assertType('ZendTest\Feed\Pubsubhubbub\Pubsub', PubSubHubbub\PubSubHubbub::getHttpClient());
     }
 
     public function testCanDetectHubs()
     {
-        $feed = Zend_Feed_Reader::importFile(dirname(__FILE__) . '/_files/rss20.xml');
+        $feed = \Zend\Feed\Reader\Reader::importFile(dirname(__FILE__) . '/_files/rss20.xml');
         $this->assertEquals(array(
             'http://www.example.com/hub', 'http://www.example.com/hub2'
-        ), Zend_Feed_Pubsubhubbub::detectHubs($feed));
+        ), PubSubHubbub\PubSubHubbub::detectHubs($feed));
     }
 
 }
 
-class Test_Http_Client_Pubsub extends Zend_Http_Client {}
+class Pubsub extends \Zend\HTTP\Client {}

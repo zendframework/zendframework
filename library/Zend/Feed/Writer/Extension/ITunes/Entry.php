@@ -18,17 +18,23 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
- 
+
 /**
- * @uses       Zend_Feed_Exception
- * @uses       Zend_Feed_Writer
- * @uses       Zend_Feed_Writer_Exception_InvalidMethodException
+ * @namespace
+ */
+namespace Zend\Feed\Writer\Extension\ITunes;
+
+
+/**
+ * @uses       \Zend\Feed\Exception
+ * @uses       \Zend\Feed\Writer\Writer
+ * @uses       \Zend\Feed\Writer\Exception\InvalidMethodException
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Extension_ITunes_Entry
+class Entry
 {
     /**
      * Array of Feed data for rendering by Extension's renderers
@@ -48,7 +54,7 @@ class Zend_Feed_Writer_Extension_ITunes_Entry
      * Set feed encoding
      * 
      * @param  string $enc 
-     * @return Zend_Feed_Writer_Extension_ITunes_Entry
+     * @return \Zend\Feed\Writer\Extension\ITunes\Entry
      */
     public function setEncoding($enc)
     {
@@ -70,16 +76,16 @@ class Zend_Feed_Writer_Extension_ITunes_Entry
      * Set a block value of "yes" or "no". You may also set an empty string.
      *
      * @param  string
-     * @return Zend_Feed_Writer_Extension_ITunes_Entry
+     * @return \Zend\Feed\Writer\Extension\ITunes\Entry
      */
     public function setItunesBlock($value)
     {
         if (!ctype_alpha($value) && strlen($value) > 0) {
-            throw new Zend_Feed_Exception('invalid parameter: "block" may only'
+            throw new \Zend\Feed\Exception('invalid parameter: "block" may only'
             . ' contain alphabetic characters');
         }
         if (iconv_strlen($value, $this->getEncoding()) > 255) {
-            throw new Zend_Feed_Exception('invalid parameter: "block" may only'
+            throw new \Zend\Feed\Exception('invalid parameter: "block" may only'
             . ' contain a maximum of 255 characters');
         }
         $this->_data['block'] = $value;
@@ -89,7 +95,7 @@ class Zend_Feed_Writer_Extension_ITunes_Entry
      * Add authors to itunes entry
      * 
      * @param  array $values 
-     * @return Zend_Feed_Writer_Extension_ITunes_Entry
+     * @return \Zend\Feed\Writer\Extension\ITunes\Entry
      */
     public function addItunesAuthors(array $values)
     {
@@ -103,12 +109,12 @@ class Zend_Feed_Writer_Extension_ITunes_Entry
      * Add author to itunes entry
      * 
      * @param  string $value 
-     * @return Zend_Feed_Writer_Extension_ITunes_Entry
+     * @return \Zend\Feed\Writer\Extension\ITunes\Entry
      */
     public function addItunesAuthor($value)
     {
         if (iconv_strlen($value, $this->getEncoding()) > 255) {
-            throw new Zend_Feed_Exception('invalid parameter: any "author" may only'
+            throw new \Zend\Feed\Exception('invalid parameter: any "author" may only'
             . ' contain a maximum of 255 characters each');
         }
         if (!isset($this->_data['authors'])) {
@@ -122,7 +128,7 @@ class Zend_Feed_Writer_Extension_ITunes_Entry
      * Set duration
      * 
      * @param  int $value 
-     * @return Zend_Feed_Writer_Extension_ITunes_Entry
+     * @return \Zend\Feed\Writer\Extension\ITunes\Entry
      */
     public function setItunesDuration($value)
     {
@@ -131,7 +137,7 @@ class Zend_Feed_Writer_Extension_ITunes_Entry
             && !preg_match("/^\d+:[0-5]{1}[0-9]{1}$/", $value)
             && !preg_match("/^\d+:[0-5]{1}[0-9]{1}:[0-5]{1}[0-9]{1}$/", $value)
         ) {
-            throw new Zend_Feed_Exception('invalid parameter: "duration" may only'
+            throw new \Zend\Feed\Exception('invalid parameter: "duration" may only'
             . ' be of a specified [[HH:]MM:]SS format');
         }
         $this->_data['duration'] = $value;
@@ -142,12 +148,12 @@ class Zend_Feed_Writer_Extension_ITunes_Entry
      * Set "explicit" flag
      * 
      * @param  bool $value 
-     * @return Zend_Feed_Writer_Extension_ITunes_Entry
+     * @return \Zend\Feed\Writer\Extension\ITunes\Entry
      */
     public function setItunesExplicit($value)
     {
         if (!in_array($value, array('yes','no','clean'))) {
-            throw new Zend_Feed_Exception('invalid parameter: "explicit" may only'
+            throw new \Zend\Feed\Exception('invalid parameter: "explicit" may only'
             . ' be one of "yes", "no" or "clean"');
         }
         $this->_data['explicit'] = $value;
@@ -158,17 +164,17 @@ class Zend_Feed_Writer_Extension_ITunes_Entry
      * Set keywords
      * 
      * @param  array $value 
-     * @return Zend_Feed_Writer_Extension_ITunes_Entry
+     * @return \Zend\Feed\Writer\Extension\ITunes\Entry
      */
     public function setItunesKeywords(array $value)
     {
         if (count($value) > 12) {
-            throw new Zend_Feed_Exception('invalid parameter: "keywords" may only'
+            throw new \Zend\Feed\Exception('invalid parameter: "keywords" may only'
             . ' contain a maximum of 12 terms');
         }
         $concat = implode(',', $value);
         if (iconv_strlen($concat, $this->getEncoding()) > 255) {
-            throw new Zend_Feed_Exception('invalid parameter: "keywords" may only'
+            throw new \Zend\Feed\Exception('invalid parameter: "keywords" may only'
             . ' have a concatenated length of 255 chars where terms are delimited'
             . ' by a comma');
         }
@@ -180,12 +186,12 @@ class Zend_Feed_Writer_Extension_ITunes_Entry
      * Set subtitle
      * 
      * @param  string $value 
-     * @return Zend_Feed_Writer_Extension_ITunes_Entry
+     * @return \Zend\Feed\Writer\Extension\ITunes\Entry
      */
     public function setItunesSubtitle($value)
     {
         if (iconv_strlen($value, $this->getEncoding()) > 255) {
-            throw new Zend_Feed_Exception('invalid parameter: "subtitle" may only'
+            throw new \Zend\Feed\Exception('invalid parameter: "subtitle" may only'
             . ' contain a maximum of 255 characters');
         }
         $this->_data['subtitle'] = $value;
@@ -196,12 +202,12 @@ class Zend_Feed_Writer_Extension_ITunes_Entry
      * Set summary
      * 
      * @param  string $value 
-     * @return Zend_Feed_Writer_Extension_ITunes_Entry
+     * @return \Zend\Feed\Writer\Extension\ITunes\Entry
      */
     public function setItunesSummary($value)
     {
         if (iconv_strlen($value, $this->getEncoding()) > 4000) {
-            throw new Zend_Feed_Exception('invalid parameter: "summary" may only'
+            throw new \Zend\Feed\Exception('invalid parameter: "summary" may only'
             . ' contain a maximum of 4000 characters');
         }
         $this->_data['summary'] = $value;
@@ -217,11 +223,11 @@ class Zend_Feed_Writer_Extension_ITunes_Entry
      */
     public function __call($method, array $params)
     {
-        $point = Zend_Feed_Writer::lcfirst(substr($method, 9));
+        $point = \Zend\Feed\Writer\Writer::lcfirst(substr($method, 9));
         if (!method_exists($this, 'setItunes' . ucfirst($point))
             && !method_exists($this, 'addItunes' . ucfirst($point))
         ) {
-            throw new Zend_Feed_Writer_Exception_InvalidMethodException(
+            throw new \Zend\Feed\Writer\Exception\InvalidMethodException(
                 'invalid method: ' . $method
             );
         }

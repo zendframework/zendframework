@@ -20,14 +20,20 @@
  */
 
 /**
- * @uses       Zend_Feed_Reader
- * @uses       Zend_Uri
+ * @namespace
+ */
+namespace Zend\Feed\Reader;
+use Zend\URI;
+
+/**
+ * @uses       \Zend\Feed\Reader\Reader
+ * @uses       \Zend\Uri\Uri
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Reader_FeedSet extends ArrayObject
+class FeedSet extends \ArrayObject
 {
 
     public $rss = null;
@@ -52,7 +58,7 @@ class Zend_Feed_Reader_FeedSet extends ArrayObject
      * @param string $uri
      * @return void
      */
-    public function addLinks(DOMNodeList $links, $uri)
+    public function addLinks(\DOMNodeList $links, $uri)
     {
         foreach ($links as $link) {
             if (strtolower($link->getAttribute('rel')) !== 'alternate'
@@ -79,16 +85,16 @@ class Zend_Feed_Reader_FeedSet extends ArrayObject
      */
     protected function _absolutiseUri($link, $uri = null)
     {
-        if (!Zend_Uri::check($link)) {
+        if (!URI\URL::validate($link)) {
             if (!is_null($uri)) {
-                $uri = Zend_Uri::factory($uri);
+                $uri = new URI\URL($uri);
 
                 if ($link[0] !== '/') {
                     $link = $uri->getPath() . '/' . $link;
                 }
 
                 $link = $uri->getScheme() . '://' . $uri->getHost() . '/' . $this->_canonicalizePath($link);
-                if (!Zend_Uri::check($link)) {
+                if (!URI\Zend\Uri\Uri::check($link)) {
                     $link = null;
                 }
             }
@@ -122,7 +128,7 @@ class Zend_Feed_Reader_FeedSet extends ArrayObject
      *
      * @param string $offset
      * @return mixed
-     * @uses Zend_Feed_Reader
+     * @uses \Zend\Feed\Reader\Reader
      */
     public function offsetGet($offset)
     {
@@ -130,7 +136,7 @@ class Zend_Feed_Reader_FeedSet extends ArrayObject
             if (!$this->offsetExists('href')) {
                 return null;
             }
-            $feed = Zend_Feed_Reader::import($this->offsetGet('href'));
+            $feed = Reader::import($this->offsetGet('href'));
             $this->offsetSet('feed', $feed);
             return $feed;
         }

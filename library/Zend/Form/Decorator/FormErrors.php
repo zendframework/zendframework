@@ -367,38 +367,19 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
     {
         $content = '';
 
-        $errors = $form->getMessages();
-        
-        if ($form->isArray()) {
-            $name = $form->getElementsBelongTo();
-            $path = trim(strtr((string)$name, array('[' => '/', ']' => '')), '/');
-            $segs = ('' !== $path) ? explode('/', $path) : array();
-            foreach ($segs as $seg) {
-                if (!array_key_exists($seg, (array)$errors)) {
-                    return '';
+        foreach ($form->getElementsAndSubFormsOrdered() as $subitem) {
+            if ($subitem instanceof Zend_Form_Element) {
+                $messages = $subitem->getMessages();
+                if (count($messages)) {
+                    $subitem->setView($view);
+                    $content .= $this->getMarkupListItemStart()
+                             .  $this->renderLabel($subitem, $view)
+                             .  $view->formErrors($messages, $this->getOptions())
+                             .  $this->getMarkupListItemEnd();
                 }
-                $errors = $errors[$seg];
-            }
-        } else if ($form instanceof Zend_Form_SubForm) {
-            if ((1 == count($errors)) && array_key_exists($name, $errors)) {
-                $errors = $errors[$name];
-            }
-        }
-        if (empty($errors)) {
-            return $content;
-        }
-
-        foreach ($errors as $name => $list) {
-            $element = $form->$name;
-            if ($element instanceof Zend_Form_Element) {
-                $element->setView($view);
-                $content .= $this->getMarkupListItemStart()
-                         .  $this->renderLabel($element, $view)
-                         .  $view->formErrors($list, $this->getOptions())
-                         .  $this->getMarkupListItemEnd();
-            } elseif (!$this->ignoreSubForms() && ($element instanceof Zend_Form)) {
+            } else if (!$this->ignoreSubForms()) {
                 $content .= $this->getMarkupListStart()
-                          . $this->_recurseForm($element, $view)
+                          . $this->_recurseForm($subitem, $view)
                           . $this->getMarkupListEnd();
             }
         }

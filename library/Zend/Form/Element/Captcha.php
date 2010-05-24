@@ -154,7 +154,6 @@ class Zend_Form_Element_Captcha extends Zend_Form_Element_Xhtml
      */
     public function setOptions(array $options)
     {
-        parent::setOptions($options);
         if (array_key_exists('captcha', $options)) {
             if (array_key_exists('captchaOptions', $options)) {
                 $this->setCaptcha($options['captcha'], $options['captchaOptions']);
@@ -164,6 +163,7 @@ class Zend_Form_Element_Captcha extends Zend_Form_Element_Xhtml
             }
             unset($options['captcha']);
         }
+        parent::setOptions($options);
         return $this;
     }
 

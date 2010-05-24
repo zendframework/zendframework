@@ -1,23 +1,23 @@
 dependencies = {
-    action:        "release",
-    releaseName:   "zend",
-    loader:        "default",
-    cssOptimize:   "comments",
-    optimize:      "shrinksafe",
-    layerOptimize: "shrinksafe",
-    copyTests:     false,
-    layers: [
+    "action":        "release",
+    "releaseName":   "zend",
+    "loader":        "default",
+    "cssOptimize":   "comments",
+    "optimize":      "shrinksafe",
+    "layerOptimize": "shrinksafe",
+    "copyTests":     false,
+    "layers": [
         {
-            name: "../zend/main.js",
-            layerDependencies: [],
-            dependencies: [
-                "zend.main",
+            "name": "../zend/main.js",
+            "layerDependencies": [],
+            "dependencies": [
+                "zend.main"
             ]
         }
     ],
-    prefixes: [
+    "prefixes": [
+        [ "zend", "../zend" ],
         [ "dijit", "../dijit" ],
-        [ "dojox", "../dojox" ],
-        [ "zend", "../zend" ]
+        [ "dojox", "../dojox" ]
     ]
 };

@@ -498,9 +498,9 @@ class Zend_Dojo_BuildLayer
 
         $profile = $profileOptions;
         $profile['layers'] = array(array(
-            'name' => $layerScriptPath,
+            'name'              => $layerScriptPath,
             'layerDependencies' => array(),
-            'dependencies' => array($layerName),
+            'dependencies'      => array($layerName),
         ));
         $profile['prefixes'] = array_values($profilePrefixes);
 
@@ -529,7 +529,7 @@ class Zend_Dojo_BuildLayer
     {
         require_once 'Zend/Json.php';
         $profile = Zend_Json::encode($profile);
-        $profile = preg_replace('/"([^"]*)":/', '$1:', $profile);
+        $profile = trim($profile, '"');
         $profile = preg_replace('/' . preg_quote('\\') . '/', '', $profile);
         return $profile;
     }

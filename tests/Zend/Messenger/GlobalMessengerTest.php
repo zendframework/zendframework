@@ -10,11 +10,11 @@
  * @license    New BSD {@link http://www.opensource.org/licenses/bsd-license.php}
  */
 
-namespace ZendTest\Messenger;
-use Zend\Messenger\GlobalMessenger as Messenger,
-    Zend\Messenger\Handler;
+namespace ZendTest\SignalSlot;
+use Zend\SignalSlot\GlobalSignals as SignalSlot,
+    Zend\SignalSlot\Handler;
 
-class GlobalMessengerTest extends \PHPUnit_Framework_TestCase
+class GlobalSignalsTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -31,76 +31,76 @@ class GlobalMessengerTest extends \PHPUnit_Framework_TestCase
 
     public function clearAllTopics()
     {
-        Messenger::setInstance();
+        SignalSlot::setInstance();
     }
 
     public function testAttachShouldReturnHandler()
     {
-        $handle = Messenger::attach('test', $this, __METHOD__);
+        $handle = SignalSlot::attach('test', $this, __METHOD__);
         $this->assertTrue($handle instanceof Handler);
     }
 
     public function testAttachShouldAddHandlerToTopic()
     {
-        $handle = Messenger::attach('test', $this, __METHOD__);
-        $handles = Messenger::getHandlers('test');
+        $handle = SignalSlot::attach('test', $this, __METHOD__);
+        $handles = SignalSlot::getHandlers('test');
         $this->assertEquals(1, count($handles));
         $this->assertContains($handle, $handles);
     }
 
     public function testAttachShouldAddTopicIfItDoesNotExist()
     {
-        $topics = Messenger::getTopics();
+        $topics = SignalSlot::getTopics();
         $this->assertTrue(empty($topics), var_export($topics, 1));
-        $handle = Messenger::attach('test', $this, __METHOD__);
-        $topics = Messenger::getTopics();
+        $handle = SignalSlot::attach('test', $this, __METHOD__);
+        $topics = SignalSlot::getTopics();
         $this->assertFalse(empty($topics));
         $this->assertContains('test', $topics);
     }
 
     public function testDetachShouldRemoveHandlerFromTopic()
     {
-        $handle = Messenger::attach('test', $this, __METHOD__);
-        $handles = Messenger::getHandlers('test');
+        $handle = SignalSlot::attach('test', $this, __METHOD__);
+        $handles = SignalSlot::getHandlers('test');
         $this->assertContains($handle, $handles);
-        Messenger::detach($handle);
-        $handles = Messenger::getHandlers('test');
+        SignalSlot::detach($handle);
+        $handles = SignalSlot::getHandlers('test');
         $this->assertNotContains($handle, $handles);
     }
 
     public function testDetachShouldReturnFalseIfTopicDoesNotExist()
     {
-        $handle = Messenger::attach('test', $this, __METHOD__);
-        Messenger::clearHandlers('test');
-        $this->assertFalse(Messenger::detach($handle));
+        $handle = SignalSlot::attach('test', $this, __METHOD__);
+        SignalSlot::clearHandlers('test');
+        $this->assertFalse(SignalSlot::detach($handle));
     }
 
     public function testDetachShouldReturnFalseIfHandlerDoesNotExist()
     {
-        $handle1 = Messenger::attach('test', $this, __METHOD__);
-        Messenger::clearHandlers('test');
-        $handle2 = Messenger::attach('test', $this, 'handleTestTopic');
-        $this->assertFalse(Messenger::detach($handle1));
+        $handle1 = SignalSlot::attach('test', $this, __METHOD__);
+        SignalSlot::clearHandlers('test');
+        $handle2 = SignalSlot::attach('test', $this, 'handleTestTopic');
+        $this->assertFalse(SignalSlot::detach($handle1));
     }
 
     public function testRetrievingAttachedHandlersShouldReturnEmptyArrayWhenTopicDoesNotExist()
     {
-        $handles = Messenger::getHandlers('test');
+        $handles = SignalSlot::getHandlers('test');
         $this->assertTrue(empty($handles));
     }
 
     public function testNotifyShouldNotifyAttachedHandlers()
     {
-        $handle = Messenger::attach('test', $this, 'handleTestTopic');
-        Messenger::notify('test', 'test message');
+        $handle = SignalSlot::attach('test', $this, 'handleTestTopic');
+        SignalSlot::notify('test', 'test message');
         $this->assertEquals('test message', $this->message);
     }
 
     public function testNotifyUntilShouldReturnAsSoonAsCallbackReturnsTrue()
     {
-        Messenger::attach('foo.bar', 'strpos');
-        Messenger::attach('foo.bar', 'strstr');
-        $value = Messenger::notifyUntil(
+        SignalSlot::attach('foo.bar', 'strpos');
+        SignalSlot::attach('foo.bar', 'strstr');
+        $value = SignalSlot::notifyUntil(
             function ($value) { return (!$value); },
             'foo.bar',
             'foo', 'f'

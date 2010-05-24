@@ -10,8 +10,8 @@
  * @license    New BSD {@link http://www.opensource.org/licenses/bsd-license.php}
  */
 
-namespace ZendTest\Messenger;
-use Zend\Messenger\Handler as Handler;
+namespace ZendTest\SignalSlot;
+use Zend\SignalSlot\Handler as Handler;
 
 /**
  * @category   Phly
@@ -43,8 +43,8 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testCallbackShouldBeArrayIfHandlerPassedToConstructor()
     {
-        $handle = new Handler('foo', '\\ZendTest\\Messenger\\Handlers\\ObjectCallback', 'test');
-        $this->assertSame(array('\\ZendTest\\Messenger\\Handlers\\ObjectCallback', 'test'), $handle->getCallback());
+        $handle = new Handler('foo', '\\ZendTest\\SignalSlot\\Handlers\\ObjectCallback', 'test');
+        $this->assertSame(array('\\ZendTest\\SignalSlot\\Handlers\\ObjectCallback', 'test'), $handle->getCallback());
     }
 
     public function testCallShouldInvokeCallbackWithSuppliedArguments()
@@ -56,7 +56,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Zend\Messenger\InvalidCallbackException
+     * @expectedException \Zend\SignalSlot\InvalidCallbackException
      */
     public function testPassingInvalidCallbackShouldRaiseInvalidCallbackExceptionDuringCall()
     {
@@ -66,9 +66,9 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testCallShouldReturnTheReturnValueOfTheCallback()
     {
-        $handle = new Handler('foo', '\\ZendTest\\Messenger\\Handlers\\ObjectCallback', 'test');
-        if (!is_callable(array('\\ZendTest\\Messenger\\Handlers\\ObjectCallback', 'test'))) {
-            echo "\nClass exists? " . var_export(class_exists('\\ZendTest\\Messenger\\Handlers\\ObjectCallback'), 1) . "\n";
+        $handle = new Handler('foo', '\\ZendTest\\SignalSlot\\Handlers\\ObjectCallback', 'test');
+        if (!is_callable(array('\\ZendTest\\SignalSlot\\Handlers\\ObjectCallback', 'test'))) {
+            echo "\nClass exists? " . var_export(class_exists('\\ZendTest\\SignalSlot\\Handlers\\ObjectCallback'), 1) . "\n";
             echo "Include path: " . get_include_path() . "\n";
         }
         $this->assertEquals('bar', $handle->call(array()));
@@ -76,28 +76,28 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testStringCallbackResolvingToClassNameShouldCallViaInvoke()
     {
-        $handle = new Handler('foo', '\\ZendTest\\Messenger\\Handlers\\Invokable');
+        $handle = new Handler('foo', '\\ZendTest\\SignalSlot\\Handlers\\Invokable');
         $this->assertEquals('__invoke', $handle->call(), var_export($handle->getCallback(), 1));
     }
 
     /**
-     * @expectedException \Zend\Messenger\InvalidCallbackException
+     * @expectedException \Zend\SignalSlot\InvalidCallbackException
      */
     public function testStringCallbackReferringToClassWithoutDefinedInvokeShouldRaiseException()
     {
-        $handle = new Handler('foo', '\\ZendTest\\Messenger\\Handlers\\InstanceMethod');
+        $handle = new Handler('foo', '\\ZendTest\\SignalSlot\\Handlers\\InstanceMethod');
         $handle->call();
     }
 
     public function testCallbackConsistingOfStringContextWithNonStaticMethodShouldInstantiateContext()
     {
-        $handle = new Handler('foo', 'ZendTest\\Messenger\\Handlers\\InstanceMethod', 'callable');
+        $handle = new Handler('foo', 'ZendTest\\SignalSlot\\Handlers\\InstanceMethod', 'callable');
         $this->assertEquals('callable', $handle->call());
     }
 
     public function testCallbackToClassImplementingOverloadingShouldSucceed()
     {
-        $handle = new Handler('foo', '\\ZendTest\\Messenger\\Handlers\\Overloadable', 'foo');
+        $handle = new Handler('foo', '\\ZendTest\\SignalSlot\\Handlers\\Overloadable', 'foo');
         $this->assertEquals('foo', $handle->call());
     }
 

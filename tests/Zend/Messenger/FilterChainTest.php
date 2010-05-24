@@ -10,9 +10,9 @@
  * @license    New BSD {@link http://www.opensource.org/licenses/bsd-license.php}
  */
 
-namespace ZendTest\Messenger;
-use Zend\Messenger\FilterChain,
-    Zend\Messenger\Handler;
+namespace ZendTest\SignalSlot;
+use Zend\SignalSlot\FilterChain,
+    Zend\SignalSlot\Handler;
 
 /**
  * @category   Phly

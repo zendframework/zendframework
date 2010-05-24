@@ -1,5 +1,5 @@
 <?php
-namespace ZendTest\Messenger\Handlers;
+namespace ZendTest\SignalSlot\Slots;
 class InstanceMethod
 {
     public function callable()

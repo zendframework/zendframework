@@ -20,7 +20,13 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Mail/MailTest.php';
+/**
+ * @namespace
+ */
+namespace Zend;
+use Zend\Mime;
+use Zend\Mail;
+
 
 /**
  * @category   Zend
@@ -30,30 +36,30 @@ require_once 'Zend/Mail/MailTest.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mime
  */
-class Zend_MimeTest extends PHPUnit_Framework_TestCase
+class MimeTest extends \PHPUnit_Framework_TestCase
 {
     public function testBoundary()
     {
         // check boundary for uniqueness
-        $m1 = new Zend_Mime();
-        $m2 = new Zend_Mime();
+        $m1 = new Mime\Mime();
+        $m2 = new Mime\Mime();
         $this->assertNotEquals($m1->boundary(), $m2->boundary());
 
         // check instantiating with arbitrary boundary string
         $myBoundary = 'mySpecificBoundary';
-        $m3 = new Zend_Mime($myBoundary);
+        $m3 = new Mime\Mime($myBoundary);
         $this->assertEquals($m3->boundary(), $myBoundary);
 
     }
 
     public function testIsPrintable_notPrintable()
     {
-        $this->assertFalse(Zend_Mime::isPrintable('Test with special chars: �����'));
+        $this->assertFalse(Mime\Mime::isPrintable('Test with special chars: �����'));
     }
 
     public function testIsPrintable_isPrintable()
     {
-        $this->assertTrue(Zend_Mime::isPrintable('Test without special chars'));
+        $this->assertTrue(Mime\Mime::isPrintable('Test without special chars'));
     }
 
     public function testQP()
@@ -65,27 +71,31 @@ class Zend_MimeTest extends PHPUnit_Framework_TestCase
               . ", long, long, long, long, long, long, long, long, long, long"
               . ", long, long, long, long and with ����";
 
-        $qp = Zend_Mime::encodeQuotedPrintable($text);
+        $qp = Mime\Mime::encodeQuotedPrintable($text);
         $this->assertEquals(quoted_printable_decode($qp), $text);
     }
 
     public function testBase64()
     {
         $content = str_repeat("\x88\xAA\xAF\xBF\x29\x88\xAA\xAF\xBF\x29\x88\xAA\xAF", 4);
-        $encoded = Zend_Mime::encodeBase64($content);
+        $encoded = Mime\Mime::encodeBase64($content);
         $this->assertEquals($content, base64_decode($encoded));
     }
 
     public function testZf1058WhitespaceAtEndOfBodyCausesInfiniteLoop()
     {
-        $mail = new Zend_Mail();
+        // Set timezone to avoid "date(): It is not safe to rely on the system's timezone settings."
+        // message.
+        date_default_timezone_set('GMT');
+
+        $mail = new \Zend\Mail\Mail();
         $mail->setSubject('my subject');
         $mail->setBodyText("my body\r\n\r\n...after two newlines\r\n ");
         $mail->setFrom('test@email.com');
         $mail->addTo('test@email.com');
 
         // test with generic transport
-        $mock = new Zend_Mail_Transport_Sendmail_Mock();
+        $mock = new SendmailTransportMock();
         $mail->send($mock);
         $body = quoted_printable_decode($mock->body);
         $this->assertContains("my body\r\n\r\n...after two newlines", $body, $body);
@@ -97,7 +107,7 @@ class Zend_MimeTest extends PHPUnit_Framework_TestCase
      */
     public function testEncodeMailHeaderQuotedPrintable($str, $charset, $result)
     {
-        $this->assertEquals($result, Zend_Mime::encodeQuotedPrintableHeader($str, $charset));
+        $this->assertEquals($result, Mime\Mime::encodeQuotedPrintableHeader($str, $charset));
     }
 
     public static function dataTestEncodeMailHeaderQuotedPrintable()
@@ -119,7 +129,7 @@ class Zend_MimeTest extends PHPUnit_Framework_TestCase
      */
     public function testEncodeMailHeaderBase64($str, $charset, $result)
     {
-        $this->assertEquals($result, Zend_Mime::encodeBase64Header($str, $charset));
+        $this->assertEquals($result, Mime\Mime::encodeBase64Header($str, $charset));
     }
 
     public static function dataTestEncodeMailHeaderBase64()
@@ -138,17 +148,40 @@ class Zend_MimeTest extends PHPUnit_Framework_TestCase
     public function testLineLengthInQuotedPrintableHeaderEncoding()
     {
         $subject = "Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!";
-        $encoded = Zend_Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 100);
-        foreach(explode(Zend_Mime::LINEEND, $encoded) AS $line ) {
+        $encoded = Mime\Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 100);
+        foreach(explode(Mime\Mime::LINEEND, $encoded) AS $line ) {
             if(strlen($line) > 100) {
                 $this->fail("Line '".$line."' is ".strlen($line)." chars long, only 100 allowed.");
             }
         }
-        $encoded = Zend_Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 40);
-        foreach(explode(Zend_Mime::LINEEND, $encoded) AS $line ) {
+        $encoded = Mime\Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 40);
+        foreach(explode(Mime\Mime::LINEEND, $encoded) AS $line ) {
             if(strlen($line) > 40) {
                 $this->fail("Line '".$line."' is ".strlen($line)." chars long, only 40 allowed.");
             }
         }
+    }
+}
+
+
+/**
+ * Mock mail transport class for testing Sendmail transport
+ */
+class SendmailTransportMock extends Mail\Transport\Sendmail
+{
+    /**
+     * @var Zend_Mail
+     */
+    public $mail    = null;
+    public $from    = null;
+    public $subject = null;
+    public $called  = false;
+
+    public function _sendMail()
+    {
+        $this->mail    = $this->_mail;
+        $this->from    = $this->_mail->getFrom();
+        $this->subject = $this->_mail->getSubject();
+        $this->called  = true;
     }
 }

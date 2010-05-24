@@ -21,22 +21,30 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Mail\Transport;
+use Zend\Mail\Protocol\Smtp as SmtpProtocol;
+use Zend\Mail\Protocol;
+use Zend\Mime;
+
+/**
  * SMTP connection object
  *
- * Loads an instance of Zend_Mail_Protocol_Smtp and forwards smtp transactions
+ * Loads an instance of \Zend\Mail\Protocol\Smtp and forwards smtp transactions
  *
- * @uses       Zend_Loader
- * @uses       Zend_Mail_Protocol_Smtp
- * @uses       Zend_Mail_Transport_Abstract
- * @uses       Zend_Mail_Transport_Exception
- * @uses       Zend_Mime
+ * @uses       \Zend\Loader
+ * @uses       \Zend\Mail\Protocol\Smtp\Smtp
+ * @uses       \Zend\Mail\Transport\AbstractTransport
+ * @uses       \Zend\Mail\Transport\Exception
+ * @uses       \Zend\Mime\Mime
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Transport
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
+class Smtp extends AbstractTransport
 {
     /**
      * EOL character string used by transport
@@ -86,9 +94,9 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
 
 
     /**
-     * Instance of Zend_Mail_Protocol_Smtp
+     * Instance of \Zend\Mail\Protocol\Smtp\Smtp
      *
-     * @var Zend_Mail_Protocol_Smtp
+     * @var \Zend\Mail\Protocol\Smtp\Smtp
      */
     protected $_connection;
 
@@ -99,7 +107,7 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
      * @param  string $host OPTIONAL (Default: 127.0.0.1)
      * @param  array|null $config OPTIONAL (Default: null)
      * @return void
-     * 
+     *
      * @todo Someone please make this compatible
      *       with the SendMail transport class.
      */
@@ -127,10 +135,10 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
      */
     public function __destruct()
     {
-        if ($this->_connection instanceof Zend_Mail_Protocol_Smtp) {
+        if ($this->_connection instanceof SmtpProtocol\Smtp) {
             try {
                 $this->_connection->quit();
-            } catch (Zend_Mail_Protocol_Exception $e) {
+            } catch (Protocol\Exception $e) {
                 // ignore
             }
             $this->_connection->disconnect();
@@ -141,11 +149,11 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
     /**
      * Sets the connection protocol instance
      *
-     * @param Zend_Mail_Protocol_Abstract $client
+     * @param \Zend\Mail\Protocol\AbstractProtocol $client
      *
      * @return void
      */
-    public function setConnection(Zend_Mail_Protocol_Abstract $connection)
+    public function setConnection(Protocol\AbstractProtocol $connection)
     {
         $this->_connection = $connection;
     }
@@ -154,7 +162,7 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
     /**
      * Gets the connection protocol instance
      *
-     * @return Zend_Mail_Protocol|null
+     * @return \Zend\Mail\Protocol|null
      */
     public function getConnection()
     {
@@ -173,14 +181,11 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
     public function _sendMail()
     {
         // If sending multiple messages per session use existing adapter
-        if (!($this->_connection instanceof Zend_Mail_Protocol_Smtp)) {
+        if (!($this->_connection instanceof SmtpProtocol\Smtp)) {
             // Check if authentication is required and determine required class
-            $connectionClass = 'Zend_Mail_Protocol_Smtp';
+            $connectionClass = '\Zend\Mail\Protocol\Smtp';
             if ($this->_auth) {
-                $connectionClass .= '_Auth_' . ucwords($this->_auth);
-            }
-            if (!class_exists($connectionClass)) {
-                Zend_Loader::loadClass($connectionClass);
+                $connectionClass .= '\Auth\\' . ucwords($this->_auth);
             }
             $this->setConnection(new $connectionClass($this->_host, $this->_port, $this->_config));
             $this->_connection->connect();
@@ -199,7 +204,7 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
         }
 
         // Issue DATA command to client
-        $this->_connection->data($this->header . Zend_Mime::LINEEND . $this->body);
+        $this->_connection->data($this->header . Mime\Mime::LINEEND . $this->body);
     }
 
     /**
@@ -210,12 +215,12 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
      * @access  protected
      * @param   array $headers
      * @return  void
-     * @throws  Zend_Transport_Exception
+     * @throws  \Zend\Transport\Exception
      */
     protected function _prepareHeaders($headers)
     {
         if (!$this->_mail) {
-            throw new Zend_Mail_Transport_Exception('_prepareHeaders requires a registered Zend_Mail object');
+            throw new Exception('_prepareHeaders requires a registered \Zend\Mail\Mail object');
         }
 
         unset($headers['Bcc']);

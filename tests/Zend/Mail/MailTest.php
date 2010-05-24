@@ -21,92 +21,13 @@
  */
 
 /**
- * Test helper
+ * @namespace
  */
-
-/**
- * Zend_Mail
- */
-
-/**
- * Zend_Mail_Transport_Abstract
- */
-
-/**
- * Zend_Mail_Transport_Sendmail
- */
-
-/**
- * Zend_Mail_Transport_Smtp
- */
-
-/**
- * Zend_Date
- */
-
-/**
- * Zend_Config
- */
-
-/**
- * Mock mail transport class for testing purposes
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Mail_Transport_Mock extends Zend_Mail_Transport_Abstract
-{
-    /**
-     * @var Zend_Mail
-     */
-    public $mail       = null;
-    public $returnPath = null;
-    public $subject    = null;
-    public $from       = null;
-    public $headers    = null;
-    public $called     = false;
-
-    public function _sendMail()
-    {
-        $this->mail       = $this->_mail;
-        $this->subject    = $this->_mail->getSubject();
-        $this->from       = $this->_mail->getFrom();
-        $this->returnPath = $this->_mail->getReturnPath();
-        $this->headers    = $this->_headers;
-        $this->called     = true;
-    }
-}
-
-/**
- * Mock mail transport class for testing Sendmail transport
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Mail_Transport_Sendmail_Mock extends Zend_Mail_Transport_Sendmail
-{
-    /**
-     * @var Zend_Mail
-     */
-    public $mail    = null;
-    public $from    = null;
-    public $subject = null;
-    public $called  = false;
-
-    public function _sendMail()
-    {
-        $this->mail    = $this->_mail;
-        $this->from    = $this->_mail->getFrom();
-        $this->subject = $this->_mail->getSubject();
-        $this->called  = true;
-    }
-}
+namespace ZendTest\Mail;
+use Zend\Mail\Transport;
+use Zend\Mail;
+use Zend\Mime;
+use Zend\Date;
 
 /**
  * @category   Zend
@@ -116,12 +37,19 @@ class Zend_Mail_Transport_Sendmail_Mock extends Zend_Mail_Transport_Sendmail
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
+class MailTest extends \PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        // Set timezone to avoid "date(): It is not safe to rely on the system's timezone settings."
+        // message.
+        date_default_timezone_set('GMT');
+    }
 
-    public function tearDown() {
-        Zend_Mail::clearDefaultFrom();
-        Zend_Mail::clearDefaultReplyTo();
+    public function tearDown()
+    {
+        Mail\Mail::clearDefaultFrom();
+        Mail\Mail::clearDefaultReplyTo();
     }
 
     /**
@@ -131,7 +59,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
      */
     public function testOnlyText()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $res = $mail->setBodyText('This is a test.');
         $mail->setFrom('testmail@example.com', 'test Mail User');
         $mail->setSubject('My Subject');
@@ -142,7 +70,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $mail->addCc('recipient1_cc@example.com', 'Example no. 1 for cc');
         $mail->addCc('recipient2_cc@example.com', 'Example no. 2 for cc');
 
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
 
         $this->assertTrue($mock->called);
@@ -168,7 +96,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
      */
     public function testArrayRecipients()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $res = $mail->setBodyText('Test #2');
         $mail->setFrom('eli@example.com', 'test Mail User');
         $mail->setSubject('Subject #2');
@@ -176,7 +104,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $mail->addCc(array('keith@example.com', 'Cal Evans' => 'cal@example.com'));
         $mail->addBcc(array('ralph@example.com', 'matthew@example.com'));
 
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
 
         $this->assertTrue($mock->called);
@@ -200,7 +128,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
      */
     public function testRecipientsHeaderFormat()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $res = $mail->setBodyText('Test recipients Header format.');
         $mail->setFrom('yoshida@example.com', 'test Mail User');
         $mail->setSubject('Test recipients Header format.');
@@ -208,7 +136,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $mail->addTo('address_to2@example.com', 'noinclude comma nor at mark');
         $mail->addCc('address_cc@example.com', 'include, name_cc');
 
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
 
         $this->assertTrue($mock->called);
@@ -225,7 +153,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
      */
     public function testHeaderEncoding()
     {
-        $mail = new Zend_Mail("UTF-8");
+        $mail = new Mail\Mail("UTF-8");
         $mail->setBodyText('My Nice Test Text');
         // try header injection:
         $mail->addTo("testmail@example.com\nCc:foobar@example.com");
@@ -237,7 +165,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $mail->setSubject("\xC7\xB1\xC7\xAE");
         $mail->addHeader('X-MyTest', "Test-\xC7\xB1", true);
 
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
 
         $this->assertTrue($mock->called);
@@ -286,12 +214,12 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
      */
     public function testHeaderSendMailTransportHaveNoRightTrim()
     {
-        $mail = new Zend_Mail("UTF-8");
+        $mail = new Mail\Mail("UTF-8");
         $mail->setBodyText('My Nice Test Text');
         $mail->addTo("foobar@example.com");
         $mail->setSubject("hello world!");
 
-        $transportMock = new Zend_Mail_Transport_Sendmail_Mock();
+        $transportMock = new SendmailTransportMock();
         $mail->send($transportMock);
 
         $this->assertEquals($transportMock->header, rtrim($transportMock->header));
@@ -304,7 +232,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
      */
     public function testHeaderEncoding2()
     {
-        $mail = new Zend_Mail("UTF-8");
+        $mail = new Mail\Mail("UTF-8");
         $mail->setBodyText('My Nice Test Text');
         // try header injection:
         $mail->addTo("testmail@example.com\nCc:foobar@example.com");
@@ -316,7 +244,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $mail->setSubject("\xC7\xB1\xC7\xAE");
         $mail->addHeader('X-MyTest', "Test-\xC7\xB1", true);
 
-        $mock = new Zend_Mail_Transport_Sendmail_Mock();
+        $mock = new SendmailTransportMock();
         $mail->send($mock);
 
         $this->assertTrue($mock->called);
@@ -364,14 +292,14 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
      */
     public function testMultipartAlternative()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $mail->setBodyText('My Nice Test Text');
         $mail->setBodyHtml('My Nice <b>Test</b> Text');
         $mail->addTo('testmail@example.com', 'Test Recipient');
         $mail->setFrom('mymail@example.com', 'Test Sender');
         $mail->setSubject('Test: Alternate Mail with Zend_Mail');
 
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
 
         // check headers
@@ -412,7 +340,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
      */
     public function testAttachment()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $mail->setBodyText('My Nice Test Text');
         $mail->addTo('testmail@example.com', 'Test Recipient');
         $mail->setFrom('mymail@example.com', 'Test Sender');
@@ -421,7 +349,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $at->type = 'image/gif';
         $at->id = 12;
         $at->filename = 'test.gif';
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
 
         // now check what was generated by Zend_Mail.
@@ -463,7 +391,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
      */
     public function testMultipartAlternativePlusAttachment()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $mail->setBodyText('My Nice Test Text');
         $mail->setBodyHtml('My Nice <b>Test</b> Text');
         $mail->addTo('testmail@example.com', 'Test Recipient');
@@ -475,7 +403,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $at->id = 12;
         $at->filename = 'test.gif';
 
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
 
         // check headers
@@ -516,7 +444,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 
     public function testReturnPath()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $res = $mail->setBodyText('This is a test.');
         $mail->setFrom('testmail@example.com', 'test Mail User');
         $mail->setSubject('My Subject');
@@ -528,14 +456,14 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $mail->addCc('recipient2_cc@example.com', 'Example no. 2 for cc');
 
         // First example: from and return-path should be equal
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
         $this->assertTrue($mock->called);
         $this->assertEquals($mail->getFrom(), $mock->returnPath);
 
         // Second example: from and return-path should not be equal
         $mail->setReturnPath('sender2@example.com');
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
         $this->assertTrue($mock->called);
         $this->assertNotEquals($mail->getFrom(), $mock->returnPath);
@@ -545,17 +473,17 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 
     public function testNoBody()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $mail->setFrom('testmail@example.com', 'test Mail User');
         $mail->setSubject('My Subject');
         $mail->addTo('recipient1@example.com');
 
         // First example: from and return-path should be equal
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         try {
             $mail->send($mock);
             $this->assertTrue($mock->called);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // success
             $this->assertContains('No body specified', $e->getMessage());
         }
@@ -564,11 +492,11 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
     /**
      * Helper method for {@link testZf928ToAndBccHeadersShouldNotMix()}; extracts individual header lines
      *
-     * @param Zend_Mail_Transport_Abstract $mock
+     * @param \Zend\Mail\Transport\AbstractTransport $mock
      * @param string $type
      * @return string
      */
-    protected function _getHeader(Zend_Mail_Transport_Abstract $mock, $type = 'To')
+    protected function _getHeader(Transport\AbstractTransport $mock, $type = 'To')
     {
         $headers = str_replace("\r\n", "\n", $mock->header);
         $headers = explode("\n", $mock->header);
@@ -593,7 +521,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 
     public function testZf928ToAndBccHeadersShouldNotMix()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $mail->setSubject('my subject');
         $mail->setBodyText('my body');
         $mail->setFrom('info@onlime.ch');
@@ -602,7 +530,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $mail->addBcc('second.bcc@email.com');
 
         // test with generic transport
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
         $to  = $this->_getHeader($mock);
         $bcc = $this->_getHeader($mock, 'Bcc');
@@ -610,7 +538,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $this->assertNotContains('second.bcc@email.com', $to, $bcc);
 
         // test with sendmail-like transport
-        $mock = new Zend_Mail_Transport_Sendmail_Mock();
+        $mock = new SendmailTransportMock();
         $mail->send($mock);
         $to  = $this->_getHeader($mock);
         $bcc = $this->_getHeader($mock, 'Bcc');
@@ -621,14 +549,14 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 
     public function testZf927BlankLinesShouldPersist()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $mail->setSubject('my subject');
         $mail->setBodyText("my body\r\n\r\n...after two newlines");
         $mail->setFrom('test@email.com');
         $mail->addTo('test@email.com');
 
         // test with generic transport
-        $mock = new Zend_Mail_Transport_Sendmail_Mock();
+        $mock = new SendmailTransportMock();
         $mail->send($mock);
         $body = quoted_printable_decode($mock->body);
         $this->assertContains("\r\n\r\n...after", $body, $body);
@@ -637,7 +565,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
     public function testGetJustBodyText()
     {
         $text = "my body\r\n\r\n...after two newlines";
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $mail->setBodyText($text);
 
         $this->assertContains('my body', $mail->getBodyText(true));
@@ -647,7 +575,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
     public function testGetJustBodyHtml()
     {
         $text = "<html><head></head><body><p>Some body text</p></body></html>";
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $mail->setBodyHtml($text);
 
         $this->assertContains('Some body text', $mail->getBodyHtml(true));
@@ -655,31 +583,31 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 
     public function testTypeAccessor()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $this->assertNull($mail->getType());
 
-        $mail->setType(Zend_Mime::MULTIPART_ALTERNATIVE);
-        $this->assertEquals(Zend_Mime::MULTIPART_ALTERNATIVE, $mail->getType());
+        $mail->setType(Mime\Mime::MULTIPART_ALTERNATIVE);
+        $this->assertEquals(Mime\Mime::MULTIPART_ALTERNATIVE, $mail->getType());
 
-        $mail->setType(Zend_Mime::MULTIPART_RELATED);
-        $this->assertEquals(Zend_Mime::MULTIPART_RELATED, $mail->getType());
+        $mail->setType(Mime\Mime::MULTIPART_RELATED);
+        $this->assertEquals(Mime\Mime::MULTIPART_RELATED, $mail->getType());
 
         try {
             $mail->setType('text/plain');
-            $this->fail('Invalid Zend_Mime type should throw an exception');
-        } catch (Exception $e) {
+            $this->fail('Invalid Mime type should throw an exception');
+        } catch (\Exception $e) {
         }
     }
 
     public function testDateSet()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $res = $mail->setBodyText('Date Test');
         $mail->setFrom('testmail@example.com', 'test Mail User');
         $mail->setSubject('Date Test');
         $mail->addTo('recipient@example.com');
 
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
 
         $this->assertTrue($mock->called);
@@ -690,14 +618,14 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 
     public function testSetDateInt()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $res = $mail->setBodyText('Date Test');
         $mail->setFrom('testmail@example.com', 'test Mail User');
         $mail->setSubject('Date Test');
         $mail->addTo('recipient@example.com');
         $mail->setDate(362656800);
 
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
 
         $this->assertTrue($mock->called);
@@ -706,14 +634,14 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 
     public function testSetDateString()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $res = $mail->setBodyText('Date Test');
         $mail->setFrom('testmail@example.com', 'test Mail User');
         $mail->setSubject('Date Test');
         $mail->addTo('recipient@example.com');
         $mail->setDate('1981-06-29T12:00:00');
 
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
 
         $this->assertTrue($mock->called);
@@ -722,14 +650,14 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 
     public function testSetDateObject()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $res = $mail->setBodyText('Date Test');
         $mail->setFrom('testmail@example.com', 'test Mail User');
         $mail->setSubject('Date Test');
         $mail->addTo('recipient@example.com');
-        $mail->setDate(new Zend_Date('1981-06-29T12:00:00', Zend_Date::ISO_8601));
+        $mail->setDate(new Date\Date('1981-06-29T12:00:00', Date\Date::ISO_8601));
 
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
 
         $this->assertTrue($mock->called);
@@ -738,52 +666,52 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 
     public function testSetDateInvalidString()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
 
         try {
             $mail->setDate('invalid date');
             $this->fail('Invalid date should throw an exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
     public function testSetDateInvalidType()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
 
         try {
             $mail->setDate(true);
             $this->fail('Invalid date should throw an exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
     public function testSetDateInvalidObject()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
 
         try {
             $mail->setDate($mail);
             $this->fail('Invalid date should throw an exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
     public function testSetDateTwice()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
 
         $mail->setDate();
         try {
             $mail->setDate(123456789);
             $this->fail('setting date twice should throw an exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
     public function testClearDate()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
 
         $mail->setDate();
         $mail->clearDate();
@@ -792,14 +720,14 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 
     public function testAutoMessageId()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $res = $mail->setBodyText('Message ID Test');
         $mail->setFrom('testmail@example.com', 'test Mail User');
         $mail->setSubject('Message ID Test');
         $mail->setMessageId();
         $mail->addTo('recipient@example.com');
 
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
 
         $this->assertTrue($mock->called);
@@ -810,19 +738,19 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 
     public function testSetMessageIdTwice()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
 
         $mail->setMessageId();
         try {
             $mail->setMessageId();
             $this->fail('setting message-id twice should throw an exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
     public function testClearMessageId()
     {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
 
         $mail->setMessageId();
         $mail->clearMessageId();
@@ -834,7 +762,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
      */
     public function testSetReplyTo()
     {
-        $mail = new Zend_Mail('UTF-8');
+        $mail = new Mail\Mail('UTF-8');
         $mail->setReplyTo("foo@zend.com", "\xe2\x82\xa0!");
         $headers = $mail->getHeaders();
 
@@ -847,10 +775,10 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
      */
     public function testSetHeaderEncoding()
     {
-        $mail = new Zend_Mail();
-        $this->assertEquals(Zend_Mime::ENCODING_QUOTEDPRINTABLE, $mail->getHeaderEncoding());
-        $mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
-        $this->assertEquals(Zend_Mime::ENCODING_BASE64,          $mail->getHeaderEncoding());
+        $mail = new Mail\Mail();
+        $this->assertEquals(Mime\Mime::ENCODING_QUOTEDPRINTABLE, $mail->getHeaderEncoding());
+        $mail->setHeaderEncoding(Mime\Mime::ENCODING_BASE64);
+        $this->assertEquals(Mime\Mime::ENCODING_BASE64,          $mail->getHeaderEncoding());
     }
 
     /**
@@ -859,7 +787,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
      */
     public function testIfLongSubjectsHaveCorrectLineBreaksAndEncodingMarks($subject)
     {
-        $mail = new Zend_Mail("UTF-8");
+        $mail = new Mail\Mail("UTF-8");
         $mail->setSubject($subject);
         $headers = $mail->getHeaders();
         $this->assertMailHeaderConformsToRfc($headers['Subject'][0]);
@@ -869,53 +797,53 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
      * @group ZF-7702
      */
     public function testReplyToIsNoRecipient() {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $mail->setReplyTo('foo@example.com','foobar');
         $this->assertEquals(0, count($mail->getRecipients()));
     }
 
     public function testGetReplyToReturnsReplyTo() {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $mail->setReplyTo('foo@example.com');
         $this->assertEquals('foo@example.com',$mail->getReplyTo());
     }
 
     /**
-     * @expectedException Zend_Mail_Exception
+     * @expectedException \Zend\Mail\Exception
      */
     public function testReplyToCantBeSetTwice() {
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $mail->setReplyTo('user@example.com');
         $mail->setReplyTo('user2@example.com');
     }
 
     public function testDefaultFrom() {
-        Zend_Mail::setDefaultFrom('john@example.com','John Doe');
-        $this->assertEquals(array('email' => 'john@example.com','name' =>'John Doe'), Zend_Mail::getDefaultFrom());
+        Mail\Mail::setDefaultFrom('john@example.com','John Doe');
+        $this->assertEquals(array('email' => 'john@example.com','name' =>'John Doe'), Mail\Mail::getDefaultFrom());
 
-        Zend_Mail::clearDefaultFrom();
-        $this->assertEquals(null, Zend_Mail::getDefaultFrom());
+        Mail\Mail::clearDefaultFrom();
+        $this->assertEquals(null, Mail\Mail::getDefaultFrom());
 
-        Zend_Mail::setDefaultFrom('john@example.com');
-        $this->assertEquals(array('email' => 'john@example.com','name' => null), Zend_Mail::getDefaultFrom());
+        Mail\Mail::setDefaultFrom('john@example.com');
+        $this->assertEquals(array('email' => 'john@example.com','name' => null), Mail\Mail::getDefaultFrom());
     }
 
     public function testDefaultReplyTo() {
-        Zend_Mail::setDefaultReplyTo('john@example.com','John Doe');
-        $this->assertEquals(array('email' => 'john@example.com','name' =>'John Doe'), Zend_Mail::getDefaultReplyTo());
+        Mail\Mail::setDefaultReplyTo('john@example.com','John Doe');
+        $this->assertEquals(array('email' => 'john@example.com','name' =>'John Doe'), Mail\Mail::getDefaultReplyTo());
 
-        Zend_Mail::clearDefaultReplyTo();
-        $this->assertEquals(null, Zend_Mail::getDefaultReplyTo());
+        Mail\Mail::clearDefaultReplyTo();
+        $this->assertEquals(null, Mail\Mail::getDefaultReplyTo());
 
-        Zend_Mail::setDefaultReplyTo('john@example.com');
-        $this->assertEquals(array('email' => 'john@example.com','name' => null), Zend_Mail::getDefaultReplyTo());
+        Mail\Mail::setDefaultReplyTo('john@example.com');
+        $this->assertEquals(array('email' => 'john@example.com','name' => null), Mail\Mail::getDefaultReplyTo());
     }
 
     public function testSettingFromDefaults() {
-        Zend_Mail::setDefaultFrom('john@example.com', 'John Doe');
-        Zend_Mail::setDefaultReplyTo('foo@example.com','Foo Bar');
+        Mail\Mail::setDefaultFrom('john@example.com', 'John Doe');
+        Mail\Mail::setDefaultReplyTo('foo@example.com','Foo Bar');
 
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $headers = $mail->setFromToDefaultFrom() // test fluent interface
                         ->setReplyToFromDefault()
                         ->getHeaders();
@@ -928,13 +856,13 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 
     public function testMethodSendUsesDefaults()
     {
-        Zend_Mail::setDefaultFrom('john@example.com', 'John Doe');
-        Zend_Mail::setDefaultReplyTo('foo@example.com','Foo Bar');
+        Mail\Mail::setDefaultFrom('john@example.com', 'John Doe');
+        Mail\Mail::setDefaultReplyTo('foo@example.com','Foo Bar');
 
-        $mail = new Zend_Mail();
+        $mail = new Mail\Mail();
         $mail->setBodyText('Defaults Test');
 
-        $mock = new Zend_Mail_Transport_Mock();
+        $mock = new TransportMock();
         $mail->send($mock);
         $headers = $mock->headers;
 
@@ -949,7 +877,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
      */
     public function testSendmailTransportShouldAcceptConfigAndArrayAsConstructor()
     {
-        $mail = new Zend_Mail("UTF-8");
+        $mail = new Mail\Mail("UTF-8");
         $mail->setBodyText('My Nice Test Text');
         $mail->addTo('foobar@example.com');
         $mail->setSubject('hello world!');
@@ -957,10 +885,10 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $params = array('envelope'=> '-tjohn@example.com', 'foo' => '-fbar');
         $expected = '-tjohn@example.com -fbar';
 
-        $transportMock = new Zend_Mail_Transport_Sendmail_Mock($params);
+        $transportMock = new SendmailTransportMock($params);
         $this->assertEquals($expected, $transportMock->parameters);
 
-        $transportMock = new Zend_Mail_Transport_Sendmail_Mock(new Zend_Config($params));
+        $transportMock = new SendmailTransportMock(new \Zend\Config\Config($params));
         $this->assertEquals($expected, $transportMock->parameters);
     }
 
@@ -970,17 +898,17 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
      */
     public function testSendmailTransportThrowsExceptionWithInvalidParams()
     {
-        $mail = new Zend_Mail("UTF-8");
+        $mail = new Mail\Mail("UTF-8");
         $mail->setBodyText('My Nice Test Text');
         $mail->addTo('foobar@example.com');
         $mail->setSubject('hello world!');
 
-        $transport = new Zend_Mail_Transport_Sendmail();
+        $transport = new Transport\Sendmail();
         $transport->parameters = true;
         try {
             $mail->send($transport);
             $this->fail('Exception should have been thrown, but wasn\'t');
-        } catch(Zend_Mail_Transport_Exception $e) {
+        } catch(Transport\Exception $e) {
         	// do nothing
         }
     }
@@ -1008,7 +936,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
     protected function assertMailHeaderConformsToRfc($header)
     {
         $this->numAssertions++;
-        $parts = explode(Zend_Mime::LINEEND, $header);
+        $parts = explode(Mime\Mime::LINEEND, $header);
         if(count($parts) > 0) {
             for($i = 0; $i < count($parts); $i++) {
                 if(preg_match('/(=?[a-z0-9-_]+\?[q|b]{1}\?)/i', $parts[$i], $matches)) {
@@ -1067,7 +995,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
                             ));
                         }
                     }
-                } else if(Zend_Mime::isPrintable($parts[$i]) == false) {
+                } else if(Mime\Mime::isPrintable($parts[$i]) == false) {
                     $this->fail(sprintf(
                         "Encoded-word in line %d contains non printable characters.",
                         $i+1
@@ -1077,4 +1005,57 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         }
     }
 
+}
+
+
+/**
+ * Test helper
+ */
+
+/**
+ * Mock mail transport class for testing purposes
+ */
+class TransportMock extends Transport\AbstractTransport
+{
+    /**
+     * @var \Zend\Mail\Mail
+     */
+    public $mail       = null;
+    public $returnPath = null;
+    public $subject    = null;
+    public $from       = null;
+    public $headers    = null;
+    public $called     = false;
+
+    public function _sendMail()
+    {
+        $this->mail       = $this->_mail;
+        $this->subject    = $this->_mail->getSubject();
+        $this->from       = $this->_mail->getFrom();
+        $this->returnPath = $this->_mail->getReturnPath();
+        $this->headers    = $this->_headers;
+        $this->called     = true;
+    }
+}
+
+/**
+ * Mock mail transport class for testing Sendmail transport
+ */
+class SendmailTransportMock extends Transport\Sendmail
+{
+    /**
+     * @var Zend_Mail
+     */
+    public $mail    = null;
+    public $from    = null;
+    public $subject = null;
+    public $called  = false;
+
+    public function _sendMail()
+    {
+        $this->mail    = $this->_mail;
+        $this->from    = $this->_mail->getFrom();
+        $this->subject = $this->_mail->getSubject();
+        $this->called  = true;
+    }
 }

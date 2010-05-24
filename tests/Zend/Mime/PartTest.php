@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Mime;
+use Zend\Mime;
+
+/**
  * Zend_Mime_Part
  */
 
@@ -36,7 +42,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mime
  */
-class Zend_Mime_PartTest extends PHPUnit_Framework_TestCase
+class PartTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * MIME part test object
@@ -50,8 +56,8 @@ class Zend_Mime_PartTest extends PHPUnit_Framework_TestCase
     {
         $this->_testText = 'safdsafsa�lg ��gd�� sd�jg�sdjg�ld�gksd�gj�sdfg�dsj�gjsd�gj�dfsjg�dsfj�djs�g kjhdkj '
                        . 'fgaskjfdh gksjhgjkdh gjhfsdghdhgksdjhg';
-        $this->part = new Zend_Mime_Part($this->_testText);
-        $this->part->encoding = Zend_Mime::ENCODING_BASE64;
+        $this->part = new Mime\Part($this->_testText);
+        $this->part->encoding = Mime\Mime::ENCODING_BASE64;
         $this->part->type = "text/plain";
         $this->part->filename = 'test.txt';
         $this->part->disposition = 'attachment';
@@ -62,7 +68,7 @@ class Zend_Mime_PartTest extends PHPUnit_Framework_TestCase
     public function testHeaders()
     {
         $expectedHeaders = array('Content-Type: text/plain',
-                                 'Content-Transfer-Encoding: ' . Zend_Mime::ENCODING_BASE64,
+                                 'Content-Transfer-Encoding: ' . Mime\Mime::ENCODING_BASE64,
                                  'Content-Disposition: attachment',
                                  'filename="test.txt"',
                                  'charset=iso8859-1',
@@ -81,11 +87,11 @@ class Zend_Mime_PartTest extends PHPUnit_Framework_TestCase
         $content = $this->part->getContent();
         $this->assertEquals($this->_testText, base64_decode($content));
         // Test with quotedPrintable Encoding:
-        $this->part->encoding = Zend_Mime::ENCODING_QUOTEDPRINTABLE;
+        $this->part->encoding = Mime\Mime::ENCODING_QUOTEDPRINTABLE;
         $content = $this->part->getContent();
         $this->assertEquals($this->_testText, quoted_printable_decode($content));
         // Test with 8Bit encoding
-        $this->part->encoding = Zend_Mime::ENCODING_8BIT;
+        $this->part->encoding = Mime\Mime::ENCODING_8BIT;
         $content = $this->part->getContent();
         $this->assertEquals($this->_testText, $content);
     }
@@ -98,8 +104,8 @@ class Zend_Mime_PartTest extends PHPUnit_Framework_TestCase
         // Test Base64
         $fp = fopen($testfile,'rb');
         $this->assertTrue(is_resource($fp));
-        $part = new Zend_Mime_Part($fp);
-        $part->encoding = Zend_Mime::ENCODING_BASE64;
+        $part = new Mime\Part($fp);
+        $part->encoding = Mime\Mime::ENCODING_BASE64;
         $fp2 = $part->getEncodedStream();
         $this->assertTrue(is_resource($fp2));
         $encoded = stream_get_contents($fp2);
@@ -109,8 +115,8 @@ class Zend_Mime_PartTest extends PHPUnit_Framework_TestCase
         // test QuotedPrintable
         $fp = fopen($testfile,'rb');
         $this->assertTrue(is_resource($fp));
-        $part = new Zend_Mime_Part($fp);
-        $part->encoding = Zend_Mime::ENCODING_QUOTEDPRINTABLE;
+        $part = new Mime\Part($fp);
+        $part->encoding = Mime\Mime::ENCODING_QUOTEDPRINTABLE;
         $fp2 = $part->getEncodedStream();
         $this->assertTrue(is_resource($fp2));
         $encoded = stream_get_contents($fp2);

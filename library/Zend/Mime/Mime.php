@@ -19,6 +19,10 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace Zend\Mime;
 
 /**
  * Support class for MultiPart Mime Messages
@@ -28,7 +32,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Mime
+class Mime
 {
     const TYPE_OCTETSTREAM = 'application/octet-stream';
     const TYPE_TEXT = 'text/plain';

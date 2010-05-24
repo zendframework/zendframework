@@ -21,8 +21,10 @@
  */
 
 /**
- * Zend_Mime_Message
+ * @namespace
  */
+namespace ZendTest\Mime;
+use Zend\Mime;
 
 /**
  * PHPUnit test case
@@ -36,25 +38,25 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mime
  */
-class Zend_Mime_MessageTest extends PHPUnit_Framework_TestCase
+class MessageTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testMultiPart()
     {
-        $msg = new Zend_Mime_Message();  // No Parts
+        $msg = new Mime\Message();  // No Parts
         $this->assertFalse($msg->isMultiPart());
     }
 
     public function testSetGetParts()
     {
-        $msg = new Zend_Mime_Message();  // No Parts
+        $msg = new Mime\Message();  // No Parts
         $p = $msg->getParts();
         $this->assertTrue(is_array($p));
         $this->assertTrue(count($p) == 0);
 
         $p2 = array();
-        $p2[] = new Zend_Mime_Part('This is a test');
-        $p2[] = new Zend_Mime_Part('This is another test');
+        $p2[] = new Mime\Part('This is a test');
+        $p2[] = new Mime\Part('This is another test');
         $msg->setParts($p2);
         $p = $msg->getParts();
         $this->assertTrue(is_array($p));
@@ -63,23 +65,23 @@ class Zend_Mime_MessageTest extends PHPUnit_Framework_TestCase
 
     public function testGetMime()
     {
-        $msg = new Zend_Mime_Message();  // No Parts
+        $msg = new Mime\Message();  // No Parts
         $m = $msg->getMime();
-        $this->assertType('Zend_Mime', $m);
+        $this->assertType('\Zend\Mime\Mime', $m);
 
-        $msg = new Zend_Mime_Message();  // No Parts
-        $mime = new Zend_Mime('1234');
+        $msg = new Mime\Message();  // No Parts
+        $mime = new Mime\Mime('1234');
         $msg->setMime($mime);
         $m2 = $msg->getMime();
-        $this->assertType('Zend_Mime', $m2);
+        $this->assertType('\Zend\Mime\Mime', $m2);
         $this->assertEquals('1234', $m2->boundary());
     }
 
     public function testGenerate()
     {
-        $msg = new Zend_Mime_Message();  // No Parts
-        $p1 = new Zend_Mime_Part('This is a test');
-        $p2 = new Zend_Mime_Part('This is another test');
+        $msg = new Mime\Message();  // No Parts
+        $p1 = new Mime\Part('This is a test');
+        $p2 = new Mime\Part('This is another test');
         $msg->addPart($p1);
         $msg->addPart($p2);
         $res = $msg->generateMessage();
@@ -99,7 +101,7 @@ class Zend_Mime_MessageTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * check if decoding a string into a Zend_Mime_Message object works
+     * check if decoding a string into a \Zend\Mime\Message object works
      *
      */
     public function testDecodeMimeMessage()
@@ -120,7 +122,7 @@ Content-ID: <12>
 This is another test
 --=_af4357ef34b786aae1491b0a2d14399f--
 EOD;
-        $res = Zend_Mime_Message::createFromMessage($text, '=_af4357ef34b786aae1491b0a2d14399f');
+        $res = Mime\Message::createFromMessage($text, '=_af4357ef34b786aae1491b0a2d14399f');
 
         $parts = $res->getParts();
         $this->assertEquals(2, count($parts));

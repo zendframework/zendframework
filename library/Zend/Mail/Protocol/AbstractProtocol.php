@@ -22,13 +22,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Mail\Protocol;
+use Zend\Validator\Hostname as HostnameValidator;
+use Zend\Validator;
+
+/**
  * Zend_Mail_Protocol_Abstract
  *
  * Provides low-level methods for concrete adapters to communicate with a remote mail server and track requests and responses.
  *
- * @uses       Zend_Mail_Protocol_Exception
- * @uses       Zend_Validate
- * @uses       Zend_Validate_Hostname
+ * @uses       \Zend\Mail\Protocol\Exception
+ * @uses       \Zend\Validator\ValidatorChain
+ * @uses       \Zend\Validator\Hostname\Hostname
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
@@ -37,7 +44,7 @@
  * @version    $Id$
  * @todo Implement proxy settings
  */
-abstract class Zend_Mail_Protocol_Abstract
+abstract class AbstractProtocol
 {
     /**
      * Mail default EOL string
@@ -72,7 +79,7 @@ abstract class Zend_Mail_Protocol_Abstract
 
     /**
      * Instance of Zend_Validate to check hostnames
-     * @var Zend_Validate
+     * @var \Zend\Validator\ValidatorChain
      */
     protected $_validHost;
 
@@ -118,16 +125,16 @@ abstract class Zend_Mail_Protocol_Abstract
      *
      * @param  string  $host OPTIONAL Hostname of remote connection (default: 127.0.0.1)
      * @param  integer $port OPTIONAL Port number (default: null)
-     * @throws Zend_Mail_Protocol_Exception
+     * @throws \Zend\Mail\Protocol\Exception
      * @return void
      */
     public function __construct($host = '127.0.0.1', $port = null)
     {
-        $this->_validHost = new Zend_Validate();
-        $this->_validHost->addValidator(new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_ALL));
+        $this->_validHost = new Validator\ValidatorChain();
+        $this->_validHost->addValidator(new HostnameValidator\Hostname(HostnameValidator\Hostname::ALLOW_ALL));
 
         if (!$this->_validHost->isValid($host)) {
-            throw new Zend_Mail_Protocol_Exception(join(', ', $this->_validHost->getMessages()));
+            throw new Exception(join(', ', $this->_validHost->getMessages()));
         }
 
         $this->_host = $host;
@@ -218,7 +225,7 @@ abstract class Zend_Mail_Protocol_Abstract
      * An example $remote string may be 'tcp://mail.example.com:25' or 'ssh://hostname.com:2222'
      *
      * @param  string $remote Remote
-     * @throws Zend_Mail_Protocol_Exception
+     * @throws \Zend\Mail\Protocol\Exception
      * @return boolean
      */
     protected function _connect($remote)
@@ -233,11 +240,11 @@ abstract class Zend_Mail_Protocol_Abstract
             if ($errorNum == 0) {
                 $errorStr = 'Could not open socket';
             }
-            throw new Zend_Mail_Protocol_Exception($errorStr);
+            throw new Exception($errorStr);
         }
 
         if (($result = stream_set_timeout($this->_socket, self::TIMEOUT_CONNECTION)) === false) {
-            throw new Zend_Mail_Protocol_Exception('Could not set stream timeout');
+            throw new Exception('Could not set stream timeout');
         }
 
         return $result;
@@ -261,13 +268,13 @@ abstract class Zend_Mail_Protocol_Abstract
      * Send the given request followed by a LINEEND to the server.
      *
      * @param  string $request
-     * @throws Zend_Mail_Protocol_Exception
+     * @throws \Zend\Mail\Protocol\Exception
      * @return integer|boolean Number of bytes written to remote host
      */
     protected function _send($request)
     {
         if (!is_resource($this->_socket)) {
-            throw new Zend_Mail_Protocol_Exception('No connection has been established to ' . $this->_host);
+            throw new Exception('No connection has been established to ' . $this->_host);
         }
 
         $this->_request = $request;
@@ -278,7 +285,7 @@ abstract class Zend_Mail_Protocol_Abstract
         $this->_addLog($request . self::EOL);
 
         if ($result === false) {
-            throw new Zend_Mail_Protocol_Exception('Could not send request to ' . $this->_host);
+            throw new Exception('Could not send request to ' . $this->_host);
         }
 
         return $result;
@@ -289,13 +296,13 @@ abstract class Zend_Mail_Protocol_Abstract
      * Get a line from the stream.
      *
      * @var    integer $timeout Per-request timeout value if applicable
-     * @throws Zend_Mail_Protocol_Exception
+     * @throws \Zend\Mail\Protocol\Exception
      * @return string
      */
     protected function _receive($timeout = null)
     {
         if (!is_resource($this->_socket)) {
-            throw new Zend_Mail_Protocol_Exception('No connection has been established to ' . $this->_host);
+            throw new Exception('No connection has been established to ' . $this->_host);
         }
 
         // Adapters may wish to supply per-commend timeouts according to appropriate RFC
@@ -313,11 +320,11 @@ abstract class Zend_Mail_Protocol_Abstract
         $info = stream_get_meta_data($this->_socket);
 
         if (!empty($info['timed_out'])) {
-            throw new Zend_Mail_Protocol_Exception($this->_host . ' has timed out');
+            throw new Exception($this->_host . ' has timed out');
         }
 
         if ($reponse === false) {
-            throw new Zend_Mail_Protocol_Exception('Could not read from ' . $this->_host);
+            throw new Exception('Could not read from ' . $this->_host);
         }
 
         return $reponse;
@@ -331,7 +338,7 @@ abstract class Zend_Mail_Protocol_Abstract
      * Throws a Zend_Mail_Protocol_Exception if an unexpected code is returned.
      *
      * @param  string|array $code One or more codes that indicate a successful response
-     * @throws Zend_Mail_Protocol_Exception
+     * @throws \Zend\Mail\Protocol\Exception
      * @return string Last line of response string
      */
     protected function _expect($code, $timeout = null)
@@ -359,7 +366,7 @@ abstract class Zend_Mail_Protocol_Abstract
         } while (strpos($more, '-') === 0); // The '-' message prefix indicates an information string instead of a response string.
 
         if ($errMsg !== '') {
-            throw new Zend_Mail_Protocol_Exception($errMsg);
+            throw new Exception($errMsg);
         }
 
         return $msg;

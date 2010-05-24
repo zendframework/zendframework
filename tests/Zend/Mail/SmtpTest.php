@@ -21,18 +21,9 @@
  */
 
 /**
- * Zend_Mail_Protocol_Smtp
+ * @namespace
  */
-
-
-/**
- * Zend_Mail_Transport_Smtp
- */
-
-
-/**
- * PHPUnit test case
- */
+namespace ZendTest\Mail;
 
 /**
  * @category   Zend
@@ -42,7 +33,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class Zend_Mail_SmtpTest extends PHPUnit_Framework_TestCase
+class SmtpTest extends \PHPUnit_Framework_TestCase
 {
     protected $_params;
     protected $_transport;
@@ -60,20 +51,20 @@ class Zend_Mail_SmtpTest extends PHPUnit_Framework_TestCase
     public function testTransportSetup()
     {
         try {
-            $this->_transport = new Zend_Mail_Transport_Smtp($this->_params['host'], $this->_params);
-        } catch (Exception $e) {
+            $this->_transport = new \Zend\Mail\Transport\Smtp($this->_params['host'], $this->_params);
+        } catch (\Exception $e) {
             $this->fail('exception raised while creating smtp transport');
         }
 
         try {
-            $this->_connection = new Zend_Mail_Protocol_Smtp($this->_params['host'], $this->_params['port']);
+            $this->_connection = new \Zend\Mail\Protocol\Smtp\Smtp($this->_params['host'], $this->_params['port']);
             $this->_transport->setConnection($this->_connection);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->fail('exception raised while setting smtp transport connection');
         }
 
         $this->_connection = $this->_transport->getConnection();
-        if (!($this->_connection instanceof Zend_Mail_Protocol_Abstract)) {
+        if (!($this->_connection instanceof \Zend\Mail\Protocol\AbstractProtocol)) {
             $this->fail('smtp transport connection is not an instance of protocol abstract');
         }
     }

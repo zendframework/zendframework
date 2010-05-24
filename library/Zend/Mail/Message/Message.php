@@ -20,15 +20,22 @@
  */
 
 /**
- * @uses       Zend_Mail_Exception
- * @uses       Zend_Mail_Message_Interface
- * @uses       Zend_Mail_Part
+ * @namespace
+ */
+namespace Zend\Mail\Message;
+use Zend\Mail;
+use Zend\Mail\Part as MailPart;
+
+/**
+ * @uses       \Zend\Mail\Exception
+ * @uses       \Zend\Mail\Message\MessageInterface
+ * @uses       \Zend\Mail\Part\Part
  * @category   Zend
  * @package    Zend_Mail
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Mail_Message extends Zend_Mail_Part implements Zend_Mail_Message_Interface
+class Message extends MailPart\Part implements MessageInterface
 {
     /**
      * flags for this message
@@ -44,7 +51,7 @@ class Zend_Mail_Message extends Zend_Mail_Part implements Zend_Mail_Message_Inte
      * - flags array with flags for message, keys are ignored, use constants defined in Zend_Mail_Storage
      *
      * @param  string $rawMessage  full message with or without headers
-     * @throws Zend_Mail_Exception
+     * @throws \Zend\Mail\Exception
      */
     public function __construct(array $params)
     {
@@ -52,7 +59,7 @@ class Zend_Mail_Message extends Zend_Mail_Part implements Zend_Mail_Message_Inte
             if (!is_resource($params['file'])) {
                 $params['raw'] = @file_get_contents($params['file']);
                 if ($params['raw'] === false) {
-                    throw new Zend_Mail_Exception('could not open file');
+                    throw new Mail\Exception('could not open file');
                 }
             } else {
                 $params['raw'] = stream_get_contents($params['file']);
@@ -80,7 +87,7 @@ class Zend_Mail_Message extends Zend_Mail_Part implements Zend_Mail_Message_Inte
     /**
      * check if flag is set
      *
-     * @param mixed $flag a flag name, use constants defined in Zend_Mail_Storage
+     * @param mixed $flag a flag name, use constants defined in \Zend\Mail\Storage\Storage
      * @return bool true if set, otherwise false
      */
     public function hasFlag($flag)

@@ -14,26 +14,46 @@
  *
  * @category   Zend
  * @package    Zend_Mail
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Mail\Message;
+
+/**
  * @category   Zend
  * @package    Zend_Mail
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Mail_Storage
+
+interface MessageInterface
 {
-    // maildir and IMAP flags, using IMAP names, where possible to be able to distinguish between IMAP
-    // system flags and other flags
-    const FLAG_PASSED   = 'Passed';
-    const FLAG_SEEN     = '\Seen';
-    const FLAG_ANSWERED = '\Answered';
-    const FLAG_FLAGGED  = '\Flagged';
-    const FLAG_DELETED  = '\Deleted';
-    const FLAG_DRAFT    = '\Draft';
-    const FLAG_RECENT   = '\Recent';
+    /**
+     * return toplines as found after headers
+     *
+     * @return string toplines
+     */
+    public function getTopLines();
+
+    /**
+     * check if flag is set
+     *
+     * @param mixed $flag a flag name, use constants defined in \Zend\Mail\Storage\Storage
+     * @return bool true if set, otherwise false
+     */
+    public function hasFlag($flag);
+
+    /**
+     * get all set flags
+     *
+     * @return array array with flags, key and value are the same for easy lookup
+     */
+    public function getFlags();
 }

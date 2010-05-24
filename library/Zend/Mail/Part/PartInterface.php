@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace Zend\Mail\Part;
 
 /**
  * @uses       RecursiveIterator
@@ -29,7 +33,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Mail_Part_Interface extends RecursiveIterator
+interface PartInterface extends \RecursiveIterator
 {
     /**
      * Check if part is a multipart message
@@ -45,7 +49,7 @@ interface Zend_Mail_Part_Interface extends RecursiveIterator
      * If part is multipart the raw content of this part with all sub parts is returned
      *
      * @return string body
-     * @throws Zend_Mail_Exception
+     * @throws \Zend\Mail\Exception
      */
     public function getContent();
 
@@ -60,8 +64,8 @@ interface Zend_Mail_Part_Interface extends RecursiveIterator
      * Get part of multipart message
      *
      * @param  int $num number of part starting with 1 for first part
-     * @return Zend_Mail_Part wanted part
-     * @throws Zend_Mail_Exception
+     * @return \Zend\Mail\Part\Part wanted part
+     * @throws \Zend\Mail\Exception
      */
     public function getPart($num);
 
@@ -92,7 +96,7 @@ interface Zend_Mail_Part_Interface extends RecursiveIterator
      * @param  string $name   name of header, matches case-insensitive, but camel-case is replaced with dashes
      * @param  string $format change type of return value to 'string' or 'array'
      * @return string|array value of header in wanted or internal format
-     * @throws Zend_Mail_Exception
+     * @throws \Zend\Mail\Exception
      */
     public function getHeader($name, $format = null);
 
@@ -109,7 +113,7 @@ interface Zend_Mail_Part_Interface extends RecursiveIterator
      * @param  string $wantedPart the wanted part, default is first, if null an array with all parts is returned
      * @param  string $firstName  key name for the first part
      * @return string|array wanted part or all parts as array($firstName => firstPart, partname => value)
-     * @throws Zend_Exception, Zend_Mail_Exception
+     * @throws Zend_Exception, \Zend\Mail\Exception
      */
     public function getHeaderField($name, $wantedPart = 0, $firstName = 0);
 
@@ -119,11 +123,11 @@ interface Zend_Mail_Part_Interface extends RecursiveIterator
      *
      * This getter is short for Zend_Mail_Part::getHeader($name, 'string')
      *
-     * @see Zend_Mail_Part::getHeader()
+     * @see \Zend\Mail\Part::getHeader()
      *
      * @param  string $name header name
      * @return string value of header
-     * @throws Zend_Mail_Exception
+     * @throws \Zend\Mail\Exception
      */
     public function __get($name);
 

@@ -20,12 +20,18 @@
  */
 
 /**
- * @uses       Zend_Exception
+ * @namespace
+ */
+namespace Zend\Mail;
+use Zend;
+
+/**
+ * @uses       \Zend\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Mail_Exception extends Zend_Exception
+class Exception extends Zend\Exception
 {}
 

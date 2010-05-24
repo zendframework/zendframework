@@ -21,13 +21,18 @@
  */
 
 /**
- * @uses       Zend_Mail_Exception
+ * @namespace
+ */
+namespace Zend\Mail\Protocol;
+use Zend\Mail;
+
+/**
+ * @uses       \Zend\Mail\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Mail_Protocol_Exception extends Zend_Mail_Exception
+class Exception extends Mail\Exception
 {}
-

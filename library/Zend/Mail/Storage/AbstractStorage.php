@@ -21,18 +21,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Mail\Storage;
+
+/**
  * @uses       ArrayAccess
  * @uses       Countable
  * @uses       OutOfBoundsException
  * @uses       SeekableIterator
- * @uses       Zend_Mail_Storage_Exception
+ * @uses       \Zend\Mail\Storage\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, SeekableIterator
+abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIterator
 {
     /**
      * class capabilities with default values
@@ -61,7 +66,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
      * used message class, change it in an extened class to extend the returned message class
      * @var string
      */
-    protected $_messageClass = 'Zend_Mail_Message';
+    protected $_messageClass = '\Zend\Mail\Message';
 
     /**
      * Getter for has-properties. The standard has properties
@@ -74,7 +79,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
      *
      * @param  string $var  property name
      * @return bool         supported or not
-     * @throws Zend_Mail_Storage_Exception
+     * @throws \Zend\Mail\Storage\Exception
      */
     public function __get($var)
     {
@@ -83,7 +88,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
             return isset($this->_has[$var]) ? $this->_has[$var] : null;
         }
 
-        throw new Zend_Mail_Storage_Exception($var . ' not found');
+        throw new Exception($var . ' not found');
     }
 
 
@@ -102,7 +107,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
      * Count messages messages in current box/folder
      *
      * @return int number of messages
-     * @throws Zend_Mail_Storage_Exception
+     * @throws \Zend\Mail\Storage\Exception
      */
     abstract public function countMessages();
 
@@ -120,7 +125,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
      * Get a message with headers and body
      *
      * @param  $id int number of message
-     * @return Zend_Mail_Message
+     * @return \Zend\Mail\Message\Message
      */
     abstract public function getMessage($id);
 
@@ -148,7 +153,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
      * Create instance with parameters
      *
      * @param  array $params mail reader specific parameters
-     * @throws Zend_Mail_Storage_Exception
+     * @throws \Zend\Mail\Storage\Exception
      */
     abstract public function __construct($params);
 
@@ -192,7 +197,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
      *
      * @param int|null $id message number
      * @return array|string message number for given message or all messages as array
-     * @throws Zend_Mail_Storage_Exception
+     * @throws \Zend\Mail\Storage\Exception
      */
     abstract public function getUniqueId($id = null);
 
@@ -204,7 +209,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
      *
      * @param string $id unique id
      * @return int message number
-     * @throws Zend_Mail_Storage_Exception
+     * @throws \Zend\Mail\Storage\Exception
      */
     abstract public function getNumberByUniqueId($id);
 
@@ -233,7 +238,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
             if ($this->getMessage($id)) {
                 return true;
             }
-        } catch(Zend_Mail_Storage_Exception $e) {}
+        } catch(Exception $e) {}
 
         return false;
      }
@@ -243,7 +248,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
       * ArrayAccess::offsetGet()
       *
       * @param    int $id
-      * @return   Zend_Mail_Message message object
+      * @return   \Zend\Mail\Message\Message message object
       */
      public function offsetGet($id)
      {
@@ -256,12 +261,12 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
       *
       * @param    id     $id
       * @param    mixed  $value
-      * @throws   Zend_Mail_Storage_Exception
+      * @throws   \Zend\Mail\Storage\Exception
       * @return   void
       */
      public function offsetSet($id, $value)
      {
-        throw new Zend_Mail_Storage_Exception('cannot write mail messages via array access');
+        throw new Exception('cannot write mail messages via array access');
      }
 
 
@@ -296,7 +301,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
      /**
       * Iterator::current()
       *
-      * @return   Zend_Mail_Message current message
+      * @return   \Zend\Mail\Message\Message current message
       */
      public function current()
      {
@@ -354,7 +359,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
         }
 
         if ($pos > $this->_iterationMax) {
-            throw new OutOfBoundsException('this position does not exist');
+            throw new \OutOfBoundsException('this position does not exist');
         }
         $this->_iterationPos = $pos;
      }

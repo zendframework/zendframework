@@ -21,6 +21,13 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Mail;
+use Zend\Mail\Storage;
+use Zend\Mail\Protocol;
+
+/**
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage UnitTests
@@ -28,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
+class ImapTest extends \PHPUnit_Framework_TestCase
 {
     protected $_params;
 
@@ -95,8 +102,8 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
     public function testConnectOk()
     {
         try {
-            $mail = new Zend_Mail_Storage_Imap($this->_params);
-        } catch (Exception $e) {
+            $mail = new Storage\Imap($this->_params);
+        } catch (\Exception $e) {
             $this->fail('exception raised while loading connection to imap server');
         }
     }
@@ -104,8 +111,8 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
     public function testConnectConfig()
     {
         try {
-            $mail = new Zend_Mail_Storage_Imap(new Zend_Config($this->_params));
-        } catch (Exception $e) {
+            $mail = new Storage\Imap(new \Zend\Config\Config($this->_params));
+        } catch (\Exception $e) {
             $this->fail('exception raised while loading connection to imap server');
         }
     }
@@ -114,8 +121,8 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
     {
         $this->_params['host'] = 'example.example';
         try {
-            $mail = new Zend_Mail_Storage_Imap($this->_params);
-        } catch (Exception $e) {
+            $mail = new Storage\Imap($this->_params);
+        } catch (\Exception $e) {
             return; // test ok
         }
 
@@ -126,8 +133,8 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
     public function testNoParams()
     {
         try {
-            $mail = new Zend_Mail_Storage_Imap(array());
-        } catch (Exception $e) {
+            $mail = new Storage\Imap(array());
+        } catch (\Exception $e) {
             return; // test ok
         }
 
@@ -143,8 +150,8 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
         $this->_params['ssl'] = 'SSL';
         try {
-            $mail = new Zend_Mail_Storage_Imap($this->_params);
-        } catch (Exception $e) {
+            $mail = new Storage\Imap($this->_params);
+        } catch (\Exception $e) {
             $this->fail('exception raised while loading connection to imap server with SSL');
         }
     }
@@ -157,8 +164,8 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
         $this->_params['ssl'] = 'TLS';
         try {
-            $mail = new Zend_Mail_Storage_Imap($this->_params);
-        } catch (Exception $e) {
+            $mail = new Storage\Imap($this->_params);
+        } catch (\Exception $e) {
             $this->fail('exception raised while loading connection to imap server with TLS');
         }
     }
@@ -168,8 +175,8 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
         $this->_params['port'] = TESTS_ZEND_MAIL_IMAP_INVALID_PORT;
 
         try {
-            $mail = new Zend_Mail_Storage_Imap($this->_params);
-        } catch (Exception $e) {
+            $mail = new Storage\Imap($this->_params);
+        } catch (\Exception $e) {
             return; // test ok
         }
 
@@ -181,8 +188,8 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
         $this->_params['port'] = TESTS_ZEND_MAIL_IMAP_WRONG_PORT;
 
         try {
-            $mail = new Zend_Mail_Storage_Imap($this->_params);
-        } catch (Exception $e) {
+            $mail = new Storage\Imap($this->_params);
+        } catch (\Exception $e) {
             return; // test ok
         }
 
@@ -195,8 +202,8 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
         $this->_params['user'] = "there is no\nnobody";
 
         try {
-            $mail = new Zend_Mail_Storage_Imap($this->_params);
-        } catch (Exception $e) {
+            $mail = new Storage\Imap($this->_params);
+        } catch (\Exception $e) {
             return; // test ok
         }
 
@@ -205,18 +212,18 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testWithInstanceConstruction()
     {
-        $protocol = new Zend_Mail_Protocol_Imap($this->_params['host']);
+        $protocol = new Protocol\Imap($this->_params['host']);
         $protocol->login($this->_params['user'], $this->_params['password']);
         // if $protocol is invalid the constructor fails while selecting INBOX
-        $mail = new Zend_Mail_Storage_Imap($protocol);
+        $mail = new Storage\Imap($protocol);
     }
 
     public function testWithNotConnectedInstance()
     {
-        $protocol = new Zend_Mail_Protocol_Imap();
+        $protocol = new Protocol\Imap();
         try {
-            $mail = new Zend_Mail_Storage_Imap($protocol);
-        } catch (Zend_Mail_Protocol_Exception $e) {
+            $mail = new Storage\Imap($protocol);
+        } catch (Protocol\Exception $e) {
             return; // test ok
         }
 
@@ -225,10 +232,10 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testWithNotLoggedInstance()
     {
-        $protocol = new Zend_Mail_Protocol_Imap($this->_params['host']);
+        $protocol = new Protocol\Imap($this->_params['host']);
         try {
-            $mail = new Zend_Mail_Storage_Imap($protocol);
-        } catch (Zend_Mail_Storage_Exception $e) {
+            $mail = new Storage\Imap($protocol);
+        } catch (Storage\Exception $e) {
             return; // test ok
         }
 
@@ -240,8 +247,8 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
         $this->_params['folder'] = 'this folder does not exist on your server';
 
         try {
-            $mail = new Zend_Mail_Storage_Imap($this->_params);
-        } catch (Exception $e) {
+            $mail = new Storage\Imap($this->_params);
+        } catch (\Exception $e) {
             return; // test ok
         }
 
@@ -251,11 +258,11 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testClose()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         try {
             $mail->close();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->fail('exception raised while closing imap connection');
         }
     }
@@ -264,32 +271,32 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testHasTop()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $this->assertTrue($mail->hasTop);
     }
 */
     public function testHasCreate()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $this->assertFalse($mail->hasCreate);
     }
 
     public function testNoop()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         try {
             $mail->noop();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->fail('exception raised while doing nothing (noop)');
         }
     }
 
     public function testCount()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $count = $mail->countMessages();
         $this->assertEquals(7, $count);
@@ -297,7 +304,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testSize()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
         $shouldSizes = array(1 => 397, 89, 694, 452, 497, 101, 139);
 
 
@@ -307,7 +314,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testSingleSize()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $size = $mail->getSize(2);
         $this->assertEquals(89, $size);
@@ -315,7 +322,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testFetchHeader()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $subject = $mail->getMessage(1)->subject;
         $this->assertEquals('Simple Message', $subject);
@@ -326,7 +333,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testFetchTopBody()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $content = $mail->getHeader(3, 1)->getContent();
         $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
@@ -334,7 +341,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 */
     public function testFetchMessageHeader()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $subject = $mail->getMessage(1)->subject;
         $this->assertEquals('Simple Message', $subject);
@@ -342,7 +349,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testFetchMessageBody()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $content = $mail->getMessage(3)->getContent();
         list($content, ) = explode("\n", $content, 2);
@@ -351,7 +358,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testRemove()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $count = $mail->countMessages();
         $mail->removeMessage(1);
@@ -360,13 +367,13 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testTooLateCount()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
         $mail->close();
         // after closing we can't count messages
 
         try {
             $mail->countMessages();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return; // test ok
         }
 
@@ -377,8 +384,8 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
     {
         $this->_params['folder'] = 'UnknownFolder';
         try {
-            $mail = new Zend_Mail_Storage_Imap($this->_params);
-        } catch (Exception $e) {
+            $mail = new Storage\Imap($this->_params);
+        } catch (\Exception $e) {
             return; // test ok
         }
 
@@ -387,10 +394,10 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testChangeFolder()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
         try {
             $mail->selectFolder('subfolder/test');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->fail('exception raised while selecting existing folder');
         }
 
@@ -399,10 +406,10 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testUnknownFolder()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
         try {
             $mail->selectFolder('/Unknown/Folder/');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return; // test ok
         }
 
@@ -411,29 +418,29 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testGlobalName()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
         try {
             // explicit call of __toString() needed for PHP < 5.2
             $this->assertEquals($mail->getFolders()->subfolder->__toString(), 'subfolder');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->fail('exception raised while selecting existing folder and getting global name');
         }
     }
 
     public function testLocalName()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
         try {
             $this->assertEquals($mail->getFolders()->subfolder->key(), 'test');
-        } catch (Zend_Mail_Exception $e) {
+        } catch (\Zend\Mail\Exception $e) {
             $this->fail('exception raised while selecting existing folder and getting local name');
         }
     }
 
     public function testKeyLocalName()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
-        $iterator = new RecursiveIteratorIterator($mail->getFolders(), RecursiveIteratorIterator::SELF_FIRST);
+        $mail = new Storage\Imap($this->_params);
+        $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
         // we search for this folder because we can't assume a order while iterating
         $search_folders = array('subfolder'      => 'subfolder',
                                 'subfolder/test' => 'test',
@@ -454,8 +461,8 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testSelectable()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
-        $iterator = new RecursiveIteratorIterator($mail->getFolders(), RecursiveIteratorIterator::SELF_FIRST);
+        $mail = new Storage\Imap($this->_params);
+        $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
 
         foreach ($iterator as $localName => $folder) {
             $this->assertEquals($localName, $folder->getLocalName());
@@ -465,7 +472,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testCountFolder()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $mail->selectFolder('subfolder/test');
         $count = $mail->countMessages();
@@ -474,7 +481,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testSizeFolder()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $mail->selectFolder('subfolder/test');
         $sizes = $mail->getSize();
@@ -483,7 +490,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testFetchHeaderFolder()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $mail->selectFolder('subfolder/test');
         $subject = $mail->getMessage(1)->subject;
@@ -492,30 +499,30 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testHasFlag()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
-        $this->assertTrue($mail->getMessage(1)->hasFlag(Zend_Mail_Storage::FLAG_RECENT));
+        $this->assertTrue($mail->getMessage(1)->hasFlag(Storage\Storage::FLAG_RECENT));
     }
 
     public function testGetFlags()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $flags = $mail->getMessage(1)->getFlags();
-        $this->assertTrue(isset($flags[Zend_Mail_Storage::FLAG_RECENT]));
-        $this->assertTrue(in_array(Zend_Mail_Storage::FLAG_RECENT, $flags));
+        $this->assertTrue(isset($flags[Storage\Storage::FLAG_RECENT]));
+        $this->assertTrue(in_array(Storage\Storage::FLAG_RECENT, $flags));
     }
 
     public function testRawHeader()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $this->assertTrue(strpos($mail->getRawHeader(1), "\r\nSubject: Simple Message\r\n") > 0);
     }
 
     public function testUniqueId()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $this->assertTrue($mail->hasUniqueId);
         $this->assertEquals(1, $mail->getNumberByUniqueId($mail->getUniqueId(1)));
@@ -539,10 +546,10 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testWrongUniqueId()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
         try {
             $mail->getNumberByUniqueId('this_is_an_invalid_id');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return; // test ok
         }
 
@@ -551,7 +558,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testCreateFolder()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
         $mail->createFolder('subfolder/test1');
         $mail->createFolder('test2', 'subfolder');
         $mail->createFolder('test3', $mail->getFolders()->subfolder);
@@ -560,18 +567,18 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
             $mail->getFolders()->subfolder->test1;
             $mail->getFolders()->subfolder->test2;
             $mail->getFolders()->subfolder->test3;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->fail('could not get new folders');
         }
     }
 
     public function testCreateExistingFolder()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         try {
             $mail->createFolder('subfolder/test');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return; // ok
         }
 
@@ -580,12 +587,12 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testRemoveFolderName()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
         $mail->removeFolder('subfolder/test');
 
         try {
             $mail->getFolders()->subfolder->test;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return; // ok
         }
         $this->fail('folder still exists');
@@ -593,12 +600,12 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testRemoveFolderInstance()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
         $mail->removeFolder($mail->getFolders()->subfolder->test);
 
         try {
             $mail->getFolders()->subfolder->test;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return; // ok
         }
         $this->fail('folder still exists');
@@ -606,11 +613,11 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testRemoveInvalidFolder()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         try {
             $mail->removeFolder('thisFolderDoestNotExist');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return; // ok
         }
         $this->fail('no error while removing invalid folder');
@@ -618,17 +625,17 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testRenameFolder()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
         try {
             $mail->renameFolder('subfolder/test', 'subfolder/test1');
             $mail->renameFolder($mail->getFolders()->subfolder->test1, 'subfolder/test');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->fail('renaming failed');
         }
 
         try {
             $mail->renameFolder('subfolder/test', 'INBOX');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return; // ok
         }
         $this->fail('no error while renaming folder to INBOX');
@@ -636,7 +643,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testAppend()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
         $count = $mail->countMessages();
 
         $message = '';
@@ -652,7 +659,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
         try {
             $mail->appendMessage('');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return; // ok
         }
         $this->fail('no error while appending empty message');
@@ -660,7 +667,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testCopy()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
         $mail->selectFolder('subfolder/test');
         $count = $mail->countMessages();
@@ -676,7 +683,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
         try {
             $mail->copyMessage(1, 'justARandomFolder');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return; // ok
         }
         $this->fail('no error while copying to wrong folder');
@@ -684,32 +691,32 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testSetFlags()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
 
-        $mail->setFlags(1, array(Zend_Mail_Storage::FLAG_SEEN));
+        $mail->setFlags(1, array(Storage\Storage::FLAG_SEEN));
         $message = $mail->getMessage(1);
-        $this->assertTrue($message->hasFlag(Zend_Mail_Storage::FLAG_SEEN));
-        $this->assertFalse($message->hasFlag(Zend_Mail_Storage::FLAG_FLAGGED));
+        $this->assertTrue($message->hasFlag(Storage\Storage::FLAG_SEEN));
+        $this->assertFalse($message->hasFlag(Storage\Storage::FLAG_FLAGGED));
 
-        $mail->setFlags(1, array(Zend_Mail_Storage::FLAG_SEEN, Zend_Mail_Storage::FLAG_FLAGGED));
+        $mail->setFlags(1, array(Storage\Storage::FLAG_SEEN, Storage\Storage::FLAG_FLAGGED));
         $message = $mail->getMessage(1);
-        $this->assertTrue($message->hasFlag(Zend_Mail_Storage::FLAG_SEEN));
-        $this->assertTrue($message->hasFlag(Zend_Mail_Storage::FLAG_FLAGGED));
+        $this->assertTrue($message->hasFlag(Storage\Storage::FLAG_SEEN));
+        $this->assertTrue($message->hasFlag(Storage\Storage::FLAG_FLAGGED));
 
-        $mail->setFlags(1, array(Zend_Mail_Storage::FLAG_FLAGGED));
+        $mail->setFlags(1, array(Storage\Storage::FLAG_FLAGGED));
         $message = $mail->getMessage(1);
-        $this->assertFalse($message->hasFlag(Zend_Mail_Storage::FLAG_SEEN));
-        $this->assertTrue($message->hasFlag(Zend_Mail_Storage::FLAG_FLAGGED));
+        $this->assertFalse($message->hasFlag(Storage\Storage::FLAG_SEEN));
+        $this->assertTrue($message->hasFlag(Storage\Storage::FLAG_FLAGGED));
 
         $mail->setFlags(1, array('myflag'));
         $message = $mail->getMessage(1);
-        $this->assertFalse($message->hasFlag(Zend_Mail_Storage::FLAG_SEEN));
-        $this->assertFalse($message->hasFlag(Zend_Mail_Storage::FLAG_FLAGGED));
+        $this->assertFalse($message->hasFlag(Storage\Storage::FLAG_SEEN));
+        $this->assertFalse($message->hasFlag(Storage\Storage::FLAG_FLAGGED));
         $this->assertTrue($message->hasFlag('myflag'));
 
         try {
-            $mail->setFlags(1, array(Zend_Mail_Storage::FLAG_RECENT));
-        } catch (Exception $e) {
+            $mail->setFlags(1, array(Storage\Storage::FLAG_RECENT));
+        } catch (\Exception $e) {
             return; // ok
         }
         $this->fail('should not be able to set recent flag');
@@ -717,7 +724,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testCapability()
     {
-        $protocol = new Zend_Mail_Protocol_Imap($this->_params['host']);
+        $protocol = new Protocol\Imap($this->_params['host']);
         $protocol->login($this->_params['user'], $this->_params['password']);
         $capa = $protocol->capability();
         $this->assertTrue(is_array($capa));
@@ -726,7 +733,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testSelect()
     {
-        $protocol = new Zend_Mail_Protocol_Imap($this->_params['host']);
+        $protocol = new Protocol\Imap($this->_params['host']);
         $protocol->login($this->_params['user'], $this->_params['password']);
         $status = $protocol->select('INBOX');
         $this->assertTrue(is_array($status['flags']));
@@ -736,7 +743,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testExamine()
     {
-        $protocol = new Zend_Mail_Protocol_Imap($this->_params['host']);
+        $protocol = new Protocol\Imap($this->_params['host']);
         $protocol->login($this->_params['user'], $this->_params['password']);
         $status = $protocol->examine('INBOX');
         $this->assertTrue(is_array($status['flags']));
@@ -745,13 +752,13 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testClosedSocketNewlineToken()
     {
-        $protocol = new Zend_Mail_Protocol_Imap($this->_params['host']);
+        $protocol = new Protocol\Imap($this->_params['host']);
         $protocol->login($this->_params['user'], $this->_params['password']);
         $protocol->logout();
 
         try {
             $protocol->select("foo\nbar");
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return; // ok
         }
         $this->fail('no exception while using procol with closed socket');
@@ -759,7 +766,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testEscaping()
     {
-        $protocol = new Zend_Mail_Protocol_Imap();
+        $protocol = new Protocol\Imap();
         $this->assertEquals($protocol->escapeString('foo'), '"foo"');
         $this->assertEquals($protocol->escapeString('f\\oo'), '"f\\\\oo"');
         $this->assertEquals($protocol->escapeString('f"oo'), '"f\\"oo"');
@@ -772,7 +779,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testFetch()
     {
-        $protocol = new Zend_Mail_Protocol_Imap($this->_params['host']);
+        $protocol = new Protocol\Imap($this->_params['host']);
         $protocol->login($this->_params['user'], $this->_params['password']);
         $protocol->select('INBOX');
 
@@ -790,7 +797,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
         try {
             $protocol->fetch('UID', 99);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return; // ok
         }
         $this->fail('no exception while fetching message');
@@ -798,7 +805,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testStore()
     {
-        $protocol = new Zend_Mail_Protocol_Imap($this->_params['host']);
+        $protocol = new Protocol\Imap($this->_params['host']);
         $protocol->login($this->_params['user'], $this->_params['password']);
         $protocol->select('INBOX');
 
@@ -816,7 +823,7 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testMove()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
         $mail->selectFolder('subfolder/test');
         $toCount = $mail->countMessages();
         $mail->selectFolder('INBOX');
@@ -831,20 +838,20 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function testCountFlags()
     {
-        $mail = new Zend_Mail_Storage_Imap($this->_params);
+        $mail = new Storage\Imap($this->_params);
         foreach ($mail as $id => $message) {
             $mail->setFlags($id, array());
         }
-        $this->assertEquals($mail->countMessages(Zend_Mail_Storage::FLAG_SEEN), 0);
-        $this->assertEquals($mail->countMessages(Zend_Mail_Storage::FLAG_ANSWERED), 0);
-        $this->assertEquals($mail->countMessages(Zend_Mail_Storage::FLAG_FLAGGED), 0);
+        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_SEEN), 0);
+        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_ANSWERED), 0);
+        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_FLAGGED), 0);
 
-        $mail->setFlags(1, array(Zend_Mail_Storage::FLAG_SEEN, Zend_Mail_Storage::FLAG_ANSWERED));
-        $mail->setFlags(2, array(Zend_Mail_Storage::FLAG_SEEN));
-        $this->assertEquals($mail->countMessages(Zend_Mail_Storage::FLAG_SEEN), 2);
-        $this->assertEquals($mail->countMessages(Zend_Mail_Storage::FLAG_ANSWERED), 1);
-        $this->assertEquals($mail->countMessages(array(Zend_Mail_Storage::FLAG_SEEN, Zend_Mail_Storage::FLAG_ANSWERED)), 1);
-        $this->assertEquals($mail->countMessages(array(Zend_Mail_Storage::FLAG_SEEN, Zend_Mail_Storage::FLAG_FLAGGED)), 0);
-        $this->assertEquals($mail->countMessages(Zend_Mail_Storage::FLAG_FLAGGED), 0);
+        $mail->setFlags(1, array(Storage\Storage::FLAG_SEEN, Storage\Storage::FLAG_ANSWERED));
+        $mail->setFlags(2, array(Storage\Storage::FLAG_SEEN));
+        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_SEEN), 2);
+        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_ANSWERED), 1);
+        $this->assertEquals($mail->countMessages(array(Storage\Storage::FLAG_SEEN, Storage\Storage::FLAG_ANSWERED)), 1);
+        $this->assertEquals($mail->countMessages(array(Storage\Storage::FLAG_SEEN, Storage\Storage::FLAG_FLAGGED)), 0);
+        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_FLAGGED), 0);
     }
 }

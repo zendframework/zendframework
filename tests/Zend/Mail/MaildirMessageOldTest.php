@@ -21,16 +21,10 @@
  */
 
 /**
- * Zend_Mail_Storage_Maildir
+ * @namespace
  */
-
-/**
- * Zend_Config
- */
-
-/**
- * PHPUnit test case
- */
+namespace ZendTest\Mail;
+use Zend\Mail\Storage;
 
 /**
  * Maildir class, which uses old message class
@@ -41,13 +35,13 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Mail_Storage_Maildir_OldMessage extends Zend_Mail_Storage_Maildir
+class MaildirOldMessage extends Storage\Maildir
 {
     /**
      * used message class
      * @var string
      */
-    protected $_messageClass = 'Zend_Mail_Message';
+    protected $_messageClass = '\Zend\Mail\Message\Message';
 }
 
 /**
@@ -58,7 +52,7 @@ class Zend_Mail_Storage_Maildir_OldMessage extends Zend_Mail_Storage_Maildir
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class Zend_Mail_MaildirMessageOldTest extends PHPUnit_Framework_TestCase
+class MaildirMessageOldTest extends \PHPUnit_Framework_TestCase
 {
     protected $_originalMaildir;
     protected $_maildir;
@@ -129,7 +123,7 @@ class Zend_Mail_MaildirMessageOldTest extends PHPUnit_Framework_TestCase
 
     public function testFetchHeader()
     {
-        $mail = new Zend_Mail_Storage_Maildir_OldMessage(array('dirname' => $this->_maildir));
+        $mail = new MaildirOldMessage(array('dirname' => $this->_maildir));
 
         $subject = $mail->getMessage(1)->subject;
         $this->assertEquals('Simple Message', $subject);
@@ -138,7 +132,7 @@ class Zend_Mail_MaildirMessageOldTest extends PHPUnit_Framework_TestCase
 /*
     public function testFetchTopBody()
     {
-        $mail = new Zend_Mail_Storage_Maildir_OldMessage(array('dirname' => $this->_maildir));
+        $mail = new MaildirOldMessage(array('dirname' => $this->_maildir));
 
         $content = $mail->getHeader(3, 1)->getContent();
         $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
@@ -146,7 +140,7 @@ class Zend_Mail_MaildirMessageOldTest extends PHPUnit_Framework_TestCase
 */
     public function testFetchMessageHeader()
     {
-        $mail = new Zend_Mail_Storage_Maildir_OldMessage(array('dirname' => $this->_maildir));
+        $mail = new MaildirOldMessage(array('dirname' => $this->_maildir));
 
         $subject = $mail->getMessage(1)->subject;
         $this->assertEquals('Simple Message', $subject);
@@ -154,7 +148,7 @@ class Zend_Mail_MaildirMessageOldTest extends PHPUnit_Framework_TestCase
 
     public function testFetchMessageBody()
     {
-        $mail = new Zend_Mail_Storage_Maildir_OldMessage(array('dirname' => $this->_maildir));
+        $mail = new MaildirOldMessage(array('dirname' => $this->_maildir));
 
         $content = $mail->getMessage(3)->getContent();
         list($content, ) = explode("\n", $content, 2);
@@ -163,32 +157,32 @@ class Zend_Mail_MaildirMessageOldTest extends PHPUnit_Framework_TestCase
 
     public function testHasFlag()
     {
-        $mail = new Zend_Mail_Storage_Maildir_OldMessage(array('dirname' => $this->_maildir));
+        $mail = new MaildirOldMessage(array('dirname' => $this->_maildir));
 
-        $this->assertFalse($mail->getMessage(5)->hasFlag(Zend_Mail_Storage::FLAG_SEEN));
-        $this->assertTrue($mail->getMessage(5)->hasFlag(Zend_Mail_Storage::FLAG_RECENT));
-        $this->assertTrue($mail->getMessage(2)->hasFlag(Zend_Mail_Storage::FLAG_FLAGGED));
-        $this->assertFalse($mail->getMessage(2)->hasFlag(Zend_Mail_Storage::FLAG_ANSWERED));
+        $this->assertFalse($mail->getMessage(5)->hasFlag(Storage\Storage::FLAG_SEEN));
+        $this->assertTrue($mail->getMessage(5)->hasFlag(Storage\Storage::FLAG_RECENT));
+        $this->assertTrue($mail->getMessage(2)->hasFlag(Storage\Storage::FLAG_FLAGGED));
+        $this->assertFalse($mail->getMessage(2)->hasFlag(Storage\Storage::FLAG_ANSWERED));
     }
 
     public function testGetFlags()
     {
-        $mail = new Zend_Mail_Storage_Maildir_OldMessage(array('dirname' => $this->_maildir));
+        $mail = new MaildirOldMessage(array('dirname' => $this->_maildir));
 
         $flags = $mail->getMessage(1)->getFlags();
-        $this->assertTrue(isset($flags[Zend_Mail_Storage::FLAG_SEEN]));
-        $this->assertTrue(in_array(Zend_Mail_Storage::FLAG_SEEN, $flags));
+        $this->assertTrue(isset($flags[Storage\Storage::FLAG_SEEN]));
+        $this->assertTrue(in_array(Storage\Storage::FLAG_SEEN, $flags));
     }
 
     public function testFetchPart()
     {
-        $mail = new Zend_Mail_Storage_Maildir_OldMessage(array('dirname' => $this->_maildir));
+        $mail = new MaildirOldMessage(array('dirname' => $this->_maildir));
         $this->assertEquals($mail->getMessage(4)->getPart(2)->contentType, 'text/x-vertical');
     }
 
     public function testPartSize()
     {
-        $mail = new Zend_Mail_Storage_Maildir_OldMessage(array('dirname' => $this->_maildir));
+        $mail = new MaildirOldMessage(array('dirname' => $this->_maildir));
         $this->assertEquals($mail->getMessage(4)->getPart(2)->getSize(), 80);
     }
 }

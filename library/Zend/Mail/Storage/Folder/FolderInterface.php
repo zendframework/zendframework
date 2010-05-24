@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace Zend\Mail\Storage\Folder;
 
 /**
  * @category   Zend
@@ -28,13 +32,13 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Mail_Storage_Folder_Interface
+interface FolderInterface
 {
     /**
      * get root folder or given folder
      *
      * @param string $rootFolder get folder structure for given folder, else root
-     * @return Zend_Mail_Storage_Folder root or wanted folder
+     * @return \Zend\Mail\Storage\Folder\Folder root or wanted folder
      */
     public function getFolders($rootFolder = null);
 
@@ -43,9 +47,9 @@ interface Zend_Mail_Storage_Folder_Interface
      *
      * folder must be selectable!
      *
-     * @param Zend_Mail_Storage_Folder|string $globalName global name of folder or instance for subfolder
+     * @param \Zend\Mail\Storage\Folder\Folder|string $globalName global name of folder or instance for subfolder
      * @return null
-     * @throws Zend_Mail_Storage_Exception
+     * @throws \Zend\Mail\Storage\Exception
      */
     public function selectFolder($globalName);
 
@@ -53,8 +57,8 @@ interface Zend_Mail_Storage_Folder_Interface
     /**
      * get Zend_Mail_Storage_Folder instance for current folder
      *
-     * @return Zend_Mail_Storage_Folder instance of current folder
-     * @throws Zend_Mail_Storage_Exception
+     * @return \Zend\Mail\Storage\Folder\Folder instance of current folder
+     * @throws \Zend\Mail\Storage\Exception
      */
     public function getCurrentFolder();
 }

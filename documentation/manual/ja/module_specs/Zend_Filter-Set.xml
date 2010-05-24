@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 22136 -->
+<!-- EN-Revision: 22254 -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のフィルタクラス群</title>
@@ -12,26 +12,12 @@
     <xi:include href="Zend_Filter-Alnum.xml">
         <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Alnum.xml" /></xi:fallback>
     </xi:include>
-
-    <sect2 id="zend.filter.set.alpha">
-        <title>Alpha</title>
-
-        <para>
-            文字列 <varname>$value</varname>
-            から、アルファベット以外を取り除いたものを返します。
-            このフィルタでは、オプションとして空白文字を認めることもできます。
-        </para>
-    </sect2>
-
-    <sect2 id="zend.filter.set.basename">
-        <title>BaseName</title>
-
-        <para>
-            ファイルへのパスを含む文字列を受け取り、
-            ファイルのベース名の部分のみを返します。
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Filter-Alpha.xml">
+        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Alpha.xml" /></xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Filter-BaseName.xml">
+        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-BaseName.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Filter-Boolean.xml">
         <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Boolean.xml" /></xi:fallback>
     </xi:include>
@@ -40,43 +26,19 @@
         <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Compress.xml" /></xi:fallback>
     </xi:include>
     <xi:include href="Zend_Filter-Decryption.xml" />
-
-    <sect2 id="zend.filter.set.digits">
-        <title>Digits</title>
-
-        <para>
-            文字列 <varname>$value</varname>
-            から、数字以外を取り除いたものを返します。
-        </para>
-    </sect2>
-
-    <sect2 id="zend.filter.set.dir">
-        <title>Dir</title>
-
-        <para>
-            パス文字列からディレクトリ名を返します。
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Filter-Digits.xml">
+        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Digits.xml" /></xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Filter-Dir.xml">
+        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Dir.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Filter-Encryption.xml" />
-
-    <sect2 id="zend.filter.set.htmlentities">
-        <title>HtmlEntities</title>
-
-        <para>
-            文字列 <varname>$value</varname> について、
-            <acronym>HTML</acronym> エンティティが存在するものについてはそのエンティティに変換したものを返します。
-        </para>
-    </sect2>
-
-    <sect2 id="zend.filter.set.int">
-        <title>Int</title>
-
-        <para>
-            (int) <varname>$value</varname> を返します。
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Filter-HtmlEntities.xml">
+        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-HtmlEntities.xml" /></xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Filter-Int.xml">
+        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Int.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Filter-LocalizedToNormalized.xml" />
     <xi:include href="Zend_Filter-NormalizedToLocalized.xml" />
     <xi:include href="Zend_Filter-Null.xml" />
@@ -87,15 +49,10 @@
     <xi:include href="Zend_Filter-RealPath.xml" />
     <xi:include href="Zend_Filter-StringToLower.xml" />
     <xi:include href="Zend_Filter-StringToUpper.xml" />
+    <xi:include href="Zend_Filter-StringTrim.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-StringTrim.xml" /></xi:fallback>
+    </xi:include>
 
-    <sect2 id="zend.filter.set.stringtrim">
-        <title>StringTrim</title>
-
-        <para>
-            文字列 <varname>$value</varname>
-            の先頭と末尾から文字を取り除いたものを返します。
-        </para>
-    </sect2>
 
     <sect2 id="zend.filter.set.stripnewlines">
         <title>StripNewlines</title>

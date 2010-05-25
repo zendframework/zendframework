@@ -558,13 +558,14 @@ abstract class Zend_Translate_Adapter {
 
         if (($options['content'] instanceof Zend_Translate) || ($options['content'] instanceof Zend_Translate_Adapter)) {
             $options['usetranslateadapter'] = true;
-            if (!empty($options['locale'])) {
+            if (!empty($options['locale']) && ($options['locale'] !== 'auto')) {
                 $options['content'] = $options['content']->getMessages($options['locale']);
             } else {
-                $locales = $options['content']->getList();
+                $content = $options['content'];
+                $locales = $content->getList();
                 foreach ($locales as $locale) {
                     $options['locale']  = $locale;
-                    $options['content'] = $options['content']->getMessages($locale);
+                    $options['content'] = $content->getMessages($locale);
                     $this->_addTranslationData($options);
                 }
 

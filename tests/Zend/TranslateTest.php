@@ -754,8 +754,8 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
                 'content' => dirname(__FILE__) . '/Translate/Adapter/_files/testarray/',
                 'locale'  => 'auto',
                 'scan'    => Zend_Translate::LOCALE_FILENAME,
-                'ignore'  => array('.', 'ignoreme', 'LC_TEST'),
-                'route'   => array('ja' => 'de_AT'),
+                'ignore'  => array('.', 'ignoreme', 'LC_OTHER'),
+                'route'   => array('ja' => 'en_US'),
             )
         );
 
@@ -768,9 +768,8 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
         );
 
         $translate->addTranslation($translate2);
-
         $langs = $translate->getList();
-        $this->assertFalse(array_key_exists('de_DE', $langs));
+        $this->assertFalse(array_key_exists('de_AT', $langs));
         $this->assertTrue(array_key_exists('ja', $langs));
         $this->assertTrue(array_key_exists('en_US', $langs));
         $this->assertEquals('Message 5 (en)', $translate->translate('Message 5', 'ja'));
@@ -788,7 +787,7 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
                 'locale'  => 'auto',
                 'scan'    => Zend_Translate::LOCALE_FILENAME,
                 'ignore'  => array('.', 'ignoreme', 'LC_TEST'),
-                'route'   => array('ja' => 'de_AT', 'de_AT' => 'ja'),
+                'route'   => array('ja' => 'en_US', 'en_US' => 'ja'),
             )
         );
 

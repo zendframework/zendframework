@@ -714,7 +714,7 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
     {
         $translate = new Zend_Translate(
             Zend_Translate::AN_ARRAY,
-            dirname(__FILE__) . '/Translate/Adapter/_files/testArray/',
+            dirname(__FILE__) . '/Translate/Adapter/_files/testarray/',
             'auto',
             array(
                 'scan' => Zend_Translate::LOCALE_FILENAME,
@@ -729,7 +729,7 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
 
         $translate2 = new Zend_Translate(
             Zend_Translate::AN_ARRAY,
-            dirname(__FILE__) . '/Translate/Adapter/_files/testArray/',
+            dirname(__FILE__) . '/Translate/Adapter/_files/testarray/',
             'auto',
             array(
                 'scan' => Zend_Translate::LOCALE_FILENAME,
@@ -751,7 +751,7 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
         $translate = new Zend_Translate(
             array(
                 'adapter' => Zend_Translate::AN_ARRAY,
-                'content' => dirname(__FILE__) . '/Translate/Adapter/_files/testArray/',
+                'content' => dirname(__FILE__) . '/Translate/Adapter/_files/testarray/',
                 'locale'  => 'auto',
                 'scan'    => Zend_Translate::LOCALE_FILENAME,
                 'ignore'  => array('.', 'ignoreme', 'LC_TEST'),
@@ -784,7 +784,7 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
         $translate = new Zend_Translate(
             array(
                 'adapter' => Zend_Translate::AN_ARRAY,
-                'content' => dirname(__FILE__) . '/Translate/Adapter/_files/testArray/',
+                'content' => dirname(__FILE__) . '/Translate/Adapter/_files/testarray/',
                 'locale'  => 'auto',
                 'scan'    => Zend_Translate::LOCALE_FILENAME,
                 'ignore'  => array('.', 'ignoreme', 'LC_TEST'),

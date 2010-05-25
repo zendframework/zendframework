@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Messenger
+ * @package    Zend_SignalSlot
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,7 +21,7 @@
 /**
  * @namespace
  */
-namespace Zend\Messenger;
+namespace Zend\SignalSlot;
 
 /**
  * FilterChain: subject/observer filter chain system
@@ -35,9 +35,9 @@ namespace Zend\Messenger;
 class FilterChain implements Filter
 {
     /**
-     * @var array All subscribers
+     * @var array All filters
      */
-    protected $_handlers = array();
+    protected $_filters = array();
 
     /**
      * Filter a value
@@ -58,10 +58,10 @@ class FilterChain implements Filter
             $argv = array_slice($argv, 1);
         }
 
-        foreach ($this->_handlers as $handle) {
+        foreach ($this->_filters as $filter) {
             $callbackArgs = $argv;
             array_unshift($callbackArgs, $value);
-            $value = $handle->call($callbackArgs);
+            $value = $filter->call($callbackArgs);
         }
         return $value;
     }
@@ -73,52 +73,51 @@ class FilterChain implements Filter
      * @param  null|string $handler If $context is a class or object, the name of the method to call
      * @return Handler Pub-Sub handle (to allow later unsubscribe)
      */
-    public function attach($context, $handler = null)
+    public function connect($context, $handler = null)
     {
         if (empty($context)) {
             throw new InvalidCallbackException('No callback provided');
         }
-        $handle = new Handler(null, $context, $handler);
-        if ($index = array_search($handle, $this->_handlers)) {
-            return $this->_handlers[$index];
+        $filter = new Slot(null, $context, $handler);
+        if ($index = array_search($filter, $this->_filters)) {
+            return $this->_filters[$index];
         }
-        $this->_handlers[] = $handle;
-        return $handle;
+        $this->_filters[] = $filter;
+        return $filter;
     }
 
     /**
-     * Unsubscribe a handler
+     * Unsubscribe a filter
      * 
-     * @param  Handler $handle 
-     * @return bool Returns true if topic and handle found, and unsubscribed; returns false if handle not found
+     * @param  Slot $filter 
+     * @return bool Returns true if filter found and unsubscribed; returns false otherwise
      */
-    public function detach(Handler $handle)
+    public function detach(Slot $filter)
     {
-        if (false === ($index = array_search($handle, $this->_handlers))) {
+        if (false === ($index = array_search($filter, $this->_filters))) {
             return false;
         }
-        unset($this->_handlers[$index]);
+        unset($this->_filters[$index]);
         return true;
     }
 
     /**
-     * Retrieve all handlers
+     * Retrieve all filters
      * 
-     * @param  string $topic 
-     * @return array Array of Handler objects
+     * @return Slot[]
      */
-    public function getHandlers()
+    public function getFilters()
     {
-        return $this->_handlers;
+        return $this->_filters;
     }
 
     /**
-     * Clear all handlers
+     * Clear all filters
      * 
      * @return void
      */
-    public function clearHandlers()
+    public function clearFilters()
     {
-        $this->_handlers = array();
+        $this->_filters = array();
     }
 }

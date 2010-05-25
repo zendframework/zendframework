@@ -12,7 +12,7 @@
 
 namespace ZendTest\SignalSlot;
 use Zend\SignalSlot\FilterChain,
-    Zend\SignalSlot\Handler;
+    Zend\SignalSlot\Slot;
 
 /**
  * @category   Phly
@@ -31,56 +31,56 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         $this->filterchain = new FilterChain;
     }
 
-    public function testSubscribeShouldReturnHandler()
+    public function testSubscribeShouldReturnSlot()
     {
-        $handle = $this->filterchain->attach($this, __METHOD__);
-        $this->assertTrue($handle instanceof Handler);
+        $handle = $this->filterchain->connect($this, __METHOD__);
+        $this->assertTrue($handle instanceof Slot);
     }
 
-    public function testSubscribeShouldAddHandlerToSubscribers()
+    public function testSubscribeShouldAddSlotToSubscribers()
     {
-        $handler  = $this->filterchain->attach($this, __METHOD__);
-        $handlers = $this->filterchain->getHandlers();
+        $handler  = $this->filterchain->connect($this, __METHOD__);
+        $handlers = $this->filterchain->getFilters();
         $this->assertEquals(1, count($handlers));
         $this->assertContains($handler, $handlers);
     }
 
-    public function testUnsubscribeShouldRemoveHandlerFromSubscribers()
+    public function testUnsubscribeShouldRemoveSlotFromSubscribers()
     {
-        $handle = $this->filterchain->attach($this, __METHOD__);
-        $handles = $this->filterchain->getHandlers();
+        $handle = $this->filterchain->connect($this, __METHOD__);
+        $handles = $this->filterchain->getFilters();
         $this->assertContains($handle, $handles);
         $this->filterchain->detach($handle);
-        $handles = $this->filterchain->getHandlers();
+        $handles = $this->filterchain->getFilters();
         $this->assertNotContains($handle, $handles);
     }
 
-    public function testUnsubscribeShouldReturnFalseIfHandlerDoesNotExist()
+    public function testUnsubscribeShouldReturnFalseIfSlotDoesNotExist()
     {
-        $handle1 = $this->filterchain->attach($this, __METHOD__);
-        $this->filterchain->clearHandlers();
-        $handle2 = $this->filterchain->attach($this, 'handleTestTopic');
+        $handle1 = $this->filterchain->connect($this, __METHOD__);
+        $this->filterchain->clearFilters();
+        $handle2 = $this->filterchain->connect($this, 'handleTestTopic');
         $this->assertFalse($this->filterchain->detach($handle1));
     }
 
-    public function testRetrievingSubscribedHandlersShouldReturnEmptyArrayWhenNoSubscribersExist()
+    public function testRetrievingSubscribedSlotsShouldReturnEmptyArrayWhenNoSubscribersExist()
     {
-        $handles = $this->filterchain->getHandlers();
+        $handles = $this->filterchain->getFilters();
         $this->assertTrue(empty($handles));
     }
 
     public function testFilterShouldPassReturnValueOfEachSubscriberToNextSubscriber()
     {
-        $this->filterchain->attach('trim');
-        $this->filterchain->attach('str_rot13');
+        $this->filterchain->connect('trim');
+        $this->filterchain->connect('str_rot13');
         $value = $this->filterchain->filter(' foo ');
         $this->assertEquals(\str_rot13('foo'), $value);
     }
 
     public function testFilterShouldAllowMultipleArgumentsButFilterOnlyFirst()
     {
-        $this->filterchain->attach($this, 'filterTestCallback1');
-        $this->filterchain->attach($this, 'filterTestCallback2');
+        $this->filterchain->connect($this, 'filterTestCallback1');
+        $this->filterchain->connect($this, 'filterTestCallback2');
         $obj = (object) array('foo' => 'bar', 'bar' => 'baz');
         $value = $this->filterchain->filter('', $obj);
         $this->assertEquals('foo:bar;bar:baz;', $value);

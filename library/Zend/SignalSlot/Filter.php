@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Messenger
+ * @package    Zend_SignalSlot
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,21 +21,21 @@
 /**
  * @namespace
  */
-namespace Zend\Messenger;
+namespace Zend\SignalSlot;
 
 /**
  * Interface for filters
  *
  * @category   Zend
- * @package    Zend_Messenger
+ * @package    Zend_SignalSlot
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Filter
 {
     public function filter($value);
-    public function attach($context, $handler = null);
-    public function detach(Handler $handle);
-    public function getHandlers();
-    public function clearHandlers();
+    public function connect($context, $handler = null);
+    public function detach(Slot $filter);
+    public function getFilters();
+    public function clearFilters();
 }

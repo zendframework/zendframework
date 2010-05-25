@@ -78,6 +78,12 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
     protected $_response;
 
     /**
+     * XPath namespaces
+     * @var array
+     */
+    protected $_xpathNamespaces = array();
+
+    /**
      * Overloading: prevent overloading to special properties
      *
      * @param  string $name
@@ -463,6 +469,17 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
     }
 
     /**
+     * Register XPath namespaces
+     *
+     * @param   array $xpathNamespaces
+     * @return  void
+     */
+    public function registerXpathNamespaces($xpathNamespaces)
+    {
+        $this->_xpathNamespaces = $xpathNamespaces;
+    }
+
+    /**
      * Assert against XPath selection
      *
      * @param  string $path XPath path
@@ -474,6 +491,7 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
         $this->_incrementAssertionCount();
         require_once 'Zend/Test/PHPUnit/Constraint/DomQuery.php';
         $constraint = new Zend_Test_PHPUnit_Constraint_DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__)) {
             $constraint->fail($path, $message);
@@ -492,6 +510,7 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
         $this->_incrementAssertionCount();
         require_once 'Zend/Test/PHPUnit/Constraint/DomQuery.php';
         $constraint = new Zend_Test_PHPUnit_Constraint_DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__)) {
             $constraint->fail($path, $message);
@@ -511,6 +530,7 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
         $this->_incrementAssertionCount();
         require_once 'Zend/Test/PHPUnit/Constraint/DomQuery.php';
         $constraint = new Zend_Test_PHPUnit_Constraint_DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $match)) {
             $constraint->fail($path, $message);
@@ -530,6 +550,7 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
         $this->_incrementAssertionCount();
         require_once 'Zend/Test/PHPUnit/Constraint/DomQuery.php';
         $constraint = new Zend_Test_PHPUnit_Constraint_DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $match)) {
             $constraint->fail($path, $message);
@@ -549,6 +570,7 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
         $this->_incrementAssertionCount();
         require_once 'Zend/Test/PHPUnit/Constraint/DomQuery.php';
         $constraint = new Zend_Test_PHPUnit_Constraint_DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $pattern)) {
             $constraint->fail($path, $message);
@@ -568,6 +590,7 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
         $this->_incrementAssertionCount();
         require_once 'Zend/Test/PHPUnit/Constraint/DomQuery.php';
         $constraint = new Zend_Test_PHPUnit_Constraint_DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $pattern)) {
             $constraint->fail($path, $message);
@@ -587,6 +610,7 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
         $this->_incrementAssertionCount();
         require_once 'Zend/Test/PHPUnit/Constraint/DomQuery.php';
         $constraint = new Zend_Test_PHPUnit_Constraint_DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $count)) {
             $constraint->fail($path, $message);
@@ -606,6 +630,7 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
         $this->_incrementAssertionCount();
         require_once 'Zend/Test/PHPUnit/Constraint/DomQuery.php';
         $constraint = new Zend_Test_PHPUnit_Constraint_DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $count)) {
             $constraint->fail($path, $message);
@@ -625,6 +650,7 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
         $this->_incrementAssertionCount();
         require_once 'Zend/Test/PHPUnit/Constraint/DomQuery.php';
         $constraint = new Zend_Test_PHPUnit_Constraint_DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $count)) {
             $constraint->fail($path, $message);
@@ -644,6 +670,7 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
         $this->_incrementAssertionCount();
         require_once 'Zend/Test/PHPUnit/Constraint/DomQuery.php';
         $constraint = new Zend_Test_PHPUnit_Constraint_DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $count)) {
             $constraint->fail($path, $message);

@@ -65,6 +65,12 @@ class Zend_Dom_Query
     protected $_docType;
 
     /**
+     * XPath namespaces
+     * @var array
+     */
+    protected $_xpathNamespaces = array();
+
+    /**
      * Constructor
      *
      * @param  null|string $document
@@ -221,6 +227,17 @@ class Zend_Dom_Query
     }
 
     /**
+     * Register XPath namespaces
+     *
+     * @param   array $xpathNamespaces
+     * @return  void
+     */
+    public function registerXpathNamespaces($xpathNamespaces)
+    {
+        $this->_xpathNamespaces = $xpathNamespaces;
+    }
+
+    /**
      * Prepare node list
      *
      * @param  DOMDocument $document
@@ -230,6 +247,9 @@ class Zend_Dom_Query
     protected function _getNodeList($document, $xpathQuery)
     {
         $xpath      = new DOMXPath($document);
+        foreach ($this->_xpathNamespaces as $prefix => $namespaceUri) {
+            $xpath->registerNamespace($prefix, $namespaceUri);
+        }
         $xpathQuery = (string) $xpathQuery;
         if (preg_match_all('|\[contains\((@[a-z0-9_-]+),\s?\' |i', $xpathQuery, $matches)) {
             foreach ($matches[1] as $attribute) {

@@ -2888,7 +2888,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         ), $feed->getImage());
     }
 
-    public function testGetsImageFromRss10()
+    /*public function testGetsImageFromRss10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/rss10.xml')
@@ -2916,7 +2916,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
             'width' => '50',
             'description' => 'Image description'
         ), $feed->getImage());
-    }
+    }*/
 
     /**
      * Get Image data (Unencoded Text) Missing

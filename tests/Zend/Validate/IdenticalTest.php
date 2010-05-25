@@ -105,18 +105,6 @@ class Zend_Validate_IdenticalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-6511
-     */
-    public function testNotSameMessageContainsTokenAndValue()
-    {
-        $this->testValidatingAgainstTokenWithNonMatchingValueReturnsFalse();
-        $messages = $this->validator->getMessages();
-        $this->assertContains("The token 'foo'", $messages['notSame']);
-        $this->assertContains('bar', $messages['notSame']);
-        $this->assertContains('does not match', $messages['notSame']);
-    }
-
-    /**
      * @see ZF-6953
      */
     public function testValidatingAgainstEmptyToken()

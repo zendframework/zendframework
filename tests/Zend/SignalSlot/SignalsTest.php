@@ -37,7 +37,7 @@ class SignalsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($handle instanceof Slot);
     }
 
-    public function testConnectShouldAddSlotToTopic()
+    public function testConnectShouldAddSlotToSignal()
     {
         $handle = $this->signals->connect('test', $this, __METHOD__);
         $handles = $this->signals->getSlots('test');
@@ -45,17 +45,17 @@ class SignalsTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($handle, $handles);
     }
 
-    public function testConnectShouldAddTopicIfItDoesNotExist()
+    public function testConnectShouldAddSignalIfItDoesNotExist()
     {
-        $topics = $this->signals->getTopics();
-        $this->assertTrue(empty($topics), var_export($topics, 1));
-        $handle = $this->signals->connect('test', $this, __METHOD__);
-        $topics = $this->signals->getTopics();
-        $this->assertFalse(empty($topics));
-        $this->assertContains('test', $topics);
+        $signals = $this->signals->getSignals();
+        $this->assertTrue(empty($signals), var_export($signals, 1));
+        $handle  = $this->signals->connect('test', $this, __METHOD__);
+        $signals = $this->signals->getSignals();
+        $this->assertFalse(empty($signals));
+        $this->assertContains('test', $signals);
     }
 
-    public function testDetachShouldRemoveSlotFromTopic()
+    public function testDetachShouldRemoveSlotFromSignal()
     {
         $handle = $this->signals->connect('test', $this, __METHOD__);
         $handles = $this->signals->getSlots('test');
@@ -65,7 +65,7 @@ class SignalsTest extends \PHPUnit_Framework_TestCase
         $this->assertNotContains($handle, $handles);
     }
 
-    public function testDetachShouldReturnFalseIfTopicDoesNotExist()
+    public function testDetachShouldReturnFalseIfSignalDoesNotExist()
     {
         $handle = $this->signals->connect('test', $this, __METHOD__);
         $this->signals->clearSlots('test');
@@ -76,36 +76,36 @@ class SignalsTest extends \PHPUnit_Framework_TestCase
     {
         $handle1 = $this->signals->connect('test', $this, __METHOD__);
         $this->signals->clearSlots('test');
-        $handle2 = $this->signals->connect('test', $this, 'handleTestTopic');
+        $handle2 = $this->signals->connect('test', $this, 'handleTestSignal');
         $this->assertFalse($this->signals->detach($handle1));
     }
 
-    public function testRetrievingConnectdSlotsShouldReturnEmptyArrayWhenTopicDoesNotExist()
+    public function testRetrievingConnectdSlotsShouldReturnEmptyArrayWhenSignalDoesNotExist()
     {
         $handles = $this->signals->getSlots('test');
         $this->assertTrue(empty($handles));
     }
 
-    public function testNotifyShouldNotifyConnectdSlots()
+    public function testEmitShouldEmitConnectedSlots()
     {
-        $handle = $this->signals->connect('test', $this, 'handleTestTopic');
-        $this->signals->notify('test', 'test message');
+        $handle = $this->signals->connect('test', $this, 'handleTestSignal');
+        $this->signals->emit('test', 'test message');
         $this->assertEquals('test message', $this->message);
     }
 
-    public function testNotifyShouldReturnTheReturnValueOfTheLastInvokedConnectr()
+    public function testEmitShouldReturnTheReturnValueOfTheLastInvokedConnectr()
     {
         $this->signals->connect('string.transform', 'trim');
         $this->signals->connect('string.transform', 'str_rot13');
-        $value = $this->signals->notify('string.transform', ' foo ');
+        $value = $this->signals->emit('string.transform', ' foo ');
         $this->assertEquals(\str_rot13(' foo '), $value);
     }
 
-    public function testNotifyUntilShouldReturnAsSoonAsCallbackReturnsTrue()
+    public function testEmitUntilShouldReturnAsSoonAsCallbackReturnsTrue()
     {
         $this->signals->connect('foo.bar', 'strpos');
         $this->signals->connect('foo.bar', 'strstr');
-        $value = $this->signals->notifyUntil(
+        $value = $this->signals->emitUntil(
             array($this, 'evaluateStringCallback'), 
             'foo.bar',
             'foo', 'f'
@@ -113,7 +113,7 @@ class SignalsTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(0, $value);
     }
 
-    public function handleTestTopic($message)
+    public function handleTestSignal($message)
     {
         $this->message = $message;
     }

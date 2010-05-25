@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Messenger
+ * @package    Zend_SignalSlot
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,20 +21,23 @@
 /**
  * @namespace
  */
-namespace Zend\Messenger;
+namespace Zend\SignalSlot;
 
 /**
- * Invalid callback exception
+ * Interface for messengers
  *
- * @uses       Exception
- * @uses       Zend\Messenger\Exception
  * @category   Zend
- * @package    Zend_Messenger
+ * @package    Zend_SignalSlot
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidCallbackException
-    extends \Exception
-    implements Exception
+interface SignalSlot
 {
+    public function emit($signal, $argv = null);
+    public function emitUntil($callback, $signal, $argv = null);
+    public function connect($signal, $context, $handler = null);
+    public function detach(Slot $handle);
+    public function getSignals();
+    public function getSlots($signal);
+    public function clearSlots($signal);
 }

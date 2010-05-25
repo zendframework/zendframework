@@ -11,7 +11,7 @@
  */
 
 namespace ZendTest\SignalSlot;
-use Zend\SignalSlot\Handler as Handler;
+use Zend\SignalSlot\Slot as Slot;
 
 /**
  * @category   Phly
@@ -20,7 +20,7 @@ use Zend\SignalSlot\Handler as Handler;
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    New BSD {@link http://www.opensource.org/licenses/bsd-license.php}
  */
-class HandlerTest extends \PHPUnit_Framework_TestCase
+class SlotTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -29,29 +29,29 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testGetTopicShouldReturnTopic()
+    public function testGetSignalShouldReturnSignal()
     {
-        $handle = new Handler('foo', 'rand');
-        $this->assertEquals('foo', $handle->getTopic());
+        $slot = new Slot('foo', 'rand');
+        $this->assertEquals('foo', $slot->getSignal());
     }
 
     public function testCallbackShouldBeStringIfNoHandlerPassedToConstructor()
     {
-        $handle = new Handler('foo', 'rand');
-        $this->assertSame('rand', $handle->getCallback());
+        $slot = new Slot('foo', 'rand');
+        $this->assertSame('rand', $slot->getCallback());
     }
 
     public function testCallbackShouldBeArrayIfHandlerPassedToConstructor()
     {
-        $handle = new Handler('foo', '\\ZendTest\\SignalSlot\\Handlers\\ObjectCallback', 'test');
-        $this->assertSame(array('\\ZendTest\\SignalSlot\\Handlers\\ObjectCallback', 'test'), $handle->getCallback());
+        $slot = new Slot('foo', '\\ZendTest\\SignalSlot\\Slots\\ObjectCallback', 'test');
+        $this->assertSame(array('\\ZendTest\\SignalSlot\\Slots\\ObjectCallback', 'test'), $slot->getCallback());
     }
 
     public function testCallShouldInvokeCallbackWithSuppliedArguments()
     {
-        $handle = new Handler('foo', $this, 'handleCall');
+        $slot = new Slot('foo', $this, 'handleCall');
         $args   = array('foo', 'bar', 'baz');
-        $handle->call($args);
+        $slot->call($args);
         $this->assertSame($args, $this->args);
     }
 
@@ -60,24 +60,24 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testPassingInvalidCallbackShouldRaiseInvalidCallbackExceptionDuringCall()
     {
-        $handle = new Handler('Invokable', 'boguscallback');
-        $handle->call();
+        $slot = new Slot('Invokable', 'boguscallback');
+        $slot->call();
     }
 
     public function testCallShouldReturnTheReturnValueOfTheCallback()
     {
-        $handle = new Handler('foo', '\\ZendTest\\SignalSlot\\Handlers\\ObjectCallback', 'test');
-        if (!is_callable(array('\\ZendTest\\SignalSlot\\Handlers\\ObjectCallback', 'test'))) {
-            echo "\nClass exists? " . var_export(class_exists('\\ZendTest\\SignalSlot\\Handlers\\ObjectCallback'), 1) . "\n";
+        $slot = new Slot('foo', '\\ZendTest\\SignalSlot\\Slots\\ObjectCallback', 'test');
+        if (!is_callable(array('\\ZendTest\\SignalSlot\\Slots\\ObjectCallback', 'test'))) {
+            echo "\nClass exists? " . var_export(class_exists('\\ZendTest\\SignalSlot\\Slots\\ObjectCallback'), 1) . "\n";
             echo "Include path: " . get_include_path() . "\n";
         }
-        $this->assertEquals('bar', $handle->call(array()));
+        $this->assertEquals('bar', $slot->call(array()));
     }
 
     public function testStringCallbackResolvingToClassNameShouldCallViaInvoke()
     {
-        $handle = new Handler('foo', '\\ZendTest\\SignalSlot\\Handlers\\Invokable');
-        $this->assertEquals('__invoke', $handle->call(), var_export($handle->getCallback(), 1));
+        $slot = new Slot('foo', '\\ZendTest\\SignalSlot\\Slots\\Invokable');
+        $this->assertEquals('__invoke', $slot->call(), var_export($slot->getCallback(), 1));
     }
 
     /**
@@ -85,28 +85,28 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testStringCallbackReferringToClassWithoutDefinedInvokeShouldRaiseException()
     {
-        $handle = new Handler('foo', '\\ZendTest\\SignalSlot\\Handlers\\InstanceMethod');
-        $handle->call();
+        $slot = new Slot('foo', '\\ZendTest\\SignalSlot\\Slots\\InstanceMethod');
+        $slot->call();
     }
 
     public function testCallbackConsistingOfStringContextWithNonStaticMethodShouldInstantiateContext()
     {
-        $handle = new Handler('foo', 'ZendTest\\SignalSlot\\Handlers\\InstanceMethod', 'callable');
-        $this->assertEquals('callable', $handle->call());
+        $slot = new Slot('foo', 'ZendTest\\SignalSlot\\Slots\\InstanceMethod', 'callable');
+        $this->assertEquals('callable', $slot->call());
     }
 
     public function testCallbackToClassImplementingOverloadingShouldSucceed()
     {
-        $handle = new Handler('foo', '\\ZendTest\\SignalSlot\\Handlers\\Overloadable', 'foo');
-        $this->assertEquals('foo', $handle->call());
+        $slot = new Slot('foo', '\\ZendTest\\SignalSlot\\Slots\\Overloadable', 'foo');
+        $this->assertEquals('foo', $slot->call());
     }
 
     public function testClosureCallbackShouldBeInvokedByCall()
     {
-        $handle = new Handler(null, function () {
+        $slot = new Slot(null, function () {
             return 'foo';
         });
-        $this->assertEquals('foo', $handle->call());
+        $this->assertEquals('foo', $slot->call());
     }
 
     public function handleCall()

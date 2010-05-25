@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Messenger
+ * @package    Zend_SignalSlot
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,17 +21,17 @@
 /**
  * @namespace
  */
-namespace Zend\Messenger;
+namespace Zend\SignalSlot;
 
 /**
- * Handler: unique handler/callback subscribed to a given topic
+ * Slot: unique handler/callback subscribed to a given signal
  *
  * @category   Zend
- * @package    Zend_Messenger
+ * @package    Zend_SignalSlot
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Handler
+class Slot
 {
     /**
      * @var string|array PHP callback to invoke
@@ -39,9 +39,9 @@ class Handler
     protected $_callback;
 
     /**
-     * @var string Topic to which this handle is subscribed
+     * @var string Signal to which this handle is subscribed
      */
-    protected $_topic;
+    protected $_signal;
 
     /**
      * Until callback has been validated, mark as invalid
@@ -52,14 +52,14 @@ class Handler
     /**
      * Constructor
      * 
-     * @param  string $topic Topic to which handle is subscribed
+     * @param  string $signal Signal to which slot is subscribed
      * @param  string|object $context Function name, class name, or object instance
      * @param  string|null $handler Method name, if $context is a class or object
      * @return void
      */
-    public function __construct($topic, $context, $handler = null)
+    public function __construct($signal, $context, $handler = null)
     {
-        $this->_topic = $topic;
+        $this->_signal = $signal;
 
         if (null === $handler) {
             $this->_callback = $context;
@@ -69,13 +69,13 @@ class Handler
     }
 
     /**
-     * Get topic to which handle is subscribed
+     * Get signal to which slot is subscribed
      * 
      * @return string
      */
-    public function getTopic()
+    public function getSignal()
     {
-        return $this->_topic;
+        return $this->_signal;
     }
 
     /**
@@ -147,7 +147,14 @@ class Handler
         return $object;
     }
 
-    protected function _validateArrayCallback($callback)
+    /**
+     * Validate an array callback
+     * 
+     * @param  array $callback 
+     * @return callback
+     * @throws InvalidCallbackException
+     */
+    protected function _validateArrayCallback(array $callback)
     {
         $context = $callback[0];
         $method  = $callback[1];

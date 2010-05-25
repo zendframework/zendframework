@@ -130,20 +130,26 @@ class Zend_Translate_Adapter_GettextTest extends PHPUnit_Framework_TestCase
     {
         $adapter = new Zend_Translate_Adapter_Gettext(dirname(__FILE__) . '/_files/translation_en.mo', 'en');
         $adapter->setOptions(array('testoption' => 'testkey'));
-        $this->assertEquals(
-            array(
-                'testoption'      => 'testkey',
-                'clear'           => false,
-                'content'         => dirname(__FILE__) . '/_files/translation_en.mo',
-                'scan'            => null,
-                'locale'          => 'en',
-                'ignore'          => '.',
-                'disableNotices'  => false,
-                'log'             => false,
-                'logMessage'      => 'Untranslated message within \'%locale%\': %message%',
-                'logUntranslated' => false,
-                'reload'          => false),
-            $adapter->getOptions());
+        $expected = array(
+            'testoption'      => 'testkey',
+            'clear'           => false,
+            'content'         => dirname(__FILE__) . '/_files/translation_en.mo',
+            'scan'            => null,
+            'locale'          => 'en',
+            'ignore'          => '.',
+            'disableNotices'  => false,
+            'log'             => false,
+            'logMessage'      => 'Untranslated message within \'%locale%\': %message%',
+            'logUntranslated' => false,
+            'reload'          => false,
+        );
+        $options = $adapter->getOptions();
+
+        foreach ($expected as $key => $value) {
+            $this->assertArrayHasKey($key, $options);
+            $this->assertEquals($value, $options[$key]);
+        }
+
         $this->assertEquals('testkey', $adapter->getOptions('testoption'));
         $this->assertTrue(is_null($adapter->getOptions('nooption')));
     }

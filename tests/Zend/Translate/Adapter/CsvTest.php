@@ -126,23 +126,29 @@ class Zend_Translate_Adapter_CsvTest extends PHPUnit_Framework_TestCase
     {
         $adapter = new Zend_Translate_Adapter_Csv(dirname(__FILE__) . '/_files/translation_en.csv', 'en');
         $adapter->setOptions(array('testoption' => 'testkey'));
-        $this->assertEquals(
-            array(
-                'delimiter'       => ';',
-                'testoption'      => 'testkey',
-                'clear'           => false,
-                'content'         => dirname(__FILE__) . '/_files/translation_en.csv',
-                'scan'            => null,
-                'locale'          => 'en',
-                'length'          => 0,
-                'enclosure'       => '"',
-                'ignore'          => '.',
-                'disableNotices'  => false,
-                'log'             => false,
-                'logMessage'      => 'Untranslated message within \'%locale%\': %message%',
-                'logUntranslated' => false,
-                'reload'          => false),
-            $adapter->getOptions());
+        $expected = array(
+            'delimiter'       => ';',
+            'testoption'      => 'testkey',
+            'clear'           => false,
+            'content'         => dirname(__FILE__) . '/_files/translation_en.csv',
+            'scan'            => null,
+            'locale'          => 'en',
+            'length'          => 0,
+            'enclosure'       => '"',
+            'ignore'          => '.',
+            'disableNotices'  => false,
+            'log'             => false,
+            'logMessage'      => 'Untranslated message within \'%locale%\': %message%',
+            'logUntranslated' => false,
+            'reload'          => false,
+        );
+        $options = $adapter->getOptions();
+
+        foreach ($expected as $key => $value) {
+            $this->assertArrayHasKey($key, $options);
+            $this->assertEquals($value, $options[$key]);
+        }
+
         $this->assertEquals('testkey', $adapter->getOptions('testoption'));
         $this->assertTrue(is_null($adapter->getOptions('nooption')));
     }

@@ -106,6 +106,8 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
         }
         if (isset($options['useDefaultMarkups']) && ($options['useDefaultMarkups'] !== false)) {
             $this->_defineDefaultMarkups();
+        } elseif (!isset($options['useDefaultMarkups'])) {
+            $this->_defineDefaultMarkups();
         }
 
         parent::__construct($options);

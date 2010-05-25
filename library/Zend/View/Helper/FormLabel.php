@@ -42,7 +42,7 @@ class Zend_View_Helper_FormLabel extends Zend_View_Helper_FormElement
      * @param  array $attribs Form element attributes (used to determine if disabled)
      * @return string The element XHTML.
      */
-    public function formLabel($name, $value = null, array $attribs = array())
+    public function formLabel($name, $value = null, array $attribs = null)
     {
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, value, attribs, options, listsep, disable, escape

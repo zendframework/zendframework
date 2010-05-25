@@ -114,6 +114,12 @@ abstract class Zend_View_Helper_FormElement extends Zend_View_Helper_HtmlElement
                     $info[$key] = $name[$key];
                 }
             }
+
+            // If all helper options are passed as an array, attribs may have 
+            // been as well
+            if (null === $attribs) {
+                $attribs = $info['attribs'];
+            }
         }
 
         $attribs = (array)$attribs;

@@ -59,7 +59,7 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 [X] `-> Zend_Pdf
 [X]     `-> Zend_Barcode
 [X] Zend_Db (except Firebug profiler)
-[ ] `-> Zend_Feed
+[X] `-> Zend_Feed
 [ ]     `-> Zend_Queue
 [X] Zend_Text
 [X] `-> Zend_ProgressBar

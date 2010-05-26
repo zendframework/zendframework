@@ -231,8 +231,6 @@ class Zend_Feed_Reader_Extension_Atom_Feed
 
         if (!$generator) {
             $generator = null;
-        } else {
-            $generator = html_entity_decode($generator, ENT_QUOTES, $this->getEncoding());
         }
 
         $this->_data['generator'] = $generator;
@@ -466,7 +464,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
                 $categoryCollection[] = array(
                     'term' => $category->getAttribute('term'),
                     'scheme' => $category->getAttribute('scheme'),
-                    'label' => html_entity_decode($category->getAttribute('label'))
+                    'label' => $category->getAttribute('label')
                 );
             }
         } else {

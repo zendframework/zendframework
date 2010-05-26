@@ -340,8 +340,6 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
 
         if (!$description) {
             $description = null;
-        } else {
-            $description = html_entity_decode($description, ENT_QUOTES, $this->getEncoding());
         }
 
         $this->_data['description'] = $description;

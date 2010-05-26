@@ -577,9 +577,6 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
             } else {
                 $generator = $this->_xpath->evaluate('string(/rdf:RDF/rss:channel/atom:generator)');
             }
-            if ($generator) {
-                $generator = html_entity_decode($generator, ENT_QUOTES, $this->getEncoding());
-            }
         }
 
         if (empty($generator)) {

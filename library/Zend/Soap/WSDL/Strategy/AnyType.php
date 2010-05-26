@@ -14,20 +14,47 @@
  *
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage Wsdl
+ * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * Zend_Soap_Wsdl_Exception
+ * @namespace
+ */
+namespace Zend\Soap\WSDL\Strategy;
+
+/**
+ * Zend_Soap_WSDL_Strategy_AnyType
  *
- * @uses       Zend_Exception
+ * @uses       \Zend\Soap\WSDL\Strategy\StrategyInterface
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage Wsdl
+ * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_Wsdl_Exception extends Zend_Exception { }
+class AnyType implements StrategyInterface
+{
+    /**
+     * Not needed in this strategy.
+     *
+     * @param \Zend\Soap\WSDL\WSDL $context
+     */
+    public function setContext(\Zend\Soap\WSDL\WSDL $context)
+    {
+
+    }
+
+    /**
+     * Returns xsd:anyType regardless of the input.
+     *
+     * @param string $type
+     * @return string
+     */
+    public function addComplexType($type)
+    {
+        return 'xsd:anyType';
+    }
+}

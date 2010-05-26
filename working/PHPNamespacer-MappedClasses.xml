@@ -14259,74 +14259,74 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Wsdl_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Wsdl/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Wsdl</newNamespace>
+      <newRelativeFilePath>Zend/Soap/WSDL/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap\WSDL</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Wsdl\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\WSDL\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl/Strategy/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Wsdl_Strategy_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Wsdl/Strategy/AbstractStrategy.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Wsdl\Strategy</newNamespace>
+      <newRelativeFilePath>Zend/Soap/WSDL/Strategy/AbstractStrategy.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap\WSDL\Strategy</newNamespace>
       <newClassName>AbstractStrategy</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Wsdl\Strategy\AbstractStrategy</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\WSDL\Strategy\AbstractStrategy</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl/Strategy/AnyType.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Wsdl_Strategy_AnyType</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Wsdl/Strategy/AnyType.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Wsdl\Strategy</newNamespace>
+      <newRelativeFilePath>Zend/Soap/WSDL/Strategy/AnyType.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap\WSDL\Strategy</newNamespace>
       <newClassName>AnyType</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Wsdl\Strategy\AnyType</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\WSDL\Strategy\AnyType</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl/Strategy/ArrayOfTypeComplex.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Wsdl/Strategy/ArrayOfTypeComplex.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Wsdl\Strategy</newNamespace>
+      <newRelativeFilePath>Zend/Soap/WSDL/Strategy/ArrayOfTypeComplex.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap\WSDL\Strategy</newNamespace>
       <newClassName>ArrayOfTypeComplex</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Wsdl\Strategy\ArrayOfTypeComplex</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\WSDL\Strategy\ArrayOfTypeComplex</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl/Strategy/ArrayOfTypeSequence.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Wsdl/Strategy/ArrayOfTypeSequence.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Wsdl\Strategy</newNamespace>
+      <newRelativeFilePath>Zend/Soap/WSDL/Strategy/ArrayOfTypeSequence.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap\WSDL\Strategy</newNamespace>
       <newClassName>ArrayOfTypeSequence</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Wsdl\Strategy\ArrayOfTypeSequence</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\WSDL\Strategy\ArrayOfTypeSequence</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl/Strategy/Composite.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Wsdl_Strategy_Composite</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Wsdl/Strategy/Composite.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Wsdl\Strategy</newNamespace>
+      <newRelativeFilePath>Zend/Soap/WSDL/Strategy/Composite.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap\WSDL\Strategy</newNamespace>
       <newClassName>Composite</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Wsdl\Strategy\Composite</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\WSDL\Strategy\Composite</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl/Strategy/DefaultComplexType.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Wsdl_Strategy_DefaultComplexType</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Wsdl/Strategy/DefaultComplexType.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Wsdl\Strategy</newNamespace>
+      <newRelativeFilePath>Zend/Soap/WSDL/Strategy/DefaultComplexType.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap\WSDL\Strategy</newNamespace>
       <newClassName>DefaultComplexType</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Wsdl\Strategy\DefaultComplexType</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\WSDL\Strategy\DefaultComplexType</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl/Strategy/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Wsdl_Strategy_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Wsdl/Strategy/StrategyInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Wsdl\Strategy</newNamespace>
+      <newRelativeFilePath>Zend/Soap/WSDL/Strategy/StrategyInterface.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap\WSDL\Strategy</newNamespace>
       <newClassName>StrategyInterface</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Wsdl\Strategy\StrategyInterface</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\WSDL\Strategy\StrategyInterface</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Wsdl</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Wsdl/Wsdl.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Wsdl</newNamespace>
-      <newClassName>Wsdl</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Wsdl\Wsdl</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Soap/WSDL/WSDL.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap\WSDL</newNamespace>
+      <newClassName>WSDL</newClassName>
+      <newFullyQualifiedName>Zend\Soap\WSDL\WSDL</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tag/Cloud/Decorator/Cloud.php</originalRelativeFilePath>

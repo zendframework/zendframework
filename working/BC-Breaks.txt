@@ -205,3 +205,22 @@ Zend_Db
  * Various capitolization changes:
     Mysql -> MySQL, Mysqli -> MySQLi, Pdo -> PDO, Pgsql -> PGSQL, Oci -> OCI, Ibm -> IBM
     Mssql -> MSSQL, Sqlite -> SQLite, Sqlsrv -> SQLSRV
+
+Zend_Mime:
+ * Zend_Mime becomes Zend\Mime
+
+Zend_Mail:
+ * Zend_Mail becomes Zend\Mail
+ * See classes mapping for other names transformations
+
+Zend_Soap:
+ * Zend_Soap becomes Zend\Soap
+ * Zend_Soap_AutoDiscover becomes Zend\Soap\AutoDiscover\AutoDiscover
+ * Zend_Soap_Client becomes Zend\Soap\Client\Client
+ * Zend_Soap_Server becomes Zend\Soap\Server\Server
+ * Zend_Soap_Wsdl becomes Zend\Soap\WSDL\WSDL
+ * Zend_Soap_Wsdl_Strategy_Abstract becomes Zend\Soap\WSDL\Strategy\AbstractStrategy
+ * Zend_Soap_Wsdl_Strategy_Interface becomes Zend\Soap\WSDL\Strategy\StrategyInterface
+ * Wsdl -> WSDL change within classes and methods names.
+
+

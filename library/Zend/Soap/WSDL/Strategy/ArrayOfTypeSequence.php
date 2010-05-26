@@ -20,16 +20,21 @@
  */
 
 /**
- * Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence
+ * @namespace
+ */
+namespace Zend\Soap\WSDL\Strategy;
+
+/**
+ * Zend_Soap_WSDL_Strategy_ArrayOfTypeSequence
  *
- * @uses       Zend_Soap_Wsdl_Strategy_DefaultComplexType
+ * @uses       \Zend\Soap\WSDL\Strategy\DefaultComplexType
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage Wsdl
+ * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence extends Zend_Soap_Wsdl_Strategy_DefaultComplexType
+class ArrayOfTypeSequence extends DefaultComplexType
 {
     /**
      * Add an unbounded ArrayOfType based on the xsd:sequence syntax if type[] is detected in return value doc comment.
@@ -48,7 +53,7 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence extends Zend_Soap_Wsdl_Strateg
                 $complexTypeName = substr($this->_getTypeNameBasedOnNestingLevel($singularType, $i), 4);
                 $childTypeName = $this->_getTypeNameBasedOnNestingLevel($singularType, $i-1);
 
-                $this->_addElementFromWsdlAndChildTypes($complexTypeName, $childTypeName);
+                $this->_addElementFromWSDLAndChildTypes($complexTypeName, $childTypeName);
             }
             // adding the PHP type which is resolved to a nested XSD type. therefore add only once.
             $this->getContext()->addType($complexTypeName);
@@ -76,7 +81,7 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence extends Zend_Soap_Wsdl_Strateg
             // This is not an Array anymore, return the xsd simple type
             return $singularType;
         } else {
-            $prefix = str_repeat("ArrayOf", $level);
+            $prefix = str_repeat('ArrayOf', $level);
             $xsdType = $this->_getStrippedXsdType($singularType);
             $arrayType = $prefix.$xsdType;
             return "tns:$arrayType";
@@ -97,13 +102,13 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence extends Zend_Soap_Wsdl_Strateg
     /**
      * From a nested defintion with type[], get the singular xsd:type
      *
-     * @throws Zend_Soap_Wsdl_Exception When no xsd:simpletype can be detected.
+     * @throws \Zend\Soap\WSDL\Exception When no xsd:simpletype can be detected.
      * @param  string $type
      * @return string
      */
     protected function _getSingularType($type)
     {
-        $singulartype = $this->getContext()->getType(str_replace("[]", "", $type));
+        $singulartype = $this->getContext()->getType(str_replace('[]', '', $type));
         return $singulartype;
     }
 
@@ -115,7 +120,7 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence extends Zend_Soap_Wsdl_Strateg
      */
     protected function _getNestedCount($type)
     {
-        return substr_count($type, "[]");
+        return substr_count($type, '[]');
     }
 
     /**
@@ -125,7 +130,7 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence extends Zend_Soap_Wsdl_Strateg
      * @param  string $childTypeName
      * @return void
      */
-    protected function _addElementFromWsdlAndChildTypes($arrayType, $childTypeName)
+    protected function _addElementFromWSDLAndChildTypes($arrayType, $childTypeName)
     {
         if (!in_array($arrayType, $this->getContext()->getTypes())) {
             $dom = $this->getContext()->toDomDocument();

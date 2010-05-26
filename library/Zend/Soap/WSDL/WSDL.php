@@ -20,19 +20,27 @@
  */
 
 /**
- * Zend_Soap_Wsdl
+ * @namespace
+ */
+namespace Zend\Soap\WSDL;
+use Zend\URI;
+
+/**
+ * \Zend\Soap\WSDL\WSDL
  *
  * @uses       DOMDocument
- * @uses       Zend_Server_Exception
- * @uses       Zend_Soap_Wsdl_Exception
- * @uses       Zend_Soap_Wsdl_Strategy_Abstract
- * @uses       Zend_Soap_Wsdl_Strategy_AnyType
- * @uses       Zend_Soap_Wsdl_Strategy_DefaultComplexType
- * @uses       Zend_Soap_Wsdl_Strategy_Interface
+ * @uses       \Zend\Server\Exception
+ * @uses       \Zend\Soap\WSDL\Exception
+ * @uses       \Zend\Soap\WSDL\Strategy\AbstractStrategy
+ * @uses       \Zend\Soap\WSDL\Strategy\AnyType
+ * @uses       \Zend\Soap\WSDL\Strategy\DefaultComplexType
+ * @uses       \Zend\Soap\WSDL\Strategy\StrategyInterface
  * @category   Zend
  * @package    Zend_Soap
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_Wsdl
+class WSDL
 {
     /**
      * @var object DomDocument Instance
@@ -71,12 +79,12 @@ class Zend_Soap_Wsdl
      * Constructor
      *
      * @param string  $name Name of the Web Service being Described
-     * @param string  $uri URI where the WSDL will be available
-     * @param boolean|string|Zend_Soap_Wsdl_Strategy_Interface $strategy
+     * @param string|\Zend\URI\URL  $uri URI where the WSDL will be available
+     * @param boolean|string|\Zend\Soap\WSDL\Strategy\StrategyInterface $strategy
      */
     public function __construct($name, $uri, $strategy = true)
     {
-        if ($uri instanceof Zend_Uri_Http) {
+        if ($uri instanceof URI\URL) {
             $uri = $uri->getUri();
         }
         $this->_uri = $uri;
@@ -93,9 +101,9 @@ class Zend_Soap_Wsdl
                     xmlns:xsd='http://www.w3.org/2001/XMLSchema'
                     xmlns:soap-enc='http://schemas.xmlsoap.org/soap/encoding/'
                     xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'></definitions>";
-        $this->_dom = new DOMDocument();
+        $this->_dom = new \DOMDocument();
         if (!$this->_dom->loadXML($wsdl)) {
-            throw new Zend_Server_Exception('Unable to create DomDocument');
+            throw new Exception('Unable to create DomDocument');
         } else {
             $this->_wsdl = $this->_dom->documentElement;
         }
@@ -106,12 +114,12 @@ class Zend_Soap_Wsdl
     /**
      * Set a new uri for this WSDL
      *
-     * @param  string|Zend_Uri_Http $uri
-     * @return Zend_Server_Wsdl
+     * @param  string|\Zend\URI\URL $uri
+     * @return \Zend\Server\WSDL\WSDL
      */
     public function setUri($uri)
     {
-        if ($uri instanceof Zend_Uri_Http) {
+        if ($uri instanceof URI\URL) {
             $uri = $uri->getUri();
         }
         $oldUri = $this->_uri;
@@ -121,7 +129,7 @@ class Zend_Soap_Wsdl
             // @todo: This is the worst hack ever, but its needed due to design and non BC issues of WSDL generation
             $xml = $this->_dom->saveXML();
             $xml = str_replace($oldUri, $uri, $xml);
-            $this->_dom = new DOMDocument();
+            $this->_dom = new \DOMDocument();
             $this->_dom->loadXML($xml);
         }
 
@@ -132,27 +140,27 @@ class Zend_Soap_Wsdl
      * Set a strategy for complex type detection and handling
      *
      * @todo Boolean is for backwards compability with extractComplexType object var. Remove it in later versions.
-     * @param boolean|string|Zend_Soap_Wsdl_Strategy_Interface $strategy
-     * @return Zend_Soap_Wsdl
+     * @param boolean|string|\Zend\Soap\WSDL\Strategy\StrategyInterface $strategy
+     * @return \Zend\Soap\WSDL\WSDL
      */
     public function setComplexTypeStrategy($strategy)
     {
         if($strategy === true) {
-            $strategy = new Zend_Soap_Wsdl_Strategy_DefaultComplexType();
+            $strategy = new Strategy\DefaultComplexType();
         } else if($strategy === false) {
-            $strategy = new Zend_Soap_Wsdl_Strategy_AnyType();
+            $strategy = new Strategy\AnyType();
         } else if(is_string($strategy)) {
             if(class_exists($strategy)) {
                 $strategy = new $strategy();
             } else {
-                throw new Zend_Soap_Wsdl_Exception(
+                throw new Exception(
                     sprintf("Strategy with name '%s does not exist.", $strategy
                 ));
             }
         }
 
-        if(!($strategy instanceof Zend_Soap_Wsdl_Strategy_Interface)) {
-            throw new Zend_Soap_Wsdl_Exception("Set a strategy that is not of type 'Zend_Soap_Wsdl_Strategy_Interface'");
+        if(!($strategy instanceof Strategy\StrategyInterface)) {
+            throw new Exception("Set a strategy that is not of type 'Zend_Soap_WSDL_Strategy_Interface'");
         }
         $this->_strategy = $strategy;
         return $this;
@@ -161,7 +169,7 @@ class Zend_Soap_Wsdl
     /**
      * Get the current complex type strategy
      *
-     * @return Zend_Soap_Wsdl_Strategy_Interface
+     * @return \Zend\Soap\WSDL\Strategy\StrategyInterface
      */
     public function getComplexTypeStrategy()
     {
@@ -353,7 +361,7 @@ class Zend_Soap_Wsdl
      */
     public function addSoapOperation($binding, $soap_action)
     {
-        if ($soap_action instanceof Zend_Uri_Http) {
+        if ($soap_action instanceof URI\URL) {
             $soap_action = $soap_action->getUri();
         }
         $soap_operation = $this->_dom->createElement('soap:operation');
@@ -375,7 +383,7 @@ class Zend_Soap_Wsdl
      */
     public function addService($name, $port_name, $binding, $location)
     {
-        if ($location instanceof Zend_Uri_Http) {
+        if ($location instanceof URI\URL) {
             $location = $location->getUri();
         }
         $service = $this->_dom->createElement('service');
@@ -435,10 +443,10 @@ class Zend_Soap_Wsdl
      */
     public function addTypes($types)
     {
-        if ($types instanceof DomDocument) {
+        if ($types instanceof \DomDocument) {
             $dom = $this->_dom->importNode($types->documentElement);
             $this->_wsdl->appendChild($types->documentElement);
-        } elseif ($types instanceof DomNode || $types instanceof DomElement || $types instanceof DomDocumentFragment ) {
+        } elseif ($types instanceof \DomNode || $types instanceof \DomElement || $types instanceof \DomDocumentFragment ) {
             $dom = $this->_dom->importNode($types);
             $this->_wsdl->appendChild($dom);
         }
@@ -448,7 +456,7 @@ class Zend_Soap_Wsdl
      * Add a complex type name that is part of this WSDL and can be used in signatures.
      *
      * @param string $type
-     * @return Zend_Soap_Wsdl
+     * @return \Zend\Soap\WSDL\WSDL
      */
     public function addType($type)
     {
@@ -562,7 +570,7 @@ class Zend_Soap_Wsdl
     /**
      * This function makes sure a complex types section and schema additions are set.
      *
-     * @return Zend_Soap_Wsdl
+     * @return \Zend\Soap\WSDL\WSDL
      */
     public function addSchemaTypeSection()
     {
@@ -604,7 +612,7 @@ class Zend_Soap_Wsdl
     private function _parseElement($element)
     {
         if (!is_array($element)) {
-            throw new Zend_Soap_Wsdl_Exception("The 'element' parameter needs to be an associative array.");
+            throw new Exception("The 'element' parameter needs to be an associative array.");
         }
 
         $elementXml = $this->_dom->createElement('xsd:element');

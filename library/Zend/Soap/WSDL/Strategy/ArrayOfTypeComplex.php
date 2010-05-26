@@ -14,24 +14,30 @@
  *
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage Wsdl
+ * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex
+ * @namespace
+ */
+namespace Zend\Soap\WSDL\Strategy;
+use Zend\Soap\WSDL;
+
+/**
+ * Zend_Soap_WSDL_Strategy_ArrayOfTypeComplex
  *
- * @uses       Zend_Soap_Wsdl_Exception
- * @uses       Zend_Soap_Wsdl_Strategy_DefaultComplexType
+ * @uses       \Zend\Soap\WSDL\Exception
+ * @uses       \Zend\Soap\WSDL\Strategy\DefaultComplexType
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage Wsdl
+ * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex extends Zend_Soap_Wsdl_Strategy_DefaultComplexType
+class ArrayOfTypeComplex extends DefaultComplexType
 {
     protected $_inProcess = array();
 
@@ -44,25 +50,25 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex extends Zend_Soap_Wsdl_Strategy
     public function addComplexType($type)
     {
         if(in_array($type, $this->_inProcess)) {
-            throw new Zend_Soap_Wsdl_Exception("Infinite recursion, cannot nest '".$type."' into itself.");
+            throw new WSDL\Exception("Infinite recursion, cannot nest '$type' into itself.");
         }
         $this->_inProcess[$type] = $type;
 
         $nestingLevel = $this->_getNestedCount($type);
 
         if($nestingLevel > 1) {
-            throw new Zend_Soap_Wsdl_Exception(
-                "ArrayOfTypeComplex cannot return nested ArrayOfObject deeper than ".
-                "one level. Use array object properties to return deep nested data.
-            ");
+            throw new WSDL\Exception(
+                'ArrayOfTypeComplex cannot return nested ArrayOfObject deeper than '
+              . 'one level. Use array object properties to return deep nested data.'
+            );
         }
 
         $singularType = $this->_getSingularPhpType($type);
 
         if(!class_exists($singularType)) {
-            throw new Zend_Soap_Wsdl_Exception(sprintf(
-                "Cannot add a complex type %s that is not an object or where ".
-                "class could not be found in 'DefaultComplexType' strategy.", $type
+            throw new WSDL\Exception(sprintf(
+                'Cannot add a complex type %s that is not an object or where '
+              . 'class could not be found in \'DefaultComplexType\' strategy.', $type
             ));
         }
 
@@ -79,7 +85,7 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex extends Zend_Soap_Wsdl_Strategy
         }
 
         unset($this->_inProcess[$type]);
-        return "tns:".$xsdComplexTypeName;
+        return 'tns:' . $xsdComplexTypeName;
     }
 
     protected function _addArrayOfComplexType($singularType, $type)
@@ -92,16 +98,16 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex extends Zend_Soap_Wsdl_Strategy
             $complexType = $dom->createElement('xsd:complexType');
             $complexType->setAttribute('name', $xsdComplexTypeName);
 
-            $complexContent = $dom->createElement("xsd:complexContent");
+            $complexContent = $dom->createElement('xsd:complexContent');
             $complexType->appendChild($complexContent);
 
-            $xsdRestriction = $dom->createElement("xsd:restriction");
+            $xsdRestriction = $dom->createElement('xsd:restriction');
             $xsdRestriction->setAttribute('base', 'soap-enc:Array');
             $complexContent->appendChild($xsdRestriction);
 
-            $xsdAttribute = $dom->createElement("xsd:attribute");
-            $xsdAttribute->setAttribute("ref", "soap-enc:arrayType");
-            $xsdAttribute->setAttribute("wsdl:arrayType", sprintf("tns:%s[]", $singularType));
+            $xsdAttribute = $dom->createElement('xsd:attribute');
+            $xsdAttribute->setAttribute('ref', 'soap-enc:arrayType');
+            $xsdAttribute->setAttribute('wsdl:arrayType', "tns:{$singularType}[]");
             $xsdRestriction->appendChild($xsdAttribute);
 
             $this->getContext()->getSchema()->appendChild($complexType);
@@ -113,7 +119,7 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex extends Zend_Soap_Wsdl_Strategy
 
     protected function _getXsdComplexTypeName($type)
     {
-        return sprintf('ArrayOf%s', $type);
+        return 'ArrayOf' . $type;
     }
 
     /**
@@ -124,7 +130,7 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex extends Zend_Soap_Wsdl_Strategy
      */
     protected function _getSingularPhpType($type)
     {
-        return str_replace("[]", "", $type);
+        return str_replace('[]', '', $type);
     }
 
     /**
@@ -135,6 +141,6 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex extends Zend_Soap_Wsdl_Strategy
      */
     protected function _getNestedCount($type)
     {
-        return substr_count($type, "[]");
+        return substr_count($type, '[]');
     }
 }

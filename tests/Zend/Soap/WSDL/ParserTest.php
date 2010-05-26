@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Soap\WSDL;
+use Zend\Soap\WSDL;
 
 /**
  * @category   Zend
@@ -28,64 +33,65 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Soap
- * @group      Zend_Soap_Wsdl
+ * @group      Zend_Soap_WSDL
  * @group      disable
  */
-class Zend_Soap_Wsdl_ParserTest extends PHPUnit_Framework_TestCase
+class ParserTest extends \PHPUnit_Framework_TestCase
 {
-    protected function getWsdlExampleDom()
+    protected function getWSDLExampleDom()
     {
-        $dom = new DOMDocument();
+        $dom = new \DOMDocument();
         $dom->loadXml(file_get_contents(dirname(__FILE__)."/../_files/wsdl_example.wsdl"));
         return $dom;
     }
 
+/*
     public function testFactoryWithDomDocument()
     {
-        $dom = $this->getWsdlExampleDom();
-        $parser = Zend_Soap_Wsdl_Parser::factory($dom);
-        $this->assertTrue($parser instanceof Zend_Soap_Wsdl_Parser);
+        $dom = $this->getWSDLExampleDom();
+        $parser = WSDL\Parser::factory($dom);
+        $this->assertTrue($parser instanceof WSDL\Parser);
     }
 
     public function testFactoryWithString()
     {
         $xmlString = file_get_contents(dirname(__FILE__)."/../_files/wsdl_example.wsdl");
-        $parser = Zend_Soap_Wsdl_Parser::factory($xmlString);
-        $this->assertTrue($parser instanceof Zend_Soap_Wsdl_Parser);
+        $parser = WSDL\Parser::factory($xmlString);
+        $this->assertTrue($parser instanceof WSDL\Parser);
     }
 
     public function testFactoryWithSimpleXml()
     {
         $xmlString = file_get_contents(dirname(__FILE__)."/../_files/wsdl_example.wsdl");
         $simpleXml = simplexml_load_string($xmlString);
-        $parser = Zend_Soap_Wsdl_Parser::factory($simpleXml);
-        $this->assertTrue($parser instanceof Zend_Soap_Wsdl_Parser);
+        $parser = WSDL\Parser::factory($simpleXml);
+        $this->assertTrue($parser instanceof WSDL\Parser);
     }
 
-    public function testFactoryWithZendSoapWsdl()
+    public function testFactoryWithZendSoapWSDL()
     {
-        $wsdl = new Zend_Soap_Wsdl("name", "http://example.com");
-        $parser = Zend_Soap_Wsdl_Parser::factory($wsdl);
-        $this->assertTrue($parser instanceof Zend_Soap_Wsdl_Parser);
+        $wsdl = new WSDL\WSDL("name", "http://example.com");
+        $parser = WSDL\Parser::factory($wsdl);
+        $this->assertTrue($parser instanceof WSDL\Parser);
     }
 
     public function testFactoryWithInvalidParser()
     {
-        $wsdl = new Zend_Soap_Wsdl("name", "http://example.com");
+        $wsdl = new WSDL\WSDL("name", "http://example.com");
         try {
-            $parser = Zend_Soap_Wsdl_Parser::factory($wsdl, "stdClass");
+            $parser = WSDL\Parser::factory($wsdl, "stdClass");
             $this->fail();
-        } catch(Exception $e) {
-            $this->assertTrue($e instanceof Zend_Soap_Wsdl_Parser_Exception);
+        } catch(\Exception $e) {
+            $this->assertTrue($e instanceof WSDL\Parser\Exception);
         }
     }
 
     public function testFactoryWithInvalidData()
     {
         try {
-            $parser = Zend_Soap_Wsdl_Parser::factory(null);
+            $parser = WSDL\Parser::factory(null);
             $this->fail();
-        } catch(Zend_Soap_Wsdl_Exception $e) {
+        } catch(WSDL\Exception $e) {
 
         }
     }
@@ -93,56 +99,56 @@ class Zend_Soap_Wsdl_ParserTest extends PHPUnit_Framework_TestCase
     public function testParserApiInterface()
     {
         // Constructor expects DOMDocument instance
-        $dom = $this->getWsdlExampleDom();
-        $parser = new Zend_Soap_Wsdl_Parser($dom);
+        $dom = $this->getWSDLExampleDom();
+        $parser = new WSDL\Parser($dom);
 
-        // SetWsdl is a fluent function
-        $this->assertTrue( ($parser->setDomDocumentContainingWsdl($dom)) instanceof Zend_Soap_Wsdl_Parser );
+        // SetWSDL is a fluent function
+        $this->assertTrue( ($parser->setDomDocumentContainingWSDL($dom)) instanceof WSDL\Parser );
 
         // Parse returns Result
         $result = $parser->parse();
-        $this->assertTrue($result instanceof Zend_Soap_Wsdl_Parser_Result);
+        $this->assertTrue($result instanceof WSDL\Parser\Result);
     }
 
     public function testParserResultApiInterface()
     {
-        $result = new Zend_Soap_Wsdl_Parser_Result(
+        $result = new WSDL\Parser\Result(
             "name",
-            Zend_Soap_Wsdl_Parser::WSDL_11,
-            new Zend_Soap_Wsdl_Element_Collection("Operation"),
-            new Zend_Soap_Wsdl_Element_Collection("Port"),
-            new Zend_Soap_Wsdl_Element_Collection("Binding"),
-            new Zend_Soap_Wsdl_Element_Collection("Service"),
-            new Zend_Soap_Wsdl_Element_Collection("Type"),
+            WSDL\Parser::WSDL_11,
+            new WSDL\Element_Collection("Operation"),
+            new WSDL\Element_Collection("Port"),
+            new WSDL\Element_Collection("Binding"),
+            new WSDL\Element_Collection("Service"),
+            new WSDL\Element_Collection("Type"),
             array("docs")
         );
 
         $this->assertEquals("name",         $result->getName());
-        $this->assertEquals("Zend_Soap_Wsdl_Element_Operation",    $result->operations->getType());
-        $this->assertEquals("Zend_Soap_Wsdl_Element_Port",         $result->ports->getType());
-        $this->assertEquals("Zend_Soap_Wsdl_Element_Binding",      $result->bindings->getType());
-        $this->assertEquals("Zend_Soap_Wsdl_Element_Service",      $result->services->getType());
-        $this->assertEquals("Zend_Soap_Wsdl_Element_Type",         $result->types->getType());
+        $this->assertEquals("Zend_Soap_WSDL_Element_Operation",    $result->operations->getType());
+        $this->assertEquals("Zend_Soap_WSDL_Element_Port",         $result->ports->getType());
+        $this->assertEquals("Zend_Soap_WSDL_Element_Binding",      $result->bindings->getType());
+        $this->assertEquals("Zend_Soap_WSDL_Element_Service",      $result->services->getType());
+        $this->assertEquals("Zend_Soap_WSDL_Element_Type",         $result->types->getType());
         $this->assertEquals(array("docs"),  $result->documentation);
 
         try {
             $key = $result->invalidKeyThrowsException;
             $this->fail();
-        } catch(Exception $e) {
-            $this->assertTrue($e instanceof Zend_Soap_Wsdl_Parser_Exception);
+        } catch(\Exception $e) {
+            $this->assertTrue($e instanceof WSDL\Parser\Exception);
         }
     }
 
-    public function testParseExampleWsdlAndCountResultElements()
+    public function testParseExampleWSDLAndCountResultElements()
     {
         // Constructor expects DOMDocument instance
-        $dom = $this->getWsdlExampleDom();
-        $parser = new Zend_Soap_Wsdl_Parser($dom);
+        $dom = $this->getWSDLExampleDom();
+        $parser = new WSDL\Parser($dom);
 
         $result = $parser->parse();
 
         $this->assertEquals("Zend_Soap_Server_TestClass", $result->getName());
-        $this->assertEquals(Zend_Soap_Wsdl_Parser::WSDL_11, $result->getVersion());
+        $this->assertEquals(WSDL\Parser::WSDL_11, $result->getVersion());
         $this->assertEquals(4, count($result->operations), "Number of operations does not match.");
         $this->assertEquals(1, count($result->bindings), "Number of bindings does not match.");
         $this->assertEquals(1, count($result->ports), "Number of ports does not match.");
@@ -152,11 +158,11 @@ class Zend_Soap_Wsdl_ParserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(4, count($result->ports->current()->operations), "Number of operations in the ports collection does not match.");
     }
 
-    public function testParseExampleWsdlAndCheckMatchingNames()
+    public function testParseExampleWSDLAndCheckMatchingNames()
     {
         // Constructor expects DOMDocument instance
-        $dom = $this->getWsdlExampleDom();
-        $parser = new Zend_Soap_Wsdl_Parser($dom);
+        $dom = $this->getWSDLExampleDom();
+        $parser = new WSDL\Parser($dom);
 
         $result = $parser->parse();
 
@@ -174,12 +180,13 @@ class Zend_Soap_Wsdl_ParserTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testParseExampleWsdlWithDocumentationBlocks()
+    public function testParseExampleWSDLWithDocumentationBlocks()
     {
-        $dom = new DOMDocument();
+        $dom = new \DOMDocument();
         $dom->loadXml(file_get_contents(dirname(__FILE__)."/../_files/wsdl_documentation.wsdl"));
 
-        $parser = new Zend_Soap_Wsdl_Parser($dom);
+        $parser = new WSDL\Parser($dom);
         $result = $parser->parse();
     }
+*/
 }

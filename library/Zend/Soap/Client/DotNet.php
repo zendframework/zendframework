@@ -20,7 +20,10 @@
  * @version    $Id$
  */
 
-if (extension_loaded('soap')) {
+/**
+ * @namespace
+ */
+namespace Zend\Soap\Client;
 
 /**
  * Zend_Soap_Client_Local
@@ -31,13 +34,13 @@ if (extension_loaded('soap')) {
  * Please leave your notes, compatiblity issues reports or
  * suggestions in fw-webservices@lists.zend.com or fw-general@lists.com
  *
- * @uses       Zend_Soap_Client
- * @uses       Zend_Soap_Client_Exception
+ * @uses       \Zend\Soap\Client\Client
+ * @uses       \Zend\Soap\Client\Exception
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Client
  */
-class Zend_Soap_Client_DotNet extends Zend_Soap_Client
+class DotNet extends Client
 {
     /**
      * Constructor
@@ -60,14 +63,14 @@ class Zend_Soap_Client_DotNet extends Zend_Soap_Client
      * My be overridden in descendant classes
      *
      * @param array $arguments
-     * @throws Zend_Soap_Client_Exception
+     * @throws \Zend\Soap\Client\Exception
      */
     protected function _preProcessArguments($arguments)
     {
         if (count($arguments) > 1  ||
             (count($arguments) == 1  &&  !is_array(reset($arguments)))
            ) {
-            throw new Zend_Soap_Client_Exception('.Net webservice arguments have to be grouped into array: array(\'a\' => $a, \'b\' => $b, ...).');
+            throw new Exception('.Net webservice arguments have to be grouped into array: array(\'a\' => $a, \'b\' => $b, ...).');
         }
 
         // Do nothing
@@ -89,5 +92,3 @@ class Zend_Soap_Client_DotNet extends Zend_Soap_Client
     }
 
 }
-
-} // end if (extension_loaded('soap')

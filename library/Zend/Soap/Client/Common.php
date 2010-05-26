@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace Zend\Soap\Client;
 
 if (extension_loaded('soap')) {
 
@@ -29,7 +33,7 @@ if (extension_loaded('soap')) {
  * @package    Zend_Soap
  * @subpackage Client
  */
-class Zend_Soap_Client_Common extends SoapClient
+class Common extends \SoapClient
 {
     /**
      * doRequest() pre-processing method

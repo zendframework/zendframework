@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Soap\AutoDiscover;
+use Zend\Soap\Client;
 
 /** Zend_Soap_Server */
 
@@ -31,7 +36,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Soap
  */
-class Zend_Soap_AutoDiscover_OnlineTest extends PHPUnit_Framework_TestCase
+class OnlineTest extends \PHPUnit_Framework_TestCase
 {
     protected $baseuri;
 
@@ -47,11 +52,11 @@ class Zend_Soap_AutoDiscover_OnlineTest extends PHPUnit_Framework_TestCase
     {
         $wsdl = $this->baseuri."/server1.php?wsdl";
 
-        $b = new Zend_Soap_Wsdl_ComplexTypeB();
+        $b = new \ZendTest\Soap\_files\ComplexTypeB();
         $b->bar = "test";
         $b->foo = "test";
 
-        $client = new Zend_Soap_Client($wsdl);
+        $client = new Client\Client($wsdl);
         $ret = $client->request($b);
 
         $this->assertTrue( is_array($ret) );
@@ -72,10 +77,10 @@ class Zend_Soap_AutoDiscover_OnlineTest extends PHPUnit_Framework_TestCase
     {
         $wsdl = $this->baseuri."/server2.php?wsdl";
 
-        $client = new Zend_Soap_Client($wsdl);
+        $client = new Client\Client($wsdl);
         $ret = $client->request("test", "test");
 
-        $this->assertTrue( ($ret instanceof stdClass) );
+        $this->assertTrue( ($ret instanceof \stdClass) );
         $this->assertEquals("test", $ret->foo);
         $this->assertEquals("test", $ret->bar);
     }

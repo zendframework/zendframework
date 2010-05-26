@@ -14,49 +14,25 @@
  *
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage Wsdl
+ * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * Abstract class for Zend_Soap_Wsdl_Strategy.
+ * @namespace
+ */
+namespace Zend\Soap\WSDL;
+
+/**
+ * Zend_Soap_WSDL_Exception
  *
- * @uses       Zend_Soap_Wsdl_Strategy_Interface
+ * @uses       \Zend\Exception
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage Wsdl
+ * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Soap_Wsdl_Strategy_Abstract implements Zend_Soap_Wsdl_Strategy_Interface
-{
-    /**
-     * Context object
-     *
-     * @var Zend_Soap_Wsdl
-     */
-    protected $_context;
-
-    /**
-     * Set the Zend_Soap_Wsdl Context object this strategy resides in.
-     *
-     * @param Zend_Soap_Wsdl $context
-     * @return void
-     */
-    public function setContext(Zend_Soap_Wsdl $context)
-    {
-        $this->_context = $context;
-    }
-
-    /**
-     * Return the current Zend_Soap_Wsdl context object
-     *
-     * @return Zend_Soap_Wsdl
-     */
-    public function getContext()
-    {
-        return $this->_context;
-    }
-}
+class Exception extends \Zend\Exception { }

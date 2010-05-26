@@ -20,39 +20,42 @@
  * @version    $Id$
  */
 
-if (extension_loaded('soap')) {
+/**
+ * @namespace
+ */
+namespace Zend\Soap\Client;
 
 /**
- * Zend_Soap_Client_Local
+ * \Zend\Soap\Client\Local
  *
  * Class is intended to be used as local SOAP client which works
  * with a provided Server object.
  *
  * Could be used for development or testing purposes.
  *
- * @uses       Zend_Soap_Client
- * @uses       Zend_Soap_Server
+ * @uses       \Zend\Soap\Client\Client
+ * @uses       \Zend\Soap\Server\Server
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Client
  */
-class Zend_Soap_Client_Local extends Zend_Soap_Client
+class Local extends Client
 {
     /**
      * Server object
      *
-     * @var Zend_Soap_Server
+     * @var \Zend\Soap\Server\Server
      */
     protected $_server;
 
     /**
      * Local client constructor
      *
-     * @param Zend_Soap_Server $server
+     * @param \Zend\Soap\Server\Server $server
      * @param string $wsdl
      * @param array $options
      */
-    function __construct(Zend_Soap_Server $server, $wsdl, $options = null)
+    function __construct(\Zend\Soap\Server\Server $server, $wsdl, $options = null)
     {
         $this->_server = $server;
 
@@ -66,7 +69,7 @@ class Zend_Soap_Client_Local extends Zend_Soap_Client
      * Actual "do request" method.
      *
      * @internal
-     * @param Zend_Soap_Client_Common $client
+     * @param \Zend\Soap\Client\Common $client
      * @param string $request
      * @param string $location
      * @param string $action
@@ -74,7 +77,7 @@ class Zend_Soap_Client_Local extends Zend_Soap_Client
      * @param int    $one_way
      * @return mixed
      */
-    public function _doRequest(Zend_Soap_Client_Common $client, $request, $location, $action, $version, $one_way = null)
+    public function _doRequest(Common $client, $request, $location, $action, $version, $one_way = null)
     {
         // Perform request as is
         ob_start();
@@ -85,5 +88,3 @@ class Zend_Soap_Client_Local extends Zend_Soap_Client
         return $response;
     }
 }
-
-} // end if (extension_loaded('soap')

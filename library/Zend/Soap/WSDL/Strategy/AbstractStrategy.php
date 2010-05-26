@@ -14,35 +14,54 @@
  *
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage Wsdl
+ * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * Interface for Zend_Soap_Wsdl_Strategy.
+ * @namespace
+ */
+namespace Zend\Soap\WSDL\Strategy;
+
+/**
+ * Abstract class for Zend_Soap_WSDL_Strategy.
  *
+ * @uses       \Zend\Soap\WSDL\Strategy\StrategyInterface
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage Wsdl
+ * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Soap_Wsdl_Strategy_Interface
+abstract class AbstractStrategy implements StrategyInterface
 {
     /**
-     * Method accepts the current WSDL context file.
+     * Context object
      *
-     * @param <type> $context
+     * @var \Zend\Soap\WSDL\WSDL
      */
-    public function setContext(Zend_Soap_Wsdl $context);
+    protected $_context;
 
     /**
-     * Create a complex type based on a strategy
+     * Set the Zend_Soap_WSDL Context object this strategy resides in.
      *
-     * @param  string $type
-     * @return string XSD type
+     * @param \Zend\Soap\WSDL\WSDL $context
+     * @return void
      */
-    public function addComplexType($type);
+    public function setContext(\Zend\Soap\WSDL\WSDL $context)
+    {
+        $this->_context = $context;
+    }
+
+    /**
+     * Return the current Zend_Soap_WSDL context object
+     *
+     * @return \Zend\Soap\WSDL\WSDL
+     */
+    public function getContext()
+    {
+        return $this->_context;
+    }
 }

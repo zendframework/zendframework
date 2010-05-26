@@ -14,25 +14,30 @@
  *
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage Wsdl
+ * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * Zend_Soap_Wsdl_Strategy_DefaultComplexType
+ * @namespace
+ */
+namespace Zend\Soap\WSDL\Strategy;
+
+/**
+ * Zend_Soap_WSDL_Strategy_DefaultComplexType
  *
  * @uses       ReflectionClass
- * @uses       Zend_Soap_Wsdl_Exception
- * @uses       Zend_Soap_Wsdl_Strategy_Abstract
+ * @uses       \Zend\Soap\WSDL\Exception
+ * @uses       \Zend\Soap\WSDL\Strategy\AbstractStrategy
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage Wsdl
+ * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_Wsdl_Strategy_DefaultComplexType extends Zend_Soap_Wsdl_Strategy_Abstract
+class DefaultComplexType extends AbstractStrategy
 {
     /**
      * Add a complex type by recursivly using all the class properties fetched via Reflection.
@@ -43,14 +48,14 @@ class Zend_Soap_Wsdl_Strategy_DefaultComplexType extends Zend_Soap_Wsdl_Strategy
     public function addComplexType($type)
     {
         if(!class_exists($type)) {
-            throw new Zend_Soap_Wsdl_Exception(sprintf(
-                "Cannot add a complex type %s that is not an object or where ".
-                "class could not be found in 'DefaultComplexType' strategy.", $type
+            throw new \Zend\Soap\WSDL\Exception(sprintf(
+                'Cannot add a complex type %s that is not an object or where '
+              . 'class could not be found in \'DefaultComplexType\' strategy.', $type
             ));
         }
 
         $dom = $this->getContext()->toDomDocument();
-        $class = new ReflectionClass($type);
+        $class = new \ReflectionClass($type);
 
         $complexType = $dom->createElement('xsd:complexType');
         $complexType->setAttribute('name', $type);

@@ -52,8 +52,8 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 [X] Zend_Gdata
 [X] Zend_InfoCard
 [X] Zend_Ldap
-[ ] Zend_Mime 
-[ ] `-> Zend_Mail
+[X] Zend_Mime 
+[X] `-> Zend_Mail
 [X] Zend_Markup
 [X] Zend_Memory 
 [X] `-> Zend_Pdf
@@ -69,7 +69,7 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 [X] `-> Zend_Rest_Client
 [X]     `-> Zend_Service_ReCaptcha
 [X]         `-> Zend_Captcha
-[ ] Zend_Soap
+[X] Zend_Soap
 [X] Zend_Tag
 [ ] Zend_Service_*
 [X] Zend_Session 

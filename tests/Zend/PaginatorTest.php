@@ -514,8 +514,42 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(10, $this->_paginator->getItemCountPerPage());
         $this->_paginator->setItemCountPerPage(15);
         $this->assertEquals(15, $this->_paginator->getItemCountPerPage());
+        $this->_paginator->setItemCountPerPage(10);
+    }
+
+    /**
+     * @group ZF-5376
+     */
+    public function testGetsAndSetsItemCounterPerPageOfNegativeOne()
+    {
+        Zend_Paginator::setConfig(new Zend_Config(array()));
+        $this->_paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array(range(1, 101)));
+        $this->_paginator->setItemCountPerPage(-1);
+        $this->assertEquals(101, $this->_paginator->getItemCountPerPage());
+        $this->_paginator->setItemCountPerPage(10);
+    }
+
+    /**
+     * @group ZF-5376
+     */
+    public function testGetsAndSetsItemCounterPerPageOfZero()
+    {
+        Zend_Paginator::setConfig(new Zend_Config(array()));
+        $this->_paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array(range(1, 101)));
         $this->_paginator->setItemCountPerPage(0);
-        $this->assertEquals(10, $this->_paginator->getItemCountPerPage());
+        $this->assertEquals(101, $this->_paginator->getItemCountPerPage());
+        $this->_paginator->setItemCountPerPage(10);
+    }
+
+    /**
+     * @group ZF-5376
+     */
+    public function testGetsAndSetsItemCounterPerPageOfNull()
+    {
+        Zend_Paginator::setConfig(new Zend_Config(array()));
+        $this->_paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array(range(1, 101)));
+        $this->_paginator->setItemCountPerPage();
+        $this->assertEquals(101, $this->_paginator->getItemCountPerPage());
         $this->_paginator->setItemCountPerPage(10);
     }
 

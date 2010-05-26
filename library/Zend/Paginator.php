@@ -93,7 +93,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
     protected static $_cache;
 
     /**
-     * Enable or desable the cache by Zend_Paginator instance
+     * Enable or disable the cache by Zend_Paginator instance
      *
      * @var bool
      */
@@ -1012,7 +1012,10 @@ class Zend_Paginator implements Countable, IteratorAggregate
      */
     protected function _getCacheInternalId()
     {
-        return md5(serialize($this->getAdapter()) . $this->getItemCountPerPage());
+        return md5(serialize(array(
+            get_class($this->getAdapter()),
+            $this->getItemCountPerPage()
+        )));
     }
 
     /**

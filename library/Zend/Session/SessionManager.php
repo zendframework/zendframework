@@ -25,7 +25,7 @@
 namespace Zend\Session;
 
 use Zend\Validator\Alnum as AlnumValidator,
-    Zend\Messenger;
+    Zend\SignalSlot\SignalSlot;
 
 /**
  * Session Manager implementation utilizing ext/session
@@ -64,7 +64,7 @@ class SessionManager extends AbstractManager
     protected $_name;
 
     /**
-     * @var Messenger\Delivery Validation chain to determine if session is valid
+     * @var SignalSlot Validation chain to determine if session is valid
      */
     protected $_validatorChain;
 
@@ -289,10 +289,10 @@ class SessionManager extends AbstractManager
      *
      * In most cases, you should use an instance of {@link ValidatorChain}.
      * 
-     * @param  Messenger\Delivery $chain 
+     * @param  SignalSlot $chain 
      * @return SessionManager
      */
-    public function setValidatorChain(Messenger\Delivery $chain)
+    public function setValidatorChain(SignalSlot $chain)
     {
         $this->_validatorChain = $chain;
         return $this;
@@ -324,7 +324,7 @@ class SessionManager extends AbstractManager
     public function isValid()
     {
         $validator = $this->getValidatorChain();
-        $return    = $validator->notifyUntil(function($test) {
+        $return    = $validator->emitUntil(function($test) {
             return !$test;
         }, 'session.validate');
         if (null === $return) {

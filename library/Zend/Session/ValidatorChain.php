@@ -23,7 +23,7 @@
  */
 namespace Zend\Session;
 
-use Zend\Messenger\Messenger;
+use Zend\SignalSlot\Signals;
 
 /**
  * Zend_Session_Validator_Interface
@@ -33,7 +33,7 @@ use Zend\Messenger\Messenger;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ValidatorChain extends Messenger
+class ValidatorChain extends Signals
 {
     /**
      * @var Storage
@@ -55,7 +55,7 @@ class ValidatorChain extends Messenger
         $validators = $storage->getMetadata('_VALID');
         if ($validators) {
             foreach ($validators as $validator => $data) {
-                $this->attach('session.validate', new $validator($data), 'isValid');
+                $this->connect('session.validate', new $validator($data), 'isValid');
             }
         }
     }
@@ -66,9 +66,9 @@ class ValidatorChain extends Messenger
      * @param  string $topic 
      * @param  string|object|Closure $context 
      * @param  null|string $handler 
-     * @return ValidatorChain
+     * @return Zend\Stdlib\SignalHandler
      */
-    public function attach($topic, $context, $handler = null)
+    public function connect($topic, $context, $handler = null)
     {
         if ($context instanceof Validator) {
             $data = $context->getData();
@@ -76,7 +76,7 @@ class ValidatorChain extends Messenger
             $this->getStorage()->setMetadata('_VALID', array($name => $data));
         }
 
-        $handle = parent::attach($topic, $context, $handler);
+        $handle = parent::connect($topic, $context, $handler);
         return $handle;
     }
 

@@ -24,7 +24,7 @@
  */
 namespace Zend\Session;
 
-use Zend\Messenger;
+use Zend\SignalSlot\SignalSlot;
 
 /**
  * Session manager interface
@@ -56,7 +56,7 @@ interface Manager
     public function forgetMe();
     public function expireSessionCookie();
 
-    public function setValidatorChain(Messenger\Delivery $chain);
+    public function setValidatorChain(SignalSlot $chain);
     public function getValidatorChain();
     public function isValid();
 }

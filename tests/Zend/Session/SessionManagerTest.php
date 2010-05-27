@@ -545,7 +545,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\\Session\\Exception', 'failed');
         $chain = $this->manager->getValidatorChain();
-        $chain->attach('session.validate', function() {
+        $chain->connect('session.validate', function() {
              return false;
         });
         $this->manager->start();

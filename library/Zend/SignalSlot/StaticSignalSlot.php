@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Messenger
+ * @package    Zend_SignalSlot
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,23 +21,25 @@
 /**
  * @namespace
  */
-namespace Zend\Messenger;
+namespace Zend\SignalSlot;
+
+use Zend\Stdlib\SignalHandler;
 
 /**
- * Interface for messengers
+ * Interface for global (static) message delivery
  *
  * @category   Zend
- * @package    Zend_Messenger
+ * @package    Zend_SignalSlot
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Delivery
+interface StaticSignalSlot
 {
-    public function notify($topic, $argv = null);
-    public function notifyUntil($callback, $topic, $argv = null);
-    public function attach($topic, $context, $handler = null);
-    public function detach(Handler $handle);
-    public function getTopics();
-    public function getHandlers($topic);
-    public function clearHandlers($topic);
+    public static function emit($signal, $args = null);
+    public static function emitUntil($callback, $signal, $args = null);
+    public static function connect($signal, $context, $handler = null);
+    public static function detach(SignalHandler $handle);
+    public static function getSignals();
+    public static function getHandlers($signal);
+    public static function clearHandlers($signal);
 }

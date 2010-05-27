@@ -1,5 +1,5 @@
 <?php
-namespace ZendTest\Messenger\Handlers;
+namespace ZendTest\Stdlib\SignalHandlers;
 
 class Overloadable
 {

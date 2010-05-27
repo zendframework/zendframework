@@ -52,7 +52,7 @@ class TestManager extends AbstractManager
     {}
 
 
-    public function setValidatorChain(\Zend\Messenger\Delivery $chain)
+    public function setValidatorChain(\Zend\SignalSlot\SignalSlot $chain)
     {}
 
     public function getValidatorChain()

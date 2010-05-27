@@ -1,5 +1,6 @@
 <?php
-namespace ZendTest\Messenger\Handlers;
+namespace ZendTest\Stdlib\SignalHandlers;
+
 class InstanceMethod
 {
     public function callable()

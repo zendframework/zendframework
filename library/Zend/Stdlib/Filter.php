@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Messenger
+ * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,20 +21,21 @@
 /**
  * @namespace
  */
-namespace Zend\Messenger;
+namespace Zend\Stdlib;
 
 /**
- * Invalid callback exception
+ * Interface for filters
  *
- * @uses       Exception
- * @uses       Zend\Messenger\Exception
  * @category   Zend
- * @package    Zend_Messenger
+ * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidCallbackException
-    extends \Exception
-    implements Exception
+interface Filter
 {
+    public function filter($value);
+    public function connect($context, $handler = null);
+    public function detach(SignalHandler $filter);
+    public function getFilters();
+    public function clearFilters();
 }

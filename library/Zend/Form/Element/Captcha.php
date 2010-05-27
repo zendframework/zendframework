@@ -207,8 +207,8 @@ class Zend_Form_Element_Captcha extends Zend_Form_Element_Xhtml
         $type = strtoupper($type);
         if ($type == self::CAPTCHA) {
             if (!isset($this->_loaders[$type])) {
-                $this->_loaders[$type] = new Zend_Loader_PluginLoader(
-                    array('Zend_Captcha' => 'Zend/Captcha/')
+                $this->_loaders[$type] = new \Zend\Loader\PluginLoader\PluginLoader(
+                    array('Zend\\Captcha' => 'Zend/Captcha/')
                 );
             }
             return $this->_loaders[$type];

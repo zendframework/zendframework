@@ -20,15 +20,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Barcode;
+use Zend;
+
+/**
  * Zend_Barcode_Exception
  *
- * @uses       Zend_Exception
+ * @uses       \Zend\Exception
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Exception extends Zend_Exception
+class Exception extends Zend\Exception
 {
     /**
      * Is this exception renderable?
@@ -38,9 +44,9 @@ class Zend_Barcode_Exception extends Zend_Exception
 
     /**
      * Set renderable flag
-     * 
-     * @param  bool $flag 
-     * @return Zend_Barcode_Exception
+     *
+     * @param  bool $flag
+     * @return \Zend\Barcode\Exception
      */
     public function setIsRenderable($flag)
     {
@@ -50,7 +56,7 @@ class Zend_Barcode_Exception extends Zend_Exception
 
     /**
      * Retrieve renderable flag
-     * 
+     *
      * @return bool
      */
     public function isRenderable()

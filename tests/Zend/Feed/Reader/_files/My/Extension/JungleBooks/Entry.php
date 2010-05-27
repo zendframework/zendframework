@@ -20,7 +20,10 @@
  * @version    $Id$
  */
 
-
+/**
+ * @namespace
+ */
+namespace My\Extension\JungleBooks;
 
 /**
  * @category   Zend
@@ -29,7 +32,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class My_FeedReader_Extension_JungleBooks_Entry extends Zend_Feed_Reader_Extension_EntryAbstract
+class Entry extends \Zend\Feed\Reader\Extension\EntryAbstract
 {
 
     public function getIsbn()

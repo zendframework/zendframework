@@ -20,18 +20,10 @@
  * @version    $Id$
  */
 
-// Call Zend_ProgressBar_Adapter_jsPushTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_ProgressBar_Adapter_jsPushTest::main");
-}
-
 /**
- * Test helper
+ * @namespace
  */
-
-/**
- * Zend_ProgressBar_Adapter_JsPush
- */
+namespace ZendTest\ProgressBar\Adapter;
 
 /**
  * @category   Zend
@@ -41,28 +33,18 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_ProgressBar
  */
-class Zend_ProgressBar_Adapter_jsPushTest extends PHPUnit_Framework_TestCase
+class JsPushTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_ProgressBar_Adapter_jsPushTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function testJson()
     {
         $result = array();
 
-        $adapter = new Zend_ProgressBar_Adapter_jsPush_Stub(array('finishMethodName' => 'Zend_ProgressBar_Finish'));
+        $adapter = new JsPushStub(array('finishMethodName' => 'Zend\ProgressBar\ProgressBar\Finish'));
         $adapter->notify(0, 2, 0.5, 1, 1, 'status');
         $output = $adapter->getLastOutput();
 
-        $matches = preg_match('#<script type="text/javascript">parent.Zend_ProgressBar_Update\((.*?)\);</script>#', $output, $result);
+        $matches = preg_match('#<script type="text/javascript">parent.'. preg_quote('Zend\\ProgressBar\\ProgressBar\\Update') . '\((.*?)\);</script>#', $output, $result);
         $this->assertEquals(1, $matches);
 
         $data = json_decode($result[1], true);
@@ -77,12 +59,12 @@ class Zend_ProgressBar_Adapter_jsPushTest extends PHPUnit_Framework_TestCase
         $adapter->finish();
         $output = $adapter->getLastOutput();
 
-        $matches = preg_match('#<script type="text/javascript">parent.Zend_ProgressBar_Finish\(\);</script>#', $output, $result);
+        $matches = preg_match('#<script type="text/javascript">parent.'. preg_quote('Zend\ProgressBar\ProgressBar\Finish') . '\(\);</script>#', $output, $result);
         $this->assertEquals(1, $matches);
     }
 }
 
-class Zend_ProgressBar_Adapter_jsPush_Stub extends Zend_ProgressBar_Adapter_JsPush
+class JsPushStub extends \Zend\ProgressBar\Adapter\JsPush
 {
     protected $_lastOutput = null;
 
@@ -95,9 +77,4 @@ class Zend_ProgressBar_Adapter_jsPush_Stub extends Zend_ProgressBar_Adapter_JsPu
     {
         $this->_lastOutput = $data;
     }
-}
-
-// Call Zend_ProgressBar_Adapter_jsPushTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_ProgressBar_Adapter_jsPushTest::main") {
-    Zend_ProgressBar_Adapter_jsPushTest::main();
 }

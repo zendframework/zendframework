@@ -21,17 +21,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Mail\Transport;
+use Zend\Config;
+
+/**
  * Class for sending eMails via the PHP internal mail() function
  *
- * @uses       Zend_Mail_Transport_Abstract
- * @uses       Zend_Mail_Transport_Exception
+ * @uses       \Zend\Mail\Transport\AbstractTransport
+ * @uses       \Zend\Mail\Transport\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Transport
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
+class Sendmail extends AbstractTransport
 {
     /**
      * Subject
@@ -64,19 +70,19 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
     /**
      * Constructor.
      *
-     * @param  string|array|Zend_Config $parameters OPTIONAL (Default: null)
+     * @param  string|array|\Zend\Config\Config $parameters OPTIONAL (Default: null)
      * @return void
      */
     public function __construct($parameters = null)
     {
-        if ($parameters instanceof Zend_Config) { 
-            $parameters = $parameters->toArray(); 
+        if ($parameters instanceof Config\Config) {
+            $parameters = $parameters->toArray();
         }
 
-        if (is_array($parameters)) { 
+        if (is_array($parameters)) {
             $parameters = implode(' ', $parameters);
         }
-        
+
         $this->parameters = $parameters;
     }
 
@@ -86,9 +92,9 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
      *
      * @access public
      * @return void
-     * @throws Zend_Mail_Transport_Exception if parameters is set
+     * @throws \Zend\Mail\Transport\Exception if parameters is set
      *         but not a string
-     * @throws Zend_Mail_Transport_Exception on mail() failure
+     * @throws \Zend\Mail\Transport\Exception on mail() failure
      */
     public function _sendMail()
     {
@@ -106,7 +112,7 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
 	             * Exception is thrown here because
 	             * $parameters is a public property
 	             */
-                throw new Zend_Mail_Transport_Exception(
+                throw new Exception(
                     'Parameters were set but are not a string'
                 );
             }
@@ -122,7 +128,7 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
         }
 
         if ($this->_errstr !== null || !$result) {
-            throw new Zend_Mail_Transport_Exception('Unable to send mail. ' . $this->_errstr);
+            throw new Exception('Unable to send mail. ' . $this->_errstr);
         }
     }
 
@@ -137,12 +143,12 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
      * @access  protected
      * @param   array $headers
      * @return  void
-     * @throws  Zend_Mail_Transport_Exception
+     * @throws  \Zend\Mail\Transport\Exception
      */
     protected function _prepareHeaders($headers)
     {
         if (!$this->_mail) {
-            throw new Zend_Mail_Transport_Exception('_prepareHeaders requires a registered Zend_Mail object');
+            throw new Exception('_prepareHeaders requires a registered \Zend\Mail\Mail object');
         }
 
         // mail() uses its $to parameter to set the To: header, and the $subject
@@ -150,12 +156,12 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
         if (0 === strpos(PHP_OS, 'WIN')) {
             // If the current recipients list is empty, throw an error
             if (empty($this->recipients)) {
-                throw new Zend_Mail_Transport_Exception('Missing To addresses');
+                throw new Exception('Missing To addresses');
             }
         } else {
             // All others, simply grab the recipients and unset the To: header
             if (!isset($headers['To'])) {
-                throw new Zend_Mail_Transport_Exception('Missing To header');
+                throw new Exception('Missing To header');
             }
 
             unset($headers['To']['append']);

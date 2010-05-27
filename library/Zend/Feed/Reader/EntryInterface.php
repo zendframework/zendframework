@@ -20,12 +20,17 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed\Reader;
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Feed_Reader_EntryInterface
+interface EntryInterface
 {
     /**
      * Get the specified author
@@ -137,7 +142,7 @@ interface Zend_Feed_Reader_EntryInterface
     /**
      * Get all categories
      *
-     * @return Zend_Feed_Reader_Collection_Category
+     * @return \Zend\Feed\Reader\Collection\Category
      */
     public function getCategories();
 }

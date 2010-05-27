@@ -14,23 +14,29 @@
  *
  * @category   Zend
  * @package    Zend_Server
- * @subpackage Method
+ * @subpackage Zend_Server_Method
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Server\Method;
+use Zend\Server;
+
+/**
  * Method callback metadata
  *
- * @uses       Zend_Server_Exception
+ * @uses       \Zend\Server\Exception
  * @category   Zend
  * @package    Zend_Server
- * @subpackage Method
+ * @subpackage Zend_Server_Method
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Server_Method_Callback
+class Callback
 {
     /**
      * @var string Class name for class method callback
@@ -74,7 +80,7 @@ class Zend_Server_Method_Callback
      * Set object state from array of options
      *
      * @param  array $options
-     * @return Zend_Server_Method_Callback
+     * @return \Zend\Server\Method\Callback
      */
     public function setOptions(array $options)
     {
@@ -91,7 +97,7 @@ class Zend_Server_Method_Callback
      * Set callback class
      *
      * @param  string $class
-     * @return Zend_Server_Method_Callback
+     * @return \Zend\Server\Method\Callback
      */
     public function setClass($class)
     {
@@ -116,7 +122,7 @@ class Zend_Server_Method_Callback
      * Set callback function
      *
      * @param  string $function
-     * @return Zend_Server_Method_Callback
+     * @return \Zend\Server\Method\Callback
      */
     public function setFunction($function)
     {
@@ -139,7 +145,7 @@ class Zend_Server_Method_Callback
      * Set callback class method
      *
      * @param  string $method
-     * @return Zend_Server_Method_Callback
+     * @return \Zend\Server\Method\Callback
      */
     public function setMethod($method)
     {
@@ -161,13 +167,13 @@ class Zend_Server_Method_Callback
      * Set callback type
      *
      * @param  string $type
-     * @return Zend_Server_Method_Callback
-     * @throws Zend_Server_Exception
+     * @return \Zend\Server\Method\Callback
+     * @throws \Zend\Server\Exception
      */
     public function setType($type)
     {
         if (!in_array($type, $this->_types)) {
-            throw new Zend_Server_Exception('Invalid method callback type  passed to ' . __CLASS__ . '::' . __METHOD__);
+            throw new Server\Exception('Invalid method callback type "' . $type . '" passed to ' . __CLASS__ . '::' . __METHOD__);
         }
         $this->_type = $type;
         return $this;

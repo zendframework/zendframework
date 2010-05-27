@@ -21,11 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-
-/**
  * Zend_Service_Amazon_Ec2_CloudWatch test case.
  *
  * @category   Zend
@@ -57,7 +52,7 @@ class Zend_Service_Amazon_Ec2_CloudWatchTest extends PHPUnit_Framework_TestCase
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_CloudWatch::setHttpClient($client);
+        Zend_Service_Amazon_Ec2_CloudWatch::setDefaultHTTPClient($client);
     }
 
     /**

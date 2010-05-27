@@ -20,13 +20,18 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed\Reader\Collection;
+
+/**
  * @uses       ArrayObject
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Feed_Reader_Collection_CollectionAbstract extends ArrayObject
+abstract class CollectionAbstract extends \ArrayObject
 {
 
     /**

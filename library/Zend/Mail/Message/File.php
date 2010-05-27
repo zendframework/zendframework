@@ -20,14 +20,20 @@
  */
 
 /**
- * @uses       Zend_Mail_Message_Interface
- * @uses       Zend_Mail_Part_File
+ * @namespace
+ */
+namespace Zend\Mail\Message;
+use Zend\Mail\Part as MailPart;
+
+/**
+ * @uses       \Zend\Mail\Message\MessageInterface
+ * @uses       \Zend\Mail\Part\File
  * @category   Zend
  * @package    Zend_Mail
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Mail_Message_File extends Zend_Mail_Part_File implements Zend_Mail_Message_Interface
+class File extends MailPart\File implements MessageInterface
 {
     /**
      * flags for this message
@@ -42,7 +48,7 @@ class Zend_Mail_Message_File extends Zend_Mail_Part_File implements Zend_Mail_Me
      * - flags array with flags for message, keys are ignored, use constants defined in Zend_Mail_Storage
      *
      * @param  string $rawMessage  full message with or without headers
-     * @throws Zend_Mail_Exception
+     * @throws \Zend\Mail\Exception
      */
     public function __construct(array $params)
     {
@@ -67,7 +73,7 @@ class Zend_Mail_Message_File extends Zend_Mail_Part_File implements Zend_Mail_Me
     /**
      * check if flag is set
      *
-     * @param mixed $flag a flag name, use constants defined in Zend_Mail_Storage
+     * @param mixed $flag a flag name, use constants defined in \Zend\Mail\Storage\Storage
      * @return bool true if set, otherwise false
      */
     public function hasFlag($flag)

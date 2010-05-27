@@ -21,6 +21,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Search\Lucene\Index;
+use Zend\Search\Lucene\Storage\Directory;
+use Zend\Search\Lucene\Index;
+use Zend\Search\Lucene\Storage\File;
+
+/**
  * Zend_Search_Lucene_Index_SegmentInfo
  */
 
@@ -36,48 +44,48 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-class Zend_Search_Lucene_Index_SegmentInfoTest extends PHPUnit_Framework_TestCase
+class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreate()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
 
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
-        $this->assertTrue($segmentInfo instanceof Zend_Search_Lucene_Index_SegmentInfo);
+        $this->assertTrue($segmentInfo instanceof Index\SegmentInfo);
     }
 
     public function testOpenCompoundFile()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $file1 = $segmentInfo->openCompoundFile('.fnm');
-        $this->assertTrue($file1 instanceof Zend_Search_Lucene_Storage_File);
+        $this->assertTrue($file1 instanceof File\FileInterface);
 
         $file2 = $segmentInfo->openCompoundFile('.tii');
         $file3 = $segmentInfo->openCompoundFile('.tii');
         $file4 = $segmentInfo->openCompoundFile('.tii', false);
 
-        $this->assertTrue($file2 instanceof Zend_Search_Lucene_Storage_File);
+        $this->assertTrue($file2 instanceof File\FileInterface);
         $this->assertTrue($file2 === $file3);
-        $this->assertTrue($file4 instanceof Zend_Search_Lucene_Storage_File);
+        $this->assertTrue($file4 instanceof File\FileInterface);
         $this->assertTrue($file2 !== $file4);
     }
 
 
     public function testCompoundFileLength()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $this->assertEquals($segmentInfo->compoundFileLength('.tii'), 58);
     }
 
     public function testGetFieldNum()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $this->assertEquals($segmentInfo->getFieldNum('contents'), 2);
         $this->assertEquals($segmentInfo->getFieldNum('non-presented-field'), -1);
@@ -85,8 +93,8 @@ class Zend_Search_Lucene_Index_SegmentInfoTest extends PHPUnit_Framework_TestCas
 
     public function testGetField()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $fieldInfo = $segmentInfo->getField(2);
 
@@ -98,8 +106,8 @@ class Zend_Search_Lucene_Index_SegmentInfoTest extends PHPUnit_Framework_TestCas
 
     public function testGetFields()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $this->assertTrue($segmentInfo->getFields() == array('path' => 'path', 'modified' => 'modified', 'contents' => 'contents'));
         $this->assertTrue($segmentInfo->getFields(true) == array('path' => 'path', 'modified' => 'modified', 'contents' => 'contents'));
@@ -107,8 +115,8 @@ class Zend_Search_Lucene_Index_SegmentInfoTest extends PHPUnit_Framework_TestCas
 
     public function testGetFieldInfos()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $fieldInfos = $segmentInfo->getFieldInfos();
 
@@ -130,16 +138,16 @@ class Zend_Search_Lucene_Index_SegmentInfoTest extends PHPUnit_Framework_TestCas
 
     public function testCount()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $this->assertEquals($segmentInfo->count(), 2);
     }
 
     public function testNumDocs()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_3', 2);
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $segmentInfo = new Index\SegmentInfo($directory, '_3', 2);
 
         $this->assertEquals($segmentInfo->count(), 2);
         $this->assertEquals($segmentInfo->numDocs(), 1);
@@ -147,18 +155,18 @@ class Zend_Search_Lucene_Index_SegmentInfoTest extends PHPUnit_Framework_TestCas
 
     public function testGetName()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $this->assertEquals($segmentInfo->getName(), '_1');
     }
 
     public function testGetTermInfo()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
-        $termInfo = $segmentInfo->getTermInfo(new Zend_Search_Lucene_Index_Term('apart', 'contents'));
+        $termInfo = $segmentInfo->getTermInfo(new Index\Term('apart', 'contents'));
 
         $this->assertEquals($termInfo->docFreq, 1);
         $this->assertEquals($termInfo->freqPointer, 29);
@@ -166,37 +174,37 @@ class Zend_Search_Lucene_Index_SegmentInfoTest extends PHPUnit_Framework_TestCas
         $this->assertEquals($termInfo->skipOffset, 0);
         $this->assertEquals($termInfo->indexPointer, null);
 
-        $termInfo1 = $segmentInfo->getTermInfo(new Zend_Search_Lucene_Index_Term('apart', 'contents'));
+        $termInfo1 = $segmentInfo->getTermInfo(new Index\Term('apart', 'contents'));
         // test for requesting cached information
         $this->assertTrue($termInfo === $termInfo1);
 
         // request for non-existing term
-        $this->assertTrue($segmentInfo->getTermInfo(new Zend_Search_Lucene_Index_Term('nonusedterm', 'contents')) === null);
+        $this->assertTrue($segmentInfo->getTermInfo(new Index\Term('nonusedterm', 'contents')) === null);
     }
 
     public function testTermFreqs()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
-        $termPositions = $segmentInfo->termFreqs(new Zend_Search_Lucene_Index_Term('bgcolor', 'contents'));
+        $termPositions = $segmentInfo->termFreqs(new Index\Term('bgcolor', 'contents'));
         $this->assertTrue($termPositions == array(0 => 3, 1 => 1));
 
-        $termPositions = $segmentInfo->termFreqs(new Zend_Search_Lucene_Index_Term('bgcolor', 'contents'), 10);
+        $termPositions = $segmentInfo->termFreqs(new Index\Term('bgcolor', 'contents'), 10);
         $this->assertTrue($termPositions == array(10 => 3, 11 => 1));
     }
 
     public function testTermPositions()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
-        $termPositions = $segmentInfo->termPositions(new Zend_Search_Lucene_Index_Term('bgcolor', 'contents'));
+        $termPositions = $segmentInfo->termPositions(new Index\Term('bgcolor', 'contents'));
         $this->assertTrue($termPositions == array(0 => array(69, 239, 370),
                                                   1 => array(58)
                                                  ));
 
-        $termPositions = $segmentInfo->termPositions(new Zend_Search_Lucene_Index_Term('bgcolor', 'contents'), 10);
+        $termPositions = $segmentInfo->termPositions(new Index\Term('bgcolor', 'contents'), 10);
         $this->assertTrue($termPositions == array(10 => array(69, 239, 370),
                                                   11 => array(58)
                                                  ));
@@ -204,36 +212,36 @@ class Zend_Search_Lucene_Index_SegmentInfoTest extends PHPUnit_Framework_TestCas
 
     public function testNorm()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $this->assertTrue(abs($segmentInfo->norm(1, 'contents') - 0.0546875) < 0.000001);
     }
 
     public function testNormVector()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $this->assertEquals($segmentInfo->normVector('contents'), "\x69\x6B");
     }
 
     public function testHasDeletions()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
 
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
         $this->assertFalse($segmentInfo->hasDeletions());
 
-        $segmentInfo1 = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_3', 2);
+        $segmentInfo1 = new Index\SegmentInfo($directory, '_3', 2);
         $this->assertTrue($segmentInfo1->hasDeletions());
     }
 
     public function testDelete()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
 
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2, 0 /* search for _1.del file */);
+        $segmentInfo = new Index\SegmentInfo($directory, '_1', 2, 0 /* search for _1.del file */);
         $this->assertFalse($segmentInfo->hasDeletions());
 
         $segmentInfo->delete(0);
@@ -242,7 +250,7 @@ class Zend_Search_Lucene_Index_SegmentInfoTest extends PHPUnit_Framework_TestCas
         // don't write changes
         unset($segmentInfo);
 
-        $segmentInfo1 = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2, $delGen);
+        $segmentInfo1 = new Index\SegmentInfo($directory, '_1', 2, $delGen);
         // Changes wasn't written, segment still has no deletions
         $this->assertFalse($segmentInfo1->hasDeletions());
 
@@ -251,35 +259,35 @@ class Zend_Search_Lucene_Index_SegmentInfoTest extends PHPUnit_Framework_TestCas
         $delGen = $segmentInfo1->getDelGen();
         unset($segmentInfo1);
 
-        $segmentInfo2 = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2, $delGen);
+        $segmentInfo2 = new Index\SegmentInfo($directory, '_1', 2, $delGen);
         $this->assertTrue($segmentInfo2->hasDeletions());
         unset($segmentInfo2);
 
         $directory->deleteFile('_1_' . base_convert($delGen, 10, 36) . '.del');
 
-        $segmentInfo3 = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2, -1 /* no detetions file */);
+        $segmentInfo3 = new Index\SegmentInfo($directory, '_1', 2, -1 /* no detetions file */);
         $this->assertFalse($segmentInfo3->hasDeletions());
     }
 
     public function testIsDeleted()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
 
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_2', 2);
+        $segmentInfo = new Index\SegmentInfo($directory, '_2', 2);
         $this->assertFalse($segmentInfo->isDeleted(0));
 
-        $segmentInfo1 = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_3', 2);
+        $segmentInfo1 = new Index\SegmentInfo($directory, '_3', 2);
         $this->assertTrue($segmentInfo1->isDeleted(0));
         $this->assertFalse($segmentInfo1->isDeleted(1));
     }
 
     public function testTermStreamStyleReading()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
 
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_3', 2);
+        $segmentInfo = new Index\SegmentInfo($directory, '_3', 2);
 
-        $this->assertEquals($segmentInfo->resetTermsStream(6, Zend_Search_Lucene_Index_SegmentInfo::SM_FULL_INFO), 8);
+        $this->assertEquals($segmentInfo->resetTermsStream(6, Index\SegmentInfo::SM_FULL_INFO), 8);
 
         $terms = array();
 
@@ -300,185 +308,185 @@ class Zend_Search_Lucene_Index_SegmentInfoTest extends PHPUnit_Framework_TestCas
         }
 
         $this->assertTrue($terms ==
-                          array(new Zend_Search_Lucene_Index_Term('a', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('about', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('accesskey', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('align', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('alink', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('already', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('and', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('are', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('at', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('b', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('be', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('been', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('bgcolor', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('body', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('border', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('bottom', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('bug', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('bugs', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('can', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('care', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('cellpadding', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('cellspacing', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('center', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('chapter', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('charset', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('check', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('class', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('click', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('colspan', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('contains', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('content', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('contributing', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('developers', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('div', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('docbook', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('documentation', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('does', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('don', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('double', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('easiest', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('equiv', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('existing', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('explanations', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('ff', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('ffffff', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('fill', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('find', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('fixed', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('footer', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('for', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('form', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('found', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('generator', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('guide', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('h', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('hasn', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('have', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('head', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('header', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('hesitate', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('home', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('homepage', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('how', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('hr', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('href', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('html', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('http', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('if', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('in', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('index', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('information', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('is', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('iso', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('it', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('latest', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('left', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('link', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('list', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('manual', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('meet', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('meta', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('modular', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('more', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('n', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('name', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('navfooter', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('navheader', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('navigation', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('net', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('new', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('newpackage', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('next', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('of', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('on', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('out', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('p', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('package', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('packages', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('page', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('patches', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('pear', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('persists', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('php', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('please', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('prev', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('previous', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('proper', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('quote', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('read', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('rel', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('report', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('reported', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('reporting', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('requirements', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('right', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('sect', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('span', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('still', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('stylesheet', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('submitting', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('summary', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('system', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('t', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('table', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('take', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('target', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('td', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('text', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('th', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('that', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('the', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('think', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('this', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('tips', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('title', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('to', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('top', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('tr', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('translating', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('type', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('u', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('unable', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('up', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('using', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('valign', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('version', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('vlink', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('way', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('which', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('width', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('will', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('with', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('writing', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('you', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('your', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('1178009946', 'modified'),
-                                new Zend_Search_Lucene_Index_Term('bugs', 'path'),
-                                new Zend_Search_Lucene_Index_Term('contributing', 'path'),
-                                new Zend_Search_Lucene_Index_Term('html', 'path'),
-                                new Zend_Search_Lucene_Index_Term('indexsource', 'path'),
-                                new Zend_Search_Lucene_Index_Term('newpackage', 'path'),
+                          array(new Index\Term('a', 'contents'),
+                                new Index\Term('about', 'contents'),
+                                new Index\Term('accesskey', 'contents'),
+                                new Index\Term('align', 'contents'),
+                                new Index\Term('alink', 'contents'),
+                                new Index\Term('already', 'contents'),
+                                new Index\Term('and', 'contents'),
+                                new Index\Term('are', 'contents'),
+                                new Index\Term('at', 'contents'),
+                                new Index\Term('b', 'contents'),
+                                new Index\Term('be', 'contents'),
+                                new Index\Term('been', 'contents'),
+                                new Index\Term('bgcolor', 'contents'),
+                                new Index\Term('body', 'contents'),
+                                new Index\Term('border', 'contents'),
+                                new Index\Term('bottom', 'contents'),
+                                new Index\Term('bug', 'contents'),
+                                new Index\Term('bugs', 'contents'),
+                                new Index\Term('can', 'contents'),
+                                new Index\Term('care', 'contents'),
+                                new Index\Term('cellpadding', 'contents'),
+                                new Index\Term('cellspacing', 'contents'),
+                                new Index\Term('center', 'contents'),
+                                new Index\Term('chapter', 'contents'),
+                                new Index\Term('charset', 'contents'),
+                                new Index\Term('check', 'contents'),
+                                new Index\Term('class', 'contents'),
+                                new Index\Term('click', 'contents'),
+                                new Index\Term('colspan', 'contents'),
+                                new Index\Term('contains', 'contents'),
+                                new Index\Term('content', 'contents'),
+                                new Index\Term('contributing', 'contents'),
+                                new Index\Term('developers', 'contents'),
+                                new Index\Term('div', 'contents'),
+                                new Index\Term('docbook', 'contents'),
+                                new Index\Term('documentation', 'contents'),
+                                new Index\Term('does', 'contents'),
+                                new Index\Term('don', 'contents'),
+                                new Index\Term('double', 'contents'),
+                                new Index\Term('easiest', 'contents'),
+                                new Index\Term('equiv', 'contents'),
+                                new Index\Term('existing', 'contents'),
+                                new Index\Term('explanations', 'contents'),
+                                new Index\Term('ff', 'contents'),
+                                new Index\Term('ffffff', 'contents'),
+                                new Index\Term('fill', 'contents'),
+                                new Index\Term('find', 'contents'),
+                                new Index\Term('fixed', 'contents'),
+                                new Index\Term('footer', 'contents'),
+                                new Index\Term('for', 'contents'),
+                                new Index\Term('form', 'contents'),
+                                new Index\Term('found', 'contents'),
+                                new Index\Term('generator', 'contents'),
+                                new Index\Term('guide', 'contents'),
+                                new Index\Term('h', 'contents'),
+                                new Index\Term('hasn', 'contents'),
+                                new Index\Term('have', 'contents'),
+                                new Index\Term('head', 'contents'),
+                                new Index\Term('header', 'contents'),
+                                new Index\Term('hesitate', 'contents'),
+                                new Index\Term('home', 'contents'),
+                                new Index\Term('homepage', 'contents'),
+                                new Index\Term('how', 'contents'),
+                                new Index\Term('hr', 'contents'),
+                                new Index\Term('href', 'contents'),
+                                new Index\Term('html', 'contents'),
+                                new Index\Term('http', 'contents'),
+                                new Index\Term('if', 'contents'),
+                                new Index\Term('in', 'contents'),
+                                new Index\Term('index', 'contents'),
+                                new Index\Term('information', 'contents'),
+                                new Index\Term('is', 'contents'),
+                                new Index\Term('iso', 'contents'),
+                                new Index\Term('it', 'contents'),
+                                new Index\Term('latest', 'contents'),
+                                new Index\Term('left', 'contents'),
+                                new Index\Term('link', 'contents'),
+                                new Index\Term('list', 'contents'),
+                                new Index\Term('manual', 'contents'),
+                                new Index\Term('meet', 'contents'),
+                                new Index\Term('meta', 'contents'),
+                                new Index\Term('modular', 'contents'),
+                                new Index\Term('more', 'contents'),
+                                new Index\Term('n', 'contents'),
+                                new Index\Term('name', 'contents'),
+                                new Index\Term('navfooter', 'contents'),
+                                new Index\Term('navheader', 'contents'),
+                                new Index\Term('navigation', 'contents'),
+                                new Index\Term('net', 'contents'),
+                                new Index\Term('new', 'contents'),
+                                new Index\Term('newpackage', 'contents'),
+                                new Index\Term('next', 'contents'),
+                                new Index\Term('of', 'contents'),
+                                new Index\Term('on', 'contents'),
+                                new Index\Term('out', 'contents'),
+                                new Index\Term('p', 'contents'),
+                                new Index\Term('package', 'contents'),
+                                new Index\Term('packages', 'contents'),
+                                new Index\Term('page', 'contents'),
+                                new Index\Term('patches', 'contents'),
+                                new Index\Term('pear', 'contents'),
+                                new Index\Term('persists', 'contents'),
+                                new Index\Term('php', 'contents'),
+                                new Index\Term('please', 'contents'),
+                                new Index\Term('prev', 'contents'),
+                                new Index\Term('previous', 'contents'),
+                                new Index\Term('proper', 'contents'),
+                                new Index\Term('quote', 'contents'),
+                                new Index\Term('read', 'contents'),
+                                new Index\Term('rel', 'contents'),
+                                new Index\Term('report', 'contents'),
+                                new Index\Term('reported', 'contents'),
+                                new Index\Term('reporting', 'contents'),
+                                new Index\Term('requirements', 'contents'),
+                                new Index\Term('right', 'contents'),
+                                new Index\Term('sect', 'contents'),
+                                new Index\Term('span', 'contents'),
+                                new Index\Term('still', 'contents'),
+                                new Index\Term('stylesheet', 'contents'),
+                                new Index\Term('submitting', 'contents'),
+                                new Index\Term('summary', 'contents'),
+                                new Index\Term('system', 'contents'),
+                                new Index\Term('t', 'contents'),
+                                new Index\Term('table', 'contents'),
+                                new Index\Term('take', 'contents'),
+                                new Index\Term('target', 'contents'),
+                                new Index\Term('td', 'contents'),
+                                new Index\Term('text', 'contents'),
+                                new Index\Term('th', 'contents'),
+                                new Index\Term('that', 'contents'),
+                                new Index\Term('the', 'contents'),
+                                new Index\Term('think', 'contents'),
+                                new Index\Term('this', 'contents'),
+                                new Index\Term('tips', 'contents'),
+                                new Index\Term('title', 'contents'),
+                                new Index\Term('to', 'contents'),
+                                new Index\Term('top', 'contents'),
+                                new Index\Term('tr', 'contents'),
+                                new Index\Term('translating', 'contents'),
+                                new Index\Term('type', 'contents'),
+                                new Index\Term('u', 'contents'),
+                                new Index\Term('unable', 'contents'),
+                                new Index\Term('up', 'contents'),
+                                new Index\Term('using', 'contents'),
+                                new Index\Term('valign', 'contents'),
+                                new Index\Term('version', 'contents'),
+                                new Index\Term('vlink', 'contents'),
+                                new Index\Term('way', 'contents'),
+                                new Index\Term('which', 'contents'),
+                                new Index\Term('width', 'contents'),
+                                new Index\Term('will', 'contents'),
+                                new Index\Term('with', 'contents'),
+                                new Index\Term('writing', 'contents'),
+                                new Index\Term('you', 'contents'),
+                                new Index\Term('your', 'contents'),
+                                new Index\Term('1178009946', 'modified'),
+                                new Index\Term('bugs', 'path'),
+                                new Index\Term('contributing', 'path'),
+                                new Index\Term('html', 'path'),
+                                new Index\Term('indexsource', 'path'),
+                                new Index\Term('newpackage', 'path'),
                                ));
 
         unset($segmentInfo);
 
 
-        $segmentInfo1 = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_3', 2);
-        $this->assertEquals($segmentInfo1->resetTermsStream(6, Zend_Search_Lucene_Index_SegmentInfo::SM_MERGE_INFO), 7);
+        $segmentInfo1 = new Index\SegmentInfo($directory, '_3', 2);
+        $this->assertEquals($segmentInfo1->resetTermsStream(6, Index\SegmentInfo::SM_MERGE_INFO), 7);
     }
 
     public function testTermStreamStyleReadingSkipTo()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
 
-        $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_3', 2);
+        $segmentInfo = new Index\SegmentInfo($directory, '_3', 2);
 
-        $this->assertEquals($segmentInfo->resetTermsStream(6, Zend_Search_Lucene_Index_SegmentInfo::SM_FULL_INFO), 8);
+        $this->assertEquals($segmentInfo->resetTermsStream(6, Index\SegmentInfo::SM_FULL_INFO), 8);
 
-        $segmentInfo->skipTo(new Zend_Search_Lucene_Index_Term('prefetch', 'contents'));
+        $segmentInfo->skipTo(new Index\Term('prefetch', 'contents'));
 
         $terms = array();
 
@@ -496,70 +504,70 @@ class Zend_Search_Lucene_Index_SegmentInfoTest extends PHPUnit_Framework_TestCas
         }
 
         $this->assertTrue($terms ==
-                          array(new Zend_Search_Lucene_Index_Term('prev', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('previous', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('proper', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('quote', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('read', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('rel', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('report', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('reported', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('reporting', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('requirements', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('right', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('sect', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('span', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('still', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('stylesheet', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('submitting', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('summary', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('system', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('t', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('table', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('take', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('target', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('td', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('text', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('th', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('that', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('the', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('think', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('this', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('tips', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('title', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('to', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('top', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('tr', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('translating', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('type', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('u', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('unable', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('up', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('using', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('valign', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('version', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('vlink', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('way', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('which', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('width', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('will', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('with', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('writing', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('you', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('your', 'contents'),
-                                new Zend_Search_Lucene_Index_Term('1178009946', 'modified'),
-                                new Zend_Search_Lucene_Index_Term('bugs', 'path'),
-                                new Zend_Search_Lucene_Index_Term('contributing', 'path'),
-                                new Zend_Search_Lucene_Index_Term('html', 'path'),
-                                new Zend_Search_Lucene_Index_Term('indexsource', 'path'),
-                                new Zend_Search_Lucene_Index_Term('newpackage', 'path'),
+                          array(new Index\Term('prev', 'contents'),
+                                new Index\Term('previous', 'contents'),
+                                new Index\Term('proper', 'contents'),
+                                new Index\Term('quote', 'contents'),
+                                new Index\Term('read', 'contents'),
+                                new Index\Term('rel', 'contents'),
+                                new Index\Term('report', 'contents'),
+                                new Index\Term('reported', 'contents'),
+                                new Index\Term('reporting', 'contents'),
+                                new Index\Term('requirements', 'contents'),
+                                new Index\Term('right', 'contents'),
+                                new Index\Term('sect', 'contents'),
+                                new Index\Term('span', 'contents'),
+                                new Index\Term('still', 'contents'),
+                                new Index\Term('stylesheet', 'contents'),
+                                new Index\Term('submitting', 'contents'),
+                                new Index\Term('summary', 'contents'),
+                                new Index\Term('system', 'contents'),
+                                new Index\Term('t', 'contents'),
+                                new Index\Term('table', 'contents'),
+                                new Index\Term('take', 'contents'),
+                                new Index\Term('target', 'contents'),
+                                new Index\Term('td', 'contents'),
+                                new Index\Term('text', 'contents'),
+                                new Index\Term('th', 'contents'),
+                                new Index\Term('that', 'contents'),
+                                new Index\Term('the', 'contents'),
+                                new Index\Term('think', 'contents'),
+                                new Index\Term('this', 'contents'),
+                                new Index\Term('tips', 'contents'),
+                                new Index\Term('title', 'contents'),
+                                new Index\Term('to', 'contents'),
+                                new Index\Term('top', 'contents'),
+                                new Index\Term('tr', 'contents'),
+                                new Index\Term('translating', 'contents'),
+                                new Index\Term('type', 'contents'),
+                                new Index\Term('u', 'contents'),
+                                new Index\Term('unable', 'contents'),
+                                new Index\Term('up', 'contents'),
+                                new Index\Term('using', 'contents'),
+                                new Index\Term('valign', 'contents'),
+                                new Index\Term('version', 'contents'),
+                                new Index\Term('vlink', 'contents'),
+                                new Index\Term('way', 'contents'),
+                                new Index\Term('which', 'contents'),
+                                new Index\Term('width', 'contents'),
+                                new Index\Term('will', 'contents'),
+                                new Index\Term('with', 'contents'),
+                                new Index\Term('writing', 'contents'),
+                                new Index\Term('you', 'contents'),
+                                new Index\Term('your', 'contents'),
+                                new Index\Term('1178009946', 'modified'),
+                                new Index\Term('bugs', 'path'),
+                                new Index\Term('contributing', 'path'),
+                                new Index\Term('html', 'path'),
+                                new Index\Term('indexsource', 'path'),
+                                new Index\Term('newpackage', 'path'),
                                ));
 
         unset($segmentInfo);
 
 
-        $segmentInfo1 = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_3', 2);
-        $this->assertEquals($segmentInfo1->resetTermsStream(6, Zend_Search_Lucene_Index_SegmentInfo::SM_MERGE_INFO), 7);
+        $segmentInfo1 = new Index\SegmentInfo($directory, '_3', 2);
+        $this->assertEquals($segmentInfo1->resetTermsStream(6, Index\SegmentInfo::SM_MERGE_INFO), 7);
     }
 }
 

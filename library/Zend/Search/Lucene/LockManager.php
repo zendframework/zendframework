@@ -20,17 +20,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Search\Lucene;
+use Zend\Search\Lucene\Storage\Directory;
+
+/**
  * This is an utility class which provides index locks processing functionality
  *
- * @uses       Zend_Search_Lucene_Exception
- * @uses       Zend_Search_Lucene_Storage_Directory
- * @uses       Zend_Search_Lucene_Storage_File
+ * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Storage\Directory\DirectoryInterface
+ * @uses       \Zend\Search\Lucene\Storage\File\FileInterface
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_LockManager
+class LockManager
 {
     /**
      * consts for name of file to show lock status
@@ -43,15 +49,15 @@ class Zend_Search_Lucene_LockManager
     /**
      * Obtain exclusive write lock on the index
      *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
-     * @return Zend_Search_Lucene_Storage_File
-     * @throws Zend_Search_Lucene_Exception
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $lockDirectory
+     * @return \Zend\Search\Lucene\Storage\File\FileInterface
+     * @throws \Zend\Search\Lucene\Exception
      */
-    public static function obtainWriteLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
+    public static function obtainWriteLock(Directory\DirectoryInterface $lockDirectory)
     {
         $lock = $lockDirectory->createFile(self::WRITE_LOCK_FILE);
         if (!$lock->lock(LOCK_EX)) {
-            throw new Zend_Search_Lucene_Exception('Can\'t obtain exclusive index lock');
+            throw new Exception('Can\'t obtain exclusive index lock');
         }
         return $lock;
     }
@@ -59,9 +65,9 @@ class Zend_Search_Lucene_LockManager
     /**
      * Release exclusive write lock
      *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $lockDirectory
      */
-    public static function releaseWriteLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
+    public static function releaseWriteLock(Directory\DirectoryInterface $lockDirectory)
     {
         $lock = $lockDirectory->getFileObject(self::WRITE_LOCK_FILE);
         $lock->unlock();
@@ -87,15 +93,15 @@ class Zend_Search_Lucene_LockManager
      *  of opportunity for another process to gain an exclusive lock when
      *  it shoudln't be allowed to).
      *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
-     * @return Zend_Search_Lucene_Storage_File
-     * @throws Zend_Search_Lucene_Exception
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $lockDirectory
+     * @return \Zend\Search\Lucene\Storage\File\FileInterface
+     * @throws \Zend\Search\Lucene\Exception
      */
-    private static function _startReadLockProcessing(Zend_Search_Lucene_Storage_Directory $lockDirectory)
+    private static function _startReadLockProcessing(Directory\DirectoryInterface $lockDirectory)
     {
         $lock = $lockDirectory->createFile(self::READ_LOCK_PROCESSING_LOCK_FILE);
         if (!$lock->lock(LOCK_EX)) {
-            throw new Zend_Search_Lucene_Exception('Can\'t obtain exclusive lock for the read lock processing file');
+            throw new Exception('Can\'t obtain exclusive lock for the read lock processing file');
         }
         return $lock;
     }
@@ -106,9 +112,9 @@ class Zend_Search_Lucene_LockManager
      * Required to protect the escalate/de-escalate read lock process
      * on GFS (and potentially other) mounted filesystems.
      *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $lockDirectory
      */
-    private static function _stopReadLockProcessing(Zend_Search_Lucene_Storage_Directory $lockDirectory)
+    private static function _stopReadLockProcessing(Directory\DirectoryInterface $lockDirectory)
     {
         $lock = $lockDirectory->getFileObject(self::READ_LOCK_PROCESSING_LOCK_FILE);
         $lock->unlock();
@@ -120,15 +126,15 @@ class Zend_Search_Lucene_LockManager
      *
      * It doesn't block other read or update processes, but prevent index from the premature cleaning-up
      *
-     * @param Zend_Search_Lucene_Storage_Directory $defaultLockDirectory
-     * @return Zend_Search_Lucene_Storage_File
-     * @throws Zend_Search_Lucene_Exception
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $defaultLockDirectory
+     * @return \Zend\Search\Lucene\Storage\File\FileInterface
+     * @throws \Zend\Search\Lucene\Exception
      */
-    public static function obtainReadLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
+    public static function obtainReadLock(Directory\DirectoryInterface $lockDirectory)
     {
         $lock = $lockDirectory->createFile(self::READ_LOCK_FILE);
         if (!$lock->lock(LOCK_SH)) {
-            throw new Zend_Search_Lucene_Exception('Can\'t obtain shared reading index lock');
+            throw new Exception('Can\'t obtain shared reading index lock');
         }
         return $lock;
     }
@@ -136,9 +142,9 @@ class Zend_Search_Lucene_LockManager
     /**
      * Release shared read lock
      *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $lockDirectory
      */
-    public static function releaseReadLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
+    public static function releaseReadLock(Directory\DirectoryInterface $lockDirectory)
     {
         $lock = $lockDirectory->getFileObject(self::READ_LOCK_FILE);
         $lock->unlock();
@@ -147,10 +153,10 @@ class Zend_Search_Lucene_LockManager
     /**
      * Escalate Read lock to exclusive level
      *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $lockDirectory
      * @return boolean
      */
-    public static function escalateReadLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
+    public static function escalateReadLock(Directory\DirectoryInterface $lockDirectory)
     {
         self::_startReadLockProcessing($lockDirectory);
 
@@ -191,9 +197,9 @@ class Zend_Search_Lucene_LockManager
     /**
      * De-escalate Read lock to shared level
      *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $lockDirectory
      */
-    public static function deEscalateReadLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
+    public static function deEscalateReadLock(Directory\DirectoryInterface $lockDirectory)
     {
         $lock = $lockDirectory->getFileObject(self::READ_LOCK_FILE);
         $lock->lock(LOCK_SH);
@@ -204,10 +210,10 @@ class Zend_Search_Lucene_LockManager
      *
      * Returns lock object on success and false otherwise (doesn't block execution)
      *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $lockDirectory
      * @return mixed
      */
-    public static function obtainOptimizationLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
+    public static function obtainOptimizationLock(Directory\DirectoryInterface $lockDirectory)
     {
         $lock = $lockDirectory->createFile(self::OPTIMIZATION_LOCK_FILE);
         if (!$lock->lock(LOCK_EX, true)) {
@@ -219,12 +225,11 @@ class Zend_Search_Lucene_LockManager
     /**
      * Release exclusive optimization lock
      *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $lockDirectory
      */
-    public static function releaseOptimizationLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
+    public static function releaseOptimizationLock(Directory\DirectoryInterface $lockDirectory)
     {
         $lock = $lockDirectory->getFileObject(self::OPTIMIZATION_LOCK_FILE);
         $lock->unlock();
     }
-
 }

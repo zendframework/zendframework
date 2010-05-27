@@ -21,52 +21,11 @@
  */
 
 /**
- * Test helper
+ * @namespace
  */
-
-/** Zend_Memory */
-
-/**
- * Memory value container
- *
- * (Should be presented for value object)
- *
- * @category   Zend
- * @package    Zend_Memory
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Memory_Manager_Dummy extends Zend_Memory_Manager
-{
-    /** @var boolean */
-    public $processUpdatePassed = false;
-
-    /** @var integer */
-    public $processedId;
-
-    /** @var Zend_Memory_Container_Movable */
-    public $processedObject;
-
-    /**
-     * Dummy object constructor
-     */
-    public function __construct()
-    {
-        // Do nothing
-    }
-
-    /**
-     * Dummy value update callback method
-     */
-    public function processUpdate(Zend_Memory_Container_Movable $container, $id)
-    {
-        $this->processUpdatePassed = true;
-        $this->processedId         = $id;
-        $this->processedObject     = $container;
-    }
-}
-
+namespace ZendTest\Memory;
+use Zend\Memory;
+use Zend\Memory\Container;
 
 /**
  * @category   Zend
@@ -76,27 +35,26 @@ class Zend_Memory_Manager_Dummy extends Zend_Memory_Manager
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Memory
  */
-class Zend_Memory_Container_MovableTest extends PHPUnit_Framework_TestCase
+class MovableTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * tests the Movable memory container object creation
      */
     public function testCreation()
     {
-        $memoryManager = new Zend_Memory_Manager_Dummy();
-        $memObject = new Zend_Memory_Container_Movable($memoryManager, 10, '0123456789');
+        $memoryManager = new DummyMemoryManager();
+        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
 
-        $this->assertTrue($memObject instanceof Zend_Memory_Container_Movable);
+        $this->assertTrue($memObject instanceof Container\Movable);
     }
-
 
     /**
      * tests the value access methods
      */
     public function testValueAccess()
     {
-        $memoryManager = new Zend_Memory_Manager_Dummy();
-        $memObject = new Zend_Memory_Container_Movable($memoryManager, 10, '0123456789');
+        $memoryManager = new DummyMemoryManager();
+        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
 
         // getRef() method
         $this->assertEquals($memObject->getRef(), '0123456789');
@@ -105,11 +63,6 @@ class Zend_Memory_Container_MovableTest extends PHPUnit_Framework_TestCase
         $valueRef[3] = '_';
         $this->assertEquals($memObject->getRef(), '012_456789');
 
-        if (version_compare(PHP_VERSION, '5.2') < 0) {
-            // Skip next tests for PHP versions before 5.2
-            return;
-        }
-
         // value property
         $this->assertEquals((string)$memObject->value, '012_456789');
 
@@ -117,7 +70,7 @@ class Zend_Memory_Container_MovableTest extends PHPUnit_Framework_TestCase
         $this->assertEquals((string)$memObject->value, '012_456_89');
 
         $memObject->value = 'another value';
-        $this->assertTrue($memObject->value instanceof Zend_Memory_Value);
+        $this->assertTrue($memObject->value instanceof \Zend\Memory\Value);
         $this->assertEquals((string)$memObject->value, 'another value');
     }
 
@@ -127,8 +80,8 @@ class Zend_Memory_Container_MovableTest extends PHPUnit_Framework_TestCase
      */
     public function testLock()
     {
-        $memoryManager = new Zend_Memory_Manager_Dummy();
-        $memObject = new Zend_Memory_Container_Movable($memoryManager, 10, '0123456789');
+        $memoryManager = new DummyMemoryManager();
+        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
 
         $this->assertFalse((boolean)$memObject->isLocked());
 
@@ -144,8 +97,8 @@ class Zend_Memory_Container_MovableTest extends PHPUnit_Framework_TestCase
      */
     public function testTouch()
     {
-        $memoryManager = new Zend_Memory_Manager_Dummy();
-        $memObject = new Zend_Memory_Container_Movable($memoryManager, 10, '0123456789');
+        $memoryManager = new DummyMemoryManager();
+        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
 
         $this->assertFalse($memoryManager->processUpdatePassed);
 
@@ -161,13 +114,8 @@ class Zend_Memory_Container_MovableTest extends PHPUnit_Framework_TestCase
      */
     public function testValueUpdateTracing()
     {
-        if (version_compare(PHP_VERSION, '5.2') < 0) {
-            // Skip next tests for PHP versions before 5.2
-            return;
-        }
-
-        $memoryManager = new Zend_Memory_Manager_Dummy();
-        $memObject = new Zend_Memory_Container_Movable($memoryManager, 10, '0123456789');
+        $memoryManager = new DummyMemoryManager();
+        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
 
         // startTrace() method is usually invoked by memory manager, when it need to be notified
         // about value update
@@ -180,5 +128,39 @@ class Zend_Memory_Container_MovableTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($memoryManager->processUpdatePassed);
         $this->assertTrue($memoryManager->processedObject === $memObject);
         $this->assertEquals($memoryManager->processedId, 10);
+    }
+}
+
+/**
+ * Memory manager helper
+ *
+ */
+class DummyMemoryManager extends Memory\MemoryManager
+{
+    /** @var boolean */
+    public $processUpdatePassed = false;
+
+    /** @var integer */
+    public $processedId;
+
+    /** @var Zend_Memory_Container_Movable */
+    public $processedObject;
+
+    /**
+     * Empty constructor
+     */
+    public function __construct()
+    {
+        // Do nothing
+    }
+
+    /**
+     * DummyMemoryManager value update callback method
+     */
+    public function processUpdate(Container\Movable $container, $id)
+    {
+        $this->processUpdatePassed = true;
+        $this->processedId         = $id;
+        $this->processedObject     = $container;
     }
 }

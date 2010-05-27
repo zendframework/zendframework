@@ -21,15 +21,22 @@
  */
 
 /**
- * @uses       Zend_Serializer_Adapter_AdapterAbstract
- * @uses       Zend_Serializer_Exception
+ * @namespace
+ */
+namespace Zend\Serializer\Adapter;
+
+use Zend\Serializer\Exception as SerializationException;
+
+/**
+ * @uses       \Zend\Serializer\Adapter\AbstractAdapter
+ * @uses       \Zend\Serializer\Exception
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Serializer_Adapter_Igbinary extends Zend_Serializer_Adapter_AdapterAbstract
+class Igbinary extends AbstractAdapter
 {
     /**
      * @var string Serialized null value
@@ -39,14 +46,14 @@ class Zend_Serializer_Adapter_Igbinary extends Zend_Serializer_Adapter_AdapterAb
     /**
      * Constructor
      * 
-     * @param  array|Zend_Config $opts 
+     * @param  array|\Zend\Config\Config $opts 
      * @return void
-     * @throws Zend_Serializer_Exception If igbinary extension is not present
+     * @throws \Zend\Serializer\Exception If igbinary extension is not present
      */
     public function __construct($opts = array()) 
     {
         if (!extension_loaded('igbinary')) {
-            throw new Zend_Serializer_Exception('PHP extension "igbinary" is required for this adapter');
+            throw new SerializationException('PHP extension "igbinary" is required for this adapter');
         }
 
         parent::__construct($opts);
@@ -62,14 +69,14 @@ class Zend_Serializer_Adapter_Igbinary extends Zend_Serializer_Adapter_AdapterAb
      * @param  mixed $value 
      * @param  array $opts 
      * @return string
-     * @throws Zend_Serializer_Exception on igbinary error
+     * @throws \Zend\Serializer\Exception on igbinary error
      */
     public function serialize($value, array $opts = array())
     {
         $ret = igbinary_serialize($value);
         if ($ret === false) {
             $lastErr = error_get_last();
-            throw new Zend_Serializer_Exception($lastErr['message']);
+            throw new SerializationException($lastErr['message']);
         }
         return $ret;
     }
@@ -80,14 +87,14 @@ class Zend_Serializer_Adapter_Igbinary extends Zend_Serializer_Adapter_AdapterAb
      * @param  string|binary $serialized 
      * @param  array $opts 
      * @return mixed
-     * @throws Zend_Serializer_Exception on igbinary error
+     * @throws \Zend\Serializer\Exception on igbinary error
      */
     public function unserialize($serialized, array $opts = array())
     {
         $ret = igbinary_unserialize($serialized);
         if ($ret === null && $serialized !== self::$_serializedNull) {
             $lastErr = error_get_last();
-            throw new Zend_Serializer_Exception($lastErr['message']);
+            throw new SerializationException($lastErr['message']);
         }
         return $ret;
     }

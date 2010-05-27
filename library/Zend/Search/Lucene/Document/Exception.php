@@ -20,12 +20,18 @@
  */
 
 /**
- * @uses       Zend_Search_Lucene_Exception
+ * @namespace
+ */
+namespace Zend\Search\Lucene\Document;
+use Zend\Search\Lucene;
+
+/**
+ * @uses       \Zend\Search\Lucene\Exception
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_Document_Exception extends Zend_Search_Lucene_Exception
-{}
-
+class Exception extends Lucene\Exception
+{
+}

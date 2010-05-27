@@ -21,16 +21,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\XmlRpc\Server;
+
+/**
  * Zend_XmlRpc_Server_Exception
  *
- * @uses       Zend_XmlRpc_Exception
+ * @uses       \Zend\XmlRpc\Exception
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_XmlRpc_Server_Exception extends Zend_XmlRpc_Exception
+class Exception extends \Zend\XmlRpc\Exception
 {
 }
 

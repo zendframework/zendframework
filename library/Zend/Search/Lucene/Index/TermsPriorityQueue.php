@@ -21,14 +21,22 @@
  */
 
 /**
- * @uses       Zend_Search_Lucene_PriorityQueue
+ * @namespace
+ */
+namespace Zend\Search\Lucene\Index;
+use Zend\Search\Lucene;
+
+/** @todo !!!!!! convert to SPL class usage */
+
+/**
+ * @uses       \Zend\Search\Lucene\PriorityQueue
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_Index_TermsPriorityQueue extends Zend_Search_Lucene_PriorityQueue
+class TermsPriorityQueue extends Lucene\AbstractPriorityQueue
 {
     /**
      * Compare elements
@@ -43,5 +51,4 @@ class Zend_Search_Lucene_Index_TermsPriorityQueue extends Zend_Search_Lucene_Pri
     {
         return strcmp($termsStream1->currentTerm()->key(), $termsStream2->currentTerm()->key()) < 0;
     }
-
 }

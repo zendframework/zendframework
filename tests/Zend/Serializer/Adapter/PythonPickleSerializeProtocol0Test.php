@@ -21,12 +21,9 @@
  */
 
 /**
- * @see Zend_Serializer_Adapter_PythonPickle
+ * @namespace
  */
-
-/**
- * PHPUnit test case
- */
+namespace ZendTest\Serializer\Adapter;
 
 /**
  * @category   Zend
@@ -35,14 +32,14 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Serializer_Adapter_PythonPickleSerializeProtocol0Test extends PHPUnit_Framework_TestCase
+class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
 {
 
     private $_adapter;
 
     public function setUp()
     {
-        $this->_adapter = new Zend_Serializer_Adapter_PythonPickle(array('protocol' => 0));
+        $this->_adapter = new \Zend\Serializer\Adapter\PythonPickle(array('protocol' => 0));
     }
 
     public function tearDown()
@@ -156,7 +153,7 @@ class Zend_Serializer_Adapter_PythonPickleSerializeProtocol0Test extends PHPUnit
 
     public function testSerializeObject()
     {
-        $value = new StdClass();
+        $value = new \StdClass();
         $value->test  = 'test';
         $value->test2 = 2;
         $expected = "(dp0\r\n"

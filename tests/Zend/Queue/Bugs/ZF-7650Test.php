@@ -20,6 +20,12 @@
  * @version    $Id: QueueTest.php 17667 2009-08-18 21:40:09Z mikaelkael $
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Queue\Bugs;
+use Zend\Queue;
+
 /*
  * This code specifically tests for ZF-7650
  */
@@ -32,12 +38,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
  */
-class Zend_Queue_Bugs_Zf7650Test extends PHPUnit_Framework_TestCase
+class Zf7650Test extends \PHPUnit_Framework_TestCase
 {
     public function testArrayAdapterShouldReturnNoMessagesWhenZeroCountRequested()
     {
-        // Zend_Queue_Adapter_Array
-        $queue = new Zend_Queue('Array');
+        // \Zend\Queue\Adapter\ArrayAdapter
+        $queue = new Queue\Queue('ArrayAdapter');
         $queue2 = $queue->createQueue('queue');
 
         $queue->send('My Test Message 1');
@@ -61,7 +67,7 @@ class Zend_Queue_Bugs_Zf7650Test extends PHPUnit_Framework_TestCase
         }
         $options = array('name' => 'ZF7650', 'driverOptions' => $driverOptions);
 
-        $queue = new Zend_Queue('Memcacheq', $options);
+        $queue = new Queue\Queue('Memcacheq', $options);
         $queue2 = $queue->createQueue('queue');
 
         $queue->send('My Test Message 1');
@@ -79,16 +85,16 @@ class Zend_Queue_Bugs_Zf7650Test extends PHPUnit_Framework_TestCase
         }
         $driverOptions = array();
         if (defined('TESTS_ZEND_QUEUE_DB')) {
-            $driverOptions = Zend_Json::decode(TESTS_ZEND_QUEUE_DB);
+            $driverOptions = \Zend\JSON\JSON::decode(TESTS_ZEND_QUEUE_DB);
         }
 
         $options = array(
             'name'          => '/temp-queue/ZF7650',
-            'options'       => array(Zend_Db_Select::FOR_UPDATE => true),
+            'options'       => array(\Zend\DB\Select\Select::FOR_UPDATE => true),
             'driverOptions' => $driverOptions,
         );
 
-        $queue = new Zend_Queue('Db', $options);
+        $queue = new Queue\Queue('Db', $options);
         $queue2 = $queue->createQueue('queue');
 
         $queue->send('My Test Message 1');
@@ -115,7 +121,7 @@ class Zend_Queue_Bugs_Zf7650Test extends PHPUnit_Framework_TestCase
         }
         $options = array('driverOptions' => $driverOptions);
 
-        $queue = new Zend_Queue('Activemq', $options);
+        $queue = new Queue\Queue('Activemq', $options);
         $queue2 = $queue->createQueue('queue');
 
         $queue->send('My Test Message 1');

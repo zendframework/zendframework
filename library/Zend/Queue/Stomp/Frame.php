@@ -21,18 +21,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Queue\Stomp;
+use Zend\Queue;
+
+/**
  * This class represents a Stomp Frame
  *
- * @uses       Zend_Queue_Exception
- * @uses       Zend_Queue_Stomp_FrameInterface
+ * @uses       \Zend\Queue\Exception
+ * @uses       \Zend\Queue\Stomp\FrameInterface
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Stomp
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Queue_Stomp_Frame
-    implements Zend_Queue_Stomp_FrameInterface
+class Frame
+    implements FrameInterface
 {
     const END_OF_FRAME   = "\x00\n";
     const CONTENT_LENGTH = 'content-length';
@@ -97,12 +103,12 @@ class Zend_Queue_Stomp_Frame
      *
      * @param boolean $auto
      * @return $this;
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
     public function setAutoContentLength($auto)
     {
         if (!is_bool($auto)) {
-            throw new Zend_Queue_Exception('$auto is not a boolean');
+            throw new Queue\Exception('$auto is not a boolean');
         }
 
         $this->_autoContentLength = $auto;
@@ -126,7 +132,7 @@ class Zend_Queue_Stomp_Frame
      *
      * @param array $headers
      * @return $this
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
     public function setHeaders(array $headers)
     {
@@ -142,16 +148,16 @@ class Zend_Queue_Stomp_Frame
      *
      * @param  string $header
      * @param  string $value
-     * @return Zend_Queue_Stomp_Frame
-     * @throws Zend_Queue_Exception
+     * @return \Zend\Queue\Stomp\Frame
+     * @throws \Zend\Queue\Exception
      */
     public function setHeader($header, $value) {
         if (!is_string($header)) {
-            throw new Zend_Queue_Exception('$header is not a string: ' . print_r($header, true));
+            throw new Queue\Exception('$header is not a string: ' . print_r($header, true));
         }
 
         if (!is_scalar($value)) {
-            throw new Zend_Queue_Exception('$value is not a string: ' . print_r($value, true));
+            throw new Queue\Exception('$value is not a string: ' . print_r($value, true));
         }
 
         $this->_headers[$header] = $value;
@@ -166,12 +172,12 @@ class Zend_Queue_Stomp_Frame
      *
      * @param  string $header
      * @return string|false
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
     public function getHeader($header)
     {
         if (!is_string($header)) {
-            throw new Zend_Queue_Exception('$header is not a string');
+            throw new Queue\Exception('$header is not a string');
         }
 
         return isset($this->_headers[$header])
@@ -199,13 +205,13 @@ class Zend_Queue_Stomp_Frame
      * Set to null for no body.
      *
      * @param  string|null $body
-     * @return Zend_Queue_Stomp_Frame
-     * @throws Zend_Queue_Exception
+     * @return \Zend\Queue\Stomp\Frame
+     * @throws \Zend\Queue\Exception
      */
     public function setBody($body)
     {
         if (!is_string($body) && !is_null($body)) {
-            throw new Zend_Queue_Exception('$body is not a string or null');
+            throw new Queue\Exception('$body is not a string or null');
         }
 
         $this->_body = $body;
@@ -230,13 +236,13 @@ class Zend_Queue_Stomp_Frame
      * Set the body for this frame
      *
      * @param  string|null
-     * @return Zend_Queue_Stomp_Frame
-     * @throws Zend_Queue_Exception
+     * @return \Zend\Queue\Stomp\Frame
+     * @throws \Zend\Queue\Exception
      */
     public function setCommand($command)
     {
         if (!is_string($command) && !is_null($command)) {
-            throw new Zend_Queue_Exception('$command is not a string or null');
+            throw new Queue\Exception('$command is not a string or null');
         }
 
         $this->_command = $command;
@@ -247,12 +253,12 @@ class Zend_Queue_Stomp_Frame
      * Takes the current parameters and returns a Stomp Frame
      *
      * @return string
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
     public function toFrame()
     {
         if ($this->getCommand() === false) {
-            throw new Zend_Queue_Exception('You must set the command');
+            throw new Queue\Exception('You must set the command');
         }
 
         $command = $this->getCommand();
@@ -294,7 +300,7 @@ class Zend_Queue_Stomp_Frame
     {
         try {
             $return = $this->toFrame();
-        } catch (Zend_Queue_Exception $e) {
+        } catch (Queue\Exception $e) {
             $return = '';
         }
         return $return;
@@ -309,7 +315,7 @@ class Zend_Queue_Stomp_Frame
     public function fromFrame($frame)
     {
         if (!is_string($frame)) {
-            throw new Zend_Queue_Exception('$frame is not a string');
+            throw new Queue\Exception('$frame is not a string');
         }
 
         $headers = array();

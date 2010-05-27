@@ -21,15 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tag\Cloud\Decorator;
+
+/**
  * Exception class for Zend_Tag_Cloud_Decorator
  *
- * @uses      Zend_Tag_Cloud_Exception
+ * @uses      \Zend\Tag\Cloud\Exception
  * @category  Zend
  * @package   Zend_Tag
- * @uses      Zend_Tag_Cloud_Exception
+ * @uses      \Zend\Tag\Cloud\Exception
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tag_Cloud_Decorator_Exception extends Zend_Tag_Cloud_Exception
+class Exception extends \Zend\Tag\Cloud\Exception
 {
 }

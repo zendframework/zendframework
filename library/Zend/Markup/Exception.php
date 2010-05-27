@@ -20,15 +20,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Markup;
+
+/**
  * Exception class for Zend_Markup
  *
- * @uses       Zend_Exception
+ * @uses       \Zend\Exception
  * @category   Zend 
- * @uses       Zend_Exception
+ * @uses       \Zend\Exception
  * @package    Zend_Markup
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Markup_Exception extends Zend_Exception
+class Exception extends \Zend\Exception
 {
 }

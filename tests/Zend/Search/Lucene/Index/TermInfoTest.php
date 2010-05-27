@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Search\Lucene\Index;
+use Zend\Search\Lucene\Index;
+
+/**
  * Zend_Search_Lucene_Index_TermInfo
  */
 
@@ -36,12 +42,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-class Zend_Search_Lucene_Index_TermInfoTest extends PHPUnit_Framework_TestCase
+class TermInfoTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreate()
     {
-        $termInfo = new Zend_Search_Lucene_Index_TermInfo(0, 1, 2, 3);
-        $this->assertTrue($termInfo instanceof Zend_Search_Lucene_Index_TermInfo);
+        $termInfo = new Index\TermInfo(0, 1, 2, 3);
+        $this->assertTrue($termInfo instanceof Index\TermInfo);
 
         $this->assertEquals($termInfo->docFreq,      0);
         $this->assertEquals($termInfo->freqPointer,  1);
@@ -49,7 +55,7 @@ class Zend_Search_Lucene_Index_TermInfoTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($termInfo->skipOffset,   3);
         $this->assertEquals($termInfo->indexPointer, null);
 
-        $termInfo = new Zend_Search_Lucene_Index_TermInfo(0, 1, 2, 3, 4);
+        $termInfo = new Index\TermInfo(0, 1, 2, 3, 4);
         $this->assertEquals($termInfo->indexPointer, 4);
     }
 }

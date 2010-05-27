@@ -20,12 +20,11 @@
  * @version    $Id$
  */
 
-// Call Zend_InfoCard_AssertionTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_InfoCard_AssertionTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\InfoCard;
+use Zend\InfoCard\XML\Assertion;
 
 /**
  * @category   Zend
@@ -35,22 +34,9 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_InfoCard
  */
-class Zend_InfoCard_AssertionTest extends PHPUnit_Framework_TestCase
+class AssertionTest extends \PHPUnit_Framework_TestCase
 {
     protected $_xmlDocument;
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_InfoCard_AssertionTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function setUp()
     {
@@ -69,15 +55,15 @@ class Zend_InfoCard_AssertionTest extends PHPUnit_Framework_TestCase
     {
         date_default_timezone_set("America/Los_Angeles");
 
-        $assertions = Zend_InfoCard_Xml_Assertion::getInstance($this->_xmlDocument);
+        $assertions = Assertion\Assertion::getInstance($this->_xmlDocument);
 
-        $this->assertTrue($assertions instanceof Zend_InfoCard_Xml_Assertion_Saml);
+        $this->assertTrue($assertions instanceof Assertion\SAML);
 
         $this->assertSame($assertions->getMajorVersion(), 1);
         $this->assertSame($assertions->getMinorversion(), 1);
         $this->assertSame($assertions->getAssertionID(), "uuid:5cf2cd76-acf6-45ef-9059-a811801b80cc");
         $this->assertSame($assertions->getIssuer(), "http://schemas.xmlsoap.org/ws/2005/05/identity/issuer/self");
-        $this->assertSame($assertions->getConfirmationMethod(), Zend_InfoCard_Xml_Assertion_Saml::CONFIRMATION_BEARER);
+        $this->assertSame($assertions->getConfirmationMethod(), Assertion\SAML::CONFIRMATION_BEARER);
         $this->assertSame($assertions->getIssuedTimestamp(), 1190153823);
 
     }
@@ -85,24 +71,20 @@ class Zend_InfoCard_AssertionTest extends PHPUnit_Framework_TestCase
     public function testAssertionErrors()
     {
         try {
-            Zend_InfoCard_Xml_Assertion::getInstance(10);
+            Assertion\Assertion::getInstance(10);
             $this->fail("Exception Not Thrown as Expected");
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             /* yay */
         }
 
         $doc = file_get_contents(dirname(__FILE__) . '/_files/signedToken_bad_type.xml');
 
         try {
-            $assertions = Zend_InfoCard_Xml_Assertion::getInstance($doc);
+            $assertions = Assertion\Assertion::getInstance($doc);
             $this->fail("Exception Not thrown as expected");
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             /* yay */
         }
     }
 }
 
-// Call Zend_InfoCard_AssertionTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_InfoCard_AssertionTest::main") {
-    Zend_InfoCard_AssertionTest::main();
-}

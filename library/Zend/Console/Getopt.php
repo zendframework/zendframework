@@ -14,14 +14,19 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Console_Getopt
+ * @package    Zend_Console
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * Zend_Console_Getopt is a class to parse options for command-line
+ * @namespace
+ */
+namespace Zend\Console;
+
+/**
+ * Getopt is a class to parse options for command-line
  * applications.
  *
  * Terminology:
@@ -123,10 +128,10 @@
  *
  * @todo  Feature request to implement callbacks.
  *        e.g. if -a is specified, run function 'handleOptionA'().
- * @uses  Zend_Console_Getopt_Exception
- * @uses  Zend_Json
+ * @uses  \Zend\Console\GetoptException
+ * @uses  \Zend\Json\Json
  */
-class Zend_Console_Getopt
+class Getopt
 {
 
     /**
@@ -245,11 +250,11 @@ class Zend_Console_Getopt
     {
         if (!isset($_SERVER['argv'])) {
             if (ini_get('register_argc_argv') == false) {
-                throw new Zend_Console_Getopt_Exception(
+                throw new GetoptException(
                     "argv is not available, because ini option 'register_argc_argv' is set Off"
                 );
             } else {
-                throw new Zend_Console_Getopt_Exception(
+                throw new GetoptException(
                     '$_SERVER["argv"] is not set, but Zend_Console_Getopt cannot work without this information.'
                 );
             }
@@ -345,13 +350,13 @@ class Zend_Console_Getopt
      * These are appended to those defined when the constructor was called.
      *
      * @param  array $argv
-     * @throws Zend_Console_Getopt_Exception When not given an array as parameter
-     * @return Zend_Console_Getopt Provides a fluent interface
+     * @throws \Zend\Console\Getopt\Exception When not given an array as parameter
+     * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
      */
     public function addArguments($argv)
     {
         if(!is_array($argv)) {
-            throw new Zend_Console_Getopt_Exception(
+            throw new GetoptException(
                 "Parameter #1 to addArguments should be an array");
         }
         $this->_argv = array_merge($this->_argv, $argv);
@@ -364,13 +369,13 @@ class Zend_Console_Getopt
      * These replace any currently defined.
      *
      * @param  array $argv
-     * @throws Zend_Console_Getopt_Exception When not given an array as parameter
-     * @return Zend_Console_Getopt Provides a fluent interface
+     * @throws \Zend\Console\Getopt\Exception When not given an array as parameter
+     * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
      */
     public function setArguments($argv)
     {
         if(!is_array($argv)) {
-            throw new Zend_Console_Getopt_Exception(
+            throw new GetoptException(
                 "Parameter #1 to setArguments should be an array");
         }
         $this->_argv = $argv;
@@ -384,7 +389,7 @@ class Zend_Console_Getopt
      * the behavior of Zend_Console_Getopt.
      *
      * @param  array $getoptConfig
-     * @return Zend_Console_Getopt Provides a fluent interface
+     * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
      */
     public function setOptions($getoptConfig)
     {
@@ -403,7 +408,7 @@ class Zend_Console_Getopt
      *
      * @param  string $configKey
      * @param  string $configValue
-     * @return Zend_Console_Getopt Provides a fluent interface
+     * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
      */
     public function setOption($configKey, $configValue)
     {
@@ -418,7 +423,7 @@ class Zend_Console_Getopt
      * These are appended to the rules defined when the constructor was called.
      *
      * @param  array $rules
-     * @return Zend_Console_Getopt Provides a fluent interface
+     * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
      */
     public function addRules($rules)
     {
@@ -501,7 +506,7 @@ class Zend_Console_Getopt
             );
         }
 
-        $json = Zend_Json::encode($j);
+        $json = \Zend\Json\Json::encode($j);
         return $json;
     }
 
@@ -513,7 +518,7 @@ class Zend_Console_Getopt
     public function toXml()
     {
         $this->parse();
-        $doc = new DomDocument('1.0', 'utf-8');
+        $doc = new \DomDocument('1.0', 'utf-8');
         $optionsNode = $doc->createElement('options');
         $doc->appendChild($optionsNode);
         foreach ($this->_options as $flag => $value) {
@@ -631,8 +636,8 @@ class Zend_Console_Getopt
      * mapping option name (short or long) to an alias.
      *
      * @param  array $aliasMap
-     * @throws Zend_Console_Getopt_Exception
-     * @return Zend_Console_Getopt Provides a fluent interface
+     * @throws \Zend\Console\Getopt\Exception
+     * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
      */
     public function setAliases($aliasMap)
     {
@@ -648,7 +653,7 @@ class Zend_Console_Getopt
             $flag = $this->_ruleMap[$flag];
             if (isset($this->_rules[$alias]) || isset($this->_ruleMap[$alias])) {
                 $o = (strlen($alias) == 1 ? '-' : '--') . $alias;
-                throw new Zend_Console_Getopt_Exception(
+                throw new GetoptException(
                     "Option \"$o\" is being defined more than once.");
             }
             $this->_rules[$flag]['alias'][] = $alias;
@@ -664,7 +669,7 @@ class Zend_Console_Getopt
      * mapping option name (short or long) to the help string.
      *
      * @param  array $helpMap
-     * @return Zend_Console_Getopt Provides a fluent interface
+     * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
      */
     public function setHelp($helpMap)
     {
@@ -686,7 +691,7 @@ class Zend_Console_Getopt
      * Also find option parameters, and remaining arguments after
      * all options have been parsed.
      *
-     * @return Zend_Console_Getopt|null Provides a fluent interface
+     * @return \Zend\Console\Getopt\Getopt|null Provides a fluent interface
      */
     public function parse()
     {
@@ -764,7 +769,7 @@ class Zend_Console_Getopt
      *
      * @param  string $flag
      * @param  mixed  $argv
-     * @throws Zend_Console_Getopt_Exception
+     * @throws \Zend\Console\Getopt\Exception
      * @return void
      */
     protected function _parseSingleOption($flag, &$argv)
@@ -773,7 +778,7 @@ class Zend_Console_Getopt
             $flag = strtolower($flag);
         }
         if (!isset($this->_ruleMap[$flag])) {
-            throw new Zend_Console_Getopt_Exception(
+            throw new GetoptException(
                 "Option \"$flag\" is not recognized.",
                 $this->getUsageMessage());
         }
@@ -784,7 +789,7 @@ class Zend_Console_Getopt
                     $param = array_shift($argv);
                     $this->_checkParameterType($realFlag, $param);
                 } else {
-                    throw new Zend_Console_Getopt_Exception(
+                    throw new GetoptException(
                         "Option \"$flag\" requires a parameter.",
                         $this->getUsageMessage());
                 }
@@ -810,7 +815,7 @@ class Zend_Console_Getopt
      *
      * @param  string $flag
      * @param  string $param
-     * @throws Zend_Console_Getopt_Exception
+     * @throws \Zend\Console\Getopt\Exception
      * @return bool
      */
     protected function _checkParameterType($flag, $param)
@@ -822,14 +827,14 @@ class Zend_Console_Getopt
         switch ($type) {
             case 'word':
                 if (preg_match('/\W/', $param)) {
-                    throw new Zend_Console_Getopt_Exception(
+                    throw new GetoptException(
                         "Option \"$flag\" requires a single-word parameter, but was given \"$param\".",
                         $this->getUsageMessage());
                 }
                 break;
             case 'integer':
                 if (preg_match('/\D/', $param)) {
-                    throw new Zend_Console_Getopt_Exception(
+                    throw new GetoptException(
                         "Option \"$flag\" requires an integer parameter, but was given \"$param\".",
                         $this->getUsageMessage());
                 }
@@ -879,7 +884,7 @@ class Zend_Console_Getopt
      * Define legal options using the Zend-style format.
      *
      * @param  array $rules
-     * @throws Zend_Console_Getopt_Exception
+     * @throws \Zend\Console\Getopt\Exception
      * @return void
      */
     protected function _addRulesModeZend($rules)
@@ -905,19 +910,19 @@ class Zend_Console_Getopt
             $mainFlag = $flags[0];
             foreach ($flags as $flag) {
                 if (empty($flag)) {
-                    throw new Zend_Console_Getopt_Exception(
+                    throw new GetoptException(
                         "Blank flag not allowed in rule \"$ruleCode\".");
                 }
                 if (strlen($flag) == 1) {
                     if (isset($this->_ruleMap[$flag])) {
-                        throw new Zend_Console_Getopt_Exception(
+                        throw new GetoptException(
                             "Option \"-$flag\" is being defined more than once.");
                     }
                     $this->_ruleMap[$flag] = $mainFlag;
                     $rule['alias'][] = $flag;
                 } else {
                     if (isset($this->_rules[$flag]) || isset($this->_ruleMap[$flag])) {
-                        throw new Zend_Console_Getopt_Exception(
+                        throw new GetoptException(
                             "Option \"--$flag\" is being defined more than once.");
                     }
                     $this->_ruleMap[$flag] = $mainFlag;
@@ -951,5 +956,4 @@ class Zend_Console_Getopt
             $this->_rules[$mainFlag] = $rule;
         }
     }
-
 }

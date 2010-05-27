@@ -20,16 +20,18 @@
  * @since      Preview Release 0.2
  */
 
+namespace Zend\Session;
+
 /**
  * Zend_Session_Exception
  *
- * @uses       Zend_Exception
+ * @uses       Zend\Exception
  * @category   Zend
  * @package    Zend_Session
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Session_Exception extends Zend_Exception
+class Exception extends \Zend\Exception
 {
     /**
      * sessionStartError

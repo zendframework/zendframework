@@ -21,24 +21,32 @@
  */
 
 /**
- * @uses       Zend_Search_Lucene_Proxy
+ * @namespace
+ */
+namespace Zend\Search\Lucene\Search;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Document;
+
+/**
+ * @uses       \Zend\Search\Lucene\IndexInterface
+ * @uses       \Zend\Search\Lucene\Document\Document
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_Search_QueryHit
+class QueryHit
 {
     /**
      * Object handle of the index
-     * @var Zend_Search_Lucene_Interface
+     * @var \Zend\Search\Lucene\IndexInterface
      */
     protected $_index = null;
 
     /**
      * Object handle of the document associated with this hit
-     * @var Zend_Search_Lucene_Document
+     * @var \Zend\Search\Lucene\Document\Document
      */
     protected $_document = null;
 
@@ -59,12 +67,12 @@ class Zend_Search_Lucene_Search_QueryHit
      * Constructor - pass object handle of Zend_Search_Lucene_Interface index that produced
      * the hit so the document can be retrieved easily from the hit.
      *
-     * @param Zend_Search_Lucene_Interface $index
+     * @param \Zend\Search\Lucene\IndexInterface $index
      */
 
-    public function __construct(Zend_Search_Lucene_Interface $index)
+    public function __construct(Lucene\IndexInterface $index)
     {
-        $this->_index = new Zend_Search_Lucene_Proxy($index);
+        $this->_index = $index;
     }
 
 
@@ -84,11 +92,11 @@ class Zend_Search_Lucene_Search_QueryHit
     /**
      * Return the document object for this hit
      *
-     * @return Zend_Search_Lucene_Document
+     * @return \Zend\Search\Lucene\Document\Document
      */
     public function getDocument()
     {
-        if (!$this->_document instanceof Zend_Search_Lucene_Document) {
+        if (!$this->_document instanceof Document\Document) {
             $this->_document = $this->_index->getDocument($this->id);
         }
 
@@ -99,11 +107,10 @@ class Zend_Search_Lucene_Search_QueryHit
     /**
      * Return the index object for this hit
      *
-     * @return Zend_Search_Lucene_Interface
+     * @return \Zend\Search\Lucene\IndexInterface
      */
     public function getIndex()
     {
         return $this->_index;
     }
 }
-

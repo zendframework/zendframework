@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Queue\Stomp;
+
+/**
  * This class represents a Stomp Frame Interface
  *
  * @category   Zend
@@ -29,7 +34,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Queue_Stomp_FrameInterface
+interface FrameInterface
 {
     /**
      * Get the status of the auto content length
@@ -50,7 +55,7 @@ interface Zend_Queue_Stomp_FrameInterface
      *
      * @param boolean $auto
      * @return $this;
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
     public function setAutoContentLength($auto);
 
@@ -68,7 +73,7 @@ interface Zend_Queue_Stomp_FrameInterface
      *
      * @param array $headers
      * @return $this
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
     public function setHeaders(array $headers);
 
@@ -78,7 +83,7 @@ interface Zend_Queue_Stomp_FrameInterface
      *
      * @param string $header
      * @return $string
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
     public function getHeader($header);
 
@@ -89,7 +94,7 @@ interface Zend_Queue_Stomp_FrameInterface
      * @param string $header
      * @param string $value
      * @return $this
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
     public function setHeader($header, $value);
 
@@ -109,7 +114,7 @@ interface Zend_Queue_Stomp_FrameInterface
      *
      * @param string|null $body
      * @return $this
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
     public function setBody($body);
 
@@ -126,7 +131,7 @@ interface Zend_Queue_Stomp_FrameInterface
      * returns false if the body does not exist
      *
      * @return $this
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
     public function setCommand($command);
 
@@ -134,7 +139,7 @@ interface Zend_Queue_Stomp_FrameInterface
     /**
      * Takes the current parameters and returns a Stomp Frame
      *
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      * @return string
      */
     public function toFrame();

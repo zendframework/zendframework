@@ -21,12 +21,17 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tag;
+
+/**
  * @category   Zend
  * @package    Zend_Tag
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Tag_Taggable
+interface Taggable
 {
     /**
      * Get the title of the tag

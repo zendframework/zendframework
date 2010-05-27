@@ -21,15 +21,20 @@
  */
 
 /**
- * @uses       Zend_Search_Lucene_Index_TermsPriorityQueue
- * @uses       Zend_Search_Lucene_Index_TermsStream_Interface
+ * @namespace
+ */
+namespace Zend\Search\Lucene;
+
+/**
+ * @uses       \Zend\Search\Lucene\Index\TermsPriorityQueue
+ * @uses       \Zend\Search\Lucene\Index\TermsStream\TermsStreamInterface
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_TermStreamsPriorityQueue implements Zend_Search_Lucene_Index_TermsStream_Interface
+class TermStreamsPriorityQueue implements Index\TermsStream\TermsStreamInterface
 {
     /**
      * Array of term streams (Zend_Search_Lucene_Index_TermsStream_Interface objects)
@@ -41,14 +46,14 @@ class Zend_Search_Lucene_TermStreamsPriorityQueue implements Zend_Search_Lucene_
     /**
      * Terms stream queue
      *
-     * @var Zend_Search_Lucene_Index_TermsPriorityQueue
+     * @var \Zend\Search\Lucene\Index\TermsPriorityQueue
      */
     protected $_termsStreamQueue = null;
 
     /**
      * Last Term in a terms stream
      *
-     * @var Zend_Search_Lucene_Index_Term
+     * @var \Zend\Search\Lucene\Index\Term
      */
     protected $_lastTerm = null;
 
@@ -56,7 +61,7 @@ class Zend_Search_Lucene_TermStreamsPriorityQueue implements Zend_Search_Lucene_
     /**
      * Object constructor
      *
-     * @param array $termStreams  array of term streams (Zend_Search_Lucene_Index_TermsStream_Interface objects)
+     * @param array $termStreams  array of term streams (\Zend\Search\Lucene\Index\TermsStream\TermsStreamInterface objects)
      */
     public function __construct(array $termStreams)
     {
@@ -70,7 +75,7 @@ class Zend_Search_Lucene_TermStreamsPriorityQueue implements Zend_Search_Lucene_
      */
     public function resetTermsStream()
     {
-        $this->_termsStreamQueue = new Zend_Search_Lucene_Index_TermsPriorityQueue();
+        $this->_termsStreamQueue = new Index\TermsPriorityQueue();
 
         foreach ($this->_termStreams as $termStream) {
             $termStream->resetTermsStream();
@@ -89,9 +94,9 @@ class Zend_Search_Lucene_TermStreamsPriorityQueue implements Zend_Search_Lucene_
      *
      * Prefix contains fully specified field info and portion of searched term
      *
-     * @param Zend_Search_Lucene_Index_Term $prefix
+     * @param \Zend\Search\Lucene\Index\Term $prefix
      */
-    public function skipTo(Zend_Search_Lucene_Index_Term $prefix)
+    public function skipTo(Index\Term $prefix)
     {
         $termStreams = array();
 
@@ -113,7 +118,7 @@ class Zend_Search_Lucene_TermStreamsPriorityQueue implements Zend_Search_Lucene_
     /**
      * Scans term streams and returns next term
      *
-     * @return Zend_Search_Lucene_Index_Term|null
+     * @return \Zend\Search\Lucene\Index\Term|null
      */
     public function nextTerm()
     {
@@ -147,7 +152,7 @@ class Zend_Search_Lucene_TermStreamsPriorityQueue implements Zend_Search_Lucene_
     /**
      * Returns term in current position
      *
-     * @return Zend_Search_Lucene_Index_Term|null
+     * @return \Zend\Search\Lucene\Index\Term|null
      */
     public function currentTerm()
     {

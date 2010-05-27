@@ -29,7 +29,7 @@
  * @uses       Zend_OpenId_Consumer_Storage
  * @uses       Zend_OpenId_Consumer_Storage_File
  * @uses       Zend_OpenId_Extension
- * @uses       Zend_Session_Namespace
+ * @uses       Zend\Session\Container
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage Zend_OpenId_Consumer
@@ -64,14 +64,14 @@ class Zend_OpenId_Consumer
     /**
      * HTTP client to make HTTP requests
      *
-     * @var Zend_Http_Client $_httpClient
+     * @var Zend\Http\Client $_httpClient
      */
     private $_httpClient = null;
 
     /**
      * HTTP session to store climed_id between requests
      *
-     * @var Zend_Session_Namespace $_session
+     * @var Zend\Session\Container $_session
      */
     private $_session = null;
 
@@ -201,7 +201,7 @@ class Zend_OpenId_Consumer
                     $identity = $_SESSION["zend_openid"]["claimed_id"];
                 }
             } else {
-                $this->_session = new Zend_Session_Namespace("zend_openid");
+                $this->_session = new \Zend\Session\Container("zend_openid");
                 if ($this->_session->identity === $identity) {
                     $identity = $this->_session->claimed_id;
                 }
@@ -464,7 +464,7 @@ class Zend_OpenId_Consumer
     {
         $client = $this->_httpClient;
         if ($client === null) {
-            $client = new Zend_Http_Client(
+            $client = new \Zend\Http\Client(
                     $url,
                     array(
                         'maxredirects' => 4,
@@ -478,10 +478,10 @@ class Zend_OpenId_Consumer
 
         $client->resetParameters();
         if ($method == 'POST') {
-            $client->setMethod(Zend_Http_Client::POST);
+            $client->setMethod(\Zend\Http\Client::POST);
             $client->setParameterPost($params);
         } else {
-            $client->setMethod(Zend_Http_Client::GET);
+            $client->setMethod(\Zend\Http\Client::GET);
             $client->setParameterGet($params);
         }
 
@@ -849,7 +849,7 @@ class Zend_OpenId_Consumer
                     "identity" => $id,
                     "claimed_id" => $claimedId);
             } else {
-                $this->_session = new Zend_Session_Namespace("zend_openid");
+                $this->_session = new \Zend\Session\Container("zend_openid");
                 $this->_session->identity = $id;
                 $this->_session->claimed_id = $claimedId;
             }
@@ -885,7 +885,7 @@ class Zend_OpenId_Consumer
     /**
      * Sets HTTP client object to make HTTP requests
      *
-     * @param Zend_Http_Client $client HTTP client object to be used
+     * @param Zend\Http\Client $client HTTP client object to be used
      */
     public function setHttpClient($client) {
         $this->_httpClient = $client;
@@ -894,7 +894,7 @@ class Zend_OpenId_Consumer
     /**
      * Returns HTTP client object that will be used to make HTTP requests
      *
-     * @return Zend_Http_Client
+     * @return Zend\Http\Client
      */
     public function getHttpClient() {
         return $this->_httpClient;
@@ -903,18 +903,20 @@ class Zend_OpenId_Consumer
     /**
      * Sets session object to store climed_id
      *
-     * @param Zend_Session_Namespace $session HTTP client object to be used
+     * @param Zend\Session\Container $session HTTP client object to be used
      */
-    public function setSession(Zend_Session_Namespace $session) {
+    public function setSession(\Zend\Session\Container $session) 
+    {
         $this->_session = $session;
     }
 
     /**
      * Returns session object that is used to store climed_id
      *
-     * @return Zend_Session_Namespace
+     * @return Zend\Session\Container
      */
-    public function getSession() {
+    public function getSession() 
+    {
         return $this->_session;
     }
 

@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Crypt;
+use Zend\Crypt\DiffieHellman;
 
 /**
  * @category   Zend
@@ -29,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Crypt
  */
-class Zend_Crypt_DiffieHellmanTest extends PHPUnit_Framework_TestCase
+class DiffieHellmanTest extends \PHPUnit_Framework_TestCase
 {
 
     public function setUp()
@@ -52,9 +57,9 @@ class Zend_Crypt_DiffieHellmanTest extends PHPUnit_Framework_TestCase
             'private'=>'14'
         );
 
-        Zend_Crypt_DiffieHellman::$useOpenssl = false;
-        $alice = new Zend_Crypt_DiffieHellman($aliceOptions['prime'], $aliceOptions['generator'], $aliceOptions['private']);
-        $bob = new Zend_Crypt_DiffieHellman($bobOptions['prime'], $bobOptions['generator'], $bobOptions['private']);
+        DiffieHellman::$useOpenssl = false;
+        $alice = new DiffieHellman($aliceOptions['prime'], $aliceOptions['generator'], $aliceOptions['private']);
+        $bob = new DiffieHellman($bobOptions['prime'], $bobOptions['generator'], $bobOptions['private']);
         $alice->generateKeys();
         $bob->generateKeys();
 
@@ -82,20 +87,20 @@ class Zend_Crypt_DiffieHellmanTest extends PHPUnit_Framework_TestCase
             'private' => '33411735792639558625733635717892563612548180650402161151077478314841463707948899786103588912325634730410551946772752880177868972816963551821740386700076034213408153924692562543117963464733156600545484510833072427003474207064650714831083304497737160382097083356876078146231616972608703322302585471319261275664'
         );
 
-        Zend_Crypt_DiffieHellman::$useOpenssl = false;
-        $alice = new Zend_Crypt_DiffieHellman($aliceOptions['prime'], $aliceOptions['generator'], $aliceOptions['private']);
-        $bob = new Zend_Crypt_DiffieHellman($bobOptions['prime'], $bobOptions['generator'], $bobOptions['private']);
+        DiffieHellman::$useOpenssl = false;
+        $alice = new DiffieHellman($aliceOptions['prime'], $aliceOptions['generator'], $aliceOptions['private']);
+        $bob = new DiffieHellman($bobOptions['prime'], $bobOptions['generator'], $bobOptions['private']);
         $alice->generateKeys();
         $bob->generateKeys();
 
         //0DmJUe9dr02pAtVoGyLHdC+rfBU3mDCelKGPXRDFHofx6mFfN2gcZCmp/ab4ezDXfpIBOatpVdbn2fTNUGo64DtKE2WGTsZCl90RgrGUv8XW/4WDPXeE7g5u7KWHBG/LCE5+XsilE5P5/GIyqr9gsiudTmk+H/hiYZl9Smar9k0=
-        $this->assertEquals('ANA5iVHvXa9NqQLVaBsix3Qvq3wVN5gwnpShj10QxR6H8ephXzdoHGQpqf2m+Hsw136SATmraVXW59n0zVBqOuA7ShNlhk7GQpfdEYKxlL/F1v+Fgz13hO4ObuylhwRvywhOfl7IpROT+fxiMqq/YLIrnU5pPh/4YmGZfUpmq/ZN', base64_encode($alice->getPublicKey(Zend_Crypt_DiffieHellman::BINARY)));
+        $this->assertEquals('ANA5iVHvXa9NqQLVaBsix3Qvq3wVN5gwnpShj10QxR6H8ephXzdoHGQpqf2m+Hsw136SATmraVXW59n0zVBqOuA7ShNlhk7GQpfdEYKxlL/F1v+Fgz13hO4ObuylhwRvywhOfl7IpROT+fxiMqq/YLIrnU5pPh/4YmGZfUpmq/ZN', base64_encode($alice->getPublicKey(DiffieHellman::BINARY)));
 
         //v8puCBaHdch0stxmkyS/sZvZHyB5f0AVkopAQ5wKSZIyEHHcGn7DXXH2u4WdCL+kMr8BcRpxRBJ0TDwfZPpu53nFNEjUd81WlfaKk95e4a/DC4dhlfBkQMebleobhedQPFAo7F9SkHN7uTLa/glxG+3T9DTb+ikcOVPoH3A1G6g=
-        $this->assertEquals('AL/KbggWh3XIdLLcZpMkv7Gb2R8geX9AFZKKQEOcCkmSMhBx3Bp+w11x9ruFnQi/pDK/AXEacUQSdEw8H2T6bud5xTRI1HfNVpX2ipPeXuGvwwuHYZXwZEDHm5XqG4XnUDxQKOxfUpBze7ky2v4JcRvt0/Q02/opHDlT6B9wNRuo', base64_encode($bob->getPublicKey(Zend_Crypt_DiffieHellman::BINARY)));
+        $this->assertEquals('AL/KbggWh3XIdLLcZpMkv7Gb2R8geX9AFZKKQEOcCkmSMhBx3Bp+w11x9ruFnQi/pDK/AXEacUQSdEw8H2T6bud5xTRI1HfNVpX2ipPeXuGvwwuHYZXwZEDHm5XqG4XnUDxQKOxfUpBze7ky2v4JcRvt0/Q02/opHDlT6B9wNRuo', base64_encode($bob->getPublicKey(DiffieHellman::BINARY)));
 
-        $aliceSecretKey = $alice->computeSecretKey($bob->getPublicKey(Zend_Crypt_DiffieHellman::BINARY), Zend_Crypt_DiffieHellman::BINARY, Zend_Crypt_DiffieHellman::BINARY);
-        $bobSecretKey = $bob->computeSecretKey($alice->getPublicKey(Zend_Crypt_DiffieHellman::BINARY), Zend_Crypt_DiffieHellman::BINARY, Zend_Crypt_DiffieHellman::BINARY);
+        $aliceSecretKey = $alice->computeSecretKey($bob->getPublicKey(DiffieHellman::BINARY), DiffieHellman::BINARY, DiffieHellman::BINARY);
+        $bobSecretKey = $bob->computeSecretKey($alice->getPublicKey(DiffieHellman::BINARY), DiffieHellman::BINARY, DiffieHellman::BINARY);
 
         // both Alice and Bob should now have the same secret key
         $expectedSharedSecret = base64_decode('FAAkw7NN1+raX9K1+dR3nqX2LZcDYYuZH13lpasaDIM4/ZXqbzdgiHZ86SILN27BjmJObtNQG/SNHfhxMalLMtLv+v0JFte/6+pIvMG9tAoPFsVh2BAvBuNpLY5W5gusgQ2p4pvJK0wz9YJ8iFdOHEOnhzYuN7LS/YXx2rBOz0Q=');
@@ -123,15 +128,15 @@ class Zend_Crypt_DiffieHellmanTest extends PHPUnit_Framework_TestCase
             'private' => '33411735792639558625733635717892563612548180650402161151077478314841463707948899786103588912325634730410551946772752880177868972816963551821740386700076034213408153924692562543117963464733156600545484510833072427003474207064650714831083304497737160382097083356876078146231616972608703322302585471319261275664'
         );
 
-        $alice = new Zend_Crypt_DiffieHellman($aliceOptions['prime'], $aliceOptions['generator'], $aliceOptions['private']);
-        $bob = new Zend_Crypt_DiffieHellman($bobOptions['prime'], $bobOptions['generator'], $bobOptions['private']);
+        $alice = new DiffieHellman($aliceOptions['prime'], $aliceOptions['generator'], $aliceOptions['private']);
+        $bob = new DiffieHellman($bobOptions['prime'], $bobOptions['generator'], $bobOptions['private']);
         $alice->generateKeys();
         $bob->generateKeys();
-        $this->assertEquals('ANA5iVHvXa9NqQLVaBsix3Qvq3wVN5gwnpShj10QxR6H8ephXzdoHGQpqf2m+Hsw136SATmraVXW59n0zVBqOuA7ShNlhk7GQpfdEYKxlL/F1v+Fgz13hO4ObuylhwRvywhOfl7IpROT+fxiMqq/YLIrnU5pPh/4YmGZfUpmq/ZN', base64_encode($alice->getPublicKey(Zend_Crypt_DiffieHellman::BINARY)));
-        $this->assertEquals('AL/KbggWh3XIdLLcZpMkv7Gb2R8geX9AFZKKQEOcCkmSMhBx3Bp+w11x9ruFnQi/pDK/AXEacUQSdEw8H2T6bud5xTRI1HfNVpX2ipPeXuGvwwuHYZXwZEDHm5XqG4XnUDxQKOxfUpBze7ky2v4JcRvt0/Q02/opHDlT6B9wNRuo', base64_encode($bob->getPublicKey(Zend_Crypt_DiffieHellman::BINARY)));
+        $this->assertEquals('ANA5iVHvXa9NqQLVaBsix3Qvq3wVN5gwnpShj10QxR6H8ephXzdoHGQpqf2m+Hsw136SATmraVXW59n0zVBqOuA7ShNlhk7GQpfdEYKxlL/F1v+Fgz13hO4ObuylhwRvywhOfl7IpROT+fxiMqq/YLIrnU5pPh/4YmGZfUpmq/ZN', base64_encode($alice->getPublicKey(DiffieHellman::BINARY)));
+        $this->assertEquals('AL/KbggWh3XIdLLcZpMkv7Gb2R8geX9AFZKKQEOcCkmSMhBx3Bp+w11x9ruFnQi/pDK/AXEacUQSdEw8H2T6bud5xTRI1HfNVpX2ipPeXuGvwwuHYZXwZEDHm5XqG4XnUDxQKOxfUpBze7ky2v4JcRvt0/Q02/opHDlT6B9wNRuo', base64_encode($bob->getPublicKey(DiffieHellman::BINARY)));
 
-        $aliceSecretKey = $alice->computeSecretKey($bob->getPublicKey(Zend_Crypt_DiffieHellman::BINARY), Zend_Crypt_DiffieHellman::BINARY, Zend_Crypt_DiffieHellman::BINARY);
-        $bobSecretKey = $bob->computeSecretKey($alice->getPublicKey(Zend_Crypt_DiffieHellman::BINARY), Zend_Crypt_DiffieHellman::BINARY, Zend_Crypt_DiffieHellman::BINARY);
+        $aliceSecretKey = $alice->computeSecretKey($bob->getPublicKey(DiffieHellman::BINARY), DiffieHellman::BINARY, DiffieHellman::BINARY);
+        $bobSecretKey = $bob->computeSecretKey($alice->getPublicKey(DiffieHellman::BINARY), DiffieHellman::BINARY, DiffieHellman::BINARY);
 
         // both Alice and Bob should now have the same secret key
         $expectedSharedSecret = base64_decode('FAAkw7NN1+raX9K1+dR3nqX2LZcDYYuZH13lpasaDIM4/ZXqbzdgiHZ86SILN27BjmJObtNQG/SNHfhxMalLMtLv+v0JFte/6+pIvMG9tAoPFsVh2BAvBuNpLY5W5gusgQ2p4pvJK0wz9YJ8iFdOHEOnhzYuN7LS/YXx2rBOz0Q=');

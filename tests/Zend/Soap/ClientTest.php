@@ -20,6 +20,13 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Soap;
+use Zend\Soap\Client;
+use Zend\Soap\Server;
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Soap_ClientTest::main');
 }
@@ -40,7 +47,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Soap
  */
-class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
+class ClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Runs this test suite
@@ -49,8 +56,8 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     public function setUp()
@@ -65,13 +72,13 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
         /*************************************************************
          * ------ Test WSDL mode options -----------------------------
          *************************************************************/
-        $client = new Zend_Soap_Client();
+        $client = new Client\Client();
 
         $this->assertTrue($client->getOptions() == array('encoding' => 'UTF-8', 'soap_version' => SOAP_1_2));
 
         $ctx = stream_context_create();
 
-        $nonWsdlOptions = array('soap_version'   => SOAP_1_1,
+        $nonWSDLOptions = array('soap_version'   => SOAP_1_1,
                                 'classmap'       => array('TestData1' => 'Zend_Soap_Client_TestData1',
                                                     'TestData2' => 'Zend_Soap_Client_TestData2',),
                                 'encoding'       => 'ISO-8859-1',
@@ -97,14 +104,14 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
 
                                 'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5);
 
-        $client->setOptions($nonWsdlOptions);
-        $this->assertTrue($client->getOptions() == $nonWsdlOptions);
+        $client->setOptions($nonWSDLOptions);
+        $this->assertTrue($client->getOptions() == $nonWSDLOptions);
 
 
         /*************************************************************
          * ------ Test non-WSDL mode options -----------------------------
          *************************************************************/
-        $client1 = new Zend_Soap_Client();
+        $client1 = new Client\Client();
 
         $this->assertTrue($client1->getOptions() == array('encoding' => 'UTF-8', 'soap_version' => SOAP_1_2));
 
@@ -135,7 +142,7 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testGetOptions()
     {
-        $client = new Zend_Soap_Client();
+        $client = new Client\Client();
 
         $this->assertTrue($client->getOptions() == array('encoding' => 'UTF-8', 'soap_version' => SOAP_1_2));
 
@@ -172,7 +179,7 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAndSetUserAgentOption()
     {
-        $client = new Zend_Soap_Client();
+        $client = new Client\Client();
         $this->assertNull($client->getUserAgent());
 
         $client->setUserAgent('agent1');
@@ -202,7 +209,7 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
      */
     public function testUserAgentAllowsEmptyString()
     {
-        $client = new Zend_Soap_Client();
+        $client = new Client\Client();
         $this->assertNull($client->getUserAgent());
         $options = $client->getOptions();
         $this->assertArrayNotHasKey('user_agent', $options);
@@ -220,10 +227,10 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testGetFunctions()
     {
-        $server = new Zend_Soap_Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');
+        $server = new Server\Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');
         $server->setClass('Zend_Soap_Client_TestClass');
 
-        $client = new Zend_Soap_Client_Local($server, dirname(__FILE__) . '/_files/wsdl_example.wsdl');
+        $client = new Client\Local($server, dirname(__FILE__) . '/_files/wsdl_example.wsdl');
 
         $this->assertTrue($client->getFunctions() == array('string testFunc1()',
                                                            'string testFunc2(string $who)',
@@ -249,10 +256,10 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Zend_Soap_Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');
+        $server = new Server\Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');
         $server->setClass('Zend_Soap_Client_TestClass');
 
-        $client = new Zend_Soap_Client_Local($server, dirname(__FILE__) . '/_files/wsdl_example.wsdl');
+        $client = new Client\Local($server, dirname(__FILE__) . '/_files/wsdl_example.wsdl');
 
         // Perform request
         $client->testFunc2('World');
@@ -279,10 +286,10 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Zend_Soap_Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');
+        $server = new Server\Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');
         $server->setClass('Zend_Soap_Client_TestClass');
 
-        $client = new Zend_Soap_Client_Local($server, dirname(__FILE__) . '/_files/wsdl_example.wsdl');
+        $client = new Client\Local($server, dirname(__FILE__) . '/_files/wsdl_example.wsdl');
 
         // Perform request
         $client->testFunc2('World');
@@ -310,10 +317,10 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Zend_Soap_Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');
+        $server = new Server\Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');
         $server->setClass('Zend_Soap_Client_TestClass');
 
-        $client = new Zend_Soap_Client_Local($server, dirname(__FILE__) . '/_files/wsdl_example.wsdl');
+        $client = new Client\Local($server, dirname(__FILE__) . '/_files/wsdl_example.wsdl');
 
         $this->assertEquals($client->testFunc2('World'), 'Hello World!');
     }
@@ -322,7 +329,7 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
     {
         $ctx = stream_context_create();
 
-        $nonWsdlOptions = array('soap_version'   => SOAP_1_1,
+        $nonWSDLOptions = array('soap_version'   => SOAP_1_1,
                                 'classmap'       => array('TestData1' => 'Zend_Soap_Client_TestData1',
                                                     'TestData2' => 'Zend_Soap_Client_TestData2',),
                                 'encoding'       => 'ISO-8859-1',
@@ -347,11 +354,11 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
                                 'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5
         );
 
-        $config = new Zend_Config($nonWsdlOptions);
+        $config = new \Zend\Config\Config($nonWSDLOptions);
 
-        $client = new Zend_Soap_Client(null, $config);
+        $client = new Client\Client(null, $config);
 
-        $this->assertEquals($nonWsdlOptions, $client->getOptions());
+        $this->assertEquals($nonWSDLOptions, $client->getOptions());
     }
 
     public function testSetInputHeaders()
@@ -361,15 +368,15 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Zend_Soap_Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');
+        $server = new Server\Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');
         $server->setClass('Zend_Soap_Client_TestClass');
 
-        $client = new Zend_Soap_Client_Local($server, dirname(__FILE__) . '/_files/wsdl_example.wsdl');
+        $client = new Client\Local($server, dirname(__FILE__) . '/_files/wsdl_example.wsdl');
 
         // Add request header
-        $client->addSoapInputHeader(new SoapHeader('http://www.example.com/namespace', 'MyHeader1', 'SOAP header content 1'));
+        $client->addSoapInputHeader(new \SoapHeader('http://www.example.com/namespace', 'MyHeader1', 'SOAP header content 1'));
         // Add permanent request header
-        $client->addSoapInputHeader(new SoapHeader('http://www.example.com/namespace', 'MyHeader2', 'SOAP header content 2'), true);
+        $client->addSoapInputHeader(new \SoapHeader('http://www.example.com/namespace', 'MyHeader2', 'SOAP header content 2'), true);
 
         // Perform request
         $client->testFunc2('World');
@@ -395,7 +402,7 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
 
 
         // Add request header
-        $client->addSoapInputHeader(new SoapHeader('http://www.example.com/namespace', 'MyHeader3', 'SOAP header content 3'));
+        $client->addSoapInputHeader(new \SoapHeader('http://www.example.com/namespace', 'MyHeader3', 'SOAP header content 3'));
 
         // Perform request
         $client->testFunc2('World');
@@ -423,7 +430,7 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
         $client->resetSoapInputHeaders();
 
         // Add request header
-        $client->addSoapInputHeader(new SoapHeader('http://www.example.com/namespace', 'MyHeader4', 'SOAP header content 4'));
+        $client->addSoapInputHeader(new \SoapHeader('http://www.example.com/namespace', 'MyHeader4', 'SOAP header content 4'));
 
         // Perform request
         $client->testFunc2('World');
@@ -460,7 +467,7 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
                    ->method('__setCookie')
                    ->with($fixtureCookieKey, $fixtureCookieValue);
 
-        $soap = new Zend_Soap_Client();
+        $soap = new Client\Client();
         $soap->setSoapClient($clientMock);
 
         $soap->setCookie($fixtureCookieKey, $fixtureCookieValue);
@@ -470,7 +477,7 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
     {
         $clientMock = $this->getMock('SoapClient', array('__setCookie'), array(null, array('uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com')));
 
-        $soap = new Zend_Soap_Client();
+        $soap = new Client\Client();
         $soap->setSoapClient($clientMock);
 
         $this->assertSame($clientMock, $soap->getSoapClient());
@@ -479,7 +486,7 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
 
 
 /** Test Class */
-class Zend_Soap_Client_TestClass {
+class TestClass {
     /**
      * Test Function 1
      *
@@ -525,7 +532,7 @@ class Zend_Soap_Client_TestClass {
 }
 
 /** Test class 2 */
-class Zend_Soap_Client_TestData1 {
+class TestData1 {
     /**
      * Property1
      *
@@ -542,7 +549,7 @@ class Zend_Soap_Client_TestData1 {
 }
 
 /** Test class 2 */
-class Zend_Soap_Client_TestData2 {
+class TestData2 {
     /**
      * Property1
      *
@@ -621,5 +628,5 @@ function Zend_Soap_Client_TestFunc6()
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Soap_ClientTest::main') {
-    Zend_Soap_ClientTest::main();
+    \Zend_Soap_ClientTest::main();
 }

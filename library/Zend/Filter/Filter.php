@@ -40,15 +40,4 @@ interface Filter
      * @return mixed
      */
     public function filter($value);
-
-    /**
-     * Invoke filter as a command
-     *
-     * Typically, should proxy to {@link filter()}
-     *
-     * @param  mixed $value
-     * @throws Zend\Filter\Exception If filtering $value is impossible
-     * @return mixed
-     */
-    public function __invoke($value);
 }

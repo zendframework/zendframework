@@ -20,15 +20,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\ProgressBar\Adapter;
+
+/**
  * Exception class for Zend_ProgressBar_Adapter
  *
- * @uses      Zend_ProgressBar_Exception
+ * @uses      \Zend\ProgressBar\Exception
  * @category  Zend
  * @package   Zend_ProgressBar
- * @uses      Zend_ProgressBar_Exception
+ * @uses      \Zend\ProgressBar\Exception
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_ProgressBar_Adapter_Exception extends Zend_ProgressBar_Exception
+class Exception extends \Zend\ProgressBar\Exception
 {
 }

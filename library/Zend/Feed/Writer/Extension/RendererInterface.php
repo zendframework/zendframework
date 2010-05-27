@@ -20,12 +20,17 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed\Writer\Extension;
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Feed_Writer_Extension_RendererInterface
+interface RendererInterface
 {
     /**
      * Constructor
@@ -42,7 +47,7 @@ interface Zend_Feed_Writer_Extension_RendererInterface
      * @param  DOMElement $base 
      * @return void
      */
-    public function setDomDocument(DOMDocument $dom, DOMElement $base);
+    public function setDomDocument(\DOMDocument $dom, \DOMElement $base);
     
     /**
      * Render

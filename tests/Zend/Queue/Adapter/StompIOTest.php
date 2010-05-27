@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Queue\Adapter;
+
 /*
  * The adapter test class provides a universal test class for all of the
  * abstract methods.
@@ -37,7 +42,7 @@
  * @group      Zend_Queue
  * @group      disable
  */
-class Zend_Queue_Adapter_StompIOTest extends PHPUnit_Framework_TestCase
+class StompIOTest extends \PHPUnit_Framework_TestCase
 {
     protected $config = array(
         'scheme' => 'tcp',
@@ -52,7 +57,7 @@ class Zend_Queue_Adapter_StompIOTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         if ( $this->io === false ) {
-            $this->io = new Zend_Queue_Adapter_Stomp_IO($this->config);
+            $this->io = new \Zend\Queue\Adapter\Stomp\IO\IO($this->config);
         }
     }
 
@@ -60,11 +65,11 @@ class Zend_Queue_Adapter_StompIOTest extends PHPUnit_Framework_TestCase
     {
         $frame = $this->io->constructFrame('SEND', array(), $this->body);
 
-        $correct = 'SEND' . Zend_Queue_Adapter_Stomp_IO::EOL;
-        $correct .= 'content-length: 11' . Zend_Queue_Adapter_Stomp_IO::EOL;
-        $correct .= Zend_Queue_Adapter_Stomp_IO::EOL;
+        $correct = 'SEND' . \Zend\Queue\Adapter\Stomp\IO\IO::EOL;
+        $correct .= 'content-length: 11' . \Zend\Queue\Adapter\Stomp\IO\IO::EOL;
+        $correct .= \Zend\Queue\Adapter\Stomp\IO\IO::EOL;
         $correct .= $this->body;
-        $correct .= Zend_Queue_Adapter_Stomp_IO::END_OF_FRAME;
+        $correct .= \Zend\Queue\Adapter\Stomp\IO\IO::END_OF_FRAME;
 
         $this->assertEquals($frame, $correct);
 
@@ -72,21 +77,21 @@ class Zend_Queue_Adapter_StompIOTest extends PHPUnit_Framework_TestCase
         try {
             $frame = $this->io->constructFrame(array());
             $this->fail('constructFrame() should have failed $action as an array');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
 
         try { // this won't test, I think because phpunit suppresses the error
             $frame = $this->io->constructFrame('SEND', 'string');
             $this->fail('constructFrame() should have failed $headers as a string');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
 
         try { // this won't test, I think because phpunit suppresses the error
             $frame = $this->io->constructFrame('SEND', array(), array());
             $this->fail('constructFrame() should have failed $body as a array');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
     }
@@ -108,7 +113,7 @@ class Zend_Queue_Adapter_StompIOTest extends PHPUnit_Framework_TestCase
         try {
             $frame = $this->io->deconstructFrame(array());
             $this->fail('deconstructFrame() should have failed with an array');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
     }
@@ -138,7 +143,7 @@ class Zend_Queue_Adapter_StompIOTest extends PHPUnit_Framework_TestCase
         try {
             $frame = $this->io->write(array());
             $this->fail('write() should have failed with an array');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
     }
@@ -146,15 +151,15 @@ class Zend_Queue_Adapter_StompIOTest extends PHPUnit_Framework_TestCase
     public function test_open_close()
     {
         try {
-            $obj = new Zend_Queue_Adapter_Stomp_IO($this->config);
-        } catch (Exception $e) {
-            $this->fail('failed to create Zend_Queue_Adapter_Stomp_IO object:' . $e->getMessage());
+            $obj = new \Zend\Queue\Adapter\Stomp\IO\IO($this->config);
+        } catch (\Exception $e) {
+            $this->fail('failed to create \Zend\Queue\Adapter\Stomp\IO\IO object:' . $e->getMessage());
         }
 
         try {
             $obj->close();
-        } catch (Exception $e) {
-            $this->fail('failed to close Zend_Queue_Adapter_Stomp_IO object:' . $e->getMessage());
+        } catch (\Exception $e) {
+            $this->fail('failed to close \Zend\Queue\Adapter\Stomp\IO\IO object:' . $e->getMessage());
         }
 
         // validate parameters
@@ -167,16 +172,16 @@ class Zend_Queue_Adapter_StompIOTest extends PHPUnit_Framework_TestCase
         try {
             $frame = $this->io->open($config);
             $this->fail('open() should have failed with an invalid configuration');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
     }
 
     public function test_constant()
     {
-        $this->assertTrue(is_string(Zend_Queue_Adapter_Stomp_IO::END_OF_FRAME));
-        $this->assertTrue(is_string(Zend_Queue_Adapter_Stomp_IO::CONTENT_LENGTH));
-        $this->assertTrue(is_string(Zend_Queue_Adapter_Stomp_IO::EOL));
+        $this->assertTrue(is_string(\Zend\Queue\Adapter\Stomp\IO\IO::END_OF_FRAME));
+        $this->assertTrue(is_string(\Zend\Queue\Adapter\Stomp\IO\IO::CONTENT_LENGTH));
+        $this->assertTrue(is_string(\Zend\Queue\Adapter\Stomp\IO\IO::EOL));
     }
 
     public function test_checkSocket()
@@ -187,7 +192,7 @@ class Zend_Queue_Adapter_StompIOTest extends PHPUnit_Framework_TestCase
         try {
             $this->io->checkSocket();
             $this->fail('checkSocket() should have failed on a fclose($socket)');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
     }

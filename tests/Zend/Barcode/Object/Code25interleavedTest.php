@@ -20,8 +20,11 @@
  * @version    $Id$
  */
 
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Barcode\Object;
+use Zend\Barcode;
 
 /**
  * @category   Zend
@@ -31,17 +34,16 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Object_Code25interleavedTest extends Zend_Barcode_Object_TestCommon
+class Code25interleavedTest extends TestCommon
 {
-
     protected function _getBarcodeObject($options = null)
     {
-        return new Zend_Barcode_Object_Code25interleaved($options);
+        return new Barcode\Object\Code25interleaved($options);
     }
 
     public function testType()
     {
-        $this->assertSame('code25interleaved', $this->_object->getType());
+        $this->assertSame('Code25interleaved', $this->_object->getType());
     }
 
     public function testWithBearerBars()
@@ -126,7 +128,7 @@ class Zend_Barcode_Object_Code25interleavedTest extends Zend_Barcode_Object_Test
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testBadTextDetectedIfChecksumWished()
     {
@@ -142,7 +144,7 @@ class Zend_Barcode_Object_Code25interleavedTest extends Zend_Barcode_Object_Test
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testCheckParamsWithLowRatio()
     {
@@ -153,7 +155,7 @@ class Zend_Barcode_Object_Code25interleavedTest extends Zend_Barcode_Object_Test
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend\Barcode\Object\Exception
      */
     public function testCheckParamsWithHighRatio()
     {

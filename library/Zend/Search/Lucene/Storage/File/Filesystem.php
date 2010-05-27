@@ -21,15 +21,21 @@
  */
 
 /**
- * @uses       Zend_Search_Lucene_Exception
- * @uses       Zend_Search_Lucene_Storage_File
+ * @namespace
+ */
+namespace Zend\Search\Lucene\Storage\File;
+use Zend\Search\Lucene;
+
+/**
+ * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Storage\File\FileInterface
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_Storage_File_Filesystem extends Zend_Search_Lucene_Storage_File
+class Filesystem extends AbstractFile
 {
     /**
      * Resource of the open file
@@ -51,7 +57,7 @@ class Zend_Search_Lucene_Storage_File_Filesystem extends Zend_Search_Lucene_Stor
 
         if (strpos($mode, 'w') === false  &&  !is_readable($filename)) {
             // opening for reading non-readable file
-            throw new Zend_Search_Lucene_Exception('File \'' . $filename . '\' is not readable.');
+            throw new Lucene\Exception('File \'' . $filename . '\' is not readable.');
         }
 
         $trackErrors = ini_get('track_errors');
@@ -61,7 +67,7 @@ class Zend_Search_Lucene_Storage_File_Filesystem extends Zend_Search_Lucene_Stor
 
         if ($this->_fileHandle === false) {
             ini_set('track_errors', $trackErrors);
-            throw new Zend_Search_Lucene_Exception($php_errormsg);
+            throw new Lucene\Exception($php_errormsg);
         }
 
         ini_set('track_errors', $trackErrors);
@@ -214,4 +220,3 @@ class Zend_Search_Lucene_Storage_File_Filesystem extends Zend_Search_Lucene_Stor
         }
     }
 }
-

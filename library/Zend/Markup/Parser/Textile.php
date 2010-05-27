@@ -21,17 +21,23 @@
  */
 
 /**
- * @uses       Zend_Markup_Parser_Exception
- * @uses       Zend_Markup_Parser_ParserInterface
- * @uses       Zend_Markup_TokenList
- * @uses       Zend_Markup_Token
+ * @namespace
+ */
+namespace Zend\Markup\Parser;
+use Zend\Markup;
+
+/**
+ * @uses       \Zend\Markup\Parser\Exception
+ * @uses       \Zend\Markup\Parser\ParserInterface
+ * @uses       \Zend\Markup\TokenList
+ * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Parser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
+class Textile implements ParserInterface
 {
 
     const STATE_SCAN          = 0;
@@ -48,14 +54,14 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
     /**
      * Token tree
      *
-     * @var Zend_Markup_TokenList
+     * @var \Zend\Markup\TokenList
      */
     protected $_tree;
 
     /**
      * Current token
      *
-     * @var Zend_Markup_Token
+     * @var \Zend\Markup\Token
      */
     protected $_current;
 
@@ -126,10 +132,10 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
     public function parse($value)
     {
         if (!is_string($value)) {
-            throw new Zend_Markup_Parser_Exception('Value to parse should be a string.');
+            throw new Exception('Value to parse should be a string.');
         }
         if (empty($value)) {
-            throw new Zend_Markup_Parser_Exception('Value to parse cannot be left empty.');
+            throw new Exception('Value to parse cannot be left empty.');
         }
 
         // first make we only have LF newlines, also trim the value
@@ -146,9 +152,9 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
         $this->_tokenize();
 
         // create the tree
-        $this->_tree     = new Zend_Markup_TokenList();
+        $this->_tree     = new Markup\TokenList();
 
-        $this->_current  = new Zend_Markup_Token('', Zend_Markup_Token::TYPE_NONE, 'Zend_Markup_Root');
+        $this->_current  = new Markup\Token('', Markup\Token::TYPE_NONE, 'Zend_Markup_Root');
         $this->_tree->addChild($this->_current);
 
         $this->_createTree();
@@ -198,7 +204,7 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                     if (!empty($this->_buffer)) {
                         $this->_tokens[] = array(
                             'tag'  => $this->_buffer,
-                            'type' => Zend_Markup_Token::TYPE_NONE
+                            'type' => Markup\Token::TYPE_NONE
                         );
                         $this->_buffer = '';
                     }
@@ -207,7 +213,7 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                         $this->_temp = array(
                             'tag'        => $matches['nl_paragraph'],
                             'name'       => 'p',
-                            'type'       => Zend_Markup_Token::TYPE_TAG,
+                            'type'       => Markup\Token::TYPE_TAG,
                             'attributes' => array()
                         );
 
@@ -216,7 +222,7 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                         $this->_tokens[] = array(
                             'tag'        => $matches['nl_break'],
                             'name'       => 'break',
-                            'type'       => Zend_Markup_Token::TYPE_TAG,
+                            'type'       => Markup\Token::TYPE_TAG,
                             'attributes' => array()
                         );
 
@@ -226,7 +232,7 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                             // now add the new token
                             $this->_tokens[] = array(
                                 'tag'        => $matches['tag'],
-                                'type'       => Zend_Markup_Token::TYPE_TAG,
+                                'type'       => Markup\Token::TYPE_TAG,
                                 'name'       => $this->_simpleTags[$matches['name']],
                                 'attributes' => $this->_extractAttributes($matches)
                             );
@@ -239,7 +245,7 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                                 }
                                 $this->_tokens[] = array(
                                     'tag'        => $matches['tag'],
-                                    'type'       => Zend_Markup_Token::TYPE_TAG,
+                                    'type'       => Markup\Token::TYPE_TAG,
                                     'name'       => $name,
                                     'attributes' => $attributes
                                 );
@@ -247,7 +253,7 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                                 $name = 'acronym';
                                 $this->_tokens[] = array(
                                     'tag'        => '',
-                                    'type'       => Zend_Markup_Token::TYPE_TAG,
+                                    'type'       => Markup\Token::TYPE_TAG,
                                     'name'       => 'acronym',
                                     'attributes' => array(
                                         'title' => $matches['title']
@@ -255,11 +261,11 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                                 );
                                 $this->_tokens[] = array(
                                     'tag'  => $matches['acronym'],
-                                    'type' => Zend_Markup_Token::TYPE_NONE
+                                    'type' => Markup\Token::TYPE_NONE
                                 );
                                 $this->_tokens[] = array(
                                     'tag'        => '(' . $matches['title'] . ')',
-                                    'type'       => Zend_Markup_Token::TYPE_TAG,
+                                    'type'       => Markup\Token::TYPE_TAG,
                                     'name'       => 'acronym',
                                     'attributes' => array()
                                 );
@@ -274,14 +280,14 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                         $this->_temp = array(
                             'tag'        => '',
                             'name'       => 'p',
-                            'type'       => Zend_Markup_token::TYPE_TAG,
+                            'type'       => Markup\token::TYPE_TAG,
                             'attributes' => array()
                         );
                     } else {
                         $this->_tokens[] = array(
                             'tag'        => "\n",
                             'name'       => 'p',
-                            'type'       => Zend_Markup_Token::TYPE_TAG,
+                            'type'       => Markup\Token::TYPE_TAG,
                             'attributes' => array()
                         );
                         $this->_temp['tag'] = substr($this->_temp['tag'], 1);
@@ -320,7 +326,7 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                         $this->_tokens[] = array(
                             'tag'        => $matches[0],
                             'name'       => $name,
-                            'type'       => Zend_Markup_Token::TYPE_TAG,
+                            'type'       => Markup\Token::TYPE_TAG,
                             'attributes' => $attributes
                         );
                     }
@@ -350,7 +356,7 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                     $this->_tokens[] = array(
                         'tag'        => $matches[0],
                         'name'       => $name,
-                        'type'       => Zend_Markup_Token::TYPE_TAG,
+                        'type'       => Markup\Token::TYPE_TAG,
                         'attributes' => $attributes
                     );
                     break;
@@ -373,7 +379,7 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                 if ($this->_current->getName() == 'li') {
                     // list items are handled differently
                     if (isset($this->_tokens[$key + 1])
-                        && ($this->_tokens[$key + 1]['type'] == Zend_Markup_Token::TYPE_TAG)
+                        && ($this->_tokens[$key + 1]['type'] == Markup\Token::TYPE_TAG)
                         && ($this->_tokens[$key + 1]['name'] == 'list')
                     ) {
                         // the next item is a correct tag
@@ -408,12 +414,12 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                     }
                 }
                 $inside = true;
-            } elseif (($token['type'] == Zend_Markup_Token::TYPE_TAG) && $inside) {
+            } elseif (($token['type'] == Markup\Token::TYPE_TAG) && $inside) {
                 if ($token['name'] == 'break') {
                     // add the newline and continue parsing
-                    $this->_current->addChild(new Zend_Markup_Token(
+                    $this->_current->addChild(new Markup\Token(
                         $token['tag'],
-                        Zend_Markup_Token::TYPE_NONE,
+                        Markup\Token::TYPE_NONE,
                         '',
                         array(),
                         $this->_current
@@ -429,9 +435,9 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
 
                         if ($this->_current->getName() != 'list') {
                             // the list isn't started yet, create it
-                            $child = new Zend_Markup_Token(
+                            $child = new Markup\Token(
                                 '',
-                                Zend_Markup_Token::TYPE_TAG,
+                                Markup\Token::TYPE_TAG,
                                 'list',
                                 $attributes,
                                 $this->_current
@@ -447,9 +453,9 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                     }
 
                     // add the token
-                    $child = new Zend_Markup_Token(
+                    $child = new Markup\Token(
                         $token['tag'],
-                        Zend_Markup_Token::TYPE_TAG,
+                        Markup\Token::TYPE_TAG,
                         $token['name'],
                         $token['attributes'],
                         $this->_current
@@ -461,9 +467,9 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                 }
             } else {
                 // simply add the token as text
-                $this->_current->addChild(new Zend_Markup_Token(
+                $this->_current->addChild(new Markup\Token(
                     $token['tag'],
-                    Zend_Markup_Token::TYPE_NONE,
+                    Markup\Token::TYPE_NONE,
                     '',
                     array(),
                     $this->_current
@@ -476,11 +482,11 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
      * Check if a tag is a stopper
      *
      * @param array $token
-     * @param Zend_Markup_Token $current
+     * @param \Zend\Markup\Token $current
      *
      * @return bool
      */
-    protected function _isStopper(array $token, Zend_Markup_Token $current)
+    protected function _isStopper(array $token, Markup\Token $current)
     {
         switch ($current->getName()) {
             case 'h1':
@@ -491,7 +497,7 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
             case 'h6':
             case 'list':
             case 'li':
-                if (($token['type'] == Zend_Markup_Token::TYPE_TAG)
+                if (($token['type'] == Markup\Token::TYPE_TAG)
                     && (($token['name'] == 'break') || ($token['name'] == 'p'))
                 ) {
                     return true;
@@ -501,7 +507,7 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                 return false;
                 break;
             default:
-                if (($token['type'] == Zend_Markup_Token::TYPE_TAG) && ($token['name'] == $current->getName())) {
+                if (($token['type'] == Markup\Token::TYPE_TAG) && ($token['name'] == $current->getName())) {
                     return true;
                 }
                 break;

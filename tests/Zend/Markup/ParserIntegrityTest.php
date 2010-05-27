@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Markup;
+use Zend\Markup;
 
 if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Markup_ParserIntegrityTest::main");
@@ -34,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Markup_ParserIntegrityTest extends PHPUnit_Framework_TestCase
+class ParserIntegrityTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -45,13 +50,13 @@ class Zend_Markup_ParserIntegrityTest extends PHPUnit_Framework_TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Markup_MarkupTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Markup_MarkupTest");
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     public function testBbcodeParser()
     {
-        $parser = Zend_Markup::factory('bbcode')->getParser();
+        $parser = Markup\Markup::factory('bbcode')->getParser();
 
         $value  = '[b][s][i]foobar[/i][/s][/b]';
         $output = '';
@@ -59,15 +64,15 @@ class Zend_Markup_ParserIntegrityTest extends PHPUnit_Framework_TestCase
         $tree = $parser->parse($value);
 
         // iterate trough the tree and check if we can generate the original value
-        $iterator = new RecursiveIteratorIterator($tree, RecursiveIteratorIterator::SELF_FIRST);
+        $iterator = new \RecursiveIteratorIterator($tree, \RecursiveIteratorIterator::SELF_FIRST);
 
         foreach ($iterator as $token) {
             $output .= $token->getTag();
 
             if ($token->getStopper() != '') {
-                $token->addChild(new Zend_Markup_Token(
+                $token->addChild(new Markup\Token(
                     $token->getStopper(),
-                    Zend_Markup_Token::TYPE_NONE,
+                    Markup\Token::TYPE_NONE,
                     '', array(), $token)
                 );
             }
@@ -80,5 +85,5 @@ class Zend_Markup_ParserIntegrityTest extends PHPUnit_Framework_TestCase
 
 // Call Zend_Markup_BbcodeTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_Markup_ParserIntegrityTest::main") {
-    Zend_Markup_BbcodeTest::main();
+    \Zend_Markup_BbcodeTest::main();
 }

@@ -19,6 +19,10 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace Zend\Memory;
 
 /**
  * String value object
@@ -33,7 +37,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Memory_Value implements ArrayAccess,Countable
+class Value implements \ArrayAccess,\Countable
 {
     /**
      * Value
@@ -45,7 +49,7 @@ class Zend_Memory_Value implements ArrayAccess,Countable
     /**
      * Container
      *
-     * @var Zend_Memory_Container_Interface
+     * @var \Zend\Memory\Container\ContainerInterface
      */
     private $_container;
 
@@ -61,9 +65,9 @@ class Zend_Memory_Value implements ArrayAccess,Countable
      * Object constructor
      *
      * @param string $value
-     * @param Zend_Memory_Container_Movable $container
+     * @param \Zend\Memory\Container\Movable $container
      */
-    public function __construct($value, Zend_Memory_Container_Movable $container)
+    public function __construct($value, Container\Movable $container)
     {
         $this->_container = $container;
 

@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Queue\Adapter;
+
 /*
  * The adapter test class provides a universal test class for all of the
  * abstract methods.
@@ -27,18 +32,6 @@
  * All methods marked not supported are explictly checked for for throwing
  * an exception.
  */
-
-/** PHPUnit Test Case */
-
-/** TestHelp.php */
-
-/** Zend_Queue */
-
-/** Zend_Queue */
-
-/** Zend_Queue_Message_Test */
-
-/** Base Adapter test class */
 
 /**
  * @category   Zend
@@ -48,7 +41,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
  */
-class Zend_Queue_Adapter_NullTest extends Zend_Queue_Adapter_AdapterTest
+class NullTest extends AdapterTest
 {
     /**
      * getAdapterName() is an method to help make AdapterTest work with any
@@ -74,7 +67,7 @@ class Zend_Queue_Adapter_NullTest extends Zend_Queue_Adapter_AdapterTest
      */
     public function getAdapterFullName()
     {
-        return 'Zend_Queue_Adapter_' . $this->getAdapterName();
+        return '\Zend\Queue\Adapter\\' . $this->getAdapterName();
     }
 
     public function getTestConfig()

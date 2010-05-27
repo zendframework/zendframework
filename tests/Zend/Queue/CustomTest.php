@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Queue;
+use Zend\Queue;
+
 /*
  * This test code tests the customization functions provided in the example
  * documentation code.
@@ -32,33 +38,32 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
- * @group      disable
  */
-class Zend_Queue_CustomTest extends PHPUnit_Framework_TestCase
+class CustomTest extends \PHPUnit_Framework_TestCase
 {
     public function test_behavior()
     {
         $object_count = 10;
         $objects = array();
 
-        $queue = new Custom_Queue('Array', array('name'=>'ObjectA'));
-        $this->assertTrue($queue instanceof Custom_Queue);
+        $queue = new Custom\Queue('ArrayAdapter', array('name'=>'ObjectA'));
+        $this->assertTrue($queue instanceof Custom\Queue);
 
         // ------------------------------------------------ send
 
         // add items $objects[0-4]
         $objects = array();
         for ($i = 0; $i < $object_count-5; $i++) {
-            $object = new Custom_Object();
-            $queue->send(new Custom_Message($object));
+            $object = new CustomObject();
+            $queue->send(new Custom\Message($object));
             $objects[] = $object;
         }
 
         // add items $objects[5-9]
-        $messages = new Custom_Messages();
+        $messages = new Custom\Messages();
         for ($i = 0; $i < 5; $i++) {
-            $object = new Custom_Object();
-            $messages->append( new Custom_Message($object));
+            $object = new CustomObject();
+            $messages->append( new Custom\Message($object));
             $objects[] = $object;
         }
         $queue->send($messages);
@@ -70,7 +75,7 @@ class Zend_Queue_CustomTest extends PHPUnit_Framework_TestCase
 
         // get the first 5 doing 0-4
         $receive = $queue->receive(5);
-        $this->assertTrue($receive instanceof Custom_Messages);
+        $this->assertTrue($receive instanceof Custom\Messages);
         $this->assertEquals(5, count($receive));
 
         // test them
@@ -79,7 +84,7 @@ class Zend_Queue_CustomTest extends PHPUnit_Framework_TestCase
             try {
                 unset($receive[$index]);
                 $this->assertTrue(true, '$receive[$index] successfully deleted');
-            } catch(Zend_Queue_Exception $e) {
+            } catch(Queue\Exception $e) {
                 $this->fail('$receive[$index] should have been deleted' . $e->getMessage());
             }
         }
@@ -89,17 +94,17 @@ class Zend_Queue_CustomTest extends PHPUnit_Framework_TestCase
         // get 1 doing $objects[5]
         $receive = $queue->receive();
         $index++;
-        $this->assertTrue($receive instanceof Custom_Messages);
+        $this->assertTrue($receive instanceof Custom\Messages);
         $this->assertEquals(1, count($receive));
 
-        // testing Custom_Messages::__deconstruct()
+        // testing Custom\Messages::__deconstruct()
         unset($receive);
         $this->assertEquals($object_count - $index, count($queue));
 
 
         // get all the rest doing 6-20
         $receive = $queue->receive($object_count - $index);
-        $this->assertTrue($receive instanceof Custom_Messages);
+        $this->assertTrue($receive instanceof Custom\Messages);
         $this->assertEquals($object_count - $index, count($receive));
 
         // test them
@@ -111,7 +116,7 @@ class Zend_Queue_CustomTest extends PHPUnit_Framework_TestCase
             try {
                 unset($receive[$r_index]);
                 $this->assertTrue(true, '$receive[$index] successfully deleted');
-            } catch(Zend_Queue_Exception $e) {
+            } catch(Queue\Exception $e) {
                 $this->fail('$receive[$index] should have been deleted' . $e->getMessage());
             }
         }
@@ -121,7 +126,7 @@ class Zend_Queue_CustomTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class Custom_Object {
+class CustomObject {
     public $a;
 
     public function __construct()

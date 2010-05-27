@@ -20,50 +20,22 @@
  */
 
 /**
- * @uses       Zend_Acl_Role_Interface
+ * @namespace
+ */
+namespace Zend\Acl;
+
+/**
  * @category   Zend
  * @package    Zend_Acl
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Acl_Role implements Zend_Acl_Role_Interface
+interface Role
 {
     /**
-     * Unique id of Role
-     *
-     * @var string
-     */
-    protected $_roleId;
-
-    /**
-     * Sets the Role identifier
-     *
-     * @param  string $id
-     * @return void
-     */
-    public function __construct($roleId)
-    {
-        $this->_roleId = (string) $roleId;
-    }
-
-    /**
-     * Defined by Zend_Acl_Role_Interface; returns the Role identifier
+     * Returns the string identifier of the Role
      *
      * @return string
      */
-    public function getRoleId()
-    {
-        return $this->_roleId;
-    }
-
-    /**
-     * Defined by Zend_Acl_Role_Interface; returns the Role identifier
-     * Proxies to getRoleId()
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getRoleId();
-    }
+    public function getRoleId();
 }

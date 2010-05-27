@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed;
+
+/**
  * Atom feed class
  *
  * The Zend_Feed_Atom class is a concrete subclass of the general
@@ -30,15 +35,15 @@
  * what kind of feed object they have been passed.
  *
  * @uses       DOMDocument
- * @uses       Zend_Feed_Abstract
- * @uses       Zend_Feed_Entry_Atom
- * @uses       Zend_Feed_Exception
+ * @uses       \Zend\Feed\AbstractFeed
+ * @uses       \Zend\Feed\Entry\Atom
+ * @uses       \Zend\Feed\Exception
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Atom extends Zend_Feed_Abstract
+class Atom extends AbstractFeed
 {
 
     /**
@@ -46,7 +51,7 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
      *
      * @var string
      */
-    protected $_entryClassName = 'Zend_Feed_Entry_Atom';
+    protected $_entryClassName = 'Zend\Feed\Entry\Atom';
 
     /**
      * The element name for individual feed elements (Atom <entry>
@@ -68,7 +73,7 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
      * Override Zend_Feed_Abstract to set up the $_element and $_entries aliases.
      *
      * @return void
-     * @throws Zend_Feed_Exception
+     * @throws \Zend\Feed\Exception
      */
     public function __wakeup()
     {
@@ -80,11 +85,11 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
             // Try to find a single <entry> instead.
             $element = $this->_element->getElementsByTagName($this->_entryElementName)->item(0);
             if (!$element) {
-                throw new Zend_Feed_Exception('No root <feed> or <' . $this->_entryElementName
+                throw new Exception('No root <feed> or <' . $this->_entryElementName
                                               . '> element found, cannot parse feed.');
             }
 
-            $doc = new DOMDocument($this->_element->version,
+            $doc = new \DOMDocument($this->_element->version,
                                    $this->_element->actualEncoding);
             $feed = $doc->appendChild($doc->createElement('feed'));
             $feed->appendChild($doc->importNode($element, true));
@@ -123,7 +128,7 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
         // index link tags by their "rel" attribute.
         $links = parent::__get('link');
         if (!is_array($links)) {
-            if ($links instanceof Zend_Feed_Element) {
+            if ($links instanceof Element) {
                 $links = array($links);
             } else {
                 return $links;
@@ -229,7 +234,7 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
             $feed->appendChild($image);
         }
 
-        $generator = !empty($array->generator) ? $array->generator : 'Zend_Feed';
+        $generator = !empty($array->generator) ? $array->generator : 'Zend\Feed';
         $generator = $this->_element->createElement('generator', $generator);
         $feed->appendChild($generator);
 
@@ -253,7 +258,7 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
      * @param  DOMElement $root  the root node to use
      * @return void
      */
-    protected function _mapFeedEntries(DOMElement $root, $array)
+    protected function _mapFeedEntries(\DOMElement $root, $array)
     {
         foreach ($array as $dataentry) {
             $entry = $this->_element->createElement('entry');
@@ -346,7 +351,7 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
     public function saveXml()
     {
         // Return a complete document including XML prologue.
-        $doc = new DOMDocument($this->_element->ownerDocument->version,
+        $doc = new \DOMDocument($this->_element->ownerDocument->version,
                                $this->_element->ownerDocument->actualEncoding);
         $doc->appendChild($doc->importNode($this->_element, true));
         $doc->formatOutput = true;
@@ -358,12 +363,12 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
      * Send feed to a http client with the correct header
      *
      * @return void
-     * @throws Zend_Feed_Exception if headers have already been sent
+     * @throws \Zend\Feed\Exception if headers have already been sent
      */
     public function send()
     {
         if (headers_sent()) {
-            throw new Zend_Feed_Exception('Cannot send ATOM because headers have already been sent.');
+            throw new Exception('Cannot send ATOM because headers have already been sent.');
         }
 
         header('Content-Type: application/atom+xml; charset=' . $this->_element->ownerDocument->actualEncoding);

@@ -18,16 +18,21 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
- 
+
 /**
- * @uses       Zend_Feed_Writer_Extension_RendererInterface
+ * @namespace
+ */
+namespace Zend\Feed\Writer\Extension;
+
+/**
+ * @uses       \Zend\Feed\Writer\Extension\RendererInterface
  * @category   Zend
  * @package    Zend_Feed_Writer_Entry_Rss
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Feed_Writer_Extension_RendererAbstract
-    implements Zend_Feed_Writer_Extension_RendererInterface
+abstract class RendererAbstract
+    implements RendererInterface
 {
     /**
      * @var DOMDocument
@@ -81,7 +86,7 @@ abstract class Zend_Feed_Writer_Extension_RendererAbstract
      * Set feed encoding
      * 
      * @param  string $enc 
-     * @return Zend_Feed_Writer_Extension_RendererAbstract
+     * @return \Zend\Feed\Writer\Extension\RendererAbstract
      */
     public function setEncoding($enc)
     {
@@ -104,9 +109,9 @@ abstract class Zend_Feed_Writer_Extension_RendererAbstract
      * 
      * @param  DOMDocument $dom 
      * @param  DOMElement $base 
-     * @return Zend_Feed_Writer_Extension_RendererAbstract
+     * @return \Zend\Feed\Writer\Extension\RendererAbstract
      */
-    public function setDomDocument(DOMDocument $dom, DOMElement $base)
+    public function setDomDocument(\DOMDocument $dom, \DOMElement $base)
     {
         $this->_dom  = $dom;
         $this->_base = $base;
@@ -127,7 +132,7 @@ abstract class Zend_Feed_Writer_Extension_RendererAbstract
      * Set feed type
      * 
      * @param  string $type 
-     * @return Zend_Feed_Writer_Extension_RendererAbstract
+     * @return \Zend\Feed\Writer\Extension\RendererAbstract
      */
     public function setType($type)
     {
@@ -149,9 +154,9 @@ abstract class Zend_Feed_Writer_Extension_RendererAbstract
      * Set root element of document 
      * 
      * @param  DOMElement $root 
-     * @return Zend_Feed_Writer_Extension_RendererAbstract
+     * @return \Zend\Feed\Writer\Extension\RendererAbstract
      */
-    public function setRootElement(DOMElement $root)
+    public function setRootElement(\DOMElement $root)
     {
         $this->_rootElement = $root;
         return $this;

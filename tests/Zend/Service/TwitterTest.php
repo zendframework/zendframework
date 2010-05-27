@@ -20,20 +20,6 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Service_TwitterTest::main');
-}
-
-/**
- * Test helper
- */
-
-/** Zend_Service_Twitter */
-
-/** Zend_Http_Client */
-
-/** Zend_Http_Client_Adapter_Test */
-
 /**
  * @category   Zend
  * @package    Zend_Service_Twitter
@@ -45,18 +31,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
 {
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -121,7 +95,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
     {
         $client = new Zend_Http_Client();
         $client->setAdapter(new Zend_Http_Client_Adapter_Test());
-        Zend_Service_Twitter::setHttpClient($client);
+        Zend_Service_Twitter::setDefaultHTTPClient($client);
         $twitter = new Zend_Service_Twitter(TESTS_ZEND_SERVICE_TWITTER_USER, TESTS_ZEND_SERVICE_TWITTER_PASS);
         try {
             $twitter->status->userTimeline(array('id' => '123', 'since' => '+2 days', /* invalid param since Apr 2009 */
@@ -743,8 +717,4 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         $twitter2 = new Zend_Service_Twitter('zftestuser2', 'zftestuser2');
         $this->assertFalse($twitter1->getLocalHttpClient() === $twitter2->getLocalHttpClient());
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Service_TwitterTest::main') {
-    Zend_Service_TwitterTest::main();
 }

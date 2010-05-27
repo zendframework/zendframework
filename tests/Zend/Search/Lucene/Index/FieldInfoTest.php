@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Search\Lucene\Index;
+use Zend\Search\Lucene\Index;
+
+/**
  * Zend_Search_Lucene_Index_FieldInfo
  */
 
@@ -36,12 +42,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-class Zend_Search_Lucene_Index_FieldInfoTest extends PHPUnit_Framework_TestCase
+class FieldInfoTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreate()
     {
-        $fieldInfo = new Zend_Search_Lucene_Index_FieldInfo('field_name', true, 3, false);
-        $this->assertTrue($fieldInfo instanceof Zend_Search_Lucene_Index_FieldInfo);
+        $fieldInfo = new Index\FieldInfo('field_name', true, 3, false);
+        $this->assertTrue($fieldInfo instanceof Index\FieldInfo);
 
         $this->assertEquals($fieldInfo->name, 'field_name');
         $this->assertEquals($fieldInfo->isIndexed, true);

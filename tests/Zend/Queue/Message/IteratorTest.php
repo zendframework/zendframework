@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Queue\Message;
+use Zend\Queue;
+
 /*
  * The adapter test class provides a universal test class for all of the
  * abstract methods.
@@ -27,15 +33,6 @@
  * All methods marked not supported are explictly checked for for throwing
  * an exception.
  */
-
-/** TestHelp.php */
-
-/** Zend_Queue */
-
-/** Zend_Queue */
-
-/** Zend_Queue_Adapter_Array */
-/** Zend_Queue_Adapter_Null */
 
 /**
  * @category   Zend
@@ -45,7 +42,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
  */
-class Zend_Queue_Message_IteratorTest extends PHPUnit_Framework_TestCase
+class IteratorTest extends \PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
@@ -55,7 +52,7 @@ class Zend_Queue_Message_IteratorTest extends PHPUnit_Framework_TestCase
             'params'    => array(),
         );
 
-        $this->queue = new Zend_Queue('array', $this->options);
+        $this->queue = new Queue\Queue('ArrayAdapter', $this->options);
 
         // construct messages
         $this->message_count = 5;
@@ -76,31 +73,24 @@ class Zend_Queue_Message_IteratorTest extends PHPUnit_Framework_TestCase
         );
 
         $classname = $this->queue->getMessageSetClass();
-        if (!class_exists($classname)) {
-            Zend_Loader::loadClass($classname);
-        }
         $this->messages = new $classname($options);
     }
 
 
     public function test_setup()
     {
-        $this->assertTrue($this->queue instanceof Zend_Queue);
+        $this->assertTrue($this->queue instanceof Queue\Queue);
         $this->assertTrue(is_array($this->options));
 
         foreach ($this->messages as $i => $message) {
-            $this->assertTrue($message instanceof Zend_Queue_Message);
+            $this->assertTrue($message instanceof \Zend\Queue\Message\Message);
             $this->assertEquals('Hello world', $message->body);
         }
     }
 
-    protected function tearDown()
-    {
-    }
-
     public function testConstruct()
     {
-        $this->assertTrue($this->messages instanceof Zend_Queue_Message_Iterator);
+        $this->assertTrue($this->messages instanceof \Zend\Queue\Message\MessageIterator);
 
         // parameter validation
         try {
@@ -108,11 +98,10 @@ class Zend_Queue_Message_IteratorTest extends PHPUnit_Framework_TestCase
             $config['data']='ops';
 
             $classname = $this->queue->getMessageSetClass();
-            Zend_Loader::loadClass($classname);
             $this->messages = new $classname($config);
-            $this->fail('config[data] must be an array.  a message should have been thrown');
-        } catch (Exception $e) {
-            $this->assertTrue(true);
+            $this->fail('config[data] must be an array. An exception should have been thrown.');
+        } catch (\Exception $e) {
+            // Exception is expected, do nothing
         }
     }
 
@@ -133,7 +122,7 @@ class Zend_Queue_Message_IteratorTest extends PHPUnit_Framework_TestCase
     public function test_get_setQueue()
     {
         $queue = $this->messages->getQueue();
-        $this->assertTrue($queue instanceof Zend_Queue);
+        $this->assertTrue($queue instanceof Queue\Queue);
 
         $this->assertTrue($this->messages->setQueue($queue));
     }

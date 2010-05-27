@@ -20,10 +20,14 @@
  * @version $Id$
  */
 
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Server\Reflection;
+use Zend\Server\Reflection;
 
 /**
- * Test case for Zend_Server_Reflection_Prototype
+ * Test case for \Zend\Server\Reflection\Prototype
  *
  * @category   Zend
  * @package    Zend_Server
@@ -32,11 +36,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
+class PrototypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Server_Reflection_Prototype object
-     * @var Zend_Server_Reflection_Prototype
+     * \Zend\Server\Reflection\Prototype object
+     * @var \Zend\Server\Reflection\Prototype
      */
     protected $_r;
 
@@ -47,7 +51,7 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
     protected $_parametersRaw;
 
     /**
-     * Array of Zend_Server_Reflection_Parameters
+     * Array of \Zend\Server\Reflection\Parameters
      * @var array
      */
     protected $_parameters;
@@ -57,18 +61,18 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $class = new ReflectionClass('Zend_Server_Reflection');
+        $class = new \ReflectionClass('\Zend\Server\Reflection\Reflection');
         $method = $class->getMethod('reflectClass');
         $parameters = $method->getParameters();
         $this->_parametersRaw = $parameters;
 
         $fParameters = array();
         foreach ($parameters as $p) {
-            $fParameters[] = new Zend_Server_Reflection_Parameter($p);
+            $fParameters[] = new Reflection\ReflectionParameter($p);
         }
         $this->_parameters = $fParameters;
 
-        $this->_r = new Zend_Server_Reflection_Prototype(new Zend_Server_Reflection_ReturnValue('void', 'No return'));
+        $this->_r = new Reflection\Prototype(new Reflection\ReflectionReturnValue('void', 'No return'));
     }
 
     /**
@@ -94,19 +98,19 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $this->assertTrue($this->_r instanceof Zend_Server_Reflection_Prototype);
+        $this->assertTrue($this->_r instanceof Reflection\Prototype);
 
         try {
-            $r1 = new Zend_Server_Reflection_Prototype($this->_r->getReturnValue(), $this->_parametersRaw);
+            $r1 = new Reflection\Prototype($this->_r->getReturnValue(), $this->_parametersRaw);
             $this->fail('Construction should only accept Z_S_R_Parameters');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // do nothing
         }
 
         try {
-            $r1 = new Zend_Server_Reflection_Prototype($this->_r->getReturnValue(), 'string');
+            $r1 = new Reflection\Prototype($this->_r->getReturnValue(), 'string');
             $this->fail('Construction requires an array of parameters');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // do nothing
         }
     }
@@ -128,11 +132,11 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
      *
      * Call as method call
      *
-     * Returns: Zend_Server_Reflection_ReturnValue
+     * Returns: \Zend\Server\Reflection\ReflectionReturnValue
      */
     public function testGetReturnValue()
     {
-        $this->assertTrue($this->_r->getReturnValue() instanceof Zend_Server_Reflection_ReturnValue);
+        $this->assertTrue($this->_r->getReturnValue() instanceof Reflection\ReflectionReturnValue);
     }
 
     /**
@@ -144,12 +148,12 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
      */
     public function testGetParameters()
     {
-        $r = new Zend_Server_Reflection_Prototype($this->_r->getReturnValue(), $this->_parameters);
+        $r = new Reflection\Prototype($this->_r->getReturnValue(), $this->_parameters);
         $p = $r->getParameters();
 
         $this->assertTrue(is_array($p));
         foreach ($p as $parameter) {
-            $this->assertTrue($parameter instanceof Zend_Server_Reflection_Parameter);
+            $this->assertTrue($parameter instanceof Reflection\ReflectionParameter);
         }
 
         $this->assertTrue($p === $this->_parameters);

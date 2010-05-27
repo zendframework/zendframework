@@ -22,11 +22,6 @@
 
 
 /**
- * Test helper
- */
-
-
-/**
  * Zend_Service_Amazon_Ec2_Availabilityzones test case.
  *
  * @category   Zend
@@ -60,7 +55,7 @@ class Zend_Service_Amazon_Ec2_AvailabilityzonesTest extends PHPUnit_Framework_Te
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Availabilityzones::setHttpClient($client);
+        Zend_Service_Amazon_Ec2_Availabilityzones::setDefaultHTTPClient($client);
 
     }
 

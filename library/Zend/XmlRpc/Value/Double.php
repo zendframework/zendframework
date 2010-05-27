@@ -21,14 +21,19 @@
  */
 
 /**
- * @uses       Zend_XmlRpc_Value_Scalar
+ * @namespace
+ */
+namespace Zend\XmlRpc\Value;
+
+/**
+ * @uses       \Zend\XmlRpc\Value\Scalar
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Value
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_XmlRpc_Value_Double extends Zend_XmlRpc_Value_Scalar
+class Double extends Scalar
 {
 
     /**

@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Soap\_files\fulltests;
 
 /**
  * @category   Zend
@@ -28,22 +32,22 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_Service_Server1
+class Server1
 {
     /**
-     * @param  Zend_Soap_Wsdl_ComplexTypeB
-     * @return Zend_Soap_Wsdl_ComplexTypeA[]
+     * @param  \ZendTest\Soap\_files\fulltests\ComplexTypeB
+     * @return \ZendTest\Soap\_files\fulltests\ComplexTypeA[]
      */
     public function request($request)
     {
-        $a = new Zend_Soap_Wsdl_ComplexTypeA();
+        $a = new ComplexTypeA();
 
-        $b1 = new Zend_Soap_Wsdl_ComplexTypeB();
+        $b1 = new ComplexTypeB();
         $b1->bar = "bar";
         $b1->foo = "bar";
         $a->baz[] = $b1;
 
-        $b2 = new Zend_Soap_Wsdl_ComplexTypeB();
+        $b2 = new ComplexTypeB();
         $b2->bar = "foo";
         $b2->foo = "foo";
         $a->baz[] = $b2;
@@ -61,7 +65,7 @@ class Zend_Soap_Service_Server1
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_Wsdl_ComplexTypeB
+class ComplexTypeB
 {
     /**
      * @var string
@@ -80,19 +84,19 @@ class Zend_Soap_Wsdl_ComplexTypeB
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_Wsdl_ComplexTypeA
+class ComplexTypeA
 {
     /**
-     * @var Zend_Soap_Wsdl_ComplexTypeB[]
+     * @var \ZendTest\Soap\_files\fulltests\ComplexTypeB[]
      */
     public $baz = array();
 }
 
 if(isset($_GET['wsdl'])) {
-    $server = new Zend_Soap_AutoDiscover(new Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex());
+    $server = new \Zend\Soap\AutoDiscover\AutoDiscover(new \Zend\Soap\WSDL\Strategy\ArrayOfTypeComplex());
 } else {
     $uri = "http://".$_SERVER['HTTP_HOST']."/".$_SERVER['PHP_SELF']."?wsdl";
-    $server = new Zend_Soap_Server($uri);
+    $server = new \Zend\Soap\Server\Server($uri);
 }
-$server->setClass('Zend_Soap_Service_Server1');
+$server->setClass('\ZendTest\Soap\_files\fulltests\Server1');
 $server->handle();

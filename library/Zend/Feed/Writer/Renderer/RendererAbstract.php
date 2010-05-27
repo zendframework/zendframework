@@ -18,17 +18,23 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
- 
+
 /**
- * @uses       Zend_Feed_Exception
- * @uses       Zend_Feed_Writer
- * @uses       Zend_Version
+ * @namespace
+ */
+namespace Zend\Feed\Writer\Renderer;
+use Zend\Feed\Writer;
+
+/**
+ * @uses       \Zend\Feed\Exception
+ * @uses       \Zend\Feed\Writer\Writer
+ * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Renderer_RendererAbstract
+class RendererAbstract
 {
     /**
      * Extensions
@@ -133,7 +139,7 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
      * Set feed encoding
      * 
      * @param  string $enc 
-     * @return Zend_Feed_Writer_Renderer_RendererAbstract
+     * @return \Zend\Feed\Writer\Renderer\RendererAbstract
      */
     public function setEncoding($enc)
     {
@@ -155,12 +161,12 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
      * Indicate whether or not to ignore exceptions
      * 
      * @param  bool $bool 
-     * @return Zend_Feed_Writer_Renderer_RendererAbstract
+     * @return \Zend\Feed\Writer\Renderer\RendererAbstract
      */
     public function ignoreExceptions($bool = true)
     {
         if (!is_bool($bool)) {
-            throw new Zend_Feed_Exception('Invalid parameter: $bool. Should be TRUE or FALSE (defaults to TRUE if null)');
+            throw new \Zend\Feed\Exception('Invalid parameter: $bool. Should be TRUE or FALSE (defaults to TRUE if null)');
         }
         $this->_ignoreExceptions = $bool;
         return $this;
@@ -206,7 +212,7 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
      *
      * @param DOMElement $root
      */
-    public function setRootElement(DOMElement $root)
+    public function setRootElement(\DOMElement $root)
     {
         $this->_rootElement = $root;
     }
@@ -228,15 +234,15 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
      */
     protected function _loadExtensions()
     {
-        Zend_Feed_Writer::registerCoreExtensions();
-        $all = Zend_Feed_Writer::getExtensions();
+        Writer\Writer::registerCoreExtensions();
+        $all = Writer\Writer::getExtensions();
         if (stripos(get_class($this), 'entry')) {
             $exts = $all['entryRenderer'];
         } else {
             $exts = $all['feedRenderer'];
         }
         foreach ($exts as $extension) {
-            $className = Zend_Feed_Writer::getPluginLoader()->getClassName($extension);
+            $className = Writer\Writer::getPluginLoader()->getClassName($extension);
             $this->_extensions[$extension] = new $className(
                 $this->getDataContainer()
             );

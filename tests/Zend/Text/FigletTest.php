@@ -20,22 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_Text_FigletTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Text_FigletTest::main");
-}
-
 /**
- * Test helper
+ * @namespace
  */
+namespace ZendTest\Text;
+use Zend\Text\Figlet;
 
-/**
- * Zend_Text_Figlet
- */
-
-/**
- * Zend_Config
- */
 
 /**
  * @category   Zend
@@ -45,78 +35,68 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Text
  */
-class Zend_Text_FigletTest extends PHPUnit_Framework_TestCase
+class FigletTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Text_FigletTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function testStandardAlignLeft()
     {
-        $figlet = new Zend_Text_Figlet();
+        $figlet = new Figlet\Figlet();
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardAlignLeft.figlet');
     }
 
     public function testStandardAlignCenter()
     {
-        $figlet = new Zend_Text_Figlet(array('justification' => Zend_Text_Figlet::JUSTIFICATION_CENTER));
+        $figlet = new Figlet\Figlet(array('justification' => Figlet\Figlet::JUSTIFICATION_CENTER));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardAlignCenter.figlet');
     }
 
     public function testStandardAlignRight()
     {
-        $figlet = new Zend_Text_Figlet(array('justification' => Zend_Text_Figlet::JUSTIFICATION_RIGHT));
+        $figlet = new Figlet\Figlet(array('justification' => Figlet\Figlet::JUSTIFICATION_RIGHT));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardAlignRight.figlet');
     }
 
     public function testStandardRightToLeftAlignLeft()
     {
-        $figlet = new Zend_Text_Figlet(array('justification' => Zend_Text_Figlet::JUSTIFICATION_LEFT,
-                                             'rightToLeft'   => Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT));
+        $figlet = new Figlet\Figlet(array('justification' => Figlet\Figlet::JUSTIFICATION_LEFT,
+                                             'rightToLeft'   => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardRightToLeftAlignLeft.figlet');
     }
 
     public function testStandardRightToLeftAlignCenter()
     {
-        $figlet = new Zend_Text_Figlet(array('justification' => Zend_Text_Figlet::JUSTIFICATION_CENTER,
-                                             'rightToLeft'   => Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT));
+        $figlet = new Figlet\Figlet(array('justification' => Figlet\Figlet::JUSTIFICATION_CENTER,
+                                             'rightToLeft'   => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardRightToLeftAlignCenter.figlet');
     }
 
     public function testStandardRightToLeftAlignRight()
     {
-        $figlet = new Zend_Text_Figlet(array('rightToLeft' => Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT));
+        $figlet = new Figlet\Figlet(array('rightToLeft' => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardRightToLeftAlignRight.figlet');
     }
 
     public function testWrongParameter()
     {
-        $figlet = new Zend_Text_Figlet();
+        $figlet = new Figlet\Figlet();
 
         try {
             $figlet->render(1);
             $this->fail('An expected InvalidArgumentException has not been raised');
-        } catch (InvalidArgumentException $expected) {
+        } catch (\InvalidArgumentException $expected) {
             $this->assertContains('$text must be a string', $expected->getMessage());
         }
     }
 
     public function testCorrectEncodingUTF8()
     {
-        $figlet = new Zend_Text_Figlet();
+        $figlet = new Figlet\Figlet();
 
         $this->_equalAgainstFile($figlet->render('Ömläüt'), 'CorrectEncoding.figlet');
     }
@@ -127,7 +107,7 @@ class Zend_Text_FigletTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('Test case cannot run on AIX');
         }
 
-        $figlet = new Zend_Text_Figlet();
+        $figlet = new Figlet\Figlet();
 
         $isoText = iconv('UTF-8', 'ISO-8859-15', 'Ömläüt');
         $this->_equalAgainstFile($figlet->render($isoText, 'ISO-8859-15'), 'CorrectEncoding.figlet');
@@ -139,7 +119,7 @@ class Zend_Text_FigletTest extends PHPUnit_Framework_TestCase
     public function testIncorrectEncoding()
     {
         $this->markTestSkipped('Test case not reproducible on all setups');
-        $figlet  = new Zend_Text_Figlet();
+        $figlet  = new Figlet\Figlet();
 
         if (PHP_OS == 'AIX') {
             $isoText = iconv('UTF-8', 'ISO-8859-15', 'Ömläüt');
@@ -153,9 +133,9 @@ class Zend_Text_FigletTest extends PHPUnit_Framework_TestCase
     public function testNonExistentFont()
     {
         try {
-            $figlet = new Zend_Text_Figlet(array('font' => dirname(__FILE__) . '/Figlet/NonExistentFont.flf'));
+            $figlet = new Figlet\Figlet(array('font' => dirname(__FILE__) . '/Figlet/NonExistentFont.flf'));
             $this->fail('An expected Zend_Text_Figlet_Exception has not been raised');
-        } catch (Zend_Text_Figlet_Exception $expected) {
+        } catch (Figlet\Exception $expected) {
             $this->assertContains('Font file not found', $expected->getMessage());
         }
     }
@@ -163,123 +143,123 @@ class Zend_Text_FigletTest extends PHPUnit_Framework_TestCase
     public function testInvalidFont()
     {
         try {
-            $figlet = new Zend_Text_Figlet(array('font' => dirname(__FILE__) . '/Figlet/InvalidFont.flf'));
+            $figlet = new Figlet\Figlet(array('font' => dirname(__FILE__) . '/Figlet/InvalidFont.flf'));
             $this->fail('An expected Zend_Text_Figlet_Exception has not been raised');
-        } catch (Zend_Text_Figlet_Exception $expected) {
+        } catch (Figlet\Exception $expected) {
             $this->assertContains('Not a FIGlet 2 font file', $expected->getMessage());
         }
     }
 
     public function testGzippedFont()
     {
-        $figlet = new Zend_Text_Figlet(array('font' => dirname(__FILE__) . '/Figlet/GzippedFont.gz'));
+        $figlet = new Figlet\Figlet(array('font' => dirname(__FILE__) . '/Figlet/GzippedFont.gz'));
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardAlignLeft.figlet');
     }
 
     public function testConfig()
     {
-        $config = new Zend_Config(array('justification' => Zend_Text_Figlet::JUSTIFICATION_RIGHT));
-        $figlet = new Zend_Text_Figlet($config);
+        $config = new \Zend\Config\Config(array('justification' => Figlet\Figlet::JUSTIFICATION_RIGHT));
+        $figlet = new Figlet\Figlet($config);
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardAlignRight.figlet');
     }
 
     public function testOutputWidth()
     {
-        $figlet = new Zend_Text_Figlet(array('outputWidth'   => 50,
-                                             'justification' => Zend_Text_Figlet::JUSTIFICATION_RIGHT));
+        $figlet = new Figlet\Figlet(array('outputWidth'   => 50,
+                                             'justification' => Figlet\Figlet::JUSTIFICATION_RIGHT));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'OutputWidth50AlignRight.figlet');
     }
 
     public function testSmushModeRemoved()
     {
-        $figlet = new Zend_Text_Figlet(array('smushMode' => -1));
+        $figlet = new Figlet\Figlet(array('smushMode' => -1));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'NoSmush.figlet');
     }
 
     public function testSmushModeRemovedRightToLeft()
     {
-        $figlet = new Zend_Text_Figlet(array('smushMode'     => -1,
-                                             'rightToLeft'   => Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT));
+        $figlet = new Figlet\Figlet(array('smushMode'     => -1,
+                                             'rightToLeft'   => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'NoSmushRightToLeft.figlet');
     }
 
     public function testSmushModeInvalid()
     {
-        $figlet = new Zend_Text_Figlet(array('smushMode' => -5));
+        $figlet = new Figlet\Figlet(array('smushMode' => -5));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardAlignLeft.figlet');
     }
 
     public function testSmushModeTooSmall()
     {
-        $figlet = new Zend_Text_Figlet(array('smushMode' => -2));
+        $figlet = new Figlet\Figlet(array('smushMode' => -2));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardAlignLeft.figlet');
     }
 
     public function testSmushModeDefault()
     {
-        $figlet = new Zend_Text_Figlet(array('smushMode' => 0));
+        $figlet = new Figlet\Figlet(array('smushMode' => 0));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'SmushDefault.figlet');
     }
 
     public function testSmushModeForced()
     {
-        $figlet = new Zend_Text_Figlet(array('smushMode' => 5));
+        $figlet = new Figlet\Figlet(array('smushMode' => 5));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'SmushForced.figlet');
     }
 
     public function testWordWrapLeftToRight()
     {
-        $figlet = new Zend_Text_Figlet();
+        $figlet = new Figlet\Figlet();
 
         $this->_equalAgainstFile($figlet->render('Dummy Dummy Dummy'), 'WordWrapLeftToRight.figlet');
     }
 
     public function testWordWrapRightToLeft()
     {
-        $figlet = new Zend_Text_Figlet(array('rightToLeft' => Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT));
+        $figlet = new Figlet\Figlet(array('rightToLeft' => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT));
 
         $this->_equalAgainstFile($figlet->render('Dummy Dummy Dummy'), 'WordWrapRightToLeft.figlet');
     }
 
     public function testCharWrapLeftToRight()
     {
-        $figlet = new Zend_Text_Figlet();
+        $figlet = new Figlet\Figlet();
 
         $this->_equalAgainstFile($figlet->render('DummyDumDummy'), 'CharWrapLeftToRight.figlet');
     }
 
     public function testCharWrapRightToLeft()
     {
-        $figlet = new Zend_Text_Figlet(array('rightToLeft' => Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT));
+        $figlet = new Figlet\Figlet(array('rightToLeft' => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT));
 
         $this->_equalAgainstFile($figlet->render('DummyDumDummy'), 'CharWrapRightToLeft.figlet');
     }
 
     public function testParagraphOff()
     {
-        $figlet = new Zend_Text_Figlet();
+        $figlet = new Figlet\Figlet();
 
         $this->_equalAgainstFile($figlet->render("Dum\nDum\n\nDum\n"), 'ParagraphOff.figlet');
     }
 
     public function testParagraphOn()
     {
-        $figlet = new Zend_Text_Figlet(array('handleParagraphs' => true));
+        $figlet = new Figlet\Figlet(array('handleParagraphs' => true));
 
         $this->_equalAgainstFile($figlet->render("Dum\nDum\n\nDum\n"), 'ParagraphOn.figlet');
     }
 
     public function testEmptyString()
     {
-        $figlet = new Zend_Text_Figlet();
+        $figlet = new Figlet\Figlet();
 
         $this->assertEquals('', $figlet->render(''));
     }
@@ -294,5 +274,5 @@ class Zend_Text_FigletTest extends PHPUnit_Framework_TestCase
 
 // Call Zend_Text_FigletTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_Text_FigletTest::main") {
-    Zend_Text_FigletTest::main();
+    \Zend_Text_FigletTest::main();
 }

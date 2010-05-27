@@ -20,18 +20,23 @@
  */
 
 /**
- * @uses       Zend_Feed_Reader
- * @uses       Zend_Feed_Reader_EntryAbstract
- * @uses       Zend_Feed_Reader_EntryInterface
- * @uses       Zend_Feed_Reader_Extension_Atom_Entry
+ * @namespace
+ */
+namespace Zend\Feed\Reader\Entry;
+use Zend\Feed\Reader;
+
+/**
+ * @uses       \Zend\Feed\Reader\Reader
+ * @uses       \Zend\Feed\Reader\EntryAbstract
+ * @uses       \Zend\Feed\Reader\EntryInterface
+ * @uses       \Zend\Feed\Reader\Extension\Atom\Entry
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Reader_Entry_Atom 
-    extends Zend_Feed_Reader_EntryAbstract 
-    implements Zend_Feed_Reader_EntryInterface
+class Atom 
+    extends Reader\EntryAbstract
 {
     /**
      * XPath query
@@ -48,21 +53,21 @@ class Zend_Feed_Reader_Entry_Atom
      * @param  string $type
      * @return void
      */
-    public function __construct(DOMElement $entry, $entryKey, $type = null)
+    public function __construct(\DOMElement $entry, $entryKey, $type = null)
     {
         parent::__construct($entry, $entryKey, $type);
 
         // Everyone by now should know XPath indices start from 1 not 0
         $this->_xpathQuery = '//atom:entry[' . ($this->_entryKey + 1) . ']';
 
-        $atomClass = Zend_Feed_Reader::getPluginLoader()->getClassName('Atom_Entry');
-        $this->_extensions['Atom_Entry'] = new $atomClass($entry, $entryKey, $type);
+        $atomClass = Reader\Reader::getPluginLoader()->getClassName('Atom\Entry');
+        $this->_extensions['Atom\Entry'] = new $atomClass($entry, $entryKey, $type);
 
-        $threadClass = Zend_Feed_Reader::getPluginLoader()->getClassName('Thread_Entry');
-        $this->_extensions['Thread_Entry'] = new $threadClass($entry, $entryKey, $type);
+        $threadClass = Reader\Reader::getPluginLoader()->getClassName('Thread\Entry');
+        $this->_extensions['Thread\Entry'] = new $threadClass($entry, $entryKey, $type);
         
-        $threadClass = Zend_Feed_Reader::getPluginLoader()->getClassName('DublinCore_Entry');
-        $this->_extensions['DublinCore_Entry'] = new $threadClass($entry, $entryKey, $type);
+        $threadClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\Entry');
+        $this->_extensions['DublinCore\Entry'] = new $threadClass($entry, $entryKey, $type);
     }
 
     /**
@@ -334,7 +339,7 @@ class Zend_Feed_Reader_Entry_Atom
     /**
      * Get category data as a Zend_Feed_Reader_Collection_Category object
      *
-     * @return Zend_Feed_Reader_Collection_Category
+     * @return \Zend\Feed\Reader\Collection\Category
      */
     public function getCategories()
     {
@@ -356,7 +361,7 @@ class Zend_Feed_Reader_Entry_Atom
     /**
      * Get source feed metadata from the entry
      *
-     * @return Zend_Feed_Reader_Feed_Atom_Source|null
+     * @return \Zend\Feed\Reader\Feed\Atom\Source|null
      */
     public function getSource()
     {
@@ -376,7 +381,7 @@ class Zend_Feed_Reader_Entry_Atom
      *
      * @param DOMXPath $xpath
      */
-    public function setXpath(DOMXPath $xpath)
+    public function setXpath(\DOMXPath $xpath)
     {
         parent::setXpath($xpath);
         foreach ($this->_extensions as $extension) {

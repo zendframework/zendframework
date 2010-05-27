@@ -21,13 +21,18 @@
  */
 
 /**
- * @uses       Zend_Mail_Exception
+ * @namespace
+ */
+namespace Zend\Mail\Storage;
+
+/**
+ * @uses       \Zend\Mail\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Mail_Storage_Exception extends Zend_Mail_Exception
+class Exception extends \Zend\Mail\Exception
 {}
 

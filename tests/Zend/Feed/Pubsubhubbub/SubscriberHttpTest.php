@@ -19,7 +19,10 @@
  * @version    $Id$
  */
 
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Feed\Pubsubhubbub;
 
 /**
  * Note that $this->_baseuri must point to a directory on a web server
@@ -38,7 +41,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Pubsubhubbub_SubscriberHttpTest extends PHPUnit_Framework_TestCase
+class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_subscriber = null;
@@ -56,7 +59,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberHttpTest extends PHPUnit_Framework_TestCa
     public function setUp()
     {
         if (defined('TESTS_Zend_Feed_Pubsubhubbub_BASEURI') &&
-            Zend_Uri_Http::check(TESTS_Zend_Feed_Pubsubhubbub_BASEURI)) {
+            \Zend\URI\URL::check(TESTS_Zend_Feed_Pubsubhubbub_BASEURI)) {
             $this->_baseuri = TESTS_Zend_Feed_Pubsubhubbub_BASEURI;
             if (substr($this->_baseuri, -1) != '/') $this->_baseuri .= '/';
             $name = $this->getName();
@@ -65,10 +68,10 @@ class Zend_Feed_Pubsubhubbub_SubscriberHttpTest extends PHPUnit_Framework_TestCa
             }
             $uri = $this->_baseuri . $name . '.php';
             $this->_adapter = new $this->_config['adapter'];
-            $this->_client = new Zend_Http_Client($uri, $this->_config);
+            $this->_client = new \Zend\HTTP\Client($uri, $this->_config);
             $this->_client->setAdapter($this->_adapter);
-            Zend_Feed_Pubsubhubbub::setHttpClient($this->_client);
-            $this->_subscriber = new Zend_Feed_Pubsubhubbub_Subscriber;
+            \Zend\Feed\PubSubHubbub\PubSubHubbub::setHttpClient($this->_client);
+            $this->_subscriber = new \Zend\Feed\PubSubHubbub\Subscriber\Subscriber;
             
             
             $this->_storage = $this->_getCleanMock('Zend_Feed_Pubsubhubbub_Entity_TopicSubscription');
@@ -112,7 +115,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberHttpTest extends PHPUnit_Framework_TestCa
     }
     
     protected function _getCleanMock($className) {
-        $class = new ReflectionClass($className);
+        $class = new \ReflectionClass($className);
         $methods = $class->getMethods();
         $stubMethods = array();
         foreach ($methods as $method) {

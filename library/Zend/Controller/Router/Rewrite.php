@@ -25,7 +25,7 @@
  *
  * @uses       Zend_Controller_Router_Abstract
  * @uses       Zend_Controller_Router_Route
- * @uses       Zend_Loader
+ * @uses       Zend\Loader
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -133,7 +133,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
     }
 
     /**
-     * Create routes out of Zend_Config configuration
+     * Create routes out of \Zend\Config\Config configuration
      *
      * Example INI:
      * routes.archive.route = "archive/:year/*"
@@ -147,16 +147,16 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
      * routes.news.defaults.controller = "news"
      * routes.news.defaults.action = "list"
      *
-     * And finally after you have created a Zend_Config with above ini:
+     * And finally after you have created a \Zend\Config\Config with above ini:
      * $router = new Zend_Controller_Router_Rewrite();
      * $router->addConfig($config, 'routes');
      *
-     * @param  Zend_Config $config  Configuration object
+     * @param  \Zend\Config\Config $config  Configuration object
      * @param  string      $section Name of the config section containing route's definitions
      * @throws Zend_Controller_Router_Exception
      * @return Zend_Controller_Router_Rewrite
      */
-    public function addConfig(Zend_Config $config, $section = null)
+    public function addConfig(\Zend\Config\Config $config, $section = null)
     {
         if ($section !== null) {
             if ($config->{$section} === null) {
@@ -176,7 +176,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
                     throw new Zend_Controller_Router_Exception("No chain defined");
                 }
 
-                if ($info->chain instanceof Zend_Config) {
+                if ($info->chain instanceof \Zend\Config\Config) {
                     $childRouteNames = $info->chain;
                 } else {
                     $childRouteNames = explode(',', $info->chain);
@@ -188,7 +188,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
                 }
 
                 $this->addRoute($name, $route);
-            } elseif (isset($info->chains) && $info->chains instanceof Zend_Config) {
+            } elseif (isset($info->chains) && $info->chains instanceof \Zend\Config\Config) {
                 $this->_addChainRoutesFromConfig($name, $route, $info->chains);
             } else {
                 $this->addRoute($name, $route);
@@ -201,14 +201,14 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
     /**
      * Get a route frm a config instance
      *
-     * @param  Zend_Config $info
+     * @param  \Zend\Config\Config $info
      * @return Zend_Controller_Router_Route_Interface
      */
-    protected function _getRouteFromConfig(Zend_Config $info)
+    protected function _getRouteFromConfig(\Zend\Config\Config $info)
     {
         $class = (isset($info->type)) ? $info->type : 'Zend_Controller_Router_Route';
         if (!class_exists($class)) {
-            Zend_Loader::loadClass($class);
+            \Zend\Loader::loadClass($class);
         }
 
         $route = call_user_func(array($class, 'getInstance'), $info);
@@ -225,12 +225,12 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
      *
      * @param  string                                 $name
      * @param  Zend_Controller_Router_Route_Interface $route
-     * @param  Zend_Config                            $childRoutesInfo
+     * @param  \Zend\Config\Config                            $childRoutesInfo
      * @return void
      */
     protected function _addChainRoutesFromConfig($name,
                                                  Zend_Controller_Router_Route_Interface $route,
-                                                 Zend_Config $childRoutesInfo)
+                                                 \Zend\Config\Config $childRoutesInfo)
     {
         foreach ($childRoutesInfo as $childRouteName => $childRouteInfo) {
             if (is_string($childRouteInfo)) {

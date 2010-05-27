@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\ProgressBar;
+
+/**
  * @category   Zend
  * @package    Zend_Console
  * @subpackage UnitTests
@@ -28,20 +33,22 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_ProgressBar
  */
-class Zend_ProgressBar_ProgressBarTest extends PHPUnit_Framework_TestCase
+class ProgressBarTest extends \PHPUnit_Framework_TestCase
 {
+    
     public function testGreaterMin()
     {
         try {
             $progressBar = $this->_getProgressBar(1, 0);
             $this->fail('An expected Zend_Console_Exception has not been raised');
-        } catch (Zend_ProgressBar_Exception $expected) {
+        } catch (\Zend\ProgressBar\Exception $expected) {
             $this->assertContains('$max must be greater than $min', $expected->getMessage());
         }
     }
 
     public function testPersistence()
     {
+        $this->markTestSkipped('Waiting for Zend\Session Conversion to namespace');
         $progressBar = $this->_getProgressBar(0, 100, 'foobar');
         $progressBar->update(25);
 
@@ -106,11 +113,11 @@ class Zend_ProgressBar_ProgressBarTest extends PHPUnit_Framework_TestCase
 
     protected function _getProgressBar($min, $max, $persistenceNamespace = null)
     {
-        return new Zend_ProgressBar_Stub(new Zend_ProgressBar_Adapter_MockUp(), $min, $max, $persistenceNamespace);
+        return new Stub(new MockUp(), $min, $max, $persistenceNamespace);
     }
 }
 
-class Zend_ProgressBar_Stub extends Zend_ProgressBar
+class Stub extends \Zend\ProgressBar\ProgressBar
 {
     public function sleep($seconds)
     {
@@ -148,7 +155,7 @@ class Zend_ProgressBar_Stub extends Zend_ProgressBar
     }
 }
 
-class Zend_ProgressBar_Adapter_MockUp extends Zend_ProgressBar_Adapter
+class MockUp extends \Zend\ProgressBar\Adapter\Adapter
 {
     protected $_current;
     protected $_max;

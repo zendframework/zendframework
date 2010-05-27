@@ -20,17 +20,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dom;
+
+/**
  * Query DOM structures based on CSS selectors and/or XPath
  *
- * @uses       Zend_Dom_Exception
- * @uses       Zend_Dom_Query_Css2Xpath
- * @uses       Zend_Dom_Query_Result
+ * @uses       Zend\Dom\Exception
+ * @uses       Zend\Dom\Css2Xpath
+ * @uses       Zend\Dom\NodeList
  * @package    Zend_Dom
- * @subpackage Query
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Dom_Query
+class Query
 {
     /**#@+
      * Document types
@@ -72,7 +76,7 @@ class Zend_Dom_Query
      * Set document to query
      *
      * @param  string $document
-     * @return Zend_Dom_Query
+     * @return \Zend\Dom\Query
      */
     public function setDocument($document)
     {
@@ -93,7 +97,7 @@ class Zend_Dom_Query
      * Register HTML document
      *
      * @param  string $document
-     * @return Zend_Dom_Query
+     * @return \Zend\Dom\Query
      */
     public function setDocumentHtml($document)
     {
@@ -106,7 +110,7 @@ class Zend_Dom_Query
      * Register XHTML document
      *
      * @param  string $document
-     * @return Zend_Dom_Query
+     * @return \Zend\Dom\Query
      */
     public function setDocumentXhtml($document)
     {
@@ -119,7 +123,7 @@ class Zend_Dom_Query
      * Register XML document
      *
      * @param  string $document
-     * @return Zend_Dom_Query
+     * @return \Zend\Dom\Query
      */
     public function setDocumentXml($document)
     {
@@ -162,11 +166,11 @@ class Zend_Dom_Query
      * Perform a CSS selector query
      *
      * @param  string $query
-     * @return Zend_Dom_Query_Result
+     * @return \Zend\Dom\NodeList
      */
-    public function query($query)
+    public function execute($query)
     {
-        $xpathQuery = Zend_Dom_Query_Css2Xpath::transform($query);
+        $xpathQuery = Css2Xpath::transform($query);
         return $this->queryXpath($xpathQuery, $query);
     }
 
@@ -175,16 +179,16 @@ class Zend_Dom_Query
      *
      * @param  string|array $xpathQuery
      * @param  string $query CSS selector query
-     * @return Zend_Dom_Query_Result
+     * @return \Zend\Dom\NodeList
      */
     public function queryXpath($xpathQuery, $query = null)
     {
         if (null === ($document = $this->getDocument())) {
-            throw new Zend_Dom_Exception('Cannot query; no document registered');
+            throw new Exception('Cannot query; no document registered');
         }
 
         libxml_use_internal_errors(true);
-        $domDoc = new DOMDocument;
+        $domDoc = new \DOMDocument;
         $type   = $this->getDocumentType();
         switch ($type) {
             case self::DOC_XML:
@@ -204,11 +208,11 @@ class Zend_Dom_Query
         libxml_use_internal_errors(false);
 
         if (!$success) {
-            throw new Zend_Dom_Exception(sprintf('Error parsing document (type == %s)', $type));
+            throw new Exception(sprintf('Error parsing document (type == %s)', $type));
         }
 
         $nodeList   = $this->_getNodeList($domDoc, $xpathQuery);
-        return new Zend_Dom_Query_Result($query, $xpathQuery, $domDoc, $nodeList);
+        return new NodeList($query, $xpathQuery, $domDoc, $nodeList);
     }
 
     /**
@@ -220,19 +224,8 @@ class Zend_Dom_Query
      */
     protected function _getNodeList($document, $xpathQuery)
     {
-        $xpath      = new DOMXPath($document);
+        $xpath      = new \DOMXPath($document);
         $xpathQuery = (string) $xpathQuery;
-        if (preg_match_all('|\[contains\((@[a-z0-9_-]+),\s?\' |i', $xpathQuery, $matches)) {
-            foreach ($matches[1] as $attribute) {
-                $queryString = '//*[' . $attribute . ']';
-                $attributeName = substr($attribute, 1);
-                $nodes = $xpath->query($queryString);
-                foreach ($nodes as $node) {
-                    $attr = $node->attributes->getNamedItem($attributeName);
-                    $attr->value = ' ' . $attr->value . ' ';
-                }
-            }
-        }
         return $xpath->query($xpathQuery);
     }
 }

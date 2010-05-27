@@ -20,6 +20,15 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Queue;
+use Zend\Queue;
+use Zend\Log;
+use Zend\Log\Writer;
+use Zend\Queue\Adapter;
+
 /*
  * The adapter test class provides a universal test class for all of the
  * abstract methods.
@@ -35,9 +44,8 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
- * @group      disable
  */
-class Zend_Queue_QueueTest extends PHPUnit_Framework_TestCase
+class QueueTest extends \PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
@@ -47,20 +55,7 @@ class Zend_Queue_QueueTest extends PHPUnit_Framework_TestCase
             'params'    => array(),
         );
 
-        $this->queue = new Zend_Queue('array', $this->config);
-
-        /**
-         * @see Zend_Log
-         */
-        if (! isset($this->logger)) {
-            if (1) { // vebose?
-                $this->_logger = new Zend_Log(new Zend_Log_Writer_Stream('php://output'));
-            } else {
-                $this->_logger = new Zend_Log(new Zend_Log_Writer_Null());
-            }
-        }
-
-        $this->queue->setLogger($this->_logger);
+        $this->queue = new Queue\Queue('ArrayAdapter', $this->config);
     }
 
     protected function tearDown()
@@ -69,9 +64,9 @@ class Zend_Queue_QueueTest extends PHPUnit_Framework_TestCase
 
     public function testConst()
     {
-        $this->assertTrue(is_string(Zend_Queue::TIMEOUT));
-        $this->assertTrue(is_integer(Zend_Queue::VISABILITY_TIMEOUT));
-        $this->assertTrue(is_string(Zend_Queue::NAME));
+        $this->assertTrue(is_string(Queue\Queue::TIMEOUT));
+        $this->assertTrue(is_integer(Queue\Queue::VISIBILITY_TIMEOUT));
+        $this->assertTrue(is_string(Queue\Queue::NAME));
     }
 
     /**
@@ -86,53 +81,43 @@ class Zend_Queue_QueueTest extends PHPUnit_Framework_TestCase
         $config = array(
             'name'      => 'queue1',
             'params'    => array(),
-            'adapter'   => 'array'
+            'adapter'   => 'ArrayAdapter'
         );
 
-        $zend_config = new Zend_Config($config);
+        $zend_config = new \Zend\Config\Config($config);
 
-        $obj = new Zend_Queue($config);
-        $this->assertTrue($obj instanceof Zend_Queue);
+        $obj = new Queue\Queue($config);
+        $this->assertTrue($obj instanceof Queue\Queue);
 
-        // test logger
-        $this->assertTrue($obj->getLogger() instanceof Zend_Log);
-
-        $obj = new Zend_Queue($zend_config);
-        $this->assertTrue($obj instanceof Zend_Queue);
-
-        try {
-            $obj = new Zend_Queue('ops');
-            $this->fail('Zend_Queue cannot accept a string');
-        } catch (Exception $e) {
-            $this->assertTrue(true);
-        }
+        $obj = new Queue\Queue($zend_config);
+        $this->assertTrue($obj instanceof Queue\Queue);
     }
 
     public function test_getConfig()
     {
-        $config = $this->queue->getConfig();
-        $this->assertTrue(is_array($config));
-        $this->assertEquals($this->config['name'], $config['name']);
+        $options = $this->queue->getOptions();
+        $this->assertTrue(is_array($options));
+        $this->assertEquals($this->config['name'], $options['name']);
     }
 
     public function test_set_getAdapter()
     {
-        $adapter = new Zend_Queue_Adapter_Array($this->config);
-        $this->assertTrue($this->queue->setAdapter($adapter) instanceof Zend_Queue);
-        $this->assertTrue($this->queue->getAdapter($adapter) instanceof Zend_Queue_Adapter_Array);
+        $adapter = new Adapter\ArrayAdapter($this->config);
+        $this->assertTrue($this->queue->setAdapter($adapter) instanceof Queue\Queue);
+        $this->assertTrue($this->queue->getAdapter($adapter) instanceof Adapter\ArrayAdapter);
     }
 
     public function test_set_getMessageClass()
     {
         $class = 'test';
-        $this->assertTrue($this->queue->setMessageClass($class) instanceof Zend_Queue);
+        $this->assertTrue($this->queue->setMessageClass($class) instanceof Queue\Queue);
         $this->assertEquals($class, $this->queue->getMessageClass());
     }
 
     public function test_set_getMessageSetClass()
     {
         $class = 'test';
-        $this->assertTrue($this->queue->setMessageSetClass($class) instanceof Zend_Queue);
+        $this->assertTrue($this->queue->setMessageSetClass($class) instanceof Queue\Queue);
         $this->assertEquals($class, $this->queue->getMessageSetClass());
     }
 
@@ -148,21 +133,21 @@ class Zend_Queue_QueueTest extends PHPUnit_Framework_TestCase
         try {
             $this->queue->createQueue(array());
             $this->fail('createQueue() $name must be a string');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
 
         try {
             $this->queue->createQueue('test', 'test');
             $this->fail('createQueue() $timeout must be an integer');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
 
         // isExists
         $queue = 'test';
         $new = $this->queue->createQueue($queue);
-        $this->assertTrue($new instanceof Zend_Queue);
+        $this->assertTrue($new instanceof Queue\Queue);
         $this->assertFalse($this->queue->createQueue($queue));
 
         $this->assertTrue($new->deleteQueue());
@@ -175,12 +160,12 @@ class Zend_Queue_QueueTest extends PHPUnit_Framework_TestCase
         try {
             $this->queue->send(array());
             $this->fail('send() $mesage must be a string');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
 
         $message = 'Hello world'; // never gets boring!
-        $this->assertTrue($this->queue->send($message) instanceof Zend_Queue_Message);
+        $this->assertTrue($this->queue->send($message) instanceof \Zend\Queue\Message\Message);
 
         // ------------------------------------ count()
         $this->assertEquals($this->queue->count(), 1);
@@ -190,19 +175,19 @@ class Zend_Queue_QueueTest extends PHPUnit_Framework_TestCase
         try {
             $this->queue->receive(array());
             $this->fail('receive() $maxMessages must be a integer or null');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
 
         try {
             $this->queue->receive(1, array());
             $this->fail('receive() $timeout must be a integer or null');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
 
         $messages = $this->queue->receive();
-        $this->assertTrue($messages instanceof Zend_Queue_Message_Iterator);
+        $this->assertTrue($messages instanceof \Zend\Queue\Message\MessageIterator);
 
         // ------------------------------------ deleteMessage()
         foreach ($messages as $i => $message) {
@@ -210,25 +195,23 @@ class Zend_Queue_QueueTest extends PHPUnit_Framework_TestCase
         }
     }
 
+/*
     public function test_set_getLogger()
     {
-        /**
-         * @see Zend_Log
-         */
+        $logger = new Log\Logger(new Writer\Null);
 
-        $logger = new Zend_Log(new Zend_Log_Writer_Null);
-
-        $this->assertTrue($this->queue->setLogger($logger) instanceof Zend_Queue);
-        $this->assertTrue($this->queue->getLogger() instanceof Zend_Log);
+        $this->assertTrue($this->queue->setLogger($logger) instanceof Queue\Queue);
+        $this->assertTrue($this->queue->getLogger() instanceof Log\Logger);
 
         // parameter verification
         try {
             $this->queue->setLogger(array());
             $this->fail('setlogger() passed an array and succeeded (bad)');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
     }
+*/
 
     public function test_capabilities()
     {

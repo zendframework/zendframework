@@ -21,20 +21,27 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Search\Lucene\Analysis\TokenFilter;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Analysis;
+
+/**
  * Token filter that removes stop words. These words must be provided as array (set), example:
  * $stopwords = array('the' => 1, 'an' => '1');
  *
  * We do recommend to provide all words in lowercase and concatenate this class after the lowercase filter.
  *
- * @uses       Zend_Search_Lucene_Analysis_TokenFilter
- * @uses       Zend_Search_Lucene_Exception
+ * @uses       \Zend\Search\Lucene\Analysis\TokenFilter\TokenFilterInterface
+ * @uses       \Zend\Search\Lucene\Exception
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_Analysis_TokenFilter_StopWords extends Zend_Search_Lucene_Analysis_TokenFilter
+class StopWords implements TokenFilterInterface
 {
     /**
      * Stop Words
@@ -54,10 +61,10 @@ class Zend_Search_Lucene_Analysis_TokenFilter_StopWords extends Zend_Search_Luce
     /**
      * Normalize Token or remove it (if null is returned)
      *
-     * @param Zend_Search_Lucene_Analysis_Token $srcToken
-     * @return Zend_Search_Lucene_Analysis_Token
+     * @param \Zend\Search\Lucene\Analysis\Token $srcToken
+     * @return \Zend\Search\Lucene\Analysis\Token
      */
-    public function normalize(Zend_Search_Lucene_Analysis_Token $srcToken) {
+    public function normalize(Analysis\Token $srcToken) {
         if (array_key_exists($srcToken->getTermText(), $this->_stopSet)) {
             return null;
         } else {
@@ -72,15 +79,15 @@ class Zend_Search_Lucene_Analysis_TokenFilter_StopWords extends Zend_Search_Luce
      * You can call this method one or more times. New stopwords are always added to current set.
      *
      * @param string $filepath full path for text file with stopwords
-     * @throws Zend_Search_Exception When the file doesn`t exists or is not readable.
+     * @throws \Zend\Search\Exception When the file doesn`t exists or is not readable.
      */
     public function loadFromFile($filepath = null) {
         if (! $filepath || ! file_exists($filepath)) {
-            throw new Zend_Search_Lucene_Exception('You have to provide valid file path');
+            throw new Lucene\Exception('You have to provide valid file path');
         }
         $fd = fopen($filepath, "r");
         if (! $fd) {
-            throw new Zend_Search_Lucene_Exception('Cannot open file ' . $filepath);
+            throw new Lucene\Exception('Cannot open file ' . $filepath);
         }
         while (!feof ($fd)) {
             $buffer = trim(fgets($fd));
@@ -89,8 +96,7 @@ class Zend_Search_Lucene_Analysis_TokenFilter_StopWords extends Zend_Search_Luce
             }
         }
         if (!fclose($fd)) {
-            throw new Zend_Search_Lucene_Exception('Cannot close file ' . $filepath);
+            throw new Lucene\Exception('Cannot close file ' . $filepath);
         }
     }
 }
-

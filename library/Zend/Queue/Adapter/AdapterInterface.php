@@ -21,39 +21,48 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Queue\Adapter;
+use Zend\Queue;
+use Zend\Queue\Message;
+
+/**
  * Interface for common queue operations
  *
+ * @uses       \Zend\Queue\Queue
+ * @uses       \Zend\Queue\Message\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Queue_Adapter_AdapterInterface
+interface AdapterInterface
 {
     /**
      * Constructor
      *
-     * @param  array|Zend_Config $options
-     * @param  Zend_Queue $queue
+     * @param  array|\Zend\Config\Config $options
+     * @param  \Zend\Queue\Queue $queue
      * @return void
      */
-    public function __construct($options, Zend_Queue $queue = null);
+    public function __construct($options, Queue\Queue $queue = null);
 
     /**
      * Retrieve queue instance
      *
-     * @return Zend_Queue
+     * @return \Zend\Queue\Queue
      */
     public function getQueue();
 
     /**
      * Set queue instnace
      *
-     * @param  Zend_Queue $queue
-     * @return Zend_Queue_Adapter_AdapterInterface
+     * @param  \Zend\Queue\Queue $queue
+     * @return \Zend\Queue\Adapter\AdapterInterface
      */
-    public function setQueue(Zend_Queue $queue);
+    public function setQueue(Queue\Queue $queue);
 
     /**
      * Does a queue already exist?
@@ -104,10 +113,10 @@ interface Zend_Queue_Adapter_AdapterInterface
     /**
      * Return the approximate number of messages in the queue
      *
-     * @param  Zend_Queue|null $queue
+     * @param  \Zend\Queue\Queue|null $queue
      * @return integer
      */
-    public function count(Zend_Queue $queue = null);
+    public function count(Queue\Queue $queue = null);
 
     /********************************************************************
      * Messsage management functions
@@ -117,20 +126,20 @@ interface Zend_Queue_Adapter_AdapterInterface
      * Send a message to the queue
      *
      * @param  mixed $message Message to send to the active queue
-     * @param  Zend_Queue|null $queue
-     * @return Zend_Queue_Message
+     * @param  \Zend\Queue\Queue|null $queue
+     * @return \Zend\Queue\Message\Message
      */
-    public function send($message, Zend_Queue $queue = null);
+    public function send($message, Queue\Queue $queue = null);
 
     /**
      * Get messages in the queue
      *
      * @param  integer|null $maxMessages Maximum number of messages to return
      * @param  integer|null $timeout Visibility timeout for these messages
-     * @param  Zend_Queue|null $queue
-     * @return Zend_Queue_Message_Iterator
+     * @param  \Zend\Queue\Queue|null $queue
+     * @return \Zend\Queue\Message\MessageIterator
      */
-    public function receive($maxMessages = null, $timeout = null, Zend_Queue $queue = null);
+    public function receive($maxMessages = null, $timeout = null, Queue\Queue $queue = null);
 
     /**
      * Delete a message from the queue
@@ -138,10 +147,10 @@ interface Zend_Queue_Adapter_AdapterInterface
      * Return true if the message is deleted, false if the deletion is
      * unsuccessful.
      *
-     * @param  Zend_Queue_Message $message
+     * @param  \Zend\Queue\Message\Message $message
      * @return boolean
      */
-    public function deleteMessage(Zend_Queue_Message $message);
+    public function deleteMessage(Message\Message $message);
 
     /********************************************************************
      * Supporting functions

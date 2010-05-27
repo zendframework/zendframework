@@ -21,13 +21,18 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Serializer\Adapter;
+
+/**
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Serializer_Adapter_IgbinaryTest extends PHPUnit_Framework_TestCase
+class IgbinaryTest extends \PHPUnit_Framework_TestCase
 {
 
     private $_adapter;
@@ -37,7 +42,7 @@ class Zend_Serializer_Adapter_IgbinaryTest extends PHPUnit_Framework_TestCase
         if (!constant('TESTS_ZEND_SERIALIZER_ADAPTER_IGBINARY_ENABLED')) {
             $this->markTestSkipped('Zend_Serializer IgBinary tests are not enabled');
         }
-        $this->_adapter = new Zend_Serializer_Adapter_Igbinary();
+        $this->_adapter = new \Zend\Serializer\Adapter\Igbinary();
     }
 
     public function tearDown()
@@ -83,7 +88,7 @@ class Zend_Serializer_Adapter_IgbinaryTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeObject()
     {
-        $value    = new stdClass();
+        $value    = new \stdClass();
         $expected = igbinary_serialize($value);
 
         $data = $this->_adapter->serialize($value);
@@ -128,7 +133,7 @@ class Zend_Serializer_Adapter_IgbinaryTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeObject()
     {
-        $expected = new stdClass();
+        $expected = new \stdClass();
         $value    = igbinary_serialize($expected);
 
         $data = $this->_adapter->unserialize($value);
@@ -138,7 +143,7 @@ class Zend_Serializer_Adapter_IgbinaryTest extends PHPUnit_Framework_TestCase
     public function testUnserialzeInvalid()
     {
         $value = "\0\1\r\n";
-        $this->setExpectedException('Zend_Serializer_Exception');
+        $this->setExpectedException('Zend\\Serializer\\Exception');
         $this->_adapter->unserialize($value);
     }
 

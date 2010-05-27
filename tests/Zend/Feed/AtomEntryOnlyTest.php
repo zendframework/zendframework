@@ -21,16 +21,10 @@
  */
 
 /**
- * Test helper
+ * @namespace
  */
+namespace ZendTest\Feed;
 
-/**
- * @see Zend_Feed
- */
-
-/**
- * @see Zend_Feed_Atom
- */
 
 /**
  * @category   Zend
@@ -40,17 +34,19 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Feed
  */
-class Zend_Feed_AtomEntryOnlyTest extends PHPUnit_Framework_TestCase
+class AtomEntryOnlyTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testEntryOnly()
     {
-        $feed = new Zend_Feed_Atom(null, file_get_contents(dirname(__FILE__) . '/_files/TestAtomFeedEntryOnly.xml'));
+        $feed = new \Zend\Feed\Atom(null, file_get_contents(dirname(__FILE__) . '/_files/TestAtomFeedEntryOnly.xml'));
 
         $this->assertEquals(1, $feed->count(), 'The entry-only feed should report one entry.');
 
+        $feed->current();
+        
         foreach ($feed as $entry);
-        $this->assertEquals('Zend_Feed_Entry_Atom', get_class($entry),
+        $this->assertEquals('Zend\Feed\Entry\Atom', get_class($entry),
                             'The single entry should be an instance of Zend_Feed_Entry_Atom');
 
         $this->assertEquals('1', $entry->id(), 'The single entry should have id 1');

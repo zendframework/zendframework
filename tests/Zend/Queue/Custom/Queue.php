@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Queue\Custom;
+
 /*
  * The adapter test class provides a universal test class for all of the
  * abstract methods.
@@ -28,10 +33,6 @@
  * an exception.
  */
 
-/** Zend_Queue */
-
-/** Zend_Queue */
-
 /**
  * @category   Zend
  * @package    Zend_Queue
@@ -39,17 +40,17 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Custom_Queue extends Zend_Queue
+class Queue extends \Zend\Queue\Queue
 {
     /**
      * Constructor
      *
      * Can be called as
-     * $queue = new Zend_Queue($config);
+     * $queue = new \ZendTest\Queue\Custom\Queue($config);
      * - or -
-     * $queue = new Zend_Queue('array', $config);
+     * $queue = new \ZendTest\Queue\Custom\Queue('ArrayAdapter', $config);
      * - or -
-     * $queue = new Zend_Queue(null, $config); // Zend_Queue->createQueue();
+     * $queue = new \ZendTest\Queue\Custom\Queue(null, $config); // Zend_Queue->createQueue();
      *
      * @param Zend_Queue_Adapter_Abstract|string $adapter adapter object or class name
      * @param Zend_Config|array  $config Zend_Config or an configuration array
@@ -59,26 +60,25 @@ class Custom_Queue extends Zend_Queue
         $args = func_get_args();
         call_user_func_array(array($this, 'parent::__construct'), $args);
 
-        $this->setMessageClass('Custom_Message');
-        $this->setMessageSetClass('Custom_Messages');
+        $this->setMessageClass('\ZendTest\Queue\Custom\Message');
+        $this->setMessageSetClass('\ZendTest\Queue\Custom\Messages');
     }
 
     /**
      * Send a message to the queue
      *
-     * @param  Custom_Message|Custom_Messages $message message
+     * @param  \ZendTest\Queue\Custom\Message|\ZendTest\Queue\Custom\Messages $message message
      * @return $this
      * @throws Zend_Queue_Exception
      */
     public function send($message)
     {
-        if (! ($message instanceof Custom_Message || $message instanceof Custom_Messages) ) {
-            /**
-             * @see Zend_Queue_Exception
-             */
-            throw new Zend_Queue_Exception('$message must be an instance of Custom_Message or Custom_Messages');
+        if (! ($message instanceof Message || $message instanceof Messages) ) {
+            throw new \Zend\Queue\Exception(
+               '$message must be an instance of \ZendTest\Queue\Custom\Message or \ZendTest\Queue\Custom\Messages'
+            );
         }
-        if ($message instanceof Custom_Message) {
+        if ($message instanceof Message) {
             $response = parent::send($message->__toString());
         } else {
             foreach($message as $i => $one) {

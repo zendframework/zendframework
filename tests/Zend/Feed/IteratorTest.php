@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Feed;
+use Zend\Feed;
+
+/**
  * Test helper
  */
 
@@ -36,15 +42,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Feed
  */
-class Zend_Feed_IteratorTest extends PHPUnit_Framework_TestCase
+class IteratorTest extends \PHPUnit_Framework_TestCase
 {
     private $_feed;
     private $_nsfeed;
 
     public function setUp()
     {
-        $this->_feed = Zend_Feed::importFile(dirname(__FILE__) . '/_files/TestAtomFeed.xml');
-        $this->_nsfeed = Zend_Feed::importFile(dirname(__FILE__) . '/_files/TestAtomFeedNamespaced.xml');
+        $this->_feed = Feed\Feed::importFile(dirname(__FILE__) . '/_files/TestAtomFeed.xml');
+        $this->_nsfeed = Feed\Feed::importFile(dirname(__FILE__) . '/_files/TestAtomFeedNamespaced.xml');
     }
 
     public function testRewind()
@@ -77,12 +83,12 @@ class Zend_Feed_IteratorTest extends PHPUnit_Framework_TestCase
     public function testCurrent()
     {
         foreach ($this->_feed as $f) {
-            $this->assertType('Zend_Feed_Entry_Atom', $f, 'Each feed entry should be an instance of Zend_Feed_Entry_Atom');
+            $this->assertType('Zend\Feed\Entry\Atom', $f, 'Each feed entry should be an instance of Zend_Feed_Entry_Atom');
             break;
         }
 
         foreach ($this->_nsfeed as $f) {
-            $this->assertType('Zend_Feed_Entry_Atom', $f, 'Each feed entry should be an instance of Zend_Feed_Entry_Atom');
+            $this->assertType('Zend\Feed\Entry\Atom', $f, 'Each feed entry should be an instance of Zend_Feed_Entry_Atom');
             break;
         }
     }

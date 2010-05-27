@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Queue\Adapter;
+use Zend\Queue\Adapter;
+
 /*
  * The adapter test class provides a universal test class for all of the
  * abstract methods.
@@ -36,7 +42,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
  */
-class Zend_Queue_Adapter_ActivemqTest extends Zend_Queue_Adapter_AdapterTest
+class ActivemqTest extends AdapterTest
 {
     public function setUp()
     {
@@ -86,8 +92,8 @@ class Zend_Queue_Adapter_ActivemqTest extends Zend_Queue_Adapter_AdapterTest
         /**
          * @see Zend_Queue_Adapter_Activemq
          */
-        $this->assertTrue(is_string(Zend_Queue_Adapter_Activemq::DEFAULT_SCHEME));
-        $this->assertTrue(is_string(Zend_Queue_Adapter_Activemq::DEFAULT_HOST));
-        $this->assertTrue(is_integer(Zend_Queue_Adapter_Activemq::DEFAULT_PORT));
+        $this->assertTrue(is_string(Adapter\Activemq::DEFAULT_SCHEME));
+        $this->assertTrue(is_string(Adapter\Activemq::DEFAULT_HOST));
+        $this->assertTrue(is_integer(Adapter\Activemq::DEFAULT_PORT));
     }
 }

@@ -26,15 +26,15 @@
  * @uses       Zend_Json
  * @uses       Zend_Loader
  * @uses       Zend_Loader_PluginLoader
- * @uses       Zend_Registry
- * @uses       Zend_Validate_Interface
+ * @uses       Zend\Registry
+ * @uses       Zend\Validator\Validator
  * @category   Zend
  * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
+class Zend_Form implements Iterator, Countable, \Zend\Validator\Validator
 {
     /**#@+
      * Plugin loader type constants
@@ -399,12 +399,12 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     /**
      * Set plugin loaders for use with decorators and elements
      *
-     * @param  Zend_Loader_PluginLoader_Interface $loader
+     * @param  Zend\Loader\PluginLoader\PluginLoaderInterface $loader
      * @param  string $type 'decorator' or 'element'
      * @return Zend_Form
      * @throws Zend_Form_Exception on invalid type
      */
-    public function setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type = null)
+    public function setPluginLoader(\Zend\Loader\PluginLoader\PluginLoaderInterface $loader, $type = null)
     {
         $type = strtoupper($type);
         switch ($type) {
@@ -428,7 +428,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      * created.
      *
      * @param  string $type
-     * @return Zend_Loader_PluginLoader_Interface
+     * @return Zend\Loader\PluginLoader\PluginLoaderInterface
      */
     public function getPluginLoader($type = null)
     {
@@ -447,7 +447,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                     throw new Zend_Form_Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
             }
 
-            $this->_loaders[$type] = new Zend_Loader_PluginLoader(
+            $this->_loaders[$type] = new \Zend\Loader\PluginLoader\PluginLoader(
                 array('Zend_' . $prefixSegment . '_' => 'Zend/' . $pathSegment . '/')
             );
         }
@@ -2734,8 +2734,8 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     public static function getDefaultTranslator()
     {
         if (null === self::$_translatorDefault) {
-            if (Zend_Registry::isRegistered('Zend_Translate')) {
-                $translator = Zend_Registry::get('Zend_Translate');
+            if (\Zend\Registry::isRegistered('Zend_Translate')) {
+                $translator = \Zend\Registry::get('Zend_Translate');
                 if ($translator instanceof Zend_Translate_Adapter) {
                     return $translator;
                 } elseif ($translator instanceof Zend_Translate) {

@@ -21,15 +21,20 @@
  */
 
 /**
- * @uses       Zend_Search_Lucene_Search_QueryEntry
- * @uses       Zend_Search_Lucene_Search_Query_Preprocessing_Phrase
+ * @namespace
+ */
+namespace Zend\Search\Lucene\Search\QueryEntry;
+
+/**
+ * @uses       \Zend\Search\Lucene\Search\QueryEntry\AbstractQueryEntry
+ * @uses       \Zend\Search\Lucene\Search\Query\Preprocessing\Phrase
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_Search_QueryEntry_Phrase extends Zend_Search_Lucene_Search_QueryEntry
+class Phrase extends AbstractQueryEntry
 {
     /**
      * Phrase value
@@ -91,12 +96,12 @@ class Zend_Search_Lucene_Search_QueryEntry_Phrase extends Zend_Search_Lucene_Sea
      * Transform entry to a subquery
      *
      * @param string $encoding
-     * @return Zend_Search_Lucene_Search_Query
-     * @throws Zend_Search_Lucene_Search_QueryParserException
+     * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
+     * @throws \Zend\Search\Lucene\Search\QueryParserException
      */
     public function getQuery($encoding)
     {
-        $query = new Zend_Search_Lucene_Search_Query_Preprocessing_Phrase($this->_phrase,
+        $query = new \Zend\Search\Lucene\Search\Query\Preprocessing\Phrase($this->_phrase,
                                                                           $encoding,
                                                                           ($this->_field !== null)?
                                                                               iconv($encoding, 'UTF-8', $this->_field) :

@@ -21,15 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Feed\Writer\Exception;
+
+/**
  * Feed exceptions
  *
  * Class to represent exceptions that occur during Feed operations.
  *
- * @uses       Zend_Feed_Exception
+ * @uses       \Zend\Feed\Exception
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Exception_InvalidMethodException extends Zend_Exception
+class InvalidMethodException extends \Zend\Exception
 {}

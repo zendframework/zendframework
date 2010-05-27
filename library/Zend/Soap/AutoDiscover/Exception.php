@@ -21,10 +21,15 @@
  */
 
 /**
- * @uses       Zend_Exception
+ * @namespace
+ */
+namespace Zend\Soap\AutoDiscover;
+
+/**
+ * @uses       \Zend\Exception
  * @package    Zend_Soap
  * @subpackage AutoDiscover
  */
-class Zend_Soap_AutoDiscover_Exception extends Zend_Exception
+class Exception extends \Zend\Exception
 {
 }

@@ -21,10 +21,12 @@
  */
 
 /**
- * Test helper
+ * @namespace
  */
+namespace ZendTest\Service\ReCaptcha;
 
-/** @see Zend_Service_ReCaptcha_Response */
+use Zend\Service\ReCaptcha,
+    Zend\HTTP\Response;
 
 /**
  * @category   Zend
@@ -35,12 +37,12 @@
  * @group      Zend_Service
  * @group      Zend_Service_ReCaptcha
  */
-class Zend_Service_ReCaptcha_ResponseTest extends PHPUnit_Framework_TestCase
+class ResponseTest extends \PHPUnit_Framework_TestCase
 {
     protected $_response = null;
 
     public function setUp() {
-        $this->_response = new Zend_Service_ReCaptcha_Response();
+        $this->_response = new ReCaptcha\Response();
     }
 
     public function testSetAndGet() {
@@ -73,7 +75,7 @@ class Zend_Service_ReCaptcha_ResponseTest extends PHPUnit_Framework_TestCase
         $status = 'false';
         $errorCode = 'foobar';
         $responseBody = $status . "\n" . $errorCode;
-        $httpResponse = new Zend_Http_Response(200, array('Content-Type' => 'text/html'), $responseBody);
+        $httpResponse = new Response\Response(200, array('Content-Type' => 'text/html'), $responseBody);
 
         $this->_response->setFromHttpResponse($httpResponse);
 
@@ -85,7 +87,7 @@ class Zend_Service_ReCaptcha_ResponseTest extends PHPUnit_Framework_TestCase
         $status = 'true';
         $errorCode = 'ok';
 
-        $response = new Zend_Service_ReCaptcha_Response($status, $errorCode);
+        $response = new ReCaptcha\Response($status, $errorCode);
 
         $this->assertSame(true, $response->getStatus());
         $this->assertSame($errorCode, $response->getErrorCode());
@@ -95,9 +97,9 @@ class Zend_Service_ReCaptcha_ResponseTest extends PHPUnit_Framework_TestCase
         $status = 'false';
         $errorCode = 'foobar';
         $responseBody = $status . "\n" . $errorCode;
-        $httpResponse = new Zend_Http_Response(200, array('Content-Type' => 'text/html'), $responseBody);
+        $httpResponse = new Response\Response(200, array('Content-Type' => 'text/html'), $responseBody);
 
-        $response = new Zend_Service_ReCaptcha_Response(null, null, $httpResponse);
+        $response = new ReCaptcha\Response(null, null, $httpResponse);
 
         $this->assertSame(false, $response->getStatus());
         $this->assertSame($errorCode, $response->getErrorCode());

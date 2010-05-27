@@ -20,14 +20,20 @@
  */
 
 /**
- * @uses       Zend_Reflection_Docblock_Tag
- * @uses       Zend_Reflection_Exception
+ * @namespace
+ */
+namespace Zend\Reflection\Docblock\Tag;
+use Zend\Reflection;
+
+/**
+ * @uses       \Zend\Reflection\ReflectionDocblockTag
+ * @uses       \Zend\Reflection\Exception
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Reflection_Docblock_Tag_Param extends Zend_Reflection_Docblock_Tag
+class Param extends Reflection\ReflectionDocblockTag
 {
     /**
      * @var string
@@ -49,11 +55,11 @@ class Zend_Reflection_Docblock_Tag_Param extends Zend_Reflection_Docblock_Tag
         $matches = array();
 
         if (!preg_match('#^@(\w+)\s+([\w|\\\]+)(?:\s+(\$\S+))?(?:\s+(.*))?#s', $tagDocblockLine, $matches)) {
-            throw new Zend_Reflection_Exception('Provided docblock line is does not contain a valid tag');
+            throw new Reflection\Exception('Provided docblock line is does not contain a valid tag');
         }
 
         if ($matches[1] != 'param') {
-            throw new Zend_Reflection_Exception('Provided docblock line is does not contain a valid @param tag');
+            throw new Reflection\Exception('Provided docblock line is does not contain a valid @param tag');
         }
 
         $this->_name = 'param';

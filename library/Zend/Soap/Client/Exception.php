@@ -20,7 +20,12 @@
  */
 
 /**
- * @uses       Zend_Exception
+ * @namespace
+ */
+namespace Zend\Soap\Client;
+
+/**
+ * @uses       \Zend\Exception
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Client
@@ -28,6 +33,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Soap_Client_Exception extends Zend_Exception
+class Exception extends \Zend\Exception
 {}
 

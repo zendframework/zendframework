@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Queue\Custom;
+
+/**
  * Class for custom messages
  *
  * We want be able to delete messages and we to serialize objects
@@ -40,13 +45,13 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Custom_Message extends Zend_Queue_Message
+class Message extends \Zend\Queue\Message\Message
 {
     /**
      * We adjusted the constructor to accept both an array and an object.
      */
     public function __construct($mixed) {
-        // we still have to support the code in Zend_Queue::receive that
+        // we still have to support the code in \Zend\Queue\Queue::receive that
         // passes in an array
         if (is_array($mixed)) {
             parent::__construct($mixed);
@@ -91,7 +96,7 @@ class Custom_Message extends Zend_Queue_Message
      * Note you cannot be disconnected from queue.
      *
      * $throw is set to to true, because most of the time you want to know if
-     * there is an error.  However, in Custom_Messages::__destruct() exceptions
+     * there is an error.  However, in Messages::__destruct() exceptions
      * cannot be thrown.
      *
      * These does not create a circular reference loop. Because deleteMessage
@@ -100,7 +105,7 @@ class Custom_Message extends Zend_Queue_Message
      *
      * @param boolean $throw defaults to true.  Throw a message if there is an error
      *
-     * @throws Zend_Queue_Exception if not connected
+     * @throws \Zend\Queue\Exception if not connected
      */
     public function delete($throw = true)
     {
@@ -109,10 +114,7 @@ class Custom_Message extends Zend_Queue_Message
                 $this->getQueue()->deleteMessage($this);
             }
         } elseif ($throw) {
-            /**
-             * @see Zend_Queue_Exception
-             */
-            throw new Zend_Queue_Exception('Disconnected from queue.  Cannot delete message from queue.');
+            throw new \Zend\Queue\Exception('Disconnected from queue.  Cannot delete message from queue.');
         }
     }
 }

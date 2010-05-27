@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Soap\_files;
+
 /* Test Functions */
 
 /**
@@ -28,7 +33,7 @@
  * @param string $arg
  * @return string
  */
-function Zend_Soap_AutoDiscover_TestFunc($who)
+function TestFunc($who)
 {
     return "Hello $who";
 }
@@ -36,7 +41,7 @@ function Zend_Soap_AutoDiscover_TestFunc($who)
 /**
  * Test Function 2
  */
-function Zend_Soap_AutoDiscover_TestFunc2()
+function TestFunc2()
 {
     return "Hello World";
 }
@@ -46,7 +51,7 @@ function Zend_Soap_AutoDiscover_TestFunc2()
  *
  * @return bool
  */
-function Zend_Soap_AutoDiscover_TestFunc3()
+function TestFunc3()
 {
     return false;
 }
@@ -56,7 +61,7 @@ function Zend_Soap_AutoDiscover_TestFunc3()
  *
  * @return bool
  */
-function Zend_Soap_AutoDiscover_TestFunc4()
+function TestFunc4()
 {
     return true;
 }
@@ -66,7 +71,7 @@ function Zend_Soap_AutoDiscover_TestFunc4()
  *
  * @return int
  */
-function Zend_Soap_AutoDiscover_TestFunc5()
+function TestFunc5()
 {
     return 123;
 }
@@ -76,7 +81,7 @@ function Zend_Soap_AutoDiscover_TestFunc5()
  *
  * @return string
  */
-function Zend_Soap_AutoDiscover_TestFunc6()
+function TestFunc6()
 {
     return "string";
 }
@@ -86,7 +91,7 @@ function Zend_Soap_AutoDiscover_TestFunc6()
  *
  * @return array
  */
-function Zend_Soap_AutoDiscover_TestFunc7()
+function TestFunc7()
 {
     return array('foo' => 'bar', 'baz' => true, 1 => false, 'bat' => 123);
 }
@@ -96,7 +101,7 @@ function Zend_Soap_AutoDiscover_TestFunc7()
  *
  * @return StdClass
  */
-function Zend_Soap_AutoDiscover_TestFunc8()
+function TestFunc8()
 {
     $return = (object) array('foo' => 'bar', 'baz' => true, 'bat' => 123, 'qux' => false);
     return $return;
@@ -109,7 +114,7 @@ function Zend_Soap_AutoDiscover_TestFunc8()
  * @param string $bar
  * @return string
  */
-function Zend_Soap_AutoDiscover_TestFunc9($foo, $bar)
+function TestFunc9($foo, $bar)
 {
     return "$foo $bar";
 }
@@ -121,7 +126,7 @@ function Zend_Soap_AutoDiscover_TestFunc9($foo, $bar)
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_AutoDiscover_TestFixingMultiplePrototypes
+class TestFixingMultiplePrototypes
 {
     /**
      * Test function
@@ -144,7 +149,7 @@ class Zend_Soap_AutoDiscover_TestFixingMultiplePrototypes
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_AutoDiscover_Test {
+class Test {
     /**
      * Test Function 1
      *
@@ -189,7 +194,7 @@ class Zend_Soap_AutoDiscover_Test {
     }
 }
 
-class Zend_Soap_AutoDiscoverTestClass1
+class AutoDiscoverTestClass1
 {
     /**
      * @var integer $var
@@ -209,31 +214,31 @@ class Zend_Soap_AutoDiscoverTestClass1
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_AutoDiscoverTestClass2
+class AutoDiscoverTestClass2
 {
     /**
      *
-     * @param Zend_Soap_AutoDiscoverTestClass1 $test
+     * @param \ZendTest\Soap\_files\AutoDiscoverTestClass1 $test
      * @return boolean
      */
-    public function add(Zend_Soap_AutoDiscoverTestClass1 $test)
+    public function add(AutoDiscoverTestClass1 $test)
     {
         return true;
     }
 
     /**
-     * @return Zend_Soap_AutoDiscoverTestClass1[]
+     * @return \ZendTest\Soap\_files\AutoDiscoverTestClass1[]
      */
     public function fetchAll()
     {
         return array(
-            new Zend_Soap_AutoDiscoverTestClass1(),
-            new Zend_Soap_AutoDiscoverTestClass1(),
+            new AutoDiscoverTestClass1(),
+            new AutoDiscoverTestClass1(),
         );
     }
 
     /**
-     * @param Zend_Soap_AutoDiscoverTestClass1[]
+     * @param \ZendTest\Soap\_files\AutoDiscoverTestClass1[]
      */
     public function addMultiple($test)
     {
@@ -248,7 +253,7 @@ class Zend_Soap_AutoDiscoverTestClass2
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_Wsdl_ComplexTypeB
+class ComplexTypeB
 {
     /**
      * @var string
@@ -267,10 +272,10 @@ class Zend_Soap_Wsdl_ComplexTypeB
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_Wsdl_ComplexTypeA
+class ComplexTypeA
 {
     /**
-     * @var Zend_Soap_Wsdl_ComplexTypeB[]
+     * @var \ZendTest\Soap\_files\ComplexTypeB[]
      */
     public $baz = array();
 }
@@ -282,7 +287,7 @@ class Zend_Soap_Wsdl_ComplexTypeA
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_Wsdl_ComplexTest
+class ComplexTest
 {
     /**
      * @var int
@@ -297,7 +302,7 @@ class Zend_Soap_Wsdl_ComplexTest
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_Wsdl_ComplexObjectStructure
+class ComplexObjectStructure
 {
     /**
      * @var boolean
@@ -327,10 +332,10 @@ class Zend_Soap_Wsdl_ComplexObjectStructure
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_Wsdl_ComplexObjectWithObjectStructure
+class ComplexObjectWithObjectStructure
 {
     /**
-     * @var Zend_Soap_Wsdl_ComplexTest
+     * @var \ZendTest\Soap\_files\ComplexTest
      */
     public $object;
 }
@@ -342,24 +347,24 @@ class Zend_Soap_Wsdl_ComplexObjectWithObjectStructure
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_AutoDiscover_MyService
+class MyService
 {
     /**
      *    @param string $foo
-     *    @return Zend_Soap_AutoDiscover_MyResponse[]
+     *    @return \ZendTest\Soap\_files\MyResponse[]
      */
     public function foo($foo) {
     }
     /**
      *    @param string $bar
-     *    @return Zend_Soap_AutoDiscover_MyResponse[]
+     *    @return \ZendTest\Soap\_files\MyResponse[]
      */
     public function bar($bar) {
     }
 
     /**
      *    @param string $baz
-     *    @return Zend_Soap_AutoDiscover_MyResponse[]
+     *    @return \ZendTest\Soap\_files\MyResponse[]
      */
     public function baz($baz) {
     }
@@ -372,7 +377,7 @@ class Zend_Soap_AutoDiscover_MyService
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_AutoDiscover_MyServiceSequence
+class MyServiceSequence
 {
     /**
      *    @param string $foo
@@ -409,7 +414,7 @@ class Zend_Soap_AutoDiscover_MyServiceSequence
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_AutoDiscover_MyResponse
+class MyResponse
 {
     /**
      * @var string
@@ -424,10 +429,10 @@ class Zend_Soap_AutoDiscover_MyResponse
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_AutoDiscover_Recursion
+class Recursion
 {
     /**
-     * @var Zend_Soap_AutoDiscover_Recursion
+     * @var \ZendTest\Soap\_files\Recursion
      */
     public $recursion;
 }
@@ -435,7 +440,7 @@ class Zend_Soap_AutoDiscover_Recursion
 /**
  * @param string $message
  */
-function Zend_Soap_AutoDiscover_OneWay($message)
+function OneWay($message)
 {
 
 }
@@ -447,7 +452,7 @@ function Zend_Soap_AutoDiscover_OneWay($message)
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Soap_AutoDiscover_NoReturnType
+class NoReturnType
 {
     /**
      *

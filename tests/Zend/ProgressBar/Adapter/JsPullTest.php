@@ -20,18 +20,11 @@
  * @version    $Id$
  */
 
-// Call Zend_ProgressBar_Adapter_JsPullTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_ProgressBar_Adapter_JsPullTest::main");
-}
-
 /**
- * Test helper
+ * @namespace
  */
+namespace ZendTest\ProgressBar\Adapter;
 
-/**
- * Zend_ProgressBar_Adapter_JsPull
- */
 
 /**
  * @category   Zend
@@ -41,22 +34,12 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_ProgressBar
  */
-class Zend_ProgressBar_Adapter_JsPullTest extends PHPUnit_Framework_TestCase
+class JsPullTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_ProgressBar_Adapter_JsPullTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function testJson()
     {
-        $adapter = new Zend_ProgressBar_Adapter_JsPull_Stub();
+        $adapter = new JsPullStub();
         $adapter->notify(0, 2, 0.5, 1, 1, 'status');
         $output = $adapter->getLastOutput();
 
@@ -79,7 +62,7 @@ class Zend_ProgressBar_Adapter_JsPullTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class Zend_ProgressBar_Adapter_JsPull_Stub extends Zend_ProgressBar_Adapter_JsPull
+class JsPullStub extends \Zend\ProgressBar\Adapter\JsPull
 {
     protected $_lastOutput = null;
 
@@ -94,7 +77,3 @@ class Zend_ProgressBar_Adapter_JsPull_Stub extends Zend_ProgressBar_Adapter_JsPu
     }
 }
 
-// Call Zend_ProgressBar_Adapter_JsPullTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_ProgressBar_Adapter_JsPullTest::main") {
-    Zend_ProgressBar_Adapter_JsPullTest::main();
-}

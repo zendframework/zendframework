@@ -807,8 +807,8 @@ class Zend_Locale
      */
     public static function isLocale($locale, $strict = false, $compatible = true)
     {
-        if (($locale instanceof Zend_Locale) 
-            || (is_array($locale) && array_key_exists($locale, self::$_localeData))
+        if (($locale instanceof Zend_Locale)
+            || (is_string($locale) && array_key_exists($locale, self::$_localeData))
         ) {
             return true;
         }

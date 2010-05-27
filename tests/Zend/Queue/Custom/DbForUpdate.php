@@ -21,8 +21,10 @@
  */
 
 /**
- * @see Zend_Queue_Adapter_Db
+ * @namespace
  */
+namespace ZendTest\Queue\Custom;
+
 
 /**
  * Class for using connecting to a Zend_Db-based queuing system
@@ -37,17 +39,17 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Custom_DbForUpdate extends Zend_Queue_Adapter_Db
+class DbForUpdate extends \Zend\Queue\Adapter\DB\DB
 {
     /**
      * Return the first element in the queue
      *
-     * @param  integer    $maxMessages
-     * @param  integer    $timeout
-     * @param  Zend_Queue $queue
-     * @return Zend_Queue_Message_Iterator
+     * @param  integer           $maxMessages
+     * @param  integer           $timeout
+     * @param  \Zend\Queue\Queue $queue
+     * @return \Zend\Queue\Message\MessageIterator
      */
-    public function receive($maxMessages=null, $timeout=null, Zend_Queue $queue=null)
+    public function receive($maxMessages=null, $timeout=null, \Zend\Queue\Queue $queue=null)
     {
         if ($maxMessages === null) {
             $maxMessages = 1;
@@ -101,13 +103,11 @@ class Custom_DbForUpdate extends Zend_Queue_Adapter_Db
                 }
             }
             $db->commit();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $db->rollBack();
             $this->getLogger()->err($e->getMessage() . ' code ' . $e->getCode());
-            /**
-             * @see Zend_Queue_Exception
-             */
-            throw new Zend_Queue_Exception($e->getMessage(), $e->getCode());
+
+            throw new \Zend\Queue\Exception($e->getMessage(), $e->getCode());
         }
 
         $config = array(
@@ -117,7 +117,7 @@ class Custom_DbForUpdate extends Zend_Queue_Adapter_Db
         );
 
         $classname = $queue->getMessageSetClass();
-        Zend_Loader::loadClass($classname);
+
         return new $classname($config);
     }
 }

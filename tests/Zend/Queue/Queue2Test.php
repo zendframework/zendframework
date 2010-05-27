@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Queue;
+
 /*
  * The adapter test class provides a universal test class for all of the
  * abstract methods.
@@ -42,7 +47,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
  */
-class Zend_Queue_Queue2Test extends Zend_Queue_QueueBaseTest
+class Queue2Test extends QueueBaseTest
 {
     protected function setUp()
     {
@@ -51,6 +56,6 @@ class Zend_Queue_Queue2Test extends Zend_Queue_QueueBaseTest
             'name'      => 'queue1'
         );
 
-        $this->queue = new Zend_Queue('Null', $this->config);
+        $this->queue = new \Zend\Queue\Queue('Null', $this->config);
     }
 }

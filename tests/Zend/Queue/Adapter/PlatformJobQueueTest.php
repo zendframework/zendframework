@@ -20,18 +20,11 @@
  * @version    $Id$
  */
 
-
-/** PHPUnit Test Case */
-
-/** TestHelp.php */
-
-/** Zend_Queue */
-
-/** Zend_Queue */
-
-/** Zend_Queue_Message_Test */
-
-/** Base Adapter test class */
+/**
+ * @namespace
+ */
+namespace ZendTest\Queue\Adapter;
+use Zend\Queue\Message;
 
 /**
  * @category   Zend
@@ -41,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
  */
-class Zend_Queue_Adapter_PlatformJobQueueTest extends Zend_Queue_Adapter_AdapterTest
+class PlatformJobQueueTest extends AdapterTest
 {
     public function setUp()
     {
@@ -84,7 +77,7 @@ class Zend_Queue_Adapter_PlatformJobQueueTest extends Zend_Queue_Adapter_Adapter
      */
     public function getAdapterFullName()
     {
-        return 'Zend_Queue_Adapter_' . $this->getAdapterName();
+        return '\Zend\Queue\Adapter\\' . $this->getAdapterName();
     }
 
     public function testFailedConstructor()
@@ -92,21 +85,21 @@ class Zend_Queue_Adapter_PlatformJobQueueTest extends Zend_Queue_Adapter_Adapter
       try {
             $queue = $this->createQueue(__FUNCTION__, array());
             $this->fail('The test should fail if no host and password are passed');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue( true, 'Job Queue host and password should be provided');
         }
 
         try {
             $queue = $this->createQueue(__FUNCTION__, array('daemonOptions' => array()));
             $this->fail('The test should fail if no host is passed');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true, 'Platform Job Queue host should be provided');
         }
 
         try {
             $queue = $this->createQueue(__FUNCTION__, array('daemonOptions' => array('host' => 'localhost')));
             $this->fail('The test should fail if no password is passed');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true, 'Platform Job Queue password should be provided');
         }
     }
@@ -122,12 +115,12 @@ class Zend_Queue_Adapter_PlatformJobQueueTest extends Zend_Queue_Adapter_Adapter
 
         $message = $queue->send(array('script' => 'info.php'));
 
-        $this->assertTrue($message instanceof Zend_Queue_Message);
+        $this->assertTrue($message instanceof Message\Message);
 
         $list = $queue->receive();
-        $this->assertTrue($list instanceof Zend_Queue_Message_Iterator);
+        $this->assertTrue($list instanceof Message\MessageIterator);
         foreach ( $list as $message ) {
-            $this->assertTrue($message instanceof Zend_Queue_Message_PlatformJob);
+            $this->assertTrue($message instanceof Message\PlatformJob);
             $queue->deleteMessage($message);
         }
 
@@ -143,13 +136,13 @@ class Zend_Queue_Adapter_PlatformJobQueueTest extends Zend_Queue_Adapter_Adapter
         $adapter = $queue->getAdapter();
 
         $message = $adapter->send(array('script' => 'info.php'));
-        $this->assertTrue($message instanceof Zend_Queue_Message);
+        $this->assertTrue($message instanceof Message\Message);
 
         $list = $queue->receive();
-        $this->assertTrue($list instanceof Zend_Queue_Message_Iterator);
+        $this->assertTrue($list instanceof Message\MessageIterator);
 
         foreach ($list as $message) {
-            $this->assertTrue($message instanceof Zend_Queue_Message_PlatformJob);
+            $this->assertTrue($message instanceof Message\PlatformJob);
             $queue->deleteMessage($message);
         }
 
@@ -176,12 +169,12 @@ class Zend_Queue_Adapter_PlatformJobQueueTest extends Zend_Queue_Adapter_Adapter
 
         // send the message
         $message = $adapter->send((array('script' => $scriptName)));
-        $this->assertTrue($message instanceof Zend_Queue_Message);
+        $this->assertTrue($message instanceof Message\Message);
 
         // get it back
         $list = $adapter->receive(1);
         $this->assertEquals(1, count($list));
-        $this->assertTrue($list instanceof Zend_Queue_Message_Iterator);
+        $this->assertTrue($list instanceof Message\MessageIterator);
         $this->assertTrue($list->valid());
 
         $message = $list->current();
@@ -189,7 +182,7 @@ class Zend_Queue_Adapter_PlatformJobQueueTest extends Zend_Queue_Adapter_Adapter
             $adapter->deleteMessage($list->current());
         }
 
-        $this->assertTrue($message instanceof Zend_Queue_Message);
+        $this->assertTrue($message instanceof Message\Message);
         $this->assertEquals($message->getJob()->getScript(), $scriptName);
 
         // delete the queue we created
@@ -214,12 +207,12 @@ class Zend_Queue_Adapter_PlatformJobQueueTest extends Zend_Queue_Adapter_Adapter
 
         // send the message
         $message = $adapter->send((array('script' => $scriptName)));
-        $this->assertTrue($message instanceof Zend_Queue_Message);
+        $this->assertTrue($message instanceof Message\Message);
 
         // get it back
         $list = $adapter->receive(1);
         $this->assertEquals(1, count($list));
-        $this->assertTrue($list instanceof Zend_Queue_Message_Iterator);
+        $this->assertTrue($list instanceof Message\MessageIterator);
         $this->assertTrue($list->valid());
 
         $message = $list->current();
@@ -227,7 +220,7 @@ class Zend_Queue_Adapter_PlatformJobQueueTest extends Zend_Queue_Adapter_Adapter
             $adapter->deleteMessage($list->current());
         }
 
-        $this->assertTrue($message instanceof Zend_Queue_Message);
+        $this->assertTrue($message instanceof Message\Message);
         $this->assertEquals($message->getJob()->getScript(), $scriptName);
 
         $id = $message->getJob()->getID();
@@ -287,7 +280,7 @@ class Zend_Queue_Adapter_PlatformJobQueueTest extends Zend_Queue_Adapter_Adapter
         if (!$queue = $this->createQueue(__FUNCTION__)) {
             return;
         }
-        $this->assertTrue($queue instanceof Zend_Queue);
+        $this->assertTrue($queue instanceof \Zend\Queue\Queue);
 
         $initCount = $queue->count();
 

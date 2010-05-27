@@ -21,24 +21,29 @@
  */
 
 /**
- * @uses       Zend_Db_Table_Abstract
+ * @namespace
+ */
+namespace Zend\Queue\Adapter\DB;
+
+/**
+ * @uses       \Zend\DB\Table\AbstractTable
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Queue_Adapter_Db_Message extends Zend_Db_Table_Abstract
+class Queue extends \Zend\DB\Table\AbstractTable
 {
     /**
      * @var string
      */
-    protected $_name = 'message';
+    protected $_name = 'queue';
 
     /**
      * @var string
      */
-    protected $_primary = 'message_id';
+    protected $_primary = 'queue_id';
 
     /**
      * @var mixed

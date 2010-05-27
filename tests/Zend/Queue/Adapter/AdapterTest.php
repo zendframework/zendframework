@@ -20,6 +20,15 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Queue\Adapter;
+use Zend\Queue;
+use Zend\Config;
+use Zend\Queue\Adapter;
+use Zend\Queue\Message;
+
 /*
  * The adapter test class provides a universal test class for all of the
  * abstract methods.
@@ -36,7 +45,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
  */
-abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
+abstract class AdapterTest extends \PHPUnit_Framework_TestCase
 {
     public function tearDown()
     {
@@ -53,9 +62,10 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
      */
     public function getAdapterName()
     {
-        die('You must overload this function: getAdapterName()');
-        // example for Zend_Queue_Adatper_Array
-        return 'Array';
+        $this->fail('You must overload this function: getAdapterName()');
+
+        // example for \Zend\Queue\Adatper\ArrayAdapter
+        return 'ArrayAdapter';
     }
 
     /**
@@ -69,7 +79,7 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
      */
     public function getAdapterFullName()
     {
-        return 'Zend_Queue_Adapter_' . $this->getAdapterName();
+        return '\Zend\Queue\Adapter\\' . $this->getAdapterName();
     }
 
     public function getTestConfig()
@@ -115,20 +125,15 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
 
         $class = $this->getAdapterFullName();
 
-        // create queue
-        if (!class_exists($class)) {
-            Zend_Loader::loadClass($class);
-        }
-
-        set_error_handler(array($this, 'handleErrors'));
+//        set_error_handler(array($this, 'handleErrors'));
         try {
-            $queue = new Zend_Queue($this->getAdapterName(), $config);
-        } catch (Zend_Queue_Exception $e) {
+            $queue = new Queue\Queue($this->getAdapterName(), $config);
+        } catch (Queue\Exception $e) {
             $this->markTestSkipped();
             restore_error_handler();
             return false;
         }
-        restore_error_handler();
+//        restore_error_handler();
 
         return $queue;
     }
@@ -167,51 +172,47 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
     public function testZendQueueAdapterConstructor()
     {
         $class = $this->getAdapterFullName();
-        /**
-         * @see Zend_Loader
-         */
-        Zend_Loader::loadClass($class);
 
         try {
-            $obj = new $class(true);
+            $obj = new $class(\true);
             $this->fail('__construct() $config must be an array');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
 
         try {
             $obj = new $class( array());
             $this->fail('__construct() cannot accept an empty array for a configuration');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
 
         try {
-            $obj = new $class(array('name' => 'queue1', 'driverOptions'=>true));
+            $obj = new $class(array('name' => 'queue1', 'driverOptions'=>\true));
             $this->fail('__construct() $config[\'options\'] must be an array');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
 
         try {
             $obj = new $class(array('name' => 'queue1', 'driverOptions'=>array('opt'=>'val')));
             $this->fail('__construct() humm I think this test is supposed to work @TODO');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
         try {
-            $config = new Zend_Config(array('driverOptions' => array() ));
+            $config = new Config\Config(array('driverOptions' => array() ));
             $obj = new $class($config);
             $this->fail('__construct() \'name\' is a required configuration value');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
 
         try {
-            $config = new Zend_Config(array('name' => 'queue1', 'driverOptions' => array(), 'options' => array('opt1' => 'val1')));
+            $config = new Config\Config(array('name' => 'queue1', 'driverOptions' => array(), 'options' => array('opt1' => 'val1')));
             $obj = new $class($config);
             $this->fail('__construct() is not supposed to accept a true value for a configuraiton');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true);
         }
 
@@ -220,14 +221,14 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
             return;
         }
         $obj = new $class($queue->getOptions(), $queue);
-        $this->assertTrue($obj instanceof Zend_Queue_Adapter_AdapterInterface);
+        $this->assertTrue($obj instanceof Adapter\AdapterInterface);
     }
 
     // this tests the configuration option $config['messageClass']
     public function testZendQueueMessageTest()
     {
         $config = $this->getTestConfig();
-        $config['messageClass'] = 'Zend_Queue_Message_Test';
+        $config['messageClass'] = '\ZendTest\Queue\Adapter\MessageClass';
 
         if (!$queue = $this->createQueue(__FUNCTION__, $config)) {
             return;
@@ -247,12 +248,12 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
         $body = 'this is a test message';
         $message = $queue->send($body);
 
-        $this->assertTrue($message instanceof Zend_Queue_Message);
+        $this->assertTrue($message instanceof Message\Message);
 
         $list = $queue->receive();
-        $this->assertTrue($list instanceof Zend_Queue_Message_Iterator);
+        $this->assertTrue($list instanceof Message\MessageIterator);
         foreach ( $list as $i => $message ) {
-            $this->assertTrue($message instanceof Zend_Queue_Message_Test);
+            $this->assertTrue($message instanceof MessageClass);
             $queue->deleteMessage($message);
         }
 
@@ -265,7 +266,7 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
         if (!$queue = $this->createQueue(__FUNCTION__)) {
             return;
         }
-        $this->assertTrue($queue->getAdapter() instanceof Zend_Queue_Adapter_AdapterInterface);
+        $this->assertTrue($queue->getAdapter() instanceof Adapter\AdapterInterface);
     }
 
     public function testCreate()
@@ -368,13 +369,13 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
 
         $body = 'this is a test message';
         $message = $adapter->send($body);
-        $this->assertTrue($message instanceof Zend_Queue_Message);
+        $this->assertTrue($message instanceof Message\Message);
 
         // receive the record we created.
         if (! $adapter->isSupported('receive')) {
             $messages = $adapter->receive();
-            foreach ( $list as $i => $message ) {
-                $this->assertTrue($message instanceof Zend_Queue_Message_Test);
+            foreach ($messages as $message) {
+                $this->assertTrue($message instanceof MessageClass);
                 $queue->deleteMessage($message);
             }
         }
@@ -400,12 +401,12 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
         // send the message
         $body = 'this is a test message 2';
         $message = $adapter->send($body);
-        $this->assertTrue($message instanceof Zend_Queue_Message);
+        $this->assertTrue($message instanceof Message\Message);
 
         // get it back
         $list = $adapter->receive(1);
         $this->assertEquals(1, count($list));
-        $this->assertTrue($list instanceof Zend_Queue_Message_Iterator);
+        $this->assertTrue($list instanceof Message\MessageIterator);
         $this->assertTrue($list->valid());
 
         $message = $list->current();
@@ -413,7 +414,7 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
             $adapter->deleteMessage($list->current());
         }
 
-        $this->assertTrue($message instanceof Zend_Queue_Message);
+        $this->assertTrue($message instanceof Message\Message);
         $this->assertEquals($message->body, $body);
 
         // delete the queue we created
@@ -442,14 +443,14 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
 
         $body = 'this is a test message';
         $message = $adapter->send($body);
-        $this->assertTrue($message instanceof Zend_Queue_Message);
+        $this->assertTrue($message instanceof Message\Message);
 
         $list = $adapter->receive();
-        $this->assertTrue($list instanceof Zend_Queue_Message_Iterator);
+        $this->assertTrue($list instanceof Message\MessageIterator);
         $this->assertTrue($list->valid());
 
         $message = $list->current();
-        $this->assertTrue($message instanceof Zend_Queue_Message);
+        $this->assertTrue($message instanceof Message\Message);
 
         $this->assertTrue($adapter->deleteMessage($message));
 
@@ -610,7 +611,7 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
         if (!$queue = $this->createQueue(__FUNCTION__)) {
             return;
         }
-        $this->assertTrue($queue instanceof Zend_Queue);
+        $this->assertTrue($queue instanceof Queue\Queue);
 
         if ($queue->isSupported('send')) {
             $msg = 1;
@@ -691,7 +692,7 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
         $start = microtime(true);
         $end = 0;
 
-        $this->assertTrue($messages instanceof Zend_Queue_Message_Iterator);
+        $this->assertTrue($messages instanceof Message\MessageIterator);
 
         $timeout = $config['timeout'] + $start + $extra_delay;
         $found = false;
@@ -775,7 +776,7 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
             try {
                 $adapter->create(__FUNCTION__ . '_2');
                 $this->fail('unsupported create() failed to throw an exception');
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->assertTrue(true, 'exception thrown');
             }
         }
@@ -784,7 +785,7 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
             try {
                 $adapter->delete(__FUNCTION__ . '_2');
                 $this->fail('unsupported delete() failed to throw an exception');
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->assertTrue(true, 'exception thrown');
             }
         }
@@ -793,7 +794,7 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
             try {
                 $adapter->send(__FUNCTION__);
                 $this->fail('unsupported send() failed to throw an exception');
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->assertTrue(true, 'exception thrown');
             }
         }
@@ -802,7 +803,7 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
             try {
                 $adapter->send(__FUNCTION__);
                 $this->fail('unsupported receive() failed to throw an exception');
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->assertTrue(true, 'exception thrown');
             }
         }
@@ -811,17 +812,17 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
             try {
                 $adapter->receive();
                 $this->fail('unsupported receive() failed to throw an exception');
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->assertTrue(true, 'exception thrown');
             }
         }
 
         if (! $functions['deleteMessage']) {
             try {
-                $message = new Zend_Queue_Message();
+                $message = new Message\Message();
                 $adapter->deleteMessage($message);
                 $this->fail('unsupported deleteMessage() failed to throw an exception');
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->assertTrue(true, 'exception thrown');
             }
         }
@@ -830,7 +831,7 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
             try {
                 $adapter->getQueues();
                 $this->fail('unsupported getQueues() failed to throw an exception');
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->assertTrue(true, 'exception thrown');
             }
         }
@@ -839,7 +840,7 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
             try {
                 $a = $adapter->count();
                 $this->fail('unsupported count() failed to throw an exception');
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->assertTrue(true, 'exception thrown');
             }
         }
@@ -848,7 +849,7 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
             try {
                 $a = $adapter->isExists(__FUNCTION__ . '_3');
                 $this->fail('unsupported isExists() failed to throw an exception');
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->assertTrue(true, 'exception thrown');
             }
         }

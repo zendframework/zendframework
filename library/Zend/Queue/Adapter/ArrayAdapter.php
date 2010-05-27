@@ -21,18 +21,26 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Queue\Adapter;
+use Zend\Queue;
+use Zend\Queue\Message;
+
+/**
  * Class for using a standard PHP array as a queue
  *
- * @uses       Zend_Loader
- * @uses       Zend_Queue_Adapter_AdapterAbstract
- * @uses       Zend_Queue_Exception
+ * @uses       \Zend\Queue\Adapter\AdapterAbstract
+ * @uses       \Zend\Queue\Queue
+ * @uses       \Zend\Queue\Exception
+ * @uses       \Zend\Queue\Message\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
+class ArrayAdapter extends AdapterAbstract
 {
     /**
      * @var array
@@ -42,11 +50,11 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
     /**
      * Constructor
      *
-     * @param  array|Zend_Config $options
-     * @param  Zend_Queue|null $queue
+     * @param  array|\Zend\Config\Config $options
+     * @param  \Zend\Queue\Queue|null $queue
      * @return void
      */
-    public function __construct($options, Zend_Queue $queue = null)
+    public function __construct($options, Queue\Queue $queue = null)
     {
         parent::__construct($options, $queue);
     }
@@ -130,18 +138,18 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
     /**
      * Return the approximate number of messages in the queue
      *
-     * @param  Zend_Queue $queue
+     * @param  \Zend\Queue\Queue $queue
      * @return integer
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
-    public function count(Zend_Queue $queue=null)
+    public function count(Queue\Queue $queue=null)
     {
         if ($queue === null) {
             $queue = $this->_queue;
         }
 
         if (!isset($this->_data[$queue->getName()])) {
-            throw new Zend_Queue_Exception('Queue does not exist');
+            throw new Queue\Exception('Queue does not exist');
         }
 
         return count($this->_data[$queue->getName()]);
@@ -155,18 +163,18 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
      * Send a message to the queue
      *
      * @param  string     $message Message to send to the active queue
-     * @param  Zend_Queue $queue
-     * @return Zend_Queue_Message
-     * @throws Zend_Queue_Exception
+     * @param  \Zend\Queue\Queue $queue
+     * @return \Zend\Queue\Message\Message
+     * @throws \Zend\Queue\Exception
      */
-    public function send($message, Zend_Queue $queue=null)
+    public function send($message, Queue\Queue $queue=null)
     {
         if ($queue === null) {
             $queue = $this->_queue;
         }
 
         if (!$this->isExists($queue->getName())) {
-            throw new Zend_Queue_Exception('Queue does not exist:' . $queue->getName());
+            throw new Queue\Exception('Queue does not exist:' . $queue->getName());
         }
 
         // create the message
@@ -186,11 +194,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
             'queue' => $queue,
             'data'  => $data,
         );
-
         $classname = $queue->getMessageClass();
-        if (!class_exists($classname)) {
-            Zend_Loader::loadClass($classname);
-        }
         return new $classname($options);
     }
 
@@ -199,10 +203,10 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
      *
      * @param  integer    $maxMessages  Maximum number of messages to return
      * @param  integer    $timeout      Visibility timeout for these messages
-     * @param  Zend_Queue $queue
-     * @return Zend_Queue_Message_Iterator
+     * @param  \Zend\Queue\Queue $queue
+     * @return \Zend\Queue\Message\MessageIterator
      */
-    public function receive($maxMessages = null, $timeout = null, Zend_Queue $queue = null)
+    public function receive($maxMessages = null, $timeout = null, Queue\Queue $queue = null)
     {
         if ($maxMessages === null) {
             $maxMessages = 1;
@@ -244,11 +248,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
             'data'         => $data,
             'messageClass' => $queue->getMessageClass(),
         );
-
         $classname = $queue->getMessageSetClass();
-        if (!class_exists($classname)) {
-            Zend_Loader::loadClass($classname);
-        }
         return new $classname($options);
     }
 
@@ -258,11 +258,11 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
      * Returns true if the message is deleted, false if the deletion is
      * unsuccessful.
      *
-     * @param  Zend_Queue_Message $message
+     * @param  \Zend\Queue\Message\Message $message
      * @return boolean
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
-    public function deleteMessage(Zend_Queue_Message $message)
+    public function deleteMessage(Message\Message $message)
     {
         // load the queue
         $queue = &$this->_data[$message->queue_name];
@@ -305,7 +305,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
     }
 
     /********************************************************************
-    * Functions that are not part of the Zend_Queue_Adapter_Abstract
+    * Functions that are not part of the \Zend\Queue\Adapter\AdapterAbstract
      *********************************************************************/
 
     /**

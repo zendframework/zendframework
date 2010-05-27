@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Queue\Adapter;
+
+/**
  * Class for managing queue messages
  *
  * @category   Zend
@@ -34,7 +39,7 @@
  * @see Zend_Queue_Message_Iterator
  */
 
-class Zend_Queue_Message_Iterator2 extends Zend_Queue_Message_Iterator
+class Iterator2 extends \Zend\Queue\Message\MessageIterator
 {
     // This is a really lazy way to test a new iterator.
 }

@@ -21,19 +21,25 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Queue\Stomp\Client;
+use Zend\Queue;
+use Zend\Queue\Stomp;
+
+/**
  * The Stomp client interacts with a Stomp server.
  *
- * @uses       Zend_Loader
- * @uses       Zend_Queue_Exception
- * @uses       Zend_Queue_Stomp_Client_ConnectionInterface
+ * @uses       \Zend\Queue\Exception
+ * @uses       \Zend\Queue\Stomp\Client\ConnectionInterface
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Stomp
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Queue_Stomp_Client_Connection
-    implements Zend_Queue_Stomp_Client_ConnectionInterface
+class Connection
+    implements ConnectionInterface
 {
     const READ_TIMEOUT_DEFAULT_USEC = 0; // 0 microseconds
     const READ_TIMEOUT_DEFAULT_SEC = 5; // 5 seconds
@@ -60,7 +66,7 @@ class Zend_Queue_Stomp_Client_Connection
      * @param  int $port
      * @param  array $options Accepts "timeout_sec" and "timeout_usec" keys
      * @return true;
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
     public function open($scheme, $host, $port, array $options = array())
     {
@@ -70,7 +76,7 @@ class Zend_Queue_Stomp_Client_Connection
         if ($this->_socket === false) {
             // aparently there is some reason that fsockopen will return false
             // but it normally throws an error.
-            throw new Zend_Queue_Exception("Unable to connect to $str; error = $errstr ( errno = $errno )");
+            throw new Queue\Exception("Unable to connect to $str; error = $errstr ( errno = $errno )");
         }
 
         stream_set_blocking($this->_socket, 0); // non blocking
@@ -128,12 +134,12 @@ class Zend_Queue_Stomp_Client_Connection
      * Check whether we are connected to the server
      *
      * @return true
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
     public function ping()
     {
         if (!is_resource($this->_socket)) {
-            throw new Zend_Queue_Exception('Not connected to Stomp server');
+            throw new Queue\Exception('Not connected to Stomp server');
         }
         return true;
     }
@@ -143,17 +149,17 @@ class Zend_Queue_Stomp_Client_Connection
      *
      * example: $response = $client->write($frame)->read();
      *
-     * @param Zend_Queue_Stom_FrameInterface $frame
+     * @param \Zend\Queue\Stom\FrameInterface $frame
      * @return $this
      */
-    public function write(Zend_Queue_Stomp_FrameInterface $frame)
+    public function write(Stomp\FrameInterface $frame)
     {
         $this->ping();
         $output = $frame->toFrame();
 
         $bytes = fwrite($this->_socket, $output, strlen($output));
         if ($bytes === false || $bytes == 0) {
-            throw new Zend_Queue_Exception('No bytes written');
+            throw new Queue\Exception('No bytes written');
         }
 
         return $this;
@@ -183,8 +189,8 @@ class Zend_Queue_Stomp_Client_Connection
     /**
      * Reads in a frame from the socket or returns false.
      *
-     * @return Zend_Queue_Stomp_FrameInterface|false
-     * @throws Zend_Queue_Exception
+     * @return \Zend\Queue\Stomp\FrameInterface|false
+     * @throws \Zend\Queue\Exception
      */
     public function read()
     {
@@ -200,7 +206,7 @@ class Zend_Queue_Stomp_Client_Connection
 
             // check to make sure that the connection is not lost.
             if ($data === false) {
-                throw new Zend_Queue_Exception('Connection lost');
+                throw new Queue\Exception('Connection lost');
             }
 
             // append last character read to $response
@@ -225,9 +231,9 @@ class Zend_Queue_Stomp_Client_Connection
     /**
      * Set the frameClass to be used
      *
-     * This must be a Zend_Queue_Stomp_FrameInterface.
+     * This must be a \Zend\Queue\Stomp\FrameInterface.
      *
-     * @param  string $classname - class is an instance of Zend_Queue_Stomp_FrameInterface
+     * @param  string $classname - class is an instance of \Zend\Queue\Stomp\FrameInterface
      * @return $this;
      */
     public function setFrameClass($classname)
@@ -245,26 +251,22 @@ class Zend_Queue_Stomp_Client_Connection
     {
         return isset($this->_options['frameClass'])
             ? $this->_options['frameClass']
-            : 'Zend_Queue_Stomp_Frame';
+            : '\Zend\Queue\Stomp\Frame';
     }
 
     /**
      * Create an empty frame
      *
-     * @return Zend_Queue_Stomp_FrameInterface
+     * @return \Zend\Queue\Stomp\FrameInterface
      */
     public function createFrame()
     {
         $class = $this->getFrameClass();
 
-        if (!class_exists($class)) {
-            Zend_Loader::loadClass($class);
-        }
-
         $frame = new $class();
 
-        if (!$frame instanceof Zend_Queue_Stomp_FrameInterface) {
-            throw new Zend_Queue_Exception('Invalid Frame class provided; must implement Zend_Queue_Stomp_FrameInterface');
+        if (!$frame instanceof Stomp\FrameInterface) {
+            throw new Queue\Exception('Invalid Frame class provided; must implement \Zend\Queue\Stomp\FrameInterface');
         }
 
         return $frame;

@@ -223,4 +223,8 @@ Zend_Soap:
  * Zend_Soap_Wsdl_Strategy_Interface becomes Zend\Soap\WSDL\Strategy\StrategyInterface
  * Wsdl -> WSDL change within classes and methods names.
 
+Zend_Queue:
+ * Zend_Queue becomes Zend\Queue
+ * 'adapterNamespace' \Zend\Queue\Queue option and adapter name \Zend\Queue\Queue constructor parameter are case sensitive now
+ * 'Array' adapter becomes 'ArrayAdapter'
 

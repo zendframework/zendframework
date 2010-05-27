@@ -21,19 +21,26 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Queue\Adapter;
+use Zend\Queue;
+
+/**
  * Class for connecting to queues performing common operations.
  *
- * @uses       Zend_Queue
- * @uses       Zend_Queue_Adapter_AdapterInterface
- * @uses       Zend_Queue_Exception
+ * @uses       \Zend\Queue\Queue
+ * @uses       \Zend\Queue\Adapter\AdapterInterface
+ * @uses       \Zend\Queue\Message\Message
+ * @uses       \Zend\Queue\Exception
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Queue_Adapter_AdapterAbstract
-    implements Zend_Queue_Adapter_AdapterInterface
+abstract class AdapterAbstract
+    implements AdapterInterface
 {
     /**
      * Default timeout for createQueue() function
@@ -60,9 +67,9 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
     protected $_queues = array();
 
     /**
-     * Contains the Zend_Queue that this object
+     * Contains the \Zend\Queue\Queue that this object
      *
-     * @var Zend_Queue_Adapter_Abstract
+     * @var \Zend\Queue\Queue
      */
     protected $_queue = null;
 
@@ -84,14 +91,14 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
      * host           => (string) What host to connect to, defaults to localhost
      * port           => (string) The port of the database
      *
-     * @param  array|Zend_Config $config An array having configuration data
-     * @param  Zend_Queue The Zend_Queue object that created this class
+     * @param  array|\Zend\Config\Config $config An array having configuration data
+     * @param  \Zend\Queue\Queue The \Zend\Queue\Queue object that created this class
      * @return void
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
-    public function __construct($options, Zend_Queue $queue = null)
+    public function __construct($options, Queue\Queue $queue = null)
     {
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         }
 
@@ -99,7 +106,7 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
          * Verify that adapter parameters are in an array.
          */
         if (!is_array($options)) {
-            throw new Zend_Queue_Exception('Adapter options must be an array or Zend_Config object');
+            throw new Queue\Exception('Adapter options must be an array or Zend_Config object');
         }
 
         // set the queue
@@ -113,7 +120,7 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
         // Normalize the options and merge with the defaults
         if (array_key_exists('options', $options)) {
             if (!is_array($options['options'])) {
-                throw new Zend_Queue_Exception("Configuration array 'options' must be an array");
+                throw new Queue\Exception("Configuration array 'options' must be an array");
             }
 
             // Can't use array_merge() because keys might be integers
@@ -138,7 +145,7 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
     /**
      * get the Zend_Queue class that is attached to this object
      *
-     * @return Zend_Queue|null
+     * @return \Zend\Queue\Queue|null
      */
     public function getQueue()
     {
@@ -148,10 +155,10 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
     /**
      * set the Zend_Queue class for this object
      *
-     * @param  Zend_Queue $queue
-     * @return Zend_Queue_Adapter_AdapterInterface
+     * @param  \Zend\Queue\Queue $queue
+     * @return \Zend\Queue\Adapter\AdapterInterface
      */
-    public function setQueue(Zend_Queue $queue)
+    public function setQueue(Queue\Queue $queue)
     {
         $this->_queue = $queue;
         return $this;

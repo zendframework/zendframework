@@ -20,26 +20,18 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Queue\Adapter;
+use Zend\DB\Select;
+
 /*
  * The adapter test class provides a universal test class for all of the
  * abstract methods.
  *
  * All methods marked not supported are explictly checked for for throwing
  * an exception.
- */
-
-/** TestHelp.php */
-
-/** Zend_Queue */
-
-/** Zend_Queue */
-
-/** Zend_Queue_Message_Test */
-
-/** Base Adapter test class */
-
-/**
- * @see Zend_Db_Select
  */
 
 /**
@@ -50,7 +42,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
  */
-class Zend_Queue_Adapter_DbTest extends Zend_Queue_Adapter_AdapterTest
+class DBTest extends AdapterTest
 {
     protected function setUp()
     {
@@ -67,7 +59,7 @@ class Zend_Queue_Adapter_DbTest extends Zend_Queue_Adapter_AdapterTest
      */
     public function getAdapterName()
     {
-        return 'Db';
+        return 'DB\DB';
     }
 
     /**
@@ -81,18 +73,18 @@ class Zend_Queue_Adapter_DbTest extends Zend_Queue_Adapter_AdapterTest
      */
     public function getAdapterFullName()
     {
-        return 'Zend_Queue_Adapter_' . $this->getAdapterName();
+        return '\Zend\Queue\Adapter\\' . $this->getAdapterName();
     }
 
     public function getTestConfig()
     {
         $driverOptions = array();
         if (defined('TESTS_ZEND_QUEUE_DB')) {
-            $driverOptions = Zend_Json::decode(TESTS_ZEND_QUEUE_DB);
+            $driverOptions = \Zend\JSON\JSON::decode(TESTS_ZEND_QUEUE_DB);
         }
 
         return array(
-            'options'       => array(Zend_Db_Select::FOR_UPDATE => true),
+            'options'       => array(Select\Select::FOR_UPDATE => true),
             'driverOptions' => $driverOptions,
         );
     }
@@ -112,10 +104,10 @@ class Zend_Queue_Adapter_DbTest extends Zend_Queue_Adapter_AdapterTest
             /**
              * @see Zend_Db_Select
              */
-            $config['options'][Zend_Db_Select::FOR_UPDATE] = array();
+            $config['options'][Select\Select::FOR_UPDATE] = array();
             $queue = $this->createQueue(__FUNCTION__, $config);
             $this->fail('FOR_UPDATE accepted an array');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(true, 'FOR_UPDATE cannot be an array');
         }
 
@@ -125,7 +117,7 @@ class Zend_Queue_Adapter_DbTest extends Zend_Queue_Adapter_AdapterTest
                 unset($config['driverOptions'][$arg]);
                 $queue = $this->createQueue(__FUNCTION__, $config);
                 $this->fail("$arg is required but was missing.");
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->assertTrue(true, $arg . ' is required.');
             }
         }

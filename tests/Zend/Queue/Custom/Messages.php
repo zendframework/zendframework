@@ -20,7 +20,11 @@
  * @version    $Id$
  */
 
-/** Zend_Queue_Message_Iterator */
+/**
+ * @namespace
+ */
+namespace ZendTest\Queue\Custom;
+use Zend\Queue as QueueNS;
 
 /**
  * This class uses the SLP_ArrayIterator
@@ -32,9 +36,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Custom_Messages
-extends Zend_Queue_Message_Iterator
-implements ArrayAccess
+class Messages extends \Zend\Queue\Message\MessageIterator implements \ArrayAccess
 {
     /**
      * Constructor
@@ -56,15 +58,11 @@ implements ArrayAccess
         }
 
         if (isset($config['data']) && ! is_array($config['data'])) {
-            /**
-             * @see Zend_Queue_Exception
-             */
-            throw new Zend_Queue_Exception('array configuration must have $config[\'data\'] = array');
+            throw new QueueNS\Exception('array configuration must have $config[\'data\'] = array');
         }
 
         // load the message class
         $class = $this->_messageClass;
-        Zend_Loader::loadClass($class);
 
         if (isset($config['data'])) {
             // for each of the messages
@@ -119,12 +117,10 @@ implements ArrayAccess
      * @see SPL ArrayAccess::offsetSet
      */
     public function offsetSet($offset, $value) {
-        if (! $value instanceof Custom_Message) {
-            $msg = '$value must be a child or an instance of Custom_Messag';
-            /**
-             * @see Zend_Queue_Exception
-             */
-            throw new Zend_Queue_Exception($msg);
+        if (! $value instanceof Message) {
+            throw new QueueNS\Exception(
+                '$value must be a child or an instance of \ZendTest\Queue\Custom\Messag'
+            );
         }
 
         $this->_data[$offset] = $value;
@@ -143,14 +139,10 @@ implements ArrayAccess
      */
     public function offsetUnset($offset) {
         if (! $this->_connected) {
-            $msg = 'Cannot delete message after serialization';
-            /**
-             * @see Zend_Queue_Exception
-             */
-            throw new Zend_Queue_Exception($msg);
+            throw new QueueNS\Exception('Cannot delete message after serialization');
         }
 
-        $this->_data[$offset]->delete(); // Custom_Message added this function
+        $this->_data[$offset]->delete(); // \ZendTest\Queue\Custom\Message added this function
         unset($this->_data[$offset]);
     }
 

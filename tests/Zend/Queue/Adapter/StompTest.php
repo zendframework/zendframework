@@ -20,8 +20,10 @@
  * @version    $Id$
  */
 
-require_once 'MessageTestClass.php';
-require_once dirname(__FILE__) . '/AdapterTest.php';
+/**
+ * @namespace
+ */
+namespace ZendTest\Queue\Adapter;
 
 /**
  * @category   Zend
@@ -32,7 +34,7 @@ require_once dirname(__FILE__) . '/AdapterTest.php';
  * @group      Zend_Queue
  * @group      disable
  */
-class Zend_Queue_Adapter_StompTest extends Zend_Queue_Adapter_AdapterTest
+class StompTest extends AdapterTest
 {
     /**
      * getAdapterName() is an method to help make AdapterTest work with any
@@ -58,7 +60,7 @@ class Zend_Queue_Adapter_StompTest extends Zend_Queue_Adapter_AdapterTest
      */
     public function getAdapterFullName()
     {
-        return 'Zend_Queue_Adapter_' . $this->getAdapterName();
+        return '\Zend\Queue\Adapter\\' . $this->getAdapterName();
     }
 
     public function getTestConfig()
@@ -77,11 +79,8 @@ class Zend_Queue_Adapter_StompTest extends Zend_Queue_Adapter_AdapterTest
 
     public function testConst()
     {
-        /**
-         * @see Zend_Queue_Adapter_Stomp
-         */
-        $this->assertTrue(is_string(Zend_Queue_Adapter_Stomp::DEFAULT_SCHEME));
-        $this->assertTrue(is_string(Zend_Queue_Adapter_Stomp::DEFAULT_HOST));
-        $this->assertTrue(is_integer(Zend_Queue_Adapter_Stomp::DEFAULT_PORT));
+        $this->assertTrue(is_string(\Zend\Queue\Adapter\Stomp::DEFAULT_SCHEME));
+        $this->assertTrue(is_string(\Zend\Queue\Adapter\Stomp::DEFAULT_HOST));
+        $this->assertTrue(is_integer(\Zend\Queue\Adapter\Stomp::DEFAULT_PORT));
     }
 }

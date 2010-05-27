@@ -10619,34 +10619,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Adapter/Array.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Adapter_Array</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Adapter/Array.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Queue/Adapter/ArrayAdapter.php</newRelativeFilePath>
       <newNamespace>Zend\Queue\Adapter</newNamespace>
-      <newClassName>Array</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Adapter\Array</newFullyQualifiedName>
+      <newClassName>ArrayAdapter</newClassName>
+      <newFullyQualifiedName>Zend\Queue\Adapter\ArrayAdapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Adapter/Db/Message.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Adapter_Db_Message</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Adapter/Db/Message.php</newRelativeFilePath>
-      <newNamespace>Zend\Queue\Adapter\Db</newNamespace>
+      <newRelativeFilePath>Zend/Queue/Adapter/DB/Message.php</newRelativeFilePath>
+      <newNamespace>Zend\Queue\Adapter\DB</newNamespace>
       <newClassName>Message</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Adapter\Db\Message</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Queue\Adapter\DB\Message</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Adapter/Db/Queue.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Adapter_Db_Queue</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Adapter/Db/Queue.php</newRelativeFilePath>
-      <newNamespace>Zend\Queue\Adapter\Db</newNamespace>
+      <newRelativeFilePath>Zend/Queue/Adapter/DB/Queue.php</newRelativeFilePath>
+      <newNamespace>Zend\Queue\Adapter\DB</newNamespace>
       <newClassName>Queue</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Adapter\Db\Queue</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Queue\Adapter\DB\Queue</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Adapter/Db.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Adapter_Db</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Adapter/Db/Db.php</newRelativeFilePath>
-      <newNamespace>Zend\Queue\Adapter\Db</newNamespace>
-      <newClassName>Db</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Adapter\Db\Db</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Queue/Adapter/DB/DB.php</newRelativeFilePath>
+      <newNamespace>Zend\Queue\Adapter\DB</newNamespace>
+      <newClassName>DB</newClassName>
+      <newFullyQualifiedName>Zend\Queue\Adapter\DB\DB</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Adapter/Memcacheq.php</originalRelativeFilePath>
@@ -10683,10 +10683,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Message/Iterator.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Message_Iterator</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Message/Iterator.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Queue/Message/MessageIterator.php</newRelativeFilePath>
       <newNamespace>Zend\Queue\Message</newNamespace>
-      <newClassName>Iterator</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Message\Iterator</newFullyQualifiedName>
+      <newClassName>MessageIterator</newClassName>
+      <newFullyQualifiedName>Zend\Queue\Message\MessageIterator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Message/PlatformJob.php</originalRelativeFilePath>

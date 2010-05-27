@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Queue\Stomp\Client;
+
+/**
  * The Stomp client interacts with a Stomp server.
  *
  * @category   Zend
@@ -29,13 +34,13 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Queue_Stomp_Client_ConnectionInterface
+interface ConnectionInterface
 {
     /**
      * @param  string  $scheme ['tcp', 'udp']
      * @param  string  host
      * @param  integer port
-     * @param  string  class - create a connection with this class; class must support Zend_Queue_Stomp_Client_Connection_Interface
+     * @param  string  class - create a connection with this class; class must support \Zend\Queue\Stomp\Client\ConnectionInterface
      * @return boolean
      */
     public function open($scheme, $host, $port);
@@ -50,7 +55,7 @@ interface Zend_Queue_Stomp_Client_ConnectionInterface
      * Check whether we are connected to the server
      *
      * @return true
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
     public function ping();
 
@@ -59,10 +64,10 @@ interface Zend_Queue_Stomp_Client_ConnectionInterface
      *
      * example: $response = $client->write($frame)->read();
      *
-     * @param  Zend_Queue_Stomp_FrameInterface $frame
+     * @param  \Zend\Queue\Stomp\FrameInterface $frame
      * @return $this
      */
-    public function write(Zend_Queue_Stomp_FrameInterface $frame);
+    public function write(\Zend\Queue\Stomp\FrameInterface $frame);
 
     /**
      * tests the socket to see if there is data for us
@@ -72,18 +77,18 @@ interface Zend_Queue_Stomp_Client_ConnectionInterface
     /**
      * reads in a frame from the socket or returns false.
      *
-     * @return Zend_Queue_Stomp_Frame|false
-     * @throws Zend_Queue_Exception
+     * @return \Zend\Queue\Stomp\Frame|false
+     * @throws \Zend\Queue\Exception
      */
     public function read();
 
     /**
      * Set the frame class to be used
      *
-     * This must be a Zend_Queue_Stomp_FrameInterface.
+     * This must be a \Zend\Queue\Stomp\FrameInterface.
      *
      * @param  string $class
-     * @return Zend_Queue_Stomp_Client_ConnectionInterface;
+     * @return \Zend\Queue\Stomp\Client\ConnectionInterface;
      */
     public function setFrameClass($class);
 
@@ -97,7 +102,7 @@ interface Zend_Queue_Stomp_Client_ConnectionInterface
     /**
      * create an empty frame
      *
-     * @return Zend_Queue_Stomp_FrameInterface class
+     * @return \Zend\Queue\Stomp\FrameInterface class
      */
     public function createFrame();
 }

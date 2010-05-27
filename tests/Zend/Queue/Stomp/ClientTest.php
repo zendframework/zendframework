@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Queue\Stomp;
+use Zend\Queue\Stomp\Client;
+
 /*
  * The adapter test class provides a universal test class for all of the
  * abstract methods.
@@ -27,14 +33,6 @@
  * All methods marked not supported are explictly checked for for throwing
  * an exception.
  */
-
-/** TestHelp.php */
-
-/** Zend_Queue_Stomp_Frame */
-
-/** Zend_Queue_Stomp_Client */
-
-/** Zend_Queue_Stomp_Client_Interface */
 
 /**
  * @category   Zend
@@ -44,8 +42,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
  */
-class Zend_Queue_Stomp_Connection_Mock
-    extends Zend_Queue_Stomp_Client_Connection
+class Mock extends Client\Connection
 {
     /**
      * open() opens a socket to the Stomp server
@@ -82,7 +79,7 @@ class Zend_Queue_Stomp_Connection_Mock
      * @param Zend_Queue_Stom_Frame $frame
      * @return $this
      */
-    public function write(Zend_Queue_Stomp_FrameInterface $frame)
+    public function write(\Zend\Queue\Stomp\FrameInterface $frame)
     {
         $this->_buffer[] = $frame;
     }
@@ -116,30 +113,30 @@ class Zend_Queue_Stomp_Connection_Mock
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
  */
-class Zend_Queue_Stomp_ClientTest extends PHPUnit_Framework_TestCase
+class ClientTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstruct()
     {
-        $client = new Zend_Queue_Stomp_Client('tcp', 'localhost', '11232', 'Zend_Queue_Stomp_Connection_Mock');
-        $this->assertTrue($client->getConnection() instanceof Zend_Queue_Stomp_Client_ConnectionInterface);
+        $client = new Client\Client('tcp', 'localhost', '11232', '\ZendTest\Queue\Stomp\Mock');
+        $this->assertTrue($client->getConnection() instanceof Client\ConnectionInterface);
     }
 
     public function testAddConnection()
     {
-        $client = new Zend_Queue_Stomp_Client();
-        $client->addConnection('tcp', 'localhost', '11232', 'Zend_Queue_Stomp_Connection_Mock');
-        $this->assertTrue($client->getConnection() instanceof Zend_Queue_Stomp_Client_ConnectionInterface);
+        $client = new Client\Client();
+        $client->addConnection('tcp', 'localhost', '11232', '\ZendTest\Queue\Stomp\Mock');
+        $this->assertTrue($client->getConnection() instanceof Client\ConnectionInterface);
 
-        $client = new Zend_Queue_Stomp_Client();
-        $this->assertFalse($client->addConnection('tcp', 'localhost', 0, 'Zend_Queue_Stomp_Connection_Mock'));
+        $client = new Client\Client();
+        $this->assertFalse($client->addConnection('tcp', 'localhost', 0, '\ZendTest\Queue\Stomp\Mock'));
     }
 
     public function testGetAndSetConnection()
     {
-        $connection = new Zend_Queue_Stomp_Connection_Mock('tcp', 'localhost', '11232');
+        $connection = new Mock('tcp', 'localhost', '11232');
 
-        $client = new Zend_Queue_Stomp_Client();
-        $this->assertTrue($client->setConnection($connection) instanceof Zend_Queue_Stomp_Client);
+        $client = new Client\Client();
+        $this->assertTrue($client->setConnection($connection) instanceof Client\Client);
 
         $try = $client->getConnection();
         $this->assertEquals($connection, $try);
@@ -147,13 +144,13 @@ class Zend_Queue_Stomp_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testSendAndReceive()
     {
-        $frame = new Zend_Queue_Stomp_Frame();
+        $frame = new \Zend\Queue\Stomp\Frame();
         $frame->setCommand('testing');
         $frame->setHeader('testing',1);
         $frame->setBody('hello world');
 
-        $client = new Zend_Queue_Stomp_Client();
-        $client->addConnection('tcp', 'localhost', '11232', 'Zend_Queue_Stomp_Connection_Mock');
+        $client = new Client\Client();
+        $client->addConnection('tcp', 'localhost', '11232', '\ZendTest\Queue\Stomp\Mock');
 
         $client->send($frame);
         $this->assertTrue($client->canRead());

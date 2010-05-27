@@ -21,17 +21,21 @@
  */
 
 /**
- * @uses       Countable
- * @uses       Iterator
- * @uses       Zend_Loader
- * @uses       Zend_Queue_Exception
+ * @namespace
+ */
+namespace Zend\Queue\Message;
+
+/**
+ * @uses       \Countable
+ * @uses       \Iterator
+ * @uses       \Zend\Queue\Exception
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Message
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Queue_Message_Iterator implements Iterator, Countable
+class MessageIterator implements \Iterator, \Countable
 {
     /**
      * The data for the queue message
@@ -42,7 +46,7 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
 
      /**
      * Connected is true if we have a reference to a live
-     * Zend_Queue_Adapter_AdapterInterface object.
+     * \Zend\Queue\Adapter\AdapterInterface object.
      * This is false after the Message has been deserialized.
      *
      * @var boolean
@@ -50,28 +54,28 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
     protected $_connected = true;
 
     /**
-     * Zend_Queue_Adapter_AdapterInterface parent class or instance
+     * \Zend\Queue\Adapter\AdapterInterface parent class or instance
      *
-     * @var Zend_Queue_Adapter_AdapterInterface
+     * @var \Zend\Queue\Adapter\AdapterInterface
      */
     protected $_queue = null;
 
     /**
-     * Name of the class of the Zend_Queue_Adapter_AdapterInterface object.
+     * Name of the class of the \Zend\Queue\Adapter\AdapterInterface object.
      *
      * @var string
      */
     protected $_queueClass = null;
 
     /**
-     * Zend_Queue_Message class name
+     * \Zend\Queue\Message\Message class name
      *
      * @var string
      */
-    protected $_messageClass = 'Zend_Queue_Message';
+    protected $_messageClass = '\Zend\Queue\Message\Message';
 
      /**
-     * Iterator pointer.
+     * MessageIterator pointer.
      *
      * @var integer
      */
@@ -97,14 +101,11 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
         }
 
         if (!is_array($options['data'])) {
-            throw new Zend_Queue_Exception('array optionsuration must have $options[\'data\'] = array');
+            throw new \Zend\Queue\Exception('array optionsuration must have $options[\'data\'] = array');
         }
 
-        // load the message class
+        // set the message class
         $classname = $this->_messageClass;
-        if (!class_exists($classname)) {
-            Zend_Loader::loadClass($classname);
-        }
 
         // for each of the messages
         foreach ($options['data'] as $data) {
@@ -163,7 +164,7 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
     /**
      * Returns the queue object, or null if this is disconnected message set
      *
-     * @return Zend_Queue|null
+     * @return \Zend\Queue\Queue|null
      */
     public function getQueue()
     {
@@ -174,11 +175,11 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
      * Set the queue object, to re-establish a live connection
      * to the queue for a Message that has been de-serialized.
      *
-     * @param  Zend_Queue_Adapter_AdapterInterface $queue
+     * @param  \Zend\Queue\Adapter\AdapterInterface $queue
      * @return boolean
-     * @throws Zend_Queue_Exception
+     * @throws \Zend\Queue\Exception
      */
-    public function setQueue(Zend_Queue $queue)
+    public function setQueue(\Zend\Queue\Queue $queue)
     {
         $this->_queue     = $queue;
         $this->_connected = false;
@@ -204,13 +205,13 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
     }
 
     /*
-     * Iterator implementation
+     * MessageIterator implementation
      */
 
     /**
-     * Rewind the Iterator to the first element.
+     * Rewind the MessageIterator to the first element.
      * Similar to the reset() function for arrays in PHP.
-     * Required by interface Iterator.
+     * Required by interface MessageIterator.
      *
      * @return void
      */
@@ -222,9 +223,9 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
     /**
      * Return the current element.
      * Similar to the current() function for arrays in PHP
-     * Required by interface Iterator.
+     * Required by interface MessageIterator.
      *
-     * @return Zend_Queue_Message current element from the collection
+     * @return \Zend\Queue\Message\Message current element from the collection
      */
     public function current()
     {
@@ -236,7 +237,7 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
     /**
      * Return the identifying key of the current element.
      * Similar to the key() function for arrays in PHP.
-     * Required by interface Iterator.
+     * Required by interface MessageIterator.
      *
      * @return integer
      */
@@ -248,7 +249,7 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
     /**
      * Move forward to next element.
      * Similar to the next() function for arrays in PHP.
-     * Required by interface Iterator.
+     * Required by interface MessageIterator.
      *
      * @return void
      */
@@ -260,7 +261,7 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
     /**
      * Check if there is a current element after calls to rewind() or next().
      * Used to check if we've iterated to the end of the collection.
-     * Required by interface Iterator.
+     * Required by interface MessageIterator.
      *
      * @return bool False if there's nothing more to iterate over
      */

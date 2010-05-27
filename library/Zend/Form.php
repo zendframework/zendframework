@@ -1396,20 +1396,22 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
         }
         $context = $data;
         foreach ($this->getElements() as $key => $element) {
-            $check = $data;
-            if (($belongsTo = $element->getBelongsTo()) !== $eBelongTo) {
-                $check = $this->_dissolveArrayValue($data, $belongsTo);
-            }
-            if (isset($check[$key])) {
-                if($element->isValid($check[$key], $context)) {
-                    $merge = array();
-                    if ($belongsTo !== $eBelongTo && '' !== (string)$belongsTo) {
-                        $key = $belongsTo . '[' . $key . ']';
-                    }
-                    $merge = $this->_attachToArray($element->getValue(), $key);
-                    $values = $this->_array_replace_recursive($values, $merge);
+            if (!$element->getIgnore()) {
+                $check = $data;
+                if (($belongsTo = $element->getBelongsTo()) !== $eBelongTo) {
+                    $check = $this->_dissolveArrayValue($data, $belongsTo);
                 }
-                $data = $this->_dissolveArrayUnsetKey($data, $belongsTo, $key);
+                if (isset($check[$key])) {
+                    if($element->isValid($check[$key], $context)) {
+                        $merge = array();
+                        if ($belongsTo !== $eBelongTo && '' !== (string)$belongsTo) {
+                            $key = $belongsTo . '[' . $key . ']';
+                        }
+                        $merge = $this->_attachToArray($element->getValue(), $key);
+                        $values = $this->_array_replace_recursive($values, $merge);
+                    }
+                    $data = $this->_dissolveArrayUnsetKey($data, $belongsTo, $key);
+                }
             }
         }
         foreach ($this->getSubForms() as $key => $form) {

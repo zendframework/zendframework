@@ -12,7 +12,7 @@
 
 namespace ZendTest\SignalSlot;
 use Zend\SignalSlot\GlobalSignals as SignalSlot,
-    Zend\SignalSlot\Slot;
+    Zend\Stdlib\SignalHandler;
 
 class GlobalSignalsTest extends \PHPUnit_Framework_TestCase
 {
@@ -34,16 +34,16 @@ class GlobalSignalsTest extends \PHPUnit_Framework_TestCase
         SignalSlot::setInstance();
     }
 
-    public function testConnectShouldReturnSlot()
+    public function testConnectShouldReturnSignalHandler()
     {
         $handle = SignalSlot::connect('test', $this, __METHOD__);
-        $this->assertTrue($handle instanceof Slot);
+        $this->assertTrue($handle instanceof SignalHandler);
     }
 
-    public function testConnectShouldAddSlotToSignal()
+    public function testConnectShouldAddSignalHandlerToSignal()
     {
         $handle = SignalSlot::connect('test', $this, __METHOD__);
-        $handles = SignalSlot::getSlots('test');
+        $handles = SignalSlot::getHandlers('test');
         $this->assertEquals(1, count($handles));
         $this->assertContains($handle, $handles);
     }
@@ -58,38 +58,38 @@ class GlobalSignalsTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('test', $signals);
     }
 
-    public function testDetachShouldRemoveSlotFromSignal()
+    public function testDetachShouldRemoveSignalHandlerFromSignal()
     {
         $handle = SignalSlot::connect('test', $this, __METHOD__);
-        $handles = SignalSlot::getSlots('test');
+        $handles = SignalSlot::getHandlers('test');
         $this->assertContains($handle, $handles);
         SignalSlot::detach($handle);
-        $handles = SignalSlot::getSlots('test');
+        $handles = SignalSlot::getHandlers('test');
         $this->assertNotContains($handle, $handles);
     }
 
     public function testDetachShouldReturnFalseIfSignalDoesNotExist()
     {
         $handle = SignalSlot::connect('test', $this, __METHOD__);
-        SignalSlot::clearSlots('test');
+        SignalSlot::clearHandlers('test');
         $this->assertFalse(SignalSlot::detach($handle));
     }
 
-    public function testDetachShouldReturnFalseIfSlotDoesNotExist()
+    public function testDetachShouldReturnFalseIfSignalHandlerDoesNotExist()
     {
         $handle1 = SignalSlot::connect('test', $this, __METHOD__);
-        SignalSlot::clearSlots('test');
+        SignalSlot::clearHandlers('test');
         $handle2 = SignalSlot::connect('test', $this, 'handleTestTopic');
         $this->assertFalse(SignalSlot::detach($handle1));
     }
 
-    public function testRetrievingAttachedSlotsShouldReturnEmptyArrayWhenSignalDoesNotExist()
+    public function testRetrievingAttachedSignalHandlersShouldReturnEmptyArrayWhenSignalDoesNotExist()
     {
-        $handles = SignalSlot::getSlots('test');
+        $handles = SignalSlot::getHandlers('test');
         $this->assertTrue(empty($handles));
     }
 
-    public function testEmitShouldEmitAttachedSlots()
+    public function testEmitShouldEmitAttachedHandlers()
     {
         $handle = SignalSlot::connect('test', $this, 'handleTestTopic');
         SignalSlot::emit('test', 'test message');

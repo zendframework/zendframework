@@ -23,6 +23,8 @@
  */
 namespace Zend\SignalSlot;
 
+use Zend\Stdlib\SignalHandler;
+
 /**
  * Static version of Signals
  *
@@ -116,10 +118,10 @@ class GlobalSignals implements StaticSignalSlot
     /**
      * Detach a slot from a signal 
      * 
-     * @param  Slot $handle 
+     * @param  SignalHandler $handle 
      * @return bool Returns true if signal and slot found, and unsubscribed; returns false if either signal or slot not found
      */
-    public static function detach(Slot $slot)
+    public static function detach(SignalHandler $slot)
     {
         $signals = self::getInstance();
         return $signals->detach($slot);
@@ -140,12 +142,12 @@ class GlobalSignals implements StaticSignalSlot
      * Retrieve all slots for a given signal
      * 
      * @param  string $signal 
-     * @return Slot[]
+     * @return SignalHandler[]
      */
-    public static function getSlots($signal)
+    public static function getHandlers($signal)
     {
         $signals = self::getInstance();
-        return $signals->getSlots($signal);
+        return $signals->getHandlers($signal);
     }
 
     /**
@@ -154,9 +156,9 @@ class GlobalSignals implements StaticSignalSlot
      * @param  string $signal 
      * @return void
      */
-    public static function clearSlots($signal)
+    public static function clearHandlers($signal)
     {
         $signals = self::getInstance();
-        return $signals->clearSlots($signal);
+        return $signals->clearHandlers($signal);
     }
 }

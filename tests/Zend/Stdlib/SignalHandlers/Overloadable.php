@@ -1,5 +1,5 @@
 <?php
-namespace ZendTest\SignalSlot\Slots;
+namespace ZendTest\Stdlib\SignalHandlers;
 
 class Overloadable
 {

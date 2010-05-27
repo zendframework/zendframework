@@ -1,24 +1,21 @@
 <?php
 /**
- * Phly - PHp LibrarY
- * 
- * @category   Phly
- * @package    Phly_PubSub
+ * @category   Zend
+ * @package    Zend_Stdlib
  * @subpackage Test
- * @copyright  Copyright (C) 2008 - Present, Matthew Weier O'Phinney
- * @author     Matthew Weier O'Phinney <mweierophinney@gmail.com> 
+ * @copyright  Copyright (c) 2010-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    New BSD {@link http://www.opensource.org/licenses/bsd-license.php}
  */
 
-namespace ZendTest\SignalSlot;
-use Zend\SignalSlot\FilterChain,
-    Zend\SignalSlot\Slot;
+namespace ZendTest\Stdlib;
+use Zend\Stdlib\FilterChain,
+    Zend\Stdlib\SignalHandler;
 
 /**
- * @category   Phly
- * @package    Phly_PubSub
+ * @category   Zend
+ * @package    Zend_Stdlib
  * @subpackage Test
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2010-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    New BSD {@link http://www.opensource.org/licenses/bsd-license.php}
  */
 class FilterChainTest extends \PHPUnit_Framework_TestCase
@@ -31,13 +28,13 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         $this->filterchain = new FilterChain;
     }
 
-    public function testSubscribeShouldReturnSlot()
+    public function testSubscribeShouldReturnSignalHandler()
     {
         $handle = $this->filterchain->connect($this, __METHOD__);
-        $this->assertTrue($handle instanceof Slot);
+        $this->assertTrue($handle instanceof SignalHandler);
     }
 
-    public function testSubscribeShouldAddSlotToSubscribers()
+    public function testSubscribeShouldAddSignalHandlerToSubscribers()
     {
         $handler  = $this->filterchain->connect($this, __METHOD__);
         $handlers = $this->filterchain->getFilters();
@@ -45,7 +42,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($handler, $handlers);
     }
 
-    public function testUnsubscribeShouldRemoveSlotFromSubscribers()
+    public function testUnsubscribeShouldRemoveSignalHandlerFromSubscribers()
     {
         $handle = $this->filterchain->connect($this, __METHOD__);
         $handles = $this->filterchain->getFilters();
@@ -55,7 +52,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         $this->assertNotContains($handle, $handles);
     }
 
-    public function testUnsubscribeShouldReturnFalseIfSlotDoesNotExist()
+    public function testUnsubscribeShouldReturnFalseIfSignalHandlerDoesNotExist()
     {
         $handle1 = $this->filterchain->connect($this, __METHOD__);
         $this->filterchain->clearFilters();
@@ -63,7 +60,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->filterchain->detach($handle1));
     }
 
-    public function testRetrievingSubscribedSlotsShouldReturnEmptyArrayWhenNoSubscribersExist()
+    public function testRetrievingSubscribedFiltersShouldReturnEmptyArrayWhenNoSubscribersExist()
     {
         $handles = $this->filterchain->getFilters();
         $this->assertTrue(empty($handles));

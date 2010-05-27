@@ -1,24 +1,21 @@
 <?php
 /**
- * Phly - PHp LibrarY
- * 
- * @category   Phly
- * @package    Phly_PubSub
+ * @category   Zend
+ * @package    Zend_SignalSlot
  * @subpackage Test
- * @copyright  Copyright (C) 2008 - Present, Matthew Weier O'Phinney
- * @author     Matthew Weier O'Phinney <mweierophinney@gmail.com> 
+ * @copyright  Copyright (c) 2010-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    New BSD {@link http://www.opensource.org/licenses/bsd-license.php}
  */
 
 namespace ZendTest\SignalSlot;
 use Zend\SignalSlot\Signals,
-    Zend\SignalSlot\Slot;
+    Zend\Stdlib\SignalHandler;
 
 /**
- * @category   Phly
- * @package    Phly_PubSub
+ * @category   Zend
+ * @package    Zend_SignalSlot
  * @subpackage Test
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2010-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    New BSD {@link http://www.opensource.org/licenses/bsd-license.php}
  */
 class SignalsTest extends \PHPUnit_Framework_TestCase
@@ -31,16 +28,16 @@ class SignalsTest extends \PHPUnit_Framework_TestCase
         $this->signals = new Signals;
     }
 
-    public function testConnectShouldReturnSlot()
+    public function testConnectShouldReturnSignalHandler()
     {
         $handle = $this->signals->connect('test', $this, __METHOD__);
-        $this->assertTrue($handle instanceof Slot);
+        $this->assertTrue($handle instanceof SignalHandler);
     }
 
-    public function testConnectShouldAddSlotToSignal()
+    public function testConnectShouldAddHandlerToSignal()
     {
         $handle = $this->signals->connect('test', $this, __METHOD__);
-        $handles = $this->signals->getSlots('test');
+        $handles = $this->signals->getHandlers('test');
         $this->assertEquals(1, count($handles));
         $this->assertContains($handle, $handles);
     }
@@ -55,45 +52,45 @@ class SignalsTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('test', $signals);
     }
 
-    public function testDetachShouldRemoveSlotFromSignal()
+    public function testDetachShouldRemoveHandlerFromSignal()
     {
         $handle = $this->signals->connect('test', $this, __METHOD__);
-        $handles = $this->signals->getSlots('test');
+        $handles = $this->signals->getHandlers('test');
         $this->assertContains($handle, $handles);
         $this->signals->detach($handle);
-        $handles = $this->signals->getSlots('test');
+        $handles = $this->signals->getHandlers('test');
         $this->assertNotContains($handle, $handles);
     }
 
     public function testDetachShouldReturnFalseIfSignalDoesNotExist()
     {
         $handle = $this->signals->connect('test', $this, __METHOD__);
-        $this->signals->clearSlots('test');
+        $this->signals->clearHandlers('test');
         $this->assertFalse($this->signals->detach($handle));
     }
 
-    public function testDetachShouldReturnFalseIfSlotDoesNotExist()
+    public function testDetachShouldReturnFalseIfHandlerDoesNotExist()
     {
         $handle1 = $this->signals->connect('test', $this, __METHOD__);
-        $this->signals->clearSlots('test');
+        $this->signals->clearHandlers('test');
         $handle2 = $this->signals->connect('test', $this, 'handleTestSignal');
         $this->assertFalse($this->signals->detach($handle1));
     }
 
-    public function testRetrievingConnectdSlotsShouldReturnEmptyArrayWhenSignalDoesNotExist()
+    public function testRetrievingConnectedHandlersShouldReturnEmptyArrayWhenSignalDoesNotExist()
     {
-        $handles = $this->signals->getSlots('test');
+        $handles = $this->signals->getHandlers('test');
         $this->assertTrue(empty($handles));
     }
 
-    public function testEmitShouldEmitConnectedSlots()
+    public function testEmitShouldEmitConnectedHandlers()
     {
         $handle = $this->signals->connect('test', $this, 'handleTestSignal');
         $this->signals->emit('test', 'test message');
         $this->assertEquals('test message', $this->message);
     }
 
-    public function testEmitShouldReturnTheReturnValueOfTheLastInvokedConnectr()
+    public function testEmitShouldReturnTheReturnValueOfTheLastInvokedHandler()
     {
         $this->signals->connect('string.transform', 'trim');
         $this->signals->connect('string.transform', 'str_rot13');

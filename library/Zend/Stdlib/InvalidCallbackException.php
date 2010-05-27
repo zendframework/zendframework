@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,15 +21,15 @@
 /**
  * @namespace
  */
-namespace Zend\SignalSlot;
+namespace Zend\Stdlib;
 
 /**
  * Invalid callback exception
  *
  * @uses       Exception
- * @uses       Zend\SignalSlot\Exception
+ * @uses       Zend\Stdlib\Exception
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

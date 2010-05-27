@@ -1,5 +1,6 @@
 <?php
-namespace ZendTest\SignalSlot\Slots;
+namespace ZendTest\Stdlib\SignalHandlers;
+
 class InstanceMethod
 {
     public function callable()

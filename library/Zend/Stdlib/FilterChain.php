@@ -13,22 +13,22 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_SignalSlot
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @package    Zend_Stdlib
+ * @copyright  Copyright (c) 2010-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
  * @namespace
  */
-namespace Zend\SignalSlot;
+namespace Zend\Stdlib;
 
 /**
  * FilterChain: subject/observer filter chain system
  *
- * @uses       Zend\Messenger\Filter
+ * @uses       Zend\Stdlib\Filter
  * @category   Zend
- * @package    Zend_Messenger
+ * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -78,7 +78,7 @@ class FilterChain implements Filter
         if (empty($context)) {
             throw new InvalidCallbackException('No callback provided');
         }
-        $filter = new Slot(null, $context, $handler);
+        $filter = new SignalHandler(null, $context, $handler);
         if ($index = array_search($filter, $this->_filters)) {
             return $this->_filters[$index];
         }
@@ -89,10 +89,10 @@ class FilterChain implements Filter
     /**
      * Unsubscribe a filter
      * 
-     * @param  Slot $filter 
+     * @param  SignalHandler $filter 
      * @return bool Returns true if filter found and unsubscribed; returns false otherwise
      */
-    public function detach(Slot $filter)
+    public function detach(SignalHandler $filter)
     {
         if (false === ($index = array_search($filter, $this->_filters))) {
             return false;
@@ -104,7 +104,7 @@ class FilterChain implements Filter
     /**
      * Retrieve all filters
      * 
-     * @return Slot[]
+     * @return SignalHandler[]
      */
     public function getFilters()
     {

@@ -23,6 +23,8 @@
  */
 namespace Zend\SignalSlot;
 
+use Zend\Stdlib\SignalHandler;
+
 /**
  * Signals: notification system
  *
@@ -103,14 +105,14 @@ class Signals implements SignalSlot
      * @param  string $signal 
      * @param  string|object $context Function name, class name, or object instance
      * @param  null|string $handler If $context is a class or object, the name of the method to call
-     * @return Slot (to allow later unsubscribe)
+     * @return SignalHandler (to allow later unsubscribe)
      */
     public function connect($signal, $context, $handler = null)
     {
         if (empty($this->_signals[$signal])) {
             $this->_signals[$signal] = array();
         }
-        $slot = new Slot($signal, $context, $handler);
+        $slot = new SignalHandler($signal, $context, $handler);
         if ($index = array_search($slot, $this->_signals[$signal])) {
             return $this->_signals[$signal][$index];
         }
@@ -121,10 +123,10 @@ class Signals implements SignalSlot
     /**
      * Unsubscribe a slot from a signal 
      * 
-     * @param  Slot $slot 
+     * @param  SignalHandler $slot 
      * @return bool Returns true if signal and handle found, and unsubscribed; returns false if either signal or handle not found
      */
-    public function detach(Slot $slot)
+    public function detach(SignalHandler $slot)
     {
         $signal = $slot->getSignal();
         if (empty($this->_signals[$signal])) {
@@ -151,9 +153,9 @@ class Signals implements SignalSlot
      * Retrieve all slots for a given signal
      * 
      * @param  string $signal 
-     * @return Slot[]
+     * @return SignalHandler[]
      */
-    public function getSlots($signal)
+    public function getHandlers($signal)
     {
         if (empty($this->_signals[$signal])) {
             return array();
@@ -167,7 +169,7 @@ class Signals implements SignalSlot
      * @param  string $signal 
      * @return void
      */
-    public function clearSlots($signal)
+    public function clearHandlers($signal)
     {
         if (!empty($this->_signals[$signal])) {
             unset($this->_signals[$signal]);

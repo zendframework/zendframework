@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,13 +21,13 @@
 /**
  * @namespace
  */
-namespace Zend\SignalSlot;
+namespace Zend\Stdlib;
 
 /**
  * Interface for filters
  *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -35,7 +35,7 @@ interface Filter
 {
     public function filter($value);
     public function connect($context, $handler = null);
-    public function detach(Slot $filter);
+    public function detach(SignalHandler $filter);
     public function getFilters();
     public function clearFilters();
 }

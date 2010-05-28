@@ -117,24 +117,7 @@ class SignalHandler
     public function call(array $args = array())
     {
         $callback = $this->getCallback();
-
-        // Following is a performance optimization hack. call_user_func() is up 
-        // to 6x faster than call_user_func_array(), and since signal handlers 
-        // will be called potentially dozens to hundreds of times in an 
-        // application, this optimization makes sense.
-        //
-        // We can potentially expand the number of case statements if we find 
-        // many instances where we're using more arguments.
-        switch (count($args)) {
-            case 1:
-                return call_user_func($callback, $args[0]);
-            case 2:
-                return call_user_func($callback, $args[0], $args[1]);
-            case 3:
-                return call_user_func($callback, $args[0], $args[1], $args[2]);
-            default:
-                return call_user_func_array($callback, $args);
-        }
+        return call_user_func_array($callback, $args);
     }
 
     /**

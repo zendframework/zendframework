@@ -19,10 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+
 /**
  * @see Zend_Rest_Client
  */
 require_once 'Zend/Rest/Client.php';
+
 /**
  * @see Zend_Rest_Client_Result
  */
@@ -49,41 +51,62 @@ class Zend_Service_Twitter extends Zend_Rest_Client
 
     /**
      * Whether or not authorization has been initialized for the current user.
+     *
      * @var bool
      */
     protected $_authInitialized = false;
+    
     /**
      * @var Zend_Http_CookieJar
      */
     protected $_cookieJar;
+    
     /**
      * Date format for 'since' strings
+     *
      * @var string
      */
     protected $_dateFormat = 'D, d M Y H:i:s T';
+    
     /**
      * Username
+     *
      * @var string
      */
     protected $_username;
+    
     /**
      * Password
+     *
      * @var string
      */
     protected $_password;
+    
     /**
      * Current method type (for method proxying)
+     *
      * @var string
      */
     protected $_methodType;
+    
     /**
      * Types of API methods
+     *
      * @var array
      */
-    protected $_methodTypes = array('status', 'user', 'directMessage', 'friendship', 'account', 'favorite', 'block');
+    protected $_methodTypes = array(
+        'status',
+        'user',
+        'directMessage',
+        'friendship',
+        'account',
+        'favorite',
+        'block'
+    );
 
     /**
      * Local HTTP Client cloned from statically set client
+     *
      * @var Zend_Http_Client
      */
     protected $_localHttpClient = null;
@@ -126,7 +149,13 @@ class Zend_Service_Twitter extends Zend_Rest_Client
         $this->_localHttpClient = $client;
         return $this;
     }
-
+    
+    /**
+     * Get the local HTTP client as distinct from the static HTPP client
+     * inherited from Zend_Rest_Client
+     *
+     * @return Zend_Http_Client
+     */
     public function getLocalHttpClient()
     {
         return $this->_localHttpClient;
@@ -183,13 +212,15 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      *
      * @param  string $type
      * @return Zend_Service_Twitter
-     * @throws Zend_Service_Twitter_Exception if method is not in method types list
+     * @throws Zend_Service_Twitter_Exception If method not in method types list
      */
     public function __get($type)
     {
         if (!in_array($type, $this->_methodTypes)) {
             include_once 'Zend/Service/Twitter/Exception.php';
-            throw new Zend_Service_Twitter_Exception('Invalid method type "' . $type . '"');
+            throw new Zend_Service_Twitter_Exception(
+                'Invalid method type "' . $type . '"'
+            );
         }
         $this->_methodType = $type;
         return $this;
@@ -207,12 +238,16 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     {
         if (empty($this->_methodType)) {
             include_once 'Zend/Service/Twitter/Exception.php';
-            throw new Zend_Service_Twitter_Exception('Invalid method "' . $method . '"');
+            throw new Zend_Service_Twitter_Exception(
+                'Invalid method "' . $method . '"'
+            );
         }
         $test = $this->_methodType . ucfirst($method);
         if (!method_exists($this, $test)) {
             include_once 'Zend/Service/Twitter/Exception.php';
-            throw new Zend_Service_Twitter_Exception('Invalid method "' . $test . '"');
+            throw new Zend_Service_Twitter_Exception(
+                'Invalid method "' . $test . '"'
+            );
         }
 
         return call_user_func_array(array($this, $test), $params);
@@ -403,16 +438,21 @@ class Zend_Service_Twitter extends Zend_Rest_Client
         $len = iconv_strlen(htmlspecialchars($status, ENT_QUOTES, 'UTF-8'), 'UTF-8');
         if ($len > self::STATUS_MAX_CHARACTERS) {
             include_once 'Zend/Service/Twitter/Exception.php';
-            throw new Zend_Service_Twitter_Exception('Status must be no more than ' . self::STATUS_MAX_CHARACTERS . ' characters in length');
+            throw new Zend_Service_Twitter_Exception(
+                'Status must be no more than '
+                . self::STATUS_MAX_CHARACTERS
+                . ' characters in length'
+            );
         } elseif (0 == $len) {
             include_once 'Zend/Service/Twitter/Exception.php';
-            throw new Zend_Service_Twitter_Exception('Status must contain at least one character');
+            throw new Zend_Service_Twitter_Exception(
+                'Status must contain at least one character'
+            );
         }
         $data = array('status' => $status);
         if (is_numeric($inReplyToStatusId) && !empty($inReplyToStatusId)) {
             $data['in_reply_to_status_id'] = $inReplyToStatusId;
         }
-        //$this->status = $status;
         $response = $this->_post($path, $data);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -620,9 +660,13 @@ class Zend_Service_Twitter extends Zend_Rest_Client
         $path = '/direct_messages/new.xml';
         $len = iconv_strlen($text, 'UTF-8');
         if (0 == $len) {
-            throw new Zend_Service_Twitter_Exception('Direct message must contain at least one character');
+            throw new Zend_Service_Twitter_Exception(
+                'Direct message must contain at least one character'
+            );
         } elseif (140 < $len) {
-            throw new Zend_Service_Twitter_Exception('Direct message must contain no more than 140 characters');
+            throw new Zend_Service_Twitter_Exception(
+                'Direct message must contain no more than 140 characters'
+            );
         }
         $data = array('user' => $user, 'text' => $text);
         $response = $this->_post($path, $data);
@@ -890,7 +934,10 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     {
         if (!preg_match('/^[a-zA-Z0-9_]{0,20}$/', $name)) {
             require_once 'Zend/Service/Twitter/Exception.php';
-            throw new Zend_Service_Twitter_Exception('Screen name, "' . $name . '" should only contain alphanumeric characters and' . ' underscores, and not exceed 15 characters.');
+            throw new Zend_Service_Twitter_Exception(
+                'Screen name, "' . $name
+                . '" should only contain alphanumeric characters and'
+                . ' underscores, and not exceed 15 characters.');
         }
         return $name;
     }
@@ -907,7 +954,9 @@ class Zend_Service_Twitter extends Zend_Rest_Client
         // Get the URI object and configure it
         if (!$this->_uri instanceof Zend_Uri_Http) {
             require_once 'Zend/Rest/Client/Exception.php';
-            throw new Zend_Rest_Client_Exception('URI object must be set before performing call');
+            throw new Zend_Rest_Client_Exception(
+                'URI object must be set before performing call'
+            );
         }
 
         $uri = $this->_uri->getUri();
@@ -919,8 +968,9 @@ class Zend_Service_Twitter extends Zend_Rest_Client
         $this->_uri->setPath($path);
 
         /**
-         * Get the HTTP client and configure it for the endpoint URI.  Do this each time
-         * because the Zend_Http_Client instance is shared among all Zend_Service_Abstract subclasses.
+         * Get the HTTP client and configure it for the endpoint URI.
+         * Do this each time because the Zend_Http_Client instance is shared
+         * among all Zend_Service_Abstract subclasses.
          */
         $this->_localHttpClient->resetParameters()->setUri($this->_uri);
     }

@@ -21,13 +21,13 @@
  */
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Service_TwitterTest::main');
+    define('PHPUnit_MAIN_METHOD', 'Zend_Service_Twitter_TwitterTest::main');
 }
 
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
+require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend_Service_Twitter */
 require_once 'Zend/Service/Twitter.php';
@@ -47,7 +47,7 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  * @group      Zend_Service
  * @group      Zend_Service_Twitter
  */
-class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Twitter_TwitterTest extends PHPUnit_Framework_TestCase
 {
 
     /**

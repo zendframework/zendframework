@@ -274,6 +274,23 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function testCustomFormErrors()
+    {
+        $this->setupForm();
+        $this->form->addDecorator($this->decorator)
+                   ->addError('form-badness');
+        $html = $this->form->render();
+        $this->assertContains('form-badness', $html);
+
+        $this->decorator->setOnlyCustomFormErrors(true);
+        $html = $this->form->render();
+        $this->assertNotRegexp('/form-errors.*?Master Foo/', $html);
+
+        $this->decorator->setShowCustomFormErrors(false);
+        $html = $this->form->render();
+        $this->assertNotContains('form-badness', $html);
+    }
+
     /**
      * @dataProvider markupOptionMethodsProvider
      */

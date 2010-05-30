@@ -518,8 +518,8 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function userShow($id)
     {
         $this->_init();
-        $path = '/1/users/show/' . $id . '.xml';
-        $response = $this->_get($path);
+        $path = '/1/users/show.xml';
+        $response = $this->_get($path, array('id'=>$id));
         return new Zend_Rest_Client_Result($response->getBody());
     }
 

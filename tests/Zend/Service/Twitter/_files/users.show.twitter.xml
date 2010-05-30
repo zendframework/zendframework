@@ -8,7 +8,7 @@
   <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
   <url>http://twitter.com</url>
   <protected>false</protected>
-  <followers_count>3227326</followers_count>
+  <followers_count>3229178</followers_count>
   <profile_background_color>ACDED6</profile_background_color>
   <profile_text_color>333333</profile_text_color>
   <profile_link_color>038543</profile_link_color>
@@ -21,10 +21,10 @@
   <time_zone>Pacific Time (US &amp; Canada)</time_zone>
   <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme18/bg.gif</profile_background_image_url>
   <profile_background_tile>false</profile_background_tile>
-  <notifications/>
+  <notifications>false</notifications>
   <geo_enabled>false</geo_enabled>
   <verified>true</verified>
-  <following/>
+  <following>true</following>
   <statuses_count>745</statuses_count>
   <lang>en</lang>
   <contributors_enabled>true</contributors_enabled>

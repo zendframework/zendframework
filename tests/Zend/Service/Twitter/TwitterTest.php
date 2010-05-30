@@ -47,7 +47,7 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  * @group      Zend_Service
  * @group      Zend_Service_Twitter
  */
-class Zend_Service_Twitter_TwitterTest2 extends PHPUnit_Framework_TestCase
+class Zend_Service_Twitter_TwitterTest extends PHPUnit_Framework_TestCase
 {
 
     /**

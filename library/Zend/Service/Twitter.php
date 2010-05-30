@@ -48,13 +48,6 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      * This should be reviewed in the future...
      */
     const STATUS_MAX_CHARACTERS = 246;
-
-    /**
-     * Whether or not authorization has been initialized for the current user.
-     *
-     * @var bool
-     */
-    protected $_authInitialized = false;
     
     /**
      * @var Zend_Http_CookieJar
@@ -74,13 +67,6 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      * @var string
      */
     protected $_username;
-    
-    /**
-     * Password
-     *
-     * @var string
-     */
-    protected $_password;
     
     /**
      * Current method type (for method proxying)
@@ -118,22 +104,19 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      * @param  string $password
      * @return void
      */
-    public function __construct($username = null, $password = null)
+    public function __construct($username = null)
     {
         $this->setLocalHttpClient(clone self::getHttpClient());
-        if (is_array($username) && is_null($password)) {
-            if (isset($username['username']) && isset($username['password'])) {
+        if (is_array($username)) {
+            if (isset($username['username'])) {
                 $this->setUsername($username['username']);
-                $this->setPassword($username['password']);
-            } elseif (isset($username[0]) && isset($username[1])) {
+            } elseif (isset($username[0])) {
                 $this->setUsername($username[0]);
-                $this->setPassword($username[1]);
             }
-        } else if (!is_null($username)) {
+        } elseif (!is_null($username)) {
             $this->setUsername($username);
-            $this->setPassword($password);
         }
-        $this->setUri('http://twitter.com');
+        $this->setUri('http://api.twitter.com');
         $this->_localHttpClient->setHeaders('Accept-Charset', 'ISO-8859-1,utf-8');
     }
 
@@ -180,29 +163,6 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function setUsername($value)
     {
         $this->_username = $value;
-        $this->_authInitialized = false;
-        return $this;
-    }
-
-    /**
-     * Retrieve password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->_password;
-    }
-
-    /**
-     * Set password
-     *
-     * @param  string $value
-     * @return Zend_Service_Twitter
-     */
-    public function setPassword($value)
-    {
-        $this->_password = $value;
         $this->_authInitialized = false;
         return $this;
     }
@@ -268,10 +228,6 @@ class Zend_Service_Twitter extends Zend_Rest_Client
         } else {
             $client->setCookieJar($this->_cookieJar);
         }
-        if (!$this->_authInitialized && $this->getUsername() !== null) {
-            $client->setAuth($this->getUsername(), $this->getPassword());
-            $this->_authInitialized = true;
-        }
     }
 
     /**
@@ -300,7 +256,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function statusPublicTimeline()
     {
         $this->_init();
-        $path = '/statuses/public_timeline.xml';
+        $path = '/1/statuses/public_timeline.xml';
         $response = $this->_get($path);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -321,7 +277,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function statusFriendsTimeline(array $params = array())
     {
         $this->_init();
-        $path = '/statuses/friends_timeline';
+        $path = '/1/statuses/friends_timeline';
         $_params = array();
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {
@@ -367,7 +323,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function statusUserTimeline(array $params = array())
     {
         $this->_init();
-        $path = '/statuses/user_timeline';
+        $path = '/1/statuses/user_timeline';
         $_params = array();
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {
@@ -417,7 +373,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function statusShow($id)
     {
         $this->_init();
-        $path = '/statuses/show/' . $this->_validInteger($id) . '.xml';
+        $path = '/1/statuses/show/' . $this->_validInteger($id) . '.xml';
         $response = $this->_get($path);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -434,7 +390,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function statusUpdate($status, $inReplyToStatusId = null)
     {
         $this->_init();
-        $path = '/statuses/update.xml';
+        $path = '/1/statuses/update.xml';
         $len = iconv_strlen(htmlspecialchars($status, ENT_QUOTES, 'UTF-8'), 'UTF-8');
         if ($len > self::STATUS_MAX_CHARACTERS) {
             include_once 'Zend/Service/Twitter/Exception.php';
@@ -470,7 +426,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function statusReplies(array $params = array())
     {
         $this->_init();
-        $path = '/statuses/replies.xml';
+        $path = '/1/statuses/replies.xml';
         $_params = array();
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {
@@ -498,7 +454,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function statusDestroy($id)
     {
         $this->_init();
-        $path = '/statuses/destroy/' . $this->_validInteger($id) . '.xml';
+        $path = '/1/statuses/destroy/' . $this->_validInteger($id) . '.xml';
         $response = $this->_post($path);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -513,7 +469,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function userFriends(array $params = array())
     {
         $this->_init();
-        $path = '/statuses/friends';
+        $path = '/1/statuses/friends';
         $_params = array();
 
         foreach ($params as $key => $value) {
@@ -544,24 +500,10 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function userFollowers($lite = false)
     {
         $this->_init();
-        $path = '/statuses/followers.xml';
+        $path = '/1/statuses/followers.xml';
         if ($lite) {
             $this->lite = 'true';
         }
-        $response = $this->_get($path);
-        return new Zend_Rest_Client_Result($response->getBody());
-    }
-
-    /**
-     * Get featured users
-     *
-     * @throws Zend_Http_Client_Exception if HTTP request fails or times out
-     * @return Zend_Rest_Client_Result
-     */
-    public function userFeatured()
-    {
-        $this->_init();
-        $path = '/statuses/featured.xml';
         $response = $this->_get($path);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -576,7 +518,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function userShow($id)
     {
         $this->_init();
-        $path = '/users/show/' . $id . '.xml';
+        $path = '/1/users/show/' . $id . '.xml';
         $response = $this->_get($path);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -595,7 +537,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function directMessageMessages(array $params = array())
     {
         $this->_init();
-        $path = '/direct_messages.xml';
+        $path = '/1/direct_messages.xml';
         $_params = array();
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {
@@ -627,7 +569,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function directMessageSent(array $params = array())
     {
         $this->_init();
-        $path = '/direct_messages/sent.xml';
+        $path = '/1/direct_messages/sent.xml';
         $_params = array();
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {
@@ -657,7 +599,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function directMessageNew($user, $text)
     {
         $this->_init();
-        $path = '/direct_messages/new.xml';
+        $path = '/1/direct_messages/new.xml';
         $len = iconv_strlen($text, 'UTF-8');
         if (0 == $len) {
             throw new Zend_Service_Twitter_Exception(
@@ -683,7 +625,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function directMessageDestroy($id)
     {
         $this->_init();
-        $path = '/direct_messages/destroy/' . $this->_validInteger($id) . '.xml';
+        $path = '/1/direct_messages/destroy/' . $this->_validInteger($id) . '.xml';
         $response = $this->_post($path);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -698,7 +640,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function friendshipCreate($id)
     {
         $this->_init();
-        $path = '/friendships/create/' . $id . '.xml';
+        $path = '/1/friendships/create/' . $id . '.xml';
         $response = $this->_post($path);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -713,7 +655,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function friendshipDestroy($id)
     {
         $this->_init();
-        $path = '/friendships/destroy/' . $id . '.xml';
+        $path = '/1/friendships/destroy/' . $id . '.xml';
         $response = $this->_post($path);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -728,7 +670,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function friendshipExists($id)
     {
         $this->_init();
-        $path = '/friendships/exists.xml';
+        $path = '/1/friendships/exists.xml';
         $data = array('user_a' => $this->getUsername(), 'user_b' => $id);
         $response = $this->_get($path, $data);
         return new Zend_Rest_Client_Result($response->getBody());
@@ -743,7 +685,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function accountVerifyCredentials()
     {
         $this->_init();
-        $response = $this->_get('/account/verify_credentials.xml');
+        $response = $this->_get('/1/account/verify_credentials.xml');
         return new Zend_Rest_Client_Result($response->getBody());
     }
 
@@ -756,7 +698,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function accountEndSession()
     {
         $this->_init();
-        $this->_get('/account/end_session');
+        $this->_get('/1/account/end_session');
         return true;
     }
 
@@ -769,7 +711,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function accountRateLimitStatus()
     {
         $this->_init();
-        $response = $this->_get('/account/rate_limit_status.xml');
+        $response = $this->_get('/1/account/rate_limit_status.xml');
         return new Zend_Rest_Client_Result($response->getBody());
     }
 
@@ -787,7 +729,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function favoriteFavorites(array $params = array())
     {
         $this->_init();
-        $path = '/favorites';
+        $path = '/1/favorites';
         $_params = array();
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {
@@ -816,7 +758,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function favoriteCreate($id)
     {
         $this->_init();
-        $path = '/favorites/create/' . $this->_validInteger($id) . '.xml';
+        $path = '/1/favorites/create/' . $this->_validInteger($id) . '.xml';
         $response = $this->_post($path);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -831,7 +773,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function favoriteDestroy($id)
     {
         $this->_init();
-        $path = '/favorites/destroy/' . $this->_validInteger($id) . '.xml';
+        $path = '/1/favorites/destroy/' . $this->_validInteger($id) . '.xml';
         $response = $this->_post($path);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -846,7 +788,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function blockCreate($id)
     {
         $this->_init();
-        $path = '/blocks/create/' . $id . '.xml';
+        $path = '/1/blocks/create/' . $id . '.xml';
         $response = $this->_post($path);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -860,7 +802,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function blockDestroy($id)
     {
         $this->_init();
-        $path = '/blocks/destroy/' . $id . '.xml';
+        $path = '/1/blocks/destroy/' . $id . '.xml';
         $response = $this->_post($path);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -875,7 +817,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function blockExists($id, $returnResult = false)
     {
         $this->_init();
-        $path = '/blocks/exists/' . $id . '.xml';
+        $path = '/1/blocks/exists/' . $id . '.xml';
         $response = $this->_get($path);
 
         $cr = new Zend_Rest_Client_Result($response->getBody());
@@ -900,7 +842,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function blockBlocking($page = 1, $returnUserIds = false)
     {
         $this->_init();
-        $path = '/blocks/blocking';
+        $path = '/1/blocks/blocking';
         if ($returnUserIds === true) {
             $path .= '/ids';
         }
@@ -972,7 +914,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
          * Do this each time because the Zend_Http_Client instance is shared
          * among all Zend_Service_Abstract subclasses.
          */
-        $this->_localHttpClient->resetParameters()->setUri($this->_uri);
+        $this->_localHttpClient->resetParameters()->setUri((string) $this->_uri);
     }
 
     /**
@@ -987,7 +929,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     {
         $this->_prepare($path);
         $this->_localHttpClient->setParameterGet($query);
-        return $this->_localHttpClient->request('GET');
+        return $this->_localHttpClient->request(Zend_Http_Client::GET);
     }
 
     /**
@@ -1001,7 +943,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     protected function _post($path, $data = null)
     {
         $this->_prepare($path);
-        return $this->_performPost('POST', $data);
+        return $this->_performPost(Zend_Http_Client::POST, $data);
     }
 
     /**

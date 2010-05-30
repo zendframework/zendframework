@@ -29,6 +29,9 @@ require_once 'Zend/Rest/Client.php';
  * @see Zend_Rest_Client_Result
  */
 require_once 'Zend/Rest/Client/Result.php';
+
+require_once 'Zend/Oauth/Consumer.php';
+
 /**
  * @category   Zend
  * @package    Zend_Service
@@ -48,6 +51,11 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      * This should be reviewed in the future...
      */
     const STATUS_MAX_CHARACTERS = 246;
+    
+    /**
+     * OAuth Endpoint
+     */
+    const OAUTH_BASE_URI = 'http://twitter.com/oauth';
     
     /**
      * @var Zend_Http_CookieJar
@@ -76,6 +84,13 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     protected $_methodType;
     
     /**
+     * Zend_Oauth Consumer
+     *
+     * @var Zend_Oauth_Consumer
+     */
+    protected $_oauthConsumer = null;
+    
+    /**
      * Types of API methods
      *
      * @var array
@@ -89,6 +104,13 @@ class Zend_Service_Twitter extends Zend_Rest_Client
         'favorite',
         'block'
     );
+    
+    /**
+     * Options passed to constructor
+     *
+     * @var array
+     */
+    protected $_options = array();
 
     /**
      * Local HTTP Client cloned from statically set client
@@ -100,24 +122,32 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     /**
      * Constructor
      *
-     * @param  string $username
-     * @param  string $password
+     * @param  array $options Optional options array
      * @return void
      */
-    public function __construct($username = null)
+    public function __construct(array $options = null, Zend_Oauth_Consumer $consumer = null)
     {
-        $this->setLocalHttpClient(clone self::getHttpClient());
-        if (is_array($username)) {
-            if (isset($username['username'])) {
-                $this->setUsername($username['username']);
-            } elseif (isset($username[0])) {
-                $this->setUsername($username[0]);
-            }
-        } elseif (!is_null($username)) {
-            $this->setUsername($username);
-        }
         $this->setUri('http://api.twitter.com');
-        $this->_localHttpClient->setHeaders('Accept-Charset', 'ISO-8859-1,utf-8');
+        if (!is_array($options)) $options = array();
+        $options['siteUrl'] = self::OAUTH_BASE_URI;
+        if ($options instanceof Zend_Config) {
+            $options = $options->toArray();
+        }
+        $this->_options = $options;
+        if (isset($options['username'])) {
+            $this->setUsername($options['username']);
+        }
+        if (isset($options['accessToken'])
+        && $options['accessToken'] instanceof Zend_Oauth_Token_Access) {
+            $this->setLocalHttpClient($options['accessToken']->getHttpClient($options));
+        } else {
+            $this->setLocalHttpClient(clone self::getHttpClient());
+            if (is_null($consumer)) {
+                $this->_oauthConsumer = new Zend_Oauth_Consumer($options);
+            } else {
+                $this->_oauthConsumer = $consumer;
+            }
+        }
     }
 
     /**
@@ -130,11 +160,12 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function setLocalHttpClient(Zend_Http_Client $client)
     {
         $this->_localHttpClient = $client;
+        $this->_localHttpClient->setHeaders('Accept-Charset', 'ISO-8859-1,utf-8');
         return $this;
     }
     
     /**
-     * Get the local HTTP client as distinct from the static HTPP client
+     * Get the local HTTP client as distinct from the static HTTP client
      * inherited from Zend_Rest_Client
      *
      * @return Zend_Http_Client
@@ -142,6 +173,19 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function getLocalHttpClient()
     {
         return $this->_localHttpClient;
+    }
+    
+    /**
+     * Checks for an authorised state
+     *
+     * @return bool
+     */
+    public function isAuthorised()
+    {
+        if ($this->getLocalHttpClient() instanceof Zend_Oauth_Client) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -196,6 +240,13 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      */
     public function __call($method, $params)
     {
+        if (method_exists($this->_oauthConsumer, $method)) {
+            $return = call_user_func_array(array($this->_oauthConsumer, $method), $params);
+            if ($return instanceof Zend_Oauth_Token_Access) {
+                $this->setLocalHttpClient($return->getHttpClient($this->_options));
+            }
+            return $return;
+        }
         if (empty($this->_methodType)) {
             include_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception(

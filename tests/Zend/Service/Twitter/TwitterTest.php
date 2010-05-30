@@ -106,6 +106,66 @@ class Zend_Service_Twitter_TwitterTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * OAuth tests
+     */
+    
+    public function testProvidingAccessTokenInOptionsSetsHttpClientFromAccessToken()
+    {
+        $token = $this->getMock('Zend_Oauth_Token_Access', array(), array(), '', false);
+        $client = $this->getMock('Zend_Oauth_Client', array(), array(), '', false);
+        $token->expects($this->once())->method('getHttpClient')
+            ->with(array('accessToken'=>$token, 'opt1'=>'val1', 'siteUrl'=>'http://twitter.com/oauth'))
+            ->will($this->returnValue($client));
+        $twitter = new Zend_Service_Twitter(array('accessToken'=>$token, 'opt1'=>'val1'));
+        $this->assertTrue($client === $twitter->getLocalHttpClient());
+    }
+    
+    public function testNotAuthorisedWithoutToken()
+    {
+        $twitter = new Zend_Service_Twitter;
+        $this->assertFalse($twitter->isAuthorised());
+    }
+    
+    public function testChecksAuthenticatedStateBasedOnAvailabilityOfAccessTokenBasedClient()
+    {
+        $token = $this->getMock('Zend_Oauth_Token_Access', array(), array(), '', false);
+        $client = $this->getMock('Zend_Oauth_Client', array(), array(), '', false);
+        $token->expects($this->once())->method('getHttpClient')
+            ->with(array('accessToken'=>$token, 'siteUrl'=>'http://twitter.com/oauth'))
+            ->will($this->returnValue($client));
+        $twitter = new Zend_Service_Twitter(array('accessToken'=>$token));
+        $this->assertTrue($twitter->isAuthorised());
+    }
+    
+    public function testRelaysMethodsToInternalOAuthInstance()
+    {
+        $oauth = $this->getMock('Zend_Oauth_Consumer', array(), array(), '', false);
+        $oauth->expects($this->once())->method('getRequestToken')->will($this->returnValue('foo'));
+        $oauth->expects($this->once())->method('getRedirectUrl')->will($this->returnValue('foo'));
+        $oauth->expects($this->once())->method('redirect')->will($this->returnValue('foo'));
+        $oauth->expects($this->once())->method('getAccessToken')->will($this->returnValue('foo'));
+        $oauth->expects($this->once())->method('getToken')->will($this->returnValue('foo'));
+        $twitter = new Zend_Service_Twitter(array('opt1'=>'val1'), $oauth);
+        $this->assertEquals('foo', $twitter->getRequestToken());
+        $this->assertEquals('foo', $twitter->getRedirectUrl());
+        $this->assertEquals('foo', $twitter->redirect());
+        $this->assertEquals('foo', $twitter->getAccessToken(array(), $this->getMock('Zend_Oauth_Token_Request')));
+        $this->assertEquals('foo', $twitter->getToken());
+    }
+    
+    public function testResetsHttpClientOnReceiptOfAccessTokenToOauthClient()
+    {
+        $oauth = $this->getMock('Zend_Oauth_Consumer', array(), array(), '', false);
+        $client = $this->getMock('Zend_Oauth_Client', array(), array(), '', false);
+        $token = $this->getMock('Zend_Oauth_Token_Access', array(), array(), '', false);
+        $token->expects($this->once())->method('getHttpClient')->will($this->returnValue($client));
+        $oauth->expects($this->once())->method('getAccessToken')->will($this->returnValue($token));
+        $twitter = new Zend_Service_Twitter(array(), $oauth);
+        $twitter->getAccessToken(array(), $this->getMock('Zend_Oauth_Token_Request'));
+        $this->assertTrue($client === $twitter->getLocalHttpClient());
+    }
+    
+    /**
      * @group ZF-8218
      */
     public function testUserNameNotRequired()
@@ -295,7 +355,7 @@ class Zend_Service_Twitter_TwitterTest extends PHPUnit_Framework_TestCase
      */
     public function testFriendshipExists()
     {
-        $twitter = new Zend_Service_Twitter('padraicb');
+        $twitter = new Zend_Service_Twitter(array('username'=>'padraicb'));
         $twitter->setLocalHttpClient($this->_stubTwitter(
             'friendships/exists.xml', Zend_Http_Client::GET, 'friendships.exists.twitter.xml',
             array('user_a'=>'padraicb', 'user_b'=>'twitter')
@@ -555,8 +615,8 @@ class Zend_Service_Twitter_TwitterTest extends PHPUnit_Framework_TestCase
      */
     public function testTwitterObjectsSoNotShareSameHttpClientToPreventConflictingAuthentication()
     {
-        $twitter1 = new Zend_Service_Twitter('zftestuser1');
-        $twitter2 = new Zend_Service_Twitter('zftestuser2');
+        $twitter1 = new Zend_Service_Twitter(array('username'=>'zftestuser1'));
+        $twitter2 = new Zend_Service_Twitter(array('username'=>'zftestuser2'));
         $this->assertFalse($twitter1->getLocalHttpClient() === $twitter2->getLocalHttpClient());
     }
     

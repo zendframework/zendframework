@@ -481,6 +481,18 @@ class Zend_Form_Element_FileTest extends PHPUnit_Framework_TestCase
     {
         $this->_errorOccurred = true;
     }
+
+
+    /**
+     * Prove the fluent interface on Zend_Form_Element_File::loadDefaultDecorators
+     *
+     * @link http://framework.zend.com/issues/browse/ZF-9913
+     * @return void
+     */
+    public function testFluentInterfaceOnLoadDefaultDecorators()
+    {
+        $this->assertSame($this->element, $this->element->loadDefaultDecorators());
+    }
 }
 
 class Zend_Form_Element_FileTest_MockAdapter extends Zend_File_Transfer_Adapter_Abstract

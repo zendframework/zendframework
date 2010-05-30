@@ -305,12 +305,12 @@ class Zend_Form_Element implements Zend_Validate_Interface
     /**
      * Load default decorators
      *
-     * @return void
+     * @return Zend_Form_Element
      */
     public function loadDefaultDecorators()
     {
         if ($this->loadDefaultDecoratorsIsDisabled()) {
-            return;
+            return $this;
         }
 
         $decorators = $this->getDecorators();
@@ -325,6 +325,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
                                                  'id'  => array('callback' => $getId)))
                  ->addDecorator('Label', array('tag' => 'dt'));
         }
+        return $this;
     }
 
     /**

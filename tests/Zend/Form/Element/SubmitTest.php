@@ -248,6 +248,17 @@ class Zend_Form_Element_SubmitTest extends PHPUnit_Framework_TestCase
             $this->markTestIncomplete('Error occurs for PHP 5.1.4 on Windows');
         }
     }
+    
+    /**
+     * Prove the fluent interface on Zend_Form_Element_Submit::loadDefaultDecorators
+     *
+     * @link http://framework.zend.com/issues/browse/ZF-9913
+     * @return void
+     */
+    public function testFluentInterfaceOnLoadDefaultDecorators()
+    {
+        $this->assertSame($this->element, $this->element->loadDefaultDecorators());
+    }
 }
 
 // Call Zend_Form_Element_SubmitTest::main() if this source file is executed directly.

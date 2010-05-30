@@ -50,10 +50,11 @@ class Zend_Form_Element_Radio extends Zend_Form_Element_Multi
     public function loadDefaultDecorators()
     {
         if ($this->loadDefaultDecoratorsIsDisabled()) {
-            return;
+            return $this;
         }
         parent::loadDefaultDecorators();
         $this->addDecorator('Label', array('tag' => 'dt',
                                            'disableFor' => true));
+        return $this;
     }
 }

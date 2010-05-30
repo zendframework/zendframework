@@ -31,6 +31,7 @@ require_once 'Zend/Form/DisplayGroupTest.php';
 require_once 'Zend/Form/ElementTest.php';
 require_once 'Zend/Form/Element/AllTests.php';
 require_once 'Zend/Form/FormTest.php';
+require_once 'Zend/Form/SubFormTest.php';
 
 /**
  * @category   Zend
@@ -56,6 +57,7 @@ class Zend_Form_AllTests
         $suite->addTestSuite('Zend_Form_ElementTest');
         $suite->addTest(Zend_Form_Element_AllTests::suite());
         $suite->addTestSuite('Zend_Form_FormTest');
+        $suite->addTestSuite('Zend_Form_SubFormTest');
 
         return $suite;
     }

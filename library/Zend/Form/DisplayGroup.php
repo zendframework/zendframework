@@ -620,7 +620,7 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
     public function loadDefaultDecorators()
     {
         if ($this->loadDefaultDecoratorsIsDisabled()) {
-            return;
+            return $this;
         }
 
         $decorators = $this->getDecorators();
@@ -630,6 +630,7 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
                  ->addDecorator('Fieldset')
                  ->addDecorator('DtDdWrapper');
         }
+        return $this;
     }
 
     /**

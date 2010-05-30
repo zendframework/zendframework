@@ -294,10 +294,9 @@ abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_
             return $value;
         } else {
             if (null !== ($translator = $this->getTranslator())) {
-                if ($translator->isTranslated($value)) {
-                    return $translator->translate($value);
-                }
+                return $translator->translate($value);
             }
+
             return $value;
         }
     }

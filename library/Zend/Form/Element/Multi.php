@@ -308,10 +308,9 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
             return $value;
         } else {
             if (null !== ($translator = $this->getTranslator())) {
-                if ($translator->isTranslated($value)) {
-                    return $translator->translate($value);
-                }
+                return $translator->translate($value);
             }
+
             return $value;
         }
     }

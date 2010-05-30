@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 22090 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headtitle">
     <title>HeadTitle Helfer</title>
@@ -14,13 +14,22 @@
     <para>
         Der <classname>HeadTitle</classname> Helfer ist eine konkrete Implementation des
         <link linkend="zend.view.helpers.initial.placeholder">Plaltzhalter Helfer</link>. Er
-        überschreibt die <methodname>toString()</methodname> Methode um die erstellung des
+        überschreibt die <methodname>toString()</methodname> Methode um die Erstellung des
         <emphasis>&lt;title&gt;</emphasis> Elements zu erzwingen, und fügt eine
         <methodname>headTitle()</methodname> Methode für das schnelle und einfache Einstellen und
         Ändern von Titel Elementen hinzu. Die Signatur dieser Methode ist
-        <methodname>headTitle($title, $setType = 'APPEND')</methodname>; standardmäßig, wird der
-        Wert dem Stack angefügt (Anhäufen von Title Segmenten), aber es kann auch 'PREPEND'
-        (Platzierung am Anfang des Stacks) oder 'SET' (Stack überschreiben) spezifiziert werden.
+        <methodname>headTitle($title, $setType = null)</methodname>; standardmäßig, wird der
+        Wert dem Stack angefügt (Anhäufen von Title Segmenten) wenn er auf null belassen wird, aber
+        es kann auch 'PREPEND' (Platzierung am Anfang des Stacks) oder 'SET' (Stack überschreiben)
+        spezifiziert werden.
+    </para>
+
+    <para>
+        Da das Setzen der weiteren (angehängten) Reihenfolge bei jedem Aufruf von
+        <methodname>headTitle</methodname> nervend sein kann, kann man eine standardmäßige
+        weitere Reihenfolge setzen indem <methodname>setDefaultAttachOrder()</methodname> aufgerufen
+        wird, welche bei allen Aufrufen von <methodname>headTitle()</methodname> angewendet wird
+        solange man nicht eine andere Reihenfolge explizit als zweiten Parameter übergibt.
     </para>
 
     <example id="zend.view.helpers.initial.headtitle.basicusage">

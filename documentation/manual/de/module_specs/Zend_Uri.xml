@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
+<!-- EN-Revision: 22081 -->
 <!-- Reviewed: 20115 -->
 <sect1 id="zend.uri.chapter">
     <title>Zend_Uri</title>
@@ -49,10 +49,10 @@ $uri = Zend_Uri::factory('http');
         <para>
             Um eine neue <acronym>URI</acronym> von Grund auf zu erstellen, übergibt man nur das
             Schema an <methodname>Zend_Uri::factory()</methodname><footnote><para>Zum Zeitpunkt des
-            Schreibens unterstützt <classname>Zend_Uri</classname> nur die Schemata
-            <acronym>HTTP</acronym> und <acronym>HTTPS</acronym></para></footnote>. Wenn eine nicht
-            unterstütztes Schema übergeben wird, wird eine <classname>Zend_Uri_Exception</classname>
-            ausgeworfen.
+            Schreibens bietet <classname>Zend_Uri</classname> nur eingebaute Unterstützung für die
+            Schemata <acronym>HTTP</acronym> und <acronym>HTTPS</acronym></para></footnote>. Wenn
+            ein nicht unterstütztes Schema übergeben, und keine Schema-spezifische Klasse angegeben
+            wird, dann wird eine <classname>Zend_Uri_Exception</classname> ausgeworfen.
         </para>
 
         <para>
@@ -60,6 +60,43 @@ $uri = Zend_Uri::factory('http');
             <methodname>Zend_Uri::factory()</methodname> eine Unterklasse von sich selbst zurück,
             die auf das zu erstellende Schema spezialisiert ist.
         </para>
+
+        <sect3>
+            <title>Erstellen neuer eigener URI Klassen</title>
+
+            <para>
+                Beginnend mit Zend Framework 1.10.5 kann man eine eigene Klasse spezifizieren
+                welche, wenn Sie als zweiter Parameter der Methode
+                <methodname>Zend_Uri::factory()</methodname> angegeben wird, verwendet wird wenn man
+                eine Zend_Uri Instanz erstellt. Das erlaubt es Zend_Uri zu erweitern und eigene URI
+                Klassen zu erstellen, und neue URI Objekte zu instanzieren basierend auf den eigenen
+                Klassen.
+            </para>
+
+            <para>
+                Der zweite Parameter welcher an <methodname>Zend_Uri::factory()</methodname>
+                übergeben wird muss ein String sein mit dem Namen der Klasse welche
+                <classname>Zend_Uri</classname> erweitert. Diese Klasse muss entweder bereits
+                geladen sein, oder geladen werden können indem
+                <methodname>Zend_Loader::loadClass()</methodname> verwendet wird - deshalb muss es
+                den Konventionen für Zend Framework Klassen und Dateien folgen und muss im
+                include_path sein.
+            </para>
+
+            <example id="zend.uri.creation.custom.example-1">
+                <title>Erstellen eine URI durch Verwendung einer eigenen Klasse</title>
+
+                <programlisting language="php"><![CDATA[
+// Erstellt eine neue 'ftp' URI basierend auf einer eigenen Klasse
+$ftpUri = Zend_Uri::factory(
+    'ftp://user@ftp.example.com/path/file',
+    'MyLibrary_Uri_Ftp'
+);
+
+// $ftpUri ist eine Instanz von MyLibrary_Uri_Ftp, welche eine Unterklasse von Zend_Uri ist
+]]></programlisting>
+            </example>
+        </sect3>
     </sect2>
 
     <sect2 id="zend.uri.manipulation">

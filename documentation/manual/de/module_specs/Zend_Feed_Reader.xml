@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 22104 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -701,6 +701,18 @@ $labels = $categories->getValues();
                             Wenn irgendeines der drei Felder abwesend ist, werden Sie entweder auf
                             die näheste vorhandene Alternative gesetzt, oder im Fall von "scheme",
                             auf <constant>NULL</constant> gesetzt.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>getImage()</methodname></entry>
+
+                        <entry>
+                            Gibt ein Array zurück welches Daten enthält die jedem Feed Bild oder
+                            Logo angehören oder NULL wenn kein Bild gefunden wurde. Das
+                            resultierende Array kann die folgenden Schlüssel enthalten: uri, link,
+                            title, description, height, und width. Nur Atom Logos enthalten eine
+                            URI so dass die anderen Metadaten nur von RSS Feeds angehören.
                         </entry>
                     </row>
                 </tbody>

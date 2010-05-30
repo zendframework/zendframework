@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21847 -->
+<!-- EN-Revision: 22104 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.writer">
     <title>Zend_Feed_Writer</title>
@@ -439,6 +439,20 @@ $out = $feed->export('atom');
                     </row>
 
                     <row>
+                        <entry><methodname>setImage()</methodname></entry>
+
+                        <entry>
+                            Akzeptiert ein Array an Metadaten für Bilder für ein RSS Bild oder ein
+                            Atom Logo. Atom 1.0 benötigt nur eine URI. RSS 2.0 benötigt eine URI,
+                            einen HTML Link, und einen Bildtitel. RSS 2.0 kann optional eine Breite,
+                            eine Höhe und eine Beschreibung des Bildes senden. Die Array Parameter
+                            können Sie enthalten indem die folgenden Schlüssel verwendet werden:
+                            uri, link, title, description, height und width. Der RSS 2.0 HTML Link
+                            sollte auf die HTML Quellseite des Feeds zeigen.
+                        </entry>
+                    </row>
+
+                    <row>
                         <entry><methodname>createEntry()</methodname></entry>
 
                         <entry>
@@ -508,7 +522,8 @@ $out = $feed->export('atom');
         <note>
             <para>
                 Zusätzlich zu diesen Settern gibt es passende Getter um Daten von den
-                Eintrags-Daten-Containern zu erhalten.
+                Eintrags-Daten-Containern zu erhalten. Zum Beispiel gibt es zu
+                <methodname>setImage()</methodname> eine passende
             </para>
         </note>
 

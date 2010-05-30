@@ -5653,6 +5653,18 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
         $result = $date2->toArray();
         $this->assertEquals(1970, $result['year']);
     }
+
+    /**
+     * @ZF-9891
+     */
+    public function testComparingDatesWithoutOption()
+    {
+        $date  = new Zend_Date(strtotime('Sat, 07 Mar 2009 08:03:50 +0000'));
+        $date2 = new Zend_Date();
+        $date2->set('Sat, 07 Mar 2009 08:03:50 +0000', Zend_Date::RFC_2822);
+
+        $this->assertTrue($date2->equals($date));
+    }
 }
 
 class Zend_Date_TestHelper extends Zend_Date

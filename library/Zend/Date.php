@@ -1136,7 +1136,7 @@ class Zend_Date extends Zend_Date_DateObject
      * @return integer  0 = equal, 1 = later, -1 = earlier
      * @throws Zend_Date_Exception
      */
-    public function compare($date, $part = null, $locale = null)
+    public function compare($date, $part = self::TIMESTAMP, $locale = null)
     {
         if (self::$_options['format_type'] == 'php') {
             $part = Zend_Locale_Format::convertPhpToIsoFormat($part);
@@ -2679,7 +2679,7 @@ class Zend_Date extends Zend_Date_DateObject
      * @return boolean
      * @throws Zend_Date_Exception
      */
-    public function equals($date, $part = null, $locale = null)
+    public function equals($date, $part = self::TIMESTAMP, $locale = null)
     {
         $result = $this->compare($date, $part, $locale);
 

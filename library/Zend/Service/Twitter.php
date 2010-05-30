@@ -426,7 +426,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function statusReplies(array $params = array())
     {
         $this->_init();
-        $path = '/1/statuses/replies.xml';
+        $path = '/1/statuses/mentions.xml';
         $_params = array();
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {

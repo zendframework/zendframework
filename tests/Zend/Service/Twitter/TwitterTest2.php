@@ -454,69 +454,99 @@ class Zend_Service_Twitter_TwitterTest2 extends PHPUnit_Framework_TestCase
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
     }
 
-    public function testUserShowByNameReturnsResults()
-    {$this->markTestIncomplete();
-        $response = $twitter->user->show('zftestuser1');
-        $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-
-        $this->assertEquals('zftestuser1', $response->toValue($response->screen_name));
-    }
-
+    /**
+     * TODO: Add verification for ALL optional parameters
+     */
     public function testStatusRepliesReturnsResults()
-    {$this->markTestIncomplete();
-        $response = $twitter->status->replies(array('page' => 1, 'since_id' => 10000, 'invalid_option' => 'doh'));
+    {
+        $twitter = new Zend_Service_Twitter;
+        $twitter->setLocalHttpClient($this->_stubTwitter(
+            'statuses/mentions.xml', Zend_Http_Client::GET, 'statuses.mentions.xml'
+        ));
+        $response = $twitter->status->replies();
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-
     }
 
-    public function testFriendshipDestory()
-    {$this->markTestIncomplete();
-        $response = $twitter->friendship->destroy('zftestuser1');
+    /**
+     * TODO: Add verification for ALL optional parameters
+     */
+    public function testFriendshipDestroy()
+    {
+        $twitter = new Zend_Service_Twitter;
+        $twitter->setLocalHttpClient($this->_stubTwitter(
+            'friendships/destroy/twitter.xml', Zend_Http_Client::POST, 'friendships.destroy.twitter.xml'
+        ));
+        $response = $twitter->friendship->destroy('twitter');
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-
     }
 
     public function testBlockingCreate()
-    {$this->markTestIncomplete();
-        $response = $twitter->block->create('zftestuser1');
+    {
+        $twitter = new Zend_Service_Twitter;
+        $twitter->setLocalHttpClient($this->_stubTwitter(
+            'blocks/create/twitter.xml', Zend_Http_Client::POST, 'blocks.create.twitter.xml'
+        ));
+        $response = $twitter->block->create('twitter');
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $this->assertEquals('zftestuser1', (string) $response->screen_name);
     }
 
     public function testBlockingExistsReturnsTrueWhenBlockExists()
-    {$this->markTestIncomplete();
-        $this->assertTrue($twitter->block->exists('zftestuser1'));
+    {
+        $twitter = new Zend_Service_Twitter;
+        $twitter->setLocalHttpClient($this->_stubTwitter(
+            'blocks/exists/twitter.xml', Zend_Http_Client::GET, 'blocks.exists.twitter.xml'
+        ));
+        $this->assertTrue($twitter->block->exists('twitter'));
     }
 
     public function testBlockingBlocked()
-    {$this->markTestIncomplete();
+    {
+        $twitter = new Zend_Service_Twitter;
+        $twitter->setLocalHttpClient($this->_stubTwitter(
+            'blocks/blocking.xml', Zend_Http_Client::GET, 'blocks.blocking.xml'
+        ));
         $response = $twitter->block->blocking();
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $this->assertEquals('zftestuser1', (string) $response->user->screen_name);
     }
 
     public function testBlockingBlockedReturnsIds()
-    {$this->markTestIncomplete();
+    {
+        $twitter = new Zend_Service_Twitter;
+        $twitter->setLocalHttpClient($this->_stubTwitter(
+            'blocks/blocking/ids.xml', Zend_Http_Client::GET, 'blocks.blocking.ids.xml',
+            array('page'=>1)
+        ));
         $response = $twitter->block->blocking(1, true);
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $this->assertEquals('16935247', (string) $response->id);
+        $this->assertEquals('23836616', (string) $response->id);
     }
 
     public function testBlockingDestroy()
-    {$this->markTestIncomplete();
-        $response = $twitter->block->destroy('zftestuser1');
+    {
+        $twitter = new Zend_Service_Twitter;
+        $twitter->setLocalHttpClient($this->_stubTwitter(
+            'blocks/destroy/twitter.xml', Zend_Http_Client::POST, 'blocks.destroy.twitter.xml'
+        ));
+        $response = $twitter->block->destroy('twitter');
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $this->assertEquals('zftestuser1', (string) $response->screen_name);
     }
 
     public function testBlockingExistsReturnsFalseWhenBlockDoesNotExists()
-    {$this->markTestIncomplete();
-        $this->assertFalse($twitter->block->exists('zftestuser1'));
+    {
+        $twitter = new Zend_Service_Twitter;
+        $twitter->setLocalHttpClient($this->_stubTwitter(
+            'blocks/exists/padraicb.xml', Zend_Http_Client::GET, 'blocks.exists.padraicb.xml'
+        ));
+        $this->assertFalse($twitter->block->exists('padraicb'));
     }
 
-    public function testBlockingExistsReturnsOjectWhenFlagPassed()
-    {$this->markTestIncomplete();
-        $response = $twitter->block->exists('zftestuser1', true);
+    public function testBlockingExistsReturnsObjectWhenFlagPassed()
+    {
+        $twitter = new Zend_Service_Twitter;
+        $twitter->setLocalHttpClient($this->_stubTwitter(
+            'blocks/exists/padraicb.xml', Zend_Http_Client::GET, 'blocks.exists.padraicb.xml'
+        ));
+        $response = $twitter->block->exists('padraicb', true);
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
     }
 
@@ -524,9 +554,9 @@ class Zend_Service_Twitter_TwitterTest2 extends PHPUnit_Framework_TestCase
      * @group ZF-6284
      */
     public function testTwitterObjectsSoNotShareSameHttpClientToPreventConflictingAuthentication()
-    {$this->markTestIncomplete();
-        $twitter1 = new Zend_Service_Twitter('zftestuser1', 'zftestuser1');
-        $twitter2 = new Zend_Service_Twitter('zftestuser2', 'zftestuser2');
+    {
+        $twitter1 = new Zend_Service_Twitter('zftestuser1');
+        $twitter2 = new Zend_Service_Twitter('zftestuser2');
         $this->assertFalse($twitter1->getLocalHttpClient() === $twitter2->getLocalHttpClient());
     }
     

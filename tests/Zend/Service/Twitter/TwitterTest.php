@@ -86,7 +86,7 @@ class Zend_Service_Twitter_TwitterTest extends PHPUnit_Framework_TestCase
      */
     protected function _stubTwitter($path, $method, $responseFile = null, array $params = null)
     {
-        $client = $this->getMock('Zend_Http_Client');
+        $client = $this->getMock('Zend_Oauth_Client', array(), array(), '', false);
         $client->expects($this->any())->method('resetParameters')
             ->will($this->returnValue($client));
         $client->expects($this->once())->method('setUri')
@@ -160,9 +160,19 @@ class Zend_Service_Twitter_TwitterTest extends PHPUnit_Framework_TestCase
         $token = $this->getMock('Zend_Oauth_Token_Access', array(), array(), '', false);
         $token->expects($this->once())->method('getHttpClient')->will($this->returnValue($client));
         $oauth->expects($this->once())->method('getAccessToken')->will($this->returnValue($token));
+        $client->expects($this->once())->method('setHeaders')->with('Accept-Charset', 'ISO-8859-1,utf-8');
         $twitter = new Zend_Service_Twitter(array(), $oauth);
         $twitter->getAccessToken(array(), $this->getMock('Zend_Oauth_Token_Request'));
         $this->assertTrue($client === $twitter->getLocalHttpClient());
+    }
+    
+    /**
+     * @expectedException Zend_Service_Twitter_Exception
+     */
+    public function testAuthorisationFailureWithUsernameAndNoAccessToken()
+    {
+        $twitter = new Zend_Service_Twitter(array('username'=>'me'));
+        $twitter->statusPublicTimeline();
     }
     
     /**

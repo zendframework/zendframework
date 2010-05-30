@@ -30,6 +30,9 @@ require_once 'Zend/Rest/Client.php';
  */
 require_once 'Zend/Rest/Client/Result.php';
 
+/**
+ * @see Zend_Oauth_Consumer
+ */
 require_once 'Zend/Oauth/Consumer.php';
 
 /**
@@ -207,7 +210,6 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function setUsername($value)
     {
         $this->_username = $value;
-        $this->_authInitialized = false;
         return $this;
     }
 
@@ -271,6 +273,15 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      */
     protected function _init()
     {
+        if (!$this->isAuthorised() && $this->getUsername() !== null) {
+            require_once 'Zend/Service/Twitter/Exception.php';
+            throw new Zend_Service_Twitter_Exception(
+                'Twitter session is unauthorised. You need to initialize '
+                . 'Zend_Service_Twitter with an OAuth Access Token or use '
+                . 'its OAuth functionality to obtain an Access Token before '
+                . 'attempting any API actions that require authorisation'
+            );
+        }
         $client = $this->_localHttpClient;
         $client->resetParameters();
         if (null == $this->_cookieJar) {

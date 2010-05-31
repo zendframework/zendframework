@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22104 -->
+<!-- EN-Revision: 22109 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -647,6 +647,16 @@ $labels = $categories->getValues();
                         <entry>
                             Gibt das Datum zurück zu dem der Feed das letzte mal geändert wurde. Das
                             zurückgegebene Datum ist ein <classname>Zend_Date</classname> Objekt.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>getLastBuildDate()</methodname></entry>
+
+                        <entry>
+                            Gibt das Datum zurück an dem der Feed das letzte Mal erstellt wurde. Das
+                            zurückgegebene Datum ist ein <classname>Zend_Date</classname> Objekt.
+                            Das wird nur von RSS unterstützt - Atom Feeds geben immer NULL zurück.
                         </entry>
                     </row>
 

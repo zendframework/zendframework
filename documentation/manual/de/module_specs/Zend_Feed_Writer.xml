@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22104 -->
+<!-- EN-Revision: 22109 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.writer">
     <title>Zend_Feed_Writer</title>
@@ -376,6 +376,18 @@ $out = $feed->export('atom');
                             Setzt das Datum zu dem dieser Feed das letzte Mal geändert wurde. Der
                             erwartete Parameter muss ein <acronym>UNIX</acronym> Timestamp oder ein
                             <classname>Zend_Date</classname> Objekt sein.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setLastBuildDate()</methodname></entry>
+
+                        <entry>
+                            Setzt das Datum an dem der Feed das letzte mal erstellt wurde. Der
+                            erwartete Parameter kann ein <acronym>UNIX</acronym> Timestamp oder ein
+                            <classname>Zend_Date</classname> Objekt sein. Das wird nur für RSS 2.0
+                            Feeds dargestellt und wird automatisch als aktuelles Datum dargestellt
+                            wenn er nicht explizit gesetzt wird.
                         </entry>
                     </row>
 

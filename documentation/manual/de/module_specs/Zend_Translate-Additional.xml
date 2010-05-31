@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21992 -->
-<!-- Reviewed: 21992 -->
+<!-- EN-Revision: 22141 -->
+<!-- Reviewed: 22141 -->
 <sect1 id="zend.translate.additional">
     <title>Zusätzliche Features für Übersetzungen</title>
 
@@ -16,7 +16,7 @@
             Optionen können bei allen Adaptern verwendet werden. Natürlich sind die Optionen für
             alle Adapter verschieden. Die Optionen können bei der Erstellung des Objekts gesetzt
             werden. Zur Zeit gibt es nur eine Option, die für alle Adaptoren verfügbar ist:
-            '<code>clear</code>' setzt, ob die neuen Übersetzungsdaten zu den bestehenden
+            '<emphasis>clear</emphasis>' setzt, ob die neuen Übersetzungsdaten zu den bestehenden
             hinzugefügt werden sollen oder ob sie diese überschreiben. Das Standardverhalten ist
             das Hinzufügen von neuen Übersetzungsdaten zu den Bestehenden. Aber das wird immer nur
             für die aktuelle Sprache gemacht. Andere Sprachen bleiben davon unberührt.
@@ -76,7 +76,7 @@ $translate->addTranslation(
                 <tbody>
                     <row>
                         <entry>adapter</entry>
-                        <entry>nur Zend_Translate</entry>
+                        <entry>nur <classname>Zend_Translate</classname></entry>
 
                         <entry>
                             Definiert den Adapter, der für die Übersetzung verwendet wird. Diese
@@ -139,13 +139,13 @@ $translate->addTranslation(
                         <entry>
                             Alle Verzeichnisse und Dateien, die mit diesem Präfix beginnen, werden
                             bei der Suche nach Dateien ignoriert. Der Standardwert ist
-                            <emphasis>'.'</emphasis> was zu dem Verhalten führt das
-                            alle versteckten Dateien ignoriert werden. Wenn dieser Wert auf
-                            <code>'tmp'</code> gesetzt wird, werden Verzeichnisse und
-                            Dateien wie z.B. <code>'tmpImages'</code> und <code>'tmpFiles'</code>,
-                            sowie alle darunter liegenden Verzeichnisse ignoriert. Diese Option
-                            akzeptiert auch ein Array, welches verwendet werden kann, wenn man mehr
-                            als einen Präfix ignorieren will.
+                            <emphasis>'.'</emphasis> was zu dem Verhalten führt das alle versteckten
+                            Dateien ignoriert werden. Wenn dieser Wert auf
+                            <emphasis>'tmp'</emphasis> gesetzt wird, werden Verzeichnisse und
+                            Dateien wie z.B. 'tmpImages' und 'tmpFiles', sowie alle darunter
+                            liegenden Verzeichnisse ignoriert. Diese Option akzeptiert auch ein
+                            Array, welches verwendet werden kann, wenn man mehr als einen Präfix
+                            ignorieren will.
                         </entry>
 
                         <entry><emphasis>.</emphasis></entry>
@@ -210,8 +210,9 @@ $translate->addTranslation(
                             <constant>Zend_Translate::LOCALE_DIRECTORY</constant> gesetzt wird,
                             wird das Gebietsschema im Verzeichnis gesucht. Wenn
                             <constant>Zend_Translate::LOCALE_FILENAME</constant> gesetzt wird,
-                            wird das Gebietsschema im Dateinamen gesucht. Siehe
-                            <xref linkend="zend.translate.additional.detection" /> für Details
+                            wird das Gebietsschema im Dateinamen gesucht. Siehe <link
+                                linkend="zend.translate.additional.detection">dieses Kapitel</link>
+                            für Details
                         </entry>
 
                         <entry><emphasis><constant>NULL</constant></emphasis></entry>
@@ -308,9 +309,9 @@ $translate->addTranslation(
             Methode <methodname>translate()</methodname> mehr als einmal gesetzt werden muss. Wenn
             die angegebene Sprache nicht existiert oder keine übersetzten Daten für diese Sprache
             vorhanden sind, versucht <methodname>setLocale()</methodname> auf die Sprache ohne
-            Region downzugraden, wenn diese angegeben wurde. Die Sprache <code>en_US</code> würde zum
-            Beispiel zu <code>en</code> downgegradet werden. Wenn sogar nach dem Downgraden die
-            Sprache nicht gefunden werden konnte, wird eine Ausnahme geworfen.
+            Region downzugraden, wenn diese angegeben wurde. Die Sprache <emphasis>en_US</emphasis>
+            würde zum Beispiel zu <emphasis>en</emphasis> downgegradet werden. Wenn sogar nach dem
+            Downgraden die Sprache nicht gefunden werden konnte, wird eine Ausnahme geworfen.
         </para>
 
         <para>
@@ -356,9 +357,10 @@ if ($translate->isAvailable("fr")) {
                 <methodname>addTranslation()</methodname> Methode hinzufügt,
                 <classname>Zend_Translate</classname> automatisch die am besten passende Sprache für
                 die eigene Umgebung auswählt, wenn man eine der automatischen Gebietsschemata
-                verwendet, die '<code>auto</code>' oder '<code>browser</code>' sein können. Man muss
-                normalerweise also <methodname>setLocale()</methodname> nicht aufrufen. Das sollte
-                nur in Verbindung mit der automatischen Erkennung von Quellen verwendet werden.
+                verwendet, die '<emphasis>auto</emphasis>' oder '<emphasis>browser</emphasis>' sein
+                können. Man muss normalerweise also <methodname>setLocale()</methodname> nicht
+                aufrufen. Das sollte nur in Verbindung mit der automatischen Erkennung von Quellen
+                verwendet werden.
             </para>
 
             <para>
@@ -572,11 +574,11 @@ $translate = new Zend_Translate(
         </note>
 
         <para>
-            In unserem Beispiel haben wir das TMX Format verwendet, welches die Sprache enthält die
-            innerhalb der Quelle verwendet wird. Aber viele der anderen Quellformate sind nicht
-            dazu fähig die Sprache in der Datei selbst zu inkludieren. Aber auch diese Quellen
-            können mit der automatischen Erkennung verwendet werden, wenn ein paar Dinge
-            berücksichtigt werden, welche nachfolgend beschrieben werden:
+            In unserem Beispiel haben wir das <acronym>TMX</acronym> Format verwendet, welches die
+            Sprache enthält die innerhalb der Quelle verwendet wird. Aber viele der anderen
+            Quellformate sind nicht dazu fähig die Sprache in der Datei selbst zu inkludieren. Aber
+            auch diese Quellen können mit der automatischen Erkennung verwendet werden, wenn ein
+            paar Dinge berücksichtigt werden, welche nachfolgend beschrieben werden:
         </para>
 
         <sect3 id="zend.translate.additional.detection.directory">
@@ -590,9 +592,9 @@ $translate = new Zend_Translate(
             </para>
 
             <para>
-                <classname>Zend_Translate</classname> benötigt die '<code>scan</code>' Option um zu
-                wissen, dass es die Namen aller Verzeichnisse nach Sprachen durchsuchen soll. Siehe
-                das folgende Beispiel für Details:
+                <classname>Zend_Translate</classname> benötigt die '<property>scan</property>'
+                Option um zu wissen, dass es die Namen aller Verzeichnisse nach Sprachen durchsuchen
+                soll. Siehe das folgende Beispiel für Details:
             </para>
 
             <example id="zend.translate.additional.detection.directory.example">
@@ -619,9 +621,9 @@ $translate = new Zend_Translate(
             <note>
                 <para>
                     Das funktioniert nur für Adapter, welche die Sprache nicht in der Quelldatei
-                    enthalten. Die Verwendung dieser Option wird zum Beispiel mit TMX ignoriert.
-                    Sprachdefinitionen im Dateinamen werden bei der Verwendung dieser Option
-                    ignoriert.
+                    enthalten. Die Verwendung dieser Option wird zum Beispiel mit
+                    <acronym>TMX</acronym> ignoriert. Sprachdefinitionen im Dateinamen werden bei
+                    der Verwendung dieser Option ignoriert.
                 </para>
             </note>
 
@@ -629,11 +631,11 @@ $translate = new Zend_Translate(
                 <para>
                     Man sollte aufpassen, wenn man verschiedene Unterverzeichnisse in der gleichen
                     Struktur hat. Angenommen wir haben eine Struktur wie
-                    <code>/language/module/de/en/file.mo</code>. In diesem Fall enthält der Pfad
-                    mehrere Strings die als Gebietsschema erkannt werden würden. Das könnte
-                    entweder <code>de</code> oder <code>en</code> sein. In solch einem Fall ist das
-                    Verhalten nicht definiert und es wird empfohlen die Dateierkennung zu
-                    verwenden.
+                    <filename>/language/module/de/en/file.mo</filename>. In diesem Fall enthält der
+                    Pfad mehrere Strings die als Gebietsschema erkannt werden würden. Das könnte
+                    entweder <emphasis>de</emphasis> oder <emphasis>en</emphasis> sein. In solch
+                    einem Fall ist das Verhalten nicht definiert und es wird empfohlen die
+                    Dateierkennung zu verwenden.
                 </para>
             </note>
         </sect3>
@@ -645,8 +647,9 @@ $translate = new Zend_Translate(
                 Ein anderer Weg um die Sprache automatisch zu erkennen ist die Verwendung von
                 speziellen Dateinamen. Man kann entweder die komplette Datei oder Teile der
                 Datei nach der verwendeten Sprache benennen. Um diese Option zu Verwenden muss die
-                '<code>scan</code>' Option beim Initiieren gesetzt werden. Es gibt verschiedene
-                Wege die Quelldateien zu benennen, welche im folgenden beschrieben werden:
+                '<property>scan</property>' Option beim Initiieren gesetzt werden. Es gibt
+                verschiedene Wege die Quelldateien zu benennen, welche im folgenden beschrieben
+                werden:
             </para>
 
             <example id="zend.translate.additional.detection.filename.example">
@@ -678,7 +681,7 @@ $translate = new Zend_Translate(
                     nur praktikabel, wenn man nur eine Datei pro Verzeichnis verwendet.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/en.mo
 /languages/de.mo
@@ -695,7 +698,7 @@ $translate = new Zend_Translate(
                     welche Erweiterung die Datei ursprünglich hatte.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/view.en
 /languages/view.de
@@ -714,7 +717,7 @@ $translate = new Zend_Translate(
                     Bindestrich '-'.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/view_en.mo -> erkennt englisch
 /languages/view_de.mo -> erkennt deutsch
@@ -727,7 +730,7 @@ $translate = new Zend_Translate(
                     Beispiel für Details.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/view_en_de.mo -> erkennt englisch
 /languages/view_en_es.mo -> erkennt englisch und überschreibt die erste Datei
@@ -741,7 +744,7 @@ $translate = new Zend_Translate(
                     Siehe das folgende Beispiel für Details.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/view_en-it.mo -> erkennt englisch weil '_' vor '-' verwendet wird
 /languages/view-en_it.mo -> erkennt italienisch weil '_' vor '-' verwendet wird
@@ -764,9 +767,9 @@ $translate = new Zend_Translate(
 
                 <para>
                     Standardmäßig ist <classname>Zend_Translate</classname> so gesetzt, dass alle
-                    Dateien und Verzeichnisse, welche mit <emphasis>'/.'</emphasis> beginnen
-                    ignoriert werden. Dies bedeutet, dass <acronym>SVN</acronym>-Dateien ignoriert
-                    werden.
+                    Dateien und Verzeichnisse, welche mit
+                    <emphasis>'<filename>/.</filename>'</emphasis> beginnen ignoriert werden. Dies
+                    bedeutet, dass <acronym>SVN</acronym>-Dateien ignoriert werden.
                 </para>
 
                 <para>
@@ -775,7 +778,7 @@ $translate = new Zend_Translate(
                     automatisch angehängt, wenn er nicht angegeben wurde.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 $translate = new Zend_Translate(
     array(
         'adapter' => $adapter,
@@ -800,7 +803,7 @@ $translate = new Zend_Translate(
 
                     <para>
                         Wenn man diese Option setzt, dann wird das standardmäßige
-                        <emphasis>'/.'</emphasis> gelöscht. Dies bedeutet, dass
+                        <emphasis>'<filename>/.</filename>'</emphasis> gelöscht. Dies bedeutet, dass
                         <classname>Zend_Translate</classname> dann alle Dateien von den versteckten
                         <acronym>SVN</acronym>-Verzeichnissen hinzugefügt werden. Wenn man mit
                         <acronym>SVN</acronym> arbeitet, dann sollte man die Array-Syntax verwenden,
@@ -818,7 +821,7 @@ $translate = new Zend_Translate(
                     ignoriert werden sollen.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 $translate = new Zend_Translate(
     array(
         'adapter' => $adapter,
@@ -850,7 +853,7 @@ $translate = new Zend_Translate(
                     <property>ignore</property> mit <emphasis>regex</emphasis> beginnen.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 $options = array(
     'ignore' => array(
         'regex' => '/test/u',
@@ -894,7 +897,7 @@ $translate = new Zend_Translate(
             verwenden. Siehe das folgende Beispiel:
         </para>
 
-        <programlisting><![CDATA[
+        <programlisting language="txt"><![CDATA[
 $translate = new Zend_Translate(
     array(
         'adapter' => 'gettext',
@@ -937,7 +940,7 @@ $translate->addTranslation(array('content' => $translate_second));
             Deshalb kann man auch nur eine Sprache vom zweiten Adapter hinzufügen.
         </para>
 
-        <programlisting><![CDATA[
+        <programlisting language="txt"><![CDATA[
 $translate->addTranslation(
     array(
         'content' => $translate_second,
@@ -1050,7 +1053,7 @@ $translate->translate('unbekannter String');
 
         <para>
             Jetzt steht im Log eine neue Notiz:
-            <code>Untranslated message within 'de': unbekannter String</code>.
+            <emphasis>Untranslated message within 'de': unbekannter String</emphasis>.
         </para>
 
         <note>
@@ -1072,10 +1075,10 @@ $translate->translate('unbekannter String');
 
         <para>
             Wenn man seine eigene Logmeldung haben will, kann man auch die Option
-            '<code>logMessage</code>' setzen. Das '<code>%message%</code>' Token ist für die
-            Platzierung der messageId in der eigenen Logmeldung zu verwenden und das
-            '<code>%locale%</code>' Token für das angefragte Gebietsschema. Siehe das folgende
-            Beispiel für ein Beispiel einer selbst definierten Logmeldung:
+            '<property>logMessage</property>' setzen. Das '<emphasis>%message%</emphasis>' Token ist
+            für die Platzierung der messageId in der eigenen Logmeldung zu verwenden und das
+            '<emphasis>%locale%</emphasis>' Token für das angefragte Gebietsschema. Siehe das
+            folgende Beispiel für ein Beispiel einer selbst definierten Logmeldung:
         </para>
 
         <example id="zend.translate.additional.logging.example2">
@@ -1119,6 +1122,11 @@ $translate->translate('unknown string');
         <para>
             Die <methodname>getMessageIds($locale = null)</methodname> Methode gibt alle bekannten
             Ids für Übersetzungen als Array zurück.
+        </para>
+
+        <para>
+            Wenn man die Message ID für eine angegebene Übersetzung wissen will, dann kan man die
+            Methode <methodname>getMessageId()</methodname> verwenden.
         </para>
 
         <para>

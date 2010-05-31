@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21988 -->
+<!-- EN-Revision: 22140 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.cachemanager">
     <title>Zend_Application_Resource_Cachemanager</title>
@@ -42,13 +42,29 @@ resources.cachemanager.database.frontendBackendAutoload = false
 
         <para>
             Das Empfangen dieses Caches vom Cache Manager ist in Wirklichkeit so einfach wie
-            der Zugriff auf eine Instanz des Managers und dem Aufruf von
-            <command>$cacheManager->getCache('database');</command>.
+            der Zugriff auf eine Instanz des Managers (<classname>Zend_Cache_Manager</classname>)
+            was von <classname>Zend_Application_Resource_Cachemanager</classname> empfangen wird
+            beim Aufruf von <command>$cacheManager->getCache('database');</command>. Das folgende
+            Beispiel ist von einem Controller genommen bei dem auf die Bootstrap Klasse als Front
+            Controller Parameter zugegriffen werden kann (welcher automatisch wärend des
+            bootstrappens zugeordnet wird). Wie man sehen kann implementiert die Cache Manager
+            Ressource eine <methodname>getCacheManager()</methodname> Methode um die ge-bootstrappte
+            Instanz von <classname>Zend_Cache_Manager</classname> zu erhalten.
         </para>
 
+        <programlisting language="php"><![CDATA[
+$manager = $this->getFrontController()
+            ->getParam('bootstrap')
+            ->getResource('cachemanager')
+            ->getCacheManager();
+$dbCache = $manager->getCache('database');
+]]></programlisting>
+
         <para>
-            Siehe auch die Methode <methodname>Zend_Cache::factory()</methodname> um die
-            Beschreibung der Standardwerte zu erhalten.
+            Siehe auch die Methode <methodname>Zend_Cache::factory()</methodname> um eine
+            Beschreibung der Standardwerte zu bekommen welche man zuordnen kann wenn ein Cache
+            über eine Konfigurationsdatei konfiguriert wurde wie im obigen Beispiel einer
+            <acronym>INI</acronym> Datei.
         </para>
     </example>
 </sect2>

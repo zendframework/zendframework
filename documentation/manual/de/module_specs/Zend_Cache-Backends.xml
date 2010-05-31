@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22060 -->
+<!-- EN-Revision: 22140 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.backends">
     <title>Zend_Cache Backends</title>
@@ -589,8 +589,8 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
                 <classname>Zend_Cache_Frontend_Capture</classname> arbeitet indem es eine Callback
                 Funktion registriert welche aufgerufen wird wenn der Ausgabebuffer den es verwendet
                 gelöscht wird. Damit das richtig funktioniert muss er der letzte Ausgabebuffer in
-                der Anfrage sein. Um dies zu garantieren MUSS der Ausgabebuffer welcher vom
-                Dispacher verwendet wird ausgeschaltet sein indem
+                der Anfrage sein. Um dies zu garantieren <emphasis>muss</emphasis> der Ausgabebuffer
+                welcher vom Dispacher verwendet wird ausgeschaltet sein indem
                 <classname>Zend_Controller_Front</classname>'s Methode
                 <methodname>setParam()</methodname> verwendet wird, zum Beispiel
                 <command>$front->setParam('disableOutputBuffering', true);</command> oder indem

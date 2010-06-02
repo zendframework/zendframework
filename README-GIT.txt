@@ -46,3 +46,15 @@ need to do the following:
    the "-s" or "--signoff" switch to "git commit". The ZF pre-receive hook
    rejects any commits from non-CLA'd authors unless there is a sign-off message
    in the commit.
+
+FEEDS AND EMAILS
+================
+RSS feeds may be found at:
+
+    http://git.zendframework.com/feeds/<branch>.xml
+
+where <branch> is a branch in the repository.
+
+To subscribe to git email notifications, send an email to:
+
+    zf-git-subscribe@lists.zend.com

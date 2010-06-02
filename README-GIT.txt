@@ -58,3 +58,5 @@ where <branch> is a branch in the repository.
 To subscribe to git email notifications, send an email to:
 
     zf-git-subscribe@lists.zend.com
+
+You will need to reply to the verification email sent to you by this list.

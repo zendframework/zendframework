@@ -42,7 +42,7 @@ list.
 
 Should you wish to filter emails from the list, they will use the
 "subject" line of commit messages, preceded by "[branch] ", and come
-from "zf-git@lists.zend.com"
+from "zf-git@lists.zend.com".
 
 CONTRIBUTORS AND COMMITTERS
 ===========================

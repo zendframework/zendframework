@@ -1,3 +1,5 @@
+test
+
 CLONING THE REPOSITORY
 ======================
 Anonymous cloning may be done from:

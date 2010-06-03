@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 22146 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.ip">
     <title>Ip</title>
@@ -54,9 +54,10 @@ if ($validator->isValid($ip)) {
 
             <para>
                 Es ist zu beachten das <classname>Zend_Validate_Ip</classname> nur IP Adressen
-                prüft. Adressen wie 'mydomain.com' oder '192.168.50.1/index.html' sind keine
-                gültigen IP Adressen. Sie sind entweder Hostnamen oder gültige
-                <acronym>URL</acronym>s, aber keine IP Adressen.
+                prüft. Adressen wie '<filename>mydomain.com</filename>' oder
+                '<filename>192.168.50.1/index.html</filename>' sind keine gültigen IP Adressen. Sie
+                sind entweder Hostnamen oder gültige <acronym>URL</acronym>s, aber keine IP
+                Adressen.
             </para>
         </note>
 
@@ -65,8 +66,9 @@ if ($validator->isValid($ip)) {
 
             <para>
                 <classname>Zend_Validate_Ip</classname> prüft IPv6 Adressen mit einer Regex. Der
-                Grund ist, dass die Filter und Methoden von <acronym>PHP</acronym> der RFC nicht
-                folgen. Viele andere vorhandene Klassen folgen Ihr auch nicht.
+                Grund ist, dass die Filter und Methoden von <acronym>PHP</acronym> der
+                <acronym>RFC</acronym> nicht folgen. Viele andere vorhandene Klassen folgen Ihr auch
+                nicht.
             </para>
         </note>
     </sect3>

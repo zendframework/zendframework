@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21905 -->
+<!-- EN-Revision: 22147 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.forms">
     <title>Erstellen von Form durch Verwendung von Zend_Form</title>
@@ -2019,7 +2019,7 @@ class My_Form_Login extends Zend_Form
 
         $password = new Zend_Form_Element_Password('password');
         $password->class = 'formtext';
-        $password->setLabel('Benutzername:')
+        $password->setLabel('Passwort:')
                  ->setDecorators(array(
                      array('ViewHelper',
                            array('helper' => 'formPassword')),

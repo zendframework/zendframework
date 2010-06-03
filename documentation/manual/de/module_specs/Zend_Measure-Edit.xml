@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 22159 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.edit">
     <title>Manipulation von Maßeinheiten</title>
@@ -92,12 +92,10 @@ print "Tonne:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
 
         <para>
             Maßeinheiten können miteinander durch <methodname>add()</methodname> addiert und durch
-            <methodname>sub()</methodname> subtrahiert werden. Jede Addition erzeugt als Ergebnis
-            ein neues Objekt. Das aktuelle Objekt wird durch die Klasse nicht verändert. Das neue
-            Objekt ist vom selben Typ die das originale Objekt. Dynamische Objekte unterstützen
-            einen flüssigen Programmierstil, bei dem komplexe Sequenzen von Operationen geschachtelt
-            werden können ohne das Risiko eines Nebeneffekts durch die Veränderung des Eingabe
-            Objektes.
+            <methodname>sub()</methodname> subtrahiert werden. Das Ergebnis ist vom selben Typ die
+            das originale Objekt. Dynamische Objekte unterstützen einen flüssigen Programmierstil,
+            bei dem komplexe Sequenzen von Operationen geschachtelt werden können ohne das Risiko
+            eines Nebeneffekts durch die Veränderung des Eingabe Objektes.
         </para>
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21585 -->
+<!-- EN-Revision: 22210 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.view.dijit">
     <title>Dijit-Spezifische View Helfer</title>
@@ -177,7 +177,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
             Die Familie der <command>dijit.layout</command> Elemente sind für die Erstellung von
             eigenen, vorhersagbaren Layouts für die eigene Site. Für alle Fragen über die generelle
             Verwendung <ulink
-                url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/layout">lesen Sie
+                url="http://dojotoolkit.org/reference-guide/dijit/layout.html">lesen Sie
                 hierüber im Dojo Handbuch nach</ulink>.
         </para>
 
@@ -428,7 +428,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
             Dojo's Formularprüfung und Eingabe Dijits sind im <command>dijit.form</command> Baum.
             Für zusätzliche Informationen über die generelle Verwendung dieser Elemente, sowie der
             akzeptierten Parameter <ulink
-                url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/form-validation-specialized-input">besuchen
+                url="http://dojotoolkit.org/reference-guide/dijit/form.html">besuchen
                 Sie bitte die dijit.form Dokumentation</ulink>.
         </para>
 
@@ -687,7 +687,7 @@ echo $view->dateTextBox(
                     bearbeiten können. <command>dijit.Editor</command> ist ein pluginfähiger,
                     erweiterbarer Editor mit einer Vielzahl an Parametern die für die Anpassung
                     verwendet werden können; siehe <ulink
-                        url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">in
+                        url="http://dojotoolkit.org/reference-guide/dijit/Editor.html">in
                         die dijit.Editor Dokumentation</ulink> für weitere Details.
                 </para>
 

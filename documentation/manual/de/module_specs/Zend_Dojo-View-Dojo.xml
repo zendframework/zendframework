@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21585 -->
+<!-- EN-Revision: 22210 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.view.dojo">
     <title>dojo() View Helfer</title>
@@ -309,7 +309,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
         <para>
             Für weitere Informationen über die Erstellung von eigenen Build, schauen Sie bitte
             <ulink
-                url="http://dojotoolkit.org/book/dojo-book-0-9/part-4-meta-dojo/package-system-and-custom-builds">in
+                url="http://dojotoolkit.org/reference-guide/dojo/index.html#package-system">in
                 die Dojo Builddokumentation</ulink>.
         </para>
     </sect3>

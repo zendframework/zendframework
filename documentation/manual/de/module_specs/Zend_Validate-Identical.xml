@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22075 -->
+<!-- EN-Revision: 22146 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.identical">
     <title>Identical</title>
@@ -161,7 +161,7 @@ if ($valid->isValid($input)) {
         <para>
             Aber das führt zu einem weiteren Fall den man berücksichtigen muss. Wenn man ein Array
             als Vergleichswert verwendet, dann sollte man dieses in einen
-            <property>'token'</property> Schlüssel einhüllen wenn dieses nur ein Element enthält.
+            '<property>token</property>' Schlüssel einhüllen wenn dieses nur ein Element enthält.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -176,12 +176,12 @@ if ($valid->isValid($input)) {
         <para>
             Das oben stehende Beispiel prüft den Integerwert 123. Der Grund für diesen speziellen
             Fall ist, dass man den Token der verwendet werden soll, durch Angabe des
-            <property>'token'</property> Schlüssels, konfigurieren kann.
+            '<property>token</property>' Schlüssels, konfigurieren kann.
         </para>
 
         <para>
             Wenn der eigene Vergleichswert nur ein Element enthält, und dieses Element
-            <property>'token'</property> heißt dann muss man dieses, wie im oben stehenden Beispiel
+            '<property>token</property>' heißt dann muss man dieses, wie im oben stehenden Beispiel
             gezeigt, einhüllen.
         </para>
 

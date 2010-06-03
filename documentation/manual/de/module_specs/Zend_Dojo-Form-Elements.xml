@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21585 -->
+<!-- EN-Revision: 22210 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.elements">
     <title>Dijit-Specifische Fomularelemente</title>
@@ -565,7 +565,7 @@ $form->addElement(
             <acronym>HTML</acronym> Inhalte sowohl zu erstellen als auch zu bearbeiten.
             <command>dijit.Editor</command> ist pluggable und kann mit eigenen Plugins erweitert
             werden wenn das gewünscht ist; siehe <ulink
-                url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">die
+                url="http://dojotoolkit.org/reference-guide/dijit/Editor.html">die
                 dijit.Editor Dokumentation</ulink> für weitere Details.
         </para>
 

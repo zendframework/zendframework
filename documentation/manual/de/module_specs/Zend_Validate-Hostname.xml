@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
+<!-- EN-Revision: 22146 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.hostname">
     <title>Hostname</title>
@@ -7,8 +7,9 @@
     <para>
         <classname>Zend_Validate_Hostname</classname> erlaubt die Prüfung von Hostnamen mit einem
         Set von bekannten Spezifikationen. Es ist möglich drei verschiedene Typen von Hostnamen zu
-        Prüfen: einen DNS Hostnamen (z.b. domain.com), IP Adressen (z.B. 1.2.3.4), und lokale
-        Hostnamen (z.B. localhost). Standarmäßig werden nur DNS Hostnamen geprüft.
+        Prüfen: einen <acronym>DNS</acronym> Hostnamen (z.b. <filename>domain.com</filename>), IP
+        Adressen (z.B. 1.2.3.4), und lokale Hostnamen (z.B. localhost). Standarmäßig werden nur
+        <acronym>DNS</acronym> Hostnamen geprüft.
     </para>
 
     <sect3 id="zend.validate.set.hostname.options">
@@ -117,7 +118,7 @@ if ($validator->isValid($hostname)) {
         <para>
             Genau wie die Verwendung von <constant>ALLOW_ALL</constant> alle Typen von Hostnamen
             akzeptiert, können diese Typen kombiniert werden um Kombinationen zu erlauben. Um zum
-            Beispiel DNS und lokale Hostnamen zu akzeptieren muß das
+            Beispiel <acronym>DNS</acronym> und lokale Hostnamen zu akzeptieren muß das
             <classname>Zend_Validate_Hostname</classname> Objekt wie folgt initialisiert werden:
         </para>
 
@@ -142,7 +143,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
             <title>IDN Domains</title>
 
             <para>
-                Bis jetzt unterstützen mehr als 50 ccTLDs IDN Domains.
+                Bis jetzt unterstützen mehr als 50 ccTLDs <acronym>IDN</acronym> Domains.
             </para>
         </note>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22141 -->
+<!-- EN-Revision: 22184 -->
 <!-- Reviewed: 22141 -->
 <sect1 id="zend.translate.additional">
     <title>Zusätzliche Features für Übersetzungen</title>
@@ -198,6 +198,20 @@ $translate->addTranslation(
                         </entry>
 
                         <entry><emphasis><constant>FALSE</constant></emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>route</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            Diese Option erlaubt das Umleiten von einer nicht existierenden
+                            Übersetzung zu anderen Sprachen. Siehe den <link
+                                linkend="zend.translate.additional.rerouting">Abschnitt für
+                                Umleitung</link> über Details für diese Option.
+                        </entry>
+
+                        <entry><emphasis><constant>NULL</constant></emphasis></entry>
                     </row>
 
                     <row>

@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 21759
+ * EN-Revision: 22075
  */
 return array(
     // Zend_Validate_Alnum
@@ -208,8 +208,8 @@ return array(
     "'%value%' has failed the IBAN check" => "'%value%' falhou na verificação do IBAN",
 
     // Zend_Validate_Identical
-    "The token '%token%' does not match the given token '%value%'" => "A marca '%token%' não corresponde a marca '%value%' fornecida",
-    "No token was provided to match against" => "Nenhuma marca foi fornecida para a comparação",
+    "The two given tokens do not match" => "Os dois tokens fornecidos não combinam",
+    "No token was provided to match against" => "Nenhum token foi fornecido para a comparação",
 
     // Zend_Validate_InArray
     "'%value%' was not found in the haystack" => "'%value%' não faz parte dos valores esperados",

@@ -23,37 +23,22 @@ If you would like to preview enhancements or bug fixes that have not yet been
 released, you can obtain the current development version of Zend Framework using one
 of the following methods:
 
-* Download the latest nightly snapshot. For those who care to brave the cutting
-  (often bleeding) edge, the nightly snapshots represent the latest single-
-  download development version of Zend Framework development. Snapshots are bundled
-  with documentation in English only or in all available languages. If you anticipate
-  updating to the latest development version of Zend Framework often, consider using
-  Subversion as described below.
-
-  http://framework.zend.com/download/snapshot
-
-* Using a Subversion (SVN) client. Zend Framework is open source software, and
-  the Subversion repository used for its development is publicly available. Consider
-  using SVN to get Zend Framework if you already use SVN for your application
-  development, want to contribute back to the framework, or need to upgrade your
-  framework version very often.
-
-  Exporting is useful if you want to get a particular framework revision without the
-  .svn  directories as created in a working copy.
+* Using a Git client. Zend Framework is open source software, and the Git
+  repository used for its development is publicly available. Consider using Git
+  to get Zend Framework if you already use Git for your application development,
+  want to contribute back to the framework, or need to upgrade your framework
+  version very often.
 
   Checking out a working copy is necessary if you would like to directly contribute
-  to Zend Framework; a working copy can be updated any time with svn update.
+  to Zend Framework; a working copy can be updated any time using git pull.
 
-  An externals definition is highly convenient for developers already using SVN to
-  manage their application working copies.
+  To clone the git repository, use the following URL:
 
-  The URL for the trunk of the Zend Framework SVN repository is:
+  git://git.zendframework.com/zf.git
 
-  http://framework.zend.com/svn/framework/trunk
+  For more information about Git, please see the official website:
 
-  For more information about Subversion, please see the official website:
-
-  http://subversion.tigris.org
+  http://www.git-scm.org
 
 CONFIGURING THE INCLUDE PATH
 ----------------------------
@@ -75,7 +60,7 @@ GETTING STARTED
 
 A great place to get up-to-speed quickly is the Zend Framework QuickStart:
 
-http://framework.zend.com/docs/quickstart
+http://framework.zend.com/manual/en/learning.quickstart.html
 
 The QuickStart covers some of the most commonly used components of ZF. Since
 Zend Framework is designed with a use-at-will architecture and components are

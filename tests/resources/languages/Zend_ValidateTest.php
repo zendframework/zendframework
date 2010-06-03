@@ -195,8 +195,8 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
     {
         $errors = array();
         $cnt    = 0;
-        foreach ($this->_translations['en'] as $key => $value) {
-            foreach ($this->_translations as $lang => $translation) {
+        foreach ($this->_translations as $lang => $translation) {
+            foreach ($this->_translations['en'] as $key => $value) {
                 if ($lang == 'en') {
                     continue;
                 }

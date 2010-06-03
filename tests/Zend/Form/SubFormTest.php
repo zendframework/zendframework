@@ -121,7 +121,6 @@ class Zend_Form_SubFormTest extends PHPUnit_Framework_TestCase
      */
     public function testRenderedSubFormDtShouldContainNoBreakSpace()
     {
-        $this->assertSame('1.11.0dev',Zend_Version::VERSION);
         $subForm = new Zend_Form_SubForm(array(
             'elements' => array(
                 'foo' => 'text',

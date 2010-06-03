@@ -3261,7 +3261,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     public function loadDefaultDecorators()
     {
         if ($this->loadDefaultDecoratorsIsDisabled()) {
-            return;
+            return $this;
         }
 
         $decorators = $this->getDecorators();
@@ -3270,6 +3270,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                  ->addDecorator('HtmlTag', array('tag' => 'dl', 'class' => 'zend_form'))
                  ->addDecorator('Form');
         }
+        return $this;
     }
 
     /**

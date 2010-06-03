@@ -517,7 +517,6 @@ class Zend_Paginator implements Countable, IteratorAggregate
         }
 
         if (null === $pageNumber) {
-            $cleanTags = self::CACHE_TAG_PREFIX;
             foreach (self::$_cache->getIdsMatchingTags(array($this->_getCacheInternalId())) as $id) {
                 if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", $id, $page)) {
                     self::$_cache->remove($this->_getCacheId($page[1]));

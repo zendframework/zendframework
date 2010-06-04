@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Html
+ * @subpackage Renderer_Markup_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,19 +23,22 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\HTML;
+namespace Zend\Markup\Renderer\Markup\HTML;
+use Zend\Markup\Renderer\Markup;
+use Zend\Markup\Token;
 
 /**
  * Tag interface
  *
- * @uses       \Zend\Markup\Renderer\HTML\HTMLAbstract
+ * @uses       \Zend\Markup\Renderer\Markup\MarkupAbstract
+ * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Html
+ * @subpackage Renderer_Markup_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ListItem extends HTMLAbstract
+class ListItem extends Markup\MarkupAbstract
 {
 
     /**
@@ -46,7 +49,7 @@ class ListItem extends HTMLAbstract
      *
      * @return string
      */
-    public function convert(\Zend\Markup\Token $token, $text)
+    public function convert(Token $token, $text)
     {
         $type = null;
         if ($token->hasAttribute('list')) {

@@ -49,7 +49,7 @@ abstract class MarkupAbstract implements MarkupInterface
 
 
     /**
-     * Set the HTML renderer instance
+     * Set the renderer instance
      *
      * @param \Zend\Markup\Renderer\RendererAbstract $renderer
      *
@@ -63,7 +63,7 @@ abstract class MarkupAbstract implements MarkupInterface
     }
 
     /**
-     * Get the HTML renderer instance
+     * Get the renderer instance
      *
      * @return \Zend\Markup\Renderer\RendererAbstract
      */

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Html
+ * @subpackage Renderer_Markup_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,48 +23,34 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\HTML;
+namespace Zend\Markup\Renderer\Markup\HTML;
+use Zend\Markup\Renderer\Markup;
+use Zend\Markup\Token;
 
 /**
  * Tag interface
  *
- * @uses       \Zend\Markup\Renderer\TokenConverterInterface
+ * @uses       \Zend\Markup\Renderer\Markup\MarkupAbstract
+ * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Html
+ * @subpackage Renderer_Markup_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class HTMLAbstract implements \Zend\Markup\Renderer\TokenConverterInterface
+class Code extends Markup\MarkupAbstract
 {
 
     /**
-     * The HTML renderer
+     * Convert the token
      *
-     * @var \Zend\Markup\Renderer\HTML
+     * @param \Zend\Markup\Token $token
+     * @param string $text
+     *
+     * @return string
      */
-    protected $_renderer;
-
-
-    /**
-     * Set the HTML renderer instance
-     *
-     * @param \Zend\Markup\Renderer\HTML $renderer
-     *
-     * @return \Zend\Markup\Renderer\HTML\HTMLAbstract
-     */
-    public function setRenderer( $renderer)
+    public function convert(Token $token, $text)
     {
-        $this->_renderer = $renderer;
-    }
-
-    /**
-     * Get the HTML renderer instance
-     *
-     * @return \Zend\Markup\Renderer\HTML
-     */
-    public function getRenderer()
-    {
-        return $this->_renderer;
+        return highlight_string($text, true);
     }
 }

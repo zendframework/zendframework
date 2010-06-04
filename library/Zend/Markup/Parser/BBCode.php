@@ -66,41 +66,6 @@ class BBCode implements ParserInterface
     protected $_current;
 
     /**
-     * Source to tokenize
-     *
-     * @var string
-     */
-    protected $_value = '';
-
-    /**
-     * Length of the value
-     *
-     * @var int
-     */
-    protected $_valueLen = 0;
-
-    /**
-     * Current pointer
-     *
-     * @var int
-     */
-    protected $_pointer = 0;
-
-    /**
-     * The buffer
-     *
-     * @var string
-     */
-    protected $_buffer = '';
-
-    /**
-     * Temporary tag storage
-     *
-     * @var array
-     */
-    protected $_temp;
-
-    /**
      * Stoppers that we are searching for
      *
      * @var array
@@ -139,13 +104,6 @@ class BBCode implements ParserInterface
      */
     protected $_tokens = array();
 
-    /**
-     * State
-     *
-     * @var int
-     */
-    protected $_state = self::STATE_SCAN;
-
 
     /**
      * Prepare the parsing of a bbcode string, the real parsing is done in {@link _parse()}
@@ -163,18 +121,175 @@ class BBCode implements ParserInterface
             throw new Exception('Value to parse cannot be left empty.');
         }
 
-        $this->_value = str_replace(array("\r\n", "\r", "\n"), self::NEWLINE, $value);
+        $tokens = $this->tokenize($value);
 
-        // variable initialization for tokenizer
-        $this->_valueLen         = strlen($this->_value);
-        $this->_pointer          = 0;
-        $this->_buffer           = '';
-        $this->_temp             = array();
-        $this->_state            = self::STATE_SCAN;
-        $this->_tokens           = array();
+        return $this->buildTree($tokens);
+    }
 
-        $this->_tokenize();
+    /**
+     * Tokenize
+     *
+     * @param string $value
+     *
+     * @return array
+     */
+    public function tokenize($value)
+    {
+        $value = str_replace(array("\r\n", "\r", "\n"), self::NEWLINE, $value);
 
+        $attribute = '';
+
+        $valueLen = strlen($value);
+        $pointer  = 0;
+        $buffer   = '';
+        $temp     = array();
+        $state    = self::STATE_SCAN;
+        $tokens   = array();
+
+        while ($pointer < $valueLen) {
+            switch ($state) {
+                case self::STATE_SCAN:
+                    $matches = array();
+                    $regex   = '#\G(?<text>[^\[]*)(?<open>\[(?<name>[' . self::NAME_CHARSET . ']+)?)?#';
+                    preg_match($regex, $value, $matches, null, $pointer);
+
+                    $pointer += strlen($matches[0]);
+
+                    if (!empty($matches['text'])) {
+                        $buffer .= $matches['text'];
+                    }
+
+                    if (!isset($matches['open'])) {
+                        // great, no tag, we are ending the string
+                        break;
+                    }
+                    if (!isset($matches['name'])) {
+                        $buffer .= $matches['open'];
+                        break;
+                    }
+
+                    $temp = array(
+                        'tag'        => '[' . $matches['name'],
+                        'name'       => $matches['name'],
+                        'attributes' => array()
+                    );
+
+                    if ($pointer >= $valueLen) {
+                        // damn, no tag
+                        $buffer .= $temp['tag'];
+                        break 2;
+                    }
+
+                    if ($value[$pointer] == '=') {
+                        $pointer++;
+
+                        $temp['tag'] .= '=';
+                        $state        = self::STATE_PARSEVALUE;
+                        $attribute           = $temp['name'];
+                    } else {
+                        $state = self::STATE_SCANATTRS;
+                    }
+                    break;
+                case self::STATE_SCANATTRS:
+                    $matches = array();
+                    $regex   = '#\G((?<end>\s*\])|\s+(?<attribute>[' . self::NAME_CHARSET . ']+)(?<eq>=?))#';
+                    if (!preg_match($regex, $value, $matches, null, $pointer)) {
+                        break 2;
+                    }
+
+                    $pointer += strlen($matches[0]);
+
+                    if (!empty($matches['end'])) {
+                        if (!empty($buffer)) {
+                            $tokens[] = array(
+                                'tag' => $buffer,
+                                'type' => Markup\Token::TYPE_NONE
+                            );
+                            $buffer = '';
+                        }
+                        $temp['tag'] .= $matches['end'];
+                        $temp['type'] = Markup\Token::TYPE_TAG;
+
+                        $tokens[] = $temp;
+                        $temp     = array();
+
+                        $state = self::STATE_SCAN;
+                    } else {
+                        // attribute name
+                        $attribute = $matches['attribute'];
+
+                        $temp['tag'] .= $matches[0];
+
+                        $temp['attributes'][$attribute] = '';
+
+                        if (empty($matches['eq'])) {
+                            $state = self::STATE_SCANATTRS;
+                        } else {
+                            $state = self::STATE_PARSEVALUE;
+                        }
+                    }
+                    break;
+                case self::STATE_PARSEVALUE:
+                    $matches = array();
+                    $regex   = '#\G((?<quote>"|\')(?<valuequote>.*?)\\2|(?<value>[^\]\s]+))#';
+                    if (!preg_match($regex, $value, $matches, null, $pointer)) {
+                        $state = self::STATE_SCANATTRS;
+                        break;
+                    }
+
+                    $pointer += strlen($matches[0]);
+
+                    if (!empty($matches['quote'])) {
+                        $temp['attributes'][$attribute] = $matches['valuequote'];
+                    } else {
+                        $temp['attributes'][$attribute] = $matches['value'];
+                    }
+                    $temp['tag'] .= $matches[0];
+
+                    $state = self::STATE_SCANATTRS;
+                    break;
+            }
+        }
+
+        if (!empty($buffer)) {
+            $tokens[] = array(
+                'tag'  => $buffer,
+                'type' => Markup\Token::TYPE_NONE
+            );
+        }
+
+        return $tokens;
+    }
+
+    /**
+     * Build a tree with a certain strategy
+     *
+     * @param array $tokens
+     * @param string $strategy
+     *
+     * @return \Zend\Markup\TokenList/
+     */
+    public function buildTree(array $tokens, $strategy = 'default')
+    {
+        switch ($strategy) {
+            case 'default':
+                return $this->_createTree($tokens);
+                break;
+            default:
+                // TODO: throw exception for this case
+                break;
+        }
+    }
+
+    /**
+     * Parse the token array into a tree
+     *
+     * @param array $tokens
+     *
+     * @return \Zend\Markup\TokenList
+     */
+    protected function _createTree($tokens)
+    {
         // variable initialization for treebuilder
         $this->_searchedStoppers = array();
         $this->_tree             = new Markup\TokenList();
@@ -186,145 +301,7 @@ class BBCode implements ParserInterface
 
         $this->_tree->addChild($this->_current);
 
-        $this->_createTree();
-
-        return $this->_tree;
-    }
-
-    /**
-     * Tokenize
-     *
-     * @param string $input
-     *
-     * @return void
-     */
-    protected function _tokenize()
-    {
-        $attribute = '';
-
-        while ($this->_pointer < $this->_valueLen) {
-            switch ($this->_state) {
-                case self::STATE_SCAN:
-                    $matches = array();
-                    $regex   = '#\G(?<text>[^\[]*)(?<open>\[(?<name>[' . self::NAME_CHARSET . ']+)?)?#';
-                    preg_match($regex, $this->_value, $matches, null, $this->_pointer);
-
-                    $this->_pointer += strlen($matches[0]);
-
-                    if (!empty($matches['text'])) {
-                        $this->_buffer .= $matches['text'];
-                    }
-
-                    if (!isset($matches['open'])) {
-                        // great, no tag, we are ending the string
-                        break;
-                    }
-                    if (!isset($matches['name'])) {
-                        $this->_buffer .= $matches['open'];
-                        break;
-                    }
-
-                    $this->_temp = array(
-                        'tag'        => '[' . $matches['name'],
-                        'name'       => $matches['name'],
-                        'attributes' => array()
-                    );
-
-                    if ($this->_pointer >= $this->_valueLen) {
-                        // damn, no tag
-                        $this->_buffer .= $this->_temp['tag'];
-                        break 2;
-                    }
-
-                    if ($this->_value[$this->_pointer] == '=') {
-                        $this->_pointer++;
-
-                        $this->_temp['tag'] .= '=';
-                        $this->_state        = self::STATE_PARSEVALUE;
-                        $attribute           = $this->_temp['name'];
-                    } else {
-                        $this->_state = self::STATE_SCANATTRS;
-                    }
-                    break;
-                case self::STATE_SCANATTRS:
-                    $matches = array();
-                    $regex   = '#\G((?<end>\s*\])|\s+(?<attribute>[' . self::NAME_CHARSET . ']+)(?<eq>=?))#';
-                    if (!preg_match($regex, $this->_value, $matches, null, $this->_pointer)) {
-                        break 2;
-                    }
-
-                    $this->_pointer += strlen($matches[0]);
-
-                    if (!empty($matches['end'])) {
-                        if (!empty($this->_buffer)) {
-                            $this->_tokens[] = array(
-                                'tag' => $this->_buffer,
-                                'type' => Markup\Token::TYPE_NONE
-                            );
-                            $this->_buffer = '';
-                        }
-                        $this->_temp['tag'] .= $matches['end'];
-                        $this->_temp['type'] = Markup\Token::TYPE_TAG;
-
-                        $this->_tokens[] = $this->_temp;
-                        $this->_temp     = array();
-
-                        $this->_state = self::STATE_SCAN;
-                    } else {
-                        // attribute name
-                        $attribute = $matches['attribute'];
-
-                        $this->_temp['tag'] .= $matches[0];
-
-                        $this->_temp['attributes'][$attribute] = '';
-
-                        if (empty($matches['eq'])) {
-                            $this->_state = self::STATE_SCANATTRS;
-                        } else {
-                            $this->_state = self::STATE_PARSEVALUE;
-                        }
-                    }
-                    break;
-                case self::STATE_PARSEVALUE:
-                    $matches = array();
-                    $regex   = '#\G((?<quote>"|\')(?<valuequote>.*?)\\2|(?<value>[^\]\s]+))#';
-                    if (!preg_match($regex, $this->_value, $matches, null, $this->_pointer)) {
-                        $this->_state = self::STATE_SCANATTRS;
-                        break;
-                    }
-
-                    $this->_pointer += strlen($matches[0]);
-
-                    if (!empty($matches['quote'])) {
-                        $this->_temp['attributes'][$attribute] = $matches['valuequote'];
-                    } else {
-                        $this->_temp['attributes'][$attribute] = $matches['value'];
-                    }
-                    $this->_temp['tag'] .= $matches[0];
-
-                    $this->_state = self::STATE_SCANATTRS;
-                    break;
-            }
-        }
-
-        if (!empty($this->_buffer)) {
-            $this->_tokens[] = array(
-                'tag'  => $this->_buffer,
-                'type' => Markup\Token::TYPE_NONE
-            );
-        }
-    }
-
-    /**
-     * Parse the token array into a tree
-     *
-     * @param array $tokens
-     *
-     * @return void
-     */
-    public function _createTree()
-    {
-        foreach ($this->_tokens as $token) {
+        foreach ($tokens as $token) {
             // first we want to know if this tag is a stopper, or at least a searched one
             if ($this->_isStopper($token['tag'])) {
                 // find the stopper
@@ -409,6 +386,8 @@ class BBCode implements ParserInterface
                 }
             }
         }
+
+        return $this->_tree;
     }
 
     /**

@@ -47,10 +47,6 @@ class BBCode implements ParserInterface
 
     const NAME_CHARSET = '^\[\]=\s';
 
-    const STATE_SCAN       = 0;
-    const STATE_SCANATTRS  = 1;
-    const STATE_PARSEVALUE = 2;
-
     /**
      * Token tree
      *
@@ -143,113 +139,116 @@ class BBCode implements ParserInterface
         $pointer  = 0;
         $buffer   = '';
         $temp     = array();
-        $state    = self::STATE_SCAN;
         $tokens   = array();
 
-        while ($pointer < $valueLen) {
-            switch ($state) {
-                case self::STATE_SCAN:
-                    $matches = array();
-                    $regex   = '#\G(?<text>[^\[]*)(?<open>\[(?<name>[' . self::NAME_CHARSET . ']+)?)?#';
-                    preg_match($regex, $value, $matches, null, $pointer);
+        scan: {
+            if ($valueLen <= $pointer) {
+                goto end;
+            }
 
-                    $pointer += strlen($matches[0]);
+            $matches = array();
+            $regex   = '#\G(?<text>[^\[]*)(?<open>\[(?<name>[' . self::NAME_CHARSET . ']+)?)?#';
+            if (!preg_match($regex, $value, $matches, null, $pointer)) {
+                goto end;
+            }
 
-                    if (!empty($matches['text'])) {
-                        $buffer .= $matches['text'];
-                    }
+            $pointer += strlen($matches[0]);
 
-                    if (!isset($matches['open'])) {
-                        // great, no tag, we are ending the string
-                        break;
-                    }
-                    if (!isset($matches['name'])) {
-                        $buffer .= $matches['open'];
-                        break;
-                    }
+            if (!empty($matches['text'])) {
+                $buffer .= $matches['text'];
+            }
 
-                    $temp = array(
-                        'tag'        => '[' . $matches['name'],
-                        'name'       => $matches['name'],
-                        'attributes' => array()
+            if (!isset($matches['open'])) {
+                // great, no tag, we are ending the string
+                goto scan;
+            }
+            if (!isset($matches['name'])) {
+                $buffer .= $matches['open'];
+                goto scan;
+            }
+
+            $temp = array(
+                'tag'        => '[' . $matches['name'],
+                'name'       => $matches['name'],
+                'attributes' => array()
+            );
+
+            if ($pointer >= $valueLen) {
+                // damn, no tag
+                $buffer .= $temp['tag'];
+                goto end;
+            }
+
+            if ($value[$pointer] == '=') {
+                $pointer++;
+
+                $temp['tag'] .= '=';
+                $attribute           = $temp['name'];
+
+                goto parsevalue;
+            }
+            goto scanattrs;
+        }
+
+        scanattrs: {
+            $matches = array();
+            $regex   = '#\G((?<end>\s*\])|\s+(?<attribute>[' . self::NAME_CHARSET . ']+)(?<eq>=?))#';
+            if (!preg_match($regex, $value, $matches, null, $pointer)) {
+                goto end;
+            }
+
+            $pointer += strlen($matches[0]);
+
+            if (!empty($matches['end'])) {
+                if (!empty($buffer)) {
+                    $tokens[] = array(
+                        'tag' => $buffer,
+                        'type' => Markup\Token::TYPE_NONE
                     );
+                    $buffer = '';
+                }
+                $temp['tag'] .= $matches['end'];
+                $temp['type'] = Markup\Token::TYPE_TAG;
 
-                    if ($pointer >= $valueLen) {
-                        // damn, no tag
-                        $buffer .= $temp['tag'];
-                        break 2;
-                    }
+                $tokens[] = $temp;
+                $temp     = array();
 
-                    if ($value[$pointer] == '=') {
-                        $pointer++;
+                goto scan;
+            } else {
+                // attribute name
+                $attribute = $matches['attribute'];
 
-                        $temp['tag'] .= '=';
-                        $state        = self::STATE_PARSEVALUE;
-                        $attribute           = $temp['name'];
-                    } else {
-                        $state = self::STATE_SCANATTRS;
-                    }
-                    break;
-                case self::STATE_SCANATTRS:
-                    $matches = array();
-                    $regex   = '#\G((?<end>\s*\])|\s+(?<attribute>[' . self::NAME_CHARSET . ']+)(?<eq>=?))#';
-                    if (!preg_match($regex, $value, $matches, null, $pointer)) {
-                        break 2;
-                    }
+                $temp['tag'] .= $matches[0];
 
-                    $pointer += strlen($matches[0]);
+                $temp['attributes'][$attribute] = '';
 
-                    if (!empty($matches['end'])) {
-                        if (!empty($buffer)) {
-                            $tokens[] = array(
-                                'tag' => $buffer,
-                                'type' => Markup\Token::TYPE_NONE
-                            );
-                            $buffer = '';
-                        }
-                        $temp['tag'] .= $matches['end'];
-                        $temp['type'] = Markup\Token::TYPE_TAG;
-
-                        $tokens[] = $temp;
-                        $temp     = array();
-
-                        $state = self::STATE_SCAN;
-                    } else {
-                        // attribute name
-                        $attribute = $matches['attribute'];
-
-                        $temp['tag'] .= $matches[0];
-
-                        $temp['attributes'][$attribute] = '';
-
-                        if (empty($matches['eq'])) {
-                            $state = self::STATE_SCANATTRS;
-                        } else {
-                            $state = self::STATE_PARSEVALUE;
-                        }
-                    }
-                    break;
-                case self::STATE_PARSEVALUE:
-                    $matches = array();
-                    $regex   = '#\G((?<quote>"|\')(?<valuequote>.*?)\\2|(?<value>[^\]\s]+))#';
-                    if (!preg_match($regex, $value, $matches, null, $pointer)) {
-                        $state = self::STATE_SCANATTRS;
-                        break;
-                    }
-
-                    $pointer += strlen($matches[0]);
-
-                    if (!empty($matches['quote'])) {
-                        $temp['attributes'][$attribute] = $matches['valuequote'];
-                    } else {
-                        $temp['attributes'][$attribute] = $matches['value'];
-                    }
-                    $temp['tag'] .= $matches[0];
-
-                    $state = self::STATE_SCANATTRS;
-                    break;
+                if (empty($matches['eq'])) {
+                    goto scanattrs;
+                }
+                goto parsevalue;
             }
         }
+
+        parsevalue: {
+            $matches = array();
+            $regex   = '#\G((?<quote>"|\')(?<valuequote>.*?)\\2|(?<value>[^\]\s]+))#';
+            if (!preg_match($regex, $value, $matches, null, $pointer)) {
+                goto scanattrs;
+            }
+
+            $pointer += strlen($matches[0]);
+
+            if (!empty($matches['quote'])) {
+                $temp['attributes'][$attribute] = $matches['valuequote'];
+            } else {
+                $temp['attributes'][$attribute] = $matches['value'];
+            }
+            $temp['tag'] .= $matches[0];
+
+            goto scanattrs;
+        }
+
+        end:
 
         if (!empty($buffer)) {
             $tokens[] = array(

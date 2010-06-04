@@ -319,7 +319,7 @@ class BBCode implements ParserInterface
                 // add the old items again if there are any
                 if (!empty($oldItems)) {
                     foreach (array_reverse($oldItems) as $item) {
-                        /* @var $token Zend_Markup_Token */
+                        /* @var $token \Zend\Markup\Token */
                         $this->_current->addChild($item);
                         $item->setParent($this->_current);
                         $this->_current = $item;

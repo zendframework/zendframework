@@ -355,7 +355,14 @@ abstract class Zend_File_Transfer_Adapter_Abstract
         $this->_break[$name]      = $breakChainOnFailure;
         $files                    = $this->_getFiles($files, true, true);
         foreach ($files as $file) {
-            $this->_files[$file]['validators'][] = $name;
+            if ($name == 'NotEmpty') {
+                $temp = $this->_files[$file]['validators'];
+                $this->_files[$file]['validators']  = array($name);
+                $this->_files[$file]['validators'] += $temp;
+            } else {
+                $this->_files[$file]['validators'][] = $name;
+            }
+
             $this->_files[$file]['validated']    = false;
         }
 

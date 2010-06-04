@@ -37,36 +37,28 @@ interface ParserInterface
     /**
      * Parse a string
      *
-     * This should output something like this:
-     *
-     * <code>
-     * array(
-     *     array(
-     *         'tag'        => '[tag="a" attr=val]',
-     *         'type'       => Zend_Markup::TYPE_TAG,
-     *         'name'       => 'tag',
-     *         'stoppers'   => array('[/]', '[/tag]'),
-     *         'attributes' => array(
-     *             'tag'  => 'a',
-     *             'attr' => 'val'
-     *         )
-     *     ),
-     *     array(
-     *         'tag'   => 'value',
-     *         'type'  => Zend_Markup::TYPE_NONE
-     *     ),
-     *     array(
-     *         'tag'        => '[/tag]',
-     *         'type'       => Zend_Markup::TYPE_STOPPER,
-     *         'name'       => 'tag',
-     *         'stoppers'   => array(),
-     *         'attributes' => array()
-     *     )
-     * )
-     * </code>
-     *
      * @param  string $value
+     *
      * @return array
      */
     public function parse($value);
+
+    /**
+     * Build a tree with a certain strategy
+     *
+     * @param array $tokens
+     * @param string $strategy
+     *
+     * @return \Zend\Markup\TokenList
+     */
+    public function buildTree(array $tokens, $strategy = 'default');
+
+    /**
+     * Tokenize a string
+     *
+     * @param string $value
+     *
+     * @return array
+     */
+    public function tokenize($value);
 }

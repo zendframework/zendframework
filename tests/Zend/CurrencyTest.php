@@ -816,4 +816,13 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(50, $currency->getValue());
         $this->assertEquals('RUB', $currency->getShortName());
     }
+
+    /**
+     * @ZF-9941
+     */
+    public function testSetValueByOutput()
+    {
+        $currency = new Zend_Currency(array('value' => 1000, 'locale' => 'de_AT'));
+        $this->assertEquals('€ 2.000,00', $currency->toCurrency(null, array('value' => 2000)));
+    }
 }

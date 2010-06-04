@@ -22,12 +22,11 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\Markup\HTML;
-use Zend\Markup\Renderer\Markup;
+namespace Zend\Markup\Renderer\Markup;
 use Zend\Markup\Token;
 
 /**
- * Simple replace markup for HTML
+ * Simple replace markup
  *
  * @uses       \Zend\Markup\Renderer\Markup\MarkupAbstract
  * @uses       \Zend\Markup\Token
@@ -37,27 +36,36 @@ use Zend\Markup\Token;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Replace extends Markup\MarkupAbstract
+class Replace extends MarkupAbstract
 {
 
     /**
-     * Markup's replacement
+     * Markup's start replacement
      *
      * @var string
      */
-    protected $_replace;
+    protected $_start;
 
+    /**
+     * Markup's end replacement
+     *
+     * @var string
+     */
+    protected $_end;
+    
 
     /**
      * Constructor
      *
-     * @param string $replace
+     * @param string $start
+     * @param string $end
      * 
      * @return void
      */
-    public function __construct($replace)
+    public function __construct($start, $end)
     {
-        $this->_replace = $replace;
+        $this->_start = $start;
+        $this->_end   = $end;
     }
 
     /**
@@ -70,6 +78,6 @@ class Replace extends Markup\MarkupAbstract
      */
     public function __invoke(Token $token, $text)
     {
-        return "<{$this->_replace}>{$text}</{$this->_replace}>";
+        return "{$this->_start}{$text}{$this->_end}";
     }
 }

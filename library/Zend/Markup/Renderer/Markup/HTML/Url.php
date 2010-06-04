@@ -50,7 +50,7 @@ class Url extends Markup\MarkupAbstract
      *
      * @return string
      */
-    public function convert(Token $token, $text)
+    public function __invoke(Token $token, $text)
     {
         if ($token->hasAttribute('url')) {
             $uri = $token->getAttribute('url');

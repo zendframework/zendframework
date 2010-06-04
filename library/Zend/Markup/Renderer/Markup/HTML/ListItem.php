@@ -49,7 +49,7 @@ class ListItem extends Markup\MarkupAbstract
      *
      * @return string
      */
-    public function convert(Token $token, $text)
+    public function __invoke(Token $token, $text)
     {
         $type = null;
         if ($token->hasAttribute('list')) {

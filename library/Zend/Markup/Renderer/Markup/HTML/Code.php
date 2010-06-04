@@ -49,7 +49,7 @@ class Code extends Markup\MarkupAbstract
      *
      * @return string
      */
-    public function convert(Token $token, $text)
+    public function __invoke(Token $token, $text)
     {
         return highlight_string($text, true);
     }

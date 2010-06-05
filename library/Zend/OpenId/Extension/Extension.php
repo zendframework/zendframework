@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\OpenId\Extension;
+
+/**
  * Abstract extension class for Zend_OpenId
  *
  * @category   Zend
@@ -28,7 +33,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_OpenId_Extension
+abstract class Extension
 {
 
     /**
@@ -44,7 +49,7 @@ abstract class Zend_OpenId_Extension
         if ($extensions !== null) {
             if (is_array($extensions)) {
                 foreach ($extensions as $ext) {
-                    if ($ext instanceof Zend_OpenId_Extension) {
+                    if ($ext instanceof Extension) {
                         if (!$ext->$func($params)) {
                             return false;
                         }
@@ -53,7 +58,7 @@ abstract class Zend_OpenId_Extension
                     }
                 }
             } else if (!is_object($extensions) ||
-                       !($extensions instanceof Zend_OpenId_Extension) ||
+                       !($extensions instanceof Extension) ||
                        !$extensions->$func($params)) {
                 return false;
             }

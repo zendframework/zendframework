@@ -22,6 +22,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\OpenId\Provider\User;
+use Zend\Session;
+
+/**
  * Class to get/store information about logged in user in Web Browser using
  * PHP session
  *
@@ -33,7 +39,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_OpenId_Provider_User_Session extends Zend_OpenId_Provider_User
+class Session extends User
 {
     /**
      * Reference to an implementation of Zend_Session_Namespace object
@@ -48,10 +54,10 @@ class Zend_OpenId_Provider_User_Session extends Zend_OpenId_Provider_User
      *
      * @param Zend_Session_Namespace $session
      */
-    public function __construct(Zend_Session_Namespace $session = null)
+    public function __construct(Session\Container $session = null)
     {
         if ($session === null) {
-            $this->_session = new Zend_Session_Namespace("openid");
+            $this->_session = new Session\Container("openid");
         } else {
             $this->_session = $session;
         }

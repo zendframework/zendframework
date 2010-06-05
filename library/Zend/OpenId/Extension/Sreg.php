@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\OpenId\Extension;
+
+/**
  * 'Simple Refistration Extension' for Zend_OpenId
  *
  * @uses       Zend_OpenId_Extension
@@ -29,7 +34,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
+class Sreg extends Extension
 {
     /**
      * SREG 1.1 namespace. All OpenID SREG 1.1 messages MUST contain variable

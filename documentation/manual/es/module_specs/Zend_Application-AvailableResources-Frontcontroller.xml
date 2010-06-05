@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 16847 -->
+    <!-- EN-Revision: 20885 -->
     <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.frontcontroller">
     <title>Zend_Application_Resource_Frontcontroller</title>
@@ -95,7 +95,7 @@
                 <emphasis>
                     <property>baseUrl</property>
                 </emphasis>
-                : base explícita a la URL de la aplicación
+                : base explícita a la <acronym>URL</acronym> de la aplicación
                 (normalmente auto-detect).
             </para>
         </listitem>
@@ -108,7 +108,10 @@
                 : array con los nombres de los plugins de las
                 clases de los Front Controllers.
                 El recurso instanciará a cada clase (sin argumentos al constructor)
-                y luego registra la instancia con el Front Controller.
+                y luego registra la instancia con el Front Controller. If you want to
+                register a plugin with a particular stack index, you need to provide an array with
+                two keys <property>class</property> and <property>stackIndex</property>.
+				
             </para>
         </listitem>
 
@@ -121,6 +124,15 @@
                 el front controller.
             </para>
         </listitem>
+		
+		        <listitem>
+            <para>
+                <emphasis><property>returnresponse</property></emphasis>: whether or not to return
+                the response object after dispatching the front controller. Value should be a
+                boolean; by default, this is disabled.
+            </para>
+        </listitem>
+		
     </itemizedlist>
 
     <para>
@@ -152,6 +164,9 @@ resources.frontController.defaultModule = "static"
 resources.frontController.baseUrl = "/subdir"
 resources.frontController.plugins.foo = "My_Plugin_Foo"
 resources.frontController.plugins.bar = "My_Plugin_Bar"
+resources.frontController.plugins.baz.class = "My_Plugin_Baz"
+resources.frontController.plugins.baz.stackIndex = 123
+resources.frontController.returnresponse = 1
 resources.frontController.env = APPLICATION_ENV
 ]]></programlisting>
     </example>

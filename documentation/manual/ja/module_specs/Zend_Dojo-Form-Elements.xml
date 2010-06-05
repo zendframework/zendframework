@@ -498,7 +498,7 @@ $form->addElement(
             dijit.Editorはプラグイン可能で、
             必要に応じてカスタム・プラグインで拡張されるかもしれません;
             詳しくは<ulink
-            url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">
+            url="http://dojotoolkit.org/reference-guide/dijit/Editor.html">
             dijit.Editorドキュメント</ulink>をご覧下さい。
         </para>
 

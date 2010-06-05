@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20854 -->
+<!-- EN-Revision: 21815 -->
 <sect3 id="zend.progressbar.adapter.jspush">
     <title>Zend_ProgressBar_Adapter_JsPush</title>
     <para>
@@ -133,7 +133,7 @@ function Zend_ProgressBar_Update(data)
         </para>
         <itemizedlist>
             <listitem>
-                <para>Dojo: <ulink url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/user-assistance-and-feedback/progress-bar" /></para>
+                <para>Dojo: <ulink url="http://dojotoolkit.org/reference-guide/dijit/ProgressBar.html" /></para>
             </listitem>
             <listitem>
                 <para>jQuery: <ulink url="http://t.wits.sg/2008/06/20/jquery-progress-bar-11/" /></para>

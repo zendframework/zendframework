@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21585 -->
+<!-- EN-Revision: 22210 -->
 <sect2 id="zend.dojo.view.dojo">
     <title>dojo() ビューヘルパー</title>
 
@@ -294,7 +294,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
 
         <para>
             独自のビルドを作成するためのさらなる情報は、<ulink
-                url="http://dojotoolkit.org/book/dojo-book-0-9/part-4-meta-dojo/package-system-and-custom-builds">
+                url="http://dojotoolkit.org/reference-guide/dojo/index.html#package-system">
             Dojo のビルドのドキュメントを参照ください</ulink>。
         </para>
     </sect3>

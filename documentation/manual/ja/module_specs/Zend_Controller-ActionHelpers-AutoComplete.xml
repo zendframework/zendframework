@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
+<!-- EN-Revision: 22210 -->
 <sect3 id="zend.controller.actionhelpers.autocomplete">
     <title>AutoComplete</title>
 
@@ -123,7 +123,7 @@ class FooController extends Zend_Controller_Action
             のふたつのウィジェットがオートコンプリート機能を持っています。
             どちらのウィジェットも、QueryReadStore
             を実装したデータを必要とします。詳細は
-            <ulink url="http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/data-retrieval-dojo-data-0">dojo.data</ulink>
+            <ulink url="http://dojotoolkit.org/reference-guide/dojo/data.html">dojo.data</ulink>
             のドキュメントを参照ください。
         </para>
 

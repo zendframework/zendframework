@@ -26,6 +26,8 @@
 namespace Zend\Markup\Renderer;
 use Zend\Filter;
 use Zend\Markup;
+use Zend\Markup\Parser;
+use Zend\Markup\Renderer\Markup\MarkupInterface;
 
 /**
  * Defines the basic rendering functionality
@@ -41,12 +43,9 @@ use Zend\Markup;
  */
 abstract class RendererAbstract
 {
-    const TYPE_CALLBACK = 4;
-    const TYPE_REPLACE  = 8;
-    const TYPE_ALIAS    = 16;
 
     /**
-     * Tag info
+     * Markup info
      *
      * @var array
      */
@@ -88,7 +87,7 @@ abstract class RendererAbstract
     protected $_groups = array();
 
     /**
-     * Plugin loader for tags
+     * Plugin loader for markups
      *
      * @var \Zend\Loader\PluginLoader\PluginLoader
      */
@@ -106,13 +105,15 @@ abstract class RendererAbstract
      *
      * @var string
      */
-    protected static $_encoding = 'UTF-8';
+    protected $_encoding = 'UTF-8';
 
 
     /**
      * Constructor
      *
      * @param array|\Zend\Config\Config $options
+     *
+     * @todo make constructor compliant with new configuration standards
      *
      * @return void
      */
@@ -178,9 +179,9 @@ abstract class RendererAbstract
      *
      * @return \Zend\Markup\Renderer\RendererAbstract
      */
-    public static function setEncoding($encoding)
+    public function setEncoding($encoding)
     {
-        self::$_encoding = $encoding;
+        $this->_encoding = $encoding;
 
         return $this;
     }
@@ -190,21 +191,20 @@ abstract class RendererAbstract
      *
      * @return string
      */
-    public static function getEncoding()
+    public function getEncoding()
     {
-        return self::$_encoding;
+        return $this->_encoding;
     }
 
     /**
      * Add a new markup
      *
      * @param string $name
-     * @param string $type
-     * @param array $options
+     * @param \Zend\Markup\Renderer\Markup\MarkupInterface $markup
      *
      * @return \Zend\Markup\Renderer\RendererAbstract
      */
-    public function addMarkup($name, $type, array $options)
+    public function addMarkup($name, MarkupInterface $markup)
     {
         if (!isset($options['group']) && ($type ^ self::TYPE_ALIAS)) {
             throw new Exception("There is no render group defined.");
@@ -225,10 +225,10 @@ abstract class RendererAbstract
 
         // check the type
         if ($type & self::TYPE_CALLBACK) {
-            // add a callback tag
+            // add a callback markup
             if (isset($options['callback'])) {
                 if (!($options['callback'] instanceof TokenConverterInterface)) {
-                    throw new Exception("Not a valid tag callback.");
+                    throw new Exception("Not a valid markup callback.");
                 }
                 if (method_exists($options['callback'], 'setRenderer')) {
                     $options['callback']->setRenderer($this);
@@ -245,7 +245,7 @@ abstract class RendererAbstract
             // add an alias
             if (empty($options['name'])) {
                 throw new Exception(
-                        'No alias was provided but tag was defined as such');
+                        'No alias was provided but markup was defined as such');
             }
 
             $this->_markups[$name] = array(
@@ -283,7 +283,7 @@ abstract class RendererAbstract
     }
 
     /**
-     * Remove the default tags
+     * Remove all the markups
      *
      * @return void
      */
@@ -296,6 +296,7 @@ abstract class RendererAbstract
      * Render function
      *
      * @param  \Zend\Markup\TokenList|string $tokenList
+     *
      * @return string
      */
     public function render($value)
@@ -321,11 +322,11 @@ abstract class RendererAbstract
      */
     protected function _render(Markup\Token $token)
     {
-        $return    = '';
+        $return = '';
 
         $this->_token = $token;
 
-        // if this tag has children, execute them
+        // if this markup has children, execute them
         if ($token->hasChildren()) {
             foreach ($token->getChildren() as $child) {
                 $return .= $this->_execute($child);
@@ -347,14 +348,14 @@ abstract class RendererAbstract
             return false;
         }
 
-        $tag = $this->_markups[$token->getName()];
+        $markup = $this->_markups[$token->getName()];
 
         // alias processing
-        while ($tag['type'] & self::TYPE_ALIAS) {
-            $tag = $this->_markups[$tag['name']];
+        while ($markup['type'] & self::TYPE_ALIAS) {
+            $markup = $this->_markups[$markup['name']];
         }
 
-        return isset($tag['group']) ? $tag['group'] : false;
+        return isset($markup['group']) ? $markup['group'] : false;
     }
 
     /**
@@ -365,7 +366,7 @@ abstract class RendererAbstract
      */
     protected function _execute(Markup\Token $token)
     {
-        // first return the normal text tags
+        // first return the normal text markups
         if ($token->getType() == Markup\Token::TYPE_NONE) {
             return $this->_filter($token->getTag());
         }
@@ -382,7 +383,7 @@ abstract class RendererAbstract
         $markup = (!$name) ? false : $this->_markups[$name];
         $empty  = (is_array($markup) && array_key_exists('empty', $markup) && $markup['empty']);
 
-        // check if the tag has content
+        // check if the markup has content
         if (!$empty && !$token->hasChildren()) {
             return '';
         }
@@ -416,14 +417,14 @@ abstract class RendererAbstract
 
         // callback
         if (is_array($markup) && ($markup['type'] & self::TYPE_CALLBACK)) {
-            // load the callback if the tag doesn't exist
+            // load the callback if the markup doesn't exist
             if (!($markup['callback'] instanceof TokenConverterInterface)) {
                 $class = $this->getPluginLoader()->load($name);
 
                 $markup['callback'] = new $class;
 
                 if (!($markup['callback'] instanceof TokenConverterInterface)) {
-                    throw new Exception("Callback for tag '$name' found, but it isn't valid.");
+                    throw new Exception("Callback for markup '$name' found, but it isn't valid.");
                 }
 
                 if (method_exists($markup['callback'], 'setRenderer')) {
@@ -522,24 +523,24 @@ abstract class RendererAbstract
      * Execute a replace token
      *
      * @param  \Zend\Markup\Token $token
-     * @param  array $tag
+     * @param  array $markup
      * @return string
      */
-    protected function _executeReplace(Markup\Token $token, $tag)
+    protected function _executeReplace(Markup\Token $token, $markup)
     {
-        return $tag['start'] . $this->_render($token) . $tag['end'];
+        return $markup['start'] . $this->_render($token) . $markup['end'];
     }
 
     /**
      * Execute a single replace token
      *
      * @param  \Zend\Markup\Token $token
-     * @param  array $tag
+     * @param  array $markup
      * @return string
      */
-    protected function _executeSingleReplace(Markup\Token $token, $tag)
+    protected function _executeSingleReplace(Markup\Token $token, $markup)
     {
-        return $tag['replace'];
+        return $markup['replace'];
     }
 
     /**

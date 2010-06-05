@@ -28,7 +28,7 @@ use Zend\Markup\Renderer\Markup;
 use Zend\Markup\Token;
 
 /**
- * Tag interface
+ * List item markup
  *
  * @uses       \Zend\Markup\Renderer\Markup\MarkupAbstract
  * @uses       \Zend\Markup\Token

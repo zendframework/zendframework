@@ -28,18 +28,18 @@ use Zend\Markup\Renderer\Markup;
 use Zend\Markup\Token;
 
 /**
- * Tag interface
+ * URL markup for HTML
  *
  * @uses       \Zend\Markup\Renderer\HTML
  * @uses       \Zend\Markup\Renderer\Markup\MarkupAbstract
  * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Html
+ * @subpackage Renderer_Markup_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Url extends Markup\MarkupAbstract
+class URL extends Markup\MarkupAbstract
 {
 
     /**
@@ -63,6 +63,7 @@ class Url extends Markup\MarkupAbstract
         }
 
         // check if the URL is valid
+        // TODO: use the new Zend\URI for this
         if (!\Zend\Markup\Renderer\HTML::isValidUri($uri)) {
             return $text;
         }
@@ -70,9 +71,8 @@ class Url extends Markup\MarkupAbstract
         $attributes = \Zend\Markup\Renderer\HTML::renderAttributes($token);
 
         // run the URI through htmlentities
-        $uri = htmlentities($uri, ENT_QUOTES, \Zend\Markup\Renderer\HTML::getEncoding());
+        $uri = htmlentities($uri, ENT_QUOTES, $this->getEncoding());
 
         return "<a href=\"{$uri}\"{$attributes}>{$text}</a>";
     }
-
 }

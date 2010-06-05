@@ -28,7 +28,7 @@ use Zend\Markup\Renderer\Markup;
 use Zend\Markup\Token;
 
 /**
- * Tag interface
+ * Image markup for HTML
  *
  * @uses       \Zend\Markup\Renderer\HTML
  * @uses       \Zend\Markup\Renderer\Markup\MarkupAbstract
@@ -76,10 +76,10 @@ class Img extends Markup\MarkupAbstract
         }
 
         // run the URI and alt through htmlentities
-        $uri = htmlentities($uri, ENT_QUOTES, \Zend\Markup\Renderer\HTML::getEncoding());
-        $alt = htmlentities($alt, ENT_QUOTES, \Zend\Markup\Renderer\HTML::getEncoding());
+        $uri = htmlentities($uri, ENT_QUOTES, $this->getEncoding());
+        $alt = htmlentities($alt, ENT_QUOTES, $this->getEncoding());
 
-
+        // TODO: mode \Zend\Markup\Renderer\HTML::renderAttributes() to \Zend\Markup\Renderer\Markup\HTML\HTMLAbstract
         return "<img src=\"{$uri}\" alt=\"{$alt}\"" . \Zend\Markup\Renderer\HTML::renderAttributes($token) . " />";
     }
 }

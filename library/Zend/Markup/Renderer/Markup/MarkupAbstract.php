@@ -27,7 +27,7 @@ namespace Zend\Markup\Renderer\Markup
 use Zend\Markup\Renderer
 
 /**
- * Tag interface
+ * Abstract markup
  *
  * @uses       \Zend\Markup\Renderer\TokenConverterInterface
  * @uses       \Zend\Markup\Renderer\RendererAbstract

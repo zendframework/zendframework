@@ -39,6 +39,15 @@ interface MarkupInterface
 {
 
     /**
+     * Set the encoding on this markup
+     *
+     * @param string $encoding
+     *
+     * @return void
+     */
+    public function setEncoding($encoding = 'UTF-8');
+
+    /**
      * Invoke the markup
      *
      * @param \Zend\Markup\Token $token

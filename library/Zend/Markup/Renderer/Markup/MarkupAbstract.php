@@ -47,6 +47,37 @@ abstract class MarkupAbstract implements MarkupInterface
      */
     protected $_renderer;
 
+    /**
+     * Markup's encoding
+     *
+     * @var string
+     */
+    protected $_encoding;
+
+
+    /**
+     * Set the encoding on this markup
+     *
+     * @param string $encoding
+     *
+     * @return \Zend\Markup\Renderer\Markup\MarkupAbstract
+     */
+    public function setEncoding($encoding = 'UTF-8')
+    {
+        $this->_encoding = $encoding;
+
+        return $this;
+    }
+
+    /**
+     * Get this markup's encoding
+     *
+     * @return string
+     */
+    public function getEncoding()
+    {
+        return $this->_encoding;
+    }
 
     /**
      * Set the renderer instance
@@ -58,6 +89,8 @@ abstract class MarkupAbstract implements MarkupInterface
     public function setRenderer(Renderer\RendererAbstract $renderer)
     {
         $this->_renderer = $renderer;
+
+        $this->setEncoding($renderer->getEncoding());
 
         return $this
     }

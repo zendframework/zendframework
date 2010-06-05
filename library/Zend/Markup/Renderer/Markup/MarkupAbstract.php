@@ -17,19 +17,18 @@
  * @subpackage Renderer_Markup
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\Markup
-use Zend\Markup\Renderer
+namespace Zend\Markup\Renderer\Markup;
+use Zend\Markup\Renderer;
 
 /**
  * Abstract markup
  *
- * @uses       \Zend\Markup\Renderer\TokenConverterInterface
+ * @uses       \Zend\Markup\Renderer\Markup\MarkupInterface
  * @uses       \Zend\Markup\Renderer\RendererAbstract
  * @category   Zend
  * @package    Zend_Markup
@@ -92,7 +91,7 @@ abstract class MarkupAbstract implements MarkupInterface
 
         $this->setEncoding($renderer->getEncoding());
 
-        return $this
+        return $this;
     }
 
     /**

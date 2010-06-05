@@ -24,13 +24,12 @@
  * @namespace
  */
 namespace Zend\Markup\Renderer\Markup\HTML;
-use Zend\Markup\Renderer\Markup;
-use Zend\Markup\Token;
+use Zend\Markup;
 
 /**
  * Code markup for HTML
  *
- * @uses       \Zend\Markup\Renderer\Markup\MarkupAbstract
+ * @uses       \Zend\Markup\Renderer\Markup\HTML\HTMLAbstract
  * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
@@ -38,7 +37,7 @@ use Zend\Markup\Token;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Code extends Markup\MarkupAbstract
+class Code extends HTMLAbstract
 {
 
     /**
@@ -49,7 +48,7 @@ class Code extends Markup\MarkupAbstract
      *
      * @return string
      */
-    public function __invoke(Token $token, $text)
+    public function __invoke(Markup\Token $token, $text)
     {
         return highlight_string($text, true);
     }

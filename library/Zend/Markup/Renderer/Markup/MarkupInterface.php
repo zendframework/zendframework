@@ -25,10 +25,12 @@
  */
 namespace Zend\Markup\Renderer\Markup;
 use Zend\Markup;
+use Zend\Markup\Renderer;
 
 /**
  * Interface for a markup
  *
+ * @uses       \Zend\Markup\Renderer\RendererAbstract
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup
@@ -43,9 +45,18 @@ interface MarkupInterface
      *
      * @param string $encoding
      *
-     * @return void
+     * @return \Zend\Markup\Renderer\Markup\MarkupInterface
      */
     public function setEncoding($encoding = 'UTF-8');
+
+    /**
+     * Set the renderer on this markup
+     *
+     * @param \Zend\Markup\Renderer\RendererAbstract $renderer
+     *
+     * @return \Zend\Markup\Renderer\Markup\MarkupInterface
+     */
+    public function setRenderer(Renderer\RendererAbstract $renderer);
 
     /**
      * Invoke the markup

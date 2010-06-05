@@ -31,7 +31,7 @@ use Zend\Markup\Token;
  * Image markup for HTML
  *
  * @uses       \Zend\Markup\Renderer\HTML
- * @uses       \Zend\Markup\Renderer\Markup\MarkupAbstract
+ * @uses       \Zend\Markup\Renderer\Markup\HTML\HTMLAbstract
  * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
@@ -39,7 +39,7 @@ use Zend\Markup\Token;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Img extends Markup\MarkupAbstract
+class Img extends HTMLAbstract
 {
 
     /**
@@ -79,7 +79,6 @@ class Img extends Markup\MarkupAbstract
         $uri = htmlentities($uri, ENT_QUOTES, $this->getEncoding());
         $alt = htmlentities($alt, ENT_QUOTES, $this->getEncoding());
 
-        // TODO: mode \Zend\Markup\Renderer\HTML::renderAttributes() to \Zend\Markup\Renderer\Markup\HTML\HTMLAbstract
-        return "<img src=\"{$uri}\" alt=\"{$alt}\"" . \Zend\Markup\Renderer\HTML::renderAttributes($token) . " />";
+        return "<img src=\"{$uri}\" alt=\"{$alt}\"" . $this->renderAttributes($token) . " />";
     }
 }

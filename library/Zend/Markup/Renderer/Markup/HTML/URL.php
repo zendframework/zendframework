@@ -24,14 +24,13 @@
  * @namespace
  */
 namespace Zend\Markup\Renderer\Markup\HTML;
-use Zend\Markup\Renderer\Markup;
 use Zend\Markup\Token;
 
 /**
  * URL markup for HTML
  *
  * @uses       \Zend\Markup\Renderer\HTML
- * @uses       \Zend\Markup\Renderer\Markup\MarkupAbstract
+ * @uses       \Zend\Markup\Renderer\Markup\HTML\HTMLAbstract
  * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
@@ -39,7 +38,7 @@ use Zend\Markup\Token;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class URL extends Markup\MarkupAbstract
+class URL extends HTMLAbstract
 {
 
     /**
@@ -68,7 +67,7 @@ class URL extends Markup\MarkupAbstract
             return $text;
         }
 
-        $attributes = \Zend\Markup\Renderer\HTML::renderAttributes($token);
+        $attributes = $this->renderAttributes($token);
 
         // run the URI through htmlentities
         $uri = htmlentities($uri, ENT_QUOTES, $this->getEncoding());

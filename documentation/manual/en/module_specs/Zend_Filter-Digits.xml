@@ -26,14 +26,20 @@
 $filter = new Zend_Filter_Digits();
 
 print $filter->filter('October 2009');
-// returns "2009"
 ]]></programlisting>
+
+        <para>
+            This returns "2009".
+        </para>
 
         <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Digits();
 
 print $filter->filter('HTML 5 for Dummies');
-// returns "5"
 ]]></programlisting>
+
+        <para>
+            This returns "5".
+        </para>
     </sect3>
 </sect2>

@@ -28,6 +28,7 @@
                     <constant>ENT_COMPAT</constant>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis><property>charset</property></emphasis>: Equivalent to the
@@ -105,12 +106,11 @@ print $filter->filter($input);
 $filter = new Zend_Filter_HtmlEntities(array('quotestyle' => ENT_COMPAT));
 
 $input  = "A 'single' and " . '"double"';
-$return = $filter->filter($input);
-print "A 'single' and &quot;double&quot;"
+print $filter->filter($input);
 ]]></programlisting>
 
         <para>
-            The above example returns <emphasis>>A 'single' and &quot;double&quot;</emphasis>.
+            The above example returns <emphasis>A 'single' and &quot;double&quot;</emphasis>.
             Notice that "double" quotes are filtered while 'single' quotes are not altered.
         </para>
 
@@ -125,7 +125,6 @@ print $filter->filter($input);
             The above example returns <emphasis>A 'single' and "double"</emphasis>. Notice that
             neither "double" or 'single' quotes are altered.
         </para>
-
     </sect3>
 
     <sect3 id="zend.filter.set.htmlentities.">
@@ -134,10 +133,9 @@ print $filter->filter($input);
         <para>
             To change or retrieve the <property>quotestyle</property> after instantiation, the two
             methods <methodname>setQuoteStyle()</methodname> and
-            <methodname>getQuoteStyle()</methodname> may be used respectively
+            <methodname>getQuoteStyle()</methodname> may be used respectively.
             <methodname>setQuoteStyle()</methodname> accepts one parameter
-            <varname>$quoteStyle</varname>; The following constants are accepted:
-
+            <varname>$quoteStyle</varname>. The following constants are accepted:
             <constant>ENT_COMPAT</constant>, <constant>ENT_QUOTES</constant>,
             <constant>ENT_NOQUOTES</constant>
         </para>
@@ -153,7 +151,7 @@ print $filter->getQuoteStyle(ENT_QUOTES);
             To change or retrieve the <property>charset</property> after instantiation, the two
             methods <methodname>setCharSet()</methodname> and <methodname>getCharSet()</methodname>
             may be used respectively. <methodname>setCharSet()</methodname> accepts one parameter
-            <varname>$charSet</varname>; See "http://php.net/htmlentities" for a list of supported
+            <varname>$charSet</varname>. See "http://php.net/htmlentities" for a list of supported
             character sets.
         </para>
 
@@ -179,7 +177,6 @@ $filter->setQuoteStyle(ENT_QUOTES);
 print $filter->getQuoteStyle(ENT_QUOTES);
 ]]></programlisting>
     </sect3>
-
 </sect2>
 <!--
 vim:se ts=4 sw=4 et:

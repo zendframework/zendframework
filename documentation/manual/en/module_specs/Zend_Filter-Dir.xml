@@ -23,20 +23,24 @@
             A basic example of usage is below:
         </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Dir();
 
 print $filter->filter('/etc/passwd');
-// returns "/etc"
 ]]></programlisting>
 
-     <programlisting language="php"><![CDATA[
+        <para>
+            This returns "/etc".
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Dir();
 
-print $filter->filter('c:/Temp/x');
-// returns "c:/Temp"
+print $filter->filter('C:/Temp/x');
 ]]></programlisting>
 
+        <para>
+            This returns "C:/Temp".
+        </para>
     </sect3>
-
 </sect2>

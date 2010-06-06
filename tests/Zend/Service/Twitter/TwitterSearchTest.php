@@ -56,6 +56,7 @@ class TwitterSearchTest extends \PHPUnit_Framework_TestCase
             return;
         }
         $this->markTestIncomplete('Need to port this over to Zend\Feed\Reader');
+        return;
         $this->twitter = new Twitter\Search();
     }
 

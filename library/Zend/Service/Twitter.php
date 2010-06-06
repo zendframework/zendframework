@@ -29,28 +29,13 @@ use Zend\REST;
 use Zend\OAuth;
 
 /**
- * @see \Zend\Rest\Client
- */
-require_once 'Zend/Rest/Client.php';
-
-/**
- * @see \Zend\Rest\Client\Result
- */
-require_once 'Zend/Rest/Client/Result.php';
-
-/**
- * @see \Zend\OAuth\Consumer
- */
-require_once 'Zend/OAuth/Consumer.php';
-
-/**
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Twitter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Twitter extends REST\Client
+class Twitter extends REST\Client\RESTClient
 {
 
     /**
@@ -152,9 +137,9 @@ class Twitter extends REST\Client
         && $options['accessToken'] instanceof OAuth\Token\Access) {
             $this->setLocalHttpClient($options['accessToken']->getHttpClient($options));
         } else {
-            $this->setLocalHttpClient(clone self::getHttpClient());
+            $this->setLocalHttpClient(clone self::getDefaultHTTPClient());
             if (is_null($consumer)) {
-                $this->_oauthConsumer = new \OAuth\Consumer($options);
+                $this->_oauthConsumer = new OAuth\Consumer($options);
             } else {
                 $this->_oauthConsumer = $consumer;
             }
@@ -231,8 +216,7 @@ class Twitter extends REST\Client
     public function __get($type)
     {
         if (!in_array($type, $this->_methodTypes)) {
-            include_once 'Zend/Service/Twitter/Exception.php';
-            throw new Service\Twitter\Exception(
+            throw new Twitter\Exception(
                 'Invalid method type "' . $type . '"'
             );
         }
@@ -252,21 +236,19 @@ class Twitter extends REST\Client
     {
         if (method_exists($this->_oauthConsumer, $method)) {
             $return = call_user_func_array(array($this->_oauthConsumer, $method), $params);
-            if ($return instanceof \OAuth\Token\Access) {
+            if ($return instanceof OAuth\Token\Access) {
                 $this->setLocalHttpClient($return->getHttpClient($this->_options));
             }
             return $return;
         }
         if (empty($this->_methodType)) {
-            include_once 'Zend/Service/Twitter/Exception.php';
-            throw new Service\Twitter\Exception(
+            throw new Twitter\Exception(
                 'Invalid method "' . $method . '"'
             );
         }
         $test = $this->_methodType . ucfirst($method);
         if (!method_exists($this, $test)) {
-            include_once 'Zend/Service/Twitter/Exception.php';
-            throw new Service\Twitter\Exception(
+            throw new Twitter\Exception(
                 'Invalid method "' . $test . '"'
             );
         }
@@ -282,8 +264,7 @@ class Twitter extends REST\Client
     protected function _init()
     {
         if (!$this->isAuthorised() && $this->getUsername() !== null) {
-            require_once 'Zend/Service/Twitter/Exception.php';
-            throw new Service\Twitter\Exception(
+            throw new Twitter\Exception(
                 'Twitter session is unauthorised. You need to initialize '
                 . 'Zend_Service_Twitter with an OAuth Access Token or use '
                 . 'its OAuth functionality to obtain an Access Token before '
@@ -465,14 +446,14 @@ class Twitter extends REST\Client
         $len = iconv_strlen(htmlspecialchars($status, ENT_QUOTES, 'UTF-8'), 'UTF-8');
         if ($len > self::STATUS_MAX_CHARACTERS) {
             include_once 'Zend/Service/Twitter/Exception.php';
-            throw Twitter\Exception(
+            throw new Twitter\Exception(
                 'Status must be no more than '
                 . self::STATUS_MAX_CHARACTERS
                 . ' characters in length'
             );
         } elseif (0 == $len) {
             include_once 'Zend/Service/Twitter/Exception.php';
-            throw Twitter\Exception(
+            throw new Twitter\Exception(
                 'Status must contain at least one character'
             );
         }
@@ -673,11 +654,11 @@ class Twitter extends REST\Client
         $path = '/1/direct_messages/new.xml';
         $len = iconv_strlen($text, 'UTF-8');
         if (0 == $len) {
-            throw Twitter\Exception(
+            throw new Twitter\Exception(
                 'Direct message must contain at least one character'
             );
         } elseif (140 < $len) {
-            throw Twitter\Exception(
+            throw new Twitter\Exception(
                 'Direct message must contain no more than 140 characters'
             );
         }
@@ -946,8 +927,7 @@ class Twitter extends REST\Client
     protected function _validateScreenName($name)
     {
         if (!preg_match('/^[a-zA-Z0-9_]{0,20}$/', $name)) {
-            require_once 'Zend/Service/Twitter/Exception.php';
-            throw Twitter\Exception(
+            throw new Twitter\Exception(
                 'Screen name, "' . $name
                 . '" should only contain alphanumeric characters and'
                 . ' underscores, and not exceed 15 characters.');
@@ -965,14 +945,13 @@ class Twitter extends REST\Client
     protected function _prepare($path)
     {
         // Get the URI object and configure it
-        if (!$this->_uri instanceof Zend_Uri_Http) {
-            require_once 'Zend/Rest/Client/Exception.php';
-            throw new Zend_Rest_Client_Exception(
+        if (!$this->_uri instanceof \Zend\URI\URL) {
+            throw new REST\Client\Exception(
                 'URI object must be set before performing call'
             );
         }
 
-        $uri = $this->_uri->getUri();
+        $uri = $this->_uri->generate();
 
         if ($path[0] != '/' && $uri[strlen($uri) - 1] != '/') {
             $path = '/' . $path;

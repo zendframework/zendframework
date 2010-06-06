@@ -89,7 +89,7 @@
             is performed, this hierarchy has its pieces passed to relevant renderers and the partial
             feeds (all DOMDocuments) are then pieced together to create a complete feed. In the case
             of Source or Deleted (Tomestone) containers, these are rendered only for Atom 2.0 and
-            ignored for RSS.
+            ignored for <acronym>RSS</acronym>.
         </para>
 
         <para>
@@ -367,8 +367,8 @@ $out = $feed->export('atom');
                             Sets the date on which this feed was last build. The expected
                             parameter may be a <acronym>UNIX</acronym> timestamp or a
                             <classname>Zend_Date</classname> object. This will only be
-                            rendered for RSS 2.0 feeds and is automatically rendered as
-                            the current date by default when not explicity set.
+                            rendered for <acronym>RSS</acronym> 2.0 feeds and is automatically
+                            rendered as the current date by default when not explicity set.
                         </entry>
                     </row>
 
@@ -431,50 +431,72 @@ $out = $feed->export('atom');
 
                     <row>
                         <entry><methodname>setImage()</methodname></entry>
+
                         <entry>
-                            Accepts an array of image metadata for an RSS image or Atom logo. Atom 1.0
-                            only requires a URI. RSS 2.0 requires a URI, HTML link, and an image title.
-                            RSS 2.0 optionally may send a width, height and image description. The array
-                            parameter may contain these using the keys: uri, link, title, description,
-                            height and width. The RSS 2.0 HTML link should point to the feed source's
-                            HTML page.
+                            Accepts an array of image metadata for an <acronym>RSS</acronym> image
+                            or Atom logo. Atom 1.0 only requires a <acronym>URI</acronym>.
+                            <acronym>RSS</acronym> 2.0 requires a <acronym>URI</acronym>,
+                            <acronym>HTML</acronym> link, and an image title. <acronym>RSS</acronym>
+                            2.0 optionally may send a width, height and image description. The array
+                            parameter may contain these using the keys: <property>uri</property>,
+                            <property>link</property>, <property>title</property>,
+                            <property>description</property>, <property>height</property> and
+                            <property>width</property>. The <acronym>RSS</acronym> 2.0
+                            <acronym>HTML</acronym> link should point to the feed source's
+                            <acronym>HTML</acronym> page.
                         </entry>
                     </row>
 
                     <row>
                         <entry><methodname>createEntry()</methodname></entry>
-                        <entry>Returns a new instance of <classname>Zend_Feed_Writer_Entry
-                        </classname>. This is the Entry level data container. New entries
-                        are not automatically assigned to the current feed, so you
-                        must explicitly call <methodname>addEntry()</methodname>
-                        to add the entry for rendering.</entry>
+
+                        <entry>
+                            Returns a new instance of
+                            <classname>Zend_Feed_Writer_Entry</classname>. This is the Entry level
+                            data container. New entries are not automatically assigned to the
+                            current feed, so you must explicitly call
+                            <methodname>addEntry()</methodname> to add the entry for rendering.
+                        </entry>
                     </row>
 
                     <row>
                         <entry><methodname>addEntry()</methodname></entry>
-                        <entry>Adds an instance of <classname>Zend_Feed_Writer_Entry
-                        </classname> to the current feed container for rendering.</entry>
+
+                        <entry>
+                            Adds an instance of <classname>Zend_Feed_Writer_Entry</classname>
+                            to the current feed container for rendering.
+                        </entry>
                     </row>
 
                     <row>
                         <entry><methodname>createTombstone()</methodname></entry>
-                        <entry>Returns a new instance of <classname>Zend_Feed_Writer_Deleted
-                        </classname>. This is the Atom 2.0 Tombstone level data container. New
-                        entries are not automatically assigned to the current feed, so you
-                        must explicitly call <methodname>addTombstone()</methodname>
-                        to add the deleted entry for rendering.</entry>
+
+                        <entry>
+                            Returns a new instance of
+                            <classname>Zend_Feed_Writer_Deleted</classname>. This is the Atom 2.0
+                            Tombstone level data container. New entries are not automatically
+                            assigned to the current feed, so you must explicitly call
+                            <methodname>addTombstone()</methodname> to add the deleted entry for
+                            rendering.
+                        </entry>
                     </row>
 
                     <row>
                         <entry><methodname>addTombstone()</methodname></entry>
-                        <entry>Adds an instance of <classname>Zend_Feed_Writer_Deleted
-                        </classname> to the current feed container for rendering.</entry>
+
+                        <entry>
+                            Adds an instance of <classname>Zend_Feed_Writer_Deleted</classname> to
+                            the current feed container for rendering.
+                        </entry>
                     </row>
 
                     <row>
                         <entry><methodname>removeEntry()</methodname></entry>
-                        <entry>Accepts a parameter indicating an array index of the
-                        entry to remove from the feed.</entry>
+
+                        <entry>
+                            Accepts a parameter indicating an array index of the entry to remove
+                            from the feed.
+                        </entry>
                     </row>
 
                     <row>
@@ -701,7 +723,7 @@ $out = $feed->export('atom');
         <note>
             <para>
                 In addition to these setters, there are also matching getters to retrieve data from
-                from the Entry data container.
+                the Entry data container.
             </para>
         </note>
     </sect2>

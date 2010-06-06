@@ -28,9 +28,7 @@
             entirely on the basis of making XPath queries against the feed <acronym>XML</acronym>'s
             Document Object Model. The <acronym>DOM</acronym> is not exposed though a chained
             property <acronym>API</acronym> like <classname>Zend_Feed</classname> though the
-            underlying <classname>DOMDocument</classname>,
-            <classname>DOMElement</classname> and
-            <classname>DOMXPath</classname> objects are exposed for external
+            underlying DOMDocument, DOMElement and DOMXPath objects are exposed for external
             manipulation. This singular approach to parsing is consistent and
             the component offers a plugin system to add to the Feed and Entry
             level <acronym>API</acronym> by writing Extensions on a similar basis.
@@ -46,7 +44,7 @@
             by an internal cache (non-persistant) so repeat <acronym>API</acronym> calls for the
             same feed will avoid additional <acronym>DOM</acronym>/XPath use. Thirdly, importing
             feeds from a <acronym>URI</acronym> can take advantage of
-            <acronym>HTTP</acronym> Conditional GET requests
+            <acronym>HTTP</acronym> Conditional <acronym>GET</acronym> requests
             which allow servers to issue an empty 304 response when the
             requested feed has not changed since the last time you requested it.
             In the final case, an instance of <classname>Zend_Cache</classname>
@@ -75,9 +73,9 @@
             that much different to <classname>Zend_Feed</classname>. Feeds can
             be imported from a string, file, <acronym>URI</acronym> or an instance of type
             <classname>Zend_Feed_Abstract</classname>. Importing from a <acronym>URI</acronym> can
-            additionally utilise a <acronym>HTTP</acronym> Conditional GET request. If importing
-            fails, an exception will be raised. The end result will be an object
-            of type <classname>Zend_Feed_Reader_FeedInterface</classname>, the
+            additionally utilise a <acronym>HTTP</acronym> Conditional <acronym>GET</acronym>
+            request. If importing fails, an exception will be raised. The end result will be an
+            object of type <classname>Zend_Feed_Reader_FeedInterface</classname>, the
             core implementations of which are
             <classname>Zend_Feed_Reader_Feed_Rss</classname> and
             <classname>Zend_Feed_Reader_Feed_Atom</classname>
@@ -161,12 +159,10 @@ $feed  = Zend_Feed_Reader::importFeed($zfeed);
             <classname>Zend_Feed_Reader</classname> does its best not to stick
             you in a narrow confine. If you need to work on a feed outside of
             <classname>Zend_Feed_Reader</classname>, you can extract the base
-            <classname>DOMDocument</classname> or
-            <classname>DOMElement</classname> objects from any class, or even an
-            <acronym>XML</acronym> string containing these. Also provided are methods to extract
-            the current <classname>DOMXPath</classname> object (with all core
-            and Extension namespaces registered) and the correct prefix used in
-            all XPath queries for the current Feed or Entry. The basic methods
+            DOMDocument or DOMElement objects from any class, or even an <acronym>XML</acronym>
+            string containing these. Also provided are methods to extract the current DOMXPath
+            object (with all core and Extension namespaces registered) and the correct prefix used
+            in all XPath queries for the current Feed or Entry. The basic methods
             to use (on any object) are <methodname>saveXml()</methodname>,
             <methodname>getDomDocument()</methodname>,
             <methodname>getElement()</methodname>,
@@ -186,25 +182,22 @@ $feed  = Zend_Feed_Reader::importFeed($zfeed);
 
             <listitem>
                 <para>
-                    <methodname>getDomDocument()</methodname> returns the
-                    <classname>DOMDocument</classname> object representing the
-                    entire feed (even if called from an Entry object).
+                    <methodname>getDomDocument()</methodname> returns the DOMDocument object
+                    representing the entire feed (even if called from an Entry object).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>getElement()</methodname> returns the
-                    <classname>DOMElement</classname> of the current object
-                    (i.e. the Feed or current Entry).
+                    DOMElement of the current object (i.e. the Feed or current Entry).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>getXpath()</methodname> returns the
-                    <classname>DOMXPath</classname> object for the current feed
-                    (even if called from an Entry object) with the namespaces of
+                    <methodname>getXpath()</methodname> returns the DOMXPath object for the current
+                    feed (even if called from an Entry object) with the namespaces of
                     the current feed type and all loaded Extensions
                     pre-registered.
                 </para>
@@ -224,9 +217,8 @@ $feed  = Zend_Feed_Reader::importFeed($zfeed);
             Here's an example where a feed might include an <acronym>RSS</acronym> Extension not
             supported by <classname>Zend_Feed_Reader</classname> out of the box.
             Notably, you could write and register an Extension (covered later)
-            to do this, but that's not always warranted for a quick check. You
-            must register any new namespaces on the
-            <classname>DOMXPath</classname> object before use unless they are
+            to do this, but that's not always warranted for a quick check. You must register any
+            new namespaces on the DOMXPath object before use unless they are
             registered by <classname>Zend_Feed_Reader</classname> or an
             Extension beforehand.
         </para>
@@ -298,7 +290,7 @@ Zend_Feed_Reader::setCache($cache);
             <para>
                 The big question often asked when importing a feed frequently, is
                 if it has even changed. With a cache enabled, you can add <acronym>HTTP</acronym>
-                Conditional GET support to your arsenal to answer that question.
+                Conditional <acronym>GET</acronym> support to your arsenal to answer that question.
             </para>
 
             <para>
@@ -340,10 +332,10 @@ $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
 ]]></programlisting>
 
             <para>
-                In the example above, with <acronym>HTTP</acronym> Conditional GET requests enabled,
-                the response header values for ETag and Last-Modified will be cached
-                along with the feed. For the next 24hrs (the cache lifetime), feeds will
-                only be updated on the cache if a non-304 response is received
+                In the example above, with <acronym>HTTP</acronym> Conditional
+                <acronym>GET</acronym> requests enabled, the response header values for ETag and
+                Last-Modified will be cached along with the feed. For the next 24hrs (the cache
+                lifetime), feeds will only be updated on the cache if a non-304 response is received
                 containing a valid <acronym>RSS</acronym> or Atom <acronym>XML</acronym> document.
             </para>
 
@@ -391,9 +383,9 @@ $feed = Zend_Feed_Reader::import(
             The returned object is an <classname>ArrayObject</classname> subclass
             called <classname>Zend_Feed_Reader_Collection_FeedLink</classname> so you can cast
             it to an array, or iterate over it, to access all the detected links.
-            However, as a simple shortcut, you can just grab the first RSS, RDF
-            or Atom link using its public properties as in the example below. Otherwise,
-            each element of the <classname>ArrayObject</classname> is a simple array
+            However, as a simple shortcut, you can just grab the first <acronym>RSS</acronym>,
+            <acronym>RDF</acronym> or Atom link using its public properties as in the example below.
+            Otherwise, each element of the <classname>ArrayObject</classname> is a simple array
             with the keys "type" and "uri" where the type is one of "rdf", "rss" or
             "atom".
         </para>
@@ -420,7 +412,7 @@ if(isset($links->atom)) {
         <para>
             This quick method only gives you one link for each feed type, but
             websites may indicate many links of any type. Perhaps it's a news
-            site with a RSS feed for each news category. You can iterate over
+            site with a <acronym>RSS</acronym> feed for each news category. You can iterate over
             all links using the ArrayObject's iterator.
         </para>
 
@@ -460,14 +452,15 @@ foreach ($links as $link) {
         <para>
             A simple example of this is
             <methodname>Zend_Feed_Reader_FeedInterface::getCategories()</methodname>. When used with
-            any RSS or Atom feed, this method will return category data as a container object called
-            <classname>Zend_Feed_Reader_Collection_Category</classname>. The container object will
-            contain, per category, three fields of data: term, scheme and label. The "term" is the
-            basic category name, often machine readable (i.e. plays nice with URIs). The scheme
-            represents a categorisation scheme (usually a URI identifier) also known as a "domain"
-            in RSS 2.0. The "label" is a human readable category name which supports
-            <acronym>HTML</acronym> entities. In RSS 2.0, there is no label attribute so it is
-            always set to the same value as the term for convenience.
+            any <acronym>RSS</acronym> or Atom feed, this method will return category data as a
+            container object called <classname>Zend_Feed_Reader_Collection_Category</classname>. The
+            container object will contain, per category, three fields of data: term, scheme and
+            label. The "term" is the basic category name, often machine readable (i.e. plays nice
+            with <acronym>URI</acronym>s). The scheme represents a categorisation scheme (usually a
+            <acronym>URI</acronym> identifier) also known as a "domain" in <acronym>RSS</acronym>
+            2.0. The "label" is a human readable category name which supports
+            <acronym>HTML</acronym> entities. In <acronym>RSS</acronym> 2.0, there is no label
+            attribute so it is always set to the same value as the term for convenience.
         </para>
 
         <para>
@@ -534,14 +527,15 @@ $labels = $categories->getValues();
         <note>
             <para>
                 While determining common ground between feed types is itself complex, it
-                should be noted that RSS in particular is a constantly disputed "specification".
-                This has its roots in the original RSS 2.0 document which contains ambiguities
-                and does not detail the correct treatment of all elements. As a result, this
-                component rigorously applies the RSS 2.0.11 Specification published by the
-                RSS Advisory Board and its accompanying RSS Best Practices Profile. No
-                other interpretation of RSS 2.0 will be supported though exceptions may
-                be allowed where it does not directly prevent the application of the two
-                documents mentioned above.
+                should be noted that <acronym>RSS</acronym> in particular is a constantly disputed
+                "specification". This has its roots in the original <acronym>RSS</acronym> 2.0
+                document which contains ambiguities and does not detail the correct treatment of all
+                elements. As a result, this component rigorously applies the <acronym>RSS</acronym>
+                2.0.11 Specification published by the <acronym>RSS</acronym> Advisory Board and its
+                accompanying <acronym>RSS</acronym> Best Practices Profile. No other interpretation
+                of <acronym>RSS</acronym> 2.0 will be supported though exceptions may be allowed
+                where it does not directly prevent the application of the two documents mentioned
+                above.
             </para>
         </note>
 
@@ -660,7 +654,8 @@ $labels = $categories->getValues();
                         <entry>
                             Returns the date on which this feed was last built. The returned date
                             will be a <classname>Zend_Date</classname> object. This is only
-                            supported by RSS - Atom feeds will always return NULL.
+                            supported by <acronym>RSS</acronym> - Atom feeds will always return
+                            <constant>NULL</constant>.
                         </entry>
                     </row>
 
@@ -718,9 +713,13 @@ $labels = $categories->getValues();
 
                         <entry>
                             Returns an array containing data relating to any feed image or logo,
-                            or NULL if no image found. The resulting array may contain the following
-                            keys: uri, link, title, description, height, and width. Atom logos only
-                            contain a URI so the remaining metadata is drawn from RSS feeds only.
+                            or <constant>NULL</constant> if no image found. The resulting array may
+                            contain the following keys: <property>uri</property>,
+                            <property>link</property>, <property>title</property>,
+                            <property>description</property>, <property>height</property>, and
+                            <property>width</property>. Atom logos only contain a
+                            <acronym>URI</acronym> so the remaining metadata is drawn from
+                            <acronym>RSS</acronym> feeds only.
                         </entry>
                     </row>
                 </tbody>
@@ -769,8 +768,7 @@ $labels = $categories->getValues();
                         <entry><methodname>getDomDocument()</methodname></entry>
 
                         <entry>
-                            Returns the parent
-                            <classname>DOMDocument</classname> object for the
+                            Returns the parent DOMDocument object for the
                             entire source <acronym>XML</acronym> document
                         </entry>
                     </row>
@@ -779,8 +777,7 @@ $labels = $categories->getValues();
                         <entry><methodname>getElement()</methodname></entry>
 
                         <entry>
-                            Returns the current feed level
-                            <classname>DOMElement</classname> object
+                            Returns the current feed level DOMElement object
                         </entry>
                     </row>
 
@@ -798,10 +795,8 @@ $labels = $categories->getValues();
                         <entry><methodname>getXpath()</methodname></entry>
 
                         <entry>
-                            Returns the <classname>DOMXPath</classname> object
-                            used internally to run queries on the
-                            <classname>DOMDocument</classname> object (this
-                            includes core and Extension namespaces
+                            Returns the DOMXPath object used internally to run queries on the
+                            DOMDocument object (this includes core and Extension namespaces
                             pre-registered)
                         </entry>
                     </row>
@@ -1134,8 +1129,7 @@ $labels = $categories->getValues();
                         <entry><methodname>getDomDocument()</methodname></entry>
 
                         <entry>
-                            Returns the parent
-                            <classname>DOMDocument</classname> object for the
+                            Returns the parent DOMDocument object for the
                             entire feed (not just the current entry)
                         </entry>
                     </row>
@@ -1144,8 +1138,7 @@ $labels = $categories->getValues();
                         <entry><methodname>getElement()</methodname></entry>
 
                         <entry>
-                            Returns the current entry level
-                            <classname>DOMElement</classname> object
+                            Returns the current entry level DOMElement object
                         </entry>
                     </row>
 
@@ -1153,10 +1146,8 @@ $labels = $categories->getValues();
                         <entry><methodname>getXpath()</methodname></entry>
 
                         <entry>
-                            Returns the <classname>DOMXPath</classname> object
-                            used internally to run queries on the
-                            <classname>DOMDocument</classname> object (this
-                            includes core and Extension namespaces
+                            Returns the DOMXPath object used internally to run queries on the
+                            DOMDocument object (this includes core and Extension namespaces
                             pre-registered)
                         </entry>
                     </row>
@@ -1405,8 +1396,7 @@ $updatePeriod = $syndication->getUpdatePeriod();
                 Inevitably, there will be times when the
                 <classname>Zend_Feed_Reader</classname> <acronym>API</acronym> is just not capable
                 of getting something you need from a feed or entry. You can use
-                the underlying source objects, like
-                <classname>DOMDocument</classname>, to get these by hand however
+                the underlying source objects, like DOMDocument, to get these by hand however
                 there is a more reusable method available by writing Extensions
                 supporting these new queries.
             </para>

@@ -102,11 +102,11 @@
             updates it with new content. This may be a blog, an aggregator, or even a web service
             with a public feed based <acronym>API</acronym>. In order for these updates to be pushed
             to Subscribers, the Publisher must notify all of its supported Hubs that an update has
-            occured using a simple <acronym>HTTP</acronym> POST request containing the
-            <acronym>URI</acronym> or the updated Topic (i.e the updated <acronym>RSS</acronym> or
-            Atom feed). The Hub will confirm receipt of the notification, fetch the updated feed,
-            and forward any updates to any Subscribers who have subscribed to that Hub for updates
-            from the relevant feed.
+            occured using a simple <acronym>HTTP</acronym> <acronym>POST</acronym> request
+            containing the <acronym>URI</acronym> or the updated Topic (i.e the updated
+            <acronym>RSS</acronym> or Atom feed). The Hub will confirm receipt of the notification,
+            fetch the updated feed, and forward any updates to any Subscribers who have subscribed
+            to that Hub for updates from the relevant feed.
         </para>
 
         <para>
@@ -337,7 +337,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                     <tbody>
                         <row>
-                            <entry>hub.callback</entry>
+                            <entry><property>hub.callback</property></entry>
                             <entry>http://www.mydomain.com/hubbub/callback?xhub.subscription=5536df06b5dcb966edab3a4c4d56213c16a8184</entry>
 
                             <entry>

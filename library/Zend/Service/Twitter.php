@@ -27,7 +27,6 @@ namespace Zend\Service;
 use Zend\HTTP;
 use Zend\REST;
 use Zend\OAuth;
-use Zend\Service\Twitter;
 
 /**
  * @see \Zend\Rest\Client
@@ -233,7 +232,7 @@ class Twitter extends REST\Client
     {
         if (!in_array($type, $this->_methodTypes)) {
             include_once 'Zend/Service/Twitter/Exception.php';
-            throw new Twitter\Exception(
+            throw new Service\Twitter\Exception(
                 'Invalid method type "' . $type . '"'
             );
         }
@@ -260,14 +259,14 @@ class Twitter extends REST\Client
         }
         if (empty($this->_methodType)) {
             include_once 'Zend/Service/Twitter/Exception.php';
-            throw new Twitter\Exception(
+            throw new Service\Twitter\Exception(
                 'Invalid method "' . $method . '"'
             );
         }
         $test = $this->_methodType . ucfirst($method);
         if (!method_exists($this, $test)) {
             include_once 'Zend/Service/Twitter/Exception.php';
-            throw new Twitter\Exception(
+            throw new Service\Twitter\Exception(
                 'Invalid method "' . $test . '"'
             );
         }
@@ -284,7 +283,7 @@ class Twitter extends REST\Client
     {
         if (!$this->isAuthorised() && $this->getUsername() !== null) {
             require_once 'Zend/Service/Twitter/Exception.php';
-            throw new Twitter\Exception(
+            throw new Service\Twitter\Exception(
                 'Twitter session is unauthorised. You need to initialize '
                 . 'Zend_Service_Twitter with an OAuth Access Token or use '
                 . 'its OAuth functionality to obtain an Access Token before '

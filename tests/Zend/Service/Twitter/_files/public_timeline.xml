@@ -1,0 +1,909 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<statuses type="array">
+<status>
+  <created_at>Sun May 30 00:31:38 +0000 2010</created_at>
+  <id>15007779000</id>
+  <text>Vamos x la 2da peliculita  http://myloc.me/7AsT6</text>
+  <source>&lt;a href="http://ubertwitter.com" rel="nofollow"&gt;UberTwitter&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>78485547</id>
+    <name>veronica martinez</name>
+    <screen_name>PillitaMartinez</screen_name>
+    <location>ÜT: 19.830304,-90.532719</location>
+    <description/>
+    <profile_image_url>http://a1.twimg.com/profile_images/825836252/DSCF3118_normal.JPG</profile_image_url>
+    <url/>
+    <protected>false</protected>
+    <followers_count>118</followers_count>
+    <profile_background_color>DBE9ED</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>CC3366</profile_link_color>
+    <profile_sidebar_fill_color>E6F6F9</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>DBE9ED</profile_sidebar_border_color>
+    <friends_count>238</friends_count>
+    <created_at>Wed Sep 30 02:10:26 +0000 2009</created_at>
+    <favourites_count>1</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme17/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>1163</statuses_count>
+    <lang>es</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo xmlns:georss="http://www.georss.org/georss">
+    <georss:point>19.830304 -90.532719</georss:point>
+  </geo>
+  <coordinates xmlns:georss="http://www.georss.org/georss">
+    <georss:point>19.830304 -90.532719</georss:point>
+  </coordinates>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:37 +0000 2010</created_at>
+  <id>15007778000</id>
+  <text>vh1 classic es una buena forma de matar el aburrimiento o de despertar de una siesta</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>27191178</id>
+    <name>sinistro iturralde</name>
+    <screen_name>sinistrobjj</screen_name>
+    <location>arround the world</location>
+    <description>multiple times BJJ WORLD CHAMP</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/879992980/28159_413740013932_591928932_5147275_6661219_n_1__normal.jpg</profile_image_url>
+    <url>http://www.alliance-ecuador.blogspot.com</url>
+    <protected>false</protected>
+    <followers_count>99</followers_count>
+    <profile_background_color>1A1B1F</profile_background_color>
+    <profile_text_color>666666</profile_text_color>
+    <profile_link_color>2FC2EF</profile_link_color>
+    <profile_sidebar_fill_color>252429</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>181A1E</profile_sidebar_border_color>
+    <friends_count>89</friends_count>
+    <created_at>Sat Mar 28 06:25:43 +0000 2009</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/50908903/_MG_4623.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications/>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>945</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:35 +0000 2010</created_at>
+  <id>15007777000</id>
+  <text>at home watching eurovision missed it so yea :/ :L lol haha</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>63556065</id>
+    <name>rebekah n</name>
+    <screen_name>destinyxcyrus</screen_name>
+    <location/>
+    <description/>
+    <profile_image_url>http://a3.twimg.com/profile_images/930881677/100410_172128_normal.jpg</profile_image_url>
+    <url/>
+    <protected>false</protected>
+    <followers_count>24</followers_count>
+    <profile_background_color>131516</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>009999</profile_link_color>
+    <profile_sidebar_fill_color>efefef</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>eeeeee</profile_sidebar_border_color>
+    <friends_count>67</friends_count>
+    <created_at>Thu Aug 06 22:11:37 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset/>
+    <time_zone/>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/67769949/zwbra7.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>458</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:31 +0000 2010</created_at>
+  <id>15007774000</id>
+  <text>Milhares de pessoas prestigiam lançamento do programa Minha Casa, Minha Vida em Juazeiro. www.sertaocentral.com.br</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>79738493</id>
+    <name>Site Sertão Central</name>
+    <screen_name>sertao_central</screen_name>
+    <location>Brasil</location>
+    <description>Higo Carlos</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/661970544/logo_normal.jpg</profile_image_url>
+    <url>http://www.sertaocentral.com.br</url>
+    <protected>false</protected>
+    <followers_count>761</followers_count>
+    <profile_background_color>022330</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>0084B4</profile_link_color>
+    <profile_sidebar_fill_color>C0DFEC</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>a8c7f7</profile_sidebar_border_color>
+    <friends_count>1996</friends_count>
+    <created_at>Sun Oct 04 14:12:27 +0000 2009</created_at>
+    <favourites_count>6</favourites_count>
+    <utc_offset>-14400</utc_offset>
+    <time_zone>Santiago</time_zone>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/44248325/higo.jpg</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>1126</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:30 +0000 2010</created_at>
+  <id>15007773000</id>
+  <text>Wonderin why my nipple hurtin my dumb ass had money stuck in my ring lmao*</text>
+  <source>&lt;a href="http://blackberry.com/twitter" rel="nofollow"&gt;Twitter for BlackBerry®&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>127754413</id>
+    <name>*Coco*</name>
+    <screen_name>thiicknic69</screen_name>
+    <location>Harlem home of the Greatest*</location>
+    <description>Bad chocolate bitch nuff said*  href=http://mylikes.com/signup?token=thiicknic69img src=http://mylikes.com/images/mylikes125.png//</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/880181726/100391586_normal.jpg</profile_image_url>
+    <url>http://null</url>
+    <protected>false</protected>
+    <followers_count>366</followers_count>
+    <profile_background_color>C0DEED</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>0084B4</profile_link_color>
+    <profile_sidebar_fill_color>DDEEF6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>C0DEED</profile_sidebar_border_color>
+    <friends_count>360</friends_count>
+    <created_at>Tue Mar 30 04:10:19 +0000 2010</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset/>
+    <time_zone/>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/88880974/Jan23_014.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>4170</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:29 +0000 2010</created_at>
+  <id>15007772000</id>
+  <text>ハルピン・トゥルルルソン？</text>
+  <source>&lt;a href="http://apiwiki.twitter.com/" rel="nofollow"&gt;API&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>128592391</id>
+    <name>ピザまん</name>
+    <screen_name>pizaman_</screen_name>
+    <location>せいろ</location>
+    <description>蒸したてあつあつのピザまんだよ！【自動botです。なにかありましたらDMをお送りください】</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/790683386/o0350046010331203264_1__normal.jpg</profile_image_url>
+    <url>http://pleurer.web.fc2.com/newdir/pizaman.html</url>
+    <protected>false</protected>
+    <followers_count>89</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>93</friends_count>
+    <created_at>Thu Apr 01 15:47:08 +0000 2010</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-36000</utc_offset>
+    <time_zone>Hawaii</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>3890</statuses_count>
+    <lang>ja</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:27 +0000 2010</created_at>
+  <id>15007771000</id>
+  <text>irei fazer um formspring.me para o #euja_ ok? hahaha :)</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>142114624</id>
+    <name>euja...</name>
+    <screen_name>euja_</screen_name>
+    <location/>
+    <description>Um twitter feito por @karol_arantes e @analuiza_farias , no dia 09.05.10 ; com a inteção de sempre postar... eu já quis.. auehaieuhaeiuha. :) </description>
+    <profile_image_url>http://a3.twimg.com/profile_images/939283957/e_normal.jpg</profile_image_url>
+    <url/>
+    <protected>false</protected>
+    <followers_count>349</followers_count>
+    <profile_background_color>ACDED6</profile_background_color>
+    <profile_text_color>ff6a3d</profile_text_color>
+    <profile_link_color>038543</profile_link_color>
+    <profile_sidebar_fill_color>e1bbf0</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>1cc758</profile_sidebar_border_color>
+    <friends_count>281</friends_count>
+    <created_at>Mon May 10 00:54:47 +0000 2010</created_at>
+    <favourites_count>1</favourites_count>
+    <utc_offset>-14400</utc_offset>
+    <time_zone>Santiago</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/106463556/3487472232_05ea679f3c.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>1186</statuses_count>
+    <lang>es</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:26 +0000 2010</created_at>
+  <id>15007770000</id>
+  <text>本日、「SOLAR FREQUENCY 」スガユウスケは13時より90分Playします。　　http://www.techno.vc/</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>123203587</id>
+    <name>SilentMusicTW</name>
+    <screen_name>SilentMusicTW</screen_name>
+    <location/>
+    <description>柏を中心にTECHNO PARTY 'FUTURETECH'と'BIORIC'を開催しています</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/780902559/35855767_22_normal.jpg</profile_image_url>
+    <url>http://www.techno.vc/</url>
+    <protected>false</protected>
+    <followers_count>60</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>116</friends_count>
+    <created_at>Mon Mar 15 09:56:59 +0000 2010</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>32400</utc_offset>
+    <time_zone>Tokyo</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>36</statuses_count>
+    <lang>ja</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:25 +0000 2010</created_at>
+  <id>15007769000</id>
+  <text>justin bieber is sexy</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>146108581</id>
+    <name>Dalisa </name>
+    <screen_name>ilovejustinB493</screen_name>
+    <location>California</location>
+    <description>I love justin bieber and i am training to become a singer</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/939650119/Photo_on_2010-05-28_at_19.44__7_normal.jpg</profile_image_url>
+    <url/>
+    <protected>false</protected>
+    <followers_count>1</followers_count>
+    <profile_background_color>642D8B</profile_background_color>
+    <profile_text_color>3D1957</profile_text_color>
+    <profile_link_color>FF0000</profile_link_color>
+    <profile_sidebar_fill_color>7AC3EE</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>65B0DA</profile_sidebar_border_color>
+    <friends_count>4</friends_count>
+    <created_at>Thu May 20 16:25:16 +0000 2010</created_at>
+    <favourites_count>10</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme10/bg.gif</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>55</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:22 +0000 2010</created_at>
+  <id>15007767000</id>
+  <text>Im not there ,missin the slack promotions lol RT @abunny_: @MyKhal - LMAO. you here?. where you at?.</text>
+  <source>&lt;a href="http://www.echofon.com/" rel="nofollow"&gt;Echofon&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>30716605</id>
+    <name>MyKhal Angelo</name>
+    <screen_name>MyKhal</screen_name>
+    <location>B R O O K L Y N</location>
+    <description>If skill could kill then my art might Body Ya !  </description>
+    <profile_image_url>http://a3.twimg.com/profile_images/643472599/Screen_shot_2010-01-20_at_3.41.00_AM_normal.png</profile_image_url>
+    <url>http://Www.Grimeyville.Com</url>
+    <protected>false</protected>
+    <followers_count>437</followers_count>
+    <profile_background_color>000000</profile_background_color>
+    <profile_text_color>050505</profile_text_color>
+    <profile_link_color>545a4d</profile_link_color>
+    <profile_sidebar_fill_color>f4f3f1</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>f4f3f1</profile_sidebar_border_color>
+    <friends_count>396</friends_count>
+    <created_at>Sun Apr 12 20:37:49 +0000 2009</created_at>
+    <favourites_count>88</favourites_count>
+    <utc_offset>-18000</utc_offset>
+    <time_zone>Quito</time_zone>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/80588363/mikey-twitter.gif</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>13284</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:21 +0000 2010</created_at>
+  <id>15007766000</id>
+  <text>Uyu Damla uyu sabah kalkılamayacak sanırım :S Uyyykkkuuuuu ZZzzzzzZZZZzzzzzZzZzzZ</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>84396856</id>
+    <name>Damla YILMAZ</name>
+    <screen_name>yakamozdamla</screen_name>
+    <location/>
+    <description/>
+    <profile_image_url>http://a1.twimg.com/profile_images/905579364/GetAttachment_normal.jpg</profile_image_url>
+    <url>http://twitter.com/yakamozdamla</url>
+    <protected>false</protected>
+    <followers_count>63</followers_count>
+    <profile_background_color>1A1B1F</profile_background_color>
+    <profile_text_color>9c009c</profile_text_color>
+    <profile_link_color>258505</profile_link_color>
+    <profile_sidebar_fill_color>252429</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>181A1E</profile_sidebar_border_color>
+    <friends_count>53</friends_count>
+    <created_at>Thu Oct 22 19:03:22 +0000 2009</created_at>
+    <favourites_count>26</favourites_count>
+    <utc_offset/>
+    <time_zone/>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme9/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>2599</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:18 +0000 2010</created_at>
+  <id>15007764000</id>
+  <text>Road sodas :) http://tweetphoto.com/24627509</text>
+  <source>&lt;a href="http://ubertwitter.com" rel="nofollow"&gt;UberTwitter&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>16322863</id>
+    <name>HeardREI</name>
+    <screen_name>HeardREI</screen_name>
+    <location>Georgia</location>
+    <description>Name:Reina,3 degrees:Business Administration/Econ,Public Relations, Master of Science in Leadership.Now working on my Ph.D in Psychology!</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/787409701/rei1_normal.jpg</profile_image_url>
+    <url/>
+    <protected>false</protected>
+    <followers_count>182</followers_count>
+    <profile_background_color>FF6699</profile_background_color>
+    <profile_text_color>362720</profile_text_color>
+    <profile_link_color>f2ea3a</profile_link_color>
+    <profile_sidebar_fill_color>E5507E</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>CC3366</profile_sidebar_border_color>
+    <friends_count>397</friends_count>
+    <created_at>Wed Sep 17 03:07:06 +0000 2008</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-18000</utc_offset>
+    <time_zone>Eastern Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/70594212/DSC04739.JPG</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>2425</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:13 +0000 2010</created_at>
+  <id>15007760000</id>
+  <text>Just got my eyebrows threaded...i forgot how much that crap hurts compared to waxing</text>
+  <source>&lt;a href="/devices" rel="nofollow"&gt;txt&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>74595984</id>
+    <name>taylor robinson</name>
+    <screen_name>Taybaybay4</screen_name>
+    <location>p_town</location>
+    <description>haha you know me! diamondback 4 life</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/444160016/taybaybay_normal.jpg</profile_image_url>
+    <url/>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>000000</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>ff0090</profile_link_color>
+    <profile_sidebar_fill_color>000000</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>000000</profile_sidebar_border_color>
+    <friends_count>14</friends_count>
+    <created_at>Tue Sep 15 23:53:06 +0000 2009</created_at>
+    <favourites_count>1</favourites_count>
+    <utc_offset>-32400</utc_offset>
+    <time_zone>Alaska</time_zone>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/41293963/dots__.br.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>2737</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:12 +0000 2010</created_at>
+  <id>15007759000</id>
+  <text>RT @portrait23: One more unfollower===&amp;gt;@innBloom &amp;lt;smh #damnshame</text>
+  <source>&lt;a href="http://ubertwitter.com" rel="nofollow"&gt;UberTwitter&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>28163598</id>
+    <name>Miss Lady Q. Johnson</name>
+    <screen_name>QueenBorne9</screen_name>
+    <location>ÜT: 40.686027,-73.76704</location>
+    <description>Complicated, simple, highly intelligent and sarcastic as hell.</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/930692380/109816998_normal.jpg</profile_image_url>
+    <url>http://tweetphoto.com/user/972361</url>
+    <protected>false</protected>
+    <followers_count>1401</followers_count>
+    <profile_background_color>0a0401</profile_background_color>
+    <profile_text_color>0e35f5</profile_text_color>
+    <profile_link_color>0a0909</profile_link_color>
+    <profile_sidebar_fill_color>dbd0d4</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>c90202</profile_sidebar_border_color>
+    <friends_count>1361</friends_count>
+    <created_at>Wed Apr 01 18:38:14 +0000 2009</created_at>
+    <favourites_count>110</favourites_count>
+    <utc_offset>-18000</utc_offset>
+    <time_zone>Eastern Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/79602114/GmasRose2.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>46598</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:10 +0000 2010</created_at>
+  <id>15007758000</id>
+  <text>ALEX MANDAME SALUDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS !! TEAMOOOOO! :d (@speitzeroficial live on http://twitcam.com/tmoe))</text>
+  <source>&lt;a href="http://apiwiki.twitter.com/" rel="nofollow"&gt;API&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>109114456</id>
+    <name>Mari Carmen </name>
+    <screen_name>Magykc</screen_name>
+    <location>Crazy land</location>
+    <description>soii muii liinda 
+ztoii bn pinch fumada 
+jeje ♥I LOVE ME♥</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/866514626/Happy0700_normal.jpg</profile_image_url>
+    <url/>
+    <protected>false</protected>
+    <followers_count>24</followers_count>
+    <profile_background_color>e31d76</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>254ec7</profile_link_color>
+    <profile_sidebar_fill_color>ff0558</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>ff0d4a</profile_sidebar_border_color>
+    <friends_count>213</friends_count>
+    <created_at>Thu Jan 28 01:02:37 +0000 2010</created_at>
+    <favourites_count>3</favourites_count>
+    <utc_offset/>
+    <time_zone/>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/80836420/colores.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>897</statuses_count>
+    <lang>es</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:08 +0000 2010</created_at>
+  <id>15007756000</id>
+  <text>#MUNDIAL "Si Palermo es habilidoso yo soy malabarista"</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>83685648</id>
+    <name>NESTOR ARIEL</name>
+    <screen_name>NESTOR_ARIEL</screen_name>
+    <location>Monte Grande, Buenos Aires</location>
+    <description>Amo la expresión, no puedo parar de hacerlo!!!. También me gusta escuchar, lo aprendo cada día más y es hermoso. Amo el arte de la conversación!!!</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/505429704/m_db3c052c1ece4970baf0a67b95150757_normal.jpg</profile_image_url>
+    <url>http://tuexpresasyoexpreso.blogspot.com/</url>
+    <protected>false</protected>
+    <followers_count>15</followers_count>
+    <profile_background_color>FFF04D</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>0099CC</profile_link_color>
+    <profile_sidebar_fill_color>f6ffd1</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>fff8ad</profile_sidebar_border_color>
+    <friends_count>17</friends_count>
+    <created_at>Mon Oct 19 20:49:29 +0000 2009</created_at>
+    <favourites_count>1</favourites_count>
+    <utc_offset>-10800</utc_offset>
+    <time_zone>Buenos Aires</time_zone>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/99861997/rosa.jpg</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>514</statuses_count>
+    <lang>es</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:06 +0000 2010</created_at>
+  <id>15007755000</id>
+  <text>830 n my night iz jus about done.... Sleepy as hell so I'm turnin it in early latta twitter-nation</text>
+  <source>&lt;a href="http://ubertwitter.com" rel="nofollow"&gt;UberTwitter&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>131211884</id>
+    <name>Its me</name>
+    <screen_name>TheReal_W1nner</screen_name>
+    <location>ÜT: 36.7992,-76.003899</location>
+    <description>Yea on my twitter grind HHEEAAVVYY... I fukz wit my team #teamfollowback ... Llleettttzzz ggoooo #teamblackberry in the buildin pin:24b15e5a </description>
+    <profile_image_url>http://a3.twimg.com/profile_images/913144683/IMG00145-20100519-1051_normal.jpg</profile_image_url>
+    <url>http://null</url>
+    <protected>false</protected>
+    <followers_count>1012</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>1039</friends_count>
+    <created_at>Fri Apr 09 16:15:31 +0000 2010</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset/>
+    <time_zone/>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>1429</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:04 +0000 2010</created_at>
+  <id>15007753000</id>
+  <text>Done and done. Show went so well! The crowd was awesome. Had 2 head home early but we'll be back w/Toby next week in Baltimore.</text>
+  <source>&lt;a href="http://itunes.apple.com/app/twitter/id333903271?mt=8" rel="nofollow"&gt;Twitter for iPhone&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>15972949</id>
+    <name>Carter's Chord</name>
+    <screen_name>CartersChord</screen_name>
+    <location>Nashville, TN</location>
+    <description>recording artists makin' music you should hear</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/615208191/19548_239204716217_7475971217_3779790_317186_n_normal.jpg</profile_image_url>
+    <url>http://carterschord.com</url>
+    <protected>false</protected>
+    <followers_count>836</followers_count>
+    <profile_background_color>fbebd2</profile_background_color>
+    <profile_text_color>919191</profile_text_color>
+    <profile_link_color>dd002c</profile_link_color>
+    <profile_sidebar_fill_color>3c193f</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>36173f</profile_sidebar_border_color>
+    <friends_count>80</friends_count>
+    <created_at>Sun Aug 24 21:33:33 +0000 2008</created_at>
+    <favourites_count>1</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme8/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>744</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:02 +0000 2010</created_at>
+  <id>15007752000</id>
+  <text>http://dld.bz/dGt5 Does self-checkout actually save you any money?</text>
+  <source>&lt;a href="http://www.socialoomph.com" rel="nofollow"&gt;SocialOomph&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>141693017</id>
+    <name>CodyNew</name>
+    <screen_name>CodyWrites2</screen_name>
+    <location/>
+    <description/>
+    <profile_image_url>http://s.twimg.com/a/1274144130/images/default_profile_4_normal.png</profile_image_url>
+    <url/>
+    <protected>false</protected>
+    <followers_count>225</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>234</friends_count>
+    <created_at>Sat May 08 19:23:26 +0000 2010</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset/>
+    <time_zone/>
+    <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>4815</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 00:31:01 +0000 2010</created_at>
+  <id>15007751000</id>
+  <text>Who tryna do something...I'm bored.lol</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>140059643</id>
+    <name>Greg Mandall</name>
+    <screen_name>cizinevyxul</screen_name>
+    <location>Brissy</location>
+    <description>Guitarist for Autumn Heartache D</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/941686188/GHTNKx_normal.jpg</profile_image_url>
+    <url/>
+    <protected>false</protected>
+    <followers_count>15</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>85</friends_count>
+    <created_at>Tue May 04 13:05:41 +0000 2010</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset/>
+    <time_zone/>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>28</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+</statuses>

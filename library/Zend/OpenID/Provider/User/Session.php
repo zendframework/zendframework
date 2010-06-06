@@ -24,7 +24,7 @@
 /**
  * @namespace
  */
-namespace Zend\OpenId\Provider\User;
+namespace Zend\OpenID\Provider\User;
 use Zend\Session;
 
 /**
@@ -39,7 +39,7 @@ use Zend\Session;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Session extends User
+class Session extends AbstractUser
 {
     /**
      * Reference to an implementation of Zend_Session_Namespace object

@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\OpenId\Extension;
+namespace Zend\OpenID\Extension;
 
 /**
  * Abstract extension class for Zend_OpenId
@@ -33,7 +33,7 @@ namespace Zend\OpenId\Extension;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Extension
+abstract class AbstractExtension
 {
 
     /**
@@ -49,7 +49,7 @@ abstract class Extension
         if ($extensions !== null) {
             if (is_array($extensions)) {
                 foreach ($extensions as $ext) {
-                    if ($ext instanceof Extension) {
+                    if ($ext instanceof AbstractExtension) {
                         if (!$ext->$func($params)) {
                             return false;
                         }
@@ -58,7 +58,7 @@ abstract class Extension
                     }
                 }
             } else if (!is_object($extensions) ||
-                       !($extensions instanceof Extension) ||
+                       !($extensions instanceof AbstractExtension) ||
                        !$extensions->$func($params)) {
                 return false;
             }

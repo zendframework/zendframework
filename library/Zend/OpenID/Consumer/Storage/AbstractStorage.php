@@ -24,7 +24,7 @@
 /**
  * @namespace
  */
-namespace Zend\OpenId\Consumer\Storage;
+namespace Zend\OpenID\Consumer\Storage;
 
 /**
  * Abstract class to implement external storage for OpenID consumer
@@ -35,7 +35,7 @@ namespace Zend\OpenId\Consumer\Storage;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Storage
+abstract class AbstractStorage
 {
 
     /**

@@ -24,8 +24,8 @@
 /**
  * @namespace
  */
-namespace Zend\OpenId\Consumer\Storage;
-use Zend\OpenId;
+namespace Zend\OpenID\Consumer\Storage;
+use Zend\OpenID;
 
 /**
  * External storage implemmentation using serialized files
@@ -38,7 +38,7 @@ use Zend\OpenId;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class File extends Storage
+class File extends AbstractStorage
 {
 
     /**
@@ -73,27 +73,27 @@ class File extends Storage
         $this->_dir = $dir;
         if (!is_dir($this->_dir)) {
             if (!@mkdir($this->_dir, 0700, 1)) {
-                throw new OpenId\Exception(
+                throw new OpenID\Exception(
                     'Cannot access storage directory ' . $dir,
-                    OpenId\Exception::ERROR_STORAGE);
+                    OpenID\Exception::ERROR_STORAGE);
             }
         }
         if (($f = fopen($this->_dir.'/assoc.lock', 'w+')) === null) {
-            throw new OpenId\Exception(
+            throw new OpenID\Exception(
                 'Cannot create a lock file in the directory ' . $dir,
-                OpenId\Exception::ERROR_STORAGE);
+                OpenID\Exception::ERROR_STORAGE);
         }
         fclose($f);
         if (($f = fopen($this->_dir.'/discovery.lock', 'w+')) === null) {
-            throw new OpenId\Exception(
+            throw new OpenID\Exception(
                 'Cannot create a lock file in the directory ' . $dir,
-                OpenId\Exception::ERROR_STORAGE);
+                OpenID\Exception::ERROR_STORAGE);
         }
         fclose($f);
         if (($f = fopen($this->_dir.'/nonce.lock', 'w+')) === null) {
-            throw new OpenId\Exception(
+            throw new OpenID\Exception(
                 'Cannot create a lock file in the directory ' . $dir,
-                OpenId\Exception::ERROR_STORAGE);
+                OpenID\Exception::ERROR_STORAGE);
         }
         fclose($f);
     }

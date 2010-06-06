@@ -24,10 +24,10 @@
 /**
  * @namespace
  */
-namespace Zend\OpenId\Consumer;
+namespace Zend\OpenID\Consumer;
 use Zend\Controller\Response;
-use Zend\OpenId;
-use Zend\OpenId\Extension;
+use Zend\OpenID;
+use Zend\OpenID\Extension;
 
 /**
  * OpenID consumer implementation
@@ -44,7 +44,7 @@ use Zend\OpenId\Extension;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Consumer
+class GenericConsumer
 {
 
     /**
@@ -100,7 +100,7 @@ class Consumer
      * @param bool $dumbMode Enables or disables consumer to use association
      *  with server based on Diffie-Hellman key agreement
      */
-    public function __construct(Storage\Storage $storage = null,
+    public function __construct(Storage\AbstractStorage $storage = null,
                                 $dumbMode = false)
     {
         if ($storage === null) {
@@ -185,7 +185,7 @@ class Consumer
 
         $version = 1.1;
         if (isset($params['openid_ns']) &&
-            $params['openid_ns'] == OpenId\OpenId::NS_2_0) {
+            $params['openid_ns'] == OpenID\OpenID::NS_2_0) {
             $version = 2.0;
         }
 
@@ -240,14 +240,14 @@ class Consumer
             $this->_setError("Missing openid.assoc_handle");
             return false;
         }
-        if ($params['openid_return_to'] != OpenId\OpenId::selfUrl()) {
+        if ($params['openid_return_to'] != OpenID\OpenID::selfUrl()) {
             /* Ignore query part in openid.return_to */
             $pos = strpos($params['openid_return_to'], '?');
             if ($pos === false ||
-                SUBSTR($params['openid_return_to'], 0 , $pos) != OpenId\OpenId::selfUrl()) {
+                SUBSTR($params['openid_return_to'], 0 , $pos) != OpenID\OpenID::selfUrl()) {
 
                 $this->_setError("Wrong openid.return_to '".
-                    $params['openid_return_to']."' != '" . OpenId\OpenId::selfUrl() ."'");
+                    $params['openid_return_to']."' != '" . OpenID\OpenID::selfUrl() ."'");
                 return false;
             }
         }
@@ -291,15 +291,15 @@ class Consumer
                 $data .= $key . ':' . $params['openid_' . strtr($key,'.','_')] . "\n";
             }
             if (base64_decode($params['openid_sig']) ==
-                OpenId\OpenId::hashHmac($macFunc, $data, $secret)) {
-                if (!Extension\Extension::forAll($extensions, 'parseResponse', $params)) {
+                OpenID\OpenID::hashHmac($macFunc, $data, $secret)) {
+                if (!Extension\AbstractExtension::forAll($extensions, 'parseResponse', $params)) {
                     $this->_setError("Extension::parseResponse failure");
                     return false;
                 }
                 /* OpenID 2.0 (11.2) Verifying Discovered Information */
                 if (isset($params['openid_claimed_id'])) {
                     $id = $params['openid_claimed_id'];
-                    if (!OpenId\OpenId::normalize($id)) {
+                    if (!OpenID\OpenID::normalize($id)) {
                         $this->_setError("Normalization failed");
                         return false;
                     } else if (!$this->_discovery($id, $discovered_server, $discovered_version)) {
@@ -332,7 +332,7 @@ class Consumer
                 return false;
             }
 
-            if (!OpenId\OpenId::normalize($id)) {
+            if (!OpenID\OpenID::normalize($id)) {
                 $this->_setError("Normalization failed");
                 return false;
             } else if (!$this->_discovery($id, $server, $discovered_version)) {
@@ -392,7 +392,7 @@ class Consumer
                 }
             }
             if (isset($ret['is_valid']) && $ret['is_valid'] == 'true') {
-                if (!Extension\Extension::forAll($extensions, 'parseResponse', $params)) {
+                if (!Extension\AbstractExtension::forAll($extensions, 'parseResponse', $params)) {
                     $this->_setError("Extension::parseResponse failure");
                     return false;
                 }
@@ -541,7 +541,7 @@ class Consumer
 
         if ($version >= 2.0) {
             $params = array(
-                'openid.ns'           => OpenId\OpenId::NS_2_0,
+                'openid.ns'           => OpenID\OpenID::NS_2_0,
                 'openid.mode'         => 'associate',
                 'openid.assoc_type'   => 'HMAC-SHA256',
                 'openid.session_type' => 'DH-SHA256',
@@ -554,17 +554,17 @@ class Consumer
             );
         }
 
-        $dh = OpenId\OpenId::createDhKey(pack('H*', OpenId\OpenId::DH_P),
-                                       pack('H*', OpenId\OpenId::DH_G),
+        $dh = OpenID\OpenID::createDhKey(pack('H*', OpenID\OpenID::DH_P),
+                                       pack('H*', OpenID\OpenID::DH_G),
                                        $priv_key);
-        $dh_details = OpenId\OpenId::getDhKeyDetails($dh);
+        $dh_details = OpenID\OpenID::getDhKeyDetails($dh);
 
         $params['openid.dh_modulus']         = base64_encode(
-            OpenId\OpenId::btwoc($dh_details['p']));
+            OpenID\OpenID::btwoc($dh_details['p']));
         $params['openid.dh_gen']             = base64_encode(
-            OpenId\OpenId::btwoc($dh_details['g']));
+            OpenID\OpenID::btwoc($dh_details['g']));
         $params['openid.dh_consumer_public'] = base64_encode(
-            OpenId\OpenId::btwoc($dh_details['pub_key']));
+            OpenID\OpenID::btwoc($dh_details['pub_key']));
 
         while(1) {
             $ret = $this->_httpRequest($url, 'POST', $params, $status);
@@ -615,7 +615,7 @@ class Consumer
 
         if ($version >= 2.0 &&
             isset($ret['ns']) &&
-            $ret['ns'] != OpenId\OpenId::NS_2_0) {
+            $ret['ns'] != OpenID\OpenID::NS_2_0) {
             $this->_setError("Wrong namespace definition in the server response");
             return false;
         }
@@ -666,12 +666,12 @@ class Consumer
         }
         if (isset($dhFunc)) {
             $serverPub = base64_decode($ret['dh_server_public']);
-            $dhSec = OpenId\OpenId::computeDhSecret($serverPub, $dh);
+            $dhSec = OpenID\OpenID::computeDhSecret($serverPub, $dh);
             if ($dhSec === false) {
                 $this->_setError("DH secret comutation failed");
                 return false;
             }
-            $sec = OpenId\OpenId::digest($dhFunc, $dhSec);
+            $sec = OpenID\OpenID::digest($dhFunc, $dhSec);
             if ($sec === false) {
                 $this->_setError("Could not create digest");
                 return false;
@@ -679,12 +679,12 @@ class Consumer
             $secret = $sec ^ base64_decode($ret['enc_mac_key']);
         }
         if ($macFunc == 'sha1') {
-            if (OpenId\OpenId::strlen($secret) != 20) {
+            if (OpenID\OpenID::strlen($secret) != 20) {
                 $this->_setError("The length of the sha1 secret must be 20");
                 return false;
             }
         } else if ($macFunc == 'sha256') {
-            if (OpenId\OpenId::strlen($secret) != 32) {
+            if (OpenID\OpenID::strlen($secret) != 32) {
                 $this->_setError("The length of the sha256 secret must be 32");
                 return false;
             }
@@ -809,7 +809,7 @@ class Consumer
     {
         $this->_setError('');
 
-        if (!OpenId\OpenId::normalize($id)) {
+        if (!OpenID\OpenID::normalize($id)) {
             $this->_setError("Normalisation failed");
             return false;
         }
@@ -838,7 +838,7 @@ class Consumer
 
         $params = array();
         if ($version >= 2.0) {
-            $params['openid.ns'] = OpenId\OpenId::NS_2_0;
+            $params['openid.ns'] = OpenID\OpenID::NS_2_0;
         }
 
         $params['openid.mode'] = $immediate ?
@@ -867,10 +867,10 @@ class Consumer
             $params['openid.assoc_handle'] = $handle;
         }
 
-        $params['openid.return_to'] = OpenId\OpenId::absoluteUrl($returnTo);
+        $params['openid.return_to'] = OpenID\OpenID::absoluteUrl($returnTo);
 
         if (empty($root)) {
-            $root = OpenId\OpenId::selfUrl();
+            $root = OpenID\OpenID::selfUrl();
             if ($root[strlen($root)-1] != '/') {
                 $root = dirname($root);
             }
@@ -881,12 +881,12 @@ class Consumer
             $params['openid.trust_root'] = $root;
         }
 
-        if (!Extension\Extension::forAll($extensions, 'prepareRequest', $params)) {
+        if (!Extension\AbstractExtension::forAll($extensions, 'prepareRequest', $params)) {
             $this->_setError("Extension::prepareRequest failure");
             return false;
         }
 
-        OpenId\OpenId::redirect($server, $params, $response);
+        OpenID\OpenID::redirect($server, $params, $response);
         return true;
     }
 

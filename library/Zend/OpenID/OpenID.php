@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\OpenId;
+namespace Zend\OpenID;
 
 /**
  * Static class that contains common utility functions for
@@ -40,7 +40,7 @@ namespace Zend\OpenId;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OpenId
+class OpenID
 {
     /**
      * Default Diffie-Hellman key generator (1024 bit)
@@ -159,9 +159,9 @@ class OpenId
     static public function absoluteUrl($url)
     {
         if (empty($url)) {
-            return OpenId::selfUrl();
+            return OpenID::selfUrl();
         } else if (!preg_match('|^([^:]+)://|', $url)) {
-            if (preg_match('|^([^:]+)://([^:@]*(?:[:][^@]*)?@)?([^/:@?#]*)(?:[:]([^/?#]*))?(/[^?]*)?((?:[?](?:[^#]*))?(?:#.*)?)$|', OpenId::selfUrl(), $reg)) {
+            if (preg_match('|^([^:]+)://([^:@]*(?:[:][^@]*)?@)?([^/:@?#]*)(?:[:]([^/?#]*))?(/[^?]*)?((?:[?](?:[^#]*))?(?:#.*)?)$|', OpenID::selfUrl(), $reg)) {
                 $scheme = $reg[1];
                 $auth = $reg[2];
                 $host = $reg[3];
@@ -424,7 +424,7 @@ class OpenId
     static public function redirect($url, $params = null,
         \Zend\Controller\Response\AbstractResponse $response = null, $method = 'GET')
     {
-        $url = OpenId::absoluteUrl($url);
+        $url = OpenID::absoluteUrl($url);
         $body = "";
         if (null === $response) {
             $response = new \Zend\Controller\Response\Http();
@@ -524,7 +524,7 @@ class OpenId
         if (function_exists('hash_hmac')) {
             return hash_hmac($macFunc, $data, $secret, 1);
         } else {
-            if (OpenId::strlen($secret) > 64) {
+            if (OpenID::strlen($secret) > 64) {
                 $secret = self::digest($macFunc, $secret);
             }
             $secret = str_pad($secret, 64, chr(0x00));
@@ -549,7 +549,7 @@ class OpenId
             return gmp_init(bin2hex($bin), 16);
         } else if (extension_loaded('bcmath')) {
             $bn = 0;
-            $len = OpenId::strlen($bin);
+            $len = OpenID::strlen($bin);
             for ($i = 0; $i < $len; $i++) {
                 $bn = bcmul($bn, 256);
                 $bn = bcadd($bn, ord($bin[$i]));
@@ -630,7 +630,7 @@ class OpenId
             $bn_p        = self::binToBigNum($p);
             $bn_g        = self::binToBigNum($g);
             if ($priv_key === null) {
-                $priv_key    = self::randomBytes(OpenId::strlen($p));
+                $priv_key    = self::randomBytes(OpenID::strlen($p));
             }
             $bn_priv_key = self::binToBigNum($priv_key);
             if (extension_loaded('gmp')) {

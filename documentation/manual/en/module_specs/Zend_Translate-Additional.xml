@@ -100,6 +100,20 @@ $translate->addTranslation(
                     </row>
 
                     <row>
+                        <entry>cache</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            Sets a cache for the translation adapter. This must be a instance of
+                            <classname>Zend_Cache_Core</classname>
+                        </entry>
+
+                        <entry>
+                            <emphasis>Per default no cache is set</emphasis>
+                        </entry>
+                    </row>
+
+                    <row>
                         <entry>content</entry>
                         <entry>all</entry>
 

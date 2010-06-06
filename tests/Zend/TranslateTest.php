@@ -810,6 +810,28 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * ZF-9877
+     */
+    public function testSetCacheThroughOptions()
+    {
+        require_once 'Zend/Cache.php';
+        $cache = Zend_Cache::factory('Core', 'File',
+            array('lifetime' => 120, 'automatic_serialization' => true),
+            array('cache_dir' => dirname(__FILE__) . '/_files/'));
+
+        $translate = new Zend_Translate(array(
+            'adapter' => Zend_Translate::AN_ARRAY,
+            'content' => array('msg1' => 'Message 1 (en)'),
+            'locale'  => 'en',
+            'cache'   => $cache,
+        ));
+
+        $return = Zend_Translate::getCache();
+        $this->assertTrue($return instanceof Zend_Cache_Core);
+        $this->assertTrue(Zend_Translate::hasCache());
+    }
+
+    /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno

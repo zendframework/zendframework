@@ -133,6 +133,11 @@ abstract class Zend_Translate_Adapter {
             $options = array('content' => $options);
         }
 
+        if (array_key_exists('cache', $options)) {
+            self::setCache($options['cache']);
+            unset($options['cache']);
+        }
+
         if (isset(self::$_cache)) {
             $id = 'Zend_Translate_' . $this->toString() . '_Options';
             $result = self::$_cache->load($id);
@@ -324,6 +329,11 @@ abstract class Zend_Translate_Adapter {
                 if (($key == 'log') && !($option instanceof Zend_Log)) {
                     require_once 'Zend/Translate/Exception.php';
                     throw new Zend_Translate_Exception('Instance of Zend_Log expected for option log');
+                }
+
+                if ($key == 'cache') {
+                    self::setCache($options);
+                    continue;
                 }
 
                 $this->_options[$key] = $option;

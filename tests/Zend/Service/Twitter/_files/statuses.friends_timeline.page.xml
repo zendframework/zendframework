@@ -1,0 +1,868 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<statuses type="array">
+<status>
+  <created_at>Sun May 30 11:41:27 +0000 2010</created_at>
+  <id>15036090677</id>
+  <text>Walking into Ormskirk to stop muscles seizing up and procure quality meats for @stedaniels' BBQ.</text>
+  <source>&lt;a href="http://itunes.apple.com/app/twitter/id333903271?mt=8" rel="nofollow"&gt;Twitter for iPhone&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>6102302</id>
+    <name>Michael Nolan</name>
+    <screen_name>MikeNolan</screen_name>
+    <location>Ormskirk, United Kingdom</location>
+    <description>Head of Web Services at Edge Hill University: http://blogs.edgehill.ac.uk/webservices/</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/18020682/mikenolan_normal.jpg</profile_image_url>
+    <url>http://www.michaelnolan.co.uk/</url>
+    <protected>false</protected>
+    <followers_count>925</followers_count>
+    <profile_background_color>0099B9</profile_background_color>
+    <profile_text_color>3C3940</profile_text_color>
+    <profile_link_color>0099B9</profile_link_color>
+    <profile_sidebar_fill_color>95E8EC</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>5ED4DC</profile_sidebar_border_color>
+    <friends_count>904</friends_count>
+    <created_at>Thu May 17 10:45:30 +0000 2007</created_at>
+    <favourites_count>530</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme4/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>4453</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo xmlns:georss="http://www.georss.org/georss">
+    <georss:point>53.55929512 -2.89619275</georss:point>
+  </geo>
+  <coordinates xmlns:georss="http://www.georss.org/georss">
+    <georss:point>53.55929512 -2.89619275</georss:point>
+  </coordinates>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:41:16 +0000 2010</created_at>
+  <id>15036083865</id>
+  <text>Donald Clarke to Rachel English about SATC: "It's filth".</text>
+  <source>&lt;a href="http://seesmic.com/app" rel="nofollow"&gt;Seesmic Web&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>14395202</id>
+    <name>Christine Bohan</name>
+    <screen_name>ChristineBohan</screen_name>
+    <location>Dublin</location>
+    <description>Journalist, politics addict and occasional venturer into the outside world</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/546573125/profilepic_normal.jpg</profile_image_url>
+    <url/>
+    <protected>false</protected>
+    <followers_count>1198</followers_count>
+    <profile_background_color>0099B9</profile_background_color>
+    <profile_text_color>3C3940</profile_text_color>
+    <profile_link_color>0099B9</profile_link_color>
+    <profile_sidebar_fill_color>95E8EC</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>5ED4DC</profile_sidebar_border_color>
+    <friends_count>1105</friends_count>
+    <created_at>Tue Apr 15 10:39:49 +0000 2008</created_at>
+    <favourites_count>715</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>Dublin</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme4/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>10589</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:40:53 +0000 2010</created_at>
+  <id>15036069608</id>
+  <text>I would appreciate the outside world more if there wasn't so much repulsive incense smoke out my front door all the time.</text>
+  <source>&lt;a href="http://itunes.apple.com/app/twitter/id333903271?mt=8" rel="nofollow"&gt;Twitter for iPhone&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>8599212</id>
+    <name>Daniel Tan</name>
+    <screen_name>BoltClock</screen_name>
+    <location>Singapore</location>
+    <description>I'm a teen freelance web developer who enjoys hacking PHP code on his Windows 7 PC (no Mac, sadly). I adore math, green, Jesus, Apple and pi, but not apple pie!</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/800400621/iBolt_normal.gif</profile_image_url>
+    <url>http://NOVALISTIC.com</url>
+    <protected>false</protected>
+    <followers_count>1245</followers_count>
+    <profile_background_color>131516</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>a73fc4</profile_link_color>
+    <profile_sidebar_fill_color>efefef</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>eeeeee</profile_sidebar_border_color>
+    <friends_count>926</friends_count>
+    <created_at>Sun Sep 02 02:12:25 +0000 2007</created_at>
+    <favourites_count>272</favourites_count>
+    <utc_offset>28800</utc_offset>
+    <time_zone>Singapore</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274834447/images/themes/theme14/bg.gif</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>40584</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:34:20 +0000 2010</created_at>
+  <id>15035819642</id>
+  <text>Restarting my PC. After restarting I'll only open Firefox, Pidgin, iTunes and Flash.</text>
+  <source>&lt;a href="http://itunes.apple.com/app/twitter/id333903271?mt=8" rel="nofollow"&gt;Twitter for iPhone&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>8599212</id>
+    <name>Daniel Tan</name>
+    <screen_name>BoltClock</screen_name>
+    <location>Singapore</location>
+    <description>I'm a teen freelance web developer who enjoys hacking PHP code on his Windows 7 PC (no Mac, sadly). I adore math, green, Jesus, Apple and pi, but not apple pie!</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/800400621/iBolt_normal.gif</profile_image_url>
+    <url>http://NOVALISTIC.com</url>
+    <protected>false</protected>
+    <followers_count>1245</followers_count>
+    <profile_background_color>131516</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>a73fc4</profile_link_color>
+    <profile_sidebar_fill_color>efefef</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>eeeeee</profile_sidebar_border_color>
+    <friends_count>926</friends_count>
+    <created_at>Sun Sep 02 02:12:25 +0000 2007</created_at>
+    <favourites_count>272</favourites_count>
+    <utc_offset>28800</utc_offset>
+    <time_zone>Singapore</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274834447/images/themes/theme14/bg.gif</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>40583</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:27:23 +0000 2010</created_at>
+  <id>15035558502</id>
+  <text>OMG LEMMINGS! AWESOME!! RT: @Swizec: DHTML Lemmings primer  http://laz.ly/ao</text>
+  <source>&lt;a href="http://www.echofon.com/" rel="nofollow"&gt;Echofon&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>12744542</id>
+    <name>Robert Basic</name>
+    <screen_name>robertbasic</screen_name>
+    <location>Serbia</location>
+    <description>For those about to code - I salute you.</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/630933128/twitterProfilePhoto.jpg_normal.png</profile_image_url>
+    <url>http://robertbasic.com</url>
+    <protected>false</protected>
+    <followers_count>1005</followers_count>
+    <profile_background_color>161D32</profile_background_color>
+    <profile_text_color>6B7287</profile_text_color>
+    <profile_link_color>0000FF</profile_link_color>
+    <profile_sidebar_fill_color>FDF08D</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>000000</profile_sidebar_border_color>
+    <friends_count>372</friends_count>
+    <created_at>Sun Jan 27 09:29:10 +0000 2008</created_at>
+    <favourites_count>25</favourites_count>
+    <utc_offset>3600</utc_offset>
+    <time_zone>Belgrade</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/3156960/header.jpg</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>15232</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:20:42 +0000 2010</created_at>
+  <id>15035315794</id>
+  <text>#php manual with the new #windows help system, multitab, better index, multi books #awesome http://yfrog.com/4oze2p</text>
+  <source>&lt;a href="http://www.tweetdeck.com" rel="nofollow"&gt;TweetDeck&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>13208432</id>
+    <name>PierreJoye</name>
+    <screen_name>PierreJoye</screen_name>
+    <location>Germany</location>
+    <description/>
+    <profile_image_url>http://a3.twimg.com/profile_images/355026753/Pierre_Joye_2_normal.jpg</profile_image_url>
+    <url>http://blog.thepimp.net</url>
+    <protected>false</protected>
+    <followers_count>461</followers_count>
+    <profile_background_color>2E191F</profile_background_color>
+    <profile_text_color>38292D</profile_text_color>
+    <profile_link_color>785740</profile_link_color>
+    <profile_sidebar_fill_color>E0FFF6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>E1F9FF</profile_sidebar_border_color>
+    <friends_count>145</friends_count>
+    <created_at>Thu Feb 07 15:50:33 +0000 2008</created_at>
+    <favourites_count>12</favourites_count>
+    <utc_offset>3600</utc_offset>
+    <time_zone>Berlin</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/59174166/xc6c874ea69888a0e2519f22776e1142.jpg</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>5072</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:19:07 +0000 2010</created_at>
+  <id>15035258134</id>
+  <text>RT @DJ_RichEars Orbital announce plans to release their first material in six years http://dlvr.it/1JZG4 (via @NMEmagazine) /via @bobrusche</text>
+  <source>&lt;a href="http://itunes.apple.com/app/twitter/id333903271?mt=8" rel="nofollow"&gt;Twitter for iPhone&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>1524641</id>
+    <name>Stefan</name>
+    <screen_name>skoop</screen_name>
+    <location>Woudenberg, Netherlands</location>
+    <description>open source, php, geek, music, symfony, buzzer, dad, conference speaker, vegetarian, fc utrecht, entrepreneur, freelancer</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/921970573/5d3c68fa-7d96-4f95-8f26-7c6d47496cd7_normal.png</profile_image_url>
+    <url>http://www.leftontheweb.com/</url>
+    <protected>false</protected>
+    <followers_count>1283</followers_count>
+    <profile_background_color>000000</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>323232</profile_link_color>
+    <profile_sidebar_fill_color>999999</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>CDCDCD</profile_sidebar_border_color>
+    <friends_count>1492</friends_count>
+    <created_at>Mon Mar 19 16:28:14 +0000 2007</created_at>
+    <favourites_count>31</favourites_count>
+    <utc_offset>3600</utc_offset>
+    <time_zone>Amsterdam</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>25591</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:18:34 +0000 2010</created_at>
+  <id>15035238297</id>
+  <text>Twitter is very sedate and polite this morning. Not a scandal in sight...</text>
+  <source>&lt;a href="http://www.tweetdeck.com" rel="nofollow"&gt;TweetDeck&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>4996631</id>
+    <name>Evert Bopp</name>
+    <screen_name>EvertB</screen_name>
+    <location>Tipperary, Ireland</location>
+    <description>www.haiti-connect.org
+Airappz.com Greenhouselimerick.com
+- WiFi know-it-all, Anarcho-capitalist, entrepreneur, part-time blogger. </description>
+    <profile_image_url>http://a3.twimg.com/profile_images/922279239/Avatar_normal.jpg</profile_image_url>
+    <url>http://evertb.wordpress.com/</url>
+    <protected>false</protected>
+    <followers_count>3231</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>3216</friends_count>
+    <created_at>Tue Apr 17 13:31:18 +0000 2007</created_at>
+    <favourites_count>410</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>Dublin</time_zone>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/12559391/pattern8-pattern-11c.png</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>52988</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:18:14 +0000 2010</created_at>
+  <id>15035226350</id>
+  <text>Tee time at TPC Deere Run in T-90</text>
+  <source>&lt;a href="http://www.tweetdeck.com/" rel="nofollow"&gt;TweetDeck&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>786947</id>
+    <name>Dave Bost</name>
+    <screen_name>davebost</screen_name>
+    <location>St. Charles, IL</location>
+    <description>Microsoft Developer Evangelist and co-host of the Thirsty Developer podcast</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/457859622/dbost_normal.jpg</profile_image_url>
+    <url>http://www.davebost.com/blog</url>
+    <protected>false</protected>
+    <followers_count>1022</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>814</friends_count>
+    <created_at>Wed Feb 21 18:53:52 +0000 2007</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>3562</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:17:34 +0000 2010</created_at>
+  <id>15035201322</id>
+  <text>Did I really subject my PC to so many installations of VS-related stuff (look at that scrollbar)?! http://twitpic.com/1sfyjx</text>
+  <source>&lt;a href="http://twitpic.com" rel="nofollow"&gt;Twitpic&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>8599212</id>
+    <name>Daniel Tan</name>
+    <screen_name>BoltClock</screen_name>
+    <location>Singapore</location>
+    <description>I'm a teen freelance web developer who enjoys hacking PHP code on his Windows 7 PC (no Mac, sadly). I adore math, green, Jesus, Apple and pi, but not apple pie!</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/800400621/iBolt_normal.gif</profile_image_url>
+    <url>http://NOVALISTIC.com</url>
+    <protected>false</protected>
+    <followers_count>1245</followers_count>
+    <profile_background_color>131516</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>a73fc4</profile_link_color>
+    <profile_sidebar_fill_color>efefef</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>eeeeee</profile_sidebar_border_color>
+    <friends_count>926</friends_count>
+    <created_at>Sun Sep 02 02:12:25 +0000 2007</created_at>
+    <favourites_count>272</favourites_count>
+    <utc_offset>28800</utc_offset>
+    <time_zone>Singapore</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274834447/images/themes/theme14/bg.gif</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>40581</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:14:18 +0000 2010</created_at>
+  <id>15035082401</id>
+  <text>test - mas att</text>
+  <source>&lt;a href="http://apiwiki.twitter.com/" rel="nofollow"&gt;API&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>813670</id>
+    <name>BrianGreene.com</name>
+    <screen_name>BrianGreene</screen_name>
+    <location>Dublin</location>
+    <description>news music spectrum politics life &amp; word play in 140 chunks</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/799736341/r26580khz_normal.jpg</profile_image_url>
+    <url>http://url.ie/BHG</url>
+    <protected>false</protected>
+    <followers_count>1245</followers_count>
+    <profile_background_color>FFFFFF</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87BC44</profile_sidebar_border_color>
+    <friends_count>405</friends_count>
+    <created_at>Tue Mar 06 01:25:53 +0000 2007</created_at>
+    <favourites_count>5</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>Dublin</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/20336474/12042008131.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>14941</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:13:03 +0000 2010</created_at>
+  <id>15035038313</id>
+  <text>More people should use Jabber instead of the common IM #opensource #secure http://bit.ly/aw45qe</text>
+  <source>&lt;a href="http://twitterfeed.com" rel="nofollow"&gt;twitterfeed&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>54631433</id>
+    <name>FOSSwiki</name>
+    <screen_name>FOSSwiki</screen_name>
+    <location>San Francisco</location>
+    <description>Automated aggregator of all things #opensource. Managed by @Jay_Nath. Enjoy!</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/302423400/boxee_normal.jpg</profile_image_url>
+    <url>http://www.jaynath.com</url>
+    <protected>false</protected>
+    <followers_count>6171</followers_count>
+    <profile_background_color>9AE4E8</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>0084B4</profile_link_color>
+    <profile_sidebar_fill_color>DDFFCC</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>BDDCAD</profile_sidebar_border_color>
+    <friends_count>6686</friends_count>
+    <created_at>Tue Jul 07 18:19:54 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/24312392/twitter_san_francisco-1.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>51617</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:13:03 +0000 2010</created_at>
+  <id>15035037848</id>
+  <text>Just submitted my article "When Open Source meets Education" for #InitMag June issue. #OpenSource #Education http://bit.ly/bv4ROt</text>
+  <source>&lt;a href="http://twitterfeed.com" rel="nofollow"&gt;twitterfeed&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>54631433</id>
+    <name>FOSSwiki</name>
+    <screen_name>FOSSwiki</screen_name>
+    <location>San Francisco</location>
+    <description>Automated aggregator of all things #opensource. Managed by @Jay_Nath. Enjoy!</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/302423400/boxee_normal.jpg</profile_image_url>
+    <url>http://www.jaynath.com</url>
+    <protected>false</protected>
+    <followers_count>6171</followers_count>
+    <profile_background_color>9AE4E8</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>0084B4</profile_link_color>
+    <profile_sidebar_fill_color>DDFFCC</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>BDDCAD</profile_sidebar_border_color>
+    <friends_count>6686</friends_count>
+    <created_at>Tue Jul 07 18:19:54 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/24312392/twitter_san_francisco-1.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>51617</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:11:33 +0000 2010</created_at>
+  <id>15034985239</id>
+  <text>#anzeige Finally a project management tool that both your engineers AND your business people will like! Check out Planio http://j.mp/90wF49</text>
+  <source>&lt;a href="http://be-a-magpie.com/twitterers/disclosure-statement" rel="nofollow"&gt;Magpie Advertising Network&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>13596092</id>
+    <name>Dennis Winter</name>
+    <screen_name>d_winter</screen_name>
+    <location>Geldern/Germany</location>
+    <description>Freelancing web developer and student from Germany!</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/897202586/DSCF4271_normal.jpg</profile_image_url>
+    <url>http://blog.4expressions.com</url>
+    <protected>false</protected>
+    <followers_count>269</followers_count>
+    <profile_background_color>352726</profile_background_color>
+    <profile_text_color>352726</profile_text_color>
+    <profile_link_color>666666</profile_link_color>
+    <profile_sidebar_fill_color>99CC33</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>352726</profile_sidebar_border_color>
+    <friends_count>436</friends_count>
+    <created_at>Sun Feb 17 20:41:26 +0000 2008</created_at>
+    <favourites_count>4</favourites_count>
+    <utc_offset>3600</utc_offset>
+    <time_zone>Berlin</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274834447/images/themes/theme5/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>1639</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:05:38 +0000 2010</created_at>
+  <id>15034774667</id>
+  <text>Omg the big bang episode with the flashback is the best ever.</text>
+  <source>&lt;a href="http://itunes.apple.com/app/twitter/id333903271?mt=8" rel="nofollow"&gt;Twitter for iPhone&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>11853742</id>
+    <name>Ivo Jansch</name>
+    <screen_name>ijansch</screen_name>
+    <location>Netherlands</location>
+    <description>CTO of Ibuildings, PHP Evangelist, Writer, Blogger</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/276839523/ivo_normal.png</profile_image_url>
+    <url>http://www.jansch.nl</url>
+    <protected>false</protected>
+    <followers_count>847</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>268</friends_count>
+    <created_at>Fri Jan 04 21:04:42 +0000 2008</created_at>
+    <favourites_count>1</favourites_count>
+    <utc_offset>3600</utc_offset>
+    <time_zone>Amsterdam</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>4540</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:05:33 +0000 2010</created_at>
+  <id>15034771446</id>
+  <text>It's going to be quite a hot, humid day. 83% humidity right now, with the temp expected in the 90's.</text>
+  <source>&lt;a href="http://itunes.apple.com/app/twitter/id333903271?mt=8" rel="nofollow"&gt;Twitter for iPhone&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>14993209</id>
+    <name>Brandon Savage</name>
+    <screen_name>brandonsavage</screen_name>
+    <location/>
+    <description/>
+    <profile_image_url>http://a3.twimg.com/profile_images/859024571/brandon_normal.jpg</profile_image_url>
+    <url/>
+    <protected>false</protected>
+    <followers_count>752</followers_count>
+    <profile_background_color>C0DEED</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>0084B4</profile_link_color>
+    <profile_sidebar_fill_color>DDEEF6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>C0DEED</profile_sidebar_border_color>
+    <friends_count>152</friends_count>
+    <created_at>Tue Jun 03 14:28:21 +0000 2008</created_at>
+    <favourites_count>3</favourites_count>
+    <utc_offset>-18000</utc_offset>
+    <time_zone>Eastern Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1273875281/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>12028</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 11:01:23 +0000 2010</created_at>
+  <id>15034618617</id>
+  <text>looking for a wordpress plugin that allows one to manage "premium content" (including susbcription mgmt, payment, etc etc)</text>
+  <source>&lt;a href="http://www.seesmic.com/" rel="nofollow"&gt;Seesmic&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>50043</id>
+    <name>Stephanie Booth</name>
+    <screen_name>stephtara</screen_name>
+    <location>Lausanne</location>
+    <description>Anglo-Swiss, online strategy consultant. Loves her Indian cat @bagha, does judo, and tries to sing. Chatty. Works at @eclau.</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/799159333/Photo_278_normal.jpg</profile_image_url>
+    <url>http://climbtothestars.org</url>
+    <protected>false</protected>
+    <followers_count>3043</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>B41E6B</profile_link_color>
+    <profile_sidebar_fill_color>FFE3FB</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>B41E6B</profile_sidebar_border_color>
+    <friends_count>718</friends_count>
+    <created_at>Fri Dec 08 09:25:46 +0000 2006</created_at>
+    <favourites_count>847</favourites_count>
+    <utc_offset>3600</utc_offset>
+    <time_zone>Bern</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/735262/IMG_1416.jpg</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>17541</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 10:58:56 +0000 2010</created_at>
+  <id>15034522004</id>
+  <text>Now time to sort out interwebs... new house has none, old one has a broken one. 3g stick or tethering is in my future!</text>
+  <source>&lt;a href="http://tweetsride.com/" rel="nofollow"&gt;TweetsRide&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>11924252</id>
+    <name>Helgi Þormar Þ.</name>
+    <screen_name>h</screen_name>
+    <location>London, United Kingdom</location>
+    <description>Party person, programmer, echolibre person etc etc</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/609089633/Photo_on_2009-10-25_at_13.27_2_normal.jpg</profile_image_url>
+    <url>http://www.helgi.ws</url>
+    <protected>false</protected>
+    <followers_count>1429</followers_count>
+    <profile_background_color>352726</profile_background_color>
+    <profile_text_color>3E4415</profile_text_color>
+    <profile_link_color>D02B55</profile_link_color>
+    <profile_sidebar_fill_color>99CC33</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>829D5E</profile_sidebar_border_color>
+    <friends_count>201</friends_count>
+    <created_at>Mon Jan 07 01:17:28 +0000 2008</created_at>
+    <favourites_count>5</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme5/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>5406</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun May 30 10:56:55 +0000 2010</created_at>
+  <id>15034450756</id>
+  <text>Hills always make me think the ride is longer than it is so I'm early for brunch with @samkabam and @elliotjaystocks. Have iPad will read.</text>
+  <source>&lt;a href="http://itunes.apple.com/app/twitter/id333903271?mt=8" rel="nofollow"&gt;Twitter for iPhone&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>7629722</id>
+    <name>Jon Tan 陳</name>
+    <screen_name>jontangerine</screen_name>
+    <location>Bristol, UK</location>
+    <description>Designer. Web typographer. Founding member of @analogcoop. Co-founder of @fontdeck.</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/897611884/205-bg-fff_normal.jpg</profile_image_url>
+    <url>http://analog.coop/</url>
+    <protected>false</protected>
+    <followers_count>2512</followers_count>
+    <profile_background_color>d8dccc</profile_background_color>
+    <profile_text_color>5e5f63</profile_text_color>
+    <profile_link_color>000000</profile_link_color>
+    <profile_sidebar_fill_color>eff2e6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>f5f5f5</profile_sidebar_border_color>
+    <friends_count>97</friends_count>
+    <created_at>Sat Jul 21 21:19:52 +0000 2007</created_at>
+    <favourites_count>6</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/83974308/bg-twitter-gradient.jpg</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>4321</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo xmlns:georss="http://www.georss.org/georss">
+    <georss:point>51.45556062 -2.6039173</georss:point>
+  </geo>
+  <coordinates xmlns:georss="http://www.georss.org/georss">
+    <georss:point>51.45556062 -2.6039173</georss:point>
+  </coordinates>
+  <place/>
+  <contributors/>
+</status>
+</statuses>

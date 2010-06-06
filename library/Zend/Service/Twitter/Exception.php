@@ -17,11 +17,15 @@
  * @subpackage Twitter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Exception.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /**
- * @uses       Zend_Service_Exception
+ * @see Zend_Service_Exception
+ */
+require_once 'Zend/Service/Exception.php';
+
+/**
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Twitter

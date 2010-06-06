@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<status>
+  <created_at>Sun May 30 13:48:40 +0000 2010</created_at>
+  <id>15042159587</id>
+  <text>Test Message 1</text>
+  <source>&lt;a href="http://apiwiki.twitter.com/" rel="nofollow"&gt;API&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>9075802</id>
+    <name>Pádraic Brady</name>
+    <screen_name>padraicb</screen_name>
+    <location>Dublin, Ireland, Europe!</location>
+    <description>PHP Developer, Open Source Contributor, and FS Audit Consultant</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/374757042/twitterProfilePhoto_normal.jpg</profile_image_url>
+    <url>http://blog.astrumfutura.com</url>
+    <protected>false</protected>
+    <followers_count>847</followers_count>
+    <profile_background_color>022330</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>0084B4</profile_link_color>
+    <profile_sidebar_fill_color>C0DFEC</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>a8c7f7</profile_sidebar_border_color>
+    <friends_count>469</friends_count>
+    <created_at>Mon Sep 24 19:35:22 +0000 2007</created_at>
+    <favourites_count>20</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>Dublin</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme15/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>5929</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>

@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -26,18 +26,18 @@
  */
 
 /**
- * @see Zend_OpenId_Provider_Storage_File
+ * @see Zend_OpenID_Provider_Storage_File
  */
 
 /**
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_OpenId
+ * @group      Zend_OpenID
  */
-class Zend_OpenId_Provider_Storage_FileTest extends PHPUnit_Framework_TestCase
+class Zend_OpenID_Provider_Storage_FileTest extends PHPUnit_Framework_TestCase
 {
     const HANDLE   = "d41d8cd98f00b204e9800998ecf8427e";
     const MAC_FUNC = "sha256";
@@ -56,7 +56,7 @@ class Zend_OpenId_Provider_Storage_FileTest extends PHPUnit_Framework_TestCase
         $tmp = dirname(__FILE__)."/_files";
         $dir = $tmp . '/openid_provider';
         @rmdir($dir);
-        $storage = new Zend_OpenId_Provider_Storage_File($dir);
+        $storage = new Zend_OpenID_Provider_Storage_File($dir);
         $this->assertTrue( is_dir($dir) );
 
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
@@ -66,13 +66,13 @@ class Zend_OpenId_Provider_Storage_FileTest extends PHPUnit_Framework_TestCase
         chmod($dir, 0);
         $dir2 = $dir . '/test';
         try {
-            $storage = new Zend_OpenId_Provider_Storage_File($dir2);
+            $storage = new Zend_OpenID_Provider_Storage_File($dir2);
             $ex = null;
         } catch (Exception $e) {
             $ex = $e;
         }
-        $this->assertTrue( $ex instanceof Zend_OpenId_Exception );
-        $this->assertSame( Zend_OpenId_Exception::ERROR_STORAGE, $ex->getCode() );
+        $this->assertTrue( $ex instanceof Zend_OpenID_Exception );
+        $this->assertSame( Zend_OpenID_Exception::ERROR_STORAGE, $ex->getCode() );
         $this->assertContains( 'Cannot access storage directory', $ex->getMessage() );
         chmod($dir, 0777);
         $this->assertFalse( is_dir($dir2) );
@@ -86,7 +86,7 @@ class Zend_OpenId_Provider_Storage_FileTest extends PHPUnit_Framework_TestCase
     public function testGetAssociation()
     {
         $expiresIn = time() + 600;
-        $storage = new Zend_OpenId_Provider_Storage_File(dirname(__FILE__)."/_files");
+        $storage = new Zend_OpenID_Provider_Storage_File(dirname(__FILE__)."/_files");
         $storage->delAssociation(self::HANDLE);
         $this->assertTrue( $storage->addAssociation(self::HANDLE, self::MAC_FUNC, self::SECRET, $expiresIn) );
         $this->assertTrue( $storage->getAssociation(self::HANDLE, $macFunc, $secret, $expires) );
@@ -99,7 +99,7 @@ class Zend_OpenId_Provider_Storage_FileTest extends PHPUnit_Framework_TestCase
         $tmp = dirname(__FILE__)."/_files";
         $dir = $tmp . '/openid_consumer';
         @rmdir($dir);
-        $storage = new Zend_OpenId_Provider_Storage_File($dir);
+        $storage = new Zend_OpenID_Provider_Storage_File($dir);
         $this->assertTrue( is_dir($dir) );
 
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
@@ -119,7 +119,7 @@ class Zend_OpenId_Provider_Storage_FileTest extends PHPUnit_Framework_TestCase
     public function testGetAssociationExpiratin()
     {
         $expiresIn = time() + 1;
-        $storage = new Zend_OpenId_Provider_Storage_File(dirname(__FILE__)."/_files");
+        $storage = new Zend_OpenID_Provider_Storage_File(dirname(__FILE__)."/_files");
         $storage->delAssociation(self::HANDLE);
         $this->assertTrue( $storage->addAssociation(self::HANDLE, self::MAC_FUNC, self::SECRET, $expiresIn) );
         sleep(2);
@@ -132,7 +132,7 @@ class Zend_OpenId_Provider_Storage_FileTest extends PHPUnit_Framework_TestCase
      */
     public function testAddUser()
     {
-        $storage = new Zend_OpenId_Provider_Storage_File(dirname(__FILE__)."/_files");
+        $storage = new Zend_OpenID_Provider_Storage_File(dirname(__FILE__)."/_files");
         $storage->delUser(self::USER);
         $this->assertTrue( $storage->addUser(self::USER, self::PASSWORD) );
         $this->assertFalse( $storage->addUser(self::USER, self::PASSWORD) );
@@ -147,7 +147,7 @@ class Zend_OpenId_Provider_Storage_FileTest extends PHPUnit_Framework_TestCase
      */
     public function testHasUser()
     {
-        $storage = new Zend_OpenId_Provider_Storage_File(dirname(__FILE__)."/_files");
+        $storage = new Zend_OpenID_Provider_Storage_File(dirname(__FILE__)."/_files");
         $storage->delUser(self::USER);
         $this->assertTrue( $storage->addUser(self::USER, self::PASSWORD) );
         $this->assertTrue( $storage->hasUser(self::USER) );
@@ -161,7 +161,7 @@ class Zend_OpenId_Provider_Storage_FileTest extends PHPUnit_Framework_TestCase
      */
     public function testCheckUser()
     {
-        $storage = new Zend_OpenId_Provider_Storage_File(dirname(__FILE__)."/_files");
+        $storage = new Zend_OpenID_Provider_Storage_File(dirname(__FILE__)."/_files");
         $storage->delUser(self::USER);
         $this->assertTrue( $storage->addUser(self::USER, self::PASSWORD) );
         $this->assertTrue( $storage->checkUser(self::USER, self::PASSWORD) );
@@ -176,7 +176,7 @@ class Zend_OpenId_Provider_Storage_FileTest extends PHPUnit_Framework_TestCase
      */
     public function testAddSite()
     {
-        $storage = new Zend_OpenId_Provider_Storage_File(dirname(__FILE__)."/_files");
+        $storage = new Zend_OpenID_Provider_Storage_File(dirname(__FILE__)."/_files");
         $storage->delUser(self::USER);
         $this->assertTrue( $storage->addUser(self::USER, self::PASSWORD) );
         $this->assertTrue( $storage->addSite(self::USER, self::SITE1, true) );

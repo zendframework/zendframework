@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -21,7 +21,7 @@
  */
 
 /**
- * Zend_OpenId
+ * Zend_OpenID
  */
 
 
@@ -31,13 +31,13 @@
 
 /**
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_OpenId
+ * @group      Zend_OpenID
  */
-class Zend_OpenId_Provider_User_SessionTest extends PHPUnit_Framework_TestCase
+class Zend_OpenID_Provider_User_SessionTest extends PHPUnit_Framework_TestCase
 {
     const USER1     = "test_user1";
     const USER2     = "test_user2";
@@ -46,8 +46,8 @@ class Zend_OpenId_Provider_User_SessionTest extends PHPUnit_Framework_TestCase
 
     public function __construct()
     {
-        $this->_user1 = new Zend_OpenId_Provider_User_Session();
-        $this->_user2 = new Zend_OpenId_Provider_User_Session(new Zend_Session_Namespace("openid2"));
+        $this->_user1 = new Zend_OpenID_Provider_User_Session();
+        $this->_user2 = new Zend_OpenID_Provider_User_Session(new Zend_Session_Namespace("openid2"));
     }
 
     /**

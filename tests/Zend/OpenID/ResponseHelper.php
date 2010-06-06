@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -21,19 +21,19 @@
  */
 
 /**
- * Zend_OpenId
+ * Zend_OpenID
  */
 
-Zend_OpenId::$exitOnRedirect = false;
+Zend_OpenID::$exitOnRedirect = false;
 
 /**
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_OpenId_ResponseHelper extends Zend_Controller_Response_Abstract
+class Zend_OpenID_ResponseHelper extends Zend_Controller_Response_Abstract
 {
     private $_canSendHeaders;
 

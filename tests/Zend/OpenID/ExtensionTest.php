@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -21,7 +21,7 @@
  */
 
 /**
- * Zend_OpenId
+ * Zend_OpenID
  */
 
 
@@ -31,13 +31,13 @@
 
 /**
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_OpenId
+ * @group      Zend_OpenID
  */
-class Zend_OpenId_ExtensionTest extends PHPUnit_Framework_TestCase
+class Zend_OpenID_ExtensionTest extends PHPUnit_Framework_TestCase
 {
     /**
      * testing forAll
@@ -46,34 +46,34 @@ class Zend_OpenId_ExtensionTest extends PHPUnit_Framework_TestCase
     public function testForAll()
     {
         $params = array();
-        $this->assertTrue( Zend_OpenId_Extension::forAll(null, 'getTrustData', $params) );
+        $this->assertTrue( Zend_OpenID_Extension::forAll(null, 'getTrustData', $params) );
         $this->assertSame( array(), $params );
 
         $params = array();
-        $this->assertTrue( Zend_OpenId_Extension::forAll(array(), 'getTrustData', $params) );
+        $this->assertTrue( Zend_OpenID_Extension::forAll(array(), 'getTrustData', $params) );
         $this->assertSame( array(), $params );
 
         $params = array();
-        $this->assertFalse( Zend_OpenId_Extension::forAll(array(1), 'getTrustData', $params) );
+        $this->assertFalse( Zend_OpenID_Extension::forAll(array(1), 'getTrustData', $params) );
 
         $params = array();
-        $this->assertFalse( Zend_OpenId_Extension::forAll(new stdClass(), 'getTrustData', $params) );
+        $this->assertFalse( Zend_OpenID_Extension::forAll(new stdClass(), 'getTrustData', $params) );
 
-        $ext = new Zend_OpenId_Extension_Sreg();
+        $ext = new Zend_OpenID_Extension_Sreg();
         $params = array();
-        $this->assertTrue( Zend_OpenId_Extension::forAll($ext, 'getTrustData', $params) );
-        $this->assertSame( array('Zend_OpenId_Extension_Sreg'=>array()), $params );
+        $this->assertTrue( Zend_OpenID_Extension::forAll($ext, 'getTrustData', $params) );
+        $this->assertSame( array('Zend_OpenID_Extension_Sreg'=>array()), $params );
 
-        $ext = new Zend_OpenId_Extension_Sreg();
+        $ext = new Zend_OpenID_Extension_Sreg();
         $params = array();
-        $this->assertTrue( Zend_OpenId_Extension::forAll(array($ext), 'getTrustData', $params) );
-        $this->assertSame( array('Zend_OpenId_Extension_Sreg'=>array()), $params );
+        $this->assertTrue( Zend_OpenID_Extension::forAll(array($ext), 'getTrustData', $params) );
+        $this->assertSame( array('Zend_OpenID_Extension_Sreg'=>array()), $params );
 
-        $ext = new Zend_OpenId_Extension_Helper();
+        $ext = new Zend_OpenID_Extension_Helper();
         $params = array();
-        $this->assertTrue( Zend_OpenId_Extension::forAll(array($ext), 'getTrustData', $params) );
+        $this->assertTrue( Zend_OpenID_Extension::forAll(array($ext), 'getTrustData', $params) );
         $this->assertSame( array(), $params );
-        $this->assertFalse( Zend_OpenId_Extension::forAll(array($ext), 'wrong', $params) );
+        $this->assertFalse( Zend_OpenID_Extension::forAll(array($ext), 'wrong', $params) );
         $this->assertSame( array(), $params );
     }
 
@@ -83,7 +83,7 @@ class Zend_OpenId_ExtensionTest extends PHPUnit_Framework_TestCase
      */
     public function testCallbacks()
     {
-        $ext = new Zend_OpenId_Extension_Helper();
+        $ext = new Zend_OpenID_Extension_Helper();
         $a = array();
         $this->assertTrue( $ext->prepareRequest($a) );
         $this->assertSame( array(), $a );
@@ -102,7 +102,7 @@ class Zend_OpenId_ExtensionTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class Zend_OpenId_Extension_Helper extends Zend_OpenId_Extension
+class Zend_OpenID_Extension_Helper extends Zend_OpenID_Extension
 {
     function wrong($data)
     {

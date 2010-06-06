@@ -16,24 +16,21 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Source.php 20785 2010-01-31 09:43:03Z mikaelkael $
  */
 
 /**
- * @namespace
+ * @see Zend_Feed_Reader_Feed_Atom
  */
-namespace Zend\Feed\Reader\Feed\Atom;
-use Zend\Feed\Reader;
+require_once 'Zend/Feed/Reader/Feed/Atom.php';
 
 /**
- * @uses       \Zend\Feed\Reader\Reader
- * @uses       \Zend\Feed\Reader\Feed\Atom\Atom
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Source extends Atom
+class Zend_Feed_Reader_Feed_Atom_Source extends Zend_Feed_Reader_Feed_Atom
 {
 
     /**
@@ -45,18 +42,18 @@ class Source extends Atom
      * @param string $xpathPrefix Passed from parent Entry object
      * @param string $type Nearly always Atom 1.0
      */
-    public function __construct(\DOMElement $source, $xpathPrefix, $type = Reader\Reader::TYPE_ATOM_10)
+    public function __construct(DOMElement $source, $xpathPrefix, $type = Zend_Feed_Reader::TYPE_ATOM_10)
     {
         $this->_domDocument = $source->ownerDocument;
-        $this->_xpath = new \DOMXPath($this->_domDocument);
+        $this->_xpath = new DOMXPath($this->_domDocument);
         $this->_data['type'] = $type;
         $this->_registerNamespaces();
         $this->_loadExtensions();
         
-        $atomClass = Reader\Reader::getPluginLoader()->getClassName('Atom\Feed');
-        $this->_extensions['Atom\Feed'] = new $atomClass($this->_domDocument, $this->_data['type'], $this->_xpath);
-        $atomClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\Feed');
-        $this->_extensions['DublinCore\Feed'] = new $atomClass($this->_domDocument, $this->_data['type'], $this->_xpath);
+        $atomClass = Zend_Feed_Reader::getPluginLoader()->getClassName('Atom_Feed');
+        $this->_extensions['Atom_Feed'] = new $atomClass($this->_domDocument, $this->_data['type'], $this->_xpath);
+        $atomClass = Zend_Feed_Reader::getPluginLoader()->getClassName('DublinCore_Feed');
+        $this->_extensions['DublinCore_Feed'] = new $atomClass($this->_domDocument, $this->_data['type'], $this->_xpath);
         foreach ($this->_extensions as $extension) {
             $extension->setXpathPrefix(rtrim($xpathPrefix, '/') . '/atom:source');
         }

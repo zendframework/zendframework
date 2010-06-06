@@ -16,26 +16,32 @@
  * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Callback.php 21234 2010-02-28 13:51:41Z padraic $
  */
 
 /**
- * @namespace
+ * @see Zend_Feed_Pubsubhubbub
  */
-namespace Zend\Feed\PubSubHubbub\Subscriber;
+require_once 'Zend/Feed/Pubsubhubbub.php';
 
 /**
- * @uses       \Zend\Feed\PubSubHubbub\PubSubHubbub
- * @uses       \Zend\Feed\PubSubHubbub\CallbackAbstract
- * @uses       \Zend\Feed\Reader\Reader
- * @uses       \Zend\Uri\Uri
+ * @see Zend_Feed_Pubsubhubbub
+ */
+require_once 'Zend/Feed/Pubsubhubbub/CallbackAbstract.php';
+
+/**
+ * @see Zend_Feed_Reader
+ */
+require_once 'Zend/Feed/Reader.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Callback
-    extends \Zend\Feed\PubSubHubbub\CallbackAbstract
+class Zend_Feed_Pubsubhubbub_Subscriber_Callback
+    extends Zend_Feed_Pubsubhubbub_CallbackAbstract
 {
     /**
      * Contains the content of any feeds sent as updates to the Callback URL
@@ -66,7 +72,7 @@ class Callback
      * Required if usePathParameter is enabled for the Subscriber.
      *
      * @param  string $key
-     * @return \Zend\Feed\PubSubHubbub\Subscriber\Callback
+     * @return Zend_Feed_Pubsubhubbub_Subscriber_Callback
      */
     public function setSubscriptionKey($key)
     {
@@ -113,7 +119,7 @@ class Callback
         } elseif ($this->isValidHubVerification($httpGetData)) {
             $data = $this->_currentSubscriptionData;
             $this->getHttpResponse()->setBody($httpGetData['hub_challenge']);
-            $data['subscription_state'] = \Zend\Feed\PubSubHubbub\PubSubHubbub::SUBSCRIPTION_VERIFIED;
+            $data['subscription_state'] = Zend_Feed_Pubsubhubbub::SUBSCRIPTION_VERIFIED;
             if (isset($httpGetData['hub_lease_seconds'])) {
                 $data['lease_seconds'] = $httpGetData['hub_lease_seconds'];
             }
@@ -168,7 +174,7 @@ class Callback
         ) {
             return false;
         }
-        if (!\Zend\URI\URL::validate($httpGetData['hub_topic'])) {
+        if (!Zend_Uri::check($httpGetData['hub_topic'])) {
             return false;
         }
 
@@ -187,7 +193,7 @@ class Callback
      * Topic we've subscribed to.
      *
      * @param  string $feed
-     * @return \Zend\Feed\PubSubHubbub\Subscriber\Callback
+     * @return Zend_Feed_Pubsubhubbub_Subscriber_Callback
      */
     public function setFeedUpdate($feed)
     {

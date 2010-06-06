@@ -16,24 +16,27 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Entry.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /**
- * @namespace
+ * @see Zend_Feed_Reader
  */
-namespace Zend\Feed\Reader\Extension\Slash;
+require_once 'Zend/Feed/Reader.php';
 
 /**
- * @uses       \Zend\Feed\Reader\Reader
- * @uses       \Zend\Feed\Reader\Extension\EntryAbstract
+ * @see Zend_Feed_Reader_Extension_EntryAbstract
+ */
+require_once 'Zend/Feed/Reader/Extension/EntryAbstract.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Entry
-    extends \Zend\Feed\Reader\Extension\EntryAbstract
+class Zend_Feed_Reader_Extension_Slash_Entry
+    extends Zend_Feed_Reader_Extension_EntryAbstract
 {
     /**
      * Get the entry section

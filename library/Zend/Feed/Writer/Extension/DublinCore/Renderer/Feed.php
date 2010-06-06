@@ -16,23 +16,22 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Feed.php 20325 2010-01-16 00:17:59Z padraic $
  */
-
+ 
 /**
- * @namespace
+ * @see Zend_Feed_Writer_Extension_RendererAbstract
  */
-namespace Zend\Feed\Writer\Extension\DublinCore\Renderer;
-
+require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
+ 
 /**
- * @uses       \Zend\Feed\Writer\Extension\RendererAbstract
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Feed
-    extends \Zend\Feed\Writer\Extension\RendererAbstract
+class Zend_Feed_Writer_Extension_DublinCore_Renderer_Feed
+    extends Zend_Feed_Writer_Extension_RendererAbstract
 {
 
     /**
@@ -78,7 +77,7 @@ class Feed
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setAuthors(\DOMDocument $dom, \DOMElement $root)
+    protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
         $authors = $this->getDataContainer()->getAuthors();
         if (!$authors || empty($authors)) {

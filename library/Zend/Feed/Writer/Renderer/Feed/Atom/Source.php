@@ -16,26 +16,20 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Source.php 20785 2010-01-31 09:43:03Z mikaelkael $
  */
-
+ 
+require_once 'Zend/Feed/Writer/Renderer/Feed/Atom/AtomAbstract.php';
+ 
 /**
- * @namespace
- */
-namespace Zend\Feed\Writer\Renderer\Feed\Atom;
-
-/**
- * @uses       DOMDocument
- * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom\AtomAbstract
- * @uses       \Zend\Feed\Writer\Renderer\RendererInterface
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Source
-    extends AtomAbstract
-    implements \Zend\Feed\Writer\Renderer\RendererInterface
+class Zend_Feed_Writer_Renderer_Feed_Atom_Source
+    extends Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
+    implements Zend_Feed_Writer_Renderer_RendererInterface
 {
 
     /**
@@ -44,7 +38,7 @@ class Source
      * @param  Zend_Feed_Writer_Feed_Source $container 
      * @return void
      */
-    public function __construct (\Zend\Feed\Writer\Source $container)
+    public function __construct (Zend_Feed_Writer_Source $container)
     {
         parent::__construct($container);
     }
@@ -52,14 +46,14 @@ class Source
     /**
      * Render Atom Feed Metadata (Source element)
      * 
-     * @return \Zend\Feed\Writer\Renderer\Feed\Atom\Atom
+     * @return Zend_Feed_Writer_Renderer_Feed_Atom
      */
     public function render()
     {
         if (!$this->_container->getEncoding()) {
             $this->_container->setEncoding('UTF-8');
         }
-        $this->_dom = new \DOMDocument('1.0', $this->_container->getEncoding());
+        $this->_dom = new DOMDocument('1.0', $this->_container->getEncoding());
         $this->_dom->formatOutput = true;
         $root = $this->_dom->createElement('source');
         $this->setRootElement($root);
@@ -94,7 +88,7 @@ class Source
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setGenerator(\DOMDocument $dom, \DOMElement $root)
+    protected function _setGenerator(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getGenerator()) {
             return;

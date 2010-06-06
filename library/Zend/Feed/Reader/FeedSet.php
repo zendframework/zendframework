@@ -16,24 +16,26 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: FeedSet.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /**
- * @namespace
+ * @see Zend_Feed_Reader
  */
-namespace Zend\Feed\Reader;
-use Zend\URI;
+require_once 'Zend/Feed/Reader.php';
 
 /**
- * @uses       \Zend\Feed\Reader\Reader
- * @uses       \Zend\Uri\Uri
+ * @see Zend_Uri
+ */
+require_once 'Zend/Uri.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FeedSet extends \ArrayObject
+class Zend_Feed_Reader_FeedSet extends ArrayObject
 {
 
     public $rss = null;
@@ -58,7 +60,7 @@ class FeedSet extends \ArrayObject
      * @param string $uri
      * @return void
      */
-    public function addLinks(\DOMNodeList $links, $uri)
+    public function addLinks(DOMNodeList $links, $uri)
     {
         foreach ($links as $link) {
             if (strtolower($link->getAttribute('rel')) !== 'alternate'
@@ -85,16 +87,16 @@ class FeedSet extends \ArrayObject
      */
     protected function _absolutiseUri($link, $uri = null)
     {
-        if (!URI\URL::validate($link)) {
+        if (!Zend_Uri::check($link)) {
             if (!is_null($uri)) {
-                $uri = new URI\URL($uri);
+                $uri = Zend_Uri::factory($uri);
 
                 if ($link[0] !== '/') {
                     $link = $uri->getPath() . '/' . $link;
                 }
 
                 $link = $uri->getScheme() . '://' . $uri->getHost() . '/' . $this->_canonicalizePath($link);
-                if (!URI\Zend\Uri\Uri::check($link)) {
+                if (!Zend_Uri::check($link)) {
                     $link = null;
                 }
             }
@@ -128,7 +130,7 @@ class FeedSet extends \ArrayObject
      *
      * @param string $offset
      * @return mixed
-     * @uses \Zend\Feed\Reader\Reader
+     * @uses Zend_Feed_Reader
      */
     public function offsetGet($offset)
     {
@@ -136,7 +138,7 @@ class FeedSet extends \ArrayObject
             if (!$this->offsetExists('href')) {
                 return null;
             }
-            $feed = Reader::import($this->offsetGet('href'));
+            $feed = Zend_Feed_Reader::import($this->offsetGet('href'));
             $this->offsetSet('feed', $feed);
             return $feed;
         }

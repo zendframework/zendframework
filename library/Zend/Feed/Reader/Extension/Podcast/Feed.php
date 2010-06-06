@@ -16,22 +16,21 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Feed.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /**
- * @namespace
+ * @see Zend_Feed_Reader_Extension_FeedAbstract
  */
-namespace Zend\Feed\Reader\Extension\Podcast;
+require_once 'Zend/Feed/Reader/Extension/FeedAbstract.php';
 
 /**
- * @uses       \Zend\Feed\Reader\Extension\FeedAbstract
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Feed extends \Zend\Feed\Reader\Extension\FeedAbstract
+class Zend_Feed_Reader_Extension_Podcast_Feed extends Zend_Feed_Reader_Extension_FeedAbstract
 {
     /**
      * Get the entry author
@@ -100,7 +99,7 @@ class Feed extends \Zend\Feed\Reader\Extension\FeedAbstract
                     $children = array();
 
                     foreach ($node->childNodes as $childNode) {
-                        if (!($childNode instanceof \DOMText)) {
+                        if (!($childNode instanceof DOMText)) {
                             $children[$childNode->getAttribute('text')] = null;
                         }
                     }

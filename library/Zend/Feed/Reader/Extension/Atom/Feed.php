@@ -16,32 +16,37 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Feed.php 22300 2010-05-26 10:13:34Z padraic $
  */
 
 /**
- * @namespace
+ * @see Zend_Feed_Reader_Extension_FeedAbstract
  */
-namespace Zend\Feed\Reader\Extension\Atom;
-use Zend\Feed\Reader;
-use Zend\Date;
-use Zend\Feed\Reader\Collection;
-use Zend\URI;
+require_once 'Zend/Feed/Reader/Extension/FeedAbstract.php';
 
 /**
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Feed\Reader\Reader
- * @uses       \Zend\Feed\Reader\Collection\Author
- * @uses       \Zend\Feed\Reader\Collection\Category
- * @uses       \Zend\Feed\Reader\Extension\FeedAbstract
- * @uses       \Zend\Uri\Uri
+ * @see Zend_Date
+ */
+require_once 'Zend/Date.php';
+
+/**
+ * @see Zend_Uri
+ */
+require_once 'Zend/Uri.php';
+
+/**
+ * @see Zend_Feed_Reader_Collection_Author
+ */
+require_once 'Zend/Feed/Reader/Collection/Author.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Feed
-    extends Reader\Extension\FeedAbstract
+class Zend_Feed_Reader_Extension_Atom_Feed
+    extends Zend_Feed_Reader_Extension_FeedAbstract
 {
     /**
      * Get a single author
@@ -87,8 +92,8 @@ class Feed
         if (count($authors) == 0) {
             $authors = null;
         } else {
-            $authors = new Collection\Author(
-                Reader\Reader::arrayUnique($authors)
+            $authors = new Zend_Feed_Reader_Collection_Author(
+                Zend_Feed_Reader::arrayUnique($authors)
             );
         }
 
@@ -110,7 +115,7 @@ class Feed
 
         $copyright = null;
 
-        if ($this->getType() === Reader\Reader::TYPE_ATOM_03) {
+        if ($this->getType() === Zend_Feed_Reader::TYPE_ATOM_03) {
             $copyright = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:copyright)');
         } else {
             $copyright = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:rights)');
@@ -128,7 +133,7 @@ class Feed
     /**
      * Get the feed creation date
      *
-     * @return \Zend\Date\Date|null
+     * @return Zend_Date|null
      */
     public function getDateCreated()
     {
@@ -138,15 +143,15 @@ class Feed
 
         $date = null;
 
-        if ($this->getType() === Reader\Reader::TYPE_ATOM_03) {
+        if ($this->getType() === Zend_Feed_Reader::TYPE_ATOM_03) {
             $dateCreated = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:created)');
         } else {
             $dateCreated = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:published)');
         }
 
         if ($dateCreated) {
-            $date = new Date\Date;
-            $date->set($dateCreated, Date\Date::ISO_8601);
+            $date = new Zend_Date;
+            $date->set($dateCreated, Zend_Date::ISO_8601);
         }
 
         $this->_data['datecreated'] = $date;
@@ -157,7 +162,7 @@ class Feed
     /**
      * Get the feed modification date
      *
-     * @return \Zend\Date\Date|null
+     * @return Zend_Date|null
      */
     public function getDateModified()
     {
@@ -167,15 +172,15 @@ class Feed
 
         $date = null;
 
-        if ($this->getType() === Reader\Reader::TYPE_ATOM_03) {
+        if ($this->getType() === Zend_Feed_Reader::TYPE_ATOM_03) {
             $dateModified = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:modified)');
         } else {
             $dateModified = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:updated)');
         }
 
         if ($dateModified) {
-            $date = new Date\Date;
-            $date->set($dateModified, Date\Date::ISO_8601);
+            $date = new Zend_Date;
+            $date->set($dateModified, Zend_Date::ISO_8601);
         }
 
         $this->_data['datemodified'] = $date;
@@ -196,7 +201,7 @@ class Feed
 
         $description = null;
 
-        if ($this->getType() === Reader\Reader::TYPE_ATOM_03) {
+        if ($this->getType() === Zend_Feed_Reader::TYPE_ATOM_03) {
             $description = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:tagline)'); // TODO: Is this the same as subtitle?
         } else {
             $description = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:subtitle)');
@@ -226,8 +231,6 @@ class Feed
 
         if (!$generator) {
             $generator = null;
-        } else {
-            $generator = html_entity_decode($generator, ENT_QUOTES, $this->getEncoding());
         }
 
         $this->_data['generator'] = $generator;
@@ -287,6 +290,30 @@ class Feed
         $this->_data['language'] = $language;
 
         return $this->_data['language'];
+    }
+
+    /**
+     * Get the feed image
+     *
+     * @return array|null
+     */
+    public function getImage()
+    {
+        if (array_key_exists('image', $this->_data)) {
+            return $this->_data['image'];
+        }
+
+        $imageUrl = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:logo)');
+
+        if (!$imageUrl) {
+            $image = null;
+        } else {
+            $image = array('uri'=>$imageUrl);
+        }
+
+        $this->_data['image'] = $image;
+
+        return $this->_data['image'];
     }
 
     /**
@@ -411,7 +438,7 @@ class Feed
     /**
      * Get all categories
      *
-     * @return \Zend\Feed\Reader\Collection\Category
+     * @return Zend_Feed_Reader_Collection_Category
      */
     public function getCategories()
     {
@@ -419,7 +446,7 @@ class Feed
             return $this->_data['categories'];
         }
 
-        if ($this->getType() == Reader\Reader::TYPE_ATOM_10) {
+        if ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10) {
             $list = $this->_xpath->query($this->getXpathPrefix() . '/atom:category');
         } else {
             /**
@@ -427,21 +454,21 @@ class Feed
              * Dublin Core extension. However there is a small possibility Atom 0.3
              * may have been retrofittied to use Atom 1.0 instead.
              */
-            $this->_xpath->registerNamespace('atom10', Reader\Reader::NAMESPACE_ATOM_10);
+            $this->_xpath->registerNamespace('atom10', Zend_Feed_Reader::NAMESPACE_ATOM_10);
             $list = $this->_xpath->query($this->getXpathPrefix() . '/atom10:category');
         }
 
         if ($list->length) {
-            $categoryCollection = new Collection\Category;
+            $categoryCollection = new Zend_Feed_Reader_Collection_Category;
             foreach ($list as $category) {
                 $categoryCollection[] = array(
                     'term' => $category->getAttribute('term'),
                     'scheme' => $category->getAttribute('scheme'),
-                    'label' => html_entity_decode($category->getAttribute('label'))
+                    'label' => $category->getAttribute('label')
                 );
             }
         } else {
-            return new Collection\Category;
+            return new Zend_Feed_Reader_Collection_Category;
         }
 
         $this->_data['categories'] = $categoryCollection;
@@ -455,7 +482,7 @@ class Feed
      * @param  DOMElement $element
      * @return string
      */
-    protected function _getAuthor(\DOMElement $element)
+    protected function _getAuthor(DOMElement $element)
     {
         $author = array();
 
@@ -487,10 +514,10 @@ class Feed
      */
     protected function _absolutiseUri($link)
     {
-        if (!\Zend\URI\URL::validate($link)) {
+        if (!Zend_Uri::check($link)) {
             if (!is_null($this->getBaseUrl())) {
                 $link = $this->getBaseUrl() . $link;
-                if (!\Zend\URI\URL::validate($link)) {
+                if (!Zend_Uri::check($link)) {
                     $link = null;
                 }
             }
@@ -503,18 +530,18 @@ class Feed
      */
     protected function _registerNamespaces()
     {
-        if ($this->getType() == Reader\Reader::TYPE_ATOM_10
-            || $this->getType() == Reader\Reader::TYPE_ATOM_03
+        if ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10
+            || $this->getType() == Zend_Feed_Reader::TYPE_ATOM_03
         ) {
             return; // pre-registered at Feed level
         }
         $atomDetected = $this->_getAtomType();
         switch ($atomDetected) {
-            case Reader\Reader::TYPE_ATOM_03:
-                $this->_xpath->registerNamespace('atom', Reader\Reader::NAMESPACE_ATOM_03);
+            case Zend_Feed_Reader::TYPE_ATOM_03:
+                $this->_xpath->registerNamespace('atom', Zend_Feed_Reader::NAMESPACE_ATOM_03);
                 break;
             default:
-                $this->_xpath->registerNamespace('atom', Reader\Reader::NAMESPACE_ATOM_10);
+                $this->_xpath->registerNamespace('atom', Zend_Feed_Reader::NAMESPACE_ATOM_10);
                 break;
         }
     }
@@ -525,15 +552,15 @@ class Feed
     protected function _getAtomType()
     {
         $dom = $this->getDomDocument();
-        $prefixAtom03 = $dom->lookupPrefix(Reader\Reader::NAMESPACE_ATOM_03);
-        $prefixAtom10 = $dom->lookupPrefix(Reader\Reader::NAMESPACE_ATOM_10);
-        if ($dom->isDefaultNamespace(Reader\Reader::NAMESPACE_ATOM_10)
+        $prefixAtom03 = $dom->lookupPrefix(Zend_Feed_Reader::NAMESPACE_ATOM_03);
+        $prefixAtom10 = $dom->lookupPrefix(Zend_Feed_Reader::NAMESPACE_ATOM_10);
+        if ($dom->isDefaultNamespace(Zend_Feed_Reader::NAMESPACE_ATOM_10)
         || !empty($prefixAtom10)) {
-            return Reader\Reader::TYPE_ATOM_10;
+            return Zend_Feed_Reader::TYPE_ATOM_10;
         }
-        if ($dom->isDefaultNamespace(Reader\Reader::NAMESPACE_ATOM_03)
+        if ($dom->isDefaultNamespace(Zend_Feed_Reader::NAMESPACE_ATOM_03)
         || !empty($prefixAtom03)) {
-            return Reader\Reader::TYPE_ATOM_03;
+            return Zend_Feed_Reader::TYPE_ATOM_03;
         }
     }
 }

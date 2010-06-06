@@ -17,14 +17,11 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: WordpressRss2DcAtomTest.php 22300 2010-05-26 10:13:34Z padraic $
  */
 
-/**
- * @namespace
- */
-namespace ZendTest\Feed\Reader\Integration;
-use Zend\Feed\Reader;
+require_once 'PHPUnit/Framework/TestCase.php';
+require_once 'Zend/Feed/Reader.php';
 
 /**
  * @category   Zend
@@ -35,14 +32,14 @@ use Zend\Feed\Reader;
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
-class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
+class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
 
     public function setup()
     {
-        Reader\Reader::reset();
+        Zend_Feed_Reader::reset();
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/wordpress-rss2-dc-atom.xml';
     }
 
@@ -52,7 +49,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsTitle()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('Norm 2782', $feed->getTitle());
@@ -60,7 +57,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsAuthors()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(array(
@@ -70,7 +67,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsSingleAuthor()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(array('name'=>'norm2782'), $feed->getAuthor());
@@ -78,7 +75,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsCopyright()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(null, $feed->getCopyright());
@@ -86,7 +83,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsDescription()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('Why are you here?', $feed->getDescription());
@@ -94,7 +91,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsLanguage()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('en', $feed->getLanguage());
@@ -102,7 +99,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('http://www.norm2782.com', $feed->getLink());
@@ -110,7 +107,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEncoding()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('UTF-8', $feed->getEncoding());
@@ -118,7 +115,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryCount()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(10, $feed->count());
@@ -130,7 +127,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryId()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -139,7 +136,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryTitle()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -152,7 +149,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryAuthors()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -161,7 +158,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntrySingleAuthor()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -170,28 +167,28 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryDescription()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
         /**
          * Note: "’" is not the same as "'" - don't replace in error
          */
-        $this->assertEquals('Being in New Zealand does strange things to a person. Everybody who knows me, knows I don’t much like that crazy invention called a Book. However, being here I’ve already finished 4 books, all of which I can highly recommend.'."\n\n".'Agile Software Development with Scrum, by Ken Schwaber and Mike Beedle'."\n".'Domain-Driven Design: Tackling Complexity in the [...]', $entry->getDescription());
+        $this->assertEquals('Being in New Zealand does strange things to a person. Everybody who knows me, knows I don&#8217;t much like that crazy invention called a Book. However, being here I&#8217;ve already finished 4 books, all of which I can highly recommend.'."\n\n".'Agile Software Development with Scrum, by Ken Schwaber and Mike Beedle'."\n".'Domain-Driven Design: Tackling Complexity in the [...]', $entry->getDescription());
     }
 
     public function testGetsEntryContent()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('<p>Being in New Zealand does strange things to a person. Everybody who knows me, knows I don’t much like that crazy invention called a Book. However, being here I’ve already finished 4 books, all of which I can highly recommend.</p>'."\n".'<ul>'."\n".'<li><a href="http://www.amazon.com/Agile-Software-Development-Scrum/dp/0130676349/">Agile Software Development with Scrum, by Ken Schwaber and Mike Beedle</a></li>'."\n".'<li><a href="http://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215/">Domain-Driven Design: Tackling Complexity in the Heart of Software, by Eric Evans</a></li>'."\n".'<li><a href="http://www.amazon.com/Enterprise-Application-Architecture-Addison-Wesley-Signature/dp/0321127420/">Patterns of Enterprise Application Architecture, by Martin Fowler</a></li>'."\n".'<li><a href="http://www.amazon.com/Refactoring-Improving-Existing-Addison-Wesley-Technology/dp/0201485672/">Refactoring: Improving the Design of Existing Code by Martin Fowler</a></li>'."\n".'</ul>'."\n".'<p>Next up: <a href="http://www.amazon.com/Design-Patterns-Object-Oriented-Addison-Wesley-Professional/dp/0201633612/">Design Patterns: Elements of Reusable Object-Oriented Software, by the Gang of Four</a>. Yes, talk about classics and shame on me for not having ordered it sooner! Also reading <a href="http://www.amazon.com/Implementation-Patterns-Addison-Wesley-Signature-Kent/dp/0321413091/">Implementation Patterns, by Kent Beck</a> at the moment.</p>'."\n", $entry->getContent());
+        $this->assertEquals('<p>Being in New Zealand does strange things to a person. Everybody who knows me, knows I don&#8217;t much like that crazy invention called a Book. However, being here I&#8217;ve already finished 4 books, all of which I can highly recommend.</p>'."\n".'<ul>'."\n".'<li><a href="http://www.amazon.com/Agile-Software-Development-Scrum/dp/0130676349/">Agile Software Development with Scrum, by Ken Schwaber and Mike Beedle</a></li>'."\n".'<li><a href="http://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215/">Domain-Driven Design: Tackling Complexity in the Heart of Software, by Eric Evans</a></li>'."\n".'<li><a href="http://www.amazon.com/Enterprise-Application-Architecture-Addison-Wesley-Signature/dp/0321127420/">Patterns of Enterprise Application Architecture, by Martin Fowler</a></li>'."\n".'<li><a href="http://www.amazon.com/Refactoring-Improving-Existing-Addison-Wesley-Technology/dp/0201485672/">Refactoring: Improving the Design of Existing Code by Martin Fowler</a></li>'."\n".'</ul>'."\n".'<p>Next up: <a href="http://www.amazon.com/Design-Patterns-Object-Oriented-Addison-Wesley-Professional/dp/0201633612/">Design Patterns: Elements of Reusable Object-Oriented Software, by the Gang of Four</a>. Yes, talk about classics and shame on me for not having ordered it sooner! Also reading <a href="http://www.amazon.com/Implementation-Patterns-Addison-Wesley-Signature-Kent/dp/0321413091/">Implementation Patterns, by Kent Beck</a> at the moment.</p>'."\n", $entry->getContent());
     }
 
     public function testGetsEntryLinks()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -200,7 +197,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -209,7 +206,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryPermaLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -219,7 +216,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryEncoding()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();

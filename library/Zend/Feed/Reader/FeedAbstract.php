@@ -16,24 +16,26 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: FeedAbstract.php 22092 2010-05-04 12:50:51Z padraic $
  */
 
 /**
- * @namespace
+ * @see Zend_Feed_Reader
  */
-namespace Zend\Feed\Reader;
+require_once 'Zend/Feed/Reader.php';
 
 /**
- * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Reader\Reader
- * @uses       Zend_feed_Reader_FeedInterface
+ * @see Zend_feed_Reader_FeedInterface
+ */
+require_once 'Zend/Feed/Reader/FeedInterface.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class FeedAbstract implements FeedInterface
+abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInterface
 {
     /**
      * Parsed feed data
@@ -78,24 +80,54 @@ abstract class FeedAbstract implements FeedInterface
     protected $_extensions = array();
 
     /**
+     * Original Source URI (set if imported from a URI)
+     *
+     * @var string
+     */
+    protected $_originalSourceUri = null;
+
+    /**
      * Constructor
      *
      * @param DomDocument The DOM object for the feed's XML
      * @param string $type Feed type
      */
-    public function __construct(\DomDocument $domDocument, $type = null)
+    public function __construct(DomDocument $domDocument, $type = null)
     {
         $this->_domDocument = $domDocument;
-        $this->_xpath = new \DOMXPath($this->_domDocument);
+        $this->_xpath = new DOMXPath($this->_domDocument);
 
         if ($type !== null) {
             $this->_data['type'] = $type;
         } else {
-            $this->_data['type'] = Reader::detectType($this->_domDocument);
+            $this->_data['type'] = Zend_Feed_Reader::detectType($this->_domDocument);
         }
         $this->_registerNamespaces();
         $this->_indexEntries();
         $this->_loadExtensions();
+    }
+
+    /**
+     * Set an original source URI for the feed being parsed. This value
+     * is returned from getFeedLink() method if the feed does not carry
+     * a self-referencing URI.
+     *
+     * @param string $uri
+     */
+    public function setOriginalSourceUri($uri)
+    {
+        $this->_originalSourceUri = $uri;
+    }
+
+    /**
+     * Get an original source URI for the feed being parsed. Returns null if
+     * unset or the feed was not imported from a URI.
+     *
+     * @return string|null
+     */
+    public function getOriginalSourceUri()
+    {
+        return $this->_originalSourceUri;
     }
 
     /**
@@ -112,14 +144,14 @@ abstract class FeedAbstract implements FeedInterface
     /**
      * Return the current entry
      *
-     * @return \Zend\Feed\Reader\EntryInterface
+     * @return Zend_Feed_Reader_EntryInterface
      */
     public function current()
     {
         if (substr($this->getType(), 0, 3) == 'rss') {
-            $reader = new Entry\RSS($this->_entries[$this->key()], $this->key(), $this->getType());
+            $reader = new Zend_Feed_Reader_Entry_Rss($this->_entries[$this->key()], $this->key(), $this->getType());
         } else {
-            $reader = new Entry\Atom($this->_entries[$this->key()], $this->key(), $this->getType());
+            $reader = new Zend_Feed_Reader_Entry_Atom($this->_entries[$this->key()], $this->key(), $this->getType());
         }
 
         $reader->setXpath($this->_xpath);
@@ -241,7 +273,8 @@ abstract class FeedAbstract implements FeedInterface
                 return call_user_func_array(array($extension, $method), $args);
             }
         }
-        throw new \Zend\Feed\Exception('Method: ' . $method
+        require_once 'Zend/Feed/Exception.php';
+        throw new Zend_Feed_Exception('Method: ' . $method
         . 'does not exist and could not be located on a registered Extension');
     }
 
@@ -249,25 +282,25 @@ abstract class FeedAbstract implements FeedInterface
      * Return an Extension object with the matching name (postfixed with _Feed)
      *
      * @param string $name
-     * @return \Zend\Feed\Reader\Extension\FeedAbstract
+     * @return Zend_Feed_Reader_Extension_FeedAbstract
      */
     public function getExtension($name)
     {
-        if (array_key_exists($name . '\Feed', $this->_extensions)) {
-            return $this->_extensions[$name . '\Feed'];
+        if (array_key_exists($name . '_Feed', $this->_extensions)) {
+            return $this->_extensions[$name . '_Feed'];
         }
         return null;
     }
 
     protected function _loadExtensions()
     {
-        $all = Reader::getExtensions();
+        $all = Zend_Feed_Reader::getExtensions();
         $feed = $all['feed'];
         foreach ($feed as $extension) {
             if (in_array($extension, $all['core'])) {
                 continue;
             }
-            $className = Reader::getPluginLoader()->getClassName($extension);
+            $className = Zend_Feed_Reader::getPluginLoader()->getClassName($extension);
             $this->_extensions[$extension] = new $className(
                 $this->getDomDocument(), $this->_data['type'], $this->_xpath
             );

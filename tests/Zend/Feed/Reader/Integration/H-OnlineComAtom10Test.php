@@ -17,15 +17,11 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: H-OnlineComAtom10Test.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
-/**
- * @namespace
- */
-namespace ZendTest\Feed\Reader\Integration;
-use Zend\Feed\Reader;
-use Zend\Date;
+require_once 'PHPUnit/Framework/TestCase.php';
+require_once 'Zend/Feed/Reader.php';
 
 /**
  * @category   Zend
@@ -36,32 +32,32 @@ use Zend\Date;
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
-class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
+class Zend_Feed_Reader_Integration_HOnlineComAtom10Test extends PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
 
     public function setup()
     {
-        Reader\Reader::reset();
+        Zend_Feed_Reader::reset();
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/h-online.com-atom10.xml';
-        $this->_options = Date\Date::setOptions();
+        $this->_options = Zend_Date::setOptions();
         foreach($this->_options as $k=>$v) {
             if (is_null($v)) {
                 unset($this->_options[$k]);
             }
         }
-        Date\Date::setOptions(array('format_type'=>'iso'));
+        Zend_Date::setOptions(array('format_type'=>'iso'));
     }
     
     public function teardown()
     {
-        Date\Date::setOptions($this->_options);
+        Zend_Date::setOptions($this->_options);
     }
 
     public function testGetsTitle()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('The H - news feed', $feed->getTitle());
@@ -69,7 +65,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsAuthors()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(array(array('name'=>'The H')), (array) $feed->getAuthors());
@@ -77,7 +73,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsSingleAuthor()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(array('name'=>'The H'), $feed->getAuthor());
@@ -85,7 +81,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsCopyright()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(null, $feed->getCopyright());
@@ -93,7 +89,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsDescription()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('Technology news', $feed->getDescription());
@@ -101,7 +97,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsLanguage()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(null, $feed->getLanguage());
@@ -109,7 +105,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('http://www.h-online.com', $feed->getLink());
@@ -117,7 +113,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEncoding()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('UTF-8', $feed->getEncoding());
@@ -125,7 +121,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryCount()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(60, $feed->count());
@@ -137,7 +133,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryId()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -146,7 +142,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryTitle()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -155,7 +151,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryAuthors()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -164,7 +160,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntrySingleAuthor()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -173,7 +169,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryDescription()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -185,7 +181,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryContent()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -194,7 +190,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryLinks()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -203,7 +199,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -212,7 +208,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryPermaLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -222,7 +218,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryEncoding()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();

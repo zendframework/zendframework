@@ -17,15 +17,11 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: WordpressAtom10Test.php 22300 2010-05-26 10:13:34Z padraic $
  */
 
-/**
- * @namespace
- */
-namespace ZendTest\Feed\Reader\Integration;
-use Zend\Feed\Reader;
-use Zend\Date;
+require_once 'PHPUnit/Framework/TestCase.php';
+require_once 'Zend/Feed/Reader.php';
 
 /**
  * @category   Zend
@@ -36,32 +32,32 @@ use Zend\Date;
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
-class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
+class Zend_Feed_Reader_Integration_WordpressAtom10Test extends PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
 
     public function setup()
     {
-        Reader\Reader::reset();
+        Zend_Feed_Reader::reset();
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/wordpress-atom10.xml';
-        $this->_options = Date\Date::setOptions();
+        $this->_options = Zend_Date::setOptions();
         foreach($this->_options as $k=>$v) {
             if (is_null($v)) {
                 unset($this->_options[$k]);
             }
         }
-        Date\Date::setOptions(array('format_type'=>'iso'));
+        Zend_Date::setOptions(array('format_type'=>'iso'));
     }
     
     public function teardown()
     {
-        Date\Date::setOptions($this->_options);
+        Zend_Date::setOptions($this->_options);
     }
 
     public function testGetsTitle()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('Norm 2782', $feed->getTitle());
@@ -69,7 +65,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsAuthors()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(array(
@@ -79,7 +75,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsSingleAuthor()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(array('name'=>'norm2782','uri'=>'http://www.norm2782.com'), $feed->getAuthor());
@@ -87,7 +83,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsCopyright()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(null, $feed->getCopyright());
@@ -95,7 +91,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsDescription()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('Why are you here?', $feed->getDescription());
@@ -103,7 +99,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsLanguage()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('en', $feed->getLanguage());
@@ -111,7 +107,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('http://www.norm2782.com', $feed->getLink());
@@ -119,7 +115,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEncoding()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals('UTF-8', $feed->getEncoding());
@@ -127,7 +123,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryCount()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $this->assertEquals(10, $feed->count());
@@ -139,7 +135,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryId()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -148,7 +144,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryTitle()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -156,12 +152,12 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
          * Note: The three dots below is actually a single Unicode character
          * called the "three dot leader". Don't replace in error!
          */
-        $this->assertEquals('Wth… reading books?', $entry->getTitle());
+        $this->assertEquals('Wth&#8230; reading books?', $entry->getTitle());
     }
 
     public function testGetsEntryAuthors()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -170,7 +166,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntrySingleAuthor()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -179,19 +175,19 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryDescription()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
         /**
          * Note: "’" is not the same as "'" - don't replace in error
          */
-        $this->assertEquals('Being in New Zealand does strange things to a person. Everybody who knows me, knows I don’t much like that crazy invention called a Book. However, being here I’ve already finished 4 books, all of which I can highly recommend.'."\n\n".'Agile Software Development with Scrum, by Ken Schwaber and Mike Beedle'."\n".'Domain-Driven Design: Tackling Complexity in the [...]', $entry->getDescription());
+        $this->assertEquals('Being in New Zealand does strange things to a person. Everybody who knows me, knows I don&#8217;t much like that crazy invention called a Book. However, being here I&#8217;ve already finished 4 books, all of which I can highly recommend.'."\n\n".'Agile Software Development with Scrum, by Ken Schwaber and Mike Beedle'."\n".'Domain-Driven Design: Tackling Complexity in the [...]', $entry->getDescription());
     }
 
     public function testGetsEntryContent()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -200,7 +196,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryLinks()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -209,7 +205,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -218,7 +214,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryPermaLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
@@ -228,7 +224,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryEncoding()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();

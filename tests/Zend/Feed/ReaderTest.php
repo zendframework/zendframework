@@ -17,14 +17,12 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: ReaderTest.php 22031 2010-04-28 15:47:44Z padraic $
  */
 
-/**
- * @namespace
- */
-namespace ZendTest\Feed;
-use Zend\Feed\Reader;
+require_once 'PHPUnit/Framework/TestCase.php';
+require_once 'Zend/Feed/Reader.php';
+require_once 'Zend/Cache.php';
 
 /**
  * @category   Zend
@@ -35,7 +33,7 @@ use Zend\Feed\Reader;
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
-class ReaderTest extends \PHPUnit_Framework_TestCase
+class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
@@ -47,84 +45,94 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        Reader\Reader::reset();
+        Zend_Feed_Reader::reset();
     }
 
     public function testDetectsFeedIsRss20()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/Reader/rss20.xml'));
-        $type = Reader\Reader::detectType($feed);
-        $this->assertEquals(Reader\Reader::TYPE_RSS_20, $type);
+        $type = Zend_Feed_Reader::detectType($feed);
+        $this->assertEquals(Zend_Feed_Reader::TYPE_RSS_20, $type);
     }
 
     public function testDetectsFeedIsRss094()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/Reader/rss094.xml'));
-        $type = Reader\Reader::detectType($feed);
-        $this->assertEquals(Reader\Reader::TYPE_RSS_094, $type);
+        $type = Zend_Feed_Reader::detectType($feed);
+        $this->assertEquals(Zend_Feed_Reader::TYPE_RSS_094, $type);
     }
 
     public function testDetectsFeedIsRss093()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/Reader/rss093.xml'));
-        $type = Reader\Reader::detectType($feed);
-        $this->assertEquals(Reader\Reader::TYPE_RSS_093, $type);
+        $type = Zend_Feed_Reader::detectType($feed);
+        $this->assertEquals(Zend_Feed_Reader::TYPE_RSS_093, $type);
     }
 
     public function testDetectsFeedIsRss092()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/Reader/rss092.xml'));
-        $type = Reader\Reader::detectType($feed);
-        $this->assertEquals(Reader\Reader::TYPE_RSS_092, $type);
+        $type = Zend_Feed_Reader::detectType($feed);
+        $this->assertEquals(Zend_Feed_Reader::TYPE_RSS_092, $type);
     }
 
     public function testDetectsFeedIsRss091()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/Reader/rss091.xml'));
-        $type = Reader\Reader::detectType($feed);
-        $this->assertEquals(Reader\Reader::TYPE_RSS_091, $type);
+        $type = Zend_Feed_Reader::detectType($feed);
+        $this->assertEquals(Zend_Feed_Reader::TYPE_RSS_091, $type);
     }
 
     public function testDetectsFeedIsRss10()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/Reader/rss10.xml'));
-        $type = Reader\Reader::detectType($feed);
-        $this->assertEquals(Reader\Reader::TYPE_RSS_10, $type);
+        $type = Zend_Feed_Reader::detectType($feed);
+        $this->assertEquals(Zend_Feed_Reader::TYPE_RSS_10, $type);
     }
 
     public function testDetectsFeedIsRss090()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/Reader/rss090.xml'));
-        $type = Reader\Reader::detectType($feed);
-        $this->assertEquals(Reader\Reader::TYPE_RSS_090, $type);
+        $type = Zend_Feed_Reader::detectType($feed);
+        $this->assertEquals(Zend_Feed_Reader::TYPE_RSS_090, $type);
     }
 
     public function testDetectsFeedIsAtom10()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/Reader/atom10.xml'));
-        $type = Reader\Reader::detectType($feed);
-        $this->assertEquals(Reader\Reader::TYPE_ATOM_10, $type);
+        $type = Zend_Feed_Reader::detectType($feed);
+        $this->assertEquals(Zend_Feed_Reader::TYPE_ATOM_10, $type);
     }
 
     public function testDetectsFeedIsAtom03()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/Reader/atom03.xml'));
-        $type = Reader\Reader::detectType($feed);
-        $this->assertEquals(Reader\Reader::TYPE_ATOM_03, $type);
+        $type = Zend_Feed_Reader::detectType($feed);
+        $this->assertEquals(Zend_Feed_Reader::TYPE_ATOM_03, $type);
+    }
+
+    /**
+     * @group ZF-9723
+     */
+    public function testDetectsTypeFromStringOrToRemindPaddyAboutForgettingATestWhichLetsAStupidTypoSurviveUnnoticedForMonths()
+    {
+        $feed = '<?xml version="1.0" encoding="utf-8" ?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/"><channel></channel></rdf:RDF>';
+        $type = Zend_Feed_Reader::detectType($feed);
+        $this->assertEquals(Zend_Feed_Reader::TYPE_RSS_10, $type);
     }
 
     public function testGetEncoding()
     {
-        $feed = Reader\Reader::importString(
+        $feed = Zend_Feed_Reader::importString(
             file_get_contents(dirname(__FILE__) . '/Reader/Entry/_files/Atom/title/plain/atom10.xml')
         );
 
@@ -135,10 +143,10 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testImportsFile()
     {
         try {
-            $feed = Reader\Reader::importFile(
+            $feed = Zend_Feed_Reader::importFile(
                 dirname(__FILE__) . '/Reader/Entry/_files/Atom/title/plain/atom10.xml'
             );
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
     }
@@ -153,18 +161,18 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         }
 
         try {
-            $feed = Reader\Reader::import('http://www.planet-php.net/rdf/');
-        } catch(\Exception $e) {
+            $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
+        } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
     }
     
     /**
      * @group ZF-8328
+     * @expectedException Zend_Feed_Exception
      */
     public function testImportsUriAndThrowsExceptionIfNotAFeed()
     {
-        $this->setExpectedException('Zend\Feed\Exception');
         if (!defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
             || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
         ) {
@@ -172,7 +180,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $feed = Reader\Reader::import('http://twitter.com/alganet');
+        $feed = Zend_Feed_Reader::import('http://twitter.com/alganet');
     }
 
     public function testGetsFeedLinksAsValueObject()
@@ -185,8 +193,8 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         }
 
         try {
-            $links = Reader\Reader::findFeedLinks('http://www.planet-php.net');
-        } catch(\Exception $e) {
+            $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
+        } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
         $this->assertEquals('http://www.planet-php.org/rss/', $links->rss);
@@ -200,8 +208,8 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
             return;
         }
-        $links = Reader\Reader::findFeedLinks('http://www.planet-php.net');
-        $this->assertTrue($links instanceof Reader\FeedSet);
+        $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
+        $this->assertTrue($links instanceof Zend_Feed_Reader_FeedSet);
         $this->assertEquals(array(
             'rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => 'http://www.planet-php.org/rss/'
         ), (array) $links->getIterator()->current());
@@ -215,9 +223,9 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
             return;
         }
-        $links = Reader\Reader::findFeedLinks('http://www.planet-php.net');
+        $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
         $link = $links->getIterator()->current();
-        $this->assertTrue($link['feed'] instanceof \Zend\Feed\Reader\Feed\RSS);
+        $this->assertTrue($link['feed'] instanceof Zend_Feed_Reader_Feed_Rss);
     }
 
     public function testZeroCountFeedSetReturnedFromEmptyList()
@@ -228,7 +236,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
             return;
         }
-        $links = Reader\Reader::findFeedLinks('http://www.example.com');
+        $links = Zend_Feed_Reader::findFeedLinks('http://www.example.com');
         $this->assertEquals(0, count($links));
     }
     
@@ -245,8 +253,8 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         }
 
         try {
-            $links = Reader\Reader::findFeedLinks('http://www.infopod.com.br');
-        } catch(\Exception $e) {
+            $links = Zend_Feed_Reader::findFeedLinks('http://www.infopod.com.br');
+        } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
         $this->assertEquals('http://feeds.feedburner.com/jonnyken/infoblog', $links->rss);
@@ -265,8 +273,8 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         }
 
         try {
-            $links = Reader\Reader::findFeedLinks('http://meiobit.com');
-        } catch(\Exception $e) {
+            $links = Zend_Feed_Reader::findFeedLinks('http://meiobit.com');
+        } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
         $this->assertEquals('http://meiobit.com/rss.xml', $links->rss);
@@ -278,16 +286,16 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testGetsFeedLinksAndNormalisesRelativeUrlsOnUriWithPath()
     {
         try {
-            $currClient = Reader\Reader::getHttpClient();
+            $currClient = Zend_Feed_Reader::getHttpClient();
 
-            $testAdapter = new \Zend\HTTP\Client\Adapter\Test();
-            $testAdapter->setResponse(new \Zend\HTTP\Response\Response(200, array(), '<!DOCTYPE html><html><head><link rel="alternate" type="application/rss+xml" href="../test.rss"><link rel="alternate" type="application/atom+xml" href="/test.atom"></head><body></body></html>'));
-            Reader\Reader::setHttpClient(new \Zend\HTTP\Client(null, array('adapter' => $testAdapter)));
+            $testAdapter = new Zend_Http_Client_Adapter_Test();
+            $testAdapter->setResponse(new Zend_Http_Response(200, array(), '<!DOCTYPE html><html><head><link rel="alternate" type="application/rss+xml" href="../test.rss"><link rel="alternate" type="application/atom+xml" href="/test.atom"></head><body></body></html>'));
+            Zend_Feed_Reader::setHttpClient(new Zend_Http_Client(null, array('adapter' => $testAdapter)));
 
-            $links = Reader\Reader::findFeedLinks('http://foo/bar');
+            $links = Zend_Feed_Reader::findFeedLinks('http://foo/bar');
 
-            Reader\Reader::setHttpClient($currClient);
-        } catch(\Exception $e) {
+            Zend_Feed_Reader::setHttpClient($currClient);
+        } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
 
@@ -297,20 +305,20 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testAddsPrefixPath()
     {
-        Reader\Reader::addPrefixPath('A\B\C', '/A/B/C');
-        $prefixPaths = Reader\Reader::getPluginLoader()->getPaths();
-        $this->assertEquals('/A/B/C/', $prefixPaths['A\B\C\\'][0]);
+        Zend_Feed_Reader::addPrefixPath('A_B_C', '/A/B/C');
+        $prefixPaths = Zend_Feed_Reader::getPluginLoader()->getPaths();
+        $this->assertEquals('/A/B/C/', $prefixPaths['A_B_C_'][0]);
     }
 
     public function testRegistersUserExtension()
     {
         try {
-            Reader\Reader::addPrefixPath('My\FeedReader\Extension', dirname(__FILE__) . '/Reader/_files/My/Extension');
-            Reader\Reader::registerExtension('JungleBooks');
-        } catch(\Exception $e) {
+            Zend_Feed_Reader::addPrefixPath('My_FeedReader_Extension',dirname(__FILE__) . '/Reader/_files/My/Extension');
+            Zend_Feed_Reader::registerExtension('JungleBooks');
+        } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
-        $this->assertTrue(Reader\Reader::isRegistered('JungleBooks'));
+        $this->assertTrue(Zend_Feed_Reader::isRegistered('JungleBooks'));
     }
 
     protected function _getTempDirectory()

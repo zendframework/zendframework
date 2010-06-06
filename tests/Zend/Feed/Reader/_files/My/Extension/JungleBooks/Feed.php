@@ -17,13 +17,10 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Feed.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
-/**
- * @namespace
- */
-namespace My\Extension\JungleBooks;
+require_once 'Zend/Feed/Reader/Extension/FeedAbstract.php';
 
 /**
  * @category   Zend
@@ -32,7 +29,7 @@ namespace My\Extension\JungleBooks;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Feed extends \Zend\Feed\Reader\Extension\FeedAbstract
+class My_FeedReader_Extension_JungleBooks_Feed extends Zend_Feed_Reader_Extension_FeedAbstract
 {
 
     public function getDaysPopularBookLink()

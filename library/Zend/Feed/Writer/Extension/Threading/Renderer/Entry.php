@@ -16,23 +16,22 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Entry.php 20325 2010-01-16 00:17:59Z padraic $
  */
-
+ 
 /**
- * @namespace
+ * @see Zend_Feed_Writer_Extension_RendererAbstract
  */
-namespace Zend\Feed\Writer\Extension\Threading\Renderer;
-
+require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
+ 
 /**
- * @uses       \Zend\Feed\Writer\Extension\RendererAbstract
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Entry
-    extends \Zend\Feed\Writer\Extension\RendererAbstract
+class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
+    extends Zend_Feed_Writer_Extension_RendererAbstract
 {
 
     /**
@@ -80,7 +79,7 @@ class Entry
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setCommentLink(\DOMDocument $dom, \DOMElement $root)
+    protected function _setCommentLink(DOMDocument $dom, DOMElement $root)
     {
         $link = $this->getDataContainer()->getCommentLink();
         if (!$link) {
@@ -105,7 +104,7 @@ class Entry
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setCommentFeedLinks(\DOMDocument $dom, \DOMElement $root)
+    protected function _setCommentFeedLinks(DOMDocument $dom, DOMElement $root)
     {
         $links = $this->getDataContainer()->getCommentFeedLinks();
         if (!$links || empty($links)) {
@@ -132,7 +131,7 @@ class Entry
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setCommentCount(\DOMDocument $dom, \DOMElement $root)
+    protected function _setCommentCount(DOMDocument $dom, DOMElement $root)
     {
         $count = $this->getDataContainer()->getCommentCount();
         if (is_null($count)) {

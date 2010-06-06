@@ -16,25 +16,22 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: RendererAbstract.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
+ 
+/** @see Zend_Feed_Writer */
+require_once 'Zend/Feed/Writer.php';
 
+/** @see Zend_Version */
+require_once 'Zend/Version.php';
+ 
 /**
- * @namespace
- */
-namespace Zend\Feed\Writer\Renderer;
-use Zend\Feed\Writer;
-
-/**
- * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Writer\Writer
- * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RendererAbstract
+class Zend_Feed_Writer_Renderer_RendererAbstract
 {
     /**
      * Extensions
@@ -139,7 +136,7 @@ class RendererAbstract
      * Set feed encoding
      * 
      * @param  string $enc 
-     * @return \Zend\Feed\Writer\Renderer\RendererAbstract
+     * @return Zend_Feed_Writer_Renderer_RendererAbstract
      */
     public function setEncoding($enc)
     {
@@ -161,12 +158,13 @@ class RendererAbstract
      * Indicate whether or not to ignore exceptions
      * 
      * @param  bool $bool 
-     * @return \Zend\Feed\Writer\Renderer\RendererAbstract
+     * @return Zend_Feed_Writer_Renderer_RendererAbstract
      */
     public function ignoreExceptions($bool = true)
     {
         if (!is_bool($bool)) {
-            throw new \Zend\Feed\Exception('Invalid parameter: $bool. Should be TRUE or FALSE (defaults to TRUE if null)');
+            require_once 'Zend/Feed/Exception.php';
+            throw new Zend_Feed_Exception('Invalid parameter: $bool. Should be TRUE or FALSE (defaults to TRUE if null)');
         }
         $this->_ignoreExceptions = $bool;
         return $this;
@@ -212,7 +210,7 @@ class RendererAbstract
      *
      * @param DOMElement $root
      */
-    public function setRootElement(\DOMElement $root)
+    public function setRootElement(DOMElement $root)
     {
         $this->_rootElement = $root;
     }
@@ -234,15 +232,15 @@ class RendererAbstract
      */
     protected function _loadExtensions()
     {
-        Writer\Writer::registerCoreExtensions();
-        $all = Writer\Writer::getExtensions();
+        Zend_Feed_Writer::registerCoreExtensions();
+        $all = Zend_Feed_Writer::getExtensions();
         if (stripos(get_class($this), 'entry')) {
             $exts = $all['entryRenderer'];
         } else {
             $exts = $all['feedRenderer'];
         }
         foreach ($exts as $extension) {
-            $className = Writer\Writer::getPluginLoader()->getClassName($extension);
+            $className = Zend_Feed_Writer::getPluginLoader()->getClassName($extension);
             $this->_extensions[$extension] = new $className(
                 $this->getDataContainer()
             );

@@ -16,38 +16,37 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Entry.php 22300 2010-05-26 10:13:34Z padraic $
  */
 
 /**
- * @namespace
+ * @see Zend_Feed_Reader
  */
-namespace Zend\Feed\Reader\Extension\Content;
-use Zend\Feed\Reader;
+require_once 'Zend/Feed/Reader.php';
 
 /**
- * @uses       \Zend\Feed\Reader\Reader
- * @uses       Zend_Feed_Reader_Entry_EntryAbstract
+ * @see Zend_Feed_Reader_Entry_EntryAbstract
+ */
+require_once 'Zend/Feed/Reader/Extension/EntryAbstract.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Entry
-    extends Reader\Extension\EntryAbstract
+class Zend_Feed_Reader_Extension_Content_Entry
+    extends Zend_Feed_Reader_Extension_EntryAbstract
 {
 
     public function getContent()
     {
-        if ($this->getType() !== Reader\Reader::TYPE_RSS_10
-            && $this->getType() !== Reader\Reader::TYPE_RSS_090
+        if ($this->getType() !== Zend_Feed_Reader::TYPE_RSS_10
+            && $this->getType() !== Zend_Feed_Reader::TYPE_RSS_090
         ) {
             $content = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
         } else {
             $content = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
-        }
-        if ($content) {
-            $content = html_entity_decode($content, ENT_QUOTES, $this->getEncoding());
         }
         return $content;
     }

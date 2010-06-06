@@ -16,23 +16,16 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: EntryAbstract.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /**
- * @namespace
- */
-namespace Zend\Feed\Reader;
-
-/**
- * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Reader\Reader
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class EntryAbstract
+abstract class Zend_Feed_Reader_EntryAbstract
 {
     /**
      * Feed entry data
@@ -84,7 +77,7 @@ abstract class EntryAbstract
      * @param  string $type
      * @return void
      */
-    public function __construct(\DOMElement $entry, $entryKey, $type = null)
+    public function __construct(DOMElement $entry, $entryKey, $type = null)
     {
         $this->_entry       = $entry;
         $this->_entryKey    = $entryKey;
@@ -92,7 +85,7 @@ abstract class EntryAbstract
         if ($type !== null) {
             $this->_data['type'] = $type;
         } else {
-            $this->_data['type'] = Reader::detectType($feed);
+            $this->_data['type'] = Zend_Feed_Reader::detectType($feed);
         }
         $this->_loadExtensions();
     }
@@ -138,7 +131,7 @@ abstract class EntryAbstract
      */
     public function saveXml()
     {
-        $dom = new \DOMDocument('1.0', $this->getEncoding());
+        $dom = new DOMDocument('1.0', $this->getEncoding());
         $entry = $dom->importNode($this->getElement(), true);
         $dom->appendChild($entry);
         return $dom->saveXml();
@@ -162,7 +155,7 @@ abstract class EntryAbstract
     public function getXpath()
     {
         if (!$this->_xpath) {
-            $this->setXpath(new \DOMXPath($this->getDomDocument()));
+            $this->setXpath(new DOMXPath($this->getDomDocument()));
         }
         return $this->_xpath;
     }
@@ -173,7 +166,7 @@ abstract class EntryAbstract
      * @param  DOMXPath $xpath
      * @return Zend_Feed_Reader_Entry_EntryAbstract
      */
-    public function setXpath(\DOMXPath $xpath)
+    public function setXpath(DOMXPath $xpath)
     {
         $this->_xpath = $xpath;
         return $this;
@@ -193,12 +186,12 @@ abstract class EntryAbstract
      * Return an Extension object with the matching name (postfixed with _Entry)
      *
      * @param string $name
-     * @return \Zend\Feed\Reader\Extension\EntryAbstract
+     * @return Zend_Feed_Reader_Extension_EntryAbstract
      */
     public function getExtension($name)
     {
-        if (array_key_exists($name . '\Entry', $this->_extensions)) {
-            return $this->_extensions[$name . '\Entry'];
+        if (array_key_exists($name . '_Entry', $this->_extensions)) {
+            return $this->_extensions[$name . '_Entry'];
         }
         return null;
     }
@@ -209,7 +202,7 @@ abstract class EntryAbstract
      * @param  string $method
      * @param  array $args
      * @return mixed
-     * @throws \Zend\Feed\Exception if no extensions implements the method
+     * @throws Zend_Feed_Exception if no extensions implements the method
      */
     public function __call($method, $args)
     {
@@ -218,7 +211,8 @@ abstract class EntryAbstract
                 return call_user_func_array(array($extension, $method), $args);
             }
         }
-        throw new \Zend\Feed\Exception('Method: ' . $method
+        require_once 'Zend/Feed/Exception.php';
+        throw new Zend_Feed_Exception('Method: ' . $method
             . 'does not exist and could not be located on a registered Extension');
     }
 
@@ -229,13 +223,13 @@ abstract class EntryAbstract
      */
     protected function _loadExtensions()
     {
-        $all = Reader::getExtensions();
+        $all = Zend_Feed_Reader::getExtensions();
         $feed = $all['entry'];
         foreach ($feed as $extension) {
             if (in_array($extension, $all['core'])) {
                 continue;
             }
-            $className = Reader::getPluginLoader()->getClassName($extension);
+            $className = Zend_Feed_Reader::getPluginLoader()->getClassName($extension);
             $this->_extensions[$extension] = new $className(
                 $this->getElement(), $this->_entryKey, $this->_data['type']
             );

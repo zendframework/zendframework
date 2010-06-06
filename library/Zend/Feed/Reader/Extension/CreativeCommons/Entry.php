@@ -16,23 +16,26 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Entry.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /**
- * @namespace
+ * @see Zend_Feed_Reader_Extension_EntryAbstract
  */
-namespace Zend\Feed\Reader\Extension\CreativeCommons;
+require_once 'Zend/Feed/Reader/Extension/EntryAbstract.php';
 
 /**
- * @uses       \Zend\Feed\Reader\Extension\CreativeCommons\Feed
- * @uses       \Zend\Feed\Reader\Extension\EntryAbstract
+ * @see Zend_Feed_Reader_Extension_CreativeCommons_Feed
+ */
+require_once 'Zend/Feed/Reader/Extension/CreativeCommons/Feed.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Entry extends \Zend\Feed\Reader\Extension\EntryAbstract
+class Zend_Feed_Reader_Extension_CreativeCommons_Entry extends Zend_Feed_Reader_Extension_EntryAbstract
 {
     /**
      * Get the entry license
@@ -72,7 +75,7 @@ class Entry extends \Zend\Feed\Reader\Extension\EntryAbstract
 
             $licenses = array_unique($licenses);
         } else {
-            $cc = new Feed(
+            $cc = new Zend_Feed_Reader_Extension_CreativeCommons_Feed(
                 $this->_domDocument, $this->_data['type'], $this->_xpath
             );
             $licenses = $cc->getLicenses();

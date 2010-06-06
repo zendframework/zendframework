@@ -20,12 +20,19 @@
  */
 
 /**
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-interface Zend_Feed_Reader_FeedInterface extends Iterator, Countable
+* @namespace
+*/
+namespace Zend\Feed\Reader;
+
+/**
+* @uses Countable
+* @uses Iterator
+* @category Zend
+* @package Zend_Feed_Reader
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+interface Feed extends \Iterator, \Countable
 {
     /**
      * Get a single author

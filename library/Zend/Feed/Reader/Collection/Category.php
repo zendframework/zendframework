@@ -20,18 +20,18 @@
  */
  
 /**
- * @see Zend_Feed_Reader_Collection_CollectionAbstract
- */
-require_once 'Zend/Feed/Reader/Collection/CollectionAbstract.php';
+* @namespace
+*/
+namespace Zend\Feed\Reader\Collection;
 
 /**
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Feed_Reader_Collection_Category
-extends Zend_Feed_Reader_Collection_CollectionAbstract
+* @uses \Zend\Feed\Reader\Collection\CollectionAbstract
+* @category Zend
+* @package Zend_Feed_Reader
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Category extends AbstractCollection
 {
 
     /**

@@ -18,24 +18,23 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: FeedAbstract.php 22092 2010-05-04 12:50:51Z padraic $
  */
+ 
+/**
+* @namespace
+*/
+namespace Zend\Feed\Reader\Feed;
+use Zend\Feed\Reader;
 
 /**
- * @see Zend_Feed_Reader
- */
-require_once 'Zend/Feed/Reader.php';
-
-/**
- * @see Zend_feed_Reader_FeedInterface
- */
-require_once 'Zend/Feed/Reader/FeedInterface.php';
-
-/**
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInterface
+* @uses \Zend\Feed\Exception
+* @uses \Zend\Feed\Reader\Reader
+* @uses \Zend\Feed\Reader\Feed
+* @category Zend
+* @package Zend_Feed_Reader
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+abstract class AbstractFeed implements Feed
 {
     /**
      * Parsed feed data
@@ -92,15 +91,15 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
      * @param DomDocument The DOM object for the feed's XML
      * @param string $type Feed type
      */
-    public function __construct(DomDocument $domDocument, $type = null)
+    public function __construct(\DomDocument $domDocument, $type = null)
     {
         $this->_domDocument = $domDocument;
-        $this->_xpath = new DOMXPath($this->_domDocument);
+        $this->_xpath = new \DOMXPath($this->_domDocument);
 
         if ($type !== null) {
             $this->_data['type'] = $type;
         } else {
-            $this->_data['type'] = Zend_Feed_Reader::detectType($this->_domDocument);
+            $this->_data['type'] = Reader\Reader::detectType($this->_domDocument);
         }
         $this->_registerNamespaces();
         $this->_indexEntries();
@@ -149,9 +148,9 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
     public function current()
     {
         if (substr($this->getType(), 0, 3) == 'rss') {
-            $reader = new Zend_Feed_Reader_Entry_Rss($this->_entries[$this->key()], $this->key(), $this->getType());
+            $reader = new Reader\Entry\Rss($this->_entries[$this->key()], $this->key(), $this->getType());
         } else {
-            $reader = new Zend_Feed_Reader_Entry_Atom($this->_entries[$this->key()], $this->key(), $this->getType());
+            $reader = new Reader\Entry\Atom($this->_entries[$this->key()], $this->key(), $this->getType());
         }
 
         $reader->setXpath($this->_xpath);
@@ -273,8 +272,7 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
                 return call_user_func_array(array($extension, $method), $args);
             }
         }
-        require_once 'Zend/Feed/Exception.php';
-        throw new Zend_Feed_Exception('Method: ' . $method
+        throw new Exception('Method: ' . $method
         . 'does not exist and could not be located on a registered Extension');
     }
 
@@ -286,21 +284,21 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
      */
     public function getExtension($name)
     {
-        if (array_key_exists($name . '_Feed', $this->_extensions)) {
-            return $this->_extensions[$name . '_Feed'];
+        if (array_key_exists($name . '\\Feed', $this->_extensions)) {
+            return $this->_extensions[$name . '\\Feed'];
         }
         return null;
     }
 
     protected function _loadExtensions()
     {
-        $all = Zend_Feed_Reader::getExtensions();
+        $all = Reader\Reader::getExtensions();
         $feed = $all['feed'];
         foreach ($feed as $extension) {
             if (in_array($extension, $all['core'])) {
                 continue;
             }
-            $className = Zend_Feed_Reader::getPluginLoader()->getClassName($extension);
+            $className = Reader\Reader::getPluginLoader()->getClassName($extension);
             $this->_extensions[$extension] = new $className(
                 $this->getDomDocument(), $this->_data['type'], $this->_xpath
             );

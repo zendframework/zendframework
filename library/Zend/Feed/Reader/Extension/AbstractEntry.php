@@ -13,19 +13,26 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Reader
+ * @package    Reader\Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: EntryAbstract.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /**
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-abstract class Zend_Feed_Reader_Extension_EntryAbstract
+* @namespace
+*/
+namespace Zend\Feed\Reader\Extension;
+use Zend\Feed\Reader;
+
+/**
+* @uses \Zend\Feed\Reader\Reader
+* @category Zend
+* @package Reader\Reader
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+abstract class AbstractEntry
 {
     /**
      * Feed entry data
@@ -77,7 +84,7 @@ abstract class Zend_Feed_Reader_Extension_EntryAbstract
      * @param  string $type
      * @return void
      */
-    public function __construct(DOMElement $entry, $entryKey, $type = null)
+    public function __construct(\DOMElement $entry, $entryKey, $type = null)
     {
         $this->_entry       = $entry;
         $this->_entryKey    = $entryKey;
@@ -86,15 +93,15 @@ abstract class Zend_Feed_Reader_Extension_EntryAbstract
         if (!is_null($type)) {
             $this->_data['type'] = $type;
         } else {
-            $this->_data['type'] = Zend_Feed_Reader::detectType($entry->ownerDocument, true);
+            $this->_data['type'] = Reader\Reader::detectType($entry->ownerDocument, true);
         }
         // set the XPath query prefix for the entry being queried
-        if ($this->getType() == Zend_Feed_Reader::TYPE_RSS_10
-            || $this->getType() == Zend_Feed_Reader::TYPE_RSS_090
+        if ($this->getType() == Reader\Reader::TYPE_RSS_10
+            || $this->getType() == Reader\Reader::TYPE_RSS_090
         ) {
             $this->setXpathPrefix('//rss:item[' . ($this->_entryKey+1) . ']');
-        } elseif ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10
-                  || $this->getType() == Zend_Feed_Reader::TYPE_ATOM_03
+        } elseif ($this->getType() == Reader\Reader::TYPE_ATOM_10
+                  || $this->getType() == Reader\Reader::TYPE_ATOM_03
         ) {
             $this->setXpathPrefix('//atom:entry[' . ($this->_entryKey+1) . ']');
         } else {
@@ -105,7 +112,7 @@ abstract class Zend_Feed_Reader_Extension_EntryAbstract
     /**
      * Get the DOM
      *
-     * @return DOMDocument
+     * @return \DOMDocument
      */
     public function getDomDocument()
     {
@@ -137,9 +144,9 @@ abstract class Zend_Feed_Reader_Extension_EntryAbstract
      * Set the XPath query
      *
      * @param  DOMXPath $xpath
-     * @return Zend_Feed_Reader_Extension_EntryAbstract
+     * @return Reader\Reader_Extension_EntryAbstract
      */
-    public function setXpath(DOMXPath $xpath)
+    public function setXpath(\DOMXPath $xpath)
     {
         $this->_xpath = $xpath;
         $this->_registerNamespaces();
@@ -154,7 +161,7 @@ abstract class Zend_Feed_Reader_Extension_EntryAbstract
     public function getXpath()
     {
         if (!$this->_xpath) {
-            $this->setXpath(new DOMXPath($this->getDomDocument()));
+            $this->setXpath(new \DOMXPath($this->getDomDocument()));
         }
         return $this->_xpath;
     }
@@ -183,7 +190,7 @@ abstract class Zend_Feed_Reader_Extension_EntryAbstract
      * Set the XPath prefix
      *
      * @param  string $prefix
-     * @return Zend_Feed_Reader_Extension_EntryAbstract
+     * @return Reader\Reader_Extension_EntryAbstract
      */
     public function setXpathPrefix($prefix)
     {

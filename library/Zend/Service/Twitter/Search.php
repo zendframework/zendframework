@@ -21,29 +21,23 @@
  */
 
 /**
- * @see Zend_Http_Client
- */
-require_once 'Zend/Rest/Client.php';
-
-/**
- * @see Zend_Json
- */
-require_once 'Zend/Json.php';
-
-/**
- * @see Zend_Feed
- */
-require_once 'Zend/Feed.php';
-
-/**
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Twitter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+ 
+/**
+ * @namespace
+ */
+namespace Zend\Service\Twitter;
+use Zend\HTTP;
+use Zend\REST;
+use Zend\Feed;
+use Zend\JSON;
 
-class Zend_Service_Twitter_Search extends Zend_Rest_Client
+class Search extends REST\Client\RESTClient
 {
     /**
      * Return Type
@@ -91,8 +85,7 @@ class Zend_Service_Twitter_Search extends Zend_Rest_Client
     public function setResponseType($responseType = 'json')
     {
         if(!in_array($responseType, $this->_responseTypes, TRUE)) {
-            require_once 'Zend/Service/Twitter/Exception.php';
-            throw new Zend_Service_Twitter_Exception('Invalid Response Type');
+            throw new Exception('Invalid Response Type');
         }
         $this->_responseType = $responseType;
         return $this;
@@ -118,7 +111,7 @@ class Zend_Service_Twitter_Search extends Zend_Rest_Client
     {
         $response     = $this->restGet('/trends.json');
 
-        return Zend_Json::decode($response->getBody());
+        return JSON::decode($response->getBody());
     }
 
     /**
@@ -155,10 +148,10 @@ class Zend_Service_Twitter_Search extends Zend_Rest_Client
 
         switch($this->_responseType) {
             case 'json':
-                return Zend_Json::decode($response->getBody());
+                return JSON::decode($response->getBody());
                 break;
             case 'atom':
-                return Zend_Feed::importString($response->getBody());
+                return Feed\Reader::importString($response->getBody());
                 break;
         }
 

@@ -21,8 +21,12 @@
  */
 
 /**
- * Zend_OpenID
+ * @namespace
  */
+namespace ZendTest\OpenID;
+
+use Zend\OpenID\OpenID,
+    Zend\OpenID\Extension;
 
 
 /**
@@ -37,7 +41,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_OpenID
  */
-class Zend_OpenID_Extension_SregTest extends PHPUnit_Framework_TestCase
+class SregTest extends \PHPUnit_Framework_TestCase
 {
     const USER = "test_user";
     const EMAIL = "user@test.com";
@@ -49,9 +53,9 @@ class Zend_OpenID_Extension_SregTest extends PHPUnit_Framework_TestCase
      */
     public function testGetProperties()
     {
-        $ext = new Zend_OpenID_Extension_Sreg();
+        $ext = new Extension\Sreg();
         $this->assertSame( array(), $ext->getProperties() );
-        $ext = new Zend_OpenID_Extension_Sreg(array('nickname'=>true,'email'=>false));
+        $ext = new Extension\Sreg(array('nickname'=>true,'email'=>false));
         $this->assertSame( array('nickname'=>true,'email'=>false), $ext->getProperties() );
     }
 
@@ -61,9 +65,9 @@ class Zend_OpenID_Extension_SregTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPolicyUrl()
     {
-        $ext = new Zend_OpenID_Extension_Sreg();
+        $ext = new Extension\Sreg();
         $this->assertSame( null, $ext->getPolicyUrl() );
-        $ext = new Zend_OpenID_Extension_Sreg(null, self::POLICY);
+        $ext = new Extension\Sreg(null, self::POLICY);
         $this->assertSame( self::POLICY, $ext->getPolicyUrl() );
     }
 
@@ -73,9 +77,9 @@ class Zend_OpenID_Extension_SregTest extends PHPUnit_Framework_TestCase
      */
     public function testGetVersion()
     {
-        $ext = new Zend_OpenID_Extension_Sreg();
+        $ext = new Extension\Sreg();
         $this->assertSame( 1.0, $ext->getVersion() );
-        $ext = new Zend_OpenID_Extension_Sreg(null, null, 1.1);
+        $ext = new Extension\Sreg(null, null, 1.1);
         $this->assertSame( 1.1, $ext->getVersion() );
     }
 
@@ -97,7 +101,7 @@ class Zend_OpenID_Extension_SregTest extends PHPUnit_Framework_TestCase
                 "language",
                 "timezone"
             ),
-            Zend_OpenID_Extension_Sreg::getSregProperties() );
+            Extension\Sreg::getSregProperties() );
     }
 
     /**
@@ -106,19 +110,19 @@ class Zend_OpenID_Extension_SregTest extends PHPUnit_Framework_TestCase
      */
     public function testPrepareRequest()
     {
-        $ext = new Zend_OpenID_Extension_Sreg();
+        $ext = new Extension\Sreg();
         $params = array();
         $this->assertTrue( $ext->prepareRequest($params) );
         $this->assertSame( array(), $params );
-        $ext = new Zend_OpenID_Extension_Sreg(array("nickname"=>true,"email"=>false));
+        $ext = new Extension\Sreg(array("nickname"=>true,"email"=>false));
         $params = array();
         $this->assertTrue( $ext->prepareRequest($params) );
         $this->assertSame( array('openid.sreg.required'=>"nickname", 'openid.sreg.optional'=>"email"), $params );
-        $ext = new Zend_OpenID_Extension_Sreg(array("nickname"=>true,"email"=>true), self::POLICY);
+        $ext = new Extension\Sreg(array("nickname"=>true,"email"=>true), self::POLICY);
         $params = array();
         $this->assertTrue( $ext->prepareRequest($params) );
         $this->assertSame( array('openid.sreg.required'=>"nickname,email", 'openid.sreg.policy_url' => self::POLICY), $params );
-        $ext = new Zend_OpenID_Extension_Sreg(array("nickname"=>false,"email"=>false), self::POLICY, 1.1);
+        $ext = new Extension\Sreg(array("nickname"=>false,"email"=>false), self::POLICY, 1.1);
         $params = array();
         $this->assertTrue( $ext->prepareRequest($params) );
         $this->assertSame( array('openid.ns.sreg'=>"http://openid.net/extensions/sreg/1.1",'openid.sreg.optional'=>"nickname,email", 'openid.sreg.policy_url' => self::POLICY), $params );
@@ -130,7 +134,7 @@ class Zend_OpenID_Extension_SregTest extends PHPUnit_Framework_TestCase
      */
     public function testParseRequest()
     {
-        $ext = new Zend_OpenID_Extension_Sreg();
+        $ext = new Extension\Sreg();
 
         $this->assertTrue( $ext->parseRequest(array()) );
         $this->assertSame( array(), $ext->getProperties() );
@@ -159,16 +163,16 @@ class Zend_OpenID_Extension_SregTest extends PHPUnit_Framework_TestCase
      */
     public function testGetTrustData()
     {
-        $ext = new Zend_OpenID_Extension_Sreg();
+        $ext = new Extension\Sreg();
         $data = array();
         $this->assertTrue( $ext->getTrustData($data) );
         $this->assertSame( 1, count($data) );
-        $this->assertSame( array(), $data["Zend_OpenID_Extension_Sreg"] );
-        $ext = new Zend_OpenID_Extension_Sreg(array('nickname'=>true,'email'=>false));
+        $this->assertSame( array(), $data["Zend\OpenID\Extension\Sreg"] );
+        $ext = new Extension\Sreg(array('nickname'=>true,'email'=>false));
         $data = array();
         $this->assertTrue( $ext->getTrustData($data) );
         $this->assertSame( 1, count($data) );
-        $this->assertSame( array('nickname'=>true,'email'=>false), $data["Zend_OpenID_Extension_Sreg"] );
+        $this->assertSame( array('nickname'=>true,'email'=>false), $data["Zend\OpenID\Extension\Sreg"] );
     }
 
     /**
@@ -177,34 +181,34 @@ class Zend_OpenID_Extension_SregTest extends PHPUnit_Framework_TestCase
      */
     public function testCheckTrustData()
     {
-        $ext = new Zend_OpenID_Extension_Sreg();
+        $ext = new Extension\Sreg();
         $this->assertTrue( $ext->checkTrustData(array()) );
         $this->assertSame( array(), $ext->getProperties() );
 
-        $ext = new Zend_OpenID_Extension_Sreg();
-        $this->assertTrue( $ext->checkTrustData(array("Zend_OpenID_Extension_Sreg"=>array())) );
+        $ext = new Extension\Sreg();
+        $this->assertTrue( $ext->checkTrustData(array("Zend\OpenID\Extension\Sreg"=>array())) );
         $this->assertSame( array(), $ext->getProperties() );
 
-        $ext = new Zend_OpenID_Extension_Sreg(array());
-        $this->assertTrue( $ext->checkTrustData(array("Zend_OpenID_Extension_Sreg"=>array("nickname"=>self::USER, "email"=>self::EMAIL))) );
+        $ext = new Extension\Sreg(array());
+        $this->assertTrue( $ext->checkTrustData(array("Zend\OpenID\Extension\Sreg"=>array("nickname"=>self::USER, "email"=>self::EMAIL))) );
         $this->assertSame( array(), $ext->getProperties() );
 
-        $ext = new Zend_OpenID_Extension_Sreg(array("nickname"=>true,"email"=>true));
-        $this->assertTrue( $ext->checkTrustData(array("Zend_OpenID_Extension_Sreg"=>array("nickname"=>self::USER, "email"=>self::EMAIL))) );
+        $ext = new Extension\Sreg(array("nickname"=>true,"email"=>true));
+        $this->assertTrue( $ext->checkTrustData(array("Zend\OpenID\Extension\Sreg"=>array("nickname"=>self::USER, "email"=>self::EMAIL))) );
         $this->assertSame( array('nickname'=>self::USER, "email"=>self::EMAIL), $ext->getProperties() );
 
-        $ext = new Zend_OpenID_Extension_Sreg(array("nickname"=>true,"email"=>true));
-        $this->assertFalse( $ext->checkTrustData(array("Zend_OpenID_Extension_Sreg"=>array("nickname"=>self::USER))) );
+        $ext = new Extension\Sreg(array("nickname"=>true,"email"=>true));
+        $this->assertFalse( $ext->checkTrustData(array("Zend\OpenID\Extension\Sreg"=>array("nickname"=>self::USER))) );
 
-        $ext = new Zend_OpenID_Extension_Sreg(array("nickname"=>true,"email"=>false));
-        $this->assertTrue( $ext->checkTrustData(array("Zend_OpenID_Extension_Sreg"=>array("nickname"=>self::USER))) );
+        $ext = new Extension\Sreg(array("nickname"=>true,"email"=>false));
+        $this->assertTrue( $ext->checkTrustData(array("Zend\OpenID\Extension\Sreg"=>array("nickname"=>self::USER))) );
         $this->assertSame( array('nickname'=>self::USER), $ext->getProperties() );
 
-        $ext = new Zend_OpenID_Extension_Sreg(array("nickname"=>false,"email"=>true));
-        $this->assertTrue( $ext->checkTrustData(array("Zend_OpenID_Extension_Sreg"=>array("nickname"=>self::USER, "email"=>self::EMAIL))) );
+        $ext = new Extension\Sreg(array("nickname"=>false,"email"=>true));
+        $this->assertTrue( $ext->checkTrustData(array("Zend\OpenID\Extension\Sreg"=>array("nickname"=>self::USER, "email"=>self::EMAIL))) );
         $this->assertSame( array('nickname'=>self::USER, "email"=>self::EMAIL), $ext->getProperties() );
 
-        $ext = new Zend_OpenID_Extension_Sreg(array("nickname"=>false,"email"=>true));
+        $ext = new Extension\Sreg(array("nickname"=>false,"email"=>true));
         $this->assertFalse( $ext->checkTrustData(array("Zend_OpenID_Extension_SregX"=>array("nickname"=>self::USER, "email"=>self::EMAIL))) );
     }
 
@@ -214,17 +218,17 @@ class Zend_OpenID_Extension_SregTest extends PHPUnit_Framework_TestCase
      */
     public function testPrepareResponse()
     {
-        $ext = new Zend_OpenID_Extension_Sreg();
+        $ext = new Extension\Sreg();
         $params = array();
         $this->assertTrue( $ext->prepareResponse($params) );
         $this->assertSame( array(), $params );
 
-        $ext = new Zend_OpenID_Extension_Sreg(array('nickname'=>self::USER, "email"=>self::EMAIL), self::POLICY);
+        $ext = new Extension\Sreg(array('nickname'=>self::USER, "email"=>self::EMAIL), self::POLICY);
         $params = array();
         $this->assertTrue( $ext->prepareResponse($params) );
         $this->assertSame( array('openid.sreg.nickname'=>self::USER, 'openid.sreg.email'=>self::EMAIL), $params );
 
-        $ext = new Zend_OpenID_Extension_Sreg(array('nickname'=>self::USER, "email"=>self::EMAIL), self::POLICY, 1.1);
+        $ext = new Extension\Sreg(array('nickname'=>self::USER, "email"=>self::EMAIL), self::POLICY, 1.1);
         $params = array();
         $this->assertTrue( $ext->prepareResponse($params) );
         $this->assertSame( array('openid.ns.sreg'=>"http://openid.net/extensions/sreg/1.1", 'openid.sreg.nickname'=>self::USER, 'openid.sreg.email'=>self::EMAIL), $params );
@@ -236,7 +240,7 @@ class Zend_OpenID_Extension_SregTest extends PHPUnit_Framework_TestCase
      */
     public function testParseResponse()
     {
-        $ext = new Zend_OpenID_Extension_Sreg();
+        $ext = new Extension\Sreg();
 
         $this->assertTrue( $ext->parseResponse(array()) );
         $this->assertSame( array(), $ext->getProperties() );

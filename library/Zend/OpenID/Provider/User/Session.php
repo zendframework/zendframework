@@ -25,7 +25,6 @@
  * @namespace
  */
 namespace Zend\OpenID\Provider\User;
-use Zend\Session;
 
 /**
  * Class to get/store information about logged in user in Web Browser using
@@ -54,10 +53,10 @@ class Session extends AbstractUser
      *
      * @param Zend_Session_Namespace $session
      */
-    public function __construct(Session\Container $session = null)
+    public function __construct(\Zend\Session\Container $session = null)
     {
         if ($session === null) {
-            $this->_session = new Session\Container("openid");
+            $this->_session = new \Zend\Session\Container("openid");
         } else {
             $this->_session = $session;
         }

@@ -21,8 +21,12 @@
  */
 
 /**
- * Zend_OpenID
+ * @namespace
  */
+namespace ZendTest\OpenID;
+
+use Zend\OpenID,
+    Zend\OpenID\Provider\User\Session;
 
 
 /**
@@ -37,7 +41,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_OpenID
  */
-class Zend_OpenID_Provider_User_SessionTest extends PHPUnit_Framework_TestCase
+class SessionTest extends \PHPUnit_Framework_TestCase
 {
     const USER1     = "test_user1";
     const USER2     = "test_user2";
@@ -46,8 +50,8 @@ class Zend_OpenID_Provider_User_SessionTest extends PHPUnit_Framework_TestCase
 
     public function __construct()
     {
-        $this->_user1 = new Zend_OpenID_Provider_User_Session();
-        $this->_user2 = new Zend_OpenID_Provider_User_Session(new Zend_Session_Namespace("openid2"));
+        $this->_user1 = new Session();
+        $this->_user2 = new Session(new \Zend\Session\Container("openid2"));
     }
 
     /**

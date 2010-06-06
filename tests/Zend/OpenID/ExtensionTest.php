@@ -21,8 +21,12 @@
  */
 
 /**
- * Zend_OpenID
+ * @namespace
  */
+namespace ZendTest\OpenID\Extension;
+
+use Zend\OpenID\OpenID,
+    Zend\OpenID\Extension;
 
 
 /**
@@ -37,7 +41,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_OpenID
  */
-class Zend_OpenID_ExtensionTest extends PHPUnit_Framework_TestCase
+class ExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * testing forAll
@@ -46,34 +50,34 @@ class Zend_OpenID_ExtensionTest extends PHPUnit_Framework_TestCase
     public function testForAll()
     {
         $params = array();
-        $this->assertTrue( Zend_OpenID_Extension::forAll(null, 'getTrustData', $params) );
+        $this->assertTrue( Extension\AbstractExtension::forAll(null, 'getTrustData', $params) );
         $this->assertSame( array(), $params );
 
         $params = array();
-        $this->assertTrue( Zend_OpenID_Extension::forAll(array(), 'getTrustData', $params) );
+        $this->assertTrue( Extension\AbstractExtension::forAll(array(), 'getTrustData', $params) );
         $this->assertSame( array(), $params );
 
         $params = array();
-        $this->assertFalse( Zend_OpenID_Extension::forAll(array(1), 'getTrustData', $params) );
+        $this->assertFalse( Extension\AbstractExtension::forAll(array(1), 'getTrustData', $params) );
 
         $params = array();
-        $this->assertFalse( Zend_OpenID_Extension::forAll(new stdClass(), 'getTrustData', $params) );
+        $this->assertFalse( Extension\AbstractExtension::forAll(new \stdClass(), 'getTrustData', $params) );
 
-        $ext = new Zend_OpenID_Extension_Sreg();
+        $ext = new Extension\Sreg();
         $params = array();
-        $this->assertTrue( Zend_OpenID_Extension::forAll($ext, 'getTrustData', $params) );
-        $this->assertSame( array('Zend_OpenID_Extension_Sreg'=>array()), $params );
+        $this->assertTrue( Extension\AbstractExtension::forAll($ext, 'getTrustData', $params) );
+        $this->assertSame( array('Zend\OpenID\Extension\Sreg'=>array()), $params );
 
-        $ext = new Zend_OpenID_Extension_Sreg();
+        $ext = new Extension\Sreg();
         $params = array();
-        $this->assertTrue( Zend_OpenID_Extension::forAll(array($ext), 'getTrustData', $params) );
-        $this->assertSame( array('Zend_OpenID_Extension_Sreg'=>array()), $params );
+        $this->assertTrue( Extension\AbstractExtension::forAll(array($ext), 'getTrustData', $params) );
+        $this->assertSame( array('Zend\OpenID\Extension\Sreg'=>array()), $params );
 
-        $ext = new Zend_OpenID_Extension_Helper();
+        $ext = new ExtensionHelper();
         $params = array();
-        $this->assertTrue( Zend_OpenID_Extension::forAll(array($ext), 'getTrustData', $params) );
+        $this->assertTrue( Extension\AbstractExtension::forAll(array($ext), 'getTrustData', $params) );
         $this->assertSame( array(), $params );
-        $this->assertFalse( Zend_OpenID_Extension::forAll(array($ext), 'wrong', $params) );
+        $this->assertFalse( Extension\AbstractExtension::forAll(array($ext), 'wrong', $params) );
         $this->assertSame( array(), $params );
     }
 
@@ -83,7 +87,7 @@ class Zend_OpenID_ExtensionTest extends PHPUnit_Framework_TestCase
      */
     public function testCallbacks()
     {
-        $ext = new Zend_OpenID_Extension_Helper();
+        $ext = new ExtensionHelper();
         $a = array();
         $this->assertTrue( $ext->prepareRequest($a) );
         $this->assertSame( array(), $a );
@@ -102,7 +106,7 @@ class Zend_OpenID_ExtensionTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class Zend_OpenID_Extension_Helper extends Zend_OpenID_Extension
+class ExtensionHelper extends Extension\AbstractExtension
 {
     function wrong($data)
     {

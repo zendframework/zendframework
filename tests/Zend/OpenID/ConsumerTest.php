@@ -21,30 +21,17 @@
  */
 
 /**
- * Zend_OpenID
+ * @namespace
  */
+namespace ZendTest\OpenID;
 
+use Zend\OpenID\OpenID,
+    Zend\OpenID\Consumer\GenericConsumer as Consumer,
+    Zend\OpenID\Consumer\Storage,
+    Zend\OpenID\Extension,
+    ZendTest\OpenID as OpenIDTest,
+    Zend\HTTP;
 
-/**
- * PHPUnit test case
- */
-
-
-/**
- * Zend_OpenID_ResponseHelper
- */
-
-/**
- * Zend_OpenID_Consumer_Storage_File
- */
-
-/**
- * Zend_OpenID_Extensions_Sreg
- */
-
-/**
- * Zend_Http_Client_Adapter_Test
- */
 
 /**
  * @category   Zend
@@ -54,7 +41,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_OpenID
  */
-class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
+class ConsumerTest extends \PHPUnit_Framework_TestCase
 {
     const ID       = "http://id.myopenid.com/";
     const REAL_ID  = "http://real_id.myopenid.com/";
@@ -73,14 +60,14 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
         $expiresIn = time() + 600;
 
         $_SERVER['SCRIPT_URI'] = "http://www.zf-test.com/test.php";
-        $storage = new Zend_OpenID_Consumer_Storage_File(dirname(__FILE__)."/_files/consumer");
+        $storage = new Storage\File(dirname(__FILE__)."/_files/consumer");
         $storage->delDiscoveryInfo(self::ID);
         $this->assertTrue( $storage->addDiscoveryInfo(self::ID, self::REAL_ID, self::SERVER, 1.1, $expiresIn) );
         $storage->delAssociation(self::SERVER);
         $this->assertTrue( $storage->addAssociation(self::SERVER, self::HANDLE, self::MAC_FUNC, self::SECRET, $expiresIn) );
 
-        $response = new Zend_OpenID_ResponseHelper(true);
-        $consumer = new Zend_OpenID_Consumer($storage);
+        $response = new OpenIDTest\ResponseHelper(true);
+        $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, null, null, null, $response) );
         $headers = $response->getHeaders();
         $this->assertSame( '', $response->getBody() );
@@ -112,8 +99,8 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
         $this->assertSame( 'http%3A%2F%2Fwww.zf-test.com', $query['openid.trust_root'] );
 
         // Test user defined return_to and trust_root
-        $response = new Zend_OpenID_ResponseHelper(true);
-        $consumer = new Zend_OpenID_Consumer($storage);
+        $response = new OpenIDTest\ResponseHelper(true);
+        $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", null, $response) );
         $headers = $response->getHeaders();
         $url = $headers[0]['value'];
@@ -138,8 +125,8 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
         $this->assertTrue( $storage->addDiscoveryInfo(self::ID, self::REAL_ID, self::SERVER, 2.0, $expiresIn) );
 
         // Test login with OpenID 2.0
-        $response = new Zend_OpenID_ResponseHelper(true);
-        $consumer = new Zend_OpenID_Consumer($storage);
+        $response = new OpenIDTest\ResponseHelper(true);
+        $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", null, $response) );
         $headers = $response->getHeaders();
         $url = $headers[0]['value'];
@@ -162,9 +149,9 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
         $this->assertSame( 'http%3A%2F%2Fwww.zf-test.com%2Ftrust.php', $query['openid.realm'] );
 
         // Test login with SREG extension
-        $ext = new Zend_OpenID_Extension_Sreg(array("nickname"=>true,"email"=>false));
-        $response = new Zend_OpenID_ResponseHelper(true);
-        $consumer = new Zend_OpenID_Consumer($storage);
+        $ext = new Extension\Sreg(array("nickname"=>true,"email"=>false));
+        $response = new OpenIDTest\ResponseHelper(true);
+        $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", $ext, $response) );
         $headers = $response->getHeaders();
         $url = $headers[0]['value'];
@@ -190,8 +177,8 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
 
         // Test login in dumb mode
         $storage->delAssociation(self::SERVER);
-        $response = new Zend_OpenID_ResponseHelper(true);
-        $consumer = new Zend_OpenID_Consumer($storage, true);
+        $response = new OpenIDTest\ResponseHelper(true);
+        $consumer = new Consumer($storage, true);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", null, $response) );
         $headers = $response->getHeaders();
         $url = $headers[0]['value'];
@@ -224,14 +211,14 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
         $expiresIn = time() + 600;
 
         $_SERVER['SCRIPT_URI'] = "http://www.zf-test.com/test.php";
-        $storage = new Zend_OpenID_Consumer_Storage_File(dirname(__FILE__)."/_files/consumer");
+        $storage = new Storage\File(dirname(__FILE__)."/_files/consumer");
         $storage->delDiscoveryInfo(self::ID);
         $this->assertTrue( $storage->addDiscoveryInfo(self::ID, self::REAL_ID, self::SERVER, 1.1, $expiresIn) );
         $storage->delAssociation(self::SERVER);
         $this->assertTrue( $storage->addAssociation(self::SERVER, self::HANDLE, self::MAC_FUNC, self::SECRET, $expiresIn) );
 
-        $response = new Zend_OpenID_ResponseHelper(true);
-        $consumer = new Zend_OpenID_Consumer($storage);
+        $response = new OpenIDTest\ResponseHelper(true);
+        $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->check(self::ID, null, null, null, $response) );
         $headers = $response->getHeaders();
         $this->assertSame( '', $response->getBody() );
@@ -274,9 +261,9 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
     {
         $expiresIn = time() + 600;
 
-        $storage = new Zend_OpenID_Consumer_Storage_File(dirname(__FILE__)."/_files/consumer");
+        $storage = new Storage\File(dirname(__FILE__)."/_files/consumer");
         $storage->delAssociation(self::SERVER);
-        $consumer = new Zend_OpenID_ConsumerHelper($storage);
+        $consumer = new ConsumerHelper($storage);
         $this->assertFalse( $consumer->getAssociation(self::SERVER, $handle, $macFunc, $secret, $expires) );
         $this->assertTrue( $storage->addAssociation(self::SERVER, self::HANDLE, self::MAC_FUNC, self::SECRET, $expiresIn) );
         $this->assertTrue( $consumer->getAssociation(self::SERVER, $handle, $macFunc, $secret, $expires) );
@@ -298,14 +285,14 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
      */
     public function testHttpRequest()
     {
-        $consumer = new Zend_OpenID_ConsumerHelper(new Zend_OpenID_Consumer_Storage_File(dirname(__FILE__)."/_files/consumer"));
-        $http = new Zend_Http_Client(null,
+        $consumer = new ConsumerHelper(new Storage\File(dirname(__FILE__)."/_files/consumer"));
+        $http = new HTTP\Client(null,
             array(
                 'maxredirects' => 4,
                 'timeout'      => 15,
                 'useragent'    => 'Zend_OpenID'
             ));
-        $test = new Zend_Http_Client_Adapter_Test();
+        $test = new HTTP\Client\Adapter\Test();
         $http->setAdapter($test);
         $consumer->SetHttpClient($http);
         $this->assertSame( $http, $consumer->GetHttpClient() );
@@ -383,16 +370,16 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
     public function testAssociate()
     {
         try {
-            $storage = new Zend_OpenID_Consumer_Storage_File(dirname(__FILE__)."/_files/consumer");
+            $storage = new Storage\File(dirname(__FILE__)."/_files/consumer");
             $storage->delAssociation(self::SERVER);
-            $consumer = new Zend_OpenID_ConsumerHelper($storage);
-            $http = new Zend_Http_Client(null,
+            $consumer = new ConsumerHelper($storage);
+            $http = new HTTP\Client(null,
                 array(
                     'maxredirects' => 4,
                     'timeout'      => 15,
                     'useragent'    => 'Zend_OpenID'
                 ));
-            $test = new Zend_Http_Client_Adapter_Test();
+            $test = new HTTP\Client\Adapter\Test();
             $http->setAdapter($test);
             $consumer->SetHttpClient($http);
 
@@ -559,15 +546,15 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
      */
     public function testDiscovery()
     {
-        $storage = new Zend_OpenID_Consumer_Storage_File(dirname(__FILE__)."/_files/consumer");
-        $consumer = new Zend_OpenID_ConsumerHelper($storage);
-        $http = new Zend_Http_Client(null,
+        $storage = new Storage\File(dirname(__FILE__)."/_files/consumer");
+        $consumer = new ConsumerHelper($storage);
+        $http = new HTTP\Client(null,
             array(
                 'maxredirects' => 4,
                 'timeout'      => 15,
                 'useragent'    => 'Zend_OpenID'
             ));
-        $test = new Zend_Http_Client_Adapter_Test();
+        $test = new HTTP\Client\Adapter\Test();
         $http->setAdapter($test);
         $consumer->SetHttpClient($http);
 
@@ -740,8 +727,8 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
     {
         $expiresIn = time() + 600;
         $_SERVER['SCRIPT_URI'] = "http://www.zf-test.com/test.php";
-        $storage = new Zend_OpenID_Consumer_Storage_File(dirname(__FILE__)."/_files/consumer");
-        $consumer = new Zend_OpenID_ConsumerHelper($storage);
+        $storage = new Storage\File(dirname(__FILE__)."/_files/consumer");
+        $consumer = new ConsumerHelper($storage);
 
         $storage->addDiscoveryInfo(self::ID, self::REAL_ID, self::SERVER, 1.1, $expiresIn);
 
@@ -771,7 +758,7 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
         // HMAC-SHA256
         $consumer->clearAssociation();
         $params = array(
-            "openid_ns" => Zend_OpenID::NS_2_0,
+            "openid_ns" => OpenID::NS_2_0,
             "openid_op_endpoint" => self::SERVER,
             "openid_return_to" => "http://www.zf-test.com/test.php",
             "openid_assoc_handle" => self::HANDLE,
@@ -790,7 +777,7 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
         // HMAC-SHA256 (duplicate response_nonce)
         $consumer->clearAssociation();
         $params = array(
-            "openid_ns" => Zend_OpenID::NS_2_0,
+            "openid_ns" => OpenID::NS_2_0,
             "openid_op_endpoint" => self::SERVER,
             "openid_return_to" => "http://www.zf-test.com/test.php",
             "openid_assoc_handle" => self::HANDLE,
@@ -858,15 +845,15 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
     {
         $expiresIn = time() + 600;
         $_SERVER['SCRIPT_URI'] = "http://www.zf-test.com/test.php";
-        $storage = new Zend_OpenID_Consumer_Storage_File(dirname(__FILE__)."/_files/consumer");
-        $consumer = new Zend_OpenID_ConsumerHelper($storage);
-        $http = new Zend_Http_Client(null,
+        $storage = new Storage\File(dirname(__FILE__)."/_files/consumer");
+        $consumer = new ConsumerHelper($storage);
+        $http = new HTTP\Client(null,
             array(
                 'maxredirects' => 4,
                 'timeout'      => 15,
                 'useragent'    => 'Zend_OpenID'
             ));
-        $test = new Zend_Http_Client_Adapter_Test();
+        $test = new HTTP\Client\Adapter\Test();
         $http->setAdapter($test);
         $consumer->SetHttpClient($http);
         $storage->delDiscoveryInfo(self::ID);
@@ -942,7 +929,7 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
         $consumer->clearAssociation();
         $storage->delAssociation(self::SERVER);
         $params = array(
-            "openid_ns"        => Zend_OpenID::NS_2_0,
+            "openid_ns"        => OpenID::NS_2_0,
             "openid_return_to" => "http://www.zf-test.com/test.php",
             "openid_assoc_handle" => self::HANDLE,
             "openid_claimed_id" => self::ID,
@@ -982,7 +969,7 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
         $test->setResponse("HTTP/1.1 200 OK\r\n\r\nis_valid:false\ninvalidate_handle:".self::HANDLE."1"."\n");
         $consumer->clearAssociation();
         $params = array(
-            "openid_ns"        => Zend_OpenID::NS_2_0,
+            "openid_ns"        => OpenID::NS_2_0,
             "openid_return_to" => "http://www.zf-test.com/test.php",
             "openid_assoc_handle" => self::HANDLE,
             "openid_claimed_id" => self::ID,
@@ -1001,7 +988,7 @@ class Zend_OpenID_ConsumerTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class Zend_OpenID_ConsumerHelper extends Zend_OpenID_Consumer {
+class ConsumerHelper extends Consumer {
 
     public function addAssociation($url, $handle, $macFunc, $secret, $expires)
     {

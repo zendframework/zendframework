@@ -209,7 +209,7 @@ class GenericConsumer
                     $identity = $_SESSION["zend_openid"]["claimed_id"];
                 }
             } else {
-                $this->_session = new \\Zend\Session\Container("zend_openid");
+                $this->_session = new \Zend\Session\Container("zend_openid");
                 if ($this->_session->identity === $identity) {
                     $identity = $this->_session->claimed_id;
                 }
@@ -472,7 +472,7 @@ class GenericConsumer
     {
         $client = $this->_httpClient;
         if ($client === null) {
-            $client = new \\Zend\Http\Client(
+            $client = new \Zend\Http\Client(
                     $url,
                     array(
                         'maxredirects' => 4,
@@ -486,10 +486,10 @@ class GenericConsumer
 
         $client->resetParameters();
         if ($method == 'POST') {
-            $client->setMethod(\Zend\Http\\Client::POST);
+            $client->setMethod(\Zend\Http\Client::POST);
             $client->setParameterPost($params);
         } else {
-            $client->setMethod(\Zend\Http\\Client::GET);
+            $client->setMethod(\Zend\Http\Client::GET);
             $client->setParameterGet($params);
         }
 
@@ -857,7 +857,7 @@ class GenericConsumer
                     "identity" => $id,
                     "claimed_id" => $claimedId);
             } else {
-                $this->_session = new \\Zend\Session\Container("zend_openid");
+                $this->_session = new \Zend\Session\Container("zend_openid");
                 $this->_session->identity = $id;
                 $this->_session->claimed_id = $claimedId;
             }
@@ -913,7 +913,7 @@ class GenericConsumer
      *
      * @param Zend\Session\Container $session HTTP client object to be used
      */
-    public function setSession(\\Zend\\Session\\Container $session) 
+    public function setSession(\Zend\Session\Container $session) 
     {
         $this->_session = $session;
     }

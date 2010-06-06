@@ -896,6 +896,48 @@ $translate = new Zend_Translate(
         </sect3>
     </sect2>
 
+    <sect2 id="zend.translate.additional.rerouting">
+        <title>Weiterleiten von Übersetzungen</title>
+
+        <para>
+            Nicht jede Nachrichten ID kann übersetzt werden. Aber manchmal ist es sinnvoll die
+            Ausgabe der Übersetzung von einer anderen Sprache durchzuführen statt die Nachrichten
+            ID selbst zurückzugeben. Man kann dies durchführen indem man die Option
+            <property>route</property> verwendet.
+        </para>
+
+        <para>
+            Man kann eine Route für jede Sprache hinzufügen. Siehe das folgende Beispiel:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$translate = new Zend_Translate(
+    array(
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'route'   => array('fr' => 'en', 'de' => 'fr')
+    )
+);
+]]></programlisting>
+
+        <para>
+            Das oben stehende give eine englische Übersetzung für alle Nachrichten zurück welche
+            nicht in französisch übersetzt werden können. Und es gibt eine französische Übersetzung
+            für alle Nachrichten zurück welche nicht in deutsch übersetzt werden können. Es gibt
+            sogar eine englische Übersetzung für alle Nachrichten zurück welche weder in deutsch
+            noch in französisch übersetzt werden können. So kann man sogar eine komplette
+            Übersetzung-Kette definieren.
+        </para>
+
+        <para>
+            Dieses Feature kann für jedermann interessant sein. Aber man sollte darauf achten dass
+            es problematisch sein kann Übersetzungen einer falsche oder anderen Sprache zurück
+            zu geben wenn der Benutzer diese Sprache nicht versteht. Man sollte dieses Feature
+            also sehr sparsam einsetzen.
+        </para>
+    </sect2>
+
     <sect2 id="zend.translate.additional.combination">
         <title>Mehrere Übersetzungsquellen kombinieren</title>
 

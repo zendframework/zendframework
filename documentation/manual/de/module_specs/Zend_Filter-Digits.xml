@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22248 -->
+<!-- EN-Revision: 22384 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.digits">
     <title>Digits</title>
@@ -27,14 +27,20 @@
 $filter = new Zend_Filter_Digits();
 
 print $filter->filter('October 2009');
-// Gibt "2009" zurück
 ]]></programlisting>
+
+        <para>
+            Dies gibt "2009" zurück.
+        </para>
 
         <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Digits();
 
 print $filter->filter('HTML 5 für Dummies');
-// Gibt "5" zurück
 ]]></programlisting>
+
+        <para>
+            Dies gibt "5" zurück.
+        </para>
     </sect3>
 </sect2>

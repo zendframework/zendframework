@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22249 -->
+<!-- EN-Revision: 22384 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.dir">
     <title>Dir</title>
@@ -28,14 +28,20 @@
 $filter = new Zend_Filter_Dir();
 
 print $filter->filter('/etc/passwd');
-// Gibt "/etc" zurück
 ]]></programlisting>
+
+        <para>
+            Dies gibt "/etc" zurück.
+        </para>
 
         <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Dir();
 
-print $filter->filter('c:/Temp/x');
-// Gibt "c:/Temp" zurück
+print $filter->filter('C:/Temp/x');
 ]]></programlisting>
+
+        <para>
+            Dies gibt "C:/Temp" zurück.
+        </para>
     </sect3>
 </sect2>

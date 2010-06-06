@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22252 -->
+<!-- EN-Revision: 22384 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.htmlentities">
     <title>HtmlEntities</title>
@@ -108,12 +108,11 @@ print $filter->filter($input);
 $filter = new Zend_Filter_HtmlEntities(array('quotestyle' => ENT_COMPAT));
 
 $input  = "Ein 'einfaches' und " . '"doppeltes"';
-$return = $filter->filter($input);
-print "Ein 'einfaches' and &quot;double&quot;"
+print $filter->filter($input);
 ]]></programlisting>
 
         <para>
-            Das obige Beispiel gibt <emphasis>>Ein 'einfaches' und &quot;doppeltes&quot;</emphasis>
+            Das obige Beispiel gibt <emphasis>Ein 'einfaches' und &quot;doppeltes&quot;</emphasis>
             zurück. Es ist zu beachten dass "doppelte" Hochkommas gefiltert werden wärend 'einfache'
             Hochkommas nich verändert werden.
         </para>

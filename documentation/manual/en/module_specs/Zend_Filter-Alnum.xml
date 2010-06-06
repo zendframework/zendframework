@@ -75,8 +75,8 @@ $return = $filter->filter('This is (my) content: 123');
 
         <para>
             To change <property>allowWhiteSpace</property> afterwards you can use
-            <methodname>setAllowWhiteSpace</methodname> and
-            <methodname>getAllowWhiteSpace</methodname>.
+            <methodname>setAllowWhiteSpace()</methodname> and
+            <methodname>getAllowWhiteSpace()</methodname>.
         </para>
     </sect3>
 </sect2>

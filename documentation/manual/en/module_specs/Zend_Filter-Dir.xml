@@ -30,7 +30,7 @@ print $filter->filter('/etc/passwd');
 ]]></programlisting>
 
         <para>
-            This returns "/etc".
+            This returns "<filename>/etc</filename>".
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -40,7 +40,7 @@ print $filter->filter('C:/Temp/x');
 ]]></programlisting>
 
         <para>
-            This returns "C:/Temp".
+            This returns "<filename>C:/Temp</filename>".
         </para>
     </sect3>
 </sect2>

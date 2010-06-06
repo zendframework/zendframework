@@ -13,8 +13,8 @@
 
         <para>
             By default, this filter works by casting the input to a <constant>BOOLEAN</constant>
-            value; in other words, it operates in a similar fashion to calling <command>(boolean)
-            $value</command>.
+            value; in other words, it operates in a similar fashion to calling
+            <command>(boolean) $value</command>.
         </para>
 
         <programlisting language="php"><![CDATA[

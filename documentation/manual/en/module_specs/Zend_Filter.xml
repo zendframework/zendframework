@@ -110,7 +110,7 @@ echo Zend_Filter::filterStatic('"',
         <para>
             Also, the <classname>Zend_Filter_Input</classname> class allows you to instantiate and
             run multiple filter and validator classes on demand to process
-            sets of input data. See <xref linkend="zend.filter.input" />.
+            sets of input data. See <link linkend="zend.filter.input">Zend_Filter_Input</link>.
         </para>
 
         <sect3 id="zend.filter.introduction.static.namespaces">

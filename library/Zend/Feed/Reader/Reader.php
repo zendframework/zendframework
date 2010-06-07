@@ -98,20 +98,20 @@ class Reader
 
     protected static $_extensions = array(
         'feed' => array(
-            'DublinCore_Feed',
-            'Atom_Feed'
+            'DublinCore\\Feed',
+            'Atom\\Feed'
         ),
         'entry' => array(
-            'Content_Entry',
-            'DublinCore_Entry',
-            'Atom_Entry'
+            'Content\\Entry',
+            'DublinCore\\Entry',
+            'Atom\\Entry'
         ),
         'core' => array(
-            'DublinCore_Feed',
-            'Atom_Feed',
-            'Content_Entry',
-            'DublinCore_Entry',
-            'Atom_Entry'
+            'DublinCore\\Feed',
+            'Atom\\Feed',
+            'Content\\Entry',
+            'DublinCore\\Entry',
+            'Atom\\Entry'
         )
     );
 
@@ -144,7 +144,7 @@ class Reader
      * @param  \Zend\HTTP\Client $httpClient
      * @return void
      */
-    public static function setHttpClient(\Zend\HTTP\Client $httpClient)
+    public static function setHttpClient(HTTP\Client $httpClient)
     {
         self::$_httpClient = $httpClient;
     }
@@ -157,8 +157,8 @@ class Reader
      */
     public static function getHttpClient()
     {
-        if (!self::$_httpClient instanceof \Zend\HTTP\Client) {
-            self::$_httpClient = new \Zend\HTTP\Client();
+        if (!self::$_httpClient instanceof HTTP\Client) {
+            self::$_httpClient = new HTTP\Client();
         }
 
         return self::$_httpClient;
@@ -310,7 +310,7 @@ class Reader
         if (substr($type, 0, 3) == 'rss') {
             $reader = new Feed\Rss($dom, $type);
         } elseif (substr($type, 8, 5) == 'entry') {
-            $reader = new Entry\Atom($dom->documentElement, 0, Reader::TYPE_ATOM_10);
+            $reader = new Entry\Atom($dom->documentElement, 0, self::TYPE_ATOM_10);
         } elseif (substr($type, 0, 4) == 'atom') {
             $reader = new Feed\Atom($dom, $type);
         } else {
@@ -340,7 +340,6 @@ class Reader
 
     public static function findFeedLinks($uri)
     {
-        // Get the HTTP response from $uri and save the contents
         $client = self::getHttpClient();
         $client->setUri($uri);
         $response = $client->request();
@@ -353,16 +352,15 @@ class Reader
         $status = $dom->loadHTML($responseHtml);
         libxml_use_internal_errors($libxml_errflag);
         if (!$status) {
-            // Build error message
             $error = libxml_get_last_error();
             if ($error && $error->message) {
-                $errormsg = "DOMDocument cannot parse HTML: {$error->message}";
+                $errormsg = "\DOMDocument cannot parse HTML: {$error->message}";
             } else {
-                $errormsg = "DOMDocument cannot parse HTML: Please check the XML document's validity";
+                $errormsg = "\DOMDocument cannot parse HTML: Please check the XML document's validity";
             }
             throw new Exception($errormsg);
         }
-        $feedSet = new Reader\FeedSet;
+        $feedSet = new FeedSet;
         $links = $dom->getElementsByTagName('link');
         $feedSet->addLinks($links, $uri);
         return $feedSet;
@@ -376,7 +374,7 @@ class Reader
      */
     public static function detectType($feed, $specOnly = false)
     {
-        if ($feed instanceof Reader\Feed) {
+        if ($feed instanceof Feed) {
             $dom = $feed->getDomDocument();
         } elseif($feed instanceof \DOMDocument) {
             $dom = $feed;
@@ -393,11 +391,11 @@ class Reader
                         $php_errormsg = '(error message not available)';
                     }
                 }
-                throw new Exception("DOMDocument cannot parse XML: $php_errormsg");
+                throw new Exception("\DOMDocument cannot parse XML: $php_errormsg");
             }
         } else {
             throw new Exception('Invalid object/scalar provided: must'
-            . ' be of type Zend_Feed_Reader_FeedInterface, DomDocument or string');
+            . ' be of type \Zend\Feed\Reader\Feed, \DomDocument or string');
         }
         $xpath = new \DOMXPath($dom);
 
@@ -498,7 +496,7 @@ class Reader
     public static function getPluginLoader()
     {
         if (!isset(self::$_pluginLoader)) {
-            self::$_pluginLoader = PluginLoader(array(
+            self::$_pluginLoader = new PluginLoader\PluginLoader(array(
                 'Zend\\Feed\\Reader\\Extension\\' => 'Zend/Feed/Reader/Extension/',
             ));
         }
@@ -557,18 +555,19 @@ class Reader
         try {
             self::getPluginLoader()->load($feedName);
             self::$_extensions['feed'][] = $feedName;
-        } catch (Zend_Loader_PluginLoader_Exception $e) {
+        } catch (PluginLoader\Exception $e) {
         }
         try {
             self::getPluginLoader()->load($entryName);
             self::$_extensions['entry'][] = $entryName;
-        } catch (Zend_Loader_PluginLoader_Exception $e) {
+        } catch (PluginLoader\Exception $e) {
         }
         if (!self::getPluginLoader()->isLoaded($feedName)
             && !self::getPluginLoader()->isLoaded($entryName)
         ) {
             throw new Exception('Could not load extension: ' . $name
-                . 'using Plugin Loader. Check prefix paths are configured and extension exists.');
+                . ' using Plugin Loader. Check prefix paths are configured and'
+                . ' extension exists.');
         }
     }
 

@@ -20,9 +20,11 @@
  * @version    $Id: Entry.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
-require_once 'Zend/Feed/Reader.php';
-
-require_once 'Zend/Feed/Reader/Extension/EntryAbstract.php';
+/**
+ * @namespace
+ */
+namespace My\FeedReader\Extension\JungleBooks;
+use Zend\Feed\Reader\Extension;
 
 /**
  * @category   Zend
@@ -31,7 +33,7 @@ require_once 'Zend/Feed/Reader/Extension/EntryAbstract.php';
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class My_FeedReader_Extension_JungleBooks_Entry extends Zend_Feed_Reader_Extension_EntryAbstract
+class Entry extends Extension\AbstractEntry
 {
 
     public function getIsbn()

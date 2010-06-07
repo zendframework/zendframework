@@ -23,7 +23,7 @@
 * @namespace
 */
 namespace Zend\Feed\Reader\Extension;
-use Zend\Feed\Reader
+use Zend\Feed\Reader;
 
 /**
 * @uses \DOMXPath

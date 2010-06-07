@@ -24,7 +24,7 @@
 */
 namespace Zend\Feed\Reader\Extension\DublinCore;
 use Zend\Feed\Reader\Collection;
-use Zend\Feed\Reader\Extension
+use Zend\Feed\Reader\Extension;
 use Zend\Date;
 
 /**

@@ -14,8 +14,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Provider
+ * @package    Zend_OpenID
+ * @subpackage Zend_OpenID_Provider
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -32,13 +32,13 @@ use Zend\Controller\Response;
 /**
  * OpenID provider (server) implementation
  *
- * @uses       Zend_OpenId
- * @uses       Zend_OpenId_Extension
- * @uses       Zend_OpenId_Provider_Storage_File
- * @uses       Zend_OpenId_Provider_User_Session
+ * @uses       Zend\OpenID\OpenID
+ * @uses       Zend\OpenId\Extension
+ * @uses       Zend\OpenId\Provider\Storage\File
+ * @uses       Zend\OpenId\Provider\User\Session
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Provider
+ * @package    Zend_OpenID
+ * @subpackage Zend_OpenID_Provider
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -48,14 +48,14 @@ class GenericProvider
     /**
      * Reference to an implementation of storage object
      *
-     * @var Zend_OpenId_Provider_Storage $_storage
+     * @var Zend\OpenId\Provider\Storage $_storage
      */
     private $_storage;
 
     /**
      * Reference to an implementation of user object
      *
-     * @var Zend_OpenId_Provider_User $_user
+     * @var Zend\OpenId\Provider\User\AbstractUser $_user
      */
     private $_user;
 
@@ -88,7 +88,7 @@ class GenericProvider
     private $_opEndpoint;
 
     /**
-     * Constructs a Zend_OpenId_Provider object with given parameters.
+     * Constructs a Zend\OpenId\Provider\GenericProvider object with given parameters.
      *
      * @param string $loginUrl is an URL that provides login screen for
      *  end-user (by default it is the same URL with additional GET variable
@@ -96,11 +96,11 @@ class GenericProvider
      * @param string $trustUrl is an URL that shows a question if end-user
      *  trust to given consumer (by default it is the same URL with additional
      *  GET variable openid.action=trust)
-     * @param Zend_OpenId_Provider_User $user is an object for communication
+     * @param Zend\OpenID\Provider\User\AbstractUser $user is an object for communication
      *  with User-Agent and store information about logged-in user (it is a
-     *  Zend_OpenId_Provider_User_Session object by default)
-     * @param Zend_OpenId_Provider_Storage $storage is an object for keeping
-     *  persistent database (it is a Zend_OpenId_Provider_Storage_File object
+     *  Zend\OpenID\Provider\User\Session object by default)
+     * @param Zend\OpenID\Provider\Storage $storage is an object for keeping
+     *  persistent database (it is a Zend\OpenID\Provider\Storage_File object
      *  by default)
      * @param integer $sessionTtl is a default time to live for association
      *   session in seconds (1 hour by default). Consumer must reestablish
@@ -329,7 +329,7 @@ class GenericProvider
      *  or set to null, then $_GET or $_POST superglobal variable is used
      *  according to REQUEST_METHOD.
      * @param mixed $extensions extension object or array of extensions objects
-     * @param Zend_Controller_Response_Abstract $response an optional response
+     * @param Zend\Controller\Response\AbstractResponse $response an optional response
      *  object to perform HTTP or HTML form redirection
      * @return mixed
      */
@@ -508,7 +508,7 @@ class GenericProvider
      * @param array $params GET or POST request variables
      * @param bool $immediate enables or disables interaction with user
      * @param mixed $extensions extension object or array of extensions objects
-     * @param Zend_Controller_Response_Abstract $response
+     * @param Zend\Controller\Response\AbstractResponse $response
      * @return array
      */
     protected function _checkId($version, $params, $immediate, $extensions=null,
@@ -638,7 +638,7 @@ class GenericProvider
      *
      * @param array $params GET or POST request variables
      * @param mixed $extensions extension object or array of extensions objects
-     * @param Zend_Controller_Response_Abstract $response an optional response
+     * @param Zend\Controller\Response\Abstract $response an optional response
      *  object to perform HTTP or HTML form redirection
      * @return bool
      */

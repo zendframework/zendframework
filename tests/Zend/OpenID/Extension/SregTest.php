@@ -209,7 +209,7 @@ class SregTest extends \PHPUnit_Framework_TestCase
         $this->assertSame( array('nickname'=>self::USER, "email"=>self::EMAIL), $ext->getProperties() );
 
         $ext = new Extension\Sreg(array("nickname"=>false,"email"=>true));
-        $this->assertFalse( $ext->checkTrustData(array("Zend_OpenID_Extension_SregX"=>array("nickname"=>self::USER, "email"=>self::EMAIL))) );
+        $this->assertFalse( $ext->checkTrustData(array("Zend\OpenID\Extension\SregX"=>array("nickname"=>self::USER, "email"=>self::EMAIL))) );
     }
 
     /**

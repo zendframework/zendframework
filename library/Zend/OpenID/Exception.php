@@ -14,7 +14,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -26,11 +26,11 @@
 namespace Zend\OpenID;
 
 /**
- * Exception class for Zend_OpenId
+ * Exception class for Zend\OpenID
  *
- * @uses       Zend_Exception
+ * @uses       Zend\Exception
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

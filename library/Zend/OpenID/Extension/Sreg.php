@@ -14,7 +14,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -26,11 +26,11 @@
 namespace Zend\OpenID\Extension;
 
 /**
- * 'Simple Refistration Extension' for Zend_OpenId
+ * 'Simple Refistration Extension' for Zend\OpenID
  *
- * @uses       Zend_OpenId_Extension
+ * @uses       Zend\OpenID\Extension
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -113,7 +113,7 @@ class Sreg extends AbstractExtension
     }
 
     /**
-     * Adds additional SREG data to OpenId 'checkid_immediate' or
+     * Adds additional SREG data to OpenID 'checkid_immediate' or
      * 'checkid_setup' request.
      *
      * @param array &$params request's var/val pairs
@@ -154,7 +154,7 @@ class Sreg extends AbstractExtension
     }
 
     /**
-     * Parses OpenId 'checkid_immediate' or 'checkid_setup' request,
+     * Parses OpenID 'checkid_immediate' or 'checkid_setup' request,
      * extracts SREG variables and sets ovject properties to corresponding
      * values.
      *
@@ -199,7 +199,7 @@ class Sreg extends AbstractExtension
     }
 
     /**
-     * Adds additional SREG data to OpenId 'id_res' response.
+     * Adds additional SREG data to OpenID 'id_res' response.
      *
      * @param array &$params response's var/val pairs
      * @return bool
@@ -220,7 +220,7 @@ class Sreg extends AbstractExtension
     }
 
     /**
-     * Parses OpenId 'id_res' response and sets object's properties according
+     * Parses OpenID 'id_res' response and sets object's properties according
      * to 'openid.sreg.*' variables in response
      *
      * @param array $params response's var/val pairs
@@ -268,7 +268,7 @@ class Sreg extends AbstractExtension
 
     /**
      * Check if given $data contains necessury SREG properties to sutisfy
-     * OpenId request. On success sets SREG response properties from given
+     * OpenID request. On success sets SREG response properties from given
      * $data and returns true, on failure returns false.
      *
      * @param array $data data from tusted servers database

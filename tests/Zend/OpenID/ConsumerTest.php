@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\OpenID;
+namespace ZendTest\OpenID\Consumer;
 
 use Zend\OpenID\OpenID,
     Zend\OpenID\Consumer\GenericConsumer as Consumer,
@@ -535,7 +535,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
             $this->assertSame( "sha256", $macFunc );
             $this->assertSame( "ed901bc561c29fd7bb42862e5f09fa37e7944a7ee72142322f34a21bfe1384b8", bin2hex($secret) );
             $this->assertTrue( $storage->delAssociation(self::SERVER) );
-        } catch (Zend_OpenID_Exception $e) {
+        } catch (Zend\OpenID\Exception $e) {
             $this->markTestSkipped($e->getMessage());
         }
     }

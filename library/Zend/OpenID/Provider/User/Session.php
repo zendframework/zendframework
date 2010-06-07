@@ -14,8 +14,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Provider
+ * @package    Zend_OpenID
+ * @subpackage Zend_OpenID_Provider
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -30,11 +30,11 @@ namespace Zend\OpenID\Provider\User;
  * Class to get/store information about logged in user in Web Browser using
  * PHP session
  *
- * @uses       Zend_OpenId_Provider_User
- * @uses       Zend_Session_Namespace
+ * @uses       Zend\OpenId\Provider\User\AbstractUser
+ * @uses       Zend\Session\Container
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Provider
+ * @package    Zend_OpenID
+ * @subpackage Zend_OpenID_Provider
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -43,15 +43,15 @@ class Session extends AbstractUser
     /**
      * Reference to an implementation of Zend_Session_Namespace object
      *
-     * @var Zend_Session_Namespace $_session
+     * @var \Zend\Session\Container $_session
      */
     private $_session = null;
 
     /**
-     * Creates Zend_OpenId_Provider_User_Session object with given session
+     * Creates \Zend\OpenId\Provider\User\Session object with given session
      * namespace or creates new session namespace named "openid"
      *
-     * @param Zend_Session_Namespace $session
+     * @param \Zend\Session\Container $session
      */
     public function __construct(\Zend\Session\Container $session = null)
     {

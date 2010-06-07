@@ -22,7 +22,7 @@
 
 
 /**
- * @see Zend_OpenID_Provider_Storage_File
+ * @see Zend\OpenID\Provider\Storage\File
  */
 
 /**

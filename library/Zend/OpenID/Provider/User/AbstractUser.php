@@ -14,8 +14,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Provider
+ * @package    Zend_OpenID
+ * @subpackage Zend\OpenId\Provider\GenericProvider
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -30,8 +30,8 @@ namespace Zend\OpenID\Provider\User;
  * Abstract class to get/store information about logged in user in Web Browser
  *
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Provider
+ * @package    Zend_OpenID
+ * @subpackage Zend\OpenId\Provider\GenericProvider
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

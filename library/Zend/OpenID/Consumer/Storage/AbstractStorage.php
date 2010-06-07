@@ -14,8 +14,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Consumer
+ * @package    Zend_OpenID
+ * @subpackage Zend_OpenID_Consumer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -30,8 +30,8 @@ namespace Zend\OpenID\Consumer\Storage;
  * Abstract class to implement external storage for OpenID consumer
  *
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Consumer
+ * @package    Zend_OpenID
+ * @subpackage Zend_OpenID_Consumer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

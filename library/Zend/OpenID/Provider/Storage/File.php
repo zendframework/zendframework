@@ -14,8 +14,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Provider
+ * @package    Zend_OpenID
+ * @subpackage Zend_OpenID_Provider
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -30,11 +30,11 @@ use Zend\OpenID;
 /**
  * External storage implemmentation using serialized files
  *
- * @uses       Zend_OpenId_Exception
- * @uses       Zend_OpenId_Provider_Storage
+ * @uses       Zend\OpenID\Exception
+ * @uses       Zend\OpenID\Provider\Storage
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Provider
+ * @package    Zend_OpenID
+ * @subpackage Zend_OpenID_Provider
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -52,7 +52,7 @@ class File extends AbstractStorage
      * Constructs storage object and creates storage directory
      *
      * @param string $dir directory name to store data files in
-     * @throws Zend_OpenId_Exception
+     * @throws Zend\OpenID\Exception
      */
     public function __construct($dir = null)
     {

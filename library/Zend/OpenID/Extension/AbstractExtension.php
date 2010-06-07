@@ -14,7 +14,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -26,10 +26,10 @@
 namespace Zend\OpenID\Extension;
 
 /**
- * Abstract extension class for Zend_OpenId
+ * Abstract extension class for Zend\OpenID
  *
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -67,7 +67,7 @@ abstract class AbstractExtension
     }
 
     /**
-     * Method to add additional data to OpenId 'checkid_immediate' or
+     * Method to add additional data to OpenID 'checkid_immediate' or
      * 'checkid_setup' request. This method addes nothing but inherited class
      * may add additional data into request.
      *
@@ -80,7 +80,7 @@ abstract class AbstractExtension
     }
 
     /**
-     * Method to parse OpenId 'checkid_immediate' or 'checkid_setup' request
+     * Method to parse OpenID 'checkid_immediate' or 'checkid_setup' request
      * and initialize object with passed data. This method parses nothing but
      * inherited class may override this method to do somthing.
      *
@@ -93,7 +93,7 @@ abstract class AbstractExtension
     }
 
     /**
-     * Method to add additional data to OpenId 'id_res' response. This method
+     * Method to add additional data to OpenID 'id_res' response. This method
      * addes nothing but inherited class may add additional data into response.
      *
      * @param array &$params response's var/val pairs
@@ -105,7 +105,7 @@ abstract class AbstractExtension
     }
 
     /**
-     * Method to parse OpenId 'id_res' response and initialize object with
+     * Method to parse OpenID 'id_res' response and initialize object with
      * passed data. This method parses nothing but inherited class may override
      * this method to do somthing.
      *

@@ -14,8 +14,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Consumer
+ * @package    Zend_OpenID
+ * @subpackage Zend_OpenID_Consumer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -32,15 +32,15 @@ use Zend\OpenID\Extension;
 /**
  * OpenID consumer implementation
  *
- * @uses       Zend_Http_Client
- * @uses       Zend_OpenId
- * @uses       Zend_OpenId_Consumer_Storage
- * @uses       Zend_OpenId_Consumer_Storage_File
- * @uses       Zend_OpenId_Extension
+ * @uses       Zend\Http\Client
+ * @uses       Zend\OpenID\OpenID
+ * @uses       Zend\OpenID\Consumer\Storage
+ * @uses       Zend\OpenID\Consumer\Storage\File
+ * @uses       Zend\OpenID\Extension
  * @uses       Zend\Session\Container
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Consumer
+ * @package    Zend_OpenID
+ * @subpackage Zend_OpenID_Consumer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -50,7 +50,7 @@ class GenericConsumer
     /**
      * Reference to an implementation of storage object
      *
-     * @var Zend_OpenId_Consumer_Storage $_storage
+     * @var Zend\OpenID\Consumer\Storage $_storage
      */
     protected $_storage = null;
 
@@ -58,7 +58,7 @@ class GenericConsumer
      * Enables or disables consumer to use association with server based on
      * Diffie-Hellman key agreement
      *
-     * @var Zend_OpenId_Consumer_Storage $_dumbMode
+     * @var Zend\OpenID\Consumer\Storage $_dumbMode
      */
     protected $_dumbMode = false;
 
@@ -91,11 +91,11 @@ class GenericConsumer
     private $_error = '';
 
     /**
-     * Constructs a Zend_OpenId_Consumer object with given $storage.
+     * Constructs a Zend\OpenID\Consumer\GenericConsumer object with given $storage.
      * Enables or disables future association with server based on
      * Diffie-Hellman key agreement.
      *
-     * @param Zend_OpenId_Consumer_Storage $storage implementation of custom
+     * @param Zend\OpenID\Consumer\Storage $storage implementation of custom
      *  storage object
      * @param bool $dumbMode Enables or disables consumer to use association
      *  with server based on Diffie-Hellman key agreement
@@ -122,7 +122,7 @@ class GenericConsumer
      * @param string $returnTo URL to redirect response from server to
      * @param string $root HTTP URL to identify consumer on server
      * @param mixed $extensions extension object or array of extensions objects
-     * @param Zend_Controller_Response_Abstract $response an optional response
+     * @param Zend\Controller\Response\AbstractResponse $response an optional response
      *  object to perform HTTP or HTML form redirection
      * @return bool
      */
@@ -149,7 +149,7 @@ class GenericConsumer
      * @param string $returnTo HTTP URL to redirect response from server to
      * @param string $root HTTP URL to identify consumer on server
      * @param mixed $extensions extension object or array of extensions objects
-     * @param Zend_Controller_Response_Abstract $response an optional response
+     * @param Zend\Controller\Response\AbstractResponse $response an optional response
      *  object to perform HTTP or HTML form redirection
      * @return bool
      */
@@ -477,7 +477,7 @@ class GenericConsumer
                     array(
                         'maxredirects' => 4,
                         'timeout'      => 15,
-                        'useragent'    => 'Zend_OpenId'
+                        'useragent'    => 'Zend_OpenID'
                     )
                 );
         } else {
@@ -800,7 +800,7 @@ class GenericConsumer
      * @param string $returnTo HTTP URL to redirect response from server to
      * @param string $root HTTP URL to identify consumer on server
      * @param mixed $extensions extension object or array of extensions objects
-     * @param Zend_Controller_Response_Abstract $response an optional response
+     * @param Zend\Controller\Response\AbstractResponse $response an optional response
      *  object to perform HTTP or HTML form redirection
      * @return bool
      */

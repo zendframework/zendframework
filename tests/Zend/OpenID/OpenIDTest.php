@@ -406,8 +406,6 @@ class OpenIDTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirect()
     {
-        $this->markTestSkipped('External dependency failed: \Zend\Controller\Response\AbstractResponse');
-
         $response = new ResponseHelper(true);
         OpenID::redirect("http://www.test.com/", null, $response, 'GET');
         $this->assertSame( 302, $response->getHttpResponseCode() );
@@ -614,7 +612,7 @@ class OpenIDTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue( strlen($dh_details['priv_key']) > 0 );
             $this->assertTrue( is_string($dh_details['pub_key']) );
             $this->assertTrue( strlen($dh_details['pub_key']) > 0 );
-        } catch (Zend_OpenID_Exception $e) {
+        } catch (Zend\OpenID\Exception $e) {
             $this->markTestSkipped($e->getMessage());
         }
     }
@@ -644,7 +642,7 @@ class OpenIDTest extends \PHPUnit_Framework_TestCase
                 bin2hex(OpenID::computeDhSecret($alice_details['pub_key'], $bob)) );
             $this->assertSame( '75',
                 bin2hex(OpenID::computeDhSecret($bob_details['pub_key'], $alice)) );
-        } catch (Zend_OpenID_Exception $e) {
+        } catch (Zend\OpenID\Exception $e) {
             $this->markTestSkipped($e->getMessage());
         }
     }

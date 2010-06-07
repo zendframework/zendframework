@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -26,17 +26,17 @@ namespace Zend\OpenID;
 
 /**
  * Static class that contains common utility functions for
- * {@link Zend_OpenId_Consumer} and {@link Zend_OpenId_Provider}.
+ * {@link Zend\OpenID\Consumer\GenericConsumer} and {@link Zend\OpenID\Provider\GenericProvider}.
  *
  * This class implements common utility functions that are used by both
  * Consumer and Provider. They include functions for Diffie-Hellman keys
  * generation and exchange, URL normalization, HTTP redirection and some others.
  *
- * @uses       Zend_Controller_Response_Abstract
- * @uses       Zend_Controller_Response_Http
- * @uses       Zend_OpenId_Exception
+ * @uses       Zend\Controller\Response\AbstractResponse
+ * @uses       Zend\Controller\Response\Http
+ * @uses       Zend\OpenID\Exception
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_OpenID
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -418,7 +418,7 @@ class OpenID
      *
      * @param string $url URL to redirect to
      * @param array $params additional variable/value pairs to send
-     * @param Zend_Controller_Response_Abstract $response
+     * @param Zend\Controller\Response\AbstractResponse $response
      * @param string $method redirection method ('GET' or 'POST')
      */
     static public function redirect($url, $params = null,
@@ -488,7 +488,7 @@ class OpenID
      * @param string $func digest algorithm
      * @param string $data data to sign
      * @return string RAW digital signature
-     * @throws Zend_OpenId_Exception
+     * @throws Zend\OpenID\Exception
      */
     static public function digest($func, $data)
     {
@@ -541,7 +541,7 @@ class OpenID
      *
      * @param string $bin binary representation of big number
      * @return mixed
-     * @throws Zend_OpenId_Exception
+     * @throws Zend\OpenID\Exception
      */
     static protected function binToBigNum($bin)
     {
@@ -567,7 +567,7 @@ class OpenID
      *
      * @param mixed $bn big number
      * @return string
-     * @throws Zend_OpenId_Exception
+     * @throws Zend\OpenID\Exception
      */
     static protected function bigNumToBin($bn)
     {
@@ -681,7 +681,7 @@ class OpenID
      * @param string $pub_key other party's public value
      * @param mixed $dh Diffie-Hellman key
      * @return string
-     * @throws Zend_OpenId_Exception
+     * @throws Zend\OpenID\Exception
      */
     static public function computeDhSecret($pub_key, $dh)
     {

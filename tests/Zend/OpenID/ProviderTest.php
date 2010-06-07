@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\OpenID;
+namespace ZendTest\OpenID\Provider;
 
 use Zend\OpenID\OpenID, 
     Zend\OpenID\Provider,
@@ -627,7 +627,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             $this->assertSame( '3600', $res['expires_in'] );
             $this->assertTrue( $storage->getAssociation($res['assoc_handle'], $macFunc, $secret, $expires) );
             $this->assertSame( 'sha256', $macFunc );
-        } catch (Zend_OpenID_Exception $e) {
+        } catch (Zend\OpenID\Exception $e) {
             $this->markTestSkipped($e->getMessage());
         }
     }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21606 -->
+<!-- EN-Revision: 21988 -->
 <sect1 id="zend.form.elements">
     <title>Zend_Form_Element を用いたフォーム要素の作成</title>
 
     <para>
         フォームは、いくつかの要素から構成されています。
-        これらの要素は、HTML フォームの入力項目に対応します。
+        これらの要素は、<acronym>HTML</acronym> フォームの入力項目に対応します。
         <classname>Zend_Form_Element</classname> は個々のフォーム要素をカプセル化し、
         以下の機能を提供します。
     </para>
@@ -198,7 +198,7 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
         <para>
             バリデーションの前に、入力の正規化を行えると便利です。
             あるいはそれが必要となることもあるでしょう。
-            たとえば、HTML タグを除去した後の内容を検証したりといった場合です。
+            たとえば、<acronym>HTML</acronym> タグを除去した後の内容を検証したりといった場合です。
             あるいは、入力の前後に含まれるスペースを取り除いてから検証を行わないと
             StringLength バリデータが正しい判断をできないなどという場合もあります。
             これらの操作は
@@ -341,8 +341,7 @@ $unfiltered = $element->getUnfilteredValue();
             </para></listitem>
 
             <listitem><para>
-                バリデータの名前 (短い名前、あるいは完全なクラス名)
-                を渡す
+                短いフィルタ名を渡す
             </para></listitem>
         </itemizedlist>
 
@@ -353,9 +352,6 @@ $unfiltered = $element->getUnfilteredValue();
         <programlisting language="php"><![CDATA[
 // バリデータのインスタンス
 $element->addValidator(new Zend_Validate_Alnum());
-
-// 完全なクラス名
-$element->addValidator('Zend_Validate_Alnum');
 
 // 短い形式の名前
 $element->addValidator('Alnum');
@@ -592,31 +588,39 @@ $messages = $element->getMessages();
 
         <para>
             バリデータに加えて、ある要素が必須である場合は
-            <code>setRequired(true)</code> を使用できます。
+            <methodname>setRequired($flag)</methodname> を使用できます。
             デフォルトではこのフラグは <constant>FALSE</constant> です。
-            この場合は、<code>isValid()</code>
-            に何も値が渡されなかった場合はバリデーションチェインをスキップします。
-            この振る舞いを変更するにはいくつかの方法があります。
+            In combination with
+            <methodname>setAllowEmpty($flag)</methodname> (<constant>TRUE</constant>
+            by default) and <methodname>setAutoInsertNotEmptyValidator($flag)</methodname>
+            (<constant>TRUE</constant> by default), the behavior of your validator chain
+            can be modified in a number of ways:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    デフォルトでは、要素が必須の場合は 'allowEmpty' フラグも
-                    <constant>TRUE</constant> です。この場合、もし空の値が <code>isValid()</code>
-                    に渡されるとバリデータはスキップされます。
-                    このフラグを切り替えるには <code>setAllowEmpty($flag)</code>
-                    を使用します。フラグを <constant>FALSE</constant> にすると、
-                    値が空の場合でもバリデータが実行されるようになります。
+                    Using the defaults, validating an Element without passing a value, or
+                    passing an empty string for it, skips all validators and validates to
+                    <constant>TRUE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    デフォルトで、もし要素が必須で 'NotEmpty'
-                    バリデータが含まれていない場合は、<code>isValid()</code> は
-                    スタックの最上位にこのバリデータを追加します。そして
-                    <varname>$breakChainOnFailure</varname> フラグを設定します。
+                    <methodname>setAllowEmpty(false)</methodname> leaving the two other
+                    mentioned flags untouched, will validate against the validator chain
+                    you defined for this Element, regardless of the value passed
+                    to <methodname>isValid()</methodname>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setRequired(true)</methodname> leaving the two other
+                    mentioned flags untouched, will add a 'NotEmpty' validator
+                    on top of the validator chain (if none was already set)), with the
+                     <varname>$breakChainOnFailure</varname> flag set.
                     これにより、必須フラグがその意味どおりに動作するようになります。
                     入力が渡されなかった場合は検証がその時点で失敗し、
                     結果をユーザに返します。それ以降のバリデータは実行されません。
@@ -651,7 +655,6 @@ $messages = $element->getMessages();
             </para>
         </note>
 
-        <!-- TODO : to be translated -->
         <note>
             <title>When is an element detected as empty?</title>
 
@@ -851,7 +854,7 @@ $messages = $element->getMessages();
 
             <listitem><para>
                 <emphasis>HtmlTag</emphasis>:
-                ラベルや要素、そしてエラーメッセージを HTML の
+                ラベルや要素、そしてエラーメッセージを <acronym>HTML</acronym> の
                 &lt;dd&gt; タグで囲みます。
             </para></listitem>
 
@@ -915,9 +918,9 @@ $this->addDecorators(array(
             説明が存在する場合は、'Description' デコレータがクラス 'description'
             の段落を追加します。ここには、そのコンテンツの内容を説明するテキストが書き込まれます。
             その次のデコレータである 'HtmlTag' は、要素とエラーと説明文を
-            HTML の &lt;dd&gt; タグで囲みます。最後に、'label'
+            <acronym>HTML</acronym> の &lt;dd&gt; タグで囲みます。最後に、'label'
             が要素のラベルを取得します。それをビューヘルパー 'FormLabel'
-            に渡し、HTML の &lt;dt&gt; で囲みます。
+            に渡し、<acronym>HTML</acronym> の &lt;dt&gt; で囲みます。
             ラベルの内容は、デフォルトでコンテンツの前に付加されます。
             出力結果は、基本的にはこのようになります。
         </para>
@@ -1159,7 +1162,7 @@ $element->class = 'text;
         <para>
             デフォルトでは、すべての属性がビューヘルパーに渡され、
             要素の描画時に使用します。これらの属性は、要素タグの
-            HTML 属性として設定されます。
+            <acronym>HTML</acronym> 属性として設定されます。
         </para>
     </sect2>
 

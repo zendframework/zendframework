@@ -20,18 +20,20 @@
  */
 
 /**
- * @see Zend_Feed_Reader_Extension_EntryAbstract
- */
-require_once 'Zend/Feed/Reader/Extension/EntryAbstract.php';
+* @namespace
+*/
+namespace Zend\Feed\Reader\Extension\Thread;
+use Zend\Feed\Reader\Extension;
 
 /**
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Feed_Reader_Extension_Thread_Entry
-    extends Zend_Feed_Reader_Extension_EntryAbstract
+* @uses \Zend\Feed\Reader\Reader
+* @uses \Zend\Feed\Reader\Extension\EntryAbstract
+* @category Zend
+* @package Zend_Feed_Reader
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Entry extends Extension\AbstractEntry
 {
     /**
      * Get the "in-reply-to" value

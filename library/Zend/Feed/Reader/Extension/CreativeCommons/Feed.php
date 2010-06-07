@@ -20,18 +20,21 @@
  */
 
 /**
- * @see Zend_Feed_Reader_Extension_FeedAbstract
- */
-require_once 'Zend/Feed/Reader/Extension/FeedAbstract.php';
+* @namespace
+*/
+namespace Zend\Feed\Reader\Extension\CreativeCommons;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Extension;
 
 /**
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Feed_Reader_Extension_CreativeCommons_Feed
-    extends Zend_Feed_Reader_Extension_FeedAbstract
+* @uses \Zend\Feed\Reader\Reader
+* @uses Reader\Reader_Entry_EntryAbstract
+* @category Zend
+* @package Reader\Reader
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Feed extends Extension\AbstractFeed
 {
     /**
      * Get the entry license

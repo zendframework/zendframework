@@ -20,17 +20,20 @@
  */
 
 /**
- * @see Zend_Feed_Reader_Extension_FeedAbstract
- */
-require_once 'Zend/Feed/Reader/Extension/FeedAbstract.php';
+* @namespace
+*/
+namespace Zend\Feed\Reader\Extension\Podcast;
+use Zend\Feed\Reader\Extension;
 
 /**
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Feed_Reader_Extension_Podcast_Feed extends Zend_Feed_Reader_Extension_FeedAbstract
+* @uses \Zend\Feed\Reader\Reader
+* @uses \Zend\Feed\Reader\Extension\EntryAbstract
+* @category Zend
+* @package Zend_Feed_Reader
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Feed extends Extension\AbstractFeed
 {
     /**
      * Get the entry author
@@ -99,7 +102,7 @@ class Zend_Feed_Reader_Extension_Podcast_Feed extends Zend_Feed_Reader_Extension
                     $children = array();
 
                     foreach ($node->childNodes as $childNode) {
-                        if (!($childNode instanceof DOMText)) {
+                        if (!($childNode instanceof \DOMText)) {
                             $children[$childNode->getAttribute('text')] = null;
                         }
                     }

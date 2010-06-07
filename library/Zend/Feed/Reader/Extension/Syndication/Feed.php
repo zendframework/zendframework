@@ -20,20 +20,22 @@
  */
 
 /**
- * @see Zend_Feed_Reader_Extension_FeedAbstract
- */
-require_once 'Zend/Feed/Reader/Extension/FeedAbstract.php';
-
-require_once 'Zend/Date.php';
+* @namespace
+*/
+namespace Zend\Feed\Reader\Extension\Syndication;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Extension;
+use Zend\Date;
 
 /**
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Feed_Reader_Extension_Syndication_Feed
-    extends Zend_Feed_Reader_Extension_FeedAbstract
+* @uses \Zend\Feed\Reader\Reader
+* @uses \Zend\Feed\Reader\Extension\EntryAbstract
+* @category Zend
+* @package Zend_Feed_Reader
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Feed extends Extension\AbstractFeed
 {
     /**
      * Get update period
@@ -57,7 +59,7 @@ class Zend_Feed_Reader_Extension_Syndication_Feed
             case 'yearly':
                 return $period;
             default:
-                throw new Zend_Feed_Exception("Feed specified invalid update period: '$period'."
+                throw new Reader\Exception("Feed specified invalid update period: '$period'."
                     .  " Must be one of hourly, daily, weekly or yearly"
                 );
         }
@@ -119,15 +121,15 @@ class Zend_Feed_Reader_Extension_Syndication_Feed
     /**
      * Get update base
      *
-     * @return Zend_Date|null
+     * @return Date\Date|null
      */
     public function getUpdateBase()
     {
         $updateBase = $this->_getData('updateBase');
         $date = null;
         if ($updateBase) {
-            $date = new Zend_Date;
-            $date->set($updateBase, Zend_Date::W3C);
+            $date = new Date\Date;
+            $date->set($updateBase, Date\Date::W3C);
         }
         return $date;
     }

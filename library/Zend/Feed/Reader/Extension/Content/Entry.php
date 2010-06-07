@@ -13,36 +13,34 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Reader
+ * @package    Reader\Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: Entry.php 22300 2010-05-26 10:13:34Z padraic $
  */
 
 /**
- * @see Zend_Feed_Reader
- */
-require_once 'Zend/Feed/Reader.php';
+* @namespace
+*/
+namespace Zend\Feed\Reader\Extension\Content;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Extension;
 
 /**
- * @see Zend_Feed_Reader_Entry_EntryAbstract
- */
-require_once 'Zend/Feed/Reader/Extension/EntryAbstract.php';
-
-/**
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Feed_Reader_Extension_Content_Entry
-    extends Zend_Feed_Reader_Extension_EntryAbstract
+* @uses \Zend\Feed\Reader\Reader
+* @uses Reader\Reader_Entry_EntryAbstract
+* @category Zend
+* @package Reader\Reader
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Entry extends Extension\AbstractEntry
 {
 
     public function getContent()
     {
-        if ($this->getType() !== Zend_Feed_Reader::TYPE_RSS_10
-            && $this->getType() !== Zend_Feed_Reader::TYPE_RSS_090
+        if ($this->getType() !== Reader\Reader::TYPE_RSS_10
+            && $this->getType() !== Reader\Reader::TYPE_RSS_090
         ) {
             $content = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
         } else {

@@ -1,9 +1,13 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../common.php';
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
 
-$mailMerge = new Zend_Service_LiveDocx_MailMerge();
+use Zend\Date\Date;
+use Zend\Service\LiveDocx\Helper;
+use Zend\Service\LiveDocx\MailMerge;
+
+$mailMerge = new MailMerge();
 
 $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
           ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
@@ -13,7 +17,7 @@ $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
  */
             
 /*
-$mailMerge = new Zend_Service_LiveDocx_MailMerge(
+$mailMerge = new MailMerge(
     array (
         'username' => DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME,
         'password' => DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD
@@ -23,20 +27,18 @@ $mailMerge = new Zend_Service_LiveDocx_MailMerge(
 
 $mailMerge->setLocalTemplate('template.doc');
 
-
 $mailMerge->assign('customer_number', sprintf("#%'10s",  rand(0,1000000000)))
           ->assign('invoice_number',  sprintf("#%'10s",  rand(0,1000000000)))
           ->assign('account_number',  sprintf("#%'10s",  rand(0,1000000000)));
 
-
 $billData = array (  
     'phone'         => '+22 (0)333 444 555',
-    'date'          => Zend_Date::now()->toString(Zend_Date::DATE_LONG),
+    'date'          => Date::now()->toString(Date::DATE_LONG),
     'name'          => 'James Henry Brown',
     'service_phone' => '+22 (0)333 444 559',
     'service_fax'   => '+22 (0)333 444 558',
-    'month'         => sprintf('%s %s', Zend_Date::now()->toString(Zend_Date::MONTH_NAME),
-                                        Zend_Date::now()->toString(Zend_Date::YEAR)),
+    'month'         => sprintf('%s %s', Date::now()->toString(Date::MONTH_NAME),
+                                        Date::now()->toString(Date::YEAR)),
     'monthly_fee'   =>  '15.00',
     'total_net'     =>  '19.60',
     'tax'           =>  '19.00',
@@ -45,7 +47,6 @@ $billData = array (
 );
 
 $mailMerge->assign($billData);
-
 
 $billConnections = array(
     array(
@@ -71,7 +72,6 @@ $billConnections = array(
 );
 
 $mailMerge->assign('connection', $billConnections);
-
 
 $mailMerge->createDocument();
 

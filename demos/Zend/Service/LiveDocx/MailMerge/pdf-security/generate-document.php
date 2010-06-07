@@ -1,23 +1,27 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../common.php';
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
 
-$mailMerge = new Zend_Service_LiveDocx_MailMerge();
+use Zend\Date\Date;
+use Zend\Service\LiveDocx\MailMerge;
 
-// Set WSDL of your premium service server
-$mailMerge->setWsdl('https://api.example.com/1.2/mailmerge.asmx?WSDL');
+$mailMerge = new MailMerge();
 
-$mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
-          ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
+// Set WSDL of your *premium* service server
+$mailMerge->setWsdl(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL);
+
+// Set username and password of your *premium* service server
+$mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME)
+          ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_PASSWORD);
 
 $mailMerge->setLocalTemplate('template.docx');
 
 $mailMerge->assign('software', 'Magic Graphical Compression Suite v1.9')
           ->assign('licensee', 'Henry Döner-Meyer')
           ->assign('company',  'Co-Operation')
-          ->assign('date',     Zend_Date::now()->toString(Zend_Date::DATE_LONG))
-          ->assign('time',     Zend_Date::now()->toString(Zend_Date::TIME_LONG))
+          ->assign('date',     Date::now()->toString(Date::DATE_LONG))
+          ->assign('time',     Date::now()->toString(Date::TIME_LONG))
           ->assign('city',     'Berlin')
           ->assign('country',  'Germany');
 
@@ -27,8 +31,8 @@ $mailMerge->setDocumentPassword('aaaaaaaaaa');
 // Available on premium service only
 $mailMerge->setDocumentAccessPermissions(
     array(
-        'AllowHighLevelPrinting' ,  // getDocumentAccessOptions() returns
-        'AllowExtractContents'      // array of permitted values
+        'AllowHighLevelPrinting',  // getDocumentAccessOptions() returns
+        'AllowExtractContents'     // array of permitted values
     ),   
     'myDocumentAccessPassword'
 );

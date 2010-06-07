@@ -42,3 +42,13 @@
  */
 define('DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME', false);
 define('DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD', false);
+
+/**
+ * Zend_Service_LiveDocx configuration - premium
+ *
+ * Define username and password in order to access LiveDocx premium web services.
+ *
+ */
+define('DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL',     false);
+define('DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME', false);
+define('DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_PASSWORD', false);

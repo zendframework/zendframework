@@ -22,11 +22,16 @@
 
 
 /**
- * Test helper
+ * @namespace
  */
+namespace ZendTest\Service\SlideShare;
+
+use Zend\Service\SlideShare,
+    Zend\Service\SlideShare\SlideShare as SlideShareService,
+    Zend\Cache\Cache as Cache;
 
 /**
- * @see Zend_Service_SlideShare
+ * @see \Zend\Service\SlideShare
  */
 
 
@@ -39,29 +44,29 @@
  * @group      Zend_Service
  * @group      Zend_Service_SlideShare
  */
-class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
+class SlideShareTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * The Slide share object instance
      *
-     * @var Zend_Service_SlideShare
+     * @var \Zend\Service\SlideShare
      */
     protected static $_ss;
 
     /**
      * Enter description here...
      *
-     * @return Zend_Service_SlideShare
+     * @return \Zend\Service\SlideShare
      */
     protected function _getSSObject()
     {
-        $ss = new Zend_Service_SlideShare(TESTS_ZEND_SERVICE_SLIDESHARE_APIKEY,
+        $ss = new SlideShareService(TESTS_ZEND_SERVICE_SLIDESHARE_APIKEY,
                                                  TESTS_ZEND_SERVICE_SLIDESHARE_SHAREDSECRET,
                                                  TESTS_ZEND_SERVICE_SLIDESHARE_USERNAME,
                                                  TESTS_ZEND_SERVICE_SLIDESHARE_PASSWORD,
                                                  TESTS_ZEND_SERVICE_SLIDESHARE_SLIDESHOWID);
 
-        $cache = Zend_Cache::factory('Core', 'File', array('lifetime' => 0, 'automatic_serialization' => true),
+        $cache = Cache::factory('Core', 'File', array('lifetime' => 0, 'automatic_serialization' => true),
                                                      array('cache_dir' => dirname(__FILE__)."/SlideShare/_files"));
         $ss->setCacheObject($cache);
         return $ss;
@@ -99,7 +104,7 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
             $this->fail("Exception Caught retrieving Slideshow");
         }
 
-        $this->assertTrue($result instanceof Zend_Service_SlideShare_SlideShow);
+        $this->assertTrue($result instanceof SlideShare\SlideShow);
 
     }
 
@@ -116,7 +121,7 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(is_array($results));
         $this->assertTrue(count($results) == 1);
-        $this->assertTrue($results[0] instanceof Zend_Service_SlideShare_SlideShow);
+        $this->assertTrue($results[0] instanceof SlideShare\SlideShow);
 
     }
 
@@ -135,7 +140,7 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
 
         if(!empty($results)) {
             $this->assertTrue(count($results) == 1);
-            $this->assertTrue($results[0] instanceof Zend_Service_SlideShare_SlideShow);
+            $this->assertTrue($results[0] instanceof SlideShare\SlideShow);
         }
     }
 
@@ -152,7 +157,7 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(is_array($results));
         $this->assertTrue(count($results) == 1);
-        $this->assertTrue($results[0] instanceof Zend_Service_SlideShare_SlideShow);
+        $this->assertTrue($results[0] instanceof SlideShare\SlideShow);
 
     }
 
@@ -163,7 +168,7 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
         $title = "Unit Test for ZF SlideShare Component";
         $ppt_file = dirname(__FILE__)."/SlideShare/_files/demo.ppt";
 
-        $show = new Zend_Service_SlideShare_SlideShow();
+        $show = new SlideShare\SlideShow();
         $show->setFilename($ppt_file);
         $show->setDescription("Unit Test");
         $show->setTitle($title);
@@ -185,7 +190,7 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
             }
         }
 
-        $this->assertTrue($result instanceof Zend_Service_SlideShare_SlideShow);
+        $this->assertTrue($result instanceof SlideShare\SlideShow);
         $this->assertTrue($result->getId() > 0);
         $this->assertTrue($result->getTitle() === $title);
 
@@ -193,7 +198,7 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
 
     public function testSlideShowObj()
     {
-        $ss = new Zend_Service_SlideShare_SlideShow();
+        $ss = new SlideShare\SlideShow();
 
         $ss->setDescription("Foo");
         $ss->setEmbedCode("Bar");

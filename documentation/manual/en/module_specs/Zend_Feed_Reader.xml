@@ -10,7 +10,7 @@
             <classname>Zend_Feed_Reader</classname> is a component used to
             consume <acronym>RSS</acronym> and Atom feeds of any version, including
             <acronym>RDF</acronym>/<acronym>RSS</acronym> 1.0,
-            <acronym>RSS</acronym> 2.0 and Atom 0.3/1.0. The <acronym>API</acronym> for
+            <acronym>RSS</acronym> 2.0, Atom 0.3 and Atom 1.0. The <acronym>API</acronym> for
             retrieving feed data is
             deliberately simple since <classname>Zend_Feed_Reader</classname> is
             capable of searching any feed of any type for the information
@@ -42,7 +42,7 @@
             <acronym>URI</acronym> if
             the cache is valid. Second, the Feed and Entry level <acronym>API</acronym> is backed
             by an internal cache (non-persistant) so repeat <acronym>API</acronym> calls for the
-            same feed will avoid additional <acronym>DOM</acronym>/XPath use. Thirdly, importing
+            same feed will avoid additional <acronym>DOM</acronym> or XPath use. Thirdly, importing
             feeds from a <acronym>URI</acronym> can take advantage of
             <acronym>HTTP</acronym> Conditional <acronym>GET</acronym> requests
             which allow servers to issue an empty 304 response when the
@@ -433,7 +433,7 @@ foreach ($links as $link) {
             types from the various feed and entry level methods may include an object
             of type <classname>Zend_Feed_Reader_Collection_CollectionAbstract</classname>.
             Despite the special class name which I'll explain below, this is just a simple
-            subclass of SPL's <classname>ArrayObject</classname>.
+            subclass of <acronym>SPL</acronym>'s <classname>ArrayObject</classname>.
         </para>
 
         <para>
@@ -487,8 +487,9 @@ foreach ($categories as $cat) {
             as a simple array using the <methodname>getValues()</methodname> method. The concept
             of "most relevant" is obviously a judgement call. For categories it means the category
             labels (not the terms or schemes) while for authors it would be the authors' names
-            (not their email addresses or URIs). The simple array is flat (just values) and passed
-            through <methodname>array_unique()</methodname> to remove duplication.
+            (not their email addresses or <acronym>URI</acronym>s). The simple array is flat (just
+            values) and passed through <methodname>array_unique()</methodname> to remove
+            duplication.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -508,10 +509,10 @@ $labels = $categories->getValues();
         <title>Retrieving Feed Information</title>
 
         <para>
-            Retrieving information from a feed (we'll cover entries/items in the
+            Retrieving information from a feed (we'll cover entries and items in the
             next section though they follow identical principals) uses a clearly
             defined <acronym>API</acronym> which is exactly the same regardless of whether the feed
-            in question is <acronym>RSS</acronym>/<acronym>RDF</acronym>/Atom. The same goes for
+            in question is <acronym>RSS</acronym>, <acronym>RDF</acronym> or Atom. The same goes for
             sub-versions of these standards and we've tested every single
             <acronym>RSS</acronym> and Atom version. While
             the underlying feed <acronym>XML</acronym> can differ substantially in terms of the
@@ -601,7 +602,8 @@ $labels = $categories->getValues();
                             Returns the <acronym>URI</acronym> of this feed, which may be the
                             same as the <acronym>URI</acronym> used to import the feed. There
                             are important cases where the feed link may differ because the source
-                            URI is being updated and is intended to be removed in the future.
+                            <acronym>URI</acronym> is being updated and is intended to be removed in
+                            the future.
                         </entry>
                     </row>
 
@@ -700,7 +702,7 @@ $labels = $categories->getValues();
                             Returns a <classname>Zend_Feed_Reader_Collection_Category</classname>
                             object containing the details of any categories associated with the
                             overall feed. The supported fields include "term" (the machine readable
-                            category name), "scheme" (the categorisation scheme/domain for this
+                            category name), "scheme" (the categorisation scheme and domain for this
                             category), and "label" (a <acronym>HTML</acronym> decoded human readable
                             category name). Where any of the three fields are absent from the field,
                             they are either set to the closest available alternative or, in the case
@@ -740,7 +742,7 @@ $labels = $categories->getValues();
             (Atom may be used to supplement <acronym>RSS</acronym>'s syntax)? Failing that, we
             could simply look at the entries, pick the most recent, and use its
             <command>&lt;pubDate&gt;</command> element. Assuming it exists... Many
-            feeds also use Dublin Core 1.0/1.1 <command>&lt;dc:date&gt;</command>
+            feeds also use Dublin Core 1.0 or 1.1 <command>&lt;dc:date&gt;</command>
             elements for feeds and entries. Or we could find Atom lurking again.
         </para>
 
@@ -817,7 +819,8 @@ $labels = $categories->getValues();
                             Returns the encoding of the source <acronym>XML</acronym> document
                             (note: this cannot account for errors such as the
                             server sending documents in a different encoding). Where not
-                            defined, the default UTF-8 encoding of Unicode is applied.
+                            defined, the default <acronym>UTF-8</acronym> encoding of Unicode is
+                            applied.
                         </entry>
                     </row>
 
@@ -1013,9 +1016,10 @@ $labels = $categories->getValues();
                             attributes from a multi-media &lt;enclosure&gt; element including
                             as array keys: <emphasis>url</emphasis>,
                             <emphasis>length</emphasis>, <emphasis>type</emphasis>.
-                            In accordance with the RSS Best Practices Profile of the RSS
-                            Advisory Board, no support is offers for multiple enclosures
-                            since such support forms no part of the RSS specification.
+                            In accordance with the <acronym>RSS</acronym> Best Practices Profile of
+                            the <acronym>RSS</acronym> Advisory Board, no support is offers for
+                            multiple enclosures since such support forms no part of the
+                            <acronym>RSS</acronym> specification.
                         </entry>
                     </row>
 
@@ -1057,7 +1061,7 @@ $labels = $categories->getValues();
                             Returns a <classname>Zend_Feed_Reader_Collection_Category</classname>
                             object containing the details of any categories associated with the
                             entry. The supported fields include "term" (the machine readable
-                            category name), "scheme" (the categorisation scheme/domain for this
+                            category name), "scheme" (the categorisation scheme and domain for this
                             category), and "label" (a <acronym>HTML</acronym> decoded human readable
                             category name). Where any of the three fields are absent from the field,
                             they are either set to the closest available alternative or, in the case
@@ -1168,7 +1172,8 @@ $labels = $categories->getValues();
                             Returns the encoding of the source <acronym>XML</acronym> document
                             (note: this cannot account for errors such as the server sending
                             documents in a different encoding). The default encoding applied
-                            in the absence of any other is the UTF-8 encoding of Unicode.
+                            in the absence of any other is the <acronym>UTF-8</acronym> encoding of
+                            Unicode.
                         </entry>
                     </row>
 

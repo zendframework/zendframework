@@ -9,11 +9,12 @@
         <para>
             <classname>Zend_Feed_Writer</classname> is the sibling component to
             <classname>Zend_Feed_Reader</classname> responsible for generating feeds for output. It
-            supports the Atom 1.0 specification (RFC 4287) and <acronym>RSS</acronym> 2.0 as
-            specified by the <acronym>RSS</acronym> Advisory Board (<acronym>RSS</acronym> 2.0.11).
-            It does not deviate from these standards. It does, however, offer a simple Extension
-            system which allows for any extension and module for either of these two specifications
-            to be implemented if they are not provided out of the box.
+            supports the Atom 1.0 specification (<acronym>RFC</acronym> 4287) and
+            <acronym>RSS</acronym> 2.0 as specified by the <acronym>RSS</acronym> Advisory Board
+            (<acronym>RSS</acronym> 2.0.11). It does not deviate from these standards. It does,
+            however, offer a simple Extension system which allows for any extension and module for
+            either of these two specifications to be implemented if they are not provided out of the
+            box.
         </para>
 
         <para>
@@ -68,8 +69,8 @@
             <classname>Zend_Feed_Writer_Deleted</classname>. The former implements Atom 2.0 source
             elements which carry source feed metadata for a specific entry within an aggregate feed
             (i.e. the current feed is not the entry's original source). The latter implements the
-            Atom Tombstones RFC allowing feeds to carry references to entries which have been
-            deleted.
+            Atom Tombstones <acronym>RFC</acronym> allowing feeds to carry references to entries
+            which have been deleted.
         </para>
 
         <para>
@@ -109,7 +110,7 @@
         <para>
             Using <classname>Zend_Feed_Writer</classname> is as simple as setting data and
             triggering the renderer. Here is an example to generate a minimal Atom 1.0 feed.
-            As this demonstrates, each feed/entry uses a separate data container.
+            As this demonstrates, each feed or entry uses a separate data container.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -516,8 +517,8 @@ $out = $feed->export('atom');
         <note>
             <para>
                 In addition to these setters, there are also matching getters to retrieve data from
-                the Entry data container. For example, <methodname>setImage()</methodname> is matched
-                with a <methodname>getImage()</methodname> method.
+                the Entry data container. For example, <methodname>setImage()</methodname> is
+                matched with a <methodname>getImage()</methodname> method.
             </para>
         </note>
 
@@ -675,7 +676,7 @@ $out = $feed->export('atom');
                         <entry>
                             Sets the number of comments associated with this entry. Rendering
                             differs between <acronym>RSS</acronym> and Atom 2.0 depending
-                            on the element/attribute needed.
+                            on the element or attribute needed.
                         </entry>
                     </row>
 
@@ -712,8 +713,8 @@ $out = $feed->export('atom');
                         <entry><methodname>setEncoding()</methodname></entry>
 
                         <entry>
-                            Sets the encoding of entry text. This will default to UTF-8 which
-                            is the preferred encoding.
+                            Sets the encoding of entry text. This will default to
+                            <acronym>UTF-8</acronym> which is the preferred encoding.
                         </entry>
                     </row>
                 </tbody>

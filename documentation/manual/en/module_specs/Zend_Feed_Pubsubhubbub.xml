@@ -372,7 +372,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                         </row>
 
                         <row>
-                            <entry>hub.lease_seconds</entry>
+                            <entry><property>hub.lease_seconds</property></entry>
                             <entry>2592000</entry>
 
                             <entry>
@@ -391,7 +391,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                         </row>
 
                         <row>
-                            <entry>hub.mode</entry>
+                            <entry><property>hub.mode</property></entry>
                             <entry>subscribe</entry>
 
                             <entry>
@@ -403,7 +403,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                         </row>
 
                         <row>
-                            <entry>hub.topic</entry>
+                            <entry><property>hub.topic</property></entry>
                             <entry>http://www.example.net/rss.xml</entry>
 
                             <entry>
@@ -416,7 +416,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                         </row>
 
                         <row>
-                            <entry>hub.verify</entry>
+                            <entry><property>hub.verify</property></entry>
                             <entry>sync</entry>
 
                             <entry>
@@ -430,7 +430,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                         </row>
 
                         <row>
-                            <entry>hub.verify</entry>
+                            <entry><property>hub.verify</property></entry>
                             <entry>async</entry>
 
                             <entry>
@@ -444,7 +444,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                         </row>
 
                         <row>
-                            <entry>hub.verify_token</entry>
+                            <entry><property>hub.verify_token</property></entry>
                             <entry>3065919804abcaa7212ae89.879827871253878386</entry>
 
                             <entry>

@@ -96,7 +96,7 @@ class Entry extends Extension\AbstractEntry
         if (count($authors) == 0) {
             $authors = null;
         } else {
-            $authors = new Reader\Reader_Collection_Author(
+            $authors = new Collection\Author(
                 Reader\Reader::arrayUnique($authors)
             );
         }
@@ -268,7 +268,7 @@ class Entry extends Extension\AbstractEntry
         $nodeList = $this->getXpath()->query($this->getXpathPrefix() . '/atom:link[@rel="enclosure"]');
 
         if ($nodeList->length > 0) {
-            $enclosure = new stdClass();
+            $enclosure = new \stdClass();
             $enclosure->url    = $nodeList->item(0)->getAttribute('href');
             $enclosure->length = $nodeList->item(0)->getAttribute('length');
             $enclosure->type   = $nodeList->item(0)->getAttribute('type');

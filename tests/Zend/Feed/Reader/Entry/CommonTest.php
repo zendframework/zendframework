@@ -20,28 +20,31 @@
  * @version    $Id: CommonTest.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'Zend/Feed/Reader.php';
+/**
+* @namespace
+*/
+namespace ZendTest\Feed\Reader\Entry;
+use Zend\Feed\Reader;
 
 /**
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Feed
- * @group      Zend_Feed_Reader
- */
-class Zend_Feed_Reader_Entry_CommonTest extends PHPUnit_Framework_TestCase
+* @category Zend
+* @package Zend_Feed
+* @subpackage UnitTests
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+* @group Zend_Feed
+* @group Zend_Feed_Reader
+*/
+class CommonTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
 
     public function setup()
     {
-        Zend_Feed_Reader::reset();
-        if (Zend_Registry::isRegistered('Zend_Locale')) {
-            $registry = Zend_Registry::getInstance();
+        Reader\Reader::reset();
+        if (\Zend\Registry::isRegistered('Zend_Locale')) {
+            $registry = \Zend\Registry::getInstance();
             unset($registry['Zend_Locale']);
         }
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/Common';
@@ -52,25 +55,25 @@ class Zend_Feed_Reader_Entry_CommonTest extends PHPUnit_Framework_TestCase
      */
     public function testGetsDomDocumentObject()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
-        $this->assertTrue($entry->getDomDocument() instanceof DOMDocument);
+        $this->assertTrue($entry->getDomDocument() instanceof \DOMDocument);
     }
 
     public function testGetsDomXpathObject()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
-        $this->assertTrue($entry->getXpath() instanceof DOMXPath);
+        $this->assertTrue($entry->getXpath() instanceof \DOMXPath);
     }
 
     public function testGetsXpathPrefixString()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
@@ -79,16 +82,16 @@ class Zend_Feed_Reader_Entry_CommonTest extends PHPUnit_Framework_TestCase
 
     public function testGetsDomElementObject()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
-        $this->assertTrue($entry->getElement() instanceof DOMElement);
+        $this->assertTrue($entry->getElement() instanceof \DOMElement);
     }
 
     public function testSaveXmlOutputsXmlStringForEntry()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
@@ -97,16 +100,16 @@ class Zend_Feed_Reader_Entry_CommonTest extends PHPUnit_Framework_TestCase
 
     public function testGetsNamedExtension()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
-        $this->assertTrue($entry->getExtension('Atom') instanceof Zend_Feed_Reader_Extension_Atom_Entry);
+        $this->assertTrue($entry->getExtension('Atom') instanceof Reader\Reader_Extension_Atom_Entry);
     }
 
     public function testReturnsNullIfExtensionDoesNotExist()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
@@ -118,7 +121,7 @@ class Zend_Feed_Reader_Entry_CommonTest extends PHPUnit_Framework_TestCase
      */
     public function testReturnsEncodingOfFeed()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
@@ -130,7 +133,7 @@ class Zend_Feed_Reader_Entry_CommonTest extends PHPUnit_Framework_TestCase
      */
     public function testReturnsEncodingOfFeedAsUtf8IfUndefined()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/atom_noencodingdefined.xml')
         );
         $entry = $feed->current();

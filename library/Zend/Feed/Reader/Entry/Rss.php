@@ -327,7 +327,7 @@ class Rss extends AbstractEntry implements Reader\Entry
             $nodeList = $this->_xpath->query($this->_xpathQueryRss . '/enclosure');
 
             if ($nodeList->length > 0) {
-                $enclosure = new stdClass();
+                $enclosure = new \stdClass();
                 $enclosure->url    = $nodeList->item(0)->getAttribute('url');
                 $enclosure->length = $nodeList->item(0)->getAttribute('length');
                 $enclosure->type   = $nodeList->item(0)->getAttribute('type');

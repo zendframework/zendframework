@@ -17,13 +17,14 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Entry.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /**
  * @namespace
  */
-namespace My\Extension\JungleBooks;
+namespace My\FeedReader\Extension\JungleBooks;
+use Zend\Feed\Reader\Extension;
 
 /**
  * @category   Zend
@@ -32,7 +33,7 @@ namespace My\Extension\JungleBooks;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Entry extends \Zend\Feed\Reader\Extension\EntryAbstract
+class Entry extends Extension\AbstractEntry
 {
 
     public function getIsbn()

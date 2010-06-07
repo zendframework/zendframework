@@ -20,13 +20,9 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
-namespace ZendTest\Feed\Writer;
-use Zend\Feed;
-use Zend\Feed\Writer\Feed as WriterFeed;
-use Zend\Date;
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/TestHelper.php';
+
+require_once 'Zend/Feed/Writer/Feed.php';
 
 /**
  * @category   Zend
@@ -37,7 +33,7 @@ use Zend\Date;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FeedTest extends \PHPUnit_Framework_TestCase
+class Zend_Feed_Writer_FeedTest extends PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
@@ -49,119 +45,119 @@ class FeedTest extends \PHPUnit_Framework_TestCase
 
     public function testAddsAuthorName()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->addAuthor('Joe');
         $this->assertEquals(array('name'=>'Joe'), $writer->getAuthor());
     }
 
     public function testAddsAuthorEmail()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->addAuthor('Joe', 'joe@example.com');
         $this->assertEquals(array('name'=>'Joe', 'email' => 'joe@example.com'), $writer->getAuthor());
     }
 
     public function testAddsAuthorUri()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->addAuthor('Joe', null, 'http://www.example.com');
         $this->assertEquals(array('name'=>'Joe', 'uri' => 'http://www.example.com'), $writer->getAuthor());
     }
 
     public function testAddAuthorThrowsExceptionOnInvalidName()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->addAuthor('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testAddAuthorThrowsExceptionOnInvalidEmail()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->addAuthor('Joe', '');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testAddAuthorThrowsExceptionOnInvalidUri()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->addAuthor('Joe', null, 'notauri');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testAddsAuthorNameFromArray()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->addAuthor(array('name'=>'Joe'));
         $this->assertEquals(array('name'=>'Joe'), $writer->getAuthor());
     }
 
     public function testAddsAuthorEmailFromArray()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->addAuthor(array('name'=>'Joe','email'=>'joe@example.com'));
         $this->assertEquals(array('name'=>'Joe', 'email' => 'joe@example.com'), $writer->getAuthor());
     }
 
     public function testAddsAuthorUriFromArray()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->addAuthor(array('name'=>'Joe','uri'=>'http://www.example.com'));
         $this->assertEquals(array('name'=>'Joe', 'uri' => 'http://www.example.com'), $writer->getAuthor());
     }
 
     public function testAddAuthorThrowsExceptionOnInvalidNameFromArray()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->addAuthor(array('name'=>''));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testAddAuthorThrowsExceptionOnInvalidEmailFromArray()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->addAuthor(array('name'=>'Joe','email'=>''));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testAddAuthorThrowsExceptionOnInvalidUriFromArray()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->addAuthor(array('name'=>'Joe','uri'=>'notauri'));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testAddAuthorThrowsExceptionIfNameOmittedFromArray()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->addAuthor(array('uri'=>'notauri'));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testAddsAuthorsFromArrayOfAuthors()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->addAuthors(array(
             array('name'=>'Joe','uri'=>'http://www.example.com'),
             array('name'=>'Jane','uri'=>'http://www.example.com')
@@ -171,465 +167,683 @@ class FeedTest extends \PHPUnit_Framework_TestCase
 
     public function testSetsCopyright()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->setCopyright('Copyright (c) 2009 Paddy Brady');
         $this->assertEquals('Copyright (c) 2009 Paddy Brady', $writer->getCopyright());
     }
 
     public function testSetCopyrightThrowsExceptionOnInvalidParam()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->setCopyright('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testSetDateCreatedDefaultsToCurrentTime()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->setDateCreated();
-        $dateNow = new Date\Date;
+        $dateNow = new Zend_Date;
         $this->assertTrue($dateNow->isLater($writer->getDateCreated()) || $dateNow->equals($writer->getDateCreated()));
     }
 
     public function testSetDateCreatedUsesGivenUnixTimestamp()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->setDateCreated(1234567890);
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
+        $myDate = new Zend_Date('1234567890', Zend_Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($writer->getDateCreated()));
     }
 
     public function testSetDateCreatedUsesZendDateObject()
     {
-        $writer = new WriterFeed\Feed;
-        $writer->setDateCreated(new Date\Date('1234567890', Date\Date::TIMESTAMP));
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setDateCreated(new Zend_Date('1234567890', Zend_Date::TIMESTAMP));
+        $myDate = new Zend_Date('1234567890', Zend_Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($writer->getDateCreated()));
     }
 
     public function testSetDateModifiedDefaultsToCurrentTime()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->setDateModified();
-        $dateNow = new Date\Date;
+        $dateNow = new Zend_Date;
         $this->assertTrue($dateNow->isLater($writer->getDateModified()) || $dateNow->equals($writer->getDateModified()));
     }
 
     public function testSetDateModifiedUsesGivenUnixTimestamp()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->setDateModified(1234567890);
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
+        $myDate = new Zend_Date('1234567890', Zend_Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($writer->getDateModified()));
     }
 
     public function testSetDateModifiedUsesZendDateObject()
     {
-        $writer = new WriterFeed\Feed;
-        $writer->setDateModified(new Date\Date('1234567890', Date\Date::TIMESTAMP));
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setDateModified(new Zend_Date('1234567890', Zend_Date::TIMESTAMP));
+        $myDate = new Zend_Date('1234567890', Zend_Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($writer->getDateModified()));
     }
 
     public function testSetDateCreatedThrowsExceptionOnInvalidParameter()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->setDateCreated('abc');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testSetDateModifiedThrowsExceptionOnInvalidParameter()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->setDateModified('abc');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testGetDateCreatedReturnsNullIfDateNotSet()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $this->assertTrue(is_null($writer->getDateCreated()));
     }
 
     public function testGetDateModifiedReturnsNullIfDateNotSet()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $this->assertTrue(is_null($writer->getDateModified()));
+    }
+
+    public function testSetLastBuildDateDefaultsToCurrentTime()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setLastBuildDate();
+        $dateNow = new Zend_Date;
+        $this->assertTrue($dateNow->isLater($writer->getLastBuildDate()) || $dateNow->equals($writer->getLastBuildDate()));
+    }
+
+    public function testSetLastBuildDateUsesGivenUnixTimestamp()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setLastBuildDate(1234567890);
+        $myDate = new Zend_Date('1234567890', Zend_Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
+    }
+
+    public function testSetLastBuildDateUsesZendDateObject()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setLastBuildDate(new Zend_Date('1234567890', Zend_Date::TIMESTAMP));
+        $myDate = new Zend_Date('1234567890', Zend_Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
+    }
+
+    public function testSetLastBuildDateThrowsExceptionOnInvalidParameter()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        try {
+            $writer->setLastBuildDate('abc');
+            $this->fail();
+        } catch (Zend_Feed_Exception $e) {
+        }
+    }
+
+    public function testGetLastBuildDateReturnsNullIfDateNotSet()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $this->assertTrue(is_null($writer->getLastBuildDate()));
     }
 
     public function testGetCopyrightReturnsNullIfDateNotSet()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $this->assertTrue(is_null($writer->getCopyright()));
     }
 
     public function testSetsDescription()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->setDescription('abc');
         $this->assertEquals('abc', $writer->getDescription());
     }
 
     public function testSetDescriptionThrowsExceptionOnInvalidParameter()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->setDescription('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testGetDescriptionReturnsNullIfDateNotSet()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $this->assertTrue(is_null($writer->getDescription()));
     }
 
     public function testSetsId()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->setId('http://www.example.com/id');
         $this->assertEquals('http://www.example.com/id', $writer->getId());
     }
 
     public function testSetsIdAcceptsUrns()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->setId('urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6');
         $this->assertEquals('urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6', $writer->getId());
     }
 
     public function testSetIdThrowsExceptionOnInvalidParameter()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->setId('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testSetIdThrowsExceptionOnInvalidUri()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->setId('http://');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testGetIdReturnsNullIfDateNotSet()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $this->assertTrue(is_null($writer->getId()));
     }
 
     public function testSetsLanguage()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->setLanguage('abc');
         $this->assertEquals('abc', $writer->getLanguage());
     }
 
     public function testSetLanguageThrowsExceptionOnInvalidParameter()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->setLanguage('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testGetLanguageReturnsNullIfDateNotSet()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $this->assertTrue(is_null($writer->getLanguage()));
     }
 
     public function testSetsLink()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->setLink('http://www.example.com/id');
         $this->assertEquals('http://www.example.com/id', $writer->getLink());
     }
 
     public function testSetLinkThrowsExceptionOnEmptyString()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->setLink('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testSetLinkThrowsExceptionOnInvalidUri()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->setLink('http://');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testGetLinkReturnsNullIfDateNotSet()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $this->assertTrue(is_null($writer->getLink()));
     }
 
     public function testSetsEncoding()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->setEncoding('utf-16');
         $this->assertEquals('utf-16', $writer->getEncoding());
     }
 
     public function testSetEncodingThrowsExceptionOnInvalidParameter()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->setEncoding('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testGetEncodingReturnsUtf8IfNotSet()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $this->assertEquals('UTF-8', $writer->getEncoding());
     }
 
     public function testSetsTitle()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->setTitle('abc');
         $this->assertEquals('abc', $writer->getTitle());
     }
 
     public function testSetTitleThrowsExceptionOnInvalidParameter()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->setTitle('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testGetTitleReturnsNullIfDateNotSet()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $this->assertTrue(is_null($writer->getTitle()));
     }
 
     public function testSetsGeneratorName()
     {
-        $writer = new WriterFeed\Feed;
-        $writer->setGenerator('ZFW');
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setGenerator(array('name'=>'ZFW'));
         $this->assertEquals(array('name'=>'ZFW'), $writer->getGenerator());
     }
 
     public function testSetsGeneratorVersion()
     {
-        $writer = new WriterFeed\Feed;
-        $writer->setGenerator('ZFW', '1.0');
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setGenerator(array('name'=>'ZFW', 'version' => '1.0'));
         $this->assertEquals(array('name'=>'ZFW', 'version' => '1.0'), $writer->getGenerator());
     }
 
     public function testSetsGeneratorUri()
     {
-        $writer = new WriterFeed\Feed;
-        $writer->setGenerator('ZFW', null, 'http://www.example.com');
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setGenerator(array('name'=>'ZFW', 'uri'=>'http://www.example.com'));
         $this->assertEquals(array('name'=>'ZFW', 'uri' => 'http://www.example.com'), $writer->getGenerator());
     }
 
     public function testSetsGeneratorThrowsExceptionOnInvalidName()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
-            $writer->setGenerator('');
+            $writer->setGenerator(array());
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testSetsGeneratorThrowsExceptionOnInvalidVersion()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
-            $writer->addAuthor('ZFW', '');
-            $this->fail();
-        } catch (Feed\Exception $e) {
+            $writer->setGenerator(array('name'=>'ZFW', 'version'=>''));
+            $this->fail('Should have failed since version is empty');
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testSetsGeneratorThrowsExceptionOnInvalidUri()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
+        try {
+            $writer->setGenerator(array('name'=>'ZFW','uri'=>'notauri'));
+            $this->fail();
+        } catch (Zend_Feed_Exception $e) {
+        }
+    }
+
+    /**
+     * @deprecated
+     */
+    public function testSetsGeneratorName_Deprecated()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setGenerator('ZFW');
+        $this->assertEquals(array('name'=>'ZFW'), $writer->getGenerator());
+    }
+
+    /**
+     * @deprecated
+     */
+    public function testSetsGeneratorVersion_Deprecated()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setGenerator('ZFW', '1.0');
+        $this->assertEquals(array('name'=>'ZFW', 'version' => '1.0'), $writer->getGenerator());
+    }
+
+    /**
+     * @deprecated
+     */
+    public function testSetsGeneratorUri_Deprecated()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setGenerator('ZFW', null, 'http://www.example.com');
+        $this->assertEquals(array('name'=>'ZFW', 'uri' => 'http://www.example.com'), $writer->getGenerator());
+    }
+
+    /**
+     * @deprecated
+     */
+    public function testSetsGeneratorThrowsExceptionOnInvalidName_Deprecated()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        try {
+            $writer->setGenerator('');
+            $this->fail();
+        } catch (Zend_Feed_Exception $e) {
+        }
+    }
+
+    /**
+     * @deprecated
+     */
+    public function testSetsGeneratorThrowsExceptionOnInvalidVersion_Deprecated()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        try {
+            $writer->setGenerator('ZFW', '');
+            $this->fail();
+        } catch (Zend_Feed_Exception $e) {
+        }
+    }
+
+    /**
+     * @deprecated
+     */
+    public function testSetsGeneratorThrowsExceptionOnInvalidUri_Deprecated()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->setGenerator('ZFW', null, 'notauri');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testGetGeneratorReturnsNullIfDateNotSet()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $this->assertTrue(is_null($writer->getGenerator()));
     }
 
     public function testSetsFeedLink()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->setFeedLink('http://www.example.com/rss', 'RSS');
         $this->assertEquals(array('rss'=>'http://www.example.com/rss'), $writer->getFeedLinks());
     }
 
     public function testSetsFeedLinkThrowsExceptionOnInvalidType()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->setFeedLink('http://www.example.com/rss', 'abc');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testSetsFeedLinkThrowsExceptionOnInvalidUri()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->setFeedLink('http://', 'rss');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testGetFeedLinksReturnsNullIfNotSet()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $this->assertTrue(is_null($writer->getFeedLinks()));
     }
     
     public function testSetsBaseUrl()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->setBaseUrl('http://www.example.com');
         $this->assertEquals('http://www.example.com', $writer->getBaseUrl());
     }
 
     public function testSetsBaseUrlThrowsExceptionOnInvalidUri()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->setBaseUrl('http://');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testGetBaseUrlReturnsNullIfNotSet()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $this->assertTrue(is_null($writer->getBaseUrl()));
     }
     
     public function testAddsHubUrl()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->addHub('http://www.example.com/hub');
         $this->assertEquals(array('http://www.example.com/hub'), $writer->getHubs());
     }
     
     public function testAddsManyHubUrls()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->addHubs(array('http://www.example.com/hub', 'http://www.example.com/hub2'));
         $this->assertEquals(array('http://www.example.com/hub', 'http://www.example.com/hub2'), $writer->getHubs());
     }
 
     public function testAddingHubUrlThrowsExceptionOnInvalidUri()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->addHub('http://');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testAddingHubUrlReturnsNullIfNotSet()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $this->assertTrue(is_null($writer->getHubs()));
     }
 
     public function testCreatesNewEntryDataContainer()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $entry = $writer->createEntry();
-        $this->assertTrue($entry instanceof \Zend\Feed\Writer\Entry);
+        $this->assertTrue($entry instanceof Zend_Feed_Writer_Entry);
     }
     
     public function testAddsCategory()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->addCategory(array('term'=>'cat_dog'));
         $this->assertEquals(array(array('term'=>'cat_dog')), $writer->getCategories());
     }
     
     public function testAddsManyCategories()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $writer->addCategories(array(array('term'=>'cat_dog'),array('term'=>'cat_mouse')));
         $this->assertEquals(array(array('term'=>'cat_dog'),array('term'=>'cat_mouse')), $writer->getCategories());
     }
 
     public function testAddingCategoryWithoutTermThrowsException()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->addCategory(array('label' => 'Cats & Dogs', 'scheme' => 'http://www.example.com/schema1'));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
     
     public function testAddingCategoryWithInvalidUriAsSchemeThrowsException()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         try {
             $writer->addCategory(array('term' => 'cat_dog', 'scheme' => 'http://'));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
+    }
+
+    // Image Tests
+
+    public function testSetsImageUri()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif'
+        ));
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/logo.gif'
+        ), $writer->getImage());
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testSetsImageUriThrowsExceptionOnEmptyUri()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => ''
+        ));
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testSetsImageUriThrowsExceptionOnMissingUri()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array());
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testSetsImageUriThrowsExceptionOnInvalidUri()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => 'http://'
+        ));
+    }
+
+    public function testSetsImageLink()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com'
+        ));
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com'
+        ), $writer->getImage());
+    }
+
+    public function testSetsImageTitle()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'title' => 'Image title'
+        ));
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'title' => 'Image title'
+        ), $writer->getImage());
+    }
+
+    public function testSetsImageHeight()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'height' => '88'
+        ));
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'height' => '88'
+        ), $writer->getImage());
+    }
+
+    public function testSetsImageWidth()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'width' => '88'
+        ));
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'width' => '88'
+        ), $writer->getImage());
+    }
+    
+    public function testSetsImageDescription()
+    {
+        $writer = new Zend_Feed_Writer_Feed;
+        $writer->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'description' => 'Image description'
+        ));
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'description' => 'Image description'
+        ), $writer->getImage());
     }
 
     public function testGetCategoriesReturnsNullIfNotSet()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $this->assertTrue(is_null($writer->getCategories()));
     }
 
     public function testAddsAndOrdersEntriesByDateIfRequested()
     {
-        $writer = new WriterFeed\Feed;
+        $writer = new Zend_Feed_Writer_Feed;
         $entry = $writer->createEntry();
         $entry->setDateCreated(1234567890);
         $entry2 = $writer->createEntry();
@@ -637,7 +851,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $writer->addEntry($entry);
         $writer->addEntry($entry2);
         $writer->orderByDate();
-        $this->assertEquals(1230000000, $writer->getEntry(1)->getDateCreated()->get(Date\Date::TIMESTAMP));
+        $this->assertEquals(1230000000, $writer->getEntry(1)->getDateCreated()->get(Zend_Date::TIMESTAMP));
     }
 
 }

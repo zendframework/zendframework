@@ -20,13 +20,11 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
-namespace ZendTest\Feed\Writer\Renderer\Entry;
-use Zend\Feed\Writer\Renderer\Feed;
-use Zend\Feed\Reader;
-use Zend\Date;
+require_once dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
+require_once 'Zend/Feed/Writer/Renderer/Feed/Rss.php';
+require_once 'Zend/Feed/Reader.php';
+require_once 'Zend/Version.php';
 
 /**
  * @category   Zend
@@ -37,7 +35,7 @@ use Zend\Date;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RssTest extends \PHPUnit_Framework_TestCase
+class Zend_Feed_Writer_Renderer_Entry_RssTest extends PHPUnit_Framework_TestCase
 {
 
     protected $_validWriter = null;
@@ -45,7 +43,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_validWriter = new \Zend\Feed\Writer\Feed\Feed;
+        $this->_validWriter = new Zend_Feed_Writer_Feed;
         
         $this->_validWriter->setType('rss');
         
@@ -67,10 +65,10 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderMethodRunsMinimalWriterContainerProperlyBeforeICheckAtomCompliance()
     {
-        $renderer = new Feed\RSS($this->_validWriter);
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         try {
             $renderer->render();
-        } catch (\Zend\Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
             $this->fail('Valid Writer object caused an exception when building which should never happen');
         }
     }
@@ -78,32 +76,34 @@ class RssTest extends \PHPUnit_Framework_TestCase
     public function testEntryEncodingHasBeenSet()
     {
         $this->_validWriter->setEncoding('iso-8859-1');
-        $renderer = new Feed\RSS($this->_validWriter);
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('iso-8859-1', $entry->getEncoding());
     }
 
     public function testEntryEncodingDefaultIsUsedIfEncodingNotSetByHand()
     {
-        $renderer = new Feed\RSS($this->_validWriter);
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('UTF-8', $entry->getEncoding());
     }
 
     public function testEntryTitleHasBeenSet()
     {
-        $renderer = new Feed\RSS($this->_validWriter);
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('This is a test entry.', $entry->getTitle());
     }
     
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
     public function testEntryTitleIfMissingThrowsExceptionIfDescriptionAlsoMissing()
     {
-        $this->setExpectedException('Zend\Feed\Exception');
-        $atomFeed = new Feed\RSS($this->_validWriter);
+        $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validEntry->remove('title');
         $this->_validEntry->remove('description');
         $atomFeed->render();
@@ -111,25 +111,27 @@ class RssTest extends \PHPUnit_Framework_TestCase
     
     public function testEntryTitleCharDataEncoding()
     {
-        $renderer = new Feed\RSS($this->_validWriter);
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validEntry->setTitle('<>&\'"áéíóú');
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('<>&\'"áéíóú', $entry->getTitle());
     }
 
     public function testEntrySummaryDescriptionHasBeenSet()
     {
-        $renderer = new Feed\RSS($this->_validWriter);
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('This is a test entry description.', $entry->getDescription());
     }
     
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
     public function testEntryDescriptionIfMissingThrowsExceptionIfAlsoNoTitle()
     {
-        $this->setExpectedException('Zend\Feed\Exception');
-        $atomFeed = new Feed\RSS($this->_validWriter);
+        $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validEntry->remove('description');
         $this->_validEntry->remove('title');
         $atomFeed->render();
@@ -137,9 +139,9 @@ class RssTest extends \PHPUnit_Framework_TestCase
     
     public function testEntryDescriptionCharDataEncoding()
     {
-        $renderer = new Feed\RSS($this->_validWriter);
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validEntry->setDescription('<>&\'"áéíóú');
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('<>&\'"áéíóú', $entry->getDescription());
     }
@@ -147,17 +149,17 @@ class RssTest extends \PHPUnit_Framework_TestCase
     public function testEntryContentHasBeenSet()
     {
         $this->_validEntry->setContent('This is test entry content.');
-        $renderer = new Feed\RSS($this->_validWriter);
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('This is test entry content.', $entry->getContent());
     }
     
     public function testEntryContentCharDataEncoding()
     {
-        $renderer = new Feed\RSS($this->_validWriter);
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validEntry->setContent('<>&\'"áéíóú');
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('<>&\'"áéíóú', $entry->getContent());
     }
@@ -165,25 +167,25 @@ class RssTest extends \PHPUnit_Framework_TestCase
     public function testEntryUpdatedDateHasBeenSet()
     {
         $this->_validEntry->setDateModified(1234567890);
-        $renderer = new Feed\RSS($this->_validWriter);
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
-        $this->assertEquals(1234567890, $entry->getDateModified()->get(Date\Date::TIMESTAMP));
+        $this->assertEquals(1234567890, $entry->getDateModified()->get(Zend_Date::TIMESTAMP));
     }
 
     public function testEntryPublishedDateHasBeenSet()
     {
         $this->_validEntry->setDateCreated(1234567000);
-        $renderer = new Feed\RSS($this->_validWriter);
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
-        $this->assertEquals(1234567000, $entry->getDateCreated()->get(Date\Date::TIMESTAMP));
+        $this->assertEquals(1234567000, $entry->getDateCreated()->get(Zend_Date::TIMESTAMP));
     }
 
     public function testEntryIncludesLinkToHtmlVersionOfFeed()
     {
-        $renderer= new Feed\RSS($this->_validWriter);
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $renderer= new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/1', $entry->getLink());
     }
@@ -191,8 +193,8 @@ class RssTest extends \PHPUnit_Framework_TestCase
     public function testEntryHoldsAnyAuthorAdded()
     {
         $this->_validEntry->addAuthor('Jane', 'jane@example.com', 'http://www.example.com/jane');
-        $renderer = new Feed\RSS($this->_validWriter);
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $author = $entry->getAuthor();
         $this->assertEquals(array('name'=>'Jane'), $entry->getAuthor());
@@ -201,8 +203,8 @@ class RssTest extends \PHPUnit_Framework_TestCase
     public function testEntryAuthorCharDataEncoding()
     {
         $this->_validEntry->addAuthor('<>&\'"áéíóú', 'jane@example.com', 'http://www.example.com/jane');
-        $renderer = new Feed\RSS($this->_validWriter);
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $author = $entry->getAuthor();
         $this->assertEquals(array('name'=>'<>&\'"áéíóú'), $entry->getAuthor());
@@ -210,13 +212,13 @@ class RssTest extends \PHPUnit_Framework_TestCase
     
     public function testEntryHoldsAnyEnclosureAdded()
     {
-        $renderer = new Feed\RSS($this->_validWriter);
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validEntry->setEnclosure(array(
             'type' => 'audio/mpeg',
             'length' => '1337',
             'uri' => 'http://example.com/audio.mp3'
         ));
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $enc = $entry->getEnclosure();
         $this->assertEquals('audio/mpeg', $enc->type);
@@ -224,11 +226,65 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://example.com/audio.mp3', $enc->url);
     }
 
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testAddsEnclosureThrowsExceptionOnMissingType()
+    {
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $this->_validEntry->setEnclosure(array(
+            'uri' => 'http://example.com/audio.mp3',
+            'length' => '1337'
+        ));
+        $renderer->render();
+    }
+
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testAddsEnclosureThrowsExceptionOnMissingLength()
+    {
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $this->_validEntry->setEnclosure(array(
+            'type' => 'audio/mpeg',
+            'uri' => 'http://example.com/audio.mp3'
+        ));
+        $renderer->render();
+    }
+    
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testAddsEnclosureThrowsExceptionOnNonNumericLength()
+    {
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $this->_validEntry->setEnclosure(array(
+            'type' => 'audio/mpeg',
+            'uri' => 'http://example.com/audio.mp3',
+            'length' => 'abc'
+        ));
+        $renderer->render();
+    }
+    
+    /**
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testAddsEnclosureThrowsExceptionOnNegativeLength()
+    {
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $this->_validEntry->setEnclosure(array(
+            'type' => 'audio/mpeg',
+            'uri' => 'http://example.com/audio.mp3',
+            'length' => -23
+        ));
+        $renderer->render();
+    }
+
     public function testEntryIdHasBeenSet()
     {
         $this->_validEntry->setId('urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6');
-        $renderer = new Feed\RSS($this->_validWriter);
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6', $entry->getId());
     }
@@ -240,38 +296,38 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     public function testEntryIdDefaultIsUsedIfNotSetByHand()
     {
-        $renderer = new Feed\RSS($this->_validWriter);
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals($entry->getLink(), $entry->getId());
     }
     
     public function testCommentLinkRendered()
     {
-        $renderer = new Feed\RSS($this->_validWriter);
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validEntry->setCommentLink('http://www.example.com/id/1');
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/id/1', $entry->getCommentLink());
     }
     
     public function testCommentCountRendered()
     {
-        $renderer = new Feed\RSS($this->_validWriter);
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validEntry->setCommentCount(22);
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals(22, $entry->getCommentCount());
     }
     
     public function testCommentFeedLinksRendered()
     {
-        $renderer = new Feed\RSS($this->_validWriter);
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validEntry->setCommentFeedLinks(array(
             array('uri'=>'http://www.example.com/atom/id/1','type'=>'atom'),
             array('uri'=>'http://www.example.com/rss/id/1','type'=>'rss'),
         ));
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         // Skipped assertion is because RSS has no facility to show Atom feeds without an extension
         $this->assertEquals('http://www.example.com/rss/id/1', $entry->getCommentFeedLink('rss'));
@@ -284,8 +340,8 @@ class RssTest extends \PHPUnit_Framework_TestCase
             array('term'=>'cat_dog', 'label' => 'Cats & Dogs', 'scheme' => 'http://example.com/schema1'),
             array('term'=>'cat_dog2')
         ));
-        $renderer = new Feed\RSS($this->_validWriter);
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $expected = array(
             array('term'=>'cat_dog', 'label' => 'cat_dog', 'scheme' => 'http://example.com/schema1'),
@@ -303,8 +359,8 @@ class RssTest extends \PHPUnit_Framework_TestCase
             array('term'=>'<>&\'"áéíóú', 'label' => 'Cats & Dogs', 'scheme' => 'http://example.com/schema1'),
             array('term'=>'cat_dog2')
         ));
-        $renderer = new Feed\RSS($this->_validWriter);
-        $feed = Reader\Reader::importString($renderer->render()->saveXml());
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $expected = array(
             array('term'=>'<>&\'"áéíóú', 'label' => '<>&\'"áéíóú', 'scheme' => 'http://example.com/schema1'),

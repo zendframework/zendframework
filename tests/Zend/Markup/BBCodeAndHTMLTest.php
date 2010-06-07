@@ -71,7 +71,7 @@ class BbcodeAndHtmlTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_markup = \Zend\Markup\Markup::factory('bbcode', 'html');
+        $this->_markup = \Zend\Markup\Markup::factory('BBCode', 'HTML');
     }
 
     /**

@@ -16,23 +16,25 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Entry.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace Zend\Feed\Reader\Extension\CreativeCommons;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Extension;
 
 /**
- * @uses       \Zend\Feed\Reader\Extension\CreativeCommons\Feed
- * @uses       \Zend\Feed\Reader\Extension\EntryAbstract
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Entry extends \Zend\Feed\Reader\Extension\EntryAbstract
+* @uses \Zend\Feed\Reader\Reader
+* @uses Reader\Reader_Entry_EntryAbstract
+* @category Zend
+* @package Reader\Reader
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Entry extends Extension\AbstractEntry
 {
     /**
      * Get the entry license

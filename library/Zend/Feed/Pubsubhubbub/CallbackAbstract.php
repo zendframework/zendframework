@@ -17,33 +17,35 @@
  * @subpackage Callback
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: CallbackAbstract.php 20785 2010-01-31 09:43:03Z mikaelkael $
  */
 
 /**
- * @namespace
+ * @see Zend_Feed_Pubsubhubbub_CallbackInterface
  */
-namespace Zend\Feed\PubSubHubbub;
+require_once 'Zend/Feed/Pubsubhubbub/CallbackInterface.php';
 
 /**
- * @uses       \Zend\Feed\PubSubHubbub\CallbackInterface
- * @uses       \Zend\Feed\PubSubHubbub\Exception
- * @uses       \Zend\Feed\PubSubHubbub\HttpResponse
+ * @see Zend_Feed_Pubsubhubbub_HttpResponse
+ */
+require_once 'Zend/Feed/Pubsubhubbub/HttpResponse.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @subpackage Callback
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class CallbackAbstract
-    implements CallbackInterface
+abstract class Zend_Feed_Pubsubhubbub_CallbackAbstract
+    implements Zend_Feed_Pubsubhubbub_CallbackInterface
 {
     /**
      * An instance of Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface used 
      * to background save any verification tokens associated with a subscription
      * or other.
      *
-     * @var \Zend\Feed\PubSubHubbub\Model\SubscriptionInterface
+     * @var Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface
      */
     protected $_storage = null;
 
@@ -52,7 +54,7 @@ abstract class CallbackAbstract
      * Zend_Feed_Pubsubhubbub_HttpResponse which shares an unenforced interface with
      * (i.e. not inherited from) Zend_Controller_Response_Http.
      *
-     * @var Zend_Feed_Pubsubhubbub_HttpResponse|\Zend\Controller\Response\Http
+     * @var Zend_Feed_Pubsubhubbub_HttpResponse|Zend_Controller_Response_Http
      */
     protected $_httpResponse = null;
 
@@ -68,7 +70,7 @@ abstract class CallbackAbstract
      * options for the Subscriber without calling all supported setter
      * methods in turn.
      *
-     * @param array|\Zend\Config\Config $options Options array or \Zend\Config\Config instance
+     * @param array|Zend_Config $options Options array or Zend_Config instance
      */
     public function __construct($config = null)
     {
@@ -80,15 +82,16 @@ abstract class CallbackAbstract
     /**
      * Process any injected configuration options
      *
-     * @param  array|\Zend\Config\Config $options Options array or \Zend\Config\Config instance
-     * @return \Zend\Feed\PubSubHubbub\CallbackAbstract
+     * @param  array|Zend_Config $options Options array or Zend_Config instance
+     * @return Zend_Feed_Pubsubhubbub_CallbackAbstract
      */
     public function setConfig($config)
     {
-        if ($config instanceof \Zend\Config\Config) {
+        if ($config instanceof Zend_Config) {
             $config = $config->toArray();
         } elseif (!is_array($config)) {
-            throw new Exception('Array or Zend_Config object'
+            require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
+            throw new Zend_Feed_Pubsubhubbub_Exception('Array or Zend_Config object'
             . 'expected, got ' . gettype($config));
         }
         if (array_key_exists('storage', $config)) {
@@ -115,10 +118,10 @@ abstract class CallbackAbstract
      * to background save any verification tokens associated with a subscription
      * or other.
      *
-     * @param  \Zend\Feed\PubSubHubbub\Model\SubscriptionInterface $storage
-     * @return \Zend\Feed\PubSubHubbub\CallbackAbstract
+     * @param  Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface $storage
+     * @return Zend_Feed_Pubsubhubbub_CallbackAbstract
      */
-    public function setStorage(Model\SubscriptionInterface $storage)
+    public function setStorage(Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface $storage)
     {
         $this->_storage = $storage;
         return $this;
@@ -129,12 +132,13 @@ abstract class CallbackAbstract
      * to background save any verification tokens associated with a subscription
      * or other.
      *
-     * @return \Zend\Feed\PubSubHubbub\Model\SubscriptionInterface
+     * @return Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface
      */
     public function getStorage()
     {
         if ($this->_storage === null) {
-            throw new Exception('No storage object has been'
+            require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
+            throw new Zend_Feed_Pubsubhubbub_Exception('No storage object has been'
                 . ' set that subclasses Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface');
         }
         return $this->_storage;
@@ -145,16 +149,17 @@ abstract class CallbackAbstract
      * Zend_Feed_Pubsubhubbub_HttpResponse which shares an unenforced interface with
      * (i.e. not inherited from) Zend_Controller_Response_Http.
      *
-     * @param  Zend_Feed_Pubsubhubbub_HttpResponse|\Zend\Controller\Response\Http $httpResponse
-     * @return \Zend\Feed\PubSubHubbub\CallbackAbstract
+     * @param  Zend_Feed_Pubsubhubbub_HttpResponse|Zend_Controller_Response_Http $httpResponse
+     * @return Zend_Feed_Pubsubhubbub_CallbackAbstract
      */
     public function setHttpResponse($httpResponse)
     {
         if (!is_object($httpResponse)
-            || (!$httpResponse instanceof HttpResponse
-                && !$httpResponse instanceof \Zend\Controller\Response\Http)
+            || (!$httpResponse instanceof Zend_Feed_Pubsubhubbub_HttpResponse
+                && !$httpResponse instanceof Zend_Controller_Response_Http)
         ) {
-            throw new Exception('HTTP Response object must'
+            require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
+            throw new Zend_Feed_Pubsubhubbub_Exception('HTTP Response object must'
                 . ' implement one of Zend_Feed_Pubsubhubbub_HttpResponse or'
                 . ' Zend_Controller_Response_Http');
         }
@@ -167,12 +172,12 @@ abstract class CallbackAbstract
      * Zend_Feed_Pubsubhubbub_HttpResponse which shares an unenforced interface with
      * (i.e. not inherited from) Zend_Controller_Response_Http.
      *
-     * @return Zend_Feed_Pubsubhubbub_HttpResponse|\Zend\Controller\Response\Http
+     * @return Zend_Feed_Pubsubhubbub_HttpResponse|Zend_Controller_Response_Http
      */
     public function getHttpResponse()
     {
         if ($this->_httpResponse === null) {
-            $this->_httpResponse = new HttpResponse;
+            $this->_httpResponse = new Zend_Feed_Pubsubhubbub_HttpResponse;
         }
         return $this->_httpResponse;
     }
@@ -183,13 +188,14 @@ abstract class CallbackAbstract
      * Defaults to 1 if left unchanged.
      *
      * @param  string|int $count
-     * @return \Zend\Feed\PubSubHubbub\CallbackAbstract
+     * @return Zend_Feed_Pubsubhubbub_CallbackAbstract
      */
     public function setSubscriberCount($count)
     {
         $count = intval($count);
         if ($count <= 0) {
-            throw new Exception('Subscriber count must be'
+            require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
+            throw new Zend_Feed_Pubsubhubbub_Exception('Subscriber count must be'
                 . ' greater than zero');
         }
         $this->_subscriberCount = $count;

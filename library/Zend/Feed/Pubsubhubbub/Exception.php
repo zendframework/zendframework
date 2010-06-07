@@ -16,20 +16,19 @@
  * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Exception.php 20785 2010-01-31 09:43:03Z mikaelkael $
  */
 
 /**
- * @namespace
+ * @see Zend_Exception
  */
-namespace Zend\Feed\PubSubHubbub;
+require_once 'Zend/Exception.php';
 
 /**
- * @uses       \Zend\Exception
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Exception
+class Zend_Feed_Pubsubhubbub_Exception extends Zend_Exception
 {}

@@ -16,35 +16,37 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: AtomAbstract.php 22099 2010-05-04 18:51:58Z padraic $
  */
 
-/**
- * @namespace
- */
-namespace Zend\Feed\Writer\Renderer\Feed\Atom;
-use Zend\Feed;
+/** @see Zend_Feed_Writer_Feed */
+require_once 'Zend/Feed/Writer/Feed.php';
+
+/** @see Zend_Version */
+require_once 'Zend/Version.php';
+
+/** @see Zend_Feed_Writer_Renderer_RendererInterface */
+require_once 'Zend/Feed/Writer/Renderer/RendererInterface.php';
+
+/** @see Zend_Feed_Writer_Renderer_Entry_Atom */
+require_once 'Zend/Feed/Writer/Renderer/Entry/Atom.php';
+
+/** @see Zend_Feed_Writer_Renderer_RendererAbstract */
+require_once 'Zend/Feed/Writer/Renderer/RendererAbstract.php';
 
 /**
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Writer\Feed\Feed
- * @uses       \Zend\Feed\Writer\Renderer\Entry\Atom\Atom
- * @uses       \Zend\Feed\Writer\Renderer\RendererAbstract
- * @uses       \Zend\Feed\Writer\Renderer\RendererInterface
- * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AtomAbstract
-    extends Feed\Writer\Renderer\RendererAbstract
+class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
+    extends Zend_Feed_Writer_Renderer_RendererAbstract
 {
     /**
      * Constructor
      * 
-     * @param  \Zend\Feed\Writer\Feed\Feed $container 
+     * @param  Zend_Feed_Writer_Feed $container 
      * @return void
      */
     public function __construct ($container)
@@ -59,7 +61,7 @@ class AtomAbstract
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setLanguage(\DOMDocument $dom, \DOMElement $root)
+    protected function _setLanguage(DOMDocument $dom, DOMElement $root)
     {
         if ($this->getDataContainer()->getLanguage()) {
             $root->setAttribute('xml:lang', $this->getDataContainer()
@@ -74,12 +76,13 @@ class AtomAbstract
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setTitle(\DOMDocument $dom, \DOMElement $root)
+    protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getTitle()) {
+            require_once 'Zend/Feed/Exception.php';
             $message = 'Atom 1.0 feed elements MUST contain exactly one'
-                . ' atom:title element but a title has not been set';
-            $exception = new Feed\Exception($message);
+            . ' atom:title element but a title has not been set';
+            $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -102,7 +105,7 @@ class AtomAbstract
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setDescription(\DOMDocument $dom, \DOMElement $root)
+    protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getDescription()) {
             return;
@@ -121,12 +124,13 @@ class AtomAbstract
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setDateModified(\DOMDocument $dom, \DOMElement $root)
+    protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getDateModified()) {
+            require_once 'Zend/Feed/Exception.php';
             $message = 'Atom 1.0 feed elements MUST contain exactly one'
-                . ' atom:updated element but a modification date has not been set';
-            $exception = new Feed\Exception($message);
+            . ' atom:updated element but a modification date has not been set';
+            $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -138,7 +142,7 @@ class AtomAbstract
         $updated = $dom->createElement('updated');
         $root->appendChild($updated);
         $text = $dom->createTextNode(
-            $this->getDataContainer()->getDateModified()->get(\Zend\Date\Date::ISO_8601)
+            $this->getDataContainer()->getDateModified()->get(Zend_Date::ISO_8601)
         );
         $updated->appendChild($text);
     }
@@ -150,11 +154,11 @@ class AtomAbstract
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setGenerator(\DOMDocument $dom, \DOMElement $root)
+    protected function _setGenerator(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getGenerator()) {
             $this->getDataContainer()->setGenerator('Zend_Feed_Writer',
-                \Zend\Version::VERSION, 'http://framework.zend.com');
+                Zend_Version::VERSION, 'http://framework.zend.com');
         }
 
         $gdata = $this->getDataContainer()->getGenerator();
@@ -177,7 +181,7 @@ class AtomAbstract
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setLink(\DOMDocument $dom, \DOMElement $root)
+    protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getLink()) {
             return;
@@ -196,15 +200,16 @@ class AtomAbstract
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setFeedLinks(\DOMDocument $dom, \DOMElement $root)
+    protected function _setFeedLinks(DOMDocument $dom, DOMElement $root)
     {
         $flinks = $this->getDataContainer()->getFeedLinks();
         if(!$flinks || !array_key_exists('atom', $flinks)) {
+            require_once 'Zend/Feed/Exception.php';
             $message = 'Atom 1.0 feed elements SHOULD contain one atom:link '
-                . 'element with a rel attribute value of "self".  This is the '
-                . 'preferred URI for retrieving Atom Feed Documents representing '
-                . 'this Atom feed but a feed link has not been set';
-            $exception = new Feed\Exception($message);
+            . 'element with a rel attribute value of "self".  This is the '
+            . 'preferred URI for retrieving Atom Feed Documents representing '
+            . 'this Atom feed but a feed link has not been set';
+            $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -230,7 +235,7 @@ class AtomAbstract
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setAuthors(\DOMDocument $dom, \DOMElement $root)
+    protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
         $authors = $this->_container->getAuthors();
         if (!$authors || empty($authors)) {
@@ -270,15 +275,16 @@ class AtomAbstract
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setId(\DOMDocument $dom, \DOMElement $root)
+    protected function _setId(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getId()
         && !$this->getDataContainer()->getLink()) {
+            require_once 'Zend/Feed/Exception.php';
             $message = 'Atom 1.0 feed elements MUST contain exactly one '
-                . 'atom:id element, or as an alternative, we can use the same '
-                . 'value as atom:link however neither a suitable link nor an '
-                . 'id have been set';
-            $exception = new Feed\Exception($message);
+            . 'atom:id element, or as an alternative, we can use the same '
+            . 'value as atom:link however neither a suitable link nor an '
+            . 'id have been set';
+            $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -304,7 +310,7 @@ class AtomAbstract
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setCopyright(\DOMDocument $dom, \DOMElement $root)
+    protected function _setCopyright(DOMDocument $dom, DOMElement $root)
     {
         $copyright = $this->getDataContainer()->getCopyright();
         if (!$copyright) {
@@ -315,6 +321,25 @@ class AtomAbstract
         $text = $dom->createTextNode($copyright);
         $copy->appendChild($text);
     }
+
+    /**
+     * Set feed level logo (image)
+     * 
+     * @param DOMDocument $dom 
+     * @param DOMElement $root 
+     * @return void
+     */
+    protected function _setImage(DOMDocument $dom, DOMElement $root)
+    {
+        $image = $this->getDataContainer()->getImage();
+        if (!$image) {
+            return;
+        }
+        $img = $dom->createElement('logo');
+        $root->appendChild($img);
+        $text = $dom->createTextNode($image['uri']);
+        $img->appendChild($text);
+    }
     
     /**
      * Set date feed was created 
@@ -323,7 +348,7 @@ class AtomAbstract
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setDateCreated(\DOMDocument $dom, \DOMElement $root)
+    protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getDateCreated()) {
             return;
@@ -342,7 +367,7 @@ class AtomAbstract
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setBaseUrl(\DOMDocument $dom, \DOMElement $root)
+    protected function _setBaseUrl(DOMDocument $dom, DOMElement $root)
     {
         $baseUrl = $this->getDataContainer()->getBaseUrl();
         if (!$baseUrl) {
@@ -358,7 +383,7 @@ class AtomAbstract
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setHubs(\DOMDocument $dom, \DOMElement $root)
+    protected function _setHubs(DOMDocument $dom, DOMElement $root)
     {
         $hubs = $this->getDataContainer()->getHubs();
         if (!$hubs) {
@@ -379,7 +404,7 @@ class AtomAbstract
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setCategories(\DOMDocument $dom, \DOMElement $root)
+    protected function _setCategories(DOMDocument $dom, DOMElement $root)
     {
         $categories = $this->getDataContainer()->getCategories();
         if (!$categories) {

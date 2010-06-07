@@ -16,16 +16,12 @@
  * @package    UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: CallbackTest.php 20723 2010-01-28 19:21:33Z padraic $
  */
 
-/**
- * @namespace
- */
-namespace ZendTest\Feed\Pubsubhubbub\Subscriber;
-use Zend\Feed\PubSubHubbub\Model;
-use Zend\Feed\PubSubHubbub;
-use Zend\Date;
+require_once 'Zend/Feed/Pubsubhubbub/Subscriber/Callback.php';
+require_once 'Zend/Feed/Pubsubhubbub/Model/Subscription.php';
+require_once 'Zend/Db/Table/Rowset/Abstract.php';
 
 /**
  * @category   Zend
@@ -36,28 +32,28 @@ use Zend\Date;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class CallbackTest extends \PHPUnit_Framework_TestCase
+class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends PHPUnit_Framework_TestCase
 {
 
     protected $_originalServer = null;
 
     public function setUp()
     {
-        $this->_callback = new \Zend\Feed\PubSubHubbub\Subscriber\Callback;
+        $this->_callback = new Zend_Feed_Pubsubhubbub_Subscriber_Callback;
         
         $this->_adapter = $this->_getCleanMock(
-            '\Zend\DB\Adapter\AbstractAdapter'
+            'Zend_Db_Adapter_Abstract'
         );
         $this->_tableGateway = $this->_getCleanMock(
-            '\Zend\DB\Table\AbstractTable'
+            'Zend_Db_Table_Abstract'
         );
         $this->_rowset = $this->_getCleanMock(
-            '\Zend\DB\Table\Rowset\AbstractRowset'
+            'Zend_Db_Table_Rowset_Abstract'
         );
         
         $this->_tableGateway->expects($this->any())->method('getAdapter')
             ->will($this->returnValue($this->_adapter));
-        $storage = new Model\Subscription($this->_tableGateway);
+        $storage = new Zend_Feed_Pubsubhubbub_Model_Subscription($this->_tableGateway);
         $this->_callback->setStorage($storage);
 
         $this->_get = array(
@@ -82,21 +78,21 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetHttpResponseObject()
     {
-        $this->_callback->setHttpResponse(new PubSubHubbub\HttpResponse);
-        $this->assertTrue($this->_callback->getHttpResponse() instanceof PubSubHubbub\HttpResponse);
+        $this->_callback->setHttpResponse(new Zend_Feed_Pubsubhubbub_HttpResponse);
+        $this->assertTrue($this->_callback->getHttpResponse() instanceof Zend_Feed_Pubsubhubbub_HttpResponse);
     }
 
     public function testCanUsesDefaultHttpResponseObject()
     {
-        $this->assertTrue($this->_callback->getHttpResponse() instanceof PubSubHubbub\HttpResponse);
+        $this->assertTrue($this->_callback->getHttpResponse() instanceof Zend_Feed_Pubsubhubbub_HttpResponse);
     }
 
     public function testThrowsExceptionOnInvalidHttpResponseObjectSet()
     {
         try {
-            $this->_callback->setHttpResponse(new \stdClass);
+            $this->_callback->setHttpResponse(new stdClass);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
     }
 
     public function testThrowsExceptionIfNonObjectSetAsHttpResponseObject()
@@ -104,7 +100,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_callback->setHttpResponse('');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
     }
 
     public function testCanSetSubscriberCount()
@@ -123,7 +119,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_callback->setSubscriberCount(0);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
     }
 
     public function testThrowsExceptionOnSettingLessThanZeroAsSubscriberCount()
@@ -131,7 +127,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_callback->setSubscriberCount(-1);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
     }
 
     public function testThrowsExceptionOnSettingAnyScalarTypeCastToAZeroOrLessIntegerAsSubscriberCount()
@@ -139,13 +135,13 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_callback->setSubscriberCount('0aa');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (Zend_Feed_Pubsubhubbub_Exception $e) {}
     }
 
 
     public function testCanSetStorageImplementation()
     {
-	    $storage = new Model\Subscription($this->_tableGateway);
+	    $storage = new Zend_Feed_Pubsubhubbub_Model_Subscription($this->_tableGateway);
         $this->_callback->setStorage($storage);
         $this->assertThat($this->_callback->getStorage(), $this->identicalTo($storage));
     }
@@ -253,11 +249,11 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->method('find')
             ->with($this->equalTo('verifytokenkey'))
             ->will($this->returnValue($this->_rowset));
-        $rowdata = new \stdClass;
+        $rowdata = new stdClass;
         $rowdata->id = 'verifytokenkey';
         $rowdata->verify_token = hash('sha256', 'cba');
-        $t = new Date\Date;
-        $rowdata->created_time = $t->get(Date\Date::TIMESTAMP);
+        $t = new Zend_Date;
+        $rowdata->created_time = $t->get(Zend_Date::TIMESTAMP);
         $rowdata->lease_seconds = 10000;
         $this->_rowset->expects($this->any())
             ->method('current')
@@ -266,7 +262,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->_tableGateway->expects($this->once())
             ->method('update')
             ->with(
-                $this->equalTo(array('id'=>'verifytokenkey','verify_token'=>hash('sha256', 'cba'),'created_time'=>$t->get(Date\Date::TIMESTAMP),'lease_seconds'=>1234567,'subscription_state'=>'verified','expiration_time'=>$t->add(1234567,Date\Date::SECOND)->get('yyyy-MM-dd HH:mm:ss'))),
+                $this->equalTo(array('id'=>'verifytokenkey','verify_token'=>hash('sha256', 'cba'),'created_time'=>$t->get(Zend_Date::TIMESTAMP),'lease_seconds'=>1234567,'subscription_state'=>'verified','expiration_time'=>$t->add(1234567,Zend_Date::SECOND)->get('yyyy-MM-dd HH:mm:ss'))),
                 $this->equalTo('id = \'verifytokenkey\'')
             );
         $this->_adapter->expects($this->once())
@@ -284,11 +280,11 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->method('find')
             ->with($this->equalTo('verifytokenkey'))
             ->will($this->returnValue($this->_rowset));
-        $rowdata = new \stdClass;
+        $rowdata = new stdClass;
         $rowdata->id = 'verifytokenkey';
         $rowdata->verify_token = hash('sha256', 'cba');
-        $t = new Date\Date;
-        $rowdata->created_time = $t->get(Date\Date::TIMESTAMP);
+        $t = new Zend_Date;
+        $rowdata->created_time = $t->get(Zend_Date::TIMESTAMP);
         $rowdata->lease_seconds = 10000;
         $this->_rowset->expects($this->any())
             ->method('current')
@@ -297,7 +293,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->_tableGateway->expects($this->once())
             ->method('update')
             ->with(
-                $this->equalTo(array('id'=>'verifytokenkey','verify_token'=>hash('sha256', 'cba'),'created_time'=>$t->get(Date\Date::TIMESTAMP),'lease_seconds'=>1234567,'subscription_state'=>'verified','expiration_time'=>$t->add(1234567,Date\Date::SECOND)->get('yyyy-MM-dd HH:mm:ss'))),
+                $this->equalTo(array('id'=>'verifytokenkey','verify_token'=>hash('sha256', 'cba'),'created_time'=>$t->get(Zend_Date::TIMESTAMP),'lease_seconds'=>1234567,'subscription_state'=>'verified','expiration_time'=>$t->add(1234567,Zend_Date::SECOND)->get('yyyy-MM-dd HH:mm:ss'))),
                 $this->equalTo('id = \'verifytokenkey\'')
             );
         $this->_adapter->expects($this->once())
@@ -320,7 +316,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->method('find')
             ->with($this->equalTo('verifytokenkey'))
             ->will($this->returnValue($this->_rowset));
-        $rowdata = new \stdClass;
+        $rowdata = new stdClass;
         $rowdata->id = 'verifytokenkey';
         $rowdata->verify_token = hash('sha256', 'cba');
         $t = time();
@@ -374,7 +370,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->method('find')
             ->with($this->equalTo('verifytokenkey'))
             ->will($this->returnValue($this->_rowset));
-        $rowdata = new \stdClass;
+        $rowdata = new stdClass;
         $rowdata->id = 'verifytokenkey';
         $rowdata->verify_token = hash('sha256', 'cba');
         $t = time();
@@ -399,7 +395,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->method('find')
             ->with($this->equalTo('verifytokenkey'))
             ->will($this->returnValue($this->_rowset));
-        $rowdata = new \stdClass;
+        $rowdata = new stdClass;
         $rowdata->id = 'verifytokenkey';
         $rowdata->verify_token = hash('sha256', 'cba');
         $t = time();
@@ -413,7 +409,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     }
     
     protected function _getCleanMock($className) {
-        $class = new \ReflectionClass($className);
+        $class = new ReflectionClass($className);
         $methods = $class->getMethods();
         $stubMethods = array();
         foreach ($methods as $method) {
@@ -426,7 +422,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             $className,
             $stubMethods,
             array(),
-            str_replace('\\', '_', ($className . '_PubsubSubscriberMock_' . uniqid())),
+            $className . '_PubsubSubscriberMock_' . uniqid(),
             false
         );
         return $mocked;

@@ -17,7 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: RssTest.php 22086 2010-05-04 11:25:54Z padraic $
  */
 
 /**
@@ -28,13 +28,13 @@ use Zend\Feed\Reader;
 use Zend\Date;
 
 /**
- * @category   Zend
- * @package    Zend_Feed
+ * @category Zend
+ * @package Zend_Feed
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Feed
- * @group      Zend_Feed_Reader
+ * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license http://framework.zend.com/license/new-bsd New BSD License
+ * @group Zend_Feed
+ * @group Zend_Feed_Reader
  */
 class RssTest extends \PHPUnit_Framework_TestCase
 {
@@ -1898,6 +1898,24 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $edate = new Date\Date;
         $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
         $this->assertTrue($edate->equals($entry->getDateModified()));
+    }
+
+    /**
+     * @group ZF-8702
+     */
+    public function testParsesCorrectDateIfMissingOffsetWhenSystemUsesUSLocale()
+    {
+        $locale = new \Zend\Locale\Locale('en_US');
+        \Zend\Registry::set('Zend_Locale', $locale);
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/datemodified/plain/rss20_en_US.xml')
+        );
+        $entry = $feed->current();
+        $fdate = $entry->getDateModified();
+        $edate = new Date\Date;
+        $edate->set('2010-01-04T08:14:00-0600', Date\Date::ISO_8601);
+        \Zend\Registry::getInstance()->offsetUnset('Zend_Locale');
+        $this->assertTrue($edate->equals($fdate));
     }
 
     // DC 1.0

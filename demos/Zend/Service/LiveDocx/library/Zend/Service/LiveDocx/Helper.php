@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,8 +20,11 @@
  * @version    $Id$
  */
 
-/** Zend_Date **/
-require_once 'Zend/Date.php';
+/**
+ * @namespace
+ */
+namespace Zend\Service\LiveDocx;
+use Zend\Date\Date;
 
 /**
  * @category   Demos
@@ -31,12 +33,17 @@ require_once 'Zend/Date.php';
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Demos_Zend_Service_LiveDocx_Helper
+class Helper
 {
     /**
      * Name of configuration file stored in /demos/Zend/Service/LiveDocx/
      */
-    const CONFIGURATION_FILE = 'configuration.php';
+    const CONFIGURATION_FILE = 'DemoConfiguration.php';
+
+    /**
+     * LiveDocx registration URL
+     */
+    const REGISTRATION_URL = 'https://www.livedocx.com/user/account_registration.aspx';
         
     /**
      * Line length in characters (used to wrap long lines)
@@ -48,6 +55,27 @@ class Demos_Zend_Service_LiveDocx_Helper
      */
     const LOCALE = 'en_US';
     
+
+    /**
+     * Return filename of configuration file (path + file)
+     * @return string
+     */
+    public static function configurationFilename()
+    {
+        return dirname(dirname(dirname(dirname(__DIR__))))
+                . DIRECTORY_SEPARATOR
+                . self::CONFIGURATION_FILE;
+    }
+
+    /**
+     * Return 'register LiveDocx account' URL
+     * @return string
+     */
+    public static function registrationUrl()
+    {
+        return self::REGISTRATION_URL;
+    }
+
     /**
      * Return true, if configuration file exists and constants
      * DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME and
@@ -58,8 +86,8 @@ class Demos_Zend_Service_LiveDocx_Helper
     public static function credentialsAvailable()
     {
         $ret = false;
-        
-        $filename = dirname(__FILE__) . DIRECTORY_SEPARATOR . self::CONFIGURATION_FILE;
+
+        $filename = self::configurationFilename();
         if (is_file($filename) && is_readable($filename)) {
             include_once $filename;
             if (defined('DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME') &&
@@ -81,27 +109,29 @@ class Demos_Zend_Service_LiveDocx_Helper
      */
     public static function credentialsHowTo()
     {
-        $ret  = PHP_EOL;
-        $ret .= sprintf('ERROR: LIVEDOCX USERNAME AND PASSWORD HAVE NOT BEEN SET.%s', PHP_EOL);
-        $ret .= PHP_EOL;
+        $dir  =  dirname(self::configurationFilename());
+        $file = basename(self::configurationFilename());
+        $url  = self::registrationUrl();
+
+        $ret  =                                                                               PHP_EOL;
+        $ret .= sprintf('ERROR: LIVEDOCX USERNAME AND PASSWORD HAVE NOT BEEN SET.%s',         PHP_EOL);
+        $ret .=                                                                               PHP_EOL;
         $ret .= sprintf('1. Using a web browser, register to use the LiveDocx service at:%s', PHP_EOL);
-        $ret .= sprintf('   https://www.livedocx.com/user/account_registration.aspx%s', PHP_EOL);
-        $ret .= sprintf('   (takes less than 1 minute).%s', PHP_EOL);
-        $ret .= PHP_EOL;
-        $ret .= sprintf('2. Change directory into:%s', PHP_EOL);
-        $ret .= sprintf('   %s%s', dirname(__FILE__), PHP_EOL);
-        $ret .= PHP_EOL;
-        $ret .= sprintf('3. Copy %s.dist to %s.%s', self::CONFIGURATION_FILE, self::CONFIGURATION_FILE, PHP_EOL);
-        $ret .= PHP_EOL;
-        $ret .= sprintf('4. Open %s in a text editor and enter the username and password%s', self::CONFIGURATION_FILE, PHP_EOL);
-        $ret .= sprintf('   you obtained in step 1 (lines 43 and 44).%s', PHP_EOL);
-        $ret .= PHP_EOL;
-        $ret .= sprintf('5. Save and close configuration.php.%s', PHP_EOL);
-        $ret .= PHP_EOL;
-        $ret .= sprintf('Congratulations!%s', PHP_EOL);
-        $ret .= PHP_EOL;
-        $ret .= sprintf('You have now set up the Zend_Service_LiveDocx demo applications.%s', PHP_EOL);
-        $ret .= PHP_EOL;
+        $ret .= sprintf('   %s%s',                                                            $url, PHP_EOL);
+        $ret .= sprintf('   (takes less than 1 minute).%s',                                   PHP_EOL);
+        $ret .=                                                                               PHP_EOL;
+        $ret .= sprintf('2. Change directory into:%s',                                        PHP_EOL);
+        $ret .= sprintf('   %s%s',                                                            $dir, PHP_EOL);
+        $ret .=                                                                               PHP_EOL;
+        $ret .= sprintf('3. Copy %s.dist to %s.%s',                                           $file, $file, PHP_EOL);
+        $ret .=                                                                               PHP_EOL;
+        $ret .= sprintf('4. Open %s in a text editor and enter the username%s',               $file, PHP_EOL);
+        $ret .= sprintf('   and password you obtained in step 1 (lines 43 and 44).%s',        PHP_EOL);
+        $ret .=                                                                               PHP_EOL;
+        $ret .= sprintf('5. Save and close %s.%s',                                            $file, PHP_EOL);
+        $ret .=                                                                               PHP_EOL;
+        $ret .= sprintf('6. Rerun this demonstration application.%s',                         PHP_EOL);
+        $ret .=                                                                               PHP_EOL;
         
         return $ret;
     }
@@ -116,14 +146,14 @@ class Demos_Zend_Service_LiveDocx_Helper
     {
         $ret = '';
         
-        $date = new Zend_Date();
+        $date = new Date();
         
         if (count($result) > 0) {
             foreach ($result as $record) {
                 $date->set($record['createTime']);
-                $createTimeFormatted = $date->get(Zend_Date::RFC_1123);
+                $createTimeFormatted = $date->get(Date::RFC_1123);
                 $date->set($record['modifyTime']);
-                $modifyTimeFormatted = $date->get(Zend_Date::RFC_1123);
+                $modifyTimeFormatted = $date->get(Date::RFC_1123);
                 $ret .= sprintf('         Filename  : %s%s', $record['filename'], PHP_EOL);
                 $ret .= sprintf('         File Size : %d b%s', $record['fileSize'], PHP_EOL);
                 $ret .= sprintf('     Creation Time : %d (%s)%s', $record['createTime'], $createTimeFormatted, PHP_EOL);
@@ -163,15 +193,35 @@ class Demos_Zend_Service_LiveDocx_Helper
         }
         return $ret;
     }
-    
+
     /**
-     * Wrap the length of long lines
-     * 
+     * Print line, wrapped at self::LINE_LENGTH th character
+     *
      * @param string $str
      * @return string
      */
-    public static function wrapLine($str)
+    public static function printLine($str)
     {
-        return wordwrap($str, self::LINE_LENGTH);
+        print wordwrap($str, self::LINE_LENGTH);
+    }
+
+    /**
+     * Print result line in check-environment.php script
+     *
+     * @param $counter
+     * @param $testString
+     * @param $testResult
+     */
+    public static function printCheckEnvironmentLine($counter, $testString, $testResult)
+    {
+        $lineLength = self::LINE_LENGTH;
+
+        //                        counter     result
+        $padding = $lineLength - (4 + strlen(TEST_PASS));
+
+        $counter    = sprintf('%2s: ', $counter);
+        $testString = str_pad($testString, $padding, '.', STR_PAD_RIGHT);
+
+        printf('%s%s%s%s', $counter, $testString, $testResult, PHP_EOL);
     }
 }

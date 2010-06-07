@@ -48,7 +48,7 @@ class Atom extends AbstractFeed
     {
         parent::__construct($dom, $type);
         $atomClass = Reader\Reader::getPluginLoader()->getClassName('Atom\\Feed');
-        $this->_extensions['Atom_Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
+        $this->_extensions['Atom\\Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
         $atomClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\\Feed');
         $this->_extensions['DublinCore\\Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
         foreach ($this->_extensions as $extension) {

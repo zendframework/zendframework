@@ -24,6 +24,7 @@
 */
 namespace Zend\Feed\Reader\Feed;
 use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
 use Zend\Date;
 
 /**
@@ -659,7 +660,7 @@ class Rss extends AbstractFeed
         }
 
         if ($list->length) {
-            $categoryCollection = new Reader_Collection_Category;
+            $categoryCollection = new Collection\Category;
             foreach ($list as $category) {
                 $categoryCollection[] = array(
                     'term' => $category->nodeValue,

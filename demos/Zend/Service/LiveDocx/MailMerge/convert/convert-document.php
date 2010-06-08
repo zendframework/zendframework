@@ -1,12 +1,12 @@
 <?php
 
-require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
+require_once dirname(__FILE__) . '/../../common.php';
 
 
 /**
  * Converting documents between supported formats
  * 
- * The primary goal of the Zend Framework LiveDocx component is to populate templates
+ * The primary goal of Zend_Service_LiveDocx_MailMerge is to populate templates
  * with textual data to generate word processing documents. It can, however,
  * also be used to convert word processing documents between supported formats.
  * 
@@ -18,9 +18,7 @@ require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
  * made available.
  */
 
-use Zend\Service\LiveDocx\MailMerge;
-
-$mailMerge = new MailMerge();
+$mailMerge = new Zend_Service_LiveDocx_MailMerge();
 
 $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
           ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);

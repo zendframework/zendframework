@@ -189,9 +189,6 @@ Zend_Service_Abstract
  * Added new set/getDefaultHTTPClient() static methods for setting global
    clients; can accept either a class name or instance. getHttpClient() will
    proxy to getDefaultHTTPClient() when no client is present.
- * Renamed Zend_Service_LiveDocx to Zend\Service\AbstractLiveDocx
- * Renamed Zend_Service_LiveDocx_MailMerge to Zend\Service\LiveDocx\MailMerge
- * Renamed Zend_Service_LiveDocx_Exception to Zend\Service\LiveDocx\Exception
 
 Zend_Search_Lucene
  * "Zend_Search_Lucene" prefix now becomes "Zend\Search\Lucene" namespace

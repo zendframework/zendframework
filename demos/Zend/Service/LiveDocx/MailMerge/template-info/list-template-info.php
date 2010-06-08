@@ -1,20 +1,19 @@
 <?php
 
-require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
+require_once dirname(__FILE__) . '/../../common.php';
 
 
-use Zend\Service\LiveDocx\Helper;
-use Zend\Service\LiveDocx\MailMerge;
+system('clear');
 
-Helper::printLine(
+print(Demos_Zend_Service_LiveDocx_Helper::wrapLine(
     PHP_EOL . 'Field and Block Field Names (merge fields)' .
     PHP_EOL . 
     PHP_EOL . 'The following templates contain the listed field or block field names:' .
     PHP_EOL .
-    PHP_EOL
+    PHP_EOL)
 );
 
-$mailMerge = new MailMerge();
+$mailMerge = new Zend_Service_LiveDocx_MailMerge();
 
 $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
           ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);

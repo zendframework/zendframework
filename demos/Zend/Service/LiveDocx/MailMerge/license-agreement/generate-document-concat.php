@@ -2,8 +2,7 @@
 
 set_time_limit(0);
 
-require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
-
+require_once dirname(__FILE__) . '/../../common.php';
 
 /**
  * Concatenating PDF files locally - advanced
@@ -31,13 +30,6 @@ require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
  *       Windows, or if your Linux distribution installs the tools at a different
  *       location. The specified paths are correct for Debian 5.0.3.
  */
-
-use Zend\Date\Date;
-use Zend\Log\Logger;
-use Zend\Log\Writer\Stream as Writer;
-use Zend\Registry;
-use Zend\Service\LiveDocx\Helper;
-use Zend\Service\LiveDocx\MailMerge;
 
 define('EXEC_PDFTK',       '/usr/bin/pdftk');
 define('EXEC_GHOSTSCRIPT', '/usr/bin/gs');
@@ -73,21 +65,21 @@ $iterations = 3;
 
 // Logger to output status messages
 
-$logger = new Logger(new Writer('php://stdout'));
+$logger = new Zend_Log(new Zend_Log_Writer_Stream('php://output'));
 
-Registry::set('logger', $logger);
+Zend_Registry::set('logger', $logger);
 
 // -----------------------------------------------------------------------------
 
 // Create temporary directory
 
-$tempDirectory = sys_get_temp_dir() . DIRECTORY_SEPARATOR . md5(rand(1, 10000) . __FILE__);
+$tempDirectory = sys_get_temp_dir() . '/' . md5(rand(1, 10000) . __FILE__);
 
 if (is_dir($tempDirectory)) {
     recursiveRemoveDirectory($tempDirectory);
 }
 
-$logger->log(sprintf('Making temporary directory %s.', $tempDirectory), Logger::INFO);
+$logger->log(sprintf('Making temporary directory %s.', $tempDirectory), Zend_Log::INFO);
 
 mkdir($tempDirectory);
 
@@ -97,7 +89,7 @@ mkdir($tempDirectory);
 
 $tempFilenames = array();
 
-$mailMerge = new MailMerge();
+$mailMerge = new Zend_Service_LiveDocx_MailMerge();
 
 $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
           ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
@@ -106,14 +98,14 @@ $mailMerge->setLocalTemplate('template.docx');
 
 for ($iteration = 1; $iteration <= $iterations; $iteration ++) {
     
-    $tempFilename = sprintf('%s%s%010s.pdf', $tempDirectory, DIRECTORY_SEPARATOR, $iteration);
+    $tempFilename = sprintf('%s/%010s.pdf', $tempDirectory, $iteration);
     $tempFilenames[] = $tempFilename;
     
     $mailMerge->assign('software', randomString())
               ->assign('licensee', randomString())
               ->assign('company',  randomString())
-              ->assign('date',     Date::now()->toString(Date::DATE_LONG))
-              ->assign('time',     Date::now()->toString(Date::TIME_LONG))
+              ->assign('date',     Zend_Date::now()->toString(Zend_Date::DATE_LONG))
+              ->assign('time',     Zend_Date::now()->toString(Zend_Date::TIME_LONG))
               ->assign('city',     randomString())
               ->assign('country',  randomString());
         
@@ -121,7 +113,7 @@ for ($iteration = 1; $iteration <= $iterations; $iteration ++) {
     
     file_put_contents($tempFilename, $mailMerge->retrieveDocument('pdf'));
     
-    $logger->log(sprintf('Generating temporary document %s.', $tempFilename), Logger::INFO);
+    $logger->log(sprintf('Generating temporary document %s.', $tempFilename), Zend_Log::INFO);
 }
 
 unset($mailMerge);
@@ -130,21 +122,21 @@ unset($mailMerge);
 
 // Concatenate temporary documents and write output document
 
-$outputFilename = __DIR__ . DIRECTORY_SEPARATOR . 'document-concat.pdf';
+$outputFilename = './document-concat.pdf';
 
-$logger->log('Concatenating temporary documents...', Logger::INFO);
+$logger->log('Concatenating temporary documents...', Zend_Log::INFO);
 
 if (true === concatenatePdfFilenames($tempFilenames, $outputFilename, $processor)) {
-    $logger->log(sprintf('...DONE. Saved output document as %s.', basename($outputFilename)), Logger::INFO);
+    $logger->log(sprintf('...DONE. Saved output document as %s.', $outputFilename), Zend_Log::INFO);
 } else {
-    $logger->log(sprintf('...ERROR.'), Logger::ERR);
+    $logger->log(sprintf('...ERROR.'), Zend_Log::ERR);
 }
 
 // -----------------------------------------------------------------------------
 
 // Delete temporary directory
 
-$logger->log(sprintf('Deleting temporary directory %s.', $tempDirectory), Logger::INFO);
+$logger->log(sprintf('Deleting temporary directory %s.', $tempDirectory), Zend_Log::INFO);
 
 if (is_dir($tempDirectory)) {
     recursiveRemoveDirectory($tempDirectory);
@@ -188,7 +180,7 @@ function recursiveRemoveDirectory($dir)
     $files = glob($dir . '*', GLOB_MARK);
     
     foreach ($files as $file) {
-        if (DIRECTORY_SEPARATOR === substr($file, - 1)) {
+        if ('/' === substr($file, - 1)) {
             recursiveRemoveDirectory($file);
         } else {
             unlink($file);
@@ -214,10 +206,10 @@ function concatenatePdfFilenames($inputFilenames, $outputFilename, $processor = 
 {
     $ret = false;
     
-    $logger = Registry::get('logger');
+    $logger = Zend_Registry::get('logger');
     
     if (! (is_file(EXEC_PDFTK) || is_file(EXEC_GHOSTSCRIPT))) {
-        $logger->log('Either pdftk or ghostscript are required for this sample application.', Logger::CRIT);
+        $logger->log('Either pdftk or ghostscript are required for this sample application.', Zend_Log::CRIT);
         exit();
     }
     
@@ -242,7 +234,7 @@ function concatenatePdfFilenames($inputFilenames, $outputFilename, $processor = 
         break;
             
         default:
-            $logger->log('Invalid concatenation processor - use PROCESSOR_PDFTK or PROCESSOR_GHOSTSCRIPT only.', Logger::CRIT);
+            $logger->log('Invalid concatenation processor - use PROCESSOR_PDFTK or PROCESSOR_GHOSTSCRIPT only.', Zend_Log::CRIT);
             exit();
         break;
     }

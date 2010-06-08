@@ -1,12 +1,9 @@
 <?php
 
-require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
+require_once dirname(__FILE__) . '/../../common.php';
 
 
-use Zend\Date\Date;
-use Zend\Service\LiveDocx\MailMerge;
-
-$mailMerge = new MailMerge();
+$mailMerge = new Zend_Service_LiveDocx_MailMerge();
 
 $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
           ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
@@ -16,8 +13,8 @@ $mailMerge->setLocalTemplate('template.docx');
 $mailMerge->setFieldValue('software', 'Magic Graphical Compression Suite v1.9')
           ->setFieldValue('licensee', 'Henry Döner-Meyer')
           ->setFieldValue('company',  'Megasoft Co-operation')
-          ->setFieldValue('date',     Date::now()->toString(Date::DATE_LONG))
-          ->setFieldValue('time',     Date::now()->toString(Date::TIME_LONG))
+          ->setFieldValue('date',     Zend_Date::now()->toString(Zend_Date::DATE_LONG))
+          ->setFieldValue('time',     Zend_Date::now()->toString(Zend_Date::TIME_LONG))
           ->setFieldValue('city',     'Bremen')
           ->setFieldValue('country',  'Germany');
 

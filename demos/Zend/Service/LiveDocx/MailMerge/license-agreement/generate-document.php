@@ -1,12 +1,9 @@
 <?php
 
-require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
+require_once dirname(__FILE__) . '/../../common.php';
 
 
-use Zend\Date\Date;
-use Zend\Service\LiveDocx\MailMerge;
-
-$mailMerge = new MailMerge();
+$mailMerge = new Zend_Service_LiveDocx_MailMerge();
 
 $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
           ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
@@ -16,8 +13,8 @@ $mailMerge->setLocalTemplate('template.docx');
 $mailMerge->assign('software', 'Magic Graphical Compression Suite v1.9')
           ->assign('licensee', 'Henry Döner-Meyer')
           ->assign('company',  'Co-Operation')
-          ->assign('date',     Date::now()->toString(Date::DATE_LONG))
-          ->assign('time',     Date::now()->toString(Date::TIME_LONG))
+          ->assign('date',     Zend_Date::now()->toString(Zend_Date::DATE_LONG))
+          ->assign('time',     Zend_Date::now()->toString(Zend_Date::TIME_LONG))
           ->assign('city',     'Berlin')
           ->assign('country',  'Germany');
 
@@ -40,8 +37,8 @@ $fieldValues = array (
         'software' => 'Magic Graphical Compression Suite v2.5',
         'licensee' => 'Henry Döner-Meyer',
         'company'  => 'Megasoft Co-Operation',
-        'date'     => Date::now()->toString(Date::DATE_LONG),
-        'time'     => Date::now()->toString(Date::TIME_LONG),
+        'date'     => Zend_Date::now()->toString(Zend_Date::DATE_LONG),
+        'time'     => Zend_Date::now()->toString(Zend_Date::TIME_LONG),
         'city'     => 'Berlin',
         'country'  => 'Germany'
     ),
@@ -50,8 +47,8 @@ $fieldValues = array (
         'software' => 'Magic CAD Suite v1.9',
         'licensee' => 'Brüno Döner-Meyer',
         'company'  => 'Future Co-Operation',
-        'date'     => Date::now()->toString(Date::DATE_LONG),
-        'time'     => Date::now()->toString(Date::TIME_LONG),
+        'date'     => Zend_Date::now()->toString(Zend_Date::DATE_LONG),
+        'time'     => Zend_Date::now()->toString(Zend_Date::TIME_LONG),
         'city'     => 'Berlin',
         'country'  => 'Germany'
     )    

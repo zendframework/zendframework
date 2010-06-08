@@ -1,11 +1,9 @@
 <?php
 
-require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
+require_once dirname(__FILE__) . '/../../common.php';
 
 
-use Zend\Cache\Cache;
-use Zend\Service\LiveDocx\Helper;
-use Zend\Service\LiveDocx\MailMerge;
+system('clear');
 
 $cacheId = md5(__FILE__);
 
@@ -15,20 +13,16 @@ $cacheFrontendOptions = array(
 );
 
 $cacheBackendOptions = array(
-    'cache_dir' => __DIR__ . '/cache'
+    'cache_dir' => dirname(__FILE__) . '/cache'
 );
 
-if (!is_dir($cacheBackendOptions['cache_dir'])) {
-    mkdir($cacheBackendOptions['cache_dir']);
-}
-
-$cache = Cache::factory('Core', 'File', $cacheFrontendOptions, $cacheBackendOptions);
+$cache = Zend_Cache::factory('Core', 'File', $cacheFrontendOptions, $cacheBackendOptions);
 
 if (! $fonts = $cache->load($cacheId)) {
     
     // Cache miss. Connect to backend service (expensive).
     
-    $mailMerge = new MailMerge();
+    $mailMerge = new Zend_Service_LiveDocx_MailMerge();
     
     $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
               ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
@@ -47,16 +41,18 @@ if (! $fonts = $cache->load($cacheId)) {
 
 unset($cache);
 
-Helper::printLine(
+print(Demos_Zend_Service_LiveDocx_Helper::wrapLine(
     PHP_EOL . 'Supported Fonts' .
     PHP_EOL . 
     PHP_EOL . 'The following fonts are installed on the backend server and may be used in templates. Fonts used in templates, which are NOT listed below, will be substituted. If you would like to use a font, which is not installed on the backend server, please contact your LiveDocx provider.' .
     PHP_EOL . 
     PHP_EOL . '(Note this method call is cached for maximum performance. The supported formats change very infrequently, hence, they are good candidates to be cached.)' .
     PHP_EOL . 
-    PHP_EOL . Helper::arrayDecorator($fonts) . 
+    PHP_EOL . Demos_Zend_Service_LiveDocx_Helper::arrayDecorator($fonts) . 
     PHP_EOL . 
-    PHP_EOL
+    PHP_EOL)
 );
+
+print(PHP_EOL);
 
 unset($mailMerge);

@@ -1,23 +1,21 @@
 <?php
 
-require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
+require_once dirname(__FILE__) . '/../../common.php';
 
 
-use Zend\Config\Ini;
-use Zend\Service\LiveDocx\Helper;
-use Zend\Service\LiveDocx\MailMerge;
+system('clear');
 
-Helper::printLine(
-    PHP_EOL . 'Using the Public LiveDocx Service with \Zend\Config\Config' .
+print(Demos_Zend_Service_LiveDocx_Helper::wrapLine(
+    PHP_EOL . 'Using the Public LiveDocx Service with Zend_Config' .
     PHP_EOL . 
-    PHP_EOL . 'This sample application illustrates how to use the Zend Framework LiveDocx component with a \Zend\Config\Config object. This is useful, for example, to store connection credentials in an external ini file.' .
+    PHP_EOL . 'This sample application illustrates how to use Zend_Service_LiveDocx_MailMerge with a Zend_Config object. This is useful, for example, to store connection credentials in an external ini file.' .
     PHP_EOL .
-    PHP_EOL
+    PHP_EOL)
 );
 
-$options = new Ini('credentials.ini');
+$options = new Zend_Config_Ini('credentials.ini');
 
-$mailMerge = new MailMerge($options);
+$mailMerge = new Zend_Service_LiveDocx_MailMerge($options);
 
 $mailMerge->getTemplateFormats(); // then call methods as usual
 

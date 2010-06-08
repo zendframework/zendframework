@@ -1,19 +1,20 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../common.php';
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
 
-system('clear');
+use Zend\Service\LiveDocx\Helper;
+use Zend\Service\LiveDocx\MailMerge;
 
-print(Demos_Zend_Service_LiveDocx_Helper::wrapLine(
+Helper::printLine(
     PHP_EOL . 'Using the Free Public Server' .
     PHP_EOL . 
-    PHP_EOL . 'This sample application illustrates how to use Zend_Service_LiveDocx_MailMerge with the free, public LiveDocx server.' .
+    PHP_EOL . 'This sample application illustrates how to use the Zend Framework LiveDocx component with the free, public LiveDocx server.' .
     PHP_EOL .
-    PHP_EOL)
+    PHP_EOL
 );
 
-$mailMerge = new Zend_Service_LiveDocx_MailMerge();
+$mailMerge = new MailMerge();
 
 $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
           ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
@@ -36,7 +37,7 @@ unset($mailMerge);
 
 // Alternatively, you can pass username and password in the constructor.
 
-$mailMerge = new Zend_Service_LiveDocx_MailMerge(
+$mailMerge = new MailMerge(
     array (
         'username' => DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME,
         'password' => DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD,

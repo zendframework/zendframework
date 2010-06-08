@@ -21,7 +21,12 @@
  */
 
 /**
- * @uses       Zend_Service_Exception
+ * @namespace
+ */
+namespace Zend\Service\LiveDocx;
+
+/**
+ * @uses       Zend\Service\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage LiveDocx
@@ -29,6 +34,5 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @since      LiveDocx 1.0
  */
-class Zend_Service_LiveDocx_Exception extends Zend_Service_Exception
-{
-}
+class Exception extends \Zend\Exception
+{}

@@ -21,10 +21,16 @@
  */
 
 /**
- * @uses       stdClass
+ * @namespace
+ */
+namespace Zend\Service\LiveDocx;
+use Zend\Date\Date;
+
+/**
+ * @uses       StdClass
  * @uses       Zend_Date
  * @uses       Zend_Service_LiveDocx
- * @uses       Zend_Service_LiveDocx_Exception
+ * @uses       Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage LiveDocx
@@ -32,7 +38,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @since      LiveDocx 1.0 
  */
-class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
+class MailMerge extends AbstractLiveDocx
 {
     /**
      * URI of LiveDocx.MailMerge WSDL
@@ -59,8 +65,66 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
     /**
      * Constructor (LiveDocx.MailMerge SOAP Service)
      *
+     * Optionally, pass an array of options (or Zend\Config\Config object).
+     *
+     * If an option with the key 'soapClient' is provided, that value will be
+     * used to set the internal SOAP client used to connect to the LiveDocx
+     * service.
+     *
+     * Use 'soapClient' in the case that you have a dedicated or (locally
+     * installed) licensed LiveDocx server. For example:
+     *
+     * {code}
+     * $mailMerge = new Zend\Service\LiveDocx\MailMerge(
+     *     array (
+     *         'username'   => 'myUsername',
+     *         'password'   => 'myPassword',
+     *         'soapClient' => new Zend\Soap\Client('https://api.example.com/path/mailmerge.asmx?WSDL')
+     *     )
+     * );
+     * {code}
+     *
+     * Replace the URI of the WSDL in the constructor of Zend_Soap_Client with
+     * that of your dedicated or licensed LiveDocx server.
+     *
+     * If you are using the public LiveDocx server, simply pass 'username' and
+     * 'password'. For example:
+     *
+     * {code}
+     * $mailMerge = new Zend\Service\LiveDocx\MailMerge(
+     *     array (
+     *         'username' => 'myUsername',
+     *         'password' => 'myPassword'
+     *     )
+     * );
+     * {code}
+     *
+     * If you prefer to not pass the username and password through the
+     * constructor, you can also call the following methods:
+     *
+     * {code}
+     * $mailMerge = new Zend\Service\LiveDocx\MailMerge();
+     *
+     * $mailMerge->setUsername('myUsername')
+     *           ->setPassword('myPassword');
+     * {/code}
+     *
+     * Or, if you want to specify your own SoapClient:
+     *
+     * {code}
+     * $mailMerge = new Zend\Service\LiveDocx\MailMerge();
+     *
+     * $mailMerge->setUsername('myUsername')
+     *           ->setPassword('myPassword');
+     *
+     * $mailMerge->setSoapClient(
+     *     new Zend\Soap\Client('https://api.example.com/path/mailmerge.asmx?WSDL')
+     * );
+     * {/code}
+     *
+     * @param  array|Zend\Config\Config $options
      * @return void
-     * @return throws Zend_Service_LiveDocx_Exception
+     * @throws LiveDocx\Exception
      * @since  LiveDocx 1.0
      */
     public function __construct($options = null)
@@ -68,7 +132,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $this->_wsdl             = self::WSDL;
         $this->_fieldValues      = array();
         $this->_blockFieldValues = array();
-        
+
         parent::__construct($options);
     }
 
@@ -77,12 +141,18 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * (i.e. a template stored locally on YOUR server)
      *
      * @param  string $filename
-     * @return Zend_Service_LiveDocx_MailMerge
-     * @throws Zend_Service_LiveDocx_Exception
+     * @return Zend\Service\LiveDocx\MailMerge
+     * @throws Zend\Service\LiveDocx\Exception
      * @since  LiveDocx 1.0
      */
     public function setLocalTemplate($filename)
     {
+        if (!is_readable($filename)) {
+            throw new Exception(
+                'Cannot read local template from disk'
+            );            
+        }
+
         $this->logIn();
         
         try {
@@ -91,7 +161,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
                 'format'   => self::getFormat($filename),
             ));
         } catch (Exception $e) {
-            throw new Zend_Service_LiveDocx_Exception(
+            throw new Exception(
                 'Cannot set local template', 0, $e
             );
         }
@@ -104,8 +174,8 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * (i.e. a template stored remotely on the LIVEDOCX server)
      *
      * @param  string $filename
-     * @return Zend_Service_LiveDocx_MailMerge
-     * @throws Zend_Service_LiveDocx_Exception
+     * @return Zend\Service\LiveDocx\MailMerge
+     * @throws Zend\Service\LiveDocx\Exception
      * @since  LiveDocx 1.0
      */
     public function setRemoteTemplate($filename)
@@ -117,7 +187,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
                 'filename' => $filename,
             ));
         } catch (Exception $e) {
-            throw new Zend_Service_LiveDocx_Exception(
+            throw new Exception(
                 'Cannot set remote template', 0, $e
             );
         }
@@ -129,8 +199,8 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * Set an associative or multi-associative array of keys and values pairs
      *
      * @param  array $values
-     * @return Zend_Service_LiveDocx_MailMerge
-     * @throws Zend_Service_LiveDocx_Exception
+     * @return Zend\Service\LiveDocx\MailMerge
+     * @throws Zend\Service\LiveDocx\Exception
      * @since  LiveDocx 1.0
      */
     public function setFieldValues($values)
@@ -151,7 +221,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
                 'fieldValues' => self::$method($values),
             ));
         } catch (Exception $e) {
-            throw new Zend_Service_LiveDocx_Exception(
+            throw new Exception(
                 'Cannot set field values', 0, $e
             );
         }
@@ -165,8 +235,8 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * @param string $field
      * @param array|string $value
      *
-     * @throws Zend_Service_LiveDocx_Exception
-     * @return Zend_Service_LiveDocx_MailMerge
+     * @throws Zend\Service\LiveDocx\Exception
+     * @return Zend\Service\LiveDocx\MailMerge
      * @since  LiveDocx 1.0
      */
     public function setFieldValue($field, $value)
@@ -182,8 +252,8 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * @param string $blockName
      * @param array $blockFieldValues
      *
-     * @return Zend_Service_LiveDocx_MailMerge
-     * @throws Zend_Service_LiveDocx_Exception
+     * @return Zend\Service\LiveDocx\MailMerge
+     * @throws Zend\Service\LiveDocx\Exception
      * @since  LiveDocx 1.0
      */
     public function setBlockFieldValues($blockName, $blockFieldValues)
@@ -196,7 +266,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
                 'blockFieldValues' => self::multiAssocArrayToArrayOfArrayOfString($blockFieldValues)
             ));
         } catch (Exception $e) {
-            throw new Zend_Service_LiveDocx_Exception(
+            throw new Exception(
                 'Cannot set block field values', 0, $e
             );
         }
@@ -209,8 +279,8 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @param array|string $field
      * @param array|string $value
-     * @return Zend_Service_LiveDocx_MailMerge
-     * @throws Zend_Service_LiveDocx_Exception
+     * @return Zend\Service\LiveDocx\MailMerge
+     * @throws Zend\Service\LiveDocx\Exception
      * @since  LiveDocx 1.0
      */
     public function assign($field, $value = null)
@@ -226,7 +296,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
                 $this->setFieldValue($field, $value);
             }
         } catch (Exception $e) {
-            throw new Zend_Service_LiveDocx_Exception(
+            throw new Exception(
                 'Cannot assign data to template', 0, $e
             );
         }
@@ -240,8 +310,8 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * This method can only be used for PDF documents
      * 
      * @param  string  $password
-     * @return Zend_Service_LiveDocx_MailMerge
-     * @throws Zend_Service_LiveDocx_Exception
+     * @return Zend\Service\LiveDocx\MailMerge
+     * @throws Zend\Service\LiveDocx\Exception
      * @since  LiveDocx 1.2 Premium
      */
     public function setDocumentPassword($password)
@@ -253,7 +323,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
                 'password' => $password
             ));
         } catch (Exception $e) {
-            throw new Zend_Service_LiveDocx_Exception(
+            throw new Exception(
                 'Cannot set document password. This method can be used on PDF files only.', 0, $e
             );
         }
@@ -265,26 +335,12 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * Set a master password for document and determine which security features
      * are accessible without using the master password.
      * 
-     * As default, nothing is allowed. To allow a security setting,
-     * explicatively set it using one of he DOCUMENT_ACCESS_PERMISSION_* class
-     * constants. 
-     * 
-     * {code}
-     * $phpLiveDocx->setDocumentAccessPermissions(
-     *     array (
-     *         Zend_Service_LiveDocx_MailMerge::DOCUMENT_ACCESS_PERMISSION_ALLOW_PRINTING_HIGH_LEVEL,
-     *         Zend_Service_LiveDocx_MailMerge::DOCUMENT_ACCESS_PERMISSION_ALLOW_EXTRACT_CONTENTS
-     *     ),
-     *     'myDocumentAccessPassword'
-     * );
-     * {code}
-     * 
      * This method can only be used for PDF documents
      * 
      * @param  array  $permissions 
      * @param  string $password
-     * @return Zend_Service_LiveDocx_MailMerge
-     * @throws Zend_Service_LiveDocx_Exception
+     * @return Zend\Service\LiveDocx\MailMerge
+     * @throws Zend\Service\LiveDocx\Exception
      * @since  LiveDocx 1.2 Premium
      */
     public function setDocumentAccessPermissions($permissions, $password)
@@ -297,7 +353,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
                 'password'    => $password
             ));
         } catch (Exception $e) {
-            throw new Zend_Service_LiveDocx_Exception(
+            throw new Exception(
                 'Cannot set document access permissions', 0, $e
             );
         }
@@ -326,7 +382,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         try {
             $this->getSoapClient()->CreateDocument();
         } catch (Exception $e) {
-            throw new Zend_Service_LiveDocx_Exception(
+            throw new Exception(
                 'Cannot create document', 0, $e
             );
         }
@@ -337,7 +393,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @param string $format
      *
-     * @throws Zend_Service_LiveDocx_Exception
+     * @throws Zend\Service\LiveDocx\Exception
      * @return binary
      * @since  LiveDocx 1.0
      */
@@ -352,7 +408,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
                 'format' => $format,
             ));
         } catch (Exception $e) {
-            throw new Zend_Service_LiveDocx_Exception(
+            throw new Exception(
                 'Cannot retrieve document - call setLocalTemplate() or setRemoteTemplate() first', 0, $e
             );
         }
@@ -576,11 +632,17 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @param  string $filename
      * @return void
-     * @throws Zend_Service_LiveDocx_Exception
+     * @throws Zend\Service\LiveDocx\Exception
      * @since  LiveDocx 1.0
      */
     public function uploadTemplate($filename)
     {
+        if (!is_readable($filename)) {
+            throw new Exception(
+                'Cannot read local template from disk'
+            );
+        }
+
         $this->logIn();
         
         try {
@@ -589,7 +651,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
                 'filename' => basename($filename),
             ));
         } catch (Exception $e) {
-            throw new Zend_Service_LiveDocx_Exception(
+            throw new Exception(
                 'Cannot upload template', 0, $e
             );
         }
@@ -600,7 +662,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @param  string $filename
      * @return binary
-     * @throws Zend_Service_LiveDocx_Exception
+     * @throws Zend\Service\LiveDocx\Exception
      * @since  LiveDocx 1.0
      */
     public function downloadTemplate($filename)
@@ -612,7 +674,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
                 'filename' => basename($filename),
             ));
         } catch (Exception $e) {
-            throw new Zend_Service_LiveDocx_Exception(
+            throw new Exception(
                 'Cannot download template', 0, $e
             );
         }
@@ -625,7 +687,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @param  string $filename
      * @return void
-     * @throws Zend_Service_LiveDocx_Exception
+     * @throws Zend\Service\LiveDocx\Exception
      * @since  LiveDocx 1.0
      */
     public function deleteTemplate($filename)
@@ -738,7 +800,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @param  string $filename
      * @return binary
-     * @throws Zend_Service_LiveDocx_Exception
+     * @throws Zend\Service\LiveDocx\Exception
      * @since  LiveDocx 1.0
      */
     public function downloadSharedDocument($filename)
@@ -750,7 +812,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
                 'filename' => basename($filename),
             ));
         } catch (Exception $e) {
-            throw new Zend_Service_LiveDocx_Exception(
+            throw new Exception(
                 'Cannot download shared document', 0, $e
             );
         }
@@ -901,7 +963,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         if (isset($list->ArrayOfString)) {
            foreach ($list->ArrayOfString as $a) {
                if (is_array($a)) {      // 1 template only
-                   $o = new stdClass();
+                   $o = new \StdClass();
                    $o->string = $a;
                } else {                 // 2 or more templates
                    $o = $a;
@@ -909,14 +971,14 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
                unset($a);
 
                if (isset($o->string)) {
-                   $date1 = new Zend_Date($o->string[3], Zend_Date::RFC_1123);
-                   $date2 = new Zend_Date($o->string[1], Zend_Date::RFC_1123);
+                   $date1 = new Date($o->string[3], Date::RFC_1123);
+                   $date2 = new Date($o->string[1], Date::RFC_1123);
 
                    $ret[] = array (
                         'filename'   => $o->string[0],
                         'fileSize'   => (integer) $o->string[2],
-                        'createTime' => (integer) $date1->get(Zend_Date::TIMESTAMP),
-                        'modifyTime' => (integer) $date2->get(Zend_Date::TIMESTAMP),
+                        'createTime' => (integer) $date1->get(Date::TIMESTAMP),
+                        'modifyTime' => (integer) $date2->get(Date::TIMESTAMP),
                    );
                }
            }

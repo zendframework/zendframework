@@ -307,7 +307,7 @@ if (defined('DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME') &&
 // -----------------------------------------------------------------------------
 
 if (true === $failed) {
-    $message = 'One or more tests failed. The web server environment, in which this script is running, does not meet the requirements for the Zend Framework LiveDocx component*.';
+    $message = 'One or more tests failed. The web server environment, in which this script is running, does not meet the requirements for the Zend Framework LiveDocx component.';
 } else {
     $message = 'Congratulations! All tests passed. The server environment, in which this script is running, is suitable for the Zend Framework LiveDocx component.';
 }

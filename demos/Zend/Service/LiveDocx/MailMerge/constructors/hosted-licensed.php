@@ -16,7 +16,7 @@ Helper::printLine(
 
 $mailMerge = new MailMerge();
 
-$mailMerge->setWsdl(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL)
+$mailMerge->setWSDL(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL)
           ->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME)
           ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_PASSWORD);
 
@@ -27,7 +27,7 @@ printf('Username : %s%sPassword : %s%s    WSDL : %s%s%s',
     PHP_EOL,
     $mailMerge->getPassword(),
     PHP_EOL,
-    $mailMerge->getWsdl(),
+    $mailMerge->getWSDL(),
     PHP_EOL,
     PHP_EOL
 );

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 22184 -->
+<!-- EN-Revision: 22390 -->
 <sect1 id="zend.translate.additional">
 
     <title>翻訳用の追加機能</title>
@@ -100,7 +100,21 @@ $translate->addTranslation(
                         <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
 
-                     <row>
+                    <row>
+                        <entry>cache</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            Sets a cache for the translation adapter. This must be a instance of
+                            <classname>Zend_Cache_Core</classname>
+                        </entry>
+
+                        <entry>
+                            <emphasis>Per default no cache is set</emphasis>
+                        </entry>
+                    </row>
+
+                    <row>
                         <entry>content</entry>
                         <entry>all</entry>
 

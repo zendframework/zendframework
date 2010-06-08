@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 22159 -->
 <sect1 id="zend.measure.edit">
 
     <title>計測値の操作</title>
@@ -98,9 +98,8 @@ print "Ton:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
 
         <para>
             複数の計測値の加算には <methodname>add()</methodname>、そして減算には <methodname>sub()</methodname>
-            を使用します。これらはそれぞれ、結果を格納した新しいオブジェクトを作成します。
-            このクラスがもとのオブジェクトを変更することはありません。
-            新しいオブジェクトは、もとのオブジェクトと同じ型になります。
+            を使用します。
+            その結果は、もとのオブジェクトと同じ型を使うでしょう。
             Dynamic objects support a fluid style of
             programming, where complex sequences of operations
             can be nested without risk of side-effects altering the

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20807 -->
+<!-- EN-Revision: 22236 -->
 <sect2 id="zend.test.phpunit.examples">
     <title>例</title>
 
@@ -303,7 +303,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             テスト用の設定を行うという作業が各テストの最初に発生します。
             PHPUnit にはそのための機能が既に用意されています。
             <ulink
-                url="http://www.phpunit.de/pocket_guide/3.3/ja/database.html">
+                url="http://www.phpunit.de/manual/3.4/en/database.html">
                 PHPUnit のドキュメントを参照ください</ulink>。
             テスト時と実運用時には別のデータベースを使用することを推奨します。
             また、特に (ファイルあるいはインメモリ形式の) SQLite

@@ -67,7 +67,7 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
                                                  TESTS_ZEND_SERVICE_SLIDESHARE_SLIDESHOWID);
 
         $cache = Cache::factory('Core', 'File', array('lifetime' => 0, 'automatic_serialization' => true),
-                                                     array('cache_dir' => dirname(__FILE__)."/SlideShare/_files"));
+                                                     array('cache_dir' => dirname(__FILE__)."/_files"));
         $ss->setCacheObject($cache);
         return $ss;
     }
@@ -166,7 +166,7 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
         $ss = $this->_getSSObject();
 
         $title = "Unit Test for ZF SlideShare Component";
-        $ppt_file = dirname(__FILE__)."/SlideShare/_files/demo.ppt";
+        $ppt_file = dirname(__FILE__)."/_files/demo.ppt";
 
         $show = new SlideShare\SlideShow();
         $show->setFilename($ppt_file);

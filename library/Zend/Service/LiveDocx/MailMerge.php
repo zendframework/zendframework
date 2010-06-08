@@ -129,9 +129,10 @@ class MailMerge extends AbstractLiveDocx
      */
     public function __construct($options = null)
     {
-        $this->_wsdl             = self::WSDL;
         $this->_fieldValues      = array();
         $this->_blockFieldValues = array();
+
+        $this->setWSDL(self::WSDL);
 
         parent::__construct($options);
     }
@@ -149,7 +150,7 @@ class MailMerge extends AbstractLiveDocx
     {
         if (!is_readable($filename)) {
             throw new Exception(
-                'Cannot read local template from disk'
+                'Cannot read local template from disk.'
             );            
         }
 
@@ -162,7 +163,7 @@ class MailMerge extends AbstractLiveDocx
             ));
         } catch (Exception $e) {
             throw new Exception(
-                'Cannot set local template', 0, $e
+                'Cannot set local template.', 0, $e
             );
         }
 
@@ -188,7 +189,7 @@ class MailMerge extends AbstractLiveDocx
             ));
         } catch (Exception $e) {
             throw new Exception(
-                'Cannot set remote template', 0, $e
+                'Cannot set remote template.', 0, $e
             );
         }
 
@@ -222,7 +223,7 @@ class MailMerge extends AbstractLiveDocx
             ));
         } catch (Exception $e) {
             throw new Exception(
-                'Cannot set field values', 0, $e
+                'Cannot set field values.', 0, $e
             );
         }
 
@@ -267,7 +268,7 @@ class MailMerge extends AbstractLiveDocx
             ));
         } catch (Exception $e) {
             throw new Exception(
-                'Cannot set block field values', 0, $e
+                'Cannot set block field values.', 0, $e
             );
         }
 
@@ -297,7 +298,7 @@ class MailMerge extends AbstractLiveDocx
             }
         } catch (Exception $e) {
             throw new Exception(
-                'Cannot assign data to template', 0, $e
+                'Cannot assign data to template.', 0, $e
             );
         }
 
@@ -354,7 +355,7 @@ class MailMerge extends AbstractLiveDocx
             ));
         } catch (Exception $e) {
             throw new Exception(
-                'Cannot set document access permissions', 0, $e
+                'Cannot set document access permissions.', 0, $e
             );
         }
         
@@ -383,7 +384,7 @@ class MailMerge extends AbstractLiveDocx
             $this->getSoapClient()->CreateDocument();
         } catch (Exception $e) {
             throw new Exception(
-                'Cannot create document', 0, $e
+                'Cannot create document.', 0, $e
             );
         }
     }
@@ -409,7 +410,7 @@ class MailMerge extends AbstractLiveDocx
             ));
         } catch (Exception $e) {
             throw new Exception(
-                'Cannot retrieve document - call setLocalTemplate() or setRemoteTemplate() first', 0, $e
+                'Cannot retrieve document - call setLocalTemplate() or setRemoteTemplate() first.', 0, $e
             );
         }
 
@@ -639,7 +640,7 @@ class MailMerge extends AbstractLiveDocx
     {
         if (!is_readable($filename)) {
             throw new Exception(
-                'Cannot read local template from disk'
+                'Cannot read local template from disk.'
             );
         }
 
@@ -652,7 +653,7 @@ class MailMerge extends AbstractLiveDocx
             ));
         } catch (Exception $e) {
             throw new Exception(
-                'Cannot upload template', 0, $e
+                'Cannot upload template.', 0, $e
             );
         }
     }
@@ -813,7 +814,7 @@ class MailMerge extends AbstractLiveDocx
             ));
         } catch (Exception $e) {
             throw new Exception(
-                'Cannot download shared document', 0, $e
+                'Cannot download shared document.', 0, $e
             );
         }
 

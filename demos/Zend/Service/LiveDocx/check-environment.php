@@ -281,7 +281,7 @@ if (defined('DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME') &&
     try {
         $microtime = microtime(true);
         $mailMerge = new MailMerge();
-        $mailMerge->setWsdl(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL);
+        $mailMerge->setWSDL(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL);
         $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME);
         $mailMerge->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_PASSWORD);
         $mailMerge->logIn();

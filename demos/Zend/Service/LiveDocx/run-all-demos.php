@@ -1,7 +1,18 @@
 <?php
 
+set_time_limit(0);
+
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
+
+/**
+ * Run all demonstration applications
+ *
+ * This script recursively runs all demonstration applications, which ship with
+ * the Zend Framework LiveDocx component. The demonstration applications
+ * do not necessarily output anything to stdout. Those that do not, generate a
+ * file in the same directory as the PHP script.
+ */
 
 exec('which php', $php);
 
@@ -12,21 +23,15 @@ if (!isset($php[0])) {
 $php = $php[0];
 
 $path = __DIR__ . DIRECTORY_SEPARATOR . 'MailMerge';
-$cmds = array();
 
 $it = new RecursiveDirectoryIterator($path);
 foreach (new RecursiveIteratorIterator($it) as $file) {
     if ('php' === strtolower(substr(strrchr($file->getFilename(), '.'), 1))) {
-        $directory = dirname($file->getPathname());
-        $basename  = (string) $file->getFilename();
-        $cmds[] = sprintf('cd %s && %s %s', $directory, $php, $basename);
+        $cmd = sprintf('cd %s && %s %s', dirname($file->getPathname()),
+                $php, $file->getFilename());
+        print($cmd . PHP_EOL);
+        passthru($cmd);
     }
-}
-
-foreach ($cmds as $cmd) {
-    print($cmd . PHP_EOL . PHP_EOL);
-    system($cmd);
-    print(PHP_EOL . '--------------------------------------------------------------------------------' . PHP_EOL . PHP_EOL);
 }
 
 exec('cd ' . __DIR__);

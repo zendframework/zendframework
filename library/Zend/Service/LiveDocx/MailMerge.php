@@ -147,6 +147,12 @@ class MailMerge extends AbstractLiveDocx
      */
     public function setLocalTemplate($filename)
     {
+        if (!is_readable($filename)) {
+            throw new Exception(
+                'Cannot read local template from disk'
+            );            
+        }
+
         $this->logIn();
         
         try {
@@ -631,6 +637,12 @@ class MailMerge extends AbstractLiveDocx
      */
     public function uploadTemplate($filename)
     {
+        if (!is_readable($filename)) {
+            throw new Exception(
+                'Cannot read local template from disk'
+            );
+        }
+
         $this->logIn();
         
         try {

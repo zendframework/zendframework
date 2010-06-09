@@ -1,6 +1,9 @@
 <?php
 
+set_time_limit(0);
+
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'Bootstrap.php';
+
 
 use Zend\Version;
 use Zend\Service\LiveDocx\MailMerge;

@@ -123,14 +123,14 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
             }
         }
 
-        if ($locale !== false) {
+        if (empty($locale)) {
             require_once 'Zend/Registry.php';
             if (Zend_Registry::isRegistered('Zend_Locale')) {
                 $locale = Zend_Registry::get('Zend_Locale');
             }
         }
 
-        if (!empty($locale)) {
+        if ($locale !== null) {
             $this->setLocale($locale);
         }
     }

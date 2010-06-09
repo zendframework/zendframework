@@ -335,6 +335,8 @@ class MailMerge extends AbstractLiveDocx
     /**
      * Set a master password for document and determine which security features
      * are accessible without using the master password.
+     *
+     * An array of supported permissions can be retrieved with getDocumentAccessOptions().
      * 
      * This method can only be used for PDF documents
      * 

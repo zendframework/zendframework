@@ -26,7 +26,7 @@ $path = __DIR__ . DIRECTORY_SEPARATOR . 'MailMerge';
 
 $it = new RecursiveDirectoryIterator($path);
 foreach (new RecursiveIteratorIterator($it) as $file) {
-    if ('php' === strtolower(substr(strrchr($file->getFilename(), '.'), 1))) {
+    if ('php' === substr($file->getFilename(), -3)) {
         $cmd = sprintf('cd %s && %s %s', dirname($file->getPathname()),
                 $php, $file->getFilename());
         print($cmd . PHP_EOL);
@@ -34,4 +34,4 @@ foreach (new RecursiveIteratorIterator($it) as $file) {
     }
 }
 
-exec('cd ' . __DIR__);
+chdir(__DIR__);

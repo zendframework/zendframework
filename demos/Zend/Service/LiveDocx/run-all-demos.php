@@ -24,8 +24,8 @@ $php = $php[0];
 
 $path = __DIR__ . DIRECTORY_SEPARATOR . 'MailMerge';
 
-$it = new RecursiveDirectoryIterator($path);
-foreach (new RecursiveIteratorIterator($it) as $file) {
+$it = new \RecursiveDirectoryIterator($path);
+foreach (new \RecursiveIteratorIterator($it) as $file) {
     if ('php' === substr($file->getFilename(), -3)) {
         $cmd = sprintf('cd %s && %s %s', dirname($file->getPathname()),
                 $php, $file->getFilename());

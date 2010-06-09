@@ -321,7 +321,7 @@ $feed = $service->getGbaseSnippetFeed($query);
 
             <para>
                 Google Base items can contain item-specific attributes such as
-                <code>&lt;g:main_ingredient&gt;</code> and <code>&lt;g:weight&gt;</code>.
+                <emphasis>&lt;g:main_ingredient&gt;</emphasis> and <emphasis>&lt;g:weight&gt;</emphasis>.
             </para>
 
             <para>

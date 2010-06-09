@@ -135,7 +135,7 @@ $user = $gdata->insertUser($user);
             <para>
                 The user's password should normally be provided as cleartext.
                 Optionally, the password can be provided as an SHA-1 digest if
-                <code>login->passwordHashFunction</code> is set to 'SHA-1'.
+                <command>login->passwordHashFunction</command> is set to 'SHA-1'.
             </para>
         </sect3>
 
@@ -256,7 +256,7 @@ $user = $user->save();
 
                 <para>
                     A user's password can be reset to a new value by updating
-                    the <code>login->password</code> property.
+                    the <command>login->password</command> property.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -278,7 +278,7 @@ $user = $user->save();
                 <para>
                     A user can be forced to change their password at their
                     next login by setting the
-                    <code>login->changePasswordAtNextLogin</code> property to
+                    <command>login->changePasswordAtNextLogin</command> property to
                     <constant>TRUE</constant>.
                 </para>
 
@@ -290,7 +290,7 @@ $user = $user->save();
 
                 <para>
                     Similarly, this can be undone by setting the
-                    <code>login->changePasswordAtNextLogin</code> property to
+                    <command>login->changePasswordAtNextLogin</command> property to
                     <constant>FALSE</constant>.
                 </para>
             </sect4>
@@ -314,7 +314,7 @@ $gdata->restoreUser('foo');
 
                 <para>
                     Alternatively, you can set the UserEntry's
-                    <code>login->suspended</code> property to
+                    <command>login->suspended</command> property to
                     <constant>TRUE</constant>.
                 </para>
 
@@ -326,7 +326,7 @@ $user = $user->save();
 
                 <para>
                     To restore the user's access, set the
-                    <code>login->suspended</code> property to
+                    <command>login->suspended</command> property to
                     <constant>FALSE</constant>.
                 </para>
             </sect4>
@@ -336,7 +336,7 @@ $user = $user->save();
 
                 <para>
                     Users can be granted the ability to administer your domain
-                    by setting their <code>login->admin</code> property to
+                    by setting their <command>login->admin</command> property to
                     <constant>TRUE</constant>.
                 </para>
 
@@ -347,7 +347,7 @@ $user = $user->save();
 ]]></programlisting>
 
                 <para>
-                    And as expected, setting a user's <code>login->admin</code>
+                    And as expected, setting a user's <command>login->admin</command>
                     property to <constant>FALSE</constant> revokes their
                     administrative rights.
                 </para>

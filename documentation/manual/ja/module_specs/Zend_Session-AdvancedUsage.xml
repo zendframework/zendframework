@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21829 -->
 <sect1 id="zend.session.advanced_usage">
 
     <title>高度な使用法</title>
@@ -51,13 +51,16 @@ Zend_Session::start();
                     </ulink> を有効にしてはいけません。
                     もし mod_php (やそれと同等のもの) を使用しており、
                     <code>php.ini</code> でこの設定が有効になっている、かつそれを無効にすることができない
-                    という場合は、<code>.htaccess</code> ファイル (通常は HTML のドキュメントルートにあります)
+                    という場合は、<code>.htaccess</code> ファイル (通常は <acronym>HTML</acronym> のドキュメントルートにあります)
                     に以下の内容を追加します。
-                    <programlisting language="httpd.conf"><![CDATA[
+                </para>
+
+                <programlisting language="httpd.conf"><![CDATA[
 php_value session.auto_start 0
 ]]></programlisting>
-                </para>
+
             </listitem>
+
             <listitem>
                 <para>
                     間違い: <acronym>PHP</acronym> の

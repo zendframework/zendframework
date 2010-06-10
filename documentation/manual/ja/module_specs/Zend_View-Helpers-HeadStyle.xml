@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21825 -->
 <sect3 id="zend.view.helpers.initial.headstyle">
     <title>HeadStyle ヘルパー</title>
 
     <para>
-        HTML の <emphasis>&lt;style&gt;</emphasis> 要素を使用して、
-        <acronym>CSS</acronym> スタイルシートを HTML の <emphasis>&lt;head&gt;</emphasis>
+        <acronym>HTML</acronym> の <emphasis>&lt;style&gt;</emphasis> 要素を使用して、
+        <acronym>CSS</acronym> スタイルシートを <acronym>HTML</acronym> の <emphasis>&lt;head&gt;</emphasis>
         要素に埋め込みます。
     </para>
 
@@ -109,7 +109,6 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
         ヘルパー</link> の具象実装です。
     </para>
 
-    <!-- TODO : to be translated -->
     <note>
         <title>UTF-8 encoding used by default</title>
 

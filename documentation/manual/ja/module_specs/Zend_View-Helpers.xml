@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21825 -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>ビューヘルパー</title>
 
@@ -59,7 +59,7 @@
             <classname>Zend_View</classname> には、はじめからいくつかのヘルパークラスが付属しています。
             これらのほとんどはフォーム要素の生成に関するもので、
             適切なエスケープ処理を自動的に行います。
-            さらに、ルートにもとづいた <acronym>URL</acronym> と HTML の一覧を作成したり、
+            さらに、ルートにもとづいた <acronym>URL</acronym> と <acronym>HTML</acronym> の一覧を作成したり、
             変数を宣言したりするものもあります。
             現在付属しているヘルパーは、次のとおりです。
         </para>
@@ -236,7 +236,7 @@ echo $this->formCheckbox('foo',
                 <varname>$options</varname> は連想配列で、任意の深さにできます。
                 <varname>$value</varname> は単一の値か複数の値の配列で、これが
                 <varname>$options</varname> 配列のキーにマッチします。
-                <varname>$listsep</varname> は、デフォルトでは HTML の改行
+                <varname>$listsep</varname> は、デフォルトでは <acronym>HTML</acronym> の改行
                 ("&lt;br /&gt;") です。デフォルトでは、
                 この要素は配列として扱われます。
                 つまり、すべてのチェックボックスは同じ名前となり、

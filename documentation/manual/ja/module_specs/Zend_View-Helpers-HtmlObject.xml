@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21825 -->
 <sect3 id="zend.view.helpers.initial.object">
     <title>HTML オブジェクトヘルパー</title>
 
     <para>
-        HTML の <emphasis><![CDATA[<object>]]></emphasis> 要素は、
+        <acronym>HTML</acronym> の <emphasis><![CDATA[<object>]]></emphasis> 要素は、
         Flash や QuickTime といったメディアをウェブページに埋め込むために使用するものです。
         オブジェクトビューヘルパーは、
         最低限の労力でメディアを埋め込めるよう手助けします。
@@ -61,7 +61,7 @@
 ]]></programlisting>
 
         <para>
-            この結果は、次のような HTML となります。
+            この結果は、次のような <acronym>HTML</acronym> となります。
         </para>
 
         <programlisting language="html"><![CDATA[

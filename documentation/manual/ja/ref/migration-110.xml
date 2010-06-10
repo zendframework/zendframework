@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21661 -->
+<!-- EN-Revision: 21825 -->
 <sect1 id="migration.110">
     <title>Zend Framework 1.10</title>
 
@@ -9,7 +9,6 @@
         下記の移行上の注意点に注意すべきです。
     </para>
 
-    <!-- TODO : to be translated -->
     <sect2 id="migration.110.zend.controller.front">
         <title>Zend_Controller_Front</title>
 
@@ -186,7 +185,6 @@ $authors = $feed->getAuthors()->getValues();
         </sect3>
     </sect2>
 
-    <!-- TODO : to be translated -->
     <sect2 id="migration.110.zend.filter.html-entities">
         <title>Zend_Filter_HtmlEntities</title>
 
@@ -214,13 +212,15 @@ $authors = $feed->getAuthors()->getValues();
         <para>
             <classname>Zend_Filter_StripTags</classname> contains a flag,
             <varname>commentsAllowed</varname>, that, in previous versions, allowed you to
-            optionally whitelist HTML comments in HTML text filtered by the class. However, this
-            opens code enabling the flag to <acronym>XSS</acronym> attacks, particularly in Internet
-            Explorer (which allows specifying conditional functionality via HTML comments). Starting
+            optionally whitelist <acronym>HTML</acronym> comments in <acronym>HTML</acronym> text
+            filtered by the class. However, this opens code enabling the flag to
+            <acronym>XSS</acronym> attacks, particularly in Internet Explorer (which allows
+            specifying conditional functionality via <acronym>HTML</acronym> comments). Starting
             in version 1.9.7 (and backported to versions 1.8.5 and 1.7.9), the
-            <varname>commentsAllowed</varname> flag no longer has any meaning, and all HTML
-            comments, including those containing other HTML tags or nested commments, will be
-            stripped from the final output of the filter.
+            <varname>commentsAllowed</varname> flag no longer has any meaning, and all
+            <acronym>HTML</acronym> comments, including those containing other
+            <acronym>HTML</acronym> tags or nested commments, will be stripped from the final output
+            of the filter.
         </para>
     </sect2>
 

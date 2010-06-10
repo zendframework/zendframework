@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21606 -->
+<!-- EN-Revision: 21825 -->
 <sect1 id="zend.file.transfer.introduction">
     <title>Zend_File_Transfer</title>
 
@@ -68,7 +68,7 @@
 ]]></programlisting>
 
         <para>
-            HTML を直接作成するのではなく、利便性を考慮して
+            <acronym>HTML</acronym> を直接作成するのではなく、利便性を考慮して
             <link linkend="zend.form.standardElements.file">Zend_Form_Element_File</link>
             を使っていることに注意しましょう。
         </para>

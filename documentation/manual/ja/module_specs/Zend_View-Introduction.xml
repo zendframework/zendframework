@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21829 -->
 <sect1 id="zend.view.introduction">
 
     <title>導入</title>
@@ -197,7 +197,7 @@ base/path/
                 制御構造に関する別の構文</ulink>の使用に賛成します。
             これらはビュースクリプトを書く際に便利なものです。
             より簡潔に書くことができ、文を１行にまとめられ、
-            HTML 内で括弧を捜す必要を削減するからです。
+            <acronym>HTML</acronym> 内で括弧を捜す必要を削減するからです。
         </para>
 
         <para>
@@ -240,7 +240,7 @@ php_value "short_open_tag" "on"
                     短いタグを逐次長いタグに変換します。
                 </para>
 
-        <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $view->setUseStreamWrapper(true);
 ]]></programlisting>
 

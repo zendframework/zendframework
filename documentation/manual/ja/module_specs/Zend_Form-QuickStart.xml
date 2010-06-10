@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21614 -->
+<!-- EN-Revision: 21829 -->
 <sect1 id="zend.form.quickstart">
     <title>Zend_Form クイックスタート</title>
 
@@ -47,7 +47,7 @@ $form->setAction('/resource/process')
 
         <para>
             さらに、<emphasis>&lt;form&gt;</emphasis>
-            タグ用のその他の HTML 属性を設定することもできます。
+            タグ用のその他の <acronym>HTML</acronym> 属性を設定することもできます。
             その場合は <methodname>setAttrib()</methodname> メソッドあるいは <methodname>setAttribs()</methodname> メソッド使用します。
             たとえば id を指定したい場合は、"<property>id</property>" 属性を使用します。
         </para>
@@ -569,7 +569,7 @@ class UserController extends Zend_Controller_Action
             フォームを表示するためのビュースクリプトは次のようになります。
         </para>
 
-<programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <h2>Please login:</h2>
 <?php echo $this->form ?>
 ]]></programlisting>

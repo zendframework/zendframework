@@ -17,21 +17,27 @@
  * @subpackage Twitter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Search.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /**
- * @uses       Zend_Feed
- * @uses       Zend_Json
- * @uses       Zend_Rest_Client
- * @uses       Zend_Service_Twitter_Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Twitter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Twitter_Search extends Zend_Rest_Client
+ 
+/**
+ * @namespace
+ */
+namespace Zend\Service\Twitter;
+use Zend\HTTP;
+use Zend\REST;
+use Zend\Feed;
+use Zend\JSON;
+
+class Search extends REST\Client\RESTClient
 {
     /**
      * Return Type
@@ -79,7 +85,7 @@ class Zend_Service_Twitter_Search extends Zend_Rest_Client
     public function setResponseType($responseType = 'json')
     {
         if(!in_array($responseType, $this->_responseTypes, TRUE)) {
-            throw new Zend_Service_Twitter_Exception('Invalid Response Type');
+            throw new Exception('Invalid Response Type');
         }
         $this->_responseType = $responseType;
         return $this;
@@ -105,7 +111,7 @@ class Zend_Service_Twitter_Search extends Zend_Rest_Client
     {
         $response     = $this->restGet('/trends.json');
 
-        return Zend_Json::decode($response->getBody());
+        return JSON::decode($response->getBody());
     }
 
     /**
@@ -142,10 +148,10 @@ class Zend_Service_Twitter_Search extends Zend_Rest_Client
 
         switch($this->_responseType) {
             case 'json':
-                return Zend_Json::decode($response->getBody());
+                return JSON::decode($response->getBody());
                 break;
             case 'atom':
-                return Zend_Feed::importString($response->getBody());
+                return Feed\Reader::importString($response->getBody());
                 break;
         }
 

@@ -16,28 +16,31 @@
  * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: ModelAbstract.php 20785 2010-01-31 09:43:03Z mikaelkael $
  */
 
-/**
- * @namespace
+
+/** @see Zend_Db_Table */
+require_once 'Zend/Db/Table.php';
+
+/** 
+ * @see Zend_Registry
+ * Seems to fix the file not being included by Zend_Db_Table...
  */
-namespace Zend\Feed\PubSubHubbub\Model;
+require_once 'Zend/Registry.php';
 
 /**
- * @uses       \Zend\DB\Table\Table
- * @uses       \Zend\Registry
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ModelAbstract
+class Zend_Feed_Pubsubhubbub_Model_ModelAbstract
 {
     /**
      * Zend_Db_Table instance to host database methods
      *
-     * @var \Zend\DB\Table\Table
+     * @var Zend_Db_Table
      */
     protected $_db = null;
  
@@ -45,15 +48,15 @@ class ModelAbstract
      * Constructor
      * 
      * @param  array $data 
-     * @param  \Zend\DB\Table\AbstractTable $tableGateway 
+     * @param  Zend_Db_Table_Abstract $tableGateway 
      * @return void
      */
-    public function __construct(\Zend\DB\Table\AbstractTable $tableGateway = null)
+    public function __construct(Zend_Db_Table_Abstract $tableGateway = null)
     {
         if (is_null($tableGateway)) {
             $parts = explode('_', get_class($this));
             $table = strtolower(array_pop($parts));
-            $this->_db = new \Zend\DB\Table\Table($table);
+            $this->_db = new Zend_Db_Table($table);
         } else {
             $this->_db = $tableGateway;
         }

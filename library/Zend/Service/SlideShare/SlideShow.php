@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\SlideShare;
+
+/**
  * The Zend_Service_SlideShare_SlideShow class represents a slide show on the
  * slideshare.net servers.
  *
@@ -30,7 +35,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_SlideShare_SlideShow
+class SlideShow
 {
 
     /**

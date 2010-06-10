@@ -16,14 +16,12 @@
  * @package    UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: PubsubhubbubTest.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
-/**
- * @namespace
- */
-namespace ZendTest\Feed\Pubsubhubbub;
-use Zend\Feed\PubSubHubbub;
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
+require_once 'Zend/Feed/Pubsubhubbub.php';
 
 /**
  * @category   Zend
@@ -34,28 +32,28 @@ use Zend\Feed\PubSubHubbub;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PubsubhubbubTest extends \PHPUnit_Framework_TestCase
+class Zend_Feed_Pubsubhubbub_PubsubhubbubTest extends PHPUnit_Framework_TestCase
 {
 
     public function teardown()
     {
-        PubSubHubbub\PubSubHubbub::clearHttpClient();
+        Zend_Feed_Pubsubhubbub::clearHttpClient();
     }
 
     public function testCanSetCustomHttpClient()
     {
-        PubSubHubbub\PubSubHubbub::setHttpClient(new Pubsub());
-        $this->assertType('ZendTest\Feed\Pubsubhubbub\Pubsub', PubSubHubbub\PubSubHubbub::getHttpClient());
+        Zend_Feed_Pubsubhubbub::setHttpClient(new Test_Http_Client_Pubsub());
+        $this->assertType('Test_Http_Client_Pubsub', Zend_Feed_Pubsubhubbub::getHttpClient());
     }
 
     public function testCanDetectHubs()
     {
-        $feed = \Zend\Feed\Reader\Reader::importFile(dirname(__FILE__) . '/_files/rss20.xml');
+        $feed = Zend_Feed_Reader::importFile(dirname(__FILE__) . '/_files/rss20.xml');
         $this->assertEquals(array(
             'http://www.example.com/hub', 'http://www.example.com/hub2'
-        ), PubSubHubbub\PubSubHubbub::detectHubs($feed));
+        ), Zend_Feed_Pubsubhubbub::detectHubs($feed));
     }
 
 }
 
-class Pubsub extends \Zend\HTTP\Client {}
+class Test_Http_Client_Pubsub extends Zend_Http_Client {}

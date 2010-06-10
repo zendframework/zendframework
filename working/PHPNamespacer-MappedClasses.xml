@@ -9291,98 +9291,98 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/OpenId/Consumer/Storage/File.php</originalRelativeFilePath>
       <originalClassName>Zend_OpenId_Consumer_Storage_File</originalClassName>
-      <newRelativeFilePath>Zend/OpenId/Consumer/Storage/File.php</newRelativeFilePath>
-      <newNamespace>Zend\OpenId\Consumer\Storage</newNamespace>
+      <newRelativeFilePath>Zend/OpenID/Consumer/Storage/File.php</newRelativeFilePath>
+      <newNamespace>Zend\OpenID\Consumer\Storage</newNamespace>
       <newClassName>File</newClassName>
-      <newFullyQualifiedName>Zend\OpenId\Consumer\Storage\File</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OpenID\Consumer\Storage\File</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/OpenId/Consumer/Storage.php</originalRelativeFilePath>
       <originalClassName>Zend_OpenId_Consumer_Storage</originalClassName>
-      <newRelativeFilePath>Zend/OpenId/Consumer/Storage/Storage.php</newRelativeFilePath>
-      <newNamespace>Zend\OpenId\Consumer\Storage</newNamespace>
-      <newClassName>Storage</newClassName>
-      <newFullyQualifiedName>Zend\OpenId\Consumer\Storage\Storage</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/OpenID/Consumer/Storage/AbstractStorage.php</newRelativeFilePath>
+      <newNamespace>Zend\OpenID\Consumer\Storage</newNamespace>
+      <newClassName>AbstractStorage</newClassName>
+      <newFullyQualifiedName>Zend\OpenID\Consumer\Storage\AbstractStorage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/OpenId/Consumer.php</originalRelativeFilePath>
       <originalClassName>Zend_OpenId_Consumer</originalClassName>
-      <newRelativeFilePath>Zend/OpenId/Consumer/Consumer.php</newRelativeFilePath>
-      <newNamespace>Zend\OpenId\Consumer</newNamespace>
-      <newClassName>Consumer</newClassName>
-      <newFullyQualifiedName>Zend\OpenId\Consumer\Consumer</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/OpenID/Consumer/GenericConsumer.php</newRelativeFilePath>
+      <newNamespace>Zend\OpenID\Consumer</newNamespace>
+      <newClassName>GenericConsumer</newClassName>
+      <newFullyQualifiedName>Zend\OpenID\Consumer\GenericConsumer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/OpenId/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_OpenId_Exception</originalClassName>
-      <newRelativeFilePath>Zend/OpenId/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\OpenId</newNamespace>
+      <newRelativeFilePath>Zend/OpenID/Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\OpenID</newNamespace>
       <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\OpenId\Exception</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OpenID\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/OpenId/Extension/Sreg.php</originalRelativeFilePath>
       <originalClassName>Zend_OpenId_Extension_Sreg</originalClassName>
-      <newRelativeFilePath>Zend/OpenId/Extension/Sreg.php</newRelativeFilePath>
-      <newNamespace>Zend\OpenId\Extension</newNamespace>
+      <newRelativeFilePath>Zend/OpenID/Extension/Sreg.php</newRelativeFilePath>
+      <newNamespace>Zend\OpenID\Extension</newNamespace>
       <newClassName>Sreg</newClassName>
-      <newFullyQualifiedName>Zend\OpenId\Extension\Sreg</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OpenID\Extension\Sreg</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/OpenId/Extension.php</originalRelativeFilePath>
       <originalClassName>Zend_OpenId_Extension</originalClassName>
-      <newRelativeFilePath>Zend/OpenId/Extension/Extension.php</newRelativeFilePath>
-      <newNamespace>Zend\OpenId\Extension</newNamespace>
-      <newClassName>Extension</newClassName>
-      <newFullyQualifiedName>Zend\OpenId\Extension\Extension</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/OpenID/Extension/AbstractExtension.php</newRelativeFilePath>
+      <newNamespace>Zend\OpenID\Extension</newNamespace>
+      <newClassName>AbstractExtension</newClassName>
+      <newFullyQualifiedName>Zend\OpenID\Extension\AbstractExtension</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/OpenId/Provider/Storage/File.php</originalRelativeFilePath>
       <originalClassName>Zend_OpenId_Provider_Storage_File</originalClassName>
-      <newRelativeFilePath>Zend/OpenId/Provider/Storage/File.php</newRelativeFilePath>
-      <newNamespace>Zend\OpenId\Provider\Storage</newNamespace>
+      <newRelativeFilePath>Zend/OpenID/Provider/Storage/File.php</newRelativeFilePath>
+      <newNamespace>Zend\OpenID\Provider\Storage</newNamespace>
       <newClassName>File</newClassName>
-      <newFullyQualifiedName>Zend\OpenId\Provider\Storage\File</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OpenID\Provider\Storage\File</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/OpenId/Provider/Storage.php</originalRelativeFilePath>
       <originalClassName>Zend_OpenId_Provider_Storage</originalClassName>
-      <newRelativeFilePath>Zend/OpenId/Provider/Storage/Storage.php</newRelativeFilePath>
-      <newNamespace>Zend\OpenId\Provider\Storage</newNamespace>
-      <newClassName>Storage</newClassName>
-      <newFullyQualifiedName>Zend\OpenId\Provider\Storage\Storage</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/OpenID/Provider/Storage/AbstractStorage.php</newRelativeFilePath>
+      <newNamespace>Zend\OpenID\Provider\Storage</newNamespace>
+      <newClassName>AbstractStorage</newClassName>
+      <newFullyQualifiedName>Zend\OpenID\Provider\Storage\AbstractStorage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/OpenId/Provider/User/Session.php</originalRelativeFilePath>
       <originalClassName>Zend_OpenId_Provider_User_Session</originalClassName>
-      <newRelativeFilePath>Zend/OpenId/Provider/User/Session.php</newRelativeFilePath>
-      <newNamespace>Zend\OpenId\Provider\User</newNamespace>
+      <newRelativeFilePath>Zend/OpenID/Provider/User/Session.php</newRelativeFilePath>
+      <newNamespace>Zend\OpenID\Provider\User</newNamespace>
       <newClassName>Session</newClassName>
-      <newFullyQualifiedName>Zend\OpenId\Provider\User\Session</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\OpenID\Provider\User\Session</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/OpenId/Provider/User.php</originalRelativeFilePath>
       <originalClassName>Zend_OpenId_Provider_User</originalClassName>
-      <newRelativeFilePath>Zend/OpenId/Provider/User/User.php</newRelativeFilePath>
-      <newNamespace>Zend\OpenId\Provider\User</newNamespace>
-      <newClassName>User</newClassName>
-      <newFullyQualifiedName>Zend\OpenId\Provider\User\User</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/OpenID/Provider/User/AbstractUser.php</newRelativeFilePath>
+      <newNamespace>Zend\OpenID\Provider\User</newNamespace>
+      <newClassName>AbstractUser</newClassName>
+      <newFullyQualifiedName>Zend\OpenID\Provider\User\AbstractUser</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/OpenId/Provider.php</originalRelativeFilePath>
       <originalClassName>Zend_OpenId_Provider</originalClassName>
-      <newRelativeFilePath>Zend/OpenId/Provider/Provider.php</newRelativeFilePath>
-      <newNamespace>Zend\OpenId\Provider</newNamespace>
-      <newClassName>Provider</newClassName>
-      <newFullyQualifiedName>Zend\OpenId\Provider\Provider</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/OpenID/Provider/GenericProvider.php</newRelativeFilePath>
+      <newNamespace>Zend\OpenID\Provider</newNamespace>
+      <newClassName>GenericProvider</newClassName>
+      <newFullyQualifiedName>Zend\OpenID\Provider\GenericProvider</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/OpenId.php</originalRelativeFilePath>
       <originalClassName>Zend_OpenId</originalClassName>
-      <newRelativeFilePath>Zend/OpenId/OpenId.php</newRelativeFilePath>
-      <newNamespace>Zend\OpenId</newNamespace>
-      <newClassName>OpenId</newClassName>
-      <newFullyQualifiedName>Zend\OpenId\OpenId</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/OpenID/OpenID.php</newRelativeFilePath>
+      <newNamespace>Zend\OpenID</newNamespace>
+      <newClassName>OpenID</newClassName>
+      <newFullyQualifiedName>Zend\OpenID\OpenID</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Paginator/Adapter/Array.php</originalRelativeFilePath>

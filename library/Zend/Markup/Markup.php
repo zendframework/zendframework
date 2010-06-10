@@ -54,7 +54,7 @@ class Markup
 
 
     /**
-     * Disable instantiation of Zend_Markup
+     * Disable instantiation of \Zend\Markup\Markup
      */
     private function __construct() { }
 

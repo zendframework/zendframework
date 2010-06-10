@@ -101,6 +101,9 @@ Zend_Uri
 Zend_Http
  * "Zend_Http_*" becomes Zend\HTTP\*
 
+Zend_OpenId
+ * "Zend_OpenId_*" becomes Zend\OpenID\*
+
 Zend_Server:
  * "Zend_Server" prefix now becomes "Zend\Server" namespace
  * "Zend_Server_Method" prefix now becomes "Zend\Server\Method" namespace

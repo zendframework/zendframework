@@ -20,13 +20,9 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
-namespace ZendTest\Feed\Writer;
-use Zend\Feed\Writer;
-use Zend\Feed;
-use Zend\Date;
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/TestHelper.php';
+
+require_once 'Zend/Feed/Writer/Deleted.php';
 
 /**
  * @category   Zend
@@ -37,130 +33,130 @@ use Zend\Date;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DeletedTest extends \PHPUnit_Framework_TestCase
+class Zend_Feed_Writer_DeletedTest extends PHPUnit_Framework_TestCase
 {
 
     public function testSetsReference()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Zend_Feed_Writer_Deleted;
         $entry->setReference('http://www.example.com/id');
         $this->assertEquals('http://www.example.com/id', $entry->getReference());
     }
 
     public function testSetReferenceThrowsExceptionOnInvalidParameter()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Zend_Feed_Writer_Deleted;
         try {
             $entry->setReference('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testGetReferenceReturnsNullIfNotSet()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Zend_Feed_Writer_Deleted;
         $this->assertTrue(is_null($entry->getReference()));
     }
     
     public function testSetWhenDefaultsToCurrentTime()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Zend_Feed_Writer_Deleted;
         $entry->setWhen();
-        $dateNow = new Date\Date;
+        $dateNow = new Zend_Date;
         $this->assertTrue($dateNow->isLater($entry->getWhen()) || $dateNow->equals($entry->getWhen()));
     }
 
     public function testSetWhenUsesGivenUnixTimestamp()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Zend_Feed_Writer_Deleted;
         $entry->setWhen(1234567890);
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
+        $myDate = new Zend_Date('1234567890', Zend_Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($entry->getWhen()));
     }
 
     public function testSetWhenUsesZendDateObject()
     {
-        $entry = new Writer\Deleted;
-        $entry->setWhen(new Date\Date('1234567890', Date\Date::TIMESTAMP));
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
+        $entry = new Zend_Feed_Writer_Deleted;
+        $entry->setWhen(new Zend_Date('1234567890', Zend_Date::TIMESTAMP));
+        $myDate = new Zend_Date('1234567890', Zend_Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($entry->getWhen()));
     }
     
     public function testSetWhenThrowsExceptionOnInvalidParameter()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Zend_Feed_Writer_Deleted;
         try {
             $entry->setWhen('abc');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
     
     public function testGetWhenReturnsNullIfDateNotSet()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Zend_Feed_Writer_Deleted;
         $this->assertTrue(is_null($entry->getWhen()));
     }
     
     public function testAddsByNameFromArray()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Zend_Feed_Writer_Deleted;
         $entry->setBy(array('name'=>'Joe'));
         $this->assertEquals(array('name'=>'Joe'), $entry->getBy());
     }
 
     public function testAddsByEmailFromArray()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Zend_Feed_Writer_Deleted;
         $entry->setBy(array('name'=>'Joe','email'=>'joe@example.com'));
         $this->assertEquals(array('name'=>'Joe', 'email' => 'joe@example.com'), $entry->getBy());
     }
 
     public function testAddsByUriFromArray()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Zend_Feed_Writer_Deleted;
         $entry->setBy(array('name'=>'Joe','uri'=>'http://www.example.com'));
         $this->assertEquals(array('name'=>'Joe', 'uri' => 'http://www.example.com'), $entry->getBy());
     }
 
     public function testAddByThrowsExceptionOnInvalidNameFromArray()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Zend_Feed_Writer_Deleted;
         try {
             $entry->setBy(array('name'=>''));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testAddByThrowsExceptionOnInvalidEmailFromArray()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Zend_Feed_Writer_Deleted;
         try {
             $entry->setBy(array('name'=>'Joe','email'=>''));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testAddByThrowsExceptionOnInvalidUriFromArray()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Zend_Feed_Writer_Deleted;
         try {
             $entry->setBy(array('name'=>'Joe','uri'=>'notauri'));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 
     public function testAddByThrowsExceptionIfNameOmittedFromArray()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Zend_Feed_Writer_Deleted;
         try {
             $entry->setBy(array('uri'=>'notauri'));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Zend_Feed_Exception $e) {
         }
     }
 

@@ -458,7 +458,8 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
             }
         }
 
-        $params = array_merge($this->_globalParams, $userParams);
+        // Use UNION (+) in order to preserve numeric keys 
+        $params = $userParams + $this->_globalParams;
 
         $route = $this->getRoute($name);
         $url   = $route->assemble($params, $reset, $encode);

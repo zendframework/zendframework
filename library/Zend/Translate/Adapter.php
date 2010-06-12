@@ -695,10 +695,9 @@ abstract class Zend_Translate_Adapter {
                         $this->_routed[$locale] = true;
                         return $this->translate($messageId, $this->_options['route'][$locale]);
                     }
-
-                    $this->_routed = array();
                 }
 
+                $this->_routed = array();
                 if ($plural === null) {
                     return $messageId;
                 }
@@ -718,11 +717,13 @@ abstract class Zend_Translate_Adapter {
         if ((is_string($messageId) || is_int($messageId)) && isset($this->_translate[$locale][$messageId])) {
             // return original translation
             if ($plural === null) {
+                $this->_routed = array();
                 return $this->_translate[$locale][$messageId];
             }
 
             $rule = Zend_Translate_Plural::getPlural($number, $locale);
             if (isset($this->_translate[$locale][$plural[0]][$rule])) {
+                $this->_routed = array();
                 return $this->_translate[$locale][$plural[0]][$rule];
             }
         } else if (strlen($locale) != 2) {
@@ -732,11 +733,13 @@ abstract class Zend_Translate_Adapter {
             if ((is_string($messageId) || is_int($messageId)) && isset($this->_translate[$locale][$messageId])) {
                 // return regionless translation (en_US -> en)
                 if ($plural === null) {
+                    $this->_routed = array();
                     return $this->_translate[$locale][$messageId];
                 }
 
                 $rule = Zend_Translate_Plural::getPlural($number, $locale);
                 if (isset($this->_translate[$locale][$plural[0]][$rule])) {
+                    $this->_routed = array();
                     return $this->_translate[$locale][$plural[0]][$rule];
                 }
             }
@@ -750,10 +753,9 @@ abstract class Zend_Translate_Adapter {
                 $this->_routed[$locale] = true;
                 return $this->translate($messageId, $this->_options['route'][$locale]);
             }
-
-            $this->_routed = array();
         }
 
+        $this->_routed = array();
         if ($plural === null) {
             return $messageId;
         }

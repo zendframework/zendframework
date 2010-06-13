@@ -746,7 +746,7 @@ class Zend_Filter_Input
         if (null !== ($translator = $this->getTranslator())) {
             if ($translator->isTranslated($message)) {
                 $message = $translator->translate($message);
-            } elseif ($translator->isTranslated(self::MISSING_MESSAGE)) {
+            } else {
                 $message = $translator->translate(self::MISSING_MESSAGE);
             }
         }
@@ -766,7 +766,7 @@ class Zend_Filter_Input
         if (null !== ($translator = $this->getTranslator())) {
             if ($translator->isTranslated($message)) {
                 $message = $translator->translate($message);
-            } elseif ($translator->isTranslated(self::NOT_EMPTY_MESSAGE)) {
+            } else {
                 $message = $translator->translate(self::NOT_EMPTY_MESSAGE);
             }
         }

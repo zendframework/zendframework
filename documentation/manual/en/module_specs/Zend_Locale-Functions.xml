@@ -710,10 +710,10 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>TerritoryToLanguage</emphasis></entry>
 
                         <entry>
-                            Returns a list of countries which are using a language. The country code
-                            is used as array key and the language code as array value. When a
-                            language is used in several countries these countries are separated with
-                            a whitespace
+                            Returns a list of languages and the countries where they are spoken. The
+                            language is used as array key and the country code as array value. When
+                            a language is used in several countries these countries are separated
+                            with a whitespace
                         </entry>
                     </row>
 
@@ -721,10 +721,10 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>LanguageToTerritory</emphasis></entry>
 
                         <entry>
-                            Returns a list of countries and the languages spoken within these
-                            countries. The country code is used as array key and the language code
-                            as array value. When a territory is using several languages these
-                            languages are separated with a whitespace
+                            Returns a list of countries and the languages which are spoken within
+                            them. The country code is used as array key and the language code
+                            as array value. When several languages are spoken within a territory
+                            then these languages are separated with a whitespace
                         </entry>
                     </row>
 
@@ -1411,9 +1411,9 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>TerritoryToLanguage</emphasis></entry>
 
                         <entry>
-                            Returns the territories where a given language is used. The language has
+                            Returns the territory where a given language is used. The language has
                             to be given as <acronym>ISO</acronym> language code for example 'en' for
-                            english. When multiple territories exist where this language is used
+                            english. When the given language is spoken within multiple territories
                             then these territories are separated with a whitespace character
                         </entry>
                     </row>
@@ -1422,10 +1422,11 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>LanguageToTerritory</emphasis></entry>
 
                         <entry>
-                            Returns the languages which are used within a given territory. The
+                            Returns the language which is spoken within a given territory. The
                             territory has to be given as <constant>ISO3166</constant> code for
-                            example 'IT' for italia. When a language is used in multiple territories
-                            then these territories are separated with a whitespace character
+                            example 'IT' for italia. When multiple languages are spoken within the
+                            given territory then these languages are separated with a whitespace
+                            character
                         </entry>
                     </row>
 

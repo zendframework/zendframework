@@ -53,8 +53,8 @@
             using the 'adapter' configuration option. When instantiating the
             client object, you can set the 'adapter' configuration option to
             a string containing the adapter's name (eg. 'Zend_Http_Client_Adapter_Socket')
-            or to a variable holding an adapter object (eg. <code>
-            new Zend_Http_Client_Adapter_Test</code>). You can also set the
+            or to a variable holding an adapter object (eg.
+            <command>new Zend_Http_Client_Adapter_Test</command>). You can also set the
             adapter later, using the <classname>Zend_Http_Client->setConfig()</classname> method.
         </para>
     </sect2>
@@ -177,8 +177,9 @@
                 <title>HTTPS SSL Stream Parameters</title>
 
                 <para>
-                    <code>ssltransport, sslcert</code> and <code>sslpassphrase</code>
-                    are only relevant when connecting using <acronym>HTTPS</acronym>.
+                    <property>ssltransport</property>, <property>sslcert</property> and
+                    <property>sslpassphrase</property> are only relevant when connecting using
+                    <acronym>HTTPS</acronym>.
                 </para>
 
                 <para>
@@ -479,7 +480,7 @@ $client = new Zend_Http_Client($uri, $config);
             specifying the 'curloptions' key in the constructor of the adapter or by calling
             <methodname>setCurlOption($name, $value)</methodname>. The <varname>$name</varname> key
             corresponds to the CURL_* constants of the cURL extension. You can
-            get access to the Curl handle by calling <code>$adapter->getHandle();</code>
+            get access to the Curl handle by calling <command>$adapter->getHandle();</command>
         </para>
 
         <example id="zend.http.client.adapters.curl.example-2">

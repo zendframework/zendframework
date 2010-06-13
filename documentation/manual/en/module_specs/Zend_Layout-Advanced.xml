@@ -114,7 +114,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
             last action prior to exiting the dispatch loop. In most cases, the
             default plugin will be suitable, but should you desire to write
             your own, you can specify the name of the plugin class to load by
-            passing the <code>pluginClass</code> option to the
+            passing the <property>pluginClass</property> option to the
             <methodname>startMvc()</methodname> method.
         </para>
 
@@ -147,7 +147,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
             Should you feel the need to write custom functionality, simply write
             an action helper class extending
             <classname>Zend_Controller_Action_Helper_Abstract</classname> and pass the
-            class name as the <code>helperClass</code> option to the
+            class name as the <property>helperClass</property> option to the
             <methodname>startMvc()</methodname> method. Details of the implementation are
             up to you.
         </para>

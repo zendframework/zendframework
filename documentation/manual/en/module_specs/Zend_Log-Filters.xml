@@ -42,7 +42,7 @@ $logger->emerg('Emergency message');
 
         <para>
             To filter only on a specific Writer instance, use the
-            <code>addFilter</code> method of that Writer:
+            <methodname>addFilter()</methodname> method of that Writer:
         </para>
 
         <programlisting language="php"><![CDATA[

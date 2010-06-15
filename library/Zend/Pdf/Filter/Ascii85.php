@@ -134,7 +134,7 @@ class Zend_Pdf_Filter_Ascii85 implements Zend_Pdf_Filter_Interface
             if (substr($data, $i, 1) == "z") {
                 $i -= 4;
                 $output .= pack("N", 0);
-                next;
+                continue;
             }
 
             $c = substr($data, $i, 5);

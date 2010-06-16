@@ -20,10 +20,16 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Controller\Action\Helper;
+use Zend\Session;
+
+/**
  * Flash Messenger - implement session-based messages
  *
- * @uses       Zend_Controller_Action_Helper_Abstract
- * @uses       Zend_Session
+ * @uses       \Zend\Controller\Action\Helper\AbstractHelper
+ * @uses       \Zend\Session\Manager
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Action_Helper
@@ -31,7 +37,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Action_Helper_Abstract implements IteratorAggregate, Countable
+class FlashMessenger extends AbstractHelper implements \IteratorAggregate, \Countable
 {
     /**
      * $_messages - Messages from previous request
@@ -43,7 +49,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
     /**
      * $_session - Zend_Session storage object
      *
-     * @var Zend_Session
+     * @var \Zend\Session\Manager
      */
     static protected $_session = null;
 
@@ -69,8 +75,8 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
      */
     public function __construct()
     {
-        if (!self::$_session instanceof Zend_Session_Namespace) {
-            self::$_session = new Zend_Session_Namespace($this->getName());
+        if (!self::$_session instanceof Session\Container) {
+            self::$_session = new Session\Container($this->getName());
             foreach (self::$_session as $namespace => $messages) {
                 self::$_messages[$namespace] = $messages;
                 unset(self::$_session->{$namespace});
@@ -83,7 +89,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
      * case, it is resetting the namespace in case we have forwarded to a different
      * action, Flashmessage will be 'clean' (default namespace)
      *
-     * @return Zend_Controller_Action_Helper_FlashMessenger Provides a fluent interface
+     * @return \Zend\Controller\Action\Helper\FlashMessenger Provides a fluent interface
      */
     public function postDispatch()
     {
@@ -96,7 +102,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
      * per action controller messaging between requests
      *
      * @param  string $namespace
-     * @return Zend_Controller_Action_Helper_FlashMessenger Provides a fluent interface
+     * @return \Zend\Controller\Action\Helper\FlashMessenger Provides a fluent interface
      */
     public function setNamespace($namespace = 'default')
     {
@@ -107,7 +113,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
     /**
      * resetNamespace() - reset the namespace to the default
      *
-     * @return Zend_Controller_Action_Helper_FlashMessenger Provides a fluent interface
+     * @return \Zend\Controller\Action\Helper\FlashMessenger Provides a fluent interface
      */
     public function resetNamespace()
     {
@@ -119,7 +125,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
      * addMessage() - Add a message to flash message
      *
      * @param  string $message
-     * @return Zend_Controller_Action_Helper_FlashMessenger Provides a fluent interface
+     * @return \Zend\Controller\Action\Helper\FlashMessenger Provides a fluent interface
      */
     public function addMessage($message)
     {
@@ -224,10 +230,10 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
     public function getIterator()
     {
         if ($this->hasMessages()) {
-            return new ArrayObject($this->getMessages());
+            return new \ArrayObject($this->getMessages());
         }
 
-        return new ArrayObject();
+        return new \ArrayObject();
     }
 
     /**

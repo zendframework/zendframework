@@ -21,13 +21,9 @@
  */
 
 /**
- * Test helper
+ * @namespace
  */
-
-// Call Zend_Controller_Action_Helper_FlashMessengerTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Action_Helper_FlashMessengerTest::main");
-}
+namespace ZendTest\Controller\Action\Helper;
 
 
 /**
@@ -40,7 +36,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit_Framework_TestCase
+class FlashMessengerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_Controller_Action
@@ -58,7 +54,7 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit_Framework
     public $helper;
 
     /**
-     * @var Zend_Controller_Request_Http
+     * @var Zend_Controller_Request_HTTP
      */
     public $request;
 
@@ -66,18 +62,6 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit_Framework
      * @var Zend_Controller_Response_Cli
      */
     public $response;
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_FlashMessengerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function setUp()
     {
@@ -93,17 +77,17 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit_Framework
         if (headers_sent()) {
             $this->markTestSkipped('Cannot test FlashMessenger: cannot start session because headers already sent');
         }
-        Zend_Session::start();
+        \Zend\Session\Manager::start();
 
-        $this->front      = Zend_Controller_Front::getInstance();
+        $this->front      = \Zend\Controller\Front::getInstance();
         $this->front->resetInstance();
         $this->front->setControllerDirectory(dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . '_files');
         $this->front->returnResponse(true);
-        $this->request    = new Zend_Controller_Request_Http();
+        $this->request    = new \Zend\Controller\Request\HTTP();
         $this->request->setControllerName('helper-flash-messenger');
-        $this->response   = new Zend_Controller_Response_Cli();
-        $this->controller = new HelperFlashMessengerController($this->request, $this->response, array());
-        $this->helper     = new Zend_Controller_Action_Helper_FlashMessenger($this->controller);
+        $this->response   = new \Zend\Controller\Response\Cli();
+        $this->controller = new \HelperFlashMessengerController($this->request, $this->response, array());
+        $this->helper     = new \Zend\Controller\Action\Helper\FlashMessenger($this->controller);
     }
 
     public function testLoadFlashMessenger()
@@ -135,7 +119,3 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit_Framework
     }
 }
 
-// Call Zend_Controller_Action_Helper_FlashMessengerTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Action_Helper_FlashMessengerTest::main") {
-    Zend_Controller_Action_Helper_FlashMessengerTest::main();
-}

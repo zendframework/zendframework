@@ -20,14 +20,19 @@
  */
 
 /**
- * Zend_Controller_Response_Http
+ * @namespace
+ */
+namespace Zend\Controller\Response;
+
+/**
+ * Zend_Controller_Response_HTTP
  *
  * HTTP response for controllers
  *
- * @uses       Zend_Controller_Response_Abstract
+ * @uses       \Zend\Controller\Response\AbstractResponse
  * @package    Zend_Controller
  * @subpackage Response
  */
-class Zend_Controller_Response_Http extends Zend_Controller_Response_Abstract
+class HTTP extends AbstractResponse
 {
 }

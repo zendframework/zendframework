@@ -20,11 +20,13 @@
  * @version    $Id$
  */
 
-// Call Zend_LayoutTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Layout_HelperTest::main");
-}
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Layout;
+use Zend\Layout;
+use Zend\Controller\Action\HelperBroker;
+use Zend\Layout\Controller\Action\Helper;
 
 
 /**
@@ -37,76 +39,53 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Layout
  */
-class Zend_Layout_HelperTest extends PHPUnit_Framework_TestCase
+class HelperTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Layout_HelperTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
-     * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
-     *
-     * @return void
-     */
     public function setUp()
     {
-        Zend_Layout_HelperTest_Layout::resetMvcInstance();
-        Zend_Controller_Front::getInstance()->resetInstance();
-        if (Zend_Controller_Action_HelperBroker::hasHelper('Layout')) {
-            Zend_Controller_Action_HelperBroker::removeHelper('Layout');
+        \Zend\Layout\Layout::resetMvcInstance();
+        \Zend\Controller\Front::getInstance()->resetInstance();
+        if (HelperBroker\HelperBroker::hasHelper('Layout')) {
+            HelperBroker\HelperBroker::removeHelper('Layout');
         }
-        if (Zend_Controller_Action_HelperBroker::hasHelper('viewRenderer')) {
-            Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer');
+        if (HelperBroker\HelperBroker::hasHelper('viewRenderer')) {
+            HelperBroker\HelperBroker::removeHelper('viewRenderer');
         }
     }
 
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
     public function tearDown()
     {
     }
 
     public function testConstructorWithLayoutObject()
     {
-        $layout = new Zend_Layout();
-        $helper = new Zend_Layout_Controller_Action_Helper_Layout($layout);
+        $layout = new Layout\Layout();
+        $helper = new Helper\Layout($layout);
         $this->assertSame($layout, $helper->getLayoutInstance());
     }
 
     public function testGetLayoutCreatesLayoutObjectWhenNoPluginRegistered()
     {
-        $helper = new Zend_Layout_Controller_Action_Helper_Layout();
+        $helper = new Helper\Layout();
         $layout = $helper->getLayoutInstance();
-        $this->assertTrue($layout instanceof Zend_Layout);
+        $this->assertTrue($layout instanceof Layout\Layout);
     }
 
     public function testGetLayoutInstancePullsMvcLayoutInstance()
     {
-        $layout = Zend_Layout::startMvc();
-        $helper = new Zend_Layout_Controller_Action_Helper_Layout();
+        $layout = Layout\Layout::startMvc();
+        $helper = new Helper\Layout();
         $this->assertSame($layout, $helper->getLayoutInstance());
     }
 
     public function testSetLayoutInstanceReplacesExistingLayoutObject()
     {
-        $layout = Zend_Layout::startMvc();
-        $helper = new Zend_Layout_Controller_Action_Helper_Layout();
+        $layout = Layout\Layout::startMvc();
+        $helper = new Helper\Layout();
         $this->assertSame($layout, $helper->getLayoutInstance());
 
-        $newLayout = new Zend_Layout();
+        $newLayout = new Layout\Layout();
         $this->assertNotSame($layout, $newLayout);
 
         $helper->setLayoutInstance($newLayout);
@@ -115,8 +94,8 @@ class Zend_Layout_HelperTest extends PHPUnit_Framework_TestCase
 
     public function testDirectFetchesLayoutObject()
     {
-        $layout = Zend_Layout::startMvc();
-        $helper = new Zend_Layout_Controller_Action_Helper_Layout();
+        $layout = Layout\Layout::startMvc();
+        $helper = new Helper\Layout();
 
         $received = $helper->direct();
         $this->assertSame($layout, $received);
@@ -124,8 +103,8 @@ class Zend_Layout_HelperTest extends PHPUnit_Framework_TestCase
 
     public function testHelperProxiesToLayoutObjectMethods()
     {
-        $layout = Zend_Layout::startMvc();
-        $helper = new Zend_Layout_Controller_Action_Helper_Layout();
+        $layout = Layout\Layout::startMvc();
+        $helper = new Helper\Layout();
 
         $helper->setOptions(array(
             'layout'     => 'foo.phtml',
@@ -136,20 +115,4 @@ class Zend_Layout_HelperTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(dirname(__FILE__) . '/_files/layouts', $helper->getLayoutPath());
         $this->assertEquals('foo', $helper->getContentKey());
     }
-}
-
-/**
- * Zend_Layout extension to allow resetting MVC instance
- */
-class Zend_Layout_HelperTest_Layout extends Zend_Layout
-{
-    public static function resetMvcInstance()
-    {
-        self::$_mvcInstance = null;
-    }
-}
-
-// Call Zend_Layout_HelperTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Layout_HelperTest::main") {
-    Zend_Layout_HelperTest::main();
 }

@@ -21,21 +21,27 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Controller\Action\Helper;
+use Zend\Dojo;
+use Zend\Layout;
+
+/**
  * Create and send Dojo-compatible autocompletion lists
  *
- * @uses       Zend_Controller_Action_HelperBroker
- * @uses       Zend_Controller_Action_Helper_AutoComplete_Abstract
- * @uses       Zend_Controller_Front
- * @uses       Zend_Dojo_Data
- * @uses       Zend_Layout
+ * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\Helper\AutoComplete\AbstractAutoComplete
+ * @uses       \Zend\Controller\Front
+ * @uses       \Zend\Dojo\Data
+ * @uses       \Zend\Layout\Layout
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Action_Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Controller_Action_Helper_AutoCompleteDojo 
-    extends Zend_Controller_Action_Helper_AutoComplete_Abstract
+class AutoCompleteDojo extends AutoComplete\AbstractAutoComplete
 {
     /**
      * Validate data for autocompletion
@@ -59,23 +65,23 @@ class Zend_Controller_Action_Helper_AutoCompleteDojo
      */
     public function prepareAutoCompletion($data, $keepLayouts = false)
     {
-        if (!$data instanceof Zend_Dojo_Data) {
+        if (!$data instanceof Dojo\Data) {
             $items = array();
             foreach ($data as $key => $value) {
                 $items[] = array('label' => $value, 'name' => $value);
             }
-            $data = new Zend_Dojo_Data('name', $items);
+            $data = new Dojo\Data('name', $items);
         }
 
         if (!$keepLayouts) {
-            Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
-            $layout = Zend_Layout::getMvcInstance();
-            if ($layout instanceof Zend_Layout) {
+            roker\HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
+            $layout = Layout\Layout::getMvcInstance();
+            if ($layout instanceof Layout\Layout) {
                 $layout->disableLayout();
             }
         }
 
-        $response = Zend_Controller_Front::getInstance()->getResponse();
+        $response = \Zend\Controller\Front::getInstance()->getResponse();
         $response->setHeader('Content-Type', 'application/json');
 
         return $data->toJson();

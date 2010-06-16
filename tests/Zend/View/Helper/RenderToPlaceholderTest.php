@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_RenderToPlaceholderTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_RenderToPlaceholderTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
 
 
 /**
@@ -37,21 +35,21 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_RenderToPlaceholderTest extends PHPUnit_Framework_TestCase
+class RenderToPlaceholderTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_view = null;
 
     public function setUp()
     {
-        $this->_view = new Zend_View(array('scriptPath'=>dirname(__FILE__).'/_files/scripts/'));
+        $this->_view = new \Zend\View\View(array('scriptPath'=>dirname(__FILE__).'/_files/scripts/'));
     }
 
     public function testDefaultEmpty()
     {
         $this->_view->renderToPlaceholder('rendertoplaceholderscript.phtml', 'fooPlaceholder');
-        $placeholder = new Zend_View_Helper_Placeholder();
-        $this->assertEquals("Foo Bar\n", $placeholder->placeholder('fooPlaceholder')->getValue());
+        $placeholder = new \Zend\View\Helper\Placeholder();
+        $this->assertEquals("Foo Bar\n", $placeholder->direct('fooPlaceholder')->getValue());
     }
 
 }

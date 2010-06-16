@@ -20,19 +20,13 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_HeadMetaTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_HeadMetaTest::main");
-}
-
-
-/** Zend_View_Helper_HeadMeta */
-
-/** Zend_View_Helper_Placeholder_Registry */
-
-/** Zend_Registry */
-
-/** Zend_View */
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
+use Zend\View\Helper\Placeholder\Registry;
+use Zend\View;
+use Zend\View\Helper;
 
 /**
  * Test class for Zend_View_Helper_HeadMeta.
@@ -45,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
+class HeadMetaTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_HeadMeta
@@ -58,17 +52,6 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
     public $basePath;
 
     /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_HeadMetaTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      *
@@ -77,16 +60,16 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->error = false;
-        foreach (array(Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY, 'Zend_View_Helper_Doctype') as $key) {
-            if (Zend_Registry::isRegistered($key)) {
-                $registry = Zend_Registry::getInstance();
+        foreach (array(Registry\Registry::REGISTRY_KEY, 'Zend_View_Helper_Doctype') as $key) {
+            if (\Zend\Registry::isRegistered($key)) {
+                $registry = \Zend\Registry::getInstance();
                 unset($registry[$key]);
             }
         }
         $this->basePath = dirname(__FILE__) . '/_files/modules';
-        $this->view     = new Zend_View();
+        $this->view     = new View\View();
         $this->view->doctype('XHTML1_STRICT');
-        $this->helper   = new Zend_View_Helper_HeadMeta();
+        $this->helper   = new Helper\HeadMeta();
         $this->helper->setView($this->view);
     }
 
@@ -108,19 +91,19 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
 
     public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
     {
-        $registry = Zend_View_Helper_Placeholder_Registry::getRegistry();
+        $registry = Registry\Registry::getRegistry();
         if ($registry->containerExists('Zend_View_Helper_HeadMeta')) {
             $registry->deleteContainer('Zend_View_Helper_HeadMeta');
         }
         $this->assertFalse($registry->containerExists('Zend_View_Helper_HeadMeta'));
-        $helper = new Zend_View_Helper_HeadMeta();
+        $helper = new Helper\HeadMeta();
         $this->assertTrue($registry->containerExists('Zend_View_Helper_HeadMeta'));
     }
 
     public function testHeadMetaReturnsObjectInstance()
     {
-        $placeholder = $this->helper->headMeta();
-        $this->assertTrue($placeholder instanceof Zend_View_Helper_HeadMeta);
+        $placeholder = $this->helper->direct();
+        $this->assertTrue($placeholder instanceof Helper\HeadMeta);
     }
 
     public function testAppendPrependAndSetThrowExceptionsWhenNonMetaValueProvided()
@@ -128,22 +111,22 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->append('foo');
             $this->fail('Non-meta value should not append');
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
         }
         try {
             $this->helper->offsetSet(3, 'foo');
             $this->fail('Non-meta value should not offsetSet');
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
         }
         try {
             $this->helper->prepend('foo');
             $this->fail('Non-meta value should not prepend');
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
         }
         try {
             $this->helper->set('foo');
             $this->fail('Non-meta value should not set');
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
         }
     }
 
@@ -252,7 +235,7 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->setName('foo');
             $this->fail('Overloading should require at least two arguments');
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
         }
     }
 
@@ -261,7 +244,7 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->setFoo('foo');
             $this->fail('Overloading should only work for (set|prepend|append)(Name|HttpEquiv)');
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
         }
     }
 
@@ -308,7 +291,7 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
      */
     public function testToStringWhenInvalidKeyProvidedShouldConvertThrownException()
     {
-        $this->helper->headMeta('some-content', 'tag value', 'not allowed key');
+        $this->helper->direct('some-content', 'tag value', 'not allowed key');
         set_error_handler(array($this, 'handleErrors'));
         $string = @$this->helper->toString();
         $this->assertEquals('', $string);
@@ -317,7 +300,7 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
 
     public function testHeadMetaHelperCreatesItemEntry()
     {
-        $this->helper->headMeta('foo', 'keywords');
+        $this->helper->direct('foo', 'keywords');
         $values = $this->helper->getArrayCopy();
         $this->assertEquals(1, count($values));
         $item = array_shift($values);
@@ -352,7 +335,7 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
     public function testStringRepresentationReflectsDoctype()
     {
         $this->view->doctype('HTML4_STRICT');
-        $this->helper->headMeta('some content', 'foo');
+        $this->helper->direct('some content', 'foo');
         $test = $this->helper->toString();
         $this->assertNotContains('/>', $test);
         $this->assertContains('some content', $test);
@@ -364,7 +347,7 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
      */
     public function testSetNameDoesntClobber()
     {
-        $view = new Zend_View();
+        $view = new View\View();
         $view->headMeta()->setName('keywords', 'foo');
         $view->headMeta()->appendHttpEquiv('pragma', 'bar');
         $view->headMeta()->appendHttpEquiv('Cache-control', 'baz');
@@ -381,7 +364,7 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
      */
     public function testSetNameDoesntClobberPart2()
     {
-        $view = new Zend_View();
+        $view = new View\View();
         $view->headMeta()->setName('keywords', 'foo');
         $view->headMeta()->setName('description', 'foo');
         $view->headMeta()->appendHttpEquiv('pragma', 'baz');
@@ -400,9 +383,9 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
      */
     public function testPlacesMetaTagsInProperOrder()
     {
-        $view = new Zend_View();
+        $view = new View\View();
         $view->headMeta()->setName('keywords', 'foo');
-        $view->headMeta('some content', 'bar', 'name', array(), Zend_View_Helper_Placeholder_Container_Abstract::PREPEND);
+        $view->headMeta('some content', 'bar', 'name', array(), \Zend\View\Helper\Placeholder\Container\AbstractContainer::PREPEND);
 
         $this->assertEquals(
             '<meta name="bar" content="some content" />' . PHP_EOL . '<meta name="keywords" content="foo" />',
@@ -436,20 +419,20 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testCharsetValidateFail()
 	{
-		$view = new Zend_View();
+		$view = new View\View();
 		$view->doctype('HTML4_STRICT');
 
 		try {
 			$view->headMeta()->setCharset('utf-8');
 			$this->fail('Should not be able to set charset for a HTML4 doctype');
-		} catch (Zend_View_Exception $e) {}
+		} catch (View\Exception $e) {}
 	}
 
 	/**
 	 * @issue ZF-7722
 	 */
 	public function testCharset() {
-		$view = new Zend_View();
+		$view = new View\View();
 		$view->doctype('HTML5');
 
 		$view->headMeta()->setCharset('utf-8');
@@ -468,5 +451,5 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
 
 // Call Zend_View_Helper_HeadMetaTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_HeadMetaTest::main") {
-    Zend_View_Helper_HeadMetaTest::main();
+    \Zend_View_Helper_HeadMetaTest::main();
 }

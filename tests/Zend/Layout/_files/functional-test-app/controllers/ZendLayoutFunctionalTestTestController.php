@@ -21,13 +21,18 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Layout\_files\functional-test-app\controllers;
+
+/**
  * @category   Zend
  * @package    Zend_Layout
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendLayoutFunctionalTestTestController extends Zend_Controller_Action
+class ZendLayoutFunctionalTestTestController extends \Zend\Controller\Action\Action
 {
 
     public function indexAction()

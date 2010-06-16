@@ -20,13 +20,18 @@
  */
 
 /**
- * Zend_Controller_Response_HttpTestCase
+ * @namespace
+ */
+namespace Zend\Controller\Response;
+
+/**
+ * Zend_Controller_Response_HTTPTestCase
  *
- * @uses       Zend_Controller_Response_Http
+ * @uses       \Zend\Controller\Response\HTTP
  * @package    Zend_Controller
  * @subpackage Response
  */
-class Zend_Controller_Response_HttpTestCase extends Zend_Controller_Response_Http
+class HTTPTestCase extends HTTP
 {
     /**
      * "send" headers by returning array of all headers that would be sent

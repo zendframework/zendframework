@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
+use Zend\View\Helper;
 
 /**
  * Tests Zend_View_Helper_ServerUrl
@@ -32,7 +37,7 @@
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_ServerUrlTest extends PHPUnit_Framework_TestCase
+class ServerUrlTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Back up of $_SERVER
@@ -62,16 +67,16 @@ class Zend_View_Helper_ServerUrlTest extends PHPUnit_Framework_TestCase
     {
         $_SERVER['HTTP_HOST'] = 'example.com';
 
-        $url = new Zend_View_Helper_ServerUrl();
-        $this->assertEquals('http://example.com', $url->serverUrl());
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('http://example.com', $url->direct());
     }
 
     public function testConstructorWithOnlyHostIncludingPort()
     {
         $_SERVER['HTTP_HOST'] = 'example.com:8000';
 
-        $url = new Zend_View_Helper_ServerUrl();
-        $this->assertEquals('http://example.com:8000', $url->serverUrl());
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('http://example.com:8000', $url->direct());
     }
 
     public function testConstructorWithHostAndHttpsOn()
@@ -79,8 +84,8 @@ class Zend_View_Helper_ServerUrlTest extends PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST'] = 'example.com';
         $_SERVER['HTTPS'] = 'on';
 
-        $url = new Zend_View_Helper_ServerUrl();
-        $this->assertEquals('https://example.com', $url->serverUrl());
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('https://example.com', $url->direct());
     }
 
     public function testConstructorWithHostAndHttpsTrue()
@@ -88,8 +93,8 @@ class Zend_View_Helper_ServerUrlTest extends PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST'] = 'example.com';
         $_SERVER['HTTPS'] = true;
 
-        $url = new Zend_View_Helper_ServerUrl();
-        $this->assertEquals('https://example.com', $url->serverUrl());
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('https://example.com', $url->direct());
     }
 
     public function testConstructorWithHostIncludingPortAndHttpsTrue()
@@ -97,8 +102,8 @@ class Zend_View_Helper_ServerUrlTest extends PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST'] = 'example.com:8181';
         $_SERVER['HTTPS'] = true;
 
-        $url = new Zend_View_Helper_ServerUrl();
-        $this->assertEquals('https://example.com:8181', $url->serverUrl());
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('https://example.com:8181', $url->direct());
     }
 
     public function testConstructorWithHttpHostAndServerNameAndPortSet()
@@ -107,8 +112,8 @@ class Zend_View_Helper_ServerUrlTest extends PHPUnit_Framework_TestCase
         $_SERVER['SERVER_NAME'] = 'example.org';
         $_SERVER['SERVER_PORT'] = 8080;
 
-        $url = new Zend_View_Helper_ServerUrl();
-        $this->assertEquals('http://example.com', $url->serverUrl());
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('http://example.com', $url->direct());
     }
 
     public function testConstructorWithNoHttpHostButServerNameAndPortSet()
@@ -117,8 +122,8 @@ class Zend_View_Helper_ServerUrlTest extends PHPUnit_Framework_TestCase
         $_SERVER['SERVER_NAME'] = 'example.org';
         $_SERVER['SERVER_PORT'] = 8080;
 
-        $url = new Zend_View_Helper_ServerUrl();
-        $this->assertEquals('http://example.org:8080', $url->serverUrl());
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('http://example.org:8080', $url->direct());
     }
 
     public function testServerUrlWithTrueParam()
@@ -127,8 +132,8 @@ class Zend_View_Helper_ServerUrlTest extends PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST']   = 'example.com';
         $_SERVER['REQUEST_URI'] = '/foo.html';
 
-        $url = new Zend_View_Helper_ServerUrl();
-        $this->assertEquals('http://example.com/foo.html', $url->serverUrl(true));
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('http://example.com/foo.html', $url->direct(true));
     }
 
     public function testServerUrlWithInteger()
@@ -137,8 +142,8 @@ class Zend_View_Helper_ServerUrlTest extends PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST'] = 'example.com';
         $_SERVER['REQUEST_URI'] = '/foo.html';
 
-        $url = new Zend_View_Helper_ServerUrl();
-        $this->assertEquals('http://example.com', $url->serverUrl(1337));
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('http://example.com', $url->direct(1337));
     }
 
     public function testServerUrlWithObject()
@@ -147,7 +152,7 @@ class Zend_View_Helper_ServerUrlTest extends PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST'] = 'example.com';
         $_SERVER['REQUEST_URI'] = '/foo.html';
 
-        $url = new Zend_View_Helper_ServerUrl();
-        $this->assertEquals('http://example.com', $url->serverUrl(new stdClass()));
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('http://example.com', $url->direct(new \stdClass()));
     }
 }

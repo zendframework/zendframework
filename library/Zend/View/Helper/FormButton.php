@@ -21,16 +21,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper to generate a "button" element
  *
- * @uses       Zend_View_Helper_FormElement
+ * @uses       \Zend\View\Helper\FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_FormButton extends Zend_View_Helper_FormElement
+class FormButton extends FormElement
 {
     /**
      * Generates a 'button' element.
@@ -47,9 +52,15 @@ class Zend_View_Helper_FormButton extends Zend_View_Helper_FormElement
      *
      * @return string The element XHTML.
      */
-    public function formButton($name, $value = null, $attribs = null)
+    public function direct($name = null, $value = null, $attribs = null)
     {
-        $info    = $this->_getInfo($name, $value, $attribs);
+        if ($name == null) {
+            throw new \InvalidArgumentException('FormButton: missing argument. $name is required in formButton($name, $value = null, $attribs = null)');
+        }
+
+        $info = $this->_getInfo($name, $value, $attribs);
+        
+        $id = $disable = $escape = null;
         extract($info); // name, id, value, attribs, options, listsep, disable
 
         // Get content

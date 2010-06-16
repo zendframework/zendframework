@@ -20,22 +20,26 @@
  */
 
 /**
- * @uses       Zend_Controller_Action_Exception
- * @uses       Zend_Controller_Action_Helper_Abstract
- * @uses       Zend_Cache_Manager
+ * @namespace
+ */
+namespace Zend\Controller\Action\Helper;
+
+/**
+ * @uses       \Zend\Controller\Action\Exception
+ * @uses       \Zend\Controller\Action\Helper\AbstractHelper
+ * @uses       \Zend\Cache\Manager
  * @category   Zend
  * @package    Zend_Controller
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Controller_Action_Helper_Cache
-    extends Zend_Controller_Action_Helper_Abstract
+class Cache extends AbstractHelper
 {
 
     /**
      * Local Cache Manager object used by Helper
      *
-     * @var Zend_Cache_Manager
+     * @var \Zend\Cache\Manager
      */
     protected $_manager = null;
 
@@ -117,10 +121,10 @@ class Zend_Controller_Action_Helper_Cache
      */
     public function removePage($relativeUrl, $recursive = false)
     {
-        $cache = $this->getCache(Zend_Cache_Manager::PAGECACHE);
+        $cache = $this->getCache(\Zend\Cache\Manager::PAGECACHE);
         if ($recursive) {
             $backend = $cache->getBackend();
-            if (($backend instanceof Zend_Cache_Backend)
+            if (($backend instanceof \Zend\Cache\Backend)
                 && method_exists($backend, 'removeRecursively')
             ) {
                 return $backend->removeRecursively($relativeUrl);
@@ -141,8 +145,8 @@ class Zend_Controller_Action_Helper_Cache
      */
     public function removePagesTagged(array $tags)
     {
-        return $this->getCache(Zend_Cache_Manager::PAGECACHE)
-            ->clean(Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG, $tags);
+        return $this->getCache(\Zend\Cache\Manager::PAGECACHE)
+            ->clean(\Zend\Cache\Cache::CLEANING_MODE_MATCHING_ANY_TAG, $tags);
     }
 
     /**
@@ -173,7 +177,7 @@ class Zend_Controller_Action_Helper_Cache
             if (isset($this->_extensions[$controller][$action])) {
                 $extension = $this->_extensions[$controller][$action];
             }
-            $this->getCache(Zend_Cache_Manager::PAGECACHE)
+            $this->getCache(\Zend\Cache\Manager::PAGECACHE)
                 ->start($this->_encodeCacheId($reqUri), $tags, $extension);
         }
     }
@@ -194,10 +198,10 @@ class Zend_Controller_Action_Helper_Cache
     /**
      * Set an instance of the Cache Manager for this helper
      *
-     * @param Zend_Cache_Manager $manager
+     * @param \Zend\Cache\Manager $manager
      * @return void
      */
-    public function setManager(Zend_Cache_Manager $manager)
+    public function setManager(\Zend\Cache\Manager $manager)
     {
         $this->_manager = $manager;
         return $this;
@@ -207,20 +211,20 @@ class Zend_Controller_Action_Helper_Cache
      * Get the Cache Manager instance or instantiate the object if not
      * exists. Attempts to load from bootstrap if available.
      *
-     * @return Zend_Cache_Manager
+     * @return \Zend\Cache\Manager
      */
     public function getManager()
     {
         if (!is_null($this->_manager)) {
             return $this->_manager;
         }
-        $front = Zend_Controller_Front::getInstance();
+        $front = \Zend\Controller\Front::getInstance();
         if ($front->getParam('bootstrap')
         && $front->getParam('bootstrap')->getResource('CacheManager')) {
             return $front->getParam('bootstrap')
                 ->getResource('CacheManager');
         }
-        $this->_manager = new Zend_Cache_Manager;
+        $this->_manager = new \Zend\Cache\Manager;
         return $this->_manager;
     }
 
@@ -260,7 +264,7 @@ class Zend_Controller_Action_Helper_Cache
                 array($this->getManager(), $method), $args
             );
         }
-        throw new Zend_Controller_Action_Exception('Method does not exist:'
+        throw new \Zend\Controller\Action\Exception('Method does not exist:'
             . $method);
     }
 

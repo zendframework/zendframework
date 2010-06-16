@@ -39,7 +39,7 @@ namespace Zend\REST;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Route extends \Zend_Controller_Router_Route_Module
+class Route extends \Zend\Controller\Router\Route\Module
 {
     /**
      * Specific Modules to receive RESTful routes
@@ -65,7 +65,7 @@ class Route extends \Zend_Controller_Router_Route_Module
      * @param array $defaults Defaults for map variables with keys as variable names
      * @param array $responders Modules or controllers to receive RESTful routes
      */
-    public function __construct(\Zend_Controller_Front $front,
+    public function __construct(\Zend\Controller\Front $front,
         array $defaults = array(),
         array $responders = array()
     ) {
@@ -84,7 +84,7 @@ class Route extends \Zend_Controller_Router_Route_Module
      */
     public static function getInstance(\Zend\Config\Config $config)
     {
-        $frontController = \Zend_Controller_Front::getInstance();
+        $frontController = \Zend\Controller\Front::getInstance();
         $defaultsArray = array();
         $restfulConfigArray = array();
         foreach ($config as $key => $values) {
@@ -113,7 +113,7 @@ class Route extends \Zend_Controller_Router_Route_Module
      */
     public function match($request, $partial = false)
     {
-        if (!$request instanceof \Zend_Controller_Request_Http) {
+        if (!$request instanceof \Zend\Controller\Request\HTTP) {
             $request = $this->_front->getRequest();
         }
         $this->_request = $request;

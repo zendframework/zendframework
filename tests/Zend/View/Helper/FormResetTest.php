@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_FormResetTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormResetTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
 
 /**
  * Test class for Zend_View_Helper_FormReset.
@@ -38,18 +36,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormResetTest extends PHPUnit_Framework_TestCase
+class FormResetTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormResetTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -59,12 +47,12 @@ class Zend_View_Helper_FormResetTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        if (Zend_Registry::isRegistered('Zend_View_Helper_Doctype')) {
-            $registry = Zend_Registry::getInstance();
+        if (\Zend\Registry::isRegistered('Zend_View_Helper_Doctype')) {
+            $registry = \Zend\Registry::getInstance();
             unset($registry['Zend_View_Helper_Doctype']);
         }
-        $this->view   = new Zend_View();
-        $this->helper = new Zend_View_Helper_FormReset();
+        $this->view   = new \Zend\View\View();
+        $this->helper = new \Zend\View\Helper\FormReset();
         $this->helper->setView($this->view);
     }
 
@@ -81,7 +69,7 @@ class Zend_View_Helper_FormResetTest extends PHPUnit_Framework_TestCase
 
     public function testShouldRenderResetInput()
     {
-        $html = $this->helper->formReset(array(
+        $html = $this->helper->direct(array(
             'name'    => 'foo',
             'value'   => 'Reset',
         ));
@@ -93,7 +81,7 @@ class Zend_View_Helper_FormResetTest extends PHPUnit_Framework_TestCase
      */
     public function testShouldAllowDisabling()
     {
-        $html = $this->helper->formReset(array(
+        $html = $this->helper->direct(array(
             'name'    => 'foo',
             'value'   => 'Reset',
             'attribs' => array('disable' => true)
@@ -103,19 +91,15 @@ class Zend_View_Helper_FormResetTest extends PHPUnit_Framework_TestCase
 
     public function testShouldRenderAsHtmlByDefault()
     {
-        $test = $this->helper->formReset('foo', 'bar');
+        $test = $this->helper->direct('foo', 'bar');
         $this->assertNotContains(' />', $test);
     }
 
     public function testShouldAllowRenderingAsXHtml()
     {
         $this->view->doctype('XHTML1_STRICT');
-        $test = $this->helper->formReset('foo', 'bar');
+        $test = $this->helper->direct('foo', 'bar');
         $this->assertContains(' />', $test);
     }
 }
 
-// Call Zend_View_Helper_FormResetTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormResetTest::main") {
-    Zend_View_Helper_FormResetTest::main();
-}

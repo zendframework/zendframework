@@ -21,18 +21,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+use Zend\Layout;
+
+/**
  * Helper for simplifying JSON responses
  *
- * @uses       Zend_Controller_Front
- * @uses       Zend_Json
- * @uses       Zend_Layout
- * @uses       Zend_View_Helper_Abstract
+ * @uses       \Zend\Controller\Front
+ * @uses       \Zend\JSON\JSON
+ * @uses       \Zend\Layout\Layout
+ * @uses       \Zend\View\Helper\AbstractHelper
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_Json extends Zend_View_Helper_Abstract
+class JSON extends AbstractHelper
 {
     /**
      * Encode data as JSON, disable layouts, and set response header
@@ -47,8 +53,12 @@ class Zend_View_Helper_Json extends Zend_View_Helper_Abstract
      *         that will not be passed to Zend_Json::encode method but will be used here
      * @return string|void
      */
-    public function json($data, $keepLayouts = false)
+    public function direct($data = null, $keepLayouts = false)
     {
+        if ($data == null) {
+            throw new \InvalidArgumentException('JSON: missing argument. $data is required in json($data, $keepLayouts = false)');
+        }
+        
         $options = array();
         if (is_array($keepLayouts))
         {
@@ -59,15 +69,15 @@ class Zend_View_Helper_Json extends Zend_View_Helper_Abstract
             unset($options['keepLayouts']);
         }
 
-        $data = Zend_Json::encode($data, null, $options);
+        $data = \Zend\JSON\JSON::encode($data, null, $options);
         if (!$keepLayouts) {
-            $layout = Zend_Layout::getMvcInstance();
-            if ($layout instanceof Zend_Layout) {
+            $layout = Layout\Layout::getMvcInstance();
+            if ($layout instanceof Layout\Layout) {
                 $layout->disableLayout();
             }
         }
 
-        $response = Zend_Controller_Front::getInstance()->getResponse();
+        $response = \Zend\Controller\Front::getInstance()->getResponse();
         $response->setHeader('Content-Type', 'application/json');
         return $data;
     }

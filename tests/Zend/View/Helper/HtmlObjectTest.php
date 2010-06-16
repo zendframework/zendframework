@@ -20,12 +20,11 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_HtmlObjectTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_HtmlObjectTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
+use Zend\View\Helper;
 
 /**
  * @category   Zend
@@ -36,25 +35,12 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_HtmlObjectTest extends PHPUnit_Framework_TestCase
+class HtmlObjectTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_HtmlObject
      */
     public $helper;
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_HtmlObjectTest");
-        PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -64,8 +50,8 @@ class Zend_View_Helper_HtmlObjectTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new Zend_View();
-        $this->helper = new Zend_View_Helper_HtmlObject();
+        $this->view = new \Zend\View\View();
+        $this->helper = new Helper\HtmlObject();
         $this->helper->setView($this->view);
     }
 
@@ -76,12 +62,12 @@ class Zend_View_Helper_HtmlObjectTest extends PHPUnit_Framework_TestCase
 
     public function testViewObjectIsSet()
     {
-        $this->assertType('Zend_View_Interface', $this->helper->view);
+        $this->assertType('Zend\View\ViewInterface', $this->helper->view);
     }
 
     public function testMakeHtmlObjectWithoutAttribsWithoutParams()
     {
-        $htmlObject = $this->helper->htmlObject('datastring', 'typestring');
+        $htmlObject = $this->helper->direct('datastring', 'typestring');
 
         $this->assertContains('<object data="datastring" type="typestring">', $htmlObject);
         $this->assertContains('</object>', $htmlObject);
@@ -92,7 +78,7 @@ class Zend_View_Helper_HtmlObjectTest extends PHPUnit_Framework_TestCase
         $attribs = array('attribkey1' => 'attribvalue1',
                          'attribkey2' => 'attribvalue2');
 
-        $htmlObject = $this->helper->htmlObject('datastring', 'typestring', $attribs);
+        $htmlObject = $this->helper->direct('datastring', 'typestring', $attribs);
 
         $this->assertContains('<object data="datastring" type="typestring" attribkey1="attribvalue1" attribkey2="attribvalue2">', $htmlObject);
         $this->assertContains('</object>', $htmlObject);
@@ -100,12 +86,12 @@ class Zend_View_Helper_HtmlObjectTest extends PHPUnit_Framework_TestCase
 
     public function testMakeHtmlObjectWithoutAttribsWithParamsHtml()
     {
-        $this->view->doctype(Zend_View_Helper_Doctype::HTML4_STRICT);
+        $this->view->doctype(Helper\Doctype::HTML4_STRICT);
 
         $params = array('paramname1' => 'paramvalue1',
                         'paramname2' => 'paramvalue2');
 
-        $htmlObject = $this->helper->htmlObject('datastring', 'typestring', array(), $params);
+        $htmlObject = $this->helper->direct('datastring', 'typestring', array(), $params);
 
         $this->assertContains('<object data="datastring" type="typestring">', $htmlObject);
         $this->assertContains('</object>', $htmlObject);
@@ -119,12 +105,12 @@ class Zend_View_Helper_HtmlObjectTest extends PHPUnit_Framework_TestCase
 
     public function testMakeHtmlObjectWithoutAttribsWithParamsXhtml()
     {
-        $this->view->doctype(Zend_View_Helper_Doctype::XHTML1_STRICT);
+        $this->view->doctype(Helper\Doctype::XHTML1_STRICT);
 
         $params = array('paramname1' => 'paramvalue1',
                         'paramname2' => 'paramvalue2');
 
-        $htmlObject = $this->helper->htmlObject('datastring', 'typestring', array(), $params);
+        $htmlObject = $this->helper->direct('datastring', 'typestring', array(), $params);
 
         $this->assertContains('<object data="datastring" type="typestring">', $htmlObject);
         $this->assertContains('</object>', $htmlObject);
@@ -138,15 +124,10 @@ class Zend_View_Helper_HtmlObjectTest extends PHPUnit_Framework_TestCase
 
     public function testMakeHtmlObjectWithContent()
     {
-        $htmlObject = $this->helper->htmlObject('datastring', 'typestring', array(), array(), 'testcontent');
+        $htmlObject = $this->helper->direct('datastring', 'typestring', array(), array(), 'testcontent');
 
         $this->assertContains('<object data="datastring" type="typestring">', $htmlObject);
         $this->assertContains('testcontent', $htmlObject);
         $this->assertContains('</object>', $htmlObject);
     }
-}
-
-// Call Zend_View_Helper_HtmlObjectTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_HtmlObjectTest::main") {
-    Zend_View_Helper_HtmlObjectTest::main();
 }

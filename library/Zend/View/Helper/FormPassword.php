@@ -21,16 +21,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper to generate a "password" element
  *
- * @uses       Zend_View_Helper_FormElement
+ * @uses       \Zend\View\Helper\FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_FormPassword extends Zend_View_Helper_FormElement
+class FormPassword extends FormElement
 {
     /**
      * Generates a 'password' element.
@@ -47,8 +52,12 @@ class Zend_View_Helper_FormPassword extends Zend_View_Helper_FormElement
      *
      * @return string The element XHTML.
      */
-    public function formPassword($name, $value = null, $attribs = null)
+    public function direct($name = null, $value = null, $attribs = null)
     {
+        if ($name == null) {
+            throw new \InvalidArgumentException('FormPassword: missing argument. $name is required in formPassword($name, $value = null, $attribs = null)');
+        }
+        
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, value, attribs, options, listsep, disable
 
@@ -70,7 +79,7 @@ class Zend_View_Helper_FormPassword extends Zend_View_Helper_FormElement
 
         // XHTML or HTML end tag?
         $endTag = ' />';
-        if (($this->view instanceof Zend_View_Abstract) && !$this->view->doctype()->isXhtml()) {
+        if (($this->view instanceof \Zend\View\AbstractView) && !$this->view->doctype()->isXhtml()) {
             $endTag= '>';
         }
 

@@ -21,18 +21,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Controller\Action\Helper;
+
+/**
  * Simplify AJAX context switching based on requested format
  *
- * @uses       Zend_Controller_Action_HelperBroker
- * @uses       Zend_Controller_Action_Helper_Abstract
- * @uses       Zend_View_Helper_Json
+ * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\Helper\AbstractHelper
+ * @uses       \Zend\View\Helper\JSON
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Action_Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Controller_Action_Helper_Json extends Zend_Controller_Action_Helper_Abstract
+class JSON extends AbstractHelper
 {
     /**
      * Suppress exit when sendJson() called
@@ -56,16 +61,16 @@ class Zend_Controller_Action_Helper_Json extends Zend_Controller_Action_Helper_A
      *         then, the array can contains a 'keepLayout'=>true|false
      *         that will not be passed to Zend_Json::encode method but will be passed
      *         to Zend_View_Helper_Json
-     * @throws Zend_Controller_Action_Helper_Json
+     * @throws \Zend\Controller\Action\Helper\JSON
      * @return string
      */
     public function encodeJson($data, $keepLayouts = false)
     {
-        $jsonHelper = new Zend_View_Helper_Json();
-        $data = $jsonHelper->json($data, $keepLayouts);
+        $jsonHelper = new \Zend\View\Helper\JSON();
+        $data = $jsonHelper->direct($data, $keepLayouts);
 
         if (!$keepLayouts) {
-            Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
+            \Zend\Controller\Action\HelperBroker\HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
         }
 
         return $data;

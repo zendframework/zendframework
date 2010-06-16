@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\View\Helper;
-use Zend\Layout;
+use Zend\Layout\Layout as LayoutManager;
 
 /**
  * Helper for simplifying JSON responses
@@ -71,8 +71,8 @@ class JSON extends AbstractHelper
 
         $data = \Zend\JSON\JSON::encode($data, null, $options);
         if (!$keepLayouts) {
-            $layout = Layout\Layout::getMvcInstance();
-            if ($layout instanceof Layout\Layout) {
+            $layout = LayoutManager::getMvcInstance();
+            if ($layout instanceof LayoutManager) {
                 $layout->disableLayout();
             }
         }

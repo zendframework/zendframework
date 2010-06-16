@@ -84,7 +84,7 @@ class SitemapTest extends TestAbstract
         $this->_oldRouter = $this->_front->getRouter();
 
         $this->_front->resetInstance();
-        $this->_front->setRequest(new Request\Http());
+        $this->_front->setRequest(new Request\HTTP());
         $this->_front->getRouter()->addDefaultRoutes();
 
         parent::setUp();
@@ -97,7 +97,7 @@ class SitemapTest extends TestAbstract
         if (null !== $this->_oldRequest) {
             $this->_front->setRequest($this->_oldRequest);
         } else {
-            $this->_front->setRequest(new Request\Http());
+            $this->_front->setRequest(new Request\HTTP());
         }
         $this->_front->setRouter($this->_oldRouter);
 

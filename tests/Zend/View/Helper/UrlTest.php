@@ -20,15 +20,10 @@
  * @version $Id$
  */
 
-// Call Zend_View_Helper_UrlTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_UrlTest::main");
-}
-
-
-
-/* Test dependency on Front Controller because there is no way to get the Controller out of View instance dynamically */
-
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
 
 /**
  * Zend_View_Helper_UrlTest
@@ -43,20 +38,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_UrlTest extends PHPUnit_Framework_TestCase
+class UrlTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_UrlTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -66,29 +49,24 @@ class Zend_View_Helper_UrlTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->front = Zend_Controller_Front::getInstance();
+        $this->front = \Zend\Controller\Front::getInstance();
         $this->front->getRouter()->addDefaultRoutes();
 
         // $this->view = new Zend_View();
-        $this->helper = new Zend_View_Helper_Url();
+        $this->helper = new \Zend\View\Helper\Url();
         // $this->helper->setView($this->view);
     }
 
     public function testDefaultEmpty()
     {
-        $url = $this->helper->url();
+        $url = $this->helper->direct();
         $this->assertEquals('/', $url);
     }
 
     public function testDefault()
     {
-        $url = $this->helper->url(array('controller' => 'ctrl', 'action' => 'act'));
+        $url = $this->helper->direct(array('controller' => 'ctrl', 'action' => 'act'));
         $this->assertEquals('/ctrl/act', $url);
     }
 
-}
-
-// Call Zend_View_Helper_UrlTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_UrlTest::main") {
-    Zend_View_Helper_UrlTest::main();
 }

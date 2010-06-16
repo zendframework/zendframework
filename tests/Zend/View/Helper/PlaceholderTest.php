@@ -20,17 +20,13 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_PlaceholderTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_PlaceholderTest::main");
-}
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
+use Zend\View\Helper;
+use Zend\View\Helper\Placeholder\Registry;
 
-
-/** Zend_View_Helper_Placeholder */
-
-/** Zend_View_Helper_Placeholder_Registry */
-
-/** Zend_Registry */
 
 /**
  * Test class for Zend_View_Helper_Placeholder.
@@ -43,24 +39,12 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_PlaceholderTest extends PHPUnit_Framework_TestCase
+class PlaceholderTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_Placeholder
      */
     public $placeholder;
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_PlaceholderTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -70,7 +54,7 @@ class Zend_View_Helper_PlaceholderTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->placeholder = new Zend_View_Helper_Placeholder();
+        $this->placeholder = new Helper\Placeholder();
     }
 
     /**
@@ -82,7 +66,7 @@ class Zend_View_Helper_PlaceholderTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->placeholder);
-        Zend_Registry::getInstance()->offsetUnset(Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY);
+        \Zend\Registry::getInstance()->offsetUnset(Registry\Registry::REGISTRY_KEY);
     }
 
     /**
@@ -90,16 +74,16 @@ class Zend_View_Helper_PlaceholderTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorCreatesRegistryOffset()
     {
-        $this->assertTrue(Zend_Registry::isRegistered(Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY));
+        $this->assertTrue(\Zend\Registry::isRegistered(Registry\Registry::REGISTRY_KEY));
     }
 
     public function testMultiplePlaceholdersUseSameRegistry()
     {
-        $this->assertTrue(Zend_Registry::isRegistered(Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY));
-        $registry = Zend_Registry::get(Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY);
+        $this->assertTrue(\Zend\Registry::isRegistered(Registry\Registry::REGISTRY_KEY));
+        $registry = \Zend\Registry::get(Registry\Registry::REGISTRY_KEY);
         $this->assertSame($registry, $this->placeholder->getRegistry());
 
-        $placeholder = new Zend_View_Helper_Placeholder();
+        $placeholder = new Helper\Placeholder();
 
         $this->assertSame($registry, $placeholder->getRegistry());
         $this->assertSame($this->placeholder->getRegistry(), $placeholder->getRegistry());
@@ -110,8 +94,7 @@ class Zend_View_Helper_PlaceholderTest extends PHPUnit_Framework_TestCase
      */
     public function testSetView()
     {
-        include_once 'Zend/View.php';
-        $view = new Zend_View();
+        $view = new \Zend\View\View();
         $this->placeholder->setView($view);
         $this->assertSame($view, $this->placeholder->view);
     }
@@ -121,8 +104,8 @@ class Zend_View_Helper_PlaceholderTest extends PHPUnit_Framework_TestCase
      */
     public function testPlaceholderRetrievesContainer()
     {
-        $container = $this->placeholder->placeholder('foo');
-        $this->assertTrue($container instanceof Zend_View_Helper_Placeholder_Container_Abstract);
+        $container = $this->placeholder->direct('foo');
+        $this->assertTrue($container instanceof \Zend\View\Helper\Placeholder\Container\AbstractContainer);
     }
 
     /**
@@ -130,13 +113,8 @@ class Zend_View_Helper_PlaceholderTest extends PHPUnit_Framework_TestCase
      */
     public function testPlaceholderRetrievesSameContainerOnSubsequentCalls()
     {
-        $container1 = $this->placeholder->placeholder('foo');
-        $container2 = $this->placeholder->placeholder('foo');
+        $container1 = $this->placeholder->direct('foo');
+        $container2 = $this->placeholder->direct('foo');
         $this->assertSame($container1, $container2);
     }
-}
-
-// Call Zend_View_Helper_PlaceholderTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_PlaceholderTest::main") {
-    Zend_View_Helper_PlaceholderTest::main();
 }

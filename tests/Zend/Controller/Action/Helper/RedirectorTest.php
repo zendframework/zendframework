@@ -20,12 +20,13 @@
  * @version    $Id$
  */
 
-// Call Zend_Controller_Action_Helper_RedirectorTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Action_Helper_RedirectorTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Controller\Action\Helper;
+use Zend\Controller;
+use Zend\Controller\Action;
+use Zend\Controller\Router\Route;
 
 /**
  * Test class for Zend_Controller_Action_Helper_Redirector.
@@ -39,7 +40,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_TestCase
+class RedirectorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_Controller_Action_Helper_Redirector
@@ -47,12 +48,12 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
     public $redirector;
 
     /**
-     * @var Zend_Controller_Request_Http
+     * @var Zend_Controller_Request_HTTP
      */
     public $request;
 
     /**
-     * @var Zend_Controller_Response_Http
+     * @var Zend_Controller_Response_HTTP
      */
     public $response;
 
@@ -61,15 +62,6 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
      */
     public $controller;
 
-    /**
-     * Runs the test methods of this class.
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_RedirectorTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Set up redirector
@@ -81,15 +73,15 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
      */
     public function setUp()
     {
-        $front = Zend_Controller_Front::getInstance();
+        $front = Controller\Front::getInstance();
         $front->resetInstance();
-        Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer');
+        \Zend\Controller\Action\HelperBroker\HelperBroker::removeHelper('viewRenderer');
 
-        $this->redirector = new Zend_Controller_Action_Helper_Redirector();
+        $this->redirector = new \Zend\Controller\Action\Helper\Redirector();
         $this->router     = $front->getRouter();
-        $this->request    = new Zend_Controller_Request_Http();
-        $this->response   = new Zend_Controller_Response_Http();
-        $this->controller = new Zend_Controller_Action_Helper_Redirector_TestController(
+        $this->request    = new \Zend\Controller\Request\HTTP();
+        $this->response   = new \Zend\Controller\Response\HTTP();
+        $this->controller = new TestController(
             $this->request,
             $this->response,
             array()
@@ -127,13 +119,13 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
         try {
             $this->redirector->setCode(251);
             $this->fail('Invalid redirect code should throw exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
 
         try {
             $this->redirector->setCode(351);
             $this->fail('Invalid redirect code should throw exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
@@ -145,27 +137,27 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
         try {
             $this->redirector->setCode('251');
             $this->fail('Invalid redirect code should throw exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
 
         try {
             $this->redirector->setCode('351');
             $this->fail('Invalid redirect code should throw exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
-    public function testRedirectorShouldOnlyAllowValidHttpRedirectCodes()
+    public function testRedirectorShouldOnlyAllowValidHTTPRedirectCodes()
     {
         try {
             $this->redirector->setCode('306');
             $this->fail('Invalid redirect code should throw exception');
-        } catch (Zend_Controller_Action_Exception $e) {
+        } catch (Action\Exception $e) {
         }
         try {
             $this->redirector->setCode('304');
             $this->fail('Invalid redirect code should throw exception');
-        } catch (Zend_Controller_Action_Exception $e) {
+        } catch (Action\Exception $e) {
         }
     }
 
@@ -256,8 +248,8 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
 
     public function testSetGotoRoute()
     {
-        $router = Zend_Controller_Front::getInstance()->getRouter();
-        $route = new Zend_Controller_Router_Route(
+        $router = Controller\Front::getInstance()->getRouter();
+        $route = new Route\Route(
             'blog/archive/:id',
             array('controller' => 'blog', 'action' => 'view', 'id' => false),
             array('id' => '\d+')
@@ -293,19 +285,19 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
         $this->assertEquals('/my/foo/bar', $this->redirector->getRedirectUrl());
     }
 
-    public function testSetGotoUrlWithHttpCodeUsingCodeProperty()
+    public function testSetGotoUrlWithHTTPCodeUsingCodeProperty()
     {
         $this->redirector->setCode(301);
         $this->redirector->setGotoUrl('/foo/bar');
         $this->assertEquals('/foo/bar', $this->redirector->getRedirectUrl());
-        $this->assertEquals(301, $this->response->getHttpResponseCode());
+        $this->assertEquals(301, $this->response->getHTTPResponseCode());
     }
 
-    public function testSetGotoUrlWithHttpCodeUsingCodeOption()
+    public function testSetGotoUrlWithHTTPCodeUsingCodeOption()
     {
         $this->redirector->setGotoUrl('/foo/bar', array('code' => 301));
         $this->assertEquals('/foo/bar', $this->redirector->getRedirectUrl());
-        $this->assertEquals(301, $this->response->getHttpResponseCode());
+        $this->assertEquals(301, $this->response->getHTTPResponseCode());
     }
 
     /**
@@ -334,8 +326,8 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
      */
     public function testGotoRoute()
     {
-        $router = Zend_Controller_Front::getInstance()->getRouter();
-        $route = new Zend_Controller_Router_Route(
+        $router = Controller\Front::getInstance()->getRouter();
+        $route = new Route\Route(
             'blog/archive/:id',
             array('controller' => 'blog', 'action' => 'view', 'id' => false),
             array('id' => '\d+')
@@ -467,7 +459,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
     /**
      * @group ZF-4318
      */
-    public function testServerVariableHttpsToOffDoesNotBuildHttpsUrl()
+    public function testServerVariableHTTPsToOffDoesNotBuildHTTPsUrl()
     {
         // Set Preconditions from Issue:
         $_SERVER['HTTPS'] = "off";
@@ -491,13 +483,13 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
 /**
  * Test controller for use with redirector tests
  */
-class Zend_Controller_Action_Helper_Redirector_TestController extends Zend_Controller_Action
+class TestController extends Action\Action
 {
 }
 
 // Call Zend_Controller_Action_Helper_RedirectorTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_Controller_Action_Helper_RedirectorTest::main") {
-    Zend_Controller_Action_Helper_RedirectorTest::main();
+    \Zend_Controller_Action_Helper_RedirectorTest::main();
 }
 
 

@@ -20,12 +20,15 @@
  * @version    $Id$
  */
 
-// Call Zend_Controller_ActionTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_ActionTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Controller;
+use Zend\Controller;
+use Zend\Controller\Action\HelperBroker;
+use Zend\Controller\Request;
+use Zend\Controller\Response;
+use Zend\Controller\Action\Helper;
 
 /**
  * @category   Zend
@@ -36,31 +39,18 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller
  * @group      Zend_Controller_Action
  */
-class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
+class ActionTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_ActionTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
-        Zend_Controller_Action_HelperBroker::resetHelpers();
-        $front = Zend_Controller_Front::getInstance();
+        HelperBroker\HelperBroker::reset();
+        $front = Controller\Front::getInstance();
         $front->resetInstance();
         $front->setControllerDirectory('.', 'default');
 
-        $this->_controller = new Zend_Controller_ActionTest_TestController(
-            new Zend_Controller_Request_Http(),
-            new Zend_Controller_Response_Cli(),
+        $this->_controller = new TestController(
+            new Request\HTTP(),
+            new Response\Cli(),
             array(
                 'foo' => 'bar',
                 'bar' => 'baz'
@@ -104,12 +94,12 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
 
     public function testGetRequest()
     {
-        $this->assertTrue($this->_controller->getRequest() instanceof Zend_Controller_Request_Abstract);
+        $this->assertTrue($this->_controller->getRequest() instanceof Request\AbstractRequest);
     }
 
     public function testGetResponse()
     {
-        $this->assertTrue($this->_controller->getResponse() instanceof Zend_Controller_Response_Abstract);
+        $this->assertTrue($this->_controller->getResponse() instanceof Response\AbstractResponse);
     }
 
     public function testGetInvokeArgs()
@@ -192,7 +182,7 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
         try {
             $response = $this->_controller->run();
             $this->fail('Should not be able to call bar as action');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             //success!
         }
     }
@@ -271,14 +261,14 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
 
     public function testInitView()
     {
-        Zend_Controller_Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
         require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'ViewController.php';
-        $controller = new ViewController(
-            new Zend_Controller_Request_Http(),
-            new Zend_Controller_Response_Cli()
+        $controller = new \ViewController(
+            new Request\HTTP(),
+            new Response\Cli()
         );
         $view = $controller->initView();
-        $this->assertTrue($view instanceof Zend_View);
+        $this->assertTrue($view instanceof \Zend\View\View);
         $scriptPath = $view->getScriptPaths();
         $this->assertTrue(is_array($scriptPath));
         $this->assertEquals(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'scripts/', $scriptPath[0]);
@@ -286,12 +276,12 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
 
     public function testRender()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $request->setControllerName('view')
                 ->setActionName('index');
-        $response = new Zend_Controller_Response_Cli();
-        Zend_Controller_Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
-        $controller = new ViewController($request, $response);
+        $response = new Response\Cli();
+        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        $controller = new \ViewController($request, $response);
 
         $controller->indexAction();
         $this->assertContains('In the index action view', $response->getBody());
@@ -299,12 +289,12 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
 
     public function testRenderByName()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $request->setControllerName('view')
                 ->setActionName('test');
-        $response = new Zend_Controller_Response_Cli();
-        Zend_Controller_Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
-        $controller = new ViewController($request, $response);
+        $response = new Response\Cli();
+        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        $controller = new \ViewController($request, $response);
 
         $controller->testAction();
         $this->assertContains('In the index action view', $response->getBody());
@@ -312,12 +302,12 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
 
     public function testRenderOutsideControllerSubdir()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $request->setControllerName('view')
                 ->setActionName('site');
-        $response = new Zend_Controller_Response_Cli();
-        Zend_Controller_Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
-        $controller = new ViewController($request, $response);
+        $response = new Response\Cli();
+        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        $controller = new \ViewController($request, $response);
 
         $controller->siteAction();
         $this->assertContains('In the sitewide view', $response->getBody());
@@ -325,12 +315,12 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
 
     public function testRenderNamedSegment()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $request->setControllerName('view')
                 ->setActionName('name');
-        $response = new Zend_Controller_Response_Cli();
-        Zend_Controller_Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
-        $controller = new ViewController($request, $response);
+        $response = new Response\Cli();
+        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        $controller = new \ViewController($request, $response);
 
         $controller->nameAction();
         $this->assertContains('In the name view', $response->getBody('name'));
@@ -338,13 +328,13 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
 
     public function testRenderNormalizesScriptName()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $request->setControllerName('foo.bar')
                 ->setActionName('baz_bat');
-        $response = new Zend_Controller_Response_Cli();
-        Zend_Controller_Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        $response = new Response\Cli();
+        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
         require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'FooBarController.php';
-        $controller = new FooBarController($request, $response);
+        $controller = new \FooBarController($request, $response);
 
         $controller->bazBatAction();
         $this->assertContains('Inside foo-bar/baz-bat.phtml', $response->getBody());
@@ -352,12 +342,12 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
 
     public function testGetViewScript()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $request->setControllerName('view')
                 ->setActionName('test');
-        $response = new Zend_Controller_Response_Cli();
-        Zend_Controller_Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
-        $controller = new ViewController($request, $response);
+        $response = new Response\Cli();
+        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        $controller = new \ViewController($request, $response);
 
         $script = $controller->getViewScript();
         $this->assertContains('view' . DIRECTORY_SEPARATOR . 'test.phtml', $script);
@@ -368,14 +358,14 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
 
     public function testGetViewScriptDoesNotOverwriteNoControllerFlagWhenNullPassed()
     {
-        Zend_Controller_Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
-        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        $viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
 
-        $request    = new Zend_Controller_Request_Http();
+        $request    = new Request\HTTP();
         $request->setControllerName('view')
                 ->setActionName('test');
-        $response   = new Zend_Controller_Response_Cli();
-        $controller = new ViewController($request, $response);
+        $response   = new Response\Cli();
+        $controller = new \ViewController($request, $response);
 
         $this->assertSame($viewRenderer->getActionController(), $controller);
         $viewRenderer->setNoController(true);
@@ -389,12 +379,12 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
 
     public function testRenderScript()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $request->setControllerName('view')
                 ->setActionName('script');
-        $response = new Zend_Controller_Response_Cli();
-        Zend_Controller_Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
-        $controller = new ViewController($request, $response);
+        $response = new Response\Cli();
+        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        $controller = new \ViewController($request, $response);
 
         $controller->scriptAction();
         $this->assertContains('Inside custom/renderScript.php', $response->getBody());
@@ -402,12 +392,12 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
 
     public function testRenderScriptToNamedResponseSegment()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $request->setControllerName('view')
                 ->setActionName('script-name');
-        $response = new Zend_Controller_Response_Cli();
-        Zend_Controller_Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
-        $controller = new ViewController($request, $response);
+        $response = new Response\Cli();
+        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        $controller = new \ViewController($request, $response);
 
         $controller->scriptNameAction();
 
@@ -417,8 +407,8 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
     public function testGetHelper()
     {
         $redirector = $this->_controller->getHelper('redirector');
-        $this->assertTrue($redirector instanceof Zend_Controller_Action_Helper_Abstract);
-        $this->assertTrue($redirector instanceof Zend_Controller_Action_Helper_Redirector);
+        $this->assertTrue($redirector instanceof Helper\AbstractHelper);
+        $this->assertTrue($redirector instanceof Helper\Redirector);
     }
 
     public function testGetHelperCopy()
@@ -426,30 +416,30 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
         $redirector = $this->_controller->getHelper('redirector');
         $copy       = $this->_controller->getHelperCopy('redirector');
         $this->assertNotSame($redirector, $copy);
-        $this->assertTrue($copy instanceof Zend_Controller_Action_Helper_Redirector);
+        $this->assertTrue($copy instanceof Helper\Redirector);
     }
 
     public function testViewInjectionUsingViewRenderer()
     {
-        Zend_Controller_Action_HelperBroker::addHelper(new Zend_Controller_Action_Helper_ViewRenderer());
-        $request = new Zend_Controller_Request_Http();
+        HelperBroker\HelperBroker::addHelper(new Helper\ViewRenderer());
+        $request = new Request\HTTP();
         $request->setControllerName('view')
                 ->setActionName('script');
-        $response = new Zend_Controller_Response_Cli();
-        Zend_Controller_Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
-        $controller = new ViewController($request, $response);
+        $response = new Response\Cli();
+        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        $controller = new \ViewController($request, $response);
         $this->assertNotNull($controller->view);
     }
 
     public function testRenderUsingViewRenderer()
     {
-        Zend_Controller_Action_HelperBroker::addHelper(new Zend_Controller_Action_Helper_ViewRenderer());
-        $request = new Zend_Controller_Request_Http();
+        HelperBroker\HelperBroker::addHelper(new Helper\ViewRenderer());
+        $request = new Request\HTTP();
         $request->setControllerName('view')
                 ->setActionName('script');
-        $response = new Zend_Controller_Response_Cli();
-        Zend_Controller_Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
-        $controller = new ViewController($request, $response);
+        $response = new Response\Cli();
+        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        $controller = new \ViewController($request, $response);
 
         $controller->scriptAction();
         $this->assertContains('Inside custom/renderScript.php', $response->getBody());
@@ -460,7 +450,7 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
         try {
             $this->_controller->bogusAction();
             $this->fail('Invalid action should throw exception');
-        } catch (Zend_Controller_Exception $e) {
+        } catch (Controller\Exception $e) {
             $this->assertRegexp('/^Action.*?(does not exist and was not trapped in __call\(\))$/', $e->getMessage());
             $this->assertContains('bogus', $e->getMessage());
             $this->assertNotContains('bogusAction', $e->getMessage());
@@ -470,7 +460,7 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
         try {
             $this->_controller->bogus();
             $this->fail('Invalid method should throw exception');
-        } catch (Zend_Controller_Exception $e) {
+        } catch (Controller\Exception $e) {
             $this->assertRegexp('/^Method.*?(does not exist and was not trapped in __call\(\))$/', $e->getMessage());
             $this->assertContains('bogus', $e->getMessage());
             $this->assertEquals(500, $e->getCode());
@@ -478,7 +468,7 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class Zend_Controller_ActionTest_TestController extends Zend_Controller_Action
+class TestController extends \Zend\Controller\Action\Action
 {
     public $initArgs = array();
 
@@ -554,7 +544,3 @@ class Zend_Controller_ActionTest_TestController extends Zend_Controller_Action
     }
 }
 
-// Call Zend_Controller_ActionTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_ActionTest::main") {
-    Zend_Controller_ActionTest::main();
-}

@@ -21,27 +21,32 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Base helper for form elements.  Extend this, don't use it on its own.
  *
- * @uses       Zend_View_Exception
- * @uses       Zend_View_Helper_HtmlElement
+ * @uses       \Zend\View\Exception
+ * @uses       \Zend\View\Helper\HtmlElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_View_Helper_FormElement extends Zend_View_Helper_HtmlElement
+abstract class FormElement extends HtmlElement
 {
     /**
-     * @var Zend_Translate
+     * @var \Zend\Translator\Translator
      */
     protected $_translator;
 
     /**
      * Get translator
      *
-     * @return Zend_Translate
+     * @return \Zend\Translator\Translator
      */
     public function getTranslator()
     {
@@ -51,19 +56,19 @@ abstract class Zend_View_Helper_FormElement extends Zend_View_Helper_HtmlElement
     /**
      * Set translator
      *
-     * @param  $translator|null Zend_Translate
-     * @return Zend_View_Helper_FormElement
+     * @param  $translator|null \Zend\Translator\Translator
+     * @return \Zend\View\Helper\FormElement
      */
     public function setTranslator($translator = null)
     {
         if (null === $translator) {
             $this->_translator = null;
-        } elseif ($translator instanceof Zend_Translate_Adapter) {
+        } elseif ($translator instanceof \Zend\Translator\Adapter\Adapter) {
             $this->_translator = $translator;
-        } elseif ($translator instanceof Zend_Translate) {
+        } elseif ($translator instanceof \Zend\Translator\Translator) {
             $this->_translator = $translator->getAdapter();
         } else {
-            $e = new Zend_View_Exception('Invalid translator specified');
+            $e = new \Zend\View\Exception('Invalid translator specified');
             $e->setView($this->view);
             throw $e;
         }

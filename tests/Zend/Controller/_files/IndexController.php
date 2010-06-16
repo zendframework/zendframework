@@ -21,9 +21,6 @@
  */
 
 
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
-
 /**
  * Mock file for testbed
  *
@@ -33,7 +30,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class IndexController extends Zend_Controller_Action
+class IndexController extends \Zend\Controller\Action\Action
 {
 
     /**
@@ -78,12 +75,12 @@ class IndexController extends Zend_Controller_Action
      */
     public function replaceAction()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new \Zend\Controller\Request\HTTP();
         $request->setControllerName('index')
                 ->setActionName('reset')
                 ->setDispatched(false);
-        $response = new Zend_Controller_Response_Http();
-        $front    = Zend_Controller_Front::getInstance();
+        $response = new \Zend\Controller\Response\HTTP();
+        $front    = \Zend\Controller\Front::getInstance();
         $front->setRequest($request)
               ->setResponse($response);
     }

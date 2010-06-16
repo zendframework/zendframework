@@ -20,17 +20,14 @@
  * @version    $Id: TranslateTest.php 18387 2010-09-23 21:00:00Z thomas $
  */
 
-// Call Zend_View_Helper_CurrencyTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_CurrencyTest::main");
-}
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
+use Zend\Cache;
+use Zend\Currency;
+use Zend\View\Helper;
 
-
-/** Zend_View_Helper_Currency */
-
-/** Zend_Registry */
-
-/** Zend_Currency */
 
 /**
  * Test class for Zend_View_Helper_Currency
@@ -43,30 +40,18 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
+class CurrencyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_Currency
      */
     public $helper;
 
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_CurrencyTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function clearRegistry()
     {
         $regKey = 'Zend_Currency';
-        if (Zend_Registry::isRegistered($regKey)) {
-            $registry = Zend_Registry::getInstance();
+        if (\Zend\Registry::isRegistered($regKey)) {
+            $registry = \Zend\Registry::getInstance();
             unset($registry[$regKey]);
         }
     }
@@ -80,12 +65,14 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->clearRegistry();
-        $this->_cache = Zend_Cache::factory('Core', 'File',
+        $this->_cache = Cache\Cache::factory('Core', 'File',
                  array('lifetime' => 120, 'automatic_serialization' => true),
-                 array('cache_dir' => dirname(__FILE__) . '/../../_files/'));
-        Zend_Currency::setCache($this->_cache);
+                 array('cache_dir' => sys_get_temp_dir())
+                 );
+        Currency\Currency::setCache($this->_cache);
 
-        $this->helper = new Zend_View_Helper_Currency('de_AT');
+
+        $this->helper = new Helper\Currency('de_AT');
     }
 
     /**
@@ -97,40 +84,40 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->helper);
-        $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+        $this->_cache->clean(Cache\Cache::CLEANING_MODE_ALL);
         $this->clearRegistry();
     }
 
     public function testCurrencyObjectPassedToConstructor()
     {
-        $curr = new Zend_Currency('de_AT');
+        $curr = new Currency\Currency('de_AT');
 
-        $helper = new Zend_View_Helper_Currency($curr);
-        $this->assertEquals('€ 1.234,56', $helper->currency(1234.56));
-        $this->assertEquals('€ 0,12', $helper->currency(0.123));
+        $helper = new Helper\Currency($curr);
+        $this->assertEquals('€ 1.234,56', $helper->direct(1234.56));
+        $this->assertEquals('€ 0,12', $helper->direct(0.123));
     }
 
     public function testLocalCurrencyObjectUsedWhenPresent()
     {
-        $curr = new Zend_Currency('de_AT');
+        $curr = new Currency\Currency('de_AT');
 
         $this->helper->setCurrency($curr);
-        $this->assertEquals('€ 1.234,56', $this->helper->currency(1234.56));
-        $this->assertEquals('€ 0,12', $this->helper->currency(0.123));
+        $this->assertEquals('€ 1.234,56', $this->helper->direct(1234.56));
+        $this->assertEquals('€ 0,12', $this->helper->direct(0.123));
     }
 
     public function testCurrencyObjectInRegistryUsedInAbsenceOfLocalCurrencyObject()
     {
-        $curr = new Zend_Currency('de_AT');
-        Zend_Registry::set('Zend_Currency', $curr);
-        $this->assertEquals('€ 1.234,56', $this->helper->currency(1234.56));
+        $curr = new Currency\Currency('de_AT');
+        \Zend\Registry::set('Zend_Currency', $curr);
+        $this->assertEquals('€ 1.234,56', $this->helper->direct(1234.56));
     }
 
     public function testPassingNonNullNonCurrencyObjectToConstructorThrowsException()
     {
         try {
-            $helper = new Zend_View_Helper_Currency('something');
-        } catch (Exception $e) {
+            $helper = new Helper\Currency('something');
+        } catch (\Exception $e) {
             if (substr($e->getMessage(), 0, 15) == 'No region found') {
                 $this->assertContains('within the locale', $e->getMessage());
             } else {
@@ -143,7 +130,7 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
     {
         try {
             $this->helper->setCurrency('something');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             if (substr($e->getMessage(), 0, 15) == 'No region found') {
                 $this->assertContains('within the locale', $e->getMessage());
             } else {
@@ -154,10 +141,10 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
 
     public function testCanOutputCurrencyWithOptions()
     {
-        $curr = new Zend_Currency('de_AT');
+        $curr = new Currency\Currency('de_AT');
 
         $this->helper->setCurrency($curr);
-        $this->assertEquals("€ 1.234,56", $this->helper->currency(1234.56, "de_AT"));
+        $this->assertEquals("€ 1.234,56", $this->helper->direct(1234.56, "de_AT"));
     }
 
     public function testCurrencyObjectNullByDefault()
@@ -167,13 +154,13 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
 
     public function testLocalCurrencyObjectIsPreferredOverRegistry()
     {
-        $currReg = new Zend_Currency('de_AT');
-        Zend_Registry::set('Zend_Currency', $currReg);
+        $currReg = new Currency\Currency('de_AT');
+        \Zend\Registry::set('Zend_Currency', $currReg);
 
-        $this->helper = new Zend_View_Helper_Currency();
+        $this->helper = new Helper\Currency();
         $this->assertSame($currReg, $this->helper->getCurrency());
 
-        $currLoc = new Zend_Currency('en_US');
+        $currLoc = new Currency\Currency('en_US');
         $this->helper->setCurrency($currLoc);
         $this->assertSame($currLoc, $this->helper->getCurrency());
         $this->assertNotSame($currLoc, $currReg);
@@ -181,17 +168,12 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
 
     public function testHelperObjectReturnedWhenNoArgumentsPassed()
     {
-        $helper = $this->helper->currency();
+        $helper = $this->helper->direct();
         $this->assertSame($this->helper, $helper);
 
-        $currLoc = new Zend_Currency('de_AT');
+        $currLoc = new Currency\Currency('de_AT');
         $this->helper->setCurrency($currLoc);
-        $helper = $this->helper->currency();
+        $helper = $this->helper->direct();
         $this->assertSame($this->helper, $helper);
     }
-}
-
-// Call Zend_View_Helper_TranslateTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_TranslateTest::main") {
-    Zend_View_Helper_TranslateTest::main();
 }

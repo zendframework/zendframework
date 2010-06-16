@@ -21,15 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper\Placeholder\Container;
+
+/**
  * Exception for Zend_View_Helper_Placeholder_Container class.
  *
- * @uses       Zend_View_Exception
+ * @uses       \Zend\View\Exception
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_Placeholder_Container_Exception extends Zend_View_Exception
+class Exception extends \Zend\View\Exception
 {
 }

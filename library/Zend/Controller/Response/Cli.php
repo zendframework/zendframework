@@ -20,17 +20,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Controller\Response;
+
+/**
  * Zend_Controller_Response_Cli
  *
  * CLI response for controllers
  *
- * @uses       Zend_Controller_Response_Abstract
+ * @uses       \Zend\Controller\Response\AbstractResponse
  * @package    Zend_Controller
  * @subpackage Response
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Controller_Response_Cli extends Zend_Controller_Response_Abstract
+class Cli extends AbstractResponse
 {
     /**
      * Flag; if true, when header operations are called after headers have been

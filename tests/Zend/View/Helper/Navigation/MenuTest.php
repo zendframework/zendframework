@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper\Navigation;
 
 /**
  * Tests Zend_View_Helper_Navigation_Menu
@@ -32,15 +36,15 @@
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_Navigation_MenuTest
-    extends Zend_View_Helper_Navigation_TestAbstract
+class MenuTest
+    extends TestAbstract
 {
     /**
      * Class name for view helper to test
      *
      * @var string
      */
-    protected $_helperName = 'Zend_View_Helper_Navigation_Menu';
+    protected $_helperName = 'Zend\View\Helper\Navigation\Menu';
 
     /**
      * View helper
@@ -72,17 +76,17 @@ class Zend_View_Helper_Navigation_MenuTest
     public function testAutoloadingContainerFromRegistry()
     {
         $oldReg = null;
-        if (Zend_Registry::isRegistered(self::REGISTRY_KEY)) {
-            $oldReg = Zend_Registry::get(self::REGISTRY_KEY);
+        if (\Zend\Registry::isRegistered(self::REGISTRY_KEY)) {
+            $oldReg = \Zend\Registry::get(self::REGISTRY_KEY);
         }
-        Zend_Registry::set(self::REGISTRY_KEY, $this->_nav1);
+        \Zend\Registry::set(self::REGISTRY_KEY, $this->_nav1);
 
         $this->_helper->setContainer(null);
 
         $expected = $this->_getExpected('menu/default1.html');
         $actual = $this->_helper->render();
 
-        Zend_Registry::set(self::REGISTRY_KEY, $oldReg);
+        \Zend\Registry::set(self::REGISTRY_KEY, $oldReg);
 
         $this->assertEquals($expected, $actual);
     }
@@ -176,7 +180,7 @@ class Zend_View_Helper_Navigation_MenuTest
     {
         $acl = $this->_getAcl();
         $this->_helper->setAcl($acl['acl']);
-        $this->_helper->setRole(new Zend_Acl_Role('member'));
+        $this->_helper->setRole(new \Zend\Acl\Role\GenericRole('member'));
 
         $expected = $this->_getExpected('menu/acl_role_interface.html');
         $this->assertEquals($expected, $this->_helper->render());
@@ -209,17 +213,17 @@ class Zend_View_Helper_Navigation_MenuTest
 
     public function testTranslationUsingTranslatorFromRegistry()
     {
-        $oldReg = Zend_Registry::isRegistered('Zend_Translate')
-                ? Zend_Registry::get('Zend_Translate')
+        $oldReg = \Zend\Registry::isRegistered('Zend_Translate')
+                ? \Zend\Registry::get('Zend_Translate')
                 : null;
 
         $translator = $this->_getTranslator();
-        Zend_Registry::set('Zend_Translate', $translator);
+        \Zend\Registry::set('Zend_Translate', $translator);
 
         $expected = $this->_getExpected('menu/translated.html');
         $actual = $this->_helper->render();
 
-        Zend_Registry::set('Zend_Translate', $oldReg);
+        \Zend\Registry::set('Zend_Translate', $oldReg);
 
         $this->assertEquals($expected, $actual);
 
@@ -262,7 +266,7 @@ class Zend_View_Helper_Navigation_MenuTest
         try {
             $this->_helper->render();
             $this->fail('invalid $partial should throw Zend_View_Exception');
-        } catch (Zend_View_Exception $e) {
+        } catch (\Zend\View\Exception $e) {
         }
     }
 

@@ -21,16 +21,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Form label helper
  *
- * @uses       Zend_View_Helper_FormElement
+ * @uses       \Zend\View\Helper\FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_FormLabel extends Zend_View_Helper_FormElement
+class FormLabel extends FormElement
 {
     /**
      * Generates a 'label' element.
@@ -40,8 +45,12 @@ class Zend_View_Helper_FormLabel extends Zend_View_Helper_FormElement
      * @param  array $attribs Form element attributes (used to determine if disabled)
      * @return string The element XHTML.
      */
-    public function formLabel($name, $value = null, array $attribs = array())
+    public function direct($name = null, $value = null, array $attribs = array())
     {
+        if ($name == null) {
+            throw new \InvalidArgumentException('FormLabel: missing argument. $name is required in formLabel($name, $value = null, array $attribs = array())');
+        }
+        
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, value, attribs, options, listsep, disable, escape
 

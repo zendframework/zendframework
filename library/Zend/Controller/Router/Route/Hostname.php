@@ -21,18 +21,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Controller\Router\Route;
+use Zend\Config;
+
+/**
  * Hostname Route
  *
- * @uses       Zend_Controller_Front
- * @uses       Zend_Controller_Router_Exception
- * @uses       Zend_Controller_Router_Route_Abstract
+ * @uses       \Zend\Controller\Front
+ * @uses       \Zend\Controller\Router\Exception
+ * @uses       \Zend\Controller\Router\Route\AbstractRoute
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route_Abstract
+class Hostname extends AbstractRoute
 {
 
     protected $_hostVariable   = ':';
@@ -81,7 +87,7 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
     /**
      * Current request object
      *
-     * @var Zend_Controller_Request_Abstract
+     * @var \Zend\Controller\Request\AbstractRequest
      */
     protected $_request;
 
@@ -95,10 +101,10 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
     /**
      * Set the request object
      *
-     * @param  Zend_Controller_Request_Abstract|null $request
+     * @param  \Zend\Controller\Request\AbstractRequest|null $request
      * @return void
      */
-    public function setRequest(Zend_Controller_Request_Abstract $request = null)
+    public function setRequest(\Zend\Controller\Request\AbstractRequest $request = null)
     {
         $this->_request = $request;
     }
@@ -106,12 +112,12 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
     /**
      * Get the request object
      *
-     * @return Zend_Controller_Request_Abstract $request
+     * @return \Zend\Controller\Request\AbstractRequest $request
      */
     public function getRequest()
     {
         if ($this->_request === null) {
-            $this->_request = Zend_Controller_Front::getInstance()->getRequest();
+            $this->_request = \Zend\Controller\Front::getInstance()->getRequest();
         }
 
         return $this->_request;
@@ -120,12 +126,12 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
     /**
      * Instantiates route based on passed Zend_Config structure
      *
-     * @param Zend_Config $config Configuration object
+     * @param \Zend\Config\Config $config Configuration object
      */
-    public static function getInstance(Zend_Config $config)
+    public static function getInstance(Config\Config $config)
     {
-        $reqs   = ($config->reqs instanceof Zend_Config) ? $config->reqs->toArray() : array();
-        $defs   = ($config->defaults instanceof Zend_Config) ? $config->defaults->toArray() : array();
+        $reqs   = ($config->reqs instanceof Config\Config) ? $config->reqs->toArray() : array();
+        $defs   = ($config->defaults instanceof Config\Config) ? $config->defaults->toArray() : array();
         $scheme = (isset($config->scheme)) ? $config->scheme : null;
         return new self($config->route, $defs, $reqs, $scheme);
     }
@@ -165,7 +171,7 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
      * Matches a user submitted path with parts defined by a map. Assigns and
      * returns an array of variables on a successful match.
      *
-     * @param Zend_Controller_Request_Http $request Request to get the host from
+     * @param \Zend\Controller\Request\HTTP $request Request to get the host from
      * @return array|false An array of assigned values or a false on a mismatch
      */
     public function match($request)
@@ -180,7 +186,7 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
         }
 
         // Get the host and remove unnecessary port information
-        $host = $request->getHttpHost();
+        $host = $request->getHTTPHost();
         if (preg_match('#:\d+$#', $host, $result) === 1) {
             $host = substr($host, 0, -strlen($result[0]));
         }
@@ -270,7 +276,7 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
                 } elseif (isset($this->_defaults[$name])) {
                     $host[$key] = $this->_defaults[$name];
                 } else {
-                    throw new Zend_Controller_Router_Exception($name . ' is not specified');
+                    throw new \Zend\Controller\Router\Exception($name . ' is not specified');
                 }
             } else {
                 $host[$key] = $part;
@@ -293,7 +299,7 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
             $scheme = $this->_scheme;
         } else {
             $request = $this->getRequest();
-            if ($request instanceof Zend_Controller_Request_Http) {
+            if ($request instanceof \Zend\Controller\Request\HTTP) {
                 $scheme = $request->getScheme();
             } else {
                 $scheme = 'http';

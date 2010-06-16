@@ -20,19 +20,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View;
+
+/**
  * Exception for Zend_View class.
  *
- * @uses       Zend_Exception
+ * @uses       \Zend\Exception
  * @category   Zend
  * @package    Zend_Date
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Exception extends Zend_Exception
+class Exception extends \Zend\Exception
 {
     protected $view = null;
 
-    public function setView(Zend_View_Interface $view = null)
+    public function setView(ViewInterface $view = null)
     {
         $this->view = $view;
         return $this;

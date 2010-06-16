@@ -20,13 +20,11 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_Placeholder_Container_AbstractTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_Placeholder_ContainerTest::main");
-}
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper\Placeholder;
 
-
-/** Zend_View_Helper_Placeholder_Container */
 
 /**
  * Test class for Zend_View_Helper_Placeholder_Container.
@@ -39,24 +37,12 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_Placeholder_ContainerTest extends PHPUnit_Framework_TestCase
+class ContainerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_Placeholder_Container
      */
     public $container;
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_Placeholder_ContainerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -66,7 +52,7 @@ class Zend_View_Helper_Placeholder_ContainerTest extends PHPUnit_Framework_TestC
      */
     public function setUp()
     {
-        $this->container = new Zend_View_Helper_Placeholder_Container(array());
+        $this->container = new \Zend\View\Helper\Placeholder\Container\Container(array());
     }
 
     /**
@@ -324,7 +310,7 @@ class Zend_View_Helper_Placeholder_ContainerTest extends PHPUnit_Framework_TestC
                 $this->container->captureStart('SET');
                 $this->container->captureEnd();
             $this->container->captureEnd();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->container->captureEnd();
             $caught = true;
         }
@@ -446,5 +432,5 @@ class Zend_View_Helper_Placeholder_ContainerTest extends PHPUnit_Framework_TestC
 
 // Call Zend_View_Helper_Placeholder_ContainerTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_Placeholder_ContainerTest::main") {
-    Zend_View_Helper_Placeholder_ContainerTest::main();
+    \Zend_View_Helper_Placeholder_ContainerTest::main();
 }

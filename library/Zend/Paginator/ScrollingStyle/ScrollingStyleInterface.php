@@ -20,29 +20,24 @@
  */
 
 /**
- * Interface for pagination adapters.
- *
- * @uses       Countable
+ * @namespace
+ */
+namespace Zend\Paginator\ScrollingStyle;
+
+/**
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Paginator_Adapter_Interface extends Countable
+interface ScrollingStyleInterface
 {
     /**
-     * Returns the total number of rows in the collection.
+     * Returns an array of "local" pages given a page number and range.
      *
-     * @return integer
-     */
-    //public function count();
-
-    /**
-     * Returns an collection of items for a page.
-     *
-     * @param  integer $offset Page offset
-     * @param  integer $itemCountPerPage Number of items per page
+     * @param  \Zend\Paginator\Paginator $paginator
+     * @param  integer $pageRange (Optional) Page range
      * @return array
      */
-    public function getItems($offset, $itemCountPerPage);
+    public function getPages(\Zend\Paginator\Paginator $paginator, $pageRange = null);
 }

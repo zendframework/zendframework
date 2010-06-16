@@ -22,30 +22,61 @@
 /**
  * @namespace
  */
-namespace Zend\Paginator\ScrollingStyle;
+namespace Zend\Paginator\Adapter;
 
 /**
- * A scrolling style that returns every page in the collection.
- * Useful when it is necessary to make every page available at
- * once--for example, when using a dropdown menu pagination control.
- *
- * @uses       \Zend\Paginator\ScrollingStyle\ScrollingStyleInterface
+ * @uses       \Zend\Paginator\Adapter\AdapterInterface
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class All implements ScrollingStyleInterface
+class ArrayAdapter implements AdapterInterface
 {
     /**
-     * Returns an array of all pages given a page number and range.
+     * ArrayAdapter
      *
-     * @param  \Zend\Paginator\Paginator $paginator
-     * @param  integer $pageRange Unused
+     * @var array
+     */
+    protected $_array = null;
+
+    /**
+     * Item count
+     *
+     * @var integer
+     */
+    protected $_count = null;
+
+    /**
+     * Constructor.
+     *
+     * @param array $array ArrayAdapter to paginate
+     */
+    public function __construct(array $array)
+    {
+        $this->_array = $array;
+        $this->_count = count($array);
+    }
+
+    /**
+     * Returns an array of items for a page.
+     *
+     * @param  integer $offset Page offset
+     * @param  integer $itemCountPerPage Number of items per page
      * @return array
      */
-    public function getPages(\Zend\Paginator\Paginator $paginator, $pageRange = null)
+    public function getItems($offset, $itemCountPerPage)
     {
-        return $paginator->getPagesInRange(1, $paginator->count());
+        return array_slice($this->_array, $offset, $itemCountPerPage);
+    }
+
+    /**
+     * Returns the total number of rows in the array.
+     *
+     * @return integer
+     */
+    public function count()
+    {
+        return $this->_count;
     }
 }

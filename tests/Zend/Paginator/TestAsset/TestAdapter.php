@@ -14,25 +14,33 @@
  *
  * @category   Zend
  * @package    Zend_Paginator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Paginator\TestAsset;
+
+/**
  * @category   Zend
  * @package    Zend_Paginator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Paginator_ScrollingStyle_Interface
+class TestAdapter extends \ArrayObject implements \Zend\Paginator\Adapter\AdapterInterface
 {
-    /**
-     * Returns an array of "local" pages given a page number and range.
-     *
-     * @param  Zend_Paginator $paginator
-     * @param  integer $pageRange (Optional) Page range
-     * @return array
-     */
-    public function getPages(Zend_Paginator $paginator, $pageRange = null);
+    public function count()
+    {
+        return 10;
+    }
+
+    public function getItems($pageNumber, $itemCountPerPage)
+    {
+        return new \ArrayObject(range(1, 10));
+    }
 }

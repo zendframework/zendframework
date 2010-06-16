@@ -20,58 +20,34 @@
  */
 
 /**
- * @uses       Zend_Paginator_Adapter_Interface
+ * @namespace
+ */
+namespace Zend\Paginator\Adapter;
+
+/**
+ * Interface for pagination adapters.
+ *
+ * @uses       Countable
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Paginator_Adapter_Array implements Zend_Paginator_Adapter_Interface
+interface AdapterInterface extends \Countable
 {
     /**
-     * Array
+     * Returns the total number of rows in the collection.
      *
-     * @var array
+     * @return integer
      */
-    protected $_array = null;
+    //public function count();
 
     /**
-     * Item count
-     *
-     * @var integer
-     */
-    protected $_count = null;
-
-    /**
-     * Constructor.
-     *
-     * @param array $array Array to paginate
-     */
-    public function __construct(array $array)
-    {
-        $this->_array = $array;
-        $this->_count = count($array);
-    }
-
-    /**
-     * Returns an array of items for a page.
+     * Returns an collection of items for a page.
      *
      * @param  integer $offset Page offset
      * @param  integer $itemCountPerPage Number of items per page
      * @return array
      */
-    public function getItems($offset, $itemCountPerPage)
-    {
-        return array_slice($this->_array, $offset, $itemCountPerPage);
-    }
-
-    /**
-     * Returns the total number of rows in the array.
-     *
-     * @return integer
-     */
-    public function count()
-    {
-        return $this->_count;
-    }
+    public function getItems($offset, $itemCountPerPage);
 }

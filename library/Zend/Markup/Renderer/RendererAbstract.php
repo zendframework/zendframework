@@ -119,11 +119,13 @@ abstract class RendererAbstract
      * Set the parser
      *
      * @param  \Zend\Markup\Parser\ParserInterface $parser
+     *
      * @return \Zend\Markup\Renderer\RendererAbstract
      */
     public function setParser(Parser\ParserInterface $parser)
     {
         $this->_parser = $parser;
+
         return $this;
     }
 
@@ -256,11 +258,26 @@ abstract class RendererAbstract
      * @param  \Zend\Markup\Token $token
      *
      * @return string
-     *
-     * @todo Redo this method completely with the new way of doing tags
      */
     protected function _execute(Markup\Token $token)
     {
+        switch ($token->getType()) {
+            case Markup\Token::TYPE_MARKUP:
+                if (!isset($this->_markups[$token->getName()])) {
+                    // TODO: apply filters
+                    return $token->getContent() . $this->_render($token) . $token->getStopper();
+                }
+
+                $markup = $this->_markups[$token->getName()];
+
+                return $markup($token, $this->_render($token));
+                break;
+            case Markup\Token::TYPE_NONE:
+            default:
+                // TODO: apply filters
+                return $token->getContent();
+                break;
+        }
     }
 
     /**

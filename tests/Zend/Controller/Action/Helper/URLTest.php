@@ -52,7 +52,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
         $this->front = \Zend\Controller\Front::getInstance();
         $this->front->resetInstance();
         $this->front->setRequest(new \Zend\Controller\Request\HTTP());
-        $this->helper = new \Zend\Controller\Action\Helper\Url();
+        $this->helper = new \Zend\Controller\Action\Helper\URL();
     }
 
     /**
@@ -66,7 +66,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
         unset($this->helper);
     }
 
-    public function testSimpleWithAllParamsProducesAppropriateUrl()
+    public function testSimpleWithAllParamsProducesAppropriateURL()
     {
         $url = $this->helper->simple('baz', 'bar', 'foo', array('bat' => 'foo', 'ho' => 'hum'));
         $this->assertEquals('/foo/bar/baz', substr($url, 0, 12));
@@ -74,7 +74,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('/ho/hum', $url);
     }
 
-    public function testSimpleWithMissingControllerAndModuleProducesAppropriateUrl()
+    public function testSimpleWithMissingControllerAndModuleProducesAppropriateURL()
     {
         $request = $this->front->getRequest();
         $request->setModuleName('foo')
@@ -85,13 +85,13 @@ class URLTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('/ho/hum', $url);
     }
 
-    public function testSimpleWithDefaultModuleProducesUrlWithoutModuleSegment()
+    public function testSimpleWithDefaultModuleProducesURLWithoutModuleSegment()
     {
         $url = $this->helper->simple('baz', 'bar', 'default', array('bat' => 'foo', 'ho' => 'hum'));
         $this->assertEquals('/bar/baz', substr($url, 0, 8));
     }
 
-    public function testUrlMethodCreatesUrlBasedOnNamedRouteAndPassedParameters()
+    public function testURLMethodCreatesURLBasedOnNamedRouteAndPassedParameters()
     {
         $router = $this->front->getRouter();
         $route  = new Route\Route(
@@ -108,7 +108,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/foo/bar/3', $url);
     }
 
-    public function testUrlMethodCreatesUrlBasedOnNamedRouteAndDefaultParameters()
+    public function testURLMethodCreatesURLBasedOnNamedRouteAndDefaultParameters()
     {
         $router = $this->front->getRouter();
         $route  = new Route\Route(
@@ -125,7 +125,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/foo', $url);
     }
 
-    public function testUrlMethodCreatesUrlBasedOnPassedParametersUsingDefaultRouteWhenNoNamedRoutePassed()
+    public function testURLMethodCreatesURLBasedOnPassedParametersUsingDefaultRouteWhenNoNamedRoutePassed()
     {
         $this->front->getRouter()->addDefaultRoutes();
         $this->front->addModuleDirectory(dirname(__FILE__) . '/../../_files/modules');
@@ -152,9 +152,9 @@ class URLTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-2822
      */
-    public function testBaseUrlIsAssembledIntoUrl()
+    public function testBaseURLIsAssembledIntoURL()
     {
-        $this->front->setBaseUrl('baseurl');
+        $this->front->setBaseURL('baseurl');
 
         $request = $this->front->getRequest();
         $request->setModuleName('module')
@@ -165,7 +165,3 @@ class URLTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-// Call Zend_Controller_Action_Helper_UrlTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Action_Helper_UrlTest::main") {
-    \Zend_Controller_Action_Helper_UrlTest::main();
-}

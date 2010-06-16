@@ -23,12 +23,11 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Router\Rewrite;
-use Zend\Controller\Router\Rewrite\Route\Route;
+namespace Zend\Controller\Router\Rewrite\Route;
 use Zend\Controller\Request\HTTP as HTTPRequest;
 
 /**
- * Ruby routing based router
+ * Route interface
  *
  * @package    Zend_Controller
  * @subpackage Router
@@ -36,52 +35,15 @@ use Zend\Controller\Request\HTTP as HTTPRequest;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Router
+interface Route
 {
-    /**
-     * Append multiple routes
-     *
-     * @param  array $routes
-     * @return Router
-     */
-    public function addRoutes(array $routes)
-    {
-        foreach ($routes as $name => $route) {
-            $this->addRoute($name, $route);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Appends a route to the end of the list
-     *
-     * @param  string $name
-     * @param  mixed  $route
-     * @return Router
-     */
-    public function addRoute($name, $route)
-    {
-        if (is_array($route)) {
-            // @todo: Array to AbstractRoute
-        } elseif (!$route instanceof Route) {
-            // @todo: throw exception
-        }
-
-        $this->_routes[$name] = $route;
-
-        return $this;
-    }
-
     /**
      * Match a request
      *
-     * @param HTTPRequest $request
+     * @param  HTTPRequest $request
+     * @return boolean
      */
-    public function match(HTTPRequest $request)
-    {
-
-    }
+    public function match(HTTPRequest $request, $pathOffset);
 
     /**
      * Assemble an URL
@@ -90,8 +52,5 @@ class Router
      * @param  array $options
      * @return string
      */
-    public function assemble(array $params = null, array $options = null)
-    {
-        
-    }
+    public function assemble(array $params = null, array $options = null);
 }

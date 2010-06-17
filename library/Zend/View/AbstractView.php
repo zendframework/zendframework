@@ -377,17 +377,22 @@ abstract class AbstractView implements ViewInterface
      *
      * @param  string $path
      * @param  string $prefix Prefix to use for helper and filter paths
+     * @param  bool $namespaced Whether the paths are namespaced or prefixed; namespaced by default
      * @return \Zend\View\AbstractView
      */
-    public function addBasePath($path, $classPrefix = 'Zend\View')
+    public function addBasePath($path, $classPrefix = 'Zend\View', $namespaced = true)
     {
         $path        = rtrim($path, '/');
         $path        = rtrim($path, '\\');
         $path       .= DIRECTORY_SEPARATOR;
-        $classPrefix = rtrim($classPrefix, '\\') . '\\';
+        if ($namespaced) {
+            $classPrefix = rtrim($classPrefix, '\\') . '\\';
+        } else {
+            $classPrefix = rtrim($classPrefix, '_') . '_';
+        }
         $this->addScriptPath($path . 'scripts');
-        $this->addHelperPath($path . 'helpers', $classPrefix . 'Helper');
-        $this->addFilterPath($path . 'filters', $classPrefix . 'Filter');
+        $this->addHelperPath($path . 'helpers', $classPrefix . 'Helper', $namespaced);
+        $this->addFilterPath($path . 'filters', $classPrefix . 'Filter', $namespaced);
         return $this;
     }
 
@@ -511,11 +516,12 @@ abstract class AbstractView implements ViewInterface
      * @param string|array The directory (-ies) to add.
      * @param string $classPrefix Class prefix to use with classes in this
      * directory; defaults to Zend_View_Helper
+     * @param  bool $namespaced Whether the paths are namespaced or prefixed; namespaced by default
      * @return \Zend\View\AbstractView
      */
-    public function addHelperPath($path, $classPrefix = 'Zend\View\Helper\\')
+    public function addHelperPath($path, $classPrefix = 'Zend\View\Helper\\', $namespaced = true)
     {
-        return $this->_addPluginPath('helper', $classPrefix, (array) $path);
+        return $this->_addPluginPath('helper', $classPrefix, (array) $path, $namespaced);
     }
 
     /**
@@ -619,11 +625,12 @@ abstract class AbstractView implements ViewInterface
      * @param string|array The directory (-ies) to add.
      * @param string $classPrefix Class prefix to use with classes in this
      * directory; defaults to Zend_View_Filter
+     * @param  bool $namespaced Whether the paths are namespaced or prefixed; namespaced by default
      * @return \Zend\View\AbstractView
      */
-    public function addFilterPath($path, $classPrefix = 'Zend\View\Filter\\')
+    public function addFilterPath($path, $classPrefix = 'Zend\View\Filter\\', $namespaced = true)
     {
-        return $this->_addPluginPath('filter', $classPrefix, (array) $path);
+        return $this->_addPluginPath('filter', $classPrefix, (array) $path, $namespaced);
     }
 
     /**
@@ -1097,13 +1104,14 @@ abstract class AbstractView implements ViewInterface
      * @param  string $type
      * @param  string $classPrefix
      * @param  array $paths
+     * @param  bool $namespaced Whether the paths are namespaced or prefixed; namespaced by default
      * @return \Zend\View\AbstractView
      */
-    private function _addPluginPath($type, $classPrefix, array $paths)
+    private function _addPluginPath($type, $classPrefix, array $paths, $namespaced = true)
     {
         $loader = $this->getPluginLoader($type);
         foreach ($paths as $path) {
-            $loader->addPrefixPath($classPrefix, $path);
+            $loader->addPrefixPath($classPrefix, $path, $namespaced);
         }
         return $this;
     }

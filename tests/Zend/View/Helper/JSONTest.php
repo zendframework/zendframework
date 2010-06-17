@@ -96,7 +96,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
     {
         $data = $this->helper->direct('foobar');
         $this->assertTrue(is_string($data));
-        $this->assertEquals(array('foobar'), \Zend\JSON\JSON::decode($data));
+        $this->assertEquals('foobar', \Zend\JSON\JSON::decode($data));
     }
 
     public function testJsonHelperDisablesLayoutsByDefault()

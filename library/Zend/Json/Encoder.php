@@ -145,7 +145,7 @@ class Zend_Json_Encoder
         foreach ($propCollection as $name => $propValue) {
             if (isset($propValue)) {
                 $props .= ','
-                        . $this->_encodeValue($name)
+                        . $this->_encodeString($name)
                         . ':'
                         . $this->_encodeValue($propValue);
             }

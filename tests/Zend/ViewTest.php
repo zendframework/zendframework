@@ -652,6 +652,21 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("Some text", $escaped);
     }
 
+    /**
+     * @group ZF-9595
+     */
+    public function testEscapeShouldAllowAndUseMoreThanOneArgument()
+    {
+        $view = new Zend_View();
+        $view->setEscape(array($this, 'escape'));
+        $this->assertEquals('foobar', $view->escape('foo', 'bar'));
+    }
+
+    public function escape($value, $additional = '')
+    {
+        return $value . $additional;
+    }
+
     public function testZf995UndefinedPropertiesReturnNull()
     {
         error_reporting(E_ALL | E_STRICT);

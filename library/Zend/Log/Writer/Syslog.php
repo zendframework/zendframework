@@ -80,8 +80,8 @@ class Zend_Log_Writer_Syslog extends Zend_Log_Writer_Abstract
     protected $_facility = LOG_USER;
 
     /**
-     * _validFacilities 
-     * 
+     * _validFacilities
+     *
      * @var array
      */
     protected $_validFacilities = array(
@@ -122,10 +122,10 @@ class Zend_Log_Writer_Syslog extends Zend_Log_Writer_Abstract
         }
         $this->_initializeSyslog();
     }
-    
+
     /**
      * Create a new instance of Zend_Log_Writer_Syslog
-     * 
+     *
      * @param  array|Zend_Config $config
      * @return Zend_Log_Writer_Syslog
      * @throws Zend_Log_Exception
@@ -162,7 +162,7 @@ class Zend_Log_Writer_Syslog extends Zend_Log_Writer_Abstract
             return;
         }
 
-        if (!in_array($facility($this->_validFacilities))) {
+        if (!in_array($facility, $this->_validFacilities)) {
             require_once 'Zend/Log/Exception.php';
             throw new Zend_Log_Exception('Invalid log facility provided; please see http://php.net/openlog for a list of valid facility values');
         }

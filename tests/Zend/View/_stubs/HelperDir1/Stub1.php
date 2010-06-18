@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\View\_stubs\HelperDir1;
+namespace Foo\View\Helper;
 
 \PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
@@ -36,7 +36,7 @@ namespace ZendTest\View\_stubs\HelperDir1;
  */
 class Stub1
 {
-    public function stub1()
+    public function direct()
     {
         return 'foo';
     }

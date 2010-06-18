@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\View\_stubs\FilterDir1;
+namespace ZendTest\View\Filter;
 
 \PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 

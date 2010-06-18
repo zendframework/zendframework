@@ -578,9 +578,9 @@ abstract class AbstractView implements ViewInterface
         }
 
         if (!$helper instanceof ViewInterface) {
-            if (!method_exists($helper, $name)) {
+            if (!method_exists($helper, 'direct')) {
                 $e =  new Exception(
-                    'View helper must implement Zend_View_Interface or have a method matching the name provided'
+                    'View helper must implement Zend\\View\\Interface or have a "direct" method'
                 );
                 $e->setView($this);
                 throw $e;
@@ -892,7 +892,12 @@ abstract class AbstractView implements ViewInterface
             return call_user_func($this->_escape, $var, ENT_COMPAT, $this->_encoding);
         }
 
-        return call_user_func($this->_escape, $var);
+        if (1 === func_num_args()) {
+            return call_user_func($this->_escape, $var);
+        }
+
+        $args = func_get_args();
+        return call_user_func_array($this->_escape, $args);
     }
 
     /**

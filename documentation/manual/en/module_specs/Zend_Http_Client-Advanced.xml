@@ -363,7 +363,7 @@ $client = new Zend_Http_Client('http://www.example.com/fetchdata.php', array(
 
 // Do we have the cookies stored in our session?
 if (isset($_SESSION['cookiejar']) &&
-    $_SESSION['cookiejar'] instanceof Zend_Http_CookieJar)) {
+    $_SESSION['cookiejar'] instanceof Zend_Http_CookieJar) {
 
     $client->setCookieJar($_SESSION['cookiejar']);
 } else {

@@ -4310,22 +4310,6 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-10016
-     */
-    public function testSetDefaultsAcceptsArrayAccessObject()
-    {
-        $val = new ArrayObject(array('foo' => 'val'));
-        $this->assertTrue($val instanceof ArrayAccess);
-
-        try {
-            $this->form->addElement('text', 'foo')
-                       ->setDefaults($val);
-        } catch (Zend_Form_Exception $e) {}
-        
-        $this->assertSame('val', $this->form->foo->getValue());
-    }
-
-    /**
      * Used by test methods susceptible to ZF-2794, marks a test as incomplete
      *
      * @link   http://framework.zend.com/issues/browse/ZF-2794
@@ -4348,8 +4332,6 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame($this->form, $this->form->loadDefaultDecorators());
     }
-
-
 }
 
 class Zend_Form_FormTest_DisplayGroup extends Zend_Form_DisplayGroup

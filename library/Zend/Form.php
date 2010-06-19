@@ -1248,16 +1248,11 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      *
      * Sets values for all elements specified in the array of $defaults.
      *
-     * @param mixed $defaults array|ArrayAccess
+     * @param  array $defaults
      * @return Zend_Form
      */
-    public function setDefaults($defaults)
+    public function setDefaults(array $defaults)
     {
-        if (!is_array($defaults) && !($defaults instanceof ArrayAccess)) {
-            throw new Zend_Form_Exception(__METHOD__ .
-                                          ' expects param $defaults to be an array or an ArrayAccess Object');
-        }
-
         $eBelongTo = null;
 
         if ($this->isArray()) {
@@ -2022,10 +2017,10 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      *
      * Proxies to {@link setDefaults()}
      *
-     * @param mixed $values array|ArrayAccess
+     * @param  array $values
      * @return Zend_Form
      */
-    public function populate($values)
+    public function populate(array $values)
     {
         return $this->setDefaults($values);
     }

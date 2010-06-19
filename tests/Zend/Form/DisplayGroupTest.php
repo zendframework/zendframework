@@ -789,6 +789,22 @@ class Zend_Form_DisplayGroupTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame($this->group, $this->group->loadDefaultDecorators());
     }
+
+    /**
+     * @group ZF-7552
+     */
+    public function testAddDecoratorsKeepsNonNumericKeyNames()
+    {
+        $this->group->addDecorators(array(array(array('td'  => 'HtmlTag'),
+                                               array('tag' => 'td')),
+                                         array(array('tr'  => 'HtmlTag'),
+                                               array('tag' => 'tr')),
+                                         array('HtmlTag', array('tag' => 'baz'))));
+        $t1 = $this->group->getDecorators();
+        $this->group->setDecorators($t1);
+        $t2 = $this->group->getDecorators();
+        $this->assertEquals($t1, $t2);
+    }
 }
 
 class Zend_Form_DisplayGroupTest_DisplayGroup extends Zend_Form_DisplayGroup

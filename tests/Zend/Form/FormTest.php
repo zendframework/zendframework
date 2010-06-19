@@ -4332,6 +4332,22 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame($this->form, $this->form->loadDefaultDecorators());
     }
+
+    /**
+     * @group ZF-7552
+     */
+    public function testAddDecoratorsKeepsNonNumericKeyNames()
+    {
+        $this->form->addDecorators(array(array(array('td'  => 'HtmlTag'),
+                                               array('tag' => 'td')),
+                                         array(array('tr'  => 'HtmlTag'),
+                                               array('tag' => 'tr')),
+                                         array('HtmlTag', array('tag' => 'baz'))));
+        $t1 = $this->form->getDecorators();
+        $this->form->setDecorators($t1);
+        $t2 = $this->form->getDecorators();
+        $this->assertEquals($t1, $t2);
+    }
 }
 
 class Zend_Form_FormTest_DisplayGroup extends Zend_Form_DisplayGroup

@@ -2666,11 +2666,14 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      */
     public function addDecorators(array $decorators)
     {
-        foreach ($decorators as $decoratorInfo) {
-            if (is_string($decoratorInfo)) {
-                $this->addDecorator($decoratorInfo);
-            } elseif ($decoratorInfo instanceof Zend_Form_Decorator_Interface) {
-                $this->addDecorator($decoratorInfo);
+        foreach ($decorators as $decoratorName => $decoratorInfo) {
+            if (is_string($decoratorInfo) ||
+                $decoratorInfo instanceof Zend_Form_Decorator_Interface) {
+                if (!is_numeric($decoratorName)) {
+                    $this->addDecorator(array($decoratorName => $decoratorInfo));
+                } else {
+                    $this->addDecorator($decoratorInfo);
+                }
             } elseif (is_array($decoratorInfo)) {
                 $argc    = count($decoratorInfo);
                 $options = array();

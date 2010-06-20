@@ -77,7 +77,7 @@ class Zend_Mail extends Zend_Mime_Message
      * Mail character set
      * @var string
      */
-    protected $_charset = null;
+    protected $_charset = 'iso-8859-1';
 
     /**
      * Mail headers
@@ -208,11 +208,14 @@ class Zend_Mail extends Zend_Mime_Message
     /**
      * Public constructor
      *
-     * @param string $charset
+     * @param  string $charset
+     * @return void
      */
-    public function __construct($charset = 'iso-8859-1')
+    public function __construct($charset = null)
     {
-        $this->_charset = $charset;
+        if (!is_null($charset)) {
+            $this->_charset = $charset;
+        }
     }
 
     /**

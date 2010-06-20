@@ -193,9 +193,10 @@ class Zend_Oauth_Consumer extends Zend_Oauth
 
         // OAuth 1.0a Verifier
         if (!is_null($authorizedToken->getParam('oauth_verifier'))) {
-            $request->setParameters(array(
+            $params = array_merge($request->getParameters(), array(
                 'oauth_verifier' => $authorizedToken->getParam('oauth_verifier')
             ));
+            $request->setParameters($params);
         }
         if (!is_null($httpMethod)) {
             $request->setMethod($httpMethod);

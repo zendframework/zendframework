@@ -213,7 +213,7 @@ class Zend_Mail extends Zend_Mime_Message
      */
     public function __construct($charset = null)
     {
-        if (!is_null($charset)) {
+        if ($charset != null) {
             $this->_charset = $charset;
         }
     }

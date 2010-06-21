@@ -21,16 +21,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper to generate a "file" element
  *
- * @uses       Zend_View_Helper_FormElement
+ * @uses       \Zend\View\Helper\FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_FormFile extends Zend_View_Helper_FormElement
+class FormFile extends FormElement
 {
     /**
      * Generates a 'file' element.
@@ -45,8 +50,12 @@ class Zend_View_Helper_FormFile extends Zend_View_Helper_FormElement
      *
      * @return string The element XHTML.
      */
-    public function formFile($name, $attribs = null)
+    public function direct($name = null, $attribs = null)
     {
+        if ($name == null) {
+            throw new \InvalidArgumentException('FormFile: missing argument. $name is required in formFile($name, $attribs = null)');
+        }
+        
         $info = $this->_getInfo($name, null, $attribs);
         extract($info); // name, id, value, attribs, options, listsep, disable
 
@@ -58,7 +67,7 @@ class Zend_View_Helper_FormFile extends Zend_View_Helper_FormElement
 
         // XHTML or HTML end tag?
         $endTag = ' />';
-        if (($this->view instanceof Zend_View_Abstract) && !$this->view->doctype()->isXhtml()) {
+        if (($this->view instanceof \Zend\View\AbstractView) && !$this->view->doctype()->isXhtml()) {
             $endTag= '>';
         }
 

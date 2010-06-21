@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Controller\Request;
+
+/**
  * Zend_Controller_Request_Apache404
  *
  * HTTP request object for use with Zend_Controller family. Extends basic HTTP
@@ -30,12 +35,12 @@
  * In each case, the URL to check against is found in REDIRECT_URL, not
  * REQUEST_URI.
  *
- * @uses       Zend_Controller_Request_Http
- * @uses       Zend_Uri
+ * @uses       \Zend\Controller\Request\HTTP
+ * @uses       \Zend\Uri\Uri
  * @package    Zend_Controller
  * @subpackage Request
  */
-class Zend_Controller_Request_Apache404 extends Zend_Controller_Request_Http
+class Apache404 extends HTTP
 {
     public function setRequestUri($requestUri = null)
     {

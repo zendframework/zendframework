@@ -136,12 +136,8 @@ abstract class AbstractLiveDocx
      */
     protected function _initSoapClient($endpoint)
     {
-        try {
-            $this->_soapClient = new Client();
-            $this->_soapClient->setWsdl($endpoint);
-        } catch (\SoapFault $e) {   // @todo -- which exception to catch here?
-            throw new Exception('Cannot connect to LiveDocx service at ' . $endpoint, 0, $e);
-        }            
+        $this->_soapClient = new Client();
+        $this->_soapClient->setWSDL($endpoint);
     }
     
     /**
@@ -184,18 +180,18 @@ abstract class AbstractLiveDocx
             
             if (null === $this->getUsername()) {
                 throw new Exception(
-                    'Username has not been set. To set username specify the options array in the constructor or call setUsername($username) after instantiation'
+                    'Username has not been set. To set username specify the options array in the constructor or call setUsername($username) after instantiation.'
                 );
             }
             
             if (null === $this->getPassword()) {
                 throw new Exception(
-                    'Password has not been set. To set password specify the options array in the constructor or call setPassword($password) after instantiation'
+                    'Password has not been set. To set password specify the options array in the constructor or call setPassword($password) after instantiation.'
                 );
             }
             
             if (null === $this->getSoapClient()) {
-                $this->_initSoapClient($this->_wsdl);
+                $this->_initSoapClient($this->getWSDL());
             }            
             
             try {
@@ -204,9 +200,9 @@ abstract class AbstractLiveDocx
                     'password' => $this->getPassword(),
                 ));
                 $this->_loggedIn = true;
-            } catch (Exception $e) {
+            } catch (\SoapFault $e) {
                 throw new Exception(
-                    'Cannot login into LiveDocx service - username and/or password are invalid', 0, $e
+                    'Cannot login into LiveDocx service. Please check that your server can download the WSDL (' . $this->getWSDL() . ') and that your username and password are valid.', 0, $e
                 );
             }            
         }
@@ -229,7 +225,7 @@ abstract class AbstractLiveDocx
                 $this->_loggedIn = false;
             } catch (Exception $e) {
                 throw new Exception(
-                    'Cannot log out of LiveDocx service', 0, $e
+                    'Cannot log out of LiveDocx service.', 0, $e
                 );
             }            
         }
@@ -278,7 +274,7 @@ abstract class AbstractLiveDocx
      * @return Zend\Service\AbstractLiveDocx
      * @since  LiveDocx 1.0
      */      
-    public function setWsdl($wsdl) 
+    public function setWSDL($wsdl) 
     {
         $this->_wsdl = $wsdl;
         return $this;
@@ -320,9 +316,13 @@ abstract class AbstractLiveDocx
      * @return Zend\Service\AbstractLiveDocx
      * @since  LiveDocx 1.0
      */      
-    public function getWsdl() 
+    public function getWSDL() 
     {
-        return $this->_wsdl;
+        if (null !== $this->getSoapClient()) {
+            return $this->getSoapClient()->getWSDL();
+        } else {
+            return $this->_wsdl;
+        }
     }    
 
     /**

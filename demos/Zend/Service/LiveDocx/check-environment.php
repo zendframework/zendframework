@@ -1,6 +1,9 @@
 <?php
 
+set_time_limit(0);
+
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'Bootstrap.php';
+
 
 use Zend\Version;
 use Zend\Service\LiveDocx\MailMerge;
@@ -9,8 +12,8 @@ use Zend\Service\LiveDocx\Helper;
 define('TEST_PASS',       'PASS');
 define('TEST_FAIL',       'FAIL');
 
-define('MIN_PHP_VERSION', '5.2.4');
-define('MIN_ZF_VERSION',  '1.10.0');
+define('MIN_PHP_VERSION', '5.3');
+define('MIN_ZF_VERSION',  '2.0.0dev1');
 
 define('SOCKET_TIMEOUT',   5); // seconds
 
@@ -281,7 +284,7 @@ if (defined('DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME') &&
     try {
         $microtime = microtime(true);
         $mailMerge = new MailMerge();
-        $mailMerge->setWsdl(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL);
+        $mailMerge->setWSDL(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL);
         $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME);
         $mailMerge->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_PASSWORD);
         $mailMerge->logIn();

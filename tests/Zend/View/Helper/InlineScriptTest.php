@@ -20,17 +20,13 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_InlineScriptTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_InlineScriptTest::main");
-}
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
+use Zend\View\Helper\Placeholder\Registry;
+use Zend\View\Helper;
 
-
-/** Zend_View_Helper_InlineScript */
-
-/** Zend_View_Helper_Placeholder_Registry */
-
-/** Zend_Registry */
 
 /**
  * Test class for Zend_View_Helper_InlineScript.
@@ -43,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_InlineScriptTest extends PHPUnit_Framework_TestCase
+class InlineScriptTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_InlineScript
@@ -56,18 +52,6 @@ class Zend_View_Helper_InlineScriptTest extends PHPUnit_Framework_TestCase
     public $basePath;
 
     /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_InlineScriptTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      *
@@ -75,13 +59,13 @@ class Zend_View_Helper_InlineScriptTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $regKey = Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY;
-        if (Zend_Registry::isRegistered($regKey)) {
-            $registry = Zend_Registry::getInstance();
+        $regKey = Registry\Registry::REGISTRY_KEY;
+        if (\Zend\Registry::isRegistered($regKey)) {
+            $registry = \Zend\Registry::getInstance();
             unset($registry[$regKey]);
         }
         $this->basePath = dirname(__FILE__) . '/_files/modules';
-        $this->helper = new Zend_View_Helper_InlineScript();
+        $this->helper = new Helper\InlineScript();
     }
 
     /**
@@ -97,23 +81,18 @@ class Zend_View_Helper_InlineScriptTest extends PHPUnit_Framework_TestCase
 
     public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
     {
-        $registry = Zend_View_Helper_Placeholder_Registry::getRegistry();
+        $registry = Registry\Registry::getRegistry();
         if ($registry->containerExists('Zend_View_Helper_InlineScript')) {
             $registry->deleteContainer('Zend_View_Helper_InlineScript');
         }
         $this->assertFalse($registry->containerExists('Zend_View_Helper_InlineScript'));
-        $helper = new Zend_View_Helper_InlineScript();
+        $helper = new Helper\InlineScript();
         $this->assertTrue($registry->containerExists('Zend_View_Helper_InlineScript'));
     }
 
     public function testInlineScriptReturnsObjectInstance()
     {
-        $placeholder = $this->helper->inlineScript();
-        $this->assertTrue($placeholder instanceof Zend_View_Helper_InlineScript);
+        $placeholder = $this->helper->direct();
+        $this->assertTrue($placeholder instanceof Helper\InlineScript);
     }
-}
-
-// Call Zend_View_Helper_InlineScriptTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_InlineScriptTest::main") {
-    Zend_View_Helper_InlineScriptTest::main();
 }

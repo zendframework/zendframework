@@ -20,19 +20,13 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_HeadLinkTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_HeadLinkTest::main");
-}
-
-
-/** Zend_View_Helper_HeadLink */
-
-/** Zend_View_Helper_Placeholder_Registry */
-
-/** Zend_Registry */
-
-/** Zend_View */
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
+use Zend\View\Helper\Placeholder\Registry;
+use Zend\View\Helper;
+use Zend\View;
 
 /**
  * Test class for Zend_View_Helper_HeadLink.
@@ -45,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
+class HeadLinkTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_HeadLink
@@ -58,18 +52,6 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
     public $basePath;
 
     /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_HeadLinkTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      *
@@ -77,15 +59,15 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        foreach (array(Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY, 'Zend_View_Helper_Doctype') as $key) {
-            if (Zend_Registry::isRegistered($key)) {
-                $registry = Zend_Registry::getInstance();
+        foreach (array(Registry\Registry::REGISTRY_KEY, 'Zend_View_Helper_Doctype') as $key) {
+            if (\Zend\Registry::isRegistered($key)) {
+                $registry = \Zend\Registry::getInstance();
                 unset($registry[$key]);
             }
         }
         $this->basePath = dirname(__FILE__) . '/_files/modules';
-        $this->view = new Zend_View();
-        $this->helper = new Zend_View_Helper_HeadLink();
+        $this->view = new View\View();
+        $this->helper = new Helper\HeadLink();
         $this->helper->setView($this->view);
     }
 
@@ -102,19 +84,19 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
 
     public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
     {
-        $registry = Zend_View_Helper_Placeholder_Registry::getRegistry();
+        $registry = Registry\Registry::getRegistry();
         if ($registry->containerExists('Zend_View_Helper_HeadLink')) {
             $registry->deleteContainer('Zend_View_Helper_HeadLink');
         }
         $this->assertFalse($registry->containerExists('Zend_View_Helper_HeadLink'));
-        $helper = new Zend_View_Helper_HeadLink();
+        $helper = new Helper\HeadLink();
         $this->assertTrue($registry->containerExists('Zend_View_Helper_HeadLink'));
     }
 
     public function testHeadLinkReturnsObjectInstance()
     {
-        $placeholder = $this->helper->headLink();
-        $this->assertTrue($placeholder instanceof Zend_View_Helper_HeadLink);
+        $placeholder = $this->helper->direct();
+        $this->assertTrue($placeholder instanceof Helper\HeadLink);
     }
 
     public function testPrependThrowsExceptionWithoutArrayArgument()
@@ -122,7 +104,7 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->prepend('foo');
             $this->fail('prepend should raise exception without array argument');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
@@ -131,7 +113,7 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->append('foo');
             $this->fail('append should raise exception without array argument');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
@@ -140,7 +122,7 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->set('foo');
             $this->fail('set should raise exception without array argument');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
@@ -149,7 +131,7 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->offsetSet(1, 'foo');
             $this->fail('set should raise exception without array argument');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
@@ -160,9 +142,9 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
             'link2' => array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => 'bar'),
             'link3' => array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => 'baz'),
         );
-        $this->helper->headLink($links['link1'])
-                     ->headLink($links['link2'], 'PREPEND')
-                     ->headLink($links['link3']);
+        $this->helper->direct($links['link1'])
+                     ->direct($links['link2'], 'PREPEND')
+                     ->direct($links['link3']);
 
         $string = $this->helper->toString();
         $lines  = substr_count($string, PHP_EOL);
@@ -271,7 +253,7 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->appendStylesheet();
             $this->fail('Helper should expect at least one argument');
-        } catch (Zend_View_Exception $e) {}
+        } catch (View\Exception $e) {}
     }
 
     public function testOverloadingShouldAllowSingleArrayArgument()
@@ -286,7 +268,7 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->setStylesheet(array('bogus' => 'unused'));
             $this->fail('Invalid attribute values should raise exception');
-        } catch (Zend_View_Exception $e) { }
+        } catch (View\Exception $e) { }
     }
 
     public function testOverloadingOffsetSetWorks()
@@ -303,7 +285,7 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->bogusMethod();
             $this->fail('Invalid method should raise exception');
-        } catch (Zend_View_Exception $e) { }
+        } catch (View\Exception $e) { }
     }
 
     public function testStylesheetAttributesGetSet()
@@ -349,11 +331,11 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->setAlternate('foo');
             $this->fail('Setting alternate with fewer than 3 args should raise exception');
-        } catch (Zend_View_Exception $e) { }
+        } catch (View\Exception $e) { }
         try {
             $this->helper->setAlternate('foo', 'bar');
             $this->fail('Setting alternate with fewer than 3 args should raise exception');
-        } catch (Zend_View_Exception $e) { }
+        } catch (View\Exception $e) { }
     }
 
     public function testIndentationIsHonored()
@@ -370,8 +352,8 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
     public function testLinkRendersAsPlainHtmlIfDoctypeNotXhtml()
     {
         $this->view->doctype('HTML4_STRICT');
-        $this->helper->headLink(array('rel' => 'icon', 'src' => '/foo/bar'))
-                     ->headLink(array('rel' => 'foo', 'href' => '/bar/baz'));
+        $this->helper->direct(array('rel' => 'icon', 'src' => '/foo/bar'))
+                     ->direct(array('rel' => 'foo', 'href' => '/bar/baz'));
         $test = $this->helper->toString();
         $this->assertNotContains(' />', $test);
     }
@@ -441,10 +423,10 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
      */
     public function testContainerMaintainsCorrectOrderOfItems()
     {
-        $this->helper->headLink()->offsetSetStylesheet(1,'/test1.css');
-        $this->helper->headLink()->offsetSetStylesheet(10,'/test2.css');
-        $this->helper->headLink()->offsetSetStylesheet(20,'/test3.css');
-        $this->helper->headLink()->offsetSetStylesheet(5,'/test4.css');
+        $this->helper->direct()->offsetSetStylesheet(1,'/test1.css');
+        $this->helper->direct()->offsetSetStylesheet(10,'/test2.css');
+        $this->helper->direct()->offsetSetStylesheet(20,'/test3.css');
+        $this->helper->direct()->offsetSetStylesheet(5,'/test4.css');
 
         $test = $this->helper->toString();
 
@@ -459,5 +441,5 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
 
 // Call Zend_View_Helper_HeadLinkTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_HeadLinkTest::main") {
-    Zend_View_Helper_HeadLinkTest::main();
+    \Zend_View_Helper_HeadLinkTest::main();
 }

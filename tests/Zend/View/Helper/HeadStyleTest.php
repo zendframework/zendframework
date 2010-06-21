@@ -20,17 +20,13 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_HeadStyleTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_HeadStyleTest::main");
-}
-
-
-/** Zend_View_Helper_HeadStyle */
-
-/** Zend_View_Helper_Placeholder_Registry */
-
-/** Zend_Registry */
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
+use Zend\View\Helper\Placeholder\Registry;
+use Zend\View\Helper;
+use Zend\View;
 
 /**
  * Test class for Zend_View_Helper_HeadStyle.
@@ -43,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
+class HeadStyleTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_HeadStyle
@@ -56,18 +52,6 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
     public $basePath;
 
     /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_HeadStyleTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      *
@@ -75,13 +59,13 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $regKey = Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY;
-        if (Zend_Registry::isRegistered($regKey)) {
-            $registry = Zend_Registry::getInstance();
+        $regKey = Registry\Registry::REGISTRY_KEY;
+        if (\Zend\Registry::isRegistered($regKey)) {
+            $registry = \Zend\Registry::getInstance();
             unset($registry[$regKey]);
         }
         $this->basePath = dirname(__FILE__) . '/_files/modules';
-        $this->helper = new Zend_View_Helper_HeadStyle();
+        $this->helper = new Helper\HeadStyle();
     }
 
     /**
@@ -97,19 +81,19 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
 
     public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
     {
-        $registry = Zend_View_Helper_Placeholder_Registry::getRegistry();
+        $registry = Registry\Registry::getRegistry();
         if ($registry->containerExists('Zend_View_Helper_HeadStyle')) {
             $registry->deleteContainer('Zend_View_Helper_HeadStyle');
         }
         $this->assertFalse($registry->containerExists('Zend_View_Helper_HeadStyle'));
-        $helper = new Zend_View_Helper_HeadStyle();
+        $helper = new Helper\HeadStyle();
         $this->assertTrue($registry->containerExists('Zend_View_Helper_HeadStyle'));
     }
 
     public function testHeadStyleReturnsObjectInstance()
     {
-        $placeholder = $this->helper->headStyle();
-        $this->assertTrue($placeholder instanceof Zend_View_Helper_HeadStyle);
+        $placeholder = $this->helper->direct();
+        $this->assertTrue($placeholder instanceof Helper\HeadStyle);
     }
 
     public function testAppendPrependAndSetThrowExceptionsWhenNonStyleValueProvided()
@@ -117,19 +101,19 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->append('foo');
             $this->fail('Non-style value should not append');
-        } catch (Zend_View_Exception $e) { }
+        } catch (View\Exception $e) { }
         try {
             $this->helper->offsetSet(5, 'foo');
             $this->fail('Non-style value should not offsetSet');
-        } catch (Zend_View_Exception $e) { }
+        } catch (View\Exception $e) { }
         try {
             $this->helper->prepend('foo');
             $this->fail('Non-style value should not prepend');
-        } catch (Zend_View_Exception $e) { }
+        } catch (View\Exception $e) { }
         try {
             $this->helper->set('foo');
             $this->fail('Non-style value should not set');
-        } catch (Zend_View_Exception $e) { }
+        } catch (View\Exception $e) { }
     }
 
     public function testOverloadAppendStyleAppendsStyleToStack()
@@ -142,7 +126,7 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
             $this->assertEquals($i + 1, count($values));
             $item = $values[$i];
 
-            $this->assertTrue($item instanceof stdClass);
+            $this->assertTrue($item instanceof \stdClass);
             $this->assertObjectHasAttribute('content', $item);
             $this->assertObjectHasAttribute('attributes', $item);
             $this->assertEquals($string, $item->content);
@@ -159,7 +143,7 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
             $this->assertEquals($i + 1, count($values));
             $item = array_shift($values);
 
-            $this->assertTrue($item instanceof stdClass);
+            $this->assertTrue($item instanceof \stdClass);
             $this->assertObjectHasAttribute('content', $item);
             $this->assertObjectHasAttribute('attributes', $item);
             $this->assertEquals($string, $item->content);
@@ -178,7 +162,7 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($values));
         $item = array_shift($values);
 
-        $this->assertTrue($item instanceof stdClass);
+        $this->assertTrue($item instanceof \stdClass);
         $this->assertObjectHasAttribute('content', $item);
         $this->assertObjectHasAttribute('attributes', $item);
         $this->assertEquals($string, $item->content);
@@ -248,9 +232,9 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
         $style2 = 'a {}' . PHP_EOL . 'h1 {}';
         $style3 = 'a {}' . PHP_EOL . 'h2 {}';
 
-        $this->helper->headStyle($style1, 'SET')
-                     ->headStyle($style2, 'PREPEND')
-                     ->headStyle($style3, 'APPEND');
+        $this->helper->direct($style1, 'SET')
+                     ->direct($style2, 'PREPEND')
+                     ->direct($style3, 'APPEND');
         $this->assertEquals(3, count($this->helper));
         $values = $this->helper->getArrayCopy();
         $this->assertTrue((strstr($values[0]->content, $style2)) ? true : false);
@@ -264,11 +248,11 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
         $style2 = 'body {}' . PHP_EOL . 'h1 {}';
         $style3 = 'div {}' . PHP_EOL . 'li {}';
 
-        $this->helper->headStyle($style1, 'SET')
-                     ->headStyle($style2, 'PREPEND')
-                     ->headStyle($style3, 'APPEND');
+        $this->helper->direct($style1, 'SET')
+                     ->direct($style2, 'PREPEND')
+                     ->direct($style3, 'APPEND');
         $html = $this->helper->toString();
-        $doc  = new DOMDocument;
+        $doc  = new \DOMDocument;
         $dom  = $doc->loadHtml($html);
         $this->assertTrue(($dom !== false));
 
@@ -307,7 +291,7 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->bogusMethod();
             $this->fail('Invalid method should raise exception');
-        } catch (Zend_View_Exception $e) { }
+        } catch (View\Exception $e) { }
     }
 
     public function testTooFewArgumentsRaisesException()
@@ -315,7 +299,7 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->appendStyle();
             $this->fail('Too few arguments should raise exception');
-        } catch (Zend_View_Exception $e) { }
+        } catch (View\Exception $e) { }
     }
 
     public function testIndentationIsHonored()
@@ -343,31 +327,31 @@ h1 {
 
     public function testSerialCapturingWorks()
     {
-        $this->helper->headStyle()->captureStart();
+        $this->helper->direct()->captureStart();
         echo "Captured text";
-        $this->helper->headStyle()->captureEnd();
+        $this->helper->direct()->captureEnd();
 
         try {
-            $this->helper->headStyle()->captureStart();
-        } catch (Zend_View_Exception $e) {
+            $this->helper->direct()->captureStart();
+        } catch (View\Exception $e) {
             $this->fail('Serial capturing should work');
         }
-        $this->helper->headStyle()->captureEnd();
+        $this->helper->direct()->captureEnd();
     }
 
     public function testNestedCapturingFails()
     {
-        $this->helper->headStyle()->captureStart();
+        $this->helper->direct()->captureStart();
         echo "Captured text";
             try {
-                $this->helper->headStyle()->captureStart();
-                $this->helper->headStyle()->captureEnd();
+                $this->helper->direct()->captureStart();
+                $this->helper->direct()->captureEnd();
                 $this->fail('Nested capturing should fail');
-            } catch (Zend_View_Exception $e) {
-                $this->helper->headStyle()->captureEnd();
+            } catch (View\Exception $e) {
+                $this->helper->direct()->captureEnd();
                 $this->assertContains('Cannot nest', $e->getMessage());
             }
-        $this->helper->headStyle()->captureEnd();
+        $this->helper->direct()->captureEnd();
     }
 
     public function testMediaAttributeAsArray()
@@ -444,5 +428,5 @@ a {
 
 // Call Zend_View_Helper_HeadStyleTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_HeadStyleTest::main") {
-    Zend_View_Helper_HeadStyleTest::main();
+    \Zend_View_Helper_HeadStyleTest::main();
 }

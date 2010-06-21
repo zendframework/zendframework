@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper\Navigation;
+use Zend\Controller\Request;
+use Zend\View;
 
 /**
  * Tests Zend_View_Helper_Navigation_Sitemap
@@ -32,8 +38,7 @@
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_Navigation_SitemapTest
-    extends Zend_View_Helper_Navigation_TestAbstract
+class SitemapTest extends TestAbstract
 {
     protected $_front;
     protected $_oldRequest;
@@ -45,7 +50,7 @@ class Zend_View_Helper_Navigation_SitemapTest
      *
      * @var string
      */
-    protected $_helperName = 'Zend_View_Helper_Navigation_Sitemap';
+    protected $_helperName = 'Zend\View\Helper\Navigation\Sitemap';
 
     /**
      * View helper
@@ -74,12 +79,12 @@ class Zend_View_Helper_Navigation_SitemapTest
         $_SERVER['SERVER_PORT'] = 80;
         $_SERVER['REQUEST_URI'] = '/';
 
-        $this->_front = Zend_Controller_Front::getInstance();
+        $this->_front = \Zend\Controller\Front::getInstance();
         $this->_oldRequest = $this->_front->getRequest();
         $this->_oldRouter = $this->_front->getRouter();
 
         $this->_front->resetInstance();
-        $this->_front->setRequest(new Zend_Controller_Request_Http());
+        $this->_front->setRequest(new Request\HTTP());
         $this->_front->getRouter()->addDefaultRoutes();
 
         parent::setUp();
@@ -92,7 +97,7 @@ class Zend_View_Helper_Navigation_SitemapTest
         if (null !== $this->_oldRequest) {
             $this->_front->setRequest($this->_oldRequest);
         } else {
-            $this->_front->setRequest(new Zend_Controller_Request_Http());
+            $this->_front->setRequest(new Request\HTTP());
         }
         $this->_front->setRouter($this->_oldRouter);
 
@@ -124,17 +129,17 @@ class Zend_View_Helper_Navigation_SitemapTest
     public function testAutoloadContainerFromRegistry()
     {
         $oldReg = null;
-        if (Zend_Registry::isRegistered(self::REGISTRY_KEY)) {
-            $oldReg = Zend_Registry::get(self::REGISTRY_KEY);
+        if (\Zend\Registry::isRegistered(self::REGISTRY_KEY)) {
+            $oldReg = \Zend\Registry::get(self::REGISTRY_KEY);
         }
-        Zend_Registry::set(self::REGISTRY_KEY, $this->_nav1);
+        \Zend\Registry::set(self::REGISTRY_KEY, $this->_nav1);
 
         $this->_helper->setContainer(null);
 
         $expected = $this->_getExpected('sitemap/default1.xml');
         $actual = $this->_helper->render();
 
-        Zend_Registry::set(self::REGISTRY_KEY, $oldReg);
+        \Zend\Registry::set(self::REGISTRY_KEY, $oldReg);
 
         $this->assertEquals($expected, $expected);
     }
@@ -217,7 +222,7 @@ class Zend_View_Helper_Navigation_SitemapTest
 
         try {
             $this->_helper->render($nav);
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
             $expected = sprintf(
                     'Encountered an invalid URL for Sitemap XML: "%s"',
                     'http://w.');
@@ -245,7 +250,7 @@ class Zend_View_Helper_Navigation_SitemapTest
             $this->_helper->setServerUrl('site.example.org');
             $this->fail('An invalid server URL was given, but a ' .
                         'Zend_Uri_Exception was not thrown');
-        } catch (Zend_Uri_Exception $e) {
+        } catch (\Zend\URI\Exception $e) {
             $this->assertContains('Illegal scheme', $e->getMessage());
         }
     }
@@ -285,10 +290,10 @@ class Zend_View_Helper_Navigation_SitemapTest
 
         try {
             $this->_helper->render($nav);
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
             $expected = sprintf(
                     'Sitemap is invalid according to XML Schema at "%s"',
-                    Zend_View_Helper_Navigation_Sitemap::SITEMAP_XSD);
+                    \Zend\View\Helper\Navigation\Sitemap::SITEMAP_XSD);
             $actual = $e->getMessage();
             $this->assertEquals($expected, $actual);
             return;

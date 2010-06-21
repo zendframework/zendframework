@@ -20,6 +20,14 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper\Navigation;
+use Zend\Acl;
+use Zend\View\Helper\Navigation;
+use Zend\Acl\Role;
+use Zend\View;
 
 /**
  * Tests Zend_View_Helper_Navigation
@@ -32,20 +40,20 @@
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_Navigation_NavigationTest
-    extends Zend_View_Helper_Navigation_TestAbstract
+class NavigationTest
+    extends TestAbstract
 {
     /**
      * Class name for view helper to test
      *
      * @var string
      */
-    protected $_helperName = 'Zend_View_Helper_Navigation';
+    protected $_helperName = 'Zend\View\Helper\Navigation';
 
     /**
      * View helper
      *
-     * @var Zend_View_Helper_Navigation
+     * @var Zend\View\Helper\Navigation
      */
     protected $_helper;
 
@@ -67,10 +75,10 @@ class Zend_View_Helper_Navigation_NavigationTest
     {
         // setup
         $oldReg = null;
-        if (Zend_Registry::isRegistered(self::REGISTRY_KEY)) {
-            $oldReg = Zend_Registry::get(self::REGISTRY_KEY);
+        if (\Zend\Registry::isRegistered(self::REGISTRY_KEY)) {
+            $oldReg = \Zend\Registry::get(self::REGISTRY_KEY);
         }
-        Zend_Registry::set(self::REGISTRY_KEY, $this->_nav1);
+        \Zend\Registry::set(self::REGISTRY_KEY, $this->_nav1);
         $this->_helper->setContainer(null);
 
         // result
@@ -78,7 +86,7 @@ class Zend_View_Helper_Navigation_NavigationTest
         $actual = $this->_helper->render();
 
         // teardown
-        Zend_Registry::set(self::REGISTRY_KEY, $oldReg);
+        \Zend\Registry::set(self::REGISTRY_KEY, $oldReg);
 
         $this->assertEquals($expected, $actual);
     }
@@ -202,33 +210,33 @@ class Zend_View_Helper_Navigation_NavigationTest
 
     public function testGetAclReturnsAclInstanceSetWithSetAcl()
     {
-        $acl = new Zend_Acl();
+        $acl = new Acl\Acl();
         $this->_helper->setAcl($acl);
         $this->assertEquals($acl, $this->_helper->getAcl());
     }
 
     public function testGetAclReturnsAclInstanceSetWithSetDefaultAcl()
     {
-        $acl = new Zend_Acl();
-        Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
+        $acl = new Acl\Acl();
+        Navigation\HelperAbstract::setDefaultAcl($acl);
         $actual = $this->_helper->getAcl();
-        Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl(null);
+        Navigation\HelperAbstract::setDefaultAcl(null);
         $this->assertEquals($acl, $actual);
     }
 
     public function testSetDefaultAclAcceptsNull()
     {
-        $acl = new Zend_Acl();
-        Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
-        Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl(null);
+        $acl = new Acl\Acl();
+        Navigation\HelperAbstract::setDefaultAcl($acl);
+        Navigation\HelperAbstract::setDefaultAcl(null);
         $this->assertNull($this->_helper->getAcl());
     }
 
     public function testSetDefaultAclAcceptsNoParam()
     {
-        $acl = new Zend_Acl();
-        Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
-        Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl();
+        $acl = new Acl\Acl();
+        Navigation\HelperAbstract::setDefaultAcl($acl);
+        Navigation\HelperAbstract::setDefaultAcl();
         $this->assertNull($this->_helper->getAcl());
     }
 
@@ -240,7 +248,7 @@ class Zend_View_Helper_Navigation_NavigationTest
 
     public function testSetRoleAcceptsRoleInterface()
     {
-        $role = new Zend_Acl_Role('member');
+        $role = new Role\GenericRole('member');
         $this->_helper->setRole($role);
         $this->assertEquals($role, $this->_helper->getRole());
     }
@@ -263,7 +271,7 @@ class Zend_View_Helper_Navigation_NavigationTest
             $this->_helper->setRole(1337);
             $this->fail('An invalid argument was given, but a ' .
                         'Zend_View_Exception was not thrown');
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
             $this->assertContains('$role must be a string', $e->getMessage());
         }
     }
@@ -271,10 +279,10 @@ class Zend_View_Helper_Navigation_NavigationTest
     public function testSetRoleThrowsExceptionWhenGivenAnArbitraryObject()
     {
         try {
-            $this->_helper->setRole(new stdClass());
+            $this->_helper->setRole(new \stdClass());
             $this->fail('An invalid argument was given, but a ' .
                         'Zend_View_Exception was not thrown');
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
             $this->assertContains('$role must be a string', $e->getMessage());
         }
     }
@@ -282,40 +290,40 @@ class Zend_View_Helper_Navigation_NavigationTest
     public function testSetDefaultRoleAcceptsString()
     {
         $expected = 'member';
-        Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole($expected);
+        Navigation\HelperAbstract::setDefaultRole($expected);
         $actual = $this->_helper->getRole();
-        Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(null);
+        Navigation\HelperAbstract::setDefaultRole(null);
         $this->assertEquals($expected, $actual);
     }
 
     public function testSetDefaultRoleAcceptsRoleInterface()
     {
-        $expected = new Zend_Acl_Role('member');
-        Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole($expected);
+        $expected = new Role\GenericRole('member');
+        Navigation\HelperAbstract::setDefaultRole($expected);
         $actual = $this->_helper->getRole();
-        Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(null);
+        Navigation\HelperAbstract::setDefaultRole(null);
         $this->assertEquals($expected, $actual);
     }
 
     public function testSetDefaultRoleAcceptsNull()
     {
-        Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(null);
+        Navigation\HelperAbstract::setDefaultRole(null);
         $this->assertNull($this->_helper->getRole());
     }
 
     public function testSetDefaultRoleAcceptsNoParam()
     {
-        Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole();
+        Navigation\HelperAbstract::setDefaultRole();
         $this->assertNull($this->_helper->getRole());
     }
 
     public function testSetDefaultRoleThrowsExceptionWhenGivenAnInt()
     {
         try {
-            Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(1337);
+            Navigation\HelperAbstract::setDefaultRole(1337);
             $this->fail('An invalid argument was given, but a ' .
                         'Zend_View_Exception was not thrown');
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
             $this->assertContains('$role must be', $e->getMessage());
         }
     }
@@ -323,10 +331,10 @@ class Zend_View_Helper_Navigation_NavigationTest
     public function testSetDefaultRoleThrowsExceptionWhenGivenAnArbitraryObject()
     {
         try {
-            Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(new stdClass());
+            Navigation\HelperAbstract::setDefaultRole(new \stdClass());
             $this->fail('An invalid argument was given, but a ' .
                         'Zend_View_Exception was not thrown');
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
             $this->assertContains('$role must be', $e->getMessage());
         }
     }
@@ -349,9 +357,9 @@ class Zend_View_Helper_Navigation_NavigationTest
 
     public function testPageIdShouldBeNormalized()
     {
-        $nl = Zend_View_Helper_Navigation::EOL;
+        $nl = \Zend\Navigation\Navigation::EOL;
 
-        $container = new Zend_Navigation(array(
+        $container = new \Zend\Navigation\Navigation(array(
             array(
                 'label' => 'Page 1',
                 'id'    => 'p1',
@@ -383,7 +391,7 @@ class Zend_View_Helper_Navigation_NavigationTest
      */
     public function testRenderInvisibleItem()
     {
-        $container = new Zend_Navigation(array(
+        $container = new \Zend\Navigation\Navigation(array(
             array(
                 'label' => 'Page 1',
                 'id'    => 'p1',

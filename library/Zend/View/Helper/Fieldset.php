@@ -21,15 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper for rendering fieldsets
  *
- * @uses       Zend_View_Helper_FormElement
+ * @uses       \Zend\View\Helper\FormElement
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_Fieldset extends Zend_View_Helper_FormElement
+class Fieldset extends FormElement
 {
     /**
      * Render HTML form
@@ -39,9 +44,14 @@ class Zend_View_Helper_Fieldset extends Zend_View_Helper_FormElement
      * @param  array $attribs HTML form attributes
      * @return string
      */
-    public function fieldset($name, $content, $attribs = null)
+    public function direct($name = null, $content = null, $attribs = null)
     {
+        if ($name == null || $content == null) {
+            throw new \InvalidArgumentException('Fieldset helper requires both $name and $content to be provided.');
+        }
+        
         $info = $this->_getInfo($name, $content, $attribs);
+        $escape = $id = null;
         extract($info);
 
         // get legend

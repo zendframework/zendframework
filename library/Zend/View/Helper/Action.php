@@ -21,18 +21,25 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+use Zend\View;
+use Zend\Controller\Action\HelperBroker;
+
+/**
  * Helper for rendering output of a controller action
  *
- * @uses       Zend_Controller_Action_HelperBroker
- * @uses       Zend_Controller_Front
- * @uses       Zend_View_Exception
- * @uses       Zend_View_Helper_Abstract
+ * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Front
+ * @uses       \Zend\View\Exception
+ * @uses       \Zend\View\Helper\AbstractHelper
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
+class Action extends AbstractHelper
 {
     /**
      * @var string
@@ -40,17 +47,17 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
     public $defaultModule;
 
     /**
-     * @var Zend_Controller_Dispatcher_Interface
+     * @var \Zend\Controller\Dispatcher\DispatcherInterface
      */
     public $dispatcher;
 
     /**
-     * @var Zend_Controller_Request_Abstract
+     * @var \Zend\Controller\Request\AbstractRequest
      */
     public $request;
 
     /**
-     * @var Zend_Controller_Response_Abstract
+     * @var \Zend\Controller\Response\AbstractResponse
      */
     public $response;
 
@@ -63,10 +70,10 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
      */
     public function __construct()
     {
-        $front   = Zend_Controller_Front::getInstance();
+        $front   = \Zend\Controller\Front::getInstance();
         $modules = $front->getControllerDirectory();
         if (empty($modules)) {
-            $e = new Zend_View_Exception('Action helper depends on valid front controller instance');
+            $e = new View\Exception('Action helper depends on valid front controller instance');
             $e->setView($this->view);
             throw $e;
         }
@@ -75,7 +82,7 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
         $response = $front->getResponse();
 
         if (empty($request) || empty($response)) {
-            $e = new Zend_View_Exception('Action view helper requires both a registered request and response object in the front controller instance');
+            $e = new View\Exception('Action view helper requires both a registered request and response object in the front controller instance');
             $e->setView($this->view);
             throw $e;
         }
@@ -114,16 +121,20 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
      * @param  array $params
      * @return string
      */
-    public function action($action, $controller, $module = null, array $params = array())
+    public function direct($action = null, $controller = null, $module = null, array $params = array())
     {
+        if ($action == null || $controller == null) {
+            throw new \InvalidArgumentException('Action: missing argument. $action and $controller are required in action($action, $controller, $module = null, array $params = array())');
+        }
+        
         $this->resetObjects();
         if (null === $module) {
             $module = $this->defaultModule;
         }
 
         // clone the view object to prevent over-writing of view variables
-        $viewRendererObj = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-        Zend_Controller_Action_HelperBroker::addHelper(clone $viewRendererObj);
+        $viewRendererObj = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        HelperBroker\HelperBroker::addHelper(clone $viewRendererObj);
 
         $this->request->setParams($params)
                       ->setModuleName($module)
@@ -134,7 +145,7 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
         $this->dispatcher->dispatch($this->request, $this->response);
 
         // reset the viewRenderer object to it's original state
-        Zend_Controller_Action_HelperBroker::addHelper($viewRendererObj);
+        HelperBroker\HelperBroker::addHelper($viewRendererObj);
 
 
         if (!$this->request->isDispatched()
@@ -152,7 +163,7 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
     /**
      * Clone the current View
      *
-     * @return Zend_View_Interface
+     * @return \Zend\View\ViewInterface
      */
     public function cloneView()
     {

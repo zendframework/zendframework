@@ -20,6 +20,17 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper\Navigation;
+use Zend\Navigation\Page;
+use Zend\Config;
+use Zend\Acl;
+use Zend\Acl\Role;
+use Zend\Acl\Resource;
+use Zend\View;
+use Zend\View\Helper\Navigation;
 
 /**
  * Tests Zend_View_Helper_Navigation_Links
@@ -32,20 +43,19 @@
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_Navigation_LinksTest
-    extends Zend_View_Helper_Navigation_TestAbstract
+class LinksTest extends TestAbstract
 {
     /**
      * Class name for view helper to test
      *
      * @var string
      */
-    protected $_helperName = 'Zend_View_Helper_Navigation_Links';
+    protected $_helperName = 'Zend\View\Helper\Navigation\Links';
 
     /**
      * View helper
      *
-     * @var Zend_View_Helper_Navigation_Links
+     * @var Zend\View\Helper\Navigation\Links
      */
     protected $_helper;
 
@@ -60,7 +70,7 @@ class Zend_View_Helper_Navigation_LinksTest
         $this->_doctypeHelper = $this->_helper->view->doctype();
         $this->_oldDoctype = $this->_doctypeHelper->getDoctype();
         $this->_doctypeHelper->setDoctype(
-                Zend_View_Helper_Doctype::HTML4_LOOSE);
+                \Zend\View\Helper\Doctype::HTML4_LOOSE);
 
         // disable all active pages
         foreach ($this->_helper->findAllByActive(true) as $page) {
@@ -70,6 +80,7 @@ class Zend_View_Helper_Navigation_LinksTest
 
     public function tearDown()
     {
+        return;
         $this->_doctypeHelper->setDoctype($this->_oldDoctype);
     }
 
@@ -116,7 +127,7 @@ class Zend_View_Helper_Navigation_LinksTest
     public function testDetectRelationFromPageInstancePropertyOfActivePage()
     {
         $active = $this->_helper->findOneByLabel('Page 2');
-        $active->addRel('example', Zend_Navigation_Page::factory(array(
+        $active->addRel('example', Page\Page::factory(array(
             'uri' => 'http://www.example.com/',
             'label' => 'An example page'
         )));
@@ -164,7 +175,7 @@ class Zend_View_Helper_Navigation_LinksTest
     public function testDetectRelationFromConfigInstancePropertyOfActivePage()
     {
         $active = $this->_helper->findOneByLabel('Page 2');
-        $active->addRel('example', new Zend_Config(array(
+        $active->addRel('example', new Config\Config(array(
             'uri' => 'http://www.example.com/',
             'label' => 'An example page'
         )));
@@ -211,7 +222,7 @@ class Zend_View_Helper_Navigation_LinksTest
     {
         $active = $this->_helper->findOneByLabel('Page 2');
 
-        $active->addRel('alternate', new Zend_Config(array(
+        $active->addRel('alternate', new Config\Config(array(
             array(
                 'label' => 'foo',
                 'uri'   => 'bar'
@@ -237,7 +248,7 @@ class Zend_View_Helper_Navigation_LinksTest
             'appendix', 'help', 'bookmark'
         );
 
-        $samplePage = Zend_Navigation_Page::factory(array(
+        $samplePage = Page\Page::factory(array(
             'label' => 'An example page',
             'uri'   => 'http://www.example.com/'
         ));
@@ -419,15 +430,15 @@ class Zend_View_Helper_Navigation_LinksTest
 
     public function testAclFiltersAwayPagesFromPageProperty()
     {
-        $acl = new Zend_Acl();
-        $acl->addRole(new Zend_Acl_Role('member'));
-        $acl->addRole(new Zend_Acl_Role('admin'));
-        $acl->add(new Zend_Acl_Resource('protected'));
+        $acl = new Acl\Acl();
+        $acl->addRole(new Role\GenericRole('member'));
+        $acl->addRole(new Role\GenericRole('admin'));
+        $acl->add(new Resource\GenericResource('protected'));
         $acl->allow('admin', 'protected');
         $this->_helper->setAcl($acl);
         $this->_helper->setRole($acl->getRole('member'));
 
-        $samplePage = Zend_Navigation_Page::factory(array(
+        $samplePage = Page\Page::factory(array(
             'label'    => 'An example page',
             'uri'      => 'http://www.example.com/',
             'resource' => 'protected'
@@ -471,19 +482,19 @@ class Zend_View_Helper_Navigation_LinksTest
 
     public function testAclFiltersAwayPagesFromContainerSearch()
     {
-        $acl = new Zend_Acl();
-        $acl->addRole(new Zend_Acl_Role('member'));
-        $acl->addRole(new Zend_Acl_Role('admin'));
-        $acl->add(new Zend_Acl_Resource('protected'));
+        $acl = new Acl\Acl();
+        $acl->addRole(new Role\GenericRole('member'));
+        $acl->addRole(new Role\GenericRole('admin'));
+        $acl->add(new Resource\GenericResource('protected'));
         $acl->allow('admin', 'protected');
         $this->_helper->setAcl($acl);
         $this->_helper->setRole($acl->getRole('member'));
 
         $oldContainer = $this->_helper->getContainer();
         $container = $this->_helper->getContainer();
-        $iterator = new RecursiveIteratorIterator(
+        $iterator = new \RecursiveIteratorIterator(
             $container,
-            RecursiveIteratorIterator::SELF_FIRST);
+            \RecursiveIteratorIterator::SELF_FIRST);
         foreach ($iterator as $page) {
             $page->resource = 'protected';
         }
@@ -527,7 +538,7 @@ class Zend_View_Helper_Navigation_LinksTest
             $this->_helper->findRelation($active, 'foo', 'bar');
             $this->fail('An invalid value was given, but a ' .
                         'Zend_View_Exception was not thrown');
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
             $this->assertContains('Invalid argument: $rel', $e->getMessage());
         }
     }
@@ -539,7 +550,7 @@ class Zend_View_Helper_Navigation_LinksTest
             $this->_helper->renderLink($active, 'foo', 'bar');
             $this->fail('An invalid value was given, but a ' .
                         'Zend_View_Exception was not thrown');
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
             $this->assertContains('Invalid relation attribute', $e->getMessage());
         }
     }
@@ -574,7 +585,7 @@ class Zend_View_Helper_Navigation_LinksTest
 
         // find active page and create page to use for relations
         $active = $this->_helper->findOneByLabel('Page 1');
-        $forcedRelation = new Zend_Navigation_Page_Uri(array(
+        $forcedRelation = new Page\Uri(array(
             'label' => 'Forced page',
             'uri'   => '#'
         ));
@@ -601,21 +612,21 @@ class Zend_View_Helper_Navigation_LinksTest
     private function _getFlags()
     {
         return array(
-            Zend_View_Helper_Navigation_Links::RENDER_ALTERNATE  => 'alternate',
-            Zend_View_Helper_Navigation_Links::RENDER_STYLESHEET => 'stylesheet',
-            Zend_View_Helper_Navigation_Links::RENDER_START      => 'start',
-            Zend_View_Helper_Navigation_Links::RENDER_NEXT       => 'next',
-            Zend_View_Helper_Navigation_Links::RENDER_PREV       => 'prev',
-            Zend_View_Helper_Navigation_Links::RENDER_CONTENTS   => 'contents',
-            Zend_View_Helper_Navigation_Links::RENDER_INDEX      => 'index',
-            Zend_View_Helper_Navigation_Links::RENDER_GLOSSARY   => 'glossary',
-            Zend_View_Helper_Navigation_Links::RENDER_CHAPTER    => 'chapter',
-            Zend_View_Helper_Navigation_Links::RENDER_SECTION    => 'section',
-            Zend_View_Helper_Navigation_Links::RENDER_SUBSECTION => 'subsection',
-            Zend_View_Helper_Navigation_Links::RENDER_APPENDIX   => 'appendix',
-            Zend_View_Helper_Navigation_Links::RENDER_HELP       => 'help',
-            Zend_View_Helper_Navigation_Links::RENDER_BOOKMARK   => 'bookmark',
-            Zend_View_Helper_Navigation_Links::RENDER_CUSTOM     => 'canonical'
+            Navigation\Links::RENDER_ALTERNATE  => 'alternate',
+            Navigation\Links::RENDER_STYLESHEET => 'stylesheet',
+            Navigation\Links::RENDER_START      => 'start',
+            Navigation\Links::RENDER_NEXT       => 'next',
+            Navigation\Links::RENDER_PREV       => 'prev',
+            Navigation\Links::RENDER_CONTENTS   => 'contents',
+            Navigation\Links::RENDER_INDEX      => 'index',
+            Navigation\Links::RENDER_GLOSSARY   => 'glossary',
+            Navigation\Links::RENDER_CHAPTER    => 'chapter',
+            Navigation\Links::RENDER_SECTION    => 'section',
+            Navigation\Links::RENDER_SUBSECTION => 'subsection',
+            Navigation\Links::RENDER_APPENDIX   => 'appendix',
+            Navigation\Links::RENDER_HELP       => 'help',
+            Navigation\Links::RENDER_BOOKMARK   => 'bookmark',
+            Navigation\Links::RENDER_CUSTOM     => 'canonical'
         );
     }
 
@@ -655,8 +666,8 @@ class Zend_View_Helper_Navigation_LinksTest
 
     public function testRenderFlagBitwiseOr()
     {
-        $newFlag = Zend_View_Helper_Navigation_Links::RENDER_NEXT |
-                   Zend_View_Helper_Navigation_Links::RENDER_PREV;
+        $newFlag = Navigation\Links::RENDER_NEXT |
+                   Navigation\Links::RENDER_PREV;
         $this->_helper->setRenderFlag($newFlag);
         $active = $this->_helper->findOneByLabel('Page 1.1');
         $active->active = true;
@@ -673,8 +684,8 @@ class Zend_View_Helper_Navigation_LinksTest
     public function testIndenting()
     {
         $active = $this->_helper->findOneByLabel('Page 1.1');
-        $newFlag = Zend_View_Helper_Navigation_Links::RENDER_NEXT |
-                   Zend_View_Helper_Navigation_Links::RENDER_PREV;
+        $newFlag = Navigation\Links::RENDER_NEXT |
+                   Navigation\Links::RENDER_PREV;
         $this->_helper->setRenderFlag($newFlag);
         $this->_helper->setIndent('  ');
         $active->active = true;
@@ -692,7 +703,7 @@ class Zend_View_Helper_Navigation_LinksTest
     {
         $this->_helper->setMaxDepth(1);
         $this->_helper->findOneByLabel('Page 2.3.3')->setActive(); // level 2
-        $flag = Zend_View_Helper_Navigation_Links::RENDER_NEXT;
+        $flag = Navigation\Links::RENDER_NEXT;
 
         $expected = '<link rel="next" href="page2/page2_3/page2_3_1" title="Page 2.3.1">';
         $actual = $this->_helper->setRenderFlag($flag)->render();
@@ -704,7 +715,7 @@ class Zend_View_Helper_Navigation_LinksTest
     {
         $this->_helper->setMinDepth(2);
         $this->_helper->findOneByLabel('Page 2.3')->setActive(); // level 1
-        $flag = Zend_View_Helper_Navigation_Links::RENDER_NEXT;
+        $flag = Navigation\Links::RENDER_NEXT;
 
         $expected = '';
         $actual = $this->_helper->setRenderFlag($flag)->render();

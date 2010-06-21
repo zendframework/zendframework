@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_FormImageTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormImageTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
 
 /**
  * Test class for Zend_View_Helper_FormImage.
@@ -38,19 +36,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
+class FormImageTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormImageTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -60,8 +47,8 @@ class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new Zend_View();
-        $this->helper = new Zend_View_Helper_FormImage();
+        $this->view = new \Zend\View\View();
+        $this->helper = new \Zend\View\Helper\FormImage();
         $this->helper->setView($this->view);
     }
 
@@ -77,7 +64,7 @@ class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
 
     public function testFormImageRendersFormImageXhtml()
     {
-        $button = $this->helper->formImage('foo', 'bar');
+        $button = $this->helper->direct('foo', 'bar');
         $this->assertRegexp('/<input[^>]*?src="bar"/', $button);
         $this->assertRegexp('/<input[^>]*?name="foo"/', $button);
         $this->assertRegexp('/<input[^>]*?type="image"/', $button);
@@ -85,7 +72,7 @@ class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
 
     public function testDisablingFormImageRendersImageInputWithDisableAttribute()
     {
-        $button = $this->helper->formImage('foo', 'bar', array('disable' => true));
+        $button = $this->helper->direct('foo', 'bar', array('disable' => true));
         $this->assertRegexp('/<input[^>]*?disabled="disabled"/', $button);
         $this->assertRegexp('/<input[^>]*?src="bar"/', $button);
         $this->assertRegexp('/<input[^>]*?name="foo"/', $button);
@@ -95,5 +82,5 @@ class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
 
 // Call Zend_View_Helper_FormImageTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormImageTest::main") {
-    Zend_View_Helper_FormImageTest::main();
+    \Zend_View_Helper_FormImageTest::main();
 }

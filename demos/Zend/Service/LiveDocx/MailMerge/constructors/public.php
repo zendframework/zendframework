@@ -26,7 +26,7 @@ printf('Username : %s%sPassword : %s%s    WSDL : %s%s%s',
     PHP_EOL,
     $mailMerge->getPassword(),
     PHP_EOL,
-    $mailMerge->getWsdl(),
+    $mailMerge->getWSDL(),
     PHP_EOL,
     PHP_EOL
 );
@@ -51,7 +51,7 @@ printf('Username : %s%sPassword : %s%s    WSDL : %s%s%s',
     PHP_EOL,
     $mailMerge->getPassword(),
     PHP_EOL,
-    $mailMerge->getWsdl(),
+    $mailMerge->getWSDL(),
     PHP_EOL,
     PHP_EOL
 );

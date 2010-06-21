@@ -20,16 +20,21 @@
  * @version    $Id$
  */
 
-// Call Zend_Controller_Response_HttpTestCaseTest::main() if this source file is executed directly.
+/**
+ * @namespace
+ */
+namespace ZendTest\Controller\Response;
+
+// Call Zend_Controller_Response_HTTPTestCaseTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Response_HttpTestCaseTest::main");
+    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Response_HTTPTestCaseTest::main");
 }
 
 
-/** Zend_Controller_Response_HttpTestCase */
+/** Zend_Controller_Response_HTTPTestCase */
 
 /**
- * Test class for Zend_Controller_Response_HttpTestCase.
+ * Test class for Zend_Controller_Response_HTTPTestCase.
  *
  * @category   Zend
  * @package    Zend_Controller
@@ -39,7 +44,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller
  * @group      Zend_Controller_Response
  */
-class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit_Framework_TestCase
+class HTTPTestCaseTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -48,8 +53,8 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit_Framework_TestCa
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Response_HttpTestCaseTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Controller_Response_HTTPTestCaseTest");
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
@@ -60,7 +65,7 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit_Framework_TestCa
      */
     public function setUp()
     {
-        $this->response = new Zend_Controller_Response_HttpTestCase();
+        $this->response = new \Zend\Controller\Response\HTTPTestCase();
     }
 
     /**
@@ -125,7 +130,7 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit_Framework_TestCa
     }
 }
 
-// Call Zend_Controller_Response_HttpTestCaseTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Response_HttpTestCaseTest::main") {
-    Zend_Controller_Response_HttpTestCaseTest::main();
+// Call Zend_Controller_Response_HTTPTestCaseTest::main() if this source file is executed directly.
+if (PHPUnit_MAIN_METHOD == "Zend_Controller_Response_HTTPTestCaseTest::main") {
+    \Zend_Controller_Response_HTTPTestCaseTest::main();
 }

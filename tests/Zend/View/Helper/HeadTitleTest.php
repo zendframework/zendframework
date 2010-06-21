@@ -20,17 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_HeadTitleTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_HeadTitleTest::main");
-}
-
-
-/** Zend_View_Helper_HeadTitle */
-
-/** Zend_View_Helper_Placeholder_Registry */
-
-/** Zend_Registry */
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
+use Zend\View\Helper\Placeholder\Registry;
+use Zend\View\Helper;
 
 /**
  * Test class for Zend_View_Helper_HeadTitle.
@@ -43,7 +38,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
+class HeadTitleTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_HeadTitle
@@ -56,17 +51,6 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
     public $basePath;
 
     /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_HeadTitleTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      *
@@ -74,13 +58,13 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $regKey = Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY;
-        if (Zend_Registry::isRegistered($regKey)) {
-            $registry = Zend_Registry::getInstance();
+        $regKey = Registry\Registry::REGISTRY_KEY;
+        if (\Zend\Registry::isRegistered($regKey)) {
+            $registry = \Zend\Registry::getInstance();
             unset($registry[$regKey]);
         }
         $this->basePath = dirname(__FILE__) . '/_files/modules';
-        $this->helper = new Zend_View_Helper_HeadTitle();
+        $this->helper = new Helper\HeadTitle();
     }
 
     /**
@@ -96,51 +80,51 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
 
     public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
     {
-        $registry = Zend_View_Helper_Placeholder_Registry::getRegistry();
+        $registry = Registry\Registry::getRegistry();
         if ($registry->containerExists('Zend_View_Helper_HeadTitle')) {
             $registry->deleteContainer('Zend_View_Helper_HeadTitle');
         }
         $this->assertFalse($registry->containerExists('Zend_View_Helper_HeadTitle'));
-        $helper = new Zend_View_Helper_HeadTitle();
+        $helper = new Helper\HeadTitle();
         $this->assertTrue($registry->containerExists('Zend_View_Helper_HeadTitle'));
     }
 
     public function testHeadTitleReturnsObjectInstance()
     {
-        $placeholder = $this->helper->headTitle();
-        $this->assertTrue($placeholder instanceof Zend_View_Helper_HeadTitle);
+        $placeholder = $this->helper->direct();
+        $this->assertTrue($placeholder instanceof Helper\HeadTitle);
     }
 
     public function testCanSetTitleViaHeadTitle()
     {
-        $placeholder = $this->helper->headTitle('Foo Bar', 'SET');
+        $placeholder = $this->helper->direct('Foo Bar', 'SET');
         $this->assertContains('Foo Bar', $placeholder->toString());
     }
 
     public function testCanAppendTitleViaHeadTitle()
     {
-        $placeholder = $this->helper->headTitle('Foo');
-        $placeholder = $this->helper->headTitle('Bar');
+        $placeholder = $this->helper->direct('Foo');
+        $placeholder = $this->helper->direct('Bar');
         $this->assertContains('FooBar', $placeholder->toString());
     }
 
     public function testCanPrependTitleViaHeadTitle()
     {
-        $placeholder = $this->helper->headTitle('Foo');
-        $placeholder = $this->helper->headTitle('Bar', 'PREPEND');
+        $placeholder = $this->helper->direct('Foo');
+        $placeholder = $this->helper->direct('Bar', 'PREPEND');
         $this->assertContains('BarFoo', $placeholder->toString());
     }
 
     public function testReturnedPlaceholderToStringContainsFullTitleElement()
     {
-        $placeholder = $this->helper->headTitle('Foo');
-        $placeholder = $this->helper->headTitle('Bar', 'APPEND')->setSeparator(' :: ');
+        $placeholder = $this->helper->direct('Foo');
+        $placeholder = $this->helper->direct('Bar', 'APPEND')->setSeparator(' :: ');
         $this->assertEquals('<title>Foo :: Bar</title>', $placeholder->toString());
     }
 
     public function testToStringEscapesEntries()
     {
-        $this->helper->headTitle('<script type="text/javascript">alert("foo");</script>');
+        $this->helper->direct('<script type="text/javascript">alert("foo");</script>');
         $string = $this->helper->toString();
         $this->assertNotContains('<script', $string);
         $this->assertNotContains('</script>', $string);
@@ -148,8 +132,8 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
 
     public function testToStringEscapesSeparator()
     {
-        $this->helper->headTitle('Foo')
-                     ->headTitle('Bar')
+        $this->helper->direct('Foo')
+                     ->direct('Bar')
                      ->setSeparator(' <br /> ');
         $string = $this->helper->toString();
         $this->assertNotContains('<br />', $string);
@@ -161,7 +145,7 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
     public function testIndentationIsHonored()
     {
         $this->helper->setIndent(4);
-        $this->helper->headTitle('foo');
+        $this->helper->direct('foo');
         $string = $this->helper->toString();
 
         $this->assertContains('    <title>', $string);
@@ -169,12 +153,12 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
 
     public function testAutoEscapeIsHonored()
     {
-        $this->helper->headTitle('Some Title &copyright;');
+        $this->helper->direct('Some Title &copyright;');
         $this->assertEquals('<title>Some Title &amp;copyright;</title>', $this->helper->toString());
 
-        $this->assertTrue($this->helper->headTitle()->getAutoEscape());
-        $this->helper->headTitle()->setAutoEscape(false);
-        $this->assertFalse($this->helper->headTitle()->getAutoEscape());
+        $this->assertTrue($this->helper->direct()->getAutoEscape());
+        $this->helper->direct()->setAutoEscape(false);
+        $this->assertFalse($this->helper->direct()->getAutoEscape());
 
 
         $this->assertEquals('<title>Some Title &copyright;</title>', $this->helper->toString());
@@ -186,7 +170,7 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
      */
     public function testZF2918()
     {
-        $this->helper->headTitle('Some Title');
+        $this->helper->direct('Some Title');
         $this->helper->setPrefix('Prefix: ');
         $this->helper->setPostfix(' :Postfix');
 
@@ -200,7 +184,7 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
     public function testZF3577()
     {
         $this->helper->setAutoEscape(true);
-        $this->helper->headTitle('Some Title');
+        $this->helper->direct('Some Title');
         $this->helper->setPrefix('Prefix & ');
         $this->helper->setPostfix(' & Postfix');
 
@@ -209,10 +193,10 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
 
     public function testCanTranslateTitle()
     {
-        $adapter = new Zend_Translate_Adapter_Ini(dirname(__FILE__) . '/../../Translate/Adapter/_files/translation_en.ini', 'en');
-        Zend_Registry::set('Zend_Translate', $adapter);
+        $adapter = new \Zend\Translator\Adapter\Ini(dirname(__FILE__) . '/../../Translator/Adapter/_files/translation_en.ini', 'en');
+        \Zend\Registry::set('Zend_Translate', $adapter);
         $this->helper->enableTranslation();
-        $this->helper->headTitle('Message_1');
+        $this->helper->direct('Message_1');
         $this->assertEquals('<title>Message 1 (en)</title>', $this->helper->toString());
     }
 
@@ -221,12 +205,7 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
     */
     public function testHeadTitleZero()
     {
-        $this->helper->headTitle('0');
+        $this->helper->direct('0');
         $this->assertEquals('<title>0</title>', $this->helper->toString());
     }
-}
-
-// Call Zend_View_Helper_HeadTitleTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_HeadTitleTest::main") {
-    Zend_View_Helper_HeadTitleTest::main();
 }

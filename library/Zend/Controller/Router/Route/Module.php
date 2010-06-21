@@ -21,19 +21,29 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Controller\Router\Route;
+use Zend\Controller\Request;
+
+use Zend\Controller\Dispatcher;
+
+use Zend\Config;
+
+/**
  * Module Route
  *
  * Default route for module functionality
  *
- * @uses       Zend_Controller_Front
- * @uses       Zend_Controller_Router_Route_Abstract
+ * @uses       \Zend\Controller\Front
+ * @uses       \Zend\Controller\Router\Route\AbstractRoute
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_Abstract
+class Module extends AbstractRoute
 {
     /**
      * URI delimiter
@@ -60,12 +70,12 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
     /**#@-*/
 
     /**
-     * @var Zend_Controller_Dispatcher_Interface
+     * @var \Zend\Controller\Dispatcher\DispatcherInterface
      */
     protected $_dispatcher;
 
     /**
-     * @var Zend_Controller_Request_Abstract
+     * @var \Zend\Controller\Request\AbstractRequest
      */
     protected $_request;
 
@@ -76,11 +86,11 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
     /**
      * Instantiates route based on passed Zend_Config structure
      */
-    public static function getInstance(\Zend\Config\Config $config)
+    public static function getInstance(Config\Config $config)
     {
-        $frontController = Zend_Controller_Front::getInstance();
+        $frontController = \Zend\Controller\Front::getInstance();
 
-        $defs       = ($config->defaults instanceof Zend_Config) ? $config->defaults->toArray() : array();
+        $defs       = ($config->defaults instanceof Config\Config) ? $config->defaults->toArray() : array();
         $dispatcher = $frontController->getDispatcher();
         $request    = $frontController->getRequest();
 
@@ -91,12 +101,12 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
      * Constructor
      *
      * @param array $defaults Defaults for map variables with keys as variable names
-     * @param Zend_Controller_Dispatcher_Interface $dispatcher Dispatcher object
-     * @param Zend_Controller_Request_Abstract $request Request object
+     * @param \Zend\Controller\Dispatcher\DispatcherInterface $dispatcher Dispatcher object
+     * @param \Zend\Controller\Request\AbstractRequest $request Request object
      */
     public function __construct(array $defaults = array(),
-                Zend_Controller_Dispatcher_Interface $dispatcher = null,
-                Zend_Controller_Request_Abstract $request = null)
+                \Zend\Controller\Dispatcher\DispatcherInterface $dispatcher = null,
+                \Zend\Controller\Request\AbstractRequest $request = null)
     {
         $this->_defaults = $defaults;
 

@@ -20,20 +20,14 @@
  * @version    $Id$
  */
 
-// Call Zend_Controller_Plugin_ErrorHandlerTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD"))
-{
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Plugin_ErrorHandlerTest::main");
-    $basePath = realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..');
-    set_include_path(
-        $basePath . DIRECTORY_SEPARATOR . 'tests'
-        . PATH_SEPARATOR . $basePath . DIRECTORY_SEPARATOR . 'library'
-        . PATH_SEPARATOR . get_include_path()
-    );
-}
-
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Controller\Plugin;
+use Zend\Controller;
+use Zend\Controller\Request;
+use Zend\Controller\Plugin;
+use Zend\Controller\Dispatcher;
 
 
 /**
@@ -48,17 +42,17 @@ if (!defined("PHPUnit_MAIN_METHOD"))
  * @group      Zend_Controller
  * @group      Zend_Controller_Plugin
  */
-class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit_Framework_TestCase
+class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Request object
-     * @var Zend_Controller_Request_Http
+     * @var Zend_Controller_Request_HTTP
      */
     public $request;
 
     /**
      * Response object
-     * @var Zend_Controller_Response_Http
+     * @var Zend_Controller_Response_HTTP
      */
     public $response;
 
@@ -69,19 +63,6 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit_Framework_TestCase
     public $plugin;
 
     /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Plugin_ErrorHandlerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      *
@@ -89,10 +70,10 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        Zend_Controller_Front::getInstance()->resetInstance();
-        $this->request  = new Zend_Controller_Request_Http();
-        $this->response = new Zend_Controller_Response_Http();
-        $this->plugin   = new Zend_Controller_Plugin_ErrorHandler();
+        Controller\Front::getInstance()->resetInstance();
+        $this->request  = new Request\HTTP();
+        $this->response = new \Zend\Controller\Response\HTTP();
+        $this->plugin   = new Plugin\ErrorHandler();
 
         $this->plugin->setRequest($this->request);
         $this->plugin->setResponse($this->response);
@@ -141,7 +122,7 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit_Framework_TestCase
 
     public function testPostDispatchNoControllerException()
     {
-        $this->response->setException(new Zend_Controller_Dispatcher_Exception('Testing controller exception'));
+        $this->response->setException(new Dispatcher\Exception('Testing controller exception'));
         $this->request->setModuleName('foo')
                       ->setControllerName('bar')
                       ->setActionName('baz');
@@ -149,8 +130,8 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit_Framework_TestCase
 
         $this->assertNotNull($this->request->getParam('error_handler'));
         $errorHandler = $this->request->getParam('error_handler');
-        $this->assertTrue($errorHandler instanceof ArrayObject);
-        $this->assertEquals(Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER, $errorHandler->type);
+        $this->assertTrue($errorHandler instanceof \ArrayObject);
+        $this->assertEquals(Plugin\ErrorHandler::EXCEPTION_NO_CONTROLLER, $errorHandler->type);
 
         $this->assertEquals('error', $this->request->getActionName());
         $this->assertEquals('error', $this->request->getControllerName());
@@ -159,7 +140,7 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit_Framework_TestCase
 
     public function testPostDispatchNoActionException()
     {
-        $this->response->setException(new Zend_Controller_Action_Exception('Testing action exception', 404));
+        $this->response->setException(new \Zend\Controller\Action\Exception('Testing action exception', 404));
         $this->request->setModuleName('foo')
                       ->setControllerName('bar')
                       ->setActionName('baz');
@@ -167,8 +148,8 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit_Framework_TestCase
 
         $this->assertNotNull($this->request->getParam('error_handler'));
         $errorHandler = $this->request->getParam('error_handler');
-        $this->assertTrue($errorHandler instanceof ArrayObject);
-        $this->assertEquals(Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION, $errorHandler->type);
+        $this->assertTrue($errorHandler instanceof \ArrayObject);
+        $this->assertEquals(Plugin\ErrorHandler::EXCEPTION_NO_ACTION, $errorHandler->type);
 
         $this->assertEquals('error', $this->request->getActionName());
         $this->assertEquals('error', $this->request->getControllerName());
@@ -177,7 +158,7 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit_Framework_TestCase
 
     public function testPostDispatchOtherException()
     {
-        $this->response->setException(new Exception('Testing other exception'));
+        $this->response->setException(new \Exception('Testing other exception'));
         $this->request->setModuleName('foo')
                       ->setControllerName('bar')
                       ->setActionName('baz');
@@ -185,8 +166,8 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit_Framework_TestCase
 
         $this->assertNotNull($this->request->getParam('error_handler'));
         $errorHandler = $this->request->getParam('error_handler');
-        $this->assertTrue($errorHandler instanceof ArrayObject);
-        $this->assertEquals(Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER, $errorHandler->type);
+        $this->assertTrue($errorHandler instanceof \ArrayObject);
+        $this->assertEquals(Plugin\ErrorHandler::EXCEPTION_OTHER, $errorHandler->type);
 
         $this->assertEquals('error', $this->request->getActionName());
         $this->assertEquals('error', $this->request->getControllerName());
@@ -195,26 +176,26 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit_Framework_TestCase
 
     public function testPostDispatchThrowsWhenCalledRepeatedly()
     {
-        $this->response->setException(new Exception('Testing other exception'));
+        $this->response->setException(new \Exception('Testing other exception'));
         $this->request->setModuleName('foo')
                       ->setControllerName('bar')
                       ->setActionName('baz');
         $this->plugin->postDispatch($this->request);
 
-        $this->response->setException(new Zend_Controller_Dispatcher_Exception('Another exception'));
+        $this->response->setException(new Dispatcher\Exception('Another exception'));
         try {
             $this->plugin->postDispatch($this->request);
             $this->fail('Repeated calls with new exceptions should throw exceptions');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $type = get_class($e);
-            $this->assertEquals('Zend_Controller_Dispatcher_Exception', $type);
+            $this->assertEquals('Zend\Controller\Dispatcher\Exception', $type);
             $this->assertEquals('Another exception', $e->getMessage());
         }
     }
 
     public function testPostDispatchDoesNothingWhenCalledRepeatedlyWithoutNewExceptions()
     {
-        $this->response->setException(new Exception('Testing other exception'));
+        $this->response->setException(new \Exception('Testing other exception'));
         $this->request->setModuleName('foo')
                       ->setControllerName('bar')
                       ->setActionName('baz');
@@ -222,7 +203,7 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit_Framework_TestCase
 
         try {
             $this->plugin->postDispatch($this->request);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->fail('Repeated calls with no new exceptions should not throw exceptions');
         }
     }
@@ -240,7 +221,7 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit_Framework_TestCase
 
     public function testPostDispatchErrorRequestIsClone()
     {
-        $this->response->setException(new Zend_Controller_Dispatcher_Exception('Testing controller exception'));
+        $this->response->setException(new Dispatcher\Exception('Testing controller exception'));
         $this->request->setModuleName('foo')
                       ->setControllerName('bar')
                       ->setActionName('baz');
@@ -248,18 +229,18 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit_Framework_TestCase
 
         $this->assertNotNull($this->request->getParam('error_handler'));
         $errorHandler = $this->request->getParam('error_handler');
-        $this->assertTrue($errorHandler instanceof ArrayObject);
-        $this->assertTrue($errorHandler->request instanceof Zend_Controller_Request_Http);
+        $this->assertTrue($errorHandler instanceof \ArrayObject);
+        $this->assertTrue($errorHandler->request instanceof Request\HTTP);
         $this->assertNotSame($this->request, $errorHandler->request);
     }
 
     public function testPostDispatchQuitsWithFalseUserErrorHandlerParam()
     {
-        $front = Zend_Controller_Front::getInstance();
+        $front = Controller\Front::getInstance();
         $front->resetInstance();
         $front->setParam('noErrorHandler', true);
 
-        $this->response->setException(new Zend_Controller_Dispatcher_Exception('Testing controller exception'));
+        $this->response->setException(new Dispatcher\Exception('Testing controller exception'));
         $this->request->setModuleName('foo')
                       ->setControllerName('bar')
                       ->setActionName('baz');
@@ -268,10 +249,3 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit_Framework_TestCase
         $this->assertNull($this->request->getParam('error_handler'));
     }
 }
-
-// Call Zend_Controller_Plugin_ErrorHandlerTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Plugin_ErrorHandlerTest::main")
-{
-    Zend_Controller_Plugin_ErrorHandlerTest::main();
-}
-

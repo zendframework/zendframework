@@ -2,11 +2,11 @@ CLONING THE REPOSITORY
 ======================
 Anonymous cloning may be done from:
 
-    git://git.zendframework.com/zf2test.git
+    git://git.zendframework.com/zf.git
 
 If you have commit rights, you will use the following:
 
-    ssh://git@git.zendframework.com:21652/zf2test.git
+    ssh://git@git.zendframework.com:21652/zf.git
 
 You must make sure your author email is specified exactly as it appears
 in JIRA.  To do so, do the following in your git repository:

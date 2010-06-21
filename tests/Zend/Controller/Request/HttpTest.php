@@ -20,11 +20,11 @@
  * @version    $Id$
  */
 
-// Call Zend_Controller_Request_HttpTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Request_HttpTest::main");
-}
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Controller\Request;
+use Zend\Controller\Request;
 
 /**
  * @category   Zend
@@ -35,10 +35,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller
  * @group      Zend_Controller_Request
  */
-class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
+class HTTPTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_Controller_Request_Http
+     * @var Zend_Controller_Request_HTTP
      */
     protected $_request;
 
@@ -47,18 +47,6 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
      * @var array
      */
     protected $_origServer;
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Request_HttpTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function setUp()
     {
@@ -69,7 +57,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
             'SCRIPT_FILENAME' => __FILE__,
             'PHP_SELF'        => __FILE__,
         );
-        $this->_request = new Zend_Controller_Request_Http('http://framework.zend.com/news/3?var1=val1&var2=val2#anchor');
+        $this->_request = new Request\HTTP('http://framework.zend.com/news/3?var1=val1&var2=val2#anchor');
     }
 
     public function tearDown()
@@ -150,7 +138,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         try {
             $this->_request->set('foo', 'bar');
             $this->fail('set() should alias to __set(), and throw an exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // success
         }
     }
@@ -190,7 +178,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         try {
             $this->_request->foo = 'bar';
             $this->fail('__set() should throw an exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // success
         }
     }
@@ -279,13 +267,13 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
     public function testConstructSetsRequestUri()
     {
         $_SERVER['REQUEST_URI'] = '/mycontroller/myaction?foo=bar';
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $this->assertEquals('/mycontroller/myaction?foo=bar', $request->getRequestUri());
     }
 
     public function testSetRequestUriDoesNotPassUriThroughUrldecode()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $request->setRequestUri('/foo/bar?foo=bar%20baz');
         $requestUri = $request->getRequestUri();
         $this->assertNotEquals('/foo/bar?foo=bar baz', $requestUri);
@@ -347,7 +335,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
 
     public function testGetRawBodyReturnsFalseWithNoPost()
     {
-        Zend_AllTests_StreamWrapper_PhpInput::mockInput('');
+        \ZendTest\AllTests\StreamWrapper\PHPInput::mockInput('');
         $this->assertFalse($this->_request->getRawBody());
         stream_wrapper_restore('php');
     }
@@ -389,7 +377,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
 
     public function testPathInfoNeedingBaseUrl()
     {
-        $request = new Zend_Controller_Request_Http('http://localhost/test/index.php/ctrl-name/act-name');
+        $request = new Request\HTTP('http://localhost/test/index.php/ctrl-name/act-name');
         $this->assertEquals('/test/index.php/ctrl-name/act-name', $request->getRequestUri());
         $request->setBaseUrl('/test/index.php');
         $this->assertEquals('/test/index.php', $request->getBaseUrl());
@@ -440,7 +428,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
      */
     public function testGetBasePathIsEmptyStringIfNoneSet()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $this->assertEquals('', $request->getBasePath());
     }
 
@@ -460,7 +448,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
             'var1' => 'val1',
             'var2' => 'val2'
         );
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
 
         $this->assertEquals('/index.php', $request->getBaseUrl());
     }
@@ -476,7 +464,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
             'var1' => 'val1',
             'var2' => 'val2'
         );
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
 
         $this->assertEquals('/index.php', $request->getBaseUrl());
     }
@@ -490,7 +478,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
             'var1' => 'val1',
             'var2' => 'val2'
         );
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
 
         $this->assertEquals('/index.php', $request->getBaseUrl());
     }
@@ -505,7 +493,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
             'var1' => 'val1',
             'var2' => 'val2'
         );
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
 
         $this->assertEquals('/index.php', $request->getBaseUrl());
     }
@@ -521,7 +509,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
             'var1' => 'val1',
             'var2' => 'val2'
         );
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
 
         $this->assertEquals('/index.php', $request->getBaseUrl());
     }
@@ -530,7 +518,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
      */
     public function testSetBaseUrlWithScriptNameAsGetParam()
     {
-        $request = new Zend_Controller_Request_Http;
+        $request = new Request\HTTP;
 
         $_SERVER['REQUEST_URI']     = '/article/archive?foo=index.php';
         $_SERVER['QUERY_STRING']    = 'foo=index.php';
@@ -554,7 +542,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
             'var1' => 'val1',
             'var2' => 'val2'
         );
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
 
         $this->assertEquals('/html', $request->getBasePath(), $request->getBaseUrl());
     }
@@ -564,7 +552,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $_SERVER['REQUEST_URI']     = '/dir/action';
         $_SERVER['PHP_SELF']        = '/dir/index.php';
         $_SERVER['SCRIPT_FILENAME'] = '/var/web/dir/index.php';
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
 
         $this->assertEquals('/dir', $request->getBasePath(), $request->getBaseUrl());
     }
@@ -612,16 +600,16 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
             // Suppressing warning
             $header = @$this->_request->getHeader();
             $this->fail('getHeader() should fail with no arguments)');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // success
         }
     }
 
-    public function testIsXmlHttpRequest()
+    public function testIsXmlHTTPRequest()
     {
-        $this->assertFalse($this->_request->isXmlHttpRequest());
-        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
-        $this->assertTrue($this->_request->isXmlHttpRequest());
+        $this->assertFalse($this->_request->isXmlHTTPRequest());
+        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHTTPRequest';
+        $this->assertTrue($this->_request->isXmlHTTPRequest());
     }
 
     public function testSetNullParamUnsetsKey()
@@ -699,17 +687,17 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
      * @group ZFI-233
      * @group ZF-5818
      */
-    public function testStrippingHttpProtocolAndHostFromRequestUriOnlyWhenPresentAtBeginningOfUri()
+    public function testStrippingHTTPProtocolAndHostFromRequestUriOnlyWhenPresentAtBeginningOfUri()
     {
         $_SERVER['REQUEST_URI'] = 'http://foo.example.com/foo/bar?r=http://foo.example.com/bar/baz';
         $_SERVER['HTTP_HOST']   = 'foo.example.com';
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $test = $request->getRequestUri();
         $this->assertEquals('/foo/bar?r=http://foo.example.com/bar/baz', $test);
 
         $_SERVER['REQUEST_URI'] = '/foo/bar?r=http://foo.example.com/bar/baz';
         $_SERVER['HTTP_HOST']   = 'foo.example.com';
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $test = $request->getRequestUri();
         $this->assertEquals('/foo/bar?r=http://foo.example.com/bar/baz', $test);
     }
@@ -719,19 +707,19 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
      * @group ZFI-233
      * @group ZF-5818
      */
-    public function testStrippingHttpsProtocolAndHostFromRequestUriOnlyWhenPresentAtBeginningOfUri()
+    public function testStrippingHTTPsProtocolAndHostFromRequestUriOnlyWhenPresentAtBeginningOfUri()
     {
         $_SERVER['REQUEST_URI'] = 'https://foo.example.com/foo/bar?r=https://foo.example.com/bar/baz';
         $_SERVER['HTTP_HOST']   = 'foo.example.com';
         $_SERVER['HTTPS']       = 'on';
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $test = $request->getRequestUri();
         $this->assertEquals('/foo/bar?r=https://foo.example.com/bar/baz', $test);
 
         $_SERVER['REQUEST_URI'] = '/foo/bar?r=https://foo.example.com/bar/baz';
         $_SERVER['HTTP_HOST']   = 'foo.example.com';
         $_SERVER['HTTPS']       = 'on';
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $test = $request->getRequestUri();
         $this->assertEquals('/foo/bar?r=https://foo.example.com/bar/baz', $test);
     }
@@ -741,13 +729,13 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
      * @group ZFI-233
      * @group ZF-5818
      */
-    public function testStrippingHttpProtocolHostAndNonStandardPortFromRequestUriOnlyWhenPresentAtBeginningOfUri()
+    public function testStrippingHTTPProtocolHostAndNonStandardPortFromRequestUriOnlyWhenPresentAtBeginningOfUri()
     {
         $_SERVER['REQUEST_URI'] = 'http://foo.example.com:8888/foo/bar?r=http://foo.example.com:8888/bar/baz';
         $_SERVER['HTTP_HOST']   = '';
         $_SERVER['SERVER_NAME'] = 'foo.example.com';
         $_SERVER['SERVER_PORT'] = '8888';
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $test = $request->getRequestUri();
         $this->assertEquals('/foo/bar?r=http://foo.example.com:8888/bar/baz', $test);
 
@@ -755,7 +743,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST']   = '';
         $_SERVER['SERVER_NAME'] = 'foo.example.com';
         $_SERVER['SERVER_PORT'] = '8888';
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $test = $request->getRequestUri();
         $this->assertEquals('/foo/bar?r=https://foo.example.com:8888/bar/baz', $test);
     }
@@ -765,7 +753,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
      */
     public function testGetClientIp()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
 
         $_SERVER['HTTP_CLIENT_IP'] = '192.168.1.10';
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '192.168.1.11';
@@ -791,7 +779,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
      */
     public function testGetClientIpNoProxyCheck()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
 
         $_SERVER['HTTP_CLIENT_IP'] = '192.168.1.10';
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '192.168.1.11';
@@ -805,8 +793,8 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
      */
     public function testCallingGetRawBodyMultipleTimesShouldReturnSameValue()
     {
-        Zend_AllTests_StreamWrapper_PhpInput::mockInput('foobar');
-        $request = new Zend_Controller_Request_Http();
+        \ZendTest\AllTests\StreamWrapper\PHPInput::mockInput('foobar');
+        $request = new Request\HTTP();
         $first = $request->getRawBody();
         $this->assertSame($first, $request->getRawBody());
         stream_wrapper_restore('php');
@@ -829,7 +817,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
      */
     public function testSetPathInfoShouldNotStripBaseUrlIfBaseUrlNotInRequestUri()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $request->setBaseUrl('/app');
         $_SERVER['REQUEST_URI'] = '/index/index';
         $pathInfo = $request->getPathInfo();
@@ -837,7 +825,3 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
     }
 }
 
-// Call Zend_Controller_Request_HttpTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Request_HttpTest::main") {
-    Zend_Controller_Request_HttpTest::main();
-}

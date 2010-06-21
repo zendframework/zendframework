@@ -20,20 +20,15 @@
  * @version    $Id$
  */
 
-// Call Zend_Controller_FrontTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_FrontTest::main");
-
-    $basePath = realpath(dirname(__FILE__) . str_repeat(DIRECTORY_SEPARATOR . '..', 3));
-
-    set_include_path(
-        $basePath . DIRECTORY_SEPARATOR . 'tests'
-        . PATH_SEPARATOR . $basePath . DIRECTORY_SEPARATOR . 'library'
-        . PATH_SEPARATOR . get_include_path()
-    );
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Controller;
+use Zend\Controller;
+use Zend\Controller\Action\HelperBroker;
+use Zend\Controller\Request;
+use Zend\Controller\Response;
+use Zend\Controller\Router;
 
 /**
  * @category   Zend
@@ -44,33 +39,23 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller
  * @group      Zend_Controller_Front
  */
-class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
+class FrontTest extends \PHPUnit_Framework_TestCase
 {
-    protected $_controller = null;
-
     /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
+     * @var \Zend\Controller\Front
      */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_FrontTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
+    protected $_controller = null;
 
     public function setUp()
     {
-        $this->_controller = Zend_Controller_Front::getInstance();
+        $this->_controller = Controller\Front::getInstance();
         $this->_controller->resetInstance();
         $this->_controller->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files')
                           ->setParam('noErrorHandler', true)
                           ->setParam('noViewRenderer', true)
                           ->returnResponse(true)
                           ->throwExceptions(false);
-        Zend_Controller_Action_HelperBroker::resetHelpers();
+        HelperBroker\HelperBroker::resetHelpers();
     }
 
     public function tearDown()
@@ -90,91 +75,91 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-3145
+     * @group ZF-3145
      */
     public function testResetInstanceShouldResetHelperBroker()
     {
-        Zend_Controller_Action_HelperBroker::addHelper(new Zend_Controller_Action_Helper_ViewRenderer());
-        Zend_Controller_Action_HelperBroker::addHelper(new Zend_Controller_Action_Helper_Url());
-        $helpers = Zend_Controller_Action_HelperBroker::getExistingHelpers();
+        HelperBroker\HelperBroker::addHelper(new \Zend\Controller\Action\Helper\ViewRenderer());
+        HelperBroker\HelperBroker::addHelper(new \Zend\Controller\Action\Helper\Url());
+        $helpers = HelperBroker\HelperBroker::getExistingHelpers();
         $this->assertTrue(is_array($helpers));
         $this->assertFalse(empty($helpers));
 
         $this->_controller->resetInstance();
-        $helpers = Zend_Controller_Action_HelperBroker::getExistingHelpers();
+        $helpers = HelperBroker\HelperBroker::getExistingHelpers();
         $this->assertTrue(is_array($helpers));
         $this->assertTrue(empty($helpers));
     }
 
     public function testSetGetRequest()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $this->_controller->setRequest($request);
         $this->assertTrue($request === $this->_controller->getRequest());
 
         $this->_controller->resetInstance();
-        $this->_controller->setRequest('Zend_Controller_Request_Http');
+        $this->_controller->setRequest('\Zend\Controller\Request\HTTP');
         $request = $this->_controller->getRequest();
-        $this->assertTrue($request instanceof Zend_Controller_Request_Http);
+        $this->assertTrue($request instanceof Request\HTTP);
     }
 
     public function testSetRequestThrowsExceptionWithBadRequest()
     {
         try {
-            $this->_controller->setRequest('Zend_Controller_Response_Cli');
+            $this->_controller->setRequest('\Zend\Controller\Response\Cli');
             $this->fail('Should not be able to set invalid request class');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // success
         }
     }
 
     public function testSetGetResponse()
     {
-        $response = new Zend_Controller_Response_Cli();
+        $response = new Response\Cli();
         $this->_controller->setResponse($response);
         $this->assertTrue($response === $this->_controller->getResponse());
 
         $this->_controller->resetInstance();
-        $this->_controller->setResponse('Zend_Controller_Response_Cli');
+        $this->_controller->setResponse('\Zend\Controller\Response\Cli');
         $response = $this->_controller->getResponse();
-        $this->assertTrue($response instanceof Zend_Controller_Response_Cli);
+        $this->assertTrue($response instanceof Response\Cli);
     }
 
     public function testSetResponseThrowsExceptionWithBadResponse()
     {
         try {
-            $this->_controller->setResponse('Zend_Controller_Request_Http');
+            $this->_controller->setResponse('\Zend\Controller\Request\HTTP');
             $this->fail('Should not be able to set invalid response class');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // success
         }
     }
 
     public function testSetGetRouter()
     {
-        $router = new Zend_Controller_Router_Rewrite();
+        $router = new Router\Rewrite();
         $this->_controller->setRouter($router);
         $this->assertTrue($router === $this->_controller->getRouter());
 
         $this->_controller->resetInstance();
-        $this->_controller->setRouter('Zend_Controller_Router_Rewrite');
+        $this->_controller->setRouter('\Zend\Controller\Router\Rewrite');
         $router = $this->_controller->getRouter();
-        $this->assertTrue($router instanceof Zend_Controller_Router_Rewrite);
+        $this->assertTrue($router instanceof Router\Rewrite);
     }
 
     public function testSetRouterThrowsExceptionWithBadRouter()
     {
         try {
-            $this->_controller->setRouter('Zend_Controller_Request_Http');
+            $this->_controller->setRouter('\Zend\Controller\Request\HTTP');
             $this->fail('Should not be able to set invalid router class');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // success
         }
     }
 
     public function testSetGetDispatcher()
     {
-        $dispatcher = new Zend_Controller_Dispatcher_Standard();
+        $dispatcher = new \Zend\Controller\Dispatcher\Standard();
         $this->_controller->setDispatcher($dispatcher);
 
         $this->assertTrue($dispatcher === $this->_controller->getDispatcher());
@@ -260,8 +245,8 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
      */
     public function testDispatch()
     {
-        $request = new Zend_Controller_Request_Http('http://example.com/index');
-        $this->_controller->setResponse(new Zend_Controller_Response_Cli());
+        $request = new Request\HTTP('http://example.com/index');
+        $this->_controller->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
         $this->assertContains('Index action called', $response->getBody());
@@ -272,8 +257,8 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
      */
     public function testDispatch1()
     {
-        $request = new Zend_Controller_Request_Http('http://example.com/index/index');
-        $this->_controller->setResponse(new Zend_Controller_Response_Cli());
+        $request = new Request\HTTP('http://example.com/index/index');
+        $this->_controller->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
         $this->assertContains('Index action called', $response->getBody());
@@ -285,7 +270,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     /*
     public function testDispatch2()
     {
-        $request = new Zend_Controller_Request_Http('http://example.com/index/foo');
+        $request = new Zend_Controller_Request_HTTP('http://example.com/index/foo');
 
         try {
             $this->_controller->dispatch($request);
@@ -302,7 +287,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     /*
     public function testDispatch3()
     {
-        $request = new Zend_Controller_Request_Http('http://example.com/baz');
+        $request = new Zend_Controller_Request_HTTP('http://example.com/baz');
 
         try {
             $this->_controller->dispatch($request);
@@ -318,8 +303,8 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
      */
     public function testDispatch4()
     {
-        $request = new Zend_Controller_Request_Http('http://example.com/foo/bar');
-        $this->_controller->setResponse(new Zend_Controller_Response_Cli());
+        $request = new Request\HTTP('http://example.com/foo/bar');
+        $this->_controller->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
         $body = $response->getBody();
@@ -333,8 +318,8 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
      */
     public function testDispatch5()
     {
-        $request = new Zend_Controller_Request_Http('http://example.com/index/args');
-        $this->_controller->setResponse(new Zend_Controller_Response_Cli());
+        $request = new Request\HTTP('http://example.com/index/args');
+        $this->_controller->setResponse(new Response\Cli());
         $this->_controller->setParam('foo', 'bar');
         $this->_controller->setParam('baz', 'bat');
         $response = $this->_controller->dispatch($request);
@@ -349,9 +334,9 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
      */
     public function testDispatch6()
     {
-        $request = new Zend_Controller_Request_Http('http://framework.zend.com/foo/bar/var1/baz');
-        $this->_controller->setResponse(new Zend_Controller_Response_Cli());
-        $this->_controller->setRouter(new Zend_Controller_Router_Rewrite());
+        $request = new Request\HTTP('http://framework.zend.com/foo/bar/var1/baz');
+        $this->_controller->setResponse(new Response\Cli());
+        $this->_controller->setRouter(new Router\Rewrite());
         $response = $this->_controller->dispatch($request);
 
         $body = $response->getBody();
@@ -369,9 +354,9 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         if ('cli' == strtolower(php_sapi_name())) {
             $this->markTestSkipped('Issues with $_GET in CLI interface prevents test from passing');
         }
-        $request = new Zend_Controller_Request_Http('http://framework.zend.com/index.php?controller=foo&action=bar');
+        $request = new Request\HTTP('http://framework.zend.com/index.php?controller=foo&action=bar');
 
-        $response = new Zend_Controller_Response_Cli();
+        $response = new Response\Cli();
         $response = $this->_controller->dispatch($request, $response);
 
         $body = $response->getBody();
@@ -386,7 +371,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         try {
             $this->_controller->run(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
             $this->fail('Should not be able to call run() from object instance');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // success
         }
     }
@@ -403,7 +388,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
 
     public function testSetGetBaseUrlPopulatesRequest()
     {
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $this->_controller->setRequest($request);
         $this->_controller->setBaseUrl('/index.php');
         $this->assertEquals('/index.php', $request->getBaseUrl());
@@ -416,7 +401,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         try {
             $this->_controller->setBaseUrl(array());
             $this->fail('Should not be able to set non-string base URL');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // success
         }
     }
@@ -428,8 +413,8 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     public function testBaseUrlPushedToRequest()
     {
         $this->_controller->setBaseUrl('/index.php');
-        $request  = new Zend_Controller_Request_Http('http://example.com/index');
-        $response = new Zend_Controller_Response_Cli();
+        $request  = new Request\HTTP('http://example.com/index');
+        $response = new Response\Cli();
         $response = $this->_controller->dispatch($request, $response);
 
         $this->assertContains('index.php', $request->getBaseUrl());
@@ -459,14 +444,14 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     {
         $this->_controller->throwExceptions(true);
         $this->_controller->setControllerDirectory(dirname(__FILE__));
-        $request = new Zend_Controller_Request_Http('http://framework.zend.com/bogus/baz');
-        $this->_controller->setResponse(new Zend_Controller_Response_Cli());
-        $this->_controller->setRouter(new Zend_Controller_Router_Rewrite());
+        $request = new Request\HTTP('http://framework.zend.com/bogus/baz');
+        $this->_controller->setResponse(new Response\Cli());
+        $this->_controller->setRouter(new Router\Rewrite());
 
         try {
             $response = $this->_controller->dispatch($request);
             $this->fail('Invalid controller should throw exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // success
         }
     }
@@ -493,9 +478,9 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
      */
     public function testReturnResponseReturnsResponse()
     {
-        $request = new Zend_Controller_Request_Http('http://framework.zend.com/foo/bar/var1/baz');
-        $this->_controller->setResponse(new Zend_Controller_Response_Cli());
-        $this->_controller->setRouter(new Zend_Controller_Router_Rewrite());
+        $request = new Request\HTTP('http://framework.zend.com/foo/bar/var1/baz');
+        $this->_controller->setResponse(new Response\Cli());
+        $this->_controller->setRouter(new Router\Rewrite());
         $this->_controller->returnResponse(false);
 
         ob_start();
@@ -508,14 +493,14 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
 
     public function testRunStatically()
     {
-        $request = new Zend_Controller_Request_Http('http://example.com/index/index');
+        $request = new Request\HTTP('http://example.com/index/index');
         $this->_controller->setRequest($request);
-        Zend_Controller_Front::run(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        Controller\Front::run(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
     }
 
     public function testRunDynamically()
     {
-        $request = new Zend_Controller_Request_Http('http://example.com/index/index');
+        $request = new Request\HTTP('http://example.com/index/index');
         $this->_controller->setRequest($request);
         $this->_controller->run(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
     }
@@ -523,8 +508,8 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     public function testModulePathDispatched()
     {
         $this->_controller->addControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . '/Admin', 'admin');
-        $request = new Zend_Controller_Request_Http('http://example.com/admin/foo/bar');
-        $this->_controller->setResponse(new Zend_Controller_Response_Cli());
+        $request = new Request\HTTP('http://example.com/admin/foo/bar');
+        $this->_controller->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
         $body = $response->getBody();
@@ -559,7 +544,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     public function testShouldAllowRetrievingCurrentModuleDirectory()
     {
         $this->testAddModuleDirectory();
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $request->setModuleName('bar');
         $this->_controller->setRequest($request);
         $dir = $this->_controller->getModuleDirectory();
@@ -602,8 +587,8 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         try {
             $this->_controller->addModuleDirectory($moduleDir);
             $this->fail('Exception expected but not thrown');
-        }catch(Exception $e){
-            $this->assertType('Zend_Exception',$e);
+        }catch(\Exception $e){
+            $this->assertType('Zend\Exception',$e);
             $this->assertRegExp('/Directory \w+ not readable/',$e->getMessage());
         }
     }
@@ -636,31 +621,31 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
 
     public function testErrorHandlerPluginRegisteredWhenDispatched()
     {
-        $this->assertFalse($this->_controller->hasPlugin('Zend_Controller_Plugin_ErrorHandler'));
-        $request = new Zend_Controller_Request_Http('http://example.com/index/index');
+        $this->assertFalse($this->_controller->hasPlugin('\Zend\Controller\Plugin\ErrorHandler'));
+        $request = new Request\HTTP('http://example.com/index/index');
         $this->_controller->setParam('noErrorHandler', false)
-                          ->setResponse(new Zend_Controller_Response_Cli());
+                          ->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
-        $this->assertTrue($this->_controller->hasPlugin('Zend_Controller_Plugin_ErrorHandler'));
+        $this->assertTrue($this->_controller->hasPlugin('\Zend\Controller\Plugin\ErrorHandler'));
     }
 
     public function testErrorHandlerPluginNotRegisteredIfNoErrorHandlerSet()
     {
-        $this->assertFalse($this->_controller->hasPlugin('Zend_Controller_Plugin_ErrorHandler'));
-        $request = new Zend_Controller_Request_Http('http://example.com/index/index');
+        $this->assertFalse($this->_controller->hasPlugin('\Zend\Controller\Plugin\ErrorHandler'));
+        $request = new Request\HTTP('http://example.com/index/index');
         $this->_controller->setParam('noErrorHandler', true)
-                          ->setResponse(new Zend_Controller_Response_Cli());
+                          ->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
-        $this->assertFalse($this->_controller->hasPlugin('Zend_Controller_Plugin_ErrorHandler'));
+        $this->assertFalse($this->_controller->hasPlugin('\Zend\Controller\Plugin\ErrorHandler'));
     }
 
     public function testReplaceRequestAndResponseMidStream()
     {
-        $request = new Zend_Controller_Request_Http('http://example.com/index/replace');
-        $this->_controller->setResponse(new Zend_Controller_Response_Cli());
-        $response = new Zend_Controller_Response_Http();
+        $request = new Request\HTTP('http://example.com/index/replace');
+        $this->_controller->setResponse(new Response\Cli());
+        $response = new Response\HTTP();
         $responsePost = $this->_controller->dispatch($request, $response);
 
         $requestPost  = $this->_controller->getRequest();
@@ -674,30 +659,25 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
 
     public function testViewRendererHelperRegisteredWhenDispatched()
     {
-        $this->assertFalse(Zend_Controller_Action_HelperBroker::hasHelper('viewRenderer'));
+        $this->assertFalse(HelperBroker\HelperBroker::hasHelper('viewRenderer'));
         $this->_controller->setParam('noViewRenderer', false);
 
-        $request = new Zend_Controller_Request_Http('http://example.com/index/index');
-        $this->_controller->setResponse(new Zend_Controller_Response_Cli());
+        $request = new Request\HTTP('http://example.com/index/index');
+        $this->_controller->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
-        $this->assertTrue(Zend_Controller_Action_HelperBroker::hasHelper('viewRenderer'));
+        $this->assertTrue(HelperBroker\HelperBroker::hasHelper('viewRenderer'));
     }
 
     public function testViewRendererHelperNotRegisteredIfNoViewRendererSet()
     {
-        $this->assertFalse(Zend_Controller_Action_HelperBroker::hasHelper('viewRenderer'));
+        $this->assertFalse(HelperBroker\HelperBroker::hasHelper('viewRenderer'));
         $this->_controller->setParam('noViewRenderer', true);
 
-        $request = new Zend_Controller_Request_Http('http://example.com/index/index');
-        $this->_controller->setResponse(new Zend_Controller_Response_Cli());
+        $request = new Request\HTTP('http://example.com/index/index');
+        $this->_controller->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
-        $this->assertFalse(Zend_Controller_Action_HelperBroker::hasHelper('viewRenderer'));
+        $this->assertFalse(HelperBroker\HelperBroker::hasHelper('viewRenderer'));
     }
-}
-
-// Call Zend_Controller_FrontTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_FrontTest::main") {
-    Zend_Controller_FrontTest::main();
 }

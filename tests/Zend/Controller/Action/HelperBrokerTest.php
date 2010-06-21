@@ -20,13 +20,14 @@
  * @version    $Id$
  */
 
-// Call Zend_Controller_Action_HelperBrokerTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Action_HelperBrokerTest::main");
-}
-
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Controller\Action;
+use Zend\Controller\Action\HelperBroker;
+use Zend\Controller\Request;
+use Zend\Controller\Response;
+use Zend\Controller\Action\Helper;
 
 /**
  * @category   Zend
@@ -38,59 +39,47 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
+class HelperBrokerTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_HelperBrokerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function setUp()
     {
-        $this->front = Zend_Controller_Front::getInstance();
+        $this->front = \Zend\Controller\Front::getInstance();
         $this->front->resetInstance();
         $this->front->setParam('noViewRenderer', true)
                     ->setParam('noErrorHandler', true)
                     ->throwExceptions(true);
-        Zend_Controller_Action_HelperBroker::resetHelpers();
+        HelperBroker\HelperBroker::resetHelpers();
 
-        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
         $viewRenderer->setActionController();
     }
 
     public function testLoadingAndReturningHelper()
     {
         $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
-        $request = new Zend_Controller_Request_Http('http://framework.zend.com/helper-broker/test-get-redirector/');
-        $this->front->setResponse(new Zend_Controller_Response_Cli());
+        $request = new Request\HTTP('http://framework.zend.com/helper-broker/test-get-redirector/');
+        $this->front->setResponse(new Response\Cli());
 
         $this->front->returnResponse(true);
         $response = $this->front->dispatch($request);
-        $this->assertEquals('Zend_Controller_Action_Helper_Redirector', $response->getBody());
+        $this->assertEquals('Zend\Controller\Action\Helper\Redirector', $response->getBody());
     }
 
     public function testLoadingAndReturningHelperStatically()
     {
-        $helper = new Zend_Controller_Action_HelperBroker_TestHelper();
-        Zend_Controller_Action_HelperBroker::addHelper($helper);
-        $received = Zend_Controller_Action_HelperBroker::getExistingHelper('testHelper');
+        $helper = new TestHelper();
+        HelperBroker\HelperBroker::addHelper($helper);
+        $received = HelperBroker\HelperBroker::getExistingHelper('testHelper');
         $this->assertSame($received, $helper);
     }
 
     public function testGetExistingHelperThrowsExceptionWithUnregisteredHelper()
     {
         try {
-            $received = Zend_Controller_Action_HelperBroker::getExistingHelper('testHelper');
+            $received = HelperBroker\HelperBroker::getExistingHelper('testHelper');
             $this->fail('Retrieving unregistered helpers should throw an exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // success
         }
     }
@@ -98,17 +87,17 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
     public function testLoadingHelperOnlyInitializesOnce()
     {
         $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
-        $request = new Zend_Controller_Request_Http();
+        $request = new Request\HTTP();
         $request->setModuleName('default')
                 ->setControllerName('zend_controller_action_helper-broker')
                 ->setActionName('index');
-        $response = new Zend_Controller_Response_Cli();
+        $response = new Response\Cli();
         $this->front->setResponse($response);
 
-        $helper = new Zend_Controller_Action_HelperBroker_TestHelper();
-        Zend_Controller_Action_HelperBroker::addHelper($helper);
+        $helper = new TestHelper();
+        HelperBroker\HelperBroker::addHelper($helper);
 
-        $controller = new Zend_Controller_Action_HelperBrokerController($request, $response, array());
+        $controller = new HelperBrokerController($request, $response, array());
         $controller->test();
         $received = $controller->getHelper('testHelper');
         $this->assertSame($helper, $received);
@@ -117,53 +106,53 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
 
     public function testLoadingAndCheckingHelpersStatically()
     {
-        $helper = new Zend_Controller_Action_Helper_Redirector();
-        Zend_Controller_Action_HelperBroker::addHelper($helper);
+        $helper = new Helper\Redirector();
+        HelperBroker\HelperBroker::addHelper($helper);
 
-        $this->assertTrue(Zend_Controller_Action_HelperBroker::hasHelper('redirector'));
+        $this->assertTrue(HelperBroker\HelperBroker::hasHelper('redirector'));
     }
 
     public function testLoadingAndRemovingHelpersStatically()
     {
-        $helper = new Zend_Controller_Action_Helper_Redirector();
-        Zend_Controller_Action_HelperBroker::addHelper($helper);
+        $helper = new Helper\Redirector();
+        HelperBroker\HelperBroker::addHelper($helper);
 
-        $this->assertTrue(Zend_Controller_Action_HelperBroker::hasHelper('redirector'));
-        Zend_Controller_Action_HelperBroker::removeHelper('redirector');
-        $this->assertFalse(Zend_Controller_Action_HelperBroker::hasHelper('redirector'));
+        $this->assertTrue(HelperBroker\HelperBroker::hasHelper('redirector'));
+        HelperBroker\HelperBroker::removeHelper('redirector');
+        $this->assertFalse(HelperBroker\HelperBroker::hasHelper('redirector'));
     }
      public function testReturningHelper()
     {
         $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
-        $request = new Zend_Controller_Request_Http('http://framework.zend.com/helper-broker/test-get-redirector/');
-        $this->front->setResponse(new Zend_Controller_Response_Cli());
+        $request = new Request\HTTP('http://framework.zend.com/helper-broker/test-get-redirector/');
+        $this->front->setResponse(new Response\Cli());
 
         $this->front->returnResponse(true);
         $response = $this->front->dispatch($request);
-        $this->assertEquals('Zend_Controller_Action_Helper_Redirector', $response->getBody());
+        $this->assertEquals('Zend\Controller\Action\Helper\Redirector', $response->getBody());
     }
 
     public function testReturningHelperViaMagicGet()
     {
         $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
-        $request = new Zend_Controller_Request_Http('http://framework.zend.com/helper-broker/test-helper-via-magic-get/');
-        $this->front->setResponse(new Zend_Controller_Response_Cli());
+        $request = new Request\HTTP('http://framework.zend.com/helper-broker/test-helper-via-magic-get/');
+        $this->front->setResponse(new Response\Cli());
 
         $this->front->returnResponse(true);
         $response = $this->front->dispatch($request);
-        $this->assertEquals('Zend_Controller_Action_Helper_Redirector', $response->getBody());
+        $this->assertEquals('Zend\Controller\Action\Helper\Redirector', $response->getBody());
     }
 
     public function testReturningHelperViaMagicCall()
     {
         $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
-        $request = new Zend_Controller_Request_Http('http://framework.zend.com/helper-broker/test-helper-via-magic-call/');
-        $this->front->setResponse(new Zend_Controller_Response_Cli());
+        $request = new Request\HTTP('http://framework.zend.com/helper-broker/test-helper-via-magic-call/');
+        $this->front->setResponse(new Response\Cli());
 
         $this->front->returnResponse(true);
 
         require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files/Helpers/TestHelper.php';
-        Zend_Controller_Action_HelperBroker::addHelper(new MyApp_TestHelper());
+        HelperBroker\HelperBroker::addHelper(new \MyApp\TestHelper());
 
         $response = $this->front->dispatch($request);
         $this->assertEquals('running direct call', $response->getBody());
@@ -172,8 +161,8 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
     public function testNonExistentHelper()
     {
         $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
-        $request = new Zend_Controller_Request_Http('http://framework.zend.com/helper-broker/test-bad-helper/');
-        $this->front->setResponse(new Zend_Controller_Response_Cli());
+        $request = new Request\HTTP('http://framework.zend.com/helper-broker/test-bad-helper/');
+        $this->front->setResponse(new Response\Cli());
 
         $this->front->returnResponse(true);
         $response = $this->front->dispatch($request);
@@ -183,41 +172,42 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
     public function testCustomHelperRegistered()
     {
         $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
-        $request = new Zend_Controller_Request_Http('http://framework.zend.com/helper-broker/test-custom-helper/');
-        $this->front->setResponse(new Zend_Controller_Response_Cli());
+        $request = new Request\HTTP('http://framework.zend.com/helper-broker/test-custom-helper/');
+        $this->front->setResponse(new Response\Cli());
 
         $this->front->returnResponse(true);
 
-        Zend_Controller_Action_HelperBroker::addHelper(new MyApp_TestHelper());
+        require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files/Helpers/TestHelper.php';
+        HelperBroker\HelperBroker::addHelper(new \MyApp\TestHelper());
 
         $response = $this->front->dispatch($request);
-        $this->assertEquals('MyApp_TestHelper', $response->getBody());
+        $this->assertEquals('MyApp\TestHelper', $response->getBody());
     }
 
     public function testCustomHelperFromPath()
     {
         $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
-        $request = new Zend_Controller_Request_Http('http://framework.zend.com/helper-broker/test-custom-helper/');
-        $this->front->setResponse(new Zend_Controller_Response_Cli());
+        $request = new Request\HTTP('http://framework.zend.com/helper-broker/test-custom-helper/');
+        $this->front->setResponse(new Response\Cli());
 
         $this->front->returnResponse(true);
 
-        Zend_Controller_Action_HelperBroker::addPath(
+        HelperBroker\HelperBroker::addPath(
             dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Helpers',
             'MyApp'
             );
 
         $response = $this->front->dispatch($request);
-        $this->assertEquals('MyApp_TestHelper', $response->getBody());
+        $this->assertEquals('MyApp\TestHelper', $response->getBody());
     }
 
     public function testGetExistingHelpers()
     {
-        Zend_Controller_Action_HelperBroker::addHelper(new Zend_Controller_Action_Helper_Redirector());
+        HelperBroker\HelperBroker::addHelper(new Helper\Redirector());
         // already included in setup, techinically we shouldnt be able to do this, but until 2.0 - its allowed
-        Zend_Controller_Action_HelperBroker::addHelper(new Zend_Controller_Action_Helper_ViewRenderer()); // @todo in future this should throw an exception
+        HelperBroker\HelperBroker::addHelper(new Helper\ViewRenderer()); // @todo in future this should throw an exception
 
-        $helpers = Zend_Controller_Action_HelperBroker::getExistingHelpers();
+        $helpers = HelperBroker\HelperBroker::getExistingHelpers();
         $this->assertTrue(is_array($helpers));
         $this->assertEquals(2, count($helpers));
         $this->assertContains('ViewRenderer', array_keys($helpers));
@@ -226,30 +216,30 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
 
     public function testGetHelperStatically()
     {
-        $helper = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-        $this->assertTrue($helper instanceof Zend_Controller_Action_Helper_ViewRenderer);
+        $helper = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $this->assertTrue($helper instanceof Helper\ViewRenderer);
 
-        $helpers = Zend_Controller_Action_HelperBroker::getExistingHelpers();
+        $helpers = HelperBroker\HelperBroker::getExistingHelpers();
         $this->assertTrue(is_array($helpers));
         $this->assertEquals(1, count($helpers));
     }
 
     public function testHelperPullsResponseFromRegisteredActionController()
     {
-        $helper = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+        $helper = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
 
-        $aRequest   = new Zend_Controller_Request_Http();
+        $aRequest   = new Request\HTTP();
         $aRequest->setModuleName('default')
                  ->setControllerName('zend_controller_action_helper-broker')
                  ->setActionName('index');
-        $aResponse  = new Zend_Controller_Response_Cli();
-        $controller = new Zend_Controller_Action_HelperBrokerController($aRequest, $aResponse, array());
+        $aResponse  = new Response\Cli();
+        $controller = new HelperBrokerController($aRequest, $aResponse, array());
 
-        $fRequest   = new Zend_Controller_Request_Http();
+        $fRequest   = new Request\HTTP();
         $fRequest->setModuleName('foo')
                  ->setControllerName('foo-bar')
                  ->setActionName('baz');
-        $fResponse  = new Zend_Controller_Response_Cli();
+        $fResponse  = new Response\Cli();
         $this->front->setRequest($fRequest)
                     ->setResponse($fResponse);
 
@@ -265,20 +255,20 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
 
     public function testHelperPullsResponseFromFrontControllerWithNoRegisteredActionController()
     {
-        $helper = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+        $helper = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
         $this->assertNull($helper->getActionController());
 
-        $aRequest   = new Zend_Controller_Request_Http();
+        $aRequest   = new Request\HTTP();
         $aRequest->setModuleName('default')
                  ->setControllerName('zend_controller_action_helper-broker')
                  ->setActionName('index');
-        $aResponse  = new Zend_Controller_Response_Cli();
+        $aResponse  = new Response\Cli();
 
-        $fRequest   = new Zend_Controller_Request_Http();
+        $fRequest   = new Request\HTTP();
         $fRequest->setModuleName('foo')
                  ->setControllerName('foo-bar')
                  ->setActionName('baz');
-        $fResponse  = new Zend_Controller_Response_Cli();
+        $fResponse  = new Response\Cli();
         $this->front->setRequest($fRequest)
                     ->setResponse($fResponse);
 
@@ -292,13 +282,13 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
 
     public function testHelperPathStackIsLifo()
     {
-        Zend_Controller_Action_HelperBroker::addPath(
+        HelperBroker\HelperBroker::addPath(
             dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Helpers',
             'MyApp'
             );
 
-        $urlHelper = Zend_Controller_Action_HelperBroker::getStaticHelper('url');
-        $this->assertTrue($urlHelper instanceof MyApp_Url);
+        $urlHelper = HelperBroker\HelperBroker::getStaticHelper('url');
+        $this->assertTrue($urlHelper instanceof \MyApp\Url);
     }
 
     /**
@@ -306,8 +296,8 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
      */
     public function testPluginLoaderShouldHaveDefaultPrefixPath()
     {
-        $loader = Zend_Controller_Action_HelperBroker::getPluginLoader();
-        $paths  = $loader->getPaths('Zend_Controller_Action_Helper');
+        $loader = HelperBroker\HelperBroker::getPluginLoader();
+        $paths  = $loader->getPaths('Zend\Controller\Action\Helper');
         $this->assertFalse(empty($paths));
     }
 
@@ -316,16 +306,16 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
      */
     public function testBrokerShouldAcceptCustomPluginLoaderInstance()
     {
-        $loader = Zend_Controller_Action_HelperBroker::getPluginLoader();
-        $custom = new Zend_Loader_PluginLoader();
-        Zend_Controller_Action_HelperBroker::setPluginLoader($custom);
-        $test   = Zend_Controller_Action_HelperBroker::getPluginLoader();
+        $loader = HelperBroker\HelperBroker::getPluginLoader();
+        $custom = new \Zend\Loader\PluginLoader\PluginLoader();
+        HelperBroker\HelperBroker::setPluginLoader($custom);
+        $test   = HelperBroker\HelperBroker::getPluginLoader();
         $this->assertNotSame($loader, $test);
         $this->assertSame($custom, $test);
     }
 }
 
-class Zend_Controller_Action_HelperBroker_TestHelper extends Zend_Controller_Action_Helper_Abstract
+class TestHelper extends Helper\AbstractHelper
 {
     public $count = 0;
 
@@ -335,7 +325,7 @@ class Zend_Controller_Action_HelperBroker_TestHelper extends Zend_Controller_Act
     }
 }
 
-class Zend_Controller_Action_HelperBrokerController extends Zend_Controller_Action
+class HelperBrokerController extends \Zend\Controller\Action\Action
 {
     public $helper;
 
@@ -348,9 +338,4 @@ class Zend_Controller_Action_HelperBrokerController extends Zend_Controller_Acti
     {
         $this->_helper->getHelper('testHelper');
     }
-}
-
-// Call Zend_Controller_Action_HelperBrokerTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Action_HelperBrokerTest::main") {
-    Zend_Controller_Action_HelperBrokerTest::main();
 }

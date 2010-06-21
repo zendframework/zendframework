@@ -20,15 +20,20 @@
  */
 
 /**
- * @uses       Zend_Paginator_Adapter_Interface
- * @uses       Zend_Paginator_Exception
- * @uses       Zend_Paginator_SerializableLimitIterator
+ * @namespace
+ */
+namespace Zend\Paginator\Adapter;
+
+/**
+ * @uses       \Zend\Paginator\Adapter\AdapterInterface
+ * @uses       \Zend\Paginator\Exception
+ * @uses       \Zend\Paginator\SerializableLimitIterator
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Paginator_Adapter_Iterator implements Zend_Paginator_Adapter_Interface
+class Iterator implements AdapterInterface
 {
     /**
      * Iterator which implements Countable
@@ -48,12 +53,12 @@ class Zend_Paginator_Adapter_Iterator implements Zend_Paginator_Adapter_Interfac
      * Constructor.
      *
      * @param  Iterator $iterator Iterator to paginate
-     * @throws Zend_Paginator_Exception
+     * @throws \Zend\Paginator\Exception
      */
-    public function __construct(Iterator $iterator)
+    public function __construct(\Iterator $iterator)
     {
-        if (!$iterator instanceof Countable) {
-            throw new Zend_Paginator_Exception('Iterator must implement Countable');
+        if (!$iterator instanceof \Countable) {
+            throw new \Zend\Paginator\Exception('Iterator must implement Countable');
         }
 
         $this->_iterator = $iterator;
@@ -72,7 +77,7 @@ class Zend_Paginator_Adapter_Iterator implements Zend_Paginator_Adapter_Interfac
         if ($this->_count == 0) {
             return array();
         }
-        return new Zend_Paginator_SerializableLimitIterator($this->_iterator, $offset, $itemCountPerPage);
+        return new \Zend\Paginator\SerializableLimitIterator($this->_iterator, $offset, $itemCountPerPage);
     }
 
     /**

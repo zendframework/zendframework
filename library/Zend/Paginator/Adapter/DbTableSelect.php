@@ -20,20 +20,25 @@
  */
 
 /**
- * @uses       Zend_Paginator_Adapter_DbSelect
+ * @namespace
+ */
+namespace Zend\Paginator\Adapter;
+
+/**
+ * @uses       \Zend\Paginator\Adapter\DbSelect
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Paginator_Adapter_DbTableSelect extends Zend_Paginator_Adapter_DbSelect
+class DbTableSelect extends DbSelect
 {
     /**
      * Returns a Zend_Db_Table_Rowset_Abstract of items for a page.
      *
      * @param  integer $offset Page offset
      * @param  integer $itemCountPerPage Number of items per page
-     * @return Zend_Db_Table_Rowset_Abstract
+     * @return \Zend\DB\Table\Rowset\AbstractRowset
      */
     public function getItems($offset, $itemCountPerPage)
     {

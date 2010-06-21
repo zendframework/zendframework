@@ -84,27 +84,7 @@ class Zend_Log_Writer_Syslog extends Zend_Log_Writer_Abstract
      *
      * @var array
      */
-    protected $_validFacilities = array(
-        LOG_AUTH,
-        LOG_AUTHPRIV,
-        LOG_CRON,
-        LOG_DAEMON,
-        LOG_KERN,
-        LOG_LOCAL0,
-        LOG_LOCAL1,
-        LOG_LOCAL2,
-        LOG_LOCAL3,
-        LOG_LOCAL4,
-        LOG_LOCAL5,
-        LOG_LOCAL6,
-        LOG_LOCAL7,
-        LOG_LPR,
-        LOG_MAIL,
-        LOG_NEWS,
-        LOG_SYSLOG,
-        LOG_USER,
-        LOG_UUCP,
-    );
+    protected $_validFacilities = array();
 
     /**
      * Class constructor
@@ -117,10 +97,16 @@ class Zend_Log_Writer_Syslog extends Zend_Log_Writer_Abstract
         if (isset($params['application'])) {
             $this->_application = $params['application'];
         }
+
+        $runInitializeSyslog = true;
         if (isset($params['facility'])) {
-            $this->_facility = $params['facility'];
+            $this->_facility = $this->setFacility($params['facility']);
+            $runInitializeSyslog = false;
         }
-        $this->_initializeSyslog();
+
+        if ($runInitializeSyslog) {
+            $this->_initializeSyslog();
+        }
     }
 
     /**
@@ -136,10 +122,44 @@ class Zend_Log_Writer_Syslog extends Zend_Log_Writer_Abstract
     }
 
     /**
+     * Initialize values facilities
+     *
+     * @return void
+     */
+    protected function _initializeValidFacilities()
+    {
+        $constants = array(
+            'LOG_AUTH',
+            'LOG_AUTHPRIV',
+            'LOG_CRON',
+            'LOG_DAEMON',
+            'LOG_KERN',
+            'LOG_LOCAL0',
+            'LOG_LOCAL1',
+            'LOG_LOCAL2',
+            'LOG_LOCAL3',
+            'LOG_LOCAL4',
+            'LOG_LOCAL5',
+            'LOG_LOCAL6',
+            'LOG_LOCAL7',
+            'LOG_LPR',
+            'LOG_MAIL',
+            'LOG_NEWS',
+            'LOG_SYSLOG',
+            'LOG_USER',
+            'LOG_UUCP'
+        );
+
+        foreach ($constants as $constant) {
+            if (defined($constant)) {
+                $this->_validFacilities[] = constant($constant);
+            }
+        }
+    }
+
+    /**
      * Initialize syslog / set application name and facility
      *
-     * @param  string $application Application name
-     * @param  string $facility Syslog facility
      * @return void
      */
     protected function _initializeSyslog()
@@ -160,6 +180,10 @@ class Zend_Log_Writer_Syslog extends Zend_Log_Writer_Abstract
     {
         if ($this->_facility === $facility) {
             return;
+        }
+
+        if (!count($this->_validFacilities)) {
+            $this->_initializeValidFacilities();
         }
 
         if (!in_array($facility, $this->_validFacilities)) {

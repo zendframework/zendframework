@@ -20,4 +20,9 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Controller\_files\modules\bar\views\scripts\test;
+
 echo 'Rendered test/foo.php';

@@ -21,15 +21,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Controller\Router\Route;
+use Zend\Config;
+
+/**
  * Chain route is used for managing route chaining.
  *
- * @uses       Zend_Controller_Router_Route_Abstract
+ * @uses       \Zend\Controller\Router\Route\AbstractRoute
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Controller_Router_Route_Chain extends Zend_Controller_Router_Route_Abstract
+class Chain extends AbstractRoute
 {
     protected $_routes = array();
     protected $_separators = array();
@@ -37,22 +43,22 @@ class Zend_Controller_Router_Route_Chain extends Zend_Controller_Router_Route_Ab
     /**
      * Instantiates route based on passed Zend_Config structure
      *
-     * @param Zend_Config $config Configuration object
+     * @param \Zend\Config\Config $config Configuration object
      */
-    public static function getInstance(\Zend\Config\Config $config)
+    public static function getInstance(Config\Config $config)
     {
-        $defs = ($config->defaults instanceof \Zend\Config\Config) ? $config->defaults->toArray() : array();
+        $defs = ($config->defaults instanceof Config\Config) ? $config->defaults->toArray() : array();
         return new self($config->route, $defs);
     }
 
     /**
      * Add a route to this chain
      *
-     * @param  Zend_Controller_Router_Route_Abstract $route
+     * @param  \Zend\Controller\Router\Route\AbstractRoute $route
      * @param  string                                $separator
-     * @return Zend_Controller_Router_Route_Chain
+     * @return \Zend\Controller\Router\Route\Chain
      */
-    public function chain(Zend_Controller_Router_Route_Abstract $route, $separator = '/')
+    public function addChain(AbstractRoute $route, $separator = '/')
     {
         $this->_routes[]     = $route;
         $this->_separators[] = $separator;
@@ -65,7 +71,7 @@ class Zend_Controller_Router_Route_Chain extends Zend_Controller_Router_Route_Ab
      * Matches a user submitted path with a previously defined route.
      * Assigns and returns an array of defaults on a successful match.
      *
-     * @param  Zend_Controller_Request_Http $request Request to get the path info from
+     * @param  \Zend\Controller\Request\HTTP $request Request to get the path info from
      * @return array|false An array of assigned values or a false on a mismatch
      */
     public function match($request, $partial = null)
@@ -150,10 +156,10 @@ class Zend_Controller_Router_Route_Chain extends Zend_Controller_Router_Route_Ab
     /**
      * Set the request object for this and the child routes
      *
-     * @param  Zend_Controller_Request_Abstract|null $request
+     * @param  \Zend\Controller\Request\AbstractRequest|null $request
      * @return void
      */
-    public function setRequest(Zend_Controller_Request_Abstract $request = null)
+    public function setRequest(\Zend\Controller\Request\AbstractRequest $request = null)
     {
         $this->_request = $request;
 

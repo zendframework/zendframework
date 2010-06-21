@@ -20,13 +20,20 @@
  */
 
 /**
- * @uses       Zend_View_Exception
+ * @namespace
+ */
+namespace Zend\View\Helper;
+use Zend\Paginator;
+use Zend\View;
+
+/**
+ * @uses       \Zend\View\Exception
  * @category   Zend
  * @package    Zend_View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_PaginationControl
+class PaginationControl
 {
     /**
      * View instance
@@ -45,10 +52,10 @@ class Zend_View_Helper_PaginationControl
     /**
      * Sets the view instance.
      *
-     * @param  Zend_View_Interface $view View instance
-     * @return Zend_View_Helper_PaginationControl
+     * @param  \Zend\View\ViewInterface $view View instance
+     * @return \Zend\View\Helper\PaginationControl
      */
-    public function setView(Zend_View_Interface $view)
+    public function setView(View\ViewInterface $view)
     {
         $this->view = $view;
         return $this;
@@ -79,20 +86,20 @@ class Zend_View_Helper_PaginationControl
      * if so, uses that.  Also, if no scrolling style or partial are specified,
      * the defaults will be used (if set).
      *
-     * @param  Zend_Paginator (Optional) $paginator
+     * @param  \Zend\Paginator\Paginator (Optional) $paginator
      * @param  string $scrollingStyle (Optional) Scrolling style
      * @param  string $partial (Optional) View partial
      * @param  array|string $params (Optional) params to pass to the partial
      * @return string
-     * @throws Zend_View_Exception
+     * @throws \Zend\View\Exception
      */
-    public function paginationControl(Zend_Paginator $paginator = null, $scrollingStyle = null, $partial = null, $params = null)
+    public function direct(Paginator\Paginator $paginator = null, $scrollingStyle = null, $partial = null, $params = null)
     {
         if ($paginator === null) {
-            if (isset($this->view->paginator) and $this->view->paginator !== null and $this->view->paginator instanceof Zend_Paginator) {
+            if (isset($this->view->paginator) and $this->view->paginator !== null and $this->view->paginator instanceof Paginator\Paginator) {
                 $paginator = $this->view->paginator;
             } else {
-                $e = new Zend_View_Exception('No paginator instance provided or incorrect type');
+                $e = new View\Exception('No paginator instance provided or incorrect type');
                 $e->setView($this->view);
                 throw $e;
             }
@@ -100,7 +107,7 @@ class Zend_View_Helper_PaginationControl
 
         if ($partial === null) {
             if (self::$_defaultViewPartial === null) {
-                $e = new Zend_View_Exception('No view partial provided and no default set');
+                $e = new View\Exception('No view partial provided and no default set');
                 $e->setView($this->view);
                 throw $e;
             }
@@ -116,7 +123,7 @@ class Zend_View_Helper_PaginationControl
 
         if (is_array($partial)) {
             if (count($partial) != 2) {
-                $e = new Zend_View_Exception('A view partial supplied as an array must contain two values: the filename and its module');
+                $e = new View\Exception('A view partial supplied as an array must contain two values: the filename and its module');
                 $e->setView($this->view);
                 throw $e;
             }

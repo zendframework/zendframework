@@ -20,15 +20,11 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_DoctypeTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_DoctypeTest::main");
-}
-
-
-/** Zend_View_Helper_Doctype */
-
-/** Zend_Registry */
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
+use Zend\View\Helper;
 
 /**
  * Test class for Zend_View_Helper_Doctype.
@@ -41,7 +37,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_DoctypeTest extends PHPUnit_Framework_TestCase
+class DoctypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_Doctype
@@ -54,18 +50,6 @@ class Zend_View_Helper_DoctypeTest extends PHPUnit_Framework_TestCase
     public $basePath;
 
     /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_DoctypeTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      *
@@ -74,11 +58,11 @@ class Zend_View_Helper_DoctypeTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $regKey = 'Zend_View_Helper_Doctype';
-        if (Zend_Registry::isRegistered($regKey)) {
-            $registry = Zend_Registry::getInstance();
+        if (\Zend\Registry::isRegistered($regKey)) {
+            $registry = \Zend\Registry::getInstance();
             unset($registry[$regKey]);
         }
-        $this->helper = new Zend_View_Helper_Doctype();
+        $this->helper = new Helper\Doctype();
     }
 
     /**
@@ -94,9 +78,9 @@ class Zend_View_Helper_DoctypeTest extends PHPUnit_Framework_TestCase
 
     public function testRegistryEntryCreatedAfterInstantiation()
     {
-        $this->assertTrue(Zend_Registry::isRegistered('Zend_View_Helper_Doctype'));
-        $doctype = Zend_Registry::get('Zend_View_Helper_Doctype');
-        $this->assertTrue($doctype instanceof ArrayObject);
+        $this->assertTrue(\Zend\Registry::isRegistered('Zend_View_Helper_Doctype'));
+        $doctype = \Zend\Registry::get('Zend_View_Helper_Doctype');
+        $this->assertTrue($doctype instanceof \ArrayObject);
         $this->assertTrue(isset($doctype['doctype']));
         $this->assertTrue(isset($doctype['doctypes']));
         $this->assertTrue(is_array($doctype['doctypes']));
@@ -104,25 +88,25 @@ class Zend_View_Helper_DoctypeTest extends PHPUnit_Framework_TestCase
 
     public function testDoctypeMethodReturnsObjectInstance()
     {
-        $doctype = $this->helper->doctype();
-        $this->assertTrue($doctype instanceof Zend_View_Helper_Doctype);
+        $doctype = $this->helper->direct();
+        $this->assertTrue($doctype instanceof Helper\Doctype);
     }
 
     public function testPassingDoctypeSetsDoctype()
     {
-        $doctype = $this->helper->doctype('XHTML1_STRICT');
+        $doctype = $this->helper->direct('XHTML1_STRICT');
         $this->assertEquals('XHTML1_STRICT', $doctype->getDoctype());
     }
 
     public function testIsXhtmlReturnsTrueForXhtmlDoctypes()
     {
         foreach (array('XHTML1_STRICT', 'XHTML1_TRANSITIONAL', 'XHTML1_FRAMESET', 'XHTML5') as $type) {
-            $doctype = $this->helper->doctype($type);
+            $doctype = $this->helper->direct($type);
             $this->assertEquals($type, $doctype->getDoctype());
             $this->assertTrue($doctype->isXhtml());
         }
 
-        $doctype = $this->helper->doctype('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://framework.zend.com/foo/DTD/xhtml1-custom.dtd">');
+        $doctype = $this->helper->direct('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://framework.zend.com/foo/DTD/xhtml1-custom.dtd">');
         $this->assertEquals('CUSTOM_XHTML', $doctype->getDoctype());
         $this->assertTrue($doctype->isXhtml());
     }
@@ -130,46 +114,46 @@ class Zend_View_Helper_DoctypeTest extends PHPUnit_Framework_TestCase
     public function testIsXhtmlReturnsFalseForNonXhtmlDoctypes()
     {
         foreach (array('HTML4_STRICT', 'HTML4_LOOSE', 'HTML4_FRAMESET') as $type) {
-            $doctype = $this->helper->doctype($type);
+            $doctype = $this->helper->direct($type);
             $this->assertEquals($type, $doctype->getDoctype());
             $this->assertFalse($doctype->isXhtml());
         }
 
-        $doctype = $this->helper->doctype('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 10.0 Strict//EN" "http://framework.zend.com/foo/DTD/html10-custom.dtd">');
+        $doctype = $this->helper->direct('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 10.0 Strict//EN" "http://framework.zend.com/foo/DTD/html10-custom.dtd">');
         $this->assertEquals('CUSTOM', $doctype->getDoctype());
         $this->assertFalse($doctype->isXhtml());
     }
 
 	public function testIsHtml5() {
 		foreach (array('HTML5', 'XHTML5') as $type) {
-            $doctype = $this->helper->doctype($type);
+            $doctype = $this->helper->direct($type);
             $this->assertEquals($type, $doctype->getDoctype());
             $this->assertTrue($doctype->isHtml5());
         }
 
 		foreach (array('HTML4_STRICT', 'HTML4_LOOSE', 'HTML4_FRAMESET', 'XHTML1_STRICT', 'XHTML1_TRANSITIONAL', 'XHTML1_FRAMESET') as $type) {
-			$doctype = $this->helper->doctype($type);
+			$doctype = $this->helper->direct($type);
             $this->assertEquals($type, $doctype->getDoctype());
             $this->assertFalse($doctype->isHtml5());
 		}
 	}
 	
 	public function testCanRegisterCustomHtml5Doctype() {
-		$doctype = $this->helper->doctype('<!DOCTYPE html>');
+		$doctype = $this->helper->direct('<!DOCTYPE html>');
         $this->assertEquals('CUSTOM', $doctype->getDoctype());
         $this->assertTrue($doctype->isHtml5());
 	}
 
     public function testCanRegisterCustomXhtmlDoctype()
     {
-        $doctype = $this->helper->doctype('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://framework.zend.com/foo/DTD/xhtml1-custom.dtd">');
+        $doctype = $this->helper->direct('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://framework.zend.com/foo/DTD/xhtml1-custom.dtd">');
         $this->assertEquals('CUSTOM_XHTML', $doctype->getDoctype());
         $this->assertTrue($doctype->isXhtml());
     }
 
     public function testCanRegisterCustomHtmlDoctype()
     {
-        $doctype = $this->helper->doctype('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 10.0 Strict//EN" "http://framework.zend.com/foo/DTD/html10-custom.dtd">');
+        $doctype = $this->helper->direct('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 10.0 Strict//EN" "http://framework.zend.com/foo/DTD/html10-custom.dtd">');
         $this->assertEquals('CUSTOM', $doctype->getDoctype());
         $this->assertFalse($doctype->isXhtml());
     }
@@ -177,22 +161,18 @@ class Zend_View_Helper_DoctypeTest extends PHPUnit_Framework_TestCase
     public function testMalformedCustomDoctypeRaisesException()
     {
         try {
-            $doctype = $this->helper->doctype('<!FOO HTML>');
+            $doctype = $this->helper->direct('<!FOO HTML>');
             $this->fail('Malformed doctype should raise exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
     public function testStringificationReturnsDoctypeString()
     {
-        $doctype  = $this->helper->doctype('XHTML1_STRICT');
+        $doctype = $this->helper->direct('XHTML1_STRICT');
         $string   = $doctype->__toString();
-        $registry = Zend_Registry::get('Zend_View_Helper_Doctype');
+        $registry = \Zend\Registry::get('Zend_View_Helper_Doctype');
         $this->assertEquals($registry['doctypes']['XHTML1_STRICT'], $string);
     }
 }
 
-// Call Zend_View_Helper_DoctypeTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_DoctypeTest::main") {
-    Zend_View_Helper_DoctypeTest::main();
-}

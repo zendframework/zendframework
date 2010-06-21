@@ -21,20 +21,26 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Navigation\Page;
+use Zend\Navigation;
+
+/**
  * Represents a page that is defined using module, controller, action, route
  * name and route params to assemble the href
  *
- * @uses       Zend_Controller_Action_HelperBroker
- * @uses       Zend_Controller_Front
- * @uses       Zend_Navigation_Exception
- * @uses       Zend_Navigation_Page
+ * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Front
+ * @uses       \Zend\Navigation\Exception
+ * @uses       \Zend\Navigation\Page\Page
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage Page
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
+class Mvc extends Page
 {
     /**
      * Action name to use when assembling URL
@@ -96,7 +102,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      * Action helper for assembling URLs
      *
      * @see getHref()
-     * @var Zend_Controller_Action_Helper_Url
+     * @var \Zend\Controller\Action\Helper\Url
      */
     protected static $_urlHelper = null;
 
@@ -116,7 +122,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
     public function isActive($recursive = false)
     {
         if (!$this->_active) {
-            $front = Zend_Controller_Front::getInstance();
+            $front = \Zend\Controller\Front::getInstance();
             $reqParams = $front->getRequest()->getParams();
 
             if (!array_key_exists('module', $reqParams)) {
@@ -169,27 +175,27 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
 
         if (null === self::$_urlHelper) {
             self::$_urlHelper =
-                Zend_Controller_Action_HelperBroker::getStaticHelper('Url');
+                \Zend\Controller\Action\HelperBroker\HelperBroker::getStaticHelper('URL');
         }
 
         $params = $this->getParams();
 
-        if ($param = $this->getModule()) {
+        if (($param = $this->getModule()) != null) {
             $params['module'] = $param;
         }
 
-        if ($param = $this->getController()) {
+        if (($param = $this->getController()) != null) {
             $params['controller'] = $param;
         }
 
-        if ($param = $this->getAction()) {
+        if (($param = $this->getAction()) != null) {
             $params['action'] = $param;
         }
-
-        $url = self::$_urlHelper->url($params,
+        
+        $url = self::$_urlHelper->__invoke($params,
                                       $this->getRoute(),
                                       $this->getResetParams());
-
+//var_dump($url);
         return $this->_hrefCache = $url;
     }
 
@@ -199,13 +205,13 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      * @see getHref()
      *
      * @param  string $action             action name
-     * @return Zend_Navigation_Page_Mvc   fluent interface, returns self
-     * @throws Zend_Navigation_Exception  if invalid $action is given
+     * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
+     * @throws \Zend\Navigation\Exception  if invalid $action is given
      */
     public function setAction($action)
     {
         if (null !== $action && !is_string($action)) {
-            throw new Zend_Navigation_Exception(
+            throw new Navigation\Exception(
                     'Invalid argument: $action must be a string or null');
         }
 
@@ -232,13 +238,13 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      * @see getHref()
      *
      * @param  string|null $controller    controller name
-     * @return Zend_Navigation_Page_Mvc   fluent interface, returns self
-     * @throws Zend_Navigation_Exception  if invalid controller name is given
+     * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
+     * @throws \Zend\Navigation\Exception  if invalid controller name is given
      */
     public function setController($controller)
     {
         if (null !== $controller && !is_string($controller)) {
-            throw new Zend_Navigation_Exception(
+            throw new Navigation\Exception(
                     'Invalid argument: $controller must be a string or null');
         }
 
@@ -265,13 +271,13 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      * @see getHref()
      *
      * @param  string|null $module        module name
-     * @return Zend_Navigation_Page_Mvc   fluent interface, returns self
-     * @throws Zend_Navigation_Exception  if invalid module name is given
+     * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
+     * @throws \Zend\Navigation\Exception  if invalid module name is given
      */
     public function setModule($module)
     {
         if (null !== $module && !is_string($module)) {
-            throw new Zend_Navigation_Exception(
+            throw new Navigation\Exception(
                     'Invalid argument: $module must be a string or null');
         }
 
@@ -299,7 +305,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @param  array|null $params        [optional] page params. Default is null
      *                                   which sets no params.
-     * @return Zend_Navigation_Page_Mvc  fluent interface, returns self
+     * @return \Zend\Navigation\Page\Mvc  fluent interface, returns self
      */
     public function setParams(array $params = null)
     {
@@ -332,13 +338,13 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      * @see getHref()
      *
      * @param  string $route              route name to use when assembling URL
-     * @return Zend_Navigation_Page_Mvc   fluent interface, returns self
-     * @throws Zend_Navigation_Exception  if invalid $route is given
+     * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
+     * @throws \Zend\Navigation\Exception  if invalid $route is given
      */
     public function setRoute($route)
     {
         if (null !== $route && (!is_string($route) || strlen($route) < 1)) {
-            throw new Zend_Navigation_Exception(
+            throw new Navigation\Exception(
                  'Invalid argument: $route must be a non-empty string or null');
         }
 
@@ -366,7 +372,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @param  bool $resetParams         whether params should be reset when
      *                                   assembling URL
-     * @return Zend_Navigation_Page_Mvc  fluent interface, returns self
+     * @return \Zend\Navigation\Page\Mvc  fluent interface, returns self
      */
     public function setResetParams($resetParams)
     {
@@ -392,10 +398,10 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @see getHref()
      *
-     * @param  Zend_Controller_Action_Helper_Url $uh  URL helper
+     * @param  \Zend\Controller\Action\Helper\Url $uh  URL helper
      * @return void
      */
-    public static function setUrlHelper(Zend_Controller_Action_Helper_Url $uh)
+    public static function setUrlHelper(\Zend\Controller\Action\Helper\Url $uh)
     {
         self::$_urlHelper = $uh;
     }

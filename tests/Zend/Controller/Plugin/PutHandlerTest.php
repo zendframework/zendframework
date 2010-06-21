@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Controller\Plugin;
+
 // Call Zend_Controller_Plugin_PutHandlerTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Controller_Plugin_PutHandlerTest::main");
@@ -38,11 +43,11 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller
  * @group      Zend_Controller_Plugin
  */
-class Zend_Controller_Plugin_PutHandlerTest extends PHPUnit_Framework_TestCase
+class PutHandlerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Request object
-     * @var Zend_Controller_Request_Http
+     * @var Zend_Controller_Request_HTTP
      */
     public $request;
 
@@ -61,8 +66,8 @@ class Zend_Controller_Plugin_PutHandlerTest extends PHPUnit_Framework_TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Plugin_PutHandlerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Controller_Plugin_PutHandlerTest");
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
@@ -73,9 +78,9 @@ class Zend_Controller_Plugin_PutHandlerTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        Zend_Controller_Front::getInstance()->resetInstance();
-        $this->request  = new Zend_Controller_Request_HttpTestCase();
-        $this->plugin   = new Zend_Controller_Plugin_PutHandler();
+        \Zend\Controller\Front::getInstance()->resetInstance();
+        $this->request  = new \Zend\Controller\Request\HTTPTestCase();
+        $this->plugin   = new \Zend\Controller\Plugin\PutHandler();
 
         $this->plugin->setRequest($this->request);
     }
@@ -93,6 +98,6 @@ class Zend_Controller_Plugin_PutHandlerTest extends PHPUnit_Framework_TestCase
 
 // Call Zend_Controller_Plugin_PutHandlerTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_Controller_Plugin_PutHandlerTest::main") {
-    Zend_Controller_Plugin_PutHandlerTest::main();
+    \Zend_Controller_Plugin_PutHandlerTest::main();
 }
 

@@ -21,19 +21,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper for declaring default values of template variables
  *
- * @uses       Zend_View_Helper_Abstract
+ * @uses       \Zend\View\Helper\AbstractHelper
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_DeclareVars extends Zend_View_Helper_Abstract
+class DeclareVars extends AbstractHelper
 {
     /**
      * The view object that created this helper object.
-     * @var Zend_View
+     * @var \Zend\View\View
      */
     public $view;
 
@@ -61,7 +66,7 @@ class Zend_View_Helper_DeclareVars extends Zend_View_Helper_Abstract
      * @param string|array variable number of arguments, all string names of variables to test
      * @return void
      */
-    public function declareVars()
+    public function direct()
     {
         $args = func_get_args();
         foreach($args as $key) {

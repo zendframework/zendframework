@@ -20,17 +20,13 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_HeadScriptTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_HeadScriptTest::main");
-}
-
-
-/** Zend_View_Helper_HeadScript */
-
-/** Zend_View_Helper_Placeholder_Registry */
-
-/** Zend_Registry */
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
+use Zend\View\Helper\Placeholder\Registry;
+use Zend\View\Helper;
+use Zend\View;
 
 /**
  * Test class for Zend_View_Helper_HeadScript.
@@ -43,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_HeadScriptTest extends PHPUnit_Framework_TestCase
+class HeadScriptTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_HeadScript
@@ -55,16 +51,6 @@ class Zend_View_Helper_HeadScriptTest extends PHPUnit_Framework_TestCase
      */
     public $basePath;
 
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_HeadScriptTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -74,13 +60,13 @@ class Zend_View_Helper_HeadScriptTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $regKey = Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY;
-        if (Zend_Registry::isRegistered($regKey)) {
-            $registry = Zend_Registry::getInstance();
+        $regKey = Registry\Registry::REGISTRY_KEY;
+        if (\Zend\Registry::isRegistered($regKey)) {
+            $registry = \Zend\Registry::getInstance();
             unset($registry[$regKey]);
         }
         $this->basePath = dirname(__FILE__) . '/_files/modules';
-        $this->helper = new Zend_View_Helper_HeadScript();
+        $this->helper = new Helper\HeadScript();
     }
 
     /**
@@ -96,19 +82,19 @@ class Zend_View_Helper_HeadScriptTest extends PHPUnit_Framework_TestCase
 
     public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
     {
-        $registry = Zend_View_Helper_Placeholder_Registry::getRegistry();
+        $registry = Registry\Registry::getRegistry();
         if ($registry->containerExists('Zend_View_Helper_HeadScript')) {
             $registry->deleteContainer('Zend_View_Helper_HeadScript');
         }
         $this->assertFalse($registry->containerExists('Zend_View_Helper_HeadScript'));
-        $helper = new Zend_View_Helper_HeadScript();
+        $helper = new Helper\HeadScript();
         $this->assertTrue($registry->containerExists('Zend_View_Helper_HeadScript'));
     }
 
     public function testHeadScriptReturnsObjectInstance()
     {
-        $placeholder = $this->helper->headScript();
-        $this->assertTrue($placeholder instanceof Zend_View_Helper_HeadScript);
+        $placeholder = $this->helper->direct();
+        $this->assertTrue($placeholder instanceof Helper\HeadScript);
     }
 
     public function testSetPrependAppendAndOffsetSetThrowExceptionsOnInvalidItems()
@@ -116,19 +102,19 @@ class Zend_View_Helper_HeadScriptTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->append('foo');
             $this->fail('Append should throw exception with invalid item');
-        } catch (Zend_View_Exception $e) { }
+        } catch (View\Exception $e) { }
         try {
             $this->helper->offsetSet(1, 'foo');
             $this->fail('OffsetSet should throw exception with invalid item');
-        } catch (Zend_View_Exception $e) { }
+        } catch (View\Exception $e) { }
         try {
             $this->helper->prepend('foo');
             $this->fail('Prepend should throw exception with invalid item');
-        } catch (Zend_View_Exception $e) { }
+        } catch (View\Exception $e) { }
         try {
             $this->helper->set('foo');
             $this->fail('Set should throw exception with invalid item');
-        } catch (Zend_View_Exception $e) { }
+        } catch (View\Exception $e) { }
     }
 
     protected function _inflectAction($type)
@@ -252,7 +238,7 @@ class Zend_View_Helper_HeadScriptTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->fooBar('foo');
             $this->fail('Invalid method should raise exception');
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
         }
     }
 
@@ -261,21 +247,21 @@ class Zend_View_Helper_HeadScriptTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->setScript();
             $this->fail('Too few arguments should raise exception');
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
         }
 
         try {
             $this->helper->offsetSetScript(5);
             $this->fail('Too few arguments should raise exception');
-        } catch (Zend_View_Exception $e) {
+        } catch (View\Exception $e) {
         }
     }
 
     public function testHeadScriptAppropriatelySetsScriptItems()
     {
-        $this->helper->headScript('FILE', 'foo', 'set')
-                     ->headScript('SCRIPT', 'bar', 'prepend')
-                     ->headScript('SCRIPT', 'baz', 'append');
+        $this->helper->direct('FILE', 'foo', 'set')
+                     ->direct('SCRIPT', 'bar', 'prepend')
+                     ->direct('SCRIPT', 'baz', 'append');
         $items = $this->helper->getArrayCopy();
         for ($i = 0; $i < 3; ++$i) {
             $item = $items[$i];
@@ -299,9 +285,9 @@ class Zend_View_Helper_HeadScriptTest extends PHPUnit_Framework_TestCase
 
     public function testToStringRendersValidHtml()
     {
-        $this->helper->headScript('FILE', 'foo', 'set')
-                     ->headScript('SCRIPT', 'bar', 'prepend')
-                     ->headScript('SCRIPT', 'baz', 'append');
+        $this->helper->direct('FILE', 'foo', 'set')
+                     ->direct('SCRIPT', 'bar', 'prepend')
+                     ->direct('SCRIPT', 'baz', 'append');
         $string = $this->helper->toString();
 
         $scripts = substr_count($string, '<script ');
@@ -317,7 +303,7 @@ class Zend_View_Helper_HeadScriptTest extends PHPUnit_Framework_TestCase
         $this->assertContains('bar', $string);
         $this->assertContains('baz', $string);
 
-        $doc = new DOMDocument;
+        $doc = new \DOMDocument;
         $dom = $doc->loadHtml($string);
         $this->assertTrue($dom !== false);
     }
@@ -354,53 +340,53 @@ document.write(bar.strlen());');
 
     public function testDoesNotAllowDuplicateFiles()
     {
-        $this->helper->headScript('FILE', '/js/prototype.js');
-        $this->helper->headScript('FILE', '/js/prototype.js');
+        $this->helper->direct('FILE', '/js/prototype.js');
+        $this->helper->direct('FILE', '/js/prototype.js');
         $this->assertEquals(1, count($this->helper));
     }
 
     public function testRenderingDoesNotRenderArbitraryAttributesByDefault()
     {
-        $this->helper->headScript()->appendFile('/js/foo.js', 'text/javascript', array('bogus' => 'deferred'));
-        $test = $this->helper->headScript()->toString();
+        $this->helper->direct()->appendFile('/js/foo.js', 'text/javascript', array('bogus' => 'deferred'));
+        $test = $this->helper->direct()->toString();
         $this->assertNotContains('bogus="deferred"', $test);
     }
 
     public function testCanRenderArbitraryAttributesOnRequest()
     {
-        $this->helper->headScript()->appendFile('/js/foo.js', 'text/javascript', array('bogus' => 'deferred'))
+        $this->helper->direct()->appendFile('/js/foo.js', 'text/javascript', array('bogus' => 'deferred'))
              ->setAllowArbitraryAttributes(true);
-        $test = $this->helper->headScript()->toString();
+        $test = $this->helper->direct()->toString();
         $this->assertContains('bogus="deferred"', $test);
     }
 
     public function testCanPerformMultipleSerialCaptures()
     {
-        $this->helper->headScript()->captureStart();
+        $this->helper->direct()->captureStart();
         echo "this is something captured";
-        $this->helper->headScript()->captureEnd();
+        $this->helper->direct()->captureEnd();
         try {
-            $this->helper->headScript()->captureStart();
-        } catch (Zend_View_Exception $e) {
+            $this->helper->direct()->captureStart();
+        } catch (View\Exception $e) {
             $this->fail('Serial captures should be allowed');
         }
         echo "this is something else captured";
-        $this->helper->headScript()->captureEnd();
+        $this->helper->direct()->captureEnd();
     }
 
     public function testCannotNestCaptures()
     {
-        $this->helper->headScript()->captureStart();
+        $this->helper->direct()->captureStart();
         echo "this is something captured";
         try {
-            $this->helper->headScript()->captureStart();
-            $this->helper->headScript()->captureEnd();
+            $this->helper->direct()->captureStart();
+            $this->helper->direct()->captureEnd();
             $this->fail('Should not be able to nest captures');
-        } catch (Zend_View_Exception $e) {
-            $this->helper->headScript()->captureEnd();
+        } catch (View\Exception $e) {
+            $this->helper->direct()->captureEnd();
             $this->assertContains('Cannot nest', $e->getMessage());
         }
-        $this->helper->headScript()->captureEnd();
+        $this->helper->direct()->captureEnd();
     }
 
     /**
@@ -415,16 +401,16 @@ document.write(bar.strlen());');
 
     public function testConditionalScript()
     {
-        $this->helper->headScript()->appendFile('/js/foo.js', 'text/javascript', array('conditional' => 'lt IE 7'));
-        $test = $this->helper->headScript()->toString();
+        $this->helper->direct()->appendFile('/js/foo.js', 'text/javascript', array('conditional' => 'lt IE 7'));
+        $test = $this->helper->direct()->toString();
         $this->assertContains('<!--[if lt IE 7]>', $test);
     }
 
     public function testConditionalScriptWidthIndentation()
     {
-        $this->helper->headScript()->appendFile('/js/foo.js', 'text/javascript', array('conditional' => 'lt IE 7'));
-        $this->helper->headScript()->setIndent(4);
-        $test = $this->helper->headScript()->toString();
+        $this->helper->direct()->appendFile('/js/foo.js', 'text/javascript', array('conditional' => 'lt IE 7'));
+        $this->helper->direct()->setIndent(4);
+        $test = $this->helper->direct()->toString();
         $this->assertContains('    <!--[if lt IE 7]>', $test);
     }
 
@@ -453,5 +439,5 @@ document.write(bar.strlen());');
 
 // Call Zend_View_Helper_HeadScriptTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_HeadScriptTest::main") {
-    Zend_View_Helper_HeadScriptTest::main();
+    \Zend_View_Helper_HeadScriptTest::main();
 }

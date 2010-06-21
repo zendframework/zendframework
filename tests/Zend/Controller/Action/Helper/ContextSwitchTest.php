@@ -21,6 +21,17 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Controller\Action\Helper;
+use Zend\Controller\Action\HelperBroker;
+use Zend\Layout;
+use Zend\Controller\Action\Helper;
+use Zend\Controller\Action;
+use Zend\Controller;
+use Zend\Config;
+
+/**
  * Test class for Zend_Controller_Action_Helper_ContextSwitch.
  *
  * @category   Zend
@@ -32,20 +43,8 @@
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_TestCase
+class ContextSwitchTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_ContextSwitchTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -55,30 +54,30 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
      */
     public function setUp()
     {
-        Zend_Controller_Action_Helper_ContextSwitchTest_LayoutOverride::resetMvcInstance();
-        Zend_Controller_Action_HelperBroker::resetHelpers();
+        \Zend\Layout\Layout::resetMvcInstance();
+        HelperBroker\HelperBroker::resetHelpers();
 
-        $this->front = Zend_Controller_Front::getInstance();
+        $this->front = Controller\Front::getInstance();
         $this->front->resetInstance();
         $this->front->addModuleDirectory(dirname(__FILE__) . '/../../_files/modules');
 
-        $this->layout = Zend_Layout::startMvc();
+        $this->layout = Layout\Layout::startMvc();
 
-        $this->helper = new Zend_Controller_Action_Helper_ContextSwitch();
-        Zend_Controller_Action_HelperBroker::addHelper($this->helper);
+        $this->helper = new Helper\ContextSwitch();
+        HelperBroker\HelperBroker::addHelper($this->helper);
 
-        $this->request = new Zend_Controller_Request_Http();
-        $this->response = new Zend_Controller_Response_Cli();
+        $this->request = new \Zend\Controller\Request\HTTP();
+        $this->response = new \Zend\Controller\Response\Cli();
 
         $this->front->setRequest($this->request)
                     ->setResponse($this->response)
                     ->addControllerDirectory(dirname(__FILE__));
 
-        $this->view = new Zend_View();
-        $this->viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+        $this->view = new \Zend\View\View();
+        $this->viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
         $this->viewRenderer->setView($this->view);
 
-        $this->controller = new Zend_Controller_Action_Helper_ContextSwitchTestController(
+        $this->controller = new ContextSwitchTestController(
             $this->request,
             $this->response,
             array()
@@ -128,14 +127,14 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
         try {
             $this->helper->setSuffix('foobar', 'foobar');
             $this->fail('setSuffix() should throw exception with invalid context type');
-        } catch (Zend_Controller_Action_Exception $e) {
+        } catch (Action\Exception $e) {
             $this->assertContains('Cannot set suffix', $e->getMessage());
         }
 
         try {
             $this->helper->getSuffix('foobar');
             $this->fail('getSuffix() should throw exception with invalid context type');
-        } catch (Zend_Controller_Action_Exception $e) {
+        } catch (Action\Exception $e) {
             $this->assertContains('Cannot retrieve suffix', $e->getMessage());
         }
     }
@@ -170,7 +169,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
         try {
             $this->helper->addHeader('xml', 'Content-Type', 'application/xml');
             $this->fail('addHeader() should raise exception for existing headers');
-        } catch (Zend_Controller_Exception $e) {
+        } catch (Controller\Exception $e) {
             $this->assertContains('already exists', $e->getMessage());
         }
     }
@@ -213,56 +212,56 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
         try {
             $this->helper->addHeader('foobar', 'foobar', 'baz');
             $this->fail('addHeader() should throw exception with invalid context type');
-        } catch (Zend_Controller_Action_Exception $e) {
+        } catch (Action\Exception $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
         try {
             $this->helper->setHeader('foobar', 'foobar', 'baz');
             $this->fail('setHeader() should throw exception with invalid context type');
-        } catch (Zend_Controller_Action_Exception $e) {
+        } catch (Action\Exception $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
         try {
             $this->helper->getHeader('foobar', 'Content-Type');
             $this->fail('getHeader() should throw exception with invalid context type');
-        } catch (Zend_Controller_Action_Exception $e) {
+        } catch (Action\Exception $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
         try {
             $this->helper->getHeaders('foobar');
             $this->fail('getHeaders() should throw exception with invalid context type');
-        } catch (Zend_Controller_Action_Exception $e) {
+        } catch (Action\Exception $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
         try {
             $this->helper->addHeaders('foobar', array('X-Foo' => 'Bar'));
             $this->fail('addHeaders() should throw exception with invalid context type');
-        } catch (Zend_Controller_Action_Exception $e) {
+        } catch (Action\Exception $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
         try {
             $this->helper->setHeaders('foobar', array('X-Foo' => 'Bar'));
             $this->fail('setHeaders() should throw exception with invalid context type');
-        } catch (Zend_Controller_Action_Exception $e) {
+        } catch (Action\Exception $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
         try {
             $this->helper->removeHeader('foobar', 'X-Foo');
             $this->fail('removeHeader() should throw exception with invalid context type');
-        } catch (Zend_Controller_Action_Exception $e) {
+        } catch (Action\Exception $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
         try {
             $this->helper->clearHeaders('foobar');
             $this->fail('clearHeaders() should throw exception with invalid context type');
-        } catch (Zend_Controller_Action_Exception $e) {
+        } catch (Action\Exception $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
     }
@@ -324,7 +323,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
         try {
             $this->helper->addContext('xml', array());
             $this->fail('Shold not be able to add context if already exists');
-        } catch (Zend_Controller_Exception $e) {
+        } catch (Controller\Exception $e) {
             $this->assertContains('exists', $e->getMessage());
         }
     }
@@ -425,7 +424,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
         try {
             $this->helper->setDefaultContext('foobar');
             $this->fail('setDefaultContext() should raise exception if context does not exist');
-        } catch (Zend_Controller_Action_Exception $e) {
+        } catch (Action\Exception $e) {
             $this->assertContains('Cannot set default context', $e->getMessage());
         }
     }
@@ -467,7 +466,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
         try {
             $this->helper->initContext();
             $this->fail('Invalid contexts array should cause failure');
-        } catch (Zend_Controller_Exception $e) {
+        } catch (Controller\Exception $e) {
             $this->assertContains('Invalid', $e->getMessage());
         }
         $this->checkNothingIsDone();
@@ -667,7 +666,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
         $this->assertTrue($found, 'JSON content type header not found');
 
         $body = $this->response->getBody();
-        $result = Zend_Json::decode($body);
+        $result = \Zend\JSON\JSON::decode($body);
         $this->assertTrue(is_array($result), var_export($body, 1));
         $this->assertTrue(isset($result['foo']));
         $this->assertTrue(isset($result['bar']));
@@ -813,21 +812,21 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
 
     public function testCanSetOptionsViaConfig()
     {
-        $config = new Zend_Config($this->getOptions());
+        $config = new Config\Config($this->getOptions());
         $this->helper->setConfig($config);
         $this->checkOptionsAreSet();
     }
 
     public function testOptionsPassedToConstructorShouldSetInstanceState()
     {
-        $this->helper = new Zend_Controller_Action_Helper_ContextSwitch($this->getOptions());
+        $this->helper = new Helper\ContextSwitch($this->getOptions());
         $this->checkOptionsAreSet();
     }
 
     public function testConfigPassedToConstructorShouldSetInstanceState()
     {
-        $config = new Zend_Config($this->getOptions());
-        $this->helper = new Zend_Controller_Action_Helper_ContextSwitch($config);
+        $config = new Config\Config($this->getOptions());
+        $this->helper = new Helper\ContextSwitch($config);
         $this->checkOptionsAreSet();
     }
 
@@ -839,7 +838,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
         try {
             $this->helper->setAutoJsonSerialization(true);
             $this->helper->postJsonContext();
-        } catch(Zend_Controller_Action_Exception $zcae) {
+        } catch(Action\Exception $zcae) {
             $this->fail('Exception should be throw when view does not implement getVars() method');
         }
     }
@@ -849,14 +848,14 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
      */
     public function testPostJsonContextThrowsExceptionWhenGetVarsMethodsDoesntExist()
     {
-        $view = new Zend_Controller_Action_Helper_ContextSwitchText_CustomView();
+        $view = new CustomView();
         $this->viewRenderer->setView($view);
 
         try {
             $this->helper->setAutoJsonSerialization(true);
             $this->helper->postJsonContext();
             $this->fail('Exception should be throw when view does not implement getVars() method');
-        } catch(Zend_Controller_Action_Exception $zcae) {
+        } catch(Action\Exception $zcae) {
         }
     }
 
@@ -902,7 +901,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
     }
 }
 
-class Zend_Controller_Action_Helper_ContextSwitchTestController extends Zend_Controller_Action
+class ContextSwitchTestController extends Action\Action
 {
     public $contextSwitch;
 
@@ -937,15 +936,8 @@ class Zend_Controller_Action_Helper_ContextSwitchTestController extends Zend_Con
     }
 }
 
-class Zend_Controller_Action_Helper_ContextSwitchTest_LayoutOverride extends Zend_Layout
-{
-    public static function resetMvcInstance()
-    {
-        self::$_mvcInstance = null;
-    }
-}
 
-class Zend_Controller_Action_Helper_ContextSwitchText_CustomView implements Zend_View_Interface
+class CustomView implements \Zend\View\ViewInterface
 {
     public function getEngine()
     {}

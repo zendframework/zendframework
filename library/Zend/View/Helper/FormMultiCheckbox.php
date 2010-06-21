@@ -21,16 +21,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper to generate a set of checkbox button elements
  *
- * @uses       Zend_View_Helper_FormRadio
+ * @uses       \Zend\View\Helper\FormRadio
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_FormMultiCheckbox extends Zend_View_Helper_FormRadio
+class FormMultiCheckbox extends FormRadio
 {
     /**
      * Input type to use
@@ -62,9 +67,11 @@ class Zend_View_Helper_FormMultiCheckbox extends Zend_View_Helper_FormRadio
      *
      * @return string The radio buttons XHTML.
      */
-    public function formMultiCheckbox($name, $value = null, $attribs = null,
-        $options = null, $listsep = "<br />\n")
+    public function direct($name = null, $value = null, $attribs = null, $options = null, $listsep = "<br />\n")
     {
-        return $this->formRadio($name, $value, $attribs, $options, $listsep);
+        if ($name == null) {
+            throw new \InvalidArgumentException('FormMultiCheckbox: missing argument. $name is required in formMultiCheckbox($name, $value = null, $attribs = null, $options = null, $listsep = "<br />\n")');
+        }
+        return parent::direct($name, $value, $attribs, $options, $listsep);
     }
 }

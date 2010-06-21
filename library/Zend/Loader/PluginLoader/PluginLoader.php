@@ -122,20 +122,32 @@ class PluginLoader implements PluginLoaderInterface
      * Format prefix for internal use
      *
      * @param  string $prefix
+     * @param  bool $namespaced Whether the paths are namespaced or prefixed; namespaced by default
      * @return string
      */
-    protected function _formatPrefix($prefix)
+    protected function _formatPrefix($prefix, $namespaced = true)
     {
         if($prefix == "") {
             return $prefix;
         }
 
-        $last = strlen($prefix) - 1;
-        if ($prefix{$last} == '\\') {
-            return $prefix;
-        }
 
-        return rtrim($prefix, '\\') . '\\';
+        switch ($namespaced) {
+            case true:
+                $last = strlen($prefix) - 1;
+                if ($prefix{$last} == '\\') {
+                    return $prefix;
+                }
+
+                return $prefix . '\\';
+            case false:
+                $last = strlen($prefix) - 1;
+                if ($prefix{$last} == '_') {
+                    return $prefix;
+                }
+
+                return $prefix . '_';
+        }
     }
 
     /**
@@ -143,15 +155,16 @@ class PluginLoader implements PluginLoaderInterface
      *
      * @param string $prefix
      * @param string $path
+     * @param  bool $namespaced Whether the paths are namespaced or prefixed; namespaced by default
      * @return \Zend\Loader\PluginLoader\PluginLoader
      */
-    public function addPrefixPath($prefix, $path)
+    public function addPrefixPath($prefix, $path, $namespaced = true)
     {
         if (!is_string($prefix) || !is_string($path)) {
             throw new Exception('Zend\\Loader\\PluginLoader::addPrefixPath() method only takes strings for prefix and path.');
         }
 
-        $prefix = $this->_formatPrefix($prefix);
+        $prefix = $this->_formatPrefix($prefix, $namespaced);
         $path   = rtrim($path, '/\\') . '/';
 
         if ($this->_useStaticRegistry) {

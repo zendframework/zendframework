@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Paginator;
+
+/**
  * @uses       LimitIterator
  * @uses       Serializable
  * @category   Zend
@@ -27,7 +32,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Paginator_SerializableLimitIterator extends LimitIterator implements Serializable
+class SerializableLimitIterator extends \LimitIterator implements \Serializable
 {
 
     /**
@@ -52,7 +57,7 @@ class Zend_Paginator_SerializableLimitIterator extends LimitIterator implements 
      * @param int $count Maximum number of elements to show or -1 for all
      * @see LimitIterator::__construct
      */
-    public function __construct (Iterator $it, $offset=0, $count=-1)
+    public function __construct (\Iterator $it, $offset=0, $count=-1)
     {
         parent::__construct($it, $offset, $count);
         $this->_offset = $offset;

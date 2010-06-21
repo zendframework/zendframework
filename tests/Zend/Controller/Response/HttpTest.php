@@ -21,14 +21,10 @@
  */
 
 /**
- * Test helper
+ * @namespace
  */
-
-// Call Zend_Controller_Response_HttpTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Controller_Response_HttpTest::main');
-}
-
+namespace ZendTest\Controller\Response;
+use Zend\Controller\Response;
 
 /**
  * @category   Zend
@@ -39,29 +35,16 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Controller
  * @group      Zend_Controller_Response
  */
-class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
+class HTTPTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_Http_Response
+     * @var Zend_HTTP_Response
      */
     protected $_response;
 
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Response_HttpTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
-        $this->_response = new Zend_Controller_Response_Http();
+        $this->_response = new Response\HTTP();
         $this->_response->headersSentThrowsException = false;
     }
 
@@ -185,11 +168,11 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(empty($headers));
     }
 
-    public function testSetHttpResponseCode()
+    public function testSetHTTPResponseCode()
     {
-        $this->assertEquals(200, $this->_response->getHttpResponseCode());
-        $this->_response->setHttpResponseCode(302);
-        $this->assertEquals(302, $this->_response->getHttpResponseCode());
+        $this->assertEquals(200, $this->_response->getHTTPResponseCode());
+        $this->_response->setHTTPResponseCode(302);
+        $this->assertEquals(302, $this->_response->getHTTPResponseCode());
     }
 
     public function testSetBody()
@@ -215,7 +198,7 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
 
     /**
      * SKIPPED - This test is untestable in the CLI environment.  PHP ignores all
-     * header() calls (which are used by Http_Abstract::setHeader()), thus, anything
+     * header() calls (which are used by HTTP_Abstract::setHeader()), thus, anything
      * that is expected to be found in http headers when inserted via header(), will
      * not be found.  In addition, headers_sent() should always return false, until
      * real output is sent to the console.
@@ -225,7 +208,7 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
 
         $skipHeadersTest = headers_sent();
         if ($skipHeadersTest) {
-            $this->markTestSkipped('Unable to run Zend_Controller_Response_Http::__toString() test as headers have already been sent');
+            $this->markTestSkipped('Unable to run Zend_Controller_Response_HTTP::__toString() test as headers have already been sent');
             return;
         }
 
@@ -265,7 +248,7 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
 
     public function testGetException()
     {
-        $e = new Exception('Test');
+        $e = new \Exception('Test');
         $this->_response->setException($e);
 
         $test  = $this->_response->getException();
@@ -280,7 +263,7 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
 
     public function testSendResponseWithExceptions()
     {
-        $e = new Exception('Test exception rendering');
+        $e = new \Exception('Test exception rendering');
         $this->_response->setException($e);
         $this->_response->renderExceptions(true);
 
@@ -293,21 +276,21 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
     public function testSetResponseCodeThrowsExceptionWithBadCode()
     {
         try {
-            $this->_response->setHttpResponseCode(99);
+            $this->_response->setHTTPResponseCode(99);
             $this->fail('Should not accept response codes < 100');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
 
         try {
-            $this->_response->setHttpResponseCode(600);
+            $this->_response->setHTTPResponseCode(600);
             $this->fail('Should not accept response codes > 599');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
 
         try {
-            $this->_response->setHttpResponseCode('bogus');
+            $this->_response->setHTTPResponseCode('bogus');
             $this->fail('Should not accept non-integer response codes');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
@@ -326,7 +309,7 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
         try {
             $this->_response->canSendHeaders(true);
             $this->fail('canSendHeaders() should throw exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             var_dump($e->getMessage());
             $this->assertRegExp('/headers already sent in .+, line \d+$/', $e->getMessage());
         }
@@ -557,50 +540,50 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
 
     public function testIsRedirectWhen3xxResponseCodeSet()
     {
-        $this->_response->setHttpResponseCode(301);
+        $this->_response->setHTTPResponseCode(301);
         $this->assertTrue($this->_response->isRedirect());
     }
 
     public function testIsNotRedirectWithSufficientlyLarge3xxResponseCodeSet()
     {
-        $this->_response->setHttpResponseCode(309);
+        $this->_response->setHTTPResponseCode(309);
         $this->assertFalse($this->_response->isRedirect());
     }
 
     public function testHasExceptionOfType()
     {
-        $this->assertFalse($this->_response->hasExceptionOfType('Zend_Controller_Response_Exception'));
-        $this->_response->setException(new Zend_Controller_Response_Exception());
-        $this->assertTrue($this->_response->hasExceptionOfType('Zend_Controller_Response_Exception'));
+        $this->assertFalse($this->_response->hasExceptionOfType('Zend\Controller\Response\Exception'));
+        $this->_response->setException(new Response\Exception());
+        $this->assertTrue($this->_response->hasExceptionOfType('Zend\Controller\Response\Exception'));
     }
 
     public function testHasExceptionOfMessage()
     {
         $this->assertFalse($this->_response->hasExceptionOfMessage('FooBar'));
-        $this->_response->setException(new Zend_Controller_Response_Exception('FooBar'));
+        $this->_response->setException(new Response\Exception('FooBar'));
         $this->assertTrue($this->_response->hasExceptionOfMessage('FooBar'));
     }
 
     public function testHasExceptionOfCode()
     {
         $this->assertFalse($this->_response->hasExceptionOfCode(200));
-        $this->_response->setException(new Zend_Controller_Response_Exception('FooBar', 200));
+        $this->_response->setException(new Response\Exception('FooBar', 200));
         $this->assertTrue($this->_response->hasExceptionOfCode(200));
     }
 
     public function testGetExceptionByType()
     {
-        $this->assertFalse($this->_response->getExceptionByType('Zend_Controller_Response_Exception'));
-        $this->_response->setException(new Zend_Controller_Response_Exception());
-        $exceptions = $this->_response->getExceptionByType('Zend_Controller_Response_Exception');
+        $this->assertFalse($this->_response->getExceptionByType('Zend\Controller\Response\Exception'));
+        $this->_response->setException(new Response\Exception());
+        $exceptions = $this->_response->getExceptionByType('Zend\Controller\Response\Exception');
         $this->assertTrue(0 < count($exceptions));
-        $this->assertTrue($exceptions[0] instanceof Zend_Controller_Response_Exception);
+        $this->assertTrue($exceptions[0] instanceof Response\Exception);
     }
 
     public function testGetExceptionByMessage()
     {
         $this->assertFalse($this->_response->getExceptionByMessage('FooBar'));
-        $this->_response->setException(new Zend_Controller_Response_Exception('FooBar'));
+        $this->_response->setException(new Response\Exception('FooBar'));
         $exceptions = $this->_response->getExceptionByMessage('FooBar');
         $this->assertTrue(0 < count($exceptions));
         $this->assertEquals('FooBar', $exceptions[0]->getMessage());
@@ -609,7 +592,7 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
     public function testGetExceptionByCode()
     {
         $this->assertFalse($this->_response->getExceptionByCode(200));
-        $this->_response->setException(new Zend_Controller_Response_Exception('FooBar', 200));
+        $this->_response->setException(new Response\Exception('FooBar', 200));
         $exceptions = $this->_response->getExceptionByCode(200);
         $this->assertTrue(0 < count($exceptions));
         $this->assertEquals(200, $exceptions[0]->getCode());
@@ -631,10 +614,5 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class Zend_Controller_Response_HttpTest_Action extends Zend_Controller_Action
+class Action extends \Zend\Controller\Action\Action
 {}
-
-// Call Zend_Controller_Response_HttpTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Response_HttpTest::main") {
-    Zend_Controller_Response_HttpTest::main();
-}

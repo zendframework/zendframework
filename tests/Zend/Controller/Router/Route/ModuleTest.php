@@ -20,17 +20,12 @@
  * @version    $Id$
  */
 
-/** Test helper */
-
-
-/** Zend_Controller_Router_Route_Module */
-
-/** Zend_Controller_Front */
-
-// Call Zend_Controller_Router_Route_ModuleTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Router_Route_ModuleTest::main");
-}
+/**
+ * @namespace
+ */
+namespace ZendTest\Controller\Router\Route;
+use Zend\Controller\Router\Route;
+use Zend\Config;
 
 /**
  * @category   Zend
@@ -41,29 +36,17 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller
  * @group      Zend_Controller_Router
  */
-class Zend_Controller_Router_Route_ModuleTest extends PHPUnit_Framework_TestCase
+class ModuleTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_request;
     protected $_dispatcher;
     protected $route;
 
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Router_Route_ModuleTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function setUp()
     {
-        $front = Zend_Controller_Front::getInstance();
+        $front = \Zend\Controller\Front::getInstance();
         $front->resetInstance();
         $front->setParam('noErrorHandler', true)
               ->setParam('noViewRenderer', true);
@@ -81,10 +64,10 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit_Framework_TestCase
             'module'     => 'default'
         );
 
-        $this->_request = new Zend_Controller_Request_Http();
+        $this->_request = new \Zend\Controller\Request\HTTP();
         $front->setRequest($this->_request);
 
-        $this->route = new Zend_Controller_Router_Route_Module($defaults, $this->_dispatcher, $this->_request);
+        $this->route = new Route\Module($defaults, $this->_dispatcher, $this->_request);
     }
 
     public function testModuleMatch()
@@ -172,7 +155,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit_Framework_TestCase
         $this->_request->setControllerKey('c');
         $this->_request->setActionKey('a');
 
-        $this->route = new Zend_Controller_Router_Route_Module(array(), $this->_dispatcher, $this->_request);
+        $this->route = new Route\Module(array(), $this->_dispatcher, $this->_request);
 
         $values = $this->route->match('mod/ctrl');
 
@@ -418,10 +401,10 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $config = new Zend_Config($routeConf);
-        $route = Zend_Controller_Router_Route_Module::getInstance($config);
+        $config = new Config\Config($routeConf);
+        $route = Route\Module::getInstance($config);
 
-        $this->assertType('Zend_Controller_Router_Route_Module', $route);
+        $this->assertType('Zend\Controller\Router\Route\Module', $route);
     }
 
     public function testEncode()
@@ -454,7 +437,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit_Framework_TestCase
 
     public function testGetInstanceMatching()
     {
-        $this->route = Zend_Controller_Router_Route_Module::getInstance(new Zend_Config(array()));
+        $this->route = Route\Module::getInstance(new Config\Config(array()));
 
         $this->_request->setModuleKey('m');
         $this->_request->setControllerKey('c');
@@ -482,9 +465,4 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit_Framework_TestCase
         $url = $this->route->assemble($params);
         $this->assertNotContains('"><script>alert(11639)<', $url);
     }
-}
-
-// Call Zend_Controller_Router_Route_ModuleTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Router_Route_ModuleTest::main") {
-    Zend_Controller_Router_Route_ModuleTest::main();
 }

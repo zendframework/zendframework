@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_HtmlPageTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_HtmlPageTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
 
 /**
  * @category   Zend
@@ -36,25 +34,12 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_HtmlPageTest extends PHPUnit_Framework_TestCase
+class HtmlPageTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_HtmlPage
      */
     public $helper;
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_HtmlPageTest");
-        PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -64,8 +49,8 @@ class Zend_View_Helper_HtmlPageTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new Zend_View();
-        $this->helper = new Zend_View_Helper_HtmlPage();
+        $this->view = new \Zend\View\View();
+        $this->helper = new \Zend\View\Helper\HtmlPage();
         $this->helper->setView($this->view);
     }
 
@@ -76,7 +61,7 @@ class Zend_View_Helper_HtmlPageTest extends PHPUnit_Framework_TestCase
 
     public function testMakeHtmlPage()
     {
-        $htmlPage = $this->helper->htmlPage('/path/to/page.html');
+        $htmlPage = $this->helper->direct('/path/to/page.html');
 
         $objectStartElement = '<object data="/path/to/page.html"'
                             . ' type="text/html"'
@@ -85,9 +70,4 @@ class Zend_View_Helper_HtmlPageTest extends PHPUnit_Framework_TestCase
         $this->assertContains($objectStartElement, $htmlPage);
         $this->assertContains('</object>', $htmlPage);
     }
-}
-
-// Call Zend_View_Helper_HtmlPageTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_HtmlPageTest::main") {
-    Zend_View_Helper_HtmlPageTest::main();
 }

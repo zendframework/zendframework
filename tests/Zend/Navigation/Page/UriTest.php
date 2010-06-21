@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Navigation\Page;
+use Zend\Navigation\Page;
+use Zend\Navigation;
 
 /**
  * Tests the class Zend_Navigation_Page_Uri
@@ -31,11 +37,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Navigation
  */
-class Zend_Navigation_Page_UriTest extends PHPUnit_Framework_TestCase
+class UriTest extends \PHPUnit_Framework_TestCase
 {
     public function testUriOptionAsString()
     {
-        $page = new Zend_Navigation_Page_Uri(array(
+        $page = new Page\Uri(array(
             'label' => 'foo',
             'uri' => '#'
         ));
@@ -45,7 +51,7 @@ class Zend_Navigation_Page_UriTest extends PHPUnit_Framework_TestCase
 
     public function testUriOptionAsNull()
     {
-        $page = new Zend_Navigation_Page_Uri(array(
+        $page = new Page\Uri(array(
             'label' => 'foo',
             'uri' => null
         ));
@@ -56,10 +62,10 @@ class Zend_Navigation_Page_UriTest extends PHPUnit_Framework_TestCase
     public function testUriOptionAsInteger()
     {
         try {
-            $page = new Zend_Navigation_Page_Uri(array('uri' => 1337));
+            $page = new Page\Uri(array('uri' => 1337));
             $this->fail('An invalid \'uri\' was given, but ' .
                         'a Zend_Navigation_Exception was not thrown');
-        } catch (Zend_Navigation_Exception $e) {
+        } catch (Navigation\Exception $e) {
 
         }
     }
@@ -67,20 +73,20 @@ class Zend_Navigation_Page_UriTest extends PHPUnit_Framework_TestCase
     public function testUriOptionAsObject()
     {
         try {
-            $uri = new stdClass();
+            $uri = new \stdClass();
             $uri->foo = 'bar';
 
-            $page = new Zend_Navigation_Page_Uri(array('uri' => $uri));
+            $page = new Page\Uri(array('uri' => $uri));
             $this->fail('An invalid \'uri\' was given, but ' .
                         'a Zend_Navigation_Exception was not thrown');
-        } catch (Zend_Navigation_Exception $e) {
+        } catch (Navigation\Exception $e) {
 
         }
     }
 
     public function testSetAndGetUri()
     {
-        $page = new Zend_Navigation_Page_Uri(array(
+        $page = new Page\Uri(array(
             'label' => 'foo',
             'uri' => '#'
         ));
@@ -94,7 +100,7 @@ class Zend_Navigation_Page_UriTest extends PHPUnit_Framework_TestCase
     {
         $uri = 'spotify:album:4YzcWwBUSzibRsqD9Sgu4A';
 
-        $page = new Zend_Navigation_Page_Uri();
+        $page = new Page\Uri();
         $page->setUri($uri);
 
         $this->assertEquals($uri, $page->getHref());

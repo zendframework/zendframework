@@ -21,13 +21,18 @@
  */
 
 /**
- * @uses       Zend_Controller_Exception
+ * @namespace
+ */
+namespace Zend\Controller\Request;
+
+/**
+ * @uses       \Zend\Controller\Exception
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Request
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Controller_Request_Exception extends Zend_Controller_Exception
+class Exception extends \Zend\Controller\Exception
 {}
 

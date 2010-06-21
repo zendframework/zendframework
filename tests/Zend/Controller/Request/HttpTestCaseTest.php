@@ -20,16 +20,21 @@
  * @version    $Id$
  */
 
-// Call Zend_Controller_Request_HttpTestCaseTest::main() if this source file is executed directly.
+/**
+ * @namespace
+ */
+namespace ZendTest\Controller\Request;
+
+// Call Zend_Controller_Request_HTTPTestCaseTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Request_HttpTestCaseTest::main");
+    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Request_HTTPTestCaseTest::main");
 }
 
 
-/** Zend_Controller_Request_HttpTestCase */
+/** Zend_Controller_Request_HTTPTestCase */
 
 /**
- * Test class for Zend_Controller_Request_HttpTestCase.
+ * Test class for Zend_Controller_Request_HTTPTestCase.
  *
  * @category   Zend
  * @package    Zend_Controller
@@ -39,7 +44,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller
  * @group      Zend_Controller_Request
  */
-class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCase
+class HTTPTestCaseTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -48,8 +53,8 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Request_HttpTestCaseTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Controller_Request_HTTPTestCaseTest");
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
@@ -60,7 +65,7 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
      */
     public function setUp()
     {
-        $this->request = new Zend_Controller_Request_HttpTestCase();
+        $this->request = new \Zend\Controller\Request\HTTPTestCase();
         $_GET    = array();
         $_POST   = array();
         $_COOKIE = array();
@@ -225,11 +230,11 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
         foreach ($headers as $key => $value) {
             $this->assertEquals($value, $this->request->getHeader($key));
         }
-        $this->request->setHeader('X-Requested-With', 'XMLHttpRequest');
+        $this->request->setHeader('X-Requested-With', 'XMLHTTPRequest');
         $test = $this->request->getHeaders();
         $this->assertTrue(is_array($test));
         $this->assertEquals(3, count($test));
-        $this->assertEquals('XMLHttpRequest', $this->request->getHeader('X-Requested-With'));
+        $this->assertEquals('XMLHTTPRequest', $this->request->getHeader('X-Requested-With'));
     }
 
     public function testShouldAllowClearingRequestHeaders()
@@ -310,7 +315,7 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
     }
 }
 
-// Call Zend_Controller_Request_HttpTestCaseTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Request_HttpTestCaseTest::main") {
-    Zend_Controller_Request_HttpTestCaseTest::main();
+// Call Zend_Controller_Request_HTTPTestCaseTest::main() if this source file is executed directly.
+if (PHPUnit_MAIN_METHOD == "Zend_Controller_Request_HTTPTestCaseTest::main") {
+    \Zend_Controller_Request_HTTPTestCaseTest::main();
 }

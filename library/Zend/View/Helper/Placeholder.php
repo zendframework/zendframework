@@ -21,19 +21,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper for passing data between otherwise segregated Views. It's called
  * Placeholder to make its typical usage obvious, but can be used just as easily
  * for non-Placeholder things. That said, the support for this is only
  * guaranteed to effect subsequently rendered templates, and of course Layouts.
  *
- * @uses       Zend_View_Helper_Abstract.php
- * @uses       Zend_View_Helper_Placeholder_Registry
+ * @uses       \Zend\View\Helper\AbstractHelper.php
+ * @uses       \Zend\View\Helper\Placeholder\Registry\Registry
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_Placeholder extends Zend_View_Helper_Abstract
+class Placeholder extends \Zend\View\Helper\AbstractHelper
 {
     /**
      * Placeholder items
@@ -42,7 +47,7 @@ class Zend_View_Helper_Placeholder extends Zend_View_Helper_Abstract
     protected $_items = array();
 
     /**
-     * @var Zend_View_Helper_Placeholder_Registry
+     * @var \Zend\View\Helper\Placeholder\Registry\Registry
      */
     protected $_registry;
 
@@ -55,7 +60,7 @@ class Zend_View_Helper_Placeholder extends Zend_View_Helper_Abstract
      */
     public function __construct()
     {
-        $this->_registry = Zend_View_Helper_Placeholder_Registry::getRegistry();
+        $this->_registry = Placeholder\Registry\Registry::getRegistry();
     }
 
 
@@ -63,10 +68,14 @@ class Zend_View_Helper_Placeholder extends Zend_View_Helper_Abstract
      * Placeholder helper
      *
      * @param  string $name
-     * @return Zend_View_Helper_Placeholder_Container_Abstract
+     * @return \Zend\View\Helper\Placeholder\Container\AbstractContainer
      */
-    public function placeholder($name)
+    public function direct($name = null)
     {
+        if ($name == null) {
+            throw new \InvalidArgumentException('Placeholder: missing argument.  $name is required by placeholder($name)');
+        }
+        
         $name = (string) $name;
         return $this->_registry->getContainer($name);
     }
@@ -74,7 +83,7 @@ class Zend_View_Helper_Placeholder extends Zend_View_Helper_Abstract
     /**
      * Retrieve the registry
      *
-     * @return Zend_View_Helper_Placeholder_Registry
+     * @return \Zend\View\Helper\Placeholder\Registry\Registry
      */
     public function getRegistry()
     {

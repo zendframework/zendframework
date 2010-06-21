@@ -21,15 +21,20 @@
  */
 
 /**
- * @uses       Zend_Json
- * @uses       Zend_View_Helper_Abstract
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
+ * @uses       \Zend\JSON\JSON
+ * @uses       \Zend\View\Helper\AbstractHelper
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_View_Helper_HtmlElement extends Zend_View_Helper_Abstract
+abstract class HtmlElement extends AbstractHelper
 {
     /**
      * EOL character
@@ -92,7 +97,7 @@ abstract class Zend_View_Helper_HtmlElement extends Zend_View_Helper_Abstract
                 // Don't escape event attributes; _do_ substitute double quotes with singles
                 if (!is_scalar($val)) {
                     // non-scalar data should be cast to JSON first
-                    $val = Zend_Json::encode($val);
+                    $val = \Zend\JSON\JSON::encode($val);
                 }
                 $val = preg_replace('/"([^"]*)":/', '$1:', $val);
             } else {

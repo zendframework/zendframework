@@ -735,6 +735,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
      */
     public function testUsingFallbackAutoloaderWithModulesShouldNotResultInFrontcontrollerNotFoundWarning()
     {
+        require_once dirname(__FILE__) . '/../_files/Zf7696Bootstrap.php';
         $this->autoloader->setFallbackAutoloader(true);
         $options = array(
             'Resources' => array(

@@ -36,7 +36,7 @@ namespace ZendTest\View\_stubs\HelperDir2;
  */
 class Stub1
 {
-    public function stub1()
+    public function direct()
     {
         return 'foo';
     }

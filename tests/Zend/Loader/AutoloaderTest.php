@@ -382,6 +382,22 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(class_exists($class, false));
     }
 
+    /**
+     * @group ZF-10024
+     */
+    public function testClosuresRegisteredWithAutoloaderShouldBeUtilized()
+    {
+        if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+            $this->markTestSkipped(__METHOD__ . ' requires PHP version 5.3.0 or greater');
+        }
+
+        $this->autoloader->pushAutoloader(function($class) {
+            require_once dirname(__FILE__) . '/_files/AutoloaderClosure.php';
+        });
+        $test = new AutoloaderTest_AutoloaderClosure();
+        $this->assertTrue($test instanceof AutoloaderTest_AutoloaderClosure);
+    }
+
     public function addTestIncludePath()
     {
         set_include_path(dirname(__FILE__) . '/_files/' . PATH_SEPARATOR . $this->includePath);

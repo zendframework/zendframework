@@ -20,29 +20,34 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Navigation;
+
+/**
  * A simple container class for {@link Zend_Navigation_Page} pages
  *
- * @uses      Zend_Navigation_Container
- * @uses      Zend_Navigation_Exception
+ * @uses      \Zend\Navigation\Container
+ * @uses      \Zend\Navigation\Exception
  * @category  Zend
  * @package   Zend_Navigation
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Navigation extends Zend_Navigation_Container
+class Navigation extends Container
 {
     /**
      * Creates a new navigation container
      *
-     * @param array|Zend_Config $pages    [optional] pages to add
-     * @throws Zend_Navigation_Exception  if $pages is invalid
+     * @param array|\Zend\Config\Config $pages    [optional] pages to add
+     * @throws \Zend\Navigation\Exception  if $pages is invalid
      */
     public function __construct($pages = null)
     {
-        if (is_array($pages) || $pages instanceof Zend_Config) {
+        if (is_array($pages) || $pages instanceof \Zend\Config\Config) {
             $this->addPages($pages);
         } elseif (null !== $pages) {
-            throw new Zend_Navigation_Exception(
+            throw new Exception(
                     'Invalid argument: $pages must be an array, an ' .
                     'instance of Zend_Config, or null');
         }

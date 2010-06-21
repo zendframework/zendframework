@@ -21,17 +21,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Navigation\Page;
+
+/**
  * Represents a page that is defined by specifying a URI
  *
- * @uses       Zend_Navigation_Exception
- * @uses       Zend_Navigation_Page
+ * @uses       \Zend\Navigation\Exception
+ * @uses       \Zend\Navigation\Page\Page
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage Page
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Navigation_Page_Uri extends Zend_Navigation_Page
+class Uri extends Page
 {
     /**
      * Page URI
@@ -44,13 +49,13 @@ class Zend_Navigation_Page_Uri extends Zend_Navigation_Page
      * Sets page URI
      *
      * @param  string $uri                page URI, must a string or null
-     * @return Zend_Navigation_Page_Uri   fluent interface, returns self
-     * @throws Zend_Navigation_Exception  if $uri is invalid
+     * @return \Zend\Navigation\Page\Uri   fluent interface, returns self
+     * @throws \Zend\Navigation\Exception  if $uri is invalid
      */
     public function setUri($uri)
     {
         if (null !== $uri && !is_string($uri)) {
-            throw new Zend_Navigation_Exception(
+            throw new \Zend\Navigation\Exception(
                     'Invalid argument: $uri must be a string or null');
         }
 

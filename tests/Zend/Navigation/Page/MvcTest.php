@@ -20,6 +20,13 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Navigation\Page;
+use Zend\Controller\Request;
+use Zend\Navigation\Page;
+use Zend\Navigation;
 
 /**
  * Tests the class Zend_Navigation_Page_Mvc
@@ -31,7 +38,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Navigation
  */
-class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
+class MvcTest extends \PHPUnit_Framework_TestCase
 {
     protected $_front;
     protected $_oldRequest;
@@ -39,12 +46,12 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->_front = Zend_Controller_Front::getInstance();
+        $this->_front = \Zend\Controller\Front::getInstance();
         $this->_oldRequest = $this->_front->getRequest();
         $this->_oldRouter = $this->_front->getRouter();
 
         $this->_front->resetInstance();
-        $this->_front->setRequest(new Zend_Controller_Request_Http());
+        $this->_front->setRequest(new Request\Http());
         $this->_front->getRouter()->addDefaultRoutes();
     }
 
@@ -53,14 +60,14 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
         if (null !== $this->_oldRequest) {
             $this->_front->setRequest($this->_oldRequest);
         } else {
-            $this->_front->setRequest(new Zend_Controller_Request_Http());
+            $this->_front->setRequest(new Request\Http());
         }
         $this->_front->setRouter($this->_oldRouter);
     }
 
     public function testHrefGeneratedByUrlHelperRequiresNoRoute()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Page\Mvc(array(
             'label' => 'foo',
             'action' => 'index',
             'controller' => 'index'
@@ -74,7 +81,7 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
 
     public function testHrefGeneratedIsRouteAware()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Page\Mvc(array(
             'label' => 'foo',
             'action' => 'myaction',
             'controller' => 'mycontroller',
@@ -86,7 +93,7 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
 
         $this->_front->getRouter()->addRoute(
             'myroute',
-            new Zend_Controller_Router_Route(
+            new \Zend\Controller\Router\Route\Route(
                 'lolcat/:action/:page',
                 array(
                     'module'     => 'default',
@@ -102,7 +109,7 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
 
     public function testIsActiveReturnsTrueOnIdenticalModuleControllerAction()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Page\Mvc(array(
             'label' => 'foo',
             'action' => 'index',
             'controller' => 'index'
@@ -119,7 +126,7 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
 
     public function testIsActiveReturnsFalseOnDifferentModuleControllerAction()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Page\Mvc(array(
             'label' => 'foo',
             'action' => 'bar',
             'controller' => 'index'
@@ -136,7 +143,7 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
 
     public function testIsActiveReturnsTrueOnIdenticalIncludingPageParams()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Page\Mvc(array(
             'label' => 'foo',
             'action' => 'view',
             'controller' => 'post',
@@ -158,7 +165,7 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
 
     public function testIsActiveReturnsTrueWhenRequestHasMoreParams()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Page\Mvc(array(
             'label' => 'foo',
             'action' => 'view',
             'controller' => 'post',
@@ -177,7 +184,7 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
 
     public function testIsActiveReturnsFalseWhenRequestHasLessParams()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Page\Mvc(array(
             'label' => 'foo',
             'action' => 'view',
             'controller' => 'post',
@@ -199,7 +206,7 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
 
     public function testActionAndControllerAccessors()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Page\Mvc(array(
             'label' => 'foo',
             'action' => 'index',
             'controller' => 'index'
@@ -224,7 +231,7 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
                     $msg = "'$invalid' is invalid for $setter(), but no ";
                     $msg .= 'Zend_Navigation_Exception was thrown';
                     $this->fail($msg);
-                } catch (Zend_Navigation_Exception $e) {
+                } catch (Navigation\Exception $e) {
 
                 }
             }
@@ -233,7 +240,7 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
 
     public function testModuleAndRouteAccessors()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Page\Mvc(array(
             'label' => 'foo',
             'action' => 'index',
             'controller' => 'index'
@@ -258,7 +265,7 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
                     $msg = "'$invalid' is invalid for $setter(), but no ";
                     $msg .= 'Zend_Navigation_Exception was thrown';
                     $this->fail($msg);
-                } catch (Zend_Navigation_Exception $e) {
+                } catch (Navigation\Exception $e) {
 
                 }
             }
@@ -267,7 +274,7 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
 
     public function testSetAndGetResetParams()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Page\Mvc(array(
             'label' => 'foo',
             'action' => 'index',
             'controller' => 'index'
@@ -288,7 +295,7 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
 
     public function testSetAndGetParams()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Page\Mvc(array(
             'label' => 'foo',
             'action' => 'index',
             'controller' => 'index'
@@ -328,7 +335,7 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
             'meaning' => 42
         );
 
-        $page = new Zend_Navigation_Page_Mvc($options);
+        $page = new Page\Mvc($options);
 
         $toArray = $page->toArray();
 
@@ -344,19 +351,16 @@ class Zend_Navigation_Page_MvcTest extends PHPUnit_Framework_TestCase
 
     public function testSpecifyingAnotherUrlHelperToGenerateHrefs()
     {
-        $path = dirname(dirname(__FILE__)) . '/_files/My/UrlHelper.php';
-        require_once $path;
+        $newHelper = new \ZendTest\Navigation\TestAsset\UrlHelper();
+        Page\Mvc::setUrlHelper($newHelper);
 
-        $newHelper = new My_UrlHelper();
-        Zend_Navigation_Page_Mvc::setUrlHelper($newHelper);
+        $page = new Page\Mvc();
 
-        $page = new Zend_Navigation_Page_Mvc();
-
-        $expected = My_UrlHelper::RETURN_URL;
+        $expected = \ZendTest\Navigation\TestAsset\UrlHelper::RETURN_URL;
         $actual = $page->getHref();
 
-        $old = Zend_Controller_Action_HelperBroker::getStaticHelper('Url');
-        Zend_Navigation_Page_Mvc::setUrlHelper($old);
+        $old = \Zend\Controller\Action\HelperBroker\HelperBroker::getStaticHelper('URL');
+        Page\Mvc::setUrlHelper($old);
 
         $this->assertEquals($expected, $actual);
     }

@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Navigation\TestAsset;
 
 /**
  * @category   Zend
@@ -28,11 +32,11 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class My_UrlHelper extends Zend_Controller_Action_Helper_Url
+class UrlHelper extends \Zend\Controller\Action\Helper\Url
 {
     const RETURN_URL = 'spotify:track:2nd6CTjR9zjHGT0QtpfLHe';
 
-    public function url($urlOptions = array(), $name = null, $reset = false, $encode = true)
+    public function __invoke($urlOptions = array(), $name = null, $reset = false, $encode = true)
     {
         return self::RETURN_URL;
     }

@@ -20,6 +20,12 @@
  * @version    $Id:$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Navigation;
+use Zend\Navigation\Page;
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_NavigationTest::main');
 }
@@ -37,7 +43,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Navigation
  */
-class Zend_NavigationTest extends PHPUnit_Framework_TestCase
+class NavigationTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var     Zend_Navigation
@@ -47,7 +53,7 @@ class Zend_NavigationTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->_navigation = new Zend_Navigation();
+        $this->_navigation = new \Zend\Navigation\Navigation();
     }
     
     protected function tearDown()
@@ -62,8 +68,8 @@ class Zend_NavigationTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_NavigationTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite("Zend_NavigationTest");
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
@@ -74,9 +80,9 @@ class Zend_NavigationTest extends PHPUnit_Framework_TestCase
      */
     public function testNavigationArraySortsCorrectly()
     {
-        $page1 = new Zend_Navigation_Page_Uri(array('uri' => 'page1'));
-        $page2 = new Zend_Navigation_Page_Uri(array('uri' => 'page2'));
-        $page3 = new Zend_Navigation_Page_Uri(array('uri' => 'page3'));
+        $page1 = new Page\Uri(array('uri' => 'page1'));
+        $page2 = new Page\Uri(array('uri' => 'page2'));
+        $page3 = new Page\Uri(array('uri' => 'page3'));
 
         $this->_navigation->setPages(array($page1, $page2, $page3));
 

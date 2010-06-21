@@ -21,21 +21,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Navigation\TestAsset;
+
+/**
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class My_InvalidPage
+class Container extends \Zend\Navigation\Container
 {
-    /**
-     * Returns the page's href
-     *
-     * @return string
-     */
-    public function getHref()
+    public function addPage($page)
     {
-        return '#';
+        parent::addPage($page);
+        $this->_pages = array();
     }
 }

@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Navigation;
+use Zend\Navigation\Page;
+use Zend\Navigation;
 
 /**
  * Tests Zend_Navigation_Page::factory()
@@ -32,113 +38,97 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Navigation
  */
-class Zend_Navigation_PageFactoryTest extends PHPUnit_Framework_TestCase
+class PageFactoryTest extends \PHPUnit_Framework_TestCase
 {
-    protected $_oldIncludePath;
 
-    protected function setUp()
-    {
-        // store old include path
-        $this->_oldIncludePath = get_include_path();
-
-        // add _files dir to include path
-        $addToPath = dirname(__FILE__) . '/_files';
-        set_include_path($addToPath . PATH_SEPARATOR . $this->_oldIncludePath);
-    }
-
-    protected function tearDown()
-    {
-        // reset include path
-        set_include_path($this->_oldIncludePath);
-    }
 
     public function testDetectMvcPage()
     {
         $pages = array(
-            Zend_Navigation_Page::factory(array(
+            Page\Page::factory(array(
                 'label' => 'MVC Page',
                 'action' => 'index'
             )),
-            Zend_Navigation_Page::factory(array(
+            Page\Page::factory(array(
                 'label' => 'MVC Page',
                 'controller' => 'index'
             )),
-            Zend_Navigation_Page::factory(array(
+            Page\Page::factory(array(
                 'label' => 'MVC Page',
                 'module' => 'index'
             )),
-            Zend_Navigation_Page::factory(array(
+            Page\Page::factory(array(
                 'label' => 'MVC Page',
                 'route' => 'home'
             ))
         );
 
-        $this->assertContainsOnly('Zend_Navigation_Page_Mvc', $pages);
+        $this->assertContainsOnly('Zend\Navigation\Page\Mvc', $pages);
     }
 
     public function testDetectUriPage()
     {
-        $page = Zend_Navigation_Page::factory(array(
+        $page = Page\Page::factory(array(
             'label' => 'URI Page',
             'uri' => '#'
         ));
 
-        $this->assertType('Zend_Navigation_Page_Uri', $page);
+        $this->assertType('Zend\Navigation\Page\Uri', $page);
     }
 
     public function testMvcShouldHaveDetectionPrecedence()
     {
-        $page = Zend_Navigation_Page::factory(array(
+        $page = Page\Page::factory(array(
             'label' => 'MVC Page',
             'action' => 'index',
             'controller' => 'index',
             'uri' => '#'
         ));
 
-        $this->assertType('Zend_Navigation_Page_Mvc', $page);
+        $this->assertType('Zend\Navigation\Page\Mvc', $page);
     }
 
     public function testSupportsMvcShorthand()
     {
-        $mvcPage = Zend_Navigation_Page::factory(array(
+        $mvcPage = Page\Page::factory(array(
             'type' => 'mvc',
             'label' => 'MVC Page',
             'action' => 'index',
             'controller' => 'index'
         ));
 
-        $this->assertType('Zend_Navigation_Page_Mvc', $mvcPage);
+        $this->assertType('Zend\Navigation\Page\Mvc', $mvcPage);
     }
 
     public function testSupportsUriShorthand()
     {
-        $uriPage = Zend_Navigation_Page::factory(array(
+        $uriPage = Page\Page::factory(array(
             'type' => 'uri',
             'label' => 'URI Page',
             'uri' => 'http://www.example.com/'
         ));
 
-        $this->assertType('Zend_Navigation_Page_Uri', $uriPage);
+        $this->assertType('Zend\Navigation\Page\Uri', $uriPage);
     }
 
     public function testSupportsCustomPageTypes()
     {
-        $page = Zend_Navigation_Page::factory(array(
-            'type' => 'My_Page',
+        $page = Page\Page::factory(array(
+            'type' => 'ZendTest\Navigation\TestAsset\Page',
             'label' => 'My Custom Page'
         ));
 
-        return $this->assertType('My_Page', $page);
+        return $this->assertType('ZendTest\Navigation\TestAsset\Page', $page);
     }
 
     public function testShouldFailForInvalidType()
     {
         try {
-            $page = Zend_Navigation_Page::factory(array(
-                'type' => 'My_InvalidPage',
+            $page = Page\Page::factory(array(
+                'type' => 'ZendTest\Navigation\TestAsset\InvalidPage',
                 'label' => 'My Invalid Page'
             ));
-        } catch(Zend_Navigation_Exception $e) {
+        } catch(Navigation\Exception $e) {
             return;
         }
 
@@ -153,8 +143,8 @@ class Zend_Navigation_PageFactoryTest extends PHPUnit_Framework_TestCase
         );
 
         try {
-            $page = Zend_Navigation_Page::factory($pageConfig);
-        } catch(Zend_Exception $e) {
+            $page = Page\Page::factory($pageConfig);
+        } catch(\Zend\Exception $e) {
             return;
         }
 
@@ -165,10 +155,10 @@ class Zend_Navigation_PageFactoryTest extends PHPUnit_Framework_TestCase
     public function testShouldFailIfUnableToDetermineType()
     {
         try {
-            $page = Zend_Navigation_Page::factory(array(
+            $page = Page\Page::factory(array(
                 'label' => 'My Invalid Page'
             ));
-        } catch(Zend_Navigation_Exception $e) {
+        } catch(Navigation\Exception $e) {
             return;
         }
 

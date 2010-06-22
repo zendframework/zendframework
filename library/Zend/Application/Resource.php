@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Application;
+
+/**
  * Interface for bootstrap resources
  *
  * @category   Zend
@@ -29,7 +34,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Application_Resource_Resource
+interface Resource
 {
     /**
      * Constructor
@@ -44,15 +49,15 @@ interface Zend_Application_Resource_Resource
     /**
      * Set the bootstrap to which the resource is attached
      *
-     * @param  Zend_Application_Bootstrap_Bootstrapper $bootstrap
-     * @return Zend_Application_Resource_Resource
+     * @param  \Zend\Application\Bootstrapper $bootstrap
+     * @return \Zend\Application\Resource
      */
-    public function setBootstrap(Zend_Application_Bootstrap_Bootstrapper $bootstrap);
+    public function setBootstrap(Bootstrapper $bootstrap);
 
     /**
      * Retrieve the bootstrap to which the resource is attached
      *
-     * @return Zend_Application_Bootstrap_Bootstrapper
+     * @return \Zend\Application\Bootstrapper
      */
     public function getBootstrap();
 
@@ -60,7 +65,7 @@ interface Zend_Application_Resource_Resource
      * Set resource options
      *
      * @param  array $options
-     * @return Zend_Application_Resource_Resource
+     * @return \Zend\Application\Resource
      */
     public function setOptions(array $options);
 

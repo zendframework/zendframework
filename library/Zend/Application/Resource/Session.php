@@ -21,32 +21,41 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Application\Resource;
+
+use Zend\Application\ResourceException,
+    Zend\Session\SessionManager,
+    Zend\Session\SaveHandler;
+
+/**
  * Resource for setting session options
  *
- * @uses       Zend_Application_Resource_Exception
- * @uses       Zend_Application_Resource_ResourceAbstract
- * @uses       Zend_Session
+ * @uses       \Zend\Application\ResourceException
+ * @uses       \Zend\Application\Resource\AbstractResource
+ * @uses       \Zend\Session\Manager
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_Session extends Zend_Application_Resource_ResourceAbstract
+class Session extends AbstractResource
 {
     /**
      * Save handler to use
      *
-     * @var Zend_Session_SaveHandler_Interface
+     * @var \Zend\Session\SaveHandler
      */
     protected $_saveHandler = null;
 
     /**
      * Set session save handler
      *
-     * @param  array|string|Zend_Session_SaveHandler_Interface $saveHandler
-     * @return Zend_Application_Resource_Session
-     * @throws Zend_Application_Resource_Exception When $saveHandler is no valid save handler
+     * @param  array|string|\Zend\Session\SaveHandler $saveHandler
+     * @return \Zend\Application\Resource\Session
+     * @throws \Zend\Application\ResourceException When $saveHandler is no valid save handler
      */
     public function setSaveHandler($saveHandler)
     {
@@ -57,14 +66,14 @@ class Zend_Application_Resource_Session extends Zend_Application_Resource_Resour
     /**
      * Get session save handler
      *
-     * @return Zend_Session_SaveHandler_Interface
+     * @return \Zend\Session\SaveHandler
      */
     public function getSaveHandler()
     {
-        if (!$this->_saveHandler instanceof Zend_Session_SaveHandler_Interface) {
+        if (!$this->_saveHandler instanceof SaveHandler) {
             if (is_array($this->_saveHandler)) {
                 if (!array_key_exists('class', $this->_saveHandler)) {
-                    throw new Zend_Application_Resource_Exception('Session save handler class not provided in options');
+                    throw new ResourceException('Session save handler class not provided in options');
                 }
                 $options = array();
                 if (array_key_exists('options', $this->_saveHandler)) {
@@ -73,11 +82,11 @@ class Zend_Application_Resource_Session extends Zend_Application_Resource_Resour
                 $this->_saveHandler = $this->_saveHandler['class'];
                 $this->_saveHandler = new $this->_saveHandler($options);
             } elseif (is_string($this->_saveHandler)) {
-                $this->_saveHandler = new $this->_saveHandler();
+                $this->_saveHandler = new $this->_saveHandler;
             }
 
-            if (!$this->_saveHandler instanceof Zend_Session_SaveHandler_Interface) {
-                throw new Zend_Application_Resource_Exception('Invalid session save handler');
+            if (!$this->_saveHandler instanceof SaveHandler) {
+                throw new ResourceException('Invalid session save handler');
             }
         }
         return $this->_saveHandler;
@@ -103,12 +112,16 @@ class Zend_Application_Resource_Session extends Zend_Application_Resource_Resour
             unset($options['savehandler']);
         }
 
-        if (count($options) > 0) {
-            Zend_Session::setOptions($options);
+        $handler = false;
+        if ($this->_hasSaveHandler()) {
+            $handler = $this->getSaveHandler();
         }
 
-        if ($this->_hasSaveHandler()) {
-            Zend_Session::setSaveHandler($this->getSaveHandler());
+        if (count($options) > 0) {
+            $manager = new SessionManager($options);
+            return $manager;
         }
+
+        return ($handler) ? $handler : false;
     }
 }

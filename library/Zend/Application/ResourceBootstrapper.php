@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Application;
+
+/**
  * Interface for bootstrap classes that utilize resource plugins
  *
  * @category   Zend
@@ -29,22 +34,22 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Application_Bootstrap_ResourceBootstrapper
+interface ResourceBootstrapper
 {
     /**
      * Register a resource with the bootstrap
      *
-     * @param  string|Zend_Application_Resource_Resource $resource
-     * @param  null|array|Zend_Config                     $options
-     * @return Zend_Application_Bootstrap_ResourceBootstrapper
+     * @param  string|\Zend\Application\Resource $resource
+     * @param  null|array|\Zend\Config\Config                     $options
+     * @return \Zend\Application\ResourceBootstrapper
      */
     public function registerPluginResource($resource, $options = null);
 
     /**
      * Unregister a resource from the bootstrap
      *
-     * @param  string|Zend_Application_Resource_Resource $resource
-     * @return Zend_Application_Bootstrap_ResourceBootstrapper
+     * @param  string|\Zend\Application\Resource $resource
+     * @return \Zend\Application\ResourceBootstrapper
      */
     public function unregisterPluginResource($resource);
 
@@ -60,7 +65,7 @@ interface Zend_Application_Bootstrap_ResourceBootstrapper
      * Retrieve resource
      *
      * @param  string $resource
-     * @return Zend_Application_Resource_Resource
+     * @return \Zend\Application\Resource
      */
     public function getPluginResource($resource);
 
@@ -81,15 +86,15 @@ interface Zend_Application_Bootstrap_ResourceBootstrapper
     /**
      * Set plugin loader to use to fetch resources
      *
-     * @param  Zend_Loader_PluginLoader_Interface Zend_Loader_PluginLoader
-     * @return Zend_Application_Bootstrap_ResourceBootstrapper
+     * @param  \Zend\Loader\PluginLoader\PluginLoader_Interface \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Application\ResourceBootstrapper
      */
-    public function setPluginLoader(Zend_Loader_PluginLoader_Interface $loader);
+    public function setPluginLoader(\Zend\Loader\PluginLoader\PluginLoaderInterface $loader);
 
     /**
      * Retrieve plugin loader for resources
      *
-     * @return Zend_Loader_PluginLoader
+     * @return \Zend\Loader\PluginLoader\PluginLoader
      */
     public function getPluginLoader();
 }

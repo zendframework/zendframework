@@ -12,32 +12,28 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Application
- * @subpackage UnitTests
+ * @category  Zend
+ * @package   Zend_Application
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
- * @category   Zend
- * @package    Zend_Application
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @namespace
  */
-class Bootstrap extends Zend_Application_Bootstrap_BootstrapAbstract
+namespace Zend\Application;
+
+/**
+ * Exception class for Zend_Application
+ *
+ * @uses      \Zend\Application\Exception
+ * @category  Zend
+ * @package   Zend_Application
+ * @uses      \Zend\Application\Exception
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class BootstrapException extends Exception
 {
-    public $bootstrapped = false;
-
-    public function run()
-    {
-    }
-
-    protected function _bootstrap($resource = null)
-    {
-        $this->bootstrapped = true;
-        $this->getApplication()->default = true;
-    }
 }

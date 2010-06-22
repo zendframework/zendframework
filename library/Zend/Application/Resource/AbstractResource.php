@@ -21,21 +21,28 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Application\Resource;
+
+use Zend\Application\Resource;
+
+/**
  * Abstract class for bootstrap resources
  *
- * @uses       Zend_Application_Resource_Resource
+ * @uses       \Zend\Application\Resource
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Application_Resource_Resource
+abstract class AbstractResource implements Resource
 {
     /**
      * Parent bootstrap
      *
-     * @var Zend_Application_Bootstrap_Bootstrapper
+     * @var \Zend\Application\Bootstrapper
      */
     protected $_bootstrap;
 
@@ -65,7 +72,7 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
     {
         if (is_array($options)) {
             $this->setOptions($options);
-        } else if ($options instanceof Zend_Config) {
+        } else if ($options instanceof \Zend\Config\Config) {
             $this->setOptions($options->toArray());
         }
     }
@@ -74,7 +81,7 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
      * Set options from array
      *
      * @param  array $options Configuration for resource
-     * @return Zend_Application_Resource_ResourceAbstract
+     * @return \Zend\Application\Resource\AbstractResource
      */
     public function setOptions(array $options)
     {
@@ -133,10 +140,10 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
     /**
      * Set the bootstrap to which the resource is attached
      *
-     * @param  Zend_Application_Bootstrap_Bootstrapper $bootstrap
-     * @return Zend_Application_Resource_Resource
+     * @param  \Zend\Application\Bootstrapper $bootstrap
+     * @return \Zend\Application\Resource
      */
-    public function setBootstrap(Zend_Application_Bootstrap_Bootstrapper $bootstrap)
+    public function setBootstrap(\Zend\Application\Bootstrapper $bootstrap)
     {
         $this->_bootstrap = $bootstrap;
         return $this;
@@ -145,7 +152,7 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
     /**
      * Retrieve the bootstrap to which the resource is attached
      *
-     * @return null|Zend_Application_Bootstrap_Bootstrapper
+     * @return null|\Zend\Application\Bootstrapper
      */
     public function getBootstrap()
     {

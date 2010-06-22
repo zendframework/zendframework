@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+use Zend\Application\AbstractBootstrap;
+
 /**
  * @category   Zend
  * @package    Zend_Application
@@ -27,10 +29,17 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zabt_Resource_Autoloaded extends Zend_Application_Resource_ResourceAbstract
+class Bootstrap extends AbstractBootstrap
 {
-    public function init()
+    public $bootstrapped = false;
+
+    public function run()
     {
-        $this->getBootstrap()->executedAutoloadedResource = true;
+    }
+
+    protected function _bootstrap($resource = null)
+    {
+        $this->bootstrapped = true;
+        $this->getApplication()->default = true;
     }
 }

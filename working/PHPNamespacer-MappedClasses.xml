@@ -363,42 +363,42 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Bootstrap/Bootstrap.php</originalRelativeFilePath>
       <originalClassName>Zend_Application_Bootstrap_Bootstrap</originalClassName>
-      <newRelativeFilePath>Zend/Application/Bootstrap/Bootstrap.php</newRelativeFilePath>
-      <newNamespace>Zend\Application\Bootstrap</newNamespace>
+      <newRelativeFilePath>Zend/Application/Bootstrap.php</newRelativeFilePath>
+      <newNamespace>Zend\Application</newNamespace>
       <newClassName>Bootstrap</newClassName>
-      <newFullyQualifiedName>Zend\Application\Bootstrap\Bootstrap</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Application\Bootstrap</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Bootstrap/BootstrapAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Application_Bootstrap_BootstrapAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Application/Bootstrap/BootstrapAbstract.php</newRelativeFilePath>
-      <newNamespace>Zend\Application\Bootstrap</newNamespace>
-      <newClassName>BootstrapAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Application\Bootstrap\BootstrapAbstract</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Application/AbstractBootstrap.php</newRelativeFilePath>
+      <newNamespace>Zend\Application</newNamespace>
+      <newClassName>AbstractBootstrap</newClassName>
+      <newFullyQualifiedName>Zend\Application\AbstractBootstrap</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Bootstrap/Bootstrapper.php</originalRelativeFilePath>
       <originalClassName>Zend_Application_Bootstrap_Bootstrapper</originalClassName>
-      <newRelativeFilePath>Zend/Application/Bootstrap/Bootstrapper.php</newRelativeFilePath>
-      <newNamespace>Zend\Application\Bootstrap</newNamespace>
+      <newRelativeFilePath>Zend/Application/Bootstrapper.php</newRelativeFilePath>
+      <newNamespace>Zend\Application</newNamespace>
       <newClassName>Bootstrapper</newClassName>
-      <newFullyQualifiedName>Zend\Application\Bootstrap\Bootstrapper</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Application\Bootstrapper</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Bootstrap/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Application_Bootstrap_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Application/Bootstrap/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Application\Bootstrap</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Application\Bootstrap\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Application/BootstrapException.php</newRelativeFilePath>
+      <newNamespace>Zend\Application</newNamespace>
+      <newClassName>BootstrapException</newClassName>
+      <newFullyQualifiedName>Zend\Application\BootstrapException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Bootstrap/ResourceBootstrapper.php</originalRelativeFilePath>
       <originalClassName>Zend_Application_Bootstrap_ResourceBootstrapper</originalClassName>
-      <newRelativeFilePath>Zend/Application/Bootstrap/ResourceBootstrapper.php</newRelativeFilePath>
-      <newNamespace>Zend\Application\Bootstrap</newNamespace>
+      <newRelativeFilePath>Zend/Application/ResourceBootstrapper.php</newRelativeFilePath>
+      <newNamespace>Zend\Application</newNamespace>
       <newClassName>ResourceBootstrapper</newClassName>
-      <newFullyQualifiedName>Zend\Application\Bootstrap\ResourceBootstrapper</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Application\ResourceBootstrapper</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Exception.php</originalRelativeFilePath>
@@ -435,10 +435,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Resource/Db.php</originalRelativeFilePath>
       <originalClassName>Zend_Application_Resource_Db</originalClassName>
-      <newRelativeFilePath>Zend/Application/Resource/Db.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Application/Resource/DB.php</newRelativeFilePath>
       <newNamespace>Zend\Application\Resource</newNamespace>
-      <newClassName>Db</newClassName>
-      <newFullyQualifiedName>Zend\Application\Resource\Db</newFullyQualifiedName>
+      <newClassName>DB</newClassName>
+      <newFullyQualifiedName>Zend\Application\Resource\DB</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Resource/Dojo.php</originalRelativeFilePath>
@@ -451,18 +451,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Resource/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Application_Resource_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Application/Resource/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Application\Resource</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Application\Resource\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Application/ResourceException.php</newRelativeFilePath>
+      <newNamespace>Zend\Application</newNamespace>
+      <newClassName>ResourceException</newClassName>
+      <newFullyQualifiedName>Zend\Application\ResourceException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Resource/Frontcontroller.php</originalRelativeFilePath>
       <originalClassName>Zend_Application_Resource_Frontcontroller</originalClassName>
-      <newRelativeFilePath>Zend/Application/Resource/Frontcontroller.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Application/Resource/FrontController.php</newRelativeFilePath>
       <newNamespace>Zend\Application\Resource</newNamespace>
-      <newClassName>Frontcontroller</newClassName>
-      <newFullyQualifiedName>Zend\Application\Resource\Frontcontroller</newFullyQualifiedName>
+      <newClassName>FrontController</newClassName>
+      <newFullyQualifiedName>Zend\Application\Resource\FrontController</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Resource/Layout.php</originalRelativeFilePath>
@@ -507,10 +507,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Resource/Multidb.php</originalRelativeFilePath>
       <originalClassName>Zend_Application_Resource_Multidb</originalClassName>
-      <newRelativeFilePath>Zend/Application/Resource/Multidb.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Application/Resource/MultiDB.php</newRelativeFilePath>
       <newNamespace>Zend\Application\Resource</newNamespace>
-      <newClassName>Multidb</newClassName>
-      <newFullyQualifiedName>Zend\Application\Resource\Multidb</newFullyQualifiedName>
+      <newClassName>MultiDB</newClassName>
+      <newFullyQualifiedName>Zend\Application\Resource\MultiDB</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Resource/Navigation.php</originalRelativeFilePath>
@@ -523,18 +523,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Resource/Resource.php</originalRelativeFilePath>
       <originalClassName>Zend_Application_Resource_Resource</originalClassName>
-      <newRelativeFilePath>Zend/Application/Resource/Resource.php</newRelativeFilePath>
-      <newNamespace>Zend\Application\Resource</newNamespace>
+      <newRelativeFilePath>Zend/Application/Resource.php</newRelativeFilePath>
+      <newNamespace>Zend\Application</newNamespace>
       <newClassName>Resource</newClassName>
-      <newFullyQualifiedName>Zend\Application\Resource\Resource</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Application\Resource</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Resource/ResourceAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Application_Resource_ResourceAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Application/Resource/ResourceAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Application/Resource/AbstractResource.php</newRelativeFilePath>
       <newNamespace>Zend\Application\Resource</newNamespace>
-      <newClassName>ResourceAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Application\Resource\ResourceAbstract</newFullyQualifiedName>
+      <newClassName>AbstractResource</newClassName>
+      <newFullyQualifiedName>Zend\Application\Resource\AbstractResource</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Resource/Router.php</originalRelativeFilePath>

@@ -12,23 +12,29 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category  Zend
- * @package   Zend_Application
+ * @category   Zend
+ * @package    Zend_Application
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
+namespace Zabt\Resource;
+
+use Zend\Application\Resource\AbstractResource;
+
 /**
- * Exception class for Zend_Application
- *
- * @uses      Zend_Application_Exception
- * @category  Zend
- * @package   Zend_Application
- * @uses      Zend_Application_Exception
+ * @category   Zend
+ * @package    Zend_Application
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Bootstrap_Exception extends Zend_Application_Exception
+class Autoloaded extends AbstractResource
 {
+    public function init()
+    {
+        $this->getBootstrap()->executedAutoloadedResource = true;
+    }
 }

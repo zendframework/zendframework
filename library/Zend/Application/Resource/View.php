@@ -21,50 +21,55 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Application\Resource;
+
+/**
  * Resource for settings view options
  *
- * @uses       Zend_Application_Resource_ResourceAbstract
- * @uses       Zend_Controller_Action_HelperBroker
- * @uses       Zend_Controller_Action_Helper_ViewRenderer
- * @uses       Zend_View
+ * @uses       \Zend\Application\Resource\AbstractResource
+ * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\Helper\ViewRenderer
+ * @uses       \Zend\View\View
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_View extends Zend_Application_Resource_ResourceAbstract
+class View extends AbstractResource
 {
     /**
-     * @var Zend_View_Interface
+     * @var \Zend\View\ViewInterface
      */
     protected $_view;
 
     /**
      * Defined by Zend_Application_Resource_Resource
      *
-     * @return Zend_View
+     * @return \Zend\View\View
      */
     public function init()
     {
         $view = $this->getView();
 
-        $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
+        $viewRenderer = new \Zend\Controller\Action\Helper\ViewRenderer();
         $viewRenderer->setView($view);
-        Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
+        \Zend\Controller\Action\HelperBroker\HelperBroker::addHelper($viewRenderer);
         return $view;
     }
 
     /**
      * Retrieve view object
      *
-     * @return Zend_View
+     * @return \Zend\View\View
      */
     public function getView()
     {
         if (null === $this->_view) {
             $options = $this->getOptions();
-            $this->_view = new Zend_View($options);
+            $this->_view = new \Zend\View\View($options);
 
             if(isset($options['doctype'])) {
                 $this->_view->doctype()->setDoctype(strtoupper($options['doctype']));

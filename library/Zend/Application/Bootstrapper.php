@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Application;
+
+/**
  * Interface for bootstrap classes
  *
  * @category   Zend
@@ -29,12 +34,12 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Application_Bootstrap_Bootstrapper
+interface Bootstrapper
 {
     /**
      * Constructor
      *
-     * @param  Zend_Application $application
+     * @param  \Zend\Application\Application $application
      * @return void
      */
     public function __construct($application);
@@ -43,14 +48,14 @@ interface Zend_Application_Bootstrap_Bootstrapper
      * Set bootstrap options
      *
      * @param  array $options
-     * @return Zend_Application_Bootstrap_Bootstrapper
+     * @return \Zend\Application\Bootstrapper
      */
     public function setOptions(array $options);
 
     /**
      * Retrieve application object
      *
-     * @return Zend_Application|Zend_Application_Bootstrap_Bootstrapper
+     * @return Zend_Application|\Zend\Application\Bootstrapper
      */
     public function getApplication();
 

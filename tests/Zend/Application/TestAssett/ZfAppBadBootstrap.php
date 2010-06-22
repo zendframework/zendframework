@@ -14,22 +14,21 @@
  *
  * @category   Zend
  * @package    Zend_Application
- * @subpackage Resource
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
+namespace ZendTest\Application\TestAssett;
+
 /**
- * Exception class for Zend_Application
- *
- * @uses       Zend_Application_Exception
  * @category   Zend
  * @package    Zend_Application
- * @subpackage Resource
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_Exception extends Zend_Application_Exception
+class ZfAppBadBootstrap
 {
 }

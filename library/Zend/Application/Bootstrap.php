@@ -20,25 +20,30 @@
  * @version    $Id$
  */
 
-use \Zend\Loader\ResourceAutoloader;
-use \Zend\Application\Module\Autoloader as ModuleAutoloader;
+/**
+ * @namespace
+ */
+namespace Zend\Application;
+
+use Zend\Loader\ResourceAutoloader,
+    Zend\Application\Module\Autoloader as ModuleAutoloader;
 
 /**
  * Concrete base class for bootstrap classes
  *
  * Registers and utilizes Zend_Controller_Front by default.
  *
- * @uses       Zend_Application_Bootstrap_BootstrapAbstract
- * @uses       Zend_Application_Bootstrap_Exception
- * @uses       Zend_Application_Module_Autoloader
+ * @uses       \Zend\Application\AbstractBootstrap
+ * @uses       \Zend\Application\BootstrapException
+ * @uses       \Zend\Application\Module\Autoloader
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Bootstrap
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Bootstrap_Bootstrap
-    extends Zend_Application_Bootstrap_BootstrapAbstract
+class Bootstrap
+    extends AbstractBootstrap
 {
     /**
      * Application resource namespace
@@ -48,16 +53,16 @@ class Zend_Application_Bootstrap_Bootstrap
 
     /**
      * Application resource autoloader
-     * @var Zend_Loader_Autoloader_Resource
+     * @var \Zend\Loader\ResourceAutoloader
      */
     protected $_resourceLoader;
 
     /**
      * Constructor
      *
-     * Ensure FrontController resource is registered
+     * Ensure frontcontroller resource is registered
      *
-     * @param  Zend_Application|Zend_Application_Bootstrap_Bootstrapper $application
+     * @param  Zend_Application|\Zend\Application\Bootstrapper $application
      * @return void
      */
     public function __construct($application)
@@ -71,8 +76,8 @@ class Zend_Application_Bootstrap_Bootstrap
         }
         $this->getResourceLoader();
 
-        if (!$this->hasPluginResource('FrontController')) {
-            $this->registerPluginResource('FrontController');
+        if (!$this->hasPluginResource('frontcontroller')) {
+            $this->registerPluginResource('frontcontroller');
         }
     }
 
@@ -86,14 +91,14 @@ class Zend_Application_Bootstrap_Bootstrap
      * the front controller, and dispatches the front controller.
      *
      * @return mixed
-     * @throws Zend_Application_Bootstrap_Exception
+     * @throws \Zend\Application\BootstrapException
      */
     public function run()
     {
-        $front   = $this->getResource('FrontController');
+        $front   = $this->getResource('frontcontroller');
         $default = $front->getDefaultModule();
         if (null === $front->getControllerDirectory($default)) {
-            throw new Zend_Application_Bootstrap_Exception(
+            throw new BootstrapException(
                 'No default controller directory registered with front controller'
             );
         }
@@ -108,10 +113,10 @@ class Zend_Application_Bootstrap_Bootstrap
     /**
      * Set module resource loader
      *
-     * @param  Zend_Loader_Autoloader_Resource $loader
-     * @return Zend_Application_Module_Bootstrap
+     * @param  \Zend\Loader\ResourceAutoloader $loader
+     * @return \Zend\Application\Module\Bootstrap
      */
-    public function setResourceLoader(ResourceAutoloader $loader)
+    public function setResourceLoader(\ResourceAutoloader $loader)
     {
         $this->_resourceLoader = $loader;
         return $this;
@@ -120,16 +125,16 @@ class Zend_Application_Bootstrap_Bootstrap
     /**
      * Retrieve module resource loader
      *
-     * @return Zend_Loader_Autoloader_Resource
+     * @return \Zend\Loader\ResourceAutoloader
      */
     public function getResourceLoader()
     {
         if ((null === $this->_resourceLoader)
             && (false !== ($namespace = $this->getAppNamespace()))
         ) {
-            $r    = new ReflectionClass($this);
+            $r    = new \ReflectionClass($this);
             $path = $r->getFileName();
-            $this->setResourceLoader(new ModuleAutoloader(array(
+            $this->setResourceLoader(new \ModuleAutoloader(array(
                 'namespace' => $namespace,
                 'basePath'  => dirname($path),
             )));
@@ -151,7 +156,7 @@ class Zend_Application_Bootstrap_Bootstrap
      * Set application namespace (for module autoloading)
      *
      * @param  string
-     * @return Zend_Application_Bootstrap_Bootstrap
+     * @return \Zend\Application\Bootstrap
      */
     public function setAppNamespace($value)
     {

@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Application\Resource\TestAssett;
+
+use Zend\Application\Bootstrap;
+
 /**
  * @category   Zend
  * @package    Zend_Application
@@ -27,10 +31,11 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZfAppBootstrapCustomView extends Zend_Application_Bootstrap_Bootstrap {
+class ZfAppBootstrapCustomView extends Bootstrap
+{
     public function _initView()
     {
-        $view = new Zend_View();
+        $view = new \Zend\View\View();
         $view->setInMethodByTest = true;
         return $view;
     }

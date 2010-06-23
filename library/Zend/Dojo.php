@@ -77,7 +77,7 @@ class Zend_Dojo
      * @param  Zend_View_Interface $view
      * @return void
      */
-    public static function enableView(Zend_View_Interface $view)
+    public static function enableView(\Zend\View\ViewInterface $view)
     {
         if (false === $view->getPluginLoader('helper')->getPaths('Zend_Dojo_View_Helper')) {
             $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');

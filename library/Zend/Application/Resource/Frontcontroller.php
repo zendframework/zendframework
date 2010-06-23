@@ -111,7 +111,7 @@ class Frontcontroller extends AbstractResource
                         }
 
                         $plugin = new $pluginClass();
-                        $front->_registerPlugin($plugin, $stackIndex);
+                        $front->registerPlugin($plugin, $stackIndex);
                     }
                     break;
 

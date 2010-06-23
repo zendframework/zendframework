@@ -36,8 +36,7 @@ namespace Zend\Application\Resource;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Dojo
-    extends AbstractResource
+class Dojo extends AbstractResource
 {
     /**
      * @var \Zend\Dojo\View\Helper\Dojo\Container
@@ -65,7 +64,7 @@ class Dojo
             $this->getBootstrap()->bootstrap('view');
             $view = $this->getBootstrap()->view;
 
-            \Zend\Dojo\Dojo::enableView($view);
+            \Zend_Dojo::enableView($view);
             $view->dojo()->setOptions($this->getOptions());
 
             $this->_dojo = $view->dojo();

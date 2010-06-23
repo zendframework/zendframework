@@ -27,7 +27,7 @@ namespace Zend\Controller\Router\Rewrite\Route;
 use Zend\Controller\Request\HTTP as HTTPRequest;
 
 /**
- * Route interface
+ * Literal route
  *
  * @package    Zend_Controller
  * @subpackage Router
@@ -35,18 +35,56 @@ use Zend\Controller\Request\HTTP as HTTPRequest;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-abstract class AbstractRoute implements Route
+class Literal implements Route
 {
+    /**
+     * Route to match
+     * 
+     * @var string
+     */
+    protected $_route;
+
+    /**
+     * Default values
+     *
+     * @var array
+     */
+    protected $_defaults;
+
+    /**
+     * Create a new literal route
+     *
+     * @param  string $route
+     * @param  array  $defaults
+     * @return void
+     */
+    public function __construct($route, $defaults = array())
+    {
+        $this->_route    = $route;
+        $this->_defaults = $defaults;
+    }
+
     /**
      * match(): defined by Route interface
      *
      * @see    Route::match()
      * @param  HTTPRequest $request
+     * @param  integer     $pathOffset
      * @return boolean
      */
-    public function match(HTTPRequest $request, $pathOffset)
+    public function match(HTTPRequest $request, $pathOffset = null)
     {
+        if ($pathOffset !== null) {
+            if (strpos($request->getRequestUri(), $this->_route) === $pathOffset) {
+                return $this->_defaults;
+            }
+        } else {
+            if ($request->getRequestUri() === $this->_route) {
+                return $this->_defaults;
+            }
+        }
 
+        return null;
     }
 
     /**
@@ -59,6 +97,6 @@ abstract class AbstractRoute implements Route
      */
     public function assemble(array $params = null, array $options = null)
     {
-        
+        return $this->_route;
     }
 }

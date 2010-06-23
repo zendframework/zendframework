@@ -27,7 +27,7 @@ namespace Zend\Controller\Router\Rewrite\Route;
 use Zend\Controller\Request\HTTP as HTTPRequest;
 
 /**
- * Route interface
+ * Regex route
  *
  * @package    Zend_Controller
  * @subpackage Router
@@ -35,23 +35,69 @@ use Zend\Controller\Request\HTTP as HTTPRequest;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-interface Route
+class Regex implements Route
 {
     /**
-     * Match a request
+     * Regex to match
+     * 
+     * @var string
+     */
+    protected $_regex;
+
+    /**
+     * Default values
      *
+     * @var array
+     */
+    protected $_defaults;
+
+    /**
+     * Create a new literal route
+     *
+     * @param  string $regex
+     * @param  array  $defaults
+     * @return void
+     */
+    public function __construct($regex, $defaults = array())
+    {
+        $this->_route    = $regex;
+        $this->_defaults = $defaults;
+    }
+
+    /**
+     * match(): defined by Route interface
+     *
+     * @see    Route::match()
      * @param  HTTPRequest $request
      * @param  integer     $pathOffset
      * @return boolean
      */
-    public function match(HTTPRequest $request, $pathOffset = null);
+    public function match(HTTPRequest $request, $pathOffset = null)
+    {
+        if ($pathOffset !== null) {
+            $result = preg_match('(\G' . $this->_regex . ')i', $request->getRequestUri(), $match, null, $pathOffset);
+        } else {
+            $result = preg_match('(^' . $this->_regex . '$)i', $request->getRequestUri(), $match);
+        }
+
+        if ($result === null) {
+            return null;
+        }
+
+        // @todo: examine $match
+        return $this->_defaults;
+    }
 
     /**
-     * Assemble an URL
+     * assemble(): Defined by Route interface
      *
+     * @see    Route::assemble()
      * @param  array $params
      * @param  array $options
      * @return string
      */
-    public function assemble(array $params = null, array $options = null);
+    public function assemble(array $params = null, array $options = null)
+    {
+        // @todo: implement this
+    }
 }

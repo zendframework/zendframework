@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Controller\Router\Rewrite;
-use Zend\Controller\Router\Rewrite\Route\Route;
+use Zend\Controller\Router\Rewrite\Route;
 use Zend\Controller\Request\HTTP as HTTPRequest;
 
 /**
@@ -38,6 +38,13 @@ use Zend\Controller\Request\HTTP as HTTPRequest;
  */
 class Router
 {
+    /**
+     * List of all routes
+     *
+     * @var array
+     */
+    protected $_routes = array();
+
     /**
      * Append multiple routes
      *
@@ -63,9 +70,11 @@ class Router
     public function addRoute($name, $route)
     {
         if (is_array($route)) {
-            // @todo: Array to AbstractRoute
-        } elseif (!$route instanceof Route) {
-            // @todo: throw exception
+            $route = $this->_routeFromArray($specs);
+        }
+
+        if (!$route instanceof Route\Route) {
+            throw new InvalidArgumentException('Supplied route must either be an array or a route object');
         }
 
         $this->_routes[$name] = $route;
@@ -74,9 +83,49 @@ class Router
     }
 
     /**
+     * Create a route from array specifications
+     *
+     * @param  array $specs
+     * @return Route\Route
+     */
+    protected function _routeFromArray(array $specs)
+    {
+        if (!isset($specs['type'])) {
+            throw new InvalidArgumentException('"type" key missing in array');
+        } elseif (!isset($specs['options'])) {
+            throw new InvalidArgumentException('"options" key missing in array');
+        }
+
+        if (strpos($specs['type'], '\\') !== false) {
+            $className = $specs['type'];
+        } else {
+            $className = 'Route\\' . $specs['type'];
+        }
+
+        $route = new $className($specs['options']);
+
+        if (isset($specs['routes'])) {
+            $route = new Route\Part($route);
+
+            foreach ($specs['routes'] as $subName => $subRoute) {
+                if (is_array($subRoute)) {
+                    $subRoute = $this->_routeFromArray($subRoute);
+                }
+
+                $terminates = (isset($specs['terminates']) && $specs['terminates']);
+
+                $route->append($subName, new Route\Part($subRoute), $terminates);
+            }
+        }
+
+        return $route;
+    }
+
+    /**
      * Match a request
      *
-     * @param HTTPRequest $request
+     * @param  HTTPRequest $request
+     * @return RouterMatch
      */
     public function match(HTTPRequest $request)
     {

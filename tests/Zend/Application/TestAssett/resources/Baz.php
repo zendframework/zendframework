@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Application\TestAssett\Resource;
+
+use Zend\Application\Resource\AbstractResource;
+
 /**
  * @category   Zend
  * @package    Zend_Application
@@ -27,11 +31,11 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_BootstrapTest_Resource_Baz extends Zend_Application_Resource_ResourceAbstract
+class Baz extends AbstractResource
 {
     public function init()
     {
-        $o = new stdClass();
+        $o = new \stdClass();
         $o->baz = 'Baz';
         return $o;
     }

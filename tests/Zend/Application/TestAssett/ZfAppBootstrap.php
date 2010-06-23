@@ -56,7 +56,7 @@ class ZfAppBootstrap extends AbstractBootstrap
 
     protected function _initBarbaz()
     {
-        $o = new stdClass();
+        $o = new \stdClass();
         $o->baz = 'Baz';
         return $o;
     }

@@ -116,7 +116,7 @@ class Bootstrap
      * @param  \Zend\Loader\ResourceAutoloader $loader
      * @return \Zend\Application\Module\Bootstrap
      */
-    public function setResourceLoader(\ResourceAutoloader $loader)
+    public function setResourceLoader(ResourceAutoloader $loader)
     {
         $this->_resourceLoader = $loader;
         return $this;
@@ -134,7 +134,7 @@ class Bootstrap
         ) {
             $r    = new \ReflectionClass($this);
             $path = $r->getFileName();
-            $this->setResourceLoader(new \ModuleAutoloader(array(
+            $this->setResourceLoader(new ModuleAutoloader(array(
                 'namespace' => $namespace,
                 'basePath'  => dirname($path),
             )));

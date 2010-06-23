@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Application\TestAssett;
+
+use Zend\Application\AbstractBootstrap;
+
 /**
  * @category   Zend
  * @package    Zend_Application
@@ -27,7 +31,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class BootstrapBaseCircularDependency extends Zend_Application_Bootstrap_BootstrapAbstract
+class BootstrapBaseCircularDependency extends AbstractBootstrap
 {
     public $complete = false;
 

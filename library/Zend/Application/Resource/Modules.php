@@ -106,7 +106,7 @@ class Modules extends AbstractResource
             }
 
             $moduleBootstrap = new $bootstrapClass($bootstrap);
-            $moduleBootstrap->_bootstrap();
+            $moduleBootstrap->bootstrap();
             $this->_bootstraps[$module] = $moduleBootstrap;
         }
 

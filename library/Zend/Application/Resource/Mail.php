@@ -25,7 +25,8 @@
  */
 namespace Zend\Application\Resource;
 
-use Zend\Loader;
+use Zend\Loader,
+    Zend\Application\ResourceException;
 
 /**
  * Resource for setting up Mail Transport and default From & ReplyTo addresses
@@ -107,7 +108,7 @@ class Mail extends AbstractResource
         if(isset($options[$key]['email']) &&
            !is_numeric($options[$key]['email']))
         {
-            $method = array('Zend_Mail', 'setDefault' . ucfirst($type));
+            $method = array('Zend\\Mail\\Mail', 'setDefault' . ucfirst($type));
             if(isset($options[$key]['name']) &&
                !is_numeric($options[$key]['name']))
             {
@@ -136,9 +137,9 @@ class Mail extends AbstractResource
             $transportName = ucfirst(strtolower($transportName));
 
             if(!Loader\Autoloader::autoload($transportName)) {
-                $transportName = 'Zend_Mail_Transport_' . $transportName;
+                $transportName = 'Zend\\Mail\\Transport\\' . $transportName;
                 if(!Loader\Autoloader::autoload($transportName)) {
-                    throw new xception(
+                    throw new ResourceException(
                         "Specified Mail Transport '{$transportName}'"
                         . 'could not be found'
                     );
@@ -149,16 +150,16 @@ class Mail extends AbstractResource
         unset($options['type']);
         
         switch($transportName) {
-            case 'Zend_Mail_Transport_Smtp':
+            case 'Zend\\Mail\\Transport\\Smtp':
                 if(!isset($options['host'])) {
-                    throw new xception(
+                    throw new ResourceException(
                         'A host is necessary for smtp transport,'
                         .' but none was given');
                 }
                 
                 $transport = new $transportName($options['host'], $options);
                 break;
-            case 'Zend_Mail_Transport_Sendmail':
+            case 'Zend\\Mail\\Transport\\Sendmail':
             default:
                 $transport = new $transportName($options);
                 break;

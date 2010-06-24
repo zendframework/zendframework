@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\Application\Resource;
-use Zend\DB\Adapter;
+
+use Zend\DB\Adapter,
+    Zend\Application\ResourceException;
 
 /**
  * Database resource for multiple database setups
@@ -132,7 +134,7 @@ class Multidb extends AbstractResource
             return $this->_dbs[$db];
         }
         
-        throw new xception(
+        throw new ResourceException(
             'A DB adapter was tried to retrieve, but was not configured'
         );
     }

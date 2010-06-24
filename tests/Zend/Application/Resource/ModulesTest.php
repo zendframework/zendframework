@@ -20,17 +20,13 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Application_Resource_ModulesTest::main');
-}
+namespace ZendTest\Application\Resource;
 
-/**
- * Test helper
- */
-
-/**
- * Zend_Loader_Autoloader
- */
+use Zend\Loader\Autoloader,
+    Zend\Application\Resource\Modules as ModulesResource,
+    Zend\Application\Application,
+    Zend\Controller\Front as FrontController,
+    ZendTest\Application\TestAssett\ZfAppBootstrap;
 
 /**
  * @category   Zend
@@ -40,14 +36,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
+class ModulesResourceTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         // Store original autoloaders
@@ -58,14 +48,14 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
             $this->loaders = array();
         }
 
-        Zend_Loader_Autoloader::resetInstance();
-        $this->autoloader = Zend_Loader_Autoloader::getInstance();
+        Autoloader::resetInstance();
+        $this->autoloader = Autoloader::getInstance();
 
-        $this->application = new Zend_Application('testing');
+        $this->application = new Application('testing');
 
         $this->bootstrap = new ZfAppBootstrap($this->application);
 
-        $this->front = Zend_Controller_Front::getInstance();
+        $this->front = FrontController::getInstance();
         $this->front->resetInstance();
     }
 
@@ -82,14 +72,14 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
         }
 
         // Reset autoloader instance so it doesn't affect other tests
-        Zend_Loader_Autoloader::resetInstance();
+        Autoloader::resetInstance();
     }
 
     public function testInitializationTriggersNothingIfNoModulesRegistered()
     {
 
         $this->bootstrap->registerPluginResource('Frontcontroller', array());
-        $resource = new Zend_Application_Resource_Modules(array());
+        $resource = new ModulesResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $this->assertFalse(isset($this->bootstrap->default));
@@ -103,11 +93,10 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
      */
     public function testInitializationTriggersDefaultModuleBootstrapWhenDiffersFromApplicationBootstrap()
     {
-
         $this->bootstrap->registerPluginResource('Frontcontroller', array(
-            'moduleDirectory' => dirname(__FILE__) . '/../_files/modules',
+            'moduleDirectory' => __DIR__ . '/../TestAssett/modules',
         ));
-        $resource = new Zend_Application_Resource_Modules(array());
+        $resource = new ModulesResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $this->assertTrue(isset($this->bootstrap->default));
@@ -117,9 +106,9 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
     {
 
         $this->bootstrap->registerPluginResource('Frontcontroller', array(
-            'moduleDirectory' => dirname(__FILE__) . '/../_files/modules',
+            'moduleDirectory' => __DIR__ . '/../TestAssett/modules',
         ));
-        $resource = new Zend_Application_Resource_Modules(array());
+        $resource = new ModulesResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $this->assertTrue($this->bootstrap->foo, 'foo failed');
@@ -134,9 +123,9 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
     {
 
         $this->bootstrap->registerPluginResource('Frontcontroller', array(
-            'moduleDirectory' => dirname(__FILE__) . '/../_files/modules',
+            'moduleDirectory' => __DIR__ . '/../TestAssett/modules',
         ));
-        $resource = new Zend_Application_Resource_Modules(array());
+        $resource = new ModulesResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $bootstraps = $resource->getExecutedBootstraps();
@@ -155,9 +144,9 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
     {
 
         $this->bootstrap->registerPluginResource('Frontcontroller', array(
-            'moduleDirectory' => dirname(__FILE__) . '/../_files/modules',
+            'moduleDirectory' => __DIR__ . '/../TestAssett/modules',
         ));
-        $resource = new Zend_Application_Resource_Modules(array());
+        $resource = new ModulesResource(array());
         $resource->setBootstrap($this->bootstrap);
         $bootstraps = $resource->init();
         $this->assertEquals(4, count((array)$bootstraps));
@@ -166,8 +155,4 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('foo',     (array)$bootstraps);
         $this->assertArrayHasKey('default', (array)$bootstraps);
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_ModulesTest::main') {
-    Zend_Application_Resource_ModulesTest::main();
 }

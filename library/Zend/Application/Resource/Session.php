@@ -44,11 +44,27 @@ use Zend\Application\ResourceException,
 class Session extends AbstractResource
 {
     /**
+     * Session manager
+     * @var Zend\Session\Manager
+     */
+    protected $_manager;
+
+    /**
      * Save handler to use
      *
      * @var \Zend\Session\SaveHandler
      */
     protected $_saveHandler = null;
+
+    /**
+     * Retrieve session manager
+     * 
+     * @return Zend\Session\Manager|null
+     */
+    public function getManager()
+    {
+        return $this->_manager;
+    }
 
     /**
      * Set session save handler
@@ -88,6 +104,12 @@ class Session extends AbstractResource
             if (!$this->_saveHandler instanceof SaveHandler) {
                 throw new ResourceException('Invalid session save handler');
             }
+
+            // Inject session manager
+            $manager = $this->getManager();
+            if ($manager instanceof \Zend\Session\Manager) {
+                $this->_saveHandler->setManager($manager);
+            }
         }
         return $this->_saveHandler;
     }
@@ -103,25 +125,28 @@ class Session extends AbstractResource
     /**
      * Defined by Zend_Application_Resource_Resource
      *
-     * @return void
+     * @return Zend\Session\Manager
      */
     public function init()
     {
         $options = array_change_key_case($this->getOptions(), CASE_LOWER);
+
+        // AbstractResource proxies options to setters during construction.
+        // This will set the savehandler as an array of options; we do not
+        // need or want to pass those to session configuration.
         if (isset($options['savehandler'])) {
             unset($options['savehandler']);
         }
 
+        // Instantiate a session manager object, and store it locally
+        $this->_manager = new SessionManager($options);
+
+        // Determine if we have a save handler to initialize
         $handler = false;
         if ($this->_hasSaveHandler()) {
             $handler = $this->getSaveHandler();
         }
 
-        if (count($options) > 0) {
-            $manager = new SessionManager($options);
-            return $manager;
-        }
-
-        return ($handler) ? $handler : false;
+        return $this->_manager;
     }
 }

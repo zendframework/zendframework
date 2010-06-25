@@ -20,18 +20,14 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Application_Resource_ViewTest::main');
-}
+namespace ZendTest\Application\Resource;
 
-/**
- * Test helper
- */
-
-/**
- * Zend_Loader_Autoloader
- */
-
+use Zend\Loader\Autoloader,
+    ZendTest\Application\TestAssett\ZfAppBootstrap,
+    Zend\Application\Application,
+    Zend\Application\Resource\View as ViewResource,
+    Zend\Controller\Action\HelperBroker\HelperBroker,
+    Zend\View\View;
 
 /**
  * @category   Zend
@@ -41,14 +37,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class Zend_Application_Resource_ViewTest extends PHPUnit_Framework_TestCase
+class ViewTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         // Store original autoloaders
@@ -59,14 +49,14 @@ class Zend_Application_Resource_ViewTest extends PHPUnit_Framework_TestCase
             $this->loaders = array();
         }
 
-        Zend_Loader_Autoloader::resetInstance();
-        $this->autoloader = Zend_Loader_Autoloader::getInstance();
+        Autoloader::resetInstance();
+        $this->autoloader = Autoloader::getInstance();
 
-        $this->application = new Zend_Application('testing');
+        $this->application = new Application('testing');
 
         $this->bootstrap = new ZfAppBootstrap($this->application);
 
-        Zend_Controller_Action_HelperBroker::resetHelpers();
+        HelperBroker::resetHelpers();
     }
 
     public function tearDown()
@@ -82,22 +72,22 @@ class Zend_Application_Resource_ViewTest extends PHPUnit_Framework_TestCase
         }
 
         // Reset autoloader instance so it doesn't affect other tests
-        Zend_Loader_Autoloader::resetInstance();
+        Autoloader::resetInstance();
     }
 
     public function testInitializationInitializesViewObject()
     {
-        $resource = new Zend_Application_Resource_View(array());
+        $resource = new ViewResource(array());
         $resource->init();
-        $this->assertTrue($resource->getView() instanceof Zend_View);
+        $this->assertTrue($resource->getView() instanceof View);
     }
 
     public function testInitializationInjectsViewIntoViewRenderer()
     {
-        $resource = new Zend_Application_Resource_View(array());
+        $resource = new ViewResource(array());
         $resource->init();
         $view = $resource->getView();
-        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
+        $viewRenderer = HelperBroker::getStaticHelper('ViewRenderer');
         $this->assertSame($view, $viewRenderer->view);
     }
 
@@ -106,7 +96,7 @@ class Zend_Application_Resource_ViewTest extends PHPUnit_Framework_TestCase
         $options = array(
             'scriptPath' => dirname(__FILE__),
         );
-        $resource = new Zend_Application_Resource_View($options);
+        $resource = new ViewResource($options);
         $resource->init();
         $view  = $resource->getView();
         $paths = $view->getScriptPaths();
@@ -116,13 +106,9 @@ class Zend_Application_Resource_ViewTest extends PHPUnit_Framework_TestCase
     public function testDoctypeIsSet()
     {
         $options = array('doctype' => 'XHTML1_FRAMESET');
-	$resource = new Zend_Application_Resource_View($options);
+        $resource = new ViewResource($options);
         $resource->init();
         $view  = $resource->getView();
-	$this->assertEquals('XHTML1_FRAMESET', $view->doctype()->getDoctype());
+        $this->assertEquals('XHTML1_FRAMESET', $view->doctype()->getDoctype());
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_ViewTest::main') {
-    Zend_Application_Resource_ViewTest::main();
 }

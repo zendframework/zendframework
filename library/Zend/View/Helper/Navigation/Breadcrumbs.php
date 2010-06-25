@@ -32,15 +32,14 @@ use Zend\View;
  * Helper for printing breadcrumbs
  *
  * @uses       \Zend\View\Exception
- * @uses       \Zend\View\Helper\Navigation\HelperAbstract
+ * @uses       \Zend\View\Helper\Navigation\AbstractHelper
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Breadcrumbs
-    extends HelperAbstract
+class Breadcrumbs extends AbstractHelper
 {
     /**
      * Breadcrumbs separator string
@@ -310,12 +309,12 @@ class Breadcrumbs
         return $this->view->partial($partial, null, $model);
     }
 
-    // Zend_View_Helper_Navigation_Helper:
+    // Zend\View\Helper\Navigation\Helper:
 
     /**
      * Renders helper
      *
-     * Implements {@link Zend_View_Helper_Navigation_Helper::render()}.
+     * Implements {@link Zend\View\Helper\Navigation\Helper::render()}.
      *
      * @param  \Zend\Navigation\Container $container  [optional] container to
      *                                               render. Default is to

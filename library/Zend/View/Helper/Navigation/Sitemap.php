@@ -41,15 +41,14 @@ use Zend\View;
  * @uses       \Zend\Validator\Sitemap\Loc
  * @uses       \Zend\Validator\Sitemap\Priority
  * @uses       \Zend\View\Exception
- * @uses       \Zend\View\Helper\Navigation\HelperAbstract
+ * @uses       \Zend\View\Helper\Navigation\AbstractHelper
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Sitemap
-    extends HelperAbstract
+class Sitemap extends AbstractHelper
 {
     /**
      * Namespace for the <urlset> tag
@@ -80,7 +79,7 @@ class Sitemap
     protected $_useXmlDeclaration = true;
 
     /**
-     * Whether sitemap should be validated using Zend_Validate_Sitemap_*
+     * Whether sitemap should be validated using Zend\Validate\Sitemap\*
      *
      * @var bool
      */

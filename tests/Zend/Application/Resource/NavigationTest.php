@@ -90,7 +90,7 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
         $resource = new NavigationResource(array());
         $resource->setBootstrap($this->bootstrap);
         $test = $resource->init();
-        $this->assertTrue($test instanceof \Zend\Navigation);
+        $this->assertTrue($test instanceof \Zend\Navigation\Navigation);
         $this->bootstrap->unregisterPluginResource('view');
     }
 
@@ -105,7 +105,7 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap)->init();
 
         $view = $this->bootstrap->getPluginResource('view')->getView();
-        $number = $view->getHelper('navigation')->navigation()->count();
+        $number = $view->getHelper('navigation')->getContainer()->count();
 
         $this->assertEquals($number,1);
         $this->bootstrap->unregisterPluginResource('view');
@@ -168,7 +168,7 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
         foreach($options as $option) {
             $resource = new NavigationResource($option);
             $resource->setBootstrap($this->bootstrap)->init();
-            $results[] = Registry::get($key) instanceof \Zend\Navigation;;
+            $results[] = Registry::get($key) instanceof \Zend\Navigation\Navigation;
             Registry::set($key,null);
         }
 

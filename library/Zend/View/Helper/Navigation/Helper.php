@@ -144,7 +144,7 @@ interface Helper
      * Render invisible items?
      *
      * @param  bool $renderInvisible                       [optional] boolean flag
-     * @return \Zend\View\Helper\Navigation\HelperAbstract  fluent interface
+     * @return \Zend\View\Helper\Navigation\Helper  fluent interface
      *                                                     returns self
      */
     public function setRenderInvisible($renderInvisible = true);

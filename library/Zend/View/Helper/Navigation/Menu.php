@@ -32,15 +32,14 @@ use Zend\View;
  *
  * @uses       RecursiveIteratorIterator
  * @uses       \Zend\View\Exception
- * @uses       \Zend\View\Helper\Navigation\HelperAbstract
+ * @uses       \Zend\View\Helper\Navigation\AbstractHelper
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Menu
-    extends HelperAbstract
+class Menu extends AbstractHelper
 {
     /**
      * CSS class to use for the ul element
@@ -206,7 +205,7 @@ class Menu
      * Returns an HTML string containing an 'a' element for the given page if
      * the page's href is not empty, and a 'span' element if it is empty
      *
-     * Overrides {@link Zend_View_Helper_Navigation_Abstract::htmlify()}.
+     * Overrides {@link Zend\View\Helper\Navigation\AbstractHelper::htmlify()}.
      *
      * @param  \Zend\Navigation\Page\Page $page  page to generate HTML for
      * @return string                      HTML string for the given page
@@ -619,12 +618,12 @@ class Menu
         return $this->view->partial($partial, null, $model);
     }
 
-    // Zend_View_Helper_Navigation_Helper:
+    // Zend\View\Helper\Navigation\Helper:
 
     /**
      * Renders menu
      *
-     * Implements {@link Zend_View_Helper_Navigation_Helper::render()}.
+     * Implements {@link Zend\View\Helper\Navigation\Helper::render()}.
      *
      * If a partial view is registered in the helper, the menu will be rendered
      * using the given partial script. If no partial is registered, the menu

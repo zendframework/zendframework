@@ -34,15 +34,14 @@ use Zend\View;
  * @uses       RecursiveIteratorIterator
  * @uses       \Zend\Navigation\Page\Page
  * @uses       \Zend\View\Exception
- * @uses       \Zend\View\Helper\Navigation\HelperAbstract
+ * @uses       \Zend\View\Helper\Navigation\AbstractHelper
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Links
-    extends HelperAbstract
+class Links extends AbstractHelper
 {
     /**#@+
      * Constants used for specifying which link types to find and render
@@ -166,20 +165,20 @@ class Links
      * the render constants. Examples:
      * <code>
      * // render all links except glossary
-     * $flag = Zend_View_Helper_Navigation_Links:RENDER_ALL ^
-     *         Zend_View_Helper_Navigation_Links:RENDER_GLOSSARY;
+     * $flag = Zend\View\Helper\Navigation\Links:RENDER_ALL ^
+     *         Zend\View\Helper\Navigation\Links:RENDER_GLOSSARY;
      * $helper->setRenderFlag($flag);
      *
      * // render only chapters and sections
-     * $flag = Zend_View_Helper_Navigation_Links:RENDER_CHAPTER |
-     *         Zend_View_Helper_Navigation_Links:RENDER_SECTION;
+     * $flag = Zend\View\Helper\Navigation\Links:RENDER_CHAPTER |
+     *         Zend\View\Helper\Navigation\Links:RENDER_SECTION;
      * $helper->setRenderFlag($flag);
      *
      * // render only relations that are not native W3C relations
-     * $helper->setRenderFlag(Zend_View_Helper_Navigation_Links:RENDER_CUSTOM);
+     * $helper->setRenderFlag(Zend\View\Helper\Navigation\Links:RENDER_CUSTOM);
      *
      * // render all relations (default)
-     * $helper->setRenderFlag(Zend_View_Helper_Navigation_Links:RENDER_ALL);
+     * $helper->setRenderFlag(Zend\View\Helper\Navigation\Links:RENDER_ALL);
      * </code>
      *
      * Note that custom relations can also be rendered directly using the
@@ -739,12 +738,12 @@ class Links
                $this->getClosingBracket();
     }
 
-    // Zend_View_Helper_Navigation_Helper:
+    // Zend\View\Helper\Navigation\Helper:
 
     /**
      * Renders helper
      *
-     * Implements {@link Zend_View_Helper_Navigation_Helper::render()}.
+     * Implements {@link Zend\View\Helper\Navigation\Helper::render()}.
      *
      * @param  \Zend\Navigation\Container $container  [optional] container to
      *                                               render. Default is to

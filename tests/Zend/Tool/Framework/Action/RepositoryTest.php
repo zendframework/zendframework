@@ -21,13 +21,10 @@
  */
 
 /**
- * @see TestHelper.php
+ * @namespace
  */
-
-/**
- * @see Zend_Tool_Framework_Action_Base
- */
-
+namespace ZendTest\Tool\Framework\Action;
+use Zend\Tool\Framework\Action;
 
 /**
  * @category   Zend
@@ -40,7 +37,7 @@
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Action
  */
-class Zend_Tool_Framework_Action_RepositoryTest extends PHPUnit_Framework_TestCase
+class RepositoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_Tool_Framework_Action_Repository
@@ -49,7 +46,7 @@ class Zend_Tool_Framework_Action_RepositoryTest extends PHPUnit_Framework_TestCa
 
     public function setup()
     {
-        $this->_repository = new Zend_Tool_Framework_Action_Repository();
+        $this->_repository = new Action\Repository();
     }
 
     public function teardown()
@@ -64,35 +61,32 @@ class Zend_Tool_Framework_Action_RepositoryTest extends PHPUnit_Framework_TestCa
 
     public function testAddActionCanHandleActionObjects()
     {
-        $fooAction = new Zend_Tool_Framework_Action_Base();
+        $fooAction = new Action\Base();
         $fooAction->setName('Foo');
         $this->_repository->addAction($fooAction);
 
         $this->assertEquals(1, count($this->_repository));
-        $this->assertEquals('Zend_Tool_Framework_Action_Base', get_class($this->_repository->getAction('Foo')));
+        $this->assertEquals('Zend\Tool\Framework\Action\Base', get_class($this->_repository->getAction('Foo')));
     }
 
     public function testAddActionWillParseNameFromClassNameOnExtendedActions()
     {
-        $this->_repository->addAction(new Zend_Tool_Framework_Action_Asset_Foo());
-        $this->assertEquals('Zend_Tool_Framework_Action_Asset_Foo', get_class($this->_repository->getAction('Foo')));
+        $this->_repository->addAction(new \ZendTest\Tool\Framework\Action\TestAsset\Foo());
+        $this->assertEquals('ZendTest\Tool\Framework\Action\TestAsset\Foo', get_class($this->_repository->getAction('Foo')));
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Action_Exception
-     */
     public function testAddActionThrowsExceptionOnDuplicateNameAction()
     {
-        $this->_repository->addAction(new Zend_Tool_Framework_Action_Asset_Foo());
-        $this->_repository->addAction(new Zend_Tool_Framework_Action_Asset_Foo());
+        $this->_repository->addAction(new \ZendTest\Tool\Framework\Action\TestAsset\Foo());
+        
+        $this->setExpectedException('\Zend\Tool\Framework\Action\Exception');
+        $this->_repository->addAction(new \ZendTest\Tool\Framework\Action\TestAsset\Foo());
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Action_Exception
-     */
     public function testAddActionThrowsExceptionOnActionWithNoName()
     {
-        $this->_repository->addAction(new Zend_Tool_Framework_Action_Base());
+        $this->setExpectedException('Zend\Tool\Framework\Action\Exception');
+        $this->_repository->addAction(new Action\Base());
     }
 
     public function testGetActionReturnsNullOnNonExistentAction()
@@ -102,34 +96,34 @@ class Zend_Tool_Framework_Action_RepositoryTest extends PHPUnit_Framework_TestCa
 
     public function testRepositoryIsCountable()
     {
-        $this->assertTrue($this->_repository instanceof Countable);
+        $this->assertTrue($this->_repository instanceof \Countable);
     }
 
     public function testRepositoryIsIterable()
     {
-        $this->assertTrue($this->_repository instanceof Traversable);
+        $this->assertTrue($this->_repository instanceof \Traversable);
     }
 
     public function testRepositoryCanIterate()
     {
-        $this->_repository->addAction(new Zend_Tool_Framework_Action_Base('Foo'));
-        $this->_repository->addAction(new Zend_Tool_Framework_Action_Base('Bar'));
+        $this->_repository->addAction(new Action\Base('Foo'));
+        $this->_repository->addAction(new Action\Base('Bar'));
         $i=0;
         foreach ($this->_repository as $action) {
             $i++;
-            $this->assertEquals('Zend_Tool_Framework_Action_Base', get_class($action));
+            $this->assertEquals('Zend\Tool\Framework\Action\Base', get_class($action));
         }
         $this->assertEquals(2, $i);
     }
 
     public function testGetActionsReturnsAnArrayOfActions()
     {
-        $this->_repository->addAction(new Zend_Tool_Framework_Action_Base('Foo'));
-        $this->_repository->addAction(new Zend_Tool_Framework_Action_Base('Bar'));
+        $this->_repository->addAction(new Action\Base('Foo'));
+        $this->_repository->addAction(new Action\Base('Bar'));
         $i=0;
         foreach ($this->_repository->getActions() as $action) {
             $i++;
-            $this->assertEquals('Zend_Tool_Framework_Action_Base', get_class($action));
+            $this->assertEquals('Zend\Tool\Framework\Action\Base', get_class($action));
         }
         $this->assertEquals(2, $i);
     }

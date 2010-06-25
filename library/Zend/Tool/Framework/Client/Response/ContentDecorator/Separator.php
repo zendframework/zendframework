@@ -21,14 +21,19 @@
  */
 
 /**
- * @uses       Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
+ * @namespace
+ */
+namespace Zend\Tool\Framework\Client\Response\ContentDecorator;
+
+/**
+ * @uses       \Zend\Tool\Framework\Client\Response\ContentDecorator\ContentDecoratorInterface
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
-    implements Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
+class Separator
+    implements ContentDecoratorInterface
 {
 
     /**
@@ -50,7 +55,7 @@ class Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
      * setSeparator()
      *
      * @param string $separator
-     * @return Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
+     * @return \Zend\Tool\Framework\Client\Response\ContentDecorator\Separator
      */
     public function setSeparator($separator)
     {

@@ -21,16 +21,22 @@
  */
 
 /**
- * @uses       Zend_Tool_Framework_Client_Exception
- * @uses       Zend_Tool_Project_Profile
- * @uses       Zend_Tool_Project_Provider_Abstract
+ * @namespace
+ */
+namespace Zend\Tool\Project\Provider;
+use Zend\Tool\Framework\Client;
+
+/**
+ * @uses       \Zend\Tool\Framework\Client\Exception
+ * @uses       \Zend\Tool\Project\Profile\Profile
+ * @uses       \Zend\Tool\Project\Provider\AbstractProvider
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Provider_Project
-    extends Zend_Tool_Project_Provider_Abstract
+class Project
+    extends AbstractProvider
 {
 
     protected $_specialties = array('Info');
@@ -51,7 +57,7 @@ class Zend_Tool_Project_Provider_Project
             if (!file_exists($path)) {
                 $created = mkdir($path);
                 if (!$created) {
-                    throw new Zend_Tool_Framework_Client_Exception('Could not create requested project directory \'' . $path . '\'');
+                    throw new Client\Exception('Could not create requested project directory \'' . $path . '\'');
                 }
             }
             $path = str_replace('\\', '/', realpath($path));
@@ -60,7 +66,7 @@ class Zend_Tool_Project_Provider_Project
         $profile = $this->_loadProfile(self::NO_PROFILE_RETURN_FALSE, $path);
 
         if ($profile !== false) {
-            throw new Zend_Tool_Framework_Client_Exception('A project already exists here');
+            throw new Client\Exception('A project already exists here');
         }
 
         $profileData = null;
@@ -78,7 +84,7 @@ class Zend_Tool_Project_Provider_Project
             $profileData = $this->_getDefaultProfile();
         }
 
-        $newProfile = new Zend_Tool_Project_Profile(array(
+        $newProfile = new \Zend\Tool\Project\Profile\Profile(array(
             'projectDirectory' => $path,
             'profileData' => $profileData
             ));

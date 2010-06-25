@@ -21,16 +21,21 @@
  */
 
 /**
- * @uses       Zend_Tool_Framework_Metadata_Attributable
- * @uses       Zend_Tool_Framework_Metadata_Interface
- * @uses       Zend_Tool_Framework_Registry_Exception
+ * @namespace
+ */
+namespace Zend\Tool\Framework\Metadata;
+
+/**
+ * @uses       \Zend\Tool\Framework\Metadata\Attributable
+ * @uses       \Zend\Tool\Framework\Metadata\MetadataInterface
+ * @uses       \Zend\Tool\Framework\Registry\Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Metadata_Dynamic 
-    implements Zend_Tool_Framework_Metadata_Interface, Zend_Tool_Framework_Metadata_Attributable
+class Dynamic 
+    implements MetadataInterface, Attributable
 {
 
     /**
@@ -72,7 +77,7 @@ class Zend_Tool_Framework_Metadata_Dynamic
      * setType()
      * 
      * @param $type
-     * @return Zend_Tool_Framework_Metadata_Dynamic
+     * @return \Zend\Tool\Framework\Metadata\Dynamic
      */
     public function setType($type)
     {
@@ -96,7 +101,7 @@ class Zend_Tool_Framework_Metadata_Dynamic
      * setName()
      * 
      * @param $name
-     * @return Zend_Tool_Framework_Metadata_Dynamic
+     * @return \Zend\Tool\Framework\Metadata\Dynamic
      */
     public function setName($name)
     {
@@ -120,7 +125,7 @@ class Zend_Tool_Framework_Metadata_Dynamic
      * setValue()
      * 
      * @param $value
-     * @return Zend_Tool_Framework_Metadata_Dynamic
+     * @return \Zend\Tool\Framework\Metadata\Dynamic
      */
     public function setValue($value)
     {
@@ -183,7 +188,7 @@ class Zend_Tool_Framework_Metadata_Dynamic
         } elseif (array_key_exists($name, $this->_dynamicAttributes)) {
             return $this->_dynamicAttributes[$name];
         } else {
-            throw new Zend_Tool_Framework_Registry_Exception('Property ' . $name . ' was not located in this metadata.');
+            throw new \Zend\Tool\Framework\Registry\Exception('Property ' . $name . ' was not located in this metadata.');
         }
     }
 

@@ -21,18 +21,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Context\Zf;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       Zend_Tool_Project_Context_Filesystem_Directory
+ * @uses       \Zend\Tool\Project\Context\Filesystem\Directory
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Zf_LocalesDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
+class LocalesDirectory extends \Zend\Tool\Project\Context\Filesystem\Directory
 {
 
     /**

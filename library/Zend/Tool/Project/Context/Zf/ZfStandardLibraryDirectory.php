@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Context\Zf;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
@@ -28,15 +33,15 @@
  *
  * @uses       RecursiveDirectoryIterator
  * @uses       RecursiveIteratorIterator
- * @uses       Zend_Loader
- * @uses       Zend_Tool_Project_Context_Filesystem_Directory
+ * @uses       \Zend\Loader
+ * @uses       \Zend\Tool\Project\Context\Filesystem\Directory
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Zf_ZfStandardLibraryDirectory 
-    extends Zend_Tool_Project_Context_Filesystem_Directory
+class ZfStandardLibraryDirectory 
+    extends \Zend\Tool\Project\Context\Filesystem\Directory
 {
 
     /**
@@ -63,8 +68,8 @@ class Zend_Tool_Project_Context_Zf_ZfStandardLibraryDirectory
         parent::create();
         $zfPath = $this->_getZfPath();
         if ($zfPath != false) {
-            $zfIterator = new RecursiveDirectoryIterator($zfPath);
-            foreach ($rii = new RecursiveIteratorIterator($zfIterator, RecursiveIteratorIterator::SELF_FIRST) as $file) {
+            $zfIterator = new \RecursiveDirectoryIterator($zfPath);
+            foreach ($rii = new \RecursiveIteratorIterator($zfIterator, \RecursiveIteratorIterator::SELF_FIRST) as $file) {
                 $relativePath = preg_replace('#^'.preg_quote(realpath($zfPath), '#').'#', '', realpath($file->getPath())) . DIRECTORY_SEPARATOR . $file->getFilename();
                 if (strpos($relativePath, DIRECTORY_SEPARATOR . '.') !== false) {
                     continue;
@@ -87,7 +92,7 @@ class Zend_Tool_Project_Context_Zf_ZfStandardLibraryDirectory
      */
     protected function _getZfPath()
     {
-        foreach (Zend_Loader::explodeIncludePath() as $includePath) {
+        foreach (\Zend\Loader::explodeIncludePath() as $includePath) {
             if (!file_exists($includePath) || $includePath[0] == '.') {
                 continue;
             }

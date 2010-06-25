@@ -21,13 +21,18 @@
  */
 
 /**
- * @uses       Zend_Tool_Framework_Manifest_Interface
+ * @namespace
+ */
+namespace Zend\Tool\Framework\Manifest;
+
+/**
+ * @uses       \Zend\Tool\Framework\Manifest\ManifestInterface
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Tool_Framework_Manifest_ProviderManifestable extends Zend_Tool_Framework_Manifest_Interface
+interface ProviderManifestable extends ManifestInterface
 {
 
     /**
@@ -36,7 +41,7 @@ interface Zend_Tool_Framework_Manifest_ProviderManifestable extends Zend_Tool_Fr
      * Should either return a single provider or an array
      * of providers
      *
-     * @return array|string|Zend_Tool_Framework_Provider_Interface
+     * @return array|string|\Zend\Tool\Framework\Provider\ProviderInterface
      */
     public function getProviders();
 

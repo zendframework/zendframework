@@ -21,16 +21,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Framework\Metadata;
+
+/**
  * @uses       ReflectionObject
- * @uses       Zend_Tool_Framework_Metadata_Attributable
- * @uses       Zend_Tool_Framework_Metadata_Interface
+ * @uses       \Zend\Tool\Framework\Metadata\Attributable
+ * @uses       \Zend\Tool\Framework\Metadata\MetadataInterface
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Metadata_Basic 
-    implements Zend_Tool_Framework_Metadata_Interface, Zend_Tool_Framework_Metadata_Attributable
+class Basic 
+    implements MetadataInterface, Attributable
 {
 
     /**#@+
@@ -70,7 +75,7 @@ class Zend_Tool_Framework_Metadata_Basic
      * options that are supported via a set method.
      *
      * @param array $options
-     * @return Zend_Tool_Framework_Metadata_Basic
+     * @return \Zend\Tool\Framework\Metadata\Basic
      */
     public function setOptions(Array $options)
     {
@@ -98,7 +103,7 @@ class Zend_Tool_Framework_Metadata_Basic
      * setType()
      *
      * @param string $type
-     * @return Zend_Tool_Framework_Metadata_Basic
+     * @return \Zend\Tool\Framework\Metadata\Basic
      */
     public function setType($type)
     {
@@ -120,7 +125,7 @@ class Zend_Tool_Framework_Metadata_Basic
      * setName()
      *
      * @param string $name
-     * @return Zend_Tool_Framework_Metadata_Basic
+     * @return \Zend\Tool\Framework\Metadata\Basic
      */
     public function setName($name)
     {
@@ -142,7 +147,7 @@ class Zend_Tool_Framework_Metadata_Basic
      * setValue()
      *
      * @param unknown_type $Value
-     * @return Zend_Tool_Framework_Metadata_Basic
+     * @return \Zend\Tool\Framework\Metadata\Basic
      */
     public function setValue($value)
     {
@@ -154,7 +159,7 @@ class Zend_Tool_Framework_Metadata_Basic
      * setReference()
      *
      * @param mixed $reference
-     * @return Zend_Tool_Framework_Metadata_Basic
+     * @return \Zend\Tool\Framework\Metadata\Basic
      */
     public function setReference($reference)
     {
@@ -181,12 +186,12 @@ class Zend_Tool_Framework_Metadata_Basic
      */
     public function getAttributes($type = self::ATTRIBUTES_ALL, $stringRepresentationOfNonScalars = false)
     {
-        $thisReflection = new ReflectionObject($this);
+        $thisReflection = new \ReflectionObject($this);
 
         $metadataPairValues = array();
 
         foreach (get_object_vars($this) as $varName => $varValue) {
-            if ($type == self::ATTRIBUTES_NO_PARENT && ($thisReflection->getProperty($varName)->getDeclaringClass()->getName() == 'Zend_Tool_Framework_Metadata_Basic')) {
+            if ($type == self::ATTRIBUTES_NO_PARENT && ($thisReflection->getProperty($varName)->getDeclaringClass()->getName() == 'Zend\Tool\Framework\Metadata\Basic')) {
                 continue;
             }
 

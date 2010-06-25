@@ -20,9 +20,16 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Element;
+
+use Zend\Form\Element;
+
+/**
  * Base element for XHTML elements
  *
- * @uses       Zend_Form_Element
+ * @uses       \Zend\Form\Element
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -30,6 +37,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-abstract class Zend_Form_Element_Xhtml extends Zend_Form_Element
+abstract class Xhtml extends Element
 {
 }

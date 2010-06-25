@@ -4291,10 +4291,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Form/Decorator/Captcha.php</originalRelativeFilePath>
       <originalClassName>Zend_Form_Decorator_Captcha</originalClassName>
-      <newRelativeFilePath>Zend/Form/Decorator/Captcha/Captcha.php</newRelativeFilePath>
-      <newNamespace>Zend\Form\Decorator\Captcha</newNamespace>
+      <newRelativeFilePath>Zend/Form/Decorator/Captcha.php</newRelativeFilePath>
+      <newNamespace>Zend\Form\Decorator</newNamespace>
       <newClassName>Captcha</newClassName>
-      <newFullyQualifiedName>Zend\Form\Decorator\Captcha\Captcha</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Form\Decorator\Captcha</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Form/Decorator/Description.php</originalRelativeFilePath>
@@ -4387,10 +4387,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Form/Decorator/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Form_Decorator_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Form/Decorator/DecoratorInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Form\Decorator</newNamespace>
-      <newClassName>DecoratorInterface</newClassName>
-      <newFullyQualifiedName>Zend\Form\Decorator\DecoratorInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Form/Decorator.php</newRelativeFilePath>
+      <newNamespace>Zend\Form</newNamespace>
+      <newClassName>Decorator</newClassName>
+      <newFullyQualifiedName>Zend\Form\Decorator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Form/Decorator/Label.php</originalRelativeFilePath>
@@ -4403,10 +4403,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Form/Decorator/Marker/File/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Form_Decorator_Marker_File_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Form/Decorator/Marker/File/FileInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Form\Decorator\Marker\File</newNamespace>
-      <newClassName>FileInterface</newClassName>
-      <newFullyQualifiedName>Zend\Form\Decorator\Marker\File\FileInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Form/Decorator/FileDecorator.php</newRelativeFilePath>
+      <newNamespace>Zend\Form\Decorator</newNamespace>
+      <newClassName>FileDecorator</newClassName>
+      <newFullyQualifiedName>Zend\Form\Decorator\FileDecorator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Form/Decorator/PrepareElements.php</originalRelativeFilePath>
@@ -4475,10 +4475,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Form/Element/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Form_Element_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Form/Element/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Form\Element</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Form\Element\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Form/ElementException.php</newRelativeFilePath>
+      <newNamespace>Zend\Form</newNamespace>
+      <newClassName>ElementException</newClassName>
+      <newFullyQualifiedName>Zend\Form\ElementException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Form/Element/File.php</originalRelativeFilePath>
@@ -4603,10 +4603,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Form/Element.php</originalRelativeFilePath>
       <originalClassName>Zend_Form_Element</originalClassName>
-      <newRelativeFilePath>Zend/Form/Element/Element.php</newRelativeFilePath>
-      <newNamespace>Zend\Form\Element</newNamespace>
+      <newRelativeFilePath>Zend/Form/Element.php</newRelativeFilePath>
+      <newNamespace>Zend\Form</newNamespace>
       <newClassName>Element</newClassName>
-      <newFullyQualifiedName>Zend\Form\Element\Element</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Form\Element</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Form/Exception.php</originalRelativeFilePath>

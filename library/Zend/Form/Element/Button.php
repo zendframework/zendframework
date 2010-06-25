@@ -20,9 +20,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Element;
+
+/**
  * Button form element
  *
- * @uses       Zend_Form_Element_Submit
+ * @uses       \Zend\Form\Element\Submit
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -30,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Element_Button extends Zend_Form_Element_Submit
+class Button extends Submit
 {
     /**
      * Use formButton view helper by default

@@ -23,7 +23,6 @@
  * @namespace
  */
 namespace Zend\Validator;
-use Zend\Translator\Adapter;
 use Zend\Translator;
 
 /**
@@ -334,7 +333,7 @@ abstract class AbstractValidator implements Validator
      */
     public function setTranslator($translator = null)
     {
-        if ((null === $translator) || ($translator instanceof Adapter\Adapter)) {
+        if ((null === $translator) || ($translator instanceof Translator\Adapter)) {
             $this->_translator = $translator;
         } elseif ($translator instanceof Translator\Translator) {
             $this->_translator = $translator->getAdapter();
@@ -347,7 +346,7 @@ abstract class AbstractValidator implements Validator
     /**
      * Return translation object
      *
-     * @return \Zend\Translate\Adapter\Adapter|null
+     * @return \Zend\Translate\Adapter|null
      */
     public function getTranslator()
     {
@@ -365,12 +364,12 @@ abstract class AbstractValidator implements Validator
     /**
      * Set default translation object for all validate objects
      *
-     * @param  Zend_Translate|\Zend\Translate\Adapter\Adapter|null $translator
+     * @param  Zend_Translate|\Zend\Translate\Adapter|null $translator
      * @return void
      */
     public static function setDefaultTranslator($translator = null)
     {
-        if ((null === $translator) || ($translator instanceof Adapter\Adapter)) {
+        if ((null === $translator) || ($translator instanceof Translator\Adapter)) {
             self::$_defaultTranslator = $translator;
         } elseif ($translator instanceof Translate\Translator) {
             self::$_defaultTranslator = $translator->getAdapter();
@@ -382,14 +381,14 @@ abstract class AbstractValidator implements Validator
     /**
      * Get default translation object for all validate objects
      *
-     * @return \Zend\Translate\Adapter\Adapter|null
+     * @return \Zend\Translate\Adapter|null
      */
     public static function getDefaultTranslator()
     {
         if (null === self::$_defaultTranslator) {
             if (\Zend\Registry::isRegistered('Zend_Translate')) {
                 $translator = \Zend\Registry::get('Zend_Translate');
-                if ($translator instanceof Adapter\Adapter) {
+                if ($translator instanceof Translator\Adapter) {
                     return $translator;
                 } elseif ($translator instanceof Translator\Translator) {
                     return $translator->getAdapter();

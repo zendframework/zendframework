@@ -20,14 +20,19 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form;
+
+/**
  * Exception for Zend_Form component.
  *
- * @uses       Zend_Exception
+ * @uses       \Zend\Exception
  * @category   Zend
  * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Form_Exception extends \Zend\Exception
+class Exception extends \Zend\Exception
 {
 }

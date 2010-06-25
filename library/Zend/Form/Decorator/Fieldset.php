@@ -20,11 +20,16 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Decorator;
+
+/**
  * Zend_Form_Decorator_Fieldset
  *
  * Any options passed will be used as HTML attributes of the fieldset tag.
  *
- * @uses       Zend_Form_Decorator_Abstract
+ * @uses       \Zend\Form\Decorator\AbstractDecorator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -32,7 +37,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Decorator_Fieldset extends Zend_Form_Decorator_Abstract
+class Fieldset extends AbstractDecorator
 {
     /**
      * Attribs that should be removed prior to rendering
@@ -80,7 +85,7 @@ class Zend_Form_Decorator_Fieldset extends Zend_Form_Decorator_Abstract
      * Set legend
      *
      * @param  string $value
-     * @return Zend_Form_Decorator_Fieldset
+     * @return \Zend\Form\Decorator\Fieldset
      */
     public function setLegend($value)
     {

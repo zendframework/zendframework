@@ -460,7 +460,7 @@ class DisplayGroup implements \Iterator,\Countable
     {
         foreach ($elements as $element) {
             if (!$element instanceof Element) {
-                throw new Exception('elements passed via array to addElements() must be Zend_Form_Elements only');
+                throw new Exception('elements passed via array to addElements() must be Zend\Form\Elements only');
             }
             $this->addElement($element);
         }

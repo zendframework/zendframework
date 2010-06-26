@@ -8,7 +8,7 @@
         <title>Zend Framework</title>
 
         <para>
-            Zend Framework es un framework de código abierto y orientado a objectos para facilitar 
+            Zend Framework es un framework de código abierto y orientado a objectos para facilitar
             el desarrollo de aplicaciones web con PHP 5.
             A menudo es considerado una 'biblioteca de componentes', debido a que estos poseen bajo
             acoplamiento entre sí lo cual permite reutilizarlos con un alto grado de independencia. Proporciona
@@ -55,7 +55,7 @@
             En resumen ¿qué es exactamente el patrón MVC del que tanto hablan? ¿y por qué
             debería importarte? MVC no es sólo un acrónimo de tres letras que puedes utilizar
             para impresionar a tus amigos, actualmente MVC se ha convertido en un estándar
-            para el diseño de las aplicaciones web modernas. Y por buenas razones ya que 
+            para el diseño de las aplicaciones web modernas. Y por buenas razones ya que
             ayuda a modelar de forma precisa la separación de intereses permitiendo agrupar
             en distintas partes de la aplicación el código que se relaciona con la presentación,
             el que implementa la lógica de negocios y el que accede a los datos.

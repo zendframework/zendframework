@@ -161,7 +161,7 @@
                                             determinar qué sección de la configuración
                                             se traerá.
                                         </para>
-										<para>
+                                        <para>
                                             As of 1.10, you may also pass multiple paths containing
                                             config files to be merged into a single configuration.
                                             This assists in reducing config duplication across many

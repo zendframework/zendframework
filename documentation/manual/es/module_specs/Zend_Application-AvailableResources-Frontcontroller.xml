@@ -111,7 +111,7 @@
                 y luego registra la instancia con el Front Controller. If you want to
                 register a plugin with a particular stack index, you need to provide an array with
                 two keys <property>class</property> and <property>stackIndex</property>.
-				
+
             </para>
         </listitem>
 
@@ -124,15 +124,15 @@
                 el front controller.
             </para>
         </listitem>
-		
-		        <listitem>
+
+                <listitem>
             <para>
                 <emphasis><property>returnresponse</property></emphasis>: whether or not to return
                 the response object after dispatching the front controller. Value should be a
                 boolean; by default, this is disabled.
             </para>
         </listitem>
-		
+
     </itemizedlist>
 
     <para>

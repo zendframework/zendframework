@@ -115,7 +115,7 @@ Zend_Loader::loadClass('Container_Tree',
             así que el nombre de la clase puede contener únicamente caracteres
             alfanuméricos, guiones ('-'), barras bajas ('_'), y puntos ('.'). </para>
 
-			<note>
+            <note>
             <title>Loading Classes from PHP Namespaces</title>
 
             <para>

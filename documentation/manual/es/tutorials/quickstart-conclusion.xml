@@ -2,16 +2,16 @@
 <!-- EN-Revision: 19996 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.conclusion">
-    <title>°Felicitaciones!</title>
+    <title>¬°Felicitaciones!</title>
     <para>
-        Ahora ha creado una aplicaciÛn muy sencilla utilizando algunas de los componentes mas 
-		usados en Zend Framework. Zend Framework ha creado muchos componentes que se ocupan de la
-		mayoria de lo requerimientos m·s comunes de las aplicaciones web incluyendo
-		servicios web,busquedas, <acronym>PDF</acronym> lectura y escritura, autenticaciÛn, 
-		autorizaciÛn, mucho m·s.
-        La <link linkend="reference"> GuÌa de Referencia </ link> es un gran lugar para encontrar
-		m·s informaciÛn sobre los componentes que se ha utilizado en esta guÌa de inicio r·pido, 
-		asÌ como otros componentes.	Esperamos que encuentre util Zend Framework y mas importante lo
-		encuentre divertido!  
+        Ahora ha creado una aplicaci√≥n muy sencilla utilizando algunas de los componentes mas
+        usados en Zend Framework. Zend Framework ha creado muchos componentes que se ocupan de la
+        mayoria de lo requerimientos m√°s comunes de las aplicaciones web incluyendo
+        servicios web,busquedas, <acronym>PDF</acronym> lectura y escritura, autenticaci√≥n,
+        autorizaci√≥n, mucho mas.
+        La <link linkend="reference"> Gu√≠a de Referencia </link> es un gran lugar para encontrar
+        m√°s informaci√≥n sobre los componentes que se ha utilizado en esta gu√≠a de inicio r√°pido,
+        as√≠ como otros componentes.    Esperamos que encuentre util Zend Framework y mas importante lo
+        encuentre divertido!
     </para>
 </sect1>

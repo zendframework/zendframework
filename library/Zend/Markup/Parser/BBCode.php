@@ -208,7 +208,7 @@ class BBCode implements ParserInterface
                     $buffer = '';
                 }
                 $temp['tag'] .= $matches['end'];
-                $temp['type'] = Markup\Token::TYPE_TAG;
+                $temp['type'] = Markup\Token::TYPE_MARKUP;
 
                 $tokens[] = $temp;
                 $temp     = array();
@@ -326,7 +326,7 @@ class BBCode implements ParserInterface
                     }
                 }
             } else {
-                if ($token['type'] == Markup\Token::TYPE_TAG) {
+                if ($token['type'] == Markup\Token::TYPE_MARKUP) {
                     if ($token['tag'] == self::NEWLINE) {
                         // this is a newline tag, add it as a token
                         $this->_current->addChild(new Markup\Token(

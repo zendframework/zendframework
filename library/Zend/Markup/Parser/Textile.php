@@ -138,6 +138,20 @@ class Textile implements ParserInterface
             throw new Exception('Value to parse cannot be left empty.');
         }
 
+        $this->tokenize();
+
+        return $this->buildTree($this->_tokens);
+    }
+
+    /**
+     * Tokenize a textile string
+     *
+     * @param string $value
+     *
+     * @return array
+     */
+    public function tokenize($value)
+    {
         // first make we only have LF newlines, also trim the value
         $this->_value = str_replace(array("\r\n", "\r"), "\n", $value);
         $this->_value = trim($this->_value);
@@ -149,27 +163,7 @@ class Textile implements ParserInterface
         $this->_temp     = array();
         $this->_tokens   = array();
 
-        $this->_tokenize();
-
-        // create the tree
-        $this->_tree     = new Markup\TokenList();
-
-        $this->_current  = new Markup\Token('', Markup\Token::TYPE_NONE, 'Zend_Markup_Root');
-        $this->_tree->addChild($this->_current);
-
-        $this->_createTree();
-
-        return $this->_tree;
-    }
-
-    /**
-     * Tokenize a textile string
-     *
-     * @return array
-     */
-    protected function _tokenize()
-    {
-        $state    = self::STATE_NEW_PARAGRAPH;
+        $state = self::STATE_NEW_PARAGRAPH;
 
         $attrsMatch = implode('|', array(
             self::MATCH_ATTR_CLASSID,
@@ -362,6 +356,27 @@ class Textile implements ParserInterface
                     break;
             }
         }
+
+        return $this->_tokens;
+    }
+
+    /**
+     * Build a tree
+     *
+     * @param string $strategy
+     *
+     * @return \Zend\Markup\TokenList
+     */
+    public function buildTree(array $tokens, $strategy = 'default')
+    {
+        $this->_tokens = $tokens;
+
+        switch ($strategy) {
+            case 'default':
+                $this->_createTree();
+        }
+
+        return $this->_tree;
     }
 
     /**
@@ -371,6 +386,12 @@ class Textile implements ParserInterface
      */
     protected function _createTree()
     {
+        // create the tree
+        $this->_tree     = new Markup\TokenList();
+
+        $this->_current  = new Markup\Token('', Markup\Token::TYPE_NONE, 'Zend_Markup_Root');
+        $this->_tree->addChild($this->_current);
+
         $inside = true;
 
         foreach ($this->_tokens as $key => $token) {

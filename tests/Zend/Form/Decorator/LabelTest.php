@@ -20,13 +20,13 @@
  * @version    $Id$
  */
 
-// Call Zend_Form_Decorator_LabelTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_LabelTest::main");
-}
+namespace ZendTest\Form\Decorator;
 
-
-
+use Zend\Form\Decorator\Label as LabelDecorator,
+    Zend\Form\Decorator\AbstractDecorator,
+    Zend\Form\Element,
+    Zend\Translator\Translator,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Form_Decorator_Label
@@ -38,20 +38,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
+class LabelTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_LabelTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -60,34 +48,23 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->decorator = new Zend_Form_Decorator_Label();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
+        $this->decorator = new LabelDecorator();
     }
 
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath(dirname(__FILE__) . '/../../../../library/Zend/View/Helper');
+        $view = new View();
         return $view;
     }
 
     public function testUsesPrependPlacementByDefault()
     {
-        $this->assertEquals(Zend_Form_Decorator_Abstract::PREPEND, $this->decorator->getPlacement());
+        $this->assertEquals(AbstractDecorator::PREPEND, $this->decorator->getPlacement());
     }
 
     public function testRenderReturnsOriginalContentWhenNoViewPresentInElement()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $this->decorator->setElement($element);
         $content = 'test content';
         $this->assertSame($content, $this->decorator->render($content));
@@ -95,7 +72,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
     public function testRenderReturnsOriginalContentWhenNoLabelPresentInElement()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $this->decorator->setElement($element);
         $content = 'test content';
         $this->assertSame($content, $this->decorator->render($content));
@@ -103,7 +80,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
     public function testRenderUsesElementIdIfSet()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $element->setAttrib('id', 'foobar')
                 ->setView($this->getView())
                 ->setLabel('My Label');
@@ -115,7 +92,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
     public function testRenderAddsOptionalClassForNonRequiredElements()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $element->setView($this->getView())
                 ->setLabel('My Label');
         $this->decorator->setElement($element);
@@ -133,7 +110,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
     public function testRenderAddsRequiredClassForRequiredElements()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $element->setRequired(true)
                 ->setView($this->getView())
                 ->setLabel('My Label');
@@ -152,7 +129,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
     public function testRenderAppendsRequiredClassToClassProvidedInRequiredElement()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $element->setRequired(true)
                 ->setView($this->getView())
                 ->setLabel('My Label')
@@ -166,7 +143,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
     public function testRenderUtilizesOptionalSuffixesAndPrefixesWhenRequested()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $element->setAttribs(array(
                     'optionalPrefix' => '-opt-prefix-',
                     'optionalSuffix' => '-opt-suffix-',
@@ -187,7 +164,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
     public function testRenderUtilizesRequiredSuffixesAndPrefixesWhenRequested()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $element->setAttribs(array(
                     'optionalPrefix' => '-opt-prefix-',
                     'optionalSuffix' => '-opt-suffix-',
@@ -208,11 +185,11 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-3538
+     * @group ZF-3538
      */
     public function testRenderShouldNotUtilizeElementClass()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $element->setView($this->getView())
                 ->setLabel('My Label')
                 ->setAttrib('class', 'foobar');
@@ -224,7 +201,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
     public function testRenderRendersLabel()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $element->setView($this->getView())
                 ->setLabel('My Label');
         $this->decorator->setElement($element);
@@ -238,7 +215,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
     public function testRenderAppendsOnRequest()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $element->setView($this->getView())
                 ->setLabel('My Label');
         $this->decorator->setElement($element)
@@ -250,7 +227,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
     public function testCanChooseNotToEscapeLabel()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $element->setView($this->getView())
                 ->setLabel('<b>My Label</b>');
         $this->decorator->setElement($element)
@@ -261,10 +238,10 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
     public function testRetrievingLabelRetrievesLabelWithTranslationAndPrefixAndSuffix()
     {
-        $translate = new Zend_Translate('array', array('My Label' => 'Translation'), 'en');
+        $translate = new Translator('ArrayAdapter', array('My Label' => 'Translation'), 'en');
         $translate->setLocale('en');
 
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $element->setView($this->getView())
                 ->setLabel('My Label')
                 ->setTranslator($translate);
@@ -285,7 +262,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
     public function testSettingTagToEmptyValueShouldDisableTag()
     {
-        $element = new Zend_Form_Element_Text('foo', array('label' => 'Foo'));
+        $element = new Element\Text('foo', array('label' => 'Foo'));
         $this->decorator->setElement($element)
                         ->setTag('');
         $content = $this->decorator->render('');
@@ -297,16 +274,11 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
      */
     public function testSettingTagToEmptyValueShouldSetTagToNull()
     {
-        $element = new Zend_Form_Element_Text('foo', array('label' => 'Foo'));
+        $element = new Element\Text('foo', array('label' => 'Foo'));
         $this->decorator->setElement($element)
                         ->setOptions(array('tag' => 'dt'));
         $this->decorator->setTag('');
         $tag = $this->decorator->getTag();
-        $this->assertTrue( NULL === $tag, $tag );
+        $this->assertNull($tag);
     }
-}
-
-// Call Zend_Form_Decorator_LabelTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_LabelTest::main") {
-    Zend_Form_Decorator_LabelTest::main();
 }

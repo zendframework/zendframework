@@ -3008,7 +3008,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
         if (empty($decorators)) {
             $this->addDecorator('FormElements')
                  ->addDecorator('HtmlTag', array('tag' => 'dl', 'class' => 'zend_form'))
-                 ->addDecorator('Form');
+                 ->addDecorator('FormDecorator');
         }
     }
 

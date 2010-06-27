@@ -2507,8 +2507,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->_checkZf2794();
 
-        $decorator = $this->form->getDecorator('form');
-        $this->assertTrue($decorator instanceof \Zend\Form\Decorator\Form);
+        $decorator = $this->form->getDecorator('FormDecorator');
+        $this->assertTrue($decorator instanceof \Zend\Form\Decorator\FormDecorator);
     }
 
     public function testCanDisableRegisteringFormDecoratorsDuringInitialization()
@@ -2647,7 +2647,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
             'FormElements',
             array(array('div' => 'HtmlTag'), array('tag' => 'div')),
             array(array('fieldset' => 'HtmlTag'), array('tag' => 'fieldset')),
-            'Form',
+            'FormDecorator',
         ));
 
         $decorator  = $this->form->getDecorator('fieldset');
@@ -3174,7 +3174,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form->setDecorators(array(
             'FormElements',
             array('HtmlTag', array('tag' => 'table')),
-            'Form',
+            'FormDecorator',
         ));
         $this->form->addElementPrefixPath('My\Decorator', __DIR__ . '/TestAsset/decorators/', 'decorator');
         $this->form->addElement('text', 'test', array(
@@ -3202,7 +3202,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form->setElementDecorators(
             array(
                 'Description',
-                'Form',
+                'FormDecorator',
                 'Fieldset',
             ),
             array(
@@ -3217,14 +3217,14 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($element->getDecorator('HtmlTag'));
         $decorator = $element->getDecorator('Description');
         $this->assertTrue($decorator instanceof \Zend\Form\Decorator\Description);
-        $decorator = $element->getDecorator('Form');
-        $this->assertTrue($decorator instanceof \Zend\Form\Decorator\Form);
+        $decorator = $element->getDecorator('FormDecorator');
+        $this->assertTrue($decorator instanceof \Zend\Form\Decorator\FormDecorator);
         $decorator = $element->getDecorator('Fieldset');
         $this->assertTrue($decorator instanceof \Zend\Form\Decorator\Fieldset);
 
         foreach (array('foo', 'baz') as $name) {
             $element = $this->form->$name;
-            $this->assertFalse($element->getDecorator('Form'));
+            $this->assertFalse($element->getDecorator('FormDecorator'));
             $this->assertFalse($element->getDecorator('Fieldset'));
         }
     }
@@ -3237,7 +3237,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form->setElementDecorators(
             array(
                 'Description',
-                'Form',
+                'FormDecorator',
                 'Fieldset',
             ),
             array(
@@ -3254,14 +3254,14 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($element->getDecorator('HtmlTag'));
         $decorator = $element->getDecorator('Description');
         $this->assertTrue($decorator instanceof \Zend\Form\Decorator\Description);
-        $decorator = $element->getDecorator('Form');
-        $this->assertTrue($decorator instanceof \Zend\Form\Decorator\Form);
+        $decorator = $element->getDecorator('FormDecorator');
+        $this->assertTrue($decorator instanceof \Zend\Form\Decorator\FormDecorator);
         $decorator = $element->getDecorator('Fieldset');
         $this->assertTrue($decorator instanceof \Zend\Form\Decorator\Fieldset);
 
         foreach (array('foo', 'baz') as $name) {
             $element = $this->form->$name;
-            $this->assertFalse($element->getDecorator('Form'));
+            $this->assertFalse($element->getDecorator('FormDecorator'));
             $this->assertFalse($element->getDecorator('Fieldset'));
         }
     }
@@ -3553,7 +3553,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertNotContains('<dl', $html);
         $this->assertNotContains('<form', $html);
 
-        $html = $this->form->renderForm('this is the content');
+        $html = $this->form->renderFormDecorator('this is the content');
         $this->assertContains('<form', $html);
         $this->assertContains('</form>', $html);
         $this->assertContains('this is the content', $html);

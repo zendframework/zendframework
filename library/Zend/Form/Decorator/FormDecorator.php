@@ -47,7 +47,7 @@ use Zend\Form as ZendForm;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Form extends AbstractDecorator
+class FormDecorator extends AbstractDecorator
 {
     /**
      * Default view helper

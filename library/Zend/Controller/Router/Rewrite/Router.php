@@ -39,11 +39,47 @@ use Zend\Controller\Request\HTTP as HTTPRequest;
 class Router
 {
     /**
-     * List of all routes
+     * Heap containing all routes
      *
-     * @var array
+     * @var SplMaxHeap
      */
-    protected $_routes = array();
+    protected $_routes;
+
+    /**
+     * Instantiate a new router
+     *
+     * @param  mixed $options
+     * @return void
+     */
+    public function __construct($options = null)
+    {
+        $this->_routes = SplMaxHeap();
+
+        if ($options !== null) {
+            $this->setOptions($options);
+        }
+    }
+
+    /**
+     * Set options of the router
+     *
+     * @param  mixed $options
+     * @return Router
+     */
+    public function setOptions($options)
+    {
+        if (!is_array($options) || !$options instanceof Traversable) {
+            throw new InvalidArgumentException('Options must either be an array or implement Traversable');
+        }
+
+        foreach ($options as $key => $value) {
+            switch ($key) {
+                case 'routes':
+                    $this->addRoutes($value);
+                    break;
+            }
+        }
+    }
 
     /**
      * Append multiple routes
@@ -61,7 +97,7 @@ class Router
     }
 
     /**
-     * Appends a route to the end of the list
+     * Append a route to the end of the list
      *
      * @param  string $name
      * @param  mixed  $route

@@ -35,7 +35,7 @@ use Zend\Controller\Router\Rewrite\Route\Route;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class PriorityList implements \Iterator
+class PriorityList implements \Iterator, \Countable
 {
     /**
      * Internal list of all routes
@@ -50,6 +50,13 @@ class PriorityList implements \Iterator
      * @var integer
      */
     protected $_serial = 0;
+
+    /**
+     * Internal counter to avoid usage of count()
+     *
+     * @var integer
+     */
+    protected $_count = 0;
 
     /**
      * Wether the list was already sorted
@@ -69,6 +76,7 @@ class PriorityList implements \Iterator
     public function insert($name, Route $route, $priority)
     {
         $this->_sorted = false;
+        $this->_count++;
 
         $this->_routes[$name] = array(
             'route'    => $route,
@@ -86,6 +94,7 @@ class PriorityList implements \Iterator
     public function remove($name)
     {
         $this->_sorted = false;
+        $this->_count--;
 
         unset($this->_routes['name']);
     }
@@ -97,7 +106,7 @@ class PriorityList implements \Iterator
      */
     protected function _sort()
     {
-        usort($this->_routes, array($this, '_compare'));
+        uasort($this->_routes, array($this, '_compare'));
     }
 
     /**
@@ -110,16 +119,16 @@ class PriorityList implements \Iterator
     protected function _compare(array $route1, array $route2)
     {
         if ($route1['priority'] === $route2['priority']) {
-            return ($route1['serial'] < $route2['serial'] ? -1 : 1);
+            return ($route1['serial'] > $route2['serial'] ? -1 : 1);
         }
 
-        return ($route1['priority'] < $route2['priority'] ? -1 : 1);
+        return ($route1['priority'] > $route2['priority'] ? -1 : 1);
     }
 
     /**
-     * rewind(): defined by Iterator interface
+     * rewind(): defined by \Iterator interface
      *
-     * @see    Iterator::rewind()
+     * @see    \Iterator::rewind()
      * @return void
      */
     public function rewind() {
@@ -131,20 +140,20 @@ class PriorityList implements \Iterator
     }
 
     /**
-     * current(): defined by Iterator interface
+     * current(): defined by \Iterator interface
      *
-     * @see    Iterator::current()
+     * @see    \Iterator::current()
      * @return Route
      */
     public function current() {
         $node = current($this->_routes);
-        return ($node !== falsse ? $node['route'] : false);
+        return ($node !== false ? $node['route'] : false);
     }
 
     /**
-     * key(): defined by Iterator interface
+     * key(): defined by \Iterator interface
      *
-     * @see    Iterator::key()
+     * @see    \Iterator::key()
      * @return string
      */
     public function key() {
@@ -152,23 +161,33 @@ class PriorityList implements \Iterator
     }
 
     /**
-     * next(): defined by Iterator interface
+     * next(): defined by \Iterator interface
      *
-     * @see    Iterator::next()
+     * @see    \Iterator::next()
      * @return Route
      */
     public function next() {
-        $node = next($this->var);
-        return $node['route'];
+        $node = next($this->_routes);
+        return ($node !== false ? $node['route'] : false);
     }
 
     /**
-     * valid(): defined by Iterator interface
+     * valid(): defined by \Iterator interface
      *
-     * @see    Iterator::valid()
+     * @see    \Iterator::valid()
      * @return boolean
      */
     public function valid() {
         return ($this->current() !== false);
+    }
+
+    /**
+     * count(): defined by \Countable interface
+     *
+     * @see    \Countable::valid()
+     * @return integer
+     */
+    public function count() {
+        return $this->_count;
     }
 }

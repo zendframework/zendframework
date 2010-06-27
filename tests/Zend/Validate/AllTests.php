@@ -91,7 +91,9 @@ class Zend_Validate_AllTests
         $suite->addTestSuite('Zend_Validate_AlphaTest');
         $suite->addTestSuite('Zend_Validate_BarcodeTest');
         $suite->addTestSuite('Zend_Validate_BetweenTest');
+        $suite->addTestSuite('Zend_Validate_CallbackTest');
         $suite->addTestSuite('Zend_Validate_CcnumTest');
+        $suite->addTestSuite('Zend_Validate_CreditCardTest');
         $suite->addTestSuite('Zend_Validate_DateTest');
         $suite->addTest(Zend_Validate_Db_AllTests::suite());
         $suite->addTestSuite('Zend_Validate_DigitsTest');
@@ -101,6 +103,7 @@ class Zend_Validate_AllTests
         $suite->addTestSuite('Zend_Validate_GreaterThanTest');
         $suite->addTestSuite('Zend_Validate_HexTest');
         $suite->addTestSuite('Zend_Validate_HostnameTest');
+        $suite->addTestSuite('Zend_Validate_IbanTest');
         $suite->addTestSuite('Zend_Validate_IdenticalTest');
         $suite->addTestSuite('Zend_Validate_InArrayTest');
         $suite->addTestSuite('Zend_Validate_IntTest');
@@ -109,6 +112,7 @@ class Zend_Validate_AllTests
         $suite->addTestSuite('Zend_Validate_LessThanTest');
         $suite->addTestSuite('Zend_Validate_MessageTest');
         $suite->addTestSuite('Zend_Validate_NotEmptyTest');
+        $suite->addTestSuite('Zend_Validate_PostCodeTest');
         $suite->addTestSuite('Zend_Validate_RegexTest');
         $suite->addTest(Zend_Validate_Sitemap_AllTests::suite());
         $suite->addTestSuite('Zend_Validate_StringLengthTest');

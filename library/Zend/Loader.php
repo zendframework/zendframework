@@ -21,6 +21,10 @@
 
 namespace Zend;
 
+require_once __DIR__ . '/Loader/ClassNotFoundException.php';
+require_once __DIR__ . '/Loader/InvalidDirectoryArgumentException.php';
+require_once __DIR__ . '/Loader/SecurityException.php';
+
 /**
  * Static methods for loading classes and files.
  *
@@ -59,8 +63,7 @@ class Loader
         }
 
         if ((null !== $dirs) && !is_string($dirs) && !is_array($dirs)) {
-            require_once __DIR__ . '/Loader/InvalidDirectoryArgumentException.php';
-            throw new \Zend\Loader\InvalidDirectoryArgumentException('Directory argument must be a string or an array');
+            throw new Loader\InvalidDirectoryArgumentException('Directory argument must be a string or an array');
         }
 
         // Autodiscover the path from the class name
@@ -98,8 +101,7 @@ class Loader
         }
 
         if (!class_exists($class, false) && !interface_exists($class, false)) {
-            require_once __DIR__ . '/Loader/ClassNotFoundException.php';
-            throw new \Zend\Loader\ClassNotFoundException("File \"$file\" does not exist or class \"$class\" was not found in the file");
+            throw new Loader\ClassNotFoundException("File \"$file\" does not exist or class \"$class\" was not found in the file");
         }
     }
 
@@ -236,8 +238,7 @@ class Loader
          * Security check
          */
         if (preg_match('/[^a-z0-9\\/\\\\_.:-]/i', $filename)) {
-            require_once __DIR__ . '/Loader/SecurityException.php';
-            throw new \Zend\Loader\SecurityException('Illegal character in filename');
+            throw new Loader\SecurityException('Illegal character in filename');
         }
     }
 

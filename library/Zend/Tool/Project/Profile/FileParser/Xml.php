@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Profile\FileParser;
+use Zend\Tool\Project\Profile;
+use Zend\Tool\Project\Profile\Resource;
 
 /**
  * @uses       DOMDocument
@@ -27,25 +33,25 @@
  * @uses       RecursiveIteratorIterator
  * @uses       SimpleXMLElement
  * @uses       SimpleXMLIterator
- * @uses       Zend_Tool_Project_Context_Repository
- * @uses       Zend_Tool_Project_Profile
- * @uses       Zend_Tool_Project_Profile_FileParser_Interface
- * @uses       Zend_Tool_Project_Profile_Resource
+ * @uses       \Zend\Tool\Project\Context\Repository
+ * @uses       \Zend\Tool\Project\Profile\Profile
+ * @uses       \Zend\Tool\Project\Profile\FileParser\FileParserInterface
+ * @uses       \Zend\Tool\Project\Profile\Resource\Resource
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Profile_FileParser_Interface
+class Xml implements FileParserInterface
 {
 
     /**
-     * @var Zend_Tool_Project_Profile
+     * @var \Zend\Tool\Project\Profile\Profile
      */
     protected $_profile = null;
 
     /**
-     * @var Zend_Tool_Project_Context_Repository
+     * @var \Zend\Tool\Project\Context\Repository
      */
     protected $_contextRepository = null;
 
@@ -55,7 +61,7 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
      */
     public function __construct()
     {
-        $this->_contextRepository = Zend_Tool_Project_Context_Repository::getInstance();
+        $this->_contextRepository = \Zend\Tool\Project\Context\Repository::getInstance();
     }
 
     /**
@@ -63,16 +69,16 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
      *
      * create an xml string from the provided profile
      *
-     * @param Zend_Tool_Project_Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @return string
      */
-    public function serialize(Zend_Tool_Project_Profile $profile)
+    public function serialize(Profile\Profile $profile)
     {
 
         $profile = clone $profile;
 
         $this->_profile = $profile;
-        $xmlElement = new SimpleXMLElement('<projectProfile />');
+        $xmlElement = new \SimpleXMLElement('<projectProfile />');
 
         if ($profile->hasAttribute('type')) {
             $xmlElement->addAttribute('type', $profile->getAttribute('type'));
@@ -84,7 +90,7 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
         
         self::_serializeRecurser($profile, $xmlElement);
 
-        $doc = new DOMDocument('1.0');
+        $doc = new \DOMDocument('1.0');
         $doc->formatOutput = true;
         $domnode = dom_import_simplexml($xmlElement);
         $domnode = $doc->importNode($domnode, true);
@@ -100,21 +106,21 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
      * in the xml string provided
      *
      * @param string xml data
-     * @param Zend_Tool_Project_Profile The profile to use as the top node
-     * @return Zend_Tool_Project_Profile
+     * @param \Zend\Tool\Project\Profile\Profile The profile to use as the top node
+     * @return \Zend\Tool\Project\Profile\Profile
      */
-    public function unserialize($data, Zend_Tool_Project_Profile $profile)
+    public function unserialize($data, Profile\Profile $profile)
     {
         if ($data == null) {
-            throw new Exception('contents not available to unserialize.');
+            throw new \Exception('contents not available to unserialize.');
         }
 
         $this->_profile = $profile;
 
-        $xmlDataIterator = new SimpleXMLIterator($data);
+        $xmlDataIterator = new \SimpleXMLIterator($data);
 
         if ($xmlDataIterator->getName() != 'projectProfile') {
-            throw new Exception('Profiles must start with a projectProfile node');
+            throw new \Exception('Profiles must start with a projectProfile node');
         }
         
         if (isset($xmlDataIterator['type'])) {
@@ -144,7 +150,7 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
      * @param array $resources
      * @param SimpleXmlElement $xmlNode
      */
-    protected function _serializeRecurser($resources, SimpleXmlElement $xmlNode)
+    protected function _serializeRecurser($resources, \SimpleXmlElement $xmlNode)
     {
         // @todo find a better way to handle concurrency.. if no clone, _position in node gets messed up
         //if ($resources instanceof Zend_Tool_Project_Profile_Resource) {
@@ -186,15 +192,15 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
      * as needed to *unserialize* the profile from an xmlIterator
      *
      * @param SimpleXMLIterator $xmlIterator
-     * @param Zend_Tool_Project_Profile_Resource $resource
+     * @param \Zend\Tool\Project\Profile\Resource\Resource $resource
      */
-    protected function _unserializeRecurser(SimpleXMLIterator $xmlIterator, Zend_Tool_Project_Profile_Resource $resource = null)
+    protected function _unserializeRecurser(\SimpleXMLIterator $xmlIterator, Resource\Resource $resource = null)
     {
 
         foreach ($xmlIterator as $resourceName => $resourceData) {
 
             $contextName = $resourceName;
-            $subResource = new Zend_Tool_Project_Profile_Resource($contextName);
+            $subResource = new Resource\Resource($contextName);
             $subResource->setProfile($this->_profile);
 
             if ($resourceAttributes = $resourceData->attributes()) {
@@ -232,7 +238,7 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
     {
 
         foreach ($this->_profile as $topResource) {
-            $rii = new RecursiveIteratorIterator($topResource, RecursiveIteratorIterator::SELF_FIRST);
+            $rii = new \RecursiveIteratorIterator($topResource, \RecursiveIteratorIterator::SELF_FIRST);
             foreach ($rii as $resource) {
                 $resource->initializeContext();
             }

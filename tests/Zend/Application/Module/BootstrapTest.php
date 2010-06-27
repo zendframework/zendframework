@@ -20,7 +20,16 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__) . '/../_files/ZfModuleBootstrap.php';
+namespace ZendTest\Application\Module;
+
+use Zend\Application\Module\Bootstrap as ModuleBootstrap,
+    Zend\Loader\Autoloader,
+    Zend\Loader\ResourceAutoloader,
+    Zend\Application\Application,
+    Zend\Controller\Front as FrontController,
+    ZendTest\Application\TestAssett\ZfModule_Bootstrap;
+
+require_once __DIR__ . '/../TestAssett/ZfModuleBootstrap.php';
 
 /**
  * @category   Zend
@@ -30,14 +39,8 @@ require_once dirname(__FILE__) . '/../_files/ZfModuleBootstrap.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
+class BootstrapTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         // Store original autoloaders
@@ -48,12 +51,12 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
             $this->loaders = array();
         }
 
-        Zend_Loader_Autoloader::resetInstance();
-        $this->autoloader = Zend_Loader_Autoloader::getInstance();
+        Autoloader::resetInstance();
+        $this->autoloader = Autoloader::getInstance();
 
-        $this->application = new Zend_Application('testing');
+        $this->application = new Application('testing');
 
-        Zend_Controller_Front::getInstance()->resetInstance();
+        FrontController::getInstance()->resetInstance();
     }
 
     public function tearDown()
@@ -69,12 +72,12 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
         }
 
         // Reset autoloader instance so it doesn't affect other tests
-        Zend_Loader_Autoloader::resetInstance();
+        Autoloader::resetInstance();
     }
 
     public function testConstructorShouldInitializeModuleResourceLoaderWithModulePrefix()
     {
-        $bootstrap = new ZfModule_Bootstrap($this->application);
+        $bootstrap = new \ZfModule_Bootstrap($this->application);
         $module = $bootstrap->getModuleName();
         $loader = $bootstrap->getResourceLoader();
         $this->assertNotNull($loader, "resource loader is unexpectedly NULL");
@@ -83,19 +86,19 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorShouldAcceptResourceLoaderInOptions()
     {
-        $loader = new Zend_Loader_Autoloader_Resource(array(
+        $loader = new ResourceAutoloader(array(
             'namespace' => 'Foo',
-            'basePath'  => dirname(__FILE__),
+            'basePath'  => __DIR__,
         ));
         $this->application->setOptions(array('resourceLoader' => $loader));
 
-        $bootstrap = new ZfModule_Bootstrap($this->application);
+        $bootstrap = new \ZfModule_Bootstrap($this->application);
         $this->assertSame($loader, $bootstrap->getResourceLoader(), var_export($bootstrap->getOptions(), 1));
     }
 
     public function testModuleNameShouldBeFirstSegmentOfClassName()
     {
-        $bootstrap = new ZfModule_Bootstrap($this->application);
+        $bootstrap = new \ZfModule_Bootstrap($this->application);
         $this->assertEquals('ZfModule', $bootstrap->getModuleName());
     }
 
@@ -108,7 +111,7 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
             )
         );
         $this->application->setOptions($options);
-        $bootstrap = new ZfModule_Bootstrap($this->application);
+        $bootstrap = new \ZfModule_Bootstrap($this->application);
         $this->assertEquals('baz', $bootstrap->foo);
     }
 
@@ -117,7 +120,7 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
      */
     public function testFrontControllerPluginResourceShouldBeRegistered()
     {
-        $bootstrap = new ZfModule_Bootstrap($this->application);
+        $bootstrap = new \ZfModule_Bootstrap($this->application);
         $this->assertTrue($bootstrap->hasPluginResource('FrontController'));
     }
 
@@ -130,12 +133,12 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
             'resources' => array(
                 'frontController' => array(
                     'baseUrl'             => '/foo',
-                    'controllerDirectory' => dirname(__FILE__),
+                    'controllerDirectory' => __DIR__,
                 ),
             ),
             'bootstrap' => array(
-                'path'  => dirname(__FILE__) . '/../_files/ZfAppBootstrap.php',
-                'class' => 'ZfAppBootstrap',
+                'path'  => __DIR__ . '/../TestAssett/ZfAppBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAssett\\ZfAppBootstrap',
             ),
             'ZfModule' => array(
                 'resources' => array(
@@ -146,12 +149,12 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
         $appBootstrap = $this->application->getBootstrap();
         $appBootstrap->bootstrap('FrontController');
         $front = $appBootstrap->getResource('FrontController');
-        $bootstrap = new ZfModule_Bootstrap($appBootstrap);
+        $bootstrap = new \ZfModule_Bootstrap($appBootstrap);
         $bootstrap->bootstrap('FrontController');
         $test = $bootstrap->getResource('FrontController');
         $this->assertSame($front, $test);
         $this->assertEquals('/foo', $test->getBaseUrl());
-        $this->assertEquals(dirname(__FILE__), $test->getControllerDirectory('default'));
+        $this->assertEquals(__DIR__, $test->getControllerDirectory('default'));
     }
 
     /**
@@ -164,12 +167,12 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
                 'modules' => array(),
                 'frontController' => array(
                     'baseUrl'             => '/foo',
-                    'moduleDirectory'     => dirname(__FILE__) . '/../_files/modules',
+                    'moduleDirectory'     => __DIR__ . '/../TestAssett/modules',
                 ),
             ),
             'bootstrap' => array(
-                'path'  => dirname(__FILE__) . '/../_files/ZfAppBootstrap.php',
-                'class' => 'ZfAppBootstrap',
+                'path'  => __DIR__ . '/../TestAssett/ZfAppBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAssett\\ZfAppBootstrap',
             )
         ));
         $appBootstrap = $this->application->getBootstrap();
@@ -195,15 +198,15 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
                 'modules' => array(),
                 'frontController' => array(
                     'baseUrl'             => '/foo',
-                    'moduleDirectory'     => dirname(__FILE__) . '/../_files/modules',
+                    'moduleDirectory'     => __DIR__ . '/../TestAssett/modules',
                 ),
             ),
             'pluginPaths' => array(
-                'ZfModuleBootstrap_Resource' => dirname(__FILE__),
+                'ZfModule\\Bootstrap\\Resource' => __DIR__,
             ),
             'bootstrap' => array(
-                'path'  => dirname(__FILE__) . '/../_files/ZfAppBootstrap.php',
-                'class' => 'ZfAppBootstrap',
+                'path'  => __DIR__ . '/../TestAssett/ZfAppBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAssett\\ZfAppBootstrap',
             )
         ));
         $appBootstrap = $this->application->getBootstrap();
@@ -212,7 +215,7 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
         foreach ($modules as $bootstrap) {
             $loader = $bootstrap->getPluginLoader();
             $paths  = $loader->getPaths();
-            $this->assertTrue(array_key_exists('ZfModuleBootstrap_Resource_', $paths));
+            $this->assertTrue(array_key_exists('ZfModule\\Bootstrap\\Resource\\', $paths));
         }
     }
 }

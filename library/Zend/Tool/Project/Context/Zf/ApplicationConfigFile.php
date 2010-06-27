@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Context\Zf;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
@@ -28,14 +33,14 @@
  *
  * @uses       RecursiveArrayIterator
  * @uses       RecursiveIteratorIterator
- * @uses       Zend_Config_Ini
- * @uses       Zend_Tool_Project_Context_Filesystem_File
+ * @uses       \Zend\Config\Ini
+ * @uses       \Zend\Tool\Project\Context\Filesystem\File
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Project_Context_Filesystem_File
+class ApplicationConfigFile extends \Zend\Tool\Project\Context\Filesystem\File
 {
 
     /**
@@ -61,7 +66,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
     /**
      * init()
      *
-     * @return Zend_Tool_Project_Context_Zf_ApplicationConfigFile
+     * @return \Zend\Tool\Project\Context\Zf\ApplicationConfigFile
      */
     public function init()
     {
@@ -101,7 +106,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
 
     public function getAsZendConfig($section = 'production')
     {
-        return new Zend_Config_Ini($this->getPath(), $section);
+        return new \Zend\Config\Ini($this->getPath(), $section);
     }
     
     /**
@@ -111,7 +116,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
      * @param string $value
      * @param string $section
      * @param bool   $quoteValue
-     * @return Zend_Tool_Project_Context_Zf_ApplicationConfigFile
+     * @return \Zend\Tool\Project\Context\Zf\ApplicationConfigFile
      */
     public function addStringItem($key, $value, $section = 'production', $quoteValue = true)
     {
@@ -155,7 +160,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
      * @param array $item
      * @param string $section
      * @param bool $quoteValue
-     * @return Zend_Tool_Project_Context_Zf_ApplicationConfigFile
+     * @return \Zend\Tool\Project\Context\Zf\ApplicationConfigFile
      */
     public function addItem($item, $section = 'production', $quoteValue = true)
     {
@@ -163,9 +168,9 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
         $stringValues = array();
         $configKeyNames = array();
         
-        $rii = new RecursiveIteratorIterator(
-            new RecursiveArrayIterator($item),
-            RecursiveIteratorIterator::SELF_FIRST
+        $rii = new \RecursiveIteratorIterator(
+            new \RecursiveArrayIterator($item),
+            \RecursiveIteratorIterator::SELF_FIRST
             );
         
         $lastDepth = 0;
@@ -223,9 +228,9 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
         $stringValues = array();
         $configKeyNames = array();
         
-        $rii = new RecursiveIteratorIterator(
-            new RecursiveArrayIterator($item),
-            RecursiveIteratorIterator::SELF_FIRST
+        $rii = new \RecursiveIteratorIterator(
+            new \RecursiveArrayIterator($item),
+            \RecursiveIteratorIterator::SELF_FIRST
             );
         
         $lastDepth = 0;

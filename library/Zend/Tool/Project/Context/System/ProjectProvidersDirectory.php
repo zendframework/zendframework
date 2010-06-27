@@ -21,24 +21,29 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Context\System;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
  * @uses       DirectoryIterator
- * @uses       Zend_Tool_Project_Context_Filesystem_Directory
- * @uses       Zend_Tool_Project_Context_System_Interface
- * @uses       Zend_Tool_Project_Context_System_NotOverwritable
+ * @uses       \Zend\Tool\Project\Context\Filesystem\Directory
+ * @uses       \Zend\Tool\Project\Context\System\SystemInterface
+ * @uses       \Zend\Tool\Project\Context\System\NotOverwritable
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_System_ProjectProvidersDirectory
-    extends Zend_Tool_Project_Context_Filesystem_Directory
-    implements Zend_Tool_Project_Context_System_Interface,
-               Zend_Tool_Project_Context_System_NotOverwritable
+class ProjectProvidersDirectory
+    extends \Zend\Tool\Project\Context\Filesystem\Directory
+    implements SystemInterface,
+               NotOverwritable
 {
 
     /**
@@ -59,7 +64,7 @@ class Zend_Tool_Project_Context_System_ProjectProvidersDirectory
     /**
      * init()
      *
-     * @return Zend_Tool_Project_Context_System_ProjectProvidersDirectory
+     * @return \Zend\Tool\Project\Context\System\ProjectProvidersDirectory
      */
     public function init()
     {
@@ -67,7 +72,7 @@ class Zend_Tool_Project_Context_System_ProjectProvidersDirectory
 
         if (file_exists($this->getPath())) {
 
-            foreach (new DirectoryIterator($this->getPath()) as $item) {
+            foreach (new \DirectoryIterator($this->getPath()) as $item) {
                 if ($item->isFile()) {
                     $loadableFiles[] = $item->getPathname();
                 }

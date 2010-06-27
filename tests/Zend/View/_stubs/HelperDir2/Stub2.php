@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\View\_stubs\HelperDir2;
+namespace Zend\View\Helper;
 
 \PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
@@ -38,7 +38,7 @@ class Stub2
 {
     public $view;
 
-    public function stub2()
+    public function direct()
     {
         return 'bar';
     }

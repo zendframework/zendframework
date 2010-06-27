@@ -21,32 +21,38 @@
  */
 
 /**
- * @uses       Zend_Version
+ * @namespace
+ */
+namespace Zend\Tool\Framework\Client\Console;
+use Zend\Tool\Framework\Metadata;
+
+/**
+ * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Client_Console_HelpSystem
+class HelpSystem
 {
 
     /**
-     * @var Zend_Tool_Framework_Registry_Interface
+     * @var \Zend\Tool\Framework\Registry\RegistryInterface
      */
     protected $_registry = null;
 
     /**
-     * @var Zend_Tool_Framework_Client_Response
+     * @var \Zend\Tool\Framework\Client\Response\Response
      */
     protected $_response = null;
 
     /**
      * setRegistry()
      *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
-     * @return Zend_Tool_Framework_Client_Console_HelpSystem
+     * @param \Zend\Tool\Framework\Registry\RegistryInterface $registry
+     * @return \Zend\Tool\Framework\Client\Console\HelpSystem
      */
-    public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
+    public function setRegistry(\Zend\Tool\Framework\Registry\RegistryInterface $registry)
     {
         $this->_registry = $registry;
         $this->_response = $registry->getResponse();
@@ -59,7 +65,7 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
      * @param string $errorMessage
      * @param Exception $exception
      */
-    public function respondWithErrorMessage($errorMessage, Exception $exception = null)
+    public function respondWithErrorMessage($errorMessage, \Exception $exception = null)
     {
         // break apart the message into wrapped chunks
         $errorMessages = explode(PHP_EOL, wordwrap($errorMessage, 70, PHP_EOL, false));
@@ -79,7 +85,7 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
     /**
      * respondWithGeneralHelp()
      *
-     * @return Zend_Tool_Framework_Client_Console_HelpSystem
+     * @return \Zend\Tool\Framework\Client\Console\HelpSystem
      */
     public function respondWithGeneralHelp()
     {
@@ -108,7 +114,7 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
      * respondWithActionHelp()
      *
      * @param string $actionName
-     * @return Zend_Tool_Framework_Client_Console_HelpSystem
+     * @return \Zend\Tool\Framework\Client\Console\HelpSystem
      */
     public function respondWithActionHelp($actionName)
     {
@@ -123,7 +129,7 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
      *
      * @param string $providerName
      * @param string $actionName
-     * @return Zend_Tool_Framework_Client_Console_HelpSystem
+     * @return \Zend\Tool\Framework\Client\Console\HelpSystem
      */
     public function respondWithSpecialtyAndParamHelp($providerName, $actionName)
     {
@@ -140,7 +146,7 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
      * respondWithProviderHelp()
      *
      * @param string $providerName
-     * @return Zend_Tool_Framework_Client_Console_HelpSystem
+     * @return \Zend\Tool\Framework\Client\Console\HelpSystem
      */
     public function respondWithProviderHelp($providerName)
     {
@@ -153,12 +159,12 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
     /**
      * _respondWithHeader()
      *
-     * @return Zend_Tool_Framework_Client_Console_HelpSystem
+     * @return \Zend\Tool\Framework\Client\Console\HelpSystem
      */
     protected function _respondWithHeader()
     {
         $this->_response->appendContent('Zend Framework', array('color' => array('hiWhite'), 'separator' => false));
-        $this->_response->appendContent(' Command Line Console Tool v' . Zend_Version::VERSION . '');
+        $this->_response->appendContent(' Command Line Console Tool v' . \Zend\Version::VERSION . '');
         return $this;
     }
 
@@ -168,7 +174,7 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
      * @param string $providerNameFilter
      * @param string $actionNameFilter
      * @param bool $includeAllSpecialties
-     * @return Zend_Tool_Framework_Client_Console_HelpSystem
+     * @return \Zend\Tool\Framework\Client\Console\HelpSystem
      */
     protected function _respondWithSystemInformation($providerNameFilter = null, $actionNameFilter = null, $includeAllSpecialties = false)
     {
@@ -325,10 +331,10 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
     /**
      * _respondWithProviderName()
      *
-     * @param Zend_Tool_Framework_Metadata_Tool $providerMetadata
-     * @return Zend_Tool_Framework_Client_Console_HelpSystem
+     * @param \Zend\Tool\Framework\Metadata\Tool $providerMetadata
+     * @return \Zend\Tool\Framework\Client\Console\HelpSystem
      */
-    protected function _respondWithProviderName(Zend_Tool_Framework_Metadata_Tool $providerMetadata)
+    protected function _respondWithProviderName(Metadata\Tool $providerMetadata)
     {
         $this->_response->appendContent('  ' . $providerMetadata->getProviderName());
         return $this;
@@ -337,17 +343,17 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
     /**
      * _respondWithCommand()
      *
-     * @param Zend_Tool_Framework_Metadata_Tool $providerMetadata
-     * @param Zend_Tool_Framework_Metadata_Tool $actionMetadata
-     * @param Zend_Tool_Framework_Metadata_Tool $specialtyMetadata
-     * @param Zend_Tool_Framework_Metadata_Tool $parameterLongMetadata
-     * @return Zend_Tool_Framework_Client_Console_HelpSystem
+     * @param \Zend\Tool\Framework\Metadata\Tool $providerMetadata
+     * @param \Zend\Tool\Framework\Metadata\Tool $actionMetadata
+     * @param \Zend\Tool\Framework\Metadata\Tool $specialtyMetadata
+     * @param \Zend\Tool\Framework\Metadata\Tool $parameterLongMetadata
+     * @return \Zend\Tool\Framework\Client\Console\HelpSystem
      */
     protected function _respondWithCommand(
-        Zend_Tool_Framework_Metadata_Tool $providerMetadata,
-        Zend_Tool_Framework_Metadata_Tool $actionMetadata,
-        Zend_Tool_Framework_Metadata_Tool $specialtyMetadata,
-        Zend_Tool_Framework_Metadata_Tool $parameterLongMetadata)//,
+        Metadata\Tool $providerMetadata,
+        Metadata\Tool $actionMetadata,
+        Metadata\Tool $specialtyMetadata,
+        Metadata\Tool $parameterLongMetadata)//,
         //Zend_Tool_Framework_Metadata_Tool $parameterShortMetadata)
     {
         $this->_response->appendContent(

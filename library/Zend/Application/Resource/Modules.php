@@ -21,18 +21,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Application\Resource;
+
+/**
  * Module bootstrapping resource
  *
  * @uses       ArrayObject
- * @uses       Zend_Application_Resource_Exception
- * @uses       Zend_Application_Resource_ResourceAbstract
+ * @uses       \Zend\Application\ResourceException
+ * @uses       \Zend\Application\Resource\AbstractResource
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_Modules extends Zend_Application_Resource_ResourceAbstract
+class Modules extends AbstractResource
 {
     /**
      * @var ArrayObject
@@ -47,7 +52,7 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
      */
     public function __construct($options = null)
     {
-        $this->_bootstraps = new ArrayObject(array(), ArrayObject::ARRAY_AS_PROPS);
+        $this->_bootstraps = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
         parent::__construct($options);
     }
 
@@ -55,13 +60,13 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
      * Initialize modules
      *
      * @return array
-     * @throws Zend_Application_Resource_Exception When bootstrap class was not found
+     * @throws \Zend\Application\ResourceException When bootstrap class was not found
      */
     public function init()
     {
         $bootstrap = $this->getBootstrap();
-        $bootstrap->bootstrap('FrontController');
-        $front = $bootstrap->getResource('FrontController');
+        $bootstrap->bootstrap('frontcontroller');
+        $front = $bootstrap->getResource('frontcontroller');
 
         $modules = $front->getControllerDirectory();
         $default = $front->getDefaultModule();
@@ -76,14 +81,14 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
                     if (($default != $module)
                         && !class_exists($bootstrapClass, false)
                     ) {
-                        throw new Zend_Application_Resource_Exception(sprintf(
+                        throw new xception(sprintf(
                             $eMsgTpl, $module, $bootstrapClass
                         ));
                     } elseif ($default == $module) {
                         if (!class_exists($bootstrapClass, false)) {
                             $bootstrapClass = 'Bootstrap';
                             if (!class_exists($bootstrapClass, false)) {
-                                throw new Zend_Application_Resource_Exception(sprintf(
+                                throw new xception(sprintf(
                                     $eMsgTpl, $module, $bootstrapClass
                                 ));
                             }

@@ -254,9 +254,10 @@ class DB
          * Load the adapter class.  This throws an exception
          * if the specified class cannot be loaded.
          */
-//        if (!class_exists($adapterName)) {
+        if (!class_exists($adapterName)) {
 //            \Zend\Loader::loadClass($adapterName);
-//        }
+            echo "FAILED TO FIND $adapterName\n";
+        }
 
         /*
          * Create an instance of the adapter class.

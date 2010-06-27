@@ -55,7 +55,7 @@ class AutoloaderTest extends \PHPUnit_Framework_TestCase
 
         $this->loader = new ModuleAutoloader(array(
             'namespace' => 'FooBar',
-            'basePath'  => realpath(dirname(__FILE__) . '/_files'),
+            'basePath'  => realpath(__DIR__ . '/_files'),
         ));
     }
 

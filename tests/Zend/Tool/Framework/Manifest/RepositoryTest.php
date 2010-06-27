@@ -21,15 +21,10 @@
  */
 
 /**
- * @see TestHelper.php
+ * @namespace
  */
-
-/**
- * @see Zend_Tool_Framework_Manifest_Repository
- */
-
-
-
+namespace ZendTest\Tool\Framework\Manifest;
+use Zend\Tool\Framework\Metadata;
 
 /**
  * @category   Zend
@@ -42,7 +37,7 @@
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Manifest
  */
-class Zend_Tool_Framework_Manifest_RepositoryTest extends PHPUnit_Framework_TestCase
+class RepositoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_Tool_Framework_Registry
@@ -56,12 +51,12 @@ class Zend_Tool_Framework_Manifest_RepositoryTest extends PHPUnit_Framework_Test
 
     public function setup()
     {
-        $this->_repository = new Zend_Tool_Framework_Manifest_Repository();
+        $this->_repository = new \Zend\Tool\Framework\Manifest\Repository();
 
         // setup the registry components required to test with
-        $this->_registry = new Zend_Tool_Framework_Registry();
-        $this->_registry->setProviderRepository(new Zend_Tool_Framework_Provider_Repository());
-        $this->_registry->setActionRepository(new Zend_Tool_Framework_Action_Repository());
+        $this->_registry = new \Zend\Tool\Framework\Registry\Registry();
+        $this->_registry->setProviderRepository(new \Zend\Tool\Framework\Provider\Repository());
+        $this->_registry->setActionRepository(new \Zend\Tool\Framework\Action\Repository());
         $this->_registry->setManifestRepository($this->_repository);
     }
 
@@ -73,8 +68,8 @@ class Zend_Tool_Framework_Manifest_RepositoryTest extends PHPUnit_Framework_Test
 
     public function testAddManfestsWillPersistManifests()
     {
-        $this->_repository->addManifest(new Zend_Tool_Framework_Manifest_Asset_ManifestGoodOne());
-        $this->_repository->addManifest(new Zend_Tool_Framework_Manifest_Asset_ManifestGoodTwo());
+        $this->_repository->addManifest(new \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestGoodOne());
+        $this->_repository->addManifest(new \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestGoodTwo());
         $this->assertEquals(2, count($this->_repository->getManifests()));
 
         $actionRepository = $this->_registry->getActionRepository();
@@ -96,30 +91,28 @@ class Zend_Tool_Framework_Manifest_RepositoryTest extends PHPUnit_Framework_Test
 
     public function testAddManfestsWillPersistManifestsAndObeyIndex()
     {
-        $this->_repository->addManifest(new Zend_Tool_Framework_Manifest_Asset_ManifestGoodTwo());
-        $this->_repository->addManifest(new Zend_Tool_Framework_Manifest_Asset_ManifestGoodOne());
+        $this->_repository->addManifest(new \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestGoodTwo());
+        $this->_repository->addManifest(new \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestGoodOne());
 
 
         $manifests = $this->_repository->getManifests();
 
         $this->assertEquals(2, count($manifests));
-        $this->assertTrue(array_shift($manifests) instanceof Zend_Tool_Framework_Manifest_Asset_ManifestGoodOne);
-        $this->assertTrue(array_shift($manifests) instanceof Zend_Tool_Framework_Manifest_Asset_ManifestGoodTwo);
+        $this->assertTrue(array_shift($manifests) instanceof \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestGoodOne);
+        $this->assertTrue(array_shift($manifests) instanceof \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestGoodTwo);
 
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Manifest_Exception
-     */
     public function testAddManifestThrowsExceptionOnBadGetProviders()
     {
-        $this->_repository->addManifest(new Zend_Tool_Framework_Manifest_Asset_ManifestBadProvider());
+        $this->setExpectedException('Zend\Tool\Framework\Manifest\Exception');
+        $this->_repository->addManifest(new \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestBadProvider());
     }
 
     public function testProcessAddsMetadataToManifest()
     {
-        $this->_repository->addManifest(new Zend_Tool_Framework_Manifest_Asset_ManifestGoodTwo());
-        $this->_repository->addManifest(new Zend_Tool_Framework_Manifest_Asset_ManifestGoodOne());
+        $this->_repository->addManifest(new \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestGoodTwo());
+        $this->_repository->addManifest(new \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestGoodOne());
         $this->_repository->process();
 
         //die(); // @todo ensure that we check whats actually in the repository
@@ -127,19 +120,18 @@ class Zend_Tool_Framework_Manifest_RepositoryTest extends PHPUnit_Framework_Test
         $this->assertEquals(2, count($this->_repository->getManifests()));
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Manifest_Exception
-     */
+
     public function testProcessThrowsExceptionOnBadMetadata()
     {
-        $this->_repository->addManifest(new Zend_Tool_Framework_Manifest_Asset_ManifestBadMetadata());
+        $this->setExpectedException('Zend\Tool\Framework\Manifest\Exception');
+        $this->_repository->addManifest(new \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestBadMetadata());
         $this->_repository->process();
     }
 
     public function testRepositoryIsCastableToString()
     {
-        $this->_repository->addManifest(new Zend_Tool_Framework_Manifest_Asset_ManifestGoodTwo());
-        $this->_repository->addManifest(new Zend_Tool_Framework_Manifest_Asset_ManifestGoodOne());
+        $this->_repository->addManifest(new \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestGoodTwo());
+        $this->_repository->addManifest(new \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestGoodOne());
         $this->_repository->process();
 
         $expected = 'Basic' . PHP_EOL . '    Type: Basic, Name: FooOne, Value: Bar' . PHP_EOL
@@ -151,19 +143,19 @@ class Zend_Tool_Framework_Manifest_RepositoryTest extends PHPUnit_Framework_Test
 
     public function testRepositoryIsCountable()
     {
-        $this->_repository->addManifest(new Zend_Tool_Framework_Manifest_Asset_ManifestGoodOne());
+        $this->_repository->addManifest(new \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestGoodOne());
         $this->_repository->process();
 
-        $this->assertTrue($this->_repository instanceof Countable);
+        $this->assertTrue($this->_repository instanceof \Countable);
         $this->assertEquals(1, count($this->_repository));
     }
 
     public function testRepositoryIsIterable()
     {
-        $this->_repository->addManifest(new Zend_Tool_Framework_Manifest_Asset_ManifestGoodOne());
+        $this->_repository->addManifest(new \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestGoodOne());
         $this->_repository->process();
 
-        $this->assertTrue($this->_repository instanceof Traversable);
+        $this->assertTrue($this->_repository instanceof \Traversable);
         foreach ($this->_repository as $thing) {
             $this->assertTrue(true);
         }
@@ -171,17 +163,17 @@ class Zend_Tool_Framework_Manifest_RepositoryTest extends PHPUnit_Framework_Test
 
     public function testManifestGetMetadatasCollectionSearchWorks()
     {
-        $metadata1 = new Zend_Tool_Framework_Metadata_Basic(array(
+        $metadata1 = new Metadata\Basic(array(
             'name' => 'Foo',
             'value' => 'Bar',
             ));
 
-        $metadata2 = new Zend_Tool_Framework_Metadata_Basic(array(
+        $metadata2 = new Metadata\Basic(array(
             'name' => 'Bar',
             'value' => 'Baz',
             ));
 
-        $metadata3 = new Zend_Tool_Framework_Metadata_Basic(array(
+        $metadata3 = new Metadata\Basic(array(
             'name' => 'Baz',
             'value' => 'Foo',
             ));
@@ -199,17 +191,17 @@ class Zend_Tool_Framework_Manifest_RepositoryTest extends PHPUnit_Framework_Test
 
     public function testManifestGetMetadataSingularSearchWorks()
     {
-        $metadata1 = new Zend_Tool_Framework_Metadata_Basic(array(
+        $metadata1 = new Metadata\Basic(array(
             'name' => 'Foo',
             'value' => 'Bar',
             ));
 
-        $metadata2 = new Zend_Tool_Framework_Metadata_Basic(array(
+        $metadata2 = new Metadata\Basic(array(
             'name' => 'Bar',
             'value' => 'Baz',
             ));
 
-        $metadata3 = new Zend_Tool_Framework_Metadata_Basic(array(
+        $metadata3 = new Metadata\Basic(array(
             'name' => 'Baz',
             'value' => 'Foo',
             ));
@@ -225,17 +217,17 @@ class Zend_Tool_Framework_Manifest_RepositoryTest extends PHPUnit_Framework_Test
 
     public function testManifestGetMetadatasCollectionSearchWorksWithNonExistentProperties()
     {
-        $metadata1 = new Zend_Tool_Framework_Metadata_Basic(array(
+        $metadata1 = new Metadata\Basic(array(
             'name' => 'Foo',
             'value' => 'Bar',
             ));
 
-        $metadata2 = new Zend_Tool_Framework_Metadata_Basic(array(
+        $metadata2 = new Metadata\Basic(array(
             'name' => 'Bar',
             'value' => 'Baz',
             ));
 
-        $metadata3 = new Zend_Tool_Framework_Metadata_Basic(array(
+        $metadata3 = new Metadata\Basic(array(
             'name' => 'Baz',
             'value' => 'Foo',
             ));

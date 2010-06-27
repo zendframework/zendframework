@@ -161,20 +161,22 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($module, $scriptPaths[0]);
 
         $helperPaths = $this->helper->view->getHelperPaths();
-        $test        = ucfirst($module) . '\View\Helper\\';
+        $testNS      = ucfirst($module) . '\View\Helper\\';
+        $testPrefix  = ucfirst($module) . '_View_Helper_';
         $found       = false;
         foreach ($helperPaths as $prefix => $paths) {
-            if ($test == $prefix) {
+            if ($testNS == $prefix || $testPrefix == $prefix) {
                 $found = true;
             }
         }
         $this->assertTrue($found, 'Did not find auto-initialized helper path: ' . var_export($helperPaths, 1));
 
         $filterPaths = $this->helper->view->getFilterPaths();
-        $test        = ucfirst($module) . '\View\Filter\\';
+        $testNS      = ucfirst($module) . '\View\Filter\\';
+        $testPrefix  = ucfirst($module) . '_View_Filter_';
         $found = false;
         foreach ($filterPaths as $prefix => $paths) {
-            if ($test == $prefix) {
+            if ($testNS == $prefix || $testPrefix == $prefix) {
                 $found = true;
             }
         }
@@ -808,7 +810,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
 
         $this->helper->render();
         $body = $this->response->getBody();
-        $this->assertContains('fooUseHelper invoked', $body, 'Received ' . $body);
+        $this->assertContains('FooUseHelper invoked', $body, 'Received ' . $body);
     }
 
     public function testCorrectViewHelperPathShouldBePropagatedWhenSubControllerInvokedInDefaultModule()

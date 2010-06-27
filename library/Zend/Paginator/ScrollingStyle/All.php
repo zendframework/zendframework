@@ -20,26 +20,31 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Paginator\ScrollingStyle;
+
+/**
  * A scrolling style that returns every page in the collection.
  * Useful when it is necessary to make every page available at
  * once--for example, when using a dropdown menu pagination control.
  *
- * @uses       Zend_Paginator_ScrollingStyle_Interface
+ * @uses       \Zend\Paginator\ScrollingStyle\ScrollingStyleInterface
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Paginator_ScrollingStyle_All implements Zend_Paginator_ScrollingStyle_Interface
+class All implements ScrollingStyleInterface
 {
     /**
      * Returns an array of all pages given a page number and range.
      *
-     * @param  Zend_Paginator $paginator
+     * @param  \Zend\Paginator\Paginator $paginator
      * @param  integer $pageRange Unused
      * @return array
      */
-    public function getPages(Zend_Paginator $paginator, $pageRange = null)
+    public function getPages(\Zend\Paginator\Paginator $paginator, $pageRange = null)
     {
         return $paginator->getPagesInRange(1, $paginator->count());
     }

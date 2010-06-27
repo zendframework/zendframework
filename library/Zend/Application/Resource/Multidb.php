@@ -21,6 +21,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Application\Resource;
+
+use Zend\DB\Adapter,
+    Zend\Application\ResourceException;
+
+/**
  * Database resource for multiple database setups
  *
  * Example configuration:
@@ -39,17 +47,17 @@
  *   resources.multidb.db2.dbname = "db2"
  * </pre>
  *
- * @uses       Zend_Application_Resource_Exception
- * @uses       Zend_Application_Resource_ResourceAbstract
- * @uses       Zend_Db
- * @uses       Zend_Db_Table
+ * @uses       \Zend\Application\ResourceException
+ * @uses       \Zend\Application\Resource\AbstractResource
+ * @uses       \Zend\DB\DB
+ * @uses       \Zend\DB\Table\Table
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_Multidb extends Zend_Application_Resource_ResourceAbstract
+class Multidb extends AbstractResource
 {
     /**
      * Associative array containing all configured db's
@@ -61,14 +69,14 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
     /**
      * An instance of the default db, if set
      * 
-     * @var null|Zend_Db_Adapter_Abstract
+     * @var null|\Zend\DB\Adapter\AbstractAdapter
      */
     protected $_defaultDb;
 
     /**
      * Initialize the Database Connections (instances of Zend_Db_Table_Abstract)
      *
-     * @return Zend_Application_Resource_Multidb
+     * @return \Zend\Application\Resource\MultiDB
      */    
     public function init() 
     {
@@ -79,7 +87,7 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
             $default = isset($params['default'])?(int)$params['default']:false;
             unset($params['adapter'], $params['default']);
         	
-            $this->_dbs[$id] = Zend_Db::factory($adapter, $params);
+            $this->_dbs[$id] = \Zend\DB\DB::factory($adapter, $params);
 
             if ($default
                 // For consistency with the Db Resource Plugin
@@ -96,12 +104,12 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
     /**
      * Determine if the given db(identifier) is the default db.
      *
-     * @param  string|Zend_Db_Adapter_Abstract $db The db to determine whether it's set as default
+     * @param  string|\Zend\DB\Adapter\AbstractAdapter $db The db to determine whether it's set as default
      * @return boolean True if the given parameter is configured as default. False otherwise
      */
     public function isDefault($db)
     {
-        if(!$db instanceof Zend_Db_Adapter_Abstract) {
+        if(!$db instanceof Adapter\AbstractAdapter) {
             $db = $this->getDb($db);
         }
 
@@ -111,10 +119,10 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
     /**
      * Retrieve the specified database connection
      * 
-     * @param  null|string|Zend_Db_Adapter_Abstract $db The adapter to retrieve.
+     * @param  null|string|\Zend\DB\Adapter\AbstractAdapter $db The adapter to retrieve.
      *                                               Null to retrieve the default connection
-     * @return Zend_Db_Adapter_Abstract
-     * @throws Zend_Application_Resource_Exception if the given parameter could not be found
+     * @return \Zend\DB\Adapter\AbstractAdapter
+     * @throws \Zend\Application\ResourceException if the given parameter could not be found
      */
     public function getDb($db = null) 
     {
@@ -126,7 +134,7 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
             return $this->_dbs[$db];
         }
         
-        throw new Zend_Application_Resource_Exception(
+        throw new ResourceException(
             'A DB adapter was tried to retrieve, but was not configured'
         );
     }
@@ -137,7 +145,7 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
      * @param  boolean $justPickOne If true, a random (the first one in the stack)
      *                           connection is returned if no default was set.
      *                           If false, null is returned if no default was set.
-     * @return null|Zend_Db_Adapter_Abstract
+     * @return null|\Zend\DB\Adapter\AbstractAdapter
      */
     public function getDefaultDb($justPickOne = true) 
     {
@@ -155,11 +163,11 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
     /**
      * Set the default db adapter
      * 
-     * @var Zend_Db_Adapter_Abstract $adapter Adapter to set as default
+     * @var \Zend\DB\Adapter\AbstractAdapter $adapter Adapter to set as default
      */
-    protected function _setDefault(Zend_Db_Adapter_Abstract $adapter) 
+    protected function _setDefault(Adapter\AbstractAdapter $adapter) 
     {
-        Zend_Db_Table::setDefaultAdapter($adapter);
+        \Zend\DB\Table\Table::setDefaultAdapter($adapter);
         $this->_defaultDb = $adapter;
     }
 }

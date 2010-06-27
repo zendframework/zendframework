@@ -21,6 +21,13 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Paginator\Adapter;
+use Zend\Paginator\Adapter;
+use Zend\Paginator;
+
+/**
  * @see Zend_Paginator
  */
 
@@ -40,7 +47,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Paginator
  */
-class Zend_Paginator_Adapter_NullTest extends PHPUnit_Framework_TestCase
+class NullTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_Paginator_Adapter_Array
@@ -53,7 +60,7 @@ class Zend_Paginator_Adapter_NullTest extends PHPUnit_Framework_TestCase
     protected function setUp ()
     {
         parent::setUp();
-        $this->_adapter = new Zend_Paginator_Adapter_Null(101);
+        $this->_adapter = new Adapter\Null(101);
     }
     /**
      * Cleans up the environment after running a test.
@@ -80,7 +87,7 @@ class Zend_Paginator_Adapter_NullTest extends PHPUnit_Framework_TestCase
      */
     public function testAdapterReturnsCorrectValues()
     {
-        $paginator = Zend_Paginator::factory(2);
+        $paginator = Paginator\Paginator::factory(2);
         $paginator->setCurrentPageNumber(1);
         $paginator->setItemCountPerPage(5);
 
@@ -89,7 +96,7 @@ class Zend_Paginator_Adapter_NullTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(2, $pages->currentItemCount);
         $this->assertEquals(2, $pages->lastItemNumber);
 
-        $paginator = Zend_Paginator::factory(19);
+        $paginator = Paginator\Paginator::factory(19);
         $paginator->setCurrentPageNumber(4);
         $paginator->setItemCountPerPage(5);
 
@@ -103,7 +110,7 @@ class Zend_Paginator_Adapter_NullTest extends PHPUnit_Framework_TestCase
      * @group ZF-4151
      */
     public function testEmptySet() {
-        $this->_adapter = new Zend_Paginator_Adapter_Null(0);
+        $this->_adapter = new Adapter\Null(0);
         $actual = $this->_adapter->getItems(0, 10);
         $this->assertEquals(array(), $actual);
     }
@@ -112,7 +119,7 @@ class Zend_Paginator_Adapter_NullTest extends PHPUnit_Framework_TestCase
      * Verify that the fix for ZF-4151 doesn't create an OBO error
      */
     public function testSetOfOne() {
-        $this->_adapter = new Zend_Paginator_Adapter_Null(1);
+        $this->_adapter = new Adapter\Null(1);
         $actual = $this->_adapter->getItems(0, 10);
         $this->assertEquals(array_fill(0, 1, null), $actual);
     }

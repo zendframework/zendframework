@@ -20,4 +20,9 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Tool\Framework\Client\Console;
+
 ?>

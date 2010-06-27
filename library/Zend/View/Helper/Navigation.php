@@ -25,18 +25,21 @@
  */
 namespace Zend\View\Helper;
 
+use Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper,
+    Zend\View\Helper\Navigation\Helper as NavigationHelper;
+
 /**
  * Proxy helper for retrieving navigational helpers and forwarding calls
  *
  * @uses       \Zend\View\Exception
- * @uses       \Zend\View\Helper\Navigation\HelperAbstract
+ * @uses       \Zend\View\Helper\Navigation\AbstractHelper
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Navigation extends HelperAbstract
+class Navigation extends AbstractNavigationHelper
 {
     /**
      * View helper namespace
@@ -85,7 +88,7 @@ class Navigation extends HelperAbstract
      *
      * @param  \Zend\Navigation\Container $container  [optional] container to
      *                                               operate on
-     * @return \Zend\View\Helper\Navigation\Navigation           fluent interface, returns
+     * @return \Zend\View\Helper\Navigation           fluent interface, returns
      *                                               self
      */
     public function direct(\Zend\Navigation\Container $container = null)
@@ -137,7 +140,7 @@ class Navigation extends HelperAbstract
      * Returns the helper matching $proxy
      *
      * The helper must implement the interface
-     * {@link Zend_View_Helper_Navigation_Helper}.
+     * {@link Zend\View\Helper\Navigation\Helper}.
      *
      * @param string $proxy                        helper name
      * @param bool   $strict                       [optional] whether
@@ -173,11 +176,11 @@ class Navigation extends HelperAbstract
             }
         }
 
-        if (!$helper instanceof Helper) {
+        if (!$helper instanceof NavigationHelper) {
             if ($strict) {
                 $e = new \Zend\View\Exception(sprintf(
                         'Proxy helper "%s" is not an instance of ' .
-                        'Zend_View_Helper_Navigation_Helper',
+                        'Zend\View\Helper\Navigation\Helper',
                         get_class($helper)));
                 $e->setView($this->view);
                 throw $e;
@@ -199,7 +202,7 @@ class Navigation extends HelperAbstract
      * @param  \Zend\View\Helper\Navigation\Helper $helper  helper instance
      * @return void
      */
-    protected function _inject(Helper $helper)
+    protected function _inject(NavigationHelper $helper)
     {
         if ($this->getInjectContainer() && !$helper->hasContainer()) {
             $helper->setContainer($this->getContainer());
@@ -315,7 +318,7 @@ class Navigation extends HelperAbstract
         return $this->_injectTranslator;
     }
 
-    // Zend_View_Helper_Navigation_Helper:
+    // Zend\View\Helper\Navigation\Helper:
 
     /**
      * Renders helper

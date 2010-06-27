@@ -21,21 +21,27 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Context\Zf;
+use Zend\CodeGenerator\PHP;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       Zend_CodeGenerator_Php_Class
- * @uses       Zend_CodeGenerator_Php_File
- * @uses       Zend_CodeGenerator_Php_Property
- * @uses       Zend_Tool_Project_Context_Zf_AbstractClassFile
+ * @uses       \Zend\CodeGenerator\PHP\PHPClass
+ * @uses       \Zend\CodeGenerator\PHP\PHPFile
+ * @uses       \Zend\CodeGenerator\PHP\PHPProperty
+ * @uses       \Zend\Tool\Project\Context\Zf\AbstractClassFile
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Zf_DbTableFile extends Zend_Tool_Project_Context_Zf_AbstractClassFile
+class DbTableFile extends AbstractClassFile
 {
 
     protected $_dbTableName = null;
@@ -73,16 +79,16 @@ class Zend_Tool_Project_Context_Zf_DbTableFile extends Zend_Tool_Project_Context
     {
         $className = $this->getFullClassName($this->_dbTableName, 'Model_DbTable');
         
-        $codeGenFile = new Zend_CodeGenerator_Php_File(array(
+        $codeGenFile = new PHP\PHPFile(array(
             'fileName' => $this->getPath(),
             'classes' => array(
-                new Zend_CodeGenerator_Php_Class(array(
+                new PHP\PHPClass(array(
                     'name' => $className,
                     'extendedClass' => 'Zend_Db_Table_Abstract',
                     'properties' => array(
-                        new Zend_CodeGenerator_Php_Property(array(
+                        new PHP\PHPProperty(array(
                             'name' => '_name',
-                            'visibility' => Zend_CodeGenerator_Php_Property::VISIBILITY_PROTECTED,
+                            'visibility' => PHP\PHPProperty::VISIBILITY_PROTECTED,
                             'defaultValue' => $this->_actualTableName
                             ))
                         ),

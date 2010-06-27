@@ -27,10 +27,10 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FooUseHelper extends \Zend\View\Helper\AbstractHelper
+class Foo_View_Helper_FooUseHelper extends \Zend\View\Helper\AbstractHelper
 {
     public function direct()
     {
-        return __FUNCTION__ . ' invoked';
+        return __CLASS__ . ' invoked';
     }
 }

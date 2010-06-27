@@ -21,22 +21,28 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Context\Zf;
+use Zend\CodeGenerator\PHP;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       Zend_CodeGenerator_Php_Class
- * @uses       Zend_CodeGenerator_Php_File
- * @uses       Zend_CodeGenerator_Php_Method
- * @uses       Zend_Filter_Word_DashToCamelCase
- * @uses       Zend_Tool_Project_Context_Filesystem_File
+ * @uses       \Zend\CodeGenerator\PHP\PHPClass
+ * @uses       \Zend\CodeGenerator\PHP\PHPFile
+ * @uses       \Zend\CodeGenerator\PHP\PHPMethod
+ * @uses       \Zend\Filter\Word\DashToCamelCase
+ * @uses       \Zend\Tool\Project\Context\Filesystem\File
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Zf_TestLibraryFile extends Zend_Tool_Project_Context_Filesystem_File
+class TestLibraryFile extends \Zend\Tool\Project\Context\Filesystem\File
 {
 
     /**
@@ -57,7 +63,7 @@ class Zend_Tool_Project_Context_Zf_TestLibraryFile extends Zend_Tool_Project_Con
     /**
      * init()
      *
-     * @return Zend_Tool_Project_Context_Zf_TestLibraryFile
+     * @return \Zend\Tool\Project\Context\Zf\TestLibraryFile
      */
     public function init()
     {
@@ -75,24 +81,24 @@ class Zend_Tool_Project_Context_Zf_TestLibraryFile extends Zend_Tool_Project_Con
     public function getContents()
     {
 
-        $filter = new Zend_Filter_Word_DashToCamelCase();
+        $filter = new \Zend\Filter\Word\DashToCamelCase();
 
         $className = $filter->filter($this->_forClassName) . 'Test';
 
-        $codeGenFile = new Zend_CodeGenerator_Php_File(array(
+        $codeGenFile = new PHP\PHPFile(array(
             'requiredFiles' => array(
                 'PHPUnit/Framework/TestCase.php'
                 ),
             'classes' => array(
-                new Zend_CodeGenerator_Php_Class(array(
+                new PHP\PHPClass(array(
                     'name' => $className,
                     'extendedClass' => 'PHPUnit_Framework_TestCase',
                     'methods' => array(
-                        new Zend_CodeGenerator_Php_Method(array(
+                        new PHP\PHPMethod(array(
                             'name' => 'setUp',
                             'body' => '        /* Setup Routine */'
                             )),
-                        new Zend_CodeGenerator_Php_Method(array(
+                        new PHP\PHPMethod(array(
                             'name' => 'tearDown',
                             'body' => '        /* Tear Down Routine */'
                             ))

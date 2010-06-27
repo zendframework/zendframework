@@ -6,6 +6,7 @@ if (!$component) {
     die('A component is required');
 }
 
+$self       = __DIR__ . '/test-iterator.php';
 $path       = realpath(__DIR__ . '/../tests/Zend/' . $component . '/');
 $tests_path = realpath(__DIR__ . '/../tests/');
 $output     = __DIR__ . '/tmp/tests';
@@ -26,10 +27,12 @@ foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as
     
     // if (preg_match('#\.php$#', $fs_item->getRealPath()) && !preg_match('#_files#', $fs_item->getRealPath())) {
     if (preg_match('#\.php$#', $fs_item->getRealPath())) {
-        $command = 'php -d display_errors=0 ./test-namespacer.php ../tests ' . $relative_to_tests . ' > ' . $output . '/' . $relative_to_tests;
-        system($command);
+echo "Copying file " . $fs_item->getRealPath() . " to $output/$relative_to_tests\n";
+        copy($fs_item->getRealPath(), $output . '/' . $relative_to_tests);
     } else {
-        echo copy($fs_item->getRealPath(), $output . '/' . $relative_to_tests);
+echo "Recursively running command on  $relative_to_tests\n";
+        $command = 'php -d display_errors=0 ' . $self . ' ' . $tests_path . ' ' . $relative_to_tests . ' > ' . $output . '/' . $relative_to_tests;
+        system($command);
     }
 
 }

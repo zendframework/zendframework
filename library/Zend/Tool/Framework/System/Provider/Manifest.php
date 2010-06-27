@@ -21,18 +21,23 @@
  */
 
 /**
- * @uses       Zend_Tool_Framework_Provider_Interface
- * @uses       Zend_Tool_Framework_Registry_EnabledInterface
+ * @namespace
+ */
+namespace Zend\Tool\Framework\System\Provider;
+
+/**
+ * @uses       \Zend\Tool\Framework\Provider\ProviderInterface
+ * @uses       \Zend\Tool\Framework\Registry\EnabledInterface
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_System_Provider_Manifest
-    implements Zend_Tool_Framework_Provider_Interface, Zend_Tool_Framework_Registry_EnabledInterface
+class Manifest
+    implements \Zend\Tool\Framework\Provider\ProviderInterface, \Zend\Tool\Framework\Registry\EnabledInterface
 {
 
-    public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
+    public function setRegistry(\Zend\Tool\Framework\Registry\RegistryInterface $registry)
     {
         $this->_registry = $registry;
     }

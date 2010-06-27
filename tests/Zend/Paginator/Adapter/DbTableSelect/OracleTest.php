@@ -20,10 +20,10 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Paginator_Adapter_DbSelect_OracleTest
+ * @namespace
  */
+namespace ZendTest\Paginator\Adapter\DbTableSelect;
 
 
 /**
@@ -34,15 +34,20 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Paginator
  */
-class Zend_Paginator_Adapter_DbTableSelect_OracleTest extends Zend_Paginator_Adapter_DbSelect_OracleTest
+class OracleTest extends \ZendTest\Paginator\Adapter\DbSelect\OracleTest
 {
+    public function setup()
+    {
+        $this->markTestSkipped('Skipping until Zend\DB is refactored.');
+    }
+    
     /**
      * @group ZF-3775
      */
     public function testSelectDoesReturnZendDbTableRowset()
     {
         $query   = $this->_table->select();
-        $adapter = new Zend_Paginator_Adapter_DbTableSelect($query);
+        $adapter = new \Zend\Paginator\Adapter\DbTableSelect($query);
         $items   = $adapter->getItems(0, 10);
 
         $this->assertType('Zend_Db_Table_Rowset', $items);

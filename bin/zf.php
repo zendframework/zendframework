@@ -29,6 +29,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+use Zend\Loader;
 class ZF
 {
 
@@ -360,7 +361,7 @@ class ZF
         }
         
         $zfIncludePath['relativePath'] = dirname(__FILE__) . '/../library/';
-        if (file_exists($zfIncludePath['relativePath'] . 'Zend/Tool/Framework/Client/Console.php')) {
+        if (file_exists($zfIncludePath['relativePath'] . 'Zend/Tool/Framework/Client/Console/Console.php')) {
             set_include_path(realpath($zfIncludePath['relativePath']) . PATH_SEPARATOR . get_include_path());
         }
     
@@ -383,14 +384,14 @@ class ZF
     protected function _tryClientLoad()
     {
         $this->_clientLoaded = false;
-        $fh = @fopen('Zend/Tool/Framework/Client/Console.php', 'r', true);
+        $fh = @fopen('Zend/Loader/Autoloader.php', 'r', true);
         if (!$fh) {
             return $this->_clientLoaded; // false
         } else {
             fclose($fh);
             unset($fh);
-            include 'Zend/Tool/Framework/Client/Console.php';
-            $this->_clientLoaded = class_exists('Zend_Tool_Framework_Client_Console');
+            include 'Zend/Loader/Autoloader.php';
+            $this->_clientLoaded = class_exists('Zend\Loader\Autoloader', false);
         }
         
         return $this->_clientLoaded;
@@ -602,9 +603,11 @@ EOS;
 	    }
 	    
 	    // ensure that zf.php loads the Zend_Tool_Project features
-	    $configOptions['classesToLoad'] = 'Zend_Tool_Project_Provider_Manifest';
+	    $configOptions['classesToLoad'] = 'Zend\Tool\Project\Provider\Manifest';
 	    
-	    $console = new Zend_Tool_Framework_Client_Console($configOptions);
+	    Zend\Loader\Autoloader::getInstance();
+	    
+	    $console = new Zend\Tool\Framework\Client\Console\Console($configOptions);
 	    $console->dispatch();
 		return null;
     }

@@ -20,29 +20,34 @@
  */
 
 /**
- * @uses       Zend_Tool_Project_Provider_Abstract
- * @uses       Zend_Tool_Project_Provider_Exception
+ * @namespace
+ */
+namespace Zend\Tool\Project\Provider;
+
+/**
+ * @uses       \Zend\Tool\Project\Provider\AbstractProvider
+ * @uses       \Zend\Tool\Project\Provider\Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Provider_ProjectProvider extends Zend_Tool_Project_Provider_Abstract
+class ProjectProvider extends AbstractProvider
 {
 
     /**
      * createResource()
      *
-     * @param Zend_Tool_Project_Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $projectProviderName
      * @param string $actionNames
-     * @return Zend_Tool_Project_Profile_Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
-    public static function createResource(Zend_Tool_Project_Profile $profile, $projectProviderName, $actionNames = null)
+    public static function createResource(\Zend\Tool\Project\Profile\Profile $profile, $projectProviderName, $actionNames = null)
     {
 
         if (!is_string($projectProviderName)) {
-            throw new Zend_Tool_Project_Provider_Exception('Zend_Tool_Project_Provider_Controller::createResource() expects \"projectProviderName\" is the name of a project provider resource to create.');
+            throw new Exception('Zend_Tool_Project_Provider_Controller::createResource() expects \"projectProviderName\" is the name of a project provider resource to create.');
         }
 
         $profileSearchParams = array();
@@ -68,7 +73,7 @@ class Zend_Tool_Project_Provider_ProjectProvider extends Zend_Tool_Project_Provi
      *
      * @var string       $name            class name for new Zend_Tool Project Provider
      * @var array|string $actions         list of provider methods
-     * @throws Zend_Tool_Project_Provider_Exception
+     * @throws \Zend\Tool\Project\Provider\Exception
      */
     public function create($name, $actions = null)
     {

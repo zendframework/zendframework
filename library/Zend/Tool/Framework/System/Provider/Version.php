@@ -19,24 +19,28 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace Zend\Tool\Framework\System\Provider;
 
 /**
  * Version Provider
  *
- * @uses       Zend_Tool_Framework_Provider_Interface
- * @uses       Zend_Tool_Framework_Registry
- * @uses       Zend_Version
+ * @uses       \Zend\Tool\Framework\Provider\ProviderInterface
+ * @uses       \Zend\Tool\Framework\Registry\Registry
+ * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_System_Provider_Version
-    implements Zend_Tool_Framework_Provider_Interface, Zend_Tool_Framework_Registry_EnabledInterface
+class Version
+    implements \Zend\Tool\Framework\Provider\ProviderInterface, \Zend\Tool\Framework\Registry\EnabledInterface
 {
 
     /**
-     * @var Zend_Tool_Framework_Registry_Interface
+     * @var \Zend\Tool\Framework\Registry\RegistryInterface
      */
     protected $_registry = null;
 
@@ -46,7 +50,7 @@ class Zend_Tool_Framework_System_Provider_Version
 
     protected $_specialties = array('MajorPart', 'MinorPart', 'MiniPart');
 
-    public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
+    public function setRegistry(\Zend\Tool\Framework\Registry\RegistryInterface $registry)
     {
         $this->_registry = $registry;
         return $this;
@@ -104,7 +108,7 @@ class Zend_Tool_Framework_System_Provider_Version
 
     protected function _splitVersion()
     {
-        list($major, $minor, $mini) = explode('.', Zend_Version::VERSION);
+        list($major, $minor, $mini) = explode('.', \Zend\Version::VERSION);
         return array('major' => $major, 'minor' => $minor, 'mini' => $mini);
     }
 

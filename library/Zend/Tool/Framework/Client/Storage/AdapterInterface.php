@@ -21,12 +21,17 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Framework\Client\Storage;
+
+/**
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Tool_Framework_Client_Storage_AdapterInterface
+interface AdapterInterface
 {
 
     public function put($name, $value);

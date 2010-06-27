@@ -21,24 +21,29 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Context\System;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       Zend_Tool_Project_Context_Filesystem_File
- * @uses       Zend_Tool_Project_Context_System_Interface
- * @uses       Zend_Tool_Project_Context_System_NotOverwritable
- * @uses       Zend_Tool_Project_Profile_FileParser_Xml
+ * @uses       \Zend\Tool\Project\Context\Filesystem\File
+ * @uses       \Zend\Tool\Project\Context\System\SystemInterface
+ * @uses       \Zend\Tool\Project\Context\System\NotOverwritable
+ * @uses       \Zend\Tool\Project\Profile\FileParser\Xml
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_System_ProjectProfileFile
-    extends Zend_Tool_Project_Context_Filesystem_File
-    implements Zend_Tool_Project_Context_System_Interface,
-               Zend_Tool_Project_Context_System_NotOverwritable
+class ProjectProfileFile
+    extends \Zend\Tool\Project\Context\Filesystem\File
+    implements SystemInterface,
+               NotOverwritable
 {
 
     /**
@@ -47,7 +52,7 @@ class Zend_Tool_Project_Context_System_ProjectProfileFile
     protected $_filesystemName = '.zfproject.xml';
 
     /**
-     * @var Zend_Tool_Project_Profile
+     * @var \Zend\Tool\Project\Profile\Profile
      */
     protected $_profile = null;
     
@@ -64,8 +69,8 @@ class Zend_Tool_Project_Context_System_ProjectProfileFile
     /**
      * setProfile()
      *
-     * @param Zend_Tool_Project_Profile $profile
-     * @return Zend_Tool_Project_Context_System_ProjectProfileFile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @return \Zend\Tool\Project\Context\System\ProjectProfileFile
      */
     public function setProfile($profile)
     {
@@ -78,7 +83,7 @@ class Zend_Tool_Project_Context_System_ProjectProfileFile
      *
      * Proxy to create
      *
-     * @return Zend_Tool_Project_Context_System_ProjectProfileFile
+     * @return \Zend\Tool\Project\Context\System\ProjectProfileFile
      */
     public function save()
     {
@@ -93,7 +98,7 @@ class Zend_Tool_Project_Context_System_ProjectProfileFile
      */
     public function getContents()
     {
-        $parser = new Zend_Tool_Project_Profile_FileParser_Xml();
+        $parser = new \Zend\Tool\Project\Profile\FileParser\Xml();
         $profile = $this->_resource->getProfile();
         $xml = $parser->serialize($profile);
         return $xml;

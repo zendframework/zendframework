@@ -20,17 +20,12 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Application_Resource_TranslateTest::main');
-}
+namespace ZendTest\Application\Resource;
 
-/**
- * Test helper
- */
-
-/**
- * Zend_Loader_Autoloader
- */
+use Zend\Loader\Autoloader,
+    Zend\Application,
+    Zend\Application\Resource\Translate as TranslateResource,
+    Zend\Registry;
 
 /**
  * @category   Zend
@@ -40,19 +35,13 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
+class TranslateTest extends \PHPUnit_Framework_TestCase
 {
     private $_translationOptions = array('data' => array(
         'message1' => 'message1',
         'message2' => 'message2',
         'message3' => 'message3'
     ));
-
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function setUp()
     {
@@ -64,14 +53,14 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
             $this->loaders = array();
         }
 
-        Zend_Loader_Autoloader::resetInstance();
-        $this->autoloader = Zend_Loader_Autoloader::getInstance();
+        Autoloader::resetInstance();
+        $this->autoloader = Autoloader::getInstance();
 
-        $this->application = new Zend_Application('testing');
+        $this->application = new Application\Application('testing');
 
-        $this->bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
+        $this->bootstrap = new Application\Bootstrap($this->application);
 
-        Zend_Registry::_unsetInstance();
+        Registry::_unsetInstance();
     }
 
     public function tearDown()
@@ -87,44 +76,40 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
         }
 
         // Reset autoloader instance so it doesn't affect other tests
-        Zend_Loader_Autoloader::resetInstance();
+        Autoloader::resetInstance();
     }
 
     public function testInitializationInitializesTranslateObject()
     {
-        $resource = new Zend_Application_Resource_Translate($this->_translationOptions);
+        $resource = new TranslateResource($this->_translationOptions);
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
-        $this->assertTrue($resource->getTranslate() instanceof Zend_Translate);
+        $this->assertTrue($resource->getTranslate() instanceof \Zend\Translator\Translator);
     }
 
     public function testInitializationReturnsLocaleObject()
     {
-        $resource = new Zend_Application_Resource_Translate($this->_translationOptions);
+        $resource = new TranslateResource($this->_translationOptions);
         $resource->setBootstrap($this->bootstrap);
         $test = $resource->init();
-        $this->assertTrue($test instanceof Zend_Translate);
+        $this->assertTrue($test instanceof \Zend\Translator\Translator);
     }
 
     public function testOptionsPassedToResourceAreUsedToSetLocaleState()
     {
-        $resource = new Zend_Application_Resource_Translate($this->_translationOptions);
+        $resource = new TranslateResource($this->_translationOptions);
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $translate = $resource->getTranslate();
-        $this->assertTrue(Zend_Registry::isRegistered('Zend_Translate'));
-        $this->assertSame(Zend_Registry::get('Zend_Translate'), $translate);
+        $this->assertTrue(Registry::isRegistered('Zend_Translate'));
+        $this->assertSame(Registry::get('Zend_Translate'), $translate);
     }
 
     public function testResourceThrowsExceptionWithoutData()
     {
-        try {
-            $resource = new Zend_Application_Resource_Translate();
-            $resource->getTranslate();
-            $this->fail('Expected Zend_Application_Resource_Exception');
-        } catch (Zend_Application_Resource_Exception $e) {
-            $this->assertType('Zend_Application_Resource_Exception', $e);
-        }
+        $this->setExpectedException('Zend\\Application\\ResourceException');
+        $resource = new TranslateResource();
+        $resource->getTranslate();
     }
 
     /**
@@ -136,18 +121,14 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
         $options2 = array_merge_recursive($this->_translationOptions,
                                           array('data' => array('message4' => 'bericht4')));
 
-        $translate = new Zend_Translate(Zend_Translate::AN_ARRAY, $options1);
-        Zend_Registry::set('Zend_Translate', $translate);
+        $translate = new \Zend\Translator\Translator(\Zend\Translator\Translator::AN_ARRAY, $options1);
+        Registry::set('Zend_Translate', $translate);
 
-        $resource = new Zend_Application_Resource_Translate($options2);
+        $resource = new TranslateResource($options2);
 
         $this->assertTrue($translate === $resource->getTranslate());
         $this->assertEquals('bar', $translate->translate('foo'));
         $this->assertEquals('bericht4', $translate->translate('message4'));
         $this->assertEquals('shouldNotExist', $translate->translate('shouldNotExist'));
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_TranslateTest::main') {
-    Zend_Application_Resource_TranslateTest::main();
 }

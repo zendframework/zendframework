@@ -333,14 +333,14 @@ class ViewRenderer extends AbstractHelper
      */
     protected function _generateDefaultPrefix()
     {
-        $default = 'Zend\View';
+        $default = 'Zend_View';
         if (null === $this->_actionController) {
             return $default;
         }
 
         $class = get_class($this->_actionController);
 
-        if (!strstr($class, '\\')) {
+        if (!strstr($class, '\\') && !strstr($class, '_')) {
             return $default;
         }
 
@@ -349,7 +349,11 @@ class ViewRenderer extends AbstractHelper
             return $default;
         }
 
-        $prefix = substr($class, 0, strpos($class, '\\')) . '\View';
+        if (strstr($class, '\\')) {
+            $prefix = substr($class, 0, strpos($class, '\\')) . '\View';
+        } elseif (strstr($class, '_')) {
+            $prefix = substr($class, 0, strpos($class, '_')) . '_View';
+        }
 
         return $prefix;
     }
@@ -475,7 +479,8 @@ class ViewRenderer extends AbstractHelper
             }
         }
         if (!$pathExists) {
-            $this->view->addBasePath($path, $prefix);
+            $namespaced = (false !== strstr($prefix, '\\'));
+            $this->view->addBasePath($path, $prefix, $namespaced);
         }
 
         // Register view with action controller (unless already registered)

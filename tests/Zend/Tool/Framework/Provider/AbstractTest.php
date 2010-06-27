@@ -21,10 +21,9 @@
  */
 
 /**
- * @see TestHelper.php
+ * @namespace
  */
-
-
+namespace ZendTest\Tool\Framework\Provider;
 
 /**
  * @category   Zend
@@ -37,7 +36,7 @@
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Provider
  */
-class Zend_Tool_Framework_Provider_AbstractTest extends PHPUnit_Framework_TestCase
+class AbstractTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_request = null;
@@ -46,9 +45,9 @@ class Zend_Tool_Framework_Provider_AbstractTest extends PHPUnit_Framework_TestCa
 
     public function setup()
     {
-        $this->_request = new Zend_Tool_Framework_Client_Request();
-        $this->_response = new Zend_Tool_Framework_Client_Response();
-        $this->_registry = new Zend_Tool_Framework_Registry();
+        $this->_request = new \Zend\Tool\Framework\Client\Request();
+        $this->_response = new \Zend\Tool\Framework\Client\Response\Response();
+        $this->_registry = new \Zend\Tool\Framework\Registry\Registry();
 
         $this->_registry->setRequest($this->_request);
         $this->_registry->setResponse($this->_response);
@@ -56,7 +55,7 @@ class Zend_Tool_Framework_Provider_AbstractTest extends PHPUnit_Framework_TestCa
 
     public function testAbsractReturnsRequestAndResponse()
     {
-        $provider = new Zend_Tool_Framework_Provider_Asset_ProviderFullFeatured();
+        $provider = new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderFullFeatured();
         $provider->setRegistry($this->_registry);
         $returnInternals = $provider->_testReturnInternals();
         $this->assertTrue(array_shift($returnInternals) === $this->_request);

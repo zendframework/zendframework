@@ -394,6 +394,6 @@ abstract class Word extends AbstractAdapter
      */
     public function getDecorator()
     {
-        return "Captcha_Word";
+        return "Captcha\Word";
     }
 }

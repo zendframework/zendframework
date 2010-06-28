@@ -49,7 +49,7 @@ class File extends Xhtml
     /**
      * Plugin loader type
      */
-    const TRANSFER_ADAPTER = 'TRANSFER_ADAPTER';
+    const TRANSFER_ADAPTER = 'TRANSFER\ADAPTER';
 
     /**
      * @var string Default view helper
@@ -181,7 +181,7 @@ class File extends Xhtml
      */
     public function setTransferAdapter($adapter)
     {
-        if ($adapter instanceof AdapterFileAdapter) {
+        if ($adapter instanceof AbstractFileAdapter) {
             $this->_adapter = $adapter;
         } elseif (is_string($adapter)) {
             $loader = $this->getPluginLoader(self::TRANSFER_ADAPTER);

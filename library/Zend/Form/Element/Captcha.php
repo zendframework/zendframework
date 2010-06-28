@@ -243,7 +243,7 @@ class Captcha extends Xhtml
         switch ($type) {
             case null:
                 $loader = $this->getPluginLoader(self::CAPTCHA);
-                $cPrefix = rtrim($prefix, '_') . '_Captcha';
+                $cPrefix = rtrim($prefix, '\\') . '\Captcha';
                 $cPath   = rtrim($path, '/\\') . '/Captcha';
                 $loader->addPrefixPath($cPrefix, $cPath);
                 return parent::addPrefixPath($prefix, $path);

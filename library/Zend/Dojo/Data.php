@@ -29,7 +29,7 @@ use Zend\JSON\JSON;
  * dojo.data support for Zend Framework
  *
  * @uses       ArrayAccess
- * @uses       Iterator
+ * @uses       IteratorAggregate
  * @uses       Countable
  * @uses       \Zend\Dojo\Exception
  * @uses       \Zend\JSON\JSON

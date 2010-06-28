@@ -26,7 +26,7 @@ namespace Zend\Dojo;
 
 use Zend\Config\Config,
     Zend\JSON\JSON,
-    Zend\View\ViewInterface as View;
+    Zend\View\ViewInterface;
 
 /**
  * Dojo module layer and custom build profile generation support
@@ -142,7 +142,7 @@ class BuildLayer
      * @param  \Zend\View\ViewInterface $view
      * @return \Zend\Dojo\BuildLayer
      */
-    public function setView(View $view)
+    public function setView(ViewInterface $view)
     {
         $this->_view = $view;
         return $this;

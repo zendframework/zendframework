@@ -65,13 +65,13 @@ class Container
      * Base CDN url to utilize
      * @var string
      */
-    protected $_cdnBase = Dojo\Dojo::CDN_BASE_GOOGLE;
+    protected $_cdnBase = \Zend\Dojo\Dojo::CDN_BASE_GOOGLE;
 
     /**
      * Path segment following version string of CDN path
      * @var string
      */
-    protected $_cdnDojoPath = Dojo\Dojo::CDN_DOJO_PATH_GOOGLE;
+    protected $_cdnDojoPath = \Zend\Dojo\Dojo::CDN_DOJO_PATH_GOOGLE;
 
     /**
      * Dojo version to use from CDN

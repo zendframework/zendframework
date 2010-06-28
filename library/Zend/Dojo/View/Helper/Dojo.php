@@ -27,7 +27,8 @@ namespace Zend\Dojo\View\Helper;
 
 use Zend\Dojo\View\Helper\Exception as DojoViewException,
     Zend\Registry,
-    Zend\View\ViewInterface as View;
+    Zend\View\ViewInterface as View,
+    Zend\View\Helper\AbstractHelper as AbstractViewHelper;
 
 /**
  * Zend_Dojo_View_Helper_Dojo: Dojo View Helper
@@ -36,14 +37,14 @@ use Zend\Dojo\View\Helper\Exception as DojoViewException,
  * events.
  *
  * @uses       \Zend\Dojo\View\Exception
- * @uses       \Zend\Dojo\View\Helper\Dojo\Container
+ * @uses       \Zend\Dojo\View\Helper\DojoContainer
  * @uses       \Zend\Registry
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Dojo
+class Dojo extends AbstractViewHelper
 {
     /**#@+
      * Programmatic dijit creation style constants
@@ -58,7 +59,7 @@ class Dojo
     public $view;
 
     /**
-     * @var \Zend\Dojo\View\Helper\Dojo\Container
+     * @var \Zend\Dojo\View\Helper\DojoContainer
      */
     protected $_container;
 
@@ -78,17 +79,18 @@ class Dojo
     public function __construct()
     {
         $registry = Registry::getInstance();
-        if (!isset($registry[__CLASS__])) {
+        $key      = __CLASS__;
+        if (!isset($registry[$key])) {
             $container = new Dojo\Container();
-            $registry[__CLASS__] = $container;
+            $registry[$key] = $container;
         }
-        $this->_container = $registry[__CLASS__];
+        $this->_container = $registry[$key];
     }
 
     /**
      * Set view object
      *
-     * @param  Zend_Dojo_View_Interface $view
+     * @param  Zend\View\ViewInterface $view
      * @return void
      */
     public function setView(View $view)
@@ -100,7 +102,7 @@ class Dojo
     /**
      * Return dojo container
      *
-     * @return \Zend\Dojo\View\Helper\Dojo\Container
+     * @return \Zend\Dojo\View\Helper\DojoContainer
      */
     public function direct()
     {

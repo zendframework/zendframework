@@ -20,9 +20,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Element;
+
+/**
  * Reset form element
  *
- * @uses       Zend_Form_Element_Submit
+ * @uses       \Zend\Form\Element\Submit
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -30,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Element_Reset extends Zend_Form_Element_Submit
+class Reset extends Submit
 {
     /**
      * Use formReset view helper by default

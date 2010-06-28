@@ -19,10 +19,19 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Decorator;
+
+use Zend\Form\Decorator,
+    Zend\Config\Config,
+    Zend\Form;
+
+/**
  * Zend_Form_Decorator_Abstract
  *
- * @uses       Zend_Form_Decorator_Exception
- * @uses       Zend_Form_Decorator_Interface
+ * @uses       \Zend\Form\Decorator\Exception
+ * @uses       \Zend\Form\Decorator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -30,7 +39,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Interface
+abstract class AbstractDecorator implements Decorator
 {
     /**
      * Placement constants
@@ -45,7 +54,7 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
     protected $_placement = 'APPEND';
 
     /**
-     * @var Zend_Form_Element|Zend_Form
+     * @var \Zend\Form\Element|\Zend\Form\Form
      */
     protected $_element;
 
@@ -64,14 +73,14 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
     /**
      * Constructor
      *
-     * @param  array|Zend_Config $options
+     * @param  array|\Zend\Config\Config $options
      * @return void
      */
     public function __construct($options = null)
     {
         if (is_array($options)) {
             $this->setOptions($options);
-        } elseif ($options instanceof Zend_Config) {
+        } elseif ($options instanceof Config) {
             $this->setConfig($options);
         }
     }
@@ -80,7 +89,7 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
      * Set options
      *
      * @param  array $options
-     * @return Zend_Form_Decorator_Abstract
+     * @return \Zend\Form\Decorator\AbstractDecorator
      */
     public function setOptions(array $options)
     {
@@ -91,10 +100,10 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
     /**
      * Set options from config object
      *
-     * @param  Zend_Config $config
-     * @return Zend_Form_Decorator_Abstract
+     * @param  \Zend\Config\Config $config
+     * @return \Zend\Form\Decorator\AbstractDecorator
      */
-    public function setConfig(Zend_Config $config)
+    public function setConfig(Config $config)
     {
         return $this->setOptions($config->toArray());
     }
@@ -104,7 +113,7 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
      *
      * @param  string $key
      * @param  mixed $value
-     * @return Zend_Form_Decorator_Abstract
+     * @return \Zend\Form\Decorator\AbstractDecorator
      */
     public function setOption($key, $value)
     {
@@ -157,7 +166,7 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
     /**
      * Clear all options
      *
-     * @return Zend_Form_Decorator_Abstract
+     * @return \Zend\Form\Decorator\AbstractDecorator
      */
     public function clearOptions()
     {
@@ -168,17 +177,17 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
     /**
      * Set current form element
      *
-     * @param  Zend_Form_Element|Zend_Form $element
-     * @return Zend_Form_Decorator_Abstract
-     * @throws Zend_Form_Decorator_Exception on invalid element type
+     * @param  \Zend\Form\Form_Element|\Zend\Form\Form $element
+     * @return \Zend\Form\Decorator\AbstractDecorator
+     * @throws \Zend\Form\Decorator\Exception on invalid element type
      */
     public function setElement($element)
     {
-        if ((!$element instanceof Zend_Form_Element)
-            && (!$element instanceof Zend_Form)
-            && (!$element instanceof Zend_Form_DisplayGroup))
+        if ((!$element instanceof Form\Element)
+            && (!$element instanceof Form\Form)
+            && (!$element instanceof Form\DisplayGroup))
         {
-            throw new Zend_Form_Decorator_Exception('Invalid element type passed to decorator');
+            throw new Exception('Invalid element type passed to decorator');
         }
 
         $this->_element = $element;
@@ -188,7 +197,7 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
     /**
      * Retrieve current element
      *
-     * @return Zend_Form_Element|Zend_Form
+     * @return \Zend\Form\Form_Element|\Zend\Form\Form
      */
     public function getElement()
     {
@@ -242,10 +251,10 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
      *
      * @param  string $content
      * @return string
-     * @throws Zend_Form_Decorator_Exception when unimplemented
+     * @throws \Zend\Form\Decorator\Exception when unimplemented
      */
     public function render($content)
     {
-        throw new Zend_Form_Decorator_Exception('render() not implemented');
+        throw new Exception('render() not implemented');
     }
 }

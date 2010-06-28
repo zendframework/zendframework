@@ -20,9 +20,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Element;
+
+/**
  * Base class for multi-option form elements
  *
- * @uses       Zend_Form_Element_Xhtml
+ * @uses       \Zend\Form\Element\Xhtml
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -30,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
+abstract class Multi extends Xhtml
 {
     /**
      * Array of options for multi-item
@@ -97,7 +102,7 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
      *
      * @param  string $option
      * @param  string $value
-     * @return Zend_Form_Element_Multi
+     * @return \Zend\Form\Element\Multi
      */
     public function addMultiOption($option, $value = '')
     {
@@ -114,7 +119,7 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
      * Add many options at once
      *
      * @param  array $options
-     * @return Zend_Form_Element_Multi
+     * @return \Zend\Form\Element\Multi
      */
     public function addMultiOptions(array $options)
     {
@@ -135,7 +140,7 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
      * Set all options at once (overwrites)
      *
      * @param  array $options
-     * @return Zend_Form_Element_Multi
+     * @return \Zend\Form\Element\Multi
      */
     public function setMultiOptions(array $options)
     {
@@ -199,7 +204,7 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
     /**
      * Clear all options
      *
-     * @return Zend_Form_Element_Multi
+     * @return \Zend\Form\Element\Multi
      */
     public function clearMultiOptions()
     {
@@ -212,7 +217,7 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
      * Set flag indicating whether or not to auto-register inArray validator
      *
      * @param  bool $flag
-     * @return Zend_Form_Element_Multi
+     * @return \Zend\Form\Element\Multi
      */
     public function setRegisterInArrayValidator($flag)
     {

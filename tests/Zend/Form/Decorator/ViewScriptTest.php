@@ -20,13 +20,11 @@
  * @version    $Id$
  */
 
-// Call Zend_Form_Decorator_ViewScriptTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_ViewScriptTest::main");
-}
+namespace ZendTest\Form\Decorator;
 
-
-
+use Zend\Form\Decorator\ViewScript as ViewScriptDecorator,
+    Zend\Form\Element\Text as TextElement,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Form_Decorator_ViewScript
@@ -38,19 +36,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_ViewScriptTest extends PHPUnit_Framework_TestCase
+class ViewScriptTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_ViewScriptTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -59,30 +46,19 @@ class Zend_Form_Decorator_ViewScriptTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->decorator = new Zend_Form_Decorator_ViewScript();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
+        $this->decorator = new ViewScriptDecorator();
     }
 
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath(dirname(__FILE__) . '/../../../../library/Zend/View/Helper');
-        $view->addScriptPath(dirname(__FILE__) . '/../_files/views/');
+        $view = new View();
+        $view->addScriptPath(__DIR__ . '/../TestAsset/views/');
         return $view;
     }
 
     public function getElement()
     {
-        $element = new Zend_Form_Element_Text('foo');
+        $element = new TextElement('foo');
         $element->setView($this->getView());
         $this->decorator->setElement($element);
         return $element;
@@ -90,12 +66,9 @@ class Zend_Form_Decorator_ViewScriptTest extends PHPUnit_Framework_TestCase
 
     public function testRenderRaisesExceptionIfNoViewScriptRegistered()
     {
+        $this->setExpectedException('Zend\Form\Exception', 'script');
         $this->getElement();
-        try {
-            $this->decorator->render('');
-        } catch (Zend_Form_Exception $e) {
-            $this->assertContains('script', $e->getMessage());
-        }
+        $this->decorator->render('');
     }
 
     public function testViewScriptNullByDefault()
@@ -183,9 +156,4 @@ class Zend_Form_Decorator_ViewScriptTest extends PHPUnit_Framework_TestCase
         $this->assertContains('This text prefixes the content', $test);
         $this->assertContains('This text appends the content', $test);
     }
-}
-
-// Call Zend_Form_Decorator_ViewScriptTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_ViewScriptTest::main") {
-    Zend_Form_Decorator_ViewScriptTest::main();
 }

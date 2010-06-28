@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Form\Element\TestAsset\TransferAdapter;
+
+use Zend\File\Transfer\Adapter\AbstractAdapter;
+
 /**
  * @category   Zend
  * @package    Zend_Form
@@ -27,7 +31,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Form_Element_FileTest_Adapter_Foo extends Zend_File_Transfer_Adapter_Abstract
+class Foo extends AbstractAdapter
 {
     public $received = false;
 

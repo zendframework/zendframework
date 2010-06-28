@@ -19,7 +19,14 @@
  */
 
 /**
- * Zend_Form_Decorator_Interface
+ * @namespace
+ */
+namespace Zend\Form;
+
+use Zend\Config\Config;
+
+/**
+ * Form Decorator interface
  *
  * @category   Zend
  * @package    Zend_Form
@@ -28,14 +35,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-interface Zend_Form_Decorator_Interface
+interface Decorator
 {
     /**
      * Constructor
      *
      * Accept options during initialization.
      *
-     * @param  array|Zend_Config $options
+     * @param  array|\Zend\Config\Config $options
      * @return void
      */
     public function __construct($options = null);
@@ -47,7 +54,7 @@ interface Zend_Form_Decorator_Interface
      * an element or a form object.
      *
      * @param  mixed $element
-     * @return Zend_Form_Decorator_Interface
+     * @return \Zend\Form\Decorator
      */
     public function setElement($element);
 
@@ -62,24 +69,24 @@ interface Zend_Form_Decorator_Interface
      * Set decorator options from an array
      *
      * @param  array $options
-     * @return Zend_Form_Decorator_Interface
+     * @return \Zend\Form\Decorator
      */
     public function setOptions(array $options);
 
     /**
      * Set decorator options from a config object
      *
-     * @param  Zend_Config $config
-     * @return Zend_Form_Decorator_Interface
+     * @param  \Zend\Config\Config $config
+     * @return \Zend\Form\Decorator
      */
-    public function setConfig(Zend_Config $config);
+    public function setConfig(Config $config);
 
     /**
      * Set a single option
      *
      * @param  string $key
      * @param  mixed $value
-     * @return Zend_Form_Decorator_Interface
+     * @return \Zend\Form\Decorator
      */
     public function setOption($key, $value);
 
@@ -109,7 +116,7 @@ interface Zend_Form_Decorator_Interface
     /**
      * Clear all options
      *
-     * @return Zend_Form_Decorator_Interface
+     * @return \Zend\Form\Decorator
      */
     public function clearOptions();
 

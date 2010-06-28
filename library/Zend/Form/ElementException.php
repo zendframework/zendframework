@@ -14,37 +14,27 @@
  *
  * @category   Zend
  * @package    Zend_Form
- * @subpackage UnitTests
+ * @subpackage Element
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
 
 /**
- * Mock file for testbed
+ * @namespace
+ */
+namespace Zend\Form;
+
+/**
+ * Exception for Zend_Form component.
  *
+ * @uses       \Zend\Form\Exception
  * @category   Zend
  * @package    Zend_Form
- * @subpackage UnitTests
+ * @subpackage Element
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class My_Decorator_TableRow extends Zend_Form_Decorator_Abstract
+class ElementException extends Exception
 {
-
-    /**
-     * Test Function for render
-     *
-     * @param  string $content Content to display
-     * @return string
-     */
-    public function render($content)
-    {
-        $e = $this->getElement();
-        return "<tr><td>{$e->getLabel()}</td><td>{$content}</td><td>{$e->getDescription()}</td></tr>";
-    }
-
 }

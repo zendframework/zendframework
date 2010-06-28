@@ -14,35 +14,30 @@
  *
  * @category   Zend
  * @package    Zend_Wildfire
- * @subpackage Plugin
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Wildfire\Channel;
+
+/**
  * @category   Zend
  * @package    Zend_Wildfire
- * @subpackage Plugin
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Wildfire_Plugin_Interface
+interface ChannelInterface
 {
 
     /**
-     * Flush any buffered data.
+     * Determine if channel is ready.
      *
-     * @param string $protocolUri The URI of the protocol that should be flushed to
-     * @return void
+     * @return boolean Returns TRUE if channel is ready.
      */
-    public function flushMessages($protocolUri);
-
-    /**
-     * Get the unique indentifier for this plugin.
-     *
-     * @return string Returns the URI of the plugin.
-     */
-    public function getUri();
+    public function isReady();
 
 }

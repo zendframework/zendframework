@@ -43,6 +43,7 @@ require_once 'Zend/Validate/File/NotExistsTest.php';
 require_once 'Zend/Validate/File/Sha1Test.php';
 require_once 'Zend/Validate/File/SizeTest.php';
 require_once 'Zend/Validate/File/UploadTest.php';
+require_once 'Zend/Validate/File/WordCountTest.php';
 
 /**
  * @category   Zend
@@ -80,6 +81,7 @@ class Zend_Validate_File_AllTests
         $suite->addTestSuite('Zend_Validate_File_Sha1Test');
         $suite->addTestSuite('Zend_Validate_File_SizeTest');
         $suite->addTestSuite('Zend_Validate_File_UploadTest');
+        $suite->addTestSuite('Zend_Validate_File_WordCountTest');
 
         return $suite;
     }

@@ -20,9 +20,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Element;
+
+/**
  * Multiselect form element
  *
- * @uses       Zend_Form_Element_Select
+ * @uses       \Zend\Form\Element\Select
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -30,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Element_Multiselect extends Zend_Form_Element_Select
+class Multiselect extends Select
 {
     /**
      * 'multiple' attribute

@@ -20,6 +20,13 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Decorator;
+
+use Zend\Form as ZendForm;
+
+/**
  * Zend_Form_Decorator_Form
  *
  * Render a Zend_Form object.
@@ -31,8 +38,8 @@
  *
  * Any other options passed will be used as HTML attributes of the form tag.
  *
- * @uses       Zend_Form
- * @uses       Zend_Form_Decorator_Abstract
+ * @uses       \Zend\Form\Form
+ * @uses       \Zend\Form\Decorator\AbstractDecorator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -40,7 +47,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Decorator_Form extends Zend_Form_Decorator_Abstract
+class FormDecorator extends AbstractDecorator
 {
     /**
      * Default view helper
@@ -52,7 +59,7 @@ class Zend_Form_Decorator_Form extends Zend_Form_Decorator_Abstract
      * Set view helper for rendering form
      *
      * @param  string $helper
-     * @return Zend_Form_Decorator_Form
+     * @return \Zend\Form\Decorator\Form
      */
     public function setHelper($helper)
     {
@@ -85,16 +92,16 @@ class Zend_Form_Decorator_Form extends Zend_Form_Decorator_Abstract
     public function getOptions()
     {
         if (null !== ($element = $this->getElement())) {
-            if ($element instanceof Zend_Form) {
+            if ($element instanceof ZendForm\Form) {
                 $element->getAction();
                 $method = $element->getMethod();
-                if ($method == Zend_Form::METHOD_POST) {
+                if ($method == ZendForm\Form::METHOD_POST) {
                     $this->setOption('enctype', 'application/x-www-form-urlencoded');
                 }
                 foreach ($element->getAttribs() as $key => $value) {
                     $this->setOption($key, $value);
                 }
-            } elseif ($element instanceof Zend_Form_DisplayGroup) {
+            } elseif ($element instanceof ZendForm\DisplayGroup) {
                 foreach ($element->getAttribs() as $key => $value) {
                     $this->setOption($key, $value);
                 }

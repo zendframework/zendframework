@@ -20,11 +20,16 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Decorator;
+
+/**
  * Zend_Form_Decorator_Errors
  *
  * Any options passed will be used as HTML attributes of the ul tag for the errors.
  *
- * @uses       Zend_Form_Decorator_Abstract
+ * @uses       \Zend\Form\Decorator\AbstractDecorator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -32,7 +37,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Decorator_Errors extends Zend_Form_Decorator_Abstract
+class Errors extends AbstractDecorator
 {
     /**
      * Render errors

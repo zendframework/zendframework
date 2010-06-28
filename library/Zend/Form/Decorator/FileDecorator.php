@@ -19,15 +19,19 @@
  */
 
 /**
- * Zend_Form_Decorator_Marker_File_Interface
+ * @namespace
+ */
+namespace Zend\Form\Decorator;
+
+/**
+ * Marker interface for file decorators
  *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
-interface Zend_Form_Decorator_Marker_File_Interface
+interface FileDecorator
 {
 }

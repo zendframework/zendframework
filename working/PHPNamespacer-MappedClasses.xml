@@ -4347,10 +4347,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Form/Decorator/Form.php</originalRelativeFilePath>
       <originalClassName>Zend_Form_Decorator_Form</originalClassName>
-      <newRelativeFilePath>Zend/Form/Decorator/Form.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Form/Decorator/FormDecorator.php</newRelativeFilePath>
       <newNamespace>Zend\Form\Decorator</newNamespace>
-      <newClassName>Form</newClassName>
-      <newFullyQualifiedName>Zend\Form\Decorator\Form</newFullyQualifiedName>
+      <newClassName>FormDecorator</newClassName>
+      <newFullyQualifiedName>Zend\Form\Decorator\FormDecorator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Form/Decorator/FormElements.php</originalRelativeFilePath>

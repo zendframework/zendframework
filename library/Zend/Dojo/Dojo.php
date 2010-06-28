@@ -19,6 +19,13 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo;
+
+use Zend\View\ViewInterface as View;
+
+/**
  * Enable Dojo components
  *
  * @package    Zend_Dojo
@@ -26,7 +33,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Dojo
+class Dojo
 {
     /**
      * Base path to AOL CDN
@@ -51,16 +58,16 @@ class Zend_Dojo
     /**
      * Dojo-enable a form instance
      *
-     * @param  Zend_Form $form
+     * @param  \Zend\Form\Form $form
      * @return void
      */
-    public static function enableForm(Zend_Form $form)
+    public static function enableForm(\Zend\Form\Form $form)
     {
-        $form->addPrefixPath('Zend_Dojo_Form_Decorator', 'Zend/Dojo/Form/Decorator', 'decorator')
-             ->addPrefixPath('Zend_Dojo_Form_Element', 'Zend/Dojo/Form/Element', 'element')
-             ->addElementPrefixPath('Zend_Dojo_Form_Decorator', 'Zend/Dojo/Form/Decorator', 'decorator')
-             ->addDisplayGroupPrefixPath('Zend_Dojo_Form_Decorator', 'Zend/Dojo/Form/Decorator')
-             ->setDefaultDisplayGroupClass('Zend_Dojo_Form_DisplayGroup');
+        $form->addPrefixPath('Zend\Dojo\Form\Decorator', 'Zend/Dojo/Form/Decorator', 'decorator')
+             ->addPrefixPath('Zend\Dojo\Form\Element', 'Zend/Dojo/Form/Element', 'element')
+             ->addElementPrefixPath('Zend\Dojo\Form\Decorator', 'Zend/Dojo/Form/Decorator', 'decorator')
+             ->addDisplayGroupPrefixPath('Zend\Dojo\Form\Decorator', 'Zend/Dojo/Form/Decorator')
+             ->setDefaultDisplayGroupClass('Zend\Dojo\Form\DisplayGroup');
 
         foreach ($form->getSubForms() as $subForm) {
             self::enableForm($subForm);
@@ -74,13 +81,13 @@ class Zend_Dojo
     /**
      * Dojo-enable a view instance
      *
-     * @param  Zend_View_Interface $view
+     * @param  \Zend\View\ViewInterface $view
      * @return void
      */
-    public static function enableView(\Zend\View\ViewInterface $view)
+    public static function enableView(View $view)
     {
-        if (false === $view->getPluginLoader('helper')->getPaths('Zend_Dojo_View_Helper')) {
-            $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
+        if (false === $view->getPluginLoader('helper')->getPaths('Zend\Dojo\View\Helper')) {
+            $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend\Dojo\View\Helper');
         }
     }
 }

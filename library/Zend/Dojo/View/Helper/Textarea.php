@@ -21,15 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\View\Helper;
+
+/**
  * Dojo Textarea dijit
  *
- * @uses       Zend_Dojo_View_Helper_Dijit
+ * @uses       \Zend\Dojo\View\Helper\Dijit
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
   */
-class Zend_Dojo_View_Helper_Textarea extends Zend_Dojo_View_Helper_Dijit
+class Textarea extends Dijit
 {
     /**
      * Dijit being used
@@ -58,7 +63,7 @@ class Zend_Dojo_View_Helper_Textarea extends Zend_Dojo_View_Helper_Dijit
      * @param  array $attribs HTML attributes
      * @return string
      */
-    public function textarea($id, $value = null, array $params = array(), array $attribs = array())
+    public function direct($id, $value = null, array $params = array(), array $attribs = array())
     {
         if (!array_key_exists('id', $attribs)) {
             $attribs['id']    = $id;

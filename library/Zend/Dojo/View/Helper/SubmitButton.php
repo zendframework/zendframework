@@ -21,15 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\View\Helper;
+
+/**
  * Dojo Button dijit tied to submit input
  *
- * @uses       Zend_Dojo_View_Helper_Button
+ * @uses       \Zend\Dojo\View\Helper\Button
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Dojo_View_Helper_SubmitButton extends Zend_Dojo_View_Helper_Button
+class SubmitButton extends Button
 {
     /**
      * @var string Submit input
@@ -45,7 +50,7 @@ class Zend_Dojo_View_Helper_SubmitButton extends Zend_Dojo_View_Helper_Button
      * @param  array $attribs HTML attributes
      * @return string
      */
-    public function submitButton($id, $value = null, array $params = array(), array $attribs = array())
+    public function direct($id = null, $value = null, array $params = array(), array $attribs = array())
     {
         if (!array_key_exists('label', $params)) {
             $params['label'] = $value;

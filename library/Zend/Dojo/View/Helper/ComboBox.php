@@ -21,16 +21,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\View\Helper;
+
+use Zend\JSON\JSON;
+
+/**
  * Dojo ComboBox dijit
  *
- * @uses       Zend_Dojo_View_Helper_Dijit
- * @uses       Zend_Json
+ * @uses       \Zend\Dojo\View\Helper\Dijit
+ * @uses       \Zend\JSON\JSON
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Dojo_View_Helper_ComboBox extends Zend_Dojo_View_Helper_Dijit
+class ComboBox extends Dijit
 {
     /**
      * Dijit being used
@@ -60,7 +67,7 @@ class Zend_Dojo_View_Helper_ComboBox extends Zend_Dojo_View_Helper_Dijit
      * @param  array|null $options Select options
      * @return string
      */
-    public function comboBox($id, $value = null, array $params = array(), array $attribs = array(), array $options = null)
+    public function direct($id = null, $value = null, array $params = array(), array $attribs = array(), array $options = null)
     {
         $html = '';
         if (!array_key_exists('id', $attribs)) {
@@ -135,7 +142,7 @@ class Zend_Dojo_View_Helper_ComboBox extends Zend_Dojo_View_Helper_Dijit
                 $this->dojo->addJavascript('var ' . $storeParams['jsId'] . ";\n");
                 $js = $storeParams['jsId'] . ' = '
                     . 'new ' . $storeParams['dojoType'] . '('
-                    .     Zend_Json::encode($extraParams)
+                    .     JSON::encode($extraParams)
                     . ");\n";
                 $js = "function() {\n$js\n}";
                 $this->dojo->_addZendLoad($js);

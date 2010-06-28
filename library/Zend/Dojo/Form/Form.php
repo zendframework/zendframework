@@ -20,30 +20,37 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\Form;
+
+use Zend\View\ViewInterface as View;
+
+/**
  * Dijit-enabled Form
  *
- * @uses       Zend_Form
+ * @uses       \Zend\Form\Form
  * @package    Zend_Dojo
  * @subpackage Form
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Dojo_Form extends Zend_Form
+class Form extends \Zend\Form\Form
 {
     /**
      * Constructor
      *
-     * @param  array|Zend_Config|null $options
+     * @param  array|\Zend\Config\Config|null $options
      * @return void
      */
     public function __construct($options = null)
     {
-        $this->addPrefixPath('Zend_Dojo_Form_Decorator', 'Zend/Dojo/Form/Decorator', 'decorator')
-             ->addPrefixPath('Zend_Dojo_Form_Element', 'Zend/Dojo/Form/Element', 'element')
-             ->addElementPrefixPath('Zend_Dojo_Form_Decorator', 'Zend/Dojo/Form/Decorator', 'decorator')
-             ->addDisplayGroupPrefixPath('Zend_Dojo_Form_Decorator', 'Zend/Dojo/Form/Decorator')
-             ->setDefaultDisplayGroupClass('Zend_Dojo_Form_DisplayGroup');
+        $this->addPrefixPath('Zend\Dojo\Form\Decorator', 'Zend/Dojo/Form/Decorator', 'decorator')
+             ->addPrefixPath('Zend\Dojo\Form\Element', 'Zend/Dojo/Form/Element', 'element')
+             ->addElementPrefixPath('Zend\Dojo\Form\Decorator', 'Zend/Dojo/Form/Decorator', 'decorator')
+             ->addDisplayGroupPrefixPath('Zend\Dojo\Form\Decorator', 'Zend/Dojo/Form/Decorator')
+             ->setDefaultDisplayGroupClass('Zend\Dojo\Form\DisplayGroup');
         parent::__construct($options);
     }
 
@@ -71,14 +78,14 @@ class Zend_Dojo_Form extends Zend_Form
      *
      * Ensures that the view object has the dojo view helper path set.
      *
-     * @param  Zend_View_Interface $view
-     * @return Zend_Dojo_Form_Element_Dijit
+     * @param  \Zend\View\ViewInterface $view
+     * @return \Zend\Dojo\Form\Element\Dijit
      */
-    public function setView(Zend_View_Interface $view = null)
+    public function setView(View $view = null)
     {
         if (null !== $view) {
-            if (false === $view->getPluginLoader('helper')->getPaths('Zend_Dojo_View_Helper')) {
-                $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
+            if (false === $view->getPluginLoader('helper')->getPaths('Zend\Dojo\View\Helper')) {
+                $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend\Dojo\View\Helper');
             }
         }
         return parent::setView($view);

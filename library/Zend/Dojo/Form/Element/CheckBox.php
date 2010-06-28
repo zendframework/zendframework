@@ -20,18 +20,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\Form\Element;
+
+/**
  * CheckBox dijit
  *
  * Note: this would be easier with mixins or traits...
  *
- * @uses       Zend_Dojo_Form_Element_Dijit
+ * @uses       \Zend\Dojo\Form\Element\Dijit
  * @package    Zend_Dojo
  * @subpackage Form_Element
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Dojo_Form_Element_CheckBox extends Zend_Dojo_Form_Element_Dijit
+class CheckBox extends Dijit
 {
     /**
      * Is the checkbox checked?
@@ -79,7 +84,7 @@ class Zend_Dojo_Form_Element_CheckBox extends Zend_Dojo_Form_Element_Dijit
      * value against checked and unchecked values after configuration.
      *
      * @param  array $options
-     * @return Zend_Form_Element_Checkbox
+     * @return \Zend\Form\Element\Checkbox
      */
     public function setOptions(array $options)
     {
@@ -113,7 +118,7 @@ class Zend_Dojo_Form_Element_CheckBox extends Zend_Dojo_Form_Element_Dijit
      *
      *
      * @param  mixed $value
-     * @return Zend_Form_Element_Checkbox
+     * @return \Zend\Form\Element\Checkbox
      */
     public function setValue($value)
     {
@@ -131,7 +136,7 @@ class Zend_Dojo_Form_Element_CheckBox extends Zend_Dojo_Form_Element_Dijit
      * Set checked value
      *
      * @param  string $value
-     * @return Zend_Form_Element_Checkbox
+     * @return \Zend\Form\Element\Checkbox
      */
     public function setCheckedValue($value)
     {
@@ -154,7 +159,7 @@ class Zend_Dojo_Form_Element_CheckBox extends Zend_Dojo_Form_Element_Dijit
      * Set unchecked value
      *
      * @param  string $value
-     * @return Zend_Form_Element_Checkbox
+     * @return \Zend\Form\Element\Checkbox
      */
     public function setUncheckedValue($value)
     {
@@ -177,7 +182,7 @@ class Zend_Dojo_Form_Element_CheckBox extends Zend_Dojo_Form_Element_Dijit
      * Set checked flag
      *
      * @param  bool $flag
-     * @return Zend_Form_Element_Checkbox
+     * @return \Zend\Form\Element\Checkbox
      */
     public function setChecked($flag)
     {

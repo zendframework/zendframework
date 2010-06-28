@@ -21,17 +21,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\Form\Element;
+
+use Zend\Form\ElementException;
+
+/**
  * Editor dijit
  *
- * @uses       Zend_Dojo_Form_Element_Dijit
- * @uses       Zend_Form_Element_Exception
+ * @uses       \Zend\Dojo\Form\Element\Dijit
+ * @uses       \Zend\Form\ElementException
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage Form_Element
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
+class Editor extends Dijit
 {
     /**
      * @var string View helper
@@ -42,7 +49,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Add a single event to connect to the editing area
      *
      * @param  string $event
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function addCaptureEvent($event)
     {
@@ -61,7 +68,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Add multiple capture events
      *
      * @param  array $events
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function addCaptureEvents(array $events)
     {
@@ -75,7 +82,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Overwrite many capture events at once
      *
      * @param  array $events
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function setCaptureEvents(array $events)
     {
@@ -113,7 +120,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Remove a given capture event
      *
      * @param  string $event
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function removeCaptureEvent($event)
     {
@@ -130,7 +137,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
     /**
      * Clear all capture events
      *
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function clearCaptureEvents()
     {
@@ -141,7 +148,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Add a single event to the dijit
      *
      * @param  string $event
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function addEvent($event)
     {
@@ -160,7 +167,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Add multiple events
      *
      * @param  array $events
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function addEvents(array $events)
     {
@@ -174,7 +181,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Overwrite many events at once
      *
      * @param  array $events
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function setEvents(array $events)
     {
@@ -212,7 +219,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Remove a given event
      *
      * @param  string $event
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function removeEvent($event)
     {
@@ -228,7 +235,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
     /**
      * Clear all events
      *
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function clearEvents()
     {
@@ -239,7 +246,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Add a single editor plugin
      *
      * @param  string $plugin
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function addPlugin($plugin)
     {
@@ -258,7 +265,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Add multiple plugins
      *
      * @param  array $plugins
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function addPlugins(array $plugins)
     {
@@ -272,7 +279,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Overwrite many plugins at once
      *
      * @param  array $plugins
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function setPlugins(array $plugins)
     {
@@ -310,7 +317,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Remove a given plugin
      *
      * @param  string $plugin
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function removePlugin($plugin)
     {
@@ -326,7 +333,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
     /**
      * Clear all plugins
      *
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function clearPlugins()
     {
@@ -337,7 +344,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Set edit action interval
      *
      * @param  int $interval
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function setEditActionInterval($interval)
     {
@@ -361,7 +368,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Set focus on load flag
      *
      * @param  bool $flag
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function setFocusOnLoad($flag)
     {
@@ -385,12 +392,12 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Set editor height
      *
      * @param  string|int $height
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function setHeight($height)
     {
         if (!preg_match('/^\d+(em|px|%)?$/i', $height)) {
-            throw new Zend_Form_Element_Exception('Invalid height provided; must be integer or CSS measurement');
+            throw new ElementException('Invalid height provided; must be integer or CSS measurement');
         }
         if (!preg_match('/(em|px|%)$/', $height)) {
             $height .= 'px';
@@ -415,7 +422,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Set whether or not to inherit parent's width
      *
      * @param  bool $flag
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function setInheritWidth($flag)
     {
@@ -439,12 +446,12 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Set minimum height of editor
      *
      * @param  string|int $minHeight
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function setMinHeight($minHeight)
     {
         if (!preg_match('/^\d+(em)?$/i', $minHeight)) {
-            throw new Zend_Form_Element_Exception('Invalid minHeight provided; must be integer or CSS measurement');
+            throw new ElementException('Invalid minHeight provided; must be integer or CSS measurement');
         }
         if ('em' != substr($minHeight, -2)) {
             $minHeight .= 'em';
@@ -469,7 +476,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Add a custom stylesheet
      *
      * @param  string $styleSheet
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function addStyleSheet($styleSheet)
     {
@@ -491,7 +498,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Add multiple custom stylesheets
      *
      * @param  array $styleSheets
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function addStyleSheets(array $styleSheets)
     {
@@ -505,7 +512,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Overwrite all stylesheets
      *
      * @param  array $styleSheets
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function setStyleSheets(array $styleSheets)
     {
@@ -543,7 +550,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Remove a single stylesheet
      *
      * @param  string $styleSheet
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function removeStyleSheet($styleSheet)
     {
@@ -559,7 +566,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
     /**
      * Clear all stylesheets
      *
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function clearStyleSheets()
     {
@@ -573,7 +580,7 @@ class Zend_Dojo_Form_Element_Editor extends Zend_Dojo_Form_Element_Dijit
      * Set update interval
      *
      * @param  int $interval
-     * @return Zend_Dojo_Form_Element_Editor
+     * @return \Zend\Dojo\Form\Element\Editor
      */
     public function setUpdateInterval($interval)
     {

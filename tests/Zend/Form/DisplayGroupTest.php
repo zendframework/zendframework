@@ -212,7 +212,7 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
     public function testCanAddSingleDecoratorAsString()
     {
         $this->group->clearDecorators();
-        $this->assertFalse($this->group->getDecorator('form'));
+        $this->assertFalse($this->group->getDecorator('formDecorator'));
 
         $this->group->addDecorator('viewHelper');
         $decorator = $this->group->getDecorator('viewHelper');
@@ -227,7 +227,7 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
     public function testCanAddSingleDecoratorAsDecoratorObject()
     {
         $this->group->clearDecorators();
-        $this->assertFalse($this->group->getDecorator('form'));
+        $this->assertFalse($this->group->getDecorator('formDecorator'));
 
         $decorator = new Decorator\ViewHelper;
         $this->group->addDecorator($decorator);
@@ -238,18 +238,18 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
     public function testCanRetrieveSingleDecoratorRegisteredAsDecoratorObjectUsingShortName()
     {
         $this->group->clearDecorators();
-        $this->assertFalse($this->group->getDecorator('form'));
+        $this->assertFalse($this->group->getDecorator('formDecorator'));
 
-        $decorator = new Decorator\Form;
+        $decorator = new Decorator\FormDecorator;
         $this->group->addDecorator($decorator);
-        $test = $this->group->getDecorator('form');
+        $test = $this->group->getDecorator('formDecorator');
         $this->assertSame($decorator, $test);
     }
 
     public function testCanAddMultipleDecorators()
     {
         $this->group->clearDecorators();
-        $this->assertFalse($this->group->getDecorator('form'));
+        $this->assertFalse($this->group->getDecorator('formDecorator'));
 
         $testDecorator = new Decorator\HtmlTag;
         $this->group->addDecorators(array(
@@ -266,8 +266,8 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
     public function testCanRemoveDecorator()
     {
         $this->testDefaultDecoratorsRegistered();
-        $this->group->removeDecorator('form');
-        $this->assertFalse($this->group->getDecorator('form'));
+        $this->group->removeDecorator('formDecorator');
+        $this->assertFalse($this->group->getDecorator('formDecorator'));
     }
 
     /**
@@ -548,14 +548,14 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
     public function testSetOptionsSetsArrayOfStringDecorators()
     {
         $options = $this->getOptions();
-        $options['decorators'] = array('label', 'form');
+        $options['decorators'] = array('label', 'formDecorator');
         $this->group->setOptions($options);
         $this->assertFalse($this->group->getDecorator('group'));
 
         $decorator = $this->group->getDecorator('label');
         $this->assertTrue($decorator instanceof Decorator\Label);
-        $decorator = $this->group->getDecorator('form');
-        $this->assertTrue($decorator instanceof Decorator\Form);
+        $decorator = $this->group->getDecorator('formDecorator');
+        $this->assertTrue($decorator instanceof Decorator\FormDecorator);
     }
 
     public function testSetOptionsSetsArrayOfArrayDecorators()
@@ -563,7 +563,7 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
         $options = $this->getOptions();
         $options['decorators'] = array(
             array('label', array('id' => 'mylabel')),
-            array('form', array('id' => 'form')),
+            array('formDecorator', array('id' => 'form')),
         );
         $this->group->setOptions($options);
         $this->assertFalse($this->group->getDecorator('group'));
@@ -573,8 +573,8 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
         $options = $decorator->getOptions();
         $this->assertEquals('mylabel', $options['id']);
 
-        $decorator = $this->group->getDecorator('form');
-        $this->assertTrue($decorator instanceof Decorator\Form);
+        $decorator = $this->group->getDecorator('formDecorator');
+        $this->assertTrue($decorator instanceof Decorator\FormDecorator);
         $options = $decorator->getOptions();
         $this->assertEquals('form', $options['id']);
     }
@@ -589,7 +589,7 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'options'   => array('id' => 'form'),
-                'decorator' => 'form',
+                'decorator' => 'formDecorator',
             ),
         );
         $this->group->setOptions($options);
@@ -600,8 +600,8 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
         $options = $decorator->getOptions();
         $this->assertEquals('mylabel', $options['id']);
 
-        $decorator = $this->group->getDecorator('form');
-        $this->assertTrue($decorator instanceof Decorator\Form);
+        $decorator = $this->group->getDecorator('formDecorator');
+        $this->assertTrue($decorator instanceof Decorator\FormDecorator);
         $options = $decorator->getOptions();
         $this->assertEquals('form', $options['id']);
     }

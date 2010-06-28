@@ -1528,24 +1528,24 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testCanSetDefaultDisplayGroupClass()
     {
         $this->testDefaultDisplayGroupClassExists();
-        $this->form->setDefaultDisplayGroupClass('ZendTest\Form\TestAsset\DisplayGroup');
-        $this->assertEquals('ZendTest\Form\TestAsset\DisplayGroup', $this->form->getDefaultDisplayGroupClass());
+        $this->form->setDefaultDisplayGroupClass('ZendTest\Form\TestAsset\TestDisplayGroup');
+        $this->assertEquals('ZendTest\Form\TestAsset\TestDisplayGroup', $this->form->getDefaultDisplayGroupClass());
     }
 
     public function testDefaultDisplayGroupClassUsedForNewDisplayGroups()
     {
-        $this->form->setDefaultDisplayGroupClass('ZendTest\Form\TestAsset\DisplayGroup');
+        $this->form->setDefaultDisplayGroupClass('ZendTest\Form\TestAsset\TestDisplayGroup');
         $this->setupElements();
         $this->form->addDisplayGroup(array('foo', 'bar'), 'foobar');
         $displayGroup = $this->form->getDisplayGroup('foobar');
-        $this->assertTrue($displayGroup instanceof TestAsset\DisplayGroup);
+        $this->assertTrue($displayGroup instanceof TestAsset\TestDisplayGroup);
     }
 
     public function testCanPassDisplayGroupClassWhenAddingDisplayGroup()
     {
         $this->setupElements();
-        $this->form->addDisplayGroup(array('foo', 'bar'), 'foobar', array('displayGroupClass' => 'ZendTest\Form\TestAsset\DisplayGroup'));
-        $this->assertTrue($this->form->foobar instanceof TestAsset\DisplayGroup);
+        $this->form->addDisplayGroup(array('foo', 'bar'), 'foobar', array('displayGroupClass' => 'ZendTest\Form\TestAsset\TestDisplayGroup'));
+        $this->assertTrue($this->form->foobar instanceof TestAsset\TestDisplayGroup);
     }
 
     /**

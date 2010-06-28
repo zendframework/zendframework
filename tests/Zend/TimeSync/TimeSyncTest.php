@@ -20,10 +20,9 @@
  * @version    $Id$
  */
 
-namespace ZendTest;
+namespace ZendTest\TimeSync;
 
-use Zend\TimeSync\TimeSyncObject,
-    Zend\TimeSync;
+use Zend\TimeSync;
 
 /**
  * @category   Zend
@@ -54,9 +53,9 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitTimeserver()
     {
-        $server = new TimeSyncObject();
+        $server = new TimeSync\TimeSync();
 
-        $this->assertTrue($server instanceof TimeSync);
+        $this->assertTrue($server instanceof TimeSync\TimeSync);
     }
 
     /**
@@ -66,7 +65,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitTimeservers()
     {
-        $server = new TimeSyncObject($this->timeservers);
+        $server = new TimeSync\TimeSync($this->timeservers);
         $result = $server->getServer('server_f');
 
         $this->assertTrue($result instanceof TimeSync\Protocol);
@@ -80,7 +79,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitDefaultScheme()
     {
-        $server = new TimeSyncObject('time.windows.com', 'windows_time');
+        $server = new TimeSync\TimeSync('time.windows.com', 'windows_time');
         $server->setServer('windows_time');
         $result = $server->getServer();
 
@@ -94,7 +93,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitNtpScheme()
     {
-        $server = new TimeSyncObject('ntp://time.windows.com', 'windows_time');
+        $server = new TimeSync\TimeSync('ntp://time.windows.com', 'windows_time');
         $server->setServer('windows_time');
         $result = $server->getServer();
 
@@ -108,7 +107,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitSntpScheme()
     {
-        $server = new TimeSyncObject('sntp://time.zend.com', 'windows_time');
+        $server = new TimeSync\TimeSync('sntp://time.zend.com', 'windows_time');
         $server->setServer('windows_time');
         $result = $server->getServer();
 
@@ -124,7 +123,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
     public function testInitUnknownScheme()
     {
         try {
-            $server = new TimeSyncObject('http://time.windows.com', 'windows_time');
+            $server = new TimeSync\TimeSync('http://time.windows.com', 'windows_time');
             $this->fail('Exception expected because we supplied an invalid protocol');
         } catch (TimeSync\Exception $e) {
             // success
@@ -140,7 +139,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
     {
         $timeout = 5;
 
-        $server = new TimeSyncObject();
+        $server = new TimeSync\TimeSync();
         $server->setOptions(array('timeout' => $timeout));
 
         $this->assertEquals($timeout, $server->getOptions('timeout'));
@@ -158,7 +157,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
             'foo'     => 'bar'
         );
 
-        $server = new TimeSyncObject();
+        $server = new TimeSync\TimeSync();
         $server->setOptions($options);
 
         $this->assertEquals($options['timeout'], $server->getOptions('timeout'));
@@ -172,7 +171,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInvalidOptionKey()
     {
-        $server = new TimeSyncObject();
+        $server = new TimeSync\TimeSync();
 
         try {
             $result = $server->getOptions('foobar');
@@ -189,7 +188,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetUnknownCurrent()
     {
-        $server = new TimeSyncObject();
+        $server = new TimeSync\TimeSync();
 
         try {
             $server->setServer('unkown_alias');
@@ -206,7 +205,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUnknownCurrent()
     {
-        $server = new TimeSyncObject();
+        $server = new TimeSync\TimeSync();
 
         try {
             $result = $server->getServer();
@@ -223,7 +222,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUnknownServer()
     {
-        $server = new TimeSyncObject();
+        $server = new TimeSync\TimeSync();
 
         try {
             $result = $server->getServer('none_existing_server_alias');
@@ -241,7 +240,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDate()
     {
-        $server = new TimeSyncObject($this->timeservers);
+        $server = new TimeSync\TimeSync($this->timeservers);
 
         try {
             $result = $server->getDate();
@@ -258,7 +257,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetNtpDate()
     {
-        $server = new TimeSyncObject('ntp://time.windows.com', 'time_windows');
+        $server = new TimeSync\TimeSync('ntp://time.windows.com', 'time_windows');
 
         try {
             $result = $server->getDate();
@@ -275,7 +274,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSntpDate()
     {
-        $server = new TimeSyncObject('sntp://time-C.timefreq.bldrdoc.gov');
+        $server = new TimeSync\TimeSync('sntp://time-C.timefreq.bldrdoc.gov');
 
         try {
             $result = $server->getDate();
@@ -297,7 +296,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
             'server_b' => 'another-dummy-ntp-timeserver.com'
         );
 
-        $server = new TimeSyncObject($servers);
+        $server = new TimeSync\TimeSync($servers);
 
         try {
             $result = $server->getDate();
@@ -317,10 +316,10 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testWalkServers()
     {
-        $servers = new TimeSyncObject($this->timeservers);
+        $servers = new TimeSync\TimeSync($this->timeservers);
 
         foreach ($servers as $key => $server) {
-            $this->assertTrue($server instanceof TimeSync_Protocol);
+            $this->assertTrue($server instanceof TimeSync\Protocol);
         }
     }
 
@@ -331,7 +330,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInfo()
     {
-        $server = new TimeSyncObject('time.windows.com');
+        $server = new TimeSync\TimeSync('time.windows.com');
         try {
             $date   = $server->getDate();
             $result = $server->getInfo();

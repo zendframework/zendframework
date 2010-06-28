@@ -79,15 +79,15 @@ THE FOLLOWING IN ANY ORDER (except where indicated):
 
 Fifth pass:
 All together:
-[ ] Zend_Controller, [ ] Zend_View, [ ] Zend_Layout, [ ] Zend_Rest_Route/Controller
+[X] Zend_Controller, [X] Zend_View, [X] Zend_Layout, [X] Zend_Rest_Route/Controller
 
 Sixth pass:
-[ ] Zend_Wildfire (and all Firebug related sub-components)
-[ ] Zend_OpenId
-[ ] Zend_Form -> [ ] Zend_Dojo
-[ ] Zend_Navigation
-[ ] Zend_Paginator
+[X] Zend_Wildfire (and all Firebug related sub-components)
+[X] Zend_OpenId
+[X] Zend_Form -> [ ] Zend_Dojo
+[X] Zend_Navigation
+[X] Zend_Paginator
 [ ] Zend_Test
 
 Seventh (and last) pass:
-[ ] Zend_Application -> [ ] Zend_Tool
+[X] Zend_Application -> [X] Zend_Tool

@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Test\PHPUnit\Db\DataSet;
+use Zend\Test\PHPUnit\Db\DataSet;
 
 /**
  * @category   Zend
@@ -29,18 +34,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_PHPUnit_Db_DataSet_DbTableDataSetTest extends PHPUnit_Framework_TestCase
+class DbTableDataSetTest extends \PHPUnit_Framework_TestCase
 {
     public function testAddTableAppendedToTableNames()
     {
         $fixtureTable = "foo";
 
-        $table = $this->getMock('Zend_Db_Table', array(), array(), '', false);
+        $table = $this->getMock('Zend\Db\Table\Table', array(), array(), '', false);
         $table->expects($this->at(0))->method('info')->with('name')->will($this->returnValue($fixtureTable));
         $table->expects($this->at(1))->method('info')->with('name')->will($this->returnValue($fixtureTable));
         $table->expects($this->at(2))->method('info')->with('cols')->will($this->returnValue(array()));
 
-        $dataSet = new Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet();
+        $dataSet = new DataSet\DbTableDataSet();
         $dataSet->addTable($table);
 
         $this->assertEquals(array($fixtureTable), $dataSet->getTableNames());
@@ -50,21 +55,21 @@ class Zend_Test_PHPUnit_Db_DataSet_DbTableDataSetTest extends PHPUnit_Framework_
     {
         $fixtureTable = "foo";
 
-        $table = $this->getMock('Zend_Db_Table', array(), array(), '', false);
+        $table = $this->getMock('Zend\Db\Table\Table', array(), array(), '', false);
         $table->expects($this->at(0))->method('info')->with('name')->will($this->returnValue($fixtureTable));
         $table->expects($this->at(1))->method('info')->with('name')->will($this->returnValue($fixtureTable));
         $table->expects($this->at(2))->method('info')->with('cols')->will($this->returnValue(array()));
 
-        $dataSet = new Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet();
+        $dataSet = new DataSet\DbTableDataSet();
         $dataSet->addTable($table);
 
-        $this->assertType('Zend_Test_PHPUnit_Db_DataSet_DbTable', $dataSet->getTable($fixtureTable));
+        $this->assertType('Zend\Test\PHPUnit\Db\DataSet\DbTable', $dataSet->getTable($fixtureTable));
     }
 
     public function testGetUnknownTableThrowsException()
     {
         $this->setExpectedException('InvalidArgumentException');
-        $dataSet = new Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet();
+        $dataSet = new DataSet\DbTableDataSet();
         $dataSet->getTable('unknown');
     }
 }

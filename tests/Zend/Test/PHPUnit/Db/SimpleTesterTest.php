@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Test\PHPUnit\Db;
+use Zend\Test\PHPUnit\Db;
 
 /**
  * @category   Zend
@@ -29,32 +34,32 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_PHPUnit_Db_SimpleTesterTest extends PHPUnit_Framework_TestCase
+class SimpleTesterTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetConnection()
     {
-        $testAdapter = $this->getMock('Zend_Test_DbAdapter');
+        $testAdapter = $this->getMock('Zend\Test\DbAdapter');
         $testAdapter->expects($this->any())
                     ->method('delete')
-                    ->will($this->throwException(new Exception));
+                    ->will($this->throwException(new \Exception));
 
-        $connection = new Zend_Test_PHPUnit_Db_Connection($testAdapter, "schema");
+        $connection = new Db\Connection($testAdapter, "schema");
 
-        $databaseTester = new Zend_Test_PHPUnit_Db_SimpleTester($connection);
+        $databaseTester = new Db\SimpleTester($connection);
 
         $this->assertSame($connection, $databaseTester->getConnection());
     }
 
     public function testSetupDatabase()
     {
-        $testAdapter = $this->getMock('Zend_Test_DbAdapter');
+        $testAdapter = $this->getMock('Zend\Test\DbAdapter');
         $testAdapter->expects($this->any())
                     ->method('delete')
-                    ->will($this->throwException(new Exception));
+                    ->will($this->throwException(new \Exception));
 
-        $connection = new Zend_Test_PHPUnit_Db_Connection($testAdapter, "schema");
+        $connection = new Db\Connection($testAdapter, "schema");
 
-        $databaseTester = new Zend_Test_PHPUnit_Db_SimpleTester($connection);
+        $databaseTester = new Db\SimpleTester($connection);
 
         $dataSet = $this->getMock('PHPUnit_Extensions_Database_DataSet_IDataSet');
         $dataSet->expects($this->any())
@@ -68,10 +73,10 @@ class Zend_Test_PHPUnit_Db_SimpleTesterTest extends PHPUnit_Framework_TestCase
 
     public function testInvalidConnectionGivenThrowsException()
     {
-        $this->setExpectedException("Zend_Test_PHPUnit_Db_Exception");
+        $this->setExpectedException('Zend\Test\PHPUnit\Db\Exception');
 
         $connection = $this->getMock('PHPUnit_Extensions_Database_DB_IDatabaseConnection');
 
-        $databaseTester = new Zend_Test_PHPUnit_Db_SimpleTester($connection);
+        $databaseTester = new Db\SimpleTester($connection);
     }
 }

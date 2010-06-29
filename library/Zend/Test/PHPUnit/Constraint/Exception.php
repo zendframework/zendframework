@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Test\PHPUnit\Constraint;
+
+/**
  * Zend_Test_PHPUnit_Constraint_Exception
  *
  * @uses       PHPUnit_Framework_ExpectationFailedException
@@ -30,6 +35,6 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Test_PHPUnit_Constraint_Exception extends PHPUnit_Framework_ExpectationFailedException
+class Exception extends \PHPUnit_Framework_ExpectationFailedException
 {
 }

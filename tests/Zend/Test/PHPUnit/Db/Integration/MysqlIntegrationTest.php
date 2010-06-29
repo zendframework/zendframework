@@ -59,9 +59,9 @@ class MysqlIntegrationTest extends AbstractTestCase
             'dbname'   => TESTS_ZEND_DB_ADAPTER_MYSQL_DATABASE,
         );
 
-        $this->dbAdapter = \Zend\DB\DB::factory('pdo_mysql', $params);
-        $this->dbAdapter->query("DROP TABLE foo");
-        $this->dbAdapter->query("DROP TABLE bar");
+        $this->dbAdapter = \Zend\DB\DB::factory('PDOMySQL', $params);
+        $this->dbAdapter->query("DROP TABLE IF EXISTS foo");
+        $this->dbAdapter->query("DROP TABLE IF EXISTS bar");
         $this->dbAdapter->query(
             'CREATE TABLE foo (id INT(10) AUTO_INCREMENT PRIMARY KEY, foo VARCHAR(255), bar VARCHAR(255), baz VARCHAR(255)) AUTO_INCREMENT=1'
         );

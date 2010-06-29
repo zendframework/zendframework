@@ -24,17 +24,18 @@
  * @namespace
  */
 namespace ZendTest\Test\PHPUnit;
-use Zend\Session;
-use Zend\Controller;
-use Zend\Controller\Request;
-use Zend\Controller\Response;
-use Zend\Dom;
-use Zend\Controller\Router;
-use Zend\Controller\Dispatcher;
-use Zend\Controller\Plugin;
-use Zend\Controller\Action\HelperBroker;
-use Zend\Test\PHPUnit\Constraint;
-use Zend\Application;
+use Zend\Application,
+    Zend\Controller,
+    Zend\Controller\Action\HelperBroker\HelperBroker,
+    Zend\Controller\Dispatcher,
+    Zend\Controller\Plugin,
+    Zend\Controller\Request,
+    Zend\Controller\Response,
+    Zend\Controller\Router,
+    Zend\Dom,
+    Zend\Registry,
+    Zend\Session,
+    Zend\Test\PHPUnit\Constraint;
 
 /**
  * Test class for Zend_Test_PHPUnit_ControllerTestCase.
@@ -74,7 +75,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        $registry = \Zend\Registry::getInstance();
+        $registry = Registry::getInstance();
         if (isset($registry['router'])) {
             unset($registry['router']);
         }
@@ -87,7 +88,6 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
         if (isset($registry['viewRenderer'])) {
             unset($registry['viewRenderer']);
         }
-        //Session\Manager::$_unitTestEnabled = false;
         session_id(uniqid());
     }
 
@@ -197,14 +197,14 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
                    ->registerPlugin($plugin)
                    ->setRouter($router)
                    ->setDispatcher($dispatcher);
-        $viewRenderer = HelperBroker\HelperBroker::getStaticHelper('ViewRenderer');
+        $viewRenderer = HelperBroker::getStaticHelper('ViewRenderer');
         $this->testCase->reset();
         $test = $controller->getRouter();
         $this->assertNotSame($router, $test);
         $test = $controller->getDispatcher();
         $this->assertNotSame($dispatcher, $test);
         $this->assertFalse($controller->getPlugin('Zend\Controller\Plugin\ErrorHandler'));
-        $test = HelperBroker\HelperBroker::getStaticHelper('ViewRenderer');
+        $test = HelperBroker::getStaticHelper('ViewRenderer');
         $this->assertNotSame($viewRenderer, $test);
         $this->assertNull($controller->getRequest());
         $this->assertNull($controller->getResponse());
@@ -227,10 +227,10 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
         $this->testCase->bootstrap = dirname(__FILE__) . '/_files/bootstrap.php';
         $this->testCase->bootstrap();
         $controller = $this->testCase->getFrontController();
-        $this->assertSame(\Zend\Registry::get('router'), $controller->getRouter());
-        $this->assertSame(\Zend\Registry::get('dispatcher'), $controller->getDispatcher());
-        $this->assertSame(\Zend\Registry::get('plugin'), $controller->getPlugin('Zend\Controller\Plugin\ErrorHandler'));
-        $this->assertSame(\Zend\Registry::get('viewRenderer'), HelperBroker\HelperBroker::getStaticHelper('ViewRenderer'));
+        $this->assertSame(Registry::get('router'), $controller->getRouter());
+        $this->assertSame(Registry::get('dispatcher'), $controller->getDispatcher());
+        $this->assertSame(Registry::get('plugin'), $controller->getPlugin('Zend\Controller\Plugin\ErrorHandler'));
+        $this->assertSame(Registry::get('viewRenderer'), HelperBroker::getStaticHelper('ViewRenderer'));
     }
 
     public function testBootstrapShouldInvokeCallbackSpecifiedInPublicBootstrapProperty()
@@ -238,10 +238,10 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
         $this->testCase->bootstrap = array($this, 'bootstrapCallback');
         $this->testCase->bootstrap();
         $controller = $this->testCase->getFrontController();
-        $this->assertSame(\Zend\Registry::get('router'), $controller->getRouter());
-        $this->assertSame(\Zend\Registry::get('dispatcher'), $controller->getDispatcher());
-        $this->assertSame(\Zend\Registry::get('plugin'), $controller->getPlugin('Zend\Controller\Plugin\ErrorHandler'));
-        $this->assertSame(\Zend\Registry::get('viewRenderer'), HelperBroker\HelperBroker::getStaticHelper('ViewRenderer'));
+        $this->assertSame(Registry::get('router'), $controller->getRouter());
+        $this->assertSame(Registry::get('dispatcher'), $controller->getDispatcher());
+        $this->assertSame(Registry::get('plugin'), $controller->getPlugin('Zend\Controller\Plugin\ErrorHandler'));
+        $this->assertSame(Registry::get('viewRenderer'), HelperBroker::getStaticHelper('ViewRenderer'));
     }
 
     public function bootstrapCallback()
@@ -254,11 +254,11 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
                    ->registerPlugin($plugin)
                    ->setRouter($router)
                    ->setDispatcher($dispatcher);
-        $viewRenderer = HelperBroker\HelperBroker::getStaticHelper('ViewRenderer');
-        \Zend\Registry::set('router', $router);
-        \Zend\Registry::set('dispatcher', $dispatcher);
-        \Zend\Registry::set('plugin', $plugin);
-        \Zend\Registry::set('viewRenderer', $viewRenderer);
+        $viewRenderer = HelperBroker::getStaticHelper('ViewRenderer');
+        Registry::set('router', $router);
+        Registry::set('dispatcher', $dispatcher);
+        Registry::set('plugin', $plugin);
+        Registry::set('viewRenderer', $viewRenderer);
     }
 
     public function testDispatchShouldDispatchSpecifiedUrl()
@@ -360,20 +360,20 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testAssertXpathShouldDoNothingForValidResponseContent()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
-        $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, ' bar ')]");
-        $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, ' baz ')]");
-        $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, ' bat ')]");
-        $this->testCase->assertNotXpath("//div[@id='foo']//legend[contains(@class, ' bogus ')]");
-        $this->testCase->assertXpathContentContains("//legend[contains(@class, ' bat ')]", "La di da");
-        $this->testCase->assertNotXpathContentContains("//legend[contains(@class, ' bat ')]", "La do da");
-        $this->testCase->assertXpathContentRegex("//legend[contains(@class, ' bat ')]", "/d[a'i]/i");
-        $this->testCase->assertNotXpathContentRegex("//legend[contains(@class, ' bat ')]", "/d[o'e]/i");
-        $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, ' bar ')]", 2);
-        $this->testCase->assertXpathCount("//div[@id='foo']//legend[contains(@class, ' bar ')]", 2);
-        $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, ' bar ')]", 2);
-        $this->testCase->assertXpathCountMax("//div[@id='foo']//legend[contains(@class, ' bar ')]", 2);
+        $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, 'bar')]");
+        $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, 'baz')]");
+        $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, 'bat')]");
+        $this->testCase->assertNotXpath("//div[@id='foo']//legend[contains(@class, 'bogus')]");
+        $this->testCase->assertXpathContentContains("//legend[contains(@class, 'bat')]", "La di da");
+        $this->testCase->assertNotXpathContentContains("//legend[contains(@class, 'bat')]", "La do da");
+        $this->testCase->assertXpathContentRegex("//legend[contains(@class, 'bat')]", "/d[a'i]/i");
+        $this->testCase->assertNotXpathContentRegex("//legend[contains(@class, 'bat')]", "/d[o'e]/i");
+        $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, 'bar')]", 2);
+        $this->testCase->assertXpathCount("//div[@id='foo']//legend[contains(@class, 'bar')]", 2);
+        $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, 'bar')]", 2);
+        $this->testCase->assertXpathCountMax("//div[@id='foo']//legend[contains(@class, 'bar')]", 2);
     }
 
     public function testAssertXpathShouldThrowExceptionsForInValidResponseContent()
@@ -381,53 +381,53 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
         $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         try {
-            $this->testCase->assertNotXpath("//div[@id='foo']//legend[contains(@class, ' bar ')]");
-            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, ' bar ')] failed");
+            $this->testCase->assertNotXpath("//div[@id='foo']//legend[contains(@class, 'bar')]");
+            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bar')] failed");
         } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, ' bogus ')]");
-            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, ' bogus ')] failed");
+            $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, 'bogus')]");
+            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bogus')] failed");
         } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertNotXpathContentContains("//legend[contains(@class, ' bat ')]", "La di da");
-            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, ' bat ')] failed");
+            $this->testCase->assertNotXpathContentContains("//legend[contains(@class, 'bat')]", "La di da");
+            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, 'bat')] failed");
         } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertXpathContentContains("//legend[contains(@class, ' bat ')]", 'La do da');
-            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, ' bat ')] failed");
+            $this->testCase->assertXpathContentContains("//legend[contains(@class, 'bat')]", 'La do da');
+            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, 'bat')] failed");
         } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertNotXpathContentRegex("//legend[contains(@class, ' bat ')]", '/d[a|i]/i');
-            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, ' bat ')] failed");
+            $this->testCase->assertNotXpathContentRegex("//legend[contains(@class, 'bat')]", '/d[a|i]/i');
+            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, 'bat')] failed");
         } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertXpathContentRegex("//legend[contains(@class, ' bat ')]", '/d[o|e]/i');
-            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, ' bat ')] failed");
+            $this->testCase->assertXpathContentRegex("//legend[contains(@class, 'bat')]", '/d[o|e]/i');
+            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, 'bat')] failed");
         } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, ' bar ')]", 3);
-            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, ' bar ')] failed");
+            $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, 'bar')]", 3);
+            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bar')] failed");
         } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertXpathCount("//div[@id='foo']//legend[contains(@class, ' bar ')]", 1);
-            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, ' bar ')] failed");
+            $this->testCase->assertXpathCount("//div[@id='foo']//legend[contains(@class, 'bar')]", 1);
+            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bar')] failed");
         } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, ' bar ')]", 3);
-            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, ' bar ')] failed");
+            $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, 'bar')]", 3);
+            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bar')] failed");
         } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertXpathCountMax("//div[@id='foo']//legend[contains(@class, ' bar ')]", 1);
-            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, ' bar ')] failed");
+            $this->testCase->assertXpathCountMax("//div[@id='foo']//legend[contains(@class, 'bar')]", 1);
+            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bar')] failed");
         } catch (Constraint\Exception $e) {
         }
     }
@@ -624,7 +624,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
     public function testResetResponseShouldClearAllViewPlaceholders()
     {
         $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
-        $viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $viewRenderer->initView();
         $view = $viewRenderer->view;
         $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend\Dojo\View\Helper');

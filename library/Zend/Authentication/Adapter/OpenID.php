@@ -25,7 +25,10 @@
  */
 namespace Zend\Authentication\Adapter;
 use Zend\Authentication\Adapter as AuthenticationAdapter,
-    Zend\Authentication\Result as AuthenticationResult;
+    Zend\Authentication\Result as AuthenticationResult,
+    Zend\Controller\Response\AbstractResponse,
+    Zend\OpenID\Consumer\GenericConsumer as GenericConsumer,
+    Zend\OpenID\Consumer\Storage\AbstractStorage as OpenIDStorage;
 
 /**
  * A Zend_Auth Authentication Adapter allowing the use of OpenID protocol as an
@@ -113,11 +116,11 @@ class OpenId implements AuthenticationAdapter
      */
     public function __construct(
         $id = null,
-        \Zend_OpenId_Consumer_Storage $storage = null,
+        OpenIDStorage $storage = null,
         $returnTo = null,
         $root = null,
         $extensions = null,
-        \Zend_Controller_Response_Abstract $response = null
+        AbstractResponse $response = null
     ) {
         $this->_id         = $id;
         $this->_storage    = $storage;
@@ -145,7 +148,7 @@ class OpenId implements AuthenticationAdapter
      * @param  Zend_OpenId_Consumer_Storage $storage
      * @return Zend\Authentication\Adapter\OpenId Provides a fluent interface
      */
-    public function setStorage(\Zend_OpenId_Consumer_Storage $storage)
+    public function setStorage(OpenIDStorage $storage)
     {
         $this->_storage = $storage;
         return $this;
@@ -232,7 +235,7 @@ class OpenId implements AuthenticationAdapter
     public function authenticate() {
         $id = $this->_id;
         if (!empty($id)) {
-            $consumer = new \Zend_OpenId_Consumer($this->_storage);
+            $consumer = new GenericConsumer($this->_storage);
             $consumer->setHttpClient($this->_httpClient);
             /* login() is never returns on success */
             if (!$this->_check_immediate) {
@@ -261,7 +264,7 @@ class OpenId implements AuthenticationAdapter
         } else {
             $params = (isset($_SERVER['REQUEST_METHOD']) &&
                        $_SERVER['REQUEST_METHOD']=='POST') ? $_POST: $_GET;
-            $consumer = new \Zend_OpenId_Consumer($this->_storage);
+            $consumer = new GenericConsumer($this->_storage);
             $consumer->setHttpClient($this->_httpClient);
             if ($consumer->verify(
                     $params,

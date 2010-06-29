@@ -1060,7 +1060,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     public function getRequest()
     {
         if (null === $this->_request) {
-            $this->_request = new Request\HttpTestCase;
+            $this->_request = new Request\HTTPTestCase;
         }
         return $this->_request;
     }
@@ -1073,7 +1073,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     public function getResponse()
     {
         if (null === $this->_response) {
-            $this->_response = new \Zend\Controller\Response\HttpTestCase;
+            $this->_response = new \Zend\Controller\Response\HTTPTestCase;
         }
         return $this->_response;
     }

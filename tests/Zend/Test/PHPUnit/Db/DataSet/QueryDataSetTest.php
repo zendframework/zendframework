@@ -54,7 +54,7 @@ class QueryDataSetTest extends DataSetTestCase
         $fixtureTableName = "foo";
 
         $adapterMock = $this->getMock('Zend\Test\DbAdapter');
-        $selectMock = $this->getMock('Zend\Db\Select\Select', array(), array($adapterMock));
+        $selectMock = $this->getMock('Zend\DB\Select\Select', array(), array($adapterMock));
 
         $adapterMock->expects($this->once())
                     ->method('select')

@@ -20,19 +20,14 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_Form_Element_DijitTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Element_DijitTest::main");
-}
+namespace ZendTest\Dojo\Form\Element;
 
-
-/** Zend_Dojo_Form_Element_TextBox */
-
-/** Zend_View */
-
-/** Zend_Registry */
-
-/** Zend_Dojo_View_Helper_Dojo */
+use Zend\Dojo\Form\Element\TextBox as TextBoxElement,
+    Zend\Dojo\Form\Decorator\DijitElement as DijitElementDecorator,
+    Zend\Dojo\View\Helper\Dojo as DojoHelper,
+    Zend\Form\Decorator\Description as DescriptionDecorator,
+    Zend\Registry,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_Dijit.
@@ -45,19 +40,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
-class Zend_Dojo_Form_Element_DijitTest extends PHPUnit_Framework_TestCase
+class DijitTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_DijitTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -66,34 +50,24 @@ class Zend_Dojo_Form_Element_DijitTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Zend_Registry::_unsetInstance();
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+        Registry::_unsetInstance();
+        DojoHelper::setUseDeclarative();
 
         $this->view    = $this->getView();
         $this->element = $this->getElement();
         $this->element->setView($this->view);
     }
 
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-    }
-
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+        $view = new View();
+        \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
 
     public function getElement()
     {
-        $element = new Zend_Dojo_Form_Element_TextBox(
+        $element = new TextBoxElement(
             'foo',
             array(
                 'value' => 'some text',
@@ -126,7 +100,7 @@ class Zend_Dojo_Form_Element_DijitTest extends PHPUnit_Framework_TestCase
     public function testDijitElementDecoratorShouldBeEnabledByDefault()
     {
         $decorator = $this->element->getDecorator('DijitElement');
-        $this->assertTrue($decorator instanceof Zend_Dojo_Form_Decorator_DijitElement, get_class($decorator));
+        $this->assertTrue($decorator instanceof DijitElementDecorator, get_class($decorator));
     }
 
     /**
@@ -135,7 +109,7 @@ class Zend_Dojo_Form_Element_DijitTest extends PHPUnit_Framework_TestCase
     public function testDescriptionDecoratorShouldBeEnabledByDefault()
     {
         $decorator = $this->element->getDecorator('Description');
-        $this->assertTrue($decorator instanceof Zend_Form_Decorator_Description, get_class($decorator));
+        $this->assertTrue($decorator instanceof DescriptionDecorator, get_class($decorator));
     }
 
     public function testRenderingShouldCreateDijit()
@@ -146,15 +120,10 @@ class Zend_Dojo_Form_Element_DijitTest extends PHPUnit_Framework_TestCase
 
     public function testElementShouldDojoEnableViewObject()
     {
-        $this->element->setView(new Zend_View);
+        $this->element->setView(new View);
         $view = $this->element->getView();
         $loader = $view->getPluginLoader('helper');
-        $paths = $loader->getPaths('Zend_Dojo_View_Helper');
+        $paths = $loader->getPaths('Zend\Dojo\View\Helper');
         $this->assertTrue(is_array($paths));
     }
-}
-
-// Call Zend_Dojo_Form_Element_DijitTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Element_DijitTest::main") {
-    Zend_Dojo_Form_Element_DijitTest::main();
 }

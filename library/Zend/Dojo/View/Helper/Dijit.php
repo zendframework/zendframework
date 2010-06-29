@@ -25,8 +25,7 @@
  */
 namespace Zend\Dojo\View\Helper;
 
-use Zend\Dojo,
-    Zend\JSON\JSON,
+use Zend\JSON\JSON,
     Zend\View\ViewInterface as View,
     Zend\View\Helper\HtmlElement;
 

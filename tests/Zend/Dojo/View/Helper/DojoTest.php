@@ -20,19 +20,14 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_View_Helper_DojoTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_View_Helper_DojoTest::main");
-}
+namespace ZendTest\Dojo\View\Helper;
 
-
-/** Zend_Dojo_View_Helper_Dojo */
-
-/** Zend_Dojo_View_Helper_Dojo_Container */
-
-/** Zend_Dojo */
-
-/** Zend_View */
+use Zend\Dojo\View\Helper\Dojo as DojoHelper,
+    Zend\Dojo\View\Helper\Dojo\Container as DojoContainer,
+    Zend\JSON\JSON,
+    Zend\Registry,
+    Zend\View\View,
+    Zend\View\ViewInterface;
 
 /**
  * Test class for Zend_Dojo_View_Helper_Dojo.
@@ -45,19 +40,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_DojoTest extends PHPUnit_Framework_TestCase
+class DojoTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_DojoTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -66,40 +50,30 @@ class Zend_Dojo_View_Helper_DojoTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Zend_Registry::_unsetInstance();
+        Registry::_unsetInstance();
         $this->view   = $this->getView();
-        $this->helper = new Zend_Dojo_View_Helper_Dojo_Container();
+        $this->helper = new DojoContainer();
         $this->helper->setView($this->view);
-        Zend_Registry::set('Zend_Dojo_View_Helper_Dojo', $this->helper);
-        Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
+        Registry::set('Zend\Dojo\View\Helper\Dojo', $this->helper);
+        DojoHelper::setUseProgrammatic();
     }
 
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+        $view = new View();
+        \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
 
     public function testViewPropertyShouldBeNullByDefault()
     {
-        $helper = new Zend_Dojo_View_Helper_Dojo();
+        $helper = new DojoHelper();
         $this->assertNull($helper->view);
     }
 
     public function testShouldBeAbleToSetViewProperty()
     {
-        $this->assertTrue($this->helper->view instanceof Zend_View_Interface);
+        $this->assertTrue($this->helper->view instanceof ViewInterface);
     }
 
     public function testNoModulesShouldBeRegisteredByDefault()
@@ -130,12 +104,8 @@ class Zend_Dojo_View_Helper_DojoTest extends PHPUnit_Framework_TestCase
 
     public function testInvalidModuleNameShouldThrowExceptionDuringRegistration()
     {
-        try {
-            $this->helper->requireModule('foo#$!bar');
-            $this->fail('Invalid module name should throw exception during registration');
-        } catch (Zend_Dojo_View_Exception $e) {
-            $this->assertContains('invalid character', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Dojo\View\Exception', 'invalid character');
+        $this->helper->requireModule('foo#$!bar');
     }
 
     /**
@@ -204,14 +174,14 @@ class Zend_Dojo_View_Helper_DojoTest extends PHPUnit_Framework_TestCase
 
     public function testShouldUseGoogleCdnByDefault()
     {
-        $this->assertEquals(Zend_Dojo::CDN_BASE_GOOGLE, $this->helper->getCdnBase());
+        $this->assertEquals(\Zend\Dojo\Dojo::CDN_BASE_GOOGLE, $this->helper->getCdnBase());
     }
 
     public function testShouldAllowSpecifyingCdnBasePath()
     {
         $this->testShouldUseGoogleCdnByDefault();
-        $this->helper->setCdnBase(Zend_Dojo::CDN_BASE_AOL);
-        $this->assertEquals(Zend_Dojo::CDN_BASE_AOL, $this->helper->getCdnBase());
+        $this->helper->setCdnBase(\Zend\Dojo\Dojo::CDN_BASE_AOL);
+        $this->assertEquals(\Zend\Dojo\Dojo::CDN_BASE_AOL, $this->helper->getCdnBase());
     }
 
     public function testShouldUseLatestVersionWhenUsingCdnByDefault()
@@ -228,14 +198,14 @@ class Zend_Dojo_View_Helper_DojoTest extends PHPUnit_Framework_TestCase
 
     public function testShouldUseAolCdnDojoPathByDefault()
     {
-        $this->assertEquals(Zend_Dojo::CDN_DOJO_PATH_AOL, $this->helper->getCdnDojoPath());
+        $this->assertEquals(\Zend\Dojo\Dojo::CDN_DOJO_PATH_AOL, $this->helper->getCdnDojoPath());
     }
 
     public function testShouldAllowSpecifyingCdnDojoPath()
     {
         $this->testShouldUseAolCdnDojoPathByDefault();
-        $this->helper->setCdnDojoPath(Zend_Dojo::CDN_DOJO_PATH_GOOGLE);
-        $this->assertEquals(Zend_Dojo::CDN_DOJO_PATH_GOOGLE, $this->helper->getCdnDojoPath());
+        $this->helper->setCdnDojoPath(\Zend\Dojo\Dojo::CDN_DOJO_PATH_GOOGLE);
+        $this->assertEquals(\Zend\Dojo\Dojo::CDN_DOJO_PATH_GOOGLE, $this->helper->getCdnDojoPath());
     }
 
     public function testShouldAllowSpecifyingLocalDojoInstall()
@@ -314,12 +284,8 @@ class Zend_Dojo_View_Helper_DojoTest extends PHPUnit_Framework_TestCase
 
     public function testInvalidStylesheetModuleNameShouldThrowException()
     {
-        try {
-            $this->helper->addStylesheetModule('foo/bar/baz');
-            $this->fail('invalid module designation should throw exception');
-        } catch (Zend_Dojo_View_Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Dojo\View\Exception', 'Invalid');
+        $this->helper->addStylesheetModule('foo/bar/baz');
     }
 
     public function testRenderingModuleStylesheetShouldProperlyCreatePaths()
@@ -388,10 +354,10 @@ function() {
         $this->assertEquals('foo', $action);
     }
 
-    public function testDojoMethodShouldReturnContainer()
+    public function testDirectMethodShouldReturnContainer()
     {
-        $helper = new Zend_Dojo_View_Helper_Dojo();
-        $this->assertSame($this->helper, $helper->dojo());
+        $helper = new DojoHelper();
+        $this->assertSame($this->helper, $helper->direct());
     }
 
     public function testHelperStorageShouldPersistBetweenViewObjects()
@@ -412,9 +378,9 @@ function() {
     {
         $this->setupDojo();
         $html = $this->helper->__toString();
-        $doc  = new DOMDocument;
+        $doc  = new \DOMDocument;
         $doc->loadHTML($html);
-        $xPath = new DOMXPath($doc);
+        $xPath = new \DOMXPath($doc);
         $results = $xPath->query('//script');
         $this->assertEquals(3, $results->length);
         for ($i = 0; $i < 3; ++$i) {
@@ -457,7 +423,7 @@ function() {
         $this->assertRegexp('|<style [^>]*>[\r\n]+\s*<!--|', $html);
         $this->assertRegexp('|<script [^>]*>[\r\n]+\s*//<!--|', $html);
 
-        $this->helper = new Zend_Dojo_View_Helper_Dojo();
+        $this->helper = new DojoHelper();
         $view->doctype('XHTML1_STRICT');
         $this->helper->setView($view);
         $this->setupDojo();
@@ -482,21 +448,21 @@ function() {
 
     public function testShouldUseProgrammaticDijitCreationByDefault()
     {
-        $this->assertTrue(Zend_Dojo_View_Helper_Dojo::useProgrammatic());
+        $this->assertTrue(DojoHelper::useProgrammatic());
     }
 
     public function testShouldAllowSpecifyingDeclarativeDijitCreation()
     {
         $this->testShouldUseProgrammaticDijitCreationByDefault();
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
-        $this->assertTrue(Zend_Dojo_View_Helper_Dojo::useDeclarative());
+        DojoHelper::setUseDeclarative();
+        $this->assertTrue(DojoHelper::useDeclarative());
     }
 
     public function testShouldAllowSpecifyingProgrammaticDijitCreationWithNoScriptGeneration()
     {
-        Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
-        $this->assertTrue(Zend_Dojo_View_Helper_Dojo::useProgrammatic());
-        $this->assertTrue(Zend_Dojo_View_Helper_Dojo::useProgrammaticNoScript());
+        DojoHelper::setUseProgrammatic(-1);
+        $this->assertTrue(DojoHelper::useProgrammatic());
+        $this->assertTrue(DojoHelper::useProgrammaticNoScript());
     }
 
     public function testAddingProgrammaticDijitsShouldAcceptIdAndArrayOfDijitParams()
@@ -517,12 +483,10 @@ function() {
         $this->assertEquals('dijit.form.Form', $dijit['params']['dojoType']);
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testAddingDuplicateProgrammaticDijitsShouldRaiseExceptions()
     {
         $this->helper->addDijit('foo', array('dojoType' => 'dijit.form.Form'));
+        $this->setExpectedException('Zend\Dojo\View\Exception');
         $this->helper->addDijit('foo', array('dojoType' => 'dijit.form.ComboBox'));
     }
 
@@ -615,7 +579,7 @@ function() {
     {
         $this->testShouldAllowAddingMultipleDijitsAtOnce();
         $json  = $this->helper->dijitsToJson();
-        $array = Zend_Json::decode($json);
+        $array = JSON::decode($json);
         $this->assertTrue(is_array($array));
 
         $keys  = array();
@@ -747,9 +711,9 @@ function() {
         $this->setupDojo();
         $this->testShouldAllowAddingLayers();
         $html = $this->helper->__toString();
-        $doc  = new DOMDocument;
+        $doc  = new \DOMDocument;
         $doc->loadHTML($html);
-        $xPath = new DOMXPath($doc);
+        $xPath = new \DOMXPath($doc);
         $results = $xPath->query('//script');
 
         $found = array();
@@ -766,41 +730,38 @@ function() {
         $this->assertSame(array('foo', 'bar'), $found);
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testCallingMethodThatDoesNotExistInContainerShouldRaiseException()
     {
-        $dojo = new Zend_Dojo_View_Helper_Dojo();
+        $this->setExpectedException('Zend\Dojo\View\Exception');
+        $dojo = new DojoHelper();
         $dojo->bogus();
     }
 
     public function testShouldAllowSpecifyingDeclarativeUsage()
     {
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
-        $this->assertTrue(Zend_Dojo_View_Helper_Dojo::useDeclarative());
+        DojoHelper::setUseDeclarative();
+        $this->assertTrue(DojoHelper::useDeclarative());
     }
 
     public function testShouldAllowSpecifyingProgrammaticUsageWithNoScriptGeneration()
     {
-        Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
-        $this->assertTrue(Zend_Dojo_View_Helper_Dojo::useProgrammaticNoScript());
+        DojoHelper::setUseProgrammatic(-1);
+        $this->assertTrue(DojoHelper::useProgrammaticNoScript());
     }
 
     public function testInvalidFlagPassedToUseProgrammaticShouldUseProgrammaticWithScripts()
     {
-        Zend_Dojo_View_Helper_Dojo::setUseProgrammatic('foo');
-        $this->assertFalse(Zend_Dojo_View_Helper_Dojo::useProgrammaticNoScript());
-        $this->assertTrue(Zend_Dojo_View_Helper_Dojo::useProgrammatic());
+        DojoHelper::setUseProgrammatic('foo');
+        $this->assertFalse(DojoHelper::useProgrammaticNoScript());
+        $this->assertTrue(DojoHelper::useProgrammatic());
     }
 
     /**
-     * @see   ZF-3962
      * @group ZF-3962
      */
     public function testHelperShouldAllowDisablingParseOnLoadWithDeclarativeStyle()
     {
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+        DojoHelper::setUseDeclarative();
         $this->helper->requireModule('dijit.layout.ContentPane')
                      ->setDjConfigOption('parseOnLoad', 'false')
                      ->enable();
@@ -843,7 +804,8 @@ function() {
         $this->assertRegexp('/zendDijits.*?(zend\.custom)/s', $test, 'Generated markup: ' . $test);
     }
 
-    public function testDojoViewHelperContainerAddOptionsPassesOnAllStringOptions() {
+    public function testDojoViewHelperContainerAddOptionsPassesOnAllStringOptions() 
+    {
         $helper = $this->helper;
         $options = array(
             'requireModules' => 'ZfTestRequiredModule',
@@ -870,7 +832,8 @@ function() {
         $this->assertTrue($helper->registerDojoStylesheet());
     }
 
-    public function testDojoViewHelperContainerAddOptionsPassesOnAllArrayOptions() {
+    public function testDojoViewHelperContainerAddOptionsPassesOnAllArrayOptions() 
+    {
         $helper = $this->helper;
         $modulePaths = array('module1' => 'path1', 'module2' => 'path2');
         $layers = array('layer_two','layer_three');
@@ -907,9 +870,4 @@ function() {
                      ->addStylesheet('/css/custom.css')
                      ->addOnLoad('foo');
     }
-}
-
-// Call Zend_Dojo_View_Helper_DojoTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_View_Helper_DojoTest::main") {
-    Zend_Dojo_View_Helper_DojoTest::main();
 }

@@ -26,6 +26,7 @@
 namespace Zend\Dojo\View\Helper\Dojo;
 
 use Zend\Dojo\View\Exception as DojoViewException,
+    Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Config\Config,
     Zend\View\ViewInterface as View,
     Zend\JSON\JSON;
@@ -963,7 +964,7 @@ EOJ;
 
         $this->_isXhtml = $this->view->doctype()->isXhtml();
 
-        if (\Zend\Dojo::useDeclarative()) {
+        if (DojoHelper::useDeclarative()) {
             if (null === $this->getDjConfigOption('parseOnLoad')) {
                 $this->setDjConfigOption('parseOnLoad', true);
             }

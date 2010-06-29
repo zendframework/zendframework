@@ -20,19 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_View_Helper_CustomDijitTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_View_Helper_CustomDijitTest::main");
-}
+namespace ZendTest\Dojo\View\Helper;
 
-
-/** Zend_Dojo_View_Helper_CustomDijit */
-
-/** Zend_View */
-
-/** Zend_Registry */
-
-/** Zend_Dojo_View_Helper_Dojo */
+use Zend\Dojo\View\Helper\CustomDijit as CustomDijitHelper,
+    Zend\Dojo\View\Helper\Dojo as DojoHelper,
+    Zend\Registry,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_CustomDijit
@@ -45,19 +38,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_CustomDijitTest extends PHPUnit_Framework_TestCase
+class CustomDijitTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -66,34 +48,22 @@ class Zend_Dojo_View_Helper_CustomDijitTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Zend_Registry::_unsetInstance();
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+        Registry::_unsetInstance();
+        DojoHelper::setUseDeclarative();
 
         $this->view   = $this->getView();
     }
 
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-    }
-
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+        $view = new View();
+        \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testHelperShouldRaiseExceptionIfNoDojoTypePassed()
     {
+        $this->setExpectedException('Zend\Dojo\View\Exception');
         $this->view->customDijit('foo');
     }
 
@@ -113,7 +83,7 @@ class Zend_Dojo_View_Helper_CustomDijitTest extends PHPUnit_Framework_TestCase
 
     public function testHelperInProgrammaticModeShouldRegisterDojoTypeAsModule()
     {
-        Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
+        DojoHelper::setUseProgrammatic();
         $content = $this->view->customDijit('foo', 'content', array('dojoType' => 'custom.Dijit'));
         $dojo    = $this->view->dojo();
         $modules = $dojo->getModules();
@@ -122,7 +92,7 @@ class Zend_Dojo_View_Helper_CustomDijitTest extends PHPUnit_Framework_TestCase
 
     public function testHelperInProgrammaticModeShouldGenerateDivWithoutPassedDojoType()
     {
-        Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
+        DojoHelper::setUseProgrammatic();
         $content = $this->view->customDijit('foo', 'content', array('dojoType' => 'custom.Dijit'));
         $this->assertNotContains('dojoType="custom.Dijit"', $content);
     }
@@ -137,19 +107,19 @@ class Zend_Dojo_View_Helper_CustomDijitTest extends PHPUnit_Framework_TestCase
 
     public function testUsesDefaultDojoTypeWhenPresent()
     {
-        $helper = new Zend_Dojo_View_Helper_CustomDijitTest_FooContentPane();
+        $helper = new TestAsset\FooContentPane();
         $helper->setView($this->view);
-        $content = $helper->fooContentPane('foo');
+        $content = $helper->direct('foo');
         $this->assertContains('dojoType="foo.ContentPane"', $content);
     }
 
     public function testCapturingUsesDefaultDojoTypeWhenPresent()
     {
-        $helper = new Zend_Dojo_View_Helper_CustomDijitTest_FooContentPane();
+        $helper = new TestAsset\FooContentPane();
         $helper->setView($this->view);
-        $helper->fooContentPane()->captureStart('foo');
+        $helper->direct()->captureStart('foo');
         echo "Captured content started\n";
-        $content = $helper->fooContentPane()->captureEnd('foo');
+        $content = $helper->direct()->captureEnd('foo');
         $this->assertContains(">Captured content started\n<", $content);
         $this->assertContains('dojoType="foo.ContentPane"', $content);
     }
@@ -165,20 +135,4 @@ class Zend_Dojo_View_Helper_CustomDijitTest extends PHPUnit_Framework_TestCase
         ));
         $this->assertContains('<select', $content);
     }
-}
-
-class Zend_Dojo_View_Helper_CustomDijitTest_FooContentPane
-    extends Zend_Dojo_View_Helper_CustomDijit
-{
-    protected $_defaultDojoType = 'foo.ContentPane';
-
-    public function fooContentPane($id = null, $value = null, array $params = array(), array $attribs = array())
-    {
-        return $this->customDijit($id, $value, $params, $attribs);
-    }
-}
-
-// Call Zend_Dojo_View_Helper_CustomDijitTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_View_Helper_CustomDijitTest::main") {
-    Zend_Dojo_View_Helper_CustomDijitTest::main();
 }

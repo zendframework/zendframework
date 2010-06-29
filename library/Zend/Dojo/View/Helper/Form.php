@@ -81,7 +81,7 @@ class Form extends Dijit
 
         $attribs = $this->_prepareDijit($attribs, array(), 'layout');
 
-        return $this->getFormHelper()->form($id, $attribs, $content);
+        return $this->getFormHelper()->direct($id, $attribs, $content);
     }
 
     /**

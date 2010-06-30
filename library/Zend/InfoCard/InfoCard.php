@@ -26,7 +26,7 @@ namespace Zend\InfoCard;
 
 /**
  * @uses       \Zend\InfoCard\Adapter\Default
- * @uses       \Zend\InfoCard\Adapter\AdapterInterface
+ * @uses       \Zend\InfoCard\Adapter
  * @uses       \Zend\InfoCard\Claims
  * @uses       \Zend\InfoCard\Exception
  * @uses       \Zend\InfoCard\XML\Assertion\Assertion
@@ -71,7 +71,7 @@ class InfoCard
      * The InfoCard Adapter to use for callbacks into the application using the component
      * such as when storing assertions, etc.
      *
-     * @var \Zend\InfoCard\Adapter\AdapterInterface
+     * @var \Zend\InfoCard\Adapter
      */
     protected $_adapter;
 
@@ -98,10 +98,10 @@ class InfoCard
      * Sets the adapter uesd for callbacks into the application using the component, used
      * when doing things such as storing / retrieving assertions, etc.
      *
-     * @param \Zend\InfoCard\Adapter\AdapterInterface $a The Adapter instance
+     * @param \Zend\InfoCard\Adapter $a The Adapter instance
      * @return \Zend\InfoCard\InfoCard The instnace
      */
-    public function setAdapter(Adapter\AdapterInterface $a)
+    public function setAdapter(Adapter $a)
     {
         $this->_adapter = $a;
         return $this;
@@ -111,7 +111,7 @@ class InfoCard
      * Retrieves the adapter used for callbacks into the application using the component.
      * If no adapter was set then an instance of Zend_InfoCard_Adapter_Default is used
      *
-     * @return \Zend\InfoCard\Adapter\AdapterInterface The Adapter instance
+     * @return \Zend\InfoCard\Adapter The Adapter instance
      */
     public function getAdapter()
     {

@@ -7291,10 +7291,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Adapter/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Adapter_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Adapter/AdapterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Adapter</newNamespace>
-      <newClassName>AdapterInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Adapter\AdapterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/Adapter.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard</newNamespace>
+      <newClassName>Adapter</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\Adapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Exception.php</originalRelativeFilePath>

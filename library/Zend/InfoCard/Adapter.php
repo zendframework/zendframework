@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\InfoCard\Adapter;
+namespace Zend\InfoCard;
 
 /**
  * The interface required by all Zend_InfoCard Adapter classes to implement. It represents
@@ -35,7 +35,7 @@ namespace Zend\InfoCard\Adapter;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface AdapterInterface
+interface Adapter
 {
     /**
      * Store the assertion's claims in persistent storage

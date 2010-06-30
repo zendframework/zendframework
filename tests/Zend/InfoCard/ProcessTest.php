@@ -167,7 +167,7 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 
         $infoCard->setAdapter($adapter);
 
-        $result = $infoCard->getAdapter() instanceof Adapter\AdapterInterface;
+        $result = $infoCard->getAdapter() instanceof Adapter;
 
         $this->assertTrue($result);
         $this->assertTrue($infoCard->getAdapter() instanceof TestAsset\MockAdapter);

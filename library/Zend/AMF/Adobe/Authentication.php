@@ -30,7 +30,7 @@ use Zend\Authentication;
  * This class implements authentication against XML file with roles for Flex Builder.
  *
  * @uses       \Zend\Acl\Acl
- * @uses       \Zend\AMF\Authentication\AbstractAuthentication
+ * @uses       \Zend\AMF\AbstractAuthentication
  * @uses       \Zend\Authentication\Result
  * @uses       \Zend\Authentication\Adapter\Exception
  * @package    Zend_Amf
@@ -38,7 +38,7 @@ use Zend\Authentication;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Authentication extends \Zend\AMF\Authentication\AbstractAuthentication
+class Authentication extends \Zend\AMF\AbstractAuthentication
 {
 
     /**

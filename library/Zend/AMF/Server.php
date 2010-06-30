@@ -121,7 +121,7 @@ class Server implements \Zend\Server\ServerInterface
     /**
      * Authentication handler object
      *
-     * @var Zend\AMF\Authentication\AbstractAuthentication
+     * @var Zend\AMF\AbstractAuthentication
      */
     protected $_auth;
 
@@ -175,10 +175,10 @@ class Server implements \Zend\Server\ServerInterface
     /**
      * Set authentication adapter
      *
-     * @param  Zend\AMF\Authentication\AbstractAuthentication $auth
+     * @param  Zend\AMF\AbstractAuthentication $auth
      * @return Zend\AMF\Server
      */
-    public function setAuth(Authentication\AbstractAuthentication $auth)
+    public function setAuth(AbstractAuthentication $auth)
     {
         $this->_auth = $auth;
         return $this;
@@ -187,7 +187,7 @@ class Server implements \Zend\Server\ServerInterface
    /**
      * Get authentication adapter
      *
-     * @return Zend\AMF\Authentication\AbstractAuthentication
+     * @return Zend\AMF\AbstractAuthentication
      */
     public function getAuth()
     {

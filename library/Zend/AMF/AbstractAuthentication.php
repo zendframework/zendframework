@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\AMF\Authentication;
+namespace Zend\AMF;
 
 /**
  * Base abstract class for AMF authentication implementation

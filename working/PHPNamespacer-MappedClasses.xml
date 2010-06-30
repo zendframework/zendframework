@@ -99,10 +99,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Auth/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Auth_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/AMF/Authentication/AbstractAuthentication.php</newRelativeFilePath>
-      <newNamespace>Zend\AMF\Authentication</newNamespace>
+      <newRelativeFilePath>Zend/AMF/AbstractAuthentication.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF</newNamespace>
       <newClassName>AbstractAuthentication</newClassName>
-      <newFullyQualifiedName>Zend\AMF\Authentication\AbstractAuthentication</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\AbstractAuthentication</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Constants.php</originalRelativeFilePath>

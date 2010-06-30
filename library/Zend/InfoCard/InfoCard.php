@@ -32,7 +32,7 @@ namespace Zend\InfoCard;
  * @uses       \Zend\InfoCard\XML\Assertion\Assertion
  * @uses       Zend_InfoCard_Xml_Cipher
  * @uses       \Zend\InfoCard\XML\EncryptedData\EncryptedData
- * @uses       \Zend\InfoCard\XML\Security\Security
+ * @uses       \Zend\InfoCard\XML\Security
  * @category   Zend
  * @package    Zend_InfoCard
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -417,7 +417,7 @@ class InfoCard
             throw new Exception("Invalid Assertion Object returned");
         }
 
-        if(!($reference_id = XML\Security\Security::validateXMLSignature($assertions->asXML()))) {
+        if(!($reference_id = XML\Security::validateXMLSignature($assertions->asXML()))) {
             $retval->setError("Failure Validating the Signature of the assertion document");
             $retval->setCode(Claims::RESULT_VALIDATION_FAILURE);
             return $retval;

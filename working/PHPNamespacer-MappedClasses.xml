@@ -7579,10 +7579,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Security.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Security</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/XML/Security/Security.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\XML\Security</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/Security.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML</newNamespace>
       <newClassName>Security</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\XML\Security\Security</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Security</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/SecurityTokenReference.php</originalRelativeFilePath>

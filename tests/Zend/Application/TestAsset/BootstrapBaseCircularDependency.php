@@ -20,9 +20,9 @@
  * @version    $Id$
  */
 
-namespace ZendTest\Application\TestAssett\Resource;
+namespace ZendTest\Application\TestAsset;
 
-use Zend\Application\Resource\AbstractResource;
+use Zend\Application\AbstractBootstrap;
 
 /**
  * @category   Zend
@@ -31,10 +31,23 @@ use Zend\Application\Resource\AbstractResource;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Foobar extends AbstractResource
+class BootstrapBaseCircularDependency extends AbstractBootstrap
 {
-    public function init()
+    public $complete = false;
+
+    public function run()
     {
-        $this->getBootstrap()->executedFoobarResource = true;
+    }
+
+    public function _initFirst()
+    {
+        $this->bootstrap('Second');
+        $this->complete = true;
+    }
+
+    public function _initSecond()
+    {
+        $this->bootstrap('First');
+        $this->complete = true;
     }
 }

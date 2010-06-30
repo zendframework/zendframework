@@ -20,9 +20,9 @@
  * @version    $Id$
  */
 
-namespace ZendTest\Application\TestAssett;
+namespace ZendTest\Application\TestAsset\Resource;
 
-use Zend\Application\AbstractBootstrap;
+use Zend\Application\Resource\AbstractResource;
 
 /**
  * @category   Zend
@@ -31,23 +31,17 @@ use Zend\Application\AbstractBootstrap;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class BootstrapBaseCircularDependency extends AbstractBootstrap
+class Foo extends AbstractResource
 {
-    public $complete = false;
+    public $someArbitraryKey;
 
-    public function run()
+    public function init()
     {
+        $this->getBootstrap()->executedFooResource = true;
     }
 
-    public function _initFirst()
+    public function setSomeArbitraryKey($value)
     {
-        $this->bootstrap('Second');
-        $this->complete = true;
-    }
-
-    public function _initSecond()
-    {
-        $this->bootstrap('First');
-        $this->complete = true;
+        $this->someArbitraryKey = $value;
     }
 }

@@ -25,7 +25,7 @@ namespace ZendTest\Application\Resource;
 use Zend\Loader\Autoloader,
     Zend\Application\Application,
     Zend\Application\Resource\Db as DbResource,
-    ZendTest\Application\TestAssett\ZfAppBootstrap;
+    ZendTest\Application\TestAsset\ZfAppBootstrap;
 
 /**
  * @category   Zend

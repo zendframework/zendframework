@@ -20,9 +20,9 @@
  * @version    $Id$
  */
 
-namespace ZendTest\Application\TestAssett\Resource;
+namespace ZendTest\Application\Resource\TestAsset;
 
-use Zend\Application\Resource\AbstractResource;
+use Zend\Application\Bootstrap;
 
 /**
  * @category   Zend
@@ -31,12 +31,12 @@ use Zend\Application\Resource\AbstractResource;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Baz extends AbstractResource
+class ZfAppBootstrapCustomView extends Bootstrap
 {
-    public function init()
+    public function _initView()
     {
-        $o = new \stdClass();
-        $o->baz = 'Baz';
-        return $o;
+        $view = new \Zend\View\View();
+        $view->setInMethodByTest = true;
+        return $view;
     }
 }

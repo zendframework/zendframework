@@ -20,7 +20,7 @@
  * @version    $Id$
  */
 
-namespace ZendTest\Application\TestAssett\Resource;
+namespace ZendTest\Application\TestAsset\Resource;
 
 use Zend\Application\Resource\AbstractResource;
 
@@ -31,17 +31,12 @@ use Zend\Application\Resource\AbstractResource;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Foo extends AbstractResource
+class Baz extends AbstractResource
 {
-    public $someArbitraryKey;
-
     public function init()
     {
-        $this->getBootstrap()->executedFooResource = true;
-    }
-
-    public function setSomeArbitraryKey($value)
-    {
-        $this->someArbitraryKey = $value;
+        $o = new \stdClass();
+        $o->baz = 'Baz';
+        return $o;
     }
 }

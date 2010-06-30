@@ -26,7 +26,7 @@ use Zend\Loader\Autoloader,
     Zend\Application\Resource\Cachemanager,
     Zend\Application,
     Zend\Controller\Front as FrontController,
-    ZendTest\Application\TestAssett\ZfAppBootstrap;
+    ZendTest\Application\TestAsset\ZfAppBootstrap;
 
 /**
  * @category   Zend

@@ -142,7 +142,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingIncludePathOptionShouldModifyIncludePath()
     {
-        $expected = __DIR__ . '/TestAssett';
+        $expected = __DIR__ . '/TestAsset';
         $this->application->setOptions(array(
             'includePaths' => array(
                 $expected,
@@ -189,7 +189,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     public function testPassingStringBootstrapPathOptionShouldRegisterBootstrap()
     {
         $this->application->setOptions(array(
-            'bootstrap' => __DIR__ . '/TestAssett/modules/default/Bootstrap.php',
+            'bootstrap' => __DIR__ . '/TestAsset/modules/default/Bootstrap.php',
         ));
         $bootstrap = $this->application->getBootstrap();
         $this->assertTrue($bootstrap instanceof \Bootstrap);
@@ -199,7 +199,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $this->application->setOptions(array(
             'bootstrap' => array(
-                'path' => __DIR__ . '/TestAssett/modules/default/Bootstrap.php',
+                'path' => __DIR__ . '/TestAsset/modules/default/Bootstrap.php',
             ),
         ));
         $bootstrap = $this->application->getBootstrap();
@@ -210,12 +210,12 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $this->application->setOptions(array(
             'bootstrap' => array(
-                'path'  => __DIR__ . '/TestAssett/ZfAppBootstrap.php',
-                'class' => 'ZendTest\\Application\\TestAssett\\ZfAppBootstrap',
+                'path'  => __DIR__ . '/TestAsset/ZfAppBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAsset\\ZfAppBootstrap',
             ),
         ));
         $bootstrap = $this->application->getBootstrap();
-        $this->assertTrue($bootstrap instanceof TestAssett\ZfAppBootstrap);
+        $this->assertTrue($bootstrap instanceof TestAsset\ZfAppBootstrap);
     }
 
     public function testPassingArrayBootstrapWithoutPathOptionShouldRaiseException()
@@ -246,31 +246,31 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingStringIniConfigPathOptionToConstructorShouldLoadOptions()
     {
-        $application = new Application\Application('testing', __DIR__ . '/TestAssett/appconfig.ini');
+        $application = new Application\Application('testing', __DIR__ . '/TestAsset/appconfig.ini');
         $this->assertTrue($application->hasOption('foo'));
     }
 
     public function testPassingStringXmlConfigPathOptionToConstructorShouldLoadOptions()
     {
-        $application = new Application\Application('testing', __DIR__ . '/TestAssett/appconfig.xml');
+        $application = new Application\Application('testing', __DIR__ . '/TestAsset/appconfig.xml');
         $this->assertTrue($application->hasOption('foo'));
     }
 
     public function testPassingStringPhpConfigPathOptionToConstructorShouldLoadOptions()
     {
-        $application = new Application\Application('testing', __DIR__ . '/TestAssett/appconfig.php');
+        $application = new Application\Application('testing', __DIR__ . '/TestAsset/appconfig.php');
         $this->assertTrue($application->hasOption('foo'));
     }
 
     public function testPassingStringIncConfigPathOptionToConstructorShouldLoadOptions()
     {
-        $application = new Application\Application('testing', __DIR__ . '/TestAssett/appconfig.inc');
+        $application = new Application\Application('testing', __DIR__ . '/TestAsset/appconfig.inc');
         $this->assertTrue($application->hasOption('foo'));
     }
 
     public function testPassingArrayOptionsWithConfigKeyShouldLoadOptions()
     {
-        $application = new Application\Application('testing', array('bar' => 'baz', 'config' => __DIR__ . '/TestAssett/appconfig.inc'));
+        $application = new Application\Application('testing', array('bar' => 'baz', 'config' => __DIR__ . '/TestAsset/appconfig.inc'));
         $this->assertTrue($application->hasOption('foo'));
         $this->assertTrue($application->hasOption('bar'));
     }
@@ -281,26 +281,26 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
      */
     public function testPassingArrayOptionsWithConfigKeyShouldLoadOptionsAndNotOverride()
     {
-        $application = new Application\Application('testing', array('foo' => 'baz', 'config' => __DIR__ . '/TestAssett/appconfig.inc'));
+        $application = new Application\Application('testing', array('foo' => 'baz', 'config' => __DIR__ . '/TestAsset/appconfig.inc'));
         $this->assertNotEquals('bar', $application->getOption('foo'));
     }
 
     public function testPassingInvalidStringOptionToConstructorShouldRaiseException()
     {
         $this->setExpectedException('Zend\\Application\\Exception');
-        $application = new Application\Application('testing', __DIR__ . '/TestAssett/appconfig');
+        $application = new Application\Application('testing', __DIR__ . '/TestAsset/appconfig');
     }
 
     public function testPassingZendConfigToConstructorShouldLoadOptions()
     {
-        $config = new IniConfig(__DIR__ . '/TestAssett/appconfig.ini', 'testing');
+        $config = new IniConfig(__DIR__ . '/TestAsset/appconfig.ini', 'testing');
         $application = new Application\Application('testing', $config);
         $this->assertTrue($application->hasOption('foo'));
     }
 
     public function testPassingArrayOptionsToConstructorShouldLoadOptions()
     {
-        $config = new IniConfig(__DIR__ . '/TestAssett/appconfig.ini', 'testing');
+        $config = new IniConfig(__DIR__ . '/TestAsset/appconfig.ini', 'testing');
         $application = new Application\Application('testing', $config->toArray());
         $this->assertTrue($application->hasOption('foo'));
     }
@@ -316,7 +316,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\\Application\\Exception');
         $this->application->setOptions(array(
             'bootstrap' => array(
-                'path'  => __DIR__ . '/TestAssett/ZfAppNoBootstrap.php',
+                'path'  => __DIR__ . '/TestAsset/ZfAppNoBootstrap.php',
                 'class' => 'ZfAppNoBootstrap',
             ),
         ));
@@ -328,8 +328,8 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\\Application\\Exception');
         $this->application->setOptions(array(
             'bootstrap' => array(
-                'path'  => __DIR__ . '/TestAssett/ZfAppBadBootstrap.php',
-                'class' => 'ZendTest\\Application\\TestAssett\\ZfAppBadBootstrap',
+                'path'  => __DIR__ . '/TestAsset/ZfAppBadBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAsset\\ZfAppBadBootstrap',
             ),
         ));
         $bootstrap = $this->application->getBootstrap();
@@ -345,12 +345,12 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
                 'modules' => array(),
                 'FrontController' => array(
                     'baseUrl'             => '/foo',
-                    'moduleDirectory'     => __DIR__ . '/TestAssett/modules',
+                    'moduleDirectory'     => __DIR__ . '/TestAsset/modules',
                 ),
             ),
             'Bootstrap' => array(
-                'path'  => __DIR__ . '/TestAssett/ZfAppBootstrap.php',
-                'class' => 'ZendTest\\Application\\TestAssett\\ZfAppBootstrap',
+                'path'  => __DIR__ . '/TestAsset/ZfAppBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAsset\\ZfAppBootstrap',
             ),
         );
         $this->application->setOptions($options);
@@ -365,7 +365,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application\Application(
             'production', __DIR__ .
-            '/TestAssett/zf-6679-1.inc'
+            '/TestAsset/zf-6679-1.inc'
         );
         $options = $application->getOptions();
         $this->assertEquals(array('includePaths', 'config'), array_keys($options));
@@ -420,8 +420,8 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application\Application('testing', array(
             'bootstrap' => array(
-                'path' => __DIR__ . '/TestAssett/ZfAppBootstrap.php',
-                'class' => 'ZendTest\\Application\\TestAssett\\ZfAppBootstrap'
+                'path' => __DIR__ . '/TestAsset/ZfAppBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAsset\\ZfAppBootstrap'
                 )
             )
         );
@@ -435,8 +435,8 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application\Application('testing', array(
             'config' => array(
-                __DIR__ . '/TestAssett/Zf-6719-1.ini',
-                __DIR__ . '/TestAssett/Zf-6719-2.ini'
+                __DIR__ . '/TestAsset/Zf-6719-1.ini',
+                __DIR__ . '/TestAsset/Zf-6719-2.ini'
                 )
             )
         );

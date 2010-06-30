@@ -1,6 +1,6 @@
 <?php
 
-namespace ZendTest\Application\TestAssett;
+namespace ZendTest\Application\TestAsset;
 
 use Zend\Session\SaveHandler,
     Zend\Session\Manager;

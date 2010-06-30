@@ -20,7 +20,7 @@
  * @version    $Id$
  */
 
-use Zend\Controller\Action\Action as ActionController;
+use Zend\Controller\Action as ActionController;
 
 /**
  * @category   Zend

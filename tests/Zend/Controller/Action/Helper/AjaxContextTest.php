@@ -179,7 +179,7 @@ class AjaxContextTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class AjaxContextTestController extends \Zend\Controller\Action\Action
+class AjaxContextTestController extends \Zend\Controller\Action
 {
     public $ajaxable = array(
         'foo' => array('xml'),

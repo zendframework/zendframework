@@ -483,14 +483,6 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
 /**
  * Test controller for use with redirector tests
  */
-class TestController extends Action\Action
+class TestController extends Action
 {
 }
-
-// Call Zend_Controller_Action_Helper_RedirectorTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Action_Helper_RedirectorTest::main") {
-    \Zend_Controller_Action_Helper_RedirectorTest::main();
-}
-
-
-

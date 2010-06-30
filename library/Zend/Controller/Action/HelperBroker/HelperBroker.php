@@ -43,7 +43,7 @@ class HelperBroker
     /**
      * $_actionController - ActionController reference
      *
-     * @var \Zend\Controller\Action\Action
+     * @var \Zend\Controller\Action
      */
     protected $_actionController;
 
@@ -113,7 +113,7 @@ class HelperBroker
      * @param string $prefix Optional; defaults to 'Zend_Controller_Action_Helper'
      * @return void
      */
-    static public function addPath($path, $prefix = 'Zend_Controller_Action_Helper')
+    static public function addPath($path, $prefix = 'Zend\Controller\Action\Helper')
     {
         self::getPluginLoader()->addPrefixPath($prefix, $path);
     }
@@ -249,7 +249,7 @@ class HelperBroker
      * @param \Zend\Controller\Action\Action $actionController
      * @return void
      */
-    public function __construct(Action\Action $actionController)
+    public function __construct(Action $actionController)
     {
         $this->_actionController = $actionController;
         foreach (self::getStack() as $helper) {
@@ -374,7 +374,7 @@ class HelperBroker
         $helper = new $class();
 
         if (!$helper instanceof Helper\AbstractHelper) {
-            throw new Action\Exception('Helper name ' . $name . ' -> class ' . $class . ' is not of type Zend_Controller_Action_Helper_Abstract');
+            throw new Action\Exception('Helper name ' . $name . ' -> class ' . $class . ' is not of type Zend\Controller\Action\Helper\AbstractHelper');
         }
 
         self::getStack()->push($helper);

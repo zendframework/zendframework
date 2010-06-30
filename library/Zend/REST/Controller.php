@@ -24,6 +24,8 @@
  */
 namespace Zend\REST;
 
+use Zend\Controller\Action as ActionController;
+
 /**
  * An abstract class to guide implementation of action controllers for use with
  * Zend\REST\Route.
@@ -35,7 +37,7 @@ namespace Zend\REST;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Controller extends \Zend_Controller_Action
+abstract class Controller extends ActionController
 {
     /**
      * The index action handles index/list requests; it should respond with a

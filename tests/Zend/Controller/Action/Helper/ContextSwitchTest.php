@@ -901,7 +901,7 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class ContextSwitchTestController extends Action\Action
+class ContextSwitchTestController extends Action
 {
     public $contextSwitch;
 

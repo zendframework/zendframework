@@ -23,7 +23,10 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Action;
+namespace Zend\Controller;
+
+use Zend\Controller\Request\AbstractRequest,
+    Zend\Controller\Response\AbstractResponse;
 
 /**
  * @category   Zend
@@ -32,7 +35,7 @@ namespace Zend\Controller\Action;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ActionInterface
+interface ActionController
 {
     /**
      * Class constructor
@@ -60,8 +63,8 @@ interface ActionInterface
      * @param array $invokeArgs Any additional invocation arguments
      * @return void
      */
-    public function __construct(\Zend\Controller\Request\AbstractRequest $request,
-                                \Zend\Controller\Response\AbstractResponse $response,
+    public function __construct(AbstractRequest $request,
+                                AbstractResponse $response,
                                 array $invokeArgs = array());
 
     /**

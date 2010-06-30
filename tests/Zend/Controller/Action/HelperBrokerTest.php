@@ -325,7 +325,7 @@ class TestHelper extends Helper\AbstractHelper
     }
 }
 
-class HelperBrokerController extends \Zend\Controller\Action\Action
+class HelperBrokerController extends \Zend\Controller\Action
 {
     public $helper;
 

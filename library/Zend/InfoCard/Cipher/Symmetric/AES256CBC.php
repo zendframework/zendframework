@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\InfoCard\Cipher\Symmetric\AES256CBC;
+namespace Zend\InfoCard\Cipher\Symmetric;
 
 /**
  * @category   Zend
@@ -32,7 +32,7 @@ namespace Zend\InfoCard\Cipher\Symmetric\AES256CBC;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface AES256CBCInterface
+interface AES256CBC
 {
     public function decrypt($encryptedData, $decryptionKey, $iv_length = null);
 }

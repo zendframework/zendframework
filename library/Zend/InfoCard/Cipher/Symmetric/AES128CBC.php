@@ -23,17 +23,16 @@
 /**
  * @namespace
  */
-namespace Zend\InfoCard\Cipher\Symmetric\AES128CBC;
+namespace Zend\InfoCard\Cipher\Symmetric;
 
 /**
- * @uses       \Zend\InfoCard\Cipher\Symmetric\AES256CBC\AES256CBCInterface
+ * @uses       \Zend\InfoCard\Cipher\Symmetric\AES256CBC
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface AES128CBCInterface
-    extends \Zend\InfoCard\Cipher\Symmetric\AES256CBC\AES256CBCInterface
+interface AES128CBC extends AES256CBC
 {
 }

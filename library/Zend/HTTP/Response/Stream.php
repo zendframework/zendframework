@@ -25,12 +25,14 @@
  */
 namespace Zend\HTTP\Response;
 
+use Zend\HTTP\Response;
+
 /**
  * Zend_Http_Response represents an HTTP 1.0 / 1.1 response message. It
  * includes easy access to all the response's different elemts, as well as some
  * convenience methods for parsing and validating HTTP responses.
  *
- * @uses       \Zend\HTTP\Response\Response
+ * @uses       \Zend\HTTP\Response
  * @package    Zend_Http
  * @subpackage Response
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

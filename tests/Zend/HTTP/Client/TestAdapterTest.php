@@ -152,7 +152,7 @@ class TestAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->adapter->read(); // pop out first response
 
-        $respObj = \Zend\HTTP\Response\Response::fromString($testResponse);
+        $respObj = \Zend\HTTP\Response::fromString($testResponse);
 
         $this->adapter->addResponse($respObj);
         $this->assertEquals($testResponse, $this->adapter->read());

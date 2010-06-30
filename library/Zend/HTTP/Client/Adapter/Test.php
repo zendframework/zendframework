@@ -37,7 +37,7 @@ use Zend\HTTP\Client\Adapter as HTTPAdapter,
  *
  * @uses       \Zend\HTTP\Client\Adapter\Exception
  * @uses       \Zend\HTTP\Client\Adapter
- * @uses       \Zend\HTTP\Response\Response
+ * @uses       \Zend\HTTP\Response
  * @uses       \Zend\URI\URL
  * @category   Zend
  * @package    Zend_Http
@@ -190,11 +190,11 @@ class Test implements HTTPAdapter
     /**
      * Set the HTTP response(s) to be returned by this adapter
      *
-     * @param \Zend\HTTP\Response\Response|array|string $response
+     * @param \Zend\HTTP\Response|array|string $response
      */
     public function setResponse($response)
     {
-        if ($response instanceof Response\Response) {
+        if ($response instanceof Response) {
             $response = $response->asString("\r\n");
         }
 
@@ -205,11 +205,11 @@ class Test implements HTTPAdapter
     /**
      * Add another response to the response buffer.
      *
-     * @param string \Zend\HTTP\Response\Response|$response
+     * @param string \Zend\HTTP\Response|$response
      */
     public function addResponse($response)
     {
-         if ($response instanceof Response\Response) {
+         if ($response instanceof Response) {
             $response = $response->asString("\r\n");
         }
 

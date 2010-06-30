@@ -7267,10 +7267,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/Response.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_Response</originalClassName>
-      <newRelativeFilePath>Zend/HTTP/Response/Response.php</newRelativeFilePath>
-      <newNamespace>Zend\HTTP\Response</newNamespace>
+      <newRelativeFilePath>Zend/HTTP/Response.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP</newNamespace>
       <newClassName>Response</newClassName>
-      <newFullyQualifiedName>Zend\HTTP\Response\Response</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\HTTP\Response</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Adapter/Default.php</originalRelativeFilePath>

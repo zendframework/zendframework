@@ -23,8 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\HTTP\Response;
-use Zend\HTTP;
+namespace Zend\HTTP;
 
 /**
  * Zend_Http_Response represents an HTTP 1.0 / 1.1 response message. It
@@ -32,7 +31,7 @@ use Zend\HTTP;
  * convenience methods for parsing and validating HTTP responses.
  *
  * @uses       \Zend\HTTP\Exception
- * @uses       \Zend\HTTP\Response\Response
+ * @uses       \Zend\HTTP\Response
  * @package    Zend_Http
  * @subpackage Response
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -159,14 +158,14 @@ class Response
     {
         // Make sure the response code is valid and set it
         if (self::responseCodeAsText($code) === null) {
-            throw new HTTP\Exception("{$code} is not a valid HTTP response code");
+            throw new Exception("{$code} is not a valid HTTP response code");
         }
 
         $this->code = $code;
 
         // Make sure we got valid headers and set them
         if (! is_array($headers)) {
-            throw new HTTP\Exception('No valid headers were passed');
+            throw new Exception('No valid headers were passed');
     }
 
         foreach ($headers as $name => $value) {
@@ -181,7 +180,7 @@ class Response
 
         // Set the HTTP version
         if (! preg_match('|^\d\.\d$|', $version)) {
-            throw new HTTP\Exception("Invalid HTTP response version: $version");
+            throw new Exception("Invalid HTTP response version: $version");
         }
 
         $this->version = $version;
@@ -576,7 +575,7 @@ class Response
 
         while (trim($body)) {
             if (! preg_match("/^([\da-fA-F]+)[^\r\n]*\r\n/sm", $body, $m)) {
-                throw new HTTP\Exception("Error parsing body - doesn't seem to be a chunked message");
+                throw new Exception("Error parsing body - doesn't seem to be a chunked message");
             }
 
             $length = hexdec(trim($m[1]));
@@ -603,7 +602,7 @@ class Response
     public static function decodeGzip($body)
     {
         if (! function_exists('gzinflate')) {
-            throw new HTTP\Exception(
+            throw new Exception(
                 'zlib extension is required in order to decode "gzip" encoding'
             );
         }
@@ -622,7 +621,7 @@ class Response
     public static function decodeDeflate($body)
     {
         if (! function_exists('gzuncompress')) {
-            throw new HTTP\Exception(
+            throw new Exception(
                 'zlib extension is required in order to decode "deflate" encoding'
             );
         }
@@ -650,7 +649,7 @@ class Response
      * Create a new Zend_Http_Response object from a string
      *
      * @param string $response_str
-     * @return \Zend\HTTP\Response\Response
+     * @return \Zend\HTTP\Response
      */
     public static function fromString($response_str)
     {

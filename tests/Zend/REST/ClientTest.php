@@ -110,7 +110,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $rest = new Client\RESTClient('http://framework.zend.com');
 
         $response = $rest->restGet('rest');
-        $this->assertTrue($response instanceof Response\Response);
+        $this->assertTrue($response instanceof Response);
         $this->assertContains($expXml, $response->getBody());
     }
 
@@ -129,7 +129,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->adapter->setResponse($response);
 
         $response = $this->rest->restGet('/rest/');
-        $this->assertTrue($response instanceof Response\Response);
+        $this->assertTrue($response instanceof Response);
         $this->assertContains($expXml, $response->getBody());
     }
 
@@ -149,7 +149,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $reqXml   = file_get_contents($this->path . 'returnInt.xml');
         $response = $this->rest->restPost('/rest/', $reqXml);
-        $this->assertTrue($response instanceof Response\Response);
+        $this->assertTrue($response instanceof Response);
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
 
@@ -172,7 +172,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->adapter->setResponse($response);
 
         $response = $this->rest->restPost('/rest/', array('foo' => 'bar', 'baz' => 'bat'));
-        $this->assertTrue($response instanceof Response\Response);
+        $this->assertTrue($response instanceof Response);
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
 
@@ -196,7 +196,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $reqXml   = file_get_contents($this->path . 'returnInt.xml');
         $response = $this->rest->restPut('/rest/', $reqXml);
-        $this->assertTrue($response instanceof Response\Response);
+        $this->assertTrue($response instanceof Response);
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
 
@@ -220,7 +220,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $reqXml   = file_get_contents($this->path . 'returnInt.xml');
         $response = $this->rest->restDelete('/rest/');
-        $this->assertTrue($response instanceof Response\Response);
+        $this->assertTrue($response instanceof Response);
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
     }

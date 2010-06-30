@@ -129,7 +129,7 @@ class RESTClient extends \Zend\Service\AbstractService
      * @param string $path
      * @param array  $query Array of GET parameters
      * @throws Zend\HTTP\Client\Exception
-     * @return Zend\HTTP\Response\Response
+     * @return Zend\HTTP\Response
      */
     final public function restGet($path, array $query = null)
     {
@@ -148,7 +148,7 @@ class RESTClient extends \Zend\Service\AbstractService
      *
      * @param mixed $method
      * @param mixed $data
-     * @return \Zend\HTTP\Response\Response
+     * @return \Zend\HTTP\Response
      */
     protected function _performPost($method, $data = null)
     {
@@ -167,7 +167,7 @@ class RESTClient extends \Zend\Service\AbstractService
      * @param string $path
      * @param mixed $data Raw data to send
      * @throws \Zend\HTTP\Client\Exception
-     * @return \Zend\HTTP\Response\Response
+     * @return \Zend\HTTP\Response
      */
     final public function restPost($path, $data = null)
     {
@@ -181,7 +181,7 @@ class RESTClient extends \Zend\Service\AbstractService
      * @param string $path
      * @param mixed $data Raw data to send in request
      * @throws \Zend\HTTP\Client\Exception
-     * @return \Zend\HTTP\Response\Response
+     * @return \Zend\HTTP\Response
      */
     final public function restPut($path, $data = null)
     {
@@ -194,7 +194,7 @@ class RESTClient extends \Zend\Service\AbstractService
      *
      * @param string $path
      * @throws \Zend\HTTP\Client\Exception
-     * @return \Zend\HTTP\Response\Response
+     * @return \Zend\HTTP\Response
      */
     final public function restDelete($path)
     {

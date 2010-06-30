@@ -184,7 +184,7 @@ class GApps extends GData\GData
      *        array of string-based key/value pairs.
      * @throws \Zend\GData\App\HttpException
      * @throws \Zend\GData\GApps\ServiceException
-     * @return \Zend\HTTP\Response\Response
+     * @return \Zend\HTTP\Response
      */
     public function get($uri, $extraHeaders = array())
     {
@@ -205,7 +205,7 @@ class GApps extends GData\GData
      * @param integer $remainingRedirects (optional)
      * @param string $contentType Content-type of the data
      * @param array $extraHaders Extra headers to add tot he request
-     * @return \Zend\HTTP\Response\Response
+     * @return \Zend\HTTP\Response
      * @throws \Zend\GData\App\HttpException
      * @throws \Zend\GData\App\InvalidArgumentException
      * @throws \Zend\GData\GApps\ServiceException
@@ -230,7 +230,7 @@ class GApps extends GData\GData
      * @param integer $remainingRedirects (optional)
      * @param string $contentType Content-type of the data
      * @param array $extraHaders Extra headers to add tot he request
-     * @return \Zend\HTTP\Response\Response
+     * @return \Zend\HTTP\Response
      * @throws \Zend\GData\App\HttpException
      * @throws \Zend\GData\App\InvalidArgumentException
      * @throws \Zend\GData\GApps\ServiceException

@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Validator\Db;
+namespace Zend\Validator\DB;
 
 /**
  * Confirms a record does not exist in a table.
@@ -33,7 +33,7 @@ namespace Zend\Validator\Db;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class NoRecordExists extends AbstractDb
+class NoRecordExists extends AbstractDB
 {
     public function isValid($value)
     {

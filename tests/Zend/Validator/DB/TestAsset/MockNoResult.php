@@ -20,9 +20,9 @@
  * @version    $Id $
  */
 
-/**
- * @see Zend_Db_Adapter_Abstract
- */
+namespace ZendTest\Validator\DB\TestAsset;
+
+use Zend\DB\Adapter\AbstractAdapter;
 
 /**
  * Mock Db adapter for Zend_Validate_Db tests
@@ -33,7 +33,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Db_MockNoResult extends \Zend\Db\Adapter\AbstractAdapter
+class MockNoResult extends AbstractAdapter
 {
 
     /**

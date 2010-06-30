@@ -29,7 +29,7 @@ namespace Zend\Application\Resource;
  * Front Controller resource
  *
  * @uses       \Zend\Application\Resource\AbstractResource
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\HelperBroker
  * @uses       \Zend\Controller\Front
  * @category   Zend
  * @package    Zend_Application
@@ -126,7 +126,7 @@ class Frontcontroller extends AbstractResource
                 case 'actionhelperpaths':
                     if (is_array($value)) {
                         foreach ($value as $helperPrefix => $helperPath) {
-                            \Zend\Controller\Action\HelperBroker\HelperBroker::addPath($helperPath, $helperPrefix);
+                            \Zend\Controller\Action\HelperBroker::addPath($helperPath, $helperPrefix);
                         }
                     }
                     break;

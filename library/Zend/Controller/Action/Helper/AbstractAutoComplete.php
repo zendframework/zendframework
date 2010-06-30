@@ -25,7 +25,7 @@
  */
 namespace Zend\Controller\Action\Helper;
 
-use Zend\Controller\Action\HelperBroker\HelperBroker,
+use Zend\Controller\Action\HelperBroker,
     Zend\Layout\Layout;
 
 /**

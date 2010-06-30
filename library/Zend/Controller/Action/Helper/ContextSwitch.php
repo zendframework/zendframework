@@ -327,7 +327,7 @@ class ContextSwitch extends AbstractHelper
             return;
         }
 
-        $viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $view = $viewRenderer->view;
         if ($view instanceof View\ViewInterface) {
             $viewRenderer->setNoRender(true);
@@ -1070,7 +1070,7 @@ class ContextSwitch extends AbstractHelper
             return;
         }
 
-        $viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $view = $viewRenderer->view;
         if ($view instanceof View\ViewInterface) {
             if(method_exists($view, 'getVars')) {
@@ -1332,7 +1332,7 @@ class ContextSwitch extends AbstractHelper
     protected function _getViewRenderer()
     {
         if (null === $this->_viewRenderer) {
-            $this->_viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+            $this->_viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         }
 
         return $this->_viewRenderer;

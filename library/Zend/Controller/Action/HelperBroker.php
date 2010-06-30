@@ -23,9 +23,12 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Action\HelperBroker;
-use Zend\Controller\Action;
-use Zend\Controller\Action\Helper;
+namespace Zend\Controller\Action;
+
+use Zend\Controller\Action,
+    Zend\Loader\PluginLoader\Exception as PluginLoaderException,
+    Zend\Loader\PluginLoader\PluginLoaderInterface,
+    Zend\Loader\PluginLoader\PluginLoader;
 
 /**
  * @uses       \Zend\Controller\Action\Exception
@@ -67,8 +70,8 @@ class HelperBroker
      */
     public static function setPluginLoader($loader)
     {
-        if ((null !== $loader) && (!$loader instanceof \Zend\Loader\PluginLoader\PluginLoaderInterface)) {
-            throw new Action\Exception('Invalid plugin loader provided to HelperBroker');
+        if ((null !== $loader) && (!$loader instanceof PluginLoaderInterface)) {
+            throw new Exception('Invalid plugin loader provided to HelperBroker');
         }
         self::$_pluginLoader = $loader;
     }
@@ -87,7 +90,7 @@ class HelperBroker
     public static function getPluginLoader()
     {
         if (null === self::$_pluginLoader) {
-            self::$_pluginLoader = new \Zend\Loader\PluginLoader\PluginLoader(array(
+            self::$_pluginLoader = new PluginLoader(array(
                 'Zend\Controller\Action\Helper' => 'Zend/Controller/Action/Helper/',
             ));
         }
@@ -101,8 +104,8 @@ class HelperBroker
      */
     static public function addPrefix($prefix)
     {
-        $prefix = rtrim($prefix, '_');
-        $path   = str_replace('_', DIRECTORY_SEPARATOR, $prefix);
+        $prefix = rtrim($prefix, '\\');
+        $path   = str_replace('\\', DIRECTORY_SEPARATOR, $prefix);
         self::getPluginLoader()->addPrefixPath($prefix, $path);
     }
 
@@ -184,7 +187,7 @@ class HelperBroker
         $stack = self::getStack();
 
         if (!isset($stack->{$name})) {
-            throw new Action\Exception('Action helper "' . $name . '" has not been registered with the helper broker');
+            throw new Exception('Action helper "' . $name . '" has not been registered with the helper broker');
         }
 
         return $stack->{$name};
@@ -237,7 +240,7 @@ class HelperBroker
     public static function getStack()
     {
         if (self::$_stack == null) {
-            self::$_stack = new PriorityStack();
+            self::$_stack = new HelperPriorityStack();
         }
 
         return self::$_stack;
@@ -326,7 +329,7 @@ class HelperBroker
     {
         $helper = $this->getHelper($method);
         if (!method_exists($helper, 'direct')) {
-            throw new Action\Exception('Helper "' . $method . '" does not support overloading via direct()');
+            throw new Exception('Helper "' . $method . '" does not support overloading via direct()');
         }
         return call_user_func_array(array($helper, 'direct'), $args);
     }
@@ -350,8 +353,8 @@ class HelperBroker
      */
     protected static function _normalizeHelperName($name)
     {
-        if (strpos($name, '_') !== false) {
-            $name = str_replace(' ', '', ucwords(str_replace('_', ' ', $name)));
+        if (strpos($name, '\\') !== false) {
+            $name = str_replace(' ', '', ucwords(str_replace('\\', ' ', $name)));
         }
 
         return ucfirst($name);
@@ -367,14 +370,14 @@ class HelperBroker
     {
         try {
             $class = self::getPluginLoader()->load($name);
-        } catch (\Zend\Loader\PluginLoader\Exception $e) {
-            throw new Action\Exception('Action Helper by name ' . $name . ' not found', 0, $e);
+        } catch (PluginLoaderException $e) {
+            throw new Exception('Action Helper by name ' . $name . ' not found', 0, $e);
         }
 
         $helper = new $class();
 
         if (!$helper instanceof Helper\AbstractHelper) {
-            throw new Action\Exception('Helper name ' . $name . ' -> class ' . $class . ' is not of type Zend\Controller\Action\Helper\AbstractHelper');
+            throw new Exception('Helper name ' . $name . ' -> class ' . $class . ' is not of type Zend\Controller\Action\Helper\AbstractHelper');
         }
 
         self::getStack()->push($helper);

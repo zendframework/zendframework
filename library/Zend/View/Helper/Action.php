@@ -30,7 +30,7 @@ use Zend\Controller\Action\HelperBroker;
 /**
  * Helper for rendering output of a controller action
  *
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\HelperBroker
  * @uses       \Zend\Controller\Front
  * @uses       \Zend\View\Exception
  * @uses       \Zend\View\Helper\AbstractHelper
@@ -47,7 +47,7 @@ class Action extends AbstractHelper
     public $defaultModule;
 
     /**
-     * @var \Zend\Controller\Dispatcher\DispatcherInterface
+     * @var \Zend\Controller\Dispatcher
      */
     public $dispatcher;
 
@@ -133,8 +133,8 @@ class Action extends AbstractHelper
         }
 
         // clone the view object to prevent over-writing of view variables
-        $viewRendererObj = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
-        HelperBroker\HelperBroker::addHelper(clone $viewRendererObj);
+        $viewRendererObj = HelperBroker::getStaticHelper('viewRenderer');
+        HelperBroker::addHelper(clone $viewRendererObj);
 
         $this->request->setParams($params)
                       ->setModuleName($module)
@@ -145,7 +145,7 @@ class Action extends AbstractHelper
         $this->dispatcher->dispatch($this->request, $this->response);
 
         // reset the viewRenderer object to it's original state
-        HelperBroker\HelperBroker::addHelper($viewRendererObj);
+        HelperBroker::addHelper($viewRendererObj);
 
 
         if (!$this->request->isDispatched()

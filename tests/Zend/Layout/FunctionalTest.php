@@ -68,7 +68,7 @@ class FunctionalTest extends \PHPUnit_Framework_TestCase // \Zend\Test\PHPUnit\C
 
     public function testMissingViewScriptDoesDoubleRender()
     {
-        \Zend\Controller\Action\HelperBroker\HelperBroker::getStack()->offsetSet(-91, new \Zend\Controller\Action\Helper\ViewRenderer());
+        \Zend\Controller\Action\HelperBroker::getStack()->offsetSet(-91, new \Zend\Controller\Action\Helper\ViewRenderer());
         // go to the test controller for this funcitonal test
         $this->dispatch('/zend-layout-functional-test-test/missing-view-script');
         $this->assertEquals(trim($this->response->getBody()), "[DEFAULT_LAYOUT_START]\n[DEFAULT_LAYOUT_START]\n[DEFAULT_LAYOUT_END]\n(ErrorController::errorAction output)[DEFAULT_LAYOUT_END]");

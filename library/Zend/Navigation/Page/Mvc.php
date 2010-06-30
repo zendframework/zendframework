@@ -30,7 +30,7 @@ use Zend\Navigation;
  * Represents a page that is defined using module, controller, action, route
  * name and route params to assemble the href
  *
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\HelperBroker
  * @uses       \Zend\Controller\Front
  * @uses       \Zend\Navigation\Exception
  * @uses       \Zend\Navigation\Page\Page
@@ -175,7 +175,7 @@ class Mvc extends Page
 
         if (null === self::$_urlHelper) {
             self::$_urlHelper =
-                \Zend\Controller\Action\HelperBroker\HelperBroker::getStaticHelper('URL');
+                \Zend\Controller\Action\HelperBroker::getStaticHelper('URL');
         }
 
         $params = $this->getParams();

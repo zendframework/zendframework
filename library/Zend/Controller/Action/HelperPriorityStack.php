@@ -23,9 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Action\HelperBroker;
-use Zend\Controller\Action\Helper;
-use Zend\Controller\Action;
+namespace Zend\Controller\Action;
 
 /**
  * @uses       \Zend\Controller\Action\Exception
@@ -35,7 +33,7 @@ use Zend\Controller\Action;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PriorityStack implements \IteratorAggregate, \ArrayAccess, \Countable
+class HelperPriorityStack implements \IteratorAggregate, \ArrayAccess, \Countable
 {
 
     protected $_helpersByPriority = array();
@@ -147,7 +145,7 @@ class PriorityStack implements \IteratorAggregate, \ArrayAccess, \Countable
         $priority = (int) $priority;
 
         if (!$helper instanceof Helper\AbstractHelper) {
-            throw new Action\Exception('$helper must extend Zend\Controller\Action\Helper\AbstractHelper');
+            throw new Exception('$helper must extend Zend\Controller\Action\Helper\AbstractHelper');
         }
 
         if (array_key_exists($helper->getName(), $this->_helpersByNameRef)) {
@@ -181,7 +179,7 @@ class PriorityStack implements \IteratorAggregate, \ArrayAccess, \Countable
     public function offsetUnset($priorityOrHelperName)
     {
         if (!$this->offsetExists($priorityOrHelperName)) {
-            throw new Action\Exception('A helper with priority or name ' . $priorityOrHelperName . ' does not exist.');
+            throw new Exception('A helper with priority or name ' . $priorityOrHelperName . ' does not exist.');
         }
 
         if (is_string($priorityOrHelperName)) {

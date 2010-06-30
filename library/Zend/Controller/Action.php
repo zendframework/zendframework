@@ -26,12 +26,12 @@ namespace Zend\Controller;
 
 use Zend\Controller\Request\AbstractRequest,
     Zend\Controller\Response\AbstractResponse,
-    Zend\Controller\Action\HelperBroker\HelperBroker,
+    Zend\Controller\Action\HelperBroker,
     Zend\View;
 
 /**
  * @uses       \Zend\Controller\Action\Exception
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\HelperBroker
  * @uses       \Zend\Controller\ActionController
  * @uses       \Zend\Controller\Exception
  * @uses       \Zend\Controller\Front
@@ -96,7 +96,7 @@ abstract class Action implements ActionController
     /**
      * Helper Broker to assist in routing help requests to the proper object
      *
-     * @var \Zend\Controller\Action\HelperBroker\HelperBroker
+     * @var \Zend\Controller\Action\HelperBroker
      */
     protected $_helper = null;
 

@@ -34,7 +34,7 @@ use Zend\Form\Form,
     Zend\Translator\Translator,
     Zend\Validator\Validator,
     Zend\View,
-    Zend\Controller\Action\HelperBroker\HelperBroker as ActionHelperBroker;
+    Zend\Controller\Action\HelperBroker as ActionHelperBroker;
 
 /**
  * @category   Zend

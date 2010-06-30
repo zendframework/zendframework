@@ -29,7 +29,7 @@ use Zend\Config\Config,
     Zend\JSON\JSON,
     Zend\View\ViewInterface as View,
     Zend\Translator,
-    Zend\Controller\Action\HelperBroker\HelperBroker as ActionHelperBroker;
+    Zend\Controller\Action\HelperBroker as ActionHelperBroker;
 
 /**
  * Zend_Form

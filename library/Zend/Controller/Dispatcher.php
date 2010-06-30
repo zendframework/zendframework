@@ -23,9 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Dispatcher;
-use Zend\Controller\Request;
-use Zend\Controller\Response;
+namespace Zend\Controller;
 
 /**
  * @package    Zend_Controller
@@ -33,7 +31,7 @@ use Zend\Controller\Response;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface DispatcherInterface
+interface Dispatcher
 {
     /**
      * Formats a string into a controller name.  This is used to take a raw
@@ -81,7 +79,7 @@ interface DispatcherInterface
      *
      * @param string $name
      * @param mixed $value
-     * @return \Zend\Controller\Dispatcher\DispatcherInterface
+     * @return \Zend\Controller\Dispatcher
      */
     public function setParam($name, $value);
 
@@ -89,7 +87,7 @@ interface DispatcherInterface
      * Set an array of a parameters to pass to the Action Controller constructor
      *
      * @param array $params
-     * @return \Zend\Controller\Dispatcher\DispatcherInterface
+     * @return \Zend\Controller\Dispatcher
      */
     public function setParams(array $params);
 
@@ -116,7 +114,7 @@ interface DispatcherInterface
      * each.
      *
      * @param null|string|array single key or array of keys for params to clear
-     * @return \Zend\Controller\Dispatcher\DispatcherInterface
+     * @return \Zend\Controller\Dispatcher
      */
     public function clearParams($name = null);
 
@@ -140,7 +138,7 @@ interface DispatcherInterface
      *
      * @param string $path
      * @param string $args
-     * @return \Zend\Controller\Dispatcher\DispatcherInterface
+     * @return \Zend\Controller\Dispatcher
      */
     public function addControllerDirectory($path, $args = null);
 
@@ -151,7 +149,7 @@ interface DispatcherInterface
      * added.
      *
      * @param string|array $dir
-     * @return \Zend\Controller\Dispatcher\DispatcherInterface
+     * @return \Zend\Controller\Dispatcher
      */
     public function setControllerDirectory($path);
 

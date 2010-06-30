@@ -26,7 +26,7 @@ namespace Zend\Controller;
 use Zend;
 
 /**
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\HelperBroker
  * @uses       \Zend\Controller\Action\Helper\ViewRenderer
  * @uses       \Zend\Controller\Dispatcher\Standard
  * @uses       \Zend\Controller\Exception
@@ -57,8 +57,8 @@ class Front
     protected $_controllerDir = null;
 
     /**
-     * Instance of Zend_Controller_Dispatcher_Interface
-     * @var \Zend\Controller\Dispatcher\DispatcherInterface
+     * Instance of Zend\Controller\Dispatcher
+     * @var \Zend\Controller\Dispatcher
      */
     protected $_dispatcher = null;
 
@@ -197,7 +197,7 @@ class Front
                     break;
             }
         }
-        Action\HelperBroker\HelperBroker::resetHelpers();
+        Action\HelperBroker::resetHelpers();
     }
 
     /**
@@ -575,10 +575,10 @@ class Front
      * taking a Zend_Controller_Dispatcher_Token object, instantiating the controller, and
      * call the action method of the controller.
      *
-     * @param \Zend\Controller\Dispatcher\DispatcherInterface $dispatcher
+     * @param \Zend\Controller\Dispatcher $dispatcher
      * @return \Zend\Controller\Front
      */
-    public function setDispatcher(Dispatcher\DispatcherInterface $dispatcher)
+    public function setDispatcher(Dispatcher $dispatcher)
     {
         $this->_dispatcher = $dispatcher;
         return $this;
@@ -587,14 +587,14 @@ class Front
     /**
      * Return the dispatcher object.
      *
-     * @return \Zend\Controller\Dispatcher\DispatcherInterface
+     * @return \Zend\Controller\Dispatcher
      */
     public function getDispatcher()
     {
         /**
          * Instantiate the default dispatcher if one was not set.
          */
-        if (!$this->_dispatcher instanceof Dispatcher\DispatcherInterface) {
+        if (!$this->_dispatcher instanceof Dispatcher) {
             $this->_dispatcher = new Dispatcher\Standard();
         }
         return $this->_dispatcher;
@@ -835,8 +835,8 @@ class Front
             $this->_plugins->registerPlugin(new Plugin\ErrorHandler(), 100);
         }
 
-        if (!$this->getParam('noViewRenderer') && !Action\HelperBroker\HelperBroker::hasHelper('viewRenderer')) {
-            Action\HelperBroker\HelperBroker::getStack()->offsetSet(-80, new Action\Helper\ViewRenderer());
+        if (!$this->getParam('noViewRenderer') && !Action\HelperBroker::hasHelper('viewRenderer')) {
+            Action\HelperBroker::getStack()->offsetSet(-80, new Action\Helper\ViewRenderer());
         }
 
         /**

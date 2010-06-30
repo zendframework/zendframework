@@ -28,7 +28,7 @@ use Zend\View;
 use Zend\JSON;
 
 /**
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\HelperBroker
  * @uses       \Zend\JSON\JSON
  * @uses       \Zend\Loader\PluginLoader\PluginLoader
  * @uses       \Zend\Paginator\Exception
@@ -850,7 +850,7 @@ class Paginator implements \Countable, \IteratorAggregate
     public function getView()
     {
         if ($this->_view === null) {
-            $viewRenderer = \Zend\Controller\Action\HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+            $viewRenderer = \Zend\Controller\Action\HelperBroker::getStaticHelper('viewRenderer');
             if ($viewRenderer->view === null) {
                 $viewRenderer->initView();
             }

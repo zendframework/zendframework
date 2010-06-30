@@ -26,7 +26,7 @@ use Zend\Loader\Autoloader,
     ZendTest\Application\TestAsset\ZfAppBootstrap,
     Zend\Application\Application,
     Zend\Application\Resource\View as ViewResource,
-    Zend\Controller\Action\HelperBroker\HelperBroker,
+    Zend\Controller\Action\HelperBroker,
     Zend\View\View;
 
 /**

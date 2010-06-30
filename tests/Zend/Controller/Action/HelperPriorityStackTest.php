@@ -23,8 +23,10 @@
 /**
  * @namespace
  */
-namespace ZendTest\Controller\Action\HelperBroker;
-use Zend\Controller\Action\Helper;
+namespace ZendTest\Controller\Action;
+
+use Zend\Controller\Action\HelperPriorityStack,
+    Zend\Controller\Action\Helper;
 
 /**
  * @category   Zend
@@ -36,17 +38,17 @@ use Zend\Controller\Action\Helper;
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-class PriorityStackTest extends \PHPUnit_Framework_TestCase
+class HelperPriorityStackTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend_Controller_Action_HelperBroker_PriorityStack
+     * @var Zend\Controller\Action\HelperPriorityStack
      */
     public $stack = null;
 
     public function setUp()
     {
-        $this->stack = new \Zend\Controller\Action\HelperBroker\PriorityStack();
+        $this->stack = new HelperPriorityStack();
     }
 
     public function testStackMaintainsLifo()

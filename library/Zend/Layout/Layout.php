@@ -31,7 +31,7 @@ use Zend\Filter;
 /**
  * Provide Layout support for MVC applications
  *
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\HelperBroker
  * @uses       \Zend\Controller\Front
  * @uses       \Zend\Filter\Inflector
  * @uses       \Zend\Layout\Exception
@@ -226,8 +226,8 @@ class Layout
                 $front->unregisterPlugin($pluginClass);
             }
 
-            if (HelperBroker\HelperBroker::hasHelper('layout')) {
-                HelperBroker\HelperBroker::removeHelper('layout');
+            if (HelperBroker::hasHelper('layout')) {
+                HelperBroker::removeHelper('layout');
             }
 
             unset($layout);
@@ -297,11 +297,11 @@ class Layout
     protected function _initHelper()
     {
         $helperClass = $this->getHelperClass();
-        if (!HelperBroker\HelperBroker::hasHelper('layout')) {
+        if (!HelperBroker::hasHelper('layout')) {
             if (!class_exists($helperClass)) {
                 \Zend\Loader::loadClass($helperClass);
             }
-            HelperBroker\HelperBroker::getStack()->offsetSet(-90, new $helperClass($this));
+            HelperBroker::getStack()->offsetSet(-90, new $helperClass($this));
         }
     }
 
@@ -571,7 +571,7 @@ class Layout
     public function getView()
     {
         if (null === $this->_view) {
-            $viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+            $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
             if (null === $viewRenderer->view) {
                 $viewRenderer->initView();
             }

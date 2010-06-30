@@ -29,7 +29,7 @@ namespace Zend\Application\Resource;
  * Resource for settings view options
  *
  * @uses       \Zend\Application\Resource\AbstractResource
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\HelperBroker
  * @uses       \Zend\Controller\Action\Helper\ViewRenderer
  * @uses       \Zend\View\View
  * @category   Zend
@@ -56,7 +56,7 @@ class View extends AbstractResource
 
         $viewRenderer = new \Zend\Controller\Action\Helper\ViewRenderer();
         $viewRenderer->setView($view);
-        \Zend\Controller\Action\HelperBroker\HelperBroker::addHelper($viewRenderer);
+        \Zend\Controller\Action\HelperBroker::addHelper($viewRenderer);
         return $view;
     }
 

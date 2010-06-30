@@ -27,7 +27,7 @@ use Zend\Config\Config,
     Zend\Validator\Validator,
     Zend\Filter\Filter,
     Zend\View\ViewInterface as View,
-    Zend\Controller\Action\HelperBroker\HelperBroker as ActionHelperBroker;
+    Zend\Controller\Action\HelperBroker as ActionHelperBroker;
 
 /**
  * Zend_Form_Element

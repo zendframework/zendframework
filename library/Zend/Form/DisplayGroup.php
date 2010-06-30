@@ -26,7 +26,7 @@ use Zend\Loader\PluginLoader,
     Zend\Config\Config,
     Zend\Translator,
     Zend\View\ViewInterface as View,
-    Zend\Controller\Action\HelperBroker\HelperBroker as ActionHelperBroker;
+    Zend\Controller\Action\HelperBroker as ActionHelperBroker;
 
 /**
  * Zend_Form_DisplayGroup

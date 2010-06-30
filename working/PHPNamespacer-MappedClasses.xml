@@ -1539,18 +1539,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/HelperBroker/PriorityStack.php</originalRelativeFilePath>
       <originalClassName>Zend_Controller_Action_HelperBroker_PriorityStack</originalClassName>
-      <newRelativeFilePath>Zend/Controller/Action/HelperBroker/PriorityStack.php</newRelativeFilePath>
-      <newNamespace>Zend\Controller\Action\HelperBroker</newNamespace>
-      <newClassName>PriorityStack</newClassName>
-      <newFullyQualifiedName>Zend\Controller\Action\HelperBroker\PriorityStack</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Controller/Action/HelperPriorityStack.php</newRelativeFilePath>
+      <newNamespace>Zend\Controller\Action</newNamespace>
+      <newClassName>HelperPriorityStack</newClassName>
+      <newFullyQualifiedName>Zend\Controller\Action\HelperPriorityStack</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/HelperBroker.php</originalRelativeFilePath>
       <originalClassName>Zend_Controller_Action_HelperBroker</originalClassName>
-      <newRelativeFilePath>Zend/Controller/Action/HelperBroker/HelperBroker.php</newRelativeFilePath>
-      <newNamespace>Zend\Controller\Action\HelperBroker</newNamespace>
+      <newRelativeFilePath>Zend/Controller/Action/HelperBroker.php</newRelativeFilePath>
+      <newNamespace>Zend\Controller\Action</newNamespace>
       <newClassName>HelperBroker</newClassName>
-      <newFullyQualifiedName>Zend\Controller\Action\HelperBroker\HelperBroker</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Controller\Action\HelperBroker</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/Interface.php</originalRelativeFilePath>
@@ -1587,10 +1587,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Dispatcher/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Controller_Dispatcher_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Controller/Dispatcher/DispatcherInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Controller\Dispatcher</newNamespace>
-      <newClassName>DispatcherInterface</newClassName>
-      <newFullyQualifiedName>Zend\Controller\Dispatcher\DispatcherInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Controller/Dispatcher.php</newRelativeFilePath>
+      <newNamespace>Zend\Controller</newNamespace>
+      <newClassName>Dispatcher</newClassName>
+      <newFullyQualifiedName>Zend\Controller\Dispatcher</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Dispatcher/Standard.php</originalRelativeFilePath>

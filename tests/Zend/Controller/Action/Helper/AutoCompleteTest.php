@@ -26,7 +26,7 @@
 namespace ZendTest\Controller\Action\Helper;
 
 use Zend\Controller\Action\Exception as ActionException,
-    Zend\Controller\Action\HelperBroker\HelperBroker,
+    Zend\Controller\Action\HelperBroker,
     Zend\Controller\Action\Helper\AbstractAutoComplete,
     Zend\Controller\Action\Helper\AutoCompleteDojo,
     Zend\Controller\Action\Helper\AutoCompleteScriptaculous,

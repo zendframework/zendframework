@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Controller\Action\Helper;
-use Zend\Controller\Action\HelperBroker\HelperBroker,
+use Zend\Controller\Action\HelperBroker,
     Zend\Controller\Front as FrontController,
     Zend\Dojo\Data as DojoData,
     Zend\Layout\Layout;
@@ -32,8 +32,8 @@ use Zend\Controller\Action\HelperBroker\HelperBroker,
 /**
  * Create and send Dojo-compatible autocompletion lists
  *
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
- * @uses       \Zend\Controller\Action\Helper\AutoComplete\AbstractAutoComplete
+ * @uses       \Zend\Controller\Action\HelperBroker
+ * @uses       \Zend\Controller\Action\Helper\AbstractAutoComplete
  * @uses       \Zend\Controller\Front
  * @uses       \Zend\Dojo\Data
  * @uses       \Zend\Layout\Layout

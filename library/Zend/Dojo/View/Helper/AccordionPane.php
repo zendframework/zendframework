@@ -21,15 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\View\Helper;
+
+/**
  * Dojo AccordionPane dijit
  *
- * @uses       Zend_Dojo_View_Helper_DijitContainer
+ * @uses       \Zend\Dojo\View\Helper\DijitContainer
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
   */
-class Zend_Dojo_View_Helper_AccordionPane extends Zend_Dojo_View_Helper_DijitContainer
+class AccordionPane extends DijitContainer
 {
     /**
      * Dijit being used
@@ -52,7 +57,7 @@ class Zend_Dojo_View_Helper_AccordionPane extends Zend_Dojo_View_Helper_DijitCon
      * @param  array $attribs HTML attributes
      * @return string
      */
-    public function accordionPane($id = null, $content = '', array $params = array(), array $attribs = array())
+    public function direct($id = null, $content = '', array $params = array(), array $attribs = array())
     {
         if (0 === func_num_args()) {
             return $this;

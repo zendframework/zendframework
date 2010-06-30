@@ -20,7 +20,11 @@
  * @version    $Id$
  */
 
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Test;
+use Zend\Test;
 
 /**
  * @category   Zend
@@ -30,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_DbAdapterTest extends PHPUnit_Framework_TestCase
+class DbAdapterTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_Test_DbAdapter
@@ -39,15 +43,15 @@ class Zend_Test_DbAdapterTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_adapter = new Zend_Test_DbAdapter();
+        $this->_adapter = new Test\DbAdapter();
     }
 
     public function testAppendStatementToStack()
     {
-        $stmt1 = Zend_Test_DbStatement::createSelectStatement( array() );
+        $stmt1 = Test\DbStatement::createSelectStatement( array() );
         $this->_adapter->appendStatementToStack($stmt1);
 
-        $stmt2 = Zend_Test_DbStatement::createSelectStatement( array() );
+        $stmt2 = Test\DbStatement::createSelectStatement( array() );
         $this->_adapter->appendStatementToStack($stmt2);
 
         $this->assertSame($stmt2, $this->_adapter->query("foo"));

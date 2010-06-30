@@ -21,29 +21,34 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Test\PHPUnit\Db\Operation;
+
+/**
  * Operation for Inserting on setup or teardown of a database tester.
  *
  * @uses       PHPUnit_Extensions_Database_DataSet_IDataSet
  * @uses       PHPUnit_Extensions_Database_DB_IDatabaseConnection
  * @uses       PHPUnit_Extensions_Database_Operation_Exception
  * @uses       PHPUnit_Extensions_Database_Operation_IDatabaseOperation
- * @uses       Zend_Test_PHPUnit_Db_Connection
+ * @uses       \Zend\Test\PHPUnit\Db\Connection
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Test_PHPUnit_Db_Operation_Insert implements PHPUnit_Extensions_Database_Operation_IDatabaseOperation
+class Insert implements \PHPUnit_Extensions_Database_Operation_IDatabaseOperation
 {
     /**
      * @param PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection
      * @param PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet
      */
-    public function execute(PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection, PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet)
+    public function execute(\PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection, \PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet)
     {
-        if(!($connection instanceof Zend_Test_PHPUnit_Db_Connection)) {
-            throw new Zend_Test_PHPUnit_Db_Exception("Not a valid Zend_Test_PHPUnit_Db_Connection instance, ".get_class($connection)." given!");
+        if(!($connection instanceof \Zend\Test\PHPUnit\Db\Connection)) {
+            throw new \Zend\Test\PHPUnit\Db\Exception("Not a valid Zend_Test_PHPUnit_Db_Connection instance, ".get_class($connection)." given!");
         }
 
         $databaseDataSet = $connection->createDataSet();
@@ -58,8 +63,8 @@ class Zend_Test_PHPUnit_Db_Operation_Insert implements PHPUnit_Extensions_Databa
                 $values = $this->buildInsertValues($table, $i);
                 try {
                     $db->insert($tableName, $values);
-                } catch (Exception $e) {
-                    throw new PHPUnit_Extensions_Database_Operation_Exception("INSERT", "INSERT INTO ".$tableName." [..]", $values, $table, $e->getMessage());
+                } catch (\Exception $e) {
+                    throw new \PHPUnit_Extensions_Database_Operation_Exception("INSERT", "INSERT INTO ".$tableName." [..]", $values, $table, $e->getMessage());
                 }
             }
         }
@@ -71,7 +76,7 @@ class Zend_Test_PHPUnit_Db_Operation_Insert implements PHPUnit_Extensions_Databa
      * @param int $rowNum
      * @return array
      */
-    protected function buildInsertValues(PHPUnit_Extensions_Database_DataSet_ITable $table, $rowNum)
+    protected function buildInsertValues(\PHPUnit_Extensions_Database_DataSet_ITable $table, $rowNum)
     {
         $values = array();
         foreach($table->getTableMetaData()->getColumns() as $columnName) {

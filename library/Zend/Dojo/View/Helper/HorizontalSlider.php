@@ -21,15 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\View\Helper;
+
+/**
  * Dojo HorizontalSlider dijit
  *
- * @uses       Zend_Dojo_View_Helper_Slider
+ * @uses       \Zend\Dojo\View\Helper\Slider
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
   */
-class Zend_Dojo_View_Helper_HorizontalSlider extends Zend_Dojo_View_Helper_Slider
+class HorizontalSlider extends Slider
 {
     /**
      * Dijit being used
@@ -52,7 +57,7 @@ class Zend_Dojo_View_Helper_HorizontalSlider extends Zend_Dojo_View_Helper_Slide
      * @param  array $attribs HTML attributes
      * @return string
      */
-    public function horizontalSlider($id, $value = null, array $params = array(), array $attribs = array())
+    public function direct($id = null, $value = null, array $params = array(), array $attribs = array())
     {
         return $this->prepareSlider($id, $value, $params, $attribs);
     }

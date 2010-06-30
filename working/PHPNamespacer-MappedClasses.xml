@@ -2891,10 +2891,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Dojo/View/Helper/Dojo.php</originalRelativeFilePath>
       <originalClassName>Zend_Dojo_View_Helper_Dojo</originalClassName>
-      <newRelativeFilePath>Zend/Dojo/View/Helper/Dojo/Dojo.php</newRelativeFilePath>
-      <newNamespace>Zend\Dojo\View\Helper\Dojo</newNamespace>
+      <newRelativeFilePath>Zend/Dojo/View/Helper/Dojo.php</newRelativeFilePath>
+      <newNamespace>Zend\Dojo\View\Helper</newNamespace>
       <newClassName>Dojo</newClassName>
-      <newFullyQualifiedName>Zend\Dojo\View\Helper\Dojo\Dojo</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Dojo\View\Helper\Dojo</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Dojo/View/Helper/Editor.php</originalRelativeFilePath>

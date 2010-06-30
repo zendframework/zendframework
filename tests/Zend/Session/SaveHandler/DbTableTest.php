@@ -26,6 +26,7 @@ use Zend\Session\SaveHandler\DbTable,
     Zend\Session\SaveHandler\Exception as SaveHandlerException,
     Zend\Session\Manager,
     Zend\DB\DB,
+    Zend\DB\Adapter\AbstractAdapter,
     Zend\DB\Table\AbstractTable,
     ZendTest\Session\TestAsset\TestManager;
 
@@ -555,7 +556,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     protected function _dropTable()
     {
-        if (!$this->_db instanceof \Zend_Db_Adapter_Abstract) {
+        if (!$this->_db instanceof AbstractAdapter) {
             return;
         }
         $this->_db->query('DROP TABLE Sessions');

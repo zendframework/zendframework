@@ -20,29 +20,23 @@
  */
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Feed_Pubsubhubbub_AllTests::main');
+    define('PHPUnit_MAIN_METHOD', 'Zend_Feed_Pubsubhubbub_Model_AllTests::main');
 }
 
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
-require_once 'Zend/Feed/Pubsubhubbub/PubsubhubbubTest.php';
-require_once 'Zend/Feed/Pubsubhubbub/PublisherTest.php';
-require_once 'Zend/Feed/Pubsubhubbub/SubscriberTest.php';
-require_once 'Zend/Feed/Pubsubhubbub/SubscriberHttpTest.php';
-require_once 'Zend/Feed/Pubsubhubbub/Model/AllTests.php';
-require_once 'Zend/Feed/Pubsubhubbub/Subscriber/CallbackTest.php';
-
+require_once 'Zend/Feed/Pubsubhubbub/Model/SubscriptionTest.php';
 
 /**
  * @category   Zend
  * @package    Zend_Feed
  * @subpackage UnitTests
  * @group      Zend_Feed
- * @group      Zend_Feed_Subsubhubbub
+ * @group      Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Pubsubhubbub_AllTests
+class Zend_Feed_Pubsubhubbub_Model_AllTests
 {
     public static function main()
     {
@@ -52,18 +46,11 @@ class Zend_Feed_Pubsubhubbub_AllTests
     public static function suite()
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend');
-
-        $suite->addTestSuite('Zend_Feed_Pubsubhubbub_PubsubhubbubTest');
-        $suite->addTestSuite('Zend_Feed_Pubsubhubbub_PublisherTest');
-        $suite->addTestSuite('Zend_Feed_Pubsubhubbub_SubscriberTest');
-        $suite->addTestSuite('Zend_Feed_Pubsubhubbub_SubscriberHttpTest');
-        $suite->addTest(Zend_Feed_Pubsubhubbub_Model_AllTests::suite());
-        $suite->addTestSuite('Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest');
-
+        $suite->addTestSuite('Zend_Feed_Pubsubhubbub_Model_SubscriptionTest');
         return $suite;
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Zend_Feed_Pubsubhubbub_AllTests::main') {
+if (PHPUnit_MAIN_METHOD == 'Zend_Feed_Pubsubhubbub_Model_AllTests::main') {
     Zend_Feed_Pubsubhubbub_AllTests::main();
 }

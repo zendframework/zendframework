@@ -23,8 +23,10 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Action\Helper\AutoComplete;
-use Zend\Controller\Action\HelperBroker;
+namespace Zend\Controller\Action\Helper;
+
+use Zend\Controller\Action\HelperBroker\HelperBroker,
+    Zend\Layout\Layout;
 
 /**
  * Create and send autocompletion lists
@@ -38,8 +40,7 @@ use Zend\Controller\Action\HelperBroker;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAutoComplete 
-    extends \Zend\Controller\Action\Helper\AbstractHelper
+abstract class AbstractAutoComplete extends AbstractHelper
 {
     /**
      * Suppress exit when sendJson() called
@@ -72,11 +73,11 @@ abstract class AbstractAutoComplete
      */
     public function disableLayouts()
     {
-        if (null !== ($layout = \Zend\Layout\Layout::getMvcInstance())) {
+        if (null !== ($layout = Layout::getMvcInstance())) {
             $layout->disableLayout();
         }
 
-        HelperBroker\HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
+        HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
 
         return $this;
     }
@@ -92,7 +93,7 @@ abstract class AbstractAutoComplete
     public function encodeJson($data, $keepLayouts = false)
     {
         if ($this->validateData($data)) {
-            return HelperBroker\HelperBroker::getStaticHelper('Json')->encodeJson($data, $keepLayouts);
+            return HelperBroker::getStaticHelper('Json')->encodeJson($data, $keepLayouts);
         }
 
         throw new \Zend\Controller\Action\Exception('Invalid data passed for autocompletion');

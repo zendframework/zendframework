@@ -1459,10 +1459,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/Helper/AutoComplete/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Controller_Action_Helper_AutoComplete_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Controller/Action/Helper/AutoComplete/AbstractAutoComplete.php</newRelativeFilePath>
-      <newNamespace>Zend\Controller\Action\Helper\AutoComplete</newNamespace>
+      <newRelativeFilePath>Zend/Controller/Action/Helper/AbstractAutoComplete.php</newRelativeFilePath>
+      <newNamespace>Zend\Controller\Action\Helper</newNamespace>
       <newClassName>AbstractAutoComplete</newClassName>
-      <newFullyQualifiedName>Zend\Controller\Action\Helper\AutoComplete\AbstractAutoComplete</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Controller\Action\Helper\AbstractAutoComplete</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/Helper/AutoCompleteDojo.php</originalRelativeFilePath>

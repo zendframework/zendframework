@@ -24,8 +24,10 @@
  * @namespace
  */
 namespace Zend\Controller\Action\Helper;
-use Zend\Dojo;
-use Zend\Layout;
+use Zend\Controller\Action\HelperBroker\HelperBroker,
+    Zend\Controller\Front as FrontController,
+    Zend\Dojo\Data as DojoData,
+    Zend\Layout\Layout;
 
 /**
  * Create and send Dojo-compatible autocompletion lists
@@ -41,7 +43,7 @@ use Zend\Layout;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AutoCompleteDojo extends AutoComplete\AbstractAutoComplete
+class AutoCompleteDojo extends AbstractAutoComplete
 {
     /**
      * Validate data for autocompletion
@@ -65,23 +67,23 @@ class AutoCompleteDojo extends AutoComplete\AbstractAutoComplete
      */
     public function prepareAutoCompletion($data, $keepLayouts = false)
     {
-        if (!$data instanceof Dojo\Data) {
+        if (!$data instanceof DojoData) {
             $items = array();
             foreach ($data as $key => $value) {
                 $items[] = array('label' => $value, 'name' => $value);
             }
-            $data = new Dojo\Data('name', $items);
+            $data = new DojoData('name', $items);
         }
 
         if (!$keepLayouts) {
-            roker\HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
-            $layout = Layout\Layout::getMvcInstance();
-            if ($layout instanceof Layout\Layout) {
+            HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
+            $layout = Layout::getMvcInstance();
+            if ($layout instanceof Layout) {
                 $layout->disableLayout();
             }
         }
 
-        $response = \Zend\Controller\Front::getInstance()->getResponse();
+        $response = FrontController::getInstance()->getResponse();
         $response->setHeader('Content-Type', 'application/json');
 
         return $data->toJson();

@@ -25,11 +25,16 @@
  */
 namespace ZendTest\Controller\Action\Helper;
 
-use Zend\Controller\Action\HelperBroker;
-use Zend\Layout;
-use Zend\Controller\Action\Helper;
-use Zend\Controller\Action\Helper\AutoComplete;
-use Zend\JSON;
+use Zend\Controller\Action\Exception as ActionException,
+    Zend\Controller\Action\HelperBroker\HelperBroker,
+    Zend\Controller\Action\Helper\AbstractAutoComplete,
+    Zend\Controller\Action\Helper\AutoCompleteDojo,
+    Zend\Controller\Action\Helper\AutoCompleteScriptaculous,
+    Zend\Controller\Front as FrontController,
+    Zend\Controller\Request\HTTP as HTTPRequest,
+    Zend\Controller\Response\Cli as CLIResponse,
+    Zend\Layout\Layout,
+    Zend\JSON\JSON;
 
 
 /**
@@ -55,20 +60,18 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->markTestSkipped('Skipped until DOJO is converted to Zend\Dojo');
-        
-        \Zend\Layout\Layout::resetMvcInstance();
-        HelperBroker\HelperBroker::resetHelpers();
-        HelperBroker\HelperBroker::setPluginLoader(null);
+        Layout::resetMvcInstance();
+        HelperBroker::resetHelpers();
+        HelperBroker::setPluginLoader(null);
 
-        $this->request = new \Zend\Controller\Request\HTTP();
-        $this->response = new \Zend\Controller\Response\Cli();
-        $this->front = \Zend\Controller\Front::getInstance();
+        $this->request = new HTTPRequest();
+        $this->response = new CLIResponse();
+        $this->front = FrontController::getInstance();
         $this->front->resetInstance();
         $this->front->setRequest($this->request)->setResponse($this->response);
 
-        $this->viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
-        $this->layout = Layout\Layout::startMvc();
+        $this->viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
+        $this->layout = Layout::startMvc();
     }
 
     /**
@@ -83,19 +86,19 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
 
     public function testConcreteImplementationsDeriveFromAutoCompleteBaseClass()
     {
-        $dojo = new Helper\AutoCompleteDojo();
-        $this->assertTrue($dojo instanceof AutoComplete\AbstractAutoComplete);
+        $dojo = new AutoCompleteDojo();
+        $this->assertTrue($dojo instanceof AbstractAutoComplete);
 
-        $scriptaculous = new Helper\AutoCompleteScriptaculous();
-        $this->assertTrue($scriptaculous instanceof AutoComplete\AbstractAutoComplete);
+        $scriptaculous = new AutoCompleteScriptaculous();
+        $this->assertTrue($scriptaculous instanceof AbstractAutoComplete);
     }
 
     public function testEncodeJsonProxiesToJsonActionHelper()
     {
-        $dojo    = new Helper\AutoCompleteDojo();
+        $dojo    = new AutoCompleteDojo();
         $data    = array('foo', 'bar', 'baz');
         $encoded = $dojo->prepareAutoCompletion($data);
-        $decoded = JSON\JSON::decode($encoded);
+        $decoded = JSON::decode($encoded);
         $test    = array();
         foreach ($decoded['items'] as $item) {
             $test[] = $item['name'];
@@ -117,10 +120,10 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
 
     public function testDojoHelperEncodesToJson()
     {
-        $dojo = new Helper\AutoCompleteDojo();
+        $dojo = new AutoCompleteDojo();
         $data = array('foo', 'bar', 'baz');
         $encoded = $dojo->direct($data, false);
-        $decoded = JSON\JSON::decode($encoded);
+        $decoded = JSON::decode($encoded);
         $this->assertContains('items', array_keys($decoded));
         $this->assertContains('identifier', array_keys($decoded));
         $this->assertEquals('name', $decoded['identifier']);
@@ -134,11 +137,11 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
 
     public function testDojoHelperSendsResponseByDefault()
     {
-        $dojo = new Helper\AutoCompleteDojo();
+        $dojo = new AutoCompleteDojo();
         $dojo->suppressExit = true;
         $data = array('foo', 'bar', 'baz');
         $encoded = $dojo->direct($data);
-        $decoded = JSON\JSON::decode($encoded);
+        $decoded = JSON::decode($encoded);
         $test    = array();
         foreach ($decoded['items'] as $item) {
             $test[] = $item['name'];
@@ -150,7 +153,7 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
 
     public function testDojoHelperDisablesLayoutsAndViewRendererByDefault()
     {
-        $dojo = new Helper\AutoCompleteDojo();
+        $dojo = new AutoCompleteDojo();
         $dojo->suppressExit = true;
         $data = array('foo', 'bar', 'baz');
         $encoded = $dojo->direct($data);
@@ -160,7 +163,7 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
 
     public function testDojoHelperCanEnableLayoutsAndViewRenderer()
     {
-        $dojo = new Helper\AutoCompleteDojo();
+        $dojo = new AutoCompleteDojo();
         $dojo->suppressExit = true;
         $data = array('foo', 'bar', 'baz');
         $encoded = $dojo->direct($data, false, true);
@@ -170,7 +173,7 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
 
     public function testScriptaculousHelperThrowsExceptionOnInvalidDataFormat()
     {
-        $scriptaculous = new Helper\AutoCompleteScriptaculous();
+        $scriptaculous = new AutoCompleteScriptaculous();
 
         $data = new \stdClass;
         $data->foo = 'bar';
@@ -178,14 +181,14 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
         try {
             $encoded = $scriptaculous->encodeJson($data);
             $this->fail('Objects should be considered invalid');
-        } catch (\Zend\Controller\Action\Exception $e) {
+        } catch (ActionException $e) {
             $this->assertContains('Invalid data', $e->getMessage());
         }
     }
 
     public function testScriptaculousHelperCreatesHtmlMarkup()
     {
-        $scriptaculous = new Helper\AutoCompleteScriptaculous();
+        $scriptaculous = new AutoCompleteScriptaculous();
         $scriptaculous->suppressExit = true;
         $data = array('foo', 'bar', 'baz');
         $formatted = $scriptaculous->direct($data);
@@ -198,7 +201,7 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
 
     public function testScriptaculousHelperSendsResponseByDefault()
     {
-        $scriptaculous = new Helper\AutoCompleteScriptaculous();
+        $scriptaculous = new AutoCompleteScriptaculous();
         $scriptaculous->suppressExit = true;
         $data = array('foo', 'bar', 'baz');
         $encoded = $scriptaculous->direct($data);
@@ -208,7 +211,7 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
 
     public function testScriptaculousHelperDisablesLayoutsAndViewRendererByDefault()
     {
-        $scriptaculous = new Helper\AutoCompleteScriptaculous();
+        $scriptaculous = new AutoCompleteScriptaculous();
         $scriptaculous->suppressExit = true;
         $data = array('foo', 'bar', 'baz');
         $encoded = $scriptaculous->direct($data);
@@ -218,7 +221,7 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
 
     public function testScriptaculousHelperCanEnableLayoutsAndViewRenderer()
     {
-        $scriptaculous = new Helper\AutoCompleteScriptaculous();
+        $scriptaculous = new AutoCompleteScriptaculous();
         $scriptaculous->suppressExit = true;
         $data = array('foo', 'bar', 'baz');
         $encoded = $scriptaculous->direct($data, false, true);

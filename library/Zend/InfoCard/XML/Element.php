@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\InfoCard\XML\Element;
+namespace Zend\InfoCard\XML;
 
 /**
  * The Interface used to represent an XML Data Type
@@ -34,7 +34,7 @@ namespace Zend\InfoCard\XML\Element;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ElementInterface
+interface Element
 {
     /**
      * Return the data within the object as an XML document

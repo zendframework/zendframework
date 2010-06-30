@@ -7435,10 +7435,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Element/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Element_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/XML/Element/ElementInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\XML\Element</newNamespace>
-      <newClassName>ElementInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\XML\Element\ElementInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/XML/Element.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML</newNamespace>
+      <newClassName>Element</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Element</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Element.php</originalRelativeFilePath>

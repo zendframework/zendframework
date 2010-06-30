@@ -23,7 +23,8 @@
 /**
  * @namespace
  */
-namespace Zend\InfoCard\Cipher\PKI\RSA;
+namespace Zend\InfoCard\Cipher\PKI;
+
 use Zend\InfoCard\Cipher\PKI\Adapter;
 
 /**
@@ -36,7 +37,7 @@ use Zend\InfoCard\Cipher\PKI\Adapter;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface RSAInterface
+interface RSA
 {
     /**
      * Decrypts RSA encrypted data using the given private key

@@ -7331,10 +7331,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Pki/Rsa/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Cipher_Pki_Rsa_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Cipher/PKI/RSA/RSAInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Cipher\PKI\RSA</newNamespace>
-      <newClassName>RSAInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Cipher\PKI\RSA\RSAInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/Cipher/PKI/RSA.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\Cipher\PKI</newNamespace>
+      <newClassName>RSA</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\Cipher\PKI\RSA</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/Adapter/Abstract.php</originalRelativeFilePath>

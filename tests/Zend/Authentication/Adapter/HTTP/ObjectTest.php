@@ -25,9 +25,9 @@
  */
 namespace ZendTest\Auth\Adapter\HTTP;
 
-use Zend\Authentication\Adapter\HTTP;
-use Zend\Authentication\Adapter;
-use Zend\Authentication;
+use Zend\Authentication\Adapter\HTTP,
+    Zend\Authentication\Adapter,
+    Zend\Authentication;
 
 /**
  * @category   Zend
@@ -188,8 +188,8 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
             // Good, it threw an exception
         }
 
-        $request  = $this->getMock('Zend_Controller_Request_Http');
-        $response = $this->getMock('Zend_Controller_Response_Http');
+        $request  = $this->getMock('Zend\Controller\Request\HTTP');
+        $response = $this->getMock('Zend\Controller\Response\HTTP');
 
         // If this throws an exception, it fails
         $a->setRequest($request)
@@ -199,8 +199,8 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testNoResolvers()
     {
-        $request  = $this->getMock('Zend_Controller_Request_Http');
-        $response = $this->getMock('Zend_Controller_Response_Http');
+        $request  = $this->getMock('Zend\Controller\Request\HTTP');
+        $response = $this->getMock('Zend\Controller\Response\HTTP');
 
         // Stub request for Basic auth
         $request->expects($this->any())
@@ -220,7 +220,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         }
 
         // Stub request for Digest auth, must be reseted (recreated)
-        $request  = $this->getMock('Zend_Controller_Request_Http');
+        $request  = $this->getMock('Zend\Controller\Request\HTTP');
         $request->expects($this->any())
                 ->method('getHeader')
                 ->will($this->returnValue('Digest <followed by a space caracter'));
@@ -240,8 +240,8 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testWrongResolverUsed()
     {
-        $response = $this->getMock('Zend_Controller_Response_Http');
-        $request  = $this->getMock('Zend_Controller_Request_Http');
+        $response = $this->getMock('Zend\Controller\Response\HTTP');
+        $request  = $this->getMock('Zend\Controller\Request\HTTP');
         $request->expects($this->any())
                 ->method('getHeader')
                 ->will($this->returnValue('Basic <followed by a space caracter')); // A basic Header will be provided by that request
@@ -257,8 +257,8 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testUnsupportedScheme()
     {
-        $response = $this->getMock('Zend_Controller_Response_Http');
-        $request  = $this->getMock('Zend_Controller_Request_Http');
+        $response = $this->getMock('Zend\Controller\Response\HTTP');
+        $request  = $this->getMock('Zend\Controller\Request\HTTP');
         $request->expects($this->any())
                 ->method('getHeader')
                 ->will($this->returnValue('NotSupportedScheme <followed by a space caracter'));

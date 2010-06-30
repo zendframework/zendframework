@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Router;
+namespace Zend\Controller;
 
 /**
  * @package    Zend_Controller
@@ -31,7 +31,7 @@ namespace Zend\Controller\Router;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface RouterInterface
+interface Router
 {
     /**
      * Processes a request and sets its controller and action.  If
@@ -78,7 +78,7 @@ interface RouterInterface
      * Set Front Controller
      *
      * @param \Zend\Controller\Front $controller
-     * @return \Zend\Controller\Router\RouterInterface
+     * @return \Zend\Controller\Router
      */
     public function setFrontController(\Zend\Controller\Front $controller);
 
@@ -87,7 +87,7 @@ interface RouterInterface
      *
      * @param string $name
      * @param mixed $param
-     * @return \Zend\Controller\Router\RouterInterface
+     * @return \Zend\Controller\Router
      */
     public function setParam($name, $value);
 
@@ -95,7 +95,7 @@ interface RouterInterface
      * Set an array of a parameters to pass to helper object constructors
      *
      * @param array $params
-     * @return \Zend\Controller\Router\RouterInterface
+     * @return \Zend\Controller\Router
      */
     public function setParams(array $params);
 
@@ -122,7 +122,7 @@ interface RouterInterface
      * each.
      *
      * @param null|string|array single key or array of keys for params to clear
-     * @return \Zend\Controller\Router\RouterInterface
+     * @return \Zend\Controller\Router
      */
     public function clearParams($name = null);
 

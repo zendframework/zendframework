@@ -111,8 +111,8 @@ class Front
     protected $_returnResponse = false;
 
     /**
-     * Instance of Zend_Controller_Router_Interface
-     * @var \Zend\Controller\Router\RouterInterface
+     * Instance of Zend\Controller\Router
+     * @var \Zend\Controller\Router
      */
     protected $_router = null;
 
@@ -481,7 +481,7 @@ class Front
      * If a class name is provided, instantiates router with any parameters
      * registered via {@link setParam()} or {@link setParams()}.
      *
-     * @param string|\Zend\Controller\Router\RouterInterface $router
+     * @param string|\Zend\Controller\Router $router
      * @throws \Zend\Controller\Exception if invalid router class
      * @return \Zend\Controller\Front
      */
@@ -494,7 +494,7 @@ class Front
             $router = new $router();
         }
 
-        if (!$router instanceof Router\RouterInterface) {
+        if (!$router instanceof Router) {
             throw new Exception('Invalid router class');
         }
 
@@ -509,7 +509,7 @@ class Front
      *
      * Instantiates a Zend_Controller_Router_Rewrite object if no router currently set.
      *
-     * @return \Zend\Controller\Router\RouterInterface
+     * @return \Zend\Controller\Router
      */
     public function getRouter()
     {

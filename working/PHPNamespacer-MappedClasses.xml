@@ -1763,10 +1763,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Router/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Controller_Router_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Controller/Router/RouterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Controller\Router</newNamespace>
-      <newClassName>RouterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Controller\Router\RouterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Controller/Router.php</newRelativeFilePath>
+      <newNamespace>Zend\Controller</newNamespace>
+      <newClassName>Router</newClassName>
+      <newFullyQualifiedName>Zend\Controller\Router</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Router/Rewrite.php</originalRelativeFilePath>

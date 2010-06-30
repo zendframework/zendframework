@@ -24,12 +24,13 @@
  * @namespace
  */
 namespace Zend\InfoCard\XML\Assertion;
+
 use Zend\InfoCard\XML;
 
 /**
  * Factory object to retrieve an Assertion object based on the type of XML document provided
  *
- * @uses       \Zend\InfoCard\XML\Assertion\AssertionInterface
+ * @uses       \Zend\InfoCard\XML\Assertion
  * @uses       \Zend\InfoCard\XML\Assertion\SAML
  * @uses       \Zend\InfoCard\XML\Exception
  * @category   Zend
@@ -59,7 +60,7 @@ final class Assertion
      *
      * @throws \Zend\InfoCard\XML\Exception
      * @param string $xmlData The XML-Formatted Assertion
-     * @return \Zend\InfoCard\XML\Assertion\AssertionInterface
+     * @return \Zend\InfoCard\XML\Assertion
      * @throws \Zend\InfoCard\XML\Exception
      */
     static public function getInstance($xmlData)

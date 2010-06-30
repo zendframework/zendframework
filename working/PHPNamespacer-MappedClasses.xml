@@ -7411,10 +7411,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Assertion/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Assertion_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/XML/Assertion/AssertionInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\XML\Assertion</newNamespace>
-      <newClassName>AssertionInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\XML\Assertion\AssertionInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/XML/Assertion.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML</newNamespace>
+      <newClassName>Assertion</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Assertion</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Assertion/Saml.php</originalRelativeFilePath>

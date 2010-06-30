@@ -413,7 +413,7 @@ class InfoCard
             return $retval;
         }
 
-        if(!($assertions instanceof XML\Assertion\AssertionInterface)) {
+        if(!($assertions instanceof XML\Assertion)) {
             throw new Exception("Invalid Assertion Object returned");
         }
 

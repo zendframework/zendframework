@@ -23,6 +23,7 @@
  */
 namespace Zend\Form;
 use Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathMapper,
     Zend\Config\Config,
     Zend\Translator,
     Zend\View\ViewInterface as View,
@@ -88,7 +89,7 @@ class DisplayGroup implements \Iterator,\Countable
 
     /**
      * Plugin loader for decorators
-     * @var \Zend\Loader\PluginLoader\PluginLoader
+     * @var \Zend\Loader\PrefixPathMapper
      */
     protected $_loader;
 
@@ -124,11 +125,11 @@ class DisplayGroup implements \Iterator,\Countable
      * Constructor
      *
      * @param  string $name
-     * @param  \Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  \Zend\Loader\PrefixPathMapper $loader
      * @param  array|\Zend\Config\Config $options
      * @return void
      */
-    public function __construct($name, PluginLoader\PluginLoaderInterface $loader, $options = null)
+    public function __construct($name, PrefixPathMapper $loader, $options = null)
     {
         $this->setName($name);
 
@@ -539,10 +540,10 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Set plugin loader
      *
-     * @param  \Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  \Zend\Loader\PrefixPathMapper $loader
      * @return \Zend\Form\DisplayGroup
      */
-    public function setPluginLoader(PluginLoader\PluginLoaderInterface $loader)
+    public function setPluginLoader(PrefixPathMapper $loader)
     {
         $this->_loader = $loader;
         return $this;
@@ -551,7 +552,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Retrieve plugin loader
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public function getPluginLoader()
     {

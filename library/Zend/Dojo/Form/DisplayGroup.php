@@ -24,7 +24,7 @@
  */
 namespace Zend\Dojo\Form;
 
-use Zend\Loader\PluginLoader\PluginLoaderInterface as PluginLoader,
+use Zend\Loader\PrefixPathMapper as PluginLoader,
     Zend\View\ViewInterface as View;
 
 /**
@@ -43,7 +43,7 @@ class DisplayGroup extends \Zend\Form\DisplayGroup
      * Constructor
      *
      * @param  string $name
-     * @param  \Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  \Zend\Loader\PrefixPathMapper $loader
      * @param  array|\Zend\Config\Config|null $options
      * @return void
      */

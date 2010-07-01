@@ -25,6 +25,7 @@ namespace Zend\Form;
 use Zend\Config\Config,
     Zend\Registry,
     Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathMapper,
     Zend\Loader,
     Zend\JSON\JSON,
     Zend\View\ViewInterface as View,
@@ -38,7 +39,7 @@ use Zend\Config\Config,
  * @uses       \Zend\Form\Exception
  * @uses       \Zend\JSON\JSON
  * @uses       \Zend\Loader
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
+ * @uses       \Zend\Loader\PluginLoader
  * @uses       Zend\Registry
  * @uses       Zend\Validator\Validator
  * @category   Zend
@@ -412,12 +413,12 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     /**
      * Set plugin loaders for use with decorators and elements
      *
-     * @param  Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  Zend\Loader\PrefixPathMapper $loader
      * @param  string $type 'decorator' or 'element'
      * @return \Zend\Form\Form
      * @throws \Zend\Form\Exception on invalid type
      */
-    public function setPluginLoader(PluginLoader\PluginLoaderInterface $loader, $type = null)
+    public function setPluginLoader(PrefixPathMapper $loader, $type = null)
     {
         $type = strtoupper($type);
         switch ($type) {
@@ -441,7 +442,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
      * created.
      *
      * @param  string $type
-     * @return Zend\Loader\PluginLoader\PluginLoaderInterface
+     * @return Zend\Loader\PrefixPathMapper
      */
     public function getPluginLoader($type = null)
     {
@@ -460,7 +461,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
                     throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
             }
 
-            $this->_loaders[$type] = new PluginLoader\PluginLoader(
+            $this->_loaders[$type] = new PluginLoader(
                 array('Zend\\' . $prefixSegment . '\\' => 'Zend/' . $pathSegment . '/')
             );
         }

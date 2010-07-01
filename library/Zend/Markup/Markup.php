@@ -23,10 +23,10 @@
  * @namespace
  */
 namespace Zend\Markup;
-use Zend\Loader\PluginLoader;
+use Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathMapper;
 
 /**
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
  * @category   Zend
  * @package    Zend_Markup
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -41,14 +41,14 @@ class Markup
     /**
      * The parser loader
      *
-     * @var \Zend\Loader\PluginLoader\PluginLoader
+     * @var \Zend\Loader\PrefixPathMapper
      */
     protected static $_parserLoader;
 
     /**
      * The renderer loader
      *
-     * @var \Zend\Loader\PluginLoader\PluginLoader
+     * @var \Zend\Loader\PrefixPathMapper
      */
     protected static $_rendererLoader;
 
@@ -61,12 +61,12 @@ class Markup
     /**
      * Get the parser loader
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public static function getParserLoader()
     {
-        if (!(self::$_parserLoader instanceof PluginLoader\PluginLoader)) {
-            self::$_parserLoader = new PluginLoader\PluginLoader(array(
+        if (!(self::$_parserLoader instanceof PrefixPathMapper)) {
+            self::$_parserLoader = new PluginLoader(array(
                 'Zend\Markup\Parser' => 'Zend/Markup/Parser/',
             ));
         }
@@ -77,12 +77,12 @@ class Markup
     /**
      * Get the renderer loader
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public static function getRendererLoader()
     {
-        if (!(self::$_rendererLoader instanceof PluginLoader\PluginLoader)) {
-            self::$_rendererLoader = new PluginLoader\PluginLoader(array(
+        if (!(self::$_rendererLoader instanceof PrefixPathMapper)) {
+            self::$_rendererLoader = new PluginLoader(array(
                 'Zend\Markup\Renderer' => 'Zend/Markup/Renderer/',
             ));
         }
@@ -95,7 +95,7 @@ class Markup
      *
      * @param  string $prefix
      * @param  string $path
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public static function addParserPath($prefix, $path)
     {
@@ -107,7 +107,7 @@ class Markup
      *
      * @param  string $prefix
      * @param  string $path
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public static function addRendererPath($prefix, $path)
     {

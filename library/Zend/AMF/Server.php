@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\AMF;
-use Zend\Loader\PluginLoader\PluginLoader,
+use Zend\Loader\PluginLoader,
     Zend\Authentication\AuthenticationService,
     Zend\Server\Reflection;
 
@@ -44,7 +44,7 @@ use Zend\Loader\PluginLoader\PluginLoader,
  * @uses       Zend\AMF\Value\Messaging\ErrorMessage
  * @uses       Zend\AMF\Server\Exception
  * @uses       Zend\Authentication\AuthenticationService
- * @uses       Zend\Loader\PluginLoader\PluginLoader
+ * @uses       Zend\Loader\PluginLoader
  * @uses       Zend\Server\ServerInterface
  * @uses       Zend\Server\Reflection\Reflection
  * @uses       Zend\Session\Manager
@@ -73,7 +73,7 @@ class Server implements \Zend\Server\ServerInterface
 
     /**
      * Loader for classes in added directories
-     * @var Zend\Loader\PluginLoader\PluginLoader
+     * @var Zend\Loader\PluginLoader
      */
     protected $_loader;
 
@@ -303,7 +303,7 @@ class Server implements \Zend\Server\ServerInterface
     /**
      * Get PluginLoader for the Server
      *
-     * @return Zend\Loader\PluginLoader\PluginLoader
+     * @return Zend\Loader\PluginLoader
      */
     protected function getLoader()
     {

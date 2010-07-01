@@ -26,15 +26,15 @@
 namespace Zend\Controller\Action;
 
 use Zend\Controller\Action,
-    Zend\Loader\PluginLoader\Exception as PluginLoaderException,
-    Zend\Loader\PluginLoader\PluginLoaderInterface,
-    Zend\Loader\PluginLoader\PluginLoader;
+    Zend\Loader\PrefixPathMapper,
+    Zend\Loader\PluginLoaderException,
+    Zend\Loader\PluginLoader;
 
 /**
  * @uses       \Zend\Controller\Action\Exception
  * @uses       \Zend\Controller\Action\HelperBroker\PriorityStack
  * @uses       \Zend\Loader
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
+ * @uses       \Zend\Loader\PluginLoader
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Action
@@ -51,7 +51,7 @@ class HelperBroker
     protected $_actionController;
 
     /**
-     * @var \Zend\Loader\PluginLoader\PluginLoaderInterface
+     * @var \Zend\Loader\PrefixPathMapper
      */
     protected static $_pluginLoader;
 
@@ -65,12 +65,12 @@ class HelperBroker
     /**
      * Set PluginLoader for use with broker
      *
-     * @param  \Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  \Zend\Loader\PrefixPathMapper $loader
      * @return void
      */
     public static function setPluginLoader($loader)
     {
-        if ((null !== $loader) && (!$loader instanceof PluginLoaderInterface)) {
+        if ((null !== $loader) && (!$loader instanceof PrefixPathMapper)) {
             throw new Exception('Invalid plugin loader provided to HelperBroker');
         }
         self::$_pluginLoader = $loader;
@@ -85,7 +85,7 @@ class HelperBroker
     /**
      * Retrieve PluginLoader
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public static function getPluginLoader()
     {

@@ -30,7 +30,7 @@ use Zend\Form\Element,
     Zend\Config\Config,
     Zend\Controller\Action\HelperBroker,
     Zend\JSON\JSON,
-    Zend\Loader\PluginLoader\PluginLoader,
+    Zend\Loader\PluginLoader,
     Zend\Registry,
     Zend\Translator\Translator,
     Zend\View\View;

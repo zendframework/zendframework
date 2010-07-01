@@ -8067,26 +8067,26 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader/PluginLoader/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Loader_PluginLoader_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Loader/PluginLoader/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Loader\PluginLoader</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Loader\PluginLoader\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Loader/PluginLoaderException.php</newRelativeFilePath>
+      <newNamespace>Zend\Loader</newNamespace>
+      <newClassName>PluginLoaderException</newClassName>
+      <newFullyQualifiedName>Zend\Loader\PluginLoaderException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader/PluginLoader/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Loader_PluginLoader_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Loader/PluginLoader/PluginLoaderInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Loader\PluginLoader</newNamespace>
-      <newClassName>PluginLoaderInterface</newClassName>
-      <newFullyQualifiedName>Zend\Loader\PluginLoader\PluginLoaderInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Loader/PrefixPathMapper.php</newRelativeFilePath>
+      <newNamespace>Zend\Loader</newNamespace>
+      <newClassName>PrefixPathMapper</newClassName>
+      <newFullyQualifiedName>Zend\Loader\PrefixPathMapper</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader/PluginLoader.php</originalRelativeFilePath>
       <originalClassName>Zend_Loader_PluginLoader</originalClassName>
-      <newRelativeFilePath>Zend/Loader/PluginLoader/PluginLoader.php</newRelativeFilePath>
-      <newNamespace>Zend\Loader\PluginLoader</newNamespace>
+      <newRelativeFilePath>Zend/Loader/PluginLoader.php</newRelativeFilePath>
+      <newNamespace>Zend\Loader</newNamespace>
       <newClassName>PluginLoader</newClassName>
-      <newFullyQualifiedName>Zend\Loader\PluginLoader\PluginLoader</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Loader\PluginLoader</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader.php</originalRelativeFilePath>

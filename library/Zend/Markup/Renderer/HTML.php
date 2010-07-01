@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\Markup\Renderer;
-use Zend\Markup;
+use Zend\Markup,
+    Zend\Loader\PluginLoader;
 
 /**
  * HTML renderer
@@ -32,7 +33,7 @@ use Zend\Markup;
  * @uses       \Zend\Filter\Callback
  * @uses       \Zend\Filter\HtmlEntities
  * @uses       \Zend\Filter\PregReplace
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
+ * @uses       \Zend\Loader\PluginLoader
  * @uses       \Zend\Markup\Renderer\RendererAbstract
  * @category   Zend
  * @package    Zend_Markup
@@ -91,7 +92,7 @@ class HTML extends RendererAbstract
             $options = $options->toArray();
         }
 
-        $this->_pluginLoader = new \Zend\Loader\PluginLoader\PluginLoader(array(
+        $this->_pluginLoader = new PluginLoader(array(
             'Zend\Markup\Renderer\HTML' => 'Zend/Markup/Renderer/HTML/'
         ));
 

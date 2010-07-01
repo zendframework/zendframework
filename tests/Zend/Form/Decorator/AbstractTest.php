@@ -27,7 +27,7 @@ use Zend\Form\Decorator,
     Zend\Form\Element,
     Zend\Form\Form,
     Zend\Config\Config,
-    Zend\Loader\PluginLoader\PluginLoader;
+    Zend\Loader\PluginLoader;
 
 /**
  * Test class for Zend_Form_Decorator_Abstract

@@ -24,10 +24,11 @@
  */
 namespace Zend\Serializer;
 
-use Zend\Loader\PluginLoader;
+use Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathMapper;
 
 /**
- * @uses       Zend\Loader\PluginLoader\PluginLoader
+ * @uses       Zend\Loader\PluginLoader
  * @uses       Zend\Serializer\Exception
  * @category   Zend
  * @package    Zend_Serializer
@@ -39,7 +40,7 @@ class Serializer
     /**
      * Plugin loader to load adapter.
      *
-     * @var null|Zend\Loader\PluginLoader\PluginLoader
+     * @var null|Zend\Loader\PrefixPathMapper
      */
     private static $_adapterLoader = null;
 
@@ -82,7 +83,7 @@ class Serializer
     /**
      * Get the adapter plugin loader.
      *
-     * @return Zend\Loader\PluginLoader\PluginLoader
+     * @return Zend\Loader\PrefixPathMapper
      */
     public static function getAdapterLoader() 
     {
@@ -95,10 +96,10 @@ class Serializer
     /**
      * Change the adapter plugin load.
      *
-     * @param  Zend\Loader\PluginLoader\PluginLoader $pluginLoader
+     * @param  Zend\Loader\PrefixPathMapper $pluginLoader
      * @return void
      */
-    public static function setAdapterLoader(PluginLoader\PluginLoader $pluginLoader) 
+    public static function setAdapterLoader(PrefixPathMapper $pluginLoader) 
     {
         self::$_adapterLoader = $pluginLoader;
     }
@@ -106,7 +107,7 @@ class Serializer
     /**
      * Resets the internal adapter plugin loader
      *
-     * @return Zend\Loader\PluginLoader\PluginLoader
+     * @return Zend\Loader\PrefixPathMapper
      */
     public static function resetAdapterLoader()
     {
@@ -117,11 +118,11 @@ class Serializer
     /**
      * Returns a default adapter plugin loader
      *
-     * @return Zend\Loader\PluginLoader\PluginLoader
+     * @return Zend\Loader\PluginLoader
      */
     protected static function _getDefaultAdapterLoader()
     {
-        $loader = new PluginLoader\PluginLoader();
+        $loader = new PluginLoader();
         $loader->addPrefixPath('Zend\\Serializer\\Adapter\\', __DIR__ . '/Serializer/Adapter');
         return $loader;
     }

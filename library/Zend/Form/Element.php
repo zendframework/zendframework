@@ -24,6 +24,7 @@
 namespace Zend\Form;
 use Zend\Config\Config,
     Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathMapper,
     Zend\Validator\Validator,
     Zend\Filter\Filter,
     Zend\View\ViewInterface as View,
@@ -37,7 +38,7 @@ use Zend\Config\Config,
  * @uses       \Zend\Form\Form
  * @uses       \Zend\Form\ElementException
  * @uses       \Zend\Form\Exception
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
+ * @uses       \Zend\Loader\PluginLoader
  * @uses       \Zend\Validator\Validator
  * @category   Zend
  * @package    Zend_Form
@@ -969,12 +970,12 @@ class Element implements Validator
     /**
      * Set plugin loader to use for validator or filter chain
      *
-     * @param  \Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  \Zend\Loader\PrefixPathMapper $loader
      * @param  string $type 'decorator', 'filter', or 'validate'
      * @return \Zend\Form\Element
      * @throws \Zend\Form\Exception on invalid type
      */
-    public function setPluginLoader(PluginLoader\PluginLoaderInterface $loader, $type)
+    public function setPluginLoader(PrefixPathMapper $loader, $type)
     {
         $type = strtoupper($type);
         switch ($type) {
@@ -995,7 +996,7 @@ class Element implements Validator
      * 'decorator', 'filter', or 'validate' for $type.
      *
      * @param  string $type
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      * @throws \Zend\Loader\Exception on invalid type.
      */
     public function getPluginLoader($type)
@@ -1012,7 +1013,7 @@ class Element implements Validator
                     $pathSegment   = 'Form/Decorator';
                 }
                 if (!isset($this->_loaders[$type])) {
-                    $this->_loaders[$type] = new PluginLoader\PluginLoader(
+                    $this->_loaders[$type] = new PluginLoader(
                         array('Zend\\' . $prefixSegment . '\\' => 'Zend/' . $pathSegment . '/')
                     );
                 }

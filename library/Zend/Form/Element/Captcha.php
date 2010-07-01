@@ -41,7 +41,7 @@ use Zend\Captcha\Adapter as CaptchaAdapter,
  * @uses       ReflectionClass
  * @uses       \Zend\Captcha\Adapter
  * @uses       \Zend\Form\Element\Xhtml
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
+ * @uses       \Zend\Loader\PluginLoader
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -208,7 +208,7 @@ class Captcha extends Xhtml
      * Support for plugin loader for Captcha adapters
      *
      * @param  string $type
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      * @throws \Zend\Loader\Exception on invalid type.
      */
     public function getPluginLoader($type)
@@ -216,7 +216,7 @@ class Captcha extends Xhtml
         $type = strtoupper($type);
         if ($type == self::CAPTCHA) {
             if (!isset($this->_loaders[$type])) {
-                $this->_loaders[$type] = new PluginLoader\PluginLoader(
+                $this->_loaders[$type] = new PluginLoader(
                     array('Zend\\Captcha' => 'Zend/Captcha/')
                 );
             }

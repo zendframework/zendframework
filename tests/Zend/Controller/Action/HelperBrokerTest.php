@@ -33,7 +33,7 @@ use Zend\Controller\Action\HelperBroker,
     Zend\Controller\Request\HTTP as Request,
     Zend\Controller\Response\Cli as Response,
     Zend\Controller\Action\Helper,
-    Zend\Loader\PluginLoader\PluginLoader;
+    Zend\Loader\PluginLoader;
 
 /**
  * @category   Zend

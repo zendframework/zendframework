@@ -24,7 +24,7 @@ namespace ZendTest\Application;
 
 use Zend\Loader\Autoloader,
     Zend\Loader\ResourceAutoloader,
-    Zend\Loader\PluginLoader\PluginLoader,
+    Zend\Loader\PluginLoader,
     Zend\Registry,
     Zend\Application,
     Zend\Application\Resource\AbstractResource;

@@ -234,7 +234,7 @@ class ViewTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadHelperNonexistantFile()
     {
-        $this->setExpectedException('Zend\\Loader\\PluginLoader\\Exception', 'not found');
+        $this->setExpectedException('Zend\\Loader\\PluginLoaderException', 'not found');
         $view = new View();
         $view->nonexistantHelper();
     }
@@ -245,7 +245,7 @@ class ViewTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadHelperNonexistantClass()
     {
-        $this->setExpectedException('Zend\\Loader\\PluginLoader\\Exception', 'not found');
+        $this->setExpectedException('Zend\\Loader\\PluginLoaderException', 'not found');
         $view = new View();
         $view->setHelperPath(array(__DIR__ . '/_stubs/HelperDir1'));
         $view->stubEmpty();

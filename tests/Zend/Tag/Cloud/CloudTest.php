@@ -165,7 +165,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
 
     public function testSetPluginLoader()
     {
-        $loader = new PluginLoader\PluginLoader(array('foo_' => 'bar/'));
+        $loader = new PluginLoader(array('foo_' => 'bar/'));
         $cloud  = $this->_getCloud(array(), null);
         $cloud->setPluginLoader($loader);
         $paths  = $cloud->getPluginLoader()->getPaths();
@@ -175,7 +175,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
 
     public function testSetPluginLoaderViaOptions()
     {
-        $loader = new PluginLoader\PluginLoader(array('foo_' => 'bar/'));
+        $loader = new PluginLoader(array('foo_' => 'bar/'));
         $cloud  = $this->_getCloud(array('pluginLoader' => $loader), null);
         $paths  = $cloud->getPluginLoader()->getPaths();
 

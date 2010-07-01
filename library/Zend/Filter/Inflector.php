@@ -23,15 +23,14 @@
  * @namespace
  */
 namespace Zend\Filter;
-use Zend\Config;
-use Zend\Loader\PluginLoader;
+
+use Zend\Config,
+    Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathMapper;
 
 /**
  * Filter chain for string inflection
  *
- * @uses       Zend\Filter\Exception
- * @uses       Zend\Filter\AbstractFilter
- * @uses       Zend\Loader\PluginLoader\PluginLoader
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -40,7 +39,7 @@ use Zend\Loader\PluginLoader;
 class Inflector extends AbstractFilter
 {
     /**
-     * @var \Zend\Loader\PluginLoader\PluginLoaderInterface
+     * @var \Zend\Loader\PrefixPathMapper
      */
     protected $_pluginLoader = null;
 
@@ -102,12 +101,12 @@ class Inflector extends AbstractFilter
     /**
      * Retreive PluginLoader
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoaderInterface
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public function getPluginLoader()
     {
-        if (!$this->_pluginLoader instanceof PluginLoader\PluginLoaderInterface) {
-            $this->_pluginLoader = new PluginLoader\PluginLoader(array('Zend\\Filter\\' => 'Zend/Filter/'), __CLASS__);
+        if (!$this->_pluginLoader instanceof PrefixPathMapper) {
+            $this->_pluginLoader = new PluginLoader(array('Zend\\Filter\\' => 'Zend/Filter/'), __CLASS__);
         }
 
         return $this->_pluginLoader;
@@ -116,10 +115,10 @@ class Inflector extends AbstractFilter
     /**
      * Set PluginLoader
      *
-     * @param \Zend\Loader\PluginLoader\PluginLoaderInterface $pluginLoader
+     * @param \Zend\Loader\PrefixPathMapper $pluginLoader
      * @return \Zend\Filter\Inflector
      */
-    public function setPluginLoader(PluginLoader\PluginLoaderInterface $pluginLoader)
+    public function setPluginLoader(PrefixPathMapper $pluginLoader)
     {
         $this->_pluginLoader = $pluginLoader;
         return $this;

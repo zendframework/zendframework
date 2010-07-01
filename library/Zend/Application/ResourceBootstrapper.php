@@ -25,6 +25,8 @@
  */
 namespace Zend\Application;
 
+use Zend\Loader\PrefixPathMapper;
+
 /**
  * Interface for bootstrap classes that utilize resource plugins
  *
@@ -86,15 +88,15 @@ interface ResourceBootstrapper
     /**
      * Set plugin loader to use to fetch resources
      *
-     * @param  \Zend\Loader\PluginLoader\PluginLoader_Interface \Zend\Loader\PluginLoader\PluginLoader
+     * @param  \Zend\Loader\PrefixPathMapper $loader
      * @return \Zend\Application\ResourceBootstrapper
      */
-    public function setPluginLoader(\Zend\Loader\PluginLoader\PluginLoaderInterface $loader);
+    public function setPluginLoader(PrefixPathMapper $loader);
 
     /**
      * Retrieve plugin loader for resources
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public function getPluginLoader();
 }

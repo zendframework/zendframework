@@ -14,7 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Loader
- * @subpackage PluginLoader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Loader\PluginLoader;
+namespace Zend\Loader;
 
 /**
  * Plugin class loader exceptions
@@ -31,10 +30,9 @@ namespace Zend\Loader\PluginLoader;
  * @uses       \Zend\Loader\Exception
  * @category   Zend
  * @package    Zend_Loader
- * @subpackage PluginLoader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \DomainException implements \Zend\Loader\Exception
+class PluginLoaderException extends \DomainException implements Exception
 {
 }

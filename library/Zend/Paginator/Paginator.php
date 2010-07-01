@@ -23,14 +23,15 @@
  * @namespace
  */
 namespace Zend\Paginator;
-use Zend\Loader\PluginLoader;
-use Zend\View;
-use Zend\JSON;
+
+use Zend\Loader\PluginLoader,
+    Zend\View,
+    Zend\JSON;
 
 /**
  * @uses       \Zend\Controller\Action\HelperBroker
  * @uses       \Zend\JSON\JSON
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
+ * @uses       \Zend\Loader\PluginLoader
  * @uses       \Zend\Paginator\Exception
  * @uses       \Zend\View\Exception
  * @category   Zend
@@ -56,7 +57,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Adapter plugin loader
      *
-     * @var \Zend\Loader\PluginLoader\PluginLoader
+     * @var \Zend\Loader\PrefixPathMapper
      */
     protected static $_adapterLoader = null;
 
@@ -84,7 +85,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Scrolling style plugin loader
      *
-     * @var \Zend\Loader\PluginLoader\PluginLoader
+     * @var \Zend\Loader\PrefixPathMapper
      */
     protected static $_scrollingStyleLoader = null;
 
@@ -301,12 +302,12 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Returns the adapter loader.  If it doesn't exist it's created.
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public static function getAdapterLoader()
     {
         if (self::$_adapterLoader === null) {
-            self::$_adapterLoader = new PluginLoader\PluginLoader(
+            self::$_adapterLoader = new PluginLoader(
                 array('Zend\Paginator\Adapter' => 'Zend/Paginator/Adapter')
             );
         }
@@ -396,12 +397,12 @@ class Paginator implements \Countable, \IteratorAggregate
      * Returns the scrolling style loader.  If it doesn't exist it's
      * created.
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public static function getScrollingStyleLoader()
     {
         if (self::$_scrollingStyleLoader === null) {
-            self::$_scrollingStyleLoader = new PluginLoader\PluginLoader(
+            self::$_scrollingStyleLoader = new PluginLoader(
                 array('Zend\Paginator\ScrollingStyle' => 'Zend/Paginator/ScrollingStyle')
             );
         }

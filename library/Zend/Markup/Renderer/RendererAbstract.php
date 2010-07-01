@@ -89,7 +89,7 @@ abstract class RendererAbstract
     /**
      * Plugin loader for markups
      *
-     * @var \Zend\Loader\PluginLoader\PluginLoader
+     * @var \Zend\Loader\PrefixPathMapper
      */
     protected $_pluginLoader;
 
@@ -165,7 +165,7 @@ abstract class RendererAbstract
     /**
      * Get the plugin loader
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public function getPluginLoader()
     {

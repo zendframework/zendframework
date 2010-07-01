@@ -23,12 +23,14 @@
  * @namespace
  */
 namespace Zend\Text\Table;
-use Zend\Config;
+
+use Zend\Config,
+    Zend\Loader\PluginLoader;
 
 /**
  * Zend_Text_Table enables developers to create tables out of characters
  *
- * @uses      \Zend\Loader\PluginLoader\PluginLoader
+ * @uses      \Zend\Loader\PluginLoader
  * @uses      \Zend\Text\Table\Exception
  * @uses      \Zend\Text\Table\Column
  * @uses      \Zend\Text\Table\Row
@@ -92,7 +94,7 @@ class Table
     /**
      * Plugin loader for decorators
      *
-     * @var string
+     * @var Zend\Loader\PrefixPathMapper
      */
     protected $_pluginLoader = null;
 
@@ -257,14 +259,14 @@ class Table
     /**
      * Get the plugin loader for decorators
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public function getPluginLoader()
     {
         if ($this->_pluginLoader === null) {
             $prefix     = 'Zend\Text\Table\Decorator\\';
             $pathPrefix = 'Zend/Text/Table/Decorator/';
-            $this->_pluginLoader = new \Zend\Loader\PluginLoader\PluginLoader(array($prefix => $pathPrefix));
+            $this->_pluginLoader = new PluginLoader(array($prefix => $pathPrefix));
         }
 
         return $this->_pluginLoader;

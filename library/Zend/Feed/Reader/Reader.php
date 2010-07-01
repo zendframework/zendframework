@@ -23,8 +23,11 @@
 * @namespace
 */
 namespace Zend\Feed\Reader;
-use Zend\HTTP;
-use Zend\Loader\PluginLoader;
+
+use Zend\HTTP,
+    Zend\Loader\PluginLoader,
+    Zend\Loader\PluginLoaderException,
+    Zend\Loader\PrefixPathMapper;
 
 /**
 * @uses \Zend\Feed\Feed
@@ -33,7 +36,7 @@ use Zend\Loader\PluginLoader;
 * @uses \Zend\Feed\Reader\Feed\Atom\Atom
 * @uses \Zend\Feed\Reader\Feed\RSS
 * @uses \Zend\HTTP\Client
-* @uses \Zend\Loader\PluginLoader\PluginLoader
+* @uses \Zend\Loader\PluginLoader
 * @category Zend
 * @package Zend_Feed_Reader
 * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -481,9 +484,9 @@ class Reader
     /**
      * Set plugin loader for use with Extensions
      *
-     * @param  Zend_Loader_PluginLoader_Interface $loader
+     * @param  Zend\Loader\PrefixPathMapper $loader
      */
-    public static function setPluginLoader(PluginLoader\PluginLoaderInterface $loader)
+    public static function setPluginLoader(PrefixPathMapper $loader)
     {
         self::$_pluginLoader = $loader;
     }
@@ -491,12 +494,12 @@ class Reader
     /**
      * Get plugin loader for use with Extensions
      *
-     * @return  Zend_Loader_PluginLoader_Interface $loader
+     * @return  Zend\Loader\PrefixPathMapper $loader
      */
     public static function getPluginLoader()
     {
         if (!isset(self::$_pluginLoader)) {
-            self::$_pluginLoader = new PluginLoader\PluginLoader(array(
+            self::$_pluginLoader = new PluginLoader(array(
                 'Zend\\Feed\\Reader\\Extension\\' => 'Zend/Feed/Reader/Extension/',
             ));
         }
@@ -555,12 +558,12 @@ class Reader
         try {
             self::getPluginLoader()->load($feedName);
             self::$_extensions['feed'][] = $feedName;
-        } catch (PluginLoader\Exception $e) {
+        } catch (PluginLoaderException $e) {
         }
         try {
             self::getPluginLoader()->load($entryName);
             self::$_extensions['entry'][] = $entryName;
-        } catch (PluginLoader\Exception $e) {
+        } catch (PluginLoaderException $e) {
         }
         if (!self::getPluginLoader()->isLoaded($feedName)
             && !self::getPluginLoader()->isLoaded($entryName)

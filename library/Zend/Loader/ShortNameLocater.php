@@ -14,7 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Loader
- * @subpackage PluginLoader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,49 +22,30 @@
 /**
  * @namespace
  */
-namespace Zend\Loader\PluginLoader;
+namespace Zend\Loader;
 
 /**
- * Plugin class loader interface
+ * Short name locater interface
  *
  * @category   Zend
  * @package    Zend_Loader
- * @subpackage PluginLoader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface PluginLoaderInterface
+interface ShortNameLocater
 {
-    /**
-     * Add prefixed paths to the registry of paths
-     *
-     * @param string $prefix
-     * @param string $path
-     * @return \Zend\Loader\PluginLoader\PluginLoaderInterface
-     */
-    public function addPrefixPath($prefix, $path);
-
-    /**
-     * Remove a prefix (or prefixed-path) from the registry
-     *
-     * @param string $prefix
-     * @param string $path OPTIONAL
-     * @return \Zend\Loader\PluginLoader\PluginLoaderInterface
-     */
-    public function removePrefixPath($prefix, $path = null);
-
     /**
      * Whether or not a Helper by a specific name
      *
-     * @param string $name
-     * @return \Zend\Loader\PluginLoader\PluginLoaderInterface
+     * @param  string $name
+     * @return bool
      */
     public function isLoaded($name);
 
     /**
      * Return full class name for a named helper
      *
-     * @param string $name
+     * @param  string $name
      * @return string
      */
     public function getClassName($name);
@@ -73,7 +53,7 @@ interface PluginLoaderInterface
     /**
      * Load a helper via the name provided
      *
-     * @param string $name
+     * @param  string $name
      * @return string
      */
     public function load($name);

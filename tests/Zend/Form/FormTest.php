@@ -30,6 +30,7 @@ use Zend\Form\Form,
     Zend\Config\Ini as IniConfig,
     Zend\Config\Xml as XmlConfig,
     Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathMapper,
     Zend\JSON\JSON,
     Zend\Translator\Translator,
     Zend\Validator\Validator,
@@ -637,7 +638,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testGetPluginLoaderRetrievesDefaultDecoratorPluginLoader()
     {
         $loader = $this->form->getPluginLoader('decorator');
-        $this->assertTrue($loader instanceof PluginLoader\PluginLoader);
+        $this->assertTrue($loader instanceof PluginLoader);
         $paths = $loader->getPaths('Zend\Form\Decorator');
         $this->assertTrue(is_array($paths), var_export($loader, 1));
         $this->assertTrue(0 < count($paths));
@@ -647,7 +648,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidTypeToSetPluginLoaderThrowsException()
     {
-        $loader = new PluginLoader\PluginLoader();
+        $loader = new PluginLoader();
         $this->setExpectedException('Zend\Form\Exception', 'Invalid type');
         $this->form->setPluginLoader($loader, 'foo');
     }
@@ -660,7 +661,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetCustomDecoratorPluginLoader()
     {
-        $loader = new PluginLoader\PluginLoader();
+        $loader = new PluginLoader();
         $this->form->setPluginLoader($loader, 'decorator');
         $test = $this->form->getPluginLoader('decorator');
         $this->assertSame($loader, $test);
@@ -726,7 +727,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testGetPluginLoaderRetrievesDefaultElementPluginLoader()
     {
         $loader = $this->form->getPluginLoader('element');
-        $this->assertTrue($loader instanceof PluginLoader\PluginLoaderInterface);
+        $this->assertTrue($loader instanceof PrefixPathMapper);
         $paths = $loader->getPaths('Zend\Form\Element');
         $this->assertTrue(is_array($paths), var_export($loader, 1));
         $this->assertTrue(0 < count($paths));
@@ -736,7 +737,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetCustomDecoratorElementLoader()
     {
-        $loader = new PluginLoader\PluginLoader();
+        $loader = new PluginLoader();
         $this->form->setPluginLoader($loader, 'element');
         $test = $this->form->getPluginLoader('element');
         $this->assertSame($loader, $test);
@@ -753,8 +754,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testAddAllPluginLoaderPrefixPathsSimultaneously()
     {
-        $decoratorLoader = new PluginLoader\PluginLoader();
-        $elementLoader   = new PluginLoader\PluginLoader();
+        $decoratorLoader = new PluginLoader();
+        $elementLoader   = new PluginLoader();
         $this->form->setPluginLoader($decoratorLoader, 'decorator')
                    ->setPluginLoader($elementLoader, 'element')
                    ->addPrefixPath('Zend', 'Zend/');

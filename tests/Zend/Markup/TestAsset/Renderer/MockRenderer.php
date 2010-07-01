@@ -25,6 +25,9 @@
  */
 namespace ZendTest\Markup\TestAsset\Renderer;
 
+use Zend\Markup\AbstractRenderer,
+    Zend\Filter\FilterChain;
+
 /**
  * HTML renderer
  *
@@ -34,7 +37,7 @@ namespace ZendTest\Markup\TestAsset\Renderer;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MockRenderer extends \Zend\Markup\Renderer\RendererAbstract
+class MockRenderer extends AbstractRenderer
 {
 
     /**
@@ -44,6 +47,6 @@ class MockRenderer extends \Zend\Markup\Renderer\RendererAbstract
      */
     public function addDefaultFilters()
     {
-        $this->_defaultFilter = new \Zend\Filter\FilterChain();
+        $this->_defaultFilter = new FilterChain();
     }
 }

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Parser
+ * @subpackage Renderer_Markup
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,42 +23,49 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Parser;
+namespace Zend\Markup\Renderer;
+
+use Zend\Markup\AbstractRenderer,
+    Zend\Markup\Token;
 
 /**
+ * Interface for a markup
+ *
+ * @uses       \Zend\Markup\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Parser
+ * @subpackage Renderer_Markup
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ParserInterface
+interface Markup
 {
-    /**
-     * Parse a string
-     *
-     * @param  string $value
-     *
-     * @return array
-     */
-    public function parse($value);
 
     /**
-     * Build a tree with a certain strategy
+     * Set the encoding on this markup
      *
-     * @param array $tokens
-     * @param string $strategy
+     * @param string $encoding
      *
-     * @return \Zend\Markup\TokenList
+     * @return \Zend\Markup\Renderer\Markup
      */
-    public function buildTree(array $tokens, $strategy = 'default');
+    public function setEncoding($encoding = 'UTF-8');
 
     /**
-     * Tokenize a string
+     * Set the renderer on this markup
      *
-     * @param string $value
+     * @param \Zend\Markup\AbstractRenderer $renderer
      *
-     * @return array
+     * @return \Zend\Markup\Renderer\Markup
      */
-    public function tokenize($value);
+    public function setRenderer(AbstractRenderer $renderer);
+
+    /**
+     * Invoke the markup
+     *
+     * @param \Zend\Markup\Token $token
+     * @param string $text
+     *
+     * @return string
+     */
+    public function __invoke(Token $token, $text);
 }

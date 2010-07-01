@@ -24,16 +24,10 @@
  * @namespace
  */
 namespace ZendTest\Markup\TestAsset\Parser;
-use Zend\Markup\Parser;
-use Zend\Markup;
 
-/**
- * @see Zend_Markup_TokenList
- */
-
-/**
- * @see Zend_Markup_Parser_ParserInterface
- */
+use Zend\Markup\Parser,
+    Zend\Markup\Token,
+    Zend\Markup\TokenList;
 
 /**
  * @category   Zend
@@ -42,7 +36,7 @@ use Zend\Markup;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MockParser implements Parser\ParserInterface
+class MockParser implements Parser
 {
 
     /**
@@ -68,18 +62,18 @@ class MockParser implements Parser\ParserInterface
         }
 
         // initialize variables
-        $tree    = new Markup\TokenList();
-        $current = new Markup\Token(
+        $tree    = new TokenList();
+        $current = new Token(
             '',
-            Markup\Token::TYPE_NONE,
+            Token::TYPE_NONE,
             'Zend_Markup_Root'
         );
 
         $tree->addChild($current);
 
-        $token = new Markup\Token(
+        $token = new Token(
             $value,
-            Markup\Token::TYPE_NONE,
+            Token::TYPE_NONE,
             '',
             array(),
             $current

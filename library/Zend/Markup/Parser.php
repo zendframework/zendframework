@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup
+ * @subpackage Parser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,48 +23,42 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\Markup;
-use Zend\Markup;
-use Zend\Markup\Renderer;
+namespace Zend\Markup;
 
 /**
- * Interface for a markup
- *
- * @uses       \Zend\Markup\Renderer\RendererAbstract
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup
+ * @subpackage Parser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface MarkupInterface
+interface Parser
 {
+    /**
+     * Parse a string
+     *
+     * @param  string $value
+     *
+     * @return array
+     */
+    public function parse($value);
 
     /**
-     * Set the encoding on this markup
+     * Build a tree with a certain strategy
      *
-     * @param string $encoding
+     * @param array $tokens
+     * @param string $strategy
      *
-     * @return \Zend\Markup\Renderer\Markup\MarkupInterface
+     * @return \Zend\Markup\TokenList
      */
-    public function setEncoding($encoding = 'UTF-8');
+    public function buildTree(array $tokens, $strategy = 'default');
 
     /**
-     * Set the renderer on this markup
+     * Tokenize a string
      *
-     * @param \Zend\Markup\Renderer\RendererAbstract $renderer
+     * @param string $value
      *
-     * @return \Zend\Markup\Renderer\Markup\MarkupInterface
+     * @return array
      */
-    public function setRenderer(Renderer\RendererAbstract $renderer);
-
-    /**
-     * Invoke the markup
-     *
-     * @param \Zend\Markup\Token $token
-     * @param string $text
-     *
-     * @return string
-     */
-    public function __invoke(Markup\Token $token, $text);
+    public function tokenize($value);
 }

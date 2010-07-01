@@ -23,11 +23,9 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer;
+namespace Zend\Markup;
+
 use Zend\Filter;
-use Zend\Markup;
-use Zend\Markup\Parser;
-use Zend\Markup\Renderer\Markup\MarkupInterface;
 
 /**
  * Defines the basic rendering functionality
@@ -41,9 +39,8 @@ use Zend\Markup\Renderer\Markup\MarkupInterface;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class RendererAbstract
+abstract class AbstractRenderer
 {
-
     /**
      * Markup info
      *
@@ -54,7 +51,7 @@ abstract class RendererAbstract
     /**
      * Parser
      *
-     * @var \Zend\Markup\Parser\ParserInterface
+     * @var \Zend\Markup\Parser
      */
     protected $_parser;
 
@@ -143,10 +140,10 @@ abstract class RendererAbstract
     /**
      * Set the parser
      *
-     * @param  \Zend\Markup\Parser\ParserInterface $parser
-     * @return \Zend\Markup\Renderer\RendererAbstract
+     * @param  \Zend\Markup\Parser $parser
+     * @return \Zend\Markup\AbstractRenderer
      */
-    public function setParser(Markup\Parser\ParserInterface $parser)
+    public function setParser(Parser $parser)
     {
         $this->_parser = $parser;
         return $this;
@@ -155,7 +152,7 @@ abstract class RendererAbstract
     /**
      * Get the parser
      *
-     * @return \Zend\Markup\Parser\ParserInterface
+     * @return \Zend\Markup\Parser
      */
     public function getParser()
     {
@@ -177,7 +174,7 @@ abstract class RendererAbstract
      *
      * @param string $encoding
      *
-     * @return \Zend\Markup\Renderer\RendererAbstract
+     * @return \Zend\Markup\AbstractRenderer
      */
     public function setEncoding($encoding)
     {
@@ -200,11 +197,11 @@ abstract class RendererAbstract
      * Add a new markup
      *
      * @param string $name
-     * @param \Zend\Markup\Renderer\Markup\MarkupInterface $markup
+     * @param \Zend\Markup\Renderer\Markup $markup
      *
-     * @return \Zend\Markup\Renderer\RendererAbstract
+     * @return \Zend\Markup\AbstractRenderer
      */
-    public function addMarkup($name, MarkupInterface $markup)
+    public function addMarkup($name, Renderer\Markup $markup)
     {
         if (!isset($options['group']) && ($type ^ self::TYPE_ALIAS)) {
             throw new Exception("There is no render group defined.");
@@ -320,7 +317,7 @@ abstract class RendererAbstract
      * @param  \Zend\Markup\Token $token
      * @return string
      */
-    protected function _render(Markup\Token $token)
+    protected function _render(Token $token)
     {
         $return = '';
 
@@ -342,7 +339,7 @@ abstract class RendererAbstract
      * @param  \Zend\Markup\Token $token
      * @return string|bool
      */
-    protected function _getGroup(Markup\Token $token)
+    protected function _getGroup(Token $token)
     {
         if (!isset($this->_markups[$token->getName()])) {
             return false;
@@ -364,10 +361,10 @@ abstract class RendererAbstract
      * @param  \Zend\Markup\Token $token
      * @return string
      */
-    protected function _execute(Markup\Token $token)
+    protected function _execute(Token $token)
     {
         // first return the normal text markups
-        if ($token->getType() == Markup\Token::TYPE_NONE) {
+        if ($token->getType() == Token::TYPE_NONE) {
             return $this->_filter($token->getTag());
         }
 
@@ -474,7 +471,7 @@ abstract class RendererAbstract
      *
      * @return string
      */
-    protected function _getMarkupName(Markup\Token $token)
+    protected function _getMarkupName(Token $token)
     {
         $name = $token->getName();
         if (empty($name)) {
@@ -526,7 +523,7 @@ abstract class RendererAbstract
      * @param  array $markup
      * @return string
      */
-    protected function _executeReplace(Markup\Token $token, $markup)
+    protected function _executeReplace(Token $token, $markup)
     {
         return $markup['start'] . $this->_render($token) . $markup['end'];
     }
@@ -538,7 +535,7 @@ abstract class RendererAbstract
      * @param  array $markup
      * @return string
      */
-    protected function _executeSingleReplace(Markup\Token $token, $markup)
+    protected function _executeSingleReplace(Token $token, $markup)
     {
         return $markup['replace'];
     }
@@ -618,7 +615,7 @@ abstract class RendererAbstract
      * @param string $markup
      * @param string $placement
      *
-     * @return \Zend\Markup\Renderer\RendererAbstract
+     * @return \Zend\Markup\AbstractRenderer
      */
     public function addFilter(Filter\Filter $filter, $markup, $placement = Filter\FilterChainFilter\FilterChain::CHAIN_APPEND)
     {
@@ -652,7 +649,7 @@ abstract class RendererAbstract
      * @param \Zend\Filter\Filter $filter
      * @param string $markup
      *
-     * @return \Zend\Markup\Renderer\RendererAbstract
+     * @return \Zend\Markup\AbstractRenderer
      */
     public function setFilter(Filter\Filter $filter, $markup)
     {

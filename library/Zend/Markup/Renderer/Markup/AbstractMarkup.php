@@ -23,26 +23,28 @@
  * @namespace
  */
 namespace Zend\Markup\Renderer\Markup;
-use Zend\Markup\Renderer;
+
+use Zend\Markup\Renderer\Markup,
+    Zend\Markup\AbstractRenderer;
 
 /**
  * Abstract markup
  *
- * @uses       \Zend\Markup\Renderer\Markup\MarkupInterface
- * @uses       \Zend\Markup\Renderer\RendererAbstract
+ * @uses       \Zend\Markup\Renderer\Markup
+ * @uses       \Zend\Markup\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class MarkupAbstract implements MarkupInterface
+abstract class AbstractMarkup implements Markup
 {
 
     /**
      * The renderer
      *
-     * @var \Zend\Markup\Renderer\RendererAbstract
+     * @var \Zend\Markup\AbstractRenderer
      */
     protected $_renderer;
 
@@ -59,7 +61,7 @@ abstract class MarkupAbstract implements MarkupInterface
      *
      * @param string $encoding
      *
-     * @return \Zend\Markup\Renderer\Markup\MarkupAbstract
+     * @return \Zend\Markup\Renderer\Markup\AbstractMarkup
      */
     public function setEncoding($encoding = 'UTF-8')
     {
@@ -81,11 +83,11 @@ abstract class MarkupAbstract implements MarkupInterface
     /**
      * Set the renderer instance
      *
-     * @param \Zend\Markup\Renderer\RendererAbstract $renderer
+     * @param \Zend\Markup\AbstractRenderer $renderer
      *
-     * @return \Zend\Markup\Renderer\Markup\MarkupAbstract
+     * @return \Zend\Markup\Renderer\Markup\AbstractMarkup
      */
-    public function setRenderer(Renderer\RendererAbstract $renderer)
+    public function setRenderer(AbstractRenderer $renderer)
     {
         $this->_renderer = $renderer;
 
@@ -97,7 +99,7 @@ abstract class MarkupAbstract implements MarkupInterface
     /**
      * Get the renderer instance
      *
-     * @return \Zend\Markup\Renderer\RendererAbstract
+     * @return \Zend\Markup\AbstractRenderer
      */
     public function getRenderer()
     {

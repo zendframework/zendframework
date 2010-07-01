@@ -120,7 +120,7 @@ class Markup
      * @param  string $parser
      * @param  string $renderer
      * @param  array $options
-     * @return \Zend\Markup\Renderer\RendererAbstract
+     * @return \Zend\Markup\AbstractRenderer
      */
     public static function factory($parser, $renderer = 'HTML', array $options = array())
     {

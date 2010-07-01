@@ -8619,10 +8619,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Parser/ParserInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Markup_Parser_ParserInterface</originalClassName>
-      <newRelativeFilePath>Zend/Markup/Parser/ParserInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Markup\Parser</newNamespace>
-      <newClassName>ParserInterface</newClassName>
-      <newFullyQualifiedName>Zend\Markup\Parser\ParserInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Markup/Parser.php</newRelativeFilePath>
+      <newNamespace>Zend\Markup</newNamespace>
+      <newClassName>Parser</newClassName>
+      <newFullyQualifiedName>Zend\Markup\Parser</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Parser/Textile.php</originalRelativeFilePath>
@@ -8651,10 +8651,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Renderer/Html/HtmlAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Markup_Renderer_Html_HtmlAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Markup/Renderer/HTML/HTMLAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Markup/Renderer/HTML/AbstractHTML.php</newRelativeFilePath>
       <newNamespace>Zend\Markup\Renderer\HTML</newNamespace>
-      <newClassName>HTMLAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Markup\Renderer\HTML\HTMLAbstract</newFullyQualifiedName>
+      <newClassName>AbstractHTML</newClassName>
+      <newFullyQualifiedName>Zend\Markup\Renderer\HTML\AbstractHTML</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Renderer/Html/Img.php</originalRelativeFilePath>
@@ -8691,10 +8691,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Renderer/RendererAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Markup_Renderer_RendererAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Markup/Renderer/RendererAbstract.php</newRelativeFilePath>
-      <newNamespace>Zend\Markup\Renderer</newNamespace>
-      <newClassName>RendererAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Markup\Renderer\RendererAbstract</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Markup/AbstractRenderer.php</newRelativeFilePath>
+      <newNamespace>Zend\Markup</newNamespace>
+      <newClassName>AbstractRenderer</newClassName>
+      <newFullyQualifiedName>Zend\Markup\AbstractRenderer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Renderer/TokenConverterInterface.php</originalRelativeFilePath>

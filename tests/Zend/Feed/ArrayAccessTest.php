@@ -1,0 +1,110 @@
+<?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Feed
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
+ */
+
+/**
+ * @namespace
+ */
+namespace ZendTest\Feed;
+use Zend\Feed;
+
+/**
+ * Test helper
+ */
+
+/**
+ * @see Zend_Feed
+ */
+
+/**
+ * @category   Zend
+ * @package    Zend_Feed
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Feed
+ */
+class ArrayAccessTest extends \PHPUnit_Framework_TestCase
+{
+    protected $_feed;
+    protected $_nsfeed;
+
+    public function setUp()
+    {
+        $this->_feed = Feed\Feed::importFile(dirname(__FILE__) . '/_files/TestAtomFeed.xml');
+        $this->_nsfeed = Feed\Feed::importFile(dirname(__FILE__) . '/_files/TestAtomFeedNamespaced.xml');
+    }
+
+    public function testExists()
+    {
+        $this->assertFalse(isset($this->_feed[-1]), 'Negative array access should fail');
+        $this->assertTrue(isset($this->_feed['version']), 'Feed version should be set');
+
+        $this->assertFalse(isset($this->_nsfeed[-1]), 'Negative array access should fail');
+        $this->assertTrue(isset($this->_nsfeed['version']), 'Feed version should be set');
+    }
+
+    public function testGet()
+    {
+        $this->assertEquals($this->_feed['version'], '1.0', 'Feed version should be 1.0');
+        $this->assertEquals($this->_nsfeed['version'], '1.0', 'Feed version should be 1.0');
+    }
+
+    public function testSet()
+    {
+        $this->_feed['category'] = 'tests';
+        $this->assertTrue(isset($this->_feed['category']), 'Feed category should be set');
+        $this->assertEquals($this->_feed['category'], 'tests', 'Feed category should be tests');
+
+        $this->_nsfeed['atom:category'] = 'tests';
+        $this->assertTrue(isset($this->_nsfeed['atom:category']), 'Feed category should be set');
+        $this->assertEquals($this->_nsfeed['atom:category'], 'tests', 'Feed category should be tests');
+
+        // Changing an existing index.
+        $oldEntry = $this->_feed['version'];
+        $this->_feed['version'] = '1.1';
+        $this->assertTrue($oldEntry != $this->_feed['version'], 'Version should have changed');
+    }
+
+    public function testUnset()
+    {
+        $feed = Feed\Feed::importFile(dirname(__FILE__) . '/_files/TestAtomFeed.xml');
+        unset($feed['version']);
+        $this->assertFalse(isset($feed['version']), 'Version should be unset');
+        $this->assertEquals('', $feed['version'], 'Version should be equal to the empty string');
+
+        $nsfeed = Feed\Feed::importFile(dirname(__FILE__) . '/_files/TestAtomFeedNamespaced.xml');
+        unset($nsfeed['version']);
+        $this->assertFalse(isset($nsfeed['version']), 'Version should be unset');
+        $this->assertEquals('', $nsfeed['version'], 'Version should be equal to the empty string');
+    }
+
+    /**
+     * @issue ZF-5354
+     */
+    public function testGetsLinkWithEmptyOrMissingRelAsAlternateRel()
+    {
+        $feed = Feed\Feed::importFile(dirname(__FILE__) . '/_files/AtomHOnline.xml');
+        $entry = $feed->current();
+        $this->assertEquals('http://www.h-online.com/security/Google-acquires-reCAPTCHA--/news/114266/from/rss', $entry->link('alternate'));
+    }
+
+}

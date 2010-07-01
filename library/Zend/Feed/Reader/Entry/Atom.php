@@ -13,29 +13,30 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Reader\Reader
+ * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Atom.php 20096 2010-01-06 02:05:09Z bkarwin $
+ * @version    $Id$
  */
 
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace Zend\Feed\Reader\Entry;
 use Zend\Feed\Reader;
 
 /**
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Entry\AbstractEntry
-* @uses \Zend\Feed\Reader\Entry
-* @uses \Zend\Feed\Reader\Extension\Atom\Entry
-* @category Zend
-* @package Zend_Feed_Reader
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-*/
-class Atom extends AbstractEntry implements Reader\Entry
+ * @uses       \Zend\Feed\Reader\Reader
+ * @uses       \Zend\Feed\Reader\EntryAbstract
+ * @uses       \Zend\Feed\Reader\EntryInterface
+ * @uses       \Zend\Feed\Reader\Extension\Atom\Entry
+ * @category   Zend
+ * @package    Zend_Feed_Reader
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class Atom 
+    extends Reader\EntryAbstract
 {
     /**
      * XPath query
@@ -59,14 +60,14 @@ class Atom extends AbstractEntry implements Reader\Entry
         // Everyone by now should know XPath indices start from 1 not 0
         $this->_xpathQuery = '//atom:entry[' . ($this->_entryKey + 1) . ']';
 
-        $atomClass = Reader\Reader::getPluginLoader()->getClassName('Atom\\Entry');
-        $this->_extensions['Atom\\Entry'] = new $atomClass($entry, $entryKey, $type);
+        $atomClass = Reader\Reader::getPluginLoader()->getClassName('Atom\Entry');
+        $this->_extensions['Atom\Entry'] = new $atomClass($entry, $entryKey, $type);
 
-        $threadClass = Reader\Reader::getPluginLoader()->getClassName('Thread\\Entry');
-        $this->_extensions['Thread\\Entry'] = new $threadClass($entry, $entryKey, $type);
+        $threadClass = Reader\Reader::getPluginLoader()->getClassName('Thread\Entry');
+        $this->_extensions['Thread\Entry'] = new $threadClass($entry, $entryKey, $type);
         
-        $threadClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\\Entry');
-        $this->_extensions['DublinCore\\Entry'] = new $threadClass($entry, $entryKey, $type);
+        $threadClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\Entry');
+        $this->_extensions['DublinCore\Entry'] = new $threadClass($entry, $entryKey, $type);
     }
 
     /**
@@ -336,9 +337,9 @@ class Atom extends AbstractEntry implements Reader\Entry
     }
     
     /**
-     * Get category data as a Reader\Reader_Collection_Category object
+     * Get category data as a Zend_Feed_Reader_Collection_Category object
      *
-     * @return Reader\Reader_Collection_Category
+     * @return \Zend\Feed\Reader\Collection\Category
      */
     public function getCategories()
     {
@@ -360,7 +361,7 @@ class Atom extends AbstractEntry implements Reader\Entry
     /**
      * Get source feed metadata from the entry
      *
-     * @return Reader\Reader_Feed_Atom_Source|null
+     * @return \Zend\Feed\Reader\Feed\Atom\Source|null
      */
     public function getSource()
     {
@@ -378,7 +379,7 @@ class Atom extends AbstractEntry implements Reader\Entry
     /**
      * Set the XPath query (incl. on all Extensions)
      *
-     * @param \DOMXPath $xpath
+     * @param DOMXPath $xpath
      */
     public function setXpath(\DOMXPath $xpath)
     {

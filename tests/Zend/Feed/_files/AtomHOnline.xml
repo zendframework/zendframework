@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>The H - news feed</title>
+<subtitle>Technology news</subtitle>
+<link href="http://www.h-online.com" />
+<link rel="self" href="http://www.h-online.com/news/atom.xml" />
+<updated>2009-09-17T17:39:21+02:00</updated>
+<author>
+<name>The H</name>
+</author>
+<id>http://www.h-online.com/security/Google-acquires-reCAPTCHA--/news/114266/from/rss</id>
+
+<entry>
+    <title>Google acquires reCAPTCHA</title>
+    <link href="http://www.h-online.com/security/Google-acquires-reCAPTCHA--/news/114266/from/rss" />
+    <summary>Google has announced that it has acquired reCAPTCHA, one of the leading providers of CAPTCHAs which are used in authentication tests</summary>
+    <id>http://www.h-online.com/security/Google-acquires-reCAPTCHA--/news/114266/from/rss</id>
+    <updated>2009-09-17T17:39:21+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Lost+Found: Password shaking, macro viruses and comment spam</title>
+    <link href="http://www.h-online.com/security/Lost-Found-Password-shaking-macro-viruses-and-comment-spam--/news/114265/from/rss" />
+    <summary>Too short for news, too good to lose; lost+found is a round up of useful security information. Today, Password shaking, macro viruses and comment spam</summary>
+    <id>http://www.h-online.com/security/Lost-Found-Password-shaking-macro-viruses-and-comment-spam--/news/114265/from/rss</id>
+    <updated>2009-09-17T16:29:59+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Free Microsoft tools for detecting security problems</title>
+    <link href="http://www.h-online.com/security/Free-Microsoft-tools-for-detecting-security-problems--/news/114264/from/rss" />
+    <summary>Microsoft has made two free tools for detecting holes in applications available to developers. For quite some time Redmond's own developers have been using these tools within the Security Development Life cycle</summary>
+    <id>http://www.h-online.com/security/Free-Microsoft-tools-for-detecting-security-problems--/news/114264/from/rss</id>
+    <updated>2009-09-17T16:00:48+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Chatting with a phisher</title>
+    <link href="http://www.h-online.com/security/Chatting-with-a-phisher--/news/114263/from/rss" />
+    <summary>After Man-in-the-Middle attacks we now have Chat-in-the-Middle attacks on online banking customers. These pop up a chat window in the browser - and a phisher, posing as a bank representative, starts asking probing questions</summary>
+    <id>http://www.h-online.com/security/Chatting-with-a-phisher--/news/114263/from/rss</id>
+    <updated>2009-09-17T15:20:05+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Noop - a new language for the JVM</title>
+    <link href="http://www.h-online.com/open/Noop-a-new-language-for-the-JVM--/news/114262/from/rss" />
+    <summary>Noop is a new language for the JVM which aims to make coding more productive and reliable by making dependency injection and testing fundamental to the language</summary>
+    <id>http://www.h-online.com/open/Noop-a-new-language-for-the-JVM--/news/114262/from/rss</id>
+    <updated>2009-09-17T13:14:06+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Version 4.2 of OSGi Java component technology available</title>
+    <link href="http://www.h-online.com/open/Version-4-2-of-OSGi-Java-component-technology-available--/news/114261/from/rss" />
+    <summary>Version 4.2 of the OSGi component technology, which is popular in the Java world, is now available to download. Almost all Java EE application servers are based on this specification</summary>
+    <id>http://www.h-online.com/open/Version-4-2-of-OSGi-Java-component-technology-available--/news/114261/from/rss</id>
+    <updated>2009-09-17T11:53:12+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>DragonFly BSD 2.4 released</title>
+    <link href="http://www.h-online.com/open/DragonFly-BSD-2-4-released--/news/114260/from/rss" />
+    <summary>The DragonFly BSD project has announced the availability of version 2.4 of their FreeBSD fork, a major update that includes several bug fixes, performance improvements and a new 64-bit port</summary>
+    <id>http://www.h-online.com/open/DragonFly-BSD-2-4-released--/news/114260/from/rss</id>
+    <updated>2009-09-17T11:16:08+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Privacy for RFID tags</title>
+    <link href="http://www.h-online.com/security/Privacy-for-RFID-tags--/news/114259/from/rss" />
+    <summary>Wholesale RFID tagging poses a risk to privacy. A research team has proposed distributing keys as a method of ensuring privacy</summary>
+    <id>http://www.h-online.com/security/Privacy-for-RFID-tags--/news/114259/from/rss</id>
+    <updated>2009-09-17T09:48:38+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Firefox Flash check working</title>
+    <link href="http://www.h-online.com/security/Firefox-Flash-check-working--/news/114258/from/rss" />
+    <summary>In one week, ten million Firefox users have responded to Firefox's recently added Adobe Flash checks</summary>
+    <id>http://www.h-online.com/security/Firefox-Flash-check-working--/news/114258/from/rss</id>
+    <updated>2009-09-17T10:44:58+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Nominations open for the Free Software Awards</title>
+    <link href="http://www.h-online.com/open/Nominations-open-for-the-Free-Software-Awards--/news/114257/from/rss" />
+    <summary>The FSF has opened nominations for 2009's Free Software Awards, and is looking for nominations for individuals and projects</summary>
+    <id>http://www.h-online.com/open/Nominations-open-for-the-Free-Software-Awards--/news/114257/from/rss</id>
+    <updated>2009-09-16T20:06:38+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>ClarkConnect becomes ClearOS</title>
+    <link href="http://www.h-online.com/open/ClarkConnect-becomes-ClearOS--/news/114256/from/rss" />
+    <summary>The ClearFoundation is hoping to scale new heights with ClearOS [--] the Linux-based small business server, a successor to ClarkConnect, which will now be free to use, with the income stream coming from related services</summary>
+    <id>http://www.h-online.com/open/ClarkConnect-becomes-ClearOS--/news/114256/from/rss</id>
+    <updated>2009-09-16T18:58:00+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>GitHub to move to Rackspace</title>
+    <link href="http://www.h-online.com/open/GitHub-to-move-to-Rackspace--/news/114255/from/rss" />
+    <summary>GitHub co-founder Tom Preston-Werner has announced that the open source code hosting service will be moving its servers from Engine Yard to Rackspace</summary>
+    <id>http://www.h-online.com/open/GitHub-to-move-to-Rackspace--/news/114255/from/rss</id>
+    <updated>2009-09-16T18:23:09+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>KOffice 2.1 Beta 2 released</title>
+    <link href="http://www.h-online.com/open/KOffice-2-1-Beta-2-released--/news/114253/from/rss" />
+    <summary>The KOffice developers have released the second beta of version 2.1 of their open source office suite, which includes a number of bug fixes, new features and performance improvements</summary>
+    <id>http://www.h-online.com/open/KOffice-2-1-Beta-2-released--/news/114253/from/rss</id>
+    <updated>2009-09-16T16:34:45+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>MonitoringForge uncovered by GroundWork</title>
+    <link href="http://www.h-online.com/open/MonitoringForge-uncovered-by-GroundWork--/news/114254/from/rss" />
+    <summary>GroundWork has revealed its new community for open source network monitoring and management</summary>
+    <id>http://www.h-online.com/open/MonitoringForge-uncovered-by-GroundWork--/news/114254/from/rss</id>
+    <updated>2009-09-16T16:32:06+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Companies have wrong priorities for security updates</title>
+    <link href="http://www.h-online.com/security/Companies-have-wrong-priorities-for-security-updates--/news/114252/from/rss" />
+    <summary>Although attacks on Windows PCs nowadays almost exclusively exploit vulnerabilities in applications, it takes twice as long for security updates for applications to be installed as it does to plug vulnerabilities in the operating system</summary>
+    <id>http://www.h-online.com/security/Companies-have-wrong-priorities-for-security-updates--/news/114252/from/rss</id>
+    <updated>2009-09-16T15:07:52+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Jaspersoft launches JasperReports Professional Developer Edition</title>
+    <link href="http://www.h-online.com/open/Jaspersoft-launches-JasperReports-Professional-Developer-Edition--/news/114251/from/rss" />
+    <summary>Open source Business Intelligence software specialist Jaspersoft has announced the immediate availability of a new version of JasperReports Professional and has introduced JasperReports Professional Developer Edition</summary>
+    <id>http://www.h-online.com/open/Jaspersoft-launches-JasperReports-Professional-Developer-Edition--/news/114251/from/rss</id>
+    <updated>2009-09-16T13:12:54+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Google Android 1.6 SDK released</title>
+    <link href="http://www.h-online.com/open/Google-Android-1-6-SDK-released--/news/114249/from/rss" />
+    <summary>The Google Android Developers have announced the release of the Android 1.6, code name Donut, software development kit</summary>
+    <id>http://www.h-online.com/open/Google-Android-1-6-SDK-released--/news/114249/from/rss</id>
+    <updated>2009-09-16T12:30:13+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Oracle Enterprise Linux updated</title>
+    <link href="http://www.h-online.com/open/Oracle-Enterprise-Linux-updated--/news/114250/from/rss" />
+    <summary>Oracle updates its RHEL clone, Unbreakable Linux, to keep in step with Red Hat Enterprise Linux</summary>
+    <id>http://www.h-online.com/open/Oracle-Enterprise-Linux-updated--/news/114250/from/rss</id>
+    <updated>2009-09-16T11:46:25+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Terracotta 3.1 supports Hibernate</title>
+    <link href="http://www.h-online.com/open/Terracotta-3-1-supports-Hibernate--/news/114248/from/rss" />
+    <summary>Distributed caching for Hibernate queries comes to Terracotta's caching system with version 3.1's new Hibernate plug-in</summary>
+    <id>http://www.h-online.com/open/Terracotta-3-1-supports-Hibernate--/news/114248/from/rss</id>
+    <updated>2009-09-16T11:30:17+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Google Chrome 3.0 released</title>
+    <link href="http://www.h-online.com/security/Google-Chrome-3-0-released--/news/114247/from/rss" />
+    <summary>Just over one year after Google's Chrome web browser was originally launched, Google has announced the release of Chrome version 3 which includes several bug fixes, improvements and new features</summary>
+    <id>http://www.h-online.com/security/Google-Chrome-3-0-released--/news/114247/from/rss</id>
+    <updated>2009-09-16T11:18:46+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>MySpace bring open source MapReduce to .NET</title>
+    <link href="http://www.h-online.com/open/MySpace-bring-open-source-MapReduce-to-NET--/news/114246/from/rss" />
+    <summary>MySpace have released Quizmt, an implementation of MapReduce algorithms for clustered computing running on Windows and .NET</summary>
+    <id>http://www.h-online.com/open/MySpace-bring-open-source-MapReduce-to-NET--/news/114246/from/rss</id>
+    <updated>2009-09-17T12:07:01+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>GNOME Foundation releases first quarterly report</title>
+    <link href="http://www.h-online.com/open/GNOME-Foundation-releases-first-quarterly-report--/news/114244/from/rss" />
+    <summary>The GNOME Foundation has released its first quarterly report. The Q2 2009 Quarterly report spans June, July and August and covers several topics, including the projects migration to Git</summary>
+    <id>http://www.h-online.com/open/GNOME-Foundation-releases-first-quarterly-report--/news/114244/from/rss</id>
+    <updated>2009-09-15T17:29:49+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Live video stream of LinuxCon 2009 highlights</title>
+    <link href="http://www.h-online.com/open/Live-video-stream-of-LinuxCon-2009-highlights--/news/114245/from/rss" />
+    <summary>Highlights of the Linux Foundation conference LinuxCon 2009, taking place from the 21st to the 23rd of September are to be available as a live internet broadcast.  Keynote speakers include Joe Brockmeier, Bdale Garbee and Mark Shuttleworth</summary>
+    <id>http://www.h-online.com/open/Live-video-stream-of-LinuxCon-2009-highlights--/news/114245/from/rss</id>
+    <updated>2009-09-15T17:22:22+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Anonymous browsing on Android</title>
+    <link href="http://www.h-online.com/security/Anonymous-browsing-on-Android--/news/114243/from/rss" />
+    <summary>A group of developers at the Digital Technology Group at the University of Cambridge have released two Android applications that allow users browse the web anonymously using The Onion Router</summary>
+    <id>http://www.h-online.com/security/Anonymous-browsing-on-Android--/news/114243/from/rss</id>
+    <updated>2009-09-15T16:25:05+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>New York Times shows bad banner ad</title>
+    <link href="http://www.h-online.com/security/New-York-Times-shows-bad-banner-ad--/news/114242/from/rss" />
+    <summary>Over the weekend, visitors to the newspaper's website were confronted with scareware pop-ups telling them that their PCs had an infection. In order to place their fake banner ad, the scammers had passed themselves off as a well-known company</summary>
+    <id>http://www.h-online.com/security/New-York-Times-shows-bad-banner-ad--/news/114242/from/rss</id>
+    <updated>2009-09-15T14:31:25+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Referential integrity for Berkeley DB</title>
+    <link href="http://www.h-online.com/open/Referential-integrity-for-Berkeley-DB--/news/114241/from/rss" />
+    <summary>Oracle has added foreign keys and a C# interface to its free Berkeley DB</summary>
+    <id>http://www.h-online.com/open/Referential-integrity-for-Berkeley-DB--/news/114241/from/rss</id>
+    <updated>2009-09-15T13:49:10+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Horde vulnerabilities fixed</title>
+    <link href="http://www.h-online.com/security/Horde-vulnerabilities-fixed--/news/114240/from/rss" />
+    <summary>New versions of the Horde Application Framework, Horde Groupware and various other Horde applications fix two cross-site scripting vulnerabilities and one vulnerability which allows files to be overwritten</summary>
+    <id>http://www.h-online.com/security/Horde-vulnerabilities-fixed--/news/114240/from/rss</id>
+    <updated>2009-09-15T11:59:43+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>openSUSE 11.2 Milestone 7 released</title>
+    <link href="http://www.h-online.com/open/openSUSE-11-2-Milestone-7-released--/news/114238/from/rss" />
+    <summary>The openSUSE project has released the seventh milestone in the development of openSUSE 11.2, code named Fichte</summary>
+    <id>http://www.h-online.com/open/openSUSE-11-2-Milestone-7-released--/news/114238/from/rss</id>
+    <updated>2009-09-15T11:51:52+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Security updates for Bugzilla</title>
+    <link href="http://www.h-online.com/security/Security-updates-for-Bugzilla--/news/114239/from/rss" />
+    <summary>The developers of the Bugzilla open source bug tracking system have released versions 3.0.9, 3.2.5 and 3.4.2, which fix SQL injection vulnerabilities and remove a means of sniffing out a user's password</summary>
+    <id>http://www.h-online.com/security/Security-updates-for-Bugzilla--/news/114239/from/rss</id>
+    <updated>2009-09-15T11:12:10+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Microsoft says "We are working on our Linux drivers"</title>
+    <link href="http://www.h-online.com/open/Microsoft-says-We-are-working-on-our-Linux-drivers--/news/114237/from/rss" />
+    <summary>Microsoft's Sam Ramji says the company is working on their Linux Hyper-V drivers and has not abandoned them</summary>
+    <id>http://www.h-online.com/open/Microsoft-says-We-are-working-on-our-Linux-drivers--/news/114237/from/rss</id>
+    <updated>2009-09-15T09:48:54+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>The Linux Foundation welcomes ARM</title>
+    <link href="http://www.h-online.com/open/The-Linux-Foundation-welcomes-ARM--/news/114236/from/rss" />
+    <summary>The microprocessor and microcontroller manufacturer has joined the Linux Foundation. ARM processors are used in a large number of Linux driven mobile devices</summary>
+    <id>http://www.h-online.com/open/The-Linux-Foundation-welcomes-ARM--/news/114236/from/rss</id>
+    <updated>2009-09-15T12:43:47+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>CodePlex Foundation founding flawed says legal expert</title>
+    <link href="http://www.h-online.com/open/CodePlex-Foundation-founding-flawed-says-legal-expert--/news/114235/from/rss" />
+    <summary>Andrew Updegrove, of Gesmer Updegrove LLP, has documented his concerns with the founding of Microsoft's CodePlex Foundation</summary>
+    <id>http://www.h-online.com/open/CodePlex-Foundation-founding-flawed-says-legal-expert--/news/114235/from/rss</id>
+    <updated>2009-09-14T18:05:10+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>SystemRescueCd 1.3.0 released</title>
+    <link href="http://www.h-online.com/open/SystemRescueCd-1-3-0-released--/news/114234/from/rss" />
+    <summary>The SystemRescueCD developers have released version 1.3.0 of their Linux distribution for administering or repairing an operating system and recovering data after a system crash</summary>
+    <id>http://www.h-online.com/open/SystemRescueCd-1-3-0-released--/news/114234/from/rss</id>
+    <updated>2009-09-14T17:30:13+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>First Alpha of BeOS-inspired Haiku released</title>
+    <link href="http://www.h-online.com/open/First-Alpha-of-BeOS-inspired-Haiku-released--/news/114232/from/rss" />
+    <summary>After eight years of development, the Haiku Project developers have announced the availability of the first official development release of Haiku</summary>
+    <id>http://www.h-online.com/open/First-Alpha-of-BeOS-inspired-Haiku-released--/news/114232/from/rss</id>
+    <updated>2009-09-14T17:09:46+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>eyeOS 2.0 rethinks its webtop for 2010</title>
+    <link href="http://www.h-online.com/open/eyeOS-2-0-rethinks-its-webtop-for-2010--/news/114231/from/rss" />
+    <summary>In 2010, eyeOS, the webtop operating system, is getting a new desktop, easier collaboration, real time notifications and more</summary>
+    <id>http://www.h-online.com/open/eyeOS-2-0-rethinks-its-webtop-for-2010--/news/114231/from/rss</id>
+    <updated>2009-09-14T16:44:43+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>WebKit adds support for WebGL</title>
+    <link href="http://www.h-online.com/open/WebKit-adds-support-for-WebGL--/news/114230/from/rss" />
+    <summary>The WebKit developers have begun to integrate GPU-accelerated 3D capabilities via WebGL into their open source browser engine</summary>
+    <id>http://www.h-online.com/open/WebKit-adds-support-for-WebGL--/news/114230/from/rss</id>
+    <updated>2009-09-14T16:13:02+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>MonoTouch 1.0 released for iPhone developers</title>
+    <link href="http://www.h-online.com/open/MonoTouch-1-0-released-for-iPhone-developers--/news/114229/from/rss" />
+    <summary>Novell's Mono on iPhone package arrives, with prices ranging from $399 to $3,999</summary>
+    <id>http://www.h-online.com/open/MonoTouch-1-0-released-for-iPhone-developers--/news/114229/from/rss</id>
+    <updated>2009-09-14T17:00:13+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Survey: Three out of four administrators don't trust anti-virus software</title>
+    <link href="http://www.h-online.com/security/Survey-Three-out-of-four-administrators-don-t-trust-anti-virus-software--/news/114227/from/rss" />
+    <summary>In a study, 89 per cent of respondents use a standard anti-virus product, but half of them only because it is "better than nothing". The other half felt compelled to use an anti-virus product due to company guidelines</summary>
+    <id>http://www.h-online.com/security/Survey-Three-out-of-four-administrators-don-t-trust-anti-virus-software--/news/114227/from/rss</id>
+    <updated>2009-09-14T13:51:54+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Twitapps.com to close, code to be open sourced</title>
+    <link href="http://www.h-online.com/open/Twitapps-com-to-close-code-to-be-open-sourced--/news/114228/from/rss" />
+    <summary>The Twitter notification by email service will close in the next few weeks, but the code behind it will be released as open source</summary>
+    <id>http://www.h-online.com/open/Twitapps-com-to-close-code-to-be-open-sourced--/news/114228/from/rss</id>
+    <updated>2009-09-14T12:50:26+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Linux Mint 7 XFCE released</title>
+    <link href="http://www.h-online.com/open/Linux-Mint-7-XFCE-released--/news/114226/from/rss" />
+    <summary>The Mint development team have released Linux Mint 7 XFCE, a Community Edition based on Xfce 4.6</summary>
+    <id>http://www.h-online.com/open/Linux-Mint-7-XFCE-released--/news/114226/from/rss</id>
+    <updated>2009-09-14T12:34:12+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Botnet discovered on Linux servers</title>
+    <link href="http://www.h-online.com/security/Botnet-discovered-on-Linux-servers--/news/114225/from/rss" />
+    <summary>The servers in question register with dynamic DNS services to distribute malware</summary>
+    <id>http://www.h-online.com/security/Botnet-discovered-on-Linux-servers--/news/114225/from/rss</id>
+    <updated>2009-09-14T10:52:46+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Mozilla releases SeaMonkey 2.0 Beta 2</title>
+    <link href="http://www.h-online.com/open/Mozilla-releases-SeaMonkey-2-0-Beta-2--/news/114224/from/rss" />
+    <summary>Mozilla has announced the release of version 2.0 beta 2 of their SeaMonkey "all-in-one internet application suite", completing the planned feature set</summary>
+    <id>http://www.h-online.com/open/Mozilla-releases-SeaMonkey-2-0-Beta-2--/news/114224/from/rss</id>
+    <updated>2009-09-14T11:07:47+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Creature comforts for Ubuntu</title>
+    <link href="http://www.h-online.com/open/Creature-comforts-for-Ubuntu--/news/114223/from/rss" />
+    <summary>Ubuntu's community manager Jono Bacon discusses a number of features designed to make the popular Linux distribution more user-friendly and productive</summary>
+    <id>http://www.h-online.com/open/Creature-comforts-for-Ubuntu--/news/114223/from/rss</id>
+    <updated>2009-09-14T09:34:09+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>The H Week</title>
+    <link href="http://www.h-online.com/news/The-H-Week--/114222/from/rss" />
+    <summary>Linux Kernel 2.6.31 is released, The H looks at Linux and Digital Rights Management, Microsoft confirmed an SMB vulnerability can be exploited to remotely reboot Windows and announced the formation of the new CodePlex Foundation for open source</summary>
+    <id>http://www.h-online.com/news/The-H-Week--/114222/from/rss</id>
+    <updated>2009-09-12T14:40:15+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Apple open source Grand Central</title>
+    <link href="http://www.h-online.com/open/Apple-open-source-Grand-Central--/news/114221/from/rss" />
+    <summary>The engine behind Snow Leopards multi-core support is released as Apache 2.0 licensed open source</summary>
+    <id>http://www.h-online.com/open/Apple-open-source-Grand-Central--/news/114221/from/rss</id>
+    <updated>2009-09-13T11:01:28+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Chrome adds new defence for cross-site scripting attacks</title>
+    <link href="http://www.h-online.com/security/Chrome-adds-new-defence-for-cross-site-scripting-attacks--/news/114220/from/rss" />
+    <summary>Google has released Chrome 4.0.207.0 for Mac and Linux into its developer channel, adding a new a reflective XSS filter to defend against cross-site scripting attacks</summary>
+    <id>http://www.h-online.com/security/Chrome-adds-new-defence-for-cross-site-scripting-attacks--/news/114220/from/rss</id>
+    <updated>2009-09-11T17:09:26+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>openSUSE planned outage this weekend</title>
+    <link href="http://www.h-online.com/open/openSUSE-planned-outage-this-weekend--/news/114219/from/rss" />
+    <summary>A planned power outage in the projects office in Nuernberg, Germany will take several of its servers off line from the 11th to the 14th of September</summary>
+    <id>http://www.h-online.com/open/openSUSE-planned-outage-this-weekend--/news/114219/from/rss</id>
+    <updated>2009-09-11T16:07:36+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Apple's iPhone 3.1 anti-phishing ineffective?</title>
+    <link href="http://www.h-online.com/security/Apple-s-iPhone-3-1-anti-phishing-ineffective--/news/114218/from/rss" />
+    <summary>According to several reports, the new anti-phishing feature Apple introduced in iPhone OS 3.1 for its mobile version of the Safari web browser is unreliable</summary>
+    <id>http://www.h-online.com/security/Apple-s-iPhone-3-1-anti-phishing-ineffective--/news/114218/from/rss</id>
+    <updated>2009-09-11T13:25:23+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>New Google Summer of Code statistics posted</title>
+    <link href="http://www.h-online.com/open/New-Google-Summer-of-Code-statistics-posted--/news/114217/from/rss" />
+    <summary>Google has posted new statistics about its 2005 to 2009 Summer of Code contests which offer university students stipends to write and develop code for various open source projects</summary>
+    <id>http://www.h-online.com/open/New-Google-Summer-of-Code-statistics-posted--/news/114217/from/rss</id>
+    <updated>2009-09-11T13:11:34+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Report says IBM is switching from Microsoft Office to Lotus Symphony</title>
+    <link href="http://www.h-online.com/open/Report-says-IBM-is-switching-from-Microsoft-Office-to-Lotus-Symphony--/news/114216/from/rss" />
+    <summary>According to German daily "Handelsblatt", the Lotus office suite has to be installed on all company PCs within the next ten days. Reportedly, some 330,000 employees have  already switched</summary>
+    <id>http://www.h-online.com/open/Report-says-IBM-is-switching-from-Microsoft-Office-to-Lotus-Symphony--/news/114216/from/rss</id>
+    <updated>2009-09-11T12:59:14+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>VirtualBox 3.0.6 released</title>
+    <link href="http://www.h-online.com/open/VirtualBox-3-0-6-released--/news/114215/from/rss" />
+    <summary>Sun Microsystems has released version 3.0.6, a maintenance update of its open source VirtualBox desktop virtualisation application for x86 hardware</summary>
+    <id>http://www.h-online.com/open/VirtualBox-3-0-6-released--/news/114215/from/rss</id>
+    <updated>2009-09-11T13:09:42+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>First update for Apple's Snow Leopard released</title>
+    <link href="http://www.h-online.com/security/First-update-for-Apple-s-Snow-Leopard-released--/news/114213/from/rss" />
+    <summary>Apple has released Mac OS X 10.6.1 for Snow Leopard and Security Update 2009-005 for 10.4.11 Tiger and 10.5.8 Leopard systems, fixing several bugs and security vulnerabilities</summary>
+    <id>http://www.h-online.com/security/First-update-for-Apple-s-Snow-Leopard-released--/news/114213/from/rss</id>
+    <updated>2009-09-11T11:39:55+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Tornado let loose by Facebook</title>
+    <link href="http://www.h-online.com/open/Tornado-let-loose-by-Facebook--/news/114214/from/rss" />
+    <summary>Facebook shake up the Python web framework sector by open sourcing Tornado Web Server, the Python server behind the FriendFeed social network aggregator</summary>
+    <id>http://www.h-online.com/open/Tornado-let-loose-by-Facebook--/news/114214/from/rss</id>
+    <updated>2009-09-14T15:24:28+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Survey: "Open Core" least popular open source option</title>
+    <link href="http://www.h-online.com/open/Survey-Open-Core-least-popular-open-source-option--/news/114212/from/rss" />
+    <summary>A survey says that the "Open Core" model for open source licensing trails behind dual licensing and open source with commercial support in terms of acceptability to the enterprise</summary>
+    <id>http://www.h-online.com/open/Survey-Open-Core-least-popular-open-source-option--/news/114212/from/rss</id>
+    <updated>2009-09-11T10:50:37+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Microsoft announces open source foundation</title>
+    <link href="http://www.h-online.com/open/Microsoft-announces-open-source-foundation--/news/114211/from/rss" />
+    <summary>The new CodePlex Foundation aims to bring together commercial software vendors and the open source community</summary>
+    <id>http://www.h-online.com/open/Microsoft-announces-open-source-foundation--/news/114211/from/rss</id>
+    <updated>2009-09-11T11:02:35+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Four Critical Holes in QuickTime Closed</title>
+    <link href="http://www.h-online.com/security/Four-Critical-Holes-in-QuickTime-Closed--/news/114209/from/rss" />
+    <summary>The update closes errors which could allow crafted video files to be used to spread infection</summary>
+    <id>http://www.h-online.com/security/Four-Critical-Holes-in-QuickTime-Closed--/news/114209/from/rss</id>
+    <updated>2009-09-10T15:56:10+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Google begins launch of Chrome Extensions</title>
+    <link href="http://www.h-online.com/open/Google-begins-launch-of-Chrome-Extensions--/news/114208/from/rss" />
+    <summary>Extensions for Google Chrome and Chromium are clearly on their way as the feature is now switched on by default in the developer builds of the open source browsers</summary>
+    <id>http://www.h-online.com/open/Google-begins-launch-of-Chrome-Extensions--/news/114208/from/rss</id>
+    <updated>2009-09-10T14:43:53+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>iPhone OS 3.1 available</title>
+    <link href="http://www.h-online.com/security/iPhone-OS-3-1-available--/news/114207/from/rss" />
+    <summary>iPhone OS 3.1 and iPhone OS 3.1.1 for all iPod touch devices are now available for download at iTunes. The new systems come with numerous improvements and functions and close several security holes, some of them critical</summary>
+    <id>http://www.h-online.com/security/iPhone-OS-3-1-available--/news/114207/from/rss</id>
+    <updated>2009-09-10T12:54:42+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Numerous holes in Firefox 3.0 and 3.5 fixed</title>
+    <link href="http://www.h-online.com/security/Numerous-holes-in-Firefox-3-0-and-3-5-fixed--/news/114206/from/rss" />
+    <summary>Attackers were able to use manipulated websites to infect PCs. The new versions now also warn users if they are using outdated versions of the Flash plug-in</summary>
+    <id>http://www.h-online.com/security/Numerous-holes-in-Firefox-3-0-and-3-5-fixed--/news/114206/from/rss</id>
+    <updated>2009-09-10T12:18:54+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Better query analysis in MySQL Enterprise</title>
+    <link href="http://www.h-online.com/open/Better-query-analysis-in-MySQL-Enterprise--/news/114205/from/rss" />
+    <summary>The commercial Enterprise Fall Release 2009 of the open source MySQL database will feature query filtering and analysis using new correlation graphs</summary>
+    <id>http://www.h-online.com/open/Better-query-analysis-in-MySQL-Enterprise--/news/114205/from/rss</id>
+    <updated>2009-09-10T11:40:38+02:00</updated>
+</entry>
+
+</feed>

@@ -13,33 +13,32 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Reader\Reader
+ * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Feed.php 20096 2010-01-06 02:05:09Z bkarwin $
+ * @version    $Id$
  */
 
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace Zend\Feed\Reader\Extension\DublinCore;
-use Zend\Feed\Reader;
-use Zend\Feed\Reader\Collection;
-use Zend\Feed\Reader\Extension;
 use Zend\Date;
+use Zend\Feed\Reader\Collection;
 
 /**
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Collection\Author
-* @uses \Zend\Feed\Reader\Collection\Category
-* @uses \Zend\Feed\Reader\Extension\AbstractEntry
-* @category Zend
-* @package Zend_Feed_Reader
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-*/
-class Feed extends Extension\AbstractFeed
+ * @uses       \Zend\Date\Date
+ * @uses       \Zend\Feed\Reader\Reader
+ * @uses       \Zend\Feed\Reader\Collection\Author
+ * @uses       \Zend\Feed\Reader\Collection\Category
+ * @uses       \Zend\Feed\Reader\Extension\FeedAbstract
+ * @category   Zend
+ * @package    Zend_Feed_Reader
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class Feed
+    extends \Zend\Feed\Reader\Extension\FeedAbstract
 {
     /**
      * Get a single author
@@ -90,7 +89,7 @@ class Feed extends Extension\AbstractFeed
                 );
             }
             $authors = new Collection\Author(
-                Reader\Reader::arrayUnique($authors)
+                \Zend\Feed\Reader\Reader::arrayUnique($authors)
             );
         } else {
             $authors = null;
@@ -235,7 +234,7 @@ class Feed extends Extension\AbstractFeed
     /**
      *
      *
-     * @return Date\Date|null
+     * @return \Zend\Date\Date|null
      */
     public function getDate()
     {
@@ -263,7 +262,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get categories (subjects under DC)
      *
-     * @return Reader\Reader_Collection_Category
+     * @return \Zend\Feed\Reader\Collection\Category
      */
     public function getCategories()
     {

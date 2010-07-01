@@ -16,20 +16,21 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Collection.php 20785 2010-01-31 09:43:03Z mikaelkael $
+ * @version    $Id$
  */
 
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace Zend\Feed\Reader\Collection;
 
 /**
-* @category Zend
-* @package Zend_Feed_Reader
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-*/
+ * @uses       ArrayObject
+ * @category   Zend
+ * @package    Zend_Feed_Reader
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Collection extends \ArrayObject
 {
 

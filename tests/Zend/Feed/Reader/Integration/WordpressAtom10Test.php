@@ -17,25 +17,25 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: WordpressAtom10Test.php 22300 2010-05-26 10:13:34Z padraic $
+ * @version    $Id$
  */
 
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace ZendTest\Feed\Reader\Integration;
 use Zend\Feed\Reader;
 use Zend\Date;
 
 /**
-* @category Zend
-* @package Zend_Feed
-* @subpackage UnitTests
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
+ * @category   Zend
+ * @package    Zend_Feed
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Feed
+ * @group      Zend_Feed_Reader
+ */
 class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 {
 
@@ -156,7 +156,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
          * Note: The three dots below is actually a single Unicode character
          * called the "three dot leader". Don't replace in error!
          */
-        $this->assertEquals('Wth&#8230; reading books?', $entry->getTitle());
+        $this->assertEquals('Wth… reading books?', $entry->getTitle());
     }
 
     public function testGetsEntryAuthors()
@@ -186,7 +186,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
         /**
          * Note: "’" is not the same as "'" - don't replace in error
          */
-        $this->assertEquals('Being in New Zealand does strange things to a person. Everybody who knows me, knows I don&#8217;t much like that crazy invention called a Book. However, being here I&#8217;ve already finished 4 books, all of which I can highly recommend.'."\n\n".'Agile Software Development with Scrum, by Ken Schwaber and Mike Beedle'."\n".'Domain-Driven Design: Tackling Complexity in the [...]', $entry->getDescription());
+        $this->assertEquals('Being in New Zealand does strange things to a person. Everybody who knows me, knows I don’t much like that crazy invention called a Book. However, being here I’ve already finished 4 books, all of which I can highly recommend.'."\n\n".'Agile Software Development with Scrum, by Ken Schwaber and Mike Beedle'."\n".'Domain-Driven Design: Tackling Complexity in the [...]', $entry->getDescription());
     }
 
     public function testGetsEntryContent()

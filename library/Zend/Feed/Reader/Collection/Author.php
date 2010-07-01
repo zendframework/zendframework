@@ -16,22 +16,23 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Author.php 20096 2010-01-06 02:05:09Z bkarwin $
+ * @version    $Id$
  */
- 
+
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace Zend\Feed\Reader\Collection;
 
 /**
-* @uses \Zend\Feed\Reader\Collection\AbstractCollection
-* @category Zend
-* @package Zend_Feed_Reader
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-*/
-class Author extends AbstractCollection
+ * @uses       \Zend\Feed\Reader\Collection\CollectionAbstract
+ * @category   Zend
+ * @package    Zend_Feed_Reader
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class Author
+    extends CollectionAbstract
 {
 
     /**

@@ -13,35 +13,35 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Reader\Reader
+ * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Feed.php 22300 2010-05-26 10:13:34Z padraic $
+ * @version    $Id$
  */
 
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace Zend\Feed\Reader\Extension\Atom;
 use Zend\Feed\Reader;
 use Zend\Date;
 use Zend\Feed\Reader\Collection;
-use Zend\Feed\Reader\Extension;
 use Zend\URI;
 
 /**
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Collection\Author
-* @uses \Zend\Feed\Reader\Collection\Category
-* @uses \Zend\Feed\Reader\Extension\FeedAbstract
-* @uses \Zend\Uri\Uri
-* @category Zend
-* @package Reader\Reader
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-*/
-class Feed extends Extension\AbstractFeed
+ * @uses       \Zend\Date\Date
+ * @uses       \Zend\Feed\Reader\Reader
+ * @uses       \Zend\Feed\Reader\Collection\Author
+ * @uses       \Zend\Feed\Reader\Collection\Category
+ * @uses       \Zend\Feed\Reader\Extension\FeedAbstract
+ * @uses       \Zend\Uri\Uri
+ * @category   Zend
+ * @package    Zend_Feed_Reader
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class Feed
+    extends Reader\Extension\FeedAbstract
 {
     /**
      * Get a single author
@@ -128,7 +128,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get the feed creation date
      *
-     * @return Date\Date|null
+     * @return \Zend\Date\Date|null
      */
     public function getDateCreated()
     {
@@ -157,7 +157,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get the feed modification date
      *
-     * @return Date\Date|null
+     * @return \Zend\Date\Date|null
      */
     public function getDateModified()
     {
@@ -197,7 +197,7 @@ class Feed extends Extension\AbstractFeed
         $description = null;
 
         if ($this->getType() === Reader\Reader::TYPE_ATOM_03) {
-            $description = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:tagline)');
+            $description = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:tagline)'); // TODO: Is this the same as subtitle?
         } else {
             $description = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:subtitle)');
         }
@@ -226,6 +226,8 @@ class Feed extends Extension\AbstractFeed
 
         if (!$generator) {
             $generator = null;
+        } else {
+            $generator = html_entity_decode($generator, ENT_QUOTES, $this->getEncoding());
         }
 
         $this->_data['generator'] = $generator;
@@ -285,30 +287,6 @@ class Feed extends Extension\AbstractFeed
         $this->_data['language'] = $language;
 
         return $this->_data['language'];
-    }
-
-    /**
-     * Get the feed image
-     *
-     * @return array|null
-     */
-    public function getImage()
-    {
-        if (array_key_exists('image', $this->_data)) {
-            return $this->_data['image'];
-        }
-
-        $imageUrl = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:logo)');
-
-        if (!$imageUrl) {
-            $image = null;
-        } else {
-            $image = array('uri'=>$imageUrl);
-        }
-
-        $this->_data['image'] = $image;
-
-        return $this->_data['image'];
     }
 
     /**
@@ -433,7 +411,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get all categories
      *
-     * @return Reader\Reader_Collection_Category
+     * @return \Zend\Feed\Reader\Collection\Category
      */
     public function getCategories()
     {
@@ -459,7 +437,7 @@ class Feed extends Extension\AbstractFeed
                 $categoryCollection[] = array(
                     'term' => $category->getAttribute('term'),
                     'scheme' => $category->getAttribute('scheme'),
-                    'label' => $category->getAttribute('label')
+                    'label' => html_entity_decode($category->getAttribute('label'))
                 );
             }
         } else {

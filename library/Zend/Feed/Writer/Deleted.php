@@ -16,18 +16,26 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Deleted.php 20785 2010-01-31 09:43:03Z mikaelkael $
+ * @version    $Id$
  */
 
-require_once 'Zend/Feed/Writer/Feed/FeedAbstract.php';
- 
- /**
+/**
+ * @namespace
+ */
+namespace Zend\Feed\Writer;
+use Zend\Feed;
+use Zend\Date;
+
+/**
+ * @uses       \Zend\Date\Date
+ * @uses       \Zend\Feed\Exception
+ * @uses       \Zend\Uri\Uri
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Deleted
+class Deleted
 {
 
     /**
@@ -53,8 +61,7 @@ class Zend_Feed_Writer_Deleted
     public function setEncoding($encoding)
     {
         if (empty($encoding) || !is_string($encoding)) {
-            require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception('Invalid parameter: parameter must be a non-empty string');
+            throw new Feed\Exception('Invalid parameter: parameter must be a non-empty string');
         }
         $this->_data['encoding'] = $encoding;
     }
@@ -109,8 +116,7 @@ class Zend_Feed_Writer_Deleted
     public function setReference($reference)
     {
         if (empty($reference) || !is_string($reference)) {
-            require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception('Invalid parameter: reference must be a non-empty string');
+            throw new Feed\Exception('Invalid parameter: reference must be a non-empty string');
         }
         $this->_data['reference'] = $reference;
     }
@@ -127,14 +133,13 @@ class Zend_Feed_Writer_Deleted
     {
         $zdate = null;
         if (is_null($date)) {
-            $zdate = new Zend_Date;
+            $zdate = new Date\Date;
         } elseif (ctype_digit($date) && strlen($date) == 10) {
-            $zdate = new Zend_Date($date, Zend_Date::TIMESTAMP);
-        } elseif ($date instanceof Zend_Date) {
+            $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
+        } elseif ($date instanceof Date\Date) {
             $zdate = $date;
         } else {
-            require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception('Invalid Zend_Date object or UNIX Timestamp passed as parameter');
+            throw new Feed\Exception('Invalid Zend_Date object or UNIX Timestamp passed as parameter');
         }
         $this->_data['when'] = $zdate;
     }
@@ -154,24 +159,21 @@ class Zend_Feed_Writer_Deleted
             || empty($by['name']) 
             || !is_string($by['name'])
         ) {
-            require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception('Invalid parameter: author array must include a "name" key with a non-empty string value');
+            throw new Feed\Exception('Invalid parameter: author array must include a "name" key with a non-empty string value');
         }
         $author['name'] = $by['name'];
         if (isset($by['email'])) {
             if (empty($by['email']) || !is_string($by['email'])) {
-                require_once 'Zend/Feed/Exception.php';
-                throw new Zend_Feed_Exception('Invalid parameter: "email" array value must be a non-empty string');
+                throw new Feed\Exception('Invalid parameter: "email" array value must be a non-empty string');
             }
             $author['email'] = $by['email'];
         }
         if (isset($by['uri'])) {
             if (empty($by['uri']) 
                 || !is_string($by['uri']) 
-                || !Zend_Uri::check($by['uri'])
+                || !\Zend\URI\URL::validate($by['uri'])
             ) {
-                require_once 'Zend/Feed/Exception.php';
-                throw new Zend_Feed_Exception('Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
+                throw new Feed\Exception('Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
             }
             $author['uri'] = $by['uri'];
         }

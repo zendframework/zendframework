@@ -53,7 +53,7 @@
                 <para>
                     <link linkend="zend.gdata.gapps">Google Provisioning</link>
                     provides the ability to create, retrieve, update, and
-                    delete user accounts, nicknames, and email lists on a
+                    delete user accounts, nicknames, groups, and email lists on a
                     Google Apps hosted domain.
                 </para>
             </listitem>

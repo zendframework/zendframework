@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\ProgressBar\Adapter;
-use Zend\Config;
+
+use Zend\Config\Config;
 
 /**
  * Abstract class for Zend_ProgressBar_Adapters
@@ -33,7 +34,7 @@ use Zend\Config;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Adapter
+abstract class AbstractAdapter
 {
     /**
      * Option keys to skip when calling setOptions()
@@ -57,7 +58,7 @@ abstract class Adapter
     {
         if (is_array($options)) {
             $this->setOptions($options);
-        } elseif ($options instanceof Config\Config) {
+        } elseif ($options instanceof Config) {
             $this->setConfig($options);
         }
     }
@@ -68,7 +69,7 @@ abstract class Adapter
      * @param  \Zend\Config\Config $config
      * @return \Zend\ProgressBar\Adapter\Adapter
      */
-    public function setConfig(Config\Config $config)
+    public function setConfig(Config $config)
     {
         $this->setOptions($config->toArray());
 

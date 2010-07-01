@@ -10571,10 +10571,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/ProgressBar/Adapter.php</originalRelativeFilePath>
       <originalClassName>Zend_ProgressBar_Adapter</originalClassName>
-      <newRelativeFilePath>Zend/ProgressBar/Adapter/Adapter.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/ProgressBar/Adapter/AbstractAdapter.php</newRelativeFilePath>
       <newNamespace>Zend\ProgressBar\Adapter</newNamespace>
-      <newClassName>Adapter</newClassName>
-      <newFullyQualifiedName>Zend\ProgressBar\Adapter\Adapter</newFullyQualifiedName>
+      <newClassName>AbstractAdapter</newClassName>
+      <newFullyQualifiedName>Zend\ProgressBar\Adapter\AbstractAdapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/ProgressBar/Exception.php</originalRelativeFilePath>

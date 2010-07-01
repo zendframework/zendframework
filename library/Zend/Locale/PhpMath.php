@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Locale\Math;
+namespace Zend\Locale;
 
 /**
  * Utility class for proxying math function to bcmath functions, if present,
@@ -30,7 +30,7 @@ namespace Zend\Locale\Math;
  * Sampling of PHP environments and platforms suggests that at least 80% to 90% support bcmath.
  * This file should only be loaded for the 10% to 20% lacking access to the bcmath extension.
  *
- * @uses       \Zend\Locale\Math\Exception
+ * @uses       \Zend\Locale\MathException
  * @category   Zend
  * @package    Zend_Locale
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -41,15 +41,15 @@ class PhpMath extends Math
     public static function disable()
     {
         self::$_bcmathDisabled = true;
-        self::$add   = 'Zend\\Locale\\Math\\PhpMath::Add';
-        self::$sub   = 'Zend\\Locale\\Math\\PhpMath::Sub';
-        self::$pow   = 'Zend\\Locale\\Math\\PhpMath::Pow';
-        self::$mul   = 'Zend\\Locale\\Math\\PhpMath::Mul';
-        self::$div   = 'Zend\\Locale\\Math\\PhpMath::Div';
-        self::$comp  = 'Zend\\Locale\\Math\\PhpMath::Comp';
-        self::$sqrt  = 'Zend\\Locale\\Math\\PhpMath::Sqrt';
-        self::$mod   = 'Zend\\Locale\\Math\\PhpMath::Mod';
-        self::$scale = 'Zend\\Locale\\Math\\PhpMath::Scale';
+        self::$add   = 'Zend\\Locale\\PhpMath::Add';
+        self::$sub   = 'Zend\\Locale\\PhpMath::Sub';
+        self::$pow   = 'Zend\\Locale\\PhpMath::Pow';
+        self::$mul   = 'Zend\\Locale\\PhpMath::Mul';
+        self::$div   = 'Zend\\Locale\\PhpMath::Div';
+        self::$comp  = 'Zend\\Locale\\PhpMath::Comp';
+        self::$sqrt  = 'Zend\\Locale\\PhpMath::Sqrt';
+        self::$mod   = 'Zend\\Locale\\PhpMath::Mod';
+        self::$scale = 'Zend\\Locale\\PhpMath::Scale';
 
         self::$defaultScale     = 0;
         self::$defaultPrecision = 1;
@@ -75,7 +75,7 @@ class PhpMath extends Math
         $op2 = self::normalize($op2);
         $result = $op1 + $op2;
         if (is_infinite($result)  or  (abs($result - $op2 - $op1) > $precision)) {
-            throw new Exception("addition overflow: $op1 + $op2 != $result", $op1, $op2, $result);
+            throw new MathException("addition overflow: $op1 + $op2 != $result", $op1, $op2, $result);
         }
 
         return self::round(self::normalize($result), $scale);
@@ -97,7 +97,7 @@ class PhpMath extends Math
         $op2  = self::normalize($op2);
         $result = $op1 - $op2;
         if (is_infinite($result)  or  (abs($result + $op2 - $op1) > $precision)) {
-            throw new Exception("subtraction overflow: $op1 - $op2 != $result", $op1, $op2, $result);
+            throw new MathException("subtraction overflow: $op1 - $op2 != $result", $op1, $op2, $result);
         }
 
         return self::round(self::normalize($result), $scale);
@@ -118,7 +118,7 @@ class PhpMath extends Math
 
         $result = pow($op1, $op2);
         if (is_infinite($result)  or  is_nan($result)) {
-            throw new Exception("power overflow: $op1 ^ $op2", $op1, $op2, $result);
+            throw new MathException("power overflow: $op1 ^ $op2", $op1, $op2, $result);
         }
 
         return self::round(self::normalize($result), $scale);
@@ -137,7 +137,7 @@ class PhpMath extends Math
         $op2 = self::normalize($op2);
         $result = $op1 * $op2;
         if (is_infinite($result)  or  is_nan($result)) {
-            throw new Exception("multiplication overflow: $op1 * $op2 != $result", $op1, $op2, $result);
+            throw new MathException("multiplication overflow: $op1 * $op2 != $result", $op1, $op2, $result);
         }
 
         return self::round(self::normalize($result), $scale);
@@ -150,7 +150,7 @@ class PhpMath extends Math
         }
 
         if (empty($op2)) {
-            throw new Exception("can not divide by zero", $op1, $op2, null);
+            throw new MathException("can not divide by zero", $op1, $op2, null);
         }
         if (empty($op1)) {
             $op1 = 0;
@@ -159,7 +159,7 @@ class PhpMath extends Math
         $op2 = self::normalize($op2);
         $result = $op1 / $op2;
         if (is_infinite($result)  or  is_nan($result)) {
-            throw new Exception("division overflow: $op1 / $op2 != $result", $op1, $op2, $result);
+            throw new MathException("division overflow: $op1 / $op2 != $result", $op1, $op2, $result);
         }
 
         return self::round(self::normalize($result), $scale);
@@ -198,7 +198,7 @@ class PhpMath extends Math
         }
         $result = $op1 % $op2;
         if (is_nan($result)  or  (($op1 - $result) % $op2 != 0)) {
-            throw new Exception("modulus calculation error: $op1 % $op2 != $result", $op1, $op2, $result);
+            throw new MathException("modulus calculation error: $op1 % $op2 != $result", $op1, $op2, $result);
         }
 
         return self::normalize($result);
@@ -233,7 +233,7 @@ class PhpMath extends Math
     public static function Scale($scale)
     {
         if ($scale > 9) {
-            throw new Exception("can not scale to precision $scale", $scale, null, null);
+            throw new MathException("can not scale to precision $scale", $scale, null, null);
         }
         self::$defaultScale     = $scale;
         self::$defaultPrecision = pow(10, -$scale);

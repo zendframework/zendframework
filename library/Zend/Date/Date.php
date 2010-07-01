@@ -27,7 +27,7 @@ use Zend\TimeSync;
 use Zend\Locale\Locale;
 use Zend\Locale\Format;
 use Zend\Locale\Data;
-use Zend\Locale\Math\Math;
+use Zend\Locale\Math;
 
 /**
  * @uses      \Zend\Date\DateObject

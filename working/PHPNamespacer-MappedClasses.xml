@@ -8131,26 +8131,26 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Locale/Math/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Locale_Math_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Locale/Math/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Locale\Math</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Locale\Math\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Locale/MathException.php</newRelativeFilePath>
+      <newNamespace>Zend\Locale</newNamespace>
+      <newClassName>MathException</newClassName>
+      <newFullyQualifiedName>Zend\Locale\MathException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Locale/Math/PhpMath.php</originalRelativeFilePath>
       <originalClassName>Zend_Locale_Math_PhpMath</originalClassName>
-      <newRelativeFilePath>Zend/Locale/Math/PhpMath.php</newRelativeFilePath>
-      <newNamespace>Zend\Locale\Math</newNamespace>
+      <newRelativeFilePath>Zend/Locale/PhpMath.php</newRelativeFilePath>
+      <newNamespace>Zend\Locale</newNamespace>
       <newClassName>PhpMath</newClassName>
-      <newFullyQualifiedName>Zend\Locale\Math\PhpMath</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Locale\PhpMath</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Locale/Math.php</originalRelativeFilePath>
       <originalClassName>Zend_Locale_Math</originalClassName>
-      <newRelativeFilePath>Zend/Locale/Math/Math.php</newRelativeFilePath>
-      <newNamespace>Zend\Locale\Math</newNamespace>
+      <newRelativeFilePath>Zend/Locale/Math.php</newRelativeFilePath>
+      <newNamespace>Zend\Locale</newNamespace>
       <newClassName>Math</newClassName>
-      <newFullyQualifiedName>Zend\Locale\Math\Math</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Locale\Math</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Locale.php</originalRelativeFilePath>

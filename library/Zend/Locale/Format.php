@@ -29,7 +29,7 @@ namespace Zend\Locale;
  * @uses       \Zend\Locale\Locale
  * @uses       \Zend\Locale\Data
  * @uses       \Zend\Locale\Exception
- * @uses       \Zend\Locale\Math\Math
+ * @uses       \Zend\Locale\Math
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage Format
@@ -288,8 +288,8 @@ class Format
      */
     public static function toNumber($value, array $options = array())
     {
-        $value             = Math\Math::normalize($value);
-        $value             = Math\Math::floatalize($value);
+        $value             = Math::normalize($value);
+        $value             = Math::floatalize($value);
         $options           = self::_checkOptions($options) + self::$_options;
         $options['locale'] = (string) $options['locale'];
 
@@ -305,14 +305,14 @@ class Format
             $format  = self::_seperateFormat($format, $value, $options['precision']);
 
             if ($options['precision'] !== null) {
-                $value   = Math\Math::normalize(Math\Math::round($value, $options['precision']));
+                $value   = Math::normalize(Math::round($value, $options['precision']));
             }
         } else {
             // seperate negative format pattern when available
             $format  = self::_seperateFormat($format, $value, $options['precision']);
             if (strpos($format, '.')) {
                 if (is_numeric($options['precision'])) {
-                    $value = Math\Math::round($value, $options['precision']);
+                    $value = Math::round($value, $options['precision']);
                 } else {
                     if (substr($format, iconv_strpos($format, '.') + 1, 3) == '###') {
                         $options['precision'] = null;
@@ -324,10 +324,10 @@ class Format
                     }
                 }
             } else {
-                $value = Math\Math::round($value, 0);
+                $value = Math::round($value, 0);
                 $options['precision'] = 0;
             }
-            $value = Math\Math::normalize($value);
+            $value = Math::normalize($value);
         }
 
         if (iconv_strpos($format, '0') === false) {
@@ -367,9 +367,9 @@ class Format
             $number = $value;
         }
 
-        $prec = call_user_func(Math\Math::$sub, $value, $number, $options['precision']);
-        $prec = Math\Math::floatalize($prec);
-        $prec = Math\Math::normalize($prec);
+        $prec = call_user_func(Math::$sub, $value, $number, $options['precision']);
+        $prec = Math::floatalize($prec);
+        $prec = Math::normalize($prec);
         if (iconv_strpos($prec, '-') !== false) {
             $prec = iconv_substr($prec, 1);
         }
@@ -448,7 +448,7 @@ class Format
             $format = iconv_substr($format, 0, iconv_strpos($format, '#')) . $number . iconv_substr($format, $point);
         }
         // set negative sign
-        if (call_user_func(Math\Math::$comp, $value, 0, $options['precision']) < 0) {
+        if (call_user_func(Math::$comp, $value, 0, $options['precision']) < 0) {
             if (iconv_strpos($format, '-') === false) {
                 $format = $symbols['minus'] . $format;
             } else {
@@ -463,7 +463,7 @@ class Format
     private static function _seperateFormat($format, $value, $precision)
     {
         if (iconv_strpos($format, ';') !== false) {
-            if (call_user_func(Math\Math::$comp, $value, 0, $precision) < 0) {
+            if (call_user_func(Math::$comp, $value, 0, $precision) < 0) {
                 $tmpformat = iconv_substr($format, iconv_strpos($format, ';') + 1);
                 if ($tmpformat[0] == '(') {
                     $format = iconv_substr($format, 0, iconv_strpos($format, ';'));

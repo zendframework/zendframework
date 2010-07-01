@@ -33,6 +33,7 @@ require_once 'Zend/Log/Filter/MessageTest.php';
 require_once 'Zend/Log/Filter/SuppressTest.php';
 require_once 'Zend/Log/Formatter/SimpleTest.php';
 require_once 'Zend/Log/Formatter/XmlTest.php';
+require_once 'Zend/Log/Writer/AbstractTest.php';
 require_once 'Zend/Log/Writer/DbTest.php';
 if (PHP_OS != 'AIX') {
     require_once 'Zend/Log/Writer/FirebugTest.php';
@@ -71,6 +72,7 @@ class Zend_Log_AllTests
         $suite->addTestSuite('Zend_Log_Filter_SuppressTest');
         $suite->addTestSuite('Zend_Log_Formatter_SimpleTest');
         $suite->addTestSuite('Zend_Log_Formatter_XmlTest');
+        $suite->addTestSuite('Zend_Log_Writer_AbstractTest');
         $suite->addTestSuite('Zend_Log_Writer_DbTest');
         if (PHP_OS != 'AIX') {
             $suite->addTestSuite('Zend_Log_Writer_FirebugTest');

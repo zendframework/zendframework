@@ -24,14 +24,18 @@
  * @namespace
  */
 namespace Zend\Queue\Adapter;
-use Zend\Queue;
+
+use Zend\Queue\Adapter,
+    Zend\Queue\Queue,
+    Zend\Queue\Exception as QueueException,
+    Zend\Config\Config;
 
 /**
  * Class for connecting to queues performing common operations.
  *
  * @uses       \Zend\Queue\Queue
- * @uses       \Zend\Queue\Adapter\AdapterInterface
- * @uses       \Zend\Queue\Message\Message
+ * @uses       \Zend\Queue\Adapter
+ * @uses       \Zend\Queue\Message
  * @uses       \Zend\Queue\Exception
  * @category   Zend
  * @package    Zend_Queue
@@ -39,8 +43,7 @@ use Zend\Queue;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AdapterAbstract
-    implements AdapterInterface
+abstract class AbstractAdapter implements Adapter
 {
     /**
      * Default timeout for createQueue() function
@@ -96,9 +99,9 @@ abstract class AdapterAbstract
      * @return void
      * @throws \Zend\Queue\Exception
      */
-    public function __construct($options, Queue\Queue $queue = null)
+    public function __construct($options, Queue $queue = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
+        if ($options instanceof Config) {
             $options = $options->toArray();
         }
 
@@ -106,7 +109,7 @@ abstract class AdapterAbstract
          * Verify that adapter parameters are in an array.
          */
         if (!is_array($options)) {
-            throw new Queue\Exception('Adapter options must be an array or Zend_Config object');
+            throw new QueueException('Adapter options must be an array or Zend_Config object');
         }
 
         // set the queue
@@ -120,7 +123,7 @@ abstract class AdapterAbstract
         // Normalize the options and merge with the defaults
         if (array_key_exists('options', $options)) {
             if (!is_array($options['options'])) {
-                throw new Queue\Exception("Configuration array 'options' must be an array");
+                throw new QueueException("Configuration array 'options' must be an array");
             }
 
             // Can't use array_merge() because keys might be integers
@@ -156,9 +159,9 @@ abstract class AdapterAbstract
      * set the Zend_Queue class for this object
      *
      * @param  \Zend\Queue\Queue $queue
-     * @return \Zend\Queue\Adapter\AdapterInterface
+     * @return \Zend\Queue\Adapter
      */
-    public function setQueue(Queue\Queue $queue)
+    public function setQueue(Queue $queue)
     {
         $this->_queue = $queue;
         return $this;

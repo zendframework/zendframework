@@ -23,23 +23,22 @@
 /**
  * @namespace
  */
-namespace Zend\Queue\Stomp\Client;
-use Zend\Queue;
-use Zend\Queue\Stomp;
+namespace Zend\Queue\Stomp;
+
+use Zend\Queue\Exception as QueueException;
 
 /**
  * The Stomp client interacts with a Stomp server.
  *
  * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Stomp\Client\ConnectionInterface
+ * @uses       \Zend\Queue\Stomp\StompConnection
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Stomp
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Connection
-    implements ConnectionInterface
+class Connection implements StompConnection
 {
     const READ_TIMEOUT_DEFAULT_USEC = 0; // 0 microseconds
     const READ_TIMEOUT_DEFAULT_SEC = 5; // 5 seconds
@@ -76,7 +75,7 @@ class Connection
         if ($this->_socket === false) {
             // aparently there is some reason that fsockopen will return false
             // but it normally throws an error.
-            throw new Queue\Exception("Unable to connect to $str; error = $errstr ( errno = $errno )");
+            throw new QueueException("Unable to connect to $str; error = $errstr ( errno = $errno )");
         }
 
         stream_set_blocking($this->_socket, 0); // non blocking
@@ -139,7 +138,7 @@ class Connection
     public function ping()
     {
         if (!is_resource($this->_socket)) {
-            throw new Queue\Exception('Not connected to Stomp server');
+            throw new QueueException('Not connected to Stomp server');
         }
         return true;
     }
@@ -149,17 +148,17 @@ class Connection
      *
      * example: $response = $client->write($frame)->read();
      *
-     * @param \Zend\Queue\Stom\FrameInterface $frame
+     * @param \Zend\Queue\Stom\StompFrame $frame
      * @return $this
      */
-    public function write(Stomp\FrameInterface $frame)
+    public function write(StompFrame $frame)
     {
         $this->ping();
         $output = $frame->toFrame();
 
         $bytes = fwrite($this->_socket, $output, strlen($output));
         if ($bytes === false || $bytes == 0) {
-            throw new Queue\Exception('No bytes written');
+            throw new QueueException('No bytes written');
         }
 
         return $this;
@@ -189,7 +188,7 @@ class Connection
     /**
      * Reads in a frame from the socket or returns false.
      *
-     * @return \Zend\Queue\Stomp\FrameInterface|false
+     * @return \Zend\Queue\Stomp\StompFrame|false
      * @throws \Zend\Queue\Exception
      */
     public function read()
@@ -206,7 +205,7 @@ class Connection
 
             // check to make sure that the connection is not lost.
             if ($data === false) {
-                throw new Queue\Exception('Connection lost');
+                throw new QueueException('Connection lost');
             }
 
             // append last character read to $response
@@ -231,9 +230,9 @@ class Connection
     /**
      * Set the frameClass to be used
      *
-     * This must be a \Zend\Queue\Stomp\FrameInterface.
+     * This must be a \Zend\Queue\Stomp\StompFrame.
      *
-     * @param  string $classname - class is an instance of \Zend\Queue\Stomp\FrameInterface
+     * @param  string $classname - class is an instance of \Zend\Queue\Stomp\StompFrame
      * @return $this;
      */
     public function setFrameClass($classname)
@@ -257,7 +256,7 @@ class Connection
     /**
      * Create an empty frame
      *
-     * @return \Zend\Queue\Stomp\FrameInterface
+     * @return \Zend\Queue\Stomp\StompFrame
      */
     public function createFrame()
     {
@@ -265,8 +264,8 @@ class Connection
 
         $frame = new $class();
 
-        if (!$frame instanceof Stomp\FrameInterface) {
-            throw new Queue\Exception('Invalid Frame class provided; must implement \Zend\Queue\Stomp\FrameInterface');
+        if (!$frame instanceof StompFrame) {
+            throw new QueueException('Invalid Frame class provided; must implement \Zend\Queue\Stomp\StompFrame');
         }
 
         return $frame;

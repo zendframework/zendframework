@@ -23,8 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Queue\Message;
-use Zend\Queue;
+namespace Zend\Queue;
 
 /**
  * Class for managing queue messages
@@ -47,7 +46,7 @@ class Message
 
      /**
      * Connected is true if we have a reference to a live
-     * \Zend\Queue\Adapter\AdapterAbstract object.
+     * \Zend\Queue\Adapter object.
      * This is false after the Message has been deserialized.
      *
      * @var boolean
@@ -77,7 +76,7 @@ class Message
     public function __construct(array $options = array())
     {
         if (isset($options['queue'])) {
-            if ($options['queue'] instanceof Queue\Queue) {
+            if ($options['queue'] instanceof Queue) {
                 $this->_queue      = $options['queue'];
                 $this->_queueClass = get_class($this->_queue);
             } else {
@@ -86,14 +85,14 @@ class Message
                     $result = get_class($options['queue']);
                 }
 
-                throw new Queue\Exception(
+                throw new Exception(
                     '$options[\'queue\'] = ' . $result . ': must be instanceof \Zend\Queue\Queue'
                 );
             }
         }
         if (isset($options['data'])) {
             if (!is_array($options['data'])) {
-                throw new Queue\Exception('Data must be an array');
+                throw new Exception('Data must be an array');
             }
             $this->_data = $options['data'];
         }
@@ -109,7 +108,7 @@ class Message
     public function __get($key)
     {
         if (!array_key_exists($key, $this->_data)) {
-            throw new Queue\Exception("Specified field \"$key\" is not in the message");
+            throw new Exception("Specified field \"$key\" is not in the message");
         }
         return $this->_data[$key];
     }
@@ -125,7 +124,7 @@ class Message
     public function __set($key, $value)
     {
         if (!array_key_exists($key, $this->_data)) {
-            throw new Queue\Exception("Specified field \"$key\" is not in the message");
+            throw new Exception("Specified field \"$key\" is not in the message");
         }
         $this->_data[$key] = $value;
     }
@@ -184,7 +183,7 @@ class Message
      * @param  \Zend\Queue\Queue $queue
      * @return boolean
      */
-    public function setQueue(Queue\Queue $queue)
+    public function setQueue(Queue $queue)
     {
         $queueClass        = get_class($queue);
         $this->_queue      = $queue;

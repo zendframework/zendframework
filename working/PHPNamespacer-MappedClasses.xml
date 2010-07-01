@@ -10603,18 +10603,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Adapter/AdapterAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Adapter_AdapterAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Adapter/AdapterAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Queue/Adapter/AbstractAdapter.php</newRelativeFilePath>
       <newNamespace>Zend\Queue\Adapter</newNamespace>
-      <newClassName>AdapterAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Adapter\AdapterAbstract</newFullyQualifiedName>
+      <newClassName>AbstractAdapter</newClassName>
+      <newFullyQualifiedName>Zend\Queue\Adapter\AbstractAdapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Adapter/AdapterInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Adapter_AdapterInterface</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Adapter/AdapterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Queue\Adapter</newNamespace>
-      <newClassName>AdapterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Adapter\AdapterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Queue/Adapter.php</newRelativeFilePath>
+      <newNamespace>Zend\Queue</newNamespace>
+      <newClassName>Adapter</newClassName>
+      <newFullyQualifiedName>Zend\Queue\Adapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Adapter/Array.php</originalRelativeFilePath>
@@ -10643,10 +10643,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Adapter/Db.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Adapter_Db</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Adapter/DB/DB.php</newRelativeFilePath>
-      <newNamespace>Zend\Queue\Adapter\DB</newNamespace>
+      <newRelativeFilePath>Zend/Queue/Adapter/DB.php</newRelativeFilePath>
+      <newNamespace>Zend\Queue\Adapter</newNamespace>
       <newClassName>DB</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Adapter\DB\DB</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Queue\Adapter\DB</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Adapter/Memcacheq.php</originalRelativeFilePath>
@@ -10699,34 +10699,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Message.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Message</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Message/Message.php</newRelativeFilePath>
-      <newNamespace>Zend\Queue\Message</newNamespace>
+      <newRelativeFilePath>Zend/Queue/Message.php</newRelativeFilePath>
+      <newNamespace>Zend\Queue</newNamespace>
       <newClassName>Message</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Message\Message</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Queue\Message</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Stomp/Client/Connection.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Stomp_Client_Connection</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Stomp/Client/Connection.php</newRelativeFilePath>
-      <newNamespace>Zend\Queue\Stomp\Client</newNamespace>
+      <newRelativeFilePath>Zend/Queue/Stomp/Connection.php</newRelativeFilePath>
+      <newNamespace>Zend\Queue\Stomp</newNamespace>
       <newClassName>Connection</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Stomp\Client\Connection</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Queue\Stomp\Connection</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Stomp/Client/ConnectionInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Stomp_Client_ConnectionInterface</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Stomp/Client/ConnectionInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Queue\Stomp\Client</newNamespace>
-      <newClassName>ConnectionInterface</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Stomp\Client\ConnectionInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Queue/Stomp/StompConnection.php</newRelativeFilePath>
+      <newNamespace>Zend\Queue\Stomp</newNamespace>
+      <newClassName>StompConnection</newClassName>
+      <newFullyQualifiedName>Zend\Queue\Stomp\StompConnection</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Stomp/Client.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Stomp_Client</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Stomp/Client/Client.php</newRelativeFilePath>
-      <newNamespace>Zend\Queue\Stomp\Client</newNamespace>
+      <newRelativeFilePath>Zend/Queue/Stomp/Client.php</newRelativeFilePath>
+      <newNamespace>Zend\Queue\Stomp</newNamespace>
       <newClassName>Client</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Stomp\Client\Client</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Queue\Stomp\Client</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Stomp/Frame.php</originalRelativeFilePath>
@@ -10739,10 +10739,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Stomp/FrameInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Stomp_FrameInterface</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Stomp/FrameInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Queue/Stomp/StompFrame.php</newRelativeFilePath>
       <newNamespace>Zend\Queue\Stomp</newNamespace>
-      <newClassName>FrameInterface</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Stomp\FrameInterface</newFullyQualifiedName>
+      <newClassName>StompFrame</newClassName>
+      <newFullyQualifiedName>Zend\Queue\Stomp\StompFrame</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue.php</originalRelativeFilePath>

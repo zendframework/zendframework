@@ -26,7 +26,7 @@
 namespace Zend\Queue\Stomp;
 
 /**
- * This class represents a Stomp Frame Interface
+ * This interface represents a Stomp Frame
  *
  * @category   Zend
  * @package    Zend_Queue
@@ -34,7 +34,7 @@ namespace Zend\Queue\Stomp;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface FrameInterface
+interface StompFrame
 {
     /**
      * Get the status of the auto content length

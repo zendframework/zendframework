@@ -83,7 +83,7 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($this->options));
 
         foreach ($this->messages as $i => $message) {
-            $this->assertTrue($message instanceof \Zend\Queue\Message\Message);
+            $this->assertTrue($message instanceof \Zend\Queue\Message);
             $this->assertEquals('Hello world', $message->body);
         }
     }

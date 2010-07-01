@@ -23,22 +23,20 @@
 /**
  * @namespace
  */
-namespace Zend\Queue\Adapter;
-use Zend\Queue;
-use Zend\Queue\Message;
+namespace Zend\Queue;
 
 /**
  * Interface for common queue operations
  *
  * @uses       \Zend\Queue\Queue
- * @uses       \Zend\Queue\Message\Message
+ * @uses       \Zend\Queue\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface AdapterInterface
+interface Adapter
 {
     /**
      * Constructor
@@ -47,7 +45,7 @@ interface AdapterInterface
      * @param  \Zend\Queue\Queue $queue
      * @return void
      */
-    public function __construct($options, Queue\Queue $queue = null);
+    public function __construct($options, Queue $queue = null);
 
     /**
      * Retrieve queue instance
@@ -60,9 +58,9 @@ interface AdapterInterface
      * Set queue instnace
      *
      * @param  \Zend\Queue\Queue $queue
-     * @return \Zend\Queue\Adapter\AdapterInterface
+     * @return \Zend\Queue\Adapter
      */
-    public function setQueue(Queue\Queue $queue);
+    public function setQueue(Queue $queue);
 
     /**
      * Does a queue already exist?
@@ -116,7 +114,7 @@ interface AdapterInterface
      * @param  \Zend\Queue\Queue|null $queue
      * @return integer
      */
-    public function count(Queue\Queue $queue = null);
+    public function count(Queue $queue = null);
 
     /********************************************************************
      * Messsage management functions
@@ -127,9 +125,9 @@ interface AdapterInterface
      *
      * @param  mixed $message Message to send to the active queue
      * @param  \Zend\Queue\Queue|null $queue
-     * @return \Zend\Queue\Message\Message
+     * @return \Zend\Queue\Message
      */
-    public function send($message, Queue\Queue $queue = null);
+    public function send($message, Queue $queue = null);
 
     /**
      * Get messages in the queue
@@ -139,7 +137,7 @@ interface AdapterInterface
      * @param  \Zend\Queue\Queue|null $queue
      * @return \Zend\Queue\Message\MessageIterator
      */
-    public function receive($maxMessages = null, $timeout = null, Queue\Queue $queue = null);
+    public function receive($maxMessages = null, $timeout = null, Queue $queue = null);
 
     /**
      * Delete a message from the queue
@@ -147,10 +145,10 @@ interface AdapterInterface
      * Return true if the message is deleted, false if the deletion is
      * unsuccessful.
      *
-     * @param  \Zend\Queue\Message\Message $message
+     * @param  \Zend\Queue\Message $message
      * @return boolean
      */
-    public function deleteMessage(Message\Message $message);
+    public function deleteMessage(Message $message);
 
     /********************************************************************
      * Supporting functions

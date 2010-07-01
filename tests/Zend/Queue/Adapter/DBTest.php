@@ -59,7 +59,7 @@ class DBTest extends AdapterTest
      */
     public function getAdapterName()
     {
-        return 'DB\DB';
+        return 'DB';
     }
 
     /**

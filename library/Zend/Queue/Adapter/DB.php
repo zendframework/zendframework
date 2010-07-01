@@ -23,11 +23,14 @@
 /**
  * @namespace
  */
-namespace Zend\Queue\Adapter\DB;
-use Zend\Queue;
-use Zend\DB as DB_ns;
-use Zend\DB\Select;
-use Zend;
+namespace Zend\Queue\Adapter;
+
+use Zend\Queue\Queue,
+    Zend\Queue\Exception as QueueException,
+    Zend\Queue\Message,
+    Zend\DB as DB_ns,
+    Zend\DB\Adapter\AbstractAdapter as AbstractDBAdapter,
+    Zend\DB\Select\Select;
 
 /**
  * Class for using connecting to a Zend_DB-based queuing system
@@ -47,7 +50,7 @@ use Zend;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DB extends \Zend\Queue\Adapter\AdapterAbstract
+class DB extends AbstractAdapter
 {
     /**
      * @var \Zend\Queue\Adapter\DB\Queue
@@ -71,31 +74,31 @@ class DB extends \Zend\Queue\Adapter\AdapterAbstract
      * @param  \Zend\Queue\Queue|null $queue
      * @return void
      */
-    public function __construct($options, Queue\Queue $queue = null)
+    public function __construct($options, Queue $queue = null)
     {
         parent::__construct($options, $queue);
 
-        if (!isset($this->_options['options'][Select\Select::FOR_UPDATE])) {
+        if (!isset($this->_options['options'][Select::FOR_UPDATE])) {
             // turn off auto update by default
-            $this->_options['options'][Select\Select::FOR_UPDATE] = false;
+            $this->_options['options'][Select::FOR_UPDATE] = false;
         }
 
-        if (!is_bool($this->_options['options'][Select\Select::FOR_UPDATE])) {
-            throw new Queue\Exception('Options array item: \Zend\DB\Select::FOR_UPDATE must be boolean');
+        if (!is_bool($this->_options['options'][Select::FOR_UPDATE])) {
+            throw new QueueException('Options array item: \Zend\DB\Select::FOR_UPDATE must be boolean');
         }
 
         if (isset($this->_options['dbAdapter'])
-            && $this->_options['dbAdapter'] instanceof \Zend\DB\Adapter\AbstractAdapter) {
+            && $this->_options['dbAdapter'] instanceof AbstractDBAdapter) {
             $db = $this->_options['dbAdapter'];
         } else {
             $db = $this->_initDBAdapter();
         }
 
-        $this->_queueTable = new Queue(array(
+        $this->_queueTable = new DB\Queue(array(
             'db' => $db,
         ));
 
-        $this->_messageTable = new Message(array(
+        $this->_messageTable = new DB\Message(array(
             'db' => $db,
         ));
 
@@ -113,23 +116,23 @@ class DB extends \Zend\Queue\Adapter\AdapterAbstract
     {
         $options = &$this->_options['driverOptions'];
         if (!array_key_exists('type', $options)) {
-            throw new Queue\Exception("Configuration array must have a key for 'type' for the database type to use");
+            throw new QueueException("Configuration array must have a key for 'type' for the database type to use");
         }
 
         if (!array_key_exists('host', $options)) {
-            throw new Queue\Exception("Configuration array must have a key for 'host' for the host to use");
+            throw new QueueException("Configuration array must have a key for 'host' for the host to use");
         }
 
         if (!array_key_exists('username', $options)) {
-            throw new Queue\Exception("Configuration array must have a key for 'username' for the username to use");
+            throw new QueueException("Configuration array must have a key for 'username' for the username to use");
         }
 
         if (!array_key_exists('password', $options)) {
-            throw new Queue\Exception("Configuration array must have a key for 'password' for the password to use");
+            throw new QueueException("Configuration array must have a key for 'password' for the password to use");
         }
 
         if (!array_key_exists('dbname', $options)) {
-            throw new Queue\Exception("Configuration array must have a key for 'dbname' for the database to use");
+            throw new QueueException("Configuration array must have a key for 'dbname' for the database to use");
         }
 
         $type = $options['type'];
@@ -138,7 +141,7 @@ class DB extends \Zend\Queue\Adapter\AdapterAbstract
         try {
             $db = DB_ns\DB::factory($type, $options);
         } catch (DB_ns\Exception $e) {
-            throw new Queue\Exception('Error connecting to database: ' . $e->getMessage(), $e->getCode(), $e);
+            throw new QueueException('Error connecting to database: ' . $e->getMessage(), $e->getCode(), $e);
         }
 
         return $db;
@@ -165,7 +168,7 @@ class DB extends \Zend\Queue\Adapter\AdapterAbstract
 
         try {
             $id = $this->getQueueId($name);
-        } catch (Queue\Exception $e) {
+        } catch (QueueException $e) {
             return false;
         }
 
@@ -200,7 +203,7 @@ class DB extends \Zend\Queue\Adapter\AdapterAbstract
                 return true;
             }
         } catch (\Exception $e) {
-            throw new Queue\Exception($e->getMessage(), $e->getCode(), $e);
+            throw new QueueException($e->getMessage(), $e->getCode(), $e);
         }
 
         return false;
@@ -230,7 +233,7 @@ class DB extends \Zend\Queue\Adapter\AdapterAbstract
             try {
                 $queue->delete();
             } catch (\Exception $e) {
-                throw new Queue\Exception($e->getMessage(), $e->getCode(), $e);
+                throw new QueueException($e->getMessage(), $e->getCode(), $e);
             }
         }
 
@@ -272,7 +275,7 @@ class DB extends \Zend\Queue\Adapter\AdapterAbstract
      * @return integer
      * @throws \Zend\Queue\Exception
      */
-    public function count(Queue\Queue $queue = null)
+    public function count(Queue $queue = null)
     {
         if ($queue === null) {
             $queue = $this->_queue;
@@ -300,7 +303,7 @@ class DB extends \Zend\Queue\Adapter\AdapterAbstract
      * @return \Zend\Queue\Message\Message
      * @throws \Zend\Queue\Exception - database error
      */
-    public function send($message, Queue\Queue $queue = null)
+    public function send($message, Queue $queue = null)
     {
         if ($this->_messageRow === null) {
             $this->_messageRow = $this->_messageTable->createRow();
@@ -318,7 +321,7 @@ class DB extends \Zend\Queue\Adapter\AdapterAbstract
         }
 
         if (!$this->isExists($queue->getName())) {
-            throw new Queue\Exception('Queue does not exist:' . $queue->getName());
+            throw new QueueException('Queue does not exist:' . $queue->getName());
         }
 
         $msg           = clone $this->_messageRow;
@@ -331,7 +334,7 @@ class DB extends \Zend\Queue\Adapter\AdapterAbstract
         try {
             $msg->save();
         } catch (\Exception $e) {
-            throw new Queue\Exception($e->getMessage(), $e->getCode(), $e);
+            throw new QueueException($e->getMessage(), $e->getCode(), $e);
         }
 
         $options = array(
@@ -351,7 +354,7 @@ class DB extends \Zend\Queue\Adapter\AdapterAbstract
      * @return \Zend\Queue\Message\MessageIterator
      * @throws \Zend\Queue\Exception - database error
      */
-    public function receive($maxMessages = null, $timeout = null, Queue\Queue $queue = null)
+    public function receive($maxMessages = null, $timeout = null, Queue $queue = null)
     {
         if ($maxMessages === null) {
             $maxMessages = 1;
@@ -374,7 +377,7 @@ class DB extends \Zend\Queue\Adapter\AdapterAbstract
                 $db->beginTransaction();
 
                 $query = $db->select();
-                if ($this->_options['options'][Select\Select::FOR_UPDATE]) {
+                if ($this->_options['options'][Select::FOR_UPDATE]) {
                     // turn on forUpdate
                     $query->forUpdate();
                 }
@@ -410,7 +413,7 @@ class DB extends \Zend\Queue\Adapter\AdapterAbstract
         } catch (\Exception $e) {
             $db->rollBack();
 
-            throw new Queue\Exception($e->getMessage(), $e->getCode(), $e);
+            throw new QueueException($e->getMessage(), $e->getCode(), $e);
         }
 
         $options = array(
@@ -431,7 +434,7 @@ class DB extends \Zend\Queue\Adapter\AdapterAbstract
      * @param  \Zend\Queue\Message\Message $message
      * @return boolean
      */
-    public function deleteMessage(\Zend\Queue\Message\Message $message)
+    public function deleteMessage(Message $message)
     {
         $db    = $this->_messageTable->getAdapter();
         $where = $db->quoteInto('handle=?', $message->handle);
@@ -495,7 +498,7 @@ class DB extends \Zend\Queue\Adapter\AdapterAbstract
         $queue = $this->_queueTable->fetchRow($query);
 
         if ($queue === null) {
-            throw new Queue\Exception('Queue does not exist: ' . $name);
+            throw new QueueException('Queue does not exist: ' . $name);
         }
 
         $this->_queues[$name] = (int)$queue->queue_id;

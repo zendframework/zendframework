@@ -40,8 +40,7 @@ use Zend\View;
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class NavigationTest
-    extends TestAbstract
+class NavigationTest extends TestAbstract
 {
     /**
      * Class name for view helper to test
@@ -59,14 +58,14 @@ class NavigationTest
 
     public function testHelperEntryPointWithoutAnyParams()
     {
-        $returned = $this->_helper->navigation();
+        $returned = $this->_helper->direct();
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav1, $returned->getContainer());
     }
 
     public function testHelperEntryPointWithContainerParam()
     {
-        $returned = $this->_helper->navigation($this->_nav2);
+        $returned = $this->_helper->direct($this->_nav2);
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav2, $returned->getContainer());
     }
@@ -218,25 +217,25 @@ class NavigationTest
     public function testGetAclReturnsAclInstanceSetWithSetDefaultAcl()
     {
         $acl = new Acl\Acl();
-        Navigation\HelperAbstract::setDefaultAcl($acl);
+        Navigation\AbstractHelper::setDefaultAcl($acl);
         $actual = $this->_helper->getAcl();
-        Navigation\HelperAbstract::setDefaultAcl(null);
+        Navigation\AbstractHelper::setDefaultAcl(null);
         $this->assertEquals($acl, $actual);
     }
 
     public function testSetDefaultAclAcceptsNull()
     {
         $acl = new Acl\Acl();
-        Navigation\HelperAbstract::setDefaultAcl($acl);
-        Navigation\HelperAbstract::setDefaultAcl(null);
+        Navigation\AbstractHelper::setDefaultAcl($acl);
+        Navigation\AbstractHelper::setDefaultAcl(null);
         $this->assertNull($this->_helper->getAcl());
     }
 
     public function testSetDefaultAclAcceptsNoParam()
     {
         $acl = new Acl\Acl();
-        Navigation\HelperAbstract::setDefaultAcl($acl);
-        Navigation\HelperAbstract::setDefaultAcl();
+        Navigation\AbstractHelper::setDefaultAcl($acl);
+        Navigation\AbstractHelper::setDefaultAcl();
         $this->assertNull($this->_helper->getAcl());
     }
 
@@ -290,37 +289,37 @@ class NavigationTest
     public function testSetDefaultRoleAcceptsString()
     {
         $expected = 'member';
-        Navigation\HelperAbstract::setDefaultRole($expected);
+        Navigation\AbstractHelper::setDefaultRole($expected);
         $actual = $this->_helper->getRole();
-        Navigation\HelperAbstract::setDefaultRole(null);
+        Navigation\AbstractHelper::setDefaultRole(null);
         $this->assertEquals($expected, $actual);
     }
 
     public function testSetDefaultRoleAcceptsRoleInterface()
     {
         $expected = new Role\GenericRole('member');
-        Navigation\HelperAbstract::setDefaultRole($expected);
+        Navigation\AbstractHelper::setDefaultRole($expected);
         $actual = $this->_helper->getRole();
-        Navigation\HelperAbstract::setDefaultRole(null);
+        Navigation\AbstractHelper::setDefaultRole(null);
         $this->assertEquals($expected, $actual);
     }
 
     public function testSetDefaultRoleAcceptsNull()
     {
-        Navigation\HelperAbstract::setDefaultRole(null);
+        Navigation\AbstractHelper::setDefaultRole(null);
         $this->assertNull($this->_helper->getRole());
     }
 
     public function testSetDefaultRoleAcceptsNoParam()
     {
-        Navigation\HelperAbstract::setDefaultRole();
+        Navigation\AbstractHelper::setDefaultRole();
         $this->assertNull($this->_helper->getRole());
     }
 
     public function testSetDefaultRoleThrowsExceptionWhenGivenAnInt()
     {
         try {
-            Navigation\HelperAbstract::setDefaultRole(1337);
+            Navigation\AbstractHelper::setDefaultRole(1337);
             $this->fail('An invalid argument was given, but a ' .
                         'Zend_View_Exception was not thrown');
         } catch (View\Exception $e) {
@@ -331,7 +330,7 @@ class NavigationTest
     public function testSetDefaultRoleThrowsExceptionWhenGivenAnArbitraryObject()
     {
         try {
-            Navigation\HelperAbstract::setDefaultRole(new \stdClass());
+            Navigation\AbstractHelper::setDefaultRole(new \stdClass());
             $this->fail('An invalid argument was given, but a ' .
                         'Zend_View_Exception was not thrown');
         } catch (View\Exception $e) {
@@ -357,7 +356,7 @@ class NavigationTest
 
     public function testPageIdShouldBeNormalized()
     {
-        $nl = \Zend\Navigation\Navigation::EOL;
+        $nl = PHP_EOL;
 
         $container = new \Zend\Navigation\Navigation(array(
             array(

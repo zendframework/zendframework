@@ -25,6 +25,9 @@
  */
 namespace Zend\Navigation\Page;
 
+use Zend\Navigation\AbstractPage,
+    Zend\Navigation\Exception as NavigationException;
+
 /**
  * Represents a page that is defined by specifying a URI
  *
@@ -36,7 +39,7 @@ namespace Zend\Navigation\Page;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Uri extends Page
+class Uri extends AbstractPage
 {
     /**
      * Page URI
@@ -55,7 +58,7 @@ class Uri extends Page
     public function setUri($uri)
     {
         if (null !== $uri && !is_string($uri)) {
-            throw new \Zend\Navigation\Exception(
+            throw new NavigationException(
                     'Invalid argument: $uri must be a string or null');
         }
 

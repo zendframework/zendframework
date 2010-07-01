@@ -9123,10 +9123,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Navigation/Page.php</originalRelativeFilePath>
       <originalClassName>Zend_Navigation_Page</originalClassName>
-      <newRelativeFilePath>Zend/Navigation/Page/Page.php</newRelativeFilePath>
-      <newNamespace>Zend\Navigation\Page</newNamespace>
-      <newClassName>Page</newClassName>
-      <newFullyQualifiedName>Zend\Navigation\Page\Page</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Navigation/AbstractPage.php</newRelativeFilePath>
+      <newNamespace>Zend\Navigation</newNamespace>
+      <newClassName>AbstractPage</newClassName>
+      <newFullyQualifiedName>Zend\Navigation\AbstractPage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Navigation.php</originalRelativeFilePath>

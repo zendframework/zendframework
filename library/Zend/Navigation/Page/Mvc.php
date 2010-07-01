@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\Navigation\Page;
-use Zend\Navigation;
+
+use Zend\Navigation\AbstractPage,
+    Zend\Navigation\Exception as NavigationException;
 
 /**
  * Represents a page that is defined using module, controller, action, route
@@ -40,7 +42,7 @@ use Zend\Navigation;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Mvc extends Page
+class Mvc extends AbstractPage
 {
     /**
      * Action name to use when assembling URL
@@ -211,7 +213,7 @@ class Mvc extends Page
     public function setAction($action)
     {
         if (null !== $action && !is_string($action)) {
-            throw new Navigation\Exception(
+            throw new NavigationException(
                     'Invalid argument: $action must be a string or null');
         }
 
@@ -244,7 +246,7 @@ class Mvc extends Page
     public function setController($controller)
     {
         if (null !== $controller && !is_string($controller)) {
-            throw new Navigation\Exception(
+            throw new NavigationException(
                     'Invalid argument: $controller must be a string or null');
         }
 
@@ -277,7 +279,7 @@ class Mvc extends Page
     public function setModule($module)
     {
         if (null !== $module && !is_string($module)) {
-            throw new Navigation\Exception(
+            throw new NavigationException(
                     'Invalid argument: $module must be a string or null');
         }
 
@@ -344,7 +346,7 @@ class Mvc extends Page
     public function setRoute($route)
     {
         if (null !== $route && (!is_string($route) || strlen($route) < 1)) {
-            throw new Navigation\Exception(
+            throw new NavigationException(
                  'Invalid argument: $route must be a non-empty string or null');
         }
 

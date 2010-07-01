@@ -106,7 +106,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Adapter
      *
-     * @var \Zend\Paginator\Adapter\AdapterInterface
+     * @var \Zend\Paginator\Adapter
      */
     protected $_adapter = null;
 
@@ -417,7 +417,7 @@ class Paginator implements \Countable, \IteratorAggregate
      */
     public function __construct($adapter)
     {
-        if ($adapter instanceof Adapter\AdapterInterface) {
+        if ($adapter instanceof Adapter) {
             $this->_adapter = $adapter;
         } else if ($adapter instanceof AdapterAggregate) {
             $this->_adapter = $adapter->getPaginatorAdapter();
@@ -546,7 +546,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Returns the adapter.
      *
-     * @return \Zend\Paginator\Adapter\AdapterInterface
+     * @return \Zend\Paginator\Adapter
      */
     public function getAdapter()
     {
@@ -1048,7 +1048,7 @@ class Paginator implements \Countable, \IteratorAggregate
      * Loads a scrolling style.
      *
      * @param string $scrollingStyle
-     * @return \Zend\Paginator\ScrollingStyle\ScrollingStyleInterface
+     * @return \Zend\Paginator\ScrollingStyle
      */
     protected function _loadScrollingStyle($scrollingStyle = null)
     {
@@ -1058,7 +1058,7 @@ class Paginator implements \Countable, \IteratorAggregate
 
         switch (strtolower(gettype($scrollingStyle))) {
             case 'object':
-                if (!$scrollingStyle instanceof ScrollingStyle\ScrollingStyleInterface) {
+                if (!$scrollingStyle instanceof ScrollingStyle) {
                     throw new View\Exception('Scrolling style must implement ' .
                         'Zend_Paginator_ScrollingStyle_Interface');
                 }

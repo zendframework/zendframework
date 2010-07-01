@@ -23,22 +23,24 @@
  * @namespace
  */
 namespace Zend\Paginator\Adapter;
-use Zend\DB\Select;
-use Zend\DB;
-use Zend\Paginator;
+
+use Zend\DB\Select,
+    Zend\DB,
+    Zend\Paginator\Adapter,
+    Zend\Paginator\Exception as PaginatorException;
 
 /**
  * @uses       \Zend\DB\DB
  * @uses       \Zend\DB\Expr
  * @uses       \Zend\DB\Select\Select
- * @uses       \Zend\Paginator\Adapter\AdapterInterface
+ * @uses       \Zend\Paginator\Adapter
  * @uses       \Zend\Paginator\Exception
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DbSelect implements AdapterInterface
+class DbSelect implements Adapter
 {
     /**
      * Name of the row count column
@@ -108,7 +110,7 @@ class DbSelect implements AdapterInterface
 
             // The select query can contain only one column, which should be the row count column
             if (false === strpos($countColumnPart, $rowCountColumn)) {
-                throw new Paginator\Exception('Row count column not found');
+                throw new PaginatorException('Row count column not found');
             }
 
             $result = $rowCount->query(DB\DB::FETCH_ASSOC)->fetch();
@@ -117,7 +119,7 @@ class DbSelect implements AdapterInterface
         } else if (is_integer($rowCount)) {
             $this->_rowCount = $rowCount;
         } else {
-            throw new Paginator\Exception('Invalid row count');
+            throw new PaginatorException('Invalid row count');
         }
 
         return $this;

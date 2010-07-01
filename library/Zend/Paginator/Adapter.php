@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Paginator\Adapter;
+namespace Zend\Paginator;
 
 /**
  * Interface for pagination adapters.
@@ -33,7 +33,7 @@ namespace Zend\Paginator\Adapter;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface AdapterInterface extends \Countable
+interface Adapter extends \Countable
 {
     /**
      * Returns the total number of rows in the collection.

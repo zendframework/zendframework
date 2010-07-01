@@ -389,7 +389,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Folder\Maildir($this->_params);
         $root = $mail->getFolders();
-        $root->foobar = new Folder\Folder('foobar', DIRECTORY_SEPARATOR . 'foobar');
+        $root->foobar = new Folder('foobar', DIRECTORY_SEPARATOR . 'foobar');
 
         try {
             $mail->selectFolder('foobar');
@@ -404,7 +404,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Folder\Maildir($this->_params);
         $root = $mail->getFolders();
-        $root->foobar = new Folder\Folder('foobar', 'foobar');
+        $root->foobar = new Folder('foobar', 'foobar');
 
         try {
             $mail->selectFolder('foobar');
@@ -419,7 +419,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Folder\Maildir($this->_params);
         $root = $mail->getFolders();
-        $root->foobar = new Folder\Folder('foobar', 'foobar', false);
+        $root->foobar = new Folder('foobar', 'foobar', false);
 
         try {
             $mail->selectFolder('foobar');

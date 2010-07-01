@@ -22,20 +22,18 @@
 /**
  * @namespace
  */
-namespace Zend\Mail\Message;
-use Zend\Mail;
-use Zend\Mail\Part as MailPart;
+namespace Zend\Mail;
 
 /**
  * @uses       \Zend\Mail\Exception
  * @uses       \Zend\Mail\Message\MessageInterface
- * @uses       \Zend\Mail\Part\Part
+ * @uses       \Zend\Mail\Part
  * @category   Zend
  * @package    Zend_Mail
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Message extends MailPart\Part implements MessageInterface
+class Message extends Part implements MailMessage
 {
     /**
      * flags for this message
@@ -59,7 +57,7 @@ class Message extends MailPart\Part implements MessageInterface
             if (!is_resource($params['file'])) {
                 $params['raw'] = @file_get_contents($params['file']);
                 if ($params['raw'] === false) {
-                    throw new Mail\Exception('could not open file');
+                    throw new Exception('could not open file');
                 }
             } else {
                 $params['raw'] = stream_get_contents($params['file']);

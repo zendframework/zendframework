@@ -41,7 +41,7 @@ class MaildirOldMessage extends Storage\Maildir
      * used message class
      * @var string
      */
-    protected $_messageClass = '\Zend\Mail\Message\Message';
+    protected $_messageClass = '\Zend\Mail\Message';
 }
 
 /**

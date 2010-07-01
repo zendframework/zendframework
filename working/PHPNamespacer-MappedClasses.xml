@@ -8347,18 +8347,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Message/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Message_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Message/MessageInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Message</newNamespace>
-      <newClassName>MessageInterface</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Message\MessageInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Mail/MailMessage.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
+      <newClassName>MailMessage</newClassName>
+      <newFullyQualifiedName>Zend\Mail\MailMessage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Message.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Message</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Message/Message.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Message</newNamespace>
+      <newRelativeFilePath>Zend/Mail/Message.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
       <newClassName>Message</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Message\Message</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\Message</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Part/File.php</originalRelativeFilePath>
@@ -8371,26 +8371,26 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Part/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Part_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Part/PartInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Part</newNamespace>
-      <newClassName>PartInterface</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Part\PartInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Mail/MailPart.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
+      <newClassName>MailPart</newClassName>
+      <newFullyQualifiedName>Zend\Mail\MailPart</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Part.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Part</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Part/Part.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Part</newNamespace>
+      <newRelativeFilePath>Zend/Mail/Part.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
       <newClassName>Part</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Part\Part</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\Part</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Protocol/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Protocol_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Protocol/AbstractProtocol.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Protocol</newNamespace>
+      <newRelativeFilePath>Zend/Mail/AbstractProtocol.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
       <newClassName>AbstractProtocol</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Protocol\AbstractProtocol</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\AbstractProtocol</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Protocol/Exception.php</originalRelativeFilePath>
@@ -8443,18 +8443,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Protocol/Smtp.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Protocol_Smtp</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Protocol/Smtp/Smtp.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Protocol\Smtp</newNamespace>
+      <newRelativeFilePath>Zend/Mail/Protocol/Smtp.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail\Protocol</newNamespace>
       <newClassName>Smtp</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Protocol\Smtp\Smtp</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\Protocol\Smtp</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Storage_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Storage/AbstractStorage.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Storage</newNamespace>
+      <newRelativeFilePath>Zend/Mail/AbstractStorage.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
       <newClassName>AbstractStorage</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Storage\AbstractStorage</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\AbstractStorage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Exception.php</originalRelativeFilePath>
@@ -8467,10 +8467,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Folder/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Storage_Folder_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Storage/Folder/FolderInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Storage\Folder</newNamespace>
-      <newClassName>FolderInterface</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Storage\Folder\FolderInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Mail/Storage/MailFolder.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail\Storage</newNamespace>
+      <newClassName>MailFolder</newClassName>
+      <newFullyQualifiedName>Zend\Mail\Storage\MailFolder</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Folder/Maildir.php</originalRelativeFilePath>
@@ -8491,10 +8491,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Folder.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Storage_Folder</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Storage/Folder/Folder.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Storage\Folder</newNamespace>
+      <newRelativeFilePath>Zend/Mail/Storage/Folder.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail\Storage</newNamespace>
       <newClassName>Folder</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Storage\Folder\Folder</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\Storage\Folder</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Imap.php</originalRelativeFilePath>
@@ -8531,10 +8531,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Writable/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Storage_Writable_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Storage/Writable/WritableInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Storage\Writable</newNamespace>
-      <newClassName>WritableInterface</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Storage\Writable\WritableInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Mail/Storage/Writable.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail\Storage</newNamespace>
+      <newClassName>Writable</newClassName>
+      <newFullyQualifiedName>Zend\Mail\Storage\Writable</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Writable/Maildir.php</originalRelativeFilePath>
@@ -8547,18 +8547,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Storage</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Storage/Storage.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Storage</newNamespace>
+      <newRelativeFilePath>Zend/Mail/Storage.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
       <newClassName>Storage</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Storage\Storage</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\Storage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Transport/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Transport_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Transport/AbstractTransport.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Transport</newNamespace>
+      <newRelativeFilePath>Zend/Mail/AbstractTransport.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
       <newClassName>AbstractTransport</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Transport\AbstractTransport</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\AbstractTransport</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Transport/Exception.php</originalRelativeFilePath>

@@ -25,6 +25,9 @@
  */
 namespace Zend\Mail\Storage;
 
+use Zend\Mail\AbstractStorage,
+    Zend\Mail\Storage;
+
 /**
  * @uses       \Zend\Mail\Message\File
  * @uses       \Zend\Mail\Storage\Storage

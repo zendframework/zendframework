@@ -24,8 +24,9 @@
 /**
  * @namespace
  */
-namespace Zend\Mail\Protocol\Smtp;
-use Zend\Mail\Protocol;
+namespace Zend\Mail\Protocol;
+
+use Zend\Mail\AbstractProtocol;
 
 /**
  * Smtp implementation of Zend_Mail_Protocol_Abstract
@@ -41,7 +42,7 @@ use Zend\Mail\Protocol;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Smtp extends Protocol\AbstractProtocol
+class Smtp extends AbstractProtocol
 {
     /**
      * The transport method for the socket
@@ -133,7 +134,7 @@ class Smtp extends Protocol\AbstractProtocol
                     break;
 
                 default:
-                    throw new Protocol\Exception($config['ssl'] . ' is unsupported SSL type');
+                    throw new Exception($config['ssl'] . ' is unsupported SSL type');
                     break;
             }
         }
@@ -171,12 +172,12 @@ class Smtp extends Protocol\AbstractProtocol
     {
         // Respect RFC 2821 and disallow HELO attempts if session is already initiated.
         if ($this->_sess === true) {
-            throw new Protocol\Exception('Cannot issue HELO to existing session');
+            throw new Exception('Cannot issue HELO to existing session');
         }
 
         // Validate client hostname
         if (!$this->_validHost->isValid($host)) {
-            throw new Protocol\Exception(join(', ', $this->_validHost->getMessages()));
+            throw new Exception(join(', ', $this->_validHost->getMessages()));
         }
 
         // Initiate helo sequence
@@ -188,7 +189,7 @@ class Smtp extends Protocol\AbstractProtocol
             $this->_send('STARTTLS');
             $this->_expect(220, 180);
             if (!stream_socket_enable_crypto($this->_socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
-                throw new Protocol\Exception('Unable to connect via TLS');
+                throw new Exception('Unable to connect via TLS');
             }
             $this->_ehlo($host);
         }
@@ -211,10 +212,10 @@ class Smtp extends Protocol\AbstractProtocol
         try {
             $this->_send('EHLO ' . $host);
             $this->_expect(250, 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
-        } catch (Protocol\Exception $e) {
+        } catch (Exception $e) {
             $this->_send('HELO ' . $host);
             $this->_expect(250, 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
-        } catch (Protocol\Exception $e) {
+        } catch (Exception $e) {
             throw $e;
         }
     }
@@ -230,7 +231,7 @@ class Smtp extends Protocol\AbstractProtocol
     public function mail($from)
     {
         if ($this->_sess !== true) {
-            throw new Protocol\Exception('A valid session has not been started');
+            throw new Exception('A valid session has not been started');
         }
 
         $this->_send('MAIL FROM:<' . $from . '>');
@@ -253,7 +254,7 @@ class Smtp extends Protocol\AbstractProtocol
     public function rcpt($to)
     {
         if ($this->_mail !== true) {
-            throw new Protocol\Exception('No sender reverse path has been supplied');
+            throw new Exception('No sender reverse path has been supplied');
         }
 
         // Set rcpt to true, as per 4.1.1.3 of RFC 2821
@@ -274,7 +275,7 @@ class Smtp extends Protocol\AbstractProtocol
     {
         // Ensure recipients have been set
         if ($this->_rcpt !== true) {
-            throw new Protocol\Exception('No recipient forward path has been supplied');
+            throw new Exception('No recipient forward path has been supplied');
         }
 
         $this->_send('DATA');
@@ -368,7 +369,7 @@ class Smtp extends Protocol\AbstractProtocol
     public function auth()
     {
         if ($this->_auth === true) {
-            throw new Protocol\Exception('Already authenticated for this session');
+            throw new Exception('Already authenticated for this session');
         }
     }
 

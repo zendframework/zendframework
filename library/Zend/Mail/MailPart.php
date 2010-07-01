@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Mail\Part;
+namespace Zend\Mail;
 
 /**
  * @uses       RecursiveIterator
@@ -33,7 +33,7 @@ namespace Zend\Mail\Part;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface PartInterface extends \RecursiveIterator
+interface MailPart extends \RecursiveIterator
 {
     /**
      * Check if part is a multipart message

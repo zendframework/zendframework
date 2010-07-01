@@ -103,7 +103,7 @@ class InterfaceTest extends \PHPUnit_Framework_TestCase
         $list = new Storage\Mbox(array('filename' => $this->_mboxFile));
 
         foreach ($list as $key => $message) {
-            $this->assertTrue($message instanceof \Zend\Mail\Message\MessageInterface, 'value in iteration is not a mail message');
+            $this->assertTrue($message instanceof \Zend\Mail\MailMessage, 'value in iteration is not a mail message');
         }
     }
 

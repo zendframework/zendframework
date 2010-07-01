@@ -23,9 +23,9 @@
 /**
  * @namespace
  */
-namespace Zend\Mail\Transport;
+namespace Zend\Mail;
+
 use Zend\Mime;
-use Zend\Mail;
 
 /**
  * Abstract for sending eMails through different
@@ -208,7 +208,7 @@ abstract class AbstractTransport
             }
         }
         if (!$sane) {
-            throw new Mail\Exception('At least one mail header line is too long');
+            throw new Exception('At least one mail header line is too long');
         }
     }
 
@@ -292,7 +292,7 @@ abstract class AbstractTransport
      * @return void
      * @throws \Zend\Mail\Transport\Exception if mail is empty
      */
-    public function send(\Zend\Mail\Mail $mail)
+    public function send(Mail $mail)
     {
         $this->_isMultipart = false;
         $this->_mail        = $mail;

@@ -24,26 +24,27 @@
  * @namespace
  */
 namespace Zend\Mail\Storage;
-use Zend\Mail\Protocol;
+
+use Zend\Mail\AbstractStorage,
+    Zend\Mail\Storage,
+    Zend\Mail\Protocol;
 
 /**
  * @uses       \Zend\Mail\Message\Message
  * @uses       \Zend\Mail\Protocol\Imap
- * @uses       \Zend\Mail\Storage\Storage
- * @uses       \Zend\Mail\Storage\AbstractStorage
+ * @uses       \Zend\Mail\Storage
+ * @uses       \Zend\Mail\AbstractStorage
  * @uses       \Zend\Mail\Storage\Exception
- * @uses       \Zend\Mail\Storage\Folder\Folder
- * @uses       \Zend\Mail\Storage\Folder\FolderInterface
- * @uses       \Zend\Mail\Storage\Writable\WritableInterface
+ * @uses       \Zend\Mail\Storage\Folder
+ * @uses       \Zend\Mail\Storage\MailFolder
+ * @uses       \Zend\Mail\Storage\Writable
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Imap
-    extends AbstractStorage
-    implements Folder\FolderInterface, Writable\WritableInterface
+class Imap extends AbstractStorage implements MailFolder, Writable
 {
     // TODO: with an internal cache we could optimize this class, or create an extra class with
     // such optimizations. Especially the various fetch calls could be combined to one cache call
@@ -327,7 +328,7 @@ class Imap
      * get root folder or given folder
      *
      * @param  string $rootFolder get folder structure for given folder, else root
-     * @return \Zend\Mail\Storage\Folder\Folder root or wanted folder
+     * @return \Zend\Mail\Storage\Folder root or wanted folder
      * @throws \Zend\Mail\Storage\Exception
      * @throws \Zend\Mail\Protocol\Exception
      */
@@ -339,7 +340,7 @@ class Imap
         }
 
         ksort($folders, SORT_STRING);
-        $root = new Folder\Folder('/', '/', false);
+        $root = new Folder('/', '/', false);
         $stack = array(null);
         $folderStack = array(null);
         $parentFolder = $root;
@@ -358,7 +359,7 @@ class Imap
 
                     array_push($stack, $parent);
                     $parent = $globalName . $data['delim'];
-                    $folder = new Folder\Folder($localName, $globalName, $selectable);
+                    $folder = new Folder($localName, $globalName, $selectable);
                     $parentFolder->$localName = $folder;
                     array_push($folderStack, $parentFolder);
                     $parentFolder = $folder;
@@ -381,7 +382,7 @@ class Imap
      *
      * folder must be selectable!
      *
-     * @param  \Zend\Mail\Storage\Folder\Folder|string $globalName global name of folder or instance for subfolder
+     * @param  \Zend\Mail\Storage\Folder|string $globalName global name of folder or instance for subfolder
      * @return null
      * @throws \Zend\Mail\Storage\Exception
      * @throws \Zend\Mail\Protocol\Exception
@@ -399,7 +400,7 @@ class Imap
     /**
      * get \Zend\Mail\Storage\Folder instance for current folder
      *
-     * @return \Zend\Mail\Storage\Folder\Folder instance of current folder
+     * @return \Zend\Mail\Storage\Folder instance of current folder
      * @throws \Zend\Mail\Storage\Exception
      */
     public function getCurrentFolder()
@@ -414,14 +415,14 @@ class Imap
      * may be used as parent or which chars may be used in the folder name
      *
      * @param  string                          $name         global name of folder, local name if $parentFolder is set
-     * @param  string|\Zend\Mail\Storage\Folder\Folder $parentFolder parent folder for new folder, else root folder is parent
+     * @param  string|\Zend\Mail\Storage\Folder $parentFolder parent folder for new folder, else root folder is parent
      * @return null
      * @throws \Zend\Mail\Storage\Exception
      */
     public function createFolder($name, $parentFolder = null)
     {
         // TODO: we assume / as the hierarchy delim - need to get that from the folder class!
-        if ($parentFolder instanceof Folder\Folder) {
+        if ($parentFolder instanceof Folder) {
             $folder = $parentFolder->getGlobalName() . '/' . $name;
         } else if ($parentFolder != null) {
             $folder = $parentFolder . '/' . $name;
@@ -437,13 +438,13 @@ class Imap
     /**
      * remove a folder
      *
-     * @param  string|\Zend\Mail\Storage\Folder\Folder $name      name or instance of folder
+     * @param  string|\Zend\Mail\Storage\Folder $name      name or instance of folder
      * @return null
      * @throws \Zend\Mail\Storage\Exception
      */
     public function removeFolder($name)
     {
-        if ($name instanceof Folder\Folder) {
+        if ($name instanceof Folder) {
             $name = $name->getGlobalName();
         }
 
@@ -457,14 +458,14 @@ class Imap
      *
      * The new name has the same restrictions as in createFolder()
      *
-     * @param  string|\Zend\Mail\Storage\Folder\Folder $oldName name or instance of folder
+     * @param  string|\Zend\Mail\Storage\Folder $oldName name or instance of folder
      * @param  string                          $newName new global name of folder
      * @return null
      * @throws \Zend\Mail\Storage\Exception
      */
     public function renameFolder($oldName, $newName)
     {
-        if ($oldName instanceof Folder\Folder) {
+        if ($oldName instanceof Folder) {
             $oldName = $oldName->getGlobalName();
         }
 
@@ -477,7 +478,7 @@ class Imap
      * append a new message to mail storage
      *
      * @param  string                                     $message message as string or instance of message class
-     * @param  null|string|\Zend\Mail\Storage\Folder\Folder       $folder  folder for new message, else current folder is taken
+     * @param  null|string|\Zend\Mail\Storage\Folder       $folder  folder for new message, else current folder is taken
      * @param  null|array                                 $flags   set flags for new message, else a default set is used
      * @throws \Zend\Mail\Storage\Exception
      */
@@ -502,7 +503,7 @@ class Imap
      * copy an existing message
      *
      * @param  int                             $id     number of message
-     * @param  string|\Zend\Mail\Storage\Folder\Folder $folder name or instance of targer folder
+     * @param  string|\Zend\Mail\Storage\Folder $folder name or instance of targer folder
      * @return null
      * @throws \Zend\Mail\Storage\Exception
      */
@@ -519,7 +520,7 @@ class Imap
      * NOTE: imap has no native move command, thus it's emulated with copy and delete
      *
      * @param  int                             $id     number of message
-     * @param  string|\Zend\Mail\Storage\Folder\Folder $folder name or instance of targer folder
+     * @param  string|\Zend\Mail\Storage\Folder $folder name or instance of targer folder
      * @return null
      * @throws \Zend\Mail\Storage\Exception
      */

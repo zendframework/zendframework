@@ -386,7 +386,7 @@ class MboxFolderTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Folder\Mbox($this->_params);
         $root = $mail->getFolders();
-        $root->foobar = new Folder\Folder('x', 'x');
+        $root->foobar = new Folder('x', 'x');
         try {
             $mail->getFolders('foobar');
         } catch (\Exception $e) {
@@ -400,7 +400,7 @@ class MboxFolderTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Folder\Mbox($this->_params);
         $root = $mail->getFolders();
-        $root->foobar = new Folder\Folder('foobar', DIRECTORY_SEPARATOR . 'foobar');
+        $root->foobar = new Folder('foobar', DIRECTORY_SEPARATOR . 'foobar');
 
         try {
             $mail->selectFolder('foobar');

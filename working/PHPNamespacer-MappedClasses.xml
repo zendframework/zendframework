@@ -8107,10 +8107,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Locale/Data.php</originalRelativeFilePath>
       <originalClassName>Zend_Locale_Data</originalClassName>
-      <newRelativeFilePath>Zend/Locale/Data/Data.php</newRelativeFilePath>
-      <newNamespace>Zend\Locale\Data</newNamespace>
+      <newRelativeFilePath>Zend/Locale/Data.php</newRelativeFilePath>
+      <newNamespace>Zend\Locale</newNamespace>
       <newClassName>Data</newClassName>
-      <newFullyQualifiedName>Zend\Locale\Data\Data</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Locale\Data</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Locale/Exception.php</originalRelativeFilePath>

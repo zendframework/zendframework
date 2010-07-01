@@ -23,11 +23,9 @@
 /**
  * @namespace
  */
-namespace Zend\Locale\Data;
+namespace Zend\Locale;
 
-use Zend\Locale\Exception,
-    Zend\Locale\Locale,
-    Zend\Cache\Cache,
+use Zend\Cache\Cache,
     Zend\Cache\Frontend as CacheFrontend;
 
 /**
@@ -153,7 +151,7 @@ class Data
         // load locale file if not already in cache
         // needed for alias tag when referring to other locale
         if (empty(self::$_ldml[(string) $locale])) {
-            $filename = __DIR__ . '/resources/' . $locale . '.xml';
+            $filename = __DIR__ . '/Data/resources/' . $locale . '.xml';
             if (!file_exists($filename)) {
                 throw new Exception("Missing locale file '$filename' for '$locale' locale.");
             }

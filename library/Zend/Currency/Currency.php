@@ -176,10 +176,10 @@ class Currency
         $format = $options['format'];
         $locale = $options['locale'];
         if (empty($format)) {
-            $format = Data\Data::getContent($locale, 'currencynumber');
+            $format = Data::getContent($locale, 'currencynumber');
         } else if (Locale\Locale::isLocale($format, true, false)) {
             $locale = $format;
-            $format = Data\Data::getContent($format, 'currencynumber');
+            $format = Data::getContent($format, 'currencynumber');
         }
 
         $original = $value;
@@ -313,7 +313,7 @@ class Currency
         }
 
         // Get the available currencies for this country
-        $data = Data\Data::getContent($locale, 'currencytoregion', $country);
+        $data = Data::getContent($locale, 'currencytoregion', $country);
         if ((empty($currency) === false) and (empty($data) === false)) {
             $abbreviation = $currency;
         } else {
@@ -340,9 +340,9 @@ class Currency
         $params = self::_checkParams($currency, $locale);
 
         // Get the symbol
-        $symbol = Data\Data::getContent($params['locale'], 'currencysymbol', $params['currency']);
+        $symbol = Data::getContent($params['locale'], 'currencysymbol', $params['currency']);
         if (empty($symbol) === true) {
-            $symbol = Data\Data::getContent($params['locale'], 'currencysymbol', $params['name']);
+            $symbol = Data::getContent($params['locale'], 'currencysymbol', $params['name']);
         }
 
         if (empty($symbol) === true) {
@@ -372,9 +372,9 @@ class Currency
             return $params['name'];
         }
 
-        $list = Data\Data::getContent($params['locale'], 'currencytoname', $params['currency']);
+        $list = Data::getContent($params['locale'], 'currencytoname', $params['currency']);
         if (empty($list) === true) {
-            $list = Data\Data::getContent($params['locale'], 'nametocurrency', $params['currency']);
+            $list = Data::getContent($params['locale'], 'nametocurrency', $params['currency']);
             if (empty($list) === false) {
                 $list = $params['currency'];
             }
@@ -403,9 +403,9 @@ class Currency
         $params = self::_checkParams($currency, $locale);
 
         // Get the name
-        $name = Data\Data::getContent($params['locale'], 'nametocurrency', $params['currency']);
+        $name = Data::getContent($params['locale'], 'nametocurrency', $params['currency']);
         if (empty($name) === true) {
-            $name = Data\Data::getContent($params['locale'], 'nametocurrency', $params['name']);
+            $name = Data::getContent($params['locale'], 'nametocurrency', $params['name']);
         }
 
         if (empty($name) === true) {
@@ -432,7 +432,7 @@ class Currency
             throw new Exception('No currency defined');
         }
 
-        $data = Data\Data::getContent('', 'regiontocurrency', $currency);
+        $data = Data::getContent('', 'regiontocurrency', $currency);
 
         $result = explode(' ', $data);
         return $result;
@@ -454,7 +454,7 @@ class Currency
             }
         }
 
-        return Data\Data::getList('', 'regiontocurrency', $region);
+        return Data::getList('', 'regiontocurrency', $region);
     }
 
     /**
@@ -484,7 +484,7 @@ class Currency
      */
     public static function getCache()
     {
-        return Data\Data::getCache();
+        return Data::getCache();
     }
 
     /**
@@ -495,7 +495,7 @@ class Currency
      */
     public static function setCache(Frontend $cache)
     {
-        Data\Data::setCache($cache);
+        Data::setCache($cache);
     }
 
     /**
@@ -505,7 +505,7 @@ class Currency
      */
     public static function hasCache()
     {
-        return Data\Data::hasCache();
+        return Data::hasCache();
     }
 
     /**
@@ -515,7 +515,7 @@ class Currency
      */
     public static function removeCache()
     {
-        Data\Data::removeCache();
+        Data::removeCache();
     }
 
     /**
@@ -525,7 +525,7 @@ class Currency
      */
     public static function clearCache()
     {
-        Data\Data::clearCache();
+        Data::clearCache();
     }
 
     /**

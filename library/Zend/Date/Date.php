@@ -26,7 +26,7 @@ namespace Zend\Date;
 use Zend\TimeSync;
 use Zend\Locale\Locale;
 use Zend\Locale\Format;
-use Zend\Locale\Data\Data;
+use Zend\Locale\Data;
 use Zend\Locale\Math\Math;
 
 /**

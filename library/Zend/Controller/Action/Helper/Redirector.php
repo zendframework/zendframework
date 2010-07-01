@@ -479,9 +479,7 @@ class Redirector extends AbstractHelper
     {
         if ($this->getCloseSessionOnExit()) {
             // Close session, if started
-            if (class_exists('Zend_Session', false) && Session\Manager::isStarted()) {
-                Session\Manager::writeClose();
-            } elseif (isset($_SESSION)) {
+            if (isset($_SESSION) && !empty($_SESSION)) {
                 session_write_close();
             }
         }

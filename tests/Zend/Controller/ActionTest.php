@@ -468,7 +468,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class TestController extends \Zend\Controller\Action\Action
+class TestController extends \Zend\Controller\Action
 {
     public $initArgs = array();
 

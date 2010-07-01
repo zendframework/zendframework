@@ -23,9 +23,10 @@
 /**
  * @namespace
  */
-namespace ZendTest\Validate\Db;
-use Zend\Db\Table;
-use Zend\Validator\Db;
+namespace ZendTest\Validator\DB;
+
+use Zend\DB\Table\AbstractTable,
+    Zend\Validator\DB\NoRecordExists as NoRecordExistsValidator;
 
 
 /**
@@ -56,9 +57,8 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->markTestSkipped('Waiting till Zend_Db is converted to namespaces');
-        $this->_adapterHasResult = new \Db_MockHasResult();
-        $this->_adapterNoResult = new \Db_MockNoResult();
+        $this->_adapterHasResult = new TestAsset\MockHasResult();
+        $this->_adapterNoResult = new TestAsset\MockNoResult();
     }
 
     /**
@@ -68,8 +68,8 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicFindsRecord()
     {
-        Table\AbstractTable::setDefaultAdapter($this->_adapterHasResult);
-        $validator = new Db\NoRecordExists('users', 'field1');
+        AbstractTable::setDefaultAdapter($this->_adapterHasResult);
+        $validator = new NoRecordExistsValidator('users', 'field1');
         $this->assertFalse($validator->isValid('value1'));
     }
 
@@ -80,8 +80,8 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicFindsNoRecord()
     {
-        Table\AbstractTable::setDefaultAdapter($this->_adapterNoResult);
-        $validator = new Db\NoRecordExists('users', 'field1');
+        AbstractTable::setDefaultAdapter($this->_adapterNoResult);
+        $validator = new NoRecordExistsValidator('users', 'field1');
         $this->assertTrue($validator->isValid('nosuchvalue'));
     }
 
@@ -92,8 +92,8 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testExcludeWithArray()
     {
-        Table\AbstractTable::setDefaultAdapter($this->_adapterHasResult);
-        $validator = new Db\NoRecordExists('users', 'field1', array('field' => 'id', 'value' => 1));
+        AbstractTable::setDefaultAdapter($this->_adapterHasResult);
+        $validator = new NoRecordExistsValidator('users', 'field1', array('field' => 'id', 'value' => 1));
         $this->assertFalse($validator->isValid('value3'));
     }
 
@@ -105,8 +105,8 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testExcludeWithArrayNoRecord()
     {
-        Table\AbstractTable::setDefaultAdapter($this->_adapterNoResult);
-        $validator = new Db\NoRecordExists('users', 'field1', array('field' => 'id', 'value' => 1));
+        AbstractTable::setDefaultAdapter($this->_adapterNoResult);
+        $validator = new NoRecordExistsValidator('users', 'field1', array('field' => 'id', 'value' => 1));
         $this->assertTrue($validator->isValid('nosuchvalue'));
     }
 
@@ -118,8 +118,8 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testExcludeWithString()
     {
-        Table\AbstractTable::setDefaultAdapter($this->_adapterHasResult);
-        $validator = new Db\NoRecordExists('users', 'field1', 'id != 1');
+        AbstractTable::setDefaultAdapter($this->_adapterHasResult);
+        $validator = new NoRecordExistsValidator('users', 'field1', 'id != 1');
         $this->assertFalse($validator->isValid('value3'));
     }
 
@@ -131,8 +131,8 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testExcludeWithStringNoRecord()
     {
-        Table\AbstractTable::setDefaultAdapter($this->_adapterNoResult);
-        $validator = new Db\NoRecordExists('users', 'field1', 'id != 1');
+        AbstractTable::setDefaultAdapter($this->_adapterNoResult);
+        $validator = new NoRecordExistsValidator('users', 'field1', 'id != 1');
         $this->assertTrue($validator->isValid('nosuchvalue'));
     }
 
@@ -144,13 +144,10 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testThrowsExceptionWithNoAdapter()
     {
-        Table\AbstractTable::setDefaultAdapter(null);
-        try {
-            $validator = new Db\NoRecordExists('users', 'field1', 'id != 1');
-            $valid = $validator->isValid('nosuchvalue');
-            $this->markTestFailed('Did not throw exception');
-        } catch (\Exception $e) {
-        }
+        AbstractTable::setDefaultAdapter(null);
+        $validator = new NoRecordExistsValidator('users', 'field1', 'id != 1');
+        $this->setExpectedException('Zend\Validator\Exception');
+        $valid = $validator->isValid('nosuchvalue');
     }
 
     /**
@@ -160,8 +157,8 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithSchema()
     {
-        Table\AbstractTable::setDefaultAdapter($this->_adapterHasResult);
-        $validator = new Db\NoRecordExists(array('table' => 'users',
+        AbstractTable::setDefaultAdapter($this->_adapterHasResult);
+        $validator = new NoRecordExistsValidator(array('table' => 'users',
                                                                'schema' => 'my'),
                                                          'field1');
         $this->assertFalse($validator->isValid('value1'));
@@ -174,8 +171,8 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithSchemaNoResult()
     {
-        Table\AbstractTable::setDefaultAdapter($this->_adapterNoResult);
-        $validator = new Db\NoRecordExists(array('table' => 'users',
+        AbstractTable::setDefaultAdapter($this->_adapterNoResult);
+        $validator = new NoRecordExistsValidator(array('table' => 'users',
                                                                'schema' => 'my'),
                                                          'field1');
         $this->assertTrue($validator->isValid('value1'));
@@ -189,9 +186,9 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     public function testAdapterProvided()
     {
         //clear the default adapter to ensure provided one is used
-        Table\AbstractTable::setDefaultAdapter(null);
+        AbstractTable::setDefaultAdapter(null);
         try {
-            $validator = new Db\NoRecordExists('users', 'field1', null, $this->_adapterHasResult);
+            $validator = new NoRecordExistsValidator('users', 'field1', null, $this->_adapterHasResult);
             $this->assertFalse($validator->isValid('value1'));
         } catch (\Exception $e) {
             $this->markTestSkipped('No database available');
@@ -206,9 +203,9 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     public function testAdapterProvidedNoResult()
     {
         //clear the default adapter to ensure provided one is used
-        Table\AbstractTable::setDefaultAdapter(null);
+        AbstractTable::setDefaultAdapter(null);
         try {
-            $validator = new Db\NoRecordExists('users', 'field1', null, $this->_adapterNoResult);
+            $validator = new NoRecordExistsValidator('users', 'field1', null, $this->_adapterNoResult);
             $this->assertTrue($validator->isValid('value1'));
         } catch (\Exception $e) {
             $this->markTestSkipped('No database available');

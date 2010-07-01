@@ -25,10 +25,11 @@
  */
 namespace ZendTest\Authentication\Adapter;
 
-use Zend\Authentication\Adapter;
-use Zend\Authentication;
-use Zend_Db_Select;
-use Zend_Db;
+use Zend\Authentication\Adapter,
+    Zend\Authentication,
+    Zend\DB\DB,
+    Zend\DB\Adapter\PDO\SQLite as SQLiteAdapter,
+    Zend\DB\Select\Select as DBSelect;
 
 /**
  * @category   Zend
@@ -82,7 +83,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->_adapter = null;
-        if ($this->_db instanceof \Zend_Db_Adapter_Abstract) {
+        if ($this->_db instanceof DB\Adapter\AbstractAdapter) {
             $this->_db->query('DROP TABLE [users]');
         }
         $this->_db = null;
@@ -212,7 +213,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testAdapterCanReturnDbSelectObject()
     {
-        $this->assertTrue($this->_adapter->getDbSelect() instanceof \Zend_Db_Select);
+        $this->assertTrue($this->_adapter->getDbSelect() instanceof DBSelect);
     }
 
     /**
@@ -244,7 +245,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         $this->_adapter->setCredential('my_password');
         $this->_adapter->authenticate();
         $selectAfterAuth = $this->_adapter->getDbSelect();
-        $whereParts = $selectAfterAuth->getPart(\Zend_Db_Select::WHERE);
+        $whereParts = $selectAfterAuth->getPart(DBSelect::WHERE);
         $this->assertEquals(1, count($whereParts));
         $this->assertEquals('(1 = 1)', array_pop($whereParts));
     }
@@ -329,12 +330,12 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     public function testDbTableAdapterUsesCaseFolding()
     {
         $this->tearDown();
-        $this->_setupDbAdapter(array(\Zend_Db::CASE_FOLDING => \Zend_Db::CASE_UPPER));
+        $this->_setupDbAdapter(array(DB::CASE_FOLDING => DB::CASE_UPPER));
         $this->_setupAuthAdapter();
 
         $this->_adapter->setIdentity('my_username');
         $this->_adapter->setCredential('my_password');
-        $this->_db->foldCase(\Zend_Db::CASE_UPPER);
+        $this->_db->foldCase(DB::CASE_UPPER);
         $this->_adapter->authenticate();
     }
 
@@ -346,7 +347,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
             $params['options'] = $optionalParams;
         }
 
-        $this->_db = new \Zend_Db_Adapter_Pdo_Sqlite($params);
+        $this->_db = new SQLiteAdapter($params);
 
         $sqlCreate = 'CREATE TABLE [users] ( '
                    . '[id] INTEGER  NOT NULL PRIMARY KEY, '

@@ -614,5 +614,5 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class Action extends \Zend\Controller\Action\Action
+class Action extends \Zend\Controller\Action
 {}

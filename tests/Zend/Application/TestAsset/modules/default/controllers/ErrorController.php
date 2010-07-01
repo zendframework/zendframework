@@ -1,5 +1,5 @@
 <?php
-use Zend\Controller\Action\Action as ActionController;
+use Zend\Controller\Action as ActionController;
 
 class ErrorController extends ActionController
 {

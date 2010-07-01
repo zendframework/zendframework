@@ -24,9 +24,9 @@
  * @namespace
  */
 namespace ZendTest\Wildfire;
-use Zend\Wildfire\Channel;
-use Zend\Wildfire\Plugin\FirePhp;
-use Zend\Controller;
+use Zend\Wildfire\Channel,
+    Zend\Wildfire\Plugin\FirePhp,
+    Zend\Controller;
 
 /**
  * @category   Zend
@@ -973,7 +973,7 @@ class HttpHeadersChannel extends Channel\HttpHeaders
 {
 }
 
-class Request extends \Zend\Controller\Request\HttpTestCase
+class Request extends \Zend\Controller\Request\HTTPTestCase
 {
 
     protected $_enabled = false;
@@ -1003,7 +1003,7 @@ class Request extends \Zend\Controller\Request\HttpTestCase
 }
 
 
-class Response extends \Zend\Controller\Response\HttpTestCase
+class Response extends \Zend\Controller\Response\HTTPTestCase
 {
 
     public function getHeadersForTesting()

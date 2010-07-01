@@ -25,6 +25,8 @@
  */
 namespace ZendTest\REST;
 
+use Zend\Controller\Request\HTTPTestCase as Request,
+    Zend\Controller\Response\HTTPTestCase as Response;
 
 /**
  * @category   Zend
@@ -40,8 +42,8 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $request  = new \Zend_Controller_Request_HttpTestCase();
-        $response = new \Zend_Controller_Response_HttpTestCase();
+        $request  = new Request();
+        $response = new Response();
         $this->_testController = new TestAsset\TestController($request, $response);
     }
 

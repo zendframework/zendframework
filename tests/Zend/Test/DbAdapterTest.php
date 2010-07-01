@@ -37,7 +37,7 @@ use Zend\Test;
 class DbAdapterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_Test_DbAdapter
+     * @var Zend\Test\DbAdapter
      */
     private $_adapter = null;
 
@@ -123,8 +123,8 @@ class DbAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $this->_adapter->getProfiler()->getTotalNumQueries());
 
         $qp = $this->_adapter->getProfiler()->getLastQueryProfile();
-        /* @var $qp Zend_Db_Profiler_Query */
 
+        /* @var $qp Zend\DB\Profiler\Query */
         $this->assertFalse($qp->hasEnded());
     }
 
@@ -135,8 +135,8 @@ class DbAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $this->_adapter->getProfiler()->getTotalNumQueries());
 
         $qp = $this->_adapter->getProfiler()->getLastQueryProfile();
-        /* @var $qp Zend_Db_Profiler_Query */
 
+        /* @var $qp Zend\DB\Profiler\Query */
         $this->assertTrue($qp->hasEnded());
     }
 
@@ -145,8 +145,8 @@ class DbAdapterTest extends \PHPUnit_Framework_TestCase
         $stmt = $this->_adapter->query("SELECT * FROM foo WHERE bar = ?", array(1234));
 
         $qp = $this->_adapter->getProfiler()->getLastQueryProfile();
-        /* @var $qp Zend_Db_Profiler_Query */
 
+        /* @var $qp Zend\DB\Profiler\Query */
         $this->assertEquals(array(1 => 1234), $qp->getQueryParams());
         $this->assertEquals("SELECT * FROM foo WHERE bar = ?", $qp->getQuery());
     }
@@ -159,8 +159,8 @@ class DbAdapterTest extends \PHPUnit_Framework_TestCase
         $stmt->bindParam(1, $var);
 
         $qp = $this->_adapter->getProfiler()->getLastQueryProfile();
-        /* @var $qp Zend_Db_Profiler_Query */
 
+        /* @var $qp Zend\DB\Profiler\Query */
         $this->assertEquals(array(1 => 1234), $qp->getQueryParams());
         $this->assertEquals("SELECT * FROM foo WHERE bar = ?", $qp->getQuery());
     }

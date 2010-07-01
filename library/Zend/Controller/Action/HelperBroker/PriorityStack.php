@@ -147,7 +147,7 @@ class PriorityStack implements \IteratorAggregate, \ArrayAccess, \Countable
         $priority = (int) $priority;
 
         if (!$helper instanceof Helper\AbstractHelper) {
-            throw new Action\Exception('$helper must extend Zend_Controller_Action_Helper_Abstract.');
+            throw new Action\Exception('$helper must extend Zend\Controller\Action\Helper\AbstractHelper');
         }
 
         if (array_key_exists($helper->getName(), $this->_helpersByNameRef)) {

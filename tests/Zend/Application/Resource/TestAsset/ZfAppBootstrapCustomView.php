@@ -13,39 +13,30 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Application
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
-namespace Zend\Validator\Db;
+namespace ZendTest\Application\Resource\TestAsset;
+
+use Zend\Application\Bootstrap;
 
 /**
- * Confirms a record does not exist in a table.
- *
- * @uses       \Zend\Validator\Db\AbstractDb
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Application
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class NoRecordExists extends AbstractDb
+class ZfAppBootstrapCustomView extends Bootstrap
 {
-    public function isValid($value)
+    public function _initView()
     {
-        $valid = true;
-        $this->_setValue($value);
-
-        $result = $this->_query($value);
-        if ($result) {
-            $valid = false;
-            $this->_error(self::ERROR_RECORD_FOUND);
-        }
-
-        return $valid;
+        $view = new \Zend\View\View();
+        $view->setInMethodByTest = true;
+        return $view;
     }
 }

@@ -13,39 +13,41 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Application
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
-namespace Zend\Validator\Db;
+namespace ZendTest\Application\TestAsset;
+
+use Zend\Application\AbstractBootstrap;
 
 /**
- * Confirms a record exists in a table.
- *
- * @uses       \Zend\Validator\Db\AbstractDb
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Application
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RecordExists extends AbstractDb
+class BootstrapBaseCircularDependency extends AbstractBootstrap
 {
-    public function isValid($value)
+    public $complete = false;
+
+    public function run()
     {
-        $valid = true;
-        $this->_setValue($value);
+    }
 
-        $result = $this->_query($value);
-        if (!$result) {
-            $valid = false;
-            $this->_error(self::ERROR_NO_RECORD_FOUND);
-        }
+    public function _initFirst()
+    {
+        $this->bootstrap('Second');
+        $this->complete = true;
+    }
 
-        return $valid;
+    public function _initSecond()
+    {
+        $this->bootstrap('First');
+        $this->complete = true;
     }
 }

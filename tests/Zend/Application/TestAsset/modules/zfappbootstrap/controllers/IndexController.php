@@ -20,9 +20,7 @@
  * @version    $Id$
  */
 
-namespace ZendTest\Application\TestAssett\Resource;
-
-use Zend\Application\Resource\AbstractResource;
+use Zend\Controller\Action as ActionController;
 
 /**
  * @category   Zend
@@ -31,10 +29,12 @@ use Zend\Application\Resource\AbstractResource;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Foobar extends AbstractResource
+class Zfappbootstrap_IndexController extends ActionController
 {
-    public function init()
+    public function indexAction()
     {
-        $this->getBootstrap()->executedFoobarResource = true;
+        echo "Inside index action!\n";
+        $this->_helper->viewRenderer->setNoRender();
+        $this->getInvokeArg('bootstrap')->getContainer()->zfappbootstrap = true;
     }
 }

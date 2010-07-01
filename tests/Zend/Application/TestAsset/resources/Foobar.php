@@ -20,9 +20,9 @@
  * @version    $Id$
  */
 
-namespace ZendTest\Application\Resource\TestAssett;
+namespace ZendTest\Application\TestAsset\Resource;
 
-use Zend\Application\Bootstrap;
+use Zend\Application\Resource\AbstractResource;
 
 /**
  * @category   Zend
@@ -31,12 +31,10 @@ use Zend\Application\Bootstrap;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZfAppBootstrapCustomView extends Bootstrap
+class Foobar extends AbstractResource
 {
-    public function _initView()
+    public function init()
     {
-        $view = new \Zend\View\View();
-        $view->setInMethodByTest = true;
-        return $view;
+        $this->getBootstrap()->executedFoobarResource = true;
     }
 }

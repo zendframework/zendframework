@@ -22,8 +22,15 @@
 /**
  * @namespace
  */
-namespace Zend\Validator\Db;
-use Zend\Validator;
+namespace Zend\Validator\DB;
+
+use Zend\Validator\AbstractValidator,
+    Zend\Validator\Exception as ValidatorException,
+    Zend\Config\Config,
+    Zend\DB\DB,
+    Zend\DB\Adapter\AbstractAdapter as AbstractDBAdapter,
+    Zend\DB\Table\AbstractTable as AbstractTable,
+    Zend\DB\Select\Select as DBSelect;
 
 /**
  * Class for Database record validation
@@ -38,7 +45,7 @@ use Zend\Validator;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractDb extends Validator\AbstractValidator
+abstract class AbstractDb extends AbstractValidator
 {
     /**
      * Error constants
@@ -99,7 +106,7 @@ abstract class AbstractDb extends Validator\AbstractValidator
      */
     public function __construct($options)
     {
-        if ($options instanceof \Zend\Config\Config) {
+        if ($options instanceof Config) {
             $options = $options->toArray();
         } else if (func_num_args() > 1) {
             $options       = func_get_args();
@@ -117,11 +124,11 @@ abstract class AbstractDb extends Validator\AbstractValidator
         }
 
         if (!array_key_exists('table', $options) && !array_key_exists('schema', $options)) {
-            throw new Validator\Exception('Table or Schema option missing!');
+            throw new ValidatorException('Table or Schema option missing!');
         }
 
         if (!array_key_exists('field', $options)) {
-            throw new Validator\Exception('Field option missing!');
+            throw new ValidatorException('Field option missing!');
         }
 
         if (array_key_exists('adapter', $options)) {
@@ -160,8 +167,8 @@ abstract class AbstractDb extends Validator\AbstractValidator
      */
     public function setAdapter($adapter)
     {
-        if (!($adapter instanceof \Zend\Db\Adapter\AbstractAdapter)) {
-            throw new Validator\Exception('Adapter option must be a database adapter!');
+        if (!($adapter instanceof AbstractdBAdapter)) {
+            throw new ValidatorException('Adapter option must be a database adapter!');
         }
 
         $this->_adapter = $adapter;
@@ -268,16 +275,16 @@ abstract class AbstractDb extends Validator\AbstractValidator
          * Check for an adapter being defined. if not, fetch the default adapter.
          */
         if ($this->_adapter === null) {
-            $this->_adapter = \Zend\Db\Table\AbstractTable::getDefaultAdapter();
+            $this->_adapter = AbstractTable::getDefaultAdapter();
             if (null === $this->_adapter) {
-                throw new Validator\Exception('No database adapter present');
+                throw new ValidatorException('No database adapter present');
             }
         }
 
         /**
          * Build select object
          */
-        $select = new \Zend\Db\Select\Select($this->_adapter);
+        $select = new DBSelect($this->_adapter);
         $select->from($this->_table, array($this->_field), $this->_schema)
                ->where($this->_adapter->quoteIdentifier($this->_field).' = ?', $value);
         if ($this->_exclude !== null) {
@@ -292,7 +299,7 @@ abstract class AbstractDb extends Validator\AbstractValidator
         /**
          * Run query
          */
-        $result = $this->_adapter->fetchRow($select, array(), \Zend\Db\Db::FETCH_ASSOC);
+        $result = $this->_adapter->fetchRow($select, array(), DB::FETCH_ASSOC);
 
         return $result;
     }

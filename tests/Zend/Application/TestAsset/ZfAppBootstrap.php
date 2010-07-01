@@ -20,7 +20,9 @@
  * @version    $Id$
  */
 
-use Zend\Controller\Action\Action as ActionController;
+namespace ZendTest\Application\TestAsset;
+
+use Zend\Application\AbstractBootstrap;
 
 /**
  * @category   Zend
@@ -29,12 +31,44 @@ use Zend\Controller\Action\Action as ActionController;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zfappbootstrap_IndexController extends ActionController
+class ZfAppBootstrap extends AbstractBootstrap
 {
-    public function indexAction()
+    public $barExecuted = 0;
+    public $fooExecuted = 0;
+    public $executedFooResource = false;
+    public $executedFooBarResource = false;
+
+    protected $_arbitraryValue;
+
+    public function run()
     {
-        echo "Inside index action!\n";
-        $this->_helper->viewRenderer->setNoRender();
-        $this->getInvokeArg('bootstrap')->getContainer()->zfappbootstrap = true;
+    }
+
+    protected function _initFoo()
+    {
+        $this->fooExecuted++;
+    }
+
+    protected function _initBar()
+    {
+        $this->barExecuted++;
+    }
+
+    protected function _initBarbaz()
+    {
+        $o = new \stdClass();
+        $o->baz = 'Baz';
+        return $o;
+    }
+
+    public function setArbitrary($value)
+    {
+        $this->_arbitraryValue = $value;
+        return $this;
+    }
+
+    public function getArbitrary()
+    {
+        return $this->_arbitraryValue;
     }
 }

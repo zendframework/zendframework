@@ -20,7 +20,7 @@
  * @version    $Id$
  */
 
-namespace ZendTest\Application\TestAssett\Resource;
+namespace ZendTest\Application\TestAsset\Resource;
 
 use Zend\Application\Resource\AbstractResource;
 

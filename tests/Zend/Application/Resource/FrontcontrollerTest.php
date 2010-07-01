@@ -24,7 +24,7 @@ namespace ZendTest\Application\Resource;
 
 use Zend\Controller\Front as FrontController,
     Zend\Loader\Autoloader,
-    ZendTest\Application\TestAssett\ZfAppBootstrap,
+    ZendTest\Application\TestAsset\ZfAppBootstrap,
     Zend\Application\Application,
     Zend\Application\Resource\Frontcontroller as FrontcontrollerResource;
 
@@ -148,29 +148,29 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
     {
         $resource = new FrontcontrollerResource(array(
             'moduleDirectory' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
-                               . 'TestAssett' . DIRECTORY_SEPARATOR . 'modules',
+                               . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules',
         ));
         $resource->init();
         $front = $resource->getFrontController();
         $dir   = $front->getControllerDirectory();
         $expected = array(
             'bar'     => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
-                       . 'TestAssett' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
+                       . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
                        . 'bar' . DIRECTORY_SEPARATOR . 'controllers',
             'default' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
-                       . 'TestAssett' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
+                       . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
                        . 'default' . DIRECTORY_SEPARATOR . 'controllers',
             'foo-bar' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
-                       . 'TestAssett' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
+                       . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
                        . 'foo-bar' . DIRECTORY_SEPARATOR . 'controllers',
             'foo'     => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
-                       . 'TestAssett' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
+                       . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
                        . 'foo' . DIRECTORY_SEPARATOR . 'controllers',
             'baz'     => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
-                       . 'TestAssett' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
+                       . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
                        . 'baz' . DIRECTORY_SEPARATOR . 'controllers',
             'zfappbootstrap' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
-                              . 'TestAssett' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
+                              . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
                               . 'zfappbootstrap' . DIRECTORY_SEPARATOR . 'controllers',
         );
         $this->assertEquals($expected, $dir);

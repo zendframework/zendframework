@@ -23,7 +23,7 @@
 namespace ZendTest\Application\Resource;
 
 use Zend\Loader\Autoloader,
-    ZendTest\Application\TestAssett\ZfAppBootstrap,
+    ZendTest\Application\TestAsset\ZfAppBootstrap,
     Zend\Application\Application,
     Zend\Application\Resource\View as ViewResource,
     Zend\Controller\Action\HelperBroker\HelperBroker,

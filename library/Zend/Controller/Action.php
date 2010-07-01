@@ -22,15 +22,17 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Action;
-use Zend\Controller\Request;
-use Zend\Controller\Response;
-use Zend\Controller;
+namespace Zend\Controller;
+
+use Zend\Controller\Request\AbstractRequest,
+    Zend\Controller\Response\AbstractResponse,
+    Zend\Controller\Action\HelperBroker\HelperBroker,
+    Zend\View;
 
 /**
  * @uses       \Zend\Controller\Action\Exception
  * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
- * @uses       \Zend\Controller\Action\ActionInterface
+ * @uses       \Zend\Controller\ActionController
  * @uses       \Zend\Controller\Exception
  * @uses       \Zend\Controller\Front
  * @uses       \Zend\View\View
@@ -40,7 +42,7 @@ use Zend\Controller;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Action implements ActionInterface
+abstract class Action implements ActionController
 {
     /**
      * @var array of existing class methods
@@ -67,7 +69,7 @@ abstract class Action implements ActionInterface
     protected $_frontController;
 
     /**
-     * Zend_Controller_Request_Abstract object wrapping the request environment
+     * AbstractRequest object wrapping the request environment
      * @var \Zend\Controller\Request\AbstractRequest
      */
     protected $_request = null;
@@ -124,12 +126,12 @@ abstract class Action implements ActionInterface
      * @param array $invokeArgs Any additional invocation arguments
      * @return void
      */
-    public function __construct(Request\AbstractRequest $request, Response\AbstractResponse $response, array $invokeArgs = array())
+    public function __construct(AbstractRequest $request, AbstractResponse $response, array $invokeArgs = array())
     {
         $this->setRequest($request)
              ->setResponse($response)
              ->_setInvokeArgs($invokeArgs);
-        $this->_helper = new HelperBroker\HelperBroker($this);
+        $this->_helper = new HelperBroker($this);
         $this->init();
     }
 
@@ -166,7 +168,7 @@ abstract class Action implements ActionInterface
             return $this->view;
         }
 
-        if (isset($this->view) && ($this->view instanceof \Zend\View\ViewInterface)) {
+        if (isset($this->view) && ($this->view instanceof View\ViewInterface)) {
             return $this->view;
         }
 
@@ -178,10 +180,10 @@ abstract class Action implements ActionInterface
         }
         $baseDir = dirname($dirs[$module]) . DIRECTORY_SEPARATOR . 'views';
         if (!file_exists($baseDir) || !is_dir($baseDir)) {
-            throw new Controller\Exception('Missing base view directory ("' . $baseDir . '")');
+            throw new Exception('Missing base view directory ("' . $baseDir . '")');
         }
 
-        $this->view = new \Zend\View\View(array('basePath' => $baseDir));
+        $this->view = new View\View(array('basePath' => $baseDir));
 
         return $this->view;
     }
@@ -271,11 +273,11 @@ abstract class Action implements ActionInterface
         if (null === $action) {
             $action = $request->getActionName();
         } elseif (!is_string($action)) {
-            throw new Controller\Exception('Invalid action specifier for view render');
+            throw new Exception('Invalid action specifier for view render');
         }
 
         if (null === $this->_delimiters) {
-            $dispatcher = Controller\Front::getInstance()->getDispatcher();
+            $dispatcher = Front::getInstance()->getDispatcher();
             $wordDelimiters = $dispatcher->getWordDelimiter();
             $pathDelimiters = $dispatcher->getPathDelimiter();
             $this->_delimiters = array_unique(array_merge($wordDelimiters, (array) $pathDelimiters));
@@ -307,9 +309,9 @@ abstract class Action implements ActionInterface
      * Set the Request object
      *
      * @param \Zend\Controller\Request\AbstractRequest $request
-     * @return \Zend\Controller\Action\Action
+     * @return \Zend\Controller\Action
      */
-    public function setRequest(Request\AbstractRequest $request)
+    public function setRequest(AbstractRequest $request)
     {
         $this->_request = $request;
         return $this;
@@ -329,9 +331,9 @@ abstract class Action implements ActionInterface
      * Set the Response object
      *
      * @param \Zend\Controller\Response\AbstractResponse $response
-     * @return \Zend\Controller\Action\Action
+     * @return \Zend\Controller\Action
      */
-    public function setResponse(Response\AbstractResponse $response)
+    public function setResponse(AbstractResponse $response)
     {
         $this->_response = $response;
         return $this;
@@ -341,7 +343,7 @@ abstract class Action implements ActionInterface
      * Set invocation arguments
      *
      * @param array $args
-     * @return \Zend\Controller\Action\Action
+     * @return \Zend\Controller\Action
      */
     protected function _setInvokeArgs(array $args = array())
     {
@@ -400,9 +402,9 @@ abstract class Action implements ActionInterface
      * Set the front controller instance
      *
      * @param \Zend\Controller\Front $front
-     * @return \Zend\Controller\Action\Action
+     * @return \Zend\Controller\Action
      */
-    public function setFrontController(Controller\Front $front)
+    public function setFrontController(Front $front)
     {
         $this->_frontController = $front;
         return $this;
@@ -422,12 +424,12 @@ abstract class Action implements ActionInterface
 
         // Grab singleton instance, if class has been loaded
         if (class_exists('Zend\Controller\Front')) {
-            $this->_frontController = Controller\Front::getInstance();
+            $this->_frontController = Front::getInstance();
             return $this->_frontController;
         }
 
         // Throw exception in all other cases
-        throw new Controller\Exception('Front controller class has not been loaded');
+        throw new Exception('Front controller class has not been loaded');
     }
 
     /**
@@ -476,10 +478,10 @@ abstract class Action implements ActionInterface
     {
         if ('Action' == substr($methodName, -6)) {
             $action = substr($methodName, 0, strlen($methodName) - 6);
-            throw new Exception(sprintf('Action "%s" does not exist and was not trapped in __call()', $action), 404);
+            throw new Action\Exception(sprintf('Action "%s" does not exist and was not trapped in __call()', $action), 404);
         }
 
-        throw new Exception(sprintf('Method "%s" does not exist and was not trapped in __call()', $methodName), 500);
+        throw new Action\Exception(sprintf('Method "%s" does not exist and was not trapped in __call()', $methodName), 500);
     }
 
     /**
@@ -536,7 +538,7 @@ abstract class Action implements ActionInterface
      * object to use
      * @return \Zend\Controller\Response\AbstractResponse
      */
-    public function run(Request\AbstractRequest $request = null, Response\AbstractResponse $response = null)
+    public function run(AbstractRequest $request = null, \AbstractResponse $response = null)
     {
         if (null !== $request) {
             $this->setRequest($request);
@@ -586,7 +588,7 @@ abstract class Action implements ActionInterface
      *
      * @param string $paramName
      * @param mixed $value
-     * @return \Zend\Controller\Action\Action
+     * @return \Zend\Controller\Action
      */
     protected function _setParam($paramName, $value)
     {

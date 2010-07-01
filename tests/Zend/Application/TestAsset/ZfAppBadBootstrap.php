@@ -20,9 +20,7 @@
  * @version    $Id$
  */
 
-namespace ZendTest\Application\TestAssett;
-
-use Zend\Application\AbstractBootstrap;
+namespace ZendTest\Application\TestAsset;
 
 /**
  * @category   Zend
@@ -31,44 +29,6 @@ use Zend\Application\AbstractBootstrap;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZfAppBootstrap extends AbstractBootstrap
+class ZfAppBadBootstrap
 {
-    public $barExecuted = 0;
-    public $fooExecuted = 0;
-    public $executedFooResource = false;
-    public $executedFooBarResource = false;
-
-    protected $_arbitraryValue;
-
-    public function run()
-    {
-    }
-
-    protected function _initFoo()
-    {
-        $this->fooExecuted++;
-    }
-
-    protected function _initBar()
-    {
-        $this->barExecuted++;
-    }
-
-    protected function _initBarbaz()
-    {
-        $o = new \stdClass();
-        $o->baz = 'Baz';
-        return $o;
-    }
-
-    public function setArbitrary($value)
-    {
-        $this->_arbitraryValue = $value;
-        return $this;
-    }
-
-    public function getArbitrary()
-    {
-        return $this->_arbitraryValue;
-    }
 }

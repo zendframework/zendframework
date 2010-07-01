@@ -141,8 +141,8 @@ class MultidbResourceTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($this->_dbOptions);
         $res = $resource->init();
-        $this->assertTrue($res->getDefaultDb() instanceof Zend\DB\Adapter\PDOMySQL);
-        $this->assertTrue($res->getDefaultDb(true) instanceof Zend\DB\Adapter\PDOMySQL);
+        $this->assertTrue($res->getDefaultDb() instanceof \Zend\DB\Adapter\PDOMySQL);
+        $this->assertTrue($res->getDefaultDb(true) instanceof \Zend\DB\Adapter\PDOMySQL);
         $this->assertNull($res->getDefaultDb(false));
     }
     

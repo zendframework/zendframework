@@ -27,9 +27,9 @@ use Zend\Application\Module\Bootstrap as ModuleBootstrap,
     Zend\Loader\ResourceAutoloader,
     Zend\Application\Application,
     Zend\Controller\Front as FrontController,
-    ZendTest\Application\TestAssett\ZfModule_Bootstrap;
+    ZendTest\Application\TestAsset\ZfModule_Bootstrap;
 
-require_once __DIR__ . '/../TestAssett/ZfModuleBootstrap.php';
+require_once __DIR__ . '/../TestAsset/ZfModuleBootstrap.php';
 
 /**
  * @category   Zend
@@ -137,8 +137,8 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
                 ),
             ),
             'bootstrap' => array(
-                'path'  => __DIR__ . '/../TestAssett/ZfAppBootstrap.php',
-                'class' => 'ZendTest\\Application\\TestAssett\\ZfAppBootstrap',
+                'path'  => __DIR__ . '/../TestAsset/ZfAppBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAsset\\ZfAppBootstrap',
             ),
             'ZfModule' => array(
                 'resources' => array(
@@ -167,12 +167,12 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
                 'modules' => array(),
                 'frontController' => array(
                     'baseUrl'             => '/foo',
-                    'moduleDirectory'     => __DIR__ . '/../TestAssett/modules',
+                    'moduleDirectory'     => __DIR__ . '/../TestAsset/modules',
                 ),
             ),
             'bootstrap' => array(
-                'path'  => __DIR__ . '/../TestAssett/ZfAppBootstrap.php',
-                'class' => 'ZendTest\\Application\\TestAssett\\ZfAppBootstrap',
+                'path'  => __DIR__ . '/../TestAsset/ZfAppBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAsset\\ZfAppBootstrap',
             )
         ));
         $appBootstrap = $this->application->getBootstrap();
@@ -198,15 +198,15 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
                 'modules' => array(),
                 'frontController' => array(
                     'baseUrl'             => '/foo',
-                    'moduleDirectory'     => __DIR__ . '/../TestAssett/modules',
+                    'moduleDirectory'     => __DIR__ . '/../TestAsset/modules',
                 ),
             ),
             'pluginPaths' => array(
                 'ZfModule\\Bootstrap\\Resource' => __DIR__,
             ),
             'bootstrap' => array(
-                'path'  => __DIR__ . '/../TestAssett/ZfAppBootstrap.php',
-                'class' => 'ZendTest\\Application\\TestAssett\\ZfAppBootstrap',
+                'path'  => __DIR__ . '/../TestAsset/ZfAppBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAsset\\ZfAppBootstrap',
             )
         ));
         $appBootstrap = $this->application->getBootstrap();

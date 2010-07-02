@@ -84,7 +84,7 @@ class DBTest extends AdapterTest
         }
 
         return array(
-            'options'       => array(Select\Select::FOR_UPDATE => true),
+            'options'       => array(Select::FOR_UPDATE => true),
             'driverOptions' => $driverOptions,
         );
     }
@@ -104,7 +104,7 @@ class DBTest extends AdapterTest
             /**
              * @see Zend_Db_Select
              */
-            $config['options'][Select\Select::FOR_UPDATE] = array();
+            $config['options'][Select::FOR_UPDATE] = array();
             $queue = $this->createQueue(__FUNCTION__, $config);
             $this->fail('FOR_UPDATE accepted an array');
         } catch (\Exception $e) {

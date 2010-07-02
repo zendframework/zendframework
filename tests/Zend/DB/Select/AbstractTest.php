@@ -51,7 +51,7 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
     public function testSelect()
     {
         $select = $this->_select();
-        $this->assertType('Zend\DB\Select\Select', $select,
+        $this->assertType('Zend\DB\Select', $select,
             'Expecting object of type Zend_Db_Select, got ' . get_class($select));
         $stmt = $this->_db->query($select);
         $row = $stmt->fetch();
@@ -72,7 +72,7 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
     public function testSelectQuery()
     {
         $select = $this->_select();
-        $this->assertType('Zend\DB\Select\Select', $select,
+        $this->assertType('Zend\DB\Select', $select,
             'Expecting object of type Zend_Db_Select, got ' . get_class($select));
         $stmt = $select->query();
         $row = $stmt->fetch();
@@ -92,7 +92,7 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
         $select = $this->_select()->where("$product_id = :product_id")
                                   ->bind(array(':product_id' => 1));
 
-        $this->assertType('Zend\DB\Select\Select', $select,
+        $this->assertType('Zend\DB\Select', $select,
             'Expecting object of type Zend_Db_Select, got ' . get_class($select));
         $stmt = $select->query();
         $row = $stmt->fetch();
@@ -306,7 +306,7 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
     public function testSelectColumnsReset()
     {
         $select = $this->_selectColumnsReset()
-            ->reset(Select\Select::COLUMNS)
+            ->reset(Select::COLUMNS)
             ->columns('product_name');
         $stmt = $this->_db->query($select);
         $result = $stmt->fetchAll();
@@ -314,7 +314,7 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
         $this->assertNotContains('product_id', array_keys($result[0]));
 
         $select = $this->_selectColumnsReset()
-            ->reset(Select\Select::COLUMNS)
+            ->reset(Select::COLUMNS)
             ->columns('p.product_name');
         $stmt = $this->_db->query($select);
         $result = $stmt->fetchAll();
@@ -322,7 +322,7 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
         $this->assertNotContains('product_id', array_keys($result[0]));
 
         $select = $this->_selectColumnsReset()
-            ->reset(Select\Select::COLUMNS)
+            ->reset(Select::COLUMNS)
             ->columns('product_name', 'p');
         $stmt = $this->_db->query($select);
         $result = $stmt->fetchAll();
@@ -334,8 +334,8 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
     {
         $select = $this->_selectColumnsReset();
         try {
-            $select->reset(Select\Select::COLUMNS)
-                   ->reset(Select\Select::FROM)
+            $select->reset(Select::COLUMNS)
+                   ->reset(Select::FROM)
                    ->columns('product_id');
             $this->fail('Expected exception of type "Zend_Db_Select_Exception"');
         } catch (\Zend\Exception $e) {
@@ -1563,15 +1563,15 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
         $select = $this->_db->select()
             ->from('zfproducts')
             ->limit(1);
-        $count = $select->getPart(Select\Select::LIMIT_COUNT);
+        $count = $select->getPart(Select::LIMIT_COUNT);
         $this->assertEquals(1, $count);
 
-        $select->reset(Select\Select::LIMIT_COUNT);
-        $count = $select->getPart(Select\Select::LIMIT_COUNT);
+        $select->reset(Select::LIMIT_COUNT);
+        $count = $select->getPart(Select::LIMIT_COUNT);
         $this->assertNull($count);
 
         $select->reset(); // reset the whole object
-        $from = $select->getPart(Select\Select::FROM);
+        $from = $select->getPart(Select::FROM);
         $this->assertTrue(empty($from));
     }
 

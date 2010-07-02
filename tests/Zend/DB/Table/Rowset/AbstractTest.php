@@ -45,7 +45,7 @@ abstract class AbstractTest extends \ZendTest\DB\Table\TestSetup
         $table = $this->_table['bugs'];
 
         $rows = $table->find(array(1, 2));
-        $this->assertType('Zend\DB\Table\Rowset\AbstractRowset', $rows,
+        $this->assertType('Zend\DB\Table\AbstractRowset', $rows,
             'Expecting object of type Zend_Db_Table_Rowset_Abstract, got '.get_class($rows));
 
         // see if we're at the beginning
@@ -54,7 +54,7 @@ abstract class AbstractTest extends \ZendTest\DB\Table\TestSetup
 
         // get first row and see if it's the right one
         $row1 = $rows->current();
-        $this->assertType('Zend\DB\Table\Row\AbstractRow', $row1,
+        $this->assertType('Zend\DB\Table\AbstractRow', $row1,
             'Expecting object of type Zend_Db_Table_Row_Abstract, got '.get_class($row1));
         $bug_id = $this->_db->foldCase('bug_id');
         $this->assertEquals(1, $row1->$bug_id);
@@ -66,7 +66,7 @@ abstract class AbstractTest extends \ZendTest\DB\Table\TestSetup
 
         // get second row and see if it's the right one
         $row2 = $rows->current();
-        $this->assertType('Zend\DB\Table\Row\AbstractRow', $row2,
+        $this->assertType('Zend\DB\Table\AbstractRow', $row2,
             'Expecting object of type Zend_Db_Table_Row_Abstract, got '.get_class($row2));
         $this->assertEquals(2, $row2->$bug_id);
 
@@ -88,7 +88,7 @@ abstract class AbstractTest extends \ZendTest\DB\Table\TestSetup
         // get row at beginning and compare it to
         // the one we got earlier
         $row1Copy = $rows->current();
-        $this->assertType('Zend\DB\Table\Row\AbstractRow', $row1,
+        $this->assertType('Zend\DB\Table\AbstractRow', $row1,
             'Expecting object of type Zend_Db_Table_Row_Abstract, got '.get_class($row1));
         $this->assertEquals(1, $row1->$bug_id);
         $this->assertSame($row1, $row1Copy);
@@ -98,11 +98,11 @@ abstract class AbstractTest extends \ZendTest\DB\Table\TestSetup
         try{
             $rows->seek(99999); // this index should not exist
             $this->fail('An exception should have been thrown here');
-        }catch(Rowset\Exception $e){ }
+        }catch(RowsetException $e){ }
         try{
             $rows->seek(-20);
             $this->fail('An exception should have been thrown here');
-        }catch(Rowset\Exception $e){ }
+        }catch(RowsetException $e){ }
 
 
         $rows->seek(1);
@@ -130,7 +130,7 @@ abstract class AbstractTest extends \ZendTest\DB\Table\TestSetup
         try{
             $rows->getRow(99999); // this index should not exist
             $this->fail('An exception should have been thrown here');
-        }catch(Rowset\Exception $e){
+        }catch(RowsetException $e){
             // has the exception correctly been overwritten by getRow() ?
             $this->assertRegExp('#No row could be found at position \d+#',$e->getMessage());
         }
@@ -142,7 +142,7 @@ abstract class AbstractTest extends \ZendTest\DB\Table\TestSetup
         $rowset = $table->fetchAll();
 
         $this->assertTrue(isset($rowset[0]));
-        $this->assertType('Zend\DB\Table\Row\Row', $rowset[0]);
+        $this->assertType('Zend\DB\Table\Row', $rowset[0]);
     }
 
     public function testTableRowsetEmpty()
@@ -220,11 +220,11 @@ abstract class AbstractTest extends \ZendTest\DB\Table\TestSetup
         $rowsNew = unserialize($serRows);
 
         $this->assertFalse($rowsNew->isConnected());
-        $this->assertType('Zend\DB\Table\Rowset\AbstractRowset', $rowsNew,
+        $this->assertType('Zend\DB\Table\AbstractRowset', $rowsNew,
             'Expecting object of type Zend_Db_Table_Rowset_Abstract, got '.get_class($rowsNew));
 
         $row1New = $rowsNew->current();
-        $this->assertType('Zend\DB\Table\Row\AbstractRow', $row1New,
+        $this->assertType('Zend\DB\Table\AbstractRow', $row1New,
             'Expecting object of type Zend_Db_Table_Row_Abstract, got '.get_class($row1New));
     }
 
@@ -245,7 +245,7 @@ abstract class AbstractTest extends \ZendTest\DB\Table\TestSetup
         $serRows = serialize($rows);
 
         $rowsNew = unserialize($serRows);
-        $this->assertType('Zend\DB\Table\Rowset\AbstractRowset', $rowsNew,
+        $this->assertType('Zend\DB\Table\AbstractRowset', $rowsNew,
             'Expecting object of type Zend_Db_Table_Rowset_Abstract, got '.get_class($rowsNew));
 
         $table2 = $this->_table['products'];
@@ -254,7 +254,7 @@ abstract class AbstractTest extends \ZendTest\DB\Table\TestSetup
             $connected = $rowsNew->setTable($table2);
             $this->fail('Expected to catch Zend_Db_Table_Row_Exception');
         } catch (\Zend\Exception $e) {
-            $this->assertType('Zend\DB\Table\Row\Exception', $e,
+            $this->assertType('Zend\DB\Table\RowException', $e,
                 'Expecting object of type Zend_Db_Table_Row_Exception, got '.get_class($e));
             $this->assertEquals('The specified Table is of class ZendTest\DB\Table\TestAsset\TableProducts, expecting class to be instance of ZendTest\DB\Table\TestAsset\TableBugs', $e->getMessage());
         }

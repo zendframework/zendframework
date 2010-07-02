@@ -25,6 +25,9 @@
  */
 namespace Zend\DB\Statement\PDO;
 
+use Zend\DB\Statement\PDO,
+    Zend\DB\Statement\Exception as StatementException;
+
 /**
  * Proxy class to wrap a PDOStatement object for IBM Databases.
  * Matches the interface of PDOStatement.  All methods simply proxy to the
@@ -88,7 +91,7 @@ class IBM extends PDO
                 return $this->_stmt->bindParam($parameter, $variable, $type, $length, $options);
             }
         } catch (\PDOException $e) {
-            throw new \Zend\DB\Statement\Exception($e->getMessage(), $e->getCode(), $e);
+            throw new StatementException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

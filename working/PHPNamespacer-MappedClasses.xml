@@ -2043,18 +2043,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Db2/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Db2_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/DB2/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\DB2</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\DB2\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/DB2Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
+      <newClassName>DB2Exception</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\DB2Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Db2.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Db2</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/DB2/DB2.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\DB2</newNamespace>
+      <newRelativeFilePath>Zend/DB/Adapter/DB2.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
       <newClassName>DB2</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\DB2\DB2</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Adapter\DB2</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Exception.php</originalRelativeFilePath>
@@ -2067,42 +2067,42 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Mysqli/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Mysqli_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/MySQLi/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\MySQLi</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\MySQLi\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/MySQLiException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
+      <newClassName>MySQLiException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\MySQLiException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Mysqli.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Mysqli</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/MySQLi/MySQLi.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\MySQLi</newNamespace>
+      <newRelativeFilePath>Zend/DB/Adapter/MySQLi.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
       <newClassName>MySQLi</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\MySQLi\MySQLi</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Adapter\MySQLi</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Oracle/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Oracle_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/Oracle/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\Oracle</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\Oracle\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/OracleException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
+      <newClassName>OracleException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\OracleException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Oracle.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Oracle</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/Oracle/Oracle.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\Oracle</newNamespace>
+      <newRelativeFilePath>Zend/DB/Adapter/Oracle.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
       <newClassName>Oracle</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\Oracle\Oracle</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Adapter\Oracle</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Pdo/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Pdo_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/PDO/AbstractPDO.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\PDO</newNamespace>
-      <newClassName>AbstractPDO</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\PDO\AbstractPDO</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/AbstractPDOAdapter.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
+      <newClassName>AbstractPDOAdapter</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\AbstractPDOAdapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Pdo/Ibm/Db2.php</originalRelativeFilePath>
@@ -2171,18 +2171,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Sqlsrv/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Sqlsrv_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/SQLSRV/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\SQLSRV</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\SQLSRV\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/SQLSRVException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
+      <newClassName>SQLSRVException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\SQLSRVException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Sqlsrv.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Sqlsrv</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/SQLSRV/SQLSRV.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\SQLSRV</newNamespace>
+      <newRelativeFilePath>Zend/DB/Adapter/SQLSRV.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
       <newClassName>SQLSRV</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\SQLSRV\SQLSRV</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Adapter\SQLSRV</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Exception.php</originalRelativeFilePath>
@@ -2235,34 +2235,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Select/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Select_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Select/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Select</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Select\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/SelectException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB</newNamespace>
+      <newClassName>SelectException</newClassName>
+      <newFullyQualifiedName>Zend\DB\SelectException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Select.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Select</originalClassName>
-      <newRelativeFilePath>Zend/DB/Select/Select.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Select</newNamespace>
+      <newRelativeFilePath>Zend/DB/Select.php</newRelativeFilePath>
+      <newNamespace>Zend\DB</newNamespace>
       <newClassName>Select</newClassName>
-      <newFullyQualifiedName>Zend\DB\Select\Select</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Select</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Db2/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Db2_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/DB2/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\DB2</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\DB2\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement/DB2Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
+      <newClassName>DB2Exception</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\DB2Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Db2.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Db2</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/DB2/DB2.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\DB2</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/DB2.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
       <newClassName>DB2</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\DB2\DB2</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\DB2</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Exception.php</originalRelativeFilePath>
@@ -2275,42 +2275,42 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Interface</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/StatementInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement</newNamespace>
-      <newClassName>StatementInterface</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\StatementInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement.php</newRelativeFilePath>
+      <newNamespace>Zend\DB</newNamespace>
+      <newClassName>Statement</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Mysqli/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Mysqli_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/MySQLi/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\MySQLi</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\MySQLi\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement/MySQLiException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
+      <newClassName>MySQLiException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\MySQLiException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Mysqli.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Mysqli</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/MySQLi/MySQLi.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\MySQLi</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/MySQLi.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
       <newClassName>MySQLi</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\MySQLi\MySQLi</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\MySQLi</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Oracle/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Oracle_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/Oracle/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\Oracle</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\Oracle\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement/OracleException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
+      <newClassName>OracleException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\OracleException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Oracle.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Oracle</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/Oracle/Oracle.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\Oracle</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/Oracle.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
       <newClassName>Oracle</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\Oracle\Oracle</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\Oracle</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Pdo/Ibm.php</originalRelativeFilePath>
@@ -2331,34 +2331,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Pdo.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Pdo</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/PDO/PDO.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\PDO</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/PDO.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
       <newClassName>PDO</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\PDO\PDO</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\PDO</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Sqlsrv/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Sqlsrv_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/SQLSRV/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\SQLSRV</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\SQLSRV\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement/SQLSRVException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
+      <newClassName>SQLSRVException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\SQLSRVException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Sqlsrv.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Sqlsrv</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/SQLSRV/SQLSRV.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\SQLSRV</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/SQLSRV.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
       <newClassName>SQLSRV</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\SQLSRV\SQLSRV</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\SQLSRV</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/Statement.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/DB/Statement/AbstractStatement.php</newRelativeFilePath>
       <newNamespace>Zend\DB\Statement</newNamespace>
-      <newClassName>Statement</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\Statement</newFullyQualifiedName>
+      <newClassName>AbstractStatement</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\AbstractStatement</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Abstract.php</originalRelativeFilePath>
@@ -2387,66 +2387,66 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Row/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Row_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Row/AbstractRow.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Row</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/AbstractRow.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
       <newClassName>AbstractRow</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Row\AbstractRow</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\AbstractRow</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Row/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Row_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Row/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Row</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Row\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Table/RowException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
+      <newClassName>RowException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Table\RowException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Row.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Row</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Row/Row.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Row</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Row.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
       <newClassName>Row</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Row\Row</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Row</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Rowset/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Rowset_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Rowset/AbstractRowset.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Rowset</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/AbstractRowset.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
       <newClassName>AbstractRowset</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Rowset\AbstractRowset</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\AbstractRowset</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Rowset/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Rowset_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Rowset/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Rowset</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Rowset\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Table/RowsetException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
+      <newClassName>RowsetException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Table\RowsetException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Rowset.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Rowset</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Rowset/Rowset.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Rowset</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Rowset.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
       <newClassName>Rowset</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Rowset\Rowset</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Rowset</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Select/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Select_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Select/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Select</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Select\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Table/SelectException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
+      <newClassName>SelectException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Table\SelectException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Select.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Select</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Select/Select.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Select</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Select.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
       <newClassName>Select</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Select\Select</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Select</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table.php</originalRelativeFilePath>

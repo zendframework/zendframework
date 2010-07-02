@@ -32,7 +32,7 @@ namespace ZendTest\DB\Table\TestAsset\Row;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TestTableRow extends \Zend\DB\Table\Row\AbstractRow
+class TestTableRow extends \Zend\DB\Table\AbstractRow
 {
     protected $_tableClass = '\ZendTest\DB\Table\TestAsset\TableBugs';
 

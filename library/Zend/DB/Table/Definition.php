@@ -24,7 +24,8 @@
  * @namespace
  */
 namespace Zend\DB\Table;
-use Zend\Config;
+
+use Zend\Config\Config;
 
 /**
  * Class for SQL table interface.
@@ -51,7 +52,7 @@ class Definition
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Config\Config) {
+        if ($options instanceof Config) {
             $this->setConfig($options);
         } elseif (is_array($options)) {
             $this->setOptions($options);
@@ -64,7 +65,7 @@ class Definition
      * @param \Zend\Config\Config $config
      * @return \Zend\DB\Table\Definition
      */
-    public function setConfig(Config\Config $config)
+    public function setConfig(Config $config)
     {
         $this->setOptions($config->toArray());
         return $this;

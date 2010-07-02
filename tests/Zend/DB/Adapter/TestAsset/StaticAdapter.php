@@ -97,7 +97,7 @@ class StaticAdapter extends \Zend\DB\Adapter\AbstractAdapter
         $this->_connect();
 
         // is the $sql a Zend_Db_Select object?
-        if ($sql instanceof \Zend\DB\Select\Select) {
+        if ($sql instanceof \Zend\DB\Select) {
             $sql = $sql->__toString();
         }
 

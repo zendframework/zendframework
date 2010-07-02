@@ -34,6 +34,6 @@ namespace ZendTest\DB\Adapter\TestAsset;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PDOStatement extends \Zend\DB\Statement\PDO\PDO
+class PDOStatement extends \Zend\DB\Statement\PDO
 {
 }

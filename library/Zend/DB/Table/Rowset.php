@@ -29,7 +29,7 @@ namespace Zend\DB\Table;
  * Reference concrete class that extends Zend_Db_Table_Rowset_Abstract.
  * Developers may also create their own classes that extend the abstract class.
  *
- * @uses       \Zend\DB\Table\Rowset\AbstractRowset
+ * @uses       \Zend\DB\Table\AbstractRowset
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Table

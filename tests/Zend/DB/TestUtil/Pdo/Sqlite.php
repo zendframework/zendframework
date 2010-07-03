@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Db\TestUtil\Pdo;
+namespace ZendTest\DB\TestUtil\Pdo;
 
 /**
  * @see Zend_Db_TestUtil_Pdo_Common

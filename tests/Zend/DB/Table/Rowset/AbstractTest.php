@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Db\Table\Rowset;
+namespace ZendTest\DB\Table\Rowset;
 use Zend\DB\Table\Rowset;
 
 

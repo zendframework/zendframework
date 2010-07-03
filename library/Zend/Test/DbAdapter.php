@@ -222,7 +222,7 @@ class DbAdapter extends \Zend\DB\Adapter\AbstractAdapter
     /**
      * Prepare a statement and return a PDOStatement-like object.
      *
-     * @param string|\Zend\DB\Select\Select $sql SQL query
+     * @param string|\Zend\DB\Select $sql SQL query
      * @return Zend_Db_Statment|PDOStatement
      */
     public function prepare($sql)

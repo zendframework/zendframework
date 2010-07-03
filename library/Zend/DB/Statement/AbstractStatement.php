@@ -26,7 +26,7 @@
 namespace Zend\DB\Statement;
 
 use Zend\DB\DB,
-    Zend\DB\Select;
+    Zend\DB\Statement;
 
 /**
  * Abstract class to emulate a PDOStatement for native database adapters.

@@ -30,16 +30,16 @@ use Zend\Queue\Queue,
     Zend\Queue\Message,
     Zend\DB as DB_ns,
     Zend\DB\Adapter\AbstractAdapter as AbstractDBAdapter,
-    Zend\DB\Select\Select;
+    Zend\DB\Select;
 
 /**
  * Class for using connecting to a Zend_DB-based queuing system
  *
  * @uses       \Zend\DB\DB
  * @uses       \Zend\DB\Expr
- * @uses       \Zend\DB\Select\Select
+ * @uses       \Zend\DB\Select
  * @uses       \Zend\DB\Adapter\AbstractAdapter
- * @uses       \Zend\DB\Table\Row\AbstractRow
+ * @uses       \Zend\DB\Table\AbstractRow
  * @uses       \Zend\Queue\Adapter\AdapterAbstract
  * @uses       \Zend\Queue\Adapter\DB\Message
  * @uses       \Zend\Queue\Adapter\DB\Queue
@@ -63,7 +63,7 @@ class DB extends AbstractAdapter
     protected $_messageTable = null;
 
     /**
-     * @var \Zend\DB\Table\Row\AbstractRow
+     * @var \Zend\DB\Table\AbstractRow
      */
     protected $_messageRow = null;
 
@@ -229,7 +229,7 @@ class DB extends AbstractAdapter
         }
         $queue = $list->current();
 
-        if ($queue instanceof \Zend\DB\Table\Row\AbstractRow) {
+        if ($queue instanceof \Zend\DB\Table\AbstractRow) {
             try {
                 $queue->delete();
             } catch (\Exception $e) {

@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Db\Table\Relationships;
+namespace ZendTest\DB\Table\Relationships;
 use Zend\DB\Table;
 
 

@@ -28,7 +28,7 @@ namespace Zend\DB\Statement;
 /**
  * Extends for Oracle.
  *
- * @uses       \Zend\DB\Statement\Statement
+ * @uses       \Zend\DB\Statement\AbstractStatement
  * @uses       \Zend\DB\Statement\OracleException
  * @category   Zend
  * @package    Zend_Db
@@ -61,7 +61,7 @@ class Oracle extends AbstractStatement
      * Activate/deactivate return of LOB as string
      *
      * @param string $lob_as_string
-     * @return \Zend\DB\Statement\Oracle\Oracle
+     * @return \Zend\DB\Statement\Oracle
      */
     public function setLobAsString($lob_as_string)
     {

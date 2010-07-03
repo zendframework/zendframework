@@ -271,9 +271,9 @@ class Paginator implements \Countable, \IteratorAggregate
             if ($adapter == self::INTERNAL_ADAPTER) {
                 if (is_array($data)) {
                     $adapter = 'ArrayAdapter';
-                } else if ($data instanceof \Zend\DB\Table\Select\Select) {
+                } else if ($data instanceof \Zend\DB\Table\Select) {
                     $adapter = 'DbTableSelect';
-                } else if ($data instanceof \Zend\DB\Select\Select) {
+                } else if ($data instanceof \Zend\DB\Select) {
                     $adapter = 'DbSelect';
                 } else if ($data instanceof \Iterator) {
                     $adapter = 'Iterator';
@@ -940,7 +940,7 @@ class Paginator implements \Countable, \IteratorAggregate
     {
         $currentItems = $this->getCurrentItems();
 
-        if ($currentItems instanceof \Zend\DB\Table\Rowset\AbstractRowset) {
+        if ($currentItems instanceof \Zend\DB\Table\AbstractRowset) {
             return JSON\JSON::encode($currentItems->toArray());
         } else {
             return JSON\JSON::encode($currentItems);

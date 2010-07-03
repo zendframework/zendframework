@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Db\Profiler;
+namespace ZendTest\DB\Profiler;
 use Zend\Wildfire\Channel;
 use Zend\DB\Profiler;
 use Zend\Wildfire\Plugin\FirePhp;

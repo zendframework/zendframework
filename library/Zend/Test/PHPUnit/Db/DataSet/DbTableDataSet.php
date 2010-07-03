@@ -52,7 +52,7 @@ class DbTableDataSet extends \PHPUnit_Extensions_Database_DataSet_AbstractDataSe
      * By default a select * will be done on the given tablename.
      *
      * @param \Zend\DB\Table\AbstractTable $table
-     * @param string|\Zend\DB\Select\Select $query
+     * @param string|\Zend\DB\Select $query
      * @param string $where
      * @param string $order
      * @param string $count

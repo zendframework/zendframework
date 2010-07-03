@@ -29,7 +29,7 @@ namespace Zend\DB\Statement;
  * Extends for Microsoft SQL Server Driver for PHP
  *
  * @uses       \Zend\DB\DB
- * @uses       \Zend\DB\Statement\Statement
+ * @uses       \Zend\DB\Statement\AbstractStatement
  * @uses       \Zend\DB\Statement\SQLSRVException
  * @category   Zend
  * @package    Zend_Db

@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Db\Adapter\_files\Testnamespace;
+namespace ZendTest\DB\Adapter\_files\Testnamespace;
 
 
 /**

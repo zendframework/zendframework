@@ -664,7 +664,7 @@ class Select
      *
      * @param integer $fetchMode OPTIONAL
      * @param  mixed  $bind An array of data to bind to the placeholders.
-     * @return PDO_Statement|\Zend\DB\Statement\Statement
+     * @return PDO_Statement|\Zend\DB\Statement
      */
     public function query($fetchMode = null, $bind = array())
     {

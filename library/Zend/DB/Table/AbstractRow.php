@@ -204,7 +204,7 @@ abstract class AbstractRow implements \ArrayAccess
      * Unset row field value
      *
      * @param  string $columnName The column key.
-     * @return \Zend\DB\Table\Row\AbstractRow
+     * @return \Zend\DB\Table\AbstractRow
      * @throws \Zend\DB\Table\RowException
      */
     public function __unset($columnName)
@@ -648,7 +648,7 @@ abstract class AbstractRow implements \ArrayAccess
      * Sets all data in the row from an array.
      *
      * @param  array $data
-     * @return \Zend\DB\Table\Row\AbstractRow Provides a fluent interface
+     * @return \Zend\DB\Table\AbstractRow Provides a fluent interface
      */
     public function setFromArray(array $data)
     {
@@ -899,7 +899,7 @@ abstract class AbstractRow implements \ArrayAccess
      * @param string|\Zend\DB\Table\AbstractTable $parentTable
      * @param string                        OPTIONAL $ruleKey
      * @param \Zend\DB\Table\Select          OPTIONAL $select
-     * @return \Zend\DB\Table\Row\AbstractRow   Query result from $parentTable
+     * @return \Zend\DB\Table\AbstractRow   Query result from $parentTable
      * @throws \Zend\DB\Table\RowException If $parentTable is not a table or is not loadable.
      */
     public function findParentRow($parentTable, $ruleKey = null, Select $select = null)

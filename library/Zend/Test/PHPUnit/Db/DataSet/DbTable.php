@@ -75,7 +75,7 @@ class DbTable extends \PHPUnit_Extensions_Database_DataSet_QueryTable
      * Construct Dataset Table from Zend_Db_Table object
      *
      * @param \Zend\DB\Table\AbstractTable        $table
-     * @param string|\Zend\DB\Select\Select|null    $where
+     * @param string|\Zend\DB\Select|null    $where
      * @param string|null                   $order
      * @param int                           $count
      * @param int                           $offset
@@ -103,7 +103,7 @@ class DbTable extends \PHPUnit_Extensions_Database_DataSet_QueryTable
             $this->data = $this->_table->fetchAll(
                 $this->_where, $this->_order, $this->_count, $this->_offset
             );
-            if($this->data instanceof \Zend\DB\Table\Rowset\AbstractRowset) {
+            if($this->data instanceof \Zend\DB\Table\AbstractRowset) {
                 $this->data = $this->data->toArray();
             }
         }

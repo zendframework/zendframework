@@ -29,7 +29,7 @@ namespace Zend\DB\Statement;
  * Extends for DB2 native adapter.
  *
  * @uses       \Zend\DB\DB
- * @uses       \Zend\DB\Statement\Statement
+ * @uses       \Zend\DB\Statement\AbstractStatement
  * @uses       \Zend\DB\Statement\DB2Exception
  * @package    Zend_Db
  * @subpackage Statement

@@ -29,7 +29,7 @@ namespace Zend\DB\Statement;
  * Extends for Mysqli
  *
  * @uses       \Zend\DB\DB
- * @uses       \Zend\DB\Statement\Statement
+ * @uses       \Zend\DB\Statement\AbstractStatement
  * @uses       \Zend\DB\Statement\MySQLiException
  * @category   Zend
  * @package    Zend_Db

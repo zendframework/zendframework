@@ -31,7 +31,7 @@ use Zend\DB\Adapter;
  *
  * @uses       \Zend\DB\DB
  * @uses       \Zend\DB\Adapter\AbstractAdapter
- * @uses       \Zend\DB\Select\Select
+ * @uses       \Zend\DB\Select
  * @uses       \Zend\DB\Table\Exception
  * @uses       \Zend\DB\Table\Select
  * @uses       \Zend\Loader
@@ -1268,7 +1268,7 @@ abstract class AbstractTable
      *
      * Honors the Zend_Db_Adapter fetch mode.
      *
-     * @param string|array|\Zend\DB\Table\Select $where  OPTIONAL An SQL WHERE clause or \Zend\DB\Table\Select\Select object.
+     * @param string|array|\Zend\DB\Table\Select $where  OPTIONAL An SQL WHERE clause or \Zend\DB\Table\Select object.
      * @param string|array                      $order  OPTIONAL An SQL ORDER clause.
      * @param int                               $count  OPTIONAL An SQL LIMIT count.
      * @param int                               $offset OPTIONAL An SQL LIMIT offset.
@@ -1313,7 +1313,7 @@ abstract class AbstractTable
      * Fetches one row in an object of type Zend_Db_Table_Row_Abstract,
      * or returns null if no row matches the specified criteria.
      *
-     * @param string|array|\Zend\DB\Table\Select $where  OPTIONAL An SQL WHERE clause or \Zend\DB\Table\Select\Select object.
+     * @param string|array|\Zend\DB\Table\Select $where  OPTIONAL An SQL WHERE clause or \Zend\DB\Table\Select object.
      * @param string|array                      $order  OPTIONAL An SQL ORDER clause.
      * @return \Zend\DB\Table\AbstractRow|null The row results per the
      *     Zend_Db_Adapter fetch mode, or null if no row found.

@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Db\Adapter\_files\Test;
+namespace ZendTest\DB\Adapter\_files\Test;
 
 /**
  * PHPUnit_Util_Filter

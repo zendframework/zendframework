@@ -350,7 +350,7 @@ abstract class AbstractRowset implements \SeekableIterator, \Countable, \ArrayAc
      * Required by the ArrayAccess implementation
      *
      * @param string $offset
-     * @return \Zend\DB\Table\Row\AbstractRow
+     * @return \Zend\DB\Table\AbstractRow
      */
     public function offsetGet($offset)
     {

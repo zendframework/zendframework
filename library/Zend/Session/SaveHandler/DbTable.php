@@ -25,7 +25,7 @@ use Zend\Session\SaveHandler as Savable,
     Zend\Session\Container,
     Zend\Session\Manager,
     Zend\DB\Table\AbstractTable,
-    Zend\DB\Table\Row\AbstractRow;
+    Zend\DB\Table\AbstractRow;
 
 /**
  * DB Table session save handler

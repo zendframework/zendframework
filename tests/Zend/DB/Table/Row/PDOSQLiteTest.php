@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Db\Table\Row;
+namespace ZendTest\DB\Table\Row;
 
 /**
  * @category   Zend

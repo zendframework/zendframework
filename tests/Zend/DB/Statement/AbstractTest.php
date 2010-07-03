@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Db\Statement;
+namespace ZendTest\DB\Statement;
 use Zend\DB\Statement;
 use Zend\DB;
 

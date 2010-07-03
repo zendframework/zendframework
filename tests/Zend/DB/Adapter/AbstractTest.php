@@ -188,7 +188,7 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
     {
         $exceptionClass = '\Zend\DB\Adapter\Exception';
         if ($adapterClass === null) {
-            $adapterClass = '\Zend\Db\Adapter\\' . $this->getDriver();
+            $adapterClass = '\Zend\DB\Adapter\\' . $this->getDriver();
         }
 
         $params = $this->_util->getParams();

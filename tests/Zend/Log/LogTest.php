@@ -372,7 +372,7 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-9555
+     * @group ZF-9955
      */
     public function testExceptionConstructWriterFromConfig()
     {

@@ -180,6 +180,9 @@ class Zend_Log
         $filter = $this->_constructFromConfig('filter', $config, $this->_defaultFilterNamespace);
 
         if (!$filter instanceof Zend_Log_Filter_Interface) {
+             $filterName = is_object($filter)
+                         ? get_class($filter)
+                         : 'The specified filter';
             /** @see Zend_Log_Exception */
             require_once 'Zend/Log/Exception.php';
             throw new Zend_Log_Exception("{$filterName} does not implement Zend_Log_Filter_Interface");

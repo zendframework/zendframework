@@ -385,9 +385,31 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
             $this->assertRegExp('#^(Zend_Log_Writer_NotExtendedWriterAbstract|The\sspecified\swriter)#', $e->getMessage());
         }
     }
+
+    /**
+     * @group ZF-9956
+     */
+    public function testExceptionConstructFilterFromConfig()
+    {
+        try {
+            $logger = new Zend_Log();
+            $filter = array('filterName' => 'NotImplementsFilterInterface');
+            $logger->addFilter($filter);
+        } catch (Exception $e) {
+            $this->assertType('Zend_Log_Exception', $e);
+            $this->assertRegExp('#^(Zend_Log_Filter_NotImplementsFilterInterface|The\sspecified\sfilter)#', $e->getMessage());
+        }
+    }
 }
 
 class Zend_Log_Writer_NotExtendedWriterAbstract implements Zend_Log_FactoryInterface
+{
+    public static function factory($config)
+    {
+    }
+}
+
+class Zend_Log_Filter_NotImplementsFilterInterface implements Zend_Log_FactoryInterface
 {
     public static function factory($config)
     {

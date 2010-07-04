@@ -426,6 +426,10 @@ class Zend_Locale
         }
 
         $httplanguages = getenv('HTTP_ACCEPT_LANGUAGE');
+        if (empty($httplanguages)) {
+            $httplanguages = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+        }
+
         $languages     = array();
         if (empty($httplanguages) === true) {
             return $languages;

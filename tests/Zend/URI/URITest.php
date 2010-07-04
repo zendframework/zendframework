@@ -456,7 +456,7 @@ class URITest extends \PHPUnit_Framework_TestCase
             array('with#pound', 'with%23pound'),
             array('with space', 'with+space'),
             array('test=a&var[]=1&var[]=2&some[thing]=3', 'test=a&var%5B%5D=1&var%5B%5D=2&some%5Bthing%5D=3'),
-            array("with\nlinebreak", "with%0Alinebreak")
+            array("with \nline break", "with+%0Aline+break")
         );
     }
     

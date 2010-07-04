@@ -38,6 +38,8 @@ use Zend\URI\URI;
  *
  * @uses      \Zend\URI\URI
  * @uses      \Zend\URI\HTTP
+ * @uses      \Zend\URI\File
+ * @uses      \Zend\URI\Mailto
  * @uses      \Zend\URI\Exception
  * @uses      \Zend\Loader
  * @category  Zend

@@ -247,8 +247,7 @@ class Zend_Locale
      */
     public function __construct($locale = null)
     {
-        $locale = self::_prepareLocale($locale);
-        $this->setLocale((string) $locale);
+        $this->setLocale($locale);
     }
 
     /**

@@ -73,7 +73,7 @@ class Zend_Validate_File_IsCompressedTest extends PHPUnit_Framework_TestCase
                 . ' but mime_content_type exhibits buggy behavior on this system.'
                 );
         }
-        
+
         $valuesExpected = array(
             array(null, true),
             array('zip', true),
@@ -188,6 +188,10 @@ class Zend_Validate_File_IsCompressedTest extends PHPUnit_Framework_TestCase
 
     public function testOptionsAtConstructor()
     {
+        if (!extension_loaded('fileinfo')) {
+            $this->markTestSkipped('This PHP Version has no finfo installed');
+        }
+
         $validator = new Zend_Validate_File_IsCompressed(array(
             'image/gif',
             'image/jpg',

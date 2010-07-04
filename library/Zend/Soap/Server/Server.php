@@ -30,7 +30,7 @@ namespace Zend\Soap\Server;
  * @uses       DOMDocument
  * @uses       SoapFault
  * @uses       SoapServer
- * @uses       \Zend\Server\ServerInterface
+ * @uses       \Zend\Server\Server
  * @uses       \Zend\Soap\Server\Exception
  * @category   Zend
  * @package    Zend_Soap
@@ -39,7 +39,7 @@ namespace Zend\Soap\Server;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Server implements \Zend\Server\ServerInterface
+class Server implements \Zend\Server\Server
 {
     /**
      * Actor URI

@@ -31,7 +31,7 @@ use Zend\Soap\WSDL;
  * \Zend\Soap\AutoDiscover\AutoDiscover
  *
  * @uses       \Zend\Server\AbstractServer
- * @uses       \Zend\Server\ServerInterface
+ * @uses       \Zend\Server\Server
  * @uses       \Zend\Server\Reflection\Reflection
  * @uses       \Zend\Soap\AutoDiscover\Exception
  * @uses       \Zend\Soap\WSDL\WSDL
@@ -40,7 +40,7 @@ use Zend\Soap\WSDL;
  * @package    Zend_Soap
  * @subpackage AutoDiscover
  */
-class AutoDiscover implements \Zend\Server\ServerInterface
+class AutoDiscover implements \Zend\Server\Server
 {
     /**
      * @var \Zend\Soap\WSDL\WSDL

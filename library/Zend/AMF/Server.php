@@ -45,7 +45,7 @@ use Zend\Loader\PluginLoader,
  * @uses       Zend\AMF\Server\Exception
  * @uses       Zend\Authentication\AuthenticationService
  * @uses       Zend\Loader\PluginLoader
- * @uses       Zend\Server\ServerInterface
+ * @uses       Zend\Server\Server
  * @uses       Zend\Server\Reflection\Reflection
  * @uses       Zend\Session\Manager
  * @uses       Zend\Session\Container
@@ -54,7 +54,7 @@ use Zend\Loader\PluginLoader,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Server implements \Zend\Server\ServerInterface
+class Server implements \Zend\Server\Server
 {
     /**
      * Array of dispatchables

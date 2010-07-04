@@ -11763,10 +11763,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Server_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Server/ServerInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Server/Server.php</newRelativeFilePath>
       <newNamespace>Zend\Server</newNamespace>
-      <newClassName>ServerInterface</newClassName>
-      <newFullyQualifiedName>Zend\Server\ServerInterface</newFullyQualifiedName>
+      <newClassName>Server</newClassName>
+      <newFullyQualifiedName>Zend\Server\Server</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Method/Callback.php</originalRelativeFilePath>

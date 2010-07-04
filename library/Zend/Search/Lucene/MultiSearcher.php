@@ -30,14 +30,14 @@ use Zend\Search\Lucene\Storage\Directory;
  *
  * @uses       \Zend\Search\Lucene\Index
  * @uses       \Zend\Search\Lucene\Exception
- * @uses       \Zend\Search\Lucene\IndexInterface
+ * @uses       \Zend\Search\Lucene\SearchIndex
  * @uses       \Zend\Search\Lucene\TermStreamsPriorityQueue
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MultiSearcher implements IndexInterface
+class MultiSearcher implements SearchIndex
 {
     /**
      * List of indices for searching.
@@ -58,7 +58,7 @@ class MultiSearcher implements IndexInterface
         $this->_indices = $indices;
 
         foreach ($this->_indices as $index) {
-            if (!$index instanceof IndexInterface) {
+            if (!$index instanceof SearchIndex) {
                 throw new Exception('sub-index objects have to implement Zend_Search_Lucene_Interface.');
             }
         }
@@ -67,9 +67,9 @@ class MultiSearcher implements IndexInterface
     /**
      * Add index for searching.
      *
-     * @param \Zend\Search\Lucene\IndexInterface $index
+     * @param \Zend\Search\Lucene\SearchIndex $index
      */
-    public function addIndex(IndexInterface $index)
+    public function addIndex(SearchIndex $index)
     {
         $this->_indices[] = $index;
     }
@@ -82,11 +82,11 @@ class MultiSearcher implements IndexInterface
      * 0 means pre-2.1 index format
      * -1 means there are no segments files.
      *
-     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
+     * @param \Zend\Search\Lucene\Storage\Directory $directory
      * @return integer
      * @throws \Zend\Search\Lucene\Exception
      */
-    public static function getActualGeneration(Directory\DirectoryInterface $directory)
+    public static function getActualGeneration(Directory $directory)
     {
         throw new Exception("Generation number can't be retrieved for multi-searcher");
     }
@@ -129,7 +129,7 @@ class MultiSearcher implements IndexInterface
     /**
      * Returns the Zend_Search_Lucene_Storage_Directory instance for this index.
      *
-     * @return \Zend\Search\Lucene\Storage\Directory\DirectoryInterface
+     * @return \Zend\Search\Lucene\Storage\Directory
      */
     public function getDirectory()
     {
@@ -413,7 +413,7 @@ class MultiSearcher implements IndexInterface
      * number $id in this index.
      *
      * @param integer|\Zend\Search\Lucene\Search\QueryHit $id
-     * @return \Zend\Search\Lucene\Document\Document
+     * @return \Zend\Search\Lucene\Document
      * @throws \Zend\Search\Lucene\Exception    Exception is thrown if $id is out of the range
      */
     public function getDocument($id)
@@ -598,7 +598,7 @@ class MultiSearcher implements IndexInterface
     /**
      * Retrive similarity used by index reader
      *
-     * @return \Zend\Search\Lucene\Search\Similarity\Similarity
+     * @return \Zend\Search\Lucene\Search\Similarity
      * @throws \Zend\Search\Lucene\Exception
      */
     public function getSimilarity()
@@ -720,10 +720,10 @@ class MultiSearcher implements IndexInterface
     /**
      * Adds a document to this index.
      *
-     * @param \Zend\Search\Lucene\Document\Document $document
+     * @param \Zend\Search\Lucene\Document $document
      * @throws \Zend\Search\Lucene\Exception
      */
-    public function addDocument(Document\Document $document)
+    public function addDocument(Document $document)
     {
         if ($this->_documentDistributorCallBack !== null) {
             $index = call_user_func($this->_documentDistributorCallBack, $document, $this->_indices);

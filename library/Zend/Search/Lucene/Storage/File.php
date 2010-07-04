@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Search\Lucene\Storage\File;
+namespace Zend\Search\Lucene\Storage;
 use Zend\Search\Lucene;
 
 /**
@@ -33,7 +33,7 @@ use Zend\Search\Lucene;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface FileInterface
+interface File
 {
     /**
      * Sets the file position indicator and advances the file pointer.

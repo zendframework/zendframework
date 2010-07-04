@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Search\Lucene\Storage\Directory;
+namespace Zend\Search\Lucene\Storage;
 
 /**
  * @category   Zend
@@ -32,7 +32,7 @@ namespace Zend\Search\Lucene\Storage\Directory;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface DirectoryInterface
+interface Directory
 {
 
     /**
@@ -53,7 +53,7 @@ interface DirectoryInterface
      * Creates a new, empty file in the directory with the given $filename.
      *
      * @param string $filename
-     * @return \Zend\Search\Lucene\Storage\File\FileInterface
+     * @return \Zend\Search\Lucene\Storage\File
      */
     public function createFile($filename);
 
@@ -132,7 +132,7 @@ interface DirectoryInterface
      *
      * @param string $filename
      * @param boolean $shareHandler
-     * @return \Zend\Search\Lucene\Storage\File\FileInterface
+     * @return \Zend\Search\Lucene\Storage\File
      */
     public function getFileObject($filename, $shareHandler = true);
 }

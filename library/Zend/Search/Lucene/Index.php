@@ -30,10 +30,10 @@ use Zend\Search\Lucene\Storage\Directory;
  * @uses       \Zend\Search\Lucene\Document
  * @uses       \Zend\Search\Lucene\Exception
  * @uses       \Zend\Search\Lucene\Index
- * @uses       \Zend\Search\Lucene\IndexInterface
+ * @uses       \Zend\Search\Lucene\SearchIndex
  * @uses       \Zend\Search\Lucene\LockManager
  * @uses       \Zend\Search\Lucene\Search
- * @uses       \Zend\Search\Lucene\Search\Similarity\Similarity
+ * @uses       \Zend\Search\Lucene\Search\Similarity
  * @uses       \Zend\Search\Lucene\Storage\Directory
  * @uses       \Zend\Search\Lucene\TermStreamsPriorityQueue
  * @category   Zend
@@ -41,12 +41,12 @@ use Zend\Search\Lucene\Storage\Directory;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Index implements IndexInterface
+class Index implements SearchIndex
 {
     /**
      * File system adapter.
      *
-     * @var \Zend\Search\Lucene\Storage\Directory\DirectoryInterface
+     * @var \Zend\Search\Lucene\Storage\Directory
      */
     private $_directory = null;
 
@@ -117,11 +117,11 @@ class Index implements IndexInterface
      * 0 means pre-2.1 index format
      * -1 means there are no segments files.
      *
-     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
+     * @param \Zend\Search\Lucene\Storage\Directory $directory
      * @return integer
      * @throws \Zend\Search\Lucene\Exception
      */
-    public static function getActualGeneration(Directory\DirectoryInterface $directory)
+    public static function getActualGeneration(Directory $directory)
     {
         /**
          * Zend_Search_Lucene uses segments.gen file to retrieve current generation number
@@ -476,7 +476,7 @@ class Index implements IndexInterface
     /**
      * Returns the Zend_Search_Lucene_Storage_Directory instance for this index.
      *
-     * @return \Zend\Search\Lucene\Storage\Directory\DirectoryInterface
+     * @return \Zend\Search\Lucene\Storage\Directory
      */
     public function getDirectory()
     {
@@ -836,7 +836,7 @@ class Index implements IndexInterface
      * number $id in this index.
      *
      * @param integer|\Zend\Search\Lucene\Search\QueryHit $id
-     * @return \Zend\Search\Lucene\Document\Document
+     * @return \Zend\Search\Lucene\Document
      * @throws \Zend\Search\Lucene\Exception    Exception is thrown if $id is out of the range
      */
     public function getDocument($id)
@@ -867,7 +867,7 @@ class Index implements IndexInterface
         $fdtFile->seek($fieldValuesPosition, SEEK_CUR);
         $fieldCount = $fdtFile->readVInt();
 
-        $doc = new Document\Document();
+        $doc = new Document();
         for ($count = 0; $count < $fieldCount; $count++) {
             $fieldNum = $fdtFile->readVInt();
             $bits = $fdtFile->readByte();
@@ -1049,11 +1049,11 @@ class Index implements IndexInterface
     /**
      * Retrive similarity used by index reader
      *
-     * @return \Zend\Search\Lucene\Search\Similarity\Similarity
+     * @return \Zend\Search\Lucene\Search\Similarity
      */
     public function getSimilarity()
     {
-        return Similarity\Similarity::getDefault();
+        return Similarity::getDefault();
     }
 
 
@@ -1139,9 +1139,9 @@ class Index implements IndexInterface
     /**
      * Adds a document to this index.
      *
-     * @param \Zend\Search\Lucene\Document\Document $document
+     * @param \Zend\Search\Lucene\Document $document
      */
-    public function addDocument(Document\Document $document)
+    public function addDocument(Document $document)
     {
         $this->_getIndexWriter()->addDocument($document);
         $this->_docCount++;

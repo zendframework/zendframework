@@ -40,7 +40,7 @@ use Zend\Search\Lucene\Search\Query;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class PreprocessingAbstract extends Query\AbstractQuery
+abstract class AbstractPreprocessing extends Query\AbstractQuery
 {
     /**
      * Matched terms.
@@ -57,10 +57,10 @@ abstract class PreprocessingAbstract extends Query\AbstractQuery
     /**
      * Optimize query in the context of specified index
      *
-     * @param \Zend\Search\Lucene\IndexInterface $index
+     * @param \Zend\Search\Lucene\SearchIndex $index
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
-    public function optimize(Lucene\IndexInterface $index)
+    public function optimize(Lucene\SearchIndex $index)
     {
         throw new Lucene\Exception('This query is not intended to be executed.');
     }
@@ -68,10 +68,10 @@ abstract class PreprocessingAbstract extends Query\AbstractQuery
     /**
      * Constructs an appropriate Weight implementation for this query.
      *
-     * @param \Zend\Search\Lucene\IndexInterface $reader
+     * @param \Zend\Search\Lucene\SearchIndex $reader
      * @return \Zend\Search\Lucene\Search\Weight\Weight
      */
-    public function createWeight(Lucene\IndexInterface $reader)
+    public function createWeight(Lucene\SearchIndex $reader)
     {
         throw new Lucene\Exception('This query is not intended to be executed.');
     }
@@ -80,10 +80,10 @@ abstract class PreprocessingAbstract extends Query\AbstractQuery
      * Execute query in context of index reader
      * It also initializes necessary internal structures
      *
-     * @param \Zend\Search\Lucene\IndexInterface $reader
+     * @param \Zend\Search\Lucene\SearchIndex $reader
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
      */
-    public function execute(Lucene\IndexInterface $reader, $docsFilter = null)
+    public function execute(Lucene\SearchIndex $reader, $docsFilter = null)
     {
         throw new Lucene\Exception('This query is not intended to be executed.');
     }
@@ -104,10 +104,10 @@ abstract class PreprocessingAbstract extends Query\AbstractQuery
      * Score specified document
      *
      * @param integer $docId
-     * @param \Zend\Search\Lucene\IndexInterface $reader
+     * @param \Zend\Search\Lucene\SearchIndex $reader
      * @return float
      */
-    public function score($docId, Lucene\IndexInterface $reader)
+    public function score($docId, Lucene\SearchIndex $reader)
     {
         throw new Lucene\Exception('This query is not intended to be executed.');
     }

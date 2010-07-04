@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Search\Lucene\Search\Similarity;
+namespace Zend\Search\Lucene\Search;
 
 /**
  * @todo !!!!!!! This class is actually used as singleton. It has to be redesigned.
@@ -42,7 +42,7 @@ abstract class Similarity
     /**
      * The Similarity implementation used by default.
      *
-     * @var \Zend\Search\Lucene\Search\Similarity\Similarity
+     * @var \Zend\Search\Lucene\Search\Similarity
      */
     private static $_defaultImpl;
 
@@ -314,7 +314,7 @@ abstract class Similarity
      * Set the default Similarity implementation used by indexing and search
      * code.
      *
-     * @param \Zend\Search\Lucene\Search\Similarity\Similarity $similarity
+     * @param \Zend\Search\Lucene\Search\Similarity $similarity
      */
     public static function setDefault(Similarity $similarity)
     {
@@ -326,12 +326,12 @@ abstract class Similarity
      * Return the default Similarity implementation used by indexing and search
      * code.
      *
-     * @return \Zend\Search\Lucene\Search\Similarity\Similarity
+     * @return \Zend\Search\Lucene\Search\Similarity
      */
     public static function getDefault()
     {
         if (!self::$_defaultImpl instanceof Similarity) {
-            self::$_defaultImpl = new DefaultSimilarity();
+            self::$_defaultImpl = new Similarity\DefaultSimilarity();
         }
 
         return self::$_defaultImpl;
@@ -501,10 +501,10 @@ abstract class Similarity
      * Returns a score factor for the term
      *
      * @param mixed $input
-     * @param \Zend\Search\Lucene\IndexInterface $reader
+     * @param \Zend\Search\Lucene\SearchIndex $reader
      * @return a score factor for the term
      */
-    public function idf($input, \Zend\Search\Lucene\IndexInterface $reader)
+    public function idf($input, \Zend\Search\Lucene\SearchIndex $reader)
     {
         if (!is_array($input)) {
             return $this->idfFreq($reader->docFreq($input), $reader->count());

@@ -59,11 +59,11 @@ class DirectoryTest extends \PHPUnit_Framework_TestCase
 
         $directory = new Directory\Filesystem($tempPath);
 
-        $this->assertTrue($directory instanceof Directory\DirectoryInterface);
+        $this->assertTrue($directory instanceof Directory);
         $this->assertEquals(count($directory->fileList()), 0);
 
         $fileObject = $directory->createFile('file1');
-        $this->assertTrue($fileObject instanceof \Zend\Search\Lucene\Storage\File\FileInterface);
+        $this->assertTrue($fileObject instanceof \Zend\Search\Lucene\Storage\File);
         unset($fileObject);
         $this->assertEquals($directory->fileLength('file1'), 0);
 
@@ -112,7 +112,7 @@ class DirectoryTest extends \PHPUnit_Framework_TestCase
     public function testFilesystemSubfoldersAutoCreation()
     {
         $directory = new Directory\Filesystem(dirname(__FILE__) . '/_tempFiles/_files/dir1/dir2/dir3');
-        $this->assertTrue($directory instanceof Directory\DirectoryInterface);
+        $this->assertTrue($directory instanceof Directory);
         $directory->close();
 
         rmdir(dirname(__FILE__) . '/_tempFiles/_files/dir1/dir2/dir3');

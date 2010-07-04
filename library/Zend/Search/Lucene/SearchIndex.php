@@ -25,16 +25,16 @@
 namespace Zend\Search\Lucene;
 
 /**
- * @uses       \Zend\Search\Lucene\Document\Document
+ * @uses       \Zend\Search\Lucene\Document
  * @uses       \Zend\Search\Lucene\Index\DocsFilter
  * @uses       \Zend\Search\Lucene\Index\Term
- * @uses       \Zend\Search\Lucene\Index\TermsStream\TermsStreamInterface
+ * @uses       \Zend\Search\Lucene\Index\TermsStream
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface IndexInterface extends Index\TermsStream\TermsStreamInterface
+interface SearchIndex extends Index\TermsStream
 {
     /**
      * Get current generation number
@@ -43,11 +43,11 @@ interface IndexInterface extends Index\TermsStream\TermsStreamInterface
      * 0 means pre-2.1 index format
      * -1 means there are no segments files.
      *
-     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
+     * @param \Zend\Search\Lucene\Storage\Directory $directory
      * @return integer
      * @throws \Zend\Search\Lucene\Exception
      */
-    public static function getActualGeneration(Storage\Directory\DirectoryInterface $directory);
+    public static function getActualGeneration(Storage\Directory $directory);
 
     /**
      * Get segments file name
@@ -76,7 +76,7 @@ interface IndexInterface extends Index\TermsStream\TermsStreamInterface
     /**
      * Returns the Zend_Search_Lucene_Storage_Directory instance for this index.
      *
-     * @return \Zend\Search\Lucene\Storage\Directory\DirectoryInterface
+     * @return \Zend\Search\Lucene\Storage\Directory
      */
     public function getDirectory();
 
@@ -214,7 +214,7 @@ interface IndexInterface extends Index\TermsStream\TermsStreamInterface
      * number $id in this index.
      *
      * @param integer|\Zend\Search\Lucene\Search\QueryHit $id
-     * @return \Zend\Search\Lucene\Document\Document
+     * @return \Zend\Search\Lucene\Document
      */
     public function getDocument($id);
 
@@ -280,7 +280,7 @@ interface IndexInterface extends Index\TermsStream\TermsStreamInterface
     /**
      * Retrive similarity used by index reader
      *
-     * @return \Zend\Search\Lucene\Search\Similarity\Similarity
+     * @return \Zend\Search\Lucene\Search\Similarity
      */
     public function getSimilarity();
 
@@ -312,9 +312,9 @@ interface IndexInterface extends Index\TermsStream\TermsStreamInterface
     /**
      * Adds a document to this index.
      *
-     * @param \Zend\Search\Lucene\Document\Document $document
+     * @param \Zend\Search\Lucene\Document $document
      */
-    public function addDocument(Document\Document $document);
+    public function addDocument(Document $document);
 
     /**
      * Commit changes resulting from delete() or undeleteAll() operations.

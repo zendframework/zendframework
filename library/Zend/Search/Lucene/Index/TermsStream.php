@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Search_Lucene
- * @subpackage Search
+ * @subpackage Index
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,37 +23,50 @@
 /**
  * @namespace
  */
-namespace Zend\Search\Lucene\Search\Highlighter;
-use Zend\Search\Lucene\Document;
+namespace Zend\Search\Lucene\Index;
 
 /**
- * @uses       \Zend\Search\Lucene\Document
+ * @uses       \Zend\Search\Lucene\Index\Term
  * @category   Zend
  * @package    Zend_Search_Lucene
- * @subpackage Search
+ * @subpackage Index
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface HighlighterInterface
+interface TermsStream
 {
     /**
-     * Set document for highlighting.
-     *
-     * @param \Zend\Search\Lucene\Document\HTML $document
+     * Reset terms stream.
      */
-    public function setDocument(Document\HTML $document);
+    public function resetTermsStream();
 
     /**
-     * Get document for highlighting.
+     * Skip terms stream up to specified term preffix.
      *
-     * @return \Zend\Search\Lucene\Document\HTML $document
+     * Prefix contains fully specified field info and portion of searched term
+     *
+     * @param \Zend\Search\Lucene\Index\Term $prefix
      */
-    public function getDocument();
+    public function skipTo(Term $prefix);
 
     /**
-     * Highlight specified words (method is invoked once per subquery)
+     * Scans terms dictionary and returns next term
      *
-     * @param string|array $words  Words to highlight. They could be organized using the array or string.
+     * @return \Zend\Search\Lucene\Index\Term|null
      */
-    public function highlight($words);
+    public function nextTerm();
+
+    /**
+     * Returns term in current position
+     *
+     * @return \Zend\Search\Lucene\Index\Term|null
+     */
+    public function currentTerm();
+
+    /**
+     * Close terms stream
+     *
+     * Should be used for resources clean up if stream is not read up to the end
+     */
+    public function closeTermsStream();
 }

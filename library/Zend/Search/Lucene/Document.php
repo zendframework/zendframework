@@ -23,8 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Search\Lucene\Document;
-use Zend\Search\Lucene;
+namespace Zend\Search\Lucene;
 
 /**
  * A Document is a set of fields. Each field has a name and a textual value.
@@ -73,9 +72,9 @@ class Document
      * Add a field object to this document.
      *
      * @param \Zend\Search\Lucene\Document\Field $field
-     * @return \Zend\Search\Lucene\Document\Document
+     * @return \Zend\Search\Lucene\Document
      */
-    public function addField(Field $field)
+    public function addField(Document\Field $field)
     {
         $this->_fields[$field->name] = $field;
 
@@ -103,7 +102,7 @@ class Document
     public function getField($fieldName)
     {
         if (!array_key_exists($fieldName, $this->_fields)) {
-            throw new Lucene\Exception("Field name \"$fieldName\" not found in document.");
+            throw new Exception("Field name \"$fieldName\" not found in document.");
         }
         return $this->_fields[$fieldName];
     }

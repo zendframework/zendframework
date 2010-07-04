@@ -25,10 +25,12 @@
  */
 namespace Zend\Search\Lucene\Document;
 
+use Zend\Search\Lucene\Document;
+
 /**
  * OpenXML document.
  *
- * @uses       \Zend\Search\Lucene\Document\Document
+ * @uses       \Zend\Search\Lucene\Document
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Document

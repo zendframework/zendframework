@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Search\Lucene\Analysis\Analyzer;
+namespace Zend\Search\Lucene\Analysis;
 
 /**
  * An Analyzer is used to analyze text.
@@ -34,7 +34,7 @@ namespace Zend\Search\Lucene\Analysis\Analyzer;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface AnalyzerInterface
+interface Analyzer
 {
     /**
      * Tokenize text to terms

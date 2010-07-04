@@ -23,8 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Search\Lucene\Analysis\TokenFilter;
-use Zend\Search\Lucene\Analysis;
+namespace Zend\Search\Lucene\Analysis;
 
 /**
  * Token filter converts (normalizes) Token ore removes it from a token stream.
@@ -36,7 +35,7 @@ use Zend\Search\Lucene\Analysis;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface TokenFilterInterface
+interface TokenFilter
 {
     /**
      * Normalize Token or remove it (if null is returned)
@@ -44,5 +43,5 @@ interface TokenFilterInterface
      * @param \Zend\Search\Lucene\Analysis\Token $srcToken
      * @return \Zend\Search\Lucene\Analysis\Token
      */
-    public function normalize(Analysis\Token $srcToken);
+    public function normalize(Token $srcToken);
 }

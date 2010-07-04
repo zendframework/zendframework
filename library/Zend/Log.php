@@ -75,19 +75,19 @@ class Zend_Log
      * @var callback
      */
     protected $_origErrorHandler       = null;
-    
+
     /**
      *
      * @var boolean
      */
     protected $_registeredErrorHandler = false;
-    
+
     /**
      *
      * @var array
      */
     protected $_errorHandlerMap        = false;
-    
+
     /**
      *
      * @var string
@@ -153,6 +153,9 @@ class Zend_Log
         $writer = $this->_constructFromConfig('writer', $config, $this->_defaultWriterNamespace);
 
         if (!$writer instanceof Zend_Log_Writer_Abstract) {
+            $writerName = is_object($writer)
+                        ? get_class($writer)
+                        : 'The specified writer';
             /** @see Zend_Log_Exception */
             require_once 'Zend/Log/Exception.php';
             throw new Zend_Log_Exception("{$writerName} does not extend Zend_Log_Writer_Abstract!");
@@ -460,7 +463,7 @@ class Zend_Log
     public function setEventItem($name, $value) {
         $this->_extras = array_merge($this->_extras, array($name => $value));
     }
-    
+
     /**
      * Register Logging system as an error handler to log php errors
      * Note: it still calls the original error handler if set_error_handler is able to return it.
@@ -479,12 +482,12 @@ class Zend_Log
     public function registerErrorHandler()
     {
         // Only register once.  Avoids loop issues if it gets registered twice.
-        if ($this->_registeredErrorHandler) { 
-        	return $this; 
+        if ($this->_registeredErrorHandler) {
+        	return $this;
         }
-        
+
         $this->_origErrorHandler = set_error_handler(array($this, 'errorHandler'));
-        
+
         // Contruct a default map of phpErrors to Zend_Log priorities.
         // Some of the errors are uncatchable, but are included for completeness
         $this->_errorHandlerMap = array(
@@ -506,11 +509,11 @@ class Zend_Log
         if (defined('E_USER_DEPRECATED')) {
             $this->_errorHandlerMap['E_USER_DEPRECATED'] = Zend_Log::DEBUG;
         }
-        
+
         $this->_registeredErrorHandler = true;
         return $this;
     }
-    
+
     /**
      * Error Handler will convert error into log message, and then call the original error handler
      *
@@ -525,7 +528,7 @@ class Zend_Log
     public function errorHandler($errno, $errstr, $errfile, $errline, $errcontext)
     {
         $errorLevel = error_reporting();
-        
+
         if ($errorLevel && $errno) {
             if (isset($this->_errorHandlerMap[$errno])) {
                 $priority = $this->_errorHandlerMap[$errno];
@@ -534,7 +537,7 @@ class Zend_Log
             }
             $this->log($errstr, $priority, array('errno'=>$errno, 'file'=>$errfile, 'line'=>$errline, 'context'=>$errcontext));
         }
-        
+
         if ($this->_origErrorHandler !== null) {
             return call_user_func($this->_origErrorHandler, $errno, $errstr, $errfile, $errline, $errcontext);
         }
@@ -543,7 +546,7 @@ class Zend_Log
 
     /**
      * Set timestamp format for log entries.
-     * 
+     *
      * @param string $format
      * @return Zend_Log
      */
@@ -555,7 +558,7 @@ class Zend_Log
 
     /**
      * Get timestamp format used for log entries.
-     * 
+     *
      * @return string
      */
     public function getTimestampFormat()

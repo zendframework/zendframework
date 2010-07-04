@@ -31,6 +31,9 @@ require_once 'Zend/Log/Writer/Mock.php';
 /** Zend_Log_Writer_Stream */
 require_once 'Zend/Log/Writer/Stream.php';
 
+/** Zend_Log_FactoryInterface */
+require_once 'Zend/Log/FactoryInterface.php';
+
 /**
  * @category   Zend
  * @package    Zend_Log
@@ -241,7 +244,7 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $info = $event['info'];
         $this->assertContains('nonesuch', $info);
     }
-    
+
     // Factory
 
     public function testLogConstructFromConfigStream()
@@ -298,36 +301,36 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $logger = new Zend_Log();
         $logger->addWriter($writer);
         $this->errWriter = $writer;
-        
-        
+
+
         $oldErrorLevel = error_reporting();
-        
+
         $this->expectingLogging = true;
         error_reporting(E_ALL | E_STRICT);
-        
+
         $oldHandler = set_error_handler(array($this, 'verifyHandlerData'));
         $logger->registerErrorHandler();
-        
+
         trigger_error("Testing notice shows up in logs", E_USER_NOTICE);
         trigger_error("Testing warning shows up in logs", E_USER_WARNING);
         trigger_error("Testing error shows up in logs", E_USER_ERROR);
-        
+
         $this->expectingLogging = false;
         error_reporting(0);
-        
+
         trigger_error("Testing notice misses logs", E_USER_NOTICE);
         trigger_error("Testing warning misses logs", E_USER_WARNING);
         trigger_error("Testing error misses logs", E_USER_ERROR);
-        
+
         restore_error_handler(); // Pop off the Logger
         restore_error_handler(); // Pop off the verifyHandlerData
         error_reporting($oldErrorLevel); // Restore original reporting level
         unset($this->errWriter);
     }
-    
+
     /**
      * @group ZF-9192
-     * Used by testUsingWithErrorHandler - 
+     * Used by testUsingWithErrorHandler -
      * verifies that the data written to the original logger is the same as the data written in Zend_Log
      */
     public function verifyHandlerData($errno, $errstr, $errfile, $errline, $errcontext)
@@ -343,7 +346,7 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
             $this->assertTrue(empty($this->errWriter->events));
         }
     }
-    
+
     /**
      * @group ZF-9870
      */
@@ -354,7 +357,7 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $this->assertSame($logger, $logger->setTimestampFormat('Y-m-d H:i:s'));
         $this->assertEquals('Y-m-d H:i:s', $logger->getTimestampFormat());
     }
-    
+
     /**
      * @group ZF-9870
      */
@@ -366,5 +369,27 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         rewind($this->log);
         $message = stream_get_contents($this->log);
         $this->assertEquals(date('Y-m-d'), substr($message, 0, 10));
+    }
+
+    /**
+     * @group ZF-9555
+     */
+    public function testExceptionConstructWriterFromConfig()
+    {
+        try {
+            $logger = new Zend_Log();
+            $writer = array('writerName' => 'NotExtendedWriterAbstract');
+            $logger->addWriter($writer);
+        } catch (Exception $e) {
+            $this->assertType('Zend_Log_Exception', $e);
+            $this->assertRegExp('#^(Zend_Log_Writer_NotExtendedWriterAbstract|The\sspecified\swriter)#', $e->getMessage());
+        }
+    }
+}
+
+class Zend_Log_Writer_NotExtendedWriterAbstract implements Zend_Log_FactoryInterface
+{
+    public static function factory($config)
+    {
     }
 }

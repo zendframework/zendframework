@@ -357,13 +357,59 @@ class URITest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Test that valid userInfo input is validated by validateUserInfo
+     * 
+     * @param string $userInfo
+     * @dataProvider validUserInfoProvider
+     */
+    public function testValidateUserInfoValid($userInfo)
+    {
+        $this->assertTrue(URI::validateUserInfo($userInfo));
+    }
+    
+    /**
+     * Test that invalid userInfo input is not accepted by validateUserInfo
+     * 
+     * @param string $userInfo
+     * @param string $exp 
+     * @dataProvider invalidUserInfoProvider
+     */
+    public function testValidateUserInfoInvalid($userInfo, $exp)
+    {
+        $this->assertFalse(URI::validateUserInfo($userInfo));
+    }
+    
+    /**
+     * Test that valid userInfo is returned unchanged by encodeUserInfo
+     * 
+     * @param $userInfo
+     * @dataProvider validUserInfoProvider
+     */
+    public function testEncodeUserInfoValid($userInfo)
+    {
+        $this->assertEquals($userInfo, URI::encodeUserInfo($userInfo));
+    }
+    
+    /**
+     * Test that invalid userInfo input properly encoded by encodeUserInfo
+     * 
+     * @param string $userInfo
+     * @param string $exp 
+     * @dataProvider invalidUserInfoProvider
+     */
+    public function testEncodeUserInfoInvalid($userInfo, $exp)
+    {
+        $this->assertEquals($exp, URI::encodeUserInfo($userInfo));
+    }
+    
+    /**
      * 
      * Enter description here ...
      */
     public function testInvalidCharacter()
     {
         $this->markTestIncomplete();
-        $url = new URI('http://an`di:password@www.zend.com');
+        $url = new URI('http://@www.zend.com');
         $this->assertFalse($url->isValid());
     }
 
@@ -401,6 +447,29 @@ class URITest extends \PHPUnit_Framework_TestCase
     /**
      * Data Providers
      */
+    
+    static public function validUserInfoProvider()
+    {
+        return array(
+            array('user:'),
+            array(':password'),
+            array('user:password'),
+            array(':'),
+            array('my-user'),
+            array('one:two:three:four'),
+            array('my-user-has-%3A-colon:pass'),
+            array('a_.!~*\'(-)n0123Di%25%26:pass;:&=+$,word')
+        );
+    }
+    
+    static public function invalidUserInfoProvider()
+    {
+        return array(
+            array('an`di:password',    'an%60di:password'),
+            array('user name',         'user%20name'),
+            array('shahar.e@zend.com', 'shahar.e%40zend.com')
+        );
+    }
     
     /**
      * Data provider for valid URIs, not necessarily complete 
@@ -470,7 +539,8 @@ class URITest extends \PHPUnit_Framework_TestCase
         return array(
             array('a=1&b=2&c=3&d=4'),
             array('with?questionmark/andslash'),
-            array('id=123&url=http://example.com/?bar=foo+baz'), 
+            array('id=123&url=http://example.com/?bar=foo+baz'),
+            array('with%20%0Aline%20break'), 
         );
     }
     
@@ -486,9 +556,10 @@ class URITest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('with#pound', 'with%23pound'),
-            array('with space', 'with+space'),
+            array('with space', 'with%20space'),
             array('test=a&var[]=1&var[]=2&some[thing]=3', 'test=a&var%5B%5D=1&var%5B%5D=2&some%5Bthing%5D=3'),
-            array("with \nline break", "with+%0Aline+break")
+            array("with \nline break", "with%20%0Aline%20break"),
+            array("with%percent", "with%25percent"),
         );
     }
     

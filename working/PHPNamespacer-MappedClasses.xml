@@ -17387,10 +17387,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Wildfire/Channel/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Wildfire_Channel_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Wildfire/Channel/ChannelInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Wildfire\Channel</newNamespace>
-      <newClassName>ChannelInterface</newClassName>
-      <newFullyQualifiedName>Zend\Wildfire\Channel\ChannelInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Wildfire/Channel.php</newRelativeFilePath>
+      <newNamespace>Zend\Wildfire</newNamespace>
+      <newClassName>Channel</newClassName>
+      <newFullyQualifiedName>Zend\Wildfire\Channel</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Wildfire/Exception.php</originalRelativeFilePath>
@@ -17419,18 +17419,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Wildfire/Plugin/FirePhp.php</originalRelativeFilePath>
       <originalClassName>Zend_Wildfire_Plugin_FirePhp</originalClassName>
-      <newRelativeFilePath>Zend/Wildfire/Plugin/FirePhp/FirePhp.php</newRelativeFilePath>
-      <newNamespace>Zend\Wildfire\Plugin\FirePhp</newNamespace>
+      <newRelativeFilePath>Zend/Wildfire/Plugin/FirePhp.php</newRelativeFilePath>
+      <newNamespace>Zend\Wildfire\Plugin</newNamespace>
       <newClassName>FirePhp</newClassName>
-      <newFullyQualifiedName>Zend\Wildfire\Plugin\FirePhp\FirePhp</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Wildfire\Plugin\FirePhp</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Wildfire/Plugin/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Wildfire_Plugin_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Wildfire/Plugin/PluginInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Wildfire\Plugin</newNamespace>
-      <newClassName>PluginInterface</newClassName>
-      <newFullyQualifiedName>Zend\Wildfire\Plugin\PluginInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Wildfire/Plugin.php</newRelativeFilePath>
+      <newNamespace>Zend\Wildfire</newNamespace>
+      <newClassName>Plugin</newClassName>
+      <newFullyQualifiedName>Zend\Wildfire\Plugin</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Wildfire/Protocol/JsonStream.php</originalRelativeFilePath>

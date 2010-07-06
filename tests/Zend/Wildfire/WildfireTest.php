@@ -47,14 +47,14 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     {
         date_default_timezone_set('America/Los_Angeles');
         Channel\HttpHeaders::destroyInstance();
-        FirePhp\FirePhp::destroyInstance();
+        FirePhp::destroyInstance();
     }
 
     public function tearDown()
     {
         Controller\Front::getInstance()->resetInstance();
         Channel\HttpHeaders::destroyInstance();
-        FirePhp\FirePhp::destroyInstance();
+        FirePhp::destroyInstance();
     }
 
     protected function _setupWithFrontController()
@@ -70,7 +70,7 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
                           ->setParam('noViewRenderer', true)
                           ->throwExceptions(false);
 
-        FirePhp\FirePhp::getInstance()->setOption('includeLineNumbers', false);
+        FirePhp::getInstance()->setOption('includeLineNumbers', false);
 
         $this->_request->setUserAgentExtensionEnabled(true);
     }
@@ -85,7 +85,7 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
         $channel->setResponse($this->_response);
 
         if ($ModifyOptions) {
-          FirePhp\FirePhp::getInstance()->setOption('includeLineNumbers', false);
+          FirePhp::getInstance()->setOption('includeLineNumbers', false);
         }
 
         $this->_request->setUserAgentExtensionEnabled(true);
@@ -93,12 +93,12 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
 
     public function testNoResponseObject()
     {
-        FirePhp\FirePhp::getInstance()->setEnabled(false);
-        FirePhp\FirePhp::send('Hello World');
+        FirePhp::getInstance()->setEnabled(false);
+        FirePhp::send('Hello World');
 
-        FirePhp\FirePhp::getInstance()->setEnabled(true);
+        FirePhp::getInstance()->setEnabled(true);
         try {
-            FirePhp\FirePhp::send('Hello World');
+            FirePhp::send('Hello World');
             $this->fail('Should throw a response object not initialized error');
         } catch (\Exception $e) {
             // success
@@ -151,8 +151,8 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     {
         $this->_setupWithoutFrontController();
         try {
-            FirePhp\FirePhp::getInstance();
-            FirePhp\FirePhp::init(null);
+            FirePhp::getInstance();
+            FirePhp::init(null);
             $this->fail('Should not be able to re-initialize');
         } catch (\Exception $e) {
             // success
@@ -163,9 +163,9 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     {
         $this->_setupWithoutFrontController();
 
-        $firephp = FirePhp\FirePhp::getInstance();
+        $firephp = FirePhp::getInstance();
         $channel = Channel\HttpHeaders::getInstance();
-        $protocol = $channel->getProtocol(FirePhp\FirePhp::PROTOCOL_URI);
+        $protocol = $channel->getProtocol(FirePhp::PROTOCOL_URI);
 
         $this->assertFalse($protocol->getMessages());
 
@@ -173,8 +173,8 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($firephp->send('Hello World'));
 
-        $messages = array(FirePhp\FirePhp::STRUCTURE_URI_FIREBUGCONSOLE=>
-                          array(FirePhp\FirePhp::PLUGIN_URI=>
+        $messages = array(FirePhp::STRUCTURE_URI_FIREBUGCONSOLE=>
+                          array(FirePhp::PLUGIN_URI=>
                                 array('[{"Type":"LOG"},"Hello World"]')));
 
         $this->assertEquals(serialize($protocol->getMessages()),
@@ -193,7 +193,7 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
         $controller = Controller\Front::getInstance();
         $channel = Channel\HttpHeaders::getInstance();
 
-        $firephp = FirePhp\FirePhp::getInstance();
+        $firephp = FirePhp::getInstance();
         $firephp->send('Hello World');
 
         $plugins = $controller->getPlugins();
@@ -210,7 +210,7 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
 
         Channel\HttpHeaders::setControllerPluginStackIndex(99);
 
-        $firephp = FirePhp\FirePhp::getInstance();
+        $firephp = FirePhp::getInstance();
         $firephp->send('Hello World');
 
         $plugins = $controller->getPlugins();
@@ -222,7 +222,7 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     {
         $this->_setupWithoutFrontController();
 
-        $firephp = FirePhp\FirePhp::getInstance();
+        $firephp = FirePhp::getInstance();
 
         $message = 'This is a log message!';
 
@@ -243,7 +243,7 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     {
         $this->_setupWithFrontController();
 
-        $firephp = FirePhp\FirePhp::getInstance();
+        $firephp = FirePhp::getInstance();
 
         $message = 'This is a log message!';
 
@@ -269,7 +269,7 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     {
         $this->_setupWithFrontController();
 
-        $firephp = FirePhp\FirePhp::getInstance();
+        $firephp = FirePhp::getInstance();
 
         $encodedMessage = $message = 'Отладочный';
 
@@ -294,7 +294,7 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     {
         $this->_setupWithFrontController();
 
-        $firephp = FirePhp\FirePhp::getInstance();
+        $firephp = FirePhp::getInstance();
 
         $obj1 = new JsonEncodingTestClass();
         $obj2 = new JsonEncodingTestClass();
@@ -320,11 +320,11 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
      */
     public function testAdvancedLogging()
     {
-        FirePhp\FirePhp::getInstance()->setOption('maxTraceDepth',0);
+        FirePhp::getInstance()->setOption('maxTraceDepth',0);
 
         $this->_setupWithoutFrontController();
 
-        $firephp = FirePhp\FirePhp::getInstance();
+        $firephp = FirePhp::getInstance();
 
         $message = 'This is a log message!';
         $label = 'Test Label';
@@ -339,36 +339,36 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
         $firephp->send($message, null, 'TRACE');
         $firephp->send($table, null, 'TABLE');
 
-        FirePhp\FirePhp::send($message, $label);
-        FirePhp\FirePhp::send($message, $label, FirePhp\FirePhp::DUMP);
+        FirePhp::send($message, $label);
+        FirePhp::send($message, $label, FirePhp::DUMP);
 
         try {
           throw new \Exception('Test Exception');
         } catch (\Exception $e) {
-          FirePhp\FirePhp::send($e);
+          FirePhp::send($e);
         }
 
         try {
-            FirePhp\FirePhp::send($message, $label, 'UNKNOWN');
+            FirePhp::send($message, $label, 'UNKNOWN');
             $this->fail('Should not be able to log with undefined log style');
         } catch (\Exception $e) {
             // success
         }
 
         $channel = Channel\HttpHeaders::getInstance();
-        $protocol = $channel->getProtocol(FirePhp\FirePhp::PROTOCOL_URI);
+        $protocol = $channel->getProtocol(FirePhp::PROTOCOL_URI);
 
-        $messages = array(FirePhp\FirePhp::STRUCTURE_URI_FIREBUGCONSOLE=>
-                          array(FirePhp\FirePhp::PLUGIN_URI=>
+        $messages = array(FirePhp::STRUCTURE_URI_FIREBUGCONSOLE=>
+                          array(FirePhp::PLUGIN_URI=>
                                 array(1=>'[{"Type":"TABLE"},["Summary line for the table",[["Column 1","Column 2"],["Row 1 c 1"," Row 1 c 2"],["Row 2 c 1"," Row 2 c 2"]]]]',
                                       2=>'[{"Type":"LOG","Label":"Test Label"},"This is a log message!"]')),
-                          FirePhp\FirePhp::STRUCTURE_URI_DUMP=>
-                          array(FirePhp\FirePhp::PLUGIN_URI=>
+                          FirePhp::STRUCTURE_URI_DUMP=>
+                          array(FirePhp::PLUGIN_URI=>
                                 array('{"Test Label":"This is a log message!"}')));
 
         $qued_messages = $protocol->getMessages();
-        unset($qued_messages[FirePhp\FirePhp::STRUCTURE_URI_FIREBUGCONSOLE][FirePhp\FirePhp::PLUGIN_URI][0]);
-        unset($qued_messages[FirePhp\FirePhp::STRUCTURE_URI_FIREBUGCONSOLE][FirePhp\FirePhp::PLUGIN_URI][3]);
+        unset($qued_messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE][FirePhp::PLUGIN_URI][0]);
+        unset($qued_messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE][FirePhp::PLUGIN_URI][3]);
 
         $this->assertEquals(serialize($qued_messages),
                             serialize($messages));
@@ -380,16 +380,16 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
         $this->_setupWithoutFrontController();
 
         $channel = Channel\HttpHeaders::getInstance();
-        $protocol = $channel->getProtocol(FirePhp\FirePhp::PROTOCOL_URI);
+        $protocol = $channel->getProtocol(FirePhp::PROTOCOL_URI);
 
-        $message = new FirePhp\Message(FirePhp\FirePhp::LOG, 'Message 1');
+        $message = new FirePhp\Message(FirePhp::LOG, 'Message 1');
 
 
-        $this->assertEquals($message->getStyle(), FirePhp\FirePhp::LOG);
+        $this->assertEquals($message->getStyle(), FirePhp::LOG);
 
-        $message->setStyle(FirePhp\FirePhp::INFO);
+        $message->setStyle(FirePhp::INFO);
 
-        $this->assertEquals($message->getStyle(), FirePhp\FirePhp::INFO);
+        $this->assertEquals($message->getStyle(), FirePhp::INFO);
 
 
         $this->assertNull($message->getLabel());
@@ -415,17 +415,17 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
 
 
         $message->setDestroy(true);
-        $this->assertfalse(FirePhp\FirePhp::send($message));
+        $this->assertfalse(FirePhp::send($message));
 
         $message->setDestroy(false);
-        $this->assertTrue(FirePhp\FirePhp::send($message));
+        $this->assertTrue(FirePhp::send($message));
 
         Channel\HttpHeaders::getInstance()->flush();
 
         $messages = $protocol->getMessages();
 
-        $this->assertEquals($messages[FirePhp\FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
-                                            [FirePhp\FirePhp::PLUGIN_URI][0],
+        $this->assertEquals($messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
+                                            [FirePhp::PLUGIN_URI][0],
                             '[{"Type":"INFO","Label":"Label 1"},"Message 2"]');
     }
 
@@ -521,13 +521,13 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
         $this->_setupWithoutFrontController();
 
         $channel = Channel\HttpHeaders::getInstance();
-        $protocol = $channel->getProtocol(FirePhp\FirePhp::PROTOCOL_URI);
+        $protocol = $channel->getProtocol(FirePhp::PROTOCOL_URI);
 
         $table = new FirePhp\TableMessage('TestMessage');
         $table->setHeader(array('col1','col2'));
         $table->setBuffered(true);
 
-        FirePhp\FirePhp::send($table);
+        FirePhp::send($table);
 
         $cell = new \ArrayObject();
         $cell->append("item1");
@@ -539,8 +539,8 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
 
         $messages = $protocol->getMessages();
 
-        $this->assertEquals($messages[FirePhp\FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
-                                            [FirePhp\FirePhp::PLUGIN_URI][0],
+        $this->assertEquals($messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
+                                            [FirePhp::PLUGIN_URI][0],
                             '[{"Type":"TABLE","Label":"TestMessage"},[["col1","col2"],["row1",{"__className":"ArrayObject","undeclared:0":"item1","undeclared:1":"item2"}]]]');
     }
 
@@ -548,9 +548,9 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     {
         $this->_setupWithFrontController();
 
-        FirePhp\FirePhp::group('Test Group');
-        FirePhp\FirePhp::send('Test Message');
-        FirePhp\FirePhp::groupEnd();
+        FirePhp::group('Test Group');
+        FirePhp::send('Test Message');
+        FirePhp::groupEnd();
 
         $this->_controller->dispatch();
 
@@ -569,9 +569,9 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     {
         $label = 'Message';
 
-        $message1 = new FirePhp\Message(FirePhp\FirePhp::LOG, $label);
+        $message1 = new FirePhp\Message(FirePhp::LOG, $label);
 
-        $message2 = new FirePhp\Message(FirePhp\FirePhp::LOG, $label);
+        $message2 = new FirePhp\Message(FirePhp::LOG, $label);
 
         $this->assertNotEquals($message1,$message2);
     }
@@ -581,12 +581,12 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
         $this->_setupWithoutFrontController();
 
         $channel = Channel\HttpHeaders::getInstance();
-        $protocol = $channel->getProtocol(FirePhp\FirePhp::PROTOCOL_URI);
+        $protocol = $channel->getProtocol(FirePhp::PROTOCOL_URI);
 
-        $message = new FirePhp\Message(FirePhp\FirePhp::LOG, 'Message 1');
+        $message = new FirePhp\Message(FirePhp::LOG, 'Message 1');
         $this->assertFalse($message->setBuffered(true));
 
-        FirePhp\FirePhp::send($message);
+        FirePhp::send($message);
 
         $this->assertFalse($protocol->getMessages());
 
@@ -596,8 +596,8 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
 
         $messages = $protocol->getMessages();
 
-        $this->assertEquals($messages[FirePhp\FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
-                                            [FirePhp\FirePhp::PLUGIN_URI][0],
+        $this->assertEquals($messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
+                                            [FirePhp::PLUGIN_URI][0],
                             '[{"Type":"LOG"},"Message 2"]');
     }
 
@@ -606,12 +606,12 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
         $this->_setupWithFrontController();
 
         $channel = Channel\HttpHeaders::getInstance();
-        $protocol = $channel->getProtocol(FirePhp\FirePhp::PROTOCOL_URI);
+        $protocol = $channel->getProtocol(FirePhp::PROTOCOL_URI);
 
-        $message = new FirePhp\Message(FirePhp\FirePhp::LOG, 'Message 1');
+        $message = new FirePhp\Message(FirePhp::LOG, 'Message 1');
         $this->assertFalse($message->setBuffered(true));
 
-        FirePhp\FirePhp::send($message);
+        FirePhp::send($message);
 
         $this->assertFalse($protocol->getMessages());
 
@@ -621,8 +621,8 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
 
         $messages = $protocol->getMessages();
 
-        $this->assertEquals($messages[FirePhp\FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
-                                            [FirePhp\FirePhp::PLUGIN_URI][0],
+        $this->assertEquals($messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
+                                            [FirePhp::PLUGIN_URI][0],
                             '[{"Type":"LOG"},"Message 2"]');
     }
 
@@ -631,18 +631,18 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
         $this->_setupWithoutFrontController();
 
         $channel = Channel\HttpHeaders::getInstance();
-        $protocol = $channel->getProtocol(FirePhp\FirePhp::PROTOCOL_URI);
+        $protocol = $channel->getProtocol(FirePhp::PROTOCOL_URI);
 
-        $message = new FirePhp\Message(FirePhp\FirePhp::LOG, 'Message 1');
+        $message = new FirePhp\Message(FirePhp::LOG, 'Message 1');
         $message->setBuffered(true);
 
-        FirePhp\FirePhp::send($message);
+        FirePhp::send($message);
 
-        $this->assertEquals($message->getStyle(), FirePhp\FirePhp::LOG);
+        $this->assertEquals($message->getStyle(), FirePhp::LOG);
 
-        $message->setStyle(FirePhp\FirePhp::INFO);
+        $message->setStyle(FirePhp::INFO);
 
-        $this->assertEquals($message->getStyle(), FirePhp\FirePhp::INFO);
+        $this->assertEquals($message->getStyle(), FirePhp::INFO);
 
         $message->setDestroy(true);
 
@@ -671,7 +671,7 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($channel->flush(), 'Nothing to flush - No messages');
 
-        FirePhp\FirePhp::send('Hello World');
+        FirePhp::send('Hello World');
 
         $this->assertTrue($channel->flush(), 'One message to flush');
 
@@ -683,30 +683,30 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     public function testFirePhpPluginSubclass()
     {
 
-        $firephp = FirePhp\FirePhp::init('ZendTest\Wildfire\FirePhpPlugin');
+        $firephp = FirePhp::init('ZendTest\Wildfire\FirePhpPlugin');
 
         $this->assertEquals(get_class($firephp),
                             'ZendTest\Wildfire\FirePhpPlugin');
 
-        FirePhp\FirePhp::destroyInstance();
+        FirePhp::destroyInstance();
 
         try {
-            FirePhp\FirePhp::init('ZendTest\Wildfire\Request');
+            FirePhp::init('ZendTest\Wildfire\Request');
             $this->fail('Should not be able to initialize');
         } catch (\Exception $e) {
             // success
         }
 
-        $this->assertNull(FirePhp\FirePhp::getInstance(true));
+        $this->assertNull(FirePhp::getInstance(true));
 
         try {
-            FirePhp\FirePhp::init(array());
+            FirePhp::init(array());
             $this->fail('Should not be able to initialize');
         } catch (\Exception $e) {
             // success
         }
 
-        $this->assertNull(FirePhp\FirePhp::getInstance(true));
+        $this->assertNull(FirePhp::getInstance(true));
     }
 
     public function testHttpHeadersChannelSubclass()
@@ -745,16 +745,16 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     {
         $this->_setupWithoutFrontController();
 
-        $firephp = FirePhp\FirePhp::getInstance();
+        $firephp = FirePhp::getInstance();
         $channel = Channel\HttpHeaders::getInstance();
-        $protocol = $channel->getProtocol(FirePhp\FirePhp::PROTOCOL_URI);
+        $protocol = $channel->getProtocol(FirePhp::PROTOCOL_URI);
 
         $firephp->send(array('file'=>tmpfile()));
 
         $messages = $protocol->getMessages();
 
-        $message = $messages[FirePhp\FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
-                            [FirePhp\FirePhp::PLUGIN_URI]
+        $message = $messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
+                            [FirePhp::PLUGIN_URI]
                             [0];
 
         $this->assertEquals(substr($message,0,41)
@@ -768,9 +768,9 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     {
         $this->_setupWithoutFrontController();
 
-        $firephp = FirePhp\FirePhp::getInstance();
+        $firephp = FirePhp::getInstance();
         $channel = Channel\HttpHeaders::getInstance();
-        $protocol = $channel->getProtocol(FirePhp\FirePhp::PROTOCOL_URI);
+        $protocol = $channel->getProtocol(FirePhp::PROTOCOL_URI);
 
         $data = array();
         for ($i=0 ; $i < 400 ; $i++) {
@@ -793,7 +793,7 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
      */
     public function testOptions()
     {
-        $firephp = FirePhp\FirePhp::getInstance();
+        $firephp = FirePhp::getInstance();
 
         $_options = array(
             'traceOffset' => 1, /* The offset in the trace which identifies the source of the message */
@@ -821,9 +821,9 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     {
         $this->_setupWithoutFrontController();
 
-        $firephp = FirePhp\FirePhp::getInstance();
+        $firephp = FirePhp::getInstance();
         $channel = Channel\HttpHeaders::getInstance();
-        $protocol = $channel->getProtocol(FirePhp\FirePhp::PROTOCOL_URI);
+        $protocol = $channel->getProtocol(FirePhp::PROTOCOL_URI);
 
         $obj = new TestObject1();
 
@@ -835,8 +835,8 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
 
         $messages = $protocol->getMessages();
 
-        $message = $messages[FirePhp\FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
-                            [FirePhp\FirePhp::PLUGIN_URI]
+        $message = $messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
+                            [FirePhp::PLUGIN_URI]
                             [0];
 
         if (version_compare(phpversion(), '5.3' , '<')) {
@@ -849,8 +849,8 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
                               '[{"Type":"LOG"},{"__className":"ZendTest\\\\Wildfire\\\\TestObject1","public:name":"Name","public:value":"Value","protected:static:protectedStatic":"ProtectedStatic"}]');
         }
 
-        $message = $messages[FirePhp\FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
-                            [FirePhp\FirePhp::PLUGIN_URI]
+        $message = $messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
+                            [FirePhp::PLUGIN_URI]
                             [1];
 
         $this->assertEquals($message,
@@ -861,9 +861,9 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     {
         $this->_setupWithoutFrontController();
 
-        $firephp = FirePhp\FirePhp::getInstance();
+        $firephp = FirePhp::getInstance();
         $channel = Channel\HttpHeaders::getInstance();
-        $protocol = $channel->getProtocol(FirePhp\FirePhp::PROTOCOL_URI);
+        $protocol = $channel->getProtocol(FirePhp::PROTOCOL_URI);
 
         $obj = new TestObject2();
 
@@ -871,8 +871,8 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
 
         $messages = $protocol->getMessages();
 
-        $message = $messages[FirePhp\FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
-                            [FirePhp\FirePhp::PLUGIN_URI]
+        $message = $messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
+                            [FirePhp::PLUGIN_URI]
                             [0];
 
         if (version_compare(phpversion(), '5.3' , '<')) {
@@ -895,9 +895,9 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     {
         $this->_setupWithoutFrontController();
 
-        $firephp = FirePhp\FirePhp::getInstance();
+        $firephp = FirePhp::getInstance();
         $channel = Channel\HttpHeaders::getInstance();
-        $protocol = $channel->getProtocol(FirePhp\FirePhp::PROTOCOL_URI);
+        $protocol = $channel->getProtocol(FirePhp::PROTOCOL_URI);
 
         $firephp->setOption('maxObjectDepth',2);
         $firephp->setOption('maxArrayDepth',1);
@@ -914,20 +914,20 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
         $table[] = array('Col1', 'Col2');
         $table[] = array($obj, $obj);
 
-        $firephp->send($table, 'Label', FirePhp\FirePhp::TABLE);
+        $firephp->send($table, 'Label', FirePhp::TABLE);
 
 
         $messages = $protocol->getMessages();
 
-        $message = $messages[FirePhp\FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
-                            [FirePhp\FirePhp::PLUGIN_URI]
+        $message = $messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
+                            [FirePhp::PLUGIN_URI]
                             [0];
 
         $this->assertEquals($message,
                             '[{"Type":"LOG"},{"__className":"ZendTest\\\\Wildfire\\\\TestObject3","public:name":"Name","public:value":"Value","undeclared:testArray":["val1","** Max Array Depth (1) **"],"undeclared:child":{"__className":"ZendTest\\\\Wildfire\\\\TestObject3","public:name":"Name","public:value":"Value","undeclared:testArray":["val1","** Max Array Depth (1) **"],"undeclared:child":"** Max Object Depth (2) **"}}]');
 
-        $message = $messages[FirePhp\FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
-                            [FirePhp\FirePhp::PLUGIN_URI]
+        $message = $messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
+                            [FirePhp::PLUGIN_URI]
                             [1];
 
         $this->assertEquals($message,
@@ -965,7 +965,7 @@ class JsonEncodingTestClass
 }
 
 
-class FirePhpPlugin extends FirePhp\FirePhp
+class FirePhpPlugin extends FirePhp
 {
 }
 

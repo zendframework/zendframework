@@ -36,7 +36,7 @@ use Zend\Controller;
  * @uses       \Zend\Controller\Request\AbstractRequest
  * @uses       \Zend\Controller\Response\AbstractResponse
  * @uses       \Zend\Loader
- * @uses       \Zend\Wildfire\Channel\ChannelInterface
+ * @uses       \Zend\Wildfire\Channel
  * @uses       \Zend\Wildfire\Exception
  * @uses       \Zend\Wildfire\Protocol\JSONStream
  * @category   Zend
@@ -47,7 +47,7 @@ use Zend\Controller;
  */
 class HttpHeaders 
     extends Controller\Plugin\AbstractPlugin 
-    implements ChannelInterface
+    implements Wildfire\Channel
 {
     /**
      * The string to be used to prefix the headers.

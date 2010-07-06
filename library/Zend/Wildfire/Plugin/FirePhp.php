@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Wildfire\Plugin\FirePhp;
+namespace Zend\Wildfire\Plugin;
 use Zend\Wildfire;
 
 /**
@@ -35,7 +35,7 @@ use Zend\Wildfire;
  * @uses       \Zend\Loader
  * @uses       \Zend\Wildfire\Channel\HttpHeaders
  * @uses       \Zend\Wildfire\Exception
- * @uses       \Zend\Wildfire\Plugin\PluginInterface
+ * @uses       \Zend\Wildfire\Plugin
  * @uses       \Zend\Wildfire\Protocol\JSONStream
  * @category   Zend
  * @package    Zend_Wildfire
@@ -43,7 +43,7 @@ use Zend\Wildfire;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FirePhp implements Wildfire\Plugin\PluginInterface
+class FirePhp implements Wildfire\Plugin
 {
     /**
      * Plain log style.
@@ -118,7 +118,7 @@ class FirePhp implements Wildfire\Plugin\PluginInterface
 
     /**
      * Singleton instance
-     * @var \Zend\Wildfire\Plugin\FirePhp\FirePhp
+     * @var \Zend\Wildfire\Plugin\FirePhp
      */
     protected static $_instance = null;
 
@@ -130,7 +130,7 @@ class FirePhp implements Wildfire\Plugin\PluginInterface
 
     /**
      * The channel via which to send the encoded messages.
-     * @var \Zend\Wildfire\Channel\ChannelInterface
+     * @var \Zend\Wildfire\Channel
      */
     protected $_channel = null;
 
@@ -167,8 +167,8 @@ class FirePhp implements Wildfire\Plugin\PluginInterface
     /**
      * Create singleton instance.
      *
-     * @param string $class OPTIONAL Subclass of \Zend\Wildfire\Plugin\FirePhp\FirePhp
-     * @return \Zend\Wildfire\Plugin\FirePhp\FirePhp Returns the singleton \Zend\Wildfire\Plugin\FirePhp\FirePhp instance
+     * @param string $class OPTIONAL Subclass of \Zend\Wildfire\Plugin\FirePhp
+     * @return \Zend\Wildfire\Plugin\FirePhp Returns the singleton \Zend\Wildfire\Plugin\FirePhp instance
      * @throws \Zend\Wildfire\Exception
      */
     public static function init($class = null)
@@ -182,7 +182,7 @@ class FirePhp implements Wildfire\Plugin\PluginInterface
             }
 
             self::$_instance = new $class();
-            if (!self::$_instance instanceof FirePhp) {
+            if (!self::$_instance instanceof self) {
                 self::$_instance = null;
                 throw new Wildfire\Exception('Invalid class to third argument. Must be subclass of Zend_Wildfire_Plugin_FirePhp.');
             }
@@ -207,7 +207,7 @@ class FirePhp implements Wildfire\Plugin\PluginInterface
      * Get or create singleton instance
      *
      * @param $skipCreate boolean True if an instance should not be created
-     * @return \Zend\Wildfire\Plugin\FirePhp\FirePhp
+     * @return \Zend\Wildfire\Plugin\FirePhp
      */
     public static function getInstance($skipCreate=false)
     {
@@ -351,7 +351,7 @@ class FirePhp implements Wildfire\Plugin\PluginInterface
             return false;
         }
 
-        if ($var instanceof Message) {
+        if ($var instanceof FirePhp\Message) {
 
             if ($var->getBuffered()) {
                 if (!in_array($var, self::$_instance->_messages)) {

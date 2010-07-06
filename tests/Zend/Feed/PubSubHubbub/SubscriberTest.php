@@ -51,7 +51,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
     {
         $client = new \Zend\HTTP\Client;
         PubSubHubbub\PubSubHubbub::setHttpClient($client);
-        $this->_subscriber = new \Zend\Feed\PubSubHubbub\Subscriber\Subscriber;
+        $this->_subscriber = new \Zend\Feed\PubSubHubbub\Subscriber;
         $this->_adapter = $this->_getCleanMock(
             '\Zend\DB\Adapter\AbstractAdapter'
         );

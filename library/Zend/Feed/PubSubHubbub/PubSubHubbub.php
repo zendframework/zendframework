@@ -73,15 +73,14 @@ class PubSubHubbub
     {
         if (is_string($source)) {
             $feed = Reader\Reader::import($source);
-        } elseif (is_object($source) && $source instanceof Reader\FeedAbstract) {
+        } elseif (is_object($source) && $source instanceof Reader\AbstractFeed) {
             $feed = $source;
         } elseif (is_object($source) && $source instanceof \Zend\Feed\AbstractFeed) {
             $feed = Reader\Reader::importFeed($source);
         } else {
-            require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
             throw new Exception('The source parameter was'
             . ' invalid, i.e. not a URL string or an instance of type'
-            . ' Zend_Feed_Reader_FeedAbstract or Zend_Feed_Abstract');
+            . ' Zend\Feed\Reader\FeedAbstract or Zend\Feed\Abstract');
         }
         return $feed->getHubs();
     }

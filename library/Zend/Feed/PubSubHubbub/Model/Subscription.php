@@ -30,17 +30,15 @@ use Zend\Date;
 /**
  * @uses       \Zend\Date\Date
  * @uses       \Zend\Feed\PubSubHubbub\Exception
- * @uses       \Zend\Feed\PubSubHubbub\Model\ModelAbstract
- * @uses       \Zend\Feed\PubSubHubbub\Model\SubscriptionInterface
+ * @uses       \Zend\Feed\PubSubHubbub\Model\AbstractModel
+ * @uses       \Zend\Feed\PubSubHubbub\Model\SubscriptionPersistence
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @subpackage Entity
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Subscription
-    extends ModelAbstract
-    implements SubscriptionInterface
+class Subscription extends AbstractModel implements SubscriptionPersistence
 {
     
     /**

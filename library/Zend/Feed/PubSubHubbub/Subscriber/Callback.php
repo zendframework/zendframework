@@ -26,7 +26,7 @@ namespace Zend\Feed\PubSubHubbub\Subscriber;
 
 /**
  * @uses       \Zend\Feed\PubSubHubbub\PubSubHubbub
- * @uses       \Zend\Feed\PubSubHubbub\CallbackAbstract
+ * @uses       \Zend\Feed\PubSubHubbub\AbstractCallback
  * @uses       \Zend\Feed\Reader\Reader
  * @uses       \Zend\Uri\Uri
  * @category   Zend
@@ -34,8 +34,7 @@ namespace Zend\Feed\PubSubHubbub\Subscriber;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Callback
-    extends \Zend\Feed\PubSubHubbub\CallbackAbstract
+class Callback extends \Zend\Feed\PubSubHubbub\AbstractCallback
 {
     /**
      * Contains the content of any feeds sent as updates to the Callback URL

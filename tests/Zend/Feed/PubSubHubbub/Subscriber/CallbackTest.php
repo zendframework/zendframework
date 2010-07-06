@@ -52,7 +52,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             '\Zend\DB\Table\AbstractTable'
         );
         $this->_rowset = $this->_getCleanMock(
-            '\Zend\DB\Table\Rowset\AbstractRowset'
+            '\Zend\DB\Table\AbstractRowset'
         );
         
         $this->_tableGateway->expects($this->any())->method('getAdapter')

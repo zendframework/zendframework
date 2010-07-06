@@ -26,7 +26,7 @@ use Zend\Loader\PluginLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Config\Config,
     Zend\Translator,
-    Zend\View\ViewInterface as View,
+    Zend\View\ViewEngine as View,
     Zend\Controller\Action\HelperBroker as ActionHelperBroker;
 
 /**
@@ -117,7 +117,7 @@ class DisplayGroup implements \Iterator,\Countable
     protected $_translatorDisabled = false;
 
     /**
-     * @var \Zend\View\ViewInterface
+     * @var \Zend\View\ViewEngine
      */
     protected $_view;
 
@@ -844,7 +844,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Set view
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return \Zend\Form\DisplayGroup
      */
     public function setView(View $view = null)
@@ -856,7 +856,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Retrieve view
      *
-     * @return \Zend\View\ViewInterface
+     * @return \Zend\View\ViewEngine
      */
     public function getView()
     {

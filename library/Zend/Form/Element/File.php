@@ -28,7 +28,7 @@ use Zend\Form\ElementException,
     Zend\Form\Decorator\FileDecorator,
     Zend\Loader\PluginLoader,
     Zend\Loader\PrefixPathMapper,
-    Zend\View\ViewInterface as View,
+    Zend\View\ViewEngine as View,
     Zend\File\Transfer\Adapter\AbstractAdapter as AbstractFileAdapter;
 
 /**
@@ -868,7 +868,7 @@ class File extends Xhtml
      * Render form element
      * Checks for decorator interface to prevent errors
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return string
      */
     public function render(View $view = null)

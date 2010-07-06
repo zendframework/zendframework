@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\View\Helper\Placeholder\Registry;
+namespace Zend\View\Helper\Placeholder;
 
 /**
  * Exception for Zend_View_Helper_Placeholder_Registry class.
@@ -35,6 +35,6 @@ namespace Zend\View\Helper\Placeholder\Registry;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\View\Exception
+class RegistryException extends \Zend\View\Exception
 {
 }

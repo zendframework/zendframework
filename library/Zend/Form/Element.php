@@ -27,7 +27,7 @@ use Zend\Config\Config,
     Zend\Loader\PrefixPathMapper,
     Zend\Validator\Validator,
     Zend\Filter\Filter,
-    Zend\View\ViewInterface as View,
+    Zend\View\ViewEngine as View,
     Zend\Controller\Action\HelperBroker as ActionHelperBroker;
 
 /**
@@ -219,7 +219,7 @@ class Element implements Validator
     protected $_value;
 
     /**
-     * @var \Zend\View\ViewInterface
+     * @var \Zend\View\ViewEngine
      */
     protected $_view;
 
@@ -1741,7 +1741,7 @@ class Element implements Validator
     /**
      * Set view object
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return \Zend\Form\Element
      */
     public function setView(View $view = null)
@@ -1755,7 +1755,7 @@ class Element implements Validator
      *
      * Retrieves from ViewRenderer if none previously set.
      *
-     * @return null|\Zend\View\ViewInterface
+     * @return null|\Zend\View\ViewEngine
      */
     public function getView()
     {
@@ -1968,7 +1968,7 @@ class Element implements Validator
     /**
      * Render form element
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return string
      */
     public function render(View $view = null)

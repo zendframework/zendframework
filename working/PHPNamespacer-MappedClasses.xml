@@ -17155,10 +17155,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_View_Helper_Interface</originalClassName>
-      <newRelativeFilePath>Zend/View/Helper/HelperInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\View\Helper</newNamespace>
-      <newClassName>HelperInterface</newClassName>
-      <newFullyQualifiedName>Zend\View\Helper\HelperInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/View/Helper.php</newRelativeFilePath>
+      <newNamespace>Zend\View</newNamespace>
+      <newClassName>Helper</newClassName>
+      <newFullyQualifiedName>Zend\View\Helper</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/Json.php</originalRelativeFilePath>
@@ -17291,34 +17291,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/Placeholder/Container.php</originalRelativeFilePath>
       <originalClassName>Zend_View_Helper_Placeholder_Container</originalClassName>
-      <newRelativeFilePath>Zend/View/Helper/Placeholder/Container/Container.php</newRelativeFilePath>
-      <newNamespace>Zend\View\Helper\Placeholder\Container</newNamespace>
+      <newRelativeFilePath>Zend/View/Helper/Placeholder/Container.php</newRelativeFilePath>
+      <newNamespace>Zend\View\Helper\Placeholder</newNamespace>
       <newClassName>Container</newClassName>
-      <newFullyQualifiedName>Zend\View\Helper\Placeholder\Container\Container</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\View\Helper\Placeholder\Container</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/Placeholder/Registry/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_View_Helper_Placeholder_Registry_Exception</originalClassName>
-      <newRelativeFilePath>Zend/View/Helper/Placeholder/Registry/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\View\Helper\Placeholder\Registry</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\View\Helper\Placeholder\Registry\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/View/Helper/Placeholder/RegistryException.php</newRelativeFilePath>
+      <newNamespace>Zend\View\Helper\Placeholder</newNamespace>
+      <newClassName>RegistryException</newClassName>
+      <newFullyQualifiedName>Zend\View\Helper\Placeholder\RegistryException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/Placeholder/Registry.php</originalRelativeFilePath>
       <originalClassName>Zend_View_Helper_Placeholder_Registry</originalClassName>
-      <newRelativeFilePath>Zend/View/Helper/Placeholder/Registry/Registry.php</newRelativeFilePath>
-      <newNamespace>Zend\View\Helper\Placeholder\Registry</newNamespace>
+      <newRelativeFilePath>Zend/View/Helper/Placeholder/Registry.php</newRelativeFilePath>
+      <newNamespace>Zend\View\Helper\Placeholder</newNamespace>
       <newClassName>Registry</newClassName>
-      <newFullyQualifiedName>Zend\View\Helper\Placeholder\Registry\Registry</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\View\Helper\Placeholder\Registry</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/Placeholder.php</originalRelativeFilePath>
       <originalClassName>Zend_View_Helper_Placeholder</originalClassName>
-      <newRelativeFilePath>Zend/View/Helper/Placeholder/Placeholder.php</newRelativeFilePath>
-      <newNamespace>Zend\View\Helper\Placeholder</newNamespace>
+      <newRelativeFilePath>Zend/View/Helper/Placeholder.php</newRelativeFilePath>
+      <newNamespace>Zend\View\Helper</newNamespace>
       <newClassName>Placeholder</newClassName>
-      <newFullyQualifiedName>Zend\View\Helper\Placeholder\Placeholder</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\View\Helper\Placeholder</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/RenderToPlaceholder.php</originalRelativeFilePath>
@@ -17355,10 +17355,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_View_Interface</originalClassName>
-      <newRelativeFilePath>Zend/View/ViewInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/View/ViewEngine.php</newRelativeFilePath>
       <newNamespace>Zend\View</newNamespace>
-      <newClassName>ViewInterface</newClassName>
-      <newFullyQualifiedName>Zend\View\ViewInterface</newFullyQualifiedName>
+      <newClassName>ViewEngine</newClassName>
+      <newFullyQualifiedName>Zend\View\ViewEngine</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Stream.php</originalRelativeFilePath>

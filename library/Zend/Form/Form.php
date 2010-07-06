@@ -28,7 +28,7 @@ use Zend\Config\Config,
     Zend\Loader\PrefixPathMapper,
     Zend\Loader,
     Zend\JSON\JSON,
-    Zend\View\ViewInterface as View,
+    Zend\View\ViewEngine as View,
     Zend\Translator,
     Zend\Controller\Action\HelperBroker as ActionHelperBroker;
 
@@ -229,7 +229,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     protected $_translatorDisabled = false;
 
     /**
-     * @var \Zend\View\ViewInterface
+     * @var \Zend\View\ViewEngine
      */
     protected $_view;
 
@@ -2346,7 +2346,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     /**
      * Set view object
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return \Zend\Form\Form
      */
     public function setView(View $view = null)
@@ -2360,7 +2360,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
      *
      * If none registered, attempts to pull from ViewRenderer.
      *
-     * @return \Zend\View\ViewInterface|null
+     * @return \Zend\View\ViewEngine|null
      */
     public function getView()
     {
@@ -2642,7 +2642,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     /**
      * Render form
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return string
      */
     public function render(View $view = null)

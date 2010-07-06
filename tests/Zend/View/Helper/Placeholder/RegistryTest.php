@@ -56,10 +56,10 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $registry = \Zend\Registry::getInstance();
-        if (isset($registry[Registry\Registry::REGISTRY_KEY])) {
-            unset($registry[Registry\Registry::REGISTRY_KEY]);
+        if (isset($registry[Registry::REGISTRY_KEY])) {
+            unset($registry[Registry::REGISTRY_KEY]);
         }
-        $this->registry = new Registry\Registry();
+        $this->registry = new Registry();
     }
 
     /**
@@ -90,7 +90,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->registry->containerExists('foo'));
         $container = $this->registry->createContainer('foo');
-        $this->assertTrue($container instanceof Container\Container);
+        $this->assertTrue($container instanceof Container);
     }
 
     /**
@@ -109,7 +109,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetContainerCreatesRegistryEntry()
     {
-        $foo = new Container\Container(array('foo', 'bar'));
+        $foo = new Container(array('foo', 'bar'));
         $this->assertFalse($this->registry->containerExists('foo'));
         $this->registry->setContainer('foo', $foo);
         $this->assertTrue($this->registry->containerExists('foo'));
@@ -117,7 +117,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
     public function testSetContainerCreatesRegistersContainerInstance()
     {
-        $foo = new Container\Container(array('foo', 'bar'));
+        $foo = new Container(array('foo', 'bar'));
         $this->assertFalse($this->registry->containerExists('foo'));
         $this->registry->setContainer('foo', $foo);
         $container = $this->registry->getContainer('foo');
@@ -126,7 +126,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
     public function testContainerClassAccessorsSetState()
     {
-        $this->assertEquals('\Zend\View\Helper\Placeholder\Container\Container', $this->registry->getContainerClass());
+        $this->assertEquals('\Zend\View\Helper\Placeholder\Container', $this->registry->getContainerClass());
         $this->registry->setContainerClass('ZendTest\View\Helper\Placeholder\MockContainer');
         $this->assertEquals('ZendTest\View\Helper\Placeholder\MockContainer', $this->registry->getContainerClass());
     }
@@ -164,24 +164,24 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
     public function testGetRegistryReturnsRegistryInstance()
     {
-        $registry = Registry\Registry::getRegistry();
-        $this->assertTrue($registry instanceof Registry\Registry);
+        $registry = Registry::getRegistry();
+        $this->assertTrue($registry instanceof Registry);
     }
 
     public function testGetRegistrySubsequentTimesReturnsSameInstance()
     {
-        $registry1 = Registry\Registry::getRegistry();
-        $registry2 = Registry\Registry::getRegistry();
+        $registry1 = Registry::getRegistry();
+        $registry2 = Registry::getRegistry();
         $this->assertSame($registry1, $registry2);
     }
 
     public function testGetRegistryRegistersWithGlobalRegistry()
     {
-        $this->assertFalse(\Zend\Registry::isRegistered(Registry\Registry::REGISTRY_KEY));
-        $registry = Registry\Registry::getRegistry();
-        $this->assertTrue(\Zend\Registry::isRegistered(Registry\Registry::REGISTRY_KEY));
+        $this->assertFalse(\Zend\Registry::isRegistered(Registry::REGISTRY_KEY));
+        $registry = Registry::getRegistry();
+        $this->assertTrue(\Zend\Registry::isRegistered(Registry::REGISTRY_KEY));
 
-        $registered = \Zend\Registry::get(Registry\Registry::REGISTRY_KEY);
+        $registered = \Zend\Registry::get(Registry::REGISTRY_KEY);
         $this->assertSame($registry, $registered);
     }
 }

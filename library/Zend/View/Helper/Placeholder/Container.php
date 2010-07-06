@@ -16,36 +16,24 @@
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
  * @namespace
  */
-namespace Zend\View\Helper;
+namespace Zend\View\Helper\Placeholder;
 
 /**
- * @category   Zend
+ * Container for placeholder values
+ *
+ * @uses       \Zend\View\Helper\Placeholder\Container\AbstractContainer
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface HelperInterface
+class Container extends Container\AbstractContainer
 {
-    /**
-     * Set the View object
-     *
-     * @param  \Zend\View\ViewInterface $view
-     * @return \Zend\View\Helper\HelperInterface
-     */
-    public function setView(\Zend\View\ViewInterface $view);
-
-    /**
-     * Strategy pattern: helper method to invoke
-     *
-     * @return mixed
-     */
-    public function direct();
 }

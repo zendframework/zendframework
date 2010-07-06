@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\View\Helper\Placeholder\Registry;
+namespace Zend\View\Helper\Placeholder;
 
 /**
  * Registry for placeholder containers
@@ -31,7 +31,7 @@ namespace Zend\View\Helper\Placeholder\Registry;
  * @uses       ReflectionClass
  * @uses       \Zend\Loader
  * @uses       \Zend\Registry
- * @uses       \Zend\View\Helper\Placeholder\Container\Container
+ * @uses       \Zend\View\Helper\Placeholder\Container
  * @uses       \Zend\View\Helper\Placeholder\Container\AbstractContainer
  * @uses       \Zend\View\Helper\Placeholder\Registry\Exception
  * @package    Zend_View
@@ -45,13 +45,13 @@ class Registry
      * Zend_Registry key under which placeholder registry exists
      * @const string
      */
-    const REGISTRY_KEY = 'Zend\View\Helper\Placeholder\Registry\Registry';
+    const REGISTRY_KEY = 'Zend\View\Helper\Placeholder\Registry';
 
     /**
      * Default container class
      * @var string
      */
-    protected $_containerClass = '\Zend\View\Helper\Placeholder\Container\Container';
+    protected $_containerClass = '\Zend\View\Helper\Placeholder\Container';
 
     /**
      * Placeholder containers
@@ -126,8 +126,8 @@ class Registry
      * Set the container for an item in the registry
      *
      * @param  string $key
-     * @param  Zend_View_Placeholder_Container_Abstract $container
-     * @return Zend_View_Placeholder_Registry
+     * @param  Zend\View\Placeholder\Container\AbstractContainer $container
+     * @return Zend\View\Placeholder\Registry
      */
     public function setContainer($key, \Zend\View\Helper\Placeholder\Container\AbstractContainer $container)
     {
@@ -157,7 +157,7 @@ class Registry
      * Set the container class to use
      *
      * @param  string $name
-     * @return \Zend\View\Helper\Placeholder\Registry\Registry
+     * @return \Zend\View\Helper\Placeholder\Registry
      */
     public function setContainerClass($name)
     {
@@ -166,11 +166,8 @@ class Registry
         }
 
         
-        //$reflection = new \ReflectionClass($name);
-        //if (!$reflection->isSubclassOf(new \ReflectionClass('Zend\View\Helper\Placeholder\Container\AbstractContainer'))) {
         if (!in_array('Zend\View\Helper\Placeholder\Container\AbstractContainer', class_parents($name))) {
-            $e = new Exception('Invalid Container class specified');
-            //$e->setView($this->view);
+            $e = new Container\Exception('Invalid Container class specified');
             throw $e;
         }
 

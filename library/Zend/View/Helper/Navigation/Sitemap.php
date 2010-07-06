@@ -274,7 +274,7 @@ class Sitemap extends AbstractHelper
     protected function _xmlEscape($string)
     {
         $enc = 'UTF-8';
-        if ($this->view instanceof View\ViewInterface
+        if ($this->view instanceof View\ViewEngine
             && method_exists($this->view, 'getEncoding')
         ) {
             $enc = $this->view->getEncoding();

@@ -600,18 +600,18 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $viewRenderer->setView(new View\View());
 
-        $this->assertType('Zend\View\ViewInterface', $this->_paginator->getView());
+        $this->assertType('Zend\View\ViewEngine', $this->_paginator->getView());
     }
 
     public function testGeneratesViewIfNonexistent()
     {
-        $this->assertType('Zend\View\ViewInterface', $this->_paginator->getView());
+        $this->assertType('Zend\View\ViewEngine', $this->_paginator->getView());
     }
 
     public function testGetsAndSetsView()
     {
         $this->_paginator->setView(new View\View());
-        $this->assertType('Zend\View\ViewInterface', $this->_paginator->getView());
+        $this->assertType('Zend\View\ViewEngine', $this->_paginator->getView());
     }
 
     public function testRenders()

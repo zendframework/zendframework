@@ -226,7 +226,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     {
         $layout = new Layout\Layout();
         $view = $layout->getView();
-        $this->assertTrue($view instanceof View\ViewInterface);
+        $this->assertTrue($view instanceof View\ViewEngine);
     }
 
     /**

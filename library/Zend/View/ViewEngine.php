@@ -32,7 +32,7 @@ namespace Zend\View;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ViewInterface
+interface ViewEngine
 {
     /**
      * Return the template engine object, if any

@@ -391,7 +391,7 @@ class ViewTest extends \PHPUnit_Framework_TestCase
     public function testInstanceOfInterface()
     {
         $view = new View();
-        $this->assertTrue($view instanceof \Zend\View\ViewInterface);
+        $this->assertTrue($view instanceof \Zend\View\ViewEngine);
     }
 
     public function testGetVars()

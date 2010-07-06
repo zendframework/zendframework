@@ -33,13 +33,14 @@ use Zend\Loader\PrefixPathMapper,
  * @uses       \Zend\Loader
  * @uses       \Zend\Loader\PluginLoader
  * @uses       \Zend\View\Exception
- * @uses       \Zend\View\ViewInterface
+ * @uses       \Zend\View\Helper
+ * @uses       \Zend\View\ViewEngine
  * @category   Zend
  * @package    Zend_View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractView implements ViewInterface
+abstract class AbstractView implements ViewEngine
 {
     /**
      * Path stack for script, helper, and filter directories.
@@ -580,7 +581,7 @@ abstract class AbstractView implements ViewInterface
             throw $e;
         }
 
-        if (!$helper instanceof ViewInterface) {
+        if (!$helper instanceof Helper) {
             if (!method_exists($helper, 'direct')) {
                 $e =  new Exception(
                     'View helper must implement Zend\\View\\Interface or have a "direct" method'

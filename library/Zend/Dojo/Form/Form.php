@@ -24,7 +24,7 @@
  */
 namespace Zend\Dojo\Form;
 
-use Zend\View\ViewInterface as View;
+use Zend\View\ViewEngine as View;
 
 /**
  * Dijit-enabled Form
@@ -78,7 +78,7 @@ class Form extends \Zend\Form\Form
      *
      * Ensures that the view object has the dojo view helper path set.
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return \Zend\Dojo\Form\Element\Dijit
      */
     public function setView(View $view = null)

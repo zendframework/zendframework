@@ -25,7 +25,7 @@
 namespace Zend\Dojo\Form;
 
 use Zend\Loader\PrefixPathMapper as PluginLoader,
-    Zend\View\ViewInterface as View;
+    Zend\View\ViewEngine as View;
 
 /**
  * Dijit-enabled DisplayGroup
@@ -58,7 +58,7 @@ class DisplayGroup extends \Zend\Form\DisplayGroup
      *
      * Ensures that the view object has the dojo view helper path set.
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return \Zend\Dojo\Form\Element\Dijit
      */
     public function setView(View $view = null)

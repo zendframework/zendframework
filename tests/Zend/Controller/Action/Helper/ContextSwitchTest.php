@@ -937,7 +937,7 @@ class ContextSwitchTestController extends Action
 }
 
 
-class CustomView implements \Zend\View\ViewInterface
+class CustomView implements \Zend\View\ViewEngine
 {
     public function getEngine()
     {}

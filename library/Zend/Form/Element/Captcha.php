@@ -26,7 +26,7 @@
 namespace Zend\Form\Element;
 
 use Zend\Captcha\Adapter as CaptchaAdapter,
-    Zend\View\ViewInterface as View,
+    Zend\View\ViewEngine as View,
     Zend\Loader\PluginLoader;
 
 /**
@@ -177,7 +177,7 @@ class Captcha extends Xhtml
     /**
      * Render form element
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return string
      */
     public function render(View $view = null)

@@ -26,7 +26,7 @@ namespace Zend\Form\Decorator;
 
 use Zend\File\Transfer\Adapter,
     Zend\Form\Element,
-    Zend\View\ViewInterface as View;
+    Zend\View\ViewEngine as View;
 
 /**
  * Zend_Form_Decorator_File

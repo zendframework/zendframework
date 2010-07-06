@@ -79,7 +79,7 @@ class FormLabelTest extends \PHPUnit_Framework_TestCase
     public function testViewIsSetAndSameAsCallingViewObject()
     {
         $this->assertTrue(isset($this->helper->view));
-        $this->assertTrue($this->helper->view instanceof \Zend\View\ViewInterface);
+        $this->assertTrue($this->helper->view instanceof \Zend\View\ViewEngine);
         $this->assertSame($this->view, $this->helper->view);
     }
 

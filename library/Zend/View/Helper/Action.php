@@ -163,7 +163,7 @@ class Action extends AbstractHelper
     /**
      * Clone the current View
      *
-     * @return \Zend\View\ViewInterface
+     * @return \Zend\View\ViewEngine
      */
     public function cloneView()
     {

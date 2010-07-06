@@ -41,7 +41,7 @@ namespace Zend\Application\Resource;
 class View extends AbstractResource
 {
     /**
-     * @var \Zend\View\ViewInterface
+     * @var \Zend\View\ViewEngine
      */
     protected $_view;
 

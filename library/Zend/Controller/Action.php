@@ -36,7 +36,7 @@ use Zend\Controller\Request\AbstractRequest,
  * @uses       \Zend\Controller\Exception
  * @uses       \Zend\Controller\Front
  * @uses       \Zend\View\View
- * @uses       \Zend\View\ViewInterface
+ * @uses       \Zend\View\ViewEngine
  * @category   Zend
  * @package    Zend_Controller
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -89,7 +89,7 @@ abstract class Action implements ActionController
 
     /**
      * View object
-     * @var \Zend\View\ViewInterface
+     * @var \Zend\View\ViewEngine
      */
     public $view;
 
@@ -159,7 +159,7 @@ abstract class Action implements ActionController
      * - helper path = views/helpers/
      * - filter path = views/filters/
      *
-     * @return \Zend\View\ViewInterface
+     * @return \Zend\View\ViewEngine
      * @throws \Zend\Controller\Exception if base view directory does not exist
      */
     public function initView()
@@ -168,7 +168,7 @@ abstract class Action implements ActionController
             return $this->view;
         }
 
-        if (isset($this->view) && ($this->view instanceof View\ViewInterface)) {
+        if (isset($this->view) && ($this->view instanceof View\ViewEngine)) {
             return $this->view;
         }
 

@@ -170,7 +170,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * View instance used for self rendering
      *
-     * @var \Zend\View\ViewInterface
+     * @var \Zend\View\ViewEngine
      */
     protected $_view = null;
 
@@ -846,7 +846,7 @@ class Paginator implements \Countable, \IteratorAggregate
      * Retrieves the view instance.  If none registered, attempts to pull f
      * rom ViewRenderer.
      *
-     * @return \Zend\View\ViewInterface|null
+     * @return \Zend\View\ViewEngine|null
      */
     public function getView()
     {
@@ -864,10 +864,10 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Sets the view object.
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return \Zend\Paginator\Paginator
      */
-    public function setView(View\ViewInterface $view = null)
+    public function setView(View\ViewEngine $view = null)
     {
         $this->_view = $view;
 
@@ -917,10 +917,10 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Renders the paginator.
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return string
      */
-    public function render(View\ViewInterface $view = null)
+    public function render(View\ViewEngine $view = null)
     {
         if (null !== $view) {
             $this->setView($view);

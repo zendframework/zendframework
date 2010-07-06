@@ -52,7 +52,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->container = new \Zend\View\Helper\Placeholder\Container\Container(array());
+        $this->container = new \Zend\View\Helper\Placeholder\Container(array());
     }
 
     /**

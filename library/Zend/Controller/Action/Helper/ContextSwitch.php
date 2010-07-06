@@ -329,7 +329,7 @@ class ContextSwitch extends AbstractHelper
 
         $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $view = $viewRenderer->view;
-        if ($view instanceof View\ViewInterface) {
+        if ($view instanceof View\ViewEngine) {
             $viewRenderer->setNoRender(true);
         }
     }
@@ -1072,7 +1072,7 @@ class ContextSwitch extends AbstractHelper
 
         $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $view = $viewRenderer->view;
-        if ($view instanceof View\ViewInterface) {
+        if ($view instanceof View\ViewEngine) {
             if(method_exists($view, 'getVars')) {
                 $vars = \Zend\JSON\JSON::encode($view->getVars());
                 $this->getResponse()->setBody($vars);

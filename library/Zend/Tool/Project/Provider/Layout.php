@@ -39,7 +39,7 @@ class Layout
     implements \Zend\Tool\Framework\Provider\Pretendable
 {
     
-    public static function createResource(\Zend\Tool\Project\Profile\Profile $profile, $layoutName = 'layout')
+    public static function createResource(\Zend\Tool\Project\Profile $profile, $layoutName = 'layout')
     {
         $applicationDirectory = $profile->search('applicationDirectory');
         $layoutDirectory = $applicationDirectory->search('layoutsDirectory');

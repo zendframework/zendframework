@@ -64,7 +64,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $contextRegistry = Context\Repository::getInstance();
         $contextRegistry->addContextsFromDirectory(dirname(__FILE__) . '/../../../../library/Zend/Tool/Project/Context/Zf/', 'Zend\Tool\Project\Context\Zf\\');
 
-        $this->_standardProfileFromData = new Profile\Profile();
+        $this->_standardProfileFromData = new Profile();
         $this->_standardProfileFromData->setAttribute('profileData',      file_get_contents($this->_projectProfileFile));
         $this->_standardProfileFromData->setAttribute('projectDirectory', $this->_projectDirectory);
     }
@@ -78,7 +78,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
     public function testAttibuteGettersAndSettersWork()
     {
 
-        $profile = new Profile\Profile(array('foo' => 'bar'));
+        $profile = new Profile(array('foo' => 'bar'));
         $profile->setAttributes(array('baz' => 'BAZ'));
         $profile->setAttribute('boof', 'foob');
 
@@ -92,7 +92,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
     {
         copy($this->_projectProfileFile, $this->_projectDirectory . '/.zfproject.xml');
 
-        $profile = new Profile\Profile();
+        $profile = new Profile();
         $profile->setAttribute('projectDirectory', $this->_projectDirectory);
         $profile->loadFromFile();
 
@@ -100,7 +100,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $projectDirectoryResource = $profile->current();
 
         $this->assertEquals(1, count($profile));
-        $this->assertEquals('Zend\Tool\Project\Profile\Resource\Resource', get_class($projectDirectoryResource));
+        $this->assertEquals('Zend\Tool\Project\Profile\Resource', get_class($projectDirectoryResource));
         $this->assertEquals('Zend\Tool\Project\Context\System\ProjectDirectory', get_class($projectDirectoryResource->getContext()));
     }
 
@@ -108,7 +108,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
     public function testProfileLoadsFromExistingFileGivenProfileFile()
     {
 
-        $profile = new Profile\Profile(array(
+        $profile = new Profile(array(
             'projectProfileFile' => $this->_projectProfileFile,
             'projectDirectory'   => $this->_projectDirectory
             ));
@@ -116,14 +116,14 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
 
         $projectDirectoryResource = $profile->current();
 
-        $this->assertEquals('Zend\Tool\Project\Profile\Resource\Resource', get_class($projectDirectoryResource));
+        $this->assertEquals('Zend\Tool\Project\Profile\Resource', get_class($projectDirectoryResource));
         $this->assertEquals('Zend\Tool\Project\Context\System\ProjectDirectory', get_class($projectDirectoryResource->getContext()));
     }
 
     public function testProfileFromVariousSourcesIsLoadableFromFile()
     {
 
-        $profile = new Profile\Profile();
+        $profile = new Profile();
 
         // no options, should return false
         $this->assertFalse($profile->isLoadableFromFile());
@@ -137,7 +137,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($profile->isLoadableFromFile());
 
         // just project directory
-        $profile = new Profile\Profile();
+        $profile = new Profile();
 
         // shoudl be false with non existent directory
         $profile->setAttribute('projectDirectory', $this->_projectDirectory . 'non-existent/dir/');
@@ -154,11 +154,11 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
     public function testLoadFromDataIsSameAsLoadFromFile()
     {
 
-        $profile = new Profile\Profile(array('projectProfileFile' => $this->_projectProfileFile));
+        $profile = new Profile(array('projectProfileFile' => $this->_projectProfileFile));
         $profile->setAttribute('projectDirectory', $this->_projectDirectory);
         $profile->loadFromFile();
 
-        $profile2 = new Profile\Profile();
+        $profile2 = new Profile();
         $profile2->setAttribute('profileData', file_get_contents($this->_projectProfileFile));
         $profile2->setAttribute('projectDirectory', $this->_projectDirectory);
         $profile2->loadFromData();
@@ -183,7 +183,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
 
     public function testProfileCanFindResource()
     {
-        $profile = new Profile\Profile(array(
+        $profile = new Profile(array(
             'projectProfileFile' => $this->_projectProfileFile,
             'projectDirectory'   => $this->_projectDirectory
             ));
@@ -191,12 +191,12 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
 
         $modelsDirectoryResource = $profile->search('modelsDirectory');
 
-        $this->assertEquals('Zend\Tool\Project\Profile\Resource\Resource', get_class($modelsDirectoryResource));
+        $this->assertEquals('Zend\Tool\Project\Profile\Resource', get_class($modelsDirectoryResource));
         $this->assertEquals('Zend\Tool\Project\Context\Zf\ModelsDirectory', get_class($modelsDirectoryResource->getContext()));
 
         $publicIndexFile = $profile->search(array('publicDirectory', 'publicIndexFile'));
 
-        $this->assertEquals('Zend\Tool\Project\Profile\Resource\Resource', get_class($publicIndexFile));
+        $this->assertEquals('Zend\Tool\Project\Profile\Resource', get_class($publicIndexFile));
         $this->assertEquals('Zend\Tool\Project\Context\Zf\PublicIndexFile', get_class($publicIndexFile->getContext()));
 
     }
@@ -238,7 +238,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
     public function testProfileThrowsExceptionOnLoadFromData()
     {
         $this->setExpectedException('Zend\Tool\Project\Exception');
-        $profile = new Profile\Profile();
+        $profile = new Profile();
 
         // missing data from attributes should throw exception here
         $profile->loadFromData();
@@ -247,7 +247,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
     public function testProfileThrowsExceptionOnLoadFromFile()
     {
         $this->setExpectedException('Zend\Tool\Project\Exception');
-        $profile = new Profile\Profile();
+        $profile = new Profile();
 
         // missing file path or project path
         $profile->loadFromFile();
@@ -256,7 +256,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
     public function testProfileThrowsExceptionOnStoreToFile()
     {
         $this->setExpectedException('Zend\Tool\Project\Exception');
-        $profile = new Profile\Profile();
+        $profile = new Profile();
 
         // missing file path or project path
         $profile->storeToFile();
@@ -265,7 +265,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
     public function testProfileThrowsExceptionOnLoadFromFileWithBadPathForProfileFile()
     {
         $this->setExpectedException('Zend\Tool\Project\Exception');
-        $profile = new Profile\Profile();
+        $profile = new Profile();
         $profile->setAttribute('projectProfileFile', '/path/should/not/exist');
 
         // missing file path or project path

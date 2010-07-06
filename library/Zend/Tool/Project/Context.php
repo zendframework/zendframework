@@ -14,7 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Tool
- * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,20 +22,22 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Project\Context\System;
+namespace Zend\Tool\Project;
 
 /**
- * This class is the front most class for utilizing Zend_Tool_Project
+ * Interface for contexts
  *
- * A profile is a hierarchical set of resources that keep track of
- * items within a specific project.
+ * setResource() is an optional method that if the context supports
+ * will be set with the resource at construction time
  *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface SystemInterface
+interface Context
 {
+
+    public function getName();
 
 }

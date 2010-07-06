@@ -37,7 +37,7 @@ use Zend\Tool\Project\Profile as ProjectProfile;
 class Model extends AbstractProvider
 {
 
-    public static function createResource(ProjectProfile\Profile $profile, $modelName, $moduleName = null)
+    public static function createResource(ProjectProfile $profile, $modelName, $moduleName = null)
     {
         if (!is_string($modelName)) {
             throw new Exception('Zend_Tool_Project_Provider_Model::createResource() expects \"modelName\" is the name of a model resource to create.');
@@ -63,29 +63,29 @@ class Model extends AbstractProvider
     /**
      * hasResource()
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $modelName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    public static function hasResource(ProjectProfile\Profile $profile, $modelName, $moduleName = null)
+    public static function hasResource(ProjectProfile $profile, $modelName, $moduleName = null)
     {
         if (!is_string($modelName)) {
             throw new Exception('Zend_Tool_Project_Provider_Model::createResource() expects \"modelName\" is the name of a model resource to check for existence.');
         }
 
         $modelsDirectory = self::_getModelsDirectoryResource($profile, $moduleName);
-        return (($modelsDirectory->search(array('modelFile' => array('modelName' => $modelName)))) instanceof ProjectProfile\Resource\Resource);
+        return (($modelsDirectory->search(array('modelFile' => array('modelName' => $modelName)))) instanceof ProjectProfile\Resource);
     }
     
     /**
      * _getModelsDirectoryResource()
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    protected static function _getModelsDirectoryResource(ProjectProfile\Profile $profile, $moduleName = null)
+    protected static function _getModelsDirectoryResource(ProjectProfile $profile, $moduleName = null)
     {
         $profileSearchParams = array();
 

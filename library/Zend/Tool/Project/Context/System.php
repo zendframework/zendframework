@@ -23,38 +23,20 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Project\Profile\FileParser;
-use Zend\Tool\Project\Profile;
+namespace Zend\Tool\Project\Context;
 
 /**
+ * This class is the front most class for utilizing Zend_Tool_Project
+ *
+ * A profile is a hierarchical set of resources that keep track of
+ * items within a specific project.
+ *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface FileParserInterface
+interface System
 {
-
-    /**
-     * serialize()
-     *
-     * This method should take a profile and return a string
-     * representation of it.
-     *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
-     * @return string
-     */
-    public function serialize(Profile\Profile $profile);
-
-    /**
-     * unserialize()
-     *
-     * This method should be able to take string data an create a
-     * struture in the provided $profile
-     *
-     * @param string $data
-     * @param \Zend\Tool\Project\Profile\Profile $profile
-     */
-    public function unserialize($data, Profile\Profile $profile);
 
 }

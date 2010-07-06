@@ -24,8 +24,9 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Profile\FileParser;
-use Zend\Tool\Project\Profile;
-use Zend\Tool\Project\Profile\Resource;
+use Zend\Tool\Project\Profile\FileParser,
+    Zend\Tool\Project\Profile,
+    Zend\Tool\Project\Profile\Resource;
 
 /**
  * @uses       DOMDocument
@@ -34,19 +35,19 @@ use Zend\Tool\Project\Profile\Resource;
  * @uses       SimpleXMLElement
  * @uses       SimpleXMLIterator
  * @uses       \Zend\Tool\Project\Context\Repository
- * @uses       \Zend\Tool\Project\Profile\Profile
- * @uses       \Zend\Tool\Project\Profile\FileParser\FileParserInterface
- * @uses       \Zend\Tool\Project\Profile\Resource\Resource
+ * @uses       \Zend\Tool\Project\Profile
+ * @uses       \Zend\Tool\Project\Profile\FileParser
+ * @uses       \Zend\Tool\Project\Profile\Resource
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Xml implements FileParserInterface
+class Xml implements FileParser
 {
 
     /**
-     * @var \Zend\Tool\Project\Profile\Profile
+     * @var \Zend\Tool\Project\Profile
      */
     protected $_profile = null;
 
@@ -69,10 +70,10 @@ class Xml implements FileParserInterface
      *
      * create an xml string from the provided profile
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @return string
      */
-    public function serialize(Profile\Profile $profile)
+    public function serialize(Profile $profile)
     {
 
         $profile = clone $profile;
@@ -106,10 +107,10 @@ class Xml implements FileParserInterface
      * in the xml string provided
      *
      * @param string xml data
-     * @param \Zend\Tool\Project\Profile\Profile The profile to use as the top node
-     * @return \Zend\Tool\Project\Profile\Profile
+     * @param \Zend\Tool\Project\Profile The profile to use as the top node
+     * @return \Zend\Tool\Project\Profile
      */
-    public function unserialize($data, Profile\Profile $profile)
+    public function unserialize($data, Profile $profile)
     {
         if ($data == null) {
             throw new \Exception('contents not available to unserialize.');
@@ -192,15 +193,15 @@ class Xml implements FileParserInterface
      * as needed to *unserialize* the profile from an xmlIterator
      *
      * @param SimpleXMLIterator $xmlIterator
-     * @param \Zend\Tool\Project\Profile\Resource\Resource $resource
+     * @param \Zend\Tool\Project\Profile\Resource $resource
      */
-    protected function _unserializeRecurser(\SimpleXMLIterator $xmlIterator, Resource\Resource $resource = null)
+    protected function _unserializeRecurser(\SimpleXMLIterator $xmlIterator, Resource $resource = null)
     {
 
         foreach ($xmlIterator as $resourceName => $resourceData) {
 
             $contextName = $resourceName;
-            $subResource = new Resource\Resource($contextName);
+            $subResource = new Resource($contextName);
             $subResource->setProfile($this->_profile);
 
             if ($resourceAttributes = $resourceData->attributes()) {

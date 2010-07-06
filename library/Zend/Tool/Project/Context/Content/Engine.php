@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Project\Context\Content\Engine;
+namespace Zend\Tool\Project\Context\Content;
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
@@ -64,20 +64,20 @@ class Engine
     {
         $this->_storage = $storage;
         $this->_engines = array(
-            new CodeGenerator($storage, $this->_keyInStorage),
-            new Phtml($storage, $this->_keyInStorage),
+            new Engine\CodeGenerator($storage, $this->_keyInStorage),
+            new Engine\Phtml($storage, $this->_keyInStorage),
             );
     }
 
     /**
      * getContent()
      *
-     * @param \Zend\Tool\Project\Context\ContextInterface $context
+     * @param \Zend\Tool\Project\Context $context
      * @param string $methodName
      * @param mixed $parameters
      * @return string
      */
-    public function getContent(\Zend\Tool\Project\Context\ContextInterface $context, $methodName, $parameters)
+    public function getContent(\Zend\Tool\Project\Context $context, $methodName, $parameters)
     {
         $content = null;
 

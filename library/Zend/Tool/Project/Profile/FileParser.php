@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Tool
+ * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -22,22 +23,38 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Project\Context;
+namespace Zend\Tool\Project\Profile;
+use Zend\Tool\Project\Profile;
 
 /**
- * Interface for contexts
- *
- * setResource() is an optional method that if the context supports
- * will be set with the resource at construction time
- *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ContextInterface
+interface FileParser
 {
 
-    public function getName();
+    /**
+     * serialize()
+     *
+     * This method should take a profile and return a string
+     * representation of it.
+     *
+     * @param \Zend\Tool\Project\Profile $profile
+     * @return string
+     */
+    public function serialize(Profile $profile);
+
+    /**
+     * unserialize()
+     *
+     * This method should be able to take string data an create a
+     * struture in the provided $profile
+     *
+     * @param string $data
+     * @param \Zend\Tool\Project\Profile $profile
+     */
+    public function unserialize($data, Profile $profile);
 
 }

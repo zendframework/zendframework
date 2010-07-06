@@ -39,13 +39,13 @@ class View extends AbstractProvider
     /**
      * createResource()
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $actionName
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    public static function createResource(\Zend\Tool\Project\Profile\Profile $profile, $actionName, $controllerName, $moduleName = null)
+    public static function createResource(\Zend\Tool\Project\Profile $profile, $actionName, $controllerName, $moduleName = null)
     {
         if (!is_string($actionName)) {
             throw new Exception('Zend_Tool_Project_Provider_View::createResource() expects \"actionName\" is the name of a controller resource to create.');

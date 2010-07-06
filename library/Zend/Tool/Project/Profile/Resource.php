@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Project\Profile\Resource;
+namespace Zend\Tool\Project\Profile;
 
 /**
  * This class is an iterator that will iterate only over enabled resources
@@ -36,16 +36,16 @@ namespace Zend\Tool\Project\Profile\Resource;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Resource extends Container
+class Resource extends Resource\Container
 {
 
     /**
-     * @var \Zend\Tool\Project\Profile\Profile
+     * @var \Zend\Tool\Project\Profile
      */
     protected $_profile = null;
 
     /**
-     * @var \Zend\Tool\Project\Profile\Resource\Resource
+     * @var \Zend\Tool\Project\Profile\Resource
      */
     protected $_parentResource = null;
 
@@ -74,7 +74,7 @@ class Resource extends Container
     /**
      * __construct()
      *
-     * @param string|\Zend\Tool\Project\Context\ContextInterface $context
+     * @param string|\Zend\Tool\Project\Context $context
      */
     public function __construct($context)
     {
@@ -84,8 +84,8 @@ class Resource extends Container
     /**
      * setContext()
      *
-     * @param string|\Zend\Tool\Project\Context\ContextInterface $context
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @param string|\Zend\Tool\Project\Context $context
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function setContext($context)
     {
@@ -96,7 +96,7 @@ class Resource extends Container
     /**
      * getContext()
      *
-     * @return \Zend\Tool\Project\Context\ContextInterface
+     * @return \Zend\Tool\Project\Context
      */
     public function getContext()
     {
@@ -114,7 +114,7 @@ class Resource extends Container
     {
         if (is_string($this->_context)) {
             return $this->_context;
-        } elseif ($this->_context instanceof \Zend\Tool\Project\Context\ContextInterface) {
+        } elseif ($this->_context instanceof \Zend\Tool\Project\Context) {
             return $this->_context->getName();
         } else {
             throw new \Zend\Tool\Project\Exception('Invalid context in resource');
@@ -124,10 +124,10 @@ class Resource extends Container
     /**
      * setProfile()
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @param \Zend\Tool\Project\Profile $profile
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    public function setProfile(\Zend\Tool\Project\Profile\Profile $profile)
+    public function setProfile(\Zend\Tool\Project\Profile $profile)
     {
         $this->_profile = $profile;
         return $this;
@@ -136,7 +136,7 @@ class Resource extends Container
     /**
      * getProfile
      *
-     * @return \Zend\Tool\Project\Profile\Profile
+     * @return \Zend\Tool\Project\Profile
      */
     public function getProfile()
     {
@@ -161,7 +161,7 @@ class Resource extends Container
      * setEnabled()
      *
      * @param bool $enabled
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function setEnabled($enabled = true)
     {
@@ -184,7 +184,7 @@ class Resource extends Container
      * setDeleted()
      *
      * @param bool $deleted
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function setDeleted($deleted = true)
     {
@@ -195,7 +195,7 @@ class Resource extends Container
     /**
      * isDeleted()
      *
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function isDeleted()
     {
@@ -205,7 +205,7 @@ class Resource extends Container
     /**
      * initializeContext()
      *
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function initializeContext()
     {
@@ -243,7 +243,7 @@ class Resource extends Container
      *
      * @param string $method
      * @param array $arguments
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function __call($method, $arguments)
     {

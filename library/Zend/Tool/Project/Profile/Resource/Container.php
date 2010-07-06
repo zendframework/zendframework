@@ -35,7 +35,7 @@ use Zend\Tool\Project\Profile;
  * @uses       \Zend\Tool\Project\Context\Repository
  * @uses       \Zend\Tool\Project\Profile\Exception
  * @uses       \Zend\Tool\Project\Profile\Iterator\ContextFilter
- * @uses       \Zend\Tool\Project\Profile\Resource\Resource
+ * @uses       \Zend\Tool\Project\Profile\Resource
  * @uses       \Zend\Tool\Project\Profile\Resource\SearchConstraints
  * @category   Zend
  * @package    Zend_Tool
@@ -74,7 +74,7 @@ class Container implements \RecursiveIterator, \Countable
      * </code>
      *
      * @param \Zend\Tool\Project\Profile\Resource\SearchConstraints|string|array $searchParameters
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function search($matchSearchConstraints, $nonMatchSearchConstraints = null)
     {
@@ -147,7 +147,7 @@ class Container implements \RecursiveIterator, \Countable
      * @param array|\Zend\Tool\Project\Profile\Resource\SearchConstraints $appendResourceOrSearchConstraints
      * @param string $context
      * @param array $attributes
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function createResourceAt($appendResourceOrSearchConstraints, $context, Array $attributes = array())
     {
@@ -169,7 +169,7 @@ class Container implements \RecursiveIterator, \Countable
      *
      * @param string $context
      * @param array $attributes
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function createResource($context, Array $attributes = array())
     {
@@ -180,7 +180,7 @@ class Container implements \RecursiveIterator, \Countable
             } else {
                 throw new Profile\Exception('Context by name ' . $context . ' was not found in the context registry.');
             }
-        } elseif (!$context instanceof \Zend\Tool\Project\Context\ContextInterface) {
+        } elseif (!$context instanceof \Zend\Tool\Project\Context) {
             throw new Profile\Exception('Context must be of type string or Zend_Tool_Project_Context_Interface.');
         }
 
@@ -334,7 +334,7 @@ class Container implements \RecursiveIterator, \Countable
     /**
      * current() - required by RecursiveIterator
      *
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function current()
     {

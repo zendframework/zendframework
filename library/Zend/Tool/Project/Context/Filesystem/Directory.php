@@ -58,7 +58,7 @@ class Directory extends AbstractFilesystem
     public function create()
     {
         // check to ensure the parent exists, if not, call it and create it
-        if (($parentResource = $this->_resource->getParentResource()) instanceof \Zend\Tool\Project\Profile\Resource\Resource) {
+        if (($parentResource = $this->_resource->getParentResource()) instanceof \Zend\Tool\Project\Profile\Resource) {
             if ((($parentContext = $parentResource->getContext()) instanceof AbstractFilesystem)
                 && (!$parentContext->exists())) {
                 $parentResource->create();

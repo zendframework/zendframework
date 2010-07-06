@@ -29,9 +29,9 @@ use Zend\Tool\Project\Context;
 /**
  * @uses       \Zend\Tool\Framework\Provider\AbstractProvider
  * @uses       \Zend\Tool\Framework\Registry\FrameworkRegistry
- * @uses       \Zend\Tool\Project\Context\Content\Engine\Engine
+ * @uses       \Zend\Tool\Project\Context\Content\Engine
  * @uses       \Zend\Tool\Project\Context\Repository
- * @uses       \Zend\Tool\Project\Profile\Profile
+ * @uses       \Zend\Tool\Project\Profile
  * @uses       \Zend\Tool\Project\Profile\FileParser\Xml
  * @uses       \Zend\Tool\Project\Provider\Exception
  * @category   Zend
@@ -53,7 +53,7 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
     protected $_projectPath = null;
 
     /**
-     * @var \Zend\Tool\Project\Profile\Profile
+     * @var \Zend\Tool\Project\Profile
      */
     protected $_loadedProfile = null;
 
@@ -99,7 +99,7 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
      * @param $loadProfileFlag bool Whether or not to throw an exception when no profile is found
      * @param $projectDirectory string The project directory to use to search
      * @param $searchParentDirectories bool Whether or not to search upper level direcotries
-     * @return \Zend\Tool\Project\Profile\Profile
+     * @return \Zend\Tool\Project\Profile
      */
     protected function _loadProfile($loadProfileFlag = self::NO_PROFILE_THROW_EXCEPTION, $projectDirectory = null, $searchParentDirectories = true)
     {
@@ -110,7 +110,7 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
             throw new Exception('The $projectDirectory supplied does not exist.');
         }
 
-        $profile = new \Zend\Tool\Project\Profile\Profile();
+        $profile = new \Zend\Tool\Project\Profile();
 
         $parentDirectoriesArray = explode(DIRECTORY_SEPARATOR, ltrim($projectDirectory, DIRECTORY_SEPARATOR));
         while ($parentDirectoriesArray) {
@@ -151,7 +151,7 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
     /**
      * Load the project profile from the current working directory, if not throw exception
      *
-     * @return \Zend\Tool\Project\Profile\Profile
+     * @return \Zend\Tool\Project\Profile
      */
     protected function _loadProfileRequired()
     {
@@ -165,7 +165,7 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
     /**
      * Return the currently loaded profile
      *
-     * @return \Zend\Tool\Project\Profile\Profile
+     * @return \Zend\Tool\Project\Profile
      */
     protected function _getProfile($loadProfileFlag = self::NO_PROFILE_THROW_EXCEPTION)
     {
@@ -195,14 +195,14 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
         $projectProfileFile->getContext()->save();
     }
 
-    protected function _getContentForContext(Context\ContextInterface $context, $methodName, $parameters)
+    protected function _getContentForContext(Context $context, $methodName, $parameters)
     {
         $storage = $this->_registry->getStorage();
         if (!$storage->isEnabled()) {
             return false;
         }
 
-        $engine = new Context\Content\Engine\Engine($storage);
+        $engine = new Context\Content\Engine($storage);
         return $engine->getContent($context, $methodName, $parameters);
     }
 

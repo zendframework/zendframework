@@ -15243,10 +15243,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Context/Content/Engine.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Project_Context_Content_Engine</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Project/Context/Content/Engine/Engine.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Project\Context\Content\Engine</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Project/Context/Content/Engine.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Project\Context\Content</newNamespace>
       <newClassName>Engine</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Project\Context\Content\Engine\Engine</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Project\Context\Content\Engine</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Context/Exception.php</originalRelativeFilePath>
@@ -15283,10 +15283,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Context/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Project_Context_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Project/Context/ContextInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Project\Context</newNamespace>
-      <newClassName>ContextInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Project\Context\ContextInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Project/Context.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Project</newNamespace>
+      <newClassName>Context</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Project\Context</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Context/Repository.php</originalRelativeFilePath>
@@ -15299,10 +15299,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Context/System/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Project_Context_System_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Project/Context/System/SystemInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Project\Context\System</newNamespace>
-      <newClassName>SystemInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Project\Context\System\SystemInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Project/Context/System.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Project\Context</newNamespace>
+      <newClassName>System</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Project\Context\System</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Context/System/NotOverwritable.php</originalRelativeFilePath>
@@ -15803,10 +15803,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Profile/FileParser/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Project_Profile_FileParser_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Project/Profile/FileParser/FileParserInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Project\Profile\FileParser</newNamespace>
-      <newClassName>FileParserInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Project\Profile\FileParser\FileParserInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Project/Profile/FileParser.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Project\Profile</newNamespace>
+      <newClassName>FileParser</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Project\Profile\FileParser</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Profile/FileParser/Xml.php</originalRelativeFilePath>
@@ -15851,18 +15851,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Profile/Resource.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Project_Profile_Resource</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Project/Profile/Resource/Resource.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Project\Profile\Resource</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Project/Profile/Resource.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Project\Profile</newNamespace>
       <newClassName>Resource</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Project\Profile\Resource\Resource</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Project\Profile\Resource</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Profile.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Project_Profile</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Project/Profile/Profile.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Project\Profile</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Project/Profile.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Project</newNamespace>
       <newClassName>Profile</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Project\Profile\Profile</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Project\Profile</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Provider/Abstract.php</originalRelativeFilePath>

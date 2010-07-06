@@ -280,14 +280,14 @@ abstract class AbstractOutline implements \RecursiveIterator, \Countable
      *
      * Returns dictionary indirect object or reference
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactory    $factory object factory for newly created indirect objects
+     * @param \Zend\PDF\ObjectFactory    $factory object factory for newly created indirect objects
      * @param boolean $updateNavigation  Update navigation flag
      * @param \Zend\PDF\InternalType\AbstractTypeObject $parent   Parent outline dictionary reference
      * @param \Zend\PDF\InternalType\AbstractTypeObject $prev     Previous outline dictionary reference
      * @param SplObjectStorage $processedOutlines  List of already processed outlines
      * @return \Zend\PDF\InternalType\AbstractTypeObject
      */
-    abstract public function dumpOutline(ObjectFactory\ObjectFactoryInterface $factory,
+    abstract public function dumpOutline(ObjectFactory $factory,
                                                                               $updateNavigation,
                                               InternalType\AbstractTypeObject $parent,
                                               InternalType\AbstractTypeObject $prev = null,

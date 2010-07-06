@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @subpackage Zend_PDF_Color
+ * @package    Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,37 +23,35 @@
 /**
  * @namespace
  */
-namespace Zend\PDF\Color;
+namespace Zend\PDF\InternalType;
 
 /**
- * PDF provides a powerfull facilities for specifying the colors of graphics objects.
- * This class encapsulates color behaviour.
- *
- * Some colors interact with PDF document (create additional objects in a PDF),
- * others don't do it. That is defined in a subclasses.
+ * PDF stream filter
  *
  * @package    Zend_PDF
- * @subpackage Zend_PDF_Color
+ * @package    Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ColorInterface
+interface StreamFilter
 {
     /**
-     * Instructions, which can be directly inserted into content stream
-     * to switch color.
-     * Color set instructions differ for stroking and nonstroking operations.
+     * Encode data
      *
-     * @param boolean $stroking
+     * @param string $data
+     * @param array $params
      * @return string
+     * @throws \Zend\PDF\Exception
      */
-    public function instructions($stroking);
+    public static function encode($data, $params = null);
 
     /**
-     * Get color components (color space dependent)
+     * Decode data
      *
-     * @return array
+     * @param string $data
+     * @param array $params
+     * @return string
+     * @throws \Zend\PDF\Exception
      */
-    public function getComponents();
+    public static function decode($data, $params = null);
 }
-

@@ -44,7 +44,7 @@ class Style
      * Fill color.
      * Used to fill geometric shapes or text.
      *
-     * @var \Zend\PDF\Color\ColorInterface|null
+     * @var \Zend\PDF\Color|null
      */
     private $_fillColor = null;
 
@@ -52,7 +52,7 @@ class Style
      * Line color.
      * Current color, used for lines and font outlines.
      *
-     * @var \Zend\PDF\Color\ColorInterface|null
+     * @var \Zend\PDF\Color|null
      */
 
     private $_color;
@@ -118,9 +118,9 @@ class Style
     /**
      * Set fill color.
      *
-     * @param \Zend\PDF\Color\ColorInterface $color
+     * @param \Zend\PDF\Color $color
      */
-    public function setFillColor(Color\ColorInterface $color)
+    public function setFillColor(Color $color)
     {
         $this->_fillColor = $color;
     }
@@ -128,9 +128,9 @@ class Style
     /**
      * Set line color.
      *
-     * @param \Zend\PDF\Color\ColorInterface $color
+     * @param \Zend\PDF\Color $color
      */
-    public function setLineColor(Color\ColorInterface $color)
+    public function setLineColor(Color $color)
     {
         $this->_color = $color;
     }
@@ -189,7 +189,7 @@ class Style
     /**
      * Get fill color.
      *
-     * @return \Zend\PDF\Color\ColorInterface|null
+     * @return \Zend\PDF\Color|null
      */
     public function getFillColor()
     {
@@ -199,7 +199,7 @@ class Style
     /**
      * Get line color.
      *
-     * @return \Zend\PDF\Color\ColorInterface|null
+     * @return \Zend\PDF\Color|null
      */
     public function getLineColor()
     {

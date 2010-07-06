@@ -30,13 +30,13 @@ use Zend\PDF;
  * Abstract compression stream filter
  *
  * @uses       \Zend\PDF\Exception
- * @uses       \Zend\PDF\InternalType\StreamFilter\FilterInterface
+ * @uses       \Zend\PDF\InternalType\StreamFilter
  * @package    Zend_PDF
  * @package    Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractCompression implements PDF\InternalType\StreamFilter\FilterInterface
+abstract class AbstractCompression implements PDF\InternalType\StreamFilter
 {
     /**
      * Paeth prediction function

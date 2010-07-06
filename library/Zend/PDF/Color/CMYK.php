@@ -24,12 +24,14 @@
  * @namespace
  */
 namespace Zend\PDF\Color;
-use Zend\PDF\InternalType;
+
+use Zend\PDF\Color,
+    Zend\PDF\InternalType;
 
 /**
  * CMYK color implementation
  *
- * @uses       \Zend\PDF\Color\ColorInterface
+ * @uses       \Zend\PDF\Color
  * @uses       \Zend\PDF\InternalType\NumericObject
  * @category   Zend
  * @package    Zend_PDF
@@ -37,7 +39,7 @@ use Zend\PDF\InternalType;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class CMYK implements ColorInterface
+class CMYK implements Color
 {
     /**
      * Cyan level.

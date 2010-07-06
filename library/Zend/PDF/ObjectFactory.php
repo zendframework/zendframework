@@ -23,8 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\PDF\ObjectFactory;
-use Zend\PDF\InternalType;
+namespace Zend\PDF;
 
 /**
  * PDF element factory interface.
@@ -35,7 +34,7 @@ use Zend\PDF\InternalType;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ObjectFactoryInterface
+interface ObjectFactory
 {
     /**
      * Close factory and clean-up resources
@@ -47,7 +46,7 @@ interface ObjectFactoryInterface
     /**
      * Get source factory object
      *
-     * @return \Zend\PDF\ObjectFactory\ObjectFactory
+     * @return \Zend\PDF\ObjectFactory
      */
     public function resolve();
 
@@ -75,23 +74,23 @@ interface ObjectFactoryInterface
     /**
      * Attach factory to the current;
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      */
-    public function attach(ObjectFactoryInterface $factory);
+    public function attach(ObjectFactory $factory);
 
     /**
      * Calculate object enumeration shift.
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      * @return integer
      */
-    public function calculateShift(ObjectFactoryInterface $factory);
+    public function calculateShift(ObjectFactory $factory);
 
     /**
      * Clean enumeration shift cache.
      * Has to be used after PDF render operation to let followed updates be correct.
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      * @return integer
      */
     public function cleanEnumerationShiftCache();
@@ -99,11 +98,11 @@ interface ObjectFactoryInterface
     /**
      * Retrive object enumeration shift.
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      * @return integer
      * @throws \Zend\PDF\Exception
      */
-    public function getEnumerationShift(ObjectFactoryInterface $factory);
+    public function getEnumerationShift(ObjectFactory $factory);
 
     /**
      * Mark object as modified in context of current factory.
@@ -145,7 +144,7 @@ interface ObjectFactoryInterface
      * Enumerate modified objects.
      * Returns array of Zend_PDF_UpdateInfoContainer
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactory $rootFactory
+     * @param \Zend\PDF\ObjectFactory $rootFactory
      * @return array
      */
     public function listModifiedObjects($rootFactory = null);

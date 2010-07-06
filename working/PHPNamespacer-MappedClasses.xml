@@ -9779,10 +9779,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Color.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Color</originalClassName>
-      <newRelativeFilePath>Zend/PDF/Color/ColorInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\PDF\Color</newNamespace>
-      <newClassName>ColorInterface</newClassName>
-      <newFullyQualifiedName>Zend\PDF\Color\ColorInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/Color.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF</newNamespace>
+      <newClassName>Color</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Color</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Destination/Explicit.php</originalRelativeFilePath>
@@ -10003,10 +10003,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/ElementFactory/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_ElementFactory_Interface</originalClassName>
-      <newRelativeFilePath>Zend/PDF/ObjectFactory/ObjectFactoryInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\PDF\ObjectFactory</newNamespace>
-      <newClassName>ObjectFactoryInterface</newClassName>
-      <newFullyQualifiedName>Zend\PDF\ObjectFactory\ObjectFactoryInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/ObjectFactory.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF</newNamespace>
+      <newClassName>ObjectFactory</newClassName>
+      <newFullyQualifiedName>Zend\PDF\ObjectFactory</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/ElementFactory/Proxy.php</originalRelativeFilePath>
@@ -10019,10 +10019,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/ElementFactory.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_ElementFactory</originalClassName>
-      <newRelativeFilePath>Zend/PDF/ObjectFactory/ObjectFactory.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/PDF/ObjectFactory/ElementFactory.php</newRelativeFilePath>
       <newNamespace>Zend\PDF\ObjectFactory</newNamespace>
-      <newClassName>ObjectFactory</newClassName>
-      <newFullyQualifiedName>Zend\PDF\ObjectFactory\ObjectFactory</newFullyQualifiedName>
+      <newClassName>ElementFactory</newClassName>
+      <newFullyQualifiedName>Zend\PDF\ObjectFactory\ElementFactory</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Exception.php</originalRelativeFilePath>
@@ -10147,10 +10147,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Filter/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Filter_Interface</originalClassName>
-      <newRelativeFilePath>Zend/PDF/InternalType/StreamFilter/FilterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\PDF\InternalType\StreamFilter</newNamespace>
-      <newClassName>FilterInterface</newClassName>
-      <newFullyQualifiedName>Zend\PDF\InternalType\StreamFilter\FilterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/PDF/InternalType/StreamFilter.php</newRelativeFilePath>
+      <newNamespace>Zend\PDF\InternalType</newNamespace>
+      <newClassName>StreamFilter</newClassName>
+      <newFullyQualifiedName>Zend\PDF\InternalType\StreamFilter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Filter/RunLength.php</originalRelativeFilePath>

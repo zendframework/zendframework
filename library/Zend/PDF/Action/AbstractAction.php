@@ -249,12 +249,12 @@ abstract class AbstractAction extends PDF\InternalStructure\NavigationTarget imp
      * Returns dictionary indirect object or reference
      *
      * @internal
-     * @param \Zend\PDF\ObjectFactory\ObjectFactory $factory   Object factory for newly created indirect objects
+     * @param \Zend\PDF\ObjectFactory $factory   Object factory for newly created indirect objects
      * @param SplObjectStorage $processedActions  list of already processed actions
      *                                            (used to prevent infinity loop caused by cyclic references)
      * @return \Zend\PDF\InternalType\IndirectObject|\Zend\PDF\InternalType\IndirectObjectReference
      */
-    public function dumpAction(PDF\ObjectFactory\ObjectFactoryInterface $factory, \SplObjectStorage $processedActions = null)
+    public function dumpAction(PDF\ObjectFactory $factory, \SplObjectStorage $processedActions = null)
     {
         if ($processedActions === null) {
             $processedActions = new \SplObjectStorage();

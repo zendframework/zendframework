@@ -42,7 +42,7 @@ use Zend\Memory;
  * @uses       \Zend\PDF\Image
  * @uses       \Zend\PDF\InternalStructure
  * @uses       \Zend\PDF\InternalType
- * @uses       \Zend\PDF\ObjectFactory\ObjectFactory
+ * @uses       \Zend\PDF\ObjectFactory
  * @uses       \Zend\PDF\Outline
  * @uses       \Zend\PDF\Page
  * @uses       \Zend\PDF\PDFParser\StructureParser
@@ -156,7 +156,7 @@ class PDFDocument
     /**
      * PDF objects factory.
      *
-     * @var \Zend\PDF\ObjectFactory\ObjectFactoryInterface
+     * @var \Zend\PDF\ObjectFactory
      */
     protected $_objFactory = null;
 
@@ -273,7 +273,7 @@ class PDFDocument
      */
     public function __construct($source = null, $revision = null, $load = false)
     {
-        $this->_objFactory = ObjectFactory\ObjectFactory::createFactory(1);
+        $this->_objFactory = ObjectFactory\ElementFactory::createFactory(1);
 
         if ($source !== null) {
             $this->_parser           = new PDFParser\StructureParser($source, $this->_objFactory, $load);

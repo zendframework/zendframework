@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\PDF\Color;
-use Zend\PDF;
+
+use Zend\PDF\Color,
+    Zend\PDF;
 
 /**
  * HTML color implementation
@@ -32,7 +34,7 @@ use Zend\PDF;
  * Factory class which vends Zend_PDF_Color objects from typical HTML
  * representations.
  *
- * @uses       \Zend\PDF\Color\ColorInterface
+ * @uses       \Zend\PDF\Color
  * @uses       \Zend\PDF\Color\GrayScale
  * @uses       \Zend\PDF\Color\RGB
  * @uses       \Zend\PDF\Exception
@@ -42,13 +44,13 @@ use Zend\PDF;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HTML implements ColorInterface
+class HTML implements Color
 {
 
     /**
      * Color
      *
-     * @var \Zend\PDF\Color\ColorInterface
+     * @var \Zend\PDF\Color
      */
     private $_color;
 
@@ -92,7 +94,7 @@ class HTML implements ColorInterface
      *
      * @param string $color May either be a hexidecimal number of the form
      *    #rrggbb or one of the 140 well-known names (black, white, blue, etc.)
-     * @return \Zend\PDF\Color\ColorInterface
+     * @return \Zend\PDF\Color
      */
     public static function color($color)
     {
@@ -116,7 +118,7 @@ class HTML implements ColorInterface
      *
      * @param string $color One of the 140 well-known color names (black, white,
      *    blue, etc.)
-     * @return \Zend\PDF\Color\ColorInterface
+     * @return \Zend\PDF\Color
      */
     public static function namedColor($color)
     {

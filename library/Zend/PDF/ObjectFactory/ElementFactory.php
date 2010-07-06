@@ -24,15 +24,17 @@
  * @namespace
  */
 namespace Zend\PDF\ObjectFactory;
-use Zend\PDF;
-use Zend\PDF\InternalType;
+
+use Zend\PDF\ObjectFactory,
+    Zend\PDF,
+    Zend\PDF\InternalType;
 
 /**
  * PDF element factory.
  * Responsibility is to log PDF changes
  *
  * @uses       SplObjectStorage
- * @uses       \Zend\PDF\ObjectFactory\ObjectFactoryInterface
+ * @uses       \Zend\PDF\ObjectFactory
  * @uses       \Zend\PDF\ObjectFactory\Proxy
  * @uses       \Zend\PDF\ObjectFactory\UpdateInfoContainer
  * @uses       \Zend\PDF\InternalType\IndirectObject
@@ -43,7 +45,7 @@ use Zend\PDF\InternalType;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ObjectFactory implements ObjectFactoryInterface
+class ElementFactory implements ObjectFactory
 {
     /**
      * List of the modified objects.
@@ -85,7 +87,7 @@ class ObjectFactory implements ObjectFactoryInterface
 
     /**
      * List of the attached object factories.
-     * Array of \Zend\PDF\ObjectFactory\ObjectFactoryInterface objects
+     * Array of \Zend\PDF\ObjectFactory objects
      *
      * @var array
      */
@@ -132,7 +134,7 @@ class ObjectFactory implements ObjectFactoryInterface
      * Factory generator
      *
      * @param integer $objCount
-     * @return \Zend\PDF\ObjectFactory\ObjectFactoryInterface
+     * @return \Zend\PDF\ObjectFactory
      */
     static public function createFactory($objCount)
     {
@@ -159,7 +161,7 @@ class ObjectFactory implements ObjectFactoryInterface
     /**
      * Get source factory object
      *
-     * @return \Zend\PDF\ObjectFactory\ObjectFactory
+     * @return \Zend\PDF\ObjectFactory\ElementFactory
      */
     public function resolve()
     {
@@ -206,9 +208,9 @@ class ObjectFactory implements ObjectFactoryInterface
     /**
      * Attach factory to the current;
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      */
-    public function attach(ObjectFactoryInterface $factory)
+    public function attach(ObjectFactory $factory)
     {
         if ( $factory === $this || isset($this->_attachedFactories[$factory->getId()])) {
             /**
@@ -227,10 +229,10 @@ class ObjectFactory implements ObjectFactoryInterface
     /**
      * Calculate object enumeration shift.
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      * @return integer
      */
-    public function calculateShift(ObjectFactoryInterface $factory)
+    public function calculateShift(ObjectFactory $factory)
     {
         if ($factory === $this) {
             return 0;
@@ -274,11 +276,11 @@ class ObjectFactory implements ObjectFactoryInterface
     /**
      * Retrive object enumeration shift.
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      * @return integer
      * @throws \Zend\PDF\Exception
      */
-    public function getEnumerationShift(ObjectFactoryInterface $factory)
+    public function getEnumerationShift(ObjectFactory $factory)
     {
         if (($shift = $this->calculateShift($factory)) == -1) {
             throw new PDF\Exception('Wrong object context');
@@ -355,7 +357,7 @@ class ObjectFactory implements ObjectFactoryInterface
      * Enumerate modified objects.
      * Returns array of Zend_PDF_UpdateInfoContainer
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $rootFactory
+     * @param \Zend\PDF\ObjectFactory $rootFactory
      * @return array
      */
     public function listModifiedObjects($rootFactory = null)

@@ -74,7 +74,7 @@ class DataParser
     /**
      * PDF objects factory.
      *
-     * @var \Zend\PDF\ObjectFactory\ObjectFactoryInterface
+     * @var \Zend\PDF\ObjectFactory
      */
     private $_objFactory = null;
 
@@ -699,9 +699,9 @@ class DataParser
      * Thus we don't need to care about overhead
      *
      * @param string $pdfString
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      */
-    public function __construct($source, ObjectFactory\ObjectFactoryInterface $factory)
+    public function __construct($source, ObjectFactory $factory)
     {
         $this->data         = $source;
         $this->_objFactory  = $factory;

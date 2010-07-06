@@ -22,10 +22,10 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\Server;
+namespace Zend\Soap;
 
 /**
- * @uses       \Zend\Exception
+ * @uses       \Zend\Soap\Exception
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Server
@@ -33,6 +33,6 @@ namespace Zend\Soap\Server;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Exception extends \Zend\Exception
+class ServerException extends Exception
 {}
 

@@ -23,47 +23,31 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\WSDL\Strategy;
-
-use Zend\Soap\WSDL\Strategy;
+namespace Zend\Soap\WSDL;
 
 /**
- * Abstract class for Zend_Soap_WSDL_Strategy.
+ * Interface for Zend_Soap_WSDL_Strategy.
  *
- * @uses       \Zend\Soap\WSDL\Strategy\StrategyInterface
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractStrategy implements Strategy
+interface Strategy
 {
     /**
-     * Context object
+     * Method accepts the current WSDL context file.
      *
-     * @var \Zend\Soap\WSDL
+     * @param <type> $context
      */
-    protected $_context;
+    public function setContext(\Zend\Soap\WSDL $context);
 
     /**
-     * Set the Zend_Soap_WSDL Context object this strategy resides in.
+     * Create a complex type based on a strategy
      *
-     * @param \Zend\Soap\WSDL $context
-     * @return void
+     * @param  string $type
+     * @return string XSD type
      */
-    public function setContext(\Zend\Soap\WSDL $context)
-    {
-        $this->_context = $context;
-    }
-
-    /**
-     * Return the current Zend_Soap_WSDL context object
-     *
-     * @return \Zend\Soap\WSDL
-     */
-    public function getContext()
-    {
-        return $this->_context;
-    }
+    public function addComplexType($type);
 }

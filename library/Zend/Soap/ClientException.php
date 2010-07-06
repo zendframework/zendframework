@@ -14,40 +14,25 @@
  *
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage WSDL
+ * @subpackage Client
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend\Soap\WSDL\Strategy;
+namespace Zend\Soap;
 
 /**
- * Interface for Zend_Soap_WSDL_Strategy.
- *
+ * @uses       \Zend\Soap\Exception
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage WSDL
+ * @subpackage Client
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
-interface StrategyInterface
-{
-    /**
-     * Method accepts the current WSDL context file.
-     *
-     * @param <type> $context
-     */
-    public function setContext(\Zend\Soap\WSDL\WSDL $context);
+class ClientException extends Exception
+{}
 
-    /**
-     * Create a complex type based on a strategy
-     *
-     * @param  string $type
-     * @return string XSD type
-     */
-    public function addComplexType($type);
-}

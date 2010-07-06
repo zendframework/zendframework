@@ -24,7 +24,8 @@
  * @namespace
  */
 namespace ZendTest\Soap\WSDL;
-use Zend\Soap\WSDL;
+use Zend\Soap\WSDL,
+    Zend\Soap\WSDLException;
 
 /**
  * @category   Zend;
@@ -51,7 +52,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         try {
             $binding = new WSDL\Element\Binding(array(), "portName", $operations, "test");
             $this->fail();
-        } catch(WSDL\Exception $e) {
+        } catch(WSDLException $e) {
 
         }
     }
@@ -68,7 +69,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         try {
             $type = new WSDL\Element\Type(array(), $types, "test");
             $this->fail();
-        } catch(WSDL\Exception $e) {
+        } catch(WSDLException $e) {
 
         }
     }
@@ -85,7 +86,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         try {
             $message = new WSDL\Element\Message(array(), $parts, "test");
             $this->fail();
-        } catch(WSDL\Exception $e) {
+        } catch(WSDLException $e) {
 
         }
     }
@@ -102,7 +103,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         try {
             $port = new WSDL\Element\Port(array(), $operations, "test");
             $this->fail();
-        } catch(WSDL\Exception $e) {
+        } catch(WSDLException $e) {
 
         }
     }
@@ -123,7 +124,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         try {
             $operation = new WSDL\Element\Operation(array(), $input, $output, "test");
             $this->fail();
-        } catch(WSDL\Exception $e) {
+        } catch(WSDLException $e) {
 
         }
     }
@@ -145,14 +146,14 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         try {
             $service = new WSDL\Element\Service(array(), "address", $port, $binding, "test");
             $this->fail();
-        } catch(WSDL\Exception $e) {
+        } catch(WSDLException $e) {
 
         }
 
         try {
             $service = new WSDL\Element\Service("name", array(), $port, $binding, "test");
             $this->fail();
-        } catch(WSDL\Exception $e) {
+        } catch(WSDLException $e) {
 
         }
     }
@@ -168,14 +169,14 @@ class ElementTest extends \PHPUnit_Framework_TestCase
             $type = new WSDL\Element\Type("type", new WSDL\Element\Collection("Type"), "test");
             $collection->addElement($type);
             $this->fail();
-        } catch(WSDL\Exception $e) {
+        } catch(WSDLException $e) {
 
         }
 
         try {
             $collection = new WSDL\Element\Collection(false);
             $this->fail();
-        } catch(WSDL\Exception $e) {
+        } catch(WSDLException $e) {
 
         }
     }
@@ -222,7 +223,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
             // Adding duplicate message leads to exception
             $collection->addElement($messageDuplicate);
             $this->fail("Adding a duplicate named element to a collection should throw an exception.");
-        } catch(WSDL\Exception $e) {
+        } catch(WSDLException $e) {
             $this->assertEquals(array("message1", "message2"), $collection->getElementNames());
             $this->assertEquals($message2, $collection->getElement("message2"));
             $this->assertEquals(2, count($collection));
@@ -232,7 +233,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
             // Accessing unkown message leads to exception
             $collection->getElement("messageUnknown");
             $this->fail("Accessing unknown element should throw an exception.");
-        }  catch(WSDL\Exception $e) {
+        }  catch(WSDLException $e) {
             $this->assertEquals(2, count($collection));
         }
 

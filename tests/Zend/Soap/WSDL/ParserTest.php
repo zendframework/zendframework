@@ -24,7 +24,8 @@
  * @namespace
  */
 namespace ZendTest\Soap\WSDL;
-use Zend\Soap\WSDL;
+use Zend\Soap\WSDL,
+    Zend\Soap\WSDLException;
 
 /**
  * @category   Zend
@@ -69,14 +70,14 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryWithZendSoapWSDL()
     {
-        $wsdl = new WSDL\WSDL("name", "http://example.com");
+        $wsdl = new WSDL("name", "http://example.com");
         $parser = WSDL\Parser::factory($wsdl);
         $this->assertTrue($parser instanceof WSDL\Parser);
     }
 
     public function testFactoryWithInvalidParser()
     {
-        $wsdl = new WSDL\WSDL("name", "http://example.com");
+        $wsdl = new WSDL("name", "http://example.com");
         try {
             $parser = WSDL\Parser::factory($wsdl, "stdClass");
             $this->fail();
@@ -90,7 +91,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         try {
             $parser = WSDL\Parser::factory(null);
             $this->fail();
-        } catch(WSDL\Exception $e) {
+        } catch(WSDLException $e) {
 
         }
     }

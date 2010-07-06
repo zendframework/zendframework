@@ -22,15 +22,16 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\WSDL;
+namespace Zend\Soap;
+
 use Zend\URI\URL;
 
 /**
- * \Zend\Soap\WSDL\WSDL
+ * \Zend\Soap\WSDL
  *
  * @uses       DOMDocument
  * @uses       \Zend\Server\Exception
- * @uses       \Zend\Soap\WSDL\Exception
+ * @uses       \Zend\Soap\WSDLException
  * @uses       \Zend\Soap\WSDL\Strategy\AbstractStrategy
  * @uses       \Zend\Soap\WSDL\Strategy\AnyType
  * @uses       \Zend\Soap\WSDL\Strategy\DefaultComplexType
@@ -80,7 +81,7 @@ class WSDL
      *
      * @param string  $name Name of the Web Service being Described
      * @param string|\Zend\URL  $uri URI where the WSDL will be available
-     * @param boolean|string|\Zend\Soap\WSDL\Strategy\StrategyInterface $strategy
+     * @param boolean|string|\Zend\Soap\WSDL\Strategy $strategy
      */
     public function __construct($name, $uri, $strategy = true)
     {
@@ -103,7 +104,7 @@ class WSDL
                     xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'></definitions>";
         $this->_dom = new \DOMDocument();
         if (!$this->_dom->loadXML($wsdl)) {
-            throw new Exception('Unable to create DomDocument');
+            throw new WSDLException('Unable to create DomDocument');
         } else {
             $this->_wsdl = $this->_dom->documentElement;
         }
@@ -115,7 +116,7 @@ class WSDL
      * Set a new uri for this WSDL
      *
      * @param  string|\Zend\URL $uri
-     * @return \Zend\Server\WSDL\WSDL
+     * @return \Zend\Server\WSDL
      */
     public function setUri($uri)
     {
@@ -140,27 +141,27 @@ class WSDL
      * Set a strategy for complex type detection and handling
      *
      * @todo Boolean is for backwards compability with extractComplexType object var. Remove it in later versions.
-     * @param boolean|string|\Zend\Soap\WSDL\Strategy\StrategyInterface $strategy
-     * @return \Zend\Soap\WSDL\WSDL
+     * @param boolean|string|\Zend\Soap\WSDL\Strategy $strategy
+     * @return \Zend\Soap\WSDL
      */
     public function setComplexTypeStrategy($strategy)
     {
         if($strategy === true) {
-            $strategy = new Strategy\DefaultComplexType();
+            $strategy = new WSDL\Strategy\DefaultComplexType();
         } else if($strategy === false) {
-            $strategy = new Strategy\AnyType();
+            $strategy = new WSDL\Strategy\AnyType();
         } else if(is_string($strategy)) {
             if(class_exists($strategy)) {
                 $strategy = new $strategy();
             } else {
-                throw new Exception(
+                throw new WSDLException(
                     sprintf("Strategy with name '%s does not exist.", $strategy
                 ));
             }
         }
 
-        if(!($strategy instanceof Strategy\StrategyInterface)) {
-            throw new Exception("Set a strategy that is not of type 'Zend_Soap_WSDL_Strategy_Interface'");
+        if(!($strategy instanceof WSDL\Strategy)) {
+            throw new WSDLException("Set a strategy that is not of type 'Zend\Soap\WSDL\Strategy'");
         }
         $this->_strategy = $strategy;
         return $this;
@@ -169,7 +170,7 @@ class WSDL
     /**
      * Get the current complex type strategy
      *
-     * @return \Zend\Soap\WSDL\Strategy\StrategyInterface
+     * @return \Zend\Soap\WSDL\Strategy
      */
     public function getComplexTypeStrategy()
     {
@@ -456,7 +457,7 @@ class WSDL
      * Add a complex type name that is part of this WSDL and can be used in signatures.
      *
      * @param string $type
-     * @return \Zend\Soap\WSDL\WSDL
+     * @return \Zend\Soap\WSDL
      */
     public function addType($type)
     {
@@ -570,7 +571,7 @@ class WSDL
     /**
      * This function makes sure a complex types section and schema additions are set.
      *
-     * @return \Zend\Soap\WSDL\WSDL
+     * @return \Zend\Soap\WSDL
      */
     public function addSchemaTypeSection()
     {
@@ -612,7 +613,7 @@ class WSDL
     private function _parseElement($element)
     {
         if (!is_array($element)) {
-            throw new Exception("The 'element' parameter needs to be an associative array.");
+            throw new WSDLException("The 'element' parameter needs to be an associative array.");
         }
 
         $elementXml = $this->_dom->createElement('xsd:element');

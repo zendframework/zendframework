@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Soap\_files\fulltests;
+namespace ZendTest\Soap\TestAsset\fulltests;
 
 /**
  * @category   Zend
@@ -56,7 +56,7 @@ class Server2
     /**
      * @param  string $foo
      * @param  string $bar
-     * @return \ZendTest\Soap\_files\fulltests\ComplexTypeB
+     * @return \ZendTest\Soap\TestAsset\fulltests\ComplexTypeB
      */
     public function request($foo, $bar)
     {
@@ -68,10 +68,10 @@ class Server2
 }
 
 if(isset($_GET['wsdl'])) {
-    $server = new \Zend\Soap\AutoDiscover\AutoDiscover(new \Zend\Soap\WSDL\Strategy\ArrayOfTypeComplex());
+    $server = new \Zend\Soap\AutoDiscover(new \Zend\Soap\WSDL\Strategy\ArrayOfTypeComplex());
 } else {
     $uri = "http://".$_SERVER['HTTP_HOST']."/".$_SERVER['PHP_SELF']."?wsdl";
-    $server = new \Zend\Soap\Server\Server($uri);
+    $server = new \Zend\Soap\Server($uri);
 }
-$server->setClass('ZendTest\Soap\_files\fulltests\Server2');
+$server->setClass('ZendTest\Soap\TestAsset\fulltests\Server2');
 $server->handle();

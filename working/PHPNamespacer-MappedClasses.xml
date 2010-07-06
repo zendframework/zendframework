@@ -14187,18 +14187,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/AutoDiscover/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_AutoDiscover_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Soap/AutoDiscover/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\AutoDiscover</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Soap\AutoDiscover\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Soap/AutoDiscoverException.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
+      <newClassName>AutoDiscoverException</newClassName>
+      <newFullyQualifiedName>Zend\Soap\AutoDiscoverException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/AutoDiscover.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_AutoDiscover</originalClassName>
-      <newRelativeFilePath>Zend/Soap/AutoDiscover/AutoDiscover.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\AutoDiscover</newNamespace>
+      <newRelativeFilePath>Zend/Soap/AutoDiscover.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
       <newClassName>AutoDiscover</newClassName>
-      <newFullyQualifiedName>Zend\Soap\AutoDiscover\AutoDiscover</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\AutoDiscover</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Client/Common.php</originalRelativeFilePath>
@@ -14219,10 +14219,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Client/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Client_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Client/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Client</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Client\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Soap/ClientException.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
+      <newClassName>ClientException</newClassName>
+      <newFullyQualifiedName>Zend\Soap\ClientException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Client/Local.php</originalRelativeFilePath>
@@ -14235,34 +14235,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Client.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Client</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Client/Client.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Client</newNamespace>
+      <newRelativeFilePath>Zend/Soap/Client.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
       <newClassName>Client</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Client\Client</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\Client</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Server/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Server_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Server/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Server</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Server\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Soap/ServerException.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
+      <newClassName>ServerException</newClassName>
+      <newFullyQualifiedName>Zend\Soap\ServerException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Server.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Server</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Server/Server.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Server</newNamespace>
+      <newRelativeFilePath>Zend/Soap/Server.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
       <newClassName>Server</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Server\Server</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\Server</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Wsdl_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Soap/WSDL/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\WSDL</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Soap\WSDL\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Soap/WSDLException.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
+      <newClassName>WSDLException</newClassName>
+      <newFullyQualifiedName>Zend\Soap\WSDLException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl/Strategy/Abstract.php</originalRelativeFilePath>
@@ -14315,18 +14315,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl/Strategy/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Wsdl_Strategy_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Soap/WSDL/Strategy/StrategyInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\WSDL\Strategy</newNamespace>
-      <newClassName>StrategyInterface</newClassName>
-      <newFullyQualifiedName>Zend\Soap\WSDL\Strategy\StrategyInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Soap/WSDL/Strategy.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap\WSDL</newNamespace>
+      <newClassName>Strategy</newClassName>
+      <newFullyQualifiedName>Zend\Soap\WSDL\Strategy</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Wsdl</originalClassName>
-      <newRelativeFilePath>Zend/Soap/WSDL/WSDL.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\WSDL</newNamespace>
+      <newRelativeFilePath>Zend/Soap/WSDL.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
       <newClassName>WSDL</newClassName>
-      <newFullyQualifiedName>Zend\Soap\WSDL\WSDL</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\WSDL</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tag/Cloud/Decorator/Cloud.php</originalRelativeFilePath>

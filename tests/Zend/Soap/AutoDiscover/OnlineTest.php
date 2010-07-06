@@ -56,7 +56,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $b->bar = "test";
         $b->foo = "test";
 
-        $client = new Client\Client($wsdl);
+        $client = new Client($wsdl);
         $ret = $client->request($b);
 
         $this->assertTrue( is_array($ret) );
@@ -77,7 +77,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
     {
         $wsdl = $this->baseuri."/server2.php?wsdl";
 
-        $client = new Client\Client($wsdl);
+        $client = new Client($wsdl);
         $ret = $client->request("test", "test");
 
         $this->assertTrue( ($ret instanceof \stdClass) );

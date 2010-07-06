@@ -25,6 +25,8 @@
  */
 namespace Zend\Soap\WSDL\Strategy;
 
+use Zend\Soap\WSDL\Strategy;
+
 /**
  * Zend_Soap_WSDL_Strategy_AnyType
  *
@@ -35,14 +37,14 @@ namespace Zend\Soap\WSDL\Strategy;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AnyType implements StrategyInterface
+class AnyType implements Strategy
 {
     /**
      * Not needed in this strategy.
      *
-     * @param \Zend\Soap\WSDL\WSDL $context
+     * @param \Zend\Soap\WSDL $context
      */
-    public function setContext(\Zend\Soap\WSDL\WSDL $context)
+    public function setContext(\Zend\Soap\WSDL $context)
     {
 
     }

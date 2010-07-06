@@ -43,7 +43,7 @@ class ArrayOfTypeSequenceStrategyTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->strategy = new \Zend\Soap\WSDL\Strategy\ArrayOfTypeSequence();
-        $this->wsdl = new \Zend\Soap\WSDL\WSDL('MyService', 'http://localhost/MyService.php', $this->strategy);
+        $this->wsdl = new \Zend\Soap\WSDL('MyService', 'http://localhost/MyService.php', $this->strategy);
     }
 
     public function testFunctionReturningSimpleArrayOfInts()
@@ -151,9 +151,8 @@ class ArrayOfTypeSequenceStrategyTest extends \PHPUnit_Framework_TestCase
 
     public function testAddComplexTypeOfNonExistingClassThrowsException()
     {
-        $this->setExpectedException('\Zend\Soap\WSDL\Exception');
-
-        $this->wsdl->addComplexType('\ZendTest\Soap\WSDL\UnknownClass[]');
+        $this->setExpectedException('\Zend\Soap\WSDLException');
+        $this->wsdl->addComplexType('ZendTest\Soap\WSDL\UnknownClass[]');
     }
 }
 

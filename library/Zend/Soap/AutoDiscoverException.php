@@ -23,13 +23,13 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\AutoDiscover;
+namespace Zend\Soap;
 
 /**
- * @uses       \Zend\Exception
+ * @uses       \Zend\Soap\Exception
  * @package    Zend_Soap
  * @subpackage AutoDiscover
  */
-class Exception extends \Zend\Exception
+class AutoDiscoverException extends Exception
 {
 }

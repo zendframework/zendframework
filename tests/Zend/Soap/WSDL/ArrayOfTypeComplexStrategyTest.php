@@ -47,18 +47,18 @@ class ArrayOfTypeComplexStrategyTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->strategy = new \Zend\Soap\WSDL\Strategy\ArrayOfTypeComplex();
-        $this->wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php', $this->strategy);
+        $this->wsdl = new WSDL('MyService', 'http://localhost/MyService.php', $this->strategy);
     }
 
     public function testNestingObjectsDeepMakesNoSenseThrowingException()
     {
-        $this->setExpectedException('Zend\Soap\WSDL\Exception');
+        $this->setExpectedException('Zend\Soap\WSDLException');
         $this->wsdl->addComplexType('ZendTest_Soap_TestAsset_ComplexTest[][]');
     }
 
     public function testAddComplexTypeOfNonExistingClassThrowsException()
     {
-        $this->setExpectedException('Zend\Soap\WSDL\Exception');
+        $this->setExpectedException('Zend\Soap\WSDLException');
         $this->wsdl->addComplexType('ZendTest_Soap_TestAsset_UnknownClass[]');
     }
 
@@ -221,7 +221,7 @@ class ArrayOfTypeComplexStrategyTest extends \PHPUnit_Framework_TestCase
      */
     public function testNestingOfSameTypesDoesNotLeadToInfiniteRecursionButWillThrowException()
     {
-        $this->setExpectedException('Zend\Soap\WSDL\Exception', 'Infinite recursion');
+        $this->setExpectedException('Zend\Soap\WSDLException', 'Infinite recursion');
         $return = $this->wsdl->addComplexType("ZendTest_Soap_TestAsset_Recursion");
     }
 }

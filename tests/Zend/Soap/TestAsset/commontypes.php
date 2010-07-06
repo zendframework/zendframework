@@ -621,7 +621,7 @@ class ZendTest_Soap_TestAsset_TestLocalSoapClient extends \SoapClient
      * @param string $wsdl
      * @param array $options
      */
-    function __construct(\Zend\Soap\Server\Server $server, $wsdl, $options)
+    function __construct(\Zend\Soap\Server $server, $wsdl, $options)
     {
         $this->server = $server;
         parent::__construct($wsdl, $options);

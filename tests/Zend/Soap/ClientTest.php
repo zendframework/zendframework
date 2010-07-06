@@ -63,7 +63,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         /*************************************************************
          * ------ Test WSDL mode options -----------------------------
          *************************************************************/
-        $client = new Client\Client();
+        $client = new Client();
 
         $this->assertTrue($client->getOptions() == array('encoding' => 'UTF-8', 'soap_version' => SOAP_1_2));
 
@@ -102,7 +102,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         /*************************************************************
          * ------ Test non-WSDL mode options -----------------------------
          *************************************************************/
-        $client1 = new Client\Client();
+        $client1 = new Client();
 
         $this->assertTrue($client1->getOptions() == array('encoding' => 'UTF-8', 'soap_version' => SOAP_1_2));
 
@@ -133,7 +133,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOptions()
     {
-        $client = new Client\Client();
+        $client = new Client();
 
         $this->assertTrue($client->getOptions() == array('encoding' => 'UTF-8', 'soap_version' => SOAP_1_2));
 
@@ -170,7 +170,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAndSetUserAgentOption()
     {
-        $client = new Client\Client();
+        $client = new Client();
         $this->assertNull($client->getUserAgent());
 
         $client->setUserAgent('agent1');
@@ -200,7 +200,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testUserAgentAllowsEmptyString()
     {
-        $client = new Client\Client();
+        $client = new Client();
         $this->assertNull($client->getUserAgent());
         $options = $client->getOptions();
         $this->assertArrayNotHasKey('user_agent', $options);
@@ -218,7 +218,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFunctions()
     {
-        $server = new Server\Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
         $server->setClass('ZendTest_Soap_TestAsset_TestClass');
 
         $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
@@ -247,7 +247,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Server\Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
         $server->setClass('ZendTest_Soap_TestAsset_TestClass');
 
         $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
@@ -277,7 +277,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Server\Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
         $server->setClass('ZendTest_Soap_TestAsset_TestClass');
 
         $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
@@ -308,7 +308,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Server\Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
         $server->setClass('ZendTest_Soap_TestAsset_TestClass');
 
         $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
@@ -347,7 +347,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $config = new \Zend\Config\Config($nonWSDLOptions);
 
-        $client = new Client\Client(null, $config);
+        $client = new Client(null, $config);
 
         $this->assertEquals($nonWSDLOptions, $client->getOptions());
     }
@@ -359,7 +359,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Server\Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
         $server->setClass('ZendTest_Soap_TestAsset_TestClass');
 
         $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
@@ -458,7 +458,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                    ->method('__setCookie')
                    ->with($fixtureCookieKey, $fixtureCookieValue);
 
-        $soap = new Client\Client();
+        $soap = new Client();
         $soap->setSoapClient($clientMock);
 
         $soap->setCookie($fixtureCookieKey, $fixtureCookieValue);
@@ -468,7 +468,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $clientMock = $this->getMock('SoapClient', array('__setCookie'), array(null, array('uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com')));
 
-        $soap = new Client\Client();
+        $soap = new Client();
         $soap->setSoapClient($clientMock);
 
         $this->assertSame($clientMock, $soap->getSoapClient());

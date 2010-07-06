@@ -23,18 +23,19 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\AutoDiscover;
-use Zend\URI;
-use Zend\Soap\WSDL;
+namespace Zend\Soap;
+
+use Zend\URI,
+    Zend\Soap\WSDL;
 
 /**
- * \Zend\Soap\AutoDiscover\AutoDiscover
+ * \Zend\Soap\AutoDiscover
  *
  * @uses       \Zend\Server\AbstractServer
  * @uses       \Zend\Server\Server
  * @uses       \Zend\Server\Reflection\Reflection
  * @uses       \Zend\Soap\AutoDiscover\Exception
- * @uses       \Zend\Soap\WSDL\WSDL
+ * @uses       \Zend\Soap\WSDL
  * @uses       \Zend\URI\URI
  * @category   Zend
  * @package    Zend_Soap
@@ -43,7 +44,7 @@ use Zend\Soap\WSDL;
 class AutoDiscover implements \Zend\Server\Server
 {
     /**
-     * @var \Zend\Soap\WSDL\WSDL
+     * @var \Zend\Soap\WSDL
      */
     protected $_wsdl = null;
 
@@ -88,12 +89,12 @@ class AutoDiscover implements \Zend\Server\Server
      *
      * @var string
      */
-    protected $_wsdlClass = '\Zend\Soap\WSDL\WSDL';
+    protected $_wsdlClass = '\Zend\Soap\WSDL';
 
     /**
      * Constructor
      *
-     * @param boolean|string|\Zend\Soap\WSDL\Strategy\StrategyInterface $strategy
+     * @param boolean|string|\Zend\Soap\WSDL\Strategy $strategy
      * @param string|\Zend\URI\URI $uri
      * @param string $wsdlClass
      */
@@ -116,19 +117,19 @@ class AutoDiscover implements \Zend\Server\Server
      *
      * @throws \Zend\Soap\AutoDiscover\Exception
      * @param  \Zend\URI\URI|string $uri
-     * @return \Zend\Soap\AutoDiscover\AutoDiscover
+     * @return \Zend\Soap\AutoDiscover
      */
     public function setUri($uri)
     {
         if(!is_string($uri) && !($uri instanceof URI\URI)) {
-            throw new Exception(
-                'No uri given to \Zend\Soap\AutoDiscover\AutoDiscover::setUri as string or \Zend\URI\URI instance.'
+            throw new AutoDiscoverException(
+                'No uri given to \Zend\Soap\AutoDiscover::setUri as string or \Zend\URI\URI instance.'
             );
         }
         $this->_uri = $uri;
 
         // change uri in WSDL file also if existant
-        if($this->_wsdl instanceof WSDL\WSDL) {
+        if($this->_wsdl instanceof WSDL) {
             $this->_wsdl->setUri($uri);
         }
 
@@ -159,13 +160,13 @@ class AutoDiscover implements \Zend\Server\Server
      *
      * @throws \Zend\Soap\AutoDiscover\Exception
      * @param  string $wsdlClass
-     * @return \Zend\Soap\AutoDiscover\AutoDiscover
+     * @return \Zend\Soap\AutoDiscover
      */
     public function setWSDLClass($wsdlClass)
     {
-        if(!is_string($wsdlClass) && !is_subclass_of($wsdlClass, '\Zend\Soap\WSDL\WSDL')) {
-            throw new Exception(
-                'No \Zend\Soap\WSDL\WSDL subclass given to \Zend\Soap\AutoDiscover\AutoDiscover::setWSDLClass as string.'
+        if(!is_string($wsdlClass) && !is_subclass_of($wsdlClass, 'Zend\Soap\WSDL')) {
+            throw new AutoDiscoverException(
+                'No \Zend\Soap\WSDL subclass given to Zend\Soap\AutoDiscover::setWSDLClass as string.'
             );
         }
         $this->_wsdlClass = $wsdlClass;
@@ -190,12 +191,12 @@ class AutoDiscover implements \Zend\Server\Server
      * 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/".
      *
      * @param  array $operationStyle
-     * @return \Zend\Soap\AutoDiscover\AutoDiscover
+     * @return \Zend\Soap\AutoDiscover
      */
     public function setOperationBodyStyle(array $operationStyle=array())
     {
         if(!isset($operationStyle['use'])) {
-            throw new Exception("Key 'use' is required in Operation soap:body style.");
+            throw new AutoDiscoverException("Key 'use' is required in Operation soap:body style.");
         }
         $this->_operationBodyStyle = $operationStyle;
         return $this;
@@ -207,7 +208,7 @@ class AutoDiscover implements \Zend\Server\Server
      * By default 'style' is 'rpc' and 'transport' is 'http://schemas.xmlsoap.org/soap/http'.
      *
      * @param  array $bindingStyle
-     * @return \Zend\Soap\AutoDiscover\AutoDiscover
+     * @return \Zend\Soap\AutoDiscover
      */
     public function setBindingStyle(array $bindingStyle=array())
     {
@@ -275,13 +276,13 @@ class AutoDiscover implements \Zend\Server\Server
     /**
      * Set the strategy that handles functions and classes that are added AFTER this call.
      *
-     * @param  boolean|string|\Zend\Soap\WSDL\Strategy\StrategyInterface $strategy
-     * @return \Zend\Soap\AutoDiscover\AutoDiscover
+     * @param  boolean|string|\Zend\Soap\WSDL\Strategy $strategy
+     * @return \Zend\Soap\AutoDiscover
      */
     public function setComplexTypeStrategy($strategy)
     {
         $this->_strategy = $strategy;
-        if($this->_wsdl instanceof  WSDL\WSDL) {
+        if($this->_wsdl instanceof WSDL) {
             $this->_wsdl->setComplexTypeStrategy($strategy);
         }
 
@@ -333,10 +334,10 @@ class AutoDiscover implements \Zend\Server\Server
 
         $uri = $this->getUri();
 
-        if (!($this->_wsdl instanceof WSDL\WSDL)) {
+        if (!($this->_wsdl instanceof WSDL)) {
             $parts = explode('.', basename($_SERVER['SCRIPT_NAME']));
             $name = $parts[0];
-            $wsdl = new WSDL\WSDL($name, $uri, $this->_strategy);
+            $wsdl = new WSDL($name, $uri, $this->_strategy);
 
             // The wsdl:types element must precede all other elements (WS-I Basic Profile 1.1 R2023)
             $wsdl->addSchemaTypeSection();
@@ -361,7 +362,7 @@ class AutoDiscover implements \Zend\Server\Server
      * Add a function to the WSDL document.
      *
      * @param $function \Zend\Server\Reflection\AbstractFunction function to add
-     * @param $wsdl \Zend\Soap\WSDL\WSDL WSDL document
+     * @param $wsdl \Zend\Soap\WSDL WSDL document
      * @param $port object wsdl:portType
      * @param $binding object wsdl:binding
      * @return void
@@ -381,7 +382,7 @@ class AutoDiscover implements \Zend\Server\Server
             }
         }
         if ($prototype === null) {
-            throw new Exception("No prototypes could be found for the '" . $function->getName() . "' function");
+            throw new AutoDiscoverException("No prototypes could be found for the '" . $function->getName() . "' function");
         }
 
         // Add the input message (parameters)
@@ -475,7 +476,7 @@ class AutoDiscover implements \Zend\Server\Server
      */
     public function fault($fault = null, $code = null)
     {
-        throw new Exception('Function has no use in AutoDiscover.');
+        throw new AutoDiscoverException('Function has no use in AutoDiscover.');
     }
 
     /**
@@ -501,7 +502,7 @@ class AutoDiscover implements \Zend\Server\Server
         if($this->_wsdl !== null) {
             return $this->_wsdl->dump($filename);
         } else {
-            throw new Exception('Cannot dump autodiscovered contents, WSDL file has not been generated yet.');
+            throw new AutoDiscoverException('Cannot dump autodiscovered contents, WSDL file has not been generated yet.');
         }
     }
 
@@ -513,7 +514,7 @@ class AutoDiscover implements \Zend\Server\Server
         if($this->_wsdl !== null) {
             return $this->_wsdl->toXml();
         } else {
-            throw new Exception('Cannot return autodiscovered contents, WSDL file has not been generated yet.');
+            throw new AutoDiscoverException('Cannot return autodiscovered contents, WSDL file has not been generated yet.');
         }
     }
 
@@ -534,7 +535,7 @@ class AutoDiscover implements \Zend\Server\Server
      */
     public function loadFunctions($definition)
     {
-        throw new Exception('Function has no use in AutoDiscover.');
+        throw new AutoDiscoverException('Function has no use in AutoDiscover.');
     }
 
     /**
@@ -544,7 +545,7 @@ class AutoDiscover implements \Zend\Server\Server
      */
     public function setPersistence($mode)
     {
-        throw new Exception('Function has no use in AutoDiscover.');
+        throw new AutoDiscoverException('Function has no use in AutoDiscover.');
     }
 
     /**
@@ -555,7 +556,7 @@ class AutoDiscover implements \Zend\Server\Server
      */
     public function getType($type)
     {
-        if (!($this->_wsdl instanceof WSDL\WSDL)) {
+        if (!($this->_wsdl instanceof WSDL)) {
             /** @todo Exception throwing may be more correct */
 
             // WSDL is not defined yet, so we can't recognize type in context of current service

@@ -11875,10 +11875,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection.php</originalRelativeFilePath>
       <originalClassName>Zend_Server_Reflection</originalClassName>
-      <newRelativeFilePath>Zend/Server/Reflection/Reflection.php</newRelativeFilePath>
-      <newNamespace>Zend\Server\Reflection</newNamespace>
+      <newRelativeFilePath>Zend/Server/Reflection.php</newRelativeFilePath>
+      <newNamespace>Zend\Server</newNamespace>
       <newClassName>Reflection</newClassName>
-      <newFullyQualifiedName>Zend\Server\Reflection\Reflection</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Server\Reflection</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/Abstract.php</originalRelativeFilePath>

@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Server\Reflection;
+namespace Zend\Server;
 
 /**
  * Reflection for determining method signatures to use with server classes
@@ -65,14 +65,14 @@ class Reflection
         } elseif (class_exists($class)) {
             $reflection = new \ReflectionClass($class);
         } else {
-            throw new Exception('Invalid class or object passed to attachClass()');
+            throw new Reflection\Exception('Invalid class or object passed to attachClass()');
         }
 
         if ($argv && !is_array($argv)) {
-            throw new Exception('Invalid argv argument passed to reflectClass');
+            throw new Reflection\Exception('Invalid argv argument passed to reflectClass');
         }
 
-        return new ReflectionClass($reflection, $namespace, $argv);
+        return new Reflection\ReflectionClass($reflection, $namespace, $argv);
     }
 
     /**
@@ -95,14 +95,14 @@ class Reflection
     public static function reflectFunction($function, $argv = false, $namespace = '')
     {
         if (!is_string($function) || !function_exists($function)) {
-            throw new Exception('Invalid function "' . $function . '" passed to reflectFunction');
+            throw new Reflection\Exception('Invalid function "' . $function . '" passed to reflectFunction');
         }
 
 
         if ($argv && !is_array($argv)) {
-            throw new Exception('Invalid argv argument passed to reflectClass');
+            throw new Reflection\Exception('Invalid argv argument passed to reflectClass');
         }
 
-        return new ReflectionFunction(new \ReflectionFunction($function), $namespace, $argv);
+        return new Reflection\ReflectionFunction(new \ReflectionFunction($function), $namespace, $argv);
     }
 }

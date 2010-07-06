@@ -46,7 +46,7 @@ use Zend\Loader\PluginLoader,
  * @uses       Zend\Authentication\AuthenticationService
  * @uses       Zend\Loader\PluginLoader
  * @uses       Zend\Server\Server
- * @uses       Zend\Server\Reflection\Reflection
+ * @uses       Zend\Server\Reflection
  * @uses       Zend\Session\Manager
  * @uses       Zend\Session\Container
  * @package    Zend_Amf
@@ -758,7 +758,7 @@ class Server implements \Zend\Server\Server
 
         $this->_classAllowed[is_object($class) ? get_class($class) : $class] = true;
 
-        $this->_methods[] = Reflection\Reflection::reflectClass($class, $argv, $namespace);
+        $this->_methods[] = Reflection::reflectClass($class, $argv, $namespace);
         $this->_buildDispatchTable();
 
         return $this;
@@ -792,7 +792,7 @@ class Server implements \Zend\Server\Server
             if (!is_string($func) || !function_exists($func)) {
                 throw new Exception('Unable to attach function');
             }
-            $this->_methods[] = Reflection\Reflection::reflectFunction($func, $argv, $namespace);
+            $this->_methods[] = Reflection::reflectFunction($func, $argv, $namespace);
         }
 
         $this->_buildDispatchTable();

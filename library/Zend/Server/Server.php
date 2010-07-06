@@ -94,7 +94,7 @@ interface Server
      * Return a server definition array
      *
      * Returns a server definition array as created using
-     * {@link * \Zend\Server\Reflection\Reflection}. Can be used for server introspection,
+     * {@link * \Zend\Server\Reflection}. Can be used for server introspection,
      * documentation, or persistence.
      *
      * @access public

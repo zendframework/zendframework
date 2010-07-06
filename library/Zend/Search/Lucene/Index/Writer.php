@@ -95,7 +95,7 @@ class Writer
     /**
      * File system adapter.
      *
-     * @var \Zend\Search\Lucene\Storage\Directory\DirectoryInterface
+     * @var \Zend\Search\Lucene\Storage\Directory
      */
     private $_directory = null;
 
@@ -169,11 +169,11 @@ class Writer
     /**
      * Create empty index
      *
-     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
+     * @param \Zend\Search\Lucene\Storage\Directory $directory
      * @param integer $generation
      * @param integer $nameCount
      */
-    public static function createIndex(Directory\DirectoryInterface $directory, $generation, $nameCount)
+    public static function createIndex(Directory $directory, $generation, $nameCount)
     {
         if ($generation == 0) {
             // Create index in pre-2.1 mode
@@ -224,12 +224,12 @@ class Writer
     /**
      * Open the index for writing
      *
-     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
+     * @param \Zend\Search\Lucene\Storage\Directory $directory
      * @param array $segmentInfos
      * @param integer $targetFormatVersion
-     * @param \Zend\Search\Lucene\Storage\File\FileInterface $cleanUpLock
+     * @param \Zend\Search\Lucene\Storage\File $cleanUpLock
      */
-    public function __construct(Directory\DirectoryInterface $directory, &$segmentInfos, $targetFormatVersion)
+    public function __construct(Directory $directory, &$segmentInfos, $targetFormatVersion)
     {
         $this->_directory           = $directory;
         $this->_segmentInfos        = &$segmentInfos;
@@ -239,9 +239,9 @@ class Writer
     /**
      * Adds a document to this index.
      *
-     * @param \Zend\Search\Lucene\Document\Document $document
+     * @param \Zend\Search\Lucene\Document $document
      */
-    public function addDocument(Document\Document $document)
+    public function addDocument(Document $document)
     {
         if ($this->_currentSegment === null) {
             $this->_currentSegment =

@@ -23,7 +23,7 @@
  */
 namespace Zend\Dojo;
 
-use Zend\View\ViewInterface as View;
+use Zend\View\ViewEngine as View;
 
 /**
  * Enable Dojo components
@@ -81,7 +81,7 @@ class Dojo
     /**
      * Dojo-enable a view instance
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return void
      */
     public static function enableView(View $view)

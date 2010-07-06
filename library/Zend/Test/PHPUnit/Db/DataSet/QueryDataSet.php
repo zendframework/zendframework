@@ -31,7 +31,7 @@ use Zend\DB\Select;
  *
  * @uses       PHPUnit_Extensions_Database_DataSet_QueryDataSet
  * @uses       PHPUnit_Extensions_Database_DB_IDatabaseConnection
- * @uses       \Zend\DB\Select\Select
+ * @uses       \Zend\DB\Select
  * @uses       \Zend\Test\PHPUnit\Db\DataSet\QueryTable
  * @uses       \Zend\Test\PHPUnit\Db\Exception
  * @category   Zend
@@ -61,16 +61,16 @@ class QueryDataSet extends \PHPUnit_Extensions_Database_DataSet_QueryDataSet
      * By default a select * will be done on the given tablename.
      *
      * @param string                $tableName
-     * @param string|\Zend\DB\Select\Select $query
+     * @param string|\Zend\DB\Select $query
      */
     public function addTable($tableName, $query = \NULL)
     {
         if ($query === NULL) {
             $query = $this->databaseConnection->getConnection()->select();
-            $query->from($tableName, Select\Select::SQL_WILDCARD);
+            $query->from($tableName, Select::SQL_WILDCARD);
         }
 
-        if($query instanceof Select\Select) {
+        if($query instanceof Select) {
             $query = $query->__toString();
         }
 

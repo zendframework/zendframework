@@ -24,9 +24,10 @@
  * @namespace
  */
 namespace Zend\View\Helper\Navigation;
-use Zend\Navigation;
-use Zend\Navigation\Page;
-use Zend\View;
+
+use Zend\Navigation\Container,
+    Zend\Navigation\AbstractPage,
+    Zend\View;
 
 /**
  * Helper for printing breadcrumbs
@@ -78,7 +79,7 @@ class Breadcrumbs extends AbstractHelper
      * @return \Zend\View\Helper\Navigation\Breadcrumbs  fluent interface,
      *                                                  returns self
      */
-    public function breadcrumbs(Navigation\Container $container = null)
+    public function direct(Container $container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);
@@ -184,7 +185,7 @@ class Breadcrumbs extends AbstractHelper
      *                                               registered in the helper.
      * @return string                                helper output
      */
-    public function renderStraight(Navigation\Container $container = null)
+    public function renderStraight(Container $container = null)
     {
         if (null === $container) {
             $container = $this->getContainer();
@@ -210,7 +211,7 @@ class Breadcrumbs extends AbstractHelper
 
         // walk back to root
         while ($parent = $active->getParent()) {
-            if ($parent instanceof Page\Page) {
+            if ($parent instanceof AbstractPage) {
                 // prepend crumb to html
                 $html = $this->htmlify($parent)
                       . $this->getSeparator()
@@ -251,7 +252,7 @@ class Breadcrumbs extends AbstractHelper
      *                                               be found.
      * @return string                                helper output
      */
-    public function renderPartial(Navigation\Container $container = null,
+    public function renderPartial(Container $container = null,
                                   $partial = null)
     {
         if (null === $container) {
@@ -276,7 +277,7 @@ class Breadcrumbs extends AbstractHelper
             $active = $active['page'];
             $model['pages'][] = $active;
             while ($parent = $active->getParent()) {
-                if ($parent instanceof Page\Page) {
+                if ($parent instanceof AbstractPage) {
                     $model['pages'][] = $parent;
                 } else {
                     break;
@@ -322,7 +323,7 @@ class Breadcrumbs extends AbstractHelper
      *                                               registered in the helper.
      * @return string                                helper output
      */
-    public function render(Navigation\Container $container = null)
+    public function render(Container $container = null)
     {
         if ($partial = $this->getPartial()) {
             return $this->renderPartial($container, $partial);

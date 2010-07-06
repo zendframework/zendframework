@@ -24,10 +24,11 @@
 namespace Zend\Form;
 use Zend\Config\Config,
     Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathMapper,
     Zend\Validator\Validator,
     Zend\Filter\Filter,
-    Zend\View\ViewInterface as View,
-    Zend\Controller\Action\HelperBroker\HelperBroker as ActionHelperBroker;
+    Zend\View\ViewEngine as View,
+    Zend\Controller\Action\HelperBroker as ActionHelperBroker;
 
 /**
  * Zend_Form_Element
@@ -37,7 +38,7 @@ use Zend\Config\Config,
  * @uses       \Zend\Form\Form
  * @uses       \Zend\Form\ElementException
  * @uses       \Zend\Form\Exception
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
+ * @uses       \Zend\Loader\PluginLoader
  * @uses       \Zend\Validator\Validator
  * @category   Zend
  * @package    Zend_Form
@@ -218,7 +219,7 @@ class Element implements Validator
     protected $_value;
 
     /**
-     * @var \Zend\View\ViewInterface
+     * @var \Zend\View\ViewEngine
      */
     protected $_view;
 
@@ -969,12 +970,12 @@ class Element implements Validator
     /**
      * Set plugin loader to use for validator or filter chain
      *
-     * @param  \Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  \Zend\Loader\PrefixPathMapper $loader
      * @param  string $type 'decorator', 'filter', or 'validate'
      * @return \Zend\Form\Element
      * @throws \Zend\Form\Exception on invalid type
      */
-    public function setPluginLoader(PluginLoader\PluginLoaderInterface $loader, $type)
+    public function setPluginLoader(PrefixPathMapper $loader, $type)
     {
         $type = strtoupper($type);
         switch ($type) {
@@ -995,7 +996,7 @@ class Element implements Validator
      * 'decorator', 'filter', or 'validate' for $type.
      *
      * @param  string $type
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      * @throws \Zend\Loader\Exception on invalid type.
      */
     public function getPluginLoader($type)
@@ -1012,7 +1013,7 @@ class Element implements Validator
                     $pathSegment   = 'Form/Decorator';
                 }
                 if (!isset($this->_loaders[$type])) {
-                    $this->_loaders[$type] = new PluginLoader\PluginLoader(
+                    $this->_loaders[$type] = new PluginLoader(
                         array('Zend\\' . $prefixSegment . '\\' => 'Zend/' . $pathSegment . '/')
                     );
                 }
@@ -1740,7 +1741,7 @@ class Element implements Validator
     /**
      * Set view object
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return \Zend\Form\Element
      */
     public function setView(View $view = null)
@@ -1754,7 +1755,7 @@ class Element implements Validator
      *
      * Retrieves from ViewRenderer if none previously set.
      *
-     * @return null|\Zend\View\ViewInterface
+     * @return null|\Zend\View\ViewEngine
      */
     public function getView()
     {
@@ -1967,7 +1968,7 @@ class Element implements Validator
     /**
      * Render form element
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return string
      */
     public function render(View $view = null)

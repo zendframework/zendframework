@@ -24,16 +24,20 @@
  * @namespace
  */
 namespace Zend\Mail\Storage\Writable;
-use Zend\Mail\Storage;
-use Zend\Mail\Storage\Folder;
-use Zend\Mail;
-use Zend\Mail\Storage;
+
+use Zend\Mail\Exception as MailException,
+    Zend\Mail\Storage,
+    Zend\Mail\Storage\Exception as StorageException,
+    Zend\Mail\Storage\Folder,
+    Zend\Mail\Storage\Folder\Maildir as MaildirFolder,
+    Zend\Mail\Storage\Maildir as MaildirStorage,
+    Zend\Mail\Storage\Writable;
 
 /**
  * @uses       RecursiveIteratorIterator
  * @uses       \Zend\Mail\Storage\Storage
  * @uses       \Zend\Mail\Storage\Exception
- * @uses       \Zend\Mail\Storage\Folder\Folder
+ * @uses       \Zend\Mail\Storage\Folder
  * @uses       \Zend\Mail\Storage\Folder\Maildir
  * @uses       \Zend\Mail\Storage\Maildir
  * @uses       \Zend\Mail\Storage\Writable\WritableInterface
@@ -43,9 +47,7 @@ use Zend\Mail\Storage;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Maildir
-    extends    Storage\Folder\Maildir
-    implements WritableInterface
+class Maildir extends MaildirFolder implements Writable
 {
     // TODO: init maildir (+ constructor option create if not found)
 
@@ -68,17 +70,17 @@ class Maildir
     {
         if (file_exists($dir)) {
             if (!is_dir($dir)) {
-                throw new Storage\Exception('maildir must be a directory if already exists');
+                throw new StorageException('maildir must be a directory if already exists');
             }
         } else {
             if (!mkdir($dir)) {
                 $dir = dirname($dir);
                 if (!file_exists($dir)) {
-                    throw new Storage\Exception("parent $dir not found");
+                    throw new StorageException("parent $dir not found");
                 } else if (!is_dir($dir)) {
-                    throw new Storage\Exception("parent $dir not a directory");
+                    throw new StorageException("parent $dir not a directory");
                 } else {
-                    throw new Storage\Exception('cannot create maildir');
+                    throw new StorageException('cannot create maildir');
                 }
             }
         }
@@ -87,7 +89,7 @@ class Maildir
             if (!@mkdir($dir . DIRECTORY_SEPARATOR . $subdir)) {
                 // ignore if dir exists (i.e. was already valid maildir or two processes try to create one)
                 if (!file_exists($dir . DIRECTORY_SEPARATOR . $subdir)) {
-                    throw new Storage\Exception('could not create subdir ' . $subdir);
+                    throw new StorageException('could not create subdir ' . $subdir);
                 }
             }
         }
@@ -101,7 +103,8 @@ class Maildir
      * @param  $params array mail reader specific parameters
      * @throws \Zend\Mail\Storage\Exception
      */
-    public function __construct($params) {
+    public function __construct($params) 
+    {
         if (is_array($params)) {
             $params = (object)$params;
         }
@@ -126,7 +129,7 @@ class Maildir
      */
     public function createFolder($name, $parentFolder = null)
     {
-        if ($parentFolder instanceof Folder\Folder) {
+        if ($parentFolder instanceof Folder) {
             $folder = $parentFolder->getGlobalName() . $this->_delim . $name;
         } else if ($parentFolder != null) {
             $folder = rtrim($parentFolder, $this->_delim) . $this->_delim . $name;
@@ -140,15 +143,15 @@ class Maildir
         $exists = null;
         try {
             $exists = $this->getFolders($folder);
-        } catch (Mail\Exception $e) {
+        } catch (MailException $e) {
             // ok
         }
         if ($exists) {
-            throw new Storage\Exception('folder already exists');
+            throw new StorageException('folder already exists');
         }
 
         if (strpos($folder, $this->_delim . $this->_delim) !== false) {
-            throw new Storage\Exception('invalid name - folder parts may not be empty');
+            throw new StorageException('invalid name - folder parts may not be empty');
         }
 
         if (strpos($folder, 'INBOX' . $this->_delim) === 0) {
@@ -160,7 +163,7 @@ class Maildir
         // check if we got tricked and would create a dir outside of the rootdir or not as direct child
         if (strpos($folder, DIRECTORY_SEPARATOR) !== false || strpos($folder, '/') !== false
             || dirname($fulldir) . DIRECTORY_SEPARATOR != $this->_rootdir) {
-            throw new Storage\Exception('invalid name - no directory seprator allowed in folder name');
+            throw new StorageException('invalid name - no directory seprator allowed in folder name');
         }
 
         // has a parent folder?
@@ -170,14 +173,14 @@ class Maildir
             $parent = substr($folder, 0, strrpos($folder, $this->_delim));
             try {
                 $this->getFolders($parent);
-            } catch (Mail\Exception $e) {
+            } catch (MailException $e) {
                 // does not - create parent folder
                 $this->createFolder($parent);
             }
         }
 
         if (!@mkdir($fulldir) || !@mkdir($fulldir . DIRECTORY_SEPARATOR . 'cur')) {
-            throw new Storage\Exception('error while creating new folder, may be created incompletly');
+            throw new StorageException('error while creating new folder, may be created incompletly');
         }
 
         mkdir($fulldir . DIRECTORY_SEPARATOR . 'new');
@@ -215,15 +218,15 @@ class Maildir
 
         // check if folder exists and has no children
         if (!$this->getFolders($name)->isLeaf()) {
-            throw new Storage\Exception('delete children first');
+            throw new StorageException('delete children first');
         }
 
         if ($name == 'INBOX' || $name == DIRECTORY_SEPARATOR || $name == '/') {
-            throw new Storage\Exception('wont delete INBOX');
+            throw new StorageException('wont delete INBOX');
         }
 
         if ($name == $this->getCurrentFolder()) {
-            throw new Storage\Exception('wont delete selected folder');
+            throw new StorageException('wont delete selected folder');
         }
 
         foreach (array('tmp', 'new', 'cur', '.') as $subdir) {
@@ -233,20 +236,20 @@ class Maildir
             }
             $dh = opendir($dir);
             if (!$dh) {
-                throw new Storage\Exception("error opening $subdir");
+                throw new StorageException("error opening $subdir");
             }
             while (($entry = readdir($dh)) !== false) {
                 if ($entry == '.' || $entry == '..') {
                     continue;
                 }
                 if (!unlink($dir . DIRECTORY_SEPARATOR . $entry)) {
-                    throw new Storage\Exception("error cleaning $subdir");
+                    throw new StorageException("error cleaning $subdir");
                 }
             }
             closedir($dh);
             if ($subdir !== '.') {
                 if (!rmdir($dir)) {
-                    throw new Storage\Exception("error removing $subdir");
+                    throw new StorageException("error removing $subdir");
                 }
             }
         }
@@ -254,7 +257,7 @@ class Maildir
         if (!rmdir($this->_rootdir . '.' . $name)) {
             // at least we should try to make it a valid maildir again
             mkdir($this->_rootdir . '.' . $name . DIRECTORY_SEPARATOR . 'cur');
-            throw new Storage\Exception("error removing maindir");
+            throw new StorageException("error removing maindir");
         }
 
         $parent = strpos($name, $this->_delim) ? substr($name, 0, strrpos($name, $this->_delim)) : null;
@@ -267,7 +270,7 @@ class Maildir
      *
      * The new name has the same restrictions as in createFolder()
      *
-     * @param   string|\Zend\Mail\Storage\Folder\Folder $oldName name or instance of folder
+     * @param   string|\Zend\Mail\Storage\Folder $oldName name or instance of folder
      * @param   string                          $newName new global name of folder
      * @return  null
      * @throws  \Zend\Mail\Storage\Exception
@@ -276,7 +279,7 @@ class Maildir
     {
         // TODO: This is also not atomar and has similar problems as removeFolder()
 
-        if ($oldName instanceof Folder\Folder) {
+        if ($oldName instanceof Folder) {
             $oldName = $oldName->getGlobalName();
         }
 
@@ -291,18 +294,18 @@ class Maildir
         }
 
         if (strpos($newName, $oldName . $this->_delim) === 0) {
-            throw new Storage\Exception('new folder cannot be a child of old folder');
+            throw new StorageException('new folder cannot be a child of old folder');
         }
 
         // check if folder exists and has no children
         $folder = $this->getFolders($oldName);
 
         if ($oldName == 'INBOX' || $oldName == DIRECTORY_SEPARATOR || $oldName == '/') {
-            throw new Storage\Exception('wont rename INBOX');
+            throw new StorageException('wont rename INBOX');
         }
 
         if ($oldName == $this->getCurrentFolder()) {
-            throw new Storage\Exception('wont rename selected folder');
+            throw new StorageException('wont rename selected folder');
         }
 
         $newdir = $this->createFolder($newName);
@@ -321,7 +324,7 @@ class Maildir
             }
             // using copy or moving files would be even better - but also much slower
             if (!rename($olddir . $subdir, $newdir . $subdir)) {
-                throw new Storage\Exception('error while moving ' . $subdir);
+                throw new StorageException('error while moving ' . $subdir);
             }
         }
         // create a dummy if removing fails - otherwise we can't read it next time
@@ -372,7 +375,7 @@ class Maildir
         }
         if (!file_exists($tmpdir)) {
             if (!mkdir($tmpdir)) {
-                throw new Storage\Exception('problems creating tmp dir');
+                throw new StorageException('problems creating tmp dir');
             }
         }
 
@@ -390,7 +393,7 @@ class Maildir
                 // to mark the filename as taken
                 $fh = fopen($tmpdir . $uniq, 'w');
                 if (!$fh) {
-                    throw new Storage\Exception('could not open temp file');
+                    throw new StorageException('could not open temp file');
                 }
                 break;
             }
@@ -398,7 +401,7 @@ class Maildir
         }
 
         if (!$fh) {
-            throw new Storage\Exception("tried $max_tries unique ids for a temp file, but all were taken"
+            throw new StorageException("tried $max_tries unique ids for a temp file, but all were taken"
                                                 . ' - giving up');
         }
 
@@ -417,13 +420,13 @@ class Maildir
     {
         // accessing keys is easier, faster and it removes duplicated flags
         $wanted_flags = array_flip($flags);
-        if (isset($wanted_flags[Storage\Storage::FLAG_RECENT])) {
-            throw new Storage\Exception('recent flag may not be set');
+        if (isset($wanted_flags[StorageStorage::FLAG_RECENT])) {
+            throw new StorageException('recent flag may not be set');
         }
 
         $info = ':2,';
         $flags = array();
-        foreach (Storage\Maildir::$_knownFlags as $char => $flag) {
+        foreach (MaildirStorage::$_knownFlags as $char => $flag) {
             if (!isset($wanted_flags[$flag])) {
                 continue;
             }
@@ -434,7 +437,7 @@ class Maildir
 
         if (!empty($wanted_flags)) {
             $wanted_flags = implode(', ', array_keys($wanted_flags));
-            throw new Storage\Exception('unknown flag(s): ' . $wanted_flags);
+            throw new StorageException('unknown flag(s): ' . $wanted_flags);
         }
 
         return $info;
@@ -444,30 +447,29 @@ class Maildir
      * append a new message to mail storage
      *
      * @param   string|stream                              $message message as string or stream resource
-     * @param   null|string|\Zend\Mail\Storage\Folder\Folder       $folder  folder for new message, else current folder is taken
+     * @param   null|string|\Zend\Mail\Storage\Folder       $folder  folder for new message, else current folder is taken
      * @param   null|array                                 $flags   set flags for new message, else a default set is used
      * @param   bool                                       $recent  handle this mail as if recent flag has been set,
      *                                                              should only be used in delivery
      * @throws  \Zend\Mail\Storage\Exception
      */
      // not yet * @param string|\Zend\Mail\Message|\Zend\Mime\Message $message message as string or instance of message class
-
     public function appendMessage($message, $folder = null, $flags = null, $recent = false)
     {
         if ($this->_quota && $this->checkQuota()) {
-            throw new Storage\Exception('storage is over quota!');
+            throw new StorageException('storage is over quota!');
         }
 
         if ($folder === null) {
             $folder = $this->_currentFolder;
         }
 
-        if (!($folder instanceof Folder\Folder)) {
+        if (!($folder instanceof Folder)) {
             $folder = $this->getFolders($folder);
         }
 
         if ($flags === null) {
-            $flags = array(Storage\Storage::FLAG_SEEN);
+            $flags = array(Storage::FLAG_SEEN);
         }
         $info = $this->_getInfoString($flags);
         $temp_file = $this->_createTmpFile($folder->getGlobalName());
@@ -493,7 +495,7 @@ class Maildir
         $exception = null;
 
         if (!link($temp_file['filename'], $new_filename)) {
-            $exception = new Storage\Exception('cannot link message file to final dir');
+            $exception = new StorageException('cannot link message file to final dir');
         }
         @unlink($temp_file['filename']);
 
@@ -513,17 +515,17 @@ class Maildir
      * copy an existing message
      *
      * @param   int                             $id     number of message
-     * @param   string|\Zend\Mail\Storage\Folder\Folder $folder name or instance of targer folder
+     * @param   string|\Zend\Mail\Storage\Folder $folder name or instance of targer folder
      * @return  null
      * @throws  \Zend\Mail\Storage\Exception
      */
     public function copyMessage($id, $folder)
     {
         if ($this->_quota && $this->checkQuota()) {
-            throw new Storage\Exception('storage is over quota!');
+            throw new StorageException('storage is over quota!');
         }
 
-        if (!($folder instanceof Folder\Folder)) {
+        if (!($folder instanceof Folder)) {
             $folder = $this->getFolders($folder);
         }
 
@@ -532,7 +534,7 @@ class Maildir
         $flags = $filedata['flags'];
 
         // copied message can't be recent
-        while (($key = array_search(Storage\Storage::FLAG_RECENT, $flags)) !== false) {
+        while (($key = array_search(Storage::FLAG_RECENT, $flags)) !== false) {
             unset($flags[$key]);
         }
         $info = $this->_getInfoString($flags);
@@ -554,9 +556,9 @@ class Maildir
         $exception = null;
 
         if (!copy($old_file, $temp_file['filename'])) {
-            $exception = new Storage\Exception('cannot copy message file');
+            $exception = new StorageException('cannot copy message file');
         } else if (!link($temp_file['filename'], $new_file)) {
-            $exception = new Storage\Exception('cannot link message file to final dir');
+            $exception = new StorageException('cannot link message file to final dir');
         }
         @unlink($temp_file['filename']);
 
@@ -584,8 +586,9 @@ class Maildir
      * @return null
      * @throws \Zend\Mail\Storage\Exception
      */
-    public function moveMessage($id, $folder) {
-        if (!($folder instanceof Folder\Folder)) {
+    public function moveMessage($id, $folder) 
+    {
+        if (!($folder instanceof Folder)) {
             $folder = $this->getFolders($folder);
         }
 
@@ -599,7 +602,7 @@ class Maildir
         $flags = $filedata['flags'];
 
         // moved message can't be recent
-        while (($key = array_search(Storage\Storage::FLAG_RECENT, $flags)) !== false) {
+        while (($key = array_search(Storage::FLAG_RECENT, $flags)) !== false) {
             unset($flags[$key]);
         }
         $info = $this->_getInfoString($flags);
@@ -620,7 +623,7 @@ class Maildir
         $exception = null;
 
         if (!rename($old_file, $new_file)) {
-            $exception = new Storage\Exception('cannot move message file');
+            $exception = new StorageException('cannot move message file');
         }
         @unlink($temp_file['filename']);
 
@@ -652,7 +655,7 @@ class Maildir
         $new_filename = dirname(dirname($filedata['filename'])) . DIRECTORY_SEPARATOR . 'cur' . DIRECTORY_SEPARATOR . "$filedata[uniq]$info";
 
         if (!@rename($filedata['filename'], $new_filename)) {
-            throw new Storage\Exception('cannot rename file');
+            throw new StorageException('cannot rename file');
         }
 
         $filedata['flags']    = $flags;
@@ -677,7 +680,7 @@ class Maildir
         }
 
         if (!@unlink($filename)) {
-            throw new Storage\Exception('cannot remove message');
+            throw new StorageException('cannot remove message');
         }
         unset($this->_files[$id - 1]);
         // remove the gap
@@ -698,7 +701,8 @@ class Maildir
      * @param bool|array $value new quota value
      * @return null
      */
-    public function setQuota($value) {
+    public function setQuota($value) 
+    {
         $this->_quota = $value;
     }
 
@@ -709,11 +713,12 @@ class Maildir
      *
      * @return bool|array
      */
-    public function getQuota($fromStorage = false) {
+    public function getQuota($fromStorage = false) 
+    {
         if ($fromStorage) {
             $fh = @fopen($this->_rootdir . 'maildirsize', 'r');
             if (!$fh) {
-                throw new Storage\Exception('cannot open maildirsize');
+                throw new StorageException('cannot open maildirsize');
             }
             $definition = fgets($fh);
             fclose($fh);
@@ -735,7 +740,8 @@ class Maildir
     /**
      * @see http://www.inter7.com/courierimap/README.maildirquota.html "Calculating maildirsize"
      */
-    protected function _calculateMaildirsize() {
+    protected function _calculateMaildirsize() 
+    {
         $timestamps = array();
         $messages = 0;
         $total_size = 0;
@@ -745,8 +751,8 @@ class Maildir
         } else {
             try {
                 $quota = $this->getQuota(true);
-            } catch (Storage\Exception $e) {
-                throw new Storage\Exception('no quota definition found', 0, $e);
+            } catch (StorageException $e) {
+                throw new StorageException('no quota definition found', 0, $e);
             }
         }
 
@@ -831,7 +837,8 @@ class Maildir
     /**
      * @see http://www.inter7.com/courierimap/README.maildirquota.html "Calculating the quota for a Maildir++"
      */
-    protected function _calculateQuota($forceRecalc = false) {
+    protected function _calculateQuota($forceRecalc = false) 
+    {
         $fh = null;
         $total_size = 0;
         $messages   = 0;
@@ -900,7 +907,8 @@ class Maildir
         return array('size' => $total_size, 'count' => $messages, 'quota' => $quota, 'over_quota' => $over_quota);
     }
 
-    protected function _addQuotaEntry($size, $count = 1) {
+    protected function _addQuotaEntry($size, $count = 1) 
+    {
         if (!file_exists($this->_rootdir . 'maildirsize')) {
             // TODO: should get file handler from _calculateQuota
         }
@@ -915,7 +923,8 @@ class Maildir
      * @param bool $detailedResponse return known data of quota and current size and message count @see _calculateQuota()
      * @return bool|array over quota state or detailed response
      */
-    public function checkQuota($detailedResponse = false, $forceRecalc = false) {
+    public function checkQuota($detailedResponse = false, $forceRecalc = false) 
+    {
         $result = $this->_calculateQuota($forceRecalc);
         return $detailedResponse ? $result : $result['over_quota'];
     }

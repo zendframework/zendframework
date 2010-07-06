@@ -24,11 +24,11 @@
  * @namespace
  */
 namespace Zend\View\Helper\Navigation;
-use Zend\Navigation;
-use Zend;
-use Zend\Acl;
-use Zend\View;
-use Zend\Navigation\Page;
+use Zend\Navigation,
+    Zend\Navigation\AbstractPage,
+    Zend,
+    Zend\Acl,
+    Zend\View;
 
 /**
  * Base class for navigational helpers
@@ -80,7 +80,7 @@ abstract class AbstractHelper
     /**
      * Translator
      *
-     * @var \Zend\Translator\Adapter\Adapter
+     * @var \Zend\Translator\Adapter
      */
     protected $_translator;
 
@@ -296,7 +296,7 @@ abstract class AbstractHelper
     public function setTranslator($translator = null)
     {
         if (null == $translator ||
-            $translator instanceof \Zend\Translator\Adapter\Adapter) {
+            $translator instanceof \Zend\Translator\Adapter) {
             $this->_translator = $translator;
         } elseif ($translator instanceof \Zend\Translator\Translator) {
             $this->_translator = $translator->getAdapter();
@@ -587,7 +587,7 @@ abstract class AbstractHelper
                 }
 
                 $found = $found->getParent();
-                if (!$found instanceof Page\Page) {
+                if (!$found instanceof AbstractPage) {
                     $found = null;
                     break;
                 }
@@ -652,10 +652,10 @@ abstract class AbstractHelper
     /**
      * Returns an HTML string containing an 'a' element for the given page
      *
-     * @param  \Zend\Navigation\Page\Page $page  page to generate HTML for
+     * @param  \Zend\Navigation\AbstractPage $page  page to generate HTML for
      * @return string                      HTML string for the given page
      */
-    public function htmlify(Page\Page $page)
+    public function htmlify(AbstractPage $page)
     {
         // get label and title for translating
         $label = $page->getLabel();
@@ -700,14 +700,14 @@ abstract class AbstractHelper
      * - If page is accepted by the rules above and $recursive is true, the page
      *   will not be accepted if it is the descendant of a non-accepted page.
      *
-     * @param  \Zend\Navigation\Page\Page $page      page to check
+     * @param  \Zend\Navigation\AbstractPage $page      page to check
      * @param  bool                $recursive  [optional] if true, page will not
      *                                         be accepted if it is the
      *                                         descendant of a page that is not
      *                                         accepted. Default is true.
      * @return bool                            whether page should be accepted
      */
-    public function accept(Page\Page $page, $recursive = true)
+    public function accept(AbstractPage $page, $recursive = true)
     {
         // accept by default
         $accept = true;
@@ -722,7 +722,7 @@ abstract class AbstractHelper
 
         if ($accept && $recursive) {
             $parent = $page->getParent();
-            if ($parent instanceof Page\Page) {
+            if ($parent instanceof AbstractPage) {
                 $accept = $this->accept($parent, true);
             }
         }
@@ -739,10 +739,10 @@ abstract class AbstractHelper
      *   if the ACL allows access to it using the helper's role
      * - If page has no resource or privilege, page is accepted
      *
-     * @param  \Zend\Navigation\Page\Page $page  page to check
+     * @param  \Zend\Navigation\AbstractPage $page  page to check
      * @return bool                        whether page is accepted by ACL
      */
-    protected function _acceptAcl(Page\Page $page)
+    protected function _acceptAcl(AbstractPage $page)
     {
         if (!$acl = $this->getAcl()) {
             // no acl registered means don't use acl
@@ -810,7 +810,7 @@ abstract class AbstractHelper
     protected function _normalizeId($value)
     {
         $prefix = get_class($this);
-        $prefix = strtolower(trim(substr($prefix, strrpos($prefix, '_')), '_'));
+        $prefix = strtolower(trim(substr($prefix, strrpos($prefix, '\\')), '\\'));
 
         return $prefix . '-' . $value;
     }

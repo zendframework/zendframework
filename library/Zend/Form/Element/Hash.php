@@ -25,7 +25,7 @@
 namespace Zend\Form\Element;
 
 use Zend\Session\Container as SessionContainer,
-    Zend\View\ViewInterface as View;
+    Zend\View\ViewEngine as View;
 
 /**
  * CSRF form protection
@@ -235,7 +235,7 @@ class Hash extends Xhtml
     /**
      * Render CSRF token in form
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return string
      */
     public function render(View $view = null)

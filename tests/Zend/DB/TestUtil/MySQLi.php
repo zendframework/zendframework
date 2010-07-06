@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Db\TestUtil;
+namespace ZendTest\DB\TestUtil;
 
 /**
  * @category   Zend

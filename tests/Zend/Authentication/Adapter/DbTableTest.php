@@ -29,7 +29,7 @@ use Zend\Authentication\Adapter,
     Zend\Authentication,
     Zend\DB\DB,
     Zend\DB\Adapter\PDO\SQLite as SQLiteAdapter,
-    Zend\DB\Select\Select as DBSelect;
+    Zend\DB\Select as DBSelect;
 
 /**
  * @category   Zend

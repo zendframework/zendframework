@@ -75,7 +75,7 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
     {
         $front = Controller\Front::getInstance();
         $front->resetInstance();
-        \Zend\Controller\Action\HelperBroker\HelperBroker::removeHelper('viewRenderer');
+        \Zend\Controller\Action\HelperBroker::removeHelper('viewRenderer');
 
         $this->redirector = new \Zend\Controller\Action\Helper\Redirector();
         $this->router     = $front->getRouter();

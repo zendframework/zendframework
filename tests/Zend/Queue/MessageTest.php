@@ -77,7 +77,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'data'      => $this->data,
         );
 
-        $this->message = new Message\Message($this->options);
+        $this->message = new Message($this->options);
     }
 
     protected function tearDown()
@@ -87,7 +87,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testConstruct()
     {
         try {
-            $message = new Message\Message($this->options);
+            $message = new Message($this->options);
             $this->assertTrue(true);
         } catch (\Exception $e) {
             $this->fail('should have gotten a valid object');
@@ -97,7 +97,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         try {
             $config2 = $this->options;
             $config2['queue'] = 'weee';
-            $message = new Message\Message($config2);
+            $message = new Message($config2);
             $this->fail('should have thrown an exception bad queue var');
         } catch (\Exception $e) {
             $this->assertTrue(true);
@@ -106,7 +106,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         try {
             $config2 = $this->options;
             $config2['data'] = 'weee';
-            $message = new Message\Message($config2);
+            $message = new Message($config2);
             $this->fail('should have thrown an exception bad queue var');
         } catch (\Exception $e) {
             $this->assertTrue(true);
@@ -137,7 +137,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         }
 
         try {
-            $message = new Message\Message($this->options);
+            $message = new Message($this->options);
             $this->assertTrue(true);
         } catch (\Exception $e) {
             $this->fail('should have gotten a valid object');
@@ -147,7 +147,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         try {
             $config2 = $this->options;
             $config2['queue'] = 'weee';
-            $message = new Message\Message($config2);
+            $message = new Message($config2);
             $this->fail('should have thrown an exception bad queue var');
         } catch (\Exception $e) {
             $this->assertTrue(true);
@@ -156,7 +156,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         try {
             $config2 = $this->options;
             $config2['data'] = 'weee';
-            $message = new Message\Message($config2);
+            $message = new Message($config2);
             $this->fail('should have thrown an exception bad queue var');
         } catch (\Exception $e) {
             $this->assertTrue(true);

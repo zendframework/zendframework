@@ -159,10 +159,10 @@ class Tool extends Basic
     /**
      * setActionReference()
      *
-     * @param \Zend\Tool\Framework\Action\ActionInterface $action
+     * @param \Zend\Tool\Framework\Action $action
      * @return \Zend\Tool\Framework\Metadata\Tool
      */
-    public function setActionReference(\Zend\Tool\Framework\Action\ActionInterface $action)
+    public function setActionReference(\Zend\Tool\Framework\Action $action)
     {
         $this->_actionReference = $action;
         return $this;
@@ -171,7 +171,7 @@ class Tool extends Basic
     /**
      * getActionReference()
      *
-     * @return \Zend\Tool\Framework\Action\ActionInterface
+     * @return \Zend\Tool\Framework\Action
      */
     public function getActionReference()
     {
@@ -181,10 +181,10 @@ class Tool extends Basic
     /**
      * setProviderReference()
      *
-     * @param \Zend\Tool\Framework\Provider\ProviderInterface $provider
+     * @param \Zend\Tool\Framework\Provider $provider
      * @return \Zend\Tool\Framework\Metadata\Tool
      */
-    public function setProviderReference(\Zend\Tool\Framework\Provider\ProviderInterface $provider)
+    public function setProviderReference(\Zend\Tool\Framework\Provider $provider)
     {
         $this->_providerReference = $provider;
         return $this;
@@ -193,7 +193,7 @@ class Tool extends Basic
     /**
      * getProviderReference()
      *
-     * @return \Zend\Tool\Framework\Provider\ProviderInterface
+     * @return \Zend\Tool\Framework\Provider
      */
     public function getProviderReference()
     {

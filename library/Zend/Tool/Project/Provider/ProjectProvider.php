@@ -38,12 +38,12 @@ class ProjectProvider extends AbstractProvider
     /**
      * createResource()
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $projectProviderName
      * @param string $actionNames
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    public static function createResource(\Zend\Tool\Project\Profile\Profile $profile, $projectProviderName, $actionNames = null)
+    public static function createResource(\Zend\Tool\Project\Profile $profile, $projectProviderName, $actionNames = null)
     {
 
         if (!is_string($projectProviderName)) {

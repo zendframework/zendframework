@@ -24,15 +24,16 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\Action;
+use Zend\Tool\Framework\Action;
 
 /**
- * @uses       \Zend\Tool\Framework\Action\ActionInterface
+ * @uses       \Zend\Tool\Framework\Action
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Base implements ActionInterface
+class Base implements Action
 {
 
     /**
@@ -83,7 +84,7 @@ class Base implements ActionInterface
     /**
      * _parseName - internal method to determine the name of an action when one is not explicity provided.
      *
-     * @param \Zend\Tool\Framework\Action\ActionInterface $action
+     * @param \Zend\Tool\Framework\Action $action
      * @return string
      */
     protected function _parseName()

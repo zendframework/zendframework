@@ -24,21 +24,21 @@
  * @namespace
  */
 namespace Zend\Queue\Stomp;
-use Zend\Queue;
+
+use Zend\Queue\Exception as QueueException;
 
 /**
  * This class represents a Stomp Frame
  *
  * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Stomp\FrameInterface
+ * @uses       \Zend\Queue\Stomp\StompFrame
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Stomp
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Frame
-    implements FrameInterface
+class Frame implements StompFrame
 {
     const END_OF_FRAME   = "\x00\n";
     const CONTENT_LENGTH = 'content-length';
@@ -108,7 +108,7 @@ class Frame
     public function setAutoContentLength($auto)
     {
         if (!is_bool($auto)) {
-            throw new Queue\Exception('$auto is not a boolean');
+            throw new QueueException('$auto is not a boolean');
         }
 
         $this->_autoContentLength = $auto;
@@ -153,11 +153,11 @@ class Frame
      */
     public function setHeader($header, $value) {
         if (!is_string($header)) {
-            throw new Queue\Exception('$header is not a string: ' . print_r($header, true));
+            throw new QueueException('$header is not a string: ' . print_r($header, true));
         }
 
         if (!is_scalar($value)) {
-            throw new Queue\Exception('$value is not a string: ' . print_r($value, true));
+            throw new QueueException('$value is not a string: ' . print_r($value, true));
         }
 
         $this->_headers[$header] = $value;
@@ -177,7 +177,7 @@ class Frame
     public function getHeader($header)
     {
         if (!is_string($header)) {
-            throw new Queue\Exception('$header is not a string');
+            throw new QueueException('$header is not a string');
         }
 
         return isset($this->_headers[$header])
@@ -211,7 +211,7 @@ class Frame
     public function setBody($body)
     {
         if (!is_string($body) && !is_null($body)) {
-            throw new Queue\Exception('$body is not a string or null');
+            throw new QueueException('$body is not a string or null');
         }
 
         $this->_body = $body;
@@ -242,7 +242,7 @@ class Frame
     public function setCommand($command)
     {
         if (!is_string($command) && !is_null($command)) {
-            throw new Queue\Exception('$command is not a string or null');
+            throw new QueueException('$command is not a string or null');
         }
 
         $this->_command = $command;
@@ -258,7 +258,7 @@ class Frame
     public function toFrame()
     {
         if ($this->getCommand() === false) {
-            throw new Queue\Exception('You must set the command');
+            throw new QueueException('You must set the command');
         }
 
         $command = $this->getCommand();
@@ -300,7 +300,7 @@ class Frame
     {
         try {
             $return = $this->toFrame();
-        } catch (Queue\Exception $e) {
+        } catch (QueueException $e) {
             $return = '';
         }
         return $return;
@@ -315,7 +315,7 @@ class Frame
     public function fromFrame($frame)
     {
         if (!is_string($frame)) {
-            throw new Queue\Exception('$frame is not a string');
+            throw new QueueException('$frame is not a string');
         }
 
         $headers = array();

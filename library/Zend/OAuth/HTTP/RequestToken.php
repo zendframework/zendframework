@@ -147,7 +147,7 @@ class RequestToken extends HTTPClient
      * return the resulting HTTP Response.
      *
      * @param  array $params
-     * @return Zend\HTTP\Response\Response
+     * @return Zend\HTTP\Response
      */
     protected function _attemptRequest(array $params)
     {

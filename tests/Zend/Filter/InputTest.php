@@ -26,7 +26,7 @@ namespace ZendTest\Filter
 use Zend\Filter\InputFilter,
     Zend\Filter,
     Zend\Validator,
-    Zend\Loader\PluginLoader\PluginLoader,
+    Zend\Loader\PluginLoader,
     Zend\Translator;
 
 /**
@@ -1190,8 +1190,8 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $input = new InputFilter(null, null);
 
         $loader = $input->getPluginLoader(InputFilter::VALIDATOR);
-        $this->assertType('\\Zend\\Loader\\PluginLoader\\PluginLoader', $loader,
-            'Expected object of type Zend\\Loader\\PluginLoader\\PluginLoader, got ' , get_class($loader));
+        $this->assertType('\\Zend\\Loader\\PluginLoader', $loader,
+            'Expected object of type Zend\\Loader\\PluginLoader, got ' , get_class($loader));
 
         $this->setExpectedException('\\Zend\\Filter\\Exception', 'Invalid type');
         $loader = $input->getPluginLoader('foo');

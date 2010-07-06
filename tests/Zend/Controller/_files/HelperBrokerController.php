@@ -89,4 +89,13 @@ class HelperBrokerController extends \Zend\Controller\Action
         $this->getResponse()->appendBody(get_class($this->_helper->TestHelper));
     }
 
+    /**
+     * Test function for testLoadingHelperOnlyInitializesOnce
+     * 
+     * @return void
+     */
+    public function test()
+    {
+        $this->_helper->getHelper('testHelper');
+    }
 }

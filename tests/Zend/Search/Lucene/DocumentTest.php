@@ -58,14 +58,14 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreate()
     {
-        $document =  new Document\Document();
+        $document =  new Document();
 
         $this->assertEquals($document->boost, 1);
     }
 
     public function testFields()
     {
-        $document =  new Document\Document();
+        $document =  new Document();
 
         $document->addField(Document\Field::Text('title',      'Title'));
         $document->addField(Document\Field::Text('annotation', 'Annotation'));
@@ -100,10 +100,10 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     public function testAddFieldMethodChaining()
     {
-        $document =  new Document\Document();
-        $this->assertTrue($document->addField(Document\Field::Text('title', 'Title')) instanceof Document\Document);
+        $document =  new Document();
+        $this->assertTrue($document->addField(Document\Field::Text('title', 'Title')) instanceof Document);
 
-        $document =  new Document\Document();
+        $document =  new Document();
         $document->addField(Document\Field::Text('title',      'Title'))
                  ->addField(Document\Field::Text('annotation', 'Annotation'))
                  ->addField(Document\Field::Text('body',       'Document body, document body, document body...'));

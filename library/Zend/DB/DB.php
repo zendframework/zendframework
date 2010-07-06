@@ -244,10 +244,6 @@ class DB
             unset($config['adapterNamespace']);
         }
 
-        // Adapter no longer normalized- see http://framework.zend.com/issues/browse/ZF-5606
-        //$adapterName = $adapterNamespace . '\\';
-        //$adapterName .= str_replace(' ', '\\', ucwords(str_replace('\\', ' ', strtolower($adapter))));
-
         $adapterName = $adapterNamespace . '\\' . $adapter;
         
         /*
@@ -255,7 +251,6 @@ class DB
          * if the specified class cannot be loaded.
          */
         if (!class_exists($adapterName)) {
-//            \Zend\Loader::loadClass($adapterName);
             echo "FAILED TO FIND $adapterName\n";
         }
 
@@ -269,7 +264,7 @@ class DB
          * Verify that the object created is a descendent of the abstract adapter type.
          */
         if (! $dbAdapter instanceof Adapter\AbstractAdapter) {
-            throw new Exception("Adapter class '$adapterName' does not extend Zend_Db_Adapter_Abstract");
+            throw new Exception("Adapter class '$adapterName' does not extend Zend\DB\Adapter\AbstractAdapter");
         }
 
         return $dbAdapter;

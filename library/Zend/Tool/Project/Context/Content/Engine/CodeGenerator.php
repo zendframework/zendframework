@@ -42,7 +42,7 @@ use Zend\Tool\Project\Context;
 class CodeGenerator
 {
     /**
-     * @var \Zend\Tool\Framework\Client\Storage\Storage
+     * @var \Zend\Tool\Framework\Client\Storage
      */
     protected $_storage = null;
 
@@ -54,10 +54,10 @@ class CodeGenerator
     /**
      * __construct()
      *
-     * @param \Zend\Tool\Framework\Client\Storage\Storage $storage
+     * @param \Zend\Tool\Framework\Client\Storage $storage
      * @param string $contentPrefix
      */
-    public function __construct(\Zend\Tool\Framework\Client\Storage\Storage $storage, $contentPrefix)
+    public function __construct(\Zend\Tool\Framework\Client\Storage $storage, $contentPrefix)
     {
         $this->_storage       = $storage;
         $this->_contentPrefix = $contentPrefix;
@@ -66,11 +66,11 @@ class CodeGenerator
     /**
      * hasContent()
      *
-     * @param \Zend\Tool\Project\Context\ContextInterface $context
+     * @param \Zend\Tool\Project\Context $context
      * @param string $method
      * @return string
      */
-    public function hasContent(Context\ContextInterface $context, $method)
+    public function hasContent(Context $context, $method)
     {
         return $this->_storage->has($this->_contentPrefix . '/' . $context->getName() . '/' . $method . '.php');
     }
@@ -78,12 +78,12 @@ class CodeGenerator
     /**
      * getContent()
      *
-     * @param \Zend\Tool\Project\Context\ContextInterface $context
+     * @param \Zend\Tool\Project\Context $context
      * @param string $method
      * @param mixed $parameters
      * @return string
      */
-    public function getContent(Context\ContextInterface $context, $method, $parameters)
+    public function getContent(Context $context, $method, $parameters)
     {
         $streamUri = $this->_storage->getStreamUri($this->_contentPrefix . '/' . $context->getName() . '/' . $method . '.php');
 

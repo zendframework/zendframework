@@ -24,23 +24,26 @@
  */
 namespace Zend\Tool\Framework\System\Provider;
 
+use Zend\Tool\Framework\Provider,
+    Zend\Tool\Framework\Registry,
+    Zend\Tool\Framework\RegistryEnabled;
+
 /**
  * Version Provider
  *
- * @uses       \Zend\Tool\Framework\Provider\ProviderInterface
- * @uses       \Zend\Tool\Framework\Registry\Registry
+ * @uses       \Zend\Tool\Framework\Provider
+ * @uses       \Zend\Tool\Framework\Registry\FrameworkRegistry
  * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Version
-    implements \Zend\Tool\Framework\Provider\ProviderInterface, \Zend\Tool\Framework\Registry\EnabledInterface
+class Version implements Provider, RegistryEnabled
 {
 
     /**
-     * @var \Zend\Tool\Framework\Registry\RegistryInterface
+     * @var \Zend\Tool\Framework\Registry
      */
     protected $_registry = null;
 
@@ -50,7 +53,7 @@ class Version
 
     protected $_specialties = array('MajorPart', 'MinorPart', 'MiniPart');
 
-    public function setRegistry(\Zend\Tool\Framework\Registry\RegistryInterface $registry)
+    public function setRegistry(Registry $registry)
     {
         $this->_registry = $registry;
         return $this;

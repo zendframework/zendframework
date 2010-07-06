@@ -122,11 +122,11 @@ abstract class DatabaseTestCase extends \PHPUnit_Extensions_Database_TestCase
     /**
      * Create a data table based on a Zend_Db_Table_Rowset instance
      *
-     * @param  \Zend\DB\Table\Rowset\AbstractRowset $rowset
+     * @param  \Zend\DB\Table\AbstractRowset $rowset
      * @param  string
      * @return \Zend\Test\PHPUnit\Db\DataSet\DbRowset
      */
-    protected function createDbRowset(\Zend\DB\Table\Rowset\AbstractRowset $rowset, $tableName = null)
+    protected function createDbRowset(\Zend\DB\Table\AbstractRowset $rowset, $tableName = null)
     {
         return new Db\DataSet\DbRowset($rowset, $tableName);
     }

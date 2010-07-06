@@ -27,7 +27,8 @@ use Zend\Form\ElementException,
     Zend\Form\Form,
     Zend\Form\Decorator\FileDecorator,
     Zend\Loader\PluginLoader,
-    Zend\View\ViewInterface as View,
+    Zend\Loader\PrefixPathMapper,
+    Zend\View\ViewEngine as View,
     Zend\File\Transfer\Adapter\AbstractAdapter as AbstractFileAdapter;
 
 /**
@@ -36,7 +37,7 @@ use Zend\Form\ElementException,
  * @uses       \Zend\Form\Form
  * @uses       \Zend\Form\ElementException
  * @uses       \Zend\Form\Element\Xhtml
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
+ * @uses       \Zend\Loader\PluginLoader
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -105,11 +106,11 @@ class File extends Xhtml
     /**
      * Set plugin loader
      *
-     * @param  \Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  \Zend\Loader\PrefixPathMapper $loader
      * @param  string $type
      * @return \Zend\Form\Element\File
      */
-    public function setPluginLoader(PluginLoader\PluginLoaderInterface $loader, $type)
+    public function setPluginLoader(PrefixPathMapper $loader, $type)
     {
         $type = strtoupper($type);
 
@@ -125,7 +126,7 @@ class File extends Xhtml
      * Get Plugin Loader
      *
      * @param  string $type
-     * @return \Zend\Loader\PluginLoader\PluginLoaderInterface
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public function getPluginLoader($type)
     {
@@ -136,7 +137,7 @@ class File extends Xhtml
         }
 
         if (!array_key_exists($type, $this->_loaders)) {
-            $loader = new PluginLoader\PluginLoader(array(
+            $loader = new PluginLoader(array(
                 'Zend\File\Transfer\Adapter' => 'Zend/File/Transfer/Adapter/',
             ));
             $this->setPluginLoader($loader, self::TRANSFER_ADAPTER);
@@ -867,7 +868,7 @@ class File extends Xhtml
      * Render form element
      * Checks for decorator interface to prevent errors
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return string
      */
     public function render(View $view = null)

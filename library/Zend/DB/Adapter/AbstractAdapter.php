@@ -36,7 +36,7 @@ use Zend\DB\Select;
  * @uses       \Zend\DB\Adapter\Exception
  * @uses       \Zend\DB\Profiler\Profiler
  * @uses       \Zend\DB\Profiler\Exception
- * @uses       \Zend\DB\Select\Select
+ * @uses       \Zend\DB\Select
  * @uses       \Zend\Loader
  * @category   Zend
  * @package    Zend_Db
@@ -74,7 +74,7 @@ abstract class AbstractAdapter
      *
      * @var string
      */
-    protected $_defaultStmtClass = '\Zend\DB\Statement\Statement';
+    protected $_defaultStmtClass = '\Zend\DB\Statement\AbstractStatement';
 
     /**
      * Default class name for the profiler object.
@@ -421,7 +421,7 @@ abstract class AbstractAdapter
      * @param  mixed  $sql  The SQL statement with placeholders.
      *                      May be a string or Zend_Db_Select.
      * @param  mixed  $bind An array of data to bind to the placeholders.
-     * @return \Zend\DB\Statement\StatementInterface
+     * @return \Zend\DB\Statement
      */
     public function query($sql, $bind = array())
     {
@@ -429,7 +429,7 @@ abstract class AbstractAdapter
         $this->_connect();
 
         // is the $sql a Zend_Db_Select object?
-        if ($sql instanceof Select\Select) {
+        if ($sql instanceof Select) {
             if (empty($bind)) {
                 $bind = $sql->getBind();
             }
@@ -666,11 +666,11 @@ abstract class AbstractAdapter
     /**
      * Creates and returns a new Zend_Db_Select object for this adapter.
      *
-     * @return \Zend\DB\Select\Select
+     * @return \Zend\DB\Select
      */
     public function select()
     {
-        return new Select\Select($this);
+        return new Select($this);
     }
 
     /**
@@ -687,7 +687,7 @@ abstract class AbstractAdapter
      * Fetches all SQL result rows as a sequential array.
      * Uses the current fetchMode for the adapter.
      *
-     * @param string|\Zend\DB\Select\Select $sql  An SQL SELECT statement.
+     * @param string|\Zend\DB\Select $sql  An SQL SELECT statement.
      * @param mixed                 $bind Data to bind into SELECT placeholders.
      * @param mixed                 $fetchMode Override current fetch mode.
      * @return array
@@ -706,7 +706,7 @@ abstract class AbstractAdapter
      * Fetches the first row of the SQL result.
      * Uses the current fetchMode for the adapter.
      *
-     * @param string|\Zend\DB\Select\Select $sql An SQL SELECT statement.
+     * @param string|\Zend\DB\Select $sql An SQL SELECT statement.
      * @param mixed $bind Data to bind into SELECT placeholders.
      * @param mixed                 $fetchMode Override current fetch mode.
      * @return array
@@ -730,7 +730,7 @@ abstract class AbstractAdapter
      * rows with duplicate values in the first column will
      * overwrite previous data.
      *
-     * @param string|\Zend\DB\Select\Select $sql An SQL SELECT statement.
+     * @param string|\Zend\DB\Select $sql An SQL SELECT statement.
      * @param mixed $bind Data to bind into SELECT placeholders.
      * @return array
      */
@@ -750,7 +750,7 @@ abstract class AbstractAdapter
      *
      * The first column in each row is used as the array key.
      *
-     * @param string|\Zend\DB\Select\Select $sql An SQL SELECT statement.
+     * @param string|\Zend\DB\Select $sql An SQL SELECT statement.
      * @param mixed $bind Data to bind into SELECT placeholders.
      * @return array
      */
@@ -767,7 +767,7 @@ abstract class AbstractAdapter
      * The first column is the key, the second column is the
      * value.
      *
-     * @param string|\Zend\DB\Select\Select $sql An SQL SELECT statement.
+     * @param string|\Zend\DB\Select $sql An SQL SELECT statement.
      * @param mixed $bind Data to bind into SELECT placeholders.
      * @return array
      */
@@ -784,7 +784,7 @@ abstract class AbstractAdapter
     /**
      * Fetches the first column of the first row of the SQL result.
      *
-     * @param string|\Zend\DB\Select\Select $sql An SQL SELECT statement.
+     * @param string|\Zend\DB\Select $sql An SQL SELECT statement.
      * @param mixed $bind Data to bind into SELECT placeholders.
      * @return string
      */
@@ -825,7 +825,7 @@ abstract class AbstractAdapter
     {
         $this->_connect();
 
-        if ($value instanceof Select\Select) {
+        if ($value instanceof Select) {
             return '(' . $value->assemble() . ')';
         }
 
@@ -971,7 +971,7 @@ abstract class AbstractAdapter
     {
         if ($ident instanceof DB\Expr) {
             $quoted = $ident->__toString();
-        } elseif ($ident instanceof Select\Select) {
+        } elseif ($ident instanceof Select) {
             $quoted = '(' . $ident->assemble() . ')';
         } else {
             if (is_string($ident)) {
@@ -1172,8 +1172,8 @@ abstract class AbstractAdapter
     /**
      * Prepare a statement and return a PDOStatement-like object.
      *
-     * @param string|\Zend\DB\Select\Select $sql SQL query
-     * @return \Zend\DB\Statement\Statement|PDOStatement
+     * @param string|\Zend\DB\Select $sql SQL query
+     * @return \Zend\DB\Statement|PDOStatement
      */
     abstract public function prepare($sql);
 

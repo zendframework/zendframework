@@ -31,9 +31,9 @@ use Zend\Wildfire;
  * Encodes messages into the Wildfire JSON Stream Communication Protocol.
  *
  * @uses       \Zend\JSON\JSON
- * @uses       \Zend\Wildfire\Channel\ChannelInterface
+ * @uses       \Zend\Wildfire\Channel
  * @uses       \Zend\Wildfire\Exception
- * @uses       \Zend\Wildfire\Plugin\PluginInterface
+ * @uses       \Zend\Wildfire\Plugin
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage Protocol
@@ -62,10 +62,10 @@ class JSONStream
     /**
      * Register a plugin that uses this protocol
      *
-     * @param \Zend\Wildfire\Plugin\PluginInterface $plugin The plugin to be registered
+     * @param \Zend\Wildfire\Plugin $plugin The plugin to be registered
      * @return boolean Returns TRUE if plugin was registered, false if it was already registered
      */
-    public function registerPlugin(Plugin\PluginInterface $plugin)
+    public function registerPlugin(Plugin $plugin)
     {
         if (in_array($plugin,$this->_plugins)) {
             return false;
@@ -77,12 +77,12 @@ class JSONStream
     /**
      * Record a message with the given data in the given structure
      *
-     * @param \Zend\Wildfire\Plugin\PluginInterface $plugin The plugin recording the message
+     * @param \Zend\Wildfire\Plugin $plugin The plugin recording the message
      * @param string $structure The structure to be used for the data
      * @param array $data The data to be recorded
      * @return boolean Returns TRUE if message was recorded
      */
-    public function recordMessage(Plugin\PluginInterface $plugin, $structure, $data)
+    public function recordMessage(Plugin $plugin, $structure, $data)
     {
         if(!isset($this->_messages[$structure])) {
             $this->_messages[$structure] = array();
@@ -101,10 +101,10 @@ class JSONStream
     /**
      * Remove all qued messages
      *
-     * @param \Zend\Wildfire\Plugin\PluginInterface $plugin The plugin for which to clear messages
+     * @param \Zend\Wildfire\Plugin $plugin The plugin for which to clear messages
      * @return boolean Returns TRUE if messages were present
      */
-    public function clearMessages(Plugin\PluginInterface $plugin)
+    public function clearMessages(Plugin $plugin)
     {
         $uri = $plugin->getUri();
 
@@ -153,11 +153,11 @@ class JSONStream
     /**
      * Retrieves all formatted data ready to be sent by the channel.
      *
-     * @param \Zend\Wildfire\Channel\ChannelInterface $channel The instance of the channel that will be transmitting the data
+     * @param \Zend\Wildfire\Channel $channel The instance of the channel that will be transmitting the data
      * @return mixed Returns the data to be sent by the channel.
      * @throws \Zend\Wildfire\Exception
      */
-    public function getPayload(Wildfire\Channel\ChannelInterface $channel)
+    public function getPayload(Wildfire\Channel $channel)
     {
         if (!$channel instanceof Wildfire\Channel\HttpHeaders) {
             throw new Wildfire\Exception('The '.get_class($channel).' channel is not supported by the '.get_class($this).' protocol.');

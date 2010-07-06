@@ -49,7 +49,7 @@ class HttpException extends Exception
      *
      * @param  string $message Optionally set a message
      * @param \Zend\HTTP\Client\Exception Optionally pass in a \Zend\HTTP\Client\Exception
-     * @param \Zend\HTTP\Response\Response Optionally pass in a \Zend\HTTP\Response\Response
+     * @param \Zend\HTTP\Response Optionally pass in a \Zend\HTTP\Response
      */
     public function __construct($message = null, $e = null, $response = null)
     {
@@ -82,7 +82,7 @@ class HttpException extends Exception
     /**
      * Set the Zend_Http_Response.
      *
-     * @param \Zend\HTTP\Response\Response $response
+     * @param \Zend\HTTP\Response $response
      */
     public function setResponse($response)
     {
@@ -93,7 +93,7 @@ class HttpException extends Exception
     /**
      * Get the Zend_Http_Response.
      *
-     * @return \Zend\HTTP\Response\Response
+     * @return \Zend\HTTP\Response
      */
     public function getResponse()
     {

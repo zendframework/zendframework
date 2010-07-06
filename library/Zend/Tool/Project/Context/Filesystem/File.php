@@ -97,7 +97,7 @@ class File extends AbstractFilesystem
      *
      * @param unknown_type $resource
      */
-    public function setResource(Resource\Resource $resource)
+    public function setResource(Resource $resource)
     {
         $this->_resource = $resource;
         $this->_resource->setAppendable(false);
@@ -107,7 +107,7 @@ class File extends AbstractFilesystem
     /**
      * getResource()
      * 
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function getResource()
     {
@@ -122,7 +122,7 @@ class File extends AbstractFilesystem
     public function create()
     {
         // check to ensure the parent exists, if not, call it and create it
-        if (($parentResource = $this->_resource->getParentResource()) instanceof Resource\Resource) {
+        if (($parentResource = $this->_resource->getParentResource()) instanceof Resource) {
             if ((($parentContext = $parentResource->getContext()) instanceof AbstractFilesystem)
                 && (!$parentContext->exists())) {
                 $parentResource->create();

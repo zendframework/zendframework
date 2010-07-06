@@ -25,7 +25,8 @@
  */
 namespace Zend\AMF\Parser;
 
-use Zend\AMF\Exception as AMFException;
+use Zend\AMF\Exception as AMFException,
+    Zend\Loader\PrefixPathMapper;
 
 /**
  * Loads a local class and executes the instantiation of that class.
@@ -74,7 +75,7 @@ final class TypeLoader
     );
 
     /**
-     * @var \Zend\Loader\PluginLoader\PluginLoaderInterface
+     * @var \Zend\Loader\PrefixPathMapper
      */
     protected static $_resourceLoader = null;
 
@@ -149,9 +150,9 @@ final class TypeLoader
     /**
      * Set loader for resource type handlers
      *
-     * @param \Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param \Zend\Loader\PrefixPathMapper $loader
      */
-    public static function setResourceLoader(\Zend\Loader\PluginLoader\PluginLoaderInterface $loader)
+    public static function setResourceLoader(PrefixPathMapper $loader)
     {
         self::$_resourceLoader = $loader;
     }

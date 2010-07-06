@@ -61,15 +61,15 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $file1 = $segmentInfo->openCompoundFile('.fnm');
-        $this->assertTrue($file1 instanceof File\FileInterface);
+        $this->assertTrue($file1 instanceof File);
 
         $file2 = $segmentInfo->openCompoundFile('.tii');
         $file3 = $segmentInfo->openCompoundFile('.tii');
         $file4 = $segmentInfo->openCompoundFile('.tii', false);
 
-        $this->assertTrue($file2 instanceof File\FileInterface);
+        $this->assertTrue($file2 instanceof File);
         $this->assertTrue($file2 === $file3);
-        $this->assertTrue($file4 instanceof File\FileInterface);
+        $this->assertTrue($file4 instanceof File);
         $this->assertTrue($file2 !== $file4);
     }
 

@@ -32,16 +32,14 @@ use Zend\InfoCard\Cipher;
  *
  * @uses       \Zend\InfoCard\Cipher\Exception
  * @uses       \Zend\InfoCard\Cipher\PKI\Adapter\AbstractAdapter
- * @uses       \Zend\InfoCard\Cipher\PKI\RSA\RSAInterface
+ * @uses       \Zend\InfoCard\Cipher\PKI\RSA
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RSA
-    extends AbstractAdapter
-    implements Cipher\PKI\RSA\RSAInterface
+class RSA extends AbstractAdapter implements Cipher\PKI\RSA
 {
 
     /**

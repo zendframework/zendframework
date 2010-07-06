@@ -24,7 +24,8 @@
  * @namespace
  */
 namespace Zend\Soap\WSDL\Strategy;
-use Zend\Soap\WSDL;
+
+use Zend\Soap\WSDLException;
 
 /**
  * Zend_Soap_WSDL_Strategy_ArrayOfTypeComplex
@@ -50,14 +51,14 @@ class ArrayOfTypeComplex extends DefaultComplexType
     public function addComplexType($type)
     {
         if(in_array($type, $this->_inProcess)) {
-            throw new WSDL\Exception("Infinite recursion, cannot nest '$type' into itself.");
+            throw new WSDLException("Infinite recursion, cannot nest '$type' into itself.");
         }
         $this->_inProcess[$type] = $type;
 
         $nestingLevel = $this->_getNestedCount($type);
 
         if($nestingLevel > 1) {
-            throw new WSDL\Exception(
+            throw new WSDLException(
                 'ArrayOfTypeComplex cannot return nested ArrayOfObject deeper than '
               . 'one level. Use array object properties to return deep nested data.'
             );
@@ -66,7 +67,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
         $singularType = $this->_getSingularPhpType($type);
 
         if(!class_exists($singularType)) {
-            throw new WSDL\Exception(sprintf(
+            throw new WSDLException(sprintf(
                 'Cannot add a complex type %s that is not an object or where '
               . 'class could not be found in \'DefaultComplexType\' strategy.', $type
             ));

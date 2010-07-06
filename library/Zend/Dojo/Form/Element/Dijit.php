@@ -24,7 +24,7 @@
  */
 namespace Zend\Dojo\Form\Element;
 
-use Zend\View\ViewInterface as View;
+use Zend\View\ViewEngine as View;
 
 /**
  * Base element for dijit elements
@@ -179,7 +179,7 @@ abstract class Dijit extends \Zend\Form\Element
      *
      * Ensures that the view object has the dojo view helper path set.
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return \Zend\Dojo\Form\Element\Dijit
      */
     public function setView(View $view = null)

@@ -23,21 +23,24 @@
  * @namespace
  */
 namespace Zend\Feed\Reader;
-use Zend\HTTP;
-use Zend\Loader\PluginLoader;
+
+use Zend\HTTP,
+    Zend\Loader\PluginLoader,
+    Zend\Loader\PluginLoaderException,
+    Zend\Loader\PrefixPathMapper;
 
 /**
- * @uses       \Zend\Feed\Feed
- * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Reader\FeedSet
- * @uses       \Zend\Feed\Reader\Feed\Atom\Atom
- * @uses       \Zend\Feed\Reader\Feed\RSS
- * @uses       \Zend\HTTP\Client
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @uses \Zend\Feed\Feed
+ * @uses \Zend\Feed\Exception
+ * @uses \Zend\Feed\Reader\FeedSet
+ * @uses \Zend\Feed\Reader\Feed\Atom\Atom
+ * @uses \Zend\Feed\Reader\Feed\RSS
+ * @uses \Zend\HTTP\Client
+ * @uses \Zend\Loader\PluginLoader
+ * @category Zend
+ * @package Zend_Feed_Reader
+ * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 class Reader
 {
@@ -503,9 +506,9 @@ class Reader
     /**
      * Set plugin loader for use with Extensions
      *
-     * @param  \Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  Zend\Loader\PrefixPathMapper $loader
      */
-    public static function setPluginLoader(PluginLoader\PluginLoaderInterface $loader)
+    public static function setPluginLoader(PrefixPathMapper $loader)
     {
         self::$_pluginLoader = $loader;
     }
@@ -513,13 +516,13 @@ class Reader
     /**
      * Get plugin loader for use with Extensions
      *
-     * @return  \Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @return  Zend\Loader\PrefixPathMapper $loader
      */
     public static function getPluginLoader()
     {
         if (!isset(self::$_pluginLoader)) {
-            self::$_pluginLoader = new PluginLoader\PluginLoader(array(
-                'Zend\Feed\Reader\Extension\\' => 'Zend/Feed/Reader/Extension/',
+            self::$_pluginLoader = new PluginLoader(array(
+                'Zend\\Feed\\Reader\\Extension\\' => 'Zend/Feed/Reader/Extension/',
             ));
         }
         return self::$_pluginLoader;
@@ -577,12 +580,12 @@ class Reader
         try {
             self::getPluginLoader()->load($feedName);
             self::$_extensions['feed'][] = $feedName;
-        } catch (PluginLoader\Exception $e) {
+        } catch (PluginLoaderException $e) {
         }
         try {
             self::getPluginLoader()->load($entryName);
             self::$_extensions['entry'][] = $entryName;
-        } catch (PluginLoader\Exception $e) {
+        } catch (PluginLoaderException $e) {
         }
         if (!self::getPluginLoader()->isLoaded($feedName)
             && !self::getPluginLoader()->isLoaded($entryName)

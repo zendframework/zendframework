@@ -24,13 +24,15 @@
  */
 namespace Zend\Tool\Project\Context;
 
+use Zend\Tool\Project\Context;
+
 /**
  * @uses       Countable
  * @uses       DirectoryIterator
  * @uses       ReflectionClass
  * @uses       \Zend\Loader
  * @uses       \Zend\Tool\Project\Context\Exception
- * @uses       \Zend\Tool\Project\Context\System\SystemInterface
+ * @uses       \Zend\Tool\Project\Context\System
  * @uses       \Zend\Tool\Project\Context\System\NotOverwritable
  * @uses       \Zend\Tool\Project\Context\System\TopLevelRestrictable
  * @category   Zend
@@ -106,12 +108,12 @@ class Repository implements \Countable
     /**
      * Enter description here...
      *
-     * @param \Zend\Tool\Project\Context\ContextInterface $context
+     * @param \Zend\Tool\Project\Context $context
      * @return \Zend\Tool\Project\Context\Repository
      */
-    public function addContext(ContextInterface $context)
+    public function addContext(Context $context)
     {
-        $isSystem       = ($context instanceof System\SystemInterface);
+        $isSystem       = ($context instanceof System);
         $isTopLevel     = ($context instanceof System\TopLevelRestrictable);
         $isOverwritable = !($context instanceof System\NotOverwritable);
 

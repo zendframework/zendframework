@@ -34,8 +34,8 @@ use Zend\Search\Lucene\Storage\Directory;
  * @uses       \Zend\Search\Lucene\Index\FieldInfo
  * @uses       \Zend\Search\Lucene\Index\Term
  * @uses       \Zend\Search\Lucene\Index\TermInfo
- * @uses       \Zend\Search\Lucene\Index\TermsStream\TermsStreamInterface
- * @uses       \Zend\Search\Lucene\Search\Similarity\Similarity
+ * @uses       \Zend\Search\Lucene\Index\TermsStream
+ * @uses       \Zend\Search\Lucene\Search\Similarity
  * @uses       \Zend\Search\Lucene\Storage\Directory;
  * @category   Zend
  * @package    Zend_Search_Lucene
@@ -43,7 +43,7 @@ use Zend\Search\Lucene\Storage\Directory;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SegmentInfo implements TermsStream\TermsStreamInterface
+class SegmentInfo implements TermsStream
 {
     /**
      * "Full scan vs fetch" boundary.
@@ -212,7 +212,7 @@ class SegmentInfo implements TermsStream\TermsStreamInterface
     /**
      * Zend_Search_Lucene_Index_SegmentInfo constructor
      *
-     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
+     * @param \Zend\Search\Lucene\Storage\Directory $directory
      * @param string     $name
      * @param integer    $docCount
      * @param integer    $delGen
@@ -220,7 +220,7 @@ class SegmentInfo implements TermsStream\TermsStreamInterface
      * @param boolean    $hasSingleNormFile
      * @param boolean    $isCompound
      */
-    public function __construct(Directory\DirectoryInterface $directory, $name, $docCount, $delGen = 0, $docStoreOptions = null, $hasSingleNormFile = false, $isCompound = null)
+    public function __construct(Directory $directory, $name, $docCount, $delGen = 0, $docStoreOptions = null, $hasSingleNormFile = false, $isCompound = null)
     {
         $this->_directory = $directory;
         $this->_name      = $name;
@@ -316,7 +316,7 @@ class SegmentInfo implements TermsStream\TermsStreamInterface
                                                    $fieldBits & 0x20 /* payloads are stored */);
             if ($fieldBits & 0x10) {
                 // norms are omitted for the indexed field
-                $this->_norms[$count] = str_repeat(chr(Similarity\Similarity::encodeNorm(1.0)), $docCount);
+                $this->_norms[$count] = str_repeat(chr(Similarity::encodeNorm(1.0)), $docCount);
             }
 
             $fieldNums[$count]  = $count;
@@ -494,7 +494,7 @@ class SegmentInfo implements TermsStream\TermsStreamInterface
      * @param string $extension
      * @param boolean $shareHandler
      * @throws \Zend\Search\Lucene\Exception
-     * @return \Zend\Search\Lucene\Storage\File\FileInterface
+     * @return \Zend\Search\Lucene\Storage\File
      */
     public function openCompoundFile($extension, $shareHandler = true)
     {
@@ -1396,7 +1396,7 @@ class SegmentInfo implements TermsStream\TermsStreamInterface
             $this->_loadNorm($fieldNum);
         }
 
-        return Similarity\Similarity::decodeNorm( ord($this->_norms[$fieldNum][$id]) );
+        return Similarity::decodeNorm( ord($this->_norms[$fieldNum][$id]) );
     }
 
     /**
@@ -1410,7 +1410,7 @@ class SegmentInfo implements TermsStream\TermsStreamInterface
         $fieldNum = $this->getFieldNum($fieldName);
 
         if ($fieldNum == -1  ||  !($this->_fields[$fieldNum]->isIndexed)) {
-            $similarity = Similarity\Similarity::getDefault();
+            $similarity = Similarity::getDefault();
 
             return str_repeat(chr($similarity->encodeNorm( $similarity->lengthNorm($fieldName, 0) )),
                               $this->_docCount);
@@ -1614,7 +1614,7 @@ class SegmentInfo implements TermsStream\TermsStreamInterface
     /**
      * Term Dictionary File object for stream like terms reading
      *
-     * @var \Zend\Search\Lucene\Storage\File\FileInterface
+     * @var \Zend\Search\Lucene\Storage\File
      */
     private $_tisFile = null;
 
@@ -1628,7 +1628,7 @@ class SegmentInfo implements TermsStream\TermsStreamInterface
     /**
      * Frequencies File object for stream like terms reading
      *
-     * @var \Zend\Search\Lucene\Storage\File\FileInterface
+     * @var \Zend\Search\Lucene\Storage\File
      */
     private $_frqFile = null;
 
@@ -1642,7 +1642,7 @@ class SegmentInfo implements TermsStream\TermsStreamInterface
     /**
      * Positions File object for stream like terms reading
      *
-     * @var \Zend\Search\Lucene\Storage\File\FileInterface
+     * @var \Zend\Search\Lucene\Storage\File
      */
     private $_prxFile = null;
 

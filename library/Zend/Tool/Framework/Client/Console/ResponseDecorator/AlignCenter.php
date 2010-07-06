@@ -27,7 +27,7 @@ namespace Zend\Tool\Framework\Client\Console\ResponseDecorator;
 /**
  * Try to align a given text central on the screen.
  *
- * @uses       \Zend\Tool\Framework\Client\Response\ContentDecorator\ContentDecoratorInterface
+ * @uses       \Zend\Tool\Framework\Client\Response\ContentDecorator
  * @category   Zend
  * @package    Zend_Tool
  * @subpackage Framework
@@ -36,7 +36,7 @@ namespace Zend\Tool\Framework\Client\Console\ResponseDecorator;
  * @version    $Id$
  */
 class AlignCenter
-    implements \Zend\Tool\Framework\Client\Response\ContentDecorator\ContentDecoratorInterface
+    implements \Zend\Tool\Framework\Client\Response\ContentDecorator
 {
     public function getName()
     {

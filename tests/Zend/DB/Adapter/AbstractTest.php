@@ -188,7 +188,7 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
     {
         $exceptionClass = '\Zend\DB\Adapter\Exception';
         if ($adapterClass === null) {
-            $adapterClass = '\Zend\Db\Adapter\\' . $this->getDriver();
+            $adapterClass = '\Zend\DB\Adapter\\' . $this->getDriver();
         }
 
         $params = $this->_util->getParams();
@@ -945,7 +945,7 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
         $this->assertTrue(is_object($stmt),
             'Expected query() to return object; got ' . gettype($stmt));
 
-        $this->assertType('Zend\DB\Statement\StatementInterface', $stmt,
+        $this->assertType('Zend\DB\Statement', $stmt,
             'Expected query() to return Zend_Db_Statement or PDOStatement; got ' . get_class($stmt));
 
         $this->assertEquals(0, $count = count($stmt->fetchAll()),

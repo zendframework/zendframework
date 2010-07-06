@@ -27,7 +27,7 @@ namespace Zend\Dojo\View\Helper;
 
 use Zend\Dojo\View\Exception as DojoViewException,
     Zend\Registry,
-    Zend\View\ViewInterface as View,
+    Zend\View\ViewEngine as View,
     Zend\View\Helper\AbstractHelper as AbstractViewHelper;
 
 /**
@@ -54,7 +54,7 @@ class Dojo extends AbstractViewHelper
     /**#@-*/
 
     /**
-     * @var \Zend\View\ViewInterface
+     * @var \Zend\View\ViewEngine
      */
     public $view;
 
@@ -90,7 +90,7 @@ class Dojo extends AbstractViewHelper
     /**
      * Set view object
      *
-     * @param  Zend\View\ViewInterface $view
+     * @param  Zend\View\ViewEngine $view
      * @return void
      */
     public function setView(View $view)

@@ -49,12 +49,12 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDefaultAdapterLoader()
     {
-        $this->assertTrue(Serializer::getAdapterLoader() instanceof PluginLoader\PluginLoader);
+        $this->assertTrue(Serializer::getAdapterLoader() instanceof PluginLoader);
     }
 
     public function testChangeAdapterLoader()
     {
-        $newLoader = new PluginLoader\PluginLoader();
+        $newLoader = new PluginLoader();
         Serializer::setAdapterLoader($newLoader);
         $this->assertTrue(Serializer::getAdapterLoader() === $newLoader);
     }
@@ -74,7 +74,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
     public function testFactoryOnADummyClassAdapter()
     {
         $this->setExpectedException('Zend\\Serializer\\Exception','must implement Zend\\Serializer\\Adapter');
-        Serializer::setAdapterLoader(new PluginLoader\PluginLoader(array('ZendTest\\Serializer\\TestAsset' => __DIR__ . '/TestAsset')));
+        Serializer::setAdapterLoader(new PluginLoader(array('ZendTest\\Serializer\\TestAsset' => __DIR__ . '/TestAsset')));
         Serializer::factory('dummy');
     }
 

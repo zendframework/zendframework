@@ -162,7 +162,7 @@ class HTTP
      *
      * @todo   Remove cycling?; Replace with upfront do-or-die configuration
      * @param  array $params
-     * @return Zend\HTTP\Response\Response
+     * @return Zend\HTTP\Response
      * @throws Zend\OAuth\Exception on HTTP request errors
      */
     public function startRequestCycle(array $params)
@@ -214,11 +214,11 @@ class HTTP
      * Manages the switch from OAuth request scheme to another lower preference
      * scheme during a request cycle.
      *
-     * @param  Zend\HTTP\Response\Response
+     * @param  Zend\HTTP\Response
      * @return void
      * @throws Zend\OAuth\Exception if unable to retrieve valid token response
      */
-    protected function _assessRequestAttempt(\Zend\HTTP\Response\Response $response = null)
+    protected function _assessRequestAttempt(\Zend\HTTP\Response $response = null)
     {
         switch ($this->_preferredRequestScheme) {
             case OAuth::REQUEST_SCHEME_HEADER:

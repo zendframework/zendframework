@@ -25,6 +25,7 @@
 namespace Zend\Filter;
 
 use Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathMapper,
     Zend\Registry,
     Zend\Translator\Adapter as TranslationAdapter,
     Zend\Translator\Translator as Translator,
@@ -34,7 +35,7 @@ use Zend\Loader\PluginLoader,
  * @uses       ReflectionClass
  * @uses       Zend\Filter\Filter
  * @uses       Zend\Filter\Exception
- * @uses       Zend\Loader\PluginLoader\PluginLoader
+ * @uses       Zend\Loader\PluginLoader
  * @uses       Zend\Registry
  * @uses       Zend\Validator\Validator
  * @category   Zend
@@ -229,12 +230,12 @@ class InputFilter
     /**
      * Set plugin loaders for use with decorators and elements
      *
-     * @param  Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  Zend\Loader\PrefixPathMapper $loader
      * @param  string $type 'filter' or 'validate'
      * @return Zend\Filter\InputFilter
      * @throws Zend\Filter\Exception on invalid type
      */
-    public function setPluginLoader(PluginLoader\PluginLoaderInterface $loader, $type)
+    public function setPluginLoader(PrefixPathMapper $loader, $type)
     {
         $type = strtolower($type);
         switch ($type) {
@@ -260,7 +261,7 @@ class InputFilter
      * created.
      *
      * @param  string $type 'filter' or 'validate'
-     * @return Zend\Loader\PluginLoader\PluginLoaderInterface
+     * @return Zend\Loader\PrefixPathMapper
      * @throws Zend\Filter\Exception on invalid type
      */
     public function getPluginLoader($type)
@@ -280,7 +281,7 @@ class InputFilter
                     throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
             }
 
-            $this->_loaders[$type] = new PluginLoader\PluginLoader(
+            $this->_loaders[$type] = new PluginLoader(
                 array($prefixSegment => $pathSegment)
             );
         }

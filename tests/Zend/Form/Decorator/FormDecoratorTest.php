@@ -25,7 +25,7 @@ namespace ZendTest\Form\Decorator;
 use Zend\Form\Decorator\FormDecorator,
     Zend\Form\DisplayGroup,
     Zend\Form\Form,
-    Zend\Loader\PluginLoader\PluginLoader,
+    Zend\Loader\PluginLoader,
     Zend\View\View;
 
 /**

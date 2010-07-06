@@ -29,7 +29,7 @@ use Zend\Authentication\Adapter as AuthenticationAdapter,
     Zend\DB\DB,
     Zend\DB\Adapter\AbstractAdapter as AbstractDBAdapter,
     Zend\DB\Expr as DBExpr,
-    Zend\DB\Select\Select as DBSelect;
+    Zend\DB\Select as DBSelect;
 
 /**
  * @uses       Zend\Authentication\Adapter\Exception

@@ -24,8 +24,10 @@
  * @namespace
  */
 namespace ZendTest\Paginator\Adapter\DbSelect;
-use Zend\Paginator\Adapter;
-use Zend\DB\Statement\Oracle;
+
+use Zend\Paginator\Adapter,
+    Zend\DB\Statement\Oracle,
+    Zend\DB\Statement\OracleException;
 
 require_once 'Zend/Paginator/Adapter/DbSelectTest.php';
 require_once dirname(__FILE__) . '/../../_files/TestTable.php';
@@ -56,7 +58,7 @@ class OracleTest extends \ZendTest\Paginator\Adapter\DbSelectTest
             $this->markTestSkipped('Oracle is required');
         }
 
-        $this->_db = new \Zend\DB\Adapter\Oracle\Oracle(
+        $this->_db = new \Zend\DB\Adapter\Oracle(
                 array('host' => TESTS_ZEND_DB_ADAPTER_ORACLE_HOSTNAME ,
                         'username' => TESTS_ZEND_DB_ADAPTER_ORACLE_USERNAME ,
                         'password' => TESTS_ZEND_DB_ADAPTER_ORACLE_PASSWORD ,
@@ -118,10 +120,10 @@ class OracleTest extends \ZendTest\Paginator\Adapter\DbSelectTest
     {
         try {
             $this->_db->query('drop table "test"');
-        } catch (Oracle\Exception $e) {}
+        } catch (OracleException $e) {}
         try {
             $this->_db->query('drop table "test_empty"');
-        } catch (Oracle\Exception $e) {}
+        } catch (OracleException $e) {}
     }
 
     public function testGroupByQueryOnEmptyTableReturnsRowCountZero()

@@ -24,18 +24,18 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\Metadata;
+use Zend\Tool\Framework\Metadata;
 
 /**
  * @uses       ReflectionObject
  * @uses       \Zend\Tool\Framework\Metadata\Attributable
- * @uses       \Zend\Tool\Framework\Metadata\MetadataInterface
+ * @uses       \Zend\Tool\Framework\Metadata
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Basic 
-    implements MetadataInterface, Attributable
+class Basic implements Metadata, Attributable
 {
 
     /**#@+

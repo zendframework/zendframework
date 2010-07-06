@@ -24,20 +24,22 @@
  */
 namespace Zend\Paginator\ScrollingStyle;
 
+use Zend\Paginator\ScrollingStyle;
+
 /**
  * A Yahoo! Search-like scrolling style.  The cursor will advance to
  * the middle of the range, then remain there until the user reaches
  * the end of the page set, at which point it will continue on to
  * the end of the range and the last page in the set.
  *
- * @uses       \Zend\Paginator\ScrollingStyle\ScrollingStyleInterface
+ * @uses       \Zend\Paginator\ScrollingStyle
  * @link       http://search.yahoo.com/search?p=Zend+Framework
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Sliding implements ScrollingStyleInterface
+class Sliding implements ScrollingStyle
 {
     /**
      * Returns an array of "local" pages given a page number and range.

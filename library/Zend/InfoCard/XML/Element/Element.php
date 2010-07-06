@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\InfoCard\XML\Element;
+
 use Zend\InfoCard\XML;
 
 /**
@@ -31,7 +32,7 @@ use Zend\InfoCard\XML;
  *
  * @uses       ReflectionClass
  * @uses       SimpleXMLElement
- * @uses       \Zend\InfoCard\XML\Element\ElementInterface
+ * @uses       \Zend\InfoCard\XML\Element
  * @uses       \Zend\InfoCard\XML\Exception
  * @uses       \Zend\Loader
  * @category   Zend
@@ -40,9 +41,7 @@ use Zend\InfoCard\XML;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Element
-    extends \SimpleXMLElement
-    implements ElementInterface
+abstract class Element extends \SimpleXMLElement implements XML\Element
 {
     /**
      * Convert the object to a string by displaying its XML content

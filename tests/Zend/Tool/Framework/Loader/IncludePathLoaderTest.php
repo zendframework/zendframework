@@ -51,7 +51,7 @@ class IncludePathLoaderTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        //\Zend\Tool\Framework\Registry\Registry::resetInstance();
+        //\Zend\Tool\Framework\Registry\FrameworkRegistry::resetInstance();
     }
 
     public function testStub()

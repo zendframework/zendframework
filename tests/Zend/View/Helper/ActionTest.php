@@ -267,11 +267,11 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $this->view->setScriptPath(dirname(__FILE__) . '/_files/modules/default/views/scripts/');
         $partial->setView($this->view);
 
-        HelperBroker\HelperBroker::getStaticHelper('viewRenderer')->view = $this->view;
+        HelperBroker::getStaticHelper('viewRenderer')->view = $this->view;
 
         $partial->direct('partialActionCall.phtml');
 
-        $this->assertSame($this->view, HelperBroker\HelperBroker::getStaticHelper('viewRenderer')->view);
+        $this->assertSame($this->view, HelperBroker::getStaticHelper('viewRenderer')->view);
 
     }
 
@@ -285,14 +285,14 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         /* Setup the VR as if we were inside an action controller */
         $viewRenderer = new \Zend\Controller\Action\Helper\ViewRenderer();
         $viewRenderer->init();
-        HelperBroker\HelperBroker::addHelper($viewRenderer);
+        HelperBroker::addHelper($viewRenderer);
 
         // make sure noRender is false
         $this->assertFalse($viewRenderer->getNoRender());
 
         $value = $this->helper->direct('bar', 'action-foo');
 
-        $viewRendererPostAction = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $viewRendererPostAction = HelperBroker::getStaticHelper('viewRenderer');
 
         // ViewRenderer noRender should still be false
         $this->assertFalse($viewRendererPostAction->getNoRender());

@@ -26,7 +26,7 @@
 namespace ZendTest\Test\PHPUnit;
 use Zend\Application,
     Zend\Controller,
-    Zend\Controller\Action\HelperBroker\HelperBroker,
+    Zend\Controller\Action\HelperBroker,
     Zend\Controller\Dispatcher,
     Zend\Controller\Plugin,
     Zend\Controller\Request,

@@ -30,13 +30,13 @@ use Zend\Validator\AbstractValidator,
     Zend\DB\DB,
     Zend\DB\Adapter\AbstractAdapter as AbstractDBAdapter,
     Zend\DB\Table\AbstractTable as AbstractTable,
-    Zend\DB\Select\Select as DBSelect;
+    Zend\DB\Select as DBSelect;
 
 /**
  * Class for Database record validation
  *
  * @uses       \Zend\Db\Db
- * @uses       \Zend\Db\Select\Select
+ * @uses       \Zend\Db\Select
  * @uses       \Zend\Db\Table\AbstractTable
  * @uses       \Zend\Validator\AbstractValidator
  * @uses       \Zend\Validator\Exception

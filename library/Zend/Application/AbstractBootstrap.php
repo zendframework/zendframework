@@ -25,13 +25,16 @@
  */
 namespace Zend\Application;
 
+use Zend\Loader\PrefixPathMapper,
+    Zend\Loader\PluginLoader;
+
 /**
  * Abstract base class for bootstrap classes
  *
  * @uses       \Zend\Application\Bootstrapper
  * @uses       \Zend\Application\BootstrapException
  * @uses       \Zend\Application\ResourceBootstrapper
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
+ * @uses       \Zend\Loader\PluginLoader
  * @uses       \Zend\Registry
  * @category   Zend
  * @package    Zend_Application
@@ -76,7 +79,7 @@ abstract class AbstractBootstrap
     protected $_options = array();
 
     /**
-     * @var \Zend\Loader\PluginLoader\PluginLoaderInterface
+     * @var \Zend\Loader\PrefixPathMapper
      */
     protected $_pluginLoader;
 
@@ -403,10 +406,10 @@ abstract class AbstractBootstrap
     /**
      * Set plugin loader for loading resources
      *
-     * @param  \Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  \Zend\Loader\PrefixPathMapper $loader
      * @return \Zend\Application\AbstractBootstrap
      */
-    public function setPluginLoader(\Zend\Loader\PluginLoader\PluginLoaderInterface $loader)
+    public function setPluginLoader(PrefixPathMapper $loader)
     {
         $this->_pluginLoader = $loader;
         return $this;
@@ -415,7 +418,7 @@ abstract class AbstractBootstrap
     /**
      * Get the plugin loader for resources
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoaderInterface
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public function getPluginLoader()
     {
@@ -424,7 +427,7 @@ abstract class AbstractBootstrap
                 'Zend\\Application\\Resource' => 'Zend/Application/Resource'
             );
 
-            $this->_pluginLoader = new \Zend\Loader\PluginLoader\PluginLoader($options);
+            $this->_pluginLoader = new PluginLoader($options);
         }
 
         return $this->_pluginLoader;

@@ -32,7 +32,7 @@ use Zend\Controller\Request;
  *
  * @uses       PHPUnit_Framework_TestCase
  * @uses       PHPUnit_Runner_Version
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\HelperBroker
  * @uses       \Zend\Controller\Front
  * @uses       \Zend\Controller\Request\HttpTestCase
  * @uses       \Zend\Controller\Response\HttpTestCase
@@ -172,11 +172,11 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     public function dispatch($url = null)
     {
         // redirector should not exit
-        $redirector = HelperBroker\HelperBroker::getStaticHelper('redirector');
+        $redirector = HelperBroker::getStaticHelper('redirector');
         $redirector->setExit(false);
 
         // json helper should not exit
-        $json = HelperBroker\HelperBroker::getStaticHelper('JSON');
+        $json = HelperBroker::getStaticHelper('JSON');
         $json->suppressExit = true;
 
         $request    = $this->getRequest();
@@ -217,7 +217,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
         $this->resetRequest();
         $this->resetResponse();
         \Zend\Layout\Layout::resetMvcInstance();
-        HelperBroker\HelperBroker::resetHelpers();
+        HelperBroker::resetHelpers();
         $this->frontController->resetInstance();
         //\Zend\Session\Manager::$_unitTestEnabled = true;
     }

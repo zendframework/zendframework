@@ -99,10 +99,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Auth/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Amf_Auth_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/AMF/Authentication/AbstractAuthentication.php</newRelativeFilePath>
-      <newNamespace>Zend\AMF\Authentication</newNamespace>
+      <newRelativeFilePath>Zend/AMF/AbstractAuthentication.php</newRelativeFilePath>
+      <newNamespace>Zend\AMF</newNamespace>
       <newClassName>AbstractAuthentication</newClassName>
-      <newFullyQualifiedName>Zend\AMF\Authentication\AbstractAuthentication</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\AMF\AbstractAuthentication</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Amf/Constants.php</originalRelativeFilePath>
@@ -1459,10 +1459,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/Helper/AutoComplete/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Controller_Action_Helper_AutoComplete_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Controller/Action/Helper/AutoComplete/AbstractAutoComplete.php</newRelativeFilePath>
-      <newNamespace>Zend\Controller\Action\Helper\AutoComplete</newNamespace>
+      <newRelativeFilePath>Zend/Controller/Action/Helper/AbstractAutoComplete.php</newRelativeFilePath>
+      <newNamespace>Zend\Controller\Action\Helper</newNamespace>
       <newClassName>AbstractAutoComplete</newClassName>
-      <newFullyQualifiedName>Zend\Controller\Action\Helper\AutoComplete\AbstractAutoComplete</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Controller\Action\Helper\AbstractAutoComplete</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/Helper/AutoCompleteDojo.php</originalRelativeFilePath>
@@ -1539,18 +1539,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/HelperBroker/PriorityStack.php</originalRelativeFilePath>
       <originalClassName>Zend_Controller_Action_HelperBroker_PriorityStack</originalClassName>
-      <newRelativeFilePath>Zend/Controller/Action/HelperBroker/PriorityStack.php</newRelativeFilePath>
-      <newNamespace>Zend\Controller\Action\HelperBroker</newNamespace>
-      <newClassName>PriorityStack</newClassName>
-      <newFullyQualifiedName>Zend\Controller\Action\HelperBroker\PriorityStack</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Controller/Action/HelperPriorityStack.php</newRelativeFilePath>
+      <newNamespace>Zend\Controller\Action</newNamespace>
+      <newClassName>HelperPriorityStack</newClassName>
+      <newFullyQualifiedName>Zend\Controller\Action\HelperPriorityStack</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/HelperBroker.php</originalRelativeFilePath>
       <originalClassName>Zend_Controller_Action_HelperBroker</originalClassName>
-      <newRelativeFilePath>Zend/Controller/Action/HelperBroker/HelperBroker.php</newRelativeFilePath>
-      <newNamespace>Zend\Controller\Action\HelperBroker</newNamespace>
+      <newRelativeFilePath>Zend/Controller/Action/HelperBroker.php</newRelativeFilePath>
+      <newNamespace>Zend\Controller\Action</newNamespace>
       <newClassName>HelperBroker</newClassName>
-      <newFullyQualifiedName>Zend\Controller\Action\HelperBroker\HelperBroker</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Controller\Action\HelperBroker</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/Interface.php</originalRelativeFilePath>
@@ -1587,10 +1587,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Dispatcher/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Controller_Dispatcher_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Controller/Dispatcher/DispatcherInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Controller\Dispatcher</newNamespace>
-      <newClassName>DispatcherInterface</newClassName>
-      <newFullyQualifiedName>Zend\Controller\Dispatcher\DispatcherInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Controller/Dispatcher.php</newRelativeFilePath>
+      <newNamespace>Zend\Controller</newNamespace>
+      <newClassName>Dispatcher</newClassName>
+      <newFullyQualifiedName>Zend\Controller\Dispatcher</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Dispatcher/Standard.php</originalRelativeFilePath>
@@ -1763,10 +1763,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Router/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Controller_Router_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Controller/Router/RouterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Controller\Router</newNamespace>
-      <newClassName>RouterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Controller\Router\RouterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Controller/Router.php</newRelativeFilePath>
+      <newNamespace>Zend\Controller</newNamespace>
+      <newClassName>Router</newClassName>
+      <newFullyQualifiedName>Zend\Controller\Router</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Router/Rewrite.php</originalRelativeFilePath>
@@ -2043,18 +2043,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Db2/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Db2_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/DB2/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\DB2</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\DB2\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/DB2Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
+      <newClassName>DB2Exception</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\DB2Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Db2.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Db2</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/DB2/DB2.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\DB2</newNamespace>
+      <newRelativeFilePath>Zend/DB/Adapter/DB2.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
       <newClassName>DB2</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\DB2\DB2</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Adapter\DB2</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Exception.php</originalRelativeFilePath>
@@ -2067,42 +2067,42 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Mysqli/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Mysqli_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/MySQLi/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\MySQLi</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\MySQLi\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/MySQLiException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
+      <newClassName>MySQLiException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\MySQLiException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Mysqli.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Mysqli</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/MySQLi/MySQLi.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\MySQLi</newNamespace>
+      <newRelativeFilePath>Zend/DB/Adapter/MySQLi.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
       <newClassName>MySQLi</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\MySQLi\MySQLi</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Adapter\MySQLi</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Oracle/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Oracle_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/Oracle/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\Oracle</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\Oracle\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/OracleException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
+      <newClassName>OracleException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\OracleException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Oracle.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Oracle</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/Oracle/Oracle.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\Oracle</newNamespace>
+      <newRelativeFilePath>Zend/DB/Adapter/Oracle.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
       <newClassName>Oracle</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\Oracle\Oracle</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Adapter\Oracle</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Pdo/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Pdo_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/PDO/AbstractPDO.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\PDO</newNamespace>
-      <newClassName>AbstractPDO</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\PDO\AbstractPDO</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/AbstractPDOAdapter.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
+      <newClassName>AbstractPDOAdapter</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\AbstractPDOAdapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Pdo/Ibm/Db2.php</originalRelativeFilePath>
@@ -2171,18 +2171,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Sqlsrv/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Sqlsrv_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/SQLSRV/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\SQLSRV</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\SQLSRV\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Adapter/SQLSRVException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
+      <newClassName>SQLSRVException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Adapter\SQLSRVException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Adapter/Sqlsrv.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Adapter_Sqlsrv</originalClassName>
-      <newRelativeFilePath>Zend/DB/Adapter/SQLSRV/SQLSRV.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Adapter\SQLSRV</newNamespace>
+      <newRelativeFilePath>Zend/DB/Adapter/SQLSRV.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Adapter</newNamespace>
       <newClassName>SQLSRV</newClassName>
-      <newFullyQualifiedName>Zend\DB\Adapter\SQLSRV\SQLSRV</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Adapter\SQLSRV</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Exception.php</originalRelativeFilePath>
@@ -2235,34 +2235,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Select/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Select_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Select/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Select</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Select\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/SelectException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB</newNamespace>
+      <newClassName>SelectException</newClassName>
+      <newFullyQualifiedName>Zend\DB\SelectException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Select.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Select</originalClassName>
-      <newRelativeFilePath>Zend/DB/Select/Select.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Select</newNamespace>
+      <newRelativeFilePath>Zend/DB/Select.php</newRelativeFilePath>
+      <newNamespace>Zend\DB</newNamespace>
       <newClassName>Select</newClassName>
-      <newFullyQualifiedName>Zend\DB\Select\Select</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Select</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Db2/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Db2_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/DB2/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\DB2</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\DB2\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement/DB2Exception.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
+      <newClassName>DB2Exception</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\DB2Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Db2.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Db2</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/DB2/DB2.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\DB2</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/DB2.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
       <newClassName>DB2</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\DB2\DB2</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\DB2</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Exception.php</originalRelativeFilePath>
@@ -2275,42 +2275,42 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Interface</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/StatementInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement</newNamespace>
-      <newClassName>StatementInterface</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\StatementInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement.php</newRelativeFilePath>
+      <newNamespace>Zend\DB</newNamespace>
+      <newClassName>Statement</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Mysqli/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Mysqli_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/MySQLi/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\MySQLi</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\MySQLi\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement/MySQLiException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
+      <newClassName>MySQLiException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\MySQLiException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Mysqli.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Mysqli</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/MySQLi/MySQLi.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\MySQLi</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/MySQLi.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
       <newClassName>MySQLi</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\MySQLi\MySQLi</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\MySQLi</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Oracle/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Oracle_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/Oracle/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\Oracle</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\Oracle\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement/OracleException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
+      <newClassName>OracleException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\OracleException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Oracle.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Oracle</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/Oracle/Oracle.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\Oracle</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/Oracle.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
       <newClassName>Oracle</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\Oracle\Oracle</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\Oracle</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Pdo/Ibm.php</originalRelativeFilePath>
@@ -2331,34 +2331,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Pdo.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Pdo</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/PDO/PDO.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\PDO</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/PDO.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
       <newClassName>PDO</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\PDO\PDO</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\PDO</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Sqlsrv/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Sqlsrv_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/SQLSRV/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\SQLSRV</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\SQLSRV\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Statement/SQLSRVException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
+      <newClassName>SQLSRVException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\SQLSRVException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement/Sqlsrv.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement_Sqlsrv</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/SQLSRV/SQLSRV.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Statement\SQLSRV</newNamespace>
+      <newRelativeFilePath>Zend/DB/Statement/SQLSRV.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Statement</newNamespace>
       <newClassName>SQLSRV</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\SQLSRV\SQLSRV</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Statement\SQLSRV</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Statement.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Statement</originalClassName>
-      <newRelativeFilePath>Zend/DB/Statement/Statement.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/DB/Statement/AbstractStatement.php</newRelativeFilePath>
       <newNamespace>Zend\DB\Statement</newNamespace>
-      <newClassName>Statement</newClassName>
-      <newFullyQualifiedName>Zend\DB\Statement\Statement</newFullyQualifiedName>
+      <newClassName>AbstractStatement</newClassName>
+      <newFullyQualifiedName>Zend\DB\Statement\AbstractStatement</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Abstract.php</originalRelativeFilePath>
@@ -2387,66 +2387,66 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Row/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Row_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Row/AbstractRow.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Row</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/AbstractRow.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
       <newClassName>AbstractRow</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Row\AbstractRow</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\AbstractRow</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Row/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Row_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Row/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Row</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Row\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Table/RowException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
+      <newClassName>RowException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Table\RowException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Row.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Row</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Row/Row.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Row</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Row.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
       <newClassName>Row</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Row\Row</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Row</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Rowset/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Rowset_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Rowset/AbstractRowset.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Rowset</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/AbstractRowset.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
       <newClassName>AbstractRowset</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Rowset\AbstractRowset</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\AbstractRowset</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Rowset/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Rowset_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Rowset/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Rowset</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Rowset\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Table/RowsetException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
+      <newClassName>RowsetException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Table\RowsetException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Rowset.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Rowset</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Rowset/Rowset.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Rowset</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Rowset.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
       <newClassName>Rowset</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Rowset\Rowset</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Rowset</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Select/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Select_Exception</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Select/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Select</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Select\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/DB/Table/SelectException.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
+      <newClassName>SelectException</newClassName>
+      <newFullyQualifiedName>Zend\DB\Table\SelectException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table/Select.php</originalRelativeFilePath>
       <originalClassName>Zend_Db_Table_Select</originalClassName>
-      <newRelativeFilePath>Zend/DB/Table/Select/Select.php</newRelativeFilePath>
-      <newNamespace>Zend\DB\Table\Select</newNamespace>
+      <newRelativeFilePath>Zend/DB/Table/Select.php</newRelativeFilePath>
+      <newNamespace>Zend\DB\Table</newNamespace>
       <newClassName>Select</newClassName>
-      <newFullyQualifiedName>Zend\DB\Table\Select\Select</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\DB\Table\Select</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Db/Table.php</originalRelativeFilePath>
@@ -7267,10 +7267,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Http/Response.php</originalRelativeFilePath>
       <originalClassName>Zend_Http_Response</originalClassName>
-      <newRelativeFilePath>Zend/HTTP/Response/Response.php</newRelativeFilePath>
-      <newNamespace>Zend\HTTP\Response</newNamespace>
+      <newRelativeFilePath>Zend/HTTP/Response.php</newRelativeFilePath>
+      <newNamespace>Zend\HTTP</newNamespace>
       <newClassName>Response</newClassName>
-      <newFullyQualifiedName>Zend\HTTP\Response\Response</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\HTTP\Response</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Adapter/Default.php</originalRelativeFilePath>
@@ -7291,10 +7291,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Adapter/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Adapter_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Adapter/AdapterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Adapter</newNamespace>
-      <newClassName>AdapterInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Adapter\AdapterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/Adapter.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard</newNamespace>
+      <newClassName>Adapter</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\Adapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Exception.php</originalRelativeFilePath>
@@ -7331,10 +7331,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Pki/Rsa/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Cipher_Pki_Rsa_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Cipher/PKI/RSA/RSAInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Cipher\PKI\RSA</newNamespace>
-      <newClassName>RSAInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Cipher\PKI\RSA\RSAInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/Cipher/PKI/RSA.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\Cipher\PKI</newNamespace>
+      <newClassName>RSA</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\Cipher\PKI\RSA</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/Adapter/Abstract.php</originalRelativeFilePath>
@@ -7411,10 +7411,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Assertion/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Assertion_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/XML/Assertion/AssertionInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\XML\Assertion</newNamespace>
-      <newClassName>AssertionInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\XML\Assertion\AssertionInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/XML/Assertion.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML</newNamespace>
+      <newClassName>Assertion</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Assertion</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Assertion/Saml.php</originalRelativeFilePath>
@@ -7435,10 +7435,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Element/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Element_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/XML/Element/ElementInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\XML\Element</newNamespace>
-      <newClassName>ElementInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\XML\Element\ElementInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/XML/Element.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML</newNamespace>
+      <newClassName>Element</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Element</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Element.php</originalRelativeFilePath>
@@ -7579,10 +7579,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Security.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Security</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/XML/Security/Security.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\XML\Security</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/XML/Security.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML</newNamespace>
       <newClassName>Security</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\XML\Security\Security</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Security</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/SecurityTokenReference.php</originalRelativeFilePath>
@@ -8067,26 +8067,26 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader/PluginLoader/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Loader_PluginLoader_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Loader/PluginLoader/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Loader\PluginLoader</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Loader\PluginLoader\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Loader/PluginLoaderException.php</newRelativeFilePath>
+      <newNamespace>Zend\Loader</newNamespace>
+      <newClassName>PluginLoaderException</newClassName>
+      <newFullyQualifiedName>Zend\Loader\PluginLoaderException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader/PluginLoader/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Loader_PluginLoader_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Loader/PluginLoader/PluginLoaderInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Loader\PluginLoader</newNamespace>
-      <newClassName>PluginLoaderInterface</newClassName>
-      <newFullyQualifiedName>Zend\Loader\PluginLoader\PluginLoaderInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Loader/PrefixPathMapper.php</newRelativeFilePath>
+      <newNamespace>Zend\Loader</newNamespace>
+      <newClassName>PrefixPathMapper</newClassName>
+      <newFullyQualifiedName>Zend\Loader\PrefixPathMapper</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader/PluginLoader.php</originalRelativeFilePath>
       <originalClassName>Zend_Loader_PluginLoader</originalClassName>
-      <newRelativeFilePath>Zend/Loader/PluginLoader/PluginLoader.php</newRelativeFilePath>
-      <newNamespace>Zend\Loader\PluginLoader</newNamespace>
+      <newRelativeFilePath>Zend/Loader/PluginLoader.php</newRelativeFilePath>
+      <newNamespace>Zend\Loader</newNamespace>
       <newClassName>PluginLoader</newClassName>
-      <newFullyQualifiedName>Zend\Loader\PluginLoader\PluginLoader</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Loader\PluginLoader</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader.php</originalRelativeFilePath>
@@ -8107,10 +8107,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Locale/Data.php</originalRelativeFilePath>
       <originalClassName>Zend_Locale_Data</originalClassName>
-      <newRelativeFilePath>Zend/Locale/Data/Data.php</newRelativeFilePath>
-      <newNamespace>Zend\Locale\Data</newNamespace>
+      <newRelativeFilePath>Zend/Locale/Data.php</newRelativeFilePath>
+      <newNamespace>Zend\Locale</newNamespace>
       <newClassName>Data</newClassName>
-      <newFullyQualifiedName>Zend\Locale\Data\Data</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Locale\Data</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Locale/Exception.php</originalRelativeFilePath>
@@ -8131,26 +8131,26 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Locale/Math/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Locale_Math_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Locale/Math/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Locale\Math</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Locale\Math\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Locale/MathException.php</newRelativeFilePath>
+      <newNamespace>Zend\Locale</newNamespace>
+      <newClassName>MathException</newClassName>
+      <newFullyQualifiedName>Zend\Locale\MathException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Locale/Math/PhpMath.php</originalRelativeFilePath>
       <originalClassName>Zend_Locale_Math_PhpMath</originalClassName>
-      <newRelativeFilePath>Zend/Locale/Math/PhpMath.php</newRelativeFilePath>
-      <newNamespace>Zend\Locale\Math</newNamespace>
+      <newRelativeFilePath>Zend/Locale/PhpMath.php</newRelativeFilePath>
+      <newNamespace>Zend\Locale</newNamespace>
       <newClassName>PhpMath</newClassName>
-      <newFullyQualifiedName>Zend\Locale\Math\PhpMath</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Locale\PhpMath</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Locale/Math.php</originalRelativeFilePath>
       <originalClassName>Zend_Locale_Math</originalClassName>
-      <newRelativeFilePath>Zend/Locale/Math/Math.php</newRelativeFilePath>
-      <newNamespace>Zend\Locale\Math</newNamespace>
+      <newRelativeFilePath>Zend/Locale/Math.php</newRelativeFilePath>
+      <newNamespace>Zend\Locale</newNamespace>
       <newClassName>Math</newClassName>
-      <newFullyQualifiedName>Zend\Locale\Math\Math</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Locale\Math</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Locale.php</originalRelativeFilePath>
@@ -8347,18 +8347,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Message/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Message_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Message/MessageInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Message</newNamespace>
-      <newClassName>MessageInterface</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Message\MessageInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Mail/MailMessage.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
+      <newClassName>MailMessage</newClassName>
+      <newFullyQualifiedName>Zend\Mail\MailMessage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Message.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Message</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Message/Message.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Message</newNamespace>
+      <newRelativeFilePath>Zend/Mail/Message.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
       <newClassName>Message</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Message\Message</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\Message</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Part/File.php</originalRelativeFilePath>
@@ -8371,26 +8371,26 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Part/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Part_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Part/PartInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Part</newNamespace>
-      <newClassName>PartInterface</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Part\PartInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Mail/MailPart.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
+      <newClassName>MailPart</newClassName>
+      <newFullyQualifiedName>Zend\Mail\MailPart</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Part.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Part</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Part/Part.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Part</newNamespace>
+      <newRelativeFilePath>Zend/Mail/Part.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
       <newClassName>Part</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Part\Part</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\Part</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Protocol/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Protocol_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Protocol/AbstractProtocol.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Protocol</newNamespace>
+      <newRelativeFilePath>Zend/Mail/AbstractProtocol.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
       <newClassName>AbstractProtocol</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Protocol\AbstractProtocol</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\AbstractProtocol</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Protocol/Exception.php</originalRelativeFilePath>
@@ -8443,18 +8443,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Protocol/Smtp.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Protocol_Smtp</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Protocol/Smtp/Smtp.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Protocol\Smtp</newNamespace>
+      <newRelativeFilePath>Zend/Mail/Protocol/Smtp.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail\Protocol</newNamespace>
       <newClassName>Smtp</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Protocol\Smtp\Smtp</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\Protocol\Smtp</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Storage_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Storage/AbstractStorage.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Storage</newNamespace>
+      <newRelativeFilePath>Zend/Mail/AbstractStorage.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
       <newClassName>AbstractStorage</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Storage\AbstractStorage</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\AbstractStorage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Exception.php</originalRelativeFilePath>
@@ -8467,10 +8467,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Folder/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Storage_Folder_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Storage/Folder/FolderInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Storage\Folder</newNamespace>
-      <newClassName>FolderInterface</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Storage\Folder\FolderInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Mail/Storage/MailFolder.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail\Storage</newNamespace>
+      <newClassName>MailFolder</newClassName>
+      <newFullyQualifiedName>Zend\Mail\Storage\MailFolder</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Folder/Maildir.php</originalRelativeFilePath>
@@ -8491,10 +8491,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Folder.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Storage_Folder</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Storage/Folder/Folder.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Storage\Folder</newNamespace>
+      <newRelativeFilePath>Zend/Mail/Storage/Folder.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail\Storage</newNamespace>
       <newClassName>Folder</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Storage\Folder\Folder</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\Storage\Folder</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Imap.php</originalRelativeFilePath>
@@ -8531,10 +8531,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Writable/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Storage_Writable_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Storage/Writable/WritableInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Storage\Writable</newNamespace>
-      <newClassName>WritableInterface</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Storage\Writable\WritableInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Mail/Storage/Writable.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail\Storage</newNamespace>
+      <newClassName>Writable</newClassName>
+      <newFullyQualifiedName>Zend\Mail\Storage\Writable</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage/Writable/Maildir.php</originalRelativeFilePath>
@@ -8547,18 +8547,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Storage.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Storage</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Storage/Storage.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Storage</newNamespace>
+      <newRelativeFilePath>Zend/Mail/Storage.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
       <newClassName>Storage</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Storage\Storage</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\Storage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Transport/Abstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Mail_Transport_Abstract</originalClassName>
-      <newRelativeFilePath>Zend/Mail/Transport/AbstractTransport.php</newRelativeFilePath>
-      <newNamespace>Zend\Mail\Transport</newNamespace>
+      <newRelativeFilePath>Zend/Mail/AbstractTransport.php</newRelativeFilePath>
+      <newNamespace>Zend\Mail</newNamespace>
       <newClassName>AbstractTransport</newClassName>
-      <newFullyQualifiedName>Zend\Mail\Transport\AbstractTransport</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Mail\AbstractTransport</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Mail/Transport/Exception.php</originalRelativeFilePath>
@@ -8619,10 +8619,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Parser/ParserInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Markup_Parser_ParserInterface</originalClassName>
-      <newRelativeFilePath>Zend/Markup/Parser/ParserInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Markup\Parser</newNamespace>
-      <newClassName>ParserInterface</newClassName>
-      <newFullyQualifiedName>Zend\Markup\Parser\ParserInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Markup/Parser.php</newRelativeFilePath>
+      <newNamespace>Zend\Markup</newNamespace>
+      <newClassName>Parser</newClassName>
+      <newFullyQualifiedName>Zend\Markup\Parser</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Parser/Textile.php</originalRelativeFilePath>
@@ -8651,10 +8651,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Renderer/Html/HtmlAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Markup_Renderer_Html_HtmlAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Markup/Renderer/HTML/HTMLAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Markup/Renderer/HTML/AbstractHTML.php</newRelativeFilePath>
       <newNamespace>Zend\Markup\Renderer\HTML</newNamespace>
-      <newClassName>HTMLAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Markup\Renderer\HTML\HTMLAbstract</newFullyQualifiedName>
+      <newClassName>AbstractHTML</newClassName>
+      <newFullyQualifiedName>Zend\Markup\Renderer\HTML\AbstractHTML</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Renderer/Html/Img.php</originalRelativeFilePath>
@@ -8691,10 +8691,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Renderer/RendererAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Markup_Renderer_RendererAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Markup/Renderer/RendererAbstract.php</newRelativeFilePath>
-      <newNamespace>Zend\Markup\Renderer</newNamespace>
-      <newClassName>RendererAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Markup\Renderer\RendererAbstract</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Markup/AbstractRenderer.php</newRelativeFilePath>
+      <newNamespace>Zend\Markup</newNamespace>
+      <newClassName>AbstractRenderer</newClassName>
+      <newFullyQualifiedName>Zend\Markup\AbstractRenderer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Markup/Renderer/TokenConverterInterface.php</originalRelativeFilePath>
@@ -9123,10 +9123,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Navigation/Page.php</originalRelativeFilePath>
       <originalClassName>Zend_Navigation_Page</originalClassName>
-      <newRelativeFilePath>Zend/Navigation/Page/Page.php</newRelativeFilePath>
-      <newNamespace>Zend\Navigation\Page</newNamespace>
-      <newClassName>Page</newClassName>
-      <newFullyQualifiedName>Zend\Navigation\Page\Page</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Navigation/AbstractPage.php</newRelativeFilePath>
+      <newNamespace>Zend\Navigation</newNamespace>
+      <newClassName>AbstractPage</newClassName>
+      <newFullyQualifiedName>Zend\Navigation\AbstractPage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Navigation.php</originalRelativeFilePath>
@@ -9411,10 +9411,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Paginator/Adapter/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Paginator_Adapter_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Paginator/Adapter/AdapterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Paginator\Adapter</newNamespace>
-      <newClassName>AdapterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Paginator\Adapter\AdapterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Paginator/Adapter.php</newRelativeFilePath>
+      <newNamespace>Zend\Paginator</newNamespace>
+      <newClassName>Adapter</newClassName>
+      <newFullyQualifiedName>Zend\Paginator\Adapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Paginator/Adapter/Iterator.php</originalRelativeFilePath>
@@ -9467,10 +9467,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Paginator/ScrollingStyle/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Paginator_ScrollingStyle_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Paginator/ScrollingStyle/ScrollingStyleInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Paginator\ScrollingStyle</newNamespace>
-      <newClassName>ScrollingStyleInterface</newClassName>
-      <newFullyQualifiedName>Zend\Paginator\ScrollingStyle\ScrollingStyleInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Paginator/ScrollingStyle.php</newRelativeFilePath>
+      <newNamespace>Zend\Paginator</newNamespace>
+      <newClassName>ScrollingStyle</newClassName>
+      <newFullyQualifiedName>Zend\Paginator\ScrollingStyle</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Paginator/ScrollingStyle/Jumping.php</originalRelativeFilePath>
@@ -10571,10 +10571,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/ProgressBar/Adapter.php</originalRelativeFilePath>
       <originalClassName>Zend_ProgressBar_Adapter</originalClassName>
-      <newRelativeFilePath>Zend/ProgressBar/Adapter/Adapter.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/ProgressBar/Adapter/AbstractAdapter.php</newRelativeFilePath>
       <newNamespace>Zend\ProgressBar\Adapter</newNamespace>
-      <newClassName>Adapter</newClassName>
-      <newFullyQualifiedName>Zend\ProgressBar\Adapter\Adapter</newFullyQualifiedName>
+      <newClassName>AbstractAdapter</newClassName>
+      <newFullyQualifiedName>Zend\ProgressBar\Adapter\AbstractAdapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/ProgressBar/Exception.php</originalRelativeFilePath>
@@ -10603,18 +10603,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Adapter/AdapterAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Adapter_AdapterAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Adapter/AdapterAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Queue/Adapter/AbstractAdapter.php</newRelativeFilePath>
       <newNamespace>Zend\Queue\Adapter</newNamespace>
-      <newClassName>AdapterAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Adapter\AdapterAbstract</newFullyQualifiedName>
+      <newClassName>AbstractAdapter</newClassName>
+      <newFullyQualifiedName>Zend\Queue\Adapter\AbstractAdapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Adapter/AdapterInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Adapter_AdapterInterface</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Adapter/AdapterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Queue\Adapter</newNamespace>
-      <newClassName>AdapterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Adapter\AdapterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Queue/Adapter.php</newRelativeFilePath>
+      <newNamespace>Zend\Queue</newNamespace>
+      <newClassName>Adapter</newClassName>
+      <newFullyQualifiedName>Zend\Queue\Adapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Adapter/Array.php</originalRelativeFilePath>
@@ -10643,10 +10643,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Adapter/Db.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Adapter_Db</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Adapter/DB/DB.php</newRelativeFilePath>
-      <newNamespace>Zend\Queue\Adapter\DB</newNamespace>
+      <newRelativeFilePath>Zend/Queue/Adapter/DB.php</newRelativeFilePath>
+      <newNamespace>Zend\Queue\Adapter</newNamespace>
       <newClassName>DB</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Adapter\DB\DB</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Queue\Adapter\DB</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Adapter/Memcacheq.php</originalRelativeFilePath>
@@ -10699,34 +10699,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Message.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Message</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Message/Message.php</newRelativeFilePath>
-      <newNamespace>Zend\Queue\Message</newNamespace>
+      <newRelativeFilePath>Zend/Queue/Message.php</newRelativeFilePath>
+      <newNamespace>Zend\Queue</newNamespace>
       <newClassName>Message</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Message\Message</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Queue\Message</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Stomp/Client/Connection.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Stomp_Client_Connection</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Stomp/Client/Connection.php</newRelativeFilePath>
-      <newNamespace>Zend\Queue\Stomp\Client</newNamespace>
+      <newRelativeFilePath>Zend/Queue/Stomp/Connection.php</newRelativeFilePath>
+      <newNamespace>Zend\Queue\Stomp</newNamespace>
       <newClassName>Connection</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Stomp\Client\Connection</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Queue\Stomp\Connection</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Stomp/Client/ConnectionInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Stomp_Client_ConnectionInterface</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Stomp/Client/ConnectionInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Queue\Stomp\Client</newNamespace>
-      <newClassName>ConnectionInterface</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Stomp\Client\ConnectionInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Queue/Stomp/StompConnection.php</newRelativeFilePath>
+      <newNamespace>Zend\Queue\Stomp</newNamespace>
+      <newClassName>StompConnection</newClassName>
+      <newFullyQualifiedName>Zend\Queue\Stomp\StompConnection</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Stomp/Client.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Stomp_Client</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Stomp/Client/Client.php</newRelativeFilePath>
-      <newNamespace>Zend\Queue\Stomp\Client</newNamespace>
+      <newRelativeFilePath>Zend/Queue/Stomp/Client.php</newRelativeFilePath>
+      <newNamespace>Zend\Queue\Stomp</newNamespace>
       <newClassName>Client</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Stomp\Client\Client</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Queue\Stomp\Client</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Stomp/Frame.php</originalRelativeFilePath>
@@ -10739,10 +10739,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue/Stomp/FrameInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Queue_Stomp_FrameInterface</originalClassName>
-      <newRelativeFilePath>Zend/Queue/Stomp/FrameInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Queue/Stomp/StompFrame.php</newRelativeFilePath>
       <newNamespace>Zend\Queue\Stomp</newNamespace>
-      <newClassName>FrameInterface</newClassName>
-      <newFullyQualifiedName>Zend\Queue\Stomp\FrameInterface</newFullyQualifiedName>
+      <newClassName>StompFrame</newClassName>
+      <newFullyQualifiedName>Zend\Queue\Stomp\StompFrame</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Queue.php</originalRelativeFilePath>
@@ -11059,10 +11059,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Analysis/TokenFilter.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Analysis_TokenFilter</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Analysis/TokenFilter/TokenFilterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Search\Lucene\Analysis\TokenFilter</newNamespace>
-      <newClassName>TokenFilterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Analysis\TokenFilter\TokenFilterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Search/Lucene/Analysis/TokenFilter.php</newRelativeFilePath>
+      <newNamespace>Zend\Search\Lucene\Analysis</newNamespace>
+      <newClassName>TokenFilter</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Analysis\TokenFilter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Document/Docx.php</originalRelativeFilePath>
@@ -11115,10 +11115,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Document.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Document</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Document/Document.php</newRelativeFilePath>
-      <newNamespace>Zend\Search\Lucene\Document</newNamespace>
+      <newRelativeFilePath>Zend/Search/Lucene/Document.php</newRelativeFilePath>
+      <newNamespace>Zend\Search\Lucene</newNamespace>
       <newClassName>Document</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Document\Document</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Document</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Exception.php</originalRelativeFilePath>
@@ -11243,10 +11243,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Index/TermsStream/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Index_TermsStream_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Index/TermsStream/TermsStreamInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Search\Lucene\Index\TermsStream</newNamespace>
-      <newClassName>TermsStreamInterface</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Index\TermsStream\TermsStreamInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Search/Lucene/Index/TermsStream.php</newRelativeFilePath>
+      <newNamespace>Zend\Search\Lucene\Index</newNamespace>
+      <newClassName>TermsStream</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Index\TermsStream</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Index/Writer.php</originalRelativeFilePath>
@@ -11259,10 +11259,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/IndexInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Search/Lucene/SearchIndex.php</newRelativeFilePath>
       <newNamespace>Zend\Search\Lucene</newNamespace>
-      <newClassName>IndexInterface</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\IndexInterface</newFullyQualifiedName>
+      <newClassName>SearchIndex</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\SearchIndex</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/LockManager.php</originalRelativeFilePath>
@@ -11315,10 +11315,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/Highlighter/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Search_Highlighter_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Search/Highlighter/HighlighterInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Search\Lucene\Search\Highlighter</newNamespace>
-      <newClassName>HighlighterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Search\Highlighter\HighlighterInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Search/Lucene/Search/Highlighter.php</newRelativeFilePath>
+      <newNamespace>Zend\Search\Lucene\Search</newNamespace>
+      <newClassName>Highlighter</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Search\Highlighter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/Query/Boolean.php</originalRelativeFilePath>
@@ -11523,10 +11523,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/Similarity.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Search_Similarity</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Search/Similarity/Similarity.php</newRelativeFilePath>
-      <newNamespace>Zend\Search\Lucene\Search\Similarity</newNamespace>
+      <newRelativeFilePath>Zend/Search/Lucene/Search/Similarity.php</newRelativeFilePath>
+      <newNamespace>Zend\Search\Lucene\Search</newNamespace>
       <newClassName>Similarity</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Search\Similarity\Similarity</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Search\Similarity</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Search/Weight/Boolean.php</originalRelativeFilePath>
@@ -11587,10 +11587,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Storage/Directory.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Storage_Directory</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Storage/Directory/DirectoryInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Search\Lucene\Storage\Directory</newNamespace>
-      <newClassName>DirectoryInterface</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Storage\Directory\DirectoryInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Search/Lucene/Storage/Directory.php</newRelativeFilePath>
+      <newNamespace>Zend\Search\Lucene\Storage</newNamespace>
+      <newClassName>Directory</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Storage\Directory</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Storage/File/Filesystem.php</originalRelativeFilePath>
@@ -11611,10 +11611,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/Storage/File.php</originalRelativeFilePath>
       <originalClassName>Zend_Search_Lucene_Storage_File</originalClassName>
-      <newRelativeFilePath>Zend/Search/Lucene/Storage/File/FileInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Search\Lucene\Storage\File</newNamespace>
-      <newClassName>FileInterface</newClassName>
-      <newFullyQualifiedName>Zend\Search\Lucene\Storage\File\FileInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Search/Lucene/Storage/File.php</newRelativeFilePath>
+      <newNamespace>Zend\Search\Lucene\Storage</newNamespace>
+      <newClassName>File</newClassName>
+      <newFullyQualifiedName>Zend\Search\Lucene\Storage\File</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Search/Lucene/TermStreamsPriorityQueue.php</originalRelativeFilePath>
@@ -11763,10 +11763,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Server_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Server/ServerInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Server/Server.php</newRelativeFilePath>
       <newNamespace>Zend\Server</newNamespace>
-      <newClassName>ServerInterface</newClassName>
-      <newFullyQualifiedName>Zend\Server\ServerInterface</newFullyQualifiedName>
+      <newClassName>Server</newClassName>
+      <newFullyQualifiedName>Zend\Server\Server</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Method/Callback.php</originalRelativeFilePath>
@@ -11875,10 +11875,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Server/Reflection.php</originalRelativeFilePath>
       <originalClassName>Zend_Server_Reflection</originalClassName>
-      <newRelativeFilePath>Zend/Server/Reflection/Reflection.php</newRelativeFilePath>
-      <newNamespace>Zend\Server\Reflection</newNamespace>
+      <newRelativeFilePath>Zend/Server/Reflection.php</newRelativeFilePath>
+      <newNamespace>Zend\Server</newNamespace>
       <newClassName>Reflection</newClassName>
-      <newFullyQualifiedName>Zend\Server\Reflection\Reflection</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Server\Reflection</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/Abstract.php</originalRelativeFilePath>
@@ -14187,18 +14187,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/AutoDiscover/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_AutoDiscover_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Soap/AutoDiscover/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\AutoDiscover</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Soap\AutoDiscover\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Soap/AutoDiscoverException.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
+      <newClassName>AutoDiscoverException</newClassName>
+      <newFullyQualifiedName>Zend\Soap\AutoDiscoverException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/AutoDiscover.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_AutoDiscover</originalClassName>
-      <newRelativeFilePath>Zend/Soap/AutoDiscover/AutoDiscover.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\AutoDiscover</newNamespace>
+      <newRelativeFilePath>Zend/Soap/AutoDiscover.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
       <newClassName>AutoDiscover</newClassName>
-      <newFullyQualifiedName>Zend\Soap\AutoDiscover\AutoDiscover</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\AutoDiscover</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Client/Common.php</originalRelativeFilePath>
@@ -14219,10 +14219,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Client/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Client_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Client/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Client</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Client\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Soap/ClientException.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
+      <newClassName>ClientException</newClassName>
+      <newFullyQualifiedName>Zend\Soap\ClientException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Client/Local.php</originalRelativeFilePath>
@@ -14235,34 +14235,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Client.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Client</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Client/Client.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Client</newNamespace>
+      <newRelativeFilePath>Zend/Soap/Client.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
       <newClassName>Client</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Client\Client</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\Client</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Server/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Server_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Server/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Server</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Server\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Soap/ServerException.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
+      <newClassName>ServerException</newClassName>
+      <newFullyQualifiedName>Zend\Soap\ServerException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Server.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Server</originalClassName>
-      <newRelativeFilePath>Zend/Soap/Server/Server.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\Server</newNamespace>
+      <newRelativeFilePath>Zend/Soap/Server.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
       <newClassName>Server</newClassName>
-      <newFullyQualifiedName>Zend\Soap\Server\Server</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\Server</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Wsdl_Exception</originalClassName>
-      <newRelativeFilePath>Zend/Soap/WSDL/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\WSDL</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\Soap\WSDL\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Soap/WSDLException.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
+      <newClassName>WSDLException</newClassName>
+      <newFullyQualifiedName>Zend\Soap\WSDLException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl/Strategy/Abstract.php</originalRelativeFilePath>
@@ -14315,18 +14315,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl/Strategy/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Wsdl_Strategy_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Soap/WSDL/Strategy/StrategyInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\WSDL\Strategy</newNamespace>
-      <newClassName>StrategyInterface</newClassName>
-      <newFullyQualifiedName>Zend\Soap\WSDL\Strategy\StrategyInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Soap/WSDL/Strategy.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap\WSDL</newNamespace>
+      <newClassName>Strategy</newClassName>
+      <newFullyQualifiedName>Zend\Soap\WSDL\Strategy</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Soap/Wsdl.php</originalRelativeFilePath>
       <originalClassName>Zend_Soap_Wsdl</originalClassName>
-      <newRelativeFilePath>Zend/Soap/WSDL/WSDL.php</newRelativeFilePath>
-      <newNamespace>Zend\Soap\WSDL</newNamespace>
+      <newRelativeFilePath>Zend/Soap/WSDL.php</newRelativeFilePath>
+      <newNamespace>Zend\Soap</newNamespace>
       <newClassName>WSDL</newClassName>
-      <newFullyQualifiedName>Zend\Soap\WSDL\WSDL</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Soap\WSDL</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tag/Cloud/Decorator/Cloud.php</originalRelativeFilePath>
@@ -14723,10 +14723,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Action/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Action_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Action/ActionInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Action</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Framework/Action.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework</newNamespace>
       <newClassName>ActionInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Action\ActionInterface</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Action</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Action/Repository.php</originalRelativeFilePath>
@@ -14811,10 +14811,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Console.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Client_Console</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Client/Console/Console.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Client\Console</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Framework/Client/Console.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework\Client</newNamespace>
       <newClassName>Console</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Client\Console\Console</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Client\Console</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Exception.php</originalRelativeFilePath>
@@ -14835,10 +14835,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Interactive/InputInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Client_Interactive_InputInterface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Client/Interactive/InputInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Tool/Framework/Client/Interactive/InteractiveInput.php</newRelativeFilePath>
       <newNamespace>Zend\Tool\Framework\Client\Interactive</newNamespace>
-      <newClassName>InputInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Client\Interactive\InputInterface</newFullyQualifiedName>
+      <newClassName>InteractiveInput</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Client\Interactive\InteractiveInput</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Interactive/InputRequest.php</originalRelativeFilePath>
@@ -14859,10 +14859,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Interactive/OutputInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Client_Interactive_OutputInterface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Client/Interactive/OutputInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Tool/Framework/Client/Interactive/InteractiveOutput.php</newRelativeFilePath>
       <newNamespace>Zend\Tool\Framework\Client\Interactive</newNamespace>
-      <newClassName>OutputInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Client\Interactive\OutputInterface</newFullyQualifiedName>
+      <newClassName>InteractiveOutput</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Client\Interactive\InteractiveOutput</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Manifest.php</originalRelativeFilePath>
@@ -14883,10 +14883,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Response/ContentDecorator/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Client_Response_ContentDecorator_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Client/Response/ContentDecorator/ContentDecoratorInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Client\Response\ContentDecorator</newNamespace>
-      <newClassName>ContentDecoratorInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Client\Response\ContentDecorator\ContentDecoratorInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Framework/Client/Response/ContentDecorator.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework\Client\Response</newNamespace>
+      <newClassName>ContentDecorator</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Client\Response\ContentDecorator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Response/ContentDecorator/Separator.php</originalRelativeFilePath>
@@ -14899,18 +14899,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Response.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Client_Response</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Client/Response/Response.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Client\Response</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Framework/Client/Response.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework\Client</newNamespace>
       <newClassName>Response</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Client\Response\Response</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Client\Response</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Storage/AdapterInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Client_Storage_AdapterInterface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Client/Storage/AdapterInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Tool/Framework/Client/Storage/Adapter.php</newRelativeFilePath>
       <newNamespace>Zend\Tool\Framework\Client\Storage</newNamespace>
-      <newClassName>AdapterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Client\Storage\AdapterInterface</newFullyQualifiedName>
+      <newClassName>Adapter</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Client\Storage\Adapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Storage/Directory.php</originalRelativeFilePath>
@@ -14923,10 +14923,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Storage.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Client_Storage</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Client/Storage/Storage.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Client\Storage</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Framework/Client/Storage.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework\Client</newNamespace>
       <newClassName>Storage</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Client\Storage\Storage</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Client\Storage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Exception.php</originalRelativeFilePath>
@@ -14963,18 +14963,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Loader/IncludePathLoader.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Loader_IncludePathLoader</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Loader/IncludePathLoader/IncludePathLoader.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Loader\IncludePathLoader</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Framework/Loader/IncludePathLoader.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework\Loader</newNamespace>
       <newClassName>IncludePathLoader</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Loader\IncludePathLoader\IncludePathLoader</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Loader\IncludePathLoader</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Loader/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Loader_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Loader/LoaderInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Loader</newNamespace>
-      <newClassName>LoaderInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Loader\LoaderInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Framework/Loader.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework</newNamespace>
+      <newClassName>Loader</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Loader</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Manifest/ActionManifestable.php</originalRelativeFilePath>
@@ -15003,10 +15003,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Manifest/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Manifest_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Manifest/ManifestInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Manifest</newNamespace>
-      <newClassName>ManifestInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Manifest\ManifestInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Framework/Manifest.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework</newNamespace>
+      <newClassName>Manifest</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Manifest</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Manifest/MetadataManifestable.php</originalRelativeFilePath>
@@ -15059,10 +15059,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Metadata/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Metadata_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Metadata/MetadataInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Metadata</newNamespace>
-      <newClassName>MetadataInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Metadata\MetadataInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Framework/Metadata.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework</newNamespace>
+      <newClassName>Metadata</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Metadata</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Metadata/Tool.php</originalRelativeFilePath>
@@ -15107,10 +15107,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Provider/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Provider_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Provider/ProviderInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Provider</newNamespace>
-      <newClassName>ProviderInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Provider\ProviderInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Framework/Provider.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework</newNamespace>
+      <newClassName>Provider</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Provider</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Provider/Pretendable.php</originalRelativeFilePath>
@@ -15139,10 +15139,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Registry/EnabledInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Registry_EnabledInterface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Registry/EnabledInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Registry</newNamespace>
-      <newClassName>EnabledInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Registry\EnabledInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Framework/RegistryEnabled.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework</newNamespace>
+      <newClassName>RegistryEnabled</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\RegistryEnabled</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Registry/Exception.php</originalRelativeFilePath>
@@ -15155,18 +15155,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Registry/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Registry_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Registry/RegistryInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Registry</newNamespace>
-      <newClassName>RegistryInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Registry\RegistryInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Framework/Registry.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework</newNamespace>
+      <newClassName>Registry</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Registry</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Registry.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Registry</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Registry/Registry.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Tool/Framework/Registry/FrameworkRegistry.php</newRelativeFilePath>
       <newNamespace>Zend\Tool\Framework\Registry</newNamespace>
-      <newClassName>Registry</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Registry\Registry</newFullyQualifiedName>
+      <newClassName>FrameworkRegistry</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Registry\FrameworkRegistry</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/System/Action/Create.php</originalRelativeFilePath>
@@ -15243,10 +15243,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Context/Content/Engine.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Project_Context_Content_Engine</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Project/Context/Content/Engine/Engine.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Project\Context\Content\Engine</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Project/Context/Content/Engine.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Project\Context\Content</newNamespace>
       <newClassName>Engine</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Project\Context\Content\Engine\Engine</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Project\Context\Content\Engine</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Context/Exception.php</originalRelativeFilePath>
@@ -15283,10 +15283,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Context/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Project_Context_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Project/Context/ContextInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Project\Context</newNamespace>
-      <newClassName>ContextInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Project\Context\ContextInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Project/Context.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Project</newNamespace>
+      <newClassName>Context</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Project\Context</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Context/Repository.php</originalRelativeFilePath>
@@ -15299,10 +15299,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Context/System/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Project_Context_System_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Project/Context/System/SystemInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Project\Context\System</newNamespace>
-      <newClassName>SystemInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Project\Context\System\SystemInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Project/Context/System.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Project\Context</newNamespace>
+      <newClassName>System</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Project\Context\System</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Context/System/NotOverwritable.php</originalRelativeFilePath>
@@ -15803,10 +15803,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Profile/FileParser/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Project_Profile_FileParser_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Project/Profile/FileParser/FileParserInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Project\Profile\FileParser</newNamespace>
-      <newClassName>FileParserInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Project\Profile\FileParser\FileParserInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Project/Profile/FileParser.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Project\Profile</newNamespace>
+      <newClassName>FileParser</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Project\Profile\FileParser</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Profile/FileParser/Xml.php</originalRelativeFilePath>
@@ -15851,18 +15851,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Profile/Resource.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Project_Profile_Resource</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Project/Profile/Resource/Resource.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Project\Profile\Resource</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Project/Profile/Resource.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Project\Profile</newNamespace>
       <newClassName>Resource</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Project\Profile\Resource\Resource</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Project\Profile\Resource</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Profile.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Project_Profile</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Project/Profile/Profile.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Project\Profile</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Project/Profile.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Project</newNamespace>
       <newClassName>Profile</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Project\Profile\Profile</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Project\Profile</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Project/Provider/Abstract.php</originalRelativeFilePath>
@@ -17155,10 +17155,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_View_Helper_Interface</originalClassName>
-      <newRelativeFilePath>Zend/View/Helper/HelperInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\View\Helper</newNamespace>
-      <newClassName>HelperInterface</newClassName>
-      <newFullyQualifiedName>Zend\View\Helper\HelperInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/View/Helper.php</newRelativeFilePath>
+      <newNamespace>Zend\View</newNamespace>
+      <newClassName>Helper</newClassName>
+      <newFullyQualifiedName>Zend\View\Helper</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/Json.php</originalRelativeFilePath>
@@ -17291,34 +17291,34 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/Placeholder/Container.php</originalRelativeFilePath>
       <originalClassName>Zend_View_Helper_Placeholder_Container</originalClassName>
-      <newRelativeFilePath>Zend/View/Helper/Placeholder/Container/Container.php</newRelativeFilePath>
-      <newNamespace>Zend\View\Helper\Placeholder\Container</newNamespace>
+      <newRelativeFilePath>Zend/View/Helper/Placeholder/Container.php</newRelativeFilePath>
+      <newNamespace>Zend\View\Helper\Placeholder</newNamespace>
       <newClassName>Container</newClassName>
-      <newFullyQualifiedName>Zend\View\Helper\Placeholder\Container\Container</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\View\Helper\Placeholder\Container</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/Placeholder/Registry/Exception.php</originalRelativeFilePath>
       <originalClassName>Zend_View_Helper_Placeholder_Registry_Exception</originalClassName>
-      <newRelativeFilePath>Zend/View/Helper/Placeholder/Registry/Exception.php</newRelativeFilePath>
-      <newNamespace>Zend\View\Helper\Placeholder\Registry</newNamespace>
-      <newClassName>Exception</newClassName>
-      <newFullyQualifiedName>Zend\View\Helper\Placeholder\Registry\Exception</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/View/Helper/Placeholder/RegistryException.php</newRelativeFilePath>
+      <newNamespace>Zend\View\Helper\Placeholder</newNamespace>
+      <newClassName>RegistryException</newClassName>
+      <newFullyQualifiedName>Zend\View\Helper\Placeholder\RegistryException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/Placeholder/Registry.php</originalRelativeFilePath>
       <originalClassName>Zend_View_Helper_Placeholder_Registry</originalClassName>
-      <newRelativeFilePath>Zend/View/Helper/Placeholder/Registry/Registry.php</newRelativeFilePath>
-      <newNamespace>Zend\View\Helper\Placeholder\Registry</newNamespace>
+      <newRelativeFilePath>Zend/View/Helper/Placeholder/Registry.php</newRelativeFilePath>
+      <newNamespace>Zend\View\Helper\Placeholder</newNamespace>
       <newClassName>Registry</newClassName>
-      <newFullyQualifiedName>Zend\View\Helper\Placeholder\Registry\Registry</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\View\Helper\Placeholder\Registry</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/Placeholder.php</originalRelativeFilePath>
       <originalClassName>Zend_View_Helper_Placeholder</originalClassName>
-      <newRelativeFilePath>Zend/View/Helper/Placeholder/Placeholder.php</newRelativeFilePath>
-      <newNamespace>Zend\View\Helper\Placeholder</newNamespace>
+      <newRelativeFilePath>Zend/View/Helper/Placeholder.php</newRelativeFilePath>
+      <newNamespace>Zend\View\Helper</newNamespace>
       <newClassName>Placeholder</newClassName>
-      <newFullyQualifiedName>Zend\View\Helper\Placeholder\Placeholder</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\View\Helper\Placeholder</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/RenderToPlaceholder.php</originalRelativeFilePath>
@@ -17355,10 +17355,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_View_Interface</originalClassName>
-      <newRelativeFilePath>Zend/View/ViewInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/View/ViewEngine.php</newRelativeFilePath>
       <newNamespace>Zend\View</newNamespace>
-      <newClassName>ViewInterface</newClassName>
-      <newFullyQualifiedName>Zend\View\ViewInterface</newFullyQualifiedName>
+      <newClassName>ViewEngine</newClassName>
+      <newFullyQualifiedName>Zend\View\ViewEngine</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Stream.php</originalRelativeFilePath>
@@ -17387,10 +17387,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Wildfire/Channel/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Wildfire_Channel_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Wildfire/Channel/ChannelInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Wildfire\Channel</newNamespace>
-      <newClassName>ChannelInterface</newClassName>
-      <newFullyQualifiedName>Zend\Wildfire\Channel\ChannelInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Wildfire/Channel.php</newRelativeFilePath>
+      <newNamespace>Zend\Wildfire</newNamespace>
+      <newClassName>Channel</newClassName>
+      <newFullyQualifiedName>Zend\Wildfire\Channel</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Wildfire/Exception.php</originalRelativeFilePath>
@@ -17419,18 +17419,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Wildfire/Plugin/FirePhp.php</originalRelativeFilePath>
       <originalClassName>Zend_Wildfire_Plugin_FirePhp</originalClassName>
-      <newRelativeFilePath>Zend/Wildfire/Plugin/FirePhp/FirePhp.php</newRelativeFilePath>
-      <newNamespace>Zend\Wildfire\Plugin\FirePhp</newNamespace>
+      <newRelativeFilePath>Zend/Wildfire/Plugin/FirePhp.php</newRelativeFilePath>
+      <newNamespace>Zend\Wildfire\Plugin</newNamespace>
       <newClassName>FirePhp</newClassName>
-      <newFullyQualifiedName>Zend\Wildfire\Plugin\FirePhp\FirePhp</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Wildfire\Plugin\FirePhp</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Wildfire/Plugin/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Wildfire_Plugin_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Wildfire/Plugin/PluginInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Wildfire\Plugin</newNamespace>
-      <newClassName>PluginInterface</newClassName>
-      <newFullyQualifiedName>Zend\Wildfire\Plugin\PluginInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Wildfire/Plugin.php</newRelativeFilePath>
+      <newNamespace>Zend\Wildfire</newNamespace>
+      <newClassName>Plugin</newClassName>
+      <newFullyQualifiedName>Zend\Wildfire\Plugin</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Wildfire/Protocol/JsonStream.php</originalRelativeFilePath>

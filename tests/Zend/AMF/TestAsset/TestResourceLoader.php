@@ -2,7 +2,9 @@
 
 namespace ZendTest\AMF\TestAsset;
 
-class TestResourceLoader implements \Zend\Loader\PluginLoader\PluginLoaderInterface 
+use Zend\Loader\PrefixPathMapper;
+
+class TestResourceLoader implements PrefixPathMapper
 {
     public $suffix;
     public $namespace = 'ZendTest\\AMF\\TestAsset\\';

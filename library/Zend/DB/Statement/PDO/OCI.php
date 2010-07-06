@@ -25,6 +25,8 @@
  */
 namespace Zend\DB\Statement\PDO;
 
+use Zend\DB\Statement\PDO;
+
 /**
  * Proxy class to wrap a PDOStatement object for IBM Databases.
  * Matches the interface of PDOStatement.  All methods simply proxy to the

@@ -501,7 +501,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Imap($this->_params);
 
-        $this->assertTrue($mail->getMessage(1)->hasFlag(Storage\Storage::FLAG_RECENT));
+        $this->assertTrue($mail->getMessage(1)->hasFlag(Storage::FLAG_RECENT));
     }
 
     public function testGetFlags()
@@ -509,8 +509,8 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $mail = new Storage\Imap($this->_params);
 
         $flags = $mail->getMessage(1)->getFlags();
-        $this->assertTrue(isset($flags[Storage\Storage::FLAG_RECENT]));
-        $this->assertTrue(in_array(Storage\Storage::FLAG_RECENT, $flags));
+        $this->assertTrue(isset($flags[Storage::FLAG_RECENT]));
+        $this->assertTrue(in_array(Storage::FLAG_RECENT, $flags));
     }
 
     public function testRawHeader()
@@ -693,29 +693,29 @@ class ImapTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Imap($this->_params);
 
-        $mail->setFlags(1, array(Storage\Storage::FLAG_SEEN));
+        $mail->setFlags(1, array(Storage::FLAG_SEEN));
         $message = $mail->getMessage(1);
-        $this->assertTrue($message->hasFlag(Storage\Storage::FLAG_SEEN));
-        $this->assertFalse($message->hasFlag(Storage\Storage::FLAG_FLAGGED));
+        $this->assertTrue($message->hasFlag(Storage::FLAG_SEEN));
+        $this->assertFalse($message->hasFlag(Storage::FLAG_FLAGGED));
 
-        $mail->setFlags(1, array(Storage\Storage::FLAG_SEEN, Storage\Storage::FLAG_FLAGGED));
+        $mail->setFlags(1, array(Storage::FLAG_SEEN, Storage::FLAG_FLAGGED));
         $message = $mail->getMessage(1);
-        $this->assertTrue($message->hasFlag(Storage\Storage::FLAG_SEEN));
-        $this->assertTrue($message->hasFlag(Storage\Storage::FLAG_FLAGGED));
+        $this->assertTrue($message->hasFlag(Storage::FLAG_SEEN));
+        $this->assertTrue($message->hasFlag(Storage::FLAG_FLAGGED));
 
-        $mail->setFlags(1, array(Storage\Storage::FLAG_FLAGGED));
+        $mail->setFlags(1, array(Storage::FLAG_FLAGGED));
         $message = $mail->getMessage(1);
-        $this->assertFalse($message->hasFlag(Storage\Storage::FLAG_SEEN));
-        $this->assertTrue($message->hasFlag(Storage\Storage::FLAG_FLAGGED));
+        $this->assertFalse($message->hasFlag(Storage::FLAG_SEEN));
+        $this->assertTrue($message->hasFlag(Storage::FLAG_FLAGGED));
 
         $mail->setFlags(1, array('myflag'));
         $message = $mail->getMessage(1);
-        $this->assertFalse($message->hasFlag(Storage\Storage::FLAG_SEEN));
-        $this->assertFalse($message->hasFlag(Storage\Storage::FLAG_FLAGGED));
+        $this->assertFalse($message->hasFlag(Storage::FLAG_SEEN));
+        $this->assertFalse($message->hasFlag(Storage::FLAG_FLAGGED));
         $this->assertTrue($message->hasFlag('myflag'));
 
         try {
-            $mail->setFlags(1, array(Storage\Storage::FLAG_RECENT));
+            $mail->setFlags(1, array(Storage::FLAG_RECENT));
         } catch (\Exception $e) {
             return; // ok
         }
@@ -842,16 +842,16 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         foreach ($mail as $id => $message) {
             $mail->setFlags($id, array());
         }
-        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_SEEN), 0);
-        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_ANSWERED), 0);
-        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_FLAGGED), 0);
+        $this->assertEquals($mail->countMessages(Storage::FLAG_SEEN), 0);
+        $this->assertEquals($mail->countMessages(Storage::FLAG_ANSWERED), 0);
+        $this->assertEquals($mail->countMessages(Storage::FLAG_FLAGGED), 0);
 
-        $mail->setFlags(1, array(Storage\Storage::FLAG_SEEN, Storage\Storage::FLAG_ANSWERED));
-        $mail->setFlags(2, array(Storage\Storage::FLAG_SEEN));
-        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_SEEN), 2);
-        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_ANSWERED), 1);
-        $this->assertEquals($mail->countMessages(array(Storage\Storage::FLAG_SEEN, Storage\Storage::FLAG_ANSWERED)), 1);
-        $this->assertEquals($mail->countMessages(array(Storage\Storage::FLAG_SEEN, Storage\Storage::FLAG_FLAGGED)), 0);
-        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_FLAGGED), 0);
+        $mail->setFlags(1, array(Storage::FLAG_SEEN, Storage::FLAG_ANSWERED));
+        $mail->setFlags(2, array(Storage::FLAG_SEEN));
+        $this->assertEquals($mail->countMessages(Storage::FLAG_SEEN), 2);
+        $this->assertEquals($mail->countMessages(Storage::FLAG_ANSWERED), 1);
+        $this->assertEquals($mail->countMessages(array(Storage::FLAG_SEEN, Storage::FLAG_ANSWERED)), 1);
+        $this->assertEquals($mail->countMessages(array(Storage::FLAG_SEEN, Storage::FLAG_FLAGGED)), 0);
+        $this->assertEquals($mail->countMessages(Storage::FLAG_FLAGGED), 0);
     }
 }

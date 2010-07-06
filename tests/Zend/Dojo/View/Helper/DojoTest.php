@@ -27,7 +27,7 @@ use Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\JSON\JSON,
     Zend\Registry,
     Zend\View\View,
-    Zend\View\ViewInterface;
+    Zend\View\ViewEngine;
 
 /**
  * Test class for Zend_Dojo_View_Helper_Dojo.
@@ -73,7 +73,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldBeAbleToSetViewProperty()
     {
-        $this->assertTrue($this->helper->view instanceof ViewInterface);
+        $this->assertTrue($this->helper->view instanceof ViewEngine);
     }
 
     public function testNoModulesShouldBeRegisteredByDefault()

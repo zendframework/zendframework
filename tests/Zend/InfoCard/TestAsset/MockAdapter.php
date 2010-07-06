@@ -3,8 +3,7 @@
 namespace ZendTest\Infocard\TestAsset;
 use Zend\InfoCard\Adapter;
 
-class MockAdapter
-    implements Adapter\AdapterInterface
+class MockAdapter implements Adapter
 {
     public function storeAssertion($assertionURI, $assertionID, $conditions)
     {

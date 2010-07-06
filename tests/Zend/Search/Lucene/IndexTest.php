@@ -62,7 +62,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
     {
         $index = Lucene\Lucene::create(dirname(__FILE__) . '/_index/_files');
 
-        $this->assertTrue($index instanceof Lucene\IndexInterface);
+        $this->assertTrue($index instanceof Lucene\SearchIndex);
 
         $this->_clearDirectory(dirname(__FILE__) . '/_index/_files');
     }
@@ -71,14 +71,14 @@ class IndexTest extends \PHPUnit_Framework_TestCase
     {
         $index = Lucene\Lucene::open(dirname(__FILE__) . '/_indexSample/_files');
 
-        $this->assertTrue($index instanceof Lucene\IndexInterface);
+        $this->assertTrue($index instanceof Lucene\SearchIndex);
     }
 
     public function testOpenNonCompound()
     {
         $index = Lucene\Lucene::open(dirname(__FILE__) . '/_indexSample/_nonCompoundIndexFiles');
 
-        $this->assertTrue($index instanceof Lucene\IndexInterface);
+        $this->assertTrue($index instanceof Lucene\SearchIndex);
     }
 
     public function testDefaultSearchField()
@@ -178,7 +178,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
 
         $doc = $index->getDocument(3);
 
-        $this->assertTrue($doc instanceof Document\Document);
+        $this->assertTrue($doc instanceof Document);
         $this->assertEquals($doc->path, 'IndexSource/about-pear.html');
     }
 
@@ -221,7 +221,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
     {
         $index = Lucene\Lucene::open(dirname(__FILE__) . '/_indexSample/_files');
 
-        $this->assertTrue($index->getSimilarity() instanceof \Zend\Search\Lucene\Search\Similarity\Similarity);
+        $this->assertTrue($index->getSimilarity() instanceof \Zend\Search\Lucene\Search\Similarity);
     }
 
     public function testNorm()
@@ -290,7 +290,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
             }
 
             // Create new Document from a file
-            $doc = new Document\Document();
+            $doc = new Document();
             $doc->addField(Document\Field::Text('path', 'IndexSource/' . $file));
             $doc->addField(Document\Field::Keyword( 'modified', filemtime($indexSourceDir . '/' . $file) ));
 
@@ -314,7 +314,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         unset($index);
 
         $index1 = Lucene\Lucene::open(dirname(__FILE__) . '/_index/_files');
-        $this->assertTrue($index1 instanceof Lucene\IndexInterface);
+        $this->assertTrue($index1 instanceof Lucene\SearchIndex);
 
         $this->_clearDirectory(dirname(__FILE__) . '/_index/_files');
     }
@@ -336,7 +336,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
             }
 
             // Create new Document from a file
-            $doc = new Document\Document();
+            $doc = new Document();
             $doc->addField(Document\Field::Keyword('path', 'IndexSource/' . $file));
             $doc->addField(Document\Field::Keyword( 'modified', filemtime($indexSourceDir . '/' . $file) ));
 
@@ -359,7 +359,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         unset($index);
 
         $index1 = Lucene\Lucene::open(dirname(__FILE__) . '/_index/_files');
-        $this->assertTrue($index1 instanceof Lucene\IndexInterface);
+        $this->assertTrue($index1 instanceof Lucene\SearchIndex);
         $pathTerm = new Index\Term('IndexSource/contributing.html', 'path');
         $contributingDocs = $index1->termDocs($pathTerm);
         foreach ($contributingDocs as $id) {
@@ -369,7 +369,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         unset($index1);
 
         $index2 = Lucene\Lucene::open(dirname(__FILE__) . '/_index/_files');
-        $this->assertTrue($index2 instanceof Lucene\IndexInterface);
+        $this->assertTrue($index2 instanceof Lucene\SearchIndex);
 
         $hits = $index2->find('submitting');
         $this->assertEquals(count($hits), 3);
@@ -443,7 +443,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         $index = Lucene\Lucene::create(dirname(__FILE__) . '/_index/_files');
 
         // Zero terms
-        $doc = new Document\Document();
+        $doc = new Document();
         $doc->addField(Document\Field::Text('contents', ''));
         $index->addDocument($doc);
 
@@ -467,7 +467,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         $index = Lucene\Lucene::create(dirname(__FILE__) . '/_index/_files');
 
         // Zero terms
-        $doc = new Document\Document();
+        $doc = new Document();
         $doc->addField(Document\Field::Text('contents', 'someterm'));
         $index->addDocument($doc);
 
@@ -491,7 +491,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         $index = Lucene\Lucene::create(dirname(__FILE__) . '/_index/_files');
 
         // Zero terms
-        $doc = new Document\Document();
+        $doc = new Document();
         $doc->addField(Document\Field::Text('contents', 'someterm word'));
         $index->addDocument($doc);
 

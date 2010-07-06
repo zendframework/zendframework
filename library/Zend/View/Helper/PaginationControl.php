@@ -52,10 +52,10 @@ class PaginationControl
     /**
      * Sets the view instance.
      *
-     * @param  \Zend\View\ViewInterface $view View instance
+     * @param  \Zend\View\ViewEngine $view View instance
      * @return \Zend\View\Helper\PaginationControl
      */
-    public function setView(View\ViewInterface $view)
+    public function setView(View\ViewEngine $view)
     {
         $this->view = $view;
         return $this;

@@ -23,14 +23,15 @@
  * @namespace
  */
 namespace Zend\Paginator;
-use Zend\Loader\PluginLoader;
-use Zend\View;
-use Zend\JSON;
+
+use Zend\Loader\PluginLoader,
+    Zend\View,
+    Zend\JSON;
 
 /**
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\HelperBroker
  * @uses       \Zend\JSON\JSON
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
+ * @uses       \Zend\Loader\PluginLoader
  * @uses       \Zend\Paginator\Exception
  * @uses       \Zend\View\Exception
  * @category   Zend
@@ -56,7 +57,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Adapter plugin loader
      *
-     * @var \Zend\Loader\PluginLoader\PluginLoader
+     * @var \Zend\Loader\PrefixPathMapper
      */
     protected static $_adapterLoader = null;
 
@@ -84,7 +85,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Scrolling style plugin loader
      *
-     * @var \Zend\Loader\PluginLoader\PluginLoader
+     * @var \Zend\Loader\PrefixPathMapper
      */
     protected static $_scrollingStyleLoader = null;
 
@@ -105,7 +106,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Adapter
      *
-     * @var \Zend\Paginator\Adapter\AdapterInterface
+     * @var \Zend\Paginator\Adapter
      */
     protected $_adapter = null;
 
@@ -169,7 +170,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * View instance used for self rendering
      *
-     * @var \Zend\View\ViewInterface
+     * @var \Zend\View\ViewEngine
      */
     protected $_view = null;
 
@@ -270,9 +271,9 @@ class Paginator implements \Countable, \IteratorAggregate
             if ($adapter == self::INTERNAL_ADAPTER) {
                 if (is_array($data)) {
                     $adapter = 'ArrayAdapter';
-                } else if ($data instanceof \Zend\DB\Table\Select\Select) {
+                } else if ($data instanceof \Zend\DB\Table\Select) {
                     $adapter = 'DbTableSelect';
-                } else if ($data instanceof \Zend\DB\Select\Select) {
+                } else if ($data instanceof \Zend\DB\Select) {
                     $adapter = 'DbSelect';
                 } else if ($data instanceof \Iterator) {
                     $adapter = 'Iterator';
@@ -301,12 +302,12 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Returns the adapter loader.  If it doesn't exist it's created.
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public static function getAdapterLoader()
     {
         if (self::$_adapterLoader === null) {
-            self::$_adapterLoader = new PluginLoader\PluginLoader(
+            self::$_adapterLoader = new PluginLoader(
                 array('Zend\Paginator\Adapter' => 'Zend/Paginator/Adapter')
             );
         }
@@ -396,12 +397,12 @@ class Paginator implements \Countable, \IteratorAggregate
      * Returns the scrolling style loader.  If it doesn't exist it's
      * created.
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public static function getScrollingStyleLoader()
     {
         if (self::$_scrollingStyleLoader === null) {
-            self::$_scrollingStyleLoader = new PluginLoader\PluginLoader(
+            self::$_scrollingStyleLoader = new PluginLoader(
                 array('Zend\Paginator\ScrollingStyle' => 'Zend/Paginator/ScrollingStyle')
             );
         }
@@ -416,7 +417,7 @@ class Paginator implements \Countable, \IteratorAggregate
      */
     public function __construct($adapter)
     {
-        if ($adapter instanceof Adapter\AdapterInterface) {
+        if ($adapter instanceof Adapter) {
             $this->_adapter = $adapter;
         } else if ($adapter instanceof AdapterAggregate) {
             $this->_adapter = $adapter->getPaginatorAdapter();
@@ -545,7 +546,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Returns the adapter.
      *
-     * @return \Zend\Paginator\Adapter\AdapterInterface
+     * @return \Zend\Paginator\Adapter
      */
     public function getAdapter()
     {
@@ -845,12 +846,12 @@ class Paginator implements \Countable, \IteratorAggregate
      * Retrieves the view instance.  If none registered, attempts to pull f
      * rom ViewRenderer.
      *
-     * @return \Zend\View\ViewInterface|null
+     * @return \Zend\View\ViewEngine|null
      */
     public function getView()
     {
         if ($this->_view === null) {
-            $viewRenderer = \Zend\Controller\Action\HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+            $viewRenderer = \Zend\Controller\Action\HelperBroker::getStaticHelper('viewRenderer');
             if ($viewRenderer->view === null) {
                 $viewRenderer->initView();
             }
@@ -863,10 +864,10 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Sets the view object.
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return \Zend\Paginator\Paginator
      */
-    public function setView(View\ViewInterface $view = null)
+    public function setView(View\ViewEngine $view = null)
     {
         $this->_view = $view;
 
@@ -916,10 +917,10 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Renders the paginator.
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return string
      */
-    public function render(View\ViewInterface $view = null)
+    public function render(View\ViewEngine $view = null)
     {
         if (null !== $view) {
             $this->setView($view);
@@ -939,7 +940,7 @@ class Paginator implements \Countable, \IteratorAggregate
     {
         $currentItems = $this->getCurrentItems();
 
-        if ($currentItems instanceof \Zend\DB\Table\Rowset\AbstractRowset) {
+        if ($currentItems instanceof \Zend\DB\Table\AbstractRowset) {
             return JSON\JSON::encode($currentItems->toArray());
         } else {
             return JSON\JSON::encode($currentItems);
@@ -1047,7 +1048,7 @@ class Paginator implements \Countable, \IteratorAggregate
      * Loads a scrolling style.
      *
      * @param string $scrollingStyle
-     * @return \Zend\Paginator\ScrollingStyle\ScrollingStyleInterface
+     * @return \Zend\Paginator\ScrollingStyle
      */
     protected function _loadScrollingStyle($scrollingStyle = null)
     {
@@ -1057,7 +1058,7 @@ class Paginator implements \Countable, \IteratorAggregate
 
         switch (strtolower(gettype($scrollingStyle))) {
             case 'object':
-                if (!$scrollingStyle instanceof ScrollingStyle\ScrollingStyleInterface) {
+                if (!$scrollingStyle instanceof ScrollingStyle) {
                     throw new View\Exception('Scrolling style must implement ' .
                         'Zend_Paginator_ScrollingStyle_Interface');
                 }

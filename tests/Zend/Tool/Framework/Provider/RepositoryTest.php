@@ -58,7 +58,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $this->_repository = new Provider\Repository();
 
         // setup the registry components required to test with
-        $this->_registry = new \Zend\Tool\Framework\Registry\Registry();
+        $this->_registry = new \Zend\Tool\Framework\Registry\FrameworkRegistry();
         $this->_registry->setProviderRepository($this->_repository);
         $this->_registry->setActionRepository(new \Zend\Tool\Framework\Action\Repository());
     }
@@ -117,7 +117,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $this->_repository->process();
         $this->assertEquals(2, count($this->_repository));
         foreach ($this->_repository->getProviders() as $provider) {
-            $this->assertTrue($provider instanceof Provider\ProviderInterface);
+            $this->assertTrue($provider instanceof Provider);
         }
 
     }
@@ -156,7 +156,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $this->_repository->addProvider(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderOne());
         $this->_repository->addProvider(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderTwo());
         $this->_repository->process();
-        $this->assertTrue($this->_repository->getProvider('ProviderOne') instanceof Provider\ProviderInterface);
+        $this->assertTrue($this->_repository->getProvider('ProviderOne') instanceof Provider);
     }
 
 

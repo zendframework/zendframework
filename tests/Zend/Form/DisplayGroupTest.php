@@ -27,9 +27,9 @@ use Zend\Form\Form,
     Zend\Form\Decorator,
     Zend\Form\Element,
     Zend\Config\Config,
-    Zend\Loader\PluginLoader\PluginLoader,
+    Zend\Loader\PluginLoader,
     Zend\Registry,
-    Zend\Controller\Action\HelperBroker\HelperBroker as ActionHelperBroker,
+    Zend\Controller\Action\HelperBroker as ActionHelperBroker,
     Zend\Translator\Translator,
     Zend\View\View;
 

@@ -28,7 +28,7 @@ use Zend\Form\Element\File as FileElement,
     Zend\Form\Form,
     Zend\Form\Decorator,
     Zend\Form\SubForm,
-    Zend\Loader\PluginLoader\PluginLoader,
+    Zend\Loader\PluginLoader,
     Zend\Registry,
     Zend\Translator\Translator,
     Zend\View\View;

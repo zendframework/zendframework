@@ -95,7 +95,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         $jar = new HTTP\CookieJar();
         $res_str = file_get_contents(dirname(realpath(__FILE__)) .
             DIRECTORY_SEPARATOR . '_files'  . DIRECTORY_SEPARATOR . 'response_with_cookies');
-        $response = Response\Response::fromString($res_str);
+        $response = Response::fromString($res_str);
 
         $jar->addCookiesFromResponse($response, 'http://www.example.com');
 
@@ -423,7 +423,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
     {
         $res_str = file_get_contents(dirname(realpath(__FILE__)) .
             DIRECTORY_SEPARATOR . '_files'  . DIRECTORY_SEPARATOR . 'response_with_single_cookie');
-        $response = Response\Response::fromString($res_str);
+        $response = Response::fromString($res_str);
 
         $jar = HTTP\CookieJar::fromResponse($response, 'http://www.example.com');
 
@@ -438,7 +438,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
     {
         $res_str = file_get_contents(dirname(realpath(__FILE__)) .
             DIRECTORY_SEPARATOR . '_files'  . DIRECTORY_SEPARATOR . 'response_with_cookies');
-        $response = Response\Response::fromString($res_str);
+        $response = Response::fromString($res_str);
 
         $jar = HTTP\CookieJar::fromResponse($response, 'http://www.example.com');
 

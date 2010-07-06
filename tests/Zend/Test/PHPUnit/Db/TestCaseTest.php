@@ -99,7 +99,7 @@ class TestCaseTest extends \Zend\Test\PHPUnit\DatabaseTestCase
 
     public function testCreateDbRowsetConvenienceMethodReturnType()
     {
-        $mock = $this->getMock('Zend\DB\Table\Rowset\Rowset', array(), array(array()));
+        $mock = $this->getMock('Zend\DB\Table\Rowset', array(), array(array()));
         $mock->expects($this->once())->method('toArray')->will($this->returnValue(array("foo" => 1, "bar" => 1)));
 
         $rowset = $this->createDbRowset($mock, "fooTable");

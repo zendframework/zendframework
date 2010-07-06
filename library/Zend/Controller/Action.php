@@ -26,17 +26,17 @@ namespace Zend\Controller;
 
 use Zend\Controller\Request\AbstractRequest,
     Zend\Controller\Response\AbstractResponse,
-    Zend\Controller\Action\HelperBroker\HelperBroker,
+    Zend\Controller\Action\HelperBroker,
     Zend\View;
 
 /**
  * @uses       \Zend\Controller\Action\Exception
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\HelperBroker
  * @uses       \Zend\Controller\ActionController
  * @uses       \Zend\Controller\Exception
  * @uses       \Zend\Controller\Front
  * @uses       \Zend\View\View
- * @uses       \Zend\View\ViewInterface
+ * @uses       \Zend\View\ViewEngine
  * @category   Zend
  * @package    Zend_Controller
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -89,14 +89,14 @@ abstract class Action implements ActionController
 
     /**
      * View object
-     * @var \Zend\View\ViewInterface
+     * @var \Zend\View\ViewEngine
      */
     public $view;
 
     /**
      * Helper Broker to assist in routing help requests to the proper object
      *
-     * @var \Zend\Controller\Action\HelperBroker\HelperBroker
+     * @var \Zend\Controller\Action\HelperBroker
      */
     protected $_helper = null;
 
@@ -159,7 +159,7 @@ abstract class Action implements ActionController
      * - helper path = views/helpers/
      * - filter path = views/filters/
      *
-     * @return \Zend\View\ViewInterface
+     * @return \Zend\View\ViewEngine
      * @throws \Zend\Controller\Exception if base view directory does not exist
      */
     public function initView()
@@ -168,7 +168,7 @@ abstract class Action implements ActionController
             return $this->view;
         }
 
-        if (isset($this->view) && ($this->view instanceof View\ViewInterface)) {
+        if (isset($this->view) && ($this->view instanceof View\ViewEngine)) {
             return $this->view;
         }
 

@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\Client;
-use Zend\Log;
+use Zend\Log,
+    Zend\Tool\Framework\Registry,
+    Zend\Tool\Framework\RegistryEnabled;
 
 /**
  * @uses       \Zend\Loader\Autoloader
@@ -32,20 +34,20 @@ use Zend\Log;
  * @uses       \Zend\Log\Writer\Null
  * @uses       \Zend\Tool\Framework\Client\Exception
  * @uses       \Zend\Tool\Framework\Client\Interactive\InputHandler
- * @uses       \Zend\Tool\Framework\Client\Interactive\InputInterface
+ * @uses       \Zend\Tool\Framework\Client\Interactive\InteractiveInput
  * @uses       \Zend\Tool\Framework\Client\Manifest
- * @uses       \Zend\Tool\Framework\Registry\Registry
- * @uses       \Zend\Tool\Framework\Registry\EnabledInterface
+ * @uses       \Zend\Tool\Framework\Registry
+ * @uses       \Zend\Tool\Framework\RegistryEnabled
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractClient implements \Zend\Tool\Framework\Registry\EnabledInterface
+abstract class AbstractClient implements RegistryEnabled
 {
 
     /**
-     * @var \Zend\Tool\Framework\Registry\Registry
+     * @var \Zend\Tool\Framework\Registry
      */
     protected $_registry = null;
 
@@ -71,7 +73,7 @@ abstract class AbstractClient implements \Zend\Tool\Framework\Registry\EnabledIn
 
         // this might look goofy, but this is setting up the
         // registry for dependency injection into the client
-        $registry = new \Zend\Tool\Framework\Registry\Registry();
+        $registry = new \Zend\Tool\Framework\Registry\FrameworkRegistry();
         $registry->setClient($this);
 
         // NOTE: at this moment, $this->_registry should contain the registry object
@@ -133,7 +135,7 @@ abstract class AbstractClient implements \Zend\Tool\Framework\Registry\EnabledIn
         // process the manifest repository
         $this->_registry->getManifestRepository()->process();
 
-        if ($this instanceof Interactive\OutputInterface) {
+        if ($this instanceof Interactive\InteractiveOutput) {
             $this->_registry->getResponse()->setContentCallback(array($this, 'handleInteractiveOutput'));
         }
 
@@ -165,13 +167,13 @@ abstract class AbstractClient implements \Zend\Tool\Framework\Registry\EnabledIn
     }
 
     /**
-     * setRegistry() - Required by the Zend_Tool_Framework_Registry_EnabledInterface
+     * setRegistry() - Required by the Zend\Tool\Framework\RegistryEnabled
      * interface which ensures proper registry dependency resolution
      *
-     * @param \Zend\Tool\Framework\Registry\RegistryInterface $registry
+     * @param \Zend\Tool\Framework\Registry $registry
      * @return \Zend\Tool\Framework\Client\AbstractClient
      */
-    public function setRegistry(\Zend\Tool\Framework\Registry\RegistryInterface $registry)
+    public function setRegistry(Registry $registry)
     {
         $this->_registry = $registry;
         return $this;
@@ -180,7 +182,7 @@ abstract class AbstractClient implements \Zend\Tool\Framework\Registry\EnabledIn
     /**
      * getRegistry();
      * 
-     * @return \Zend\Tool\Framework\Registry\RegistryInterface
+     * @return \Zend\Tool\Framework\Registry
      */
     public function getRegistry()
     {
@@ -196,7 +198,7 @@ abstract class AbstractClient implements \Zend\Tool\Framework\Registry\EnabledIn
      */
     public function hasInteractiveInput()
     {
-        return ($this instanceof Interactive\InputInterface);
+        return ($this instanceof Interactive\InteractiveInput);
     }
 
     public function promptInteractiveInput($inputRequest)
@@ -292,7 +294,7 @@ abstract class AbstractClient implements \Zend\Tool\Framework\Registry\EnabledIn
         $callParameters = array();
         foreach ($methodParameters as $methodParameterName => $methodParameterValue) {
             if (!array_key_exists($methodParameterName, $requestParameters) && $methodParameterValue['optional'] == false) {
-                if ($this instanceof Interactive\InputInterface) {
+                if ($this instanceof Interactive\InteractiveInput) {
                     $promptSting = $this->getMissingParameterPromptString($provider, $actionableMethod['action'], $methodParameterValue['name']);
                     $parameterPromptValue = $this->promptInteractiveInput($promptSting)->getContent();
                     if ($parameterPromptValue == null) {

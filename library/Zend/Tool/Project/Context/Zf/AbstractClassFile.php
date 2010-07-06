@@ -58,7 +58,7 @@ abstract class AbstractClassFile
                 $containingResource = $currentResource;
                 break;
             }
-        } while ($currentResource instanceof \Zend\Tool\Project\Profile\Resource\Resource
+        } while ($currentResource instanceof \Zend\Tool\Project\Profile\Resource
             && $currentResource = $currentResource->getParentResource());
         
         $fullClassName = '';

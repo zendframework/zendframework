@@ -80,7 +80,7 @@ class MailResourceTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions(array('transport' => array('type' => 'sendmail')));
         $resource->init();
-        $this->assertTrue($resource->getMail() instanceof \Zend\Mail\Transport\AbstractTransport);
+        $this->assertTrue($resource->getMail() instanceof \Zend\Mail\AbstractTransport);
         $this->assertTrue($resource->getMail() instanceof \Zend\Mail\Transport\Sendmail);
     }
 
@@ -90,7 +90,7 @@ class MailResourceTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions(array('transport' => array('type' => 'sendmail')));
         $resource->init();
-        $this->assertTrue($resource->init() instanceof \Zend\Mail\Transport\AbstractTransport);
+        $this->assertTrue($resource->init() instanceof \Zend\Mail\AbstractTransport);
         $this->assertTrue(Mail::getDefaultTransport() instanceof \Zend\Mail\Transport\Sendmail);
     }
 

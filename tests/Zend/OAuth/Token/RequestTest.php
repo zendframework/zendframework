@@ -3,7 +3,7 @@
 namespace ZendTest\OAuth\Token;
 
 use Zend\OAuth\Token\Request as RequestToken,
-    Zend\HTTP\Response\Response as HTTPResponse;
+    Zend\HTTP\Response as HTTPResponse;
 
 class RequestTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +12,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $response = new HTTPResponse(200, array());
         $token = new RequestToken($response);
-        $this->assertType('\\Zend\\Http\\Response\\Response', $token->getResponse());
+        $this->assertType('\\Zend\\Http\\Response', $token->getResponse());
     }
 
     public function testConstructorParsesRequestTokenFromResponseBody()

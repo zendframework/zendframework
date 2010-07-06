@@ -76,7 +76,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
         $this->_config = new Config\Xml(__DIR__ . '/_files/config.xml');
         // get a fresh new copy of ViewRenderer in each tests
-        HelperBroker\HelperBroker::resetHelpers();
+        HelperBroker::resetHelpers();
 
         $fO = array('lifetime' => 3600, 'automatic_serialization' => true);
         $bO = array('cache_dir'=> $this->_getTmpDir());
@@ -597,21 +597,21 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsViewFromViewRenderer()
     {
-        $viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $viewRenderer->setView(new View\View());
 
-        $this->assertType('Zend\View\ViewInterface', $this->_paginator->getView());
+        $this->assertType('Zend\View\ViewEngine', $this->_paginator->getView());
     }
 
     public function testGeneratesViewIfNonexistent()
     {
-        $this->assertType('Zend\View\ViewInterface', $this->_paginator->getView());
+        $this->assertType('Zend\View\ViewEngine', $this->_paginator->getView());
     }
 
     public function testGetsAndSetsView()
     {
         $this->_paginator->setView(new View\View());
-        $this->assertType('Zend\View\ViewInterface', $this->_paginator->getView());
+        $this->assertType('Zend\View\ViewEngine', $this->_paginator->getView());
     }
 
     public function testRenders()

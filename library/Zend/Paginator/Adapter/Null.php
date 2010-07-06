@@ -24,14 +24,16 @@
  */
 namespace Zend\Paginator\Adapter;
 
+use Zend\Paginator\Adapter;
+
 /**
- * @uses       \Zend\Paginator\Adapter\AdapterInterface
+ * @uses       \Zend\Paginator\Adapter
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Null implements AdapterInterface
+class Null implements Adapter
 {
     /**
      * Item count

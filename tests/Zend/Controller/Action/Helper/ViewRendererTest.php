@@ -94,7 +94,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                     ->setResponse($this->response);
 
         $this->helper   = new Helper\ViewRenderer();
-        HelperBroker\HelperBroker::addHelper($this->helper);
+        HelperBroker::addHelper($this->helper);
     }
 
     /**
@@ -105,7 +105,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        HelperBroker\HelperBroker::resetHelpers();
+        HelperBroker::resetHelpers();
     }
 
     public function testConstructorSetsViewWhenPassed()

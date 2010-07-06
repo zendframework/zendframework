@@ -246,8 +246,8 @@ class HttpClient extends \Zend\HTTP\Client
      * Method for filtering the HTTP response, though no filtering is
      * currently done.
      *
-     * @param \Zend\HTTP\Response\Response $response The response object to filter
-     * @return \Zend\HTTP\Response\Response The filterd response object
+     * @param \Zend\HTTP\Response $response The response object to filter
+     * @return \Zend\HTTP\Response The filterd response object
      */
     public function filterHttpResponse($response) {
         return $response;

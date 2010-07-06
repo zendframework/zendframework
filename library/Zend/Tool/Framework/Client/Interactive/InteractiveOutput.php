@@ -14,7 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Tool
- * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Framework\Client\Storage;
+namespace Zend\Tool\Framework\Client\Interactive;
 
 /**
  * @category   Zend
@@ -31,17 +30,9 @@ namespace Zend\Tool\Framework\Client\Storage;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface AdapterInterface
+interface InteractiveOutput
 {
 
-    public function put($name, $value);
-
-    public function get($name);
-
-    public function has($name);
-
-    public function remove($name);
-
-    public function getStreamUri($name);
+    public function handleInteractiveOutput($string);
 
 }

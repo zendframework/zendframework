@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Framework\Action;
+namespace Zend\Tool\Framework;
 
 /**
  * @category   Zend
@@ -31,7 +31,27 @@ namespace Zend\Tool\Framework\Action;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ActionInterface
+interface Metadata
 {
+
+    /**
+     * getType()
+     *
+     * The type of metadata this describes
+     *
+     */
+    public function getType();
+
+    /**
+     * getName()
+     *
+     */
     public function getName();
+
+    /**
+     * getValue()
+     *
+     */
+    public function getValue();
+    
 }

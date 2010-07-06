@@ -41,7 +41,7 @@ namespace Zend\Tool\Project\Context\Content\Engine;
 class Engine
 {
     /**
-     * @var \Zend\Tool\Framework\Client\Storage\Storage
+     * @var \Zend\Tool\Framework\Client\Storage
      */
     protected $_storage = null;
 
@@ -58,9 +58,9 @@ class Engine
     /**
      * __construct()
      *
-     * @param \Zend\Tool\Framework\Client\Storage\Storage $storage
+     * @param \Zend\Tool\Framework\Client\Storage $storage
      */
-    public function __construct(\Zend\Tool\Framework\Client\Storage\Storage $storage)
+    public function __construct(\Zend\Tool\Framework\Client\Storage $storage)
     {
         $this->_storage = $storage;
         $this->_engines = array(

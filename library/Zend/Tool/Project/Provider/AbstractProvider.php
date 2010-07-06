@@ -28,7 +28,7 @@ use Zend\Tool\Project\Context;
 
 /**
  * @uses       \Zend\Tool\Framework\Provider\AbstractProvider
- * @uses       \Zend\Tool\Framework\Registry\Registry
+ * @uses       \Zend\Tool\Framework\Registry\FrameworkRegistry
  * @uses       \Zend\Tool\Project\Context\Content\Engine\Engine
  * @uses       \Zend\Tool\Project\Context\Repository
  * @uses       \Zend\Tool\Project\Profile\Profile

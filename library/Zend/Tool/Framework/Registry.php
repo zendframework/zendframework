@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Framework\Registry;
+namespace Zend\Tool\Framework;
 
 /**
  * @category   Zend
@@ -30,7 +30,7 @@ namespace Zend\Tool\Framework\Registry;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface RegistryInterface
+interface Registry
 {
 
 
@@ -38,7 +38,7 @@ interface RegistryInterface
      * setClient()
      *
      * @param \Zend\Tool\Framework\Client\AbstractClient $client
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @return \Zend\Tool\Framework\Registry
      */
     public function setClient(\Zend\Tool\Framework\Client\AbstractClient $client);
 
@@ -52,10 +52,10 @@ interface RegistryInterface
     /**
      * setLoader()
      *
-     * @param \Zend\Tool\Framework\Loader\AbstractLoader $loader
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @param \Zend\Tool\Framework\Loader $loader
+     * @return \Zend\Tool\Framework\Registry
      */
-    public function setLoader(\Zend\Tool\Framework\Loader\LoaderInterface $loader);
+    public function setLoader(\Zend\Tool\Framework\Loader $loader);
 
     /**
      * getLoader()
@@ -68,7 +68,7 @@ interface RegistryInterface
      * setActionRepository()
      *
      * @param \Zend\Tool\Framework\Action\Repository $actionRepository
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @return \Zend\Tool\Framework\Registry
      */
     public function setActionRepository(\Zend\Tool\Framework\Action\Repository $actionRepository);
 
@@ -83,7 +83,7 @@ interface RegistryInterface
      * setProviderRepository()
      *
      * @param \Zend\Tool\Framework\Provider\Repository $providerRepository
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @return \Zend\Tool\Framework\Registry
      */
     public function setProviderRepository(\Zend\Tool\Framework\Provider\Repository $providerRepository);
 
@@ -98,7 +98,7 @@ interface RegistryInterface
      * setManifestRepository()
      *
      * @param \Zend\Tool\Framework\Manifest\Repository $manifestRepository
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @return \Zend\Tool\Framework\Registry
      */
     public function setManifestRepository(\Zend\Tool\Framework\Manifest\Repository $manifestRepository);
 
@@ -113,7 +113,7 @@ interface RegistryInterface
      * setRequest()
      *
      * @param \Zend\Tool\Framework\Client\Request $request
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @return \Zend\Tool\Framework\Registry
      */
     public function setRequest(\Zend\Tool\Framework\Client\Request $request);
 
@@ -127,15 +127,15 @@ interface RegistryInterface
     /**
      * setResponse()
      *
-     * @param \Zend\Tool\Framework\Client\Response\Response $response
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @param \Zend\Tool\Framework\Client\Response $response
+     * @return \Zend\Tool\Framework\Registry
      */
-    public function setResponse(\Zend\Tool\Framework\Client\Response\Response $response);
+    public function setResponse(\Zend\Tool\Framework\Client\Response $response);
 
     /**
      * getResponse()
      *
-     * @return \Zend\Tool\Framework\Client\Response\Response
+     * @return \Zend\Tool\Framework\Client\Response
      */
     public function getResponse();
 

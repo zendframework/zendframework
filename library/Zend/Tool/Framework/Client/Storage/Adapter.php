@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Tool
+ * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -22,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Framework\Client\Response\ContentDecorator;
+namespace Zend\Tool\Framework\Client\Storage;
 
 /**
  * @category   Zend
@@ -30,11 +31,17 @@ namespace Zend\Tool\Framework\Client\Response\ContentDecorator;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ContentDecoratorInterface
+interface Adapter
 {
 
-    public function getName();
+    public function put($name, $value);
 
-    public function decorate($content, $decoratorValue);
+    public function get($name);
+
+    public function has($name);
+
+    public function remove($name);
+
+    public function getStreamUri($name);
 
 }

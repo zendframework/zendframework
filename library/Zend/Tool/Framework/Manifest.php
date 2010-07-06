@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Framework\Manifest;
+namespace Zend\Tool\Framework;
 
 /**
  * @category   Zend
@@ -30,7 +30,7 @@ namespace Zend\Tool\Framework\Manifest;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ManifestInterface
+interface Manifest
 {
 
     /**
@@ -63,7 +63,7 @@ interface ManifestInterface
      * Should either return a single action, or an array
      * of actions
      *
-     * @return array|\Zend\Tool\Framework\Action\ActionInterface
+     * @return array|\Zend\Tool\Framework\Action
      **
 
     public function getActions();

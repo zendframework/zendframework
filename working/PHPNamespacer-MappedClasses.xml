@@ -14723,10 +14723,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Action/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Action_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Action/ActionInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Action</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Framework/Action.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework</newNamespace>
       <newClassName>ActionInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Action\ActionInterface</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Action</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Action/Repository.php</originalRelativeFilePath>
@@ -14811,10 +14811,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Console.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Client_Console</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Client/Console/Console.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Client\Console</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Framework/Client/Console.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework\Client</newNamespace>
       <newClassName>Console</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Client\Console\Console</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Client\Console</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Exception.php</originalRelativeFilePath>
@@ -14835,10 +14835,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Interactive/InputInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Client_Interactive_InputInterface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Client/Interactive/InputInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Tool/Framework/Client/Interactive/InteractiveInput.php</newRelativeFilePath>
       <newNamespace>Zend\Tool\Framework\Client\Interactive</newNamespace>
-      <newClassName>InputInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Client\Interactive\InputInterface</newFullyQualifiedName>
+      <newClassName>InteractiveInput</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Client\Interactive\InteractiveInput</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Interactive/InputRequest.php</originalRelativeFilePath>
@@ -14859,10 +14859,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Interactive/OutputInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Client_Interactive_OutputInterface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Client/Interactive/OutputInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Tool/Framework/Client/Interactive/InteractiveOutput.php</newRelativeFilePath>
       <newNamespace>Zend\Tool\Framework\Client\Interactive</newNamespace>
-      <newClassName>OutputInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Client\Interactive\OutputInterface</newFullyQualifiedName>
+      <newClassName>InteractiveOutput</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Client\Interactive\InteractiveOutput</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Manifest.php</originalRelativeFilePath>
@@ -14883,10 +14883,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Response/ContentDecorator/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Client_Response_ContentDecorator_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Client/Response/ContentDecorator/ContentDecoratorInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Client\Response\ContentDecorator</newNamespace>
-      <newClassName>ContentDecoratorInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Client\Response\ContentDecorator\ContentDecoratorInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Framework/Client/Response/ContentDecorator.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework\Client\Response</newNamespace>
+      <newClassName>ContentDecorator</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Client\Response\ContentDecorator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Response/ContentDecorator/Separator.php</originalRelativeFilePath>
@@ -14899,18 +14899,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Response.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Client_Response</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Client/Response/Response.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Client\Response</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Framework/Client/Response.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework\Client</newNamespace>
       <newClassName>Response</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Client\Response\Response</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Client\Response</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Storage/AdapterInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Client_Storage_AdapterInterface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Client/Storage/AdapterInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Tool/Framework/Client/Storage/Adapter.php</newRelativeFilePath>
       <newNamespace>Zend\Tool\Framework\Client\Storage</newNamespace>
-      <newClassName>AdapterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Client\Storage\AdapterInterface</newFullyQualifiedName>
+      <newClassName>Adapter</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Client\Storage\Adapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Storage/Directory.php</originalRelativeFilePath>
@@ -14923,10 +14923,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Client/Storage.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Client_Storage</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Client/Storage/Storage.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Client\Storage</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Framework/Client/Storage.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework\Client</newNamespace>
       <newClassName>Storage</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Client\Storage\Storage</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Client\Storage</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Exception.php</originalRelativeFilePath>
@@ -14963,18 +14963,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Loader/IncludePathLoader.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Loader_IncludePathLoader</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Loader/IncludePathLoader/IncludePathLoader.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Loader\IncludePathLoader</newNamespace>
+      <newRelativeFilePath>Zend/Tool/Framework/Loader/IncludePathLoader.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework\Loader</newNamespace>
       <newClassName>IncludePathLoader</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Loader\IncludePathLoader\IncludePathLoader</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Loader\IncludePathLoader</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Loader/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Loader_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Loader/LoaderInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Loader</newNamespace>
-      <newClassName>LoaderInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Loader\LoaderInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Framework/Loader.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework</newNamespace>
+      <newClassName>Loader</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Loader</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Manifest/ActionManifestable.php</originalRelativeFilePath>
@@ -15003,10 +15003,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Manifest/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Manifest_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Manifest/ManifestInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Manifest</newNamespace>
-      <newClassName>ManifestInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Manifest\ManifestInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Framework/Manifest.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework</newNamespace>
+      <newClassName>Manifest</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Manifest</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Manifest/MetadataManifestable.php</originalRelativeFilePath>
@@ -15059,10 +15059,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Metadata/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Metadata_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Metadata/MetadataInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Metadata</newNamespace>
-      <newClassName>MetadataInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Metadata\MetadataInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Framework/Metadata.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework</newNamespace>
+      <newClassName>Metadata</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Metadata</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Metadata/Tool.php</originalRelativeFilePath>
@@ -15107,10 +15107,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Provider/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Provider_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Provider/ProviderInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Provider</newNamespace>
-      <newClassName>ProviderInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Provider\ProviderInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Framework/Provider.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework</newNamespace>
+      <newClassName>Provider</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Provider</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Provider/Pretendable.php</originalRelativeFilePath>
@@ -15139,10 +15139,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Registry/EnabledInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Registry_EnabledInterface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Registry/EnabledInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Registry</newNamespace>
-      <newClassName>EnabledInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Registry\EnabledInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Framework/RegistryEnabled.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework</newNamespace>
+      <newClassName>RegistryEnabled</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\RegistryEnabled</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Registry/Exception.php</originalRelativeFilePath>
@@ -15155,18 +15155,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Registry/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Registry_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Registry/RegistryInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Tool\Framework\Registry</newNamespace>
-      <newClassName>RegistryInterface</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Registry\RegistryInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Tool/Framework/Registry.php</newRelativeFilePath>
+      <newNamespace>Zend\Tool\Framework</newNamespace>
+      <newClassName>Registry</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Registry</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/Registry.php</originalRelativeFilePath>
       <originalClassName>Zend_Tool_Framework_Registry</originalClassName>
-      <newRelativeFilePath>Zend/Tool/Framework/Registry/Registry.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Tool/Framework/Registry/FrameworkRegistry.php</newRelativeFilePath>
       <newNamespace>Zend\Tool\Framework\Registry</newNamespace>
-      <newClassName>Registry</newClassName>
-      <newFullyQualifiedName>Zend\Tool\Framework\Registry\Registry</newFullyQualifiedName>
+      <newClassName>FrameworkRegistry</newClassName>
+      <newFullyQualifiedName>Zend\Tool\Framework\Registry\FrameworkRegistry</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Tool/Framework/System/Action/Create.php</originalRelativeFilePath>

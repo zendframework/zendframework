@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Framework\Client\Response;
+namespace Zend\Tool\Framework\Client;
 
 /**
  * @uses       \Zend\Tool\Framework\Client\Exception
@@ -63,7 +63,7 @@ class Response
      * setContentCallback()
      *
      * @param callback $callback
-     * @return \Zend\Tool\Framework\Client\Response\Response
+     * @return \Zend\Tool\Framework\Client\Response
      */
     public function setContentCallback($callback)
     {
@@ -78,7 +78,7 @@ class Response
      * setContent()
      *
      * @param string $content
-     * @return \Zend\Tool\Framework\Client\Response\Response
+     * @return \Zend\Tool\Framework\Client\Response
      */
     public function setContent($content, Array $decoratorOptions = array())
     {
@@ -93,7 +93,7 @@ class Response
      * appendCallback
      *
      * @param string $content
-     * @return \Zend\Tool\Framework\Client\Response\Response
+     * @return \Zend\Tool\Framework\Client\Response
      */
     public function appendContent($content, Array $decoratorOptions = array())
     {
@@ -113,7 +113,7 @@ class Response
      *
      * @param array $decoratorOptions
      * @param bool $mergeIntoExisting
-     * @return \Zend\Tool\Framework\Client\Response\Response
+     * @return \Zend\Tool\Framework\Client\Response
      */
     public function setDefaultDecoratorOptions(Array $decoratorOptions, $mergeIntoExisting = false)
     {
@@ -149,7 +149,7 @@ class Response
      * setException()
      *
      * @param Exception $exception
-     * @return \Zend\Tool\Framework\Client\Response\Response
+     * @return \Zend\Tool\Framework\Client\Response
      */
     public function setException(\Exception $exception)
     {
@@ -170,10 +170,10 @@ class Response
     /**
      * Add Content Decorator
      *
-     * @param \Zend\Tool\Framework\Client\Response\ContentDecorator\ContentDecoratorInterface $contentDecorator
+     * @param \Zend\Tool\Framework\Client\Response\ContentDecorator $contentDecorator
      * @return unknown
      */
-    public function addContentDecorator(ContentDecorator\ContentDecoratorInterface $contentDecorator)
+    public function addContentDecorator(Response\ContentDecorator $contentDecorator)
     {
         $decoratorName = strtolower($contentDecorator->getName());
         $this->_decorators[$decoratorName] = $contentDecorator;

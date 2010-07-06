@@ -34,7 +34,7 @@ namespace ZendTest\Tool\Framework\TestAsset;
  */
 class EmptyClient
     extends \Zend\Tool\Framework\Client\AbstractClient
-    implements \Zend\Tool\Framework\Registry\EnabledInterface
+    implements \Zend\Tool\Framework\RegistryEnabled
 {
 
     protected $_registry = null;
@@ -49,7 +49,7 @@ class EmptyClient
         return $this;
     }
 
-    public function setRegistry(\Zend\Tool\Framework\Registry\RegistryInterface $registry)
+    public function setRegistry(\Zend\Tool\Framework\Registry $registry)
     {
         $this->_registry = $registry;
     }

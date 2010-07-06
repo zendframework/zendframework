@@ -23,11 +23,11 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Framework\Client\Storage;
+namespace Zend\Tool\Framework\Client;
 
 /**
  * @uses       \Zend\Loader
- * @uses       \Zend\Tool\Framework\Client\Storage\AdapterInterface
+ * @uses       \Zend\Tool\Framework\Client\Storage\Adapter
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -37,7 +37,7 @@ class Storage
 {
 
     /**
-     * @var \Zend\Tool\Framework\Client\Storage\AdapterInterface
+     * @var \Zend\Tool\Framework\Client\Storage\Adapter
      */
     protected $_adapter = null;
 
@@ -51,7 +51,7 @@ class Storage
     public function setAdapter($adapter)
     {
         if (is_string($adapter)) {
-            $storageAdapterClass = 'Zend_Tool_Framework_Client_Storage_' . ucfirst($adapter);
+            $storageAdapterClass = 'Zend\Tool\Framework\Client\Storage\\' . ucfirst($adapter);
             \Zend\Loader::loadClass($storageAdapterClass);
             $adapter = new $storageAdapterClass();
         }
@@ -60,7 +60,7 @@ class Storage
 
     public function isEnabled()
     {
-        return ($this->_adapter instanceof AdapterInterface);
+        return ($this->_adapter instanceof Storage\Adapter);
     }
 
     public function put($name, $value)

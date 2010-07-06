@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Tool
+ * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -22,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Framework\Client\Interactive;
+namespace Zend\Tool\Framework;
 
 /**
  * @category   Zend
@@ -30,17 +31,6 @@ namespace Zend\Tool\Framework\Client\Interactive;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface InputInterface
+interface Provider
 {
-
-    /**
-     * Handle Interactive Input Request
-     *
-     * @param \Zend\Tool\Framework\Client\Interactive\InputRequest $inputRequest
-     * @return \Zend\Tool\Framework\Client\Interactive\InputResponse|string
-     */
-    public function handleInteractiveInputRequest(InputRequest $inputRequest);
-
-    public function getMissingParameterPromptString(\Zend\Tool\Framework\Provider\ProviderInterface $provider, \Zend\Tool\Framework\Action\ActionInterface $actionInterface, $missingParameterName);
-
 }

@@ -14,7 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Tool
- * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,23 +22,19 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Framework\Registry;
+namespace Zend\Tool\Framework\Client\Response;
 
 /**
- * This is a convenience class.
- *
- * At current it will return the request and response from the client registry
- * as they are the more common things that will be needed by providers
- *
- *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface EnabledInterface
+interface ContentDecorator
 {
 
-    public function setRegistry(RegistryInterface $registry);
+    public function getName();
+
+    public function decorate($content, $decoratorValue);
 
 }

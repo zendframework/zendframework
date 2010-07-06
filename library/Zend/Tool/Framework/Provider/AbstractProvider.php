@@ -24,6 +24,9 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\Provider;
+use Zend\Tool\Framework\Provider,
+    Zend\Tool\Framework\Registry,
+    Zend\Tool\Framework\RegistryEnabled;
 
 /**
  * This is a convenience class.
@@ -32,29 +35,28 @@ namespace Zend\Tool\Framework\Provider;
  * as they are the more common things that will be needed by providers
  *
  *
- * @uses       \Zend\Tool\Framework\Provider\ProviderInterface
- * @uses       \Zend\Tool\Framework\Registry\EnabledInterface
+ * @uses       \Zend\Tool\Framework\Provider
+ * @uses       \Zend\Tool\Framework\RegistryEnabled
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractProvider
-    implements ProviderInterface, \Zend\Tool\Framework\Registry\EnabledInterface
+abstract class AbstractProvider implements Provider, RegistryEnabled
 {
 
     /**
-     * @var \Zend\Tool\Framework\Registry\RegistryInterface
+     * @var \Zend\Tool\Framework\Registry
      */
     protected $_registry = null;
 
     /**
-     * setRegistry() - required by Zend_Tool_Framework_Registry_EnabledInterface
+     * setRegistry() - required by Zend\Tool\Framework\RegistryEnabled
      *
-     * @param \Zend\Tool\Framework\Registry\RegistryInterface $registry
+     * @param \Zend\Tool\Framework\Registry $registry
      * @return \Zend\Tool\Framework\Provider\AbstractProvider
      */
-    public function setRegistry(\Zend\Tool\Framework\Registry\RegistryInterface $registry)
+    public function setRegistry(Registry $registry)
     {
         $this->_registry = $registry;
         return $this;

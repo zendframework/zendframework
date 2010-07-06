@@ -46,8 +46,8 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         $this->_request = new \Zend\Tool\Framework\Client\Request();
-        $this->_response = new \Zend\Tool\Framework\Client\Response\Response();
-        $this->_registry = new \Zend\Tool\Framework\Registry\Registry();
+        $this->_response = new \Zend\Tool\Framework\Client\Response();
+        $this->_registry = new \Zend\Tool\Framework\Registry\FrameworkRegistry();
 
         $this->_registry->setRequest($this->_request);
         $this->_registry->setResponse($this->_response);

@@ -23,11 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Framework\Client\Console;
-
-require_once 'Zend/Tool/Framework/Client/AbstractClient.php';
-//require_once 'Zend\Tool\Framework\Client\Interactive\InputInterface.php';
-//require_once 'Zend\Tool\Framework\Client\Interactive\OutputInterface.php';
+namespace Zend\Tool\Framework\Client;
 
 /**
  * Zend_Tool_Framework_Client_Console - the CLI Client implementation for Zend_Tool_Framework
@@ -43,7 +39,7 @@ require_once 'Zend/Tool/Framework/Client/AbstractClient.php';
  * @uses       \Zend\Tool\Framework\Client\Console\ResponseDecorator\Blockize
  * @uses       \Zend\Tool\Framework\Client\Console\ResponseDecorator\Colorizer
  * @uses       \Zend\Tool\Framework\Client\Console\ResponseDecorator\Indention
- * @uses       \Zend\Tool\Framework\Client\Interactive\InputInterface
+ * @uses       \Zend\Tool\Framework\Client\Interactive\InteractiveInput
  * @uses       \Zend\Tool\Framework\Client\Interactive\OutputInterface
  * @uses       \Zend\Tool\Framework\Client\Response\ContentDecorator\Separator
  * @uses       \Zend\Tool\Framework\Client\Storage\Directory
@@ -55,8 +51,8 @@ require_once 'Zend/Tool/Framework/Client/AbstractClient.php';
  */
 class Console
     extends \Zend\Tool\Framework\Client\AbstractClient
-    implements \Zend\Tool\Framework\Client\Interactive\InputInterface,
-               \Zend\Tool\Framework\Client\Interactive\OutputInterface
+    implements \Zend\Tool\Framework\Client\Interactive\InteractiveInput,
+               \Zend\Tool\Framework\Client\Interactive\InteractiveOutput
 {
 
     /**
@@ -232,7 +228,7 @@ class Console
     }
 
     /**
-     * handleInteractiveInputRequest() is required by the Interactive InputInterface
+     * handleInteractiveInputRequest() is required by the InteractiveInput interface
      *
      *
      * @param \Zend\Tool\Framework\Client\Interactive\InputRequest $inputRequest
@@ -246,7 +242,7 @@ class Console
     }
 
     /**
-     * handleInteractiveOutput() is required by the Interactive OutputInterface
+     * handleInteractiveOutput() is required by the InteractiveOutput interface
      *
      * This allows us to display output immediately from providers, rather
      * than displaying it after the provider is done.
@@ -261,12 +257,12 @@ class Console
     /**
      * getMissingParameterPromptString()
      *
-     * @param \Zend\Tool\Framework\Provider\ProviderInterface $provider
-     * @param \Zend\Tool\Framework\Action\ActionInterface $actionInterface
+     * @param \Zend\Tool\Framework\Provider $provider
+     * @param \Zend\Tool\Framework\Action $actionInterface
      * @param string $missingParameterName
      * @return string
      */
-    public function getMissingParameterPromptString(\Zend\Tool\Framework\Provider\ProviderInterface $provider, \Zend\Tool\Framework\Action\ActionInterface $actionInterface, $missingParameterName)
+    public function getMissingParameterPromptString(\Zend\Tool\Framework\Provider $provider, \Zend\Tool\Framework\Action $actionInterface, $missingParameterName)
     {
         return 'Please provide a value for $' . $missingParameterName;
     }

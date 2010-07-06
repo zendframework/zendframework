@@ -14,7 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Tool
- * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Framework\Metadata;
+namespace Zend\Tool\Framework\Client\Interactive;
 
 /**
  * @category   Zend
@@ -31,27 +30,17 @@ namespace Zend\Tool\Framework\Metadata;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface MetadataInterface
+interface InteractiveInput
 {
 
     /**
-     * getType()
+     * Handle Interactive Input Request
      *
-     * The type of metadata this describes
-     *
+     * @param \Zend\Tool\Framework\Client\Interactive\InputRequest $inputRequest
+     * @return \Zend\Tool\Framework\Client\Interactive\InputResponse|string
      */
-    public function getType();
+    public function handleInteractiveInputRequest(InputRequest $inputRequest);
 
-    /**
-     * getName()
-     *
-     */
-    public function getName();
+    public function getMissingParameterPromptString(\Zend\Tool\Framework\Provider $provider, \Zend\Tool\Framework\Action $actionInterface, $missingParameterName);
 
-    /**
-     * getValue()
-     *
-     */
-    public function getValue();
-    
 }

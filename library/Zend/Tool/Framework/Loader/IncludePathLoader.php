@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Framework\Loader\IncludePathLoader;
+namespace Zend\Tool\Framework\Loader;
 
 /**
  * @uses       RecursiveDirectoryIterator
@@ -36,7 +36,7 @@ namespace Zend\Tool\Framework\Loader\IncludePathLoader;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class IncludePathLoader extends \Zend\Tool\Framework\Loader\AbstractLoader
+class IncludePathLoader extends AbstractLoader
 {
 
     /**

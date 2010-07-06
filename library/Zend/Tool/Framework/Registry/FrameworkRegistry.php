@@ -24,30 +24,33 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\Registry;
-use Zend\Tool\Framework\Client;
-use Zend\Tool\Framework\Client\Storage;
-use Zend\Tool\Framework\Action;
-use Zend\Tool\Framework\Provider;
-use Zend\Tool\Framework\Manifest;
-use Zend\Tool\Framework\Client\Response;
+
+use Zend\Tool\Framework\Registry,
+    Zend\Tool\Framework\RegistryEnabled,
+    Zend\Tool\Framework\Client,
+    Zend\Tool\Framework\Client\Storage,
+    Zend\Tool\Framework\Action,
+    Zend\Tool\Framework\Provider,
+    Zend\Tool\Framework\Manifest,
+    Zend\Tool\Framework\Client\Response;
 
 /**
  * @uses       \Zend\Tool\Framework\Action\Repository
  * @uses       \Zend\Tool\Framework\Client\Config
  * @uses       \Zend\Tool\Framework\Client\Request
- * @uses       \Zend\Tool\Framework\Client\Response\Response
- * @uses       \Zend\Tool\Framework\Client\Storage\Storage
- * @uses       \Zend\Tool\Framework\Loader\IncludePathLoader\IncludePathLoader
+ * @uses       \Zend\Tool\Framework\Client\Response
+ * @uses       \Zend\Tool\Framework\Client\Storage
+ * @uses       \Zend\Tool\Framework\Loader\IncludePathLoader
  * @uses       \Zend\Tool\Framework\Manifest\Repository
  * @uses       \Zend\Tool\Framework\Provider\Repository
  * @uses       \Zend\Tool\Framework\Registry\Exception
- * @uses       \Zend\Tool\Framework\Registry\RegistryInterface
+ * @uses       \Zend\Tool\Framework\Registry
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Registry implements RegistryInterface
+class FrameworkRegistry implements Registry
 {
     /**
      * @var \Zend\Tool\Framework\Loader\AbstractLoader
@@ -65,7 +68,7 @@ class Registry implements RegistryInterface
     protected $_config = null;
 
     /**
-     * @var \Zend\Tool\Framework\Client\Storage\Storage
+     * @var \Zend\Tool\Framework\Client\Storage
      */
     protected $_storage = null;
 
@@ -90,7 +93,7 @@ class Registry implements RegistryInterface
     protected $_request = null;
 
     /**
-     * @var \Zend\Tool\Framework\Client\Response\Response
+     * @var \Zend\Tool\Framework\Client\Response
      */
     protected $_response = null;
 
@@ -117,7 +120,7 @@ class Registry implements RegistryInterface
      * Enter description here...
      *
      * @param \Zend\Tool\Framework\Client\AbstractClient $client
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @return \Zend\Tool\Framework\Registry\FrameworkRegistry
      */
     public function setClient(Client\AbstractClient $client)
     {
@@ -142,7 +145,7 @@ class Registry implements RegistryInterface
      * setConfig()
      *
      * @param \Zend\Tool\Framework\Client\Config $config
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @return \Zend\Tool\Framework\Registry\FrameworkRegistry
      */
     public function setConfig(Client\Config $config)
     {
@@ -167,10 +170,10 @@ class Registry implements RegistryInterface
     /**
      * setStorage()
      *
-     * @param \Zend\Tool\Framework\Client\Storage\Storage $storage
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @param \Zend\Tool\Framework\Client\Storage $storage
+     * @return \Zend\Tool\Framework\Registry\FrameworkRegistry
      */
-    public function setStorage(Storage\Storage $storage)
+    public function setStorage(Storage $storage)
     {
         $this->_storage = $storage;
         return $this;
@@ -179,12 +182,12 @@ class Registry implements RegistryInterface
     /**
      * getConfig()
      *
-     * @return \Zend\Tool\Framework\Client\Storage\Storage
+     * @return \Zend\Tool\Framework\Client\Storage
      */
     public function getStorage()
     {
         if ($this->_storage === null) {
-            $this->setStorage(new Storage\Storage());
+            $this->setStorage(new Storage());
         }
 
         return $this->_storage;
@@ -193,10 +196,10 @@ class Registry implements RegistryInterface
     /**
      * setLoader()
      *
-     * @param \Zend\Tool\Framework\Loader\LoaderInterface $loader
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @param \Zend\Tool\Framework\Loader $loader
+     * @return \Zend\Tool\Framework\Registry\FrameworkRegistry
      */
-    public function setLoader(\Zend\Tool\Framework\Loader\LoaderInterface $loader)
+    public function setLoader(\Zend\Tool\Framework\Loader $loader)
     {
         $this->_loader = $loader;
         if ($this->isObjectRegistryEnablable($this->_loader)) {
@@ -208,12 +211,12 @@ class Registry implements RegistryInterface
     /**
      * getLoader()
      *
-     * @return \Zend\Tool\Framework\Loader\AbstractLoader
+     * @return \Zend\Tool\Framework\Loader
      */
     public function getLoader()
     {
         if ($this->_loader === null) {
-            $this->setLoader(new \Zend\Tool\Framework\Loader\IncludePathLoader\IncludePathLoader());
+            $this->setLoader(new \Zend\Tool\Framework\Loader\IncludePathLoader());
         }
 
         return $this->_loader;
@@ -223,7 +226,7 @@ class Registry implements RegistryInterface
      * setActionRepository()
      *
      * @param \Zend\Tool\Framework\Action\Repository $actionRepository
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @return \Zend\Tool\Framework\Registry\FrameworkRegistry
      */
     public function setActionRepository(Action\Repository $actionRepository)
     {
@@ -252,7 +255,7 @@ class Registry implements RegistryInterface
      * setProviderRepository()
      *
      * @param \Zend\Tool\Framework\Provider\Repository $providerRepository
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @return \Zend\Tool\Framework\Registry\FrameworkRegistry
      */
     public function setProviderRepository(Provider\Repository $providerRepository)
     {
@@ -281,7 +284,7 @@ class Registry implements RegistryInterface
      * setManifestRepository()
      *
      * @param \Zend\Tool\Framework\Manifest\Repository $manifestRepository
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @return \Zend\Tool\Framework\Registry\FrameworkRegistry
      */
     public function setManifestRepository(Manifest\Repository $manifestRepository)
     {
@@ -310,7 +313,7 @@ class Registry implements RegistryInterface
      * setRequest()
      *
      * @param \Zend\Tool\Framework\Client\Request $request
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @return \Zend\Tool\Framework\Registry\FrameworkRegistry
      */
     public function setRequest(Client\Request $request)
     {
@@ -335,10 +338,10 @@ class Registry implements RegistryInterface
     /**
      * setResponse()
      *
-     * @param \Zend\Tool\Framework\Client\Response\Response $response
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @param \Zend\Tool\Framework\Client\Response $response
+     * @return \Zend\Tool\Framework\Registry\FrameworkRegistry
      */
-    public function setResponse(Response\Response $response)
+    public function setResponse(Response $response)
     {
         $this->_response = $response;
         return $this;
@@ -347,12 +350,12 @@ class Registry implements RegistryInterface
     /**
      * getResponse()
      *
-     * @return \Zend\Tool\Framework\Client\Response\Response
+     * @return \Zend\Tool\Framework\Client\Response
      */
     public function getResponse()
     {
         if ($this->_response == null) {
-            $this->setResponse(new Response\Response());
+            $this->setResponse(new Response());
         }
 
         return $this->_response;
@@ -401,14 +404,14 @@ class Registry implements RegistryInterface
             throw new Exception('isObjectRegistryEnablable() expects an object.');
         }
 
-        return ($object instanceof EnabledInterface);
+        return ($object instanceof RegistryEnabled);
     }
 
     /**
      * enableRegistryOnObject() - make an object registry enabled
      *
      * @param object $object
-     * @return \Zend\Tool\Framework\Registry\Registry
+     * @return \Zend\Tool\Framework\Registry\FrameworkRegistry
      */
     public function enableRegistryOnObject($object)
     {

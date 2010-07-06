@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\Client\Console;
-use Zend\Tool\Framework\Metadata;
+use Zend\Tool\Framework\Metadata,
+    Zend\Tool\Framework\Manifest\MetadataManifestable,
+    Zend\Tool\Framework\RegistryEnabled;
 
 /**
  * Zend_Tool_Framework_Client_ConsoleClient_Manifest
@@ -34,29 +36,27 @@ use Zend\Tool\Framework\Metadata;
  * @uses       \Zend\Filter\Word\CamelCaseToDash
  * @uses       \Zend\Tool\Framework\Manifest\MetadataManifestable
  * @uses       \Zend\Tool\Framework\Metadata\Tool
- * @uses       \Zend\Tool\Framework\Registry\EnabledInterface
+ * @uses       \Zend\Tool\Framework\RegistryEnabled
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Manifest
-    implements \Zend\Tool\Framework\Registry\EnabledInterface,
-               \Zend\Tool\Framework\Manifest\MetadataManifestable
+class Manifest implements RegistryEnabled, MetadataManifestable
 {
 
     /**
-     * @var \Zend\Tool\Framework\Registry\RegistryInterface
+     * @var \Zend\Tool\Framework\Registry
      */
     protected $_registry = null;
 
     /**
-     * setRegistry() - Required for the Zend_Tool_Framework_Registry_EnabledInterface interface
+     * setRegistry() - Required for the Zend\Tool\Framework\RegistryEnabled interface
      *
-     * @param \Zend\Tool\Framework\Registry\RegistryInterface $registry
+     * @param \Zend\Tool\Framework\Registry $registry
      * @return \Zend\Tool\Framework\Client\Console\Manifest
      */
-    public function setRegistry(\Zend\Tool\Framework\Registry\RegistryInterface $registry)
+    public function setRegistry(\Zend\Tool\Framework\Registry $registry)
     {
         $this->_registry = $registry;
         return $this;

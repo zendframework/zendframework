@@ -32,7 +32,7 @@ namespace ZendTest\Tool\Framework\Manifest\TestAsset;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ActionTwo implements \Zend\Tool\Framework\Action\ActionInterface
+class ActionTwo implements \Zend\Tool\Framework\Action
 {
     public function getName()
     {

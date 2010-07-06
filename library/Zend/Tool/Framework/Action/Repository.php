@@ -25,23 +25,25 @@
  */
 namespace Zend\Tool\Framework\Action;
 
+use Zend\Tool\Framework\Action,
+    Zend\Tool\Framework\RegistryEnabled;
+
 /**
  * @uses       ArrayIterator
  * @uses       Countable
  * @uses       IteratorAggregate
  * @uses       \Zend\Tool\Framework\Action\Exception
- * @uses       \Zend\Tool\Framework\Registry\EnabledInterface
+ * @uses       \Zend\Tool\Framework\RegistryEnabled
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Repository
-    implements \Zend\Tool\Framework\Registry\EnabledInterface, \IteratorAggregate, \Countable
+class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
 {
 
     /**
-     * @var \Zend\Tool\Framework\Registry\RegistryInterface
+     * @var \Zend\Tool\Framework\Registry
      */
     protected $_registry = null;
 
@@ -53,9 +55,9 @@ class Repository
     /**
      * setRegistry()
      *
-     * @param \Zend\Tool\Framework\Registry\RegistryInterface $registry
+     * @param \Zend\Tool\Framework\Registry $registry
      */
-    public function setRegistry(\Zend\Tool\Framework\Registry\RegistryInterface $registry)
+    public function setRegistry(\Zend\Tool\Framework\Registry $registry)
     {
         $this->_registry = $registry;
     }
@@ -63,10 +65,10 @@ class Repository
     /**
      * addAction()
      *
-     * @param \Zend\Tool\Framework\Action\ActionInterface $action
+     * @param \Zend\Tool\Framework\Action $action
      * @return \Zend\Tool\Framework\Action\Repository
      */
-    public function addAction(ActionInterface $action, $overrideExistingAction = false)
+    public function addAction(Action $action, $overrideExistingAction = false)
     {
         $actionName = $action->getName();
 
@@ -107,7 +109,7 @@ class Repository
      * getAction() - get an action by a specific name
      *
      * @param string $actionName
-     * @return \Zend\Tool\Framework\Action\ActionInterface
+     * @return \Zend\Tool\Framework\Action
      */
     public function getAction($actionName)
     {

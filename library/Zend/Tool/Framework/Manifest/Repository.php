@@ -24,8 +24,10 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\Manifest;
-use Zend\Tool\Framework\Registry;
-use Zend\Tool\Framework\Metadata;
+use Zend\Tool\Framework\Manifest,
+    Zend\Tool\Framework\Registry,
+    Zend\Tool\Framework\RegistryEnabled,
+    Zend\Tool\Framework\Metadata;
 
 /**
  * @uses       ArrayIterator
@@ -34,18 +36,17 @@ use Zend\Tool\Framework\Metadata;
  * @uses       \Zend\Tool\Framework\Action\Base
  * @uses       \Zend\Tool\Framework\Manifest\Exception
  * @uses       \Zend\Tool\Framework\Metadata\Dynamic
- * @uses       \Zend\Tool\Framework\Registry\EnabledInterface
+ * @uses       \Zend\Tool\Framework\RegistryEnabled
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Repository
-    implements Registry\EnabledInterface, \IteratorAggregate, \Countable
+class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
 {
 
     /**
-     * @var Zend_Tool_Framework_Provider_Registry_Interface
+     * @var Zend\Tool\Framework\Provider\Registry
      */
     protected $_registry = null;
 
@@ -55,17 +56,17 @@ class Repository
     protected $_manifests = array();
 
     /**
-     * @var array Array of \Zend\Tool\Framework\Metadata\MetadataInterface
+     * @var array Array of \Zend\Tool\Framework\Metadata
      */
     protected $_metadatas = array();
 
     /**
      * setRegistry()
      *
-     * @param \Zend\Tool\Framework\Registry\RegistryInterface $registry
+     * @param \Zend\Tool\Framework\Registry $registry
      * @return unknown
      */
-    public function setRegistry(Registry\RegistryInterface $registry)
+    public function setRegistry(Registry $registry)
     {
         $this->_registry = $registry;
         return $this;
@@ -74,16 +75,16 @@ class Repository
     /**
      * addManifest() - Add a manifest for later processing
      *
-     * @param \Zend\Tool\Framework\Manifest\ManifestInterface $manifest
+     * @param \Zend\Tool\Framework\Manifest $manifest
      * @return \Zend\Tool\Framework\Manifest\Repository
      */
-    public function addManifest(ManifestInterface $manifest)
+    public function addManifest(Manifest $manifest)
     {
         // we need to get an index number so that manifests with
         // higher indexes have priority over others
         $index = count($this->_manifests);
 
-        if ($manifest instanceof Registry\EnabledInterface) {
+        if ($manifest instanceof RegistryEnabled) {
             $manifest->setRegistry($this->_registry);
         }
 
@@ -110,7 +111,7 @@ class Repository
                     $provider = new $provider();
                 }
                 
-                if (!$provider instanceof \Zend\Tool\Framework\Provider\ProviderInterface) {
+                if (!$provider instanceof \Zend\Tool\Framework\Provider) {
                     throw new Exception(
                         'A provider provided by the ' . get_class($manifest)
                         . ' does not implement Zend_Tool_Framework_Provider_Interface'
@@ -148,7 +149,7 @@ class Repository
     /**
      * getManifests()
      *
-     * @return \Zend\Tool\Framework\Manifest\ManifestInterface[]
+     * @return \Zend\Tool\Framework\Manifest\Manifest[]
      */
     public function getManifests()
     {
@@ -161,7 +162,7 @@ class Repository
      * @param Zend_Tool_Framework_Manifest_Metadata $metadata
      * @return \Zend\Tool\Framework\Manifest\Repository
      */
-    public function addMetadata(Metadata\MetadataInterface $metadata)
+    public function addMetadata(Metadata $metadata)
     {
         $this->_metadatas[] = $metadata;
         return $this;
@@ -189,7 +190,7 @@ class Repository
                         $metadata = new Metadata\Dynamic($metadata);
                     }
                     
-                    if (!$metadata instanceof Metadata\MetadataInterface) {
+                    if (!$metadata instanceof Metadata) {
                         throw new Exception(
                             'A Zend_Tool_Framework_Metadata_Interface object was not found in manifest ' . get_class($manifest)
                             );

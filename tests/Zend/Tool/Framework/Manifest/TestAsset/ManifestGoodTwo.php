@@ -38,12 +38,12 @@ class ManifestGoodTwo
         \Zend\Tool\Framework\Manifest\ProviderManifestable,
         \Zend\Tool\Framework\Manifest\MetadataManifestable,
         \Zend\Tool\Framework\Manifest\Indexable,
-        \Zend\Tool\Framework\Registry\EnabledInterface
+        \Zend\Tool\Framework\RegistryEnabled
 {
 
     protected $_registry = null;
 
-    public function setRegistry(\Zend\Tool\Framework\Registry\RegistryInterface $registry)
+    public function setRegistry(\Zend\Tool\Framework\Registry $registry)
     {
         $this->_registry = $registry;
     }

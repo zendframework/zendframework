@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Tool
+ * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -22,17 +23,25 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Framework\Client\Interactive;
+namespace Zend\Tool\Framework;
 
 /**
+ * Basic Interface for factilities that load Zend_Tool providers or manifests.
+ *
  * @category   Zend
  * @package    Zend_Tool
+ * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface OutputInterface
+interface Loader
 {
-
-    public function handleInteractiveOutput($string);
-
+    /**
+     * Load Providers and Manifests
+     *
+     * Returns an array of all loaded class names.
+     *
+     * @return array
+     */
+    public function load();
 }

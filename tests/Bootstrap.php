@@ -57,7 +57,8 @@ function ZendTest_Autoloader($class)
         return false;
     }
 
-    $segments = explode('\\', $class); // preg_split('#\\\\|_#', $class);//
+    // $segments = explode('\\', $class); // preg_split('#\\\\|_#', $class);//
+    $segments = preg_split('#[\\\\_]#', $class); // preg_split('#\\\\|_#', $class);//
     $ns       = array_shift($segments);
 
     switch ($ns) {

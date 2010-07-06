@@ -38,7 +38,6 @@ use Zend\Soap\WSDL;
  */
 class ElementTest extends \PHPUnit_Framework_TestCase
 {
-/*
     public function testBindingElementApi()
     {
         $operations = new WSDL\Element\Collection("test");
@@ -242,5 +241,4 @@ class ElementTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue( in_array($name, $collection->getElementNames()) );
         }
     }
-*/
 }

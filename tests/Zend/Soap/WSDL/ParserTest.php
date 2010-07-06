@@ -41,11 +41,10 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     protected function getWSDLExampleDom()
     {
         $dom = new \DOMDocument();
-        $dom->loadXml(file_get_contents(dirname(__FILE__)."/../_files/wsdl_example.wsdl"));
+        $dom->loadXml(file_get_contents(__DIR__."/../TestAsset/wsdl_example.wsdl"));
         return $dom;
     }
 
-/*
     public function testFactoryWithDomDocument()
     {
         $dom = $this->getWSDLExampleDom();
@@ -55,14 +54,14 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryWithString()
     {
-        $xmlString = file_get_contents(dirname(__FILE__)."/../_files/wsdl_example.wsdl");
+        $xmlString = file_get_contents(__DIR__."/../TestAsset/wsdl_example.wsdl");
         $parser = WSDL\Parser::factory($xmlString);
         $this->assertTrue($parser instanceof WSDL\Parser);
     }
 
     public function testFactoryWithSimpleXml()
     {
-        $xmlString = file_get_contents(dirname(__FILE__)."/../_files/wsdl_example.wsdl");
+        $xmlString = file_get_contents(__DIR__."/../TestAsset/wsdl_example.wsdl");
         $simpleXml = simplexml_load_string($xmlString);
         $parser = WSDL\Parser::factory($simpleXml);
         $this->assertTrue($parser instanceof WSDL\Parser);
@@ -183,10 +182,9 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     public function testParseExampleWSDLWithDocumentationBlocks()
     {
         $dom = new \DOMDocument();
-        $dom->loadXml(file_get_contents(dirname(__FILE__)."/../_files/wsdl_documentation.wsdl"));
+        $dom->loadXml(file_get_contents(__DIR__."/../TestAsset/wsdl_documentation.wsdl"));
 
         $parser = new WSDL\Parser($dom);
         $result = $parser->parse();
     }
-*/
 }

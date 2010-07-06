@@ -24,6 +24,8 @@
  */
 namespace ZendTest\Soap\WSDL;
 
+require_once __DIR__ . '/../TestAsset/commontypes.php';
+
 /**
  * @category   Zend
  * @package    Zend_Soap
@@ -129,19 +131,20 @@ class ArrayOfTypeSequenceStrategyTest extends \PHPUnit_Framework_TestCase
     public function testAddComplexTypeArrayOfObject()
     {
 
-         $return = $this->wsdl->addComplexType('\ZendTest\Soap\WSDL\SequenceTest[]');
+         $return = $this->wsdl->addComplexType('ZendTest_Soap_TestAsset_ComplexTypeA[]');
 
-         $this->assertEquals('tns:ArrayOf\ZendTest\Soap\WSDL\Sequencetest', $return);
+         $this->assertEquals('tns:ArrayOfZendtest_soap_testasset_complextypea', $return);
 
          $wsdl = $this->wsdl->toXML();
 
          $this->assertContains(
-            '<xsd:complexType name="\ZendTest\Soap\WSDL\SequenceTest"><xsd:all><xsd:element name="var" type="xsd:int"/></xsd:all></xsd:complexType>',
+            '<xsd:complexType name="ZendTest_Soap_TestAsset_ComplexTypeA"><xsd:all><xsd:element name="baz" type="tns:ArrayOfZendtest_soap_testasset_complextypeb"/></xsd:all></xsd:complexType>',
+            $wsdl,
             $wsdl
          );
 
          $this->assertContains(
-            '<xsd:complexType name="ArrayOf\ZendTest\Soap\WSDL\Sequencetest"><xsd:sequence><xsd:element name="item" type="tns:\ZendTest\Soap\WSDL\SequenceTest" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence></xsd:complexType>',
+            '<xsd:complexType name="ArrayOfZendtest_soap_testasset_complextypea"><xsd:sequence><xsd:element name="item" type="tns:ZendTest_Soap_TestAsset_ComplexTypeA" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence></xsd:complexType>',
             $wsdl
          );
     }

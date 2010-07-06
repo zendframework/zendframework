@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\Soap\WSDL;
-use Zend\URI;
+use Zend\URI\URL;
 
 /**
  * \Zend\Soap\WSDL\WSDL
@@ -79,13 +79,13 @@ class WSDL
      * Constructor
      *
      * @param string  $name Name of the Web Service being Described
-     * @param string|\Zend\URI\URL  $uri URI where the WSDL will be available
+     * @param string|\Zend\URL  $uri URI where the WSDL will be available
      * @param boolean|string|\Zend\Soap\WSDL\Strategy\StrategyInterface $strategy
      */
     public function __construct($name, $uri, $strategy = true)
     {
-        if ($uri instanceof URI\URL) {
-            $uri = $uri->getUri();
+        if ($uri instanceof URL) {
+            $uri = $uri->generate();
         }
         $this->_uri = $uri;
 
@@ -114,13 +114,13 @@ class WSDL
     /**
      * Set a new uri for this WSDL
      *
-     * @param  string|\Zend\URI\URL $uri
+     * @param  string|\Zend\URL $uri
      * @return \Zend\Server\WSDL\WSDL
      */
     public function setUri($uri)
     {
-        if ($uri instanceof URI\URL) {
-            $uri = $uri->getUri();
+        if ($uri instanceof URL) {
+            $uri = $uri->generate();
         }
         $oldUri = $this->_uri;
         $this->_uri = $uri;
@@ -361,8 +361,8 @@ class WSDL
      */
     public function addSoapOperation($binding, $soap_action)
     {
-        if ($soap_action instanceof URI\URL) {
-            $soap_action = $soap_action->getUri();
+        if ($soap_action instanceof URL) {
+            $soap_action = $soap_action->generate();
         }
         $soap_operation = $this->_dom->createElement('soap:operation');
         $soap_operation->setAttribute('soapAction', $soap_action);
@@ -383,8 +383,8 @@ class WSDL
      */
     public function addService($name, $port_name, $binding, $location)
     {
-        if ($location instanceof URI\URL) {
-            $location = $location->getUri();
+        if ($location instanceof URL) {
+            $location = $location->generate();
         }
         $service = $this->_dom->createElement('service');
         $service->setAttribute('name', $name);

@@ -24,9 +24,9 @@
  * @namespace
  */
 namespace ZendTest\Soap\AutoDiscover;
-use Zend\Soap\Client;
+require_once __DIR__ . '/../TestAsset/commontypes.php';
 
-/** Zend_Soap_Server */
+use Zend\Soap\Client;
 
 /**
  * @category   Zend
@@ -52,7 +52,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
     {
         $wsdl = $this->baseuri."/server1.php?wsdl";
 
-        $b = new \ZendTest\Soap\_files\ComplexTypeB();
+        $b = new \ZendTest_Soap_TestAsset_ComplexTypeB();
         $b->bar = "test";
         $b->foo = "test";
 

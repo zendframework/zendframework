@@ -59,7 +59,7 @@ class DefaultComplexTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnlyPublicPropertiesAreDiscoveredByStrategy()
     {
-        $this->strategy->addComplexType('\ZendTest\Soap\WSDL\DefaultComplexTypeTest\PublicPrivateProtected');
+        $this->strategy->addComplexType('\ZendTest\Soap\WSDL\PublicPrivateProtected');
 
         $xml = $this->wsdl->toXML();
         $this->assertNotContains( PublicPrivateProtected::PROTECTED_VAR_NAME, $xml);

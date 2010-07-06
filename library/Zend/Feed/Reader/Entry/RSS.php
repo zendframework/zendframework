@@ -31,8 +31,8 @@ use Zend\Date;
  * @uses       \Zend\Feed\Exception
  * @uses       \Zend\Feed\Reader\Reader
  * @uses       \Zend\Feed\Reader\Collection\Category
- * @uses       \Zend\Feed\Reader\EntryAbstract
- * @uses       \Zend\Feed\Reader\EntryInterface
+ * @uses       \Zend\Feed\Reader\AbstractEntry
+ * @uses       \Zend\Feed\Reader\Entry
  * @uses       \Zend\Feed\Reader\Extension\Atom\Entry
  * @uses       \Zend\Feed\Reader\Extension\Content\Entry
  * @uses       \Zend\Feed\Reader\Extension\DublinCore\Entry
@@ -44,9 +44,7 @@ use Zend\Date;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RSS 
-    extends Reader\EntryAbstract 
-    implements Reader\EntryInterface
+class RSS extends Reader\AbstractEntry implements Reader\Entry
 {
     /**
      * XPath query for RDF

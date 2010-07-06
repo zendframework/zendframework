@@ -23,42 +23,54 @@
  * @namespace
  */
 namespace Zend\Feed\Reader\Extension;
+use Zend\Feed\Reader;
 
 /**
- * @uses       DOMXPath
  * @uses       \Zend\Feed\Reader\Reader
- * @uses       \Zend\Feed\Reader\Entry\Atom
- * @uses       \Zend\Feed\Reader\Entry\RSS
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class FeedAbstract
+abstract class AbstractEntry
 {
     /**
-     * Parsed feed data
+     * Feed entry data
      *
      * @var array
      */
     protected $_data = array();
 
     /**
-     * Parsed feed data in the shape of a DOMDocument
+     * DOM document object
      *
      * @var DOMDocument
      */
     protected $_domDocument = null;
 
     /**
-     * The base XPath query used to retrieve feed data
+     * Entry instance
+     *
+     * @var \Zend\Feed\Entry\AbstractEntry
+     */
+    protected $_entry = null;
+
+    /**
+     * Pointer to the current entry
+     *
+     * @var int
+     */
+    protected $_entryKey = 0;
+
+    /**
+     * XPath object
      *
      * @var DOMXPath
      */
     protected $_xpath = null;
 
     /**
-     * The XPath prefix
+     * XPath query
      *
      * @var string
      */
@@ -67,27 +79,34 @@ abstract class FeedAbstract
     /**
      * Constructor
      *
-     * @param  \Zend\Feed\Feed_Abstract $feed The source \Zend\Feed\Feed object
-     * @param  string $type Feed type
+     * @param  \Zend\Feed\Entry\AbstractEntry $entry
+     * @param  int $entryKey
+     * @param  string $type
      * @return void
      */
-    public function __construct(\DomDocument $dom, $type = null, \DOMXPath $xpath = null)
+    public function __construct(\DOMElement $entry, $entryKey, $type = null)
     {
-        $this->_domDocument = $dom;
+        $this->_entry       = $entry;
+        $this->_entryKey    = $entryKey;
+        $this->_domDocument = $entry->ownerDocument;
 
-        if ($type !== null) {
+        if (!is_null($type)) {
             $this->_data['type'] = $type;
         } else {
-            $this->_data['type'] = \Zend\Feed\Reader\Reader::detectType($dom);
+            $this->_data['type'] = Reader\Reader::detectType($entry->ownerDocument, true);
         }
-
-        if ($xpath !== null) {
-            $this->_xpath = $xpath;
+        // set the XPath query prefix for the entry being queried
+        if ($this->getType() == Reader\Reader::TYPE_RSS_10
+            || $this->getType() == Reader\Reader::TYPE_RSS_090
+        ) {
+            $this->setXpathPrefix('//rss:item[' . ($this->_entryKey+1) . ']');
+        } elseif ($this->getType() == Reader\Reader::TYPE_ATOM_10
+                  || $this->getType() == Reader\Reader::TYPE_ATOM_03
+        ) {
+            $this->setXpathPrefix('//atom:entry[' . ($this->_entryKey+1) . ']');
         } else {
-            $this->_xpath = new \DOMXPath($this->_domDocument);
+            $this->setXpathPrefix('//item[' . ($this->_entryKey+1) . ']');
         }
-
-        $this->_registerNamespaces();
     }
 
     /**
@@ -101,7 +120,7 @@ abstract class FeedAbstract
     }
 
     /**
-     * Get the Feed's encoding
+     * Get the Entry's encoding
      *
      * @return string
      */
@@ -112,7 +131,7 @@ abstract class FeedAbstract
     }
 
     /**
-     * Get the feed type
+     * Get the entry type
      *
      * @return string
      */
@@ -121,22 +140,11 @@ abstract class FeedAbstract
         return $this->_data['type'];
     }
 
-
-    /**
-     * Return the feed as an array
-     *
-     * @return array
-     */
-    public function toArray() // untested
-    {
-        return $this->_data;
-    }
-
     /**
      * Set the XPath query
      *
      * @param  DOMXPath $xpath
-     * @return \Zend\Feed\Reader\Extension\EntryAbstract
+     * @return \Zend\Feed\Reader\Extension\AbstractEntry
      */
     public function setXpath(\DOMXPath $xpath)
     {
@@ -146,13 +154,26 @@ abstract class FeedAbstract
     }
 
     /**
-     * Get the DOMXPath object
+     * Get the XPath query object
      *
-     * @return string
+     * @return DOMXPath
      */
     public function getXpath()
     {
+        if (!$this->_xpath) {
+            $this->setXpath(new \DOMXPath($this->getDomDocument()));
+        }
         return $this->_xpath;
+    }
+
+    /**
+     * Serialize the entry to an array
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->_data;
     }
 
     /**
@@ -168,15 +189,19 @@ abstract class FeedAbstract
     /**
      * Set the XPath prefix
      *
-     * @return \Zend\Feed\Reader\Feed\Atom\Atom
+     * @param  string $prefix
+     * @return \Zend\Feed\Reader\Extension\AbstractEntry
      */
     public function setXpathPrefix($prefix)
     {
         $this->_xpathPrefix = $prefix;
+        return $this;
     }
 
     /**
-     * Register the default namespaces for the current feed format
+     * Register XML namespaces
+     *
+     * @return void
      */
-    abstract protected function _registerNamespaces();
+    protected abstract function _registerNamespaces();
 }

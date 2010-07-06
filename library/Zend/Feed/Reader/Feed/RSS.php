@@ -33,13 +33,13 @@ use Zend\Date;
  * @uses       \Zend\Feed\Reader\Collection\Author
  * @uses       \Zend\Feed\Reader\Extension\Atom\Feed
  * @uses       \Zend\Feed\Reader\Extension\DublinCore\Feed
- * @uses       \Zend\Feed\Reader\FeedAbstract
+ * @uses       \Zend\Feed\Reader\AbstractFeed
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RSS extends Reader\FeedAbstract
+class RSS extends Reader\AbstractFeed
 {
 
     /**

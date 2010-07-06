@@ -25,15 +25,17 @@
 namespace Zend\Feed\Reader;
 
 /**
+ * @uses       Countable
+ * @uses       Iterator
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface EntryInterface
+interface Feed extends \Iterator, \Countable
 {
     /**
-     * Get the specified author
+     * Get a single author
      *
      * @param  int $index
      * @return string|null
@@ -48,96 +50,74 @@ interface EntryInterface
     public function getAuthors();
 
     /**
-     * Get the entry content
+     * Get the copyright entry
      *
-     * @return string
+     * @return string|null
      */
-    public function getContent();
+    public function getCopyright();
 
     /**
-     * Get the entry creation date
+     * Get the feed creation date
      *
-     * @return string
+     * @return string|null
      */
     public function getDateCreated();
 
     /**
-     * Get the entry modification date
+     * Get the feed modification date
      *
-     * @return string
+     * @return string|null
      */
     public function getDateModified();
 
     /**
-     * Get the entry description
+     * Get the feed description
      *
-     * @return string
+     * @return string|null
      */
     public function getDescription();
 
     /**
-     * Get the entry enclosure
+     * Get the feed generator entry
      *
-     * @return stdClass
+     * @return string|null
      */
-    public function getEnclosure();
+    public function getGenerator();
 
     /**
-     * Get the entry ID
+     * Get the feed ID
      *
-     * @return string
+     * @return string|null
      */
     public function getId();
 
     /**
-     * Get a specific link
+     * Get the feed language
      *
-     * @param  int $index
-     * @return string
+     * @return string|null
      */
-    public function getLink($index = 0);
+    public function getLanguage();
 
     /**
-     * Get all links
+     * Get a link to the HTML source
      *
-     * @return array
+     * @return string|null
      */
-    public function getLinks();
+    public function getLink();
 
     /**
-     * Get a permalink to the entry
+     * Get a link to the XML feed
      *
-     * @return string
+     * @return string|null
      */
-    public function getPermalink();
+    public function getFeedLink();
 
     /**
-     * Get the entry title
+     * Get the feed title
      *
-     * @return string
+     * @return string|null
      */
     public function getTitle();
-
-    /**
-     * Get the number of comments/replies for current entry
-     *
-     * @return integer
-     */
-    public function getCommentCount();
-
-    /**
-     * Returns a URI pointing to the HTML page where comments can be made on this entry
-     *
-     * @return string
-     */
-    public function getCommentLink();
-
-    /**
-     * Returns a URI pointing to a feed of all comments for this entry
-     *
-     * @return string
-     */
-    public function getCommentFeedLink();
     
     /**
      * Get all categories
@@ -145,4 +125,5 @@ interface EntryInterface
      * @return \Zend\Feed\Reader\Collection\Category
      */
     public function getCategories();
+
 }

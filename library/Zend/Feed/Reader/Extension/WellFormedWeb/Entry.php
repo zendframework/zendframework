@@ -26,14 +26,13 @@ namespace Zend\Feed\Reader\Extension\WellFormedWeb;
 
 /**
  * @uses       \Zend\Feed\Reader\Reader
- * @uses       \Zend\Feed\Reader\Extension\EntryAbstract
+ * @uses       \Zend\Feed\Reader\Extension\AbstractEntry
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Entry
-    extends \Zend\Feed\Reader\Extension\EntryAbstract
+class Entry extends \Zend\Feed\Reader\Extension\AbstractEntry
 {
     /**
      * Get the entry comment Uri

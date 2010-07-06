@@ -32,7 +32,7 @@ namespace Zend\Feed\Reader;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class EntryAbstract
+abstract class AbstractEntry
 {
     /**
      * Feed entry data
@@ -51,7 +51,7 @@ abstract class EntryAbstract
     /**
      * Entry instance
      *
-     * @var Zend_Feed_Entry_Interface
+     * @var Zend\Feed\Entry
      */
     protected $_entry = null;
 
@@ -171,7 +171,7 @@ abstract class EntryAbstract
      * Set the XPath query
      *
      * @param  DOMXPath $xpath
-     * @return Zend_Feed_Reader_Entry_EntryAbstract
+     * @return Zend\Feed\Reader\AbstractEntry
      */
     public function setXpath(\DOMXPath $xpath)
     {
@@ -193,7 +193,7 @@ abstract class EntryAbstract
      * Return an Extension object with the matching name (postfixed with _Entry)
      *
      * @param string $name
-     * @return \Zend\Feed\Reader\Extension\EntryAbstract
+     * @return \Zend\Feed\Reader\Extension\AbstractEntry
      */
     public function getExtension($name)
     {

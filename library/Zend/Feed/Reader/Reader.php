@@ -212,7 +212,7 @@ class Reader
      * @param  string $url The URL to the feed
      * @param  string $etag OPTIONAL Last received ETag for this resource
      * @param  string $lastModified OPTIONAL Last-Modified value for this resource
-     * @return \Zend\Feed\Reader\FeedInterface
+     * @return \Zend\Feed\Reader\Feed
      */
     public static function import($uri, $etag = null, $lastModified = null)
     {
@@ -284,7 +284,7 @@ class Reader
      * Import a feed by providing a Zend_Feed_Abstract object
      *
      * @param  \Zend\Feed\Feed_Abstract $feed A fully instantiated \Zend\Feed\Feed object
-     * @return \Zend\Feed\Reader\FeedInterface
+     * @return \Zend\Feed\Reader\Feed
      */
     public static function importFeed(Feed\AbstractFeed $feed)
     {
@@ -304,7 +304,7 @@ class Reader
      * Import a feed froma string
      *
      * @param  string $string
-     * @return \Zend\Feed\Reader\FeedInterface
+     * @return \Zend\Feed\Reader\Feed
      */
     public static function importString($string)
     {
@@ -347,7 +347,7 @@ class Reader
      *
      * @param  string $filename
      * @throws \Zend\Feed\Exception
-     * @return \Zend\Feed\Reader\FeedInterface
+     * @return \Zend\Feed\Reader\Feed
      */
     public static function importFile($filename)
     {
@@ -399,7 +399,7 @@ class Reader
      */
     public static function detectType($feed, $specOnly = false)
     {
-        if ($feed instanceof FeedInterface) {
+        if ($feed instanceof Feed) {
             $dom = $feed->getDomDocument();
         } elseif($feed instanceof \DOMDocument) {
             $dom = $feed;
@@ -420,7 +420,7 @@ class Reader
             }
         } else {
             throw new \Zend\Feed\Exception('Invalid object/scalar provided: must'
-            . ' be of type Zend_Feed_Reader_FeedInterface, DomDocument or string');
+            . ' be of type Zend\Feed\Reader\Feed, DomDocument or string');
         }
         $xpath = new \DOMXPath($dom);
 

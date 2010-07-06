@@ -27,16 +27,15 @@ use Zend\Feed\Reader;
 
 /**
  * @uses       \Zend\Feed\Reader\Reader
- * @uses       \Zend\Feed\Reader\EntryAbstract
- * @uses       \Zend\Feed\Reader\EntryInterface
+ * @uses       \Zend\Feed\Reader\AbstractEntry
+ * @uses       \Zend\Feed\Reader\Entry
  * @uses       \Zend\Feed\Reader\Extension\Atom\Entry
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Atom 
-    extends Reader\EntryAbstract
+class Atom extends Reader\AbstractEntry
 {
     /**
      * XPath query

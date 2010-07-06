@@ -3307,7 +3307,7 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Reader/Collection/CollectionAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Reader_Collection_CollectionAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Reader/Collection/CollectionAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Reader/Collection/AbstractCollection.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Reader\Collection</newNamespace>
       <newClassName>CollectionAbstract</newClassName>
       <newFullyQualifiedName>Zend\Feed\Reader\Collection\CollectionAbstract</newFullyQualifiedName>
@@ -3339,18 +3339,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Reader/EntryAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Reader_EntryAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Reader/EntryAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Reader/AbstractEntry.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Reader</newNamespace>
-      <newClassName>EntryAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Reader\EntryAbstract</newFullyQualifiedName>
+      <newClassName>AbstractEntry</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Reader\AbstractEntry</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Reader/EntryInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Reader_EntryInterface</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Reader/EntryInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Reader/Entry.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Reader</newNamespace>
-      <newClassName>EntryInterface</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Reader\EntryInterface</newFullyQualifiedName>
+      <newClassName>Entry</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Reader\Entry</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Reader/Extension/Atom/Entry.php</originalRelativeFilePath>
@@ -3411,18 +3411,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Reader/Extension/EntryAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Reader_Extension_EntryAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Reader/Extension/EntryAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Reader/Extension/AbstractEntry.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Reader\Extension</newNamespace>
-      <newClassName>EntryAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Reader\Extension\EntryAbstract</newFullyQualifiedName>
+      <newClassName>AbstractEntry</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Reader\Extension\AbstractEntry</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Reader/Extension/FeedAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Reader_Extension_FeedAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Reader/Extension/FeedAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Reader/Extension/AbstractFeed.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Reader\Extension</newNamespace>
-      <newClassName>FeedAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Reader\Extension\FeedAbstract</newFullyQualifiedName>
+      <newClassName>AbstractFeed</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Reader\Extension\AbstractFeed</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Reader/Extension/Podcast/Entry.php</originalRelativeFilePath>
@@ -3499,18 +3499,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Reader/FeedAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Reader_FeedAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Reader/FeedAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Reader/AbstractFeed.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Reader</newNamespace>
-      <newClassName>FeedAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Reader\FeedAbstract</newFullyQualifiedName>
+      <newClassName>AbstractFeed</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Reader\AbstractFeed</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Reader/FeedInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Reader_FeedInterface</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Reader/FeedInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Reader/Feed.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Reader</newNamespace>
-      <newClassName>FeedInterface</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Reader\FeedInterface</newFullyQualifiedName>
+      <newClassName>Feed</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Reader\Feed</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Reader/FeedSet.php</originalRelativeFilePath>

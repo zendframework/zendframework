@@ -32,7 +32,7 @@ namespace My\Extension\JungleBooks;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Feed extends \Zend\Feed\Reader\Extension\FeedAbstract
+class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
 {
 
     public function getDaysPopularBookLink()

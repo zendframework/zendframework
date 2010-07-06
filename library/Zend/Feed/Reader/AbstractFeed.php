@@ -27,13 +27,13 @@ namespace Zend\Feed\Reader;
 /**
  * @uses       \Zend\Feed\Exception
  * @uses       \Zend\Feed\Reader\Reader
- * @uses       Zend_feed_Reader_FeedInterface
+ * @uses       Zend\Feed\Reader\Feed
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class FeedAbstract implements FeedInterface
+abstract class AbstractFeed implements Feed
 {
     /**
      * Parsed feed data
@@ -112,7 +112,7 @@ abstract class FeedAbstract implements FeedInterface
     /**
      * Return the current entry
      *
-     * @return \Zend\Feed\Reader\EntryInterface
+     * @return \Zend\Feed\Reader\Entry
      */
     public function current()
     {
@@ -249,7 +249,7 @@ abstract class FeedAbstract implements FeedInterface
      * Return an Extension object with the matching name (postfixed with _Feed)
      *
      * @param string $name
-     * @return \Zend\Feed\Reader\Extension\FeedAbstract
+     * @return \Zend\Feed\Reader\Extension\AbstractFeed
      */
     public function getExtension($name)
     {

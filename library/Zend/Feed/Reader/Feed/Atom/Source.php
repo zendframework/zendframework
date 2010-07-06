@@ -38,7 +38,7 @@ class Source extends Atom
 
     /**
      * Constructor: Create a Source object which is largely just a normal
-     * Zend_Feed_Reader_FeedAbstract object only designed to retrieve feed level
+     * Zend\Feed\Reader\AbstractFeed object only designed to retrieve feed level
      * metadata from an Atom entry's source element.
      *
      * @param DOMElement $source

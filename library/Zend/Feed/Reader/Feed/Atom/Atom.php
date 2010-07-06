@@ -28,13 +28,13 @@ use Zend\Feed\Reader;
 /**
  * @uses       \Zend\Feed\Reader\Reader
  * @uses       \Zend\Feed\Reader\Extension\Atom\Feed
- * @uses       \Zend\Feed\Reader\FeedAbstract
+ * @uses       \Zend\Feed\Reader\AbstractFeed
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Atom extends Reader\FeedAbstract
+class Atom extends Reader\AbstractFeed
 {
 
     /**

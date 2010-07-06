@@ -16163,10 +16163,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/AdapterInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Validate_Barcode_AdapterInterface</originalClassName>
-      <newRelativeFilePath>Zend/Validator/Barcode/AdapterInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Validator/Barcode/Adapter.php</newRelativeFilePath>
       <newNamespace>Zend\Validator\Barcode</newNamespace>
-      <newClassName>AdapterInterface</newClassName>
-      <newFullyQualifiedName>Zend\Validator\Barcode\AdapterInterface</newFullyQualifiedName>
+      <newClassName>Adapter</newClassName>
+      <newFullyQualifiedName>Zend\Validator\Barcode\Adapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Validate/Barcode/Code25.php</originalRelativeFilePath>

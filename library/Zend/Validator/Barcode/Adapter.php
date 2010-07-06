@@ -30,7 +30,7 @@ namespace Zend\Validator\Barcode;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface AdapterInterface
+interface Adapter
 {
     /**
      * Checks the length of a barcode
@@ -67,7 +67,7 @@ interface AdapterInterface
      * Sets the checksum validation
      *
      * @param  boolean $check
-     * @return Zend_Validate_Barcode_Adapter Provides fluid interface
+     * @return Zend\Validate\Barcode\Adapter Provides fluid interface
      */
     public function setCheck($check);
 }

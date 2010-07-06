@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\InfoCard\Cipher;
+namespace Zend\InfoCard;
 
 /**
  * Provides an abstraction for encryption ciphers used in an Information Card
@@ -76,28 +76,28 @@ class Cipher
      *
      * @throws \Zend\InfoCard\Cipher\Exception
      * @param string $uri The URI of the encryption method wantde
-     * @return mixed an Instance of Zend_InfoCard_Cipher_Symmetric_Interface or \Zend\InfoCard\Cipher\PKI\PKIInterface
+     * @return mixed an Instance of Zend\InfoCard\Cipher\Symmetric or Zend\InfoCard\Cipher\PKI
      *               depending on URI
      */
     static public function getInstanceByURI($uri)
     {
         switch($uri) {
             case self::ENC_AES256CBC:
-                return new Symmetric\Adapter\AES256CBC();
+                return new Cipher\Symmetric\Adapter\AES256CBC();
 
             case self::ENC_AES128CBC:
-                return new Symmetric\Adapter\AES128CBC();
+                return new Cipher\Symmetric\Adapter\AES128CBC();
 
             case self::ENC_RSA_OAEP_MGF1P:
-                return new PKI\Adapter\RSA(PKI\Adapter\RSA::OAEP_PADDING);
+                return new Cipher\PKI\Adapter\RSA(Cipher\PKI\Adapter\RSA::OAEP_PADDING);
                 break;
 
             case self::ENC_RSA:
-                return new PKI\Adapter\RSA(PKI\Adapter\RSA::NO_PADDING);
+                return new Cipher\PKI\Adapter\RSA(Cipher\PKI\Adapter\RSA::NO_PADDING);
                 break;
 
             default:
-                throw new Exception("Unknown Cipher URI");
+                throw new Cipher\Exception("Unknown Cipher URI");
         }
     }
 }

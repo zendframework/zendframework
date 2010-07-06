@@ -23,14 +23,15 @@
 /**
  * @namespace
  */
-namespace Zend\InfoCard\XML\EncryptedData;
+namespace Zend\InfoCard\XML\Assertion;
+
 use Zend\InfoCard\XML;
 
 /**
- * A factory class for producing Zend_InfoCard_Xml_EncryptedData objects based on
- * the type of XML document provided
+ * Factory object to retrieve an Assertion object based on the type of XML document provided
  *
- * @uses       \Zend\InfoCard\XML\EncryptedData\XMLEnc
+ * @uses       \Zend\InfoCard\XML\Assertion
+ * @uses       \Zend\InfoCard\XML\Assertion\SAML
  * @uses       \Zend\InfoCard\XML\Exception
  * @category   Zend
  * @package    Zend_InfoCard
@@ -38,8 +39,13 @@ use Zend\InfoCard\XML;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-final class EncryptedData
+final class Factory
 {
+    /**
+     * The namespace for a SAML-formatted Assertion document
+     */
+    const TYPE_SAML = 'urn:oasis:names:tc:SAML:1.0:assertion';
+
     /**
      * Constructor (disabled)
      *
@@ -50,16 +56,17 @@ final class EncryptedData
     }
 
     /**
-     * Returns an instance of the class
+     * Returns an instance of a InfoCard Assertion object based on the XML data provided
      *
-     * @param string $xmlData The XML EncryptedData String
-     * @return \Zend\InfoCard\XML\EncryptedData\AbstractEncryptedData
+     * @throws \Zend\InfoCard\XML\Exception
+     * @param string $xmlData The XML-Formatted Assertion
+     * @return \Zend\InfoCard\XML\Assertion
      * @throws \Zend\InfoCard\XML\Exception
      */
     static public function getInstance($xmlData)
     {
 
-        if($xmlData instanceof XML\Element\Element) {
+        if($xmlData instanceof XML\AbstractElement) {
             $strXmlData = $xmlData->asXML();
         } else if (is_string($xmlData)) {
             $strXmlData = $xmlData;
@@ -69,12 +76,15 @@ final class EncryptedData
 
         $sxe = simplexml_load_string($strXmlData);
 
-        switch($sxe['Type']) {
-            case 'http://www.w3.org/2001/04/xmlenc#Element':
-                return simplexml_load_string($strXmlData, 'Zend\InfoCard\XML\EncryptedData\XMLEnc');
-            default:
-                throw new XML\Exception("Unknown EncryptedData type found");
-                break;
+        $namespaces = $sxe->getDocNameSpaces();
+
+        foreach($namespaces as $namespace) {
+            switch($namespace) {
+                case self::TYPE_SAML:
+                    return simplexml_load_string($strXmlData, 'Zend\InfoCard\XML\Assertion\SAML', null);
+            }
         }
+
+        throw new XML\Exception("Unable to determine Assertion type by Namespace");
     }
 }

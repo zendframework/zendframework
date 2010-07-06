@@ -100,10 +100,10 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse(true);
         }
 
-        $key_id = $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, Cipher\Cipher::ENC_RSA_OAEP_MGF1P, "foo");
+        $key_id = $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, Cipher::ENC_RSA_OAEP_MGF1P, "foo");
 
         try {
-            $key_id = $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, Cipher\Cipher::ENC_RSA_OAEP_MGF1P, "foo");
+            $key_id = $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, Cipher::ENC_RSA_OAEP_MGF1P, "foo");
         } catch(InfoCard\Exception $e) {
             $this->assertTrue(true);
         } catch(\Exception $e) {
@@ -262,7 +262,7 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 
     public function testTransforms()
     {
-        $trans = new \Zend\InfoCard\XML\Security\Transform\Transform();
+        $trans = new \Zend\InfoCard\XML\Security\Transform\TransformChain();
 
         try {
             $trans->addTransform("foo");

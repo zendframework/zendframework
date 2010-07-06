@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\InfoCard\XML\Security\Transform;
-use Zend\InfoCard\XML\Security;
+
+use Zend\InfoCard\XML\Security\Transform,
+    Zend\InfoCard\XML\Security;
 
 /**
  * A class to create a transform rule set based on XML URIs and then apply those rules
@@ -38,7 +40,7 @@ use Zend\InfoCard\XML\Security;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Transform
+class TransformChain
 {
     /**
      * A list of transforms to apply
@@ -70,7 +72,7 @@ class Transform
      * Add a Transform URI to the list of transforms to perform
      *
      * @param string $uri The Transform URI
-     * @return \Zend\InfoCard\XML\Security\Transform\Transform
+     * @return \Zend\InfoCard\XML\Security\Transform
      */
     public function addTransform($uri)
     {
@@ -108,7 +110,7 @@ class Transform
 
             // We can't really test this check because it would require logic changes in the component itself
             // @codeCoverageIgnoreStart
-            if(!($transformer instanceof TransformInterface)) {
+            if(!($transformer instanceof Transform)) {
                 throw new Security\Exception("Transforms must implement the Transform Interface");
             }
             // @codeCoverageIgnoreEnd

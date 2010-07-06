@@ -23,9 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\InfoCard\XML\Element;
-
-use Zend\InfoCard\XML;
+namespace Zend\InfoCard\XML;
 
 /**
  * An abstract class representing a an XML data block
@@ -41,7 +39,7 @@ use Zend\InfoCard\XML;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Element extends \SimpleXMLElement implements XML\Element
+abstract class AbstractElement extends \SimpleXMLElement implements Element
 {
     /**
      * Convert the object to a string by displaying its XML content
@@ -57,7 +55,7 @@ abstract class Element extends \SimpleXMLElement implements XML\Element
      * Converts an XML Element object into a DOM object
      *
      * @throws \Zend\InfoCard\XML\Exception
-     * @param \Zend\InfoCard\XML\Element\Element $e The object to convert
+     * @param \Zend\InfoCard\XML\Element $e The object to convert
      * @return DOMElement A DOMElement representation of the same object
      */
     static public function convertToDOM(Element $e)
@@ -67,7 +65,7 @@ abstract class Element extends \SimpleXMLElement implements XML\Element
         if(!($dom instanceof \DOMElement)) {
             // Zend_InfoCard_Xml_Element extends SimpleXMLElement, so this should *never* fail
             // @codeCoverageIgnoreStart
-            throw new XML\Exception("Failed to convert between SimpleXML and DOM");
+            throw new Exception("Failed to convert between SimpleXML and DOM");
             // @codeCoverageIgnoreEnd
         }
 
@@ -79,8 +77,8 @@ abstract class Element extends \SimpleXMLElement implements XML\Element
      *
      * @throws \Zend\InfoCard\XML\Exception
      * @param DOMElement $e The DOMElement object to convert
-     * @param string $classname The name of the class to convert it to (must inhert from \Zend\InfoCard\XML\Element\Element)
-     * @return \Zend\InfoCard\XML\Element\Element a Xml Element object from the DOM element
+     * @param string $classname The name of the class to convert it to (must inhert from \Zend\InfoCard\XML\Element)
+     * @return \Zend\InfoCard\XML\Element a Xml Element object from the DOM element
      */
     static public function convertToObject(\DOMElement $e, $classname)
     {
@@ -90,8 +88,8 @@ abstract class Element extends \SimpleXMLElement implements XML\Element
 
         $reflection = new \ReflectionClass($classname);
 
-        if(!$reflection->isSubclassOf('Zend\InfoCard\XML\Element\Element')) {
-            throw new XML\Exception("DOM element must be converted to an instance of Zend_InfoCard_Xml_Element");
+        if(!$reflection->isSubclassOf('Zend\InfoCard\XML\Element')) {
+            throw new Exception("DOM element must be converted to an instance of Zend_InfoCard_Xml_Element");
         }
 
         $sxe = simplexml_import_dom($e, $classname);
@@ -99,7 +97,7 @@ abstract class Element extends \SimpleXMLElement implements XML\Element
         if(!($sxe instanceof Element)) {
             // Since we just checked to see if this was a subclass of Zend_infoCard_Xml_Element this shoudl never fail
             // @codeCoverageIgnoreStart
-            throw new XML\Exception("Failed to convert between DOM and SimpleXML");
+            throw new Exception("Failed to convert between DOM and SimpleXML");
             // @codeCoverageIgnoreEnd
         }
 

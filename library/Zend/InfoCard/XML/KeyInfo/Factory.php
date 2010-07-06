@@ -29,7 +29,7 @@ use Zend\InfoCard\XML;
 /**
  * Factory class to return a XML KeyInfo block based on input XML
  *
- * @uses       \Zend\InfoCard\XML\Element\Element
+ * @uses       \Zend\InfoCard\XML\AbstractElement
  * @uses       \Zend\InfoCard\XML\Exception
  * @uses       \Zend\InfoCard\XML\KeyInfo\Default
  * @uses       \Zend\InfoCard\XML\KeyInfo\XMLDSig
@@ -39,7 +39,7 @@ use Zend\InfoCard\XML;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class KeyInfo
+class Factory
 {
     /**
      * Constructor (disabled)
@@ -60,7 +60,7 @@ class KeyInfo
     static public function getInstance($xmlData)
     {
 
-        if($xmlData instanceof XML\Element\Element) {
+        if($xmlData instanceof XML\AbstractElement) {
             $strXmlData = $xmlData->asXML();
         } else if (is_string($xmlData)) {
             $strXmlData = $xmlData;

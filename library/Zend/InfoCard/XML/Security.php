@@ -27,7 +27,7 @@ namespace Zend\InfoCard\XML;
 
 /**
  * @uses       \Zend\InfoCard\XML\Security\Exception
- * @uses       \Zend\InfoCard\XML\Security\Transform\Transform
+ * @uses       \Zend\InfoCard\XML\Security\Transform\TransformChain
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml_Security
@@ -156,7 +156,7 @@ class Security
             $signatureValue = base64_decode((string)$sxe->Signature->SignatureValue);
         }
 
-        $transformer = new Transform\Transform();
+        $transformer = new Transform\TransformChain();
 
         foreach($sxe->Signature->SignedInfo->Reference->Transforms->children() as $transform) {
             $transformer->addTransform((string)$transform['Algorithm']);
@@ -208,7 +208,7 @@ class Security
                 throw new Security\Exception("Unable to determine or unsupported representation of the KeyValue block");
         }
 
-        $transformer = new Transform\Transform();
+        $transformer = new Transform\TransformChain();
         $transformer->addTransform((string)$sxe->Signature->SignedInfo->CanonicalizationMethod['Algorithm']);
 
         // The way we are doing our XML processing requires that we specifically add this

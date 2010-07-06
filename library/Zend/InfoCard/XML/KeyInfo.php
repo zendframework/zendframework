@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_InfoCard
- * @subpackage Zend_InfoCard_Xml_Security
+ * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,26 +23,21 @@
 /**
  * @namespace
  */
-namespace Zend\InfoCard\XML\Security\Transform;
+namespace Zend\InfoCard\XML;
 
 /**
- * Interface for XML Security Transforms
- *
  * @category   Zend
  * @package    Zend_InfoCard
- * @subpackage Zend_InfoCard_Xml_Security
+ * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface TransformInterface
+interface KeyInfo
 {
     /**
-     * Transform the given XML string according to the transform rules
-     * implemented by the object using this interface
+     * Return an object representing a KeyInfo data type
      *
-     * @throws \Zend\InfoCard\XML\Security\Transform\Exception
-     * @param string $strXmlData the input XML
-     * @return string the output XML
+     * @return \Zend\InfoCard\XML\KeyInfo
      */
-    public function transform($strXmlData);
+    public function getKeyInfo();
 }

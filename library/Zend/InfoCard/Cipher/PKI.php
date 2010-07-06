@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_InfoCard
- * @subpackage Zend_InfoCard_Xml
+ * @subpackage Zend_InfoCard_Cipher
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,21 +23,17 @@
 /**
  * @namespace
  */
-namespace Zend\InfoCard\XML\KeyInfo;
+namespace Zend\InfoCard\Cipher;
 
 /**
+ * Empty Interface represents a Pki cipher object
+ *
  * @category   Zend
  * @package    Zend_InfoCard
- * @subpackage Zend_InfoCard_Xml
+ * @subpackage Zend_InfoCard_Cipher
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface KeyInfoInterface
+interface PKI
 {
-    /**
-     * Return an object representing a KeyInfo data type
-     *
-     * @return \Zend\InfoCard\XML\KeyInfo\KeyInfo
-     */
-    public function getKeyInfo();
 }

@@ -7323,10 +7323,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Pki/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Cipher_Pki_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Cipher/PKI/PKIInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Cipher\PKI</newNamespace>
-      <newClassName>PKIInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Cipher\PKI\PKIInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/Cipher/PKI.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\Cipher</newNamespace>
+      <newClassName>PKI</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\Cipher\PKI</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Pki/Rsa/Interface.php</originalRelativeFilePath>
@@ -7379,18 +7379,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Cipher_Symmetric_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Cipher/Symmetric/SymmetricInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Cipher\Symmetric</newNamespace>
-      <newClassName>SymmetricInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Cipher\Symmetric\SymmetricInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/Cipher/Symmetric.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\Cipher</newNamespace>
+      <newClassName>Symmetric</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\Cipher\Symmetric</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Cipher.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Cipher</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/Cipher/Cipher.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\Cipher</newNamespace>
+      <newRelativeFilePath>Zend/InfoCard/Cipher.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard</newNamespace>
       <newClassName>Cipher</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\Cipher\Cipher</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\InfoCard\Cipher</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Claims.php</originalRelativeFilePath>
@@ -7427,10 +7427,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Assertion.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Assertion</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/XML/Assertion/Assertion.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/InfoCard/XML/Assertion/Factory.php</newRelativeFilePath>
       <newNamespace>Zend\InfoCard\XML\Assertion</newNamespace>
-      <newClassName>Assertion</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\XML\Assertion\Assertion</newFullyQualifiedName>
+      <newClassName>Factory</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Assertion\Factory</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Element/Interface.php</originalRelativeFilePath>
@@ -7443,10 +7443,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Element.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Element</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/XML/Element/Element.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\XML\Element</newNamespace>
-      <newClassName>Element</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\XML\Element\Element</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/XML/AbstractElement.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML</newNamespace>
+      <newClassName>AbstractElement</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\AbstractElement</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/EncryptedData/Abstract.php</originalRelativeFilePath>
@@ -7467,10 +7467,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/EncryptedData.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_EncryptedData</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/XML/EncryptedData/EncryptedData.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/InfoCard/XML/EncryptedData/Factory.php</newRelativeFilePath>
       <newNamespace>Zend\InfoCard\XML\EncryptedData</newNamespace>
-      <newClassName>EncryptedData</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\XML\EncryptedData\EncryptedData</newFullyQualifiedName>
+      <newClassName>Factory</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\EncryptedData\Factory</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/EncryptedKey.php</originalRelativeFilePath>
@@ -7507,10 +7507,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/KeyInfo/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_KeyInfo_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/XML/KeyInfo/KeyInfoInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\XML\KeyInfo</newNamespace>
-      <newClassName>KeyInfoInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\XML\KeyInfo\KeyInfoInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/XML/KeyInfo.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML</newNamespace>
+      <newClassName>KeyInfo</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\KeyInfo</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/KeyInfo/XmlDSig.php</originalRelativeFilePath>
@@ -7523,10 +7523,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/KeyInfo.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_KeyInfo</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/XML/KeyInfo/KeyInfo.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/InfoCard/XML/KeyInfo/Factory.php</newRelativeFilePath>
       <newNamespace>Zend\InfoCard\XML\KeyInfo</newNamespace>
-      <newClassName>KeyInfo</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\XML\KeyInfo\KeyInfo</newFullyQualifiedName>
+      <newClassName>Factory</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\KeyInfo\Factory</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Security/Exception.php</originalRelativeFilePath>
@@ -7555,10 +7555,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Security/Transform/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Security_Transform_Interface</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/XML/Security/Transform/TransformInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\InfoCard\XML\Security\Transform</newNamespace>
-      <newClassName>TransformInterface</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\XML\Security\Transform\TransformInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/InfoCard/XML/Security/Transform.php</newRelativeFilePath>
+      <newNamespace>Zend\InfoCard\XML\Security</newNamespace>
+      <newClassName>Transform</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Security\Transform</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Security/Transform/XmlExcC14N.php</originalRelativeFilePath>
@@ -7571,10 +7571,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Security/Transform.php</originalRelativeFilePath>
       <originalClassName>Zend_InfoCard_Xml_Security_Transform</originalClassName>
-      <newRelativeFilePath>Zend/InfoCard/XML/Security/Transform/Transform.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/InfoCard/XML/Security/Transform/TransformChain.php</newRelativeFilePath>
       <newNamespace>Zend\InfoCard\XML\Security\Transform</newNamespace>
-      <newClassName>Transform</newClassName>
-      <newFullyQualifiedName>Zend\InfoCard\XML\Security\Transform\Transform</newFullyQualifiedName>
+      <newClassName>TransformChain</newClassName>
+      <newFullyQualifiedName>Zend\InfoCard\XML\Security\Transform\TransformChain</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/InfoCard/Xml/Security.php</originalRelativeFilePath>

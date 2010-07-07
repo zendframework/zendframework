@@ -23,10 +23,10 @@
 /**
  * @namespace
  */
-namespace Zend\LDAP\Node\Schema\AttributeType;
+namespace Zend\LDAP\Node\Schema;
 
 /**
- * Zend_LDAP_Node_Schema_AttributeType_Interface provides a contract for schema attribute-types.
+ * Zend\LDAP\Node\Schema\AttributeType provides a contract for schema attribute-types.
  *
  * @category   Zend
  * @package    Zend_LDAP
@@ -34,7 +34,7 @@ namespace Zend\LDAP\Node\Schema\AttributeType;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface AttributeTypeInterface
+interface AttributeType
 {
     /**
      * Gets the attribute name

@@ -7955,10 +7955,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Schema/AttributeType/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_Schema_AttributeType_Interface</originalClassName>
-      <newRelativeFilePath>Zend/LDAP/Node/Schema/AttributeType/AttributeTypeInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\LDAP\Node\Schema\AttributeType</newNamespace>
-      <newClassName>AttributeTypeInterface</newClassName>
-      <newFullyQualifiedName>Zend\LDAP\Node\Schema\AttributeType\AttributeTypeInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/Node/Schema/AttributeType.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\Schema</newNamespace>
+      <newClassName>AttributeType</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Node\Schema\AttributeType</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Schema/AttributeType/OpenLdap.php</originalRelativeFilePath>
@@ -7987,10 +7987,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Schema/ObjectClass/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Node_Schema_ObjectClass_Interface</originalClassName>
-      <newRelativeFilePath>Zend/LDAP/Node/Schema/ObjectClass/ObjectClassInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\LDAP\Node\Schema\ObjectClass</newNamespace>
-      <newClassName>ObjectClassInterface</newClassName>
-      <newFullyQualifiedName>Zend\LDAP\Node\Schema\ObjectClass\ObjectClassInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/LDAP/Node/Schema/ObjectClass.php</newRelativeFilePath>
+      <newNamespace>Zend\LDAP\Node\Schema</newNamespace>
+      <newClassName>ObjectClass</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Node\Schema\ObjectClass</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Node/Schema/ObjectClass/OpenLdap.php</originalRelativeFilePath>

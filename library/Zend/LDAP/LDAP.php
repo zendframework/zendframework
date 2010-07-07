@@ -899,6 +899,19 @@ class LDAP
         }
 
         $iterator = new Collection\DefaultIterator($this, $search);
+        return $this->_createCollection($iterator, $collectionClass);
+    }
+
+	/**
+     * Extension point for collection creation
+     *
+     * @param  \Zend\LDAP\Collection\DefaultIterator	$iterator
+     * @param  string|null								$collectionClass
+     * @return \Zend\LDAP\Collection\Collection
+     * @throws \Zend\LDAP\Exception
+     */
+    protected function _createCollection(Collection\DefaultIterator $iterator, $collectionClass)
+    {
         if ($collectionClass === null) {
             return new Collection\Collection($iterator);
         } else {

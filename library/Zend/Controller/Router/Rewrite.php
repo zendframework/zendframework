@@ -30,7 +30,7 @@ use Zend\Config;
  * Ruby routing based Router.
  *
  * @uses       \Zend\Controller\Router\AbstractRouter
- * @uses       \Zend\Controller\Router\Route\Route
+ * @uses       \Zend\Controller\Router\Route
  * @uses       Zend\Loader
  * @package    Zend_Controller
  * @subpackage Router
@@ -58,7 +58,7 @@ class Rewrite extends AbstractRouter
     /**
      * Currently matched route
      *
-     * @var \Zend\Controller\Router\Route\RouteInterface
+     * @var \Zend\Controller\Router\Route
      */
     protected $_currentRoute = null;
 
@@ -110,10 +110,10 @@ class Rewrite extends AbstractRouter
      * If route contains method setRequest(), it is initialized with a request object
      *
      * @param  string                                 $name       Name of the route
-     * @param  \Zend\Controller\Router\Route\RouteInterface $route      Instance of the route
+     * @param  \Zend\Controller\Router\Route $route      Instance of the route
      * @return \Zend\Controller\Router\Rewrite
      */
-    public function addRoute($name, Route\RouteInterface $route)
+    public function addRoute($name, Route $route)
     {
         if (method_exists($route, 'setRequest')) {
             $route->setRequest($this->getFrontController()->getRequest());
@@ -208,7 +208,7 @@ class Rewrite extends AbstractRouter
      * Get a route frm a config instance
      *
      * @param  \Zend\Config\Config $info
-     * @return \Zend\Controller\Router\Route\RouteInterface
+     * @return \Zend\Controller\Router\Route
      */
     protected function _getRouteFromConfig(Config\Config $info)
     {
@@ -230,12 +230,12 @@ class Rewrite extends AbstractRouter
      * Add chain routes from a config route
      *
      * @param  string                                 $name
-     * @param  \Zend\Controller\Router\Route\RouteInterface $route
+     * @param  \Zend\Controller\Router\Route $route
      * @param  \Zend\Config\Config                            $childRoutesInfo
      * @return void
      */
     protected function _addChainRoutesFromConfig($name,
-                                                 Route\RouteInterface $route,
+                                                 Route $route,
                                                  Config\Config $childRoutesInfo)
     {
         foreach ($childRoutesInfo as $childRouteName => $childRouteInfo) {
@@ -285,7 +285,7 @@ class Rewrite extends AbstractRouter
     /**
      * Remove all standard default routes
      *
-     * @param  \Zend\Controller\Router\Route\RouteInterface Route
+     * @param  \Zend\Controller\Router\Route Route
      * @return \Zend\Controller\Router\Rewrite
      */
     public function removeDefaultRoutes()
@@ -311,7 +311,7 @@ class Rewrite extends AbstractRouter
      *
      * @param string $name Name of the route
      * @throws \Zend\Controller\Router\Exception
-     * @return \Zend\Controller\Router\Route\RouteInterface Route object
+     * @return \Zend\Controller\Router\Route Route object
      */
     public function getRoute($name)
     {
@@ -327,7 +327,7 @@ class Rewrite extends AbstractRouter
      * Retrieve a currently matched route
      *
      * @throws \Zend\Controller\Router\Exception
-     * @return \Zend\Controller\Router\Route\RouteInterface Route object
+     * @return \Zend\Controller\Router\Route Route object
      */
     public function getCurrentRoute()
     {
@@ -342,7 +342,7 @@ class Rewrite extends AbstractRouter
      * Retrieve a name of currently matched route
      *
      * @throws \Zend\Controller\Router\Exception
-     * @return \Zend\Controller\Router\Route\RouteInterface Route object
+     * @return \Zend\Controller\Router\Route Route object
      */
     public function getCurrentRouteName()
     {

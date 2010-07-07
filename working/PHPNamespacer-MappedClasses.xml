@@ -1803,10 +1803,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Router/Route/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Controller_Router_Route_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Controller/Router/Route/RouteInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Controller\Router\Route</newNamespace>
-      <newClassName>RouteInterface</newClassName>
-      <newFullyQualifiedName>Zend\Controller\Router\Route\RouteInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Controller/Router/Route.php</newRelativeFilePath>
+      <newNamespace>Zend\Controller\Router</newNamespace>
+      <newClassName>Route</newClassName>
+      <newFullyQualifiedName>Zend\Controller\Router\Route</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Router/Route/Module.php</originalRelativeFilePath>

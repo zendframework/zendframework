@@ -752,7 +752,7 @@ class Currency
         $rate = 1;
         if ($currency !== $this->getShortName()) {
             $service = $this->getService();
-            if (!($service instanceof CurrencyServiceInterface)) {
+            if (!($service instanceof CurrencyService)) {
                 throw new Exception('No exchange service applied');
             }
 
@@ -766,7 +766,7 @@ class Currency
     /**
      * Returns the set service class
      *
-     * @return Zend\Currency\CurrencyServiceInterface
+     * @return Zend\Currency\CurrencyService
      */
     public function getService()
     {
@@ -776,7 +776,7 @@ class Currency
     /**
      * Sets a new exchange service
      *
-     * @param string|Zend\Currency\CurrencyServiceInterface $service Service class
+     * @param string|Zend\Currency\CurrencyService $service Service class
      * @return Zend\Currency\Currency
      */
     public function setService($service)
@@ -785,8 +785,8 @@ class Currency
             $service = new $service;
         }
 
-        if (!($service instanceof CurrencyServiceInterface)) {
-            throw new Exception('A currency service must implement Zend\Currency\CurrencyServiceInterface');
+        if (!($service instanceof CurrencyService)) {
+            throw new Exception('A currency service must implement Zend\Currency\CurrencyService');
         }
 
         $this->_options['service'] = $service;

@@ -1979,10 +1979,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Currency/CurrencyInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Currency_CurrencyInterface</originalClassName>
-      <newRelativeFilePath>Zend/Currency/CurrencyServiceInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Currency/CurrencyService.php</newRelativeFilePath>
       <newNamespace>Zend\Currency</newNamespace>
-      <newClassName>CurrencyServiceInterface</newClassName>
-      <newFullyQualifiedName>Zend\Currency\CurrencyServiceInterface</newFullyQualifiedName>
+      <newClassName>CurrencyService</newClassName>
+      <newFullyQualifiedName>Zend\Currency\CurrencyService</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Currency/Exception.php</originalRelativeFilePath>

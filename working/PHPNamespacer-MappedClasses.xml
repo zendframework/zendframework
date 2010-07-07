@@ -8987,10 +8987,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Memory/Container/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Memory_Container_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Memory/Container/ContainerInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Memory\Container</newNamespace>
-      <newClassName>ContainerInterface</newClassName>
-      <newFullyQualifiedName>Zend\Memory\Container\ContainerInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Memory/Container.php</newRelativeFilePath>
+      <newNamespace>Zend\Memory</newNamespace>
+      <newClassName>Container</newClassName>
+      <newFullyQualifiedName>Zend\Memory\Container</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Memory/Container/Locked.php</originalRelativeFilePath>

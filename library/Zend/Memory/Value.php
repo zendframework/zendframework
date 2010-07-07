@@ -49,7 +49,7 @@ class Value implements \ArrayAccess,\Countable
     /**
      * Container
      *
-     * @var \Zend\Memory\Container\ContainerInterface
+     * @var \Zend\Memory\Container
      */
     private $_container;
 

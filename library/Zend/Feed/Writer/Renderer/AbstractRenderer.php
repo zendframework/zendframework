@@ -34,7 +34,7 @@ use Zend\Feed\Writer;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RendererAbstract
+class AbstractRenderer
 {
     /**
      * Extensions
@@ -139,7 +139,7 @@ class RendererAbstract
      * Set feed encoding
      * 
      * @param  string $enc 
-     * @return \Zend\Feed\Writer\Renderer\RendererAbstract
+     * @return \Zend\Feed\Writer\Renderer\AbstractRenderer
      */
     public function setEncoding($enc)
     {
@@ -161,7 +161,7 @@ class RendererAbstract
      * Indicate whether or not to ignore exceptions
      * 
      * @param  bool $bool 
-     * @return \Zend\Feed\Writer\Renderer\RendererAbstract
+     * @return \Zend\Feed\Writer\Renderer\AbstractRenderer
      */
     public function ignoreExceptions($bool = true)
     {

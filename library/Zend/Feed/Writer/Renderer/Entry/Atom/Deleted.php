@@ -27,16 +27,16 @@ namespace Zend\Feed\Writer\Renderer\Entry\Atom;
 /**
  * @uses       DOMDocument
  * @uses       \Zend\Date\Date
- * @uses       \Zend\Feed\Writer\Renderer\RendererAbstract
- * @uses       \Zend\Feed\Writer\Renderer\RendererInterface
+ * @uses       \Zend\Feed\Writer\Renderer\AbstractRenderer
+ * @uses       \Zend\Feed\Writer\Renderer
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Deleted
-    extends \Zend\Feed\Writer\Renderer\RendererAbstract
-    implements \Zend\Feed\Writer\Renderer\RendererInterface
+    extends \Zend\Feed\Writer\Renderer\AbstractRenderer
+    implements \Zend\Feed\Writer\Renderer
 {
     /**
      * Constructor
@@ -52,7 +52,7 @@ class Deleted
     /**
      * Render atom entry
      * 
-     * @return \Zend\Feed\Writer\Renderer\Entry\Atom\Atom
+     * @return \Zend\Feed\Writer\Renderer\Entry\Atom
      */
     public function render()
     {

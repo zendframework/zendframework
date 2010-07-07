@@ -22,34 +22,32 @@
 /**
  * @namespace
  */
-namespace Zend\Feed\Writer\Renderer\Feed\Atom;
+namespace Zend\Feed\Writer\Renderer\Feed;
 
 /**
  * @uses       DOMDocument
  * @uses       \Zend\Feed\Writer\Writer
- * @uses       \Zend\Feed\Writer\Feed\Feed
- * @uses       \Zend\Feed\Writer\Renderer\Entry\Atom\Atom
+ * @uses       \Zend\Feed\Writer\Feed
+ * @uses       \Zend\Feed\Writer\Renderer\Entry\Atom
  * @uses       \Zend\Feed\Writer\Renderer\Entry\Atom\Deleted
- * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom\AtomAbstract
- * @uses       \Zend\Feed\Writer\Renderer\RendererAbstract
- * @uses       \Zend\Feed\Writer\Renderer\RendererInterface
+ * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom\AbstractAtom
+ * @uses       \Zend\Feed\Writer\Renderer\AbstractRenderer
+ * @uses       \Zend\Feed\Writer\Renderer
  * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Atom
-    extends AtomAbstract
-    implements \Zend\Feed\Writer\Renderer\RendererInterface
+class Atom extends Atom\AbstractAtom implements \Zend\Feed\Writer\Renderer
 {
     /**
      * Constructor
      * 
-     * @param  \Zend\Feed\Writer\Feed\Feed $container 
+     * @param  \Zend\Feed\Writer\Feed $container 
      * @return void
      */
-    public function __construct (\Zend\Feed\Writer\Feed\Feed $container)
+    public function __construct (\Zend\Feed\Writer\Feed $container)
     {
         parent::__construct($container);
     }
@@ -57,7 +55,7 @@ class Atom
     /**
      * Render Atom feed
      * 
-     * @return \Zend\Feed\Writer\Renderer\Feed\Atom\Atom
+     * @return \Zend\Feed\Writer\Renderer\Feed\Atom
      */
     public function render()
     {
@@ -98,7 +96,7 @@ class Atom
                 $entry->setEncoding($this->getDataContainer()->getEncoding());
             }
             if ($entry instanceof \Zend\Feed\Writer\Entry) {
-                $renderer = new \Zend\Feed\Writer\Renderer\Entry\Atom\Atom($entry);
+                $renderer = new \Zend\Feed\Writer\Renderer\Entry\Atom($entry);
             } else {
                 if (!$this->_dom->documentElement->hasAttribute('xmlns:at')) {
                     $this->_dom->documentElement->setAttribute(

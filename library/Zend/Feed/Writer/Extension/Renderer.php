@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -11,10 +10,10 @@
  * http://framework.zend.com/license/new-bsd
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
+ * to padraic dot brady at yahoo dot com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed
+ * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,18 +22,44 @@
 /**
  * @namespace
  */
-namespace Zend\Feed\Writer\Exception;
+namespace Zend\Feed\Writer\Extension;
 
 /**
- * Feed exceptions
- *
- * Class to represent exceptions that occur during Feed operations.
- *
- * @uses       \Zend\Feed\Exception
  * @category   Zend
- * @package    Zend_Feed
+ * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidMethodException extends \Zend\Exception
-{}
+interface Renderer
+{
+    /**
+     * Constructor
+     *
+     * @param  mixed $container 
+     * @return void
+     */
+    public function __construct($container);
+    
+    /**
+     * Set DOMDocument and DOMElement on which to operate
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $base 
+     * @return void
+     */
+    public function setDomDocument(\DOMDocument $dom, \DOMElement $base);
+    
+    /**
+     * Render
+     * 
+     * @return void
+     */
+    public function render();
+    
+    /**
+     * Retrieve container
+     * 
+     * @return mixed
+     */
+    public function getDataContainer();
+}

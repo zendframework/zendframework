@@ -28,23 +28,22 @@ use Zend\Feed;
 /**
  * @uses       \Zend\Date\Date
  * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Writer\Feed\Feed
- * @uses       \Zend\Feed\Writer\Renderer\Entry\Atom\Atom
- * @uses       \Zend\Feed\Writer\Renderer\RendererAbstract
- * @uses       \Zend\Feed\Writer\Renderer\RendererInterface
+ * @uses       \Zend\Feed\Writer\Feed
+ * @uses       \Zend\Feed\Writer\Renderer\Entry\Atom
+ * @uses       \Zend\Feed\Writer\Renderer\AbstractRenderer
+ * @uses       \Zend\Feed\Writer\Renderer
  * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AtomAbstract
-    extends Feed\Writer\Renderer\RendererAbstract
+class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
 {
     /**
      * Constructor
      * 
-     * @param  \Zend\Feed\Writer\Feed\Feed $container 
+     * @param  \Zend\Feed\Writer\Feed $container 
      * @return void
      */
     public function __construct ($container)

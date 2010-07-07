@@ -3555,10 +3555,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Exception/InvalidMethodException.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Writer_Exception_InvalidMethodException</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Writer/Exception/InvalidMethodException.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Writer\Exception</newNamespace>
+      <newRelativeFilePath>Zend/Feed/Writer/InvalidMethodException.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\Writer</newNamespace>
       <newClassName>InvalidMethodException</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Writer\Exception\InvalidMethodException</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Feed\Writer\InvalidMethodException</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Extension/Atom/Renderer/Feed.php</originalRelativeFilePath>
@@ -3627,18 +3627,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Extension/RendererAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Writer_Extension_RendererAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Writer/Extension/RendererAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Writer/Extension/AbstractRenderer.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Writer\Extension</newNamespace>
-      <newClassName>RendererAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Writer\Extension\RendererAbstract</newFullyQualifiedName>
+      <newClassName>AbstractRenderer</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Writer\Extension\AbstractRenderer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Extension/RendererInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Writer_Extension_RendererInterface</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Writer/Extension/RendererInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Writer/Extension/Renderer.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Writer\Extension</newNamespace>
-      <newClassName>RendererInterface</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Writer\Extension\RendererInterface</newFullyQualifiedName>
+      <newClassName>Renderer</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Writer\Extension\Renderer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Extension/Slash/Renderer/Entry.php</originalRelativeFilePath>
@@ -3667,18 +3667,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Feed/FeedAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Writer_Feed_FeedAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Writer/Feed/FeedAbstract.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Writer\Feed</newNamespace>
-      <newClassName>FeedAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Writer\Feed\FeedAbstract</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Feed/Writer/AbstractFeed.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\Writer</newNamespace>
+      <newClassName>AbstractFeed</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Writer\AbstractFeed</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Feed.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Writer_Feed</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Writer/Feed/Feed.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Writer\Feed</newNamespace>
+      <newRelativeFilePath>Zend/Feed/Writer/Feed.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\Writer</newNamespace>
       <newClassName>Feed</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Writer\Feed\Feed</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Feed\Writer\Feed</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Renderer/Entry/Atom/Deleted.php</originalRelativeFilePath>
@@ -3691,10 +3691,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Renderer/Entry/Atom.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Writer_Renderer_Entry_Atom</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Writer/Renderer/Entry/Atom/Atom.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Writer\Renderer\Entry\Atom</newNamespace>
+      <newRelativeFilePath>Zend/Feed/Writer/Renderer/Entry/Atom.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\Writer\Renderer\Entry</newNamespace>
       <newClassName>Atom</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Writer\Renderer\Entry\Atom\Atom</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Feed\Writer\Renderer\Entry\Atom</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Renderer/Entry/Rss.php</originalRelativeFilePath>
@@ -3707,10 +3707,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Renderer/Feed/Atom/AtomAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Writer/Renderer/Feed/Atom/AtomAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Writer/Renderer/Feed/Atom/AbstractAtom.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Writer\Renderer\Feed\Atom</newNamespace>
-      <newClassName>AtomAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Writer\Renderer\Feed\Atom\AtomAbstract</newFullyQualifiedName>
+      <newClassName>AbstractAtom</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Writer\Renderer\Feed\Atom\AbstractAtom</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Renderer/Feed/Atom/Source.php</originalRelativeFilePath>
@@ -3723,10 +3723,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Renderer/Feed/Atom.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Writer_Renderer_Feed_Atom</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Writer/Renderer/Feed/Atom/Atom.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Writer\Renderer\Feed\Atom</newNamespace>
+      <newRelativeFilePath>Zend/Feed/Writer/Renderer/Feed/Atom.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\Writer\Renderer\Feed</newNamespace>
       <newClassName>Atom</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Writer\Renderer\Feed\Atom\Atom</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Feed\Writer\Renderer\Feed\Atom</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Renderer/Feed/Rss.php</originalRelativeFilePath>
@@ -3739,18 +3739,18 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Renderer/RendererAbstract.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Writer_Renderer_RendererAbstract</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Writer/Renderer/RendererAbstract.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Feed/Writer/Renderer/AbstractRenderer.php</newRelativeFilePath>
       <newNamespace>Zend\Feed\Writer\Renderer</newNamespace>
-      <newClassName>RendererAbstract</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Writer\Renderer\RendererAbstract</newFullyQualifiedName>
+      <newClassName>AbstractRenderer</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Writer\Renderer\AbstractRenderer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Renderer/RendererInterface.php</originalRelativeFilePath>
       <originalClassName>Zend_Feed_Writer_Renderer_RendererInterface</originalClassName>
-      <newRelativeFilePath>Zend/Feed/Writer/Renderer/RendererInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Feed\Writer\Renderer</newNamespace>
-      <newClassName>RendererInterface</newClassName>
-      <newFullyQualifiedName>Zend\Feed\Writer\Renderer\RendererInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Feed/Writer/Renderer.php</newRelativeFilePath>
+      <newNamespace>Zend\Feed\Writer</newNamespace>
+      <newClassName>Renderer</newClassName>
+      <newFullyQualifiedName>Zend\Feed\Writer\Renderer</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Feed/Writer/Source.php</originalRelativeFilePath>

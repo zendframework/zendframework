@@ -44,7 +44,7 @@ class RSSTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_validWriter = new Feed\Feed;
+        $this->_validWriter = new Feed;
         $this->_validWriter->setTitle('This is a test feed.');
         $this->_validWriter->setDescription('This is a test description.');
         $this->_validWriter->setLink('http://www.example.com');
@@ -59,9 +59,9 @@ class RSSTest extends \PHPUnit_Framework_TestCase
 
     public function testSetsWriterInConstructor()
     {
-        $writer = new Feed\Feed;
+        $writer = new Feed;
         $feed = new RendererFeed\RSS($writer);
-        $this->assertTrue($feed->getDataContainer() instanceof Feed\Feed);
+        $this->assertTrue($feed->getDataContainer() instanceof Feed);
     }
 
     public function testBuildMethodRunsMinimalWriterContainerProperlyBeforeICheckRssCompliance()

@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Feed\Writer\Renderer\Entry\Atom;
+namespace Zend\Feed\Writer\Renderer\Entry;
 use Zend\Feed;
 use Zend\Date;
 
@@ -32,8 +32,8 @@ use Zend\Date;
  * @uses       \Zend\Feed\Exception
  * @uses       \Zend\Feed\Writer\Writer
  * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom\Source
- * @uses       \Zend\Feed\Writer\Renderer\RendererAbstract
- * @uses       \Zend\Feed\Writer\Renderer\RendererInterface
+ * @uses       \Zend\Feed\Writer\Renderer\AbstractRenderer
+ * @uses       \Zend\Feed\Writer\Renderer
  * @uses       \Zend\Uri\Uri
  * @uses       tidy
  * @category   Zend
@@ -42,8 +42,8 @@ use Zend\Date;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Atom
-    extends Feed\Writer\Renderer\RendererAbstract
-    implements Feed\Writer\Renderer\RendererInterface
+    extends Feed\Writer\Renderer\AbstractRenderer
+    implements Feed\Writer\Renderer
 {
     /**
      * Constructor
@@ -59,7 +59,7 @@ class Atom
     /**
      * Render atom entry
      * 
-     * @return \Zend\Feed\Writer\Renderer\Entry\Atom\Atom
+     * @return \Zend\Feed\Writer\Renderer\Entry\Atom
      */
     public function render()
     {

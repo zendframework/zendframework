@@ -45,7 +45,7 @@ class RSSTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_validWriter = new \Zend\Feed\Writer\Feed\Feed;
+        $this->_validWriter = new \Zend\Feed\Writer\Feed;
         
         $this->_validWriter->setType('rss');
         

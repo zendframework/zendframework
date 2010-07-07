@@ -25,14 +25,13 @@
 namespace Zend\Feed\Writer\Extension;
 
 /**
- * @uses       \Zend\Feed\Writer\Extension\RendererInterface
+ * @uses       \Zend\Feed\Writer\Extension
  * @category   Zend
  * @package    Zend_Feed_Writer_Entry_Rss
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class RendererAbstract
-    implements RendererInterface
+abstract class AbstractRenderer implements Renderer
 {
     /**
      * @var DOMDocument
@@ -86,7 +85,7 @@ abstract class RendererAbstract
      * Set feed encoding
      * 
      * @param  string $enc 
-     * @return \Zend\Feed\Writer\Extension\RendererAbstract
+     * @return \Zend\Feed\Writer\Extension\AbstractRenderer
      */
     public function setEncoding($enc)
     {
@@ -109,7 +108,7 @@ abstract class RendererAbstract
      * 
      * @param  DOMDocument $dom 
      * @param  DOMElement $base 
-     * @return \Zend\Feed\Writer\Extension\RendererAbstract
+     * @return \Zend\Feed\Writer\Extension\AbstractRenderer
      */
     public function setDomDocument(\DOMDocument $dom, \DOMElement $base)
     {
@@ -132,7 +131,7 @@ abstract class RendererAbstract
      * Set feed type
      * 
      * @param  string $type 
-     * @return \Zend\Feed\Writer\Extension\RendererAbstract
+     * @return \Zend\Feed\Writer\Extension\AbstractRenderer
      */
     public function setType($type)
     {
@@ -154,7 +153,7 @@ abstract class RendererAbstract
      * Set root element of document 
      * 
      * @param  DOMElement $root 
-     * @return \Zend\Feed\Writer\Extension\RendererAbstract
+     * @return \Zend\Feed\Writer\Extension\AbstractRenderer
      */
     public function setRootElement(\DOMElement $root)
     {

@@ -28,7 +28,7 @@ use Zend\URI;
 /**
  * @uses       \Zend\Feed\Exception
  * @uses       \Zend\Feed\Writer\Writer
- * @uses       \Zend\Feed\Writer\Exception\InvalidMethodException
+ * @uses       \Zend\Feed\Writer\InvalidMethodException
  * @uses       \Zend\Uri\Uri
  * @category   Zend
  * @package    Zend_Feed_Writer
@@ -341,7 +341,7 @@ class Feed
         if (!method_exists($this, 'setItunes' . ucfirst($point))
             && !method_exists($this, 'addItunes' . ucfirst($point))
         ) {
-            throw new \Zend\Feed\Writer\Exception\InvalidMethodException(
+            throw new \Zend\Feed\Writer\InvalidMethodException(
                 'invalid method: ' . $method
             );
         }

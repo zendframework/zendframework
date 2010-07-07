@@ -40,7 +40,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
 
     public function testSetBlock()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesBlock('yes');
         $this->assertEquals('yes', $feed->getItunesBlock());
     }
@@ -48,27 +48,27 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testSetBlockThrowsExceptionOnNonAlphaValue()
     {
         $this->setExpectedException('Zend\Feed\Exception');
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesBlock('123');
     }
     
     public function testSetBlockThrowsExceptionIfValueGreaterThan255CharsLength()
     {
         $this->setExpectedException('Zend\Feed\Exception');
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesBlock(str_repeat('a', 256));
     }
     
     public function testAddAuthors()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->addItunesAuthors(array('joe', 'jane'));
         $this->assertEquals(array('joe', 'jane'), $feed->getItunesAuthors());
     }
     
     public function testAddAuthor()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->addItunesAuthor('joe');
         $this->assertEquals(array('joe'), $feed->getItunesAuthors());
     }
@@ -76,13 +76,13 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testAddAuthorThrowsExceptionIfValueGreaterThan255CharsLength()
     {
         $this->setExpectedException('Zend\Feed\Exception');
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->addItunesAuthor(str_repeat('a', 256));
     }
     
     public function testSetCategories()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $cats = array(
             'cat1',
             'cat2' => array('cat2-1', 'cat2-a&b')
@@ -94,7 +94,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testSetCategoriesThrowsExceptionIfAnyCatNameGreaterThan255CharsLength()
     {
         $this->setExpectedException('Zend\Feed\Exception');
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $cats = array(
             'cat1',
             'cat2' => array('cat2-1', str_repeat('a', 256))
@@ -105,14 +105,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     
     public function testSetImageAsPngFile()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesImage('http://www.example.com/image.png');
         $this->assertEquals('http://www.example.com/image.png', $feed->getItunesImage());
     }
     
     public function testSetImageAsJpgFile()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesImage('http://www.example.com/image.jpg');
         $this->assertEquals('http://www.example.com/image.jpg', $feed->getItunesImage());
     }
@@ -120,34 +120,34 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testSetImageThrowsExceptionOnInvalidUri()
     {
         $this->setExpectedException('Zend\Feed\Exception');
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesImage('http://');
     }
     
     public function testSetImageThrowsExceptionOnInvalidImageExtension()
     {
         $this->setExpectedException('Zend\Feed\Exception');
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesImage('http://www.example.com/image.gif');
     }
     
     public function testSetDurationAsSeconds()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesDuration(23);
         $this->assertEquals(23, $feed->getItunesDuration());
     }
     
     public function testSetDurationAsMinutesAndSeconds()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesDuration('23:23');
         $this->assertEquals('23:23', $feed->getItunesDuration());
     }
     
     public function testSetDurationAsHoursMinutesAndSeconds()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesDuration('23:23:23');
         $this->assertEquals('23:23:23', $feed->getItunesDuration());
     }
@@ -155,41 +155,41 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testSetDurationThrowsExceptionOnUnknownFormat()
     {
         $this->setExpectedException('Zend\Feed\Exception');
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesDuration('abc');
     }
     
     public function testSetDurationThrowsExceptionOnInvalidSeconds()
     {
         $this->setExpectedException('Zend\Feed\Exception');
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesDuration('23:456');
     }
     
     public function testSetDurationThrowsExceptionOnInvalidMinutes()
     {
         $this->setExpectedException('Zend\Feed\Exception');
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesDuration('23:234:45');
     }
     
     public function testSetExplicitToYes()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesExplicit('yes');
         $this->assertEquals('yes', $feed->getItunesExplicit());
     }
     
     public function testSetExplicitToNo()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesExplicit('no');
         $this->assertEquals('no', $feed->getItunesExplicit());
     }
     
     public function testSetExplicitToClean()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesExplicit('clean');
         $this->assertEquals('clean', $feed->getItunesExplicit());
     }
@@ -197,13 +197,13 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testSetExplicitThrowsExceptionOnUnknownTerm()
     {
         $this->setExpectedException('Zend\Feed\Exception');
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesExplicit('abc');
     }
     
     public function testSetKeywords()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $words = array(
             'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12'
         );
@@ -214,7 +214,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testSetKeywordsThrowsExceptionIfMaxKeywordsExceeded()
     {
         $this->setExpectedException('Zend\Feed\Exception');
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $words = array(
             'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12', 'a13'
         );
@@ -224,7 +224,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testSetKeywordsThrowsExceptionIfFormattedKeywordsExceeds255CharLength()
     {
         $this->setExpectedException('Zend\Feed\Exception');
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $words = array(
             str_repeat('a', 253), str_repeat('b', 2)
         );
@@ -233,7 +233,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     
     public function testSetNewFeedUrl()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesNewFeedUrl('http://example.com/feed');
         $this->assertEquals('http://example.com/feed', $feed->getItunesNewFeedUrl());
     }
@@ -241,27 +241,27 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testSetNewFeedUrlThrowsExceptionOnInvalidUri()
     {
         $this->setExpectedException('Zend\Feed\Exception');
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesNewFeedUrl('http://');
     }
     
     public function testAddOwner()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->addItunesOwner(array('name'=>'joe','email'=>'joe@example.com'));
         $this->assertEquals(array(array('name'=>'joe','email'=>'joe@example.com')), $feed->getItunesOwners());
     }
     
     public function testAddOwners()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->addItunesOwners(array(array('name'=>'joe','email'=>'joe@example.com')));
         $this->assertEquals(array(array('name'=>'joe','email'=>'joe@example.com')), $feed->getItunesOwners());
     }
     
     public function testSetSubtitle()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesSubtitle('abc');
         $this->assertEquals('abc', $feed->getItunesSubtitle());
     }
@@ -269,13 +269,13 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testSetSubtitleThrowsExceptionWhenValueExceeds255Chars()
     {
         $this->setExpectedException('Zend\Feed\Exception');
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesSubtitle(str_repeat('a', 256));
     }
     
     public function testSetSummary()
     {
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesSummary('abc');
         $this->assertEquals('abc', $feed->getItunesSummary());
     }
@@ -283,7 +283,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testSetSummaryThrowsExceptionWhenValueExceeds4000Chars()
     {
         $this->setExpectedException('Zend\Feed\Exception');
-        $feed = new Feed\Feed;
+        $feed = new Feed;
         $feed->setItunesSummary(str_repeat('a',4001));
     }
 

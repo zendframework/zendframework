@@ -22,8 +22,8 @@
 /**
  * @namespace
  */
-namespace Zend\Feed\Writer\Feed;
-use Zend\Feed\Writer;
+namespace Zend\Feed\Writer;
+
 use Zend\Feed;
 use Zend\URI;
 use Zend\Date;
@@ -33,7 +33,7 @@ use Zend\Date;
  * @uses       \Zend\Feed\Exception
  * @uses       \Zend\Feed\Writer\Writer
  * @uses       \Zend\Feed\Writer\Entry
- * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom\Atom
+ * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom
  * @uses       \Zend\Feed\Writer\Renderer\Feed\RSS
  * @uses       \Zend\Uri\Uri
  * @category   Zend
@@ -41,7 +41,7 @@ use Zend\Date;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FeedAbstract
+class AbstractFeed
 {
     /**
      * Contains all Feed level date to append in feed output
@@ -66,7 +66,7 @@ class FeedAbstract
      */
     public function __construct()
     {
-        Writer\Writer::registerCoreExtensions();
+        Writer::registerCoreExtensions();
         $this->_loadExtensions();
     }
 
@@ -652,7 +652,7 @@ class FeedAbstract
         foreach ($this->_extensions as $extension) {
             try {
                 return call_user_func_array(array($extension, $method), $args);
-            } catch (Feed\Writer\Exception\InvalidMethodException $e) {
+            } catch (InvalidMethodException $e) {
             }
         }
         throw new Feed\Exception('Method: ' . $method
@@ -666,10 +666,10 @@ class FeedAbstract
      */
     protected function _loadExtensions()
     {
-        $all = Writer\Writer::getExtensions();
+        $all = Writer::getExtensions();
         $exts = $all['feed'];
         foreach ($exts as $ext) {
-            $className = Writer\Writer::getPluginLoader()->getClassName($ext);
+            $className = Writer::getPluginLoader()->getClassName($ext);
             $this->_extensions[$ext] = new $className();
             $this->_extensions[$ext]->setEncoding($this->getEncoding());
         }

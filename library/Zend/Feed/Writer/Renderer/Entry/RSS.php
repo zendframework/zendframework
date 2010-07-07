@@ -28,8 +28,8 @@ use Zend\Feed;
 /**
  * @uses       \Zend\Date\Date
  * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Writer\Renderer\RendererAbstract
- * @uses       \Zend\Feed\Writer\Renderer\RendererInterface
+ * @uses       \Zend\Feed\Writer\Renderer\AbstractRenderer
+ * @uses       \Zend\Feed\Writer\Renderer
  * @uses       \Zend\Uri\Uri
  * @category   Zend
  * @package    Zend_Feed_Writer
@@ -37,8 +37,8 @@ use Zend\Feed;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RSS
-    extends Feed\Writer\Renderer\RendererAbstract
-    implements Feed\Writer\Renderer\RendererInterface
+    extends Feed\Writer\Renderer\AbstractRenderer
+    implements Feed\Writer\Renderer
 {
     /**
      * Constructor

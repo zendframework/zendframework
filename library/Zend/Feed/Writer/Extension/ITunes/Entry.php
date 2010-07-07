@@ -28,7 +28,7 @@ namespace Zend\Feed\Writer\Extension\ITunes;
 /**
  * @uses       \Zend\Feed\Exception
  * @uses       \Zend\Feed\Writer\Writer
- * @uses       \Zend\Feed\Writer\Exception\InvalidMethodException
+ * @uses       \Zend\Feed\Writer\InvalidMethodException
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -227,7 +227,7 @@ class Entry
         if (!method_exists($this, 'setItunes' . ucfirst($point))
             && !method_exists($this, 'addItunes' . ucfirst($point))
         ) {
-            throw new \Zend\Feed\Writer\Exception\InvalidMethodException(
+            throw new \Zend\Feed\Writer\InvalidMethodException(
                 'invalid method: ' . $method
             );
         }

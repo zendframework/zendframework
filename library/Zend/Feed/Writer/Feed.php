@@ -22,8 +22,8 @@
 /**
  * @namespace
  */
-namespace Zend\Feed\Writer\Feed;
-use Zend\Feed\Writer;
+namespace Zend\Feed\Writer;
+
 use Zend\Feed as ZendFeed;
 use Zend\Date;
 
@@ -35,8 +35,8 @@ use Zend\Date;
  * @uses       \Zend\Feed\Writer\Writer
  * @uses       \Zend\Feed\Writer\Deleted
  * @uses       \Zend\Feed\Writer\Entry
- * @uses       \Zend\Feed\Writer\Feed\FeedAbstract
- * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom\Atom
+ * @uses       \Zend\Feed\Writer\Feed\AbstractFeed
+ * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom
  * @uses       \Zend\Feed\Writer\Renderer\Feed\RSS
  * @uses       \Zend\Uri\Uri
  * @category   Zend
@@ -44,9 +44,7 @@ use Zend\Date;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Feed 
-    extends FeedAbstract
-    implements \Iterator, \Countable
+class Feed extends AbstractFeed implements \Iterator, \Countable
 {
 
     /**
@@ -72,7 +70,7 @@ class Feed
      */
     public function createEntry()
     {
-        $entry = new Writer\Entry;
+        $entry = new Entry;
         if ($this->getEncoding()) {
             $entry->setEncoding($this->getEncoding());
         }
@@ -86,7 +84,7 @@ class Feed
      *
      * @param \Zend\Feed\Writer\Deleted $entry
      */
-    public function addTombstone(Writer\Deleted $deleted)
+    public function addTombstone(Deleted $deleted)
     {
         $this->_entries[] = $deleted;
     }
@@ -100,7 +98,7 @@ class Feed
      */
     public function createTombstone()
     {
-        $deleted = new Writer\Deleted;
+        $deleted = new Deleted;
         if ($this->getEncoding()) {
             $deleted->setEncoding($this->getEncoding());
         }
@@ -114,7 +112,7 @@ class Feed
      *
      * @param \Zend\Feed\Writer\Entry $entry
      */
-    public function addEntry(Writer\Entry $entry)
+    public function addEntry(Entry $entry)
     {
         $this->_entries[] = $entry;
     }
@@ -189,7 +187,7 @@ class Feed
 	/**
      * Return the current entry
      *
-     * @return Zend_Feed_Reader_Entry_Interface
+     * @return Zend\Feed\Reader\Entry
      */
     public function current()
     {
@@ -250,7 +248,7 @@ class Feed
             throw new ZendFeed\Exception('Invalid feed type specified: ' . $type . '.'
             . ' Should be one of "rss" or "atom".');
         }
-        $renderClass = 'Zend_Feed_Writer_Renderer_Feed_' . $type;
+        $renderClass = 'Zend\Feed\Writer\Renderer\Feed\\' . $type;
         $renderer = new $renderClass($this);
         if ($ignoreExceptions) {
             $renderer->ignoreExceptions();

@@ -29,10 +29,10 @@ use Zend\Feed;
  * @uses       DOMDocument
  * @uses       \Zend\Date\Date
  * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Writer\Feed\Feed
+ * @uses       \Zend\Feed\Writer\Feed
  * @uses       \Zend\Feed\Writer\Renderer\Entry\RSS
- * @uses       \Zend\Feed\Writer\Renderer\RendererAbstract
- * @uses       \Zend\Feed\Writer\Renderer\RendererInterface
+ * @uses       \Zend\Feed\Writer\Renderer\AbstractRenderer
+ * @uses       \Zend\Feed\Writer\Renderer
  * @uses       \Zend\Uri\Uri
  * @uses       \Zend\Version
  * @category   Zend
@@ -41,16 +41,16 @@ use Zend\Feed;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RSS
-    extends Feed\Writer\Renderer\RendererAbstract
-    implements Feed\Writer\Renderer\RendererInterface
+    extends Feed\Writer\Renderer\AbstractRenderer
+    implements Feed\Writer\Renderer
 {
     /**
      * Constructor
      * 
-     * @param  \Zend\Feed\Writer\Feed\Feed $container 
+     * @param  \Zend\Feed\Writer\Feed $container 
      * @return void
      */
-    public function __construct (Feed\Writer\Feed\Feed $container)
+    public function __construct (Feed\Writer\Feed $container)
     {
         parent::__construct($container);
     }

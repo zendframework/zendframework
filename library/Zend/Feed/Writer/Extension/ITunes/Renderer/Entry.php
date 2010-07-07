@@ -25,14 +25,13 @@
 namespace Zend\Feed\Writer\Extension\ITunes\Renderer;
 
 /**
- * @uses       \Zend\Feed\Writer\Extension\RendererAbstract
+ * @uses       \Zend\Feed\Writer\Extension\AbstractRenderer
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Entry
-    extends \Zend\Feed\Writer\Extension\RendererAbstract
+class Entry extends \Zend\Feed\Writer\Extension\AbstractRenderer
 {
     /**
      * Set to TRUE if a rendering method actually renders something. This

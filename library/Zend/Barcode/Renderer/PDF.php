@@ -63,7 +63,7 @@ class PDF extends AbstractRenderer
     /**
      * Set an image resource to draw the barcode inside
      * @param resource $value
-     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @return \Zend\Barcode\Renderer
      * @throw \Zend\Barcode\Renderer\Exception
      */
     public function setResource($pdf, $page = 0)

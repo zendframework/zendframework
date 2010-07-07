@@ -32,7 +32,7 @@ use Zend;
  * Class for generate Barcode
  *
  * @uses       \Zend\Barcode\Exception
- * @uses       \Zend\Barcode\Object\ObjectInterface
+ * @uses       \Zend\Barcode\BarcodeObject
  * @uses       \Zend\Loader
  * @category   Zend
  * @package    Zend_Barcode
@@ -130,7 +130,7 @@ class Barcode
      */
     public static function makeBarcode($barcode, $barcodeConfig = array())
     {
-        if ($barcode instanceof Object\ObjectInterface) {
+        if ($barcode instanceof BarcodeObject) {
             return $barcode;
         }
 
@@ -197,9 +197,9 @@ class Barcode
         /*
          * Verify that the object created is a descendent of the abstract barcode type.
          */
-        if (!$bcAdapter instanceof Object\ObjectInterface) {
+        if (!$bcAdapter instanceof BarcodeObject) {
             throw new Exception(
-                "Barcode class '$barcodeName' does not implement \Zend\Barcode\Object\ObjectInterface"
+                "Barcode class '$barcodeName' does not implement \Zend\Barcode\BarcodeObject"
             );
         }
         return $bcAdapter;
@@ -210,11 +210,11 @@ class Barcode
      *
      * @param mixed $renderer           String name of renderer class, or \Zend\Config\Config object.
      * @param mixed $rendererConfig     OPTIONAL; an array or \Zend\Config\Config object with renderer parameters.
-     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @return \Zend\Barcode\Renderer
      */
     public static function makeRenderer($renderer = 'image', $rendererConfig = array())
     {
-        if ($renderer instanceof Renderer\RendererInterface) {
+        if ($renderer instanceof Renderer) {
             return $renderer;
         }
 
@@ -284,9 +284,9 @@ class Barcode
         /*
          * Verify that the object created is a descendent of the abstract barcode type.
          */
-        if (!$rdrAdapter instanceof Renderer\RendererInterface) {
+        if (!$rdrAdapter instanceof Renderer) {
             $e = new Exception(
-                "Renderer class '$rendererName' does not implements \Zend\Barcode\Renderer\RendererInterface"
+                "Renderer class '$rendererName' does not implements \Zend\Barcode\Renderer"
             );
             $e->setIsRenderable(false);
             throw $e;
@@ -297,8 +297,8 @@ class Barcode
     /**
      * Proxy to renderer render() method
      *
-     * @param string | \Zend\Barcode\Object\ObjectInterface | array | \Zend\Config\Config $barcode
-     * @param string | \Zend\Barcode\Renderer\RendererInterface $renderer
+     * @param string | \Zend\Barcode\BarcodeObject | array | \Zend\Config\Config $barcode
+     * @param string | \Zend\Barcode\Renderer $renderer
      * @param array  | \Zend\Config\Config $barcodeConfig
      * @param array  | \Zend\Config\Config $rendererConfig
      */
@@ -313,8 +313,8 @@ class Barcode
     /**
      * Proxy to renderer draw() method
      *
-     * @param string | \Zend\Barcode\Object\ObjectInterface | array | \Zend\Config\Config $barcode
-     * @param string | \Zend\Barcode\Renderer\RendererInterface $renderer
+     * @param string | \Zend\Barcode\BarcodeObject | array | \Zend\Config\Config $barcode
+     * @param string | \Zend\Barcode\Renderer $renderer
      * @param array | \Zend\Config\Config $barcodeConfig
      * @param array | \Zend\Config\Config $rendererConfig
      * @return mixed

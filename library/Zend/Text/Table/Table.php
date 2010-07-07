@@ -52,7 +52,7 @@ class Table
     /**
      * Decorator used for the table borders
      *
-     * @var \Zend\Text\Table\Decorator\DecoratorInterface
+     * @var \Zend\Text\Table\Decorator
      */
     protected $_decorator = null;
 
@@ -229,12 +229,12 @@ class Table
     /**
      * Set decorator
      *
-     * @param  \Zend\Text\Table\Decorator\DecoratorInterface|string $decorator Decorator to use
+     * @param  \Zend\Text\Table\Decorator|string $decorator Decorator to use
      * @return \Zend\Text\Table\Table
      */
     public function setDecorator($decorator)
     {
-        if ($decorator instanceof Decorator\DecoratorInterface) {
+        if ($decorator instanceof Decorator) {
             $this->_decorator = $decorator;
         } else {
             $classname        = $this->getPluginLoader()->load($decorator);

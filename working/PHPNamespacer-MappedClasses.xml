@@ -14627,10 +14627,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Text/Table/Decorator/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Text_Table_Decorator_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Text/Table/Decorator/DecoratorInterface.php</newRelativeFilePath>
-      <newNamespace>Zend\Text\Table\Decorator</newNamespace>
-      <newClassName>DecoratorInterface</newClassName>
-      <newFullyQualifiedName>Zend\Text\Table\Decorator\DecoratorInterface</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Text/Table/Decorator.php</newRelativeFilePath>
+      <newNamespace>Zend\Text\Table</newNamespace>
+      <newClassName>Decorator</newClassName>
+      <newFullyQualifiedName>Zend\Text\Table\Decorator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Text/Table/Decorator/Unicode.php</originalRelativeFilePath>

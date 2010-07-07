@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Text\Table\Decorator;
+namespace Zend\Text\Table;
 
 /**
  * Interface for Zend_Text_Table decorators
@@ -32,7 +32,7 @@ namespace Zend\Text\Table\Decorator;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface DecoratorInterface
+interface Decorator
 {
     /**
      * Get a single character for the top left corner

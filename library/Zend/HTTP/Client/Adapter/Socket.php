@@ -36,7 +36,7 @@ use Zend\HTTP\Client\Adapter as HTTPAdapter,
  * @uses       Zend\HTTP\Client\Adapter\Exception
  * @uses       Zend\HTTP\Client\Adapter
  * @uses       Zend\HTTP\Client\Adapter\Stream
- * @uses       Zend\HTTP\Response\Response
+ * @uses       Zend\HTTP\Response
  * @uses       Zend\URI\URL
  * @category   Zend
  * @package    Zend_Http
@@ -320,13 +320,13 @@ class Socket
         
         $this->_checkSocketReadTimeout();
 
-        $statusCode = Response\Response::extractCode($response);
+        $statusCode = Response::extractCode($response);
 
         // Handle 100 and 101 responses internally by restarting the read again
         if ($statusCode == 100 || $statusCode == 101) return $this->read();
 
         // Check headers to see what kind of connection / transfer encoding we have
-        $headers = Response\Response::extractHeaders($response);
+        $headers = Response::extractHeaders($response);
 
         /**
          * Responses to HEAD requests and 204 or 304 responses are not expected

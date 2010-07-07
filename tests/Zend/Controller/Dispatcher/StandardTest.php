@@ -67,7 +67,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
         }
         $front = Controller\Front::getInstance();
         $front->resetInstance();
-        \Zend\Controller\Action\HelperBroker\HelperBroker::removeHelper('viewRenderer');
+        \Zend\Controller\Action\HelperBroker::removeHelper('viewRenderer');
         $this->_dispatcher = new \Zend\Controller\Dispatcher\Standard();
         $this->_dispatcher->setControllerDirectory(array(
             'default' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',

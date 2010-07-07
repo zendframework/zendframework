@@ -20,23 +20,14 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_View_Helper_HorizontalSliderTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_View_Helper_HorizontalSliderTest::main");
-}
+namespace ZendTest\Dojo\View\Helper;
 
-
-/** Zend_Dojo_View_Helper_HorizontalSlider */
-
-/** Zend_View */
-
-/** Zend_Registry */
-
-/** Zend_Dojo_Form */
-
-/** Zend_Dojo_Form_SubForm */
-
-/** Zend_Dojo_View_Helper_Dojo */
+use Zend\Dojo\View\Helper\HorizontalSlider as HorizontalSliderHelper,
+    Zend\Dojo\View\Helper\Dojo as DojoHelper,
+    Zend\Dojo\Form\Form as DojoForm,
+    Zend\Dojo\Form\SubForm as DojoSubForm,
+    Zend\Registry,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_HorizontalSlider.
@@ -49,19 +40,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_HorizontalSliderTest extends PHPUnit_Framework_TestCase
+class HorizontalSliderTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_HorizontalSliderTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -70,34 +50,24 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends PHPUnit_Framework_TestC
      */
     public function setUp()
     {
-        Zend_Registry::_unsetInstance();
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+        Registry::_unsetInstance();
+        DojoHelper::setUseDeclarative();
 
         $this->view   = $this->getView();
-        $this->helper = new Zend_Dojo_View_Helper_HorizontalSlider();
+        $this->helper = new HorizontalSliderHelper();
         $this->helper->setView($this->view);
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
     }
 
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+        $view = new View();
+        \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
 
     public function getElement()
     {
-        return $this->helper->horizontalSlider(
+        return $this->helper->direct(
             'elementId',
             '',
             array(
@@ -180,7 +150,7 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends PHPUnit_Framework_TestC
 
     public function testShouldAllowProgrammaticDijitCreation()
     {
-        Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
+        DojoHelper::setUseProgrammatic();
         $html = $this->getElement();
         $this->assertNotRegexp('/<div[^>]*(dojoType="dijit.form.HorizontalSlider")/', $html);
         $this->assertNotNull($this->view->dojo()->getDijit('elementId-slider'));
@@ -218,17 +188,15 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends PHPUnit_Framework_TestC
         $this->assertNotContains('rightDecoration', $html);
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testSliderShouldRaiseExceptionIfMissingRequiredParameters()
     {
+        $this->setExpectedException('Zend\Dojo\View\Exception');
         $this->helper->prepareSlider('foo', 4);
     }
 
     public function testShouldAllowPassingLabelParametersViaDecorationParameters()
     {
-        $html = $this->helper->horizontalSlider(
+        $html = $this->helper->direct(
             'elementId',
             '',
             array(
@@ -263,7 +231,7 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends PHPUnit_Framework_TestC
      */
     public function testShouldCreateAppropriateIdsForElementsInSubForms()
     {
-        $form = new Zend_Dojo_Form;
+        $form = new DojoForm;
         $form->setDecorators(array(
             'FormElements',
             array('TabContainer', array(
@@ -276,7 +244,7 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends PHPUnit_Framework_TestC
             'DijitForm',
         ));
 
-        $sliderForm = new Zend_Dojo_Form_SubForm();
+        $sliderForm = new DojoSubForm();
         $sliderForm->setAttribs(array(
             'name'   => 'slidertab',
             'legend' => 'Slider Elements',
@@ -314,9 +282,4 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends PHPUnit_Framework_TestC
         $this->assertNotRegexp('/<div[^>]*(dojoType="dijit.form.HorizontalRuleLabels")[^>]*><\/div>\s*<ol/s', $html, $html);
         $this->assertRegexp('/<div[^>]*><\/div>\s*<ol[^>]*(dojoType="dijit.form.HorizontalRuleLabels")/s', $html, $html);
     }
-}
-
-// Call Zend_Dojo_View_Helper_HorizontalSliderTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_View_Helper_HorizontalSliderTest::main") {
-    Zend_Dojo_View_Helper_HorizontalSliderTest::main();
 }

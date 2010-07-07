@@ -60,7 +60,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->error = false;
-        foreach (array(Registry\Registry::REGISTRY_KEY, 'Zend_View_Helper_Doctype') as $key) {
+        foreach (array(Registry::REGISTRY_KEY, 'Zend_View_Helper_Doctype') as $key) {
             if (\Zend\Registry::isRegistered($key)) {
                 $registry = \Zend\Registry::getInstance();
                 unset($registry[$key]);
@@ -91,7 +91,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
 
     public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
     {
-        $registry = Registry\Registry::getRegistry();
+        $registry = Registry::getRegistry();
         if ($registry->containerExists('Zend_View_Helper_HeadMeta')) {
             $registry->deleteContainer('Zend_View_Helper_HeadMeta');
         }

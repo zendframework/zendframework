@@ -23,12 +23,14 @@
  * @namespace
  */
 namespace Zend\Text\Table;
-use Zend\Config;
+
+use Zend\Config,
+    Zend\Loader\PluginLoader;
 
 /**
  * Zend_Text_Table enables developers to create tables out of characters
  *
- * @uses      \Zend\Loader\PluginLoader\PluginLoader
+ * @uses      \Zend\Loader\PluginLoader
  * @uses      \Zend\Text\Table\Exception
  * @uses      \Zend\Text\Table\Column
  * @uses      \Zend\Text\Table\Row
@@ -50,7 +52,7 @@ class Table
     /**
      * Decorator used for the table borders
      *
-     * @var \Zend\Text\Table\Decorator\DecoratorInterface
+     * @var \Zend\Text\Table\Decorator
      */
     protected $_decorator = null;
 
@@ -92,7 +94,7 @@ class Table
     /**
      * Plugin loader for decorators
      *
-     * @var string
+     * @var Zend\Loader\PrefixPathMapper
      */
     protected $_pluginLoader = null;
 
@@ -227,12 +229,12 @@ class Table
     /**
      * Set decorator
      *
-     * @param  \Zend\Text\Table\Decorator\DecoratorInterface|string $decorator Decorator to use
+     * @param  \Zend\Text\Table\Decorator|string $decorator Decorator to use
      * @return \Zend\Text\Table\Table
      */
     public function setDecorator($decorator)
     {
-        if ($decorator instanceof Decorator\DecoratorInterface) {
+        if ($decorator instanceof Decorator) {
             $this->_decorator = $decorator;
         } else {
             $classname        = $this->getPluginLoader()->load($decorator);
@@ -257,14 +259,14 @@ class Table
     /**
      * Get the plugin loader for decorators
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public function getPluginLoader()
     {
         if ($this->_pluginLoader === null) {
             $prefix     = 'Zend\Text\Table\Decorator\\';
             $pathPrefix = 'Zend/Text/Table/Decorator/';
-            $this->_pluginLoader = new \Zend\Loader\PluginLoader\PluginLoader(array($prefix => $pathPrefix));
+            $this->_pluginLoader = new PluginLoader(array($prefix => $pathPrefix));
         }
 
         return $this->_pluginLoader;

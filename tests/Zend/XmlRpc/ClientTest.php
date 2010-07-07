@@ -706,7 +706,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function makeHttpResponseFor($nativeVars)
     {
         $response = $this->getServerResponseFor($nativeVars);
-        return \Zend\HTTP\Response\Response::fromString($response);
+        return \Zend\HTTP\Response::fromString($response);
     }
 
     public function mockIntrospector()

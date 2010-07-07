@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\AMF;
-use Zend\Loader\PluginLoader\PluginLoader,
+use Zend\Loader\PluginLoader,
     Zend\Authentication\AuthenticationService,
     Zend\Server\Reflection;
 
@@ -44,9 +44,9 @@ use Zend\Loader\PluginLoader\PluginLoader,
  * @uses       Zend\AMF\Value\Messaging\ErrorMessage
  * @uses       Zend\AMF\Server\Exception
  * @uses       Zend\Authentication\AuthenticationService
- * @uses       Zend\Loader\PluginLoader\PluginLoader
- * @uses       Zend\Server\ServerInterface
- * @uses       Zend\Server\Reflection\Reflection
+ * @uses       Zend\Loader\PluginLoader
+ * @uses       Zend\Server\Server
+ * @uses       Zend\Server\Reflection
  * @uses       Zend\Session\Manager
  * @uses       Zend\Session\Container
  * @package    Zend_Amf
@@ -54,7 +54,7 @@ use Zend\Loader\PluginLoader\PluginLoader,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Server implements \Zend\Server\ServerInterface
+class Server implements \Zend\Server\Server
 {
     /**
      * Array of dispatchables
@@ -73,7 +73,7 @@ class Server implements \Zend\Server\ServerInterface
 
     /**
      * Loader for classes in added directories
-     * @var Zend\Loader\PluginLoader\PluginLoader
+     * @var Zend\Loader\PluginLoader
      */
     protected $_loader;
 
@@ -121,7 +121,7 @@ class Server implements \Zend\Server\ServerInterface
     /**
      * Authentication handler object
      *
-     * @var Zend\AMF\Authentication\AbstractAuthentication
+     * @var Zend\AMF\AbstractAuthentication
      */
     protected $_auth;
 
@@ -175,10 +175,10 @@ class Server implements \Zend\Server\ServerInterface
     /**
      * Set authentication adapter
      *
-     * @param  Zend\AMF\Authentication\AbstractAuthentication $auth
+     * @param  Zend\AMF\AbstractAuthentication $auth
      * @return Zend\AMF\Server
      */
-    public function setAuth(Authentication\AbstractAuthentication $auth)
+    public function setAuth(AbstractAuthentication $auth)
     {
         $this->_auth = $auth;
         return $this;
@@ -187,7 +187,7 @@ class Server implements \Zend\Server\ServerInterface
    /**
      * Get authentication adapter
      *
-     * @return Zend\AMF\Authentication\AbstractAuthentication
+     * @return Zend\AMF\AbstractAuthentication
      */
     public function getAuth()
     {
@@ -303,7 +303,7 @@ class Server implements \Zend\Server\ServerInterface
     /**
      * Get PluginLoader for the Server
      *
-     * @return Zend\Loader\PluginLoader\PluginLoader
+     * @return Zend\Loader\PluginLoader
      */
     protected function getLoader()
     {
@@ -758,7 +758,7 @@ class Server implements \Zend\Server\ServerInterface
 
         $this->_classAllowed[is_object($class) ? get_class($class) : $class] = true;
 
-        $this->_methods[] = Reflection\Reflection::reflectClass($class, $argv, $namespace);
+        $this->_methods[] = Reflection::reflectClass($class, $argv, $namespace);
         $this->_buildDispatchTable();
 
         return $this;
@@ -792,7 +792,7 @@ class Server implements \Zend\Server\ServerInterface
             if (!is_string($func) || !function_exists($func)) {
                 throw new Exception('Unable to attach function');
             }
-            $this->_methods[] = Reflection\Reflection::reflectFunction($func, $argv, $namespace);
+            $this->_methods[] = Reflection::reflectFunction($func, $argv, $namespace);
         }
 
         $this->_buildDispatchTable();

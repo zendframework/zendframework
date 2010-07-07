@@ -61,7 +61,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $front->setResponse($this->response);
 
         $this->viewRenderer = new \Zend\Controller\Action\Helper\ViewRenderer();
-        \Zend\Controller\Action\HelperBroker\HelperBroker::addHelper($this->viewRenderer);
+        \Zend\Controller\Action\HelperBroker::addHelper($this->viewRenderer);
         $this->helper = new \Zend\Controller\Action\Helper\JSON();
         $this->helper->suppressExit = true;
     }

@@ -20,19 +20,13 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_Form_Element_ComboBoxTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Element_ComboBoxTest::main");
-}
+namespace ZendTest\Dojo\Form\Element;
 
-
-/** Zend_Dojo_Form_Element_ComboBox */
-
-/** Zend_View */
-
-/** Zend_Registry */
-
-/** Zend_Dojo_View_Helper_Dojo */
+use Zend\Dojo\Form\Element\ComboBox as ComboBoxElement,
+    Zend\Dojo\View\Helper\Dojo as DojoHelper,
+    Zend\Form\SubForm,
+    Zend\Registry,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_ComboBox.
@@ -45,19 +39,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
-class Zend_Dojo_Form_Element_ComboBoxTest extends PHPUnit_Framework_TestCase
+class ComboBoxTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_ComboBoxTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -66,34 +49,24 @@ class Zend_Dojo_Form_Element_ComboBoxTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Zend_Registry::_unsetInstance();
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+        Registry::_unsetInstance();
+        DojoHelper::setUseDeclarative();
 
         $this->view    = $this->getView();
         $this->element = $this->getElement();
         $this->element->setView($this->view);
     }
 
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-    }
-
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+        $view = new View();
+        \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
 
     public function getElement()
     {
-        $element = new Zend_Dojo_Form_Element_ComboBox(
+        $element = new ComboBoxElement(
             'foo',
             array(
                 'label' => 'ComboBox',
@@ -141,8 +114,8 @@ class Zend_Dojo_Form_Element_ComboBoxTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('autocomplete', $this->element->dijitParams));
     }
 
-    /**#@+
-     * @see ZF-3286
+    /**
+     * @group ZF-3286
      */
     public function testShouldNeverRegisterInArrayValidatorAutomatically()
     {
@@ -156,7 +129,6 @@ class Zend_Dojo_Form_Element_ComboBoxTest extends PHPUnit_Framework_TestCase
         $this->element->isValid('test');
         $this->assertFalse($this->element->getValidator('InArray'));
     }
-    /**#@-*/
 
     public function testShouldRenderComboBoxDijit()
     {
@@ -170,23 +142,17 @@ class Zend_Dojo_Form_Element_ComboBoxTest extends PHPUnit_Framework_TestCase
      */
     public function testComboBoxInSubFormShouldCreateJsonStoreBasedOnQualifiedId()
     {
-        Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
+        DojoHelper::setUseProgrammatic();
         $this->element->setStoreId('foo')
                       ->setStoreType('dojo.data.ItemFileReadStore')
                       ->setStoreParams(array(
                           'url' => '/foo',
                         ));
 
-        include_once 'Zend/Form/SubForm.php';
-        $subform = new Zend_Form_SubForm(array('name' => 'bar'));
+        $subform = new SubForm(array('name' => 'bar'));
         $subform->addElement($this->element);
         $html = $this->element->render();
         $dojo = $this->view->dojo()->__toString();
         $this->assertContains('"store":"foo"', $dojo, $dojo);
     }
-}
-
-// Call Zend_Dojo_Form_Element_ComboBoxTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Element_ComboBoxTest::main") {
-    Zend_Dojo_Form_Element_ComboBoxTest::main();
 }

@@ -94,13 +94,13 @@ class CipherTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Use of the Zend_InfoCard component requires the mcrypt extension to be enabled in PHP');
         }
 
-        $this->assertTrue(Cipher\Cipher::getInstanceByURI(Cipher\Cipher::ENC_AES128CBC)
+        $this->assertTrue(Cipher::getInstanceByURI(Cipher::ENC_AES128CBC)
                           instanceof \Zend\InfoCard\Cipher\Symmetric\Adapter\AES128CBC);
-        $this->assertTrue(Cipher\Cipher::getInstanceByURI(Cipher\Cipher::ENC_RSA)
+        $this->assertTrue(Cipher::getInstanceByURI(Cipher::ENC_RSA)
                           instanceof Adapter\RSA);
 
         try {
-            Cipher\Cipher::getInstanceByURI("Broken");
+            Cipher::getInstanceByURI("Broken");
             $this->fail("Exception not thrown as expected");
         } catch(\Exception $e) {
             /* yay */

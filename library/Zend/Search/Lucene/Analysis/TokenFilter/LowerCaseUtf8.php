@@ -24,14 +24,16 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Analysis\TokenFilter;
-use Zend\Search\Lucene\Analysis;
-use Zend\Search\Lucene;
+
+use Zend\Search\Lucene\Analysis\TokenFilter,
+    Zend\Search\Lucene\Analysis\Token,
+    Zend\Search\Lucene;
 
 /**
  * Lower case Token filter.
  *
  * @uses       \Zend\Search\Lucene\Analysis\Token
- * @uses       \Zend\Search\Lucene\Analysis\TokenFilter\TokenFilterInterface
+ * @uses       \Zend\Search\Lucene\Analysis\TokenFilter
  * @uses       \Zend\Search\Lucene\Exception
  * @category   Zend
  * @package    Zend_Search_Lucene
@@ -39,7 +41,7 @@ use Zend\Search\Lucene;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class LowerCaseUtf8 implements TokenFilterInterface
+class LowerCaseUtf8 implements TokenFilter
 {
     /**
      * Object constructor
@@ -58,9 +60,9 @@ class LowerCaseUtf8 implements TokenFilterInterface
      * @param \Zend\Search\Lucene\Analysis\Token $srcToken
      * @return \Zend\Search\Lucene\Analysis\Token
      */
-    public function normalize(Analysis\Token $srcToken)
+    public function normalize(Token $srcToken)
     {
-        $newToken = new Analysis\Token(mb_strtolower($srcToken->getTermText(), 'UTF-8'),
+        $newToken = new Token(mb_strtolower($srcToken->getTermText(), 'UTF-8'),
                                        $srcToken->getStartOffset(),
                                        $srcToken->getEndOffset());
 

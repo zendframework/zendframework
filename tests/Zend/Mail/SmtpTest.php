@@ -57,14 +57,14 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         }
 
         try {
-            $this->_connection = new \Zend\Mail\Protocol\Smtp\Smtp($this->_params['host'], $this->_params['port']);
+            $this->_connection = new \Zend\Mail\Protocol\Smtp($this->_params['host'], $this->_params['port']);
             $this->_transport->setConnection($this->_connection);
         } catch (\Exception $e) {
             $this->fail('exception raised while setting smtp transport connection');
         }
 
         $this->_connection = $this->_transport->getConnection();
-        if (!($this->_connection instanceof \Zend\Mail\Protocol\AbstractProtocol)) {
+        if (!($this->_connection instanceof \Zend\Mail\AbstractProtocol)) {
             $this->fail('smtp transport connection is not an instance of protocol abstract');
         }
     }

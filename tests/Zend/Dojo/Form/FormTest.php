@@ -20,15 +20,10 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_Form_FormTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_FormTest::main");
-}
+namespace ZendTest\Dojo\Form;
 
-
-/** Zend_Dojo_Form */
-
-/** Zend_View */
+use Zend\Dojo\Form\Form as DojoForm,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Dojo_Form and Zend_Dojo_Form_DisplayGroup
@@ -41,19 +36,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
-class Zend_Dojo_Form_FormTest extends PHPUnit_Framework_TestCase
+class FormTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_FormTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -62,49 +46,39 @@ class Zend_Dojo_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->form = new Zend_Dojo_Form();
+        $this->form = new DojoForm();
         $this->form->addElement('TextBox', 'foo')
                    ->addDisplayGroup(array('foo'), 'dg')
-                   ->setView(new Zend_View());
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
+                   ->setView(new View());
     }
 
     public function testDojoFormDecoratorPathShouldBeRegisteredByDefault()
     {
-        $paths = $this->form->getPluginLoader('decorator')->getPaths('Zend_Dojo_Form_Decorator');
+        $paths = $this->form->getPluginLoader('decorator')->getPaths('Zend\Dojo\Form\Decorator');
         $this->assertTrue(is_array($paths));
     }
 
     public function testDojoFormElementPathShouldBeRegisteredByDefault()
     {
-        $paths = $this->form->getPluginLoader('element')->getPaths('Zend_Dojo_Form_Element');
+        $paths = $this->form->getPluginLoader('element')->getPaths('Zend\Dojo\Form\Element');
         $this->assertTrue(is_array($paths));
     }
 
     public function testDojoFormElementDecoratorPathShouldBeRegisteredByDefault()
     {
-        $paths = $this->form->foo->getPluginLoader('decorator')->getPaths('Zend_Dojo_Form_Decorator');
+        $paths = $this->form->foo->getPluginLoader('decorator')->getPaths('Zend\Dojo\Form\Decorator');
         $this->assertTrue(is_array($paths));
     }
 
     public function testDojoFormDisplayGroupDecoratorPathShouldBeRegisteredByDefault()
     {
-        $paths = $this->form->dg->getPluginLoader()->getPaths('Zend_Dojo_Form_Decorator');
+        $paths = $this->form->dg->getPluginLoader()->getPaths('Zend\Dojo\Form\Decorator');
         $this->assertTrue(is_array($paths));
     }
 
     public function testDefaultDisplayGroupClassShouldBeDojoDisplayGroupByDefault()
     {
-        $this->assertEquals('Zend_Dojo_Form_DisplayGroup', $this->form->getDefaultDisplayGroupClass());
+        $this->assertEquals('Zend\Dojo\Form\DisplayGroup', $this->form->getDefaultDisplayGroupClass());
     }
 
     public function testDefaultDecoratorsShouldIncludeDijitForm()
@@ -116,16 +90,16 @@ class Zend_Dojo_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $view   = $this->form->getView();
         $loader = $view->getPluginLoader('helper');
-        $paths  = $loader->getPaths('Zend_Dojo_View_Helper');
+        $paths  = $loader->getPaths('Zend\Dojo\View\Helper');
         $this->assertTrue(is_array($paths));
     }
 
     public function testDisplayGroupShouldRegisterDojoViewHelperPath()
     {
-        $this->form->dg->setView(new Zend_View());
+        $this->form->dg->setView(new View());
         $view   = $this->form->dg->getView();
         $loader = $view->getPluginLoader('helper');
-        $paths  = $loader->getPaths('Zend_Dojo_View_Helper');
+        $paths  = $loader->getPaths('Zend\Dojo\View\Helper');
         $this->assertTrue(is_array($paths));
     }
 
@@ -137,9 +111,4 @@ class Zend_Dojo_Form_FormTest extends PHPUnit_Framework_TestCase
         $decorator = $this->form->getDecorator('HtmlTag');
         $this->assertEquals('zend_form_dojo', $decorator->getOption('class'));
     }
-}
-
-// Call Zend_Dojo_Form_FormTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_FormTest::main") {
-    Zend_Dojo_Form_FormTest::main();
 }

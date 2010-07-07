@@ -2,7 +2,7 @@
 
 namespace ZendTest\AMF\TestAsset\Authentication;
 
-use Zend\AMF\Authentication\AbstractAuthentication,
+use Zend\AMF\AbstractAuthentication,
     Zend\Authentication\Result;
 
 class RightPassword extends AbstractAuthentication

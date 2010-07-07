@@ -23,16 +23,19 @@
  * @namespace
  */
 namespace Zend\File\Transfer\Adapter;
-use Zend\File\Transfer;
-use Zend\Validator;
-use Zend\Filter;
+
+use Zend\File\Transfer,
+    Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathMapper,
+    Zend\Validator,
+    Zend\Filter;
 
 /**
  * Abstract class for file transfers (Downloads and Uploads)
  *
  * @uses      finfo
  * @uses      \Zend\File\Transfer\Exception
- * @uses      \Zend\Loader\PluginLoader\PluginLoader
+ * @uses      \Zend\Loader\PluginLoader
  * @category  Zend
  * @package   Zend_File_Transfer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -188,12 +191,12 @@ abstract class AbstractAdapter
     /**
      * Set plugin loader to use for validator or filter chain
      *
-     * @param  \Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  \Zend\Loader\PrefixPathMapper $loader
      * @param  string $type 'filter', or 'validator'
      * @return \Zend\File\Transfer\Adapter\AbstractAdapter
      * @throws \Zend\File\Transfer\Exception on invalid type
      */
-    public function setPluginLoader(\Zend\Loader\PluginLoader\PluginLoaderInterface $loader, $type)
+    public function setPluginLoader(PrefixPathMapper $loader, $type)
     {
         $type = strtoupper($type);
         switch ($type) {
@@ -213,7 +216,7 @@ abstract class AbstractAdapter
      * 'filter' or 'validator' for $type.
      *
      * @param  string $type
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      * @throws \Zend\File\Transfer\Exception on invalid type.
      */
     public function getPluginLoader($type)
@@ -230,7 +233,7 @@ abstract class AbstractAdapter
                         'Zend\\' . $prefixSegment . '\\File' => 'Zend/' . $pathSegment . '/File',
                     );
 
-                    $this->_loaders[$type] = new \Zend\Loader\PluginLoader\PluginLoader($paths);
+                    $this->_loaders[$type] = new PluginLoader($paths);
                 } else {
                     $loader = $this->_loaders[$type];
                     $prefix = 'Zend\\' . $prefixSegment . '\\File\\';

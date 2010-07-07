@@ -226,12 +226,12 @@ abstract class AbstractTest extends \ZendTest\DB\Select\AbstractTest
     {
         $table = $this->_getSelectTable('accounts');
         $select1 = $table->select();
-        $this->assertEquals(0, count($select1->getPart(Select\Select::FROM)));
-        $this->assertEquals(0, count($select1->getPart(Select\Select::COLUMNS)));
+        $this->assertEquals(0, count($select1->getPart(Select::FROM)));
+        $this->assertEquals(0, count($select1->getPart(Select::COLUMNS)));
 
         $select2 = $table->select(true);
-        $this->assertEquals(1, count($select2->getPart(Select\Select::FROM)));
-        $this->assertEquals(1, count($select2->getPart(Select\Select::COLUMNS)));
+        $this->assertEquals(1, count($select2->getPart(Select::FROM)));
+        $this->assertEquals(1, count($select2->getPart(Select::COLUMNS)));
 
         $this->assertEquals($select1->__toString(), $select2->__toString());
 

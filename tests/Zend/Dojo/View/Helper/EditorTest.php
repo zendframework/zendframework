@@ -20,19 +20,13 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_View_Helper_EditorTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_View_Helper_EditorTest::main");
-}
+namespace ZendTest\Dojo\View\Helper;
 
-
-/** Zend_Dojo_View_Helper_Editor */
-
-/** Zend_View */
-
-/** Zend_Registry */
-
-/** Zend_Dojo_View_Helper_Dojo */
+use Zend\Dojo\View\Helper\Editor as EditorHelper,
+    Zend\Dojo\View\Helper\Dojo as DojoHelper,
+    Zend\JSON\JSON,
+    Zend\Registry,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_Editor.
@@ -45,19 +39,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
+class EditorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_EditorTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -66,40 +49,30 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Zend_Registry::_unsetInstance();
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+        Registry::_unsetInstance();
+        DojoHelper::setUseDeclarative();
 
         $this->view   = $this->getView();
-        $this->helper = new Zend_Dojo_View_Helper_Editor();
+        $this->helper = new EditorHelper();
         $this->helper->setView($this->view);
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
     }
 
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+        $view = new View();
+        \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
 
     public function testHelperShouldRenderAlteredId()
     {
-        $html = $this->helper->editor('foo');
+        $html = $this->helper->direct('foo');
         $this->assertContains('id="foo-Editor"', $html, $html);
     }
 
     public function testHelperShouldRenderHiddenElementWithGivenIdentifier()
     {
-        $html = $this->helper->editor('foo');
+        $html = $this->helper->direct('foo');
         if (!preg_match('#(<input[^>]*(?:type="hidden")[^>]*>)#', $html, $matches)) {
             $this->fail('No hidden element generated');
         }
@@ -108,38 +81,38 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
 
     public function testHelperShouldRenderDojoTypeWhenUsedDeclaratively()
     {
-        $html = $this->helper->editor('foo');
+        $html = $this->helper->direct('foo');
         $this->assertContains('dojoType="dijit.Editor"', $html);
     }
 
     public function testHelperShouldRegisterDijitModule()
     {
-        $html = $this->helper->editor('foo');
+        $html = $this->helper->direct('foo');
         $modules = $this->view->dojo()->getModules();
         $this->assertContains('dijit.Editor', $modules);
     }
 
     public function testHelperShouldNormalizeArrayId()
     {
-        $html = $this->helper->editor('foo[]');
+        $html = $this->helper->direct('foo[]');
         $this->assertContains('id="foo-Editor"', $html, $html);
 
-        $html = $this->helper->editor('foo[bar]');
+        $html = $this->helper->direct('foo[bar]');
         $this->assertContains('id="foo-bar-Editor"', $html, $html);
     }
 
     public function testHelperShouldJsonifyPlugins()
     {
         $plugins = array('copy', 'cut', 'paste');
-        $html = $this->helper->editor('foo', '', array('plugins' => $plugins));
-        $pluginsString = Zend_Json::encode($plugins);
+        $html = $this->helper->direct('foo', '', array('plugins' => $plugins));
+        $pluginsString = JSON::encode($plugins);
         $pluginsString = str_replace('"', "'", $pluginsString);
         $this->assertContains('plugins="' . $pluginsString . '"', $html);
     }
 
     public function testHelperShouldCreateJavascriptToConnectEditorToHiddenValue()
     {
-        $this->helper->editor('foo');
+        $this->helper->direct('foo');
         $onLoadActions = $this->view->dojo()->getOnLoadActions();
         $found = false;
         foreach ($onLoadActions as $action) {
@@ -153,7 +126,7 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
 
     public function testHelperShouldCreateJavascriptToFindParentForm()
     {
-        $this->helper->editor('foo');
+        $this->helper->direct('foo');
         $javascript = $this->view->dojo()->getJavascript();
         $found = false;
         foreach ($javascript as $action) {
@@ -167,7 +140,7 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
 
     public function testHelperShouldNotRegisterDojoStylesheet()
     {
-        $this->helper->editor('foo');
+        $this->helper->direct('foo');
         $this->assertFalse($this->view->dojo()->registerDojoStylesheet());
     }
 
@@ -180,7 +153,7 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
             'createLink' => 'LinkDialog',
             'fontName' => 'FontChoice',
         );
-        $html = $this->helper->editor('foo', '', array('plugins' => array_keys($plugins)));
+        $html = $this->helper->direct('foo', '', array('plugins' => array_keys($plugins)));
 
         $dojo = $this->view->dojo()->__toString();
         foreach (array_values($plugins) as $plugin) {
@@ -194,7 +167,7 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
      */
     public function testHelperShouldUseDivByDefault()
     {
-        $html = $this->helper->editor('foo');
+        $html = $this->helper->direct('foo');
         $this->assertRegexp('#</?div[^>]*>#', $html, $html);
     }
 
@@ -204,12 +177,7 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
      */
     public function testHelperShouldOnlyUseTextareaInNoscriptTag()
     {
-        $html = $this->helper->editor('foo');
+        $html = $this->helper->direct('foo');
         $this->assertRegexp('#<noscript><textarea[^>]*>#', $html, $html);
     }
-}
-
-// Call Zend_Dojo_View_Helper_EditorTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_View_Helper_EditorTest::main") {
-    Zend_Dojo_View_Helper_EditorTest::main();
 }

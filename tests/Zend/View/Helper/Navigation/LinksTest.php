@@ -24,13 +24,15 @@
  * @namespace
  */
 namespace ZendTest\View\Helper\Navigation;
-use Zend\Navigation\Page;
-use Zend\Config;
-use Zend\Acl;
-use Zend\Acl\Role;
-use Zend\Acl\Resource;
-use Zend\View;
-use Zend\View\Helper\Navigation;
+
+use Zend\Navigation\AbstractPage,
+    Zend\Navigation\Page\Uri as UriPage,
+    Zend\Config,
+    Zend\Acl,
+    Zend\Acl\Role,
+    Zend\Acl\Resource,
+    Zend\View,
+    Zend\View\Helper\Navigation;
 
 /**
  * Tests Zend_View_Helper_Navigation_Links
@@ -86,14 +88,14 @@ class LinksTest extends TestAbstract
 
     public function testHelperEntryPointWithoutAnyParams()
     {
-        $returned = $this->_helper->links();
+        $returned = $this->_helper->direct();
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav1, $returned->getContainer());
     }
 
     public function testHelperEntryPointWithContainerParam()
     {
-        $returned = $this->_helper->links($this->_nav2);
+        $returned = $this->_helper->direct($this->_nav2);
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav2, $returned->getContainer());
     }
@@ -110,7 +112,7 @@ class LinksTest extends TestAbstract
         $found = $this->_helper->findRelation($active, 'rel', 'example');
 
         $expected = array(
-            'type'  => 'Zend_Navigation_Page_Uri',
+            'type'  => 'Zend\Navigation\Page\Uri',
             'href'  => 'http://www.example.com/',
             'label' => null
         );
@@ -127,14 +129,14 @@ class LinksTest extends TestAbstract
     public function testDetectRelationFromPageInstancePropertyOfActivePage()
     {
         $active = $this->_helper->findOneByLabel('Page 2');
-        $active->addRel('example', Page\Page::factory(array(
+        $active->addRel('example', AbstractPage::factory(array(
             'uri' => 'http://www.example.com/',
             'label' => 'An example page'
         )));
         $found = $this->_helper->findRelExample($active);
 
         $expected = array(
-            'type'  => 'Zend_Navigation_Page_Uri',
+            'type'  => 'Zend\Navigation\Page\Uri',
             'href'  => 'http://www.example.com/',
             'label' => 'An example page'
         );
@@ -158,7 +160,7 @@ class LinksTest extends TestAbstract
         $found = $this->_helper->findRelExample($active);
 
         $expected = array(
-            'type'  => 'Zend_Navigation_Page_Uri',
+            'type'  => 'Zend\Navigation\Page\Uri',
             'href'  => 'http://www.example.com/',
             'label' => 'An example page'
         );
@@ -182,7 +184,7 @@ class LinksTest extends TestAbstract
         $found = $this->_helper->findRelExample($active);
 
         $expected = array(
-            'type'  => 'Zend_Navigation_Page_Uri',
+            'type'  => 'Zend\Navigation\Page\Uri',
             'href'  => 'http://www.example.com/',
             'label' => 'An example page'
         );
@@ -248,7 +250,7 @@ class LinksTest extends TestAbstract
             'appendix', 'help', 'bookmark'
         );
 
-        $samplePage = Page\Page::factory(array(
+        $samplePage = AbstractPage::factory(array(
             'label' => 'An example page',
             'uri'   => 'http://www.example.com/'
         ));
@@ -433,12 +435,12 @@ class LinksTest extends TestAbstract
         $acl = new Acl\Acl();
         $acl->addRole(new Role\GenericRole('member'));
         $acl->addRole(new Role\GenericRole('admin'));
-        $acl->add(new Resource\GenericResource('protected'));
+        $acl->addResource(new Resource\GenericResource('protected'));
         $acl->allow('admin', 'protected');
         $this->_helper->setAcl($acl);
         $this->_helper->setRole($acl->getRole('member'));
 
-        $samplePage = Page\Page::factory(array(
+        $samplePage = AbstractPage::factory(array(
             'label'    => 'An example page',
             'uri'      => 'http://www.example.com/',
             'resource' => 'protected'
@@ -485,7 +487,7 @@ class LinksTest extends TestAbstract
         $acl = new Acl\Acl();
         $acl->addRole(new Role\GenericRole('member'));
         $acl->addRole(new Role\GenericRole('admin'));
-        $acl->add(new Resource\GenericResource('protected'));
+        $acl->addResource(new Resource\GenericResource('protected'));
         $acl->allow('admin', 'protected');
         $this->_helper->setAcl($acl);
         $this->_helper->setRole($acl->getRole('member'));
@@ -585,7 +587,7 @@ class LinksTest extends TestAbstract
 
         // find active page and create page to use for relations
         $active = $this->_helper->findOneByLabel('Page 1');
-        $forcedRelation = new Page\Uri(array(
+        $forcedRelation = new UriPage(array(
             'label' => 'Forced page',
             'uri'   => '#'
         ));

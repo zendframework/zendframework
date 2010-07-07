@@ -21,18 +21,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Context\Filesystem;
+use Zend\Tool\Project\Profile\Resource;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       Zend_Tool_Project_Context_Filesystem_Abstract
+ * @uses       \Zend\Tool\Project\Context\Filesystem\AbstractFilesystem
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Context_Filesystem_Abstract
+class File extends AbstractFilesystem
 {
 
     protected $_fileOnlyContext = null;
@@ -54,7 +60,7 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
     /**
      * init()
      *
-     * @return Zend_Tool_Project_Context_Filesystem_File
+     * @return \Zend\Tool\Project\Context\Filesystem\File
      */
     public function init()
     {
@@ -91,7 +97,7 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
      *
      * @param unknown_type $resource
      */
-    public function setResource(Zend_Tool_Project_Profile_Resource $resource)
+    public function setResource(Resource $resource)
     {
         $this->_resource = $resource;
         $this->_resource->setAppendable(false);
@@ -101,7 +107,7 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
     /**
      * getResource()
      * 
-     * @return Zend_Tool_Project_Profile_Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function getResource()
     {
@@ -111,13 +117,13 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
     /**
      * create()
      *
-     * @return Zend_Tool_Project_Context_Filesystem_File
+     * @return \Zend\Tool\Project\Context\Filesystem\File
      */
     public function create()
     {
         // check to ensure the parent exists, if not, call it and create it
-        if (($parentResource = $this->_resource->getParentResource()) instanceof Zend_Tool_Project_Profile_Resource) {
-            if ((($parentContext = $parentResource->getContext()) instanceof Zend_Tool_Project_Context_Filesystem_Abstract)
+        if (($parentResource = $this->_resource->getParentResource()) instanceof Resource) {
+            if ((($parentContext = $parentResource->getContext()) instanceof AbstractFilesystem)
                 && (!$parentContext->exists())) {
                 $parentResource->create();
             }
@@ -135,7 +141,7 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
     /**
      * delete()
      *
-     * @return Zend_Tool_Project_Context_Filesystem_File
+     * @return \Zend\Tool\Project\Context\Filesystem\File
      */
     public function delete()
     {

@@ -21,31 +21,40 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Application\Resource;
+
+use Zend\Application\ResourceException,
+    Zend\Registry,
+    Zend\Translator\Translator;
+
+/**
  * Resource for setting translation options
  *
- * @uses       Zend_Application_Resource_Exception
- * @uses       Zend_Application_Resource_ResourceAbstract
- * @uses       Zend_Registry
- * @uses       Zend_Translate
+ * @uses       \Zend\Application\ResourceException
+ * @uses       \Zend\Application\Resource\AbstractResource
+ * @uses       \Zend\Registry
+ * @uses       \Zend\Translator\Translator
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_Translate extends Zend_Application_Resource_ResourceAbstract
+class Translate extends AbstractResource
 {
     const DEFAULT_REGISTRY_KEY = 'Zend_Translate';
 
     /**
-     * @var Zend_Translate
+     * @var \Zend\Translator\Translator
      */
     protected $_translate;
 
     /**
      * Defined by Zend_Application_Resource_Resource
      *
-     * @return Zend_Translate
+     * @return \Zend\Translator\Translator
      */
     public function init()
     {
@@ -55,8 +64,8 @@ class Zend_Application_Resource_Translate extends Zend_Application_Resource_Reso
     /**
      * Retrieve translate object
      *
-     * @return Zend_Translate
-     * @throws Zend_Application_Resource_Exception if registry key was used
+     * @return \Zend\Translator\Translator
+     * @throws \Zend\Application\ResourceException if registry key was used
      *          already but is no instance of Zend_Translate
      */
     public function getTranslate()
@@ -65,11 +74,10 @@ class Zend_Application_Resource_Translate extends Zend_Application_Resource_Reso
             $options = $this->getOptions();
 
             if (!isset($options['data'])) {
-                require_once 'Zend/Application/Resource/Exception.php';
-                throw new Zend_Application_Resource_Exception('No translation source data provided.');
+                throw new ResourceException('No translation source data provided.');
             }
 
-            $adapter = isset($options['adapter']) ? $options['adapter'] : Zend_Translate::AN_ARRAY;
+            $adapter = isset($options['adapter']) ? $options['adapter'] : Translator::AN_ARRAY;
             $locale  = isset($options['locale'])  ? $options['locale']  : null;
             $translateOptions = isset($options['options']) ? $options['options'] : array();
 
@@ -77,11 +85,10 @@ class Zend_Application_Resource_Translate extends Zend_Application_Resource_Reso
                  ? $options['registry_key']
                  : self::DEFAULT_REGISTRY_KEY;
 
-            if(Zend_Registry::isRegistered($key)) {
-                $translate = Zend_Registry::get($key);
-                if(!$translate instanceof Zend_Translate) {
-                    require_once 'Zend/Application/Resource/Exception.php';
-                    throw new Zend_Application_Resource_Exception($key
+            if(Registry::isRegistered($key)) {
+                $translate = Registry::get($key);
+                if(!$translate instanceof Translator) {
+                    throw new ResourceException($key
                                    . ' already registered in registry but is '
                                    . 'no instance of Zend_Translate');
                 }
@@ -89,11 +96,11 @@ class Zend_Application_Resource_Translate extends Zend_Application_Resource_Reso
                 $translate->addTranslation($options['data'], $locale, $options);
                 $this->_translate = $translate;
             } else {
-                $this->_translate = new Zend_Translate(
+                $this->_translate = new Translator(
                     $adapter, $options['data'], $locale, $translateOptions
                 );
 
-                Zend_Registry::set($key, $this->_translate);
+                Registry::set($key, $this->_translate);
             }
         }
 

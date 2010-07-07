@@ -31,9 +31,9 @@ use Zend\DB\Adapter;
  *
  * @uses       \Zend\DB\DB
  * @uses       \Zend\DB\Adapter\AbstractAdapter
- * @uses       \Zend\DB\Select\Select
+ * @uses       \Zend\DB\Select
  * @uses       \Zend\DB\Table\Exception
- * @uses       \Zend\DB\Table\Select\Select
+ * @uses       \Zend\DB\Table\Select
  * @uses       \Zend\Loader
  * @uses       \Zend\Registry
  * @category   Zend
@@ -189,14 +189,14 @@ abstract class AbstractTable
      *
      * @var string
      */
-    protected $_rowClass = '\Zend\DB\Table\Row\Row';
+    protected $_rowClass = '\Zend\DB\Table\Row';
 
     /**
      * Classname for rowset
      *
      * @var string
      */
-    protected $_rowsetClass = '\Zend\DB\Table\Rowset\Rowset';
+    protected $_rowsetClass = '\Zend\DB\Table\Rowset';
 
     /**
      * Associative array map of declarative referential integrity rules.
@@ -984,13 +984,13 @@ abstract class AbstractTable
      * Returns an instance of a Zend_Db_Table_Select object.
      *
      * @param bool $withFromPart Whether or not to include the from part of the select based on the table
-     * @return \Zend\DB\Table\Select\Select
+     * @return \Zend\DB\Table\Select
      */
     public function select($withFromPart = self::SELECT_WITHOUT_FROM_PART)
     {
-        $select = new Select\Select($this);
+        $select = new Select($this);
         if ($withFromPart == self::SELECT_WITH_FROM_PART) {
-            $select->from($this->info(self::NAME), Select\Select::SQL_WILDCARD, $this->info(self::SCHEMA));
+            $select->from($this->info(self::NAME), Select::SQL_WILDCARD, $this->info(self::SCHEMA));
         }
         return $select;
     }
@@ -1192,7 +1192,7 @@ abstract class AbstractTable
      * was found.
      *
      * @param  mixed $key The value(s) of the primary keys.
-     * @return \Zend\DB\Table\Rowset\AbstractRowset Row(s) matching the criteria.
+     * @return \Zend\DB\Table\AbstractRowset Row(s) matching the criteria.
      * @throws \Zend\DB\Table\Exception
      */
     public function find()
@@ -1268,15 +1268,15 @@ abstract class AbstractTable
      *
      * Honors the Zend_Db_Adapter fetch mode.
      *
-     * @param string|array|\Zend\DB\Table\Select\Select $where  OPTIONAL An SQL WHERE clause or \Zend\DB\Table\Select\Select object.
+     * @param string|array|\Zend\DB\Table\Select $where  OPTIONAL An SQL WHERE clause or \Zend\DB\Table\Select object.
      * @param string|array                      $order  OPTIONAL An SQL ORDER clause.
      * @param int                               $count  OPTIONAL An SQL LIMIT count.
      * @param int                               $offset OPTIONAL An SQL LIMIT offset.
-     * @return Zend_Db_Table_Rowset_Abstract The row results per the Zend_Db_Adapter fetch mode.
+     * @return Zend_Db_Table_RowsetAbstract The row results per the Zend_Db_Adapter fetch mode.
      */
     public function fetchAll($where = null, $order = null, $count = null, $offset = null)
     {
-        if (!($where instanceof Select\Select)) {
+        if (!($where instanceof Select)) {
             $select = $this->select();
 
             if ($where !== null) {
@@ -1306,9 +1306,6 @@ abstract class AbstractTable
         );
 
         $rowsetClass = $this->getRowsetClass();
-//        if (!class_exists($rowsetClass)) {
-//            end\Loader::loadClass($rowsetClass);
-//        }
         return new $rowsetClass($data);
     }
 
@@ -1316,14 +1313,14 @@ abstract class AbstractTable
      * Fetches one row in an object of type Zend_Db_Table_Row_Abstract,
      * or returns null if no row matches the specified criteria.
      *
-     * @param string|array|\Zend\DB\Table\Select\Select $where  OPTIONAL An SQL WHERE clause or \Zend\DB\Table\Select\Select object.
+     * @param string|array|\Zend\DB\Table\Select $where  OPTIONAL An SQL WHERE clause or \Zend\DB\Table\Select object.
      * @param string|array                      $order  OPTIONAL An SQL ORDER clause.
-     * @return \Zend\DB\Table\Row\AbstractRow|null The row results per the
+     * @return \Zend\DB\Table\AbstractRow|null The row results per the
      *     Zend_Db_Adapter fetch mode, or null if no row found.
      */
     public function fetchRow($where = null, $order = null)
     {
-        if (!($where instanceof Select\Select)) {
+        if (!($where instanceof Select)) {
             $select = $this->select();
 
             if ($where !== null) {
@@ -1354,16 +1351,13 @@ abstract class AbstractTable
         );
 
         $rowClass = $this->getRowClass();
-//        if (!class_exists($rowClass)) {
-//            end\Loader::loadClass($rowClass);
-//        }
         return new $rowClass($data);
     }
 
     /**
      * Fetches a new blank row (not from the database).
      *
-     * @return \Zend\DB\Table\Row\AbstractRow
+     * @return \Zend\DB\Table\AbstractRow
      * @deprecated since 0.9.3 - use createRow() instead.
      */
     public function fetchNew()
@@ -1376,7 +1370,7 @@ abstract class AbstractTable
      *
      * @param  array $data OPTIONAL data to populate in the new row.
      * @param  string $defaultSource OPTIONAL flag to force default values into new row
-     * @return \Zend\DB\Table\Row\AbstractRow
+     * @return \Zend\DB\Table\AbstractRow
      */
     public function createRow(array $data = array(), $defaultSource = null)
     {
@@ -1416,9 +1410,6 @@ abstract class AbstractTable
         );
 
         $rowClass = $this->getRowClass();
-//        if (!class_exists($rowClass)) {
-//            end\Loader::loadClass($rowClass);
-//        }
         $row = new $rowClass($config);
         $row->setFromArray($data);
         return $row;
@@ -1428,9 +1419,9 @@ abstract class AbstractTable
      * Generate WHERE clause from user-supplied string or array
      *
      * @param  string|array $where  OPTIONAL An SQL WHERE clause.
-     * @return \Zend\DB\Table\Select\Select
+     * @return \Zend\DB\Table\Select
      */
-    protected function _where(Select\Select $select, $where)
+    protected function _where(Select $select, $where)
     {
         $where = (array) $where;
 
@@ -1453,9 +1444,9 @@ abstract class AbstractTable
      * Generate ORDER clause from user-supplied string or array
      *
      * @param  string|array $order  OPTIONAL An SQL ORDER clause.
-     * @return \Zend\DB\Table\Select\Select
+     * @return \Zend\DB\Table\Select
      */
-    protected function _order(Select\Select $select, $order)
+    protected function _order(Select $select, $order)
     {
         if (!is_array($order)) {
             $order = array($order);
@@ -1471,14 +1462,13 @@ abstract class AbstractTable
     /**
      * Support method for fetching rows.
      *
-     * @param  \Zend\DB\Table\Select\Select $select  query options.
+     * @param  \Zend\DB\Table\Select $select  query options.
      * @return array An array containing the row results in FETCH_ASSOC mode.
      */
-    protected function _fetch(Select\Select $select)
+    protected function _fetch(Select $select)
     {
         $stmt = $this->_db->query($select);
         $data = $stmt->fetchAll(\Zend\DB\DB::FETCH_ASSOC);
         return $data;
     }
-
 }

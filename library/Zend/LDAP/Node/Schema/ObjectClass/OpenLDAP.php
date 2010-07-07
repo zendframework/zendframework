@@ -24,24 +24,24 @@
  * @namespace
  */
 namespace Zend\LDAP\Node\Schema\ObjectClass;
-use Zend\LDAP\Node\Schema;
+
+use Zend\LDAP\Node\Schema\ObjectClass,
+    Zend\LDAP\Node\Schema;
 
 /**
- * Zend_LDAP_Node_Schema_ObjectClass_OpenLDAP provides access to the objectClass
+ * Zend\LDAP\Node\Schema\ObjectClass\OpenLDAP provides access to the objectClass
  * schema information on an OpenLDAP server.
  *
  * @uses       \Zend\LDAP\Node\Schema\Schema
  * @uses       \Zend\LDAP\Node\Schema\Item
- * @uses       \Zend\LDAP\Node\Schema\ObjectClass\ObjectClassInterface
+ * @uses       \Zend\LDAP\Node\Schema\ObjectClass
  * @category   Zend
  * @package    Zend_LDAP
  * @subpackage Schema
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OpenLDAP 
-    extends Schema\Item
-    implements ObjectClassInterface
+class OpenLDAP extends Schema\Item implements ObjectClass
 {
     /**
      * All inherited "MUST" attributes

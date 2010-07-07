@@ -24,25 +24,27 @@
  * @namespace
  */
 namespace Zend\PDF\ObjectFactory;
-use Zend\PDF\InternalType;
+
+use Zend\PDF\ObjectFactory,
+    Zend\PDF\InternalType;
 
 /**
  * PDF element factory interface.
  * Responsibility is to log PDF changes
  *
- * @uses       \Zend\PDF\ObjectFactory\ObjectFactoryInterface
+ * @uses       \Zend\PDF\ObjectFactory
  * @uses       \Zend\PDF\InternalType
  * @package    Zend_PDF
  * @package    Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Proxy implements ObjectFactoryInterface
+class Proxy implements ObjectFactory
 {
     /**
      * Factory object
      *
-     * @var \Zend\PDF\ObjectFactory\ObjectFactoryInterface
+     * @var \Zend\PDF\ObjectFactory
      */
     private $_factory;
 
@@ -50,9 +52,9 @@ class Proxy implements ObjectFactoryInterface
     /**
      * Object constructor
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      */
-    public function __construct(ObjectFactoryInterface $factory)
+    public function __construct(ObjectFactory $factory)
     {
         $this->_factory = $factory;
     }
@@ -76,7 +78,7 @@ class Proxy implements ObjectFactoryInterface
     /**
      * Get source factory object
      *
-     * @return \Zend\PDF\ObjectFactory\ObjectFactory
+     * @return \Zend\PDF\ObjectFactory
      */
     public function resolve()
     {
@@ -116,9 +118,9 @@ class Proxy implements ObjectFactoryInterface
     /**
      * Attach factory to the current;
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      */
-    public function attach(ObjectFactoryInterface $factory)
+    public function attach(ObjectFactory $factory)
     {
         $this->_factory->attach($factory);
     }
@@ -127,10 +129,10 @@ class Proxy implements ObjectFactoryInterface
      * Calculate object enumeration shift.
      *
      * @internal
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      * @return integer
      */
-    public function calculateShift(ObjectFactoryInterface $factory)
+    public function calculateShift(ObjectFactory $factory)
     {
         return $this->_factory->calculateShift($factory);
     }
@@ -139,7 +141,7 @@ class Proxy implements ObjectFactoryInterface
      * Clean enumeration shift cache.
      * Has to be used after PDF render operation to let followed updates be correct.
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      * @return integer
      */
     public function cleanEnumerationShiftCache()
@@ -150,11 +152,11 @@ class Proxy implements ObjectFactoryInterface
     /**
      * Retrive object enumeration shift.
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      * @return integer
      * @throws \Zend\PDF\Exception
      */
-    public function getEnumerationShift(ObjectFactoryInterface $factory)
+    public function getEnumerationShift(ObjectFactory $factory)
     {
         return $this->_factory->getEnumerationShift($factory);
     }
@@ -211,7 +213,7 @@ class Proxy implements ObjectFactoryInterface
      * Enumerate modified objects.
      * Returns array of Zend_PDF_UpdateInfoContainer
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactory $rootFactory
+     * @param \Zend\PDF\ObjectFactory $rootFactory
      * @return array
      */
     public function listModifiedObjects($rootFactory = null)

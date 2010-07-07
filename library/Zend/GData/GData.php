@@ -206,7 +206,7 @@ class GData extends App\App
      *                            request body
      * @param int $remainingRedirects Number of redirects to follow
      *                                if requests results in one
-     * @return \Zend\HTTP\Response\Response The response object
+     * @return \Zend\HTTP\Response The response object
      */
     public function performHttpRequest($method, $url, $headers = array(), $body = null, $contentType = null, $remainingRedirects = null)
     {

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+	<title>Example Atom Feed</title>
+	<updated>2006-01-23T23:04:33Z</updated>
+	<link rel="self" href="http://www.example.com" />
+	<id>http://www.example.com</id>
+
+	<author>
+		<name>John Doe</name>
+		<email>John@Example.com</email>
+		<uri>http://www.example.com</uri>
+	</author>
+
+	<entry>
+
+</feed>

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,6 +20,12 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Application\Resource;
+
+use Zend\Loader\Autoloader,
+    Zend\Application,
+    Zend\Application\Resource\Session as SessionResource,
+    Zend\Controller\Front as FrontController;
 
 /**
  * @category   Zend
@@ -30,18 +35,24 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_SessionTest extends PHPUnit_Framework_TestCase
+class SessionTest extends \PHPUnit_Framework_TestCase
 {
     public $resource;
 
     public function setUp()
     {
-        $this->resource = new Zend_Application_Resource_Session();
+        $this->resource = new SessionResource();
+    }
+
+    public function testReturnsSessionManager()
+    {
+        $sessionManager = $this->resource->init();
+        $this->assertType('Zend\Session\Manager', $sessionManager);
     }
 
     public function testSetSaveHandler()
     {
-        $saveHandler = $this->getMock('Zend_Session_SaveHandler_Interface');
+        $saveHandler = $this->getMock('Zend\\Session\\SaveHandler');
 
         $this->resource->setSaveHandler($saveHandler);
         $this->assertSame($saveHandler, $this->resource->getSaveHandler());
@@ -49,8 +60,7 @@ class Zend_Application_Resource_SessionTest extends PHPUnit_Framework_TestCase
 
     public function testSetSaveHandlerString()
     {
-        $saveHandlerClassName = 'Zend_Application_Resource_SessionTestHandlerMock1';
-        $saveHandler = $this->getMock('Zend_Session_SaveHandler_Interface', array(), array(), $saveHandlerClassName);
+        $saveHandlerClassName = 'ZendTest\\Application\\TestAsset\\SessionHandlerMock1';
 
         $this->resource->setSaveHandler($saveHandlerClassName);
 
@@ -59,8 +69,7 @@ class Zend_Application_Resource_SessionTest extends PHPUnit_Framework_TestCase
 
     public function testSetSaveHandlerArray()
     {
-        $saveHandlerClassName = 'Zend_Application_Resource_SessionTestHandlerMock2';
-        $saveHandler = $this->getMock('Zend_Session_SaveHandler_Interface', array(), array(), $saveHandlerClassName);
+        $saveHandlerClassName = 'ZendTest\\Application\\TestAsset\\SessionHandlerMock1';
 
         $this->resource->setSaveHandler(array('class' => $saveHandlerClassName));
 
@@ -69,30 +78,30 @@ class Zend_Application_Resource_SessionTest extends PHPUnit_Framework_TestCase
 
     public function testSetOptions()
     {
-        Zend_Session::setOptions(array(
-            'use_only_cookies' => false,
-            'remember_me_seconds' => 3600,
-        ));
-
         $this->resource->setOptions(array(
              'use_only_cookies' => true,
              'remember_me_seconds' => 7200,
         ));
 
-        $this->resource->init();
+        $sessionManager = $this->resource->init();
+        $config = $sessionManager->getConfig();
 
-        $this->assertEquals(1, Zend_Session::getOptions('use_only_cookies'));
-        $this->assertEquals(7200, Zend_Session::getOptions('remember_me_seconds'));
+        $this->assertTrue($config->getUseOnlyCookies());
+        $this->assertEquals(7200, $config->getRememberMeSeconds());
     }
 
-    public function testInitSetsSaveHandler()
+    public function testSaveManagerInjectedWithSessionManager()
     {
-        $saveHandler = $this->getMock('Zend_Session_SaveHandler_Interface');
+        $this->resource->setOptions(array(
+            'use_only_cookies'    => true,
+            'remember_me_seconds' => 7200,
+            'savehandler'         => array(
+                'class' => 'ZendTest\\Application\\TestAsset\\SessionHandlerMock1',
+            ),
+        ));
 
-        $this->resource->setSaveHandler($saveHandler);
-
-        $this->resource->init();
-
-        $this->assertSame($saveHandler, Zend_Session::getSaveHandler());
+        $sessionManager = $this->resource->init();
+        $saveHandler = $this->resource->getSaveHandler();
+        $this->assertSame($sessionManager, $saveHandler->getManager());
     }
 }

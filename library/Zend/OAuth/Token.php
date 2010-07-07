@@ -24,7 +24,7 @@
  */
 namespace Zend\OAuth;
 
-use Zend\HTTP\Response\Response as HTTPResponse,
+use Zend\HTTP\Response as HTTPResponse,
     Zend\OAuth\Http\Utility as HTTPUtility;
 
 
@@ -50,7 +50,7 @@ interface Token
     /**
      * Retrieve the response object this token is operating on
      * 
-     * @return Zend\HTTP\Response\Response
+     * @return Zend\HTTP\Response
      */
     public function getResponse();
 

@@ -38,7 +38,7 @@ use Zend\HTTP\Client;
  * @uses       \Zend\HTTP\Client\Client
  * @uses       \Zend\HTTP\Client\Adapter\Exception
  * @uses       \Zend\HTTP\Client\Adapter\Socket
- * @uses       \Zend\HTTP\Response\Response
+ * @uses       \Zend\HTTP\Response
  * @uses       \Zend\URI\URL
  * @category   Zend
  * @package    Zend_Http
@@ -218,7 +218,7 @@ class Proxy extends Socket
         }
 
         // Check that the response from the proxy is 200
-        if (\Zend\HTTP\Response\Response::extractCode($response) != 200) {
+        if (\Zend\HTTP\Response::extractCode($response) != 200) {
             throw new Exception("Unable to connect to HTTPS proxy. Server response: " . $response);
         }
 

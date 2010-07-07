@@ -23,7 +23,10 @@
  * @namespace
  */
 namespace Zend\Markup\Renderer;
-use Zend\Markup;
+
+use Zend\Markup\AbstractRenderer,
+    Zend\Markup\Token,
+    Zend\Loader\PluginLoader;
 
 /**
  * HTML renderer
@@ -32,15 +35,15 @@ use Zend\Markup;
  * @uses       \Zend\Filter\Callback
  * @uses       \Zend\Filter\HtmlEntities
  * @uses       \Zend\Filter\PregReplace
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
- * @uses       \Zend\Markup\Renderer\RendererAbstract
+ * @uses       \Zend\Loader\PluginLoader
+ * @uses       \Zend\Markup\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HTML extends RendererAbstract
+class HTML extends AbstractRenderer
 {
 
     /**
@@ -91,7 +94,7 @@ class HTML extends RendererAbstract
             $options = $options->toArray();
         }
 
-        $this->_pluginLoader = new \Zend\Loader\PluginLoader\PluginLoader(array(
+        $this->_pluginLoader = new PluginLoader(array(
             'Zend\Markup\Renderer\HTML' => 'Zend/Markup/Renderer/HTML/'
         ));
 
@@ -129,7 +132,7 @@ class HTML extends RendererAbstract
      * @param  array $markup
      * @return string
      */
-    protected function _executeReplace(Markup\Token $token, $markup)
+    protected function _executeReplace(Token $token, $markup)
     {
         if (isset($markup['tag'])) {
             if (!isset($markup['attributes'])) {
@@ -149,7 +152,7 @@ class HTML extends RendererAbstract
      * @param  array $markup
      * @return string
      */
-    protected function _executeSingleReplace(Markup\Token $token, $markup)
+    protected function _executeSingleReplace(Token $token, $markup)
     {
         if (isset($markup['tag'])) {
             if (!isset($markup['attributes'])) {
@@ -168,7 +171,7 @@ class HTML extends RendererAbstract
      * @param  array $attributes
      * @return string
      */
-    public static function renderAttributes(Markup\Token $token, array $attributes = array())
+    public static function renderAttributes(Token $token, array $attributes = array())
     {
         $attributes = array_merge(self::$_defaultAttributes, $attributes);
 

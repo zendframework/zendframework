@@ -62,9 +62,9 @@ class Response
      *
      * @param string $status
      * @param string $errorCode
-     * @param \Zend\HTTP\Response\Response $httpResponse If this is set the content will override $status and $errorCode
+     * @param \Zend\HTTP\Response $httpResponse If this is set the content will override $status and $errorCode
      */
-    public function __construct($status = null, $errorCode = null, HTTPResponse\Response $httpResponse = null)
+    public function __construct($status = null, $errorCode = null, HTTPResponse $httpResponse = null)
     {
         if ($status !== null) {
             $this->setStatus($status);
@@ -142,10 +142,10 @@ class Response
     /**
      * Populate this instance based on a Zend_Http_Response object
      *
-     * @param \Zend\HTTP\Response\Response $response
+     * @param \Zend\HTTP\Response $response
      * @return \Zend\Service\ReCaptcha\Response
      */
-    public function setFromHttpResponse(HTTPResponse\Response $response)
+    public function setFromHttpResponse(HTTPResponse $response)
     {
         $body = $response->getBody();
 

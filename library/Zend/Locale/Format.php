@@ -27,9 +27,9 @@ namespace Zend\Locale;
 
 /**
  * @uses       \Zend\Locale\Locale
- * @uses       \Zend\Locale\Data\Data
+ * @uses       \Zend\Locale\Data
  * @uses       \Zend\Locale\Exception
- * @uses       \Zend\Locale\Math\Math
+ * @uses       \Zend\Locale\Math
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage Format
@@ -100,7 +100,7 @@ class Format
                         if (isset($options['locale'])) {
                             $locale = $options['locale'];
                         }
-                        $options['number_format'] = Data\Data::getContent($locale, 'decimalnumber');
+                        $options['number_format'] = Data::getContent($locale, 'decimalnumber');
                     } else if ((gettype($value) !== 'string') and ($value !== NULL)) {
                         throw new Exception("Unknown number format type '" . gettype($value) . "'. "
                             . "Format '$value' must be a valid number format string.");
@@ -145,12 +145,12 @@ class Format
 
                 case 'cache' :
                     if ($value instanceof \Zend\Cache\Core) {
-                        Data\Data::setCache($value);
+                        Data::setCache($value);
                     }
                     break;
 
                 case 'disablecache' :
-                    Data\Data::disableCache($value);
+                    Data::disableCache($value);
                     break;
 
                 case 'precision' :
@@ -192,14 +192,14 @@ class Format
     public static function convertNumerals($input, $from, $to = null)
     {
         $from   = strtolower($from);
-        $source = Data\Data::getContent('en', 'numberingsystem', $from);
+        $source = Data::getContent('en', 'numberingsystem', $from);
         if (empty($source)) {
             throw new Exception("Unknown script '$from'. Use 'Latn' for digits 0,1,2,3,4,5,6,7,8,9.");
         }
 
         if ($to !== null) {
             $to     = strtolower($to);
-            $target = Data\Data::getContent('en', 'numberingsystem', $to);
+            $target = Data::getContent('en', 'numberingsystem', $to);
             if (empty($target)) {
                 throw new Exception("Unknown script '$to'. Use 'Latn' for digits 0,1,2,3,4,5,6,7,8,9.");
             }
@@ -243,7 +243,7 @@ class Format
         }
 
         // Get correct signs for this locale
-        $symbols = Data\Data::getList($options['locale'],'symbols');
+        $symbols = Data::getList($options['locale'],'symbols');
         // Change locale input to be default number
         if ((strpos($input, $symbols['minus']) !== false) ||
             (strpos($input, '-') !== false)) {
@@ -288,31 +288,31 @@ class Format
      */
     public static function toNumber($value, array $options = array())
     {
-        $value             = Math\Math::normalize($value);
-        $value             = Math\Math::floatalize($value);
+        $value             = Math::normalize($value);
+        $value             = Math::floatalize($value);
         $options           = self::_checkOptions($options) + self::$_options;
         $options['locale'] = (string) $options['locale'];
 
         // Get correct signs for this locale
-        $symbols = Data\Data::getList($options['locale'], 'symbols');
+        $symbols = Data::getList($options['locale'], 'symbols');
         $oenc = iconv_get_encoding('internal_encoding');
         iconv_set_encoding('internal_encoding', 'UTF-8');
 
         // Get format
         $format = $options['number_format'];
         if ($format === null) {
-            $format  = Data\Data::getContent($options['locale'], 'decimalnumber');
+            $format  = Data::getContent($options['locale'], 'decimalnumber');
             $format  = self::_seperateFormat($format, $value, $options['precision']);
 
             if ($options['precision'] !== null) {
-                $value   = Math\Math::normalize(Math\Math::round($value, $options['precision']));
+                $value   = Math::normalize(Math::round($value, $options['precision']));
             }
         } else {
             // seperate negative format pattern when available
             $format  = self::_seperateFormat($format, $value, $options['precision']);
             if (strpos($format, '.')) {
                 if (is_numeric($options['precision'])) {
-                    $value = Math\Math::round($value, $options['precision']);
+                    $value = Math::round($value, $options['precision']);
                 } else {
                     if (substr($format, iconv_strpos($format, '.') + 1, 3) == '###') {
                         $options['precision'] = null;
@@ -324,10 +324,10 @@ class Format
                     }
                 }
             } else {
-                $value = Math\Math::round($value, 0);
+                $value = Math::round($value, 0);
                 $options['precision'] = 0;
             }
-            $value = Math\Math::normalize($value);
+            $value = Math::normalize($value);
         }
 
         if (iconv_strpos($format, '0') === false) {
@@ -367,9 +367,9 @@ class Format
             $number = $value;
         }
 
-        $prec = call_user_func(Math\Math::$sub, $value, $number, $options['precision']);
-        $prec = Math\Math::floatalize($prec);
-        $prec = Math\Math::normalize($prec);
+        $prec = call_user_func(Math::$sub, $value, $number, $options['precision']);
+        $prec = Math::floatalize($prec);
+        $prec = Math::normalize($prec);
         if (iconv_strpos($prec, '-') !== false) {
             $prec = iconv_substr($prec, 1);
         }
@@ -448,7 +448,7 @@ class Format
             $format = iconv_substr($format, 0, iconv_strpos($format, '#')) . $number . iconv_substr($format, $point);
         }
         // set negative sign
-        if (call_user_func(Math\Math::$comp, $value, 0, $options['precision']) < 0) {
+        if (call_user_func(Math::$comp, $value, 0, $options['precision']) < 0) {
             if (iconv_strpos($format, '-') === false) {
                 $format = $symbols['minus'] . $format;
             } else {
@@ -463,7 +463,7 @@ class Format
     private static function _seperateFormat($format, $value, $precision)
     {
         if (iconv_strpos($format, ';') !== false) {
-            if (call_user_func(Math\Math::$comp, $value, 0, $precision) < 0) {
+            if (call_user_func(Math::$comp, $value, 0, $precision) < 0) {
                 $tmpformat = iconv_substr($format, iconv_strpos($format, ';') + 1);
                 if ($tmpformat[0] == '(') {
                     $format = iconv_substr($format, 0, iconv_strpos($format, ';'));
@@ -491,7 +491,7 @@ class Format
         $options = self::_checkOptions($options) + self::$_options;
 
         // Get correct signs for this locale
-        $symbols = Data\Data::getList($options['locale'],'symbols');
+        $symbols = Data::getList($options['locale'],'symbols');
 
         $regexs = self::_getRegexForType('decimalnumber', $options);
         $regexs = array_merge($regexs, self::_getRegexForType('scientificnumber', $options));
@@ -516,7 +516,7 @@ class Format
      */
     private static function _getRegexForType($type, $options)
     {
-        $decimal  = Data\Data::getContent($options['locale'], $type);
+        $decimal  = Data::getContent($options['locale'], $type);
         $decimal  = preg_replace('/[^#0,;\.\-Ee]/u', '',$decimal);
         $patterns = explode(';', $decimal);
 
@@ -524,7 +524,7 @@ class Format
             $patterns[1] = '-' . $patterns[0];
         }
 
-        $symbols = Data\Data::getList($options['locale'],'symbols');
+        $symbols = Data::getList($options['locale'],'symbols');
 
         foreach($patterns as $pkey => $pattern) {
             $regex[$pkey]  = '/^';
@@ -784,7 +784,7 @@ class Format
             if (!empty($options['locale']) && ($options['locale'] !== 'root') &&
                 (!is_object($options['locale']) || ((string) $options['locale'] !== 'root'))) {
                 // erase day string
-                    $daylist = Data\Data::getList($options['locale'], 'day');
+                    $daylist = Data::getList($options['locale'], 'day');
                 foreach($daylist as $key => $name) {
                     if (iconv_strpos($number, $name) !== false) {
                         $number = str_replace($name, "EEEE", $number);
@@ -801,10 +801,10 @@ class Format
                 (!is_object($options['locale']) || ((string) $options['locale'] !== 'root'))) {
                     // prepare to convert month name to their numeric equivalents, if requested,
                     // and we have a $options['locale']
-                    $position = self::_replaceMonth($number, Data\Data::getList($options['locale'],
+                    $position = self::_replaceMonth($number, Data::getList($options['locale'],
                         'month'));
                 if ($position === false) {
-                    $position = self::_replaceMonth($number, Data\Data::getList($options['locale'],
+                    $position = self::_replaceMonth($number, Data::getList($options['locale'],
                         'month', array('gregorian', 'format', 'abbreviated')));
                 }
             }
@@ -830,9 +830,9 @@ class Format
 
         // get daytime
         if (iconv_strpos($format, 'a') !== false) {
-            if (iconv_strpos(strtoupper($number), strtoupper(Data\Data::getContent($options['locale'], 'am'))) !== false) {
+            if (iconv_strpos(strtoupper($number), strtoupper(Data::getContent($options['locale'], 'am'))) !== false) {
                 $am = true;
-            } else if (iconv_strpos(strtoupper($number), strtoupper(Data\Data::getContent($options['locale'], 'pm'))) !== false) {
+            } else if (iconv_strpos(strtoupper($number), strtoupper(Data::getContent($options['locale'], 'pm'))) !== false) {
                 $am = false;
             }
         }
@@ -1058,7 +1058,7 @@ class Format
      */
     public static function getDateFormat($locale = null)
     {
-        $format = Data\Data::getContent($locale, 'date');
+        $format = Data::getContent($locale, 'date');
         if (empty($format)) {
             throw new Exception("failed to receive data from locale $locale");
         }
@@ -1155,7 +1155,7 @@ class Format
      */
     public static function getTimeFormat($locale = null)
     {
-        $format = Data\Data::getContent($locale, 'time');
+        $format = Data::getContent($locale, 'time');
         if (empty($format)) {
             throw new Exception("failed to receive data from locale $locale");
         }
@@ -1192,7 +1192,7 @@ class Format
      */
     public static function getDateTimeFormat($locale = null)
     {
-        $format = Data\Data::getContent($locale, 'datetime');
+        $format = Data::getContent($locale, 'datetime');
         if (empty($format)) {
             throw new Exception("failed to receive data from locale $locale");
         }

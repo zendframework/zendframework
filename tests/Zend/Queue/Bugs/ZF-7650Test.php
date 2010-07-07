@@ -90,7 +90,7 @@ class Zf7650Test extends \PHPUnit_Framework_TestCase
 
         $options = array(
             'name'          => '/temp-queue/ZF7650',
-            'options'       => array(\Zend\DB\Select\Select::FOR_UPDATE => true),
+            'options'       => array(\Zend\DB\Select::FOR_UPDATE => true),
             'driverOptions' => $driverOptions,
         );
 

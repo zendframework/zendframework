@@ -26,13 +26,13 @@ namespace Zend\InfoCard;
 
 /**
  * @uses       \Zend\InfoCard\Adapter\Default
- * @uses       \Zend\InfoCard\Adapter\AdapterInterface
+ * @uses       \Zend\InfoCard\Adapter
  * @uses       \Zend\InfoCard\Claims
  * @uses       \Zend\InfoCard\Exception
- * @uses       \Zend\InfoCard\XML\Assertion\Assertion
+ * @uses       \Zend\InfoCard\XML\Assertion\Factory
  * @uses       Zend_InfoCard_Xml_Cipher
- * @uses       \Zend\InfoCard\XML\EncryptedData\EncryptedData
- * @uses       \Zend\InfoCard\XML\Security\Security
+ * @uses       \Zend\InfoCard\XML\EncryptedData\Factory
+ * @uses       \Zend\InfoCard\XML\Security
  * @category   Zend
  * @package    Zend_InfoCard
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -56,14 +56,14 @@ class InfoCard
     /**
      * The instance to use to decrypt public-key encrypted data
      *
-     * @var \Zend\InfoCard\Cipher\PKI\PKIInterface
+     * @var \Zend\InfoCard\Cipher\PKI
      */
     protected $_pkiCipherObj;
 
     /**
      * The instance to use to decrypt symmetric encrypted data
      *
-     * @var \Zend\InfoCard\Cipher\Symmetric\SymmetricInterface
+     * @var \Zend\InfoCard\Cipher\Symmetric
      */
     protected $_symCipherObj;
 
@@ -71,7 +71,7 @@ class InfoCard
      * The InfoCard Adapter to use for callbacks into the application using the component
      * such as when storing assertions, etc.
      *
-     * @var \Zend\InfoCard\Adapter\AdapterInterface
+     * @var \Zend\InfoCard\Adapter
      */
     protected $_adapter;
 
@@ -98,10 +98,10 @@ class InfoCard
      * Sets the adapter uesd for callbacks into the application using the component, used
      * when doing things such as storing / retrieving assertions, etc.
      *
-     * @param \Zend\InfoCard\Adapter\AdapterInterface $a The Adapter instance
+     * @param \Zend\InfoCard\Adapter $a The Adapter instance
      * @return \Zend\InfoCard\InfoCard The instnace
      */
-    public function setAdapter(Adapter\AdapterInterface $a)
+    public function setAdapter(Adapter $a)
     {
         $this->_adapter = $a;
         return $this;
@@ -111,7 +111,7 @@ class InfoCard
      * Retrieves the adapter used for callbacks into the application using the component.
      * If no adapter was set then an instance of Zend_InfoCard_Adapter_Default is used
      *
-     * @return \Zend\InfoCard\Adapter\AdapterInterface The Adapter instance
+     * @return \Zend\InfoCard\Adapter The Adapter instance
      */
     public function getAdapter()
     {
@@ -125,7 +125,7 @@ class InfoCard
     /**
      * Gets the Public Key Cipher object used in this instance
      *
-     * @return \Zend\InfoCard\Cipher\PKI\PKIInterface
+     * @return \Zend\InfoCard\Cipher\PKI
      */
     public function getPkiCipherObject()
     {
@@ -135,10 +135,10 @@ class InfoCard
     /**
      * Sets the Public Key Cipher Object used in this instance
      *
-     * @param \Zend\InfoCard\Cipher\PKI\PKIInterface $cipherObj
+     * @param \Zend\InfoCard\Cipher\PKI $cipherObj
      * @return \Zend\InfoCard\InfoCard
      */
-    public function setPkiCipherObject(Cipher\PKI\PKIInterface $cipherObj)
+    public function setPkiCipherObject(Cipher\PKI $cipherObj)
     {
         $this->_pkiCipherObj = $cipherObj;
         return $this;
@@ -147,7 +147,7 @@ class InfoCard
     /**
      * Get the Symmetric Cipher Object used in this instance
      *
-     * @return \Zend\InfoCard\Cipher\Symmetric\SymmetricInterface
+     * @return \Zend\InfoCard\Cipher\Symmetric
      */
     public function getSymCipherObject()
     {
@@ -157,7 +157,7 @@ class InfoCard
     /**
      * Sets the Symmetric Cipher Object used in this instance
      *
-     * @param \Zend\InfoCard\Cipher\Symmetric\SymmetricInterface $cipherObj
+     * @param \Zend\InfoCard\Cipher\Symmetric $cipherObj
      * @return \Zend\InfoCard\InfoCard
      */
     public function setSymCipherObject($cipherObj)
@@ -194,7 +194,7 @@ class InfoCard
      * @param string $password (optional) The password for the private key file if necessary
      * @return string A key ID representing this key pair in the component
      */
-    public function addCertificatePair($private_key_file, $public_key_file, $type = Cipher\Cipher::ENC_RSA_OAEP_MGF1P, $password = null)
+    public function addCertificatePair($private_key_file, $public_key_file, $type = Cipher::ENC_RSA_OAEP_MGF1P, $password = null)
     {
         if(!file_exists($private_key_file) ||
            !file_exists($public_key_file)) {
@@ -213,8 +213,8 @@ class InfoCard
         }
 
         switch($type) {
-            case Cipher\Cipher::ENC_RSA:
-            case Cipher\Cipher::ENC_RSA_OAEP_MGF1P:
+            case Cipher::ENC_RSA:
+            case Cipher::ENC_RSA_OAEP_MGF1P:
                 $this->_keyPairs[$key_id] = array('private' => $private_key_file,
                                 'public'      => $public_key_file,
                                 'type_uri'    => $type);
@@ -309,13 +309,13 @@ class InfoCard
      */
     protected function _extractSignedToken($strXmlToken)
     {
-        $encryptedData = XML\EncryptedData\EncryptedData::getInstance($strXmlToken);
+        $encryptedData = XML\EncryptedData\Factory::getInstance($strXmlToken);
 
         // Determine the Encryption Method used to encrypt the token
 
         switch($encryptedData->getEncryptionMethod()) {
-            case Cipher\Cipher::ENC_AES128CBC:
-            case Cipher\Cipher::ENC_AES256CBC:
+            case Cipher::ENC_AES128CBC:
+            case Cipher::ENC_AES256CBC:
                 break;
             default:
                 throw new Exception("Unknown Encryption Method used in the secure token");
@@ -333,8 +333,8 @@ class InfoCard
         $encryptedKey = $keyinfo->getEncryptedKey();
 
         switch($encryptedKey->getEncryptionMethod()) {
-            case Cipher\Cipher::ENC_RSA:
-            case Cipher\Cipher::ENC_RSA_OAEP_MGF1P:
+            case Cipher::ENC_RSA:
+            case Cipher::ENC_RSA_OAEP_MGF1P:
                 break;
             default:
                 throw new Exception("Unknown Key Encryption Method used in secure token");
@@ -356,7 +356,7 @@ class InfoCard
             throw new Exception("Certificate Pair which matches digest is not of same algorithm type as document, check addCertificate()");
         }
 
-        $PKcipher = Cipher\Cipher::getInstanceByURI($encryptedKey->getEncryptionMethod());
+        $PKcipher = Cipher::getInstanceByURI($encryptedKey->getEncryptionMethod());
 
         $base64DecodeSupportsStrictParam = version_compare(PHP_VERSION, '5.2.0', '>=');
 
@@ -372,7 +372,7 @@ class InfoCard
             $certificate_pair['password']
             );
 
-        $symCipher = Cipher\Cipher::getInstanceByURI($encryptedData->getEncryptionMethod());
+        $symCipher = Cipher::getInstanceByURI($encryptedData->getEncryptionMethod());
 
         if ($base64DecodeSupportsStrictParam) {
             $dataCipherValueBase64Decoded = base64_decode($encryptedData->getCipherValue(), true);
@@ -406,18 +406,18 @@ class InfoCard
         }
 
         try {
-            $assertions = XML\Assertion\Assertion::getInstance($signedAssertionsXml);
+            $assertions = XML\Assertion\Factory::getInstance($signedAssertionsXml);
         } catch(Exception $e) {
             $retval->setError('Failure processing assertion document');
             $retval->setCode(Claims::RESULT_PROCESSING_FAILURE);
             return $retval;
         }
 
-        if(!($assertions instanceof XML\Assertion\AssertionInterface)) {
+        if(!($assertions instanceof XML\Assertion)) {
             throw new Exception("Invalid Assertion Object returned");
         }
 
-        if(!($reference_id = XML\Security\Security::validateXMLSignature($assertions->asXML()))) {
+        if(!($reference_id = XML\Security::validateXMLSignature($assertions->asXML()))) {
             $retval->setError("Failure Validating the Signature of the assertion document");
             $retval->setCode(Claims::RESULT_VALIDATION_FAILURE);
             return $retval;

@@ -24,10 +24,13 @@
  * @namespace
  */
 namespace Zend\Tag;
-use Zend\Config;
+
+use Zend\Config,
+    Zend\Loader\PrefixPathMapper,
+    Zend\Loader\PluginLoader;
 
 /**
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
+ * @uses       \Zend\Loader\PluginLoader
  * @uses       \Zend\Tag\Cloud\Exception
  * @uses       \Zend\Tag\Item
  * @uses       \Zend\Tag\ItemList
@@ -62,7 +65,7 @@ class Cloud
     /**
      * Plugin loader for decorators
      *
-     * @var \Zend\Loader\PluginLoader\PluginLoader
+     * @var \Zend\Loader\PrefixPathMapper
      */
     protected $_pluginLoader = null;
 
@@ -306,10 +309,10 @@ class Cloud
     /**
      * Set plugin loaders for use with decorators
      *
-     * @param  \Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  \Zend\Loader\PrefixPathMapper $loader
      * @return \Zend\Tag\Cloud
      */
-    public function setPluginLoader(\Zend\Loader\PluginLoader\PluginLoaderInterface $loader)
+    public function setPluginLoader(PrefixPathMapper $loader)
     {
         $this->_pluginLoader = $loader;
         return $this;
@@ -318,14 +321,14 @@ class Cloud
     /**
      * Get the plugin loader for decorators
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public function getPluginLoader()
     {
         if ($this->_pluginLoader === null) {
             $prefix     = 'Zend\Tag\Cloud\Decorator\\';
             $pathPrefix = 'Zend/Tag/Cloud/Decorator/';
-            $this->_pluginLoader = new \Zend\Loader\PluginLoader\PluginLoader(array($prefix => $pathPrefix));
+            $this->_pluginLoader = new PluginLoader(array($prefix => $pathPrefix));
         }
 
         return $this->_pluginLoader;

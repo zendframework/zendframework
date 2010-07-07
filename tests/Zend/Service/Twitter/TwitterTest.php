@@ -70,7 +70,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($client));
         $client->expects($this->once())->method('setUri')
             ->with('http://api.twitter.com/1/' . $path);
-        $response = $this->getMock('Zend\HTTP\Response\Response', array(), array(), '', false);
+        $response = $this->getMock('Zend\HTTP\Response', array(), array(), '', false);
         if (!is_null($params)) {
             $setter = 'setParameter' . ucfirst(strtolower($method));
             $client->expects($this->once())->method($setter)->with($params);

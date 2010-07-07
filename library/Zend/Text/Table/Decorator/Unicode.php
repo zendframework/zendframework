@@ -24,16 +24,18 @@
  */
 namespace Zend\Text\Table\Decorator;
 
+use Zend\Text\Table\Decorator;
+
 /**
  * Unicode Decorator for Zend_Text_Table
  *
- * @uses      \Zend\Text\Table\Decorator\DecoratorInterface
+ * @uses      \Zend\Text\Table\Decorator
  * @category  Zend
  * @package   Zend_Text_Table
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Unicode implements DecoratorInterface
+class Unicode implements Decorator
 {
     /**
      * Defined by Zend_Text_Table_Decorator_Interface

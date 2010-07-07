@@ -17,24 +17,24 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: CommonTest.php 20096 2010-01-06 02:05:09Z bkarwin $
+ * @version    $Id$
  */
 
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace ZendTest\Feed\Reader\Entry;
 use Zend\Feed\Reader;
 
 /**
-* @category Zend
-* @package Zend_Feed
-* @subpackage UnitTests
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
+ * @category   Zend
+ * @package    Zend_Feed
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Feed
+ * @group      Zend_Feed_Reader
+ */
 class CommonTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -104,7 +104,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
-        $this->assertTrue($entry->getExtension('Atom') instanceof Reader\Reader_Extension_Atom_Entry);
+        $this->assertTrue($entry->getExtension('Atom') instanceof \Zend\Feed\Reader\Extension\Atom\Entry);
     }
 
     public function testReturnsNullIfExtensionDoesNotExist()

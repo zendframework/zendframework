@@ -20,21 +20,13 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_Form_Element_SubmitButtonTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Element_SubmitButtonTest::main");
-}
+namespace ZendTest\Dojo\Form\Element;
 
-
-/** Zend_Dojo_Form_Element_SubmitButton */
-
-/** Zend_View */
-
-/** Zend_Registry */
-
-/** Zend_Translate */
-
-/** Zend_Dojo_View_Helper_Dojo */
+use Zend\Dojo\Form\Element\SubmitButton as SubmitButtonElement,
+    Zend\Dojo\View\Helper\Dojo as DojoHelper,
+    Zend\Registry,
+    Zend\Translator\Translator,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_SubmitButton.
@@ -47,19 +39,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
-class Zend_Dojo_Form_Element_SubmitButtonTest extends PHPUnit_Framework_TestCase
+class SubmitButtonTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_SubmitButtonTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -68,34 +49,24 @@ class Zend_Dojo_Form_Element_SubmitButtonTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Zend_Registry::_unsetInstance();
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+        Registry::_unsetInstance();
+        DojoHelper::setUseDeclarative();
 
         $this->view    = $this->getView();
         $this->element = $this->getElement();
         $this->element->setView($this->view);
     }
 
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-    }
-
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+        $view = new View();
+        \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
 
     public function getElement()
     {
-        $element = new Zend_Dojo_Form_Element_SubmitButton('foo');
+        $element = new SubmitButtonElement('foo');
         return $element;
     }
 
@@ -106,8 +77,8 @@ class Zend_Dojo_Form_Element_SubmitButtonTest extends PHPUnit_Framework_TestCase
 
     public function testGetLabelReturnsTranslatedLabelIfTranslatorIsRegistered()
     {
-        $translations = include dirname(__FILE__) . '/_files/locale/array.php';
-        $translate = new Zend_Translate('array', $translations, 'en');
+        $translations = include __DIR__ . '/TestAsset/locale/array.php';
+        $translate = new Translator('ArrayAdapter', $translations, 'en');
         $this->element->setTranslator($translate)
                       ->setLabel('submit');
         $test = $this->element->getLabel();
@@ -126,22 +97,22 @@ class Zend_Dojo_Form_Element_SubmitButtonTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorSetsLabelToNameIfNoLabelProvided()
     {
-        $button = new Zend_Dojo_Form_Element_SubmitButton('foo');
+        $button = new SubmitButtonElement('foo');
         $this->assertEquals('foo', $button->getName());
         $this->assertEquals('foo', $button->getLabel());
     }
 
     public function testCanPassLabelAsParameterToConstructor()
     {
-        $button = new Zend_Dojo_Form_Element_SubmitButton('foo', 'Label');
+        $button = new SubmitButtonElement('foo', 'Label');
         $this->assertEquals('Label', $button->getLabel());
     }
 
     public function testLabelIsTranslatedWhenTranslationAvailable()
     {
         $translations = array('Label' => 'This is the Submit Label');
-        $translate = new Zend_Translate('array', $translations);
-        $button = new Zend_Dojo_Form_Element_SubmitButton('foo', 'Label');
+        $translate = new Translator('ArrayAdapter', $translations);
+        $button = new SubmitButtonElement('foo', 'Label');
         $button->setTranslator($translate);
         $this->assertEquals($translations['Label'], $button->getLabel());
     }
@@ -186,9 +157,4 @@ class Zend_Dojo_Form_Element_SubmitButtonTest extends PHPUnit_Framework_TestCase
         $html = $this->element->render();
         $this->assertRegexp('/<input[^>]*(value="Label!")/', $html, $html);
     }
-}
-
-// Call Zend_Dojo_Form_Element_SubmitButtonTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Element_SubmitButtonTest::main") {
-    Zend_Dojo_Form_Element_SubmitButtonTest::main();
 }

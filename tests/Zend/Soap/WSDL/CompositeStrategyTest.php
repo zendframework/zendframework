@@ -23,8 +23,9 @@
  * @namespace
  */
 namespace ZendTest\Soap\WSDL;
-use Zend\Soap\WSDL\Strategy;
-use Zend\Soap\WSDL;
+use Zend\Soap\WSDL\Strategy,
+    Zend\Soap\WSDL,
+    Zend\Soap\WSDLException;
 
 /**
  * @package Zend_Soap
@@ -78,7 +79,7 @@ class CompositeStrategyTest extends \PHPUnit_Framework_TestCase
             $strategy->connectTypeToStrategy(array(), 'strategy');
             $this->fail();
         } catch(\Exception $e) {
-            $this->assertTrue($e instanceof WSDL\Exception);
+            $this->assertTrue($e instanceof WSDLException);
         }
     }
 
@@ -91,14 +92,14 @@ class CompositeStrategyTest extends \PHPUnit_Framework_TestCase
             $book = $strategy->getStrategyOfType('Book');
             $this->fail();
         } catch(\Exception $e) {
-            $this->assertTrue($e instanceof WSDL\Exception);
+            $this->assertTrue($e instanceof WSDLException);
         }
 
         try {
             $book = $strategy->getStrategyOfType('Anything');
             $this->fail();
         } catch(\Exception $e) {
-            $this->assertTrue($e instanceof WSDL\Exception);
+            $this->assertTrue($e instanceof WSDLException);
         }
     }
 
@@ -108,7 +109,7 @@ class CompositeStrategyTest extends \PHPUnit_Framework_TestCase
         $strategy->connectTypeToStrategy('\ZendTest\Soap\WSDL\Book',   '\Zend\Soap\WSDL\Strategy\ArrayOfTypeComplex');
         $strategy->connectTypeToStrategy('\ZendTest\Soap\WSDL\Cookie', '\Zend\Soap\WSDL\Strategy\DefaultComplexType');
 
-        $wsdl = new WSDL\WSDL('SomeService', 'http://example.com');
+        $wsdl = new WSDL('SomeService', 'http://example.com');
         $strategy->setContext($wsdl);
 
         $this->assertEquals('tns:\ZendTest\Soap\WSDL\Book',   $strategy->addComplexType('\ZendTest\Soap\WSDL\Book'));
@@ -123,7 +124,7 @@ class CompositeStrategyTest extends \PHPUnit_Framework_TestCase
             $strategy->addComplexType('Test');
             $this->fail();
         } catch(\Exception $e) {
-            $this->assertTrue($e instanceof WSDL\Exception);
+            $this->assertTrue($e instanceof WSDLException);
         }
     }
 }

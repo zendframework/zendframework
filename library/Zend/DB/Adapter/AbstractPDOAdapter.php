@@ -34,7 +34,7 @@ use Zend\DB\Select;
  * @uses       \Zend\DB\Adapter\Exception
  * @uses       \Zend\DB\Statement\Exception
  * @uses       \Zend\DB\Profiler\Profiler
- * @uses       \Zend\DB\Statement\PDO\PDO
+ * @uses       \Zend\DB\Statement\PDO
  * @uses       \Zend\Loader
  * @category   Zend
  * @package    Zend_Db
@@ -50,7 +50,7 @@ abstract class AbstractPDOAdapter extends Adapter\AbstractAdapter
      *
      * @var string
      */
-    protected $_defaultStmtClass = '\Zend\DB\Statement\PDO\PDO';
+    protected $_defaultStmtClass = '\Zend\DB\Statement\PDO';
 
     /**
      * Creates a PDO DSN for the adapter from $this->_config settings.
@@ -200,14 +200,14 @@ abstract class AbstractPDOAdapter extends Adapter\AbstractAdapter
      * Special handling for PDO query().
      * All bind parameter names must begin with ':'
      *
-     * @param string|\Zend\DB\Select\Select $sql The SQL statement with placeholders.
+     * @param string|\Zend\DB\Select $sql The SQL statement with placeholders.
      * @param array $bind An array of data to bind to the placeholders.
-     * @return \Zend\DB\Statement\PDO\PDO
+     * @return \Zend\DB\Statement\PDO
      * @throws \Zend\DB\Adapter\Exception To re-throw PDOException.
      */
     public function query($sql, $bind = array())
     {
-        if (empty($bind) && $sql instanceof Select\Select) {
+        if (empty($bind) && $sql instanceof Select) {
             $bind = $sql->getBind();
         }
 
@@ -238,7 +238,7 @@ abstract class AbstractPDOAdapter extends Adapter\AbstractAdapter
      */
     public function exec($sql)
     {
-        if ($sql instanceof Select\Select) {
+        if ($sql instanceof Select) {
             $sql = $sql->assemble();
         }
 

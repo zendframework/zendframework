@@ -34,7 +34,7 @@ namespace ZendTest\DB\Statement\TestAsset;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class StaticStatement implements \Zend\DB\Statement\StatementInterface
+class StaticStatement implements \Zend\DB\Statement
 {
     /**
      * binds a PHP variable to an output column in a result set

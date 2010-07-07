@@ -55,7 +55,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                           ->setParam('noViewRenderer', true)
                           ->returnResponse(true)
                           ->throwExceptions(false);
-        HelperBroker\HelperBroker::resetHelpers();
+        HelperBroker::resetHelpers();
     }
 
     public function tearDown()
@@ -79,14 +79,14 @@ class FrontTest extends \PHPUnit_Framework_TestCase
      */
     public function testResetInstanceShouldResetHelperBroker()
     {
-        HelperBroker\HelperBroker::addHelper(new \Zend\Controller\Action\Helper\ViewRenderer());
-        HelperBroker\HelperBroker::addHelper(new \Zend\Controller\Action\Helper\Url());
-        $helpers = HelperBroker\HelperBroker::getExistingHelpers();
+        HelperBroker::addHelper(new \Zend\Controller\Action\Helper\ViewRenderer());
+        HelperBroker::addHelper(new \Zend\Controller\Action\Helper\Url());
+        $helpers = HelperBroker::getExistingHelpers();
         $this->assertTrue(is_array($helpers));
         $this->assertFalse(empty($helpers));
 
         $this->_controller->resetInstance();
-        $helpers = HelperBroker\HelperBroker::getExistingHelpers();
+        $helpers = HelperBroker::getExistingHelpers();
         $this->assertTrue(is_array($helpers));
         $this->assertTrue(empty($helpers));
     }
@@ -659,25 +659,25 @@ class FrontTest extends \PHPUnit_Framework_TestCase
 
     public function testViewRendererHelperRegisteredWhenDispatched()
     {
-        $this->assertFalse(HelperBroker\HelperBroker::hasHelper('viewRenderer'));
+        $this->assertFalse(HelperBroker::hasHelper('viewRenderer'));
         $this->_controller->setParam('noViewRenderer', false);
 
         $request = new Request\HTTP('http://example.com/index/index');
         $this->_controller->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
-        $this->assertTrue(HelperBroker\HelperBroker::hasHelper('viewRenderer'));
+        $this->assertTrue(HelperBroker::hasHelper('viewRenderer'));
     }
 
     public function testViewRendererHelperNotRegisteredIfNoViewRendererSet()
     {
-        $this->assertFalse(HelperBroker\HelperBroker::hasHelper('viewRenderer'));
+        $this->assertFalse(HelperBroker::hasHelper('viewRenderer'));
         $this->_controller->setParam('noViewRenderer', true);
 
         $request = new Request\HTTP('http://example.com/index/index');
         $this->_controller->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
-        $this->assertFalse(HelperBroker\HelperBroker::hasHelper('viewRenderer'));
+        $this->assertFalse(HelperBroker::hasHelper('viewRenderer'));
     }
 }

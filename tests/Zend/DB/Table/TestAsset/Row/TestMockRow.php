@@ -34,7 +34,7 @@ use Zend\DB\Table\Select;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TestMockRow extends \Zend\DB\Table\Row\AbstractRow
+class TestMockRow extends \Zend\DB\Table\AbstractRow
 {
 
     public $parentTable       = null;
@@ -46,20 +46,20 @@ class TestMockRow extends \Zend\DB\Table\Row\AbstractRow
     public $callerRefRuleKey  = null;
     public $matchRefRuleKey   = null;
 
-    public function findDependentRowset($dependentTable, $ruleKey = null, Select\Select $select = null)
+    public function findDependentRowset($dependentTable, $ruleKey = null, Select $select = null)
     {
         $this->dependentTable    = $dependentTable;
         $this->ruleKey           = $ruleKey;
     }
 
-    public function findParentRow($parentTable, $ruleKey = null, Select\Select $select = null)
+    public function findParentRow($parentTable, $ruleKey = null, Select $select = null)
     {
         $this->parentTable       = $parentTable;
         $this->ruleKey           = $ruleKey;
     }
 
     public function findManyToManyRowset($matchTable, $intersectionTable, $callerRefRule = null,
-                                         $matchRefRule = null, Select\Select $select = null)
+                                         $matchRefRule = null, Select $select = null)
     {
         $this->matchTable        = $matchTable;
         $this->intersectionTable = $intersectionTable;

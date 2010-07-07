@@ -37,7 +37,7 @@ use Zend\Search\Lucene\Search\Similarity;
  * @uses       \Zend\Search\Lucene\Index\SegmentInfo
  * @uses       \Zend\Search\Lucene\Index\SegmentWriter\AbstractSegmentWriter
  * @uses       \Zend\Search\Lucene\Index\Term
- * @uses       \Zend\Search\Lucene\Search\Similarity\Similarity
+ * @uses       \Zend\Search\Lucene\Search\Similarity
  * @uses       \Zend\Search\Lucene\Storage\Directory
  * @uses       \Zend\Search\Lucene\Document;
  * @category   Zend
@@ -67,10 +67,10 @@ class DocumentWriter extends AbstractSegmentWriter
     /**
      * Object constructor.
      *
-     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
+     * @param \Zend\Search\Lucene\Storage\Directory $directory
      * @param string $name
      */
-    public function __construct(Directory\DirectoryInterface $directory, $name)
+    public function __construct(Directory $directory, $name)
     {
         parent::__construct($directory, $name);
 
@@ -82,14 +82,14 @@ class DocumentWriter extends AbstractSegmentWriter
     /**
      * Adds a document to this segment.
      *
-     * @param \Zend\Search\Lucene\Document\Document $document
+     * @param \Zend\Search\Lucene\Document $document
      * @throws \Zend\Search\Lucene\Exception
      */
-    public function addDocument(Document\Document $document)
+    public function addDocument(Document $document)
     {
         $storedFields = array();
         $docNorms     = array();
-        $similarity   = Similarity\Similarity::getDefault();
+        $similarity   = Similarity::getDefault();
 
         foreach ($document->getFieldNames() as $fieldName) {
             $field = $document->getField($fieldName);

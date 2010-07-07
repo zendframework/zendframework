@@ -327,9 +327,9 @@ class ContextSwitch extends AbstractHelper
             return;
         }
 
-        $viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $view = $viewRenderer->view;
-        if ($view instanceof View\ViewInterface) {
+        if ($view instanceof View\ViewEngine) {
             $viewRenderer->setNoRender(true);
         }
     }
@@ -1070,9 +1070,9 @@ class ContextSwitch extends AbstractHelper
             return;
         }
 
-        $viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $view = $viewRenderer->view;
-        if ($view instanceof View\ViewInterface) {
+        if ($view instanceof View\ViewEngine) {
             if(method_exists($view, 'getVars')) {
                 $vars = \Zend\JSON\JSON::encode($view->getVars());
                 $this->getResponse()->setBody($vars);
@@ -1332,7 +1332,7 @@ class ContextSwitch extends AbstractHelper
     protected function _getViewRenderer()
     {
         if (null === $this->_viewRenderer) {
-            $this->_viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+            $this->_viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         }
 
         return $this->_viewRenderer;

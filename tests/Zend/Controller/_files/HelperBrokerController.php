@@ -30,7 +30,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HelperBrokerController extends \Zend\Controller\Action\Action
+class HelperBrokerController extends \Zend\Controller\Action
 {
 
     /**
@@ -89,4 +89,13 @@ class HelperBrokerController extends \Zend\Controller\Action\Action
         $this->getResponse()->appendBody(get_class($this->_helper->TestHelper));
     }
 
+    /**
+     * Test function for testLoadingHelperOnlyInitializesOnce
+     * 
+     * @return void
+     */
+    public function test()
+    {
+        $this->_helper->getHelper('testHelper');
+    }
 }

@@ -60,7 +60,7 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $regKey = Registry\Registry::REGISTRY_KEY;
+        $regKey = Registry::REGISTRY_KEY;
         if (\Zend\Registry::isRegistered($regKey)) {
             $registry = \Zend\Registry::getInstance();
             unset($registry[$regKey]);
@@ -82,7 +82,7 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
 
     public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
     {
-        $registry = Registry\Registry::getRegistry();
+        $registry = Registry::getRegistry();
         if ($registry->containerExists('Zend_View_Helper_HeadScript')) {
             $registry->deleteContainer('Zend_View_Helper_HeadScript');
         }

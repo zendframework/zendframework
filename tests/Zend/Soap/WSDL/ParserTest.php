@@ -24,7 +24,8 @@
  * @namespace
  */
 namespace ZendTest\Soap\WSDL;
-use Zend\Soap\WSDL;
+use Zend\Soap\WSDL,
+    Zend\Soap\WSDLException;
 
 /**
  * @category   Zend
@@ -41,11 +42,10 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     protected function getWSDLExampleDom()
     {
         $dom = new \DOMDocument();
-        $dom->loadXml(file_get_contents(dirname(__FILE__)."/../_files/wsdl_example.wsdl"));
+        $dom->loadXml(file_get_contents(__DIR__."/../TestAsset/wsdl_example.wsdl"));
         return $dom;
     }
 
-/*
     public function testFactoryWithDomDocument()
     {
         $dom = $this->getWSDLExampleDom();
@@ -55,14 +55,14 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryWithString()
     {
-        $xmlString = file_get_contents(dirname(__FILE__)."/../_files/wsdl_example.wsdl");
+        $xmlString = file_get_contents(__DIR__."/../TestAsset/wsdl_example.wsdl");
         $parser = WSDL\Parser::factory($xmlString);
         $this->assertTrue($parser instanceof WSDL\Parser);
     }
 
     public function testFactoryWithSimpleXml()
     {
-        $xmlString = file_get_contents(dirname(__FILE__)."/../_files/wsdl_example.wsdl");
+        $xmlString = file_get_contents(__DIR__."/../TestAsset/wsdl_example.wsdl");
         $simpleXml = simplexml_load_string($xmlString);
         $parser = WSDL\Parser::factory($simpleXml);
         $this->assertTrue($parser instanceof WSDL\Parser);
@@ -70,14 +70,14 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryWithZendSoapWSDL()
     {
-        $wsdl = new WSDL\WSDL("name", "http://example.com");
+        $wsdl = new WSDL("name", "http://example.com");
         $parser = WSDL\Parser::factory($wsdl);
         $this->assertTrue($parser instanceof WSDL\Parser);
     }
 
     public function testFactoryWithInvalidParser()
     {
-        $wsdl = new WSDL\WSDL("name", "http://example.com");
+        $wsdl = new WSDL("name", "http://example.com");
         try {
             $parser = WSDL\Parser::factory($wsdl, "stdClass");
             $this->fail();
@@ -91,7 +91,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         try {
             $parser = WSDL\Parser::factory(null);
             $this->fail();
-        } catch(WSDL\Exception $e) {
+        } catch(WSDLException $e) {
 
         }
     }
@@ -183,10 +183,9 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     public function testParseExampleWSDLWithDocumentationBlocks()
     {
         $dom = new \DOMDocument();
-        $dom->loadXml(file_get_contents(dirname(__FILE__)."/../_files/wsdl_documentation.wsdl"));
+        $dom->loadXml(file_get_contents(__DIR__."/../TestAsset/wsdl_documentation.wsdl"));
 
         $parser = new WSDL\Parser($dom);
         $result = $parser->parse();
     }
-*/
 }

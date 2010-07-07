@@ -21,16 +21,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\View\Helper;
+
+use Zend\View\Helper\FormCheckbox as FormCheckboxHelper;
+
+/**
  * Dojo CheckBox dijit
  *
- * @uses       Zend_Dojo_View_Helper_Dijit
- * @uses       Zend_View_Helper_FormCheckbox
+ * @uses       \Zend\Dojo\View\Helper\Dijit
+ * @uses       \Zend\View\Helper\FormCheckbox
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
   */
-class Zend_Dojo_View_Helper_CheckBox extends Zend_Dojo_View_Helper_Dijit
+class CheckBox extends Dijit
 {
     /**
      * Dijit being used
@@ -60,7 +67,7 @@ class Zend_Dojo_View_Helper_CheckBox extends Zend_Dojo_View_Helper_Dijit
      * @param  array $checkedOptions Should contain either two items, or the keys checkedValue and uncheckedValue
      * @return string
      */
-    public function checkBox($id, $value = null, array $params = array(), array $attribs = array(), array $checkedOptions = null)
+    public function direct($id = null, $value = null, array $params = array(), array $attribs = array(), array $checkedOptions = null)
     {
         // Prepare the checkbox options
         $checked = false;
@@ -69,7 +76,7 @@ class Zend_Dojo_View_Helper_CheckBox extends Zend_Dojo_View_Helper_Dijit
         } elseif (isset($attribs['checked'])) {
             $checked = false;
         }
-        $checkboxInfo = Zend_View_Helper_FormCheckbox::determineCheckboxInfo($value, $checked, $checkedOptions);
+        $checkboxInfo = FormCheckboxHelper::determineCheckboxInfo($value, $checked, $checkedOptions);
         $attribs['checked'] = $checkboxInfo['checked'];
         if (!array_key_exists('id', $attribs)) {
             $attribs['id'] = $id;

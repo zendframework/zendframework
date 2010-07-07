@@ -429,7 +429,7 @@ function testAutoload($class)
     return $class;
 }
 
-class TestAutoloader implements \Zend\Loader\AutoloaderInterface
+class TestAutoloader implements \Zend\Loader\Autoloadable
 {
     public function autoload($class)
     {

@@ -28,7 +28,7 @@ use Zend\Registry;
 /**
  * Base class for localization
  *
- * @uses      \Zend\Locale\Data\Data
+ * @uses      \Zend\Locale\Data
  * @uses      \Zend\Locale\Data\Translation
  * @uses      \Zend\Locale\Exception
  * @uses      \Zend\Registry
@@ -535,7 +535,7 @@ class Locale
     public static function getTranslationList($path = null, $locale = null, $value = null)
     {
         $locale = self::findLocale($locale);
-        $result = Data\Data::getList($locale, $path, $value);
+        $result = Data::getList($locale, $path, $value);
         if (empty($result) === true) {
             return false;
         }
@@ -608,7 +608,7 @@ class Locale
     public static function getTranslation($value = null, $path = null, $locale = null)
     {
         $locale = self::findLocale($locale);
-        $result = Data\Data::getContent($locale, $path, $value);
+        $result = Data::getContent($locale, $path, $value);
         if (empty($result) === true) {
             return false;
         }
@@ -682,7 +682,7 @@ class Locale
     public static function getQuestion($locale = null)
     {
         $locale            = self::findLocale($locale);
-        $quest             = Data\Data::getList($locale, 'question');
+        $quest             = Data::getList($locale, 'question');
         $yes               = explode(':', $quest['yes']);
         $no                = explode(':', $quest['no']);
         $quest['yes']      = $yes[0];
@@ -848,7 +848,7 @@ class Locale
      */
     public static function getCache()
     {
-        $cache = Data\Data::getCache();
+        $cache = Data::getCache();
 
         return $cache;
     }
@@ -861,7 +861,7 @@ class Locale
      */
     public static function setCache(\Zend\Cache\Frontend $cache)
     {
-        Data\Data::setCache($cache);
+        Data::setCache($cache);
     }
 
     /**
@@ -871,7 +871,7 @@ class Locale
      */
     public static function hasCache()
     {
-        return Data\Data::hasCache();
+        return Data::hasCache();
     }
 
     /**
@@ -881,7 +881,7 @@ class Locale
      */
     public static function removeCache()
     {
-        Data\Data::removeCache();
+        Data::removeCache();
     }
 
     /**
@@ -891,7 +891,7 @@ class Locale
      */
     public static function clearCache()
     {
-        Data\Data::clearCache();
+        Data::clearCache();
     }
 
     /**
@@ -902,7 +902,7 @@ class Locale
      */
     public static function disableCache($flag)
     {
-        Data\Data::disableCache($flag);
+        Data::disableCache($flag);
     }
 
     /**

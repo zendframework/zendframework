@@ -41,7 +41,7 @@ use Zend\Search\Lucene\Search\Highlighter;
  * @uses       \Zend\Search\Lucene\Search\Query\EmptyResult
  * @uses       \Zend\Search\Lucene\Search\Query\Insignificant
  * @uses       \Zend\Search\Lucene\Search\Query\MultiTerm
- * @uses       \Zend\Search\Lucene\Search\Query\Preprocessing\PreprocessingAbstract
+ * @uses       \Zend\Search\Lucene\Search\Query\Preprocessing\AbstractPreprocessing
  * @uses       \Zend\Search\Lucene\Search\Query\Preprocessing\Term
  * @uses       \Zend\Search\Lucene\Search\Query\Term
  * @uses       \Zend\Search\Lucene\Search\Query\Wildcard
@@ -52,7 +52,7 @@ use Zend\Search\Lucene\Search\Highlighter;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Term extends PreprocessingAbstract
+class Term extends AbstractPreprocessing
 {
     /**
      * word (query parser lexeme) to find.
@@ -93,10 +93,10 @@ class Term extends PreprocessingAbstract
     /**
      * Re-write query into primitive queries in the context of specified index
      *
-     * @param \Zend\Search\Lucene\IndexInterface $index
+     * @param \Zend\Search\Lucene\SearchIndex $index
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
-    public function rewrite(Lucene\IndexInterface $index)
+    public function rewrite(Lucene\SearchIndex $index)
     {
         if ($this->_field === null) {
             $query = new Query\MultiTerm();
@@ -238,9 +238,9 @@ class Term extends PreprocessingAbstract
     /**
      * Query specific matches highlighting
      *
-     * @param \Zend\Search\Lucene\Search\Highlighter\HighlighterInterface $highlighter  Highlighter object (also contains doc for highlighting)
+     * @param \Zend\Search\Lucene\Search\Highlighter $highlighter  Highlighter object (also contains doc for highlighting)
      */
-    protected function _highlightMatches(Highlighter\HighlighterInterface $highlighter)
+    protected function _highlightMatches(Highlighter $highlighter)
     {
         /** Skip fields detection. We don't need it, since we expect all fields presented in the HTML body and don't differentiate them */
 

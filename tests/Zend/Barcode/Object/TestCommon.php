@@ -49,7 +49,7 @@ use Zend\Config;
 abstract class TestCommon extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \Zend\Barcode\Object\ObjectInterface
+     * @var \Zend\Barcode\BarcodeObject
      */
     protected $_object = null;
 

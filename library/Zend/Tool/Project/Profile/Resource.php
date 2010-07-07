@@ -21,26 +21,31 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Profile;
+
+/**
  * This class is an iterator that will iterate only over enabled resources
  *
- * @uses       Zend_Tool_Project_Context_Repository
- * @uses       Zend_Tool_Project_Exception
- * @uses       Zend_Tool_Project_Profile_Resource_Container
+ * @uses       \Zend\Tool\Project\Context\Repository
+ * @uses       \Zend\Tool\Project\Exception
+ * @uses       \Zend\Tool\Project\Profile\Resource\Container
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resource_Container
+class Resource extends Resource\Container
 {
 
     /**
-     * @var Zend_Tool_Project_Profile
+     * @var \Zend\Tool\Project\Profile
      */
     protected $_profile = null;
 
     /**
-     * @var Zend_Tool_Project_Profile_Resource
+     * @var \Zend\Tool\Project\Profile\Resource
      */
     protected $_parentResource = null;
 
@@ -69,7 +74,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
     /**
      * __construct()
      *
-     * @param string|Zend_Tool_Project_Context_Interface $context
+     * @param string|\Zend\Tool\Project\Context $context
      */
     public function __construct($context)
     {
@@ -79,8 +84,8 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
     /**
      * setContext()
      *
-     * @param string|Zend_Tool_Project_Context_Interface $context
-     * @return Zend_Tool_Project_Profile_Resource
+     * @param string|\Zend\Tool\Project\Context $context
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function setContext($context)
     {
@@ -91,7 +96,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
     /**
      * getContext()
      *
-     * @return Zend_Tool_Project_Context_Interface
+     * @return \Zend\Tool\Project\Context
      */
     public function getContext()
     {
@@ -109,20 +114,20 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
     {
         if (is_string($this->_context)) {
             return $this->_context;
-        } elseif ($this->_context instanceof Zend_Tool_Project_Context_Interface) {
+        } elseif ($this->_context instanceof \Zend\Tool\Project\Context) {
             return $this->_context->getName();
         } else {
-            throw new Zend_Tool_Project_Exception('Invalid context in resource');
+            throw new \Zend\Tool\Project\Exception('Invalid context in resource');
         }
     }
 
     /**
      * setProfile()
      *
-     * @param Zend_Tool_Project_Profile $profile
-     * @return Zend_Tool_Project_Profile_Resource
+     * @param \Zend\Tool\Project\Profile $profile
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    public function setProfile(Zend_Tool_Project_Profile $profile)
+    public function setProfile(\Zend\Tool\Project\Profile $profile)
     {
         $this->_profile = $profile;
         return $this;
@@ -131,7 +136,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
     /**
      * getProfile
      *
-     * @return Zend_Tool_Project_Profile
+     * @return \Zend\Tool\Project\Profile
      */
     public function getProfile()
     {
@@ -156,7 +161,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
      * setEnabled()
      *
      * @param bool $enabled
-     * @return Zend_Tool_Project_Profile_Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function setEnabled($enabled = true)
     {
@@ -179,7 +184,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
      * setDeleted()
      *
      * @param bool $deleted
-     * @return Zend_Tool_Project_Profile_Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function setDeleted($deleted = true)
     {
@@ -190,7 +195,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
     /**
      * isDeleted()
      *
-     * @return Zend_Tool_Project_Profile_Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function isDeleted()
     {
@@ -200,7 +205,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
     /**
      * initializeContext()
      *
-     * @return Zend_Tool_Project_Profile_Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function initializeContext()
     {
@@ -208,7 +213,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
             return;
         }
         if (is_string($this->_context)) {
-            $this->_context = Zend_Tool_Project_Context_Repository::getInstance()->getContext($this->_context);
+            $this->_context = \Zend\Tool\Project\Context\Repository::getInstance()->getContext($this->_context);
         }
 
         if (method_exists($this->_context, 'setResource')) {
@@ -238,7 +243,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
      *
      * @param string $method
      * @param array $arguments
-     * @return Zend_Tool_Project_Profile_Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
     public function __call($method, $arguments)
     {
@@ -248,7 +253,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
             }
             return call_user_func_array(array($this->_context, $method), $arguments);
         } else {
-            throw new Zend_Tool_Project_Profile_Exception('cannot call ' . $method);
+            throw new \Zend\Tool\Project\Profile\Exception('cannot call ' . $method);
         }
     }
 

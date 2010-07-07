@@ -43,7 +43,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        HelperBroker\HelperBroker::reset();
+        HelperBroker::reset();
         $front = Controller\Front::getInstance();
         $front->resetInstance();
         $front->setControllerDirectory('.', 'default');
@@ -359,7 +359,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testGetViewScriptDoesNotOverwriteNoControllerFlagWhenNullPassed()
     {
         Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
-        $viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
 
         $request    = new Request\HTTP();
         $request->setControllerName('view')
@@ -421,7 +421,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testViewInjectionUsingViewRenderer()
     {
-        HelperBroker\HelperBroker::addHelper(new Helper\ViewRenderer());
+        HelperBroker::addHelper(new Helper\ViewRenderer());
         $request = new Request\HTTP();
         $request->setControllerName('view')
                 ->setActionName('script');
@@ -433,7 +433,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderUsingViewRenderer()
     {
-        HelperBroker\HelperBroker::addHelper(new Helper\ViewRenderer());
+        HelperBroker::addHelper(new Helper\ViewRenderer());
         $request = new Request\HTTP();
         $request->setControllerName('view')
                 ->setActionName('script');
@@ -468,7 +468,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class TestController extends \Zend\Controller\Action\Action
+class TestController extends \Zend\Controller\Action
 {
     public $initArgs = array();
 

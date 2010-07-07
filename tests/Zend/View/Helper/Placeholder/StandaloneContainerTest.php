@@ -47,7 +47,7 @@ class StandaloneContainerTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $regKey = \Zend\View\Helper\Placeholder\Registry\Registry::REGISTRY_KEY;
+        $regKey = \Zend\View\Helper\Placeholder\Registry::REGISTRY_KEY;
         if (\Zend\Registry::isRegistered($regKey)) {
             $registry = \Zend\Registry::getInstance();
             unset($registry[$regKey]);

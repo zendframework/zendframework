@@ -148,10 +148,10 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
         $expression = new DB\Expr("COUNT(*) AS $row_count_column");
 
         $rowCount = clone $this->_query;
-        $rowCount->reset(Select\Select::COLUMNS)
-                 ->reset(Select\Select::ORDER)        // ZF-3740
-                 ->reset(Select\Select::LIMIT_OFFSET) // ZF-3727
-                 ->reset(Select\Select::GROUP)        // ZF-4001
+        $rowCount->reset(Select::COLUMNS)
+                 ->reset(Select::ORDER)        // ZF-3740
+                 ->reset(Select::LIMIT_OFFSET) // ZF-3727
+                 ->reset(Select::GROUP)        // ZF-4001
                  ->columns($expression);
 
         $this->_adapter->setRowCount($rowCount);

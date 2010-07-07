@@ -21,19 +21,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Framework\System\Action;
+
+/**
  * This is a convenience class.
  *
  * At current it will return the request and response from the client registry
  * as they are the more common things that will be needed by providers
  *
  *
- * @uses       Zend_Tool_Framework_Action_Base
+ * @uses       \Zend\Tool\Framework\Action\Base
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_System_Action_Delete extends Zend_Tool_Framework_Action_Base
+class Delete extends \Zend\Tool\Framework\Action\Base
 {
 
 }

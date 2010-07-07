@@ -31,12 +31,12 @@ use Zend\Filter;
 /**
  * Provide Layout support for MVC applications
  *
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\HelperBroker
  * @uses       \Zend\Controller\Front
  * @uses       \Zend\Filter\Inflector
  * @uses       \Zend\Layout\Exception
  * @uses       \Zend\Loader
- * @uses       \Zend\View\Helper\Placeholder\Registry\Registry
+ * @uses       \Zend\View\Helper\Placeholder\Registry
  * @category   Zend
  * @package    Zend_Layout
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -46,7 +46,7 @@ class Layout
 {
     /**
      * Placeholder container for layout variables
-     * @var \Zend\View\Helper\Placeholder\Container\Container
+     * @var \Zend\View\Helper\Placeholder\Container
      */
     protected $_container;
 
@@ -126,7 +126,7 @@ class Layout
     protected $_pluginClass = 'Zend\Layout\Controller\Plugin\Layout';
 
     /**
-     * @var \Zend\View\ViewInterface
+     * @var \Zend\View\ViewEngine
      */
     protected $_view;
 
@@ -226,8 +226,8 @@ class Layout
                 $front->unregisterPlugin($pluginClass);
             }
 
-            if (HelperBroker\HelperBroker::hasHelper('layout')) {
-                HelperBroker\HelperBroker::removeHelper('layout');
+            if (HelperBroker::hasHelper('layout')) {
+                HelperBroker::removeHelper('layout');
             }
 
             unset($layout);
@@ -297,11 +297,11 @@ class Layout
     protected function _initHelper()
     {
         $helperClass = $this->getHelperClass();
-        if (!HelperBroker\HelperBroker::hasHelper('layout')) {
+        if (!HelperBroker::hasHelper('layout')) {
             if (!class_exists($helperClass)) {
                 \Zend\Loader::loadClass($helperClass);
             }
-            HelperBroker\HelperBroker::getStack()->offsetSet(-90, new $helperClass($this));
+            HelperBroker::getStack()->offsetSet(-90, new $helperClass($this));
         }
     }
 
@@ -320,12 +320,12 @@ class Layout
     /**
      * Initialize placeholder container for layout vars
      *
-     * @return \Zend\View\Helper\Placeholder\Container\Container
+     * @return \Zend\View\Helper\Placeholder\Container
      */
     protected function _initVarContainer()
     {
         if (null === $this->_container) {
-            $this->_container = \Zend\View\Helper\Placeholder\Registry\Registry::getRegistry()->getContainer(__CLASS__);
+            $this->_container = \Zend\View\Helper\Placeholder\Registry::getRegistry()->getContainer(__CLASS__);
         }
 
         return $this->_container;
@@ -507,10 +507,10 @@ class Layout
     /**
      * Set view object
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return \Zend\Layout\Layout
      */
-    public function setView(\Zend\View\ViewInterface $view)
+    public function setView(\Zend\View\ViewEngine $view)
     {
         $this->_view = $view;
         return $this;
@@ -566,12 +566,12 @@ class Layout
      * If no view object currently set, retrieves it from the ViewRenderer.
      *
      * @todo Set inflector from view renderer at same time
-     * @return \Zend\View\ViewInterface
+     * @return \Zend\View\ViewEngine
      */
     public function getView()
     {
         if (null === $this->_view) {
-            $viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+            $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
             if (null === $viewRenderer->view) {
                 $viewRenderer->initView();
             }

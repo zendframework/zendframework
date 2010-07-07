@@ -115,7 +115,7 @@ class PlatformJobQueueTest extends AdapterTest
 
         $message = $queue->send(array('script' => 'info.php'));
 
-        $this->assertTrue($message instanceof Message\Message);
+        $this->assertTrue($message instanceof Message);
 
         $list = $queue->receive();
         $this->assertTrue($list instanceof Message\MessageIterator);
@@ -136,7 +136,7 @@ class PlatformJobQueueTest extends AdapterTest
         $adapter = $queue->getAdapter();
 
         $message = $adapter->send(array('script' => 'info.php'));
-        $this->assertTrue($message instanceof Message\Message);
+        $this->assertTrue($message instanceof Message);
 
         $list = $queue->receive();
         $this->assertTrue($list instanceof Message\MessageIterator);
@@ -169,7 +169,7 @@ class PlatformJobQueueTest extends AdapterTest
 
         // send the message
         $message = $adapter->send((array('script' => $scriptName)));
-        $this->assertTrue($message instanceof Message\Message);
+        $this->assertTrue($message instanceof Message);
 
         // get it back
         $list = $adapter->receive(1);
@@ -182,7 +182,7 @@ class PlatformJobQueueTest extends AdapterTest
             $adapter->deleteMessage($list->current());
         }
 
-        $this->assertTrue($message instanceof Message\Message);
+        $this->assertTrue($message instanceof Message);
         $this->assertEquals($message->getJob()->getScript(), $scriptName);
 
         // delete the queue we created
@@ -207,7 +207,7 @@ class PlatformJobQueueTest extends AdapterTest
 
         // send the message
         $message = $adapter->send((array('script' => $scriptName)));
-        $this->assertTrue($message instanceof Message\Message);
+        $this->assertTrue($message instanceof Message);
 
         // get it back
         $list = $adapter->receive(1);
@@ -220,7 +220,7 @@ class PlatformJobQueueTest extends AdapterTest
             $adapter->deleteMessage($list->current());
         }
 
-        $this->assertTrue($message instanceof Message\Message);
+        $this->assertTrue($message instanceof Message);
         $this->assertEquals($message->getJob()->getScript(), $scriptName);
 
         $id = $message->getJob()->getID();

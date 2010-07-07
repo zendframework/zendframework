@@ -25,16 +25,18 @@
  */
 namespace Zend\PDF\InternalType\StreamFilter;
 
+use Zend\PDF\InternalType\StreamFilter;
+
 /**
  * RunLength stream filter
  *
- * @uses       \Zend\PDF\InternalType\StreamFilter\FilterInterface
+ * @uses       \Zend\PDF\InternalType\StreamFilter
  * @package    Zend_PDF
  * @package    Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RunLength implements FilterInterface
+class RunLength implements StreamFilter
 {
     /**
      * Encode data

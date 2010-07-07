@@ -16,23 +16,23 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: FeedSet.php 20096 2010-01-06 02:05:09Z bkarwin $
+ * @version    $Id$
  */
 
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace Zend\Feed\Reader;
 use Zend\URI;
 
 /**
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Uri\Uri
-* @category Zend
-* @package Zend_Feed_Reader
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-*/
+ * @uses       \Zend\Feed\Reader\Reader
+ * @uses       \Zend\Uri\Uri
+ * @category   Zend
+ * @package    Zend_Feed_Reader
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class FeedSet extends \ArrayObject
 {
 
@@ -94,7 +94,7 @@ class FeedSet extends \ArrayObject
                 }
 
                 $link = $uri->getScheme() . '://' . $uri->getHost() . '/' . $this->_canonicalizePath($link);
-                if (!URI\URL::validate($link)) {
+                if (!URI\Zend\Uri\Uri::check($link)) {
                     $link = null;
                 }
             }
@@ -128,7 +128,7 @@ class FeedSet extends \ArrayObject
      *
      * @param string $offset
      * @return mixed
-     * @uses Zend_Feed_Reader
+     * @uses \Zend\Feed\Reader\Reader
      */
     public function offsetGet($offset)
     {

@@ -24,10 +24,11 @@
  * @namespace
  */
 namespace ZendTest\View\Helper\Navigation;
-use Zend\Navigation;
-use Zend\Controller;
-use Zend\Acl\Role;
-use Zend\Acl\Resource;
+
+use Zend\Navigation,
+    Zend\Controller,
+    Zend\Acl\Role,
+    Zend\Acl\Resource;
 
 /**
  * Base class for navigation view helper tests
@@ -87,9 +88,7 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->markTestSkipped('Skipped until Zend\Navigation is converted');
-        
-        $cwd = dirname(__FILE__);
+        $cwd = __DIR__;
 
         // read navigation config
         $this->_files = $cwd . '/_files';
@@ -155,10 +154,10 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
         $acl->addRole(new Role\GenericRole('admin'), 'member');
         $acl->addRole(new Role\GenericRole('special'), 'member');
 
-        $acl->add(new Resource\GenericResource('guest_foo'));
-        $acl->add(new Resource\GenericResource('member_foo'), 'guest_foo');
-        $acl->add(new Resource\GenericResource('admin_foo', 'member_foo'));
-        $acl->add(new Resource\GenericResource('special_foo'), 'member_foo');
+        $acl->addResource(new Resource\GenericResource('guest_foo'));
+        $acl->addResource(new Resource\GenericResource('member_foo'), 'guest_foo');
+        $acl->addResource(new Resource\GenericResource('admin_foo', 'member_foo'));
+        $acl->addResource(new Resource\GenericResource('special_foo'), 'member_foo');
 
         $acl->allow('guest', 'guest_foo');
         $acl->allow('member', 'member_foo');
@@ -186,6 +185,6 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
             'Go home'      => 'Gå hjem'
         );
 
-        return new \Zend\Translator\Translator('array', $data, 'nb_NO');
+        return new \Zend\Translator\Translator('ArrayAdapter', $data, 'nb_NO');
     }
 }

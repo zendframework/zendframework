@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Decorator;
+
+/**
  * Zend_Form_Decorator_Image
  *
  * Accepts the options:
@@ -29,8 +34,8 @@
  *
  * Any other options passed will be used as HTML attributes of the image tag.
  *
- * @uses       Zend_Form_Decorator_Abstract
- * @uses       Zend_Form_Decorator_HtmlTag;
+ * @uses       \Zend\Form\Decorator\AbstractDecorator
+ * @uses       \Zend\Form\Decorator\HtmlTag;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -38,7 +43,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Decorator_Image extends Zend_Form_Decorator_Abstract
+class Image extends AbstractDecorator
 {
     /**
      * Attributes that should not be passed to helper
@@ -62,7 +67,7 @@ class Zend_Form_Decorator_Image extends Zend_Form_Decorator_Abstract
      * Set HTML tag with which to surround label
      *
      * @param  string $tag
-     * @return Zend_Form_Decorator_Image
+     * @return \Zend\Form\Decorator\Image
      */
     public function setTag($tag)
     {
@@ -136,7 +141,7 @@ class Zend_Form_Decorator_Image extends Zend_Form_Decorator_Abstract
         $image = $view->formImage($name, $element->getImageValue(), $attribs);
 
         if (null !== $tag) {
-            $decorator = new Zend_Form_Decorator_HtmlTag();
+            $decorator = new HtmlTag();
             $decorator->setOptions(array('tag' => $tag));
             $image = $decorator->render($image);
         }

@@ -84,12 +84,12 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldHavePluginLoaderForValidators()
     {
         $loader = $this->adapter->getPluginLoader('validator');
-        $this->assertTrue($loader instanceof PluginLoader\PluginLoader);
+        $this->assertTrue($loader instanceof PluginLoader);
     }
 
     public function testAdapterShouldAllowAddingCustomPluginLoader()
     {
-        $loader = new PluginLoader\PluginLoader();
+        $loader = new PluginLoader();
         $this->adapter->setPluginLoader($loader, 'filter');
         $this->assertSame($loader, $this->adapter->getPluginLoader('filter'));
     }
@@ -99,7 +99,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddingInvalidPluginLoaderTypeToAdapterShouldRaiseException()
     {
-        $loader = new PluginLoader\PluginLoader();
+        $loader = new PluginLoader();
         $this->adapter->setPluginLoader($loader, 'bogus');
     }
 
@@ -354,7 +354,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldHavePluginLoaderForFilters()
     {
         $loader = $this->adapter->getPluginLoader('filter');
-        $this->assertTrue($loader instanceof PluginLoader\PluginLoader);
+        $this->assertTrue($loader instanceof PluginLoader);
     }
 
     public function testFilterPluginLoaderShouldRegisterPathsForBaseAndFileFiltersByDefault()

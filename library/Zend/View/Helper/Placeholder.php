@@ -32,7 +32,7 @@ namespace Zend\View\Helper;
  * guaranteed to effect subsequently rendered templates, and of course Layouts.
  *
  * @uses       \Zend\View\Helper\AbstractHelper.php
- * @uses       \Zend\View\Helper\Placeholder\Registry\Registry
+ * @uses       \Zend\View\Helper\Placeholder\Registry
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -47,7 +47,7 @@ class Placeholder extends \Zend\View\Helper\AbstractHelper
     protected $_items = array();
 
     /**
-     * @var \Zend\View\Helper\Placeholder\Registry\Registry
+     * @var \Zend\View\Helper\Placeholder\Registry
      */
     protected $_registry;
 
@@ -60,7 +60,7 @@ class Placeholder extends \Zend\View\Helper\AbstractHelper
      */
     public function __construct()
     {
-        $this->_registry = Placeholder\Registry\Registry::getRegistry();
+        $this->_registry = Placeholder\Registry::getRegistry();
     }
 
 
@@ -83,7 +83,7 @@ class Placeholder extends \Zend\View\Helper\AbstractHelper
     /**
      * Retrieve the registry
      *
-     * @return \Zend\View\Helper\Placeholder\Registry\Registry
+     * @return \Zend\View\Helper\Placeholder\Registry
      */
     public function getRegistry()
     {

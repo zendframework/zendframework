@@ -21,23 +21,28 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Provider;
+
+/**
  * @uses       RecursiveIteratorIterator
- * @uses       Zend_Tool_Framework_Provider_Pretendable
- * @uses       Zend_Tool_Project_Profile_Iterator_ContextFilter
- * @uses       Zend_Tool_Project_Profile_Iterator_EnabledResourceFilter
- * @uses       Zend_Tool_Project_Provider_Abstract
- * @uses       Zend_Tool_Project_Provider_Exception
+ * @uses       \Zend\Tool\Framework\Provider\Pretendable
+ * @uses       \Zend\Tool\Project\Profile\Iterator\ContextFilter
+ * @uses       \Zend\Tool\Project\Profile\Iterator\EnabledResourceFilter
+ * @uses       \Zend\Tool\Project\Provider\AbstractProvider
+ * @uses       \Zend\Tool\Project\Provider\Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Provider_Module
-    extends Zend_Tool_Project_Provider_Abstract
-    implements Zend_Tool_Framework_Provider_Pretendable
+class Module
+    extends AbstractProvider
+    implements \Zend\Tool\Framework\Provider\Pretendable
 {
 
-    public static function createResources(Zend_Tool_Project_Profile $profile, $moduleName, Zend_Tool_Project_Profile_Resource $targetModuleResource = null)
+    public static function createResources(\Zend\Tool\Project\Profile $profile, $moduleName, \Zend\Tool\Project\Profile\Resource $targetModuleResource = null)
     {
 
         // find the appliction directory, it will serve as our module skeleton
@@ -54,14 +59,14 @@ class Zend_Tool_Project_Provider_Module
 
         // if there is a module directory already, except
         if ($modulesDirectory->search(array('moduleDirectory' => array('moduleName' => $moduleName)))) {
-            throw new Zend_Tool_Project_Provider_Exception('A module named "' . $moduleName . '" already exists.');
+            throw new Exception('A module named "' . $moduleName . '" already exists.');
         }
 
         // create the module directory
         $moduleDirectory = $modulesDirectory->createResource('moduleDirectory', array('moduleName' => $moduleName));
 
         // create a context filter so that we can pull out only what we need from the module skeleton
-        $moduleContextFilterIterator = new Zend_Tool_Project_Profile_Iterator_ContextFilter(
+        $moduleContextFilterIterator = new \Zend\Tool\Project\Profile\Iterator\ContextFilter(
             $targetModuleResource,
             array(
                 'denyNames' => array('ModulesDirectory', 'ViewControllerScriptsDirectory'),
@@ -70,7 +75,7 @@ class Zend_Tool_Project_Provider_Module
             );
 
         // the iterator for the module skeleton
-        $targetIterator = new RecursiveIteratorIterator($moduleContextFilterIterator, RecursiveIteratorIterator::SELF_FIRST);
+        $targetIterator = new \RecursiveIteratorIterator($moduleContextFilterIterator, \RecursiveIteratorIterator::SELF_FIRST);
 
         // initialize some loop state information
         $currentDepth = 0;
@@ -128,15 +133,15 @@ class Zend_Tool_Project_Provider_Module
 
         if ($this->_registry->getRequest()->isPretend()) {
             $response->appendContent('I would create the following module and artifacts:');
-            foreach (new RecursiveIteratorIterator($resources, RecursiveIteratorIterator::SELF_FIRST) as $resource) {
+            foreach (new \RecursiveIteratorIterator($resources, \RecursiveIteratorIterator::SELF_FIRST) as $resource) {
                 if (is_callable(array($resource->getContext(), 'getPath'))) {
                     $response->appendContent($resource->getContext()->getPath());
                 }
             }
         } else {
             $response->appendContent('Creating the following module and artifacts:');
-            $enabledFilter = new Zend_Tool_Project_Profile_Iterator_EnabledResourceFilter($resources);
-            foreach (new RecursiveIteratorIterator($enabledFilter, RecursiveIteratorIterator::SELF_FIRST) as $resource) {
+            $enabledFilter = new \Zend\Tool\Project\Profile\Iterator\EnabledResourceFilter($resources);
+            foreach (new \RecursiveIteratorIterator($enabledFilter, \RecursiveIteratorIterator::SELF_FIRST) as $resource) {
                 $response->appendContent($resource->getContext()->getPath());
                 $resource->create();
             }

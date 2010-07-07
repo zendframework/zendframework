@@ -28,7 +28,7 @@ namespace Zend\PDF;
  * PDF Page
  *
  * @uses       \Zend\PDF\PDFDocument
- * @uses       \Zend\PDF\ObjectFactory\ObjectFactory
+ * @uses       \Zend\PDF\ObjectFactory\ElementFactory
  * @uses       \Zend\PDF\InternalType
  * @uses       \Zend\PDF\Exception
  * @uses       \Zend\PDF\Resource\Font
@@ -116,7 +116,7 @@ class Page
     /**
      * PDF objects factory.
      *
-     * @var \Zend\PDF\ObjectFactory\ObjectFactoryInterface
+     * @var \Zend\PDF\ObjectFactory
      */
     protected $_objFactory = null;
 
@@ -182,7 +182,7 @@ class Page
      *    Object factory is created by PDF parser.
      * ---------------------------------------------------------
      * new Zend_PDF_Page(\Zend\PDF\InternalType\DictionaryObject $pageDict,
-     *                   \Zend\PDF\InternalType\ObjectFactory\ObjectFactoryInterface $factory);
+     *                   \Zend\PDF\InternalType\ObjectFactory $factory);
      * ---------------------------------------------------------
      *
      * 2. Clone PDF page.
@@ -197,7 +197,7 @@ class Page
      *    If $factory is null then it will be created and page must be attached to the document to be
      *    included into output.
      * ---------------------------------------------------------
-     * new Zend_PDF_Page(string $pagesize, \Zend\PDF\ObjectFactory\ObjectFactoryInterface $factory = null);
+     * new Zend_PDF_Page(string $pagesize, \Zend\PDF\ObjectFactory $factory = null);
      * ---------------------------------------------------------
      *
      * 4. Create new page with a specified pagesize (in default user space units).
@@ -205,7 +205,7 @@ class Page
      *    included into output.
      * ---------------------------------------------------------
      * new Zend_PDF_Page(numeric $width, numeric $height,
-     *                   \Zend\PDF\ObjectFactory\ObjectFactotyInterface $factory = null);
+     *                   \Zend\PDF\ObjectFactory $factory = null);
      * ---------------------------------------------------------
      *
      *
@@ -218,7 +218,7 @@ class Page
     {
         if ($param1 instanceof InternalType\IndirectObjectReference &&
             $param1->getType() == InternalType\AbstractTypeObject::TYPE_DICTIONARY &&
-            $param2 instanceof ObjectFactory\ObjectFactoryInterface &&
+            $param2 instanceof ObjectFactory &&
             $param3 === null
            ) {
             $this->_pageDictionary = $param1;
@@ -260,12 +260,12 @@ class Page
 
             return;
         } else if (is_string($param1) &&
-                   ($param2 === null || $param2 instanceof ObjectFactory\ObjectFactoryInterface) &&
+                   ($param2 === null || $param2 instanceof ObjectFactory) &&
                    $param3 === null) {
             if ($param2 !== null) {
                 $this->_objFactory = $param2;
             } else {
-                $this->_objFactory = ObjectFactory\ObjectFactory::createFactory(1);
+                $this->_objFactory = ObjectFactory\ElementFactory::createFactory(1);
             }
             $this->_attached   = false;
             $this->_safeGS     = true; /** New page created. That's users App responsibility to track GS changes */
@@ -303,11 +303,11 @@ class Page
              */
 
         } else if (is_numeric($param1) && is_numeric($param2) &&
-                   ($param3 === null || $param3 instanceof ObjectFactory\ObjectFactoryInterface)) {
+                   ($param3 === null || $param3 instanceof ObjectFactory)) {
             if ($param3 !== null) {
                 $this->_objFactory = $param3;
             } else {
-                $this->_objFactory = ObjectFactory\ObjectFactory::createFactory(1);
+                $this->_objFactory = ObjectFactory\ElementFactory::createFactory(1);
             }
 
             $this->_attached = false;
@@ -477,10 +477,10 @@ class Page
      *
      * @todo Don't forget to close all current graphics operations (like path drawing)
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $objFactory
+     * @param \Zend\PDF\ObjectFactory $objFactory
      * @throws \Zend\PDF\Exception
      */
-    public function render(ObjectFactory\ObjectFactoryInterface $objFactory)
+    public function render(ObjectFactory $objFactory)
     {
         $this->flush();
 
@@ -509,10 +509,10 @@ class Page
     /**
      * Set fill color.
      *
-     * @param \Zend\PDF\Color\ColorInterface $color
+     * @param \Zend\PDF\Color $color
      * @return \Zend\PDF\Page
      */
-    public function setFillColor(Color\ColorInterface $color)
+    public function setFillColor(Color $color)
     {
         $this->_addProcSet('PDF');
         $this->_contents .= $color->instructions(false);
@@ -523,10 +523,10 @@ class Page
     /**
      * Set line color.
      *
-     * @param \Zend\PDF\Color\ColorInterface $color
+     * @param \Zend\PDF\Color $color
      * @return \Zend\PDF\Page
      */
-    public function setLineColor(Color\ColorInterface $color)
+    public function setLineColor(Color $color)
     {
         $this->_addProcSet('PDF');
         $this->_contents .= $color->instructions(true);

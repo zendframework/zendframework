@@ -24,8 +24,11 @@
  * @namespace
  */
 namespace Zend\Authentication\Adapter;
+
 use Zend\Authentication\Adapter as AuthenticationAdapter,
-    Zend\Authentication;
+    Zend\Authentication,
+    Zend\Controller\Request\HTTP as HTTPRequest,
+    Zend\Controller\Response\HTTP as HTTPResponse;
 
 /**
  * HTTP Authentication Adapter
@@ -293,7 +296,7 @@ class HTTP implements AuthenticationAdapter
      * @param  Zend_Controller_Request_Http $request
      * @return Zend\Authentication\Adapter\HTTP Provides a fluent interface
      */
-    public function setRequest(\Zend_Controller_Request_Http $request)
+    public function setRequest(HTTPRequest $request)
     {
         $this->_request = $request;
 
@@ -316,7 +319,7 @@ class HTTP implements AuthenticationAdapter
      * @param  Zend_Controller_Response_Http $response
      * @return Zend\Authentication\Adapter\HTTP Provides a fluent interface
      */
-    public function setResponse(\Zend_Controller_Response_Http $response)
+    public function setResponse(HTTPResponse $response)
     {
         $this->_response = $response;
 

@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Db\Select;
+namespace ZendTest\DB\Select;
 
 /**
  * @category   Zend

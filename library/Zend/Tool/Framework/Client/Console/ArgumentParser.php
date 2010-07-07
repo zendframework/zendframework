@@ -21,31 +21,38 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Framework\Client\Console;
+use Zend\Tool\Framework\Client,
+    Zend\Tool\Framework\Registry,
+    Zend\Tool\Framework\RegistryEnabled;
+
+/**
  * @uses       Zend_Console_GetOpt
- * @uses       Zend_Tool_Framework_Client_Console_HelpSystem
- * @uses       Zend_Tool_Framework_Client_Exception
- * @uses       Zend_Tool_Framework_Registry_EnabledInterface
+ * @uses       \Zend\Tool\Framework\Client\Console\HelpSystem
+ * @uses       \Zend\Tool\Framework\Client\Exception
+ * @uses       \Zend\Tool\Framework\RegistryEnabled
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Client_Console_ArgumentParser 
-    implements Zend_Tool_Framework_Registry_EnabledInterface
+class ArgumentParser implements RegistryEnabled
 {
 
     /**
-     * @var Zend_Tool_Framework_Registry_Interface
+     * @var \Zend\Tool\Framework\Registry
      */
     protected $_registry = null;
 
     /**
-     * @var Zend_Tool_Framework_Client_Request
+     * @var \Zend\Tool\Framework\Client\Request
      */
     protected $_request = null;
 
     /**
-     * @var Zend_Tool_Framework_Client_Response
+     * @var \Zend\Tool\Framework\Client\Response
      */
     protected $_response = null;
 
@@ -69,7 +76,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser
      * setArguments
      *
      * @param array $arguments
-     * @return Zend_Tool_Framework_Client_Console_ArgumentParser
+     * @return \Zend\Tool\Framework\Client\Console\ArgumentParser
      */
     public function setArguments(Array $arguments)
     {
@@ -80,10 +87,10 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser
     /**
      * setRegistry()
      *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
-     * @return Zend_Tool_Framework_Client_Console_ArgumentParser
+     * @param \Zend\Tool\Framework\Registry $registry
+     * @return \Zend\Tool\Framework\Client\Console\ArgumentParser
      */
-    public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
+    public function setRegistry(Registry $registry)
     {
         // get the client registry
         $this->_registry = $registry;
@@ -105,7 +112,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser
     {
 
         if ($this->_request == null || $this->_response == null) {
-            throw new Zend_Tool_Framework_Client_Exception('The client registry must have both a request and response registered.');
+            throw new Client\Exception('The client registry must have both a request and response registered.');
         }
 
         // setup the help options
@@ -119,7 +126,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser
         // process global options
         try {
             $this->_parseGlobalPart();
-        } catch (Zend_Tool_Framework_Client_Exception $exception) {
+        } catch (Client\Exception $exception) {
             $this->_createHelpResponse(array('error' => $exception->getMessage()));
             return;
         }
@@ -140,7 +147,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser
         // process the action part of the command line
         try {
             $this->_parseActionPart();
-        } catch (Zend_Tool_Framework_Client_Exception $exception) {
+        } catch (Client\Exception $exception) {
             $this->_request->setDispatchable(false);
             $this->_createHelpResponse(array('error' => $exception->getMessage()));
             return;
@@ -172,7 +179,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser
         // process the provider part of the command line
         try {
             $this->_parseProviderPart();
-        } catch (Zend_Tool_Framework_Client_Exception $exception) {
+        } catch (Client\Exception $exception) {
             $this->_request->setDispatchable(false);
             $this->_createHelpResponse(array('error' => $exception->getMessage()));
             return;
@@ -232,7 +239,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser
         $getoptOptions['verbose|v'] = 'VERBOSE';
         $getoptOptions['pretend|p'] = 'PRETEND';
         $getoptOptions['debug|d']   = 'DEBUG';
-        $getoptParser = new Zend_Console_Getopt($getoptOptions, $this->_argumentsWorking, array('parseAll' => false));
+        $getoptParser = new \Zend\Console\Getopt($getoptOptions, $this->_argumentsWorking, array('parseAll' => false));
 
         // @todo catch any exceptions here
         $getoptParser->parse();
@@ -290,7 +297,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser
         
         // if no action, handle error
         if (!$actionMetadata) {
-            throw new Zend_Tool_Framework_Client_Exception('Action \'' . $consoleActionName . '\' is not a valid action.');
+            throw new Client\Exception('Action \'' . $consoleActionName . '\' is not a valid action.');
         }
 
         // prepare action request name
@@ -341,7 +348,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser
         }
             
         if (!$providerMetadata) {
-            throw new Zend_Tool_Framework_Client_Exception(
+            throw new Client\Exception(
                 'Provider \'' . $consoleProviderFull . '\' is not a valid provider.'
                 );
         }
@@ -372,7 +379,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser
         }
         
         if (!$providerSpecialtyMetadata) {
-            throw new Zend_Tool_Framework_Client_Exception(
+            throw new Client\Exception(
                 'Provider \'' . $consoleSpecialtyName . '\' is not a valid specialty.'
                 );
         }
@@ -480,7 +487,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser
             }
         }
 
-        $getoptParser = new Zend_Console_Getopt($getoptOptions, $this->_argumentsWorking, array('parseAll' => false));
+        $getoptParser = new \Zend\Console\Getopt($getoptOptions, $this->_argumentsWorking, array('parseAll' => false));
         $getoptParser->parse();
         foreach ($getoptParser->getOptions() as $option) {
             $value = $getoptParser->getOption($option);
@@ -500,7 +507,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser
      */
     protected function _createHelpResponse($options = array())
     {
-        $helpSystem = new Zend_Tool_Framework_Client_Console_HelpSystem();
+        $helpSystem = new HelpSystem();
         $helpSystem->setRegistry($this->_registry);
 
         if (isset($options['error'])) {

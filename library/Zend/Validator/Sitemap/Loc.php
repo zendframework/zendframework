@@ -73,8 +73,8 @@ class Loc extends \Zend\Validator\AbstractValidator
         }
 
         $this->_setValue($value);
-        $result = \Zend\Uri\Uri::check($value);
-        if ($result !== true) {
+        $uri = new \Zend\URI\URL($value);
+        if (!$uri->isValid()) {
             $this->_error(self::NOT_VALID);
             return false;
         }

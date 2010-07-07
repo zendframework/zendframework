@@ -25,7 +25,12 @@
  */
 namespace ZendTest\REST;
 
-use Zend\REST;
+use Zend\REST,
+    Zend\Config\Ini as INIConfig,
+    Zend\Controller\Front as FrontController,
+    Zend\Controller\Request\HTTPTestCase as Request,
+    Zend\Controller\Router\Rewrite as RewriteRouter,
+    Zend\Controller\Router\Route\Route;
 
 /**
  * @category   Zend
@@ -44,7 +49,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_front = \Zend_Controller_Front::getInstance();
+        $this->_front = FrontController::getInstance();
         $this->_front->resetInstance();
         $this->_front->setParam('noErrorHandler', true)
         ->setParam('noViewRenderer', true);
@@ -72,8 +77,8 @@ class RouteTest extends \PHPUnit_Framework_TestCase
     
     public function test_getInstance_fromINIConfig()
     {
-    	$config = new \Zend\Config\Ini(dirname(__FILE__) . '/../Controller/_files/routes.ini', 'testing');
-    	$router = new \Zend_Controller_Router_Rewrite();
+    	$config = new INIConfig(dirname(__FILE__) . '/../Controller/_files/routes.ini', 'testing');
+    	$router = new RewriteRouter();
     	$router->addConfig($config, 'routes');
     	$route = $router->getRoute('rest');
     	$this->assertType('Zend\\REST\\Route', $route);
@@ -301,9 +306,9 @@ class RouteTest extends \PHPUnit_Framework_TestCase
         $router = $this->_front->getRouter();
         $router->removeDefaultRoutes();
 
-        $nonRESTRoute = new \Zend_Controller_Router_Route('api');
+        $nonRESTRoute = new Route('api');
         $RESTRoute = new REST\Route($this->_front);
-        $router->addRoute("api", $nonRESTRoute->chain($RESTRoute));
+        $router->addRoute("api", $nonRESTRoute->addChain($RESTRoute));
 
         $routedRequest = $router->route($request);
 
@@ -543,7 +548,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
     
     private function _buildRequest($method, $uri)
     {
-        $request = new \Zend_Controller_Request_HttpTestCase();
+        $request = new Request();
         $request->setMethod($method)->setRequestUri($uri);
         return $request;
     }

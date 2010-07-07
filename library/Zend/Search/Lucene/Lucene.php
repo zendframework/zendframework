@@ -65,7 +65,7 @@ class Lucene
      * Create index
      *
      * @param mixed $directory
-     * @return \Zend\Search\Lucene\IndexInterface
+     * @return \Zend\Search\Lucene\SearchIndex
      */
     public static function create($directory)
     {
@@ -76,7 +76,7 @@ class Lucene
      * Open index
      *
      * @param mixed $directory
-     * @return \Zend\Search\Lucene\IndexInterface
+     * @return \Zend\Search\Lucene\SearchIndex
      */
     public static function open($directory)
     {

@@ -2,11 +2,15 @@
 
 namespace ZendTest\REST\TestAsset;
 
-class TestController extends \Zend\REST\Controller
+use Zend\Controller\Request\AbstractRequest,
+    Zend\Controller\Response\AbstractResponse,
+    Zend\REST\Controller as RESTController;
+
+class TestController extends RESTController
 {
     public $testValue = '';
-    public function __construct(\Zend_Controller_Request_Abstract$request,
-                                \Zend_Controller_Response_Abstract $response,
+    public function __construct(AbstractRequest$request,
+                                AbstractResponse $response,
                                 array $invokeArgs = array())
     {
         $this->testValue = '';

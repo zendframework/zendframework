@@ -21,26 +21,32 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Context\System;
+use Zend\Tool\Project\Context\System;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       Zend_Tool_Project_Context_Filesystem_Directory
- * @uses       Zend_Tool_Project_Context_System_Interface
- * @uses       Zend_Tool_Project_Context_System_NotOverwritable
- * @uses       Zend_Tool_Project_Context_System_TopLevelRestrictable
- * @uses       Zend_Tool_Project_Exception
+ * @uses       \Zend\Tool\Project\Context\Filesystem\Directory
+ * @uses       \Zend\Tool\Project\Context\System
+ * @uses       \Zend\Tool\Project\Context\System\NotOverwritable
+ * @uses       \Zend\Tool\Project\Context\System\TopLevelRestrictable
+ * @uses       \Zend\Tool\Project\Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_System_ProjectDirectory
-    extends Zend_Tool_Project_Context_Filesystem_Directory
-    implements Zend_Tool_Project_Context_System_Interface,
-               Zend_Tool_Project_Context_System_NotOverwritable,
-               Zend_Tool_Project_Context_System_TopLevelRestrictable
+class ProjectDirectory
+    extends \Zend\Tool\Project\Context\Filesystem\Directory
+    implements System,
+               NotOverwritable,
+               TopLevelRestrictable
 {
 
     /**
@@ -61,7 +67,7 @@ class Zend_Tool_Project_Context_System_ProjectDirectory
     /**
      * init()
      *
-     * @return Zend_Tool_Project_Context_System_ProjectDirectory
+     * @return \Zend\Tool\Project\Context\System\ProjectDirectory
      */
     public function init()
     {
@@ -75,7 +81,7 @@ class Zend_Tool_Project_Context_System_ProjectDirectory
 
         // if not, exception.
         if ($projectDirectory == null) {
-            throw new Zend_Tool_Project_Exception('projectDirectory cannot find the directory for this project.');
+            throw new \Zend\Tool\Project\Exception('projectDirectory cannot find the directory for this project.');
         }
 
         $this->_baseDirectory = rtrim($projectDirectory, '\\/');
@@ -85,7 +91,7 @@ class Zend_Tool_Project_Context_System_ProjectDirectory
     /**
      * create()
      *
-     * @return Zend_Tool_Project_Context_System_ProjectDirectory
+     * @return \Zend\Tool\Project\Context\System\ProjectDirectory
      */
     public function create()
     {

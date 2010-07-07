@@ -24,23 +24,24 @@
  * @namespace
  */
 namespace Zend\View\Helper\Navigation;
-use Zend\Navigation;
-use Zend\View;
+
+use Zend\Navigation\Container,
+    Zend\Navigation\AbstractPage,
+    Zend\View;
 
 /**
  * Helper for rendering menus from navigation containers
  *
  * @uses       RecursiveIteratorIterator
  * @uses       \Zend\View\Exception
- * @uses       \Zend\View\Helper\Navigation\HelperAbstract
+ * @uses       \Zend\View\Helper\Navigation\AbstractHelper
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Menu
-    extends HelperAbstract
+class Menu extends AbstractHelper
 {
     /**
      * CSS class to use for the ul element
@@ -79,7 +80,7 @@ class Menu
      * @return \Zend\View\Helper\Navigation\Menu      fluent interface,
      *                                               returns self
      */
-    public function menu(Navigation\Container $container = null)
+    public function direct(Container $container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);
@@ -206,12 +207,12 @@ class Menu
      * Returns an HTML string containing an 'a' element for the given page if
      * the page's href is not empty, and a 'span' element if it is empty
      *
-     * Overrides {@link Zend_View_Helper_Navigation_Abstract::htmlify()}.
+     * Overrides {@link Zend\View\Helper\Navigation\AbstractHelper::htmlify()}.
      *
-     * @param  \Zend\Navigation\Page\Page $page  page to generate HTML for
+     * @param  \Zend\Navigation\AbstractPage $page  page to generate HTML for
      * @return string                      HTML string for the given page
      */
-    public function htmlify(Navigation\Page\Page $page)
+    public function htmlify(AbstractPage $page)
     {
         // get label and title for translating
         $label = $page->getLabel();
@@ -313,7 +314,7 @@ class Menu
      * @param  int|null                  $maxDepth   maximum depth
      * @return string                                rendered menu
      */
-    protected function _renderDeepestMenu(Navigation\Container $container,
+    protected function _renderDeepestMenu(Container $container,
                                           $ulClass,
                                           $indent,
                                           $minDepth,
@@ -365,7 +366,7 @@ class Menu
      * @param  bool                      $onlyActive  render only active branch?
      * @return string
      */
-    protected function _renderMenu(Navigation\Container $container,
+    protected function _renderMenu(Container $container,
                                    $ulClass,
                                    $indent,
                                    $minDepth,
@@ -486,7 +487,7 @@ class Menu
      *                                               controlling rendering
      * @return string                                rendered menu
      */
-    public function renderMenu(Navigation\Container $container = null,
+    public function renderMenu(Container $container = null,
                                array $options = array())
     {
         if (null === $container) {
@@ -543,7 +544,7 @@ class Menu
      *                                               {@link getIndent()}.
      * @return string                                rendered content
      */
-    public function renderSubMenu(Navigation\Container $container = null,
+    public function renderSubMenu(Container $container = null,
                                   $ulClass = null,
                                   $indent = null)
     {
@@ -579,7 +580,7 @@ class Menu
      *                                               script can be found.
      * @return string                                helper output
      */
-    public function renderPartial(Navigation\Container $container = null,
+    public function renderPartial(Container $container = null,
                                   $partial = null)
     {
         if (null === $container) {
@@ -619,12 +620,12 @@ class Menu
         return $this->view->partial($partial, null, $model);
     }
 
-    // Zend_View_Helper_Navigation_Helper:
+    // Zend\View\Helper\Navigation\Helper:
 
     /**
      * Renders menu
      *
-     * Implements {@link Zend_View_Helper_Navigation_Helper::render()}.
+     * Implements {@link Zend\View\Helper\Navigation\Helper::render()}.
      *
      * If a partial view is registered in the helper, the menu will be rendered
      * using the given partial script. If no partial is registered, the menu
@@ -639,7 +640,7 @@ class Menu
      *                                               registered in the helper.
      * @return string                                helper output
      */
-    public function render(Navigation\Container $container = null)
+    public function render(Container $container = null)
     {
         if ($partial = $this->getPartial()) {
             return $this->renderPartial($container, $partial);

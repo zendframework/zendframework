@@ -51,7 +51,7 @@ class AnalysisTest extends \PHPUnit_Framework_TestCase
     public function testAnalyzer()
     {
         $currentAnalyzer = Analyzer\Analyzer::getDefault();
-        $this->assertTrue($currentAnalyzer instanceof Analyzer\AnalyzerInterface);
+        $this->assertTrue($currentAnalyzer instanceof Analyzer);
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num */
 

@@ -79,11 +79,11 @@ class StreamObject extends IndirectObject
      * @param mixed $val
      * @param integer $objNum
      * @param integer $genNum
-     * @param \Zend\PDF\ObjectFactory\ObjectFactory $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      * @param \Zend\PDF\InternalType\DictionaryObject|null $dictionary
      * @throws \Zend\PDF\Exception
      */
-    public function __construct($val, $objNum, $genNum, ObjectFactory\ObjectFactory $factory, $dictionary = null)
+    public function __construct($val, $objNum, $genNum, ObjectFactory $factory, $dictionary = null)
     {
         parent::__construct(new StreamContent($val), $objNum, $genNum, $factory);
 
@@ -369,10 +369,10 @@ class StreamObject extends IndirectObject
      *
      * $factory parameter defines operation context.
      *
-     * @param \Zend\PDF\ObjectFactory\ObjectFactory $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      * @return string
      */
-    public function dump(ObjectFactory\ObjectFactory $factory)
+    public function dump(ObjectFactory $factory)
     {
         $shift = $factory->getEnumerationShift($this->_factory);
 

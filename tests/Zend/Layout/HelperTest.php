@@ -46,11 +46,11 @@ class HelperTest extends \PHPUnit_Framework_TestCase
     {
         \Zend\Layout\Layout::resetMvcInstance();
         \Zend\Controller\Front::getInstance()->resetInstance();
-        if (HelperBroker\HelperBroker::hasHelper('Layout')) {
-            HelperBroker\HelperBroker::removeHelper('Layout');
+        if (HelperBroker::hasHelper('Layout')) {
+            HelperBroker::removeHelper('Layout');
         }
-        if (HelperBroker\HelperBroker::hasHelper('viewRenderer')) {
-            HelperBroker\HelperBroker::removeHelper('viewRenderer');
+        if (HelperBroker::hasHelper('viewRenderer')) {
+            HelperBroker::removeHelper('viewRenderer');
         }
     }
 

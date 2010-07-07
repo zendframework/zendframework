@@ -28,7 +28,7 @@ namespace Zend\InfoCard\XML;
 /**
  * Represents a SecurityTokenReference XML block
  *
- * @uses       \Zend\InfoCard\XML\Element\Element
+ * @uses       \Zend\InfoCard\XML\AbstractElement
  * @uses       \Zend\InfoCard\XML\Exception
  * @category   Zend
  * @package    Zend_InfoCard
@@ -36,7 +36,7 @@ namespace Zend\InfoCard\XML;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SecurityTokenReference extends Element\Element
+class SecurityTokenReference extends AbstractElement
 {
     /**
      * Base64 Binary Encoding URI
@@ -52,7 +52,7 @@ class SecurityTokenReference extends Element\Element
      */
     static public function getInstance($xmlData)
     {
-        if($xmlData instanceof Element\Element) {
+        if($xmlData instanceof AbstractElement) {
             $strXmlData = $xmlData->asXML();
         } else if (is_string($xmlData)) {
             $strXmlData = $xmlData;
@@ -72,7 +72,7 @@ class SecurityTokenReference extends Element\Element
     /**
      * Return the Key Identifier XML Object
      *
-     * @return \Zend\InfoCard\XML\Element\Element
+     * @return \Zend\InfoCard\XML\AbstractElement
      * @throws \Zend\InfoCard\XML\Exception
      */
     protected function _getKeyIdentifier()
@@ -80,7 +80,7 @@ class SecurityTokenReference extends Element\Element
         $this->registerXPathNamespace('o', 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd');
         list($keyident) = $this->xpath('//o:KeyIdentifier');
 
-        if(!($keyident instanceof Element\Element)) {
+        if(!($keyident instanceof AbstractElement)) {
             throw new Exception("Failed to retrieve Key Identifier");
         }
 

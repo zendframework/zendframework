@@ -256,8 +256,8 @@ class Number extends AbstractMeasure
                 } catch (\Exception $e) {
                     throw new Exception($e->getMessage(), $e->getCode(), $e);
                 }
-                if (call_user_func(Math\Math::$comp, $value, 0) < 0) {
-                    $value = call_user_func(Math\Math::$sqrt, call_user_func(Math\Math::$pow, $value, 2));
+                if (call_user_func(Math::$comp, $value, 0) < 0) {
+                    $value = call_user_func(Math::$sqrt, call_user_func(Math::$pow, $value, 2));
                 }
                 break;
         }
@@ -282,9 +282,9 @@ class Number extends AbstractMeasure
             $length = strlen($input);
             for ($x = 0; $x < $length; ++$x) {
                 $split[$x] = hexdec($split[$x]);
-                $value     = call_user_func(Math\Math::$add, $value,
-                            call_user_func(Math\Math::$mul, $split[$x],
-                            call_user_func(Math\Math::$pow, $this->_units[$type][0], ($length - $x - 1))));
+                $value     = call_user_func(Math::$add, $value,
+                            call_user_func(Math::$mul, $split[$x],
+                            call_user_func(Math::$pow, $this->_units[$type][0], ($length - $x - 1))));
             }
         }
 
@@ -330,13 +330,13 @@ class Number extends AbstractMeasure
             $count    = 200;
             $base     = $this->_units[$type][0];
 
-            while (call_user_func(Math\Math::$comp, $value, 0, 25) <> 0) {
-                $target = call_user_func(Math\Math::$mod, $value, $base);
+            while (call_user_func(Math::$comp, $value, 0, 25) <> 0) {
+                $target = call_user_func(Math::$mod, $value, $base);
 
                 $newvalue = strtoupper(dechex($target)) . $newvalue;
 
-                $value = call_user_func(Math\Math::$sub, $value, $target, 0);
-                $value = call_user_func(Math\Math::$div, $value, $base, 0);
+                $value = call_user_func(Math::$sub, $value, $target, 0);
+                $value = call_user_func(Math::$div, $value, $base, 0);
 
                 --$count;
                 if ($count === 0) {
@@ -355,7 +355,7 @@ class Number extends AbstractMeasure
             $romanval = array_values(array_reverse(self::$_roman));
             $romankey = array_keys(array_reverse(self::$_roman));
             $count    = 200;
-            while (call_user_func(Math\Math::$comp, $value, 0, 25) <> 0) {
+            while (call_user_func(Math::$comp, $value, 0, 25) <> 0) {
                 while ($value >= $romanval[$i]) {
                     $value    -= $romanval[$i];
                     $newvalue .= $romankey[$i];

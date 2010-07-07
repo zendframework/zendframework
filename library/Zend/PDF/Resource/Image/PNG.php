@@ -31,7 +31,7 @@ use Zend\PDF\InternalType;
 /**
  * PNG image
  *
- * @uses       \Zend\PDF\ObjectFactory\ObjectFactory
+ * @uses       \Zend\PDF\ObjectFactory
  * @uses       \Zend\PDF\InternalType
  * @uses       \Zend\PDF\Exception
  * @uses       \Zend\PDF\Resource\Image\AbstractImage
@@ -228,7 +228,7 @@ class PNG extends AbstractImage
 
                 $colorSpace = new InternalType\NameObject('DeviceGray');
 
-                $decodingObjFactory = ObjectFactory\ObjectFactory::createFactory(1);
+                $decodingObjFactory = ObjectFactory\ElementFactory::createFactory(1);
                 $decodingStream = $decodingObjFactory->newStreamObject($imageData);
                 $decodingStream->dictionary->Filter      = new InternalType\NameObject('FlateDecode');
                 $decodingStream->dictionary->DecodeParms = new InternalType\DictionaryObject();
@@ -261,7 +261,7 @@ class PNG extends AbstractImage
 
                 $colorSpace = new InternalType\NameObject('DeviceRGB');
 
-                $decodingObjFactory = ObjectFactory\ObjectFactory::createFactory(1);
+                $decodingObjFactory = ObjectFactory\ElementFactory::createFactory(1);
                 $decodingStream = $decodingObjFactory->newStreamObject($imageData);
                 $decodingStream->dictionary->Filter      = new InternalType\NameObject('FlateDecode');
                 $decodingStream->dictionary->DecodeParms = new InternalType\DictionaryObject();

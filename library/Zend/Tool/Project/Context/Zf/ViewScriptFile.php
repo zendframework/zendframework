@@ -21,22 +21,27 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Context\Zf;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       Zend_Filter
- * @uses       Zend_Filter_StringToLower
- * @uses       Zend_Filter_Word_CamelCaseToDash
- * @uses       Zend_Tool_Project_Context_Filesystem_File
- * @uses       Zend_Tool_Project_Exception
+ * @uses       \Zend\Filter\FilterChain
+ * @uses       \Zend\Filter\StringToLower
+ * @uses       \Zend\Filter\Word\CamelCaseToDash
+ * @uses       \Zend\Tool\Project\Context\Filesystem\File
+ * @uses       \Zend\Tool\Project\Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Context_Filesystem_File
+class ViewScriptFile extends \Zend\Tool\Project\Context\Filesystem\File
 {
 
     /**
@@ -67,7 +72,7 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
     /**
      * init()
      *
-     * @return Zend_Tool_Project_Context_Zf_ViewScriptFile
+     * @return \Zend\Tool\Project\Context\Zf\ViewScriptFile
      */
     public function init()
     {
@@ -203,9 +208,9 @@ EOS;
 
     protected function _convertActionNameToFilesystemName($actionName)
     {
-        $filter = new Zend_Filter();
-        $filter->addFilter(new Zend_Filter_Word_CamelCaseToDash())
-            ->addFilter(new Zend_Filter_StringToLower());
+        $filter = new \Zend\Filter\FilterChain();
+        $filter->addFilter(new \Zend\Filter\Word\CamelCaseToDash())
+            ->addFilter(new \Zend\Filter\StringToLower());
         return $filter->filter($actionName);
     }
     

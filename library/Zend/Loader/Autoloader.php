@@ -136,7 +136,7 @@ class Autoloader
         $self = self::getInstance();
 
         foreach ($self->getClassAutoloaders($class) as $autoloader) {
-            if ($autoloader instanceof AutoloaderInterface) {
+            if ($autoloader instanceof Autoloadable) {
                 if ($autoloader->autoload($class)) {
                     return true;
                 }

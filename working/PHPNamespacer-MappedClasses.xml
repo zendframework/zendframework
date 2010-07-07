@@ -8035,10 +8035,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader/Autoloader/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Loader_Autoloader_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Loader/AutoloaderInterface.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Loader/Autoloadable.php</newRelativeFilePath>
       <newNamespace>Zend\Loader</newNamespace>
-      <newClassName>AutoloaderInterface</newClassName>
-      <newFullyQualifiedName>Zend\Loader\AutoloaderInterface</newFullyQualifiedName>
+      <newClassName>Autoloadable</newClassName>
+      <newFullyQualifiedName>Zend\Loader\Autoloadable</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Loader/Autoloader/Resource.php</originalRelativeFilePath>

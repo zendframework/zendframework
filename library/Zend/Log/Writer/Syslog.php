@@ -191,7 +191,7 @@ class Zend_Log_Writer_Syslog extends Zend_Log_Writer_Abstract
             throw new Zend_Log_Exception('Invalid log facility provided; please see http://php.net/openlog for a list of valid facility values');
         }
 
-        if (strstr(strtolower(PHP_OS), 'windows')
+        if ('WIN' == strtoupper(substr(PHP_OS, 0, 3))
             && ($facility !== LOG_USER)
         ) {
             require_once 'Zend/Log/Exception.php';

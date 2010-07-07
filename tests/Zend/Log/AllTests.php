@@ -42,6 +42,8 @@ require_once 'Zend/Log/Writer/MailTest.php';
 require_once 'Zend/Log/Writer/MockTest.php';
 require_once 'Zend/Log/Writer/NullTest.php';
 require_once 'Zend/Log/Writer/StreamTest.php';
+require_once 'Zend/Log/Writer/SyslogTest.php';
+require_once 'Zend/Log/Writer/ZendMonitorTest.php';
 
 /**
  * @category   Zend
@@ -81,6 +83,8 @@ class Zend_Log_AllTests
         $suite->addTestSuite('Zend_Log_Writer_MockTest');
         $suite->addTestSuite('Zend_Log_Writer_NullTest');
         $suite->addTestSuite('Zend_Log_Writer_StreamTest');
+        $suite->addTestSuite('Zend_Log_Writer_SyslogTest');
+        $suite->addTestSuite('Zend_Log_Writer_ZendMonitorTest');
 
         return $suite;
     }

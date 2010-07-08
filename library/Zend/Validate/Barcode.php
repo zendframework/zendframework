@@ -194,6 +194,17 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
         $this->_length = $adapter->getLength();
         $result        = $adapter->checkLength($value);
         if (!$result) {
+            if (is_array($this->_length)) {
+                $temp = $this->_length;
+                $this->_length = "";
+                foreach($temp as $length) {
+                    $this->_length .= "/";
+                    $this->_length .= $length;
+                }
+
+                $this->_length = substr($this->_length, 1);
+            }
+
             $this->_error(self::INVALID_LENGTH);
             return false;
         }

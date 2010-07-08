@@ -585,9 +585,7 @@ class Zend_Http_Client
      */
     public function setCookieJar($cookiejar = true)
     {
-        if (! class_exists('Zend_Http_CookieJar')) {
-            require_once 'Zend/Http/CookieJar.php';
-        }
+        Zend_Loader::loadClass('Zend_Http_CookieJar');
 
         if ($cookiejar instanceof Zend_Http_CookieJar) {
             $this->cookiejar = $cookiejar;
@@ -625,9 +623,7 @@ class Zend_Http_Client
      */
     public function setCookie($cookie, $value = null)
     {
-        if (! class_exists('Zend_Http_Cookie')) {
-            require_once 'Zend/Http/Cookie.php';
-        }
+        Zend_Loader::loadClass('Zend_Http_Cookie');
 
         if (is_array($cookie)) {
             foreach ($cookie as $c => $v) {
@@ -839,15 +835,12 @@ class Zend_Http_Client
     public function setAdapter($adapter)
     {
         if (is_string($adapter)) {
-            if (!class_exists($adapter)) {
-                try {
-                    require_once 'Zend/Loader.php';
-                    Zend_Loader::loadClass($adapter);
-                } catch (Zend_Exception $e) {
-                    /** @see Zend_Http_Client_Exception */
-                    require_once 'Zend/Http/Client/Exception.php';
-                    throw new Zend_Http_Client_Exception("Unable to load adapter '$adapter': {$e->getMessage()}", 0, $e);
-                }
+            try {
+                Zend_Loader::loadClass($adapter);
+            } catch (Zend_Exception $e) {
+                /** @see Zend_Http_Client_Exception */
+                require_once 'Zend/Http/Client/Exception.php';
+                throw new Zend_Http_Client_Exception("Unable to load adapter '$adapter': {$e->getMessage()}", 0, $e);
             }
 
             $adapter = new $adapter;

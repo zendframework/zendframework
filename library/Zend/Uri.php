@@ -127,14 +127,12 @@ abstract class Zend_Uri
             }
         }
 
-        if (!class_exists($className)) {
-            require_once 'Zend/Loader.php';
-            try {
-                Zend_Loader::loadClass($className);
-            } catch (Exception $e) {
-                require_once 'Zend/Uri/Exception.php';
-                throw new Zend_Uri_Exception("\"$className\" not found");
-            }
+        require_once 'Zend/Loader.php';
+        try {
+            Zend_Loader::loadClass($className);
+        } catch (Exception $e) {
+            require_once 'Zend/Uri/Exception.php';
+            throw new Zend_Uri_Exception("\"$className\" not found");
         }
 
         $schemeHandler = new $className($scheme, $schemeSpecific);

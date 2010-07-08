@@ -46,7 +46,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     public function testPDFObject()
     {
         $intObj = new InternalType\NumericObject(100);
-        $obj    = new InternalType\IndirectObject($intObj, 1, 0, new ObjectFactory\ObjectFactory(1));
+        $obj    = new InternalType\IndirectObject($intObj, 1, 0, new ObjectFactory\ElementFactory(1));
 
         $this->assertTrue($obj instanceof InternalType\IndirectObject);
     }
@@ -54,10 +54,10 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     public function testPDFObjectBadObjectType1()
     {
         $intObj = new InternalType\NumericObject(100);
-        $obj1   = new InternalType\IndirectObject($intObj, 1, 0, new ObjectFactory\ObjectFactory(1));
+        $obj1   = new InternalType\IndirectObject($intObj, 1, 0, new ObjectFactory\ElementFactory(1));
 
         try {
-            $obj2 = new InternalType\IndirectObject($obj1, 1, 0, new ObjectFactory\ObjectFactory(1));
+            $obj2 = new InternalType\IndirectObject($obj1, 1, 0, new ObjectFactory\ElementFactory(1));
         } catch (PDF\Exception $e) {
             $this->assertContains('must not be an instance of \Zend\PDF\InternalType\IndirectObject', $e->getMessage());
             return;
@@ -69,7 +69,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $intObj = new InternalType\NumericObject(100);
-            $obj    = new InternalType\IndirectObject($intObj, 1, -1, new ObjectFactory\ObjectFactory(1));
+            $obj    = new InternalType\IndirectObject($intObj, 1, -1, new ObjectFactory\ElementFactory(1));
         } catch (PDF\Exception $e) {
             $this->assertContains('non-negative integer', $e->getMessage());
             return;
@@ -81,7 +81,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $intObj = new InternalType\NumericObject(100);
-            $obj    = new InternalType\IndirectObject($intObj, 1, 1.2, new ObjectFactory\ObjectFactory(1));
+            $obj    = new InternalType\IndirectObject($intObj, 1, 1.2, new ObjectFactory\ElementFactory(1));
         } catch (PDF\Exception $e) {
             $this->assertContains('non-negative integer', $e->getMessage());
             return;
@@ -93,7 +93,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $intObj = new InternalType\NumericObject(100);
-            $obj    = new InternalType\IndirectObject($intObj, 0, 0, new ObjectFactory\ObjectFactory(1));
+            $obj    = new InternalType\IndirectObject($intObj, 0, 0, new ObjectFactory\ElementFactory(1));
         } catch (PDF\Exception $e) {
             $this->assertContains('positive integer', $e->getMessage());
             return;
@@ -105,7 +105,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $intObj = new InternalType\NumericObject(100);
-            $obj    = new InternalType\IndirectObject($intObj, -1, 0, new ObjectFactory\ObjectFactory(1));
+            $obj    = new InternalType\IndirectObject($intObj, -1, 0, new ObjectFactory\ElementFactory(1));
         } catch (PDF\Exception $e) {
             $this->assertContains('positive integer', $e->getMessage());
             return;
@@ -117,7 +117,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $intObj = new InternalType\NumericObject(100);
-            $obj    = new InternalType\IndirectObject($intObj, 1.2, 0, new ObjectFactory\ObjectFactory(1));
+            $obj    = new InternalType\IndirectObject($intObj, 1.2, 0, new ObjectFactory\ElementFactory(1));
         } catch (PDF\Exception $e) {
             $this->assertContains('positive integer', $e->getMessage());
             return;
@@ -128,7 +128,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     public function testGetType()
     {
         $intObj = new InternalType\NumericObject(100);
-        $obj    = new InternalType\IndirectObject($intObj, 1, 0, new ObjectFactory\ObjectFactory(1));
+        $obj    = new InternalType\IndirectObject($intObj, 1, 0, new ObjectFactory\ElementFactory(1));
 
         $this->assertEquals($obj->getType(), $intObj->getType());
     }
@@ -136,14 +136,14 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     public function testToString()
     {
         $intObj = new InternalType\NumericObject(100);
-        $obj    = new InternalType\IndirectObject($intObj, 55, 3, new ObjectFactory\ObjectFactory(1));
+        $obj    = new InternalType\IndirectObject($intObj, 55, 3, new ObjectFactory\ElementFactory(1));
 
         $this->assertEquals($obj->toString(), '55 3 R');
     }
 
     public function testDump()
     {
-        $factory = new ObjectFactory\ObjectFactory(1);
+        $factory = new ObjectFactory\ElementFactory(1);
 
         $intObj  = new InternalType\NumericObject(100);
         $obj     = new InternalType\IndirectObject($intObj, 55, 3, $factory);

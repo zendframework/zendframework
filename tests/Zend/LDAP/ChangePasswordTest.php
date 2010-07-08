@@ -106,7 +106,7 @@ class ChangePasswordTest extends OnlineTestCase
                     strstr($message, 'Server is unwilling to perform'));
             }
 
-            $this->assertType('Zend_LDAP', $this->_getLDAP()->bind($dn, $newPasswd));
+            $this->assertType('Zend\LDAP\LDAP', $this->_getLDAP()->bind($dn, $newPasswd));
 
             $this->_getLDAP()->bind();
             $this->_getLDAP()->delete($dn);

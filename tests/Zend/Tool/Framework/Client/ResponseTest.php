@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Tool\Framework\Client;
+use Zend\Tool\Framework\Client\Response\ContentDecorator;
+
+/**
  * @see TestHelper.php
  */
 
@@ -40,7 +46,7 @@
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Client
  */
-class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
+class ResponseTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -52,7 +58,7 @@ class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        $this->_response = new Zend_Tool_Framework_Client_Response();
+        $this->_response = new \Zend\Tool\Framework\Client\Response();
     }
 
     public function testContentGetterAndSetter()
@@ -89,16 +95,14 @@ class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
     public function testExceptionHandling()
     {
         $this->assertFalse($this->_response->isException());
-        $this->_response->setException(new Exception('my response exception'));
+        $this->_response->setException(new \Exception('my response exception'));
         $this->assertTrue($this->_response->isException());
         $this->assertEquals('my response exception', $this->_response->getException()->getMessage());
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Client_Exception
-     */
     public function testSetCallbackThrowsExceptionOnInvalidCallback()
     {
+        $this->setExpectedException('Zend\Tool\Framework\Client\Exception');
         $this->_response->setContentCallback(5);
     }
 
@@ -111,7 +115,7 @@ class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testAddContentDecoratorPersistsDecorators()
     {
-        $separator = new Zend_Tool_Framework_Client_Response_ContentDecorator_Separator();
+        $separator = new ContentDecorator\Separator();
         $this->_response->addContentDecorator($separator);
         $decorators = $this->_response->getContentDecorators();
         $this->assertArrayHasKey('separator', $decorators);
@@ -120,7 +124,7 @@ class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testResponseWillApplyDecorator()
     {
-        $separator = new Zend_Tool_Framework_Client_Response_ContentDecorator_Separator();
+        $separator = new ContentDecorator\Separator();
         $this->_response->addContentDecorator($separator);
         $this->_response->appendContent('foo', array('separator' => true));
         $this->_response->appendContent('boo', array('separator' => true));
@@ -129,7 +133,7 @@ class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testResponseWillIgnoreUnknownDecoratorOptions()
     {
-        $separator = new Zend_Tool_Framework_Client_Response_ContentDecorator_Separator();
+        $separator = new ContentDecorator\Separator();
         $this->_response->addContentDecorator($separator);
         $this->_response->appendContent('foo', array('foo' => 'foo'));
         $this->_response->appendContent('boo', array('bar' => 'bar'));
@@ -138,7 +142,7 @@ class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testResponseWillApplyDecoratorWithDefaultOptions()
     {
-        $separator = new Zend_Tool_Framework_Client_Response_ContentDecorator_Separator();
+        $separator = new ContentDecorator\Separator();
         $this->_response->addContentDecorator($separator);
         $this->_response->setDefaultDecoratorOptions(array('separator' => true));
         $this->_response->appendContent('foo');

@@ -492,11 +492,11 @@ class MailTest extends \PHPUnit_Framework_TestCase
     /**
      * Helper method for {@link testZf928ToAndBccHeadersShouldNotMix()}; extracts individual header lines
      *
-     * @param \Zend\Mail\Transport\AbstractTransport $mock
+     * @param \Zend\Mail\AbstractTransport $mock
      * @param string $type
      * @return string
      */
-    protected function _getHeader(Transport\AbstractTransport $mock, $type = 'To')
+    protected function _getHeader(Mail\AbstractTransport $mock, $type = 'To')
     {
         $headers = str_replace("\r\n", "\n", $mock->header);
         $headers = explode("\n", $mock->header);
@@ -1015,7 +1015,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
 /**
  * Mock mail transport class for testing purposes
  */
-class TransportMock extends Transport\AbstractTransport
+class TransportMock extends Mail\AbstractTransport
 {
     /**
      * @var \Zend\Mail\Mail

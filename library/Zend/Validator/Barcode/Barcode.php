@@ -130,18 +130,13 @@ class Barcode extends Validator\AbstractValidator
     public function setAdapter($adapter, $options = null)
     {
         $adapter = ucfirst(strtolower($adapter));
-//        if (\Zend\Loader::isReadable('Zend/Validate/Barcode/' . $adapter. '.php')) {
-            $adapter = '\\Zend\\Validator\\Barcode\\' . $adapter;
-//        }
-//
-//        if (!class_exists($adapter)) {
-            \Zend\Loader::loadClass($adapter);
-//        }
+        $adapter = '\\Zend\\Validator\\Barcode\\' . $adapter;
+        \Zend\Loader::loadClass($adapter);
 
         $this->_adapter = new $adapter($options);
-        if (!$this->_adapter instanceof AdapterInterface) {
+        if (!$this->_adapter instanceof Adapter) {
             throw new Validator\Exception(
-                "Adapter " . $adapter . " does not implement Zend\\Validate\\Barcode\\AdapterInterface"
+                "Adapter " . $adapter . " does not implement Zend\\Validate\\Barcode\\Adapter"
             );
         }
 

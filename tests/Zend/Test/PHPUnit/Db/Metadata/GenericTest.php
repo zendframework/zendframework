@@ -20,7 +20,10 @@
  * @version    $Id$
  */
 
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Test\PHPUnit\Db\Metadata;
 
 /**
  * @category   Zend
@@ -30,7 +33,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_PHPUnit_Db_Metadata_GenericTest extends PHPUnit_Framework_TestCase
+class GenericTest extends \PHPUnit_Framework_TestCase
 {
     private $adapterMock = null;
 
@@ -38,8 +41,8 @@ class Zend_Test_PHPUnit_Db_Metadata_GenericTest extends PHPUnit_Framework_TestCa
 
     public function setUp()
     {
-        $this->adapterMock = $this->getMock('Zend_Test_DbAdapter');
-        $this->metadata = new Zend_Test_PHPUnit_Db_Metadata_Generic($this->adapterMock, "schema");
+        $this->adapterMock = $this->getMock('Zend\Test\DbAdapter');
+        $this->metadata = new \Zend\Test\PHPUnit\Db\Metadata\Generic($this->adapterMock, "schema");
     }
 
     public function testGetSchema()

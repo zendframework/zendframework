@@ -24,8 +24,9 @@
  * @namespace
  */
 namespace ZendTest\Navigation;
-use Zend\Navigation\Page;
-use Zend\Navigation;
+
+use Zend\Navigation\AbstractPage,
+    Zend\Navigation;
 
 /**
  * Tests Zend_Navigation_Page::factory()
@@ -45,19 +46,19 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
     public function testDetectMvcPage()
     {
         $pages = array(
-            Page\Page::factory(array(
+            AbstractPage::factory(array(
                 'label' => 'MVC Page',
                 'action' => 'index'
             )),
-            Page\Page::factory(array(
+            AbstractPage::factory(array(
                 'label' => 'MVC Page',
                 'controller' => 'index'
             )),
-            Page\Page::factory(array(
+            AbstractPage::factory(array(
                 'label' => 'MVC Page',
                 'module' => 'index'
             )),
-            Page\Page::factory(array(
+            AbstractPage::factory(array(
                 'label' => 'MVC Page',
                 'route' => 'home'
             ))
@@ -68,7 +69,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testDetectUriPage()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'URI Page',
             'uri' => '#'
         ));
@@ -78,7 +79,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testMvcShouldHaveDetectionPrecedence()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'MVC Page',
             'action' => 'index',
             'controller' => 'index',
@@ -90,7 +91,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testSupportsMvcShorthand()
     {
-        $mvcPage = Page\Page::factory(array(
+        $mvcPage = AbstractPage::factory(array(
             'type' => 'mvc',
             'label' => 'MVC Page',
             'action' => 'index',
@@ -102,7 +103,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testSupportsUriShorthand()
     {
-        $uriPage = Page\Page::factory(array(
+        $uriPage = AbstractPage::factory(array(
             'type' => 'uri',
             'label' => 'URI Page',
             'uri' => 'http://www.example.com/'
@@ -113,7 +114,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testSupportsCustomPageTypes()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'ZendTest\Navigation\TestAsset\Page',
             'label' => 'My Custom Page'
         ));
@@ -124,7 +125,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
     public function testShouldFailForInvalidType()
     {
         try {
-            $page = Page\Page::factory(array(
+            $page = AbstractPage::factory(array(
                 'type' => 'ZendTest\Navigation\TestAsset\InvalidPage',
                 'label' => 'My Invalid Page'
             ));
@@ -143,7 +144,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
         );
 
         try {
-            $page = Page\Page::factory($pageConfig);
+            $page = AbstractPage::factory($pageConfig);
         } catch(\Zend\Exception $e) {
             return;
         }
@@ -155,7 +156,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
     public function testShouldFailIfUnableToDetermineType()
     {
         try {
-            $page = Page\Page::factory(array(
+            $page = AbstractPage::factory(array(
                 'label' => 'My Invalid Page'
             ));
         } catch(Navigation\Exception $e) {

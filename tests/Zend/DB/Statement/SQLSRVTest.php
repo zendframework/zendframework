@@ -103,12 +103,12 @@ class SQLSRVTest extends AbstractTest
         $product_id = $this->_db->quoteIdentifier('product_id');
 
         $query = "INVALID SELECT * FROM INVALID TABLE WHERE $product_id > 1 ORDER BY $product_id ASC";
-        $stmt  = new \Zend\DB\Statement\SQLSRV\SQLSRV($this->_db, $query);
+        $stmt  = new \Zend\DB\Statement\SQLSRV($this->_db, $query);
 
         try {
             $stmt->fetchAll();
             $this->fail("Invalid query should have throw an error");
-        } catch (\Zend\DB\Statement\SQLSRV\Exception $e) {
+        } catch (\Zend\DB\Statement\SQLSRVException $e) {
             // Exception is thrown, nothing to worry about
             $this->assertEquals(-11, $e->getCode());
         }

@@ -24,19 +24,23 @@
  */
 namespace Zend\View;
 
+use Zend\Loader\PrefixPathMapper,
+    Zend\Loader\PluginLoader;
+
 /**
  * Abstract class for Zend_View to help enforce private constructs.
  *
  * @uses       \Zend\Loader
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
+ * @uses       \Zend\Loader\PluginLoader
  * @uses       \Zend\View\Exception
- * @uses       \Zend\View\ViewInterface
+ * @uses       \Zend\View\Helper
+ * @uses       \Zend\View\ViewEngine
  * @category   Zend
  * @package    Zend_View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractView implements ViewInterface
+abstract class AbstractView implements ViewEngine
 {
     /**
      * Path stack for script, helper, and filter directories.
@@ -457,11 +461,11 @@ abstract class AbstractView implements ViewInterface
     /**
      * Set plugin loader for a particular plugin type
      *
-     * @param  \Zend\Loader\PluginLoader\PluginLoader $loader
+     * @param  \Zend\Loader\PrefixPathMapper $loader
      * @param  string $type
      * @return \Zend\View\AbstractView
      */
-    public function setPluginLoader(\Zend\Loader\PluginLoader\PluginLoader $loader, $type)
+    public function setPluginLoader(PrefixPathMapper $loader, $type)
     {
         $type = strtolower($type);
         if (!in_array($type, $this->_loaderTypes)) {
@@ -478,7 +482,7 @@ abstract class AbstractView implements ViewInterface
      * Retrieve plugin loader for a specific plugin type
      *
      * @param  string $type
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PrefixPathMapper
      */
     public function getPluginLoader($type)
     {
@@ -500,7 +504,7 @@ abstract class AbstractView implements ViewInterface
                 default:
                     $prefix     .= $pType;
                     $pathPrefix .= $pType;
-                    $loader = new \Zend\Loader\PluginLoader\PluginLoader(array(
+                    $loader = new PluginLoader(array(
                         $prefix => $pathPrefix
                     ));
                     $this->_loaders[$type] = $loader;
@@ -577,7 +581,7 @@ abstract class AbstractView implements ViewInterface
             throw $e;
         }
 
-        if (!$helper instanceof ViewInterface) {
+        if (!$helper instanceof Helper) {
             if (!method_exists($helper, 'direct')) {
                 $e =  new Exception(
                     'View helper must implement Zend\\View\\Interface or have a "direct" method'

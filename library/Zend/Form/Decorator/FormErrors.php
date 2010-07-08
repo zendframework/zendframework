@@ -20,13 +20,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Decorator;
+
+use Zend\Form,
+    Zend\View\ViewEngine as View;
+
+/**
  * Zend_Form_Decorator_FormErrors
  *
  * Displays all form errors in one view.
  *
  * Any options passed will be used as HTML attributes of the ul tag for the errors.
  *
- * @uses       Zend_Form_Decorator_Abstract
+ * @uses       \Zend\Form\Decorator\AbstractDecorator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -34,7 +42,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
+class FormErrors extends AbstractDecorator
 {
     /**
      * Default values for markup options
@@ -72,7 +80,7 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
     public function render($content)
     {
         $form = $this->getElement();
-        if (!$form instanceof Zend_Form) {
+        if (!$form instanceof Form\Form) {
             return $content;
         }
 
@@ -141,7 +149,7 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
      * Set markupElementLabelStart
      *
      * @param  string $markupElementLabelStart
-     * @return Zend_Form_Decorator_FormErrors
+     * @return \Zend\Form\Decorator\FormErrors
      */
     public function setMarkupElementLabelStart($markupElementLabelStart)
     {
@@ -172,7 +180,7 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
      * Set markupElementLabelEnd
      *
      * @param  string $markupElementLabelEnd
-     * @return Zend_Form_Decorator_FormErrors
+     * @return \Zend\Form\Decorator\FormErrors
      */
     public function setMarkupElementLabelEnd($markupElementLabelEnd)
     {
@@ -203,7 +211,7 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
      * Set markupListStart
      *
      * @param  string $markupListStart
-     * @return Zend_Form_Decorator_FormErrors
+     * @return \Zend\Form\Decorator\FormErrors
      */
     public function setMarkupListStart($markupListStart)
     {
@@ -234,7 +242,7 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
      * Set markupListEnd
      *
      * @param  string $markupListEnd
-     * @return Zend_Form_Decorator_FormErrors
+     * @return \Zend\Form\Decorator\FormErrors
      */
     public function setMarkupListEnd($markupListEnd)
     {
@@ -265,7 +273,7 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
      * Set markupListItemStart
      *
      * @param  string $markupListItemStart
-     * @return Zend_Form_Decorator_FormErrors
+     * @return \Zend\Form\Decorator\FormErrors
      */
     public function setMarkupListItemStart($markupListItemStart)
     {
@@ -296,7 +304,7 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
      * Set markupListItemEnd
      *
      * @param  string $markupListItemEnd
-     * @return Zend_Form_Decorator_FormErrors
+     * @return \Zend\Form\Decorator\FormErrors
      */
     public function setMarkupListItemEnd($markupListItemEnd)
     {
@@ -327,7 +335,7 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
      * Set ignoreSubForms
      *
      * @param  bool $ignoreSubForms
-     * @return Zend_Form_Decorator_FormErrors
+     * @return \Zend\Form\Decorator\FormErrors
      */
     public function setIgnoreSubForms($ignoreSubForms)
     {
@@ -338,11 +346,11 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
     /**
      * Render element label
      *
-     * @param  Zend_Form_Element $element
-     * @param  Zend_View_Interface $view
+     * @param  \Zend\Form\Element $element
+     * @param  \Zend\View\ViewEngine $view
      * @return string
      */
-    public function renderLabel(Zend_Form_Element $element, Zend_View_Interface $view)
+    public function renderLabel(Form\Element $element, View $view)
     {
         $label = $element->getLabel();
         if (empty($label)) {
@@ -357,15 +365,15 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
     /**
      * Recurse through a form object, rendering errors
      *
-     * @param  Zend_Form $form
-     * @param  Zend_View_Interface $view
+     * @param  \Zend\Form\Form $form
+     * @param  \Zend\View\ViewEngine $view
      * @return string
      */
-    protected function _recurseForm(Zend_Form $form, Zend_View_Interface $view)
+    protected function _recurseForm(Form\Form $form, View $view)
     {
         $content = '';
         $errors  = $form->getMessages();
-        if ($form instanceof Zend_Form_SubForm) {
+        if ($form instanceof Form\SubForm) {
             $name = $form->getName();
             if ((1 == count($errors)) && array_key_exists($name, $errors)) {
                 $errors = $errors[$name];
@@ -377,13 +385,13 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
 
         foreach ($errors as $name => $list) {
             $element = $form->$name;
-            if ($element instanceof Zend_Form_Element) {
+            if ($element instanceof Form\Element) {
                 $element->setView($view);
                 $content .= $this->getMarkupListItemStart()
                          .  $this->renderLabel($element, $view)
                          .  $view->formErrors($list, $this->getOptions())
                          .  $this->getMarkupListItemEnd();
-            } elseif (!$this->ignoreSubForms() && ($element instanceof Zend_Form)) {
+            } elseif (!$this->ignoreSubForms() && ($element instanceof Form\Form)) {
                 $content .= $this->getMarkupListStart()
                           . $this->_recurseForm($element, $view)
                           . $this->getMarkupListEnd();

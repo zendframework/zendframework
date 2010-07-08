@@ -51,7 +51,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     public function testFilesystem()
     {
         $file = new File\Filesystem(dirname(__FILE__) . '/_files/sample_data'); // open file object for reading
-        $this->assertTrue($file instanceof  File\FileInterface);
+        $this->assertTrue($file instanceof  File);
 
         $fileSize = filesize(dirname(__FILE__) . '/_files/sample_data');
 
@@ -113,7 +113,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         unset($file);
 
         $file = new File\Memory($fileData);
-        $this->assertTrue($file instanceof  File\FileInterface);
+        $this->assertTrue($file instanceof  File);
 
         $fileSize = strlen($fileData);
 

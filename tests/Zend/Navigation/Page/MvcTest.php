@@ -359,7 +359,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
         $expected = \ZendTest\Navigation\TestAsset\UrlHelper::RETURN_URL;
         $actual = $page->getHref();
 
-        $old = \Zend\Controller\Action\HelperBroker\HelperBroker::getStaticHelper('URL');
+        $old = \Zend\Controller\Action\HelperBroker::getStaticHelper('URL');
         Page\Mvc::setUrlHelper($old);
 
         $this->assertEquals($expected, $actual);

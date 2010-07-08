@@ -20,23 +20,26 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
 namespace Zend\Application\Module;
 
-use \Zend_Application_Bootstrap_Bootstrap;
+use Zend\Application\Bootstrap as ApplicationBootstrap;
 
 /**
  * Base bootstrap class for modules
  *
- * @uses       Zend_Loader_Autoloader_Resource
- * @uses       Zend_Application_Bootstrap_Bootstrap
+ * @uses       \Zend\Loader\ResourceAutoloader
+ * @uses       \Zend\Application\Bootstrap
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Module
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Application_Module_Bootstrap
-    extends Zend_Application_Bootstrap_Bootstrap
+abstract class Bootstrap
+    extends ApplicationBootstrap
 {
     /**
      * Set this explicitly to reduce impact of determining module name
@@ -47,7 +50,7 @@ abstract class Zend_Application_Module_Bootstrap
     /**
      * Constructor
      *
-     * @param  Zend_Application|Zend_Application_Bootstrap_Bootstrapper $application
+     * @param  Zend_Application|\Zend\Application\Bootstrapper $application
      * @return void
      */
     public function __construct($application)
@@ -55,7 +58,7 @@ abstract class Zend_Application_Module_Bootstrap
         $this->setApplication($application);
 
         // Use same plugin loader as parent bootstrap
-        if ($application instanceof \Zend_Application_Bootstrap_ResourceBootstrapper) {
+        if ($application instanceof \Zend\Application\ResourceBootstrapper) {
             $this->setPluginLoader($application->getPluginLoader());
         }
 
@@ -73,8 +76,8 @@ abstract class Zend_Application_Module_Bootstrap
         $this->initResourceLoader();
 
         // ZF-6545: ensure front controller resource is loaded
-        if (!$this->hasPluginResource('FrontController')) {
-            $this->registerPluginResource('FrontController');
+        if (!$this->hasPluginResource('frontcontroller')) {
+            $this->registerPluginResource('frontcontroller');
         }
 
         // ZF-6545: prevent recursive registration of modules

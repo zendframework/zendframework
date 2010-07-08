@@ -435,7 +435,7 @@ HTML;
      *
      * @param string $challengeField
      * @param string $responseField
-     * @return \Zend\HTTP\Response\Response
+     * @return \Zend\HTTP\Response
      * @throws \Zend\Service\ReCaptcha\Exception
      */
     protected function _post($challengeField, $responseField)

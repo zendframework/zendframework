@@ -25,11 +25,13 @@
  */
 namespace Zend\Soap\WSDL\Strategy;
 
+use Zend\Soap\WSDLException;
+
 /**
  * Zend_Soap_WSDL_Strategy_DefaultComplexType
  *
  * @uses       ReflectionClass
- * @uses       \Zend\Soap\WSDL\Exception
+ * @uses       \Zend\Soap\WSDLException
  * @uses       \Zend\Soap\WSDL\Strategy\AbstractStrategy
  * @category   Zend
  * @package    Zend_Soap
@@ -48,7 +50,7 @@ class DefaultComplexType extends AbstractStrategy
     public function addComplexType($type)
     {
         if(!class_exists($type)) {
-            throw new \Zend\Soap\WSDL\Exception(sprintf(
+            throw new WSDLException(sprintf(
                 'Cannot add a complex type %s that is not an object or where '
               . 'class could not be found in \'DefaultComplexType\' strategy.', $type
             ));

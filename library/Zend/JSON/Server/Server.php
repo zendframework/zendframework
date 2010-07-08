@@ -33,7 +33,7 @@ use Zend\Server\Reflection,
  * @uses       Zend\JSON\Server\Response\HTTP
  * @uses       Zend\JSON\Server\SMD
  * @uses       Zend\Server\AbstractServer
- * @uses       Zend\Server\Reflection\Reflection
+ * @uses       Zend\Server\Reflection
  * @category   Zend
  * @package    Zend_JSON
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -112,11 +112,11 @@ class Server extends \Zend\Server\AbstractServer
         }
 
         if (is_string($function)) {
-            $method = Reflection\Reflection::reflectFunction($function, $argv, $namespace);
+            $method = Reflection::reflectFunction($function, $argv, $namespace);
         } else {
             $class  = array_shift($function);
             $action = array_shift($function);
-            $reflection = Reflection\Reflection::reflectClass($class, $argv, $namespace);
+            $reflection = Reflection::reflectClass($class, $argv, $namespace);
             $methods = $reflection->getMethods();
             $found   = false;
             foreach ($methods as $method) {
@@ -153,7 +153,7 @@ class Server extends \Zend\Server\AbstractServer
             $argv = array_slice($argv, 3);
         }
 
-        $reflection = Reflection\Reflection::reflectClass($class, $argv, $namespace);
+        $reflection = Reflection::reflectClass($class, $argv, $namespace);
 
         foreach ($reflection->getMethods() as $method) {
             $definition = $this->_buildSignature($method, $class);

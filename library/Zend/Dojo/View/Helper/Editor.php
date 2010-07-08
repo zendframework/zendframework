@@ -21,15 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\View\Helper;
+
+/**
  * Dojo Editor dijit
  *
- * @uses       Zend_Dojo_View_Helper_Dijit
+ * @uses       \Zend\Dojo\View\Helper\Dijit
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
+class Editor extends Dijit
 {
     /**
      * @param string Dijit type
@@ -69,7 +74,7 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
      * @param  array $attribs
      * @return string
      */
-    public function editor($id, $value = null, $params = array(), $attribs = array())
+    public function direct($id = null, $value = null, $params = array(), $attribs = array())
     {
         if (isset($params['plugins'])) {
             foreach ($this->_getRequiredModules($params['plugins']) as $module) {

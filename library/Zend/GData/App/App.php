@@ -578,7 +578,7 @@ class App
      *                                of the request body
      * @param int $remainingRedirects Number of redirects to follow if request
      *                              s results in one
-     * @return \Zend\HTTP\Response\Response The response object
+     * @return \Zend\HTTP\Response The response object
      */
     public function performHttpRequest($method, $url, $headers = null,
         $body = null, $contentType = null, $remainingRedirects = null)
@@ -848,7 +848,7 @@ class App
      * @param array $extraHeaders Extra headers to add to the request, as an
      *        array of string-based key/value pairs.
      * @throws \Zend\GData\App\HttpException
-     * @return \Zend\HTTP\Response\Response
+     * @return \Zend\HTTP\Response
      */
     public function get($uri, $extraHeaders = array())
     {
@@ -867,7 +867,7 @@ class App
      * @param string $contentType Content-type of the data
      * @param array $extraHeaders Extra headers to add to the request, as an
      *        array of string-based key/value pairs.
-     * @return \Zend\HTTP\Response\Response
+     * @return \Zend\HTTP\Response
      * @throws \Zend\GData\App\Exception
      * @throws \Zend\GData\App\HttpException
      * @throws \Zend\GData\App\InvalidArgumentException
@@ -892,7 +892,7 @@ class App
      * @param string $contentType Content-type of the data
      * @param array $extraHeaders Extra headers to add to the request, as an
      *        array of string-based key/value pairs.
-     * @return \Zend\HTTP\Response\Response
+     * @return \Zend\HTTP\Response
      * @throws \Zend\GData\App\Exception
      * @throws \Zend\GData\App\HttpException
      * @throws \Zend\GData\App\InvalidArgumentException

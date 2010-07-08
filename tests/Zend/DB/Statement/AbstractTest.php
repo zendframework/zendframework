@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Db\Statement;
+namespace ZendTest\DB\Statement;
 use Zend\DB\Statement;
 use Zend\DB;
 
@@ -48,7 +48,7 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
             ->from('zfproducts');
         $sql = $select->__toString();
         $stmt = new $statementClass($this->_db, $sql);
-        $this->assertType('Zend\DB\Statement\StatmentInterface', $stmt);
+        $this->assertType('Zend\DB\Statement', $stmt);
         $stmt->closeCursor();
     }
 
@@ -59,7 +59,7 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
         $select = $this->_db->select()
             ->from('zfproducts');
         $stmt = new $statementClass($this->_db, $select);
-        $this->assertType('Zend\DB\Statement\StatmentInterface', $stmt);
+        $this->assertType('Zend\DB\Statement', $stmt);
         $stmt->closeCursor();
     }
 
@@ -68,7 +68,7 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
         $select = $this->_db->select()
             ->from('zfproducts');
         $stmt = $this->_db->prepare($select->__toString());
-        $this->assertType('Zend\DB\Statement\StatementInterface', $stmt);
+        $this->assertType('Zend\DB\Statement', $stmt);
         $stmt->closeCursor();
     }
 
@@ -77,7 +77,7 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
         $select = $this->_db->select()
             ->from('zfproducts');
         $stmt = $this->_db->query($select);
-        $this->assertType('Zend\DB\Statement\StatementInterface', $stmt);
+        $this->assertType('Zend\DB\Statement', $stmt);
         $stmt->closeCursor();
     }
 
@@ -86,7 +86,7 @@ abstract class AbstractTest extends \ZendTest\DB\TestSetup
         $stmt = $this->_db->select()
             ->from('zfproducts')
             ->query();
-        $this->assertType('Zend\DB\Statement\StatementInterface', $stmt);
+        $this->assertType('Zend\DB\Statement', $stmt);
         $stmt->closeCursor();
     }
 

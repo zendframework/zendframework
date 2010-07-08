@@ -24,8 +24,9 @@
  * @namespace
  */
 namespace ZendTest\Soap;
-use Zend\Soap\WSDL;
-use Zend\Soap\WSDL\Strategy;
+use Zend\Soap\WSDL,
+    Zend\Soap\WSDLException,
+    Zend\Soap\WSDL\Strategy;
 
 /**
  * Test cases for Zend_Soap_WSDL
@@ -56,7 +57,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     function testConstructor()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
 
         $this->assertEquals($this->sanitizeWSDLXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
@@ -71,7 +72,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     function testSetUriChangesDomDocumentWSDLStructureTnsAndTargetNamespaceAttributes()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
         $wsdl->setUri('http://localhost/MyNewService.php');
 
         $this->assertEquals($this->sanitizeWSDLXmlOutputForOsCompability($wsdl->toXml()),
@@ -87,7 +88,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     function testAddMessage()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
 
         $messageParts = array();
         $messageParts['parameter1'] = $wsdl->getType('int');
@@ -115,7 +116,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     function testAddPortType()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
 
         $wsdl->addPortType('myPortType');
 
@@ -134,7 +135,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     function testAddPortOperation()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
 
         $portType = $wsdl->addPortType('myPortType');
 
@@ -168,7 +169,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     function testAddBinding()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
 
         $wsdl->addPortType('myPortType');
         $wsdl->addBinding('MyServiceBinding', 'myPortType');
@@ -189,7 +190,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     function testAddBindingOperation()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
 
         $wsdl->addPortType('myPortType');
         $binding = $wsdl->addBinding('MyServiceBinding', 'myPortType');
@@ -244,7 +245,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     function testAddSoapBinding()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
 
         $wsdl->addPortType('myPortType');
         $binding = $wsdl->addBinding('MyServiceBinding', 'myPortType');
@@ -282,7 +283,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
                                . '</binding>'
                           . '</definitions>' );
 
-        $wsdl1 = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl1 = new WSDL('MyService', 'http://localhost/MyService.php');
 
         $wsdl1->addPortType('myPortType');
         $binding = $wsdl1->addBinding('MyServiceBinding', 'myPortType');
@@ -324,7 +325,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     function testAddSoapOperation()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
 
         $wsdl->addPortType('myPortType');
         $binding = $wsdl->addBinding('MyServiceBinding', 'myPortType');
@@ -365,7 +366,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     function testAddService()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
 
         $wsdl->addPortType('myPortType');
         $wsdl->addBinding('MyServiceBinding', 'myPortType');
@@ -393,7 +394,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     function testAddDocumentation()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
 
         $portType = $wsdl->addPortType('myPortType');
 
@@ -416,7 +417,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     public function testAddDocumentationToSetInsertsBefore()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
 
         $messageParts = array();
         $messageParts['parameter1'] = $wsdl->getType('int');
@@ -448,7 +449,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     function testToXml()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
 
         $this->assertEquals($this->sanitizeWSDLXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
@@ -463,7 +464,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     function testToDomDocument()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
         $dom = $wsdl->toDomDocument();
 
         $this->assertTrue($dom instanceOf \DOMDocument);
@@ -481,7 +482,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     function testDump()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
 
         ob_start();
         $wsdl->dump();
@@ -497,8 +498,8 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
                                . 'name="MyService" targetNamespace="http://localhost/MyService.php"/>' );
 
-        $wsdl->dump(dirname(__FILE__) . '/_files/dumped.wsdl');
-        $dumpedContent = file_get_contents(dirname(__FILE__) . '/_files/dumped.wsdl');
+        $wsdl->dump(__DIR__ . '/TestAsset/dumped.wsdl');
+        $dumpedContent = file_get_contents(__DIR__ . '/TestAsset/dumped.wsdl');
 
         $this->assertEquals($this->sanitizeWSDLXmlOutputForOsCompability($dumpedContent),
                             '<?xml version="1.0"?>'  .
@@ -510,12 +511,12 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
                                . 'name="MyService" targetNamespace="http://localhost/MyService.php"/>' );
 
-        unlink(dirname(__FILE__) . '/_files/dumped.wsdl');
+        unlink(__DIR__ . '/TestAsset/dumped.wsdl');
     }
 
     function testGetType()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php', true);
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php', true);
 
         $this->assertEquals('xsd:string',       $wsdl->getType('string'),  'xsd:string detection failed.');
         $this->assertEquals('xsd:string',       $wsdl->getType('str'),     'xsd:string detection failed.');
@@ -533,23 +534,23 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
 
     function testGetComplexTypeBasedOnStrategiesBackwardsCompabilityBoolean()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php', true);
-        $this->assertEquals('tns:Zend_Soap_WSDL_Test', $wsdl->getType('Zend_Soap_WSDL_Test'));
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php', true);
+        $this->assertEquals('tns:ZendTest_Soap_TestAsset_WSDLTestClass', $wsdl->getType('ZendTest_Soap_TestAsset_WSDLTestClass'));
         $this->assertTrue($wsdl->getComplexTypeStrategy() instanceof Strategy\DefaultComplexType);
 
-        $wsdl2 = new WSDL\WSDL('MyService', 'http://localhost/MyService.php', false);
-        $this->assertEquals('xsd:anyType',             $wsdl2->getType('Zend_Soap_WSDL_Test'));
+        $wsdl2 = new WSDL('MyService', 'http://localhost/MyService.php', false);
+        $this->assertEquals('xsd:anyType',             $wsdl2->getType('ZendTest_Soap_TestAsset_WSDLTestClass'));
         $this->assertTrue($wsdl2->getComplexTypeStrategy() instanceof Strategy\AnyType);
     }
 
     function testGetComplexTypeBasedOnStrategiesStringNames()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php', 'Zend_Soap_WSDL_Strategy_DefaultComplexType');
-        $this->assertEquals('tns:Zend_Soap_WSDL_Test', $wsdl->getType('Zend_Soap_WSDL_Test'));
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php', 'Zend\Soap\WSDL\Strategy\DefaultComplexType');
+        $this->assertEquals('tns:ZendTest_Soap_TestAsset_WSDLTestClass', $wsdl->getType('ZendTest_Soap_TestAsset_WSDLTestClass'));
         $this->assertTrue($wsdl->getComplexTypeStrategy() instanceof Strategy\DefaultComplexType);
 
-        $wsdl2 = new WSDL\WSDL('MyService', 'http://localhost/MyService.php', 'Zend_Soap_WSDL_Strategy_AnyType');
-        $this->assertEquals('xsd:anyType',             $wsdl2->getType('Zend_Soap_WSDL_Test'));
+        $wsdl2 = new WSDL('MyService', 'http://localhost/MyService.php', 'Zend\Soap\WSDL\Strategy\AnyType');
+        $this->assertEquals('xsd:anyType',             $wsdl2->getType('ZendTest_Soap_TestAsset_WSDLTestClass'));
         $this->assertTrue($wsdl2->getComplexTypeStrategy() instanceof Strategy\AnyType);
     }
 
@@ -560,10 +561,10 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
     {
         set_error_handler(array($this, 'swallowIncludeNotices'), E_WARNING);
         try {
-            $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php', 'Zend_Soap_WSDL_Strategy_UnknownStrategyType');
+            $wsdl = new WSDL('MyService', 'http://localhost/MyService.php', 'Zend_Soap_WSDL_Strategy_UnknownStrategyType');
             restore_error_handler();
             $this->fail();
-        } catch(WSDL\Exception $e) {
+        } catch(WSDLException $e) {
         }
         restore_error_handler();
     }
@@ -571,10 +572,10 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
     function testSettingInvalidStrategyObjectThrowsException()
     {
         try {
-            $strategy = new \Zend_Soap_WSDL_Test();
-            $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php', $strategy);
+            $strategy = new \ZendTest_Soap_TestAsset_WSDLTestClass();
+            $wsdl = new WSDL('MyService', 'http://localhost/MyService.php', $strategy);
             $this->fail();
-        } catch(WSDL\Exception $e) {
+        } catch(WSDLException $e) {
 
         }
     }
@@ -582,32 +583,32 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
     function testAddingSameComplexTypeMoreThanOnceIsIgnored()
     {
         try {
-            $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
-            $wsdl->addType('Zend_Soap_WSDL_Test');
-            $wsdl->addType('Zend_Soap_WSDL_Test');
+            $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
+            $wsdl->addType('ZendTest_Soap_TestAsset_WSDLTestClass');
+            $wsdl->addType('ZendTest_Soap_TestAsset_WSDLTestClass');
             $types = $wsdl->getTypes();
             $this->assertEquals(1, count($types));
-            $this->assertEquals(array("Zend_Soap_WSDL_Test"), $types);
-        } catch(WSDL\Exception $e) {
+            $this->assertEquals(array("ZendTest_Soap_TestAsset_WSDLTestClass"), $types);
+        } catch(WSDLException $e) {
             $this->fail();
         }
     }
 
     function testUsingSameComplexTypeTwiceLeadsToReuseOfDefinition()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
-        $wsdl->addComplexType('Zend_Soap_WSDL_Test');
-        $this->assertEquals(array('Zend_Soap_WSDL_Test'), $wsdl->getTypes());
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl->addComplexType('ZendTest_Soap_TestAsset_WSDLTestClass');
+        $this->assertEquals(array('ZendTest_Soap_TestAsset_WSDLTestClass'), $wsdl->getTypes());
 
-        $wsdl->addComplexType('Zend_Soap_WSDL_Test');
-        $this->assertEquals(array('Zend_Soap_WSDL_Test'), $wsdl->getTypes());
+        $wsdl->addComplexType('ZendTest_Soap_TestAsset_WSDLTestClass');
+        $this->assertEquals(array('ZendTest_Soap_TestAsset_WSDLTestClass'), $wsdl->getTypes());
     }
 
     function testAddComplexType()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
 
-        $wsdl->addComplexType('Zend_Soap_WSDL_Test');
+        $wsdl->addComplexType('ZendTest_Soap_TestAsset_WSDLTestClass');
 
         $this->assertEquals($this->sanitizeWSDLXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
@@ -620,7 +621,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
                                . 'name="MyService" targetNamespace="http://localhost/MyService.php">'
                                . '<types>'
                                .   '<xsd:schema targetNamespace="http://localhost/MyService.php">'
-                               .     '<xsd:complexType name="Zend_Soap_WSDL_Test">'
+                               .     '<xsd:complexType name="ZendTest_Soap_TestAsset_WSDLTestClass">'
                                .       '<xsd:all>'
                                .         '<xsd:element name="var1" type="xsd:int"/>'
                                .         '<xsd:element name="var2" type="xsd:string"/>'
@@ -636,7 +637,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
      */
     function testCaseOfDocBlockParamsDosNotMatterForSoapTypeDetectionZf3910()
     {
-        $wsdl = new WSDL\WSDL('MyService', 'http://localhost/MyService.php');
+        $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
 
         $this->assertEquals("xsd:string", $wsdl->getType("StrIng"));
         $this->assertEquals("xsd:string", $wsdl->getType("sTr"));
@@ -651,7 +652,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
      */
     public function testMultipleSequenceDefinitionsOfSameTypeWillBeRecognizedOnceBySequenceStrategy()
     {
-        $wsdl = new WSDL\WSDL("MyService", "http://localhost/MyService.php");
+        $wsdl = new WSDL("MyService", "http://localhost/MyService.php");
         $wsdl->setComplexTypeStrategy(new Strategy\ArrayOfTypeSequence());
 
         $wsdl->addComplexType("string[]");
@@ -671,7 +672,7 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
      */
     public function testHtmlAmpersandInUrlInConstructorIsEncodedCorrectly()
     {
-        $wsdl = new WSDL\WSDL("MyService", self::URI_WITH_EXPANDED_AMP);
+        $wsdl = new WSDL("MyService", self::URI_WITH_EXPANDED_AMP);
         $this->assertContains(self::URI_WITH_EXPANDED_AMP, $wsdl->toXML());
     }
 
@@ -680,25 +681,8 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
      */
     public function testHtmlAmpersandInUrlInSetUriIsEncodedCorrectly()
     {
-        $wsdl = new WSDL\WSDL("MyService", "http://example.com");
+        $wsdl = new WSDL("MyService", "http://example.com");
         $wsdl->setUri(self::URI_WITH_EXPANDED_AMP);
         $this->assertContains(self::URI_WITH_EXPANDED_AMP, $wsdl->toXML());
     }
-}
-
-
-
-/**
- * Test Class
- */
-class Test {
-    /**
-     * @var integer
-     */
-    public $var1;
-
-    /**
-     * @var string
-     */
-    public $var2;
 }

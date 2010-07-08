@@ -21,15 +21,20 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\View\Helper;
+
+/**
  * Dojo NumberSpinner dijit
  *
- * @uses       Zend_Dojo_View_Helper_Dijit
+ * @uses       \Zend\Dojo\View\Helper\Dijit
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Dojo_View_Helper_NumberSpinner extends Zend_Dojo_View_Helper_Dijit
+class NumberSpinner extends Dijit
 {
     /**
      * Dijit being used
@@ -58,7 +63,7 @@ class Zend_Dojo_View_Helper_NumberSpinner extends Zend_Dojo_View_Helper_Dijit
      * @param  array $attribs HTML attributes
      * @return string
      */
-    public function numberSpinner($id, $value = null, array $params = array(), array $attribs = array())
+    public function direct($id = null, $value = null, array $params = array(), array $attribs = array())
     {
         // Get constraints and serialize to JSON if necessary
         if (array_key_exists('constraints', $params)) {

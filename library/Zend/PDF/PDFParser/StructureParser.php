@@ -344,11 +344,11 @@ class StructureParser
      * Thus we don't need to care about overhead
      *
      * @param mixed $source
-     * @param \Zend\PDF\ObjectFactory\ObjectFactoryInterface $factory
+     * @param \Zend\PDF\ObjectFactory $factory
      * @param boolean $load
      * @throws \Zend\Exception
      */
-    public function __construct($source, PDF\ObjectFactory\ObjectFactoryInterface $factory, $load)
+    public function __construct($source, PDF\ObjectFactory $factory, $load)
     {
         if ($load) {
             if (($pdfFile = @fopen($source, 'rb')) === false ) {

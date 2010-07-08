@@ -55,7 +55,7 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         \Zend\Layout\Layout::resetMvcInstance();
-        HelperBroker\HelperBroker::resetHelpers();
+        HelperBroker::resetHelpers();
 
         $this->front = Controller\Front::getInstance();
         $this->front->resetInstance();
@@ -64,7 +64,7 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
         $this->layout = Layout\Layout::startMvc();
 
         $this->helper = new Helper\ContextSwitch();
-        HelperBroker\HelperBroker::addHelper($this->helper);
+        HelperBroker::addHelper($this->helper);
 
         $this->request = new \Zend\Controller\Request\HTTP();
         $this->response = new \Zend\Controller\Response\Cli();
@@ -74,7 +74,7 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
                     ->addControllerDirectory(dirname(__FILE__));
 
         $this->view = new \Zend\View\View();
-        $this->viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $this->viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $this->viewRenderer->setView($this->view);
 
         $this->controller = new ContextSwitchTestController(
@@ -901,7 +901,7 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class ContextSwitchTestController extends Action\Action
+class ContextSwitchTestController extends Action
 {
     public $contextSwitch;
 
@@ -937,7 +937,7 @@ class ContextSwitchTestController extends Action\Action
 }
 
 
-class CustomView implements \Zend\View\ViewInterface
+class CustomView implements \Zend\View\ViewEngine
 {
     public function getEngine()
     {}

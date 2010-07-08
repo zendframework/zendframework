@@ -66,7 +66,7 @@ class PlaceholderTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->placeholder);
-        \Zend\Registry::getInstance()->offsetUnset(Registry\Registry::REGISTRY_KEY);
+        \Zend\Registry::getInstance()->offsetUnset(Registry::REGISTRY_KEY);
     }
 
     /**
@@ -74,13 +74,13 @@ class PlaceholderTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructorCreatesRegistryOffset()
     {
-        $this->assertTrue(\Zend\Registry::isRegistered(Registry\Registry::REGISTRY_KEY));
+        $this->assertTrue(\Zend\Registry::isRegistered(Registry::REGISTRY_KEY));
     }
 
     public function testMultiplePlaceholdersUseSameRegistry()
     {
-        $this->assertTrue(\Zend\Registry::isRegistered(Registry\Registry::REGISTRY_KEY));
-        $registry = \Zend\Registry::get(Registry\Registry::REGISTRY_KEY);
+        $this->assertTrue(\Zend\Registry::isRegistered(Registry::REGISTRY_KEY));
+        $registry = \Zend\Registry::get(Registry::REGISTRY_KEY);
         $this->assertSame($registry, $this->placeholder->getRegistry());
 
         $placeholder = new Helper\Placeholder();

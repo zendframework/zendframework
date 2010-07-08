@@ -13,25 +13,25 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Reader\Reader
+ * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: EntryAbstract.php 20096 2010-01-06 02:05:09Z bkarwin $
+ * @version    $Id$
  */
 
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace Zend\Feed\Reader\Extension;
 use Zend\Feed\Reader;
 
 /**
-* @uses \Zend\Feed\Reader\Reader
-* @category Zend
-* @package Reader\Reader
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-*/
+ * @uses       \Zend\Feed\Reader\Reader
+ * @category   Zend
+ * @package    Zend_Feed_Reader
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 abstract class AbstractEntry
 {
     /**
@@ -51,7 +51,7 @@ abstract class AbstractEntry
     /**
      * Entry instance
      *
-     * @var Zend_Feed_Entry_Abstract
+     * @var \Zend\Feed\Entry\AbstractEntry
      */
     protected $_entry = null;
 
@@ -79,7 +79,7 @@ abstract class AbstractEntry
     /**
      * Constructor
      *
-     * @param  Zend_Feed_Entry_Abstract $entry
+     * @param  \Zend\Feed\Entry\AbstractEntry $entry
      * @param  int $entryKey
      * @param  string $type
      * @return void
@@ -112,7 +112,7 @@ abstract class AbstractEntry
     /**
      * Get the DOM
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     public function getDomDocument()
     {
@@ -144,7 +144,7 @@ abstract class AbstractEntry
      * Set the XPath query
      *
      * @param  DOMXPath $xpath
-     * @return Reader\Reader_Extension_EntryAbstract
+     * @return \Zend\Feed\Reader\Extension\AbstractEntry
      */
     public function setXpath(\DOMXPath $xpath)
     {
@@ -190,7 +190,7 @@ abstract class AbstractEntry
      * Set the XPath prefix
      *
      * @param  string $prefix
-     * @return Reader\Reader_Extension_EntryAbstract
+     * @return \Zend\Feed\Reader\Extension\AbstractEntry
      */
     public function setXpathPrefix($prefix)
     {

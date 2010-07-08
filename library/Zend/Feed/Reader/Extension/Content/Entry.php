@@ -13,28 +13,27 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Reader\Reader
+ * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Entry.php 22300 2010-05-26 10:13:34Z padraic $
+ * @version    $Id$
  */
 
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace Zend\Feed\Reader\Extension\Content;
 use Zend\Feed\Reader;
-use Zend\Feed\Reader\Extension;
 
 /**
-* @uses \Zend\Feed\Reader\Reader
-* @uses Reader\Reader_Entry_EntryAbstract
-* @category Zend
-* @package Reader\Reader
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-*/
-class Entry extends Extension\AbstractEntry
+ * @uses       \Zend\Feed\Reader\Reader
+ * @uses       Zend\Feed\Reader\Entry\AbstractEntry
+ * @category   Zend
+ * @package    Zend_Feed_Reader
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class Entry extends Reader\Extension\AbstractEntry
 {
 
     public function getContent()
@@ -45,6 +44,9 @@ class Entry extends Extension\AbstractEntry
             $content = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
         } else {
             $content = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
+        }
+        if ($content) {
+            $content = html_entity_decode($content, ENT_QUOTES, $this->getEncoding());
         }
         return $content;
     }

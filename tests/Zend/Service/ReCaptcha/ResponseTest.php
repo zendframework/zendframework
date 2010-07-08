@@ -75,7 +75,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $status = 'false';
         $errorCode = 'foobar';
         $responseBody = $status . "\n" . $errorCode;
-        $httpResponse = new Response\Response(200, array('Content-Type' => 'text/html'), $responseBody);
+        $httpResponse = new Response(200, array('Content-Type' => 'text/html'), $responseBody);
 
         $this->_response->setFromHttpResponse($httpResponse);
 
@@ -97,7 +97,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $status = 'false';
         $errorCode = 'foobar';
         $responseBody = $status . "\n" . $errorCode;
-        $httpResponse = new Response\Response(200, array('Content-Type' => 'text/html'), $responseBody);
+        $httpResponse = new Response(200, array('Content-Type' => 'text/html'), $responseBody);
 
         $response = new ReCaptcha\Response(null, null, $httpResponse);
 

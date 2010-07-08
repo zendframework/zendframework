@@ -21,22 +21,27 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Context\Content;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       Zend_Tool_Project_Context_Content_Engine_CodeGenerator
- * @uses       Zend_Tool_Project_Context_Content_Engine_Phtml
+ * @uses       \Zend\Tool\Project\Context\Content\Engine\CodeGenerator
+ * @uses       \Zend\Tool\Project\Context\Content\Engine\Phtml
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Content_Engine
+class Engine
 {
     /**
-     * @var Zend_Tool_Framework_Client_Storage
+     * @var \Zend\Tool\Framework\Client\Storage
      */
     protected $_storage = null;
 
@@ -53,26 +58,26 @@ class Zend_Tool_Project_Context_Content_Engine
     /**
      * __construct()
      *
-     * @param Zend_Tool_Framework_Client_Storage $storage
+     * @param \Zend\Tool\Framework\Client\Storage $storage
      */
-    public function __construct(Zend_Tool_Framework_Client_Storage $storage)
+    public function __construct(\Zend\Tool\Framework\Client\Storage $storage)
     {
         $this->_storage = $storage;
         $this->_engines = array(
-            new Zend_Tool_Project_Context_Content_Engine_CodeGenerator($storage, $this->_keyInStorage),
-            new Zend_Tool_Project_Context_Content_Engine_Phtml($storage, $this->_keyInStorage),
+            new Engine\CodeGenerator($storage, $this->_keyInStorage),
+            new Engine\Phtml($storage, $this->_keyInStorage),
             );
     }
 
     /**
      * getContent()
      *
-     * @param Zend_Tool_Project_Context_Interface $context
+     * @param \Zend\Tool\Project\Context $context
      * @param string $methodName
      * @param mixed $parameters
      * @return string
      */
-    public function getContent(Zend_Tool_Project_Context_Interface $context, $methodName, $parameters)
+    public function getContent(\Zend\Tool\Project\Context $context, $methodName, $parameters)
     {
         $content = null;
 

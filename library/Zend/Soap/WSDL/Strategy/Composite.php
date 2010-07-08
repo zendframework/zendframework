@@ -24,7 +24,10 @@
  * @namespace
  */
 namespace Zend\Soap\WSDL\Strategy;
-use Zend\Soap\WSDL;
+
+use Zend\Soap\WSDL\Strategy,
+    Zend\Soap\WSDLException,
+    Zend\Soap\WSDL;
 
 /**
  * Zend_Soap_WSDL_Strategy_Composite
@@ -37,7 +40,7 @@ use Zend\Soap\WSDL;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Composite implements StrategyInterface
+class Composite implements Strategy
 {
     /**
      * Typemap of Complex Type => Strategy pairs.
@@ -49,25 +52,25 @@ class Composite implements StrategyInterface
     /**
      * Default Strategy of this composite
      *
-     * @var string|\Zend\Soap\WSDL\Strategy\StrategyInterface
+     * @var string|\Zend\Soap\WSDL\Strategy
      */
     protected $_defaultStrategy;
 
     /**
      * Context WSDL file that this composite serves
      *
-     * @var \Zend\Soap\WSDL\WSDL|null
+     * @var \Zend\Soap\WSDL|null
      */
     protected $_context;
 
     /**
      * Construct Composite WSDL Strategy.
      *
-     * @throws \Zend\Soap\WSDL\Exception
+     * @throws \Zend\Soap\WSDLException
      * @param array $typeMap
-     * @param string|\Zend\Soap\WSDL\Strategy\StrategyInterface $defaultStrategy
+     * @param string|\Zend\Soap\WSDL\Strategy $defaultStrategy
      */
-    public function __construct(array $typeMap=array(), $defaultStrategy="Zend_Soap_WSDL_Strategy_DefaultComplexType")
+    public function __construct(array $typeMap=array(), $defaultStrategy="Zend\Soap\WSDL\Strategy\DefaultComplexType")
     {
         foreach($typeMap AS $type => $strategy) {
             $this->connectTypeToStrategy($type, $strategy);
@@ -80,13 +83,13 @@ class Composite implements StrategyInterface
      *
      * @throws \Zend\Soap\WSDL\Exception
      * @param  string $type
-     * @param  string|\Zend\Soap\WSDL\Strategy\StrategyInterface $strategy
+     * @param  string|\Zend\Soap\WSDL\Strategy $strategy
      * @return \Zend\Soap\WSDL\Strategy\Composite
      */
     public function connectTypeToStrategy($type, $strategy)
     {
         if(!is_string($type)) {
-            throw new WSDL\Exception('Invalid type given to Composite Type Map.');
+            throw new WSDLException('Invalid type given to Composite Type Map.');
         }
         $this->_typeMap[$type] = $strategy;
         return $this;
@@ -95,9 +98,9 @@ class Composite implements StrategyInterface
     /**
      * Return default strategy of this composite
      *
-     * @throws \Zend\Soap\WSDL\Exception
+     * @throws \Zend\Soap\WSDLException
      * @param  string $type
-     * @return \Zend\Soap\WSDL\Strategy\StrategyInterface
+     * @return \Zend\Soap\WSDL\Strategy
      */
     public function getDefaultStrategy()
     {
@@ -105,8 +108,8 @@ class Composite implements StrategyInterface
         if(is_string($strategy) && class_exists($strategy)) {
             $strategy = new $strategy;
         }
-        if( !($strategy instanceof StrategyInterface) ) {
-            throw new WSDL\Exception(
+        if( !($strategy instanceof Strategy) ) {
+            throw new WSDLException(
                 'Default Strategy for Complex Types is not a valid strategy object.'
             );
         }
@@ -117,9 +120,9 @@ class Composite implements StrategyInterface
     /**
      * Return specific strategy or the default strategy of this type.
      *
-     * @throws \Zend\Soap\WSDL\Exception
+     * @throws \Zend\Soap\WSDLException
      * @param  string $type
-     * @return \Zend\Soap\WSDL\Strategy\StrategyInterface
+     * @return \Zend\Soap\WSDL\Strategy
      */
     public function getStrategyOfType($type)
     {
@@ -130,8 +133,8 @@ class Composite implements StrategyInterface
                 $strategy = new $strategy();
             }
 
-            if( !($strategy instanceof StrategyInterface) ) {
-                throw new WSDL\Exception(
+            if( !($strategy instanceof Strategy) ) {
+                throw new WSDLException(
                     "Strategy for Complex Type '$type' is not a valid strategy object."
                 );
             }
@@ -145,9 +148,9 @@ class Composite implements StrategyInterface
     /**
      * Method accepts the current WSDL context file.
      *
-     * @param \Zend\Soap\WSDL\WSDL $context
+     * @param \Zend\Soap\WSDL $context
      */
-    public function setContext(WSDL\WSDL $context)
+    public function setContext(WSDL $context)
     {
         $this->_context = $context;
         return $this;
@@ -156,14 +159,14 @@ class Composite implements StrategyInterface
     /**
      * Create a complex type based on a strategy
      *
-     * @throws \Zend\Soap\WSDL\Exception
+     * @throws \Zend\Soap\WSDLException
      * @param  string $type
      * @return string XSD type
      */
     public function addComplexType($type)
     {
-        if(!($this->_context instanceof WSDL\WSDL) ) {
-            throw new WSDL\Exception(
+        if(!($this->_context instanceof WSDL) ) {
+            throw new WSDLException(
                 "Cannot add complex type '$type', no context is set for this composite strategy."
             );
         }

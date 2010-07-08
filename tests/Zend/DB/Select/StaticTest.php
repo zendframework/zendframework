@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Db\Select;
+namespace ZendTest\DB\Select;
 
 
 /**
@@ -187,7 +187,7 @@ class StaticTest extends AbstractTest
     public function testSelectColumnsReset()
     {
         $select = $this->_selectColumnsReset()
-            ->reset(\Zend\DB\Select\Select::COLUMNS)
+            ->reset(\Zend\DB\Select::COLUMNS)
             ->columns('product_name');
         $sql = preg_replace('/\\s+/', ' ', $select->__toString());
         $this->assertEquals('SELECT "p"."product_name" FROM "zfproducts" AS "p"', $sql);

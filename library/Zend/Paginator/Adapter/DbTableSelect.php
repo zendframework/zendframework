@@ -38,7 +38,7 @@ class DbTableSelect extends DbSelect
      *
      * @param  integer $offset Page offset
      * @param  integer $itemCountPerPage Number of items per page
-     * @return \Zend\DB\Table\Rowset\AbstractRowset
+     * @return \Zend\DB\Table\AbstractRowset
      */
     public function getItems($offset, $itemCountPerPage)
     {

@@ -55,14 +55,14 @@ class MenuTest
 
     public function testHelperEntryPointWithoutAnyParams()
     {
-        $returned = $this->_helper->menu();
+        $returned = $this->_helper->direct();
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav1, $returned->getContainer());
     }
 
     public function testHelperEntryPointWithContainerParam()
     {
-        $returned = $this->_helper->menu($this->_nav2);
+        $returned = $this->_helper->direct($this->_nav2);
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav2, $returned->getContainer());
     }

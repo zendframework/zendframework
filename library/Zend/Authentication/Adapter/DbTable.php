@@ -25,7 +25,11 @@
  */
 namespace Zend\Authentication\Adapter;
 use Zend\Authentication\Adapter as AuthenticationAdapter,
-    Zend\Authentication\Result as AuthenticationResult;
+    Zend\Authentication\Result as AuthenticationResult,
+    Zend\DB\DB,
+    Zend\DB\Adapter\AbstractAdapter as AbstractDBAdapter,
+    Zend\DB\Expr as DBExpr,
+    Zend\DB\Select as DBSelect;
 
 /**
  * @uses       Zend\Authentication\Adapter\Exception
@@ -44,12 +48,12 @@ class DbTable implements AuthenticationAdapter
     /**
      * Database Connection
      *
-     * @var Zend_Db_Adapter_Abstract
+     * @var Zend\DB\Adapter\AbstractAdapter
      */
     protected $_zendDb = null;
 
     /**
-     * @var Zend_Db_Select
+     * @var Zend\DB\Select
      */
     protected $_dbSelect = null;
 
@@ -112,14 +116,14 @@ class DbTable implements AuthenticationAdapter
     /**
      * __construct() - Sets configuration options
      *
-     * @param  Zend_Db_Adapter_Abstract $zendDb
+     * @param  Zend\DB\Adapter\AbstractAdapter $zendDb
      * @param  string                   $tableName
      * @param  string                   $identityColumn
      * @param  string                   $credentialColumn
      * @param  string                   $credentialTreatment
      * @return void
      */
-    public function __construct(\Zend_Db_Adapter_Abstract $zendDb, $tableName = null, $identityColumn = null,
+    public function __construct(AbstractDBAdapter $zendDb, $tableName = null, $identityColumn = null,
                                 $credentialColumn = null, $credentialTreatment = null)
     {
         $this->_zendDb = $zendDb;
@@ -228,7 +232,7 @@ class DbTable implements AuthenticationAdapter
     /**
      * getDbSelect() - Return the preauthentication Db Select object for userland select query modification
      *
-     * @return Zend_Db_Select
+     * @return Zend\DB\Select
      */
     public function getDbSelect()
     {
@@ -357,7 +361,7 @@ class DbTable implements AuthenticationAdapter
             $this->_credentialTreatment = '?';
         }
 
-        $credentialExpression = new \Zend_Db_Expr(
+        $credentialExpression = new DBExpr(
             '(CASE WHEN ' .
             $this->_zendDb->quoteInto(
                 $this->_zendDb->quoteIdentifier($this->_credentialColumn, true)
@@ -386,12 +390,12 @@ class DbTable implements AuthenticationAdapter
      *                                       object is encountered
      * @return array
      */
-    protected function _authenticateQuerySelect(\Zend_Db_Select $dbSelect)
+    protected function _authenticateQuerySelect(DBSelect $dbSelect)
     {
         try {
-            if ($this->_zendDb->getFetchMode() != \Zend_DB::FETCH_ASSOC) {
+            if ($this->_zendDb->getFetchMode() != DB::FETCH_ASSOC) {
                 $origDbFetchMode = $this->_zendDb->getFetchMode();
-                $this->_zendDb->setFetchMode(\Zend_DB::FETCH_ASSOC);
+                $this->_zendDb->setFetchMode(DB::FETCH_ASSOC);
             }
             $resultIdentities = $this->_zendDb->fetchAll($dbSelect->__toString());
             if (isset($origDbFetchMode)) {

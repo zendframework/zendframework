@@ -763,7 +763,7 @@ class Stub extends Route\AbstractRoute
     public function assemble($data = array(), $reset = false, $encode = false) {}
 }
 
-class Mockup1 implements Route\RouteInterface
+class Mockup1 implements Route
 {
     public function match($path, $partial = null)
     {
@@ -777,7 +777,7 @@ class Mockup1 implements Route\RouteInterface
     public function assemble($data = array(), $reset = false, $encode = false) {}
 }
 
-class Mockup2 implements Route\RouteInterface
+class Mockup2 implements Route
 {
     protected $_request;
 

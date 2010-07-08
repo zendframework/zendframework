@@ -27,14 +27,14 @@ namespace Zend\Loader;
  *
  * @uses       Zend_Loader
  * @uses       Zend_Loader_Autoloader
- * @uses       Zend_Loader_Autoloader_Interface
+ * @uses       Zend_Loader_Autoloadable
  * @uses       Zend_Loader_Exception
  * @package    Zend_Loader
  * @subpackage Autoloader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ResourceAutoloader implements AutoloaderInterface
+class ResourceAutoloader implements Autoloadable
 {
     /**
      * @var string Base path to resource classes

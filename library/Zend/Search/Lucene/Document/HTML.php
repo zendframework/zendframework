@@ -24,8 +24,10 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Document;
-use Zend\Search\Lucene;
-use Zend\Search\Lucene\Analysis\Analyzer;
+
+use Zend\Search\Lucene\Document,
+    Zend\Search\Lucene,
+    Zend\Search\Lucene\Analysis\Analyzer;
 
 /**
  * HTML document.
@@ -33,7 +35,7 @@ use Zend\Search\Lucene\Analysis\Analyzer;
  * @uses       DOMDocument
  * @uses       DOMXPath
  * @uses       \Zend\Search\Lucene\Analysis\Analyzer
- * @uses       \Zend\Search\Lucene\Document\Document
+ * @uses       \Zend\Search\Lucene\Document
  * @uses       \Zend\Search\Lucene\Document\Field
  * @uses       \Zend\Search\Lucene\Exception
  * @category   Zend

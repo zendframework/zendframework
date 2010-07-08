@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Profile\Iterator;
+
+/**
  * This class is an iterator that will iterate only over enabled resources
  *
  * @uses       RecursiveFilterIterator
@@ -29,7 +34,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Profile_Iterator_EnabledResourceFilter extends RecursiveFilterIterator
+class EnabledResourceFilter extends \RecursiveFilterIterator
 {
 
     /**

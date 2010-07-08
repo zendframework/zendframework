@@ -36,7 +36,7 @@ class MboxOldMessage extends Storage\Mbox
      * used message class
      * @var string
      */
-    protected $_messageClass = '\Zend\Mail\Message\Message';
+    protected $_messageClass = '\Zend\Mail\Message';
 }
 
 /**

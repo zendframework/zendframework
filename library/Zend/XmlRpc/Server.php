@@ -62,7 +62,7 @@ use Zend\Server\AbstractServer,
  * @uses       ReflectionClass
  * @uses       Zend\Server\AbstractServer
  * @uses       Zend\Server\Definition
- * @uses       Zend\Server\Reflection\Reflection
+ * @uses       Zend\Server\Reflection
  * @uses       Zend\Server\Reflection\AbstractFunction
  * @uses       Zend\Server\Reflection\ReflectionMethod
  * @uses       Zend\XmlRpc\Request
@@ -211,7 +211,7 @@ class Server extends AbstractServer
             if (!is_string($func) || !function_exists($func)) {
                 throw new Server\Exception('Unable to attach function; invalid', 611);
             }
-            $reflection = Reflection\Reflection::reflectFunction($func, $argv, $namespace);
+            $reflection = Reflection::reflectFunction($func, $argv, $namespace);
             $this->_buildSignature($reflection);
         }
     }
@@ -245,7 +245,7 @@ class Server extends AbstractServer
             $argv = array_slice($argv, 2);
         }
 
-        $dispatchable = Reflection\Reflection::reflectClass($class, $argv, $namespace);
+        $dispatchable = Reflection::reflectClass($class, $argv, $namespace);
         foreach ($dispatchable->getMethods() as $reflection) {
             $this->_buildSignature($reflection, $class);
         }

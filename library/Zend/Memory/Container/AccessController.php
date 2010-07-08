@@ -24,6 +24,8 @@
  */
 namespace Zend\Memory\Container;
 
+use Zend\Memory\Container;
+
 /**
  * Memory object container access controller.
  *
@@ -34,16 +36,16 @@ namespace Zend\Memory\Container;
  * It's not referenced by memory manager and class destructor is invoked immidiately after gouing
  * out of scope or unset operation.
  *
- * Class also provides Zend_Memory_Container_Interface interface and works as proxy for such cases.
+ * Class also provides Zend\Memory\Container interface and works as proxy for such cases.
  *
- * @uses       \Zend\Memory\Container\ContainerInterface
+ * @uses       \Zend\Memory\Container
  * @uses       \Zend\Memory\Container\Movable
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AccessController implements ContainerInterface
+class AccessController implements Container
 {
     /**
      * Memory container object

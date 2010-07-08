@@ -25,11 +25,14 @@
  */
 namespace Zend\LDAP\Node\Schema\AttributeType;
 
+use Zend\LDAP\Node\Schema\AttributeType,
+    Zend\LDAP\Node\Schema;
+
 /**
  * Zend_LDAP_Node_Schema_AttributeType_OpenLDAP provides access to the attribute type
  * schema information on an OpenLDAP server.
  *
- * @uses       \Zend\LDAP\Node\Schema\AttributeType\AttributeTypeInterface
+ * @uses       \Zend\LDAP\Node\Schema\AttributeType
  * @uses       \Zend\LDAP\Node\Schema\Item
  * @category   Zend
  * @package    Zend_LDAP
@@ -37,9 +40,7 @@ namespace Zend\LDAP\Node\Schema\AttributeType;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OpenLDAP 
-    extends \Zend\LDAP\Node\Schema\Item
-    implements AttributeTypeInterface
+class OpenLDAP extends Schema\Item implements AttributeType
 {
     /**
      * Gets the attribute name

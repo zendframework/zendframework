@@ -21,20 +21,26 @@
  */
 
 /**
- * @uses       Zend_Tool_Framework_Provider_Pretendable
- * @uses       Zend_Tool_Project_Provider_Abstract
- * @uses       Zend_Tool_Project_Provider_Action
- * @uses       Zend_Tool_Project_Provider_Exception
- * @uses       Zend_Tool_Project_Provider_Test
- * @uses       Zend_Tool_Project_Provider_View
+ * @namespace
+ */
+namespace Zend\Tool\Project\Provider;
+use Zend\Tool\Project\Profile as ProjectProfile;
+
+/**
+ * @uses       \Zend\Tool\Framework\Provider\Pretendable
+ * @uses       \Zend\Tool\Project\Provider\AbstractProvider
+ * @uses       \Zend\Tool\Project\Provider\Action
+ * @uses       \Zend\Tool\Project\Provider\Exception
+ * @uses       \Zend\Tool\Project\Provider\Test
+ * @uses       \Zend\Tool\Project\Provider\View
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Provider_Controller
-    extends Zend_Tool_Project_Provider_Abstract
-    implements Zend_Tool_Framework_Provider_Pretendable
+class Controller
+    extends AbstractProvider
+    implements \Zend\Tool\Framework\Provider\Pretendable
 {
 
     /**
@@ -42,15 +48,15 @@ class Zend_Tool_Project_Provider_Controller
      * profile.  NOTE: it is your job to execute the create() method on the resource, as well as
      * store the profile when done.
      *
-     * @param Zend_Tool_Project_Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $controllerName
      * @param string $moduleName
-     * @return Zend_Tool_Project_Profile_Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    public static function createResource(Zend_Tool_Project_Profile $profile, $controllerName, $moduleName = null)
+    public static function createResource(ProjectProfile $profile, $controllerName, $moduleName = null)
     {
         if (!is_string($controllerName)) {
-            throw new Zend_Tool_Project_Provider_Exception('Zend_Tool_Project_Provider_Controller::createResource() expects \"controllerName\" is the name of a controller resource to create.');
+            throw new Exception('Zend_Tool_Project_Provider_Controller::createResource() expects \"controllerName\" is the name of a controller resource to create.');
         }
 
         if (!($controllersDirectory = self::_getControllersDirectoryResource($profile, $moduleName))) {
@@ -59,7 +65,7 @@ class Zend_Tool_Project_Provider_Controller
             } else {
                 $exceptionMessage = 'A controller directory was not found.';
             }
-            throw new Zend_Tool_Project_Provider_Exception($exceptionMessage);
+            throw new Exception($exceptionMessage);
         }
 
         $newController = $controllersDirectory->createResource(
@@ -73,29 +79,29 @@ class Zend_Tool_Project_Provider_Controller
     /**
      * hasResource()
      *
-     * @param Zend_Tool_Project_Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $controllerName
      * @param string $moduleName
-     * @return Zend_Tool_Project_Profile_Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    public static function hasResource(Zend_Tool_Project_Profile $profile, $controllerName, $moduleName = null)
+    public static function hasResource(ProjectProfile $profile, $controllerName, $moduleName = null)
     {
         if (!is_string($controllerName)) {
-            throw new Zend_Tool_Project_Provider_Exception('Zend_Tool_Project_Provider_Controller::createResource() expects \"controllerName\" is the name of a controller resource to create.');
+            throw new Exception('Zend_Tool_Project_Provider_Controller::createResource() expects \"controllerName\" is the name of a controller resource to create.');
         }
 
         $controllersDirectory = self::_getControllersDirectoryResource($profile, $moduleName);
-        return (($controllersDirectory->search(array('controllerFile' => array('controllerName' => $controllerName)))) instanceof Zend_Tool_Project_Profile_Resource);
+        return (($controllersDirectory->search(array('controllerFile' => array('controllerName' => $controllerName)))) instanceof ProjectProfile\Resource);
     }
 
     /**
      * _getControllersDirectoryResource()
      *
-     * @param Zend_Tool_Project_Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $moduleName
-     * @return Zend_Tool_Project_Profile_Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    protected static function _getControllersDirectoryResource(Zend_Tool_Project_Profile $profile, $moduleName = null)
+    protected static function _getControllersDirectoryResource(ProjectProfile $profile, $moduleName = null)
     {
         $profileSearchParams = array();
 
@@ -119,15 +125,15 @@ class Zend_Tool_Project_Provider_Controller
         $this->_loadProfile(self::NO_PROFILE_THROW_EXCEPTION);
 
         // determine if testing is enabled in the project
-        $testingEnabled = Zend_Tool_Project_Provider_Test::isTestingEnabled($this->_loadedProfile);
+        $testingEnabled = Test::isTestingEnabled($this->_loadedProfile);
 
         if (self::hasResource($this->_loadedProfile, $name, $module)) {
-            throw new Zend_Tool_Project_Provider_Exception('This project already has a controller named ' . $name);
+            throw new Exception('This project already has a controller named ' . $name);
         }
 
         // Check that there is not a dash or underscore, return if doesnt match regex
         if (preg_match('#[_-]#', $name)) {
-            throw new Zend_Tool_Project_Provider_Exception('Controller names should be camel cased.');
+            throw new Exception('Controller names should be camel cased.');
         }
         
         $originalName = $name;
@@ -140,14 +146,14 @@ class Zend_Tool_Project_Provider_Controller
         try {
             $controllerResource = self::createResource($this->_loadedProfile, $name, $module);
             if ($indexActionIncluded) {
-                $indexActionResource = Zend_Tool_Project_Provider_Action::createResource($this->_loadedProfile, 'index', $name, $module);
-                $indexActionViewResource = Zend_Tool_Project_Provider_View::createResource($this->_loadedProfile, 'index', $name, $module);
+                $indexActionResource = Action::createResource($this->_loadedProfile, 'index', $name, $module);
+                $indexActionViewResource = View::createResource($this->_loadedProfile, 'index', $name, $module);
             }
             if ($testingEnabled) {
-                $testControllerResource = Zend_Tool_Project_Provider_Test::createApplicationResource($this->_loadedProfile, $name, 'index', $module);
+                $testControllerResource = Test::createApplicationResource($this->_loadedProfile, $name, 'index', $module);
             }
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $response->setException($e);
             return;
         }

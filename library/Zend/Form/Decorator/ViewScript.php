@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Decorator;
+
+/**
  * Zend_Form_Decorator_ViewScript
  *
  * Render a view script as a decorator
@@ -39,8 +44,8 @@
  * Any options other than separator, placement, and viewScript are passed to
  * the partial as local variables.
  *
- * @uses       Zend_Form_Decorator_Abstract
- * @uses       Zend_Form_Exception
+ * @uses       \Zend\Form\Decorator\AbstractDecorator
+ * @uses       \Zend\Form\Exception
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -48,7 +53,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Decorator_ViewScript extends Zend_Form_Decorator_Abstract
+class ViewScript extends AbstractDecorator
 {
     /**
      * Default placement: append
@@ -66,7 +71,7 @@ class Zend_Form_Decorator_ViewScript extends Zend_Form_Decorator_Abstract
      * Set view script
      *
      * @param  string $script
-     * @return Zend_Form_Decorator_ViewScript
+     * @return \Zend\Form\Decorator\ViewScript
      */
     public function setViewScript($script)
     {
@@ -114,7 +119,7 @@ class Zend_Form_Decorator_ViewScript extends Zend_Form_Decorator_Abstract
 
         $viewScript = $this->getViewScript();
         if (empty($viewScript)) {
-            throw new Zend_Form_Exception('No view script registered with ViewScript decorator');
+            throw new Exception('No view script registered with ViewScript decorator');
         }
 
         $separator = $this->getSeparator();

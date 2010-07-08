@@ -13,28 +13,27 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Reader\Reader
+ * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: FeedAbstract.php 20096 2010-01-06 02:05:09Z bkarwin $
+ * @version    $Id$
  */
 
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace Zend\Feed\Reader\Extension;
-use Zend\Feed\Reader;
 
 /**
-* @uses \DOMXPath
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Entry\Atom
-* @uses \Zend\Feed\Reader\Entry\RSS
-* @category Zend
-* @package Zend_Feed_Reader
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-*/
+ * @uses       DOMXPath
+ * @uses       \Zend\Feed\Reader\Reader
+ * @uses       \Zend\Feed\Reader\Entry\Atom
+ * @uses       \Zend\Feed\Reader\Entry\RSS
+ * @category   Zend
+ * @package    Zend_Feed_Reader
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 abstract class AbstractFeed
 {
     /**
@@ -68,7 +67,7 @@ abstract class AbstractFeed
     /**
      * Constructor
      *
-     * @param  Zend_Feed_Abstract $feed The source Zend_Feed object
+     * @param  \Zend\Feed\Reader\AbstractFeed $feed The source \Zend\Feed\Feed object
      * @param  string $type Feed type
      * @return void
      */
@@ -79,7 +78,7 @@ abstract class AbstractFeed
         if ($type !== null) {
             $this->_data['type'] = $type;
         } else {
-            $this->_data['type'] = Reader\Reader::detectType($dom);
+            $this->_data['type'] = \Zend\Feed\Reader\Reader::detectType($dom);
         }
 
         if ($xpath !== null) {
@@ -137,7 +136,7 @@ abstract class AbstractFeed
      * Set the XPath query
      *
      * @param  DOMXPath $xpath
-     * @return Reader\Reader_Extension_EntryAbstract
+     * @return \Zend\Feed\Reader\Extension\AbstractEntry
      */
     public function setXpath(\DOMXPath $xpath)
     {
@@ -169,7 +168,7 @@ abstract class AbstractFeed
     /**
      * Set the XPath prefix
      *
-     * @return Reader\Reader_Feed_Atom
+     * @return \Zend\Feed\Reader\Feed\Atom\Atom
      */
     public function setXpathPrefix($prefix)
     {

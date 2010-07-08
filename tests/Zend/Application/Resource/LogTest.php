@@ -20,17 +20,12 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Application_Resource_LogTest::main');
-}
+namespace ZendTest\Application\Resource;
 
-/**
- * Test helper
- */
-
-/**
- * Zend_Loader_Autoloader
- */
+use Zend\Loader\Autoloader,
+    Zend\Application\Resource\Log as LogResource,
+    Zend\Application,
+    Zend\Controller\Front as FrontController;
 
 /**
  * @category   Zend
@@ -40,14 +35,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class Zend_Application_Resource_LogTest extends PHPUnit_Framework_TestCase
+class LogTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         // Store original autoloaders
@@ -58,12 +47,12 @@ class Zend_Application_Resource_LogTest extends PHPUnit_Framework_TestCase
             $this->loaders = array();
         }
 
-        Zend_Loader_Autoloader::resetInstance();
-        $this->autoloader = Zend_Loader_Autoloader::getInstance();
-        $this->application = new Zend_Application('testing');
-        $this->bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
+        Autoloader::resetInstance();
+        $this->autoloader = Autoloader::getInstance();
+        $this->application = new Application\Application('testing');
+        $this->bootstrap = new Application\Bootstrap($this->application);
 
-        Zend_Controller_Front::getInstance()->resetInstance();
+        FrontController::getInstance()->resetInstance();
     }
 
     public function tearDown()
@@ -79,29 +68,29 @@ class Zend_Application_Resource_LogTest extends PHPUnit_Framework_TestCase
         }
 
         // Reset autoloader instance so it doesn't affect other tests
-        Zend_Loader_Autoloader::resetInstance();
+        Autoloader::resetInstance();
     }
 
     public function testInitializationInitializesLogObject()
     {
-        $resource = new Zend_Application_Resource_Log(array());
+        $resource = new LogResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions(array(
             'Mock' => array('writerName' => 'Mock'),
         ));
         $resource->init();
-        $this->assertTrue($resource->getLog() instanceof Zend_Log);
+        $this->assertTrue($resource->getLog() instanceof \Zend\Log\Logger);
     }
 
     public function testInitializationReturnsLogObject()
     {
-        $resource = new Zend_Application_Resource_Log(array());
+        $resource = new LogResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions(array(
             'Mock' => array('writerName' => 'Mock'),
         ));
         $test = $resource->init();
-        $this->assertTrue($test instanceof Zend_Log);
+        $this->assertTrue($test instanceof \Zend\Log\Logger);
     }
 
     public function testOptionsPassedToResourceAreUsedToInitializeLog()
@@ -114,14 +103,14 @@ class Zend_Application_Resource_LogTest extends PHPUnit_Framework_TestCase
             )
         ));
 
-        $resource = new Zend_Application_Resource_Log($options);
+        $resource = new LogResource($options);
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
 
         $log      = $resource->getLog();
-        $this->assertTrue($log instanceof Zend_Log);
+        $this->assertTrue($log instanceof \Zend\Log\Logger);
 
-        $log->log($message = 'logged-message', Zend_Log::INFO);
+        $log->log($message = 'logged-message', \Zend\Log\Logger::INFO);
         rewind($stream);
         $this->assertContains($message, stream_get_contents($stream));
     }
@@ -140,16 +129,12 @@ class Zend_Application_Resource_LogTest extends PHPUnit_Framework_TestCase
                 ),
                 'filterName' => 'Priority',
                 'filterParams' => array(
-                    'priority' => '4'
+                    'priority' => 4,
                 ),
             ),
         );
-        $resource = new Zend_Application_Resource_Log($options);
+        $resource = new LogResource($options);
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_LogTest::main') {
-    Zend_Application_Resource_LogTest::main();
 }

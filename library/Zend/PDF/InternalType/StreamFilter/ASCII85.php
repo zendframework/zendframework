@@ -25,17 +25,19 @@
  */
 namespace Zend\PDF\InternalType\StreamFilter;
 
+use Zend\PDF\InternalType\StreamFilter;
+
 /**
  * ASCII85 stream filter
  *
  * @uses       \Zend\PDF\Exception
- * @uses       \Zend\PDF\InternalType\StreamFilter\FilterInterface
+ * @uses       \Zend\PDF\InternalType\StreamFilter
  * @package    Zend_PDF
  * @package    Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ASCII85 implements FilterInterface
+class ASCII85 implements StreamFilter
 {
     /**
      * Encode data

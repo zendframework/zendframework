@@ -42,10 +42,10 @@ class StreamWriter extends AbstractSegmentWriter
     /**
      * Object constructor.
      *
-     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
+     * @param \Zend\Search\Lucene\Storage\Directory $directory
      * @param string $name
      */
-    public function __construct(Directory\DirectoryInterface $directory, $name)
+    public function __construct(Directory $directory, $name)
     {
         parent::__construct($directory, $name);
     }

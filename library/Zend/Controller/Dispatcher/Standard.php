@@ -263,10 +263,10 @@ class Standard extends AbstractDispatcher
          * arguments; throw exception if it's not an action controller
          */
         $controller = new $className($request, $this->getResponse(), $this->getParams());
-        if (!($controller instanceof \Zend\Controller\Action\ActionInterface) &&
-            !($controller instanceof \Zend\Controller\Action\Action)) {
+        if (!($controller instanceof \Zend\Controller\ActionController) &&
+            !($controller instanceof \Zend\Controller\Action)) {
             throw new Exception(
-                'Controller "' . $className . '" is not an instance of Zend_Controller_Action_Interface'
+                'Controller "' . $className . '" is not an instance of Zend\Controller\ActionController'
             );
         }
 

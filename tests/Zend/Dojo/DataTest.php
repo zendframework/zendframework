@@ -20,14 +20,10 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
+namespace ZendTest\Dojo;
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_DataTest::main');
-}
-
+use Zend\Dojo\Data as DojoData,
+    Zend\JSON\JSON;
 
 /**
  * @category   Zend
@@ -37,15 +33,9 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dojo
  */
-class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
+class DataTest extends \PHPUnit_Framework_TestCase
 {
     public $dojoData;
-
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_DataTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -55,7 +45,7 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->dojoData = new Zend_Dojo_Data;
+        $this->dojoData = new DojoData;
     }
 
     public function testIdentifierShouldBeNullByDefault()
@@ -84,11 +74,9 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
         $this->assertSame(2, $this->dojoData->getIdentifier());
     }
 
-    /**
-     * @expectedException Zend_Dojo_Exception
-     */
     public function testSetIdentifierShouldThrowExceptionOnInvalidType()
     {
+        $this->setExpectedException('Zend\Dojo\Exception');
         $this->dojoData->setIdentifier(true);
     }
 
@@ -118,12 +106,8 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
             'title' => 'foo',
             'url'   => 'http://www.example.com/',
         );
-        try {
-            $this->dojoData->addItem($item);
-            $this->fail('Should throw exception if no identifier present');
-        } catch (Zend_Dojo_Exception $e) {
-            $this->assertContains('identifier', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Dojo\Exception', 'identifier');
+        $this->dojoData->addItem($item);
     }
 
     public function testAddItemShouldThrowExceptionIfNoIdentifierPresentInItem()
@@ -133,12 +117,8 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
             'url'   => 'http://www.example.com/',
         );
         $this->dojoData->setIdentifier('id');
-        try {
-            $this->dojoData->addItem($item);
-            $this->fail('Should throw exception if no identifier present');
-        } catch (Zend_Dojo_Exception $e) {
-            $this->assertContains('identifier', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Dojo\Exception', 'identifier');
+        $this->dojoData->addItem($item);
     }
 
     public function testAddItemShouldAcceptArray()
@@ -170,7 +150,7 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
 
     public function testAddItemShouldAcceptObjectImplementingToArray()
     {
-        $obj = new Zend_Dojo_DataTest_DataObject;
+        $obj = new TestAsset\DataObject;
         $this->dojoData->setIdentifier('id');
         $this->dojoData->addItem($obj);
         $this->assertEquals(1, count($this->dojoData));
@@ -180,12 +160,8 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
     public function testAddItemShouldThrowErrorOnInvalidItem()
     {
         $this->dojoData->setIdentifier('id');
-        try {
-            $this->dojoData->addItem('foo');
-            $this->fail('Invalid item should throw error');
-        } catch (Zend_Dojo_Exception $e) {
-            $this->assertContains('Only arrays and objects', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Dojo\Exception', 'Only arrays and objects');
+        $this->dojoData->addItem('foo');
     }
 
     public function testAddItemShouldAllowSpecifyingIdentifier()
@@ -214,12 +190,8 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
             'title' => 'foo',
             'url'   => 'http://www.example.com/',
         );
-        try {
-            $this->dojoData->addItem($item);
-            $this->fail('Overwriting items via addItem() should throw error');
-        } catch (Zend_Dojo_Exception $e) {
-            $this->assertContains('not allowed', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Dojo\Exception', 'Overwriting items using addItem()');
+        $this->dojoData->addItem($item);
     }
 
     public function testSetItemShouldOverwriteExistingItem()
@@ -280,7 +252,7 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
 
     public function testAddItemsShouldAcceptTraversableObject()
     {
-        $obj = new Zend_Dojo_DataTest_DataCollection;
+        $obj = new TestAsset\DataCollection;
         $this->dojoData->setIdentifier('id');
         $this->assertEquals(0, count($this->dojoData));
         $this->dojoData->addItems($obj);
@@ -290,11 +262,9 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
         $this->assertSame($obj->items[2]->toArray(), $this->dojoData->getItem(3));
     }
 
-    /**
-     * @expectedException Zend_Dojo_Exception
-     */
     public function testAddItemsShouldThrowExceptionForInvalidItems()
     {
+        $this->setExpectedException('Zend\Dojo\Exception');
         $this->dojoData->addItems('foo');
     }
 
@@ -302,7 +272,7 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
     {
         $this->testAddItemsShouldAcceptArray();
         $items = $this->dojoData->getItems();
-        $obj   = new Zend_Dojo_DataTest_DataCollection;
+        $obj   = new TestAsset\DataCollection;
         $this->dojoData->setItems($obj);
         $this->assertEquals(3, count($this->dojoData));
         $this->assertNotSame($items, $this->dojoData->getItems());
@@ -355,7 +325,7 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
                 'email' => 'baz@bar',
             ),
         );
-        $data = new Zend_Dojo_Data('id', $items, 'title');
+        $data = new DojoData('id', $items, 'title');
         $this->assertEquals('id', $data->getIdentifier());
         $this->assertEquals('title', $data->getLabel());
         foreach ($items as $item) {
@@ -387,19 +357,15 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
     {
         $this->testAddItemsShouldAcceptTraversableObject();
         $this->dojoData->setIdentifier(null);
-        try {
-            $array = $this->dojoData->toArray();
-            $this->fail('Serialization to array should throw error when no identifier is present in object');
-        } catch (Zend_Dojo_Exception $e) {
-            $this->assertContains('present', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Dojo\Exception', 'Serialization');
+        $array = $this->dojoData->toArray();
     }
 
     public function testShouldSerializeToJson()
     {
         $this->testAddItemsShouldAcceptTraversableObject();
         $json = $this->dojoData->toJson();
-        $this->assertSame($this->dojoData->toArray(), Zend_Json::decode($json));
+        $this->assertSame($this->dojoData->toArray(), JSON::decode($json));
     }
 
     public function testShouldSerializeToStringAsJson()
@@ -411,7 +377,7 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
 
     public function testShouldImplementArrayAccess()
     {
-        $this->assertTrue($this->dojoData instanceof ArrayAccess);
+        $this->assertTrue($this->dojoData instanceof \ArrayAccess);
         $this->testAddItemsShouldAcceptTraversableObject();
         $this->assertEquals($this->dojoData->getItem(1), $this->dojoData[1]);
         $this->dojoData[4] = array(
@@ -424,9 +390,9 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(isset($this->dojoData[4]));
     }
 
-    public function testShouldImplementIterator()
+    public function testShouldBeTraversable()
     {
-        $this->assertTrue($this->dojoData instanceof Iterator);
+        $this->assertTrue($this->dojoData instanceof \Traversable);
         $this->testAddItemsShouldAcceptTraversableObject();
         foreach ($this->dojoData as $key => $item) {
             $this->assertTrue(is_array($item));
@@ -436,7 +402,7 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
 
     public function testShouldImplementCountable()
     {
-        $this->assertTrue($this->dojoData instanceof Countable);
+        $this->assertTrue($this->dojoData instanceof \Countable);
     }
 
     public function testShouldAllowPopulationFromJson()
@@ -451,19 +417,17 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
                 array('id' => 4, 'title' => 'Four', 'name' => 'Fourth'),
             ),
         );
-        $json = Zend_Json::encode($data);
-        $dojoData = new Zend_Dojo_Data();
+        $json = JSON::encode($data);
+        $dojoData = new DojoData();
         $dojoData->fromJson($json);
         $test = $dojoData->toArray();
         $this->assertEquals($data, $test);
     }
 
-    /**
-     * @expectedException Zend_Dojo_Exception
-     */
     public function testFromJsonShouldThrowExceptionOnInvalidData()
     {
-        $this->dojoData->fromJson(new stdClass);
+        $this->setExpectedException('Zend\Dojo\Exception');
+        $this->dojoData->fromJson(new \stdClass);
     }
 
     /**
@@ -526,62 +490,4 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('numRows', $array));
         $this->assertTrue(array_key_exists('sort', $array));
     }
-}
-
-class Zend_Dojo_DataTest_DataObject
-{
-    public $item = array(
-        'id'    => 'foo',
-        'title' => 'Foo',
-        'email' => 'foo@foo.com',
-    );
-
-    public function toArray()
-    {
-        return $this->item;
-    }
-}
-
-class Zend_Dojo_DataTest_DataCollection implements Iterator
-{
-    public $items = array();
-
-    public function __construct()
-    {
-        for ($i = 1; $i < 4; ++$i) {
-            $item = new Zend_Dojo_DataTest_DataObject;
-            $item->item['id'] = $i;
-            $item->item['title'] .= $i;
-            $this->items[] = $item;
-        }
-    }
-
-    public function current()
-    {
-        return current($this->items);
-    }
-
-    public function key()
-    {
-        return key($this->items);
-    }
-
-    public function next()
-    {
-        return next($this->items);
-    }
-
-    public function rewind()
-    {
-        return reset($this->items);
-    }
-
-    public function valid()
-    {
-        return (bool) $this->current();
-    }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_DataTest::main') {
-    Zend_Dojo_DataTest::main();
 }

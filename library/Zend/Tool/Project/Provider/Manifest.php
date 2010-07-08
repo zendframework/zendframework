@@ -21,14 +21,19 @@
  */
 
 /**
- * @uses       Zend_Tool_Framework_Manifest_ProviderManifestable
+ * @namespace
+ */
+namespace Zend\Tool\Project\Provider;
+
+/**
+ * @uses       \Zend\Tool\Framework\Manifest\ProviderManifestable
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Provider_Manifest 
-    implements Zend_Tool_Framework_Manifest_ProviderManifestable
+class Manifest 
+    implements \Zend\Tool\Framework\Manifest\ProviderManifestable
 {
 
     /**
@@ -42,29 +47,29 @@ class Zend_Tool_Project_Provider_Manifest
         
         return array(
             // top level project & profile providers
-            'Zend_Tool_Project_Provider_Profile',
-            'Zend_Tool_Project_Provider_Project',
+            'Zend\Tool\Project\Provider\Profile',
+            'Zend\Tool\Project\Provider\Project',
         
             // app layer provider
-            'Zend_Tool_Project_Provider_Application',
+            'Zend\Tool\Project\Provider\Application',
         
             // MVC layer providers
-            'Zend_Tool_Project_Provider_Model',
-            'Zend_Tool_Project_Provider_View',
-            'Zend_Tool_Project_Provider_Controller',
-            'Zend_Tool_Project_Provider_Action',
+            'Zend\Tool\Project\Provider\Model',
+            'Zend\Tool\Project\Provider\View',
+            'Zend\Tool\Project\Provider\Controller',
+            'Zend\Tool\Project\Provider\Action',
             
             // hMVC provider
-            'Zend_Tool_Project_Provider_Module',
+            'Zend\Tool\Project\Provider\Module',
         
             // application problem providers
-            'Zend_Tool_Project_Provider_Form',
-            'Zend_Tool_Project_Provider_Layout',
-            'Zend_Tool_Project_Provider_DbAdapter',
-            'Zend_Tool_Project_Provider_DbTable',
+            'Zend\Tool\Project\Provider\Form',
+            'Zend\Tool\Project\Provider\Layout',
+            'Zend\Tool\Project\Provider\DbAdapter',
+            'Zend\Tool\Project\Provider\DbTable',
             
             // provider within project provider
-            'Zend_Tool_Project_Provider_ProjectProvider',
+            'Zend\Tool\Project\Provider\ProjectProvider',
             
         );
     }

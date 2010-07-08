@@ -24,12 +24,14 @@
  * @namespace
  */
 namespace Zend\Mail\Storage\Folder;
-use Zend\Mail\Storage;
+
+use Zend\Mail\Storage\MailFolder,
+    Zend\Mail\Storage;
 
 /**
  * @uses       \Zend\Mail\Storage\Exception
- * @uses       \Zend\Mail\Storage\Folder\Folder
- * @uses       \Zend\Mail\Storage\Folder\FolderInterface
+ * @uses       \Zend\Mail\Storage\Folder
+ * @uses       \Zend\Mail\Storage\MailFolder
  * @uses       \Zend\Mail\Storage\Mbox
  * @category   Zend
  * @package    Zend_Mail
@@ -37,11 +39,11 @@ use Zend\Mail\Storage;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Mbox extends Storage\Mbox implements FolderInterface
+class Mbox extends Storage\Mbox implements MailFolder
 {
     /**
      * \Zend\Mail\Storage\Folder root folder for folder structure
-     * @var \Zend\Mail\Storage\Folder\Folder
+     * @var \Zend\Mail\Storage\Folder
      */
     protected $_rootFolder;
 
@@ -98,7 +100,7 @@ class Mbox extends Storage\Mbox implements FolderInterface
      * $parentFolder and $parentGlobalName are only used internally for recursion.
      *
      * @param string $currentDir call with root dir, also used for recursion.
-     * @param \Zend\Mail\Storage\Folder\Folder|null $parentFolder used for recursion
+     * @param \Zend\Mail\Storage\Folder|null $parentFolder used for recursion
      * @param string $parentGlobalName used for rescursion
      * @return null
      * @throws \Zend\Mail\Storage\Exception
@@ -140,7 +142,7 @@ class Mbox extends Storage\Mbox implements FolderInterface
      * get root folder or given folder
      *
      * @param string $rootFolder get folder structure for given folder, else root
-     * @return \Zend\Mail\Storage\Folder\Folder root or wanted folder
+     * @return \Zend\Mail\Storage\Folder root or wanted folder
      * @throws \Zend\Mail\Storage\Exception
      */
     public function getFolders($rootFolder = null)
@@ -170,7 +172,7 @@ class Mbox extends Storage\Mbox implements FolderInterface
      *
      * folder must be selectable!
      *
-     * @param \Zend\Mail\Storage\Folder\Folder|string $globalName global name of folder or instance for subfolder
+     * @param \Zend\Mail\Storage\Folder|string $globalName global name of folder or instance for subfolder
      * @return null
      * @throws \Zend\Mail\Storage\Exception
      */
@@ -198,7 +200,7 @@ class Mbox extends Storage\Mbox implements FolderInterface
     /**
      * get \Zend\Mail\Storage\Folder instance for current folder
      *
-     * @return \Zend\Mail\Storage\Folder\Folder instance of current folder
+     * @return \Zend\Mail\Storage\Folder instance of current folder
      * @throws \Zend\Mail\Storage\Exception
      */
     public function getCurrentFolder()

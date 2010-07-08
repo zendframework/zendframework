@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Db\Profiler;
+namespace ZendTest\DB\Profiler;
 
 /**
  * @category   Zend

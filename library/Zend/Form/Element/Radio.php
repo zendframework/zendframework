@@ -20,9 +20,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Element;
+
+/**
  * Radio form element
  *
- * @uses       Zend_Form_Element_Multi
+ * @uses       \Zend\Form\Element\Multi
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -30,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Element_Radio extends Zend_Form_Element_Multi
+class Radio extends Multi
 {
     /**
      * Use formRadio view helper by default

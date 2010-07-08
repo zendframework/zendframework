@@ -42,10 +42,10 @@ class EmptyResult extends AbstractQuery
     /**
      * Re-write query into primitive queries in the context of specified index
      *
-     * @param \Zend\Search\Lucene\IndexInterface $index
+     * @param \Zend\Search\Lucene\SearchIndex $index
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
-    public function rewrite(Lucene\IndexInterface $index)
+    public function rewrite(Lucene\SearchIndex $index)
     {
         return $this;
     }
@@ -53,10 +53,10 @@ class EmptyResult extends AbstractQuery
     /**
      * Optimize query in the context of specified index
      *
-     * @param \Zend\Search\Lucene\IndexInterface $index
+     * @param \Zend\Search\Lucene\SearchIndex $index
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
-    public function optimize(Lucene\IndexInterface $index)
+    public function optimize(Lucene\SearchIndex $index)
     {
         // "EmptyResult" query is a primitive query and don't need to be optimized
         return $this;
@@ -65,10 +65,10 @@ class EmptyResult extends AbstractQuery
     /**
      * Constructs an appropriate Weight implementation for this query.
      *
-     * @param \Zend\Search\Lucene\IndexInterface $reader
+     * @param \Zend\Search\Lucene\SearchIndex $reader
      * @return \Zend\Search\Lucene\Search\Weight\Weight
      */
-    public function createWeight(Lucene\IndexInterface $reader)
+    public function createWeight(Lucene\SearchIndex $reader)
     {
         return new Weight\EmptyResultWeight();
     }
@@ -77,10 +77,10 @@ class EmptyResult extends AbstractQuery
      * Execute query in context of index reader
      * It also initializes necessary internal structures
      *
-     * @param \Zend\Search\Lucene\IndexInterface $reader
+     * @param \Zend\Search\Lucene\SearchIndex $reader
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
      */
-    public function execute(Lucene\IndexInterface $reader, $docsFilter = null)
+    public function execute(Lucene\SearchIndex $reader, $docsFilter = null)
     {
         // Do nothing
     }
@@ -101,10 +101,10 @@ class EmptyResult extends AbstractQuery
      * Score specified document
      *
      * @param integer $docId
-     * @param \Zend\Search\Lucene\IndexInterface $reader
+     * @param \Zend\Search\Lucene\SearchIndex $reader
      * @return float
      */
-    public function score($docId, Lucene\IndexInterface $reader)
+    public function score($docId, Lucene\SearchIndex $reader)
     {
         return 0;
     }
@@ -122,9 +122,9 @@ class EmptyResult extends AbstractQuery
     /**
      * Query specific matches highlighting
      *
-     * @param \Zend\Search\Lucene\Search\Highlighter\HighlighterInterface $highlighter  Highlighter object (also contains doc for highlighting)
+     * @param \Zend\Search\Lucene\Search\Highlighter $highlighter  Highlighter object (also contains doc for highlighting)
      */
-    protected function _highlightMatches(Highlighter\HighlighterInterface $highlighter)
+    protected function _highlightMatches(Highlighter $highlighter)
     {
         // Do nothing
     }

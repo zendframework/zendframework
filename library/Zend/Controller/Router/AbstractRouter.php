@@ -24,21 +24,23 @@
  * @namespace
  */
 namespace Zend\Controller\Router;
-use Zend\Controller;
+
+use Zend\Controller\Router,
+    Zend\Controller\Front as FrontController;
 
 /**
  * Simple first implementation of a router, to be replaced
  * with rules-based URI processor.
  *
  * @uses       \Zend\Controller\Front
- * @uses       \Zend\Controller\Router\RouterInterface
+ * @uses       \Zend\Controller\Router
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractRouter implements RouterInterface
+abstract class AbstractRouter implements Router
 {
     /**
      * Front controller instance
@@ -154,7 +156,7 @@ abstract class AbstractRouter implements RouterInterface
             return $this->_frontController;
         }
 
-        $this->_frontController = Controller\Front::getInstance();
+        $this->_frontController = FrontController::getInstance();
         return $this->_frontController;
     }
 
@@ -162,9 +164,9 @@ abstract class AbstractRouter implements RouterInterface
      * Set Front Controller
      *
      * @param \Zend\Controller\Front $controller
-     * @return \Zend\Controller\Router\RouterInterface
+     * @return \Zend\Controller\Router
      */
-    public function setFrontController(Controller\Front $controller)
+    public function setFrontController(FrontController $controller)
     {
         $this->_frontController = $controller;
         return $this;

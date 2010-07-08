@@ -28,7 +28,7 @@ namespace Zend\Controller\Action\Helper;
 /**
  * Simplify AJAX context switching based on requested format
  *
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
+ * @uses       \Zend\Controller\Action\HelperBroker
  * @uses       \Zend\Controller\Action\Helper\AbstractHelper
  * @uses       \Zend\View\Helper\JSON
  * @category   Zend
@@ -70,7 +70,7 @@ class JSON extends AbstractHelper
         $data = $jsonHelper->direct($data, $keepLayouts);
 
         if (!$keepLayouts) {
-            \Zend\Controller\Action\HelperBroker\HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
+            \Zend\Controller\Action\HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
         }
 
         return $data;

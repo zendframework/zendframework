@@ -24,8 +24,9 @@
  * @namespace
  */
 namespace Zend\Queue\Adapter;
-use Zend\Queue;
-use Zend\Queue\Message;
+use Zend\Queue\Queue,
+    Zend\Queue\Message,
+    Zend\Queue\Exception as QueueException;
 
 
 /**
@@ -34,14 +35,14 @@ use Zend\Queue\Message;
  * @uses       \Zend\Queue\Adapter\AdapterAbstract
  * @uses       \Zend\Queue\Queue
  * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Message\Message
+ * @uses       \Zend\Queue\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Null extends AdapterAbstract
+class Null extends AbstractAdapter
 {
     /**
      * Constructor
@@ -50,7 +51,7 @@ class Null extends AdapterAbstract
      * @param  null|\Zend\Queue\Queue $queue
      * @return void
      */
-    public function __construct($options, Queue\Queue $queue = null)
+    public function __construct($options, Queue $queue = null)
     {
         parent::__construct($options, $queue);
     }
@@ -66,7 +67,7 @@ class Null extends AdapterAbstract
      */
     public function isExists($name)
     {
-        throw new Queue\Exception(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
     }
 
 
@@ -77,7 +78,7 @@ class Null extends AdapterAbstract
      */
     public function create($name, $timeout=null)
     {
-        throw new Queue\Exception(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
     }
 
     /**
@@ -87,7 +88,7 @@ class Null extends AdapterAbstract
      */
     public function delete($name)
     {
-        throw new Queue\Exception(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
     }
 
     /**
@@ -97,7 +98,7 @@ class Null extends AdapterAbstract
      */
     public function getQueues()
     {
-        throw new Queue\Exception(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
     }
 
     /**
@@ -105,9 +106,9 @@ class Null extends AdapterAbstract
      *
      * @throws \Zend\Queue\Exception - not supported.
      */
-    public function count(Queue\Queue $queue=null)
+    public function count(Queue $queue=null)
     {
-        throw new Queue\Exception(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
     }
 
     /********************************************************************
@@ -119,9 +120,9 @@ class Null extends AdapterAbstract
      *
      * @throws \Zend\Queue\Exception - not supported.
      */
-    public function send($message, Queue\Queue $queue=null)
+    public function send($message, Queue $queue=null)
     {
-        throw new Queue\Exception(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
     }
 
     /**
@@ -129,9 +130,9 @@ class Null extends AdapterAbstract
      *
      * @throws \Zend\Queue\Exception - not supported.
      */
-    public function receive($maxMessages=null, $timeout=null, Queue\Queue $queue=null)
+    public function receive($maxMessages=null, $timeout=null, Queue $queue=null)
     {
-        throw new Queue\Exception(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
     }
 
     /**
@@ -139,9 +140,9 @@ class Null extends AdapterAbstract
      *
      * @throws \Zend\Queue\Exception - not supported.
      */
-    public function deleteMessage(Message\Message $message)
+    public function deleteMessage(Message $message)
     {
-        throw new Queue\Exception(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
     }
 
     /********************************************************************

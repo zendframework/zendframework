@@ -20,17 +20,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\Form\Element;
+
+/**
  * NumberTextBox dijit
  *
- * @uses       Zend_Dojo_Form_Element_ValidationTextBox
- * @uses       Zend_Form_Element_Exception
+ * @uses       \Zend\Dojo\Form\Element\ValidationTextBox
+ * @uses       \Zend\Form\ElementException
  * @package    Zend_Dojo
  * @subpackage Form_Element
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Dojo_Form_Element_NumberTextBox extends Zend_Dojo_Form_Element_ValidationTextBox
+class NumberTextBox extends ValidationTextBox
 {
     /**
      * Use NumberTextBox dijit view helper
@@ -53,7 +58,7 @@ class Zend_Dojo_Form_Element_NumberTextBox extends Zend_Dojo_Form_Element_Valida
      * Set locale
      *
      * @param  string $locale
-     * @return Zend_Dojo_Form_Element_NumberTextBox
+     * @return \Zend\Dojo\Form\Element\NumberTextBox
      */
     public function setLocale($locale)
     {
@@ -75,7 +80,7 @@ class Zend_Dojo_Form_Element_NumberTextBox extends Zend_Dojo_Form_Element_Valida
      * Set numeric format pattern
      *
      * @param  string $pattern
-     * @return Zend_Dojo_Form_Element_NumberTextBox
+     * @return \Zend\Dojo\Form\Element\NumberTextBox
      */
     public function setPattern($pattern)
     {
@@ -98,13 +103,13 @@ class Zend_Dojo_Form_Element_NumberTextBox extends Zend_Dojo_Form_Element_Valida
      *
      * @see    $_allowedTypes
      * @param  string $type
-     * @return Zend_Dojo_Form_Element_NumberTextBox
+     * @return \Zend\Dojo\Form\Element\NumberTextBox
      */
     public function setType($type)
     {
         $type = strtolower($type);
         if (!in_array($type, $this->_allowedTypes)) {
-            throw new Zend_Form_Element_Exception(sprintf('Invalid numeric type "%s" specified', $type));
+            throw new \Zend\Form\ElementException(sprintf('Invalid numeric type "%s" specified', $type));
         }
 
         $this->setConstraint('type', $type);
@@ -125,7 +130,7 @@ class Zend_Dojo_Form_Element_NumberTextBox extends Zend_Dojo_Form_Element_Valida
      * Set decimal places
      *
      * @param  int $places
-     * @return Zend_Dojo_Form_Element_NumberTextBox
+     * @return \Zend\Dojo\Form\Element\NumberTextBox
      */
     public function setPlaces($places)
     {
@@ -147,7 +152,7 @@ class Zend_Dojo_Form_Element_NumberTextBox extends Zend_Dojo_Form_Element_Valida
      * Set strict flag
      *
      * @param  bool $strict
-     * @return Zend_Dojo_Form_Element_NumberTextBox
+     * @return \Zend\Dojo\Form\Element\NumberTextBox
      */
     public function setStrict($flag)
     {

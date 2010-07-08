@@ -24,19 +24,21 @@
  * @namespace
  */
 namespace Zend\PDF\InternalType\StreamFilter;
-use Zend\PDF;
+
+use Zend\PDF\InternalType\StreamFilter,
+    Zend\PDF;
 
 /**
  * AsciiHex stream filter
  *
  * @uses       \Zend\PDF\Exception
- * @uses       \Zend\PDF\InternalType\StreamFilter\FilterInterface
+ * @uses       \Zend\PDF\InternalType\StreamFilter
  * @package    Zend_PDF
  * @package    Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ASCIIHex implements FilterInterface
+class ASCIIHex implements StreamFilter
 {
     /**
      * Encode data

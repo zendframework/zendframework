@@ -30,7 +30,7 @@ namespace Zend\AMF\Adobe;
  * @uses       Zend\AMF\Parser\TypeLoader
  * @uses       Zend\Loader
  * @uses       Zend\Reflection\ReflectionClass
- * @uses       Zend\Server\Reflection\Reflection
+ * @uses       Zend\Server\Reflection
  * @package    Zend_Amf
  * @subpackage Adobe
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -101,7 +101,7 @@ class Introspector
         $this->_types = $this->_xml->createElement('types');
         $this->_ops   = $this->_xml->createElement('operations');
 
-        $r = \Zend\Server\Reflection\Reflection::reflectClass($serviceClass);
+        $r = \Zend\Server\Reflection::reflectClass($serviceClass);
         $this->_addService($r, $this->_ops);
 
         $serv->appendChild($this->_types);

@@ -56,8 +56,8 @@ class AjaxContextTest extends \PHPUnit_Framework_TestCase
         }
 
         \Zend\Layout\Layout::resetMvcInstance();
-        HelperBroker\HelperBroker::resetHelpers();
-        HelperBroker\HelperBroker::addPrefix('Zend\Controller\Action\Helper');
+        HelperBroker::resetHelpers();
+        HelperBroker::addPrefix('Zend\Controller\Action\Helper');
 
         $this->front = \Zend\Controller\Front::getInstance();
         $this->front->resetInstance();
@@ -73,7 +73,7 @@ class AjaxContextTest extends \PHPUnit_Framework_TestCase
         $this->front->setRequest($this->request)->setResponse($this->response);
         $this->view = new \Zend\View\View();
         $this->view->addHelperPath(dirname(__FILE__) . '/../../../../../library/Zend/View/Helper/');
-        $this->viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $this->viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $this->viewRenderer->setView($this->view);
 
         $this->controller = new AjaxContextTestController(
@@ -179,7 +179,7 @@ class AjaxContextTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class AjaxContextTestController extends \Zend\Controller\Action\Action
+class AjaxContextTestController extends \Zend\Controller\Action
 {
     public $ajaxable = array(
         'foo' => array('xml'),

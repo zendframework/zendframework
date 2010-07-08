@@ -54,7 +54,7 @@ class OCI extends AbstractPDO
      *
      * @var string
      */
-    protected $_defaultStmtClass = 'Zend_Db_Statement_Pdo_Oci';
+    protected $_defaultStmtClass = 'Zend\DB\Statement\PDO\OCI';
 
     /**
      * Keys are UPPERCASE SQL datatypes or the constants

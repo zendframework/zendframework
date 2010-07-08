@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Db\Adapter\_files\Test;
+namespace ZendTest\DB\Adapter\_files\Test;
 
 /**
  * PHPUnit_Util_Filter
@@ -46,6 +46,6 @@ namespace ZendTest\Db\Adapter\_files\Test;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Db2Statement extends \Zend\DB\Statement\DB2\DB2
+class Db2Statement extends \Zend\DB\Statement\DB2
 {
 }

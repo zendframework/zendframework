@@ -21,30 +21,37 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Context\Zf;
+use Zend\Tool\Project\Context;
+use Zend\CodeGenerator\PHP;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       Zend_CodeGenerator_Php_File
- * @uses       Zend_Reflection_File
- * @uses       Zend_Tool_Project_Context_Exception
- * @uses       Zend_Tool_Project_Context_Interface
+ * @uses       \Zend\CodeGenerator\PHP\PHPFile
+ * @uses       \Zend\Reflection\ReflectionFile
+ * @uses       \Zend\Tool\Project\Context\Exception
+ * @uses       \Zend\Tool\Project\Context
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Context_Interface
+class ActionMethod implements Context
 {
 
     /**
-     * @var Zend_Tool_Project_Profile_Resource
+     * @var \Zend\Tool\Project\Profile\Resource
      */
     protected $_resource = null;
 
     /**
-     * @var Zend_Tool_Project_Profile_Resource
+     * @var \Zend\Tool\Project\Profile\Resource
      */
     protected $_controllerResource = null;
 
@@ -61,7 +68,7 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
     /**
      * init()
      *
-     * @return Zend_Tool_Project_Context_Zf_ActionMethod
+     * @return \Zend\Tool\Project\Context\Zf\ActionMethod
      */
     public function init()
     {
@@ -69,8 +76,8 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
 
         $this->_resource->setAppendable(false);
         $this->_controllerResource = $this->_resource->getParentResource();
-        if (!$this->_controllerResource->getContext() instanceof Zend_Tool_Project_Context_Zf_ControllerFile) {
-            throw new Zend_Tool_Project_Context_Exception('ActionMethod must be a sub resource of a ControllerFile');
+        if (!$this->_controllerResource->getContext() instanceof ControllerFile) {
+            throw new Context\Exception('ActionMethod must be a sub resource of a ControllerFile');
         }
         // make the ControllerFile node appendable so we can tack on the actionMethod.
         $this->_resource->getParentResource()->setAppendable(true);
@@ -105,10 +112,10 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
     /**
      * setResource()
      *
-     * @param Zend_Tool_Project_Profile_Resource $resource
-     * @return Zend_Tool_Project_Context_Zf_ActionMethod
+     * @param \Zend\Tool\Project\Profile\Resource $resource
+     * @return \Zend\Tool\Project\Context\Zf\ActionMethod
      */
-    public function setResource(Zend_Tool_Project_Profile_Resource $resource)
+    public function setResource(\Zend\Tool\Project\Profile\Resource $resource)
     {
         $this->_resource = $resource;
         return $this;
@@ -118,7 +125,7 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
      * setActionName()
      *
      * @param string $actionName
-     * @return Zend_Tool_Project_Context_Zf_ActionMethod
+     * @return \Zend\Tool\Project\Context\Zf\ActionMethod
      */
     public function setActionName($actionName)
     {
@@ -139,12 +146,12 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
     /**
      * create()
      *
-     * @return Zend_Tool_Project_Context_Zf_ActionMethod
+     * @return \Zend\Tool\Project\Context\Zf\ActionMethod
      */
     public function create()
     {
         if (self::createActionMethod($this->_controllerPath, $this->_actionName) === false) {
-            throw new Zend_Tool_Project_Context_Exception(
+            throw new Context\Exception(
                 'Could not create action within controller ' . $this->_controllerPath
                 . ' with action name ' . $this->_actionName
                 );
@@ -155,7 +162,7 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
     /**
      * delete()
      *
-     * @return Zend_Tool_Project_Context_Zf_ActionMethod
+     * @return \Zend\Tool\Project\Context\Zf\ActionMethod
      */
     public function delete()
     {
@@ -177,7 +184,7 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
             return false;
         }
 
-        $controllerCodeGenFile = Zend_CodeGenerator_Php_File::fromReflectedFileName($controllerPath, true, true);
+        $controllerCodeGenFile = PHP\PHPFile::fromReflectedFileName($controllerPath, true, true);
         $controllerCodeGenFile->getClass()->setMethod(array(
             'name' => $actionName . 'Action',
             'body' => $body
@@ -200,7 +207,7 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
             return false;
         }
 
-        $controllerCodeGenFile = Zend_CodeGenerator_Php_File::fromReflectedFileName($controllerPath, true, true);
+        $controllerCodeGenFile = PHP\PHPFile::fromReflectedFileName($controllerPath, true, true);
         return $controllerCodeGenFile->getClass()->hasMethod($actionName . 'Action');
     }
 

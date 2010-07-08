@@ -53,7 +53,7 @@ class Queue implements \Countable
     const NAME = 'name';
 
     /**
-     * @var \Zend\Queue\Adapter\AdapterInterface
+     * @var \Zend\Queue\Adapter
      */
     protected $_adapter = null;
 
@@ -69,7 +69,7 @@ class Queue implements \Countable
      *
      * @var string
      */
-    protected $_messageClass = '\Zend\Queue\Message\Message';
+    protected $_messageClass = '\Zend\Queue\Message';
 
     /**
      * Zend_Queue message iterator class
@@ -100,7 +100,7 @@ class Queue implements \Countable
     public function __construct($spec, $options = array())
     {
         $adapter = null;
-        if ($spec instanceof Adapter\AdapterInterface) {
+        if ($spec instanceof Adapter) {
             $adapter = $spec;
         } elseif (is_string($spec)) {
             $adapter = $spec;
@@ -211,7 +211,7 @@ class Queue implements \Countable
     /**
      * Set the adapter for this queue
      *
-     * @param  string|\Zend\Queue\Adapter\AdapterInterface $adapter
+     * @param  string|\Zend\Queue\Adapter $adapter
      * @return \Zend\Queue\Queue Provides a fluent interface
      */
     public function setAdapter($adapter)
@@ -230,8 +230,8 @@ class Queue implements \Countable
             $adapter = new $adapterName($this->getOptions(), $this);
         }
 
-        if (!$adapter instanceof Adapter\AdapterInterface) {
-            throw new Exception('Adapter class \'' . get_class($adapterName) . '\' does not implement \Zend\Queue\Adapter\AdapterInterface\'');
+        if (!$adapter instanceof Adapter) {
+            throw new Exception('Adapter class \'' . get_class($adapterName) . '\' does not implement \Zend\Queue\Adapter\'');
         }
 
         $this->_adapter = $adapter;
@@ -248,7 +248,7 @@ class Queue implements \Countable
     /**
      * Get the adapter for this queue
      *
-     * @return \Zend\Queue\Adapter\AdapterInterface
+     * @return \Zend\Queue\Adapter
      */
     public function getAdapter()
     {
@@ -380,11 +380,11 @@ class Queue implements \Countable
      *
      * Returns true if the adapter doesn't support message deletion.
      *
-     * @param  \Zend\Queue\Message\Message $message
+     * @param  \Zend\Queue\Message $message
      * @return boolean
      * @throws \Zend\Queue\Exception
      */
-    public function deleteMessage(Message\Message $message)
+    public function deleteMessage(Message $message)
     {
         if ($this->getAdapter()->isSupported('deleteMessage')) {
             return $this->getAdapter()->deleteMessage($message);
@@ -396,7 +396,7 @@ class Queue implements \Countable
      * Send a message to the queue
      *
      * @param  mixed $message message
-     * @return \Zend\Queue\Message\Message
+     * @return \Zend\Queue\Message
      * @throws \Zend\Queue\Exception
      */
     public function send($message)

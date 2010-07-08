@@ -31,7 +31,7 @@ use Zend\InfoCard\Cipher;
  *
  * @uses       \Zend\InfoCard\Cipher\Exception
  * @uses       \Zend\InfoCard\Cipher\Symmetric\Adapter\AbstractAdapter
- * @uses       \Zend\InfoCard\Cipher\Symmetric\AES256CBC\AES256CBCInterface
+ * @uses       \Zend\InfoCard\Cipher\Symmetric\AES256CBC
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher
@@ -40,7 +40,7 @@ use Zend\InfoCard\Cipher;
  */
 class AES256CBC
     extends AbstractAdapter
-    implements Cipher\Symmetric\AES256CBC\AES256CBCInterface
+    implements Cipher\Symmetric\AES256CBC
 {
     /**
      * The MCRYPT Cipher constant for this encryption

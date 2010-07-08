@@ -154,7 +154,7 @@ abstract class AbstractContainer extends \ArrayObject
      * Set prefix for __toString() serialization
      *
      * @param  string $prefix
-     * @return \Zend\View\Helper\Placeholder\Container\Container
+     * @return \Zend\View\Helper\Placeholder\Container\AbstractContainer
      */
     public function setPrefix($prefix)
     {
@@ -176,7 +176,7 @@ abstract class AbstractContainer extends \ArrayObject
      * Set postfix for __toString() serialization
      *
      * @param  string $postfix
-     * @return \Zend\View\Helper\Placeholder\Container\Container
+     * @return \Zend\View\Helper\Placeholder\Container\AbstractContainer
      */
     public function setPostfix($postfix)
     {
@@ -200,7 +200,7 @@ abstract class AbstractContainer extends \ArrayObject
      * Used to implode elements in container
      *
      * @param  string $separator
-     * @return \Zend\View\Helper\Placeholder\Container\Container
+     * @return \Zend\View\Helper\Placeholder\Container\AbstractContainer
      */
     public function setSeparator($separator)
     {
@@ -261,7 +261,7 @@ abstract class AbstractContainer extends \ArrayObject
      *
      * @param  int $type How to capture content into placeholder; append, prepend, or set
      * @return void
-     * @throws Zend_View_Helper_Placeholder_Exception if nested captures detected
+     * @throws Zend\View\Helper\Placeholer\Container\Exception if nested captures detected
      */
     public function captureStart($type = AbstractContainer::APPEND, $key = null)
     {

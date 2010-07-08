@@ -22,7 +22,7 @@
 
 namespace ZendTest\Locale;
 
-use Zend\Locale\Data\Data,
+use Zend\Locale\Data,
     Zend\Locale\Exception as LocaleException,
     Zend\Locale\Locale,
     Zend\Cache\Cache;

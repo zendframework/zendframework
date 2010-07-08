@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace ZendTest\Auth\Adapter\HTTP;
-use Zend\Authentication\Adapter\HTTP;
+
+use Zend\Authentication\Adapter\HTTP,
+    Zend\Controller\Response\HTTP as HTTPResponse;
 
 /**
  * @category   Zend
@@ -309,9 +311,9 @@ class AuthTest extends \PHPUnit_Framework_TestCase
     protected function _doAuth($clientHeader, $scheme)
     {
         // Set up stub request and response objects
-        $request  = $this->getMock('Zend_Controller_Request_Http');
-        $response = new \Zend_Controller_Response_Http;
-        $response->setHttpResponseCode(200);
+        $request  = $this->getMock('Zend\Controller\Request\HTTP');
+        $response = new HTTPResponse;
+        $response->setHTTPResponseCode(200);
         $response->headersSentThrowsException = false;
 
         // Set stub method return values

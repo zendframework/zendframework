@@ -54,11 +54,11 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         \Zend\Layout\Layout::resetMvcInstance();
 
         Controller\Front::getInstance()->resetInstance();
-        if (HelperBroker\HelperBroker::hasHelper('Layout')) {
-            HelperBroker\HelperBroker::removeHelper('Layout');
+        if (HelperBroker::hasHelper('Layout')) {
+            HelperBroker::removeHelper('Layout');
         }
-        if (HelperBroker\HelperBroker::hasHelper('viewRenderer')) {
-            HelperBroker\HelperBroker::removeHelper('viewRenderer');
+        if (HelperBroker::hasHelper('viewRenderer')) {
+            HelperBroker::removeHelper('viewRenderer');
         }
     }
 
@@ -226,7 +226,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     {
         $layout = new Layout\Layout();
         $view = $layout->getView();
-        $this->assertTrue($view instanceof View\ViewInterface);
+        $this->assertTrue($view instanceof View\ViewEngine);
     }
 
     /**
@@ -236,7 +236,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     {
         $layout = new Layout\Layout();
         $view = $layout->getView();
-        $vr = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $vr = HelperBroker::getStaticHelper('viewRenderer');
         $this->assertSame($vr->view, $view);
     }
 
@@ -298,8 +298,8 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     public function testHelperClassPassedToStartMvcIsUsed()
     {
         $layout = Layout\Layout::startMvc(array('helperClass' => 'ZendTest\Layout\TestAsset\MockActionHelper\Layout'));
-        $this->assertTrue(HelperBroker\HelperBroker::hasHelper('layout'));
-        $helper = HelperBroker\HelperBroker::getStaticHelper('layout');
+        $this->assertTrue(HelperBroker::hasHelper('layout'));
+        $helper = HelperBroker::getStaticHelper('layout');
         $this->assertTrue($helper instanceof \ZendTest\Layout\TestAsset\MockActionHelper\Layout);
     }
 
@@ -495,7 +495,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         Layout\Layout::resetMvcInstance();
         $front = Controller\Front::getInstance();
         $this->assertFalse($front->hasPlugin('Zend_Layout_Controller_Plugin_Layout'), 'Plugin not unregistered');
-        $this->assertFalse(HelperBroker\HelperBroker::hasHelper('Layout'), 'Helper not unregistered');
+        $this->assertFalse(HelperBroker::hasHelper('Layout'), 'Helper not unregistered');
     }
 
     public function testResettingMvcInstanceRemovesMvcSingleton()

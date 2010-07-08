@@ -25,8 +25,9 @@
  * @namespace
  */
 namespace Zend\HTTP;
-use Zend\URI,
-    Zend\HTTP;
+
+use Zend\Config\Config,
+    Zend\URI;
 
 /**
  * Zend_Http_Client is an implemetation of an HTTP client in PHP. The client
@@ -39,7 +40,7 @@ use Zend\URI,
  * @uses       Zend\HTTP\Client\Exception
  * @uses       Zend\HTTP\Cookie
  * @uses       Zend\HTTP\CookieJar
- * @uses       Zend\HTTP\Response\Response
+ * @uses       Zend\HTTP\Response
  * @uses       Zend\HTTP\Response\Stream
  * @uses       Zend\Loader
  * @uses       Zend\URI\URI
@@ -206,7 +207,7 @@ class Client
     /**
      * The last HTTP response received by the client
      *
-     * @var \Zend\HTTP\Response\Response
+     * @var \Zend\HTTP\Response
      */
     protected $last_response = null;
 
@@ -248,7 +249,7 @@ class Client
      * Set the URI for the next request
      *
      * @param  \Zend\URI\URL|string $uri
-     * @return \Zend\HTTP\Client\Client
+     * @return \Zend\HTTP\Client
      * @throws \Zend\HTTP\Client\Exception
      */
     public function setUri($uri)
@@ -300,12 +301,12 @@ class Client
      * Set configuration parameters for this HTTP client
      *
      * @param  \Zend\Config\Config | array $config
-     * @return \Zend\HTTP\Client\Client
+     * @return \Zend\HTTP\Client
      * @throws \Zend\HTTP\Client\Exception
      */
     public function setConfig($config = array())
     {
-        if ($config instanceof \Zend\Config\Config) {
+        if ($config instanceof Config) {
             $config = $config->toArray();
 
         } elseif (! is_array($config)) {
@@ -332,7 +333,7 @@ class Client
      * dropped.
      *
      * @param string $method
-     * @return \Zend\HTTP\Client\Client
+     * @return \Zend\HTTP\Client
      * @throws \Zend\HTTP\Client\Exception
      */
     public function setMethod($method = self::GET)
@@ -366,7 +367,7 @@ class Client
      * @param string|array $name Header name, full header string ('Header: value')
      *     or an array of headers
      * @param mixed $value Header value or null
-     * @return \Zend\HTTP\Client\Client
+     * @return \Zend\HTTP\Client
      * @throws \Zend\HTTP\Client\Exception
      */
     public function setHeaders($name, $value = null)
@@ -434,7 +435,7 @@ class Client
      *
      * @param string|array $name
      * @param string $value
-     * @return \Zend\HTTP\Client\Client
+     * @return \Zend\HTTP\Client
      */
     public function setParameterGet($name, $value = null)
     {
@@ -453,7 +454,7 @@ class Client
      *
      * @param string|array $name
      * @param string $value
-     * @return \Zend\HTTP\Client\Client
+     * @return \Zend\HTTP\Client
      */
     public function setParameterPost($name, $value = null)
     {
@@ -525,7 +526,7 @@ class Client
      * @param string|false $user User name or false disable authentication
      * @param string $password Password
      * @param string $type Authentication type
-     * @return \Zend\HTTP\Client\Client
+     * @return \Zend\HTTP\Client
      * @throws \Zend\HTTP\Client\Exception
      */
     public function setAuth($user, $password = '', $type = self::AUTH_BASIC)
@@ -563,15 +564,15 @@ class Client
      * and responses.
      *
      * @param \Zend\HTTP\CookieJar|boolean $cookiejar Existing cookiejar object, true to create a new one, false to disable
-     * @return \Zend\HTTP\Client\Client
+     * @return \Zend\HTTP\Client
      * @throws \Zend\HTTP\Client\Exception
      */
     public function setCookieJar($cookiejar = true)
     {
-        if ($cookiejar instanceof HTTP\CookieJar) {
+        if ($cookiejar instanceof CookieJar) {
             $this->cookiejar = $cookiejar;
         } elseif ($cookiejar === true) {
-            $this->cookiejar = new HTTP\CookieJar();
+            $this->cookiejar = new CookieJar();
         } elseif (! $cookiejar) {
             $this->cookiejar = null;
         } else {
@@ -597,7 +598,7 @@ class Client
      *
      * @param \Zend\HTTP\Cookie|string $cookie
      * @param string|null $value If "cookie" is a string, this is the cookie value.
-     * @return \Zend\HTTP\Client\Client
+     * @return \Zend\HTTP\Client
      * @throws \Zend\HTTP\Client\Exception
      */
     public function setCookie($cookie, $value = null)
@@ -619,16 +620,16 @@ class Client
         }
 
         if (isset($this->cookiejar)) {
-            if ($cookie instanceof HTTP\Cookie) {
+            if ($cookie instanceof Cookie) {
                 $this->cookiejar->addCookie($cookie);
             } elseif (is_string($cookie) && $value !== null) {
-                $cookie = HTTP\Cookie::fromString("{$cookie}={$value}",
+                $cookie = Cookie::fromString("{$cookie}={$value}",
                                                        $this->uri,
                                                        $this->config['encodecookies']);
                 $this->cookiejar->addCookie($cookie);
             }
         } else {
-            if ($cookie instanceof HTTP\Cookie) {
+            if ($cookie instanceof Cookie) {
                 $name = $cookie->getName();
                 $value = $cookie->getValue();
                 $cookie = $name;
@@ -666,7 +667,7 @@ class Client
      * @param string $data Data to send (if null, $filename is read and sent)
      * @param string $ctype Content type to use (if $data is set and $ctype is
      *     null, will be application/octet-stream)
-     * @return \Zend\HTTP\Client\Client
+     * @return \Zend\HTTP\Client
      * @throws \Zend\HTTP\Client\Exception
      */
     public function setFileUpload($filename, $formname, $data = null, $ctype = null)
@@ -698,7 +699,7 @@ class Client
      * Set the encoding type for POST data
      *
      * @param string $enctype
-     * @return \Zend\HTTP\Client\Client
+     * @return \Zend\HTTP\Client
      */
     public function setEncType($enctype = self::ENC_URLENCODED)
     {
@@ -719,7 +720,7 @@ class Client
      *
      * @param string|resource $data
      * @param string $enctype
-     * @return \Zend\HTTP\Client\Client
+     * @return \Zend\HTTP\Client
      */
     public function setRawData($data, $enctype = null)
     {
@@ -745,7 +746,7 @@ class Client
      * headers and last_*
      *
      * @param bool $clearAll Should all data be cleared?
-     * @return \Zend\HTTP\Client\Client
+     * @return \Zend\HTTP\Client
      */
     public function resetParameters($clearAll = false)
     {
@@ -788,7 +789,7 @@ class Client
      * If $config['storeresponse'] is set to false, or no response was
      * stored yet, will return null
      *
-     * @return \Zend\HTTP\Response\Response or null if none
+     * @return \Zend\HTTP\Response or null if none
      */
     public function getLastResponse()
     {
@@ -835,7 +836,7 @@ class Client
      * Set streaming for received data
      *
      * @param string|boolean $streamfile Stream file, true for temp file, false/null for no streaming
-     * @return \Zend\HTTP\Client\Client
+     * @return \Zend\HTTP\Client
      */
     public function setStream($streamfile = true)
     {
@@ -879,7 +880,7 @@ class Client
      * Send the HTTP request and return an HTTP response object
      *
      * @param string $method
-     * @return \Zend\HTTP\Response\Response
+     * @return \Zend\HTTP\Response
      * @throws \Zend\HTTP\Client\Exception
      */
     public function request($method = null)
@@ -946,14 +947,14 @@ class Client
                 rewind($stream);
                 // cleanup the adapter
                 $this->adapter->setOutputStream(null);
-                $response = HTTP\Response\Stream::fromStream($response, $stream);
+                $response = Response\Stream::fromStream($response, $stream);
                 $response->setStreamName($this->_stream_name);
                 if(!is_string($this->config['output_stream'])) {
                     // we used temp name, will need to clean up
                     $response->setCleanup(true);
                 }
             } else {
-                $response = HTTP\Response\Response::fromString($response);
+                $response = Response::fromString($response);
             }
 
             if ($this->config['storeresponse']) {
@@ -1079,7 +1080,7 @@ class Client
         // Load cookies from cookie jar
         if (isset($this->cookiejar)) {
             $cookstr = $this->cookiejar->getMatchingCookies($this->uri,
-                true, HTTP\CookieJar::COOKIE_STRING_CONCAT);
+                true, CookieJar::COOKIE_STRING_CONCAT);
 
             if ($cookstr) {
                 $headers[] = "Cookie: {$cookstr}";

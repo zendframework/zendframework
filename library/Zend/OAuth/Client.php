@@ -106,7 +106,7 @@ class Client extends \Zend\HTTP\Client
      * sign the request using the relevant signature method.
      *
      * @param  string $method
-     * @return Zend\HTTP\Response\Response
+     * @return Zend\HTTP\Response
      */
     public function request($method = null)
     {

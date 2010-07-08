@@ -23,12 +23,14 @@
  * @namespace
  */
 namespace Zend\Mail\Part;
-use Zend\Mail;
-use Zend\Mime;
+
+use Zend\Mail\Part,
+    Zend\Mail\Exception as MailException,
+    Zend\Mime;
 
 /**
  * @uses       \Zend\Mail\Exception
- * @uses       \Zend\Mail\Part\Part
+ * @uses       \Zend\Mail\Part
  * @uses       \Zend\Mime\Decode
  * @category   Zend
  * @package    Zend_Mail
@@ -55,7 +57,7 @@ class File extends Part
     public function __construct(array $params)
     {
         if (empty($params['file'])) {
-            throw new Mail\Exception('no file given in params');
+            throw new MailException('no file given in params');
         }
 
         if (!is_resource($params['file'])) {
@@ -64,7 +66,7 @@ class File extends Part
             $this->_fh = $params['file'];
         }
         if (!$this->_fh) {
-            throw new Mail\Exception('could not open file');
+            throw new MailException('could not open file');
         }
         if (isset($params['startPos'])) {
             fseek($this->_fh, $params['startPos']);
@@ -91,7 +93,7 @@ class File extends Part
 
         $boundary = $this->getHeaderField('content-type', 'boundary');
         if (!$boundary) {
-            throw new Mail\Exception('no boundary found in content type to split message');
+            throw new MailException('no boundary found in content type to split message');
         }
 
         $part = array();
@@ -103,7 +105,7 @@ class File extends Part
                 if (feof($this->_fh)) {
                     break;
                 }
-                throw new Mail\Exception('error reading file');
+                throw new MailException('error reading file');
             }
 
             $lastPos = $pos;
@@ -161,14 +163,14 @@ class File extends Part
      * Get part of multipart message
      *
      * @param  int $num number of part starting with 1 for first part
-     * @return \Zend\Mail\Part\Part wanted part
+     * @return \Zend\Mail\Part wanted part
      * @throws \Zend\Mail\Exception
      */
     public function getPart($num)
     {
         --$num;
         if (!isset($this->_partPos[$num])) {
-            throw new Mail\Exception('part not found');
+            throw new MailException('part not found');
         }
 
         return new self(array('file' => $this->_fh, 'startPos' => $this->_partPos[$num][0],

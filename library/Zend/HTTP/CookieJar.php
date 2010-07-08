@@ -49,7 +49,7 @@ use Zend\URI;
  * @uses       IteratorAggregate
  * @uses       \Zend\HTTP\Cookie
  * @uses       \Zend\HTTP\Exception
- * @uses       \Zend\HTTP\Response\Response
+ * @uses       \Zend\HTTP\Response
  * @uses       \Zend\URI\URI
  * @uses       \Zend\URI\URL
  * @category   Zend
@@ -140,12 +140,12 @@ class CookieJar implements \Countable, \IteratorAggregate
      * Parse an HTTP response, adding all the cookies set in that response
      * to the cookie jar.
      *
-     * @param \Zend\HTTP\Response\Response $response
+     * @param \Zend\HTTP\Response $response
      * @param \Zend\URI\URL|string $ref_uri Requested URI
      */
     public function addCookiesFromResponse($response, $ref_uri)
     {
-        if (! $response instanceof Response\Response) {
+        if (! $response instanceof Response) {
             throw new Exception('$response is expected to be a Response object, ' .
                 gettype($response) . ' was passed');
         }
@@ -354,12 +354,12 @@ class CookieJar implements \Countable, \IteratorAggregate
      * considered as the requested URI for setting default domain and path
      * of the cookie.
      *
-     * @param \Zend\HTTP\Response\Response $response HTTP Response object
+     * @param \Zend\HTTP\Response $response HTTP Response object
      * @param \Zend\URI\URL|string $uri The requested URI
      * @return \Zend\HTTP\CookieJar
      * @todo Add the $uri functionality.
      */
-    public static function fromResponse(Response\Response $response, $ref_uri)
+    public static function fromResponse(Response $response, $ref_uri)
     {
         $jar = new self();
         $jar->addCookiesFromResponse($response, $ref_uri);

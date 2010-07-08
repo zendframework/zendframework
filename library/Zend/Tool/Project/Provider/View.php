@@ -21,33 +21,38 @@
  */
 
 /**
- * @uses       Zend_Tool_Project_Provider_Abstract
- * @uses       Zend_Tool_Project_Provider_Exception
+ * @namespace
+ */
+namespace Zend\Tool\Project\Provider;
+
+/**
+ * @uses       \Zend\Tool\Project\Provider\AbstractProvider
+ * @uses       \Zend\Tool\Project\Provider\Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Provider_View extends Zend_Tool_Project_Provider_Abstract
+class View extends AbstractProvider
 {
 
     /**
      * createResource()
      *
-     * @param Zend_Tool_Project_Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $actionName
      * @param string $controllerName
      * @param string $moduleName
-     * @return Zend_Tool_Project_Profile_Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    public static function createResource(Zend_Tool_Project_Profile $profile, $actionName, $controllerName, $moduleName = null)
+    public static function createResource(\Zend\Tool\Project\Profile $profile, $actionName, $controllerName, $moduleName = null)
     {
         if (!is_string($actionName)) {
-            throw new Zend_Tool_Project_Provider_Exception('Zend_Tool_Project_Provider_View::createResource() expects \"actionName\" is the name of a controller resource to create.');
+            throw new Exception('Zend_Tool_Project_Provider_View::createResource() expects \"actionName\" is the name of a controller resource to create.');
         }
 
         if (!is_string($controllerName)) {
-            throw new Zend_Tool_Project_Provider_Exception('Zend_Tool_Project_Provider_View::createResource() expects \"controllerName\" is the name of a controller resource to create.');
+            throw new Exception('Zend_Tool_Project_Provider_View::createResource() expects \"controllerName\" is the name of a controller resource to create.');
         }
 
         $profileSearchParams = array();
@@ -63,7 +68,7 @@ class Zend_Tool_Project_Provider_View extends Zend_Tool_Project_Provider_Abstrac
         $profileSearchParams[] = 'viewScriptsDirectory';
 
         if (($viewScriptsDirectory = $profile->search($profileSearchParams, $noModuleSearch)) === false) {
-            throw new Zend_Tool_Project_Provider_Exception('This project does not have a viewScriptsDirectory resource.');
+            throw new Exception('This project does not have a viewScriptsDirectory resource.');
         }
 
         $profileSearchParams['viewControllerScriptsDirectory'] = array('forControllerName' => $controllerName);
@@ -88,7 +93,7 @@ class Zend_Tool_Project_Provider_View extends Zend_Tool_Project_Provider_Abstrac
     {
 
         if ($controllerName == '' || $actionNameOrSimpleName == '') {
-            throw new Zend_Tool_Project_Provider_Exception('ControllerName and/or ActionName are empty.');
+            throw new Exception('ControllerName and/or ActionName are empty.');
         }
 
         $profile = $this->_loadProfile();

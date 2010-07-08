@@ -30,7 +30,7 @@ use Zend\PDF\ObjectFactory;
 /**
  * PDF file Resource abstraction
  *
- * @uses       \Zend\PDF\ObjectFactory\ObjectFactory
+ * @uses       \Zend\PDF\ObjectFactory
  * @uses       \Zend\PDF\InternalType
  * @package    Zend_PDF
  * @package    Zend_PDF_Internal
@@ -55,7 +55,7 @@ abstract class AbstractResource
      * doesn't duplicate resource description each time then Resource is rendered
      * (referenced).
      *
-     * @var \Zend\PDF\ObjectFactory\ObjectFactoryInterface
+     * @var \Zend\PDF\ObjectFactory
      */
     protected $_objectFactory;
 
@@ -76,7 +76,7 @@ abstract class AbstractResource
      */
     public function __construct($resource)
     {
-        $this->_objectFactory = ObjectFactory\ObjectFactory::createFactory(1);
+        $this->_objectFactory = ObjectFactory\ElementFactory::createFactory(1);
         if ($resource instanceof InternalType\AbstractTypeObject) {
             $this->_resource = $this->_objectFactory->newObject($resource);
         } else {
@@ -100,7 +100,7 @@ abstract class AbstractResource
      * Get factory.
      *
      * @internal
-     * @return \Zend\PDF\ObjectFactory\ObjectFactoryInterface
+     * @return \Zend\PDF\ObjectFactory
      */
     public function getFactory()
     {

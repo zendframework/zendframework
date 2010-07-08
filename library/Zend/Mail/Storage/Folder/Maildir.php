@@ -24,11 +24,13 @@
  * @namespace
  */
 namespace Zend\Mail\Storage\Folder;
-use Zend\Mail\Storage;
+
+use Zend\Mail\Storage\MailFolder,
+    Zend\Mail\Storage;
 
 /**
  * @uses       \Zend\Mail\Storage\Exception
- * @uses       \Zend\Mail\Storage\Folder\Folder
+ * @uses       \Zend\Mail\Storage\Folder
  * @uses       \Zend\Mail\Storage\Folder\FolderInterface
  * @uses       \Zend\Mail\Storage\Maildir
  * @category   Zend
@@ -37,11 +39,11 @@ use Zend\Mail\Storage;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Maildir extends Storage\Maildir implements FolderInterface
+class Maildir extends Storage\Maildir implements MailFolder
 {
     /**
      * \Zend\Mail\Storage\Folder root folder for folder structure
-     * @var \Zend\Mail\Storage\Folder\Folder
+     * @var \Zend\Mail\Storage\Folder
      */
     protected $_rootFolder;
 
@@ -158,7 +160,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
      * get root folder or given folder
      *
      * @param string $rootFolder get folder structure for given folder, else root
-     * @return \Zend\Mail\Storage\Folder\Folder root or wanted folder
+     * @return \Zend\Mail\Storage\Folder root or wanted folder
      * @throws \Zend\Mail\Storage\Exception
      */
     public function getFolders($rootFolder = null)
@@ -192,7 +194,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
      *
      * folder must be selectable!
      *
-     * @param \Zend\Mail\Storage\Folder\Folder|string $globalName global name of folder or instance for subfolder
+     * @param \Zend\Mail\Storage\Folder|string $globalName global name of folder or instance for subfolder
      * @return null
      * @throws \Zend\Mail\Storage\Exception
      */
@@ -220,7 +222,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
     /**
      * get \Zend\Mail\Storage\Folder instance for current folder
      *
-     * @return \Zend\Mail\Storage\Folder\Folder instance of current folder
+     * @return \Zend\Mail\Storage\Folder instance of current folder
      * @throws \Zend\Mail\Storage\Exception
      */
     public function getCurrentFolder()

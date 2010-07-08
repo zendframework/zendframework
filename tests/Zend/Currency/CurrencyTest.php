@@ -777,10 +777,10 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(null, $currency->getService());
         $currency->setService(new ExchangeTest());
-        $this->assertTrue($currency->getService() instanceof Currency\CurrencyServiceInterface);
+        $this->assertTrue($currency->getService() instanceof Currency\CurrencyService);
 
         $currency->setService('ZendTest\Currency\ExchangeTest');
-        $this->assertTrue($currency->getService() instanceof Currency\CurrencyServiceInterface);
+        $this->assertTrue($currency->getService() instanceof Currency\CurrencyService);
     }
 
     /**
@@ -811,7 +811,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(null, $currency->getService());
         $currency->setService(new ExchangeTest());
-        $this->assertTrue($currency->getService() instanceof Currency\CurrencyServiceInterface);
+        $this->assertTrue($currency->getService() instanceof Currency\CurrencyService);
 
         $currency->setValue(100, 'USD');
         $this->assertEquals(50, $currency->getValue());

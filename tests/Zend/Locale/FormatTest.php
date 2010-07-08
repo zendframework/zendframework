@@ -25,7 +25,7 @@ namespace ZendTest\Locale;
 use \Zend\Locale\Format,
     \Zend\Locale\Exception as LocaleException,
     \Zend\Locale\Locale,
-    \Zend\Locale\Data\Data;
+    \Zend\Locale\Data;
 
 /**
  * @category   Zend

@@ -20,14 +20,17 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
 namespace Zend\Application\Module;
 
-use \Zend\Loader\ResourceAutoloader;
+use Zend\Loader\ResourceAutoloader;
 
 /**
  * Resource loader for application module classes
  *
- * @uses       Zend_Loader_Autoloader_Resource
+ * @uses       \Zend\Loader\ResourceAutoloader
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Module
@@ -39,7 +42,7 @@ class Autoloader extends ResourceAutoloader
     /**
      * Constructor
      *
-     * @param  array|Zend_Config $options
+     * @param  array|\Zend\Config\Config $options
      * @return void
      */
     public function __construct($options)

@@ -165,7 +165,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
         }
 
         $message = 'Hello world'; // never gets boring!
-        $this->assertTrue($this->queue->send($message) instanceof \Zend\Queue\Message\Message);
+        $this->assertTrue($this->queue->send($message) instanceof \Zend\Queue\Message);
 
         // ------------------------------------ count()
         $this->assertEquals($this->queue->count(), 1);

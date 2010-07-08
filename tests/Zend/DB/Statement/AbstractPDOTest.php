@@ -44,8 +44,8 @@ abstract class AbstractPDOTest extends AbstractTest
         $select = $this->_db->select()
             ->from('zfproducts');
         $sql = $select->__toString();
-        $stmt = new PDO\PDO($this->_db, $sql);
-        $this->assertType('Zend\DB\Statement\PDO\PDO', $stmt);
+        $stmt = new PDO($this->_db, $sql);
+        $this->assertType('Zend\DB\Statement\PDO', $stmt);
         $stmt->closeCursor();
     }
 
@@ -53,8 +53,8 @@ abstract class AbstractPDOTest extends AbstractTest
     {
         $select = $this->_db->select()
             ->from('zfproducts');
-        $stmt = new PDO\PDO($this->_db, $select);
-        $this->assertType('Zend\DB\Statement\StatementInterface', $stmt);
+        $stmt = new PDO($this->_db, $select);
+        $this->assertType('Zend\DB\Statement', $stmt);
         $stmt->closeCursor();
     }
 

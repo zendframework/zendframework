@@ -22,7 +22,9 @@
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\Inflector as InflectorFilter;
+use Zend\Filter\Inflector as InflectorFilter,
+    Zend\Loader\PrefixPathMapper,
+    Zend\Loader\PluginLoader;
 
 /**
  * Test class for Zend_Filter_Inflector.
@@ -62,7 +64,7 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
     public function testGetPluginLoaderReturnsLoaderByDefault()
     {
         $loader = $this->inflector->getPluginLoader();
-        $this->assertTrue($loader instanceof \Zend\Loader\PluginLoader\PluginLoaderInterface);
+        $this->assertTrue($loader instanceof PrefixPathMapper);
         $paths = $loader->getPaths();
         $this->assertEquals(1, count($paths));
         $this->assertTrue(array_key_exists('Zend\\Filter\\', $paths));
@@ -71,7 +73,7 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
     public function testSetPluginLoaderAllowsSettingAlternatePluginLoader()
     {
         $defaultLoader = $this->inflector->getPluginLoader();
-        $loader = new \Zend\Loader\PluginLoader\PluginLoader();
+        $loader = new PluginLoader();
         $this->inflector->setPluginLoader($loader);
         $receivedLoader = $this->inflector->getPluginLoader();
         $this->assertNotSame($defaultLoader, $receivedLoader);

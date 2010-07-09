@@ -24,12 +24,12 @@
  * @namespace
  */
 namespace Zend\Service\LiveDocx;
-use Zend\Service\LiveDocx\Exception;
-use Zend\Soap\Client\Client;
+
+use Zend\Soap\Client as SoapClient;
 
 /**
  * @uses       Exception
- * @uses       Zend\Soap\Client\Client
+ * @uses       Zend\Soap\Client
  * @category   Zend
  * @package    Zend_Service
  * @subpackage LiveDocx
@@ -47,7 +47,7 @@ abstract class AbstractLiveDocx
 
     /**
      * SOAP client used to connect to LiveDocx service
-     * @var   Zend\Soap\Client\Client
+     * @var   Zend\Soap\Client
      * @since LiveDocx 1.0
      */
     protected $_soapClient;
@@ -136,14 +136,14 @@ abstract class AbstractLiveDocx
      */
     protected function _initSoapClient($endpoint)
     {
-        $this->_soapClient = new Client();
+        $this->_soapClient = new SoapClient();
         $this->_soapClient->setWSDL($endpoint);
     }
     
     /**
      * Get SOAP client
      *
-     * @return Zend\Soap\Client\Client
+     * @return Zend\Soap\Client
      * @since  LiveDocx 1.2
      */
     public function getSoapClient()
@@ -154,7 +154,7 @@ abstract class AbstractLiveDocx
     /**
      * Set SOAP client
      *
-     * @param  Zend\Soap\Client\Client $soapClient
+     * @param  Zend\Soap\Client $soapClient
      * @return Zend\Service\AbstractLiveDocx
      * @since  LiveDocx 1.2
      */

@@ -28,6 +28,7 @@ namespace ZendTest\Service;
 namespace Zend\Service\LiveDocx;
 use Zend\Validator;
 
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_LiveDocx_LiveDocxTest::main');
 }
@@ -118,7 +119,7 @@ class LiveDocxTest extends \PHPUnit_Framework_TestCase
 
         $mailMerge = new MailMerge();
 
-        $soapClient = new \Zend\Soap\Client\Client();
+        $soapClient = new \Zend\Soap\Client();
         $soapClient->setWSDL($wsdl);
 
         $mailMerge->setSoapClient($soapClient);

@@ -26,7 +26,7 @@
 namespace ZendTest\Service;
 namespace Zend\Service\LiveDocx;
 
-use \Zend\Soap\Client\Client;
+use Zend\Soap\Client as SoapClient;
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'MailMergeTest::main');
@@ -107,7 +107,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $mailMerge = new MailMerge();
         $mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME);
         $mailMerge->setPassword(TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
-        $mailMerge->setSoapClient(new Client(self::ENDPOINT));
+        $mailMerge->setSoapClient(new SoapClient(self::ENDPOINT));
         $this->assertTrue($mailMerge->logIn());
     }    
         
@@ -130,7 +130,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $mailMerge = new MailMerge();
         $mailMerge->setUsername('phpunitInvalidUsername');
         $mailMerge->setPassword('phpunitInvalidPassword');
-        $mailMerge->setSoapClient(new Client(self::ENDPOINT));
+        $mailMerge->setSoapClient(new SoapClient(self::ENDPOINT));
         $mailMerge->logIn();
     }    
     
@@ -151,7 +151,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             array (
                 'username' => TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME,
                 'password' => TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD,
-                'soapClient' => new Client(self::ENDPOINT)
+                'soapClient' => new SoapClient(self::ENDPOINT)
             )
         );   
         $this->assertTrue($mailMerge->logIn());

@@ -34,7 +34,7 @@ interface Zend_Paginator_AdapterAggregate
     /**
      * Return a fully configured Paginator Adapter from this method.
      *
-     * @return Zend_Paginator_Adapter_Abstract
+     * @return Zend_Paginator_Adapter_Interface
      */
     public function getPaginatorAdapter();
 }

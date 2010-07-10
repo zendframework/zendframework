@@ -148,6 +148,37 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('bericht4', $translate->translate('message4'));
         $this->assertEquals('shouldNotExist', $translate->translate('shouldNotExist'));
     }
+
+    /**
+     * @group ZF-10034
+     */
+    public function testSetCacheFromCacheManager()
+    {
+        $configCache = array(
+            'translate' => array(
+                'frontend' => array(
+                    'name' => 'Core',
+                    'options' => array(
+                        'lifetime' => 120,
+                        'automatic_serialization' => true
+                    )
+                ),
+                'backend' => array(
+                    'name' => 'Black Hole'
+                )
+            )
+        );
+        $this->bootstrap->registerPluginResource('cachemanager', $configCache);
+
+        $options = $this->_translationOptions;
+        $options['cache'] = 'translate';
+        $resource = new Zend_Application_Resource_Translate($options);
+        $resource->setBootstrap($this->bootstrap);
+        $resource->init();
+
+        $this->assertType('Zend_Cache_Core', Zend_Translate::getCache());
+        Zend_Translate::clearCache();
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_TranslateTest::main') {

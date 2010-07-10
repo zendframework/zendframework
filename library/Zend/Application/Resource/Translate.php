@@ -87,6 +87,21 @@ class Zend_Application_Resource_Translate extends Zend_Application_Resource_Reso
                 }
             }
 
+            if (!empty($options['cache']) && is_string($options['cache'])) {
+                $bootstrap = $this->getBootstrap();
+                if ($bootstrap instanceof Zend_Application_Bootstrap_ResourceBootstrapper &&
+                    $bootstrap->hasPluginResource('CacheManager')
+                ) {
+                    $cacheManager = $bootstrap->bootstrap('CacheManager')
+                        ->getResource('CacheManager');
+                    if (null !== $cacheManager &&
+                        $cacheManager->hasCache($options['cache'])
+                    ) {
+                        $options['cache'] = $cacheManager->getCache($options['cache']);
+                    }
+                }
+            }
+
             $key = (isset($options['registry_key']) && !is_numeric($options['registry_key']))
                  ? $options['registry_key']
                  : self::DEFAULT_REGISTRY_KEY;

@@ -71,6 +71,8 @@ class Zend_Application_Resource_DbTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
+    	Zend_Db_Table::setDefaultMetadataCache();
+
         // Restore original autoloaders
         $loaders = spl_autoload_functions();
         foreach ($loaders as $loader) {
@@ -144,6 +146,62 @@ class Zend_Application_Resource_DbTest extends PHPUnit_Framework_TestCase
         $resource->init();
         $db = $resource->getDbAdapter();
         $this->assertTrue($db instanceof Zend_Db_Adapter_Pdo_Sqlite);
+    }
+
+    /**
+     * @group ZF-10033
+     */
+    public function testSetDefaultMetadataCache()
+    {
+        $cache = Zend_Cache::factory('Core', 'Black Hole', array(
+            'lifetime' => 120,
+            'automatic_serialization' => true
+        ));
+
+        $config = array(
+            'adapter' => 'PDO_SQLite',
+            'params'  => array(
+                'dbname' => ':memory:',
+            ),
+            'defaultMetadataCache' => $cache,
+        );
+        $resource = new Zend_Application_Resource_Db($config);
+        $resource->init();
+        $this->assertType('Zend_Cache_Core', Zend_Db_Table::getDefaultMetadataCache());
+    }
+
+    /**
+     * @group ZF-10033
+     */
+    public function testSetDefaultMetadataCacheFromCacheManager()
+    {
+        $configCache = array(
+            'database' => array(
+                'frontend' => array(
+                    'name' => 'Core',
+                    'options' => array(
+                        'lifetime' => 120,
+                        'automatic_serialization' => true
+                    )
+                ),
+                'backend' => array(
+                    'name' => 'Black Hole'
+                )
+            )
+        );
+        $this->bootstrap->registerPluginResource('cachemanager', $configCache);
+
+        $config = array(
+            'bootstrap' => $this->bootstrap,
+            'adapter' => 'PDO_SQLite',
+            'params'  => array(
+                'dbname' => ':memory:',
+            ),
+            'defaultMetadataCache' => 'database',
+        );
+        $resource = new Zend_Application_Resource_Db($config);
+        $resource->init();
+        $this->assertType('Zend_Cache_Core', Zend_Db_Table::getDefaultMetadataCache());
     }
 }
 

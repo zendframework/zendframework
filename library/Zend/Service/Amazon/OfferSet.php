@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon;
+
+/**
  * @uses       DOMXPath
  * @uses       Zend_Service_Amazon_Offer
  * @category   Zend
@@ -29,7 +34,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_OfferSet
+class OfferSet
 {
     /**
      * @var string
@@ -82,9 +87,9 @@ class Zend_Service_Amazon_OfferSet
      * @param  DOMElement $dom
      * @return void
      */
-    public function __construct(DOMElement $dom)
+    public function __construct(\DOMElement $dom)
     {
-        $xpath = new DOMXPath($dom->ownerDocument);
+        $xpath = new \DOMXPath($dom->ownerDocument);
         $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
 
         $offer = $xpath->query('./az:OfferSummary', $dom);
@@ -107,7 +112,7 @@ class Zend_Service_Amazon_OfferSet
         $offers = $xpath->query('./az:Offers/az:Offer', $dom);
         if ($offers->length >= 1) {
             foreach ($offers as $offer) {
-                $this->Offers[] = new Zend_Service_Amazon_Offer($offer);
+                $this->Offers[] = new Offer($offer);
             }
         }
     }

@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon;
+
+/**
  * @uses       Zend_Service_Amazon
  * @uses       Zend_Service_Exception
  * @category   Zend
@@ -29,7 +34,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_Query extends Zend_Service_Amazon
+class Query extends Amazon
 {
     /**
      * Search parameters
@@ -67,7 +72,7 @@ class Zend_Service_Amazon_Query extends Zend_Service_Amazon
         } else if (isset($this->_search['SearchIndex']) || $this->_searchIndex !== null || $this->_searchIndex === 'asin') {
             $this->_search[$method] = $args[0];
         } else {
-            throw new Zend_Service_Exception('You must set a category before setting the search parameters');
+            throw new \Zend\Service\Exception('You must set a category before setting the search parameters');
         }
 
         return $this;

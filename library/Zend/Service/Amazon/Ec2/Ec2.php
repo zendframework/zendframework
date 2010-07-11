@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\Ec2;
+
+/**
  * Amazon Ec2 Interface to allow easy creation of the Ec2 Components
  *
  * @uses       Zend_Loader
@@ -31,7 +36,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_Ec2
+class Ec2
 {
     /**
      * Factory method to fetch what you want to work with.
@@ -75,12 +80,12 @@ class Zend_Service_Amazon_Ec2
                 $class = 'Zend_Service_Amazon_Ec2_Securitygroups';
                 break;
             default:
-                throw new Zend_Service_Amazon_Ec2_Exception('Invalid Section: ' . $section);
+                throw new Exception('Invalid Section: ' . $section);
                 break;
         }
 
         if (!class_exists($class)) {
-            Zend_Loader::loadClass($class);
+            \Zend\Loader::loadClass($class);
         }
         return new $class($key, $secret_key);
     }

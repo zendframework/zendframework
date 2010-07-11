@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\S3;
+use Zend\Crypt;
+
+/**
  * Amazon S3 PHP connection class
  *
  * @uses       SimpleXMLElement
@@ -36,7 +42,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://docs.amazonwebservices.com/AmazonS3/2006-03-01/
  */
-class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
+class S3 extends \Zend\Service\Amazon\AbstractAmazon
 {
     /**
      * Store for stream wrapper clients
@@ -71,11 +77,11 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
      */
     public function setEndpoint($endpoint)
     {
-        if (!($endpoint instanceof Zend_Uri_Http)) {
-            $endpoint = Zend_Uri::factory($endpoint);
+        if (!($endpoint instanceof \Zend\URI\URL)) {
+            $endpoint = \Zend\Uri\Uri::factory($endpoint);
         }
         if (!$endpoint->valid()) {
-            throw new Zend_Service_Amazon_S3_Exception('Invalid endpoint supplied');
+            throw new Exception('Invalid endpoint supplied');
         }
         $this->_endpoint = $endpoint;
         return $this;
@@ -115,15 +121,15 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     {
         $len = strlen($bucket);
         if ($len < 3 || $len > 255) {
-            throw new Zend_Service_Amazon_S3_Exception("Bucket name \"$bucket\" must be between 3 and 255 characters long");
+            throw new Exception("Bucket name \"$bucket\" must be between 3 and 255 characters long");
         }
 
         if (preg_match('/[^a-z0-9\._-]/', $bucket)) {
-            throw new Zend_Service_Amazon_S3_Exception("Bucket name \"$bucket\" contains invalid characters");
+            throw new Exception("Bucket name \"$bucket\" contains invalid characters");
         }
 
         if (preg_match('/(\d){1,3}\.(\d){1,3}\.(\d){1,3}\.(\d){1,3}/', $bucket)) {
-            throw new Zend_Service_Amazon_S3_Exception("Bucket name \"$bucket\" cannot be an IP address");
+            throw new Exception("Bucket name \"$bucket\" cannot be an IP address");
         }
         return true;
     }
@@ -229,7 +235,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             return false;
         }
 
-        $xml = new SimpleXMLElement($response->getBody());
+        $xml = new \SimpleXMLElement($response->getBody());
 
         $buckets = array();
         foreach ($xml->Buckets->Bucket as $bucket) {
@@ -279,7 +285,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             return false;
         }
 
-        $xml = new SimpleXMLElement($response->getBody());
+        $xml = new \SimpleXMLElement($response->getBody());
 
         $objects = array();
         if (isset($xml->Contents)) {
@@ -359,7 +365,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         }
         $this->getHttpClient()->setStream(null);
 
-        if ($response->getStatus() != 200 || !($response instanceof Zend_Http_Response_Stream)) {
+        if ($response->getStatus() != 200 || !($response instanceof \Zend\HTTP\Response\Stream)) {
             return false;
         }
 
@@ -415,7 +421,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     {
         $data = @file_get_contents($path);
         if ($data === false) {
-            throw new Zend_Service_Amazon_S3_Exception("Cannot read file $path");
+            throw new Exception("Cannot read file $path");
         }
 
         if (!is_array($meta)) {
@@ -441,7 +447,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     {
         $data = @fopen($path, "rb");
         if ($data === false) {
-            throw new Zend_Service_Amazon_S3_Exception("Cannot open file $path");
+            throw new Exception("Cannot open file $path");
         }
 
         if (!is_array($meta)) {
@@ -495,7 +501,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         $headers['Date'] = gmdate(DATE_RFC1123, time());
 
         if(is_resource($data) && $method != 'PUT') {
-            throw new Zend_Service_Amazon_S3_Exception("Only PUT request supports stream data");
+            throw new Exception("Only PUT request supports stream data");
         }
 
         // build the end point out
@@ -634,7 +640,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             $sig_str .= '?torrent';
         }
 
-        $signature = base64_encode(Zend_Crypt_Hmac::compute($this->_getSecretKey(), 'sha1', utf8_encode($sig_str), Zend_Crypt_Hmac::BINARY));
+        $signature = base64_encode(Crypt\HMAC::compute($this->_getSecretKey(), 'sha1', utf8_encode($sig_str), Crypt\HMAC::BINARY));
         $headers['Authorization'] = 'AWS '.$this->_getAccessKey().':'.$signature;
 
         return $sig_str;

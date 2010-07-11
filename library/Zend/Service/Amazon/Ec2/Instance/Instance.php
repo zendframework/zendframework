@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\Ec2\Instance;
+
+/**
  * An Amazon EC2 interface that allows yout to run, terminate, reboot and describe Amazon
  * Ec2 Instances.
  *
@@ -32,7 +37,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_Ec2_Instance extends Zend_Service_Amazon_Ec2_Abstract
+class Instance extends \Zend\Service\Amazon\Ec2\AbstractEc2
 {
     /**
      * Constant for Small Instance TYpe
@@ -114,7 +119,7 @@ class Zend_Service_Amazon_Ec2_Instance extends Zend_Service_Amazon_Ec2_Abstract
         $options = array_merge($_defaultOptions, $options);
 
         if(!isset($options['imageId'])) {
-            throw new Zend_Service_Amazon_Ec2_Exception('No Image Id Provided');
+            throw new \Zend\Service\Amazon\Ec2\Exception('No Image Id Provided');
         }
 
 

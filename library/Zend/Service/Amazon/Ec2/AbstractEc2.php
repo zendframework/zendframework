@@ -21,6 +21,13 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\Ec2;
+use Zend\Service\Amazon;
+use Zend\Crypt;
+
+/**
  * Provides the basic functionality to send a request to the Amazon Ec2 Query API
  *
  * @uses       DOMXPath
@@ -36,7 +43,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abstract
+abstract class AbstractEc2 extends Amazon\AbstractAmazon
 {
     /**
      * The HTTP query server
@@ -95,7 +102,7 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
         } else {
             // make rue the region is valid
             if(!empty($region) && !in_array(strtolower($region), self::$_validEc2Regions, true)) {
-                throw new Zend_Service_Amazon_Exception('Invalid Amazon Ec2 Region');
+                throw new Amazon\Exception('Invalid Amazon Ec2 Region');
             }
         }
 
@@ -115,7 +122,7 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
         if(in_array(strtolower($region), self::$_validEc2Regions, true)) {
             self::$_defaultRegion = $region;
         } else {
-            throw new Zend_Service_Amazon_Exception('Invalid Amazon Ec2 Region');
+            throw new Amazon\Exception('Invalid Amazon Ec2 Region');
         }
     }
 
@@ -152,17 +159,17 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
             ));
 
             $request->setUri($url);
-            $request->setMethod(Zend_Http_Client::POST);
+            $request->setMethod(\Zend\HTTP\Client::POST);
             $request->setParameterPost($params);
 
             $httpResponse = $request->request();
 
 
-        } catch (Zend_Http_Client_Exception $zhce) {
+        } catch (\Zend\HTTP\Client\Exception $zhce) {
             $message = 'Error in request to AWS service: ' . $zhce->getMessage();
-            throw new Zend_Service_Amazon_Ec2_Exception($message, $zhce->getCode(), $zhce);
+            throw new Exception($message, $zhce->getCode(), $zhce);
         }
-        $response = new Zend_Service_Amazon_Ec2_Response($httpResponse);
+        $response = new Response($httpResponse);
         $this->checkForErrors($response);
 
         return $response;
@@ -235,7 +242,7 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
 
         $data .= implode('&', $arrData);
 
-        $hmac = Zend_Crypt_Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Zend_Crypt_Hmac::BINARY);
+        $hmac = Crypt\HMAC::compute($this->_getSecretKey(), 'SHA256', $data, Crypt\HMAC::BINARY);
 
         return base64_encode($hmac);
     }
@@ -251,15 +258,15 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
      * @throws Zend_Service_Amazon_Ec2_Exception if one or more errors are
      *         returned from Amazon.
      */
-    private function checkForErrors(Zend_Service_Amazon_Ec2_Response $response)
+    private function checkForErrors(Response $response)
     {
-        $xpath = new DOMXPath($response->getDocument());
+        $xpath = new \DOMXPath($response->getDocument());
         $list  = $xpath->query('//Error');
         if ($list->length > 0) {
             $node    = $list->item(0);
             $code    = $xpath->evaluate('string(Code/text())', $node);
             $message = $xpath->evaluate('string(Message/text())', $node);
-            throw new Zend_Service_Amazon_Ec2_Exception($message, 0, $code);
+            throw new Exception($message, 0, $code);
         }
 
     }

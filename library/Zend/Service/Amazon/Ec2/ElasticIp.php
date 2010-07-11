@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\Ec2;
+
+/**
  * An Amazon EC2 interface to allocate, associate, describe and release Elastic IP address
  * from your account.
  *
@@ -31,7 +36,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_Ec2_Elasticip extends Zend_Service_Amazon_Ec2_Abstract
+class ElasticIp extends AbstractEc2
 {
     /**
      * Acquires an elastic IP address for use with your account

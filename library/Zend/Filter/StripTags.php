@@ -244,7 +244,7 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
             $pos   = strrpos($value, '<!--');
             $start = substr($value, 0, $pos);
             $value = substr($value, $pos);
-            $value = preg_replace('/<(?:!(?:--[\s\S]*?--\s*)?(>))/us', '',  $value);
+            $value = preg_replace('/<(?:!(?:--[\s\S]*?--\s*)?(>))/s', '',  $value);
             $value = $start . $value;
         }
 

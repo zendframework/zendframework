@@ -602,6 +602,26 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
         $expected = '<img width="10" height="10" src=\'wont_be_matched.jpg\'>';
         $this->assertEquals($expected, $filter->filter($input));
     }
+
+    public function testStripTagsUnicode()
+    {
+        set_time_limit(30);
+
+        $value = '<div>This string will be<!-- Strange char r�d --> cleaned</div>';
+        $filter = new Zend_Filter_StripTags();
+        $valueFiltered = $filter->filter($value);
+        $this->assertEquals('This string will be cleaned', $valueFiltered);
+
+        $value = '<div>This string will be<!-- Сообщение --> cleaned</div>';
+        $filter = new Zend_Filter_StripTags();
+        $valueFiltered = $filter->filter($value);
+        $this->assertEquals('This string will be cleaned', $valueFiltered);
+
+        $value = '<div>This string will be<!-- ๐๑๒๓๔๕๖๗๘๙ --> cleaned</div>';
+        $filter = new Zend_Filter_StripTags();
+        $valueFiltered = $filter->filter($value);
+        $this->assertEquals('This string will be cleaned', $valueFiltered);
+    }
 }
 
 // Call Zend_Filter_StripTagsTest::main() if this source file is executed directly.

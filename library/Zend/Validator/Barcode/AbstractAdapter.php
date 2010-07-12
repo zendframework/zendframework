@@ -31,7 +31,7 @@ namespace Zend\Validator\Barcode;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AdapterAbstract implements Adapter
+abstract class AbstractAdapter implements Adapter
 {
     /**
      * Allowed barcode lengths
@@ -189,7 +189,7 @@ abstract class AdapterAbstract implements Adapter
      * Sets the checksum validation
      *
      * @param  boolean $check
-     * @return \Zend\Validator\Barcode\AdapterAbstract
+     * @return \Zend\Validator\Barcode\AbstractAdapter
      */
     public function setCheck($check)
     {

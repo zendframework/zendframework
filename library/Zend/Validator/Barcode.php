@@ -22,8 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Validator\Barcode;
-use Zend\Validator;
+namespace Zend\Validator;
 
 /**
  * @uses       \Zend\Loader
@@ -34,7 +33,7 @@ use Zend\Validator;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Barcode extends Validator\AbstractValidator
+class Barcode extends AbstractValidator
 {
     const INVALID        = 'barcodeInvalid';
     const FAILED         = 'barcodeFailed';
@@ -67,7 +66,7 @@ class Barcode extends Validator\AbstractValidator
     /**
      * Barcode adapter
      *
-     * @var Zend_Validate_Barcode_BarcodeAdapter
+     * @var Zend\Validate\Barcode\Adapter
      */
     protected $_adapter;
 
@@ -75,7 +74,7 @@ class Barcode extends Validator\AbstractValidator
      * Generates the standard validator object
      *
      * @param  string|\Zend\Config\Config|
-     *         Zend_Validate_Barcode_BarcodeAdapter $adapter Barcode adapter to use
+     *         Zend\Validate\Barcode\Adapter $adapter Barcode adapter to use
      * @return void
      * @throws \Zend\Validator\Exception
      */
@@ -99,7 +98,7 @@ class Barcode extends Validator\AbstractValidator
             if (array_key_exists('adapter', $adapter)) {
                 $adapter = $adapter['adapter'];
             } else {
-                throw new Validator\Exception("Missing option 'adapter'");
+                throw new Exception("Missing option 'adapter'");
             }
         }
 
@@ -112,7 +111,7 @@ class Barcode extends Validator\AbstractValidator
     /**
      * Returns the set adapter
      *
-     * @return Zend_Validate_Barcode_BarcodeAdapter
+     * @return Zend\Validate\Barcode\Adapter
      */
     public function getAdapter()
     {
@@ -122,9 +121,9 @@ class Barcode extends Validator\AbstractValidator
     /**
      * Sets a new barcode adapter
      *
-     * @param  string|\Zend\Validator\Barcode\Barcode $adapter Barcode adapter to use
+     * @param  string|\Zend\Validator\Barcode\Adapter $adapter Barcode adapter to use
      * @param  array  $options Options for this adapter
-     * @return void
+     * @return Zend\Validator\Barcode
      * @throws \Zend\Validator\Exception
      */
     public function setAdapter($adapter, $options = null)
@@ -136,12 +135,12 @@ class Barcode extends Validator\AbstractValidator
         }
 
         if (!class_exists($adapter)) {
-            throw new Validator\Exception('Barcode adapter matching "' . $adapter . '" not found');
+            throw new Exception('Barcode adapter matching "' . $adapter . '" not found');
         }
 
         $this->_adapter = new $adapter($options);
-        if (!$this->_adapter instanceof Adapter) {
-            throw new Validator\Exception(
+        if (!$this->_adapter instanceof Barcode\Adapter) {
+            throw new Exception(
                 "Adapter " . $adapter . " does not implement Zend\\Validate\\Barcode\\Adapter"
             );
         }
@@ -163,7 +162,7 @@ class Barcode extends Validator\AbstractValidator
      * Sets the checksum option
      *
      * @param  boolean $checksum
-     * @return \Zend\Validator\Barcode\Barcode
+     * @return \Zend\Validator\Barcode
      */
     public function setChecksum($checksum)
     {
@@ -172,7 +171,7 @@ class Barcode extends Validator\AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
+     * Defined by Zend\Validator\Validator
      *
      * Returns true if and only if $value contains a valid barcode
      *

@@ -222,8 +222,8 @@ class NormalizedToLocalizedTest extends \PHPUnit_Framework_TestCase
         );
 
         $valuesReceived = array(
-            1 => '1.234,56',
-            2 => '1.234,56',
+            1 => '1.234,57',
+            2 => '1.234,57',
             3 => '1,23',
             4 => '1,23',
             5 => '1.234,00',

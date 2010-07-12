@@ -28,7 +28,7 @@
  * @author     Marco Kaiser
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Service_DeveloperGarden_Request_RequestAbstract
+abstract class Zend_Service_DeveloperGarden_Request_AbstractRequest
 {
     /**
      * environment value
@@ -41,7 +41,7 @@ abstract class Zend_Service_DeveloperGarden_Request_RequestAbstract
      * constructor give them the environment
      *
      * @param integer $environment
-     * @return Zend_Service_DeveloperGarden_Request_RequestAbstract
+     * @return Zend_Service_DeveloperGarden_Request_AbstractRequest
      */
     public function __construct($environment)
     {
@@ -52,7 +52,7 @@ abstract class Zend_Service_DeveloperGarden_Request_RequestAbstract
      * sets a new moduleId
      *
      * @param integer $environment
-     * @return Zend_Service_DeveloperGarden_Request_RequestAbstract
+     * @return Zend_Service_DeveloperGarden_Request_AbstractRequest
      */
     public function setEnvironment($environment)
     {

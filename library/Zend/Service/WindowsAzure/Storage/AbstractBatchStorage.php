@@ -23,7 +23,7 @@
 /**
  * @uses       Zend_Http_Client
  * @uses       Zend_Http_Response
- * @uses       Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
+ * @uses       Zend_Service_WindowsAzure_Credentials_AbstractCredentials
  * @uses       Zend_Service_WindowsAzure_Exception
  * @uses       Zend_Service_WindowsAzure_Storage
  * @uses       Zend_Service_WindowsAzure_Storage_Batch
@@ -33,7 +33,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
+abstract class Zend_Service_WindowsAzure_Storage_AbstractBatchStorage
     extends Zend_Service_WindowsAzure_Storage
 {	
     /**
@@ -98,7 +98,7 @@ abstract class Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
 	 * @param string $requiredPermission Required permission
 	 * @return Zend_Http_Response
 	 */
-	public function performBatch($operations = array(), $forTableStorage = false, $isSingleSelect = false, $resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN, $requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ)
+	public function performBatch($operations = array(), $forTableStorage = false, $isSingleSelect = false, $resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN, $requiredPermission = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ)
 	{
 	    // Generate boundaries
 	    $batchBoundary = 'batch_' . md5(time() . microtime());

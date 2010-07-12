@@ -94,7 +94,7 @@ class AmamzonAbstract extends PHPUnit_Framework_TestCase
     }
 }
 
-class TestAmamzonAbstract extends Zend_Service_Amazon_Abstract
+class TestAmamzonAbstract extends Zend_Service_Amazon_AbstractService
 {
     public function returnAccessKey()
     {

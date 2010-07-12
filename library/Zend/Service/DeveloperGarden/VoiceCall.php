@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Client_ClientAbstract
+ * @uses       Zend_Service_DeveloperGarden_Client_AbstractClient
  * @uses       Zend_Service_DeveloperGarden_Request_VoiceButler_CallStatus
  * @uses       Zend_Service_DeveloperGarden_Request_VoiceButler_NewCall
  * @uses       Zend_Service_DeveloperGarden_Request_VoiceButler_NewCallSequenced
@@ -39,7 +39,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_VoiceCall
-    extends Zend_Service_DeveloperGarden_Client_ClientAbstract
+    extends Zend_Service_DeveloperGarden_Client_AbstractClient
 {
     /**
      * wsdl file

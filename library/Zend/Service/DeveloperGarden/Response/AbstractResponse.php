@@ -29,7 +29,7 @@
  * @author     Marco Kaiser
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Service_DeveloperGarden_Response_ResponseAbstract
+abstract class Zend_Service_DeveloperGarden_Response_AbstractResponse
 {
     /**
      * errorCode
@@ -49,7 +49,7 @@ abstract class Zend_Service_DeveloperGarden_Response_ResponseAbstract
      * parse the token data and throws exceptions
      *
      * @throws Zend_Service_DeveloperGarden_Response_Exception
-     * @return Zend_Service_DeveloperGarden_Response_ResponseAbstract
+     * @return Zend_Service_DeveloperGarden_Response_AbstractResponse
      */
     public function parse()
     {

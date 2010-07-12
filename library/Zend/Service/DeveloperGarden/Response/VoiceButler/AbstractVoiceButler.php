@@ -21,8 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Response_Exception
- * @uses       Zend_Service_DeveloperGarden_Response_ResponseAbstract
+ * @uses       Zend_Service_DeveloperGarden_Response_AbstractResponse
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -30,8 +29,8 @@
  * @author     Marco Kaiser
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Service_DeveloperGarden_Response_SendSms_SendSmsAbstract
-    extends Zend_Service_DeveloperGarden_Response_ResponseAbstract
+abstract class Zend_Service_DeveloperGarden_Response_VoiceButler_AbstractVoiceButler
+    extends Zend_Service_DeveloperGarden_Response_AbstractResponse
 {
     /**
      * the return from the sms request
@@ -41,10 +40,20 @@ abstract class Zend_Service_DeveloperGarden_Response_SendSms_SendSmsAbstract
     public $return = null;
 
     /**
+     * returns the return object
+     *
+     * @return stdClass
+     */
+    public function getReturn()
+    {
+        return $this->return;
+    }
+
+    /**
      * parse the response data and throws exceptions
      *
      * @throws Zend_Service_DeveloperGarden_Response_Exception
-     * @return Zend_Service_DeveloperGarden_Response_ResponseAbstract
+     * @return Zend_Service_DeveloperGarden_Response_AbstractResponse
      */
     public function parse()
     {
@@ -81,7 +90,7 @@ abstract class Zend_Service_DeveloperGarden_Response_SendSms_SendSmsAbstract
     {
         $retValue = null;
         if ($this->return instanceof stdClass) {
-            $retValue = $this->return->description;
+            $retValue = $this->return->err_msg;
         }
         return $retValue;
     }

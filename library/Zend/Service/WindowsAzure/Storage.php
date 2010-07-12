@@ -23,10 +23,10 @@
 /**
  * @uses       Zend_Http_Client
  * @uses       Zend_Http_Response
- * @uses       Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
+ * @uses       Zend_Service_WindowsAzure_Credentials_AbstractCredentials
  * @uses       Zend_Service_WindowsAzure_Credentials_SharedKey
  * @uses       Zend_Service_WindowsAzure_Exception
- * @uses       Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
+ * @uses       Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy
  * @uses       Zend_Service_WindowsAzure_Storage
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
@@ -96,16 +96,16 @@ class Zend_Service_WindowsAzure_Storage
 	protected $_usePathStyleUri = false;
 	
 	/**
-	 * Zend_Service_WindowsAzure_Credentials_CredentialsAbstract instance
+	 * Zend_Service_WindowsAzure_Credentials_AbstractCredentials instance
 	 *
-	 * @var Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
+	 * @var Zend_Service_WindowsAzure_Credentials_AbstractCredentials
 	 */
 	protected $_credentials = null;
 	
 	/**
-	 * Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract instance
+	 * Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy instance
 	 * 
-	 * @var Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
+	 * @var Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy
 	 */
 	protected $_retryPolicy = null;
 	
@@ -151,14 +151,14 @@ class Zend_Service_WindowsAzure_Storage
 	 * @param string $accountName Account name for Windows Azure
 	 * @param string $accountKey Account key for Windows Azure
 	 * @param boolean $usePathStyleUri Use path-style URI's
-	 * @param Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy Retry policy to use when making requests
+	 * @param Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy $retryPolicy Retry policy to use when making requests
 	 */
 	public function __construct(
 		$host            = self::URL_DEV_BLOB,
-		$accountName     = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT,
-		$accountKey      = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY,
+		$accountName     = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_ACCOUNT,
+		$accountKey      = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_KEY,
 		$usePathStyleUri = false,
-		Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy = null
+		Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy $retryPolicy = null
 	) {
 		$this->_host = $host;
 		$this->_accountName = $accountName;
@@ -182,7 +182,7 @@ class Zend_Service_WindowsAzure_Storage
 		
 		$this->_retryPolicy = $retryPolicy;
 		if (is_null($this->_retryPolicy)) {
-		    $this->_retryPolicy = Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract::noRetry();
+		    $this->_retryPolicy = Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy::noRetry();
 		}
 		
 		// Setup default Zend_Http_Client channel
@@ -212,13 +212,13 @@ class Zend_Service_WindowsAzure_Storage
 	/**
 	 * Set retry policy to use when making requests
 	 *
-	 * @param Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy Retry policy to use when making requests
+	 * @param Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy $retryPolicy Retry policy to use when making requests
 	 */
-	public function setRetryPolicy(Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy = null)
+	public function setRetryPolicy(Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy $retryPolicy = null)
 	{
 		$this->_retryPolicy = $retryPolicy;
 		if (is_null($this->_retryPolicy)) {
-		    $this->_retryPolicy = Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract::noRetry();
+		    $this->_retryPolicy = Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy::noRetry();
 		}
 	}
 	
@@ -283,11 +283,11 @@ class Zend_Service_WindowsAzure_Storage
 	}
 	
 	/**
-	 * Set Zend_Service_WindowsAzure_Credentials_CredentialsAbstract instance
+	 * Set Zend_Service_WindowsAzure_Credentials_AbstractCredentials instance
 	 * 
-	 * @param Zend_Service_WindowsAzure_Credentials_CredentialsAbstract $credentials Zend_Service_WindowsAzure_Credentials_CredentialsAbstract instance to use for request signing.
+	 * @param Zend_Service_WindowsAzure_Credentials_AbstractCredentials $credentials Zend_Service_WindowsAzure_Credentials_AbstractCredentials instance to use for request signing.
 	 */
-	public function setCredentials(Zend_Service_WindowsAzure_Credentials_CredentialsAbstract $credentials)
+	public function setCredentials(Zend_Service_WindowsAzure_Credentials_AbstractCredentials $credentials)
 	{
 	    $this->_credentials = $credentials;
 	    $this->_credentials->setAccountName($this->_accountName);
@@ -296,9 +296,9 @@ class Zend_Service_WindowsAzure_Storage
 	}
 	
 	/**
-	 * Get Zend_Service_WindowsAzure_Credentials_CredentialsAbstract instance
+	 * Get Zend_Service_WindowsAzure_Credentials_AbstractCredentials instance
 	 * 
-	 * @return Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
+	 * @return Zend_Service_WindowsAzure_Credentials_AbstractCredentials
 	 */
 	public function getCredentials()
 	{
@@ -326,7 +326,7 @@ class Zend_Service_WindowsAzure_Storage
 		$forTableStorage = false,
 		$rawData = null,
 		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
-		$requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
+		$requiredPermission = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ
 	) {
 	    // Clean path
 		if (strpos($path, '/') !== 0) {

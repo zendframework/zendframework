@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_VoiceButler_VoiceButlerAbstract
+ * @uses       Zend_Service_DeveloperGarden_VoiceButler_AbstractVoiceButler
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -30,7 +30,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Request_VoiceButler_CallStatus
-    extends Zend_Service_DeveloperGarden_Request_VoiceButler_VoiceButlerAbstract
+    extends Zend_Service_DeveloperGarden_Request_VoiceButler_AbstractVoiceButler
 {
     /**
      * extend the keep alive for this call
@@ -45,7 +45,7 @@ class Zend_Service_DeveloperGarden_Request_VoiceButler_CallStatus
      * @param integer $environment
      * @param string $sessionId
      * @param integer $keepAlive
-     * @return Zend_Service_DeveloperGarden_Request_RequestAbstract
+     * @return Zend_Service_DeveloperGarden_Request_AbstractRequest
      */
     public function __construct($environment, $sessionId, $keepAlive = null)
     {

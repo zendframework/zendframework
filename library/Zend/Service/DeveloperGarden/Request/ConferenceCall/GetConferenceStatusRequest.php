@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Request_RequestAbstract
+ * @uses       Zend_Service_DeveloperGarden_Request_AbstractRequest
  * @uses       Zend_Service_DeveloperGarden_Request_Exception
  * @category   Zend
  * @package    Zend_Service
@@ -31,7 +31,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceStatusRequest
-    extends Zend_Service_DeveloperGarden_Request_RequestAbstract
+    extends Zend_Service_DeveloperGarden_Request_AbstractRequest
 {
     /**
      * the conference id

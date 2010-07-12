@@ -34,7 +34,7 @@
  * @author     Marco Kaiser
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Service_DeveloperGarden_Client_ClientAbstract
+abstract class Zend_Service_DeveloperGarden_Client_AbstractClient
 {
     /**
      * constants for using with the odg api
@@ -161,7 +161,7 @@ abstract class Zend_Service_DeveloperGarden_Client_ClientAbstract
      * @param  string $name
      * @param  mixed $value
      * @throws Zend_Service_DeveloperGarden_Client_Exception
-     * @return Zend_Service_DeveloperGarden_Client_ClientAbstract
+     * @return Zend_Service_DeveloperGarden_Client_AbstractClient
      */
     public function setOption($name, $value)
     {
@@ -229,7 +229,7 @@ abstract class Zend_Service_DeveloperGarden_Client_ClientAbstract
      * sets new environment
      *
      * @param int $environment
-     * @return Zend_Service_DeveloperGarden_Client_ClientAbstract
+     * @return Zend_Service_DeveloperGarden_Client_AbstractClient
      */
     public function setEnvironment($environment)
     {
@@ -268,7 +268,7 @@ abstract class Zend_Service_DeveloperGarden_Client_ClientAbstract
      * switch to the local wsdl file usage
      *
      * @param boolen $use
-     * @return Zend_Service_DeveloperGarden_Client_ClientAbstract
+     * @return Zend_Service_DeveloperGarden_Client_AbstractClient
      */
     public function setUseLocalWsdl($use = true)
     {
@@ -280,7 +280,7 @@ abstract class Zend_Service_DeveloperGarden_Client_ClientAbstract
      * sets a new wsdl file
      *
      * @param string $wsdlFile
-     * @return Zend_Service_DeveloperGarden_Client_ClientAbstract
+     * @return Zend_Service_DeveloperGarden_Client_AbstractClient
      */
     public function setWsdl($wsdlFile = null)
     {
@@ -295,7 +295,7 @@ abstract class Zend_Service_DeveloperGarden_Client_ClientAbstract
      * sets a new local wsdl file
      *
      * @param string $wsdlFile
-     * @return Zend_Service_DeveloperGarden_Client_ClientAbstract
+     * @return Zend_Service_DeveloperGarden_Client_AbstractClient
      */
     public function setLocalWsdl($wsdlFile = null)
     {

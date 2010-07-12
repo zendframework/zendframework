@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Request_RequestAbstract
+ * @uses       Zend_Service_DeveloperGarden_Request_AbstractRequest
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -29,7 +29,7 @@
  * @author     Marco Kaiser
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Service_DeveloperGarden_Request_VoiceButler_VoiceButlerAbstract
-    extends Zend_Service_DeveloperGarden_Request_RequestAbstract
+abstract class Zend_Service_DeveloperGarden_Request_VoiceButler_AbstractVoiceButler
+    extends Zend_Service_DeveloperGarden_Request_AbstractRequest
 {
 }

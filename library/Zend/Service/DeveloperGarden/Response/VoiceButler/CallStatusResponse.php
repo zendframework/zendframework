@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Response_VoiceButler_VoiceButlerAbstract
+ * @uses       Zend_Service_DeveloperGarden_Response_VoiceButler_AbstractVoiceButler
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -30,7 +30,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_VoiceButler_CallStatusResponse
-    extends Zend_Service_DeveloperGarden_Response_VoiceButler_VoiceButlerAbstract
+    extends Zend_Service_DeveloperGarden_Response_VoiceButler_AbstractVoiceButler
 {
     /**
      * returns the session id

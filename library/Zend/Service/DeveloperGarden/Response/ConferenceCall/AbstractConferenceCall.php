@@ -29,7 +29,7 @@
  * @author     Marco Kaiser
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Service_DeveloperGarden_Response_ConferenceCall_ConferenceCallAbstract
+abstract class Zend_Service_DeveloperGarden_Response_ConferenceCall_AbstractConferenceCall
     extends Zend_Service_DeveloperGarden_Response_BaseType
 {
     /**

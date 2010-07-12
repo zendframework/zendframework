@@ -23,7 +23,7 @@
 
 /**
  * @uses       Zend_Service_DeveloperGarden_Request_Exception
- * @uses       Zend_Service_DeveloperGarden_Request_RequestAbstract
+ * @uses       Zend_Service_DeveloperGarden_Request_AbstractRequest
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -31,8 +31,8 @@
  * @author     Marco Kaiser
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
-    extends Zend_Service_DeveloperGarden_Request_RequestAbstract
+abstract class Zend_Service_DeveloperGarden_Request_SendSms_AbstractSendSms
+    extends Zend_Service_DeveloperGarden_Request_AbstractRequest
 {
     /**
      * the number or numbers to receive this sms
@@ -130,7 +130,7 @@ abstract class Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
      * @param string $number
      * @throws Zend_Service_DeveloperGarden_Request_Exception
      *
-     * @return Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
+     * @return Zend_Service_DeveloperGarden_Request_SendSms_AbstractSendSms
      */
     public function setNumber($number)
     {
@@ -157,7 +157,7 @@ abstract class Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
      * @param string $message
      * @throws Zend_Service_DeveloperGarden_Request_Exception
      *
-     * @return Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
+     * @return Zend_Service_DeveloperGarden_Request_SendSms_AbstractSendSms
      */
     public function setMessage($message)
     {
@@ -182,7 +182,7 @@ abstract class Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
      * the originator name
      *
      * @param string $originator
-     * @return Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
+     * @return Zend_Service_DeveloperGarden_Request_SendSms_AbstractSendSms
      */
     public function setOriginator($originator)
     {
@@ -203,7 +203,7 @@ abstract class Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
      * sets a new accounts
      *
      * @param $account the $account to set
-     * @return Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
+     * @return Zend_Service_DeveloperGarden_Request_SendSms_AbstractSendSms
      */
     public function setAccount($account)
     {

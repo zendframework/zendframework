@@ -77,31 +77,31 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $lang = new Translator\Translator(Translator\Translator::AN_ARRAY , array('1' => '1'), 'en');
         $this->assertTrue($lang->getAdapter() instanceof Adapter\ArrayAdapter);
 
-        $lang = new Translator\Translator(Translator\Translator::AN_GETTEXT , dirname(__FILE__) . '/Adapter/_files/translation_en.mo', 'en');
+        $lang = new Translator\Translator(Translator\Translator::AN_GETTEXT , __DIR__ . '/Adapter/_files/translation_en.mo', 'en');
         $this->assertTrue($lang->getAdapter() instanceof Adapter\Gettext);
 
-        $lang = new Translator\Translator(Translator\Translator::AN_TMX , dirname(__FILE__) . '/Adapter/_files/translation_en.tmx', 'en');
+        $lang = new Translator\Translator(Translator\Translator::AN_TMX , __DIR__ . '/Adapter/_files/translation_en.tmx', 'en');
         $this->assertTrue($lang->getAdapter() instanceof Adapter\Tmx);
 
-        $lang = new Translator\Translator(Translator\Translator::AN_CSV , dirname(__FILE__) . '/Adapter/_files/translation_en.csv', 'en');
+        $lang = new Translator\Translator(Translator\Translator::AN_CSV , __DIR__ . '/Adapter/_files/translation_en.csv', 'en');
         $this->assertTrue($lang->getAdapter() instanceof Adapter\Csv);
 
-        $lang = new Translator\Translator(Translator\Translator::AN_XLIFF , dirname(__FILE__) . '/Adapter/_files/translation_en.xliff', 'en');
+        $lang = new Translator\Translator(Translator\Translator::AN_XLIFF , __DIR__ . '/Adapter/_files/translation_en.xliff', 'en');
         $this->assertTrue($lang->getAdapter() instanceof Adapter\Xliff);
 
-        $lang = new Translator\Translator('Qt' , dirname(__FILE__) . '/Adapter/_files/translation_en2.ts', 'en');
+        $lang = new Translator\Translator('Qt' , __DIR__ . '/Adapter/_files/translation_en2.ts', 'en');
         $this->assertTrue($lang->getAdapter() instanceof Adapter\Qt);
 
-        $lang = new Translator\Translator('XmlTm' , dirname(__FILE__) . '/Adapter/_files/translation_en.xmltm', 'en');
+        $lang = new Translator\Translator('XmlTm' , __DIR__ . '/Adapter/_files/translation_en.xmltm', 'en');
         $this->assertTrue($lang->getAdapter() instanceof Adapter\XmlTm);
 
-        $lang = new Translator\Translator('Tbx' , dirname(__FILE__) . '/Adapter/_files/translation_en.tbx', 'en');
+        $lang = new Translator\Translator('Tbx' , __DIR__ . '/Adapter/_files/translation_en.tbx', 'en');
         $this->assertTrue($lang->getAdapter() instanceof Adapter\Tbx);
     }
 
     public function testSetAdapter()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_GETTEXT , dirname(__FILE__) . '/Adapter/_files/translation_en.mo', 'en');
+        $lang = new Translator\Translator(Translator\Translator::AN_GETTEXT , __DIR__ . '/Adapter/_files/translation_en.mo', 'en');
         $lang->setAdapter(Translator\Translator::AN_ARRAY, array('de' => 'de'));
         $this->assertTrue($lang->getAdapter() instanceof Adapter\ArrayAdapter);
 
@@ -204,7 +204,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
     public function testWithOption()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_CSV , dirname(__FILE__) . '/Adapter/_files/translation_otherdelimiter.csv', 'en', array('delimiter' => ','));
+        $lang = new Translator\Translator(Translator\Translator::AN_CSV , __DIR__ . '/Adapter/_files/translation_otherdelimiter.csv', 'en', array('delimiter' => ','));
         $this->assertEquals('Message 1 (en)', $lang->translate('Message 1'));
         $this->assertEquals('Message 4 (en)', $lang->translate('Message 4,'));
         $this->assertEquals('Message 5, (en)', $lang->translate('Message 5'));
@@ -212,14 +212,14 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
     public function testDirectorySearch()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_CSV, dirname(__FILE__) . '/Adapter/_files/testcsv', 'de_AT', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
+        $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files/testcsv', 'de_AT', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
         $this->assertEquals(array('de_AT' => 'de_AT', 'en_GB' => 'en_GB'), $lang->getList());
         $this->assertEquals('Nachricht 8', $lang->translate('Message 8'));
     }
 
     public function testFileSearch()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_CSV, dirname(__FILE__) . '/Adapter/_files/testcsv', 'de_DE', array('scan' => Translator\Translator::LOCALE_FILENAME));
+        $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files/testcsv', 'de_DE', array('scan' => Translator\Translator::LOCALE_FILENAME));
         $this->assertEquals(array('de_DE' => 'de_DE', 'en_US' => 'en_US'), $lang->getList());
         $this->assertEquals('Nachricht 8', $lang->translate('Message 8'));
     }
@@ -228,7 +228,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     {
         $cache = Cache\Cache::factory('Core', 'File',
             array('lifetime' => 120, 'automatic_serialization' => true),
-            array('cache_dir' => dirname(__FILE__) . '/../_files/'));
+            array('cache_dir' => __DIR__ . '/../_files/'));
         Translator\Translator::setCache($cache);
 
         $cache = Translator\Translator::getCache();
@@ -250,7 +250,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     public function testExceptionWhenNoAdapterClassWasSet()
     {
         try {
-            $lang = new Translator\Translator('Zend\Locale', dirname(__FILE__) . '/../_files/test2', null, array('scan' => Translator\Translator::LOCALE_FILENAME));
+            $lang = new Translator\Translator('Zend\Locale', __DIR__ . '/../_files/test2', null, array('scan' => Translator\Translator::LOCALE_FILENAME));
             $this->fail('Exception due to false adapter class expected');
         } catch (Translator\Exception $e) {
             $this->assertContains('does not exist and cannot be loaded', $e->getMessage());
@@ -272,7 +272,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
      */
     public function testCamelCasedOptions()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_CSV, dirname(__FILE__) . '/Adapter/_files/translation_otherdelimiter.csv', 'en', array('delimiter' => ','));
+        $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files/translation_otherdelimiter.csv', 'en', array('delimiter' => ','));
         $lang->setOptions(array('myOption' => true));
         $this->assertTrue($lang->getOptions('myOption'));
     }
@@ -282,13 +282,13 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
      */
     public function testPathNameWithColonResolution()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_CSV, dirname(__FILE__) . '/Adapter/../Adapter/_files', 'en', array('delimiter' => ','));
+        $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/../Adapter/_files', 'en', array('delimiter' => ','));
         $this->assertEquals('en', $lang->getLocale());
     }
 
     public function testUntranslatedMessageWithTriggeredError()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_CSV, dirname(__FILE__) . '/Adapter/_files', 'en', array('delimiter' => ','));
+        $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files', 'en', array('delimiter' => ','));
         $this->assertEquals('ignored', $lang->translate('ignored'));
 
         $this->_errorOccured = false;
@@ -301,7 +301,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
     public function testLogUntranslatedMessage()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_CSV, dirname(__FILE__) . '/Adapter/_files', 'en', array('delimiter' => ','));
+        $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files', 'en', array('delimiter' => ','));
         $this->assertEquals('ignored', $lang->translate('ignored'));
 
         $stream = fopen('php://memory', 'w+');
@@ -317,7 +317,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingUnknownLocaleWithTriggeredError()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_CSV, dirname(__FILE__) . '/Adapter/_files', 'en', array('delimiter' => ','));
+        $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files', 'en', array('delimiter' => ','));
         $this->_errorOccured = false;
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $lang->setLocale('ru');
@@ -328,7 +328,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingUnknownLocaleWritingToLog()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_CSV, dirname(__FILE__) . '/Adapter/_files', 'en', array('delimiter' => ','));
+        $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files', 'en', array('delimiter' => ','));
 
         $stream = fopen('php://memory', 'w+');
         $writer = new Writer\Stream($stream);
@@ -343,7 +343,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingNoLogAsLog()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_CSV, dirname(__FILE__) . '/Adapter/_files', 'en', array('delimiter' => ','));
+        $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files', 'en', array('delimiter' => ','));
 
         try {
             $lang->setOptions(array('log' => 'nolog'));
@@ -355,7 +355,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingUnknownLocaleWritingToSelfDefinedLog()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_CSV, dirname(__FILE__) . '/Adapter/_files', 'en', array('delimiter' => ','));
+        $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files', 'en', array('delimiter' => ','));
         $this->assertEquals('ignored', $lang->translate('ignored'));
 
         $stream = fopen('php://memory', 'w+');
@@ -376,15 +376,15 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     {
         $cache = Cache\Cache::factory('Core', 'File',
             array('lifetime' => 120, 'automatic_serialization' => true),
-            array('cache_dir' => dirname(__FILE__) . '/../_files/'));
+            array('cache_dir' => __DIR__ . '/../_files/'));
         Translator\Translator::setCache($cache);
 
-        $lang = new Translator\Translator(Translator\Translator::AN_CSV, dirname(__FILE__) . '/Adapter/_files', 'en', array('delimiter' => ','));
+        $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files', 'en', array('delimiter' => ','));
         $lang->setOptions(array('logMessage' => 'test'));
         $this->assertEquals('test', $lang->getOptions('logMessage'));
         unset($lang);
 
-        $lang2 = new Translator\Translator(Translator\Translator::AN_CSV, dirname(__FILE__) . '/Adapter/_files', 'en', array('delimiter' => ','));
+        $lang2 = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files', 'en', array('delimiter' => ','));
         $this->assertEquals('test', $lang2->getOptions('logMessage'));
     }
 
@@ -526,7 +526,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
     public function testPluralsWithGettext()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_GETTEXT , dirname(__FILE__) . '/Adapter/_files/translation_en.mo', 'en');
+        $lang = new Translator\Translator(Translator\Translator::AN_GETTEXT , __DIR__ . '/Adapter/_files/translation_en.mo', 'en');
 
         $this->assertEquals('Message 5 (en) Plural 0', $lang->translate(array('Message 5', 'Message 5 Plural', 1)));
         $this->assertEquals('Message 5 (en) Plural 0', $lang->plural('Message 5', 'Message 5 Plural', 1));
@@ -536,7 +536,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
     public function testPluralsWithCsv()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_CSV , dirname(__FILE__) . '/Adapter/_files/translation_en.csv', 'en');
+        $lang = new Translator\Translator(Translator\Translator::AN_CSV , __DIR__ . '/Adapter/_files/translation_en.csv', 'en');
 
         $this->assertEquals('Message 6 (en) Plural 0', $lang->translate(array('Message 6', 'Message 6 Plural1', 1)));
         $this->assertEquals('Message 6 (en) Plural 0', $lang->plural('Message 6', 'Message 6 Plural1', 1));
@@ -574,7 +574,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
      */
     public function testDontLogUntranslatedMessageWithIsTranslated()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_CSV, dirname(__FILE__) . '/Adapter/_files', 'en', array('delimiter' => ','));
+        $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files', 'en', array('delimiter' => ','));
         $this->assertFalse($lang->isTranslated('ignored'));
 
         $stream = fopen('php://memory', 'w+');
@@ -593,7 +593,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
      */
     public function testMultiFolderScan()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_ARRAY, dirname(__FILE__) . '/Adapter/_files/testarray', 'en_GB', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
+        $lang = new Translator\Translator(Translator\Translator::AN_ARRAY, __DIR__ . '/Adapter/_files/testarray', 'en_GB', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
         $this->assertEquals('Message 1 (ja)', $lang->_('Message 1', 'ja'        ));
         $this->assertEquals('Message 1 (en)', $lang->_('Message 1'              ));
     }
@@ -603,9 +603,9 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
      */
     public function testMultiClear()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_ARRAY, dirname(__FILE__) . '/Adapter/_files/testarray', 'en_GB', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
+        $lang = new Translator\Translator(Translator\Translator::AN_ARRAY, __DIR__ . '/Adapter/_files/testarray', 'en_GB', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
         $this->assertEquals('Message 1 (ja)', $lang->_('Message 1', 'ja'));
-        $lang->addTranslation(dirname(__FILE__) . '/Adapter/_files/translation_en.php', 'ja', array('clear'));
+        $lang->addTranslation(__DIR__ . '/Adapter/_files/translation_en.php', 'ja', array('clear'));
         $this->assertEquals('Message 1 (en)', $lang->_('Message 1', 'ja'));
     }
 
@@ -623,7 +623,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
      */
     public function testObjectTranslation()
     {
-        $lang = new Translator\Translator(Translator\Translator::AN_ARRAY, dirname(__FILE__) . '/Adapter/_files/testarray', 'en_GB', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
+        $lang = new Translator\Translator(Translator\Translator::AN_ARRAY, __DIR__ . '/Adapter/_files/testarray', 'en_GB', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
         $this->assertEquals('Message 1 (ja)', $lang->_('Message 1', 'ja'));
 
         $this->assertEquals($lang, $lang->translate($lang));
@@ -670,13 +670,13 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertFalse($translate->isTranslated('Message 1'));
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/Adapter/_files/translation_en.mo', 'en');
+        $adapter = new Adapter\Gettext(__DIR__ . '/Adapter/_files/translation_en.mo', 'en');
         $translate->addTranslation($adapter);
 
         $this->assertTrue($adapter->isTranslated('Message 1'));
 
-        $adapter2 = new Adapter\Gettext(dirname(__FILE__) . '/Adapter/_files/testmo/de_AT/LC_TEST/translation-de_DE.mo', 'de_AT');
-        $adapter2->addTranslation(dirname(__FILE__) . '/Adapter/_files/translation_en2.mo', 'fr');
+        $adapter2 = new Adapter\Gettext(__DIR__ . '/Adapter/_files/testmo/de_AT/LC_TEST/translation-de_DE.mo', 'de_AT');
+        $adapter2->addTranslation(__DIR__ . '/Adapter/_files/translation_en2.mo', 'fr');
         $translate->addTranslation($adapter2, 'fr');
 
         $languages = $translate->getList();
@@ -691,7 +691,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     {
         $translate = new Translator\Translator(
             Translator\Translator::AN_ARRAY,
-            dirname(__FILE__) . '/Adapter/_files/testarray/',
+            __DIR__ . '/Adapter/_files/testarray/',
             'auto',
             array(
                 'scan' => Translator\Translator::LOCALE_FILENAME,
@@ -706,7 +706,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
         $translate2 = new Translator\Translator(
             Translator\Translator::AN_ARRAY,
-            dirname(__FILE__) . '/Adapter/_files/testarray/',
+            __DIR__ . '/Adapter/_files/testarray/',
             'auto',
             array(
                 'scan' => Translator\Translator::LOCALE_FILENAME,
@@ -728,7 +728,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $translate = new Translator\Translator(
             array(
                 'adapter' => Translator\Translator::AN_ARRAY,
-                'content' => dirname(__FILE__) . '/Adapter/_files/testarray/',
+                'content' => __DIR__ . '/Adapter/_files/testarray/',
                 'locale'  => 'auto',
                 'scan'    => Translator\Translator::LOCALE_FILENAME,
                 'ignore'  => array('.', 'ignoreme', 'LC_OTHER'),
@@ -739,7 +739,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $translate2 = new Translator\Translator(
             array(
                 'adapter' => Translator\Translator::AN_CSV,
-                'content' => dirname(__FILE__) . '/Adapter/_files/translation_en.csv',
+                'content' => __DIR__ . '/Adapter/_files/translation_en.csv',
                 'locale'  => 'en_US',
             )
         );
@@ -760,7 +760,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $translate = new Translator\Translator(
             array(
                 'adapter' => Translator\Translator::AN_ARRAY,
-                'content' => dirname(__FILE__) . '/Adapter/_files/testarray/',
+                'content' => __DIR__ . '/Adapter/_files/testarray/',
                 'locale'  => 'auto',
                 'scan'    => Translator\Translator::LOCALE_FILENAME,
                 'ignore'  => array('.', 'ignoreme', 'LC_TEST'),
@@ -771,7 +771,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $translate2 = new Translator\Translator(
             array(
                 'adapter' => Translator\Translator::AN_CSV,
-                'content' => dirname(__FILE__) . '/Adapter/_files/translation_en.csv',
+                'content' => __DIR__ . '/Adapter/_files/translation_en.csv',
                 'locale'  => 'en_US',
             )
         );
@@ -794,7 +794,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $translate = new Translator\Translator(
             array(
                 'adapter' => Translator\Translator::AN_ARRAY,
-                'content' => dirname(__FILE__) . '/Adapter/_files/testarray/',
+                'content' => __DIR__ . '/Adapter/_files/testarray/',
                 'locale'  => 'auto',
                 'scan'    => Translator\Translator::LOCALE_FILENAME,
                 'ignore'  => array('.', 'ignoreme', 'LC_TEST'),
@@ -805,7 +805,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $translate2 = new Translator\Translator(
             array(
                 'adapter' => Translator\Translator::AN_CSV,
-                'content' => dirname(__FILE__) . '/Adapter/_files/translation_en.csv',
+                'content' => __DIR__ . '/Adapter/_files/translation_en.csv',
                 'locale'  => 'en_US',
             )
         );
@@ -827,7 +827,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     {
         $cache = Cache\Cache::factory('Core', 'File',
             array('lifetime' => 120, 'automatic_serialization' => true),
-            array('cache_dir' => dirname(__FILE__) . '/../_files/'));
+            array('cache_dir' => __DIR__ . '/../_files/'));
 
         $translate = new Translator\Translator(array(
             'adapter' => Translator\Translator::AN_ARRAY,

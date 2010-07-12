@@ -45,7 +45,7 @@ class DeleteAllTest extends \PHPUnit_Framework_TestCase
 
     public function testDeleteAll()
     {
-        $dataSet = new \PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(dirname(__FILE__)."/_files/truncateFixture.xml");
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(__DIR__."/_files/truncateFixture.xml");
 
         $testAdapter = $this->getMock('Zend\Test\DbAdapter');
         $testAdapter->expects($this->at(0))
@@ -64,7 +64,7 @@ class DeleteAllTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('PHPUnit_Extensions_Database_Operation_Exception');
 
-        $dataSet = new \PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(dirname(__FILE__)."/_files/truncateFixture.xml");
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(__DIR__."/_files/truncateFixture.xml");
 
         $testAdapter = $this->getMock('Zend\Test\DbAdapter');
         $testAdapter->expects($this->any())

@@ -41,7 +41,7 @@ class SnippetFeedTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->snippetFeed = new GBase\SnippetFeed(
-                file_get_contents(dirname(__FILE__) . '/_files/TestDataGBaseSnippetFeedSample1.xml'),
+                file_get_contents(__DIR__ . '/_files/TestDataGBaseSnippetFeedSample1.xml'),
                 true);
     }
 

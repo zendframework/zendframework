@@ -224,7 +224,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testBootstrapShouldIncludeBootstrapFileSpecifiedInPublicBootstrapProperty()
     {
-        $this->testCase->bootstrap = dirname(__FILE__) . '/_files/bootstrap.php';
+        $this->testCase->bootstrap = __DIR__ . '/_files/bootstrap.php';
         $this->testCase->bootstrap();
         $controller = $this->testCase->getFrontController();
         $this->assertSame(Registry::get('router'), $controller->getRouter());
@@ -263,7 +263,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testDispatchShouldDispatchSpecifiedUrl()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/bar');
         $request  = $this->testCase->getRequest();
         $response = $this->testCase->getResponse();
@@ -275,7 +275,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testAssertQueryShouldDoNothingForValidResponseContent()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(realpath(dirname(__FILE__)) . '/_files/application/controllers', 'default');
+        $this->testCase->getFrontController()->setControllerDirectory(realpath(__DIR__) . '/_files/application/controllers', 'default');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $body = $this->testCase->getResponse()->getBody();
         $this->testCase->assertQuery('div#foo legend.bar', $body);
@@ -304,7 +304,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testAssertQueryShouldThrowExceptionsForInValidResponseContent()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         try {
             $this->testCase->assertNotQuery('div#foo legend.bar');
@@ -378,7 +378,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testAssertXpathShouldThrowExceptionsForInValidResponseContent()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         try {
             $this->testCase->assertNotXpath("//div[@id='foo']//legend[contains(@class, 'bar')]");
@@ -516,7 +516,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testModuleAssertionShouldDoNothingForValidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $this->testCase->assertModule('default');
         $this->testCase->assertNotModule('zend-test-php-unit-foo');
@@ -524,7 +524,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testModuleAssertionShouldThrowExceptionForInvalidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $this->setExpectedException('PHPUnit_Framework_AssertionFailedError');
         $this->testCase->assertModule('zend-test-php-unit-foo');
@@ -533,7 +533,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testControllerAssertionShouldDoNothingForValidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $this->testCase->assertController('zend-test-php-unit-foo');
         $this->testCase->assertNotController('baz');
@@ -541,7 +541,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testControllerAssertionShouldThrowExceptionForInvalidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $this->setExpectedException('PHPUnit_Framework_AssertionFailedError');
         $this->testCase->assertController('baz');
@@ -550,7 +550,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testActionAssertionShouldDoNothingForValidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $this->testCase->assertAction('baz');
         $this->testCase->assertNotAction('zend-test-php-unit-foo');
@@ -558,7 +558,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testActionAssertionShouldThrowExceptionForInvalidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/foo/baz');
         $this->setExpectedException('PHPUnit_Framework_AssertionFailedError');
         $this->testCase->assertAction('foo');
@@ -567,7 +567,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testRouteAssertionShouldDoNothingForValidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $this->testCase->assertRoute('default');
         $this->testCase->assertNotRoute('zend-test-php-unit-foo');
@@ -575,7 +575,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testRouteAssertionShouldThrowExceptionForInvalidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/foo/baz');
         $this->setExpectedException('PHPUnit_Framework_AssertionFailedError');
         $this->testCase->assertRoute('foo');
@@ -600,7 +600,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testResetResponseShouldClearResponseObject()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $response = $this->testCase->getResponse();
         $this->testCase->resetResponse();
@@ -613,7 +613,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
      */
     public function testResetRequestShouldClearRequestObject()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $request = $this->testCase->getRequest();
         $this->testCase->resetRequest();
@@ -623,7 +623,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testResetResponseShouldClearAllViewPlaceholders()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $viewRenderer->initView();
         $view = $viewRenderer->view;
@@ -647,7 +647,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
      */
     public function testQueryParametersShouldPersistFollowingDispatch()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $request = $this->testCase->request;
         $request->setQuery('mr', 'proper')
                 ->setQuery('james', 'bond');
@@ -666,7 +666,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
      */
     public function testQueryStringShouldNotOverwritePreviouslySetQueryParameters()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $request = $this->testCase->request;
         $request->setQuery('mr', 'proper')
                 ->setQuery('james', 'bond');
@@ -686,7 +686,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
      */
     public function testSuperGlobalArraysShouldBeClearedDuringSetUp()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $request = $this->testCase->request;
         $request->setQuery('mr', 'proper')
                 ->setPost('foo', 'bar')
@@ -703,7 +703,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
      */
     public function testResetRequestShouldClearPostAndQueryParameters()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->getRequest()->setPost(array(
             'foo' => 'bar',
         ));
@@ -724,7 +724,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
         $application = new Application\Application('testing', array(
             'resources' => array(
                 'frontcontroller' => array(
-                    'controllerDirectory' => dirname(__FILE__) . '/_files/application/controllers',
+                    'controllerDirectory' => __DIR__ . '/_files/application/controllers',
                 ),
             ),
         ));
@@ -744,7 +744,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
         $application = new Application\Application('testing', array(
             'resources' => array(
                 'frontcontroller' => array(
-                    'controllerDirectory' => dirname(__FILE__) . '/_files/application/controllers',
+                    'controllerDirectory' => __DIR__ . '/_files/application/controllers',
                 ),
             ),
         ));

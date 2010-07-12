@@ -70,8 +70,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
         \Zend\Controller\Action\HelperBroker::removeHelper('viewRenderer');
         $this->_dispatcher = new \Zend\Controller\Dispatcher\Standard();
         $this->_dispatcher->setControllerDirectory(array(
-            'default' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',
-            'admin'   => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Admin'
+            'default' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',
+            'admin'   => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Admin'
         ));
     }
 
@@ -98,8 +98,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     public function testSetGetControllerDirectory()
     {
         $expected = array(
-            'default' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',
-            'admin'   => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Admin'
+            'default' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',
+            'admin'   => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Admin'
         );
         $dirs = $this->_dispatcher->getControllerDirectory();
         $this->assertEquals($expected, $dirs);
@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsDispatchableManuallyIncludedController()
     {
-        require_once dirname(__FILE__) . '/../_files/ManuallyIncludedControllers.php';
+        require_once __DIR__ . '/../_files/ManuallyIncludedControllers.php';
         $request = new Zend_Controller_Request_Http();
 
 
@@ -439,7 +439,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
         Controller\Front::getInstance()
             ->setDispatcher($this->_dispatcher)
             ->addControllerDirectory(
-                dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'foo' . DIRECTORY_SEPARATOR . 'controllers',
+                __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'foo' . DIRECTORY_SEPARATOR . 'controllers',
                 'foo'
         );
 
@@ -527,7 +527,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     {
         Controller\Front::getInstance()
             ->setDispatcher($this->_dispatcher)
-            ->addModuleDirectory(dirname(__FILE__) . '/../_files/modules');
+            ->addModuleDirectory(__DIR__ . '/../_files/modules');
         $request = new Request\Simple();
         $request->setControllerName('index')
                 ->setModuleName('bar');
@@ -542,7 +542,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     {
         Controller\Front::getInstance()
             ->setDispatcher($this->_dispatcher)
-            ->addModuleDirectory(dirname(__FILE__) . '/../_files/modules');
+            ->addModuleDirectory(__DIR__ . '/../_files/modules');
         $this->_dispatcher->setDefaultModule('foo')
                           ->setParam('prefixDefaultModule', true);
         $request = new Request\Simple();
@@ -561,7 +561,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     {
         Controller\Front::getInstance()
             ->setDispatcher($this->_dispatcher)
-            ->addModuleDirectory(dirname(__FILE__) . '/../_files/modules');
+            ->addModuleDirectory(__DIR__ . '/../_files/modules');
         $dirs = $this->_dispatcher->getControllerDirectory();
         $this->_dispatcher->removeControllerDirectory('foo');
         $test = $this->_dispatcher->getControllerDirectory();

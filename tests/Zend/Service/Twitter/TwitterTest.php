@@ -80,7 +80,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($response));
         $response->expects($this->any())->method('getBody')
             ->will($this->returnValue(
-                isset($responseFile) ? file_get_contents(dirname(__FILE__) . '/_files/' . $responseFile) : ''
+                isset($responseFile) ? file_get_contents(__DIR__ . '/_files/' . $responseFile) : ''
             ));
         return $client;
     }

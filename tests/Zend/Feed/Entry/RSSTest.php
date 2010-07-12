@@ -40,7 +40,7 @@ class RSSTest extends \PHPUnit_Framework_TestCase
 
     public function testContentEncodedSupport()
     {
-        $feed = Feed\Feed::importFile(dirname(__FILE__) . '/../_files/TestFeedEntryRssContentEncoded.xml');
+        $feed = Feed\Feed::importFile(__DIR__ . '/../_files/TestFeedEntryRssContentEncoded.xml');
         $this->assertType('Zend\Feed\RSS', $feed);
 
         $item = $feed->current();
@@ -61,7 +61,7 @@ class RSSTest extends \PHPUnit_Framework_TestCase
 
     public function testContentEncodedNullIfEmpty()
     {
-        $feed = Feed\Feed::importFile(dirname(__FILE__) . '/../_files/TestFeedEntryRssContentEncoded.xml');
+        $feed = Feed\Feed::importFile(__DIR__ . '/../_files/TestFeedEntryRssContentEncoded.xml');
         $this->assertType('Zend\Feed\RSS', $feed);
 
         $feed->next();

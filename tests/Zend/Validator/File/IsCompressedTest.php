@@ -60,7 +60,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
     {
         if (!extension_loaded('fileinfo') &&
             function_exists('mime_content_type') && ini_get('mime_magic.magicfile') &&
-            (mime_content_type(dirname(__FILE__) . '/_files/test.zip') == 'text/plain')
+            (mime_content_type(__DIR__ . '/_files/test.zip') == 'text/plain')
             ) {
             $this->markTestSkipped('This PHP Version has no finfo, has mime_content_type, '
                 . ' but mime_content_type exhibits buggy behavior on this system.'
@@ -81,7 +81,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
             'name'     => 'test.zip',
             'type'     => 'application/zip',
             'size'     => 200,
-            'tmp_name' => dirname(__FILE__) . '/_files/test.zip',
+            'tmp_name' => __DIR__ . '/_files/test.zip',
             'error'    => 0
         );
 
@@ -90,7 +90,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
             $validator->enableHeaderCheck();
             $this->assertEquals(
                 $element[1],
-                $validator->isValid(dirname(__FILE__) . '/_files/test.zip', $files),
+                $validator->isValid(__DIR__ . '/_files/test.zip', $files),
                 "Tested with " . var_export($element, 1)
             );
         }
@@ -168,13 +168,13 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
             'name'     => 'picture.jpg',
             'type'     => 'image/jpeg',
             'size'     => 200,
-            'tmp_name' => dirname(__FILE__) . '/_files/picture.jpg',
+            'tmp_name' => __DIR__ . '/_files/picture.jpg',
             'error'    => 0
         );
 
         $validator = new File\IsCompressed('test/notype');
         $validator->enableHeaderCheck();
-        $this->assertFalse($validator->isValid(dirname(__FILE__) . '/_files/picture.jpg', $files));
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/picture.jpg', $files));
         $error = $validator->getMessages();
         $this->assertTrue(array_key_exists('fileIsCompressedFalseType', $error));
     }

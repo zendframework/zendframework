@@ -43,7 +43,7 @@ class WordpressRSS2DcAtomTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        $this->_feedSamplePath = dirname(__FILE__) . '/_files/wordpress-rss2-dc-atom.xml';
+        $this->_feedSamplePath = __DIR__ . '/_files/wordpress-rss2-dc-atom.xml';
     }
 
     /**

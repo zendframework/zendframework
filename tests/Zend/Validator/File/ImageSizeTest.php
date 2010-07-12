@@ -83,24 +83,24 @@ class ImageSizeTest extends \PHPUnit_Framework_TestCase
             $validator = new File\ImageSize($element[0]);
             $this->assertEquals(
                 $element[1],
-                $validator->isValid(dirname(__FILE__) . '/_files/picture.jpg'),
+                $validator->isValid(__DIR__ . '/_files/picture.jpg'),
                 "Tested with " . var_export($element, 1)
             );
         }
 
         $validator = new File\ImageSize(array('minwidth' => 0, 'minheight' => 10, 'maxwidth' => 1000, 'maxheight' => 2000));
-        $this->assertEquals(false, $validator->isValid(dirname(__FILE__) . '/_files/nofile.jpg'));
+        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/nofile.jpg'));
         $failures = $validator->getMessages();
         $this->assertContains('can not be read', $failures['fileImageSizeNotReadable']);
 
         $file['name'] = 'TestName';
         $validator = new File\ImageSize(array('minwidth' => 0, 'minheight' => 10, 'maxwidth' => 1000, 'maxheight' => 2000));
-        $this->assertEquals(false, $validator->isValid(dirname(__FILE__) . '/_files/nofile.jpg', $file));
+        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/nofile.jpg', $file));
         $failures = $validator->getMessages();
         $this->assertContains('TestName', $failures['fileImageSizeNotReadable']);
 
         $validator = new File\ImageSize(array('minwidth' => 0, 'minheight' => 10, 'maxwidth' => 1000, 'maxheight' => 2000));
-        $this->assertEquals(false, $validator->isValid(dirname(__FILE__) . '/_files/badpicture.jpg'));
+        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/badpicture.jpg'));
         $failures = $validator->getMessages();
         $this->assertContains('could not be detected', $failures['fileImageSizeNotDetected']);
     }

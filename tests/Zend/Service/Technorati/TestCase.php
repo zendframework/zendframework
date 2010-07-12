@@ -130,7 +130,7 @@ class Zend_Service_Technorati_TestCase extends PHPUnit_Framework_TestCase
 
     public static function getTestFilePath($file)
     {
-        return dirname(__FILE__) . '/_files/' . $file;
+        return __DIR__ . '/_files/' . $file;
     }
 
     public static function getTestFileContentAsDom($file)

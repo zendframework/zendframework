@@ -54,7 +54,7 @@ class ImportTest extends \PHPUnit_Framework_TestCase
         $this->_adapter = new \Zend\HTTP\Client\Adapter\Test();
         Feed\Feed::setHttpClient(new HTTP\Client(null, array('adapter' => $this->_adapter)));
         $this->_client = Feed\Feed::getHttpClient();
-        $this->_feedDir = dirname(__FILE__) . '/_files';
+        $this->_feedDir = __DIR__ . '/_files';
     }
 
     /**

@@ -175,7 +175,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     public function testHtmlLinksProcessing()
     {
-        $doc =  Document\HTML::loadHTMLFile(dirname(__FILE__) . '/_indexSource/_files/contributing.documentation.html', true);
+        $doc =  Document\HTML::loadHTMLFile(__DIR__ . '/_indexSource/_files/contributing.documentation.html', true);
         $this->assertTrue($doc instanceof Document\HTML);
 
         $this->assertTrue(array_values($doc->getHeaderLinks()) ==
@@ -195,7 +195,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
      */
     public function testHtmlInlineTagsIndexing()
     {
-        $index = Zend_Search_Lucene::create(dirname(__FILE__) . '/_index/_files');
+        $index = Zend_Search_Lucene::create(__DIR__ . '/_index/_files');
 
         $htmlString = '<html><head><title>Hello World</title></head>'
                     . '<body><b>Zend</b>Framework' . "\n" . ' <div>Foo</div>Bar ' . "\n"
@@ -212,7 +212,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(count($hits), 1);
         
         unset($index);
-        $this->_clearDirectory(dirname(__FILE__) . '/_index/_files');
+        $this->_clearDirectory(__DIR__ . '/_index/_files');
     }
 
     /**
@@ -273,7 +273,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('ZipArchive class (Zip extension) is not loaded');
         }
 
-        $docxDocument = Document\Docx::loadDocxFile(dirname(__FILE__) . '/_openXmlDocuments/test.docx', true);
+        $docxDocument = Document\Docx::loadDocxFile(__DIR__ . '/_openXmlDocuments/test.docx', true);
 
         $this->assertTrue($docxDocument instanceof Document\Docx);
         $this->assertEquals($docxDocument->getFieldValue('title'), 'Test document');
@@ -281,7 +281,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($docxDocument->getFieldValue('body') != '');
 
         try {
-            $docxDocument1 = Document\Docx::loadDocxFile(dirname(__FILE__) . '/_openXmlDocuments/dummy.docx', true);
+            $docxDocument1 = Document\Docx::loadDocxFile(__DIR__ . '/_openXmlDocuments/dummy.docx', true);
 
             $this->fail('File not readable exception is expected.');
         } catch (Document\Exception $e) {
@@ -298,7 +298,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('ZipArchive class (Zip extension) is not loaded');
         }
 
-        $pptxDocument = Document\Pptx::loadPptxFile(dirname(__FILE__) . '/_openXmlDocuments/test.pptx', true);
+        $pptxDocument = Document\Pptx::loadPptxFile(__DIR__ . '/_openXmlDocuments/test.pptx', true);
 
         $this->assertTrue($pptxDocument instanceof Document\Pptx);
         $this->assertEquals($pptxDocument->getFieldValue('title'), 'Test document');
@@ -312,7 +312,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('ZipArchive class (Zip extension) is not loaded');
         }
 
-        $xlsxDocument = Document\Xlsx::loadXlsxFile(dirname(__FILE__) . '/_openXmlDocuments/test.xlsx', true);
+        $xlsxDocument = Document\Xlsx::loadXlsxFile(__DIR__ . '/_openXmlDocuments/test.xlsx', true);
 
         $this->assertTrue($xlsxDocument instanceof Document\Xlsx);
         $this->assertEquals($xlsxDocument->getFieldValue('title'), 'Test document');

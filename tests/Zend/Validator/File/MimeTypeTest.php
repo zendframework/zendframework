@@ -83,7 +83,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
             array('image/jpeg2000', false),
         );
 
-        $filetest = dirname(__FILE__) . '/_files/picture.jpg';
+        $filetest = __DIR__ . '/_files/picture.jpg';
         $files = array(
             'name'     => 'picture.jpg',
             'type'     => 'image/jpg',

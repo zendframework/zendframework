@@ -54,7 +54,7 @@ class CipherTest extends \PHPUnit_Framework_TestCase
 
         $obj = new Adapter\RSA();
 
-        $prv_key = file_get_Contents(dirname(__FILE__) . "/_files/ssl_private.cert");
+        $prv_key = file_get_Contents(__DIR__ . "/_files/ssl_private.cert");
 
         try {
             $obj->decrypt("Foo", $prv_key, null, "foo");

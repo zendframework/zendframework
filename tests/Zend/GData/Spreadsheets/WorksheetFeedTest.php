@@ -41,7 +41,7 @@ class WorksheetFeedTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->wksFeed = new Spreadsheets\WorksheetFeed(
-                file_get_contents(dirname(__FILE__) . '/_files/TestDataWorksheetFeedSample1.xml'),
+                file_get_contents(__DIR__ . '/_files/TestDataWorksheetFeedSample1.xml'),
                 true);
     }
 

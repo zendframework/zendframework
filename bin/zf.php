@@ -360,7 +360,7 @@ class ZF
             return;
         }
         
-        $zfIncludePath['relativePath'] = dirname(__FILE__) . '/../library/';
+        $zfIncludePath['relativePath'] = __DIR__ . '/../library/';
         if (file_exists($zfIncludePath['relativePath'] . 'Zend/Tool/Framework/Client/Console/Console.php')) {
             set_include_path(realpath($zfIncludePath['relativePath']) . PATH_SEPARATOR . get_include_path());
         }

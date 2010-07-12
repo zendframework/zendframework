@@ -520,7 +520,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->setAdapter('Zend\HTTP\Client\Adapter\Test');
         $this->_client->setUri('http://example.com');
 
-        $bodyFile = dirname(__FILE__) . '/_files/ZF2098-multibytepostdata.txt';
+        $bodyFile = __DIR__ . '/_files/ZF2098-multibytepostdata.txt';
 
         $this->_client->setRawData(file_get_contents($bodyFile), 'text/plain');
         $this->_client->request('POST');
@@ -552,7 +552,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     {
     	$url = 'http://www.example.com';
     	$config = array (
-			'output_stream' => realpath(dirname(__FILE__) . '/_files/zend_http_client_stream.file'),
+			'output_stream' => realpath(__DIR__ . '/_files/zend_http_client_stream.file'),
 		);
 		$client = new HTTPClient($url, $config);
 		try {

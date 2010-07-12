@@ -27,7 +27,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
+require_once __DIR__ . '/../../../TestHelper.php';
 
 /** Zend_Service_Twitter_Search */
 require_once 'Zend/Service/Twitter/Search.php';

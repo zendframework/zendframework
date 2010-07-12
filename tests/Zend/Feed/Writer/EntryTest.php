@@ -44,7 +44,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        $this->_feedSamplePath = dirname(__FILE__) . '/_files';
+        $this->_feedSamplePath = __DIR__ . '/_files';
     }
 
     public function testAddsAuthorName()

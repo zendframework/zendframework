@@ -152,7 +152,7 @@ class RadioTest extends \PHPUnit_Framework_TestCase
     public function testCustomLabelDecorator()
     {
         $form = new Zend_Form();
-        $form->addElementPrefixPath('My_Decorator', dirname(__FILE__) . '/../_files/decorators/', 'decorator');
+        $form->addElementPrefixPath('My_Decorator', __DIR__ . '/../_files/decorators/', 'decorator');
 
         $form->addElement($this->element);
 

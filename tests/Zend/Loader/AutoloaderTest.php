@@ -418,7 +418,7 @@ class AutoloaderTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->autoloader->pushAutoloader(function($class) {
-            require_once dirname(__FILE__) . '/_files/AutoloaderClosure.php';
+            require_once __DIR__ . '/_files/AutoloaderClosure.php';
         });
         $test = new AutoloaderTest_AutoloaderClosure();
         $this->assertTrue($test instanceof AutoloaderTest_AutoloaderClosure);
@@ -426,7 +426,7 @@ class AutoloaderTest extends \PHPUnit_Framework_TestCase
 
     public function addTestIncludePath()
     {
-        set_include_path(dirname(__FILE__) . '/_files/' . PATH_SEPARATOR . $this->includePath);
+        set_include_path(__DIR__ . '/_files/' . PATH_SEPARATOR . $this->includePath);
     }
 
     public function handleErrors($errno, $errstr)

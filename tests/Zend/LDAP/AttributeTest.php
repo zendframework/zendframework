@@ -225,7 +225,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
     public function testSetAttributeWithFilestream()
     {
         $data=array();
-        $stream=fopen(dirname(__FILE__) . '/_files/AttributeTest.input.txt', 'r');
+        $stream=fopen(__DIR__ . '/_files/AttributeTest.input.txt', 'r');
         LDAP\Attribute::setAttribute($data, 'file', $stream);
         fclose($stream);
         $this->assertEquals('String from file', $data['file'][0]);

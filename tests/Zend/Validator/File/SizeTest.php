@@ -86,7 +86,7 @@ class SizeTest extends \PHPUnit_Framework_TestCase
             $validator = new File\Size($options);
             $this->assertEquals(
                 $value,
-                $validator->isValid(dirname(__FILE__) . '/_files/testsize.mo'),
+                $validator->isValid(__DIR__ . '/_files/testsize.mo'),
                 "Tested " . var_export($value, 1) . " against options " . var_export($options, 1)
             );
         }
@@ -212,13 +212,13 @@ class SizeTest extends \PHPUnit_Framework_TestCase
     public function testFailureMessage()
     {
         $validator = new File\Size(array('min' => 9999, 'max' => 10000));
-        $this->assertFalse($validator->isValid(dirname(__FILE__) . '/_files/testsize.mo'));
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/testsize.mo'));
         $messages = $validator->getMessages();
         $this->assertContains('9.76kB', current($messages));
         $this->assertContains('794B', current($messages));
 
         $validator = new File\Size(array('min' => 9999, 'max' => 10000, 'bytestring' => false));
-        $this->assertFalse($validator->isValid(dirname(__FILE__) . '/_files/testsize.mo'));
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/testsize.mo'));
         $messages = $validator->getMessages();
         $this->assertContains('9999', current($messages));
         $this->assertContains('794', current($messages));

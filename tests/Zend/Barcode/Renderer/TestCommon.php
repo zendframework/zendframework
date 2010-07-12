@@ -52,7 +52,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         // message if timezone is not set within php.ini
         date_default_timezone_set('GMT');
 
-        Barcode\Barcode::setBarcodeFont(dirname(__FILE__) . '/../Object/_fonts/Vera.ttf');
+        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
         $this->_renderer = $this->_getRendererObject();
     }
 

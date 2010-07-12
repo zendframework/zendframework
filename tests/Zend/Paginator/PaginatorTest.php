@@ -425,7 +425,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     {
         $view = new View\View();
         $view->addBasePath(__DIR__ . '/_files');
-        $view->addHelperPath(dirname(__FILE__) . '/../../../trunk/library/Zend/View/Helper', 'Zend\View\Helper');
+        $view->addHelperPath(__DIR__ . '/../../../trunk/library/Zend/View/Helper', 'Zend\View\Helper');
 
         Helper\PaginationControl::setDefaultViewPartial('partial.phtml');
 

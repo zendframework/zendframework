@@ -105,6 +105,6 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTest extends Zend_Service_Audios
 
     public static function readTestResponse($file)
     {
-        return file_get_contents(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . $file);
+        return file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . $file);
     }
 }

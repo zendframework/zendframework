@@ -59,18 +59,18 @@ class GettextTest extends \PHPUnit_Framework_TestCase
 
     public function testCreate()
     {
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/translation_en.mo');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_en.mo');
         $this->assertTrue($adapter instanceof Adapter\Gettext);
 
         try {
-            $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/nofile.mo', 'en');
+            $adapter = new Adapter\Gettext(__DIR__ . '/_files/nofile.mo', 'en');
             $this->fail("exception expected");
         } catch (Translator\Exception $e) {
             $this->assertContains('Error opening translation file', $e->getMessage());
         }
 
         try {
-            $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/failed.mo', 'en');
+            $adapter = new Adapter\Gettext(__DIR__ . '/_files/failed.mo', 'en');
             $this->fail("exception expected");
         } catch (Translator\Exception $e) {
             $this->assertContains('is not a gettext file', $e->getMessage());
@@ -79,13 +79,13 @@ class GettextTest extends \PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/translation_en.mo');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_en.mo');
         $this->assertEquals('Gettext', $adapter->toString());
     }
 
     public function testTranslate()
     {
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/translation_en.mo', 'en');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_en.mo', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 1 (en)', $adapter->_('Message 1'));
         $this->assertEquals('Message 6', $adapter->translate('Message 6'));
@@ -95,7 +95,7 @@ class GettextTest extends \PHPUnit_Framework_TestCase
 
     public function testIsTranslated()
     {
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/translation_en.mo', 'en');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_en.mo', 'en');
         $this->assertTrue($adapter->isTranslated('Message 1'));
         $this->assertFalse($adapter->isTranslated('Message 6'));
         $this->assertTrue($adapter->isTranslated('Message 1', true));
@@ -105,7 +105,7 @@ class GettextTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadTranslationData()
     {
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/translation_en.mo', 'en');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_en.mo', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 4 (en)', $adapter->translate('Message 4'));
         $this->assertEquals('Message 2', $adapter->translate('Message 2', 'ru'));
@@ -113,20 +113,20 @@ class GettextTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1', 'en_US'));
 
         try {
-            $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.mo', 'xx');
+            $adapter->addTranslation(__DIR__ . '/_files/translation_en2.mo', 'xx');
             $this->fail("exception expected");
         } catch (Translator\Exception $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.mo', 'de', array('clear' => true));
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.mo', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
     }
 
     public function testOptions()
     {
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/translation_en.mo', 'en');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_en.mo', 'en');
         $adapter->setOptions(array('testoption' => 'testkey'));
         $expected = array(
             'testoption'      => 'testkey',
@@ -154,17 +154,17 @@ class GettextTest extends \PHPUnit_Framework_TestCase
 
     public function testClearing()
     {
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/translation_en.mo', 'en');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_en.mo', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 6', $adapter->translate('Message 6'));
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.mo', 'de', array('clear' => true));
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.mo', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Message 4', $adapter->translate('Message 4'));
     }
 
     public function testLocale()
     {
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/translation_en.mo', 'en');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_en.mo', 'en');
         $this->assertEquals('en', $adapter->getLocale());
         $locale = new Locale\Locale('en');
         $adapter->setLocale($locale);
@@ -185,9 +185,9 @@ class GettextTest extends \PHPUnit_Framework_TestCase
 
     public function testList()
     {
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/translation_en.mo', 'en');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_en.mo', 'en');
         $this->assertEquals(array('en' => 'en'), $adapter->getList());
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en.mo', 'de');
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en.mo', 'de');
         $this->assertEquals(array('en' => 'en', 'de' => 'de'), $adapter->getList());
         $this->assertTrue($adapter->isAvailable('de'));
         $locale = new Locale\Locale('en');
@@ -197,30 +197,30 @@ class GettextTest extends \PHPUnit_Framework_TestCase
 
     public function testOptionLocaleDirectory()
     {
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/testmo/', 'de_AT', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/testmo/', 'de_AT', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
         $this->assertEquals(array('de_AT' => 'de_AT', 'en_GB' => 'en_GB'), $adapter->getList());
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
     }
 
     public function testOptionLocaleFilename()
     {
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/testmo/', 'de_DE', array('scan' => Translator\Translator::LOCALE_FILENAME));
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/testmo/', 'de_DE', array('scan' => Translator\Translator::LOCALE_FILENAME));
         $this->assertEquals(array('de_DE' => 'de_DE', 'en_US' => 'en_US'), $adapter->getList());
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
     }
 
     public function testBigEndian()
     {
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/translation_bigendian.mo', 'sr');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_bigendian.mo', 'sr');
         $this->assertEquals('Informacje', $adapter->translate('Informacje'));
     }
 
     public function testAdapterInfo()
     {
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/translation_en.mo');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_en.mo');
         $this->assertEquals('', $adapter->translate(''));
         $info = $adapter->getAdapterInfo();
-        $this->assertContains('Last-Translator: Thomas Weidner <thomas.weidner@voxtronic.com>', $info[dirname(__FILE__) . '/_files/translation_en.mo']);
+        $this->assertContains('Last-Translator: Thomas Weidner <thomas.weidner@voxtronic.com>', $info[__DIR__ . '/_files/translation_en.mo']);
     }
 
     public function testOtherEncoding()
@@ -229,8 +229,8 @@ class GettextTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('These charsets are not supported on AIX');
         }
 
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/translation_otherencoding.mo', 'ru');
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_otherencoding.mo', 'ru');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_otherencoding.mo', 'ru');
+        $adapter->addTranslation(__DIR__ . '/_files/translation_otherencoding.mo', 'ru');
         // Original message is in KOI8-R.. as unit tests are done in UTF8 we have to convert
         // the returned KOI8-R string into UTF-8
         $translation = iconv("KOI8-R", "UTF-8", $adapter->translate('Message 2', 'ru'));
@@ -242,7 +242,7 @@ class GettextTest extends \PHPUnit_Framework_TestCase
     public function testFailedFile()
     {
         try {
-            $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/failed2.mo', 'en');
+            $adapter = new Adapter\Gettext(__DIR__ . '/_files/failed2.mo', 'en');
             $this->fail('Exception expected');
         } catch (Translator\Exception $e) {
             $this->assertContains('is not a gettext file', $e->getMessage());
@@ -251,7 +251,7 @@ class GettextTest extends \PHPUnit_Framework_TestCase
 
     public function testMissingAdapterInfo()
     {
-        $adapter = new Adapter\Gettext(dirname(__FILE__) . '/_files/failed3.mo', 'en');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/failed3.mo', 'en');
         $values = $adapter->getAdapterInfo();
         $this->assertContains('No adapter information available', current($values));
     }

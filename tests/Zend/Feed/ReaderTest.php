@@ -42,7 +42,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        $this->_feedSamplePath = dirname(__FILE__) . '/Reader/_files';
+        $this->_feedSamplePath = __DIR__ . '/Reader/_files';
     }
 
     public function tearDown()
@@ -135,7 +135,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testGetEncoding()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents(dirname(__FILE__) . '/Reader/Entry/_files/Atom/title/plain/atom10.xml')
+            file_get_contents(__DIR__ . '/Reader/Entry/_files/Atom/title/plain/atom10.xml')
         );
 
         $this->assertEquals('utf-8', $feed->getEncoding());
@@ -146,7 +146,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $feed = Reader\Reader::importFile(
-                dirname(__FILE__) . '/Reader/Entry/_files/Atom/title/plain/atom10.xml'
+                __DIR__ . '/Reader/Entry/_files/Atom/title/plain/atom10.xml'
             );
         } catch(\Exception $e) {
             $this->fail($e->getMessage());

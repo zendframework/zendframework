@@ -147,7 +147,7 @@ abstract class Zend_Service_DeveloperGarden_Client_ClientAbstract
         }
 
         if (!empty($this->_wsdlFileLocal)) {
-            $this->_wsdlFileLocal = realpath(dirname(__FILE__) . '/../' . $this->_wsdlFileLocal);
+            $this->_wsdlFileLocal = realpath(__DIR__ . '/../' . $this->_wsdlFileLocal);
         }
 
         if (empty($this->_wsdlFileLocal) || $this->_wsdlFileLocal === false) {

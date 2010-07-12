@@ -16,7 +16,7 @@ switch($_GET['Example']) {
         $controller = Zend_Controller_Front::getInstance();
         $controller->setParam('useDefaultControllerAlways',true);
         $controller->setParam('noViewRenderer', true);
-        $controller->setControllerDirectory(dirname(dirname(dirname(dirname(__FILE__)))).'/application/controllers/Boot/Zend-Db-Profiler-Firebug');
+        $controller->setControllerDirectory(dirname(dirname(dirname(__DIR__))).'/application/controllers/Boot/Zend-Db-Profiler-Firebug');
         $controller->dispatch();
 
         print 'Test Doc Example with Controller';

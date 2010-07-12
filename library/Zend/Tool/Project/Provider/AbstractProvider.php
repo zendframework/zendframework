@@ -69,10 +69,10 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
         if (!self::$_isInitialized) {
             $contextRegistry = Context\Repository::getInstance();
             $contextRegistry->addContextsFromDirectory(
-                dirname(dirname(__FILE__)) . '/Context/Zf/', 'Zend\Tool\Project\Context\Zf\\'
+                dirname(__DIR__) . '/Context/Zf/', 'Zend\Tool\Project\Context\Zf\\'
             );
             $contextRegistry->addContextsFromDirectory(
-                dirname(dirname(__FILE__)) . '/Context/Filesystem/', 'Zend\Tool\Project\Context\Filesystem\\'
+                dirname(__DIR__) . '/Context/Filesystem/', 'Zend\Tool\Project\Context\Filesystem\\'
             );
             self::$_isInitialized = true;
         }

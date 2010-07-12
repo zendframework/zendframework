@@ -37,7 +37,7 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_langDir = dirname(dirname(dirname(dirname(__FILE__))))
+        $this->_langDir = dirname(dirname(dirname(__DIR__)))
                         . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'languages';
         if (!is_readable($this->_langDir)) {
             throw new Exception('Language resource directory "'.$this->_langDir.'" not readable.');

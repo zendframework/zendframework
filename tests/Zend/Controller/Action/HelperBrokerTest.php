@@ -63,7 +63,7 @@ class HelperBrokerTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadingAndReturningHelper()
     {
-        $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
+        $this->front->setControllerDirectory(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files');
         $request = new Request('http://framework.zend.com/helper-broker/test-get-redirector/');
         $this->front->setResponse(new Response());
 
@@ -92,7 +92,7 @@ class HelperBrokerTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadingHelperOnlyInitializesOnce()
     {
-        $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
+        $this->front->setControllerDirectory(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files');
         $request = new Request();
         $request->setModuleName('default')
                 ->setControllerName('zend_controller_action_helper-broker')
@@ -129,7 +129,7 @@ class HelperBrokerTest extends \PHPUnit_Framework_TestCase
     }
      public function testReturningHelper()
     {
-        $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
+        $this->front->setControllerDirectory(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files');
         $request = new Request('http://framework.zend.com/helper-broker/test-get-redirector/');
         $this->front->setResponse(new Response());
 
@@ -140,7 +140,7 @@ class HelperBrokerTest extends \PHPUnit_Framework_TestCase
 
     public function testReturningHelperViaMagicGet()
     {
-        $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
+        $this->front->setControllerDirectory(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files');
         $request = new Request('http://framework.zend.com/helper-broker/test-helper-via-magic-get/');
         $this->front->setResponse(new Response());
 
@@ -151,13 +151,13 @@ class HelperBrokerTest extends \PHPUnit_Framework_TestCase
 
     public function testReturningHelperViaMagicCall()
     {
-        $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
+        $this->front->setControllerDirectory(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files');
         $request = new Request('http://framework.zend.com/helper-broker/test-helper-via-magic-call/');
         $this->front->setResponse(new Response());
 
         $this->front->returnResponse(true);
 
-        require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files/Helpers/TestHelper.php';
+        require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files/Helpers/TestHelper.php';
         HelperBroker::addHelper(new \MyApp\TestHelper());
 
         $response = $this->front->dispatch($request);
@@ -166,7 +166,7 @@ class HelperBrokerTest extends \PHPUnit_Framework_TestCase
 
     public function testNonExistentHelper()
     {
-        $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
+        $this->front->setControllerDirectory(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files');
         $request = new Request('http://framework.zend.com/helper-broker/test-bad-helper/');
         $this->front->setResponse(new Response());
 
@@ -177,13 +177,13 @@ class HelperBrokerTest extends \PHPUnit_Framework_TestCase
 
     public function testCustomHelperRegistered()
     {
-        $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
+        $this->front->setControllerDirectory(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files');
         $request = new Request('http://framework.zend.com/helper-broker/test-custom-helper/');
         $this->front->setResponse(new Response());
 
         $this->front->returnResponse(true);
 
-        require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files/Helpers/TestHelper.php';
+        require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files/Helpers/TestHelper.php';
         HelperBroker::addHelper(new \MyApp\TestHelper());
 
         $response = $this->front->dispatch($request);
@@ -192,14 +192,14 @@ class HelperBrokerTest extends \PHPUnit_Framework_TestCase
 
     public function testCustomHelperFromPath()
     {
-        $this->front->setControllerDirectory(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files');
+        $this->front->setControllerDirectory(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files');
         $request = new Request('http://framework.zend.com/helper-broker/test-custom-helper/');
         $this->front->setResponse(new Response());
 
         $this->front->returnResponse(true);
 
         HelperBroker::addPath(
-            dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Helpers',
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Helpers',
             'MyApp'
             );
 
@@ -289,7 +289,7 @@ class HelperBrokerTest extends \PHPUnit_Framework_TestCase
     public function testHelperPathStackIsLifo()
     {
         HelperBroker::addPath(
-            dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Helpers',
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Helpers',
             'MyApp'
             );
 

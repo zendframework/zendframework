@@ -330,7 +330,7 @@ class PluginLoaderTest extends \PHPUnit_Framework_TestCase
     {
         $loader = new PluginLoader(array());
         $loader->addPrefixPath('Zend_View_Helper', $this->libPath . '/Zend/View/Helper');
-        $loader->addPrefixPath('ZfTest', dirname(__FILE__) . '/_files/ZfTest');
+        $loader->addPrefixPath('ZfTest', __DIR__ . '/_files/ZfTest');
         try {
             $className = $loader->load('FormSubmit');
         } catch (Exception $e) {
@@ -383,7 +383,7 @@ class PluginLoaderTest extends \PHPUnit_Framework_TestCase
     public function testPluginLoaderShouldThrowExceptionWhenPathDoesNotExist()
     {
         $this->setExpectedException('\\Zend\\Loader\\PluginLoaderException', 'file does not exist');
-        $cacheFile = dirname(__FILE__) . '/_filesDoNotExist/includeCache.inc.php';
+        $cacheFile = __DIR__ . '/_filesDoNotExist/includeCache.inc.php';
         $this->testIncludeCacheShouldBeNullByDefault();
         PluginLoader::setIncludeFileCache($cacheFile);
     }
@@ -397,7 +397,7 @@ class PluginLoaderTest extends \PHPUnit_Framework_TestCase
         PluginLoader::setIncludeFileCache($cacheFile);
         $loader = new PluginLoader(array());
         $loader->addPrefixPath('Zend_View_Helper', $this->libPath . '/Zend/View/Helper');
-        $loader->addPrefixPath('ZfTest', dirname(__FILE__) . '/_files/ZfTest');
+        $loader->addPrefixPath('ZfTest', __DIR__ . '/_files/ZfTest');
         try {
             $className = $loader->load('CacheTest');
         } catch (Exception $e) {
@@ -433,7 +433,7 @@ class PluginLoaderTest extends \PHPUnit_Framework_TestCase
         
         $loader = new PluginLoader(array());
         $loader->addPrefixPath('Zend_View_Helper', $this->libPath . '/Zend/View/Helper');
-        $loader->addPrefixPath('ZfTest', dirname(__FILE__) . '/_files/ZfTest');
+        $loader->addPrefixPath('ZfTest', __DIR__ . '/_files/ZfTest');
         try {
             // Class in /Zend/View/Helper and not in /_files/ZfTest
             $className = $loader->load('DeclareVars');
@@ -452,7 +452,7 @@ class PluginLoaderTest extends \PHPUnit_Framework_TestCase
     public function testPrefixesEndingInBackslashDenoteNamespacedClasses()
     {
         $loader = new PluginLoader(array());
-        $loader->addPrefixPath('Zfns\\', dirname(__FILE__) . '/_files/Zfns');
+        $loader->addPrefixPath('Zfns\\', __DIR__ . '/_files/Zfns');
         try {
             $className = $loader->load('Foo');
         } catch (Exception $e) {

@@ -53,18 +53,18 @@ class Zend_Translate_Adapter_XmlTmTest extends PHPUnit_Framework_TestCase
 
     public function testCreate()
     {
-        $adapter = new Zend_Translate_Adapter_XmlTm(dirname(__FILE__) . '/_files/translation_en.xmltm');
+        $adapter = new Zend_Translate_Adapter_XmlTm(__DIR__ . '/_files/translation_en.xmltm');
         $this->assertTrue($adapter instanceof Zend_Translate_Adapter_XmlTm);
 
         try {
-            $adapter = new Zend_Translate_Adapter_XmlTm(dirname(__FILE__) . '/_files/nofile.xmltm', 'en');
+            $adapter = new Zend_Translate_Adapter_XmlTm(__DIR__ . '/_files/nofile.xmltm', 'en');
             $this->fail("exception expected");
         } catch (Zend_Translate_Exception $e) {
             $this->assertContains('is not readable', $e->getMessage());
         }
 
         try {
-            $adapter = new Zend_Translate_Adapter_XmlTm(dirname(__FILE__) . '/_files/failed.xmltm', 'en');
+            $adapter = new Zend_Translate_Adapter_XmlTm(__DIR__ . '/_files/failed.xmltm', 'en');
             $this->fail("exception expected");
         } catch (Zend_Translate_Exception $e) {
             $this->assertContains('Mismatched tag at line', $e->getMessage());
@@ -73,13 +73,13 @@ class Zend_Translate_Adapter_XmlTmTest extends PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $adapter = new Zend_Translate_Adapter_XmlTm(dirname(__FILE__) . '/_files/translation_en.xmltm');
+        $adapter = new Zend_Translate_Adapter_XmlTm(__DIR__ . '/_files/translation_en.xmltm');
         $this->assertEquals('XmlTm', $adapter->toString());
     }
 
     public function testTranslate()
     {
-        $adapter = new Zend_Translate_Adapter_XmlTm(dirname(__FILE__) . '/_files/translation_en.xmltm', 'en');
+        $adapter = new Zend_Translate_Adapter_XmlTm(__DIR__ . '/_files/translation_en.xmltm', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 1 (en)', $adapter->_('Message 1'));
         $this->assertEquals('Message 6', $adapter->translate('Message 6'));
@@ -89,7 +89,7 @@ class Zend_Translate_Adapter_XmlTmTest extends PHPUnit_Framework_TestCase
 
     public function testIsTranslated()
     {
-        $adapter = new Zend_Translate_Adapter_XmlTm(dirname(__FILE__) . '/_files/translation_en.xmltm', 'en');
+        $adapter = new Zend_Translate_Adapter_XmlTm(__DIR__ . '/_files/translation_en.xmltm', 'en');
         $this->assertTrue($adapter->isTranslated('Message 1'));
         $this->assertFalse($adapter->isTranslated('Message 6'));
         $this->assertTrue($adapter->isTranslated('Message 1', true));
@@ -99,7 +99,7 @@ class Zend_Translate_Adapter_XmlTmTest extends PHPUnit_Framework_TestCase
 
     public function testLoadTranslationData()
     {
-        $adapter = new Zend_Translate_Adapter_XmlTm(dirname(__FILE__) . '/_files/translation_en.xmltm', 'en');
+        $adapter = new Zend_Translate_Adapter_XmlTm(__DIR__ . '/_files/translation_en.xmltm', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 4 (en)', $adapter->translate('Message 4'));
         $this->assertEquals('Message 2', $adapter->translate('Message 2', 'ru'));
@@ -107,25 +107,25 @@ class Zend_Translate_Adapter_XmlTmTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1', 'en_US'));
 
         try {
-            $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en.xmltm', 'xx');
+            $adapter->addTranslation(__DIR__ . '/_files/translation_en.xmltm', 'xx');
             $this->fail("exception expected");
         } catch (Zend_Translate_Exception $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.xmltm', 'de', array('clear' => true));
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.xmltm', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
     }
 
     public function testOptions()
     {
-        $adapter = new Zend_Translate_Adapter_XmlTm(dirname(__FILE__) . '/_files/translation_en.xmltm', 'en');
+        $adapter = new Zend_Translate_Adapter_XmlTm(__DIR__ . '/_files/translation_en.xmltm', 'en');
         $adapter->setOptions(array('testoption' => 'testkey'));
         $expected = array(
             'testoption'      => 'testkey',
             'clear'           => false,
-            'content'         => dirname(__FILE__) . '/_files/translation_en.xmltm',
+            'content'         => __DIR__ . '/_files/translation_en.xmltm',
             'scan'            => null,
             'locale'          => 'en',
             'ignore'          => '.',
@@ -148,17 +148,17 @@ class Zend_Translate_Adapter_XmlTmTest extends PHPUnit_Framework_TestCase
 
     public function testClearing()
     {
-        $adapter = new Zend_Translate_Adapter_XmlTm(dirname(__FILE__) . '/_files/translation_en.xmltm', 'en');
+        $adapter = new Zend_Translate_Adapter_XmlTm(__DIR__ . '/_files/translation_en.xmltm', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 5 (en)', $adapter->translate('Message 5'));
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.xmltm', 'de', array('clear' => true));
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.xmltm', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Message 5', $adapter->translate('Message 5'));
     }
 
     public function testLocale()
     {
-        $adapter = new Zend_Translate_Adapter_XmlTm(dirname(__FILE__) . '/_files/translation_en.xmltm', 'en');
+        $adapter = new Zend_Translate_Adapter_XmlTm(__DIR__ . '/_files/translation_en.xmltm', 'en');
         $this->assertEquals('en', $adapter->getLocale());
         $locale = new Zend_Locale('en');
         $adapter->setLocale($locale);
@@ -179,9 +179,9 @@ class Zend_Translate_Adapter_XmlTmTest extends PHPUnit_Framework_TestCase
 
     public function testList()
     {
-        $adapter = new Zend_Translate_Adapter_XmlTm(dirname(__FILE__) . '/_files/translation_en.xmltm', 'en');
+        $adapter = new Zend_Translate_Adapter_XmlTm(__DIR__ . '/_files/translation_en.xmltm', 'en');
         $this->assertEquals(array('en' => 'en'), $adapter->getList());
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.xmltm', 'de');
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.xmltm', 'de');
         $this->assertEquals(array('en' => 'en', 'de' => 'de'), $adapter->getList());
         $this->assertFalse($adapter->isAvailable('fr'));
         $locale = new Zend_Locale('en');
@@ -192,7 +192,7 @@ class Zend_Translate_Adapter_XmlTmTest extends PHPUnit_Framework_TestCase
     public function testOptionLocaleDirectory()
     {
         require_once 'Zend/Translate.php';
-        $adapter = new Zend_Translate_Adapter_XmlTm(dirname(__FILE__) . '/_files/testxmltm', 'de_AT', array('scan' => Zend_Translate::LOCALE_DIRECTORY));
+        $adapter = new Zend_Translate_Adapter_XmlTm(__DIR__ . '/_files/testxmltm', 'de_AT', array('scan' => Zend_Translate::LOCALE_DIRECTORY));
         $this->assertEquals(array('de_AT' => 'de_AT', 'en_GB' => 'en_GB'), $adapter->getList());
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
     }
@@ -200,14 +200,14 @@ class Zend_Translate_Adapter_XmlTmTest extends PHPUnit_Framework_TestCase
     public function testOptionLocaleFilename()
     {
         require_once 'Zend/Translate.php';
-        $adapter = new Zend_Translate_Adapter_XmlTm(dirname(__FILE__) . '/_files/testxmltm', 'de_DE', array('scan' => Zend_Translate::LOCALE_FILENAME));
+        $adapter = new Zend_Translate_Adapter_XmlTm(__DIR__ . '/_files/testxmltm', 'de_DE', array('scan' => Zend_Translate::LOCALE_FILENAME));
         $this->assertEquals(array('de_DE' => 'de_DE', 'en_US' => 'en_US'), $adapter->getList());
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
     }
 
     public function testIsoEncoding()
     {
-        $adapter = new Zend_Translate_Adapter_XmlTm(dirname(__FILE__) . '/_files/translation_en3.xmltm', 'en');
+        $adapter = new Zend_Translate_Adapter_XmlTm(__DIR__ . '/_files/translation_en3.xmltm', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 6', $adapter->_('Message 6'));
 
@@ -222,7 +222,7 @@ class Zend_Translate_Adapter_XmlTmTest extends PHPUnit_Framework_TestCase
 
     public function testWithoutEncoding()
     {
-        $adapter = new Zend_Translate_Adapter_XmlTm(dirname(__FILE__) . '/_files/translation_withoutencoding.xmltm', 'en');
+        $adapter = new Zend_Translate_Adapter_XmlTm(__DIR__ . '/_files/translation_withoutencoding.xmltm', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Küchen Möbel (en)', $adapter->translate('Cooking furniture'));
         $this->assertEquals('Cooking furniture (en)', $adapter->translate('Küchen Möbel'));

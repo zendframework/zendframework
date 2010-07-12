@@ -47,7 +47,7 @@ class CountTest extends \PHPUnit_Framework_TestCase
 
     public function testCount()
     {
-        $f = Feed\Feed::importFile(dirname(__FILE__) . '/_files/TestAtomFeed.xml');
+        $f = Feed\Feed::importFile(__DIR__ . '/_files/TestAtomFeed.xml');
         $this->assertEquals($f->count(), 2, 'Feed count should be 2');
     }
 
@@ -56,7 +56,7 @@ class CountTest extends \PHPUnit_Framework_TestCase
     */
     public function testCountableInterface()
     {
-        $f = Feed\Feed::importFile(dirname(__FILE__) . '/_files/TestAtomFeed.xml');
+        $f = Feed\Feed::importFile(__DIR__ . '/_files/TestAtomFeed.xml');
         $this->assertEquals(count($f), 2, 'Feed count should be 2');
     }
 

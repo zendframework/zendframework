@@ -63,7 +63,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
             $registry = \Zend\Registry::getInstance();
             unset($registry[$regKey]);
         }
-        $this->basePath = dirname(__FILE__) . '/_files/modules';
+        $this->basePath = __DIR__ . '/_files/modules';
         $this->helper = new Helper\HeadTitle();
     }
 
@@ -193,7 +193,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
 
     public function testCanTranslateTitle()
     {
-        $adapter = new \Zend\Translator\Adapter\Ini(dirname(__FILE__) . '/../../Translator/Adapter/_files/translation_en.ini', 'en');
+        $adapter = new \Zend\Translator\Adapter\Ini(__DIR__ . '/../../Translator/Adapter/_files/translation_en.ini', 'en');
         \Zend\Registry::set('Zend_Translate', $adapter);
         $this->helper->enableTranslation();
         $this->helper->direct('Message_1');

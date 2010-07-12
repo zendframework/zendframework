@@ -48,18 +48,18 @@ class TmxTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreate()
     {
-        $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/translation_en.tmx', 'en');
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
         $this->assertTrue($adapter instanceof Adapter\Tmx);
 
         try {
-            $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/nofile.tmx', 'en');
+            $adapter = new Adapter\Tmx(__DIR__ . '/_files/nofile.tmx', 'en');
             $this->fail("exception expected");
         } catch (Translator\Exception $e) {
             $this->assertContains('is not readable', $e->getMessage());
         }
 
         try {
-            $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/failed.tmx', 'en');
+            $adapter = new Adapter\Tmx(__DIR__ . '/_files/failed.tmx', 'en');
             $this->fail("exception expected");
         } catch (Translator\Exception $e) {
             $this->assertContains('Mismatched tag at line', $e->getMessage());
@@ -68,13 +68,13 @@ class TmxTest extends \PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/translation_en.tmx', 'en');
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
         $this->assertEquals('Tmx', $adapter->toString());
     }
 
     public function testTranslate()
     {
-        $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/translation_en.tmx', 'en');
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 1 (en)', $adapter->_('Message 1'));
         $this->assertEquals('Message 6', $adapter->translate('Message 6'));
@@ -84,7 +84,7 @@ class TmxTest extends \PHPUnit_Framework_TestCase
 
     public function testIsTranslated()
     {
-        $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/translation_en.tmx', 'en');
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
         $this->assertTrue($adapter->isTranslated('Message 1'));
         $this->assertFalse($adapter->isTranslated('Message 6'));
         $this->assertTrue($adapter->isTranslated('Message 1', true));
@@ -94,7 +94,7 @@ class TmxTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadTranslationData()
     {
-        $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/translation_en.tmx', 'en');
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 4 (en)', $adapter->translate('Message 4'));
         $this->assertEquals('Message 2', $adapter->translate('Message 2', 'ru'));
@@ -102,20 +102,20 @@ class TmxTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1', 'en_US'));
 
         try {
-            $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en.tmx', 'xx');
+            $adapter->addTranslation(__DIR__ . '/_files/translation_en.tmx', 'xx');
             $this->fail("exception expected");
         } catch (Translator\Exception $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.tmx', 'de', array('clear' => true));
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.tmx', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
     }
 
     public function testOptions()
     {
-        $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/translation_en.tmx', 'en');
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
         $adapter->setOptions(array('testoption' => 'testkey'));
         $expected = array(
             'testoption'      => 'testkey',
@@ -143,17 +143,17 @@ class TmxTest extends \PHPUnit_Framework_TestCase
 
     public function testClearing()
     {
-        $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/translation_en.tmx', 'en');
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 5 (en)', $adapter->translate('Message 5'));
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.tmx', 'de', array('clear' => true));
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.tmx', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Message 4', $adapter->translate('Message 4'));
     }
 
     public function testLocale()
     {
-        $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/translation_en.tmx', 'en');
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
         $this->assertEquals('en', $adapter->getLocale());
         $locale = new Locale\Locale('en');
         $adapter->setLocale($locale);
@@ -174,9 +174,9 @@ class TmxTest extends \PHPUnit_Framework_TestCase
 
     public function testList()
     {
-        $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/translation_en.tmx', 'en');
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
         $this->assertEquals(array('en' => 'en', 'fr' => 'fr'), $adapter->getList());
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.tmx', 'fr');
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.tmx', 'fr');
         $this->assertEquals(array('en' => 'en', 'de' => 'de', 'fr' => 'fr'), $adapter->getList());
         $this->assertTrue($adapter->isAvailable('fr'));
         $locale = new Locale\Locale('en');
@@ -186,21 +186,21 @@ class TmxTest extends \PHPUnit_Framework_TestCase
 
     public function testOptionLocaleDirectory()
     {
-        $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/testtmx', 'de', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/testtmx', 'de', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
         $this->assertEquals(array('de' => 'de', 'en' => 'en', 'fr' => 'fr'), $adapter->getList());
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
     }
 
     public function testOptionLocaleFilename()
     {
-        $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/testtmx', 'de', array('scan' => Translator\Translator::LOCALE_FILENAME));
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/testtmx', 'de', array('scan' => Translator\Translator::LOCALE_FILENAME));
         $this->assertEquals(array('de' => 'de', 'en' => 'en', 'fr' => 'fr'), $adapter->getList());
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
     }
 
     public function testIsoEncoding()
     {
-        $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/translation_en3.tmx', 'en');
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en3.tmx', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 1 (it)', $adapter->_('Message 1', 'it'));
 
@@ -215,7 +215,7 @@ class TmxTest extends \PHPUnit_Framework_TestCase
 
     public function testWithoutEncoding()
     {
-        $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/translation_withoutencoding.tmx', 'en');
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_withoutencoding.tmx', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Küchen Möbel (en)', $adapter->translate('Cooking furniture'));
         $this->assertEquals('Cooking furniture (en)', $adapter->translate('Küchen Möbel'));
@@ -226,7 +226,7 @@ class TmxTest extends \PHPUnit_Framework_TestCase
      */
     public function testTranslate_ZF8375()
     {
-        $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/translation_en_8375.tmx', 'en', array('disableNotices' => true));
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en_8375.tmx', 'en', array('disableNotices' => true));
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 1 (en)', $adapter->_('Message 1'));
         $this->assertEquals('Message 6', $adapter->translate('Message 6'));
@@ -238,7 +238,7 @@ class TmxTest extends \PHPUnit_Framework_TestCase
 
     public function testUseId()
     {
-        $adapter = new Adapter\Tmx(dirname(__FILE__) . '/_files/translation_en2.tmx', 'en', array('useId' => false));
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en2.tmx', 'en', array('useId' => false));
         $this->assertEquals(false, $adapter->getOptions('useId'));
         $this->assertEquals('Message 1 (en)', $adapter->translate('Nachricht 1'));
         $this->assertEquals('Message 1 (en)', $adapter->_('Nachricht 1'));

@@ -47,7 +47,7 @@ class Zend_Service_WindowsAzure_BlobStorageTest extends PHPUnit_Framework_TestCa
 
     public function __construct()
     {
-        self::$path = dirname(__FILE__).'/_files/';
+        self::$path = __DIR__.'/_files/';
     }
 
     public static function main()

@@ -52,7 +52,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
             $registry = \Zend\Registry::getInstance();
             unset($registry['Zend_Locale']);
         }
-        $this->_feedSamplePath = dirname(__FILE__) . '/_files/AtomStandaloneEntry';
+        $this->_feedSamplePath = __DIR__ . '/_files/AtomStandaloneEntry';
         $this->_options = Date\Date::setOptions();
         foreach($this->_options as $k=>$v) {
             if (is_null($v)) {

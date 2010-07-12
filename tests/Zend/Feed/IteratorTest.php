@@ -49,8 +49,8 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_feed = Feed\Feed::importFile(dirname(__FILE__) . '/_files/TestAtomFeed.xml');
-        $this->_nsfeed = Feed\Feed::importFile(dirname(__FILE__) . '/_files/TestAtomFeedNamespaced.xml');
+        $this->_feed = Feed\Feed::importFile(__DIR__ . '/_files/TestAtomFeed.xml');
+        $this->_nsfeed = Feed\Feed::importFile(__DIR__ . '/_files/TestAtomFeedNamespaced.xml');
     }
 
     public function testRewind()

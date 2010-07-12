@@ -80,7 +80,7 @@ class HashTest extends \PHPUnit_Framework_TestCase
             $validator = new File\Hash($element[0]);
             $this->assertEquals(
                 $element[1],
-                $validator->isValid(dirname(__FILE__) . '/_files/picture.jpg'),
+                $validator->isValid(__DIR__ . '/_files/picture.jpg'),
                 "Tested with " . var_export($element, 1)
             );
         }
@@ -96,13 +96,13 @@ class HashTest extends \PHPUnit_Framework_TestCase
             $validator = new File\Hash($element[0]);
             $this->assertEquals(
                 $element[1],
-                $validator->isValid(dirname(__FILE__) . '/_files/picture.jpg'),
+                $validator->isValid(__DIR__ . '/_files/picture.jpg'),
                 "Tested with " . var_export($element, 1)
             );
         }
 
         $validator = new File\Hash('3f8d07e2');
-        $this->assertFalse($validator->isValid(dirname(__FILE__) . '/_files/nofile.mo'));
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileHashNotFound', $validator->getMessages()));
 
         $files = array(
@@ -113,28 +113,28 @@ class HashTest extends \PHPUnit_Framework_TestCase
             'error'    => 0
         );
         $validator = new File\Hash('3f8d07e2');
-        $this->assertFalse($validator->isValid(dirname(__FILE__) . '/_files/nofile.mo', $files));
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo', $files));
         $this->assertTrue(array_key_exists('fileHashNotFound', $validator->getMessages()));
 
         $files = array(
             'name'     => 'testsize.mo',
             'type'     => 'text',
             'size'     => 200,
-            'tmp_name' => dirname(__FILE__) . '/_files/testsize.mo',
+            'tmp_name' => __DIR__ . '/_files/testsize.mo',
             'error'    => 0
         );
         $validator = new File\Hash('3f8d07e2');
-        $this->assertTrue($validator->isValid(dirname(__FILE__) . '/_files/picture.jpg', $files));
+        $this->assertTrue($validator->isValid(__DIR__ . '/_files/picture.jpg', $files));
 
         $files = array(
             'name'     => 'testsize.mo',
             'type'     => 'text',
             'size'     => 200,
-            'tmp_name' => dirname(__FILE__) . '/_files/testsize.mo',
+            'tmp_name' => __DIR__ . '/_files/testsize.mo',
             'error'    => 0
         );
         $validator = new File\Hash('9f8d07e2');
-        $this->assertFalse($validator->isValid(dirname(__FILE__) . '/_files/picture.jpg', $files));
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/picture.jpg', $files));
         $this->assertTrue(array_key_exists('fileHashDoesNotMatch', $validator->getMessages()));
     }
 

@@ -56,8 +56,8 @@ class SegmentMergerTest extends \PHPUnit_Framework_TestCase
 {
     public function testMerge()
     {
-        $segmentsDirectory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
-        $outputDirectory   = new Directory\Filesystem(dirname(__FILE__) . '/_files');
+        $segmentsDirectory = new Directory\Filesystem(__DIR__ . '/_source/_files');
+        $outputDirectory   = new Directory\Filesystem(__DIR__ . '/_files');
         $segmentsList = array('_0', '_1', '_2', '_3', '_4');
 
         $segmentMerger = new Index\SegmentMerger($outputDirectory, 'mergedSegment');

@@ -79,7 +79,7 @@ class AtomPublishingTest extends \PHPUnit_Framework_TestCase
     public function testEdit()
     {
         Feed\Feed::setHttpClient(new TestClient());
-        $contents = file_get_contents(dirname(__FILE__) .  '/_files/AtomPublishingTest-before-update.xml');
+        $contents = file_get_contents(__DIR__ .  '/_files/AtomPublishingTest-before-update.xml');
 
         /* The base feed URI is the same as the POST URI, so just supply the
          * Zend_Feed_Entry_Atom object with that. */
@@ -117,17 +117,17 @@ class TestClient extends HTTP\Client
         switch ($method) {
             case self::POST:
                 $code = 201;
-                $body = file_get_contents(dirname(__FILE__) . '/_files/AtomPublishingTest-created-entry.xml');
+                $body = file_get_contents(__DIR__ . '/_files/AtomPublishingTest-created-entry.xml');
                 break;
 
             case self::PUT:
                 $doc1 = new \DOMDocument();
-                $doc1->load(dirname(__FILE__) . '/_files/AtomPublishingTest-expected-update.xml');
+                $doc1->load(__DIR__ . '/_files/AtomPublishingTest-expected-update.xml');
                 $doc2 = new \DOMDocument();
                 $doc2->loadXML($this->raw_post_data);
                 if ($doc1->saveXml() == $doc2->saveXml()) {
                     $code = 200;
-                    $body = file_get_contents(dirname(__FILE__) . '/_files/AtomPublishingTest-updated-entry.xml');
+                    $body = file_get_contents(__DIR__ . '/_files/AtomPublishingTest-updated-entry.xml');
                 }
                 break;
 

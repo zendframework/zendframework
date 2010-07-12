@@ -115,7 +115,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
         $cloud = $this->_getCloud(array(
             'prefixPath' => array(
                 'prefix' => 'ZendTest\Tag\Cloud\TestAsset',
-                'path' => dirname(__FILE__) . '/TestAsset'
+                'path' => __DIR__ . '/TestAsset'
             ),
             'cloudDecorator' => array(
                 'decorator' => 'CloudDummy1',
@@ -135,7 +135,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
             'prefixPath' => array(
                 array(
                     'prefix' => 'ZendTest\Tag\Cloud\TestAsset',
-                    'path' => dirname(__FILE__) . '/TestAsset'
+                    'path' => __DIR__ . '/TestAsset'
                 )
             ),
             'cloudDecorator' => array(
@@ -324,7 +324,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
         $cloud = new Tag\Cloud($options);
 
         if ($setPluginLoader) {
-            $cloud->getPluginLoader()->addPrefixPath('ZendTest\Tag\Cloud\TestAsset', dirname(__FILE__) . '/TestAsset');
+            $cloud->getPluginLoader()->addPrefixPath('ZendTest\Tag\Cloud\TestAsset', __DIR__ . '/TestAsset');
         }
 
         return $cloud;

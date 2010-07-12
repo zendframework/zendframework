@@ -261,8 +261,8 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testInitView()
     {
-        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
-        require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'ViewController.php';
+        Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
+        require_once __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'ViewController.php';
         $controller = new \ViewController(
             new Request\HTTP(),
             new Response\Cli()
@@ -271,7 +271,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($view instanceof \Zend\View\View);
         $scriptPath = $view->getScriptPaths();
         $this->assertTrue(is_array($scriptPath));
-        $this->assertEquals(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'scripts/', $scriptPath[0]);
+        $this->assertEquals(__DIR__ . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'scripts/', $scriptPath[0]);
     }
 
     public function testRender()
@@ -280,7 +280,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $request->setControllerName('view')
                 ->setActionName('index');
         $response = new Response\Cli();
-        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
         $controller = new \ViewController($request, $response);
 
         $controller->indexAction();
@@ -293,7 +293,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $request->setControllerName('view')
                 ->setActionName('test');
         $response = new Response\Cli();
-        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
         $controller = new \ViewController($request, $response);
 
         $controller->testAction();
@@ -306,7 +306,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $request->setControllerName('view')
                 ->setActionName('site');
         $response = new Response\Cli();
-        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
         $controller = new \ViewController($request, $response);
 
         $controller->siteAction();
@@ -319,7 +319,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $request->setControllerName('view')
                 ->setActionName('name');
         $response = new Response\Cli();
-        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
         $controller = new \ViewController($request, $response);
 
         $controller->nameAction();
@@ -332,8 +332,8 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $request->setControllerName('foo.bar')
                 ->setActionName('baz_bat');
         $response = new Response\Cli();
-        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
-        require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'FooBarController.php';
+        Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
+        require_once __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'FooBarController.php';
         $controller = new \FooBarController($request, $response);
 
         $controller->bazBatAction();
@@ -346,7 +346,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $request->setControllerName('view')
                 ->setActionName('test');
         $response = new Response\Cli();
-        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
         $controller = new \ViewController($request, $response);
 
         $script = $controller->getViewScript();
@@ -358,7 +358,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testGetViewScriptDoesNotOverwriteNoControllerFlagWhenNullPassed()
     {
-        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
         $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
 
         $request    = new Request\HTTP();
@@ -383,7 +383,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $request->setControllerName('view')
                 ->setActionName('script');
         $response = new Response\Cli();
-        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
         $controller = new \ViewController($request, $response);
 
         $controller->scriptAction();
@@ -396,7 +396,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $request->setControllerName('view')
                 ->setActionName('script-name');
         $response = new Response\Cli();
-        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
         $controller = new \ViewController($request, $response);
 
         $controller->scriptNameAction();
@@ -426,7 +426,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $request->setControllerName('view')
                 ->setActionName('script');
         $response = new Response\Cli();
-        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
         $controller = new \ViewController($request, $response);
         $this->assertNotNull($controller->view);
     }
@@ -438,7 +438,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $request->setControllerName('view')
                 ->setActionName('script');
         $response = new Response\Cli();
-        Controller\Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
         $controller = new \ViewController($request, $response);
 
         $controller->scriptAction();

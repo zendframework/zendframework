@@ -66,7 +66,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
                 unset($registry[$key]);
             }
         }
-        $this->basePath = dirname(__FILE__) . '/_files/modules';
+        $this->basePath = __DIR__ . '/_files/modules';
         $this->view     = new View\View();
         $this->view->doctype('XHTML1_STRICT');
         $this->helper   = new Helper\HeadMeta();

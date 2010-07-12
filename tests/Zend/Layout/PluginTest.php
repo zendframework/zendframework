@@ -119,7 +119,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
               ->setResponse($response);
 
         $layout = Layout\Layout::startMvc();
-        $layout->setLayoutPath(dirname(__FILE__) . '/_files/layouts')
+        $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->setLayout('plugin.phtml')
                ->disableInflector();
 
@@ -147,7 +147,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
               ->setResponse($response);
 
         $layout = Layout\Layout::startMvc();
-        $layout->setLayoutPath(dirname(__FILE__) . '/_files/layouts')
+        $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->setLayout('plugin.phtml')
                ->disableInflector();
 
@@ -172,7 +172,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
               ->setResponse($response);
 
         $layout = Layout\Layout::startMvc();
-        $layout->setLayoutPath(dirname(__FILE__) . '/_files/layouts')
+        $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->setLayout('plugin.phtml')
                ->disableInflector()
                ->disableLayout();
@@ -202,7 +202,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
               ->setResponse($response);
 
         $layout = Layout\Layout::startMvc();
-        $layout->setLayoutPath(dirname(__FILE__) . '/_files/layouts')
+        $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->setLayout('plugin.phtml')
                ->setMvcSuccessfulActionOnly(false)
                ->disableInflector();

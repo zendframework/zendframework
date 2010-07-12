@@ -26,7 +26,8 @@ use Zend\Loader\Autoloader,
     Zend\Application\Resource\Multidb as MultidbResource,
     Zend\Application,
     Zend\Controller\Front as FrontController,
-    Zend\DB\Table\Table as DBTable;
+    Zend\DB\Table\Table as DBTable,
+    Zend\Cache\Cache;
 
 /**
  * @category   Zend
@@ -74,7 +75,7 @@ class MultidbResourceTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         DBTable::setDefaultAdapter(null);
-        
+        DBTable::setDefaultMetadataCache();
         // Restore original autoloaders
         $loaders = spl_autoload_functions();
         foreach ($loaders as $loader) {
@@ -186,5 +187,51 @@ class MultidbResourceTest extends \PHPUnit_Framework_TestCase
         $resource->setOptions($options);
         $res = $resource->init();
         $this->assertEquals($expected, $res->getDb('db2')->getConfig());
+    }
+
+    /**
+     * @group ZF-10049
+     */
+    public function testSetDefaultMetadataCache()
+    {
+        $cache = Cache::factory('Core', 'BlackHole', array(
+            'lifetime' => 120,
+            'automatic_serialization' => true
+        ));
+
+        $options = $this->_dbOptions;
+        $options['defaultMetadataCache'] = $cache;
+        $resource = new MultidbResource($options);
+        $resource->init();
+        $this->assertType('Zend\Cache\Frontend\Core', DBTable::getDefaultMetadataCache());
+    }
+
+    /**
+     * @group ZF-10049
+     */
+    public function testSetDefaultMetadataCacheFromCacheManager()
+    {
+        $configCache = array(
+            'database' => array(
+                'frontend' => array(
+                    'name' => 'Core',
+                    'options' => array(
+                        'lifetime' => 120,
+                        'automatic_serialization' => true
+                    )
+                ),
+                'backend' => array(
+                    'name' => 'Black Hole'
+                )
+            )
+        );
+        $this->bootstrap->registerPluginResource('cachemanager', $configCache);
+
+        $options = $this->_dbOptions;
+        $options['defaultMetadataCache'] = 'database';
+        $resource = new MultidbResource($options);
+        $resource->setBootstrap($this->bootstrap);
+        $resource->init();
+        $this->assertType('Zend\Cache\Frontend\Core', DBTable::getDefaultMetadataCache());
     }
 }

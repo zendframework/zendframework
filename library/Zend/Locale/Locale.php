@@ -440,7 +440,7 @@ class Locale
         }
 
         $languages     = array();
-        if (empty($httplanguages) === true) {
+        if (empty($httplanguages)) {
             return $languages;
         }
 
@@ -1001,7 +1001,7 @@ class Locale
      */
     private static function _prepareLocale($locale, $strict = false)
     {
-        if ($locale instanceof Locale) {
+        if ($locale instanceof self) {
             $locale = $locale->toString();
         }
 

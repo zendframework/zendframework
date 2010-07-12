@@ -429,4 +429,16 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($barcode->isValid('123456'));
         $this->assertTrue($barcode->isValid('0234567'));
     }
+
+    /**
+     * @group ZF-10116
+     */
+    public function testArrayLengthMessage()
+    {
+        $barcode = new Barcode\Barcode('ean8');
+        $this->assertFalse($barcode->isValid('123'));
+        $message = $barcode->getMessages();
+        $this->assertTrue(array_key_exists('barcodeInvalidLength', $message));
+        $this->assertContains("length of 7/8 characters", $message['barcodeInvalidLength']);
+    }
 }

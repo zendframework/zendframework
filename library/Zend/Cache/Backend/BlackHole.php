@@ -35,9 +35,7 @@ use Zend\Cache;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class BlackHole 
-    extends AbstractBackend 
-    implements ExtendedBackend
+class BlackHole extends AbstractBackend implements ExtendedBackend
 {
     /**
      * Test if a cache is available for the given id and (if yes) return it (false else)

@@ -332,7 +332,7 @@ abstract class Zend_Translate_Adapter {
                 }
 
                 if ($key == 'cache') {
-                    self::setCache($options);
+                    self::setCache($option);
                     continue;
                 }
 

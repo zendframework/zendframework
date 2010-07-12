@@ -228,6 +228,43 @@ class FormErrorsTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testRenderIsArrayForm()
+    {
+        $this->setupForm();
+        $this->form->setName('foo')
+                   ->setIsArray(true);
+        $content = 'test content';
+        $test = $this->decorator->render($content);
+        $this->assertContains($content, $test);
+        foreach ($this->form->getMessages() as $name => $messages) {
+            while (($message = current($messages))) {
+                if (is_string($message)) {
+                    $this->assertContains($message, $test, var_export($messages, 1));
+                }
+                if (false === next($messages) && is_array(prev($messages))) {
+                    $messages = current($messages);
+                }
+            }
+        }
+    }
+
+    public function testCustomFormErrors()
+    {
+        $this->setupForm();
+        $this->form->addDecorator($this->decorator)
+                   ->addError('form-badness');
+        $html = $this->form->render();
+        $this->assertContains('form-badness', $html);
+
+        $this->decorator->setOnlyCustomFormErrors(true);
+        $html = $this->form->render();
+        $this->assertNotRegexp('/form-errors.*?Master Foo/', $html);
+
+        $this->decorator->setShowCustomFormErrors(false);
+        $html = $this->form->render();
+        $this->assertNotContains('form-badness', $html);
+    }
+
     /**
      * @dataProvider markupOptionMethodsProvider
      */

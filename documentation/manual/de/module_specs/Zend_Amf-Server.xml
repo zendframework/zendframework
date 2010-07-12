@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
+<!-- EN-Revision: 21741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
@@ -698,11 +698,12 @@ private function onFault(fault:Object):void {
 
         <para>
             Das ActionScripts für die Erstellung der entfernten Verbindung ist jetzt fertiggestellt.
-            Der Aufruf der ZendExample Datei führt jetzt die Verbindung zu Zend Amf aus.
-            Rückblickend haben wir die benötigten Variablen hinzugefügt um eine Verbindung zum
-            entfernten Server zu öffnen, definiert welche Methoden in der Anwendung verwendet werden
-            sollen wenn die Anwendung eine Antwort vom Server empfängt, und schlußendlich die
-            Anzeige der zurückgegebenen Daten über <methodname>trace()</methodname>.
+            Der Aufruf der ZendExample Datei führt jetzt die Verbindung zu
+            <classname>Zend_Amf</classname> aus. Rückblickend haben wir die benötigten Variablen
+            hinzugefügt um eine Verbindung zum entfernten Server zu öffnen, definiert welche
+            Methoden in der Anwendung verwendet werden sollen wenn die Anwendung eine Antwort vom
+            Server empfängt, und schlußendlich die Anzeige der zurückgegebenen Daten über
+            <methodname>trace()</methodname>.
         </para>
     </sect2>
 

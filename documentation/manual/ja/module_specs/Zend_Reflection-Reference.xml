@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20854 -->
 <sect1 id="zend.reflection.reference">
     <title>Zend_Reflectionリファレンス</title>
 
@@ -18,7 +18,7 @@
         メソッドのdocblock注釈を解析します。
         特に<code>@param</code>及び<code>@return</code>注釈が使われます。
         しかしながら、"短い"説明や"長い"説明ばかりではなく、
-        その他の注釈タグも検査することができます。
+        その他の注釈タグも検査できます。
     </para>
 
     <para>
@@ -164,7 +164,7 @@
 
         <para>
             <classname>Zend_Reflection_File</classname>により<acronym>PHP</acronym>ファイル内部を参照できます。
-            それを使って、ファイルで定義されたクラスや関数、生の<acronym>PHP</acronym>コードを参照することができます。
+            それを使って、ファイルで定義されたクラスや関数、生の<acronym>PHP</acronym>コードを参照できます。
             下記の関数が定義されています:
         </para>
 

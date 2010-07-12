@@ -312,13 +312,13 @@ class Label extends AbstractDecorator
             $options['class'] = $class;
             $label = $view->formLabel($element->getFullyQualifiedName(), trim($label), $options);
         } else {
-            $label = '&nbsp;';
+            $label = '&#160;';
         }
 
         if (null !== $tag) {
             $decorator = new HtmlTag();
             $decorator->setOptions(array('tag' => $tag,
-                                         'id'  => $this->getElement()->getName() . '-label'));
+                                         'id'  => $id . '-label'));
 
             $label = $decorator->render($label);
         }

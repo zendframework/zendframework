@@ -215,21 +215,28 @@ class RSS extends Reader\AbstractFeed
                 $dateModified = $this->_xpath->evaluate('string(/rss/channel/lastBuildDate)');
             }
             if ($dateModified) {
-                $dateStandards = array(Date\Date::RSS, Date\Date::RFC_822,
-                Date\Date::RFC_2822, Date\Date::DATES);
-                $date = new Date\Date;
-                foreach ($dateStandards as $standard) {
-                    try {
-                        $date->set($dateModified, $standard);
-                        break;
-                    } catch (Date\Exception $e) {
-                        if ($standard == Date\Date::DATES) {
-                            throw new \Zend\Feed\Exception(
-                                'Could not load date due to unrecognised'
-                                .' format (should follow RFC 822 or 2822):'
-                                . $e->getMessage(),
-                                0, $e
-                            );
+                $dateModifiedParsed = strtotime($dateModified);
+                if ($dateModifiedParsed) {
+                    $date = new Date\Date($dateModifiedParsed);
+                } else {
+                    $dateStandards = array(
+                        Date\Date::RSS, Date\Date::RFC_822,
+                        Date\Date::RFC_2822, Date\Date::DATES,
+                    );
+                    $date = new Date\Date;
+                    foreach ($dateStandards as $standard) {
+                        try {
+                            $date->set($dateModified, $standard);
+                            break;
+                        } catch (Date\Exception $e) {
+                            if ($standard == Date\Date::DATES) {
+                                throw new \Zend\Feed\Exception(
+                                    'Could not load date due to unrecognised'
+                                    .' format (should follow RFC 822 or 2822):'
+                                    . $e->getMessage(),
+                                    0, $e
+                                );
+                            }
                         }
                     }
                 }
@@ -251,6 +258,59 @@ class RSS extends Reader\AbstractFeed
         $this->_data['datemodified'] = $date;
 
         return $this->_data['datemodified'];
+    }
+
+    /**
+     * Get the feed lastBuild date
+     *
+     * @return Zend\Date\Date
+     */
+    public function getLastBuildDate()
+    {
+        if (array_key_exists('lastBuildDate', $this->_data)) {
+            return $this->_data['lastBuildDate'];
+        }
+
+        $lastBuildDate = null;
+        $date = null;
+
+        if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
+            $this->getType() !== Reader\Reader::TYPE_RSS_090) {
+            $lastBuildDate = $this->_xpath->evaluate('string(/rss/channel/lastBuildDate)');
+            if ($lastBuildDate) {
+                $lastBuildDateParsed = strtotime($lastBuildDate);
+                if ($lastBuildDateParsed) {
+                    $date = new Date\Date($lastBuildDateParsed);
+                } else {
+                    $dateStandards = array(Date\Date::RSS, Date\Date::RFC_822,
+                    Date\Date::RFC_2822, Date\Date::DATES);
+                    $date = new Date\Date;
+                    foreach ($dateStandards as $standard) {
+                        try {
+                            $date->set($lastBuildDate, $standard);
+                            break;
+                        } catch (Date\Exception $e) {
+                            if ($standard == Date\Date::DATES) {
+                                throw new \Zend\Feed\Exception(
+                                    'Could not load date due to unrecognised'
+                                    .' format (should follow RFC 822 or 2822):'
+                                    . $e->getMessage(),
+                                    0, $e
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!$date) {
+            $date = null;
+        }
+
+        $this->_data['lastBuildDate'] = $date;
+
+        return $this->_data['lastBuildDate'];
     }
 
     /**
@@ -329,6 +389,60 @@ class RSS extends Reader\AbstractFeed
         $this->_data['id'] = $id;
 
         return $this->_data['id'];
+    }
+
+    /**
+     * Get the feed image data
+     *
+     * @return array|null
+     */
+    public function getImage()
+    {
+        if (array_key_exists('image', $this->_data)) {
+            return $this->_data['image'];
+        }
+
+        if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
+            $this->getType() !== Reader\Reader::TYPE_RSS_090) {
+            $list = $this->_xpath->query('/rss/channel/image');
+            $prefix = '/rss/channel/image[1]';
+        } else {
+            $list = $this->_xpath->query('/rdf:RDF/rss:channel/rss:image');
+            $prefix = '/rdf:RDF/rss:channel/rss:image[1]';
+        }
+        if ($list->length > 0) {
+            $image = array();
+            $value = $this->_xpath->evaluate('string(' . $prefix . '/url)');
+            if ($value) {
+                $image['uri'] = $value;
+            }
+            $value = $this->_xpath->evaluate('string(' . $prefix . '/link)');
+            if ($value) {
+                $image['link'] = $value;
+            }
+            $value = $this->_xpath->evaluate('string(' . $prefix . '/title)');
+            if ($value) {
+                $image['title'] = $value;
+            }
+            $value = $this->_xpath->evaluate('string(' . $prefix . '/height)');
+            if ($value) {
+                $image['height'] = $value;
+            }
+            $value = $this->_xpath->evaluate('string(' . $prefix . '/width)');
+            if ($value) {
+                $image['width'] = $value;
+            }
+            $value = $this->_xpath->evaluate('string(' . $prefix . '/description)');
+            if ($value) {
+                $image['description'] = $value;
+            }
+        } else {
+            $image = null;
+        }
+
+        $this->_data['image'] = $image;
+
+        return $this->_data['image'];
     }
 
     /**
@@ -418,8 +532,8 @@ class RSS extends Reader\AbstractFeed
 
         $link = $this->getExtension('Atom')->getFeedLink();
 
-        if (!$link) {
-            $link = null;
+        if (is_null($link) || empty($link)) {
+            $link = $this->getOriginalSourceUri();
         }
 
         $this->_data['feedlink'] = $link;
@@ -451,9 +565,6 @@ class RSS extends Reader\AbstractFeed
                 $generator = $this->_xpath->evaluate('string(/rss/channel/atom:generator)');
             } else {
                 $generator = $this->_xpath->evaluate('string(/rdf:RDF/rss:channel/atom:generator)');
-            }
-            if ($generator) {
-                $generator = html_entity_decode($generator, ENT_QUOTES, $this->getEncoding());
             }
         }
 

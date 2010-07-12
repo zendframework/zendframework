@@ -149,7 +149,6 @@ abstract class DateObject {
      */
     protected function mktime($hour, $minute, $second, $month, $day, $year, $gmt = false)
     {
-
         // complete date but in 32bit timestamp - use PHP internal
         if ((1901 < $year) and ($year < 2038)) {
 
@@ -240,7 +239,7 @@ abstract class DateObject {
 
                     for ($mcount = 11; $mcount > ($month - 1); $mcount--) {
                         $date += self::$_monthTable[$mcount];
-                        if (($leapyear === true) and ($mcount == 1)) {
+                        if (($leapyear === true) and ($mcount == 2)) {
                             $date++;
                         }
 
@@ -328,7 +327,7 @@ abstract class DateObject {
             }
         }
 
-        // check on false or null alone failes
+        // check on false or null alone fails
         if (empty($gmt) and empty($jump)) {
             $tempstamp = $timestamp;
             if ($tempstamp > 0) {
@@ -349,7 +348,6 @@ abstract class DateObject {
                 self::$_cache->save( serialize($timestamp), $idstamp);
             }
         }
-
 
         if (($timestamp < 0) and ($gmt !== true)) {
             $timestamp -= $this->_offset;

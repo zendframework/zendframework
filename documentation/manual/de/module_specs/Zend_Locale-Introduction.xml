@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21816 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.introduction">
     <title>Einführung</title>
@@ -14,11 +14,11 @@
     </para>
 
     <para>
-        Was wir benötigen ist <ulink url="http://en.wikipedia.org/wiki/L10n">Lokalisierung</ulink>
-        und die vergleichbare <ulink
-            url="http://en.wikipedia.org/wiki/L10n">Internationalisierung</ulink>. Beide werden oft
-        abgekürzt zu <code>L10n</code> und <code>I18n</code>. Internationalisierung bezeichnet mehr
-        die Benutzung von Systemen für die spezielle Benutzung durch eindeutige Gruppen wie zum
+        Was wir benötigen ist <ulink
+            url="http://en.wikipedia.org/wiki/Internationalization_and_localization">Lokalisierung
+            und die vergleichbare Internationalisierung</ulink>. Beide werden oft abgekürzt zu
+        <emphasis>L10n</emphasis> und <emphasis>I18n</emphasis>. Internationalisierung bezeichnet
+        mehr die Benutzung von Systemen für die spezielle Benutzung durch eindeutige Gruppen wie zum
         Beispiel Sprachübersetzung, Unterstützung von lokalen Konventionen für Plurale, Daten,
         Zeiten, Währungen, Namen, Symbolen, Sortierungen, Reihungen und viele mehr.
         <code>L10n</code> und <code>I18n</code> sind einander sehr ähnlich. Zend Framework bietet
@@ -247,8 +247,8 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                         const <constant>Zend_Locale::BROWSER</constant> - Der Webbrowser des
                         Benutzer welcher die Informationen mit jeder Anfrage schickt. Diese wird von
                         <acronym>PHP</acronym> durch die globale Variable
-                        <constant>HTTP_ACCEPT_LANGUAGE</constant> veröffentlicht. Wenn kein
-                        passendes Gebietsschema gefunden wurde, dann wird mit
+                        <constant>$_SERVER['HTTP_ACCEPT_LANGUAGE']</constant> veröffentlicht. Wenn
+                        kein passendes Gebietsschema gefunden wurde, dann wird mit
                         <constant>ENVIRONMENT</constant> gesucht und als letztes mit
                         <constant>FRAMEWORK</constant> gesucht.
                     </para>
@@ -304,7 +304,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                         <code>'browser'</code> - <classname>Zend_Locale</classname> soll mit den
                         Informationen arbeiten die durch den Web Browser des Benutzers geliefert
                         werden. Sie werden von <acronym>PHP</acronym> in der globalen Variable
-                        <constant>HTTP_ACCEPT_LANGUAGE</constant> veröffentlicht.
+                        <constant>$_SERVER['HTTP_ACCEPT_LANGUAGE']</constant> veröffentlicht.
                     </para>
 
                     <para>

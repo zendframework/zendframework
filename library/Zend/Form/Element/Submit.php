@@ -116,7 +116,7 @@ class Submit extends Xhtml
     public function loadDefaultDecorators()
     {
         if ($this->loadDefaultDecoratorsIsDisabled()) {
-            return;
+            return $this;
         }
 
         $decorators = $this->getDecorators();
@@ -125,5 +125,6 @@ class Submit extends Xhtml
                  ->addDecorator('ViewHelper')
                  ->addDecorator('DtDdWrapper');
         }
+        return $this;
     }
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19436 -->
+<!-- EN-Revision: 22090 -->
 <sect3 id="zend.view.helpers.initial.headtitle">
     <title>HeadTitle ヘルパー</title>
 
     <para>
-        HTML の <emphasis>&lt;title&gt;</emphasis> 要素を使用して、
-        HTML ドキュメントのタイトルを設定します。
+        <acronym>HTML</acronym> の <emphasis>&lt;title&gt;</emphasis> 要素を使用して、
+        <acronym>HTML</acronym> ドキュメントのタイトルを設定します。
         <classname>HeadTitle</classname> ヘルパーは、
         プログラム上で作成したタイトルを保存しておいて、
         後で出力の際にそれを取得するためのものです。
@@ -21,10 +21,18 @@
         <methodname>headTitle()</methodname> メソッドによって title
         要素の設定や集約を簡単にできるようになっています。
         このメソッドのシグネチャは
-        <methodname>headTitle($title, $setType = 'APPEND')</methodname>
-        です。デフォルトでは、値はスタック (title 部の内容を集約したもの)
+        <methodname>headTitle($title, $setType = null)</methodname>
+        です。デフォルトでは、 null のままだと、値はスタック (title 部の内容を集約したもの)
         の最後に追加されます。しかしこれを 'PREPEND' (スタックの先頭に追加する)
         や 'SET' (スタック全体を上書きする) にすることもできます。
+    </para>
+
+    <para>
+        Since setting the aggregating (attach) order on each call to <methodname>
+        headTitle</methodname> can be cumbersome, you can set a default attach order
+        by calling <methodname>setDefaultAttachOrder()</methodname> which is applied
+        to all <methodname>headTitle()</methodname> calls unless you explicitly
+        pass a different attach order as the second parameter.
     </para>
 
     <example id="zend.view.helpers.initial.headtitle.basicusage">

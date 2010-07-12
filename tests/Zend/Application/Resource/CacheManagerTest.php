@@ -106,7 +106,7 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/foo', $cacheTemplate['backend']['options']['cache_dir']);
 
     }
-    
+
     public function testShouldCreateNewCacheTemplateIfConfigNotMatchesADefaultTemplate()
     {
         $options = array(
@@ -123,7 +123,7 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
         $cacheTemplate = $manager->getCacheTemplate('foo');
         $this->assertSame($options['foo'], $cacheTemplate);
     }
-    
+
     public function testShouldNotMeddleWithFrontendOrBackendCapitalisation()
     {
         $options = array(
@@ -158,5 +158,33 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
         $manager = $resource->init();
         $cache = $manager->getCache('foo');
         $this->assertTrue($cache instanceof \Zend\Cache\Frontend\Core);
+    }
+
+    /**
+     * @group ZF-9738
+     */
+    public function testZendServer()
+    {
+        if (!function_exists('zend_disk_cache_store')) {
+            $this->markTestSkipped('ZendServer is required for this test');
+        }
+
+        $options = array(
+            'foo' => array(
+                'frontend' => array(
+                    'name' => 'Core',
+                    'options' => array(
+                        'lifetime' => 7200,
+                    ),
+                ),
+                'backend' => array(
+                    'name' => 'ZendServer_Disk',
+                ),
+            ),
+        );
+        $resource = new Zend_Application_Resource_Cachemanager($options);
+        $manager = $resource->init();
+        $cache = $manager->getCache('foo')->getBackend();
+        $this->assertTrue($cache instanceof Zend_Cache_Backend_ZendServer_Disk);
     }
 }

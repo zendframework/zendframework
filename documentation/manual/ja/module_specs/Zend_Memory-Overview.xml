@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20827 -->
 <sect1 id="zend.memory.overview">
     <title>概要</title>
 
     <sect2 id="zend.memory.introduction">
         <title>導入</title>
+
         <para>
             <classname>Zend_Memory</classname> コンポーネントは、
             限られたメモリ環境でデータを管理するためのものです。
@@ -34,6 +35,7 @@
 
         <example id="zend.memory.introduction.example-1">
             <title>Zend_Memory コンポーネントの使用法</title>
+
             <para>
                 <methodname>Zend_Memory::factory()</methodname> は、
                 指定したバックエンドオプションでメモリマネージャオブジェクトの
@@ -71,16 +73,20 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
 
         <para>
             <classname>Zend_Memory</classname> コンポーネントは、以下の概念で構成されています。
+
             <itemizedlist>
                 <listitem>
                     <para>メモリマネージャ</para>
                 </listitem>
+
                 <listitem>
                     <para>メモリコンテナ</para>
                 </listitem>
+
                 <listitem>
                     <para>ロックされたメモリオブジェクト</para>
                 </listitem>
+
                 <listitem>
                     <para>移動可能なメモリオブジェクト</para>
                 </listitem>

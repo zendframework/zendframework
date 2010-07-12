@@ -713,7 +713,7 @@ class App
     public static function import($uri, $client = null,
         $className='\Zend\GData\App\Feed')
     {
-        $app = new App($client);
+        $app = new self($client);
         $requestData = $app->prepareRequest('GET', $uri);
         $response = $app->performHttpRequest(
             $requestData['method'], $requestData['url']);
@@ -794,10 +794,9 @@ class App
         $className='\Zend\GData\App\Feed', $majorProtocolVersion = null,
         $minorProtocolVersion = null)
     {
-//        if (!class_exists($className, false)) {
-//          require_once 'Zend/Loader.php';
-//          @\Zend\Loader::loadClass($className);
-//        }
+        if (!class_exists($className)) {
+            throw new Exception('Invalid class "' . $className . '" provided');
+        }
 
         // Load the feed as an XML DOMDocument object
         @ini_set('track_errors', 1);
@@ -950,6 +949,9 @@ class App
     public function insertEntry($data, $uri, $className='\Zend\GData\App\Entry',
         $extraHeaders = array())
     {
+        if (!class_exists($className)) {
+            throw new Exception('Invalid class provided "' . $className . '"');
+        }
         $response = $this->post($data, $uri, null, null, $extraHeaders);
 
         $returnEntry = new $className($response->getBody());
@@ -986,9 +988,8 @@ class App
             $className = '\Zend\GData\App\Entry';
         }
 
-        if (!class_exists($className, false)) {
-          require_once 'Zend/Loader.php';
-          @\Zend\Loader::loadClass($className);
+        if (!class_exists($className)) {
+            throw new Exception('Invalid class provided "' . $className . '"');
         }
 
         $response = $this->put($data, $uri, null, null, $extraHeaders);
@@ -1025,10 +1026,9 @@ class App
                  try {
                      // Autoloading disabled on next line for compatibility
                      // with magic factories. See ZF-6660.
-                     if (!class_exists($name . '\\' . $class, false)) {
-                         @\Zend\Loader::loadClass($name . '\\' . $class);
+                     if (class_exists($name . '\\' . $class)) {
+                        $foundClassName = $name . '\\' . $class;
                      }
-                     $foundClassName = $name . '\\' . $class;
                      break;
                  } catch (\Zend\Exception $e) {
                      // package wasn't here- continue searching

@@ -1060,7 +1060,7 @@ abstract class AbstractView implements ViewEngine
             case 'helper':
             default:
                 $this->_path[$type] = array(array(
-                    'prefix' => 'Zend\View\\' . ucfirst($type) . '_',
+                    'prefix' => 'Zend\View\\' . ucfirst($type) . '\\',
                     'dir'    => dirname(__FILE__) . $dir
                 ));
                 $this->_addPath($type, $path, $classPrefix);

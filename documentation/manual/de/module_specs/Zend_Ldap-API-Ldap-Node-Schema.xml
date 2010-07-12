@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-node-schema">
     <title>Zend_Ldap_Node_Schema</title>
@@ -33,7 +33,10 @@
             <tbody>
                 <row>
                     <entry><code>Zend_Ldap_Dn getDn()</code></entry>
-                    <entry>Holt den DN des aktuellen Nodes als Zend_Ldap_Dn.</entry>
+
+                    <entry>
+                        Holt den DN des aktuellen Nodes als <classname>Zend_Ldap_Dn</classname>.
+                    </entry>
                 </row>
 
                 <row>

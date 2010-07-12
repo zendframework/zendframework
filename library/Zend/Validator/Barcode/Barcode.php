@@ -131,7 +131,13 @@ class Barcode extends Validator\AbstractValidator
     {
         $adapter = ucfirst(strtolower($adapter));
         $adapter = '\\Zend\\Validator\\Barcode\\' . $adapter;
-        \Zend\Loader::loadClass($adapter);
+        if (\Zend\Loader::isReadable('Zend/Validator/Barcode/' . $adapter . '.php')) {
+            $adapter = '\\Zend\\Validator\\Barcode\\' . $adapter;
+        }
+
+        if (!class_exists($adapter)) {
+            throw new Validator\Exception('Barcode adapter matching "' . $adapter . '" not found');
+        }
 
         $this->_adapter = new $adapter($options);
         if (!$this->_adapter instanceof Adapter) {
@@ -180,7 +186,7 @@ class Barcode extends Validator\AbstractValidator
             return false;
         }
 
-        $this->_value  = (string) $value;
+        $this->_setValue($value);
         $adapter       = $this->getAdapter();
         $this->_length = $adapter->getLength();
         $result        = $adapter->checkLength($value);

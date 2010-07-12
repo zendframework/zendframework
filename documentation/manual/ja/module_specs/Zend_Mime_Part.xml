@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20827 -->
+<!-- EN-Revision: 21825 -->
 <sect1 id="zend.mime.part">
     <title>Zend_Mime_Part</title>
 
@@ -62,14 +62,14 @@ public $language;
                 <listitem>
                     <para>
                         <code>$charset</code>
-                        テキスト型 (Text あるいは HTML) の場合は、実際の文字セットを設定しなければなりません。
+                        テキスト型 (Text あるいは <acronym>HTML</acronym>) の場合は、実際の文字セットを設定しなければなりません。
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <code>$id</code>
-                        HTML メールにおけるインライン画像のための ID を設定します。
+                        <acronym>HTML</acronym> メールにおけるインライン画像のための ID を設定します。
                     </para>
                 </listitem>
 

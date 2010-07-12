@@ -94,6 +94,12 @@ class DomQuery extends \PHPUnit_Framework_Constraint
     protected $_useXpath          = false;
 
     /**
+     * XPath namespaces
+     * @var array
+     */
+    protected $_xpathNamespaces = array();
+
+    /**
      * Constructor; setup constraint state
      *
      * @param  string $path CSS selector path
@@ -152,8 +158,9 @@ class DomQuery extends \PHPUnit_Framework_Constraint
 
         $this->_assertType = $assertType;
 
-        $method   = $this->_useXpath ? 'queryXpath' : 'execute';
+        $method   = $this->_useXpath ? 'queryXpath' : 'query';
         $domQuery = new \Zend\Dom\Query($other);
+        $domQuery->registerXpathNamespaces($this->_xpathNamespaces);
         $result   = $domQuery->$method($this->_path);
         $argv     = func_get_args();
         $argc     = func_num_args();
@@ -260,6 +267,17 @@ class DomQuery extends \PHPUnit_Framework_Constraint
     public function toString()
     {
         return '';
+    }
+
+    /**
+     * Register XPath namespaces
+     *
+     * @param   array $xpathNamespaces
+     * @return  void
+     */
+    public function registerXpathNamespaces($xpathNamespaces)
+    {
+        $this->_xpathNamespaces = $xpathNamespaces;
     }
 
     /**

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 20827 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.progressbar.introduction" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Zend_ProgressBar</title>
+
+    <sect2 id="zend.progressbar.whatisit">
+        <title>Wprowadzenie</title>
+
+        <para>
+            <classname>Zend_ProgressBar</classname> to komponent służący do tworzenia i
+            aktualizacji pasków postępu (progressbar) w różnych środowiskach. Składa się na niego
+            pojedynczy element backendu, który sygnalizuje postęp poprzez jeden z wielu
+            dostępnych adapterów. Podczas każdej aktualizacji brana jest wartość absolutna i
+            opcjonalna wiadomość o stanie postępu a następnie skonfigurowany adapter
+            jest wywoływany z obliczonymi danymi takimi jak procent postępu
+            oraz czas, jaki został do końca wykonywanej akcji.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.progressbar.basic">
+        <title>Podstawowe użycie Zend_Progressbar</title>
+
+        <para>
+            <classname>Zend_ProgressBar</classname> jest komponentem łatwym w użyciu. Należy,
+            po prostu, utworzyć nową instancję klasy <classname>Zend_Progressbar</classname>,
+            definiując wartość minimalną i maksymalną oraz wybrać adapter służący prezentacji
+            danych o postępie działań. W przypadku operacji na pliku, użycie może wyglądać
+            następująco:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$progressBar = new Zend_ProgressBar($adapter, 0, $fileSize);
+
+while (!feof($fp)) {
+    // Wykonanie operacji
+
+    $progressBar->update($currentByteCount);
+}
+
+$progressBar->finish();
+]]></programlisting>
+
+        <para>
+            W pierwszym kroku tworzona jest instancja <classname>Zend_ProgressBar</classname>
+            ze zdefiniowanym adapterem, wartością minimalną: 0, oraz maksymalną równą
+            rozmiarowi pliku. Po tym następuje seria operacji na pliku w pętli.
+            Podczas każdej iteracji pętli, pasek postępu jest aktualizowany danymi o
+            ilości "przerobionych" bajtów pliku.
+        </para>
+
+        <para>
+            Metodę <methodname>update()</methodname> klasy <classname>Zend_ProgressBar</classname>
+            można również wywoływać bez argumentów. Powoduje to przeliczenie czasu do końca
+            wykonywanej akcji i wysłanie go do adaptera. Ten sposób może być przydatny gdy nie
+            ma konkretnych danych do wysłania adapterowi ale niezbędna jest aktualizacja
+            paska postępu. 
+        </para>
+    </sect2>
+
+    <sect2 id="zend.progressbar.persistent">
+        <title>Postęp utrwalony (persistent progress)</title>
+
+        <para>
+            Jeśli zajdzie potrzeba utrzymania paska postępu przez wiele żądań, można w tym celu
+            podać łańcuch znaków z przestrzenią nazw sesji
+            jako czwarty argument konstruktora. W tym przypadku
+            pasek postępu nie uaktualni adaptera w momencie konstruowania - niezbędne będzie
+            wywołanie metody <methodname>update()</methodname>
+            lub <methodname>finish()</methodname>.
+            Obecna wartość, tekst stanu postępu oraz czas rozpoczęcia działania
+            (wymagany przy obliczaniu czasu pozostałego do końca) będą pobrane podczas następnego
+            żądania i uruchomienia skryptu.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.progressbar.adapters">
+        <title>Standardowe adaptery</title>
+
+        <para>
+            Standardowo <classname>Zend_ProgressBar</classname> ma do dyspozycji następujące
+            adaptery:
+            <itemizedlist mark="opencircle">
+                <listitem>
+                    <para><xref linkend="zend.progressbar.adapter.console" /></para>
+                </listitem>
+                <listitem><para><xref linkend="zend.progressbar.adapter.jspush" /></para></listitem>
+                <listitem><para><xref linkend="zend.progressbar.adapter.jspull" /></para></listitem>
+            </itemizedlist>
+        </para>
+
+        <xi:include href="Zend_ProgressBar_Adapter_Console.xml" />
+        <xi:include href="Zend_ProgressBar_Adapter_JsPush.xml" />
+        <xi:include href="Zend_ProgressBar_Adapter_JsPull.xml" />
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

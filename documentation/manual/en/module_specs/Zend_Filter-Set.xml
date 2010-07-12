@@ -7,83 +7,18 @@
         Zend Framework comes with a standard set of filters, which are ready for you to use.
     </para>
 
-    <sect2 id="zend.filter.set.alnum">
-        <title>Alnum</title>
-
-        <para>
-            Returns the string <varname>$value</varname>, removing all but alphabetic and digit
-            characters. This filter includes an option to also allow white space characters.
-        </para>
-
-        <note>
-            <para>
-                The alphabetic characters mean characters that makes up words in each language.
-                However, the english alphabet is treated as the alphabetic characters in following
-                languages: Chinese, Japanese, Korean. The language is specified by
-                <classname>Zend_Locale</classname>.
-            </para>
-        </note>
-
-    </sect2>
-
-    <sect2 id="zend.filter.set.alpha">
-        <title>Alpha</title>
-
-        <para>
-            Returns the string <varname>$value</varname>, removing all but alphabetic characters.
-            This filter includes an option to also allow white space characters.
-        </para>
-    </sect2>
-
-    <sect2 id="zend.filter.set.basename">
-        <title>BaseName</title>
-
-        <para>
-            Given a string containing a path to a file, this filter will return the base
-            name of the file
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Filter-Alnum.xml" />
+    <xi:include href="Zend_Filter-Alpha.xml" />
+    <xi:include href="Zend_Filter-BaseName.xml" />
     <xi:include href="Zend_Filter-Boolean.xml" />
     <xi:include href="Zend_Filter-Callback.xml" />
     <xi:include href="Zend_Filter-Compress.xml" />
     <xi:include href="Zend_Filter-Decryption.xml" />
-
-    <sect2 id="zend.filter.set.digits">
-        <title>Digits</title>
-
-        <para>
-            Returns the string <varname>$value</varname>, removing all but digit characters.
-        </para>
-    </sect2>
-
-    <sect2 id="zend.filter.set.dir">
-        <title>Dir</title>
-
-        <para>
-            Returns directory name component of path.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Filter-Digits.xml" />
+    <xi:include href="Zend_Filter-Dir.xml" />
     <xi:include href="Zend_Filter-Encryption.xml" />
-
-    <sect2 id="zend.filter.set.htmlentities">
-        <title>HtmlEntities</title>
-
-        <para>
-            Returns the string <varname>$value</varname>, converting characters to their
-            corresponding <acronym>HTML</acronym> entity equivalents where they exist.
-        </para>
-    </sect2>
-
-    <sect2 id="zend.filter.set.int">
-        <title>Int</title>
-
-        <para>
-            Returns (int) <varname>$value</varname>
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Filter-HtmlEntities.xml" />
+    <xi:include href="Zend_Filter-Int.xml" />
     <xi:include href="Zend_Filter-LocalizedToNormalized.xml" />
     <xi:include href="Zend_Filter-NormalizedToLocalized.xml" />
     <xi:include href="Zend_Filter-Null.xml" />
@@ -91,15 +26,7 @@
     <xi:include href="Zend_Filter-RealPath.xml" />
     <xi:include href="Zend_Filter-StringToLower.xml" />
     <xi:include href="Zend_Filter-StringToUpper.xml" />
-
-    <sect2 id="zend.filter.set.stringtrim">
-        <title>StringTrim</title>
-
-        <para>
-            Returns the string <varname>$value</varname> with characters stripped from the
-            beginning and end.
-        </para>
-    </sect2>
+    <xi:include href="Zend_Filter-StringTrim.xml" />
 
     <sect2 id="zend.filter.set.stripnewlines">
         <title>StripNewlines</title>

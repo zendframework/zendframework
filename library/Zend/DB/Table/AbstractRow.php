@@ -36,7 +36,7 @@ namespace Zend\DB\Table;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractRow implements \ArrayAccess
+abstract class AbstractRow implements \ArrayAccess, \IteratorAggregate
 {
 
     /**
@@ -635,6 +635,16 @@ abstract class AbstractRow implements \ArrayAccess
     }
 
     /**
+     * Defined by IteratorAggregate
+     * 
+     * @return \Iterator
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator((array) $this->_data);
+    }
+    
+    /**
      * Returns the column/value data as an array.
      *
      * @return array
@@ -1062,13 +1072,9 @@ abstract class AbstractRow implements \ArrayAccess
         );
 
         $rowsetClass = $matchTable->getRowsetClass();
-//        if (!class_exists($rowsetClass)) {
-//            try {
-//                end\Loader::loadClass($rowsetClass);
-//            } catch (end\Exception $e) {
-//                throw new RowException($e->getMessage(), $e->getCode(), $e);
-//            }
-//        }
+        if (!class_exists($rowsetClass)) {
+            throw new RowException('Unable to find rowset class by name of "' . $rowsetClass . '"');
+        }
         $rowset = new $rowsetClass($config);
         return $rowset;
     }
@@ -1152,14 +1158,10 @@ abstract class AbstractRow implements \ArrayAccess
             }
         }
 
-//        // assume the tableName is the class name
-//        if (!class_exists($tableName)) {
-//            try {
-//                end\Loader::loadClass($tableName);
-//            } catch (end\Exception $e) {
-//                throw new RowException($e->getMessage(), $e->getCode(), $e);
-//            }
-//        }
+        // assume the tableName is the class name
+        if (!class_exists($tableName)) {
+            throw new RowException('Unable to find table class by name "' . $tableName . '"');
+        }
 
         $options = array();
 
@@ -1171,10 +1173,6 @@ abstract class AbstractRow implements \ArrayAccess
             $options[AbstractTable::DEFINITION] = $tableDefinition;
         }
 
-        if (class_exists($tableName, true) == false) {
-            throw new RowException('Class ' . $tableName . ' not found');
-        }
-        
         return new $tableName($options);
     }
 

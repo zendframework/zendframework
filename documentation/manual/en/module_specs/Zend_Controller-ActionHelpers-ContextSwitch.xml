@@ -156,7 +156,7 @@ class NewsController extends Zend_Controller_Action
 
         <para>
             By default, two contexts are available to the
-            <emphasis>ContextSwitch</emphasis> helper: json and xml.
+            <emphasis>ContextSwitch</emphasis> helper: json and <acronym>XML</acronym>.
         </para>
 
         <itemizedlist>

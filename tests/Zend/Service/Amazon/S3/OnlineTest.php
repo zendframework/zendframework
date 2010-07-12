@@ -277,6 +277,46 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_amazon->isObjectAvailable($this->_bucket."/zftestfile"));
     }
 
+    /**
+     * @depends testCreateBucket
+     * @depends testCreateObject
+     */
+    public function testCopyObject()
+    {
+        $this->_amazon->createBucket($this->_bucket);
+        $data = "testdata";
+
+        $this->_amazon->putObject($this->_bucket."/zftest", $data);
+        $info1 = $this->_amazon->getInfo($this->_bucket."/zftest");
+
+        $this->_amazon->copyObject($this->_bucket."/zftest", $this->_bucket."/zftest2");
+        $this->assertTrue($this->_amazon->isObjectAvailable($this->_bucket."/zftest"));
+        $this->assertTrue($this->_amazon->isObjectAvailable($this->_bucket."/zftest2"));
+        $info2 = $this->_amazon->getInfo($this->_bucket."/zftest2");
+
+        $this->assertEquals($info1['etag'], $info2['etag']);
+    }
+
+    /**
+     * @depends testCopyObject
+     * @depends testRemoveObject
+     */
+    public function testMoveObject()
+    {
+        $this->_amazon->createBucket($this->_bucket);
+        $data = "testdata";
+
+        $this->_amazon->putObject($this->_bucket."/zftest", $data);
+        $info1 = $this->_amazon->getInfo($this->_bucket."/zftest");
+
+        $this->_amazon->moveObject($this->_bucket."/zftest", $this->_bucket."/zftest2");
+        $this->assertFalse($this->_amazon->isObjectAvailable($this->_bucket."/zftest"));
+        $this->assertTrue($this->_amazon->isObjectAvailable($this->_bucket."/zftest2"));
+        $info2 = $this->_amazon->getInfo($this->_bucket."/zftest2");
+
+        $this->assertEquals($info1['etag'], $info2['etag']);
+    }
+
     public function testObjectEncoding()
     {
         $this->_amazon->createBucket($this->_bucket);

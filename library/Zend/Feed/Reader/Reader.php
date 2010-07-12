@@ -276,7 +276,9 @@ class Reader
             if ($response->getStatus() !== 200) {
                 throw new \Zend\Feed\Exception('Feed failed to load, got response code ' . $response->getStatus());
             }
-            return self::importString($response->getBody());
+            $reader = self::importString($response->getBody());
+            $reader->setOriginalSourceUri($uri);
+            return $reader;
         }
     }
 
@@ -406,7 +408,7 @@ class Reader
         } elseif(is_string($feed) && !empty($feed)) {
             @ini_set('track_errors', 1);
             $dom = new \DOMDocument;
-            $status = @$doc->loadXML($string);
+            $status = @$dom->loadXML($string);
             @ini_restore('track_errors');
             if (!$status) {
                 if (!isset($php_errormsg)) {

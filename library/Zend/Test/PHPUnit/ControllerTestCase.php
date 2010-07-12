@@ -79,6 +79,12 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     protected $_response;
 
     /**
+     * XPath namespaces
+     * @var array
+     */
+    protected $_xpathNamespaces = array();
+
+    /**
      * Overloading: prevent overloading to special properties
      *
      * @param  string $name
@@ -452,6 +458,17 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Register XPath namespaces
+     *
+     * @param   array $xpathNamespaces
+     * @return  void
+     */
+    public function registerXpathNamespaces($xpathNamespaces)
+    {
+        $this->_xpathNamespaces = $xpathNamespaces;
+    }
+
+    /**
      * Assert against XPath selection
      *
      * @param  string $path XPath path
@@ -462,6 +479,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     {
         $this->_incrementAssertionCount();
         $constraint = new Constraint\DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__)) {
             $constraint->fail($path, $message);
@@ -479,6 +497,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     {
         $this->_incrementAssertionCount();
         $constraint = new Constraint\DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__)) {
             $constraint->fail($path, $message);
@@ -497,6 +516,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     {
         $this->_incrementAssertionCount();
         $constraint = new Constraint\DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $match)) {
             $constraint->fail($path, $message);
@@ -515,6 +535,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     {
         $this->_incrementAssertionCount();
         $constraint = new Constraint\DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $match)) {
             $constraint->fail($path, $message);
@@ -533,6 +554,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     {
         $this->_incrementAssertionCount();
         $constraint = new Constraint\DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $pattern)) {
             $constraint->fail($path, $message);
@@ -551,6 +573,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     {
         $this->_incrementAssertionCount();
         $constraint = new Constraint\DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $pattern)) {
             $constraint->fail($path, $message);
@@ -569,6 +592,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     {
         $this->_incrementAssertionCount();
         $constraint = new Constraint\DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $count)) {
             $constraint->fail($path, $message);
@@ -587,6 +611,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     {
         $this->_incrementAssertionCount();
         $constraint = new Constraint\DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $count)) {
             $constraint->fail($path, $message);
@@ -605,6 +630,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     {
         $this->_incrementAssertionCount();
         $constraint = new Constraint\DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $count)) {
             $constraint->fail($path, $message);
@@ -623,6 +649,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     {
         $this->_incrementAssertionCount();
         $constraint = new Constraint\DomQuery($path);
+        $constraint->registerXpathNamespaces($this->_xpathNamespaces);
         $content    = $this->response->outputBody();
         if (!$constraint->evaluate($content, __FUNCTION__, $count)) {
             $constraint->fail($path, $message);

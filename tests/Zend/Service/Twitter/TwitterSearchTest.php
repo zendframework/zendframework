@@ -17,17 +17,26 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: TwitterSearchTest.php 22318 2010-05-29 18:24:27Z padraic $
+ * @version    $Id$
  */
 
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Service_Twitter_TwitterSearchTest::main');
+}
+
 /**
- * @namespace
+ * Test helper
  */
-namespace ZendTest\Service\Twitter;
-use Zend\Service;
-use Zend\Service\Twitter;
-use Zend\HTTP;
-use Zend\REST;
+require_once dirname(__FILE__) . '/../../../TestHelper.php';
+
+/** Zend_Service_Twitter_Search */
+require_once 'Zend/Service/Twitter/Search.php';
+
+/** Zend_Http_Client */
+require_once 'Zend/Http/Client.php';
+
+/** Zend_Http_Client_Adapter_Test */
+require_once 'Zend/Http/Client/Adapter/Test.php';
 
 /**
  * @category   Zend
@@ -38,8 +47,18 @@ use Zend\REST;
  * @group      Zend_Service
  * @group      Zend_Service_Twitter
  */
-class TwitterSearchTest extends \PHPUnit_Framework_TestCase
+class Zend_Service_Twitter_TwitterSearchTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * Runs the test methods of this class.
+     *
+     * @return void
+     */
+    public static function main()
+    {
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = PHPUnit_TextUI_TestRunner::run($suite);
+    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -55,9 +74,8 @@ class TwitterSearchTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Twitter tests are not enabled');
             return;
         }
-        $this->markTestIncomplete('Need to port this over to Zend\Feed\Reader');
-        return;
-        $this->twitter = new Twitter\Search();
+
+        $this->twitter = new Zend_Service_Twitter_Search();
     }
 
     public function testSetResponseTypeToJSON()
@@ -77,7 +95,7 @@ class TwitterSearchTest extends \PHPUnit_Framework_TestCase
         try {
             $this->twitter->setResponseType('xml');
             $this->fail('Setting an invalid response type should throw an exception');
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
         }
     }
 
@@ -85,7 +103,7 @@ class TwitterSearchTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $this->twitter->setResponseType('atom');
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->fail('Setting a valid response type should not throw an exception');
         }
     }
@@ -160,4 +178,8 @@ class TwitterSearchTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($response instanceof Zend_Feed_Atom);
 
     }
+}
+
+if (PHPUnit_MAIN_METHOD == 'Zend_Service_TwitterSearchTest::main') {
+    Zend_Service_TwitterSearchTest::main();
 }

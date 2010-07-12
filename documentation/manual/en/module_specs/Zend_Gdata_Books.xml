@@ -50,16 +50,16 @@
 
         <para>
             The most common action is to retrieve a list of books that match a
-            search query. To do so you create a <code>VolumeQuery</code> object
-            and pass it to the <code>Books::getVolumeFeed</code> method.
+            search query. To do so you create a <classname>VolumeQuery</classname> object
+            and pass it to the <methodname>Books::getVolumeFeed()</methodname> method.
         </para>
 
         <para>
             For example, to perform a keyword query, with a filter on
             viewability to restrict the results to partial or full view books, use
-            the <code>setMinViewability</code> and <code>setQuery</code> methods
-            of the <code>VolumeQuery</code> object. The following code snippet prints
-            the title and viewability of all volumes whose metadata or text matches
+            the <methodname>setMinViewability()</methodname> and <methodname>setQuery()</methodname>
+            methods of the <classname>VolumeQuery</classname> object. The following code snippet
+            prints the title and viewability of all volumes whose metadata or text matches
             the query term "domino":
         </para>
 
@@ -80,8 +80,8 @@ foreach ($feed as $entry) {
 ]]></programlisting>
 
         <para>
-            The <code>Query</code> class, and subclasses like
-            <code>VolumeQuery</code>, are responsible for constructing feed
+            The <classname>Query</classname> class, and subclasses like
+            <classname>VolumeQuery</classname>, are responsible for constructing feed
             <acronym>URL</acronym>s. The VolumeQuery shown above constructs a <acronym>URL</acronym>
             equivalent to the following:
         </para>
@@ -96,63 +96,63 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
         </para>
 
         <para>
-            Here are some of the most common <code>VolumeQuery</code>
+            Here are some of the most common <classname>VolumeQuery</classname>
             methods for setting search parameters:
         </para>
 
         <para>
-            <code>setQuery:</code> Specifies a search
+            <methodname>setQuery()</methodname>: Specifies a search
             query term. Book Search searches all book metadata and full text for
             books matching the term. Book metadata includes titles, keywords,
             descriptions, author names, and subjects.
             Note that any spaces, quotes or other punctuation in the parameter
-            value must be <acronym>URL</acronym>-escaped. (Use a plus (<code>+</code>) for a space.)
-            To search for an exact phrase, enclose the phrase in quotation marks.
+            value must be <acronym>URL</acronym>-escaped (Use a plus (<emphasis>+</emphasis>) for a
+            space). To search for an exact phrase, enclose the phrase in quotation marks.
             For example, to search for books matching the phrase "spy plane", set
-            the <code>q</code> parameter to <code>%22spy+plane%22</code>.
+            the <property>q</property> parameter to <command>%22spy+plane%22</command>.
             You can also use any of the <ulink url="http://books.google.com/advanced_book_search">
             advanced search operators</ulink> supported by Book Search. For example,
-            <code>jane+austen+-inauthor:austen</code> returns matches that mention
+            <command>jane+austen+-inauthor:austen</command> returns matches that mention
             (but are not authored by) Jane Austen.
         </para>
 
         <para>
-            <code>setStartIndex:</code> Specifies
+            <methodname>setStartIndex()</methodname>: Specifies
             the index of the first matching result that should be included in the
             result set. This parameter uses a one-based index, meaning the first
             result is 1, the second result is 2 and so forth. This parameter works
             in conjunction with the max-results
             parameter to determine which results to return. For example, to
             request the third set of 10 results—results 21-30—set
-            the <code>start-index</code> parameter to <code>21</code> and the
-            max-results parameter to <code>10</code>.
+            the <property>start-index</property> parameter to <emphasis>21</emphasis> and the
+            max-results parameter to <emphasis>10</emphasis>.
             Note: This isn't a general cursoring
             mechanism. If you first send a query with
-            <code>?start-index=1&amp;max-results=10</code> and then send another
-            query with <code>?start-index=11&amp;max-results=10</code>, the
+            <command>?start-index=1&amp;max-results=10</command> and then send another
+            query with <command>?start-index=11&amp;max-results=10</command>, the
             service cannot guarantee that the results are equivalent to
-            <code>?start-index=1&amp;max-results=20</code>, because insertions and
+            <command>?start-index=1&amp;max-results=20</command>, because insertions and
             deletions could have taken place in between the two queries.
         </para>
 
         <para>
-            <code>setMaxResults:</code>
+            <methodname>setMaxResults()</methodname>:
             Specifies the maximum number of results that should be included
             in the result set. This parameter works in conjunction with the
             start-index parameter to determine which
             results to return. The default value of this parameter is
-            <code>10</code> and the maximum value is <code>20</code>.
+            <emphasis>10</emphasis> and the maximum value is <emphasis>20</emphasis>.
         </para>
 
         <para>
-            <code>setMinViewability:</code> Allows you to filter the results according to the books'
-            <ulink
+            <methodname>setMinViewability()</methodname>: Allows you to filter the results according
+            to the books' <ulink
                 url="http://code.google.com/apis/books/docs/dynamic-links.html#terminology">viewability
-                status</ulink>. This parameter accepts one of three values: <code>'none'</code>
-            (the default, returning all matching books regardless of
-            viewability), <code>'partial_view'</code> (returning only books
+                status</ulink>. This parameter accepts one of three values:
+            <emphasis>'none'</emphasis> (the default, returning all matching books regardless of
+            viewability), <emphasis>'partial_view'</emphasis> (returning only books
             that the user can preview or view in their entirety), or
-            <code>'full_view'</code> (returning only books that the user can
+            <emphasis>'full_view'</emphasis> (returning only books that the user can
             view in their entirety).
         </para>
 
@@ -189,7 +189,7 @@ http://www.google.com/books/feeds/p/PARTNER_COBRAND_ID/volumes?q=ball+-soccer
 
             <para>
                 To specify an alternate <acronym>URL</acronym> when querying a volume feed, you can
-                provide an extra parameter to <code>newVolumeQuery</code>
+                provide an extra parameter to <methodname>newVolumeQuery()</methodname>
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -217,9 +217,9 @@ $query =
             </para>
 
             <para>
-                To add a rating, add a <code>Rating</code> object to a
-                <code>VolumeEntry</code> and post it to the annotation feed.
-                In the example below, we start from an empty <code>VolumeEntry</code> object.
+                To add a rating, add a <classname>Rating</classname> object to a
+                <classname>VolumeEntry</classname> and post it to the annotation feed. In the
+                example below, we start from an empty <classname>VolumeEntry</classname> object.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -244,10 +244,10 @@ $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
                 <title>Adding a review</title>
 
                 <para>
-                    To add a review, add a <code>Review</code> object to a
-                    <code>VolumeEntry</code> and post it to the annotation
+                    To add a review, add a <classname>Review</classname> object to a
+                    <classname>VolumeEntry</classname> and post it to the annotation
                     feed. In the example below, we start from an existing
-                    <code>VolumeEntry</code> object.
+                    <classname>VolumeEntry</classname> object.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -294,9 +294,9 @@ $books->updateVolume($entry, $entryUrl);
                 <title>Submitting a set of labels</title>
 
                 <para>
-                    To submit labels, add a <code>Category</code> object
+                    To submit labels, add a <classname>Category</classname> object
                     with the scheme <constant>LABELS_SCHEME</constant> to a
-                    <code>VolumeEntry</code> and post it to the annotation feed.
+                    <classname>VolumeEntry</classname> and post it to the annotation feed.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -318,7 +318,8 @@ $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
                 submitted by a given user. Annotations include reviews, ratings, and
                 labels. To retrieve any user's annotations, you can send an
                 unauthenticated request that includes the user's user ID. To retrieve the
-                authenticated user's annotations, use the value <code>me</code> as the user ID.
+                authenticated user's annotations, use the value <emphasis>me</emphasis> as the user
+                ID.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -351,7 +352,7 @@ foreach ($feed as $entry) {
             <para>
                 If you retrieved an annotation entry containing ratings,
                 reviews, and/or labels, you can remove all annotations
-                by calling <code>deleteVolume</code> on that entry.
+                by calling <methodname>deleteVolume()</methodname> on that entry.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -395,7 +396,7 @@ $books->deleteVolume($entry);
                 <para>
                     To retrieve the user's books, send a query to the
                     My Library feed. To get the library of the authenticated
-                    user, use <code>me</code> in place of <constant>USER_ID</constant>.
+                    user, use <emphasis>me</emphasis> in place of <constant>USER_ID</constant>.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -405,7 +406,7 @@ $feed = $books->getUserLibraryFeed();
                 <para>
                     Note: The feed may not contain all of the user's books, because
                     there's a default limit on the number of results returned. For
-                    more information, see the <code>max-results</code> query parameter in
+                    more information, see the <property>max-results</property> query parameter in
                     <ulink url="#zend.gdata.books.searching_for_books">Searching for books</ulink>.
                 </para>
             </sect4>
@@ -418,7 +419,7 @@ $feed = $books->getUserLibraryFeed();
                         url="#zend.gdata.books.searching_for_books">search across all books</ulink>,
                     you can do a full-text search over just the books in a
                     user's library. To do this, just set the appropriate
-                    paramters on the <code>VolumeQuery</code> object.
+                    paramters on the <classname>VolumeQuery</classname> object.
                 </para>
 
                 <para>
@@ -490,7 +491,7 @@ $books->insertVolume(
 
                 <para>
                     The following example adds an existing
-                    <code>VolumeEntry</code> object to the library:
+                    <classname>VolumeEntry</classname> object to the library:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -506,7 +507,8 @@ $books->insertVolume(
 
                 <para>
                     To remove a book from a user's library, call
-                    <code>deleteVolume</code> on the <code>VolumeEntry</code> object.
+                    <methodname>deleteVolume()</methodname> on the
+                    <classname>VolumeEntry</classname> object.
                 </para>
 
                 <programlisting language="php"><![CDATA[

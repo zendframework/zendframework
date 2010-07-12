@@ -4,8 +4,8 @@
     <title>HeadScript Helper</title>
 
     <para>
-        The HTML <emphasis>&lt;script&gt;</emphasis> element is used to either provide
-        inline client-side scripting elements or link to a remote resource
+        The <acronym>HTML</acronym> <emphasis>&lt;script&gt;</emphasis> element is used to either
+        provide inline client-side scripting elements or link to a remote resource
         containing client-side scripting code. The <classname>HeadScript</classname>
         helper allows you to manage both.
     </para>
@@ -89,6 +89,7 @@
 
         <example id="zend.view.helpers.initial.headscript.conditional">
             <title>Headscript With Conditional Comments</title>
+
             <programlisting language="php"><![CDATA[
 // adding scripts
 $this->headScript()->appendFile(
@@ -138,7 +139,7 @@ $this->headScript()->appendFile(
         <para>
             <classname>HeadScript</classname>'s sibling helper, <link
                 linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>,
-            should be used when you wish to include scripts inline in the HTML
+            should be used when you wish to include scripts inline in the <acronym>HTML</acronym>
             <emphasis>body</emphasis>. Placing scripts at the end of your document is a
             good practice for speeding up delivery of your page, particularly
             when using 3rd party analytics scripts.

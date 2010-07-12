@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20760 -->
+<!-- EN-Revision: 21826 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.oauth.introduction.security-architecture">
     <title>Architektur der Sicherheit</title>
 
     <para>
-        OAuth wurde speziell designt um über eine unsichere HTTP Verbindung zu arbeiten und deshalb
-        ist die Verwendung von HTTPS nicht notwendig obwohl es natürlich wünschenswert wäre wenn es
-        vorhanden ist. Sollte eine HTTPS Verbindung möglich sein bietet OAuth die Implementation
-        einer Signaturmethode an welche PLAINTEXT heißt und verwendet werden kann. Über eine
-        typische unsichere HTTP Verbindung muss die Verwendung von PLAINTEXT verhindert werden und
+        OAuth wurde speziell designt um über eine unsichere <acronym>HTTP</acronym> Verbindung zu
+        arbeiten und deshalb ist die Verwendung von <acronym>HTTPS</acronym> nicht notwendig obwohl
+        es natürlich wünschenswert wäre wenn es vorhanden ist. Sollte eine <acronym>HTTPS</acronym>
+        Verbindung möglich sein bietet OAuth die Implementation einer Signaturmethode an welche
+        PLAINTEXT heißt und verwendet werden kann. Über eine typische unsichere
+        <acronym>HTTP</acronym> Verbindung muss die Verwendung von PLAINTEXT verhindert werden und
         ein alternatives Schema wird verwendet. Die OAuth Spezifikation definiert zwei solcher
         Signaturmethoden: HMAC-SHA1 und RSA-SHA1. Beide werden von <classname>Zend_Oauth</classname>
         vollständig unterstützt.
@@ -17,14 +18,15 @@
 
     <para>
         Diese Signaturmethoden sind recht einfach zu verstehen. Wie man sich vorstellen kann macht
-        die PLAINTEXT Signaturmethode nichts das erwähnenswert wäre da Sie auf HTTPS aufsetzt. Wenn
-        man aber PLAINTEXT über HTTP verwenden würde, dann würde ein signifikantes Problem bestehen:
-        Es gibt keinen Weg um sicherzustellen das der Inhalt einer OAuth-aktivierten Anfrage (welche
-        einen OAuth Zugriffstoken enthalten würde) beim Routen verändert wurde. Das ist der Fall
-        weil unsichere HTTP Anfragen immer das Risiko des Lauschens, von Man In The Middle (MITM)
-        Attacken, oder andere Risiken haben können in denen eine Anfrage weiterbearbeitet werden
-        könnten und damit Arbeiten im Sinne des Angreifers ausgeführt werden indem sich dieser
-        als Originalanwendung maskiert ohne das dies vom Serviceprovider bemerkt wird.
+        die PLAINTEXT Signaturmethode nichts das erwähnenswert wäre da Sie auf
+        <acronym>HTTPS</acronym> aufsetzt. Wenn man aber PLAINTEXT über <acronym>HTTP</acronym>
+        verwenden würde, dann würde ein signifikantes Problem bestehen: Es gibt keinen Weg um
+        sicherzustellen das der Inhalt einer OAuth-aktivierten Anfrage (welche einen OAuth
+        Zugriffstoken enthalten würde) beim Routen verändert wurde. Das ist der Fall weil unsichere
+        <acronym>HTTP</acronym> Anfragen immer das Risiko des Lauschens, von Man In The Middle
+        (MITM) Attacken, oder andere Risiken haben können in denen eine Anfrage weiterbearbeitet
+        werden könnten und damit Arbeiten im Sinne des Angreifers ausgeführt werden indem sich
+        dieser als Originalanwendung maskiert ohne das dies vom Serviceprovider bemerkt wird.
     </para>
 
     <para>
@@ -82,11 +84,12 @@
 
     <para>
         Als letzter Punkt erwähnt, ist dies keine exzessive Ansicht der Sicherheitsarchitektur in
-        OAuth. Was passiert zum Beispiel wenn HTTP Anfragen welche sowohl den Zugriffstoken als auch
-        das Geheimnis des Konsumenten enthalten abgehört werden? Das System ist auf der einen Seite
-        von einer klaren Übermittlung von allem abhängig solange HTTPS nicht aktiv ist. Deshalb ist
-        die naheliegende Feststellung das HTTPS, dort wo es möglich ist zu bevorzugen ist und HTTP
-        nur an solchen Orten eingesetzt wird so es nicht anders möglich oder nicht erschwinglich
-        ist.
+        OAuth. Was passiert zum Beispiel wenn <acronym>HTTP</acronym> Anfragen welche sowohl den
+        Zugriffstoken als auch das Geheimnis des Konsumenten enthalten abgehört werden? Das System
+        ist auf der einen Seite von einer klaren Übermittlung von allem abhängig solange
+        <acronym>HTTPS</acronym> nicht aktiv ist. Deshalb ist die naheliegende Feststellung das
+        <acronym>HTTPS</acronym>, dort wo es möglich ist zu bevorzugen ist und
+        <acronym>HTTP</acronym> nur an solchen Orten eingesetzt wird so es nicht anders möglich oder
+        nicht erschwinglich ist.
     </para>
 </sect2>

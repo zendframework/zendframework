@@ -203,9 +203,45 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->getHeaderCheck());
         $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
     }
-}
 
-// Call Zend_Validate_File_MimeTypeTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Validate_File_MimeTypeTest::main") {
-    \Zend_Validate_File_MimeTypeTest::main();
+    /**
+     * @group ZF-9686
+     */
+    public function testDualValidation()
+    {
+        $valuesExpected = array(
+            array('image', true),
+        );
+
+        $filetest = __DIR__ . '/_files/picture.jpg';
+        $files = array(
+            'name'     => 'picture.jpg',
+            'type'     => 'image/jpg',
+            'size'     => 200,
+            'tmp_name' => $filetest,
+            'error'    => 0
+        );
+
+        foreach ($valuesExpected as $element) {
+            $options   = array_shift($element);
+            $expected  = array_shift($element);
+            $validator = new File\MimeType($options);
+            $validator->enableHeaderCheck();
+            $this->assertEquals(
+                $expected,
+                $validator->isValid($filetest, $files),
+                "Test expected " . var_export($expected, 1) . " with " . var_export($options, 1)
+                . "\nMessages: " . var_export($validator->getMessages(), 1)
+            );
+
+            $validator = new File\MimeType($options);
+            $validator->enableHeaderCheck();
+            $this->assertEquals(
+                $expected,
+                $validator->isValid($filetest, $files),
+                "Test expected " . var_export($expected, 1) . " with " . var_export($options, 1)
+                . "\nMessages: " . var_export($validator->getMessages(), 1)
+            );
+        }
+    }
 }

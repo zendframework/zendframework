@@ -25,13 +25,12 @@
  */
 namespace Zend\Markup\Renderer;
 
-use Zend\Markup\AbstractRenderer,
-    Zend\Markup\Token;
+use Zend\Markup\Token;
 
 /**
  * Interface for a markup
  *
- * @uses       \Zend\Markup\AbstractRenderer
+ * @uses       \Zend\Markup\Renderer\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup
@@ -53,7 +52,7 @@ interface Markup
     /**
      * Set the renderer on this markup
      *
-     * @param \Zend\Markup\AbstractRenderer $renderer
+     * @param \Zend\Markup\Renderer\AbstractRenderer $renderer
      *
      * @return \Zend\Markup\Renderer\Markup
      */

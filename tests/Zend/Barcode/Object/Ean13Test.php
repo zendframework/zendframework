@@ -114,6 +114,8 @@ class Ean13Test extends TestCommon
     {
         $this->_object->setText('000123456789');
         $this->assertEquals(115, $this->_object->getWidth());
+        $this->_object->setWithQuietZones(false);
+        $this->assertEquals(115, $this->_object->getWidth(true));
     }
 
     public function testCompleteGeneration()

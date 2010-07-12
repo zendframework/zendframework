@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18536 -->
+<!-- EN-Revision: 20854 -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>インデックスの構築</title>
 
@@ -11,7 +11,7 @@
             インデックスの作成機能および更新機能は、
             <classname>Zend_Search_Lucene</classname> モジュールと Java Lucene で実装されています。
             これらのいずれかの機能を使用して作成したインデックスについて、
-            <classname>Zend_Search_Lucene</classname> による検索が可能です。
+            <classname>Zend_Search_Lucene</classname> により検索できます。
         </para>
 
         <para>

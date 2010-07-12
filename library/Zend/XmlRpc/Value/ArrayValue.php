@@ -67,8 +67,6 @@ class ArrayValue extends Collection
         $generator->closeElement('data')
                   ->closeElement('array')
                   ->closeElement('value');
-
-        $this->_xml = (string)$generator;
     }
 }
 

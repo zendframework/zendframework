@@ -66,12 +66,12 @@ class Transfer
      */
     public function setAdapter($adapter, $direction = false, $options = array())
     {
-        if (end\Loader::isReadable('Zend/File/Transfer/Adapter/' . ucfirst($adapter). '.php')) {
-            $adapter = 'Zend_File_Transfer_Adapter_' . ucfirst($adapter);
+        if (\Zend\Loader::isReadable('Zend/File/Transfer/Adapter/' . ucfirst($adapter). '.php')) {
+            $adapter = 'Zend\File\Transfer\Adapter\\' . ucfirst($adapter);
         }
 
         if (!class_exists($adapter)) {
-            end\Loader::loadClass($adapter);
+            \Zend\Loader::loadClass($adapter);
         }
 
         $direction = (integer) $direction;

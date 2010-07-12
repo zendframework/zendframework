@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.part">
     <title>Zend_Mime_Part</title>
@@ -65,14 +65,15 @@ public $language;
                 <listitem>
                     <para>
                         <varname>$charset</varname> muß auf den aktuellen Charset des Inhaltes
-                        gesetzt werden, wenn dieser ein Texttyp ist (Text oder HTML).
+                        gesetzt werden, wenn dieser ein Texttyp ist (Text oder
+                        <acronym>HTML</acronym>).
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <varname>$id</varname> kann gesetzt werden für die Erkennung einer
-                        Content-ID für Inline Grafiken in einer HTML Nachricht.
+                        Content-ID für Inline Grafiken in einer <acronym>HTML</acronym> Nachricht.
                     </para>
                 </listitem>
 

@@ -187,7 +187,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
     public function testShouldUseLatestVersionWhenUsingCdnByDefault()
     {
         $this->helper->enable();
-        $this->assertEquals('1.3.2', $this->helper->getCdnVersion());
+        $this->assertEquals('1.4.1', $this->helper->getCdnVersion());
     }
 
     public function testShouldAllowSpecifyingDojoVersionWhenUtilizingCdn()

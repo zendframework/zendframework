@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20100 -->
+<!-- EN-Revision: 21749 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.currency.usage">
     <title>Zend_Currency verwenden</title>
@@ -97,5 +97,37 @@ Zend_Registry::set('Zend_Locale', $locale);
 // Irgendwo in der Anwendung
 $currency = new Zend_Currency();
 ]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.currency.usage.territory">
+        <title>Erstellung einer Währung basierend auf einem Land</title>
+
+        <para>
+            <classname>Zend_Currency</classname> ist auch in der Lage basierend auf einem
+            angegebenen Land zu arbeiten indem intern <classname>Zend_Locale</classname> verwendet
+            wird.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$currency = new Zend_Currency('US');
+
+// See the actual settings which are fixed to 'en_US'
+// var_dump($currency);
+]]></programlisting>
+
+        <note>
+            <title>Uppercase territories</title>
+
+            <para>
+                When you know that you are using a territory, then you should uppercase it.
+                Otherwise you could get an in your eyes false locale in return. For example,
+                when you give "om" then you could expect "ar_OM" to be returned. But in fact it
+                returns "om", as it's also a language.
+            </para>
+
+            <para>
+                Therefor always uppercase the input when you know that a territory is meant.
+            </para>
+        </note>
     </sect2>
 </sect1>

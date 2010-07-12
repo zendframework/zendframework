@@ -222,7 +222,7 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
 
         <para>
             There are other ways to assert that the current database state equals an expected
-            state. The "Bugs" table in the example already nows a lot about its inner state, so
+            state. The "Bugs" table in the example already knows a lot about its inner state, so
             why not use this to our advantage? The next example will assert that deleting from
             the database is possible:
         </para>

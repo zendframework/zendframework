@@ -86,7 +86,22 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($server->getOptions() == $options);
     }
 
-    public function testSetWSDLViaOptionsArrayIsPossible()
+    /**
+     * @group ZF-9816
+     */
+    public function testSetOptionsWithFeaturesOption()
+    {
+        $server = new Server(null, array(
+            'features' => SOAP_SINGLE_ELEMENT_ARRAYS
+        ));
+        
+        $this->assertEquals(
+            SOAP_SINGLE_ELEMENT_ARRAYS,
+            $server->getSoapFeatures()
+        );
+    }
+
+    public function testSetWsdlViaOptionsArrayIsPossible()
     {
         $server = new Server();
         $server->setOptions(array('wsdl' => 'http://www.example.com/test.wsdl'));

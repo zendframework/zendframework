@@ -370,7 +370,7 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
                 build, etc. For a listing of available options, you should read
                 the <ulink url="http://docs.dojocampus.org/build/index">Dojo
                     Build documentation</ulink> and <ulink
-                    url="http://www.dojotoolkit.org/book/dojo-book-0-9/part-4-meta-dojo/package-system-and-custom-builds">accompanying
+                    url="http://dojotoolkit.org/reference-guide/dojo/index.html#package-system">accompanying
                 documentation</ulink>.
             </para>
 

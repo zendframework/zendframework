@@ -116,6 +116,8 @@ class PostnetTest extends TestCommon
     {
         $this->_object->setText('012345');
         $this->assertEquals(186, $this->_object->getWidth());
+        $this->_object->setWithQuietZones(false);
+        $this->assertEquals(146, $this->_object->getWidth(true));
     }
 
     public function testCompleteGeneration()

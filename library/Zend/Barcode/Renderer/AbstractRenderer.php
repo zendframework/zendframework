@@ -113,9 +113,10 @@ abstract class AbstractRenderer implements Renderer
         if (is_array($options)) {
             $this->setOptions($options);
         }
-        /** @todo check if conversion is correct */
-        // $this->_type = strtolower(substr(get_class($this), strlen($this->_rendererNamespace) + 1));
-        $this->_type = substr(strrchr(get_class($this), '\\'), 1);
+        $this->_type = strtolower(substr(
+            get_class($this),
+            strlen($this->_rendererNamespace) + 1
+        ));
     }
 
     /**
@@ -493,6 +494,12 @@ abstract class AbstractRenderer implements Renderer
      * @return void
      */
     abstract protected function _checkParams();
+
+    /**
+     * Render the resource by sending headers and drawed resource
+     * @return mixed
+     */
+    abstract public function render();
 
     /**
      * Initialize the rendering resource

@@ -260,4 +260,16 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->isValid('0 06 092987 1'));
         $this->assertTrue($validator->isValid('978 0 555023 40 2'));
     }
+
+    /**
+     * @group ZF-9605
+     */
+    public function testInvalidTypeGiven()
+    {
+        $validator = new Validator\Isbn();
+        $validator->setType(Validator\Isbn::ISBN13);
+
+        $this->assertFalse($validator->isValid((float) 1.2345));
+        $this->assertFalse($validator->isValid((object) 'Test'));
+    }
 }

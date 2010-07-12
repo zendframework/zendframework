@@ -114,6 +114,8 @@ class IdentcodeTest extends TestCommon
     {
         $this->_object->setText('00123456789');
         $this->assertEquals(137, $this->_object->getWidth());
+        $this->_object->setWithQuietZones(false);
+        $this->assertEquals(117, $this->_object->getWidth(true));
     }
 
     public function testCompleteGeneration()

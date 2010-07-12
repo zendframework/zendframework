@@ -254,7 +254,7 @@ $service = new Zend_Gdata_Calendar();
         <para>
             The calendar service supports retrieving a list of calendars for the authenticated
             user. This is the same list of calendars which are displayed in the Google Calendar
-            UI, except those marked as "<code>hidden</code>" are also available.
+            UI, except those marked as "<emphasis>hidden</emphasis>" are also available.
         </para>
 
         <para>
@@ -368,9 +368,9 @@ echo "</ul>";
                 class and specifies the private visibility feed, which requires that an
                 authenticated connection is available to the calendar servers. If a MagicCookie is
                 being used for authentication, the visibility should be instead set to
-                "<code>private-magicCookieValue</code>", where magicCookieValue is the random
-                string obtained when viewing the private <acronym>XML</acronym> address in the
-                Google Calendar UI. Events are requested chronologically by start time and only
+                "<emphasis>private-magicCookieValue</emphasis>", where magicCookieValue is the
+                random string obtained when viewing the private <acronym>XML</acronym> address in
+                the Google Calendar UI. Events are requested chronologically by start time and only
                 events occurring in the future are returned.
             </para>
 
@@ -416,9 +416,9 @@ echo "</ul>";
             <para>
                 To print out all events within a certain range, for example from December 1,
                 2006 through December 15, 2007, add the following two lines to the previous sample.
-                Take care to remove "<code>$query->setFutureevents('true')</code>", since
-                <code>futureevents</code> will override <code>startMin</code> and
-                <code>startMax</code>.
+                Take care to remove "<command>$query->setFutureevents('true')</command>", since
+                <property>futureevents</property> will override <property>startMin</property> and
+                <property>startMax</property>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -427,8 +427,9 @@ $query->setStartMax('2006-12-16');
 ]]></programlisting>
 
             <para>
-                Note that <code>startMin</code> is inclusive whereas <code>startMax</code> is
-                exclusive. As a result, only events through 2006-12-15 23:59:59 will be returned.
+                Note that <property>startMin</property> is inclusive whereas
+                <property>startMax</property> is exclusive. As a result, only events through
+                2006-12-15 23:59:59 will be returned.
             </para>
         </sect3>
 
@@ -643,17 +644,18 @@ $newEvent = $service->insertEvent($event);
 
             <para>
                 An event's starting time and duration are determined by the value of its
-                <code>when</code> property, which contains the properties
-                <code>startTime</code>, <code>endTime</code>, and <code>valueString</code>.
-                <code>StartTime</code> and <code>EndTime</code> control the duration of the
-                event, while the <code>valueString</code> property is currently unused.
+                <property>when</property> property, which contains the properties
+                <property>startTime</property>, <property>endTime</property>, and
+                <property>valueString</property>. <emphasis>StartTime</emphasis> and
+                <emphasis>EndTime</emphasis> control the duration of the
+                event, while the <property>valueString</property> property is currently unused.
             </para>
 
             <para>
                 All-day events can be scheduled by specifying only the date omitting the time when
-                setting <code>startTime</code> and <code>endTime</code>. Likewise, zero-duration
-                events can be specified by omitting the <code>endTime</code>. In all cases,
-                date/time values should be provided in
+                setting <property>startTime</property> and <property>endTime</property>. Likewise,
+                zero-duration events can be specified by omitting the <property>endTime</property>.
+                In all cases, date and time values should be provided in
                 <ulink url="http://www.ietf.org/rfc/rfc3339.txt">RFC3339</ulink> format.
             </para>
 
@@ -669,20 +671,20 @@ $event->when = array($when);
 ]]></programlisting>
 
             <para>
-                The <code>when</code> attribute also controls when reminders are sent to a user.
-                Reminders are stored in an array and each event may have up to find reminders
+                The <property>when</property> attribute also controls when reminders are sent to a
+                user. Reminders are stored in an array and each event may have up to find reminders
                 associated with it.
             </para>
 
             <para>
-                For a <code>reminder</code> to be valid, it needs to have two attributes set:
-                <code>method</code> and a time. <code>Method</code> can accept one of the following
-                strings: "alert", "email", or "sms". The time should be entered as an integer and
-                can be set with either the property <code>minutes</code>, <code>hours</code>,
-                <code>days</code>, or <code>absoluteTime</code>. However, a valid request may only
-                have one of these attributes set. If a mixed time is desired, convert to the most
-                precise unit available. For example, 1 hour and 30 minutes should be entered as 90
-                minutes.
+                For a <emphasis>reminder</emphasis> to be valid, it needs to have two attributes
+                set: <property>method</property> and a time. <emphasis>Method</emphasis> can accept
+                one of the following strings: "alert", "email", or "sms". The time should be entered
+                as an integer and can be set with either the property <property>minutes</property>,
+                <property>hours</property>, <property>days</property>, or
+                <property>absoluteTime</property>. However, a valid request may only have one of
+                these attributes set. If a mixed time is desired, convert to the most precise unit
+                available. For example, 1 hour and 30 minutes should be entered as 90 minutes.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -711,7 +713,7 @@ $when->reminders = array($reminder);
 
             <para>
                 Exceptions to the recurrence pattern will usually be specified by a distinct
-                <code>recurrenceException</code> attribute. However, the iCalendar standard
+                <property>recurrenceException</property> attribute. However, the iCalendar standard
                 provides a secondary format for defining recurrences, and the possibility that
                 either may be used must be accounted for.
             </para>
@@ -759,9 +761,9 @@ $newEvent = $service->insertEvent($event);
                 QuickAdd is a feature which allows events to be created using free-form text entry.
                 For example, the string "Dinner at Joe's Diner on Thursday" would create an event
                 with the title "Dinner", location "Joe's Diner", and date "Thursday". To take
-                advantage of QuickAdd, create a new <code>QuickAdd</code> property set to
-                <constant>TRUE</constant> and store the freeform text as a <code>content</code>
-                property.
+                advantage of QuickAdd, create a new <property>QuickAdd</property> property set to
+                <constant>TRUE</constant> and store the freeform text as a
+                <property>content</property> property.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -825,9 +827,10 @@ try {
 
         <para>
             In either case, the deleted event will still show up on a user's private event feed if
-            an <code>updateMin</code> query parameter is provided. Deleted events can be
-            distinguished from regular events because they will have their <code>eventStatus</code>
-            property set to "http://schemas.google.com/g/2005#event.canceled".
+            an <property>updateMin</property> query parameter is provided. Deleted events can be
+            distinguished from regular events because they will have their
+            <property>eventStatus</property> property set to
+            "http://schemas.google.com/g/2005#event.canceled".
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -855,8 +858,9 @@ $service->delete($event->getEditLink()->href);
             Working with comments is fundamentally similar to working with events, with the only
             significant difference being that a different feed and event class should be used and
             that the additional meta-data for events such as where and when does not exist for
-            comments. Specifically, the comment's author is stored in the <code>author</code>
-            property, and the comment text is stored in the <code>content</code> property.
+            comments. Specifically, the comment's author is stored in the
+            <property>author</property> property, and the comment text is stored in the
+            <property>content</property> property.
         </para>
 
         <programlisting language="php"><![CDATA[

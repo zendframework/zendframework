@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 20794 -->
 <sect3 id="zend.view.helpers.initial.partial">
     <title>Partial ヘルパー</title>
 
     <para>
-        <code>Partial</code> ビューヘルパーは、
+        <classname>Partial</classname> ビューヘルパーは、
         指定したテンプレートを自分自身のスコープ内でレンダリングします。
         主な使い道は、
         再利用可能な部分テンプレートを変数名の競合を気にせずに使うというものです。
@@ -13,7 +13,7 @@
     </para>
 
     <para>
-        <code>Partial</code> と兄弟関係にある <code>PartialLoop</code>
+        <classname>Partial</classname> と兄弟関係にある <classname>PartialLoop</classname>
         ビューヘルパーは、反復処理可能なデータを渡して
         その各要素に対してレンダリングを行うものです。
     </para>
@@ -21,8 +21,8 @@
     <note>
         <title>PartialLoop カウンタ</title>
         <para>
-            <code>PartialLoop</code> ビューヘルパーは、変数を
-            <code>partialCounter</code> というビューに代入します。
+            <classname>PartialLoop</classname> ビューヘルパーは、変数を
+            <emphasis>partialCounter</emphasis> というビューに代入します。
             これは、配列の現在の位置をビュースクリプトに渡します。
             これを利用すると、たとえばテーブルの行の色を一行おきに入れ替えるなどが簡単にできます。
         </para>
@@ -72,7 +72,7 @@
             <title>モデルは何?</title>
 
             <para>
-                <code>Partial</code> ビューヘルパーが使用するモデルは、
+                <classname>Partial</classname> ビューヘルパーが使用するモデルは、
                 次のいずれかとなります。
             </para>
 
@@ -140,13 +140,13 @@ $view->partialLoop()->setObjectKey('model');
         </para>
 
         <para>
-            <code>PartialLoop</code> ビューヘルパーは、
+            <classname>PartialLoop</classname> ビューヘルパーは、
             この問題を解決します。これを使用すると、反復処理可能な内容
-            (配列、あるいは <code>Iterator</code> を実装したオブジェクト)
+            (配列、あるいは <emphasis>Iterator</emphasis> を実装したオブジェクト)
             をモデルに渡せるようになります。
             そしてその各要素が partial スクリプトへモデルとして渡されます。
-            各要素の内容は、<code>Partial</code>
-            ビューヘルパーが受け付ける任意の形式のモデルとすることができます。
+            各要素の内容は、<classname>Partial</classname>
+            ビューヘルパーが受け付ける任意の形式のモデルとできます。
         </para>
 
         <para>
@@ -174,7 +174,7 @@ $model = array(
 
         <para>
             そして、ビュースクリプト内で
-            <code>PartialLoop</code> ヘルパーを実行します。
+            <classname>PartialLoop</classname> ヘルパーを実行します。
         </para>
 
         <programlisting language="php"><![CDATA[

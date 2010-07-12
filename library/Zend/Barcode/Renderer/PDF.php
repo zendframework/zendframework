@@ -79,7 +79,9 @@ class PDF extends AbstractRenderer
 
         if (!count($this->_resource->pages)) {
             $this->_page = 0;
-            $this->_resource->pages[] = new Zend\PDF\Page(Zend\PDF\Page::SIZE_A4);
+            $this->_resource->pages[] = new Zend\PDF\Page(
+                Zend\PDF\Page::SIZE_A4
+            );
         }
         return $this;
     }
@@ -112,7 +114,9 @@ class PDF extends AbstractRenderer
     {
         if ($this->_resource === null) {
             $this->_resource = new Zend\PDF\PDFDocument();
-            $this->_resource->pages[] = new Zend\PDF\Page(Zend\PDF\Page::SIZE_A4);
+            $this->_resource->pages[] = new Zend\PDF\Page(
+                Zend\PDF\Page::SIZE_A4
+            );
         }
 
         $pdfPage = $this->_resource->pages[$this->_page];
@@ -143,16 +147,19 @@ class PDF extends AbstractRenderer
             }
         }
 
-        $color = new Color\RGB(($color & 0xFF0000) >> 16,
-                               ($color & 0x00FF00) >> 8,
-                                $color & 0x0000FF          );
+        $color = new Color\RGB(
+            (($color & 0xFF0000) >> 16) / 255.0,
+            (($color & 0x00FF00) >> 8) / 255.0,
+            ($color & 0x0000FF) / 255.0
+        );
 
         $page->setLineColor($color);
         $page->setFillColor($color);
         $page->setLineWidth($this->_moduleSize);
 
-        $fillType = ($filled) ?   Zend\PDF\Page::SHAPE_DRAW_FILL_AND_STROKE
-                                : Zend\PDF\Page::SHAPE_DRAW_STROKE;
+        $fillType = ($filled) 
+                  ? Zend\PDF\Page::SHAPE_DRAW_FILL_AND_STROKE
+                  : Zend\PDF\Page::SHAPE_DRAW_STROKE;
 
         $page->drawPolygon($x, $y, $fillType);
     }
@@ -167,26 +174,31 @@ class PDF extends AbstractRenderer
      * @param string $alignment
      * @param float $orientation
      */
-    protected function _drawText($text,
-                                 $size,
-                                 $position,
-                                 $font,
-                                 $color,
-                                 $alignment = 'center',
-                                 $orientation = 0)
-    {
+    protected function _drawText(
+        $text,
+        $size,
+        $position,
+        $font,
+        $color,
+        $alignment = 'center',
+        $orientation = 0
+    ) {
         $page  = $this->_resource->pages[$this->_page];
-        $color = new Color\RGB(($color & 0xFF0000) >> 16,
-                               ($color & 0x00FF00) >> 8,
-                                $color & 0x0000FF          );
+        $color = new Color\RGB(
+            (($color & 0xFF0000) >> 16) / 255.0,
+            (($color & 0x00FF00) >> 8) / 255.0,
+            ($color & 0x0000FF) / 255.0
+        );
 
         $page->setLineColor($color);
         $page->setFillColor($color);
         $page->setFont(Zend\PDF\Font::fontWithPath($font), $size * $this->_moduleSize * 1.2);
 
-        $width = $this->widthForStringUsingFontSize($text,
-                                                    Zend\PDF\Font::fontWithPath($font),
-                                                    $size * $this->_moduleSize);
+        $width = $this->widthForStringUsingFontSize(
+            $text,
+            Zend\PDF\Font::fontWithPath($font),
+            $size * $this->_moduleSize
+        );
 
         $angle = pi() * $orientation / 180;
         $left = $position[0] * $this->_moduleSize + $this->_leftOffset;

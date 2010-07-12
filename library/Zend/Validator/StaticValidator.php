@@ -124,13 +124,13 @@ class StaticValidator
      */
     public static function execute($value, $classBaseName, array $args = array(), $namespaces = array())
     {
-        $namespaces = array_merge((array) $namespaces, self::$_defaultNamespaces, array('Zend_Validate'));
+        $namespaces = array_merge((array) $namespaces, self::$_defaultNamespaces, array('Zend\Validator'));
         $className  = ucfirst($classBaseName);
         try {
             if (!class_exists($className, false)) {
                 foreach($namespaces as $namespace) {
-                    $class = $namespace . '_' . $className;
-                    $file  = str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
+                    $class = $namespace . '\\' . $className;
+                    $file  = str_replace(array('\\', '_'), DIRECTORY_SEPARATOR, $class) . '.php';
                     if (\Zend\Loader::isReadable($file)) {
                         \Zend\Loader::loadClass($class);
                         $className = $class;

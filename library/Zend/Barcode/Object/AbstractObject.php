@@ -114,6 +114,18 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     protected $_withBorder = false;
 
     /**
+     * Activate/deactivate drawing of quiet zones
+     * @var boolean
+     */
+    protected $_withQuietZones = true;
+
+    /**
+     * Force quiet zones even if
+     * @var boolean
+     */
+    protected $_mandatoryQuietZones = false;
+
+    /**
      * Orientation of the barcode in degrees
      * @var float
      */
@@ -204,6 +216,12 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     protected $_substituteChecksumCharacter = 0;
 
     /**
+     * TTF font name: can be set before instanciation of the object
+     * @var string
+     */
+    protected static $_staticFont = null;
+
+    /**
      * Constructor
      * @param array|\Zend\Config\Config $options
      * @return void
@@ -211,8 +229,8 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     public function __construct($options = null)
     {
         $this->_getDefaultOptions();
-        if (Barcode\Barcode::getBarcodeFont() !== null) {
-            $this->_font = Barcode\Barcode::getBarcodeFont();
+        if (self::$_staticFont !== null) {
+            $this->_font = self::$_staticFont;
         }
         if ($options instanceof Config) {
             $options = $options->toArray();
@@ -220,9 +238,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
         if (is_array($options)) {
             $this->setOptions($options);
         }
-        /** @todo check if conversion is correct */
-        // $this->_type = strtolower(substr(get_class($this), strlen($this->_barcodeNamespace) + 1));
-        $this->_type = substr(strrchr(get_class($this), '\\'), 1);
+        $this->_type = strtolower(substr(get_class($this), strlen($this->_barcodeNamespace) + 1));
         if ($this->_mandatoryChecksum) {
             $this->_withChecksum = true;
             $this->_withChecksumInText = true;
@@ -479,6 +495,26 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     }
 
     /**
+     * Activate/deactivate drawing of the quiet zones
+     * @param boolean $value
+     * @return Zend\Barcode\AbstractObject
+     */
+    public function setWithQuietZones($value)
+    {
+        $this->_withQuietZones = (bool) $value;
+        return $this;
+    }
+
+    /**
+     * Retrieve if quiet zones are draw or not
+     * @return boolean
+     */
+    public function getWithQuietZones()
+    {
+        return $this->_withQuietZones;
+    }
+
+    /**
      * Allow fast inversion of font/bars color and background color
      * @return \Zend\Barcode\BarcodeObject
      */
@@ -675,6 +711,18 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     }
 
     /**
+     * Set the font for all instances of barcode
+     * @param string $font
+     * @return void
+     */
+    public static function setBarcodeFont($font)
+    {
+        if (is_string($font) || (is_int($font) && $font >= 1 && $font <= 5)) {
+            self::$_staticFont = $font;
+        }
+    }
+
+    /**
      * Set the font:
      *  - if integer between 1 and 5, use gd built-in fonts
      *  - if string, $value is assumed to be the path to a TTF font
@@ -755,7 +803,11 @@ abstract class AbstractObject implements Barcode\BarcodeObject
      */
     public function getQuietZone()
     {
-        return 10 * $this->_barThinWidth * $this->_factor;
+        if ($this->_withQuietZones || $this->_mandatoryQuietZones) {
+            return 10 * $this->_barThinWidth * $this->_factor;
+        } else {
+            return 0;
+        }
     }
 
     /**
@@ -805,14 +857,15 @@ abstract class AbstractObject implements Barcode\BarcodeObject
      * @param string $alignment
      * @param float $orientation
      */
-    protected function _addText($text,
-                                $size,
-                                $position,
-                                $font,
-                                $color,
-                                $alignment = 'center',
-                                $orientation = 0)
-    {
+    protected function _addText(
+        $text,
+        $size,
+        $position,
+        $font,
+        $color,
+        $alignment = 'center',
+        $orientation = 0
+    ) {
         if ($color === null) {
             $color = $this->_foreColor;
         }
@@ -1192,8 +1245,11 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     protected function _validateText($value, $options = array())
     {
         $validatorName = (isset($options['validator'])) ? $options['validator'] : $this->getType();
-        $validator = new BarcodeValidator\Barcode(array('adapter'  => $validatorName,
-                                                        'checksum' => false,           ));
+
+        $validator = new BarcodeValidator\Barcode(array(
+            'adapter'  => $validatorName,
+            'checksum' => false,
+        ));
 
         $checksumCharacter = '';
         $withChecksum = false;

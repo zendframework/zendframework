@@ -573,27 +573,20 @@ class Entry
     }
     
     /**
-     * Adds an enclosure to the entry.
+     * Adds an enclosure to the entry. The array parameter may contain the
+     * keys 'uri', 'type' and 'length'. Only 'uri' is required for Atom, though the
+     * others must also be provided or RSS rendering (where they are required)
+     * will throw an Exception.
      *
      * @param array $enclosures
      */
     public function setEnclosure(array $enclosure)
     {
-        if (!isset($enclosure['type'])) {
-            throw new FeedException('Enclosure "type" is not set');
-        }
-        if (!isset($enclosure['length'])) {
-            throw new FeedException('Enclosure "length" is not set');
-        }
         if (!isset($enclosure['uri'])) {
             throw new FeedException('Enclosure "uri" is not set');
         }
         if (!\Zend\URI\URL::validate($enclosure['uri'])) {
             throw new FeedException('Enclosure "uri" is not a valid URI/IRI');
-        }
-        if ((int) $enclosure['length'] <= 0) {
-            throw new FeedException('Enclosure "length" must be an integer'
-            . ' indicating the content\'s length in bytes');
         }
         $this->_data['enclosure'] = $enclosure;
     }

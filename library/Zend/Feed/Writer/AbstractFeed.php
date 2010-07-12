@@ -183,6 +183,26 @@ class AbstractFeed
     }
 
     /**
+     * Set the feed last-build date. Ignored for Atom 1.0.
+     *
+     * @param null|integer|Zend\Date\Date
+     */
+    public function setLastBuildDate($date = null)
+    {
+        $zdate = null;
+        if (is_null($date)) {
+            $zdate = new Date\Date;
+        } elseif (ctype_digit($date) && strlen($date) == 10) {
+            $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
+        } elseif ($date instanceof Date\Date) {
+            $zdate = $date;
+        } else {
+            throw new \Zend\Feed\Exception('Invalid Zend\Date\Date object or UNIX Timestamp passed as parameter');
+        }
+        $this->_data['lastBuildDate'] = $zdate;
+    }
+
+    /**
      * Set the feed description
      *
      * @return string|null
@@ -202,21 +222,41 @@ class AbstractFeed
      */
     public function setGenerator($name, $version = null, $uri = null)
     {
-        if (empty($name) || !is_string($name)) {
-            throw new Feed\Exception('Invalid parameter: "name" must be a non-empty string');
-        }
-        $generator = array('name' => $name);
-        if (isset($version)) {
-            if (empty($version) || !is_string($version)) {
-                throw new Feed\Exception('Invalid parameter: "version" must be a non-empty string');
+        if (is_array($name)) {
+            $data = $name;
+            if (empty($data['name']) || !is_string($data['name'])) {
+                throw new \Zend\Feed\Exception('Invalid parameter: "name" must be a non-empty string');
             }
-            $generator['version'] = $version;
-        }
-        if (isset($uri)) {
-            if (empty($uri) || !is_string($uri) || !\Zend\URI\URL::validate($uri)) {
-                throw new Feed\Exception('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
+            $generator = array('name' => $data['name']);
+            if (isset($data['version'])) {
+                if (empty($data['version']) || !is_string($data['version'])) {
+                    throw new \Zend\Feed\Exception('Invalid parameter: "version" must be a non-empty string');
+                }
+                $generator['version'] = $data['version'];
             }
-            $generator['uri'] = $uri;
+            if (isset($data['uri'])) {
+                if (empty($data['uri']) || !is_string($data['uri']) || !\Zend\URI\URL::validate($data['uri'])) {
+                    throw new \Zend\Feed\Exception('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
+                }
+                $generator['uri'] = $data['uri'];
+            }
+        } else {
+            if (empty($name) || !is_string($name)) {
+                throw new \Zend\Feed\Exception('Invalid parameter: "name" must be a non-empty string');
+            }
+            $generator = array('name' => $name);
+            if (isset($version)) {
+                if (empty($version) || !is_string($version)) {
+                    throw new \Zend\Feed\Exception('Invalid parameter: "version" must be a non-empty string');
+                }
+                $generator['version'] = $version;
+            }
+            if (isset($uri)) {
+                if (empty($uri) || !is_string($uri) || !\Zend\URI\URL::validate($uri)) {
+                    throw new Zend_Feed_Exception('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
+                }
+                $generator['uri'] = $uri;
+            }
         }
         $this->_data['generator'] = $generator;
     }
@@ -233,6 +273,24 @@ class AbstractFeed
             throw new Feed\Exception('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
         }
         $this->_data['id'] = $id;
+    }
+
+    /**
+     * Set a feed image (URI at minimum). Parameter is a single array with the
+     * required key 'uri'. When rendering as RSS, the required keys are 'uri',
+     * 'title' and 'link'. RSS also specifies three optional parameters 'width',
+     * 'height' and 'description'. Only 'uri' is required and used for Atom rendering.
+     *
+     * @param array $data
+     */
+    public function setImage(array $data)
+    {
+        if (empty($data['uri']) || !is_string($data['uri'])
+        || !\Zend\URI\URL::validate($data['uri'])) {
+            throw new \Zend\Feed\Exception('Invalid parameter: parameter \'uri\''
+            . ' must be a non-empty string and valid URI/IRI');
+        }
+        $this->_data['image'] = $data;  
     }
 
     /**
@@ -453,6 +511,19 @@ class AbstractFeed
     }
 
     /**
+     * Get the feed last-build date
+     *
+     * @return string|null
+     */
+    public function getLastBuildDate()
+    {
+        if (!array_key_exists('lastBuildDate', $this->_data)) {
+            return null;
+        }
+        return $this->_data['lastBuildDate'];
+    }
+
+    /**
      * Get the feed description
      *
      * @return string|null
@@ -489,6 +560,19 @@ class AbstractFeed
             return null;
         }
         return $this->_data['id'];
+    }
+
+    /**
+     * Get the feed image URI
+     *
+     * @return array
+     */
+    public function getImage()
+    {
+        if (!array_key_exists('image', $this->_data)) {
+            return null;
+        }
+        return $this->_data['image'];
     }
 
     /**

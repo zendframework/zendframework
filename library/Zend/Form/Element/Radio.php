@@ -52,9 +52,12 @@ class Radio extends Multi
      */
     public function loadDefaultDecorators()
     {
-        parent::loadDefaultDecorators();
-        if (false !== $decorator = $this->getDecorator('Label')) {
-            $decorator->setOption('disableFor', true);
+        if ($this->loadDefaultDecoratorsIsDisabled()) {
+            return $this;
         }
+        parent::loadDefaultDecorators();
+        $this->addDecorator('Label', array('tag' => 'dt',
+                                           'disableFor' => true));
+        return $this;
     }
 }

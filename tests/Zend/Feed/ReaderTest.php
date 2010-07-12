@@ -122,6 +122,16 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Reader\Reader::TYPE_ATOM_03, $type);
     }
 
+    /**
+     * @group ZF-9723
+     */
+    public function testDetectsTypeFromStringOrToRemindPaddyAboutForgettingATestWhichLetsAStupidTypoSurviveUnnoticedForMonths()
+    {
+        $feed = '<?xml version="1.0" encoding="utf-8" ?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/"><channel></channel></rdf:RDF>';
+        $type = Zend_Feed_Reader::detectType($feed);
+        $this->assertEquals(Zend_Feed_Reader::TYPE_RSS_10, $type);
+    }
+
     public function testGetEncoding()
     {
         $feed = Reader\Reader::importString(

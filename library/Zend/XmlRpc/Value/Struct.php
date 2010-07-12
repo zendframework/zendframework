@@ -69,6 +69,5 @@ class Struct extends Collection
         }
         $generator->closeElement('struct')
                   ->closeElement('value');
-        $this->_xml = (string)$generator;
     }
 }

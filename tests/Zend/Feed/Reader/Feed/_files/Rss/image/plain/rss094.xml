@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="0.94">
+    <channel>
+        <image>
+            <url>http://www.example.com/image.gif</url>
+            <link>http://www.example.com</link>
+            <title>Image title</title>
+            <width>50</width>
+            <height>55</height>
+            <description>Image description</description>
+        </image>
+    </channel>
+</rss>

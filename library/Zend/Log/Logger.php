@@ -84,18 +84,24 @@ class Logger implements Factory
      * @var callback
      */
     protected $_origErrorHandler       = null;
-    
+
     /**
      *
      * @var boolean
      */
     protected $_registeredErrorHandler = false;
-    
+
     /**
      *
      * @var array
      */
     protected $_errorHandlerMap        = false;
+
+    /**
+     *
+     * @var string
+     */
+    protected $_timestampFormat        = 'c';
 
     /**
      * Class constructor.  Create a new logger
@@ -154,6 +160,9 @@ class Logger implements Factory
         $writer = $this->_constructFromConfig('writer', $config, $this->_defaultWriterNamespace);
 
         if (!$writer instanceof Writer) {
+            $writerName = is_object($writer)
+                        ? get_class($writer)
+                        : 'The specified writer';
             throw new Exception("{$writerName} does not extend Zend\\Log\\Writer!");
         }
 
@@ -176,6 +185,9 @@ class Logger implements Factory
         $filter = $this->_constructFromConfig('filter', $config, $this->_defaultFilterNamespace);
 
         if (!$filter instanceof Filter) {
+             $filterName = is_object($filter)
+                         ? get_class($filter)
+                         : 'The specified filter';
             throw new Exception("{$filterName} does not implement Zend\\Log\\Filter");
         }
 
@@ -252,7 +264,7 @@ class Logger implements Factory
     protected function _packEvent($message, $priority)
     {
         return array_merge(array(
-            'timestamp'    => date('c'),
+            'timestamp'    => date($this->_timestampFormat),
             'message'      => $message,
             'priority'     => $priority,
             'priorityName' => $this->_priorities[$priority]
@@ -512,5 +524,27 @@ class Logger implements Factory
             return call_user_func($this->_origErrorHandler, $errno, $errstr, $errfile, $errline, $errcontext);
         }
         return false;
+    }
+
+    /**
+     * Set timestamp format for log entries.
+     *
+     * @param string $format
+     * @return Zend\Log\Logger
+     */
+    public function setTimestampFormat($format)
+    {
+        $this->_timestampFormat = $format;
+        return $this;
+    }
+
+    /**
+     * Get timestamp format used for log entries.
+     *
+     * @return string
+     */
+    public function getTimestampFormat()
+    {
+        return $this->_timestampFormat;
     }
 }

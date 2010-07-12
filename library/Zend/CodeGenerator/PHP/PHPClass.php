@@ -412,7 +412,7 @@ class PHPClass extends AbstractPHP
         } elseif ($method instanceof PHPMethod) {
             $methodName = $method->getName();
         } else {
-            throw new Exception('setMethod() expects either an array of method options or an instance of Zend_CodeGenerator_Php_Method');
+            throw new Exception('setMethod() expects either an array of method options or an instance of Zend\CodeGenerator\PHP\Method');
         }
 
         if (isset($this->_methods[$methodName])) {
@@ -508,31 +508,15 @@ class PHPClass extends AbstractPHP
             $output .= 'abstract ';
         }
 
-        $name = $this->getName();
-        
-        if ($this->_namespaceName && strpos($name, $this->_namespaceName) === 0) {
-            $output .= 'class ' . substr($name, strlen($this->_namespaceName)+1);
-        } else {
-            $output .= 'class ' . $name;
-        }
-        
-        if (null !== $this->_extendedClass) {
-            if ($this->_namespaceName && strpos($this->_extendedClass, $this->_namespaceName) === 0) {
-                $output .= ' extends ' . substr($this->_extendedClass, strlen($this->_namespaceName)+1);
-            } else {
-                $output .= ' extends ' . $this->_extendedClass;
-            }
+        $output .= 'class ' . $this->getName();
+
+        if ( !empty( $this->_extendedClass) ) {
+            $output .= ' extends ' . $this->_extendedClass;
         }
 
-        $implementedInterfaces = $this->getImplementedInterfaces();
-        if (!empty($implementedInterfaces)) {
-            $output .= ' implements ';
-            foreach ($implementedInterfaces as $iiIndex => $ii) {
-                if (strpos($ii, $this->_namespaceName) === 0) {
-                    $implementedInterfaces[$iiIndex] = substr($ii, strlen($this->_namespaceName)+1);
-                }
-            }
-            $output .= implode(', ', $implementedInterfaces);
+        $implemented = $this->getImplementedInterfaces();
+        if (!empty($implemented)) {
+            $output .= ' implements ' . implode(', ', $implemented);
         }
 
         $output .= self::LINE_FEED . '{' . self::LINE_FEED . self::LINE_FEED;

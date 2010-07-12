@@ -679,10 +679,10 @@ private function onFault(fault:Object):void {
 
         <para>
             Adding in the ActionScript to make the remoting connection is now complete. Running the
-            ZendExample file now makes a connection to Zend Amf. In review you have added the
-            required variables to open a connection to the remote server, defined what methods
-            should be used when your application receives a response from the server, and finally
-            displayed the returned data to output via <methodname>trace()</methodname>.
+            ZendExample file now makes a connection to <classname>Zend_Amf</classname>. In review
+            you have added the required variables to open a connection to the remote server, defined
+            what methods should be used when your application receives a response from the server,
+            and finally displayed the returned data to output via <methodname>trace()</methodname>.
         </para>
     </sect2>
 

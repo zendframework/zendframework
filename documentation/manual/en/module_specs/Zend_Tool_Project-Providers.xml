@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.project.providers">
-    <title>Zend Tool Project Providers</title>
+    <title>Zend_Tool Project Providers</title>
 
     <para>
         Below is a table of all of the providers shipped with

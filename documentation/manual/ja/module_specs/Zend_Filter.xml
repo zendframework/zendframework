@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21193 -->
+<!-- EN-Revision: 21606 -->
 <sect1 id="zend.filter.introduction">
 
     <title>導入</title>
@@ -37,7 +37,7 @@
             HTML エンティティを除去するフィルタは、最初に定義したフィルタの考え方
             - 入力の一部を取り出すための演算子 - にもとづくものです。
             一方、HTML エンティティをエスケープするフィルタは、入力を変換するタイプのものです
-            (たとえば "<code>&amp;</code>" は "<code>&amp;amp;</code>" に変換されます)。
+            (たとえば "&amp;" は "&amp;amp;" に変換されます)。
             これらの例のような処理はウェブ開発者にとって重要です。
             <classname>Zend_Filter</classname> で "フィルタリングする" という場合、
             それは入力データに対して何らかの変換を行うことを意味します。
@@ -57,7 +57,7 @@
         </para>
 
         <para>
-            以下の例は、アンパサンド (<code>&amp;</code>) およびダブルクォート (<code>&quot;</code>)
+            以下の例は、アンパサンド (<emphasis>&amp;</emphasis>) およびダブルクォート (<emphasis>&quot;</emphasis>)
             の二つの入力データに対してフィルタを適用するものです。
 
             <programlisting language="php"><![CDATA[

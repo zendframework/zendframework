@@ -157,6 +157,16 @@ class Atom extends Reader\AbstractFeed
     }
 
     /**
+     * Get the feed lastBuild date. This is not implemented in Atom.
+     *
+     * @return string|null
+     */
+    public function getLastBuildDate()
+    {
+        return null;
+    }
+
+    /**
      * Get the feed description
      *
      * @return string|null
@@ -277,6 +287,24 @@ class Atom extends Reader\AbstractFeed
     }
 
     /**
+     * Get feed image data
+     *
+     * @return array|null
+     */
+    public function getImage()
+    {
+        if (array_key_exists('image', $this->_data)) {
+            return $this->_data['image'];
+        }
+
+        $link = $this->getExtension('Atom')->getImage();
+
+        $this->_data['image'] = $link;
+
+        return $this->_data['image'];
+    }
+
+    /**
      * Get a link to the feed's XML Url
      *
      * @return string|null
@@ -288,6 +316,10 @@ class Atom extends Reader\AbstractFeed
         }
 
         $link = $this->getExtension('Atom')->getFeedLink();
+
+        if (is_null($link) || empty($link)) {
+            $link = $this->getOriginalSourceUri();
+        }
 
         $this->_data['feedlink'] = $link;
 

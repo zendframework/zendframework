@@ -56,6 +56,23 @@ use Zend\Search\Lucene\Document;
  */
 class DocumentTest extends \PHPUnit_Framework_TestCase
 {
+
+    private function _clearDirectory($dirName)
+    {
+        if (!file_exists($dirName) || !is_dir($dirName))  {
+            return;
+        }
+
+        // remove files from temporary direcytory
+        $dir = opendir($dirName);
+        while (($file = readdir($dir)) !== false) {
+            if (!is_dir($dirName . '/' . $file)) {
+                @unlink($dirName . '/' . $file);
+            }
+        }
+        closedir($dir);
+    }
+
     public function testCreate()
     {
         $document =  new Document();
@@ -170,6 +187,60 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
                                 'faq.translators-revision-tracking.html',
                                 'index.html',
                                 'contributing.html'));
+    }
+
+
+    /**
+     * @group ZF-4252
+     */
+    public function testHtmlInlineTagsIndexing()
+    {
+        $index = Zend_Search_Lucene::create(dirname(__FILE__) . '/_index/_files');
+
+        $htmlString = '<html><head><title>Hello World</title></head>'
+                    . '<body><b>Zend</b>Framework' . "\n" . ' <div>Foo</div>Bar ' . "\n"
+                    . ' <strong>Test</strong></body></html>';
+
+        $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
+
+        $index->addDocument($doc);
+
+        $hits = $index->find('FooBar');
+        $this->assertEquals(count($hits), 0);
+
+        $hits = $index->find('ZendFramework');
+        $this->assertEquals(count($hits), 1);
+        
+        unset($index);
+        $this->_clearDirectory(dirname(__FILE__) . '/_index/_files');
+    }
+
+    /**
+     * @group ZF-8740
+     */
+    public function testHtmlAreaTags()
+    {
+        $html = '<HTML>'
+                . '<HEAD><TITLE>Page title</TITLE></HEAD>'
+                . '<BODY>'
+                .   'Document body.'
+                .   '<img src="img.png" width="640" height="480" alt="some image" usemap="#some_map" />'
+                .   '<map name="some_map">'
+                .     '<area shape="rect" coords="0,0,100,100" href="link3.html" alt="Link 3" />'
+                .     '<area shape="rect" coords="200,200,300,300" href="link4.html" alt="Link 4" />'
+                .   '</map>'
+                .   '<a href="link1.html">Link 1</a>.'
+                .   '<a href="link2.html" rel="nofollow">Link 1</a>.'
+                . '</BODY>'
+              . '</HTML>';
+
+        $oldNoFollowValue = Zend_Search_Lucene_Document_Html::getExcludeNoFollowLinks();
+
+        Zend_Search_Lucene_Document_Html::setExcludeNoFollowLinks(false);
+        $doc1 = Zend_Search_Lucene_Document_Html::loadHTML($html);
+        $this->assertTrue($doc1 instanceof Zend_Search_Lucene_Document_Html);
+        $links = array('link1.html', 'link2.html', 'link3.html', 'link4.html');
+        $this->assertTrue(array_values($doc1->getLinks()) == $links);
     }
 
     public function testHtmlNoFollowLinks()

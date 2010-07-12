@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20818 -->
+<!-- EN-Revision: 21740 -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
 
@@ -65,7 +65,6 @@ echo $server->handle();
         </para>
     </sect2>
 
-    <!-- TODO : to be translated -->
     <sect2 id="zend.xmlrpc.server.anatomy">
         <title>Anatomy of a webservice</title>
 
@@ -415,7 +414,6 @@ echo $server->handle();
 ]]></programlisting>
         </example>
 
-        <!-- TODO : to be translated -->
         <example id="zend.xmlrpc.server.use.attach-class-with-arguments">
             <title>Attaching a class with arguments</title>
 
@@ -564,7 +562,6 @@ echo $server->handle();
         <example id="zend.xmlrpc.server.use.custom-request-object">
             <title>独自のリクエスト及びレスポンスオブジェクトの利用</title>
 
-            <!-- TODO : to be translated -->
             <para>
                 Some use cases require to utilize a custom request object.
                 For example, <acronym>XML/RPC</acronym> is not bound to
@@ -676,7 +673,6 @@ echo $server->handle($request);
 ]]></programlisting>
         </example>
 
-        <!-- TODO : to be translated -->
         <note>
             <para>
                 The server cache file should be located outside the document root.
@@ -720,7 +716,7 @@ $server = new Zend_XmlRpc_Server();
             <para>
                 Performance is determined by a lot of parameters and
                 benchmarks only apply for the specific test case. Differences
-                come from PHP version, installed extensions, webserver and
+                come from <acronym>PHP</acronym> version, installed extensions, webserver and
                 operating system just to name a few. Please make sure to
                 benchmark your application on your own and decide which
                 generator to use based on <emphasis>your</emphasis> numbers.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
+<!-- EN-Revision: 21826 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.request">
     <title>Das Request Objekt</title>
@@ -187,7 +187,7 @@
                     die benötigt wird, nicht <varname>$_SERVER['REQUEST_URI']</varname>. Wenn so ein
                     Setup verwendet wird und man ungültige Routen erhält, sollte man stattdessen die
                     <classname>Zend_Controller_Request_Apache404</classname> Klasse statt der
-                    standard Http Klasse für das Anfrage Objekt verwenden:
+                    standard <acronym>HTTP</acronym> Klasse für das Anfrage Objekt verwenden:
                 </para>
 
                 <programlisting language="php"><![CDATA[

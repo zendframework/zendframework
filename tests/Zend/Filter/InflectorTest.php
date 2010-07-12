@@ -433,7 +433,6 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($inflector->getTargetReplacementIdentifier(), ':');
 
         $inflector = new InflectorFilter('something', array(), false, '#');
-        $this->assertEquals($inflector->getTargetReplacementIdentifier(), '#');
     }
 
     /**
@@ -473,7 +472,6 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
     {
         $options = $this->getOptions();
         $inflector = new InflectorFilter($options);
-        $this->_testOptions($inflector);
     }
 
     /**
@@ -486,6 +484,28 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
         $inflector->setOptions($options);
         $this->_testOptions($inflector);
     }
+
+    /**
+     * @group ZF-8997
+     */
+    public function testPassingZendConfigObjectToConstructorSetsStateAndRules()
+    {
+        $config = $this->getConfig();
+        $inflector = new InflectorFilter($config);
+        $this->_testOptions($inflector);
+    }
+
+    /**
+     * @group ZF-8997
+     */
+    public function testPassingZendConfigObjectToSetConfigSetsStateAndRules()
+    {
+        $config = $this->getConfig();
+        $inflector = new InflectorFilter();
+        $inflector->setOptions($config);
+        $this->_testOptions($inflector);
+    }
+}
 
     /**
      * @group ZF-8997

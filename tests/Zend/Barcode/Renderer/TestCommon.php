@@ -30,10 +30,6 @@ use Zend\Barcode\Object;
 use Zend\Config;
 
 /**
- * Test helper
- */
-
-/**
  * @category   Zend
  * @package    Zend_Barcode
  * @subpackage UnitTests

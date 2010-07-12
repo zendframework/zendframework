@@ -170,6 +170,24 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->layout->isEnabled());
         $this->assertFalse($this->viewRenderer->getNoRender());
     }
+    /**
+     * @group   ZF-9126
+     */
+    public function testDojoHelperEncodesUnicodeChars()
+    {
+        $dojo = new Zend_Controller_Action_Helper_AutoCompleteDojo();
+        $dojo->suppressExit = true;
+        $data = array ('garçon', 'schließen', 'Helgi Þormar Þorbjörnsson');
+        $encoded = $dojo->direct($data);
+        $body = $this->response->getBody();
+        $decoded = Zend_Json::decode($encoded);
+        $test = array ();
+        foreach ($decoded['items'] as $item) {
+            $test[] = $item['name'];
+        }
+        $this->assertSame($data, $test);
+        $this->assertSame($encoded, $body);
+    }
 
     public function testScriptaculousHelperThrowsExceptionOnInvalidDataFormat()
     {

@@ -909,15 +909,15 @@ class HTTP extends AbstractRequest
     }
 
     /**
-     * Is the request a Javascript XMLHTTPRequest?
+     * Is the request a Javascript XMLHttpRequest?
      *
      * Should work with Prototype/Script.aculo.us, possibly others.
      *
      * @return boolean
      */
-    public function isXmlHTTPRequest()
+    public function isXmlHttpRequest()
     {
-        return ($this->getHeader('X_REQUESTED_WITH') == 'XMLHTTPRequest');
+        return ($this->getHeader('X_REQUESTED_WITH') == 'XMLHttpRequest');
     }
 
     /**
@@ -987,6 +987,12 @@ class HTTP extends AbstractRequest
             $headers = apache_request_headers();
             if (!empty($headers[$header])) {
                 return $headers[$header];
+            }
+            $header = strtolower($header);
+            foreach ($headers as $key => $value) {
+                if (strtolower($key) == $header) {
+                    return $value;
+                }
             }
         }
 

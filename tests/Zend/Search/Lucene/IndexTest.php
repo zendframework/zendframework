@@ -509,4 +509,23 @@ class IndexTest extends \PHPUnit_Framework_TestCase
 
         $this->_clearDirectory(dirname(__FILE__) . '/_index/_files');
     }
+
+    /**
+     * @group ZF-9680
+     */
+    public function testIsDeletedWithoutExplicitCommit()
+    {
+        //$this->_clearDirectory(dirname(__FILE__) . '/_index/_files');
+
+        $index = Lucene\Lucene::create(dirname(__FILE__) . '/_index/_files');
+
+        $document = new Document;
+        $document->addField(Document\Field::Keyword('_id', 'myId'));
+        $document->addField(Document\Field::Keyword('bla', 'blubb'));
+        $index->addDocument($document);
+
+        $this->assertFalse($index->isDeleted(0));
+
+        $this->_clearDirectory(dirname(__FILE__) . '/_index/_files');
+    }
 }

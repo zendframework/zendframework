@@ -22,6 +22,8 @@
 
 namespace ZendTest\Application;
 
+require_once __DIR__ . '/TestAsset/Zf7696Bootstrap.php';
+
 use Zend\Loader\Autoloader,
     Zend\Loader\ResourceAutoloader,
     Zend\Loader\PluginLoader,
@@ -654,6 +656,22 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\\Application\\BootstrapException');
         $bootstrap = new Application\Bootstrap($this->application);
         $bootstrap->setApplication($bootstrap);
+    }
+    
+    /**
+     * @group ZF-7696
+     */
+    public function testUsingFallbackAutoloaderWithModulesShouldNotResultInFrontcontrollerNotFoundWarning()
+    {
+        $this->autoloader->setFallbackAutoloader(true);
+        $options = array(
+            'Resources' => array(
+                'modules' => array(),
+            ),
+        );
+        $this->application->setOptions($options);
+        $bootstrap = new \Zf7696Bootstrap($this->application);
+        $bootstrap->bootstrap(array('modules'));
     }
 }
 

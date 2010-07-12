@@ -238,7 +238,7 @@ class Zend_Service_Amazon_Ec2_Ebs extends Zend_Service_Amazon_Ec2_Abstract
     {
         $params = array();
         $params['Action']       = 'DeleteVolume';
-        $params['volumeId']     = $volumeId;
+        $params['VolumeId']     = $volumeId;
 
         $response = $this->sendRequest($params);
         $xpath = $response->getXPath();

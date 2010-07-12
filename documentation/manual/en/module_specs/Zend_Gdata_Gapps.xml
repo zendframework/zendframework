@@ -9,7 +9,7 @@
         and Docs &amp; Spreadsheets. The Provisioning <acronym>API</acronym> offers a programmatic
         interface to configure this service. Specifically, this <acronym>API</acronym> allows
         administrators the ability to create, retrieve, update, and delete
-        user accounts, nicknames, and email lists.
+        user accounts, nicknames, groups, and email lists.
     </para>
 
     <para>
@@ -135,7 +135,7 @@ $user = $gdata->insertUser($user);
             <para>
                 The user's password should normally be provided as cleartext.
                 Optionally, the password can be provided as an SHA-1 digest if
-                <code>login->passwordHashFunction</code> is set to 'SHA-1'.
+                <command>login->passwordHashFunction</command> is set to 'SHA-1'.
             </para>
         </sect3>
 
@@ -256,7 +256,7 @@ $user = $user->save();
 
                 <para>
                     A user's password can be reset to a new value by updating
-                    the <code>login->password</code> property.
+                    the <command>login->password</command> property.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -278,7 +278,7 @@ $user = $user->save();
                 <para>
                     A user can be forced to change their password at their
                     next login by setting the
-                    <code>login->changePasswordAtNextLogin</code> property to
+                    <command>login->changePasswordAtNextLogin</command> property to
                     <constant>TRUE</constant>.
                 </para>
 
@@ -290,7 +290,7 @@ $user = $user->save();
 
                 <para>
                     Similarly, this can be undone by setting the
-                    <code>login->changePasswordAtNextLogin</code> property to
+                    <command>login->changePasswordAtNextLogin</command> property to
                     <constant>FALSE</constant>.
                 </para>
             </sect4>
@@ -314,7 +314,7 @@ $gdata->restoreUser('foo');
 
                 <para>
                     Alternatively, you can set the UserEntry's
-                    <code>login->suspended</code> property to
+                    <command>login->suspended</command> property to
                     <constant>TRUE</constant>.
                 </para>
 
@@ -326,7 +326,7 @@ $user = $user->save();
 
                 <para>
                     To restore the user's access, set the
-                    <code>login->suspended</code> property to
+                    <command>login->suspended</command> property to
                     <constant>FALSE</constant>.
                 </para>
             </sect4>
@@ -336,7 +336,7 @@ $user = $user->save();
 
                 <para>
                     Users can be granted the ability to administer your domain
-                    by setting their <code>login->admin</code> property to
+                    by setting their <command>login->admin</command> property to
                     <constant>TRUE</constant>.
                 </para>
 
@@ -347,7 +347,7 @@ $user = $user->save();
 ]]></programlisting>
 
                 <para>
-                    And as expected, setting a user's <code>login->admin</code>
+                    And as expected, setting a user's <command>login->admin</command>
                     property to <constant>FALSE</constant> revokes their
                     administrative rights.
                 </para>
@@ -559,6 +559,426 @@ $nickname->delete();
 
             <programlisting language="php"><![CDATA[
 $gdata->deleteNickname('bar');
+]]></programlisting>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.gdata.gapps.groups">
+        <title>Interacting with groups</title>
+
+        <para>
+            Google Groups allows people to post messages like an email list. Google
+            is depreciating the Email List API. Google Groups provides some neat
+            features like nested groups and group owners. If you want to start
+            a new email lst, it is advisable to use Google Groups instead.
+            Google's Email List is not compatible with Google Groups. So if you
+            create an email list, it will not show up as a group. The opposite is
+            true as well.
+        </para>
+
+        <para>
+            Each group on a domain is represented as an instance of
+            <classname>Zend_Gdata_Gapps_GroupEntry</classname>.
+        </para>
+
+        <sect3 id="zend.gdata.gapps.groups.creating">
+            <title>Creating a group</title>
+
+            <para>
+                Groups can be created by calling the
+                <methodname>createGroup()</methodname> convenience method:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$gdata->createGroup('friends', 'The Friends Group');
+]]></programlisting>
+
+            <para>
+                Groups can also be created by instantiating
+                GroupEntry, providing a group id and name for the group, 
+                then calling <methodname>insertGroup()</methodname> on a service
+                object to upload the entry to the server.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$group = $gdata->newGroupEntry();
+
+$properties[0] = $this->newProperty();
+$properties[0]->name = 'groupId';
+$properties[0]->value = 'friends';
+$properties[1] = $this->newProperty();
+$properties[1]->name = 'groupName';
+$properties[1]->value = 'The Friends Group';
+
+$group->property = $properties;
+
+$group = $gdata->insertGroup($group);
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.groups.retrieveGroup">
+            <title>Retrieving an individual group</title>
+
+            <para>
+                To retrieve an individual group, call the
+                <methodname>retrieveGroup()</methodname> convenience method:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$entry = $gdata->retrieveGroup('friends');
+
+foreach ($entry->property as $p) {
+    echo "Property Name: " . $p->name;
+    echo "\nProperty Value: " . $p->value . "\n\n";
+}
+]]></programlisting>
+
+            <para>
+                This will create a <classname>Zend_Gdata_Gapps_GroupEntry</classname> 
+                object which holds the properties about the group.
+            </para>
+
+            <para>
+                Alternatively, create a new <classname>Zend_Gdata_Gapps_GroupQuery</classname>,
+                set its groupId property to the desired group id, and
+                submit the query by calling <methodname>getGroupEntry()</methodname>
+                on a service object.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$query = $gdata->newGroupQuery();
+$query->setGroupId('friends');
+$entry = $gdata->getGroupEntry($query);
+
+foreach ($entry->property as $p) {
+    echo "Property Name: " . $p->name;
+    echo "\nProperty Value: " . $p->value . "\n\n";
+}
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.groups.retrievingAll">
+            <title>Retrieving all groups in a domain</title>
+
+            <para>
+                To retrieve all groups in a domain, call the convenience
+                method <methodname>retrieveAllGroups()</methodname>.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->retrieveAllGroups();
+
+foreach ($feed->entry as $entry) {
+    foreach ($entry->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
+    }
+    echo "\n\n";
+}
+]]></programlisting>
+
+            <para>
+                This will create a <classname>Zend_Gdata_Gapps_GroupFeed</classname> 
+                object which holds each group on the domain.
+            </para>
+
+            <para>
+                Alternatively, call <methodname>getGroupFeed()</methodname> on a
+                service object with no arguments.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->getGroupFeed();
+
+foreach ($feed->entry as $entry) {
+    foreach ($entry->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
+    }
+    echo "\n\n";
+}
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.groups.deleting">
+            <title>Deleting a group</title>
+
+            <para>
+                To delete a group, call the deleteGroup() convenience method:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$gdata->deleteGroup('friends');
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.groups.updating">
+            <title>Updating a group</title>
+
+            <para>
+                Groups can be updated by calling the
+                <methodname>updateGroup()</methodname> convenience method:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$gdata->updateGroup('group-id-here', 'Group Name Here');
+]]></programlisting>
+
+            <para>
+                The first parameter is required. The second, third and fourth parameter,
+                representing the group name, group descscription, and email permission,
+                respectively are optional. Setting any of these optional parameters
+                to null will not update that item.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.groups.retrieve">
+            <title>Retrieving all groups to which a person is a member</title>
+
+            <para>
+                To retrieve all groups to which a particular person is a
+                member, call the <methodname>retrieveGroups()</methodname>
+                convenience method:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->retrieveGroups('baz@somewhere.com');
+
+foreach ($feed->entry as $entry) {
+    foreach ($entry->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
+    }
+    echo "\n\n";
+}
+]]></programlisting>
+
+            <para>
+                This will create a <classname>Zend_Gdata_Gapps_GroupFeed</classname>
+                object which holds each group associated with the specified member.
+            </para>
+
+            <para>
+                Alternatively, create a new <classname>Zend_Gdata_Gapps_GroupQuery</classname>,
+                set its member property to the desired email address, and
+                submit the query by calling <methodname>getGroupFeed()</methodname>
+                on a service object.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$query = $gdata->newGroupQuery();
+$query->setMember('baz@somewhere.com');
+$feed = $gdata->getGroupFeed($query);
+
+foreach ($feed->entry as $entry) {
+    foreach ($entry->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
+    }
+    echo "\n\n";
+}
+]]></programlisting>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.gdata.gapps.groupMembers">
+        <title>Interacting with group members</title>
+
+        <para>
+            Each member subscribed to a group is represented by an
+            instance of <classname>Zend_Gdata_Gapps_MemberEntry</classname>. 
+            Through this class, individual recipients can be added and removed
+            from groups.
+        </para>
+
+        <sect3 id="zend.gdata.gapps.groupMembers.adding">
+            <title>Adding a member to a group</title>
+
+            <para>
+                To add a member to a group, simply call the
+                <methodname>addMemberToGroup()</methodname> convenience method:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$gdata->addMemberToGroup('bar@somewhere.com', 'friends');
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.groupMembers.check">
+            <title>Check to see if member belongs to group</title>
+
+            <para>
+                To check to see if member belongs to group, simply call the
+                <methodname>isMember()</methodname> convenience method:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$isMember = $gdata->isMember('bar@somewhere.com', 'friends');
+var_dump($isMember);
+]]></programlisting>
+
+            <para>
+                The method returns a boolean value. If the member belongs to the
+                group specified, the method returns true, else it returns false.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.groupMembers.removing">
+            <title>Removing a member from a group</title>
+
+            <para>
+                To remove a member from a group, call the
+                <methodname>removeMemberFromGroup()</methodname> convenience
+                method:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$gdata->removeMemberFromGroup('baz', 'friends');
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.groupMembers.retrieving">
+            <title>Retrieving the list of members to a group</title>
+
+            <para>
+                The convenience method <methodname>retrieveAllMembers()</methodname>
+                can be used to retrieve the list of members of a group:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->retrieveAllMembers('friends');
+
+foreach ($feed as $member) {
+    foreach ($member->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
+    }
+}
+]]></programlisting>
+
+            <para>
+                Alternatively, construct a new MemberQuery, set its groupId 
+                property to match the desired group id, and call 
+                <methodname>getMemberFeed()</methodname> on a service object.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$query = $gdata->newMemberQuery();
+$query->setGroupId('friends');
+$feed = $gdata->getMemberFeed($query);
+
+foreach ($feed as $member) {
+    foreach ($member->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
+    }
+}
+]]></programlisting>
+
+            <para>
+                This will create a <classname>Zend_Gdata_Gapps_MemberFeed</classname>
+                object which holds each member for the selected group.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.gdata.gapps.groupOwners">
+        <title>Interacting with group owners</title>
+
+        <para>
+            Each owner associated with a group is represented by an
+            instance of <classname>Zend_Gdata_Gapps_OwnerEntry</classname>. 
+            Through this class, individual owners can be added and removed 
+            from groups.
+        </para>
+
+        <sect3 id="zend.gdata.gapps.groupOwners.adding">
+            <title>Adding an owner to a group</title>
+
+            <para>
+                To add an owner to a group, simply call the
+                <methodname>addOwnerToGroup()</methodname> convenience method:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$gdata->addOwnerToGroup('bar@somewhere.com', 'friends');
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.groupOwners.retrieving">
+            <title>Retrieving the list of the owner of a group</title>
+
+            <para>
+                The convenience method <methodname>retrieveGroupOwners()</methodname>
+                can be used to retrieve the list of the owners of a group:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->retrieveGroupOwners('friends');
+
+foreach ($feed as $owner) {
+    foreach ($owner->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
+    }
+}
+]]></programlisting>
+
+            <para>
+                Alternatively, construct a new OwnerQuery, set its groupId 
+                property to match the desired group id, and call 
+                <methodname>getOwnerFeed()</methodname> on a service object.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$query = $gdata->newOwnerQuery();
+$query->setGroupId('friends');
+$feed = $gdata->getOwnerFeed($query);
+
+foreach ($feed as $owner) {
+    foreach ($owner->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
+    }
+}
+]]></programlisting>
+
+            <para>
+                This will create a <classname>Zend_Gdata_Gapps_OwnerFeed</classname>
+                object which holds each member for the selected group.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.groupOwners.check">
+            <title>Check to see if an email is the owner of a group</title>
+
+            <para>
+                To check to see if an email is the owner of a group, simply call 
+                the <methodname>isOwner()</methodname> convenience method:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$isOwner = $gdata->isOwner('bar@somewhere.com', 'friends');
+var_dump($isOwner);
+]]></programlisting>
+
+            <para>
+                The method returns a boolean value. If the email is the owner of
+                the group specified, the method returns true, else it returns false.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.groupMembers.removing">
+            <title>Removing an owner from a group</title>
+
+            <para>
+                To remove an owner from a group, call the
+                <methodname>removeOwnerFromGroup()</methodname> convenience
+                method:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$gdata->removeOwnerFromGroup('baz@somewhere.com', 'friends');
 ]]></programlisting>
         </sect3>
     </sect2>

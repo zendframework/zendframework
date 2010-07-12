@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
+<!-- EN-Revision: 21741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.project.providers">
-    <title>Project Provider für Zend Tool</title>
+    <title>Project Provider für Zend_Tool</title>
 
     <para>
         Anbei ist eine Tabelle aller Provider die mit <classname>Zend_Tool_Project</classname>

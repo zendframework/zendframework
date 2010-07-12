@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-node">
     <title>Zend_Ldap_Node</title>
@@ -176,8 +176,9 @@
                     <entry><code>Zend_Ldap_Dn getCurrentDn()</code></entry>
 
                     <entry>
-                        Gibt den aktuellen DN des aktuellen Nodes als Zend_Ldap_Dn zurück. Das
-                        reflektiert mögliche rename-Operationen.
+                        Gibt den aktuellen DN des aktuellen Nodes als
+                        <classname>Zend_Ldap_Dn</classname> zurück. Das reflektiert mögliche
+                        rename-Operationen.
                     </entry>
                 </row>
 
@@ -185,8 +186,9 @@
                     <entry><code>Zend_Ldap_Dn getDn()</code></entry>
 
                     <entry>
-                        Gibt den originalen DN des aktuellen Nodes als Zend_Ldap_Dn zurück. Das
-                        reflektiert mögliche rename-Operationen.
+                        Gibt den originalen DN des aktuellen Nodes als
+                        <classname>Zend_Ldap_Dn</classname> zurück. Das reflektiert mögliche
+                        rename-Operationen.
                     </entry>
                 </row>
 

@@ -435,6 +435,11 @@ class ZendTest_Soap_TestAsset_Recursion
      * @var ZendTest_Soap_TestAsset_Recursion
      */
     public $recursion;
+
+    /**
+     * @return ZendTest_Soap_TestAsset_Recursion
+     */
+    public function create() {}
 }
 
 /**

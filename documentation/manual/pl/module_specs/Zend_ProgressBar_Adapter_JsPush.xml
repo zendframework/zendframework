@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 21825 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.progressbar.adapter.jspush">
+    <title>Zend_ProgressBar_Adapter_JsPush</title>
+
+    <para>
+        <classname>Zend_ProgressBar_Adapter_JsPush</classname> to adapter pozwalający na
+        aktualizację paska postępu w przeglądarce poprzez JavaScript Push. To oznacza, że
+        nie jest potrzebne nowe połączenie na potrzeby przesyłu danych o postępie operacji.
+        Proces pracujący po stronie serwera komunikuje się bezpośrednio z przeglądarką
+        użytkownika.
+    </para>
+
+    <para>
+        Opcje adaptera można ustawiać za pomocą metod <code>set*</code> albo przez podanie
+        tablicy asocjacyjnej lub obiektu <classname>Zend_Config</classname> w pierwszym parametrze
+        konstruktora. Dostępne opcje to:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>updateMethodName</code>: Metoda JavaScript, która zostanie wywołana
+                przy każdej aktualizacji paska postępu. Domyślnie jest to
+                <classname>Zend_ProgressBar_Update</classname>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>finishMethodName</code>: Metoda JavaScript, która zostanie wywołana
+                po zakończeniu prowadzonej operacji. Domyślna wartość to
+                <constant>NULL</constant>, co oznacza brak reakcji.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Użycie tego adaptera jest dość proste. Na początku należy utworzyć pasek postępu w
+        przeglądarce za pomocą poleceń JavaScript lub <acronym>HTML</acronym>. Następnie należy
+        zdefiniować metodę JavaScript wywoływaną przy aktualizacji oraz (opcjonalnie)
+        po skończeniu działania. Obie powinny przyjmować pojedynczy argument - obiekt
+        <acronym>JSON</acronym>. Aby otworzyć połączenie należy wywołać długo trwającą akcję
+        w ukrytym obiekcie <code>iframe</code> lub <code>object</code>. Podczas wykonywania
+        tego procesu przy każdej aktualizacji adapter będzie wywoływał odpowiednią metodę
+        przekazując do niej obiekt <acronym>JSON</acronym> o następujących parametrach:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>current</code>: Obecna wartość absolutna
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>max</code>: Maksymalna wartość absolutna
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>percent</code>: Obliczony procent postępu
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>timeTaken</code>: Czas trwania procesu (do obecnej chwili)
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>timeRemaining</code>: Oszacowanie czasu pozostałego do końca
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>text</code>: Opcjonalna wiadomość dotycząca stanu postępu
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <example id="zend.progressbar-adapter.jspush.example">
+        <title>Podstawowy przykład kodu po stronie klienta</title>
+
+        <para>
+            Ten przykład ilustruje prosty kod <acronym>HTML</acronym>, <acronym>CSS</acronym>
+            oraz JavaScript do użytku z adapterem JsPush
+        </para>
+
+        <programlisting language="html"><![CDATA[
+<div id="zend-progressbar-container">
+    <div id="zend-progressbar-done"></div>
+</div>
+
+<iframe src="long-running-process.php" id="long-running-process"></iframe>
+]]></programlisting>
+
+        <programlisting language="css"><![CDATA[
+#long-running-process {
+    position: absolute;
+    left: -100px;
+    top: -100px;
+
+    width: 1px;
+    height: 1px;
+}
+
+#zend-progressbar-container {
+    width: 100px;
+    height: 30px;
+
+    border: 1px solid #000000;
+    background-color: #ffffff;
+}
+
+#zend-progressbar-done {
+    width: 0;
+    height: 30px;
+
+    background-color: #000000;
+}
+]]></programlisting>
+
+        <programlisting language="javascript"><![CDATA[
+function Zend_ProgressBar_Update(data)
+{
+    document.getElementById('zend-progressbar-done').style.width = data.percent + '%';
+}
+]]></programlisting>
+
+        <para>
+            Powyższy kod tworzy prosty pojemnik z czarną granicą oraz blok wskazujący
+            zaawansowanie procesu. Należy pamiętać by nie ukrywać elementów
+            <code>iframe</code> lub <code>object</code> poprzez <code>display: none;</code>
+            ponieważ w takiej sytuacji niektóre przeglądarki jak Safari 2 w ogóle nie pobiorą
+            tych elementów.
+        </para>
+
+        <para>
+            Zamiast własnoręcznie tworzyć pasek postępu, można skorzystać z jednej z wielu
+            dostępnych bibliotek JavaScript, takich jak Dojo czy jQuery. Np.:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Dojo: <ulink
+                        url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/user-assistance-and-feedback/progress-bar" />
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    jQuery: <ulink url="http://t.wits.sg/2008/06/20/jquery-progress-bar-11/" />
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    MooTools: <ulink url="http://davidwalsh.name/dw-content/progress-bar.php" />
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Prototype: <ulink url="http://livepipe.net/control/progressbar" />
+                </para>
+            </listitem>
+        </itemizedlist>
+    </example>
+
+    <note>
+        <title>Odstęp czasowy pomiędzy aktualizacjami</title>
+
+        <para>
+            Należy upewnić się, że nie jest tworzona zbyt duża ilość aktualizacji. Każda z nich
+            powinna przesyłać dane o wielkości co najmniej 1kB. Dla przeglądarki Safari jest to
+            niezbędny warunek do wykonania polecenia wywołania funkcji. Internet Explorer ma
+            podobne ograniczenie - w jego przypadku jest to 256 Bajtów.
+        </para>
+    </note>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

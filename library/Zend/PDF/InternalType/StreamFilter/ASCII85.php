@@ -140,7 +140,7 @@ class ASCII85 implements StreamFilter
             if (substr($data, $i, 1) == "z") {
                 $i -= 4;
                 $output .= pack("N", 0);
-                next;
+                continue;
             }
 
             $c = substr($data, $i, 5);

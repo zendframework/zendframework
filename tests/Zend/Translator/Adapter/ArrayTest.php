@@ -56,17 +56,6 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
      */
     protected $_errorOccurred = false;
 
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Translate_Adapter_ArrayTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         if (Adapter\ArrayAdapter::hasCache()) {
@@ -160,19 +149,27 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new Adapter\ArrayAdapter(dirname(__FILE__) . '/_files/translation_en.php', 'en');
         $adapter->setOptions(array('testoption' => 'testkey'));
-        $this->assertEquals(
-            array(
-                'testoption'      => 'testkey',
-                'clear'           => false,
-                'scan'            => null,
-                'locale'          => 'en',
-                'ignore'          => '.',
-                'disableNotices'  => false,
-                'log'             => false,
-                'logMessage'      => 'Untranslated message within \'%locale%\': %message%',
-                'logUntranslated' => false,
-                'reload'          => false),
-            $adapter->getOptions());
+        $expected = array(
+            'testoption'      => 'testkey',
+            'clear'           => false,
+            'content'         => __DIR__ . '/_files/translation_en.php',
+            'scan'            => null,
+            'locale'          => 'en',
+            'ignore'          => '.',
+            'disableNotices'  => false,
+            'log'             => false,
+            'logMessage'      => 'Untranslated message within \'%locale%\': %message%',
+            'logUntranslated' => false,
+            'reload'          => false,
+        );
+
+        $options = $adapter->getOptions();
+
+        foreach ($expected as $key => $value) {
+            $this->assertArrayHasKey($key, $options);
+            $this->assertEquals($value, $options[$key]);
+        }
+
         $this->assertEquals('testkey', $adapter->getOptions('testoption'));
         $this->assertTrue(is_null($adapter->getOptions('nooption')));
     }
@@ -243,7 +240,7 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
     public function testDisablingNotices()
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $adapter = new Adapter\ArrayAdapter(array());
+        $adapter = new Adapter\ArrayAdapter(array(), 'en');
         $this->assertTrue($this->_errorOccurred);
         restore_error_handler();
         $this->_errorOccurred = false;

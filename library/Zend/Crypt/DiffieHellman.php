@@ -322,7 +322,7 @@ class DiffieHellman
     public function getPrivateKey($type = self::NUMBER)
     {
         if (!$this->hasPrivateKey()) {
-            $this->setPrivateKey($this->_generatePrivateKey());
+            $this->setPrivateKey($this->_generatePrivateKey(), self::BINARY);
         }
         if ($type == self::BINARY) {
             return $this->_math->toBinary($this->_privateKey);

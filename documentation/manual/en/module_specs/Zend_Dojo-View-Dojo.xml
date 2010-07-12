@@ -303,7 +303,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
 
         <para>
             For more information on creating custom builds, please <ulink
-                url="http://dojotoolkit.org/book/dojo-book-0-9/part-4-meta-dojo/package-system-and-custom-builds">refer
+                url="http://dojotoolkit.org/reference-guide/dojo/index.html#package-system">refer
                 to the Dojo build documentation</ulink>.
         </para>
     </sect3>

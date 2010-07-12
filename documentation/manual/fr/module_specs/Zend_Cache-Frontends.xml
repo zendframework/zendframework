@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21130 -->
+<!-- EN-Revision: 22140 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.frontends">
     <title>Les frontends Zend_Cache</title>
@@ -658,7 +658,7 @@ $res = $cache->foobar2('1', '2');
                     quand le buffer de sortie qu'il utilise est nettoyé. Dans le but de fonctionner
                     correctement, il doit être le buffer de sortie final de la requête. Pour
                     garantir ceci, le buffer de sortie utilisé par le distributeur (Dispatcher)
-                    nécessite d'être désactivé en appelant la méthode
+                    <emphasis>doit</emphasis> être désactivé en appelant la méthode
                     <methodname>setParam()</methodname> de
                     <classname>Zend_Controller_Front</classname>, par exemple
                     <command>$front->setParam('disableOutputBuffering', true);</command> ou en
@@ -965,4 +965,43 @@ if ($unTest) {
 ]]></programlisting>
         </sect3>
     </sect2>
+
+    <sect2 id="zend.cache.frontends.capture">
+        <title>Zend_Cache_Frontend_Capture</title>
+
+        <sect3 id="zend.cache.frontends.capture.introduction">
+            <title>Introduction</title>
+
+            <para>
+                <classname>Zend_Cache_Frontend_Capture</classname> is like
+                <classname>Zend_Cache_Frontend_Output</classname> but designed for a complete page.
+                It's impossible to use <classname>Zend_Cache_Frontend_Capture</classname> for
+                caching only a single block. This class is specifically designed to operate in
+                concert only with the <classname>Zend_Cache_Backend_Static</classname> backend to
+                assist in caching entire pages of <acronym>HTML</acronym> / <acronym>XML</acronym>
+                or other content to a physical static file on the local filesystem.
+            </para>
+
+            <para>
+                Please refer to the documentation on
+                <classname>Zend_Cache_Backend_Static</classname> for all use cases pertaining to
+                this class.
+            </para>
+
+            <note>
+                <para>
+                    This frontend operates by registering a callback function to be called
+                    when the output buffering it uses is cleaned. In order for this to operate
+                    correctly, it must be the final output buffer in the request. To guarantee
+                    this, the output buffering used by the Dispatcher <emphasis>must</emphasis> be
+                    disabled by calling <classname>Zend_Controller_Front</classname>'s
+                    <methodname>setParam()</methodname> method, for example,
+                    <command>$front->setParam('disableOutputBuffering', true);</command> or adding
+                    "resources.frontcontroller.params.disableOutputBuffering = true"
+                    to your bootstrap configuration file (assumed <acronym>INI</acronym>) if using
+                    <classname>Zend_Application</classname>.
+                </para>
+            </note>
+        </sect3>
+     </sect2>
 </sect1>

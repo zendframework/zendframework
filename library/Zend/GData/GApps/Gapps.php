@@ -72,6 +72,11 @@ class GApps extends GData\GData
     const APPS_NICKNAME_PATH = '/nickname/2.0';
 
     /**
+     * Path to group feeds on the Google Apps server.
+     */
+    const APPS_GROUP_PATH = '/group/2.0';
+
+    /**
      * Path to email list feeds on the Google Apps server.
      */
     const APPS_EMAIL_LIST_PATH = '/emailList/2.0';
@@ -131,7 +136,7 @@ class GApps extends GData\GData
         // completes. (See ZF-5949)
         $response = $e->getResponse();
         if (!$response) {
-            throw new GData\App\IOException('No HTTP response received (possible connection failure)');
+            throw new App\IOException('No HTTP response received (possible connection failure)');
         }
 
         try {
@@ -357,7 +362,80 @@ class GApps extends GData\GData
         } else {
             $uri = $location;
         }
-        return parent::getFeed($uri, '\Zend\GData\GApps\NicknameFeed');
+        return parent::getFeed($uri, 'Zend\GData\GApps\NicknameFeed');
+    }
+
+    /**
+     * Retreive GroupFeed object containing multiple GroupEntry
+     * objects.
+     *
+     * @param mixed $location (optional) The location for the feed, as a URL
+     *          or Query.
+     * @return Zend\GData\GApps\GroupFeed
+     * @throws Zend\GData\App\Exception
+     * @throws Zend\GData\App\HttpException
+     * @throws Zend\GData\GApps\ServiceException
+     */
+    public function getGroupFeed($location = null)
+    {
+        if ($location === null) {
+            $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+            $uri .= $this->getDomain();
+        } else if ($location instanceof GData\Query) {
+            $uri = $location->getQueryUrl();
+        } else {
+            $uri = $location;
+        }
+        return parent::getFeed($uri, 'Zend\GData\GApps\GroupFeed');
+    }
+
+    /**
+     * Retreive MemberFeed object containing multiple MemberEntry
+     * objects.
+     *
+     * @param mixed $location (optional) The location for the feed, as a URL
+     *          or Query.
+     * @return Zend\GData\GApps\MemberFeed
+     * @throws Zend\GData\App\Exception
+     * @throws Zend\GData\App\HttpException
+     * @throws Zend\GData\GApps\ServiceException
+     */
+    public function getMemberFeed($location = null)
+    {
+        if ($location === null) {
+            throw new App\InvalidArgumentException(
+                    'Location must not be null');
+        } else if ($location instanceof GData\Query) {
+            $uri = $location->getQueryUrl();
+        } else {
+            $uri = $location;
+        }
+        return parent::getFeed($uri, 'Zend\GData\GApps\MemberFeed');
+    }
+
+    /**
+     * Retreive OwnerFeed object containing multiple OwnerEntry
+     * objects.
+     *
+     * @param mixed $location (optional) The location for the feed, as a URL
+     *          or Query.
+     * @return Zend\GData\GApps\OwnerFeed
+     * @throws Zend\GData\App\Exception
+     * @throws Zend\GData\App\HttpException
+     * @throws Zend\GData\GApps\ServiceException
+     */
+    public function getOwnerFeed($location = null)
+    {
+        if ($location === null) {
+            throw new App\InvalidArgumentException(
+                    'Location must not be null');
+        } else if ($location instanceof GData\Query) {
+
+            $uri = $location->getQueryUrl();
+        } else {
+            $uri = $location;
+        }
+        return parent::getFeed($uri, '\Zend\GData\GApps\OwnerFeed');
     }
 
     /**
@@ -447,7 +525,73 @@ class GApps extends GData\GData
         } else {
             $uri = $location;
         }
-        return parent::getEntry($uri, '\Zend\GData\GApps\NicknameEntry');
+        return parent::getEntry($uri, 'Zend\GData\GApps\NicknameEntry');
+    }
+
+    /**
+     * Retreive a single GroupEntry object.
+     *
+     * @param mixed $location The location for the feed, as a URL or Query.
+     * @return Zend\GData\GApps\GroupEntry
+     * @throws Zend\GData\App\Exception
+     * @throws Zend\GData\App\HttpException
+     * @throws Zend\GData\GApps\ServiceException
+     */
+    public function getGroupEntry($location = null)
+    {
+        if ($location === null) {
+            throw new App\InvalidArgumentException(
+                    'Location must not be null');
+        } else if ($location instanceof GData\Query) {
+            $uri = $location->getQueryUrl();
+        } else {
+            $uri = $location;
+        }
+        return parent::getEntry($uri, 'Zend\GData\GApps\GroupEntry');
+    }
+
+    /**
+     * Retreive a single MemberEntry object.
+     *
+     * @param mixed $location The location for the feed, as a URL or Query.
+     * @return Zend\GData\GApps\MemberEntry
+     * @throws Zend\GData\App\Exception
+     * @throws Zend\GData\App\HttpException
+     * @throws Zend\GData\GApps\ServiceException
+     */
+    public function getMemberEntry($location = null)
+    {
+        if ($location === null) {
+            throw new App\InvalidArgumentException(
+                    'Location must not be null');
+        } else if ($location instanceof GData\Query) {
+            $uri = $location->getQueryUrl();
+        } else {
+            $uri = $location;
+        }
+        return parent::getEntry($uri, 'Zend\GData\GApps\MemberEntry');
+    }
+
+    /**
+     * Retreive a single OwnerEntry object.
+     *
+     * @param mixed $location The location for the feed, as a URL or Query.
+     * @return Zend\GData\GApps\OwnerEntry
+     * @throws Zend\GData\App\Exception
+     * @throws Zend\GData\App\HttpException
+     * @throws Zend\GData\GApps\ServiceException
+     */
+    public function getOwnerEntry($location = null)
+    {
+        if ($location === null) {
+            throw new App\InvalidArgumentException(
+                    'Location must not be null');
+        } else if ($location instanceof GData\Query) {
+            $uri = $location->getQueryUrl();
+        } else {
+            $uri = $location;
+        }
+        return parent::getEntry($uri, '\Zend\GData\GApps\OwnerEntry');
     }
 
     /**
@@ -540,6 +684,75 @@ class GApps extends GData\GData
     }
 
     /**
+     * Create a new group from a GroupEntry.
+     *
+     * @param Zend\GData\GApps\GroupEntry $group The group entry to insert.
+     * @param string $uri (optional) The URI where the group should be
+     *          uploaded to. If null, the default user creation URI for
+     *          this domain will be used.
+     * @return Zend\GData\GApps\GroupEntry The inserted group entry as
+     *          returned by the server.
+     * @throws Zend\GData\App\Exception
+     * @throws Zend\GData\App\HttpException
+     * @throws Zend\GData\GApps\ServiceException
+     */
+    public function insertGroup($group, $uri = null)
+    {
+        if ($uri === null) {
+            $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+            $uri .= $this->getDomain();
+        }
+        $newEntry = $this->insertEntry($group, $uri, 'Zend\GData\GApps\GroupEntry');
+        return $newEntry;
+    }
+
+    /**
+     * Create a new member from a MemberEntry.
+     *
+     * @param Zend\GData\GApps\MemberEntry $member The member entry to insert.
+     * @param string $uri (optional) The URI where the group should be
+     *          uploaded to. If null, the default user creation URI for
+     *          this domain will be used.
+     * @return Zend\GData\GApps\MemberEntry The inserted member entry as
+     *          returned by the server.
+     * @throws Zend\GData\App\Exception
+     * @throws Zend\GData\App\HttpException
+     * @throws Zend\GData\GApps\ServiceException
+     */
+    public function insertMember($member, $uri = null)
+    {
+        if ($uri === null) {
+            throw new App\InvalidArgumentException(
+                    'URI must not be null');
+        }
+        $newEntry = $this->insertEntry($member, $uri, 'Zend\GData\GApps\MemberEntry');
+        return $newEntry;
+    }
+
+    /**
+     * Create a new group from a OwnerEntry.
+     *
+     * @param Zend\GData\GApps\OwnerEntry $owner The owner entry to insert.
+     * @param string $uri (optional) The URI where the owner should be
+     *          uploaded to. If null, the default user creation URI for
+     *          this domain will be used.
+     * @return Zend\GData\GApps\OwnerEntry The inserted owner entry as
+     *          returned by the server.
+     * @throws Zend\GData\App\Exception
+     * @throws Zend\GData\App\HttpException
+     * @throws Zend\GData\GApps\ServiceException
+     */
+    public function insertOwner($owner, $uri = null)
+    {
+        if ($uri === null) {
+            throw new App\InvalidArgumentException(
+                    'URI must not be null');
+        }
+        $newEntry = $this->insertEntry($owner, $uri, 'Zend\GData\GApps\OwnerEntry');
+        return $newEntry;
+    }
+
+    /**
      * Create a new email list from an EmailListEntry.
      *
      * @param \Zend\GData\GApps\EmailListEntry $emailList The email list entry
@@ -610,10 +823,9 @@ class GApps extends GData\GData
                  try {
                      // Autoloading disabled on next line for compatibility
                      // with magic factories. See ZF-6660.
-                     if (!class_exists($name . '\\' . $class, false)) {
-                        @\Zend\Loader::loadClass($name . '\\' . $class);
+                     if (class_exists($name . '\\' . $class)) {
+                        $foundClassName = $name . '\\' . $class;
                      }
-                     $foundClassName = $name . '\\' . $class;
                      break;
                  } catch (\Zend\Exception $e) {
                      // package wasn't here- continue searching
@@ -911,6 +1123,358 @@ class GApps extends GData\GData
      */
     public function deleteNickname($nickname) {
         $this->delete($this->getBaseUrl() . self::APPS_NICKNAME_PATH . '/' . $nickname);
+    }
+
+    /**
+     * Create a new group.
+     *
+     * @param string $groupId A unique identifier for the group
+     * @param string $groupName The name of the group
+     * @param string $description A description of the group
+     * @param string $emailPermission The subscription permission of the group
+     * @return Zend\GData\GApps\GroupEntry The group entry as created on the server.
+     */
+    public function createGroup($groupId, $groupName, $description = null, $emailPermission = null)
+    {
+        $i = 0;
+        $group = $this->newGroupEntry();
+        
+        $properties[$i] = $this->newProperty();
+        $properties[$i]->name = 'groupId';
+        $properties[$i]->value = $groupId;
+        $i++;
+        $properties[$i] = $this->newProperty();
+        $properties[$i]->name = 'groupName';
+        $properties[$i]->value = $groupName;
+        $i++;
+
+        if($description != null) {
+            $properties[$i] = $this->newProperty();
+            $properties[$i]->name = 'description';
+            $properties[$i]->value = $description;
+            $i++;
+        }
+
+        if($emailPermission != null) {
+            $properties[$i] = $this->newProperty();
+            $properties[$i]->name = 'emailPermission';
+            $properties[$i]->value = $emailPermission;
+            $i++;
+        }        
+        
+        $group->property = $properties;
+
+        return $this->insertGroup($group);
+    }
+
+    /**
+     * Retrieves a group based on group id
+     *
+     * @param string $groupId The unique identifier for the group
+     * @return Zend\GData\GApps\GroupEntry The group entry as returned by the server.
+     */
+    public function retrieveGroup($groupId)
+    {
+        $query = $this->newGroupQuery($groupId);
+        //$query->setGroupId($groupId);
+
+        try {
+            $group = $this->getGroupEntry($query);
+        } catch (ServiceException $e) {
+            // Set the group to null if not found
+            if ($e->hasError(Error::ENTITY_DOES_NOT_EXIST)) {
+                $group = null;
+            } else {
+                throw $e;
+            }
+        }
+        return $group;
+    }
+
+    /**
+     * Retrieve all groups in the current domain. Be aware that
+     * calling this function on a domain with many groups will take a
+     * signifigant amount of time to complete. On larger domains this may
+     * may cause execution to timeout without proper precautions in place.
+     *
+     * @return Zend\GData\GApps\GroupFeed Collection of Zend\GData\GroupEntry objects
+     *              representing all groups apart of the domain.
+     */
+    public function retrieveAllGroups() 
+    {
+        return $this->retrieveAllEntriesForFeed($this->retrievePageOfGroups());
+    }
+
+    /**
+     * Delete a group
+     *
+     * @param string $groupId The unique identifier for the group
+     */
+    public function deleteGroup($groupId)
+    {
+        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri .= $this->getDomain() . '/' . $groupId;
+
+        $this->delete($uri);
+    }
+    
+    /**
+     * Check to see if a member id or group id is a member of group
+     *
+     * @param string $memberId Member id or group group id
+     * @param string $groupId Group to be checked for
+     * @return bool True, if given entity is a member
+     */
+    public function isMember($memberId, $groupId)
+    {
+        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri .= $this->getDomain() . '/' . $groupId . '/member/' . $memberId;
+        
+        //if the enitiy is not a member, an exception is thrown
+        try {
+            $results = $this->get($uri);
+        } catch (Exception $e) {
+            $results = false;
+        }
+
+        if($results) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    /**
+     * Add an email address to a group as a member
+     *
+     * @param string $recipientAddress Email address, member id, or group id
+     * @param string $groupId The unique id of the group
+     * @return Zend\GData\GApps\MemberEntry The member entry returned by the server
+     */
+    public function addMemberToGroup($recipientAddress, $groupId)
+    {
+        $member = $this->newMemberEntry();
+
+        $properties[] = $this->newProperty();
+        $properties[0]->name = 'memberId';
+        $properties[0]->value = $recipientAddress;
+
+        $member->property = $properties;
+
+        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri .= $this->getDomain() . '/' . $groupId . '/member';
+
+        return $this->insertMember($member, $uri);
+    }
+
+    /**
+     * Remove a member id from a group
+     *
+     * @param string $memberId Member id or group id
+     * @param string $groupId The unique id of the group
+     */
+    public function removeMemberFromGroup($memberId, $groupId)
+    {
+        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri .= $this->getDomain() . '/' . $groupId . '/member/' . $memberId;
+
+        return $this->delete($uri);
+    }
+
+    /**
+     * Retrieves all the members of a group
+     *
+     * @param string $groupId The unique id of the group
+     * @return Zend\GData\GApps\MemberFeed Collection of MemberEntry objects
+     *              representing all members apart of the group.
+     */
+    public function retrieveAllMembers($groupId)
+    {
+        return $this->retrieveAllEntriesForFeed(
+                $this->retrievePageOfMembers($groupId));
+    }
+
+    /**
+     * Add an email as an owner of a group
+     *
+     * @param string $email Owner's email
+     * @param string $groupId Group ownership to be checked for
+     * @return Zend\GData\GApps\OwnerEntry The OwnerEntry returned by the server
+     */
+    public function addOwnerToGroup($email, $groupId)
+    {
+        $owner = $this->newOwnerEntry();
+
+        $properties[] = $this->newProperty();
+        $properties[0]->name = 'email';
+        $properties[0]->value = $email;
+
+        $owner->property = $properties;
+
+        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri .= $this->getDomain() . '/' . $groupId . '/owner';
+        
+        return $this->insertOwner($owner, $uri);
+    }
+
+    /**
+     * Retrieves all the owners of a group
+     *
+     * @param string $groupId The unique identifier for the group
+     * @return Zend\GData\GApps\OwnerFeed Collection of Zend\GData\OwnerEntry
+     *              objects representing all owners apart of the group.
+     */
+    public function retrieveGroupOwners($groupId)
+    {
+        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri .= $this->getDomain() . '/' . $groupId . '/owner';
+
+        return $this->getOwnerFeed($uri);
+    }
+
+    /**
+     * Checks to see if an email is an owner of a group
+     *
+     * @param string $email Owner's email
+     * @param string $groupId Group ownership to be checked for
+     * @return bool True, if given entity is an owner
+     */
+    public function isOwner($email, $groupId)
+    {
+        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri .= $this->getDomain() . '/' . $groupId . '/owner/' . $email;
+        
+        //if the enitiy is not an owner of the group, an exception is thrown
+        try {            
+            $results = $this->get($uri);
+        } catch (Exception $e) {
+            $results = false;
+        }
+
+        if($results) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    /**
+     * Remove email as an owner of a group
+     *
+     * @param string $email Owner's email
+     * @param string $groupId The unique identifier for the group
+     */
+    public function removeOwnerFromGroup($email, $groupId)
+    {
+        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri .= $this->getDomain() . '/' . $groupId . '/owner/' . $email;
+
+        return $this->delete($uri);
+    }
+
+    /**
+     * Update group properties with new values. any property not defined will not
+     * be updated
+     *
+     * @param string $groupId A unique identifier for the group
+     * @param string $groupName The name of the group
+     * @param string $description A description of the group
+     * @param string $emailPermission The subscription permission of the group
+     * @return Zend\GData\GApps\GroupEntry The group entry as updated on the server.
+     */
+    public function updateGroup($groupId, $groupName = null, $description = null,
+            $emailPermission = null)
+    {
+        $i = 0;
+        $group = $this->newGroupEntry();
+        
+        $properties[$i] = $this->newProperty();
+        $properties[$i]->name = 'groupId';
+        $properties[$i]->value = $groupId;
+        $i++;
+
+        if($groupName != null) {
+            $properties[$i] = $this->newProperty();
+            $properties[$i]->name = 'groupName';
+            $properties[$i]->value = $groupName;
+            $i++;
+        }
+
+        if($description != null) {
+            $properties[$i] = $this->newProperty();
+            $properties[$i]->name = 'description';
+            $properties[$i]->value = $description;
+            $i++;
+        }
+
+        if($emailPermission != null) {
+            $properties[$i] = $this->newProperty();
+            $properties[$i]->name = 'emailPermission';
+            $properties[$i]->value = $emailPermission;
+            $i++;
+        }
+        
+        $group->property = $properties;
+
+        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri .= $this->getDomain() . '/' . $groupId;
+
+        return $this->updateEntry($group, $uri, 'Zend\GData\GApps\GroupEntry');        
+    }
+
+    /**
+     * Retrieve all of the groups that a user is a member of
+     *
+     * @param string $memberId Member username
+     * @param bool $directOnly (Optional) If true, members with direct association 
+     *             only will be considered
+     * @return Zend\GData\GApps\GroupFeed Collection of Zend\GData\GroupEntry
+     *              objects representing all groups member is apart of in the domain.
+     */
+    public function retrieveGroups($memberId, $directOnly = null)
+    {
+        $query = $this->newGroupQuery();
+        $query->setMember($memberId);
+        if($directOnly != null) {
+            $query->setDirectOnly($directOnly);
+        }
+        return $this->getGroupFeed($query);
+    }
+
+    /**
+     * Retrieve a page of groups in alphabetical order, starting with the
+     * provided group.
+     *
+     * @param string $startGroup (optional) The first group to
+     *              retrieve. If null or not defined, the page will begin
+     *              with the first group in the domain.
+     * @return Zend\GData\GApps\GroupFeed Collection of Zend\GData\GroupEntry
+     *              objects representing the groups in the domain.
+     * @throws Zend\GData\App\Exception
+     * @throws Zend\GData\App\HttpException
+     * @throws Zend\GData\GApps\ServiceException
+     */
+    public function retrievePageOfGroups ($startGroup = null)
+    {
+        $query = $this->newGroupQuery();
+        $query->setStartGroupId($startGroup);
+        return $this->getGroupFeed($query);
+    }
+
+    /**
+     * Gets page of Members
+     *
+     * @param string $groupId The group id which should be searched.
+     * @param string $startMember (optinal) The address of the first member,
+     *              or null to start with the first member in the list.
+     * @return Zend\GData\GApps\MemberFeed Collection of Zend\GData\MemberEntry
+     *              objects
+     */
+    public function retrievePageOfMembers($groupId, $startMember = null)
+    {
+        $query = $this->newMemberQuery($groupId);
+        $query->setStartMemberId($startMember);
+        return $this->getMemberFeed($query);
     }
 
     /**

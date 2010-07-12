@@ -318,4 +318,12 @@ CERT;
         }
     }
 
+    /**
+     * @group ZF-8846
+     */
+    public function testLoadsPublicKeyFromPEMWithoutPrivateKeyAndThrowsNoException()
+    {
+        $rsa = new RSA;
+        $rsa->setPemString($this->_testPemStringPublic);
+    }
 }

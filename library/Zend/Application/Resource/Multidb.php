@@ -39,7 +39,7 @@ use Zend\DB\Adapter,
  *   resources.multidb.db1.password = "XXXX"
  *   resources.multidb.db1.dbname = "db1"
  *   resources.multidb.db1.default = true
- *   
+ *
  *   resources.multidb.db2.adapter = "pdo_pgsql"
  *   resources.multidb.db2.host = "example.com"
  *   resources.multidb.db2.username = "dba"
@@ -61,11 +61,11 @@ class Multidb extends AbstractResource
 {
     /**
      * Associative array containing all configured db's
-     * 
+     *
      * @var array
-     */   
+     */
     protected $_dbs = array();
-    
+
     /**
      * An instance of the default db, if set
      * 
@@ -81,23 +81,26 @@ class Multidb extends AbstractResource
     public function init() 
     {
         $options = $this->getOptions();
-        
+
         foreach ($options as $id => $params) {
         	$adapter = $params['adapter'];
-            $default = isset($params['default'])?(int)$params['default']:false;
-            unset($params['adapter'], $params['default']);
-        	
+            $default = (int) (
+                isset($params['isDefaultTableAdapter']) && $params['isDefaultTableAdapter']
+                || isset($params['default']) && $params['default']
+            );
+            unset(
+                $params['adapter'],
+                $params['default'],
+                $params['isDefaultTableAdapter']
+            );
+
             $this->_dbs[$id] = \Zend\DB\DB::factory($adapter, $params);
 
-            if ($default
-                // For consistency with the Db Resource Plugin
-                || (isset($params['isDefaultTableAdapter']) 
-                    && $params['isDefaultTableAdapter'] == true)
-            ) {
+            if ($default) {
                 $this->_setDefault($this->_dbs[$id]);
             }
         }
-        
+
         return $this;
     }
 
@@ -124,12 +127,12 @@ class Multidb extends AbstractResource
      * @return \Zend\DB\Adapter\AbstractAdapter
      * @throws \Zend\Application\ResourceException if the given parameter could not be found
      */
-    public function getDb($db = null) 
+    public function getDb($db = null)
     {
         if ($db === null) {
             return $this->getDefaultDb();
         }
-        
+
         if (isset($this->_dbs[$db])) {
             return $this->_dbs[$db];
         }
@@ -141,13 +144,13 @@ class Multidb extends AbstractResource
 
     /**
      * Get the default db connection
-     * 
+     *
      * @param  boolean $justPickOne If true, a random (the first one in the stack)
      *                           connection is returned if no default was set.
      *                           If false, null is returned if no default was set.
      * @return null|\Zend\DB\Adapter\AbstractAdapter
      */
-    public function getDefaultDb($justPickOne = true) 
+    public function getDefaultDb($justPickOne = true)
     {
         if ($this->_defaultDb !== null) {
             return $this->_defaultDb;
@@ -156,7 +159,7 @@ class Multidb extends AbstractResource
         if ($justPickOne) {
             return reset($this->_dbs); // Return first db in db pool
         }
-        
+
         return null;
     }
 

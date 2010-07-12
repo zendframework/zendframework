@@ -339,6 +339,51 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         $this->_adapter->authenticate();
     }
 
+
+    /**
+     * Test fallback to default database adapter, when no such adapter set
+     *
+     * @group ZF-7510
+     */
+    public function testAuthenticateWithDefaultDbAdapterNoAdapterException()
+    {
+        $this->setExpectedException('Zend\Authentication\Adapter\Exception', "No database adapter present");
+
+        // make sure that no default adapter exists
+        \Zend\DB\Table\AbstractTable::setDefaultAdapter(null);
+        $this->_adapter = new Adapter\DbTable();
+    }
+
+    /**
+     * Test fallback to default database adapter
+     *
+     * @group ZF-7510
+     */
+    public function testAuthenticateWithDefaultDbAdapter()
+    {
+        // preserve default adapter between cases
+        $tmp = \Zend\DB\Table\AbstractTable::getDefaultAdapter();
+
+        // make sure that default db adapter exists
+        \Zend\DB\Table\AbstractTable::setDefaultAdapter($this->_db);
+
+        // check w/o passing adapter
+        $this->_adapter = new Adapter\DbTable($this->_db);
+        $this->_adapter
+             ->setTableName('users')
+             ->setIdentityColumn('username')
+             ->setCredentialColumn('password')
+             ->setTableName('users')
+             ->setIdentity('my_username')
+             ->setCredential('my_password');
+        $result = $this->_adapter->authenticate();
+        $this->assertTrue($result->isValid());
+
+        // restore adapter
+        \Zend\DB\Table\AbstractTable::setDefaultAdapter($tmp);
+    }
+
+
     protected function _setupDbAdapter($optionalParams = array())
     {
         $params = array('dbname' => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
@@ -762,8 +762,8 @@ $server = new Zend_XmlRpc_Server();
             <para>
                 Performance wird durch eine Vielzahl an Parametern und Benchmarks ermittelt
                 welche nur für den speziellen Testfall angewendet werden. Unterschiede basieren
-                auf der PHP Version, installierten Erweiterungen, dem Webserver und dem
-                Betriebssystem um nur einige zu nennen. Man sollte darauf achten das man die
+                auf der <acronym>PHP</acronym> Version, installierten Erweiterungen, dem Webserver
+                und dem Betriebssystem um nur einige zu nennen. Man sollte darauf achten das man die
                 eigene Anwendung selbst benchmarkt und anschließend auswählt welchen Generator
                 man verwendet, aber basierend auf <emphasis>eigenen</emphasis> Zahlen.
             </para>

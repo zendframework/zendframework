@@ -544,7 +544,10 @@ class Index implements SearchIndex
             $segmentStartId += $segmentInfo->count();
         }
 
-        return $segmentInfo->isDeleted($id - $segmentStartId);
+        if (isset($segmentInfo)) {
+            return $segmentInfo->isDeleted($id - $segmentStartId);
+        }
+        return false;
     }
 
     /**

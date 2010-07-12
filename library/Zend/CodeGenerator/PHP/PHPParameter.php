@@ -144,11 +144,20 @@ class PHPParameter extends \Zend\CodeGenerator\PHP\AbstractPHP
      */
     public function setDefaultValue($defaultValue)
     {
-        if (!$defaultValue instanceof PHPParameterDefaultValue) {
-            $defaultValue = new PHPParameterDefaultValue(array('value' => $defaultValue));
+        if ($defaultValue === null) {
+            $this->_defaultValue = new PHPParameterDefaultValue(array('value' => null));
+        } else if(is_array($defaultValue)) {
+            $defaultValue = str_replace(array("\r", "\n"), "", var_export($defaultValue, true));
+            $this->_defaultValue = new PHPParameterDefaultValue(array('value' => $defaultValue));
+        } else if(is_bool($defaultValue)) {
+            if($defaultValue == true) {
+                $this->_defaultValue = new PHPParameterDefaultValue(array('value' => "true"));
+            } else {
+                $this->_defaultValue = new PHPParameterDefaultValue(array('value' => "false"));
+            }
+        } else {
+            $this->_defaultValue = $defaultValue;
         }
-        
-        $this->_defaultValue = $defaultValue;
         return $this;
     }
 

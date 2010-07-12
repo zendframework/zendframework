@@ -216,6 +216,8 @@ class Server implements \Zend\Server\Server
                     $this->setWSDL($value);
                     break;
                 case 'featues':
+                    trigger_error(__METHOD__ . ': the option "featues" is deprecated as of 1.10.x and will be removed with 2.0.0; use "features" instead', E_USER_NOTICE);
+                case 'features':
                     $this->setSoapFeatures($value);
                     break;
                 case 'cache_wsdl':

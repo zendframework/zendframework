@@ -52,17 +52,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 class IsImageTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Validate_File_IsImageTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
      * Ensures that the validator follows expected behavior
      *
      * @return void
@@ -194,9 +183,4 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->getHeaderCheck());
         $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
     }
-}
-
-// Call Zend_Validate_File_IsImage::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Validate_File_IsImage::main") {
-    File\IsImage::main();
 }

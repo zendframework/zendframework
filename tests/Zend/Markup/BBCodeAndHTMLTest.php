@@ -25,7 +25,7 @@
  */
 namespace ZendTest\Markup;
 
-use Zend\Markup\AbstractRenderer,
+use Zend\Markup\Renderer\AbstractRenderer,
     Zend\Markup\Renderer\HTML as HTMLRenderer,
     Zend\Filter;
 
@@ -104,10 +104,12 @@ class BbcodeAndHtmlTest extends \PHPUnit_Framework_TestCase
     /**
      * Test input exceptions
      *
-     * @expectedException Zend\Markup\Parser\Exception
+     * @return void
      */
     public function testExceptionParserWrongInputType()
     {
+        $this->setExpectedException('Zend\Markup\Parser\Exception');
+
         $this->_markup->getParser()->parse(array());
     }
 

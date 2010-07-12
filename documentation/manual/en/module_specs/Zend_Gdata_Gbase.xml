@@ -226,8 +226,12 @@ session_start();
 // to the AuthSub server if necessary.
 $service = new Zend_Gdata_Gbase(getAuthSubHttpClient());
 ]]></programlisting>
-<para>Finally, an unauthenticated server can be created for use with snippets feeds:</para>
-<programlisting language="php"><![CDATA[
+
+            <para>
+                Finally, an unauthenticated server can be created for use with snippets feeds:
+            </para>
+
+            <programlisting language="php"><![CDATA[
 // Create an instance of the Base service using an unauthenticated HTTP client
 $service = new Zend_Gdata_Gbase();
 ]]></programlisting>
@@ -317,7 +321,7 @@ $feed = $service->getGbaseSnippetFeed($query);
 
             <para>
                 Google Base items can contain item-specific attributes such as
-                <code>&lt;g:main_ingredient&gt;</code> and <code>&lt;g:weight&gt;</code>.
+                <emphasis>&lt;g:main_ingredient&gt;</emphasis> and <emphasis>&lt;g:weight&gt;</emphasis>.
             </para>
 
             <para>

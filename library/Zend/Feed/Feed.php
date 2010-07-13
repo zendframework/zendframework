@@ -35,7 +35,6 @@ use Zend;
  * accessor.
  *
  * @uses       \Zend\Feed\Atom
- * @uses       \Zend\Feed\Builder\Builder
  * @uses       \Zend\Feed\Exception
  * @uses       \Zend\Feed\RSS
  * @uses       \Zend\HTTP\Client
@@ -343,43 +342,5 @@ class Feed
 
         // Return the fetched feeds
         return $feeds;
-    }
-
-    /**
-     * Construct a new Zend_Feed_Abstract object from a custom array
-     *
-     * @param  array  $data
-     * @param  string $format (rss|atom) the requested output format
-     * @return \Zend\Feed\AbstractFeed
-     */
-    public static function importArray(array $data, $format = 'Atom')
-    {
-        if (strtolower($format) == 'rss') {
-            $format = 'RSS';
-        } else {
-            $format = ucfirst(strtolower($format));
-        }
-        $obj = 'Zend\Feed\\' . $format;
-
-        return new $obj(null, null, new Builder\Builder($data));
-    }
-
-    /**
-     * Construct a new Zend_Feed_Abstract object from a Zend_Feed_Builder_Interface data source
-     *
-     * @param  \Zend\Feed\Builder\BuilderInterface $builder this object will be used to extract the data of the feed
-     * @param  string                      $format (rss|atom) the requested output format
-     * @return \Zend\Feed\AbstractFeed
-     */
-    public static function importBuilder(Builder\BuilderInterface $builder, $format = 'atom')
-    {
-        if (strtolower($format) == 'rss') {
-            $format = 'RSS';
-        } else {
-            $format = ucfirst(strtolower($format));
-        }
-        $obj = 'Zend\Feed\\' . $format;
-
-        return new $obj(null, null, $builder);
     }
 }

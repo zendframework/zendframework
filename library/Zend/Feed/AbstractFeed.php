@@ -68,11 +68,10 @@ abstract class AbstractFeed extends Element implements \Iterator, \Countable
      *
      * @param  string $uri The full URI of the feed to load, or NULL if not retrieved via HTTP or as an array.
      * @param  string $string The feed as a string, or NULL if retrieved via HTTP or as an array.
-     * @param  \Zend\Feed\Builder\BuilderInterface $builder The feed as a builder instance or NULL if retrieved as a string or via HTTP.
      * @return void
      * @throws \Zend\Feed\Exception If loading the feed failed.
      */
-    public function __construct($uri = null, $string = null, Builder\BuilderInterface $builder = null)
+    public function __construct($uri = null, $string = null)
     {
         if ($uri !== null) {
             // Retrieve the feed via HTTP
@@ -88,14 +87,6 @@ abstract class AbstractFeed extends Element implements \Iterator, \Countable
             // Retrieve the feed from $string
             $this->_element = $string;
             $this->__wakeup();
-        } else {
-            // Generate the feed from the array
-            $header = $builder->getHeader();
-            $this->_element = new \DOMDocument('1.0', $header['charset']);
-            $root = $this->_mapFeedHeaders($header);
-            $this->_mapFeedEntries($root, $builder->getEntries());
-            $this->_element = $root;
-            $this->_buildEntryCache();
         }
     }
 

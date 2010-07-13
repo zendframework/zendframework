@@ -26,7 +26,6 @@
 namespace ZendTest\Feed;
 use Zend\Feed;
 use Zend\HTTP;
-use Zend\Feed\Builder;
 use Zend\HTTP\Response;
 
 /**
@@ -196,106 +195,6 @@ class ImportTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the import of a RSS feed from an array
-     */
-    public function testRssImportFullArray()
-    {
-        $feed = Feed\Feed::importArray($this->_getFullArray(), 'rss');
-        $this->assertType('Zend\Feed\RSS', $feed);
-    }
-    
-    /**
-     * Test the import of a RSS feed from an array
-     * @group ZF-5833
-     */
-    public function testRssImportSetsIsPermaLinkAsFalseIfGuidNotAUri()
-    {
-        $feed = Feed\Feed::importArray($this->_getFullArray(), 'rss');
-        $entry = $feed->current();
-        $this->assertEquals('false', $entry->guid['isPermaLink']);
-    }
-
-    /**
-     * Test the import of a RSS feed from an array
-     */
-    public function testAtomImportFullArray()
-    {
-        $feed = Feed\Feed::importArray($this->_getFullArray(), 'atom');
-    }
-
-    /**
-     * Test the import of a RSS feed from a builder
-     */
-    public function testRssImportFullBuilder()
-    {
-        $feed = Feed\Feed::importBuilder(new Builder\Builder($this->_getFullArray()), 'rss');
-        $this->assertType('Zend\Feed\RSS', $feed);
-    }
-
-    /**
-     * Test the import of a full iTunes RSS feed from a builder
-     */
-    public function testRssImportFulliTunesBuilder()
-    {
-        $array = $this->_getFullArray();
-        $array['itunes']['author'] = 'iTunes Author';
-        $array['itunes']['owner'] = array('name' => 'iTunes Owner',
-                                          'email' => 'itunes@example.com');
-        $array['itunes']['image'] = 'http://www.example/itunes.png';
-        $array['itunes']['subtitle'] = 'iTunes subtitle';
-        $array['itunes']['summary'] = 'iTunes summary';
-        $array['itunes']['explicit'] = 'clean';
-        $array['itunes']['block'] = 'no';
-        $array['itunes']['new-feed-url'] = 'http://www.example/itunes.xml';
-        $feed = Feed\Feed::importBuilder(new Builder\Builder($array), 'rss');
-        $this->assertType('Zend\Feed\RSS', $feed);
-    }
-
-    /**
-     * Test the import of an Atom feed from a builder
-     */
-    public function testAtomImportFullBuilder()
-    {
-        $feed = Feed\Feed::importBuilder(new Builder\Builder($this->_getFullArray()), 'atom');
-
-    }
-
-    /**
-     * Test the import of an Atom feed from a builder
-     */
-    public function testAtomImportFullBuilderValid()
-    {
-        $feed = Feed\Feed::importBuilder(new Builder\Builder($this->_getFullArray()), 'atom');
-
-        $feed = Feed\Feed::importString($feed->saveXml());
-        $this->assertType('Zend\Feed\Atom', $feed);
-    }
-
-    /**
-     * Check the validity of the builder import (rss)
-     */
-    public function testRssImportFullBuilderValid()
-    {
-        $feed = Feed\Feed::importBuilder(new Builder\Builder($this->_getFullArray()), 'rss');
-        $this->assertType('Zend\Feed\RSS', $feed);
-        $feed = Feed\Feed::importString($feed->saveXml());
-        $this->assertType('Zend\Feed\RSS', $feed);
-    }
-
-    /**
-     * Test the return of a link() call (atom)
-     */
-    public function testAtomGetLink()
-    {
-        $feed = Feed\Feed::importBuilder(new Builder\Builder($this->_getFullArray()), 'atom');
-        $this->assertType('Zend\Feed\Atom', $feed);
-        $feed = Feed\Feed::importString($feed->saveXml());
-        $this->assertType('Zend\Feed\Atom', $feed);
-        $href = $feed->link('self');
-        $this->assertEquals('http://www.example.com', $href);
-    }
-
-    /**
      * Imports an invalid feed and ensure everything works as expected
      * even if XDebug is running (ZF-2590).
      */
@@ -315,85 +214,6 @@ class ImportTest extends \PHPUnit_Framework_TestCase
             $this->assertType('Zend\Feed\Exception', $e);
             $this->assertRegExp('/(XDebug is running|Empty string)/', $e->getMessage());
         }
-    }
-
-    /**
-     * Returns the array used by Zend_Feed::importArray
-     * and Zend_Feed::importBuilder tests
-     *
-     * @return array
-     */
-    protected function _getFullArray()
-    {
-        $array = array('title' => 'Title of the feed',
-                       'link' => 'http://www.example.com',
-                       'description' => 'Description of the feed',
-                       'author' => 'Olivier Sirven',
-                       'email' => 'olivier@elma.fr',
-                       'webmaster' => 'olivier@elma.fr',
-                       'charset' => 'iso-8859-15',
-                       'lastUpdate' => time(),
-                       'published' => strtotime('2007-02-27'),
-                       'copyright' => 'Common Creative',
-                       'image' => 'http://www.example/images/icon.png',
-                       'language' => 'en',
-                       'ttl' => 60,
-                       'rating' => ' (PICS-1.1 "http://www.gcf.org/v2.5" labels
-  on "1994.11.05T08:15-0500"
-  exp "1995.12.31T23:59-0000"
-  for "http://www.greatdocs.com/foo.html"
-  by "George Sanderson, Jr."
-  ratings (suds 0.5 density 0 color/hue 1))',
-                       'cloud' => array('domain' => 'rpc.sys.com',
-                                        'path' => '/rpc',
-                                        'registerProcedure' => 'webServices.pingMe',
-                                        'protocol' => 'xml-rpc'),
-                       'textInput' => array('title' => 'subscribe',
-                                            'description' => 'enter your email address to subscribe by mail',
-                                            'name' => 'email',
-                                            'link' => 'http://www.example.com/subscribe'),
-                       'skipHours' => array(1, 13, 17),
-                       'skipDays' => array('Saturday', 'Sunday'),
-                       'itunes'  => array('block' => 'no',
-                                          'keywords' => 'example,itunes,podcast',
-                                          'category' => array(array('main' => 'Technology',
-                                                                    'sub' => 'Gadgets'),
-                                                              array('main' => 'Music'))),
-                       'entries' => array(array('guid' => time(),
-                                                'title' => 'First article',
-                                                'link' => 'http://www.example.com',
-                                                'description' => 'First article description',
-                                                'content' => 'First article <strong>content</strong>',
-                                                'lastUpdate' => time(),
-                                                'comments' => 'http://www.example.com/#comments',
-                                                'commentRss' => 'http://www.example.com/comments.xml',
-                                                'source' => array('title' => 'Original title',
-                                                                  'url' => 'http://www.domain.com'),
-                                                'category' => array(array('term' => 'test category',
-                                                                          'scheme' => 'http://www.example.com/scheme'),
-                                                                    array('term' => 'another category')
-                                                                    ),
-                                                'enclosure' => array(array('url' => 'http://www.example.com/podcast.mp3',
-                                                                           'type' => 'audio/mpeg',
-                                                                           'length' => '12216320'
-                                                                           ),
-                                                                     array('url' => 'http://www.example.com/podcast2.mp3',
-                                                                           'type' => 'audio/mpeg',
-                                                                           'length' => '1221632'
-                                                                           )
-                                                                     )
-                                                ),
-                                          array('title' => 'Second article',
-                                                'link' => 'http://www.example.com/two',
-                                                'description' => 'Second article description',
-                                                'content' => 'Second article <strong>content</strong>',
-                                                'lastUpdate' => time(),
-                                                'comments' => 'http://www.example.com/two/#comments',
-                                                'category' => array(array('term' => 'test category')),
-                                                )
-                                          )
-                       );
-        return $array;
     }
 
     /**

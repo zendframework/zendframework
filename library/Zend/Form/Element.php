@@ -27,11 +27,9 @@ use Zend\Config\Config,
     Zend\Loader\PrefixPathMapper,
     Zend\Validator\Validator,
     Zend\Filter\Filter,
+    Zend\Validator\AbstractValidator,
     Zend\View\ViewEngine as View,
     Zend\Controller\Action\HelperBroker as ActionHelperBroker;
-
-/** @see Zend_Validate_Abstract */
-require_once 'Zend/Validate/Abstract.php';
 
 /**
  * Zend_Form_Element
@@ -432,16 +430,6 @@ class Element implements Validator
     /**
      * Does this element have its own specific translator?
      * 
-     * @return bool
-     */
-    public function hasTranslator()
-    {
-        return (bool)$this->_translator;
-    }
-
-    /**
-     * Does this element have its own specific translator?
-     *
      * @return bool
      */
     public function hasTranslator()
@@ -1045,9 +1033,9 @@ class Element implements Validator
      *
      * If no $type specified, assumes it is a base path for both filters and
      * validators, and sets each according to the following rules:
-     * - decorators: $prefix = $prefix . '_Decorator'
-     * - filters: $prefix = $prefix . '_Filter'
-     * - validators: $prefix = $prefix . '_Validate'
+     * - decorators: $prefix = $prefix . '\Decorator'
+     * - filters: $prefix = $prefix . '\Filter'
+     * - validators: $prefix = $prefix . '\Validator'
      *
      * Otherwise, the path prefix is set on the appropriate plugin loader.
      *
@@ -1158,7 +1146,7 @@ class Element implements Validator
                 'options'             => $options,
             );
         } else {
-            throw new Exception('Invalid validator provided to addValidator; must be string or Zend_Validate_Interface');
+            throw new Exception('Invalid validator provided to addValidator; must be string or Zend\Validator\Validator');
         }
 
 
@@ -1351,13 +1339,13 @@ class Element implements Validator
             $this->setValidators($validators);
         }
 
-        // Find the correct translator. Zend_Validate_Abstract::getDefaultTranslator()
-        // will get either the static translator attached to Zend_Validate_Abstract
-        // or the 'Zend_Translate' from Zend_Registry.
-        if (Zend_Validate_Abstract::hasDefaultTranslator() &&
-            !Zend_Form::hasDefaultTranslator())
+        // Find the correct translator. Zend\Validator\AbstractValidator::getDefaultTranslator()
+        // will get either the static translator attached to Zend\Validator\AbstractValidator
+        // or the 'Zend_Translate' from Zend\Registry.
+        if (AbstractValidator::hasDefaultTranslator() 
+            && !Form::hasDefaultTranslator())
         {
-            $translator = Zend_Validate_Abstract::getDefaultTranslator();
+            $translator = AbstractValidator::getDefaultTranslator();
             if ($this->hasTranslator()) {
                 // only pick up this element's translator if it was attached directly.
                 $translator = $this->getTranslator();

@@ -26,6 +26,7 @@ use Zend\Form\Element\Radio as RadioElement,
     Zend\Form\Element\Multi as MultiElement,
     Zend\Form\Element\Xhtml as XhtmlElement,
     Zend\Form\Element,
+    Zend\Form\Form,
     Zend\Form\Decorator,
     Zend\View\View;
 
@@ -151,14 +152,14 @@ class RadioTest extends \PHPUnit_Framework_TestCase
      */
     public function testCustomLabelDecorator()
     {
-        $form = new Zend_Form();
-        $form->addElementPrefixPath('My_Decorator', __DIR__ . '/../_files/decorators/', 'decorator');
+        $form = new Form();
+        $form->addElementPrefixPath('My\Decorator', __DIR__ . '/../TestAsset/decorators/', 'decorator');
 
         $form->addElement($this->element);
 
         $element = $form->getElement('foo');
 
-        $this->assertType('My_Decorator_Label', $element->getDecorator('Label'));
+        $this->assertType('My\Decorator\Label', $element->getDecorator('Label'));
     }
 
     /**

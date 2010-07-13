@@ -22,8 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Validator\Hostname;
-use Zend\Validator;
+namespace Zend\Validator;
 
 /**
  * Please note there are two standalone test scripts for testing IDN characters due to problems
@@ -42,7 +41,7 @@ use Zend\Validator;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Hostname extends Validator\AbstractValidator
+class Hostname extends AbstractValidator
 {
     const INVALID                 = 'hostnameInvalid';
     const IP_ADDRESS_NOT_ALLOWED  = 'hostnameIpAddressNotAllowed';
@@ -360,7 +359,7 @@ class Hostname extends Validator\AbstractValidator
      * Sets the options for this validator
      *
      * @param array $options
-     * @return \Zend\Validator\Hostname\Hostname
+     * @return \Zend\Validator\Hostname
      */
     public function setOptions($options)
     {
@@ -397,10 +396,10 @@ class Hostname extends Validator\AbstractValidator
      * @param \Zend\Validator\Ip $ipValidator OPTIONAL
      * @return void;
      */
-    public function setIpValidator(Validator\Ip $ipValidator = null)
+    public function setIpValidator(Ip $ipValidator = null)
     {
         if ($ipValidator === null) {
-            $ipValidator = new Validator\Ip();
+            $ipValidator = new Ip();
         }
 
         $this->_options['ip'] = $ipValidator;
@@ -421,7 +420,7 @@ class Hostname extends Validator\AbstractValidator
      * Sets the allow option
      *
      * @param  integer $allow
-     * @return \Zend\Validator\Hostname\Hostname Provides a fluent interface
+     * @return \Zend\Validator\Hostname Provides a fluent interface
      */
     public function setAllow($allow)
     {

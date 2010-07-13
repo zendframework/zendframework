@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon\S3;
+
+/**
  * @category   Zend
  * @package    Zend_Service_Amazon_S3
  * @subpackage UnitTests
@@ -30,7 +35,7 @@
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_S3
  */
-class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
+class StreamTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Sets up this test case
@@ -42,11 +47,11 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
         if (!constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED')) {
             $this->markTestSkipped('Zend_Service_Amazon_S3 online tests are not enabled');
         }
-        $this->_amazon = new Zend_Service_Amazon_S3(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
+        $this->_amazon = new \Zend\Service\Amazon\S3\S3(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
                                                     constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')
                                                     );
         $this->_nosuchbucket = "nonexistingbucketnamewhichnobodyshoulduse";
-        $this->_httpClientAdapterSocket = new Zend_Http_Client_Adapter_Socket();
+        $this->_httpClientAdapterSocket = new \Zend\HTTP\Client\Adapter\Socket();
 
         $this->_bucket = constant('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET');
         $this->_bucketName = "s3://".$this->_bucket;

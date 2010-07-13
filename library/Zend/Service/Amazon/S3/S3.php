@@ -54,7 +54,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
     /**
      * Endpoint for the service
      *
-     * @var Zend_Uri_Http
+     * @var \Zend\URI\URL
      */
     protected $_endpoint;
 
@@ -78,9 +78,9 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
     public function setEndpoint($endpoint)
     {
         if (!($endpoint instanceof \Zend\URI\URL)) {
-            $endpoint = \Zend\Uri\Uri::factory($endpoint);
+            $endpoint = new \Zend\URI\URL($endpoint);
         }
-        if (!$endpoint->valid()) {
+        if (!$endpoint->isValid()) {
             throw new Exception('Invalid endpoint supplied');
         }
         $this->_endpoint = $endpoint;
@@ -90,7 +90,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
     /**
      * Get current S3 endpoint
      *
-     * @return Zend_Uri_Http
+     * @return \Zend\URI\URI
      */
     public function getEndpoint()
     {
@@ -294,6 +294,9 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
                     $objects[] = (string)$object;
                 }
             }
+        }
+        if(count($objects) === 0) {
+            return false;
         }
 
         return $objects;
@@ -851,7 +854,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
      */
     public function registerStreamWrapper($name='s3')
     {
-        stream_register_wrapper($name, 'Zend_Service_Amazon_S3_Stream');
+        stream_register_wrapper($name, '\Zend\Service\Amazon\S3\Stream');
         $this->registerAsClient($name);
     }
 

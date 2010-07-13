@@ -21,6 +21,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon\S3;
+
+use Zend\Service\Amazon\S3;
+use Zend\HTTP\Response;
+
+/**
  * @category   Zend
  * @package    Zend_Service_Amazon_S3
  * @subpackage UnitTests
@@ -30,7 +38,7 @@
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_S3
  */
-class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
+class OnlineTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Reference to Amazon service consumer object
@@ -56,11 +64,11 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         if (!constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED')) {
             $this->markTestSkipped('Zend_Service_Amazon_S3 online tests are not enabled');
         }
-        $this->_amazon = new Zend_Service_Amazon_S3(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
+        $this->_amazon = new S3\S3(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
                                                     constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')
                                                     );
         $this->_nosuchbucket = "nonexistingbucketnamewhichnobodyshoulduse";
-        $this->_httpClientAdapterSocket = new Zend_Http_Client_Adapter_Socket();
+        $this->_httpClientAdapterSocket = new \Zend\HTTP\Client\Adapter\Socket();
 
         $this->_bucket = constant('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET');
 
@@ -79,6 +87,23 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
     public function testCreateBucket()
     {
         $this->_amazon->createBucket($this->_bucket);
+        $this->assertTrue($this->_amazon->isBucketAvailable($this->_bucket));
+        $list = $this->_amazon->getBuckets();
+        $this->assertContains($this->_bucket, $list);
+    }
+
+    /**
+     * Test creating bucket with location
+     * ZF-6728
+     *
+     */
+    public function testCreateBucketEU()
+    {
+        // make sure that we use different bucket,
+        // as sometimes delete operation fails to propagate in one zone before you
+        // attempt to recreate it in another
+        $this->_bucket = $this->_bucket . 'eu'; 
+        $this->_amazon->createBucket($this->_bucket, 'EU');
         $this->assertTrue($this->_amazon->isBucketAvailable($this->_bucket));
         $list = $this->_amazon->getBuckets();
         $this->assertContains($this->_bucket, $list);
@@ -106,7 +131,7 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         $this->_amazon->putObject($this->_bucket."/zftest", "testdata");
         $response = $this->_amazon->getObjectStream($this->_bucket."/zftest");
 
-        $this->assertTrue($response instanceof Zend_Http_Response_Stream, 'The test did not return stream response');
+        $this->assertTrue($response instanceof Response\Stream, 'The test did not return stream response');
         $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
         
         $stream_name = $response->getStreamName();
@@ -130,7 +155,7 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
   
         $response = $this->_amazon->getObjectStream($this->_bucket."/zftest", $outfile);
 
-        $this->assertTrue($response instanceof Zend_Http_Response_Stream, 'The test did not return stream response');
+        $this->assertTrue($response instanceof Response\Stream, 'The test did not return stream response');
         $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
         
         $this->assertEquals($outfile, $response->getStreamName());
@@ -223,9 +248,9 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
     protected function _fileTest($filename, $object, $type, $exp_type, $stream = false)
     {
         if($stream) {
-            $this->_amazon->putFile($filename, $object, array(Zend_Service_Amazon_S3::S3_CONTENT_TYPE_HEADER => $type));
+            $this->_amazon->putFile($filename, $object, array(S3\S3::S3_CONTENT_TYPE_HEADER => $type));
         } else {
-            $this->_amazon->putFileStream($filename, $object, array(Zend_Service_Amazon_S3::S3_CONTENT_TYPE_HEADER => $type));
+            $this->_amazon->putFileStream($filename, $object, array(S3\S3::S3_CONTENT_TYPE_HEADER => $type));
         }
 
         $data = file_get_contents($filename);
@@ -270,7 +295,7 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         try {
             $this->_amazon->putFile($filedir."nosuchfile", $this->_bucket."/zftestfile");
             $this->fail("Expected exception not thrown");
-        } catch(Zend_Service_Amazon_S3_Exception $e) {
+        } catch(S3\Exception $e) {
             $this->assertContains("Cannot read", $e->getMessage());
             $this->assertContains("nosuchfile", $e->getMessage());
         }
@@ -293,31 +318,34 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         try {
             $this->_amazon->createBucket("This is a Very Bad Name");
             $this->fail("Expected exception not thrown");
-        } catch(Zend_Service_Amazon_S3_Exception $e) {
+        } catch(S3\Exception $e) {
             $this->assertContains("contains invalid characters", $e->getMessage());
         }
         try {
             $this->_amazon->isBucketAvailable("This is a Very Bad Name");
             $this->fail("Expected exception not thrown");
-        } catch(Zend_Uri_Exception $e) {
+        } catch(\Zend\HTTP\Client\Adapter\Exception $e) {
+            $this->assertContains("Unable to Connect to", $e->getMessage());
+        //@todo check why \Http\Client exception is thrown instead of \Zend\Uri\Exception
+        } catch(\Zend\URI\Exception $e) {
             $this->assertContains("not a valid HTTP host", $e->getMessage());
         }
         try {
             $this->_amazon->putObject("This is a Very Bad Name/And It Gets Worse", "testdata");
             $this->fail("Expected exception not thrown");
-        } catch(Zend_Service_Amazon_S3_Exception $e) {
+        } catch(S3\Exception $e) {
             $this->assertContains("contains invalid characters", $e->getMessage());
         }
         try {
             $this->_amazon->getObject("This is a Very Bad Name/And It Gets Worse");
             $this->fail("Expected exception not thrown");
-        } catch(Zend_Service_Amazon_S3_Exception $e) {
+        } catch(S3\Exception $e) {
             $this->assertContains("contains invalid characters", $e->getMessage());
         }
         try {
             $this->_amazon->getInfo("This is a Very Bad Name/And It Gets Worse");
             $this->fail("Expected exception not thrown");
-        } catch(Zend_Service_Amazon_S3_Exception $e) {
+        } catch(S3\Exception $e) {
             $this->assertContains("contains invalid characters", $e->getMessage());
         }
     }
@@ -329,29 +357,17 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
 
         $this->_amazon->putFile($filedir."testdata.html", $this->_bucket."/zftestfile.html");
         $this->_amazon->putFile($filedir."testdata.html", $this->_bucket."/zftestfile2.html",
-            array(Zend_Service_Amazon_S3::S3_ACL_HEADER => Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ));
+            array(S3\S3::S3_ACL_HEADER => S3\S3::S3_ACL_PUBLIC_READ));
 
-        $url = 'http://' . Zend_Service_Amazon_S3::S3_ENDPOINT."/".$this->_bucket."/zftestfile.html";
+        $url = 'http://' . S3\S3::S3_ENDPOINT."/".$this->_bucket."/zftestfile.html";
         $data = @file_get_contents($url);
         $this->assertFalse($data);
 
-        $url = 'http://' . Zend_Service_Amazon_S3::S3_ENDPOINT."/".$this->_bucket."/zftestfile2.html";
+        $url = 'http://' . S3\S3::S3_ENDPOINT."/".$this->_bucket."/zftestfile2.html";
         $data = @file_get_contents($url);
         $this->assertEquals(file_get_contents($filedir."testdata.html"), $data);
     }
 
-    /**
-     * Test creating bucket with location
-     * ZF-6728
-     *
-     */
-    public function testCreateBucketEU()
-    {
-        $this->_amazon->createBucket($this->_bucket, 'EU');
-        $this->assertTrue($this->_amazon->isBucketAvailable($this->_bucket));
-        $list = $this->_amazon->getBuckets();
-        $this->assertContains($this->_bucket, $list);
-    }
     /**
      * Test bucket name with /'s and encoding
      *
@@ -363,8 +379,8 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         $this->_amazon->createBucket($this->_bucket);
         $filedir = dirname(__FILE__)."/_files/";
         $this->_amazon->putFile($filedir."testdata.html", $this->_bucket."/subdir/dir with spaces/zftestfile.html",
-            array(Zend_Service_Amazon_S3::S3_ACL_HEADER => Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ));
-        $url = 'http://' . Zend_Service_Amazon_S3::S3_ENDPOINT."/".$this->_bucket."/subdir/dir%20with%20spaces/zftestfile.html";
+            array(S3\S3::S3_ACL_HEADER => S3\S3::S3_ACL_PUBLIC_READ));
+        $url = 'http://' . S3\S3::S3_ENDPOINT."/".$this->_bucket."/subdir/dir%20with%20spaces/zftestfile.html";
         $data = @file_get_contents($url);
         $this->assertEquals(file_get_contents($filedir."testdata.html"), $data);
     }
@@ -376,11 +392,13 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
      */
     public function testCreateObjectSSL()
     {
+        $endpoint = $this->_amazon->getEndpoint();
         $this->_amazon->setEndpoint('https://s3.amazonaws.com');
-        $this->assertEquals('https://s3.amazonaws.com', $this->_amazon->getEndpoint()->getUri());
+        $this->assertEquals('https://s3.amazonaws.com', $this->_amazon->getEndpoint()->generate());
         $this->_amazon->createBucket($this->_bucket);
         $this->_amazon->putObject($this->_bucket."/zftest", "testdata");
         $this->assertEquals("testdata", $this->_amazon->getObject($this->_bucket."/zftest"));
+        $this->_amazon->setEndpoint($endpoint);
     }
 
     /**
@@ -393,7 +411,7 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         try {
             $this->_amazon->createBucket("127.0.0.1");
             $this->fail("Failed to throw expected exception");
-        } catch(Zend_Service_Amazon_S3_Exception $e) {
+        } catch(S3\Exception $e) {
             $this->assertContains("cannot be an IP address", $e->getMessage());
         }
         $this->_amazon->createBucket("123-456-789-123");

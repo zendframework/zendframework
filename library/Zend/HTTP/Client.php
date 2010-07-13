@@ -918,7 +918,7 @@ class Client
             $headers = $this->_prepareHeaders();
 
             // check that adapter supports streaming before using it
-            if(is_resource($body) && !($this->adapter instanceof Adapter\Stream)) {
+            if(is_resource($body) && !($this->adapter instanceof Client\Adapter\Stream)) {
                 throw new Client\Exception('Adapter does not support streaming');
             }
 
@@ -927,7 +927,7 @@ class Client
                 ($uri->getScheme() == 'https' ? true : false));
 
             if($this->config['output_stream']) {
-                if($this->adapter instanceof Adapter\Stream) {
+                if($this->adapter instanceof Client\Adapter\Stream) {
                     $stream = $this->_openTempStream();
                     $this->adapter->setOutputStream($stream);
                 } else {

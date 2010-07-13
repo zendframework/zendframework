@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon\S3;
 
 /**
  * Test helper
@@ -36,11 +40,11 @@
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_S3
  */
-class Zend_Service_Amazon_S3_OfflineTest extends PHPUnit_Framework_TestCase
+class OfflineTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->markTestSkipped('No offline tests for Zend_Service_Amazon_S3');
+        $this->markTestSkipped('No offline tests for Zend\Service\Amazon\S3');
     }
 
     public function testNothing()

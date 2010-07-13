@@ -42,6 +42,11 @@ use Zend\Search\Lucene\Index;
  */
 class IndexTest extends \PHPUnit_Framework_TestCase
 {
+    public function tearDown()
+    {
+        $this->_clearDirectory(__DIR__ . '/_index/_files');
+    }
+
     private function _clearDirectory($dirName)
     {
         if (!file_exists($dirName) || !is_dir($dirName))  {
@@ -63,8 +68,6 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         $index = Lucene\Lucene::create(__DIR__ . '/_index/_files');
 
         $this->assertTrue($index instanceof Lucene\SearchIndex);
-
-        $this->_clearDirectory(__DIR__ . '/_index/_files');
     }
 
     public function testOpen()
@@ -271,8 +274,6 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         $index1 = Lucene\Lucene::open($tempIndexDir);
         $this->assertTrue($index1->isDeleted(2));
         unset($index1);
-
-        $this->_clearDirectory($tempIndexDir);
     }
 
     public function testAddDocument()
@@ -315,8 +316,6 @@ class IndexTest extends \PHPUnit_Framework_TestCase
 
         $index1 = Lucene\Lucene::open(__DIR__ . '/_index/_files');
         $this->assertTrue($index1 instanceof Lucene\SearchIndex);
-
-        $this->_clearDirectory(__DIR__ . '/_index/_files');
     }
 
     public function testOptimize()
@@ -373,8 +372,6 @@ class IndexTest extends \PHPUnit_Framework_TestCase
 
         $hits = $index2->find('submitting');
         $this->assertEquals(count($hits), 3);
-
-        $this->_clearDirectory(__DIR__ . '/_index/_files');
     }
 
     public function testTerms()
@@ -458,8 +455,6 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($index->currentTerm() === null);
 
         $index->closeTermsStream();
-
-        $this->_clearDirectory(__DIR__ . '/_index/_files');
     }
 
     public function testTermsStreamInterfaceSkipToTermsRetrievingOneTermsCase()
@@ -482,8 +477,6 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($index->currentTerm() === null);
 
         $index->closeTermsStream();
-
-        $this->_clearDirectory(__DIR__ . '/_index/_files');
     }
 
     public function testTermsStreamInterfaceSkipToTermsRetrievingTwoTermsCase()
@@ -506,8 +499,6 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($index->currentTerm() == new Index\Term('word', 'contents'));
 
         $index->closeTermsStream();
-
-        $this->_clearDirectory(__DIR__ . '/_index/_files');
     }
 
     /**
@@ -515,8 +506,6 @@ class IndexTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsDeletedWithoutExplicitCommit()
     {
-        //$this->_clearDirectory(__DIR__ . '/_index/_files');
-
         $index = Lucene\Lucene::create(__DIR__ . '/_index/_files');
 
         $document = new Document;
@@ -525,7 +514,5 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         $index->addDocument($document);
 
         $this->assertFalse($index->isDeleted(0));
-
-        $this->_clearDirectory(__DIR__ . '/_index/_files');
     }
 }

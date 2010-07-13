@@ -44,7 +44,7 @@ class DocsTest extends \PHPUnit_Framework_TestCase
         $this->adapter = new \ZendTest\GData\TestAsset\MockHttpClient();
         $this->client = new \Zend\GData\HttpClient();
         $this->client->setAdapter($this->adapter);
-        $this->gdata = new \Zend\GData\Docs\Docs($this->client);
+        $this->gdata = new \Zend\GData\Docs($this->client);
     }
 
     public function testCreateFolder()

@@ -25,13 +25,15 @@
  */
 namespace Zend\GData\YouTube;
 
+use Zend\GData\YouTube;
+
 /**
  * The YouTube inbox feed list flavor of an Atom Feed with media support
  * Represents a list of individual inbox entries, where each contained entry is
  * a message.
  *
  * @uses       \Zend\GData\Media\Feed
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @uses       \Zend\GData\YouTube\InboxEntry
  * @category   Zend
  * @package    Zend_Gdata
@@ -47,7 +49,7 @@ class InboxFeed extends \Zend\GData\Media\Feed
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\YouTube\InboxEntry';
+    protected $_entryClassName = 'Zend\GData\YouTube\InboxEntry';
 
     /**
      * Creates an Inbox feed, representing a list of messages,

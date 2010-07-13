@@ -59,8 +59,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         $username = constant('TESTS_ZEND_GDATA_GAPPS_EMAIL');
         $pass = constant('TESTS_ZEND_GDATA_GAPPS_PASSWORD');
         $this->domain = constant('TESTS_ZEND_GDATA_GAPPS_DOMAIN');
-        $client = GData\ClientLogin::getHttpClient($username, $pass, GApps\GApps::AUTH_SERVICE_NAME);
-        $this->gdata = new GApps\GApps($client, $this->domain);
+        $client = GData\ClientLogin::getHttpClient($username, $pass, GApps::AUTH_SERVICE_NAME);
+        $this->gdata = new GApps($client, $this->domain);
 
         // Container to hold users and lists created during tests. All entries in
         // here will have delete() called during tear down.
@@ -321,6 +321,338 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($rNick);
     }
 
+    public function testGroupCRUDOperations() {
+        // Create group
+        $generatedGroupName = strtolower(uniqid('zf-group-'));
+        $group = $this->gdata->createGroup($generatedGroupName, 'zf-group-',
+                'testGroupCRUDOperations()');
+        $this->autoDelete($group);
+
+        $groupId = null;
+        $properties = $group->getProperty();
+        foreach ($properties as $property) {
+            if($property->name == 'groupId') {
+                $groupId = $property->value;
+            }
+        }
+
+        $this->assertEquals($generatedGroupName, $groupId);
+
+        // Retrieve group
+        $query = $this->gdata->newGroupQuery();
+        $groupFeed = $this->gdata->getGroupFeed($query);
+        $entryCount = count($groupFeed->entry);
+        $this->assertTrue($entryCount > 0);
+
+        // Delete group (uses builtin delete method, convenience delete
+        // method tested further down)
+        $group->delete();
+
+        // Ensure that group was deleted
+        $groupFeed = $this->gdata->getGroupFeed($query);
+        $this->assertEquals($entryCount - 1, count($groupFeed->entry));
+
+    }
+
+    public function testCanAssignMultipleGroupsToOneUser() {
+        // Create a user
+        $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
+            sha1(self::PASSWORD), self::PASSWORD_HASH);
+        $this->autoDelete($user);
+
+        // Create two groups
+        $groupCount = 2;
+
+        for ($i = 0; $i < $groupCount; $i++) {
+            $generatedGroupName = strtolower(uniqid('zf-group-'));
+            $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
+                    'testCanAssignMultipleGroupsToOneUser() ' . $i);
+            $this->autoDelete($group);
+            $this->gdata->addMemberToGroup($this->id, $generatedGroupName);
+        }
+
+        // Make sure that the user is subscribed to both groups
+        $subscriptions = $this->gdata->retrieveGroups($this->id);
+        $this->assertEquals($groupCount, count($subscriptions->entry));
+
+    }
+
+    public function testCanRetrievePageOfGroups() {
+        // Create a group
+        $generatedGroupName = strtolower(uniqid('zf-group-'));
+        $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
+                'testCanRetrievePageOfGroups()');
+        $this->autoDelete($group);
+
+        // Try retrieving the group feed
+        $feed = $this->gdata->retrievePageOfGroups();
+        $this->assertTrue(count($feed->entry) > 0);
+
+    }
+
+    public function testCanRetrieveAllGroups() {
+        // Create a couple of users to make sure we don't hit the limit
+        // on the max number of groups.
+        for ($i = 0; $i < 3; $i++) {
+            $user = $this->gdata->createUser(uniqid('ZF-'), self::GIVEN_NAME, self::FAMILY_NAME,
+                sha1(self::PASSWORD), self::PASSWORD_HASH);
+            $this->autoDelete($user);
+        }
+
+        // Create a whole bunch of groups to make sure we trigger
+        // paging.
+        for ($i = 0; $i < 30; $i++) {
+            $generatedGroupName = strtolower(uniqid('zf-group-'));
+            $group = $this->gdata->createGroup($generatedGroupName, 'Test Group ' . $i,
+                    'testCanRetrieveAllGroups()');
+            $this->autoDelete($group);
+        }
+
+        // Try retrieving the group feed
+        $feed = $this->gdata->retrieveAllGroups();
+        $this->assertTrue(count($feed->entry) >= 30);
+
+    }
+
+    // Test the convenience delete method for groups
+    public function testCanDeleteGroup() {  
+        // Create a group
+        $generatedGroupName = strtolower(uniqid('zf-group-'));
+        $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
+                'testCanDeleteGroup()');
+        $this->autoDelete($group);
+
+        // Assert that the group exists, just in case...
+        $query = $this->gdata->newGroupQuery();
+        $query->setGroupId($generatedGroupName);
+        $entry = $this->gdata->getGroupEntry($query);
+        $this->assertNotNull($entry);
+
+        // Delete group
+        $this->gdata->deleteGroup($generatedGroupName);
+
+        // Ensure that group was deleted
+        try {
+            $query = $this->gdata->newGroupQuery();
+            $query->setGroupId($generatedGroupName);
+            $entry = $this->gdata->getGroupEntry($query);
+            // This souldn't execute
+            $this->fail('Retrieving a non-existant group entry didn\'t' .
+                'raise exception.');
+        } catch (Zend_Gdata_Gapps_ServiceException $e) {
+            if ($e->hasError(Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST)) {
+                // Dummy assertion just to say we tested something here.
+                $this->assertTrue(true);
+            } else {
+                // Exception thrown for an unexpected reason
+                throw $e;
+            }
+        }
+
+    }
+
+    public function testCanRetrievePageOfMembers() {
+        // Create a new group
+        $generatedGroupName = strtolower(uniqid('zf-group-'));
+        $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
+                'testCanRetrievePageOfMembers()');
+        $this->autoDelete($group);
+
+        // Create two users and assign them to the group
+        $userCount = 2;
+        for ($i = 0; $i < $userCount; $i++) {
+            $generatedUsername = uniqid('ZF-');
+            $user = $this->gdata->createUser($generatedUsername,
+                self::GIVEN_NAME, self::FAMILY_NAME, sha1(self::PASSWORD),
+                self::PASSWORD_HASH);
+            $this->autoDelete($user);
+            $this->gdata->addMemberToGroup($generatedUsername,
+                $generatedGroupName);
+        }
+
+        // Retrieve members
+        $memberFeed = $this->gdata->retrievePageOfMembers($generatedGroupName);
+        $this->assertTrue(count($memberFeed->entry) == $userCount);
+
+    }
+
+    public function testCanRetrievAllMembers() {
+        // Create a new group
+        $generatedGroupName = strtolower(uniqid('zf-list-'));
+        $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
+                'testCanRetrievAllMembers()');
+        $this->autoDelete($group);
+
+        // Create enough users to trigger paging and assign them to the group
+        $userCount = 30;
+        for ($i = 0; $i < $userCount; $i++) {
+            $generatedUsername = uniqid('ZF-');
+            $user = $this->gdata->createUser($generatedUsername,
+                self::GIVEN_NAME, self::FAMILY_NAME, sha1(self::PASSWORD),
+                self::PASSWORD_HASH);
+            $this->autoDelete($user);
+            $this->gdata->addMemberToGroup($generatedUsername, $generatedGroupName);
+        }
+
+        // Retrieve members
+        $memberFeed = $this->gdata->retrieveAllMembers($generatedGroupName);
+        $this->assertTrue(count($memberFeed->entry) == $userCount);
+
+    }
+
+    // Test the convenience removeMemberFromGroup method for group members
+    public function testCanRemoveMemberFromGroup() {
+        // Create a group
+        $generatedGroupName = strtolower(uniqid('zf-list-'));
+        $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
+                'testCanDeleteGroupMember()');
+        $this->autoDelete($group);
+
+        // Create a user for the group
+        $user = $this->gdata->createUser($this->id, self::GIVEN_NAME,
+            self::FAMILY_NAME, sha1(self::PASSWORD), self::PASSWORD_HASH);
+        $this->autoDelete($user);
+        $this->gdata->addMemberToGroup($this->id, $generatedGroupName);
+
+        // Assert that the member exists, just in case...
+        $members = $this->gdata->retrieveAllMembers($generatedGroupName);
+        $this->assertTrue(count($members->entry) == 1);
+
+        // Remove the member from the group
+        $this->gdata->removeMemberFromGroup($user->login->username,
+            $generatedGroupName);
+
+        // Ensure that user was deleted
+        $members =  $this->gdata->retrieveAllMembers($generatedGroupName);
+        $this->assertTrue(count($members->entry) == 0);
+
+    }
+
+    public function testCanRetrieveGroupOwners() {
+        // Create a new group
+        $generatedGroupName = strtolower(uniqid('zf-list-'));
+        $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
+                'testCanRetrievAllOwners()');
+        $this->autoDelete($group);
+
+        $userCount = 3;
+        for ($i = 0; $i < $userCount; $i++) {
+            $generatedUsername = uniqid('ZF-');
+            $user = $this->gdata->createUser($generatedUsername,
+                self::GIVEN_NAME, self::FAMILY_NAME, sha1(self::PASSWORD),
+                self::PASSWORD_HASH);
+            $this->autoDelete($user);
+            $this->gdata->addOwnerToGroup($generatedUsername,
+                $generatedGroupName);
+        }
+
+        // Retrieve owners
+        $ownerFeed = $this->gdata->retrieveGroupOwners($generatedGroupName);
+        $this->assertTrue(count($ownerFeed->entry) == $userCount);
+
+    }
+
+    // Test the convenience removeOwnerFromGroup method for group owners
+    public function testCanRemoveOwnerFromGroup() {
+        // Create a group
+        $generatedGroupName = strtolower(uniqid('zf-list-'));
+        $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
+                'testCanDeleteGroupOwner()');
+        $this->autoDelete($group);
+
+        // Create a user for the group
+        $user = $this->gdata->createUser($this->id, self::GIVEN_NAME,
+            self::FAMILY_NAME, sha1(self::PASSWORD), self::PASSWORD_HASH);
+        $this->autoDelete($user);
+        $this->gdata->addOwnerToGroup($this->id, $generatedGroupName);
+
+        // Assert that the owner exists, just in case...
+        $owners = $this->gdata->retrieveGroupOwners($generatedGroupName);
+        $this->assertTrue(count($owners->entry) == 1);
+
+        // Remove the owner from the group
+        $this->gdata->removeOwnerFromGroup($user->login->username,
+            $generatedGroupName);
+
+        // Ensure that user was deleted
+        $owners = $this->gdata->retrieveGroupOwners($generatedGroupName);
+        $this->assertTrue(count($owners->entry) == 0);
+    }
+
+    // Test the convenience isMember method
+    public function testIsMember() {
+        // Create a group
+        $generatedGroupName = strtolower(uniqid('zf-list-'));
+        $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
+                'testIsMember()');
+        $this->autoDelete($group);
+
+        // Create a user for the group
+        $user = $this->gdata->createUser($this->id, self::GIVEN_NAME,
+            self::FAMILY_NAME, sha1(self::PASSWORD), self::PASSWORD_HASH);
+        $this->autoDelete($user);
+        $this->gdata->addMemberToGroup($this->id, $generatedGroupName);
+
+        $isMember = $this->gdata->isMember($this->id, $generatedGroupName);
+
+        $this->assertTrue($isMember);
+
+        $isMember = $this->gdata->isMember('foo_' . $this->id, $generatedGroupName);
+
+        $this->assertFalse($isMember);
+
+    }
+
+    // Test the convenience isOwner method
+    public function testIsOwner() {
+        // Create a group
+        $generatedGroupName = strtolower(uniqid('zf-list-'));
+        $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
+                'testIsMember()');
+        $this->autoDelete($group);
+
+        // Create a user for the group
+        $user = $this->gdata->createUser($this->id, self::GIVEN_NAME,
+            self::FAMILY_NAME, sha1(self::PASSWORD), self::PASSWORD_HASH);
+        $this->autoDelete($user);
+        $this->gdata->addOwnerToGroup($this->id, $generatedGroupName);
+
+        $isOwner = $this->gdata->isOwner($this->id, $generatedGroupName);
+
+        $this->assertTrue($isOwner);
+
+        $isOwner = $this->gdata->isOwner('foo_' . $this->id, $generatedGroupName);
+
+        $this->assertFalse($isOwner);
+
+    }
+
+    // Test the convenience updateGroup method
+    public function testCanUpdateGroup() {
+        // Create a group
+        $generatedGroupName = strtolower(uniqid('zf-list-'));
+        $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
+                'testCanUpdateGroup()');
+        $this->autoDelete($group);
+
+        //set new value and save it
+
+        $group = $this->gdata->updateGroup($generatedGroupName, null, 'new description here');
+
+        //verify new value
+        $description = null;
+
+        $properties = $group->getProperty();
+        foreach ($properties as $property) {
+            if($property->name == 'description') {
+                $description = $property->value;
+            }
+        }
+
+        $this->assertEquals('new description here', $description);
+
+    }
+    
     public function testEmailListCRUDOperations() {
         // Create email list
         $generatedListName = strtolower(uniqid('zf-list-'));

@@ -80,7 +80,7 @@ class QuickAddTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newQuickAdd->value, false);
 
         /* try constructing using magic factory */
-        $cal = new \Zend\GData\Calendar\Calendar();
+        $cal = new \Zend\GData\Calendar();
         $newQuickAdd2 = $cal->newQuickAdd();
         $newQuickAdd2->transferFromXML($newQuickAdd->saveXML());
         $this->assertEquals(count($newQuickAdd2->extensionElements), 1);

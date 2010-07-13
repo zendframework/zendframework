@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\Books;
 
+use Zend\GData\Books;
+
 /**
  * Assists in constructing queries for Books volumes
  *

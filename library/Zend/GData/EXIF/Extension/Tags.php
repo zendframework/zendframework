@@ -28,7 +28,7 @@ namespace Zend\GData\EXIF\Extension;
 /**
  * Represents the exif:tags element used by the Gdata Exif extensions.
  *
- * @uses       \Zend\GData\EXIF\EXIF
+ * @uses       \Zend\GData\EXIF
  * @uses       \Zend\GData\EXIF\Extension\Distance
  * @uses       \Zend\GData\EXIF\Extension\Exposure
  * @uses       \Zend\GData\EXIF\Extension\Flash
@@ -39,14 +39,14 @@ namespace Zend\GData\EXIF\Extension;
  * @uses       \Zend\GData\EXIF\Extension\Make
  * @uses       \Zend\GData\EXIF\Extension\Model
  * @uses       \Zend\GData\EXIF\Extension\Time
- * @uses       \Zend\GData\Extension\Extension
+ * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Exif
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Tags extends \Zend\GData\Extension\Extension
+class Tags extends \Zend\GData\Extension
 {
 
     protected $_rootNamespace = 'exif';
@@ -151,7 +151,7 @@ class Tags extends \Zend\GData\Extension\Extension
             $imageUniqueId = null, $iso = null, $make = null,
             $model = null, $time = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\EXIF\EXIF::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\EXIF::$namespaces);
         parent::__construct();
         $this->setDistance($distance);
         $this->setExposure($exposure);

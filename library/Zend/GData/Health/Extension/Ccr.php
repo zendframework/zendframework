@@ -29,7 +29,7 @@ namespace Zend\GData\Health\Extension;
  * Concrete class for working with CCR elements.
  *
  * @uses       \Zend\GData\App\Extension\Element
- * @uses       \Zend\GData\Health\Health
+ * @uses       \Zend\GData\Health
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Health
@@ -50,7 +50,7 @@ class Ccr extends \Zend\GData\App\Extension\Element
      */
     public function __construct($element = null)
     {
-        foreach (\Zend\GData\Health\Health::$namespaces as $nsPrefix => $nsUri) {
+        foreach (\Zend\GData\Health::$namespaces as $nsPrefix => $nsUri) {
             $this->registerNamespace($nsPrefix, $nsUri);
         }
     }

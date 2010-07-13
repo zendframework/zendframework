@@ -47,9 +47,9 @@ class HealthOnlineTest extends \PHPUnit_Framework_TestCase
         }
         $this->user = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_EMAIL');
         $this->pass = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD');
-        $serviceName = Health\Health::HEALTH_SERVICE_NAME;
+        $serviceName = Health::HEALTH_SERVICE_NAME;
         $client = GData\ClientLogin::getHttpClient($this->user, $this->pass, $serviceName);
-        $this->health = new Health\Health($client, 'google-MyPHPApp-v1.0');
+        $this->health = new Health($client, 'google-MyPHPApp-v1.0');
     }
 
     private function setupProfileID()
@@ -68,7 +68,7 @@ class HealthOnlineTest extends \PHPUnit_Framework_TestCase
     public function testGetHealthProfileListFeedWithoutUsingClientLogin()
     {
         $client = new GData\HttpClient();
-        $this->health = new Health\Health($client);
+        $this->health = new Health($client);
 
         try {
             $feed = $this->health->getHealthProfileListFeed();
@@ -92,9 +92,9 @@ class HealthOnlineTest extends \PHPUnit_Framework_TestCase
 
     public function testUseH9()
     {
-        $serviceName = Health\Health::H9_SANDBOX_SERVICE_NAME;
+        $serviceName = Health::H9_SANDBOX_SERVICE_NAME;
         $client = GData\ClientLogin::getHttpClient($this->user, $this->pass, $serviceName);
-        $h9 = new Health\Health($client, 'google-MyPHPApp-v1.0', true);
+        $h9 = new Health($client, 'google-MyPHPApp-v1.0', true);
 
         $profileListFeed = $h9->getHealthProfileListFeed();
         $profileID = $profileListFeed->entry[0]->getProfileID();

@@ -44,5 +44,5 @@ class ItemFeed extends \Zend\GData\Feed
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\GBase\ItemEntry';
+    protected $_entryClassName = 'Zend\GData\GBase\ItemEntry';
 }

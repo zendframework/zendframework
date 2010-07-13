@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\GData\YouTube;
-use Zend\GData\App;
+
+use Zend\GData\YouTube,
+    Zend\GData\App;
 
 /**
  * Represents the YouTube message flavor of an Atom entry
@@ -33,7 +35,7 @@ use Zend\GData\App;
  * @uses       \Zend\GData\Extension\Comments
  * @uses       \Zend\GData\Extension\Rating
  * @uses       \Zend\GData\Media\Entry
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @uses       \Zend\GData\YouTube\Extension\Description
  * @uses       \Zend\GData\YouTube\Extension\Statistics
  * @category   Zend
@@ -45,7 +47,7 @@ use Zend\GData\App;
 class InboxEntry extends \Zend\GData\Media\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\YouTube\InboxEntry';
+    protected $_entryClassName = 'Zend\GData\YouTube\InboxEntry';
 
     /**
      * The gd:comments element of this entry.

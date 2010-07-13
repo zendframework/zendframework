@@ -25,10 +25,12 @@
  */
 namespace Zend\GData\Extension;
 
+use Zend\GData\Extension;
+
 /**
  * Data model class to represent an entry's visibility
  *
- * @uses       \Zend\GData\Extension\Extension
+ * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

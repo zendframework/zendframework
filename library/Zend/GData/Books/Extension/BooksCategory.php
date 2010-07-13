@@ -29,7 +29,7 @@ namespace Zend\GData\Books\Extension;
  * Describes a books category
  *
  * @uses       \Zend\GData\App\Extension\Category
- * @uses       \Zend\GData\Books\Books
+ * @uses       \Zend\GData\Books
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books
@@ -53,7 +53,7 @@ class BooksCategory extends
      */
     public function __construct($term = null, $scheme = null, $label = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Books\Books::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Books::$namespaces);
         parent::__construct($term, $scheme, $label);
     }
 

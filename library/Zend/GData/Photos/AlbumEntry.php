@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\Photos;
 
+use Zend\GData\Photos;
+
 /**
  * Data model class for a Photo Album Entry.
  *
@@ -38,7 +40,7 @@ namespace Zend\GData\Photos;
  * @uses       \Zend\GData\Entry
  * @uses       \Zend\GData\Geo\Extension\GeoRssWhere
  * @uses       \Zend\GData\Media\Extension\MediaGroup
- * @uses       \Zend\GData\Photos\Photos
+ * @uses       \Zend\GData\Photos
  * @uses       \Zend\GData\Photos\Extension\Access
  * @uses       \Zend\GData\Photos\Extension\BytesUsed
  * @uses       \Zend\GData\Photos\Extension\CommentCount
@@ -57,7 +59,7 @@ namespace Zend\GData\Photos;
 class AlbumEntry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\Photos\AlbumEntry';
+    protected $_entryClassName = 'Zend\GData\Photos\AlbumEntry';
 
     /**
      * gphoto:id element

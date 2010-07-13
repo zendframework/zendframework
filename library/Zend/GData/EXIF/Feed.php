@@ -25,10 +25,12 @@
  */
 namespace Zend\GData\EXIF;
 
+use Zend\GData\EXIF;
+
 /**
  * Feed for Gdata EXIF data entries.
  *
- * @uses       \Zend\GData\EXIF\EXIF
+ * @uses       \Zend\GData\EXIF
  * @uses       \Zend\GData\EXIF\Entry
  * @uses       \Zend\GData\Feed
  * @category   Zend

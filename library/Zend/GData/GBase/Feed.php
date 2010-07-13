@@ -25,13 +25,15 @@
  */
 namespace Zend\GData\GBase;
 
+use Zend\GData\GBase;
+
 /**
  * Base class for the Google Base Feed
  *
  * @link http://code.google.com/apis/base/
  *
  * @uses       \Zend\GData\Feed
- * @uses       \Zend\GData\GBase\GBase
+ * @uses       \Zend\GData\GBase
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GBase
@@ -45,7 +47,7 @@ class Feed extends \Zend\GData\Feed
      *
      * @var string
      */
-    protected $_feedClassName = '\Zend\GData\GBase\Feed';
+    protected $_feedClassName = 'Zend\GData\GBase\Feed';
 
     /**
      * Create a new instance.

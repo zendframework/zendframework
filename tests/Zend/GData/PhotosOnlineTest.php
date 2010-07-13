@@ -50,7 +50,7 @@ class PhotosOnlineTest extends \PHPUnit_Framework_TestCase
         $pass = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD');
         $service = 'lh2';
         $client = \Zend\GData\ClientLogin::getHttpClient($user, $pass, $service);
-        $this->photos = new Photos\Photos($client);
+        $this->photos = new Photos($client);
     }
 
     /**

@@ -80,7 +80,7 @@ class SendEventNotificationsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newSendEventNotifications->value, true);
 
         /* try constructing using magic factory */
-        $cal = new \Zend\GData\Calendar\Calendar();
+        $cal = new \Zend\GData\Calendar();
         $newSendEventNotifications2 = $cal->newSendEventNotifications();
         $newSendEventNotifications2->transferFromXML($newSendEventNotifications->saveXML());
         $this->assertEquals(count($newSendEventNotifications2->extensionElements), 1);

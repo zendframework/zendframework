@@ -25,9 +25,11 @@
  */
 namespace Zend\GData\Spreadsheets;
 
+use Zend\GData\Spreadsheets;
+
 /**
  * @uses       \Zend\GData\Feed
- * @uses       \Zend\GData\Spreadsheets\Spreadsheets
+ * @uses       \Zend\GData\Spreadsheets
  * @uses       \Zend\GData\Spreadsheets\Extension\ColCount
  * @uses       \Zend\GData\Spreadsheets\Extension\RowCount
  * @category   Zend
@@ -44,14 +46,14 @@ class CellFeed extends \Zend\GData\Feed
     *
     * @var string
     */
-    protected $_entryClassName = '\Zend\GData\Spreadsheets\CellEntry';
+    protected $_entryClassName = 'Zend\GData\Spreadsheets\CellEntry';
 
     /**
     * The classname for the feed.
     *
     * @var string
     */
-    protected $_feedClassName = '\Zend\GData\Spreadsheets\CellFeed';
+    protected $_feedClassName = 'Zend\GData\Spreadsheets\CellFeed';
 
     /**
     * The row count for the feed.

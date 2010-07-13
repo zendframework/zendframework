@@ -28,15 +28,15 @@ namespace Zend\GData\DublinCore\Extension;
 /**
  * Language of the resource
  *
- * @uses       \Zend\GData\DublinCore\DublinCore
- * @uses       \Zend\GData\Extension\Extension
+ * @uses       \Zend\GData\DublinCore
+ * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage DublinCore
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Language extends \Zend\GData\Extension\Extension
+class Language extends \Zend\GData\Extension
 {
 
     protected $_rootNamespace = 'dc';
@@ -51,7 +51,7 @@ class Language extends \Zend\GData\Extension\Extension
      */
     public function __construct($value = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\DublinCore\DublinCore::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\DublinCore::$namespaces);
         parent::__construct();
         $this->_text = $value;
     }

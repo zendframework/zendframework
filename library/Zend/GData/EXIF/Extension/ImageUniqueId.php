@@ -28,15 +28,15 @@ namespace Zend\GData\EXIF\Extension;
 /**
  * Represents the exif:imageUniqueId element used by the Gdata Exif extensions.
  *
- * @uses       \Zend\GData\EXIF\EXIF
- * @uses       \Zend\GData\Extension\Extension
+ * @uses       \Zend\GData\EXIF
+ * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Exif
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ImageUniqueId extends \Zend\GData\Extension\Extension
+class ImageUniqueId extends \Zend\GData\Extension
 {
 
     protected $_rootNamespace = 'exif';
@@ -49,7 +49,7 @@ class ImageUniqueId extends \Zend\GData\Extension\Extension
      */
     public function __construct($text = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\EXIF\EXIF::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\EXIF::$namespaces);
         parent::__construct();
         $this->setText($text);
     }

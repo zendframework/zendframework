@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Feed\Reader\Collection;
+namespace Zend\Feed\Reader;
 
 /**
  * @uses       ArrayObject

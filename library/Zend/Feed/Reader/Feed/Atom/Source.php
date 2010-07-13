@@ -23,11 +23,13 @@
  * @namespace
  */
 namespace Zend\Feed\Reader\Feed\Atom;
-use Zend\Feed\Reader;
+
+use Zend\Feed\Reader\Feed\Atom,
+    Zend\Feed\Reader;
 
 /**
  * @uses       \Zend\Feed\Reader\Reader
- * @uses       \Zend\Feed\Reader\Feed\Atom\Atom
+ * @uses       \Zend\Feed\Reader\Feed\Atom
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -168,7 +168,7 @@ abstract class AbstractFeed
     /**
      * Set the XPath prefix
      *
-     * @return \Zend\Feed\Reader\Feed\Atom\Atom
+     * @return \Zend\Feed\Reader\Feed\Atom
      */
     public function setXpathPrefix($prefix)
     {

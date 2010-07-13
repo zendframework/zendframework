@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Feed\Reader\Feed\Atom;
+namespace Zend\Feed\Reader\Feed;
 use Zend\Feed\Reader;
 
 /**

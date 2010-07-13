@@ -19,9 +19,10 @@
  * @version    $Id$
  */
 
-require_once dirname(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+namespace ZendTest\Feed\PubSubHubbub\Model;
 
-require_once 'Zend/Feed/Pubsubhubbub/Model/Subscription.php';
+use Zend\Feed\PubSubHubbub\Model\Subscription;
+
 /**
  * @category   Zend
  * @package    Zend_Feed
@@ -31,7 +32,7 @@ require_once 'Zend/Feed/Pubsubhubbub/Model/Subscription.php';
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Pubsubhubbub_Model_SubscriptionTest extends PHPUnit_Framework_TestCase
+class SubscriptionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @group ZF-10069
@@ -39,7 +40,7 @@ class Zend_Feed_Pubsubhubbub_Model_SubscriptionTest extends PHPUnit_Framework_Te
     public function testAllOperations()
     {
         $this->_initDb();
-        $subscription = new Zend_Feed_Pubsubhubbub_Model_Subscription();
+        $subscription = new Subscription();
         $id = uniqid();
         $this->assertFalse($subscription->hasSubscription($id));
         $this->assertFalse($subscription->getSubscription($id));
@@ -61,19 +62,20 @@ class Zend_Feed_Pubsubhubbub_Model_SubscriptionTest extends PHPUnit_Framework_Te
 
     public function testImpemetsSubscriptionInterface()
     {
-        $reflection = new ReflectionClass('Zend_Feed_Pubsubhubbub_Model_Subscription');
-        $this->assertTrue($reflection->implementsInterface('Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface'));
+        $reflection = new \ReflectionClass('Zend\Feed\PubSubHubbub\Model\Subscription');
+        $this->assertTrue($reflection->implementsInterface('Zend\Feed\PubSubHubbub\Model\SubscriptionPersistence'));
         unset($reflection);
     }
 
     protected function _initDb()
     {
         if (!extension_loaded('pdo')
-            && !in_array('sqlite', PDO::getAvailableDrivers())) {
+            && !in_array('sqlite', \PDO::getAvailableDrivers())
+        ) {
             $this->markTestSkipped('Test only with pdo_sqlite');
         }
-        $db = Zend_Db::factory('Pdo_Sqlite', array('dbname' => ':memory:'));
-        Zend_Db_Table::setDefaultAdapter($db);
+        $db = \Zend\DB\DB::factory('PDO\SQLite', array('dbname' => ':memory:'));
+        \Zend\DB\Table\AbstractTable::setDefaultAdapter($db);
         $this->_createTable();
     }
 
@@ -92,6 +94,6 @@ class Zend_Feed_Pubsubhubbub_Model_SubscriptionTest extends PHPUnit_Framework_Te
              .      "PRIMARY KEY (id) "
              . ");";
 
-       Zend_Db_Table::getDefaultAdapter()->getConnection()->query($sql);
+       \Zend\DB\Table\AbstractTable::getDefaultAdapter()->getConnection()->query($sql);
     }
 }

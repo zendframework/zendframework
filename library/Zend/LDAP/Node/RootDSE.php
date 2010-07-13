@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\LDAP\Node\RootDSE;
+namespace Zend\LDAP\Node;
 use Zend\LDAP;
 
 /**
@@ -40,7 +40,7 @@ use Zend\LDAP;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RootDSE extends LDAP\Node\AbstractNode
+class RootDSE extends AbstractNode
 {
     const SERVER_TYPE_GENERIC         = 1;
     const SERVER_TYPE_OPENLDAP        = 2;
@@ -51,7 +51,7 @@ class RootDSE extends LDAP\Node\AbstractNode
      * Factory method to create the RootDSE.
      *
      * @param  \Zend\LDAP\LDAP $ldap
-     * @return \Zend\LDAP\Node\RootDSE\RootDSE
+     * @return \Zend\LDAP\Node\RootDSE
      * @throws \Zend\LDAP\Exception
      */
     public static function create(LDAP\LDAP $ldap)
@@ -59,12 +59,12 @@ class RootDSE extends LDAP\Node\AbstractNode
         $dn = LDAP\DN::fromString('');
         $data = $ldap->getEntry($dn, array('*', '+'), true);
         if (isset($data['domainfunctionality'])) {
-            return new ActiveDirectory($dn, $data);
+            return new RootDSE\ActiveDirectory($dn, $data);
         } else if (isset($data['dsaname'])) {
-            return new eDirectory($dn, $data);
+            return new RootDSE\eDirectory($dn, $data);
         } else if (isset($data['structuralobjectclass']) &&
                 $data['structuralobjectclass'][0] === 'OpenLDAProotDSE') {
-            return new OpenLDAP($dn, $data);
+            return new RootDSE\OpenLDAP($dn, $data);
         } else {
             return new self($dn, $data);
         }

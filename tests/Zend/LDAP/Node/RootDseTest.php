@@ -62,7 +62,7 @@ class RootDSETest extends \ZendTest\LDAP\OnlineTestCase
         $this->assertType('boolean', $root->supportsVersion(array(3, 2)));
 
         switch ($root->getServerType()) {
-            case RootDSE\RootDSE::SERVER_TYPE_ACTIVEDIRECTORY:
+            case RootDSE::SERVER_TYPE_ACTIVEDIRECTORY:
                 $this->assertType('boolean', $root->supportsControl('1.2.840.113556.1.4.319'));
                 $this->assertType('boolean', $root->supportsControl(array('1.2.840.113556.1.4.319',
                     '1.2.840.113556.1.4.473')));
@@ -72,12 +72,12 @@ class RootDSETest extends \ZendTest\LDAP\OnlineTestCase
                 $this->assertType('boolean', $root->supportsPolicy('unknown'));
                 $this->assertType('boolean', $root->supportsPolicy(array('unknown', 'unknown')));
                 break;
-            case RootDSE\RootDSE::SERVER_TYPE_EDIRECTORY:
+            case RootDSE::SERVER_TYPE_EDIRECTORY:
                 $this->assertType('boolean', $root->supportsExtension('1.3.6.1.4.1.1466.20037'));
                 $this->assertType('boolean', $root->supportsExtension(array('1.3.6.1.4.1.1466.20037',
                     '1.3.6.1.4.1.4203.1.11.1')));
                 break;
-            case RootDSE\RootDSE::SERVER_TYPE_OPENLDAP:
+            case RootDSE::SERVER_TYPE_OPENLDAP:
                 $this->assertType('boolean', $root->supportsControl('1.3.6.1.4.1.4203.1.9.1.1'));
                 $this->assertType('boolean', $root->supportsControl(array('1.3.6.1.4.1.4203.1.9.1.1',
                     '2.16.840.1.113730.3.4.18')));
@@ -99,7 +99,7 @@ class RootDSETest extends \ZendTest\LDAP\OnlineTestCase
         $this->assertType('string', $root->getSubschemaSubentry());
 
         switch ($root->getServerType()) {
-            case RootDSE\RootDSE::SERVER_TYPE_ACTIVEDIRECTORY:
+            case RootDSE::SERVER_TYPE_ACTIVEDIRECTORY:
                 $this->assertType('string', $root->getConfigurationNamingContext());
                 $this->assertType('string', $root->getCurrentTime());
                 $this->assertType('string', $root->getDefaultNamingContext());
@@ -116,7 +116,7 @@ class RootDSETest extends \ZendTest\LDAP\OnlineTestCase
                 $this->assertType('string', $root->getSchemaNamingContext());
                 $this->assertType('string', $root->getServerName());
                 break;
-            case RootDSE\RootDSE::SERVER_TYPE_EDIRECTORY:
+            case RootDSE::SERVER_TYPE_EDIRECTORY:
                 $this->assertType('string', $root->getVendorName());
                 $this->assertType('string', $root->getVendorVersion());
                 $this->assertType('string', $root->getDsaName());
@@ -128,7 +128,7 @@ class RootDSETest extends \ZendTest\LDAP\OnlineTestCase
                 $this->assertType('string', $root->getStatisticsAbandonOps());
                 $this->assertType('string', $root->getStatisticsWholeSubtreeSearchOps());
                 break;
-            case RootDSE\RootDSE::SERVER_TYPE_OPENLDAP:
+            case RootDSE::SERVER_TYPE_OPENLDAP:
                 $this->_assertNullOrString($root->getConfigContext());
                 $this->_assertNullOrString($root->getMonitorContext());
                 break;

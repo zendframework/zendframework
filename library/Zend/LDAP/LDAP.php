@@ -25,14 +25,14 @@
 namespace Zend\LDAP;
 
 /**
- * @uses       \Zend\LDAP\Collection\Collection
+ * @uses       \Zend\LDAP\Collection
  * @uses       \Zend\LDAP\Collection\DefaultIterator
  * @uses       \Zend\LDAP\DN
  * @uses       \Zend\LDAP\Exception
  * @uses       \Zend\LDAP\Filter\AbstractFilter
- * @uses       \Zend\LDAP\Node\Node
- * @uses       \Zend\LDAP\Node\RootDSE\RootDSE
- * @uses       \Zend\LDAP\Node\Schema\Schema
+ * @uses       \Zend\LDAP\Node
+ * @uses       \Zend\LDAP\Node\RootDSE
+ * @uses       \Zend\LDAP\Node\Schema
  * @category   Zend
  * @package    Zend_LDAP
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -82,14 +82,14 @@ class LDAP
     /**
      * Caches the RootDSE
      *
-     * @var \Zend\LDAP\Node\Node
+     * @var \Zend\LDAP\Node
      */
     protected $_rootDse = null;
 
     /**
      * Caches the schema
      *
-     * @var \Zend\LDAP\Node\Node
+     * @var \Zend\LDAP\Node
      */
     protected $_schema = null;
 
@@ -838,7 +838,7 @@ class LDAP
      * @param  array                                  $attributes
      * @param  string|null                            $sort
      * @param  string|null                            $collectionClass
-     * @return \Zend\LDAP\Collection\Collection
+     * @return \Zend\LDAP\Collection
      * @throws \Zend\LDAP\Exception
      */
     public function search($filter, $basedn = null, $scope = self::SEARCH_SCOPE_SUB,
@@ -909,22 +909,22 @@ class LDAP
      *
      * @param  \Zend\LDAP\Collection\DefaultIterator	$iterator
      * @param  string|null								$collectionClass
-     * @return \Zend\LDAP\Collection\Collection
+     * @return \Zend\LDAP\Collection
      * @throws \Zend\LDAP\Exception
      */
     protected function _createCollection(Collection\DefaultIterator $iterator, $collectionClass)
     {
         if ($collectionClass === null) {
-            return new Collection\Collection($iterator);
+            return new Collection($iterator);
         } else {
             $collectionClass = (string)$collectionClass;
             if (!class_exists($collectionClass)) {
                 throw new Exception(null,
                     "Class '$collectionClass' can not be found");
             }
-            if (!is_subclass_of($collectionClass, 'Zend\LDAP\Collection\Collection')) {
+            if (!is_subclass_of($collectionClass, 'Zend\LDAP\Collection')) {
                 throw new Exception(null,
-                    "Class '$collectionClass' must subclass 'Zend\LDAP\Collection\Collection'");
+                    "Class '$collectionClass' must subclass 'Zend\LDAP\Collection'");
             }
             return new $collectionClass($iterator);
         }
@@ -1395,18 +1395,18 @@ class LDAP
      * Returns the specified DN as a Zend_LDAP_Node
      *
      * @param  string|\Zend\LDAP\DN $dn
-     * @return \Zend\LDAP\Node\Node|null
+     * @return \Zend\LDAP\Node|null
      * @throws \Zend\LDAP\Exception
      */
     public function getNode($dn)
     {
-        return Node\Node::fromLDAP($dn, $this);
+        return Node::fromLDAP($dn, $this);
     }
 
     /**
      * Returns the base node as a Zend_LDAP_Node
      *
-     * @return \Zend\LDAP\Node\Node
+     * @return \Zend\LDAP\Node
      * @throws \Zend\LDAP\Exception
      */
     public function getBaseNode()
@@ -1417,13 +1417,13 @@ class LDAP
     /**
      * Returns the RootDSE
      *
-     * @return \Zend\LDAP\Node\RootDSE\RootDSE
+     * @return \Zend\LDAP\Node\RootDSE
      * @throws \Zend\LDAP\Exception
      */
     public function getRootDse()
     {
         if ($this->_rootDse === null) {
-            $this->_rootDse = Node\RootDSE\RootDSE::create($this);
+            $this->_rootDse = Node\RootDSE::create($this);
         }
         return $this->_rootDse;
     }
@@ -1431,13 +1431,13 @@ class LDAP
     /**
      * Returns the schema
      *
-     * @return \Zend\LDAP\Node\Schema\Schema
+     * @return \Zend\LDAP\Node\Schema
      * @throws \Zend\LDAP\Exception
      */
     public function getSchema()
     {
         if ($this->_schema === null) {
-            $this->_schema = Node\Schema\Schema::create($this);
+            $this->_schema = Node\Schema::create($this);
         }
         return $this->_schema;
     }

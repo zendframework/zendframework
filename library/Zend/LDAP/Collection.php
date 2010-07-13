@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\LDAP\Collection;
+namespace Zend\LDAP;
 
 /**
  * Zend_LDAP_Collection wraps a list of LDAP entries.
@@ -62,7 +62,7 @@ class Collection implements \Iterator, \Countable
      *
      * @param \Zend\LDAP\Collection\DefaultIterator $iterator
      */
-    public function __construct(DefaultIterator $iterator)
+    public function __construct(Collection\DefaultIterator $iterator)
     {
         $this->_iterator = $iterator;
     }

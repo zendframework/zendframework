@@ -26,13 +26,13 @@
 namespace Zend\Crypt\Math;
 
 /**
- * @uses       Zend\Crypt\Math\BigInteger\BigInteger
+ * @uses       Zend\Crypt\Math\BigInteger
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Math extends BigInteger\BigInteger
+class Math extends Math\BigInteger
 {
     /**
      * Generate a pseudorandom number within the given range.

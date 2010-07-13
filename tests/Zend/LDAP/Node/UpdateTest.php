@@ -77,7 +77,7 @@ class UpdateTest extends \ZendTest\LDAP\OnlineTestCase
     public function testSimpleUpdateOneValue()
     {
         $dn=$this->_createDn('ou=Test1,');
-        $node1=Node\Node::fromLDAP($dn, $this->_getLDAP());
+        $node1=Node::fromLDAP($dn, $this->_getLDAP());
         $node1->l='f';
         $node1->update();
 
@@ -93,7 +93,7 @@ class UpdateTest extends \ZendTest\LDAP\OnlineTestCase
     public function testAddNewNode()
     {
         $dn=$this->_createDn('ou=Test,');
-        $node1=Node\Node::create($dn, array('organizationalUnit'));
+        $node1=Node::create($dn, array('organizationalUnit'));
         $node1->l='a';
         $node1->update($this->_getLDAP());
 
@@ -110,7 +110,7 @@ class UpdateTest extends \ZendTest\LDAP\OnlineTestCase
     {
         $dnOld=$this->_createDn('ou=Test1,');
         $dnNew=$this->_createDn('ou=Test,');
-        $node1=Node\Node::fromLDAP($dnOld, $this->_getLDAP());
+        $node1=Node::fromLDAP($dnOld, $this->_getLDAP());
         $node1->l='f';
         $node1->setDn($dnNew);
         $node1->update();
@@ -129,7 +129,7 @@ class UpdateTest extends \ZendTest\LDAP\OnlineTestCase
     {
         $dnOld=$this->_createDn('ou=Test,');
         $dnNew=$this->_createDn('ou=TestNew,');
-        $node1=Node\Node::create($dnOld, array('organizationalUnit'));
+        $node1=Node::create($dnOld, array('organizationalUnit'));
         $node1->l='a';
         $node1->setDn($dnNew);
         $node1->update($this->_getLDAP());
@@ -147,7 +147,7 @@ class UpdateTest extends \ZendTest\LDAP\OnlineTestCase
     public function testModifyDeletedNode()
     {
         $dn=$this->_createDn('ou=Test1,');
-        $node1=Node\Node::create($dn, array('organizationalUnit'));
+        $node1=Node::create($dn, array('organizationalUnit'));
         $node1->delete();
         $node1->update($this->_getLDAP());
 
@@ -162,7 +162,7 @@ class UpdateTest extends \ZendTest\LDAP\OnlineTestCase
     public function testAddDeletedNode()
     {
         $dn=$this->_createDn('ou=Test,');
-        $node1=Node\Node::create($dn, array('organizationalUnit'));
+        $node1=Node::create($dn, array('organizationalUnit'));
         $node1->delete();
         $node1->update($this->_getLDAP());
 
@@ -173,7 +173,7 @@ class UpdateTest extends \ZendTest\LDAP\OnlineTestCase
     {
         $dnOld=$this->_createDn('ou=Test1,');
         $dnNew=$this->_createDn('ou=Test,');
-        $node1=Node\Node::fromLDAP($dnOld, $this->_getLDAP());
+        $node1=Node::fromLDAP($dnOld, $this->_getLDAP());
         $node1->setDn($dnNew);
         $node1->delete();
         $node1->update();
@@ -186,7 +186,7 @@ class UpdateTest extends \ZendTest\LDAP\OnlineTestCase
     {
         $dnOld=$this->_createDn('ou=Test,');
         $dnNew=$this->_createDn('ou=TestNew,');
-        $node1=Node\Node::create($dnOld, array('organizationalUnit'));
+        $node1=Node::create($dnOld, array('organizationalUnit'));
         $node1->setDn($dnNew);
         $node1->delete();
         $node1->update($this->_getLDAP());
@@ -200,19 +200,19 @@ class UpdateTest extends \ZendTest\LDAP\OnlineTestCase
         $dnOld=$this->_createDn('ou=Test1,');
         $dnNew=$this->_createDn('ou=Test,');
 
-        $node=Node\Node::fromLDAP($dnOld, $this->_getLDAP());
+        $node=Node::fromLDAP($dnOld, $this->_getLDAP());
         $node->setDn($dnNew);
         $node->update();
         $this->assertFalse($this->_getLDAP()->exists($dnOld));
         $this->assertTrue($this->_getLDAP()->exists($dnNew));
 
-        $node=Node\Node::fromLDAP($dnNew, $this->_getLDAP());
+        $node=Node::fromLDAP($dnNew, $this->_getLDAP());
         $node->move($dnOld);
         $node->update();
         $this->assertFalse($this->_getLDAP()->exists($dnNew));
         $this->assertTrue($this->_getLDAP()->exists($dnOld));
 
-        $node=Node\Node::fromLDAP($dnOld, $this->_getLDAP());
+        $node=Node::fromLDAP($dnOld, $this->_getLDAP());
         $node->rename($dnNew);
         $node->update();
         $this->assertFalse($this->_getLDAP()->exists($dnOld));

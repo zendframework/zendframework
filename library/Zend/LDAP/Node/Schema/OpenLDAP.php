@@ -24,14 +24,16 @@
  * @namespace
  */
 namespace Zend\LDAP\Node\Schema;
-use Zend\LDAP;
+
+use Zend\LDAP\Node\Schema,
+    Zend\LDAP;
 
 /**
  * Zend_LDAP_Node_Schema_OpenLDAP provides a simple data-container for the Schema node of
  * an OpenLDAP server.
  *
  * @uses       \Zend\LDAP\Attribute
- * @uses       \Zend\LDAP\Node\Schema\Schema
+ * @uses       \Zend\LDAP\Node\Schema
  * @uses       \Zend\LDAP\Node\Schema\AttributeType\OpenLDAP
  * @uses       \Zend\LDAP\Node\Schema\ObjectClass\OpenLDAP
  * @category   Zend
@@ -78,7 +80,7 @@ class OpenLDAP extends Schema
      *
      * @param  \Zend\LDAP\DN $dn
      * @param  \Zend\LDAP\LDAP    $ldap
-     * @return \Zend\LDAP\Node\Schema\Schema Provides a fluid interface
+     * @return \Zend\LDAP\Node\Schema Provides a fluid interface
      */
     protected function _parseSchema(LDAP\DN $dn, LDAP\LDAP $ldap)
     {

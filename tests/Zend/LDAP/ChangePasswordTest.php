@@ -41,7 +41,7 @@ class ChangePasswordTest extends OnlineTestCase
     public function testAddNewUserWithPasswordOpenLDAP()
     {
         if ($this->_getLDAP()->getRootDse()->getServerType() !==
-                RootDSE\RootDSE::SERVER_TYPE_OPENLDAP) {
+                RootDSE::SERVER_TYPE_OPENLDAP) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
@@ -73,7 +73,7 @@ class ChangePasswordTest extends OnlineTestCase
     public function testChangePasswordWithUserAccountOpenLDAP()
     {
         if ($this->_getLDAP()->getRootDse()->getServerType() !==
-                RootDSE\RootDSE::SERVER_TYPE_OPENLDAP) {
+                RootDSE::SERVER_TYPE_OPENLDAP) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
@@ -122,7 +122,7 @@ class ChangePasswordTest extends OnlineTestCase
     public function testAddNewUserWithPasswordActiveDirectory()
     {
         if ($this->_getLDAP()->getRootDse()->getServerType() !==
-                RootDSE\RootDSE::SERVER_TYPE_ACTIVEDIRECTORY) {
+                RootDSE::SERVER_TYPE_ACTIVEDIRECTORY) {
             $this->markTestSkipped('Test can only be run on an ActiveDirectory server');
         }
         $options = $this->_getLDAP()->getOptions();
@@ -162,7 +162,7 @@ class ChangePasswordTest extends OnlineTestCase
     public function testChangePasswordWithUserAccountActiveDirectory()
     {
         if ($this->_getLDAP()->getRootDse()->getServerType() !==
-                RootDSE\RootDSE::SERVER_TYPE_ACTIVEDIRECTORY) {
+                RootDSE::SERVER_TYPE_ACTIVEDIRECTORY) {
             $this->markTestSkipped('Test can only be run on an ActiveDirectory server');
         }
         $options = $this->_getLDAP()->getOptions();

@@ -23,7 +23,8 @@
 /**
  * @namespace
  */
-namespace Zend\LDAP\Node\Schema;
+namespace Zend\LDAP\Node;
+
 use Zend\LDAP;
 use Zend\LDAP\Node\RootDSE;
 
@@ -40,7 +41,7 @@ use Zend\LDAP\Node\RootDSE;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Schema extends LDAP\Node\AbstractNode
+class Schema extends AbstractNode
 {
     const OBJECTCLASS_TYPE_UNKNOWN    = 0;
     const OBJECTCLASS_TYPE_STRUCTURAL = 1;
@@ -51,7 +52,7 @@ class Schema extends LDAP\Node\AbstractNode
      * Factory method to create the Schema node.
      *
      * @param  \Zend\LDAP\LDAP $ldap
-     * @return \Zend\LDAP\Node\Schema\Schema
+     * @return \Zend\LDAP\Node\Schema
      * @throws \Zend\LDAP\Exception
      */
     public static function create(LDAP\LDAP $ldap)
@@ -59,11 +60,11 @@ class Schema extends LDAP\Node\AbstractNode
         $dn = $ldap->getRootDse()->getSchemaDn();
         $data = $ldap->getEntry($dn, array('*', '+'), true);
         switch ($ldap->getRootDse()->getServerType()) {
-            case RootDSE\RootDSE::SERVER_TYPE_ACTIVEDIRECTORY:
-                return new ActiveDirectory($dn, $data, $ldap);
-            case RootDSE\RootDSE::SERVER_TYPE_OPENLDAP:
-                return new OpenLDAP($dn, $data, $ldap);
-            case RootDSE\RootDSE::SERVER_TYPE_EDIRECTORY:
+            case RootDSE::SERVER_TYPE_ACTIVEDIRECTORY:
+                return new Schema\ActiveDirectory($dn, $data, $ldap);
+            case RootDSE::SERVER_TYPE_OPENLDAP:
+                return new Schema\OpenLDAP($dn, $data, $ldap);
+            case RootDSE::SERVER_TYPE_EDIRECTORY:
             default:
                 return new self($dn, $data, $ldap);
         }
@@ -89,7 +90,7 @@ class Schema extends LDAP\Node\AbstractNode
      *
      * @param  \Zend\LDAP\DN $dn
      * @param  \Zend\LDAP\LDAP    $ldap
-     * @return \Zend\LDAP\Node\Schema\Schema Provides a fluid interface
+     * @return \Zend\LDAP\Node\Schema Provides a fluid interface
      */
     protected function _parseSchema(LDAP\DN $dn, LDAP\LDAP $ldap)
     {

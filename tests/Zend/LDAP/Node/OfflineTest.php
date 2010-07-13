@@ -53,8 +53,8 @@ class OfflineTest extends \ZendTest\LDAP\TestCase
     public function testCreateFromArrayStringDn()
     {
         $data=$this->_createTestArrayData();
-        $node=Node\Node::fromArray($data);
-        $this->assertType('Zend\LDAP\Node\Node', $node);
+        $node=Node::fromArray($data);
+        $this->assertType('Zend\LDAP\Node', $node);
         $this->assertFalse($node->isAttached());
         $this->assertFalse($node->willBeDeleted());
         $this->assertFalse($node->willBeMoved());
@@ -65,8 +65,8 @@ class OfflineTest extends \ZendTest\LDAP\TestCase
     {
         $data=$this->_createTestArrayData();
         $data['dn']=LDAP\DN::fromString($data['dn']);
-        $node=Node\Node::fromArray($data);
-        $this->assertType('Zend\LDAP\Node\Node', $node);
+        $node=Node::fromArray($data);
+        $this->assertType('Zend\LDAP\Node', $node);
         $this->assertFalse($node->isAttached());
     }
 
@@ -77,7 +77,7 @@ class OfflineTest extends \ZendTest\LDAP\TestCase
     {
         $data=$this->_createTestArrayData();
         unset($data['dn']);
-        $node=Node\Node::fromArray($data);
+        $node=Node::fromArray($data);
     }
 
     /**
@@ -87,7 +87,7 @@ class OfflineTest extends \ZendTest\LDAP\TestCase
     {
         $data=$this->_createTestArrayData();
         $data['dn']=5;
-        $node=Node\Node::fromArray($data);
+        $node=Node::fromArray($data);
     }
 
     /**
@@ -97,15 +97,15 @@ class OfflineTest extends \ZendTest\LDAP\TestCase
     {
         $data=$this->_createTestArrayData();
         $data['dn']='name1,cn=name2,dc=example,dc=org';
-        $node=Node\Node::fromArray($data);
+        $node=Node::fromArray($data);
     }
 
     public function testCreateFromArrayAndEnsureRdnValues()
     {
         $data=$this->_createTestArrayData();
         $data['dn']=LDAP\DN::fromString($data['dn']);
-        $node=Node\Node::fromArray($data);
-        $this->assertType('Zend\LDAP\Node\Node', $node);
+        $node=Node::fromArray($data);
+        $this->assertType('Zend\LDAP\Node', $node);
         $this->assertFalse($node->isAttached());
         unset($data['dn']);
         $this->assertEquals($data, $node->getData());
@@ -114,14 +114,14 @@ class OfflineTest extends \ZendTest\LDAP\TestCase
     public function testGetDnString()
     {
         $data=$this->_createTestArrayData();
-        $node=Node\Node::fromArray($data);
+        $node=Node::fromArray($data);
         $this->assertEquals($data['dn'], $node->getDnString());
     }
 
     public function testGetDnArray()
     {
         $data=$this->_createTestArrayData();
-        $node=Node\Node::fromArray($data);
+        $node=Node::fromArray($data);
         $exA=LDAP\DN::explodeDn($data['dn']);
         $this->assertEquals($exA, $node->getDnArray());
     }
@@ -129,7 +129,7 @@ class OfflineTest extends \ZendTest\LDAP\TestCase
     public function testGetDnObject()
     {
         $data=$this->_createTestArrayData();
-        $node=Node\Node::fromArray($data);
+        $node=Node::fromArray($data);
         $compareDn=LDAP\DN::fromString('cn=name,dc=example,dc=org');
         $this->assertEquals($compareDn, $node->getDn());
         $this->assertNotSame($node->getDn(), $node->getDn());
@@ -189,7 +189,7 @@ class OfflineTest extends \ZendTest\LDAP\TestCase
     public function testGetData()
     {
         $data=$this->_createTestArrayData();
-        $node=Node\Node::fromArray($data);
+        $node=Node::fromArray($data);
         ksort($data, SORT_STRING);
         unset($data['dn']);
         $this->assertEquals($data, $node->getData());
@@ -364,7 +364,7 @@ class OfflineTest extends \ZendTest\LDAP\TestCase
     {
         $dn='cn=name,dc=example,dc=org';
         $objectClass=array('account', 'test', 'inetOrgPerson');
-        $node=Node\Node::create($dn, $objectClass);
+        $node=Node::create($dn, $objectClass);
         $this->assertEquals($dn, $node->getDnString());
         $this->assertEquals('cn=name', $node->getRdnString());
         $this->assertEquals('name', $node->cn[0]);
@@ -400,7 +400,7 @@ class OfflineTest extends \ZendTest\LDAP\TestCase
     public function testRenameNodeString()
     {
         $data=$this->_createTestArrayData();
-        $node=Node\Node::fromArray($data);
+        $node=Node::fromArray($data);
 
         $newDnString='cn=test+ou=Lab+uid=tester,cn=name,dc=example,dc=org';
         $node->setDn($newDnString);
@@ -418,7 +418,7 @@ class OfflineTest extends \ZendTest\LDAP\TestCase
     public function testRenameNodeArray()
     {
         $data=$this->_createTestArrayData();
-        $node=Node\Node::fromArray($data);
+        $node=Node::fromArray($data);
 
         $newDnArray=array(
             array('uid' => 'tester'),
@@ -434,7 +434,7 @@ class OfflineTest extends \ZendTest\LDAP\TestCase
     public function testRenameNodeDnObject()
     {
         $data=$this->_createTestArrayData();
-        $node=Node\Node::fromArray($data);
+        $node=Node::fromArray($data);
 
         $newDn=LDAP\DN::fromString('cn=test+ou=Lab+uid=tester,cn=name,dc=example,dc=org');
         $node->setDn($newDn);
@@ -465,12 +465,12 @@ class OfflineTest extends \ZendTest\LDAP\TestCase
         $this->assertNotEquals($dn1->toString(), $node1->getDn()->toString());
 
         $dn2=LDAP\DN::fromString('cn=name2,dc=example,dc=org');
-        $node2=Node\Node::create($dn2);
+        $node2=Node::create($dn2);
         $dn2->prepend(array('cn' => 'name'));
         $this->assertNotEquals($dn2->toString(), $node2->getDn()->toString());
 
         $dn3=LDAP\DN::fromString('cn=name2,dc=example,dc=org');
-        $node3=Node\Node::fromArray(array(
+        $node3=Node::fromArray(array(
             'dn' => $dn3,
             'ou' => 'Test'), false);
         $dn3->prepend(array('cn' => 'name'));
@@ -496,7 +496,7 @@ class OfflineTest extends \ZendTest\LDAP\TestCase
             )
         ), $changes);
 
-        $node=Node\Node::create('uid=test,dc=example,dc=org', array('account'));
+        $node=Node::create('uid=test,dc=example,dc=org', array('account'));
         $node->host='host';
         unset($node->cn);
         unset($node['sn']);

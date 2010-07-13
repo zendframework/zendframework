@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Crypt\Math\BigInteger;
+namespace Zend\Crypt\Math;
 
 /**
  * Support for arbitrary precision mathematics in PHP.
@@ -47,7 +47,7 @@ namespace Zend\Crypt\Math\BigInteger;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class BigInteger implements BigIntegerCapable
+class BigInteger implements BigInteger\BigIntegerCapable
 {
     /**
      * Holds an instance of one of the three arbitrary precision wrappers.
@@ -67,7 +67,7 @@ class BigInteger implements BigIntegerCapable
     public function __construct($extension = null)
     {
         if (!is_null($extension) && !in_array($extension, array('bcmath', 'gmp', 'bigint'))) {
-            throw new Exception('Invalid extension type; please use one of bcmath, gmp or bigint');
+            throw new BigInteger\Exception('Invalid extension type; please use one of bcmath, gmp or bigint');
         }
         $this->_loadAdapter($extension);
     }
@@ -82,7 +82,7 @@ class BigInteger implements BigIntegerCapable
     public function __call($methodName, $args)
     {
         if(!method_exists($this->_math, $methodName)) {
-            throw new Exception('invalid method call: ' . get_class($this->_math) . '::' . $methodName . '() does not exist');
+            throw new BigInteger\Exception('invalid method call: ' . get_class($this->_math) . '::' . $methodName . '() does not exist');
         }
         return call_user_func_array(array($this->_math, $methodName), $args);
     }
@@ -228,11 +228,11 @@ class BigInteger implements BigIntegerCapable
             }
         }
         if($extension == 'gmp' && extension_loaded('gmp')) {
-            $this->_math = new Gmp();
+            $this->_math = new BigInteger\Gmp();
         } elseif ($extension == 'bcmath') {
-            $this->_math = new Bcmath();
+            $this->_math = new BigInteger\Bcmath();
         } else {
-            throw new Exception($extension . ' big integer precision math support not detected');
+            throw new BigInteger\Exception($extension . ' big integer precision math support not detected');
         }
     }
 }

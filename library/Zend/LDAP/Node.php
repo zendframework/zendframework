@@ -23,8 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\LDAP\Node;
-use Zend\LDAP;
+namespace Zend\LDAP;
 
 /**
  * Zend_LDAP_Node provides an object oriented view into a LDAP node.
@@ -43,7 +42,7 @@ use Zend\LDAP;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Node extends AbstractNode implements \Iterator, \RecursiveIterator
+class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
 {
     /**
      * Holds the node's new DN if node is renamed.
@@ -101,7 +100,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      * @param  \Zend\LDAP\LDAP    $ldap
      * @throws \Zend\LDAP\Exception
      */
-    protected function __construct(LDAP\DN $dn, array $data, $fromDataSource, LDAP\LDAP $ldap = null)
+    protected function __construct(DN $dn, array $data, $fromDataSource, LDAP $ldap = null)
     {
         parent::__construct($dn, $data, $fromDataSource);
         if (!is_null($ldap)) $this->attachLDAP($ldap);
@@ -142,7 +141,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
     public function getLDAP()
     {
         if (is_null($this->_ldap)) {
-            throw new LDAP\Exception(null, 'No LDAP connection specified.', LDAP\Exception::LDAP_OTHER);
+            throw new Exception(null, 'No LDAP connection specified.', Exception::LDAP_OTHER);
         }
         else return $this->_ldap;
     }
@@ -154,14 +153,14 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @uses   \Zend\LDAP\DN::isChildOf()
      * @param  \Zend\LDAP\LDAP $ldap
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      * @throws \Zend\LDAP\Exception
      */
-    public function attachLDAP(LDAP\LDAP $ldap)
+    public function attachLDAP(LDAP $ldap)
     {
-        if (!LDAP\DN::isChildOf($this->_getDn(), $ldap->getBaseDn())) {
-            throw new LDAP\Exception(null, 'LDAP connection is not responsible for given node.',
-                LDAP\Exception::LDAP_OTHER);
+        if (!DN::isChildOf($this->_getDn(), $ldap->getBaseDn())) {
+            throw new Exception(null, 'LDAP connection is not responsible for given node.',
+                Exception::LDAP_OTHER);
         }
 
         if ($ldap !== $this->_ldap) {
@@ -180,7 +179,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      *
      * This is an offline method.
      *
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      */
     public function detachLDAP()
     {
@@ -228,17 +227,17 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @param  string|array|\Zend\LDAP\DN $dn
      * @param  array                     $objectClass
-     * @return \Zend\LDAP\Node\Node
+     * @return \Zend\LDAP\Node
      * @throws \Zend\LDAP\Exception
      */
     public static function create($dn, array $objectClass = array())
     {
         if (is_string($dn) || is_array($dn)) {
-            $dn = LDAP\DN::factory($dn);
-        } else if ($dn instanceof LDAP\DN) {
+            $dn = DN::factory($dn);
+        } else if ($dn instanceof DN) {
             $dn = clone $dn;
         } else {
-            throw new LDAP\Exception(null, '$dn is of a wrong data type.');
+            throw new Exception(null, '$dn is of a wrong data type.');
         }
         $new = new self($dn, array(), false, null);
         $new->_ensureRdnAttributeValues();
@@ -251,17 +250,17 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @param  string|array|\Zend\LDAP\DN $dn
      * @param  \Zend\LDAP\LDAP                 $ldap
-     * @return \Zend\LDAP\Node\Node|null
+     * @return \Zend\LDAP\Node|null
      * @throws \Zend\LDAP\Exception
      */
-    public static function fromLDAP($dn, LDAP\LDAP $ldap)
+    public static function fromLDAP($dn, LDAP $ldap)
     {
         if (is_string($dn) || is_array($dn)) {
-            $dn = LDAP\DN::factory($dn);
-        } else if ($dn instanceof LDAP\DN) {
+            $dn = DN::factory($dn);
+        } else if ($dn instanceof DN) {
             $dn = clone $dn;
         } else {
-            throw new LDAP\Exception(null, '$dn is of a wrong data type.');
+            throw new Exception(null, '$dn is of a wrong data type.');
         }
         $data = $ldap->getEntry($dn, array('*', '+'), true);
         if ($data === null) {
@@ -276,20 +275,20 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @param  array   $data
      * @param  boolean $fromDataSource
-     * @return \Zend\LDAP\Node\Node
+     * @return \Zend\LDAP\Node
      * @throws \Zend\LDAP\Exception
      */
     public static function fromArray(array $data, $fromDataSource = false)
     {
         if (!array_key_exists('dn', $data)) {
-            throw new LDAP\Exception(null, '\'dn\' key is missing in array.');
+            throw new Exception(null, '\'dn\' key is missing in array.');
         }
         if (is_string($data['dn']) || is_array($data['dn'])) {
-            $dn = LDAP\DN::factory($data['dn']);
-        } else if ($data['dn'] instanceof LDAP\DN) {
+            $dn = DN::factory($data['dn']);
+        } else if ($data['dn'] instanceof DN) {
             $dn = clone $data['dn'];
         } else {
-            throw new LDAP\Exception(null, '\'dn\' key is of a wrong data type.');
+            throw new Exception(null, '\'dn\' key is of a wrong data type.');
         }
         $fromDataSource = ($fromDataSource === true) ? true : false;
         $new = new self($dn, $data, $fromDataSource, null);
@@ -305,7 +304,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
     protected function _ensureRdnAttributeValues()
     {
         foreach ($this->getRdnArray() as $key => $value) {
-            LDAP\Attribute::setAttribute($this->_currentData, $key, $value, false);
+            Attribute::setAttribute($this->_currentData, $key, $value, false);
         }
     }
 
@@ -362,7 +361,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      *
      * Node will be deleted on calling update() if $delete is true.
      *
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      */
     public function delete()
     {
@@ -390,17 +389,17 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      * Sends all pending changes to the LDAP server
      *
      * @param  \Zend\LDAP\LDAP $ldap
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      * @throws \Zend\LDAP\Exception
      */
-    public function update(LDAP\LDAP $ldap = null)
+    public function update(LDAP $ldap = null)
     {
         if ($ldap !== null) {
             $this->attachLDAP($ldap);
         }
         $ldap = $this->getLDAP();
-        if (!($ldap instanceof LDAP\LDAP)) {
-            throw new LDAP\Exception(null, 'No LDAP connection available');
+        if (!($ldap instanceof LDAP)) {
+            throw new Exception(null, 'No LDAP connection available');
         }
 
         if ($this->willBeDeleted()) {
@@ -469,14 +468,14 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @param  \Zend\LDAP\DN|string|array $newDn
      * @throws \Zend\LDAP\Exception
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      */
     public function setDn($newDn)
     {
-        if ($newDn instanceof LDAP\DN) {
+        if ($newDn instanceof DN) {
             $this->_newDn = clone $newDn;
         } else {
-            $this->_newDn = LDAP\DN::factory($newDn);
+            $this->_newDn = DN::factory($newDn);
         }
         $this->_ensureRdnAttributeValues();
         return $this;
@@ -489,7 +488,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @param  \Zend\LDAP\DN|string|array $newDn
      * @throws \Zend\LDAP\Exception
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      */
     public function move($newDn)
     {
@@ -503,7 +502,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @param  \Zend\LDAP\DN|string|array $newDn
      * @throws \Zend\LDAP\Exception
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      */
     public function rename($newDn)
     {
@@ -516,7 +515,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      * This is an offline method.
      *
      * @param  array|string $value
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      * @throws \Zend\LDAP\Exception
      */
     public function setObjectClass($value)
@@ -531,7 +530,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      * This is an offline method.
      *
      * @param  array|string $value
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      * @throws \Zend\LDAP\Exception
      */
     public function appendObjectClass($value)
@@ -549,7 +548,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
     public function toLdif(array $options = array())
     {
         $attributes = array_merge(array('dn' => $this->getDnString()), $this->getData(false));
-        return LDAP\LDIF\Encoder::encode($attributes, $options);
+        return LDIF\Encoder::encode($attributes, $options);
     }
 
     /**
@@ -611,7 +610,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @param  string $name
      * @param  mixed  $value
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      * @throws \Zend\LDAP\Exception
      */
     public function setAttribute($name, $value)
@@ -627,7 +626,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @param  string $name
      * @param  mixed  $value
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      * @throws \Zend\LDAP\Exception
      */
     public function appendToAttribute($name, $value)
@@ -647,7 +646,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
     protected function _setAttribute($name, $value, $append)
     {
         $this->_assertChangeableAttribute($name);
-        LDAP\Attribute::setAttribute($this->_currentData, $name, $value, $append);
+        Attribute::setAttribute($this->_currentData, $name, $value, $append);
     }
 
     /**
@@ -658,7 +657,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      * @param  string        $name
      * @param  integer|array $value
      * @param  boolean       $utc
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      * @throws \Zend\LDAP\Exception
      */
     public function setDateTimeAttribute($name, $value, $utc = false)
@@ -675,7 +674,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      * @param  string        $name
      * @param  integer|array $value
      * @param  boolean       $utc
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      * @throws \Zend\LDAP\Exception
      */
     public function appendToDateTimeAttribute($name, $value, $utc = false)
@@ -696,7 +695,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
     protected function _setDateTimeAttribute($name, $value, $utc, $append)
     {
         $this->_assertChangeableAttribute($name);
-        LDAP\Attribute::setDateTimeAttribute($this->_currentData, $name, $value, $utc, $append);
+        Attribute::setDateTimeAttribute($this->_currentData, $name, $value, $utc, $append);
     }
 
     /**
@@ -705,14 +704,14 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      * @param  string $password
      * @param  string $hashType
      * @param  string $attribName
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      * @throws \Zend\LDAP\Exception
      */
-    public function setPasswordAttribute($password, $hashType = LDAP\AttributeLDAP\Attribute::PASSWORD_HASH_MD5,
+    public function setPasswordAttribute($password, $hashType = Attribute::PASSWORD_HASH_MD5,
         $attribName = 'userPassword')
     {
         $this->_assertChangeableAttribute($attribName);
-        LDAP\Attribute::setPassword($this->_currentData, $password, $hashType, $attribName);
+        Attribute::setPassword($this->_currentData, $password, $hashType, $attribName);
         return $this;
     }
 
@@ -724,7 +723,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      * This is an offline method.
      *
      * @param  string $name
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      * @throws \Zend\LDAP\Exception
      */
     public function deleteAttribute($name)
@@ -743,7 +742,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      */
     public function removeDuplicatesFromAttribute($attribName)
     {
-        LDAP\Attribute::removeDuplicatesFromAttribute($this->_currentData, $attribName);
+        Attribute::removeDuplicatesFromAttribute($this->_currentData, $attribName);
     }
 
     /**
@@ -755,7 +754,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      */
     public function removeFromAttribute($attribName, $value)
     {
-        LDAP\Attribute::removeFromAttribute($this->_currentData, $attribName, $value);
+        Attribute::removeFromAttribute($this->_currentData, $attribName, $value);
     }
 
     /**
@@ -766,14 +765,14 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
     protected function _assertChangeableAttribute($name)
     {
         $name = strtolower($name);
-        $rdn = $this->getRdnArray(LDAP\DN::ATTR_CASEFOLD_LOWER);
+        $rdn = $this->getRdnArray(DN::ATTR_CASEFOLD_LOWER);
         if ($name == 'dn') {
-            throw new LDAP\Exception(null, 'DN cannot be changed.');
+            throw new Exception(null, 'DN cannot be changed.');
         }
         else if (array_key_exists($name, $rdn)) {
-            throw new LDAP\Exception(null, 'Cannot change attribute because it\'s part of the RDN');
+            throw new Exception(null, 'Cannot change attribute because it\'s part of the RDN');
         } else if (in_array($name, self::$_systemAttributes)) {
-            throw new LDAP\Exception(null, 'Cannot change attribute because it\'s read-only');
+            throw new Exception(null, 'Cannot change attribute because it\'s read-only');
         }
         else return true;
     }
@@ -851,7 +850,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      * @return boolean
      * @throws \Zend\LDAP\Exception
      */
-    public function exists(LDAP\LDAP $ldap = null)
+    public function exists(LDAP $ldap = null)
     {
         if ($ldap !== null) {
             $this->attachLDAP($ldap);
@@ -866,10 +865,10 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      * This is an online method.
      *
      * @param  \Zend\LDAP\LDAP $ldap
-     * @return \Zend\LDAP\Node\Node Provides a fluid interface
+     * @return \Zend\LDAP\Node Provides a fluid interface
      * @throws \Zend\LDAP\Exception
      */
-    public function reload(LDAP\LDAP $ldap = null)
+    public function reload(LDAP $ldap = null)
     {
         if ($ldap !== null) {
             $this->attachLDAP($ldap);
@@ -890,7 +889,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      * @return \Zend\LDAP\Node\Collection
      * @throws \Zend\LDAP\Exception
      */
-    public function searchSubtree($filter, $scope = LDAP\LDAPLDAP\LDAP::SEARCH_SCOPE_SUB, $sort = null)
+    public function searchSubtree($filter, $scope = LDAP::SEARCH_SCOPE_SUB, $sort = null)
     {
         return $this->getLDAP()->search($filter, $this->_getDn(), $scope, array('*', '+'), $sort,
             'Zend\LDAP\Node\Collection');
@@ -906,7 +905,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      * @return integer
      * @throws \Zend\LDAP\Exception
      */
-    public function countSubtree($filter, $scope = LDAP\LDAPLDAP\LDAP::SEARCH_SCOPE_SUB)
+    public function countSubtree($filter, $scope = LDAP::SEARCH_SCOPE_SUB)
     {
         return $this->getLDAP()->count($filter, $this->_getDn(), $scope);
     }
@@ -921,7 +920,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      */
     public function countChildren()
     {
-        return $this->countSubtree('(objectClass=*)', LDAP\LDAP::SEARCH_SCOPE_ONE);
+        return $this->countSubtree('(objectClass=*)', LDAP::SEARCH_SCOPE_ONE);
     }
 
     /**
@@ -936,7 +935,7 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
      */
     public function searchChildren($filter, $sort = null)
     {
-        return $this->searchSubtree($filter, LDAP\LDAP::SEARCH_SCOPE_ONE, $sort);
+        return $this->searchSubtree($filter, LDAP::SEARCH_SCOPE_ONE, $sort);
     }
 
     /**
@@ -976,21 +975,21 @@ class Node extends AbstractNode implements \Iterator, \RecursiveIterator
             if ($this->isAttached()) {
                 $children = $this->searchChildren('(objectClass=*)', null);
                 foreach ($children as $child) {
-                    $this->_children[$child->getRdnString(LDAP\DN::ATTR_CASEFOLD_LOWER)] = $child;
+                    $this->_children[$child->getRdnString(DN::ATTR_CASEFOLD_LOWER)] = $child;
                 }
             }
         }
-        return new ChildrenIterator($this->_children);
+        return new Node\ChildrenIterator($this->_children);
     }
 
     /**
      * Returns the parent of the current node.
      *
      * @param  \Zend\LDAP\LDAP $ldap
-     * @return \Zend\LDAP\Node\Node
+     * @return \Zend\LDAP\Node
      * @throws \Zend\LDAP\Exception
      */
-    public function getParent(LDAP\LDAP $ldap = null)
+    public function getParent(LDAP $ldap = null)
     {
         if ($ldap !== null) {
             $this->attachLDAP($ldap);

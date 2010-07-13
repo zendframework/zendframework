@@ -25,24 +25,26 @@
  */
 namespace Zend\LDAP\Node;
 
+use Zend\LDAP\Node;
+
 /**
  * Zend_LDAP_Node_Collection provides a collecion of nodes.
  *
- * @uses       \Zend\LDAP\Collection\Collection
- * @uses       \Zend\LDAP\Node\Node
+ * @uses       \Zend\LDAP\Collection
+ * @uses       \Zend\LDAP\Node
  * @category   Zend
  * @package    Zend_LDAP
  * @subpackage Node
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Collection extends \Zend\LDAP\Collection\Collection
+class Collection extends \Zend\LDAP\Collection
 {
     /**
      * Creates the data structure for the given entry data
      *
      * @param  array $data
-     * @return \Zend\LDAP\Node\Node
+     * @return \Zend\LDAP\Node
      */
     protected function _createEntry(array $data)
     {

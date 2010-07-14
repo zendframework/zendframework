@@ -39,7 +39,7 @@ class AMF0Test extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_adapter = new \Zend\Serializer\Adapter\AMF0();
+        $this->_adapter = new \Zend\Serializer\Adapter\Amf0();
     }
 
     public function tearDown()

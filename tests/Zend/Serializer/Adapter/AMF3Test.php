@@ -39,7 +39,7 @@ class AMF3Test extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_adapter = new \Zend\Serializer\Adapter\AMF3();
+        $this->_adapter = new \Zend\Serializer\Adapter\Amf3();
     }
 
     public function tearDown()

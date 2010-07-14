@@ -25,11 +25,13 @@
  */
 namespace Zend\LDAP\Node\RootDSE;
 
+use Zend\LDAP\Node\RootDSE;
+
 /**
  * Zend_LDAP_Node_RootDse provides a simple data-container for the RootDSE node of
  * an OpenLDAP server.
  *
- * @uses       \Zend\LDAP\Node\RootDSE\RootDSE
+ * @uses       \Zend\LDAP\Node\RootDSE
  * @category   Zend
  * @package    Zend_LDAP
  * @subpackage RootDSE

@@ -32,7 +32,7 @@ namespace Zend\GData\YouTube\Extension;
  * it is a child of an Entry (Atom) or Item (RSS).
  *
  * @uses       \Zend\GData\Media\Extension\MediaGroup
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @uses       \Zend\GData\YouTube\Extension\Duration
  * @uses       \Zend\GData\YouTube\Extension\MediaContent
  * @uses       \Zend\GData\YouTube\Extension\MediaCredit
@@ -84,7 +84,7 @@ class MediaGroup extends \Zend\GData\Media\Extension\MediaGroup
 
     public function __construct($element = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\YouTube\YouTube::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\YouTube::$namespaces);
         parent::__construct($element);
     }
 

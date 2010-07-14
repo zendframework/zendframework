@@ -231,7 +231,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsLastBuildDateAlwaysReturnsNullForAtom()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10.xml')
         );
         $this->assertNull($feed->getLastBuildDate());
@@ -407,7 +407,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsOriginalSourceUriIfFeedLinkNotAvailableFromFeed()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/feedlink/plain/atom10_NoFeedLink.xml')
         );
         $feed->setOriginalSourceUri('http://www.example.com/feed/atom');
@@ -521,7 +521,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsImageFromAtom03()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/atom03.xml')
         );
         $this->assertEquals(array('uri'=>'http://www.example.com/logo.gif'), $feed->getImage());
@@ -529,7 +529,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsImageFromAtom10()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/atom10.xml')
         );
         $this->assertEquals(array('uri'=>'http://www.example.com/logo.gif'), $feed->getImage());
@@ -540,7 +540,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsImageFromAtom03_None()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/none/atom03.xml')
         );
         $this->assertEquals(null, $feed->getImage());
@@ -548,7 +548,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsImageFromAtom10_None()
     {
-        $feed = Zend_Feed_Reader::importString(
+        $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/none/atom10.xml')
         );
         $this->assertEquals(null, $feed->getImage());

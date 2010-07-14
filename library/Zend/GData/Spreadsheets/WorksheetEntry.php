@@ -25,11 +25,13 @@
  */
 namespace Zend\GData\Spreadsheets;
 
+use Zend\GData\Spreadsheets;
+
 /**
  * Concrete class for working with Worksheet entries.
  *
  * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Spreadsheets\Spreadsheets
+ * @uses       \Zend\GData\Spreadsheets
  * @uses       \Zend\GData\Spreadsheets\Extension\ColCount
  * @uses       \Zend\GData\Spreadsheets\Extension\RowCount
  * @category   Zend
@@ -41,7 +43,7 @@ namespace Zend\GData\Spreadsheets;
 class WorksheetEntry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\Spreadsheets\WorksheetEntry';
+    protected $_entryClassName = 'Zend\GData\Spreadsheets\WorksheetEntry';
 
     protected $_rowCount = null;
     protected $_colCount = null;

@@ -30,15 +30,15 @@ namespace Zend\GData\Photos\Extension;
  * class represents the ID of an album and is usually contained
  * within an instance of Zend_Gdata_Photos_AlbumEntry or CommentEntry.
  *
- * @uses       \Zend\GData\Extension\Extension
- * @uses       \Zend\GData\Photos\Photos
+ * @uses       \Zend\GData\Extension
+ * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AlbumId extends \Zend\GData\Extension\Extension
+class AlbumId extends \Zend\GData\Extension
 {
 
     protected $_rootNamespace = 'gphoto';
@@ -51,7 +51,7 @@ class AlbumId extends \Zend\GData\Extension\Extension
      */
     public function __construct($text = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Photos\Photos::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Photos::$namespaces);
         parent::__construct();
         $this->setText($text);
     }

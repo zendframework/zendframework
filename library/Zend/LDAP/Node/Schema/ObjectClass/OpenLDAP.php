@@ -32,7 +32,7 @@ use Zend\LDAP\Node\Schema\ObjectClass,
  * Zend\LDAP\Node\Schema\ObjectClass\OpenLDAP provides access to the objectClass
  * schema information on an OpenLDAP server.
  *
- * @uses       \Zend\LDAP\Node\Schema\Schema
+ * @uses       \Zend\LDAP\Node\Schema
  * @uses       \Zend\LDAP\Node\Schema\Item
  * @uses       \Zend\LDAP\Node\Schema\ObjectClass
  * @category   Zend
@@ -143,13 +143,13 @@ class OpenLDAP extends Schema\Item implements ObjectClass
     public function getType()
     {
         if ($this->structural) {
-            return Schema\Schema::OBJECTCLASS_TYPE_STRUCTURAL;
+            return Schema::OBJECTCLASS_TYPE_STRUCTURAL;
         } else if ($this->abstract) {
-            return Schema\Schema::OBJECTCLASS_TYPE_ABSTRACT;
+            return Schema::OBJECTCLASS_TYPE_ABSTRACT;
         } else if ($this->auxiliary) {
-            return Schema\Schema::OBJECTCLASS_TYPE_AUXILIARY;
+            return Schema::OBJECTCLASS_TYPE_AUXILIARY;
         } else {
-            return Schema\Schema::OBJECTCLASS_TYPE_UNKNOWN;
+            return Schema::OBJECTCLASS_TYPE_UNKNOWN;
         }
     }
 

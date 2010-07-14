@@ -270,41 +270,38 @@ class FeedTest extends \PHPUnit_Framework_TestCase
 
     public function testSetLastBuildDateDefaultsToCurrentTime()
     {
-        $writer = new Zend_Feed_Writer_Feed;
+        $writer = new WriterFeed;
         $writer->setLastBuildDate();
-        $dateNow = new Zend_Date;
+        $dateNow = new Date\Date;
         $this->assertTrue($dateNow->isLater($writer->getLastBuildDate()) || $dateNow->equals($writer->getLastBuildDate()));
     }
 
     public function testSetLastBuildDateUsesGivenUnixTimestamp()
     {
-        $writer = new Zend_Feed_Writer_Feed;
+        $writer = new WriterFeed;
         $writer->setLastBuildDate(1234567890);
-        $myDate = new Zend_Date('1234567890', Zend_Date::TIMESTAMP);
+        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
     }
 
     public function testSetLastBuildDateUsesZendDateObject()
     {
-        $writer = new Zend_Feed_Writer_Feed;
-        $writer->setLastBuildDate(new Zend_Date('1234567890', Zend_Date::TIMESTAMP));
-        $myDate = new Zend_Date('1234567890', Zend_Date::TIMESTAMP);
+        $writer = new WriterFeed;
+        $writer->setLastBuildDate(new Date\Date('1234567890', Date\Date::TIMESTAMP));
+        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
     }
 
     public function testSetLastBuildDateThrowsExceptionOnInvalidParameter()
     {
-        $writer = new Zend_Feed_Writer_Feed;
-        try {
-            $writer->setLastBuildDate('abc');
-            $this->fail();
-        } catch (Zend_Feed_Exception $e) {
-        }
+        $this->setExpectedException('Zend\Feed\Exception');
+        $writer = new WriterFeed;
+        $writer->setLastBuildDate('abc');
     }
 
     public function testGetLastBuildDateReturnsNullIfDateNotSet()
     {
-        $writer = new Zend_Feed_Writer_Feed;
+        $writer = new WriterFeed;
         $this->assertTrue(is_null($writer->getLastBuildDate()));
     }
 
@@ -536,7 +533,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetsGeneratorName_Deprecated()
     {
-        $writer = new Zend_Feed_Writer_Feed;
+        $writer = new WriterFeed;
         $writer->setGenerator('ZFW');
         $this->assertEquals(array('name'=>'ZFW'), $writer->getGenerator());
     }
@@ -546,7 +543,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetsGeneratorVersion_Deprecated()
     {
-        $writer = new Zend_Feed_Writer_Feed;
+        $writer = new WriterFeed;
         $writer->setGenerator('ZFW', '1.0');
         $this->assertEquals(array('name'=>'ZFW', 'version' => '1.0'), $writer->getGenerator());
     }
@@ -556,7 +553,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetsGeneratorUri_Deprecated()
     {
-        $writer = new Zend_Feed_Writer_Feed;
+        $writer = new WriterFeed;
         $writer->setGenerator('ZFW', null, 'http://www.example.com');
         $this->assertEquals(array('name'=>'ZFW', 'uri' => 'http://www.example.com'), $writer->getGenerator());
     }
@@ -566,12 +563,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetsGeneratorThrowsExceptionOnInvalidName_Deprecated()
     {
-        $writer = new Zend_Feed_Writer_Feed;
-        try {
-            $writer->setGenerator('');
-            $this->fail();
-        } catch (Zend_Feed_Exception $e) {
-        }
+        $this->setExpectedException('Zend\Feed\Exception');
+        $writer = new WriterFeed;
+        $writer->setGenerator('');
     }
 
     /**
@@ -579,12 +573,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetsGeneratorThrowsExceptionOnInvalidVersion_Deprecated()
     {
-        $writer = new Zend_Feed_Writer_Feed;
-        try {
-            $writer->setGenerator('ZFW', '');
-            $this->fail();
-        } catch (Zend_Feed_Exception $e) {
-        }
+        $this->setExpectedException('Zend\Feed\Exception');
+        $writer = new WriterFeed;
+        $writer->setGenerator('ZFW', '');
     }
 
     /**
@@ -592,12 +583,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetsGeneratorThrowsExceptionOnInvalidUri_Deprecated()
     {
-        $writer = new Zend_Feed_Writer_Feed;
-        try {
-            $writer->setGenerator('ZFW', null, 'notauri');
-            $this->fail();
-        } catch (Feed\Exception $e) {
-        }
+        $this->setExpectedException('Zend\Feed\Exception');
+        $writer = new WriterFeed;
+        $writer->setGenerator('ZFW', null, 'notauri');
     }
 
     public function testGetGeneratorReturnsNullIfDateNotSet()
@@ -737,7 +725,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
 
     public function testSetsImageUri()
     {
-        $writer = new Zend_Feed_Writer_Feed;
+        $writer = new WriterFeed;
         $writer->setImage(array(
             'uri' => 'http://www.example.com/logo.gif'
         ));
@@ -746,32 +734,26 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         ), $writer->getImage());
     }
 
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testSetsImageUriThrowsExceptionOnEmptyUri()
     {
-        $writer = new Zend_Feed_Writer_Feed;
+        $this->setExpectedException('Zend\Feed\Exception');
+        $writer = new WriterFeed;
         $writer->setImage(array(
             'uri' => ''
         ));
     }
 
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testSetsImageUriThrowsExceptionOnMissingUri()
     {
-        $writer = new Zend_Feed_Writer_Feed;
+        $this->setExpectedException('Zend\Feed\Exception');
+        $writer = new WriterFeed;
         $writer->setImage(array());
     }
 
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testSetsImageUriThrowsExceptionOnInvalidUri()
     {
-        $writer = new Zend_Feed_Writer_Feed;
+        $this->setExpectedException('Zend\Feed\Exception');
+        $writer = new WriterFeed;
         $writer->setImage(array(
             'uri' => 'http://'
         ));
@@ -779,7 +761,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
 
     public function testSetsImageLink()
     {
-        $writer = new Zend_Feed_Writer_Feed;
+        $writer = new WriterFeed;
         $writer->setImage(array(
             'uri' => 'http://www.example.com/logo.gif',
             'link' => 'http://www.example.com'
@@ -792,7 +774,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
 
     public function testSetsImageTitle()
     {
-        $writer = new Zend_Feed_Writer_Feed;
+        $writer = new WriterFeed;
         $writer->setImage(array(
             'uri' => 'http://www.example.com/logo.gif',
             'title' => 'Image title'
@@ -805,7 +787,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
 
     public function testSetsImageHeight()
     {
-        $writer = new Zend_Feed_Writer_Feed;
+        $writer = new WriterFeed;
         $writer->setImage(array(
             'uri' => 'http://www.example.com/logo.gif',
             'height' => '88'
@@ -818,7 +800,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
 
     public function testSetsImageWidth()
     {
-        $writer = new Zend_Feed_Writer_Feed;
+        $writer = new WriterFeed;
         $writer->setImage(array(
             'uri' => 'http://www.example.com/logo.gif',
             'width' => '88'
@@ -831,7 +813,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     
     public function testSetsImageDescription()
     {
-        $writer = new Zend_Feed_Writer_Feed;
+        $writer = new WriterFeed;
         $writer->setImage(array(
             'uri' => 'http://www.example.com/logo.gif',
             'description' => 'Image description'

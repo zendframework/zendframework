@@ -35,7 +35,7 @@ namespace Zend\GData;
  *
  * @link http://code.google.com/apis/gdata/overview.html
  *
- * @uses       \Zend\GData\App\App
+ * @uses       \Zend\GData\App
  * @uses       \Zend\GData\App\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Gdata
@@ -43,7 +43,7 @@ namespace Zend\GData;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GData extends App\App
+class GData extends App
 {
 
     /**

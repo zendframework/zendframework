@@ -33,15 +33,15 @@ use Zend\GData\App;
  * which is linked to a particular username.
  *
  * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\Extension\Extension
- * @uses       \Zend\GData\GApps\GApps
+ * @uses       \Zend\GData\Extension
+ * @uses       \Zend\GData\GApps
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Login extends \Zend\GData\Extension\Extension
+class Login extends \Zend\GData\Extension
 {
 
     protected $_rootNamespace = 'apps';
@@ -130,7 +130,7 @@ class Login extends \Zend\GData\Extension\Extension
         $hashFunctionName = null, $admin = null, $suspended = null,
         $changePasswordAtNextLogin = null, $agreedToTerms = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\GApps\GApps::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\GApps::$namespaces);
         parent::__construct();
         $this->_username = $username;
         $this->_password = $password;

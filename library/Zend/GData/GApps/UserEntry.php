@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\GApps;
 
+use Zend\GData\GApps;
+
 /**
  * Data model class for a Google Apps User Entry.
  *
@@ -39,7 +41,7 @@ namespace Zend\GData\GApps;
  *
  * @uses       \Zend\GData\Entry
  * @uses       \Zend\GData\Extension\FeedLink
- * @uses       \Zend\GData\GApps\GApps
+ * @uses       \Zend\GData\GApps
  * @uses       \Zend\GData\GApps\Extension\Login
  * @uses       \Zend\GData\GApps\Extension\Name
  * @uses       \Zend\GData\GApps\Extension\Quota
@@ -52,7 +54,7 @@ namespace Zend\GData\GApps;
 class UserEntry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\GApps\UserEntry';
+    protected $_entryClassName = 'Zend\GData\GApps\UserEntry';
 
     /**
      * <apps:login> element containing information about this user's

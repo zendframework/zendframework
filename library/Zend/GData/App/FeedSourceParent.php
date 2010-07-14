@@ -86,7 +86,7 @@ abstract class FeedSourceParent extends FeedEntryParent
      * This will be used to perform network requests, such as when calling
      * save() and delete().
      *
-     * @param \Zend\GData\App\App $instance The new service instance.
+     * @param \Zend\GData\App $instance The new service instance.
      * @return \Zend\GData\App\FeedEntryParent Provides a fluent interface.
      */
     public function setService($instance)

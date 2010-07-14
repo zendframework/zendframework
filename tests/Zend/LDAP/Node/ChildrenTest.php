@@ -55,7 +55,7 @@ class ChildrenTest extends \ZendTest\LDAP\OnlineTestCase
         $children=$node->getChildren();
         $this->assertType('Zend\LDAP\Node\ChildrenIterator', $children);
         $this->assertEquals(6, count($children));
-        $this->assertType('Zend\LDAP\Node\Node', $children['ou=Node']);
+        $this->assertType('Zend\LDAP\Node', $children['ou=Node']);
     }
 
     public function testGetChildrenOnDetachedNode()
@@ -72,7 +72,7 @@ class ChildrenTest extends \ZendTest\LDAP\OnlineTestCase
 
         $this->assertType('Zend\LDAP\Node\ChildrenIterator', $children);
         $this->assertEquals(6, count($children));
-        $this->assertType('Zend\LDAP\Node\Node', $children['ou=Node']);
+        $this->assertType('Zend\LDAP\Node', $children['ou=Node']);
     }
 
     public function testHasChildrenOnAttachedNode()

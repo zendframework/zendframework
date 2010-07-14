@@ -1071,7 +1071,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
      */
     public function testUseIdForDdTagByDefault()
     {
-        $this->form->addSubForm(new Zend_Form_SubForm(), 'bar')
+        $this->form->addSubForm(new SubForm(), 'bar')
                    ->bar->addElement('text', 'foo');
 
         $html = $this->form->setView($this->getView())->render();
@@ -1080,7 +1080,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testUseIdForDtTagByDefault()
     {
-        $this->form->addSubForm(new Zend_Form_SubForm(), 'bar')
+        $this->form->addSubForm(new SubForm(), 'bar')
                    ->bar->addElement('text', 'foo');
 
         $html = $this->form->setView($this->getView())->render();
@@ -1180,7 +1180,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testAddingSubFormResetsBelongsToWithDifferentSubFormName()
     {
-        $subForm = new Zend_Form_SubForm;
+        $subForm = new SubForm;
         $subForm->setName('quo')
                 ->addElement('text', 'foo');
         $this->form->addSubForm($subForm, 'bar');
@@ -1464,7 +1464,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testIsValidDiscardsValidatedValues()
     {
         $this->form->addElement('text', 'foo');
-        $this->form->addSubForm(new Zend_Form_SubForm(), 'bar')
+        $this->form->addSubForm(new SubForm(), 'bar')
                    ->bar->addElement('text', 'foo')
                         ->foo->setAllowEmpty(true)
                              ->addValidator('Identical', true, '');
@@ -1478,7 +1478,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testSetDefaultsDiscardsPopulatedValues()
     {
         $this->form->addElement('text', 'foo');
-        $this->form->addSubForm(new Zend_Form_SubForm(), 'bar')
+        $this->form->addSubForm(new SubForm(), 'bar')
                    ->bar->addElement('text', 'foo');
 
         $this->form->populate(array('foo' => 'foo Value'));
@@ -1489,18 +1489,18 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function _setup9350()
     {
-        $this->form->addSubForm(new Zend_Form_SubForm(), 'foo')
+        $this->form->addSubForm(new SubForm(), 'foo')
                    ->foo->setElementsBelongTo('foo[foo]')            // foo[foo]
-                        ->addSubForm(new Zend_Form_SubForm(), 'foo') // foo[foo][foo]
+                        ->addSubForm(new SubForm(), 'foo') // foo[foo][foo]
                         ->foo->setIsArray(false)
                              ->addElement('text', 'foo')             // foo[foo][foo][foo]
                              ->foo->addValidator('Identical',
                                                  false,
                                                  array('foo Value'));
 
-        $this->form->foo->addSubForm(new Zend_Form_SubForm(), 'baz') // foo[foo][baz]
+        $this->form->foo->addSubForm(new SubForm(), 'baz') // foo[foo][baz]
                    ->baz->setIsArray(false)
-                        ->addSubForm(new Zend_Form_SubForm(), 'baz')
+                        ->addSubForm(new SubForm(), 'baz')
                         ->baz->setElementsBelongTo('baz[baz]')       // foo[foo][baz][baz][baz]
                              ->addElement('text', 'baz')             // foo[foo][baz][baz][baz][baz]
                              ->baz->addValidator('Identical',
@@ -1509,7 +1509,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
         // This is appending a different named SubForm and setting
         // elementsBelongTo to a !isArray() Subform name from same level
-        $this->form->foo->addSubForm(new Zend_Form_SubForm(), 'quo')
+        $this->form->foo->addSubForm(new SubForm(), 'quo')
                         ->quo->setElementsBelongTo('foo')            // foo[foo][foo] !!!!
                              ->addElement('text', 'quo')             // foo[foo][foo][quo]
                              ->quo->addValidator('Identical',
@@ -1518,7 +1518,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         
         // This is setting elementsBelongTo point into the middle of 
         // a chain of another SubForms elementsBelongTo
-        $this->form->addSubForm(new Zend_Form_SubForm(), 'duh')
+        $this->form->addSubForm(new SubForm(), 'duh')
                    ->duh->setElementsBelongTo('foo[zoo]')            // foo[zoo] !!!!
                         ->addElement('text', 'zoo')                  // foo[zoo][zoo]
                         ->zoo->addValidator('Identical',
@@ -1527,9 +1527,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
         // This is !isArray SubForms Name equal to the last segment
         // of another SubForms elementsBelongTo
-        $this->form->addSubForm(new Zend_Form_SubForm(), 'iek')
+        $this->form->addSubForm(new SubForm(), 'iek')
                    ->iek->setElementsBelongTo('foo')                 // foo !!!!
-                        ->addSubForm(new Zend_Form_SubForm(), 'zoo') // foo[zoo] !!!!
+                        ->addSubForm(new SubForm(), 'zoo') // foo[zoo] !!!!
                         ->zoo->setIsArray(false)
                              ->addElement('text', 'iek')             // foo[zoo][iek]
                              ->iek->addValidator('Identical',
@@ -1634,14 +1634,14 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function _setup9401()
     {
         $sub0 = 0;
-        $this->form->addSubForm(new Zend_Form_SubForm(), $sub0)
+        $this->form->addSubForm(new SubForm(), $sub0)
                    ->$sub0->setElementsBelongTo('f[2]')
                           ->addElement('text', 'foo')
                           ->foo->addValidator('Identical',
                                               false,
                                               array('foo Value'));
 
-        $this->form->$sub0->addSubForm(new Zend_Form_SubForm(), $sub0)
+        $this->form->$sub0->addSubForm(new SubForm(), $sub0)
                           ->$sub0->addElement('text', 'quo')
                                  ->quo->addValidator('Identical',
                                                      false,
@@ -1763,7 +1763,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
                    ->setIsArray(true)
                    ->addElement('text', (string)$e)
                    ->$e->setRequired(true);
-        $this->form->addSubForm(new Zend_Form_SubForm(), $s)
+        $this->form->addSubForm(new SubForm(), $s)
                    ->$s->addElement('text', (string)$e)
                    ->$e->setRequired(true);
 

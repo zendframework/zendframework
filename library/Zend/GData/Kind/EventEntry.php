@@ -29,7 +29,7 @@ namespace Zend\GData\Kind;
  * Data model for the Gdata Event "Kind".  Google Calendar has a separate
  * EventEntry class which extends this.
  *
- * @uses       \Zend\GData\App\Extension\Extension
+ * @uses       \Zend\GData\App\Extension
  * @uses       \Zend\GData\Entry
  * @uses       \Zend\GData\Extension\Comments
  * @uses       \Zend\GData\Extension\EntryLink

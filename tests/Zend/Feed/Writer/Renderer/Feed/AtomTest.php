@@ -402,9 +402,9 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->_validWriter->setImage(
             array('uri'=>'http://www.example.com/logo.gif')
         );
-        $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
+        $atomFeed = new Atom($this->_validWriter);
         $atomFeed->render();
-        $feed = Zend_Feed_Reader::importString($atomFeed->saveXml());
+        $feed = Reader\Reader::importString($atomFeed->saveXml());
         $expected = array(
             'uri' => 'http://www.example.com/logo.gif'
         );

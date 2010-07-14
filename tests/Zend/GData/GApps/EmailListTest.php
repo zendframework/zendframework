@@ -82,7 +82,7 @@ class EmailListTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("test-name", $newEmailList->name);
 
         /* try constructing using magic factory */
-        $gdata = new \Zend\GData\GApps\GApps();
+        $gdata = new \Zend\GData\GApps();
         $newEmailList2 = $gdata->newEmailList();
         $newEmailList2->transferFromXML($newEmailList->saveXML());
         $this->assertEquals(1, count($newEmailList2->extensionElements));

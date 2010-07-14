@@ -71,11 +71,11 @@ class SchemaTest extends \ZendTest\LDAP\OnlineTestCase
         $this->assertType('array', $this->_schema->getObjectClasses());
 
         switch ($this->_getLDAP()->getRootDse()->getServerType()) {
-            case RootDSE\RootDSE::SERVER_TYPE_ACTIVEDIRECTORY:
+            case RootDSE::SERVER_TYPE_ACTIVEDIRECTORY:
                 break;
-            case RootDSE\RootDSE::SERVER_TYPE_EDIRECTORY:
+            case RootDSE::SERVER_TYPE_EDIRECTORY:
                 break;
-            case RootDSE\RootDSE::SERVER_TYPE_OPENLDAP:
+            case RootDSE::SERVER_TYPE_OPENLDAP:
                 $this->assertType('array', $this->_schema->getLDAPSyntaxes());
                 $this->assertType('array', $this->_schema->getMatchingRules());
                 $this->assertType('array', $this->_schema->getMatchingRuleUse());
@@ -118,7 +118,7 @@ class SchemaTest extends \ZendTest\LDAP\OnlineTestCase
     public function testOpenLDAPSchema()
     {
         if ($this->_getLDAP()->getRootDse()->getServerType() !==
-                RootDSE\RootDSE::SERVER_TYPE_OPENLDAP) {
+                RootDSE::SERVER_TYPE_OPENLDAP) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
@@ -138,7 +138,7 @@ class SchemaTest extends \ZendTest\LDAP\OnlineTestCase
             'street', 'telephoneNumber', 'teletexTerminalIdentifier', 'telexNumber',
             'userPassword', 'x121Address'), $ou->getMayContain());
         $this->assertEquals('RFC2256: an organizational unit', $ou->getDescription());
-        $this->assertEquals(\Zend\LDAP\Node\Schema\Schema::OBJECTCLASS_TYPE_STRUCTURAL, $ou->getType());
+        $this->assertEquals(\Zend\LDAP\Node\Schema::OBJECTCLASS_TYPE_STRUCTURAL, $ou->getType());
         $this->assertEquals(array('top'), $ou->getParentClasses());
 
         $this->assertEquals('2.5.6.5', $ou->oid);
@@ -199,7 +199,7 @@ class SchemaTest extends \ZendTest\LDAP\OnlineTestCase
     public function testActiveDirectorySchema()
     {
         if ($this->_getLDAP()->getRootDse()->getServerType() !==
-                RootDSE\RootDSE::SERVER_TYPE_ACTIVEDIRECTORY) {
+                RootDSE::SERVER_TYPE_ACTIVEDIRECTORY) {
             $this->markTestSkipped('Test can only be run on an Active Directory server');
         }
 
@@ -210,7 +210,7 @@ class SchemaTest extends \ZendTest\LDAP\OnlineTestCase
     public function testeDirectorySchema()
     {
         if ($this->_getLDAP()->getRootDse()->getServerType() !==
-                RootDSE\RootDSE::SERVER_TYPE_EDIRECTORY) {
+                RootDSE::SERVER_TYPE_EDIRECTORY) {
             $this->markTestSkipped('Test can only be run on an eDirectory server');
         }
         $this->markTestIncomplete("Novell eDirectory schema parsing is incomplete");
@@ -219,7 +219,7 @@ class SchemaTest extends \ZendTest\LDAP\OnlineTestCase
     public function testOpenLDAPSchemaAttributeTypeInheritance()
     {
         if ($this->_getLDAP()->getRootDse()->getServerType() !==
-                RootDSE\RootDSE::SERVER_TYPE_OPENLDAP) {
+                RootDSE::SERVER_TYPE_OPENLDAP) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
@@ -253,7 +253,7 @@ class SchemaTest extends \ZendTest\LDAP\OnlineTestCase
     public function testOpenLDAPSchemaObjectClassInheritance()
     {
         if ($this->_getLDAP()->getRootDse()->getServerType() !==
-                RootDSE\RootDSE::SERVER_TYPE_OPENLDAP) {
+                RootDSE::SERVER_TYPE_OPENLDAP) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
@@ -290,7 +290,7 @@ class SchemaTest extends \ZendTest\LDAP\OnlineTestCase
     public function testOpenLDAPSchemaAttributeTypeAliases()
     {
         if ($this->_getLDAP()->getRootDse()->getServerType() !==
-                RootDSE\RootDSE::SERVER_TYPE_OPENLDAP) {
+                RootDSE::SERVER_TYPE_OPENLDAP) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
@@ -305,7 +305,7 @@ class SchemaTest extends \ZendTest\LDAP\OnlineTestCase
     public function testOpenLDAPSchemaObjectClassAliases()
     {
         if ($this->_getLDAP()->getRootDse()->getServerType() !==
-                RootDSE\RootDSE::SERVER_TYPE_OPENLDAP) {
+                RootDSE::SERVER_TYPE_OPENLDAP) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 

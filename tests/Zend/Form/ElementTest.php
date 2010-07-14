@@ -33,6 +33,8 @@ use Zend\Form\Element,
     Zend\Loader\PluginLoader,
     Zend\Registry,
     Zend\Translator\Translator,
+    Zend\Validator\AbstractValidator,
+    Zend\Validator\Alpha as AlphaValidator,
     Zend\View\View;
 
 /**
@@ -1931,15 +1933,15 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     public function testElementDoesntOverrideDefaultValidatorTranslatorWithDefaultRegistryTranslator()
     {
         $registryTranslations = array('alphaInvalid' => 'Registry message');
-        $registryTranslate = new Zend_Translate('array', $registryTranslations);
-        Zend_Registry::set('Zend_Translate', $registryTranslate);
+        $registryTranslate = new Translator('ArrayAdapter', $registryTranslations);
+        Registry::set('Zend_Translate', $registryTranslate);
         
         $validatorTranslations = array('alphaInvalid' => 'Validator message');
-        $validatorTranslate = new Zend_Translate('array', $validatorTranslations);
-        Zend_Validate_Abstract::setDefaultTranslator($validatorTranslate);
+        $validatorTranslate = new Translator('ArrayAdapter', $validatorTranslations);
+        AbstractValidator::setDefaultTranslator($validatorTranslate);
         
         $elementTranslations = array('alphaInvalid' => 'Element message');
-        $elementTranslate = new Zend_Translate('array', $elementTranslations);
+        $elementTranslate = new Translator('ArrayAdapter', $elementTranslations);
        
         // the default validate translator should beat the registry one
         $this->element->addValidator('Alpha');
@@ -1954,15 +1956,15 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     public function testDefaultTranslatorDoesntOverrideElementTranslatorOnValdiation()
     {
         $registryTranslations = array('alphaInvalid' => 'Registry message');
-        $registryTranslate = new Zend_Translate('array', $registryTranslations);
-        Zend_Registry::set('Zend_Translate', $registryTranslate);
+        $registryTranslate = new Translator('ArrayAdapter', $registryTranslations);
+        Registry::set('Zend_Translate', $registryTranslate);
         
         $validatorTranslations = array('alphaInvalid' => 'Validator message');
-        $validatorTranslate = new Zend_Translate('array', $validatorTranslations);
-        Zend_Validate_Abstract::setDefaultTranslator($validatorTranslate);
+        $validatorTranslate = new Translator('ArrayAdapter', $validatorTranslations);
+        AbstractValidator::setDefaultTranslator($validatorTranslate);
         
         $elementTranslations = array('alphaInvalid' => 'Element message');
-        $elementTranslate = new Zend_Translate('array', $elementTranslations);
+        $elementTranslate = new Translator('ArrayAdapter', $elementTranslations);
         
         $this->element->addValidator('Alpha');
         $this->element->setTranslator($elementTranslate);
@@ -1977,12 +1979,12 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     public function testValidatorsDefaultTranslatorDoesntOverrideFormsDefaultTranslator()
     {
         $formTranslations = array('alphaInvalid' => 'Form message');
-        $formTranslate = new Zend_Translate('array', $formTranslations);
-        Zend_Form::setDefaultTranslator($formTranslate);
+        $formTranslate = new Translator('ArrayAdapter', $formTranslations);
+        Form::setDefaultTranslator($formTranslate);
         
         $validatorTranslations = array('alphaInvalid' => 'Validator message');
-        $validatorTranslate = new Zend_Translate('array', $validatorTranslations);
-        Zend_Validate_Abstract::setDefaultTranslator($validatorTranslate);
+        $validatorTranslate = new Translator('ArrayAdapter', $validatorTranslations);
+        AbstractValidator::setDefaultTranslator($validatorTranslate);
         
         // the default validate translator should beat the registry one
         $this->element->addValidator('Alpha');
@@ -1997,12 +1999,12 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     public function testElementsTranslatorDoesntOverrideValidatorsDirectlyAttachedTranslator()
     {
         $elementTranslations = array('alphaInvalid' => 'Element message');
-        $elementTranslate = new Zend_Translate('array', $elementTranslations);
+        $elementTranslate = new Translator('ArrayAdapter', $elementTranslations);
         
         $validatorTranslations = array('alphaInvalid' => 'Direct validator message');
-        $validatorTranslate = new Zend_Translate('array', $validatorTranslations);
+        $validatorTranslate = new Translator('ArrayAdapter', $validatorTranslations);
         
-        $validator = new Zend_Validate_Alpha();
+        $validator = new AlphaValidator();
         $validator->setTranslator($validatorTranslate);
         $this->element->addValidator($validator);
         $this->assertFalse($this->element->isValid(123));

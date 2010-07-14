@@ -100,7 +100,7 @@ class LoginTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $newLogin->agreedToTerms);
 
         /* try constructing using magic factory */
-        $gdata = new \Zend\GData\GApps\GApps();
+        $gdata = new \Zend\GData\GApps();
         $newLogin2 = $gdata->newLogin();
         $newLogin2->transferFromXML($newLogin->saveXML());
         $this->assertEquals(1, count($newLogin2->extensionElements));

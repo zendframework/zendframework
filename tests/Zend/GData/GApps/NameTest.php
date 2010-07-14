@@ -85,7 +85,7 @@ class NameTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Doe", $newName->familyName);
 
         /* try constructing using magic factory */
-        $gdata = new \Zend\GData\GApps\GApps();
+        $gdata = new \Zend\GData\GApps();
         $newName2 = $gdata->newName();
         $newName2->transferFromXML($newName->saveXML());
         $this->assertEquals(1, count($newName2->extensionElements));

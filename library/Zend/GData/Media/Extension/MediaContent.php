@@ -31,15 +31,15 @@ namespace Zend\GData\Media\Extension;
  * the same content can be represented using a
  * media:group (Zend_Gdata_Media_Extension_MediaGroup) element.
  *
- * @uses       \Zend\GData\Extension\Extension
- * @uses       \Zend\GData\Media\Media
+ * @uses       \Zend\GData\Extension
+ * @uses       \Zend\GData\Media
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Media
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MediaContent extends \Zend\GData\Extension\Extension
+class MediaContent extends \Zend\GData\Extension
 {
     protected $_rootElement = 'content';
     protected $_rootNamespace = 'media';
@@ -123,7 +123,7 @@ class MediaContent extends \Zend\GData\Extension\Extension
             $channels = null, $duration = null, $height = null, $width = null,
             $lang = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Media\Media::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Media::$namespaces);
         parent::__construct();
         $this->_url = $url;
         $this->_fileSize = $fileSize;

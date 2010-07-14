@@ -73,17 +73,16 @@ class StaticValidator
      * @param  mixed    $value
      * @param  string   $classBaseName
      * @param  array    $args          OPTIONAL
-     * @param  mixed    $namespaces    OPTIONAL
      * @return boolean
      * @throws \Zend\Validator\Exception
      */
-    public static function execute($value, $classBaseName, array $args = array(), $namespaces = array())
+    public static function execute($value, $classBaseName, array $args = array())
     {
         $loader = static::getPluginLoader();
         if (!class_exists($classBaseName)) {
             try {
                 $className  = $loader->load($classBaseName);
-            } catch (\Zend\Loader\Exception $e) {
+            } catch (Loader\Exception $e) {
                 throw new Exception("Validator class not found from basename '$classBaseName'", null, $e);
             }
         } else {
@@ -95,7 +94,7 @@ class StaticValidator
             throw new Exception("Validator class not found from basename '$classBaseName'");
         }
 
-        if ($class->hasMethod('__construct')) {
+        if ((0 < count($args)) && $class->hasMethod('__construct')) {
             $keys    = array_keys($args);
             $numeric = false;
             foreach($keys as $key) {

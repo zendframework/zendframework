@@ -24,6 +24,8 @@
  */
 namespace Zend\Validator;
 
+use Zend\Loader;
+
 /**
  * @uses       \Zend\Loader
  * @uses       \Zend\Validator\AbstractValidator
@@ -36,84 +38,37 @@ namespace Zend\Validator;
  */
 class StaticValidator
 {
+    /**
+     * @var Zend\Loader\PrefixPathMapper
+     */
+    protected static $_pluginLoader;
 
     /**
-     * Default Namespaces
-     *
-     * @var array
+     * Set plugin loader to use for locating validators
+     * 
+     * @param  Loader\PrefixPathMapper|null $loader 
+     * @return void
      */
-    protected static $_defaultNamespaces = array();
-
-    /**
-     * Returns the set default namespaces
-     *
-     * @return array
-     */
-    public static function getDefaultNamespaces()
+    public static function setPluginLoader(Loader\PrefixPathMapper $loader = null)
     {
-        return self::$_defaultNamespaces;
+        self::$_pluginLoader = $loader;
     }
 
     /**
-     * Sets new default namespaces
-     *
-     * @param array|string $namespace
-     * @return null
+     * Get plugin loader for locating validators
+     * 
+     * @return Loader\PrefixPathMapper
      */
-    public static function setDefaultNamespaces($namespace)
+    public static function getPluginLoader()
     {
-        if (!is_array($namespace)) {
-            $namespace = array((string) $namespace);
+        if (null === self::$_pluginLoader) {
+            static::setPluginLoader(new Loader\PluginLoader(array(
+                'Zend\Validator' => 'Zend/Validator',
+            )));
         }
-
-        self::$_defaultNamespaces = $namespace;
+        return self::$_pluginLoader;
     }
 
-    /**
-     * Adds a new default namespace
-     *
-     * @param array|string $namespace
-     * @return null
-     */
-    public static function addDefaultNamespaces($namespace)
-    {
-        if (!is_array($namespace)) {
-            $namespace = array((string) $namespace);
-        }
-
-        self::$_defaultNamespaces = array_unique(array_merge(self::$_defaultNamespaces, $namespace));
-    }
-
-    /**
-     * Returns true when defaultNamespaces are set
-     *
-     * @return boolean
-     */
-    public static function hasDefaultNamespaces()
-    {
-        return (!empty(self::$_defaultNamespaces));
-    }
-
-    /**
-     * Returns the maximum allowed message length
-     *
-     * @return integer
-     */
-    public static function getMessageLength()
-    {
-        return AbstractValidator::getMessageLength();
-    }
-
-    /**
-     * Sets the maximum allowed message length
-     *
-     * @param integer $length
-     */
-    public static function setMessageLength($length = -1)
-    {
-        AbstractValidator::setMessageLength($length);
-    }
-    
     /**
      * @param  mixed    $value
      * @param  string   $classBaseName
@@ -124,51 +79,41 @@ class StaticValidator
      */
     public static function execute($value, $classBaseName, array $args = array(), $namespaces = array())
     {
-        $namespaces = array_merge((array) $namespaces, self::$_defaultNamespaces, array('Zend\Validator'));
-        $className  = ucfirst($classBaseName);
-        try {
-            if (!class_exists($className, false)) {
-                foreach($namespaces as $namespace) {
-                    $class = $namespace . '\\' . $className;
-                    $file  = str_replace(array('\\', '_'), DIRECTORY_SEPARATOR, $class) . '.php';
-                    if (\Zend\Loader::isReadable($file)) {
-                        \Zend\Loader::loadClass($class);
-                        $className = $class;
-                        break;
-                    }
-                }
+        $loader = static::getPluginLoader();
+        if (!class_exists($classBaseName)) {
+            try {
+                $className  = $loader->load($classBaseName);
+            } catch (\Zend\Loader\Exception $e) {
+                throw new Exception("Validator class not found from basename '$classBaseName'", null, $e);
             }
-
-            $class = new \ReflectionClass($className);
-            if ($class->implementsInterface('Zend\Validator\Validator')) {
-                if ($class->hasMethod('__construct')) {
-                    $keys    = array_keys($args);
-                    $numeric = false;
-                    foreach($keys as $key) {
-                        if (is_numeric($key)) {
-                            $numeric = true;
-                            break;
-                        }
-                    }
-
-                    if ($numeric) {
-                        $object = $class->newInstanceArgs($args);
-                    } else {
-                        $object = $class->newInstance($args);
-                    }
-                } else {
-                    $object = $class->newInstance();
-                }
-
-                return $object->isValid($value);
-            }
-        } catch (Exception $ze) {
-            // if there is an exception while validating throw it
-            throw $ze;
-        } catch (\Exception $e) {
-            // fallthrough and continue for missing validation classes
+        } else {
+            $className = $classBaseName;
         }
 
-        throw new Exception("Validate class not found from basename '$classBaseName'");
+        $class = new \ReflectionClass($className);
+        if (!$class->implementsInterface('Zend\Validator\Validator')) {
+            throw new Exception("Validator class not found from basename '$classBaseName'");
+        }
+
+        if ($class->hasMethod('__construct')) {
+            $keys    = array_keys($args);
+            $numeric = false;
+            foreach($keys as $key) {
+                if (is_numeric($key)) {
+                    $numeric = true;
+                    break;
+                }
+            }
+
+            if ($numeric) {
+                $object = $class->newInstanceArgs($args);
+            } else {
+                $object = $class->newInstance($args);
+            }
+        } else {
+            $object = $class->newInstance();
+        }
+
+        return $object->isValid($value);
     }
 }

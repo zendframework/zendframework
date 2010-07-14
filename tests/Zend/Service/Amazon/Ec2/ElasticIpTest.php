@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon\Ec2;
+use Zend\Service\Amazon\Ec2;
+
+/**
  * Zend_Service_Amazon_Ec2_Elasticip test case.
  *
  * @category   Zend
@@ -32,7 +38,7 @@
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
  */
-class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
+class ElasticIpTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -47,14 +53,14 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->Zend_Service_Amazon_Ec2_Elasticip = new Zend_Service_Amazon_Ec2_Elasticip('access_key', 'secret_access_key');
+        $this->Zend_Service_Amazon_Ec2_Elasticip = new Ec2\ElasticIp('access_key', 'secret_access_key');
 
-        $adapter = new Zend_Http_Client_Adapter_Test();
-        $client = new Zend_Http_Client(null, array(
+        $adapter = new \Zend\HTTP\Client\Adapter\Test();
+        $client = new \Zend\HTTP\Client(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Elasticip::setDefaultHTTPClient($client);
+        Ec2\ElasticIp::setDefaultHTTPClient($client);
 
     }
 

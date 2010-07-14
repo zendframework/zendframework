@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon\Ec2;
+use Zend\Service\Amazon\Ec2\Instance;
+
+/**
  * Zend_Service_Amazon_Ec2_Instance_Windows test case.
  *
  * @todo: Should this class be named Zend_Service_Amazon_Ec2_Instance_WindowsTest?
@@ -34,7 +40,7 @@
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
  */
-class InstanceWindowsTest extends PHPUnit_Framework_TestCase
+class InstanceWindowsTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -48,14 +54,14 @@ class InstanceWindowsTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->Zend_Service_Amazon_Ec2_Instance_Windows = new Zend_Service_Amazon_Ec2_Instance_Windows('access_key', 'secret_access_key');
+        $this->Zend_Service_Amazon_Ec2_Instance_Windows = new Instance\Windows('access_key', 'secret_access_key');
 
-        $adapter = new Zend_Http_Client_Adapter_Test();
-        $client = new Zend_Http_Client(null, array(
+        $adapter = new \Zend\HTTP\Client\Adapter\Test();
+        $client = new \Zend\HTTP\Client(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Instance_Windows::setDefaultHTTPClient($client);
+        Instance\Windows::setDefaultHTTPClient($client);
     }
 
     /**
@@ -104,7 +110,7 @@ class InstanceWindowsTest extends PHPUnit_Framework_TestCase
 
         $return = $this->Zend_Service_Amazon_Ec2_Instance_Windows->bundle('i-12345678', 'my-bucket', 'my-new-image');
 
-        print_r($return);
+        //print_r($return);
 
         $arrReturn = array(
                 "instanceId" => "i-12345678",

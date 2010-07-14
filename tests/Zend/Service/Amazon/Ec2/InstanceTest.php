@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon\Ec2;
+use Zend\Service\Amazon\Ec2\Instance;
+
+/**
  * Zend_Service_Amazon_Ec2_Instance test case.
  *
  * @category   Zend
@@ -32,7 +38,7 @@
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
  */
-class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
+class InstanceTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -47,14 +53,14 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->Zend_Service_Amazon_Ec2_Instance = new Zend_Service_Amazon_Ec2_Instance('access_key', 'secret_access_key');
+        $this->Zend_Service_Amazon_Ec2_Instance = new Instance\Instance('access_key', 'secret_access_key');
 
-        $adapter = new Zend_Http_Client_Adapter_Test();
-        $client = new Zend_Http_Client(null, array(
+        $adapter = new \Zend\HTTP\Client\Adapter\Test();
+        $client = new \Zend\HTTP\Client(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Instance::setDefaultHTTPClient($client);
+        Instance\Instance::setDefaultHTTPClient($client);
 
     }
 
@@ -72,11 +78,11 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
 
     public function testConstants()
     {
-        $this->assertEquals('m1.small', Zend_Service_Amazon_Ec2_Instance::SMALL);
-        $this->assertEquals('m1.large', Zend_Service_Amazon_Ec2_Instance::LARGE);
-        $this->assertEquals('m1.xlarge', Zend_Service_Amazon_Ec2_Instance::XLARGE);
-        $this->assertEquals('c1.medium', Zend_Service_Amazon_Ec2_Instance::HCPU_MEDIUM);
-        $this->assertEquals('c1.xlarge', Zend_Service_Amazon_Ec2_Instance::HCPU_XLARGE);
+        $this->assertEquals('m1.small', Instance\Instance::SMALL);
+        $this->assertEquals('m1.large', Instance\Instance::LARGE);
+        $this->assertEquals('m1.xlarge', Instance\Instance::XLARGE);
+        $this->assertEquals('c1.medium', Instance\Instance::HCPU_MEDIUM);
+        $this->assertEquals('c1.xlarge', Instance\Instance::HCPU_XLARGE);
     }
 
     /**
@@ -315,7 +321,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
         try {
             $return = $this->Zend_Service_Amazon_Ec2_Instance->run($arrStart);
             $this->fail('Exception should be thrown when no image id is passed into the run commmand');
-        } catch (Zend_Service_Amazon_Ec2_Exception $zsaee) {
+        } catch (\Zend\Service\Amazon\Ec2\Exception $zsaee) {
             $this->assertEquals('No Image Id Provided', $zsaee->getMessage());
         }
     }

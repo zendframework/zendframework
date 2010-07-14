@@ -55,6 +55,8 @@ class Zend_Soap_Wsdl_Strategy_DefaultComplexType extends Zend_Soap_Wsdl_Strategy
         $dom = $this->getContext()->toDomDocument();
         $class = new ReflectionClass($type);
 
+        $defaultProperties = $class->getDefaultProperties();
+
         $complexType = $dom->createElement('xsd:complexType');
         $complexType->setAttribute('name', $type);
 
@@ -68,8 +70,14 @@ class Zend_Soap_Wsdl_Strategy_DefaultComplexType extends Zend_Soap_Wsdl_Strategy
                  * node for describing other classes used as attribute types for current class
                  */
                 $element = $dom->createElement('xsd:element');
-                $element->setAttribute('name', $property->getName());
+                $element->setAttribute('name', $propertyName = $property->getName());
                 $element->setAttribute('type', $this->getContext()->getType(trim($matches[1][0])));
+
+                // If the default value is null, then this property is nillable.
+                if (is_null($defaultProperties[$propertyName])) {
+                    $element->setAttribute('nillable', 'true');
+                }
+
                 $all->appendChild($element);
             }
         }

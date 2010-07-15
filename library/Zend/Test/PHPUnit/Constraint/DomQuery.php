@@ -293,6 +293,8 @@ class Zend_Test_PHPUnit_Constraint_DomQuery extends PHPUnit_Framework_Constraint
      */
     protected function _matchContent($result, $match)
     {
+        $match = (string) $match;
+
         if (0 == count($result)) {
             return false;
         }

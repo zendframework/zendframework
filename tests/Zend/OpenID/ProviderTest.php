@@ -60,7 +60,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegister()
     {
-        $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+        $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $storage->delUser(self::USER);
         $provider = new Provider\GenericProvider(null, null, $this->_user, $storage);
         $this->assertFalse( $storage->checkUser(self::USER, self::PASSWORD) );
@@ -82,7 +82,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testHasUser()
     {
-        $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+        $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $storage->delUser(self::USER);
         $provider = new Provider\GenericProvider(null, null, $this->_user, $storage);
 
@@ -106,7 +106,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testLogin()
     {
-        $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+        $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $storage->delUser(self::USER);
         $this->_user->delLoggedInUser();
         $provider = new Provider\GenericProvider(null, null, $this->_user, $storage);
@@ -138,7 +138,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testLogout()
     {
-        $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+        $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $storage->delUser(self::USER);
         $this->_user->delLoggedInUser();
         $provider = new Provider\GenericProvider(null, null, $this->_user, $storage);
@@ -161,7 +161,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoggedInUser()
     {
-        $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+        $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $storage->delUser(self::USER);
         $this->_user->delLoggedInUser();
         $provider = new Provider\GenericProvider(null, null, $this->_user, $storage);
@@ -184,7 +184,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSiteRoot()
     {
-        $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+        $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $provider = new Provider\GenericProvider(null, null, $this->_user, $storage);
 
         $params = array(
@@ -243,7 +243,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testAllowSite()
     {
-        $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+        $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $storage->delUser(self::USER);
         $this->_user->delLoggedInUser();
         $provider = new Provider\GenericProvider(null, null, $this->_user, $storage);
@@ -293,7 +293,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testDenySite()
     {
-        $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+        $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $storage->delUser(self::USER);
         $this->_user->delLoggedInUser();
         $provider = new Provider\GenericProvider(null, null, $this->_user, $storage);
@@ -358,7 +358,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelSite()
     {
-        $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+        $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $storage->delUser(self::USER);
         $this->_user->delLoggedInUser();
         $provider = new Provider\GenericProvider(null, null, $this->_user, $storage);
@@ -417,7 +417,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTrustedSites()
     {
-        $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+        $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $storage->delUser(self::USER);
         $this->_user->delLoggedInUser();
         $provider = new Provider\GenericProvider(null, null, $this->_user, $storage);
@@ -449,7 +449,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testGenSecret()
     {
-        $provider = new OpenIDTest\ProviderHelper(null, null, $this->_user, new Provider\Storage\File(dirname(__FILE__)."/_files/provider"));
+        $provider = new OpenIDTest\ProviderHelper(null, null, $this->_user, new Provider\Storage\File(__DIR__."/_files/provider"));
 
         // SHA1
         $x = $provider->genSecret("sha1");
@@ -472,7 +472,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
     public function testAssociate()
     {
         try {
-            $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+            $storage = new Provider\Storage\File(__DIR__."/_files/provider");
             $provider = new OpenIDTest\ProviderHelper(null, null, $this->_user, $storage);
 
             // Wrong assoc_type
@@ -638,7 +638,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testCheckAuthentication()
     {
-        $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+        $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $provider = new OpenIDTest\ProviderHelper(null, null, $this->_user, $storage);
 
         // Wrong arguments
@@ -741,7 +741,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testRespondToConsumer()
     {
-        $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+        $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $provider = new OpenIDTest\ProviderHelper(null, null, $this->_user, $storage);
 
         // dumb mode
@@ -862,7 +862,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
     public function testCheckIdImmediate()
     {
         $_SERVER['SCRIPT_URI'] = "http://www.test.com/server.php";
-        $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+        $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $provider = new OpenIDTest\ProviderHelper(null, null, $this->_user, $storage);
         $provider->logout();
 
@@ -1299,7 +1299,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
     public function testCheckIdSetup()
     {
         $_SERVER['SCRIPT_URI'] = "http://www.test.com/server.php";
-        $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+        $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $provider = new OpenIDTest\ProviderHelper(null, null, $this->_user, $storage);
         $provider->logout();
 
@@ -1580,7 +1580,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testHandle()
     {
-        $provider = new OpenIDTest\ProviderHelper(null, null, $this->_user, new Provider\Storage\File(dirname(__FILE__)."/_files/provider"));
+        $provider = new OpenIDTest\ProviderHelper(null, null, $this->_user, new Provider\Storage\File(__DIR__."/_files/provider"));
 
         // no openid_mode
         $this->assertFalse( $provider->handle(array()) );
@@ -1595,7 +1595,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetOpEndpoint()
     {
-        $storage = new Provider\Storage\File(dirname(__FILE__)."/_files/provider");
+        $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $provider = new OpenIDTest\ProviderHelper(null, null, $this->_user, $storage);
         $provider->setOpEndpoint("http://www.test.com/real_endpoint.php");
 

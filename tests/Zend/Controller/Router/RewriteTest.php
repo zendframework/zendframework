@@ -300,7 +300,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
 
     public function testAddConfig()
     {
-        $file = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'routes.ini';
+        $file = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'routes.ini';
         $config = new Config\Ini($file, 'testing');
 
         $this->_router->addConfig($config, 'routes');
@@ -318,7 +318,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
 
     public function testAddConfigWithoutSection()
     {
-        $file = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'routes.ini';
+        $file = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'routes.ini';
         $config = new Config\Ini($file, 'testing');
 
         $this->_router->addConfig($config->routes);
@@ -329,7 +329,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
 
     public function testAddConfigWithRootNode()
     {
-        $file = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'routes-root.ini';
+        $file = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'routes-root.ini';
         $config = new Config\Ini($file, 'routes');
 
         $this->_router->addConfig($config);
@@ -357,8 +357,8 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
     public function testDefaultRouteMatchedWithModules()
     {
         Controller\Front::getInstance()->setControllerDirectory(array(
-            'default' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',
-            'mod'     => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Admin',
+            'default' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',
+            'mod'     => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Admin',
         ));
         $request = new Request('http://localhost/mod/ctrl/act');
         $token = $this->_router->route($request);
@@ -382,8 +382,8 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
     public function testDefaultRouteWithEmptyControllerAndAction()
     {
         Controller\Front::getInstance()->setControllerDirectory(array(
-            'default' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',
-            'mod'     => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Admin',
+            'default' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',
+            'mod'     => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Admin',
         ));
         $request = new Request('http://localhost/mod');
 
@@ -688,6 +688,37 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
         $url = $this->_router->assemble(array(), 'article-id');
 
         $this->assertEquals('/articles/777', $url);
+    }
+    
+
+    /**
+     * Test that it is possible to generate a URL with a numerical key
+     *
+     * @since  2010-06-11
+     * @group  ZF-8914
+     * @covers Zend_Controller_Router_Rewrite::assemble
+     */
+    public function testCanGenerateNumericKeyUri()
+    {
+        $this->_router->addRoute(
+            'default', 
+            new Zend_Controller_Router_Route(
+                ':controller/:action/*',
+                array('controller' => 'index', 'action' => 'index')
+            )
+       );
+
+       $params = array(
+            'controller' => 'index',
+            'action'     => 'index',
+            '2'          => 'foo',
+            'page'       => 'bar',
+        );
+
+        $this->assertEquals(
+            '/index/index/2/foo/page/bar',
+            $this->_router->assemble($params)
+        );
     }
 }
 

@@ -490,7 +490,7 @@ class Response
     /**
      * Extract the headers from a response string
      *
-     * @param string $response_str
+     * @param  string $response_str
      * @return array
      */
     public static function extractHeaders($response_str)
@@ -510,7 +510,8 @@ class Response
             $line = trim($line, "\r\n");
             if ($line == "") break;
 
-            if (preg_match("|^([\w-]+):\s+(.+)|", $line, $m)) {
+            // Locate headers like 'Location: ...' and 'Location:...' (note the missing space)
+            if (preg_match("|^([\w-]+):\s*(.+)|", $line, $m)) {
                 unset($last_header);
                 $h_name = strtolower($m[1]);
                 $h_value = $m[2];

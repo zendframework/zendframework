@@ -163,6 +163,16 @@ class RSSTest extends \PHPUnit_Framework_TestCase
         $rssFeed->render();
     }
 
+    public function testFeedLastBuildDateHasBeenSet()
+    {
+        $this->_validWriter->setLastBuildDate(1234567890);
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
+        $rssFeed->render();
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $this->assertType('Zend\Date\Date', $feed->getLastBuildDate(), $rssFeed->saveXml());
+        $this->assertEquals(1234567890, $feed->getLastBuildDate()->get(\Zend\Date\Date::TIMESTAMP));
+    }
+
     public function testFeedGeneratorHasBeenSet()
     {
         $this->_validWriter->setGenerator('FooFeedBuilder', '1.00', 'http://www.example.com');
@@ -348,4 +358,188 @@ class RSSTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, (array) $feed->getHubs());
     }
 
+    public function testImageCanBeSet()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => '400',
+            'width' => '144',
+            'description' => 'Image TITLE'
+        ));
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
+        $rssFeed->render();
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $expected = array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => '400',
+            'width' => '144',
+            'description' => 'Image TITLE'  
+        );
+        $this->assertEquals($expected, $feed->getImage()); 
+    }
+
+    public function testImageCanBeSetWithOnlyRequiredElements()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT'
+        ));
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
+        $rssFeed->render();
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $expected = array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT' 
+        );
+        $this->assertEquals($expected, $feed->getImage()); 
+    }
+
+    public function testImageThrowsExceptionOnMissingLink()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'title' => 'Image ALT'
+        ));
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
+        $this->setExpectedException('Zend\Feed\Exception');
+        $rssFeed->render();
+    }
+
+    public function testImageThrowsExceptionOnMissingTitle()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com'
+        ));
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
+        $this->setExpectedException('Zend\Feed\Exception');
+        $rssFeed->render();
+    }
+
+    public function testImageThrowsExceptionOnMissingUri()
+    {
+        $this->setExpectedException('Zend\Feed\Exception');
+        $this->_validWriter->setImage(array(
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT'
+        ));
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
+        $rssFeed->render();
+    }
+
+    public function testImageThrowsExceptionIfOptionalDescriptionInvalid()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'description' => 2
+        ));
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
+        $this->setExpectedException('Zend\Feed\Exception');
+        $rssFeed->render();
+    }
+
+    public function testImageThrowsExceptionIfOptionalDescriptionEmpty()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'description' => ''
+        ));
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
+        $this->setExpectedException('Zend\Feed\Exception');
+        $rssFeed->render();
+    }
+
+    public function testImageThrowsExceptionIfOptionalHeightNotAnInteger()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => 'a',
+            'width' => 144
+        ));
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
+        $this->setExpectedException('Zend\Feed\Exception');
+        $rssFeed->render();
+    }
+
+    public function testImageThrowsExceptionIfOptionalHeightEmpty()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => '',
+            'width' => 144
+        ));
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
+        $this->setExpectedException('Zend\Feed\Exception');
+        $rssFeed->render();
+    }
+
+    public function testImageThrowsExceptionIfOptionalHeightGreaterThan400()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => '401',
+            'width' => 144
+        ));
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
+        $this->setExpectedException('Zend\Feed\Exception');
+        $rssFeed->render();
+    }
+
+    public function testImageThrowsExceptionIfOptionalWidthNotAnInteger()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => '400',
+            'width' => 'a'
+        ));
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
+        $this->setExpectedException('Zend\Feed\Exception');
+        $rssFeed->render();
+    }
+
+    public function testImageThrowsExceptionIfOptionalWidthEmpty()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => '400',
+            'width' => ''
+        ));
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
+        $this->setExpectedException('Zend\Feed\Exception');
+        $rssFeed->render();
+    }
+
+    public function testImageThrowsExceptionIfOptionalWidthGreaterThan144()
+    {
+        $this->_validWriter->setImage(array(
+            'uri' => 'http://www.example.com/logo.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image ALT',
+            'height' => '400',
+            'width' => '145'
+        ));
+        $rssFeed = new RendererFeed\RSS($this->_validWriter);
+        $this->setExpectedException('Zend\Feed\Exception');
+        $rssFeed->render();
+    }
 }

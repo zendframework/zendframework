@@ -25,7 +25,7 @@
  */
 namespace ZendTest\Markup\TestAsset\Renderer;
 
-use Zend\Markup\AbstractRenderer,
+use Zend\Markup\Renderer\AbstractRenderer,
     Zend\Filter\FilterChain;
 
 /**

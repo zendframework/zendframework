@@ -69,14 +69,14 @@
             <methodname>Zend_Gdata_AuthSub::getHttpClient()</methodname>.
             This function returns an instance of <classname>Zend_Http_Client</classname>,
             with appropriate headers set so that subsequent requests your
-            application submits using that Http Client are also authenticated.
+            application submits using that <acronym>HTTP</acronym> Client are also authenticated.
         </para>
 
         <para>
             Below is an example of <acronym>PHP</acronym> code for a web application
             to acquire authentication to use the Google Calendar service
             and create a <classname>Zend_Gdata</classname> client object using that authenticated
-            Http Client.
+            <acronym>HTTP</acronym> Client.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -140,7 +140,7 @@ if (isset($_GET['logout'])) {
                 The treatment of the <varname>$php_self</varname> variable in the
                 example above is a general security guideline, it is not
                 specific to <classname>Zend_Gdata</classname>. You should always filter content you
-                output to http headers.
+                output to <acronym>HTTP</acronym> headers.
             </para>
 
             <para>

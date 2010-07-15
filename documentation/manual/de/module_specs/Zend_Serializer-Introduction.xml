@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21119 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.serializer.introduction">
     <title>Einführung</title>
 
     <para>
         <classname>Zend_Serializer</classname> bietet ein Adapter-basierendes Interface um
-        eine speicherbare Repräsentation von PHP Typen durch unterschiedliche Arten zu bieten und
-        diese wiederherzustellen.
+        eine speicherbare Repräsentation von <acronym>PHP</acronym> Typen durch unterschiedliche
+        Arten zu bieten und diese wiederherzustellen.
     </para>
 
     <example id="zend.serializer.introduction.example.dynamic">

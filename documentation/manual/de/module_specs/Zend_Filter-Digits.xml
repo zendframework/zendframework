@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 22384 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.digits">
+    <title>Digits</title>
+
+    <para>
+        Gibt den String <varname>$value</varname> zurück und entfernt alle ausser Ziffern.
+    </para>
+
+     <sect3 id="zend.filter.set.digits.options">
+        <title>Unterstützte Optionen für Zend_Filter_Digits</title>
+
+        <para>
+            Es gibt keine zusätzlichen Optionen für <classname>Zend_Filter_Digits</classname>.
+        </para>
+    </sect3>
+
+     <sect3 id="zend.filter.set.digits.basic">
+        <title>Einfache Verwendung</title>
+
+        <para>
+            Ein einfaches Beispiel der Verwendung ist nachfolgend zu finden:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Digits();
+
+print $filter->filter('October 2009');
+]]></programlisting>
+
+        <para>
+            Dies gibt "2009" zurück.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Digits();
+
+print $filter->filter('HTML 5 für Dummies');
+]]></programlisting>
+
+        <para>
+            Dies gibt "5" zurück.
+        </para>
+    </sect3>
+</sect2>

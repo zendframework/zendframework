@@ -80,7 +80,7 @@ class TimezoneTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newTimezone->value, "America/Chicago");
 
         /* try constructing using magic factory */
-        $cal = new \Zend\GData\Calendar\Calendar();
+        $cal = new \Zend\GData\Calendar();
         $newTimezone2 = $cal->newTimezone();
         $newTimezone2->transferFromXML($newTimezone->saveXML());
         $this->assertEquals(count($newTimezone2->extensionElements), 1);

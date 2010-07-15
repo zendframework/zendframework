@@ -739,10 +739,10 @@ class InputFilter
         $message = $this->_defaults[self::MISSING_MESSAGE];
 
         if (null !== ($translator = $this->getTranslator())) {
-            if ($translator->isTranslated($message)) {
-                $message = $translator->translate($message);
-            } elseif ($translator->isTranslated(self::MISSING_MESSAGE)) {
+            if ($translator->isTranslated(self::MISSING_MESSAGE)) {
                 $message = $translator->translate(self::MISSING_MESSAGE);
+            } else {
+                $message = $translator->translate($message);
             }
         }
 
@@ -759,10 +759,10 @@ class InputFilter
         $message = $this->_defaults[self::NOT_EMPTY_MESSAGE];
 
         if (null !== ($translator = $this->getTranslator())) {
-            if ($translator->isTranslated($message)) {
-                $message = $translator->translate($message);
-            } elseif ($translator->isTranslated(self::NOT_EMPTY_MESSAGE)) {
+            if ($translator->isTranslated(self::NOT_EMPTY_MESSAGE)) {
                 $message = $translator->translate(self::NOT_EMPTY_MESSAGE);
+            } else {
+                $message = $translator->translate($message);
             }
         }
 
@@ -1100,7 +1100,7 @@ class InputFilter
         }
 
         $interfaceType = ucfirst($type);
-        $interfaceName = '\\Zend\\' . $interfaceType . '\\' . $interfaceType;
+        $interfaceName = 'Zend\\' . $interfaceType . '\\' . $interfaceType;
         $className = $this->getPluginLoader($type)->load(ucfirst($classBaseName));
 
         $class = new \ReflectionClass($className);

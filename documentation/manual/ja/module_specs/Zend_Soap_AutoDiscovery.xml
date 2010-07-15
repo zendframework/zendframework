@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20810 -->
 <sect1 id="zend.soap.autodiscovery">
     <title>自動検出</title>
 
@@ -159,7 +159,7 @@ $autodiscover->handle();
                     <para>
                         <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>が
                         WSDLをデフォルトで利用できる<acronym>URI</acronym>として使われます、
-                        しかし、それは<methodname>setUri()</methodname>メソッドによって上書きすることができます。
+                        しかし、それは<methodname>setUri()</methodname>メソッドによって上書きできます。
                     </para>
                     <para>
                         それは、名前（記述された複雑な型を含む）に関連したすべてのサービスのための
@@ -340,7 +340,7 @@ $autodiscover->handle();
             <code>soap:binding</code>および<code>soap:body</code>タグに影響を及ぼします。
             クライアント毎に、本当に機能するオプションについて、それぞれの必要条件があります。
             したがって、自動検出クラスでどんな<code>setClass</code>や<code>addFunction</code>メソッドでも呼び出す前に、
-            スタイルを設定することができます。
+            スタイルを設定できます。
         </para>
 
         <para>

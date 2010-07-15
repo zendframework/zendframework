@@ -57,7 +57,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruct()
     {
-        $tmp = dirname(__FILE__)."/_files";
+        $tmp = __DIR__."/_files";
         $dir = $tmp . '/openid_provider';
         @rmdir($dir);
         $storage = new Storage\File($dir);
@@ -90,7 +90,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     public function testGetAssociation()
     {
         $expiresIn = time() + 600;
-        $storage = new Storage\File(dirname(__FILE__)."/_files");
+        $storage = new Storage\File(__DIR__."/_files");
         $storage->delAssociation(self::HANDLE);
         $this->assertTrue( $storage->addAssociation(self::HANDLE, self::MAC_FUNC, self::SECRET, $expiresIn) );
         $this->assertTrue( $storage->getAssociation(self::HANDLE, $macFunc, $secret, $expires) );
@@ -100,7 +100,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue( $storage->delAssociation(self::HANDLE) );
         $this->assertFalse( $storage->getAssociation(self::HANDLE, $macFunc, $secret, $expires) );
 
-        $tmp = dirname(__FILE__)."/_files";
+        $tmp = __DIR__."/_files";
         $dir = $tmp . '/openid_consumer';
         @rmdir($dir);
         $storage = new Storage\File($dir);
@@ -123,7 +123,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     public function testGetAssociationExpiratin()
     {
         $expiresIn = time() + 1;
-        $storage = new Storage\File(dirname(__FILE__)."/_files");
+        $storage = new Storage\File(__DIR__."/_files");
         $storage->delAssociation(self::HANDLE);
         $this->assertTrue( $storage->addAssociation(self::HANDLE, self::MAC_FUNC, self::SECRET, $expiresIn) );
         sleep(2);
@@ -136,7 +136,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddUser()
     {
-        $storage = new Storage\File(dirname(__FILE__)."/_files");
+        $storage = new Storage\File(__DIR__."/_files");
         $storage->delUser(self::USER);
         $this->assertTrue( $storage->addUser(self::USER, self::PASSWORD) );
         $this->assertFalse( $storage->addUser(self::USER, self::PASSWORD) );
@@ -151,7 +151,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testHasUser()
     {
-        $storage = new Storage\File(dirname(__FILE__)."/_files");
+        $storage = new Storage\File(__DIR__."/_files");
         $storage->delUser(self::USER);
         $this->assertTrue( $storage->addUser(self::USER, self::PASSWORD) );
         $this->assertTrue( $storage->hasUser(self::USER) );
@@ -165,7 +165,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testCheckUser()
     {
-        $storage = new Storage\File(dirname(__FILE__)."/_files");
+        $storage = new Storage\File(__DIR__."/_files");
         $storage->delUser(self::USER);
         $this->assertTrue( $storage->addUser(self::USER, self::PASSWORD) );
         $this->assertTrue( $storage->checkUser(self::USER, self::PASSWORD) );
@@ -180,7 +180,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddSite()
     {
-        $storage = new Storage\File(dirname(__FILE__)."/_files");
+        $storage = new Storage\File(__DIR__."/_files");
         $storage->delUser(self::USER);
         $this->assertTrue( $storage->addUser(self::USER, self::PASSWORD) );
         $this->assertTrue( $storage->addSite(self::USER, self::SITE1, true) );

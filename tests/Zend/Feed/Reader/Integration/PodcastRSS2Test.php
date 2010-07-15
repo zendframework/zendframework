@@ -44,7 +44,7 @@ class PodcastRSS2Test extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        $this->_feedSamplePath = dirname(__FILE__) . '/_files/podcast.xml';
+        $this->_feedSamplePath = __DIR__ . '/_files/podcast.xml';
         $this->_options = Date\Date::setOptions();
         foreach($this->_options as $k=>$v) {
             if (is_null($v)) {

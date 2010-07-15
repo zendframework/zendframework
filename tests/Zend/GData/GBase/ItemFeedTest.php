@@ -41,7 +41,7 @@ class ItemFeedTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->itemFeed = new GBase\ItemFeed(
-                file_get_contents(dirname(__FILE__) . '/_files/TestDataGBaseItemFeedSample1.xml'),
+                file_get_contents(__DIR__ . '/_files/TestDataGBaseItemFeedSample1.xml'),
                 true);
     }
 

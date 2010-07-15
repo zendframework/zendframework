@@ -204,7 +204,7 @@ class Ldap implements AuthenticationAdapter
     public function getLdap()
     {
         if ($this->_ldap === null) {
-            $this->_ldap = new \Zend_Ldap();
+            $this->_ldap = new \Zend\LDAP\LDAP();
         }
 
         return $this->_ldap;
@@ -216,7 +216,7 @@ class Ldap implements AuthenticationAdapter
      * @param  Zend_Ldap $ldap An existing Ldap object
      * @return Zend\Authentication\Adapter\Ldap Provides a fluent interface
      */
-    public function setLdap(\Zend_Ldap $ldap)
+    public function setLdap(\Zend\LDAP\LDAP $ldap)
     {
         $this->_ldap = $ldap;
 
@@ -321,7 +321,7 @@ class Ldap implements AuthenticationAdapter
                     $ldap->bind();
                     $requireRebind = true;
                 }
-                $dn = $ldap->getCanonicalAccountName($canonicalName, Ldap\Ldap::ACCTNAME_FORM_DN);
+                $dn = $ldap->getCanonicalAccountName($canonicalName, \Zend\LDAP\LDAP::ACCTNAME_FORM_DN);
 
                 $groupResult = $this->_checkGroupMembership($ldap, $canonicalName, $dn, $adapterOptions);
                 if ($groupResult === true) {
@@ -339,7 +339,7 @@ class Ldap implements AuthenticationAdapter
                     $messages[1] = $groupResult;
                     $failedAuthorities[$dname] = $groupResult;
                 }
-            } catch (\Zend_Ldap_Exception $zle) {
+            } catch (\Zend\LDAP\Exception $zle) {
 
                 /* LDAP based authentication is notoriously difficult to diagnose. Therefore
                  * we bend over backwards to capture and record every possible bit of
@@ -348,18 +348,18 @@ class Ldap implements AuthenticationAdapter
 
                 $err = $zle->getCode();
 
-                if ($err == \Zend_Ldap_Exception::LDAP_X_DOMAIN_MISMATCH) {
+                if ($err == \Zend\LDAP\Exception::LDAP_X_DOMAIN_MISMATCH) {
                     /* This error indicates that the domain supplied in the
                      * username did not match the domains in the server options
                      * and therefore we should just skip to the next set of
                      * server options.
                      */
                     continue;
-                } else if ($err == \Zend_Ldap_Exception::LDAP_NO_SUCH_OBJECT) {
+                } else if ($err == \Zend\LDAP\Exception::LDAP_NO_SUCH_OBJECT) {
                     $code = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
                     $messages[0] = "Account not found: $username";
                     $failedAuthorities[$dname] = $zle->getMessage();
-                } else if ($err == \Zend_Ldap_Exception::LDAP_INVALID_CREDENTIALS) {
+                } else if ($err == \Zend\LDAP\Exception::LDAP_INVALID_CREDENTIALS) {
                     $code = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
                     $messages[0] = 'Invalid credentials';
                     $failedAuthorities[$dname] = $zle->getMessage();
@@ -386,12 +386,12 @@ class Ldap implements AuthenticationAdapter
      * @param  array $options
      * @return array of auth-adapter specific options
      */
-    protected function _prepareOptions(\Zend_Ldap $ldap, array $options)
+    protected function _prepareOptions(\Zend\LDAP\LDAP $ldap, array $options)
     {
         $adapterOptions = array(
             'group'       => null,
             'groupDn'     => $ldap->getBaseDn(),
-            'groupScope'  => \Zend_Ldap::SEARCH_SCOPE_SUB,
+            'groupScope'  => \Zend\LDAP\LDAP::SEARCH_SCOPE_SUB,
             'groupAttr'   => 'cn',
             'groupFilter' => 'objectClass=groupOfUniqueNames',
             'memberAttr'  => 'uniqueMember',
@@ -404,8 +404,8 @@ class Ldap implements AuthenticationAdapter
                 switch ($key) {
                     case 'groupScope':
                         $value = (int)$value;
-                        if (in_array($value, array(\Zend_Ldap::SEARCH_SCOPE_BASE,
-                                \Zend_Ldap::SEARCH_SCOPE_ONE, \Zend_Ldap::SEARCH_SCOPE_SUB), true)) {
+                        if (in_array($value, array(\Zend\LDAP\LDAP::SEARCH_SCOPE_BASE,
+                                \Zend\LDAP\LDAP::SEARCH_SCOPE_ONE, \Zend\LDAP\LDAP::SEARCH_SCOPE_SUB), true)) {
                            $adapterOptions[$key] = $value;
                         }
                         break;
@@ -432,7 +432,7 @@ class Ldap implements AuthenticationAdapter
      * @param  array     $adapterOptions
      * @return string|true
      */
-    protected function _checkGroupMembership(\Zend_Ldap $ldap, $canonicalName, $dn, array $adapterOptions)
+    protected function _checkGroupMembership(\Zend\LDAP\LDAP $ldap, $canonicalName, $dn, array $adapterOptions)
     {
         if ($adapterOptions['group'] === null) {
             return true;
@@ -444,9 +444,9 @@ class Ldap implements AuthenticationAdapter
             $user = $dn;
         }
 
-        $groupName   = \Zend_Ldap_Filter::equals($adapterOptions['groupAttr'], $adapterOptions['group']);
-        $membership  = \Zend_Ldap_Filter::equals($adapterOptions['memberAttr'], $user);
-        $group       = \Zend_Ldap_Filter::andFilter($groupName, $membership);
+        $groupName   = \Zend\LDAP\Filter\Filter::equals($adapterOptions['groupAttr'], $adapterOptions['group']);
+        $membership  = \Zend\LDAP\Filter\Filter::equals($adapterOptions['memberAttr'], $user);
+        $group       = \Zend\LDAP\Filter\Filter::andFilter($groupName, $membership);
         $groupFilter = $adapterOptions['groupFilter'];
         if (!empty($groupFilter)) {
             $group = $group->addAnd($groupFilter);

@@ -71,8 +71,6 @@ abstract class AbstractTest extends \ZendTest\DB\Table\TestSetup
             'data'   => $data,
         );
 
-//        $this->_useMyIncludePath();
-//        \Zend\Loader::loadClass('Zend_Db_Table_Asset_Row_TestTableRow');
         return new \ZendTest\DB\Table\TestAsset\Row\TestTableRow($config);
     }
 
@@ -864,6 +862,26 @@ abstract class AbstractTest extends \ZendTest\DB\Table\TestSetup
         }
     }
 
+    /**
+     * @group ZF-9836
+     */
+    public function testTableRowIsIterable()
+    {
+        $table = $this->_table['bugs'];
+
+        $rowset = $table->find(1);
+        $row = $rowset->current();
+        $this->assertTrue($row instanceof \Traversable);
+        $this->assertTrue($row instanceof \IteratorAggregate);
+        $this->assertType('ArrayIterator', $row->getIterator());
+        
+        $count=0;
+        foreach ($row as $columnValue) {
+            $count++;
+        }
+        
+        $this->assertEquals(8, $count, 'The row was iterated, there should be 8 columns iterated');
+    }
 
 
     /**

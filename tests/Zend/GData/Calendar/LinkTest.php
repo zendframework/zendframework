@@ -98,7 +98,7 @@ class LinkTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newLink->webcontent->width, "2");
 
         /* try constructing using magic factory */
-        $cal = new \Zend\GData\Calendar\Calendar();
+        $cal = new \Zend\GData\Calendar();
         $newLink2 = $cal->newLink();
         $newLink2->transferFromXML($newLink->saveXML());
         $this->assertEquals(count($newLink2->extensionElements), 1);

@@ -24,14 +24,16 @@
  * @namespace
  */
 namespace Zend\LDAP\Node\Schema;
-use Zend\LDAP;
+
+use Zend\LDAP\Node\Schema,
+    Zend\LDAP;
 
 /**
  * Zend_LDAP_Node_Schema_ActiveDirectory provides a simple data-container for the Schema node of
  * an Active Directory server.
  *
  * @uses       \Zend\LDAP\LDAP
- * @uses       \Zend\LDAP\Node\Schema\Schema
+ * @uses       \Zend\LDAP\Node\Schema
  * @uses       \Zend\LDAP\Node\Schema\AttributeType\ActiveDirectory
  * @uses       \Zend\LDAP\Node\Schema\ObjectClass\ActiveDirectory
  * @category   Zend
@@ -60,7 +62,7 @@ class ActiveDirectory extends Schema
      *
      * @param  \Zend\LDAP\DN $dn
      * @param  \Zend\LDAP\LDAP    $ldap
-     * @return \Zend\LDAP\Node\Schema\Schema Provides a fluid interface
+     * @return \Zend\LDAP\Node\Schema Provides a fluid interface
      */
     protected function _parseSchema(LDAP\DN $dn, LDAP\LDAP $ldap)
     {

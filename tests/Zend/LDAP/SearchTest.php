@@ -188,7 +188,7 @@ class SearchTest extends OnlineTestCase
     public function testSearchWithDnObjectAndFilterObject()
     {
         $dn=LDAP\DN::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
-        $filter=Filter\Filter::equals('objectClass', 'organizationalUnit');
+        $filter=Filter::equals('objectClass', 'organizationalUnit');
 
         $items=$this->_getLDAP()->search($filter, $dn, LDAP\LDAP::SEARCH_SCOPE_SUB);
         $this->assertEquals(9, $items->count());
@@ -197,7 +197,7 @@ class SearchTest extends OnlineTestCase
     public function testCountSubWithDnObjectAndFilterObject()
     {
         $dn1=LDAP\DN::fromString($this->_createDn('ou=Node,'));
-        $filter=Filter\Filter::any('objectClass');
+        $filter=Filter::any('objectClass');
 
         $count1=$this->_getLDAP()->count($filter, $dn1, LDAP\LDAP::SEARCH_SCOPE_SUB);
         $this->assertEquals(3, $count1);
@@ -230,7 +230,7 @@ class SearchTest extends OnlineTestCase
     public function testSearchEntriesShortcutWithDnObjectAndFilterObject()
     {
         $dn=LDAP\DN::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
-        $filter=Filter\Filter::equals('objectClass', 'organizationalUnit');
+        $filter=Filter::equals('objectClass', 'organizationalUnit');
 
         $entries=$this->_getLDAP()->searchEntries($filter, $dn, LDAP\LDAP::SEARCH_SCOPE_SUB);
         $this->assertType("array", $entries);
@@ -325,7 +325,7 @@ class SearchTest extends OnlineTestCase
             $this->fail('Expected exception not thrown');
         } catch (LDAP\Exception $zle) {
             $this->assertContains(
-                "Class 'ZendTest\LDAP\CollectionClassNotSubclassingZendLDAPCollection' must subclass 'Zend\LDAP\Collection\Collection'",
+                "Class 'ZendTest\LDAP\CollectionClassNotSubclassingZendLDAPCollection' must subclass 'Zend\LDAP\Collection'",
                 $zle->getMessage());
         }
     }

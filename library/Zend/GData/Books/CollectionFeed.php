@@ -25,10 +25,12 @@
  */
 namespace Zend\GData\Books;
 
+use Zend\GData\Books;
+
 /**
  * Describes a Book Search collection feed
  *
- * @uses       \Zend\GData\Books\Books
+ * @uses       \Zend\GData\Books
  * @uses       \Zend\GData\Feed
  * @category   Zend
  * @package    Zend_Gdata
@@ -57,7 +59,7 @@ class CollectionFeed extends \Zend\GData\Feed
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\Books\CollectionEntry';
+    protected $_entryClassName = 'Zend\GData\Books\CollectionEntry';
 
 }
 

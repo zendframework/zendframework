@@ -498,8 +498,8 @@ $queue = new Zend_Queue('Db', $options);
                 <listitem>
                     <para>
                         <methodname>getQueues()</methodname> - Zend Platform does not allow
-                        introspection into the attached job handling scripts via the API. This
-                        method throws an exception.
+                        introspection into the attached job handling scripts via the
+                        <acronym>API</acronym>. This method throws an exception.
                     </para>
                 </listitem>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20854 -->
 <sect1 id="zend.service.delicious">
     <title>Zend_Service_Delicious</title>
     <sect2 id="zend.service.delicious.introduction">
@@ -165,7 +165,7 @@ $posts[0]->save();
             <title>メソッドコールの連結</title>
             <para>
                すべての設定用メソッドは post オブジェクトを返すので、
-               「流れるようなインターフェイス」を使用してメソッドコールを連結することができます。
+               「流れるようなインターフェイス」を使用してメソッドコールを連結できます。
             </para>
             <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('ユーザ名', 'パスワード');

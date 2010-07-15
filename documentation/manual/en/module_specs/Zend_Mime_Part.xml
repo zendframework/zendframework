@@ -62,13 +62,13 @@ public $language;
                 <listitem>
                     <para>
                         <varname>$charset</varname> has to be set to the actual charset of the
-                        content if it is a text type (Text or HTML).
+                        content if it is a text type (Text or <acronym>HTML</acronym>).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <varname>$id</varname>
-                        may be set to identify a content-id for inline images in a HTML mail.
+                        <varname>$id</varname> may be set to identify a content-id for inline images
+                        in a <acronym>HTML</acronym> mail.
                     </para>
                 </listitem>
                 <listitem>

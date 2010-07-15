@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20100 -->
+<!-- EN-Revision: 21749 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.currency.usage">
     <title>Utiliser Zend_Currency</title>
@@ -89,5 +89,37 @@ Zend_Registry::set('Zend_Locale', $locale);
 // quelque part dans l'application
 $currency = new Zend_Currency();
 ]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.currency.usage.territory">
+        <title>Création de monnaie basée sur un pays</title>
+
+        <para>
+            <classname>Zend_Currency</classname> est aussi capable de travailler à partir d'un pays
+            fourni en utilisant <classname>Zend_Locale</classname> en interne.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$currency = new Zend_Currency('US');
+
+// Voir le réglage courant qui vaut 'en_US'
+// var_dump($currency);
+]]></programlisting>
+
+        <note>
+            <title>Mettre en majuscule les pays</title>
+
+            <para>
+                Quand vous savez que vous utilisez un pays, vous devez le mettre en majuscule.
+                Sinon vous pourriez croire que vous recevez un fausse locale. Par exemple quan
+                vous donnez "om", vous pourriez alors espérer retrouver "ar_OM". Mais en ait
+                il s'agira de "om" qui est aussi une langue.
+            </para>
+
+            <para>
+                Ainsi mettez toujours en majuscule l'entrée quand vous savez qu'il s'agit d'un
+                pays.
+            </para>
+        </note>
     </sect2>
 </sect1>

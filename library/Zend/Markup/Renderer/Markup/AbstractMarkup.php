@@ -25,13 +25,13 @@
 namespace Zend\Markup\Renderer\Markup;
 
 use Zend\Markup\Renderer\Markup,
-    Zend\Markup\AbstractRenderer;
+    Zend\Markup\Renderer\AbstractRenderer;
 
 /**
  * Abstract markup
  *
  * @uses       \Zend\Markup\Renderer\Markup
- * @uses       \Zend\Markup\AbstractRenderer
+ * @uses       \Zend\Markup\Renderer\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup
@@ -44,7 +44,7 @@ abstract class AbstractMarkup implements Markup
     /**
      * The renderer
      *
-     * @var \Zend\Markup\AbstractRenderer
+     * @var \Zend\Markup\Renderer\AbstractRenderer
      */
     protected $_renderer;
 
@@ -83,7 +83,7 @@ abstract class AbstractMarkup implements Markup
     /**
      * Set the renderer instance
      *
-     * @param \Zend\Markup\AbstractRenderer $renderer
+     * @param \Zend\Markup\Renderer\AbstractRenderer $renderer
      *
      * @return \Zend\Markup\Renderer\Markup\AbstractMarkup
      */
@@ -99,7 +99,7 @@ abstract class AbstractMarkup implements Markup
     /**
      * Get the renderer instance
      *
-     * @return \Zend\Markup\AbstractRenderer
+     * @return \Zend\Markup\Renderer\AbstractRenderer
      */
     public function getRenderer()
     {

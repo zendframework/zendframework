@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.extending">
     <title>Erweiterbarkeit</title>
@@ -190,8 +190,9 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         <para>
             Die <code>ShortWords</code> und <code>StopWords</code> Filter können mit bereits
             definierten oder eigenen Analysatoren wie folgt verwendet werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $stopWords = array('a', 'an', 'at', 'the', 'and', 'or', 'is', 'am');
 $stopWordsFilter =
     new Zend_Search_Lucene_Analysis_TokenFilter_StopWords($stopWords);
@@ -203,7 +204,7 @@ $analyzer->addFilter($stopWordsFilter);
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $shortWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_ShortWords();
 
 $analyzer =
@@ -212,14 +213,14 @@ $analyzer->addFilter($shortWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
-        </para>
 
         <para>
             Der <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname> Konstruktor
             nimmt ein Array mit Stopwörtern als Eingabe entgegen. Aber Stopwörter können auch aus
             einer Datei geladen werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_StopWords();
 $stopWordsFilter->loadFromFile($my_stopwords_file);
 
@@ -230,6 +231,7 @@ $analyzer->addFilter($stopWordsFilter);
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
 
+        <para>
             Die Datei sollte eine normale Textdatei mit einem Wort pro Zeile sein. Das '#' Zeichen
             markiert eine Zeile als Kommentar.
         </para>

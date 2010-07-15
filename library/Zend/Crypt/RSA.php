@@ -216,8 +216,13 @@ class RSA
     public function setPemString($value)
     {
         $this->_pemString = $value;
-        $this->_privateKey = new RSA\PrivateKey($this->_pemString, $this->_passPhrase);
-        $this->_publicKey = $this->_privateKey->getPublicKey();
+        try {
+            $this->_privateKey = new RSA\PrivateKey($this->_pemString, $this->_passPhrase);
+            $this->_publicKey = $this->_privateKey->getPublicKey();
+        } catch (Exception $e) {
+            $this->_privateKey = null;
+            $this->_publicKey = new RSA\PublicKey($this->_pemString);
+        }
     }
 
     public function setPemPath($value)
@@ -240,7 +245,7 @@ class RSA
 
     public function setHashAlgorithm($name)
     {
-        switch ($name) {
+        switch (strtolower($name)) {
             case 'md2':
                 $this->_hashAlgorithm = OPENSSL_ALGO_MD2;
                 break;
@@ -249,6 +254,12 @@ class RSA
                 break;
             case 'md5':
                 $this->_hashAlgorithm = OPENSSL_ALGO_MD5;
+                break;
+            case 'sha1':
+                $this->_hashAlgorithm = OPENSSL_ALGO_SHA1;
+                break;
+            case 'dss1':
+                $this->_hashAlgorithm = OPENSSL_ALGO_DSS1;
                 break;
         }
     }

@@ -57,7 +57,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
         $this->markTestSkipped('Skipped until Zend\Paginator is completed');
         
         $view = new View\View();
-        $view->addBasePath(dirname(__FILE__) . '/_files');
+        $view->addBasePath(__DIR__ . '/_files');
 
         Helper\PaginationControl::setDefaultViewPartial(null);
         $this->_viewHelper = new Helper\PaginationControl();

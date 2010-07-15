@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17910 -->
+<!-- EN-Revision: 20766 -->
 <sect1 id="zend.date.creation">
 
     <title>日付の作成</title>
 
     <para>
-        <classname>Zend_Date</classname> は、さまざまな方法で自分自身のインスタンスを作成することができます。
+        <classname>Zend_Date</classname> は、さまざまな方法で自分自身のインスタンスを作成できます。
         本章では、そのなかでもより便利な方法を紹介します。
     </para>
 

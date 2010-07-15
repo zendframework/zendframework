@@ -133,9 +133,7 @@ print_r($found2);
         <para>
             A new locale can be set with the function <methodname>setLocale()</methodname>. This
             function takes a locale string as parameter. If no locale is given, a locale is
-            <link linkend="zend.locale.selection">automatically selected</link>. Since
-            <classname>Zend_Locale</classname> objects are "light", this method exists primarily to
-            cause side-effects for code that have references to the existing instance object.
+            <link linkend="zend.locale.selection">automatically selected</link>.
         </para>
 
         <example id="zend.locale.setlocale.example-1">
@@ -179,11 +177,51 @@ print $locale->getRegion();
         </example>
     </sect2>
 
+    <sect2 id="zend.locale.getlocaletoterritory">
+        <title>Get the locale by giving a territory</title>
+
+        <para>
+            When you only have the territory or country then it's also possible to get a locale
+            from that information. You can manually search if there is a locale for this territory
+            by using <methodname>getLocaleToTerritory()</methodname>. This method returns a
+            locale for the given territory or <constant>NULL</constant> when there was has no locale
+            been found.
+        </para>
+
+        <example id="zend.locale.getlocaletoterritory.example-1">
+            <title>getLocaleToTerritory</title>
+
+            <programlisting language="php"><![CDATA[
+$locale = Zend_Locale::getLocaleToTerritory('US');
+// returns 'en_US'
+]]></programlisting>
+        </example>
+
+        <note>
+            <title>Uppercase territories</title>
+
+            <para>
+                When you know that you are using a territory, then you should uppercase it.
+                Otherwise you could get an in your eyes false locale in return when you use other
+                methods. For example: When you give "om" then
+                <methodname>getLocaleToTerritory()</methodname> returns you "ar_OM" as it knows that
+                you mean a territory. But all other methods will return "om", as it's also a
+                language.
+            </para>
+
+            <para>
+                So when you know that the given string is a territory, eighter use
+                <methodname>getLocaleToTerritory()</methodname> yourself before creating a locale,
+                or uppercase the input.
+            </para>
+        </note>
+    </sect2>
+
     <sect2 id="zend.locale.getdata">
         <title>Obtaining localized strings</title>
 
         <para>
-            <methodname>getTranslationList()</methodname> gives you access to localized informations
+            <methodname>getTranslationList()</methodname> gives you access to localized information
             of several types. These information are useful if you want to display localized data to
             a customer without the need of translating it. They are already available for your
             usage.
@@ -214,9 +252,9 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
         </example>
 
         <para>
-            You can receive this informations for all languages. But not all of the informations are
+            You can receive this information for all languages. But not all information is
             completely available for all languages. Some of these types are also available through
-            an own function for simplicity. See this list for detailed informations.
+            an own function for simplicity. See this list for detailed information.
         </para>
 
         <table id="zend.locale.getdata.table-1">
@@ -567,7 +605,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
                         <entry>
                             Returns a list of localized strings for acceptance ('yes') and
-                            negotation ('no'). Use <link
+                            negation ('no'). Use <link
                                 linkend="zend.locale.getquestion">Zend_Locale's getQuestion
                                 method</link> for simplicity
                         </entry>
@@ -672,10 +710,10 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>TerritoryToLanguage</emphasis></entry>
 
                         <entry>
-                            Returns a list of countries which are using a language. The country code
-                            is used as array key and the language code as array value. When a
-                            language is used in several countries these countries are separated with
-                            a whitespace
+                            Returns a list of languages and the countries where they are spoken. The
+                            language is used as array key and the country code as array value. When
+                            a language is used in several countries these countries are separated
+                            with a whitespace
                         </entry>
                     </row>
 
@@ -683,10 +721,10 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>LanguageToTerritory</emphasis></entry>
 
                         <entry>
-                            Returns a list of countries and the languages spoken within these
-                            countries. The country code is used as array key and the language code
-                            as array value. When a territory is using several languages these
-                            languages are separated with a whitespace
+                            Returns a list of countries and the languages which are spoken within
+                            them. The country code is used as array key and the language code
+                            as array value. When several languages are spoken within a territory
+                            then these languages are separated with a whitespace
                         </entry>
                     </row>
 
@@ -874,7 +912,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
         <para>
             If you are in need of a single translated value, you can use the
-            <methodname>getTranslation()</methodname> method. It returns always a string but it
+            <methodname>getTranslation()</methodname> method. It always returns a string but it
             accepts some different types than the <methodname>getTranslationList()</methodname>
             method. Also value is the same as before with one difference. You have to give the
             detail you want to get returned as additional value.
@@ -1058,10 +1096,11 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Am</emphasis></entry>
 
                         <entry>
-                            Returns a translation for 'AM' in a expected locale. If you want to
-                            receive data for other calendars an string with the expected calendar.
-                            If you omit the value then the 'gregorian' calendar will be used. Use
-                            <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                            Returns translation for 'AM' in the expected locale. If you want to
+                            receive data for other calendars provide a string with the expected
+                            calendar. If you omit the value then the 'gregorian' calendar will be
+                            used. Use <link
+                                linkend="zend.date.introduction">Zend_Date</link> for simplicity
                         </entry>
                     </row>
 
@@ -1069,10 +1108,11 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Pm</emphasis></entry>
 
                         <entry>
-                            Returns a translation for 'PM' in a expected locale. If you want to
-                            receive data for other calendars an string with the expected calendar.
-                            If you omit the value then the 'gregorian' calendar will be used. Use
-                            <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                            Returns translation for 'PM' in the expected locale. If you want to
+                            receive data for other calendars provide a string with the expected
+                            calendar. If you omit the value then the 'gregorian' calendar will be
+                            used. Use <link linkend="zend.date.introduction">Zend_Date</link> for
+                            simplicity
                         </entry>
                     </row>
 
@@ -1085,7 +1125,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             calendars or formats, then you must give an array instead of the era
                             number with the expected values. The array has to look like this:
                             <methodname>array('calendar', 'format', 'era number')</methodname>. If
-                            you give only an string then the default values are the 'gregorian'
+                            you give only a string then the default values are the 'gregorian'
                             calendar and the 'abbr' format
                         </entry>
                     </row>
@@ -1105,7 +1145,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Date</emphasis></entry>
 
                         <entry>
-                            Returns the date format for an given calendar or format within a locale.
+                            Returns the date format for a given calendar or format within a locale.
                             If you omit the value then the 'gregorian' calendar will be used with
                             the 'medium' format. If you give a string then the 'gregorian' calendar
                             will be used with the given format. Or you can also give an array which
@@ -1129,7 +1169,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Time</emphasis></entry>
 
                         <entry>
-                            Returns the time format for an given calendar or format within a locale.
+                            Returns the time format for a given calendar or format within a locale.
                             If you omit the value then the 'gregorian' calendar will be used with
                             the 'medium' format. If you give a string then the 'gregorian' calendar
                             will be used with the given format. Or you can also give an array which
@@ -1270,7 +1310,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Question</emphasis></entry>
 
                         <entry>
-                            Returns a localized string for acceptance ('yes') and negotation ('no').
+                            Returns a localized string for acceptance ('yes') and negation ('no').
                             You have to give either 'yes' or 'no' as value to receive the expected
                             string. Use <link linkend="zend.locale.getquestion">Zend_Locale's
                                 getQuestion method</link> for simplicity
@@ -1371,9 +1411,9 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>TerritoryToLanguage</emphasis></entry>
 
                         <entry>
-                            Returns the territories where a given language is used. The language has
+                            Returns the territory where a given language is used. The language has
                             to be given as <acronym>ISO</acronym> language code for example 'en' for
-                            english. When multiple territories exist where this language is used
+                            english. When the given language is spoken within multiple territories
                             then these territories are separated with a whitespace character
                         </entry>
                     </row>
@@ -1382,10 +1422,11 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>LanguageToTerritory</emphasis></entry>
 
                         <entry>
-                            Returns the languages which are used within a given territory. The
+                            Returns the language which is spoken within a given territory. The
                             territory has to be given as <constant>ISO3166</constant> code for
-                            example 'IT' for italia. When a language is used in multiple territories
-                            then these territories are separated with a whitespace character
+                            example 'IT' for italia. When multiple languages are spoken within the
+                            given territory then these languages are separated with a whitespace
+                            character
                         </entry>
                     </row>
 
@@ -1718,7 +1759,7 @@ foreach($list as $language => $content) {
             Frequently, programs need to solicit a "yes" or "no" response from the user. Use
             <methodname>getQuestion()</methodname> to obtain an array containing the correct word(s)
             or regex strings to use for prompting the user in a particular $locale (defaults to the
-            current object's locale). The returned array will contain the following informations :
+            current object's locale). The returned array will contain the following information :
         </para>
 
         <itemizedlist>
@@ -1736,15 +1777,15 @@ foreach($list as $language => $content) {
                 </para>
 
                 <para>
-                    <emphasis>yesexpr and noexpr</emphasis>: An generated regex which allows you
+                    <emphasis>yesexpr and noexpr</emphasis>: A generated regex which allows you
                     to handle user response, and search for yes or no.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            All of this informations are of course localized and depend on the set locale. See the
-            following example for the informations you can receive:
+            All of this information are of course localized and depend on the set locale. See the
+            following example for the information you can receive:
         </para>
 
         <example id="zend.locale.getquestion.example-1">
@@ -1874,7 +1915,7 @@ if (Zend_Locale::isLocale($input, true)) {
 
         <para>
             Now that you are able to detect if a given string is a locale you could add locale aware
-            behaviour to your own classes. But you will soon detect that this will always leads to
+            behaviour to your own classes. But you will soon detect that this always leads to
             the same 15 lines of code. Something like the following example:
         </para>
 
@@ -1903,7 +1944,7 @@ if ($locale instanceof Zend_Locale) {
 
         <para>
             With Zend Framework 1.8 we added a static <methodname>findLocale()</methodname> method
-            which returns you a locale string which you can work with. It processes the following
+            which returns a locale string which you can work with. It processes the following
             tasks:
         </para>
 
@@ -1917,6 +1958,12 @@ if ($locale instanceof Zend_Locale) {
             <listitem>
                 <para>
                     Degrades the locale if it does not exist in the given region
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Upgrades the locale when it is detected as region without language
                 </para>
             </listitem>
 

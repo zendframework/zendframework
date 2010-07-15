@@ -301,6 +301,7 @@ for ($i = 0; $i < 50; $i++) {
         <para>
             And now let's build the adapter:
         </para>
+
         <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,

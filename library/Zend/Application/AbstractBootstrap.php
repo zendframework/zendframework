@@ -360,6 +360,7 @@ abstract class AbstractBootstrap
                 if (0 === strcasecmp($resource, $pluginName)) {
                     return $this->_pluginResources[$pluginName];
                 }
+                continue;
             }
 
             if (class_exists($plugin)) { //@SEE ZF-7550

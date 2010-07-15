@@ -29,15 +29,15 @@ namespace Zend\GData\Media\Extension;
 /**
  * Represents the media:thumbnail element
  *
- * @uses       \Zend\GData\Extension\Extension
- * @uses       \Zend\GData\Media\Media
+ * @uses       \Zend\GData\Extension
+ * @uses       \Zend\GData\Media
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Media
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MediaThumbnail extends \Zend\GData\Extension\Extension
+class MediaThumbnail extends \Zend\GData\Extension
 {
 
     protected $_rootElement = 'thumbnail';
@@ -74,7 +74,7 @@ class MediaThumbnail extends \Zend\GData\Extension\Extension
     public function __construct($url = null, $width = null, $height = null,
             $time = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Media\Media::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Media::$namespaces);
         parent::__construct();
         $this->_url = $url;
         $this->_width = $width;

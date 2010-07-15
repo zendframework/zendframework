@@ -560,7 +560,7 @@ $form->addElement(
             Editor provides a <acronym>WYSIWYG</acronym> editor that can be used to both create and
             edit rich <acronym>HTML</acronym> content. <command>dijit.Editor</command> is pluggable
             and may be extended with custom plugins if desired; see <ulink
-                url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">the
+                url="http://dojotoolkit.org/reference-guide/dijit/Editor.html">the
                 dijit.Editor documentation</ulink> for more details.
         </para>
 

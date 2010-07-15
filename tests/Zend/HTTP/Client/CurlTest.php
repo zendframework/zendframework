@@ -58,12 +58,6 @@ class CurlTest extends CommonHttpTests
         'adapter'     => 'Zend\HTTP\Client\Adapter\Curl'
     );
 
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     protected function setUp()
     {
         if (!extension_loaded('curl')) {
@@ -297,5 +291,17 @@ class CurlTest extends CommonHttpTests
         $adapter->connect("http://framework.zend.com");
 
         $this->assertTrue(is_resource($adapter->getHandle()));
+    }
+    
+    /**
+     * @group ZF-9857
+     */
+    public function testHeadRequest()
+    {
+        $this->client->setUri($this->baseuri . 'testRawPostData.php');
+        $adapter = new Adapter\Curl();
+        $this->client->setAdapter($adapter);
+        $this->client->request('HEAD');
+        $this->assertEquals('', $this->client->getLastResponse()->getBody());
     }
 }

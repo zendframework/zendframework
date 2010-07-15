@@ -29,7 +29,7 @@ use Zend\Paginator\Adapter;
 use Zend\DB;
 use Zend\DB\Select;
 
-require_once dirname(__FILE__) . '/../_files/TestTable.php';
+require_once __DIR__ . '/../_files/TestTable.php';
 
 /**
  * @category   Zend
@@ -73,7 +73,7 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->_db = new PDO\SQLite(array(
-            'dbname' => dirname(__FILE__) . '/../_files/test.sqlite'
+            'dbname' => __DIR__ . '/../_files/test.sqlite'
         ));
 
         $this->_table = new \ZendTest\Paginator\TestAsset\TestTable($this->_db);
@@ -205,7 +205,7 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
     public function testGroupByQueryOnEmptyTableReturnsRowCountZero()
     {
         $db = new PDO\SQLite(array(
-            'dbname' => dirname(__FILE__) . '/../_files/testempty.sqlite'
+            'dbname' => __DIR__ . '/../_files/testempty.sqlite'
         ));
 
         $query = $db->select()->from('test')

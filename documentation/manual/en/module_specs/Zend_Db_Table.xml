@@ -34,7 +34,7 @@
         <example id="zend.db.table.defining.concrete-instantiation.example1">
             <title>Declaring a table class with just the string name</title>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Db_Table::setDefaultAdapter($dbAdapter);
 $bugTable = new Zend_Db_Table('bug');
 ]]></programlisting>

@@ -26,6 +26,7 @@ use Zend\Form\Element\Radio as RadioElement,
     Zend\Form\Element\Multi as MultiElement,
     Zend\Form\Element\Xhtml as XhtmlElement,
     Zend\Form\Element,
+    Zend\Form\Form,
     Zend\Form\Decorator,
     Zend\View\View;
 
@@ -143,7 +144,22 @@ class RadioTest extends \PHPUnit_Framework_TestCase
                 'test' => 'Test',
             ));
         $html = $this->element->render($this->getView());
-        $this->assertRegexp('#<dt[^>]*>&nbsp;</dt>.*?<dd#s', $html, $html);
+        $this->assertRegexp('#<dt[^>]*>&\#160;</dt>.*?<dd#s', $html, $html);
+    }
+
+    /**
+     * @group ZF-9682
+     */
+    public function testCustomLabelDecorator()
+    {
+        $form = new Form();
+        $form->addElementPrefixPath('My\Decorator', __DIR__ . '/../TestAsset/decorators/', 'decorator');
+
+        $form->addElement($this->element);
+
+        $element = $form->getElement('foo');
+
+        $this->assertType('My\Decorator\Label', $element->getDecorator('Label'));
     }
 
     /**
@@ -158,5 +174,15 @@ class RadioTest extends \PHPUnit_Framework_TestCase
              ->setLabel('Foo');
         $html = $this->element->render($this->getView());
         $this->assertNotContains('for="foo"', $html);
+    }
+
+    /**
+     * Prove the fluent interface on Zend_Form_Element_Radio::loadDefaultDecorators
+     *
+     * @group ZF-9913
+     */
+    public function testFluentInterfaceOnLoadDefaultDecorators()
+    {
+        $this->assertSame($this->element, $this->element->loadDefaultDecorators());
     }
 }

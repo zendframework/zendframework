@@ -22,6 +22,9 @@
 
 namespace ZendTest\Log;
 
+require_once __DIR__ . '/TestAsset/NotExtendedWriterAbstract.php';
+require_once __DIR__ . '/TestAsset/NotImplementsFilterInterface.php';
+
 use \Zend\Log\Logger,
     \Zend\Log;
 
@@ -319,6 +322,60 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($errline, $event['line']);
         } else {
             $this->assertTrue(empty($this->errWriter->events));
+        }
+    }
+
+    /**
+     * @group ZF-9870
+     */
+    public function testSetAndGetTimestampFormat()
+    {
+        $logger = new Logger($this->writer);
+        $this->assertEquals('c', $logger->getTimestampFormat());
+        $this->assertSame($logger, $logger->setTimestampFormat('Y-m-d H:i:s'));
+        $this->assertEquals('Y-m-d H:i:s', $logger->getTimestampFormat());
+    }
+
+    /**
+     * @group ZF-9870
+     */
+    public function testLogWritesWithModifiedTimestampFormat()
+    {
+        $logger = new Logger($this->writer);
+        $logger->setTimestampFormat('Y-m-d');
+        $logger->debug('ZF-9870');
+        rewind($this->log);
+        $message = stream_get_contents($this->log);
+        $this->assertEquals(date('Y-m-d'), substr($message, 0, 10));
+    }
+
+    /**
+     * @group ZF-9955
+     */
+    public function testExceptionConstructWriterFromConfig()
+    {
+        try {
+            $logger = new Logger();
+            $writer = array('writerName' => 'NotExtendedWriterAbstract');
+            $logger->addWriter($writer);
+        } catch (\Exception $e) {
+            $this->assertType('Zend\Log\Exception', $e);
+            $this->assertRegExp('#^(Zend\\\\Log\\\\Writer\\\\NotExtendedWriterAbstract|The\sspecified\swriter)#', $e->getMessage());
+        }
+    }
+
+    /**
+     * @group ZF-9956
+     */
+    public function testExceptionConstructFilterFromConfig()
+    {
+        try {
+            $logger = new Logger();
+            $filter = array('filterName' => 'NotImplementsFilterInterface');
+            $logger->addFilter($filter);
+        } catch (\Exception $e) {
+            $this->assertType('Zend\Log\Exception', $e);
+            $this->assertRegExp('#^(Zend\\\\Log\\\\Filter\\\\NotImplementsFilterInterface|The\sspecified\sfilter)#', $e->getMessage());
         }
     }
 }

@@ -33,7 +33,7 @@ use Zend\HTTP,
  * @uses \Zend\Feed\Feed
  * @uses \Zend\Feed\Exception
  * @uses \Zend\Feed\Reader\FeedSet
- * @uses \Zend\Feed\Reader\Feed\Atom\Atom
+ * @uses \Zend\Feed\Reader\Feed\Atom
  * @uses \Zend\Feed\Reader\Feed\RSS
  * @uses \Zend\HTTP\Client
  * @uses \Zend\Loader\PluginLoader
@@ -276,7 +276,9 @@ class Reader
             if ($response->getStatus() !== 200) {
                 throw new \Zend\Feed\Exception('Feed failed to load, got response code ' . $response->getStatus());
             }
-            return self::importString($response->getBody());
+            $reader = self::importString($response->getBody());
+            $reader->setOriginalSourceUri($uri);
+            return $reader;
         }
     }
 
@@ -294,7 +296,7 @@ class Reader
         if (substr($type, 0, 3) == 'rss') {
             $reader = new Feed\RSS($dom, $type);
         } else {
-            $reader = new Feed\Atom\Atom($dom, $type);
+            $reader = new Feed\Atom($dom, $type);
         }
 
         return $reader;
@@ -334,7 +336,7 @@ class Reader
         } elseif (substr($type, 8, 5) == 'entry') {
             $reader = new Entry\Atom($dom->documentElement, 0, self::TYPE_ATOM_10);
         } elseif (substr($type, 0, 4) == 'atom') {
-            $reader = new Feed\Atom\Atom($dom, $type);
+            $reader = new Feed\Atom($dom, $type);
         } else {
             throw new \Zend\Feed\Exception('The URI used does not point to a '
             . 'valid Atom, RSS or RDF feed that Zend_Feed_Reader can parse.');
@@ -406,7 +408,7 @@ class Reader
         } elseif(is_string($feed) && !empty($feed)) {
             @ini_set('track_errors', 1);
             $dom = new \DOMDocument;
-            $status = @$doc->loadXML($string);
+            $status = @$dom->loadXML($string);
             @ini_restore('track_errors');
             if (!$status) {
                 if (!isset($php_errormsg)) {

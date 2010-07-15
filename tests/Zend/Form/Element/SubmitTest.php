@@ -202,4 +202,15 @@ class SubmitTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->element->getIgnore());
     }
+    
+    /**
+     * Prove the fluent interface on Zend_Form_Element_Submit::loadDefaultDecorators
+     *
+     * @group ZF-9913
+     * @return void
+     */
+    public function testFluentInterfaceOnLoadDefaultDecorators()
+    {
+        $this->assertSame($this->element, $this->element->loadDefaultDecorators());
+    }
 }

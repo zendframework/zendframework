@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.alpha">
+    <title>Alpha</title>
+
+    <para>
+        <classname>Zend_Filter_Alpha</classname> is a filter which returns the string
+        <varname>$value</varname>, removing all but alphabetic characters. This filter includes an
+        option to also allow white space characters.
+    </para>
+
+    <sect3 id="zend.filter.set.alpha.options">
+        <title>Supported options for Zend_Filter_Alpha</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Filter_Alpha</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>allowwhitespace</property></emphasis>: If this option is
+                    set then whitespace characters are allowed. Otherwise they are suppressed. By
+                    default whitespace characters are not allowed.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.filter.set.alpha.basic">
+        <title>Basic usage</title>
+
+        <para>
+            A basic example of usage is below:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Alpha();
+
+print $filter->filter('This is (my) content: 123');
+]]></programlisting>
+
+        <para>
+            The above example returns 'Thisismycontent'. Notice that the whitespace characters and
+            brackets are removed.
+        </para>
+
+        <note>
+            <para>
+                <classname>Zend_Filter_Alpha</classname> works on most languages; however, there
+                are three exceptions: Chinese, Japanese and Korean. With these languages the
+                english alphabet is used. The language is detected through the use of
+                <classname>Zend_Locale</classname>.
+            </para>
+        </note>
+    </sect3>
+
+     <sect3 id="zend.filter.set.alpha.whitespace">
+         <title>Allow whitespace characters</title>
+
+        <para>
+            <classname>Zend_Filter_Alpha</classname> can also allow whitespace characters. This can
+            be useful when you want to strip special characters from a string. See the following
+            example:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Alpha(array('allowwhitespace' => true));
+
+print $filter->filter('This is (my) content: 123');
+]]></programlisting>
+
+        <para>
+            The above example returns 'This is my content '. Notice that the parenthesis, colon, and
+            numbers have all been removed while the whitespace characters remain.
+        </para>
+
+        <para>
+            To change <property>allowWhiteSpace</property> after instantiation the method
+            <methodname>setAllowWhiteSpace()</methodname> may be used.
+        </para>
+
+        <para>
+            To query the current value of <property>allowWhiteSpace</property> the method
+            <methodname>getAllowWhiteSpace()</methodname> may be used.
+        </para>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

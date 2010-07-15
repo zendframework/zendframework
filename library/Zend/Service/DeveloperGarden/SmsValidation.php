@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Client_ClientAbstract
+ * @uses       Zend_Service_DeveloperGarden_Client_AbstractClient
  * @uses       Zend_Service_DeveloperGarden_Request_SmsValidation_GetValidatedNumbers
  * @uses       Zend_Service_DeveloperGarden_Request_SmsValidation_Invalidate
  * @uses       Zend_Service_DeveloperGarden_Request_SmsValidation_SendValidationKeyword
@@ -38,7 +38,7 @@
  * @author     Marco Kaiser
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_DeveloperGarden_SmsValidation extends Zend_Service_DeveloperGarden_Client_ClientAbstract
+class Zend_Service_DeveloperGarden_SmsValidation extends Zend_Service_DeveloperGarden_Client_AbstractClient
 {
 // @codeCoverageIgnoreStart
     /**

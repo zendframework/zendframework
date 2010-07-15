@@ -51,18 +51,18 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        $this->_projectDirectory   = dirname(__FILE__) . '/_files/project1/';
+        $this->_projectDirectory   = __DIR__ . '/_files/project1/';
         if (!file_exists($this->_projectDirectory)) {
             mkdir($this->_projectDirectory);
         }
-        $this->_projectProfileFile = dirname(__FILE__) . '/_files/.zfproject.xml.orig';
+        $this->_projectProfileFile = __DIR__ . '/_files/.zfproject.xml.orig';
 
         $this->_removeProjectFiles();
 
         Context\Repository::resetInstance();
 
         $contextRegistry = Context\Repository::getInstance();
-        $contextRegistry->addContextsFromDirectory(dirname(__FILE__) . '/../../../../library/Zend/Tool/Project/Context/Zf/', 'Zend\Tool\Project\Context\Zf\\');
+        $contextRegistry->addContextsFromDirectory(__DIR__ . '/../../../../library/Zend/Tool/Project/Context/Zf/', 'Zend\Tool\Project\Context\Zf\\');
 
         $this->_standardProfileFromData = new Profile();
         $this->_standardProfileFromData->setAttribute('profileData',      file_get_contents($this->_projectProfileFile));

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21586 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.consuming-atom-single-entry">
     <title>Einen einzelnen Atom Eintrag konsumieren</title>
 
     <para>
-        Einzelne Atom <code>&lt;entry&gt;</code> Elemente sind auch für sich selber gültig.
+        Einzelne Atom <command>&lt;entry&gt;</command> Elemente sind auch für sich selber gültig.
         Normalerweise ist die <acronym>URL</acronym> für einen Eintrag die <acronym>URL</acronym>
-        des Feeds gefolgt von <code>/&lt;entryId&gt;</code>, wie bei
-        <code>http://atom.example.com/feed/1</code>, um die obige Beispiel <acronym>URL</acronym>
-        zu verwenden.
+        des Feeds gefolgt von <command>/&lt;entryId&gt;</command>, wie bei
+        <filename>http://atom.example.com/feed/1</filename>, um die obige Beispiel
+        <acronym>URL</acronym> zu verwenden.
     </para>
 
     <para>
@@ -31,7 +31,7 @@ $entry = $feed->current();
 
     <para>
         Alternativ kannst du das Objekt für den Eintrag auch direkt instanziieren, wenn du weist,
-        dass du ein Dokument mit nur einem <code>&lt;entry&gt;</code> Eintrag abrufst:
+        dass du ein Dokument mit nur einem <command>&lt;entry&gt;</command> Eintrag abrufst:
     </para>
 
     <example id="zend.feed.consuming-atom-single-entry.example.entryatom">

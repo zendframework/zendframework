@@ -49,7 +49,7 @@
 
         <para>
             All three of these methods can also accept an array of email addresses
-            to add instead of one at a time.  In the case of <methodname>addTo()</methodname> and
+            to add instead of one at a time. In the case of <methodname>addTo()</methodname> and
             <methodname>addCc()</methodname>, they can be associative arrays where the key is the
             human readable name for the recipient.
         </para>

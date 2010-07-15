@@ -82,15 +82,15 @@ class Db extends AbstractWriter
     {
         $config = self::_parseConfig($config);
         $config = array_merge(array(
-            'db'        => null, 
-            'table'     => null, 
+            'db'        => null,
+            'table'     => null,
             'columnMap' => null,
         ), $config);
-        
+
         if (isset($config['columnmap'])) {
             $config['columnMap'] = $config['columnmap'];
         }
-        
+
         return new self(
             $config['db'],
             $config['table'],
@@ -101,7 +101,7 @@ class Db extends AbstractWriter
     /**
      * Formatting is not possible on this writer
      */
-    public function setFormatter($formatter)
+    public function setFormatter(Zend_Log_Formatter_Interface $formatter)
     {
         throw new Log\Exception(get_class() . ' does not support formatting');
     }

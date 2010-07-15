@@ -25,7 +25,7 @@
  */
 
 /**
- * @see Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
+ * @see Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy
  */
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
@@ -68,7 +68,7 @@ class Zend_Service_WindowsAzure_RetryPolicyTest extends PHPUnit_Framework_TestCa
     public function testNoRetry()
     {
         $this->_executedRetries = 0;
-        $policy = Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract::noRetry();
+        $policy = Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy::noRetry();
         $retries = $policy->execute(
             array($this, '_countRetries')
         );
@@ -83,7 +83,7 @@ class Zend_Service_WindowsAzure_RetryPolicyTest extends PHPUnit_Framework_TestCa
         $this->_executedRetries = 0;
         $this->_exceptionCount = 9;
         
-        $policy = Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract::retryN(10, 100);
+        $policy = Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy::retryN(10, 100);
         $retries = $policy->execute(
             array($this, '_countRetriesAndThrowExceptions')
         );

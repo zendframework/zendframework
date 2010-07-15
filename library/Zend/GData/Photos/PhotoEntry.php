@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\Photos;
 
+use Zend\GData\Photos;
+
 /**
  * Data model class for a Comment Entry.
  *
@@ -38,7 +40,7 @@ namespace Zend\GData\Photos;
  * @uses       \Zend\GData\EXIF\Extension\Tags
  * @uses       \Zend\GData\Geo\Extension\GeoRssWhere
  * @uses       Zend_Gdata_MediaEntry
- * @uses       \Zend\GData\Photos\Photos
+ * @uses       \Zend\GData\Photos
  * @uses       \Zend\GData\Photos\Extension\AlbumId
  * @uses       \Zend\GData\Photos\Extension\Checksum
  * @uses       \Zend\GData\Photos\Extension\Client
@@ -60,7 +62,7 @@ namespace Zend\GData\Photos;
 class PhotoEntry extends \Zend\GData\Media\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\Photos\PhotoEntry';
+    protected $_entryClassName = 'Zend\GData\Photos\PhotoEntry';
 
     /**
      * gphoto:id element

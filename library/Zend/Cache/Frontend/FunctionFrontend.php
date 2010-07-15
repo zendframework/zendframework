@@ -73,25 +73,29 @@ class FunctionFrontend extends Core
     /**
      * Main method : call the specified function or get the result from cache
      *
-     * @param  string $name             Function name
-     * @param  array  $parameters       Function parameters
-     * @param  array  $tags             Cache tags
-     * @param  int    $specificLifetime If != false, set a specific lifetime for this cache record (null => infinite lifetime)
-     * @param  int   $priority         integer between 0 (very low priority) and 10 (maximum priority) used by some particular backends
+     * @param  callback $callback         A valid callback
+     * @param  array    $parameters       Function parameters
+     * @param  array    $tags             Cache tags
+     * @param  int      $specificLifetime If != false, set a specific lifetime for this cache record (null => infinite lifetime)
+     * @param  int      $priority         integer between 0 (very low priority) and 10 (maximum priority) used by some particular backends
      * @return mixed Result
      */
-    public function call($name, $parameters = array(), $tags = array(), $specificLifetime = false, $priority = 8)
+    public function call($callback, array $parameters = array(), $tags = array(), $specificLifetime = false, $priority = 8)
     {
+        if (!is_callable($callback, true, $name)) {
+            Cache::throwException('Invalid callback');
+        }
+
         $cacheBool1 = $this->_specificOptions['cache_by_default'];
         $cacheBool2 = in_array($name, $this->_specificOptions['cached_functions']);
         $cacheBool3 = in_array($name, $this->_specificOptions['non_cached_functions']);
         $cache = (($cacheBool1 || $cacheBool2) && (!$cacheBool3));
         if (!$cache) {
-            // We do not have not cache
-            return call_user_func_array($name, $parameters);
+            // Caching of this callback is disabled
+            return call_user_func_array($callback, $parameters);
         }
 
-        $id = $this->_makeId($name, $parameters);
+        $id = $this->_makeId($callback, $parameters);
         if ( ($rs = $this->load($id)) && isset($rs[0], $rs[1])) {
             // A cache is available
             $output = $rs[0];
@@ -100,7 +104,7 @@ class FunctionFrontend extends Core
             // A cache is not available (or not valid for this frontend)
             ob_start();
             ob_implicit_flush(false);
-            $return = call_user_func_array($name, $parameters);
+            $return = call_user_func_array($callback, $parameters);
             $output = ob_get_contents();
             ob_end_clean();
             $data = array($output, $return);
@@ -114,20 +118,53 @@ class FunctionFrontend extends Core
     /**
      * Make a cache id from the function name and parameters
      *
-     * @param  string $name       Function name
+     * @param  callback $callback A valid callback
      * @param  array  $parameters Function parameters
      * @throws \Zend\Cache\Exception
      * @return string Cache id
      */
-    private function _makeId($name, $parameters)
+    private function _makeId($callback, array $args)
     {
-        if (!is_string($name)) {
-            Cache::throwException('Incorrect function name');
+        if (!is_callable($callback, true, $name)) {
+            Cache::throwException('Invalid callback');
         }
-        if (!is_array($parameters)) {
-            Cache::throwException('parameters argument must be an array');
-        }
-        return md5($name . serialize($parameters));
-    }
 
+        // functions, methods and classnames are case-insensitive
+        $name = strtolower($name);
+
+        // generate a unique id for object callbacks
+        if (is_object($callback)) { // Closures & __invoke
+            $object = $callback;
+        } elseif (isset($callback[0])) { // array($object, 'method')
+            $object = $callback[0];
+        }
+        if (isset($object)) {
+            try {
+                $tmp = @serialize($callback);
+            } catch (\Exception $e) {
+                Cache::throwException($e->getMessage());
+            }
+            if (!$tmp) {
+                $lastErr = error_get_last();
+                Cache::throwException("Can't serialize callback object to generate id: {$lastErr['message']}");
+            }
+            $name.= '__' . $tmp;
+        }
+
+        // generate a unique id for arguments
+        $argsStr = '';
+        if ($args) {
+            try {
+                $argsStr = @serialize(array_values($args));
+            } catch (\Exception $e) {
+                Cache::throwException($e->getMessage());
+            }
+            if (!$argsStr) {
+                $lastErr = error_get_last();
+                throw Cache::throwException("Can't serialize arguments to generate id: {$lastErr['message']}");
+            }
+        }
+
+        return md5($name . $argsStr);
+    }
 }

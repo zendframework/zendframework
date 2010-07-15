@@ -86,8 +86,8 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
                 .' of "' . $key . '" must be a non-empty string');
         }
         $result = $this->_db->find($key);
-        if ($result) {
-            return (array) $result->current();
+        if (count($result)) {
+            return $result->current()->toArray();
         }
         return false;
     }
@@ -105,12 +105,12 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
                 .' of "' . $key . '" must be a non-empty string');
         }
         $result = $this->_db->find($key);
-        if ($result) {
+        if (count($result)) {
             return true;
         }
         return false;
     }
-    
+
     /**
      * Delete a subscription
      *
@@ -120,7 +120,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
     public function deleteSubscription($key)
     {
         $result = $this->_db->find($key);
-        if ($result) {
+        if (count($result)) {
             $this->_db->delete(
                 $this->_db->getAdapter()->quoteInto('id = ?', $key)
             );
@@ -128,5 +128,5 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
         }
         return false;
     }
-    
+
 }

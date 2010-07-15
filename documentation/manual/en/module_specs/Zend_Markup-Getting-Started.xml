@@ -14,7 +14,7 @@
 
         <para>
             We will first instantiate a <classname>Zend_Markup_Renderer_Html</classname> object
-            using the <methodname>Zend_Markup::factory()</methodname> method.  This will also create
+            using the <methodname>Zend_Markup::factory()</methodname> method. This will also create
             a <classname>Zend_Markup_Parser_Bbcode</classname> object which will be added to the
             renderer object.
         </para>

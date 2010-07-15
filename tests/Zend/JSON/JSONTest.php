@@ -730,11 +730,23 @@ class JSONTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @group ZF-8918
-     * @expectedException Zend\JSON\Exception
      */
     public function testDecodingInvalidJSONShouldRaiseAnException()
     {
+        $this->setExpectedException('Zend\JSON\Exception');
         JSON\JSON::decode(' some string ');
+    }
+
+    /**
+     * @group ZF-9416
+     * Encoding an iterator using the internal encoder should handle undefined keys
+     */
+    public function testIteratorWithoutDefinedKey()
+    {
+        $inputValue = new \ArrayIterator(array('foo'));
+        $encoded = JSON\Encoder::encode($inputValue);
+        $expectedDecoding = '{"__className":"ArrayIterator",0:"foo"}';
+        $this->assertEquals($expectedDecoding, $encoded);
     }
 }
 

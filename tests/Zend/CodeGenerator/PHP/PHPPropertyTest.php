@@ -160,15 +160,15 @@ EOS;
         $this->assertEquals($expected, $codeGenProperty->generate());
     }
 
-    /**
-     * @expectedException \Zend\CodeGenerator\PHP\Exception
-     */
     public function testOtherTypesThrowExceptionOnGenerate()
     {
         $codeGenProperty = new PHP\PHPProperty(array(
             'name' => 'someVal',
             'defaultValue' => new \stdClass(),
         ));
+
+        $this->setExpectedException('Zend\CodeGenerator\PHP\Exception');
+
         $codeGenProperty->generate();
     }
 
@@ -205,4 +205,39 @@ EOS;
         $this->assertEquals($code, $defaultValue->generate());
     }
 
+    /**
+     * @dataProvider dataSetTypeSetValueGenerate
+     * @param string $type
+     * @param mixed $value
+     * @param string $code
+     */
+    public function testSetBogusTypeSetValueGenerateUseAutoDetection($type, $value, $code)
+    {
+        if($type == 'constant') {
+            return; // constant can only be detected explicitly
+        }
+
+        $defaultValue = new PHP\PHPPropertyValue();
+        $defaultValue->setType("bogus");
+        $defaultValue->setValue($value);
+
+        $this->assertEquals($code, $defaultValue->generate());
+    }
+    
+    /**
+     * @group ZF-8849
+     */
+    public function testZF8849()
+    {
+        $property = new PHP\PHPProperty(array(
+            'defaultValue' => array('value' => 1.337, 'type' => 'string'),
+            'name'         => 'ZF8849',
+            'const'        => true
+        ));
+        
+        $this->assertEquals(
+            "    const ZF8849 = '1.337';",
+            $property->generate()
+        );
+    }
 }

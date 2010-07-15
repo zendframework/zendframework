@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20843 -->
 <sect1 id="zend.service.nirvanix">
     <title>Zend_Service_Nirvanix</title>
 
@@ -11,7 +11,7 @@
             Nirvanix は Internet Media File System (<acronym>IMFS</acronym>)
             です。インターネット上のストレージサービスに対して
             ファイルをアップロードして保存し、ファイルを管理します。
-            また、標準的なウェブサービスインターフェイスでファイルにアクセスすることができます。
+            また、標準的なウェブサービスインターフェイスでファイルにアクセスできます。
             <acronym>IMFS</acronym> はクラスタ形式のファイルシステムで、インターネット越しにアクセスします。
             また、メディアファイル (音声や動画など) に最適化されています。
             <acronym>IMFS</acronym> の目標は、ますます増えていくメディアストレージに対応する
@@ -163,7 +163,7 @@ $imfs->unlink('/foo.txt');
 
         <para>
             使いたい名前空間へのプロキシを取得したら、そのメソッドをコールします。
-            プロキシ上では、REST <acronym>API</acronym> の任意のコマンドを使用することができます。
+            プロキシ上では、REST <acronym>API</acronym> の任意のコマンドを使用できます。
             また、プロキシにはウェブサービスのコマンドをラップする便利なメソッドも用意されています。
             上の例では、<acronym>IMFS</acronym> の便利なメソッドを使用して新規ファイルを作成し、
             それを取得して表示し、最後にファイルを削除しています。
@@ -184,7 +184,7 @@ $imfs->unlink('/foo.txt');
         <para>
             プロキシオブジェクトには、その他の便利なメソッドも用意されています。
             <classname>Zend_Service_Nirvanix</classname> が用意するこれらのメソッドを使用すれば、
-            Nirvanix ウェブサービスをよりシンプルに使用することができます。
+            Nirvanix ウェブサービスをよりシンプルに使用できます。
             先ほどの例では
             <methodname>putContents()</methodname> や <methodname>getContents()</methodname>、
             そして <methodname>unlink()</methodname> といったメソッドを使用していますが、
@@ -287,7 +287,7 @@ Zend_Service_Nirvanix_Response Object
 ]]></programlisting>
 
         <para>
-            <code>SimpleXMLElement</code> の任意のプロパティやメソッドにアクセスすることができます。
+            <code>SimpleXMLElement</code> の任意のプロパティやメソッドにアクセスできます。
             上の例では、<code>$result->BytesUploaded</code> を使用して
             取得したバイト数を調べています。<code>SimpleXMLElement</code>
             に直接アクセスしたい場合は <code>$result->getSxml()</code> を使用します。

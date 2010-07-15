@@ -46,7 +46,7 @@ class DirectoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilesystem()
     {
-        $tempPath = dirname(__FILE__) . '/_tempFiles/_files';
+        $tempPath = __DIR__ . '/_tempFiles/_files';
 
         // remove files from temporary direcytory
         $dir = opendir($tempPath);
@@ -111,13 +111,13 @@ class DirectoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFilesystemSubfoldersAutoCreation()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_tempFiles/_files/dir1/dir2/dir3');
+        $directory = new Directory\Filesystem(__DIR__ . '/_tempFiles/_files/dir1/dir2/dir3');
         $this->assertTrue($directory instanceof Directory);
         $directory->close();
 
-        rmdir(dirname(__FILE__) . '/_tempFiles/_files/dir1/dir2/dir3');
-        rmdir(dirname(__FILE__) . '/_tempFiles/_files/dir1/dir2');
-        rmdir(dirname(__FILE__) . '/_tempFiles/_files/dir1');
+        rmdir(__DIR__ . '/_tempFiles/_files/dir1/dir2/dir3');
+        rmdir(__DIR__ . '/_tempFiles/_files/dir1/dir2');
+        rmdir(__DIR__ . '/_tempFiles/_files/dir1');
     }
 }
 

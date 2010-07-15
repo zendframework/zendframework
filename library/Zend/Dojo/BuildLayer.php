@@ -505,9 +505,9 @@ class BuildLayer
 
         $profile = $profileOptions;
         $profile['layers'] = array(array(
-            'name' => $layerScriptPath,
+            'name'              => $layerScriptPath,
             'layerDependencies' => array(),
-            'dependencies' => array($layerName),
+            'dependencies'      => array($layerName),
         ));
         $profile['prefixes'] = array_values($profilePrefixes);
 

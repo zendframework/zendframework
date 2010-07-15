@@ -101,16 +101,14 @@ class TestBackend extends AbstractBackend implements ExtendedBackend
     public function load($id, $doNotTestCacheValidity = false)
     {
         $this->_addLog('get', array($id, $doNotTestCacheValidity));
-        if ( $id == 'false'
-          || $id == 'd8523b3ee441006261eeffa5c3d3a0a7'
-          || $id == 'e83249ea22178277d5befc2c5e2e9ace'
-          || $id == '40f649b94977c0a6e76902e2a0b43587'
-          || $id == 'ace7797c586c72fecc4d0d3413de4d57'
-          || $id == '574aea2816b51d1c8aa6d5fd0c1144ac'
-          || $id == 'c687b54c872594de4a635a94935ee4b5'
-          || $id == '90ed42644de581cc298d2a74e61de288'
-          )
-        {
+
+        if ($id == 'false'
+            || $id == 'd8523b3ee441006261eeffa5c3d3a0a7'
+            || $id == 'e83249ea22178277d5befc2c5e2e9ace'
+            || $id == '40f649b94977c0a6e76902e2a0b43587'
+            || $id == '88161989b73a4cbfd0b701c446115a99'
+            || $id == '205fc79cba24f0f0018eb92c7c8b3ba4'
+        ) {
             return false;
         }
         if ($id=='serialized') {
@@ -119,13 +117,12 @@ class TestBackend extends AbstractBackend implements ExtendedBackend
         if ($id=='serialized2') {
             return serialize(array('headers' => array(), 'data' => 'foo'));
         }
-        if (($id=='71769f39054f75894288e397df04e445') or ($id=='615d222619fb20b527168340cebd0578')) {
-            return serialize(array('foo', 'bar'));
-        }
-        if (($id=='8a02d218a5165c467e7a5747cc6bd4b6') or ($id=='648aca1366211d17cbf48e65dc570bee')) {
-            return serialize(array('foo', 'bar'));
-        }
-        if ($id=='f93593d664b080ec712db169cc41f50e' || $id == '263b963032376e23204188ea488bee2a') {
+        if ($id == '71769f39054f75894288e397df04e445' 
+            || $id == '615d222619fb20b527168340cebd0578'
+            || $id == '8a02d218a5165c467e7a5747cc6bd4b6' 
+            || $id == '648aca1366211d17cbf48e65dc570bee'
+            || $id == '4a923ef02d7f997ca14d56dfeae25ea7'
+        ) {
             return serialize(array('foo', 'bar'));
         }
         return 'foo';

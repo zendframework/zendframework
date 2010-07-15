@@ -44,12 +44,12 @@ class SubForm extends Form
     /**
      * Load the default decorators
      *
-     * @return void
+     * @return Zend_Form_SubForm
      */
     public function loadDefaultDecorators()
     {
         if ($this->loadDefaultDecoratorsIsDisabled()) {
-            return;
+            return $this;
         }
 
         $decorators = $this->getDecorators();
@@ -59,5 +59,6 @@ class SubForm extends Form
                  ->addDecorator('Fieldset')
                  ->addDecorator('DtDdWrapper');
         }
+        return $this;
     }
 }

@@ -61,20 +61,20 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->adapter = new TestAsset\MockHttpClient();
         $this->client = new \Zend\GData\HttpClient();
         $this->client->setAdapter($this->adapter);
-        $this->service = new App\App($this->client);
+        $this->service = new App($this->client);
     }
 
     public function testImportFile()
     {
-        $feed = App\App::importFile($this->fileName,
+        $feed = App::importFile($this->fileName,
                 'Zend\GData\App\Feed', true);
         $this->assertEquals('dive into mark', $feed->title->text);
     }
 
     public function testSetAndGetHttpMethodOverride()
     {
-        App\App::setHttpMethodOverride(true);
-        $this->assertEquals(true, App\App::getHttpMethodOverride());
+        App::setHttpMethodOverride(true);
+        $this->assertEquals(true, App::getHttpMethodOverride());
     }
 
     public function testSetAndGetProtocolVersion()

@@ -86,7 +86,7 @@ class Zend_Service_Amazon_Ec2_AbstractTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class TestAmazonAbstract extends Zend_Service_Amazon_Ec2_Abstract
+class TestAmazonAbstract extends Zend_Service_Amazon_Ec2_AbstractService
 {
 
     public function returnRegion()

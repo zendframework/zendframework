@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20109 -->
+<!-- EN-Revision: 21997 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.view.placeholders.standard">
     <title>Standard Platzhalter</title>
@@ -14,13 +14,14 @@
 
     <para>
         Die meisten mitgelieferten Platzhalter sind für die Erstellung von Inhalten der
-        <code>&lt;head&gt;</code> Sektion des Layout Inhalts -- ein Areal das man normalerweise
-        nicht direkt über Anwendungs View Skripte manipuliert, aber eines das man beeinflussen will.
-        Als Beispiel: Wenn man will das der Titel auf jeder Seite bestimmte Inhalte enthält, aber
-        spezifische Inhalte auf dem Controller und/oder der Aktion basieren; wenn man
-        <acronym>CSS</acronym> Dateien spezifizieren will um Sie basieren auf der Sektion in der man
-        sich befindet zu Laden; wenn man spezifische JavaScript Skripts zu unterschiedlichen Zeiten
-        laden will; oder wenn man die <acronym>DocType</acronym> Deklaration setzen will.
+        <emphasis>&lt;head&gt;</emphasis> Sektion des Layout Inhalts -- ein Areal das man
+        normalerweise nicht direkt über Anwendungs View Skripte manipuliert, aber eines das man
+        beeinflussen will. Als Beispiel: Wenn man will das der Titel auf jeder Seite bestimmte
+        Inhalte enthält, aber spezifische Inhalte auf dem Controller und/oder der Aktion basieren;
+        wenn man <acronym>CSS</acronym> Dateien spezifizieren will um Sie basieren auf der Sektion
+        in der man sich befindet zu Laden; wenn man spezifische JavaScript Skripts zu
+        unterschiedlichen Zeiten laden will; oder wenn man die <acronym>DocType</acronym>
+        Deklaration setzen will.
     </para>
 
     <para>
@@ -164,7 +165,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         <para>
             Am einfachsten erlaubt es der <methodname>headTitle()</methodname> Helfer den Inhalt zu
-            für das <code>&lt;title&gt;</code> Tag zu sammeln; wenn man es ausgibt, wird es
+            für das <emphasis>&lt;title&gt;</emphasis> Tag zu sammeln; wenn man es ausgibt, wird es
             basierend auf der Reihenfolge mit der es hinzugefügt wurde zusammengefügt. Man kann die
             Reihenfolge kontrollieren indem <methodname>prepend()</methodname> und
             <methodname>append()</methodname> verwendet werden, und einen Separator angegeben
@@ -349,9 +350,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             <methodname>appendFile()</methodname>, <methodname>prependScript()</methodname>, und
             <methodname>appendScript()</methodname>. Die ersten zwei erlauben es Dateien zu
             spezifizieren auf die im <varname>$src</varname> Attribut des
-            <code>&lt;script&gt;</code> Tags referenziert wird; die letzteren zwei nehmen den
-            angegebenen Inhalt und stellen Ihn als literales JavaScript im
-            <code>&lt;script&gt;</code> Tag dar.
+            <emphasis>&lt;script&gt;</emphasis> Tags referenziert wird; die letzteren zwei nehmen
+            den angegebenen Inhalt und stellen Ihn als literales JavaScript im
+            <emphasis>&lt;script&gt;</emphasis> Tag dar.
         </para>
 
         <para>
@@ -433,15 +434,15 @@ site = {
 
             <para>
                 Viele Browser blockieren oft die Anzeige von Seiten bis alle Skripte und Stylesheets
-                geladen wurden auf die in der <code>&lt;head&gt;</code> Sektion referenziert wird.
-                Wenn man eine Anzahl solcher Direktiven hat, kann das Einfluß darauf haben wie bald
-                jemand damit beginnen kann sich die Seite anzuschauen:
+                geladen wurden auf die in der <emphasis>&lt;head&gt;</emphasis> Sektion referenziert
+                wird. Wenn man eine Anzahl solcher Direktiven hat, kann das Einfluß darauf haben wie
+                bald jemand damit beginnen kann sich die Seite anzuschauen:
             </para>
 
             <para>
-                Ein Weg darum zu kommen besteht darin die <code>&lt;script&gt;</code> Tags einfach
-                nach dem schließenden <code>&lt;body&gt;</code> Tag des Dokuments auszugeben. (Das
-                ist eine Praxis die speziell vom <ulink
+                Ein Weg darum zu kommen besteht darin die <emphasis>&lt;script&gt;</emphasis> Tags
+                einfach nach dem schließenden <emphasis>&lt;body&gt;</emphasis> Tag des Dokuments
+                auszugeben. (Das ist eine Praxis die speziell vom <ulink
                     url="http://developer.yahoo.com/yslow/">Y! Slow Projekt</ulink> empfohlen wird)
             </para>
 

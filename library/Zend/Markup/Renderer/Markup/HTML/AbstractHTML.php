@@ -31,7 +31,7 @@ use Zend\Markup\Renderer\Markup\AbstractMarkup,
  * Abstract markup
  *
  * @uses       \Zend\Markup\Renderer\Markup\AbstractMarkup
- * @uses       \Zend\Markup\AbstractRenderer
+ * @uses       \Zend\Markup\Renderer\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup_HTML
@@ -46,7 +46,7 @@ abstract class AbstractHTML extends AbstractMarkup
      *
      * @var array
      */
-    protected $_attributes;
+    protected $_attributes = array();
 
 
     /**

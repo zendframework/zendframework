@@ -228,21 +228,28 @@ class RSS extends Reader\AbstractEntry implements Reader\Entry
         ) {
             $dateModified = $this->_xpath->evaluate('string('.$this->_xpathQueryRss.'/pubDate)');
             if ($dateModified) {
-                $dateStandards = array(Date\Date::RSS, Date\Date::RFC_822,
-                Date\Date::RFC_2822, Date\Date::DATES);
-                $date = new Date\Date;
-                foreach ($dateStandards as $standard) {
-                    try {
-                        $date->set($dateModified, $standard);
-                        break;
-                    } catch (Date\Exception $e) {
-                        if ($standard == Date\Date::DATES) {
-                            throw new \Zend\Feed\Exception(
-                                'Could not load date due to unrecognised'
-                                .' format (should follow RFC 822 or 2822):'
-                                . $e->getMessage(),
-                                0, $e
-                            );
+                $dateModifiedParsed = strtotime($dateModified);
+                if ($dateModifiedParsed) {
+                    $date = new Date\Date($dateModifiedParsed);
+                } else {
+                    $dateStandards = array(
+                        Date\Date::RSS, Date\Date::RFC_822,
+                        Date\Date::RFC_2822, Date\Date::DATES,
+                    );
+                    $date = new Date\Date;
+                    foreach ($dateStandards as $standard) {
+                        try {
+                            $date->set($dateModified, $standard);
+                            break;
+                        } catch (Date\Exception $e) {
+                            if ($standard == Date\Date::DATES) {
+                                throw new \Zend\Feed\Exception(
+                                    'Could not load date due to unrecognised'
+                                    .' format (should follow RFC 822 or 2822):'
+                                    . $e->getMessage(),
+                                    0, $e
+                                );
+                            }
                         }
                     }
                 }
@@ -297,8 +304,6 @@ class RSS extends Reader\AbstractEntry implements Reader\Entry
 
         if (!$description) {
             $description = null;
-        } else {
-            $description = html_entity_decode($description, ENT_QUOTES, $this->getEncoding());
         }
 
         $this->_data['description'] = $description;

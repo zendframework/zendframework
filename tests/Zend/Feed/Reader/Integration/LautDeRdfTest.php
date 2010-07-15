@@ -44,7 +44,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        $this->_feedSamplePath = dirname(__FILE__) . '/_files/laut.de-rdf.xml';
+        $this->_feedSamplePath = __DIR__ . '/_files/laut.de-rdf.xml';
         $this->_options = Date\Date::setOptions();
         foreach($this->_options as $k=>$v) {
             if (is_null($v)) {

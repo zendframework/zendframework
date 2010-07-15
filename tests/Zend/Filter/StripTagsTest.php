@@ -578,4 +578,44 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $filter($input));
     }
 
+    /**
+     * @group ZF-9434
+     */
+    public function testCommentWithTagInSameLine()
+    {
+        $input    = 'test <!-- testcomment --> test <div>div-content</div>';
+        $expected = 'test  test div-content';
+        $this->assertEquals($expected, $this->_filter->filter($input));
+    }
+
+    /**
+     * @group ZF-9833
+     */
+    public function testMultiParamArray()
+    {
+        $filter = new StripTagsFilter(array("a","b","hr"),array(),true);
+
+        $input    = 'test <a /> test <div>div-content</div>';
+        $expected = 'test <a /> test div-content';
+        $this->assertEquals($expected, $filter->filter($input));
+    }
+
+    /**
+     * @group ZF-9828
+     */
+    public function testMultiQuoteInput()
+    {
+        $filter = new StripTagsFilter(
+            array(
+                'allowTags' => 'img',
+                'allowAttribs' => array('width', 'height', 'src')
+            )
+        );
+
+        $input    = '<img width="10" height="10" src=\'wont_be_matched.jpg\'>';
+        $expected = '<img width="10" height="10" src=\'wont_be_matched.jpg\'>';
+        $this->assertEquals($expected, $filter->filter($input));
+    }
+}
+
 }

@@ -25,6 +25,8 @@
  */
 namespace Zend\LDAP\Node;
 
+use Zend\LDAP\Node;
+
 /**
  * Zend_LDAP_Node_ChildrenIterator provides an iterator to a collection of children nodes.
  *
@@ -32,7 +34,7 @@ namespace Zend\LDAP\Node;
  * @uses       Countable
  * @uses       Iterator
  * @uses       RecursiveIterator
- * @uses       \Zend\LDAP\Node\Node
+ * @uses       \Zend\LDAP\Node
  * @category   Zend
  * @package    Zend_LDAP
  * @subpackage Node
@@ -74,7 +76,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      * Return the current child.
      * Implements Iterator
      *
-     * @return \Zend\LDAP\Node\Node
+     * @return \Zend\LDAP\Node
      */
     public function current()
     {

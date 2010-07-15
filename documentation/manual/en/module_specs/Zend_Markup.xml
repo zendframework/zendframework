@@ -15,7 +15,7 @@
         <classname>Zend_Markup_Renderer_Abstract</classname>. The factory
         method accepts three arguments. The first one is the parser used to
         tokenize the text (e.g. BbCode). The second (optional) parameter is
-        the renderer to use, Html by default. Thirdly an array with options
+        the renderer to use, <acronym>HTML</acronym> by default. Thirdly an array with options
         to use for the renderer can be specified.
     </para>
 </sect1>

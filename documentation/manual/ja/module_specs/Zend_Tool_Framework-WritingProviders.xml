@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19568 -->
+<!-- EN-Revision: 21741 -->
 <sect1 id="zend.tool.framework.writing-providers">
     <title>Zend_Tool_Frameworkを利用してプロバイダを作成する</title>
 
@@ -12,11 +12,10 @@
     </para>
 
     <sect2 id="zend.tool.framework.writing-providers.loading">
-        <title>Zend Tool はどのようにプロバイダを見つけるか</title>
+        <title>Zend_Tool はどのようにプロバイダを見つけるか</title>
 
-        <!-- TODO: to be translated -->
         <para>
-            By default Zend Tool uses the IncludePathLoader to find all
+            By default <classname>Zend_Tool</classname> uses the IncludePathLoader to find all
             the providers that you can run. It recursivly iterates all
             include path directories and opens all files that end
             with "Manifest.php" or "Provider.php".  All classes in these
@@ -43,6 +42,7 @@
                     provider being accessible by the name "hello".
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     If your provider has a method <methodname>getName()</methodname>
@@ -50,6 +50,7 @@
                     the name.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     If your provider has "Provider" as prefix, e.g. it is called
@@ -60,16 +61,18 @@
         </itemizedlist>
 
         <note>
-            <para>The IncludePathLoader does not follow symlinks, that means
-            you cannot link provider functionality into your include paths,
-            they have to be physically present in the include paths.</para>
+            <para>
+                The IncludePathLoader does not follow symlinks, that means
+                you cannot link provider functionality into your include paths,
+                they have to be physically present in the include paths.
+            </para>
         </note>
 
         <example id="zend.tool.framework.writing-providers.loading.example">
             <title>Exposing Your Providers with a Manifest</title>
 
             <para>
-                You can expose your providers to Zend Tool by offering a manifest
+                You can expose your providers to <classname>Zend_Tool</classname> by offering a manifest
                 with a special filename ending with "Manifest.php".
                 A Provider Manifest is an implementation of the
                 <interface>Zend_Tool_Framework_Manifest_ProviderManifestable</interface>
@@ -135,10 +138,9 @@ Hello from my provider!
     <sect2 id="zend.tool.framework.writing-providers.response">
         <title>レスポンスオブジェクト</title>
 
-        <!-- TODO: to be translated -->
         <para>
-            As discussed in the architecture section Zend Tool allows to hook different clients for
-            using your Zend Tool providers. To keep compliant with different clients you should
+            As discussed in the architecture section <classname>Zend_Tool</classname> allows to hook different clients for
+            using your <classname>Zend_Tool</classname> providers. To keep compliant with different clients you should
             use the response object to return messages from your providers instead of using
             <methodname>echo()</methodname> or a similiar output mechanism. Rewritting our hello
             provider with this knowledge it looks like:
@@ -156,7 +158,6 @@ class My_Component_HelloProvider
 }
 ]]></programlisting>
 
-        <!-- TODO: to be translated -->
         <para>
             As you can see one has to extend the <classname>Zend_Tool_Framework_Provider_Abstract</classname>
             to gain access to the Registry which holds the <classname>Zend_Tool_Framework_Client_Response</classname>
@@ -212,7 +213,6 @@ class My_Component_HelloProvider
         </sect3>
 
         <sect3 id="zend.tool.framework.writing-providers.advanced.prompt">
-            <!-- TODO: to be translated -->
             <title>Prompt the User for Input</title>
 
             <para>
@@ -237,7 +237,6 @@ class My_Component_HelloProvider
 }
 ]]></programlisting>
 
-            <!-- TODO: to be translated -->
             <para>
                 This command throws an exception if the current client is not
                 able to handle interactive requests. In case of the default Console Client
@@ -297,7 +296,6 @@ I would say hello Ralph.
         <sect3 id="zend.tool.framework.writing-providers.advanced.verbosedebug">
             <title>冗長及びデバッグモード</title>
 
-            <!-- TODO: to be translated -->
             <para>
                 You can also run your provider actions in "verbose" or "debug" modes.
                 The semantics in regard to this actions have to be implemented by you
@@ -325,11 +323,10 @@ class My_Component_HelloProvider
         <sect3 id="zend.tool.framework.writing-providers.advanced.configstorage">
             <title>ユーザーの構成及びストレージにアクセス</title>
 
-            <!-- TODO: to be translated -->
             <para>
                 Using the Enviroment variable <property>ZF_CONFIG_FILE</property> or the
                 .zf.ini in your home directory you can inject configuration parameters into
-                any Zend Tool provider. Access to this configuration is available via the
+                any <classname>Zend_Tool</classname> provider. Access to this configuration is available via the
                 registry that is passed to your provider if you extend
                 <classname>Zend_Tool_Framework_Provider_Abstract</classname>.
             </para>
@@ -350,7 +347,6 @@ class My_Component_HelloProvider
 }
 ]]></programlisting>
 
-            <!-- TODO: to be translated -->
             <para>
                 The returned configuration is of the type
                 <classname>Zend_Tool_Framework_Client_Config</classname> but internally the
@@ -393,7 +389,6 @@ class Zend_Tool_Framework_Client_Storage
 }
 ]]></programlisting>
 
-            <!-- TODO: to be translated -->
             <important>
                 <para>
                     When designing your providers that are config or storage aware remember to

@@ -80,7 +80,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newColor->value, '#abcdef');
 
         /* try constructing using magic factory */
-        $cal = new \Zend\GData\Calendar\Calendar();
+        $cal = new \Zend\GData\Calendar();
         $newColor2 = $cal->newColor();
         $newColor2->transferFromXML($newColor->saveXML());
         $this->assertEquals(count($newColor2->extensionElements), 1);

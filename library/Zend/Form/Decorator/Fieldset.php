@@ -129,12 +129,12 @@ class Fieldset extends AbstractDecorator
             return $content;
         }
 
-        $legend        = $this->getLegend();
-        $attribs       = $this->getOptions();
-        $name          = $element->getFullyQualifiedName();
+        $legend  = $this->getLegend();
+        $attribs = $this->getOptions();
+        $name    = $element->getFullyQualifiedName();
+        $id      = (string)$element->getId();
 
-        $id = $element->getId();
-        if (!empty($id)) {
+        if (!array_key_exists('id', $attribs) && '' !== $id) {
             $attribs['id'] = 'fieldset-' . $id;
         }
 

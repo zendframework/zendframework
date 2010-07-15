@@ -1414,7 +1414,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('2002-02-14T04:31:30+05:00', $date->get(Date::W3C));
         $date->setTimeZone('UTC');
         $date->set(-20, Date::YEAR_8601, 'en_US');
-        $this->assertSame('-20-02-14T23:31:30+00:00', $date->get(Date::W3C));
+        $this->assertSame('-20-02-13T23:31:30+00:00', $date->get(Date::W3C));
         $date->set($d2, Date::YEAR_8601, 'en_US');
         $this->assertSame('2002-02-14T04:31:30+05:00', $date->get(Date::W3C));
         $date->setTimezone('Indian/Maldives');
@@ -1446,7 +1446,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('2002-02-14T04:31:30+05:00', $date->get(Date::W3C));
         $date->setTimeZone('UTC');
         $date->set(-20, Date::YEAR, 'en_US');
-        $this->assertSame('-20-02-14T23:31:30+00:00', $date->get(Date::W3C));
+        $this->assertSame('-20-02-13T23:31:30+00:00', $date->get(Date::W3C));
         $date->set($d2, Date::YEAR, 'en_US');
         $this->assertSame('2002-02-14T04:31:30+05:00', $date->get(Date::W3C));
         $date->setTimezone('Indian/Maldives');
@@ -1478,7 +1478,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('2002-02-14T04:31:30+05:00', $date->get(Date::W3C));
         $date->setTimeZone('UTC');
         $date->set(-20, Date::YEAR_SHORT, 'en_US');
-        $this->assertSame('-20-02-14T23:31:30+00:00', $date->get(Date::W3C));
+        $this->assertSame('-20-02-13T23:31:30+00:00', $date->get(Date::W3C));
         $date->set($d2, Date::YEAR_SHORT, 'en_US');
         $this->assertSame('2002-02-14T04:31:30+05:00', $date->get(Date::W3C));
         $date->setTimezone('Indian/Maldives');
@@ -1510,7 +1510,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('2002-02-14T04:31:30+05:00', $date->get(Date::W3C));
         $date->setTimeZone('UTC');
         $date->set(-20, Date::YEAR_SHORT_8601, 'en_US');
-        $this->assertSame('-20-02-14T23:31:30+00:00', $date->get(Date::W3C));
+        $this->assertSame('-20-02-13T23:31:30+00:00', $date->get(Date::W3C));
         $date->set($d2, Date::YEAR_SHORT_8601, 'en_US');
         $this->assertSame('2002-02-14T04:31:30+05:00', $date->get(Date::W3C));
         $date->setTimezone('Indian/Maldives');
@@ -4961,10 +4961,10 @@ class DateTest extends \PHPUnit_Framework_TestCase
 
             $info = $server->getInfo();
 
-            if ($info['offset'] != 0) {
+            if (($info['offset'] >= 1) || ($info['offset'] <= -1)) {
                 $this->assertFalse($date1->getTimestamp() == $date2->getTimestamp());
             } else {
-                $this->assertSame($date1->getTimestamp(), $date2->getTimestamp());
+                $this->assertEquals($date1->getTimestamp(), $date2->getTimestamp());
             }
         } catch (\ZendTimeSync\Exception $e) {
             $this->markTestIncomplete('NTP timeserver not available.');
@@ -5324,7 +5324,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     public function testZF3677()
     {
         $locale = new Locale('de_AT');
-        Registry::set('Locale', $locale);
+        Registry::set('Zend_Locale', $locale);
 
         $date   = new Date('13',null,$locale);
         $this->assertSame($date->getLocale(), $locale->toString());
@@ -5642,6 +5642,18 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $date2  = $date->getMonth();
         $result = $date2->toArray();
         $this->assertEquals(1970, $result['year']);
+    }
+
+    /**
+     * @ZF-9891
+     */
+    public function testComparingDatesWithoutOption()
+    {
+        $date  = new Date(strtotime('Sat, 07 Mar 2009 08:03:50 +0000'));
+        $date2 = new Date();
+        $date2->set('Sat, 07 Mar 2009 08:03:50 +0000', Date::RFC_2822);
+
+        $this->assertTrue($date2->equals($date));
     }
 }
 

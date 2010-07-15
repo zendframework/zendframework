@@ -184,6 +184,14 @@ class Loader
             return true;
         }
 
+        if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN'
+            && preg_match('/^[a-z]:/i', $filename)
+        ) {
+            // If on windows, and path provided is clearly an absolute path, 
+            // return false immediately
+            return false;
+        }
+
         foreach (self::explodeIncludePath() as $path) {
             if ($path == '.') {
                 if (is_readable($filename)) {

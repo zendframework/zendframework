@@ -54,6 +54,11 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
         \Zend\Dojo\Dojo::enableView($this->view);
     }
 
+    public function tearDown()
+    {
+        unset($this->view);
+    }
+
     public function testViewShouldBeNullByDefault()
     {
         $build = new BuildLayer();
@@ -308,7 +313,10 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
         $decodedProfile  = $this->decodeProfileJson($profile);
         $decodedExpected = $this->decodeProfileJson($expected);
 
-        $this->assertEquals($decodedExpected, $decodedProfile, "Expected:\n" . var_export($decodedExpected, 1) . "\nActual:\n" . var_export($decodedProfile, 1));
+        foreach ($decodedExpected as $key => $value) {
+            $this->assertArrayHasKey($key, $decodedProfile);
+            $this->assertEquals($value, $decodedProfile[$key], $key . ' is not same');
+        }
     }
 
     public function testGeneratedDojoBuildProfileWithLayerDependencies()
@@ -326,7 +334,10 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
         $decodedProfile  = $this->decodeProfileJson($profile);
         $decodedExpected = $this->decodeProfileJson($expected);
 
-        $this->assertEquals($decodedExpected, $decodedProfile, "Expected:\n" . var_export($decodedExpected, 1) . "\nActual:\n" . var_export($decodedProfile, 1));
+        foreach ($decodedExpected as $key => $value) {
+            $this->assertArrayHasKey($key, $decodedProfile);
+            $this->assertEquals($value, $decodedProfile[$key]);
+        }
     }
 
     protected function stripWhitespace($string)

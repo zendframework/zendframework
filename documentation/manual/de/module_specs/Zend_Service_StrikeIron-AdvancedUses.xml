@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
+<!-- EN-Revision: 21831 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron.advanced-uses">
     <title>Zend_Service_StrikeIron: Erweiterte Verwendung</title>
@@ -24,8 +24,9 @@
             Um ein StrikeIron Service zu probieren für das keine Wrapper Klasse vorhanden ist, muß
             die <code>wsdl</code> Option statt der <code>class</code> Option an
             <methodname>getService()</methodname> übergeben werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(
     array('username' => 'your-username', 'password' => 'your-password')
 );
@@ -40,7 +41,6 @@ echo $result->listingName;
 
 // Zend Technologies USA Inc
 ]]></programlisting>
-        </para>
 
         <para>
             Um StrikeIron Services durch WSDL zu verwenden wird zumindest ein Verständnis für WSDL
@@ -48,7 +48,8 @@ echo $result->listingName;
             Auch <ulink url="http://janschneider.de">Jan Schneider</ulink> vom
             <ulink url="http://horde.org">Horde Projekt</ulink> hat eine <ulink
                 url="http://janschneider.de/news/25/268">kleine <acronym>PHP</acronym>
-                Routine</ulink> geschrieben die eine WSDL Datei in lesbares HTML konvertiert.
+                Routine</ulink> geschrieben die eine WSDL Datei in lesbares <acronym>HTML</acronym>
+            konvertiert.
         </para>
 
         <para>
@@ -93,8 +94,9 @@ echo $result->listingName;
             und <ulink
                 url="http://www.php.net/manual/de/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></ulink>:
             aufzurufen:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron =
     new Zend_Service_StrikeIron(array('username' => 'your-username',
                                       'password' => 'your-password',
@@ -111,6 +113,5 @@ $soapClient = $taxBasic->getSoapClient();
 echo $soapClient->__getLastRequest();
 echo $soapClient->__getLastResponse();
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

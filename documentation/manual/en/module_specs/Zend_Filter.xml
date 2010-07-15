@@ -25,17 +25,17 @@
         <para>
             This basic definition of a filter may be extended to include
             generalized transformations upon input. A common transformation
-            applied in web applications is the escaping of HTML entities. For
+            applied in web applications is the escaping of <acronym>HTML</acronym> entities. For
             example, if a form field is automatically populated with untrusted
             input (e.g., from a web browser), this value should either be free
-            of HTML entities or contain only escaped HTML entities, in order to
-            prevent undesired behavior and security vulnerabilities. To meet
-            this requirement, HTML entities that appear in the input must
+            of <acronym>HTML</acronym> entities or contain only escaped <acronym>HTML</acronym>
+            entities, in order to prevent undesired behavior and security vulnerabilities. To meet
+            this requirement, <acronym>HTML</acronym> entities that appear in the input must
             either be removed or escaped. Of course, which approach is more
             appropriate depends on the situation. A filter that removes the
-            HTML entities operates within the scope of the first definition of
+            <acronym>HTML</acronym> entities operates within the scope of the first definition of
             filter - an operator that produces a subset of the input. A filter
-            that escapes the HTML entities, however, transforms the input
+            that escapes the <acronym>HTML</acronym> entities, however, transforms the input
             (e.g., "&amp;" is transformed to
             "&amp;amp;"). Supporting such use cases for web
             developers is important, and "to filter," in the context of using
@@ -58,14 +58,14 @@
             Following is a basic example of using a filter upon two input data,
             the ampersand (<emphasis>&amp;</emphasis>) and double quote
             (<emphasis>&quot;</emphasis>) characters:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
 echo $htmlEntities->filter('&'); // &amp;
 echo $htmlEntities->filter('"'); // &quot;
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.filter.introduction.static">
@@ -78,26 +78,26 @@ echo $htmlEntities->filter('"'); // &quot;
             The first argument of this method is a data input value, that you
             would pass to the <methodname>filter()</methodname> method. The second
             argument is a string, which corresponds to the basename of the
-            filter class, relative to the Zend_Filter namespace. The
+            filter class, relative to the <classname>Zend_Filter</classname> namespace. The
             <methodname>staticFilter()</methodname> method automatically loads the class, creates
             an instance, and applies the <methodname>filter()</methodname> method to the data
             input.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo Zend_Filter::filterStatic('&', 'HtmlEntities');
 ]]></programlisting>
-        </para>
 
         <para>
             You can also pass an array of constructor arguments, if they
             are needed for the filter class.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo Zend_Filter::filterStatic('"',
                                'HtmlEntities',
                                array('quotestyle' => ENT_QUOTES));
 ]]></programlisting>
-        </para>
 
         <para>
             The static usage can be convenient for invoking a filter ad hoc,
@@ -110,7 +110,7 @@ echo Zend_Filter::filterStatic('"',
         <para>
             Also, the <classname>Zend_Filter_Input</classname> class allows you to instantiate and
             run multiple filter and validator classes on demand to process
-            sets of input data. See <xref linkend="zend.filter.input" />.
+            sets of input data. See <link linkend="zend.filter.input">Zend_Filter_Input</link>.
         </para>
 
         <sect3 id="zend.filter.introduction.static.namespaces">

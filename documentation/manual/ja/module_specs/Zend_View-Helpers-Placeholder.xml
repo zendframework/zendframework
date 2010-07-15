@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 19433 -->
 <sect3 id="zend.view.helpers.initial.placeholder">
     <title>Placeholder ヘルパー</title>
 
     <para>
-        <code>Placeholder</code> ビューヘルパーは、
+        <classname>Placeholder</classname> ビューヘルパーは、
         ビュースクリプトとビューのインスタンスとの間でコンテンツを永続化させます。
         それ以外の便利な機能としては次のようなものがあります。
         たとえばコンテンツの集約、ビュースクリプトの内容をキャプチャして後で再利用、
@@ -18,7 +18,7 @@
 
         <para>
             プレースホルダの基本的な使用法は、ビューのデータを永続化させることです。
-            <code>Placeholder</code> ヘルパーを起動する際にプレースホルダ名を指定し、
+            <classname>Placeholder</classname> ヘルパーを起動する際にプレースホルダ名を指定し、
             ヘルパーはプレースホルダコンテナオブジェクトを返します。
             これを処理するなり、単純に echo するなりして使用できます。
         </para>
@@ -44,8 +44,8 @@
         </para>
 
         <para>
-            <code>Placeholder</code> ビューヘルパーは、
-            <code>ArrayObject</code> を継承したコンテナを使用します。
+            <classname>Placeholder</classname> ビューヘルパーは、
+             <classname>ArrayObject</classname> を継承したコンテナを使用します。
             これは、配列をより高機能に操作できるものです。
             さらに、コンテナに格納された内容をフォーマットするために
             さまざまなメソッドが用意されています。
@@ -104,8 +104,8 @@ $this->placeholder('foo')->setPrefix("<ul>\n    <li>")
 ]]></programlisting>
 
         <para>
-            <code>Placeholder</code> コンテナオブジェクトは
-            <code>ArrayObject</code> を継承しているので、
+            <classname>Placeholder</classname> コンテナオブジェクトは
+             <classname>ArrayObject</classname> を継承しているので、
             単純にコンテナに格納するのではなく
             そのコンテナの特定のキーにコンテンツを格納するのも簡単です。
             キーへのアクセスは、オブジェクトのプロパティか配列のキーのいずれでも可能です。
@@ -128,8 +128,8 @@ echo $foo['bar'];
         <para>
             時には、プレースホルダの中身を
             テンプレートに渡しやすいようビュースクリプトで保持することもあるでしょう。
-            <code>Placeholder</code> ビューヘルパーは、
-            任意のコンテンツをキャプチャして後でレンダリングすることができます。
+            <classname>Placeholder</classname> ビューヘルパーは、
+            任意のコンテンツをキャプチャして後でレンダリングできます。
             そのために使用する <acronym>API</acronym> は次のようなものです。
         </para>
 
@@ -142,7 +142,7 @@ echo $foo['bar'];
 
                 <para>
                     <varname>$type</varname> は、
-                    <code>Placeholder</code> の定数 <constant>APPEND</constant> あるいは
+                    <classname>Placeholder</classname> の定数 <constant>APPEND</constant> あるいは
                     <constant>SET</constant> のいずれかとなります。<constant>APPEND</constant>
                     を指定すると、キャプチャされたコンテンツが
                     プレースホルダ内の現在のコンテンツの末尾に追加されます。
@@ -155,7 +155,7 @@ echo $foo['bar'];
 
                 <para>
                     <varname>$key</varname> には、コンテンツのキャプチャ先として
-                    プレースホルダのコンテナの特定のキーを指定することができます。
+                    プレースホルダのコンテナの特定のキーを指定できます。
                 </para>
 
                 <para>

@@ -54,7 +54,7 @@ class RSSTest extends \PHPUnit_Framework_TestCase
             $registry = \Zend\Registry::getInstance();
             unset($registry['Zend_Locale']);
         }
-        $this->_feedSamplePath = dirname(__FILE__) . '/_files/Rss';
+        $this->_feedSamplePath = __DIR__ . '/_files/Rss';
         $this->_options = Date\Date::setOptions();
         foreach($this->_options as $k=>$v) {
             if (is_null($v)) {
@@ -1898,6 +1898,24 @@ class RSSTest extends \PHPUnit_Framework_TestCase
         $edate = new Date\Date;
         $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
         $this->assertTrue($edate->equals($entry->getDateModified()));
+    }
+
+    /**
+     * @group ZF-8702
+     */
+    public function testParsesCorrectDateIfMissingOffsetWhenSystemUsesUSLocale()
+    {
+        $locale = new \Zend\Locale\Locale('en_US');
+        \Zend\Registry::set('Zend_Locale', $locale);
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/datemodified/plain/rss20_en_US.xml')
+        );
+        $entry = $feed->current();
+        $fdate = $entry->getDateModified();
+        $edate = new Date\Date;
+        $edate->set('2010-01-04T08:14:00-0600', Date\Date::ISO_8601);
+        \Zend\Registry::getInstance()->offsetUnset('Zend_Locale');
+        $this->assertTrue($edate->equals($fdate), $edate->get(Date\Date::ISO_8601) . ' :: ' . $fdate->get(Date\Date::ISO_8601) . "\n");
     }
 
     // DC 1.0

@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 21816 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.locale.introduction">
+    <title>Wprowadzenie</title>
+
+    <para>
+        <classname>Zend_Locale</classname> to odpowiedź frameworka na pytanie: "Jak jedna aplikacja
+        może być używana na całym świecie?". Większość odpowie: "To proste. Wystarczy przetłumaczyć
+        wszystkie napisy na inne języki.". Jednak użycie prostych tabel mapujących frazy jednego
+        języka na drugi nie jest wystarczające. Różne regiony mogą mieć różne konwencje dotyczące
+        imion, nazwisk, zwrotów grzecznościowych, formatu liczb, dat, czasu, waluty itp.
+    </para>
+
+    <para>
+        Niezbędna jest
+        <ulink url="http://en.wikipedia.org/wiki/Internationalization_and_localization">Lokalizacja
+        i internacjonalizacja</ulink>. Zwroty te często są przedstawiane skrótowo jako odpowiednio
+        <emphasis>L10n</emphasis> oraz <emphasis>I18n</emphasis>. Internacjonalizacja zakłada
+        przystosowanie do użycia systemu niezależnie od specjalnych wymogów
+        charakterystycznych dla użytkowników
+        w zakresie języka, regionu, sposobu zapisu liczb, konwencji finansowych, dat i czasu.
+        Lokalizacja określa dodanie do systemu funkcjonalności obsługujących określone wymogi
+        dotyczące języka, konwencji dat, czasu, waluty, nazw, symboli, sortowania itp.
+        <code>L10n</code> i <code>I18n</code> uzupełniają się nawzajem. Zend Framework udostępnia
+        ich obsługę poprzez szereg komponentów. M. in.:
+        <classname>Zend_Locale</classname>, <classname>Zend_Date</classname>,
+        <classname>Zend_Measure</classname>, <classname>Zend_Translate</classname>,
+        <classname>Zend_Currency</classname>, and <classname>Zend_TimeSync</classname>.
+    </para>
+
+    <tip>
+        <title>Zend_Locale i setlocale()</title>
+
+        <para>
+            W <ulink url="http://php.net/setlocale">dokumentacji PHP</ulink> można przeczytać, że
+            funkcja <methodname>setlocale()</methodname> nie jest bezpieczna wątkowo (thread-safe)
+            ponieważ działa w zasięgu procesu a nie wątku. To oznacza, że w środowisku
+            wielowątkowym może dojść do sytuacji w której locale ulegnie zmianie pomimo braku
+            odwołań do funkcji <methodname>setlocale()</methodname> w skrypcie.
+            To, z kolei, może prowadzić do nieoczekiwanych rezultatów działania programu.
+        </para>
+
+        <para>
+            Podczas używania <classname>Zend_Locale</classname> takie ograniczenia nie występują
+            ponieważ klasa <classname>Zend_Locale</classname> jest całkowicie niezależna od funkcji
+            <acronym>PHP</acronym> <methodname>setlocale()</methodname>.
+        </para>
+    </tip>
+    
+    <sect2 id="zend.locale.whatislocalization">
+        <title>Co to jest lokalizacja</title>
+
+        <para>
+            Lokalizacja oznacza, że aplikacja (lub strona) może być używana przez różnych
+            użytkowników, którzy mówią w różnych językach. Jednak przetłumaczenie napisów
+            to tylko jedno z wielu zagadnień z tym związanych. W Zend Framework składają
+            się na nią:
+        </para>
+
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <classname>Zend_Locale</classname> - Główna klasa wspierająca locale dla
+                    pozostałych komponentów Zend Framework.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Translate</classname> - Tłumaczenie łańcuchów znaków.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Date</classname> - Lokalizacja dat, czasów.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Calendar</classname> - Lokalizacja kalendarzy (ze wsparciem
+                    dla systemów kalendarzy innych niż Gregoriański)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Currency</classname> - Lokalizacja walut.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Locale_Format</classname> - Przetwarzanie i generowanie
+                    zlokalizowanych liczb.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Locale_Data</classname> - Pozyskiwanie zlokalizowanej formy
+                    standardowych łańcuchów znaków - nazw państw, języków i
+                    <ulink url="http://unicode.org/cldr/">innych z <acronym>CLDR</acronym></ulink>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>TODO</code> - Lokalizacja porządków sortowania
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.locale.whatis">
+        <title>Czym jest locale</title>
+
+        <para>
+            Każdy użytkownik komputera używa locale, nawet wtedy gdy o tym nie myśli. Aplikacje
+            nie posiadające obsługujące wielu zestawów językowych przeważnie wspierają
+            jedno określone locale (locale autora). Kiedy klasa lub funkcja używają lokalizacji,
+            mówi się że jest świadoma locale. W jaki sposób kod "wie" jakiego locale użytkownik
+            się spodziewa?
+        </para>
+
+        <para>
+            Łańcuch znaków lub obiekt identyfikujący locale daje klasie
+            <classname>Zend_Locale</classname> i jej klasom pochodnym dostęp do informacji
+            dotyczących języka oraz regionu, których użytkownik się spodziewa.
+            Na podstawie tych informacji dokonywane jest poprawne formatowanie, normalizacja
+            oraz konwersje.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.locale.representation">
+        <title>Jak locale są reprezentowane</title>
+
+        <para>
+            Identyfikatory locale składają się z informacji dotyczących języka użytkownika oraz
+            preferowanego/podstawowego regionu geograficznego (np. stan, województwo, land).
+            Łańcuchy identyfikatorów locale używane w Zend Framework przestrzegają międzynarodowych
+            standardów dotyczących skrótów języków i regionów. Zapisane są jako
+            <code>język_REGION</code>. Obie części są utworzone z liter znaków wchodzących w skład
+            <acronym>ASCII</acronym>.
+        </para>
+
+        <note>
+            <para>
+                W przeciwieństwie do popularnego osądu istnieją identyfikatory locale składające
+                się z więcej niż 2 liter. Dodatkowo istnieją języki i regiony których skróty
+                również są zawarte w więcej niż 2 literach. Mając to na uwadze, należy wystrzegać
+                się własnoręcznego wydobywania oznaczenia języka czy regionu z pełnego\
+                identyfikatora locale. Zamiast tego należy skorzystać z
+                <classname>Zend_Locale</classname>. W przeciwnym przypadku efekty działania kodu
+                mogą okazać się niespodziewane.
+            </para>
+        </note>
+
+        <para>
+            Użytkownik z USA może spodziewać się języka angielskiego (<code>English</code>)
+            oraz regionu <constant>USA</constant>. Daje to identyfikator locale: "en_US".
+            Użytkownik w Niemczech będzie się spodziewał języka niemieckiego
+            (<code>Deutsch</code>) oraz regionu Niemcy (<code>Deutschland</code>) co da
+            locale "de_DE". Aby zasięgnąć szczegółowych informacji o konkretnym
+            identyfikatorze locale do użytku w Zend Framework należy zapoznać się z <ulink
+           url="http://unicode.org/cldr/data/diff/supplemental/languages_and_territories.html">listą
+            identyfikatorów locale</ulink>.
+        </para>
+
+        <example id="zend.locale.representation.example-1">
+            <title>Wybranie konkretnego locale</title>
+
+            <programlisting language="php"><![CDATA[
+$locale = new Zend_Locale('de_DE'); // Język niemiecki _ Niemcy
+]]></programlisting>
+        </example>
+
+        <para>
+            Użytkownik z Niemiec przebywający w Ameryce mógłby oczekiwać języka
+            <code>Deutsch</code> i regionu <constant>USA</constant> ale podobne niestandardowe
+            połączenia nie są wspierane w takim stopniu jak pełnoprawne locale. Jeśli podana
+            zostanie nieprawidłowa kombinacja to nastąpi automatyczne odrzucenie kodu regionu.
+            Dla przykładu, "de_IS" zostałoby ograniczone do "de" a "xh_RU" - do "xh" ponieważ
+            żadna z tych kombinacji nie jest poprawna. Dodatkowo, jeśli język podanej kombinacji
+            nie jest wspierany (np. "zz_US") lub nie istnieje to zostanie użyte domyślne locale
+            "root", które ma domyślny zestaw definicji międzynarodowych oznaczeń dat, czasów,
+            liczb, walut itp. Proces odrzucania kodu regionu zależy również od żądanych informacji.
+            Niektóre kombinacje języków i regionów mogą być odpowiednie dla określonego
+            rodzaju danych (np. dat) ale nie dla innych (np. format waluty).
+        </para>
+
+        <para>
+            Należy mieć na uwadze zmiany historyczne ponieważ komponenty Zend Framework mogą nie
+            być "świadome" częstych zmian stref czasowych na przestrzeni lat w wielu regionach.
+            Przykładowo, <ulink url="http://www.statoids.com/tus.html"> pod tym linkiem widać
+            historyczną listę szeregu zmian</ulink> jakich dokonywały rządy w stosunku do
+            występowania tzw. czasu letniego a nawet obowiązującej strefy czasowej. Przez to,
+            podczas obliczeń na datach, komponenty Zend Framework nie będą brały tych zmian pod
+            uwagę. Zamiast tego zwrócony zostanie rezultat wynikający z użycia strefy czasowej
+            wg. obecnych zasad dotyczących czasu letniego i strefy czasowej konkretnego regionu.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.locale.selection">
+        <title>Wybranie odpowiedniego locale</title>
+
+        <para>
+            W większości przypadków <code>new Zend_Locale()</code> automatycznie wybierze poprawne
+            locale zachowując uprzywilejowanie w stosunku do danych udostępnionych przez
+            przeglądarkę użytkownika. W przypadku użycia
+            <code>new Zend_Locale(Zend_Locale::ENVIRONMENT)</code> pierwszym źródłem informacji
+            o locale stanie się konfiguracja serwera hostingowego tak jak opisano niżej.
+        </para>
+
+        <example id="zend.locale.selection.example-1">
+            <title>Automatyczny wybór locale</title>
+
+            <programlisting language="php"><![CDATA[
+$locale  = new Zend_Locale();
+
+// domyślne zachowanie, tak samo jak wyżej
+$locale1 = new Zend_Locale(Zend_Locale::BROWSER);
+
+// preferencja ustawień serwera
+$locale2 = new Zend_Locale(Zend_Locale::ENVIRONMENT);
+
+// perferencja ustawień frameworka
+$locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
+]]></programlisting>
+        </example>
+
+        <para>
+            Algorytm automatycznego szukania locale używany przez <classname>Zend_Locale</classname>
+            używa trzech źródeł danych:
+
+            <orderedlist>
+                <listitem>
+                    <para>
+                        const <constant>Zend_Locale::BROWSER</constant> - Przeglądarka użytkownika
+                        przy każdym żądaniu, dostarcza informacji, które przekładane są na zmienną
+                        globalną <acronym>PHP</acronym> o nazwie
+                        <varname>$_SERVER['HTTP_ACCEPT_LANGUAGE']</varname>.
+                        Jeśli brak jest odpowiedniego locale to następnym źródłem branym pod
+                        uwagę jest <constant>ENVIRONMENT</constant> i w ostateczności
+                        <constant>FRAMEWORK</constant>.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        const <constant>Zend_Locale::ENVIRONMENT</constant> - <acronym>PHP</acronym>
+                        udostępnia locale serwera hostingowego poprzez wewnętrzną funkcję
+                        <methodname>setlocale()</methodname>. Jeśli brak jest odpowiedniego locale
+                        to kolejnym źródłem branym pod uwagę staje się
+                        <constant>FRAMEWORK</constant> i w ostateczności
+                        <constant>BROWSER</constant>.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        const <constant>Zend_Locale::FRAMEWORK</constant> - W momencie, w którym
+                        Zend Framework będzie miał wystandaryzowany sposób określania
+                        domyślnych wartości komponentów (cecha jeszcze niedostępna) wtedy użycie
+                        tej stałej spowoduje wybranie locale na podstawie tych domyślnych wartości.
+                        W przypadku braku odpowiedniego locale kolejnym źródłem branym pod uwagę
+                        będzie <constant>ENVIRONMENT</constant> i na końcu
+                        <constant>BROWSER</constant>.
+                    </para>
+                </listitem>
+            </orderedlist>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.locale.selection.automatic">
+        <title>Użycie automatycznego locale</title>
+
+        <para>
+            <classname>Zend_Locale</classname> oferuje trzy dodatkowe locale. Nie należą one
+            do żadnego języka ani regionu. Są to locale "automatyczne" co oznacza, że działają
+            na podobnej zasadzie co metoda <methodname>getDefault()</methodname> ale bez potrzeby
+            tworzenia instancji. Locale "automatyczne" mogą być użyte w każdym momencie, w którym
+            możliwe byłoby zdefiniowanie locale w standardowy sposób. Dzięki temu można ich używać
+            w łatwy sposób np. w sytuacji pracy z locale udostępnianym przez przeglądarkę.
+        </para>
+
+        <para>
+            Istnieją trzy rodzaje takich locale, których zachowanie nie jest standardowe:
+            <orderedlist>
+                <listitem>
+                    <para>
+                        <code>'browser'</code> - klasa <classname>Zend_Locale</classname> powinna
+                        użyć informacji dostarczanych przez przeglądarkę użytkownika. Te dane są
+                        udostępniane przez <acronym>PHP</acronym> w globalnej zmiennej
+                        <varname>$_SERVER['HTTP_ACCEPT_LANGUAGE']</varname>.
+                    </para>
+
+                    <para>
+                        Jeśli przeglądarka użytkownika informuje o więcej niż jednym locale
+                        <classname>Zend_Locale</classname> użyje pierwszego z listy. W przypadku
+                        nie podania żadnego locale przez przeglądarkę (lub gdy skrypt jest
+                        uruchomiony z linii poleceń) zostanie użyte "automatyczne" locale
+                        <code>'environment'</code>.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>'environment'</code> - klasa <classname>Zend_Locale</classname>
+                        powinna brać pod uwagę informacje przekazane przez serwer hostingowy.
+                        Są one udostępnione przez <acronym>PHP</acronym> poprzez wewnętrzną funkcję
+                        <methodname>setlocale()</methodname>.
+                    </para>
+
+                    <para>
+                        Jeśli środowisko serwera informuje o więcej niż jednym locale
+                        <classname>Zend_Locale</classname> użyje pierwszego z listy. W przypadku
+                        nie podania żadnego locale zostanie użyte "automatyczne" locale
+                        <code>'browser'</code>.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>'auto'</code> - klasa <classname>Zend_Locale</classname> powinna
+                        automatycznie wykryć locale, które nadaje się do użycia. W pierwszej
+                        kolejności będzie próbować znaleźć locale użytkownika, w przypadku
+                        niepowodzenia pod uwagę brane będzie środowisko serwera hostingowego.
+                    </para>
+
+                    <para>
+                        Jeśli nie uda się wykryć locale, klasa rzuci wyjątek i powiadomi o
+                        niepowodzeniu.
+                    </para>
+                </listitem>
+            </orderedlist>
+        </para>
+
+        <example id="zend.locale.selection.automatic.example-1">
+            <title>Użycie automatycznego locale</title>
+
+            <programlisting language="php"><![CDATA[
+// bez automatycznej detekcji
+//$locale = new Zend_Locale(Zend_Locale::BROWSER);
+//$date = new Zend_Date($locale);
+
+// z automatyczną detekcją
+$date = new Zend_Date('auto');
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.locale.defaultlocale">
+        <title>Użycie domyślnego locale</title>
+
+        <para>
+            W niektórych środowiskach automatyczna detekcja locale nie jest możliwa. Można się tego
+            spodziewać w przypadku uruchomienia skryptu z linii poleceń lub gdy przeglądarka
+            użytkownika nie ma zdefiniowanego języka a domyślnym locale serwera hostingowego
+            jest 'C' lub inne niestandardowe locale.
+        </para>
+
+        <para>
+            W takim przypadku <classname>Zend_Locale</classname> rzuci wyjątek z informacją o
+            niepowodzeniu w automatycznym wykryciu locale. Istnieją dwa wyjścia z tej sytuacji.
+            Pierwszym jest ręczne ustawienie nowego locale, drugim - zdefiniowanie domyślnego
+            locale.
+        </para>
+
+        <example id="zend.locale.defaultlocale.example-1">
+            <title>Obsługa wyjątków locale</title>
+
+            <programlisting language="php"><![CDATA[
+// w pliku bootstrap
+try {
+    $locale = new Zend_Locale('auto');
+} catch (Zend_Locale_Exception $e) {
+    $locale = new Zend_Locale('de');
+}
+
+// w modelu/kontrolerze
+$date = new Zend_Date($locale);
+]]></programlisting>
+        </example>
+
+        <para>
+            To podejście ma jedną wadę. Wymusza ustawienie obiektu locale poprzez
+            <classname>Zend_Locale</classname> w każdej klasie. W przypadku używania wielu klas
+            może to stanowić duży problem.
+        </para>
+
+        <para>
+            Od Zend Framework 1.5 istnieje o wiele lepszy sposób na obsługę takiej sytuacji.
+            Można ustawić domyślne locale za pomocą statycznej metody
+            <methodname>setDefault()</methodname>. Oczywiście każde nieznane lub źle sformułowane
+            locale również spowoduje rzucenie wyjątku. <methodname>setDefault()</methodname>
+            powinna być wywołana przed uruchomieniem dowolnej klasy używającej
+            <classname>Zend_Locale</classname>. Tak jak w poniższym przykładzie:
+        </para>
+
+        <example id="zend.locale.defaultlocale.example-2">
+            <title>Ustawienie domyślnego locale</title>
+
+            <programlisting language="php"><![CDATA[
+// w pliku bootstrap
+Zend_Locale::setDefault('de');
+
+// w modelu/kontrolerze
+$date = new Zend_Date();
+]]></programlisting>
+        </example>
+
+        <para>
+            W przypadku niepowodzenia automatycznego wykrycia locale użyte zostanie locale
+            <emphasis>de</emphasis>. W przeciwnym przypadku - klasa użyje wykrytego locale.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.locale.interoperate">
+        <title>Klasy ZF "świadome" locale</title>
+
+        <para>
+            Klasy, które są "świadome" locale w Zend Framework polegają na
+            <classname>Zend_Locale</classname> w kwestii automatycznego wybrania locale na
+            zasadach opisanych wcześniej. Np. w aplikacji webowej Zend Framework, utworzenie
+            obiektu klasy <classname>Zend_Date</classname> bez podania locale spowoduje, że
+            powstały obiekt będzie miał locale ustawione na podstawie przeglądarki użytkownika.
+        </para>
+
+        <example id="zend.locale.interoperate.example-1">
+            <title>Format daty domyślnie dostosowuje się do przeglądarki</title>
+
+            <programlisting language="php"><![CDATA[
+$date = new Zend_Date('2006',Zend_Date::YEAR);
+]]></programlisting>
+        </example>
+
+        <para>
+            Aby zmienić domyślne zachowanie i zmusić komponenty Zend Framework "świadome" locale
+            do użytku określonego locale (obojętnie od ustawień przeglądarki użytkownika) należy
+            podać nazwę locale w trzecim argumencie konstruktora.
+        </para>
+
+        <example id="zend.locale.interoperate.example-2">
+            <title>Zmiana domyślnego wykrywania locale</title>
+
+            <programlisting language="php"><![CDATA[
+$usLocale = new Zend_Locale('en_US');
+$date = new Zend_Date('2006', Zend_Date::YEAR, $usLocale);
+$temp = new Zend_Measure_Temperature('100,10',
+                                     Zend_Measure::TEMPERATURE,
+                                     $usLocale);
+]]></programlisting>
+        </example>
+
+        <para>
+            Jeśli jest wiadomo, że wiele obiektów powinno użyć określonego locale to należy się
+            upewnić, że będą miały to locale określone. Dzięki temu można uniknąć dodatkowego
+            czasu pracy skryptu wynikającego z wyszukiwania odpowiedniego locale.
+        </para>
+
+        <example id="zend.locale.interoperate.example-3">
+            <title>Optymalizacja wydajności dzięki określeniu locale</title>
+
+            <programlisting language="php"><![CDATA[
+$locale = new Zend_Locale();
+$date = new Zend_Date('2006', Zend_Date::YEAR, $locale);
+$temp = new Zend_Measure_Temperature('100,10',
+                                     Zend_Measure::TEMPERATURE,
+                                     $locale);
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.locale.frameworkwidelocale">
+        <title>Locale obowiązujące w całej aplikacji</title>
+
+        <para>
+            Zend Framework umożliwia zdefiniowanie locale obowiązującego w całej aplikacji.
+            Polega to na wywołaniu obiektu klasy <classname>Zend_Locale</classname> i umieszczeniu
+            go w rejestrze z kluczem 'Zend_Locale'. Dzięki temu ta instancja będzie używana we
+            wszystkich klasach "świadomych" locale Zend Framework. Ten sposób umożliwia
+            ustawienie locale w rejestrze i uwolnienie się od potrzeby zwracania uwagi na to
+            zagadnienie. Ustawione locale zostanie automatycznie użyte we wszystkich przypadkach.
+            Przykładowe użycie znajduje się w poniższym przykładzie:
+        </para>
+
+        <example id="zend.locale.frameworkwidelocale.example">
+            <title>Użycie locale obowiązującego w całej aplikacji</title>
+
+            <programlisting language="php"><![CDATA[
+// w pliku bootstrap
+$locale = new Zend_Locale('de_AT');
+Zend_Registry::set('Zend_Locale', $locale);
+
+// w modelu lub kontrolerze
+$date = new Zend_Date();
+// print $date->getLocale();
+echo $date->getDate();
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.locale.formatoptions">
+        <title>Zend_Locale_Format::setOptions(array $options)</title>
+
+        <para>
+            Opcja 'precision' służy do obcięcia lub wydłużenia liczby. Wartość '-1' wyłącza
+            możliwość modyfikacji ilości liczb po przecinku. Opcja 'locale' jest pomocna podczas
+            przetwarzania liczb i dat z użyciem separatorów oraz nazw miesięcy.
+            Opcja formatów dat 'format_type' umożliwia wybór pomiędzy standardem
+            <acronym>CLDR</acronym>/ISO oraz wyrażeniami funkcji <acronym>PHP</acronym> date().
+            Opcja 'fix_date' umożliwia podanie formatu liczb do użytku z metodą
+            <methodname>toNumber()</methodname> (więcej informacji znajduje się w rozdziale
+            <xref linkend= "zend.locale.number.localize"/>).
+        </para>
+
+        <para>
+            Opcja 'date_format' może być użyta do określenia domyślnego formatu daty ale należy
+            zachować ostrożność przy używaniu <methodname>getDate()</methodname>,
+            <methodname>checkdateFormat()</methodname> and <methodname>getTime()</methodname>.
+            Aby ich pomyślnie używać należy umieścić w ich opcjach następującą tablicę:
+            array('date_format' => null, 'locale' => $locale).
+        </para>
+
+        <example id="zend.locale.formatoptions.example-1">
+            <title>Daty przyjmują domyślny format przeglądarki</title>
+
+            <programlisting language="php"><![CDATA[
+Zend_Locale_Format::setOptions(array('locale' => 'en_US',
+                                     'fix_date' => true,
+                                     'format_type' => 'php'));
+]]></programlisting>
+        </example>
+
+        <para>
+            Aby uzyskać standardowe definicje locale można użyć stałej
+            <constant>Zend_Locale_Format::STANDARD</constant>. Ustawienie w opcji
+            <code>date_format</code> na <constant>Zend_Locale_Format::STANDARD</constant> spowoduje
+            użycie standardowej definicji formatu zawartej w bieżącym locale. Umieszczenie tej
+            stałej w opcji <code>number_format</code> spowoduje użycie standardowego
+            formatu liczb z bieżącego locale. Ustawienie stałej w opcji <code>locale</code>
+            spowoduje użycie standardowego locale dla środowiska bądź przeglądarki.
+        </para>
+
+        <example id="zend.locale.formatoptions.example-2">
+            <title>Użycie standardowych definicji w metodzie setOptions()</title>
+
+            <programlisting language="php"><![CDATA[
+Zend_Locale_Format::setOptions(array('locale' => 'en_US',
+                                     'date_format' => 'dd.MMMM.YYYY'));
+// nadpisanie globalnego formatu daty
+$date = Zend_Locale_Format::getDate('2007-04-20',
+                                    array('date_format' =>
+                                              Zend_Locale_Format::STANDARD);
+
+// globalne ustawienie standardowego locale
+Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
+                                     'date_format' => 'dd.MMMM.YYYY'));
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.locale.cache">
+        <title>Przyspieszenie Zend_Locale i jej klas pochodnych</title>
+
+        <para>
+            Można przyspieszyć działanie klasy <classname>Zend_Locale</classname> i jej klas
+            pochodnych poprzez użycie <classname>Zend_Cache</classname>. W przypadku używania
+            <classname>Zend_Locale</classname> osiągnąć to można za pomocą statycznej
+            metody <methodname>Zend_Locale::setCache($cache)</methodname>.
+            Klasę <classname>Zend_Locale_Format</classname> można przyspieszyć używając opcji
+            <code>cache</code> w
+            <classname>Zend_Locale_Format::setOptions(array('cache' => $adapter));</classname>.
+            Jeśli używane są obie klasy należy ustawić cache jedynie dla
+            <classname>Zend_Locale</classname>. W przeciwnym przypadku ostatni ustawiony cache
+            nadpisze wcześniejszy. Dla ułatwienia istnieją również statyczne metody
+            <methodname>getCache()</methodname>, <methodname>hasCache()</methodname>,
+            <methodname>clearCache()</methodname> oraz <methodname>removeCache()</methodname>.
+        </para>
+
+        <para>
+            Jeśli deweloper nie ustawi własnoręcznie cache'u <classname>Zend_Locale</classname>
+            automatycznie zrobi to za niego. W niektórych sytuacjach może zajść potrzeba rezygnacji
+            z użycia cache'u, nawet za cenę wydajności. Wtedy należy użyć statycznej metody
+            <methodname>disableCache(true)</methodname>. Oprócz wyłączenia ewentualnego wcześniej
+            ustawionego cache'u (bez usuwania jego zawartości) metoda ta zapobiega generowaniu
+            cache'u (jeśli nie był wcześniej ustawiony).
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

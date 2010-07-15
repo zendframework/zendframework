@@ -51,6 +51,15 @@
 
             <listitem>
                 <para>
+                    <methodname>setUseNumbers($numbers)</methodname> and
+                    <methodname>getUseNumbers()</methodname> allow you to specify if numbers will be
+                    considered as possible characters for the random work or only letters would be
+                    used.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
                     <methodname>setSessionClass($class)</methodname> and
                     <methodname>getSessionClass()</methodname> allow you to specify an
                     alternate <classname>Zend_Session_Namespace</classname> implementation to
@@ -231,6 +240,19 @@
                     for the <acronym>CAPTCHA</acronym> image. The default is
                     "<filename>.png</filename>". Note: changing this value will not change the type
                     of the generated image.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setDotNoiseLevel($level)</methodname> and
+                    <methodname>getDotNoiseLevel()</methodname>, along with
+                    <methodname>setLineNoiseLevel($level)</methodname> and
+                    <methodname>getLineNoiseLevel()</methodname>,
+                    allow you to control how much "noise" in the form of random dots and lines the
+                    image would contain. Each unit of <varname>$level</varname> produces one random
+                    dot or line. The default is 100 dots and 5 lines. The noise is added twice -
+                    before and after the image distortion transformation.
                 </para>
             </listitem>
         </itemizedlist>

@@ -207,7 +207,7 @@ class URL implements URI
         }
 
         // Check the host against the allowed values; delegated to Zend_Filter.
-        $validate = new Hostname\Hostname(Hostname\Hostname::ALLOW_ALL);
+        $validate = new Hostname(Hostname::ALLOW_ALL);
 
         return $validate->isValid($host);
     }

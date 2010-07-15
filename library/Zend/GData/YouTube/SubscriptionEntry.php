@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\GData\YouTube;
-use Zend\GData\App;
+
+use Zend\GData\YouTube,
+    Zend\GData\App;
 
 /**
  * Represents the YouTube video subscription flavor of an Atom entry
@@ -33,7 +35,7 @@ use Zend\GData\App;
  * @uses       \Zend\GData\Entry
  * @uses       \Zend\GData\Extension\FeedLink
  * @uses       \Zend\GData\Media\Extension\MediaThumbnail
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @uses       \Zend\GData\YouTube\Extension\CountHint
  * @uses       \Zend\GData\YouTube\Extension\Description
  * @uses       \Zend\GData\YouTube\Extension\PlaylistId
@@ -49,7 +51,7 @@ use Zend\GData\App;
 class SubscriptionEntry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\YouTube\SubscriptionEntry';
+    protected $_entryClassName = 'Zend\GData\YouTube\SubscriptionEntry';
 
     /**
      * Nested feed links

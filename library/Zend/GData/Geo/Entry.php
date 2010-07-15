@@ -25,11 +25,13 @@
  */
 namespace Zend\GData\Geo;
 
+use Zend\GData\Geo;
+
 /**
  * An Atom entry containing Geograpic data.
  *
  * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Geo\Geo
+ * @uses       \Zend\GData\Geo
  * @uses       \Zend\GData\Geo\Extension\GeoRssWhere
  * @category   Zend
  * @package    Zend_Gdata
@@ -40,7 +42,7 @@ namespace Zend\GData\Geo;
 class Entry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\Geo\Entry';
+    protected $_entryClassName = 'Zend\GData\Geo\Entry';
 
     protected $_where = null;
 

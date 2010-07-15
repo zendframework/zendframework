@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16476 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.console.getopt.rules">
     <title>Getopt の規則の宣言</title>
     <para>
@@ -117,7 +117,7 @@ $opts = new Zend_Console_Getopt(
             <command>--banana</command> および <command>-b</command> は同じ意味を持つエイリアスで、
             このオプションには整数値のパラメータが必須となります。
             最後に <command>--pear</command> および <command>-p</command> は同じ意味を持つエイリアスで、
-            このオプションには任意で文字列のパラメータを指定することができます。
+            このオプションには任意で文字列のパラメータを指定できます。
         </para>
     </sect2>
 

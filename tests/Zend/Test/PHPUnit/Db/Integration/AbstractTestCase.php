@@ -69,7 +69,7 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
         $dataSet->addTable($fooTable);
 
         $xmlDataSet = new \PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(
-            dirname(__FILE__)."/_files/sqliteIntegrationFixture.xml"
+            __DIR__."/_files/sqliteIntegrationFixture.xml"
         );
         $this->assertTrue($xmlDataSet->assertEquals($dataSet));
     }
@@ -85,7 +85,7 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
     public function testSimpleTesterSetupAndRowsetEquals()
     {
         $dataSet = new \PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(
-            dirname(__FILE__)."/_files/sqliteIntegrationFixture.xml"
+            __DIR__."/_files/sqliteIntegrationFixture.xml"
         );
         $fooDataTable = $dataSet->getTable("foo");
 

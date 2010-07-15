@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20810 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.autodiscovery">
     <title>AutoDiscovery</title>
@@ -101,8 +101,9 @@
             Hier ist ein Beispiel einer üblichen Verwendung der Autodiscovery Funktionalität. Die
             Funktion <methodname>handle()</methodname> erzeugt die WSDL Datei und postet Sie an den
             Browser.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_SoapServer_Class {
 ...
 }
@@ -111,7 +112,6 @@ $autodiscover = new Zend_Soap_AutoDiscover();
 $autodiscover->setClass('My_SoapServer_Class');
 $autodiscover->handle();
 ]]></programlisting>
-        </para>
 
         <para>
             Wenn man auf die erzeugte WSDL Datei zugreifen muß um Sie in eine Datei oder als
@@ -139,8 +139,7 @@ $autodiscover->handle();
                 auf die Anfragen hört.
             </para>
 
-            <para>
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if(isset($_GET['wsdl'])) {
     $autodiscover = new Zend_Soap_AutoDiscover();
     $autodiscover->setClass('HelloWorldService');
@@ -152,7 +151,6 @@ if(isset($_GET['wsdl'])) {
     $soap->handle();
 }
 ]]></programlisting>
-            </para>
         </note>
     </sect2>
 
@@ -163,12 +161,13 @@ if(isset($_GET['wsdl'])) {
             Wenn eine Klasse verwendet wird um SOAP Server Funktionalitäten anzubieten, dann sollte
             die selbe Klasse an <classname>Zend_Soap_AutoDiscover</classname> für die WSDL Erzeugung
             übergeben werden:
-            <programlisting language="php"><![CDATA[
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $autodiscover = new Zend_Soap_AutoDiscover();
 $autodiscover->setClass('My_SoapServer_Class');
 $autodiscover->handle();
 ]]></programlisting>
-        </para>
 
         <para>
             Die folgenden Regeln werden wärend der WSDL Erzeugung verwendet:
@@ -254,8 +253,9 @@ $autodiscover->handle();
             Wenn ein Set von Funktionen verwendet wird um SOAP Server Funktionalität anzubieten,
             dann sollte das selbe Set mit <classname>Zend_Soap_AutoDiscovery</classname> für die
             WSDL Erzeugung verwendet werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $autodiscover = new Zend_Soap_AutoDiscover();
 $autodiscover->addFunction('function1');
 $autodiscover->addFunction('function2');
@@ -263,7 +263,6 @@ $autodiscover->addFunction('function3');
 ...
 $autodiscover->handle();
 ]]></programlisting>
-        </para>
 
         <para>
             Die folgenden Regeln werden wärend der WSDL Erzeugung verwendet:
@@ -419,8 +418,7 @@ $autodiscover->handle();
             ausführt.
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $autodiscover = new Zend_Soap_AutoDiscover();
 // Standard ist 'use' => 'encoded' und
 // 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'
@@ -439,6 +437,5 @@ $autodiscover->setBindingStyle(
 $autodiscover->addFunction('myfunc1');
 $autodiscover->handle();
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

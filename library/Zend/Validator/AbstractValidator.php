@@ -226,10 +226,10 @@ abstract class AbstractValidator implements Validator
         $message = $this->_messageTemplates[$messageKey];
 
         if (null !== ($translator = $this->getTranslator())) {
-            if ($translator->isTranslated($message)) {
-                $message = $translator->translate($message);
-            } elseif ($translator->isTranslated($messageKey)) {
+            if ($translator->isTranslated($messageKey)) {
                 $message = $translator->translate($messageKey);
+            } else {
+                $message = $translator->translate($message);
             }
         }
 
@@ -362,6 +362,16 @@ abstract class AbstractValidator implements Validator
     }
 
     /**
+     * Does this validator have its own specific translator?
+     *
+     * @return bool
+     */
+    public function hasTranslator()
+    {
+        return (bool)$this->_translator;
+    }
+
+    /**
      * Set default translation object for all validate objects
      *
      * @param  Zend_Translate|\Zend\Translate\Adapter|null $translator
@@ -371,7 +381,7 @@ abstract class AbstractValidator implements Validator
     {
         if ((null === $translator) || ($translator instanceof Translator\Adapter)) {
             self::$_defaultTranslator = $translator;
-        } elseif ($translator instanceof Translate\Translator) {
+        } elseif ($translator instanceof Translator\Translator) {
             self::$_defaultTranslator = $translator->getAdapter();
         } else {
             throw new Exception('Invalid translator specified');
@@ -397,6 +407,16 @@ abstract class AbstractValidator implements Validator
         }
 
         return self::$_defaultTranslator;
+    }
+
+    /**
+     * Is there a default translation object set?
+     *
+     * @return boolean
+     */
+    public static function hasDefaultTranslator()
+    {
+        return (bool)self::$_defaultTranslator;
     }
 
     /**

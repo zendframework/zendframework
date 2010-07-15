@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21606 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.consuming-atom">
     <title>Einen Atom Feed konsumieren</title>
@@ -11,16 +11,17 @@
         Hauptunterschied ist die Struktur des Atom Protokolls selber. Atom ist ein Nachfolger von
         <acronym>RSS</acronym>; es ist ein mehr verallgemeinertes Protokoll und es wurde gestaltet,
         um einfacher mit Feeds umzugehen, die ihren kompletten Inhalt innerhalb des Feeds bereit
-        stellen, indem für diesen Zweck der <code>description</code> Tag von <acronym>RSS</acronym>
-        in die zwei Elemente <code>summary</code> und <code>content</code> aufgeteilt wird.
+        stellen, indem für diesen Zweck der <property>description</property> Tag von
+        <acronym>RSS</acronym> in die zwei Elemente <property>summary</property> und
+        <property>content</property> aufgeteilt wird.
     </para>
 
     <example id="zend.feed.consuming-atom.example.usage">
         <title>Grundlegende Verwendung eines Atom Feeds</title>
 
         <para>
-            Lese einen Atom Feed und gebe <code>title</code> und <code>summary</code> jedes
-            Eintrages aus:
+            Lese einen Atom Feed und gebe <property>title</property> und
+            <property>summary</property> jedes Eintrages aus:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -37,105 +38,106 @@ foreach ($feed as $entry) {
         In einem Atom Feed kannst du die folgenden Feed-Eigenschaften erwarten:
     </para>
 
-    <para>
-        <itemizedlist>
-            <listitem>
-                <para>
-                    <code>title</code> - Die Überschrift des Feeds, gleichbedeutend mit der
-                    Überschrift eines <acronym>RSS</acronym> Channels
-                </para>
-            </listitem>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <property>title</property> - Die Überschrift des Feeds, gleichbedeutend mit der
+                Überschrift eines <acronym>RSS</acronym> Channels
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <code>id</code> - Jeder Feed und Eintrag hat in Atom einen einzigartige
-                    Bezeichner
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>id</property> - Jeder Feed und Eintrag hat in Atom einen einzigartige
+                Bezeichner
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <code>link</code> - Feeds können mehrere Links enthalten, welche durch ein
-                    <code>type</code> Attribut ausgezeichnet werden
-                </para>
+        <listitem>
+            <para>
+                <property>link</property> - Feeds können mehrere Links enthalten, welche durch
+                ein <property>type</property> Attribut ausgezeichnet werden
+            </para>
 
-                <para>
-                    In einem <acronym>RSS</acronym> Channel wäre dies gleichbedeutend mit
-                    <code>type="text/html"</code>. Wenn der Link auf eine alternative Version des
-                    selben Inhalts verweist, der nicht im Feed enthalten ist, würde es ein
-                    <code>rel="alternate"</code> Attribut enthalten.
-                </para>
-            </listitem>
+            <para>
+                In einem <acronym>RSS</acronym> Channel wäre dies gleichbedeutend mit
+                <command>type="text/html"</command>. Wenn der Link auf eine alternative Version
+                des selben Inhalts verweist, der nicht im Feed enthalten ist, würde es ein
+                <command>rel="alternate"</command> Attribut enthalten.
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <code>subtitle</code> - Die Beschreibung des Feeds, gleichbedeutend mit der
-                    Beschreibung eines <acronym>RSS</acronym> Channels
-                </para>
+        <listitem>
+            <para>
+                <property>subtitle</property> - Die Beschreibung des Feeds, gleichbedeutend mit
+                der Beschreibung eines <acronym>RSS</acronym> Channels
+            </para>
 
-                <para><code>author->name()</code> - Der Name des Autoren des Feeds</para>
-                <para><code>author->email()</code> - Die E-Mail Adresse des Autoren des Feeds</para>
-            </listitem>
-        </itemizedlist>
-    </para>
+            <para><property>author->name()</property> - Der Name des Autoren des Feeds</para>
+
+            <para>
+                <property>author->email()</property> - Die E-Mail Adresse des Autoren des Feeds
+            </para>
+        </listitem>
+    </itemizedlist>
 
     <para>
         Atom Einträge haben normalerweise folgende Eigenschaften:
     </para>
 
-    <para>
-        <itemizedlist>
-            <listitem>
-                <para><code>id</code> - Der einzigartige Bezeichner des Eintrags</para>
-            </listitem>
+    <itemizedlist>
+        <listitem>
+            <para><property>id</property> - Der einzigartige Bezeichner des Eintrags</para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <code>title</code> - Die Überschrift des Eintrags, gleichbedeutend mit der
-                    Überschrift eines <acronym>RSS</acronym> Eintrags
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>title</property> - Die Überschrift des Eintrags, gleichbedeutend mit
+                der Überschrift eines <acronym>RSS</acronym> Eintrags
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <code>link</code> - Ein Link zu einem anderen Format oder einer alternativen
-                    Ansicht diesen Eintrags
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>link</property> - Ein Link zu einem anderen Format oder einer
+                alternativen Ansicht diesen Eintrags
+            </para>
+        </listitem>
 
-            <listitem>
-                <para><code>summary</code> - Eine Zusammenfassung des Inhalts dieses Eintrags</para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>summary</property> - Eine Zusammenfassung des Inhalts dieses Eintrags
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <code>content</code> - Der komplette Inhalt des Eintrags; kann übersprungen
-                    werden, wenn der Feed nur Zusammenfassungen enthält
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>content</property> - Der komplette Inhalt des Eintrags; kann
+                übersprungen werden, wenn der Feed nur Zusammenfassungen enthält
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <code>author</code> - Mit <code>name</code> und <code>email</code> Unter-Tags
-                    wie den Feeds
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>author</property> - Mit <property>name</property> und
+                <property>email</property> Unter-Tags wie den Feeds
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <code>published</code> - Das Datum, an dem der Eintrag veröffentlicht wurde,
-                    im <acronym>RFC</acronym> 3339 Format
-                </para>
-            </listitem>
+        <listitem>
+            <para>
+                <property>published</property> - Das Datum, an dem der Eintrag veröffentlicht
+                wurde, im <acronym>RFC</acronym> 3339 Format
+            </para>
+        </listitem>
 
-            <listitem>
-                <para>
-                    <code>updated</code> - Das Datum, an dem der Eintrag das letzte Mal geändert
-                    wurde, im <acronym>RFC</acronym> 3339 Format
-                </para>
-            </listitem>
-        </itemizedlist>
-    </para>
+        <listitem>
+            <para>
+                <property>updated</property> - Das Datum, an dem der Eintrag das letzte Mal
+                geändert wurde, im <acronym>RFC</acronym> 3339 Format
+            </para>
+        </listitem>
+    </itemizedlist>
 
     <para>
         Für weitere Informationen über Atom und unzähligen anderen Quellen, besuche

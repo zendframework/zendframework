@@ -243,7 +243,7 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
     
     public function testPutFile()
     {
-        $filedir = dirname(__FILE__)."/_files/";
+        $filedir = __DIR__."/_files/";
         $this->_amazon->createBucket($this->_bucket);
 
         $this->_fileTest($filedir."testdata", $this->_bucket."/zftestfile", null, 'binary/octet-stream');
@@ -254,7 +254,7 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
 
     public function testPutFileStream()
     {
-        $filedir = dirname(__FILE__)."/_files/";
+        $filedir = __DIR__."/_files/";
         $this->_amazon->createBucket($this->_bucket);
 
         $this->_fileTest($filedir."testdata", $this->_bucket."/zftestfile", null, 'binary/octet-stream', true);
@@ -265,7 +265,7 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
     
     public function testPutNoFile()
     {
-        $filedir = dirname(__FILE__)."/_files/";
+        $filedir = __DIR__."/_files/";
 
         try {
             $this->_amazon->putFile($filedir."nosuchfile", $this->_bucket."/zftestfile");
@@ -275,6 +275,46 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
             $this->assertContains("nosuchfile", $e->getMessage());
         }
         $this->assertFalse($this->_amazon->isObjectAvailable($this->_bucket."/zftestfile"));
+    }
+
+    /**
+     * @depends testCreateBucket
+     * @depends testCreateObject
+     */
+    public function testCopyObject()
+    {
+        $this->_amazon->createBucket($this->_bucket);
+        $data = "testdata";
+
+        $this->_amazon->putObject($this->_bucket."/zftest", $data);
+        $info1 = $this->_amazon->getInfo($this->_bucket."/zftest");
+
+        $this->_amazon->copyObject($this->_bucket."/zftest", $this->_bucket."/zftest2");
+        $this->assertTrue($this->_amazon->isObjectAvailable($this->_bucket."/zftest"));
+        $this->assertTrue($this->_amazon->isObjectAvailable($this->_bucket."/zftest2"));
+        $info2 = $this->_amazon->getInfo($this->_bucket."/zftest2");
+
+        $this->assertEquals($info1['etag'], $info2['etag']);
+    }
+
+    /**
+     * @depends testCopyObject
+     * @depends testRemoveObject
+     */
+    public function testMoveObject()
+    {
+        $this->_amazon->createBucket($this->_bucket);
+        $data = "testdata";
+
+        $this->_amazon->putObject($this->_bucket."/zftest", $data);
+        $info1 = $this->_amazon->getInfo($this->_bucket."/zftest");
+
+        $this->_amazon->moveObject($this->_bucket."/zftest", $this->_bucket."/zftest2");
+        $this->assertFalse($this->_amazon->isObjectAvailable($this->_bucket."/zftest"));
+        $this->assertTrue($this->_amazon->isObjectAvailable($this->_bucket."/zftest2"));
+        $info2 = $this->_amazon->getInfo($this->_bucket."/zftest2");
+
+        $this->assertEquals($info1['etag'], $info2['etag']);
     }
 
     public function testObjectEncoding()
@@ -325,7 +365,7 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
     public function testAcl()
     {
         $this->_amazon->createBucket($this->_bucket);
-        $filedir = dirname(__FILE__)."/_files/";
+        $filedir = __DIR__."/_files/";
 
         $this->_amazon->putFile($filedir."testdata.html", $this->_bucket."/zftestfile.html");
         $this->_amazon->putFile($filedir."testdata.html", $this->_bucket."/zftestfile2.html",
@@ -361,7 +401,7 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
     public function testObjectPath()
     {
         $this->_amazon->createBucket($this->_bucket);
-        $filedir = dirname(__FILE__)."/_files/";
+        $filedir = __DIR__."/_files/";
         $this->_amazon->putFile($filedir."testdata.html", $this->_bucket."/subdir/dir with spaces/zftestfile.html",
             array(Zend_Service_Amazon_S3::S3_ACL_HEADER => Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ));
         $url = 'http://' . Zend_Service_Amazon_S3::S3_ENDPOINT."/".$this->_bucket."/subdir/dir%20with%20spaces/zftestfile.html";

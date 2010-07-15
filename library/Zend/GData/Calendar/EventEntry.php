@@ -25,10 +25,12 @@
  */
 namespace Zend\GData\Calendar;
 
+use Zend\GData\Calendar;
+
 /**
  * Data model class for a Google Calendar Event Entry
  *
- * @uses       \Zend\GData\Calendar\Calendar
+ * @uses       \Zend\GData\Calendar
  * @uses       \Zend\GData\Calendar\Extension\Link
  * @uses       \Zend\GData\Calendar\Extension\SendEventNotifications
  * @uses       \Zend\GData\Calendar\Extension\QuickAdd
@@ -44,7 +46,7 @@ namespace Zend\GData\Calendar;
 class EventEntry extends \Zend\GData\Kind\EventEntry
 {
 
-    protected $_entryClassName = '\Zend\GData\Calendar\EventEntry';
+    protected $_entryClassName = 'Zend\GData\Calendar\EventEntry';
     protected $_sendEventNotifications = null;
     protected $_timezone = null;
     protected $_quickadd = null;

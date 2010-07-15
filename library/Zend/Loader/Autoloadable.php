@@ -32,5 +32,14 @@ namespace Zend\Loader;
  */
 interface Autoloadable
 {
+    /**
+     * Autoload a class
+     *
+     * @abstract
+     * @param   $class
+     * @return  mixed
+     *          False [if unable to load $class]
+     *          get_class($class) [if $class is successfully loaded]
+     */
     public function autoload($class);
 }

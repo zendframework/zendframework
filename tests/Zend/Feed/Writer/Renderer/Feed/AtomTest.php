@@ -397,4 +397,18 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, (array) $feed->getHubs());
     }
 
+    public function testImageCanBeSet()
+    {
+        $this->_validWriter->setImage(
+            array('uri'=>'http://www.example.com/logo.gif')
+        );
+        $atomFeed = new Atom($this->_validWriter);
+        $atomFeed->render();
+        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $expected = array(
+            'uri' => 'http://www.example.com/logo.gif'
+        );
+        $this->assertEquals($expected, $feed->getImage());
+    }
+
 }

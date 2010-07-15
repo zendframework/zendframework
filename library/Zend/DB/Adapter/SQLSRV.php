@@ -85,9 +85,9 @@ class SQLSRV extends AbstractAdapter
      * @var array Associative array of datatypes to values 0, 1, or 2.
      */
     protected $_numericDataTypes = array(
-        DB\DB::INT_TYPE    => DB\DB::INT_TYPE,
-        DB\DB::BIGINT_TYPE => DB\DB::BIGINT_TYPE,
-        DB\DB::FLOAT_TYPE  => DB\DB::FLOAT_TYPE,
+        DB\DB::INT_TYPE      => DB\DB::INT_TYPE,
+        DB\DB::BIGINT_TYPE   => DB\DB::BIGINT_TYPE,
+        DB\DB::FLOAT_TYPE    => DB\DB::FLOAT_TYPE,
         'INT'                => DB\DB::INT_TYPE,
         'SMALLINT'           => DB\DB::INT_TYPE,
         'TINYINT'            => DB\DB::INT_TYPE,
@@ -417,6 +417,13 @@ class SQLSRV extends AbstractAdapter
         $stmt   = $this->query($sql);
         $result = $stmt->fetchAll(DB\DB::FETCH_NUM);
 
+		// ZF-7698
+		$stmt->closeCursor();
+        
+        if (count($result) == 0) {
+            return array();
+        }
+
         $owner           = 1;
         $table_name      = 2;
         $column_name     = 3;
@@ -580,25 +587,23 @@ class SQLSRV extends AbstractAdapter
             $sql = preg_replace('/^SELECT\s/i', 'SELECT TOP ' . $count . ' ', $sql);
         } else {
             $orderby = stristr($sql, 'ORDER BY');
-            if ($orderby !== false) {
-                $sort  = (stripos($orderby, ' desc') !== false) ? 'desc' : 'asc';
-                $order = str_ireplace('ORDER BY', '', $orderby);
-                $order = trim(preg_replace('/\bASC\b|\bDESC\b/i', '', $order));
+
+            if (!$orderby) {
+                $over = 'ORDER BY (SELECT 0)';
+            } else {
+                $over = preg_replace('/\"[^,]*\".\"([^,]*)\"/i', '"inner_tbl"."$1"', $orderby);
             }
-    
-            $sql = preg_replace('/^SELECT\s/i', 'SELECT TOP ' . ($count+$offset) . ' ', $sql);
-    
-            $sql = 'SELECT * FROM (SELECT TOP ' . $count . ' * FROM (' . $sql . ') AS inner_tbl';
-            if ($orderby !== false) {
-                $innerOrder = preg_replace('/\".*\".\"(.*)\"/i', '"inner_tbl"."$1"', $order);
-                $sql .= ' ORDER BY ' . $innerOrder . ' ';
-                $sql .= (stripos($sort, 'asc') !== false) ? 'DESC' : 'ASC';
-            }
-            $sql .= ') AS outer_tbl';
-            if ($orderby !== false) {
-                $outerOrder = preg_replace('/\".*\".\"(.*)\"/i', '"outer_tbl"."$1"', $order);
-                $sql .= ' ORDER BY ' . $outerOrder . ' ' . $sort;
-            }
+            
+            // Remove ORDER BY clause from $sql
+            $sql = preg_replace('/\s+ORDER BY(.*)/', '', $sql);
+            
+            // Add ORDER BY clause as an argument for ROW_NUMBER()
+            $sql = "SELECT ROW_NUMBER() OVER ($over) AS \"ZEND_DB_ROWNUM\", * FROM ($sql) AS inner_tbl";
+          
+            $start = $offset + 1;
+            $end = $offset + $count;
+
+            $sql = "WITH outer_tbl AS ($sql) SELECT * FROM outer_tbl WHERE \"ZEND_DB_ROWNUM\" BETWEEN $start AND $end";
         }
 
         return $sql;
@@ -628,10 +633,10 @@ class SQLSRV extends AbstractAdapter
     public function getServerVersion()
     {
         $this->_connect();
-        $version = sqlsrv_client_info($this->_connection);
+        $serverInfo = sqlsrv_server_info($this->_connection);
 
-        if ($version !== false) {
-            return $version['DriverVer'];
+        if ($serverInfo !== false) {
+            return $serverInfo['SQLServerVersion'];
         }
 
         return null;

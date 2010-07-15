@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20872 -->
 <sect1 id="zend.search.lucene.query-api">
     <title>クエリ作成用の API</title>
 
@@ -9,7 +9,7 @@
     </para>
 
     <para>
-        ユーザクエリは、<acronym>API</acronym> で作成したクエリを組み合わせて作成することができます。
+        ユーザクエリは、<acronym>API</acronym> で作成したクエリを組み合わせて作成できます。
         クエリパーサを使用して、文字列からクエリを作成します。
         <programlisting language="php"><![CDATA[
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
@@ -112,7 +112,7 @@ $hits  = $index->find($query);
         <para>
             各単語は、<emphasis>required (必須)</emphasis>・<emphasis>prohibited (禁止)</emphasis>・
             <emphasis>neither (どちらでもない)</emphasis>
-            のいずれかを指定することができます。
+            のいずれかを指定できます。
 
             <itemizedlist>
                 <listitem>
@@ -270,7 +270,7 @@ $hits  = $index->find($query);
             文字列によるクエリ
         </para>
         <programlisting language="querystring"><![CDATA[
-+(word1 word2 word3) author:(word4 word5) -word6
++(word1 word2 word3) (author:word4 author:word5) -(word6)
 ]]></programlisting>
 
         <itemizedlist>
@@ -522,7 +522,7 @@ $query4 = new Zend_Search_Lucene_Search_Query_Phrase(
 
         <para>
             <classname>Zend_Search_Lucene_Search_Query_Phrase</classname> クラスのコンストラクタで、
-            オプションの 3 つの引数を指定することができます。
+            オプションの 3 つの引数を指定できます。
         </para>
         <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_Query_Phrase(
@@ -545,7 +545,7 @@ Zend_Search_Lucene_Search_Query_Phrase(
 
         <para>
             <varname>$field</varname> は文字列で、検索対象となるドキュメントのフィールドを指定します。
-            指定しなかったり null を渡したりした場合は、デフォルトのフィールドが対象となります。
+            指定しなかったり <constant>NULL</constant> を渡したりした場合は、デフォルトのフィールドが対象となります。
         </para>
 
         <para>
@@ -649,7 +649,7 @@ $query->addTerm(new Zend_Search_Lucene_Index_Term('framework', 'title'));
             これは完全に一致するもののみを対象とします。
         </para>
         <para>
-            曖昧度は、クエリを作成した後で設定することができます。
+            曖昧度は、クエリを作成した後で設定できます。
         </para>
         <programlisting language="php"><![CDATA[
 // 隙間をあけないクエリ
@@ -710,8 +710,8 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            上限あるいは下限のどちらか一方を null にすることができます
-            (両方を null にすることはできません)。この場合、Zend_Search_Lucene
+            上限あるいは下限のどちらか一方を <constant>NULL</constant> にできます
+            (両方を <constant>NULL</constant> にすることはできません)。この場合、Zend_Search_Lucene
             は「先頭から指定した値まで」あるいは「指定した値から最後まで」
             という条件で検索します。
             <programlisting language="php"><![CDATA[

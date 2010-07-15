@@ -510,7 +510,6 @@ class Paginator implements \Countable, \IteratorAggregate
         }
 
         if (null === $pageNumber) {
-            $cleanTags = self::CACHE_TAG_PREFIX;
             foreach (self::$_cache->getIdsMatchingTags(array($this->_getCacheInternalId())) as $id) {
                 if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", $id, $page)) {
                     self::$_cache->remove($this->_getCacheId($page[1]));
@@ -686,11 +685,11 @@ class Paginator implements \Countable, \IteratorAggregate
      * @param  integer $itemCountPerPage
      * @return \Zend\Paginator\Paginator $this
      */
-    public function setItemCountPerPage($itemCountPerPage)
+    public function setItemCountPerPage($itemCountPerPage = -1)
     {
         $this->_itemCountPerPage = (integer) $itemCountPerPage;
         if ($this->_itemCountPerPage < 1) {
-            $this->_itemCountPerPage = $this->getItemCountPerPage();
+            $this->_itemCountPerPage = $this->getTotalItemCount();
         }
         $this->_pageCount        = $this->_calculatePageCount();
         $this->_currentItems     = null;
@@ -882,6 +881,8 @@ class Paginator implements \Countable, \IteratorAggregate
      */
     public function normalizeItemNumber($itemNumber)
     {
+        $itemNumber = (integer) $itemNumber;
+
         if ($itemNumber < 1) {
             $itemNumber = 1;
         }
@@ -901,6 +902,8 @@ class Paginator implements \Countable, \IteratorAggregate
      */
     public function normalizePageNumber($pageNumber)
     {
+        $pageNumber = (integer) $pageNumber;
+
         if ($pageNumber < 1) {
             $pageNumber = 1;
         }
@@ -986,7 +989,10 @@ class Paginator implements \Countable, \IteratorAggregate
      */
     protected function _getCacheInternalId()
     {
-        return md5(serialize($this->getAdapter()) . $this->getItemCountPerPage());
+        return md5(serialize(array(
+            spl_object_hash($this->getAdapter()),
+            $this->getItemCountPerPage()
+        )));
     }
 
     /**

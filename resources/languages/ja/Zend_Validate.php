@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 21362
+ * EN-Revision: 22075
  */
 return array(
     // Zend_Validate_Alnum
@@ -208,7 +208,7 @@ return array(
     "'%value%' has failed the IBAN check" => " '%value%' は IBAN コードチェックに失敗しました",
 
     // Zend_Validate_Identical
-    "The token '%token%' does not match the given token '%value%'" => "トークン '%token%' は '%value%' と一致しませんでした",
+    "The two given tokens do not match" => "2 つのトークンは一致しませんでした",
     "No token was provided to match against" => "チェックを行うためのトークンがありませんでした",
 
     // Zend_Validate_InArray
@@ -223,6 +223,7 @@ return array(
     "'%value%' does not appear to be a valid IP address" => " '%value%' は IP アドレスではないようです",
 
     // Zend_Validate_Isbn
+     "Invalid type given, value should be string or integer" => "不正な形式です。値は文字列または数値である必要があります",
     "'%value%' is no valid ISBN number" => " '%value%' は ISBN 番号ではありません",
 
     // Zend_Validate_LessThan
@@ -233,12 +234,14 @@ return array(
     "Value is required and can't be empty" => "値は必須です。空値は許可されていません",
 
     // Zend_Validate_PostCode
-    "Invalid type given, value should be string or integer" => "不正な形式です。値は文字列または数値である必要があります",
-    "'%value%' does not appear to be an postal code" => " '%value%' は郵便番号でないようです",
+    "Invalid type given. The value should be a string or a integer" => "不正な形式です。値は文字列または数値である必要があります",
+    "'%value%' does not appear to be a postal code" => " '%value%' は郵便番号でないようです",
 
     // Zend_Validate_Regex
     "Invalid type given, value should be string, integer or float" => "不正な形式です。値は文字列、整数、もしくは小数である必要があります",
     "'%value%' does not match against pattern '%pattern%'" => " '%value%' はパターン '%pattern%' と一致していません",
+    "There was an internal error while using the pattern '%pattern%'" => "正規表現パターン '%pattern%' を使用中に内部エラーが発生しました。",
+
 
     // Zend_Validate_Sitemap_Changefreq
     "'%value%' is no valid sitemap changefreq" => " '%value%' は正しいサイトマップの更新頻度ではありません",

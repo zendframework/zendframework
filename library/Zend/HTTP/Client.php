@@ -809,6 +809,9 @@ class Client
     public function setAdapter($adapter)
     {
         if (is_string($adapter)) {
+            if (!class_exists($adapter)) {
+                throw new Client\Exception('Unable to locate adapter class "' . $adapter . '"');
+            }
             $adapter = new $adapter;
         }
 
@@ -867,12 +870,13 @@ class Client
                  'Zend_Http_Client');
         }
 
-        $fp = fopen($this->_stream_name, "w+b");
-        if(!$fp) {
-                $this->close();
-                throw new Client\Exception("Could not open temp file $name");
-
+        if (false === ($fp = @fopen($this->_stream_name, "w+b"))) {
+                if ($this->adapter instanceof Client\Adapter) {
+                    $this->adapter->close();
+                }
+                throw new Client\Exception("Could not open temp file {$this->_stream_name}");
         }
+
         return $fp;
     }
 

@@ -75,13 +75,13 @@ class PostCode extends AbstractValidator
      */
     public function __construct($options = null)
     {
-        if ($options instanceof end\Config\Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         }
 
         if (empty($options)) {
-            if (end\Registry::isRegistered('Zend_Locale')) {
-                $this->setLocale(end\Registry::get('Zend_Locale'));
+            if (\Zend\Registry::isRegistered('Zend_Locale')) {
+                $this->setLocale(\Zend\Registry::get('Zend_Locale'));
             }
         } elseif (is_array($options)) {
             // Received

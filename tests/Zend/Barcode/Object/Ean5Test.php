@@ -104,6 +104,8 @@ class Ean5Test extends TestCommon
     {
         $this->_object->setText('45678');
         $this->assertEquals(68, $this->_object->getWidth());
+        $this->_object->setWithQuietZones(false);
+        $this->assertEquals(48, $this->_object->getWidth(true));
     }
 
     public function testCompleteGeneration()

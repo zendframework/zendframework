@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20872 -->
 <sect1 id="zend.pdf.pages">
     <title>ページの操作</title>
     <sect2 id="zend.pdf.pages.creation">
@@ -59,7 +59,7 @@
             ドキュメントのページは、<classname>Zend_Pdf</classname> クラスの public メンバである
             <varname>$pages</varname> に保存されます。これは <classname>Zend_Pdf_Page</classname>
             オブジェクトの配列です。これによってページの並び順も定義され、
-            一般的な配列と同じように操作することができます。
+            一般的な配列と同じように操作できます。
         </para>
 
         <example id="zend.pdf.pages.example-1">
@@ -121,8 +121,8 @@ unset($pdf->pages[$templatePageIndex]);
             <para>
                 注意! 複製されたページは、テンプレートページと同じ
                 <acronym>PDF</acronym> リソースを共有します。つまり、
-                テンプレートページと同じドキュメントしか使用することができません。
-                ドキュメントを修正したら、新しいページとして保存することができます。
+                テンプレートページと同じドキュメントしか使用できません。
+                ドキュメントを修正したら、新しいページとして保存できます。
             </para>
         </caution>
     </sect2>

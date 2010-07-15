@@ -86,7 +86,22 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($server->getOptions() == $options);
     }
 
-    public function testSetWSDLViaOptionsArrayIsPossible()
+    /**
+     * @group ZF-9816
+     */
+    public function testSetOptionsWithFeaturesOption()
+    {
+        $server = new Server(null, array(
+            'features' => SOAP_SINGLE_ELEMENT_ARRAYS
+        ));
+        
+        $this->assertEquals(
+            SOAP_SINGLE_ELEMENT_ARRAYS,
+            $server->getSoapFeatures()
+        );
+    }
+
+    public function testSetWsdlViaOptionsArrayIsPossible()
     {
         $server = new Server();
         $server->setOptions(array('wsdl' => 'http://www.example.com/test.wsdl'));
@@ -243,10 +258,10 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = new Server();
 
         $this->assertNull($server->getWSDL());
-        $server->setWSDL(dirname(__FILE__).'/_files/wsdl_example.wsdl');
-        $this->assertEquals(dirname(__FILE__).'/_files/wsdl_example.wsdl', $server->getWSDL());
+        $server->setWSDL(__DIR__.'/_files/wsdl_example.wsdl');
+        $this->assertEquals(__DIR__.'/_files/wsdl_example.wsdl', $server->getWSDL());
         try {
-            $server->setWSDL(dirname(__FILE__).'/_files/bogus.wsdl');
+            $server->setWSDL(__DIR__.'/_files/bogus.wsdl');
             $this->fail('Invalid WSDL URI or PATH should fail');
         } catch (\Exception $e)  {
             // success
@@ -258,8 +273,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = new Server();
 
         $this->assertNull($server->getWSDL());
-        $server->setWSDL(dirname(__FILE__).'/_files/wsdl_example.wsdl');
-        $this->assertEquals(dirname(__FILE__).'/_files/wsdl_example.wsdl', $server->getWSDL());
+        $server->setWSDL(__DIR__.'/_files/wsdl_example.wsdl');
+        $this->assertEquals(__DIR__.'/_files/wsdl_example.wsdl', $server->getWSDL());
     }
 
     public function testAddFunction()

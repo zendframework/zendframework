@@ -25,6 +25,7 @@ namespace ZendTest\Form\Decorator;
 use Zend\Form\Decorator\Fieldset as FieldsetDecorator,
     Zend\Form\Element,
     Zend\Form\Form,
+    Zend\Form\SubForm,
     Zend\View\View;
 
 /**
@@ -97,6 +98,20 @@ class FieldsetTest extends \PHPUnit_Framework_TestCase
         $this->testLegendInitiallyNull();
         $this->decorator->setLegend('this is a legend');
         $this->assertEquals('this is a legend', $this->decorator->getLegend());
+    }
+
+    /**
+     * @group ZF-7054
+     */
+    public function testCustomIdSupersedesElementId()
+    {
+        $form = new SubForm();
+        $form->setName('bar')
+             ->setView($this->getView());
+        $html = $this->decorator->setElement($form)
+                                ->setOption('id', 'foo-id')
+                                ->render('content');
+        $this->assertContains('foo-id', $html);
     }
 
     /**

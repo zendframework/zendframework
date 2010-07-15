@@ -30,6 +30,6 @@
 
 Zend_Loader::registerAutoload();
 
-set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__) . '/_files');
+set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/_files');
 
 $parseError = new ParseError();

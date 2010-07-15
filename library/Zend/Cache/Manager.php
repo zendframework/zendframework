@@ -39,7 +39,7 @@ class Manager
      * Constant holding reserved name for default Page Cache
      */
     const PAGECACHE = 'page';
-    
+
     /**
      * Constant holding reserved name for default Page Tag Cache
      */
@@ -167,16 +167,16 @@ class Manager
                 || !$this->_optionTemplates[$name]['backend']['options']['tag_cache'] instanceof Core)
             ) {
                 $this->_optionTemplates[$name]['backend']['options']['tag_cache']
-                    = $this->getCache(self::PAGETAGCACHE );
+                    = $this->getCache(self::PAGETAGCACHE);
             }
             $this->_caches[$name] = Cache::factory(
                 $this->_optionTemplates[$name]['frontend']['name'],
                 $this->_optionTemplates[$name]['backend']['name'],
                 isset($this->_optionTemplates[$name]['frontend']['options']) ? $this->_optionTemplates[$name]['frontend']['options'] : array(),
                 isset($this->_optionTemplates[$name]['backend']['options']) ? $this->_optionTemplates[$name]['backend']['options'] : array(),
-                false,
-                false,
-                true
+                isset($this->_optionTemplates[$name]['frontend']['customFrontendNaming']) ? $this->_optionTemplates[$name]['frontend']['customFrontendNaming'] : false,
+                isset($this->_optionTemplates[$name]['backend']['customBackendNaming']) ? $this->_optionTemplates[$name]['backend']['customBackendNaming'] : false,
+                isset($this->_optionTemplates[$name]['frontendBackendAutoload']) ? $this->_optionTemplates[$name]['frontendBackendAutoload'] : false
             );
             return $this->_caches[$name];
         }

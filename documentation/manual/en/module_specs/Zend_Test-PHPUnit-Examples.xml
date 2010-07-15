@@ -316,7 +316,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             database is in a pristine, testable configuration at the beginning
             of each test. PHPUnit already provides functionality for doing so;
             <ulink
-                url="http://www.phpunit.de/pocket_guide/3.3/en/database.html">read
+                url="http://www.phpunit.de/manual/3.4/en/database.html">read
                 about it in the PHPUnit documentation</ulink>. We recommend
             using a separate database for testing versus production, and in
             particular recommend using either a SQLite file or in-memory

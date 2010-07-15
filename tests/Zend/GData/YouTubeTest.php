@@ -42,7 +42,7 @@ class YouTubeTest extends \PHPUnit_Framework_TestCase
     {
         // These tests shouldn't be doing anything online, so we can use
         // bogus authentication credentials.
-        $this->gdata = new YouTube\YouTube(null);
+        $this->gdata = new YouTube(null);
         $this->responseText = file_get_contents(
                 'Zend/GData/YouTube/_files/FormUploadTokenResponseSample.xml',
                 true);
@@ -50,7 +50,7 @@ class YouTubeTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFormUploadTokenResponseHandler()
     {
-        $responseArray = YouTube\YouTube::parseFormUploadTokenResponse($this->responseText);
+        $responseArray = YouTube::parseFormUploadTokenResponse($this->responseText);
         $this->assertEquals('http://uploads.gdata.youtube.com/action/FormDataUpload/AIwbF1_JjEQ9cGTjEAd5FKwV42SeNWJexmc5y7XR-eFj24uqbqU6NRcxKJW_4R-sYISLxQ',
                             $responseArray['url']);
         $this->assertEquals('AIwbFAQ21fImpR2iYPaFnfuCvfbCB3qBxl5qXiZlpH3lfkungiSPoyw1iOM1gFB6Nx-wmY-kjprNT3qtdp7LJCLfngn11Ne_X9Jd44Vz8AzygtEtaDGyib5tnri0O0-V5pwcAPCHIJurOMsOpA2zInW8V8qHk2S2LheXfTXVbqc0Li9iCBpsoBGbykYU0moNoyGAaKRbSBD0oPnCv6v9Rll5Zjvivi2hQt-Br2JDb9wVeLv3qyAFaeyN6X6k32RyaAHs_n8d8d_oSriQmvS8g1HxSCS4dnoGL7tafQ4SBqnrQEb-hxFeu1ZrAwCLv',
@@ -63,9 +63,9 @@ class YouTubeTest extends \PHPUnit_Framework_TestCase
         $clientId = 'MyClientId';
         $developerKey = 'MyDeveloperKey';
         $httpClient = new \Zend\HTTP\Client();
-        $yt = new YouTube\YouTube($httpClient, $applicationId, $clientId, $developerKey);
+        $yt = new YouTube($httpClient, $applicationId, $clientId, $developerKey);
 
-        $this->assertTrue($yt instanceOf YouTube\YouTube);
+        $this->assertTrue($yt instanceOf YouTube);
         $client = $yt->getHttpClient();
 
         $this->assertEquals($client->getHeader('X-GData-Key'), 'key='. $developerKey);

@@ -27,6 +27,7 @@ use Zend\Config\Config,
     Zend\Loader\PrefixPathMapper,
     Zend\Validator\Validator,
     Zend\Filter\Filter,
+    Zend\Validator\AbstractValidator,
     Zend\View\ViewEngine as View,
     Zend\Controller\Action\HelperBroker as ActionHelperBroker;
 
@@ -311,23 +312,27 @@ class Element implements Validator
     /**
      * Load default decorators
      *
-     * @return void
+     * @return Zend_Form_Element
      */
     public function loadDefaultDecorators()
     {
         if ($this->loadDefaultDecoratorsIsDisabled()) {
-            return;
+            return $this;
         }
 
         $decorators = $this->getDecorators();
         if (empty($decorators)) {
+            $getId = create_function('$decorator',
+                                     'return $decorator->getElement()->getId()
+                                             . "-element";');
             $this->addDecorator('ViewHelper')
-                ->addDecorator('Errors')
-                ->addDecorator('Description', array('tag' => 'p', 'class' => 'description'))
-                ->addDecorator('HtmlTag', array('tag' => 'dd',
-                                                'id'  => $this->getName() . '-element'))
-                ->addDecorator('Label', array('tag' => 'dt'));
+                 ->addDecorator('Errors')
+                 ->addDecorator('Description', array('tag' => 'p', 'class' => 'description'))
+                 ->addDecorator('HtmlTag', array('tag' => 'dd',
+                                                 'id'  => array('callback' => $getId)))
+                 ->addDecorator('Label', array('tag' => 'dt'));
         }
+        return $this;
     }
 
     /**
@@ -1028,9 +1033,9 @@ class Element implements Validator
      *
      * If no $type specified, assumes it is a base path for both filters and
      * validators, and sets each according to the following rules:
-     * - decorators: $prefix = $prefix . '_Decorator'
-     * - filters: $prefix = $prefix . '_Filter'
-     * - validators: $prefix = $prefix . '_Validate'
+     * - decorators: $prefix = $prefix . '\Decorator'
+     * - filters: $prefix = $prefix . '\Filter'
+     * - validators: $prefix = $prefix . '\Validator'
      *
      * Otherwise, the path prefix is set on the appropriate plugin loader.
      *
@@ -1141,7 +1146,7 @@ class Element implements Validator
                 'options'             => $options,
             );
         } else {
-            throw new Exception('Invalid validator provided to addValidator; must be string or Zend_Validate_Interface');
+            throw new Exception('Invalid validator provided to addValidator; must be string or Zend\Validator\Validator');
         }
 
 
@@ -1334,13 +1339,34 @@ class Element implements Validator
             $this->setValidators($validators);
         }
 
+        // Find the correct translator. Zend\Validator\AbstractValidator::getDefaultTranslator()
+        // will get either the static translator attached to Zend\Validator\AbstractValidator
+        // or the 'Zend_Translate' from Zend\Registry.
+        if (AbstractValidator::hasDefaultTranslator() 
+            && !Form::hasDefaultTranslator())
+        {
+            $translator = AbstractValidator::getDefaultTranslator();
+            if ($this->hasTranslator()) {
+                // only pick up this element's translator if it was attached directly.
+                $translator = $this->getTranslator();
+            }
+        } else {
+            $translator = $this->getTranslator();
+        }
+
         $this->_messages = array();
         $this->_errors   = array();
         $result          = true;
         $isArray         = $this->isArray();
         foreach ($this->getValidators() as $key => $validator) {
             if (method_exists($validator, 'setTranslator')) {
-                $validator->setTranslator($this->getTranslator());
+                if (method_exists($validator, 'hasTranslator')) {
+                    if (!$validator->hasTranslator()) {
+                        $validator->setTranslator($translator);
+                    }
+                } else {
+                    $validator->setTranslator($translator);
+                }
             }
 
             if (method_exists($validator, 'setDisableTranslator')) {
@@ -1834,11 +1860,14 @@ class Element implements Validator
      */
     public function addDecorators(array $decorators)
     {
-        foreach ($decorators as $decoratorInfo) {
-            if (is_string($decoratorInfo)) {
-                $this->addDecorator($decoratorInfo);
-            } elseif ($decoratorInfo instanceof Decorator) {
-                $this->addDecorator($decoratorInfo);
+        foreach ($decorators as $decoratorName => $decoratorInfo) {
+            if (is_string($decoratorInfo) ||
+                $decoratorInfo instanceof Decorator) {
+                if (!is_numeric($decoratorName)) {
+                    $this->addDecorator(array($decoratorName => $decoratorInfo));
+                } else {
+                    $this->addDecorator($decoratorInfo);
+                }
             } elseif (is_array($decoratorInfo)) {
                 $argc    = count($decoratorInfo);
                 $options = array();
@@ -2071,7 +2100,7 @@ class Element implements Validator
         }
 
         $messages = false;
-        if (isset($validator['options']['messages'])) {
+        if (isset($validator['options']) && array_key_exists('messages', (array)$validator['options'])) {
             $messages = $validator['options']['messages'];
             unset($validator['options']['messages']);
         }

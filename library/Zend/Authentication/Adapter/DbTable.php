@@ -29,7 +29,8 @@ use Zend\Authentication\Adapter as AuthenticationAdapter,
     Zend\DB\DB,
     Zend\DB\Adapter\AbstractAdapter as AbstractDBAdapter,
     Zend\DB\Expr as DBExpr,
-    Zend\DB\Select as DBSelect;
+    Zend\DB\Select as DBSelect,
+    Zend\DB\Table\AbstractTable;
 
 /**
  * @uses       Zend\Authentication\Adapter\Exception
@@ -123,10 +124,10 @@ class DbTable implements AuthenticationAdapter
      * @param  string                   $credentialTreatment
      * @return void
      */
-    public function __construct(AbstractDBAdapter $zendDb, $tableName = null, $identityColumn = null,
+    public function __construct(AbstractDBAdapter $zendDb = null, $tableName = null, $identityColumn = null,
                                 $credentialColumn = null, $credentialTreatment = null)
     {
-        $this->_zendDb = $zendDb;
+        $this->_setDbAdapter($zendDb);
 
         if (null !== $tableName) {
             $this->setTableName($tableName);
@@ -143,6 +144,30 @@ class DbTable implements AuthenticationAdapter
         if (null !== $credentialTreatment) {
             $this->setCredentialTreatment($credentialTreatment);
         }
+    }
+
+    /**
+     * _setDbAdapter() - set the database adapter to be used for quering
+     *
+     * @param Zend_Db_Adapter_Abstract 
+     * @throws Zend_Auth_Adapter_Exception
+     * @return Zend_Auth_Adapter_DbTable
+     */
+    protected function _setDbAdapter(AbstractDBAdapter $zendDb = null)
+    {
+        $this->_zendDb = $zendDb;
+
+        /**
+         * If no adapter is specified, fetch default database adapter.
+         */
+        if(null === $this->_zendDb) {
+            $this->_zendDb = AbstractTable::getDefaultAdapter();
+            if (null === $this->_zendDb) {
+                throw new Exception('No database adapter present');
+            }
+        }
+        
+        return $this;
     }
 
     /**
@@ -303,7 +328,7 @@ class DbTable implements AuthenticationAdapter
         $dbSelect = $this->_authenticateCreateSelect();
         $resultIdentities = $this->_authenticateQuerySelect($dbSelect);
 
-        if ( ($authResult = $this->_authenticateValidateResultset($resultIdentities)) instanceof AuthenticationResult) {
+        if ( ($authResult = $this->_authenticateValidateResultSet($resultIdentities)) instanceof AuthenticationResult) {
             return $authResult;
         }
 

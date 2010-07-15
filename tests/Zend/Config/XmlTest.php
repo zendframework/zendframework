@@ -41,16 +41,16 @@ class XmlTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_xmlFileConfig = dirname(__FILE__) . '/_files/config.xml';
-        $this->_xmlFileAllSectionsConfig = dirname(__FILE__) . '/_files/allsections.xml';
-        $this->_xmlFileCircularConfig = dirname(__FILE__) . '/_files/circular.xml';
-        $this->_xmlFileTopLevelStringConfig = dirname(__FILE__) . '/_files/toplevelstring.xml';
-        $this->_xmlFileOneTopLevelStringConfig = dirname(__FILE__) . '/_files/onetoplevelstring.xml';
-        $this->_nonReadableConfig = dirname(__FILE__) . '/_files/nonreadable.xml';
-        $this->_xmlFileSameNameKeysConfig = dirname(__FILE__) . '/_files/array.xml';
-        $this->_xmlFileShortParamsOneConfig = dirname(__FILE__) . '/_files/shortparamsone.xml';
-        $this->_xmlFileShortParamsTwoConfig = dirname(__FILE__) . '/_files/shortparamstwo.xml';
-        $this->_xmlFileInvalid = dirname(__FILE__) . '/_files/invalid.xml';
+        $this->_xmlFileConfig = __DIR__ . '/_files/config.xml';
+        $this->_xmlFileAllSectionsConfig = __DIR__ . '/_files/allsections.xml';
+        $this->_xmlFileCircularConfig = __DIR__ . '/_files/circular.xml';
+        $this->_xmlFileTopLevelStringConfig = __DIR__ . '/_files/toplevelstring.xml';
+        $this->_xmlFileOneTopLevelStringConfig = __DIR__ . '/_files/onetoplevelstring.xml';
+        $this->_nonReadableConfig = __DIR__ . '/_files/nonreadable.xml';
+        $this->_xmlFileSameNameKeysConfig = __DIR__ . '/_files/array.xml';
+        $this->_xmlFileShortParamsOneConfig = __DIR__ . '/_files/shortparamsone.xml';
+        $this->_xmlFileShortParamsTwoConfig = __DIR__ . '/_files/shortparamstwo.xml';
+        $this->_xmlFileInvalid = __DIR__ . '/_files/invalid.xml';
     }
 
     public function testLoadSingleSection()

@@ -61,7 +61,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
             'ABCDEF'           => false
             );
         foreach ($valuesExpected as $input => $result) {
-            $this->assertEquals($result, $validator->isValid((string)$input), 'Test failed at ' . $input);
+            $this->assertEquals($result, $validator->isValid($input), 'Test failed at ' . $input);
         }
     }
 
@@ -132,7 +132,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
             'ABCDEF'           => false
             );
         foreach ($valuesExpected as $input => $result) {
-            $this->assertEquals($result, $validator->isValid((string)$input));
+            $this->assertEquals($result, $validator->isValid($input));
         }
     }
 
@@ -191,7 +191,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
             'ABCDEF'           => false
             );
         foreach ($valuesExpected as $input => $result) {
-            $this->assertEquals($result, $validator->isValid((string)$input));
+            $this->assertEquals($result, $validator->isValid($input));
         }
     }
 

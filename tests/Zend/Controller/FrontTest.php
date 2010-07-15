@@ -50,7 +50,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     {
         $this->_controller = Controller\Front::getInstance();
         $this->_controller->resetInstance();
-        $this->_controller->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files')
+        $this->_controller->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files')
                           ->setParam('noErrorHandler', true)
                           ->setParam('noViewRenderer', true)
                           ->returnResponse(true)
@@ -168,7 +168,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     public function testSetGetControllerDirectory()
     {
         $test = $this->_controller->getControllerDirectory();
-        $expected = array('default' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        $expected = array('default' => __DIR__ . DIRECTORY_SEPARATOR . '_files');
         $this->assertSame($expected, $test);
     }
 
@@ -369,7 +369,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     public function _testRunThrowsException()
     {
         try {
-            $this->_controller->run(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+            $this->_controller->run(__DIR__ . DIRECTORY_SEPARATOR . '_files');
             $this->fail('Should not be able to call run() from object instance');
         } catch (\Exception $e) {
             // success
@@ -443,7 +443,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     public function testThrowExceptionsThrows()
     {
         $this->_controller->throwExceptions(true);
-        $this->_controller->setControllerDirectory(dirname(__FILE__));
+        $this->_controller->setControllerDirectory(__DIR__);
         $request = new Request\HTTP('http://framework.zend.com/bogus/baz');
         $this->_controller->setResponse(new Response\Cli());
         $this->_controller->setRouter(new Router\Rewrite());
@@ -495,19 +495,19 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     {
         $request = new Request\HTTP('http://example.com/index/index');
         $this->_controller->setRequest($request);
-        Controller\Front::run(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        Controller\Front::run(__DIR__ . DIRECTORY_SEPARATOR . '_files');
     }
 
     public function testRunDynamically()
     {
         $request = new Request\HTTP('http://example.com/index/index');
         $this->_controller->setRequest($request);
-        $this->_controller->run(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        $this->_controller->run(__DIR__ . DIRECTORY_SEPARATOR . '_files');
     }
 
     public function testModulePathDispatched()
     {
-        $this->_controller->addControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . '/Admin', 'admin');
+        $this->_controller->addControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . '/Admin', 'admin');
         $request = new Request\HTTP('http://example.com/admin/foo/bar');
         $this->_controller->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
@@ -525,7 +525,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
 
     public function testAddModuleDirectory()
     {
-        $moduleDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
+        $moduleDir = __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
         $this->_controller->addModuleDirectory($moduleDir);
         $controllerDirs = $this->_controller->getControllerDirectory();
         $this->assertTrue(isset($controllerDirs['foo']));
@@ -572,7 +572,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanRemoveIndividualModuleDirectory()
     {
-        $moduleDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
+        $moduleDir = __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
         $this->_controller->addModuleDirectory($moduleDir);
         $controllerDirs = $this->_controller->getControllerDirectory();
         $this->_controller->removeControllerDirectory('foo');
@@ -595,7 +595,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
 
     public function testGetControllerDirectoryByModuleName()
     {
-        $moduleDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
+        $moduleDir = __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
         $this->_controller->addModuleDirectory($moduleDir);
         $barDir = $this->_controller->getControllerDirectory('bar');
         $this->assertNotNull($barDir);
@@ -604,7 +604,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
 
     public function testGetControllerDirectoryByModuleNameReturnsNullOnBadModule()
     {
-        $moduleDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
+        $moduleDir = __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
         $this->_controller->addModuleDirectory($moduleDir);
         $dir = $this->_controller->getControllerDirectory('_bazbat');
         $this->assertNull($dir);

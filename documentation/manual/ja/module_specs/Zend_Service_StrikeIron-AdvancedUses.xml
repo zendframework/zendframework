@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20807 -->
 <sect1 id="zend.service.strikeiron.advanced-uses">
     <title>Zend_Service_StrikeIron: 応用編</title>
 
@@ -18,7 +18,7 @@
         <link linkend="zend.service.strikeiron.bundled-services">バンドルされているサービス</link>
         を参照ください。しかし、StrikeIron には何百ものサービスがあり、
         中には便利なものも多くあります。
-        これらについても、ラッパークラスを作成せずに利用することができます。
+        これらについても、ラッパークラスを作成せずに利用できます。
       </para>
 
       <para>
@@ -83,7 +83,7 @@ echo $result->listingName;
         <acronym>PHP</acronym> の
         <ulink url="http://www.php.net/manual/ja/function.soap-soapclient-construct.php">SOAPClient</ulink>
         には <code>trace</code> オプションがあり、これを使用すると直前のトランザクションで交換された
-        <acronym>XML</acronym> を取得することができます。<classname>Zend_Service_StrikeIron</classname> は、デフォルトでは
+        <acronym>XML</acronym> を取得できます。<classname>Zend_Service_StrikeIron</classname> は、デフォルトでは
         <code>trace</code> を有効にしません。しかし、<code>SOAPClient</code>
         に渡すオプションを指定することで、この挙動は簡単に変更できます。
       </para>

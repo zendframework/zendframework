@@ -43,7 +43,7 @@ class XmlParsingTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->tokenDocument = dirname(__FILE__) . '/_files/encryptedtoken.xml';
+        $this->tokenDocument = __DIR__ . '/_files/encryptedtoken.xml';
         $this->loadXmlDocument();
     }
 
@@ -54,7 +54,7 @@ class XmlParsingTest extends \PHPUnit_Framework_TestCase
 
     public function testEncryptedDataType()
     {
-            $doc = file_get_contents(dirname(__FILE__) . '/_files/encryptedtoken_bad_type.xml');
+            $doc = file_get_contents(__DIR__ . '/_files/encryptedtoken_bad_type.xml');
 
             try {
                 $encryptedData = EncryptedData\Factory::getInstance($doc);
@@ -156,7 +156,7 @@ class XmlParsingTest extends \PHPUnit_Framework_TestCase
             /* yay */
         }
 
-        $doc = file_get_contents(dirname(__FILE__) . "/_files/encryptedkey_bad_block.xml");
+        $doc = file_get_contents(__DIR__ . "/_files/encryptedkey_bad_block.xml");
 
         try {
             XML\EncryptedKey::getInstance($doc);
@@ -167,7 +167,7 @@ class XmlParsingTest extends \PHPUnit_Framework_TestCase
 
 
 
-        $doc = file_get_contents(dirname(__FILE__) . "/_files/encryptedkey_missing_enc_algo.xml");
+        $doc = file_get_contents(__DIR__ . "/_files/encryptedkey_missing_enc_algo.xml");
         $ek = XML\EncryptedKey::getInstance($doc);
 
         try {
@@ -212,7 +212,7 @@ class XmlParsingTest extends \PHPUnit_Framework_TestCase
             /* yay */
         }
 
-        $doc = file_get_contents(dirname(__FILE__) . "/_files/security_token_bad_keyref.xml");
+        $doc = file_get_contents(__DIR__ . "/_files/security_token_bad_keyref.xml");
 
         try {
             $si = XML\SecurityTokenReference::getInstance($doc);

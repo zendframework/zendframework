@@ -216,11 +216,11 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
     public function testGettingPageCacheAlsoCreatesTagCache()
     {
         $manager = new Cache\Manager;
-        $pagetagConfig = $manager->getCacheTemplate('pagetag');
-        $pagetagConfig['backend']['options']['cache_dir'] = $this->getTmpDir();
-        $manager->setCacheTemplate('pagetag', $pagetagConfig);
-        $pagetag = $manager->getCache('page')->getBackend()->getOption('tag_cache');
-        $this->assertTrue($pagetag instanceof Cache\Frontend);
+        $tagCacheConfig = $manager->getCacheTemplate('tagCache');
+        $tagCacheConfig['backend']['options']['cache_dir'] = $this->getTmpDir();
+        $manager->setTemplateOptions('pagetag', $tagCacheConfig);
+        $tagCache = $manager->getCache('page')->getBackend()->getOption('tag_cache');
+        $this->assertTrue($tagCache instanceof Cache\Core);
     }
 
     // Helper Methods

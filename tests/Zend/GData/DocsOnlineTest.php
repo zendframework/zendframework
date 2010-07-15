@@ -46,9 +46,9 @@ class DocsOnlineTest extends \PHPUnit_Framework_TestCase
         $user = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_EMAIL');
         $pass = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD');
         $this->docTitle = constant('TESTS_ZEND_GDATA_DOCS_DOCUMENTTITLE');
-        $service = Docs\Docs::AUTH_SERVICE_NAME;
+        $service = Docs::AUTH_SERVICE_NAME;
         $client = \Zend\GData\ClientLogin::getHttpClient($user, $pass, $service);
-        $this->gdata = new Docs\Docs($client);
+        $this->gdata = new Docs($client);
     }
 
     public function testGetSpreadsheetFeed()
@@ -100,7 +100,7 @@ class DocsOnlineTest extends \PHPUnit_Framework_TestCase
         $newDocumentEntry = $this->gdata->uploadFile(
             'Zend/GData/_files/DocsTest.csv', $documentTitle,
             $this->gdata->lookupMimeType('CSV'),
-            Docs\Docs::DOCUMENTS_LIST_FEED_URI);
+            Docs::DOCUMENTS_LIST_FEED_URI);
         $this->assertTrue($newDocumentEntry->title->text === $documentTitle);
 
         // Get the newly created document.

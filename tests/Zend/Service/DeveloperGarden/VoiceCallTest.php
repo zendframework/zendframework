@@ -82,7 +82,7 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
 
 
         $this->assertType(
-            'Zend_Service_DeveloperGarden_Client_ClientAbstract',
+            'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setEnvironment(Zend_Service_DeveloperGarden_VoiceCall_Mock::ENV_MOCK)
         );
 
@@ -112,7 +112,7 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
 
 
         $this->assertType(
-            'Zend_Service_DeveloperGarden_Client_ClientAbstract',
+            'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setEnvironment(Zend_Service_DeveloperGarden_VoiceCall_Mock::ENV_MOCK)
         );
 
@@ -144,7 +144,7 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
 
 
         $this->assertType(
-            'Zend_Service_DeveloperGarden_Client_ClientAbstract',
+            'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setEnvironment(Zend_Service_DeveloperGarden_VoiceCall_Mock::ENV_MOCK)
         );
 
@@ -158,7 +158,7 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
 
 
         $this->assertType(
-            'Zend_Service_DeveloperGarden_Client_ClientAbstract',
+            'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setEnvironment(Zend_Service_DeveloperGarden_VoiceCall_Mock::ENV_MOCK)
         );
 
@@ -193,7 +193,7 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
     public function testTearDownCallException()
     {
         $this->assertType(
-            'Zend_Service_DeveloperGarden_Client_ClientAbstract',
+            'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setEnvironment(Zend_Service_DeveloperGarden_VoiceCall_Mock::ENV_MOCK)
         );
 
@@ -207,7 +207,7 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
 
 
         $this->assertType(
-            'Zend_Service_DeveloperGarden_Client_ClientAbstract',
+            'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setEnvironment(Zend_Service_DeveloperGarden_VoiceCall_Mock::ENV_MOCK)
         );
 

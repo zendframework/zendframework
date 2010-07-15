@@ -460,7 +460,8 @@ class Rewrite extends AbstractRouter
             }
         }
 
-        $params = array_merge($this->_globalParams, $userParams);
+        // Use UNION (+) in order to preserve numeric keys 
+        $params = $userParams + $this->_globalParams;
 
         $route = $this->getRoute($name);
         $url   = $route->assemble($params, $reset, $encode);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20799 -->
 <sect1 id="zend.translate.introduction">
 
     <title>導入</title>
@@ -25,6 +25,7 @@
                 たとえば gettext の使用法は非常に複雑です。
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis><acronym>PHP</acronym> は gettext
@@ -34,6 +35,7 @@
                 ネイティブなサポートがないからです。
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>デフォルト言語の検出方法がない:</emphasis>
@@ -41,6 +43,7 @@
                 個々のブラウザについての深い知識を要します。
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>Gettext はスレッドセーフでない:</emphasis>
@@ -68,6 +71,7 @@
                 形式のファイルにも対応しています。
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>スレッドセーフな gettext:</emphasis>
@@ -75,6 +79,7 @@
                 マルチスレッド環境でも問題なく使用できます。
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>簡単で汎用的な <acronym>API</acronym>:</emphasis>
@@ -85,17 +90,19 @@
                 ストレージアダプタを指定している部分を一行変更するだけで対応できます。
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>ユーザの標準言語の検出:</emphasis>
                 ユーザがサイトにアクセスする際の preferred language
-                設定を検出し、<classname>Zend_Translate</classname> で使用することができます。
+                設定を検出し、<classname>Zend_Translate</classname> で使用できます。
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>自動的なソースの検出:</emphasis>
-                <classname>Zend_Translate</classname> は、複数のソースファイルを検出して統合することができます。
+                <classname>Zend_Translate</classname> は、複数のソースファイルを検出して統合できます。
                 さらに、ディレクトリやファイル名に応じて使用するロケールを自動検出することもできます。
             </para>
         </listitem>
@@ -121,16 +128,19 @@
                     使用するアダプタを決める
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     ビューを作成し、<classname>Zend_Translate</classname> をコードに組み込む
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     コードから入力ファイルを作成する
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     入力ファイルを指定した言語に翻訳する

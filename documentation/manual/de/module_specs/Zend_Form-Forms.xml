@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 22147 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.forms">
     <title>Erstellen von Form durch Verwendung von Zend_Form</title>
@@ -812,8 +812,8 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
 
                         <listitem>
                             <para>
-                                <code>addElement($typeOrElement, $name, array $options =
-                                array())</code>
+                                <methodname>addElement($typeOrElement, $name, array $options =
+                                    array())</methodname>
                             </para>
                         </listitem>
 
@@ -918,8 +918,8 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     <itemizedlist>
                         <listitem>
                             <para>
-                                <code>setTranslator(Zend_Translate_Adapter $translator =
-                                null)</code>
+                                <methodname>setTranslator(Zend_Translate_Adapter $translator =
+                                    null)</methodname>
                             </para>
                         </listitem>
 
@@ -975,9 +975,9 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
         <para>
             Eine Subform kann ein <classname>Zend_Form</classname> Objekt sein, oder typischerweise
             ein <classname>Zend_Form_SubForm</classname> Objekt. Das zweitere enthält Dekoratore die
-            für das Einfügen in größere Formen passen (z.B. gibt es keine zusätzlichen HTML form
-            Tags aus, gruppiert aber Elemente). Um eine Subform anzuhängen, muß diese einfach der
-            Form hinzugefügt und ein Name vergeben werden:
+            für das Einfügen in größere Formen passen (z.B. gibt es keine zusätzlichen
+            <acronym>HTML</acronym> form Tags aus, gruppiert aber Elemente). Um eine Subform
+            anzuhängen, muß diese einfach der Form hinzugefügt und ein Name vergeben werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1067,9 +1067,10 @@ $form->setSubFormDecorators(array(
         <para>
             Wärend die Nützlichkeit von Formen primär von den Elementen die Sie enthalten her
             rührt, enthhalten Sie auch anderen Metadaten, wie einen Namen (oft verwendet als
-            eindeutige ID im HTML Markup); die Aktion und Methode der Form; die Anzahl an
-            Elementen, Gruppen, und Subformen die Sie enthält; und sonstige Metadaten (die
-            normalerweise verwendet werden um HTML Attribute für das Form Tag selbst zu setzen).
+            eindeutige ID im <acronym>HTML</acronym> Markup); die Aktion und Methode der Form; die
+            Anzahl an Elementen, Gruppen, und Subformen die Sie enthält; und sonstige Metadaten (die
+            normalerweise verwendet werden um <acronym>HTML</acronym> Attribute für das Form Tag
+            selbst zu setzen).
         </para>
 
         <para>
@@ -1120,8 +1121,8 @@ $form->setAction('/user/login')
         </note>
 
         <para>
-            <classname>Zend_Form</classname> implementiert das <code>Countable</code> Interface,
-            welches es erlaubt es als Argument fürs Zählen zu übergeben:
+            <classname>Zend_Form</classname> implementiert das <classname>Countable</classname>
+            Interface, welches es erlaubt es als Argument fürs Zählen zu übergeben:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1200,8 +1201,8 @@ $form->setDecorators(array(
 ]]></programlisting>
 
         <para>
-            Jegliche Attribute die auf dem Form Objekt gesetzt sindwerden als HTML Attribute des
-            <code>&lt;form&gt;</code> Tags verwendet.
+            Jegliche Attribute die auf dem Form Objekt gesetzt sindwerden als
+            <acronym>HTML</acronym> Attribute des <emphasis>&lt;form&gt;</emphasis> Tags verwendet.
         </para>
 
         <note>
@@ -1272,9 +1273,10 @@ $fooBar  = $form->getDecorator('FooBar');
 
         <para>
             Man kann eigene Dekoratore für die Erzeugung der Form erstellen. Ein üblicher Grund
-            hierfür ist, wenn man das exakte HTML weiß das man verwenden will; der Dekorator könnte
-            das exakte HTML erstellen und es einfach zurückgeben, wobei potentiell die Dekoratore
-            der individuellen Elemente oder Anzeigegruppen verwendet werden.
+            hierfür ist, wenn man das exakte <acronym>HTML</acronym> weiß das man verwenden will;
+            der Dekorator könnte das exakte <acronym>HTML</acronym> erstellen und es einfach
+            zurückgeben, wobei potentiell die Dekoratore der individuellen Elemente oder
+            Anzeigegruppen verwendet werden.
         </para>
 
         <para>
@@ -1562,8 +1564,8 @@ $validValues = $form->getValidValues($_POST);
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type
-                                = null)</code>
+                            <methodname>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader,
+                                $type = null)</methodname>
                         </para>
                     </listitem>
 
@@ -1877,21 +1879,21 @@ $validValues = $form->getValidValues($_POST);
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>prefixPaths</code> wird übergeben an
+                    <property>prefixPath</property> wird übergeben an
                     <methodname>addPrefixPaths()</methodname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>elementPrefixPaths</code> wird übergeben an
+                    <property>elementPrefixPath</property> wird übergeben an
                     <methodname>addElementPrefixPaths()</methodname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>displayGroupPrefixPaths</code> wird übergeben an
+                    <property>displayGroupPrefixPath</property> wird übergeben an
                     <methodname>addDisplayGroupPrefixPaths()</methodname>
                 </para>
             </listitem>
@@ -1901,16 +1903,18 @@ $validValues = $form->getValidValues($_POST);
 
                 <itemizedlist>
                     <listitem>
-                        <para><code>setAttrib (da setAttribs *wird* funktionieren)</code></para>
+                        <para>
+                            <property>setAttrib</property> (da setAttribs *wird* funktionieren)
+                        </para>
                     </listitem>
 
-                    <listitem><para><code>setConfig</code></para></listitem>
-                    <listitem><para><code>setDefault</code></para></listitem>
-                    <listitem><para><code>setOptions</code></para></listitem>
-                    <listitem><para><code>setPluginLoader</code></para></listitem>
-                    <listitem><para><code>setSubForms</code></para></listitem>
-                    <listitem><para><code>setTranslator</code></para></listitem>
-                    <listitem><para><code>setView</code></para></listitem>
+                    <listitem><para><property>setConfig</property></para></listitem>
+                    <listitem><para><property>setDefault</property></para></listitem>
+                    <listitem><para><property>setOptions</property></para></listitem>
+                    <listitem><para><property>setPluginLoader</property></para></listitem>
+                    <listitem><para><property>setSubForms</property></para></listitem>
+                    <listitem><para><property>setTranslator</property></para></listitem>
+                    <listitem><para><property>setView</property></para></listitem>
                 </itemizedlist>
             </listitem>
         </itemizedlist>
@@ -2015,7 +2019,7 @@ class My_Form_Login extends Zend_Form
 
         $password = new Zend_Form_Element_Password('password');
         $password->class = 'formtext';
-        $password->setLabel('Benutzername:')
+        $password->setLabel('Passwort:')
                  ->setDecorators(array(
                      array('ViewHelper',
                            array('helper' => 'formPassword')),

@@ -24,7 +24,7 @@
  * @uses       Zend_Http_Client
  * @uses       Zend_Service_WindowsAzure_Exception
  * @uses       Zend_Service_WindowsAzure_Storage
- * @uses       Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
+ * @uses       Zend_Service_WindowsAzure_Storage_AbstractBatchStorage
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Storage
@@ -36,7 +36,7 @@ class Zend_Service_WindowsAzure_Storage_Batch
     /**
      * Storage client the batch is defined on
      * 
-     * @var Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
+     * @var Zend_Service_WindowsAzure_Storage_AbstractBatchStorage
      */
     protected $_storageClient = null;
     
@@ -71,9 +71,9 @@ class Zend_Service_WindowsAzure_Storage_Batch
     /**
      * Creates a new Zend_Service_WindowsAzure_Storage_Batch
      * 
-     * @param Zend_Service_WindowsAzure_Storage_BatchStorageAbstract $storageClient Storage client the batch is defined on
+     * @param Zend_Service_WindowsAzure_Storage_AbstractBatchStorage $storageClient Storage client the batch is defined on
      */
-    public function __construct(Zend_Service_WindowsAzure_Storage_BatchStorageAbstract $storageClient = null, $baseUrl = '')
+    public function __construct(Zend_Service_WindowsAzure_Storage_AbstractBatchStorage $storageClient = null, $baseUrl = '')
     {
         $this->_storageClient = $storageClient;
         $this->_baseUrl       = $baseUrl;

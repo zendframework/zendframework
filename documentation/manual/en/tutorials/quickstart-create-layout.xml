@@ -4,15 +4,15 @@
     <title>Create A Layout</title>
 
     <para>
-        You may have noticed that the view scripts in the previous sections were HTML fragments- not
-        complete pages. This is by design; we want our actions to return content only related to the
-        action itself, not the application as a whole.
+        You may have noticed that the view scripts in the previous sections were
+        <acronym>HTML</acronym> fragments- not complete pages. This is by design; we want our
+        actions to return content only related to the action itself, not the application as a whole.
     </para>
 
     <para>
-        Now we must compose that generated content into a full HTML page. We'd also like to have a
-        consistent look and feel for the application. We will use a global site layout to accomplish
-        both of these tasks.
+        Now we must compose that generated content into a full <acronym>HTML</acronym> page. We'd
+        also like to have a consistent look and feel for the application. We will use a global site
+        layout to accomplish both of these tasks.
     </para>
 
     <para>
@@ -41,8 +41,8 @@
     </para>
 
     <para>
-        To get started using Zend_Layout, first we need to inform our bootstrap to use the
-        <classname>Layout</classname> resource. This can be done using the
+        To get started using <classname>Zend_Layout</classname>, first we need to inform our
+        bootstrap to use the <classname>Layout</classname> resource. This can be done using the
         <command>zf enable layout</command> command:
     </para>
 
@@ -68,7 +68,7 @@ resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
 ]]></programlisting>
 
     <para>
-        The final INI file should look as follows:
+        The final <acronym>INI</acronym> file should look as follows:
     </para>
 
     <programlisting language="ini"><![CDATA[
@@ -213,9 +213,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     <para>
         Note also the use of the <methodname>headLink()</methodname> placeholder. This is an easy
-        way to generate the HTML for &lt;link&gt; elements, as well as to keep track of them
-        throughout your application. If you need to add additional CSS sheets to support a single
-        action, you can do so, and be assured it will be present in the final rendered page.
+        way to generate the <acronym>HTML</acronym> for &lt;link&gt; elements, as well as to keep
+        track of them throughout your application. If you need to add additional CSS sheets to
+        support a single action, you can do so, and be assured it will be present in the final
+        rendered page.
     </para>
 
     <note>

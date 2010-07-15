@@ -164,6 +164,17 @@ class SQLSRVTest extends AbstractTest
         $this->assertFalse($desc['product_name']['IDENTITY'], 'Expected product_name to return false for IDENTITY');
     }
 
+    /**
+     * test that describeTable() returns empty array on not existing table
+     * @group ZF-9079
+     */
+    public function testAdapterDescribeTableNotExistingTable()
+    {
+        $desc = $this->_db->describeTable('not_existing_table');
+
+        $this->assertEquals(0, count($desc), 'Expected to have empty result');
+    }
+
     public function testAdapterDescribeTablePrimaryKeyColumn()
     {
         $desc = $this->_db->describeTable('zfproducts');
@@ -465,6 +476,77 @@ class SQLSRVTest extends AbstractTest
         $product_id = $this->_db->quoteIdentifier('product_id');
 
         $sql = $this->_db->limit("SELECT * FROM $products ORDER BY $products.$product_id", 1, 1);
+
+        $stmt = $this->_db->query($sql);
+        $result = $stmt->fetchAll();
+        $this->assertEquals(1, count($result),
+            'Expecting row count to be 1');
+        $this->assertEquals(2, $result[0]['product_id'],
+            'Expecting to get product_id 2');
+    }    
+
+    /**
+     * @group ZF-8148
+     */
+    public function testAdapterLimitOffsetWithOffsetExceedingRowCount()
+    {
+        $products = $this->_db->quoteIdentifier('zfproducts');
+        $product_id = $this->_db->quoteIdentifier('product_id');
+
+        $sql = $this->_db->limit("SELECT * FROM $products ORDER BY $products.$product_id", 2, 2);
+
+        $stmt = $this->_db->query($sql);
+        $result = $stmt->fetchAll();
+        $this->assertEquals(1, count($result),
+            'Expecting row count to be 1');
+    }  
+
+    /**
+     * @group ZF-8148
+     */
+    public function testAdapterLimitWithoutOrder()
+    {
+        $products = $this->_db->quoteIdentifier('zfproducts');
+        $product_id = $this->_db->quoteIdentifier('product_id');
+
+        $sql = $this->_db->limit("SELECT * FROM $products", 1);
+
+        $stmt = $this->_db->query($sql);
+        $result = $stmt->fetchAll();
+        $this->assertEquals(1, count($result),
+            'Expecting row count to be 1');
+        $this->assertEquals(1, $result[0]['product_id'],
+            'Expecting to get product_id 1');
+    }     
+
+    /**
+     * @group ZF-8148
+     */
+    public function testAdapterLimitOffsetWithoutOrder()
+    {
+        $products = $this->_db->quoteIdentifier('zfproducts');
+        $product_id = $this->_db->quoteIdentifier('product_id');
+
+        $sql = $this->_db->limit("SELECT * FROM $products", 1, 1);
+
+        $stmt = $this->_db->query($sql);
+        $result = $stmt->fetchAll();
+        $this->assertEquals(1, count($result),
+            'Expecting row count to be 1');
+        $this->assertEquals(2, $result[0]['product_id'],
+            'Expecting to get product_id 2');
+    }  
+    
+    /**
+     * @group ZF-8901
+     */
+    public function testAdapterLimitOffsetWithMultipleOrderColumns()
+    {
+        $products = $this->_db->quoteIdentifier('zfproducts');
+        $product_id = $this->_db->quoteIdentifier('product_id');
+        $product_name = $this->_db->quoteIdentifier('product_name');
+
+        $sql = $this->_db->limit("SELECT * FROM $products ORDER BY $products.$product_id ASC, $products.$product_name DESC", 1, 1);
 
         $stmt = $this->_db->query($sql);
         $result = $stmt->fetchAll();

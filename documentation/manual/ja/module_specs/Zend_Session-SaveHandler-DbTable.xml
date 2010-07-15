@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17086 -->
+<!-- EN-Revision: 20810 -->
 <sect1 id="zend.session.savehandler.dbtable">
     <title>Zend_Session_SaveHandler_DbTable</title>
+
     <para>
         <classname>Zend_Session_SaveHandler_DbTable</classname> の基本セットアップには、少なくとも
         設定配列/<classname>Zend_Config</classname> オブジェクトの各設定を意味する 4 つのカラムが必要です。
@@ -12,8 +13,10 @@
         lifetime は、セッションの有効期間です (<command>modified + lifetime > time()</command>)。
         そして data が、セッションに保存されているデータをシリアライズしたものです。
     </para>
+
     <example id="zend.session.savehandler.dbtable.basic">
             <title>基本的な設定</title>
+
             <programlisting language="SQL"><![CDATA[
 CREATE TABLE `session` (
   `id` char(32),
@@ -23,6 +26,7 @@ CREATE TABLE `session` (
   PRIMARY KEY (`id`)
 );
 ]]></programlisting>
+
         <programlisting language="php"><![CDATA[
 // データベース接続を準備します
 $db = Zend_Db::factory('Pdo_Mysql', array(
@@ -53,12 +57,15 @@ Zend_Session::start();
 // これで、ふつうに Zend_Session を使えるようになります
 ]]></programlisting>
     </example>
+
     <para>
         <classname>Zend_Session_SaveHandler_DbTable</classname> で、
         複数カラムの主キーを使用することもできます。
     </para>
+
     <example id="zend.session.savehandler.dbtable.multi-column-key">
         <title>複数カラムの主キーの使用</title>
+
         <programlisting language="SQL"><![CDATA[
 CREATE TABLE `session` (
     `session_id` char(32) NOT NULL,
@@ -70,10 +77,11 @@ CREATE TABLE `session` (
     PRIMARY KEY (`Session_ID`, `save_path`, `name`)
 );
 ]]></programlisting>
+
         <programlisting language="php"><![CDATA[
 // 先ほど同様にまず DB 接続を設定します
 // 注意: この設定は Zend_Db_Table にも渡されることに注意しましょう
-// テーブル固有の内容についてもここで設定することができます
+// テーブル固有の内容についてもここで設定できます
 $config = array(
     'name'              => 'session', // Zend_Db_Table のテーブル名
     'primary'           => array(

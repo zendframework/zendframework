@@ -51,7 +51,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_origEncoding = iconv_get_encoding('internal_encoding');
-        $this->_validator = new Hostname\Hostname();
+        $this->_validator = new Hostname();
     }
 
     /**
@@ -70,16 +70,16 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
     public function testBasic()
     {
         $valuesExpected = array(
-            array(Hostname\Hostname::ALLOW_IP, true, array('1.2.3.4', '10.0.0.1', '255.255.255.255')),
-            array(Hostname\Hostname::ALLOW_IP, false, array('1.2.3.4.5', '0.0.0.256')),
-            array(Hostname\Hostname::ALLOW_DNS, true, array('example.com', 'example.museum', 'd.hatena.ne.jp')),
-            array(Hostname\Hostname::ALLOW_DNS, false, array('localhost', 'localhost.localdomain', '1.2.3.4', 'domain.invalid')),
-            array(Hostname\Hostname::ALLOW_LOCAL, true, array('localhost', 'localhost.localdomain', 'example.com')),
-            array(Hostname\Hostname::ALLOW_ALL, true, array('localhost', 'example.com', '1.2.3.4')),
-            array(Hostname\Hostname::ALLOW_LOCAL, false, array('local host', 'example,com', 'exam_ple.com'))
+            array(Hostname::ALLOW_IP, true, array('1.2.3.4', '10.0.0.1', '255.255.255.255')),
+            array(Hostname::ALLOW_IP, false, array('1.2.3.4.5', '0.0.0.256')),
+            array(Hostname::ALLOW_DNS, true, array('example.com', 'example.museum', 'd.hatena.ne.jp')),
+            array(Hostname::ALLOW_DNS, false, array('localhost', 'localhost.localdomain', '1.2.3.4', 'domain.invalid')),
+            array(Hostname::ALLOW_LOCAL, true, array('localhost', 'localhost.localdomain', 'example.com')),
+            array(Hostname::ALLOW_ALL, true, array('localhost', 'example.com', '1.2.3.4')),
+            array(Hostname::ALLOW_LOCAL, false, array('local host', 'example,com', 'exam_ple.com'))
         );
         foreach ($valuesExpected as $element) {
-            $validator = new Hostname\Hostname($element[0]);
+            $validator = new Hostname($element[0]);
             foreach ($element[2] as $input) {
                 $this->assertEquals($element[1], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
             }
@@ -89,13 +89,13 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
     public function testCombination()
     {
         $valuesExpected = array(
-            array(Hostname\Hostname::ALLOW_DNS | Hostname\Hostname::ALLOW_LOCAL, true, array('domain.com', 'localhost', 'local.localhost')),
-            array(Hostname\Hostname::ALLOW_DNS | Hostname\Hostname::ALLOW_LOCAL, false, array('1.2.3.4', '255.255.255.255')),
-            array(Hostname\Hostname::ALLOW_DNS | Hostname\Hostname::ALLOW_IP, true, array('1.2.3.4', '255.255.255.255')),
-            array(Hostname\Hostname::ALLOW_DNS | Hostname\Hostname::ALLOW_IP, false, array('localhost', 'local.localhost'))
+            array(Hostname::ALLOW_DNS | Hostname::ALLOW_LOCAL, true, array('domain.com', 'localhost', 'local.localhost')),
+            array(Hostname::ALLOW_DNS | Hostname::ALLOW_LOCAL, false, array('1.2.3.4', '255.255.255.255')),
+            array(Hostname::ALLOW_DNS | Hostname::ALLOW_IP, true, array('1.2.3.4', '255.255.255.255')),
+            array(Hostname::ALLOW_DNS | Hostname::ALLOW_IP, false, array('localhost', 'local.localhost'))
             );
         foreach ($valuesExpected as $element) {
-            $validator = new Hostname\Hostname($element[0]);
+            $validator = new Hostname($element[0]);
             foreach ($element[2] as $input) {
                 $this->assertEquals($element[1], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
             }
@@ -109,11 +109,11 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
     public function testDashes()
     {
         $valuesExpected = array(
-            array(Hostname\Hostname::ALLOW_DNS, true, array('domain.com', 'doma-in.com')),
-            array(Hostname\Hostname::ALLOW_DNS, false, array('-domain.com', 'domain-.com', 'do--main.com'))
+            array(Hostname::ALLOW_DNS, true, array('domain.com', 'doma-in.com')),
+            array(Hostname::ALLOW_DNS, false, array('-domain.com', 'domain-.com', 'do--main.com'))
             );
         foreach ($valuesExpected as $element) {
-            $validator = new Hostname\Hostname($element[0]);
+            $validator = new Hostname($element[0]);
             foreach ($element[2] as $input) {
                 $this->assertEquals($element[1], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
             }
@@ -136,7 +136,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
      */
     public function testIDN()
     {
-        $validator = new Hostname\Hostname();
+        $validator = new Hostname();
 
         // Check IDN matching
         $valuesExpected = array(
@@ -163,7 +163,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
 
         // Check setting no IDN matching via constructor
         unset($validator);
-        $validator = new Hostname\Hostname(Hostname\Hostname::ALLOW_DNS, false);
+        $validator = new Hostname(Hostname::ALLOW_DNS, false);
         $valuesExpected = array(
             array(false, array('bürger.de', 'hãllo.de', 'hållo.se'))
             );
@@ -180,7 +180,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
      */
     public function testRessourceIDN()
     {
-        $validator = new Hostname\Hostname();
+        $validator = new Hostname();
 
         // Check IDN matching
         $valuesExpected = array(
@@ -207,7 +207,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
 
         // Check setting no IDN matching via constructor
         unset($validator);
-        $validator = new Hostname\Hostname(Hostname\Hostname::ALLOW_DNS, false);
+        $validator = new Hostname(Hostname::ALLOW_DNS, false);
         $valuesExpected = array(
             array(false, array('bürger.com', 'hãllo.com', 'hållo.com'))
             );
@@ -224,7 +224,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
      */
     public function testTLD()
     {
-        $validator = new Hostname\Hostname();
+        $validator = new Hostname();
 
         // Check TLD matching
         $valuesExpected = array(
@@ -250,7 +250,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
 
         // Check setting no TLD matching via constructor
         unset($validator);
-        $validator = new Hostname\Hostname(Hostname\Hostname::ALLOW_DNS, true, false);
+        $validator = new Hostname(Hostname::ALLOW_DNS, true, false);
         $valuesExpected = array(
             array(true, array('domain.xx', 'domain.zz', 'domain.madeup'))
             );
@@ -268,7 +268,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAllow()
     {
-        $this->assertEquals(Hostname\Hostname::ALLOW_DNS, $this->_validator->getAllow());
+        $this->assertEquals(Hostname::ALLOW_DNS, $this->_validator->getAllow());
     }
 
     /**
@@ -304,7 +304,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
      */
     public function testNumberNames()
     {
-        $validator = new Hostname\Hostname();
+        $validator = new Hostname();
 
         // Check TLD matching
         $valuesExpected = array(
@@ -323,7 +323,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
      */
     public function testPunycodeDecoding()
     {
-        $validator = new Hostname\Hostname();
+        $validator = new Hostname();
 
         // Check TLD matching
         $valuesExpected = array(
@@ -361,7 +361,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
     public function testDifferentIconvEncoding()
     {
         iconv_set_encoding('internal_encoding', 'ISO8859-1');
-        $validator = new Hostname\Hostname();
+        $validator = new Hostname();
 
         $valuesExpected = array(
             array(true, array('bürger.com', 'hãllo.com', 'hållo.com')),

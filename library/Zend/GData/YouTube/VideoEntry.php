@@ -24,9 +24,11 @@
  * @namespace
  */
 namespace Zend\GData\YouTube;
-use Zend\GData\App;
-use Zend\GData\Extension as GDataExtension;
-use Zend\GData\Media\Extension as MediaExtension;
+
+use Zend\GData\YouTube,
+    Zend\GData\App,
+    Zend\GData\Extension as GDataExtension,
+    Zend\GData\Media\Extension as MediaExtension;
 
 /**
  * Represents the YouTube video flavor of an Atom entry
@@ -38,7 +40,7 @@ use Zend\GData\Media\Extension as MediaExtension;
  * @uses       \Zend\GData\Extension\FeedLink
  * @uses       \Zend\GData\Extension\Rating
  * @uses       \Zend\GData\Geo\Extension\GeoRssWhere
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @uses       \Zend\GData\YouTube\Extension\Control
  * @uses       \Zend\GData\YouTube\Extension\Link
  * @uses       \Zend\GData\YouTube\Extension\Location
@@ -59,7 +61,7 @@ class VideoEntry extends MediaEntry
 
     const YOUTUBE_DEVELOPER_TAGS_SCHEMA = 'http://gdata.youtube.com/schemas/2007/developertags.cat';
     const YOUTUBE_CATEGORY_SCHEMA = 'http://gdata.youtube.com/schemas/2007/categories.cat';
-    protected $_entryClassName = '\Zend\GData\YouTube\VideoEntry';
+    protected $_entryClassName = 'Zend\GData\YouTube\VideoEntry';
 
     /**
      * If null, the video can be embedded

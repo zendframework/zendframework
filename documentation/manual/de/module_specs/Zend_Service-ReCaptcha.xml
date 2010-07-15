@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20810 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.recaptcha">
     <title>Zend_Service_ReCaptcha</title>
@@ -113,7 +113,7 @@ if (!$result->isValid()) {
         <para>
             Um diese Komponente zu verwenden benötigt man
             <ulink url="http://recaptcha.net/whyrecaptcha.html">einen Account</ulink> um
-            öffentliche und private Schlüssel für die Mailhide API erstellen.
+            öffentliche und private Schlüssel für die Mailhide <acronym>API</acronym> erstellen.
         </para>
 
         <example id="zend.service.recaptcha.mailhide.example-1">

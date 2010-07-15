@@ -167,4 +167,14 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('bar', $html);
         $this->assertNotContains('baz', $html);
     }
+
+    /**
+     * Prove the fluent interface on Zend_Form_Element_Image::loadDefaultDecorators
+     *
+     * @group ZF-9913
+     */
+    public function testFluentInterfaceOnLoadDefaultDecorators()
+    {
+        $this->assertSame($this->element, $this->element->loadDefaultDecorators());
+    }
 }

@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: Twitter.php 22338 2010-05-30 19:07:01Z padraic $
  */
- 
+
 /**
  * @namespace
  */
@@ -98,7 +98,7 @@ class Twitter extends REST\Client\RESTClient
         'friendship',
         'account',
         'favorite',
-        'block'
+        'block',
     );
     
     /**
@@ -126,7 +126,7 @@ class Twitter extends REST\Client\RESTClient
         $this->setUri('http://api.twitter.com');
         if (!is_array($options)) $options = array();
         $options['siteUrl'] = self::OAUTH_BASE_URI;
-        if ($options instanceof \Zend\Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         }
         $this->_options = $options;
@@ -134,10 +134,11 @@ class Twitter extends REST\Client\RESTClient
             $this->setUsername($options['username']);
         }
         if (isset($options['accessToken'])
+
         && $options['accessToken'] instanceof OAuth\Token\Access) {
             $this->setLocalHttpClient($options['accessToken']->getHttpClient($options));
         } else {
-            $this->setLocalHttpClient(clone self::getDefaultHTTPClient());
+            $this->setLocalHttpClient(clone self::getHttpClient());
             if (is_null($consumer)) {
                 $this->_oauthConsumer = new OAuth\Consumer($options);
             } else {

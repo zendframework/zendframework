@@ -434,7 +434,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testPhpVersionBug()
     {
         try {
-            $file = dirname(__FILE__) . '/_files/ZF-8462.pdf';
+            $file = __DIR__ . '/_files/ZF-8462.pdf';
             $pdf = PDF\PDFDocument::load($file);
         } catch (PDF\Exception $e) {
             if (strpos($e->getMessage(), 'Cross-reference streams are not supported yet.') !== false) {

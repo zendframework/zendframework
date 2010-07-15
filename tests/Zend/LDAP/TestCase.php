@@ -57,6 +57,6 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      */
     protected function _createTestNode()
     {
-        return \Zend\LDAP\Node\Node::fromArray($this->_createTestArrayData(), true);
+        return \Zend\LDAP\Node::fromArray($this->_createTestArrayData(), true);
     }
 }

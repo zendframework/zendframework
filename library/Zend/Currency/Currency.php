@@ -141,7 +141,7 @@ class Currency
     public function toCurrency($value = null, array $options = array())
     {
         if ($value === null) {
-            if (is_array($value) && isset($options['value'])) {
+            if (is_array($options) && isset($options['value'])) {
                 $value = $options['value'];
             } else {
                 $value = $this->_options['value'];
@@ -782,6 +782,9 @@ class Currency
     public function setService($service)
     {
         if (is_string($service)) {
+            if (!class_exists($service)) {
+                throw new Exception('A currency service by class name "' . $service . '" does not exist');
+            }
             $service = new $service;
         }
 

@@ -78,7 +78,7 @@ abstract class AbstractTest extends \ZendTest\DB\Select\AbstractTest
     protected function _useMyIncludePath()
     {
         $this->_runtimeIncludePath = get_include_path();
-        set_include_path(dirname(__FILE__) . '/../_files/' . PATH_SEPARATOR . $this->_runtimeIncludePath);
+        set_include_path(__DIR__ . '/../_files/' . PATH_SEPARATOR . $this->_runtimeIncludePath);
     }
 
     protected function _restoreIncludePath()

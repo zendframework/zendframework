@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon;
+use Zend\Service\Amazon;
 
 /**
  * @todo: Rename class to Zend_Service_Amazon_AbstractTest
@@ -32,7 +37,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  */
-class AmamzonAbstract extends PHPUnit_Framework_TestCase
+class AmamzonAbstract extends \PHPUnit_Framework_TestCase
 {
     /**
      * Prepares the environment before running a test.
@@ -55,14 +60,14 @@ class AmamzonAbstract extends PHPUnit_Framework_TestCase
         try {
             $class = new TestAmamzonAbstract();
             $this->fail('Exception should be thrown when no keys are passed in.');
-        } catch(Zend_Service_Amazon_Exception $zsae) {}
+        } catch(Amazon\Exception $zsae) {}
     }
 
     public function testConstructorWithKeysDoesNotThrowException()
     {
         try {
             $class = new TestAmamzonAbstract('TestAccessKey', 'TestSecretKey');
-        } catch(Zend_Service_Amazon_Exception $zsae) {
+        } catch(Amazon\Exception $zsae) {
             $this->fail('Exception should be thrown when no keys are passed in.');
         }
     }
@@ -94,7 +99,7 @@ class AmamzonAbstract extends PHPUnit_Framework_TestCase
     }
 }
 
-class TestAmamzonAbstract extends Zend_Service_Amazon_Abstract
+class TestAmamzonAbstract extends Amazon\AbstractAmazon
 {
     public function returnAccessKey()
     {

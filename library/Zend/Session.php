@@ -531,8 +531,9 @@ class Zend_Session extends Zend_Session_Abstract
                     unset($_SESSION['__ZF'][$namespace]);
                 }
 
-                // Expire Namespace by Global Hop (ENGH)
-                if (isset($namespace_metadata['ENGH']) && $namespace_metadata['ENGH'] >= 1) {
+                // Expire Namespace by Global Hop (ENGH) if it wasnt expired above
+                if (isset($_SESSION['__ZF'][$namespace]) && isset($namespace_metadata['ENGH']) && $namespace_metadata['ENGH'] >= 1) {
+
                     $_SESSION['__ZF'][$namespace]['ENGH']--;
 
                     if ($_SESSION['__ZF'][$namespace]['ENGH'] === 0) {
@@ -570,8 +571,8 @@ class Zend_Session extends Zend_Session_Abstract
                             unset($_SESSION['__ZF'][$namespace]['ENVGH'][$variable]);
                         }
                     }
-		    if(empty($_SESSION['__ZF'][$namespace]['ENVGH'])) {
-			unset($_SESSION['__ZF'][$namespace]['ENVGH']);	
+                    if (empty($_SESSION['__ZF'][$namespace]['ENVGH'])) {
+                        unset($_SESSION['__ZF'][$namespace]['ENVGH']);    
                     }
                 }
             }

@@ -489,10 +489,6 @@ class Acl
      */
     public function removeAllow($roles = null, $resources = null, $privileges = null)
     {
-        if ($resources == null) {
-            $resources = array_keys($this->_resources);
-        }
-        
         return $this->setRule(self::OP_REMOVE, self::TYPE_ALLOW, $roles, $resources, $privileges);
     }
 
@@ -507,10 +503,6 @@ class Acl
      */
     public function removeDeny($roles = null, $resources = null, $privileges = null)
     {
-        if ($resources == null) {
-            $resources = array_keys($this->_resources);
-        }
-        
         return $this->setRule(self::OP_REMOVE, self::TYPE_DENY, $roles, $resources, $privileges);
     }
 
@@ -595,7 +587,7 @@ class Acl
 
         // ensure that all specified Resources exist; normalize input to array of Resource objects or null
         if (!is_array($resources)) {
-            $resources = array($resources);
+            $resources = ($resources == null && count($this->_resources) > 0) ? array_keys($this->_resources) : array($resources);
         } else if (0 === count($resources)) {
             $resources = array(null);
         }

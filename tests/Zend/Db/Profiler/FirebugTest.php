@@ -106,7 +106,9 @@ class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        $this->_db->getConnection()->exec('DROP TABLE foo');
+        if (extension_loaded('pdo_sqlite')) {
+            $this->_db->getConnection()->exec('DROP TABLE foo');
+        }
 
         Zend_Wildfire_Channel_HttpHeaders::destroyInstance();
         Zend_Wildfire_Plugin_FirePhp::destroyInstance();

@@ -405,6 +405,7 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
                 } while ($chunksize > 0);
             } else {
                 $this->close();
+		require_once 'Zend/Http/Client/Adapter/Exception.php';
                 throw new Zend_Http_Client_Adapter_Exception('Cannot handle "' .
                     $headers['transfer-encoding'] . '" transfer encoding');
             }

@@ -90,8 +90,9 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        return;
-        $this->_db->getConnection()->exec('DROP TABLE foo');
+        if (extension_loaded('pdo_sqlite')) {
+            $this->_db->getConnection()->exec('DROP TABLE foo');
+        }
 
         Channel\HttpHeaders::destroyInstance();
         FirePhp\FirePhp::destroyInstance();

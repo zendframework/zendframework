@@ -128,6 +128,9 @@ resources.frontController.plugins.baz.class = "My_Plugin_Baz"
 resources.frontController.plugins.baz.stackIndex = 123
 resources.frontController.returnresponse = 1
 resources.frontController.env = APPLICATION_ENV
+
+; The following proxies to: Zend_Controller_Action_HelperBroker::addPath('Helper_Path', $helperPrefix);
+resources.frontController.actionHelperPaths.HELPER_Prefix = "My/Helper/Path"
 ]]></programlisting>
     </example>
 

@@ -227,4 +227,15 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($ss->getTranscript(), "none");
 
     }
+
+    /**
+     * @group   ZF-3247
+     */
+	public function testSlideShareObjectHandlesUnicodeCharactersWell()
+	{
+		$slideShow = new Zend_Service_SlideShare_SlideShow();
+		$slideShow->setTitle('Unicode test: ஸ்றீனிவாஸ ராமானுஜன் ஐயங்கார்');
+
+        $this->assertEquals('UTF-8', mb_detect_encoding($slideShow->getTitle()));
+	}
 }

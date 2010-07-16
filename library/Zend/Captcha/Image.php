@@ -577,10 +577,14 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
             // safety guard
             return;
         }
+        $suffixLength = strlen($this->_suffix);
         foreach (new DirectoryIterator($imgdir) as $file) {
             if (!$file->isDot() && !$file->isDir()) {
                 if ($file->getMTime() < $expire) {
-                    unlink($file->getPathname());
+                    // only deletes files ending with $this->_suffix
+                    if (substr($file->getFilename(), -($suffixLength)) == $this->_suffix) {
+                        unlink($file->getPathname());
+                    }
                 }
             }
         }

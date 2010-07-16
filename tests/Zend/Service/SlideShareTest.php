@@ -236,6 +236,9 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
 		$slideShow = new Zend_Service_SlideShare_SlideShow();
 		$slideShow->setTitle('Unicode test: ஸ்றீனிவாஸ ராமானுஜன் ஐயங்கார்');
 
+		if (!extension_loaded('mbstring')) {
+		    $this->markTestSkipped('Extension "mbstring" not loaded');
+		}
         $this->assertEquals('UTF-8', mb_detect_encoding($slideShow->getTitle()));
 	}
 }

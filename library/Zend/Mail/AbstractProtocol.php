@@ -171,7 +171,7 @@ abstract class AbstractProtocol
      * 
      * @return int the maximum log size
      */
-    public function setMaximumLog($maximumLog)
+    public function getMaximumLog()
     {
         return $this->_maximumLog;
     }

@@ -563,6 +563,7 @@ define('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED', false);
 define('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID', 'Enter AWSAccessKeyId here');
 define('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY', 'Enter AWSSecretKey here');
 define('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET', 'zftestamazons3bucket');
+define('TESTS_ZEND_SERVICE_AMAZON_SQS_QUEUE', 'zftestamazonsqsqueuename');
 
 /**
  * Zend_Service_Delicious tests

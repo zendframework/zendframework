@@ -400,6 +400,20 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
             $this->assertRegExp('#^(Zend_Log_Filter_NotImplementsFilterInterface|The\sspecified\sfilter)#', $e->getMessage());
         }
     }
+
+    /**
+     * @group ZF-8953
+     */
+    public function testFluentInterface()
+    {
+        $logger   = new Zend_Log();
+        $instance = $logger->addPriority('all', 8)
+                           ->addFilter(1)
+                           ->addWriter(array('writerName' => 'Null'))
+                           ->setEventItem('os', PHP_OS);
+
+        $this->assertTrue($instance instanceof Zend_Log);
+    }
 }
 
 class Zend_Log_Writer_NotExtendedWriterAbstract implements Zend_Log_FactoryInterface

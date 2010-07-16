@@ -62,6 +62,18 @@ class Zend_Log_Writer_AbstractTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend_Log_Exception');
         $this->_writer->addFilter(new StdClass());
     }
+
+    /**
+     * @group ZF-8953
+     */
+    public function testFluentInterface()
+    {
+        require_once 'Zend/Log/Formatter/Simple.php';
+        $instance = $this->_writer->addFilter(1)
+                                  ->setFormatter(new Zend_Log_Formatter_Simple());
+
+        $this->assertTrue($instance instanceof Zend_Log_Writer_AbstractTest_Concrete);
+    }
 }
 
 class Zend_Log_Writer_AbstractTest_Concrete extends Zend_Log_Writer_Abstract

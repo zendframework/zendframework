@@ -84,4 +84,16 @@ class Zend_Log_Writer_SyslogTest extends PHPUnit_Framework_TestCase
             $this->assertContains('Only LOG_USER is a valid', $e->getMessage());
         }
     }
+
+    /**
+     * @group ZF-8953
+     */
+    public function testFluentInterface()
+    {
+        $writer   = new Zend_Log_Writer_Syslog();
+        $instance = $writer->setFacility(LOG_USER)
+                           ->setApplicationName('my_app');
+
+        $this->assertTrue($instance instanceof Zend_Log_Writer_Syslog);
+    }
 }

@@ -63,6 +63,7 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
         }
 
         $this->_filters[] = $filter;
+        return $this;
     }
 
     /**
@@ -92,6 +93,7 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
     public function setFormatter(Zend_Log_Formatter_Interface $formatter)
     {
         $this->_formatter = $formatter;
+        return $this;
     }
 
     /**

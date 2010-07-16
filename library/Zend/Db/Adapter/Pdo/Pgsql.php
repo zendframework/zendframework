@@ -281,7 +281,10 @@ class Zend_Db_Adapter_Pdo_Pgsql extends Zend_Db_Adapter_Pdo_Abstract
     public function lastSequenceId($sequenceName)
     {
         $this->_connect();
-        $value = $this->fetchOne("SELECT CURRVAL(".$this->quote($sequenceName).")");
+        $sequenceName = trim((string) $sequenceName, $this->getQuoteIdentifierSymbol());
+        $value = $this->fetchOne("SELECT CURRVAL("
+               . $this->quote($this->quoteIdentifier($sequenceName, true))
+               . ")");
         return $value;
     }
 
@@ -296,7 +299,10 @@ class Zend_Db_Adapter_Pdo_Pgsql extends Zend_Db_Adapter_Pdo_Abstract
     public function nextSequenceId($sequenceName)
     {
         $this->_connect();
-        $value = $this->fetchOne("SELECT NEXTVAL(".$this->quote($sequenceName).")");
+        $sequenceName = trim((string) $sequenceName, $this->getQuoteIdentifierSymbol());
+        $value = $this->fetchOne("SELECT NEXTVAL("
+               . $this->quote($this->quoteIdentifier($sequenceName, true))
+               . ")");
         return $value;
     }
 

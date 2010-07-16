@@ -184,7 +184,7 @@ class Syslog extends AbstractWriter
     public function setFacility($facility)
     {
         if ($this->_facility === $facility) {
-            return;
+            return $this;
         }
 
         if (!count($this->_validFacilities)) {
@@ -205,6 +205,7 @@ class Syslog extends AbstractWriter
 
         $this->_facility = $facility;
         $this->_initializeSyslog();
+        return $this;
     }
 
     /**
@@ -216,10 +217,11 @@ class Syslog extends AbstractWriter
     public function setApplicationName($application)
     {
         if ($this->_application === $application) {
-            return;
+            return $this;
         }
         $this->_application = $application;
         $this->_initializeSyslog();
+        return $this;
     }
 
     /**

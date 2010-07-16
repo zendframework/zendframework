@@ -391,6 +391,7 @@ class Logger implements Factory
         }
 
         $this->_priorities[$priority] = $name;
+        return $this;
     }
 
     /**
@@ -414,6 +415,7 @@ class Logger implements Factory
         }
 
         $this->_filters[] = $filter;
+        return $this;
     }
 
     /**
@@ -437,6 +439,7 @@ class Logger implements Factory
         }
 
         $this->_writers[] = $writer;
+        return $this;
     }
 
     /**
@@ -449,6 +452,7 @@ class Logger implements Factory
     public function setEventItem($name, $value) 
     {
         $this->_extras = array_merge($this->_extras, array($name => $value));
+        return $this;
     }
     
     /**

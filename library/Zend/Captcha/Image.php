@@ -595,6 +595,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      */
     public function render(Zend_View_Interface $view = null, $element = null)
     {
-        return '<img width="'.$this->getWidth().'" height="'.$this->getHeight().'" alt="'.$this->getImgAlt().'" src="' . $this->getImgUrl() . $this->getId() . $this->getSuffix() . '"/><br/>';
+        return '<img width="' . $this->getWidth() . '" height="' . $this->getHeight() . '" alt="' . $this->getImgAlt()
+             . '" src="' . $this->getImgUrl() . $this->getId() . $this->getSuffix() . '" />';
     }
 }

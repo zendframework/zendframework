@@ -300,7 +300,7 @@ abstract class AbstractRowset implements \SeekableIterator, \Countable, \ArrayAc
      */
     public function valid()
     {
-        return $this->_pointer < $this->_count;
+        return $this->_pointer >= 0 && $this->_pointer < $this->_count;
     }
 
     /**

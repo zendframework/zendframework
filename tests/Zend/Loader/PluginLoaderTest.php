@@ -441,7 +441,7 @@ class PluginLoaderTest extends \PHPUnit_Framework_TestCase
             $paths = $loader->getPaths();
             $this->fail(sprintf("Failed loading helper; paths: %s", var_export($paths, 1)));
         }
-        
+
         $classPath = $loader->getClassPath('DeclareVars');
         $this->assertContains($expected, $classPath);
     }
@@ -461,5 +461,21 @@ class PluginLoaderTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertEquals('Zfns\\Foo', $className);
         $this->assertEquals('Zfns\\Foo', $loader->getClassName('Foo'));
+    }
+
+    /**
+     * @group ZF-9721
+     */
+    public function testRemovePrefixPathThrowsExceptionIfPathNotRegisteredInPrefix()
+    {
+        try {
+            $loader = new Zend_Loader_PluginLoader(array('My_Namespace_' => 'My/Namespace/'));
+            $loader->removePrefixPath('My_Namespace_', 'ZF9721');
+            $this->fail();
+        } catch (Exception $e) {
+            $this->assertType('Zend_Loader_PluginLoader_Exception', $e);
+            $this->assertContains('Prefix My_Namespace_ / Path ZF9721', $e->getMessage());
+        }
+        $this->assertEquals(1, count($loader->getPaths('My_Namespace_')));
     }
 }

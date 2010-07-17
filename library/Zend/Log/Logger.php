@@ -386,7 +386,7 @@ class Logger implements Factory
         $name = strtoupper($name);
 
         if (isset($this->_priorities[$priority])
-            || array_search($name, $this->_priorities)) {
+            || false !== array_search($name, $this->_priorities)) {
             throw new Exception('Existing priorities cannot be overwritten');
         }
 

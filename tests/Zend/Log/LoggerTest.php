@@ -392,4 +392,33 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($instance instanceof Zend_Log);
     }
+
+    /**
+     * @group ZF-10170
+     */
+    public function testPriorityDuplicates()
+    {
+        $logger   = new Zend_Log();
+        $mock     = new Zend_Log_Writer_Mock();
+        $logger->addWriter($mock);
+        try {
+            $logger->addPriority('emerg', 8);
+            $this->fail();
+        } catch(Exception $e) {
+            $this->assertType('Zend_Log_Exception', $e);
+            $this->assertEquals('Existing priorities cannot be overwritten', $e->getMessage());
+        }
+
+        try {
+            $logger->log('zf10170', 0);
+            $logger->log('clone zf10170', 8);
+            $this->fail();
+        } catch (Exception $e) {
+            $this->assertType('Zend_Log_Exception', $e);
+            $this->assertEquals('Bad log priority', $e->getMessage());
+        }
+        $this->assertEquals(0, $mock->events[0]['priority']);
+        $this->assertEquals('EMERG', $mock->events[0]['priorityName']);
+        $this->assertFalse(array_key_exists(1, $mock->events));
+    }
 }

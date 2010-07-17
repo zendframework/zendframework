@@ -354,7 +354,12 @@ abstract class AbstractRowset implements \SeekableIterator, \Countable, \ArrayAc
      */
     public function offsetGet($offset)
     {
-        $this->_pointer = (int) $offset;
+        $offset = (int) $offset;
+        if ($offset < 0 || $offset >= $this->_count) {
+            require_once 'Zend/Db/Table/Rowset/Exception.php';
+            throw new Zend_Db_Table_Rowset_Exception("Illegal index $offset");
+        }
+        $this->_pointer = $offset;
 
         return $this->current();
     }

@@ -395,7 +395,7 @@ class Zend_Log
         $name = strtoupper($name);
 
         if (isset($this->_priorities[$priority])
-            || array_search($name, $this->_priorities)) {
+            || false !== array_search($name, $this->_priorities)) {
             /** @see Zend_Log_Exception */
             require_once 'Zend/Log/Exception.php';
             throw new Zend_Log_Exception('Existing priorities cannot be overwritten');

@@ -444,6 +444,9 @@ class Zend_Auth_Adapter_DbTable_BasicSqliteTest extends PHPUnit_Framework_TestCa
         $this->assertTrue($result->isValid());
         $this->assertEquals('my_username', $result->getIdentity());
         
+        $this->_adapter = null;
+        $this->_setupAuthAdapter();
+        
         // test if user 2 can authenticate
         $this->_adapter->setIdentity('my_username')
                        ->setCredential('my_otherpass')

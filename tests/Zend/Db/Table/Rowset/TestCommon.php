@@ -266,12 +266,29 @@ abstract class Zend_Db_Table_Rowset_TestCommon extends Zend_Db_Table_TestSetup
 
     /**
      * @group ZF-9213
+     * @group ZF-10173
      */
     public function testTableRowsetIndexesValid()
     {
         $rowset = $this->_table['bugs']->fetchAll();
-        $this->assertNull($rowset[-1]);
+        try {
+            $rowset[-1];
+            $this->fail();
+        } catch (Exception $e) {
+            $this->assertType('Zend_Db_Table_Rowset_Exception', $e);
+            $this->assertContains('Illegal index', $e->getMessage());
+        }
+
         $this->assertTrue($rowset[0] instanceof Zend_Db_Table_Row);
-        $this->assertNull($rowset[count($rowset) + 2]);
+
+        try {
+            $row = $rowset[count($rowset) + 1];
+            $this->fail();
+        } catch (Exception $e) {
+            $this->assertType('Zend_Db_Table_Rowset_Exception', $e);
+            $this->assertContains('Illegal index', $e->getMessage());
+        }
+        $this->assertEquals(0, $rowset->key());
     }
+
 }

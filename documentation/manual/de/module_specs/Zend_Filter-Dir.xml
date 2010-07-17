@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22384 -->
+<!-- EN-Revision: 22389 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.dir">
     <title>Dir</title>
@@ -31,7 +31,7 @@ print $filter->filter('/etc/passwd');
 ]]></programlisting>
 
         <para>
-            Dies gibt "/etc" zurück.
+            Dies gibt "<filename>/etc</filename>" zurück.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -41,7 +41,7 @@ print $filter->filter('C:/Temp/x');
 ]]></programlisting>
 
         <para>
-            Dies gibt "C:/Temp" zurück.
+            Dies gibt "<filename>C:/Temp</filename>" zurück.
         </para>
     </sect3>
 </sect2>

@@ -369,6 +369,17 @@ class DbTable implements AuthenticationAdapter
             return $authResult;
         }
 
+        if (true === $this->getAmbiguityIdentity()) {
+            $validIdentities = array ();
+            $zendAuthCredentialMatchColumn = $this->_zendDb->foldCase('zend_auth_credential_match');
+            foreach ($resultIdentities as $identity) {
+                if (1 === (int) $identity[$zendAuthCredentialMatchColumn]) {
+                    $validIdentities[] = $identity;
+                }
+            }
+            $resultIdentities = $validIdentities;
+        }
+        
         $authResult = $this->_authenticateValidateResult(array_shift($resultIdentities));
         return $authResult;
     }

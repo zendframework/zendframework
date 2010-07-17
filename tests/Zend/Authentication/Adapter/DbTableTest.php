@@ -429,6 +429,9 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($result->isValid());
         $this->assertEquals('my_username', $result->getIdentity());
         
+        $this->_adapter = null;
+        $this->_setupAuthAdapter();
+        
         // test if user 2 can authenticate
         $this->_adapter->setIdentity('my_username')
                        ->setCredential('my_otherpass')

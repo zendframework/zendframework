@@ -21,6 +21,11 @@
  */
 
 /**
+ * @see Zend_Exception
+ */
+require_once 'Zend/Application/Exception.php';
+
+/**
  * Exception class for Zend_Application
  *
  * @uses       Zend_Application_Exception

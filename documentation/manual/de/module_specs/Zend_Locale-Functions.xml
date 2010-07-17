@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21864 -->
+<!-- EN-Revision: 22433 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.functions">
     <title>Zend_Locale verwenden</title>
@@ -751,10 +751,10 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>TerritoryToLanguage</emphasis></entry>
 
                         <entry>
-                            Gibt eine Liste von Ländern zurück die eine Sprache verwenden. Der
-                            Ländercode wird als Arrayschlüssel und der Sprachcode als Arraywert
-                            zurückgegeben. Wenn eine Sprache in mehreren Ländern verwendet wird
-                            werden diese Länder mit einem Leerzeichen getrennt
+                            Gibt eine Liste von Sprachen zurück und die Länder in welche Sie
+                            gesprochen werden. Das Land wird als Arrayschlüssel und der Sprachcode
+                            als Arraywert zurückgegeben. Wenn eine Sprache in mehreren Ländern
+                            verwendet wird werden diese Länder mit einem Leerzeichen getrennt
                         </entry>
                     </row>
 
@@ -762,10 +762,11 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>LanguageToTerritory</emphasis></entry>
 
                         <entry>
-                            Gibt eine Liste von Ländern und den in diesen Ländern gesprächenen
-                            Sprachen zurück. Der Ländercode wird als Arrayschlüssel und der
-                            Sprachcode wird als Arraywert zurückgegeben. Wenn ein Land verschiedene
-                            Sprachen verwendet werden diese Sprachen mit einem Leerzeichen getrennt
+                            Gibt eine Liste von Ländern zurück mit den Sprachen welche in Ihnen
+                            gesprochen werden. Der Ländercode wird als Arrayschlüssel und der
+                            Sprachcode wird als Arraywert zurückgegeben. Wenn verschiedene Sprachen
+                            in einem Land gesprochen werden dann werden diese Sprachen mit einem
+                            Leerzeichen getrennt
                         </entry>
                     </row>
 
@@ -1506,11 +1507,11 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>TerritoryToLanguage</emphasis></entry>
 
                         <entry>
-                            Gibt die Territorien zurück die in einer angegebenen Sprache verwendet
-                            werden. Die Sprache muß als <acronym>ISO</acronym> Sprachcode angegeben
-                            werden zum Beispiel 'en' für englisch. Wenn mehrere Sprachen in einem
-                            Territorien verwendet werden dann werden diese Sprachen mit einem
-                            Leerzeichen getrennt
+                            Gibt das Territorium zurück in dem die angegebene Sprache verwendet
+                            wird. Die Sprache muß als <acronym>ISO</acronym> Sprachcode angegeben
+                            werden zum Beispiel 'en' für englisch. Wenn die angegebene Sprache in
+                            mehreren Territorien verwendet wird, dann werden diese Sprachen mit
+                            einem Leerzeichen getrennt
                         </entry>
                     </row>
 
@@ -1518,11 +1519,11 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>LanguageToTerritory</emphasis></entry>
 
                         <entry>
-                            Gibt die Sprachen zurück die in einem angegebenen Territorium verwendet
+                            Gibt die Sprachen zurück die in dem angegebenen Territorium gesprochen
                             werden. Das Territorium muß als <acronym>ISO3166</acronym> Code
-                            angegeben werden zum Beispiel 'IT' für italienisch. Wenn eine Sprache in
-                            mehreren Territorien verwendet wird dann werden diese Territorien mit
-                            einem Leerzeichen getrennt
+                            angegeben werden zum Beispiel 'IT' für italienisch. Wenn im angegebenen
+                            Territorium mehrere Sprachen gesprochen werden, dann werden diese
+                            Territorien mit einem Leerzeichen getrennt
                         </entry>
                     </row>
 

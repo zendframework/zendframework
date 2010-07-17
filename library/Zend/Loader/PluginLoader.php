@@ -256,7 +256,7 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
 
         if ($path != null) {
             $pos = array_search($path, $registry[$prefix]);
-            if ($pos === null) {
+            if (false === $pos) {
                 require_once 'Zend/Loader/PluginLoader/Exception.php';
                 throw new Zend_Loader_PluginLoader_Exception('Prefix ' . $prefix . ' / Path ' . $path . ' was not found in the PluginLoader.');
             }

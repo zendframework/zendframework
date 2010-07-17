@@ -397,6 +397,63 @@ class Zend_Auth_Adapter_DbTable_BasicSqliteTest extends PHPUnit_Framework_TestCa
         // restore adapter
         Zend_Db_Table_Abstract::setDefaultAdapter($tmp);
     }
+    /**
+     * Test to see same usernames with different passwords can not authenticate
+     * when flag is not set. This is the current state of 
+     * Zend_Auth_Adapter_DbTable (up to ZF 1.10.6)
+     * 
+     * @group   ZF-7289
+     */
+    public function testEqualUsernamesDifferentPasswordShouldNotAuthenticateWhenFlagIsNotSet()
+    {
+        $this->_db->insert('users', array (
+            'username' => 'my_username',
+            'password' => 'my_otherpass',
+            'real_name' => 'Test user 2',
+        ));
+        
+        // test if user 1 can authenticate
+        $this->_adapter->setIdentity('my_username')
+                       ->setCredential('my_password');
+        $result = $this->_adapter->authenticate();
+        $this->assertTrue(in_array('More than one record matches the supplied identity.',
+            $result->getMessages()));
+        $this->assertFalse($result->isValid());
+    }
+    /**
+     * Test to see same usernames with different passwords can authenticate when
+     * a flag is set
+     * 
+     * @group   ZF-7289
+     */
+    public function testEqualUsernamesDifferentPasswordShouldAuthenticateWhenFlagIsSet()
+    {
+        $this->_db->insert('users', array (
+            'username' => 'my_username',
+            'password' => 'my_otherpass',
+            'real_name' => 'Test user 2',
+        ));
+        
+        // test if user 1 can authenticate
+        $this->_adapter->setIdentity('my_username')
+                       ->setCredential('my_password')
+                       ->setAmbiguityIdentity(true);
+        $result = $this->_adapter->authenticate();
+        $this->assertFalse(in_array('More than one record matches the supplied identity.',
+            $result->getMessages()));
+        $this->assertTrue($result->isValid());
+        $this->assertEquals('my_username', $result->getIdentity());
+        
+        // test if user 2 can authenticate
+        $this->_adapter->setIdentity('my_username')
+                       ->setCredential('my_otherpass')
+                       ->setAmbiguityIdentity(true);
+        $result2 = $this->_adapter->authenticate();
+        $this->assertFalse(in_array('More than one record matches the supplied identity.',
+            $result->getMessages()));
+        $this->assertTrue($result->isValid());
+        $this->assertEquals('my_username', $result->getIdentity());
+    }
 
 
     protected function _setupDbAdapter($optionalParams = array())

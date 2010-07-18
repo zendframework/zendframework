@@ -968,7 +968,7 @@ var_dump($isOwner);
             </para>
         </sect3>
 
-        <sect3 id="zend.gdata.gapps.groupMembers.removing">
+        <sect3 id="zend.gdata.gapps.groupOwners.removing">
             <title>Removing an owner from a group</title>
 
             <para>

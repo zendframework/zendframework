@@ -486,7 +486,7 @@ stream_copy_to_stream($response->getStream(), $fp);
         <para>
             Second parameter for <methodname>getObjectStream()</methodname> is optional and
             specifies target file to write the data. If not specified, temporary file is used, which
-            will be deleted after the respons eobject is destroyed.
+            will be deleted after the response object is destroyed.
         </para>
 
         <para>

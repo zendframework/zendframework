@@ -136,6 +136,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
     /**
      * Test reading from an object
      *
+     * @group ZF-10035
      * @return void
      */
     public function testReadObject()
@@ -160,12 +161,15 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
         $new_data = '';
 
         $f = fopen($this->_fileName, 'r');
+        fseek($f, 1000);
         while (!feof($f)) {
-            $new_data .= fread($f, 1024);
+            $chunk =  fread($f, 1000);
+            $new_data .= $chunk;
+            $this->assertEquals(strlen($chunk), 1000);
         }
         fclose($f);
 
-        $this->assertEquals($data, $new_data);
+        $this->assertEquals(substr($data, 1000), $new_data);
 
         unset($data);
         unset($new_data);
@@ -222,7 +226,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
         $result = mkdir($this->_bucketName);
         $this->assertTrue($result);
 
-    $this->assertTrue(is_dir($this->_bucketName));
+        $this->assertTrue(is_dir($this->_bucketName));
 
         $data = str_repeat('x', 10000);
         $len = strlen($data);
@@ -231,7 +235,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
         $size = file_put_contents($this->_fileName, $data);
         $this->assertEquals($len, $size);
 
-    $this->assertFalse(is_dir($this->_fileName));
+        $this->assertFalse(is_dir($this->_fileName));
 
         // Stat an object
         $info = stat($this->_fileName);

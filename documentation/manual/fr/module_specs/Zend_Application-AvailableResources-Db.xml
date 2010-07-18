@@ -33,6 +33,12 @@
             <emphasis><property>isDefaultTableAdapter</property></emphasis>&#160;: spécifie
             si l'adaptateur est celui par défaut des tables.
         </para></listitem>
+
+        <listitem><para>
+            <emphasis><property>defaultMetadataCache</property></emphasis>: spécifie
+            le nom d'un modèle du gestionnaire de cache ou l'objet de cache pour les méta-données
+            pour toutes les tables.
+        </para></listitem>
     </itemizedlist>
 
     <example id="zend.application.available-resources.db.configExample">
@@ -51,6 +57,9 @@ resources.db.params.username = "webuser"
 resources.db.params.password = "XXXXXXX"
 resources.db.params.dbname = "test"
 resources.db.isDefaultTableAdapter = true
+
+; Optionnellement, on peut utiliser un modèle du gestionnaire de cache:
+resources.db.defaultMetadataCache = "database"
 ]]></programlisting>
     </example>
 

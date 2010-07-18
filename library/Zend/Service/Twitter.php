@@ -128,7 +128,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      * @param  array $options Optional options array
      * @return void
      */
-    public function __construct(array $options = null, Zend_Oauth_Consumer $consumer = null)
+    public function __construct($options = null, Zend_Oauth_Consumer $consumer = null)
     {
         $this->setUri('http://api.twitter.com');
         if (!is_array($options)) $options = array();

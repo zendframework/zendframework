@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22390 -->
+<!-- EN-Revision: 22585 -->
 <!-- Reviewed: 22141 -->
 <sect1 id="zend.translate.additional">
     <title>Zusätzliche Features für Übersetzungen</title>
@@ -244,6 +244,21 @@ $translate->addTranslation(
                         </entry>
 
                         <entry><emphasis><constant>NULL</constant></emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>tag</entry>
+                        <entry>Alle</entry>
+
+                        <entry>
+                            Setzt ein individuelles Tag welche für den verknüpften Cache verwendet
+                            wird. Die Verwendung dieser Option erlaubt es den Cache für einzelne
+                            Instanzen zu verwenden und zu löschen. Wenn diese Option nicht gesetzt
+                            wird, dann wird der verknüpfte Cache kombiniert für alle Instanzen
+                            verwendet.
+                        </entry>
+
+                        <entry><emphasis><classname>Zend_Translate</classname></emphasis></entry>
                     </row>
 
                     <row>

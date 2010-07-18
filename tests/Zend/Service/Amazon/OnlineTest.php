@@ -225,7 +225,7 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
      */
     public function testItemLookup()
     {
-        $item = $this->_amazon->itemLookup('B0000A432X');
+        $item = $this->_amazon->itemLookup('B0015T963C');
         $this->assertTrue($item instanceof Zend_Service_Amazon_Item);
     }
 
@@ -328,7 +328,7 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
      */
     public function testQueryAsin()
     {
-        $item = $this->_query->asin('B0000A432X')->search();
+        $item = $this->_query->asin('B0015T963C')->search();
         $this->assertTrue($item instanceof Zend_Service_Amazon_Item);
     }
 }

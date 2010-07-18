@@ -997,6 +997,27 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
 
         $p = new Zend_Paginator(array());
     }
+
+    /**
+     * @group ZF-9396
+     */
+    public function testArrayAccessInClassSerializableLimitIterator()
+    {
+        $iterator  = new ArrayIterator(array('zf9396', 'foo', null));
+        $paginator = Zend_Paginator::factory($iterator);
+
+        $this->assertEquals('zf9396', $paginator->getItem(1));
+
+        $items = $paginator->getAdapter()
+                           ->getItems(0, 10);
+
+        $this->assertEquals('foo', $items[1]);
+        $this->assertEquals(0, $items->key());
+        $this->assertFalse(isset($items[2]));
+        $this->assertTrue(isset($items[1]));
+        $this->assertFalse(isset($items[3]));
+        $this->assertEquals(0, $items->key());
+    }
 }
 
 class Zend_Paginator_TestArrayAggregate implements Zend_Paginator_AdapterAggregate

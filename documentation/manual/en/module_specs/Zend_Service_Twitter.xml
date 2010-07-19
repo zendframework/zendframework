@@ -117,19 +117,7 @@
                 HTTP authentication mechanism where a user just
                 needed to allow applications to store their username and password.
             </para>
-            
-            <note>
-                <para>
-                    In order to authenticate with Twitter, ALL applications MUST be registered with
-                    Twitter in order to receive a Consumer Key and Consumer Secret to be used when
-                    authenticating with OAuth. This can not be reused across multiple applications - 
-                    you must register each new application separately. Twitter access tokens have
-                    no expiry date, so storing them to a database is advised (they can, of course,
-                    be refreshed simply be repeating the OAuth authorization process). This can only
-                    be done while interacting with the user associated with that access token.
-                </para>
-            </note>
-            
+
             <para>The following example demonstrates setting up <classname>Zend_Service_Twitter</classname>
             which is given an already established OAuth access token. Please refer to the <classname>Zend_Oauth</classname>
             documentation to understand the workflow involved. The access token is a serializable object, so you may
@@ -152,13 +140,25 @@ $twitter = new Zend_Service_Twitter(array(
 // verify user's credentials with Twitter
 $response = $twitter->account->verifyCredentials();
 ]]></programlisting>
-
-    <note>
-        <para>The previous pre-OAuth version of <classname>Zend_Service_Twitter</classname> allowed
-        passing in a username as the first parameter rather than within an array. This is no longer supported.</para>
-    </note>
-
         </example>
+
+        <note>
+            <para>
+                In order to authenticate with Twitter, ALL applications MUST be registered with
+                Twitter in order to receive a Consumer Key and Consumer Secret to be used when
+                authenticating with OAuth. This can not be reused across multiple applications - 
+                you must register each new application separately. Twitter access tokens have
+                no expiry date, so storing them to a database is advised (they can, of course,
+                be refreshed simply be repeating the OAuth authorization process). This can only
+                be done while interacting with the user associated with that access token.
+            </para>
+
+            <para>
+                The previous pre-OAuth version of <classname>Zend_Service_Twitter</classname>
+                allowed passing in a username as the first parameter rather than within an array.
+                This is no longer supported.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.service.twitter.account">

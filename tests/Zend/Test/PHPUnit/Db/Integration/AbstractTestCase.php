@@ -25,7 +25,7 @@
  */
 namespace ZendTest\Test\PHPUnit\Db\Integration;
 use Zend\Test\PHPUnit\Db\DataSet;
-use Zend\DB\Table;
+use Zend\Db\Table;
 
 /**
  * @category   Zend

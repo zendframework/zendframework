@@ -25,6 +25,7 @@ namespace ZendTest\Application\Resource;
 use Zend\Loader\Autoloader,
     Zend\Application,
     Zend\Application\Resource\Translate as TranslateResource,
+    Zend\Translator\Translator,
     Zend\Registry;
 
 /**
@@ -155,11 +156,11 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
         $options = $this->_translationOptions;
         $options['cache'] = 'translate';
-        $resource = new Zend_Application_Resource_Translate($options);
+        $resource = new TranslateResource($options);
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
 
-        $this->assertType('Zend_Cache_Core', Zend_Translate::getCache());
-        Zend_Translate::clearCache();
+        $this->assertType('Zend\Cache\Frontend\Core', Translator::getCache());
+        Translator::clearCache();
     }
 }

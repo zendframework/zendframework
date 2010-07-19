@@ -23,9 +23,9 @@
  * @namespace
  */
 namespace ZendTest\Feed\PubSubHubbub;
-use Zend\DB\Adapter;
+use Zend\Db\Adapter;
 
-use Zend\DB\Table;
+use Zend\Db\Table;
 
 use Zend\Feed\PubSubHubbub;
 
@@ -53,10 +53,10 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         PubSubHubbub\PubSubHubbub::setHttpClient($client);
         $this->_subscriber = new \Zend\Feed\PubSubHubbub\Subscriber;
         $this->_adapter = $this->_getCleanMock(
-            '\Zend\DB\Adapter\AbstractAdapter'
+            '\Zend\Db\Adapter\AbstractAdapter'
         );
         $this->_tableGateway = $this->_getCleanMock(
-            '\Zend\DB\Table\AbstractTable'
+            '\Zend\Db\Table\AbstractTable'
         );
         $this->_tableGateway->expects($this->any())->method('getAdapter')
             ->will($this->returnValue($this->_adapter));

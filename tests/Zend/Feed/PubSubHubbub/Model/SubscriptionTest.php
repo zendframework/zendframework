@@ -74,15 +74,15 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
         ) {
             $this->markTestSkipped('Test only with pdo_sqlite');
         }
-        $db = \Zend\DB\DB::factory('PDO\SQLite', array('dbname' => ':memory:'));
-        \Zend\DB\Table\AbstractTable::setDefaultAdapter($db);
+        $db = \Zend\Db\Db::factory('Pdo\Sqlite', array('dbname' => ':memory:'));
+        \Zend\Db\Table\AbstractTable::setDefaultAdapter($db);
         $this->_createTable();
     }
 
     protected function _createTable()
     {
         $sql = "CREATE TABLE subscription ("
-             .      "id varchar(32) NOT NULL DEFAULT '', "
+             .      "id varchar(32) PRIMARY KEY NOT NULL DEFAULT '', "
              .      "topic_url varchar(255) DEFAULT NULL, "
              .      "hub_url varchar(255) DEFAULT NULL, "
              .      "created_time datetime DEFAULT NULL, "
@@ -90,10 +90,9 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
              .      "verify_token varchar(255) DEFAULT NULL, "
              .      "secret varchar(255) DEFAULT NULL, "
              .      "expiration_time datetime DEFAULT NULL, "
-             .      "subscription_state varchar(12) DEFAULT NULL, "
-             .      "PRIMARY KEY (id) "
+             .      "subscription_state varchar(12) DEFAULT NULL"
              . ");";
 
-       \Zend\DB\Table\AbstractTable::getDefaultAdapter()->getConnection()->query($sql);
+       \Zend\Db\Table\AbstractTable::getDefaultAdapter()->getConnection()->query($sql);
     }
 }

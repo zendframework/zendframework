@@ -37,7 +37,7 @@ class AbstractModel
     /**
      * Zend_Db_Table instance to host database methods
      *
-     * @var \Zend\DB\Table\Table
+     * @var \Zend\Db\Table\Table
      */
     protected $_db = null;
  
@@ -45,15 +45,15 @@ class AbstractModel
      * Constructor
      * 
      * @param  array $data 
-     * @param  \Zend\DB\Table\AbstractTable $tableGateway 
+     * @param  \Zend\Db\Table\AbstractTable $tableGateway 
      * @return void
      */
-    public function __construct(\Zend\DB\Table\AbstractTable $tableGateway = null)
+    public function __construct(\Zend\Db\Table\AbstractTable $tableGateway = null)
     {
         if (is_null($tableGateway)) {
-            $parts = explode('_', get_class($this));
+            $parts = explode('\\', get_class($this));
             $table = strtolower(array_pop($parts));
-            $this->_db = new \Zend\DB\Table\Table($table);
+            $this->_db = new \Zend\Db\Table\Table($table);
         } else {
             $this->_db = $tableGateway;
         }

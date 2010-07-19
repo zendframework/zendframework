@@ -29,7 +29,7 @@ namespace Zend\Test\PHPUnit\Db;
  * Generic Abstraction of Zend_Db Connections in the PHPUnit Database Extension context.
  *
  * @uses       PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection
- * @uses       \Zend\DB\Adapter\AbstractAdapter
+ * @uses       \Zend\Db\Adapter\AbstractAdapter
  * @uses       \Zend\Test\PHPUnit\Db\DataSet\QueryTable
  * @uses       \Zend\Test\PHPUnit\Db\Metadata\Generic
  * @uses       PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection
@@ -44,7 +44,7 @@ class Connection extends \PHPUnit_Extensions_Database_DB_DefaultDatabaseConnecti
     /**
      * Zend_Db_Adapter_Abstract
      *
-     * @var \Zend\DB\Adapter\AbstractAdapter
+     * @var \Zend\Db\Adapter\AbstractAdapter
      */
     protected $_connection;
 
@@ -65,10 +65,10 @@ class Connection extends \PHPUnit_Extensions_Database_DB_DefaultDatabaseConnecti
     /**
      * Construct Connection based on Zend_Db_Adapter_Abstract
      *
-     * @param \Zend\DB\Adapter\AbstractAdapter $db
+     * @param \Zend\Db\Adapter\AbstractAdapter $db
      * @param string $schema
      */
-    public function __construct(\Zend\DB\Adapter\AbstractAdapter $db, $schema)
+    public function __construct(\Zend\Db\Adapter\AbstractAdapter $db, $schema)
     {
         $this->_connection = $db;
         $this->_schema = $schema;
@@ -99,7 +99,7 @@ class Connection extends \PHPUnit_Extensions_Database_DB_DefaultDatabaseConnecti
     /**
      * Returns a Zend_Db Connection
      *
-     * @return \Zend\DB\Adapter\AbstractAdapter
+     * @return \Zend\Db\Adapter\AbstractAdapter
      */
     public function getConnection()
     {

@@ -24,15 +24,15 @@
  */
 namespace Zend\Paginator\Adapter;
 
-use Zend\DB\Select,
-    Zend\DB,
+use Zend\Db\Select,
+    Zend\Db,
     Zend\Paginator\Adapter,
     Zend\Paginator\Exception as PaginatorException;
 
 /**
- * @uses       \Zend\DB\DB
- * @uses       \Zend\DB\Expr
- * @uses       \Zend\DB\Select
+ * @uses       \Zend\Db\Db
+ * @uses       \Zend\Db\Expr
+ * @uses       \Zend\Db\Select
  * @uses       \Zend\Paginator\Adapter
  * @uses       \Zend\Paginator\Exception
  * @category   Zend
@@ -52,14 +52,14 @@ class DbSelect implements Adapter
     /**
      * The COUNT query
      *
-     * @var \Zend\DB\Select
+     * @var \Zend\Db\Select
      */
     protected $_countSelect = null;
 
     /**
      * Database query
      *
-     * @var \Zend\DB\Select
+     * @var \Zend\Db\Select
      */
     protected $_select = null;
 
@@ -73,7 +73,7 @@ class DbSelect implements Adapter
     /**
      * Constructor.
      *
-     * @param \Zend\DB\Select $select The select query
+     * @param \Zend\Db\Select $select The select query
      */
     public function __construct(Select $select)
     {
@@ -90,7 +90,7 @@ class DbSelect implements Adapter
      * Users are therefore encouraged to profile their queries to find
      * the solution that best meets their needs.
      *
-     * @param  \Zend\DB\Select|integer $totalRowCount Total row count integer
+     * @param  \Zend\Db\Select|integer $totalRowCount Total row count integer
      *                                               or query
      * @return \Zend\Paginator\Adapter\DbSelect $this
      * @throws \Zend\Paginator\Exception
@@ -102,7 +102,7 @@ class DbSelect implements Adapter
 
             $countColumnPart = $columns[0][1];
 
-            if ($countColumnPart instanceof DB\Expr) {
+            if ($countColumnPart instanceof Db\Expr) {
                 $countColumnPart = $countColumnPart->__toString();
             }
 
@@ -113,7 +113,7 @@ class DbSelect implements Adapter
                 throw new PaginatorException('Row count column not found');
             }
 
-            $result = $rowCount->query(DB\DB::FETCH_ASSOC)->fetch();
+            $result = $rowCount->query(Db\Db::FETCH_ASSOC)->fetch();
 
             $this->_rowCount = count($result) > 0 ? $result[$rowCountColumn] : 0;
         } else if (is_integer($rowCount)) {
@@ -162,7 +162,7 @@ class DbSelect implements Adapter
      * In that use-case I'm expecting problems when either GROUP BY or DISTINCT
      * has one column.
      *
-     * @return \Zend\DB\Select
+     * @return \Zend\Db\Select
      */
     public function getCountSelect()
     {
@@ -189,7 +189,7 @@ class DbSelect implements Adapter
          * to the COUNT query.
          */
         if (!empty($unionParts)) {
-            $expression = new DB\Expr($countPart . $countColumn);
+            $expression = new Db\Expr($countPart . $countColumn);
 
             $rowCount = $db->select()->from($rowCount, $expression);
         } else {
@@ -208,7 +208,7 @@ class DbSelect implements Adapter
             } else if ($isDistinct) {
                 $part = $columnParts[0];
 
-                if ($part[1] !== Select::SQL_WILDCARD && !($part[1] instanceof DB\Expr)) {
+                if ($part[1] !== Select::SQL_WILDCARD && !($part[1] instanceof Db\Expr)) {
                     $column = $db->quoteIdentifier($part[1], true);
 
                     if (!empty($part[0])) {
@@ -218,7 +218,7 @@ class DbSelect implements Adapter
                     $groupPart = $column;
                 }
             } else if (!empty($groupParts) && $groupParts[0] !== Select::SQL_WILDCARD &&
-                       !($groupParts[0] instanceof DB\Expr)) {
+                       !($groupParts[0] instanceof Db\Expr)) {
                 $groupPart = $db->quoteIdentifier($groupParts[0], true);
             }
 
@@ -234,7 +234,7 @@ class DbSelect implements Adapter
             /**
              * Create the COUNT part of the query
              */
-            $expression = new DB\Expr($countPart . $countColumn);
+            $expression = new Db\Expr($countPart . $countColumn);
 
             $rowCount->reset(Select::COLUMNS)
                      ->reset(Select::ORDER)

@@ -65,7 +65,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
            $this->markTestSkipped('Pdo_Sqlite extension is not loaded');
         }
 
-        $this->_adapter = new \Zend\DB\Adapter\PDO\SQLite(array(
+        $this->_adapter = new \Zend\Db\Adapter\Pdo\Sqlite(array(
             'dbname' => __DIR__ . '/_files/test.sqlite'
         ));
 

@@ -24,8 +24,8 @@ namespace Zend\Session\SaveHandler;
 use Zend\Session\SaveHandler as Savable,
     Zend\Session\Container,
     Zend\Session\Manager,
-    Zend\DB\Table\AbstractTable,
-    Zend\DB\Table\AbstractRow;
+    Zend\Db\Table\AbstractTable,
+    Zend\Db\Table\AbstractRow;
 
 /**
  * DB Table session save handler

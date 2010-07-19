@@ -46,13 +46,13 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->_callback = new \Zend\Feed\PubSubHubbub\Subscriber\Callback;
         
         $this->_adapter = $this->_getCleanMock(
-            '\Zend\DB\Adapter\AbstractAdapter'
+            '\Zend\Db\Adapter\AbstractAdapter'
         );
         $this->_tableGateway = $this->_getCleanMock(
-            '\Zend\DB\Table\AbstractTable'
+            '\Zend\Db\Table\AbstractTable'
         );
         $this->_rowset = $this->_getCleanMock(
-            '\Zend\DB\Table\AbstractRowset'
+            '\Zend\Db\Table\AbstractRowset'
         );
         
         $this->_tableGateway->expects($this->any())->method('getAdapter')

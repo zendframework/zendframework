@@ -29,8 +29,8 @@ namespace Zend\Application\Resource;
  * Resource for creating database adapter
  *
  * @uses       \Zend\Application\Resource\AbstractResource
- * @uses       \Zend\DB\DB
- * @uses       \Zend\DB\Table\Table
+ * @uses       \Zend\Db\Db
+ * @uses       \Zend\Db\Table\Table
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
@@ -69,7 +69,7 @@ class Db extends AbstractResource
      * Set the adapter
      *
      * @param  $adapter string
-     * @return \Zend\Application\Resource\DB
+     * @return \Zend\Application\Resource\Db
      */
     public function setAdapter($adapter)
     {
@@ -91,7 +91,7 @@ class Db extends AbstractResource
      * Set the adapter params
      *
      * @param  $adapter string
-     * @return \Zend\Application\Resource\DB
+     * @return \Zend\Application\Resource\Db
      */
     public function setParams(array $params)
     {
@@ -113,7 +113,7 @@ class Db extends AbstractResource
      * Set whether to use this as default table adapter
      *
      * @param  boolean $defaultTableAdapter
-     * @return \Zend\Application\Resource\DB
+     * @return \Zend\Application\Resource\Db
      */
     public function setIsDefaultTableAdapter($isDefaultTableAdapter)
     {
@@ -141,7 +141,7 @@ class Db extends AbstractResource
         if ((null === $this->_db)
             && (null !== ($adapter = $this->getAdapter()))
         ) {
-            $this->_db = \Zend\DB\DB::factory($adapter, $this->getParams());
+            $this->_db = \Zend\Db\Db::factory($adapter, $this->getParams());
         }
         return $this->_db;
     }
@@ -149,13 +149,13 @@ class Db extends AbstractResource
     /**
      * Defined by Zend_Application_Resource_Resource
      *
-     * @return \Zend\DB\Adapter\AbstractAdapter|null
+     * @return \Zend\Db\Adapter\AbstractAdapter|null
      */
     public function init()
     {
         if (null !== ($db = $this->getDbAdapter())) {
             if ($this->isDefaultTableAdapter()) {
-                \Zend\DB\Table\Table::setDefaultAdapter($db);
+                \Zend\Db\Table\Table::setDefaultAdapter($db);
             }
             return $db;
         }
@@ -173,7 +173,7 @@ class Db extends AbstractResource
 
         if (is_string($cache)) {
             $bootstrap = $this->getBootstrap();
-            if ($bootstrap instanceof Zend_Application_Bootstrap_ResourceBootstrapper
+            if ($bootstrap instanceof \Zend\Application\ResourceBootstrapper
                 && $bootstrap->hasPluginResource('CacheManager')
             ) {
                 $cacheManager = $bootstrap->bootstrap('CacheManager')
@@ -182,12 +182,12 @@ class Db extends AbstractResource
                     $metadataCache = $cacheManager->getCache($cache);
                 }
             }
-        } else if ($cache instanceof Zend_Cache_Core) {
+        } else if ($cache instanceof \Zend\Cache\Frontend) {
             $metadataCache = $cache;
         }
 
-        if ($metadataCache instanceof Zend_Cache_Core) {
-            Zend_Db_Table::setDefaultMetadataCache($metadataCache);
+        if ($metadataCache instanceof \Zend\Cache\Frontend) {
+            \Zend\Db\Table\AbstractTable::setDefaultMetadataCache($metadataCache);
         }
 
         return $this;

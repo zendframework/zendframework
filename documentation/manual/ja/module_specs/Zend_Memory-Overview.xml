@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20827 -->
+<!-- EN-Revision: 21829 -->
 <sect1 id="zend.memory.overview">
     <title>概要</title>
 
@@ -117,6 +117,7 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
 
             <para>
                 この属性 <code>value</code> は、オブジェクトのプロパティとして扱うことができます。
+            </para>
 
                 <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
@@ -131,7 +132,6 @@ echo ord($memObject->value[$index1]);
 
 $memObject->value = substr($memObject->value, $start, $length);
 ]]></programlisting>
-            </para>
 
             <note>
                 <para>

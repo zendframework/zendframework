@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21829 -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDLアクセッサ</title>
 
@@ -335,6 +335,7 @@
             <title>型情報の取得</title>
             <para>
                 <methodname>getType($type)</methodname>メソッドは、指定された <acronym>PHP</acronym> 型をマップするために用いられるかもしれません:
+            </para>
 
             <programlisting language="php"><![CDATA[
 ...
@@ -350,7 +351,7 @@ class MyClass {
 ...
 $soapMyClassType = $wsdl->getType('MyClass');
 ]]></programlisting>
-            </para>
+
         </sect3>
 
         <sect3 id="zend.soap.wsdl.types.add_complex">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20779 -->
+<!-- EN-Revision: 21826 -->
 <sect1 id="zend.gdata.authsub">
     <title>AuthSub による認証</title>
 
@@ -64,13 +64,13 @@
             <methodname>Zend_Gdata_AuthSub::getHttpClient()</methodname>
             をコールします。この関数は <classname>Zend_Http_Client</classname>
             のインスタンスを返します。このインスタンスには適切なヘッダが設定されており、
-            後でこの Http クライアントを使用して送信したリクエストは認証済みのものとなります。
+            後でこの <acronym>HTTP</acronym> クライアントを使用して送信したリクエストは認証済みのものとなります。
         </para>
 
         <para>
             以下の例は、<acronym>PHP</acronym> のウェブアプリケーションのコードです。
             Google Calendar サービスに対する認証を行い、
-            認証済みの Http クライアントを使用して <classname>Zend_Gdata</classname>
+            認証済みの <acronym>HTTP</acronym> クライアントを使用して <classname>Zend_Gdata</classname>
             クライアントオブジェクトを作成します。
         </para>
 
@@ -134,7 +134,7 @@ if (isset($_GET['logout'])) {
             上の例における <varname>$php_self</varname> の扱い方は、
             一般的なセキュリティ問題の対応法に従ったものです。
             <classname>Zend_Gdata</classname> に固有のものではありません。
-            http ヘッダに出力する内容は、つねにフィルタリングするようにしましょう。
+            <acronym>HTTP</acronym> ヘッダに出力する内容は、つねにフィルタリングするようにしましょう。
         </para>
         <para>
             認証トークンの解除については、ユーザが Google Data

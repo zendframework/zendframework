@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21825 -->
 <sect1 id="zend.form.advanced">
     <title>Zend_Form の高度な使用法</title>
 
@@ -151,8 +151,10 @@
         <para>
             <classname>Zend_Form</classname> は、この処理を
             <link linkend="zend.form.forms.subforms">サブフォーム</link>
-            で自動化します。デフォルトで、
-            サブフォームのレンダリングには先ほどのような配列記法を使用します。
+            で自動化します。
+            <!-- TODO : to be translated -->
+            By default, sub forms render using the array notation as shown in the
+            previous <acronym>HTML</acronym> form listing, complete with ids.
             配列の名前はサブフォーム名からとられ、
             配列のキーはサブフォーム内に含まれる要素となります。
             サブフォームは、何段階でもネストさせることができます。

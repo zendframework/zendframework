@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 22390 -->
+<!-- EN-Revision: 22585 -->
 <sect1 id="zend.translate.additional">
 
     <title>翻訳用の追加機能</title>
@@ -223,6 +223,20 @@ $translate->addTranslation(
                         </entry>
                         <entry><emphasis><constant>NULL</constant></emphasis></entry>
                     </row>
+
+                     <row>
+                        <entry>tag</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            Sets an individual tag which is used for the attached cache. Using this
+                            option allows to use and clear the cache for single instances. When this
+                            option is not set, the attached cache is used for all instances combined
+                        </entry>
+
+                        <entry><emphasis><classname>Zend_Translate</classname></emphasis></entry>
+                    </row>
+
                     <row>
                         <entry>delimiter</entry>
                         <entry>Csv</entry>

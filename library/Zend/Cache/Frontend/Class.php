@@ -230,15 +230,25 @@ class Zend_Cache_Frontend_Class extends Zend_Cache_Core
     }
 
     /**
+     * ZF-9970
+     *
+     * @deprecated
+     */
+    private function _makeId($name, $args)
+    {
+        return $this->makeId($name, $args);
+    }
+
+    /**
      * Make a cache id from the method name and parameters
      *
-     * @param  string $name       Method name
-     * @param  array  $parameters Method parameters
+     * @param  string $name Method name
+     * @param  array  $args Method parameters
      * @return string Cache id
      */
-    public function makeId($name, $parameters)
+    public function makeId($name, array $args = array())
     {
-        return md5($this->_cachedEntityLabel . '__' . $name . '__' . serialize($parameters));
+        return md5($this->_cachedEntityLabel . '__' . $name . '__' . serialize($args));
     }
 
 }

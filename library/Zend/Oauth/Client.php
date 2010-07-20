@@ -74,7 +74,7 @@ class Zend_Oauth_Client extends Zend_Http_Client
      * @param  array|Zend_Config $config
      * @return void
      */
-    public function __construct(array $oauthOptions, $uri = null, $config = null)
+    public function __construct($oauthOptions, $uri = null, $config = null)
     {
         parent::__construct($uri, $config);
         $this->_config = new Zend_Oauth_Config;
@@ -95,7 +95,7 @@ class Zend_Oauth_Client extends Zend_Http_Client
     {
         return $this->adapter;
     }
-    
+
    /**
      * Load the connection adapter
      *
@@ -269,7 +269,7 @@ class Zend_Oauth_Client extends Zend_Http_Client
                 $queryParts = explode('&', $this->getUri()->getQuery());
                 foreach ($queryParts as $queryPart) {
                     $kvTuple = explode('=', $queryPart);
-                    $params[$kvTuple[0]] = 
+                    $params[$kvTuple[0]] =
                         (array_key_exists(1, $kvTuple) ? $kvTuple[1] : NULL);
                 }
             }

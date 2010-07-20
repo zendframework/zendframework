@@ -94,7 +94,7 @@ class Zend_Cache_Frontend_Function extends Zend_Cache_Core
             return call_user_func_array($callback, $parameters);
         }
 
-        $id = $this->_makeId($callback, $parameters);
+        $id = $this->makeId($callback, $parameters);
         if ( ($rs = $this->load($id)) && isset($rs[0], $rs[1])) {
             // A cache is available
             $output = $rs[0];
@@ -122,7 +122,7 @@ class Zend_Cache_Frontend_Function extends Zend_Cache_Core
      * @throws Zend_Cache_Exception
      * @return string Cache id
      */
-    private function _makeId($callback, array $args)
+    public function makeId($callback, array $args)
     {
         if (!is_callable($callback, true, $name)) {
             Zend_Cache::throwException('Invalid callback');

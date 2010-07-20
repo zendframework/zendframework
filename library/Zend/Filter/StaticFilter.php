@@ -24,6 +24,8 @@
  */
 namespace Zend\Filter;
 
+use Zend\Loader;
+
 /**
  * @uses       \Zend\Filter\Exception
  * @uses       \Zend\Filter\Filter
@@ -37,60 +39,34 @@ namespace Zend\Filter;
 class StaticFilter
 {
     /**
-     * Default Namespaces
-     *
-     * @var array
+     * @var Loader\PrefixPathMapper
      */
-    protected static $_defaultNamespaces = array();
+    protected static $_pluginLoader;
 
     /**
-     * Returns the set default namespaces
-     *
-     * @return array
+     * Set plugin loader for resolving filter classes
+     * 
+     * @param  Loader\PrefixPathMapper $loader 
+     * @return void
      */
-    public static function getDefaultNamespaces()
+    public static function setPluginLoader(Loader\PrefixPathMapper $loader = null)
     {
-        return self::$_defaultNamespaces;
+        self::$_pluginLoader = $loader;
     }
 
     /**
-     * Sets new default namespaces
-     *
-     * @param array|string $namespace
-     * @return null
+     * Get plugin loader for resolving filter classes
+     * 
+     * @return Loader\PrefixPathMapper
      */
-    public static function setDefaultNamespaces($namespace)
+    public static function getPluginLoader()
     {
-        if (!is_array($namespace)) {
-            $namespace = array((string) $namespace);
+        if (null === self::$_pluginLoader) {
+            static::setPluginLoader(new Loader\PluginLoader(array(
+                'Zend\Filter' => 'Zend/Filter',
+            )));
         }
-
-        self::$_defaultNamespaces = $namespace;
-    }
-
-    /**
-     * Adds a new default namespace
-     *
-     * @param array|string $namespace
-     * @return null
-     */
-    public static function addDefaultNamespaces($namespace)
-    {
-        if (!is_array($namespace)) {
-            $namespace = array((string) $namespace);
-        }
-
-        self::$_defaultNamespaces = array_unique(array_merge(self::$_defaultNamespaces, $namespace));
-    }
-
-    /**
-     * Returns true when defaultNamespaces are set
-     *
-     * @return boolean
-     */
-    public static function hasDefaultNamespaces()
-    {
-        return (!empty(self::$_defaultNamespaces));
+        return self::$_pluginLoader;
     }
 
     /**
@@ -112,32 +88,41 @@ class StaticFilter
      */
     public static function execute($value, $classBaseName, array $args = array(), $namespaces = array())
     {
-        $namespaces = array_merge((array) $namespaces, self::$_defaultNamespaces, array('Zend\\Filter'));
-        foreach ($namespaces as $namespace) {
-            $className = $namespace . '\\' . ucfirst($classBaseName);
-            if (!class_exists($className, false)) {
-                try {
-                    $file = str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
-                    if (\Zend\Loader::isReadable($file)) {
-                        \Zend\Loader::loadClass($className);
-                    } else {
-                        continue;
-                    }
-                } catch (\Zend\Loader\Exception $ze) {
-                    continue;
+        $loader = static::getPluginLoader();
+        if (!class_exists($classBaseName)) {
+            try {
+                $className  = $loader->load($classBaseName);
+            } catch (Loader\Exception $e) {
+                throw new Exception("Filter class not found from basename '$classBaseName'", null, $e);
+            }
+        } else {
+            $className = $classBaseName;
+        }
+
+        $class = new \ReflectionClass($className);
+        if (!$class->implementsInterface('Zend\Filter\Filter')) {
+            throw new Exception("Filter class not found from basename '$classBaseName'");
+        }
+
+        if ((0 < count($args)) && $class->hasMethod('__construct')) {
+            $keys    = array_keys($args);
+            $numeric = false;
+            foreach($keys as $key) {
+                if (is_numeric($key)) {
+                    $numeric = true;
+                    break;
                 }
             }
 
-            $class = new \ReflectionClass($className);
-            if ($class->implementsInterface('Zend\\Filter\\Filter')) {
-                if ($class->hasMethod('__construct')) {
-                    $object = $class->newInstanceArgs($args);
-                } else {
-                    $object = $class->newInstance();
-                }
-                return $object($value);
+            if ($numeric) {
+                $object = $class->newInstanceArgs($args);
+            } else {
+                $object = $class->newInstance($args);
             }
+        } else {
+            $object = $class->newInstance();
         }
-        throw new Exception("Filter class not found from basename '$classBaseName'");
+
+        return $object->filter($value);
     }
 }

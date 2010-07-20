@@ -24,6 +24,10 @@
  * @namespace
  */
 namespace ZendTest\Barcode\Renderer;
+
+// This was not being autoloaded; explicit require_once fixes issues
+require_once __DIR__ . '/../Object/_files/BarcodeTest.php';
+
 use ZendTest\Barcode\Object\_files as ObjectNSFiles;
 use Zend\Barcode;
 use Zend\Barcode\Object;

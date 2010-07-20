@@ -32,14 +32,14 @@ namespace ZendTest\Serializer\Adapter;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class JSONTest extends \PHPUnit_Framework_TestCase
+class PhpCodeTest extends \PHPUnit_Framework_TestCase
 {
 
     private $_adapter;
 
     public function setUp()
     {
-        $this->_adapter = new \Zend\Serializer\Adapter\Json();
+        $this->_adapter = new \Zend\Serializer\Adapter\PhpCode();
     }
 
     public function tearDown()
@@ -49,8 +49,8 @@ class JSONTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeString()
     {
-        $value    = 'test';
-        $expected = '"test"';
+        $value      = 'test';
+        $expected   = "'test'";
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -68,7 +68,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
     public function testSerializeNull()
     {
         $value    = null;
-        $expected = 'null';
+        $expected = 'NULL';
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -76,8 +76,8 @@ class JSONTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeNumeric()
     {
-        $value    = 100;
-        $expected = '100';
+        $value    = 100.12345;
+        $expected = '100.12345';
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -85,9 +85,8 @@ class JSONTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeObject()
     {
-        $value       = new \stdClass();
-        $value->test = "test";
-        $expected    = '{"test":"test"}';
+        $value    = new \stdClass();
+        $expected = "stdClass::__set_state(array(\n))";
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -95,7 +94,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeString()
     {
-        $value    = '"test"';
+        $value    = "'test'";
         $expected = 'test';
 
         $data = $this->_adapter->unserialize($value);
@@ -111,8 +110,9 @@ class JSONTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeNull() {
-        $value    = 'null';
+    public function testUnserializeNull()
+    {
+        $value    = 'NULL';
         $expected = null;
 
         $data = $this->_adapter->unserialize($value);
@@ -128,24 +128,16 @@ class JSONTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeAsArray()
+/* TODO: PHP Fatal error:  Call to undefined method stdClass::__set_state()
+    public function testUnserializeObject()
     {
-        $value    = '{"test":"test"}';
-        $expected = array('test' => 'test');
+        $value    = "stdClass::__set_state(array(\n))";
+        $expected = new stdClass();
 
         $data = $this->_adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
-
-    public function testUnserializeAsObject()
-    {
-        $value      = '{"test":"test"}';
-        $expected   = new \stdClass();
-        $expected->test = 'test';
-
-        $data = $this->_adapter->unserialize($value, array('objectDecodeType' => \Zend\Json\Json::TYPE_OBJECT));
-        $this->assertEquals($expected, $data);
-    }
+*/
 
     public function testUnserialzeInvalid()
     {

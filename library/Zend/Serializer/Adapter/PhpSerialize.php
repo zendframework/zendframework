@@ -36,36 +36,62 @@ use Zend\Serializer\Exception as SerializationException;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PHPCode extends AbstractAdapter
+class PhpSerialize extends AbstractAdapter
 {
     /**
-     * Serialize PHP using var_export
+     *  @var null|string Serialized boolean false value
+     */
+    private static $_serializedFalse = null;
+
+    /**
+     * Constructor
+     * 
+     * @param  array|Zend\Config\Config $opts 
+     * @return void
+     */
+    public function __construct($opts = array()) 
+    {
+        parent::__construct($opts);
+
+        if (self::$_serializedFalse === null) {
+            self::$_serializedFalse = serialize(false);
+        }
+    }
+
+    /**
+     * Serialize using serialize()
      * 
      * @param  mixed $value 
      * @param  array $opts 
      * @return string
+     * @throws Zend\Serializer\Exception On serialize error
      */
     public function serialize($value, array $opts = array())
     {
-        return var_export($value, true);
+        $ret = serialize($value);
+        if ($ret === false) {
+            $lastErr = error_get_last();
+            throw new SerializationException($lastErr['message']);
+        }
+        return $ret;
     }
 
     /**
-     * Deserialize PHP string
-     *
-     * Warning: this uses eval(), and should likely be avoided.
+     * Unserialize
      * 
-     * @param  string $code 
+     * @todo   Allow integration with unserialize_callback_func
+     * @param  string $serialized 
      * @param  array $opts 
      * @return mixed
-     * @throws \Zend\Serializer\Exception on eval error
+     * @throws Zend\Serializer\Exception on unserialize error
      */
-    public function unserialize($code, array $opts = array())
+    public function unserialize($serialized, array $opts = array())
     {
-        $eval = @eval('$ret=' . $code . ';');
-        if ($eval === false) {
+        // TODO: @see php.ini directive "unserialize_callback_func"
+        $ret = @unserialize($serialized);
+        if ($ret === false && $serialized !== self::$_serializedFalse) {
             $lastErr = error_get_last();
-            throw new SerializationException('eval failed: ' . $lastErr['message']);
+            throw new SerializationException($lastErr['message']);
         }
         return $ret;
     }

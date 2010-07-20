@@ -32,14 +32,14 @@ namespace ZendTest\Serializer\Adapter;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PHPSerializeTest extends \PHPUnit_Framework_TestCase
+class JsonTest extends \PHPUnit_Framework_TestCase
 {
 
     private $_adapter;
 
     public function setUp()
     {
-        $this->_adapter = new \Zend\Serializer\Adapter\PHPSerialize();
+        $this->_adapter = new \Zend\Serializer\Adapter\Json();
     }
 
     public function tearDown()
@@ -49,8 +49,8 @@ class PHPSerializeTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeString()
     {
-        $value      = 'test';
-        $expected   = 's:4:"test";';
+        $value    = 'test';
+        $expected = '"test"';
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -59,7 +59,7 @@ class PHPSerializeTest extends \PHPUnit_Framework_TestCase
     public function testSerializeFalse()
     {
         $value    = false;
-        $expected = 'b:0;';
+        $expected = 'false';
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -68,7 +68,7 @@ class PHPSerializeTest extends \PHPUnit_Framework_TestCase
     public function testSerializeNull()
     {
         $value    = null;
-        $expected = 'N;';
+        $expected = 'null';
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -77,7 +77,7 @@ class PHPSerializeTest extends \PHPUnit_Framework_TestCase
     public function testSerializeNumeric()
     {
         $value    = 100;
-        $expected = 'i:100;';
+        $expected = '100';
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -85,8 +85,9 @@ class PHPSerializeTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeObject()
     {
-        $value    = new \stdClass();
-        $expected = 'O:8:"stdClass":0:{}';
+        $value       = new \stdClass();
+        $value->test = "test";
+        $expected    = '{"test":"test"}';
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -94,7 +95,7 @@ class PHPSerializeTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeString()
     {
-        $value    = 's:4:"test";';
+        $value    = '"test"';
         $expected = 'test';
 
         $data = $this->_adapter->unserialize($value);
@@ -103,16 +104,15 @@ class PHPSerializeTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeFalse()
     {
-        $value    = 'b:0;';
+        $value    = 'false';
         $expected = false;
 
         $data = $this->_adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeNull()
-    {
-        $value    = 'N;';
+    public function testUnserializeNull() {
+        $value    = 'null';
         $expected = null;
 
         $data = $this->_adapter->unserialize($value);
@@ -121,19 +121,29 @@ class PHPSerializeTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeNumeric()
     {
-        $value    = 'i:100;';
+        $value    = '100';
         $expected = 100;
 
         $data = $this->_adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeObject()
+    public function testUnserializeAsArray()
     {
-        $value    = 'O:8:"stdClass":0:{}';
-        $expected = new \stdClass();
+        $value    = '{"test":"test"}';
+        $expected = array('test' => 'test');
 
         $data = $this->_adapter->unserialize($value);
+        $this->assertEquals($expected, $data);
+    }
+
+    public function testUnserializeAsObject()
+    {
+        $value      = '{"test":"test"}';
+        $expected   = new \stdClass();
+        $expected->test = 'test';
+
+        $data = $this->_adapter->unserialize($value, array('objectDecodeType' => \Zend\Json\Json::TYPE_OBJECT));
         $this->assertEquals($expected, $data);
     }
 

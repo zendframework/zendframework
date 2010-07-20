@@ -32,7 +32,7 @@ namespace ZendTest\Serializer\Adapter;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class WDDXTest extends \PHPUnit_Framework_TestCase
+class WddxTest extends \PHPUnit_Framework_TestCase
 {
 
     private $_adapter;
@@ -42,7 +42,7 @@ class WDDXTest extends \PHPUnit_Framework_TestCase
         if (!constant('TESTS_ZEND_SERIALIZER_ADAPTER_WDDX_ENABLED')) {
             $this->markTestSkipped('Zend_Serializer WDDX tests are not enabled');
         }
-        $this->_adapter = new \Zend\Serializer\Adapter\WDDX();
+        $this->_adapter = new \Zend\Serializer\Adapter\Wddx();
     }
 
     public function tearDown()

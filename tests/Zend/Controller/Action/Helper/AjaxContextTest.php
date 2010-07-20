@@ -67,7 +67,7 @@ class AjaxContextTest extends \PHPUnit_Framework_TestCase
 
         $this->helper = new \Zend\Controller\Action\Helper\AjaxContext();
 
-        $this->request = new \Zend\Controller\Request\HTTP();
+        $this->request = new \Zend\Controller\Request\Http();
         $this->response = new \Zend\Controller\Response\Cli();
 
         $this->front->setRequest($this->request)->setResponse($this->response);
@@ -123,8 +123,8 @@ class AjaxContextTest extends \PHPUnit_Framework_TestCase
 
     public function testInitContextFailsWithNoAjaxableActions()
     {
-        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHTTPRequest';
-        $this->assertTrue($this->request->isXmlHTTPRequest());
+        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
+        $this->assertTrue($this->request->isXmlHttpRequest());
 
         $this->controller->contexts = $this->controller->ajaxable;
         unset($this->controller->ajaxable);
@@ -136,8 +136,8 @@ class AjaxContextTest extends \PHPUnit_Framework_TestCase
 
     public function testInitContextSwitchesContextWithXhrRequests()
     {
-        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHTTPRequest';
-        $this->assertTrue($this->request->isXmlHTTPRequest());
+        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
+        $this->assertTrue($this->request->isXmlHttpRequest());
 
         $this->request->setParam('format', 'xml')
                       ->setActionName('foo');
@@ -161,8 +161,8 @@ class AjaxContextTest extends \PHPUnit_Framework_TestCase
 
     public function testGetCurrentContextResetToNullWhenSubsequentInitContextFailsXhrTest()
     {
-        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHTTPRequest';
-        $this->assertTrue($this->request->isXmlHTTPRequest());
+        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
+        $this->assertTrue($this->request->isXmlHttpRequest());
 
         $this->assertNull($this->helper->getCurrentContext());
 

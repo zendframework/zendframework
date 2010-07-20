@@ -75,11 +75,11 @@ class IndexController extends \Zend\Controller\Action
      */
     public function replaceAction()
     {
-        $request = new \Zend\Controller\Request\HTTP();
+        $request = new \Zend\Controller\Request\Http();
         $request->setControllerName('index')
                 ->setActionName('reset')
                 ->setDispatched(false);
-        $response = new \Zend\Controller\Response\HTTP();
+        $response = new \Zend\Controller\Response\Http();
         $front    = \Zend\Controller\Front::getInstance();
         $front->setRequest($request)
               ->setResponse($response);

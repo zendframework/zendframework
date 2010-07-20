@@ -15,7 +15,7 @@ class OauthTest extends \PHPUnit_Framework_TestCase
     public function testCanSetCustomHttpClient()
     {
         OAuth\OAuth::setHttpClient(new HTTPClient19485876());
-        $this->assertType('ZendTest\\OAuth\\HTTPClient19485876', OAuth\OAuth::getHttpClient());
+        $this->assertType('ZendTest\\OAuth\\HttpClient19485876', OAuth\OAuth::getHttpClient());
     }
 
     public function testGetHttpClientResetsParameters()
@@ -39,4 +39,4 @@ class OauthTest extends \PHPUnit_Framework_TestCase
 
 }
 
-class HTTPClient19485876 extends \Zend\HTTP\Client {}
+class HTTPClient19485876 extends \Zend\Http\Client {}

@@ -3,7 +3,7 @@
 namespace ZendTest\OAuth\Token;
 
 use Zend\OAuth\Token\Access as AccessToken,
-    Zend\HTTP\Response as HTTPResponse;
+    Zend\Http\Response as HTTPResponse;
 
 class AccessTest extends \PHPUnit_Framework_TestCase
 {
@@ -85,7 +85,7 @@ class AccessTest extends \PHPUnit_Framework_TestCase
 
 }
 
-class HTTPUtility90244 extends \Zend\OAuth\HTTP\Utility
+class HTTPUtility90244 extends \Zend\OAuth\Http\Utility
 {
     public function __construct(){}
     public function generateNonce(){return md5('1234567890');}

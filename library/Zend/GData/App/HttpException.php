@@ -31,7 +31,7 @@ namespace Zend\GData\App;
  * Class to represent exceptions that occur during Gdata operations.
  *
  * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\HTTP\Client\Exception
+ * @uses       \Zend\Http\Client\Exception
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
@@ -48,8 +48,8 @@ class HttpException extends Exception
      * Create a new Zend_Gdata_App_HttpException
      *
      * @param  string $message Optionally set a message
-     * @param \Zend\HTTP\Client\Exception Optionally pass in a \Zend\HTTP\Client\Exception
-     * @param \Zend\HTTP\Response Optionally pass in a \Zend\HTTP\Response
+     * @param \Zend\Http\Client\Exception Optionally pass in a \Zend\Http\Client\Exception
+     * @param \Zend\Http\Response Optionally pass in a \Zend\Http\Response
      */
     public function __construct($message = null, $e = null, $response = null)
     {
@@ -61,7 +61,7 @@ class HttpException extends Exception
     /**
      * Get the Zend_Http_Client_Exception.
      *
-     * @return \Zend\HTTP\Client\Exception
+     * @return \Zend\Http\Client\Exception
      */
     public function getHttpClientException()
     {
@@ -71,7 +71,7 @@ class HttpException extends Exception
     /**
      * Set the Zend_Http_Client_Exception.
      *
-     * @param \Zend\HTTP\Client\Exception $value
+     * @param \Zend\Http\Client\Exception $value
      */
     public function setHttpClientException($value)
     {
@@ -82,7 +82,7 @@ class HttpException extends Exception
     /**
      * Set the Zend_Http_Response.
      *
-     * @param \Zend\HTTP\Response $response
+     * @param \Zend\Http\Response $response
      */
     public function setResponse($response)
     {
@@ -93,7 +93,7 @@ class HttpException extends Exception
     /**
      * Get the Zend_Http_Response.
      *
-     * @return \Zend\HTTP\Response
+     * @return \Zend\Http\Response
      */
     public function getResponse()
     {

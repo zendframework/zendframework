@@ -28,12 +28,6 @@ use Zend\Controller;
 use Zend\Controller\Request;
 use Zend\Controller\Response;
 
-// Call Zend_Controller_Dispatcher_StandardTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Dispatcher_StandardTest::main");
-}
-
-
 
 /**
  * @category   Zend
@@ -47,18 +41,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
     protected $_dispatcher;
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Controller_Dispatcher_StandardTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function setUp()
     {
@@ -107,7 +89,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testIsDispatchable()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
 
         $this->assertFalse($this->_dispatcher->isDispatchable($request));
 
@@ -124,7 +106,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testModuleIsDispatchable()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setModuleName('admin');
         $request->setControllerName('foo');
         $request->setActionName('bar');
@@ -143,7 +125,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     public function testIsDispatchableManuallyIncludedController()
     {
         require_once __DIR__ . '/../_files/ManuallyIncludedControllers.php';
-        $request = new Zend_Controller_Request_Http();
+        $request = new \Zend\Controller\Request\Http();
 
 
         $this->_dispatcher->setParam('prefixDefaultModule', true);
@@ -186,7 +168,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testDispatchValidControllerDefaultAction()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('index');
         $response = new Response\Cli();
         $this->_dispatcher->dispatch($request, $response);
@@ -196,7 +178,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testDispatchValidControllerAndAction()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('index');
         $request->setActionName('index');
         $response = new Response\Cli();
@@ -207,7 +189,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testDispatchValidControllerWithInvalidAction()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('index');
         $request->setActionName('foo');
         $response = new Response\Cli();
@@ -222,7 +204,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testDispatchInvalidController()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('bogus');
         $response = new Response\Cli();
 
@@ -236,7 +218,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testDispatchInvalidControllerUsingDefaults()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('bogus');
         $response = new Response\Cli();
 
@@ -256,7 +238,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsingDefaultControllerAlwaysShouldRewriteActionNameToDefault()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('bogus');
         $request->setActionName('really');
         $request->setParam('action', 'really'); // router sets action as a param
@@ -276,7 +258,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testDispatchInvalidControllerUsingDefaultsWithDefaultModule()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('bogus')
                 ->setModuleName('default');
         $response = new Response\Cli();
@@ -295,7 +277,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testDispatchValidControllerWithPrePostDispatch()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('foo');
         $request->setActionName('bar');
         $response = new Response\Cli();
@@ -309,7 +291,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testDispatchNoControllerUsesDefaults()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $response = new Response\Cli();
         $this->_dispatcher->dispatch($request, $response);
 
@@ -345,7 +327,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
      */
     public function testModules()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setModuleName('admin');
         $request->setControllerName('foo');
         $request->setActionName('bar');
@@ -360,7 +342,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testModuleControllerInSubdirWithCamelCaseAction()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setModuleName('admin');
         $request->setControllerName('foo-bar');
         $request->setActionName('baz.bat');
@@ -378,7 +360,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
         $this->_dispatcher->setDefaultControllerName('foo')
              ->setParam('useDefaultControllerAlways', true);
 
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setModuleName('admin');
 
         $this->assertTrue($this->_dispatcher->isDispatchable($request), var_export($this->_dispatcher->getControllerDirectory(), 1));
@@ -391,7 +373,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testNoModuleOrControllerDefaultsCorrectly()
     {
-        $request = new Request\HTTP('http://example.com/');
+        $request = new Request\Http('http://example.com/');
 
         $this->assertFalse($this->_dispatcher->isDispatchable($request), var_export($this->_dispatcher->getControllerDirectory(), 1));
 
@@ -403,7 +385,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testOutputBuffering()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('ob');
         $request->setActionName('index');
 
@@ -421,7 +403,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Skipping output buffer disabling in Zend_Controller_Dispatcher_Standard');
         }
 
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('ob');
         $request->setActionName('index');
         $this->_dispatcher->setParam('disableOutputBuffering', true);
@@ -443,7 +425,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
                 'foo'
         );
 
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setModuleName('foo');
         $request->setControllerName('admin_index');
         $request->setActionName('index');
@@ -483,7 +465,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testSanelyDiscardOutputBufferOnException()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('ob');
         $request->setActionName('exception');
 
@@ -502,7 +484,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDefaultControllerClassResetsRequestObject()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setModuleName('foobar')
                 ->setControllerName('bazbatbegone')
                 ->setActionName('bebop');
@@ -574,7 +556,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
      */
     public function testCamelCasedActionsNotRequestedWithWordSeparatorsShouldNotResolve()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setModuleName('admin');
         $request->setControllerName('foo-bar');
         $request->setActionName('bazBat');
@@ -595,7 +577,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     public function testCamelCasedActionsNotRequestedWithWordSeparatorsShouldResolveIfForced()
     {
         $this->_dispatcher->setParam('useCaseSensitiveActions', true);
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setModuleName('admin');
         $request->setControllerName('foo-bar');
         $request->setActionName('bazBat');
@@ -625,7 +607,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     public function testForcingCamelCasedActionsNotRequestedWithWordSeparatorsShouldRaiseNotices()
     {
         $this->_dispatcher->setParam('useCaseSensitiveActions', true);
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setModuleName('admin');
         $request->setControllerName('foo-bar');
         $request->setActionName('bazBat');
@@ -660,9 +642,4 @@ class StandardTest extends \PHPUnit_Framework_TestCase
             $this->assertContains('No default module', $e->getMessage());
         }
     }
-}
-
-// Call Zend_Controller_Dispatcher_StandardTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Dispatcher_StandardTest::main") {
-    \Zend_Controller_Dispatcher_StandardTest::main();
 }

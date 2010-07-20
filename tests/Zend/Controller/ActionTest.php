@@ -49,7 +49,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $front->setControllerDirectory('.', 'default');
 
         $this->_controller = new TestController(
-            new Request\HTTP(),
+            new Request\Http(),
             new Response\Cli(),
             array(
                 'foo' => 'bar',
@@ -264,7 +264,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
         require_once __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'ViewController.php';
         $controller = new \ViewController(
-            new Request\HTTP(),
+            new Request\Http(),
             new Response\Cli()
         );
         $view = $controller->initView();
@@ -276,7 +276,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testRender()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('view')
                 ->setActionName('index');
         $response = new Response\Cli();
@@ -289,7 +289,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderByName()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('view')
                 ->setActionName('test');
         $response = new Response\Cli();
@@ -302,7 +302,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderOutsideControllerSubdir()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('view')
                 ->setActionName('site');
         $response = new Response\Cli();
@@ -315,7 +315,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderNamedSegment()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('view')
                 ->setActionName('name');
         $response = new Response\Cli();
@@ -328,7 +328,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderNormalizesScriptName()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('foo.bar')
                 ->setActionName('baz_bat');
         $response = new Response\Cli();
@@ -342,7 +342,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testGetViewScript()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('view')
                 ->setActionName('test');
         $response = new Response\Cli();
@@ -361,7 +361,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
         $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
 
-        $request    = new Request\HTTP();
+        $request    = new Request\Http();
         $request->setControllerName('view')
                 ->setActionName('test');
         $response   = new Response\Cli();
@@ -379,7 +379,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderScript()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('view')
                 ->setActionName('script');
         $response = new Response\Cli();
@@ -392,7 +392,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderScriptToNamedResponseSegment()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('view')
                 ->setActionName('script-name');
         $response = new Response\Cli();
@@ -422,7 +422,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testViewInjectionUsingViewRenderer()
     {
         HelperBroker::addHelper(new Helper\ViewRenderer());
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('view')
                 ->setActionName('script');
         $response = new Response\Cli();
@@ -434,7 +434,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testRenderUsingViewRenderer()
     {
         HelperBroker::addHelper(new Helper\ViewRenderer());
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setControllerName('view')
                 ->setActionName('script');
         $response = new Response\Cli();

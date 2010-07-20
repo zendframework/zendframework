@@ -29,8 +29,8 @@ use Zend\Server\Reflection,
 /**
  * @uses       Zend\JSON\Server\Error
  * @uses       Zend\JSON\Server\Exception
- * @uses       Zend\JSON\Server\Request\HTTP
- * @uses       Zend\JSON\Server\Response\HTTP
+ * @uses       Zend\JSON\Server\Request\Http
+ * @uses       Zend\JSON\Server\Response\Http
  * @uses       Zend\JSON\Server\SMD
  * @uses       Zend\Server\AbstractServer
  * @uses       Zend\Server\Reflection
@@ -248,7 +248,7 @@ class Server extends \Zend\Server\AbstractServer
     public function getRequest()
     {
         if (null === ($request = $this->_request)) {
-            $this->setRequest(new Request\HTTP());
+            $this->setRequest(new Request\Http());
         }
         return $this->_request;
     }
@@ -273,7 +273,7 @@ class Server extends \Zend\Server\AbstractServer
     public function getResponse()
     {
         if (null === ($response = $this->_response)) {
-            $this->setResponse(new Response\HTTP());
+            $this->setResponse(new Response\Http());
         }
         return $this->_response;
     }

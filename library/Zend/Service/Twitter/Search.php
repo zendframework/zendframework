@@ -32,7 +32,7 @@
  * @namespace
  */
 namespace Zend\Service\Twitter;
-use Zend\HTTP;
+use Zend\Http;
 use Zend\REST;
 use Zend\Feed;
 use Zend\JSON;

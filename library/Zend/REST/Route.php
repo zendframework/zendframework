@@ -113,7 +113,7 @@ class Route extends \Zend\Controller\Router\Route\Module
      */
     public function match($request, $partial = false)
     {
-        if (!$request instanceof \Zend\Controller\Request\HTTP) {
+        if (!$request instanceof \Zend\Controller\Request\Http) {
             $request = $this->_front->getRequest();
         }
         $this->_request = $request;

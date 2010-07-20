@@ -31,7 +31,7 @@ use Zend\Date;
  * @uses       \Zend\Date\Date
  * @uses       \Zend\Feed\PubSubHubbub\PubSubHubbub
  * @uses       \Zend\Feed\PubSubHubbub\Exception
- * @uses       \Zend\HTTP\Client
+ * @uses       \Zend\Http\Client
  * @uses       \Zend\Uri\Uri
  * @uses       \Zend\Version
  * @category   Zend
@@ -657,12 +657,12 @@ class Subscriber
      * Get a basic prepared HTTP client for use
      *
      * @param  string $mode Must be "subscribe" or "unsubscribe"
-     * @return \Zend\HTTP\Client
+     * @return \Zend\Http\Client
      */
     protected function _getHttpClient()
     {
         $client = PubSubHubbub::getHttpClient();
-        $client->setMethod(\Zend\HTTP\Client::POST);
+        $client->setMethod(\Zend\Http\Client::POST);
         $client->setConfig(array('useragent' => 'Zend_Feed_Pubsubhubbub_Subscriber/'
             . \Zend\Version::VERSION));
         return $client;

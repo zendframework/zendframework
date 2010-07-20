@@ -61,8 +61,8 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $front = Controller\Front::getInstance();
         $front->resetInstance();
 
-        $this->request  = new Request\HTTP('http://framework.zend.com/action-foo');
-        $this->response = new Response\HTTP();
+        $this->request  = new Request\Http('http://framework.zend.com/action-foo');
+        $this->response = new Response\Http();
         $this->response->headersSentThrowsException = false;
         $front->setRequest($this->request)
               ->setResponse($this->response)
@@ -213,7 +213,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $front = Controller\Front::getInstance();
         $front->resetInstance();
 
-        $response = new Response\HTTP();
+        $response = new Response\Http();
         $response->headersSentThrowsException = false;
         $front->setResponse($response)
               ->addModuleDirectory(__DIR__ . '/_files/modules');
@@ -232,7 +232,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $front = Controller\Front::getInstance();
         $front->resetInstance();
 
-        $request = new Request\HTTP('http://framework.zend.com/foo');
+        $request = new Request\Http('http://framework.zend.com/foo');
         $front->setRequest($this->request)
               ->addModuleDirectory(__DIR__ . '/_files/modules');
         try {

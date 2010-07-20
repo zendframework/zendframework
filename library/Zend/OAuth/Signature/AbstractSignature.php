@@ -25,11 +25,11 @@
 namespace Zend\OAuth\Signature;
 
 use Zend\OAuth\Signature as OAuthSignature,
-    Zend\OAuth\HTTP\Utility as HTTPUtility,
+    Zend\OAuth\Http\Utility as HTTPUtility,
     Zend\OAuth\Exception as OAuthException;
 
 /**
- * @uses       Zend\OAuth\HTTP\Utility
+ * @uses       Zend\OAuth\Http\Utility
  * @uses       Zend\URI\URL
  * @category   Zend
  * @package    Zend_OAuth

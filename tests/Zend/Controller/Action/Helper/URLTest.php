@@ -51,7 +51,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
     {
         $this->front = \Zend\Controller\Front::getInstance();
         $this->front->resetInstance();
-        $this->front->setRequest(new \Zend\Controller\Request\HTTP());
+        $this->front->setRequest(new \Zend\Controller\Request\Http());
         $this->helper = new \Zend\Controller\Action\Helper\URL();
     }
 

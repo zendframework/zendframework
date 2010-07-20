@@ -30,7 +30,7 @@ use Zend\OpenID\OpenID,
     Zend\OpenID\Consumer\Storage,
     Zend\OpenID\Extension,
     ZendTest\OpenID as OpenIDTest,
-    Zend\HTTP;
+    Zend\Http;
 
 
 /**
@@ -286,13 +286,13 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
     public function testHttpRequest()
     {
         $consumer = new ConsumerHelper(new Storage\File(__DIR__."/_files/consumer"));
-        $http = new HTTP\Client(null,
+        $http = new Http\Client(null,
             array(
                 'maxredirects' => 4,
                 'timeout'      => 15,
                 'useragent'    => 'Zend_OpenID'
             ));
-        $test = new HTTP\Client\Adapter\Test();
+        $test = new Http\Client\Adapter\Test();
         $http->setAdapter($test);
         $consumer->SetHttpClient($http);
         $this->assertSame( $http, $consumer->GetHttpClient() );
@@ -373,13 +373,13 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
             $storage = new Storage\File(__DIR__."/_files/consumer");
             $storage->delAssociation(self::SERVER);
             $consumer = new ConsumerHelper($storage);
-            $http = new HTTP\Client(null,
+            $http = new Http\Client(null,
                 array(
                     'maxredirects' => 4,
                     'timeout'      => 15,
                     'useragent'    => 'Zend_OpenID'
                 ));
-            $test = new HTTP\Client\Adapter\Test();
+            $test = new Http\Client\Adapter\Test();
             $http->setAdapter($test);
             $consumer->SetHttpClient($http);
 
@@ -548,13 +548,13 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
     {
         $storage = new Storage\File(__DIR__."/_files/consumer");
         $consumer = new ConsumerHelper($storage);
-        $http = new HTTP\Client(null,
+        $http = new Http\Client(null,
             array(
                 'maxredirects' => 4,
                 'timeout'      => 15,
                 'useragent'    => 'Zend_OpenID'
             ));
-        $test = new HTTP\Client\Adapter\Test();
+        $test = new Http\Client\Adapter\Test();
         $http->setAdapter($test);
         $consumer->SetHttpClient($http);
 
@@ -847,13 +847,13 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         $_SERVER['SCRIPT_URI'] = "http://www.zf-test.com/test.php";
         $storage = new Storage\File(__DIR__."/_files/consumer");
         $consumer = new ConsumerHelper($storage);
-        $http = new HTTP\Client(null,
+        $http = new Http\Client(null,
             array(
                 'maxredirects' => 4,
                 'timeout'      => 15,
                 'useragent'    => 'Zend_OpenID'
             ));
-        $test = new HTTP\Client\Adapter\Test();
+        $test = new Http\Client\Adapter\Test();
         $http->setAdapter($test);
         $consumer->SetHttpClient($http);
         $storage->delDiscoveryInfo(self::ID);

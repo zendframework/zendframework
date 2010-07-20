@@ -29,7 +29,7 @@ use Zend\Config\Config;
 /**
  * Zend_Service_ReCaptcha
  *
- * @uses       \Zend\HTTP\Client
+ * @uses       \Zend\Http\Client
  * @uses       \Zend\JSON\JSON
  * @uses       Zend\Service\AbstractService
  * @uses       \Zend\Service\ReCaptcha\Exception
@@ -435,7 +435,7 @@ HTML;
      *
      * @param string $challengeField
      * @param string $responseField
-     * @return \Zend\HTTP\Response
+     * @return \Zend\Http\Response
      * @throws \Zend\Service\ReCaptcha\Exception
      */
     protected function _post($challengeField, $responseField)
@@ -457,7 +457,7 @@ HTML;
         }
 
         /* Fetch an instance of the http client */
-        $httpClient = $this->getHTTPClient();
+        $httpClient = $this->getHttpClient();
 
         $postParams = array('privatekey' => $this->_privateKey,
                             'remoteip'   => $this->_ip,
@@ -467,7 +467,7 @@ HTML;
         /* Make the POST and return the response */
         return $httpClient->setUri(self::VERIFY_SERVER)
                           ->setParameterPost($postParams)
-                          ->request(\Zend\HTTP\Client::POST);
+                          ->request(\Zend\Http\Client::POST);
     }
 
     /**

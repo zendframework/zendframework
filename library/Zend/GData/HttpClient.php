@@ -33,14 +33,14 @@ namespace Zend\GData;
  *
  * @uses       \Zend\GData\App\Exception
  * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\HTTP\Client
+ * @uses       \Zend\Http\Client
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HttpClient extends \Zend\HTTP\Client
+class HttpClient extends \Zend\Http\Client
 {
 
     /**
@@ -246,8 +246,8 @@ class HttpClient extends \Zend\HTTP\Client
      * Method for filtering the HTTP response, though no filtering is
      * currently done.
      *
-     * @param \Zend\HTTP\Response $response The response object to filter
-     * @return \Zend\HTTP\Response The filterd response object
+     * @param \Zend\Http\Response $response The response object to filter
+     * @return \Zend\Http\Response The filterd response object
      */
     public function filterHttpResponse($response) {
         return $response;
@@ -256,7 +256,7 @@ class HttpClient extends \Zend\HTTP\Client
     /**
      * Return the current connection adapter
      *
-     * @return \Zend\HTTP\Client\Adapter|string $adapter
+     * @return \Zend\Http\Client\Adapter|string $adapter
      */
     public function getAdapter()
     {
@@ -266,7 +266,7 @@ class HttpClient extends \Zend\HTTP\Client
    /**
      * Load the connection adapter
      *
-     * @param \Zend\HTTP\Client\Adapter $adapter
+     * @param \Zend\Http\Client\Adapter $adapter
      * @return void
      */
     public function setAdapter($adapter)
@@ -308,7 +308,7 @@ class HttpClient extends \Zend\HTTP\Client
      * Prepare the request body (for POST and PUT requests)
      *
      * @return string
-     * @throws \Zend\HTTP\Client\Exception
+     * @throws \Zend\Http\Client\Exception
      */
     protected function _prepareBody()
     {
@@ -325,7 +325,7 @@ class HttpClient extends \Zend\HTTP\Client
     /**
      * Clear all custom parameters we set.
      *
-     * @return \Zend\HTTP\Client
+     * @return \Zend\Http\Client
      */
     public function resetParameters($clearAll = false)
     {
@@ -343,7 +343,7 @@ class HttpClient extends \Zend\HTTP\Client
      *
      * @param string $data The request data
      * @param string $enctype The encoding type
-     * @return \Zend\HTTP\Client
+     * @return \Zend\Http\Client
      */
     public function setRawDataStream($data, $enctype = null)
     {

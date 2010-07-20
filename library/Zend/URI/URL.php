@@ -555,6 +555,9 @@ class URL implements URI
      */
     public function setPath($path)
     {
+        if (empty($path)) {
+            $path = '/';
+        }
         $this->_path = $path;
         return $this;
     }

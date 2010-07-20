@@ -287,7 +287,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class HTTPTestMockAdapter extends \Zend\File\Transfer\Adapter\HTTP
+class HTTPTestMockAdapter extends \Zend\File\Transfer\Adapter\Http
 {
     public function __construct()
     {

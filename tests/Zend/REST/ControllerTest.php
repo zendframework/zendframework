@@ -25,8 +25,8 @@
  */
 namespace ZendTest\REST;
 
-use Zend\Controller\Request\HTTPTestCase as Request,
-    Zend\Controller\Response\HTTPTestCase as Response;
+use Zend\Controller\Request\HttpTestCase as Request,
+    Zend\Controller\Response\HttpTestCase as Response;
 
 /**
  * @category   Zend

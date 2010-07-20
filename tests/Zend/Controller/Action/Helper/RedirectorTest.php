@@ -79,8 +79,8 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
 
         $this->redirector = new \Zend\Controller\Action\Helper\Redirector();
         $this->router     = $front->getRouter();
-        $this->request    = new \Zend\Controller\Request\HTTP();
-        $this->response   = new \Zend\Controller\Response\HTTP();
+        $this->request    = new \Zend\Controller\Request\Http();
+        $this->response   = new \Zend\Controller\Response\Http();
         $this->controller = new TestController(
             $this->request,
             $this->response,
@@ -147,7 +147,7 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testRedirectorShouldOnlyAllowValidHTTPRedirectCodes()
+    public function testRedirectorShouldOnlyAllowValidHttpRedirectCodes()
     {
         try {
             $this->redirector->setCode('306');
@@ -285,19 +285,19 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/my/foo/bar', $this->redirector->getRedirectUrl());
     }
 
-    public function testSetGotoUrlWithHTTPCodeUsingCodeProperty()
+    public function testSetGotoUrlWithHttpCodeUsingCodeProperty()
     {
         $this->redirector->setCode(301);
         $this->redirector->setGotoUrl('/foo/bar');
         $this->assertEquals('/foo/bar', $this->redirector->getRedirectUrl());
-        $this->assertEquals(301, $this->response->getHTTPResponseCode());
+        $this->assertEquals(301, $this->response->getHttpResponseCode());
     }
 
-    public function testSetGotoUrlWithHTTPCodeUsingCodeOption()
+    public function testSetGotoUrlWithHttpCodeUsingCodeOption()
     {
         $this->redirector->setGotoUrl('/foo/bar', array('code' => 301));
         $this->assertEquals('/foo/bar', $this->redirector->getRedirectUrl());
-        $this->assertEquals(301, $this->response->getHTTPResponseCode());
+        $this->assertEquals(301, $this->response->getHttpResponseCode());
     }
 
     /**
@@ -459,7 +459,7 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-4318
      */
-    public function testServerVariableHTTPsToOffDoesNotBuildHTTPsUrl()
+    public function testServerVariableHttpsToOffDoesNotBuildHttpsUrl()
     {
         // Set Preconditions from Issue:
         $_SERVER['HTTPS'] = "off";

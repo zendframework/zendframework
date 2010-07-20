@@ -46,13 +46,13 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->_callback = new \Zend\Feed\PubSubHubbub\Subscriber\Callback;
         
         $this->_adapter = $this->_getCleanMock(
-            '\Zend\Db\Adapter\AbstractAdapter'
+            'Zend\Db\Adapter\AbstractAdapter'
         );
         $this->_tableGateway = $this->_getCleanMock(
-            '\Zend\Db\Table\AbstractTable'
+            'Zend\Db\Table\AbstractTable'
         );
         $this->_rowset = $this->_getCleanMock(
-            '\Zend\Db\Table\AbstractRowset'
+            'Zend\Db\Table\AbstractRowset'
         );
         
         $this->_tableGateway->expects($this->any())->method('getAdapter')
@@ -412,7 +412,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_callback->getHttpResponse()->getHeader('X-Hub-On-Behalf-Of') == 1);
     }
     
-    protected function _getCleanMock($className) {
+    protected function _getCleanMock($className) 
+    {
         $class = new \ReflectionClass($className);
         $methods = $class->getMethods();
         $stubMethods = array();

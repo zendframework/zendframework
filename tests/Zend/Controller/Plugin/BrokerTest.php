@@ -66,7 +66,7 @@ class BrokerTest extends \PHPUnit_Framework_TestCase
     public function testUsingFrontController()
     {
         $this->controller->setControllerDirectory(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files');
-        $request = new Request\HTTP('http://framework.zend.com/empty');
+        $request = new Request\Http('http://framework.zend.com/empty');
         $this->controller->setResponse(new Response\Cli());
         $plugin = new TestPlugin();
         $this->controller->registerPlugin($plugin);
@@ -157,7 +157,7 @@ class BrokerTest extends \PHPUnit_Framework_TestCase
 
     public function testBrokerCatchesExceptions()
     {
-        $request  = new Request\HTTP('http://framework.zend.com/empty');
+        $request  = new Request\Http('http://framework.zend.com/empty');
         $response = new Response\Cli();
         $broker   = new Plugin\Broker();
         $broker->setResponse($response);

@@ -117,7 +117,7 @@ class RESTClient extends \Zend\Service\AbstractService
 
         /**
          * Get the HTTP client and configure it for the endpoint URI.  Do this 
-         * each time as the Zend\HTTP\Client instance may be shared with other 
+         * each time as the Zend\Http\Client instance may be shared with other 
          * Zend\Service\AbstractService subclasses.
          */
         $this->getHttpClient()->resetParameters()->setUri($this->_uri);
@@ -128,8 +128,8 @@ class RESTClient extends \Zend\Service\AbstractService
      *
      * @param string $path
      * @param array  $query Array of GET parameters
-     * @throws Zend\HTTP\Client\Exception
-     * @return Zend\HTTP\Response
+     * @throws Zend\Http\Client\Exception
+     * @return Zend\Http\Response
      */
     final public function restGet($path, array $query = null)
     {
@@ -148,7 +148,7 @@ class RESTClient extends \Zend\Service\AbstractService
      *
      * @param mixed $method
      * @param mixed $data
-     * @return \Zend\HTTP\Response
+     * @return \Zend\Http\Response
      */
     protected function _performPost($method, $data = null)
     {
@@ -166,8 +166,8 @@ class RESTClient extends \Zend\Service\AbstractService
      *
      * @param string $path
      * @param mixed $data Raw data to send
-     * @throws \Zend\HTTP\Client\Exception
-     * @return \Zend\HTTP\Response
+     * @throws \Zend\Http\Client\Exception
+     * @return \Zend\Http\Response
      */
     final public function restPost($path, $data = null)
     {
@@ -180,8 +180,8 @@ class RESTClient extends \Zend\Service\AbstractService
      *
      * @param string $path
      * @param mixed $data Raw data to send in request
-     * @throws \Zend\HTTP\Client\Exception
-     * @return \Zend\HTTP\Response
+     * @throws \Zend\Http\Client\Exception
+     * @return \Zend\Http\Response
      */
     final public function restPut($path, $data = null)
     {
@@ -193,8 +193,8 @@ class RESTClient extends \Zend\Service\AbstractService
      * Performs an HTTP DELETE request to $path.
      *
      * @param string $path
-     * @throws \Zend\HTTP\Client\Exception
-     * @return \Zend\HTTP\Response
+     * @throws \Zend\Http\Client\Exception
+     * @return \Zend\Http\Response
      */
     final public function restDelete($path)
     {

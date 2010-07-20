@@ -28,7 +28,7 @@ namespace ZendTest\REST;
 use Zend\REST,
     Zend\Config\Ini as INIConfig,
     Zend\Controller\Front as FrontController,
-    Zend\Controller\Request\HTTPTestCase as Request,
+    Zend\Controller\Request\HttpTestCase as Request,
     Zend\Controller\Router\Rewrite as RewriteRouter,
     Zend\Controller\Router\Route\Route;
 

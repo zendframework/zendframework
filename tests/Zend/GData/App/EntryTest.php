@@ -26,7 +26,7 @@
 namespace ZendTest\GData\App;
 use Zend\GData\App;
 use Zend\GData;
-use Zend\HTTP;
+use Zend\Http;
 use Zend\GData\App\Extension;
 use Zend\URI;
 
@@ -158,7 +158,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->entry->getHttpClient(),
                 $s->getHttpClient());
 
-        $c = new HTTP\Client();
+        $c = new Http\Client();
         $s->setHttpClient($c);
         $this->assertEquals($this->entry->getHttpClient(),
                 $s->getHttpClient($c));
@@ -174,10 +174,10 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(get_class($s->getHttpClient()),
                 'Zend\GData\HttpClient');
 
-        $c = new HTTP\Client();
+        $c = new Http\Client();
         $this->entry->setHttpClient($c);
         $this->assertEquals(get_class($s->getHttpClient()),
-                'Zend\HTTP\Client');
+                'Zend\Http\Client');
     }
 
     public function testSaveSupportsGDataV2()

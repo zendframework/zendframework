@@ -31,7 +31,7 @@ use Zend\Controller\Action\Exception as ActionException,
     Zend\Controller\Action\Helper\AutoCompleteDojo,
     Zend\Controller\Action\Helper\AutoCompleteScriptaculous,
     Zend\Controller\Front as FrontController,
-    Zend\Controller\Request\HTTP as HTTPRequest,
+    Zend\Controller\Request\Http as HTTPRequest,
     Zend\Controller\Response\Cli as CLIResponse,
     Zend\Layout\Layout,
     Zend\JSON\JSON;
@@ -175,12 +175,12 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
      */
     public function testDojoHelperEncodesUnicodeChars()
     {
-        $dojo = new Zend_Controller_Action_Helper_AutoCompleteDojo();
+        $dojo = new AutoCompleteDojo();
         $dojo->suppressExit = true;
         $data = array ('garçon', 'schließen', 'Helgi Þormar Þorbjörnsson');
         $encoded = $dojo->direct($data);
         $body = $this->response->getBody();
-        $decoded = Zend_Json::decode($encoded);
+        $decoded = JSON::decode($encoded);
         $test = array ();
         foreach ($decoded['items'] as $item) {
             $test[] = $item['name'];

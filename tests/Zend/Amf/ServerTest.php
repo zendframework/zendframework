@@ -717,7 +717,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $result  = $this->_server->handle();
         $content = ob_get_clean();
         $request = $this->_server->getRequest();
-        $this->assertTrue($request instanceof Request\HTTPRequest);
+        $this->assertTrue($request instanceof Request\HttpRequest);
         $bodies  = $request->getAmfBodies();
         $this->assertEquals(0, count($bodies));
         $this->assertContains('Endpoint', $content);
@@ -728,7 +728,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->_server->setRequest('Zend\\Amf\\Request\\StreamRequest');
         $request = $this->_server->getRequest();
         $this->assertTrue($request instanceof Request\StreamRequest);
-        $this->assertFalse($request instanceof Request\HTTPRequest);
+        $this->assertFalse($request instanceof Request\HttpRequest);
     }
 
     /**
@@ -760,7 +760,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->_server->setResponse('Zend\\Amf\\Response\\StreamResponse');
         $response = $this->_server->getResponse();
         $this->assertTrue($response instanceof Response\StreamResponse);
-        $this->assertFalse($response instanceof Response\HTTPResponse);
+        $this->assertFalse($response instanceof Response\HttpResponse);
     }
 
     /**

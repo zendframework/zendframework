@@ -25,8 +25,8 @@ namespace ZendTest\Application;
 use Zend\Loader\Autoloader,
     Zend\Application,
     Zend\Controller\Front as FrontController,
-    Zend\Controller\Request\HTTPTestCase as HttpRequestTestCase,
-    Zend\Controller\Response\HTTPTestCase as HttpResponseTestCase;
+    Zend\Controller\Request\HttpTestCase as HttpRequestTestCase,
+    Zend\Controller\Response\HttpTestCase as HttpResponseTestCase;
 
 /**
  * @category   Zend

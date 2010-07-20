@@ -53,7 +53,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         \Zend\Layout\Layout::resetMvcInstance();
 
-        $this->response = new \Zend\Controller\Response\HTTP();
+        $this->response = new \Zend\Controller\Response\Http();
         $this->response->headersSentThrowsException = false;
 
         $front = \Zend\Controller\Front::getInstance();

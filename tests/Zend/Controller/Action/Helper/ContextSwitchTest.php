@@ -66,7 +66,7 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
         $this->helper = new Helper\ContextSwitch();
         HelperBroker::addHelper($this->helper);
 
-        $this->request = new \Zend\Controller\Request\HTTP();
+        $this->request = new \Zend\Controller\Request\Http();
         $this->response = new \Zend\Controller\Response\Cli();
 
         $this->front->setRequest($this->request)

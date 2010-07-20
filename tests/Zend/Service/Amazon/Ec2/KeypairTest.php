@@ -54,7 +54,7 @@ class Zend_Service_Amazon_Ec2_KeypairTest extends PHPUnit_Framework_TestCase
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Keypair::setDefaultHTTPClient($client);
+        Zend_Service_Amazon_Ec2_Keypair::setDefaultHttpClient($client);
 
 
     }

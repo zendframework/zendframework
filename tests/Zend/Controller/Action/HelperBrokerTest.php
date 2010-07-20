@@ -30,7 +30,7 @@ require_once __DIR__ . '/TestAsset/TestHelper.php';
 
 use Zend\Controller\Action\HelperBroker,
     Zend\Controller\Front as FrontController,
-    Zend\Controller\Request\HTTP as Request,
+    Zend\Controller\Request\Http as Request,
     Zend\Controller\Response\Cli as Response,
     Zend\Controller\Action\Helper,
     Zend\Loader\PluginLoader;

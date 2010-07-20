@@ -85,8 +85,8 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->basePath = realpath(__DIR__ . str_repeat(DIRECTORY_SEPARATOR . '..', 2));
-        $this->request  = new \Zend\Controller\Request\HTTP();
-        $this->response = new \Zend\Controller\Response\HTTP();
+        $this->request  = new \Zend\Controller\Request\Http();
+        $this->response = new \Zend\Controller\Response\Http();
         $this->front    = \Zend\Controller\Front::getInstance();
         $this->front->resetInstance();
         $this->front->addModuleDirectory($this->basePath . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules')
@@ -412,7 +412,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('index')
                       ->setActionName('test')
                       ->setDispatched(true);
-        $this->response->setHTTPResponseCode(302);
+        $this->response->setHttpResponseCode(302);
         $controller = new \Bar_IndexController($this->request, $this->response, array());
         $this->helper->setActionController($controller);
         $this->helper->postDispatch();

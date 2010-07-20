@@ -28,9 +28,9 @@ namespace Zend\OAuth;
  * @uses       \Zend\OAuth\OAuth
  * @uses       \Zend\OAuth\Config\Config
  * @uses       \Zend\OAuth\Exception
- * @uses       \Zend\OAuth\HTTP\AccessToken
- * @uses       \Zend\OAuth\HTTP\RequestToken
- * @uses       \Zend\OAuth\HTTP\UserAuthorization
+ * @uses       \Zend\OAuth\Http\AccessToken
+ * @uses       \Zend\OAuth\Http\RequestToken
+ * @uses       \Zend\OAuth\Http\UserAuthorization
  * @uses       \Zend\OAuth\Token\AuthorizedRequest
  * @uses       \Zend\Uri\Uri
  * @category   Zend
@@ -86,16 +86,16 @@ class Consumer extends OAuth
      *
      * @param  null|array $customServiceParameters Non-OAuth Provider-specified parameters
      * @param  null|string $httpMethod
-     * @param  null|Zend\OAuth\HTTP\RequestToken $request
+     * @param  null|Zend\OAuth\Http\RequestToken $request
      * @return Zend\OAuth\Token\Request
      */
     public function getRequestToken(
         array $customServiceParameters = null,
         $httpMethod = null,
-        HTTP\RequestToken $request = null
+        Http\RequestToken $request = null
     ) {
         if (is_null($request)) {
-            $request = new HTTP\RequestToken($this, $customServiceParameters);
+            $request = new Http\RequestToken($this, $customServiceParameters);
         } elseif(!is_null($customServiceParameters)) {
             $request->setParameters($customServiceParameters);
         }
@@ -124,10 +124,10 @@ class Consumer extends OAuth
     public function getRedirectUrl(
         array $customServiceParameters = null,
         Token\Request $token = null,
-        HTTP\UserAuthorization $redirect = null
+        Http\UserAuthorization $redirect = null
     ) {
         if (is_null($redirect)) {
-            $redirect = new HTTP\UserAuthorization($this, $customServiceParameters);
+            $redirect = new Http\UserAuthorization($this, $customServiceParameters);
         } elseif(!is_null($customServiceParameters)) {
             $redirect->setParameters($customServiceParameters);
         }
@@ -144,12 +144,12 @@ class Consumer extends OAuth
      * Sends headers and exit()s on completion.
      *
      * @param  null|array $customServiceParameters
-     * @param  null|Zend\OAuth\HTTP\UserAuthorization $request
+     * @param  null|Zend\OAuth\Http\UserAuthorization $request
      * @return void
      */
     public function redirect(
         array $customServiceParameters = null,
-        HTTP\UserAuthorization $request = null
+        Http\UserAuthorization $request = null
     ) {
         $redirectUrl = $this->getRedirectUrl($customServiceParameters, $request);
         header('Location: ' . $redirectUrl);
@@ -163,7 +163,7 @@ class Consumer extends OAuth
      * @param  array $queryData GET data returned in user's redirect from Provider
      * @param  Zend\OAuth\Token\Request Request Token information
      * @param  string $httpMethod
-     * @param  Zend\OAuth\HTTP\AccessToken $request
+     * @param  Zend\OAuth\Http\AccessToken $request
      * @return Zend\OAuth\Token\Access
      * @throws Zend\OAuth\Exception on invalid authorization token, non-matching response authorization token, or unprovided authorization token
      */
@@ -171,7 +171,7 @@ class Consumer extends OAuth
         $queryData, 
         Token\Request $token,
         $httpMethod = null, 
-        HTTP\AccessToken $request = null
+        Http\AccessToken $request = null
     ) {
         $authorizedToken = new Token\AuthorizedRequest($queryData);
         if (!$authorizedToken->isValid()) {
@@ -179,7 +179,7 @@ class Consumer extends OAuth
                 'Response from Service Provider is not a valid authorized request token');
         }
         if (is_null($request)) {
-            $request = new HTTP\AccessToken($this);
+            $request = new Http\AccessToken($this);
         }
 
         // OAuth 1.0a Verifier

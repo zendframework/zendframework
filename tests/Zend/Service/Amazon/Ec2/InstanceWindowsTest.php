@@ -55,7 +55,7 @@ class InstanceWindowsTest extends PHPUnit_Framework_TestCase
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Instance_Windows::setDefaultHTTPClient($client);
+        Zend_Service_Amazon_Ec2_Instance_Windows::setDefaultHttpClient($client);
     }
 
     /**

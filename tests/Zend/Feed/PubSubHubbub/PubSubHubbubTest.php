@@ -58,4 +58,4 @@ class PubSubHubbubTest extends \PHPUnit_Framework_TestCase
 
 }
 
-class Pubsub extends \Zend\HTTP\Client {}
+class Pubsub extends \Zend\Http\Client {}

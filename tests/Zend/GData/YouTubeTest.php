@@ -62,7 +62,7 @@ class YouTubeTest extends \PHPUnit_Framework_TestCase
         $applicationId = 'MyTestCompany-MyTestApp-0.1';
         $clientId = 'MyClientId';
         $developerKey = 'MyDeveloperKey';
-        $httpClient = new \Zend\HTTP\Client();
+        $httpClient = new \Zend\Http\Client();
         $yt = new YouTube($httpClient, $applicationId, $clientId, $developerKey);
 
         $this->assertTrue($yt instanceOf YouTube);

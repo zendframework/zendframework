@@ -25,17 +25,17 @@
 namespace Zend\OAuth;
 
 /**
- * @uses       Zend\HTTP\Client
+ * @uses       Zend\Http\Client
  * @uses       Zend\OAuth\OAuth
  * @uses       Zend\OAuth\Config\StandardConfig
  * @uses       Zend\OAuth\Exception
- * @uses       Zend\OAuth\HTTP\Utility
+ * @uses       Zend\OAuth\Http\Utility
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Client extends \Zend\HTTP\Client
+class Client extends \Zend\Http\Client
 {
     /**
      * Flag to indicate that the client has detected the server as supporting
@@ -87,7 +87,7 @@ class Client extends \Zend\HTTP\Client
     /**
      * Return the current connection adapter
      *
-     * @return Zend\HTTP\Client\Adapter|string $adapter
+     * @return Zend\Http\Client\Adapter|string $adapter
      */
     public function getAdapter()
     {
@@ -97,7 +97,7 @@ class Client extends \Zend\HTTP\Client
    /**
      * Load the connection adapter
      *
-     * @param Zend\HTTP\Client\Adapter $adapter
+     * @param Zend\Http\Client\Adapter $adapter
      * @return void
      */
     public function setAdapter($adapter)
@@ -139,7 +139,7 @@ class Client extends \Zend\HTTP\Client
      * Prepare the request body (for POST and PUT requests)
      *
      * @return string
-     * @throws Zend\HTTP\Client\Exception
+     * @throws Zend\Http\Client\Exception
      */
     protected function _prepareBody()
     {
@@ -156,7 +156,7 @@ class Client extends \Zend\HTTP\Client
     /**
      * Clear all custom parameters we set.
      *
-     * @return Zend\HTTP\Client
+     * @return Zend\Http\Client
      */
     public function resetParameters($clearAll = false)
     {
@@ -169,11 +169,11 @@ class Client extends \Zend\HTTP\Client
      *
      * This is used to support POSTing from open file handles without
      * caching the entire body into memory. It is a wrapper around
-     * Zend\HTTP\Client::setRawData().
+     * Zend\Http\Client::setRawData().
      *
      * @param string $data The request data
      * @param string $enctype The encoding type
-     * @return Zend\HTTP\Client
+     * @return Zend\Http\Client
      */
     public function setRawDataStream($data, $enctype = null)
     {
@@ -187,7 +187,7 @@ class Client extends \Zend\HTTP\Client
      * Might be defunct and removed in a later iteration.
      *
      * @param  string $method
-     * @return Zend\HTTP\Client
+     * @return Zend\Http\Client
      */
     public function setMethod($method = self::GET)
     {
@@ -211,7 +211,7 @@ class Client extends \Zend\HTTP\Client
      * sign the request using the relevant signature method.
      *
      * @param  string $method
-     * @return Zend\HTTP\Response
+     * @return Zend\Http\Response
      */
     public function request($method = null)
     {

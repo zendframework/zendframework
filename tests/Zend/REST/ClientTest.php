@@ -27,7 +27,7 @@ namespace ZendTest\REST;
 
 use Zend\REST\Client,
     Zend\Uri,
-    Zend\HTTP\Response;
+    Zend\Http\Response;
 
 /**
  * Test cases for RESTClient
@@ -46,11 +46,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $this->path = __DIR__ . '/TestAsset/responses/';
 
-        $this->adapter = new \Zend\HTTP\Client\Adapter\Test();
-        $client        = new \Zend\HTTP\Client(null, array(
+        $this->adapter = new \Zend\Http\Client\Adapter\Test();
+        $client        = new \Zend\Http\Client(null, array(
             'adapter' => $this->adapter
         ));
-        Client\RESTClient::setDefaultHTTPClient($client);
+        Client\RESTClient::setDefaultHttpClient($client);
 
         $this->rest = new Client\RESTClient('http://framework.zend.com/');
     }
@@ -153,7 +153,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
 
-        $request = Client\RESTClient::getDefaultHTTPClient()->getLastRequest();
+        $request = Client\RESTClient::getDefaultHttpClient()->getLastRequest();
         $this->assertContains($reqXml, $request, $request);
     }
 
@@ -176,7 +176,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
 
-        $request = Client\RESTClient::getDefaultHTTPClient()->getLastRequest();
+        $request = Client\RESTClient::getDefaultHttpClient()->getLastRequest();
         $this->assertContains('foo=bar&baz=bat', $request, $request);
     }
 
@@ -200,7 +200,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
 
-        $request = Client\RESTClient::getDefaultHTTPClient()->getLastRequest();
+        $request = Client\RESTClient::getDefaultHttpClient()->getLastRequest();
         $this->assertContains($reqXml, $request, $request);
     }
 

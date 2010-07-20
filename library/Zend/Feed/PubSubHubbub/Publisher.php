@@ -28,7 +28,7 @@ use Zend\URI;
 /**
  * @uses       \Zend\Feed\PubSubHubbub\PubSubHubbub
  * @uses       \Zend\Feed\PubSubHubbub\Exception
- * @uses       \Zend\HTTP\Client
+ * @uses       \Zend\Http\Client
  * @uses       \Zend\Uri\Uri
  * @uses       \Zend\Version
  * @category   Zend
@@ -384,12 +384,12 @@ class Publisher
     /**
      * Get a basic prepared HTTP client for use
      *
-     * @return \Zend\HTTP\Client
+     * @return \Zend\Http\Client
      */
     protected function _getHttpClient()
     {
         $client = PubSubHubbub::getHttpClient();
-        $client->setMethod(\Zend\HTTP\Client::POST);
+        $client->setMethod(\Zend\Http\Client::POST);
         $client->setConfig(array(
             'useragent' => 'Zend_Feed_Pubsubhubbub_Publisher/' . \Zend\Version::VERSION,
         ));

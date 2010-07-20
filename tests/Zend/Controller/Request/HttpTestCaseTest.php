@@ -65,7 +65,7 @@ class HTTPTestCaseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->request = new \Zend\Controller\Request\HTTPTestCase();
+        $this->request = new \Zend\Controller\Request\HttpTestCase();
         $_GET    = array();
         $_POST   = array();
         $_COOKIE = array();

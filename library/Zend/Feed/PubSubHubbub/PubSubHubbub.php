@@ -24,10 +24,10 @@
  */
 namespace Zend\Feed\PubSubHubbub;
 use Zend\Feed\Reader;
-use Zend\HTTP;
+use Zend\Http;
 
 /**
- * @uses       \Zend\HTTP\Client
+ * @uses       \Zend\Http\Client
  * @uses       \Zend\Feed\AbstractFeed
  * @uses       \Zend\Feed\PubSubHubbub\Exception
  * @uses       \Zend\Feed\Reader\Reader
@@ -56,7 +56,7 @@ class PubSubHubbub
     /**
      * Singleton instance if required of the HTTP client
      *
-     * @var \Zend\HTTP\Client
+     * @var \Zend\Http\Client
      */
     protected static $httpClient = null;
 
@@ -89,10 +89,10 @@ class PubSubHubbub
      * Allows the external environment to make Zend_Oauth use a specific
      * Client instance.
      *
-     * @param  \Zend\HTTP\Client $httpClient
+     * @param  \Zend\Http\Client $httpClient
      * @return void
      */
-    public static function setHttpClient(HTTP\Client $httpClient)
+    public static function setHttpClient(Http\Client $httpClient)
     {
         self::$httpClient = $httpClient;
     }
@@ -102,12 +102,12 @@ class PubSubHubbub
      * the instance is reset and cleared of previous parameters GET/POST.
      * Headers are NOT reset but handled by this component if applicable.
      *
-     * @return \Zend\HTTP\Client
+     * @return \Zend\Http\Client
      */
     public static function getHttpClient()
     {
         if (!isset(self::$httpClient)):
-            self::$httpClient = new HTTP\Client;
+            self::$httpClient = new Http\Client;
         else:
             self::$httpClient->resetParameters();
         endif;

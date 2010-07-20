@@ -25,7 +25,7 @@
  * @namespace
  */
 namespace Zend\GData;
-use Zend\HTTP;
+use Zend\Http;
 
 /**
  * Provides Atom Publishing Protocol (APP) functionality.  This class and all
@@ -40,7 +40,7 @@ use Zend\HTTP;
  * @uses       \Zend\GData\HttpAdapterStreamingProxy
  * @uses       \Zend\GData\HttpAdapterStreamingSocket
  * @uses       \Zend\GData\HttpClient
- * @uses       \Zend\HTTP\Client\Exception
+ * @uses       \Zend\Http\Client\Exception
  * @uses       \Zend\Loader
  * @uses       \Zend\Version
  * @category   Zend
@@ -67,14 +67,14 @@ class App
     /**
      * Client object used to communicate
      *
-     * @var \Zend\HTTP\Client
+     * @var \Zend\Http\Client
      */
     protected $_httpClient;
 
     /**
      * Client object used to communicate in static context
      *
-     * @var \Zend\HTTP\Client
+     * @var \Zend\Http\Client
      */
     protected static $_staticHttpClient = null;
 
@@ -163,7 +163,7 @@ class App
     /**
      * Create Gdata object
      *
-     * @param \Zend\HTTP\Client $client
+     * @param \Zend\Http\Client $client
      * @param string $applicationId
      */
     public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
@@ -221,7 +221,7 @@ class App
     /**
      * Get the Zend_Http_Client object used for communication
      *
-     * @return \Zend\HTTP\Client
+     * @return \Zend\Http\Client
      */
     public function getHttpClient()
     {
@@ -231,7 +231,7 @@ class App
     /**
      * Set the Zend_Http_Client object used for communication
      *
-     * @param \Zend\HTTP\Client $client The client to use for communication
+     * @param \Zend\Http\Client $client The client to use for communication
      * @throws \Zend\GData\App\HttpException
      * @return \Zend\GData\App Provides a fluent interface
      */
@@ -239,11 +239,11 @@ class App
         $applicationId = 'MyCompany-MyApp-1.0')
     {
         if ($client === null) {
-            $client = new HTTP\Client();
+            $client = new Http\Client();
         }
-        if (!$client instanceof HTTP\Client) {
+        if (!$client instanceof Http\Client) {
             throw new App\HttpException(
-                'Argument is not an instance of Zend\HTTP\Client.');
+                'Argument is not an instance of Zend\Http\Client.');
         }
         $userAgent = $applicationId . ' Zend_Framework_Gdata/' .
             \Zend\Version::VERSION;
@@ -262,10 +262,10 @@ class App
      *
      * Sets the static HTTP client object to use for retrieving the feed.
      *
-     * @param  \Zend\HTTP\Client $httpClient
+     * @param  \Zend\Http\Client $httpClient
      * @return void
      */
-    public static function setStaticHttpClient(HTTP\Client $httpClient)
+    public static function setStaticHttpClient(Http\Client $httpClient)
     {
         self::$_staticHttpClient = $httpClient;
     }
@@ -274,12 +274,12 @@ class App
     /**
      * Gets the HTTP client object. If none is set, a new Zend_Http_Client will be used.
      *
-     * @return \Zend\HTTP\Client
+     * @return \Zend\Http\Client
      */
     public static function getStaticHttpClient()
     {
-        if (!self::$_staticHttpClient instanceof HTTP\Client) {
-            $client = new HTTP\Client();
+        if (!self::$_staticHttpClient instanceof Http\Client) {
+            $client = new Http\Client();
             $userAgent = 'Zend_Framework_Gdata/' . \Zend\Version::VERSION;
             $client->setHeaders('User-Agent', $userAgent);
             $client->setConfig(array(
@@ -578,7 +578,7 @@ class App
      *                                of the request body
      * @param int $remainingRedirects Number of redirects to follow if request
      *                              s results in one
-     * @return \Zend\HTTP\Response The response object
+     * @return \Zend\Http\Response The response object
      */
     public function performHttpRequest($method, $url, $headers = null,
         $body = null, $contentType = null, $remainingRedirects = null)
@@ -651,7 +651,7 @@ class App
             $this->_httpClient->setRawDataStream($body, $contentType);
             $oldHttpAdapter = $this->_httpClient->getAdapter();
 
-            if ($oldHttpAdapter instanceof \Zend\HTTP\Client\Adapter\Proxy) {
+            if ($oldHttpAdapter instanceof \Zend\Http\Client\Adapter\Proxy) {
                 $newAdapter = new HttpAdapterStreamingProxy();
             } else {
                 $newAdapter = new HttpAdapterStreamingSocket();
@@ -667,7 +667,7 @@ class App
             if ($usingMimeStream) {
                 $this->_httpClient->setAdapter($oldHttpAdapter);
             }
-        } catch (\Zend\HTTP\Client\Exception $e) {
+        } catch (\Zend\Http\Client\Exception $e) {
             // reset adapter
             if ($usingMimeStream) {
                 $this->_httpClient->setAdapter($oldHttpAdapter);
@@ -702,7 +702,7 @@ class App
      * Imports a feed located at $uri.
      *
      * @param  string $uri
-     * @param  \Zend\HTTP\Client $client The client used for communication
+     * @param  \Zend\Http\Client $client The client used for communication
      * @param  string $className The class which is used as the return type
      * @throws \Zend\GData\App\Exception
      * @return string|\Zend\GData\App\Feed Returns string only if the object
@@ -847,7 +847,7 @@ class App
      * @param array $extraHeaders Extra headers to add to the request, as an
      *        array of string-based key/value pairs.
      * @throws \Zend\GData\App\HttpException
-     * @return \Zend\HTTP\Response
+     * @return \Zend\Http\Response
      */
     public function get($uri, $extraHeaders = array())
     {
@@ -866,7 +866,7 @@ class App
      * @param string $contentType Content-type of the data
      * @param array $extraHeaders Extra headers to add to the request, as an
      *        array of string-based key/value pairs.
-     * @return \Zend\HTTP\Response
+     * @return \Zend\Http\Response
      * @throws \Zend\GData\App\Exception
      * @throws \Zend\GData\App\HttpException
      * @throws \Zend\GData\App\InvalidArgumentException
@@ -891,7 +891,7 @@ class App
      * @param string $contentType Content-type of the data
      * @param array $extraHeaders Extra headers to add to the request, as an
      *        array of string-based key/value pairs.
-     * @return \Zend\HTTP\Response
+     * @return \Zend\Http\Response
      * @throws \Zend\GData\App\Exception
      * @throws \Zend\GData\App\HttpException
      * @throws \Zend\GData\App\InvalidArgumentException

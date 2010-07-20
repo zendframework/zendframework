@@ -171,7 +171,7 @@ class Hostname extends AbstractRoute
      * Matches a user submitted path with parts defined by a map. Assigns and
      * returns an array of variables on a successful match.
      *
-     * @param \Zend\Controller\Request\HTTP $request Request to get the host from
+     * @param \Zend\Controller\Request\Http $request Request to get the host from
      * @return array|false An array of assigned values or a false on a mismatch
      */
     public function match($request)
@@ -299,7 +299,7 @@ class Hostname extends AbstractRoute
             $scheme = $this->_scheme;
         } else {
             $request = $this->getRequest();
-            if ($request instanceof \Zend\Controller\Request\HTTP) {
+            if ($request instanceof \Zend\Controller\Request\Http) {
                 $scheme = $request->getScheme();
             } else {
                 $scheme = 'http';

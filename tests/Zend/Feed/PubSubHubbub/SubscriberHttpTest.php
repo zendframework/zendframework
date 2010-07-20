@@ -68,7 +68,7 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
             }
             $uri = $this->_baseuri . $name . '.php';
             $this->_adapter = new $this->_config['adapter'];
-            $this->_client = new \Zend\HTTP\Client($uri, $this->_config);
+            $this->_client = new \Zend\Http\Client($uri, $this->_config);
             $this->_client->setAdapter($this->_adapter);
             \Zend\Feed\PubSubHubbub\PubSubHubbub::setHttpClient($this->_client);
             $this->_subscriber = new \Zend\Feed\PubSubHubbub\Subscriber\Subscriber;

@@ -632,7 +632,7 @@ class Dispatcher extends \Zend\Controller\Dispatcher\Standard
  *
  * @uses Zend_Controller_Request_Interface
  */
-class Request extends \Zend\Controller\Request\HTTP
+class Request extends \Zend\Controller\Request\Http
 {
     protected $_host;
     protected $_port;
@@ -650,7 +650,7 @@ class Request extends \Zend\Controller\Request\HTTP
         parent::__construct($uri);
     }
 
-    public function getHTTPHost() {
+    public function getHttpHost() {
         $return = $this->_host;
         if ($this->_port)  $return .= ':' . $this->_port;
         return $return;

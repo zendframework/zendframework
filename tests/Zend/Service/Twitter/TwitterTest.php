@@ -26,7 +26,7 @@
 namespace ZendTest\Service\Twitter;
 
 use Zend\Service,
-    Zend\HTTP,
+    Zend\Http,
     Zend\REST;
 
 /**
@@ -43,7 +43,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     
     public function teardown()
     {
-        Service\AbstractService::setDefaultHTTPClient(new HTTP\Client);
+        Service\AbstractService::setDefaultHttpClient(new Http\Client);
     }
     
     /**
@@ -62,7 +62,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
      * @param string $method Do we expect HTTP GET or POST?
      * @param string $responseFile File containing a valid XML response to the request
      * @param array $params Expected GET/POST parameters for the request
-     * @return \Zend\HTTP\Client
+     * @return \Zend\Http\Client
      */
     protected function _stubTwitter($path, $method, $responseFile = null, array $params = null)
     {
@@ -71,7 +71,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($client));
         $client->expects($this->once())->method('setUri')
             ->with('http://api.twitter.com/1/' . $path);
-        $response = $this->getMock('Zend\HTTP\Response', array(), array(), '', false);
+        $response = $this->getMock('Zend\Http\Response', array(), array(), '', false);
         if (!is_null($params)) {
             $setter = 'setParameter' . ucfirst(strtolower($method));
             $client->expects($this->once())->method($setter)->with($params);
@@ -164,7 +164,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {    
         $twitter = new Service\Twitter();
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'users/show.xml', HTTP\Client::GET, 'users.show.twitter.xml',
+            'users/show.xml', Http\Client::GET, 'users.show.twitter.xml',
             array('id'=>'twitter')
         ));
         $exists = $twitter->user->show('twitter')->id() !== null;
@@ -178,7 +178,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter();
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'statuses/user_timeline.xml', HTTP\Client::GET, 'user_timeline.twitter.xml'
+            'statuses/user_timeline.xml', Http\Client::GET, 'user_timeline.twitter.xml'
         ));
         $twitter->status->userTimeline(array('screen_name' => 'twitter'));
     }
@@ -210,7 +210,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'statuses/user_timeline/783214.xml', HTTP\Client::GET, 'user_timeline.twitter.xml', array(
+            'statuses/user_timeline/783214.xml', Http\Client::GET, 'user_timeline.twitter.xml', array(
                 'page' => '1',
                 'count' => '123',
                 'user_id' => '783214',
@@ -256,7 +256,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'statuses/public_timeline.xml', HTTP\Client::GET, 'public_timeline.xml'
+            'statuses/public_timeline.xml', Http\Client::GET, 'public_timeline.xml'
         ));
         $twitter->status->publicTimeline();
     }
@@ -272,7 +272,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'account/verify_credentials.xml', HTTP\Client::GET, 'account.verify_credentials.xml'
+            'account/verify_credentials.xml', Http\Client::GET, 'account.verify_credentials.xml'
         ));
         $response = $twitter->account->verifyCredentials();
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -282,7 +282,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'statuses/public_timeline.xml', HTTP\Client::GET, 'public_timeline.xml'
+            'statuses/public_timeline.xml', Http\Client::GET, 'public_timeline.xml'
         ));
         $response = $twitter->status->publicTimeline();
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -292,7 +292,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'account/rate_limit_status.xml', HTTP\Client::GET, 'rate_limit_status.xml'
+            'account/rate_limit_status.xml', Http\Client::GET, 'rate_limit_status.xml'
         ));
         $response = $twitter->account->rateLimitStatus();
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -302,7 +302,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'account/rate_limit_status.xml', HTTP\Client::GET, 'rate_limit_status.xml'
+            'account/rate_limit_status.xml', Http\Client::GET, 'rate_limit_status.xml'
         ));
         $response = $twitter->account->rateLimitStatus();
         $remaining_hits = $response->toValue($response->{'remaining-hits'});
@@ -313,7 +313,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'account/end_session', HTTP\Client::GET
+            'account/end_session', Http\Client::GET
         ));
         $response = $twitter->account->endSession();
         $this->assertTrue($response);
@@ -327,7 +327,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'friendships/create/twitter.xml', HTTP\Client::POST, 'friendships.create.twitter.xml'
+            'friendships/create/twitter.xml', Http\Client::POST, 'friendships.create.twitter.xml'
         ));
         $response = $twitter->friendship->create('twitter');
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -343,7 +343,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter(array('username'=>'padraicb'));
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'friendships/exists.xml', HTTP\Client::GET, 'friendships.exists.twitter.xml',
+            'friendships/exists.xml', Http\Client::GET, 'friendships.exists.twitter.xml',
             array('user_a'=>'padraicb', 'user_b'=>'twitter')
         ));
         $response = $twitter->friendship->exists('twitter');
@@ -357,7 +357,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {   
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'statuses/friends_timeline.xml', HTTP\Client::GET, 'statuses.friends_timeline.page.xml',
+            'statuses/friends_timeline.xml', Http\Client::GET, 'statuses.friends_timeline.page.xml',
             array('page'=>3)
         ));
         $response = $twitter->status->friendsTimeline(array('page' => 3));
@@ -371,7 +371,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'statuses/user_timeline/twitter.xml', HTTP\Client::GET, 'user_timeline.twitter.xml'
+            'statuses/user_timeline/twitter.xml', Http\Client::GET, 'user_timeline.twitter.xml'
         ));
         $response = $twitter->status->userTimeline(array('id' => 'twitter'));
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -384,7 +384,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'statuses/update.xml', HTTP\Client::POST, 'statuses.update.xml',
+            'statuses/update.xml', Http\Client::POST, 'statuses.update.xml',
             array('status'=>'Test Message 1')
         ));
         $response = $twitter->status->update('Test Message 1');
@@ -409,7 +409,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'statuses/show/15042159587.xml', HTTP\Client::GET, 'statuses.show.xml'
+            'statuses/show/15042159587.xml', Http\Client::GET, 'statuses.show.xml'
         ));
         $response = $twitter->status->show(15042159587);
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -419,7 +419,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'favorites/create/15042159587.xml', HTTP\Client::POST, 'favorites.create.xml'
+            'favorites/create/15042159587.xml', Http\Client::POST, 'favorites.create.xml'
         ));
         $response = $twitter->favorite->create(15042159587);
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -429,7 +429,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'favorites.xml', HTTP\Client::GET, 'favorites.xml'
+            'favorites.xml', Http\Client::GET, 'favorites.xml'
         ));
         $response = $twitter->favorite->favorites();
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -442,7 +442,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'favorites/destroy/15042159587.xml', HTTP\Client::POST, 'favorites.destroy.xml'
+            'favorites/destroy/15042159587.xml', Http\Client::POST, 'favorites.destroy.xml'
         ));
         $response = $twitter->favorite->destroy(15042159587);
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -452,7 +452,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'statuses/destroy/15042159587.xml', HTTP\Client::POST, 'statuses.destroy.xml'
+            'statuses/destroy/15042159587.xml', Http\Client::POST, 'statuses.destroy.xml'
         ));
         $response = $twitter->status->destroy(15042159587);
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -465,7 +465,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'statuses/friends.xml', HTTP\Client::GET, 'statuses.friends.xml'
+            'statuses/friends.xml', Http\Client::GET, 'statuses.friends.xml'
         ));
         $response = $twitter->user->friends();
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -479,7 +479,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'statuses/followers.xml', HTTP\Client::GET, 'statuses.followers.xml'
+            'statuses/followers.xml', Http\Client::GET, 'statuses.followers.xml'
         ));
         $response = $twitter->user->followers();
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -489,7 +489,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'users/show.xml', HTTP\Client::GET, 'users.show.twitter.xml',
+            'users/show.xml', Http\Client::GET, 'users.show.twitter.xml',
             array('id'=>'twitter')
         ));
         $response = $twitter->user->show('twitter');
@@ -503,7 +503,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'statuses/mentions.xml', HTTP\Client::GET, 'statuses.mentions.xml'
+            'statuses/mentions.xml', Http\Client::GET, 'statuses.mentions.xml'
         ));
         $response = $twitter->status->replies();
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -516,7 +516,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'friendships/destroy/twitter.xml', HTTP\Client::POST, 'friendships.destroy.twitter.xml'
+            'friendships/destroy/twitter.xml', Http\Client::POST, 'friendships.destroy.twitter.xml'
         ));
         $response = $twitter->friendship->destroy('twitter');
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -526,7 +526,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'blocks/create/twitter.xml', HTTP\Client::POST, 'blocks.create.twitter.xml'
+            'blocks/create/twitter.xml', Http\Client::POST, 'blocks.create.twitter.xml'
         ));
         $response = $twitter->block->create('twitter');
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -536,7 +536,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'blocks/exists/twitter.xml', HTTP\Client::GET, 'blocks.exists.twitter.xml'
+            'blocks/exists/twitter.xml', Http\Client::GET, 'blocks.exists.twitter.xml'
         ));
         $this->assertTrue($twitter->block->exists('twitter'));
     }
@@ -545,7 +545,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'blocks/blocking.xml', HTTP\Client::GET, 'blocks.blocking.xml'
+            'blocks/blocking.xml', Http\Client::GET, 'blocks.blocking.xml'
         ));
         $response = $twitter->block->blocking();
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -555,7 +555,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'blocks/blocking/ids.xml', HTTP\Client::GET, 'blocks.blocking.ids.xml',
+            'blocks/blocking/ids.xml', Http\Client::GET, 'blocks.blocking.ids.xml',
             array('page'=>1)
         ));
         $response = $twitter->block->blocking(1, true);
@@ -567,7 +567,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'blocks/destroy/twitter.xml', HTTP\Client::POST, 'blocks.destroy.twitter.xml'
+            'blocks/destroy/twitter.xml', Http\Client::POST, 'blocks.destroy.twitter.xml'
         ));
         $response = $twitter->block->destroy('twitter');
         $this->assertTrue($response instanceof REST\Client\Result);
@@ -577,7 +577,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'blocks/exists/padraicb.xml', HTTP\Client::GET, 'blocks.exists.padraicb.xml'
+            'blocks/exists/padraicb.xml', Http\Client::GET, 'blocks.exists.padraicb.xml'
         ));
         $this->assertFalse($twitter->block->exists('padraicb'));
     }
@@ -586,7 +586,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     {
         $twitter = new Service\Twitter;
         $twitter->setLocalHttpClient($this->_stubTwitter(
-            'blocks/exists/padraicb.xml', HTTP\Client::GET, 'blocks.exists.padraicb.xml'
+            'blocks/exists/padraicb.xml', Http\Client::GET, 'blocks.exists.padraicb.xml'
         ));
         $response = $twitter->block->exists('padraicb', true);
         $this->assertTrue($response instanceof REST\Client\Result);

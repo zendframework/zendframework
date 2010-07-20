@@ -25,7 +25,7 @@
  */
 namespace Zend\GData;
 
-use Zend\HTTP;
+use Zend\Http;
 
 /**
  * Service class for interacting with the YouTube Data API.
@@ -161,7 +161,7 @@ class YouTube extends Media
     /**
      * Create Zend_Gdata_YouTube object
      *
-     * @param \Zend\HTTP\Client $client (optional) The HTTP client to use when
+     * @param \Zend\Http\Client $client (optional) The HTTP client to use when
      *          when communicating with the Google servers.
      * @param string $applicationId The identity of the app in the form of
      *        Company-AppName-Version
@@ -184,7 +184,7 @@ class YouTube extends Media
     /**
      * Set the Zend_Http_Client object used for communication
      *
-     * @param \Zend\HTTP\Client $client The client to use for communication
+     * @param \Zend\Http\Client $client The client to use for communication
      * @throws \Zend\GData\App\HttpException
      * @return \Zend\GData\App Provides a fluent interface
      */
@@ -193,9 +193,9 @@ class YouTube extends Media
         $developerKey = null)
     {
         if ($client === null) {
-            $client = new HTTP\Client();
+            $client = new Http\Client();
         }
-        if (!$client instanceof HTTP\Client) {
+        if (!$client instanceof Http\Client) {
             throw new App\HttpException(
                 'Argument is not an instance of Zend_Http_Client.');
         }

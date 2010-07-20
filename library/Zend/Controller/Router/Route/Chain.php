@@ -71,7 +71,7 @@ class Chain extends AbstractRoute
      * Matches a user submitted path with a previously defined route.
      * Assigns and returns an array of defaults on a successful match.
      *
-     * @param  \Zend\Controller\Request\HTTP $request Request to get the path info from
+     * @param  \Zend\Controller\Request\Http $request Request to get the path info from
      * @return array|false An array of assigned values or a false on a mismatch
      */
     public function match($request, $partial = null)

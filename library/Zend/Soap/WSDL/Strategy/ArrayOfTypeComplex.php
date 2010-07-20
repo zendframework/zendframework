@@ -80,7 +80,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
             // The following blocks define the Array of Object structure
             $xsdComplexTypeName = $this->_addArrayOfComplexType($singularType, $type);
         } else {
-            $xsdComplexTypeName = $singularType;
+            $xsdComplexTypeName = WSDL::translateType($singularType);
         }
 
         // The array for the objects has been created, now build the object definition:

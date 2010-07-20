@@ -62,14 +62,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($uri instanceof URI\URI);
         $this->assertEquals('http://framework.zend.com/rest/', $uri->generate());
 
-        $client->setUri(new URI\URL('http://framework.zend.com/soap/'));
+        $client->setUri(new Uri\Url('http://framework.zend.com/soap/'));
         $uri = $client->getUri();
-        $this->assertTrue($uri instanceof URI\URL);
+        $this->assertTrue($uri instanceof Uri\Url);
         $this->assertEquals('http://framework.zend.com/soap/', $uri->generate());
 
         $client->setUri('http://framework.zend.com/xmlrpc/');
         $uri = $client->getUri();
-        $this->assertTrue($uri instanceof URI\URL);
+        $this->assertTrue($uri instanceof Uri\Url);
         $this->assertEquals('http://framework.zend.com/xmlrpc/', $uri->generate());
     }
 

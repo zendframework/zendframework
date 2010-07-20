@@ -631,7 +631,7 @@ class App
 
         // Set the params for the new request to be performed
         $this->_httpClient->setHeaders($headers);
-        $urlObj = new \Zend\URI\URL($url);
+        $urlObj = new \Zend\Uri\Url($url);
         preg_match("/^(.*?)(\?.*)?$/", $url, $matches);
         $this->_httpClient->setUri($matches[1]);
         $queryArray = $urlObj->getQueryAsArray();

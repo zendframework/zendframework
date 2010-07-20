@@ -26,7 +26,7 @@ namespace Zend\Feed\Reader\Extension\Atom;
 use Zend\Feed\Reader;
 use Zend\Date;
 use Zend\Feed\Reader\Collection;
-use Zend\URI;
+use Zend\Uri;
 
 /**
  * @uses       DOMDocument
@@ -570,10 +570,10 @@ class Entry extends Reader\Extension\AbstractEntry
      */
     protected function _absolutiseUri($link)
     {
-        if (!\Zend\URI\URL::validate($link)) {
+        if (!\Zend\Uri\Url::validate($link)) {
             if (!is_null($this->getBaseUrl())) {
                 $link = $this->getBaseUrl() . $link;
-                if (!\Zend\URI\URL::validate($link)) {
+                if (!\Zend\Uri\Url::validate($link)) {
                     $link = null;
                 }
             }

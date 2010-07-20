@@ -25,7 +25,7 @@
  */
 namespace ZendTest\Http;
 use Zend\Http;
-use Zend\URI;
+use Zend\Uri;
 
 /**
  * Zend_Http_Cookie unit tests
@@ -357,7 +357,7 @@ class CookieTest extends \PHPUnit_Framework_TestCase
 
     static public function domainMatchTestProvider()
     {
-        $uri = new URI\URL('http://www.foo.com/some/file.txt');
+        $uri = new Uri\Url('http://www.foo.com/some/file.txt');
 
         return array(
             array('foo=bar; domain=.example.com;', 'http://www.example.com/foo/bar.php', true),
@@ -505,11 +505,11 @@ class CookieTest extends \PHPUnit_Framework_TestCase
     static public function refUrlProvider()
     {
         return array(
-            array(new URI\URL('http://example.com/')),
-            array(new URI\URL('http://www.example.com/foo/bar/')),
-            array(new URI\URL('http://some.really.deep.domain.com')),
-            array(new URI\URL('http://localhost/path/to/very/deep/file.php')),
-            array(new URI\URL('http://arr.gr/some%20path/text%2Ffile'))
+            array(new Uri\Url('http://example.com/')),
+            array(new Uri\Url('http://www.example.com/foo/bar/')),
+            array(new Uri\Url('http://some.really.deep.domain.com')),
+            array(new Uri\Url('http://localhost/path/to/very/deep/file.php')),
+            array(new Uri\Url('http://arr.gr/some%20path/text%2Ffile'))
         );
     }
 

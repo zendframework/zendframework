@@ -36,8 +36,8 @@ use Zend\Navigation\AbstractPage,
  *
  * @uses       DOMDocument
  * @uses       RecursiveIteratorIterator
- * @uses       \Zend\URI\URL
- * @uses       \Zend\URI\Exception
+ * @uses       \Zend\Uri\Url
+ * @uses       \Zend\Uri\Exception
  * @uses       \Zend\Validator\Sitemap\Changefreq
  * @uses       \Zend\Validator\Sitemap\Lastmod
  * @uses       \Zend\Validator\Sitemap\Loc
@@ -225,13 +225,13 @@ class Sitemap extends AbstractHelper
      *
      * @param  string $serverUrl                    server URL to set (only
      *                                              scheme and host)
-     * @throws \Zend\URI\Exception                   if invalid server URL
+     * @throws \Zend\Uri\Exception                   if invalid server URL
      * @return \Zend\View\Helper\Navigation\Sitemap  fluent interface, returns
      *                                              self
      */
     public function setServerUrl($serverUrl)
     {
-        $uri = new \Zend\URI\URL($serverUrl);
+        $uri = new \Zend\Uri\Url($serverUrl);
         $uri->setFragment('');
         $uri->setPath('');
         $uri->setQuery('');
@@ -239,7 +239,7 @@ class Sitemap extends AbstractHelper
         if ($uri->isValid()) {
             $this->_serverUrl = $uri->generate();
         } else {
-            $e = new \Zend\URI\Exception(sprintf(
+            $e = new \Zend\Uri\Exception(sprintf(
                     'Invalid server URL: "%s"',
                     $serverUrl));
             $e->setView($this->view);

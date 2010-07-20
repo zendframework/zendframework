@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\Feed\Reader;
-use Zend\URI;
+use Zend\Uri;
 
 /**
  * @uses       \Zend\Feed\Reader\Reader
@@ -85,9 +85,9 @@ class FeedSet extends \ArrayObject
      */
     protected function _absolutiseUri($link, $uri = null)
     {
-        if (!URI\URL::validate($link)) {
+        if (!Uri\Url::validate($link)) {
             if (!is_null($uri)) {
-                $uri = new URI\URL($uri);
+                $uri = new Uri\Url($uri);
 
                 if ($link[0] !== '/') {
                     $link = $uri->getPath() . '/' . $link;

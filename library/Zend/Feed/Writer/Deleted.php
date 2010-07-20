@@ -172,7 +172,7 @@ class Deleted
         if (isset($by['uri'])) {
             if (empty($by['uri']) 
                 || !is_string($by['uri']) 
-                || !\Zend\URI\URL::validate($by['uri'])
+                || !\Zend\Uri\Url::validate($by['uri'])
             ) {
                 throw new FeedException('Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
             }

@@ -51,7 +51,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Action\Thread
  * @uses       \Zend\Pdf\Action\Trans
  * @uses       \Zend\Pdf\Action\Unknown
- * @uses       \Zend\Pdf\Action\URI
+ * @uses       \Zend\Pdf\Action\Uri
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
  * @uses       \Zend\Pdf\InternalType\ArrayObject
  * @uses       \Zend\Pdf\Exception
@@ -175,7 +175,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
                 brake;
 
             case 'URI':
-                return new URI($dictionary, $processedActions);
+                return new Uri($dictionary, $processedActions);
                 brake;
 
             case 'Sound':

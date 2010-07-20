@@ -25,7 +25,7 @@
 namespace Zend\OAuth\Config;
 use Zend\OAuth\Config as OAuthConfig,
     Zend\OAuth,
-    Zend\URI;
+    Zend\Uri;
 
 /**
  * @uses       Zend\OAuth\OAuth
@@ -639,7 +639,7 @@ class StandardConfig implements OAuthConfig
      */
     protected function _validateUrl($url)
     {
-        $uri = new URI\URL($url);
+        $uri = new Uri\Url($url);
         if (!$uri->isValid()) {
             throw new OAuth\Exception(sprintf("'%s' is not a valid URI", $url));
         } elseif (!in_array($uri->getScheme(), array('http', 'https'))) {

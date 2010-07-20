@@ -39,7 +39,7 @@ use Zend\Http\Client;
  * @uses       \Zend\Http\Client\Adapter\Exception
  * @uses       \Zend\Http\Client\Adapter\Socket
  * @uses       \Zend\Http\Response
- * @uses       \Zend\URI\URL
+ * @uses       \Zend\Uri\Url
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
@@ -107,7 +107,7 @@ class Proxy extends Socket
      * Send request to the proxy server
      *
      * @param string        $method
-     * @param \Zend\URI\URL $uri
+     * @param \Zend\Uri\Url $uri
      * @param string        $http_ver
      * @param array         $headers
      * @param string        $body

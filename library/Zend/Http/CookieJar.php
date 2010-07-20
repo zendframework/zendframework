@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Http;
-use Zend\URI;
+use Zend\Uri;
 
 /**
  * A Zend_Http_CookieJar object is designed to contain and maintain HTTP cookies, and should
@@ -50,8 +50,8 @@ use Zend\URI;
  * @uses       \Zend\Http\Cookie
  * @uses       \Zend\Http\Exception
  * @uses       \Zend\Http\Response
- * @uses       \Zend\URI\URI
- * @uses       \Zend\URI\URL
+ * @uses       \Zend\Uri\Uri
+ * @uses       \Zend\Uri\Url
  * @category   Zend
  * @package    Zend_Http
  * @subpackage CookieJar
@@ -116,7 +116,7 @@ class CookieJar implements \Countable, \IteratorAggregate
      * or as a string - in which case an object is created from the string.
      *
      * @param \Zend\Http\Cookie|string $cookie
-     * @param \Zend\URI\URL|string    $ref_uri Optional reference URI (for domain, path, secure)
+     * @param \Zend\Uri\Url|string    $ref_uri Optional reference URI (for domain, path, secure)
      */
     public function addCookie($cookie, $ref_uri = null)
     {
@@ -141,7 +141,7 @@ class CookieJar implements \Countable, \IteratorAggregate
      * to the cookie jar.
      *
      * @param \Zend\Http\Response $response
-     * @param \Zend\URI\URL|string $ref_uri Requested URI
+     * @param \Zend\Uri\Url|string $ref_uri Requested URI
      */
     public function addCookiesFromResponse($response, $ref_uri)
     {
@@ -178,7 +178,7 @@ class CookieJar implements \Countable, \IteratorAggregate
      * whether session cookies should be sent or not, and the time to consider as "now" when
      * checking cookie expiry time.
      *
-     * @param string|\Zend\URI\URL $uri URI to check against (secure, domain, path)
+     * @param string|\Zend\Uri\Url $uri URI to check against (secure, domain, path)
      * @param boolean $matchSessionCookies Whether to send session cookies
      * @param int $ret_as Whether to return cookies as objects of \Zend\Http\Cookie or as strings
      * @param int $now Override the current time when checking for expiry time
@@ -187,8 +187,8 @@ class CookieJar implements \Countable, \IteratorAggregate
     public function getMatchingCookies($uri, $matchSessionCookies = true,
         $ret_as = self::COOKIE_OBJECT, $now = null)
     {
-        if (is_string($uri)) $uri = new URI\URL($uri);
-        if (! $uri instanceof URI\URL) {
+        if (is_string($uri)) $uri = new Uri\Url($uri);
+        if (! $uri instanceof Uri\Url) {
             throw new Exception("Invalid URI string or object passed");
         }
 
@@ -217,7 +217,7 @@ class CookieJar implements \Countable, \IteratorAggregate
     /**
      * Get a specific cookie according to a URI and name
      *
-     * @param \Zend\URI\URL|string $uri The uri (domain and path) to match
+     * @param \Zend\Uri\Url|string $uri The uri (domain and path) to match
      * @param string $cookie_name The cookie's name
      * @param int $ret_as Whether to return cookies as objects of \Zend\Http\Cookie or as strings
      * @return \Zend\Http\Cookie|string
@@ -225,10 +225,10 @@ class CookieJar implements \Countable, \IteratorAggregate
     public function getCookie($uri, $cookie_name, $ret_as = self::COOKIE_OBJECT)
     {
         if (is_string($uri)) {
-            $uri = new URI\URL($uri);
+            $uri = new Uri\Url($uri);
         }
 
-        if (! $uri instanceof URI\URL) {
+        if (! $uri instanceof Uri\Url) {
             throw new Exception('Invalid URI specified');
         }
 
@@ -355,7 +355,7 @@ class CookieJar implements \Countable, \IteratorAggregate
      * of the cookie.
      *
      * @param \Zend\Http\Response $response HTTP Response object
-     * @param \Zend\URI\URL|string $uri The requested URI
+     * @param \Zend\Uri\Url|string $uri The requested URI
      * @return \Zend\Http\CookieJar
      * @todo Add the $uri functionality.
      */

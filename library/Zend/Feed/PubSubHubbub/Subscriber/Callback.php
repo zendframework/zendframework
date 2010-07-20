@@ -167,7 +167,7 @@ class Callback extends \Zend\Feed\PubSubHubbub\AbstractCallback
         ) {
             return false;
         }
-        if (!\Zend\URI\URL::validate($httpGetData['hub_topic'])) {
+        if (!\Zend\Uri\Url::validate($httpGetData['hub_topic'])) {
             return false;
         }
 

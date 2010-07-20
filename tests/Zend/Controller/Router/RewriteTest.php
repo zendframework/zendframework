@@ -739,8 +739,8 @@ class Request extends \Zend\Controller\Request\Http
             $uri = 'http://localhost/foo/bar/baz/2';
         }
 
-        //$uri = \Zend\URI\URL::fromString($uri);
-        $url = new \Zend\URI\URL($uri);
+        //$uri = \Zend\Uri\Url::fromString($uri);
+        $url = new \Zend\Uri\Url($uri);
         $this->_host = $url->getHost();
         $this->_port = $url->getPort();
 

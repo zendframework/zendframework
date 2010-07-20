@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\URI;
+namespace Zend\Uri;
 use Zend\Validator\Hostname;
 
 /**
@@ -36,7 +36,7 @@ use Zend\Validator\Hostname;
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class URL implements URI
+class Url implements Uri
 {
     
     /**
@@ -130,13 +130,20 @@ class URL implements URI
 
     public static function validate($url)
     {
+        if (empty($url)) {
+            return false;
+        }
         try {
             $url = new self($url);
-            unset($url);
-            return true;
         } catch (\Exception $exception) {
+            return false;
         }
-        return false;
+
+        if (!$url->getScheme()) {
+            return false;
+        }
+
+        return $url->isValid();
     }
     
     /**
@@ -326,7 +333,7 @@ class URL implements URI
      * setAllowUnwise()
      * 
      * @param bool $allowUnwise
-     * @return \Zend\URI\URL
+     * @return \Zend\Uri\Url
      */
     public function setAllowUnwise($allowUnwise = false)
     {
@@ -712,13 +719,23 @@ class URL implements URI
     public function isValid()
     {
         // Return true if and only if all parts of the URI have passed validation
-        return $this->isValidUsername()
-           and $this->isValidPassword()
-           and $this->isValidHost()
-           and $this->isValidPort()
-           and $this->isValidPath()
-           and $this->isValidQuery()
-           and $this->isValidFragment();
+        if ($this->isValidUsername()
+           && $this->isValidPassword()
+           && $this->isValidHost()
+           && $this->isValidPort()
+           && $this->isValidPath()
+           && $this->isValidQuery()
+           && $this->isValidFragment()
+        ) {
+            if (!$this->getScheme()) {
+                return false;
+            }
+            if (!$this->getHost()) {
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
     
     /**

@@ -291,7 +291,7 @@ class Atom
             $this->getDataContainer()->setId(
                 $this->getDataContainer()->getLink());
         }
-        if (!\Zend\URI\URL::validate($this->getDataContainer()->getId()) &&
+        if (!\Zend\Uri\Url::validate($this->getDataContainer()->getId()) &&
         !preg_match('#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#', $this->getDataContainer()->getId())) {
             throw new Feed\Exception('Atom 1.0 IDs must be a valid URI/IRI');
         }

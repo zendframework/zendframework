@@ -297,7 +297,7 @@ class RSS
         }
         $text = $dom->createTextNode($this->getDataContainer()->getId());
         $id->appendChild($text);
-        if (!\Zend\URI\URL::validate($this->getDataContainer()->getId())) {
+        if (!\Zend\Uri\Url::validate($this->getDataContainer()->getId())) {
             $id->setAttribute('isPermaLink', 'false');
         }
     }

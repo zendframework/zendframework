@@ -44,7 +44,7 @@ use Zend\Pdf\InternalType;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class URI extends AbstractAction
+class Uri extends AbstractAction
 {
     /**
      * Object constructor
@@ -79,11 +79,11 @@ class URI extends AbstractAction
     }
 
     /**
-     * Create new Zend_PDF_Action_URI object using specified uri
+     * Create new Zend_PDF_Action_Uri object using specified uri
      *
      * @param string  $uri    The URI to resolve, encoded in 7-bit ASCII
      * @param boolean $isMap  A flag specifying whether to track the mouse position when the URI is resolved
-     * @return \Zend\Pdf\Action\URI
+     * @return \Zend\Pdf\Action\Uri
      */
     public static function create($uri, $isMap = false)
     {
@@ -105,7 +105,7 @@ class URI extends AbstractAction
      * Set URI to resolve
      *
      * @param string $uri   The uri to resolve, encoded in 7-bit ASCII.
-     * @return \Zend\Pdf\Action\URI
+     * @return \Zend\Pdf\Action\Uri
      */
     public function setUri($uri)
     {
@@ -136,7 +136,7 @@ class URI extends AbstractAction
      * relative to the upper-left corner of the annotation rectangle.
      *
      * @param boolean $isMap  A flag specifying whether to track the mouse position when the URI is resolved
-     * @return \Zend\Pdf\Action\URI
+     * @return \Zend\Pdf\Action\Uri
      */
     public function setIsMap($isMap)
     {

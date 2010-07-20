@@ -29,7 +29,7 @@ use Zend\OAuth\Http as HTTPClient;
 /**
  * @uses       \Zend\OAuth\Client
  * @uses       \Zend\OAuth\Http
- * @uses       \Zend\URI\URL
+ * @uses       \Zend\Uri\Url
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -46,7 +46,7 @@ class UserAuthorization extends HTTPClient
     public function getUrl()
     {
         $params = $this->assembleParams();
-        $uri    = new \Zend\URI\URL($this->_consumer->getUserAuthorizationUrl());
+        $uri    = new \Zend\Uri\Url($this->_consumer->getUserAuthorizationUrl());
 
         $uri->setQuery(
             $this->_httpUtility->toEncodedQueryString($params)

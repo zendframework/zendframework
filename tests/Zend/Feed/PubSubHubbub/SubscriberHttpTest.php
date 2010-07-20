@@ -59,7 +59,7 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (defined('TESTS_Zend_Feed_PubSubHubbub_BASEURI') &&
-            \Zend\URI\URL::check(TESTS_Zend_Feed_PubSubHubbub_BASEURI)) {
+            \Zend\Uri\Url::check(TESTS_Zend_Feed_PubSubHubbub_BASEURI)) {
             $this->_baseuri = TESTS_Zend_Feed_PubSubHubbub_BASEURI;
             if (substr($this->_baseuri, -1) != '/') $this->_baseuri .= '/';
             $name = $this->getName();

@@ -37,7 +37,7 @@ use Zend\Http\Client\Adapter as HTTPAdapter,
  * @uses       \Zend\Http\Client\Adapter\Exception
  * @uses       \Zend\Http\Client\Adapter
  * @uses       \Zend\Http\Client\Adapter\Stream
- * @uses       \Zend\URI\URL
+ * @uses       \Zend\Uri\Url
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
@@ -248,7 +248,7 @@ class Curl implements HTTPAdapter, Stream
      * Send request to the remote server
      *
      * @param  string        $method
-     * @param  \Zend\URI\URL $uri
+     * @param  \Zend\Uri\Url $uri
      * @param  float         $http_ver
      * @param  array         $headers
      * @param  string        $body

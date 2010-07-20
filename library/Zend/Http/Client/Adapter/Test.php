@@ -38,7 +38,7 @@ use Zend\Http\Client\Adapter as HTTPAdapter,
  * @uses       \Zend\Http\Client\Adapter\Exception
  * @uses       \Zend\Http\Client\Adapter
  * @uses       \Zend\Http\Response
- * @uses       \Zend\URI\URL
+ * @uses       \Zend\Uri\Url
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
@@ -139,7 +139,7 @@ class Test implements HTTPAdapter
      * Send request to the remote server
      *
      * @param string        $method
-     * @param \Zend\URI\URL $uri
+     * @param \Zend\Uri\Url $uri
      * @param string        $http_ver
      * @param array         $headers
      * @param string        $body

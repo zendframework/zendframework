@@ -59,7 +59,7 @@ class Img extends AbstractHTML
         }
 
         // check if the URL is valid
-        // TODO: use \Zend\URI for this
+        // TODO: use \Zend\Uri for this
         if (!\Zend\Markup\Renderer\HTML::isValidUri($uri)) {
             return $text;
         }

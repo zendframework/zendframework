@@ -25,7 +25,7 @@
 namespace Zend\Feed\Writer;
 
 use Zend\Feed\Exception as FeedException;
-use Zend\URI;
+use Zend\Uri;
 use Zend\Date;
 
 /**
@@ -102,7 +102,7 @@ class Entry
             if (isset($name['uri'])) {
                 if (empty($name['uri']) 
                     || !is_string($name['uri']) 
-                    || !\Zend\URI\URL::validate($name['uri'])
+                    || !\Zend\Uri\Url::validate($name['uri'])
                 ) {
                     throw new FeedException('Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
                 }
@@ -124,7 +124,7 @@ class Entry
                 $author['email'] = $email;
             }
             if (isset($uri)) {
-                if (empty($uri) || !is_string($uri) || !\Zend\URI\URL::validate($uri)) {
+                if (empty($uri) || !is_string($uri) || !\Zend\Uri\Url::validate($uri)) {
                     throw new FeedException('Invalid parameter: "uri" value must be a non-empty string and valid URI/IRI');
                 }
                 $author['uri'] = $uri;
@@ -270,7 +270,7 @@ class Entry
      */
     public function setLink($link)
     {
-        if (empty($link) || !is_string($link) || !\Zend\URI\URL::validate($link)) {
+        if (empty($link) || !is_string($link) || !\Zend\Uri\Url::validate($link)) {
             throw new FeedException('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
         }
         $this->_data['link'] = $link;
@@ -296,7 +296,7 @@ class Entry
      */
     public function setCommentLink($link)
     {
-        if (empty($link) || !is_string($link) || !\Zend\URI\URL::validate($link)) {
+        if (empty($link) || !is_string($link) || !\Zend\Uri\Url::validate($link)) {
             throw new FeedException('Invalid parameter: "link" must be a non-empty string and valid URI/IRI');
         }
         $this->_data['commentLink'] = $link;
@@ -309,7 +309,7 @@ class Entry
      */
     public function setCommentFeedLink(array $link)
     {
-        if (!isset($link['uri']) || !is_string($link['uri']) || !\Zend\URI\URL::validate($link['uri'])) {
+        if (!isset($link['uri']) || !is_string($link['uri']) || !\Zend\Uri\Url::validate($link['uri'])) {
             throw new FeedException('Invalid parameter: "link" must be a non-empty string and valid URI/IRI');
         }
         if (!isset($link['type']) || !in_array($link['type'], array('atom', 'rss', 'rdf'))) {
@@ -535,7 +535,7 @@ class Entry
         if (isset($category['scheme'])) {
             if (empty($category['scheme']) 
                 || !is_string($category['scheme'])
-                || !\Zend\URI\URL::validate($category['scheme'])
+                || !\Zend\Uri\Url::validate($category['scheme'])
             ) {
                 throw new FeedException('The Atom scheme or RSS domain of'
                 . ' a category must be a valid URI');
@@ -585,7 +585,7 @@ class Entry
         if (!isset($enclosure['uri'])) {
             throw new FeedException('Enclosure "uri" is not set');
         }
-        if (!\Zend\URI\URL::validate($enclosure['uri'])) {
+        if (!\Zend\Uri\Url::validate($enclosure['uri'])) {
             throw new FeedException('Enclosure "uri" is not a valid URI/IRI');
         }
         $this->_data['enclosure'] = $enclosure;

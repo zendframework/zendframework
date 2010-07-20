@@ -946,7 +946,7 @@ class Twitter extends Rest\Client\RestClient
     protected function _prepare($path)
     {
         // Get the URI object and configure it
-        if (!$this->_uri instanceof \Zend\URI\URL) {
+        if (!$this->_uri instanceof \Zend\Uri\Url) {
             throw new Rest\Client\Exception(
                 'URI object must be set before performing call'
             );

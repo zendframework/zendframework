@@ -1913,7 +1913,7 @@ class RSSTest extends \PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $fdate = $entry->getDateModified();
         $edate = new Date\Date;
-        $edate->set('2010-01-04T08:14:00-0600', Date\Date::ISO_8601);
+        $edate->set('2010-01-04T02:14:00-0600', Date\Date::ISO_8601);
         \Zend\Registry::getInstance()->offsetUnset('Zend_Locale');
         $this->assertTrue($edate->equals($fdate), $edate->get(Date\Date::ISO_8601) . ' :: ' . $fdate->get(Date\Date::ISO_8601) . "\n");
     }

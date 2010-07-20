@@ -25,7 +25,7 @@
  * @namespace
  */
 namespace Zend\Http;
-use Zend\URI;
+use Zend\Uri;
 
 /**
  * Zend_Http_Cookie is a class describing an HTTP cookie and all it's parameters.
@@ -41,7 +41,7 @@ use Zend\URI;
  *
  * @uses       \Zend\Date\Date
  * @uses       \Zend\Http\Exception
- * @uses       \Zend\URI\URL
+ * @uses       \Zend\Uri\Url
  * @category   Zend
  * @package    Zend_Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -221,7 +221,7 @@ class Cookie
     /**
      * Checks whether the cookie should be sent or not in a specific scenario
      *
-     * @param string|\Zend\URI\URL $uri URI to check against (secure, domain, path)
+     * @param string|\Zend\Uri\Url $uri URI to check against (secure, domain, path)
      * @param boolean $matchSessionCookies Whether to send session cookies
      * @param int $now Override the current time when checking for expiry time
      * @return boolean
@@ -229,7 +229,7 @@ class Cookie
     public function match($uri, $matchSessionCookies = true, $now = null)
     {
         if (is_string ($uri)) {
-            $uri = new URI\URL($uri);
+            $uri = new Uri\Url($uri);
         }
 
         // Make sure we have a valid Zend_Uri_Http object
@@ -275,7 +275,7 @@ class Cookie
      * (for example the value of the Set-Cookie HTTP header)
      *
      * @param string $cookieStr
-     * @param \Zend\URI\URL|string $refUri Reference URI for default values (domain, path)
+     * @param \Zend\Uri\Url|string $refUri Reference URI for default values (domain, path)
      * @param boolean $encodeValue Weither or not the cookie's value should be
      *                             passed through urlencode/urldecode
      * @return \Zend\Http\Cookie A new \Zend\Http\Cookie object or false on failure.
@@ -284,7 +284,7 @@ class Cookie
     {
         // Set default values
         if (is_string($refUri)) {
-            $refUri = new URI\URL($refUri);
+            $refUri = new Uri\Url($refUri);
         }
 
         $name    = '';
@@ -306,7 +306,7 @@ class Cookie
         }
 
         // Set default domain and path
-        if ($refUri instanceof URI\URL) {
+        if ($refUri instanceof Uri\Url) {
             $domain = $refUri->getHost();
             $path = $refUri->getPath();
             $path = substr($path, 0, strrpos($path, '/'));

@@ -1,9 +1,9 @@
 <?php 
 
-namespace ZendTest\URL;
-use Zend\URI\URL;
+namespace ZendTest\Url;
+use Zend\Uri\Url;
 
-class URLTest extends \PHPUnit_Framework_TestCase
+class UrlTest extends \PHPUnit_Framework_TestCase
 {
     
 
@@ -12,7 +12,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
      */
     public function testSimple()
     {
-        $url = new URL('http://www.zend.com');
+        $url = new Url('http://www.zend.com');
         $this->assertTrue($url->isValid());
         $this->assertEquals('http', $url->getScheme());
         $this->assertEquals('www.zend.com', $url->getHost());
@@ -32,7 +32,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($tests as $testURL) {
-            $obj = new URL($testURL);
+            $obj = new Url($testURL);
             $this->assertEquals($testURL, $obj->generate(),
                 "getUri() returned value that differs from input for $testURL");
         }
@@ -40,7 +40,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
 
     public function testAllParts()
     {
-        $url = new URL('http://andi:password@www.zend.com:8080/path/to/file?a=1&b=2#top');
+        $url = new Url('http://andi:password@www.zend.com:8080/path/to/file?a=1&b=2#top');
         $this->assertEquals('http', $url->getScheme());
         $this->assertEquals('andi', $url->getUsername());
         $this->assertEquals('password', $url->getPassword());
@@ -55,19 +55,19 @@ class URLTest extends \PHPUnit_Framework_TestCase
     public function testURLSupportsVariousCharacters()
     {
         $urlTarget = 'http://a_.!~*\'(-)n0123Di%25%26:pass;:&=+$,word@www.zend.com';
-        $url = new URL($urlTarget);
+        $url = new Url($urlTarget);
         $this->assertEquals($urlTarget, $url->generate());
     }
 
     public function testInvalidCharacter()
     {
-        $url = new URL('http://an`di:password@www.zend.com');
+        $url = new Url('http://an`di:password@www.zend.com');
         $this->assertFalse($url->isValid());
     }
 
     public function testSquareBrackets()
     {
-        $url = new URL('https://example.com/foo/?var[]=1&var[]=2&some[thing]=3');
+        $url = new Url('https://example.com/foo/?var[]=1&var[]=2&some[thing]=3');
         $this->assertEquals('var[]=1&var[]=2&some[thing]=3', $url->getQuery());
         
         $targetArray = array (
@@ -86,7 +86,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
     public function testSuccessiveSlashes()
     {
 
-        $url = new URL('http://example.com/foo//bar/baz//fob/');
+        $url = new Url('http://example.com/foo//bar/baz//fob/');
         $this->assertTrue($url->isValid());
         $this->assertEquals('/foo//bar/baz//fob/', $url->getPath());
     
@@ -101,7 +101,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnencodedQueryParameters()
     {
-         $url = new URL('http://foo.com/bar');
+         $url = new Url('http://foo.com/bar');
          $url->setQuery('id=123&url=http://example.com/?bar=foo baz');
          $this->assertEquals('http://foo.com/bar?id=123&url=http%3A%2F%2Fexample.com%2F%3Fbar%3Dfoo+baz', $url->generate());
     }
@@ -120,7 +120,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
         }
         $urlString = file_get_contents(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR .
            '_files' . DIRECTORY_SEPARATOR . 'testVeryLongUriZF3712.txt');
-        $url = new URL($urlString);
+        $url = new Url($urlString);
         $this->assertEquals($urlString, $url->generate());
     }
 
@@ -129,7 +129,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetQueryAsArrayReturnsCorrectArray()
     {
-        $url = new URL('http://example.com/foo/?test=a&var[]=1&var[]=2&some[thing]=3');
+        $url = new Url('http://example.com/foo/?test=a&var[]=1&var[]=2&some[thing]=3');
         $this->assertEquals(array(
             'test' => 'a',
             'var'  => array(1, 2),
@@ -144,7 +144,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddReplaceQueryParametersModifiesQueryAndReturnsOldQuery()
     {
-        $url = new URL('http://example.com/foo/?a=1&b=2&c=3');
+        $url = new Url('http://example.com/foo/?a=1&b=2&c=3');
         $url->addReplaceQueryParameters(array('b' => 4, 'd' => -1));
         $this->assertEquals(array(
             'a' => 1,
@@ -160,7 +160,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
      */
     public function testRemoveQueryParametersModifiesQueryAndReturnsOldQuery()
     {
-        $url = new URL('http://example.com/foo/?a=1&b=2&c=3&d=4');
+        $url = new Url('http://example.com/foo/?a=1&b=2&c=3&d=4');
         $url->removeQueryParameters(array('b', 'd', 'e'));
         $this->assertEquals(array('a' => 1, 'c' => 3), $url->getQueryAsArray());
         $this->assertEquals('a=1&c=3', $url->getQuery());

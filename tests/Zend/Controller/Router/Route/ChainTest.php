@@ -643,7 +643,7 @@ class Request extends \Zend\Controller\Request\Http
             $uri = 'http://localhost/foo/bar/baz/2';
         }
 
-        $uri = new \Zend\URI\URL($uri);
+        $uri = new \Zend\Uri\Url($uri);
         $this->_host = $uri->getHost();
         $this->_port = $uri->getPort();
 

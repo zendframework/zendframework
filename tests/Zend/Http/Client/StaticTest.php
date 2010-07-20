@@ -84,7 +84,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->setUri($uristr);
 
         $uri = $this->_client->getUri();
-        $this->assertTrue($uri instanceof URI\URL, 'Returned value is not a Uri object as expected');
+        $this->assertTrue($uri instanceof Uri\Url, 'Returned value is not a Uri object as expected');
         $this->assertEquals($uri->__toString(), $uristr, 'Returned Uri object does not hold the expected URI');
 
         $uri = $this->_client->getUri(true);
@@ -98,12 +98,12 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetGetUriObject()
     {
-        $uriobj = new URI\URL('http://www.zend.com:80/');
+        $uriobj = new Uri\Url('http://www.zend.com:80/');
 
         $this->_client->setUri($uriobj);
 
         $uri = $this->_client->getUri();
-        $this->assertTrue($uri instanceof URI\URL, 'Returned value is not a Uri object as expected');
+        $this->assertTrue($uri instanceof Uri\Url, 'Returned value is not a Uri object as expected');
         $this->assertEquals($uri, $uriobj, 'Returned object is not the excepted Uri object');
     }
 
@@ -123,7 +123,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     public function testInvalidUriObjectException()
     {
         try {
-            $uri = new URI\URL('mailto:nobody@example.com');
+            $uri = new Uri\Url('mailto:nobody@example.com');
             $this->_client->setUri($uri);
             $this->fail('Excepted invalid URI object exception was not thrown');
         } catch (HTTPClient\Exception $e) {

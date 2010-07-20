@@ -291,7 +291,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = $this->service->newEntry();
         $newEntry = $entry->save($uri);
         $request = $this->adapter->popRequest();
-        $uriObject = new URI\URL($uri);
+        $uriObject = new Uri\Url($uri);
         $uriObject->setPort('80');
         $this->assertEquals($uriObject, $request->uri);
     }
@@ -407,7 +407,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setEtag($etag);
         $newEntry = $entry->reload();
         $requestUri = $this->adapter->popRequest()->uri;
-        $expectedUriObject = new URI\URL($expectedUri);
+        $expectedUriObject = new Uri\Url($expectedUri);
         $expectedUriObject->setPort('80');
         $this->assertEquals($expectedUriObject, $requestUri);
     }
@@ -426,7 +426,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setEtag($etag);
         $newEntry = $entry->reload($uriOverride);
         $requestUri = $this->adapter->popRequest()->uri;
-        $uriOverrideObject = new URI\URL($uriOverride);
+        $uriOverrideObject = new Uri\Url($uriOverride);
         $uriOverrideObject->setPort('80');
         $this->assertEquals($uriOverrideObject, $requestUri);
     }

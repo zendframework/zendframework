@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\Controller\Request;
-use Zend\URI;
+use Zend\Uri;
 use Zend\Controller;
 
 /**
@@ -112,8 +112,8 @@ class Http extends AbstractRequest
     public function __construct($uri = null)
     {
         if (null !== $uri) {
-            if (!$uri instanceof URI\URL) {
-                $uri = new URI\URL($uri);
+            if (!$uri instanceof Uri\Url) {
+                $uri = new Uri\Url($uri);
             }
             if ($uri->isValid()) {
                 $path  = $uri->getPath();

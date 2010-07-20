@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\Feed\PubSubHubbub;
-use Zend\URI;
+use Zend\Uri;
 
 /**
  * @uses       \Zend\Feed\PubSubHubbub\PubSubHubbub
@@ -119,7 +119,7 @@ class Publisher
      */
     public function addHubUrl($url)
     {
-        if (empty($url) || !is_string($url) || !\Zend\URI\URL::validate($url)) {
+        if (empty($url) || !is_string($url) || !\Zend\Uri\Url::validate($url)) {
             throw new Exception('Invalid parameter "url"'
                 .' of "' . $url . '" must be a non-empty string and a valid'
                 .'URL');
@@ -177,7 +177,7 @@ class Publisher
      */
     public function addUpdatedTopicUrl($url)
     {
-        if (empty($url) || !is_string($url) || !\Zend\URI\URL::validate($url)) {
+        if (empty($url) || !is_string($url) || !\Zend\Uri\Url::validate($url)) {
             throw new Exception('Invalid parameter "url"'
                 .' of "' . $url . '" must be a non-empty string and a valid'
                 .'URL');

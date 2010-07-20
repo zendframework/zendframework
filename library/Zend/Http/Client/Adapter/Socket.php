@@ -37,7 +37,7 @@ use Zend\Http\Client\Adapter as HTTPAdapter,
  * @uses       Zend\Http\Client\Adapter
  * @uses       Zend\Http\Client\Adapter\Stream
  * @uses       Zend\Http\Response
- * @uses       Zend\URI\URL
+ * @uses       Zend\Uri\Url
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
@@ -245,7 +245,7 @@ class Socket implements HTTPAdapter, Stream
      * Send request to the remote server
      *
      * @param string        $method
-     * @param \Zend\URI\URL $uri
+     * @param \Zend\Uri\Url $uri
      * @param string        $http_ver
      * @param array         $headers
      * @param string        $body

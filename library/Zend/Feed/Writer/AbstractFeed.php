@@ -25,7 +25,7 @@
 namespace Zend\Feed\Writer;
 
 use Zend\Feed;
-use Zend\URI;
+use Zend\Uri;
 use Zend\Date;
 
 /**
@@ -91,7 +91,7 @@ class AbstractFeed
                 $author['email'] = $name['email'];
             }
             if (isset($name['uri'])) {
-                if (empty($name['uri']) || !is_string($name['uri']) || !\Zend\URI\URL::validate($name['uri'])) {
+                if (empty($name['uri']) || !is_string($name['uri']) || !\Zend\Uri\Url::validate($name['uri'])) {
                     throw new Feed\Exception('Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
                 }
                 $author['uri'] = $name['uri'];
@@ -108,7 +108,7 @@ class AbstractFeed
                 $author['email'] = $email;
             }
             if (isset($uri)) {
-                if (empty($uri) || !is_string($uri) || !\Zend\URI\URL::validate($uri)) {
+                if (empty($uri) || !is_string($uri) || !\Zend\Uri\Url::validate($uri)) {
                     throw new Feed\Exception('Invalid parameter: "uri" value must be a non-empty string and valid URI/IRI');
                 }
                 $author['uri'] = $uri;
@@ -235,7 +235,7 @@ class AbstractFeed
                 $generator['version'] = $data['version'];
             }
             if (isset($data['uri'])) {
-                if (empty($data['uri']) || !is_string($data['uri']) || !\Zend\URI\URL::validate($data['uri'])) {
+                if (empty($data['uri']) || !is_string($data['uri']) || !\Zend\Uri\Url::validate($data['uri'])) {
                     throw new \Zend\Feed\Exception('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
                 }
                 $generator['uri'] = $data['uri'];
@@ -252,8 +252,8 @@ class AbstractFeed
                 $generator['version'] = $version;
             }
             if (isset($uri)) {
-                if (empty($uri) || !is_string($uri) || !\Zend\URI\URL::validate($uri)) {
-                    throw new Zend_Feed_Exception('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
+                if (empty($uri) || !is_string($uri) || !\Zend\Uri\Url::validate($uri)) {
+                    throw new \Zend\Feed\Exception('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
                 }
                 $generator['uri'] = $uri;
             }
@@ -268,7 +268,7 @@ class AbstractFeed
      */
     public function setId($id)
     {
-        if ((empty($id) || !is_string($id) || !\Zend\URI\URL::validate($id)) &&
+        if ((empty($id) || !is_string($id) || !\Zend\Uri\Url::validate($id)) &&
         !preg_match('#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#', $id)) {
             throw new Feed\Exception('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
         }
@@ -286,7 +286,7 @@ class AbstractFeed
     public function setImage(array $data)
     {
         if (empty($data['uri']) || !is_string($data['uri'])
-        || !\Zend\URI\URL::validate($data['uri'])) {
+        || !\Zend\Uri\Url::validate($data['uri'])) {
             throw new \Zend\Feed\Exception('Invalid parameter: parameter \'uri\''
             . ' must be a non-empty string and valid URI/IRI');
         }
@@ -313,7 +313,7 @@ class AbstractFeed
      */
     public function setLink($link)
     {
-        if (empty($link) || !is_string($link) || !\Zend\URI\URL::validate($link)) {
+        if (empty($link) || !is_string($link) || !\Zend\Uri\Url::validate($link)) {
             throw new Feed\Exception('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
         }
         $this->_data['link'] = $link;
@@ -326,7 +326,7 @@ class AbstractFeed
      */
     public function setFeedLink($link, $type)
     {
-        if (empty($link) || !is_string($link) || !\Zend\URI\URL::validate($link)) {
+        if (empty($link) || !is_string($link) || !\Zend\Uri\Url::validate($link)) {
             throw new Feed\Exception('Invalid parameter: "link"" must be a non-empty string and valid URI/IRI');
         }
         if (!in_array(strtolower($type), array('rss', 'rdf', 'atom'))) {
@@ -368,7 +368,7 @@ class AbstractFeed
      */
     public function setBaseUrl($url)
     {
-        if (empty($url) || !is_string($url) || !\Zend\URI\URL::validate($url)) {
+        if (empty($url) || !is_string($url) || !\Zend\Uri\Url::validate($url)) {
             throw new Feed\Exception('Invalid parameter: "url" array value'
             . ' must be a non-empty string and valid URI/IRI');
         }
@@ -382,7 +382,7 @@ class AbstractFeed
      */
     public function addHub($url)
     {
-        if (empty($url) || !is_string($url) || !\Zend\URI\URL::validate($url)) {
+        if (empty($url) || !is_string($url) || !\Zend\Uri\Url::validate($url)) {
             throw new Feed\Exception('Invalid parameter: "url" array value'
             . ' must be a non-empty string and valid URI/IRI');
         }
@@ -419,7 +419,7 @@ class AbstractFeed
         if (isset($category['scheme'])) {
             if (empty($category['scheme']) 
                 || !is_string($category['scheme'])
-                || !\Zend\URI\URL::validate($category['scheme'])
+                || !\Zend\Uri\Url::validate($category['scheme'])
             ) {
                 throw new Feed\Exception('The Atom scheme or RSS domain of'
                 . ' a category must be a valid URI');

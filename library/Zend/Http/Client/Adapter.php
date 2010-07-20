@@ -59,7 +59,7 @@ interface Adapter
      * Send request to the remote server
      *
      * @param string        $method
-     * @param \Zend\URI\URL $url
+     * @param \Zend\Uri\Url $url
      * @param string        $http_ver
      * @param array         $headers
      * @param string        $body

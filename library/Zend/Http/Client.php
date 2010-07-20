@@ -27,7 +27,7 @@
 namespace Zend\Http;
 
 use Zend\Config\Config,
-    Zend\URI;
+    Zend\Uri;
 
 /**
  * Zend_Http_Client is an implemetation of an HTTP client in PHP. The client
@@ -43,8 +43,8 @@ use Zend\Config\Config,
  * @uses       Zend\Http\Response
  * @uses       Zend\Http\Response\Stream
  * @uses       Zend\Loader
- * @uses       Zend\URI\URI
- * @uses       Zend\URI\URL
+ * @uses       Zend\Uri\Uri
+ * @uses       Zend\Uri\Url
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client
@@ -120,7 +120,7 @@ class Client
     /**
      * Request URI
      *
-     * @var \Zend\URI\URL
+     * @var \Zend\Uri\Url
      */
     protected $uri = null;
 
@@ -232,7 +232,7 @@ class Client
      * Constructor method. Will create a new HTTP client. Accepts the target
      * URL and optionally configuration array.
      *
-     * @param \Zend\URI\URL|string $uri
+     * @param \Zend\Uri\Url|string $uri
      * @param array $config Configuration key-value pairs.
      */
     public function __construct($uri = null, $config = null)
@@ -248,7 +248,7 @@ class Client
     /**
      * Set the URI for the next request
      *
-     * @param  \Zend\URI\URL|string $uri
+     * @param  \Zend\Uri\Url|string $uri
      * @return \Zend\Http\Client
      * @throws \Zend\Http\Client\Exception
      */
@@ -256,7 +256,7 @@ class Client
     {
         if (is_string($uri)) {
             try {
-                $uri = new URI\URL($uri);
+                $uri = new Uri\Url($uri);
             } catch (URI\Exception $e) {
                 throw new Client\Exception('Passed parameter is not a valid HTTP URI.');
             } 
@@ -286,11 +286,11 @@ class Client
      * Get the URI for the next request
      *
      * @param boolean $as_string If true, will return the URI as a string
-     * @return \Zend\URI\URL|string
+     * @return \Zend\Uri\Url|string
      */
     public function getUri($as_string = false)
     {
-        if ($as_string && $this->uri instanceof URI\URL) {
+        if ($as_string && $this->uri instanceof Uri\Url) {
             return $this->uri->__toString();
         } else {
             return $this->uri;
@@ -536,7 +536,7 @@ class Client
             $this->auth = null;
 
             // Clear the auth information in the uri instance as well
-            if ($this->uri instanceof URI\URL) {
+            if ($this->uri instanceof Uri\Url) {
                 $this->getUri()->setUsername('');
                 $this->getUri()->setPassword('');
             }
@@ -889,7 +889,7 @@ class Client
      */
     public function request($method = null)
     {
-        if (! $this->uri instanceof URI\URL) {
+        if (! $this->uri instanceof Uri\Url) {
             throw new Client\Exception('No valid URI has been passed to the client');
         }
 
@@ -984,7 +984,7 @@ class Client
                 }
 
                 // If we got a well formed absolute URI
-                $url = new URI\URL($location);
+                $url = new Uri\Url($location);
                 
                 if ($url->isValid()) {
                     $this->setHeaders('host', null);

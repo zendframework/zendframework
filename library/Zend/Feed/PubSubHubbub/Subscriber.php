@@ -24,7 +24,7 @@
  */
 namespace Zend\Feed\PubSubHubbub;
 
-use Zend\URI;
+use Zend\Uri;
 use Zend\Date;
 
 /**
@@ -214,7 +214,7 @@ class Subscriber
      */
     public function setTopicUrl($url)
     {
-        if (empty($url) || !is_string($url) || !\Zend\URI\URL::validate($url)) {
+        if (empty($url) || !is_string($url) || !\Zend\Uri\Url::validate($url)) {
             throw new Exception('Invalid parameter "url"'
                 .' of "' . $url . '" must be a non-empty string and a valid'
                 .' URL');
@@ -274,7 +274,7 @@ class Subscriber
      */
     public function setCallbackUrl($url)
     {
-        if (empty($url) || !is_string($url) || !\Zend\URI\URL::validate($url)) {
+        if (empty($url) || !is_string($url) || !\Zend\Uri\Url::validate($url)) {
             throw new Exception('Invalid parameter "url"'
                 . ' of "' . $url . '" must be a non-empty string and a valid'
                 . ' URL');
@@ -340,7 +340,7 @@ class Subscriber
      */
     public function addHubUrl($url)
     {
-        if (empty($url) || !is_string($url) || !\Zend\URI\URL::validate($url)) {
+        if (empty($url) || !is_string($url) || !\Zend\Uri\Url::validate($url)) {
             throw new Exception('Invalid parameter "url"'
                 . ' of "' . $url . '" must be a non-empty string and a valid'
                 . ' URL');

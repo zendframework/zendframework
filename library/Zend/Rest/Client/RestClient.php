@@ -25,14 +25,14 @@
  */
 namespace Zend\Rest\Client;
 
-use Zend\URI;
+use Zend\Uri;
 
 /**
  * @uses       Zend\Rest\Client\Exception
  * @uses       Zend\Rest\Client\Result
  * @uses       Zend\Service\AbstractService
- * @uses       Zend\URI\URI
- * @uses       Zend\URI\URL
+ * @uses       Zend\Uri\Uri
+ * @uses       Zend\Uri\Url
  * @category   Zend
  * @package    Zend_Rest
  * @subpackage Client
@@ -69,15 +69,15 @@ class RestClient extends \Zend\Service\AbstractService
     /**
      * Set the URI to use in the request
      *
-     * @param string|Zend\URI\URI $uri URI for the web service
+     * @param string|Zend\Uri\Uri $uri URI for the web service
      * @return Zend\Rest\Client\RestClient
      */
     public function setUri($uri)
     {
-        if ($uri instanceof URI\URI) {
+        if ($uri instanceof URI\Uri) {
             $this->_uri = $uri;
         } else {
-            $this->_uri = new URI\URL($uri);
+            $this->_uri = new Uri\Url($uri);
         }
 
         return $this;
@@ -86,7 +86,7 @@ class RestClient extends \Zend\Service\AbstractService
     /**
      * Retrieve the current request URI object
      *
-     * @return Zend\URI\URI
+     * @return Zend\Uri\Uri
      */
     public function getUri()
     {
@@ -103,7 +103,7 @@ class RestClient extends \Zend\Service\AbstractService
     final private function _prepareRest($path)
     {
         // Get the URI object and configure it
-        if (!$this->_uri instanceof URI\URI) {
+        if (!$this->_uri instanceof URI\Uri) {
             throw new Exception('URI object must be set before performing call');
         }
 

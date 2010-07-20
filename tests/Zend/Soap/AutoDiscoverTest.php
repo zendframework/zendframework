@@ -907,8 +907,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testRecursiveWsdlDependencies()
     {
-        $autodiscover = new Zend_Soap_AutoDiscover('Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex');
-        $autodiscover->setClass('Zend_Soap_AutoDiscover_Recursion');
+        $autodiscover = new AutoDiscover('Zend\Soap\WSDL\Strategy\ArrayOfTypeComplex');
+        $autodiscover->setClass('ZendTest_Soap_TestAsset_Recursion');
         $wsdl = $autodiscover->toXml();
 
         //  <types>

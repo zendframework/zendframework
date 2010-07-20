@@ -25,6 +25,8 @@
  */
 namespace Zend\Soap\WSDL\Strategy;
 
+use Zend\Soap;
+
 use Zend\Soap\WSDLException;
 
 /**
@@ -59,8 +61,9 @@ class DefaultComplexType extends AbstractStrategy
         $dom = $this->getContext()->toDomDocument();
         $class = new \ReflectionClass($type);
 
+        $translatedType = Soap\WSDL::translateType($type);
         $complexType = $dom->createElement('xsd:complexType');
-        $complexType->setAttribute('name', $type);
+        $complexType->setAttribute('name', $translatedType);
 
         $all = $dom->createElement('xsd:all');
 
@@ -82,6 +85,6 @@ class DefaultComplexType extends AbstractStrategy
         $this->getContext()->getSchema()->appendChild($complexType);
         $this->getContext()->addType($type);
 
-        return "tns:$type";
+        return 'tns:' . $translatedType;
     }
 }

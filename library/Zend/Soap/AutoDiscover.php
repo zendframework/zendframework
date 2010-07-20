@@ -300,16 +300,20 @@ class AutoDiscover implements \Zend\Server\Server
     {
         $uri = $this->getUri();
 
-        $wsdl = new $this->_wsdlClass($class, $uri, $this->_strategy);
+        $translatedClass = WSDL::translateType($class);
+
+        $wsdl = new $this->_wsdlClass($translatedClass, $uri, $this->_strategy);
 
         // The wsdl:types element must precede all other elements (WS-I Basic Profile 1.1 R2023)
         $wsdl->addSchemaTypeSection();
 
-        $port = $wsdl->addPortType($class . 'Port');
-        $binding = $wsdl->addBinding($class . 'Binding', 'tns:' .$class. 'Port');
+        $port = $wsdl->addPortType($translatedClass . 'Port');
+        $binding = $wsdl->addBinding($translatedClass . 'Binding', 'tns:' . $translatedClass . 'Port');
 
         $wsdl->addSoapBinding($binding, $this->_bindingStyle['style'], $this->_bindingStyle['transport']);
-        $wsdl->addService($class . 'Service', $class . 'Port', 'tns:' . $class . 'Binding', $uri);
+        $wsdl->addService($translatedClass . 'Service',
+                          $translatedClass . 'Port',
+                          'tns:' . $translatedClass . 'Binding', $uri);
         foreach ($this->_reflection->reflectClass($class)->getMethods() as $method) {
             $this->_addFunctionToWSDL($method, $wsdl, $port, $binding);
         }
@@ -385,6 +389,8 @@ class AutoDiscover implements \Zend\Server\Server
             throw new AutoDiscoverException("No prototypes could be found for the '" . $function->getName() . "' function");
         }
 
+        $functionName = WSDL::translateType($function->getName());
+
         // Add the input message (parameters)
         $args = array();
         if ($this->_bindingStyle['style'] == 'document') {
@@ -401,7 +407,7 @@ class AutoDiscover implements \Zend\Server\Server
                 $sequence[] = $sequenceElement;
             }
             $element = array(
-                'name' => $function->getName(),
+                'name' => $functionName,
                 'sequence' => $sequence
             );
             // Add the wrapper element part, which must be named 'parameters'
@@ -412,7 +418,7 @@ class AutoDiscover implements \Zend\Server\Server
                 $args[$param->getName()] = array('type' => $wsdl->getType($param->getType()));
             }
         }
-        $wsdl->addMessage($function->getName() . 'In', $args);
+        $wsdl->addMessage($functionName . 'In', $args);
 
         $isOneWayMessage = false;
         if($prototype->getReturnType() == "void") {
@@ -427,12 +433,12 @@ class AutoDiscover implements \Zend\Server\Server
                 $sequence = array();
                 if ($prototype->getReturnType() != "void") {
                     $sequence[] = array(
-                        'name' => $function->getName() . 'Result',
+                        'name' => $functionName . 'Result',
                         'type' => $wsdl->getType($prototype->getReturnType())
                     );
                 }
                 $element = array(
-                    'name' => $function->getName() . 'Response',
+                    'name' => $functionName . 'Response',
                     'sequence' => $sequence
                 );
                 // Add the wrapper element part, which must be named 'parameters'
@@ -441,14 +447,14 @@ class AutoDiscover implements \Zend\Server\Server
                 // RPC style: add the return value as a typed part
                 $args['return'] = array('type' => $wsdl->getType($prototype->getReturnType()));
             }
-            $wsdl->addMessage($function->getName() . 'Out', $args);
+            $wsdl->addMessage($functionName . 'Out', $args);
         }
 
         // Add the portType operation
         if($isOneWayMessage == false) {
-            $portOperation = $wsdl->addPortOperation($port, $function->getName(), 'tns:' . $function->getName() . 'In', 'tns:' . $function->getName() . 'Out');
+            $portOperation = $wsdl->addPortOperation($port, $functionName, 'tns:' . $functionName . 'In', 'tns:' . $functionName . 'Out');
         } else {
-            $portOperation = $wsdl->addPortOperation($port, $function->getName(), 'tns:' . $function->getName() . 'In', false);
+            $portOperation = $wsdl->addPortOperation($port, $functionName, 'tns:' . $functionName . 'In', false);
         }
         $desc = $function->getDescription();
         if (strlen($desc) > 0) {
@@ -461,8 +467,8 @@ class AutoDiscover implements \Zend\Server\Server
         }
 
         // Add the binding operation
-        $operation = $wsdl->addBindingOperation($binding, $function->getName(),  $this->_operationBodyStyle, $this->_operationBodyStyle);
-        $wsdl->addSoapOperation($operation, $uri . '#' .$function->getName());
+        $operation = $wsdl->addBindingOperation($binding, $functionName,  $this->_operationBodyStyle, $this->_operationBodyStyle);
+        $wsdl->addSoapOperation($operation, $uri . '#' . $functionName);
 
         // Add the function name to the list
         $this->_functions[] = $function->getName();

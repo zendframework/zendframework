@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://framework.zend.com/my_script.php" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" name="Zend_Soap_Server_TestClass" targetNamespace="http://framework.zend.com/my_script.php" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://framework.zend.com/my_script.php" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" name="ZendTest.Soap.Server.TestClass" targetNamespace="http://framework.zend.com/my_script.php" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
     <wsdl:documentation>Definitions</wsdl:documentation>
 
-    <portType name="Zend_Soap_Server_TestClassPort">
+    <portType name="ZendTest.Soap.Server.TestClassPort">
         <wsdl:documentation>Ports</wsdl:documentation>
         <operation name="testFunc1">
             <input message="tns:testFunc1Request"/>
@@ -22,7 +22,7 @@
         </operation>
     </portType>
 
-    <binding name="Zend_Soap_Server_TestClassBinding" type="tns:Zend_Soap_Server_TestClassPort">
+    <binding name="ZendTest.Soap.Server.TestClassBinding" type="tns:ZendTest.Soap.Server.TestClassPort">
         <wsdl:documentation>Bindings</wsdl:documentation>
 
         <soap:operation soapAction="http://framework.zend.com/my_script.php#testFunc4"/>
@@ -69,9 +69,9 @@
         </operation>
     </binding>
 
-    <service name="Zend_Soap_Server_TestClassService">
+    <service name="ZendTest.Soap.Server.TestClassService">
         <wsdl:documentation>Services</wsdl:documentation>
-        <port name="Zend_Soap_Server_TestClassPort" binding="tns:Zend_Soap_Server_TestClassBinding">
+        <port name="ZendTest.Soap.Server.TestClassPort" binding="tns:ZendTest.Soap.Server.TestClassBinding">
             <soap:address location="http://framework.zend.com/my_script.php"/>
         </port>
     </service>

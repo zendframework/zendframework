@@ -25,10 +25,13 @@
  */
 namespace Zend\Soap\WSDL\Strategy;
 
+use Zend\Soap;
+
+use Zend\Soap\WSDL;
 use Zend\Soap\WSDLException;
 
 /**
- * Zend_Soap_WSDL_Strategy_ArrayOfTypeComplex
+ * ArrayOfTypeComplex strategy
  *
  * @uses       \Zend\Soap\WSDL\Exception
  * @uses       \Zend\Soap\WSDL\Strategy\DefaultComplexType
@@ -50,7 +53,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
      */
     public function addComplexType($type)
     {
-        if(in_array($type, $this->_inProcess)) {
+        if(isset($this->_inProcess[$type])) {
             throw new WSDLException("Infinite recursion, cannot nest '$type' into itself.");
         }
         $this->_inProcess[$type] = $type;
@@ -95,7 +98,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
 
         $xsdComplexTypeName = $this->_getXsdComplexTypeName($singularType);
 
-        if(!in_array($xsdComplexTypeName, $this->getContext()->getTypes())) {
+        if(!in_array($singularType . '[]', $this->getContext()->getTypes())) {
             $complexType = $dom->createElement('xsd:complexType');
             $complexType->setAttribute('name', $xsdComplexTypeName);
 
@@ -108,11 +111,12 @@ class ArrayOfTypeComplex extends DefaultComplexType
 
             $xsdAttribute = $dom->createElement('xsd:attribute');
             $xsdAttribute->setAttribute('ref', 'soap-enc:arrayType');
-            $xsdAttribute->setAttribute('wsdl:arrayType', sprintf('tns:%s[]', $singularType));
+            $xsdAttribute->setAttribute('wsdl:arrayType',
+                                        'tns:' . WSDL::translateType($singularType) . '[]');
             $xsdRestriction->appendChild($xsdAttribute);
 
             $this->getContext()->getSchema()->appendChild($complexType);
-            $this->getContext()->addType($xsdComplexTypeName);
+            $this->getContext()->addType($singularType . '[]');
         }
 
         return $xsdComplexTypeName;
@@ -120,7 +124,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
 
     protected function _getXsdComplexTypeName($type)
     {
-        return sprintf('ArrayOf%s', $type);
+        return 'ArrayOf' . WSDL::translateType($type);
     }
 
     /**

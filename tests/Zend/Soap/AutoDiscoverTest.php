@@ -850,6 +850,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $autodiscover->setClass('\ZendTest\Soap\TestAsset\MyServiceSequence');
         $wsdl = $autodiscover->toXml();
 
+var_dump("\n" . $wsdl) ; exit();
+
         $this->assertEquals(1, substr_count($wsdl, '<xsd:complexType name="ArrayOfString">'));
         $this->assertEquals(1, substr_count($wsdl, '<xsd:complexType name="ArrayOfArrayOfString">'));
         $this->assertEquals(1, substr_count($wsdl, '<xsd:complexType name="ArrayOfArrayOfArrayOfString">'));

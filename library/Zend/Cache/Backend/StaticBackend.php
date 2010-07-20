@@ -151,7 +151,7 @@ class StaticBackend extends AbstractBackend implements Backend
      * Test if a cache is available or not (for the given id)
      *
      * @param  string $id cache id
-     * @return bool 
+     * @return bool
      */
     public function test($id)
     {
@@ -170,7 +170,7 @@ class StaticBackend extends AbstractBackend implements Backend
             return false;
         }
         $pathName = $this->_options['public_dir'] . dirname($id);
-        
+
         // Switch extension if needed
         if (isset($this->_tagged[$id])) {
             $extension = $this->_tagged[$id]['extension'];
@@ -253,12 +253,19 @@ class StaticBackend extends AbstractBackend implements Backend
         $this->getInnerCache()->save($this->_tagged, self::INNER_CACHE_NAME);
         return (bool) $result;
     }
-    
+
     /**
      * Recursively create the directories needed to write the static file
      */
     protected function _createDirectoriesFor($path)
     {
+        if ( !is_dir($path)
+          && !@mkdir($path, $this->_options['cache_directory_umask'], true)) {
+            $lastErr = error_get_last();
+            Zend_Cache::throwException("Can't create directory: {$lastErr['message']}");
+        }
+
+        /*
         $parts = explode('/', $path);
         $directory = '';
         foreach ($parts as $part) {
@@ -267,8 +274,9 @@ class StaticBackend extends AbstractBackend implements Backend
                 mkdir($directory, $this->_octdec($this->_options['cache_directory_umask']));
             }
         }
+        */
     }
-    
+
     /**
      * Detect serialization of data (cannot predict since this is the only way
      * to obey the interface yet pass in another parameter).
@@ -479,8 +487,8 @@ class StaticBackend extends AbstractBackend implements Backend
 
     /**
      * Verify path exists and is non-empty
-     * 
-     * @param  string $path 
+     *
+     * @param  string $path
      * @return bool
      */
     protected function _verifyPath($path)
@@ -492,7 +500,7 @@ class StaticBackend extends AbstractBackend implements Backend
 
     /**
      * Determine the page to save from the request
-     * 
+     *
      * @return string
      */
     protected function _detectId()
@@ -523,14 +531,14 @@ class StaticBackend extends AbstractBackend implements Backend
 
         // Validation assumes no query string, fragments or scheme included - only the path
         if (!preg_match(
-                '/^(?:\/(?:(?:%[[:xdigit:]]{2}|[A-Za-z0-9-_.!~*\'()\[\]:@&=+$,;])*)?)+$/', 
+                '/^(?:\/(?:(?:%[[:xdigit:]]{2}|[A-Za-z0-9-_.!~*\'()\[\]:@&=+$,;])*)?)+$/',
                 $string
             )
         ) {
             Cache\Cache::throwException("Invalid id or tag '$string' : must be a valid URL path");
         }
     }
-    
+
     /**
      * Detect an octal string and return its octal value for file permission ops
      * otherwise return the non-string (assumed octal or decimal int already)
@@ -545,7 +553,7 @@ class StaticBackend extends AbstractBackend implements Backend
         }
         return $val;
     }
-    
+
     /**
      * Decode a request URI from the provided ID
      */

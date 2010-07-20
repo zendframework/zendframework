@@ -211,7 +211,7 @@ class ClassFrontend extends Core
             return call_user_func_array(array($this->_cachedEntity, $name), $parameters);
         }
 
-        $id = $this->makeId($name, $parameters);
+        $id = $this->_makeId($name, $parameters);
         if ( ($rs = $this->load($id)) && isset($rs[0], $rs[1]) ) {
             // A cache is available
             $output = $rs[0];

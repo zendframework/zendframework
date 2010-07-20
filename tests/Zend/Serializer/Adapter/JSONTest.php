@@ -39,7 +39,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_adapter = new \Zend\Serializer\Adapter\JSON();
+        $this->_adapter = new \Zend\Serializer\Adapter\Json();
     }
 
     public function tearDown()
@@ -143,7 +143,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
         $expected   = new \stdClass();
         $expected->test = 'test';
 
-        $data = $this->_adapter->unserialize($value, array('objectDecodeType' => \Zend\JSON\JSON::TYPE_OBJECT));
+        $data = $this->_adapter->unserialize($value, array('objectDecodeType' => \Zend\Json\Json::TYPE_OBJECT));
         $this->assertEquals($expected, $data);
     }
 

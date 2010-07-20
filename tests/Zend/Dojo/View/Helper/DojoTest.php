@@ -24,7 +24,7 @@ namespace ZendTest\Dojo\View\Helper;
 
 use Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Dojo\View\Helper\Dojo\Container as DojoContainer,
-    Zend\JSON\JSON,
+    Zend\Json\Json,
     Zend\Registry,
     Zend\View\View,
     Zend\View\ViewEngine;
@@ -579,7 +579,7 @@ function() {
     {
         $this->testShouldAllowAddingMultipleDijitsAtOnce();
         $json  = $this->helper->dijitsToJson();
-        $array = JSON::decode($json);
+        $array = Json::decode($json);
         $this->assertTrue(is_array($array));
 
         $keys  = array();

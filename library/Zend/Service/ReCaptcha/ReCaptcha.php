@@ -30,7 +30,7 @@ use Zend\Config\Config;
  * Zend_Service_ReCaptcha
  *
  * @uses       \Zend\Http\Client
- * @uses       \Zend\JSON\JSON
+ * @uses       \Zend\Json\Json
  * @uses       Zend\Service\AbstractService
  * @uses       \Zend\Service\ReCaptcha\Exception
  * @uses       \Zend\Service\ReCaptcha\Response
@@ -402,7 +402,7 @@ class ReCaptcha extends \Zend\Service\AbstractService
         $reCaptchaOptions = '';
 
         if (!empty($this->_options)) {
-            $encoded = \Zend\JSON\JSON::encode($this->_options);
+            $encoded = \Zend\Json\Json::encode($this->_options);
             $reCaptchaOptions = <<<SCRIPT
 <script type="text/javascript">
     var RecaptchaOptions = {$encoded};

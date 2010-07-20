@@ -88,7 +88,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
     {
         $newAdapter = 'JSON';
         Serializer::setDefaultAdapter($newAdapter);
-        $this->assertTrue(Serializer::getDefaultAdapter() instanceof Adapter\JSON);
+        $this->assertTrue(Serializer::getDefaultAdapter() instanceof Adapter\Json);
     }
 
     public function testChangeDefaultAdapterWithInstance()
@@ -110,7 +110,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
     public function testSerializeSpecificAdapter()
     {
         $value = 'test';
-        $adapter = new Adapter\JSON();
+        $adapter = new Adapter\Json();
         $expected = $adapter->serialize($value);
         $this->assertEquals($expected, Serializer::serialize($value, array('adapter' => $adapter)));
     }
@@ -126,7 +126,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeSpecificAdapter()
     {
-        $adapter = new Adapter\JSON();
+        $adapter = new Adapter\Json();
         $value = '"test"';
         $expected = $adapter->unserialize($value);
         $this->assertEquals($expected, Serializer::unserialize($value, array('adapter' => $adapter)));

@@ -211,7 +211,7 @@ class File extends Xhtml
     public function getTransferAdapter()
     {
         if (null === $this->_adapter) {
-            $this->setTransferAdapter('HTTP');
+            $this->setTransferAdapter('Http');
         }
         return $this->_adapter;
     }

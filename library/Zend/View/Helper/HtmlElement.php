@@ -26,7 +26,7 @@
 namespace Zend\View\Helper;
 
 /**
- * @uses       \Zend\JSON\JSON
+ * @uses       \Zend\Json\Json
  * @uses       \Zend\View\Helper\AbstractHelper
  * @category   Zend
  * @package    Zend_View
@@ -97,7 +97,7 @@ abstract class HtmlElement extends AbstractHelper
                 // Don't escape event attributes; _do_ substitute double quotes with singles
                 if (!is_scalar($val)) {
                     // non-scalar data should be cast to JSON first
-                    $val = \Zend\JSON\JSON::encode($val);
+                    $val = \Zend\Json\Json::encode($val);
                 }
                 $val = preg_replace('/"([^"]*)":/', '$1:', $val);
             } else {

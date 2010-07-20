@@ -273,7 +273,7 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
 
         $encodedMessage = $message = 'Отладочный';
 
-        if (function_exists('json_encode') && \Zend\JSON\JSON::$useBuiltinEncoderDecoder !== true) {
+        if (function_exists('json_encode') && \Zend\Json\Json::$useBuiltinEncoderDecoder !== true) {
           $encodedMessage = '\u041e\u0442\u043b\u0430\u0434\u043e\u0447\u043d\u044b\u0439';
         }
 

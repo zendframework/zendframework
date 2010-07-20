@@ -36,7 +36,7 @@ use Zend\Wildfire;
  * @uses       \Zend\Wildfire\Channel\HttpHeaders
  * @uses       \Zend\Wildfire\Exception
  * @uses       \Zend\Wildfire\Plugin
- * @uses       \Zend\Wildfire\Protocol\JSONStream
+ * @uses       \Zend\Wildfire\Protocol\JsonStream
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage Plugin
@@ -104,7 +104,7 @@ class FirePhp implements Wildfire\Plugin
     /**
      * The protocol URI for this plugin
      */
-    const PROTOCOL_URI = Wildfire\Protocol\JSONStream::PROTOCOL_URI;
+    const PROTOCOL_URI = Wildfire\Protocol\JsonStream::PROTOCOL_URI;
 
     /**
      * The structure URI for the Dump structure

@@ -26,11 +26,11 @@ namespace Zend\Paginator;
 
 use Zend\Loader\PluginLoader,
     Zend\View,
-    Zend\JSON;
+    Zend\Json;
 
 /**
  * @uses       \Zend\Controller\Action\HelperBroker
- * @uses       \Zend\JSON\JSON
+ * @uses       \Zend\Json\Json
  * @uses       \Zend\Loader\PluginLoader
  * @uses       \Zend\Paginator\Exception
  * @uses       \Zend\View\Exception
@@ -944,9 +944,9 @@ class Paginator implements \Countable, \IteratorAggregate
         $currentItems = $this->getCurrentItems();
 
         if ($currentItems instanceof \Zend\Db\Table\AbstractRowset) {
-            return JSON\JSON::encode($currentItems->toArray());
+            return Json\Json::encode($currentItems->toArray());
         } else {
-            return JSON\JSON::encode($currentItems);
+            return Json\Json::encode($currentItems);
         }
     }
 

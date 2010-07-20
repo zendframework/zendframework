@@ -23,7 +23,7 @@
 namespace ZendTest\Dojo;
 
 use Zend\Dojo\Data as DojoData,
-    Zend\JSON\JSON;
+    Zend\Json\Json;
 
 /**
  * @category   Zend
@@ -365,7 +365,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
     {
         $this->testAddItemsShouldAcceptTraversableObject();
         $json = $this->dojoData->toJson();
-        $this->assertSame($this->dojoData->toArray(), JSON::decode($json));
+        $this->assertSame($this->dojoData->toArray(), Json::decode($json));
     }
 
     public function testShouldSerializeToStringAsJson()
@@ -417,7 +417,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
                 array('id' => 4, 'title' => 'Four', 'name' => 'Fourth'),
             ),
         );
-        $json = JSON::encode($data);
+        $json = Json::encode($data);
         $dojoData = new DojoData();
         $dojoData->fromJson($json);
         $test = $dojoData->toArray();

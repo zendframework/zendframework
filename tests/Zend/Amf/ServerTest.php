@@ -1069,7 +1069,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         // create a mock remoting message
         $message = new Messaging\RemotingMessage();
         $message->operation = 'encode';
-        $message->source = 'Zend\\JSON\\JSON';
+        $message->source = 'Zend\\Json\\Json';
         $message->body = array("123");
         // create a mock message body to place th remoting message inside
         $newBody = new Value\MessageBody(null,"/1", $message);
@@ -1081,7 +1081,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->_server->handle($request);
         $response = $this->_server->getResponse()->getAMFBodies();
         $this->assertTrue($response[0]->getData() instanceof Messaging\ErrorMessage);
-        // test the same while ensuring Zend\JSON\JSON is loaded
+        // test the same while ensuring Zend\Json\Json is loaded
         $this->_server->handle($request);
         $response = $this->_server->getResponse()->getAMFBodies();
         $this->assertTrue($response[0]->getData() instanceof Messaging\ErrorMessage);

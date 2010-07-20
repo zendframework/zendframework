@@ -666,7 +666,7 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($found, 'JSON content type header not found');
 
         $body = $this->response->getBody();
-        $result = \Zend\JSON\JSON::decode($body);
+        $result = \Zend\Json\Json::decode($body);
         $this->assertTrue(is_array($result), var_export($body, 1));
         $this->assertTrue(isset($result['foo']));
         $this->assertTrue(isset($result['bar']));

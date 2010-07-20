@@ -35,7 +35,7 @@ namespace Zend\Service\Twitter;
 use Zend\Http;
 use Zend\REST;
 use Zend\Feed;
-use Zend\JSON;
+use Zend\Json;
 
 class Search extends REST\Client\RESTClient
 {
@@ -111,7 +111,7 @@ class Search extends REST\Client\RESTClient
     {
         $response     = $this->restGet('/trends.json');
 
-        return JSON::decode($response->getBody());
+        return Json::decode($response->getBody());
     }
 
     /**
@@ -148,7 +148,7 @@ class Search extends REST\Client\RESTClient
 
         switch($this->_responseType) {
             case 'json':
-                return JSON::decode($response->getBody());
+                return Json::decode($response->getBody());
                 break;
             case 'atom':
                 return Feed\Reader::importString($response->getBody());

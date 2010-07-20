@@ -24,7 +24,7 @@ namespace ZendTest\Dojo\View\Helper;
 
 use Zend\Dojo\View\Helper\Editor as EditorHelper,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
-    Zend\JSON\JSON,
+    Zend\Json\Json,
     Zend\Registry,
     Zend\View\View;
 
@@ -105,7 +105,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     {
         $plugins = array('copy', 'cut', 'paste');
         $html = $this->helper->direct('foo', '', array('plugins' => $plugins));
-        $pluginsString = JSON::encode($plugins);
+        $pluginsString = Json::encode($plugins);
         $pluginsString = str_replace('"', "'", $pluginsString);
         $this->assertContains('plugins="' . $pluginsString . '"', $html);
     }

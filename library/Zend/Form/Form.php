@@ -27,7 +27,7 @@ use Zend\Config\Config,
     Zend\Loader\PluginLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Loader,
-    Zend\JSON\JSON,
+    Zend\Json\Json,
     Zend\View\ViewEngine as View,
     Zend\Translator,
     Zend\Controller\Action\HelperBroker as ActionHelperBroker;
@@ -37,7 +37,7 @@ use Zend\Config\Config,
  *
  * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
  * @uses       \Zend\Form\Exception
- * @uses       \Zend\JSON\JSON
+ * @uses       \Zend\Json\Json
  * @uses       \Zend\Loader
  * @uses       \Zend\Loader\PluginLoader
  * @uses       Zend\Registry
@@ -2329,10 +2329,10 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     public function processAjax(array $data)
     {
         if ($this->isValidPartial($data)) {
-            return JSON::encode(true);
+            return Json::encode(true);
         }
         $messages = $this->getMessages();
-        return JSON::encode($messages);
+        return Json::encode($messages);
     }
 
     /**

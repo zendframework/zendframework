@@ -24,7 +24,7 @@ namespace ZendTest\Dojo;
 
 use Zend\Dojo\BuildLayer,
     Zend\Dojo\View\Helper\Dojo\Container as DojoContainer,
-    Zend\JSON\JSON,
+    Zend\Json\Json,
     Zend\Registry,
     Zend\View\View;
 
@@ -365,7 +365,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
     {
         $profile = preg_replace('/^dependencies = (.*?);$/s', '$1', $profile);
         $profile = preg_replace('/(\b)([^"\':,]+):/', '$1"$2":', $profile);
-        $data    = JSON::decode($profile);
+        $data    = Json::decode($profile);
         ksort($data);
         return $data;
     }

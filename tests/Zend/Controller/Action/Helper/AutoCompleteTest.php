@@ -34,7 +34,7 @@ use Zend\Controller\Action\Exception as ActionException,
     Zend\Controller\Request\Http as HTTPRequest,
     Zend\Controller\Response\Cli as CLIResponse,
     Zend\Layout\Layout,
-    Zend\JSON\JSON;
+    Zend\Json\Json;
 
 
 /**
@@ -98,7 +98,7 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
         $dojo    = new AutoCompleteDojo();
         $data    = array('foo', 'bar', 'baz');
         $encoded = $dojo->prepareAutoCompletion($data);
-        $decoded = JSON::decode($encoded);
+        $decoded = Json::decode($encoded);
         $test    = array();
         foreach ($decoded['items'] as $item) {
             $test[] = $item['name'];
@@ -123,7 +123,7 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
         $dojo = new AutoCompleteDojo();
         $data = array('foo', 'bar', 'baz');
         $encoded = $dojo->direct($data, false);
-        $decoded = JSON::decode($encoded);
+        $decoded = Json::decode($encoded);
         $this->assertContains('items', array_keys($decoded));
         $this->assertContains('identifier', array_keys($decoded));
         $this->assertEquals('name', $decoded['identifier']);
@@ -141,7 +141,7 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
         $dojo->suppressExit = true;
         $data = array('foo', 'bar', 'baz');
         $encoded = $dojo->direct($data);
-        $decoded = JSON::decode($encoded);
+        $decoded = Json::decode($encoded);
         $test    = array();
         foreach ($decoded['items'] as $item) {
             $test[] = $item['name'];
@@ -180,7 +180,7 @@ class AutoCompleteTest extends \PHPUnit_Framework_TestCase
         $data = array ('garçon', 'schließen', 'Helgi Þormar Þorbjörnsson');
         $encoded = $dojo->direct($data);
         $body = $this->response->getBody();
-        $decoded = JSON::decode($encoded);
+        $decoded = Json::decode($encoded);
         $test = array ();
         foreach ($decoded['items'] as $item) {
             $test[] = $item['name'];

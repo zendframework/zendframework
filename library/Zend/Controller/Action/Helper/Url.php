@@ -37,7 +37,7 @@ namespace Zend\Controller\Action\Helper;
  */
 use Zend\Controller\Request;
 
-class URL extends AbstractHelper
+class Url extends AbstractHelper
 {
     /**
      * Create URL based on default route

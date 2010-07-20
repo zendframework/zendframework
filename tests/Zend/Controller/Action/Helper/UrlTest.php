@@ -38,7 +38,7 @@ use Zend\Controller\Router\Route;
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-class URLTest extends \PHPUnit_Framework_TestCase
+class UrlTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -52,7 +52,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
         $this->front = \Zend\Controller\Front::getInstance();
         $this->front->resetInstance();
         $this->front->setRequest(new \Zend\Controller\Request\Http());
-        $this->helper = new \Zend\Controller\Action\Helper\URL();
+        $this->helper = new \Zend\Controller\Action\Helper\Url();
     }
 
     /**

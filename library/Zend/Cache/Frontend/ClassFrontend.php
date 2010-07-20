@@ -211,7 +211,7 @@ class ClassFrontend extends Core
             return call_user_func_array(array($this->_cachedEntity, $name), $parameters);
         }
 
-        $id = $this->_makeId($name, $parameters);
+        $id = $this->makeId($name, $parameters);
         if ( ($rs = $this->load($id)) && isset($rs[0], $rs[1]) ) {
             // A cache is available
             $output = $rs[0];
@@ -238,7 +238,7 @@ class ClassFrontend extends Core
      * @param  array  $parameters Method parameters
      * @return string Cache id
      */
-    private function _makeId($name, $parameters)
+    public function makeId($name, $parameters)
     {
         return md5($this->_cachedEntityLabel . '__' . $name . '__' . serialize($parameters));
     }

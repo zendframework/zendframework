@@ -23,9 +23,9 @@
 /**
  * @namespace
  */
-namespace ZendTest\REST;
+namespace ZendTest\Rest;
 
-use Zend\REST,
+use Zend\Rest,
     Zend\Config\Ini as INIConfig,
     Zend\Controller\Front as FrontController,
     Zend\Controller\Request\HttpTestCase as Request,
@@ -71,7 +71,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
     public function test_getVersion()
     {
-        $route = new REST\Route($this->_front);
+        $route = new Rest\Route($this->_front);
         $this->assertEquals(2, $route->getVersion());
     }
     
@@ -81,7 +81,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
     	$router = new RewriteRouter();
     	$router->addConfig($config, 'routes');
     	$route = $router->getRoute('rest');
-    	$this->assertType('Zend\\REST\\Route', $route);
+    	$this->assertType('Zend\\Rest\\Route', $route);
     	$this->assertEquals('object', $route->getDefault('controller'));
     	
     	$request = $this->_buildRequest('GET', '/mod/project');
@@ -307,7 +307,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
         $router->removeDefaultRoutes();
 
         $nonRESTRoute = new Route('api');
-        $RESTRoute = new REST\Route($this->_front);
+        $RESTRoute = new Rest\Route($this->_front);
         $router->addRoute("api", $nonRESTRoute->addChain($RESTRoute));
 
         $routedRequest = $router->route($request);
@@ -508,7 +508,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
     public function test_assemble_plain_ignores_action()
     {
-        $route = new REST\Route($this->_front, array(), array());
+        $route = new Rest\Route($this->_front, array(), array());
         $params = array('module'=>'mod', 'controller'=>'user', 'action'=>'get');
         $url = $route->assemble($params);
         $this->assertEquals('mod/user', $url);
@@ -516,7 +516,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
     public function test_assemble_id_after_controller()
     {
-        $route = new REST\Route($this->_front, array(), array());
+        $route = new Rest\Route($this->_front, array(), array());
         $params = array('module'=>'mod', 'controller'=>'user', 'id'=>'lcrouch');
         $url = $route->assemble($params);
         $this->assertEquals('mod/user/lcrouch', $url);
@@ -524,7 +524,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
     public function test_assemble_index_after_controller_with_params()
     {
-        $route = new REST\Route($this->_front, array(), array());
+        $route = new Rest\Route($this->_front, array(), array());
         $params = array('module'=>'mod', 'controller'=>'user', 'index'=>true, 'foo'=>'bar');
         $url = $route->assemble($params);
         $this->assertEquals('mod/user/index/foo/bar', $url);
@@ -532,7 +532,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
     
     public function test_assemble_encode_param_values()
     {
-        $route = new REST\Route($this->_front, array(), array());
+        $route = new Rest\Route($this->_front, array(), array());
         $params = array('module'=>'mod', 'controller'=>'user', 'index'=>true, 'foo'=>'bar is n!ice');
         $url = $route->assemble($params);
         $this->assertEquals('mod/user/index/foo/bar+is+n%21ice', $url);
@@ -540,7 +540,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
     public function test_assemble_does_NOT_encode_param_values()
     {
-        $route = new REST\Route($this->_front, array(), array());
+        $route = new Rest\Route($this->_front, array(), array());
         $params = array('module'=>'mod', 'controller'=>'user', 'index'=>true, 'foo'=>'bar is n!ice');
         $url = $route->assemble($params, false, false);
         $this->assertEquals('mod/user/index/foo/bar is n!ice', $url);
@@ -557,7 +557,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
     {
         $this->_front->setRequest($request);
         if ($route == null)
-        	$route = new REST\Route($this->_front, array(), $config);
+        	$route = new Rest\Route($this->_front, array(), $config);
         $values = $route->match($request);
         return $values;
     }

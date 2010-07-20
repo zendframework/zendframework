@@ -23,11 +23,11 @@
 /**
  * @namespace
  */
-namespace Zend\REST\Client;
+namespace Zend\Rest\Client;
 
 /**
  * @uses       IteratorAggregate
- * @uses       \Zend\REST\Client\ResultException
+ * @uses       \Zend\Rest\Client\ResultException
  * @category   Zend
  * @package    Zend_Rest
  * @subpackage Client
@@ -101,7 +101,7 @@ class Result implements \IteratorAggregate
      * Get Property Overload
      *
      * @param string $name
-     * @return null|SimpleXMLElement|array Null if not found, SimpleXMLElement if only one value found, array of \Zend\REST\Client\Result objects otherwise
+     * @return null|SimpleXMLElement|array Null if not found, SimpleXMLElement if only one value found, array of \Zend\Rest\Client\Result objects otherwise
      */
     public function __get($name)
     {

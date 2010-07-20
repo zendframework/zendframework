@@ -33,11 +33,11 @@
  */
 namespace Zend\Service\Twitter;
 use Zend\Http;
-use Zend\REST;
+use Zend\Rest;
 use Zend\Feed;
 use Zend\Json;
 
-class Search extends REST\Client\RESTClient
+class Search extends Rest\Client\RestClient
 {
     /**
      * Return Type

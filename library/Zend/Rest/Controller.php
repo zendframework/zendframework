@@ -22,13 +22,13 @@
 /**
  * @namespace
  */
-namespace Zend\REST;
+namespace Zend\Rest;
 
 use Zend\Controller\Action as ActionController;
 
 /**
  * An abstract class to guide implementation of action controllers for use with
- * Zend\REST\Route.
+ * Zend\Rest\Route.
  *
  * @uses       Zend_Controller_Action
  * @category   Zend

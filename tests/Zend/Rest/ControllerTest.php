@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\REST;
+namespace ZendTest\Rest;
 
 use Zend\Controller\Request\HttpTestCase as Request,
     Zend\Controller\Response\HttpTestCase as Response;

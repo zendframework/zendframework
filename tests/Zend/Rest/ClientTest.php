@@ -23,9 +23,9 @@
 /**
  * @namespace
  */
-namespace ZendTest\REST;
+namespace ZendTest\Rest;
 
-use Zend\REST\Client,
+use Zend\Rest\Client,
     Zend\Uri,
     Zend\Http\Response;
 
@@ -50,14 +50,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client        = new \Zend\Http\Client(null, array(
             'adapter' => $this->adapter
         ));
-        Client\RESTClient::setDefaultHttpClient($client);
+        Client\RestClient::setDefaultHttpClient($client);
 
-        $this->rest = new Client\RESTClient('http://framework.zend.com/');
+        $this->rest = new Client\RestClient('http://framework.zend.com/');
     }
 
     public function testUri()
     {
-        $client = new Client\RESTClient('http://framework.zend.com/rest/');
+        $client = new Client\RestClient('http://framework.zend.com/rest/');
         $uri = $client->getUri();
         $this->assertTrue($uri instanceof URI\URI);
         $this->assertEquals('http://framework.zend.com/rest/', $uri->generate());
@@ -87,9 +87,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                   . $expXml;
         $this->adapter->setResponse($response);
 
-        $rest = new Client\RESTClient();
+        $rest = new Client\RestClient();
 
-        $this->setExpectedException('Zend\\REST\\Client\\Exception');
+        $this->setExpectedException('Zend\\Rest\\Client\\Exception');
         $response = $rest->restGet('/rest/');
     }
 
@@ -107,7 +107,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                   . $expXml;
         $this->adapter->setResponse($response);
 
-        $rest = new Client\RESTClient('http://framework.zend.com');
+        $rest = new Client\RestClient('http://framework.zend.com');
 
         $response = $rest->restGet('rest');
         $this->assertTrue($response instanceof Response);
@@ -153,7 +153,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
 
-        $request = Client\RESTClient::getDefaultHttpClient()->getLastRequest();
+        $request = Client\RestClient::getDefaultHttpClient()->getLastRequest();
         $this->assertContains($reqXml, $request, $request);
     }
 
@@ -176,7 +176,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
 
-        $request = Client\RESTClient::getDefaultHttpClient()->getLastRequest();
+        $request = Client\RestClient::getDefaultHttpClient()->getLastRequest();
         $this->assertContains('foo=bar&baz=bat', $request, $request);
     }
 
@@ -200,7 +200,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
 
-        $request = Client\RESTClient::getDefaultHttpClient()->getLastRequest();
+        $request = Client\RestClient::getDefaultHttpClient()->getLastRequest();
         $this->assertContains($reqXml, $request, $request);
     }
 
@@ -260,7 +260,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->adapter->setResponse($response);
 
         $response = $this->rest->doStuff('why', 'not');
-        $this->assertTrue($response instanceof Client\RESTClient);
+        $this->assertTrue($response instanceof Client\RestClient);
         $this->assertSame($this->rest, $response);
     }
 
@@ -289,7 +289,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidXmlInClientResultLeadsToException()
     {
-        $this->setExpectedException('Zend\\REST\\Client\\ResultException');
+        $this->setExpectedException('Zend\\Rest\\Client\\ResultException');
         $result = new Client\Result("invalidxml");
     }
 }

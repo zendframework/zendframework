@@ -23,9 +23,9 @@
 /**
  * @namespace
  */
-namespace ZendTest\REST;
+namespace ZendTest\Rest;
 
-use Zend\REST\Client;
+use Zend\Rest\Client;
 
 /**
  * Test cases for Zend_Rest_Server

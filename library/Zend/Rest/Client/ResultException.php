@@ -23,12 +23,12 @@
 /**
  * @namespace
  */
-namespace Zend\REST\Client;
+namespace Zend\Rest\Client;
 
 /**
  * REST client result exception
  *
- * @uses       Zend\REST\Client\Exception
+ * @uses       Zend\Rest\Client\Exception
  * @package    Zend_Rest
  * @subpackage Client
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

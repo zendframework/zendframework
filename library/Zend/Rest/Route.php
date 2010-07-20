@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\REST;
+namespace Zend\Rest;
 
 /**
  * Rest Route

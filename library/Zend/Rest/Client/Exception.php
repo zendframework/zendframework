@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Rest
+ * @subpackage Client
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -22,15 +23,18 @@
 /**
  * @namespace
  */
-namespace Zend\REST;
+namespace Zend\Rest\Client;
 
 /**
- * @uses       \Zend\Exception
- * @category   Zend
+ * Zend_Rest_Server_Exception
+ *
+ * @uses       \Zend\Rest\Exception
  * @package    Zend_Rest
+ * @subpackage Client
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Exception
-{}
+class Exception extends \Zend\Rest\Exception
+{
+}
 

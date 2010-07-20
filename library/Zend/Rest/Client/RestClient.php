@@ -23,13 +23,13 @@
 /**
  * @namespace
  */
-namespace Zend\REST\Client;
+namespace Zend\Rest\Client;
 
 use Zend\URI;
 
 /**
- * @uses       Zend\REST\Client\Exception
- * @uses       Zend\REST\Client\Result
+ * @uses       Zend\Rest\Client\Exception
+ * @uses       Zend\Rest\Client\Result
  * @uses       Zend\Service\AbstractService
  * @uses       Zend\URI\URI
  * @uses       Zend\URI\URL
@@ -39,7 +39,7 @@ use Zend\URI;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RESTClient extends \Zend\Service\AbstractService
+class RestClient extends \Zend\Service\AbstractService
 {
     /**
      * Data for the query
@@ -70,7 +70,7 @@ class RESTClient extends \Zend\Service\AbstractService
      * Set the URI to use in the request
      *
      * @param string|Zend\URI\URI $uri URI for the web service
-     * @return Zend\REST\Client\RESTClient
+     * @return Zend\Rest\Client\RestClient
      */
     public function setUri($uri)
     {
@@ -97,7 +97,7 @@ class RESTClient extends \Zend\Service\AbstractService
      * Call a remote REST web service URI and return the Zend_Http_Response object
      *
      * @param  string $path            The path to append to the URI
-     * @throws Zend\REST\Client\Exception
+     * @throws Zend\Rest\Client\Exception
      * @return void
      */
     final private function _prepareRest($path)
@@ -220,7 +220,7 @@ class RESTClient extends \Zend\Service\AbstractService
      *
      * @param string $method Method name
      * @param array $args Method args
-     * @return \Zend\REST\Client\RESTClient_Result|\Zend\REST\Client\RESTClient \Zend\REST\Client\RESTClient if using
+     * @return \Zend\Rest\Client\RestClient_Result|\Zend\Rest\Client\RestClient \Zend\Rest\Client\RestClient if using
      * a remote method, Zend_Rest_Client_Result if using an HTTP request method
      */
     public function __call($method, $args)

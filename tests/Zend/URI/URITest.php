@@ -42,31 +42,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */ 
     
     /**
-     * Test that valid URIs pass validation
-     * 
-     * @param string $uriString
-     * @dataProvider validUriStringProvider
-     */
-    public function testValidUriIsValid($uriString)
-    {
-        $uri = new URI($uriString);
-        $this->assertTrue($uri->isValid());
-    }
-
-    /**
-     * Test that invalid URIs pass validation
-     *
-     * @param string $uriString 
-     * @dataProvider invalidUriStringProvider
-     */
-    public function testInvalidUriIsInvalid($uriString)
-    {
-        $uri = new URI($uriString);
-        $this->assertFalse($uri->isValid());
-    }
-
-        /**
-     * Test that parsing and composing a URI returns the same URI
+     * Test that parsing and composing a valid URI returns the same URI
      *
      * @param        string $uriString
      * @dataProvider validUriStringProvider
@@ -286,6 +262,30 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     
     /**
+     * Test that valid URIs pass validation
+     * 
+     * @param string $uriString
+     * @dataProvider validUriStringProvider
+     */
+    public function testValidUriIsValid($uriString)
+    {
+        $uri = new URI($uriString);
+        $this->assertTrue($uri->isValid());
+    }
+
+    /**
+     * Test that invalid URIs pass validation
+     *
+     * @param \Zend\URI\URI $uri 
+     * @dataProvider invalidUriObjectProvider
+     */
+    public function testInvalidUriIsInvalid(URI $uri)
+    {
+        $this->markTestSkipped();
+        $this->assertFalse($uri->isValid());
+    }
+    
+    /**
      * Check that valid schemes are valid according to validateScheme()
      * 
      * @param string $scheme
@@ -305,6 +305,28 @@ class URITest extends \PHPUnit_Framework_TestCase
     public function testValidSchemeInvalid($scheme)
     {
         $this->assertFalse(URI::validateScheme($scheme));
+    }
+    
+    /**
+     * Check that valid hosts are valid according to validateHost()
+     * 
+     * @param string $host
+     * @dataProvider validHostProvider
+     */
+    public function testValidateHostValid($host)
+    {
+        $this->assertTrue(URI::validateHost($host));
+    }
+    
+    /**
+     * Check that invalid hosts are invalid according to validateHost()
+     * 
+     * @param string $host
+     * @dataProvider invalidHostProvider
+     */
+    public function testValiteHostInvalid($host)
+    {
+        $this->assertFalse(URI::validateHost($host));
     }
     
     /**
@@ -403,16 +425,27 @@ class URITest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Test that validatePort works for valid ports
      * 
-     * Enter description here ...
+     * @param mixed $port
+     * @dataProvider validPortProvider
      */
-    public function testInvalidCharacter()
+    public function testValidatePortValid($port)
     {
-        $this->markTestIncomplete();
-        $url = new URI('http://@www.zend.com');
-        $this->assertFalse($url->isValid());
+        $this->assertTrue(URI::validatePort($port));
     }
-
+    
+    /**
+     * Test that validatePort works for invalid ports
+     * 
+     * @param mixed $port
+     * @dataProvider invalidPortProvider
+     */
+    public function testValidatePortInvalid($port)
+    {
+        $this->assertFalse(URI::validatePort($port));
+    }
+    
     /**
      * @group ZF-1480
      */
@@ -443,6 +476,24 @@ class URITest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('a=1&c=3', $url->getQuery());
     }
     */
+    
+    /**
+     * Other tests
+     */
+    
+    /**
+     * Test the fluent interface
+     * 
+     * @param string $method
+     * @param string $params
+     * @dataProvider fluentInterfaceMethodProvider
+     */
+    public function testFluentInterface($method, $params)
+    {
+        $uri = new URI;
+        $ret = call_user_func_array(array($uri, $method), $params);
+        $this->assertSame($uri, $ret);
+    }
     
     /**
      * Data Providers
@@ -571,9 +622,36 @@ class URITest extends \PHPUnit_Framework_TestCase
     static public function invalidUriStringProvider()
     {
         return array(
+            array(':path'),
             array(null)
         );
     }
+    
+    /**
+     * Data provider for invalid URI objects
+     * 
+     * @return array
+     */
+    static public function invalidUriObjectProvider()
+    {
+        // Empty URI is not valid
+        $obj1 = new URI;
+        
+        // Path cannot begin with '//' if there is no authority part
+        $obj2 = new URI;
+        $obj2->setPath('//path');
+
+        // A relative URI cannot have a path beginning with ':'
+        $obj3 = new URI;
+        $obj3->setPath(':path');
+        
+        return array(
+            array($obj1),
+            array($obj2),
+            array($obj3)
+        );
+    }
+    
     
     /**
      * Data provider for valid URIs with their different parts
@@ -615,6 +693,106 @@ class URITest extends \PHPUnit_Framework_TestCase
                 'host'   => 'example.com',
                 'path'   => '/foo//bar/baz//fob/'
             ))
+        );
+    }
+    
+    /**
+     * Provider for valid ports
+     * 
+     * @return array
+     */
+    static public function validPortProvider()
+    {
+        return array(
+            array(null),
+            array(1),
+            array(0xffff),
+            array(80),
+            array('443')
+        );
+    }
+    
+    /**
+     * Provider for invalid ports
+     *
+     * @return array
+     */
+    static public function invalidPortProvider()
+    {
+        return array(
+            array(0),
+            array(-1),
+            array(0x10000),
+            array('foo'),
+            array('0xf'),
+            array('-'),
+            array(':'),
+            array('/')
+        );
+    }
+    
+    static public function validHostProvider()
+    {
+        return array(
+            // IPv4 addresses
+            array('10.1.2.3'),
+            array('127.0.0.1'),
+            array('0.0.0.0'),
+            array('255.255.255.255'),
+            
+            // IPv6 addresses
+            // Examples from http://en.wikipedia.org/wiki/IPv6_address
+            array('[2001:0db8:85a3:0000:0000:8a2e:0370:7334]'),
+            array('[2001:db8:85a3:0:0:8a2e:370:7334]'),
+            array('[2001:db8:85a3::8a2e:370:7334]'),
+            array('[0:0:0:0:0:0:0:1]'),
+            array('[::1]'),
+            array('[2001:0db8:85a3:08d3:1319:8a2e:0370:7348]'),
+            
+            // Internet and local DNS names
+            array('www.example.com'),
+            array('zend.com'),
+            array('php-israel.org'),
+            array('arr.gr'),
+            array('localhost'),
+            array('loca.host'),
+            array('zend-framework.test'),
+            array('a.b.c.d'),
+            array('a1.b2.c3.d4'),
+            array('some-domain-with-dashes'),
+        
+            // Registered name (other than DNS names)
+            array('some~unre_served.ch4r5'),
+            array('pct.%D7%A9%D7%97%D7%A8%20%D7%94%D7%92%D7%93%D7%95%D7%9C.co.il'),
+            array('sub-delims-!$&\'()*+,;=.are.ok'),
+            array('%2F%3A')
+        );
+    }
+    
+    static public function invalidHostProvider()
+    {
+        
+    }
+    
+    /**
+     * Return all methods that are expected to return the same object they
+     * are called on, to test the fluent interface
+     * 
+     * @return array
+     */
+    static public function fluentInterfaceMethodProvider()
+    {
+        return array(
+            array('setScheme',    array('file')),
+            array('setUserInfo',  array('userInfo')),
+            array('setHost',      array('example.com')),
+            array('setPort',      array(80)),
+            array('setPath',      array('/baz/baz')),
+            array('setQuery',     array('foo=bar')),
+            array('setFragment',  array('part2')),
+            array('makeRelative', array('http://foo.bar/')),
+            array('resolve',      array('http://foo.bar/')),
+            array('normalize',    array())
         );
     }
 }

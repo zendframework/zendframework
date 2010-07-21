@@ -118,12 +118,12 @@ class ArrayOfTypeSequenceStrategyTest extends \PHPUnit_Framework_TestCase
     {
         $return = $this->wsdl->addComplexType('\ZendTest\Soap\WSDL\SequenceTest');
 
-        $this->assertEquals('tns:\ZendTest\Soap\WSDL\SequenceTest', $return);
+        $this->assertEquals('tns:ZendTest.Soap.WSDL.SequenceTest', $return);
 
         $wsdl = $this->wsdl->toXML();
 
         $this->assertContains(
-            '<xsd:complexType name="\ZendTest\Soap\WSDL\SequenceTest"><xsd:all><xsd:element name="var" type="xsd:int"/></xsd:all></xsd:complexType>',
+            '<xsd:complexType name="ZendTest.Soap.WSDL.SequenceTest"><xsd:all><xsd:element name="var" type="xsd:int"/></xsd:all></xsd:complexType>',
             $wsdl
         );
     }
@@ -131,20 +131,20 @@ class ArrayOfTypeSequenceStrategyTest extends \PHPUnit_Framework_TestCase
     public function testAddComplexTypeArrayOfObject()
     {
 
-         $return = $this->wsdl->addComplexType('ZendTest_Soap_TestAsset_ComplexTypeA[]');
+         $return = $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\ComplexTypeA[]');
 
-         $this->assertEquals('tns:ArrayOfZendtest_soap_testasset_complextypea', $return);
+         $this->assertEquals('tns:ArrayOfZendTest.Soap.TestAsset.ComplexTypeA', $return);
 
          $wsdl = $this->wsdl->toXML();
 
          $this->assertContains(
-            '<xsd:complexType name="ZendTest_Soap_TestAsset_ComplexTypeA"><xsd:all><xsd:element name="baz" type="tns:ArrayOfZendtest_soap_testasset_complextypeb"/></xsd:all></xsd:complexType>',
+            '<xsd:complexType name="ZendTest.Soap.TestAsset.ComplexTypeA"><xsd:all><xsd:element name="baz" type="tns:ArrayOfZendTest.Soap.TestAsset.ComplexTypeB"/></xsd:all></xsd:complexType>',
             $wsdl,
             $wsdl
          );
 
          $this->assertContains(
-            '<xsd:complexType name="ArrayOfZendtest_soap_testasset_complextypea"><xsd:sequence><xsd:element name="item" type="tns:ZendTest_Soap_TestAsset_ComplexTypeA" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence></xsd:complexType>',
+            '<xsd:complexType name="ArrayOfZendTest.Soap.TestAsset.ComplexTypeA"><xsd:sequence><xsd:element name="item" type="tns:ZendTest.Soap.TestAsset.ComplexTypeA" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence></xsd:complexType>',
             $wsdl
          );
     }

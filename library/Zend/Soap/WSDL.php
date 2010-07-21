@@ -91,7 +91,7 @@ class WSDL
         $this->_uri = $uri;
 
         /**
-         * @todo change DomDocument object creation from cparsing to construxting using API
+         * @todo change DomDocument object creation from cparsing to constructing using API
          * It also should authomatically escape $name and $uri values if necessary
          */
         $wsdl = "<?xml version='1.0' ?>
@@ -161,7 +161,7 @@ class WSDL
         }
 
         if(!($strategy instanceof WSDL\Strategy)) {
-            throw new WSDLException("Set a strategy that is not of type 'Zend\Soap\WSDL\Strategy'");
+            throw new WSDLException('Set a strategy that is not of type \'Zend\Soap\WSDL\Strategy\'');
         }
         $this->_strategy = $strategy;
         return $this;
@@ -457,12 +457,13 @@ class WSDL
      * Add a complex type name that is part of this WSDL and can be used in signatures.
      *
      * @param string $type
+     * @param string $wsdlType
      * @return \Zend\Soap\WSDL
      */
-    public function addType($type)
+    public function addType($type, $wsdlType)
     {
-        if(!in_array($type, $this->_includedTypes)) {
-            $this->_includedTypes[] = $type;
+        if(!isset($this->_includedTypes[$type])) {
+            $this->_includedTypes[$type] = $wsdlType;
         }
         return $this;
     }
@@ -586,6 +587,21 @@ class WSDL
     }
 
     /**
+     * Translate PHP type into WSDL QName
+     *
+     * @param string $type
+     * @return string QName
+     */
+    public static function translateType($type)
+    {
+        if ($type[0] == '\\') {
+            $type = substr($type, 1);
+        }
+
+        return str_replace('\\', '.', $type);
+    }
+
+    /**
      * Add a {@link http://www.w3.org/TR/wsdl#_types types} data type definition
      *
      * @param string $type Name of the class to be specified
@@ -593,8 +609,8 @@ class WSDL
      */
     public function addComplexType($type)
     {
-        if (in_array($type, $this->getTypes())) {
-            return "tns:$type";
+        if (isset($this->_includedTypes[$type])) {
+            return $this->_includedTypes[$type];
         }
         $this->addSchemaTypeSection();
 

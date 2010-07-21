@@ -40,17 +40,6 @@ use Zend\Soap\Server;
  */
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs this test suite
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         if (!extension_loaded('soap')) {
@@ -70,8 +59,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $ctx = stream_context_create();
 
         $nonWSDLOptions = array('soap_version'   => SOAP_1_1,
-                                'classmap'       => array('TestData1' => 'ZendTest_Soap_TestAsset_TestData1',
-                                                    'TestData2' => 'ZendTest_Soap_TestAsset_TestData2',),
+                                'classmap'       => array('TestData1' => '\ZendTest\Soap\TestAsset\TestData1',
+                                                    'TestData2' => '\ZendTest\Soap\TestAsset\TestData2',),
                                 'encoding'       => 'ISO-8859-1',
                                 'uri'            => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
                                 'location'       => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
@@ -108,8 +97,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $wsdlOptions = array('soap_version'   => SOAP_1_1,
                              'wsdl'           => __DIR__.'/TestAsset/wsdl_example.wsdl',
-                             'classmap'       => array('TestData1' => 'ZendTest_Soap_TestAsset_TestData1',
-                                                 'TestData2' => 'ZendTest_Soap_TestAsset_TestData2',),
+                             'classmap'       => array('TestData1' => '\ZendTest\Soap\TestAsset\TestData1',
+                                                 'TestData2' => '\ZendTest\Soap\TestAsset\TestData2',),
                              'encoding'       => 'ISO-8859-1',
 
                              'login'          => 'http_login',
@@ -140,8 +129,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $options = array('soap_version'   => SOAP_1_1,
                          'wsdl'           => __DIR__.'/TestAsset/wsdl_example.wsdl',
 
-                         'classmap'       => array('TestData1' => 'ZendTest_Soap_TestAsset_TestData1',
-                                             'TestData2' => 'ZendTest_Soap_TestAsset_TestData2',),
+                         'classmap'       => array('TestData1' => '\ZendTest\Soap\TestAsset\TestData1',
+                                             'TestData2' => '\ZendTest\Soap\TestAsset\TestData2',),
                          'encoding'       => 'ISO-8859-1',
                          'uri'            => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
                          'location'       => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
@@ -219,7 +208,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testGetFunctions()
     {
         $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
-        $server->setClass('ZendTest_Soap_TestAsset_TestClass');
+        $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
 
         $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
 
@@ -248,7 +237,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         }
 
         $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
-        $server->setClass('ZendTest_Soap_TestAsset_TestClass');
+        $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
 
         $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
 
@@ -278,7 +267,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         }
 
         $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
-        $server->setClass('ZendTest_Soap_TestAsset_TestClass');
+        $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
 
         $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
 
@@ -309,7 +298,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         }
 
         $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
-        $server->setClass('ZendTest_Soap_TestAsset_TestClass');
+        $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
 
         $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
 
@@ -321,8 +310,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $ctx = stream_context_create();
 
         $nonWSDLOptions = array('soap_version'   => SOAP_1_1,
-                                'classmap'       => array('TestData1' => 'ZendTest_Soap_TestAsset_TestData1',
-                                                    'TestData2' => 'ZendTest_Soap_TestAsset_TestData2',),
+                                'classmap'       => array('TestData1' => '\ZendTest\Soap\TestAsset\TestData1',
+                                                    'TestData2' => '\ZendTest\Soap\TestAsset\TestData2',),
                                 'encoding'       => 'ISO-8859-1',
                                 'uri'            => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
                                 'location'       => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
@@ -360,7 +349,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         }
 
         $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
-        $server->setClass('ZendTest_Soap_TestAsset_TestClass');
+        $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
 
         $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
 

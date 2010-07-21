@@ -1,9 +1,11 @@
 <?php
 
+namespace ZendTest\Soap\TestAsset;
+
 /**
  * Test Class
  */
-class ZendTest_Soap_TestAsset_WSDLTestClass {
+class WSDLTestClass {
     /**
      * @var integer
      */

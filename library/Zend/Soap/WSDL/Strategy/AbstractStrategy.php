@@ -66,4 +66,20 @@ abstract class AbstractStrategy implements Strategy
     {
         return $this->_context;
     }
+
+    /**
+     * Look through registered types
+     *
+     * @param string $phpType
+     * @return string
+     */
+    public function scanRegisteredTypes($phpType)
+    {
+        if (array_key_exists($phpType, $this->getContext()->getTypes())) {
+            $soapTypes = $this->getContext()->getTypes();
+            return $soapTypes[$phpType];
+        }
+
+        return null;
+    }
 }

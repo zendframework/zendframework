@@ -25,22 +25,7 @@
  */
 namespace ZendTest\Search\Lucene;
 use Zend\Search\Lucene\Document;
-
-/**
- * Zend_Search_Lucene_Document
- */
-
-/**
- * Zend_Search_Lucene_Document_Docx
- */
-
-/**
- * Zend_Search_Lucene_Document_Pptx
- */
-
-/**
- * Zend_Search_Lucene_Document_Xlsx
- */
+use Zend\Search\Lucene;
 
 /**
  * PHPUnit test case
@@ -195,13 +180,13 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
      */
     public function testHtmlInlineTagsIndexing()
     {
-        $index = Zend_Search_Lucene::create(__DIR__ . '/_index/_files');
+        $index = Lucene\Lucene::create(__DIR__ . '/_index/_files');
 
         $htmlString = '<html><head><title>Hello World</title></head>'
                     . '<body><b>Zend</b>Framework' . "\n" . ' <div>Foo</div>Bar ' . "\n"
                     . ' <strong>Test</strong></body></html>';
 
-        $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
+        $doc = Document\Html::loadHTML($htmlString);
 
         $index->addDocument($doc);
 
@@ -210,7 +195,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
         $hits = $index->find('ZendFramework');
         $this->assertEquals(count($hits), 1);
-        
+
         unset($index);
         $this->_clearDirectory(__DIR__ . '/_index/_files');
     }
@@ -234,11 +219,11 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
                 . '</BODY>'
               . '</HTML>';
 
-        $oldNoFollowValue = Zend_Search_Lucene_Document_Html::getExcludeNoFollowLinks();
+        $oldNoFollowValue = Document\Html::getExcludeNoFollowLinks();
 
-        Zend_Search_Lucene_Document_Html::setExcludeNoFollowLinks(false);
-        $doc1 = Zend_Search_Lucene_Document_Html::loadHTML($html);
-        $this->assertTrue($doc1 instanceof Zend_Search_Lucene_Document_Html);
+        Document\Html::setExcludeNoFollowLinks(false);
+        $doc1 = Document\Html::loadHTML($html);
+        $this->assertTrue($doc1 instanceof Document\Html);
         $links = array('link1.html', 'link2.html', 'link3.html', 'link4.html');
         $this->assertTrue(array_values($doc1->getLinks()) == $links);
     }

@@ -1,29 +1,23 @@
-Welcome to the Zend Framework 1.10 Release! 
+Welcome to the Zend Framework 2.0.0 Release! 
 
 RELEASE INFORMATION
 ---------------
-Zend Framework 1.10dev Release ([INSERT REV NUM HERE]).
-Released on <Month> <Day>, <Year>.
+Zend Framework 2.0.0dev1
+
+THIS RELEASE IS A DEVELOPMENT RELEASE AND NOT INTENDED FOR PRODUCTION USE.
+PLEASE USE AT YOUR OWN RISK.
 
 NEW FEATURES
 ------------
 
-* Zend_Filter_Null, contributed by Thomas Weidner
-* Zend_Filter_Compress/Decompress, contributed by Thomas Weidner
-* Zend_Validate_Callback, contributed by Thomas Weidner
-* Zend_Validate_PostCode, contributed by Thomas Weidner
+Please see the ZF2 Requirements page for details on new features and changes:
 
-A detailed list of all features and bug fixes in this release may be found at:
-
-http://framework.zend.com/changelog/
+    http://framework.zend.com/wiki/display/ZFDEV2/Zend+Framework+2.0+Requirements
 
 SYSTEM REQUIREMENTS
 -------------------
 
-Zend Framework requires PHP 5.2.4 or later. Please see our reference
-guide for more detailed system requirements:
-
-http://framework.zend.com/manual/en/requirements.html
+Zend Framework 2 requires PHP 5.3 or later. 
 
 INSTALLATION
 ------------

@@ -86,7 +86,7 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
         $test->setConfig($config);
         $this->assertEquals(3600, $test->getOption('lifetime'));
     }
-    
+
     /**
      * @group ZF-9092
      */
@@ -522,4 +522,18 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
         $this->assertContains('id6', $ids);
     }
 
+    /**
+     * @group ZF-10189
+     */
+    public function testIfFileZendLogWasIncluded()
+    {
+        if (class_exists('Zend_Log', false)) {
+            $this->markTestSkipped('File Zend/Log.php already included');
+        }
+
+        $cacheCore = new Zend_Cache_Core(
+            array('logging' => true)
+        );
+        $this->assertTrue($cacheCore->getOption('logger') instanceof Zend_Log);
+    }
 }

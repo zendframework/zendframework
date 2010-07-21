@@ -23,40 +23,63 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\WSDL\Strategy;
+namespace Zend\Soap\Wsdl\Strategy;
 
-use Zend\Soap\WSDL\Strategy;
+use Zend\Soap\Wsdl\Strategy;
 
 /**
- * Zend_Soap_WSDL_Strategy_AnyType
+ * Abstract class for Zend_Soap_Wsdl_Strategy.
  *
- * @uses       \Zend\Soap\WSDL\Strategy\StrategyInterface
+ * @uses       \Zend\Soap\Wsdl\Strategy
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AnyType implements Strategy
+abstract class AbstractStrategy implements Strategy
 {
     /**
-     * Not needed in this strategy.
+     * Context object
      *
-     * @param \Zend\Soap\WSDL $context
+     * @var \Zend\Soap\Wsdl
      */
-    public function setContext(\Zend\Soap\WSDL $context)
-    {
+    protected $_context;
 
+    /**
+     * Set the Zend_Soap_Wsdl Context object this strategy resides in.
+     *
+     * @param \Zend\Soap\Wsdl $context
+     * @return void
+     */
+    public function setContext(\Zend\Soap\Wsdl $context)
+    {
+        $this->_context = $context;
     }
 
     /**
-     * Returns xsd:anyType regardless of the input.
+     * Return the current Zend_Soap_Wsdl context object
      *
-     * @param string $type
+     * @return \Zend\Soap\Wsdl
+     */
+    public function getContext()
+    {
+        return $this->_context;
+    }
+
+    /**
+     * Look through registered types
+     *
+     * @param string $phpType
      * @return string
      */
-    public function addComplexType($type)
+    public function scanRegisteredTypes($phpType)
     {
-        return 'xsd:anyType';
+        if (array_key_exists($phpType, $this->getContext()->getTypes())) {
+            $soapTypes = $this->getContext()->getTypes();
+            return $soapTypes[$phpType];
+        }
+
+        return null;
     }
 }

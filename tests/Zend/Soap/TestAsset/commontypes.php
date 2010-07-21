@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-// namespace ZendTest\Soap\TestAsset;
+namespace ZendTest\Soap\TestAsset;
 
 /* Test Functions */
 
@@ -33,7 +33,7 @@
  * @param string $arg
  * @return string
  */
-function ZendTest_Soap_TestAsset_TestFunc($who)
+function TestFunc($who)
 {
     return "Hello $who";
 }
@@ -41,7 +41,7 @@ function ZendTest_Soap_TestAsset_TestFunc($who)
 /**
  * Test Function 2
  */
-function ZendTest_Soap_TestAsset_TestFunc2()
+function TestFunc2()
 {
     return "Hello World";
 }
@@ -51,7 +51,7 @@ function ZendTest_Soap_TestAsset_TestFunc2()
  *
  * @return bool
  */
-function ZendTest_Soap_TestAsset_TestFunc3()
+function TestFunc3()
 {
     return false;
 }
@@ -61,7 +61,7 @@ function ZendTest_Soap_TestAsset_TestFunc3()
  *
  * @return bool
  */
-function ZendTest_Soap_TestAsset_TestFunc4()
+function TestFunc4()
 {
     return true;
 }
@@ -71,7 +71,7 @@ function ZendTest_Soap_TestAsset_TestFunc4()
  *
  * @return int
  */
-function ZendTest_Soap_TestAsset_TestFunc5()
+function TestFunc5()
 {
     return 123;
 }
@@ -81,7 +81,7 @@ function ZendTest_Soap_TestAsset_TestFunc5()
  *
  * @return string
  */
-function ZendTest_Soap_TestAsset_TestFunc6()
+function TestFunc6()
 {
     return "string";
 }
@@ -91,7 +91,7 @@ function ZendTest_Soap_TestAsset_TestFunc6()
  *
  * @return array
  */
-function ZendTest_Soap_TestAsset_TestFunc7()
+function TestFunc7()
 {
     return array('foo' => 'bar', 'baz' => true, 1 => false, 'bat' => 123);
 }
@@ -101,7 +101,7 @@ function ZendTest_Soap_TestAsset_TestFunc7()
  *
  * @return StdClass
  */
-function ZendTest_Soap_TestAsset_TestFunc8()
+function TestFunc8()
 {
     $return = (object) array('foo' => 'bar', 'baz' => true, 'bat' => 123, 'qux' => false);
     return $return;
@@ -114,7 +114,7 @@ function ZendTest_Soap_TestAsset_TestFunc8()
  * @param string $bar
  * @return string
  */
-function ZendTest_Soap_TestAsset_TestFunc9($foo, $bar)
+function TestFunc9($foo, $bar)
 {
     return "$foo $bar";
 }
@@ -126,7 +126,7 @@ function ZendTest_Soap_TestAsset_TestFunc9($foo, $bar)
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendTest_Soap_TestAsset_TestFixingMultiplePrototypes
+class TestFixingMultiplePrototypes
 {
     /**
      * Test function
@@ -149,7 +149,7 @@ class ZendTest_Soap_TestAsset_TestFixingMultiplePrototypes
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendTest_Soap_TestAsset_Test {
+class Test {
     /**
      * Test Function 1
      *
@@ -194,7 +194,7 @@ class ZendTest_Soap_TestAsset_Test {
     }
 }
 
-class ZendTest_Soap_TestAsset_AutoDiscoverTestClass1
+class AutoDiscoverTestClass1
 {
     /**
      * @var integer $var
@@ -214,11 +214,11 @@ class ZendTest_Soap_TestAsset_AutoDiscoverTestClass1
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendTest_Soap_TestAsset_AutoDiscoverTestClass2
+class AutoDiscoverTestClass2
 {
     /**
      *
-     * @param ZendTest_Soap_TestAsset_AutoDiscoverTestClass1 $test
+     * @param \ZendTest\Soap\TestAsset\AutoDiscoverTestClass1 $test
      * @return boolean
      */
     public function add(AutoDiscoverTestClass1 $test)
@@ -227,7 +227,7 @@ class ZendTest_Soap_TestAsset_AutoDiscoverTestClass2
     }
 
     /**
-     * @return ZendTest_Soap_TestAsset_AutoDiscoverTestClass1[]
+     * @return \ZendTest\Soap\TestAsset\AutoDiscoverTestClass1[]
      */
     public function fetchAll()
     {
@@ -238,7 +238,7 @@ class ZendTest_Soap_TestAsset_AutoDiscoverTestClass2
     }
 
     /**
-     * @param ZendTest_Soap_TestAsset_AutoDiscoverTestClass1[]
+     * @param \ZendTest\Soap\TestAsset\AutoDiscoverTestClass1[]
      */
     public function addMultiple($test)
     {
@@ -253,7 +253,7 @@ class ZendTest_Soap_TestAsset_AutoDiscoverTestClass2
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendTest_Soap_TestAsset_ComplexTypeB
+class ComplexTypeB
 {
     /**
      * @var string
@@ -272,10 +272,10 @@ class ZendTest_Soap_TestAsset_ComplexTypeB
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendTest_Soap_TestAsset_ComplexTypeA
+class ComplexTypeA
 {
     /**
-     * @var ZendTest_Soap_TestAsset_ComplexTypeB[]
+     * @var \ZendTest\Soap\TestAsset\ComplexTypeB[]
      */
     public $baz = array();
 }
@@ -287,7 +287,7 @@ class ZendTest_Soap_TestAsset_ComplexTypeA
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendTest_Soap_TestAsset_ComplexTest
+class ComplexTest
 {
     /**
      * @var int
@@ -302,7 +302,7 @@ class ZendTest_Soap_TestAsset_ComplexTest
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendTest_Soap_TestAsset_ComplexObjectStructure
+class ComplexObjectStructure
 {
     /**
      * @var boolean
@@ -332,10 +332,10 @@ class ZendTest_Soap_TestAsset_ComplexObjectStructure
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendTest_Soap_TestAsset_ComplexObjectWithObjectStructure
+class ComplexObjectWithObjectStructure
 {
     /**
-     * @var ZendTest_Soap_TestAsset_ComplexTest
+     * @var \ZendTest\Soap\TestAsset\ComplexTest
      */
     public $object;
 }
@@ -347,24 +347,24 @@ class ZendTest_Soap_TestAsset_ComplexObjectWithObjectStructure
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendTest_Soap_TestAsset_MyService
+class MyService
 {
     /**
      *    @param string $foo
-     *    @return ZendTest_Soap_TestAsset_MyResponse[]
+     *    @return \ZendTest\Soap\TestAsset\MyResponse[]
      */
     public function foo($foo) {
     }
     /**
      *    @param string $bar
-     *    @return ZendTest_Soap_TestAsset_MyResponse[]
+     *    @return \ZendTest\Soap\TestAsset\MyResponse[]
      */
     public function bar($bar) {
     }
 
     /**
      *    @param string $baz
-     *    @return ZendTest_Soap_TestAsset_MyResponse[]
+     *    @return \ZendTest\Soap\TestAsset\MyResponse[]
      */
     public function baz($baz) {
     }
@@ -377,7 +377,7 @@ class ZendTest_Soap_TestAsset_MyService
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendTest_Soap_TestAsset_MyServiceSequence
+class MyServiceSequence
 {
     /**
      *    @param string $foo
@@ -414,7 +414,7 @@ class ZendTest_Soap_TestAsset_MyServiceSequence
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendTest_Soap_TestAsset_MyResponse
+class MyResponse
 {
     /**
      * @var string
@@ -429,15 +429,15 @@ class ZendTest_Soap_TestAsset_MyResponse
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendTest_Soap_TestAsset_Recursion
+class Recursion
 {
     /**
-     * @var ZendTest_Soap_TestAsset_Recursion
+     * @var \ZendTest\Soap\TestAsset\Recursion
      */
     public $recursion;
 
     /**
-     * @return ZendTest_Soap_TestAsset_Recursion
+     * @return \ZendTest\Soap\TestAsset\Recursion
      */
     public function create() {}
 }
@@ -445,7 +445,7 @@ class ZendTest_Soap_TestAsset_Recursion
 /**
  * @param string $message
  */
-function ZendTest_Soap_TestAsset_OneWay($message)
+function OneWay($message)
 {
 
 }
@@ -457,7 +457,7 @@ function ZendTest_Soap_TestAsset_OneWay($message)
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendTest_Soap_TestAsset_NoReturnType
+class NoReturnType
 {
     /**
      *
@@ -471,7 +471,7 @@ class ZendTest_Soap_TestAsset_NoReturnType
 
 /* Client test classes */
 /** Test Class */
-class ZendTest_Soap_TestAsset_TestClass {
+class TestClass {
     /**
      * Test Function 1
      *
@@ -517,7 +517,7 @@ class ZendTest_Soap_TestAsset_TestClass {
 }
 
 /** Test class 2 */
-class ZendTest_Soap_TestAsset_TestData1 {
+class TestData1 {
     /**
      * Property1
      *
@@ -534,7 +534,7 @@ class ZendTest_Soap_TestAsset_TestData1 {
 }
 
 /** Test class 2 */
-class ZendTest_Soap_TestAsset_TestData2 {
+class TestData2 {
     /**
      * Property1
      *
@@ -551,7 +551,7 @@ class ZendTest_Soap_TestAsset_TestData2 {
 }
 
 /** Server test classes */
-class ZendTest_Soap_TestAsset_ServerTestClass 
+class ServerTestClass
 {
     /**
      * Test Function 1
@@ -610,7 +610,7 @@ class ZendTest_Soap_TestAsset_ServerTestClass
 if (extension_loaded('soap')) {
 
 /** Local SOAP client */
-class ZendTest_Soap_TestAsset_TestLocalSoapClient extends \SoapClient
+class TestLocalSoapClient extends \SoapClient
 {
     /**
      * Server object

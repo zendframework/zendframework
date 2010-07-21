@@ -23,47 +23,16 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\WSDL\Strategy;
-
-use Zend\Soap\WSDL\Strategy;
+namespace Zend\Soap;
 
 /**
- * Abstract class for Zend_Soap_WSDL_Strategy.
+ * Zend_Soap_Wsdl_Exception
  *
- * @uses       \Zend\Soap\WSDL\Strategy\StrategyInterface
+ * @uses       \Zend\Soap\Exception
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage WSDL
+ * @subpackage Wsdl
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractStrategy implements Strategy
-{
-    /**
-     * Context object
-     *
-     * @var \Zend\Soap\WSDL
-     */
-    protected $_context;
-
-    /**
-     * Set the Zend_Soap_WSDL Context object this strategy resides in.
-     *
-     * @param \Zend\Soap\WSDL $context
-     * @return void
-     */
-    public function setContext(\Zend\Soap\WSDL $context)
-    {
-        $this->_context = $context;
-    }
-
-    /**
-     * Return the current Zend_Soap_WSDL context object
-     *
-     * @return \Zend\Soap\WSDL
-     */
-    public function getContext()
-    {
-        return $this->_context;
-    }
-}
+class WsdlException extends Exception { }

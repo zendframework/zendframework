@@ -23,16 +23,31 @@
 /**
  * @namespace
  */
-namespace Zend\Soap;
+namespace Zend\Soap\Wsdl;
 
 /**
- * Zend_Soap_WSDL_Exception
+ * Interface for Zend_Soap_Wsdl_Strategy.
  *
- * @uses       \Zend\Soap\Exception
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class WSDLException extends Exception { }
+interface Strategy
+{
+    /**
+     * Method accepts the current WSDL context file.
+     *
+     * @param <type> $context
+     */
+    public function setContext(\Zend\Soap\Wsdl $context);
+
+    /**
+     * Create a complex type based on a strategy
+     *
+     * @param  string $type
+     * @return string XSD type
+     */
+    public function addComplexType($type);
+}

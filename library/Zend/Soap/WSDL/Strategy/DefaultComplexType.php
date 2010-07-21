@@ -83,7 +83,7 @@ class DefaultComplexType extends AbstractStrategy
 
         $complexType->appendChild($all);
         $this->getContext()->getSchema()->appendChild($complexType);
-        $this->getContext()->addType($type);
+        $this->getContext()->addType($type, 'tns:' . $translatedType);
 
         return 'tns:' . $translatedType;
     }

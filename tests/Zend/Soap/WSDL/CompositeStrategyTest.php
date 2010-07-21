@@ -112,8 +112,8 @@ class CompositeStrategyTest extends \PHPUnit_Framework_TestCase
         $wsdl = new WSDL('SomeService', 'http://example.com');
         $strategy->setContext($wsdl);
 
-        $this->assertEquals('tns:\ZendTest\Soap\WSDL\Book',   $strategy->addComplexType('\ZendTest\Soap\WSDL\Book'));
-        $this->assertEquals('tns:\ZendTest\Soap\WSDL\Cookie', $strategy->addComplexType('\ZendTest\Soap\WSDL\Cookie'));
+        $this->assertEquals('tns:ZendTest.Soap.WSDL.Book',   $strategy->addComplexType('\ZendTest\Soap\WSDL\Book'));
+        $this->assertEquals('tns:ZendTest.Soap.WSDL.Cookie', $strategy->addComplexType('\ZendTest\Soap\WSDL\Cookie'));
         $this->assertEquals('xsd:anyType', $strategy->addComplexType('\ZendTest\Soap\WSDL\Anything'));
     }
 

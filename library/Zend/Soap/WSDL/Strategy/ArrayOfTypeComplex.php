@@ -84,7 +84,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
         }
 
         // The array for the objects has been created, now build the object definition:
-        if(!in_array($singularType, $this->getContext()->getTypes())) {
+        if(!array_key_exists($singularType, $this->getContext()->getTypes())) {
             parent::addComplexType($singularType);
         }
 
@@ -98,7 +98,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
 
         $xsdComplexTypeName = $this->_getXsdComplexTypeName($singularType);
 
-        if(!in_array($singularType . '[]', $this->getContext()->getTypes())) {
+        if(!array_key_exists($singularType . '[]', $this->getContext()->getTypes())) {
             $complexType = $dom->createElement('xsd:complexType');
             $complexType->setAttribute('name', $xsdComplexTypeName);
 
@@ -116,7 +116,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
             $xsdRestriction->appendChild($xsdAttribute);
 
             $this->getContext()->getSchema()->appendChild($complexType);
-            $this->getContext()->addType($singularType . '[]');
+            $this->getContext()->addType($singularType . '[]', $xsdComplexTypeName);
         }
 
         return $xsdComplexTypeName;

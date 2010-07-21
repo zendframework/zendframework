@@ -23,11 +23,11 @@
 /**
  * @namespace
  */
-namespace ZendTest\Soap\WSDL;
+namespace ZendTest\Soap\Wsdl;
 
 require_once __DIR__."/../TestAsset/commontypes.php";
 
-use Zend\Soap\WSDL;
+use Zend\Soap\Wsdl;
 
 
 /**
@@ -37,7 +37,7 @@ use Zend\Soap\WSDL;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Soap
- * @group      Zend_Soap_WSDL
+ * @group      Zend_Soap_Wsdl
  */
 class ArrayOfTypeComplexStrategyTest extends \PHPUnit_Framework_TestCase
 {
@@ -46,19 +46,19 @@ class ArrayOfTypeComplexStrategyTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->strategy = new \Zend\Soap\WSDL\Strategy\ArrayOfTypeComplex();
-        $this->wsdl = new WSDL('MyService', 'http://localhost/MyService.php', $this->strategy);
+        $this->strategy = new \Zend\Soap\Wsdl\Strategy\ArrayOfTypeComplex();
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php', $this->strategy);
     }
 
     public function testNestingObjectsDeepMakesNoSenseThrowingException()
     {
-        $this->setExpectedException('Zend\Soap\WSDLException');
+        $this->setExpectedException('Zend\Soap\WsdlException');
         $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\ComplexTest[][]');
     }
 
     public function testAddComplexTypeOfNonExistingClassThrowsException()
     {
-        $this->setExpectedException('Zend\Soap\WSDLException');
+        $this->setExpectedException('Zend\Soap\WsdlException');
         $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\UnknownClass[]');
     }
 
@@ -88,7 +88,7 @@ class ArrayOfTypeComplexStrategyTest extends \PHPUnit_Framework_TestCase
     {
         $return = $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\ComplexTest[]');
         $this->assertEquals("tns:ArrayOfZendTest.Soap.TestAsset.ComplexTest", $return);
-        // $this->assertTrue($this->wsdl->getComplexTypeStrategy() instanceof \Zend\Soap\WSDL\Strategy\ArrayOfTypeComplexStrategy);
+        // $this->assertTrue($this->wsdl->getComplexTypeStrategy() instanceof \Zend\Soap\Wsdl\Strategy\ArrayOfTypeComplexStrategy);
 
         $wsdl = $this->wsdl->toXML();
     }
@@ -225,7 +225,7 @@ class ArrayOfTypeComplexStrategyTest extends \PHPUnit_Framework_TestCase
         $this->markTestSkipped('It seems, it\'s obsolete.');
         return;
 
-        $this->setExpectedException('Zend\Soap\WSDLException', 'Infinite recursion');
+        $this->setExpectedException('Zend\Soap\WsdlException', 'Infinite recursion');
         $return = $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\Recursion');
     }
 }

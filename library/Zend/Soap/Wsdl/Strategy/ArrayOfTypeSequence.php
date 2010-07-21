@@ -22,20 +22,20 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\WSDL\Strategy;
+namespace Zend\Soap\Wsdl\Strategy;
+
+use Zend\Soap\Wsdl;
 
 /**
- * Zend_Soap_WSDL_Strategy_ArrayOfTypeSequence
+ * Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence
  *
- * @uses       \Zend\Soap\WSDL\Strategy\DefaultComplexType
+ * @uses       \Zend\Soap\Wsdl\Strategy\DefaultComplexType
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-use Zend\Soap\WSDL;
-
 class ArrayOfTypeSequence extends DefaultComplexType
 {
     /**
@@ -82,14 +82,14 @@ class ArrayOfTypeSequence extends DefaultComplexType
             // This is not an Array anymore, return the xsd simple type
             return $this->getContext()->getType($singularType);
         } else {
-            return 'tns:' . str_repeat('ArrayOf', $level) . ucfirst(WSDL::translateType($singularType));
+            return 'tns:' . str_repeat('ArrayOf', $level) . ucfirst(Wsdl::translateType($singularType));
         }
     }
 
     /**
      * From a nested defintion with type[], get the singular xsd:type
      *
-     * @throws \Zend\Soap\WSDLException When no xsd:simpletype can be detected.
+     * @throws \Zend\Soap\WsdlException When no xsd:simpletype can be detected.
      * @param  string $type
      * @return string
      */

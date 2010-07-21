@@ -26,13 +26,13 @@
 namespace Zend\Soap;
 
 /**
- * Zend_Soap_WSDL_Exception
+ * Zend_Soap_Wsdl_Exception
  *
  * @uses       \Zend\Soap\Exception
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage WSDL
+ * @subpackage Wsdl
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class WSDLException extends Exception { }
+class WsdlException extends Exception { }

@@ -58,7 +58,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $_SERVER['HTTPS'] = "off";
     }
 
-    protected function sanitizeWSDLXmlOutputForOsCompability($xmlstring)
+    protected function sanitizeWsdlXmlOutputForOsCompability($xmlstring)
     {
         $xmlstring = str_replace(array("\r", "\n"), "", $xmlstring);
         $xmlstring = preg_replace('/(>[\s]{1,}<)/', '', $xmlstring);
@@ -148,7 +148,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
               . '</definitions>';
 
         $dom->save(__DIR__.'/TestAsset/setclass.wsdl');
-        $this->assertEquals($wsdl, $this->sanitizeWSDLXmlOutputForOsCompability($dom->saveXML()));
+        $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
         $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
 
         unlink(__DIR__.'/TestAsset/setclass.wsdl');
@@ -305,7 +305,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
               . '</definitions>';
 
         $dom->save(__DIR__.'/TestAsset/setclass.wsdl');
-        $this->assertEquals($wsdl, $this->sanitizeWSDLXmlOutputForOsCompability($dom->saveXML()));
+        $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
         $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
 
         unlink(__DIR__.'/TestAsset/setclass.wsdl');
@@ -326,10 +326,10 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $dom->loadXML(ob_get_clean());
 
         $dom->save(__DIR__.'/TestAsset/setclass.wsdl');
-        $this->assertContains('<message name="testFunc1Out"><part name="return"', $this->sanitizeWSDLXmlOutputForOsCompability($dom->saveXML()));
-        $this->assertContains('<message name="testFunc2Out"><part name="return"', $this->sanitizeWSDLXmlOutputForOsCompability($dom->saveXML()));
-        $this->assertContains('<message name="testFunc3Out"><part name="return"', $this->sanitizeWSDLXmlOutputForOsCompability($dom->saveXML()));
-        $this->assertContains('<message name="testFunc4Out"><part name="return"', $this->sanitizeWSDLXmlOutputForOsCompability($dom->saveXML()));
+        $this->assertContains('<message name="testFunc1Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
+        $this->assertContains('<message name="testFunc2Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
+        $this->assertContains('<message name="testFunc3Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
+        $this->assertContains('<message name="testFunc4Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
 
         unlink(__DIR__.'/TestAsset/setclass.wsdl');
     }
@@ -372,7 +372,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
                 '<message name="ZendTest.Soap.TestAsset.TestFuncIn"><part name="who" type="xsd:string"/></message>'.
                 '<message name="ZendTest.Soap.TestAsset.TestFuncOut"><part name="return" type="xsd:string"/></message>'.
                 '</definitions>';
-        $this->assertEquals($wsdl, $this->sanitizeWSDLXmlOutputForOsCompability($dom->saveXML()), "Bad WSDL generated");
+        $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()), "Bad WSDL generated");
         $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
 
         unlink(__DIR__.'/TestAsset/addfunction.wsdl');
@@ -422,7 +422,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
                 '<message name="ZendTest.Soap.TestAsset.TestFuncIn"><part name="parameters" element="tns:ZendTest.Soap.TestAsset.TestFunc"/></message>'.
                 '<message name="ZendTest.Soap.TestAsset.TestFuncOut"><part name="parameters" element="tns:ZendTest.Soap.TestAsset.TestFuncResponse"/></message>'.
                 '</definitions>';
-        $this->assertEquals($wsdl, $this->sanitizeWSDLXmlOutputForOsCompability($dom->saveXML()), "Bad WSDL generated");
+        $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()), "Bad WSDL generated");
         $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
 
         unlink(__DIR__.'/TestAsset/addfunction.wsdl');
@@ -446,7 +446,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $parts = explode('.', basename($_SERVER['SCRIPT_NAME']));
         $name = $parts[0];
 
-        $wsdl = $this->sanitizeWSDLXmlOutputForOsCompability($dom->saveXML());
+        $wsdl = $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML());
         $this->assertContains('<message name="ZendTest.Soap.TestAsset.TestFuncOut"><part name="return" type="xsd:string"/>', $wsdl);
         $this->assertNotContains('<message name="ZendTest.Soap.TestAsset.TestFuncOut"><part name="ZendTest.Soap.TestAsset.TestFuncReturn"', $wsdl);
         $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
@@ -554,7 +554,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
                 '<message name="ZendTest.Soap.TestAsset.TestFunc9In"><part name="foo" type="xsd:string"/><part name="bar" type="xsd:string"/></message>'.
                 '<message name="ZendTest.Soap.TestAsset.TestFunc9Out"><part name="return" type="xsd:string"/></message>'.
                 '</definitions>';
-        $this->assertEquals($wsdl, $this->sanitizeWSDLXmlOutputForOsCompability($dom->saveXML()), "Generated WSDL did not match expected XML");
+        $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()), "Generated WSDL did not match expected XML");
         $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
 
 
@@ -583,7 +583,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-4117
      */
-    public function testChangeWSDLUriInConstructor()
+    public function testChangeWsdlUriInConstructor()
     {
         $scriptUri = 'http://localhost/my_script.php';
 
@@ -601,7 +601,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-4117
      */
-    public function testChangeWSDLUriViaSetUri()
+    public function testChangeWsdlUriViaSetUri()
     {
         $scriptUri = 'http://localhost/my_script.php';
 
@@ -631,7 +631,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-4117
      */
-    public function testChangingWSDLUriAfterGenerationIsPossible()
+    public function testChangingWsdlUriAfterGenerationIsPossible()
     {
         $scriptUri = 'http://localhost/my_script.php';
 
@@ -662,7 +662,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      * @group ZF-4125
      *
      */
-    public function testUsingClassWithMultipleMethodPrototypesProducesValidWSDL()
+    public function testUsingClassWithMultipleMethodPrototypesProducesValidWsdl()
     {
         $scriptUri = 'http://localhost/my_script.php';
 
@@ -754,7 +754,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testComplexTypesThatAreUsedMultipleTimesAreRecoginzedOnce()
     {
-        $server = new AutoDiscover('Zend\Soap\WSDL\Strategy\ArrayOfTypeComplex');
+        $server = new AutoDiscover('Zend\Soap\Wsdl\Strategy\ArrayOfTypeComplex');
         $server->setClass('\ZendTest\Soap\TestAsset\AutoDiscoverTestClass2');
 
         ob_start();
@@ -792,8 +792,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $wsdlOutput = ob_get_clean();
 
         $this->assertEquals(
-            $this->sanitizeWSDLXmlOutputForOsCompability($wsdlOutput),
-            $this->sanitizeWSDLXmlOutputForOsCompability($server->toXml())
+            $this->sanitizeWsdlXmlOutputForOsCompability($wsdlOutput),
+            $this->sanitizeWsdlXmlOutputForOsCompability($server->toXml())
         );
 
         ob_start();
@@ -801,15 +801,15 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $wsdlOutput = ob_get_clean();
 
         $this->assertEquals(
-            $this->sanitizeWSDLXmlOutputForOsCompability($wsdlOutput),
-            $this->sanitizeWSDLXmlOutputForOsCompability($server->toXml())
+            $this->sanitizeWsdlXmlOutputForOsCompability($wsdlOutput),
+            $this->sanitizeWsdlXmlOutputForOsCompability($server->toXml())
         );
     }
 
     /**
      * @group ZF-5330
      */
-    public function testDumpOrXmlOnlyAfterGeneratedAutoDiscoverWSDL()
+    public function testDumpOrXmlOnlyAfterGeneratedAutoDiscoverWsdl()
     {
         $server = new AutoDiscover();
         try {
@@ -832,7 +832,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnSameArrayOfObjectsResponseOnDifferentMethodsWhenArrayComplex()
     {
-        $autodiscover = new AutoDiscover('Zend\Soap\WSDL\Strategy\ArrayOfTypeComplex');
+        $autodiscover = new AutoDiscover('Zend\Soap\Wsdl\Strategy\ArrayOfTypeComplex');
         $autodiscover->setClass('\ZendTest\Soap\TestAsset\MyService');
         $wsdl = $autodiscover->toXml();
 
@@ -846,7 +846,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnSameArrayOfObjectsResponseOnDifferentMethodsWhenArraySequence()
     {
-        $autodiscover = new AutoDiscover('Zend\Soap\WSDL\Strategy\ArrayOfTypeSequence');
+        $autodiscover = new AutoDiscover('Zend\Soap\Wsdl\Strategy\ArrayOfTypeSequence');
         $autodiscover->setClass('\ZendTest\Soap\TestAsset\MyServiceSequence');
         $wsdl = $autodiscover->toXml();
 
@@ -907,7 +907,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testRecursiveWsdlDependencies()
     {
-        $autodiscover = new AutoDiscover('\Zend\Soap\WSDL\Strategy\ArrayOfTypeComplex');
+        $autodiscover = new AutoDiscover('\Zend\Soap\Wsdl\Strategy\ArrayOfTypeComplex');
         $autodiscover->setClass('\ZendTest\Soap\TestAsset\Recursion');
         $wsdl = $autodiscover->toXml();
 

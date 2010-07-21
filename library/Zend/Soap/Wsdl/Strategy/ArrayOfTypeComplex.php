@@ -23,18 +23,18 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\WSDL\Strategy;
+namespace Zend\Soap\Wsdl\Strategy;
 
 use Zend\Soap;
 
-use Zend\Soap\WSDL;
-use Zend\Soap\WSDLException;
+use Zend\Soap\Wsdl;
+use Zend\Soap\WsdlException;
 
 /**
  * ArrayOfTypeComplex strategy
  *
- * @uses       \Zend\Soap\WSDL\Exception
- * @uses       \Zend\Soap\WSDL\Strategy\DefaultComplexType
+ * @uses       \Zend\Soap\Wsdl\Exception
+ * @uses       \Zend\Soap\Wsdl\Strategy\DefaultComplexType
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL
@@ -64,7 +64,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
             // The following blocks define the Array of Object structure
             return $this->_addArrayOfComplexType($singularType, $type);
         } else {
-            throw new WSDLException(
+            throw new WsdlException(
                 'ArrayOfTypeComplex cannot return nested ArrayOfObject deeper than '
               . 'one level. Use array object properties to return deep nested data.'
             );
@@ -84,7 +84,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
             return $soapType;
         }
 
-        $xsdComplexTypeName = 'ArrayOf' . WSDL::translateType($singularType);
+        $xsdComplexTypeName = 'ArrayOf' . Wsdl::translateType($singularType);
         $xsdComplexType     = 'tns:' . $xsdComplexTypeName;
 
         // Register type here to avoid recursion
@@ -110,7 +110,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
         $xsdAttribute = $dom->createElement('xsd:attribute');
         $xsdAttribute->setAttribute('ref', 'soap-enc:arrayType');
         $xsdAttribute->setAttribute('wsdl:arrayType',
-                                    'tns:' . WSDL::translateType($singularType) . '[]');
+                                    'tns:' . Wsdl::translateType($singularType) . '[]');
         $xsdRestriction->appendChild($xsdAttribute);
 
         $this->getContext()->getSchema()->appendChild($complexType);

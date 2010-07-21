@@ -23,14 +23,14 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\WSDL\Strategy;
+namespace Zend\Soap\Wsdl\Strategy;
 
-use Zend\Soap\WSDL\Strategy;
+use Zend\Soap\Wsdl\Strategy;
 
 /**
- * Abstract class for Zend_Soap_WSDL_Strategy.
+ * Abstract class for Zend_Soap_Wsdl_Strategy.
  *
- * @uses       \Zend\Soap\WSDL\Strategy\StrategyInterface
+ * @uses       \Zend\Soap\Wsdl\Strategy
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL
@@ -42,25 +42,25 @@ abstract class AbstractStrategy implements Strategy
     /**
      * Context object
      *
-     * @var \Zend\Soap\WSDL
+     * @var \Zend\Soap\Wsdl
      */
     protected $_context;
 
     /**
-     * Set the Zend_Soap_WSDL Context object this strategy resides in.
+     * Set the Zend_Soap_Wsdl Context object this strategy resides in.
      *
-     * @param \Zend\Soap\WSDL $context
+     * @param \Zend\Soap\Wsdl $context
      * @return void
      */
-    public function setContext(\Zend\Soap\WSDL $context)
+    public function setContext(\Zend\Soap\Wsdl $context)
     {
         $this->_context = $context;
     }
 
     /**
-     * Return the current Zend_Soap_WSDL context object
+     * Return the current Zend_Soap_Wsdl context object
      *
-     * @return \Zend\Soap\WSDL
+     * @return \Zend\Soap\Wsdl
      */
     public function getContext()
     {

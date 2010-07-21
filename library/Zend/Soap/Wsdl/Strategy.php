@@ -23,40 +23,31 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\WSDL\Strategy;
-
-use Zend\Soap\WSDL\Strategy;
+namespace Zend\Soap\Wsdl;
 
 /**
- * Zend_Soap_WSDL_Strategy_AnyType
+ * Interface for Zend_Soap_Wsdl_Strategy.
  *
- * @uses       \Zend\Soap\WSDL\Strategy\StrategyInterface
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AnyType implements Strategy
+interface Strategy
 {
     /**
-     * Not needed in this strategy.
+     * Method accepts the current WSDL context file.
      *
-     * @param \Zend\Soap\WSDL $context
+     * @param <type> $context
      */
-    public function setContext(\Zend\Soap\WSDL $context)
-    {
-
-    }
+    public function setContext(\Zend\Soap\Wsdl $context);
 
     /**
-     * Returns xsd:anyType regardless of the input.
+     * Create a complex type based on a strategy
      *
-     * @param string $type
-     * @return string
+     * @param  string $type
+     * @return string XSD type
      */
-    public function addComplexType($type)
-    {
-        return 'xsd:anyType';
-    }
+    public function addComplexType($type);
 }

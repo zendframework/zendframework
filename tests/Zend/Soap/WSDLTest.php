@@ -584,11 +584,12 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
-            $wsdl->addType('\ZendTest\Soap\TestAsset\WSDLTestClass');
-            $wsdl->addType('\ZendTest\Soap\TestAsset\WSDLTestClass');
+            $wsdl->addType('\ZendTest\Soap\TestAsset\WSDLTestClass', 'tns:SomeTypeName');
+            $wsdl->addType('\ZendTest\Soap\TestAsset\WSDLTestClass', 'tns:AnotherTypeName');
             $types = $wsdl->getTypes();
             $this->assertEquals(1, count($types));
-            $this->assertEquals(array('\ZendTest\Soap\TestAsset\WSDLTestClass'), $types);
+            $this->assertEquals(array('\ZendTest\Soap\TestAsset\WSDLTestClass' => 'tns:SomeTypeName'),
+                                $types);
         } catch(WSDLException $e) {
             $this->fail();
         }
@@ -598,10 +599,14 @@ class WSDLTest extends \PHPUnit_Framework_TestCase
     {
         $wsdl = new WSDL('MyService', 'http://localhost/MyService.php');
         $wsdl->addComplexType('\ZendTest\Soap\TestAsset\WSDLTestClass');
-        $this->assertEquals(array('\ZendTest\Soap\TestAsset\WSDLTestClass'), $wsdl->getTypes());
+        $this->assertEquals(array('\ZendTest\Soap\TestAsset\WSDLTestClass' =>
+                                     'tns:ZendTest.Soap.TestAsset.WSDLTestClass'),
+                            $wsdl->getTypes());
 
         $wsdl->addComplexType('\ZendTest\Soap\TestAsset\WSDLTestClass');
-        $this->assertEquals(array('\ZendTest\Soap\TestAsset\WSDLTestClass'), $wsdl->getTypes());
+        $this->assertEquals(array('\ZendTest\Soap\TestAsset\WSDLTestClass' =>
+                                     'tns:ZendTest.Soap.TestAsset.WSDLTestClass'),
+                            $wsdl->getTypes());
     }
 
     function testAddComplexType()

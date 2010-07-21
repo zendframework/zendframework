@@ -43,8 +43,6 @@ use Zend\Soap\WSDLException;
  */
 class ArrayOfTypeComplex extends DefaultComplexType
 {
-    protected $_inProcess = array();
-
     /**
      * Add an ArrayOfType based on the xsd:complexType syntax if type[] is detected in return value doc comment.
      *
@@ -53,78 +51,71 @@ class ArrayOfTypeComplex extends DefaultComplexType
      */
     public function addComplexType($type)
     {
-        if(isset($this->_inProcess[$type])) {
-            throw new WSDLException("Infinite recursion, cannot nest '$type' into itself.");
+        if (($soapType = $this->scanRegisteredTypes($type)) !== null) {
+            return $soapType;
         }
-        $this->_inProcess[$type] = $type;
 
+        $singularType = $this->_getSingularPhpType($type);
         $nestingLevel = $this->_getNestedCount($type);
 
-        if($nestingLevel > 1) {
+        if($nestingLevel == 0) {
+            return parent::addComplexType($singularType);
+        } else if($nestingLevel == 1) {
+            // The following blocks define the Array of Object structure
+            return $this->_addArrayOfComplexType($singularType, $type);
+        } else {
             throw new WSDLException(
                 'ArrayOfTypeComplex cannot return nested ArrayOfObject deeper than '
               . 'one level. Use array object properties to return deep nested data.'
             );
         }
-
-        $singularType = $this->_getSingularPhpType($type);
-
-        if(!class_exists($singularType)) {
-            throw new WSDLException(sprintf(
-                'Cannot add a complex type %s that is not an object or where '
-              . 'class could not be found in \'DefaultComplexType\' strategy.', $type
-            ));
-        }
-
-        if($nestingLevel == 1) {
-            // The following blocks define the Array of Object structure
-            $xsdComplexTypeName = $this->_addArrayOfComplexType($singularType, $type);
-        } else {
-            $xsdComplexTypeName = WSDL::translateType($singularType);
-        }
-
-        // The array for the objects has been created, now build the object definition:
-        if(!in_array($singularType, $this->getContext()->getTypes())) {
-            parent::addComplexType($singularType);
-        }
-
-        unset($this->_inProcess[$type]);
-        return 'tns:' . $xsdComplexTypeName;
     }
 
+    /**
+     * Add an ArrayOfType based on the xsd:complexType syntax if type[] is detected in return value doc comment.
+     *
+     * @param string $singularType   e.g. '\MyNamespace\MyClassname'
+     * @param string $type           e.g. '\MyNamespace\MyClassname[]'
+     * @return string tns:xsd-type   e.g. 'tns:ArrayOfMyNamespace.MyClassname'
+     */
     protected function _addArrayOfComplexType($singularType, $type)
     {
-        $dom = $this->getContext()->toDomDocument();
-
-        $xsdComplexTypeName = $this->_getXsdComplexTypeName($singularType);
-
-        if(!in_array($singularType . '[]', $this->getContext()->getTypes())) {
-            $complexType = $dom->createElement('xsd:complexType');
-            $complexType->setAttribute('name', $xsdComplexTypeName);
-
-            $complexContent = $dom->createElement('xsd:complexContent');
-            $complexType->appendChild($complexContent);
-
-            $xsdRestriction = $dom->createElement('xsd:restriction');
-            $xsdRestriction->setAttribute('base', 'soap-enc:Array');
-            $complexContent->appendChild($xsdRestriction);
-
-            $xsdAttribute = $dom->createElement('xsd:attribute');
-            $xsdAttribute->setAttribute('ref', 'soap-enc:arrayType');
-            $xsdAttribute->setAttribute('wsdl:arrayType',
-                                        'tns:' . WSDL::translateType($singularType) . '[]');
-            $xsdRestriction->appendChild($xsdAttribute);
-
-            $this->getContext()->getSchema()->appendChild($complexType);
-            $this->getContext()->addType($singularType . '[]');
+        if (($soapType = $this->scanRegisteredTypes($type)) !== null) {
+            return $soapType;
         }
 
-        return $xsdComplexTypeName;
-    }
+        $xsdComplexTypeName = 'ArrayOf' . WSDL::translateType($singularType);
+        $xsdComplexType     = 'tns:' . $xsdComplexTypeName;
 
-    protected function _getXsdComplexTypeName($type)
-    {
-        return 'ArrayOf' . WSDL::translateType($type);
+        // Register type here to avoid recursion
+        $this->getContext()->addType($type, $xsdComplexType);
+
+        // Process singular type using DefaultComplexType strategy
+        parent::addComplexType($singularType);
+
+
+        // Add array type structure to WSDL document
+        $dom = $this->getContext()->toDomDocument();
+
+        $complexType = $dom->createElement('xsd:complexType');
+        $complexType->setAttribute('name', $xsdComplexTypeName);
+
+        $complexContent = $dom->createElement('xsd:complexContent');
+        $complexType->appendChild($complexContent);
+
+        $xsdRestriction = $dom->createElement('xsd:restriction');
+        $xsdRestriction->setAttribute('base', 'soap-enc:Array');
+        $complexContent->appendChild($xsdRestriction);
+
+        $xsdAttribute = $dom->createElement('xsd:attribute');
+        $xsdAttribute->setAttribute('ref', 'soap-enc:arrayType');
+        $xsdAttribute->setAttribute('wsdl:arrayType',
+                                    'tns:' . WSDL::translateType($singularType) . '[]');
+        $xsdRestriction->appendChild($xsdAttribute);
+
+        $this->getContext()->getSchema()->appendChild($complexType);
+
+        return $xsdComplexType;
     }
 
     /**

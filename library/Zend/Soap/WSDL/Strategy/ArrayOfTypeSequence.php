@@ -52,25 +52,20 @@ class ArrayOfTypeSequence extends DefaultComplexType
             $singularType = $this->_getSingularType($type);
 
             for($i = 1; $i <= $nestedCounter; $i++) {
-                $complexType = $this->_getTypeBasedOnNestingLevel($singularType, $i);
-                $complexTypeName = substr($complexType, strpos($complexType, ':') + 1);
+                $complexType    = $this->_getTypeBasedOnNestingLevel($singularType, $i);
+                $complexTypePhp = $singularType . str_repeat('[]', $i);
+                $childType      = $this->_getTypeBasedOnNestingLevel($singularType, $i-1);
 
-                $childType = $this->_getTypeBasedOnNestingLevel($singularType, $i-1);
-
-                $this->_addSequenceType($complexTypeName,
-                                        $childType,
-                                        $singularType . str_repeat('[]', $i));
+                $this->_addSequenceType($complexType, $childType, $complexTypePhp);
             }
-            // adding the PHP type which is resolved to a nested XSD type. therefore add only once.
-            $this->getContext()->addType($type);
 
-            return 'tns:' . $complexTypeName;
-        } else if (!in_array($type, $this->getContext()->getTypes())) {
+            return $complexType;
+        } else if (($soapType = $this->scanRegisteredTypes($type)) !== null) {
+            // Existing complex type
+            return $soapType;
+        } else {
             // New singular complex type
             return parent::addComplexType($type);
-        } else {
-            // Existing complex type
-            return $this->getContext()->getType($type);
         }
     }
 
@@ -117,32 +112,39 @@ class ArrayOfTypeSequence extends DefaultComplexType
     /**
      * Append the complex type definition to the WSDL via the context access
      *
-     * @param  string $arrayTypeName  Array type name (e.g. 'ArrayOf...')
+     * @param  string $arrayType      Array type name (e.g. 'tns:ArrayOfArrayOfInt')
      * @param  string $childType      Qualified array items type (e.g. 'xsd:int', 'tns:ArrayOfInt')
      * @param  string $phpArrayType   PHP type (e.g. 'int[][]', '\MyNamespace\MyClassName[][][]')
      * @return void
      */
-    protected function _addSequenceType($arrayTypeName, $childType, $phpArrayType)
+    protected function _addSequenceType($arrayType, $childType, $phpArrayType)
     {
-        if (!in_array($phpArrayType, $this->getContext()->getTypes())) {
-            $dom = $this->getContext()->toDomDocument();
-
-            $complexType = $dom->createElement('xsd:complexType');
-            $complexType->setAttribute('name', $arrayTypeName);
-
-            $sequence = $dom->createElement('xsd:sequence');
-
-            $element = $dom->createElement('xsd:element');
-            $element->setAttribute('name',      'item');
-            $element->setAttribute('type',      $childType);
-            $element->setAttribute('minOccurs', 0);
-            $element->setAttribute('maxOccurs', 'unbounded');
-            $sequence->appendChild($element);
-
-            $complexType->appendChild($sequence);
-
-            $this->getContext()->getSchema()->appendChild($complexType);
-            $this->getContext()->addType($phpArrayType);
+        if (($soapType = $this->scanRegisteredTypes($phpArrayType)) !== null) {
+            return;
         }
+
+        // Register type here to avoid recursion
+        $this->getContext()->addType($phpArrayType, $arrayType);
+
+
+        $dom = $this->getContext()->toDomDocument();
+
+        $arrayTypeName = substr($arrayType, strpos($arrayType, ':') + 1);
+
+        $complexType = $dom->createElement('xsd:complexType');
+        $complexType->setAttribute('name', $arrayTypeName);
+
+        $sequence = $dom->createElement('xsd:sequence');
+
+        $element = $dom->createElement('xsd:element');
+        $element->setAttribute('name',      'item');
+        $element->setAttribute('type',      $childType);
+        $element->setAttribute('minOccurs', 0);
+        $element->setAttribute('maxOccurs', 'unbounded');
+        $sequence->appendChild($element);
+
+        $complexType->appendChild($sequence);
+
+        $this->getContext()->getSchema()->appendChild($complexType);
     }
 }

@@ -457,12 +457,13 @@ class WSDL
      * Add a complex type name that is part of this WSDL and can be used in signatures.
      *
      * @param string $type
+     * @param string $wsdlType
      * @return \Zend\Soap\WSDL
      */
-    public function addType($type)
+    public function addType($type, $wsdlType)
     {
-        if(!in_array($type, $this->_includedTypes)) {
-            $this->_includedTypes[] = $type;
+        if(!isset($this->_includedTypes[$type])) {
+            $this->_includedTypes[$type] = $wsdlType;
         }
         return $this;
     }
@@ -608,8 +609,8 @@ class WSDL
      */
     public function addComplexType($type)
     {
-        if (in_array($type, $this->getTypes())) {
-            return 'tns:' . self::translateType($type);
+        if (isset($this->_includedTypes[$type])) {
+            return $this->_includedTypes[$type];
         }
         $this->addSchemaTypeSection();
 

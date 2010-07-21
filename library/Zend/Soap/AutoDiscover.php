@@ -300,20 +300,20 @@ class AutoDiscover implements \Zend\Server\Server
     {
         $uri = $this->getUri();
 
-        $translatedClass = WSDL::translateType($class);
+        $translatedClassName = WSDL::translateType($class);
 
-        $wsdl = new $this->_wsdlClass($translatedClass, $uri, $this->_strategy);
+        $wsdl = new $this->_wsdlClass($translatedClassName, $uri, $this->_strategy);
 
         // The wsdl:types element must precede all other elements (WS-I Basic Profile 1.1 R2023)
         $wsdl->addSchemaTypeSection();
 
-        $port = $wsdl->addPortType($translatedClass . 'Port');
-        $binding = $wsdl->addBinding($translatedClass . 'Binding', 'tns:' . $translatedClass . 'Port');
+        $port = $wsdl->addPortType($translatedClassName . 'Port');
+        $binding = $wsdl->addBinding($translatedClassName . 'Binding', 'tns:' . $translatedClassName . 'Port');
 
         $wsdl->addSoapBinding($binding, $this->_bindingStyle['style'], $this->_bindingStyle['transport']);
-        $wsdl->addService($translatedClass . 'Service',
-                          $translatedClass . 'Port',
-                          'tns:' . $translatedClass . 'Binding', $uri);
+        $wsdl->addService($translatedClassName . 'Service',
+                          $translatedClassName . 'Port',
+                          'tns:' . $translatedClassName . 'Binding', $uri);
         foreach ($this->_reflection->reflectClass($class)->getMethods() as $method) {
             $this->_addFunctionToWSDL($method, $wsdl, $port, $binding);
         }

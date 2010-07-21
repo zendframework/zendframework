@@ -850,8 +850,6 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $autodiscover->setClass('\ZendTest\Soap\TestAsset\MyServiceSequence');
         $wsdl = $autodiscover->toXml();
 
-var_dump("\n" . $wsdl) ; exit();
-
         $this->assertEquals(1, substr_count($wsdl, '<xsd:complexType name="ArrayOfString">'));
         $this->assertEquals(1, substr_count($wsdl, '<xsd:complexType name="ArrayOfArrayOfString">'));
         $this->assertEquals(1, substr_count($wsdl, '<xsd:complexType name="ArrayOfArrayOfArrayOfString">'));
@@ -867,7 +865,7 @@ var_dump("\n" . $wsdl) ; exit();
         $autodiscover = new AutoDiscover();
         $autodiscover->setUri("http://example.com/?a=b&amp;b=c");
 
-        $autodiscover->setClass("\ZendTest\Soap\TestAsset\Test");
+        $autodiscover->setClass('\ZendTest\Soap\TestAsset\Test');
         $wsdl = $autodiscover->toXml();
 
         $this->assertContains("http://example.com/?a=b&amp;b=c", $wsdl);
@@ -926,10 +924,10 @@ var_dump("\n" . $wsdl) ; exit();
 
     public function assertWsdlPathExists($xml, $path)
     {
-        $doc = new DOMDocument('UTF-8');
+        $doc = new \DOMDocument('UTF-8');
         $doc->loadXML($xml);
 
-        $xpath = new DOMXPath($doc);
+        $xpath = new \DOMXPath($doc);
         $xpath->registerNamespace('wsdl', 'http://schemas.xmlsoap.org/wsdl/');
 
         $nodes = $xpath->query($path);

@@ -924,10 +924,10 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
     public function assertWsdlPathExists($xml, $path)
     {
-        $doc = new DOMDocument('UTF-8');
+        $doc = new \DOMDocument('UTF-8');
         $doc->loadXML($xml);
 
-        $xpath = new DOMXPath($doc);
+        $xpath = new \DOMXPath($doc);
         $xpath->registerNamespace('wsdl', 'http://schemas.xmlsoap.org/wsdl/');
 
         $nodes = $xpath->query($path);

@@ -609,9 +609,8 @@ class WSDL
      */
     public function addComplexType($type)
     {
-        if (array_key_exists($type, $this->getTypes())) {
-            $definedTypes = $this->getTypes();
-            return $definedTypes[$type];
+        if (isset($this->_includedTypes[$type])) {
+            return $this->_includedTypes[$type];
         }
         $this->addSchemaTypeSection();
 

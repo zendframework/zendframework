@@ -60,9 +60,9 @@ class ArrayOfTypeSequence extends DefaultComplexType
             }
 
             return $complexType;
-        } else if (array_key_exists($type, $this->getContext()->getTypes())) {
+        } else if (($soapType = $this->scanRegisteredTypes($type)) !== null) {
             // Existing complex type
-            return $this->getContext()->getType($type);
+            return $soapType;
         } else {
             // New singular complex type
             return parent::addComplexType($type);
@@ -119,26 +119,32 @@ class ArrayOfTypeSequence extends DefaultComplexType
      */
     protected function _addSequenceType($arrayType, $childType, $phpArrayType)
     {
-        if (!array_key_exists($phpArrayType, $this->getContext()->getTypes())) {
-            $dom = $this->getContext()->toDomDocument();
-
-            $complexType = $dom->createElement('xsd:complexType');
-            // Remove namespace preffix to construct type name
-            $complexType->setAttribute('name', substr($arrayType, strpos($arrayType, ':') + 1));
-
-            $sequence = $dom->createElement('xsd:sequence');
-
-            $element = $dom->createElement('xsd:element');
-            $element->setAttribute('name',      'item');
-            $element->setAttribute('type',      $childType);
-            $element->setAttribute('minOccurs', 0);
-            $element->setAttribute('maxOccurs', 'unbounded');
-            $sequence->appendChild($element);
-
-            $complexType->appendChild($sequence);
-
-            $this->getContext()->getSchema()->appendChild($complexType);
-            $this->getContext()->addType($phpArrayType, $arrayType);
+        if (($soapType = $this->scanRegisteredTypes($phpArrayType)) !== null) {
+            return;
         }
+
+        // Register type here to avoid recursion
+        $this->getContext()->addType($phpArrayType, $arrayType);
+
+
+        $dom = $this->getContext()->toDomDocument();
+
+        $arrayTypeName = substr($arrayType, strpos($arrayType, ':') + 1);
+
+        $complexType = $dom->createElement('xsd:complexType');
+        $complexType->setAttribute('name', $arrayTypeName);
+
+        $sequence = $dom->createElement('xsd:sequence');
+
+        $element = $dom->createElement('xsd:element');
+        $element->setAttribute('name',      'item');
+        $element->setAttribute('type',      $childType);
+        $element->setAttribute('minOccurs', 0);
+        $element->setAttribute('maxOccurs', 'unbounded');
+        $sequence->appendChild($element);
+
+        $complexType->appendChild($sequence);
+
+        $this->getContext()->getSchema()->appendChild($complexType);
     }
 }

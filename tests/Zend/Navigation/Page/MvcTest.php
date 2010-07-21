@@ -51,7 +51,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
         $this->_oldRouter = $this->_front->getRouter();
 
         $this->_front->resetInstance();
-        $this->_front->setRequest(new Request\HTTP());
+        $this->_front->setRequest(new Request\Http());
         $this->_front->getRouter()->addDefaultRoutes();
     }
 
@@ -60,7 +60,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
         if (null !== $this->_oldRequest) {
             $this->_front->setRequest($this->_oldRequest);
         } else {
-            $this->_front->setRequest(new Request\HTTP());
+            $this->_front->setRequest(new Request\Http());
         }
         $this->_front->setRouter($this->_oldRouter);
     }

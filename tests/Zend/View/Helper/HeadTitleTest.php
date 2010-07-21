@@ -212,8 +212,8 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
     public function testCanPrependTitlesUsingDefaultAttachOrder()
     {
         $this->helper->setDefaultAttachOrder('PREPEND');
-        $placeholder = $this->helper->headTitle('Foo');
-        $placeholder = $this->helper->headTitle('Bar');
+        $placeholder = $this->helper->direct('Foo');
+        $placeholder = $this->helper->direct('Bar');
         $this->assertContains('BarFoo', $placeholder->toString());
     }
 }

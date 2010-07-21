@@ -26,7 +26,7 @@
 namespace ZendTest\GData\App;
 use Zend\GData\App;
 use Zend\GData;
-use Zend\HTTP;
+use Zend\Http;
 use Zend\GData\App\Extension;
 use Zend\URI;
 
@@ -158,7 +158,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->entry->getHttpClient(),
                 $s->getHttpClient());
 
-        $c = new HTTP\Client();
+        $c = new Http\Client();
         $s->setHttpClient($c);
         $this->assertEquals($this->entry->getHttpClient(),
                 $s->getHttpClient($c));
@@ -174,10 +174,10 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(get_class($s->getHttpClient()),
                 'Zend\GData\HttpClient');
 
-        $c = new HTTP\Client();
+        $c = new Http\Client();
         $this->entry->setHttpClient($c);
         $this->assertEquals(get_class($s->getHttpClient()),
-                'Zend\HTTP\Client');
+                'Zend\Http\Client');
     }
 
     public function testSaveSupportsGDataV2()
@@ -291,7 +291,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = $this->service->newEntry();
         $newEntry = $entry->save($uri);
         $request = $this->adapter->popRequest();
-        $uriObject = new URI\URL($uri);
+        $uriObject = new Uri\Url($uri);
         $uriObject->setPort('80');
         $this->assertEquals($uriObject, $request->uri);
     }
@@ -407,7 +407,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setEtag($etag);
         $newEntry = $entry->reload();
         $requestUri = $this->adapter->popRequest()->uri;
-        $expectedUriObject = new URI\URL($expectedUri);
+        $expectedUriObject = new Uri\Url($expectedUri);
         $expectedUriObject->setPort('80');
         $this->assertEquals($expectedUriObject, $requestUri);
     }
@@ -426,7 +426,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setEtag($etag);
         $newEntry = $entry->reload($uriOverride);
         $requestUri = $this->adapter->popRequest()->uri;
-        $uriOverrideObject = new URI\URL($uriOverride);
+        $uriOverrideObject = new Uri\Url($uriOverride);
         $uriOverrideObject->setPort('80');
         $this->assertEquals($uriOverrideObject, $requestUri);
     }

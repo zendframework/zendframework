@@ -24,7 +24,7 @@ namespace ZendTest\Dojo\View\Helper;
 
 use Zend\Dojo\View\Helper\NumberSpinner as NumberSpinnerHelper,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
-    Zend\JSON\JSON,
+    Zend\Json\Json,
     Zend\Registry,
     Zend\View\View;
 
@@ -107,7 +107,7 @@ class NumberSpinnerTest extends \PHPUnit_Framework_TestCase
             $this->fail('Did not serialize constraints');
         }
         $constraints = str_replace("'", '"', $m[1]);
-        $constraints = JSON::decode($constraints);
+        $constraints = Json::decode($constraints);
         $this->assertTrue(is_array($constraints), var_export($m[1], 1));
         $this->assertTrue(array_key_exists('min', $constraints));
         $this->assertTrue(array_key_exists('max', $constraints));

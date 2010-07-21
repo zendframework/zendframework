@@ -143,7 +143,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
 
         $token = $this->_router->route($request);
 
-        $this->assertType('Zend\Controller\Request\HTTP', $token);
+        $this->assertType('Zend\Controller\Request\Http', $token);
     }
 
     public function testRouteWithIncorrectRequest()
@@ -515,7 +515,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($token->getParam('bogus'));
     }
 
-    public function testAssemblingWithHostnameHTTP()
+    public function testAssemblingWithHostnameHttp()
     {
         $route = new Route\Hostname('www.zend.com');
 
@@ -524,7 +524,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://www.zend.com', $this->_router->assemble(array(), 'hostname-route'));
     }
 
-    public function testAssemblingWithHostnameHTTPs()
+    public function testAssemblingWithHostnameHttps()
     {
         $backupServer = $_SERVER;
         $_SERVER['HTTPS'] = 'on';
@@ -538,7 +538,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
         $_SERVER = $backupServer;
     }
 
-    public function testAssemblingWithHostnameThroughChainHTTP()
+    public function testAssemblingWithHostnameThroughChainHttp()
     {
         $foo = new Route\Hostname('www.zend.com');
         $bar = new Route\StaticRoute('bar');
@@ -551,7 +551,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://www.zend.com/bar', $this->_router->assemble(array(), 'foo-bar'));
     }
 
-    public function testAssemblingWithHostnameWithChainHTTP()
+    public function testAssemblingWithHostnameWithChainHttp()
     {
         $foo = new Route\Hostname('www.zend.com');
         $bar = new Route\StaticRoute('bar');
@@ -702,7 +702,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
     {
         $this->_router->addRoute(
             'default', 
-            new Zend_Controller_Router_Route(
+            new Route\Route(
                 ':controller/:action/*',
                 array('controller' => 'index', 'action' => 'index')
             )
@@ -728,7 +728,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
  *
  * @uses Zend_Controller_Request_Interface
  */
-class Request extends \Zend\Controller\Request\HTTP
+class Request extends \Zend\Controller\Request\Http
 {
     protected $_host;
     protected $_port;
@@ -739,15 +739,15 @@ class Request extends \Zend\Controller\Request\HTTP
             $uri = 'http://localhost/foo/bar/baz/2';
         }
 
-        //$uri = \Zend\URI\URL::fromString($uri);
-        $url = new \Zend\URI\URL($uri);
+        //$uri = \Zend\Uri\Url::fromString($uri);
+        $url = new \Zend\Uri\Url($uri);
         $this->_host = $url->getHost();
         $this->_port = $url->getPort();
 
         parent::__construct($url);
     }
 
-    public function getHTTPHost() {
+    public function getHttpHost() {
         $return = $this->_host;
         if ($this->_port)  $return .= ':' . $this->_port;
         return $return;

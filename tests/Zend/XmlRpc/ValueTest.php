@@ -148,7 +148,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     {
         Value::setGenerator($generator);
         $bigInt = (string)(PHP_INT_MAX + 1);
-        $native = new BigInteger\BigInteger();
+        $native = new BigInteger();
         $native->init($bigInt);
 
         $xmlStrings = array("<value><i8>$bigInt</i8></value>",
@@ -171,7 +171,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $types = array(Value::XMLRPC_TYPE_APACHEI8,
                        Value::XMLRPC_TYPE_I8);
 
-        $bigInt = new BigInteger\BigInteger();
+        $bigInt = new BigInteger();
         $bigInt->init($native);
 
         foreach ($types as $type) {

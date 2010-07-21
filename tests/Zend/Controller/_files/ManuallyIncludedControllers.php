@@ -20,10 +20,7 @@
  * @version    $Id: ManuallyIncludedControllers.php $
  */
 
-require_once 'PHPUnit/Util/Filter.php';
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
-require_once 'Zend/Controller/Action.php';
 
 /**
  * Mock file for testbed
@@ -34,21 +31,21 @@ require_once 'Zend/Controller/Action.php';
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class IncludedController extends Zend_Controller_Action
+class IncludedController extends \Zend\Controller\Action
 {
     public function indexAction()
     {
     }
 }
 
-class Default_IncludedPrefixController extends Zend_Controller_Action
+class Default_IncludedPrefixController extends \Zend\Controller\Action
 {
     public function indexAction()
     {
     }
 }
 
-class Admin_IncludedAdminController extends Zend_Controller_Action
+class Admin_IncludedAdminController extends \Zend\Controller\Action
 {
     public function indexAction()
     {

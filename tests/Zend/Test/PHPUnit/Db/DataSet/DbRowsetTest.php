@@ -42,7 +42,7 @@ class DbRowsetTest extends \PHPUnit_Framework_TestCase
             'rowClass' => 'stdClass',
             'data'     => array(array('foo' => 'bar'), array('foo' => 'baz')),
         );
-        $rowset = new \Zend\DB\Table\Rowset($config);
+        $rowset = new \Zend\Db\Table\Rowset($config);
         return $rowset;
     }
 

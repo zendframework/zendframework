@@ -24,7 +24,7 @@
  */
 namespace Zend\Soap;
 
-use Zend\URI\URL;
+use Zend\Uri\Url;
 
 /**
  * \Zend\Soap\WSDL

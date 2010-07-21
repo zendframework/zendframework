@@ -25,13 +25,13 @@
  */
 namespace Zend\Dojo\View\Helper;
 
-use Zend\JSON\JSON;
+use Zend\Json\Json;
 
 /**
  * Dojo ComboBox dijit
  *
  * @uses       \Zend\Dojo\View\Helper\Dijit
- * @uses       \Zend\JSON\JSON
+ * @uses       \Zend\Json\Json
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -142,7 +142,7 @@ class ComboBox extends Dijit
                 $this->dojo->addJavascript('var ' . $storeParams['jsId'] . ";\n");
                 $js = $storeParams['jsId'] . ' = '
                     . 'new ' . $storeParams['dojoType'] . '('
-                    .     JSON::encode($extraParams)
+                    .     Json::encode($extraParams)
                     . ");\n";
                 $js = "function() {\n$js\n}";
                 $this->dojo->_addZendLoad($js);

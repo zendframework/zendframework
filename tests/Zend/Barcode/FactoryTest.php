@@ -28,7 +28,7 @@ use Zend\Barcode;
 use Zend\Barcode\Renderer;
 use Zend\Barcode\Object;
 use Zend\Config;
-use Zend\PDF;
+use Zend\Pdf;
 
 /**
  * @category   Zend
@@ -59,7 +59,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testMinimalFactoryWithRenderer()
     {
         $renderer = Barcode\Barcode::factory('code39', 'PDF');
-        $this->assertTrue($renderer instanceof Renderer\PDF);
+        $this->assertTrue($renderer instanceof Renderer\Pdf);
         $this->assertTrue($renderer->getBarcode() instanceof Object\Code39);
     }
 
@@ -358,7 +358,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         Barcode\Barcode::setBarcodeFont(__DIR__ . '/Object/_fonts/Vera.ttf');
         $resource = Barcode\Barcode::draw('code25', 'PDF');
-        $this->assertTrue($resource instanceof PDF\PDFDocument);
+        $this->assertTrue($resource instanceof Pdf\PdfDocument);
         Barcode\Barcode::setBarcodeFont('');
     }
 

@@ -59,7 +59,7 @@ class MysqlIntegrationTest extends AbstractTestCase
             'dbname'   => TESTS_ZEND_DB_ADAPTER_MYSQL_DATABASE,
         );
 
-        $this->dbAdapter = \Zend\DB\DB::factory('PDOMySQL', $params);
+        $this->dbAdapter = \Zend\Db\Db::factory('PdoMysql', $params);
         $this->dbAdapter->query("DROP TABLE IF EXISTS foo");
         $this->dbAdapter->query("DROP TABLE IF EXISTS bar");
         $this->dbAdapter->query(

@@ -54,7 +54,7 @@ class Zend_Service_Amazon_Ec2_SecuritygroupsTest extends PHPUnit_Framework_TestC
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Securitygroups::setDefaultHTTPClient($client);
+        Zend_Service_Amazon_Ec2_Securitygroups::setDefaultHttpClient($client);
 
     }
 

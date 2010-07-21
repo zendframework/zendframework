@@ -235,10 +235,10 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
 
     // session.cookie_httponly
 
-    public function testCookieHTTPOnlyIsMutable()
+    public function testCookieHttpOnlyIsMutable()
     {
-        $this->config->setCookieHTTPOnly(true);
-        $this->assertEquals(true, $this->config->getCookieHTTPOnly());
+        $this->config->setCookieHttpOnly(true);
+        $this->assertEquals(true, $this->config->getCookieHttpOnly());
     }
 
     // session.use_cookies
@@ -518,7 +518,7 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'cookie_httponly',
-                'getCookieHTTPOnly',
+                'getCookieHttpOnly',
                 true,
             ),
             array(

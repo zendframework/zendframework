@@ -66,9 +66,9 @@ use Zend\Server\AbstractServer,
  * @uses       Zend\Server\Reflection\AbstractFunction
  * @uses       Zend\Server\Reflection\ReflectionMethod
  * @uses       Zend\XmlRpc\Request
- * @uses       Zend\XmlRpc\Request\HTTP
+ * @uses       Zend\XmlRpc\Request\Http
  * @uses       Zend\XmlRpc\Response
- * @uses       Zend\XmlRpc\Response\HTTP
+ * @uses       Zend\XmlRpc\Response\Http
  * @uses       Zend\XmlRpc\Server\Exception
  * @uses       Zend\XmlRpc\Server\Fault
  * @uses       Zend\XmlRpc\Server\System
@@ -94,10 +94,10 @@ class Server extends AbstractServer
     protected $_request = null;
 
     /**
-     * Class to use for responses; defaults to {@link Zend\XmlRpc\Response\HTTP}
+     * Class to use for responses; defaults to {@link Zend\XmlRpc\Response\Http}
      * @var string
      */
-    protected $_responseClass = 'Zend\\XmlRpc\\Response\\HTTP';
+    protected $_responseClass = 'Zend\\XmlRpc\\Response\\Http';
 
     /**
      * Dispatch table of name => method pairs
@@ -283,7 +283,7 @@ class Server extends AbstractServer
         if ((!$request || !$request instanceof Request)
             && (null === ($request = $this->getRequest()))
         ) {
-            $request = new Request\HTTP();
+            $request = new Request\Http();
             $request->setEncoding($this->getEncoding());
         }
 

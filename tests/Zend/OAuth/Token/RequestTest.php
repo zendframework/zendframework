@@ -3,7 +3,7 @@
 namespace ZendTest\OAuth\Token;
 
 use Zend\OAuth\Token\Request as RequestToken,
-    Zend\HTTP\Response as HTTPResponse;
+    Zend\Http\Response as HTTPResponse;
 
 class RequestTest extends \PHPUnit_Framework_TestCase
 {

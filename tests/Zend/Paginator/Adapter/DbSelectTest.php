@@ -24,10 +24,10 @@
  * @namespace
  */
 namespace ZendTest\Paginator\Adapter;
-use Zend\DB\Adapter\PDO;
+use Zend\Db\Adapter\Pdo;
 use Zend\Paginator\Adapter;
-use Zend\DB;
-use Zend\DB\Select;
+use Zend\Db;
+use Zend\Db\Select;
 
 require_once __DIR__ . '/../_files/TestTable.php';
 
@@ -72,7 +72,7 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $this->_db = new PDO\SQLite(array(
+        $this->_db = new Pdo\Sqlite(array(
             'dbname' => __DIR__ . '/../_files/test.sqlite'
         ));
 
@@ -132,7 +132,7 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
 
         try {
             $wrongcolumn = $this->_db->quoteIdentifier('wrongcolumn');
-            $expr = new DB\Expr("COUNT(*) AS $wrongcolumn");
+            $expr = new Db\Expr("COUNT(*) AS $wrongcolumn");
             $query = $this->_db->select($expr)->from('test');
 
             $this->_adapter->setRowCount($query);
@@ -145,7 +145,7 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
     public function testAcceptsQueryForRowCount()
     {
         $row_count_column = $this->_db->quoteIdentifier(Adapter\DbSelect::ROW_COUNT_COLUMN);
-        $expression = new DB\Expr("COUNT(*) AS $row_count_column");
+        $expression = new Db\Expr("COUNT(*) AS $row_count_column");
 
         $rowCount = clone $this->_query;
         $rowCount->reset(Select::COLUMNS)
@@ -204,7 +204,7 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
      */
     public function testGroupByQueryOnEmptyTableReturnsRowCountZero()
     {
-        $db = new PDO\SQLite(array(
+        $db = new Pdo\Sqlite(array(
             'dbname' => __DIR__ . '/../_files/testempty.sqlite'
         ));
 

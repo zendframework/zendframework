@@ -102,7 +102,7 @@ class GData extends App
     /**
      * Create Gdata object
      *
-     * @param \Zend\HTTP\Client $client
+     * @param \Zend\Http\Client $client
      * @param string $applicationId The identity of the app in the form of
      *          Company-AppName-Version
      */
@@ -115,7 +115,7 @@ class GData extends App
      * Imports a feed located at $uri.
      *
      * @param  string $uri
-     * @param  \Zend\HTTP\Client $client The client used for communication
+     * @param  \Zend\Http\Client $client The client used for communication
      * @param  string $className The class which is used as the return type
      * @throws \Zend\GData\App\Exception
      * @return string|\Zend\GData\App\Feed Returns string only if the object
@@ -206,7 +206,7 @@ class GData extends App
      *                            request body
      * @param int $remainingRedirects Number of redirects to follow
      *                                if requests results in one
-     * @return \Zend\HTTP\Response The response object
+     * @return \Zend\Http\Response The response object
      */
     public function performHttpRequest($method, $url, $headers = array(), $body = null, $contentType = null, $remainingRedirects = null)
     {

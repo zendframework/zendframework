@@ -24,14 +24,14 @@
  */
 namespace Zend\Feed\PubSubHubbub;
 
-use Zend\URI;
+use Zend\Uri;
 use Zend\Date;
 
 /**
  * @uses       \Zend\Date\Date
  * @uses       \Zend\Feed\PubSubHubbub\PubSubHubbub
  * @uses       \Zend\Feed\PubSubHubbub\Exception
- * @uses       \Zend\HTTP\Client
+ * @uses       \Zend\Http\Client
  * @uses       \Zend\Uri\Uri
  * @uses       \Zend\Version
  * @category   Zend
@@ -214,7 +214,7 @@ class Subscriber
      */
     public function setTopicUrl($url)
     {
-        if (empty($url) || !is_string($url) || !\Zend\URI\URL::validate($url)) {
+        if (empty($url) || !is_string($url) || !\Zend\Uri\Url::validate($url)) {
             throw new Exception('Invalid parameter "url"'
                 .' of "' . $url . '" must be a non-empty string and a valid'
                 .' URL');
@@ -274,7 +274,7 @@ class Subscriber
      */
     public function setCallbackUrl($url)
     {
-        if (empty($url) || !is_string($url) || !\Zend\URI\URL::validate($url)) {
+        if (empty($url) || !is_string($url) || !\Zend\Uri\Url::validate($url)) {
             throw new Exception('Invalid parameter "url"'
                 . ' of "' . $url . '" must be a non-empty string and a valid'
                 . ' URL');
@@ -340,7 +340,7 @@ class Subscriber
      */
     public function addHubUrl($url)
     {
-        if (empty($url) || !is_string($url) || !\Zend\URI\URL::validate($url)) {
+        if (empty($url) || !is_string($url) || !\Zend\Uri\Url::validate($url)) {
             throw new Exception('Invalid parameter "url"'
                 . ' of "' . $url . '" must be a non-empty string and a valid'
                 . ' URL');
@@ -657,12 +657,12 @@ class Subscriber
      * Get a basic prepared HTTP client for use
      *
      * @param  string $mode Must be "subscribe" or "unsubscribe"
-     * @return \Zend\HTTP\Client
+     * @return \Zend\Http\Client
      */
     protected function _getHttpClient()
     {
         $client = PubSubHubbub::getHttpClient();
-        $client->setMethod(\Zend\HTTP\Client::POST);
+        $client->setMethod(\Zend\Http\Client::POST);
         $client->setConfig(array('useragent' => 'Zend_Feed_Pubsubhubbub_Subscriber/'
             . \Zend\Version::VERSION));
         return $client;

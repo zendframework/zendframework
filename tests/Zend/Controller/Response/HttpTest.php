@@ -44,7 +44,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_response = new Response\HTTP();
+        $this->_response = new Response\Http();
         $this->_response->headersSentThrowsException = false;
     }
 
@@ -168,11 +168,11 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(empty($headers));
     }
 
-    public function testSetHTTPResponseCode()
+    public function testSetHttpResponseCode()
     {
-        $this->assertEquals(200, $this->_response->getHTTPResponseCode());
-        $this->_response->setHTTPResponseCode(302);
-        $this->assertEquals(302, $this->_response->getHTTPResponseCode());
+        $this->assertEquals(200, $this->_response->getHttpResponseCode());
+        $this->_response->setHttpResponseCode(302);
+        $this->assertEquals(302, $this->_response->getHttpResponseCode());
     }
 
     public function testSetBody()
@@ -208,7 +208,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
 
         $skipHeadersTest = headers_sent();
         if ($skipHeadersTest) {
-            $this->markTestSkipped('Unable to run Zend_Controller_Response_HTTP::__toString() test as headers have already been sent');
+            $this->markTestSkipped('Unable to run Zend_Controller_Response_Http::__toString() test as headers have already been sent');
             return;
         }
 
@@ -276,19 +276,19 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
     public function testSetResponseCodeThrowsExceptionWithBadCode()
     {
         try {
-            $this->_response->setHTTPResponseCode(99);
+            $this->_response->setHttpResponseCode(99);
             $this->fail('Should not accept response codes < 100');
         } catch (\Exception $e) {
         }
 
         try {
-            $this->_response->setHTTPResponseCode(600);
+            $this->_response->setHttpResponseCode(600);
             $this->fail('Should not accept response codes > 599');
         } catch (\Exception $e) {
         }
 
         try {
-            $this->_response->setHTTPResponseCode('bogus');
+            $this->_response->setHttpResponseCode('bogus');
             $this->fail('Should not accept non-integer response codes');
         } catch (\Exception $e) {
         }
@@ -540,13 +540,13 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
 
     public function testIsRedirectWhen3xxResponseCodeSet()
     {
-        $this->_response->setHTTPResponseCode(301);
+        $this->_response->setHttpResponseCode(301);
         $this->assertTrue($this->_response->isRedirect());
     }
 
     public function testIsNotRedirectWithSufficientlyLarge3xxResponseCodeSet()
     {
-        $this->_response->setHTTPResponseCode(309);
+        $this->_response->setHttpResponseCode(309);
         $this->assertFalse($this->_response->isRedirect());
     }
 

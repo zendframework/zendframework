@@ -102,7 +102,7 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         // Since we can't retrieve the password or hash function via the
         // API, let's see if a ClientLogin auth request succeeds
         try {
-            GData\ClientLogin::getHTTPClient($this->id . '@' .
+            GData\ClientLogin::getHttpClient($this->id . '@' .
                 $this->domain, self::PASSWORD, 'xapi');
         } catch (\Zend\GData\App\AuthException $e) {
            $this->fail("Unable to authenticate new user via ClientLogin.");

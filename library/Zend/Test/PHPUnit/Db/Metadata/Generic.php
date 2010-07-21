@@ -29,7 +29,7 @@ namespace Zend\Test\PHPUnit\Db\Metadata;
  * Generic Metadata accessor for the Zend_Db adapters
  *
  * @uses       PHPUnit_Extensions_Database_DB_IMetaData
- * @uses       \Zend\DB\Adapter\AbstractAdapter
+ * @uses       \Zend\Db\Adapter\AbstractAdapter
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
@@ -41,7 +41,7 @@ class Generic implements \PHPUnit_Extensions_Database_DB_IMetaData
     /**
      * Zend_Db Connection
      *
-     * @var \Zend\DB\Adapter\AbstractAdapter
+     * @var \Zend\Db\Adapter\AbstractAdapter
      */
     protected $_connection;
 
@@ -66,7 +66,7 @@ class Generic implements \PHPUnit_Extensions_Database_DB_IMetaData
      * @param PDO $pdo
      * @param string $schema
      */
-    public final function __construct(\Zend\DB\Adapter\AbstractAdapter $db, $schema)
+    public final function __construct(\Zend\Db\Adapter\AbstractAdapter $db, $schema)
     {
         $this->_connection = $db;
         $this->_schema     = $schema;

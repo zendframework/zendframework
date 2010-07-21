@@ -32,8 +32,8 @@ use Zend;
  * @uses       \Zend\Controller\Exception
  * @uses       \Zend\Controller\Plugin\Broker
  * @uses       \Zend\Controller\Plugin\ErrorHandler
- * @uses       \Zend\Controller\Request\HTTP
- * @uses       \Zend\Controller\Response\HTTP
+ * @uses       \Zend\Controller\Request\Http
+ * @uses       \Zend\Controller\Response\Http
  * @uses       \Zend\Controller\Router\Rewrite
  * @uses       \Zend\Loader
  * @category   Zend
@@ -845,7 +845,7 @@ class Front
         if (null !== $request) {
             $this->setRequest($request);
         } elseif ((null === $request) && (null === ($request = $this->getRequest()))) {
-            $request = new Request\HTTP();
+            $request = new Request\Http();
             $this->setRequest($request);
         }
 
@@ -864,7 +864,7 @@ class Front
         if (null !== $response) {
             $this->setResponse($response);
         } elseif ((null === $this->_response) && (null === ($this->_response = $this->getResponse()))) {
-            $response = new Response\HTTP();
+            $response = new Response\Http();
             $this->setResponse($response);
         }
 

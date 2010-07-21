@@ -24,8 +24,8 @@
  * @namespace
  */
 namespace Zend\Service;
-use Zend\HTTP;
-use Zend\REST;
+use Zend\Http;
+use Zend\Rest;
 use Zend\OAuth;
 
 /**
@@ -35,7 +35,7 @@ use Zend\OAuth;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Twitter extends REST\Client\RESTClient
+class Twitter extends Rest\Client\RestClient
 {
 
     /**
@@ -54,7 +54,7 @@ class Twitter extends REST\Client\RESTClient
     const OAUTH_BASE_URI = 'http://twitter.com/oauth';
     
     /**
-     * @var \Zend\HTTP\CookieJar
+     * @var \Zend\Http\CookieJar
      */
     protected $_cookieJar;
     
@@ -111,7 +111,7 @@ class Twitter extends REST\Client\RESTClient
     /**
      * Local HTTP Client cloned from statically set client
      *
-     * @var \Zend\HTTP\Client
+     * @var \Zend\Http\Client
      */
     protected $_localHttpClient = null;
 
@@ -154,7 +154,7 @@ class Twitter extends REST\Client\RESTClient
      * @param Zend_Http_Client $client
      * @return self
      */
-    public function setLocalHttpClient(HTTP\Client $client)
+    public function setLocalHttpClient(Http\Client $client)
     {
         $this->_localHttpClient = $client;
         $this->_localHttpClient->setHeaders('Accept-Charset', 'ISO-8859-1,utf-8');
@@ -163,9 +163,9 @@ class Twitter extends REST\Client\RESTClient
     
     /**
      * Get the local HTTP client as distinct from the static HTTP client
-     * inherited from \Zend\REST\Client
+     * inherited from \Zend\Rest\Client
      *
-     * @return \Zend\HTTP\Client
+     * @return \Zend\Http\Client
      */
     public function getLocalHttpClient()
     {
@@ -302,15 +302,15 @@ class Twitter extends REST\Client\RESTClient
     /**
      * Public Timeline status
      *
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function statusPublicTimeline()
     {
         $this->_init();
         $path = '/1/statuses/public_timeline.xml';
         $response = $this->_get($path);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
@@ -323,7 +323,7 @@ class Twitter extends REST\Client\RESTClient
      * - page: return page X of results
      *
      * @param  array $params
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
      * @return void
      */
     public function statusFriendsTimeline(array $params = array())
@@ -354,7 +354,7 @@ class Twitter extends REST\Client\RESTClient
         }
         $path .= '.xml';
         $response = $this->_get($path, $_params);
-        $return = new REST\Client\Result($response->getBody());
+        $return = new Rest\Client\Result($response->getBody());
         return $return;
     }
 
@@ -370,8 +370,8 @@ class Twitter extends REST\Client\RESTClient
      * - user_id: specfies the ID of the user for whom to return the user_timeline
      * - screen_name: specfies the screen name of the user for whom to return the user_timeline
      *
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function statusUserTimeline(array $params = array())
     {
@@ -413,22 +413,22 @@ class Twitter extends REST\Client\RESTClient
         }
         $path .= '.xml';
         $response = $this->_get($path, $_params);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
      * Show a single status
      *
      * @param  int $id Id of status to show
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function statusShow($id)
     {
         $this->_init();
         $path = '/1/statuses/show/' . $this->_validInteger($id) . '.xml';
         $response = $this->_get($path);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
@@ -436,8 +436,8 @@ class Twitter extends REST\Client\RESTClient
      *
      * @param  string $status
      * @param  int $in_reply_to_status_id
-     * @return \Zend\REST\Client\Result
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
      * @throws \Zend\Service\Twitter\Exception if message is too short or too long
      */
     public function statusUpdate($status, $inReplyToStatusId = null)
@@ -463,7 +463,7 @@ class Twitter extends REST\Client\RESTClient
             $data['in_reply_to_status_id'] = $inReplyToStatusId;
         }
         $response = $this->_post($path, $data);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
@@ -473,8 +473,8 @@ class Twitter extends REST\Client\RESTClient
      * - since_id: return results only after the specified tweet id
      * - page: return page X of results
      *
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function statusReplies(array $params = array())
     {
@@ -494,30 +494,30 @@ class Twitter extends REST\Client\RESTClient
             }
         }
         $response = $this->_get($path, $_params);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
      * Destroy a status message
      *
      * @param  int $id ID of status to destroy
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function statusDestroy($id)
     {
         $this->_init();
         $path = '/1/statuses/destroy/' . $this->_validInteger($id) . '.xml';
         $response = $this->_post($path);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
      * User friends
      *
      * @param  int|string $id Id or username of user for whom to fetch friends
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function userFriends(array $params = array())
     {
@@ -540,15 +540,15 @@ class Twitter extends REST\Client\RESTClient
         $path .= '.xml';
 
         $response = $this->_get($path, $_params);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
      * User Followers
      *
      * @param  bool $lite If true, prevents inline inclusion of current status for followers; defaults to false
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function userFollowers($lite = false)
     {
@@ -558,22 +558,22 @@ class Twitter extends REST\Client\RESTClient
             $this->lite = 'true';
         }
         $response = $this->_get($path);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
      * Show extended information on a user
      *
      * @param  int|string $id User ID or name
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function userShow($id)
     {
         $this->_init();
         $path = '/1/users/show.xml';
         $response = $this->_get($path, array('id'=>$id));
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
@@ -584,8 +584,8 @@ class Twitter extends REST\Client\RESTClient
      * - page: return page X of results
      *
      * @param  array $params
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function directMessageMessages(array $params = array())
     {
@@ -605,7 +605,7 @@ class Twitter extends REST\Client\RESTClient
             }
         }
         $response = $this->_get($path, $_params);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
@@ -616,8 +616,8 @@ class Twitter extends REST\Client\RESTClient
      * - page: return page X of results
      *
      * @param  array $params
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function directMessageSent(array $params = array())
     {
@@ -637,7 +637,7 @@ class Twitter extends REST\Client\RESTClient
             }
         }
         $response = $this->_get($path, $_params);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
@@ -645,9 +645,9 @@ class Twitter extends REST\Client\RESTClient
      *
      * @param  int|string $user User to whom to send message
      * @param  string $text Message to send to user
-     * @return \Zend\REST\Client\Result
+     * @return \Zend\Rest\Client\Result
      * @throws \Zend\Service\Twitter\Exception if message is too short or too long
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
      */
     public function directMessageNew($user, $text)
     {
@@ -665,60 +665,60 @@ class Twitter extends REST\Client\RESTClient
         }
         $data = array('user' => $user, 'text' => $text);
         $response = $this->_post($path, $data);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
      * Destroy a direct message
      *
      * @param  int $id ID of message to destroy
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function directMessageDestroy($id)
     {
         $this->_init();
         $path = '/1/direct_messages/destroy/' . $this->_validInteger($id) . '.xml';
         $response = $this->_post($path);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
      * Create friendship
      *
      * @param  int|string $id User ID or name of new friend
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function friendshipCreate($id)
     {
         $this->_init();
         $path = '/1/friendships/create/' . $id . '.xml';
         $response = $this->_post($path);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
      * Destroy friendship
      *
      * @param  int|string $id User ID or name of friend to remove
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function friendshipDestroy($id)
     {
         $this->_init();
         $path = '/1/friendships/destroy/' . $id . '.xml';
         $response = $this->_post($path);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
      * Friendship exists
      *
      * @param int|string $id User ID or name of friend to see if they are your friend
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function friendshipExists($id)
     {
@@ -726,26 +726,26 @@ class Twitter extends REST\Client\RESTClient
         $path = '/1/friendships/exists.xml';
         $data = array('user_a' => $this->getUsername(), 'user_b' => $id);
         $response = $this->_get($path, $data);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
      * Verify Account Credentials
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
      *
-     * @return \Zend\REST\Client\Result
+     * @return \Zend\Rest\Client\Result
      */
     public function accountVerifyCredentials()
     {
         $this->_init();
         $response = $this->_get('/1/account/verify_credentials.xml');
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
      * End current session
      *
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
      * @return true
      */
     public function accountEndSession()
@@ -758,14 +758,14 @@ class Twitter extends REST\Client\RESTClient
     /**
      * Returns the number of api requests you have left per hour.
      *
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function accountRateLimitStatus()
     {
         $this->_init();
         $response = $this->_get('/1/account/rate_limit_status.xml');
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
@@ -776,8 +776,8 @@ class Twitter extends REST\Client\RESTClient
      * - 'page': Retrieve a different page of resuls
      *
      * @param  array $params
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function favoriteFavorites(array $params = array())
     {
@@ -798,37 +798,37 @@ class Twitter extends REST\Client\RESTClient
         }
         $path .= '.xml';
         $response = $this->_get($path, $_params);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
      * Mark a status as a favorite
      *
      * @param  int $id Status ID you want to mark as a favorite
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function favoriteCreate($id)
     {
         $this->_init();
         $path = '/1/favorites/create/' . $this->_validInteger($id) . '.xml';
         $response = $this->_post($path);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
      * Remove a favorite
      *
      * @param  int $id Status ID you want to de-list as a favorite
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
-     * @return \Zend\REST\Client\Result
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
+     * @return \Zend\Rest\Client\Result
      */
     public function favoriteDestroy($id)
     {
         $this->_init();
         $path = '/1/favorites/destroy/' . $this->_validInteger($id) . '.xml';
         $response = $this->_post($path);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
@@ -836,28 +836,28 @@ class Twitter extends REST\Client\RESTClient
      * Destroys a friendship to the blocked user if it exists.
      *
      * @param integer|string $id       The ID or screen name of a user to block.
-     * @return \Zend\REST\Client\Result
+     * @return \Zend\Rest\Client\Result
      */
     public function blockCreate($id)
     {
         $this->_init();
         $path = '/1/blocks/create/' . $id . '.xml';
         $response = $this->_post($path);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
      * Un-blocks the user specified in the ID parameter for the authenticating user
      *
      * @param integer|string $id       The ID or screen_name of the user to un-block.
-     * @return \Zend\REST\Client\Result
+     * @return \Zend\Rest\Client\Result
      */
     public function blockDestroy($id)
     {
         $this->_init();
         $path = '/1/blocks/destroy/' . $id . '.xml';
         $response = $this->_post($path);
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
@@ -865,7 +865,7 @@ class Twitter extends REST\Client\RESTClient
      *
      * @param string|integer $id    The ID or screen_name of the potentially blocked user.
      * @param boolean $returnResult Instead of returning a boolean return the rest response from twitter
-     * @return Boolean|\Zend\REST\Client\Result
+     * @return Boolean|\Zend\Rest\Client\Result
      */
     public function blockExists($id, $returnResult = false)
     {
@@ -873,7 +873,7 @@ class Twitter extends REST\Client\RESTClient
         $path = '/1/blocks/exists/' . $id . '.xml';
         $response = $this->_get($path);
 
-        $cr = new REST\Client\Result($response->getBody());
+        $cr = new Rest\Client\Result($response->getBody());
 
         if ($returnResult === true)
             return $cr;
@@ -890,7 +890,7 @@ class Twitter extends REST\Client\RESTClient
      *
      * @param integer $page         Optional. Specifies the page number of the results beginning at 1. A single page contains 20 ids.
      * @param boolean $returnUserIds  Optional. Returns only the userid's instead of the whole user object
-     * @return \Zend\REST\Client\Result
+     * @return \Zend\Rest\Client\Result
      */
     public function blockBlocking($page = 1, $returnUserIds = false)
     {
@@ -901,13 +901,13 @@ class Twitter extends REST\Client\RESTClient
         }
         $path .= '.xml';
         $response = $this->_get($path, array('page' => $page));
-        return new REST\Client\Result($response->getBody());
+        return new Rest\Client\Result($response->getBody());
     }
 
     /**
      * Protected function to validate that the integer is valid or return a 0
      * @param $int
-     * @throws \Zend\HTTP\Client\Exception if HTTP request fails or times out
+     * @throws \Zend\Http\Client\Exception if HTTP request fails or times out
      * @return integer
      */
     protected function _validInteger($int)
@@ -946,8 +946,8 @@ class Twitter extends REST\Client\RESTClient
     protected function _prepare($path)
     {
         // Get the URI object and configure it
-        if (!$this->_uri instanceof \Zend\URI\URL) {
-            throw new REST\Client\Exception(
+        if (!$this->_uri instanceof \Zend\Uri\Url) {
+            throw new Rest\Client\Exception(
                 'URI object must be set before performing call'
             );
         }
@@ -973,14 +973,14 @@ class Twitter extends REST\Client\RESTClient
      *
      * @param string $path
      * @param array  $query Array of GET parameters
-     * @throws \Zend\HTTP\Client\Exception
-     * @return \Zend\HTTP\Response
+     * @throws \Zend\Http\Client\Exception
+     * @return \Zend\Http\Response
      */
     protected function _get($path, array $query = null)
     {
         $this->_prepare($path);
         $this->_localHttpClient->setParameterGet($query);
-        return $this->_localHttpClient->request(HTTP\Client::GET);
+        return $this->_localHttpClient->request(Http\Client::GET);
     }
 
     /**
@@ -988,13 +988,13 @@ class Twitter extends REST\Client\RESTClient
      *
      * @param string $path
      * @param mixed $data Raw data to send
-     * @throws \Zend\HTTP\Client\Exception
-     * @return \Zend\HTTP\Response
+     * @throws \Zend\Http\Client\Exception
+     * @return \Zend\Http\Response
      */
     protected function _post($path, $data = null)
     {
         $this->_prepare($path);
-        return $this->_performPost(HTTP\Client::POST, $data);
+        return $this->_performPost(Http\Client::POST, $data);
     }
 
     /**
@@ -1006,7 +1006,7 @@ class Twitter extends REST\Client\RESTClient
      *
      * @param mixed $method
      * @param mixed $data
-     * @return \Zend\HTTP\Response
+     * @return \Zend\Http\Response
      */
     protected function _performPost($method, $data = null)
     {

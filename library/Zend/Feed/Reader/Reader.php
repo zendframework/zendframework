@@ -24,7 +24,7 @@
  */
 namespace Zend\Feed\Reader;
 
-use Zend\HTTP,
+use Zend\Http,
     Zend\Loader\PluginLoader,
     Zend\Loader\PluginLoaderException,
     Zend\Loader\PrefixPathMapper;
@@ -35,7 +35,7 @@ use Zend\HTTP,
  * @uses \Zend\Feed\Reader\FeedSet
  * @uses \Zend\Feed\Reader\Feed\Atom
  * @uses \Zend\Feed\Reader\Feed\RSS
- * @uses \Zend\HTTP\Client
+ * @uses \Zend\Http\Client
  * @uses \Zend\Loader\PluginLoader
  * @category Zend
  * @package Zend_Feed_Reader
@@ -82,7 +82,7 @@ class Reader
     /**
      * HTTP client object to use for retrieving feeds
      *
-     * @var \Zend\HTTP\Client
+     * @var \Zend\Http\Client
      */
     protected static $_httpClient = null;
 
@@ -144,10 +144,10 @@ class Reader
      *
      * Sets the HTTP client object to use for retrieving the feeds.
      *
-     * @param  \Zend\HTTP\Client $httpClient
+     * @param  \Zend\Http\Client $httpClient
      * @return void
      */
-    public static function setHttpClient(HTTP\Client $httpClient)
+    public static function setHttpClient(Http\Client $httpClient)
     {
         self::$_httpClient = $httpClient;
     }
@@ -160,8 +160,8 @@ class Reader
      */
     public static function getHttpClient()
     {
-        if (!self::$_httpClient instanceof HTTP\Client) {
-            self::$_httpClient = new HTTP\Client();
+        if (!self::$_httpClient instanceof Http\Client) {
+            self::$_httpClient = new Http\Client();
         }
 
         return self::$_httpClient;

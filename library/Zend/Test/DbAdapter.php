@@ -28,8 +28,8 @@ namespace Zend\Test;
 /**
  * Testing Database Adapter which acts as a stack for SQL Results
  *
- * @uses       \Zend\DB\Adapter\AbstractAdapter
- * @uses       \Zend\DB\Profiler\Profiler
+ * @uses       \Zend\Db\Adapter\AbstractAdapter
+ * @uses       \Zend\Db\Profiler\Profiler
  * @uses       \Zend\Test\DbStatement
  * @category   Zend
  * @package    Zend_Test
@@ -37,7 +37,7 @@ namespace Zend\Test;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DbAdapter extends \Zend\DB\Adapter\AbstractAdapter
+class DbAdapter extends \Zend\Db\Adapter\AbstractAdapter
 {
     /**
      * @var array
@@ -74,7 +74,7 @@ class DbAdapter extends \Zend\DB\Adapter\AbstractAdapter
      */
     public function __construct()
     {
-        $profiler = new \Zend\DB\Profiler\Profiler();
+        $profiler = new \Zend\Db\Profiler();
         $profiler->setEnabled(true);
         $this->setProfiler($profiler);
     }
@@ -295,7 +295,7 @@ class DbAdapter extends \Zend\DB\Adapter\AbstractAdapter
      *
      * @param integer $mode
      * @return void
-     * @throws \Zend\DB\Adapter\Exception
+     * @throws \Zend\Db\Adapter\Exception
      */
     public function setFetchMode($mode)
     {

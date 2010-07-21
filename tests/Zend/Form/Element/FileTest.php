@@ -97,7 +97,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     public function testElementShouldUseHttpTransferAdapterByDefault()
     {
         $adapter = $this->element->getTransferAdapter();
-        $this->assertTrue($adapter instanceof \Zend\File\Transfer\Adapter\HTTP);
+        $this->assertTrue($adapter instanceof \Zend\File\Transfer\Adapter\Http);
     }
 
     public function testElementShouldAllowSpecifyingAdapterUsingConcreteInstance()

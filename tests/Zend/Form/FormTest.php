@@ -32,7 +32,7 @@ use Zend\Form\Form,
     Zend\Config\Xml as XmlConfig,
     Zend\Loader\PluginLoader,
     Zend\Loader\PrefixPathMapper,
-    Zend\JSON\JSON,
+    Zend\Json\Json,
     Zend\Translator\Translator,
     Zend\Validator\Validator,
     Zend\View,
@@ -2389,7 +2389,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->setupElements();
         $return = $this->form->processAjax($this->elementValues);
-        $this->assertTrue(JSON::decode($return));
+        $this->assertTrue(Json::decode($return));
     }
 
     public function testProcessAjaxReturnsJsonTrueForValidPartialForm()
@@ -2397,14 +2397,14 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->setupElements();
         $data = array('foo' => 'abcdef', 'baz' => 'abc123');
         $return = $this->form->processAjax($data);
-        $this->assertTrue(JSON::decode($return));
+        $this->assertTrue(Json::decode($return));
     }
 
     public function testProcessAjaxReturnsJsonWithAllErrorMessagesForInvalidForm()
     {
         $this->setupElements();
         $data = array('foo' => '123456', 'bar' => 'abcdef', 'baz' => 'abc-123');
-        $return = JSON::decode($this->form->processAjax($data));
+        $return = Json::decode($this->form->processAjax($data));
         $this->assertTrue(is_array($return));
         $this->assertEquals(array_keys($data), array_keys($return));
     }
@@ -2413,7 +2413,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->setupElements();
         $data = array('baz' => 'abc-123');
-        $return = JSON::decode($this->form->processAjax($data));
+        $return = Json::decode($this->form->processAjax($data));
         $this->assertTrue(is_array($return));
         $this->assertEquals(array_keys($data), array_keys($return), var_export($return, 1));
     }
@@ -2670,7 +2670,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
             'foo' => '',
         );
         $return = $this->form->processAjax($data);
-        $messages = JSON::decode($return);
+        $messages = Json::decode($return);
         $this->assertTrue(is_array($messages));
 
         $this->assertTrue(isset($messages['foo']));

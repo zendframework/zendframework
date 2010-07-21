@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\Feed\Writer\Extension\ITunes;
-use Zend\URI;
+use Zend\Uri;
 
 /**
  * @uses       \Zend\Feed\Exception
@@ -170,7 +170,7 @@ class Feed
      */
     public function setItunesImage($value)
     {
-        if (!\Zend\URI\URL::validate($value)) {
+        if (!\Zend\Uri\Url::validate($value)) {
             throw new \Zend\Feed\Exception('invalid parameter: "image" may only'
                 . ' be a valid URI/IRI');
         }
@@ -249,7 +249,7 @@ class Feed
      */
     public function setItunesNewFeedUrl($value)
     {
-        if (!\Zend\URI\URL::validate($value)) {
+        if (!\Zend\Uri\Url::validate($value)) {
             throw new \Zend\Feed\Exception('invalid parameter: "newFeedUrl" may only'
                 . ' be a valid URI/IRI');
         }

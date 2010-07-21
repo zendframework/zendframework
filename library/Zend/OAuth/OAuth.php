@@ -24,10 +24,10 @@
  */
 namespace Zend\OAuth;
 
-use Zend\HTTP\Client as HTTPClient;
+use Zend\Http\Client as HTTPClient;
 
 /**
- * @uses       Zend\HTTP\Client
+ * @uses       Zend\Http\Client
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -47,7 +47,7 @@ class OAuth
     /**
      * Singleton instance if required of the HTTP client
      *
-     * @var Zend\HTTP\Client
+     * @var Zend\Http\Client
      */
     protected static $httpClient = null;
 
@@ -55,7 +55,7 @@ class OAuth
      * Allows the external environment to make Zend_OAuth use a specific
      * Client instance.
      *
-     * @param Zend\HTTP\Client $httpClient
+     * @param Zend\Http\Client $httpClient
      * @return void
      */
     public static function setHttpClient(HTTPClient $httpClient)
@@ -68,7 +68,7 @@ class OAuth
      * the instance is reset and cleared of previous parameters and
      * Authorization header values.
      *
-     * @return Zend\HTTP\Client
+     * @return Zend\Http\Client
      */
     public static function getHttpClient()
     {

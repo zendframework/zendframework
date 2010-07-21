@@ -94,9 +94,9 @@ class ClientLogin
         if ($client == null) {
             $client = new HttpClient();
         }
-        if (!$client instanceof \Zend\HTTP\Client) {
+        if (!$client instanceof \Zend\Http\Client) {
             throw new App\HttpException(
-                    'Client is not an instance of Zend\HTTP\Client.');
+                    'Client is not an instance of Zend\Http\Client.');
         }
 
         // Build the HTTP client for authentication
@@ -132,7 +132,7 @@ class ClientLogin
         ob_start();
         try {
             $response = $client->request('POST');
-        } catch (\Zend\HTTP\Client\Exception $e) {
+        } catch (\Zend\Http\Client\Exception $e) {
             throw new App\HttpException($e->getMessage(), $e);
         }
         ob_end_clean();

@@ -71,8 +71,8 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         Controller\Front::getInstance()->resetInstance();
-        $this->request  = new Request\HTTP();
-        $this->response = new \Zend\Controller\Response\HTTP();
+        $this->request  = new Request\Http();
+        $this->response = new \Zend\Controller\Response\Http();
         $this->plugin   = new Plugin\ErrorHandler();
 
         $this->plugin->setRequest($this->request);
@@ -230,7 +230,7 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($this->request->getParam('error_handler'));
         $errorHandler = $this->request->getParam('error_handler');
         $this->assertTrue($errorHandler instanceof \ArrayObject);
-        $this->assertTrue($errorHandler->request instanceof Request\HTTP);
+        $this->assertTrue($errorHandler->request instanceof Request\Http);
         $this->assertNotSame($this->request, $errorHandler->request);
     }
 

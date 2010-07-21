@@ -143,7 +143,6 @@ abstract class Cache
         if (!$customBackendNaming) {
             $backend  = self::_normalizeName($backend);
         }
-echo "Normalized backend name: $backend\n";
         if (in_array($backend, self::$standardBackends)) {
             // we use a standard backend
             $backendClass = 'Zend\\Cache\\Backend\\' . $backend;

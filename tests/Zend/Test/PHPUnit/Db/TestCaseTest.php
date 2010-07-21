@@ -79,27 +79,27 @@ class TestCaseTest extends \Zend\Test\PHPUnit\DatabaseTestCase
 
     public function testCheckZendDbConnectionConvenienceMethodReturnType()
     {
-        $mock = $this->getMock('\Zend\DB\Adapter\PDO\SQLite', array('delete'), array(), 'Zend_DB_Adapter_Mock', false);
+        $mock = $this->getMock('\Zend\Db\Adapter\Pdo\Sqlite', array('delete'), array(), 'Zend_DB_Adapter_Mock', false);
         $this->assertTrue($this->createZendDbConnection($mock, "test") instanceof \Zend\Test\PHPUnit\Db\Connection);
     }
 
     public function testCreateDbTableDataSetConvenienceMethodReturnType()
     {
-        $tableMock = $this->getMock('\Zend\DB\Table\Table', array(), array(), "", false);
+        $tableMock = $this->getMock('\Zend\Db\Table\Table', array(), array(), "", false);
         $tableDataSet = $this->createDbTableDataSet(array($tableMock));
         $this->assertTrue($tableDataSet instanceof \Zend\Test\PHPUnit\Db\DataSet\DbTableDataSet);
     }
 
     public function testCreateDbTableConvenienceMethodReturnType()
     {
-        $mock = $this->getMock('Zend\DB\Table\Table', array(), array(), "", false);
+        $mock = $this->getMock('Zend\Db\Table\Table', array(), array(), "", false);
         $table = $this->createDbTable($mock);
         $this->assertTrue($table instanceof \Zend\Test\PHPUnit\Db\DataSet\DbTable);
     }
 
     public function testCreateDbRowsetConvenienceMethodReturnType()
     {
-        $mock = $this->getMock('Zend\DB\Table\Rowset', array(), array(array()));
+        $mock = $this->getMock('Zend\Db\Table\Rowset', array(), array(array()));
         $mock->expects($this->once())->method('toArray')->will($this->returnValue(array("foo" => 1, "bar" => 1)));
 
         $rowset = $this->createDbRowset($mock, "fooTable");

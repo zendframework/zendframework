@@ -54,7 +54,7 @@ class QueryDataSetTest extends DataSetTestCase
         $fixtureTableName = "foo";
 
         $adapterMock = $this->getMock('Zend\Test\DbAdapter');
-        $selectMock = $this->getMock('Zend\DB\Select', array(), array($adapterMock));
+        $selectMock = $this->getMock('Zend\Db\Select', array(), array($adapterMock));
 
         $adapterMock->expects($this->once())
                     ->method('select')
@@ -63,7 +63,7 @@ class QueryDataSetTest extends DataSetTestCase
 
         $selectMock->expects($this->once())
                    ->method('from')
-                   ->with($fixtureTableName, \Zend\DB\Select::SQL_WILDCARD);
+                   ->with($fixtureTableName, \Zend\Db\Select::SQL_WILDCARD);
         $selectMock->expects($this->once())
                    ->method('__toString')
                    ->will($this->returnValue('SELECT * FOM foo'));

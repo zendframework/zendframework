@@ -30,7 +30,7 @@ namespace Zend\Test\PHPUnit\Db\DataSet;
  *
  * @uses       PHPUnit_Extensions_Database_DataSet_AbstractTable
  * @uses       PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData
- * @uses       \Zend\DB\Table\AbstractRowset
+ * @uses       \Zend\Db\Table\AbstractRowset
  * @uses       \Zend\Test\PHPUnit\Db\Exception
  * @category   Zend
  * @package    Zend_Test
@@ -43,10 +43,10 @@ class DbRowset extends \PHPUnit_Extensions_Database_DataSet_AbstractTable
     /**
      * Construct Table object from a Zend_Db_Table_Rowset
      *
-     * @param \Zend\DB\Table\AbstractRowset $rowset
+     * @param \Zend\Db\Table\AbstractRowset $rowset
      * @param string $tableName
      */
-    public function __construct(\Zend\DB\Table\AbstractRowset $rowset, $tableName = null)
+    public function __construct(\Zend\Db\Table\AbstractRowset $rowset, $tableName = null)
     {
         if($tableName == null) {
             $table = $rowset->getTable();

@@ -24,15 +24,15 @@
  * @namespace
  */
 namespace Zend\XmlRpc;
-use Zend\HTTP,
+use Zend\Http,
     Zend\XmlRpc\Value;
 
 /**
  * An XML-RPC client implementation
  *
- * @uses       Zend\HTTP\Client
+ * @uses       Zend\Http\Client
  * @uses       Zend\XmlRpc\Client\FaultException
- * @uses       Zend\XmlRpc\Client\HTTPException
+ * @uses       Zend\XmlRpc\Client\HttpException
  * @uses       Zend\XmlRpc\Client\ServerIntrospection
  * @uses       Zend\XmlRpc\Client\ServerProxy
  * @uses       Zend\XmlRpc\Fault
@@ -56,7 +56,7 @@ class Client
 
     /**
      * HTTP Client to use for requests
-     * @var Zend\HTTP\Client
+     * @var Zend\Http\Client
      */
     protected $_httpClient = null;
 
@@ -95,13 +95,13 @@ class Client
      *
      * @param  string $server      Full address of the XML-RPC service
      *                             (e.g. http://time.xmlrpc.com/RPC2)
-     * @param  Zend\HTTP\Client $httpClient HTTP Client to use for requests
+     * @param  Zend\Http\Client $httpClient HTTP Client to use for requests
      * @return void
      */
-    public function __construct($server, HTTP\Client $httpClient = null)
+    public function __construct($server, Http\Client $httpClient = null)
     {
         if ($httpClient === null) {
-            $this->_httpClient = new HTTP\Client();
+            $this->_httpClient = new Http\Client();
         } else {
             $this->_httpClient = $httpClient;
         }
@@ -114,10 +114,10 @@ class Client
     /**
      * Sets the HTTP client object to use for connecting the XML-RPC server.
      *
-     * @param  Zend\HTTP\Client $httpClient
-     * @return Zend\HTTP\Client
+     * @param  Zend\Http\Client $httpClient
+     * @return Zend\Http\Client
      */
-    public function setHttpClient(HTTP\Client $httpClient)
+    public function setHttpClient(Http\Client $httpClient)
     {
         return $this->_httpClient = $httpClient;
     }
@@ -126,7 +126,7 @@ class Client
     /**
      * Gets the HTTP client object.
      *
-     * @return Zend\HTTP\Client
+     * @return Zend\Http\Client
      */
     public function getHttpClient()
     {
@@ -222,7 +222,7 @@ class Client
      * @param Zend\XmlRpc\Request $request
      * @param null|Zend\XmlRpc\Response $response
      * @return void
-     * @throws Zend\XmlRpc\Client\HTTPException
+     * @throws Zend\XmlRpc\Client\HttpException
      */
     public function doRequest($request, $response = null)
     {
@@ -248,13 +248,13 @@ class Client
 
         $xml = $this->_lastRequest->__toString();
         $http->setRawData($xml);
-        $httpResponse = $http->request(HTTP\Client::POST);
+        $httpResponse = $http->request(Http\Client::POST);
 
         if (! $httpResponse->isSuccessful()) {
             /**
              * Exception thrown when an HTTP error occurs
              */
-            throw new Client\HTTPException(
+            throw new Client\HttpException(
                 $httpResponse->getMessage(),
                 $httpResponse->getStatus()
             );

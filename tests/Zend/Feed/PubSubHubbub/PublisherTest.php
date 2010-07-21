@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace ZendTest\Feed\PubSubHubbub;
-use Zend\HTTP;
+use Zend\Http;
 use Zend\Feed\PubSubHubbub;
 
 /**
@@ -45,7 +45,7 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $client = new HTTP\Client;
+        $client = new Http\Client;
         PubSubHubbub\PubSubHubbub::setHttpClient($client);
         $this->_publisher = new PubSubHubbub\Publisher;
     }
@@ -304,7 +304,7 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
 
 // Some stubs for what Http_Client would be doing
 
-class ClientSuccess extends HTTP\Client
+class ClientSuccess extends Http\Client
 {
     public function request($method = null) {
         $response = new ResponseSuccess;
@@ -312,7 +312,7 @@ class ClientSuccess extends HTTP\Client
     }
     public function getBody(){return $this->_prepareBody();}
 }
-class ClientFail extends HTTP\Client
+class ClientFail extends Http\Client
 {
     public function request($method = null) {
         $response = new ResponseFail;

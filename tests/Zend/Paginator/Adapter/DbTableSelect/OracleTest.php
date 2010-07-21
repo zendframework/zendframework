@@ -38,7 +38,7 @@ class OracleTest extends \ZendTest\Paginator\Adapter\DbSelect\OracleTest
 {
     public function setup()
     {
-        $this->markTestSkipped('Skipping until Zend\DB is refactored.');
+        $this->markTestSkipped('Skipping until Zend\Db is refactored.');
     }
     
     /**
@@ -50,6 +50,6 @@ class OracleTest extends \ZendTest\Paginator\Adapter\DbSelect\OracleTest
         $adapter = new \Zend\Paginator\Adapter\DbTableSelect($query);
         $items   = $adapter->getItems(0, 10);
 
-        $this->assertType('Zend\DB\Table\Rowset', $items);
+        $this->assertType('Zend\Db\Table\Rowset', $items);
     }
 }

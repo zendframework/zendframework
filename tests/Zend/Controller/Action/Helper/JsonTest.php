@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace ZendTest\Controller\Action\Helper;
-use Zend\JSON;
+use Zend\Json;
 use Zend\Layout;
 
 
@@ -53,7 +53,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         \Zend\Layout\Layout::resetMvcInstance();
 
-        $this->response = new \Zend\Controller\Response\HTTP();
+        $this->response = new \Zend\Controller\Response\Http();
         $this->response->headersSentThrowsException = false;
 
         $front = \Zend\Controller\Front::getInstance();
@@ -62,7 +62,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
         $this->viewRenderer = new \Zend\Controller\Action\Helper\ViewRenderer();
         \Zend\Controller\Action\HelperBroker::addHelper($this->viewRenderer);
-        $this->helper = new \Zend\Controller\Action\Helper\JSON();
+        $this->helper = new \Zend\Controller\Action\Helper\Json();
         $this->helper->suppressExit = true;
     }
 
@@ -102,7 +102,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         $data = $this->helper->encodeJson(array('foobar'));
         $this->assertTrue(is_string($data));
-        $this->assertEquals(array('foobar'), JSON\JSON::decode($data));
+        $this->assertEquals(array('foobar'), Json\Json::decode($data));
     }
 
     public function testJsonHelperDisablesLayoutsAndViewRendererByDefault()
@@ -130,7 +130,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->helper->sendJson(array('foobar'));
         $this->verifyJsonHeader();
         $response = $this->response->getBody();
-        $this->assertSame(array('foobar'), JSON\JSON::decode($response));
+        $this->assertSame(array('foobar'), Json\Json::decode($response));
     }
 
     public function testDirectProxiesToSendJsonByDefault()
@@ -138,13 +138,13 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->helper->direct(array('foobar'));
         $this->verifyJsonHeader();
         $response = $this->response->getBody();
-        $this->assertSame(array('foobar'), JSON\JSON::decode($response));
+        $this->assertSame(array('foobar'), Json\Json::decode($response));
     }
 
     public function testCanPreventDirectSendingResponse()
     {
         $data = $this->helper->direct(array('foobar'), false);
-        $this->assertSame(array('foobar'), JSON\JSON::decode($data));
+        $this->assertSame(array('foobar'), Json\Json::decode($data));
         $this->verifyJsonHeader();
         $response = $this->response->getBody();
         $this->assertTrue(empty($response));

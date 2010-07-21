@@ -40,7 +40,7 @@ class DbTableDataSetTest extends \PHPUnit_Framework_TestCase
     {
         $fixtureTable = "foo";
 
-        $table = $this->getMock('Zend\DB\Table\Table', array(), array(), '', false);
+        $table = $this->getMock('Zend\Db\Table\Table', array(), array(), '', false);
         $table->expects($this->at(0))->method('info')->with('name')->will($this->returnValue($fixtureTable));
         $table->expects($this->at(1))->method('info')->with('name')->will($this->returnValue($fixtureTable));
         $table->expects($this->at(2))->method('info')->with('cols')->will($this->returnValue(array()));
@@ -55,7 +55,7 @@ class DbTableDataSetTest extends \PHPUnit_Framework_TestCase
     {
         $fixtureTable = "foo";
 
-        $table = $this->getMock('Zend\DB\Table\Table', array(), array(), '', false);
+        $table = $this->getMock('Zend\Db\Table\Table', array(), array(), '', false);
         $table->expects($this->at(0))->method('info')->with('name')->will($this->returnValue($fixtureTable));
         $table->expects($this->at(1))->method('info')->with('name')->will($this->returnValue($fixtureTable));
         $table->expects($this->at(2))->method('info')->with('cols')->will($this->returnValue(array()));

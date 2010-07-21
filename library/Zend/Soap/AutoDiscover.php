@@ -25,7 +25,7 @@
  */
 namespace Zend\Soap;
 
-use Zend\URI,
+use Zend\Uri,
     Zend\Soap\WSDL;
 
 /**
@@ -36,7 +36,7 @@ use Zend\URI,
  * @uses       \Zend\Server\Reflection
  * @uses       \Zend\Soap\AutoDiscover\Exception
  * @uses       \Zend\Soap\WSDL
- * @uses       \Zend\URI\URI
+ * @uses       \Zend\Uri\Uri
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage AutoDiscover
@@ -95,7 +95,7 @@ class AutoDiscover implements \Zend\Server\Server
      * Constructor
      *
      * @param boolean|string|\Zend\Soap\WSDL\Strategy $strategy
-     * @param string|\Zend\URI\URI $uri
+     * @param string|\Zend\Uri\Uri $uri
      * @param string $wsdlClass
      */
     public function __construct($strategy = true, $uri=null, $wsdlClass=null)
@@ -116,14 +116,14 @@ class AutoDiscover implements \Zend\Server\Server
      * Set the location at which the WSDL file will be availabe.
      *
      * @throws \Zend\Soap\AutoDiscover\Exception
-     * @param  \Zend\URI\URI|string $uri
+     * @param  \Zend\Uri\Uri|string $uri
      * @return \Zend\Soap\AutoDiscover
      */
     public function setUri($uri)
     {
-        if(!is_string($uri) && !($uri instanceof URI\URI)) {
+        if(!is_string($uri) && !($uri instanceof URI\Uri)) {
             throw new AutoDiscoverException(
-                'No uri given to \Zend\Soap\AutoDiscover::setUri as string or \Zend\URI\URI instance.'
+                'No uri given to \Zend\Soap\AutoDiscover::setUri as string or \Zend\Uri\Uri instance.'
             );
         }
         $this->_uri = $uri;
@@ -139,7 +139,7 @@ class AutoDiscover implements \Zend\Server\Server
     /**
      * Return the current Uri that the SOAP WSDL Service will be located at.
      *
-     * @return \Zend\URI\URI
+     * @return \Zend\Uri\Uri
      */
     public function getUri()
     {
@@ -149,7 +149,7 @@ class AutoDiscover implements \Zend\Server\Server
             $schema     = $this->getSchema();
             $host       = $this->getHostName();
             $scriptName = $this->getRequestUriWithoutParameters();
-            $uri = new URI\URL($schema . '://' . $host . $scriptName);
+            $uri = new Uri\Url($schema . '://' . $host . $scriptName);
             $this->setUri($uri);
         }
         return $uri;

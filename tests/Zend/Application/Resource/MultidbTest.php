@@ -26,7 +26,7 @@ use Zend\Loader\Autoloader,
     Zend\Application\Resource\Multidb as MultidbResource,
     Zend\Application,
     Zend\Controller\Front as FrontController,
-    Zend\DB\Table\Table as DBTable,
+    Zend\Db\Table\Table as DBTable,
     Zend\Cache\Cache;
 
 /**
@@ -41,13 +41,13 @@ class MultidbResourceTest extends \PHPUnit_Framework_TestCase
 {
     protected $_dbOptions = array(
         'db1' => array(
-            'adapter'  => 'PDOMySQL',
+            'adapter'  => 'PdoMysql',
             'dbname'   => 'db1',
             'password' => 'XXXX',
             'username' => 'webuser',
         ),
         'db2' => array(
-            'adapter'  => 'PDO\SQLite', 
+            'adapter'  => 'Pdo\Sqlite', 
             'dbname'   => 'db2', 
             'password' => 'notthatpublic', 
             'username' => 'dba',
@@ -105,8 +105,8 @@ class MultidbResourceTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($this->_dbOptions);
         $res = $resource->init();
-        $this->assertTrue($res->getDb('db1') instanceof \Zend\DB\Adapter\PDOMySQL);
-        $this->assertTrue($res->getDb('db2') instanceof \Zend\DB\Adapter\PDO\SQLite);
+        $this->assertTrue($res->getDb('db1') instanceof \Zend\Db\Adapter\PdoMysql);
+        $this->assertTrue($res->getDb('db2') instanceof \Zend\Db\Adapter\Pdo\Sqlite);
     }
 
     public function testGetDefaultIsSetAndReturnedObject()
@@ -118,7 +118,7 @@ class MultidbResourceTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($options);
         $res = $resource->init();
-        $this->assertTrue($res->getDb() instanceof \Zend\DB\Adapter\PDO\SQLite);
+        $this->assertTrue($res->getDb() instanceof \Zend\Db\Adapter\Pdo\Sqlite);
         $this->assertTrue($res->isDefault($res->getDb('db2')));
         $this->assertTrue($res->isDefault('db2'));
 
@@ -129,10 +129,10 @@ class MultidbResourceTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($options);
         $res = $resource->init();
-        $this->assertTrue($res->getDb() instanceof \Zend\DB\Adapter\PDO\SQLite);
+        $this->assertTrue($res->getDb() instanceof \Zend\Db\Adapter\Pdo\Sqlite);
         $this->assertTrue($res->isDefault($res->getDb('db2')));
         $this->assertTrue($res->isDefault('db2'));
-        $this->assertTrue(DBTable::getDefaultAdapter() instanceof \Zend\DB\Adapter\PDO\SQLite);
+        $this->assertTrue(DBTable::getDefaultAdapter() instanceof \Zend\Db\Adapter\Pdo\Sqlite);
     }
 
     public function testGetDefaultRandomWhenNoDefaultWasSetObject()
@@ -141,8 +141,8 @@ class MultidbResourceTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($this->_dbOptions);
         $res = $resource->init();
-        $this->assertTrue($res->getDefaultDb() instanceof \Zend\DB\Adapter\PDOMySQL);
-        $this->assertTrue($res->getDefaultDb(true) instanceof \Zend\DB\Adapter\PDOMySQL);
+        $this->assertTrue($res->getDefaultDb() instanceof \Zend\Db\Adapter\PdoMysql);
+        $this->assertTrue($res->getDefaultDb(true) instanceof \Zend\Db\Adapter\PdoMysql);
         $this->assertNull($res->getDefaultDb(false));
     }
 

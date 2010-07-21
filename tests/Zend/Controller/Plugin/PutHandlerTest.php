@@ -79,7 +79,7 @@ class PutHandlerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         \Zend\Controller\Front::getInstance()->resetInstance();
-        $this->request  = new \Zend\Controller\Request\HTTPTestCase();
+        $this->request  = new \Zend\Controller\Request\HttpTestCase();
         $this->plugin   = new \Zend\Controller\Plugin\PutHandler();
 
         $this->plugin->setRequest($this->request);

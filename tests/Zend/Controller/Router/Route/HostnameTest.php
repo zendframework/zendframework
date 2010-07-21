@@ -238,7 +238,7 @@ class Stub extends \Zend\Controller\Request\AbstractRequest
         $this->_scheme = $scheme;
     }
 
-    public function getHTTPHost() {
+    public function getHttpHost() {
         return $this->_host;
     }
 

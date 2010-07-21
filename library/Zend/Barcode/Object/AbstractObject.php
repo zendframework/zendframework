@@ -44,7 +44,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
      * Namespace of the barcode for autoloading
      * @var string
      */
-    protected $_barcodeNamespace = '\Zend\Barcode\Object';
+    protected $_barcodeNamespace = 'Zend\Barcode\Object';
 
     /**
      * Set of drawing instructions
@@ -1246,7 +1246,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     {
         $validatorName = (isset($options['validator'])) ? $options['validator'] : $this->getType();
 
-        $validator = new BarcodeValidator\Barcode(array(
+        $validator = new BarcodeValidator(array(
             'adapter'  => $validatorName,
             'checksum' => false,
         ));

@@ -64,7 +64,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
             'module'     => 'default'
         );
 
-        $this->_request = new \Zend\Controller\Request\HTTP();
+        $this->_request = new \Zend\Controller\Request\Http();
         $front->setRequest($this->_request);
 
         $this->route = new Route\Module($defaults, $this->_dispatcher, $this->_request);

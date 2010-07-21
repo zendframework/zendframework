@@ -246,7 +246,7 @@ class Redirector extends AbstractHelper
     {
         if ($this->getPrependBase()) {
             $request = $this->getRequest();
-            if ($request instanceof \Zend\Controller\Request\HTTP) {
+            if ($request instanceof \Zend\Controller\Request\Http) {
                 $base = rtrim($request->getBaseUrl(), '/');
                 if (!empty($base) && ('/' != $base)) {
                     $url = $base . '/' . ltrim($url, '/');

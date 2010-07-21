@@ -22,13 +22,13 @@
  */
 namespace Zend\ProgressBar\Adapter;
 
-use Zend\JSON\JSON;
+use Zend\Json\Json;
 
 /**
  * Zend_ProgressBar_Adapter_JsPull offers a simple method for updating a
  * progressbar in a browser.
  *
- * @uses      \Zend\JSON\JSON
+ * @uses      \Zend\Json\Json
  * @uses      \Zend\ProgressBar\Adapter\Adapter
  * @category  Zend
  * @package   Zend_ProgressBar
@@ -79,7 +79,7 @@ class JsPull extends AbstractAdapter
             'finished'      => false
         );
 
-        $data = JSON::encode($arguments);
+        $data = Json::encode($arguments);
 
         // Output the data
         $this->_outputData($data);
@@ -92,7 +92,7 @@ class JsPull extends AbstractAdapter
      */
     public function finish()
     {
-        $data = JSON::encode(array('finished' => true));
+        $data = Json::encode(array('finished' => true));
 
         $this->_outputData($data);
     }

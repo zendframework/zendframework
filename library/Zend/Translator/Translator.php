@@ -169,10 +169,10 @@ class Translator
     /**
      * Sets a cache for all instances of Zend_Translate
      *
-     * @param  \Zend\Cache\Frontend\Core $cache Cache to store to
+     * @param  \Zend\Cache\Frontend $cache Cache to store to
      * @return void
      */
-    public static function setCache(\Zend\Cache\Frontend\Core $cache)
+    public static function setCache(\Zend\Cache\Frontend $cache)
     {
         self::$_cache = $cache;
     }

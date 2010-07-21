@@ -195,14 +195,14 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($found, 'Version header not found or incorrect');
     }
 
-    public function testHTTPETagsPropagateToEntriesOnGet()
+    public function testHttpETagsPropagateToEntriesOnGet()
     {
         $this->adapter->setResponse($this->httpEntrySample);
         $entry = $this->service->getEntry('http://www.example.com');
         $this->assertEquals($this->expectedEtag, $entry->getEtag());
     }
 
-    public function testHTTPETagsPropagateToEntriesOnUpdate()
+    public function testHttpETagsPropagateToEntriesOnUpdate()
     {
         $this->adapter->setResponse($this->httpEntrySample);
         $entry = new App\Entry();
@@ -210,7 +210,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->expectedEtag, $newEntry->getEtag());
     }
 
-    public function testHTTPEtagsPropagateToEntriesOnInsert()
+    public function testHttpEtagsPropagateToEntriesOnInsert()
     {
         $this->adapter->setResponse($this->httpEntrySample);
         $entry = new App\Entry();
@@ -218,7 +218,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->expectedEtag, $newEntry->getEtag());
     }
 
-    public function testIfMatchHTTPHeaderSetOnUpdate()
+    public function testIfMatchHttpHeaderSetOnUpdate()
     {
         $etag = 'ABCD1234';
         $this->adapter->setResponse("HTTP/1.1 201 Created");
@@ -239,7 +239,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($found, 'If-Match header not found or incorrect');
     }
 
-    public function testIfMatchHTTPHeaderSetOnUpdateIfWeak()
+    public function testIfMatchHttpHeaderSetOnUpdateIfWeak()
     {
         $etag = 'W/ABCD1234';
         $this->adapter->setResponse("HTTP/1.1 201 Created");
@@ -260,7 +260,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($found, 'If-Match header found');
     }
 
-    public function testIfMatchHTTPHeaderSetOnSave()
+    public function testIfMatchHttpHeaderSetOnSave()
     {
         $etag = 'ABCD1234';
         $this->adapter->setResponse("HTTP/1.1 201 Created");
@@ -282,7 +282,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($found, 'If-Match header not found or incorrect');
     }
 
-    public function testIfMatchHTTPHeaderNotSetOnDelete()
+    public function testIfMatchHttpHeaderNotSetOnDelete()
     {
         $etag = 'ABCD1234';
         $this->adapter->setResponse("HTTP/1.1 201 Created");
@@ -304,7 +304,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($found, 'If-Match header found on delete');
     }
 
-    public function testIfMatchHTTPHeaderSetOnManualPost()
+    public function testIfMatchHttpHeaderSetOnManualPost()
     {
         $etag = 'ABCD1234';
         $this->adapter->setResponse("HTTP/1.1 201 Created");
@@ -322,7 +322,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($found, 'If-Match header not found or incorrect');
     }
 
-    public function testIfMatchHTTPHeaderSetOnManualPut()
+    public function testIfMatchHttpHeaderSetOnManualPut()
     {
         $etag = 'ABCD1234';
         $this->adapter->setResponse("HTTP/1.1 201 Created");
@@ -344,7 +344,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($found, 'If-Match header not found or incorrect');
     }
 
-    public function testIfMatchHTTPHeaderSetOnManualDelete()
+    public function testIfMatchHttpHeaderSetOnManualDelete()
     {
         $etag = 'ABCD1234';
         $this->adapter->setResponse("HTTP/1.1 201 Created");
@@ -449,7 +449,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-8397
      */
-    public function testIfMatchHTTPHeaderIsResetEachRequest()
+    public function testIfMatchHttpHeaderIsResetEachRequest()
     {
         // Update an entry
         $etag = 'ABCD1234';

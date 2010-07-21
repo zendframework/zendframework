@@ -23,14 +23,14 @@
  * @namespace
  */
 namespace Zend\OAuth\Token;
-use Zend\HTTP\Response as HTTPResponse,
+use Zend\Http\Response as HTTPResponse,
     Zend\OAuth\Token as OAuthToken,
-    Zend\OAuth\HTTP\Utility as HTTPUtility,
+    Zend\OAuth\Http\Utility as HTTPUtility,
     Zend\OAuth\Exception as OAuthException;
 
 /**
- * @uses       Zend\HTTP\Response
- * @uses       Zend\OAuth\HTTP\Utility
+ * @uses       Zend\Http\Response
+ * @uses       Zend\OAuth\Http\Utility
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -56,20 +56,20 @@ abstract class AbstractToken implements OAuthToken
     /**
      * OAuth response object
      * 
-     * @var \Zend\HTTP\Response
+     * @var \Zend\Http\Response
      */
     protected $_response = null;
 
     /**
-     * @var \Zend\OAuth\HTTP\Utility
+     * @var \Zend\OAuth\Http\Utility
      */
     protected $_httpUtility = null;
 
     /**
      * Constructor; basic setup for any Token subclass.
      *
-     * @param  null|\Zend\HTTP\Response $response
-     * @param  null|\Zend\OAuth\HTTP\Utility $utility
+     * @param  null|\Zend\Http\Response $response
+     * @param  null|\Zend\OAuth\Http\Utility $utility
      * @return void
      */
     public function __construct(
@@ -114,7 +114,7 @@ abstract class AbstractToken implements OAuthToken
     /**
      * Return the HTTP response object used to initialise this instance.
      *
-     * @return \Zend\HTTP\Response
+     * @return \Zend\Http\Response
      */
     public function getResponse()
     {
@@ -257,7 +257,7 @@ abstract class AbstractToken implements OAuthToken
      * Parse a HTTP response body and collect returned parameters
      * as raw url decoded key-value pairs in an associative array.
      *
-     * @param  \Zend\HTTP\Response $response
+     * @param  \Zend\Http\Response $response
      * @return array
      */
     protected function _parseParameters(HTTPResponse $response)

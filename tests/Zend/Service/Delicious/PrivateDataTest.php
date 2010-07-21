@@ -59,7 +59,7 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
                 'useragent' => 'Zend_Service_Delicious - Unit tests/0.1',
                 'keepalive' => true
         ));
-        Zend_Rest_Client::setDefaultHTTPClient($httpClient);
+        Zend_Rest_Client::setDefaultHttpClient($httpClient);
 
         $this->_delicious = new Zend_Service_Delicious(self::TEST_UNAME, self::TEST_PASS);
     }

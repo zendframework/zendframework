@@ -25,8 +25,8 @@
  */
 namespace ZendTest\XmlRpc;
 
-use Zend\HTTP\Client\Adapter,
-    Zend\HTTP,
+use Zend\Http\Client\Adapter,
+    Zend\Http,
     Zend\XmlRpc\Client,
     Zend\XmlRpc\Value,
     Zend\XmlRpc;
@@ -61,7 +61,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->httpAdapter = new Adapter\Test();
-        $this->httpClient = new HTTP\Client('http://foo',
+        $this->httpClient = new Http\Client('http://foo',
                                     array('adapter' => $this->httpAdapter));
 
         $this->xmlrpcClient = new Client('http://foo');
@@ -74,14 +74,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $xmlrpcClient = new Client('http://foo');
         $httpClient = $xmlrpcClient->getHttpClient();
-        $this->assertType('Zend\\HTTP\\Client', $httpClient);
+        $this->assertType('Zend\\Http\\Client', $httpClient);
         $this->assertSame($httpClient, $xmlrpcClient->getHttpClient());
     }
 
     public function testSettingAndGettingHttpClient()
     {
         $xmlrpcClient = new Client('http://foo');
-        $httpClient = new HTTP\Client('http://foo');
+        $httpClient = new Http\Client('http://foo');
         $this->assertNotSame($httpClient, $xmlrpcClient->getHttpClient());
 
         $xmlrpcClient->setHttpClient($httpClient);
@@ -316,7 +316,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $response = $this->makeHttpResponseFrom($body, $status, $message);
         $this->httpAdapter->setResponse($response);
 
-        $this->setExpectedException('Zend\\XmlRpc\\Client\\HTTPException', $message, $status);
+        $this->setExpectedException('Zend\\XmlRpc\\Client\\HttpException', $message, $status);
         $this->xmlrpcClient->call('foo');
     }
 
@@ -617,7 +617,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $baseUri = "http://foo:80";
         $this->httpAdapter = new Adapter\Test();
-        $this->httpClient = new HTTP\Client(null, array('adapter' => $this->httpAdapter));
+        $this->httpClient = new Http\Client(null, array('adapter' => $this->httpAdapter));
 
         $this->xmlrpcClient = new Client($baseUri);
         $this->xmlrpcClient->setHttpClient($this->httpClient);
@@ -706,7 +706,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function makeHttpResponseFor($nativeVars)
     {
         $response = $this->getServerResponseFor($nativeVars);
-        return \Zend\HTTP\Response::fromString($response);
+        return \Zend\Http\Response::fromString($response);
     }
 
     public function mockIntrospector()
@@ -724,7 +724,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function mockHttpClient()
     {
-        $this->mockedHttpClient = $this->getMock('Zend\\HTTP\\Client');
+        $this->mockedHttpClient = $this->getMock('Zend\\Http\\Client');
         $this->xmlrpcClient->setHttpClient($this->mockedHttpClient);
     }
 }

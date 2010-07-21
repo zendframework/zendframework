@@ -39,7 +39,7 @@ class SpreadsheetsTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->gdata = new \Zend\GData\Spreadsheets(new \Zend\HTTP\Client());
+        $this->gdata = new \Zend\GData\Spreadsheets(new \Zend\Http\Client());
     }
 
     public function testSpreadsheets()

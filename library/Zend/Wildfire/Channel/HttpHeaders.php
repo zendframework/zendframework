@@ -38,7 +38,7 @@ use Zend\Controller;
  * @uses       \Zend\Loader
  * @uses       \Zend\Wildfire\Channel
  * @uses       \Zend\Wildfire\Exception
- * @uses       \Zend\Wildfire\Protocol\JSONStream
+ * @uses       \Zend\Wildfire\Protocol\JsonStream
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage Channel
@@ -157,8 +157,8 @@ class HttpHeaders
     protected function _initProtocol($uri)
     {
         switch ($uri) {
-            case Protocol\JSONStream::PROTOCOL_URI;
-                return new Protocol\JSONStream();
+            case Protocol\JsonStream::PROTOCOL_URI;
+                return new Protocol\JsonStream();
         }
         throw new Wildfire\Exception('Tyring to initialize unknown protocol for URI "'.$uri.'".');
     }

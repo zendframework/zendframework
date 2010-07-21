@@ -25,7 +25,7 @@
  */
 namespace Zend\Dojo\View\Helper;
 
-use Zend\JSON\JSON,
+use Zend\Json\Json,
     Zend\View\ViewEngine as View,
     Zend\View\Helper\HtmlElement;
 
@@ -33,7 +33,7 @@ use Zend\JSON\JSON,
  * Dojo dijit base class
  *
  * @uses       \Zend\Dojo\View\Helper\Dojo
- * @uses       \Zend\JSON\JSON
+ * @uses       \Zend\Json\Json
  * @uses       \Zend\View\Helper\HtmlElement
  * @package    Zend_Dojo
  * @subpackage View
@@ -255,7 +255,7 @@ abstract class Dijit extends HtmlElement
                 } else {
                     $values = array();
                 }
-                $values = JSON::encode($values);
+                $values = Json::encode($values);
                 if ($this->_useDeclarative()) {
                     $values = str_replace('"', "'", $values);
                 }

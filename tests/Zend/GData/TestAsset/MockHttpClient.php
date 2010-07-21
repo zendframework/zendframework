@@ -48,7 +48,7 @@ class Request
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MockHttpClient extends \Zend\HTTP\Client\Adapter\Test
+class MockHttpClient extends \Zend\Http\Client\Adapter\Test
 {
     protected $_requests;
 

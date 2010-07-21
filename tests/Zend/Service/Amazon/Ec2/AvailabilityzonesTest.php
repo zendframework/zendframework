@@ -55,7 +55,7 @@ class Zend_Service_Amazon_Ec2_AvailabilityzonesTest extends PHPUnit_Framework_Te
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Availabilityzones::setDefaultHTTPClient($client);
+        Zend_Service_Amazon_Ec2_Availabilityzones::setDefaultHttpClient($client);
 
     }
 

@@ -29,7 +29,7 @@ use Zend\Form\Element,
     Zend\Form\Form,
     Zend\Config\Config,
     Zend\Controller\Action\HelperBroker,
-    Zend\JSON\JSON,
+    Zend\Json\Json,
     Zend\Loader\PluginLoader,
     Zend\Registry,
     Zend\Translator\Translator,
@@ -233,7 +233,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                       ->addFilter(new TestAsset\ArrayFilter());
         $test = $this->element->getValue();
         $this->assertTrue(is_array($test));
-        $test = JSON::encode($test);
+        $test = Json::encode($test);
         $this->assertNotContains('foo', $test);
         foreach (array('bar', 'baz', 'bat') as $value) {
             $this->assertContains($value, $test);
@@ -935,7 +935,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                       ->setValue(array('foo', 'bar', 'baz'))
                       ->addError('error with value %value%');
         $errors = $this->element->getMessages();
-        $errors = JSON::encode($errors);
+        $errors = Json::encode($errors);
         foreach (array('foo', 'bar', 'baz') as $value) {
             $message = 'error with value ' . $value;
             $this->assertContains($message, $errors);

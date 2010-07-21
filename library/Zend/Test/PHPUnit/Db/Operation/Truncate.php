@@ -68,16 +68,16 @@ class Truncate implements \PHPUnit_Extensions_Database_Operation_IDatabaseOperat
     /**
      * Truncate a given table.
      *
-     * @param \Zend\DB\Adapter\AbstractAdapter $db
+     * @param \Zend\Db\Adapter\AbstractAdapter $db
      * @param string $tableName
      * @return void
      */
-    protected function _truncate(\Zend\DB\Adapter\AbstractAdapter $db, $tableName)
+    protected function _truncate(\Zend\Db\Adapter\AbstractAdapter $db, $tableName)
     {
         $tableName = $db->quoteIdentifier($tableName);
-        if($db instanceof \Zend\DB\Adapter\PDO\SQLite) {
+        if($db instanceof \Zend\Db\Adapter\Pdo\Sqlite) {
             $db->query('DELETE FROM '.$tableName);
-        } else if($db instanceof \Zend\DB\Adapter\DB2\DB2) {
+        } else if($db instanceof \Zend\Db\Adapter\Db2) {
             /*if(strstr(PHP_OS, "WIN")) {
                 $file = tempnam(sys_get_temp_dir(), "zendtestdbibm_");
                 file_put_contents($file, "");
@@ -86,10 +86,10 @@ class Truncate implements \PHPUnit_Extensions_Database_Operation_IDatabaseOperat
             } else {
                 $db->query('IMPORT FROM /dev/null OF DEL REPLACE INTO '.$tableName);
             }*/
-            throw Zend_Exception("IBM Db2 TRUNCATE not supported.");
+            throw \Zend\Exception("IBM Db2 TRUNCATE not supported.");
         } else if($this->_isMssqlOrOracle($db)) {
             $db->query('TRUNCATE TABLE '.$tableName);
-        } else if($db instanceof \Zend\DB\Adapter\PDO\PGSQL) {
+        } else if($db instanceof \Zend\Db\Adapter\Pdo\PgSql) {
             $db->query('TRUNCATE '.$tableName.' CASCADE');
         } else {
             $db->query('TRUNCATE '.$tableName);
@@ -105,10 +105,10 @@ class Truncate implements \PHPUnit_Extensions_Database_Operation_IDatabaseOperat
     private function _isMssqlOrOracle($db)
     {
         return (
-            $db instanceof \Zend\DB\Adapter\PDO\MSSQL ||
-            $db instanceof \Zend\DB\Adapter\SQLSRV\SQLSRV ||
-            $db instanceof \Zend\DB\Adapter\PDO\OCI ||
-            $db instanceof \Zend\DB\Adapter\Oracle\Oracle
+            $db instanceof \Zend\Db\Adapter\Pdo\Mssql ||
+            $db instanceof \Zend\Db\Adapter\Sqlsrv ||
+            $db instanceof \Zend\Db\Adapter\Pdo\Oci ||
+            $db instanceof \Zend\Db\Adapter\Oracle
         );
     }
 }

@@ -26,11 +26,11 @@
 namespace Zend\Authentication\Adapter;
 use Zend\Authentication\Adapter as AuthenticationAdapter,
     Zend\Authentication\Result as AuthenticationResult,
-    Zend\DB\DB,
-    Zend\DB\Adapter\AbstractAdapter as AbstractDBAdapter,
-    Zend\DB\Expr as DBExpr,
-    Zend\DB\Select as DBSelect,
-    Zend\DB\Table\AbstractTable;
+    Zend\Db\Db,
+    Zend\Db\Adapter\AbstractAdapter as AbstractDBAdapter,
+    Zend\Db\Expr as DBExpr,
+    Zend\Db\Select as DBSelect,
+    Zend\Db\Table\AbstractTable;
 
 /**
  * @uses       Zend\Authentication\Adapter\Exception
@@ -49,12 +49,12 @@ class DbTable implements AuthenticationAdapter
     /**
      * Database Connection
      *
-     * @var Zend\DB\Adapter\AbstractAdapter
+     * @var Zend\Db\Adapter\AbstractAdapter
      */
     protected $_zendDb = null;
 
     /**
-     * @var Zend\DB\Select
+     * @var Zend\Db\Select
      */
     protected $_dbSelect = null;
 
@@ -117,7 +117,7 @@ class DbTable implements AuthenticationAdapter
     /**
      * __construct() - Sets configuration options
      *
-     * @param  Zend\DB\Adapter\AbstractAdapter $zendDb
+     * @param  Zend\Db\Adapter\AbstractAdapter $zendDb
      * @param  string                   $tableName
      * @param  string                   $identityColumn
      * @param  string                   $credentialColumn
@@ -257,7 +257,7 @@ class DbTable implements AuthenticationAdapter
     /**
      * getDbSelect() - Return the preauthentication Db Select object for userland select query modification
      *
-     * @return Zend\DB\Select
+     * @return Zend\Db\Select
      */
     public function getDbSelect()
     {
@@ -418,9 +418,9 @@ class DbTable implements AuthenticationAdapter
     protected function _authenticateQuerySelect(DBSelect $dbSelect)
     {
         try {
-            if ($this->_zendDb->getFetchMode() != DB::FETCH_ASSOC) {
+            if ($this->_zendDb->getFetchMode() != Db::FETCH_ASSOC) {
                 $origDbFetchMode = $this->_zendDb->getFetchMode();
-                $this->_zendDb->setFetchMode(DB::FETCH_ASSOC);
+                $this->_zendDb->setFetchMode(Db::FETCH_ASSOC);
             }
             $resultIdentities = $this->_zendDb->fetchAll($dbSelect->__toString());
             if (isset($origDbFetchMode)) {

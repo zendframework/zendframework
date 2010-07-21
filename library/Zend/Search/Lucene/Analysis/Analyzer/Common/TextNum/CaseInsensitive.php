@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Analysis\Analyzer\Common\TextNum;
+use Zend\Search\Lucene\Analysis\Analyzer\Common;
 use Zend\Search\Lucene\Analysis\TokenFilter;
 
 /**
@@ -35,7 +36,7 @@ use Zend\Search\Lucene\Analysis\TokenFilter;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class CaseInsensitive extends TextNum
+class CaseInsensitive extends Common\TextNum
 {
     public function __construct()
     {

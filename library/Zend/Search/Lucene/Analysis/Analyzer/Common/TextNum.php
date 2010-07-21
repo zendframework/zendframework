@@ -23,12 +23,10 @@
 /**
  * @namespace
  */
-namespace Zend\Search\Lucene\Analysis\Analyzer\Common\TextNum;
-use Zend\Search\Lucene\Analysis\Analyzer\Common;
+namespace Zend\Search\Lucene\Analysis\Analyzer\Common;
 use Zend\Search\Lucene\Analysis;
 
 /**
- * @uses       \Zend\Search\Lucene\Analysis\Analyzer\Common
  * @uses       \Zend\Search\Lucene\Analysis\Token
  * @category   Zend
  * @package    Zend_Search_Lucene
@@ -36,7 +34,7 @@ use Zend\Search\Lucene\Analysis;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TextNum extends Common\AbstractCommon
+class TextNum extends AbstractCommon
 {
     /**
      * Current position in a stream

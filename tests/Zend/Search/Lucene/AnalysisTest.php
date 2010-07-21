@@ -25,6 +25,7 @@
  */
 namespace ZendTest\Search\Lucene;
 use Zend\Search\Lucene\Analysis\Analyzer;
+use Zend\Search\Lucene\Analysis\Analyzer\Common;
 use Zend\Search\Lucene\Analysis\Analyzer\Common\Text;
 use Zend\Search\Lucene\Analysis\Analyzer\Common\TextNum;
 use Zend\Search\Lucene\Analysis\Analyzer\Common\Utf8;
@@ -55,7 +56,7 @@ class AnalysisTest extends \PHPUnit_Framework_TestCase
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num */
 
-        $newAnalyzer = new Utf8Num\Utf8Num();
+        $newAnalyzer = new Common\Utf8Num();
         Analyzer\Analyzer::setDefault($newAnalyzer);
         $this->assertTrue(Analyzer\Analyzer::getDefault() === $newAnalyzer);
 
@@ -67,7 +68,7 @@ class AnalysisTest extends \PHPUnit_Framework_TestCase
     {
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Text */
 
-        $analyzer = new Text\Text();
+        $analyzer = new Common\Text();
 
         $tokenList = $analyzer->tokenize('Word1 Word2 anotherWord');
 
@@ -119,7 +120,7 @@ class AnalysisTest extends \PHPUnit_Framework_TestCase
     {
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum */
 
-        $analyzer = new TextNum\TextNum();
+        $analyzer = new Common\TextNum();
 
         $tokenList = $analyzer->tokenize('Word1 Word2 anotherWord');
 
@@ -176,7 +177,7 @@ class AnalysisTest extends \PHPUnit_Framework_TestCase
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8 */
 
-        $analyzer = new Utf8\Utf8();
+        $analyzer = new Common\Utf8();
 
         // UTF-8 text with a cyrillic symbols
         $tokenList = $analyzer->tokenize('Слово1 Слово2 ДругоеСлово', 'UTF-8');
@@ -208,7 +209,7 @@ class AnalysisTest extends \PHPUnit_Framework_TestCase
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num */
 
-        $analyzer = new Utf8Num\Utf8Num();
+        $analyzer = new Common\Utf8Num();
 
         // UTF-8 text with a cyrillic symbols
         $tokenList = $analyzer->tokenize('Слово1 Слово2 ДругоеСлово', 'UTF-8');
@@ -310,7 +311,7 @@ class AnalysisTest extends \PHPUnit_Framework_TestCase
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8 */
 
-        $analyzer = new Utf8\Utf8();
+        $analyzer = new Common\Utf8();
 
         // UTF-8 text with a cyrillic symbols
         $tokenList = $analyzer->tokenize(iconv('UTF-8', 'Windows-1251', 'Слово1 Слово2 ДругоеСлово'), 'Windows-1251');

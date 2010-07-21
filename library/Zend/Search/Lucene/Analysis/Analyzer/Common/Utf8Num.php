@@ -23,13 +23,11 @@
 /**
  * @namespace
  */
-namespace Zend\Search\Lucene\Analysis\Analyzer\Common\Utf8;
-use Zend\Search\Lucene\Analysis\Analyzer\Common;
+namespace Zend\Search\Lucene\Analysis\Analyzer\Common;
 use Zend\Search\Lucene\Analysis;
 use Zend\Search\Lucene;
 
 /**
- * @uses       \Zend\Search\Lucene\Analysis\Analyzer\Common
  * @uses       \Zend\Search\Lucene\Analysis\Token
  * @uses       \Zend\Search\Lucene\Exception
  * @category   Zend
@@ -38,7 +36,7 @@ use Zend\Search\Lucene;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Utf8 extends Common\AbstractCommon
+class Utf8Num extends AbstractCommon
 {
     /**
      * Current char position in an UTF-8 stream
@@ -63,7 +61,7 @@ class Utf8 extends Common\AbstractCommon
     {
         if (@preg_match('/\pL/u', 'a') != 1) {
             // PCRE unicode support is turned off
-            throw new Lucene\Exception('Utf8 analyzer needs PCRE unicode support to be enabled.');
+            throw new Lucene\Exception('Utf8Num analyzer needs PCRE unicode support to be enabled.');
         }
     }
 
@@ -97,7 +95,7 @@ class Utf8 extends Common\AbstractCommon
         }
 
         do {
-            if (! preg_match('/[\p{L}]+/u', $this->_input, $match, PREG_OFFSET_CAPTURE, $this->_bytePosition)) {
+            if (! preg_match('/[\p{L}\p{N}]+/u', $this->_input, $match, PREG_OFFSET_CAPTURE, $this->_bytePosition)) {
                 // It covers both cases a) there are no matches (preg_match(...) === 0)
                 // b) error occured (preg_match(...) === FALSE)
                 return null;

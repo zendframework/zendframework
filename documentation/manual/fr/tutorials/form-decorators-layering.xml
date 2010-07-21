@@ -8,11 +8,11 @@
         Si vous avez bien suivi <link linkend="learning.form.decorators.simplest">la section
             précédente</link>, vous avez pu remarquer que la méthode
         <methodname>render()</methodname> prend un argument, <varname>$content</varname>.
-        Il est de type chaine de caractères. <methodname>render()</methodname> va utiliser cette
-        chaine et décider de la remplacer, de rajouter ou de faire précéder du contenu à celle-ci.
-        Ceci permet de chaine les décorateurs -- ce qui ouvre des possibilités de créer ses propres
-        décorateurs qui vont rendre une petite partie des données d'un élément chacun -- c'est la
-        chaine complet de décorateurs qui déterminera le rendu final réel de l'élément.
+        Il est de type chaîne de caractères. <methodname>render()</methodname> va utiliser cette
+        chaîne et décider de la remplacer, de rajouter ou de faire précéder du contenu à celle-ci.
+        Ceci permet de chaîner les décorateurs -- ce qui ouvre des possibilités de créer ses propres
+        décorateurs qui vont rendre chacun une petite partie des données d'un élément -- c'est la
+        chaîne complète de décorateurs qui déterminera le rendu final réel de l'élément.
     </para>
 
     <para>
@@ -20,71 +20,73 @@
     </para>
 
     <para>
-        Pour la plupart des éléments, les décorateurs suiovants sont chargés par défaut:
+        Pour la plupart des éléments, les décorateurs suivants sont chargés par défaut&#160;:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <classname>ViewHelper</classname>: utilise une aide de vue pour rendre l'élément
-                balise de formulaire à proprement parlé.
+                <classname>ViewHelper</classname>&#160;: utilise une aide de vue pour rendre
+                l'élément balise de formulaire à proprement parlé.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <classname>Errors</classname>: utilise l'aide de vue <classname>FormErrors</classname>
-                pour afficher les erreurs de validation éventuelles.
+                <classname>Errors</classname>&#160;: utilise l'aide de vue
+                <classname>FormErrors</classname> pour afficher les erreurs de validation
+                éventuelles.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <classname>Description</classname>: utilise l'aide de vue <classname>FormNote</classname>
-                afin de rendre la description éventuelle de l'élément.
+                <classname>Description</classname>&#160;: utilise l'aide de vue
+                <classname>FormNote</classname> afin de rendre la description éventuelle de
+                l'élément.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <classname>HtmlTag</classname>: encapsule les trois objets ci-dessus dans un tag
-                <code>&lt;dd&gt;</code>.
+                <classname>HtmlTag</classname>&#160;: encapsule les trois objets ci-dessus
+                dans un tag <code>&lt;dd&gt;</code>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <classname>Label</classname>: rend l'intitulé de l'élément en utilisant l'aide de vue
-                <classname>FormLabel</classname> (et en encapsulant le tout dans un tag
-                <code>&lt;dt&gt;</code>).
+                <classname>Label</classname>&#160;: rend l'intitulé de l'élément en utilisant
+                l'aide de vue <classname>FormLabel</classname> (et en encapsulant le tout
+                dans un tag <code>&lt;dt&gt;</code>).
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Notez bien que chaque décorateur na qu'une petite tâche particulière et opère sur une partie
-        spécifique des données de l'élément auquel il est rattaché, le décorateur
-        <classname>Errors</classname> récupère les messages de validation de l'élément et les rend,
-        le décorateur <classname>Label</classname> rend simplement le libéllé. Ceci fait que chaque
-        décorateur est très petit, réutilisable, et surtout testable.
+        Notez bien que chaque décorateur n'a qu'une petite tâche particulière et opère sur une
+        partie spécifique des données de l'élément auquel il est rattaché, le décorateur
+        <classname>Errors</classname> récupère les messages de validation de l'élément et
+        effectue leur rendu, le décorateur <classname>Label</classname> rend simplement le
+        libellé. Ceci fait que chaque décorateur est très petit, réutilisable, et surtout testable.
     </para>
 
     <para>
-        Cet argument <varname>$content</varname> vient de là aussi : chaque décorateur travaille
-        avec sa méthode <methodname>render()</methodname> sur un contenu (générallement généré par
-        le décorateur immédiatement précédent dans la pile globale) et embellit ce contenu en lui
-        rajoutant ou en lui faisant précéder des informations. Il peut aussi remplacer totallement
-        son contenu.
+        Cet argument <varname>$content</varname> vient de là aussi&#160;: chaque décorateur
+        travaille avec sa méthode <methodname>render()</methodname> sur un contenu (généralement
+        généré par le décorateur immédiatement précédent dans la pile globale) et embellit ce
+        contenu en lui rajoutant ou en lui faisant précéder des informations. Il peut aussi
+        remplacer totalement son contenu.
     </para>
 
     <para>
         Ainsi, pensez au mécanisme des décorateurs comme la conception d'un oignon de l'intérieur
-        vers l'exterieur.
+        vers l'extérieur.
     </para>
 
     <para>
         Voyons voir un exemple, le même que celui<link
-            linkend="learning.form.decorators.simplest">de la section précédente</link>:
+            linkend="learning.form.decorators.simplest">de la section précédente</link>&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -108,7 +110,7 @@ class My_Decorator_SimpleInput extends Zend_Form_Decorator_Abstract
 ]]></programlisting>
 
     <para>
-        Supprimons la fonctionnalité libéllé (label) et créons un décorateur spécifique pour lui.
+        Supprimons la fonctionnalité libellé (label) et créons un décorateur spécifique pour lui.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -145,13 +147,13 @@ class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
 ]]></programlisting>
 
     <para>
-        Ok, ca semble bon mais il y a un problème : le dernier décorateur va l'emporter. Vous allez
-        vous retrouver avec comme seul rendu, celui du dernier décorateur.
+        Ok, ca semble bon mais il y a un problème&#160;: le dernier décorateur va l'emporter. Vous
+        allez vous retrouver avec comme seul rendu, celui du dernier décorateur.
     </para>
 
     <para>
         Pour faire fonctionner le tout comme il se doit, concaténez simplement le contenu précédent
-        <varname>$content</varname> avec le contenu généré:
+        <varname>$content</varname> avec le contenu généré&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -159,10 +161,11 @@ return $content . $markup;
 ]]></programlisting>
 
     <para>
-        Le problème avec cette approche est que vous ne pouvez pas choisir où se place le contenu du décorateur
-        en question. Heureusement, un mécanisme standard existe;
-        <classname>Zend_Form_Decorator_Abstract</classname> possède le concept de place et définit des constantes
-        pour le régler. Aussi, il permet de préciser un séparateur à placer entre les 2. Voyons celà:
+        Le problème avec cette approche est que vous ne pouvez pas choisir où se place le contenu
+        du décorateur en question. Heureusement, un mécanisme standard existe&#160;;
+        <classname>Zend_Form_Decorator_Abstract</classname> possède le concept de place et définit
+        des constantes pour le régler. Aussi, il permet de préciser un séparateur à placer entre
+        les 2. Voyons celà&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -222,7 +225,7 @@ class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
     </para>
 
     <para>
-        Créons dès lors un élément de formulaire qui va utiliser tout celà:
+        Créons dès lors un élément de formulaire qui va utiliser tout celà&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -241,42 +244,45 @@ $element = new Zend_Form_Element('foo', array(
 ]]></programlisting>
 
     <para>
-        Comment ça fonctionne? et bien nous appelons <methodname>render()</methodname>, l'élément va alors
-        commencer une itération sur tous ses décorateurs, en appelant <methodname>render()</methodname>
-        sur chacun. Il va passer une chaine vide comme contenu pour le premier décorateur, et le rendu
-        de chaque décorateur va servir de contenu pour le suivant, ainsi de suite:
+        Comment ça fonctionne&#160;? et bien nous appelons <methodname>render()</methodname>,
+        l'élément va alors commencer une itération sur tous ses décorateurs, en appelant
+        <methodname>render()</methodname> sur chacun. Il va passer une chaîne vide comme contenu
+        pour le premier décorateur, et le rendu de chaque décorateur va servir de contenu pour
+        le suivant, ainsi de suite&#160;:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                Contenu initial : chaine vide: ''.
+                Contenu initial&#160;: chaîne vide: ''.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                chaine vide ('') est passée au décorateur <classname>SimpleInput</classname>, qui génère
-                un tag de formulaire de type input qu'il ajoute à la chaine vide: <emphasis>&lt;input
-                    id="bar-foo" name="bar[foo]" type="text" value="test"/&gt;</emphasis>.
+                Chaîne vide ('') est passée au décorateur <classname>SimpleInput</classname>, qui
+                génère un tag de formulaire de type input qu'il ajoute à la chaîne vide&#160;:
+                <emphasis>&lt;input id="bar-foo" name="bar[foo]" type="text"
+                    value="test"/&gt;</emphasis>.
             </para>
         </listitem>
 
         <listitem>
             <para>
                 Ce contenu généré est alors passé comme contenu original pour le décorateur
-                <classname>SimpleLabel</classname> qui génère un libéllé et le place avant le contenu
-                original avec comme séparateur <constant>PHP_EOL</constant>, ce qui donne:
-                <emphasis>&lt;label for="bar-foo"&gt;\n&lt;input id="bar-foo" name="bar[foo]"
-                    type="text" value="test"/&gt;</emphasis>.
+                <classname>SimpleLabel</classname> qui génère un libellé et le place avant le
+                contenu original avec comme séparateur <constant>PHP_EOL</constant>, ce qui
+                donne&#160;: <emphasis>&lt;label for="bar-foo"&gt;\n&lt;input id="bar-foo"
+                    name="bar[foo]" type="text" value="test"/&gt;</emphasis>.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Mais attendez une minute! Et si nous voulions que le libéllé soit rendu après le tag de formulaire
-        pour une raison quelconque? Vous souvenez-vous de l'option "placement"? Vous pouvez la préciser
-        comme option de décorateur, et le plus simple est alors de la passer à la création de l'élément:
+        Mais attendez une minute&#160;! Et si nous voulions que le libellé soit rendu après le tag
+        de formulaire pour une raison quelconque&#160;? Vous souvenez-vous de l'option
+        "placement"&#160;? Vous pouvez la préciser comme option de décorateur, et le plus simple
+        est alors de la passer à la création de l'élément&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -295,67 +301,67 @@ $element = new Zend_Form_Element('foo', array(
 ]]></programlisting>
 
     <para>
-        Notez que passer des options vous oblige à préciser le nom du décorateur dans un tableau en tant
-        que premier élément, le deuxième élément est un tableau d'options.
+        Notez que passer des options vous oblige à préciser le nom du décorateur dans un tableau en
+        tant que premier élément, le deuxième élément est un tableau d'options.
     </para>
 
     <para>
-        Le code ci-dessus propose un rendu : <emphasis>&lt;input id="bar-foo" name="bar[foo]" type="text"
-            value="test"/&gt;\n&lt;label for="bar-foo"&gt;</emphasis>.
+        Le code ci-dessus propose un rendu&#160;: <emphasis>&lt;input id="bar-foo" name="bar[foo]"
+            type="text" value="test"/&gt;\n&lt;label for="bar-foo"&gt;</emphasis>.
     </para>
 
     <para>
         Grâce à cette technique, vous pouvez avoir plusieurs décorateurs dont chacun s'occupe
-        de rendre une petite partie d'un élément; et c'est en utilisant plusieurs décorateurs et en
-        les chainant correctement que vous obtiendrez un rendu complet : l'oignon final.
+        de rendre une petite partie d'un élément&#160;; et c'est en utilisant plusieurs décorateurs
+        et en les chaînant correctement que vous obtiendrez un rendu complet&#160;: l'oignon final.
     </para>
 
     <para>
-        Avantages et inconvénients d'une telle technique, commençons par les inconvénients:
+        Avantages et inconvénients d'une telle technique, commençons par les inconvénients&#160;:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                C'est plus complexe qu'un rendu simple. Vous devez faire attention à chaque décorateur
-                mais en plus à l'ordre dans lequel ils agissent.
+                C'est plus complexe qu'un rendu simple. Vous devez faire attention à chaque
+                décorateur mais en plus à l'ordre dans lequel ils agissent.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Ca consomme plus de ressources. Plus de décorateurs, plus d'objets, multipliés par le
-                nombre d'éléments dans un formulaire et la consommation en ressources augmente.
+                Ça consomme plus de ressources. Plus de décorateurs, plus d'objets, multipliés par
+                le nombre d'éléments dans un formulaire et la consommation en ressources augmente.
                 La mise en cache peut aider.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Les avantages sont:
+        Les avantages sont&#160;:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                Réutilisabilité. Vous pouvez créer des décorateurs complètement réutilisables car vous
-                ne vous souciez pas du rendu final, mais de chaque petit bout de rendu.
+                Réutilisabilité. Vous pouvez créer des décorateurs complètement réutilisables car
+                vous ne vous souciez pas du rendu final, mais de chaque petit bout de rendu.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Fléxibilité. Il est en théorie possible d'arriver au rendu final voulu très exactement,
-                et ceci avec une petite poignée de décorateurs.
+                Fléxibilité. Il est en théorie possible d'arriver au rendu final voulu très
+                exactement, et ceci avec une petite poignée de décorateurs.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
         Les exemples ci-dessus montrent l'utilisation de décorateurs au sein même d'un objet
-        <classname>Zend_Form</classname> et nous avons vu comment les décorateurs jouent les uns avec les
-        autres pour arriver au rendu final. Afin de pouvoir les utiliser de manière indépendante,
-        la version 1.7 a ajouté des méthodes fléxibles rendant les formulaires ressemblant au style
-        Rail. Nous allons nous pencher sur ce fait dans la section suivante.
+        <classname>Zend_Form</classname> et nous avons vu comment les décorateurs jouent les uns
+        avec les autres pour arriver au rendu final. Afin de pouvoir les utiliser de manière
+        indépendante, a version 1.7 a ajouté des méthodes flexibles rendant les formulaires
+        ressemblant au style Rail. Nous allons nous pencher sur ce fait dans la section suivante.
     </para>
 </sect1>

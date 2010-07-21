@@ -60,7 +60,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         $expiresIn = time() + 600;
 
         $_SERVER['SCRIPT_URI'] = "http://www.zf-test.com/test.php";
-        $storage = new Storage\File(dirname(__FILE__)."/_files/consumer");
+        $storage = new Storage\File(__DIR__."/_files/consumer");
         $storage->delDiscoveryInfo(self::ID);
         $this->assertTrue( $storage->addDiscoveryInfo(self::ID, self::REAL_ID, self::SERVER, 1.1, $expiresIn) );
         $storage->delAssociation(self::SERVER);
@@ -211,7 +211,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         $expiresIn = time() + 600;
 
         $_SERVER['SCRIPT_URI'] = "http://www.zf-test.com/test.php";
-        $storage = new Storage\File(dirname(__FILE__)."/_files/consumer");
+        $storage = new Storage\File(__DIR__."/_files/consumer");
         $storage->delDiscoveryInfo(self::ID);
         $this->assertTrue( $storage->addDiscoveryInfo(self::ID, self::REAL_ID, self::SERVER, 1.1, $expiresIn) );
         $storage->delAssociation(self::SERVER);
@@ -261,7 +261,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
     {
         $expiresIn = time() + 600;
 
-        $storage = new Storage\File(dirname(__FILE__)."/_files/consumer");
+        $storage = new Storage\File(__DIR__."/_files/consumer");
         $storage->delAssociation(self::SERVER);
         $consumer = new ConsumerHelper($storage);
         $this->assertFalse( $consumer->getAssociation(self::SERVER, $handle, $macFunc, $secret, $expires) );
@@ -285,7 +285,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
      */
     public function testHttpRequest()
     {
-        $consumer = new ConsumerHelper(new Storage\File(dirname(__FILE__)."/_files/consumer"));
+        $consumer = new ConsumerHelper(new Storage\File(__DIR__."/_files/consumer"));
         $http = new HTTP\Client(null,
             array(
                 'maxredirects' => 4,
@@ -370,7 +370,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
     public function testAssociate()
     {
         try {
-            $storage = new Storage\File(dirname(__FILE__)."/_files/consumer");
+            $storage = new Storage\File(__DIR__."/_files/consumer");
             $storage->delAssociation(self::SERVER);
             $consumer = new ConsumerHelper($storage);
             $http = new HTTP\Client(null,
@@ -546,7 +546,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
      */
     public function testDiscovery()
     {
-        $storage = new Storage\File(dirname(__FILE__)."/_files/consumer");
+        $storage = new Storage\File(__DIR__."/_files/consumer");
         $consumer = new ConsumerHelper($storage);
         $http = new HTTP\Client(null,
             array(
@@ -727,7 +727,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
     {
         $expiresIn = time() + 600;
         $_SERVER['SCRIPT_URI'] = "http://www.zf-test.com/test.php";
-        $storage = new Storage\File(dirname(__FILE__)."/_files/consumer");
+        $storage = new Storage\File(__DIR__."/_files/consumer");
         $consumer = new ConsumerHelper($storage);
 
         $storage->addDiscoveryInfo(self::ID, self::REAL_ID, self::SERVER, 1.1, $expiresIn);
@@ -845,7 +845,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
     {
         $expiresIn = time() + 600;
         $_SERVER['SCRIPT_URI'] = "http://www.zf-test.com/test.php";
-        $storage = new Storage\File(dirname(__FILE__)."/_files/consumer");
+        $storage = new Storage\File(__DIR__."/_files/consumer");
         $consumer = new ConsumerHelper($storage);
         $http = new HTTP\Client(null,
             array(

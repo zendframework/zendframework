@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Response_ResponseAbstract
+ * @uses       Zend_Service_DeveloperGarden_Response_AbstractResponse
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -30,7 +30,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_BaseType
-    extends Zend_Service_DeveloperGarden_Response_ResponseAbstract
+    extends Zend_Service_DeveloperGarden_Response_AbstractResponse
 {
     /**
      * the status code
@@ -50,7 +50,7 @@ class Zend_Service_DeveloperGarden_Response_BaseType
      * parse the result
      *
      * @throws Zend_Service_DeveloperGarden_Response_Exception
-     * @return Zend_Service_DeveloperGarden_Response_ResponseAbstract
+     * @return Zend_Service_DeveloperGarden_Response_AbstractResponse
      */
     public function parse()
     {

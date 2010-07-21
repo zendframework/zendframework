@@ -133,7 +133,7 @@ class FigletTest extends \PHPUnit_Framework_TestCase
     public function testNonExistentFont()
     {
         try {
-            $figlet = new Figlet\Figlet(array('font' => dirname(__FILE__) . '/Figlet/NonExistentFont.flf'));
+            $figlet = new Figlet\Figlet(array('font' => __DIR__ . '/Figlet/NonExistentFont.flf'));
             $this->fail('An expected Zend_Text_Figlet_Exception has not been raised');
         } catch (Figlet\Exception $expected) {
             $this->assertContains('Font file not found', $expected->getMessage());
@@ -143,7 +143,7 @@ class FigletTest extends \PHPUnit_Framework_TestCase
     public function testInvalidFont()
     {
         try {
-            $figlet = new Figlet\Figlet(array('font' => dirname(__FILE__) . '/Figlet/InvalidFont.flf'));
+            $figlet = new Figlet\Figlet(array('font' => __DIR__ . '/Figlet/InvalidFont.flf'));
             $this->fail('An expected Zend_Text_Figlet_Exception has not been raised');
         } catch (Figlet\Exception $expected) {
             $this->assertContains('Not a FIGlet 2 font file', $expected->getMessage());
@@ -152,7 +152,7 @@ class FigletTest extends \PHPUnit_Framework_TestCase
 
     public function testGzippedFont()
     {
-        $figlet = new Figlet\Figlet(array('font' => dirname(__FILE__) . '/Figlet/GzippedFont.gz'));
+        $figlet = new Figlet\Figlet(array('font' => __DIR__ . '/Figlet/GzippedFont.gz'));
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardAlignLeft.figlet');
     }
 
@@ -266,7 +266,7 @@ class FigletTest extends \PHPUnit_Framework_TestCase
 
     protected function _equalAgainstFile($output, $file)
     {
-        $compareString = file_get_contents(dirname(__FILE__) . '/Figlet/' . $file);
+        $compareString = file_get_contents(__DIR__ . '/Figlet/' . $file);
 
         $this->assertEquals($compareString, $output);
     }

@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Client_ClientAbstract
+ * @uses       Zend_Service_DeveloperGarden_Client_AbstractClient
  * @uses       Zend_Service_DeveloperGarden_ConferenceCall_ConferenceAccount
  * @uses       Zend_Service_DeveloperGarden_ConferenceCall_ConferenceDetail
  * @uses       Zend_Service_DeveloperGarden_ConferenceCall_ConferenceSchedule
@@ -88,7 +88,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_ConferenceCall
-    extends Zend_Service_DeveloperGarden_Client_ClientAbstract
+    extends Zend_Service_DeveloperGarden_Client_AbstractClient
 {
     /**
      * wsdl file

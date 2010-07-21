@@ -28,15 +28,15 @@ namespace Zend\GData\Media\Extension;
 /**
  * Represents the media:rating element
  *
- * @uses       \Zend\GData\Extension\Extension
- * @uses       \Zend\GData\Media\Media
+ * @uses       \Zend\GData\Extension
+ * @uses       \Zend\GData\Media
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Media
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MediaRating extends \Zend\GData\Extension\Extension
+class MediaRating extends \Zend\GData\Extension
 {
 
     protected $_rootElement = 'rating';
@@ -55,7 +55,7 @@ class MediaRating extends \Zend\GData\Extension\Extension
      */
     public function __construct($text = null, $scheme = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Media\Media::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Media::$namespaces);
         parent::__construct();
         $this->_scheme = $scheme;
         $this->_text = $text;

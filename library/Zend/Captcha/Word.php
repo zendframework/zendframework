@@ -135,7 +135,7 @@ abstract class Word extends AbstractAdapter
      *
      * @return string
      */
-    public function getSessionClass()
+	public function getSessionClass()
     {
         return $this->_sessionClass;
     }
@@ -234,6 +234,28 @@ abstract class Word extends AbstractAdapter
 	}
 
     /**
+     * Numbers should be included in the pattern?
+     * 
+     * @return bool
+     */
+    public function getUseNumbers()
+    {
+        return $this->_useNumbers;
+    }
+
+	/**
+	 * Set if numbers should be included in the pattern
+	 * 
+     * @param $_useNumbers numbers should be included in the pattern?
+     * @return Zend_Captcha_Word
+     */
+    public function setUseNumbers($_useNumbers)
+    {
+        $this->_useNumbers = $_useNumbers;
+        return $this;
+    }
+	
+	/**
      * Get session object
      *
      * @return \Zend\Session\Container

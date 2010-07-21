@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20977 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-layout">
     <title>Ein Layout erstellen</title>
 
     <para>
-        Wie man festgestellen kann waren die View Skripte im vorhergehenden Kapitel HTML Fragmente-
-        und keine kompletten Seiten. Das ist so gewünscht; wir wollen das unsere Aktionen nur den
-        Inhalt zurückgeben der für die Aktion selbst relevant ist, und nicht die Anwendung als
-        ganzes.
+        Wie man festgestellen kann waren die View Skripte im vorhergehenden Kapitel
+        <acronym>HTML</acronym> Fragmente- und keine kompletten Seiten. Das ist so gewünscht; wir
+        wollen das unsere Aktionen nur den Inhalt zurückgeben der für die Aktion selbst relevant
+        ist, und nicht die Anwendung als ganzes.
     </para>
 
     <para>
-        Jetzt müssen wir den erstellten Inhalt zu einer kompletten HTML Seite zusammenfügen. Wir
-        wollen auch ein konsistentes Aussehen und Feeling für die Anwendung haben. Wir wollen ein
-        globales Sitelayout verwenden um beide Arbeiten zu ermöglichen.
+        Jetzt müssen wir den erstellten Inhalt zu einer kompletten <acronym>HTML</acronym> Seite
+        zusammenfügen. Wir wollen auch ein konsistentes Aussehen und Feeling für die Anwendung
+        haben. Wir wollen ein globales Sitelayout verwenden um beide Arbeiten zu ermöglichen.
     </para>
 
     <para>
@@ -44,9 +44,9 @@
     </para>
 
     <para>
-        Um mit Zend_Layout zu beginnen müssen wir als erstes die Bootstrap informieren das Sie die
-        <classname>Layout</classname> Ressource verwenden soll. Das kann getan werden indem der
-        Befehl <command>zf enable layout</command> verwendet wird:
+        Um mit <classname>Zend_Layout</classname> zu beginnen müssen wir als erstes die Bootstrap
+        informieren das Sie die <classname>Layout</classname> Ressource verwenden soll. Das kann
+        getan werden indem der Befehl <command>zf enable layout</command> verwendet wird:
     </para>
 
     <programlisting language="shell"><![CDATA[
@@ -69,7 +69,7 @@ resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
 ]]></programlisting>
 
     <para>
-        Die endgültige INI Datei sollte wie folgt aussehen:
+        Die endgültige <acronym>INI</acronym> Datei sollte wie folgt aussehen:
     </para>
 
     <programlisting language="ini"><![CDATA[
@@ -216,10 +216,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     <para>
         Es ist zu beachten das wir auch den <methodname>headLink()</methodname> Platzhalter
-        verwenden. Das ist ein einfacher Weg um das HTML für das &lt;link&gt; Element zu erstellen,
-        sowie um es durch die Anwendung hindurch zu verfolgen. Wenn man zusätzliche CSS Blätter
-        zur Unterstützung einer einzelnen Aktion benötigt, kann das getan werden indem man
-        sicherstellt das Sie in der endgültig dargestellten Seite vorhanden sind.
+        verwenden. Das ist ein einfacher Weg um das <acronym>HTML</acronym> für das &lt;link&gt;
+        Element zu erstellen, sowie um es durch die Anwendung hindurch zu verfolgen. Wenn man
+        zusätzliche CSS Blätter zur Unterstützung einer einzelnen Aktion benötigt, kann das getan
+        werden indem man sicherstellt das Sie in der endgültig dargestellten Seite vorhanden sind.
     </para>
 
     <note>

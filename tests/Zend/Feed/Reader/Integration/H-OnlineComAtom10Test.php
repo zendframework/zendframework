@@ -44,7 +44,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        $this->_feedSamplePath = dirname(__FILE__) . '/_files/h-online.com-atom10.xml';
+        $this->_feedSamplePath = __DIR__ . '/_files/h-online.com-atom10.xml';
         $this->_options = Date\Date::setOptions();
         foreach($this->_options as $k=>$v) {
             if (is_null($v)) {

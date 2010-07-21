@@ -109,6 +109,7 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 
         <example id="zend.date.additional.sunrise-sunset.example-1">
             <title>Getting all Available Cities</title>
+
             <programlisting language="php"><![CDATA[
 // Output the complete list of available cities
 print_r (Zend_Date_Cities::getCityList());
@@ -180,6 +181,7 @@ print_r (Zend_Date_Cities::getCityList());
 
         <example id="zend.date.additional.sunrise-sunset.example-2">
             <title>Getting the Location for a City</title>
+
             <programlisting language="php"><![CDATA[
 // Get the location for a defined city
 // uses the effective horizon as no horizon is defined

@@ -64,7 +64,7 @@
         <para>
            For convenience, you can use <link
                linkend="zend.form.standardElements.file">Zend_Form_Element_File</link> instead of
-           building the HTML manually.
+           building the <acronym>HTML</acronym> manually.
         </para>
 
         <para>

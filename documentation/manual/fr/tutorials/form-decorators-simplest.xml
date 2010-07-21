@@ -8,12 +8,12 @@
         <title>Aperçu du pattern décorateur</title>
 
         <para>
-            Pour commencer, nous allons voir un epu de théorie sur <ulink
+            Pour commencer, nous allons voir un peu de théorie sur <ulink
                 url="http://en.wikipedia.org/wiki/Decorator_pattern">le pattern décorateur
                 </ulink>. Une technique consiste à définir une interface commune que les
-            objets originaux et les décorateurs implémentent; les décorateurs ayant comme
+            objets originaux et les décorateurs implémentent&#160;; les décorateurs ayant comme
             dépendance les objets originaux, ils vont alors pouvoir redéfinir ou proxier
-            les appels à leurs méthodes. Voyons un peu de code afin de mieux comprendre:
+            les appels à leurs méthodes. Voyons un peu de code afin de mieux comprendre&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -76,12 +76,13 @@ class LockedWindow implements Window
 ]]></programlisting>
 
         <para>
-            Nous créons un objet de type <classname>StandardWindow</classname>, le passons au constructeur
-            de <classname>LockedWindow</classname>, et le comportement de notre fenêtre a maintenant changé.
-            Le point fort ici est que nous n'avons pas besoin d'implémenter une fonctionnalité de verrou
-            ("lock") dans l'objet de base (StandardWindow) -- le décorateur s'occupe de cela. En plus,
-            vous pouvez utiliser votre fenêtre décorée à la place de la fenêtre standard : elles
-            implémentent la même interface.
+            Nous créons un objet de type <classname>StandardWindow</classname>, le passons au
+            constructeur de <classname>LockedWindow</classname>, et le comportement de notre
+            fenêtre a maintenant changé. Le point fort ici est que nous n'avons pas besoin
+            d'implémenter une fonctionnalité de verrou ("lock") dans l'objet de base
+            (StandardWindow) -- le décorateur s'occupe de cela. En plus, vous pouvez utiliser
+            votre fenêtre décorée à la place de la fenêtre standard&#160;: elles implémentent
+            la même interface.
         </para>
 
         <para>
@@ -93,7 +94,7 @@ class LockedWindow implements Window
         </para>
 
         <para>
-            Dans cet exemple particulier, nous allons utiliser le<ulink
+            Dans cet exemple particulier, nous allons utiliser le <ulink
                 url="http://en.wikipedia.org/wiki/Duck_typing">duck typing</ulink> plutôt qu'une
             interface explicite. Ceci permet à notre implémentation d'être un peu plus fléxible
             tout en gardant l'utilisation de la décoration intacte.
@@ -138,11 +139,11 @@ class TextPerson
 ]]></programlisting>
 
         <para>
-            Dans cet exemple, nous passons une instance <classname>Person</classname> au constructeur
-            de <classname>TextPerson</classname>. Grâce à la surcharge des méthodes, nous pouvons
-            continuer d'appeler les méthodes de <classname>Person</classname> -- affecter un nom,
-            un prénom, ... -- mais nous pouvons en plus récupérer une représentation sous forme de
-            chaine grâce à <methodname>__toString()</methodname>.
+            Dans cet exemple, nous passons une instance <classname>Person</classname> au
+            constructeur de <classname>TextPerson</classname>. Grâce à la surcharge des méthodes,
+            nous pouvons continuer d'appeler les méthodes de <classname>Person</classname>
+            -- affecter un nom, un prénom, ... -- mais nous pouvons en plus récupérer une
+            représentation sous forme de chaîne grâce à <methodname>__toString()</methodname>.
         </para>
 
         <para>
@@ -161,7 +162,7 @@ class TextPerson
             Les décorateurs de <classname>Zend_Form</classname> implémentent tous,
             <classname>Zend_Form_Decorator_Interface</classname>. Cette interface permet
             de régler les options du décorateur, enregistrer en lui l'élément ainsi
-            qu'effectuer le rendu. YUne classe de base,
+            qu'effectuer le rendu. Une classe de base,
             <classname>Zend_Form_Decorator_Abstract</classname>, propose une implémentation
             de cette logique de base dont vous aurez besoin, à l'exception du rendu que vous
             devrez définir.
@@ -169,9 +170,9 @@ class TextPerson
 
         <para>
             Imaginons une situation dans laquelle nous souhaitons simplement rendre un élément
-            comme un tag html text avec un libéllé(label). Juste la base, nous verrons plus tard
+            comme un tag html text avec un libellé (label). Juste la base, nous verrons plus tard
             la gestion des erreurs et les éventuels autres tags html. Un tel décorateur pourrait
-            ressembler à ça:
+            ressembler à ça&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -195,7 +196,7 @@ class My_Decorator_SimpleInput extends Zend_Form_Decorator_Abstract
 ]]></programlisting>
 
         <para>
-            Créons un élément qui utilise ce décorateur:
+            Créons un élément qui utilise ce décorateur&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -209,7 +210,7 @@ $element   = new Zend_Form_Element('foo', array(
 ]]></programlisting>
 
         <para>
-            Le visuel de cet élément donne:
+            Le visuel de cet élément donne&#160;:
         </para>
 
         <programlisting language="html"><![CDATA[
@@ -220,7 +221,7 @@ $element   = new Zend_Form_Element('foo', array(
         <para>
             Nous pourrions aussi ranger cette classe dans un dossier de librairie, il
             faut alors informer l'élément du chemin vers ce dossier, et ensuite faire
-            référence au décorateur comme "SimpleInput":
+            référence au décorateur comme "SimpleInput"&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -59,7 +59,7 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
 
         $this->front = Controller\Front::getInstance();
         $this->front->resetInstance();
-        $this->front->addModuleDirectory(dirname(__FILE__) . '/../../_files/modules');
+        $this->front->addModuleDirectory(__DIR__ . '/../../_files/modules');
 
         $this->layout = Layout\Layout::startMvc();
 
@@ -71,7 +71,7 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
 
         $this->front->setRequest($this->request)
                     ->setResponse($this->response)
-                    ->addControllerDirectory(dirname(__FILE__));
+                    ->addControllerDirectory(__DIR__);
 
         $this->view = new \Zend\View\View();
         $this->viewRenderer = HelperBroker::getStaticHelper('viewRenderer');

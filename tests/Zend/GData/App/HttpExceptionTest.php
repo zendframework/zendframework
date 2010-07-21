@@ -47,9 +47,9 @@ class HttpExceptionTest extends \PHPUnit_Framework_TestCase
         $pass = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD');
         $this->sprKey = constant('TESTS_ZEND_GDATA_SPREADSHEETS_SPREADSHEETKEY');
         $this->wksId = constant('TESTS_ZEND_GDATA_SPREADSHEETS_WORKSHEETID');
-        $service = Spreadsheets\Spreadsheets::AUTH_SERVICE_NAME;
+        $service = Spreadsheets::AUTH_SERVICE_NAME;
         $client = \Zend\GData\ClientLogin::getHttpClient($user, $pass, $service);
-        $this->gdata = new Spreadsheets\Spreadsheets($client);
+        $this->gdata = new Spreadsheets($client);
     }
 
     public function testGetRawResponseBody()

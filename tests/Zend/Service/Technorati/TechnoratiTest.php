@@ -627,7 +627,7 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
                   . "X-Powered-By: PHP/5.2.1\r\n"
                   . "Connection: close\r\n"
                   . "\r\n"
-                  . file_get_contents(dirname(__FILE__) . '/_files/' . $file) ;
+                  . file_get_contents(__DIR__ . '/_files/' . $file) ;
 
         $this->adapter->setResponse($response);
         return $this->technorati; // allow chain call

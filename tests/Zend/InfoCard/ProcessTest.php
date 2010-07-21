@@ -44,9 +44,9 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->tokenDocument = dirname(__FILE__) . '/_files/encryptedtoken.xml';
-        $this->sslPubKey     = dirname(__FILE__) . '/_files/ssl_pub.cert';
-        $this->sslPrvKey     = dirname(__FILE__) . '/_files/ssl_private.cert';
+        $this->tokenDocument = __DIR__ . '/_files/encryptedtoken.xml';
+        $this->sslPubKey     = __DIR__ . '/_files/ssl_pub.cert';
+        $this->sslPrvKey     = __DIR__ . '/_files/ssl_private.cert';
         $this->loadXmlDocument();
         $_SERVER['SERVER_NAME'] = "192.168.1.105";
         $_SERVER['SERVER_PORT'] = 80;

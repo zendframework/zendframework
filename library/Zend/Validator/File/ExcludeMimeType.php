@@ -75,7 +75,7 @@ class ExcludeMimeType extends MimeType
                 $mime = new \finfo($const);
             }
 
-            if ($mime !== false) {
+            if (!empty($mime)) {
                 $this->_type = $mime->file($value);
             }
             unset($mime);

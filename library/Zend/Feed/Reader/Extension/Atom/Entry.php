@@ -247,8 +247,6 @@ class Entry extends Reader\Extension\AbstractEntry
 
         if (!$description) {
             $description = null;
-        } else {
-            $description = html_entity_decode($description, ENT_QUOTES, $this->getEncoding());
         }
 
         $this->_data['description'] = $description;
@@ -412,8 +410,6 @@ class Entry extends Reader\Extension\AbstractEntry
 
         if (!$title) {
             $title = null;
-        } else {
-            $title = html_entity_decode($title, ENT_QUOTES, $this->getEncoding());
         }
 
         $this->_data['title'] = $title;
@@ -531,7 +527,7 @@ class Entry extends Reader\Extension\AbstractEntry
                 $categoryCollection[] = array(
                     'term' => $category->getAttribute('term'),
                     'scheme' => $category->getAttribute('scheme'),
-                    'label' => html_entity_decode($category->getAttribute('label'))
+                    'label' => $category->getAttribute('label')
                 );
             }
         } else {

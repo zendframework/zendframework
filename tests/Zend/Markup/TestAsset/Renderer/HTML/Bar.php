@@ -25,6 +25,8 @@
  */
 namespace ZendTest\Markup\TestAsset\Renderer\HTML;
 
+use Zend\Markup\Renderer\AbstractRenderer;
+
 /**
  * Tag interface
  *
@@ -34,8 +36,15 @@ namespace ZendTest\Markup\TestAsset\Renderer\HTML;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Bar implements \Zend\Markup\Renderer\TokenConverterInterface
+class Bar implements \Zend\Markup\Renderer\Markup
 {
+    public function setEncoding($encoding = 'UTF-8')
+    {
+    }
+   
+    public function setRenderer(AbstractRenderer $renderer)
+    {
+    }
 
     /**
      * Convert the token
@@ -45,7 +54,7 @@ class Bar implements \Zend\Markup\Renderer\TokenConverterInterface
      *
      * @return string
      */
-    public function convert(\Zend\Markup\Token $token, $text)
+    public function __invoke(\Zend\Markup\Token $token, $text)
     {
         $bar = $token->getAttribute('bar');
 

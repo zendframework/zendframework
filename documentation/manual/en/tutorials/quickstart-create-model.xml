@@ -13,9 +13,9 @@
 
     <para>
         <classname>Zend_Controller_Front</classname> has a notion of "modules", which are individual
-        mini-applications.  Modules mimic the directory structure that the <command>zf</command>
+        mini-applications. Modules mimic the directory structure that the <command>zf</command>
         tool sets up under <filename>application/</filename>, and all classes inside them are
-        assumed to begin with a common prefix, the module name.  <filename>application/</filename>
+        assumed to begin with a common prefix, the module name. <filename>application/</filename>
         is itself a module -- the "default" or "application" module. As such, we'll want to setup
         autoloading for resources within this directory.
     </para>
@@ -35,7 +35,7 @@
         <emphasis>email address</emphasis>. Assuming we store them in a database, we may also want a
         <emphasis>unique identifier</emphasis> for each entry. We'll likely want to be able to save
         an entry, fetch individual entries, and retrieve all entries. As such, a simple guestbook
-        model API might look something like this:
+        model <acronym>API</acronym> might look something like this:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -420,8 +420,8 @@ class Application_Model_DbTable_Guestbook extends Zend_Db_Table_Abstract
         Now let's create a <ulink url="http://martinfowler.com/eaaCatalog/dataMapper.html">Data
             Mapper</ulink>. A <emphasis>Data Mapper</emphasis> maps a domain object to the database.
         In our case, it will map our model, <classname>Application_Model_Guestbook</classname>, to
-        our data source, <classname>Application_Model_DbTable_Guestbook</classname>. A typical API
-        for a data mapper is as follows:
+        our data source, <classname>Application_Model_DbTable_Guestbook</classname>. A typical
+        <acronym>API</acronym> for a data mapper is as follows:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -536,10 +536,10 @@ Updating project profile '.zfproject.xml'
 ]]></programlisting>
 
     <para>
-        We'll modify this empty PHP class to make it easy to populate the model by passing an array
-        of data either to the constructor or a <methodname>setOptions()</methodname> method. The
-        final model class, located in <filename>application/models/Guestbook.php</filename>, should
-        look like this:
+        We'll modify this empty <acronym>PHP</acronym> class to make it easy to populate the model
+        by passing an array of data either to the constructor or a
+        <methodname>setOptions()</methodname> method. The final model class, located in
+        <filename>application/models/Guestbook.php</filename>, should look like this:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -659,7 +659,7 @@ Updating project profile '.zfproject.xml'
     <para>
         This will create a new controller, <classname>GuestbookController</classname>, in
         <filename>application/controllers/GuestbookController.php</filename>, with a single action
-        method, <methodname>indexAction()</methodname>.  It will also create a view script directory
+        method, <methodname>indexAction()</methodname>. It will also create a view script directory
         for the controller, <filename>application/views/scripts/guestbook/</filename>, with a view
         script for the index action.
     </para>
@@ -749,7 +749,7 @@ Usage: load.sqlite.php [ options ]
         <para>
             The "-e" switch allows you to specify the value to use for the constant
             <constant>APPLICATION_ENV</constant> -- which in turn allows you to create a SQLite
-            database for each environment you define.  Be sure to run the script for the environment
+            database for each environment you define. Be sure to run the script for the environment
             you choose for your application when deploying.
         </para>
     </note>

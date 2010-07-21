@@ -136,6 +136,8 @@ class Code39Test extends TestCommon
     {
         $this->_object->setText('0123456789');
         $this->assertEquals(211, $this->_object->getWidth());
+        $this->_object->setWithQuietZones(false);
+        $this->assertEquals(191, $this->_object->getWidth(true));
     }
 
     public function testCompleteGeneration()

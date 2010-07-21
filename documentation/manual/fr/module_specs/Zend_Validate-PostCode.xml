@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.post_code">
     <title>PostCode</title>
@@ -108,5 +108,30 @@ $validator = new Zend_Validate_PostCode(array(
     'format' => 'FR-\d+'
 ));
 ]]></programlisting>
+    </sect3>
+
+    <sect3 id="zend.validate.set.post_code.options">
+        <title>Options supportées par Zend_Validate_PostCode</title>
+
+        <para>
+            Les options suivantes sont supportées par
+            <classname>Zend_Validate_PostCode</classname>&#160;:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>format</property></emphasis>&#160;: spécifie le format
+                    de code postal qui sera utilisé pour la validation.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>locale</property></emphasis>&#160;: spécifie la locale
+                    à partir de laquelle le code postal sera récupéré.
+                </para>
+            </listitem>
+        </itemizedlist>
     </sect3>
 </sect2>

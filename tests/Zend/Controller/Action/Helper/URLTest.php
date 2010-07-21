@@ -128,7 +128,7 @@ class URLTest extends \PHPUnit_Framework_TestCase
     public function testURLMethodCreatesURLBasedOnPassedParametersUsingDefaultRouteWhenNoNamedRoutePassed()
     {
         $this->front->getRouter()->addDefaultRoutes();
-        $this->front->addModuleDirectory(dirname(__FILE__) . '/../../_files/modules');
+        $this->front->addModuleDirectory(__DIR__ . '/../../_files/modules');
         $url = $this->helper->__invoke(array(
             'module'     => 'foo',
             'controller' => 'bar',

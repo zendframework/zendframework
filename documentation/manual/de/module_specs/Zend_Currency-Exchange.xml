@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20102 -->
+<!-- EN-Revision: 21646 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.currency.exchange">
     <title>Währungen wechseln</title>
@@ -32,7 +32,7 @@ class SimpleExchange implements Zend_Currency_CurrencyInterface
 
         switch ($to) {
             case 'EUR':
-                return 0.5;
+                return 2;
             case 'JPE':
                 return 0.7;
        }
@@ -73,7 +73,7 @@ class SimpleExchange implements Zend_Currency_CurrencyInterface
 $currency = new Zend_Currency(
     array(
         'value'    => 1000,
-        'currency' => 'USD',
+        'currency' => 'EUR',
     )
 );
 
@@ -82,10 +82,10 @@ $service  = new SimpleExchange();
 // Das Umrechnungsservice anfügen
 $currency->setService($service);
 
-$currency_2 = new Zend_Currency(
+$currency2 = new Zend_Currency(
     array(
         'value'    => 1000,
-        'currency' => 'EUR',
+        'currency' => 'USD',
     )
 );
 
@@ -93,8 +93,8 @@ print $currency->add($currency2);
 ]]></programlisting>
 
     <para>
-        Um obigen Beispeil wird '$ 3.000' zurückgegeben weil die 1.000 <acronym>EUR</acronym> mit
-        dem Faktor 2 in 2.000 <acronym>USD</acronym> umgerechnet werden.
+        Um obigen Beispeil wird '$ 3.000' zurückgegeben weil die 1.000 <acronym>USD</acronym> mit
+        dem Faktor 2 in 2.000 <acronym>EUR</acronym> umgerechnet werden.
     </para>
 
     <note>

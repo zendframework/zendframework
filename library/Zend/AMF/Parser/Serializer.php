@@ -50,5 +50,5 @@ interface Serializer
      * @param  int $markerType
      * @return void
      */
-    public function writeTypeMarker($content, $markerType=null);
+    public function writeTypeMarker(&$content, $markerType = null);
 }

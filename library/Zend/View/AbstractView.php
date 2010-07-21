@@ -1053,15 +1053,15 @@ abstract class AbstractView implements ViewEngine
 
         switch ($type) {
             case 'script':
-                $this->_path[$type] = array(dirname(__FILE__) . $dir);
+                $this->_path[$type] = array(__DIR__ . $dir);
                 $this->_addPath($type, $path);
                 break;
             case 'filter':
             case 'helper':
             default:
                 $this->_path[$type] = array(array(
-                    'prefix' => 'Zend\View\\' . ucfirst($type) . '_',
-                    'dir'    => dirname(__FILE__) . $dir
+                    'prefix' => 'Zend\View\\' . ucfirst($type) . '\\',
+                    'dir'    => __DIR__ . $dir
                 ));
                 $this->_addPath($type, $path, $classPrefix);
                 break;

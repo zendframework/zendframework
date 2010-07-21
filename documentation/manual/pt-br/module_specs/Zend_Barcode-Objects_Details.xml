@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20764 -->
+<!-- EN-Revision: 21667 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.barcode.objects.details">
     <title>Descrição dos códigos de barras embarcados</title>
@@ -340,6 +340,10 @@
                 Se o número de caracteres for menor que 13, o
                 <classname>Zend_Barcode_Object_Ean13</classname> adicionará
                 automaticamente na frente do texto do código de barras os zeros faltantes.
+            </para>
+
+            <para>
+                A opção <property>withQuietZones</property> não afeta este código de barras.
             </para>
         </note>
     </sect3>
@@ -722,6 +726,10 @@
                 <classname>Zend_Barcode_Object_Upca</classname> adicionará
                 automaticamente na frente do texto do código de barras os zeros faltantes.
             </para>
+
+            <para>
+                A opção <property>withQuietZones</property> não afeta este código de barras.
+            </para>
         </note>
     </sect3>
 
@@ -783,6 +791,10 @@
                 Se o primeiro caractere do texto a ser codificado não for 0 ou 1, o
                 <classname>Zend_Barcode_Object_Upce</classname> irá automaticamente
                 substituí-lo por 0.
+            </para>
+
+            <para>
+                A opção <property>withQuietZones</property> não afeta este código de barras.
             </para>
         </note>
     </sect3>

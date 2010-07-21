@@ -45,7 +45,7 @@ class FormLabel extends FormElement
      * @param  array $attribs Form element attributes (used to determine if disabled)
      * @return string The element XHTML.
      */
-    public function direct($name = null, $value = null, array $attribs = array())
+    public function direct($name = null, $value = null, array $attribs = null)
     {
         if ($name == null) {
             throw new \InvalidArgumentException('FormLabel: missing argument. $name is required in formLabel($name, $value = null, array $attribs = array())');

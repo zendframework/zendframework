@@ -112,6 +112,17 @@ class SubFormTest extends \PHPUnit_Framework_TestCase
         $form->addSubForm($subForm, 'foobar')
              ->setView(new View);
         $html = $form->render();
-        $this->assertRegexp('#<dt[^>]*>&nbsp;</dt>#s', $html);
+        $this->assertContains('>&#160;</dt>', $html  );
+    }
+
+    /**
+     * Prove the fluent interface on Zend_Form_Subform::loadDefaultDecorators
+     *
+     * @group ZF-9913
+     * @return void
+     */
+    public function testFluentInterfaceOnLoadDefaultDecorators()
+    {
+        $this->assertSame($this->form, $this->form->loadDefaultDecorators());
     }
 }

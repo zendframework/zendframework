@@ -315,6 +315,14 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $this->assertSame(true, $this->_object->getWithChecksumInText());
     }
 
+    public function testWithoutQuietZones()
+    {
+        $this->_object->setWithQuietZones(0);
+        $this->assertSame(false, $this->_object->getWithQuietZones());
+        $this->_object->setWithQuietZones(false);
+        $this->assertSame(false, $this->_object->getWithQuietZones());
+    }
+
     public function testSetFontAsNumberForGdImage()
     {
         if (! extension_loaded('gd')) {

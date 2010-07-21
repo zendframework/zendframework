@@ -45,9 +45,6 @@ class Entry extends Reader\Extension\AbstractEntry
         } else {
             $content = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
         }
-        if ($content) {
-            $content = html_entity_decode($content, ENT_QUOTES, $this->getEncoding());
-        }
         return $content;
     }
 

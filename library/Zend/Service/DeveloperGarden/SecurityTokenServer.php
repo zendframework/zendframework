@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Client_ClientAbstract
+ * @uses       Zend_Service_DeveloperGarden_Client_AbstractClient
  * @uses       Zend_Service_DeveloperGarden_Response_SecurityTokenServer_GetTokensResponse
  * @uses       Zend_Service_DeveloperGarden_Response_SecurityTokenServer_SecurityTokenResponse
  * @uses       Zend_Service_DeveloperGarden_SecurityTokenServer_Cache
@@ -33,7 +33,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_SecurityTokenServer
-    extends Zend_Service_DeveloperGarden_Client_ClientAbstract
+    extends Zend_Service_DeveloperGarden_Client_AbstractClient
 {
     /**
      * wsdl file

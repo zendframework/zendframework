@@ -20,5 +20,5 @@
  * @version    $Id$
  */
 
-$config = include dirname(__FILE__) . '/appconfig.inc';
+$config = include __DIR__ . '/appconfig.inc';
 return $config;

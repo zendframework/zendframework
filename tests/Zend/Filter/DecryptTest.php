@@ -86,11 +86,11 @@ ccL43V3Z4JN9OXRAfGWXyrBJNmwURkq7a2EyFElBBWK03OLYVMevQyRJcMKY0ai+
 tmnFUSkH2zwnkXQfPUxg9aV7TmGQv/3TkK1SziyDyNm7GwtyIlfcigCCRz3uc77U
 Izcez5wgmkpNElg/D7/VCd9E+grTfPYNmuTVccGOes+n8ISJJdW0vYX1xwWv5l
 bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt');
-        $filter->setPrivateKey(dirname(__FILE__) . '/_files/privatekey.pem');
+        $filter->setPrivateKey(__DIR__ . '/_files/privatekey.pem');
 
         $key = $filter->getPrivateKey();
         $this->assertEquals(
-            array(dirname(__FILE__) . '/_files/privatekey.pem' =>
+            array(__DIR__ . '/_files/privatekey.pem' =>
                   '-----BEGIN RSA PRIVATE KEY-----
 MIICXgIBAAKBgQDKTIp7FntJt1BioBZ0lmWBE8CyzngeGCHNMcAC4JLbi1Y0LwT4
 CSaQarbvAqBRmc+joHX+rcURm89wOibRaThrrZcvgl2pomzu7shJc0ObiRZC8H7p
@@ -219,7 +219,7 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
         }
 
         $filter = new EncryptFilter(array('adapter' => 'Openssl'));
-        $filter->setPublicKey(dirname(__FILE__) . '/_files/publickey.pem');
+        $filter->setPublicKey(__DIR__ . '/_files/publickey.pem');
         $output = $filter('teststring');
         $envelopekeys = $filter->getEnvelopeKey();
         $this->assertNotEquals('teststring', $output);
@@ -231,7 +231,7 @@ ccL43V3Z4JN9OXRAfGWXyrBJNmwURkq7a2EyFElBBWK03OLYVMevQyRJcMKY0ai+
 tmnFUSkH2zwnkXQfPUxg9aV7TmGQv/3TkK1SziyDyNm7GwtyIlfcigCCRz3uc77U
 Izcez5wgmkpNElg/D7/VCd9E+grTfPYNmuTVccGOes+n8ISJJdW0vYX1xwWv5l
 bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt');
-        $filter->setPrivateKey(dirname(__FILE__) . '/_files/privatekey.pem');
+        $filter->setPrivateKey(__DIR__ . '/_files/privatekey.pem');
         $filter->setEnvelopeKey($envelopekeys);
         $input = $filter($output);
         $this->assertEquals('teststring', trim($input));

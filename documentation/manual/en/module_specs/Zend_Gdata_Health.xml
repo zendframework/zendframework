@@ -283,9 +283,9 @@ $healthService = new Zend_Gdata_Health($client,
 
         <para>
             To query the user's profile feed, make sure your initial AuthSub token was requested
-            with the <code>permission=1</code> parameter set. The process of extracting data from
-            the profile requires two steps, sending a query and iterating through the resulting
-            feed.
+            with the <property>permission</property> parameter set to <emphasis>1</emphasis>. The
+            process of extracting data from the profile requires two steps, sending a query and
+            iterating through the resulting feed.
         </para>
 
         <sect3 id="zend.gdata.health.profilefeed.query">
@@ -328,7 +328,7 @@ $profileFeed = $healthService->getHealthProfileFeed($query);
 
                 <para>
                     Using <methodname>setDigest("true")</methodname> returns all of user's CCR data
-                    in a single Atom <code>&lt;entry&gt;</code>.
+                    in a single Atom <emphasis>&lt;entry&gt;</emphasis>.
                 </para>
 
                 <para>
@@ -354,8 +354,9 @@ $profileFeed = $healthService->getHealthProfileFeed($query);
 
             <para>
                 Each Google Health entry contains CCR data, however, using the
-                <code>digest=true</code> query parameter will consolidate all of the CCR elements
-                (that match your query) into a single Atom <code>&lt;entry&gt;</code>.
+                <property>digest</property> query parameter and setting is to
+                <constant>TRUE</constant> will consolidate all of the CCR elements
+                (that match your query) into a single Atom <emphasis>&lt;entry&gt;</emphasis>.
             </para>
 
             <para>
@@ -423,8 +424,8 @@ foreach ($conditions as $cond) {
             Since ClientLogin requires a profile ID with each of its feeds, applications will likely
             want to query this feed first in order to select the appropriate profile. The profile
             list feed returns Atom entries corresponding each profile in the user's Google Health
-            account. The profile ID is returned in the Atom <code>&lt;content&gt;</code> and the
-            profile name in the <code>&lt;title&gt;</code> element.
+            account. The profile ID is returned in the Atom <emphasis>&lt;content&gt;</emphasis> and
+            the profile name in the <emphasis>&lt;title&gt;</emphasis> element.
         </para>
 
         <sect3 id="zend.gdata.health.profilelist.query">

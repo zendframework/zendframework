@@ -108,7 +108,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
 
             $xsdAttribute = $dom->createElement('xsd:attribute');
             $xsdAttribute->setAttribute('ref', 'soap-enc:arrayType');
-            $xsdAttribute->setAttribute('wsdl:arrayType', "tns:{$singularType}[]");
+            $xsdAttribute->setAttribute('wsdl:arrayType', sprintf('tns:%s[]', $singularType));
             $xsdRestriction->appendChild($xsdAttribute);
 
             $this->getContext()->getSchema()->appendChild($complexType);
@@ -120,7 +120,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
 
     protected function _getXsdComplexTypeName($type)
     {
-        return 'ArrayOf' . $type;
+        return sprintf('ArrayOf%s', $type);
     }
 
     /**

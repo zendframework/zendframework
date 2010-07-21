@@ -24,9 +24,10 @@
  * @namespace
  */
 namespace ZendTest\Service\Twitter;
-use Zend\Service;
-use Zend\HTTP;
-use Zend\REST;
+
+use Zend\Service,
+    Zend\HTTP,
+    Zend\REST;
 
 /**
  * @category   Zend
@@ -79,7 +80,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($response));
         $response->expects($this->any())->method('getBody')
             ->will($this->returnValue(
-                isset($responseFile) ? file_get_contents(dirname(__FILE__) . '/_files/' . $responseFile) : ''
+                isset($responseFile) ? file_get_contents(__DIR__ . '/_files/' . $responseFile) : ''
             ));
         return $client;
     }
@@ -149,11 +150,9 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($client === $twitter->getLocalHttpClient());
     }
     
-    /**
-     * @expectedException \Zend\Service\Twitter\Exception
-     */
     public function testAuthorisationFailureWithUsernameAndNoAccessToken()
     {
+        $this->setExpectedException('Zend\Service\Twitter\Exception');
         $twitter = new Service\Twitter(array('username'=>'me'));
         $twitter->statusPublicTimeline();
     }
@@ -186,10 +185,10 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-7781
-     * @expectedException \Zend\Service\Twitter\Exception
      */
     public function testRetrievingStatusesWithInvalidScreenNameCharacterThrowsInvalidScreenNameException()
     {
+        $this->setExpectedException('Zend\Service\Twitter\Exception');
         $twitter = new Service\Twitter();
         $twitter->status->userTimeline(array('screen_name' => 'abc.def'));
     }
@@ -239,20 +238,16 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($twitter, $return);
     }
 
-    /**
-     * @expectedException \Zend\Service\Twitter\Exception
-     */
     public function testOverloadingGetShouldthrowExceptionWithInvalidMethodType()
     {
+        $this->setExpectedException('Zend\Service\Twitter\Exception');
         $twitter = new Service\Twitter;
         $return = $twitter->foo;
     }
 
-    /**
-     * @expectedException \Zend\Service\Twitter\Exception
-     */
     public function testOverloadingGetShouldthrowExceptionWithInvalidFunction()
     {
+        $this->setExpectedException('Zend\Service\Twitter\Exception');
         $twitter = new Service\Twitter;
         $return = $twitter->foo();
     }
@@ -266,11 +261,9 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $twitter->status->publicTimeline();
     }
 
-    /**
-     * @expectedException \Zend\Service\Twitter\Exception
-     */
     public function testMethodProxyingThrowExceptionsWithInvalidMethods()
     {
+        $this->setExpectedException('Zend\Service\Twitter\Exception');
         $twitter = new Service\Twitter;
         $twitter->status->foo();
     }
@@ -398,20 +391,16 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($response instanceof REST\Client\Result);
     }
 
-    /**
-     * @expectedException \Zend\Service\Twitter\Exception
-     */
     public function testPostStatusUpdateToLongShouldThrowException()
     {
+        $this->setExpectedException('Zend\Service\Twitter\Exception');
         $twitter = new Service\Twitter;
         $twitter->status->update('Test Message - ' . str_repeat(' Hello ', 140));
     }
 
-    /**
-     * @expectedException \Zend\Service\Twitter\Exception
-     */
     public function testPostStatusUpdateEmptyShouldThrowException()
     {
+        $this->setExpectedException('Zend\Service\Twitter\Exception');
         $twitter = new Service\Twitter;
         $twitter->status->update('');
     }

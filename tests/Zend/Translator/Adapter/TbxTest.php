@@ -46,31 +46,20 @@ use Zend\Locale;
  */
 class TbxTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Translate_Adapter_TbxTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testCreate()
     {
-        $adapter = new Adapter\Tbx(dirname(__FILE__) . '/_files/translation_en.tbx', 'en');
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'en');
         $this->assertTrue($adapter instanceof Adapter\Tbx);
 
         try {
-            $adapter = new Adapter\Tbx(dirname(__FILE__) . '/_files/nofile.tbx', 'en');
+            $adapter = new Adapter\Tbx(__DIR__ . '/_files/nofile.tbx', 'en');
             $this->fail("exception expected");
         } catch (Translator\Exception $e) {
             $this->assertContains('is not readable', $e->getMessage());
         }
 
         try {
-            $adapter = new Adapter\Tbx(dirname(__FILE__) . '/_files/failed.tbx', 'en');
+            $adapter = new Adapter\Tbx(__DIR__ . '/_files/failed.tbx', 'en');
             $this->fail("exception expected");
         } catch (Translator\Exception $e) {
             $this->assertContains('Mismatched tag at line', $e->getMessage());
@@ -79,13 +68,13 @@ class TbxTest extends \PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $adapter = new Adapter\Tbx(dirname(__FILE__) . '/_files/translation_en.tbx', 'fr');
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'fr');
         $this->assertEquals('Tbx', $adapter->toString());
     }
 
     public function testTranslate()
     {
-        $adapter = new Adapter\Tbx(dirname(__FILE__) . '/_files/translation_en.tbx', 'fr');
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'fr');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 1 (en)', $adapter->_('Message 1'));
         $this->assertEquals('Message 6', $adapter->translate('Message 6'));
@@ -95,7 +84,7 @@ class TbxTest extends \PHPUnit_Framework_TestCase
 
     public function testIsTranslated()
     {
-        $adapter = new Adapter\Tbx(dirname(__FILE__) . '/_files/translation_en.tbx', 'en');
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'en');
         $this->assertTrue($adapter->isTranslated('Message 1'));
         $this->assertFalse($adapter->isTranslated('Message 6'));
         $this->assertTrue($adapter->isTranslated('Message 1', true));
@@ -105,58 +94,65 @@ class TbxTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadTranslationData()
     {
-        $adapter = new Adapter\Tbx(dirname(__FILE__) . '/_files/translation_en.tbx', 'fr');
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'fr');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 4 (en)', $adapter->translate('Message 4'));
         $this->assertEquals('Message 2', $adapter->translate('Message 2', 'ru'));
         $this->assertEquals('Message 1', $adapter->translate('Message 1', 'xx'));
 
         try {
-            $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en.tbx', 'xx');
+            $adapter->addTranslation(__DIR__ . '/_files/translation_en.tbx', 'xx');
             $this->fail("exception expected");
         } catch (Translator\Exception $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.tbx', 'de', array('clear' => true));
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.tbx', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
     }
 
     public function testOptions()
     {
-        $adapter = new Adapter\Tbx(dirname(__FILE__) . '/_files/translation_en.tbx', 'en');
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'en');
         $adapter->setOptions(array('testoption' => 'testkey'));
-        $this->assertEquals(
-            array(
-                'testoption'      => 'testkey',
-                'clear'           => false,
-                'scan'            => null,
-                'locale'          => 'en',
-                'ignore'          => '.',
-                'disableNotices'  => false,
-                'log'             => false,
-                'logMessage'      => 'Untranslated message within \'%locale%\': %message%',
-                'logUntranslated' => false,
-                'reload'          => false),
-            $adapter->getOptions());
+        $expected = array(
+            'testoption'      => 'testkey',
+            'clear'           => false,
+            'content'         => __DIR__ . '/_files/translation_en.tbx',
+            'scan'            => null,
+            'locale'          => 'en',
+            'ignore'          => '.',
+            'disableNotices'  => false,
+            'log'             => false,
+            'logMessage'      => 'Untranslated message within \'%locale%\': %message%',
+            'logUntranslated' => false,
+            'reload'          => false,
+        );
+        $options = $adapter->getOptions();
+
+        foreach ($expected as $key => $value) {
+            $this->assertArrayHasKey($key, $options);
+            $this->assertEquals($value, $options[$key]);
+        }
+
         $this->assertEquals('testkey', $adapter->getOptions('testoption'));
         $this->assertTrue(is_null($adapter->getOptions('nooption')));
     }
 
     public function testClearing()
     {
-        $adapter = new Adapter\Tbx(dirname(__FILE__) . '/_files/translation_en.tbx', 'fr');
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'fr');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 4 (en)', $adapter->translate('Message 4'));
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.tbx', 'de', array('clear' => true));
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.tbx', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Message 4', $adapter->translate('Message 4'));
     }
 
     public function testLocale()
     {
-        $adapter = new Adapter\Tbx(dirname(__FILE__) . '/_files/translation_en.tbx', 'fr');
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'fr');
         $this->assertEquals('fr', $adapter->getLocale());
         $locale = new Locale\Locale('fr');
         $adapter->setLocale($locale);
@@ -177,9 +173,9 @@ class TbxTest extends \PHPUnit_Framework_TestCase
 
     public function testList()
     {
-        $adapter = new Adapter\Tbx(dirname(__FILE__) . '/_files/translation_en.tbx', 'en');
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'en');
         $this->assertEquals(array('en' => 'en', 'fr' => 'fr'), $adapter->getList());
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.tbx', 'de');
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.tbx', 'de');
         $this->assertEquals(array('en' => 'en', 'de' => 'de', 'fr' => 'fr'), $adapter->getList());
         $this->assertTrue($adapter->isAvailable('fr'));
         $locale = new Locale\Locale('en');
@@ -189,21 +185,21 @@ class TbxTest extends \PHPUnit_Framework_TestCase
 
     public function testOptionLocaleDirectory()
     {
-        $adapter = new Adapter\Tbx(dirname(__FILE__) . '/_files/testtbx', 'de', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/testtbx', 'de', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
         $this->assertEquals(array('en' => 'en', 'fr' => 'fr', 'de' => 'de'), $adapter->getList());
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
     }
 
     public function testOptionLocaleFilename()
     {
-        $adapter = new Adapter\Tbx(dirname(__FILE__) . '/_files/testtbx', 'de', array('scan' => Translator\Translator::LOCALE_FILENAME));
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/testtbx', 'de', array('scan' => Translator\Translator::LOCALE_FILENAME));
         $this->assertEquals(array('en' => 'en', 'fr' => 'fr', 'de' => 'de'), $adapter->getList());
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
     }
 
     public function testIsoEncoding()
     {
-        $adapter = new Adapter\Tbx(dirname(__FILE__) . '/_files/translation_en3.tbx', 'fr');
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en3.tbx', 'fr');
         $this->assertEquals('Message 1 (fr)', $adapter->translate('Message 1'));
 
         if (PHP_OS == 'AIX') {
@@ -217,7 +213,7 @@ class TbxTest extends \PHPUnit_Framework_TestCase
 
     public function testWithoutEncoding()
     {
-        $adapter = new Adapter\Tbx(dirname(__FILE__) . '/_files/translation_withoutencoding.tbx', 'fr');
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_withoutencoding.tbx', 'fr');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Küchen Möbel (en)', $adapter->translate('Cooking furniture'));
         $this->assertEquals('Cooking furniture (en)', $adapter->translate('Küchen Möbel'));
@@ -237,9 +233,4 @@ class TbxTest extends \PHPUnit_Framework_TestCase
     {
         $this->_errorOccurred = true;
     }
-}
-
-// Call Zend_Translate_Adapter_TbxTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Translate_Adapter_TbxTest::main") {
-    \Zend_Translate_Adapter_TbxTest::main();
 }

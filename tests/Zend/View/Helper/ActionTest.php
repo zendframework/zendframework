@@ -66,7 +66,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $this->response->headersSentThrowsException = false;
         $front->setRequest($this->request)
               ->setResponse($this->response)
-              ->addModuleDirectory(dirname(__FILE__) . '/_files/modules');
+              ->addModuleDirectory(__DIR__ . '/_files/modules');
 
         $this->view   = new \Zend\View\View();
         $this->helper = new Helper\Action();
@@ -216,7 +216,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $response = new Response\HTTP();
         $response->headersSentThrowsException = false;
         $front->setResponse($response)
-              ->addModuleDirectory(dirname(__FILE__) . '/_files/modules');
+              ->addModuleDirectory(__DIR__ . '/_files/modules');
         try {
             $helper = new Helper\Action();
             $this->fail('No request in front controller should cause action helper to throw exception');
@@ -234,7 +234,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
         $request = new Request\HTTP('http://framework.zend.com/foo');
         $front->setRequest($this->request)
-              ->addModuleDirectory(dirname(__FILE__) . '/_files/modules');
+              ->addModuleDirectory(__DIR__ . '/_files/modules');
         try {
             $helper = new Helper\Action();
             $this->fail('No response in front controller should cause action helper to throw exception');
@@ -264,7 +264,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testActionWithPartialsUseOfViewRendererReturnsToOriginatingViewState()
     {
         $partial = new \Zend\View\Helper\Partial();
-        $this->view->setScriptPath(dirname(__FILE__) . '/_files/modules/default/views/scripts/');
+        $this->view->setScriptPath(__DIR__ . '/_files/modules/default/views/scripts/');
         $partial->setView($this->view);
 
         HelperBroker::getStaticHelper('viewRenderer')->view = $this->view;

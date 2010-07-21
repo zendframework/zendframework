@@ -25,13 +25,15 @@
  */
 namespace Zend\GData\Health;
 
+use Zend\GData\Health;
+
 /**
  * Concrete class for working with Health profile entries.
  *
  * @link http://code.google.com/apis/health/
  *
  * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Health\Health
+ * @uses       \Zend\GData\Health
  * @uses       \Zend\GData\Health\Extension\Ccr
  * @category   Zend
  * @package    Zend_Gdata
@@ -46,7 +48,7 @@ class ProfileEntry extends \Zend\GData\Entry
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\Health\ProfileEntry';
+    protected $_entryClassName = 'Zend\GData\Health\ProfileEntry';
 
     /**
      * Google Health CCR data

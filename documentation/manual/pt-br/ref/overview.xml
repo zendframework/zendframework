@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <chapter id="introduction.overview">
     <title>Resumo</title>
 
     <para>
         Zend Framework é um framework de código aberto para o desenvolvimento de aplicações web e
-        web services com PHP 5. Zend Framework é implementado usando 100% de código orientado a
-        objeto. A estrutura dos componente do Zend Framework é um tanto original; cada componente
-        é projetado com poucas dependências em outros componentes. Essa arquitetura flexível
-        permite que os desenvolvedores utilizem os componentes individualmente.
-        Costumamos chamar isso de modelo "use à vontade".
+        web services com <acronym>PHP</acronym> 5. Zend Framework é implementado usando 100% de
+        código orientado a objeto. A estrutura dos componente do Zend Framework é um tanto original;
+        cada componente é projetado com poucas dependências em outros componentes. Essa arquitetura
+        flexível permite que os desenvolvedores utilizem os componentes individualmente. Costumamos
+        chamar isso de modelo "use à vontade".
     </para>
 
     <para>

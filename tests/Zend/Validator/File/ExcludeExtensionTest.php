@@ -82,13 +82,13 @@ class ExcludeExtensionTest extends \PHPUnit_Framework_TestCase
             $validator = new File\ExcludeExtension($element[0]);
             $this->assertEquals(
                 $element[1],
-                $validator->isValid(dirname(__FILE__) . '/_files/testsize.mo'),
+                $validator->isValid(__DIR__ . '/_files/testsize.mo'),
                 "Tested with " . var_export($element, 1)
             );
         }
 
         $validator = new File\ExcludeExtension('mo');
-        $this->assertEquals(false, $validator->isValid(dirname(__FILE__) . '/_files/nofile.mo'));
+        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileExcludeExtensionNotFound', $validator->getMessages()));
 
         $files = array(
@@ -99,29 +99,29 @@ class ExcludeExtensionTest extends \PHPUnit_Framework_TestCase
             'error'    => 0
         );
         $validator = new File\ExcludeExtension('mo');
-        $this->assertEquals(false, $validator->isValid(dirname(__FILE__) . '/_files/nofile.mo', $files));
+        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/nofile.mo', $files));
         $this->assertTrue(array_key_exists('fileExcludeExtensionNotFound', $validator->getMessages()));
 
         $files = array(
             'name'     => 'testsize.mo',
             'type'     => 'text',
             'size'     => 200,
-            'tmp_name' => dirname(__FILE__) . '/_files/testsize.mo',
+            'tmp_name' => __DIR__ . '/_files/testsize.mo',
             'error'    => 0
         );
         $validator = new File\ExcludeExtension('mo');
-        $this->assertEquals(false, $validator->isValid(dirname(__FILE__) . '/_files/testsize.mo', $files));
+        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/testsize.mo', $files));
         $this->assertTrue(array_key_exists('fileExcludeExtensionFalse', $validator->getMessages()));
 
         $files = array(
             'name'     => 'testsize.mo',
             'type'     => 'text',
             'size'     => 200,
-            'tmp_name' => dirname(__FILE__) . '/_files/testsize.mo',
+            'tmp_name' => __DIR__ . '/_files/testsize.mo',
             'error'    => 0
         );
         $validator = new File\ExcludeExtension('gif');
-        $this->assertEquals(true, $validator->isValid(dirname(__FILE__) . '/_files/testsize.mo', $files));
+        $this->assertEquals(true, $validator->isValid(__DIR__ . '/_files/testsize.mo', $files));
     }
 
     public function testCaseTesting()
@@ -130,14 +130,14 @@ class ExcludeExtensionTest extends \PHPUnit_Framework_TestCase
             'name'     => 'testsize.mo',
             'type'     => 'text',
             'size'     => 200,
-            'tmp_name' => dirname(__FILE__) . '/_files/testsize.mo',
+            'tmp_name' => __DIR__ . '/_files/testsize.mo',
             'error'    => 0
         );
         $validator = new File\ExcludeExtension(array('MO', 'case' => true));
-        $this->assertEquals(true, $validator->isValid(dirname(__FILE__) . '/_files/testsize.mo', $files));
+        $this->assertEquals(true, $validator->isValid(__DIR__ . '/_files/testsize.mo', $files));
 
         $validator = new File\ExcludeExtension(array('MO', 'case' => false));
-        $this->assertEquals(false, $validator->isValid(dirname(__FILE__) . '/_files/testsize.mo', $files));
+        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/testsize.mo', $files));
     }
 
     /**

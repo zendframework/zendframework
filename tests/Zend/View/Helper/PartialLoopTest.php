@@ -58,7 +58,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->basePath = dirname(__FILE__) . '/_files/modules';
+        $this->basePath = __DIR__ . '/_files/modules';
         $this->helper = new \Zend\View\Helper\PartialLoop();
         Controller\Front::getInstance()->resetInstance();
     }

@@ -735,6 +735,10 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
      */
     public function testUploadRawData()
     {
+        if (!ini_get('file_uploads')) {
+            $this->markTestSkipped('File uploads disabled.');
+        }
+        
         $this->client->setUri($this->baseuri. 'testUploads.php');
 
         $rawdata = file_get_contents(__FILE__);
@@ -751,6 +755,10 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
      */
     public function testUploadLocalFile()
     {
+        if (!ini_get('file_uploads')) {
+            $this->markTestSkipped('File uploads disabled.');
+        }
+        
         $this->client->setUri($this->baseuri. 'testUploads.php');
         $this->client->setFileUpload(__FILE__, 'uploadfile', null, 'text/x-foo-bar');
         $res = $this->client->request('POST');
@@ -763,6 +771,10 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
     public function testUploadLocalDetectMime()
     {
+        if (!ini_get('file_uploads')) {
+            $this->markTestSkipped('File uploads disabled.');
+        }
+        
         $detect = null;
         if (function_exists('finfo_file')) {
             $f = @finfo_open(FILEINFO_MIME);
@@ -791,6 +803,10 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
     public function testUploadNameWithSpecialChars()
     {
+        if (!ini_get('file_uploads')) {
+            $this->markTestSkipped('File uploads disabled.');
+        }
+        
         $this->client->setUri($this->baseuri. 'testUploads.php');
 
         $rawdata = file_get_contents(__FILE__);
@@ -819,6 +835,10 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
      */
     public function testMutipleFilesWithSameFormNameZF5744()
     {
+        if (!ini_get('file_uploads')) {
+            $this->markTestSkipped('File uploads disabled.');
+        }
+        
         $rawData = 'Some test raw data here...';
 
         $this->client->setUri($this->baseuri . 'testUploads.php');
@@ -932,6 +952,29 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $res = $this->client->setRawData($data, 'image/jpeg')->request('PUT');
         $expected = $this->_getTestFileContents('staticFile.jpg');
         $this->assertEquals($expected, $res->getBody(), 'Response body does not contain the expected data');
+    }
+    
+    /**
+     * Test that we can deal with double Content-Length headers
+     * 
+     * @link http://framework.zend.com/issues/browse/ZF-9404
+     */
+    public function testZF9404DoubleContentLengthHeader()
+    {
+        $this->client->setUri($this->baseuri . 'ZF9404-doubleContentLength.php');
+        $expect = filesize(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'ZF9404-doubleContentLength.php');
+        
+        $response = $this->client->request();
+        if (! $response->isSuccessful()) {
+            throw new ErrorException("Error requesting test URL");
+        }
+        
+        $clen = $response->getHeader('content-length');
+        if (! (is_array($clen))) {
+            $this->markTestSkipped("Didn't get multiple Content-length headers");
+        }
+        
+        $this->assertEquals($expect, strlen($response->getBody()));
     }
     
     /**

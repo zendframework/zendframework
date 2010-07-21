@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\Photos;
 
+use Zend\GData\Photos;
+
 /**
  * Data model class for a Comment Entry.
  *
@@ -36,7 +38,7 @@ namespace Zend\GData\Photos;
  *
  * @uses       \Zend\GData\App\Extension\Category
  * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Photos\Photos
+ * @uses       \Zend\GData\Photos
  * @uses       \Zend\GData\Photos\Extension\Id
  * @uses       \Zend\GData\Photos\Extension\PhotoId
  * @uses       \Zend\GData\Photos\Extension\Weight
@@ -49,7 +51,7 @@ namespace Zend\GData\Photos;
 class CommentEntry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\Photos\CommentEntry';
+    protected $_entryClassName = 'Zend\GData\Photos\CommentEntry';
 
     /**
      * gphoto:id element

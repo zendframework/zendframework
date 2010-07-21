@@ -29,15 +29,15 @@ namespace Zend\GData\Photos\Extension;
  * Represents the gphoto:quotaCurrent element used by the API.
  * This class represents the number of bytes of storage used by a user.
  *
- * @uses       \Zend\GData\Extension\Extension
- * @uses       \Zend\GData\Photos\Photos
+ * @uses       \Zend\GData\Extension
+ * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class QuotaCurrent extends \Zend\GData\Extension\Extension
+class QuotaCurrent extends \Zend\GData\Extension
 {
 
     protected $_rootNamespace = 'gphoto';
@@ -50,7 +50,7 @@ class QuotaCurrent extends \Zend\GData\Extension\Extension
      */
     public function __construct($text = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Photos\Photos::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Photos::$namespaces);
         parent::__construct();
         $this->setText($text);
     }

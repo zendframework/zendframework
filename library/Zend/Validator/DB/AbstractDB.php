@@ -286,10 +286,10 @@ abstract class AbstractDb extends AbstractValidator
          */
         $select = new DBSelect($this->_adapter);
         $select->from($this->_table, array($this->_field), $this->_schema)
-               ->where($this->_adapter->quoteIdentifier($this->_field).' = ?', $value);
+               ->where($this->_adapter->quoteIdentifier($this->_field, true).' = ?', $value);
         if ($this->_exclude !== null) {
             if (is_array($this->_exclude)) {
-                $select->where($this->_adapter->quoteIdentifier($this->_exclude['field']).' != ?', $this->_exclude['value']);
+                $select->where($this->_adapter->quoteIdentifier($this->_exclude['field'], true).' != ?', $this->_exclude['value']);
             } else {
                 $select->where($this->_exclude);
             }

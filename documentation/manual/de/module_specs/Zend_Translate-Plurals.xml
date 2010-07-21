@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21194 -->
-<!-- Reviewed: 21194 -->
+<!-- EN-Revision: 21661 -->
+<!-- Reviewed: 21661 -->
 <sect1 id="zend.translate.plurals">
     <title>Schreibweisen von Pluralformen für Übersetzungen</title>
 
@@ -58,7 +58,13 @@
             </para>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/german.mo',
+        'locale'  => 'de'
+    )
+);
 $translate->plural('Car', 'Cars', $number);
 ]]></programlisting>
         </example>
@@ -91,7 +97,13 @@ $translate->plural('Car', 'Cars', $number);
             </para>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/german.mo',
+        'locale'  => 'de'
+    )
+);
 $translate->translate(array('Car', 'Cars', $number));
 ]]></programlisting>
         </example>
@@ -113,7 +125,13 @@ $translate->translate(array('Car', 'Cars', $number));
             </para>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/german.mo',
+        'locale'  => 'de'
+    )
+);
 $translate->translate(array('Car',
                             'Cars first plural',
                             'Cars second plural',

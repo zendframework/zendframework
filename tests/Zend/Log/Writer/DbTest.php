@@ -46,7 +46,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testFormattingIsNotSupported()
     {
         $this->setExpectedException('\\Zend\\Log\\Exception', 'does not support formatting');
-        $this->writer->setFormatter(new \stdclass);
+        $this->writer->setFormatter(new \Zend\Log\Formatter\Simple);
     }
 
     public function testWriteWithDefaults()
@@ -98,7 +98,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\\Zend\\Log\\Exception', 'Database adapter is null');
         $this->writer->write(array('message' => 'this should fail'));
     }
-    
+
     public function testFactory()
     {
         $cfg = array('log' => array('memory' => array(
@@ -111,6 +111,19 @@ class DbTest extends \PHPUnit_Framework_TestCase
 
         $logger = Logger::factory($cfg['log']);
         $this->assertTrue($logger instanceof Logger);
+    }
+
+    /**
+     * @group ZF-10089
+     */
+    public function testThrowStrictSetFormatter()
+    {
+        try {
+            $this->writer->setFormatter(new StdClass());
+        } catch (Exception $e) {
+            $this->assertType('PHPUnit_Framework_Error', $e);
+            $this->assertContains('must implement interface', $e->getMessage());
+        }
     }
 }
 

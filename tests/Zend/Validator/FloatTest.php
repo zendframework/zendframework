@@ -148,6 +148,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
         setlocale(LC_ALL, 'de');
         $valid = new Validator\Float();
         $this->assertTrue($valid->isValid(123,456));
+        $this->assertTrue($valid->isValid('123,456'));
     }
 
     /**
@@ -168,5 +169,59 @@ class FloatTest extends \PHPUnit_Framework_TestCase
         setlocale(LC_ALL, 'de');
         $valid = new Validator\Float();
         $this->assertTrue($valid->isValid(10.5));
+    }
+
+    /**
+     * @ZF-7987
+     */
+    public function testPhpLocaleFrFloatType()
+    {
+        setlocale(LC_ALL, 'fr');
+        $valid = new Validator\Float();
+        $this->assertTrue($valid->isValid(10.5));
+    }
+
+    /**
+     * @ZF-8919
+     */
+    public function testPhpLocaleDeStringType()
+    {
+        setlocale(LC_ALL, 'de_AT');
+        setlocale(LC_NUMERIC, 'de_AT');
+        $valid = new Validator\Float('de_AT');
+        $this->assertTrue($valid->isValid('1,3'));
+        $this->assertTrue($valid->isValid('1000,3'));
+        $this->assertTrue($valid->isValid('1.000,3'));
+        $this->assertFalse($valid->isValid('1.3'));
+        $this->assertFalse($valid->isValid('1000.3'));
+        $this->assertFalse($valid->isValid('1,000.3'));
+    }
+
+    /**
+     * @ZF-8919
+     */
+    public function testPhpLocaleFrStringType()
+    {
+        $valid = new Validator\Float('fr_FR');
+        $this->assertTrue($valid->isValid('1,3'));
+        $this->assertTrue($valid->isValid('1000,3'));
+        $this->assertTrue($valid->isValid('1 000,3'));
+        $this->assertFalse($valid->isValid('1.3'));
+        $this->assertFalse($valid->isValid('1000.3'));
+        $this->assertFalse($valid->isValid('1,000.3'));
+    }
+
+    /**
+     * @ZF-8919
+     */
+    public function testPhpLocaleEnStringType()
+    {
+        $valid = new Validator\Float('en_US');
+        $this->assertTrue($valid->isValid('1.3'));
+        $this->assertTrue($valid->isValid('1000.3'));
+        $this->assertTrue($valid->isValid('1,000.3'));
+        $this->assertFalse($valid->isValid('1,3'));
+        $this->assertFalse($valid->isValid('1000,3'));
+        $this->assertFalse($valid->isValid('1.000,3'));
     }
 }

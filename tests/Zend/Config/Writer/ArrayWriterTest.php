@@ -39,7 +39,7 @@ class ArrayWriterTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_tempName = tempnam(dirname(__FILE__) . '/temp', 'tmp');
+        $this->_tempName = tempnam(__DIR__ . '/temp', 'tmp');
     }
 
     public function tearDown()

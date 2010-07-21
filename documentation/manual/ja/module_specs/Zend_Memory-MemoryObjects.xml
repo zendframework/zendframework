@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20827 -->
 <sect1 id="zend.memory.memory-objects">
 
     <title>メモリオブジェクト</title>
@@ -47,7 +47,7 @@ $memObject = $memoryManager->createLocked($data);
             ロックされたオブジェクトは、移動可能なオブジェクトと同じインターフェイス
             (<classname>Zend_Memory_Container_Interface</classname>) を提供します。
             したがって、ロックされたオブジェクトは
-            どんな場面でも、移動可能なオブジェクトのかわりに使用することができます。
+            どんな場面でも、移動可能なオブジェクトのかわりに使用できます。
         </para>
 
         <para>

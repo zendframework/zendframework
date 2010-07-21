@@ -84,7 +84,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->basePath = realpath(dirname(__FILE__) . str_repeat(DIRECTORY_SEPARATOR . '..', 2));
+        $this->basePath = realpath(__DIR__ . str_repeat(DIRECTORY_SEPARATOR . '..', 2));
         $this->request  = new \Zend\Controller\Request\HTTP();
         $this->response = new \Zend\Controller\Response\HTTP();
         $this->front    = \Zend\Controller\Front::getInstance();
@@ -244,7 +244,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
         $controller = new \Foo_IndexController($this->request, $this->response, array());
         $this->helper->setActionController($controller);
 
-        $viewDir = dirname(__FILE__) . str_repeat(DIRECTORY_SEPARATOR . '..', 2) . DIRECTORY_SEPARATOR . 'views';
+        $viewDir = __DIR__ . str_repeat(DIRECTORY_SEPARATOR . '..', 2) . DIRECTORY_SEPARATOR . 'views';
         $this->helper->initView($viewDir, 'Baz_Bat', array(
             'neverRender'     => true,
             'noRender'        => true,

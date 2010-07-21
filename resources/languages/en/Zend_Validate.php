@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 21573
+ * EN-Revision: 22075
  */
 return array(
     // Zend_Validate_Alnum
@@ -208,7 +208,7 @@ return array(
     "'%value%' has failed the IBAN check" => "'%value%' has failed the IBAN check",
 
     // Zend_Validate_Identical
-    "The token '%token%' does not match the given token '%value%'" => "The token '%token%' does not match the given token '%value%'",
+    "The two given tokens do not match" => "The two given tokens do not match",
     "No token was provided to match against" => "No token was provided to match against",
 
     // Zend_Validate_InArray
@@ -223,6 +223,7 @@ return array(
     "'%value%' does not appear to be a valid IP address" => "'%value%' does not appear to be a valid IP address",
 
     // Zend_Validate_Isbn
+    "Invalid type given, value should be string or integer" => "Invalid type given, value should be string or integer",
     "'%value%' is no valid ISBN number" => "'%value%' is no valid ISBN number",
 
     // Zend_Validate_LessThan

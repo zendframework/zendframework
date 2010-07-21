@@ -2,7 +2,7 @@
 <!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.log.writers.firebug">
-    <title>An Firebox schreiben</title>
+    <title>An Firebug schreiben</title>
 
     <para>
         <classname>Zend_Log_Writer_Firebug</classname> sendet Logdaten an die

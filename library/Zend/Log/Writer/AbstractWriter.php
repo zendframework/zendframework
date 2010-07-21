@@ -64,6 +64,10 @@ abstract class AbstractWriter implements Writer, Factory
             $filter = new \Zend\Log\Filter\Priority($filter);
         }
 
+        if (!$filter instanceof \Zend\Log\Filter) {
+            throw new \Zend\Log\Exception('Invalid filter provided');
+        }
+
         $this->_filters[] = $filter;
     }
 

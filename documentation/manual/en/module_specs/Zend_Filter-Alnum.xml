@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.alnum">
+    <title>Alnum</title>
+
+    <para>
+        <classname>Zend_Filter_Alnum</classname> is a filter which returns only alphabetic
+        characters and digits. All other characters are supressed.
+    </para>
+
+    <sect3 id="zend.filter.set.alnum.options">
+        <title>Supported options for Zend_Filter_Alnum</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Filter_Alnum</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>allowwhitespace</property></emphasis>: If this option is set
+                    then whitespace characters are allowed. Otherwise they are supressed. Per
+                    default whitespaces are not allowed.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.filter.set.alnum.basic">
+        <title>Basic usage</title>
+
+        <para>
+            See the following example for the default behaviour of this filter.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Alnum();
+$return = $filter->filter('This is (my) content: 123');
+// returns 'Thisismycontent123'
+]]></programlisting>
+
+        <para>
+            The above example returns 'Thisismycontent123'. As you see all whitespaces and also the
+            brackets are filtered.
+        </para>
+
+        <note>
+            <para>
+                <classname>Zend_Filter_Alnum</classname> works on almost all languages. But actually
+                there are three exceptions: Chinese, Japanese and Korean. Within these languages the
+                english alphabet is use instead of the characters from these languages. The language
+                itself is detected by using <classname>Zend_Locale</classname>.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.filter.set.alnum.whitespace">
+        <title>Allow whitespaces</title>
+
+        <para>
+            <classname>Zend_Filter_Alnum</classname> can also allow whitespaces. This can be usefull
+            when you want to strip special chars from a text. See the following example:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Alnum(array('allowwhitespace' => true));
+$return = $filter->filter('This is (my) content: 123');
+// returns 'This is my content 123'
+]]></programlisting>
+
+        <para>
+            The above example returns 'This is my content 123'. As you see only the brackets are
+            filtered whereas the whitespaces are not touched.
+        </para>
+
+        <para>
+            To change <property>allowWhiteSpace</property> afterwards you can use
+            <methodname>setAllowWhiteSpace()</methodname> and
+            <methodname>getAllowWhiteSpace()</methodname>.
+        </para>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

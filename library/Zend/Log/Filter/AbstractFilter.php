@@ -38,8 +38,7 @@ use Zend\Log\Factory,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-abstract class AbstractFilter 
-    implements Filter, Factory
+abstract class AbstractFilter implements Filter, Factory
 {
     /**
      * Validate and optionally convert the config to array

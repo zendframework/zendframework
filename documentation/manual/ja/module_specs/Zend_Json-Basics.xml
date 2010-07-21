@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19912 -->
+<!-- EN-Revision: 20792 -->
 <sect1 id="zend.json.basics">
     <title>基本的な使用法</title>
     <para>
@@ -17,7 +17,6 @@ $phpNative = Zend_Json::decode($encodedValue);
 $json = Zend_Json::encode($phpNative);
 ]]></programlisting>
 
-    <!-- TODO : to be translated -->
     <sect2 id="zend.json.basics.prettyprint">
         <title>Pretty-printing JSON</title>
 
@@ -37,7 +36,6 @@ if($debug) {
 }
 ]]></programlisting>
 
-        <!-- TODO : to be translated -->
         <para>
             Second optional argument of <methodname>Zend_Json::prettyPrint()</methodname> is an option array.
             Option <code>indent</code> allows to set indentation string - by default it's a single tab character.

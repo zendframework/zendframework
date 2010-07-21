@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 20763 -->
 <sect1 id="zend.auth.adapter.ldap">
 
     <title>LDAP 認証</title>
@@ -232,7 +232,7 @@ Array
             複数のサーバオプションを設定しておけば、
             このアダプタで複数ドメインのユーザ認証を行うことができます。
             また、ひとつのサーバが使用できない場合に別のサーバに問い合わせを行う
-            フェイルオーバー機能も提供することができます。
+            フェイルオーバー機能も提供できます。
         </para>
 
         <note>

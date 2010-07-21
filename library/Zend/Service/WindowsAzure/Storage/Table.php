@@ -23,13 +23,13 @@
 /**
  * @uses       Zend_Http_Client
  * @uses       Zend_Http_Response
- * @uses       Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
+ * @uses       Zend_Service_WindowsAzure_Credentials_AbstractCredentials
  * @uses       Zend_Service_WindowsAzure_Credentials_SharedKey
  * @uses       Zend_Service_WindowsAzure_Credentials_SharedKeyLite
  * @uses       Zend_Service_WindowsAzure_Exception
- * @uses       Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
+ * @uses       Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy
  * @uses       Zend_Service_WindowsAzure_Storage
- * @uses       Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
+ * @uses       Zend_Service_WindowsAzure_Storage_AbstractBatchStorage
  * @uses       Zend_Service_WindowsAzure_Storage_DynamicTableEntity
  * @uses       Zend_Service_WindowsAzure_Storage_TableEntity
  * @uses       Zend_Service_WindowsAzure_Storage_TableEntityQuery
@@ -41,7 +41,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_WindowsAzure_Storage_Table
-    extends Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
+    extends Zend_Service_WindowsAzure_Storage_AbstractBatchStorage
 {
 	/**
 	 * Creates a new Zend_Service_WindowsAzure_Storage_Table instance
@@ -50,9 +50,9 @@ class Zend_Service_WindowsAzure_Storage_Table
 	 * @param string $accountName Account name for Windows Azure
 	 * @param string $accountKey Account key for Windows Azure
 	 * @param boolean $usePathStyleUri Use path-style URI's
-	 * @param Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy Retry policy to use when making requests
+	 * @param Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy $retryPolicy Retry policy to use when making requests
 	 */
-	public function __construct($host = Zend_Service_WindowsAzure_Storage::URL_DEV_TABLE, $accountName = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT, $accountKey = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY, $usePathStyleUri = false, Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy = null)
+	public function __construct($host = Zend_Service_WindowsAzure_Storage::URL_DEV_TABLE, $accountName = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_ACCOUNT, $accountKey = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_KEY, $usePathStyleUri = false, Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy $retryPolicy = null)
 	{
 		parent::__construct($host, $accountName, $accountKey, $usePathStyleUri, $retryPolicy);
 

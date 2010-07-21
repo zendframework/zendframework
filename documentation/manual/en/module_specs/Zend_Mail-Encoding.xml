@@ -4,13 +4,13 @@
     <title>Encoding</title>
 
     <para>
-        Text and HTML message bodies are encoded with the quotedprintable mechanism by default.
-        Message headers are also encoded with the quotedprintable mechanism if you do not specify
-        base64 in <methodname>setHeaderEncoding()</methodname>. If you use language that is not
-        Roman letters-based, the base64 would be more suitable. All other attachments are encoded
-        via base64 if no other encoding is given in the <methodname>addAttachment()</methodname>
-        call or assigned to the <acronym>MIME</acronym> part object later. 7Bit and 8Bit encoding
-        currently only pass on the binary content data.
+        Text and <acronym>HTML</acronym> message bodies are encoded with the quotedprintable
+        mechanism by default. Message headers are also encoded with the quotedprintable mechanism if
+        you do not specify base64 in <methodname>setHeaderEncoding()</methodname>. If you use
+        language that is not Roman letters-based, the base64 would be more suitable. All other
+        attachments are encoded via base64 if no other encoding is given in the
+        <methodname>addAttachment()</methodname> call or assigned to the <acronym>MIME</acronym>
+        part object later. 7Bit and 8Bit encoding currently only pass on the binary content data.
     </para>
 
     <para>

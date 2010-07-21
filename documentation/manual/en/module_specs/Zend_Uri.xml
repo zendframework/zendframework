@@ -47,9 +47,10 @@ $uri = Zend_Uri::factory('http');
         <para>
             To create a new <acronym>URI</acronym> from scratch, pass only the scheme to
             <methodname>Zend_Uri::factory()</methodname><footnote><para>At the time of writing,
-            <classname>Zend_Uri</classname> only supports the <acronym>HTTP</acronym> and
-            <acronym>HTTPS</acronym> schemes.</para></footnote>. If an unsupported scheme is
-            passed, a <classname>Zend_Uri_Exception</classname> will be thrown.
+            <classname>Zend_Uri</classname> only provides built-in support for the <acronym>HTTP</acronym> 
+            and <acronym>HTTPS</acronym> schemes.</para></footnote>. If an unsupported scheme is
+            passed and no scheme-specific class is specified, a <classname>Zend_Uri_Exception</classname> 
+            will be thrown.
         </para>
 
         <para>
@@ -57,6 +58,41 @@ $uri = Zend_Uri::factory('http');
             <methodname>Zend_Uri::factory()</methodname> will return a subclass of itself that
             specializes in the scheme to be created.
         </para>
+        
+        <sect3>
+            <title>Creating a New Custom-Class URI</title>
+            
+            <para>
+                Starting from Zend Framework 1.10.5, you can specify a custom class to be 
+                used when creating the Zend_Uri instance, as a second parameter to the 
+                <methodname>Zend_Uri::factory()</methodname> method.  
+                This enables you to subclass Zend_Uri and create your own custom URI classes,
+                and instantiate new URI objects based on your own custom classes. 
+            </para>
+            
+            <para>
+                The 2nd parameter passed to <methodname>Zend_Uri::factory()</methodname> must
+                be a string with the name of a class extending <classname>Zend_Uri</classname>. 
+                The class must either be alredy-loaded, or loadable using <methodname>Zend_Loader::loadClass()</methodname> - 
+                that is, it must follow the Zend Framework class and file naming conventions, and 
+                must be in your include_path.   
+            </para>
+            
+            <example id="zend.uri.creation.custom.example-1">
+                <title>Creating a URI using a custom class</title>
+                
+                <programlisting language="php"><![CDATA[
+// Create a new 'ftp' URI based on a custom class
+$ftpUri = Zend_Uri::factory(
+    'ftp://user@ftp.example.com/path/file', 
+    'MyLibrary_Uri_Ftp'
+);
+
+// $ftpUri is an instance of MyLibrary_Uri_Ftp, which is a subclass of Zend_Uri 
+]]></programlisting>
+            </example>
+        </sect3>
+                
     </sect2>
 
     <sect2 id="zend.uri.manipulation">

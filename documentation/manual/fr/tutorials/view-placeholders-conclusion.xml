@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 22312 -->
+<!-- Reviewed: no -->
+<sect1 id="learning.view.placeholders.conclusion">
+    <title>View Placeholders: Conclusion</title>
+
+    <para>
+        Les objets placeholders de vue sont des manières simples et puissante de créer des layouts
+        de mise en page riches pour votre application. Vous pouvez utiliser des placeholders déja
+        fournis comme ceux abordés précedemment (<methodname>doctype()</methodname>,
+        <methodname>headTitle()</methodname>, <methodname>headLink()</methodname>  et
+        <methodname>headScript()</methodname>), ou utiliser l'aide générique
+        <methodname>placeholder()</methodname> pour agréger du contenu et le rendre de manière
+        personnalisée. Expérimentez les et visitez les sections appropriées du manuel pour découvrir
+        et tester des fonctionnalités supplémentaires qui vous seront sûrement utiles.
+    </para>
+</sect1>

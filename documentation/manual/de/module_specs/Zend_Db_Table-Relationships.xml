@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
+<!-- EN-Revision: 21587 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.relationships">
     <title>Zend_Db_Table Relationships</title>
@@ -25,10 +25,11 @@
 
         <para>
             Die Klassen für jede eigene Tabelle müssen durch das Erweitern der abstrakten Klasse
-            <classname>Zend_Db_Table_Abstract</classname>, wie in
-            <xref linkend="zend.db.table.defining" /> beschrieben, definiert werden. Siehe auch
-            unter <xref linkend="zend.db.adapter.example-database" /> für eine Beschreibug einer
-            Beispieldatenbank für welche der folgende Beispielcode designed wurde.
+            <classname>Zend_Db_Table_Abstract</classname>, wie in <link
+                linkend="zend.db.table.defining">diesem Kapitel</link> beschrieben, definiert
+            werden. Siehe auch in <link linkend="zend.db.adapter.example-database">diesem
+                Kapitel</link> für die Beschreibung einer Beispieldatenbank für welche der folgende
+            Beispielcode designed wurde.
         </para>
 
         <para>
@@ -94,11 +95,12 @@ class BugsProducts extends Zend_Db_Table_Abstract
 ]]></programlisting>
 
         <para>
-            Wenn <classname>Zend_Db_Table</classname> verwendet wird um kaskadierende UPDATE und
-            DELETE Operationen zu emulieren, muß das <varname>$_dependentTables</varname> Array in
-            der Klasse für die Eltern-Tabelle definiert werden. Der Klassenname muß für jede
-            abhängige Komponente aufgelistet werden. Hierbei muß der Klassenname und nicht der
-            physikalische Name der <acronym>SQL</acronym> Tabelle verwendet werden.
+            Wenn <classname>Zend_Db_Table</classname> verwendet wird um kaskadierende
+            <constant>UPDATE</constant> und <constant>DELETE</constant> Operationen zu emulieren,
+            muß das <varname>$_dependentTables</varname> Array in der Klasse für die Eltern-Tabelle
+            definiert werden. Der Klassenname muß für jede abhängige Komponente aufgelistet werden.
+            Hierbei muß der Klassenname und nicht der physikalische Name der <acronym>SQL</acronym>
+            Tabelle verwendet werden.
         </para>
 
         <note>
@@ -106,7 +108,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 Die Deklaration von <varname>$_dependentTables</varname> sollte übergangen werden
                 wenn referentielle Integritätsverknüpfungen im <acronym>RDBMS</acronym> Server
                 verwendet werden um kaskadierende Operationen zu implementieren. Siehe
-                <xref linkend="zend.db.table.relationships.cascading" /> für weitere Informationen.
+                <link linkend="zend.db.table.relationships.cascading">dieses Kapitel</link> für
+                weitere Informationen.
             </para>
         </note>
 
@@ -129,8 +132,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
         <para>
             Im Beispiel <acronym>PHP</acronym> Code von oben, sind die Regelschlüssel in der Bugs
-            Tabelle folgende: <code>'Reporter'</code>, <code>'Engineer'</code>,
-            <code>'Verifier'</code>, und <code>'Product'</code>.
+            Tabelle folgende: <command>'Reporter'</command>, <command>'Engineer'</command>,
+            <command>'Verifier'</command>, und <command>'Product'</command>.
         </para>
 
         <para>
@@ -164,10 +167,10 @@ class BugsProducts extends Zend_Db_Table_Abstract
                     Es ist für eine abhängige Tabelle üblich eine eigene Referenz zu Ihrer
                     Elterntabelle zu haben, aber einige Tabellen haben mehrfache Referenzen zu der
                     gleichen Elterntabelle. In der Beispieldatenbank gibt es eine Referenz von der
-                    <code>bugs</code> Tabelle zu der <code>products</code> Tabelle, aber drei
-                    Referenzen von der <code>bugs</code> Tabelle zur <code>accounts</code> Tabelle.
-                    Jede Referenz sollte in einen separaten Eintrag im
-                    <varname>$_referenceMap</varname> Array gegeben werden.
+                    <command>bugs</command> Tabelle zu der <command>products</command> Tabelle, aber
+                    drei Referenzen von der <command>bugs</command> Tabelle zur
+                    <command>accounts</command> Tabelle. Jede Referenz sollte in einen separaten
+                    Eintrag im <varname>$_referenceMap</varname> Array gegeben werden.
                 </para>
             </listitem>
 
@@ -181,14 +184,16 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 <para>
                     Es ist üblich das dies eine einzelne Spalte ist, aber einige Tabellen haben
                     mehr-spaltige Schlüssel. Wenn die Referenz einen mehr-spaltigen Schlüssel
-                    verwendet, muß die Reihenfolge der Spalten im <code>'columns'</code> Eintrag
-                    der Reihenfolge der Spalten im <code>'refColumns'</code> Eintrag entsprechen.
+                    verwendet, muß die Reihenfolge der Spalten im <command>'columns'</command>
+                    Eintrag der Reihenfolge der Spalten im <command>'refColumns'</command> Eintrag
+                    entsprechen.
                 </para>
 
                 <para>
-                    Dieses Element kann optional spezifiziert werden. Wenn <code>refColumns</code>
-                    nicht spezifiziert wird, werden standardmäßig die Spalte verwendet, die als
-                    primäre Schlüsselspalte in der Elterntabelle bekannt sind.
+                    Dieses Element kann optional spezifiziert werden. Wenn
+                    <property>refColumns</property> nicht spezifiziert wird, werden standardmäßig
+                    die Spalten verwendet, die als primäre Schlüsselspalten in der Elterntabelle
+                    bekannt sind.
                 </para>
             </listitem>
 
@@ -196,8 +201,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 <para>
                     <emphasis>onDelete</emphasis> => Eine Regel für eine Aktion die
                     ausgeführt wird wenn eine Zeile in der Elterntabelle gelöscht wird. Siehe auch
-                    <xref linkend="zend.db.table.relationships.cascading" /> für weitere
-                    Informationen.
+                    <link linkend="zend.db.table.relationships.cascading">dieses Kapitel</link> für
+                    weitere Informationen.
                 </para>
             </listitem>
 
@@ -206,8 +211,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
                     <emphasis>onUpdate</emphasis> => Eine Regel für eine Aktion die
                     ausgeführt wird wenn Werte in der primären Schlüsselspalte der Elterntabelle
                     aktualisiert werden. Siehe auch
-                    <xref linkend="zend.db.table.relationships.cascading" /> für weitere
-                    Informationen.
+                    <link linkend="zend.db.table.relationships.cascading">dieses Kapitel</link> für
+                    weitere Informationen.
                 </para>
             </listitem>
         </itemizedlist>
@@ -244,8 +249,8 @@ $row->findDependentRowset($table, [$rule]);
 
             <para>
                 Dieses Beispiel zeigt wie man ein Zeilenobjekt von der Tabelle
-                <code>Accounts</code> erhält und die <code>Bugs</code> findet die durch diesen
-                Account mitgeteilt wurden.
+                <command>Accounts</command> erhält und die <command>Bugs</command> findet die durch
+                diesen Account mitgeteilt wurden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -268,18 +273,18 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
         <para>
             Im obigen Beispiel wird der Regelschlüssel nicht spezifiziert, sodas standardmäßig die
             Regel verwendet wird die als erste der Elterntabelle entspricht. Das ist die Regel
-            <code>'Reporter'</code>.
+            <command>'Reporter'</command>.
         </para>
 
         <example id="zend.db.table.relationships.fetching.dependent.example-by">
             <title>Eine anhängige Zeile durch eine spezifische Regel erhalten</title>
 
             <para>
-                Das Beispiel zeigt wie ein Zeilenobjekt von der <code>Accounts</code> Tabelle
-                erhalten werden kann, und die zugeordneten <code>Bugs</code> die vom Benutzer
+                Das Beispiel zeigt wie ein Zeilenobjekt von der <command>Accounts</command> Tabelle
+                erhalten werden kann, und die zugeordneten <command>Bugs</command> die vom Benutzer
                 dieses Accounts bereits gefixed wurden, gefunden werden können. Der String des
                 Regelschlüssels der zu dieser Referenziellen Abhängigkeit in dem Beispiel
-                korrespondiert ist <code>'Engineer'</code>.
+                korrespondiert ist <command>'Engineer'</command>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -296,20 +301,19 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
             das Select Objekt der Elternzeilen verwendet wird.
         </para>
 
-        <para>
-            <example id="zend.db.table.relationships.fetching.dependent.example-by-select">
-                <title>
-                    Ein anhängiges Zeilenset erhalten indem Zend_Db_Table_Select verwendet wird
-                </title>
+        <example id="zend.db.table.relationships.fetching.dependent.example-by-select">
+            <title>
+                Ein anhängiges Zeilenset erhalten indem Zend_Db_Table_Select verwendet wird
+            </title>
 
-                <para>
-                    Dieses Beispiel zeigt wir ein Zeilenobjekt von der Tabelle
-                    <code>Accounts</code> empfangen werden kann, und die zugeordneten
-                    <code>Bugs</code> die vom Benutzer dieses Zugangs zu beheben sind, gefunden
-                    werden können, beschränkt auf 3 Zeilen und nach Name sortiert.
-                </para>
+            <para>
+                Dieses Beispiel zeigt wir ein Zeilenobjekt von der Tabelle
+                <command>Accounts</command> empfangen werden kann, und die zugeordneten
+                <command>Bugs</command> die vom Benutzer dieses Zugangs zu beheben sind, gefunden
+                werden können, beschränkt auf 3 Zeilen und nach Name sortiert.
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
 $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
@@ -320,8 +324,9 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
                                                      'Engineer',
                                                      $select);
 ]]></programlisting>
-            </example>
+        </example>
 
+        <para>
             Alternativ können Zeilen von einer abhängigen Tabelle abgefragt werden indem ein
             spezieller Mechanismus verwendet wird der "magische Methode" genannt wird.
             <classname>Zend_Db_Table_Row_Abstract</classname> ruft die Methode:
@@ -333,20 +338,20 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$row->find&lt;TabellenKlasse&gt;()</code>
+                    <command>$row->find&lt;TabellenKlasse&gt;()</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$row->find&lt;TabellenKlasse&gt;By&lt;Regel&gt;()</code>
+                    <command>$row->find&lt;TabellenKlasse&gt;By&lt;Regel&gt;()</command>
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            In den obigen Patterns, sind <code>&lt;TabellenKlasse&gt;</code> und
-            <code>&lt;Regel&gt;</code> Strings die mit dem Klassennamen der abhängigen Tabelle
+            In den obigen Patterns, sind <command>&lt;TabellenKlasse&gt;</command> und
+            <command>&lt;Regel&gt;</command> Strings die mit dem Klassennamen der abhängigen Tabelle
             korrespondieren, und der Regelschlüssel der abhängigen Tabelle der die Enterntabelle
             referenziert.
         </para>
@@ -414,9 +419,9 @@ $row->findParentRow($table, [$rule]);
             <title>Eine Elternzeile holen</title>
 
             <para>
-                Dieses Beispiel zeigt wie ein Zeilen Objekt von der Tabelle <code>Bugs</code>
+                Dieses Beispiel zeigt wie ein Zeilen Objekt von der Tabelle <command>Bugs</command>
                 geholt werden kann (zum Beispiel einer dieser Fehler mit Status 'NEW'), und die
-                Zeile in der <code>Accounts</code> Tabelle für diesen Benutzer, der den Fehler
+                Zeile in der <command>Accounts</command> Tabelle für diesen Benutzer, der den Fehler
                 gemeldet hat, gefunden werden kann.
             </para>
 
@@ -440,17 +445,17 @@ $reporter = $bug1->findParentRow('Accounts');
         <para>
             Im obigen Beispiel wird der Regelschlüssel nicht spezifiziert, sodas standardmäßig die
             Regel verwendet wird die als erste der Elterntabelle entspricht. Das ist die Regel
-            <code>'Reporter'</code>.
+            <command>'Reporter'</command>.
         </para>
 
         <example id="zend.db.table.relationships.fetching.parent.example-by">
             <title>Eine Elternzeile durch eine spezifizierte Regel holen</title>
 
             <para>
-                Dieses Beispiel zeigt wie ein Zeilenobjekt von der Tabelle <code>Bugs</code> geholt
-                werden kann, und der Account für den Ingenieur der zugeordnet wurde, diesen Fehler
-                zu beheben, gefunden werden kann. Der Regelschlüssel der in diesem Beispiel der
-                referenzierten Abhängigkeit entspricht ist <code>'Engineer'</code>.
+                Dieses Beispiel zeigt wie ein Zeilenobjekt von der Tabelle <command>Bugs</command>
+                geholt werden kann, und der Account für den Ingenieur der zugeordnet wurde, diesen
+                Fehler zu beheben, gefunden werden kann. Der Regelschlüssel der in diesem Beispiel
+                der referenzierten Abhängigkeit entspricht ist <command>'Engineer'</command>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -474,23 +479,24 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$row->findParent&lt;TabellenKlasse&gt;([Zend_Db_Table_Select
-                    $select])</code>
+                    <command>$row->findParent&lt;TabellenKlasse&gt;([Zend_Db_Table_Select
+                        $select])</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$row->findParent&lt;TabellenKlasse&gt;By&lt;Regel&gt;(
-                    [Zend_Db_Table_Select $select])</code>
+                    <command>$row->findParent&lt;TabellenKlasse&gt;By&lt;Regel&gt;(
+                        [Zend_Db_Table_Select $select])</command>
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            In den obigen Pattern sind, <code>&lt;TabellenKlasse&gt;</code> und
-            <code>&lt;Regel&gt;</code> Strings die dem Klassennamen der Elterntabelle entsprechen,
-            und der Regelname der abhängigen Tabelle der die Elterntabelle referenziert.
+            In den obigen Pattern sind, <command>&lt;TabellenKlasse&gt;</command> und
+            <command>&lt;Regel&gt;</command> Strings die dem Klassennamen der Elterntabelle
+            entsprechen, und der Regelname der abhängigen Tabelle der die Elterntabelle
+            referenziert.
         </para>
 
         <note>
@@ -571,9 +577,9 @@ $row->findManyToManyRowset($table,
 
             <para>
                 Dieses Beispiel zeigt wie man ein Zeilenobjekt von der Originaltabelle
-                <code>Bugs</code> erhält, und wie Zeilen von der Zieltabelle <code>Products</code>
-                gefunden werden können die Produkte repräsentieren welche diesem Bug zugeordnet
-                sind.
+                <command>Bugs</command> erhält, und wie Zeilen von der Zieltabelle
+                <command>Products</command> gefunden werden können die Produkte repräsentieren
+                welche diesem Bug zugeordnet sind.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -595,13 +601,13 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         <para>
             Der <varname>$rule1</varname> Schlüssel benennt die Regel für die Verknüpfung der
             Verknüpfungstabelle zur Originaltabelle. In diesem Beispiel ist das die verknüpfung von
-            <code>BugsProducts</code> zu <code>Bugs</code>.
+            <command>BugsProducts</command> zu <command>Bugs</command>.
         </para>
 
         <para>
             Der <varname>$rule2</varname> Schlüssel benennt die Regel für die Verknüpfung der
             Verknüpfungstabelle zur Zieltabelle. In diesem Beispiel ist der die Verknüpfung von
-            <code>Bugs</code> zu <code>Products</code>.
+            <command>Bugs</command> zu <command>Products</command>.
         </para>
 
         <para>
@@ -615,7 +621,8 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         <para>
             Im obigen Beispiel wird der Regelschlüssel nicht spezifiziert, sodas standardmäßig die
             ersten passenden Regeln verwendet werden. In diesem Fall ist <varname>$rule1</varname>
-            <code>'Reporter'</code> und <varname>$rule2</varname> ist <code>'Product'</code>.
+            <command>'Reporter'</command> und <varname>$rule2</varname> ist
+            <command>'Product'</command>.
         </para>
 
         <example id="zend.db.table.relationships.fetching.many-to-many.example-by">
@@ -625,8 +632,9 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
 
             <para>
                 Dieses Beispiel zeigt wie man ein Zeilenobjekt von der Originaltabelle
-                <code>Bugs</code> erhält, und Zeilen von der Zieltabelle <code>Products</code>
-                findet die Produkte repräsentieren die dem Fehler zugeordnet sind.
+                <command>Bugs</command> erhält, und Zeilen von der Zieltabelle
+                <command>Products</command> findet die Produkte repräsentieren die dem Fehler
+                zugeordnet sind.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -644,36 +652,39 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
             Alternativ können Zeilen von der Zieltabelle in einer Viele-Zu-Viele Verknüpfung
             abgefragt werden inden eine "magische Methode" verwendet wird.
             <classname>Zend_Db_Table_Row_Abstract</classname> ruft die Methode:
-            <code>findManyToManyRowset('&lt;TabellenKlasse&gt;',
-            '&lt;VerknüpfungTabellenKlasse&gt;', '&lt;Regel1&gt;', '&lt;Regel2&gt;')</code> auf,
-            wenn eine Methode aufgerufen wird die einem der folgenden Pattern entspricht:
+            <command>findManyToManyRowset('&lt;TabellenKlasse&gt;',
+                '&lt;VerknüpfungTabellenKlasse&gt;', '&lt;Regel1&gt;', '&lt;Regel2&gt;')</command>
+            auf, wenn eine Methode aufgerufen wird die einem der folgenden Pattern entspricht:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$row->find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;([Zend_Db_Table_Select $select])</code>
+                    <command>$row->find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;
+                        ([Zend_Db_Table_Select $select])</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$row->find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;By&lt;Regel1&gt;([Zend_Db_Table_Select $select])</code>
+                    <command>$row->find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;By&lt;Regel1&gt;
+                        ([Zend_Db_Table_Select $select])</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$row->find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;By&lt;Regel1&gt;And&lt;Regel2&gt;([Zend_Db_Table_Select $select])</code>
+                    <command>$row->find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;By&lt;Regel1&gt;And&lt;Regel2&gt;
+                        ([Zend_Db_Table_Select $select])</command>
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            In den oben gezeigten Pattern sind <code>&lt;TabellenKlasse&gt;</code> und
-            <code>&lt;VerknüpfungsTabellenKlasse&gt;</code> Strings die den Klassennamen der
-            Zieltabelle und der Verknüpfungstabelle entsprechen. <code>&lt;Regel1&gt;</code> und
-            <code>&lt;Regel2&gt;</code> sind Strings die den Regelschlüssel in der
+            In den oben gezeigten Pattern sind <command>&lt;TabellenKlasse&gt;</command> und
+            <command>&lt;VerknüpfungsTabellenKlasse&gt;</command> Strings die den Klassennamen der
+            Zieltabelle und der Verknüpfungstabelle entsprechen. <command>&lt;Regel1&gt;</command>
+            und <command>&lt;Regel2&gt;</command> sind Strings die den Regelschlüssel in der
             Verknüpfungstabelle entsprechen, welche die Originaltabelle und die Zieltabelle
             referenzieren.
         </para>
@@ -719,22 +730,23 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
                 Die Deklaration von kaskadierenden Operationen in
                 <classname>Zend_Db_Table</classname> <emphasis>nur</emphasis> für
                 <acronym>RDBMS</acronym> Marken gedacht die keine deklarative referentielle
-                Integrität unterstützen (DRI).
+                Integrität unterstützen (<acronym>DRI</acronym>).
             </para>
 
             <para>
                 Zum Beispiel, bei der Verwendung von MySQL's MyISAM Speicherengine oder SQLite.
-                Diese Lösungen unterstützen kein DRI. Hierbei ist es hilfreich die kaskadierenden
-                Operationen mit <classname>Zend_Db_Table</classname> zu deklarieren.
+                Diese Lösungen unterstützen kein <acronym>DRI</acronym>. Hierbei ist es hilfreich
+                die kaskadierenden Operationen mit <classname>Zend_Db_Table</classname> zu
+                deklarieren.
             </para>
 
             <para>
-                Wenn die eigene <acronym>RDBMS</acronym> DRI implementiert sowie die
-                <code>ON DELETE</code> und <code>ON UPDATE</code> Klauseln, sollten diese Klauseln
-                im eigenen Datenbank Schema deklariert werden, anstatt das kaskadierende Feature von
-                <classname>Zend_Db_Table</classname> zu verwenden. Die Deklaration von DRI Regeln in
-                der <acronym>RDBMS</acronym> ist besser für die Geschwindigkeit der Datenbank,
-                Konsistenz und Integrität.
+                Wenn die eigene <acronym>RDBMS</acronym> <acronym>DRI</acronym> implementiert sowie
+                die ON <constant>DELETE</constant> und ON <constant>UPDATE</constant> Klauseln,
+                sollten diese Klauseln im eigenen Datenbank Schema deklariert werden, anstatt das
+                kaskadierende Feature von <classname>Zend_Db_Table</classname> zu verwenden. Die
+                Deklaration von <acronym>DRI</acronym> Regeln in der <acronym>RDBMS</acronym> ist
+                besser für die Geschwindigkeit der Datenbank, Konsistenz und Integrität.
             </para>
 
             <para>
@@ -754,9 +766,9 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             <title>Beispiel für ein kaskadierendes Löschen</title>
 
             <para>
-                Dieses Beispiel zeigt das Löschen einer Zeile in der <code>Products</code> Tabelle,
-                welche konfiguriert ist um automatisch abhängige Zeilen in der <code>Bugs</code>
-                Tabelle zu löschen.
+                Dieses Beispiel zeigt das Löschen einer Zeile in der <command>Products</command>
+                Tabelle, welche konfiguriert ist um automatisch abhängige Zeilen in der
+                <command>Bugs</command> Tabelle zu löschen.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -788,29 +800,31 @@ $product1234->delete();
         <para>
             Um eine kaskadierende Abhängigkeit in <classname>Zend_Db_Table</classname> zu
             deklarieren, müssen die Regeln in <varname>$_referenceMap</varname> bearbeitet werden.
-            Die assoziativen Arrayschlüssel <code>'onDelete'</code> und <code>'onUpdate'</code>
-            müssen auf den String 'cascade' (oder die Konstante <constant>self::CASCADE</constant>)
-            gesetzt werden. Bevor eine Zeile von der Elterntabelle gelöscht wird oder dessen Wert
-            des primären Schlüssels aktualisiert wird, werden alle Zeilen in der abhängigen Tabelle,
-            welche die Eltern-Zeilen referenzieren, zuerst gelöscht oder aktualisiert.
+            Die assoziativen Arrayschlüssel <command>'onDelete'</command> und
+            <command>'onUpdate'</command> müssen auf den String 'cascade' (oder die Konstante
+            <constant>self::CASCADE</constant>) gesetzt werden. Bevor eine Zeile von der
+            Elterntabelle gelöscht wird oder dessen Wert des primären Schlüssels aktualisiert wird,
+            werden alle Zeilen in der abhängigen Tabelle, welche die Eltern-Zeilen referenzieren,
+            zuerst gelöscht oder aktualisiert.
         </para>
 
         <example id="zend.db.table.relationships.cascading.example-declaration">
             <title>Beispieldeklaration einer kaskadierenden Operation</title>
 
             <para>
-                Im unten angeführten Beispiel, werden die Zeilen in der <code>Bugs</code> Tabelle
-                automatisch gelöscht wenn eine Zeile in der <code>Products</code> Tabelle zu der
-                Sie referenzieren gelöscht wird. Das <code>'onDelete'</code> Element des
-                Referenzplan Eintrages wird auf <constant>self::CASCADE</constant> gesetzt.
+                Im unten angeführten Beispiel, werden die Zeilen in der <command>Bugs</command>
+                Tabelle automatisch gelöscht wenn eine Zeile in der <command>Products</command>
+                Tabelle zu der Sie referenzieren gelöscht wird. Das <command>'onDelete'</command>
+                Element des Referenzplan Eintrages wird auf <constant>self::CASCADE</constant>
+                gesetzt.
             </para>
 
             <para>
                 Es wird in diesem Beispiel keine kaskadierende Aktualisierung durchgeführt wenn der
                 primäre Schlüsselwert in der Elternklasse verändert wird. Das
-                <code>'onUpdate'</code> Element des Referenzplan Eintrages ist
+                <command>'onUpdate'</command> Element des Referenzplan Eintrages ist
                 <constant>self::RESTRICT</constant>. Das gleiche Ergebnis erhält man durch
-                Unterdrückung des <code>'onUpdate'</code> Eintrages.
+                Unterdrückung des <command>'onUpdate'</command> Eintrages.
             </para>
 
             <programlisting language="php"><![CDATA[

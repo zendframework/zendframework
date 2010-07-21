@@ -48,7 +48,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreate()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
 
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
@@ -57,7 +57,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testOpenCompoundFile()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $file1 = $segmentInfo->openCompoundFile('.fnm');
@@ -76,7 +76,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testCompoundFileLength()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $this->assertEquals($segmentInfo->compoundFileLength('.tii'), 58);
@@ -84,7 +84,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFieldNum()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $this->assertEquals($segmentInfo->getFieldNum('contents'), 2);
@@ -93,7 +93,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testGetField()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $fieldInfo = $segmentInfo->getField(2);
@@ -106,7 +106,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFields()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $this->assertTrue($segmentInfo->getFields() == array('path' => 'path', 'modified' => 'modified', 'contents' => 'contents'));
@@ -115,7 +115,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFieldInfos()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $fieldInfos = $segmentInfo->getFieldInfos();
@@ -138,7 +138,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testCount()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $this->assertEquals($segmentInfo->count(), 2);
@@ -146,7 +146,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testNumDocs()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
         $segmentInfo = new Index\SegmentInfo($directory, '_3', 2);
 
         $this->assertEquals($segmentInfo->count(), 2);
@@ -155,7 +155,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testGetName()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $this->assertEquals($segmentInfo->getName(), '_1');
@@ -163,7 +163,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testGetTermInfo()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $termInfo = $segmentInfo->getTermInfo(new Index\Term('apart', 'contents'));
@@ -184,7 +184,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testTermFreqs()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $termPositions = $segmentInfo->termFreqs(new Index\Term('bgcolor', 'contents'));
@@ -196,7 +196,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testTermPositions()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $termPositions = $segmentInfo->termPositions(new Index\Term('bgcolor', 'contents'));
@@ -212,7 +212,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testNorm()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $this->assertTrue(abs($segmentInfo->norm(1, 'contents') - 0.0546875) < 0.000001);
@@ -220,7 +220,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testNormVector()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
 
         $this->assertEquals($segmentInfo->normVector('contents'), "\x69\x6B");
@@ -228,7 +228,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testHasDeletions()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
 
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2);
         $this->assertFalse($segmentInfo->hasDeletions());
@@ -239,7 +239,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testDelete()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
 
         $segmentInfo = new Index\SegmentInfo($directory, '_1', 2, 0 /* search for _1.del file */);
         $this->assertFalse($segmentInfo->hasDeletions());
@@ -271,7 +271,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testIsDeleted()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
 
         $segmentInfo = new Index\SegmentInfo($directory, '_2', 2);
         $this->assertFalse($segmentInfo->isDeleted(0));
@@ -283,7 +283,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testTermStreamStyleReading()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
 
         $segmentInfo = new Index\SegmentInfo($directory, '_3', 2);
 
@@ -480,7 +480,7 @@ class SegmentInfoTest extends \PHPUnit_Framework_TestCase
 
     public function testTermStreamStyleReadingSkipTo()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
 
         $segmentInfo = new Index\SegmentInfo($directory, '_3', 2);
 

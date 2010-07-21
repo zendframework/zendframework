@@ -20,7 +20,7 @@
  */
 
 // set include_path to library/ directory only -- see ticket #11
-set_include_path( dirname(dirname(dirname(dirname(__FILE__))))
+set_include_path( dirname(dirname(dirname(__DIR__)))
                   . DIRECTORY_SEPARATOR . 'library' );
 
 require_once 'Zend/Pdf.php';
@@ -70,7 +70,7 @@ $style->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD),
 try {
     // Create new image object
     require_once 'Zend/Pdf/Image.php';
-    $stampImage = Zend_Pdf_Image::imageWithPath(dirname(__FILE__) . '/stamp.jpg');
+    $stampImage = Zend_Pdf_Image::imageWithPath(__DIR__ . '/stamp.jpg');
 } catch (Zend_Pdf_Exception $e) {
     // Example of operating with image loading exceptions.
     if ($e->getMessage() != 'Image extension is not installed.' &&

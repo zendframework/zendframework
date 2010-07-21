@@ -185,7 +185,7 @@ interface Zend_Form_Decorator_Interface
             As an example, let's say you want to reduce the number of
             decorators you use, and build a "composite" decorator to take care
             of rendering the label, element, any error messages, and description
-            in an HTML 'div'. You might build such a 'Composite'
+            in an <acronym>HTML</acronym> 'div'. You might build such a 'Composite'
             decorator as follows:
         </para>
 

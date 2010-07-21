@@ -152,7 +152,7 @@
             <classname>Zend_Form</classname> attempts to automate this process with its
             <link linkend="zend.form.forms.subforms">sub forms</link>. By
             default, sub forms render using the array notation as shown in the
-            previous HTML form listing, complete with ids. The array name is
+            previous <acronym>HTML</acronym> form listing, complete with ids. The array name is
             based on the sub form name, with the keys based on the elements
             contained in the sub form. Sub forms may be nested arbitrarily deep,
             and this will create nested arrays to reflect the structure.

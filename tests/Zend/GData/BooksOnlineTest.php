@@ -46,9 +46,9 @@ class BooksOnlineTest extends \PHPUnit_Framework_TestCase
         }
         $user = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_EMAIL');
         $pass = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD');
-        $service = Books\Books::AUTH_SERVICE_NAME;
+        $service = Books::AUTH_SERVICE_NAME;
         $client = \Zend\GData\ClientLogin::getHttpClient($user, $pass, $service);
-        $this->gdata = new Books\Books($client);
+        $this->gdata = new Books($client);
     }
 
     public function testGetVolumeFeed()
@@ -107,7 +107,7 @@ class BooksOnlineTest extends \PHPUnit_Framework_TestCase
         $entry->setId(new Extension\Id('Mfer_MFwQrkC'));
         $entry->setRating(new \Zend\GData\Extension\Rating(3, 1, 5, 1));
         $newEntry = $this->gdata->insertVolume($entry,
-            Books\Books::MY_ANNOTATION_FEED_URI);
+            Books::MY_ANNOTATION_FEED_URI);
         $this->assertTrue($newEntry instanceof Books\VolumeEntry);
         $this->gdata->deleteVolume($newEntry);
     }

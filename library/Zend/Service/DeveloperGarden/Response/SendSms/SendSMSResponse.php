@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Response_SendSms_SendSmsAbstract
+ * @uses       Zend_Service_DeveloperGarden_Response_SendSms_AbstractSendSms
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -30,6 +30,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_SendSms_SendSMSResponse
-    extends Zend_Service_DeveloperGarden_Response_SendSms_SendSmsAbstract
+    extends Zend_Service_DeveloperGarden_Response_SendSms_AbstractSendSms
 {
 }

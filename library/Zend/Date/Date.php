@@ -272,7 +272,7 @@ class Date extends DateObject
                         if ($value === null) {
                             parent::$_cache = null;
                         } else {
-                            if (!$value instanceof \Zend\Cache\Core) {
+                            if (!$value instanceof \Zend\Cache\Frontend) {
                                 throw new Exception("Instance of Zend_Cache expected");
                             }
 
@@ -439,8 +439,10 @@ class Date extends DateObject
             }
         }
 
-        if (($format !== null) and !defined($format) and
-            ($format != 'ee') and ($format != 'ss') and Locale::isLocale($format, null, false)) {
+        if (($format !== null) && !defined($format) 
+            && ($format != 'ee') && ($format != 'ss') && ($format != 'GG') && ($format != 'MM') && ($format != 'EE') && ($format != 'TT')
+            && Locale::isLocale($format, null, false)
+        ) {
             $locale = $format;
             $format = null;
         }
@@ -528,8 +530,10 @@ class Date extends DateObject
             $locale = $this->getLocale();
         }
 
-        if (($part !== null) and !defined($part) and
-            ($part != 'ee') and ($part != 'ss') and Locale::isLocale($part, null, false)) {
+        if (($part !== null) && !defined($part)
+            && ($part != 'ee') && ($part != 'ss') && ($part != 'GG') && ($part != 'MM') && ($part != 'EE') && ($part != 'TT')
+            && Locale::isLocale($part, null, false)
+        ) {
             $locale = $part;
             $part = null;
         }
@@ -1133,7 +1137,7 @@ class Date extends DateObject
      * @return integer  0 = equal, 1 = later, -1 = earlier
      * @throws \Zend\Date\Exception
      */
-    public function compare($date, $part = null, $locale = null)
+    public function compare($date, $part = self::TIMESTAMP, $locale = null)
     {
         if (self::$_options['format_type'] == 'php') {
             $part = Format::convertPhpToIsoFormat($part);
@@ -2611,7 +2615,7 @@ class Date extends DateObject
      * @return boolean
      * @throws \Zend\Date\Exception
      */
-    public function equals($date, $part = null, $locale = null)
+    public function equals($date, $part = self::TIMESTAMP, $locale = null)
     {
         $result = $this->compare($date, $part, $locale);
 
@@ -4645,7 +4649,9 @@ class Date extends DateObject
             return false;
         }
 
-        if (($format !== null) and (Locale::isLocale($format, null, false))) {
+        if (($format !== null) && ($format != 'ee') && ($format != 'ss') && ($format != 'GG') && ($format != 'MM') && ($format != 'EE') && ($format != 'TT')
+            && (Locale::isLocale($format, null, false))
+        ) {
             $locale = $format;
             $format = null;
         }
@@ -4804,19 +4810,19 @@ class Date extends DateObject
                 return Data::getContent($locale, 'date', array('gregorian', 'short'));
                 break;
             case self::TIMES :
-                return Data::getContent($locale, 'date');
+                return Data::getContent($locale, 'time');
                 break;
             case self::TIME_FULL :
                 return Data::getContent($locale, 'time', array('gregorian', 'full'));
                 break;
             case self::TIME_LONG :
-                return Data::getContent($locale, 'date', array('gregorian', 'long'));
+                return Data::getContent($locale, 'time', array('gregorian', 'long'));
                 break;
             case self::TIME_MEDIUM :
-                return Data::getContent($locale, 'date', array('gregorian', 'medium'));
+                return Data::getContent($locale, 'time', array('gregorian', 'medium'));
                 break;
             case self::TIME_SHORT :
-                return Data::getContent($locale, 'date', array('gregorian', 'short'));
+                return Data::getContent($locale, 'time', array('gregorian', 'short'));
                 break;
             case self::DATETIME :
                 return Data::getContent($locale, 'datetime');

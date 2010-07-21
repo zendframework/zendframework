@@ -55,7 +55,13 @@
             </para>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/german.mo',
+        'locale'  => 'de'
+    )
+);
 $translate->plural('Car', 'Cars', $number);
 ]]></programlisting>
         </example>
@@ -86,7 +92,13 @@ $translate->plural('Car', 'Cars', $number);
             </para>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/german.mo',
+        'locale'  => 'de'
+    )
+);
 $translate->translate(array('Car', 'Cars', $number));
 ]]></programlisting>
         </example>
@@ -105,12 +117,22 @@ $translate->translate(array('Car', 'Cars', $number));
             </para>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
-$translate->translate(array('Car',
-                            'Cars first plural',
-                            'Cars second plural',
-                            $number,
-                            'ru'));
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/german.mo',
+        'locale'  => 'de'
+    )
+);
+$translate->translate(
+    array(
+        'Car',
+        'Cars first plural',
+        'Cars second plural',
+        $number,
+        'ru'
+    )
+);
 ]]></programlisting>
         </example>
 

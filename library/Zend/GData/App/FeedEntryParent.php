@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\App;
 
+use Zend\GData\App;
+
 /**
  * Abstract class for common functionality in entries and feeds
  *
@@ -145,7 +147,7 @@ abstract class FeedEntryParent extends Base
      * Set the active service instance for this object. This will be used to
      * perform network requests, such as when calling save() and delete().
      *
-     * @param \Zend\GData\App\App $instance The new service instance.
+     * @param \Zend\GData\App $instance The new service instance.
      * @return \Zend\GData\App\FeedEntryParent Provides a fluent interface.
      */
     public function setService($instance)
@@ -158,7 +160,7 @@ abstract class FeedEntryParent extends Base
      * Get the active service instance for this object. This will be used to
      * perform network requests, such as when calling save() and delete().
      *
-     * @return \Zend\GData\App\App|null The current service instance, or null if
+     * @return \Zend\GData\App|null The current service instance, or null if
      *         not set.
      */
     public function getService()

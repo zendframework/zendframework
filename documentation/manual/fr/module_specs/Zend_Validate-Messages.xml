@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20352 -->
+<!-- EN-Revision: 22119 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.messages">
     <title>Messages de validation</title>
 
     <para>
         Chaque validateur basé sur <classname>Zend_Validate</classname> propose un ou plusieurs messages
-        dans le cas d'un echec. Vous pouvez utiliser ces informations pour créer vos propres messages
+        dans le cas d'un échec. Vous pouvez utiliser ces informations pour créer vos propres messages
         ou pour traduire les messages présents.
     </para>
 
     <para>
-        These validation messages are constants which can be found at top of each validator class.
-        Let's look into <classname>Zend_Validate_GreaterThan</classname> for an descriptive example:
+        Ces messages sont représentés par des constantes se trouvant en haut de chaque classe de validateur.
+        Voyons <classname>Zend_Validate_GreaterThan</classname> pour un exemple complet:
     </para>
 
     <programlisting language="php"><![CDATA[
 protected $_messageTemplates = array(
-    self::NOT_GREATER => "'%value%' is not greater than '%min%'",
+    self::NOT_GREATER => "'%value%' n'est pas plus grande que '%min%'",
 );
 ]]></programlisting>
 
     <para>
-        As you can see the constant <constant>self::NOT_GREATER</constant> refers to the failure and
-        is used as key, and the message itself is used as value of the message array.
+        Comme vous le voyez, la constante <constant>self::NOT_GREATER</constant> fait référence à un échec et est
+        utilisée comme clé, le message lui-même est utilisé comme valeur dans le tableau des messages.
     </para>
 
     <para>
-        You can retrieve all message templates from a validator by using the
-        <methodname>getMessageTemplates()</methodname> method. It returns you the above array which
-        contains all messages a validator could return in the case of a failed validation.
+        Vous pouvez récupérer les templates de messages d'un validateur en utilisant la méthode
+        <methodname>getMessageTemplates()</methodname>. Elle vous retourne le tableau comme vu ci-dessus qui contient
+        tous les messages que le validateur pourrait retourner en cas d'échec de validation.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -38,76 +38,77 @@ $messages  = $validator->getMessageTemplates();
 ]]></programlisting>
 
     <para>
-        Using the <methodname>setMessage()</methodname> method you can set another message to be
-        returned in case of the specified failure.
+        La méthode <methodname>setMessage()</methodname> permet de modifier un message unique correspondant à un
+        cas particulier d'échec de validation.
     </para>
 
     <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_GreaterThan();
-$validator->setMessage('Please enter a lower value', Zend_Validate_GreaterThan::NOT_GREATER);
+$validator->setMessage('Entrez une valeur plus petite', Zend_Validate_GreaterThan::NOT_GREATER);
 ]]></programlisting>
 
     <para>
-        The second parameter defines the failure which will be overridden. When you omit this
-        parameter, then the given message will be set for all possible failures of this validator.
+        Le deuxième paramètre indique le cas d'échec à surcharger. Lorsque vous omettez ce paramètre,
+        alors le message précisé sera affecté comme message pour tous les cas d'échec possibles du validateur.
     </para>
 
     <sect2 id="zend.validate.messages.pretranslated">
-        <title>Using pre-translated validation messages</title>
+        <title>Utiliser les messages de validations pré-traduits</title>
 
         <para>
-            Zend Framework is shipped with more than 45 different validators with more than 200
-            failure messages. It can be a tendious task to translate all of these messages. But for
-            your convinience Zend Framework comes with already pre-translated validation messages.
-            You can find them within the path <filename>/resources/languages</filename> in your
-            Zend Framework installation.
+            Zend Framework est livré avec plus de 45 validateurs différents et plus de 200 messages d'échecs.
+            Cela peut-être pénible de tous les traduire. Pour votre convenance, Zend Framework est livré avec
+            des messages d'échec pré-traduits. Vous les trouverez dans <filename>/resources/languages</filename>
+            de votre installation de Zend Framework.
         </para>
 
         <note>
-            <title>Used path</title>
+            <title>Chemin utilisé</title>
 
             <para>
-                The resource files are outside of the library path because all of your translations
-                should also be outside of this path.
+                Les fichiers de ressources sont en dehors du dossier library car les traductions sont sensées
+                être en dehors de ce chemin.
             </para>
         </note>
 
         <para>
-            So to translate all validation messages to german for example, all you have to do is to
-            attach a translator to <classname>Zend_Validate</classname> using these resource files.
+            Donc pour traduire les messages de validation en français par exemple, tout ce qu'il y a à faire est
+            d'attacher un objet de traduction à <classname>Zend_Validate</classname> en utilisant les fichiers
+            de ressources (pré-traductions).
         </para>
 
         <programlisting language="php"><![CDATA[
 $translator = new Zend_Translate(
-    'array',
-    '/resources/languages',
-    $language,
-    array('scan' => Zend_Locale::LOCALE_DIRECTORY)
+    array(
+        'adapter' => 'array',
+        'content' => '/resources/languages',
+        'locale'  => $language,
+        'scan' => Zend_Translate::LOCALE_DIRECTORY
+    )
 );
 Zend_Validate_Abstract::setDefaultTranslator($translator);
 ]]></programlisting>
 
         <note>
-            <title>Used translation adapter</title>
+            <title>Adaptateur de traduction utilisé</title>
 
             <para>
-                As translation adapter Zend Framework choosed the array adapter. It is simple to
-                edit and created very fast.
+                L'adaptateur array a été utilisé, ceci pour permettre une modification simple des
+                messages pré-traduits.
             </para>
         </note>
 
         <note>
-            <title>Supported languages</title>
+            <title>Langues supportées</title>
 
             <para>
-                This feature is very young, so the amount of supported languages may not be
-                complete. New languages will be added with each release. Additionally feel free to
-                use the existing resource files to make your own translations.
+                Cette caractéristique de pré-traduction est jeune, donc le nombre de langues supportées peut
+                ne pas être complet. De nouvelles langues seront ajoutées dans les sorties futures.
             </para>
 
             <para>
-                You could also use these resource files to rewrite existing translations. So you
-                are not in need to create these files manually yourself.
+                Vous pouvez aussi partir de ces fichiers pré-traduits pour créer vos propres traductions,
+                par exemple.
             </para>
         </note>
     </sect2>
@@ -138,7 +139,7 @@ Zend_Validate::setMessageLength(100);
 ]]></programlisting>
 
         <note>
-            <title>Où ce paramètre est-il utilisé&#160;?</title>
+            <title>Où ce paramètre est-il utilisé ?</title>
 
             <para>
                 La taille des messages affecte aussi les messages personnalisés enregistrés, dès

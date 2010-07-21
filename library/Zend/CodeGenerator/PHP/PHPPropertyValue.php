@@ -35,41 +35,5 @@ namespace Zend\CodeGenerator\PHP;
  */
 class PHPPropertyValue extends PHPValue
 {
-    
     protected $_topMostValue = true;
-    
-    public function setValue($value)
-    {
-        parent::setValue($value);
-        $type = $this->_type;
-        if ($type == self::TYPE_AUTO) {
-            $type = $this->_getAutodeterminedType($value);
-        }
-        
-        if ($type == self::TYPE_ARRAY) {
-            foreach (new \RecursiveArrayIterator($value) as $value) {
-                if ((is_object($value) && (!$value instanceof self)) || is_resource($value)) {
-                    throw new Exception('PHPPropertyValue values must be of a non-object, non-resource type inside an array');
-                }
-                if ($value instanceof self) {
-                    $value->_topMostValue = false;
-                }
-            }
-        } else {
-            if (is_object($value) || is_resource($value)) {
-                throw new Exception('PHPPropertyValue values must be of a non-object, non-resource type');
-            }
-        }
-
-        return $this;
-    }
-    
-    public function generate()
-    {
-        $output = parent::generate();
-        if ($this->_topMostValue) {
-            $output .= ';';
-        }
-        return $output;
-    }
 }

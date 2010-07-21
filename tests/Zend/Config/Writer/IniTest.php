@@ -40,7 +40,7 @@ class IniTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_tempName = tempnam(dirname(__FILE__) . '/temp', 'tmp');
+        $this->_tempName = tempnam(__DIR__ . '/temp', 'tmp');
     }
 
     public function tearDown()
@@ -97,7 +97,7 @@ class IniTest extends \PHPUnit_Framework_TestCase
 
     public function testWriteAndReadOriginalFile()
     {
-        $config = new IniConfig(dirname(__FILE__) . '/files/allsections.ini', null, array('skipExtends' => true));
+        $config = new IniConfig(__DIR__ . '/files/allsections.ini', null, array('skipExtends' => true));
 
         $writer = new Ini(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
@@ -112,7 +112,7 @@ class IniTest extends \PHPUnit_Framework_TestCase
 
     public function testWriteAndReadSingleSection()
     {
-        $config = new IniConfig(dirname(__FILE__) . '/files/allsections.ini', 'staging', array('skipExtends' => true));
+        $config = new IniConfig(__DIR__ . '/files/allsections.ini', 'staging', array('skipExtends' => true));
 
         $writer = new Ini(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
@@ -175,7 +175,7 @@ ECS;
 
     public function testRenderWithoutSections2()
     {
-        $config = new IniConfig(dirname(__FILE__) . '/files/allsections.ini', null, array('skipExtends' => true));
+        $config = new IniConfig(__DIR__ . '/files/allsections.ini', null, array('skipExtends' => true));
 
         $writer = new Ini();
         $writer->setRenderWithoutSections();
@@ -216,5 +216,40 @@ ECS;
         $this->setExpectedException('\\Zend\\Config\\Exception', 'Value can not contain double quotes');
         $writer = new Ini(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
+    }
+    
+    /**
+     * @group ZF-6289
+     */
+    public function testZF6289_NonSectionElementsAndSectionJumbling()
+    {
+        $config = new Zend_Config(array(
+            'one'   => 'element',
+            'two'   => array('type' => 'section'),
+            'three' => 'element',
+            'four'  => array('type' => 'section'),
+            'five'  => 'element'
+        ));
+        
+        $writer = new Zend_Config_Writer_Ini;
+        $iniString = $writer->setConfig($config)->render($config);
+        
+        $expected = <<<ECS
+one = "element"
+three = "element"
+five = "element"
+[two]
+type = "section"
+
+[four]
+type = "section"
+
+
+ECS;
+        
+        $this->assertEquals(
+            $expected,
+            $iniString
+        );
     }
 }

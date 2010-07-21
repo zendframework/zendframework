@@ -49,7 +49,6 @@ class LocTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->markTestSkipped('Skipped until Zend_Uri is converted to namespaces');
         $this->_validator = new \Zend\Validator\Sitemap\Loc();
     }
 
@@ -97,7 +96,7 @@ class LocTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($values as $value) {
-            $this->assertSame(false, $this->_validator->isValid($value));
+            $this->assertFalse($this->_validator->isValid($value), $value);
             $messages = $this->_validator->getMessages();
             $this->assertContains('is no valid', current($messages));
         }

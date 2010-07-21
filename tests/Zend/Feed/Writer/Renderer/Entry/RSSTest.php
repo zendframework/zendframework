@@ -224,6 +224,52 @@ class RSSTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://example.com/audio.mp3', $enc->url);
     }
 
+    public function testAddsEnclosureThrowsExceptionOnMissingType()
+    {
+        $renderer = new Feed\RSS($this->_validWriter);
+        $this->_validEntry->setEnclosure(array(
+            'uri' => 'http://example.com/audio.mp3',
+            'length' => '1337'
+        ));
+        $this->setExpectedException('Zend\Feed\Exception');
+        $renderer->render();
+    }
+
+    public function testAddsEnclosureThrowsExceptionOnMissingLength()
+    {
+        $renderer = new Feed\RSS($this->_validWriter);
+        $this->_validEntry->setEnclosure(array(
+            'type' => 'audio/mpeg',
+            'uri' => 'http://example.com/audio.mp3'
+        ));
+        $this->setExpectedException('Zend\Feed\Exception');
+        $renderer->render();
+    }
+    
+    public function testAddsEnclosureThrowsExceptionOnNonNumericLength()
+    {
+        $renderer = new Feed\RSS($this->_validWriter);
+        $this->_validEntry->setEnclosure(array(
+            'type' => 'audio/mpeg',
+            'uri' => 'http://example.com/audio.mp3',
+            'length' => 'abc'
+        ));
+        $this->setExpectedException('Zend\Feed\Exception');
+        $renderer->render();
+    }
+    
+    public function testAddsEnclosureThrowsExceptionOnNegativeLength()
+    {
+        $renderer = new Feed\RSS($this->_validWriter);
+        $this->_validEntry->setEnclosure(array(
+            'type' => 'audio/mpeg',
+            'uri' => 'http://example.com/audio.mp3',
+            'length' => -23
+        ));
+        $this->setExpectedException('Zend\Feed\Exception');
+        $renderer->render();
+    }
+
     public function testEntryIdHasBeenSet()
     {
         $this->_validEntry->setId('urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6');

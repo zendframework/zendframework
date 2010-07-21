@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16474 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.console.getopt.configuration">
     <title>Zend_Console_Getopt の設定</title>
 
@@ -8,7 +8,7 @@
         <title>オプションの規則の追加</title>
         <para>
             <classname>Zend_Console_Getopt</classname> のコンストラクタで指定するもの以外にも、
-            追加でオプションの規則を指定することができます。その際には
+            追加でオプションの規則を指定できます。その際には
             <methodname>addRules()</methodname> メソッドを使用します。
             <methodname>addRules()</methodname> に渡す引数は、コンストラクタの最初の引数と同じです。
             短い形式のオプション指定を表す文字列、

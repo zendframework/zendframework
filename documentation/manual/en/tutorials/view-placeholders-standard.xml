@@ -13,10 +13,10 @@
 
     <para>
         Most of the shipped placeholders are for generating content for the
-        <code>&lt;head&gt;</code> section of your layout content -- an area you typically cannot
-        manipulate directly via your application view scripts, but one you may want to influence. As
-        examples: you may want your title to contain certain content on every page, but specific
-        content based on the controller and/or action; you may want to specify
+        <emphasis>&lt;head&gt;</emphasis> section of your layout content -- an area you typically
+        cannot manipulate directly via your application view scripts, but one you may want to
+        influence. As examples: you may want your title to contain certain content on every page,
+        but specific content based on the controller and/or action; you may want to specify
         <acronym>CSS</acronym> files to load based on what section of the application you're in; you
         may need specific JavaScript scripts loaded at different times; or you may want to set the
         <acronym>DocType</acronym> declaration.
@@ -160,11 +160,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         <para>
             At its simplest, the <methodname>headTitle()</methodname> helper allows you to aggregate
-            content for the <code>&lt;title&gt;</code> tag; when you echo it, it then assembles it
-            based on the order in which segments are added. You can control the order using
-            <methodname>prepend()</methodname> and <methodname>append()</methodname>, and provide a
-            separator to use between segments using the <methodname>setSeparator()</methodname>
-            method.
+            content for the <emphasis>&lt;title&gt;</emphasis> tag; when you echo it, it then
+            assembles it based on the order in which segments are added. You can control the order
+            using <methodname>prepend()</methodname> and <methodname>append()</methodname>, and
+            provide a separator to use between segments using the
+            <methodname>setSeparator()</methodname> method.
         </para>
 
         <para>
@@ -339,9 +339,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             aggregate; common methods include <methodname>prependFile()</methodname>,
             <methodname>appendFile()</methodname>, <methodname>prependScript()</methodname>, and
             <methodname>appendScript()</methodname>. The first two allow you to specify files that
-            will be referenced in a <code>&lt;script&gt;</code> tag's <varname>$src</varname>
-            attribute; the latter two will take the content provided and render it as literal
-            JavaScript within a <code>&lt;script&gt;</code> tag.
+            will be referenced in a <emphasis>&lt;script&gt;</emphasis> tag's
+            <varname>$src</varname> attribute; the latter two will take the content provided and
+            render it as literal JavaScript within a <emphasis>&lt;script&gt;</emphasis> tag.
         </para>
 
         <para>
@@ -423,15 +423,15 @@ site = {
 
             <para>
                 Many browsers will often block display of a page until all scripts and stylesheets
-                referenced in the <code>&lt;head&gt;</code> section have loaded. If you have a
-                number of such directives, this can impact how soon somebody can start actually
+                referenced in the <emphasis>&lt;head&gt;</emphasis> section have loaded. If you have
+                a number of such directives, this can impact how soon somebody can start actually
                 viewing the page.
             </para>
 
             <para>
-                One way around this is to emit your <code>&lt;script&gt;</code> tags just prior to
-                closing the <code>&lt;body&gt;</code> of your document. (This is a practice
-                specifically recommend by the <ulink
+                One way around this is to emit your <emphasis>&lt;script&gt;</emphasis> tags just
+                prior to closing the <emphasis>&lt;body&gt;</emphasis> of your document. (This is a
+                practice specifically recommend by the <ulink
                     url="http://developer.yahoo.com/yslow/">Y! Slow project</ulink>.)
             </para>
 

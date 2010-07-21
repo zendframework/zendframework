@@ -142,4 +142,15 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse(array_key_exists('helper', $this->element->getAttribs()));
     }
+
+    /**
+     * Prove the fluent interface on Zend_Form_Element_Captcha::loadDefaultDecorators
+     *
+     * @link http://framework.zend.com/issues/browse/ZF-9913
+     * @return void
+     */
+    public function testFluentInterfaceOnLoadDefaultDecorators()
+    {
+        $this->assertSame($this->element, $this->element->loadDefaultDecorators());
+    }
 }

@@ -459,8 +459,8 @@ foreach($list as $name) {
 
         <para>
             It is possible to get and put objects using not stream data held in memory but files or
-            PHP streams. This is especially useful when file sizes are large in order not to
-            overcome memory limits.
+            <acronym>PHP</acronym> streams. This is especially useful when file sizes are large in
+            order not to overcome memory limits.
         </para>
 
         <para>

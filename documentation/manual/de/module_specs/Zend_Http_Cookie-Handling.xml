@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21018 -->
+<!-- EN-Revision: 21826 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.cookies">
     <title>Zend_Http_Cookie und Zend_Http_CookieJar</title>
@@ -177,10 +177,10 @@ $cookie = Zend_Http_Cookie::fromString('foo=bar; secure;',
 
         <para>
             Ein Cookie Objekt kann durch die magische __toString()-Methode zurück in einen String
-            umgewandelt werden. Diese Methode erstellt einen HTTP-Anfrage "Cookie"-Header String,
-            der den Namen sowie den Inhalt des Cookies enthält und durch ein Semikolon (';')
-            abgeschlossen ist. Der Inhalt wird URL-kodiert, wie es für einen Cookie-Header
-            vorgeschrieben ist:
+            umgewandelt werden. Diese Methode erstellt einen <acronym>HTTP</acronym>-Anfrage
+            "Cookie"-Header String, der den Namen sowie den Inhalt des Cookies enthält und durch ein
+            Semikolon (';') abgeschlossen ist. Der Inhalt wird URL-kodiert, wie es für einen
+            Cookie-Header vorgeschrieben ist:
 
             <example id="zend.http.cookies.cookie.instantiating.example-2">
                <title>Transformation eines Zend_Http_Cookie-Objekts zu einem String</title>

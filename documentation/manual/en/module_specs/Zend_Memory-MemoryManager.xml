@@ -40,11 +40,11 @@ $memoryManager = Zend_Memory::factory('File', $backendOptions);
         <para>
             You may use the special name '<code>None</code>' as a backend name,
             in addition to standard <classname>Zend_Cache</classname> backends.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $memoryManager = Zend_Memory::factory('None');
 ]]></programlisting>
-        </para>
 
         <para>
             If you use '<code>None</code>' as the backend name, then the memory
@@ -72,10 +72,11 @@ $memoryManager = Zend_Memory::factory('None');
             <para>
                 Create movable objects (objects, which may be swapped) using
                 the <methodname>Zend_Memory_Manager::create([$data])</methodname> method:
-                <programlisting language="php"><![CDATA[
+            </para>
+
+            <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ]]></programlisting>
-            </para>
 
             <para>
                 The <varname>$data</varname> argument is optional and used to
@@ -90,10 +91,11 @@ $memObject = $memoryManager->create($data);
             <para>
                 Create locked objects (objects, which are not swapped) using
                 the <methodname>Zend_Memory_Manager::createLocked([$data])</methodname> method:
-                <programlisting language="php"><![CDATA[
+            </para>
+
+            <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
 ]]></programlisting>
-            </para>
 
             <para>
                 The <varname>$data</varname> argument is optional and used to
@@ -108,8 +110,9 @@ $memObject = $memoryManager->createLocked($data);
             <para>
                 Memory objects are automatically destroyed and removed from
                 memory when they go out of scope:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 function foo()
 {
     global $memoryManager, $memList;
@@ -134,7 +137,6 @@ function foo()
     // and is not destroyed
 }
 ]]></programlisting>
-            </para>
 
             <para>
                 This applies to both movable and locked objects.
@@ -163,12 +165,12 @@ function foo()
                 You can retrieve or set the memory limit setting using the
                 <methodname>getMemoryLimit()</methodname> and
                 <methodname>setMemoryLimit($newLimit)</methodname> methods:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $oldLimit = $memoryManager->getMemoryLimit();  // Get memory limit in bytes
 $memoryManager->setMemoryLimit($newLimit);     // Set memory limit in bytes
 ]]></programlisting>
-            </para>
 
             <para>
                 A negative value for memory limit means 'no limit'.
@@ -195,12 +197,12 @@ $memoryManager->setMemoryLimit($newLimit);     // Set memory limit in bytes
                 You can retrieve or set the minimum size using the
                 <methodname>getMinSize()</methodname> and
                 <methodname>setMinSize($newSize)</methodname> methods:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $oldMinSize = $memoryManager->getMinSize();  // Get MinSize in bytes
 $memoryManager->setMinSize($newSize);        // Set MinSize limit in bytes
 ]]></programlisting>
-            </para>
 
             <para>
                 The default minimum size value is 16KB (16384 bytes).

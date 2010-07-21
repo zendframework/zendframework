@@ -363,7 +363,14 @@ abstract class AbstractAdapter
         $this->_break[$name]      = $breakChainOnFailure;
         $files                    = $this->_getFiles($files, true, true);
         foreach ($files as $file) {
-            $this->_files[$file]['validators'][] = $name;
+            if ($name == 'NotEmpty') {
+                $temp = $this->_files[$file]['validators'];
+                $this->_files[$file]['validators']  = array($name);
+                $this->_files[$file]['validators'] += $temp;
+            } else {
+                $this->_files[$file]['validators'][] = $name;
+            }
+
             $this->_files[$file]['validated']    = false;
         }
 
@@ -1284,7 +1291,7 @@ abstract class AbstractAdapter
                 $mime = @finfo_open($const);
             }
 
-            if ($mime !== false) {
+            if (!empty($mime)) {
                 $result = finfo_file($mime, $file);
             }
 

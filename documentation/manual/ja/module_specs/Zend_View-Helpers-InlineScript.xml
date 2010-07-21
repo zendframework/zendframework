@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19434 -->
+<!-- EN-Revision: 21825 -->
 <sect3 id="zend.view.helpers.initial.inlinescript">
     <title>InlineScript ヘルパー</title>
 
     <para>
-        HTML の <emphasis>&lt;script&gt;</emphasis> 要素を使用して、
+        <acronym>HTML</acronym> の <emphasis>&lt;script&gt;</emphasis> 要素を使用して、
         クライアントサイトのスクリプトをインラインで指定したり
         外部のリソースからスクリプトのコードを読み込んだりします。
         <classname>InlineScript</classname> ヘルパーは、この両方の方式に対応しています。
@@ -20,7 +20,7 @@
         <title>HTML Body スクリプトでの InlineScript の使用法</title>
 
         <para>
-            <classname>InlineScript</classname> は、スクリプトを HTML の
+            <classname>InlineScript</classname> は、スクリプトを <acronym>HTML</acronym> の
             <emphasis>body</emphasis> 部に埋め込みたいときに使用します。
             スクリプトをドキュメントの最後のほうに配置するようにすると、
             ページの表示速度が向上します。特に、
@@ -28,7 +28,7 @@
         </para>
 
         <para>
-            JS ライブラリの中には、HTML の <emphasis>head</emphasis>
+            JS ライブラリの中には、 <acronym>HTML</acronym> の <emphasis>head</emphasis>
             で読み込まなければならないものもあります。そのような場合は
             <link linkend="zend.view.helpers.initial.headscript">HeadScript</link>
             を使用します。

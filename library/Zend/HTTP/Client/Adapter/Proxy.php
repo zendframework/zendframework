@@ -163,14 +163,24 @@ class Proxy extends Socket
             $request .= "$v\r\n";
         }
 
-        // Add the request body
-        $request .= "\r\n" . $body;
+        if(is_resource($body)) {
+            $request .= "\r\n";
+        } else {
+            // Add the request body
+            $request .= "\r\n" . $body;
+        }
 
         // Send the request
         if (! @fwrite($this->socket, $request)) {
             throw new Exception("Error writing request to proxy server");
         }
 
+        if (is_resource($body)) {
+            if(stream_copy_to_stream($body, $this->socket) == 0) {
+                throw new _Exception('Error writing request to server');
+            }
+        }
+        
         return $request;
     }
 

@@ -103,21 +103,19 @@ class PHPClassTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(count($codeGenClass->getProperties()), 3);
     }
 
-    /**
-     * @expectedException Zend\CodeGenerator\PHP\Exception
-     */
     public function testSetPropertyAlreadyExistsThrowsException()
     {
         $codeGenClass = new PHP\PHPClass();
         $codeGenClass->setProperty(array('name' => 'prop3'));
+        $this->setExpectedException('Zend\CodeGenerator\PHP\Exception');
+
         $codeGenClass->setProperty(array('name' => 'prop3'));
     }
 
-    /**
-     * @expectedException Zend\CodeGenerator\PHP\Exception
-     */
     public function testSetPropertyNoArrayOrPropertyThrowsException()
     {
+        $this->setExpectedException('Zend\CodeGenerator\PHP\Exception');
+
         $codeGenClass = new PHP\PHPClass();
         $codeGenClass->setProperty("propertyName");
     }
@@ -143,18 +141,16 @@ class PHPClassTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(count($codeGenClass->getMethods()), 3);
     }
 
-    /**
-     * @expectedException Zend\CodeGenerator\PHP\Exception
-     */
     public function testSetMethodNoMethodOrArrayThrowsException()
     {
+        $this->setExpectedException('Zend\CodeGenerator\PHP\Exception',
+            'setMethod() expects either an array of method options or an instance of Zend\CodeGenerator\PHP\Method'
+        );
+
         $codeGenClass = new PHP\PHPClass();
         $codeGenClass->setMethod("aMethodName");
     }
 
-    /**
-     * @expectedException Zend\CodeGenerator\PHP\Exception
-     */
     public function testSetMethodNameAlreadyExistsThrowsException()
     {
         $methodA = new PHP\PHPMethod();
@@ -164,6 +160,8 @@ class PHPClassTest extends \PHPUnit_Framework_TestCase
 
         $codeGenClass = new PHP\PHPClass();
         $codeGenClass->setMethod($methodA);
+
+        $this->setExpectedException('Zend\CodeGenerator\PHP\Exception', 'A method by name foo already exists in this class.');
 
         $codeGenClass->setMethod($methodB);
     }
@@ -238,7 +236,7 @@ EOS;
      */
     public function testClassFromReflectionThatImplementsInterfaces()
     {
-        $reflClass = new Reflection\ReflectionClass('\ZendTest\CodeGenerator\PHP\TestAsset\ClassWithInterface');
+        $reflClass = new Reflection\ReflectionClass('ZendTest\CodeGenerator\PHP\TestAsset\ClassWithInterface');
 
         $codeGen = PHP\PHPClass::fromReflection($reflClass);
         $codeGen->setSourceDirty(true);
@@ -263,5 +261,45 @@ EOS;
 
         $expectedClassDef = 'class NewClassWithInterface extends ClassWithInterface implements ThreeInterface';
         $this->assertContains($expectedClassDef, $code);
+    }
+
+    /**
+     * @group ZF-9602
+     */
+    public function testSetextendedclassShouldIgnoreEmptyClassnameOnGenerate()
+    {
+        $codeGenClass = new PHP\PHPClass();
+        $codeGenClass->setName( 'MyClass' )
+                     ->setExtendedClass('');
+
+        $expected = <<<CODE
+class MyClass
+{
+
+
+}
+
+CODE;
+        $this->assertEquals( $expected, $codeGenClass->generate() );
+    }
+
+    /**
+     * @group ZF-9602
+     */
+    public function testSetextendedclassShouldNotIgnoreNonEmptyClassnameOnGenerate()
+    {
+        $codeGenClass = new PHP\PHPClass();
+        $codeGenClass->setName( 'MyClass' )
+                     ->setExtendedClass('ParentClass');
+
+        $expected = <<<CODE
+class MyClass extends ParentClass
+{
+
+
+}
+
+CODE;
+        $this->assertEquals( $expected, $codeGenClass->generate() );
     }
 }

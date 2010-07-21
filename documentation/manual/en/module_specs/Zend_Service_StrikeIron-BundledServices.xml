@@ -35,8 +35,9 @@
 
             The service contains a <methodname>getZipCode()</methodname> method that will retrieve
             information about a United States ZIP code or Canadian postal code:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -73,7 +74,6 @@ if ($zips->count == 0) {
 // http://www.strikeiron.com/exampledata/StrikeIronZipCodeInformation_v3.pdf
 $status = $response->serviceStatus;
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.service.strikeiron.bundled-services.us-address-verification">
@@ -105,8 +105,9 @@ $status = $response->serviceStatus;
         <para>
             The service contains a <methodname>verifyAddressUSA()</methodname> method that will
             verify an address in the United States:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -138,7 +139,6 @@ if ($result->addressErrorNumber != 0) {
     $valid = ($result->valid == 'VALID');
 }
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.service.strikeiron.bundled-services.sales-use-tax-basic">
@@ -171,8 +171,9 @@ if ($result->addressErrorNumber != 0) {
             The service contains two methods, <methodname>getTaxRateUSA()</methodname> and
             <methodname>getTaxRateCanada()</methodname>, that will retrieve sales and use tax data
             for the United States and Canada, respectively.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -189,6 +190,5 @@ $rateInfo = $taxBasic->getTaxRateUS(array('zip_code' => 95014));
 print_r($rateInfo);               // show all properties
 echo $rateInfo->state_sales_tax;  // or just the state sales tax
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

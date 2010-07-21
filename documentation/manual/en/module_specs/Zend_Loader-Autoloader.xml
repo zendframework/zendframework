@@ -136,9 +136,9 @@ $autoloader->setFallbackAutoloader(true);
             <title>Loading Classes from PHP Namespaces</title>
 
             <para>
-                Starting in version 1.10.0, Zend Framework now allows loading classes from PHP
-                namespaces. This support follows the same guidelines and implementation as that
-                found in the <ulink
+                Starting in version 1.10.0, Zend Framework now allows loading classes from
+                <acronym>PHP</acronym> namespaces. This support follows the same guidelines and
+                implementation as that found in the <ulink
                     url="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PHP
                 Framework Interop Group PSR-0</ulink> reference implementation.
             </para>
@@ -158,7 +158,7 @@ $autoloader->setFallbackAutoloader(true);
                 <listitem>
                     <para>
                         Each "_" character in the <emphasis>CLASS NAME</emphasis> is converted to a
-                        <constant>DIRECTORY_SEPARATOR</constant>.  The "_" character has no special
+                        <constant>DIRECTORY_SEPARATOR</constant>. The "_" character has no special
                         meaning in the namespace.
                     </para>
                 </listitem>

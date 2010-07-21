@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20779 -->
 <sect1 id="zend.gdata.introduction">
     <title>導入</title>
     <para>
@@ -59,14 +59,14 @@
                 <para>
                     <link linkend="zend.gdata.gbase">Google Base</link>
                     は、Google Base のアイテムを取得したり
-                    アイテムを投稿、更新、あるいは削除したりすることができます。
+                    アイテムを投稿、更新、あるいは削除したりできます。
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <link linkend="zend.gdata.youtube">YouTube</link>
                     は、動画やコメント、お気に入り、登録チャンネル、
-                    ユーザのプロファイルといった情報を検索して取得することができます。
+                    ユーザのプロファイルといった情報を検索して取得できます。
                 </para>
             </listitem>
             <listitem>
@@ -79,7 +79,7 @@
                 <para>
                     <ulink url="http://code.google.com/apis/blogger/developers_guide_php.html">Google Blogger</ulink>
                     は、人気のあるインターネットプロバイダです。
-                    "ボタンひとつで簡単に" 記事を配信することができます。
+                    "ボタンひとつで簡単に" 記事を配信できます。
                 </para>
             </listitem>
             <listitem>
@@ -91,7 +91,7 @@
             <listitem>
                 <para>
                     Google Notebook
-                    は、メモ帳の内容を一般に公開することができます。
+                    は、メモ帳の内容を一般に公開できます。
                 </para>
             </listitem>
         </itemizedlist>
@@ -134,7 +134,7 @@
                         クエリクラスには、出来上がったクエリの <acronym>URL</acronym> を生成するためのメソッド
                         <code>getQueryUrl</code> もあります。
                         また、<methodname>getQueryString()</methodname>
-                        メソッドを使用すると、<acronym>URL</acronym> のクエリ文字列部分を取得することができます。
+                        メソッドを使用すると、<acronym>URL</acronym> のクエリ文字列部分を取得できます。
                     </para>
                 </listitem>
                 <listitem>
@@ -312,7 +312,7 @@ $entry->cell = $cell;
             <classname>Zend_Gdata</classname> はデフォルトの <classname>Zend_Http_Client</classname> オブジェクトを作成します。
             これには、プライベートフィードにアクセスするための認証データは設定されていません。
             <classname>Zend_Http_Client</classname> オブジェクトを自分で指定すると、
-            クライアントオブジェクトに対する設定オプションを指定することができます。
+            クライアントオブジェクトに対する設定オプションを指定できます。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -352,7 +352,7 @@ $gdata->setMinorProtocolVersion(null);
 
         <para>
             パラメータを指定することで、<classname>Zend_Gdata</classname>
-            での問い合わせをカスタマイズすることができます。
+            での問い合わせをカスタマイズできます。
             クエリのパラメータは、 <classname>Zend_Gdata_Query</classname>
             のサブクラスを使用して指定します。
             <classname>Zend_Gdata_Query</classname> クラスにはクエリパラメータを設定するメソッドが含まれ、
@@ -362,7 +362,7 @@ $gdata->setMinorProtocolVersion(null);
             Spreadsheets の CellQuery クラスは Cell Feed
             に対する問い合わせを行い、ListQuery クラスは
             List Feed に対する問い合わせを行います。
-            それぞれのフィードに対して別々のパラメータを指定することができます。
+            それぞれのフィードに対して別々のパラメータを指定できます。
 
             GData 全体で使用できるパラメータについて、
             以下で説明します。
@@ -392,7 +392,7 @@ $gdata->setMinorProtocolVersion(null);
                     <code>atom</code> となります。
                     注意: <classname>Zend_Gdata</classname> で処理できるのは、
                     atom フィード形式の出力だけであることに注意しましょう。
-                    <classname>Zend_Http_Client</classname> を使用するとその他の形式のフィードも取得することができます。
+                    <classname>Zend_Http_Client</classname> を使用するとその他の形式のフィードも取得できます。
                     その際は、<classname>Zend_Gdata_Query</classname>
                     クラスやそのサブクラスが作成したクエリ <acronym>URL</acronym> を使用します。
                 </para>
@@ -590,7 +590,7 @@ foreach ($feed as $entry) {
         <title>エントリの更新</title>
 
         <para>
-            エントリを取得したら、それを更新してサーバに保存することができます。以下に例を示します。
+            エントリを取得したら、それを更新してサーバに保存できます。以下に例を示します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -623,7 +623,7 @@ foreach ($feed as $entry) {
 
         <para>
             各サービス用のデータモデルクラスを使用して適切なエントリを作成し、
-            Google のサービスに投稿することができます。
+            Google のサービスに投稿できます。
             <methodname>insertEntry()</methodname> 関数には、
             <classname>Zend_Gdata_App_Entry</classname> の子クラスに投稿内容を格納して渡します。
             このメソッドは <classname>Zend_Gdata_App_Entry</classname> の子クラスを返します。

@@ -56,7 +56,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testGzipResponse ()
     {
-        $response_text = file_get_contents(dirname(__FILE__) . '/_files/response_gzip');
+        $response_text = file_get_contents(__DIR__ . '/_files/response_gzip');
 
         $res = Response::fromString($response_text);
 
@@ -67,7 +67,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testDeflateResponse ()
     {
-        $response_text = file_get_contents(dirname(__FILE__) . '/_files/response_deflate');
+        $response_text = file_get_contents(__DIR__ . '/_files/response_deflate');
 
         $res = Response::fromString($response_text);
 
@@ -87,7 +87,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testNonStandardDeflateResponseZF6040()
     {
-        $response_text = file_get_contents(dirname(__FILE__) . '/_files/response_deflate_iis');
+        $response_text = file_get_contents(__DIR__ . '/_files/response_deflate_iis');
 
         $res = Response::fromString($response_text);
 
@@ -98,7 +98,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testChunkedResponse ()
     {
-        $response_text = file_get_contents(dirname(__FILE__) . '/_files/response_chunked');
+        $response_text = file_get_contents(__DIR__ . '/_files/response_chunked');
 
         $res = Response::fromString($response_text);
 
@@ -109,7 +109,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testChunkedResponseCaseInsensitiveZF5438()
     {
-        $response_text = file_get_contents(dirname(__FILE__) . '/_files/response_chunked_case');
+        $response_text = file_get_contents(__DIR__ . '/_files/response_chunked_case');
 
         $res = Response::fromString($response_text);
 
@@ -133,13 +133,13 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testExtractMessageCrlf()
     {
-        $response_text = file_get_contents(dirname(__FILE__) . '/_files/response_crlf');
+        $response_text = file_get_contents(__DIR__ . '/_files/response_crlf');
         $this->assertEquals("OK", Response::extractMessage($response_text), "Response message is not 'OK' as expected");
     }
 
     public function testExtractMessageLfonly()
     {
-        $response_text = file_get_contents(dirname(__FILE__) . '/_files/response_lfonly');
+        $response_text = file_get_contents(__DIR__ . '/_files/response_lfonly');
         $this->assertEquals("OK", Response::extractMessage($response_text), "Response message is not 'OK' as expected");
     }
 
@@ -163,6 +163,20 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($response->isError(), 'Response is an error, but isError() returned false');
         $this->assertFalse($response->isSuccessful(), 'Response is an error, but isSuccessful() returned true');
         $this->assertFalse($response->isRedirect(), 'Response is an error, but isRedirect() returned true');
+    }
+
+    /**
+     * @group ZF-5520
+     */
+    public function test302LocationHeaderMatches()
+    {
+        $headerName  = 'Location';
+        $headerValue = 'http://www.google.com/ig?hl=en';
+        $response    = Response::fromString($this->readResponse('response_302'));
+        $responseIis = Response::fromString($this->readResponse('response_302_iis'));
+
+        $this->assertEquals($headerValue, $response->getHeader($headerName));
+        $this->assertEquals($headerValue, $responseIis->getHeader($headerName));
     }
 
     public function test300isRedirect()
@@ -333,6 +347,6 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
      */
     protected function readResponse($response)
     {
-        return file_get_contents(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . $response);
+        return file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . $response);
     }
 }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 22255 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.stringtrim">
+    <title>StringTrim</title>
+
+    <para>
+        Dieser Filter verändert einen angegebenen String so dass bestimmte Zeichen vom Anfang und
+        vom Ende entfernt werden.
+    </para>
+
+     <sect3 id="zend.filter.set.stringtrim.options">
+        <title>Unterstützte Optionen für Zend_Filter_StringTrim</title>
+
+        <para>
+            Die folgenden Optionen werden für <classname>Zend_Filter_StringTrim</classname>
+            unterstützt:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>charlist</property></emphasis>: Liste der Zeichen welche vom
+                    Anfang und vom Ende des Strings entfernt werden sollen. Wenn sie nicht gesetzt
+                    wird oder null ist, wird das Standardverhalten verwendet, welches nur
+                    Leerzeichen vom Beginn und vom Ende des Strings entfernt.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.filter.set.stringtrim.basic">
+        <title>Einfache Verwendung</title>
+
+        <para>
+            Ein einfaches Beispiel der Verwendung ist nachfolgend zu finden:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_StringTrim();
+
+print $filter->filter(' Das ist (mein) Inhalt: ');
+]]></programlisting>
+
+        <para>
+            Das obige Beispiel gibe 'Das ist (mein) Inhalt:' zurück. Es sollte beachtet werden dass
+            alle Leerzeichen entfernt wurden.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.filter.set.stringtrim.types">
+        <title>Standardverhalten für Zend_Filter_StringTrim</title>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_StringTrim(':');
+// oder new Zend_Filter_StringTrim(array('charlist' => ':'));
+
+print $filter->filter(' Das ist (mein) Inhalt:');
+]]></programlisting>
+
+        <para>
+            Das obige Beispiel gibt 'Das ist (mein) Inhalt' zurück. Es sollte beachtet werden dass
+            Leerzeichen und Doppelpunkte entfernt werden. Man kann auch eine Instanz von
+            <classname>Zend_Config</classname> oder ein Array mit einem 'charlist' Schlüssel
+            angeben. Un die gewünschte Liste der Zeichen nach der Instanzierung zu setzen kann die
+            Methode <methodname>setCharList()</methodname> verwendet werden.
+            <methodname>getCharList()</methodname> gibt die Werte zurück welche für die Zeichenliste
+            gesetzt sind.
+        </para>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

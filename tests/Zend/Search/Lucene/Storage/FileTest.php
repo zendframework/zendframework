@@ -50,10 +50,10 @@ class FileTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilesystem()
     {
-        $file = new File\Filesystem(dirname(__FILE__) . '/_files/sample_data'); // open file object for reading
+        $file = new File\Filesystem(__DIR__ . '/_files/sample_data'); // open file object for reading
         $this->assertTrue($file instanceof  File);
 
-        $fileSize = filesize(dirname(__FILE__) . '/_files/sample_data');
+        $fileSize = filesize(__DIR__ . '/_files/sample_data');
 
         $this->assertEquals($file->size(), $fileSize);
 
@@ -84,7 +84,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         unset($file);
 
 
-        $testFName = dirname(__FILE__) . '/_files/sample_data_1';
+        $testFName = __DIR__ . '/_files/sample_data_1';
         $file = new File\Filesystem($testFName, 'wb');
         $file->lock(LOCK_EX);
         $file->writeByte(10);
@@ -107,7 +107,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     public function testMemory()
     {
-        $file = new File\Filesystem(dirname(__FILE__) . '/_files/sample_data');
+        $file = new File\Filesystem(__DIR__ . '/_files/sample_data');
         $fileData = $file->readBytes($file->size());
         $file->close();
         unset($file);

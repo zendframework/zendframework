@@ -42,7 +42,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        $this->_feedSamplePath = dirname(__FILE__) . '/Reader/_files';
+        $this->_feedSamplePath = __DIR__ . '/Reader/_files';
     }
 
     public function tearDown()
@@ -122,10 +122,20 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Reader\Reader::TYPE_ATOM_03, $type);
     }
 
+    /**
+     * @group ZF-9723
+     */
+    public function testDetectsTypeFromStringOrToRemindPaddyAboutForgettingATestWhichLetsAStupidTypoSurviveUnnoticedForMonths()
+    {
+        $feed = '<?xml version="1.0" encoding="utf-8" ?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/"><channel></channel></rdf:RDF>';
+        $type = Reader\Reader::detectType($feed);
+        $this->assertEquals(Reader\Reader::TYPE_RSS_10, $type);
+    }
+
     public function testGetEncoding()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents(dirname(__FILE__) . '/Reader/Entry/_files/Atom/title/plain/atom10.xml')
+            file_get_contents(__DIR__ . '/Reader/Entry/_files/Atom/title/plain/atom10.xml')
         );
 
         $this->assertEquals('utf-8', $feed->getEncoding());
@@ -136,7 +146,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $feed = Reader\Reader::importFile(
-                dirname(__FILE__) . '/Reader/Entry/_files/Atom/title/plain/atom10.xml'
+                __DIR__ . '/Reader/Entry/_files/Atom/title/plain/atom10.xml'
             );
         } catch(\Exception $e) {
             $this->fail($e->getMessage());

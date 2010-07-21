@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 20872 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.progressbar.adapter.jspull">
+    <title>Zend_ProgressBar_Adapter_JsPull</title>
+
+    <para>
+        Adapter <classname>Zend_ProgressBar_Adapter_JsPull</classname> jest przeciwieństwem
+        jsPush. W jego przypadku niezbędne jest "wyciągnięcie" aktualizacji
+        zamiast "wypchnięcia" z przeglądarki. Generalnie zaleca się użycie tego adaptera
+        z opcją utrwalania postępu <classname>Zend_ProgressBar</classname>.
+        Jego działanie polega na wysłaniu do przeglądarki
+        łańcucha znaków (w formacie <acronym>JSON</acronym>), który wygląda tak
+        jak string <acronym>JSON</acronym> wysyłany przez adapter jsPush. Jedyną różnicą
+        pomiędzy nimi jest dodatkowy parametr (w stringu wysyłanym przez adapter jsPull)
+        o nazwie <code>finished</code>. Zawiera on wartość <constant>FALSE</constant> kiedy
+        uruchamiana jest metoda <methodname>update()</methodname> lub <constant>TRUE</constant>
+        w przypadku wywoływania metody <methodname>finish()</methodname>.
+    </para>
+
+    <para>
+        Opcje adaptera można ustawiać za pomocą metod <code>set*</code> albo przez podanie
+        tablicy asocjacyjnej lub obiektu <classname>Zend_Config</classname> w pierwszym parametrze
+        konstruktora. Dostępne opcje to:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>exitAfterSend</code>: Flaga oznaczająca czy bieżące żądanie ma zostać
+                zakończone po wysłaniu danych do przeglądarki. Domyślnie przyjmuje wartość
+                <constant>TRUE</constant>.
+            </para>
+        </listitem>
+    </itemizedlist>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

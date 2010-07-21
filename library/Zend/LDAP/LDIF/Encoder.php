@@ -168,7 +168,7 @@ class Encoder
             return $this->_encodeString($value);
         } else if (is_array($value)) {
             return $this->_encodeAttributes($value);
-        } else if ($value instanceof \Zend\LDAP\Node\Node) {
+        } else if ($value instanceof \Zend\LDAP\Node) {
             return $value->toLdif($this->_options);
         }
         return null;

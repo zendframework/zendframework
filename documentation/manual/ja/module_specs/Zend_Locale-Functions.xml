@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 21751 -->
 <sect1 id="zend.locale.functions">
 
     <title>Zend_Locale の使用法</title>
@@ -140,9 +140,7 @@ print_r($found2);
             新しいロケールを設定するには、関数 <methodname>setLocale()</methodname>
             を使用します。この関数は、ロケール文字列をパラメータとして受け取ります。
             ロケールを省略した場合は、ロケールが
-            <link linkend="zend.locale.selection">自動的に選択</link>
-            されます。<classname>Zend_Locale</classname> オブジェクトは "light"
-            なので、このメソッドは既存のインスタンスを参照しているすべてのコードに影響をおよぼします。
+            <link linkend="zend.locale.selection">自動的に選択</link> されます。
         </para>
 
         <example id="zend.locale.setlocale.example-1">
@@ -185,6 +183,46 @@ print $locale->getRegion();
 ]]></programlisting>
         </example>
 
+    </sect2>
+
+    <sect2 id="zend.locale.getlocaletoterritory">
+        <title>Get the locale by giving a territory</title>
+
+        <para>
+            When you only have the territory or country then it's also possible to get a locale
+            from that information. You can manually search if there is a locale for this territory
+            by using <methodname>getLocaleToTerritory()</methodname>. This method returns a
+            locale for the given territory or <constant>NULL</constant> when there was has no locale
+            been found.
+        </para>
+
+        <example id="zend.locale.getlocaletoterritory.example-1">
+            <title>getLocaleToTerritory</title>
+
+            <programlisting language="php"><![CDATA[
+$locale = Zend_Locale::getLocaleToTerritory('US');
+// returns 'en_US'
+]]></programlisting>
+        </example>
+
+        <note>
+            <title>Uppercase territories</title>
+
+            <para>
+                When you know that you are using a territory, then you should uppercase it.
+                Otherwise you could get an in your eyes false locale in return when you use other
+                methods. For example: When you give "om" then
+                <methodname>getLocaleToTerritory()</methodname> returns you "ar_OM" as it knows that
+                you mean a territory. But all other methods will return "om", as it's also a
+                language.
+            </para>
+
+            <para>
+                So when you know that the given string is a territory, eighter use
+                <methodname>getLocaleToTerritory()</methodname> yourself before creating a locale,
+                or uppercase the input.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.locale.getdata">
@@ -1735,6 +1773,14 @@ if ($locale instanceof Zend_Locale) {
                     指定した地域にロケールが存在しない場合は地域部をはずす
                 </para>
             </listitem>
+
+            <!-- TODO : to be translated -->
+            <listitem>
+                <para>
+                    Upgrades the locale when it is detected as region without language
+                </para>
+            </listitem>
+
             <listitem>
                 <para>
                     入力を省略した場合は、それまでにアプリケーションで設定されていたロケールを返す

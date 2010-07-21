@@ -21,7 +21,7 @@
 
 /**
  * @uses       Zend_Http_Client
- * @uses       Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
+ * @uses       Zend_Service_WindowsAzure_Credentials_AbstractCredentials
  * @uses       Zend_Service_WindowsAzure_Credentials_SharedKey
  * @uses       Zend_Service_WindowsAzure_Storage
  * @category   Zend
@@ -30,7 +30,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */ 
 class Zend_Service_WindowsAzure_Credentials_SharedKeyLite
-    extends Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
+    extends Zend_Service_WindowsAzure_Credentials_AbstractCredentials
 {
     /**
 	 * Sign request URL with credentials
@@ -43,7 +43,7 @@ class Zend_Service_WindowsAzure_Credentials_SharedKeyLite
 	public function signRequestUrl(
 		$requestUrl = '',
 		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
-		$requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
+		$requiredPermission = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ
 	) {
 	    return $requestUrl;
 	}
@@ -67,7 +67,7 @@ class Zend_Service_WindowsAzure_Credentials_SharedKeyLite
 		$headers = null,
 		$forTableStorage = false,
 		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
-		$requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
+		$requiredPermission = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ
 	) {
 		// Determine path
 		if ($this->_usePathStyleUri) {
@@ -89,8 +89,8 @@ class Zend_Service_WindowsAzure_Credentials_SharedKeyLite
 
 		// Request date
 		$requestDate = '';
-		if (isset($headers[Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PREFIX_STORAGE_HEADER . 'date'])) {
-		    $requestDate = $headers[Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PREFIX_STORAGE_HEADER . 'date'];
+		if (isset($headers[Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PREFIX_STORAGE_HEADER . 'date'])) {
+		    $requestDate = $headers[Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PREFIX_STORAGE_HEADER . 'date'];
 		} else {
 		    $requestDate = gmdate('D, d M Y H:i:s', time()) . ' GMT'; // RFC 1123
 		}
@@ -103,7 +103,7 @@ class Zend_Service_WindowsAzure_Credentials_SharedKeyLite
     	$signString     = base64_encode(hash_hmac('sha256', $stringToSign, $this->_accountKey, true));
 
     	// Sign request
-    	$headers[Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PREFIX_STORAGE_HEADER . 'date'] = $requestDate;
+    	$headers[Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PREFIX_STORAGE_HEADER . 'date'] = $requestDate;
     	$headers['Authorization'] = 'SharedKeyLite ' . $this->_accountName . ':' . $signString;
     	
     	// Return headers

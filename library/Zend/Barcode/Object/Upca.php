@@ -45,6 +45,7 @@ class Upca extends Ean13
     {
         $this->_barcodeLength = 12;
         $this->_mandatoryChecksum = true;
+        $this->_mandatoryQuietZones = true;
     }
 
     /**

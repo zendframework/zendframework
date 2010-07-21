@@ -222,6 +222,34 @@ class RSS
         if ((!$data || empty($data))) {
             return;
         }
+        if (!isset($data['type'])) {
+            $exception = new \Zend\Feed\Exception('Enclosure "type" is not set');
+            if (!$this->_ignoreExceptions) {
+                throw $exception;
+            } else {
+                $this->_exceptions[] = $exception;
+                return;
+            }
+        }
+        if (!isset($data['length'])) {
+            $exception = new \Zend\Feed\Exception('Enclosure "length" is not set');
+            if (!$this->_ignoreExceptions) {
+                throw $exception;
+            } else {
+                $this->_exceptions[] = $exception;
+                return;
+            }
+        }
+        if (isset($data['length']) && (int) $data['length'] <= 0) {
+            $exception = new \Zend\Feed\Exception('Enclosure "length" must be an integer'
+            . ' indicating the content\'s length in bytes');
+            if (!$this->_ignoreExceptions) {
+                throw $exception;
+            } else {
+                $this->_exceptions[] = $exception;
+                return;
+            }
+        }
         $enclosure = $this->_dom->createElement('enclosure');
         $enclosure->setAttribute('type', $data['type']);
         $enclosure->setAttribute('length', $data['length']);

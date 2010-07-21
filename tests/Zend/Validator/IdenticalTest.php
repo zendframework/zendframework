@@ -47,12 +47,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class IdenticalTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite('Zend_Validate_IdenticalTest');
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         $this->validator = new Validator\Identical;
@@ -108,18 +102,6 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-6511
-     */
-    public function testNotSameMessageContainsTokenAndValue()
-    {
-        $this->testValidatingAgainstTokenWithNonMatchingValueReturnsFalse();
-        $messages = $this->validator->getMessages();
-        $this->assertContains("The token 'foo'", $messages['notSame']);
-        $this->assertContains('bar', $messages['notSame']);
-        $this->assertContains('does not match', $messages['notSame']);
-    }
-
-    /**
      * @see ZF-6953
      */
     public function testValidatingAgainstEmptyToken()
@@ -148,9 +130,13 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid(123));
         $this->assertFalse($validator->isValid(array('token' => 123)));
     }
-}
 
-// Call Zend_Validate_IdenticalTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Validate_IdenticalTest::main') {
-    \Zend_Validate_IdenticalTest::main();
+    public function testValidatingNonStrictToken()
+    {
+        $validator = new Validator\Identical(array('token' => 123, 'strict' => false));
+        $this->assertTrue($validator->isValid('123'));
+
+        $validator->setStrict(true);
+        $this->assertFalse($validator->isValid(array('token' => '123')));
+    }
 }

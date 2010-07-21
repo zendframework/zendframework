@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 20827 -->
 <sect3 id="zend.progressbar.adapter.console">
     <title>Zend_ProgressBar_Adapter_Console</title>
     <para>
         <classname>Zend_ProgressBar_Adapter_Console</classname> は、
         ターミナル用に使用するテキストベースのアダプタです。
-        ターミナルの横幅を自動的に検出することができますが、
+        ターミナルの横幅を自動的に検出できますが、
         独自に幅を指定することもできます。
-        プログレスバーとともに表示する要素や、その順序も変更することができます。
-        また、プログレスバーそのものの形式も設定することが可能です。
+        プログレスバーとともに表示する要素や、その順序も変更できます。
+        また、プログレスバーそのものの形式も設定できます。
     </para>
     <note>
         <title>自動的なコンソール幅の認識</title>

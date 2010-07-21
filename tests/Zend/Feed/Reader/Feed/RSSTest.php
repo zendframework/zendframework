@@ -50,11 +50,11 @@ class RSSTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        if (\Zend\Registry::isRegistered('Zend\Locale')) {
+        if (\Zend\Registry::isRegistered('Zend_Locale')) {
             $registry = \Zend\Registry::getInstance();
-            unset($registry['Zend\Locale']);
+            unset($registry['Zend_Locale']);
         }
-        $this->_feedSamplePath = dirname(__FILE__) . '/_files/Rss';
+        $this->_feedSamplePath = __DIR__ . '/_files/Rss';
         $this->_options = Date\Date::setOptions();
         foreach($this->_options as $k=>$v) {
             if (is_null($v)) {
@@ -1870,6 +1870,15 @@ class RSSTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://www.example.com/feed/rss', $feed->getFeedLink());
     }
 
+    public function testGetsOriginalSourceUriIfFeedLinkNotAvailableFromFeed()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/feedlink/plain/rss20_NoFeedLink.xml')
+        );
+        $feed->setOriginalSourceUri('http://www.example.com/feed/rss');
+        $this->assertEquals('http://www.example.com/feed/rss', $feed->getFeedLink());
+    }
+
     public function testGetsFeedLinkFromRss094()
     {
         $feed = Reader\Reader::importString(
@@ -2094,6 +2103,27 @@ class RSSTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Get Last Build Date (Unencoded Text)
+     */
+    public function testGetsLastBuildDateFromRss20()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/lastbuilddate/plain/rss20.xml')
+        );
+        $edate = new Date\Date;
+        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
+        $this->assertTrue($edate->equals($feed->getLastBuildDate()));
+    }
+
+    public function testGetsLastBuildDateFromRss20_None()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/lastbuilddate/plain/none/rss20.xml')
+        );
+        $this->assertEquals(null, $feed->getLastBuildDate());
+    }
+
+    /**
      * Get Date Modified (Unencoded Text)
      */
     public function testGetsDateModifiedFromRss20()
@@ -2104,6 +2134,23 @@ class RSSTest extends \PHPUnit_Framework_TestCase
         $edate = new Date\Date;
         $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
+    }
+
+    /**
+     * @group ZF-8702
+     */
+    public function testParsesCorrectDateIfMissingOffsetWhenSystemUsesUSLocale()
+    {
+        $locale = new \Zend\Locale\Locale('en_US');
+        \Zend\Registry::set('Zend_Locale', $locale);
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/datemodified/plain/rss20_en_US.xml')
+        );
+        $fdate = $feed->getDateModified();
+        $edate = new Date\Date;
+        $edate->set('2010-01-04T08:14:00-0600', Date\Date::ISO_8601);
+        \Zend\Registry::getInstance()->offsetUnset('Zend_Locale');
+        $this->assertTrue($edate->equals($fdate));
     }
 
     // DC 1.0
@@ -2766,4 +2813,170 @@ class RSSTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), array_values($feed->getCategories()->getValues()));
     }
 
+    /**
+     * Get Image data (Unencoded Text)
+     */
+    public function testGetsImageFromRss20()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/rss20.xml')
+        );
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/image.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image title',
+            'height' => '55',
+            'width' => '50',
+            'description' => 'Image description'
+        ), $feed->getImage());
+    }
+
+    public function testGetsImageFromRss094()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/rss094.xml')
+        );
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/image.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image title',
+            'height' => '55',
+            'width' => '50',
+            'description' => 'Image description'
+        ), $feed->getImage());
+    }
+
+    public function testGetsImageFromRss093()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/rss093.xml')
+        );
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/image.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image title',
+            'height' => '55',
+            'width' => '50',
+            'description' => 'Image description'
+        ), $feed->getImage());
+    }
+
+    public function testGetsImageFromRss092()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/rss092.xml')
+        );
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/image.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image title',
+            'height' => '55',
+            'width' => '50',
+            'description' => 'Image description'
+        ), $feed->getImage());
+    }
+
+    public function testGetsImageFromRss091()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/rss091.xml')
+        );
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/image.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image title',
+            'height' => '55',
+            'width' => '50',
+            'description' => 'Image description'
+        ), $feed->getImage());
+    }
+
+    /*public function testGetsImageFromRss10()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/rss10.xml')
+        );
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/image.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image title',
+            'height' => '55',
+            'width' => '50',
+            'description' => 'Image description'
+        ), $feed->getImage());
+    }
+
+    public function testGetsImageFromRss090()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/rss090.xml')
+        );
+        $this->assertEquals(array(
+            'uri' => 'http://www.example.com/image.gif',
+            'link' => 'http://www.example.com',
+            'title' => 'Image title',
+            'height' => '55',
+            'width' => '50',
+            'description' => 'Image description'
+        ), $feed->getImage());
+    }*/
+
+    /**
+     * Get Image data (Unencoded Text) Missing
+     */
+    public function testGetsImageFromRss20_None()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/none/rss20.xml')
+        );
+        $this->assertEquals(null, $feed->getImage());
+    }
+
+    public function testGetsImageFromRss094_None()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/none/rss094.xml')
+        );
+        $this->assertEquals(null, $feed->getImage());
+    }
+
+    public function testGetsImageFromRss093_None()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/none/rss093.xml')
+        );
+        $this->assertEquals(null, $feed->getImage());
+    }
+
+    public function testGetsImageFromRss092_None()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/none/rss092.xml')
+        );
+        $this->assertEquals(null, $feed->getImage());
+    }
+
+    public function testGetsImageFromRss091_None()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/none/rss091.xml')
+        );
+        $this->assertEquals(null, $feed->getImage());
+    }
+
+    public function testGetsImageFromRss10_None()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/none/rss10.xml')
+        );
+        $this->assertEquals(null, $feed->getImage());
+    }
+
+    public function testGetsImageFromRss090_None()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/image/plain/none/rss090.xml')
+        );
+        $this->assertEquals(null, $feed->getImage());
+    }
 }

@@ -314,6 +314,25 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
         $text = $dom->createTextNode($copyright);
         $copy->appendChild($text);
     }
+    /**
+     * Set feed level logo (image)
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
+    protected function _setImage(\DOMDocument $dom, \DOMElement $root)
+    {
+        $image = $this->getDataContainer()->getImage();
+        if (!$image) {
+            return;
+        }
+        $img = $dom->createElement('logo');
+        $root->appendChild($img);
+        $text = $dom->createTextNode($image['uri']);
+        $img->appendChild($text);
+    }
+    
     
     /**
      * Set date feed was created 

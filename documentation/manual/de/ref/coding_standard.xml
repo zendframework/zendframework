@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21161 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
     <title>Zend Framework Coding Standard für PHP</title>
@@ -187,13 +187,14 @@
 
                 <para>
                     Der Hintergrund dieser Änderung ist die Verwendung von Namespaces. Da wir auf
-                    Zend Framework 2.0 und die Verwendung von PHP 5.3 zugehen, werden wir Namespaces
-                    verwenden. Der einfachste Weg die Konvertierung zu Namespaces zu automatisieren
-                    besteht darin die Unterstriche in Namespace Separatoren zu konvertieren -- aber
-                    in der alten Namenskonvention, lässt dies den Klassennamen einfach als
-                    "Abstract" oder "Interface" zurück" -- beide sind reservierte Schlüsselwörter
-                    in PHP. Wenn wir den Namen der (Unter)Komponente dem Klassennamen voranstellen
-                    können wir diese Probleme vermeiden.
+                    Zend Framework 2.0 und die Verwendung von <acronym>PHP</acronym> 5.3 zugehen,
+                    werden wir Namespaces verwenden. Der einfachste Weg die Konvertierung zu
+                    Namespaces zu automatisieren besteht darin die Unterstriche in Namespace
+                    Separatoren zu konvertieren -- aber in der alten Namenskonvention, lässt dies
+                    den Klassennamen einfach als "Abstract" oder "Interface" zurück" -- beide sind
+                    reservierte Schlüsselwörter in <acronym>PHP</acronym>. Wenn wir den Namen der
+                    (Unter)Komponente dem Klassennamen voranstellen können wir diese Probleme
+                    vermeiden.
                 </para>
 
                 <para>

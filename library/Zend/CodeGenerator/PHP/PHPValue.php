@@ -106,6 +106,8 @@ class PHPValue extends AbstractPHP
     {
         if ($this->_type == self::TYPE_AUTO) {
             $type = $this->_getAutoDeterminedType($this->_value);
+        } else {
+            $type = $this->_type;
         }
 
         // valid types for constants
@@ -155,9 +157,6 @@ class PHPValue extends AbstractPHP
      */
     public function setType($type)
     {
-        if (!in_array($type, self::$_constants)) {
-            throw new Exception('This is not a value type for the PHPValue object');
-        }
         $this->_type = $type;
         return $this;
     }
@@ -195,6 +194,52 @@ class PHPValue extends AbstractPHP
     }
 
     /**
+     * _getValidatedType()
+     *
+     * @param string $type
+     * @return string
+     */
+    protected function _getValidatedType($type)
+    {
+        if (($constName = array_search($type, self::$_constants)) !== false) {
+            return $type;
+        }
+
+        return self::TYPE_AUTO;
+    }
+
+    /**
+     * _getAutoDeterminedType()
+     *
+     * @param mixed $value
+     * @return string
+     */
+    public function _getAutoDeterminedType($value)
+    {
+        switch (gettype($value)) {
+            case 'boolean':
+                return self::TYPE_BOOLEAN;
+            case 'integer':
+                return self::TYPE_INT;
+            case 'string':
+                return self::TYPE_STRING;
+            case 'double':
+            case 'float':
+            case 'integer':
+                return self::TYPE_NUMBER;
+            case 'array':
+                return self::TYPE_ARRAY;
+            case 'NULL':
+                return self::TYPE_NULL;
+            case 'object':
+            case 'resource':
+            case 'unknown type':
+            default:
+                return self::TYPE_OTHER;
+        }
+    }
+
+    /**
      * generate()
      *
      * @return string
@@ -208,7 +253,7 @@ class PHPValue extends AbstractPHP
         }
 
         $value = $this->_value;
-        
+
         if ($type == self::TYPE_AUTO) {
             $type = $this->_getAutoDeterminedType($value);
 
@@ -236,6 +281,9 @@ class PHPValue extends AbstractPHP
             case self::TYPE_BOOL:
                 $output .= ( $value ? 'true' : 'false' );
                 break;
+            case self::TYPE_STRING:
+                $output .= "'" . addcslashes($value, "'") . "'";
+                break;
             case self::TYPE_NULL:
                 $output .= 'null';
                 break;
@@ -261,6 +309,7 @@ class PHPValue extends AbstractPHP
                 foreach ($value as $n => $v) {
                     $v->setArrayDepth($this->_arrayDepth + 1);
                     $partV = $v->generate();
+                    $partV = substr($partV, 0, strlen($partV)-1);
                     if ($n === $noKeyIndex) {
                         $outputParts[] = $partV;
                         $noKeyIndex++;
@@ -271,66 +320,21 @@ class PHPValue extends AbstractPHP
                 $padding = ($this->_outputMode == self::OUTPUT_MULTIPLE_LINE)
                     ? self::LINE_FEED . str_repeat($this->_indentation, $this->_arrayDepth+1)
                     : ' ';
-                    $output .= implode(',' . $padding, $outputParts);
+                $output .= implode(',' . $padding, $outputParts);
                 if ($curArrayMultiblock == true && $this->_outputMode == self::OUTPUT_MULTIPLE_LINE) {
                     $output .= self::LINE_FEED . str_repeat($this->_indentation, $this->_arrayDepth+1);
                 }
                 $output .= ')';
                 break;
-            case self::TYPE_STRING:
             case self::TYPE_OTHER:
             default:
-                $output .= "'" . addcslashes($value, "'") . "'";
+                throw new Exception(
+                    "Type '".get_class($value)."' is unknown or cannot be used as property default value."
+                );
         }
+
+        $output .= ';';
 
         return $output;
     }
-    
-
-    /**
-     * _getValidatedType()
-     *
-     * @param string $type
-     * @return string
-     */
-    protected function _getValidatedType($type)
-    {
-        if (in_array($type, self::$_constants)) {
-            return $type;
-        }
-
-        return self::TYPE_AUTO;
-    }
-
-    /**
-     * _getAutoDeterminedType()
-     *
-     * @param mixed $value
-     * @return string
-     */
-    protected function _getAutoDeterminedType($value)
-    {
-        switch (gettype($value)) {
-            case 'boolean':
-                return self::TYPE_BOOLEAN;
-            case 'integer':
-                return self::TYPE_INT;
-            case 'string':
-                return self::TYPE_STRING;
-            case 'double':
-            case 'float':
-            case 'integer':
-                return self::TYPE_NUMBER;
-            case 'array':
-                return self::TYPE_ARRAY;
-            case 'NULL':
-                return self::TYPE_NULL;
-            case 'object':
-            case 'resource':
-            case 'unknown type':
-            default:
-                return self::TYPE_OTHER;
-        }
-    }
-
 }

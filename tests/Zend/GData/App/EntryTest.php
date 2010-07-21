@@ -44,7 +44,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var \Zend\GData\App\App
+     * @var \Zend\GData\App
      */
     protected $service = null;
     
@@ -61,7 +61,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->adapter = new \ZendTest\GData\TestAsset\MockHttpClient();
         $this->client = new GData\HttpClient();
         $this->client->setAdapter($this->adapter);
-        $this->service = new App\App($this->client);
+        $this->service = new App($this->client);
     }
 
     public function testEmptyEntryShouldHaveEmptyExtensionsList()
@@ -133,7 +133,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetAndgetService()
     {
-        $data = new App\App();
+        $data = new App();
         $this->entry->setService($data);
         $this->assertEquals($this->entry->getService(), $data);
 
@@ -150,7 +150,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     public function testGetHttpClientPullsFromServiceInstance()
     {
-        $s = new App\App();
+        $s = new App();
         $this->entry->setService($s);
 
         $c = new GData\HttpClient();
@@ -166,7 +166,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     public function testSetHttpClientPushesIntoServiceInstance()
     {
-        $s = new App\App();
+        $s = new App();
         $this->entry->setService($s);
 
         $c = new GData\HttpClient();

@@ -168,14 +168,14 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
             $this->_validator->setFormat(null);
             $this->fail();
         } catch (Validator\Exception $e) {
-            $this->assertContains('has to be given', $e->getMessage());
+            $this->assertContains('A postcode-format string has to be given', $e->getMessage());
         }
 
         try {
             $this->_validator->setFormat('');
             $this->fail();
         } catch (Validator\Exception $e) {
-            $this->assertContains('has to be given', $e->getMessage());
+            $this->assertContains('A postcode-format string has to be given', $e->getMessage());
         }
     }
 

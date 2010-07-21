@@ -4,7 +4,7 @@
     <title>Doctype Helper</title>
 
     <para>
-        Valid HTML and <acronym>XHTML</acronym> documents should include a
+        Valid <acronym>HTML</acronym> and <acronym>XHTML</acronym> documents should include a
         <constant>DOCTYPE</constant> declaration. Besides being difficult to remember, these can
         also affect how certain elements in your document should be rendered (for instance,
         CDATA escaping in <emphasis>&lt;script&gt;</emphasis> and

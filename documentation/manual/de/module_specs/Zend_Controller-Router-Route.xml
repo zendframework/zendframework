@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
+<!-- EN-Revision: 21661 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
@@ -282,12 +282,25 @@ $router->addRoute('archive', $route);
 
         <programlisting language="php"><![CDATA[
 // Den Übersetzer vorbereiten
-$translator = new Zend_Translate('array', array(), 'en');
-$translator->addTranslation(array('archive' => 'archiv',
-                                  'year'    => 'jahr',
-                                  'month'   => 'monat',
-                                  'index'   => 'uebersicht'),
-                            'de');
+$translator = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => array(),
+        'locale'  => 'en'
+    )
+);
+$translator->addTranslation(
+    array(
+        'content' =>
+            array(
+                'archive' => 'archiv',
+                'year'    => 'jahr',
+                'month'   => 'monat',
+                'index'   => 'uebersicht'
+            ),
+        'locale' => 'de'
+    )
+);
 
 // Das aktuelle Gebietsschema für den Übersetzer setzen
 $translator->setLocale('en');

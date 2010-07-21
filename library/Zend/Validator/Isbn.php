@@ -38,6 +38,7 @@ class Isbn extends AbstractValidator
     const ISBN10  = '10';
     const ISBN13  = '13';
     const INVALID = 'isbnInvalid';
+    const NO_ISBN = 'isbnNoIsbn';
 
     /**
      * Validation failure message template definitions.
@@ -45,7 +46,8 @@ class Isbn extends AbstractValidator
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID => "'%value%' is no valid ISBN number",
+        self::INVALID => "Invalid type given, value should be string or integer",
+        self::NO_ISBN => "'%value%' is no valid ISBN number",
     );
 
     /**
@@ -150,14 +152,18 @@ class Isbn extends AbstractValidator
      */
     public function isValid($value)
     {
-        // save value
+        if (!is_string($value) && !is_int($value)) {
+            $this->_error(self::INVALID);
+            return false;
+        }
+
         $value = (string) $value;
         $this->_setValue($value);
 
         switch ($this->_detectFormat()) {
             case self::ISBN10:
                 // sum
-                $isbn10 = preg_replace('/[^0-9X]/', '', $value);
+                $isbn10 = str_replace($this->_separator, '', $value);
                 $sum    = 0;
                 for ($i = 0; $i < 9; $i++) {
                     $sum += (10 - $i) * $isbn10{$i};
@@ -174,7 +180,7 @@ class Isbn extends AbstractValidator
 
             case self::ISBN13:
                 // sum
-                $isbn13 = preg_replace('/[^0-9]/', '', $value);
+                $isbn13 = str_replace($this->_separator, '', $value);
                 $sum    = 0;
                 for ($i = 0; $i < 12; $i++) {
                     if ($i % 2 == 0) {
@@ -191,13 +197,13 @@ class Isbn extends AbstractValidator
                 break;
 
             default:
-                $this->_error(self::INVALID);
+                $this->_error(self::NO_ISBN);
                 return false;
         }
 
         // validate
         if (substr($this->_value, -1) != $checksum) {
-            $this->_error(self::INVALID);
+            $this->_error(self::NO_ISBN);
             return false;
         }
         return true;

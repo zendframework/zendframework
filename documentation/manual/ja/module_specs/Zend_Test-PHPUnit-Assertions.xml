@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20807 -->
 <sect2 id="zend.test.phpunit.assertions">
     <title>アサーション</title>
 
@@ -17,7 +17,7 @@
 
         <para>
             <acronym>CSS</acronym> セレクタを使うと、
-            レスポンスの中身に何らかの結果が入っていることを簡単に検証することができます。
+            レスポンスの中身に何らかの結果が入っていることを簡単に検証できます。
             また、Javascript の UI や <acronym>AJAX</acronym> との統合も簡単に行えます。
             大半の JS ツールキットは、
             <acronym>CSS</acronym> セレクタ形式で DOM 要素を取得するための仕組みを持っています。
@@ -164,7 +164,7 @@
             アクションがリダイレクトを行うこともよくあります。
             リダイレクト先をたどらなくても、
             <classname>Zend_Test_PHPUnit_ControllerTestCase</classname>
-            のさまざまなアサーションでそれをテストすることができます。
+            のさまざまなアサーションでそれをテストできます。
         </para>
 
         <itemizedlist>

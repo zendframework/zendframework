@@ -67,10 +67,10 @@ class ZendMonitor extends AbstractWriter
     /**
      * Is logging to this writer enabled?
      *
-     * If the Zend Monitor extension is not enabled, this log writer will 
-     * fail silently. You can query this method to determine if the log 
+     * If the Zend Monitor extension is not enabled, this log writer will
+     * fail silently. You can query this method to determine if the log
      * writer is enabled.
-     * 
+     *
      * @return bool
      */
     public function isEnabled()
@@ -106,7 +106,7 @@ class ZendMonitor extends AbstractWriter
         unset($event['priority'], $event['message']);
 
         if (!empty($event)) {
-            monitor_custom_event($priority, $message, $event);
+            monitor_custom_event($priority, $message, false, $event);
         } else {
             monitor_custom_event($priority, $message);
         }

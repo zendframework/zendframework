@@ -215,7 +215,7 @@ class PDFDocument
      * @param integer $revision
      * @return \Zend\PDF\PDFDocument
      */
-    public static function parse($source = null, $revision = null)
+    public static function parse(&$source = null, $revision = null)
     {
         return new PDFDocument($source, $revision);
     }

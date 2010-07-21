@@ -50,7 +50,8 @@
 
         <example>
             <title>Traverse LDAP tree recursively</title>
-<programlisting language="php"><![CDATA[
+
+            <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
 $ldap->bind();

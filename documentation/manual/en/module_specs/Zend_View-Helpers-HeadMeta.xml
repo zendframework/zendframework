@@ -4,8 +4,8 @@
     <title>HeadMeta Helper</title>
 
     <para>
-        The HTML <emphasis>&lt;meta&gt;</emphasis> element is used to provide meta
-        information about your HTML document -- typically keywords, document
+        The <acronym>HTML</acronym> <emphasis>&lt;meta&gt;</emphasis> element is used to provide
+        meta information about your <acronym>HTML</acronym> document -- typically keywords, document
         character set, caching pragmas, etc. Meta tags may be either of the
         'http-equiv' or 'name' types, must contain a 'content' attribute, and
         can also have either of the 'lang' or 'scheme' modifier attributes.
@@ -151,7 +151,8 @@ $this->headMeta()->appendHttpEquiv('Content-Type',
 ]]></programlisting>
 
         <para>
-            If you are serving an HTML5 document, you should provide the character set like this:
+            If you are serving an <acronym>HTML</acronym>5 document, you should provide the
+            character set like this:
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -51,7 +51,7 @@ class ObController extends \Zend\Controller\Action
     {
         echo "In exception action\n";
         $view = new \Zend\View\View();
-        $view->addBasePath(dirname(dirname(__FILE__)) . '/views');
+        $view->addBasePath(dirname(__DIR__) . '/views');
         $view->render('ob.phtml');
     }
 

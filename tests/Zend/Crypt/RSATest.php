@@ -86,9 +86,9 @@ l9Nwj3KnPKFdqzJchujP2TLNwSYoQnxgyoMxdho=
 
 CERT;
 
-        $this->_testPemPath = dirname(__FILE__) . '/_files/test.pem';
+        $this->_testPemPath = __DIR__ . '/_files/test.pem';
 
-        $this->_testCertificatePath = dirname(__FILE__) . '/_files/test.cert';
+        $this->_testCertificatePath = __DIR__ . '/_files/test.cert';
     }
 
     public function testConstructorSetsPemString()
@@ -318,4 +318,12 @@ CERT;
         }
     }
 
+    /**
+     * @group ZF-8846
+     */
+    public function testLoadsPublicKeyFromPEMWithoutPrivateKeyAndThrowsNoException()
+    {
+        $rsa = new RSA;
+        $rsa->setPemString($this->_testPemStringPublic);
+    }
 }

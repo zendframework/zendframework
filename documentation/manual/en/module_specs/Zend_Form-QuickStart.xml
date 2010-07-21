@@ -45,7 +45,7 @@ $form->setAction('/resource/process')
         </para>
 
         <para>
-            You can set additional HTML attributes for the
+            You can set additional <acronym>HTML</acronym> attributes for the
             <emphasis>&lt;form&gt;</emphasis> tag by using the <methodname>setAttrib()</methodname>
             or <methodname>setAttribs()</methodname> methods. For instance, if you wish to set the
             id, set the "<property>id</property>" attribute:
@@ -525,7 +525,7 @@ class UserController extends Zend_Controller_Action
             And a view script for displaying the form:
         </para>
 
-<programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <h2>Please login:</h2>
 <?php echo $this->form ?>
 ]]></programlisting>

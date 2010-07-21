@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17136 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.controller.basics">
     <title>Zend_Controller の基本</title>
 
@@ -8,7 +8,7 @@
         <classname>Zend_Controller</classname> は軽量で部品化されており、拡張しやすいように設計されています。
         この設計は、柔軟性および利用者に対する自由度を確保するための最低限のものであり、
         <classname>Zend_Controller</classname> を使用して構築したシステムは、
-        ほぼ同じようなコード配置・規約を共有することができます。
+        ほぼ同じようなコード配置・規約を共有できます。
     </para>
 
     <para>
@@ -141,7 +141,7 @@
                         MixedCase あるいは camelCase の単語を複数使用したい場合は、
                         URL 上での単語の区切り文字として '-' あるいは
                         '.' のいずれかを使用しなければなりません
-                        (とは言え、ここで使用する文字は変更することができます)。
+                        (とは言え、ここで使用する文字は変更できます)。
                     </para>
 
                     <para>

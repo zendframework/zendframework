@@ -77,7 +77,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
     
     public function test_getInstance_fromINIConfig()
     {
-    	$config = new INIConfig(dirname(__FILE__) . '/../Controller/_files/routes.ini', 'testing');
+    	$config = new INIConfig(__DIR__ . '/../Controller/_files/routes.ini', 'testing');
     	$router = new RewriteRouter();
     	$router->addConfig($config, 'routes');
     	$route = $router->getRoute('rest');

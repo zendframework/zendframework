@@ -45,9 +45,9 @@ class GBaseOnlineTest extends \PHPUnit_Framework_TestCase
         }
         $user = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_EMAIL');
         $pass = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD');
-        $service = GBase\GBase::AUTH_SERVICE_NAME;
+        $service = GBase::AUTH_SERVICE_NAME;
         $client = \Zend\GData\ClientLogin::getHttpClient($user, $pass, $service);
-        $this->gdata = new GBase\GBase($client);
+        $this->gdata = new GBase($client);
     }
 
     public function testGetGBaseItemFeed()

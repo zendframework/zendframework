@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20819 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.html-mails">
     <title>HTML E-Mail</title>
 
     <para>
-        Um einen E-Mail im HTML Format zu versenden, muss der Hauptteil der Nachricht durch die
-        <methodname>setBodyHTML()</methodname> statt durch die
+        Um einen E-Mail im <acronym>HTML</acronym> Format zu versenden, muss der Hauptteil der
+        Nachricht durch die <methodname>setBodyHTML()</methodname> statt durch die
         <methodname>setBodyText()</methodname> gesetzt werden. Der <acronym>MIME</acronym>
-        Inhaltstyp wird dann automatisch auf <code>text/html</code> gesetzt. Wenn du sowohl HTML als
-        auch Text Daten verwendest, wird automatisch eine multipart/alternative
-        <acronym>MIME</acronym> E-Mail erstellt:
+        Inhaltstyp wird dann automatisch auf <code>text/html</code> gesetzt. Wenn du sowohl
+        <acronym>HTML</acronym> als auch Text Daten verwendest, wird automatisch eine
+        multipart/alternative <acronym>MIME</acronym> E-Mail erstellt:
     </para>
 
     <example id="zend.mail.html-mails.example-1">

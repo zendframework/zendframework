@@ -130,7 +130,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
                                   '(f1:word) (-(f1:word) +(f1:word))');
 
 
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         foreach ($queries as $id => $queryString) {
             $query = Search\QueryParser::parse($queryString);
@@ -173,7 +173,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testEmptyQuery()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $hits = $index->find('');
 
@@ -182,7 +182,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testTermQuery()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $hits = $index->find('submitting');
 
@@ -200,7 +200,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testMultiTermQuery()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $hits = $index->find('submitting AND wishlists');
 
@@ -213,7 +213,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testPraseQuery()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $hits = $index->find('"reporting bugs"');
 
@@ -232,7 +232,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testQueryParserKeywordsHandlingPhrase()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
 
         $query = Search\QueryParser::parse('"IndexSource/contributing.wishlist.html" AND Home');
@@ -257,7 +257,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testQueryParserKeywordsHandlingTerm()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
 
         $query = Search\QueryParser::parse('IndexSource\/contributing\.wishlist\.html AND Home');
@@ -290,7 +290,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testBooleanQuery()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $hits = $index->find('submitting AND (wishlists OR requirements)');
 
@@ -307,7 +307,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testBooleanQueryWithPhraseSubquery()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $hits = $index->find('"PEAR developers" AND Home');
 
@@ -323,7 +323,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testBooleanQueryWithNonExistingPhraseSubquery()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $query = Search\QueryParser::parse('"Non-existing phrase" AND Home');
 
@@ -335,7 +335,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testFilteredTokensQueryParserProcessing()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $this->assertEquals(count(\Zend\Search\Lucene\Analysis\Analyzer\Analyzer::getDefault()->tokenize('123456787654321')), 0);
 
@@ -354,7 +354,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testWildcardQuery()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $wildcardMinPrefix = Query\Wildcard::getMinPrefixLength();
         Query\Wildcard::setMinPrefixLength(0);
@@ -383,7 +383,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testFuzzyQuery()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $defaultPrefixLength = Query\Fuzzy::getDefaultPrefixLength();
         Query\Fuzzy::setDefaultPrefixLength(0);
@@ -412,7 +412,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testInclusiveRangeQuery()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $hits = $index->find('[xml TO zzzzz]');
 
@@ -432,7 +432,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testNonInclusiveRangeQuery()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $hits = $index->find('{xml TO zzzzz}');
 
@@ -452,7 +452,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testDefaultSearchField()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $storedDefaultSearchField = Lucene\Lucene::getDefaultSearchField();
 
@@ -480,7 +480,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
         // Restore default search field if it wasn't done by previous test because of failure
         Lucene\Lucene::setDefaultSearchField(null);
 
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $hits = $index->find('submitting AND wishlists');
         $hit = $hits[0];
@@ -497,7 +497,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testDelayedResourceCleanUp()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $hits = $index->find('submitting AND wishlists');
         unset($index);
@@ -515,7 +515,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testSortingResult()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $hits = $index->find('"reporting bugs"', 'path');
 
@@ -534,7 +534,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testSortingResultByScore()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $hits = $index->find('"reporting bugs"', 'score', SORT_NUMERIC, SORT_ASC,
                                                  'path',  SORT_STRING,  SORT_ASC);
@@ -567,7 +567,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
 
     public function testLimitingResult()
     {
-        $index = Lucene\Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+        $index = Lucene\Lucene::open(__DIR__ . '/_index23Sample/_files');
 
         $storedResultSetLimit = Lucene\Lucene::getResultSetLimit();
 

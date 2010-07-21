@@ -45,7 +45,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 class Zend_Service_DeveloperGarden_OfflineBaseUserServiceTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @todo add more tests for the ClientAbstract
+     * @todo add more tests for the AbstractClient
      */
 
     /**

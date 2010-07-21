@@ -29,7 +29,7 @@ namespace Zend\GData\YouTube\Extension;
  * Specialized Link class for use with YouTube. Enables use of yt extension elements.
  *
  * @uses       \Zend\GData\App\Extension\Link
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @uses       \Zend\GData\YouTube\Extension\Token
  * @category   Zend
  * @package    Zend_Gdata
@@ -50,7 +50,7 @@ class Link extends \Zend\GData\App\Extension\Link
     public function __construct($href = null, $rel = null, $type = null,
             $hrefLang = null, $title = null, $length = null, $token = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\YouTube\YouTube::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\YouTube::$namespaces);
         parent::__construct($href, $rel, $type, $hrefLang, $title, $length);
         $this->_token = $token;
     }

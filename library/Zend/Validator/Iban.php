@@ -117,7 +117,7 @@ class Iban extends AbstractValidator
      */
     public function __construct($locale = null)
     {
-        if ($locale instanceof end\Config\Config) {
+        if ($locale instanceof \Zend\Config\Config) {
             $locale = $locale->toArray();
         }
 
@@ -129,13 +129,13 @@ class Iban extends AbstractValidator
             }
         }
 
-        if ($locale !== false) {
+        if (empty($locale)) {
             if (\Zend\Registry::isRegistered('Zend_Locale')) {
                 $locale = \Zend\Registry::get('Zend_Locale');
             }
         }
 
-        if (!empty($locale)) {
+        if ($locale !== null) {
             $this->setLocale($locale);
         }
     }

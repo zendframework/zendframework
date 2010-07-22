@@ -167,7 +167,7 @@ class Zend_Pdf_Resource_Image_Png extends Zend_Pdf_Resource_Image
 
                         case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_INDEXED:
                             //Find the first transparent color in the index, we will mask that. (This is a bit of a hack. This should be a SMask and mask all entries values).
-                            if(($trnsIdx = strpos($trnsData, chr(0))) !== false) {
+                            if(($trnsIdx = strpos($trnsData, "\0")) !== false) {
                                 $transparencyData = array(new Zend_Pdf_Element_Numeric($trnsIdx),
                                                           new Zend_Pdf_Element_Numeric($trnsIdx));
                             }

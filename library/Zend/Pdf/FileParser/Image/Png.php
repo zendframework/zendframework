@@ -312,7 +312,7 @@ class Zend_Pdf_FileParser_Image_Png extends Zend_Pdf_FileParser_Image
                   */
 
                   $tmpData = $this->readBytes($chunkLength);
-                  if(($trnsIdx = strpos($tmpData, chr(0))) !== false) {
+                  if(($trnsIdx = strpos($tmpData, "\0")) !== false) {
                        $this->_transparencyData = array($trnsIdx, $trnsIdx);
                   }
 

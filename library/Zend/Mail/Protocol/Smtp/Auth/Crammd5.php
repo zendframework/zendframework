@@ -94,7 +94,7 @@ class Zend_Mail_Protocol_Smtp_Auth_Crammd5 extends Zend_Mail_Protocol_Smtp
         if (strlen($key) > 64) {
             $key = pack('H32', md5($key));
         } elseif (strlen($key) < 64) {
-            $key = str_pad($key, $block, chr(0));
+            $key = str_pad($key, $block, "\0");
         }
 
         $k_ipad = substr($key, 0, 64) ^ str_repeat(chr(0x36), 64);

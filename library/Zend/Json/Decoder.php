@@ -367,19 +367,19 @@ class Zend_Json_Decoder
                                 $result .= '/';
                                 break;
                             case 'b' :
-                                $result .= chr(8);
+                                $result .= "\x08";
                                 break;
                             case 'f' :
-                                $result .= chr(12);
+                                $result .= "\x0c";
                                 break;
                             case 'n' :
-                                $result .= chr(10);
+                                $result .= "\x0a";
                                 break;
                             case 'r' :
-                                $result .= chr(13);
+                                $result .= "\x0d";
                                 break;
                             case 't' :
-                                $result .= chr(9);
+                                $result .= "\x09";
                                 break;
                             case '\'' :
                                 $result .= '\'';

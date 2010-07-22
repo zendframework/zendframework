@@ -1223,7 +1223,7 @@ class Zend_Pdf
                         if (extension_loaded('mbstring') === true) {
                             $detected = mb_detect_encoding($value);
                             if ($detected !== 'ASCII') {
-                                $value = chr(254) . chr(255) . mb_convert_encoding($value, 'UTF-16', $detected);
+                                $value = "\xfe\xff" . mb_convert_encoding($value, 'UTF-16', $detected);
                             }
                         }
                         $docInfo->$key = new Zend_Pdf_Element_String((string)$value);

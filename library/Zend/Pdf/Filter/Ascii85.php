@@ -78,7 +78,7 @@ class Zend_Pdf_Filter_Ascii85 implements Zend_Pdf_Filter_Interface
 
             //0 pad the rest
             for ($j = $n;$j < 4;$j++) {
-                $chunk .= chr(0);
+                $chunk .= "\0";
             }
 
             $b = unpack("N", $chunk);

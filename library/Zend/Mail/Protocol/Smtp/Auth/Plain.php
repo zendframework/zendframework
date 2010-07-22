@@ -89,7 +89,7 @@ class Zend_Mail_Protocol_Smtp_Auth_Plain extends Zend_Mail_Protocol_Smtp
 
         $this->_send('AUTH PLAIN');
         $this->_expect(334);
-        $this->_send(base64_encode(chr(0) . $this->_username . chr(0) . $this->_password));
+        $this->_send(base64_encode("\0" . $this->_username . "\0" . $this->_password));
         $this->_expect(235);
         $this->_auth = true;
     }

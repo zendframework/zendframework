@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\Sqs;
+use Zend\Crypt;
+
+/**
  * Class for connecting to the Amazon Simple Queue Service (SQS)
  *
  * @uses       SimpleXMLElement
@@ -34,7 +40,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://aws.amazon.com/sqs/ Amazon Simple Queue Service
  */
+<<<<<<< HEAD:library/Zend/Service/Amazon/Sqs.php
 class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_AbstractService
+=======
+class Sqs extends \Zend\Service\Amazon\AbstractAmazon
+>>>>>>> merges/farazdagi:library/Zend/Service/Amazon/Sqs/Sqs.php
 {
     /**
      * Default timeout for createQueue() function
@@ -108,7 +118,7 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_AbstractService
                     $retry = true;
                     $retry_count++;
                 } else {
-                    throw new Zend_Service_Amazon_Sqs_Exception($result->Error->Code);
+                    throw new Exception($result->Error->Code);
                 }
             } else {
                 return (string) $result->CreateQueueResult->QueueUrl;
@@ -133,7 +143,7 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_AbstractService
         $result = $this->_makeRequest($queue_url, 'DeleteQueue');
 
         if ($result->Error->Code !== null) {
-            throw new Zend_Service_Amazon_Sqs_Exception($result->Error->Code);
+            throw new Exception($result->Error->Code);
         }
 
         return true;
@@ -150,7 +160,7 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_AbstractService
         $result = $this->_makeRequest(null, 'ListQueues');
 
         if ($result->ListQueuesResult->QueueUrl === null) {
-            throw new Zend_Service_Amazon_Sqs_Exception($result->Error->Code);
+            throw new Exception($result->Error->Code);
         }
 
         $queues = array();
@@ -191,9 +201,9 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_AbstractService
         $result = $this->_makeRequest($queue_url, 'SendMessage', $params);
 
         if ($result->SendMessageResult->MessageId === null) {
-            throw new Zend_Service_Amazon_Sqs_Exception($result->Error->Code);
+            throw new Exception($result->Error->Code);
         } else if ((string) $result->SendMessageResult->MD5OfMessageBody != $checksum) {
-            throw new Zend_Service_Amazon_Sqs_Exception('MD5 of body does not match message sent');
+            throw new Exception('MD5 of body does not match message sent');
         }
 
         return (string) $result->SendMessageResult->MessageId;
@@ -225,7 +235,7 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_AbstractService
         $result = $this->_makeRequest($queue_url, 'ReceiveMessage', $params);
 
         if ($result->ReceiveMessageResult->Message === null) {
-            throw new Zend_Service_Amazon_Sqs_Exception($result->Error->Code);
+            throw new Exception($result->Error->Code);
         }
 
         $data = array();
@@ -283,7 +293,7 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_AbstractService
         $result = $this->_makeRequest($queue_url, 'GetQueueAttributes', $params);
 
         if ($result->GetQueueAttributesResult->Attribute === null) {
-            throw new Zend_Service_Amazon_Sqs_Exception($result->Error->Code);
+            throw new Exception($result->Error->Code);
         }
         
         if(count($result->GetQueueAttributesResult->Attribute) > 1) {
@@ -348,7 +358,7 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_AbstractService
 
         unset($client);
 
-        return new SimpleXMLElement($response->getBody());
+        return new \SimpleXMLElement($response->getBody());
     }
 
     /**
@@ -424,7 +434,7 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_AbstractService
 
         $data .= implode('&', $arrData);
 
-        $hmac = Zend_Crypt_Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Zend_Crypt_Hmac::BINARY);
+        $hmac = Crypt\HMAC::compute($this->_getSecretKey(), 'SHA256', $data, Crypt\HMAC::BINARY);
 
         return base64_encode($hmac);
     }

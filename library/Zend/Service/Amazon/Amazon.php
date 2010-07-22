@@ -21,6 +21,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon;
+use Zend\Service;
+use Zend\REST\Client;
+use Zend\Crypt;
+
+/**
  * @uses       DOMDocument
  * @uses       DOMXPath
  * @uses       Zend_Crypt_Hmac
@@ -34,7 +42,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon
+class Amazon
 {
     /**
      * Amazon Web Services Access Key ID
@@ -88,7 +96,7 @@ class Zend_Service_Amazon
 
         $countryCode = (string) $countryCode;
         if (!isset($this->_baseUriList[$countryCode])) {
-            throw new Zend_Service_Exception("Unknown country code: $countryCode");
+            throw new Service\Exception("Unknown country code: $countryCode");
         }
 
         $this->_baseUri = $this->_baseUriList[$countryCode];
@@ -114,15 +122,15 @@ class Zend_Service_Amazon
         $response = $client->restGet('/onca/xml', $options);
 
         if ($response->isError()) {
-            throw new Zend_Service_Exception('An error occurred sending request. Status code: '
+            throw new Service\Exception('An error occurred sending request. Status code: '
                                            . $response->getStatus());
         }
 
-        $dom = new DOMDocument();
+        $dom = new \DOMDocument();
         $dom->loadXML($response->getBody());
         self::_checkErrors($dom);
 
-        return new Zend_Service_Amazon_ResultSet($dom);
+        return new ResultSet($dom);
     }
 
 
@@ -147,23 +155,23 @@ class Zend_Service_Amazon
         $response = $client->restGet('/onca/xml', $options);
 
         if ($response->isError()) {
-            throw new Zend_Service_Exception(
+            throw new Service\Exception(
                 'An error occurred sending request. Status code: ' . $response->getStatus()
             );
         }
 
-        $dom = new DOMDocument();
+        $dom = new \DOMDocument();
         $dom->loadXML($response->getBody());
         self::_checkErrors($dom);
-        $xpath = new DOMXPath($dom);
+        $xpath = new \DOMXPath($dom);
         $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
         $items = $xpath->query('//az:Items/az:Item');
 
         if ($items->length == 1) {
-            return new Zend_Service_Amazon_Item($items->item(0));
+            return new Item($items->item(0));
         }
 
-        return new Zend_Service_Amazon_ResultSet($dom);
+        return new ResultSet($dom);
     }
 
 
@@ -175,7 +183,7 @@ class Zend_Service_Amazon
     public function getRestClient()
     {
         if($this->_rest === null) {
-            $this->_rest = new Zend_Rest_Client();
+            $this->_rest = new Client\RESTClient();
         }
         return $this->_rest;
     }
@@ -186,7 +194,7 @@ class Zend_Service_Amazon
      * @param Zend_Rest_Client
      * @return Zend_Service_Amazon
      */
-    public function setRestClient(Zend_Rest_Client $client)
+    public function setRestClient(Client\RESTClient $client)
     {
         $this->_rest = $client;
         return $this;
@@ -241,7 +249,7 @@ class Zend_Service_Amazon
     {
         $signature = self::buildRawSignature($baseUri, $options);
         return base64_encode(
-            Zend_Crypt_Hmac::compute($secretKey, 'sha256', $signature, Zend_Crypt_Hmac::BINARY)
+            Crypt\HMAC::compute($secretKey, 'sha256', $signature, Crypt\HMAC::BINARY)
         );
     }
 
@@ -274,9 +282,9 @@ class Zend_Service_Amazon
      * @throws Zend_Service_Exception
      * @return void
      */
-    protected static function _checkErrors(DOMDocument $dom)
+    protected static function _checkErrors(\DOMDocument $dom)
     {
-        $xpath = new DOMXPath($dom);
+        $xpath = new \DOMXPath($dom);
         $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
 
         if ($xpath->query('//az:Error')->length >= 1) {
@@ -287,7 +295,7 @@ class Zend_Service_Amazon
                 case 'AWS.ECommerceService.NoExactMatches':
                     break;
                 default:
-                    throw new Zend_Service_Exception("$message ($code)");
+                    throw new Service\Exception("$message ($code)");
             }
         }
     }

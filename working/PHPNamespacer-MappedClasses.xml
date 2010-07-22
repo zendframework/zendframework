@@ -11931,10 +11931,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/Amazon/Ec2/Availabilityzones.php</originalRelativeFilePath>
       <originalClassName>Zend_Service_Amazon_Ec2_Availabilityzones</originalClassName>
-      <newRelativeFilePath>Zend/Service/Amazon/Ec2/Availabilityzones.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Service/Amazon/Ec2/AvailabilityZones.php</newRelativeFilePath>
       <newNamespace>Zend\Service\Amazon\Ec2</newNamespace>
-      <newClassName>Availabilityzones</newClassName>
-      <newFullyQualifiedName>Zend\Service\Amazon\Ec2\Availabilityzones</newFullyQualifiedName>
+      <newClassName>AvailabilityZones</newClassName>
+      <newFullyQualifiedName>Zend\Service\Amazon\Ec2\AvailabilityZones</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/Amazon/Ec2/CloudWatch.php</originalRelativeFilePath>
@@ -11955,10 +11955,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/Amazon/Ec2/Elasticip.php</originalRelativeFilePath>
       <originalClassName>Zend_Service_Amazon_Ec2_Elasticip</originalClassName>
-      <newRelativeFilePath>Zend/Service/Amazon/Ec2/Elasticip.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Service/Amazon/Ec2/ElasticIp.php</newRelativeFilePath>
       <newNamespace>Zend\Service\Amazon\Ec2</newNamespace>
-      <newClassName>Elasticip</newClassName>
-      <newFullyQualifiedName>Zend\Service\Amazon\Ec2\Elasticip</newFullyQualifiedName>
+      <newClassName>ElasticIp</newClassName>
+      <newFullyQualifiedName>Zend\Service\Amazon\Ec2\ElasticIp</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/Amazon/Ec2/Exception.php</originalRelativeFilePath>
@@ -12027,10 +12027,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/Amazon/Ec2/Securitygroups.php</originalRelativeFilePath>
       <originalClassName>Zend_Service_Amazon_Ec2_Securitygroups</originalClassName>
-      <newRelativeFilePath>Zend/Service/Amazon/Ec2/Securitygroups.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Service/Amazon/Ec2/SecurityGroups.php</newRelativeFilePath>
       <newNamespace>Zend\Service\Amazon\Ec2</newNamespace>
-      <newClassName>Securitygroups</newClassName>
-      <newFullyQualifiedName>Zend\Service\Amazon\Ec2\Securitygroups</newFullyQualifiedName>
+      <newClassName>SecurityGroups</newClassName>
+      <newFullyQualifiedName>Zend\Service\Amazon\Ec2\SecurityGroups</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/Amazon/Ec2.php</originalRelativeFilePath>

@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\Ec2;
+
+/**
  * The Custom Exception class that allows you to have access to the AWS Error Code.
  *
  * @uses       Zend_Service_Amazon_Exception
@@ -30,7 +35,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_Ec2_Exception extends Zend_Service_Amazon_Exception
+class Exception extends \Zend\Service\Amazon\Exception
 {
     private $awsErrorCode = '';
 

@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon\Ec2;
+use Zend\Service\Amazon\Ec2\WindowsInstance;
+
+/**
  * Zend_Service_Amazon_Ec2_Instance_Windows test case.
  *
  * @todo: Should this class be named Zend_Service_Amazon_Ec2_Instance_WindowsTest?
@@ -34,13 +40,13 @@
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
  */
-class InstanceWindowsTest extends PHPUnit_Framework_TestCase
+class InstanceWindowsTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
      * @var Zend_Service_Amazon_Ec2_Instance_Windows
      */
-    private $Zend_Service_Amazon_Ec2_Instance_Windows;
+    private $instance;
 
     /**
      * Prepares the environment before running a test.
@@ -48,14 +54,14 @@ class InstanceWindowsTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->Zend_Service_Amazon_Ec2_Instance_Windows = new Zend_Service_Amazon_Ec2_Instance_Windows('access_key', 'secret_access_key');
+        $this->instance = new WindowsInstance('access_key', 'secret_access_key');
 
-        $adapter = new Zend_Http_Client_Adapter_Test();
-        $client = new Zend_Http_Client(null, array(
+        $adapter = new \Zend\HTTP\Client\Adapter\Test();
+        $client = new \Zend\HTTP\Client(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Instance_Windows::setDefaultHttpClient($client);
+        WindowsInstance::setDefaultHTTPClient($client);
     }
 
     /**
@@ -64,7 +70,7 @@ class InstanceWindowsTest extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         unset($this->adapter);
-        $this->Zend_Service_Amazon_Ec2_Instance_Windows = null;
+        $this->instance = null;
 
         parent::tearDown();
     }
@@ -102,9 +108,9 @@ class InstanceWindowsTest extends PHPUnit_Framework_TestCase
                     ."</BundleInstanceResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance_Windows->bundle('i-12345678', 'my-bucket', 'my-new-image');
+        $return = $this->instance->bundle('i-12345678', 'my-bucket', 'my-new-image');
 
-        print_r($return);
+        //print_r($return);
 
         $arrReturn = array(
                 "instanceId" => "i-12345678",
@@ -158,7 +164,7 @@ class InstanceWindowsTest extends PHPUnit_Framework_TestCase
                     ."</CancelBundleTaskResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance_Windows->cancelBundle('bun-cla322b9');
+        $return = $this->instance->cancelBundle('bun-cla322b9');
 
         $arrReturn = array(    "instanceId" => "i-12345678",
                 "bundleId" => "bun-cla322b9",
@@ -215,7 +221,7 @@ class InstanceWindowsTest extends PHPUnit_Framework_TestCase
                     ."</DescribeBundleTasksResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance_Windows->describeBundle('bun-cla322b9');
+        $return = $this->instance->describeBundle('bun-cla322b9');
 
         $arrReturn = array(
             array(

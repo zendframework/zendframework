@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\Ec2;
+
+/**
  * An Amazon EC2 interface that allows yout to run, terminate, reboot and describe Amazon
  * Ec2 Instances.
  *
@@ -32,7 +37,11 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+<<<<<<< HEAD
 class Zend_Service_Amazon_Ec2_CloudWatch extends Zend_Service_Amazon_Ec2_AbstractService
+=======
+class CloudWatch extends AbstractEc2
+>>>>>>> merges/farazdagi
 {
     /**
      * The HTTP query server
@@ -240,7 +249,7 @@ class Zend_Service_Amazon_Ec2_CloudWatch extends Zend_Service_Amazon_Ec2_Abstrac
         }
 
         if (!isset($options['MeasureName']) || !in_array($options['MeasureName'], $this->_validMetrics, true)) {
-            throw new Zend_Service_Amazon_Ec2_Exception('Invalid Metric Type: ' . $options['MeasureName']);
+            throw new Exception('Invalid Metric Type: ' . $options['MeasureName']);
         }
 
         if(!isset($options['Statistics'])) {

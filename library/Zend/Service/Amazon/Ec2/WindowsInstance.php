@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\Ec2;
+use Zend\Crypt;
+
+/**
  * An Amazon EC2 interface that allows yout to run, terminate, reboot and describe Amazon
  * Ec2 Instances.
  *
@@ -33,7 +39,11 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+<<<<<<< HEAD:library/Zend/Service/Amazon/Ec2/Instance/Windows.php
 class Zend_Service_Amazon_Ec2_Instance_Windows extends Zend_Service_Amazon_Ec2_AbstractService
+=======
+class WindowsInstance extends AbstractEc2
+>>>>>>> merges/farazdagi:library/Zend/Service/Amazon/Ec2/WindowsInstance.php
 {
     /**
      * Bundles an Amazon EC2 instance running Windows
@@ -166,7 +176,7 @@ class Zend_Service_Amazon_Ec2_Instance_Windows extends Zend_Service_Amazon_Ec2_A
         $arrParams['conditions'][] = array('acl' => 'ec2-bundle-read');
         $arrParams['conditions'][] = array('starts-with', '$key', $prefix);
 
-        return base64_encode(Zend_Json::encode($arrParams));
+        return base64_encode(\Zend\Json\Json::encode($arrParams));
     }
 
     /**
@@ -177,7 +187,7 @@ class Zend_Service_Amazon_Ec2_Instance_Windows extends Zend_Service_Amazon_Ec2_A
      */
     protected function _signS3UploadPolicy($policy)
     {
-        $hmac = Zend_Crypt_Hmac::compute($this->_getSecretKey(), 'SHA1', $policy, Zend_Crypt_Hmac::BINARY);
+        $hmac = Crypt\HMAC::compute($this->_getSecretKey(), 'SHA1', $policy, Crypt\HMAC::BINARY);
         return $hmac;
     }
 }

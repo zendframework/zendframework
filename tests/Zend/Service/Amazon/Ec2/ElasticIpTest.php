@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon\Ec2;
+use Zend\Service\Amazon\Ec2;
+
+/**
  * Zend_Service_Amazon_Ec2_Elasticip test case.
  *
  * @category   Zend
@@ -32,13 +38,13 @@
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
  */
-class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
+class ElasticIpTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
      * @var Zend_Service_Amazon_Ec2_Elasticip
      */
-    private $Zend_Service_Amazon_Ec2_Elasticip;
+    private $elasticip;
 
     /**
      * Prepares the environment before running a test.
@@ -47,14 +53,14 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->Zend_Service_Amazon_Ec2_Elasticip = new Zend_Service_Amazon_Ec2_Elasticip('access_key', 'secret_access_key');
+        $this->elasticip = new Ec2\ElasticIp('access_key', 'secret_access_key');
 
-        $adapter = new Zend_Http_Client_Adapter_Test();
-        $client = new Zend_Http_Client(null, array(
+        $adapter = new \Zend\HTTP\Client\Adapter\Test();
+        $client = new \Zend\HTTP\Client(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Elasticip::setDefaultHttpClient($client);
+        Ec2\ElasticIp::setDefaultHTTPClient($client);
 
     }
 
@@ -65,7 +71,7 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
     {
         unset($this->adapter);
 
-        $this->Zend_Service_Amazon_Ec2_Elasticip = null;
+        $this->elasticip = null;
 
         parent::tearDown();
     }
@@ -86,7 +92,7 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
                     . "</AllocateAddressResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $ipAddress = $this->Zend_Service_Amazon_Ec2_Elasticip->allocate();
+        $ipAddress = $this->elasticip->allocate();
         $this->assertEquals('67.202.55.255', $ipAddress);
     }
 
@@ -106,7 +112,7 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
                     . "</AssociateAddressResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Elasticip->associate('67.202.55.255', 'i-ag8ga0a');
+        $return = $this->elasticip->associate('67.202.55.255', 'i-ag8ga0a');
 
         $this->assertTrue($return);
 
@@ -136,7 +142,7 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
                     . "</DescribeAddressesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $response = $this->Zend_Service_Amazon_Ec2_Elasticip->describe('67.202.55.255');
+        $response = $this->elasticip->describe('67.202.55.255');
 
         $arrIp = array(
             'publicIp'      => '67.202.55.255',
@@ -171,7 +177,7 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
                     . "</DescribeAddressesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $response = $this->Zend_Service_Amazon_Ec2_Elasticip->describe(array('67.202.55.255', '67.202.55.200'));
+        $response = $this->elasticip->describe(array('67.202.55.255', '67.202.55.200'));
 
         $arrIps = array(
             array(
@@ -208,7 +214,7 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
                     . "</DisassociateAddressResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Elasticip->disassocate('67.202.55.255');
+        $return = $this->elasticip->disassocate('67.202.55.255');
 
         $this->assertTrue($return);
 
@@ -233,7 +239,7 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
                     . "</ReleaseAddressResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Elasticip->release('67.202.55.255');
+        $return = $this->elasticip->release('67.202.55.255');
 
         $this->assertTrue($return);
 

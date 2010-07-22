@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace ZendTest\Captcha;
+use Zend\View\View;
 
 /**
  * @category   Zend
@@ -63,11 +64,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         if(!is_dir($this->testDir)) {
             @mkdir($this->testDir);
         }
-        $this->element = new \Zend_Form_Element_Captcha('captchaI',
+        $this->element = new \Zend\Form\Element\Captcha('captchaI',
                     array('captcha' => array('Image',
                                              'sessionClass' => 'ZendTest\\Captcha\\TestAsset\\SessionContainer',
                                              'imgDir'       => $this->testDir,
-                                             'font'         => __DIR__. '/../PDF/_fonts/Vera.ttf')
+                                             'font'         => __DIR__. '/../Pdf/_fonts/Vera.ttf')
                          ));
         $this->captcha =  $this->element->getCaptcha();
     }
@@ -104,7 +105,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new \Zend_View();
+        $view = new View;
         $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
         return $view;
     }

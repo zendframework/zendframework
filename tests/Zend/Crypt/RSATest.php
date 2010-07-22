@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace ZendTest\Crypt;
-use Zend\Crypt\RSA,
+use Zend\Crypt\Rsa as RSA,
     Zend\Crypt;
 
 /**

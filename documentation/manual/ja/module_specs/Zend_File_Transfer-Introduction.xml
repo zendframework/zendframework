@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 22556 -->
 <sect1 id="zend.file.transfer.introduction">
     <title>Zend_File_Transfer</title>
 
@@ -602,6 +602,16 @@ while (!$upload['done']) {
 
             </example>
 
+            <note>
+                <title>Knowing the file to get the progress from</title>
+
+                <para>
+                    The above example works when your upload identified is set to 'progress_key'.
+                    When you are using another identifier within your form you must give the used
+                    identifier as first parameter to <methodname>getProgress()</methodname> on the
+                    initial call.
+                </para>
+            </note>
         </sect3>
     </sect2>
 </sect1>

@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon\Ec2;
+use Zend\Service\Amazon\Ec2;
 
 /**
  * Zend_Service_Amazon_Ec2 test case.
@@ -33,7 +38,7 @@
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
  */
-class Zend_Service_Amazon_Ec2_Ec2Test extends PHPUnit_Framework_TestCase
+class Ec2Test extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -59,39 +64,39 @@ class Zend_Service_Amazon_Ec2_Ec2Test extends PHPUnit_Framework_TestCase
 
     public function testFactoryReturnsKeyPairObject()
     {
-        $object = Zend_Service_Amazon_Ec2::factory('keypair', 'access_key', 'secret_access_key');
-        $this->assertType('Zend_Service_Amazon_Ec2_Keypair', $object);
+        $object = Ec2\Ec2::factory('keypair', 'access_key', 'secret_access_key');
+        $this->assertType('\Zend\Service\Amazon\Ec2\Keypair', $object);
     }
 
     public function testFactoryReturnsElasticIpObject()
     {
-        $object = Zend_Service_Amazon_Ec2::factory('elasticip', 'access_key', 'secret_access_key');
-        $this->assertType('Zend_Service_Amazon_Ec2_Elasticip', $object);
+        $object = Ec2\Ec2::factory('elasticip', 'access_key', 'secret_access_key');
+        $this->assertType('\Zend\Service\Amazon\Ec2\Elasticip', $object);
     }
 
 
     public function testFactoryReturnsEbsObject()
     {
-        $object = Zend_Service_Amazon_Ec2::factory('ebs', 'access_key', 'secret_access_key');
-        $this->assertType('Zend_Service_Amazon_Ec2_Ebs', $object);
+        $object = Ec2\Ec2::factory('ebs', 'access_key', 'secret_access_key');
+        $this->assertType('\Zend\Service\Amazon\Ec2\Ebs', $object);
     }
 
     public function testFactoryReturnImageObject()
     {
-        $object = Zend_Service_Amazon_Ec2::factory('image', 'access_key', 'secret_access_key');
-        $this->assertType('Zend_Service_Amazon_Ec2_Image', $object);
+        $object = Ec2\Ec2::factory('image', 'access_key', 'secret_access_key');
+        $this->assertType('\Zend\Service\Amazon\Ec2\Image', $object);
     }
 
     public function testFactoryReturnsInstanceObject()
     {
-        $object = Zend_Service_Amazon_Ec2::factory('instance', 'access_key', 'secret_access_key');
-        $this->assertType('Zend_Service_Amazon_Ec2_Instance', $object);
+        $object = Ec2\Ec2::factory('instance', 'access_key', 'secret_access_key');
+        $this->assertType('\Zend\Service\Amazon\Ec2\Instance', $object);
     }
 
     public function testFactoryReturnsSecurityGroupsObject()
     {
-        $object = Zend_Service_Amazon_Ec2::factory('security', 'access_key', 'secret_access_key');
-        $this->assertType('Zend_Service_Amazon_Ec2_Securitygroups', $object);
+        $object = Ec2\Ec2::factory('security', 'access_key', 'secret_access_key');
+        $this->assertType('\Zend\Service\Amazon\Ec2\Securitygroups', $object);
     }
 
 }

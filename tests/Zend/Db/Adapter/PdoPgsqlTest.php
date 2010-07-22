@@ -214,4 +214,22 @@ class PdoPgsqlTest extends AbstractPdoTest
         $this->_util->dropTable('zf_pgsql_bpchar');
         $this->assertEquals('Default', $description['pg_name']['DEFAULT']);
     }
+
+    /**
+     * @group ZF-10160
+     */
+    public function testQuoteIdentifiersInSequence()
+    {
+        $this->_util->createSequence('camelCase_id_seq');
+        $this->_db->nextSequenceId('camelCase_id_seq');
+        $this->_db->nextSequenceId($this->_db->quoteIdentifier('camelCase_id_seq', true));
+        $this->_db->lastSequenceId('camelCase_id_seq');
+        $this->_db->lastSequenceId($this->_db->quoteIdentifier('camelCase_id_seq', true));
+
+        require_once 'Zend/Db/Expr.php';
+        $this->_db->lastSequenceId(new Zend_Db_Expr('camelCase_id_seq'));
+        $lastId = $this->_db->lastSequenceId(new Zend_Db_Expr('camelCase_id_seq'));
+        $this->assertEquals(2, $lastId);
+        $this->_util->dropSequence('camelCase_id_seq');
+    }
 }

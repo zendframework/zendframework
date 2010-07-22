@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20779 -->
+<!-- EN-Revision: 22397 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.health">
     <title>Verwenden von Google Health</title>
@@ -293,9 +293,10 @@ $healthService = new Zend_Gdata_Health($client,
 
         <para>
             Um den Profil Feed des Benutzers abzufragen, muß man sicherstellen das der initiale
-            AuthSub Token mit gesetztem <code>permission=1</code> Parameter angefragt wurde. Der
-            Prozess des extrahierens von Daten aus dem Profil benötigt zwei Schritte. Das Senden
-            einer Anfrage und dem durchlaufen des resultierenden Feeds.
+            AuthSub Token angefragt wird wobei der <property>permission</property> Parameter auf
+            <emphasis>1</emphasis> gesetzt ist. Der Prozess des extrahierens von Daten aus dem
+            Profil benötigt zwei Schritte. Das Senden einer Anfrage und dem durchlaufen des
+            resultierenden Feeds.
         </para>
 
         <sect3 id="zend.gdata.health.profilefeed.query">
@@ -341,7 +342,7 @@ $profileFeed = $healthService->getHealthProfileFeed($query);
 
                 <para>
                     Wenn man <methodname>setDigest("true")</methodname> verwendet werden alle CCR
-                    Daten des Benutzers in einem einzelnen Atom <code>&lt;entry&gt;</code>
+                    Daten des Benutzers in einem einzelnen Atom <emphasis>&lt;entry&gt;</emphasis>
                     zurückgegeben.
                 </para>
 
@@ -368,9 +369,9 @@ $profileFeed = $healthService->getHealthProfileFeed($query);
 
             <para>
                 Jeder Google Health Eintrag enthält CCR Daten, trotzem führt die Verwendung des
-                Abfrageparameters <code>digest=true</code> dazu das alle CCR Elemente (die dieser
-                Abfrage entsprechen) in einen einzelnen Atom <code>&lt;entry&gt;</code>
-                zusammengefügt werden.
+                Abfrageparameters <property>digest</property> mit <constant>TRUE</constant> dazu
+                dass alle CCR Elemente (die dieser Abfrage entsprechen) in einen einzelnen Atom
+                <emphasis>&lt;entry&gt;</emphasis> zusammengefügt werden.
             </para>
 
             <para>
@@ -441,8 +442,8 @@ foreach ($conditions as $cond) {
             Da ClientLogin bei jedem seiner Feeds eine Profil ID benötigt, sollten Anwendungen
             diesen Feed als erstes abfragen um die richtigen Profile auszuwählen. Der Profil Listen
             Feed gibt Atom Einträge zurück die jedem Profil im Benutzeraccount von Google Health
-            entsprechen. Die ProfilID wird im Atom <code>&lt;content&gt;</code> und der Name im
-            <code>&lt;title&gt;</code> Element zurückgegeben.
+            entsprechen. Die ProfilID wird im Atom <emphasis>&lt;content&gt;</emphasis> und der Name
+            im <emphasis>&lt;title&gt;</emphasis> Element zurückgegeben.
         </para>
 
         <sect3 id="zend.gdata.health.profilelist.query">

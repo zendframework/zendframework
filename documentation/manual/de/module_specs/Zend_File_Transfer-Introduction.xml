@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 22556 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.introduction">
     <title>Zend_File_Transfer</title>
@@ -511,8 +511,11 @@ while (!$upload['done']) {
                 <listitem>
                     <para>
                         <emphasis>id</emphasis>: Die ID dieses Uploads. Die ID identifiziert den
-                        Upload in der Extension. Sie wird automatisch geschrieben. Man sollte Sie
-                        nie ändern oder den Wert selbst setzen.
+                        Upload in der Extension. Man kann Sie auf den Wert des versteckten
+                        Schlüssels setzen welcher den Upload identifiziert wenn
+                        <methodname>getProgress()</methodname> das erste Mal aufgerufen wird.
+                        Standardmäßig ist er auf <emphasis>progress_key</emphasis> gesetzt. Man
+                        darf die ID nicht im Nachhinein ändern.
                     </para>
                 </listitem>
 
@@ -597,6 +600,17 @@ while (!$upload['done']) {
 }
 ]]></programlisting>
             </example>
+
+            <note>
+                <title>Die Datei kennen von welcher der Fortschritt kommen soll</title>
+
+                <para>
+                    Das obige Beispiel funktioniert wenn der identifizierte Upload auf
+                    'progress_key' gesetzt wurde. Wenn man einen anderen Identifikator im Formular
+                    verwendet muss man den verwendeten Identifikator als ersten Parameter an
+                    <methodname>getProgress()</methodname> bei initialen Aufruf übergeben.
+                </para>
+            </note>
         </sect3>
     </sect2>
 </sect1>

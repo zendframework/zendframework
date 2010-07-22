@@ -29,6 +29,16 @@ use Zend\Loader\Autoloader,
     ZendTest\Application\TestAsset\ZfAppBootstrap;
 
 /**
+ * Zend_Cache_Backend
+ */
+require_once 'Zend/Cache/Backend.php';
+
+/**
+ * Zend_Cache_Core
+ */
+require_once 'Zend/Cache/Core.php';
+
+/**
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
@@ -187,4 +197,35 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
         $cache = $manager->getCache('foo')->getBackend();
         $this->assertTrue($cache instanceof Zend_Cache_Backend_ZendServer_Disk);
     }
+
+    /**
+     * @group ZF-9737
+     */
+    public function testCustomFrontendBackendNaming()
+    {
+        $options = array(
+            'zf9737' => array(
+                'frontend' => array(
+                    'name'                 => 'custom-naming',
+                    'customFrontendNaming' => false),
+                'backend' => array('name'                    => 'Zend_Cache_Backend_Custom_Naming',
+                                   'customBackendNaming'     => true),
+                'frontendBackendAutoload' => true)
+        );
+
+        $resource = new Zend_Application_Resource_Cachemanager($options);
+        $manager  = $resource->init();
+        $cache    = $manager->getCache('zf9737');
+        $this->assertTrue($cache->getBackend() instanceof Zend_Cache_Backend_Custom_Naming);
+        $this->assertTrue($cache instanceof Zend_Cache_Frontend_CustomNaming);
+    }
+}
+
+
+class Zend_Cache_Backend_Custom_Naming extends Zend_Cache_Backend
+{
+}
+
+class Zend_Cache_Frontend_CustomNaming extends Zend_Cache_Core
+{
 }

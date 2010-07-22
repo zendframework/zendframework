@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon\Ec2;
+use Zend\Service\Amazon\Ec2\Instance;
+
+/**
  * Zend_Service_Amazon_Ec2_Instance test case.
  *
  * @category   Zend
@@ -32,13 +38,13 @@
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
  */
-class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
+class InstanceTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
      * @var Zend_Service_Amazon_Ec2_Instance
      */
-    private $Zend_Service_Amazon_Ec2_Instance;
+    private $instance;
 
     /**
      * Prepares the environment before running a test.
@@ -47,14 +53,14 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->Zend_Service_Amazon_Ec2_Instance = new Zend_Service_Amazon_Ec2_Instance('access_key', 'secret_access_key');
+        $this->instance = new Instance('access_key', 'secret_access_key');
 
-        $adapter = new Zend_Http_Client_Adapter_Test();
-        $client = new Zend_Http_Client(null, array(
+        $adapter = new \Zend\HTTP\Client\Adapter\Test();
+        $client = new \Zend\HTTP\Client(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Instance::setDefaultHttpClient($client);
+        Instance::setDefaultHTTPClient($client);
 
     }
 
@@ -65,18 +71,18 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
     {
         unset($this->adapter);
 
-        $this->Zend_Service_Amazon_Ec2_Instance = null;
+        $this->instance = null;
 
         parent::tearDown();
     }
 
     public function testConstants()
     {
-        $this->assertEquals('m1.small', Zend_Service_Amazon_Ec2_Instance::SMALL);
-        $this->assertEquals('m1.large', Zend_Service_Amazon_Ec2_Instance::LARGE);
-        $this->assertEquals('m1.xlarge', Zend_Service_Amazon_Ec2_Instance::XLARGE);
-        $this->assertEquals('c1.medium', Zend_Service_Amazon_Ec2_Instance::HCPU_MEDIUM);
-        $this->assertEquals('c1.xlarge', Zend_Service_Amazon_Ec2_Instance::HCPU_XLARGE);
+        $this->assertEquals('m1.small', Instance::SMALL);
+        $this->assertEquals('m1.large', Instance::LARGE);
+        $this->assertEquals('m1.xlarge', Instance::XLARGE);
+        $this->assertEquals('c1.medium', Instance::HCPU_MEDIUM);
+        $this->assertEquals('c1.xlarge', Instance::HCPU_XLARGE);
     }
 
     /**
@@ -99,7 +105,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "</ConfirmProductInstanceResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance->confirmProduct('254933287430', 'i-1bda7172');
+        $return = $this->instance->confirmProduct('254933287430', 'i-1bda7172');
 
         $this->assertEquals('254933287430', $return['ownerId']);
     }
@@ -120,7 +126,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "</ConfirmProductInstanceResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance->confirmProduct('254933287430', 'i-1bda7172');
+        $return = $this->instance->confirmProduct('254933287430', 'i-1bda7172');
 
         $this->assertFalse($return);
     }
@@ -177,7 +183,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "</DescribeInstancesResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance->describe('i-28a64341');
+        $return = $this->instance->describe('i-28a64341');
 
         $this->assertEquals('r-44a5402d', $return['instances'][0]['reservationId']);
         $this->assertEquals('default', $return['instances'][0]['groupSet'][0]);
@@ -236,7 +242,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "</DescribeInstancesResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse, true);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance->describe('i-28a64341', true);
+        $return = $this->instance->describe('i-28a64341', true);
 
         $this->assertEquals(0, count($return['instances']));
     }
@@ -290,7 +296,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "</DescribeInstancesResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance->describeByImageId('ami-6ea54007');
+        $return = $this->instance->describeByImageId('ami-6ea54007');
 
         $this->assertEquals('i-28a64341', $return[0]['instanceId']);
         $this->assertEquals('ami-6ea54007', $return[0]['imageId']);
@@ -313,9 +319,9 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
         );
 
         try {
-            $return = $this->Zend_Service_Amazon_Ec2_Instance->run($arrStart);
+            $return = $this->instance->run($arrStart);
             $this->fail('Exception should be thrown when no image id is passed into the run commmand');
-        } catch (Zend_Service_Amazon_Ec2_Exception $zsaee) {
+        } catch (\Zend\Service\Amazon\Ec2\Exception $zsaee) {
             $this->assertEquals('No Image Id Provided', $zsaee->getMessage());
         }
     }
@@ -409,7 +415,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
             'blockDeviceName'       => '/dev/sdv'
         );
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance->run($arrStart);
+        $return = $this->instance->run($arrStart);
 
         $this->assertEquals(3, count($return['instances']));
         $this->assertEquals('495219933132', $return['ownerId']);
@@ -479,7 +485,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
             'blockDeviceName'       => '/dev/sdv'
         );
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance->run($arrStart);
+        $return = $this->instance->run($arrStart);
 
         $arrGroups = array('default', 'web');
 
@@ -514,7 +520,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "</TerminateInstancesResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance->terminate('i-28a64341');
+        $return = $this->instance->terminate('i-28a64341');
 
         $this->assertEquals(1, count($return));
 
@@ -564,7 +570,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
 
         $arrInstanceIds = array('i-28a64341', 'i-21a64348');
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance->terminate($arrInstanceIds);
+        $return = $this->instance->terminate($arrInstanceIds);
 
         $this->assertEquals(2, count($return));
 
@@ -590,7 +596,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
         $this->adapter->setResponse($rawHttpResponse);
 
         $arrInstanceIds = array('i-28a64341', 'i-21a64348');
-        $return = $this->Zend_Service_Amazon_Ec2_Instance->reboot($arrInstanceIds);
+        $return = $this->instance->reboot($arrInstanceIds);
 
         $this->assertTrue($return);
     }
@@ -611,7 +617,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "</RebootInstancesResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance->reboot('i-28a64341');
+        $return = $this->instance->reboot('i-28a64341');
 
         $this->assertTrue($return);
     }
@@ -641,7 +647,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "</GetConsoleOutputResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance->consoleOutput('i-28a64341');
+        $return = $this->instance->consoleOutput('i-28a64341');
 
         $arrOutput = array(
             'instanceId'    => 'i-28a64341',
@@ -683,7 +689,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "</MonitorInstancesResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance->monitor('i-43a4412a');
+        $return = $this->instance->monitor('i-43a4412a');
 
         $arrReturn = array(array('instanceid' => 'i-43a4412a', 'monitorstate' => 'monitoring'));
         $this->assertSame($arrReturn, $return);
@@ -712,7 +718,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "</UnmonitorInstancesResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance->unmonitor('i-43a4412a');
+        $return = $this->instance->unmonitor('i-43a4412a');
 
         $arrReturn = array(array('instanceid' => 'i-43a4412a', 'monitorstate' => 'pending'));
         $this->assertSame($arrReturn, $return);

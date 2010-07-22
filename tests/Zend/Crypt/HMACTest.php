@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace ZendTest\Crypt;
-use Zend\Crypt\HMAC;
+use Zend\Crypt\Hmac as HMAC;
 
 /**
  * Outside the Internal Function tests, tests do not distinguish between hash and mhash

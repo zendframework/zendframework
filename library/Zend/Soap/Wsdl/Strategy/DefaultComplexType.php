@@ -72,6 +72,8 @@ class DefaultComplexType extends AbstractStrategy
         $this->getContext()->addType($type, $soapType);
 
 
+        $defaultProperties = $class->getDefaultProperties();
+
         $complexType = $dom->createElement('xsd:complexType');
         $complexType->setAttribute('name', $soapTypeName);
 
@@ -85,8 +87,14 @@ class DefaultComplexType extends AbstractStrategy
                  * node for describing other classes used as attribute types for current class
                  */
                 $element = $dom->createElement('xsd:element');
-                $element->setAttribute('name', $property->getName());
+                $element->setAttribute('name', $propertyName = $property->getName());
                 $element->setAttribute('type', $this->getContext()->getType(trim($matches[1][0])));
+
+                // If the default value is null, then this property is nillable.
+                if (is_null($defaultProperties[$propertyName])) {
+                    $element->setAttribute('nillable', 'true');
+                }
+
                 $all->appendChild($element);
             }
         }

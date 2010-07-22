@@ -261,4 +261,31 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $this->assertFalse($connected);
     }
 
+    /**
+     * @group ZF-9213
+     * @group ZF-10173
+     */
+    public function testTableRowsetIndexesValid()
+    {
+        $rowset = $this->_table['bugs']->fetchAll();
+        try {
+            $rowset[-1];
+            $this->fail();
+        } catch (Exception $e) {
+            $this->assertType('Zend_Db_Table_Rowset_Exception', $e);
+            $this->assertContains('Illegal index', $e->getMessage());
+        }
+
+        $this->assertTrue($rowset[0] instanceof Zend_Db_Table_Row);
+
+        try {
+            $row = $rowset[count($rowset) + 1];
+            $this->fail();
+        } catch (Exception $e) {
+            $this->assertType('Zend_Db_Table_Rowset_Exception', $e);
+            $this->assertContains('Illegal index', $e->getMessage());
+        }
+        $this->assertEquals(0, $rowset->key());
+    }
+
 }

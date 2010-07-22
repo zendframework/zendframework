@@ -268,7 +268,7 @@ class PluginLoader implements PrefixPathMapper
 
         if ($path != null) {
             $pos = array_search($path, $registry[$prefix]);
-            if (in_array($pos, array(null, false))) {
+            if (false === $pos) {
                 throw new PluginLoaderException('Prefix ' . $prefix . ' / Path ' . $path . ' was not found in the PluginLoader.');
             }
             unset($registry[$prefix][$pos]);

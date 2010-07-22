@@ -490,8 +490,10 @@ while (!$upload['done']) {
                 <listitem>
                     <para>
                         <emphasis>id</emphasis>: The ID of this upload. This ID identifies the
-                        upload within the extension. It is filled automatically. You should never
-                        change or give this value yourself.
+                        upload within the extension. You can set it to the value of the hidden key
+                        which identified the upload when initially calling
+                        <methodname>getProgress()</methodname>. Per default it is set to
+                        <emphasis>progress_key</emphasis>. You must not change the ID afterwards.
                     </para>
                 </listitem>
 
@@ -574,6 +576,17 @@ while (!$upload['done']) {
 }
 ]]></programlisting>
             </example>
+
+            <note>
+                <title>Knowing the file to get the progress from</title>
+
+                <para>
+                    The above example works when your upload identified is set to 'progress_key'.
+                    When you are using another identifier within your form you must give the used
+                    identifier as first parameter to <methodname>getProgress()</methodname> on the
+                    initial call.
+                </para>
+            </note>
         </sect3>
     </sect2>
 </sect1>

@@ -69,6 +69,7 @@ abstract class AbstractWriter implements Writer, Factory
         }
 
         $this->_filters[] = $filter;
+        return $this;
     }
 
     /**
@@ -98,6 +99,7 @@ abstract class AbstractWriter implements Writer, Factory
     public function setFormatter($formatter)
     {
         $this->_formatter = $formatter;
+        return $this;
     }
 
     /**

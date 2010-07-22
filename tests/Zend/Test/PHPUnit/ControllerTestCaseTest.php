@@ -283,6 +283,8 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
         $this->testCase->assertQuery('div#foo legend.bat', $body);
         $this->testCase->assertNotQuery('div#foo legend.bogus', $body);
         $this->testCase->assertQueryContentContains('legend.bat', 'La di da', $body);
+        $this->testCase->assertQueryContentContains('legend.numeric', 42, $body);
+        $this->testCase->assertNotQueryContentContains('legend.numeric', 31, $body);
         $this->testCase->assertNotQueryContentContains('legend.bat', 'La do da', $body);
         $this->testCase->assertQueryContentRegex('legend.bat', '/d[a|i]/i', $body);
         $this->testCase->assertNotQueryContentRegex('legend.bat', '/d[o|e]/i', $body);

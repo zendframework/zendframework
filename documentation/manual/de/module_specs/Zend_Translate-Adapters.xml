@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 22585 -->
 <!-- Reviewed: 21661 -->
 <sect1 id="zend.translate.adapter">
     <title>Adapter für Zend_Translate</title>
@@ -418,6 +418,9 @@ $translate = new Zend_Translate(
         'locale'  => 'en'
     )
 );
+
+// um den Cache irgendwo später im Code zu löschen
+Zend_Translate::clearCache();
 ]]></programlisting>
 
         <note>
@@ -428,5 +431,38 @@ $translate = new Zend_Translate(
                 <methodname>addTranslation()</methodname> Methode hinzugefügt wird.
             </para>
         </note>
+
+        <para>
+            Wenn der angehängte Cache Tags unterstützt kann man einen eigenen Tag Strin durch
+            Verwendung der Option <property>tag</property> setzen. Das erlaubt es nur den Cache von
+            dieser einzelnen Instanz von <classname>Zend_Translate</classname> zu löschen. Wenn man
+            diese Option nicht verwendet wird das Standardtag <classname>Zend_Translate</classname>
+            verwendet.
+        </para>
+
+        <para>
+            Bei Verwendung der Option <property>tag</property> muss man das verwendete Tag an
+            <methodname>clearCache()</methodname> übergeben um zu deklarieren welches Tag man
+            löschen will.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$cache = Zend_Cache::factory('Core',
+                             'File',
+                             $frontendOptions,
+                             $backendOptions);
+Zend_Translate::setCache($cache);
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translate.mo',
+        'locale'  => 'en',
+        'tag'     => 'MyTag'
+    )
+);
+
+// irgendwo später im Code
+Zend_Translate::clearCache('MyTag');
+]]></programlisting>
     </sect2>
 </sect1>

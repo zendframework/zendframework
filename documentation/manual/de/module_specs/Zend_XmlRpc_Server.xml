@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 22468 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
@@ -735,21 +735,21 @@ echo $server->handle($request);
                 <classname>DOMDocument</classname> der <acronym>PHP</acronym> Erweiterung
                 <code>ext/dom</code> um seine <acronym>XML</acronym> Ausgaben zu erstellen. Wärend
                 <code>ext/dom</code> auf vielen Hosts vorhanden ist, ist es nicht wirklich das
-                schnellste. Benchmarks haben gezeigt das <classname>XMLWriter</classname> von
+                schnellste. Benchmarks haben gezeigt das <classname>XmlWriter</classname> von
                 <code>ext/xmlwriter</code> schneller ist.
             </para>
 
             <para>
                 Wenn <code>ext/xmlwriter</code> auf dem eigenen Host vorhanden ist, kann ein
-                <classname>XMLWriter</classname>-basierter Generator ausgewählt werden um die
+                <classname>XmlWriter</classname>-basierter Generator ausgewählt werden um die
                 Performance Unterschiede auszunutzen.
             </para>
 
             <programlisting language="php"><![CDATA[
 require_once 'Zend/XmlRpc/Server.php';
-require_once 'Zend/XmlRpc/Generator/XMLWriter.php';
+require_once 'Zend/XmlRpc/Generator/XmlWriter.php';
 
-Zend_XmlRpc_Value::setGenerator(new Zend_XmlRpc_Generator_XMLWriter());
+Zend_XmlRpc_Value::setGenerator(new Zend_XmlRpc_Generator_XmlWriter());
 
 $server = new Zend_XmlRpc_Server();
 ...

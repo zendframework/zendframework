@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 22593 -->
 <sect2 id="zend.application.available-resources.view">
     <title>Zend_Application_Resource_View</title>
 
@@ -27,7 +27,7 @@
 
         <programlisting language="ini"><![CDATA[
 resources.view.encoding = "UTF-8"
-resources.view.basePath = APPLICATION_PATH "/views/scripts"
+resources.view.basePath = APPLICATION_PATH "/views/"
 ]]></programlisting>
     </example>
 </sect2>

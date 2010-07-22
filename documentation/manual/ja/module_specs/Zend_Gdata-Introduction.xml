@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20779 -->
+<!-- EN-Revision: 22511 -->
 <sect1 id="zend.gdata.introduction">
     <title>導入</title>
     <para>
@@ -51,7 +51,7 @@
                 <para>
                     <link linkend="zend.gdata.gapps">Google Provisioning</link>
                     は、Google Apps がホストするドメイン上の
-                    ユーザアカウントやニックネーム、そしてメーリングリストの
+                    ユーザアカウントやニックネーム、グループ、そしてメーリングリストの
                     作成、取得、更新、削除を行うものです。
                 </para>
             </listitem>

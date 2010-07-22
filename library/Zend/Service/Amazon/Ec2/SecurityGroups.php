@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\Ec2;
+
+/**
  * An Amazon EC2 interface to create, delete, describe, grand and revoke sercurity permissions.
  *
  * @uses       Zend_Service_Amazon_Ec2_Abstract
@@ -30,7 +35,11 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+<<<<<<< HEAD:library/Zend/Service/Amazon/Ec2/Securitygroups.php
 class Zend_Service_Amazon_Ec2_Securitygroups extends Zend_Service_Amazon_Ec2_AbstractService
+=======
+class SecurityGroups extends AbstractEc2
+>>>>>>> merges/farazdagi:library/Zend/Service/Amazon/Ec2/SecurityGroups.php
 {
     /**
      * Creates a new security group.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
+<!-- EN-Revision: 22397 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gbase">
     <title>Google Base verwenden</title>
@@ -328,7 +328,8 @@ $feed = $service->getGbaseSnippetFeed($query);
 
             <para>
                 Google Base Elemente können Element-Spezifische Attribute enthalten, wie
-                <code>&lt;g:main_ingredient&gt;</code> und <code>&lt;g:weight&gt;</code>.
+                <emphasis>&lt;g:main_ingredient&gt;</emphasis> und
+                <emphasis>&lt;g:weight&gt;</emphasis>.
             </para>
 
             <para>

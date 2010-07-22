@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\Ec2;
+
+/**
  * Amazon Ec2 Interface to allow easy creation of the Ec2 Components
  *
  * @uses       Zend_Loader
@@ -31,7 +36,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_Ec2
+class Ec2
 {
     /**
      * Factory method to fetch what you want to work with.
@@ -46,41 +51,41 @@ class Zend_Service_Amazon_Ec2
     {
         switch(strtolower($section)) {
             case 'keypair':
-                $class = 'Zend_Service_Amazon_Ec2_Keypair';
+                $class = '\Zend\Service\Amazon\Ec2\Keypair';
                 break;
             case 'eip':
                 // break left out
             case 'elasticip':
-                $class = 'Zend_Service_Amazon_Ec2_Elasticip';
+                $class = '\Zend\Service\Amazon\Ec2\ElasticIp';
                 break;
             case 'ebs':
-                $class = 'Zend_Service_Amazon_Ec2_Ebs';
+                $class = '\Zend\Service\Amazon\Ec2\Ebs';
                 break;
             case 'availabilityzones':
                 // break left out
             case 'zones':
-                $class = 'Zend_Service_Amazon_Ec2_Availabilityzones';
+                $class = '\Zend\Service\Amazon\Ec2\AvailabilityZones';
                 break;
             case 'ami':
                 // break left out
             case 'image':
-                $class = 'Zend_Service_Amazon_Ec2_Image';
+                $class = '\Zend\Service\Amazon\Ec2\Image';
                 break;
             case 'instance':
-                $class = 'Zend_Service_Amazon_Ec2_Instance';
+                $class = '\Zend\Service\Amazon\Ec2\Instance\Instance';
                 break;
             case 'security':
                 // break left out
             case 'securitygroups':
-                $class = 'Zend_Service_Amazon_Ec2_Securitygroups';
+                $class = '\Zend\Service\Amazon\Ec2\SecurityGroups';
                 break;
             default:
-                throw new Zend_Service_Amazon_Ec2_Exception('Invalid Section: ' . $section);
+                throw new Exception('Invalid Section: ' . $section);
                 break;
         }
 
         if (!class_exists($class)) {
-            Zend_Loader::loadClass($class);
+            \Zend\Loader::loadClass($class);
         }
         return new $class($key, $secret_key);
     }

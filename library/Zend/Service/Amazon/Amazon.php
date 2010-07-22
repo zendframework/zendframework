@@ -249,7 +249,7 @@ class Amazon
     {
         $signature = self::buildRawSignature($baseUri, $options);
         return base64_encode(
-            Crypt\HMAC::compute($secretKey, 'sha256', $signature, Crypt\HMAC::BINARY)
+            Crypt\Hmac::compute($secretKey, 'sha256', $signature, Crypt\Hmac::BINARY)
         );
     }
 

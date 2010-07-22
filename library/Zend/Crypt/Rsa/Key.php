@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Crypt\RSA;
+namespace Zend\Crypt\Rsa;
 
 /**
  * @uses       Zend\Crypt\Exception

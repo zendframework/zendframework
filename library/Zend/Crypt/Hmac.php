@@ -31,13 +31,13 @@ namespace Zend\Crypt;
  * @todo  Patch for refactoring failed tests (key block sizes >80 using internal algo)
  * @todo       Check if mhash() is a required alternative (will be PECL-only soon)
  * @uses       Zend\Crypt\Crypt
- * @uses       Zend\Crypt\HMACException
+ * @uses       Zend\Crypt\HmacException
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HMAC extends Crypt
+class Hmac extends Crypt
 {
 
     /**
@@ -108,7 +108,7 @@ class HMAC extends Crypt
     {
         // set the key
         if (!isset($key) || empty($key)) {
-            throw new HMACException('provided key is null or empty');
+            throw new HmacException('provided key is null or empty');
         }
         self::$_key = $key;
 
@@ -128,7 +128,7 @@ class HMAC extends Crypt
     protected static function _setHashAlgorithm($hash)
     {
         if (!isset($hash) || empty($hash)) {
-            throw new HMACException('provided hash string is null or empty');
+            throw new HmacException('provided hash string is null or empty');
         }
 
         $hash = strtolower($hash);
@@ -143,7 +143,7 @@ class HMAC extends Crypt
         }
 
         if ($hashSupported === false) {
-            throw new HMACException('hash algorithm provided is not supported on this PHP installation; please enable the hash or mhash extensions');
+            throw new HmacException('hash algorithm provided is not supported on this PHP installation; please enable the hash or mhash extensions');
         }
         self::$_hashAlgorithm = $hash;
     }

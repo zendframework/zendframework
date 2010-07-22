@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @subpackage Rsa
+ * @subpackage RSA
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,50 +23,47 @@
 /**
  * @namespace
  */
-namespace Zend\Crypt\RSA;
+namespace Zend\Crypt\Rsa;
 
 /**
  * @uses       Zend\Crypt\Exception
- * @uses       Zend\Crypt\RSA\Key
+ * @uses       Zend\Crypt\Rsa\Key
+ * @uses       Zend\Crypt\Rsa\PublicKey
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PublicKey extends Key
+class PrivateKey extends Key
 {
 
-    protected $_certificateString = null;
+    protected $_publicKey = null;
 
-    public function __construct($string)
+    public function __construct($pemString, $passPhrase = null)
     {
-        $this->_parse($string);
+        $this->_pemString = $pemString;
+        $this->_parse($passPhrase);
     }
 
     /**
-     * @param string $string
+     * @param string $passPhrase
      * @throws Zend\Crypt\Exception
      */
-    protected function _parse($string)
+    protected function _parse($passPhrase)
     {
-        if (preg_match("/^-----BEGIN CERTIFICATE-----/", $string)) {
-            $this->_certificateString = $string;
-        } else {
-            $this->_pemString = $string;
-        }
-
-        $result = openssl_get_publickey($string);
+        $result = openssl_get_privatekey($this->_pemString, $passPhrase);
         if (!$result) {
-            throw new \Zend\Crypt\Exception('Unable to load public key');
+            throw new \Zend\Crypt\Exception('Unable to load private key');
         }
-
         $this->_opensslKeyResource = $result;
         $this->_details = openssl_pkey_get_details($this->_opensslKeyResource);
     }
 
-    public function getCertificate()
+    public function getPublicKey()
     {
-        return $this->_certificateString;
+        if (is_null($this->_publicKey)) {
+            $this->_publicKey = new PublicKey($this->_details['key']);
+        }
+        return $this->_publicKey;
     }
-
 }

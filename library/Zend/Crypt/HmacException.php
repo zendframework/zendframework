@@ -13,7 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OAuth;
+ * @package    Zend_Crypt
+ * @subpackage Hmac
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -22,35 +23,15 @@
 /**
  * @namespace
  */
-namespace Zend\OAuth\Signature;
-use Zend\Crypt\HMAC as HMACEncryption;
+namespace Zend\Crypt;
 
 /**
- * @uses       Zend\Crypt\HMAC
- * @uses       Zend\OAuth\Signature\AbstractSignature
+ * @uses       Zend\Crypt\Exception
  * @category   Zend
- * @package    Zend_OAuth
+ * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HMAC extends AbstractSignature
+class HmacException extends Exception
 {
-    /**
-     * Sign a request
-     * 
-     * @param  array $params 
-     * @param  mixed $method 
-     * @param  mixed $url 
-     * @return string
-     */
-    public function sign(array $params, $method = null, $url = null)
-    {
-        $binaryHash = HMACEncryption::compute(
-            $this->_key,
-            $this->_hashAlgorithm,
-            $this->_getBaseSignatureString($params, $method, $url),
-            HMACEncryption::BINARY
-        );
-        return base64_encode($binaryHash);
-    }
 }

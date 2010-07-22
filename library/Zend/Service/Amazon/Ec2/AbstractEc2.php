@@ -242,7 +242,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
 
         $data .= implode('&', $arrData);
 
-        $hmac = Crypt\HMAC::compute($this->_getSecretKey(), 'SHA256', $data, Crypt\HMAC::BINARY);
+        $hmac = Crypt\Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Crypt\Hmac::BINARY);
 
         return base64_encode($hmac);
     }

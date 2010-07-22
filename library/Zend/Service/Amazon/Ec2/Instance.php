@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Service\Amazon\Ec2\Instance;
+namespace Zend\Service\Amazon\Ec2;
 
 /**
  * An Amazon EC2 interface that allows yout to run, terminate, reboot and describe Amazon
@@ -37,7 +37,7 @@ namespace Zend\Service\Amazon\Ec2\Instance;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Instance extends \Zend\Service\Amazon\Ec2\AbstractEc2
+class Instance extends AbstractEc2
 {
     /**
      * Constant for Small Instance TYpe
@@ -119,7 +119,7 @@ class Instance extends \Zend\Service\Amazon\Ec2\AbstractEc2
         $options = array_merge($_defaultOptions, $options);
 
         if(!isset($options['imageId'])) {
-            throw new \Zend\Service\Amazon\Ec2\Exception('No Image Id Provided');
+            throw new Exception('No Image Id Provided');
         }
 
 

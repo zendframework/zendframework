@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace ZendTest\Service\Amazon\Ec2;
-use Zend\Service\Amazon\Ec2\Instance;
+use Zend\Service\Amazon\Ec2\ReservedInstance;
 
 /**
  * Zend_Service_Amazon_Ec2_Instance_Reserved test case.
@@ -46,7 +46,7 @@ class InstanceReservedTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Zend_Service_Amazon_Ec2_Instance_Reserved
      */
-    private $Zend_Service_Amazon_Ec2_Instance_Reserved;
+    private $instance;
 
     /**
      * Prepares the environment before running a test.
@@ -54,14 +54,14 @@ class InstanceReservedTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->Zend_Service_Amazon_Ec2_Instance_Reserved = new Instance\Reserved('access_key', 'secret_access_key');
+        $this->instance = new ReservedInstance('access_key', 'secret_access_key');
 
         $adapter = new \Zend\HTTP\Client\Adapter\Test();
         $client = new \Zend\HTTP\Client(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Instance\Reserved::setDefaultHTTPClient($client);
+        ReservedInstance::setDefaultHTTPClient($client);
 
     }
 
@@ -71,7 +71,7 @@ class InstanceReservedTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         unset($this->adapter);
-        $this->Zend_Service_Amazon_Ec2_Instance_Reserved = null;
+        $this->instance = null;
         parent::tearDown();
     }
 
@@ -106,7 +106,7 @@ class InstanceReservedTest extends \PHPUnit_Framework_TestCase
                     ."</DescribeReservedInstancesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance_Reserved->describeInstances('4b2293b4-5813-4cc8-9ce3-1957fc1dcfc8');
+        $return = $this->instance->describeInstances('4b2293b4-5813-4cc8-9ce3-1957fc1dcfc8');
 
         $arrReturn = array(
             array(
@@ -155,7 +155,7 @@ class InstanceReservedTest extends \PHPUnit_Framework_TestCase
                     ."</DescribeReservedInstancesOfferingsResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance_Reserved->describeOfferings();
+        $return = $this->instance->describeOfferings();
 
         $arrReturn = array(
             array(
@@ -192,7 +192,7 @@ class InstanceReservedTest extends \PHPUnit_Framework_TestCase
                     ."</PurchaseReservedInstancesOfferingResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Instance_Reserved->purchaseOffering('4b2293b4-5813-4cc8-9ce3-1957fc1dcfc8');
+        $return = $this->instance->purchaseOffering('4b2293b4-5813-4cc8-9ce3-1957fc1dcfc8');
 
         $this->assertSame('4b2293b4-5813-4cc8-9ce3-1957fc1dcfc8', $return);
 

@@ -90,7 +90,7 @@ class Ec2Test extends \PHPUnit_Framework_TestCase
     public function testFactoryReturnsInstanceObject()
     {
         $object = Ec2\Ec2::factory('instance', 'access_key', 'secret_access_key');
-        $this->assertType('\Zend\Service\Amazon\Ec2\Instance\Instance', $object);
+        $this->assertType('\Zend\Service\Amazon\Ec2\Instance', $object);
     }
 
     public function testFactoryReturnsSecurityGroupsObject()

@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Service\Amazon\Ec2\Instance;
+namespace Zend\Service\Amazon\Ec2;
 use Zend\Crypt;
 
 /**
@@ -39,7 +39,7 @@ use Zend\Crypt;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Windows extends \Zend\Service\Amazon\Ec2\AbstractEc2
+class WindowsInstance extends AbstractEc2
 {
     /**
      * Bundles an Amazon EC2 instance running Windows
@@ -172,7 +172,7 @@ class Windows extends \Zend\Service\Amazon\Ec2\AbstractEc2
         $arrParams['conditions'][] = array('acl' => 'ec2-bundle-read');
         $arrParams['conditions'][] = array('starts-with', '$key', $prefix);
 
-        return base64_encode(\Zend\JSON\JSON::encode($arrParams));
+        return base64_encode(\Zend\Json\Json::encode($arrParams));
     }
 
     /**

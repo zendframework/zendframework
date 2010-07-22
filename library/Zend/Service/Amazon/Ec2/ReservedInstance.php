@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Service\Amazon\Ec2\Instance;
+namespace Zend\Service\Amazon\Ec2;
 
 /**
  * Allows you to interface with the reserved instances on Amazon Ec2
@@ -35,7 +35,7 @@ namespace Zend\Service\Amazon\Ec2\Instance;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Reserved extends \Zend\Service\Amazon\Ec2\AbstractEc2
+class ReservedInstance extends AbstractEc2
 {
     /**
      * Describes Reserved Instances that you purchased.

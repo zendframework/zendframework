@@ -11979,26 +11979,26 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/Amazon/Ec2/Instance/Reserved.php</originalRelativeFilePath>
       <originalClassName>Zend_Service_Amazon_Ec2_Instance_Reserved</originalClassName>
-      <newRelativeFilePath>Zend/Service/Amazon/Ec2/Instance/Reserved.php</newRelativeFilePath>
-      <newNamespace>Zend\Service\Amazon\Ec2\Instance</newNamespace>
-      <newClassName>Reserved</newClassName>
-      <newFullyQualifiedName>Zend\Service\Amazon\Ec2\Instance\Reserved</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Service/Amazon/Ec2/ReservedInstance.php</newRelativeFilePath>
+      <newNamespace>Zend\Service\Amazon\Ec2</newNamespace>
+      <newClassName>ReservedInstance</newClassName>
+      <newFullyQualifiedName>Zend\Service\Amazon\Ec2\ReservedInstance</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/Amazon/Ec2/Instance/Windows.php</originalRelativeFilePath>
       <originalClassName>Zend_Service_Amazon_Ec2_Instance_Windows</originalClassName>
-      <newRelativeFilePath>Zend/Service/Amazon/Ec2/Instance/Windows.php</newRelativeFilePath>
-      <newNamespace>Zend\Service\Amazon\Ec2\Instance</newNamespace>
-      <newClassName>Windows</newClassName>
-      <newFullyQualifiedName>Zend\Service\Amazon\Ec2\Instance\Windows</newFullyQualifiedName>
+      <newRelativeFilePath>Zend/Service/Amazon/Ec2/WindowsInstance.php</newRelativeFilePath>
+      <newNamespace>Zend\Service\Amazon\Ec2</newNamespace>
+      <newClassName>WindowsInstance</newClassName>
+      <newFullyQualifiedName>Zend\Service\Amazon\Ec2\WindowsInstance</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/Amazon/Ec2/Instance.php</originalRelativeFilePath>
       <originalClassName>Zend_Service_Amazon_Ec2_Instance</originalClassName>
-      <newRelativeFilePath>Zend/Service/Amazon/Ec2/Instance/Instance.php</newRelativeFilePath>
-      <newNamespace>Zend\Service\Amazon\Ec2\Instance</newNamespace>
+      <newRelativeFilePath>Zend/Service/Amazon/Ec2/Instance.php</newRelativeFilePath>
+      <newNamespace>Zend\Service\Amazon\Ec2</newNamespace>
       <newClassName>Instance</newClassName>
-      <newFullyQualifiedName>Zend\Service\Amazon\Ec2\Instance\Instance</newFullyQualifiedName>
+      <newFullyQualifiedName>Zend\Service\Amazon\Ec2\Instance</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Service/Amazon/Ec2/Keypair.php</originalRelativeFilePath>

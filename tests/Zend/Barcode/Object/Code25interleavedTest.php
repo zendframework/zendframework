@@ -43,7 +43,7 @@ class Code25interleavedTest extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('Code25interleaved', $this->_object->getType());
+        $this->assertSame('code25interleaved', $this->_object->getType());
     }
 
     public function testWithBearerBars()

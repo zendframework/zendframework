@@ -43,7 +43,7 @@ class LeitcodeTest extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('Leitcode', $this->_object->getType());
+        $this->assertSame('leitcode', $this->_object->getType());
     }
 
     public function testChecksum()

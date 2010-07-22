@@ -28,18 +28,6 @@ use Zend\Barcode;
 use Zend\Config;
 
 /**
- * Test helper
- */
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Config
- */
-
-/**
  * @category   Zend
  * @package    Zend_Barcode
  * @subpackage UnitTests
@@ -76,7 +64,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $this->assertEquals('', $this->_object->getFont());
         $object = $this->_getBarcodeObject();
         $this->assertEquals('my_static_font.ttf', $object->getFont());
-        Barcode\Barcode::setBarcodeFont('');
+        Barcode\Barcode::setBarcodeFont(null);
     }
 
     public function testStaticFontAsNumber()

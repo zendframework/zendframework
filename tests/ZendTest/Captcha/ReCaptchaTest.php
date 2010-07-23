@@ -49,7 +49,7 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
             unset($this->word);
         }
 
-        $this->element = new \Zend_Form_Element_Captcha(
+        $this->element = new \Zend\Form\Element\Captcha(
             'captchaR',
             array(
                 'captcha' => array(

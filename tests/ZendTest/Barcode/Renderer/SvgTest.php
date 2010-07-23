@@ -56,11 +56,9 @@ class SvgTest extends TestCommon
         $this->_renderer->setResource($svgResource, 10);
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testObjectSvgResource()
     {
+        $this->setExpectedException('Zend\Barcode\Renderer\Exception');
         $svgResource = new \StdClass();
         $this->_renderer->setResource($svgResource);
     }

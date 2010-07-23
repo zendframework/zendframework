@@ -60,11 +60,9 @@ class PostnetTest extends TestCommon
         $this->assertSame('0123455', $this->_object->getTextToDisplay());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Object\Exception
-     */
     public function testSetTextWithoutGoodNumberOfCharacters()
     {
+        $this->setExpectedException('\Zend\Barcode\Object\Exception');
         $this->_object->setText('1234');
         $this->_object->getText();
     }
@@ -95,11 +93,9 @@ class PostnetTest extends TestCommon
         $this->assertSame('0123455', $this->_object->getTextToDisplay());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Object\Exception
-     */
     public function testBadTextDetectedIfChecksumWished()
     {
+        $this->setExpectedException('\Zend\Barcode\Object\Exception');
         $this->_object->setText('a');
         $this->_object->setWithChecksum(true);
         $this->_object->getText();

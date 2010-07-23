@@ -93,11 +93,9 @@ class LeitcodeTest extends TestCommon
         $this->assertSame('00001.234.567.89 0', $this->_object->getTextToDisplay());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Object\Exception
-     */
     public function testBadTextDetectedIfChecksumWished()
     {
+        $this->setExpectedException('\Zend\Barcode\Object\Exception');
         $this->_object->setText('a');
         $this->_object->setWithChecksum(true);
         $this->_object->getText();

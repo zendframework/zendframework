@@ -54,11 +54,9 @@ class PdfTest extends TestCommon
         $this->_renderer->setResource($pdfResource, 10);
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testObjectPdfResource()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $pdfResource = new \StdClass();
         $this->_renderer->setResource($pdfResource);
     }

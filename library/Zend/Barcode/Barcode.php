@@ -25,6 +25,7 @@
 namespace Zend\Barcode;
 use Zend\Barcode\Renderer,
     Zend\Loader\PluginLoader,
+    Zend\Loader\ShortNameLocater,
     Zend\Config\Config,
     Zend;
 
@@ -76,7 +77,7 @@ class Barcode
      * @return \Zend\Form\Element
      * @throws \Zend\Form\Exception on invalid type
      */
-    public static function setPluginLoader(PrefixPathMapper $loader, $type)
+    public static function setPluginLoader(ShortNameLocater $loader, $type)
     {
         $type = strtoupper($type);
         switch ($type) {
@@ -95,7 +96,7 @@ class Barcode
      * 'decorator', 'filter', or 'validate' for $type.
      *
      * @param  string $type
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return \Zend\Loader\ShortNameLocater
      * @throws \Zend\Loader\Exception on invalid type.
      */
     public static function getPluginLoader($type)
@@ -112,42 +113,6 @@ class Barcode
                     );
                 }
                 return self::$_loaders[$type];
-            default:
-                throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
-        }
-    }
-
-    /**
-     * Add prefix path for plugin loader
-     *
-     * If no $type specified, assumes it is a base path for both filters and
-     * validators, and sets each according to the following rules:
-     * - decorators: $prefix = $prefix . '\Decorator'
-     * - filters: $prefix = $prefix . '\Filter'
-     * - validators: $prefix = $prefix . '\Validator'
-     *
-     * Otherwise, the path prefix is set on the appropriate plugin loader.
-     *
-     * @param  string $prefix
-     * @param  string $path
-     * @param  string $type
-     * @return \Zend\Form\Element
-     * @throws \Zend\Form\Exception for invalid type
-     */
-    public static function addPrefixPath($prefix, $path, $type = null)
-    {
-        $type = strtoupper($type);
-        switch ($type) {
-            case self::OBJECT:
-            case self::RENDERER:
-                self::getPluginLoader($type)->addPrefixPath($prefix, $path);
-                break;
-            case null:
-                $prefix = rtrim($prefix, '\\');
-                $path = rtrim($path, '/');
-                self::getPluginLoader(self::OBJECT  )->addPrefixPath($prefix . '\\Object',   $path . '/Object');
-                self::getPluginLoader(self::RENDERER)->addPrefixPath($prefix . '\\Renderer', $path . '/Renderer');
-                break;
             default:
                 throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
         }

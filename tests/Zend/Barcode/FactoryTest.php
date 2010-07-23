@@ -51,7 +51,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testMinimalFactory()
     {
         $this->_checkGDRequirement();
-
         $renderer = Barcode\Barcode::factory('code39');
         $this->assertTrue($renderer instanceof Renderer\Image);
         $this->assertTrue($renderer->getBarcode() instanceof Object\Code39);
@@ -67,7 +66,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithOptions()
     {
         $this->_checkGDRequirement();
-
         $options = array('barHeight' => 123);
         $renderer = Barcode\Barcode::factory('code39', 'image', $options);
         $this->assertEquals(123, $renderer->getBarcode()->getBarHeight());
@@ -76,7 +74,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithAutomaticExceptionRendering()
     {
         $this->_checkGDRequirement();
-
         $options = array('barHeight' => - 1);
         $renderer = Barcode\Barcode::factory('code39', 'image', $options);
         $this->assertTrue($renderer instanceof Renderer\Image);
@@ -98,7 +95,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithoutAutomaticRendererExceptionRendering()
     {
         $this->_checkGDRequirement();
-
         $options = array('imageType' => 'my');
         $renderer = Barcode\Barcode::factory('code39', 'image', array(), $options, false);
         $this->markTestIncomplete('Need to throw a configuration exception in renderer');
@@ -107,7 +103,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithZendConfig()
     {
         $this->_checkGDRequirement();
-
         $config = new Config(array('barcode'  => 'code39',
                                    'renderer' => 'image'));
         $renderer = Barcode\Barcode::factory($config);
@@ -119,7 +114,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithZendConfigAndObjectOptions()
     {
         $this->_checkGDRequirement();
-
         $config = new Config(array('barcode'       => 'code25' ,
                                    'barcodeParams' => array(
                                    'barHeight'     => 123)));
@@ -132,7 +126,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithZendConfigAndRendererOptions()
     {
         $this->_checkGDRequirement();
-
         $config = new Config(array('barcode'        => 'code25' ,
                                    'rendererParams' => array(
                                    'imageType'      => 'gif')));
@@ -145,7 +138,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithoutBarcodeWithAutomaticExceptionRender()
     {
         $this->_checkGDRequirement();
-
         $renderer = Barcode\Barcode::factory(null);
         $this->assertTrue($renderer instanceof Renderer\Image);
         $this->assertTrue($renderer->getBarcode() instanceof Object\Error);
@@ -154,7 +146,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithoutBarcodeWithAutomaticExceptionRenderWithZendConfig()
     {
         $this->_checkGDRequirement();
-
         $config = new Config(array('barcode' => null));
         $renderer = Barcode\Barcode::factory($config);
         $this->assertTrue($renderer instanceof Renderer\Image);
@@ -164,7 +155,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithExistingBarcodeObject()
     {
         $this->_checkGDRequirement();
-
         $barcode = new Object\Code25();
         $renderer = Barcode\Barcode::factory($barcode);
         $this->assertSame($barcode, $renderer->getBarcode());
@@ -227,14 +217,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testBarcodeObjectFactoryWithNamespace()
     {
-        Barcode\Barcode::addPrefixPath('ZendTest\Barcode\Object\TestAsset', __DIR__ . '/Object/TestAsset', Barcode\Barcode::OBJECT);
+        Barcode\Barcode::getPluginLoader(Barcode\Barcode::OBJECT)->addPrefixPath('ZendTest\Barcode\Object\TestAsset', __DIR__ . '/Object/TestAsset');
         $barcode = Barcode\Barcode::makeBarcode('barcodeNamespace');
         $this->assertTrue($barcode instanceof \ZendTest\Barcode\Object\TestAsset\BarcodeNamespace);
     }
 
     public function testBarcodeObjectFactoryWithNamespaceExtendStandardLibray()
     {
-        Barcode\Barcode::addPrefixPath('ZendTest\Barcode\Object\TestAsset', __DIR__ . '/Object/TestAsset', Barcode\Barcode::OBJECT);
+        Barcode\Barcode::getPluginLoader(Barcode\Barcode::OBJECT)->addPrefixPath('ZendTest\Barcode\Object\TestAsset', __DIR__ . '/Object/TestAsset');
         $barcode = Barcode\Barcode::makeBarcode('error');
         $this->assertTrue($barcode instanceof \ZendTest\Barcode\Object\TestAsset\Error);
     }
@@ -244,7 +234,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testBarcodeObjectFactoryWithNamespaceButWithoutExtendingObjectAbstract()
     {
-        Barcode\Barcode::addPrefixPath('ZendTest\Barcode\Object\TestAsset', __DIR__ . '/Object/TestAsset', Barcode\Barcode::OBJECT);
+        Barcode\Barcode::getPluginLoader(Barcode\Barcode::OBJECT)->addPrefixPath('ZendTest\Barcode\Object\TestAsset', __DIR__ . '/Object/TestAsset');
         $barcode = Barcode\Barcode::makeBarcode('barcodeNamespaceWithoutExtendingObjectAbstract');
     }
 
@@ -319,7 +309,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testBarcodeRendererFactoryWithNamespace()
     {
         $this->_checkGDRequirement();
-        Barcode\Barcode::addPrefixPath('ZendTest\Barcode\Renderer\TestAsset', __DIR__ . '/Renderer/TestAsset', Barcode\Barcode::RENDERER);
+        Barcode\Barcode::getPluginLoader(Barcode\Barcode::RENDERER)->addPrefixPath('ZendTest\Barcode\Renderer\TestAsset', __DIR__ . '/Renderer/TestAsset');
         $renderer = Barcode\Barcode::makeRenderer('rendererNamespace');
         $this->assertTrue($renderer instanceof \Zend\Barcode\Renderer);
     }
@@ -329,7 +319,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testBarcodeFactoryWithNamespaceButWithoutExtendingRendererAbstract()
     {
-        Barcode\Barcode::addPrefixPath('ZendTest\Barcode\Renderer\TestAsset', __DIR__ . '/Renderer/TestAsset', Barcode\Barcode::RENDERER);
+        Barcode\Barcode::getPluginLoader(Barcode\Barcode::RENDERER)->addPrefixPath('ZendTest\Barcode\Renderer\TestAsset', __DIR__ . '/Renderer/TestAsset');
         $renderer = Barcode\Barcode::makeRenderer('rendererNamespaceWithoutExtendingRendererAbstract');
     }
 

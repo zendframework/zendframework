@@ -24,7 +24,6 @@
  */
 namespace Zend\Barcode;
 use Zend\Barcode\Renderer,
-    Zend\Loader,
     Zend\Loader\PluginLoader,
     Zend\Config\Config,
     Zend;
@@ -61,7 +60,14 @@ class Barcode
      */
     protected static $_loaders = array();
 
-
+    /**
+     * Reset all plugin loaders
+     */
+    public static function resetPluginLoader()
+    {
+        self::$_loaders = array();
+    }
+    
     /**
      * Set plugin loader to use for validator or filter chain
      *
@@ -336,14 +342,6 @@ class Barcode
         }
 
         $rendererName = self::getPluginLoader(self::RENDERER)->load($renderer);
-
-        /*
-         * Load the renderer class.
-         * Important! This throws an exception if the specified class cannot be loaded.
-         */
-        if (!class_exists($rendererName, false)) {
-            Loader::loadClass($rendererName);
-        }
 
         /*
          * Create an instance of the barcode class.

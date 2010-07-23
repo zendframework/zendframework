@@ -45,6 +45,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         // Set timezone to avoid "It is not safe to rely on the system's timezone settings."
         // message if timezone is not set within php.ini
         date_default_timezone_set('GMT');
+        Barcode\Barcode::resetPluginLoader();
     }
 
     public function testMinimalFactory()
@@ -231,6 +232,13 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($barcode instanceof \ZendTest\Barcode\Object\TestAsset\BarcodeNamespace);
     }
 
+    public function testBarcodeObjectFactoryWithNamespaceExtendStandardLibray()
+    {
+        Barcode\Barcode::addPrefixPath('ZendTest\Barcode\Object\TestAsset', __DIR__ . '/Object/TestAsset', Barcode\Barcode::OBJECT);
+        $barcode = Barcode\Barcode::makeBarcode('error');
+        $this->assertTrue($barcode instanceof \ZendTest\Barcode\Object\TestAsset\Error);
+    }
+
     /**
      * @expectedException \Zend\Barcode\Exception
      */
@@ -251,7 +259,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testBarcodeRendererFactoryWithExistingBarcodeRenderer()
     {
         $this->_checkGDRequirement();
-
         $renderer = new Renderer\Image();
         $generatedBarcode = Barcode\Barcode::makeRenderer($renderer);
         $this->assertSame($renderer, $generatedBarcode);
@@ -260,7 +267,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testBarcodeRendererFactoryWithBarcodeAsString()
     {
         $this->_checkGDRequirement();
-
         $renderer = Barcode\Barcode::makeRenderer('image');
         $this->assertTrue($renderer instanceof Renderer\Image);
     }
@@ -277,7 +283,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testBarcodeRendererFactoryWithBarcodeAsStringAndConfigAsZendConfig()
     {
         $this->_checkGDRequirement();
-
         $config = new Config(array('imageType' => 'gif'));
         $renderer = Barcode\Barcode::makeRenderer('image', $config);
         $this->assertTrue($renderer instanceof Renderer\Image);
@@ -287,7 +292,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testBarcodeRendererFactoryWithBarcodeAsZendConfig()
     {
         $this->_checkGDRequirement();
-
         $config = new Config(array('renderer'       => 'image' ,
                                    'rendererParams' => array('imageType' => 'gif')));
         $renderer = Barcode\Barcode::makeRenderer($config);

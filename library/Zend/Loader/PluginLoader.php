@@ -31,12 +31,13 @@ namespace Zend\Loader;
  * @uses       \Zend\Loader
  * @uses       \Zend\Loader\PluginLoaderException
  * @uses       \Zend\Loader\PrefixPathMapper
+ * @uses       \Zend\Loader\ShortNameLocater
  * @category   Zend
  * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PluginLoader implements PrefixPathMapper
+class PluginLoader implements ShortNameLocater, PrefixPathMapper
 {
     /**
      * Class map cache file

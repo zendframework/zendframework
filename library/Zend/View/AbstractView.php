@@ -25,6 +25,7 @@
 namespace Zend\View;
 
 use Zend\Loader\PrefixPathMapper,
+    Zend\Loader\ShortNameLocater,
     Zend\Loader\PluginLoader;
 
 /**
@@ -461,11 +462,11 @@ abstract class AbstractView implements ViewEngine
     /**
      * Set plugin loader for a particular plugin type
      *
-     * @param  \Zend\Loader\PrefixPathMapper $loader
+     * @param  \Zend\Loader\ShortNameLocater $loader
      * @param  string $type
      * @return \Zend\View\AbstractView
      */
-    public function setPluginLoader(PrefixPathMapper $loader, $type)
+    public function setPluginLoader(ShortNameLocater $loader, $type)
     {
         $type = strtolower($type);
         if (!in_array($type, $this->_loaderTypes)) {
@@ -482,7 +483,7 @@ abstract class AbstractView implements ViewEngine
      * Retrieve plugin loader for a specific plugin type
      *
      * @param  string $type
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return \Zend\Loader\ShortNameLocater
      */
     public function getPluginLoader($type)
     {
@@ -1119,6 +1120,9 @@ abstract class AbstractView implements ViewEngine
     private function _addPluginPath($type, $classPrefix, array $paths, $namespaced = true)
     {
         $loader = $this->getPluginLoader($type);
+        if (!$loader instanceof PrefixPathMapper) {
+            return $this;
+        }
         foreach ($paths as $path) {
             $loader->addPrefixPath($classPrefix, $path, $namespaced);
         }

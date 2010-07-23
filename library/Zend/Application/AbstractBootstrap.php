@@ -26,6 +26,7 @@
 namespace Zend\Application;
 
 use Zend\Loader\PrefixPathMapper,
+    Zend\Loader\ShortNameLocater,
     Zend\Loader\PluginLoader;
 
 /**
@@ -79,7 +80,7 @@ abstract class AbstractBootstrap
     protected $_options = array();
 
     /**
-     * @var \Zend\Loader\PrefixPathMapper
+     * @var \Zend\Loader\ShortNameLocater
      */
     protected $_pluginLoader;
 
@@ -136,8 +137,10 @@ abstract class AbstractBootstrap
         if (array_key_exists('pluginpaths', $options)) {
             $pluginLoader = $this->getPluginLoader();
 
-            foreach ($options['pluginpaths'] as $prefix => $path) {
-                $pluginLoader->addPrefixPath($prefix, $path);
+            if ($pluginLoader instanceof PrefixPathMapper) {
+                foreach ($options['pluginpaths'] as $prefix => $path) {
+                    $pluginLoader->addPrefixPath($prefix, $path);
+                }
             }
             unset($options['pluginpaths']);
         }
@@ -407,10 +410,10 @@ abstract class AbstractBootstrap
     /**
      * Set plugin loader for loading resources
      *
-     * @param  \Zend\Loader\PrefixPathMapper $loader
+     * @param  \Zend\Loader\ShortNameLocater $loader
      * @return \Zend\Application\AbstractBootstrap
      */
-    public function setPluginLoader(PrefixPathMapper $loader)
+    public function setPluginLoader(ShortNameLocater $loader)
     {
         $this->_pluginLoader = $loader;
         return $this;
@@ -419,7 +422,7 @@ abstract class AbstractBootstrap
     /**
      * Get the plugin loader for resources
      *
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return \Zend\Loader\ShortNameLocater
      */
     public function getPluginLoader()
     {
@@ -428,7 +431,7 @@ abstract class AbstractBootstrap
                 'Zend\\Application\\Resource' => 'Zend/Application/Resource'
             );
 
-            $this->_pluginLoader = new PluginLoader($options);
+            $this->setPluginLoader(new PluginLoader($options));
         }
 
         return $this->_pluginLoader;

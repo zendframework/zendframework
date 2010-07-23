@@ -26,7 +26,8 @@ namespace Zend\Filter;
 
 use Zend\Config,
     Zend\Loader\PluginLoader,
-    Zend\Loader\PrefixPathMapper;
+    Zend\Loader\PrefixPathMapper,
+    Zend\Loader\ShortNameLocater;
 
 /**
  * Filter chain for string inflection
@@ -39,7 +40,7 @@ use Zend\Config,
 class Inflector extends AbstractFilter
 {
     /**
-     * @var \Zend\Loader\PrefixPathMapper
+     * @var \Zend\Loader\ShortNameLocater
      */
     protected $_pluginLoader = null;
 
@@ -101,12 +102,12 @@ class Inflector extends AbstractFilter
     /**
      * Retreive PluginLoader
      *
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return \Zend\Loader\ShortNameLocater
      */
     public function getPluginLoader()
     {
-        if (!$this->_pluginLoader instanceof PrefixPathMapper) {
-            $this->_pluginLoader = new PluginLoader(array('Zend\\Filter\\' => 'Zend/Filter/'), __CLASS__);
+        if (!$this->_pluginLoader instanceof ShortNameLocater) {
+            $this->_pluginLoader = new PluginLoader(array('Zend\Filter\\' => 'Zend/Filter/'), __CLASS__);
         }
 
         return $this->_pluginLoader;
@@ -115,10 +116,10 @@ class Inflector extends AbstractFilter
     /**
      * Set PluginLoader
      *
-     * @param \Zend\Loader\PrefixPathMapper $pluginLoader
+     * @param \Zend\Loader\ShortNameLocater $pluginLoader
      * @return \Zend\Filter\Inflector
      */
-    public function setPluginLoader(PrefixPathMapper $pluginLoader)
+    public function setPluginLoader(ShortNameLocater $pluginLoader)
     {
         $this->_pluginLoader = $pluginLoader;
         return $this;
@@ -185,7 +186,10 @@ class Inflector extends AbstractFilter
      */
     public function addFilterPrefixPath($prefix, $path)
     {
-        $this->getPluginLoader()->addPrefixPath($prefix, $path);
+        $pluginLoader = $this->getPluginLoader();
+        if ($pluginLoader instanceof PrefixPathMapper) {
+            $pluginLoader->addPrefixPath($prefix, $path);
+        }
         return $this;
     }
 

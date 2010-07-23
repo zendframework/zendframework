@@ -26,7 +26,8 @@
 namespace Zend\Amf\Parser;
 
 use Zend\Amf\Exception as AMFException,
-    Zend\Loader\PrefixPathMapper;
+    Zend\Loader\PrefixPathMapper,
+    Zend\Loader\ShortNameLocater;
 
 /**
  * Loads a local class and executes the instantiation of that class.
@@ -75,7 +76,7 @@ final class TypeLoader
     );
 
     /**
-     * @var \Zend\Loader\PrefixPathMapper
+     * @var \Zend\Loader\ShortNameLocater
      */
     protected static $_resourceLoader = null;
 
@@ -150,9 +151,9 @@ final class TypeLoader
     /**
      * Set loader for resource type handlers
      *
-     * @param \Zend\Loader\PrefixPathMapper $loader
+     * @param \Zend\Loader\ShortNameLocater $loader
      */
-    public static function setResourceLoader(PrefixPathMapper $loader)
+    public static function setResourceLoader(ShortNameLocater $loader)
     {
         self::$_resourceLoader = $loader;
     }
@@ -165,7 +166,7 @@ final class TypeLoader
      */
     public static function addResourceDirectory($prefix, $dir)
     {
-        if(self::$_resourceLoader) {
+        if(self::$_resourceLoader && self::$_resourceLoader instanceof PrefixPathMapper) {
             self::$_resourceLoader->addPrefixPath($prefix, $dir);
         }
     }

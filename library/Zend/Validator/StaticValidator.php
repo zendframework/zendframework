@@ -39,17 +39,17 @@ use Zend\Loader;
 class StaticValidator
 {
     /**
-     * @var Zend\Loader\PrefixPathMapper
+     * @var Zend\Loader\ShortNameLocater
      */
     protected static $_pluginLoader;
 
     /**
      * Set plugin loader to use for locating validators
      * 
-     * @param  Loader\PrefixPathMapper|null $loader 
+     * @param  Loader\ShortNameLocater|null $loader 
      * @return void
      */
-    public static function setPluginLoader(Loader\PrefixPathMapper $loader = null)
+    public static function setPluginLoader(Loader\ShortNameLocater $loader = null)
     {
         self::$_pluginLoader = $loader;
     }
@@ -57,7 +57,7 @@ class StaticValidator
     /**
      * Get plugin loader for locating validators
      * 
-     * @return Loader\PrefixPathMapper
+     * @return Loader\ShortNameLocater
      */
     public static function getPluginLoader()
     {

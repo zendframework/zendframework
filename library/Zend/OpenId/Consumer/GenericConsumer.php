@@ -14,8 +14,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenID
- * @subpackage Zend_OpenID_Consumer
+ * @package    Zend_OpenId
+ * @subpackage Zend_OpenId_Consumer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -39,8 +39,8 @@ use Zend\OpenId\Extension;
  * @uses       Zend\OpenId\Extension
  * @uses       Zend\Session\Container
  * @category   Zend
- * @package    Zend_OpenID
- * @subpackage Zend_OpenID_Consumer
+ * @package    Zend_OpenId
+ * @subpackage Zend_OpenId_Consumer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -477,7 +477,7 @@ class GenericConsumer
                     array(
                         'maxredirects' => 4,
                         'timeout'      => 15,
-                        'useragent'    => 'Zend_OpenID'
+                        'useragent'    => 'Zend_OpenId'
                     )
                 );
         } else {

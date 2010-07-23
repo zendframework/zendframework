@@ -27,6 +27,7 @@ namespace Zend\Controller\Action;
 
 use Zend\Controller\Action,
     Zend\Loader\PrefixPathMapper,
+    Zend\Loader\ShortNameLocater,
     Zend\Loader\PluginLoaderException,
     Zend\Loader\PluginLoader;
 
@@ -51,7 +52,7 @@ class HelperBroker
     protected $_actionController;
 
     /**
-     * @var \Zend\Loader\PrefixPathMapper
+     * @var \Zend\Loader\ShortNameLocater
      */
     protected static $_pluginLoader;
 
@@ -65,14 +66,11 @@ class HelperBroker
     /**
      * Set PluginLoader for use with broker
      *
-     * @param  \Zend\Loader\PrefixPathMapper $loader
+     * @param  \Zend\Loader\ShortNameLocater $loader
      * @return void
      */
-    public static function setPluginLoader($loader)
+    public static function setPluginLoader(ShortNameLocater $loader = null)
     {
-        if ((null !== $loader) && (!$loader instanceof PrefixPathMapper)) {
-            throw new Exception('Invalid plugin loader provided to HelperBroker');
-        }
         self::$_pluginLoader = $loader;
     }
 
@@ -85,7 +83,7 @@ class HelperBroker
     /**
      * Retrieve PluginLoader
      *
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return \Zend\Loader\ShortNameLocater
      */
     public static function getPluginLoader()
     {
@@ -104,9 +102,13 @@ class HelperBroker
      */
     static public function addPrefix($prefix)
     {
+        $loader = self::getPluginLoader();
+        if (!$loader instanceof PrefixPathMapper) {
+            return;
+        }
         $prefix = rtrim($prefix, '\\');
         $path   = str_replace('\\', DIRECTORY_SEPARATOR, $prefix);
-        self::getPluginLoader()->addPrefixPath($prefix, $path);
+        $loader->addPrefixPath($prefix, $path);
     }
 
     /**
@@ -118,7 +120,11 @@ class HelperBroker
      */
     static public function addPath($path, $prefix = 'Zend\Controller\Action\Helper')
     {
-        self::getPluginLoader()->addPrefixPath($prefix, $path);
+        $loader = self::getPluginLoader();
+        if (!$loader instanceof PrefixPathMapper) {
+            return;
+        }
+        $loader->addPrefixPath($prefix, $path);
     }
 
     /**

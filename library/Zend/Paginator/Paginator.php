@@ -25,6 +25,8 @@
 namespace Zend\Paginator;
 
 use Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathMapper,
+    Zend\Loader\ShortNameLocater,
     Zend\View,
     Zend\Json;
 
@@ -57,7 +59,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Adapter plugin loader
      *
-     * @var \Zend\Loader\PrefixPathMapper
+     * @var \Zend\Loader\ShortNameLocater
      */
     protected static $_adapterLoader = null;
 
@@ -85,7 +87,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Scrolling style plugin loader
      *
-     * @var \Zend\Loader\PrefixPathMapper
+     * @var \Zend\Loader\ShortNameLocater
      */
     protected static $_scrollingStyleLoader = null;
 
@@ -287,7 +289,7 @@ class Paginator implements \Countable, \IteratorAggregate
 
             $pluginLoader = self::getAdapterLoader();
 
-            if (null !== $prefixPaths) {
+            if (null !== $prefixPaths && $pluginLoader instanceof PrefixPathMapper) {
                 foreach ($prefixPaths as $prefix => $path) {
                     $pluginLoader->addPrefixPath($prefix, $path);
                 }
@@ -300,16 +302,27 @@ class Paginator implements \Countable, \IteratorAggregate
     }
 
     /**
+     * Set the adapter loader
+     * 
+     * @param  PluginLoader\ShortNameLocater $loader 
+     * @return void
+     */
+    public static function setAdapterLoader(ShortNameLocater $loader)
+    {
+        self::$_adapterLoader = $loader;
+    }
+
+    /**
      * Returns the adapter loader.  If it doesn't exist it's created.
      *
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return \Zend\Loader\ShortNameLocater
      */
     public static function getAdapterLoader()
     {
         if (self::$_adapterLoader === null) {
-            self::$_adapterLoader = new PluginLoader(
+            self::setAdapterLoader(new PluginLoader(
                 array('Zend\Paginator\Adapter' => 'Zend/Paginator/Adapter')
-            );
+            ));
         }
 
         return self::$_adapterLoader;
@@ -397,7 +410,7 @@ class Paginator implements \Countable, \IteratorAggregate
      * Returns the scrolling style loader.  If it doesn't exist it's
      * created.
      *
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return \Zend\Loader\ShortNameLocater
      */
     public static function getScrollingStyleLoader()
     {

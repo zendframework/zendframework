@@ -94,7 +94,7 @@ class Table
     /**
      * Plugin loader for decorators
      *
-     * @var Zend\Loader\PrefixPathMapper
+     * @var Zend\Loader\ShortNameLocater
      */
     protected $_pluginLoader = null;
 
@@ -259,7 +259,7 @@ class Table
     /**
      * Get the plugin loader for decorators
      *
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return \Zend\Loader\ShortNameLocater
      */
     public function getPluginLoader()
     {

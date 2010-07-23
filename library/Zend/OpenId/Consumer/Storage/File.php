@@ -14,8 +14,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenID
- * @subpackage Zend_OpenID_Consumer
+ * @package    Zend_OpenId
+ * @subpackage Zend_OpenId_Consumer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -33,8 +33,8 @@ use Zend\OpenId;
  * @uses       Zend\OpenId\Consumer\Storage\AbstractStorage
  * @uses       Zend\OpenId\Exception
  * @category   Zend
- * @package    Zend_OpenID
- * @subpackage Zend_OpenID_Consumer
+ * @package    Zend_OpenId
+ * @subpackage Zend_OpenId_Consumer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

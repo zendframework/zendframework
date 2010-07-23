@@ -24,6 +24,7 @@
  */
 namespace Zend\Feed\Writer;
 use Zend\Loader\PrefixPathMapper,
+    Zend\Loader\ShortNameLocater,
     Zend\Loader\PluginLoader,
     Zend\Loader\PluginLoaderException;
 
@@ -67,7 +68,7 @@ class Writer
     /**
      * PluginLoader instance used by component
      *
-     * @var \Zend\Loader\PrefixPathMapper
+     * @var \Zend\Loader\ShortNameLocater
      */
     protected static $_pluginLoader = null;
 
@@ -95,9 +96,9 @@ class Writer
     /**
      * Set plugin loader for use with Extensions
      *
-     * @param  \Zend\Loader\PrefixPathMapper
+     * @param  \Zend\Loader\ShortNameLocater
      */
-    public static function setPluginLoader(PrefixPathMapper $loader)
+    public static function setPluginLoader(ShortNameLocater $loader)
     {
         self::$_pluginLoader = $loader;
     }
@@ -105,7 +106,7 @@ class Writer
     /**
      * Get plugin loader for use with Extensions
      *
-     * @return  \Zend\Loader\PrefixPathMapper
+     * @return  \Zend\Loader\ShortNameLocater
      */
     public static function getPluginLoader()
     {
@@ -126,9 +127,13 @@ class Writer
      */
     public static function addPrefixPath($prefix, $path)
     {
+        $pluginLoader = self::getPluginLoader();
+        if (!$pluginLoader instanceof PrefixPathMapper)  {
+            return;
+        }
         $prefix = rtrim($prefix, '\\');
         $path   = rtrim($path, DIRECTORY_SEPARATOR);
-        self::getPluginLoader()->addPrefixPath($prefix, $path);
+        $pluginLoader->addPrefixPath($prefix, $path);
     }
 
     /**
@@ -139,6 +144,10 @@ class Writer
      */
     public static function addPrefixPaths(array $spec)
     {
+        $pluginLoader = self::getPluginLoader();
+        if (!$pluginLoader instanceof PrefixPathMapper)  {
+            return;
+        }
         if (isset($spec['prefix']) && isset($spec['path'])) {
             self::addPrefixPath($spec['prefix'], $spec['path']);
         }

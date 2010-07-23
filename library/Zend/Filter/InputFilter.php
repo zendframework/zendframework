@@ -26,6 +26,7 @@ namespace Zend\Filter;
 
 use Zend\Loader\PluginLoader,
     Zend\Loader\PrefixPathMapper,
+    Zend\Loader\ShortNameLocater,
     Zend\Registry,
     Zend\Translator\Adapter as TranslationAdapter,
     Zend\Translator\Translator as Translator,
@@ -208,8 +209,10 @@ class InputFilter
      */
     public function addFilterPrefixPath($prefix, $path)
     {
-        $this->getPluginLoader(self::FILTER)->addPrefixPath($prefix, $path);
-
+        $pluginLoader = $this->getPluginLoader(self::FILTER);
+        if ($pluginLoader instanceof PrefixPathMapper) {
+            $pluginLoader->addPrefixPath($prefix, $path);
+        }
         return $this;
     }
 
@@ -222,20 +225,22 @@ class InputFilter
      */
     public function addValidatorPrefixPath($prefix, $path)
     {
-        $this->getPluginLoader(self::VALIDATOR)->addPrefixPath($prefix, $path);
-
+        $pluginLoader = $this->getPluginLoader(self::VALIDATOR);
+        if ($pluginLoader instanceof PrefixPathMapper) {
+            $pluginLoader->addPrefixPath($prefix, $path);
+        }
         return $this;
     }
 
     /**
      * Set plugin loaders for use with decorators and elements
      *
-     * @param  Zend\Loader\PrefixPathMapper $loader
+     * @param  Zend\Loader\ShortNameLocater $loader
      * @param  string $type 'filter' or 'validate'
      * @return Zend\Filter\InputFilter
      * @throws Zend\Filter\Exception on invalid type
      */
-    public function setPluginLoader(PrefixPathMapper $loader, $type)
+    public function setPluginLoader(ShortNameLocater $loader, $type)
     {
         $type = strtolower($type);
         switch ($type) {
@@ -261,7 +266,7 @@ class InputFilter
      * created.
      *
      * @param  string $type 'filter' or 'validate'
-     * @return Zend\Loader\PrefixPathMapper
+     * @return Zend\Loader\ShortNameLocater
      * @throws Zend\Filter\Exception on invalid type
      */
     public function getPluginLoader($type)

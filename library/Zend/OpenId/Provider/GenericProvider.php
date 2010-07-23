@@ -14,8 +14,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenID
- * @subpackage Zend_OpenID_Provider
+ * @package    Zend_OpenId
+ * @subpackage Zend_OpenId_Provider
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -37,8 +37,8 @@ use Zend\Controller\Response;
  * @uses       Zend\OpenId\Provider\Storage\File
  * @uses       Zend\OpenId\Provider\User\Session
  * @category   Zend
- * @package    Zend_OpenID
- * @subpackage Zend_OpenID_Provider
+ * @package    Zend_OpenId
+ * @subpackage Zend_OpenId_Provider
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

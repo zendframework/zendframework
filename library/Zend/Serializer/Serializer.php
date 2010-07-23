@@ -25,7 +25,7 @@
 namespace Zend\Serializer;
 
 use Zend\Loader\PluginLoader,
-    Zend\Loader\PrefixPathMapper;
+    Zend\Loader\ShortNameLocater;
 
 /**
  * @uses       Zend\Loader\PluginLoader
@@ -40,7 +40,7 @@ class Serializer
     /**
      * Plugin loader to load adapter.
      *
-     * @var null|Zend\Loader\PrefixPathMapper
+     * @var null|Zend\Loader\ShortNameLocater
      */
     private static $_adapterLoader = null;
 
@@ -83,7 +83,7 @@ class Serializer
     /**
      * Get the adapter plugin loader.
      *
-     * @return Zend\Loader\PrefixPathMapper
+     * @return Zend\Loader\ShortNameLocater
      */
     public static function getAdapterLoader() 
     {
@@ -96,10 +96,10 @@ class Serializer
     /**
      * Change the adapter plugin load.
      *
-     * @param  Zend\Loader\PrefixPathMapper $pluginLoader
+     * @param  Zend\Loader\ShortNameLocater $pluginLoader
      * @return void
      */
-    public static function setAdapterLoader(PrefixPathMapper $pluginLoader) 
+    public static function setAdapterLoader(ShortNameLocater $pluginLoader) 
     {
         self::$_adapterLoader = $pluginLoader;
     }
@@ -107,7 +107,7 @@ class Serializer
     /**
      * Resets the internal adapter plugin loader
      *
-     * @return Zend\Loader\PrefixPathMapper
+     * @return Zend\Loader\ShortNameLocater
      */
     public static function resetAdapterLoader()
     {

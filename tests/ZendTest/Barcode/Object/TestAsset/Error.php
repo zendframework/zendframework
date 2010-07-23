@@ -1,5 +1,5 @@
 <?php
-namespace ZendTest\Barcode\Object\Namespace1;
+namespace ZendTest\Barcode\Object\TestAsset;
 
 class Error extends \Zend\Barcode\Object\Error
 {

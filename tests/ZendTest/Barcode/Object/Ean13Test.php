@@ -43,7 +43,7 @@ class Ean13Test extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('Ean13', $this->_object->getType());
+        $this->assertSame('ean13', $this->_object->getType());
     }
 
     public function testChecksum()

@@ -43,7 +43,7 @@ class Code25Test extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('Code25', $this->_object->getType());
+        $this->assertSame('code25', $this->_object->getType());
     }
 
     public function testChecksum()

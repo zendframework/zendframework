@@ -60,7 +60,7 @@ class Barcode
      * @var array
      */
     protected static $_loaders = array();
-    
+
     /**
      * Set plugin loader to use for validator or filter chain
      *

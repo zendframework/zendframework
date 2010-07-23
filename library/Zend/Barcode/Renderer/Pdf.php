@@ -160,7 +160,7 @@ class Pdf extends AbstractRenderer
         $page->setFillColor($color);
         $page->setLineWidth($this->_moduleSize);
 
-        $fillType = ($filled) 
+        $fillType = ($filled)
                   ? Page::SHAPE_DRAW_FILL_AND_STROKE
                   : Page::SHAPE_DRAW_STROKE;
 

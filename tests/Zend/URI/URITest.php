@@ -771,12 +771,16 @@ class URITest extends \PHPUnit_Framework_TestCase
     
     static public function invalidHostProvider()
     {
-        
+        return array(
+            array('with space'),
+            array('[]'),
+            array('[12:34'),
+        );
     }
     
     /**
      * Return all methods that are expected to return the same object they
-     * are called on, to test the fluent interface
+     * are called on, to test that the fluent interface is not broken
      * 
      * @return array
      */

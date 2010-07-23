@@ -25,7 +25,7 @@
  */
 namespace Zend\Application;
 
-use Zend\Loader\PrefixPathMapper;
+use Zend\Loader\ShortNameLocater;
 
 /**
  * Interface for bootstrap classes that utilize resource plugins
@@ -88,15 +88,15 @@ interface ResourceBootstrapper
     /**
      * Set plugin loader to use to fetch resources
      *
-     * @param  \Zend\Loader\PrefixPathMapper $loader
+     * @param  \Zend\Loader\ShortNameLocater $loader
      * @return \Zend\Application\ResourceBootstrapper
      */
-    public function setPluginLoader(PrefixPathMapper $loader);
+    public function setPluginLoader(ShortNameLocater $loader);
 
     /**
      * Retrieve plugin loader for resources
      *
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return \Zend\Loader\ShortNameLocater
      */
     public function getPluginLoader();
 }

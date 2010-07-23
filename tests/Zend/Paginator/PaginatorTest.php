@@ -938,8 +938,8 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testArrayAccessInClassSerializableLimitIterator()
     {
-        $iterator  = new ArrayIterator(array('zf9396', 'foo', null));
-        $paginator = Zend_Paginator::factory($iterator);
+        $iterator  = new \ArrayIterator(array('zf9396', 'foo', null));
+        $paginator = Paginator\Paginator::factory($iterator);
 
         $this->assertEquals('zf9396', $paginator->getItem(1));
 

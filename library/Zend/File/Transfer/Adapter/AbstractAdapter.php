@@ -27,6 +27,7 @@ namespace Zend\File\Transfer\Adapter;
 use Zend\File\Transfer,
     Zend\Loader\PluginLoader,
     Zend\Loader\PrefixPathMapper,
+    Zend\Loader\ShortNameLocater,
     Zend\Validator,
     Zend\Filter;
 
@@ -47,7 +48,7 @@ abstract class AbstractAdapter
      * Plugin loader Constants
      */
     const FILTER    = 'FILTER';
-    const VALIDATOR  = 'VALIDATOR';
+    const VALIDATOR = 'VALIDATOR';
     /**@-*/
 
     /**
@@ -196,7 +197,7 @@ abstract class AbstractAdapter
      * @return \Zend\File\Transfer\Adapter\AbstractAdapter
      * @throws \Zend\File\Transfer\Exception on invalid type
      */
-    public function setPluginLoader(PrefixPathMapper $loader, $type)
+    public function setPluginLoader(ShortNameLocater $loader, $type)
     {
         $type = strtoupper($type);
         switch ($type) {
@@ -216,7 +217,7 @@ abstract class AbstractAdapter
      * 'filter' or 'validator' for $type.
      *
      * @param  string $type
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return \Zend\Loader\ShortNameLocater
      * @throws \Zend\File\Transfer\Exception on invalid type.
      */
     public function getPluginLoader($type)
@@ -229,16 +230,18 @@ abstract class AbstractAdapter
                 $pathSegment   = $prefixSegment;
                 if (!isset($this->_loaders[$type])) {
                     $paths         = array(
-                        'Zend\\' . $prefixSegment . '\\'     => 'Zend/' . $pathSegment . '/',
-                        'Zend\\' . $prefixSegment . '\\File' => 'Zend/' . $pathSegment . '/File',
+                        'Zend\\' . $prefixSegment . '\\'    => 'Zend/' . $pathSegment . '/',
+                        'Zend\\' . $prefixSegment . '\File' => 'Zend/' . $pathSegment . '/File',
                     );
 
                     $this->_loaders[$type] = new PluginLoader($paths);
                 } else {
                     $loader = $this->_loaders[$type];
-                    $prefix = 'Zend\\' . $prefixSegment . '\\File\\';
-                    if (!$loader->getPaths($prefix)) {
-                        $loader->addPrefixPath($prefix, str_replace('_', '/', $prefix));
+                    if ($loader instanceof PrefixPathMapper) {
+                        $prefix = 'Zend\\' . $prefixSegment . '\File\\';
+                        if (!$loader->getPaths($prefix)) {
+                            $loader->addPrefixPath($prefix, str_replace('_', '/', $prefix));
+                        }
                     }
                 }
                 return $this->_loaders[$type];
@@ -265,22 +268,26 @@ abstract class AbstractAdapter
      */
     public function addPrefixPath($prefix, $path, $type = null)
     {
-        $type = strtoupper($type);
+        $type = (null === $type) ? null : strtoupper($type);
         switch ($type) {
             case self::FILTER:
             case self::VALIDATOR:
                 $loader = $this->getPluginLoader($type);
-                $loader->addPrefixPath($prefix, $path);
+                if ($loader instanceof PrefixPathMapper) {
+                    $loader->addPrefixPath($prefix, $path);
+                }
                 return $this;
             case null:
                 $prefix = rtrim($prefix, '\\');
                 $path   = rtrim($path, DIRECTORY_SEPARATOR);
                 foreach (array(self::FILTER, self::VALIDATOR) as $type) {
-                    $cType        = ucfirst(strtolower($type));
-                    $pluginPath   = $path . DIRECTORY_SEPARATOR . $cType . DIRECTORY_SEPARATOR;
-                    $pluginPrefix = $prefix . '\\' . $cType;
                     $loader       = $this->getPluginLoader($type);
-                    $loader->addPrefixPath($pluginPrefix, $pluginPath);
+                    if ($loader instanceof PrefixPathMapper) {
+                        $cType        = ucfirst(strtolower($type));
+                        $pluginPath   = $path . DIRECTORY_SEPARATOR . $cType . DIRECTORY_SEPARATOR;
+                        $pluginPrefix = $prefix . '\\' . $cType;
+                        $loader->addPrefixPath($pluginPrefix, $pluginPath);
+                    }
                 }
                 return $this;
             default:

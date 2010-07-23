@@ -29,16 +29,6 @@ use Zend\Loader\Autoloader,
     ZendTest\Application\TestAsset\ZfAppBootstrap;
 
 /**
- * Zend_Cache_Backend
- */
-require_once 'Zend/Cache/Backend.php';
-
-/**
- * Zend_Cache_Core
- */
-require_once 'Zend/Cache/Core.php';
-
-/**
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
@@ -192,10 +182,10 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
                 ),
             ),
         );
-        $resource = new Zend_Application_Resource_Cachemanager($options);
+        $resource = new Cachemanager($options);
         $manager = $resource->init();
         $cache = $manager->getCache('foo')->getBackend();
-        $this->assertTrue($cache instanceof Zend_Cache_Backend_ZendServer_Disk);
+        $this->assertTrue($cache instanceof \Zend\Cache\Backend\ZendServer\Disk);
     }
 
     /**
@@ -203,29 +193,26 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testCustomFrontendBackendNaming()
     {
+        $incPath = get_include_path();
+        set_include_path(implode(PATH_SEPARATOR, array(
+            __DIR__ . '/../../Cache/TestAsset',
+            $incPath,
+        )));
         $options = array(
             'zf9737' => array(
                 'frontend' => array(
                     'name'                 => 'custom-naming',
                     'customFrontendNaming' => false),
-                'backend' => array('name'                    => 'Zend_Cache_Backend_Custom_Naming',
+                'backend' => array('name'                    => 'ZendTest\Cache\TestAsset\Backend\CustomNaming',
                                    'customBackendNaming'     => true),
                 'frontendBackendAutoload' => true)
         );
 
-        $resource = new Zend_Application_Resource_Cachemanager($options);
+        $resource = new Cachemanager($options);
         $manager  = $resource->init();
         $cache    = $manager->getCache('zf9737');
-        $this->assertTrue($cache->getBackend() instanceof Zend_Cache_Backend_Custom_Naming);
-        $this->assertTrue($cache instanceof Zend_Cache_Frontend_CustomNaming);
+        $this->assertTrue($cache->getBackend() instanceof \ZendTest\Cache\TestAsset\Backend\CustomNaming);
+        $this->assertTrue($cache instanceof \Zend\Cache\Frontend\CustomNaming);
+        set_include_path($incPath);
     }
-}
-
-
-class Zend_Cache_Backend_Custom_Naming extends Zend_Cache_Backend
-{
-}
-
-class Zend_Cache_Frontend_CustomNaming extends Zend_Cache_Core
-{
 }

@@ -27,7 +27,8 @@ namespace Zend\Feed\Reader;
 use Zend\Http,
     Zend\Loader\PluginLoader,
     Zend\Loader\PluginLoaderException,
-    Zend\Loader\PrefixPathMapper;
+    Zend\Loader\PrefixPathMapper,
+    Zend\Loader\ShortNameLocater;
 
 /**
  * @uses \Zend\Feed\Feed
@@ -508,9 +509,9 @@ class Reader
     /**
      * Set plugin loader for use with Extensions
      *
-     * @param  Zend\Loader\PrefixPathMapper $loader
+     * @param  Zend\Loader\ShortNameLocater $loader
      */
-    public static function setPluginLoader(PrefixPathMapper $loader)
+    public static function setPluginLoader(ShortNameLocater $loader)
     {
         self::$_pluginLoader = $loader;
     }
@@ -518,7 +519,7 @@ class Reader
     /**
      * Get plugin loader for use with Extensions
      *
-     * @return  Zend\Loader\PrefixPathMapper $loader
+     * @return  Zend\Loader\ShortNameLocater $loader
      */
     public static function getPluginLoader()
     {
@@ -539,9 +540,12 @@ class Reader
      */
     public static function addPrefixPath($prefix, $path)
     {
-        $prefix = rtrim($prefix, '\\');
-        $path   = rtrim($path, DIRECTORY_SEPARATOR);
-        self::getPluginLoader()->addPrefixPath($prefix, $path);
+        $pluginLoader = self::getPluginLoader();
+        if ($pluginLoader instanceof PrefixPathMapper) {
+            $prefix = rtrim($prefix, '\\');
+            $path   = rtrim($path, DIRECTORY_SEPARATOR);
+            $pluginLoader->addPrefixPath($prefix, $path);
+        }
     }
 
     /**
@@ -552,6 +556,10 @@ class Reader
      */
     public static function addPrefixPaths(array $spec)
     {
+        $pluginLoader = self::getPluginLoader();
+        if (!$pluginLoader instanceof PrefixPathMapper) {
+            return;
+        }
         if (isset($spec['prefix']) && isset($spec['path'])) {
             self::addPrefixPath($spec['prefix'], $spec['path']);
         }

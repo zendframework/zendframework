@@ -127,7 +127,7 @@ class SerializableLimitIterator extends \LimitIterator implements \Serializable,
                 $current = $this->current();
                 $this->seek($currentOffset);
                 return null !== $current;
-            } catch (OutOfBoundsException $e) {
+            } catch (\OutOfBoundsException $e) {
                 // reset position in case of exception is assigned null
                 $this->seek($currentOffset);
                 return false;

@@ -130,7 +130,7 @@ class Translator
         }
 
         if (array_key_exists('cache', $options)) {
-            Zend_Translate_Adapter::setCache($options['cache']);
+            Adapter::setCache($options['cache']);
         }
 
         $adapter = $options['adapter'];
@@ -158,7 +158,7 @@ class Translator
      */
     public static function getCache()
     {
-        return Zend_Translate_Adapter::getCache();
+        return Adapter::getCache();
     }
 
     /**
@@ -169,7 +169,7 @@ class Translator
      */
     public static function setCache(\Zend\Cache\Frontend $cache)
     {
-        Zend_Translate_Adapter::setCache($cache);
+        Adapter::setCache($cache);
     }
 
     /**
@@ -179,7 +179,7 @@ class Translator
      */
     public static function hasCache()
     {
-        return Zend_Translate_Adapter::hasCache();
+        return Adapter::hasCache();
     }
 
     /**
@@ -189,7 +189,7 @@ class Translator
      */
     public static function removeCache()
     {
-        Zend_Translate_Adapter::removeCache();
+        Adapter::removeCache();
     }
 
     /**
@@ -200,7 +200,7 @@ class Translator
      */
     public static function clearCache($tag = null)
     {
-        Zend_Translate_Adapter::clearCache($tag);
+        Adapter::clearCache($tag);
     }
 
     /**

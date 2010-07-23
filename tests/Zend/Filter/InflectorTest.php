@@ -506,25 +506,3 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
         $this->_testOptions($inflector);
     }
 }
-
-    /**
-     * @group ZF-8997
-     */
-    public function testPassingZendConfigObjectToConstructorSetsStateAndRules()
-    {
-        $config = $this->getConfig();
-        $inflector = new InflectorFilter($config);
-        $this->_testOptions($inflector);
-    }
-
-    /**
-     * @group ZF-8997
-     */
-    public function testPassingZendConfigObjectToSetConfigSetsStateAndRules()
-    {
-        $config = $this->getConfig();
-        $inflector = new InflectorFilter();
-        $inflector->setOptions($config);
-        $this->_testOptions($inflector);
-    }
-}

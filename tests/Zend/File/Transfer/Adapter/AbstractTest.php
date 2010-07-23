@@ -117,7 +117,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $validateLoader = $this->adapter->getPluginLoader('validator');
         $filterLoader   = $this->adapter->getPluginLoader('filter');
         $paths = $validateLoader->getPaths('Foo\Validator');
-        $this->assertTrue(is_array($paths));
+        $this->assertTrue(is_array($paths), var_export($paths, 1));
         $paths = $filterLoader->getPaths('Foo\Filter');
         $this->assertTrue(is_array($paths));
     }

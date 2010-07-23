@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenID
+ * @package    Zend_OpenId
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -35,11 +35,11 @@ use Zend\OpenId\OpenId,
 
 /**
  * @category   Zend
- * @package    Zend_OpenID
+ * @package    Zend_OpenId
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_OpenID
+ * @group      Zend_OpenId
  */
 class ConsumerTest extends \PHPUnit_Framework_TestCase
 {
@@ -552,7 +552,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
             array(
                 'maxredirects' => 4,
                 'timeout'      => 15,
-                'useragent'    => 'Zend_OpenID'
+                'useragent'    => 'Zend_OpenId'
             ));
         $test = new Http\Client\Adapter\Test();
         $http->setAdapter($test);

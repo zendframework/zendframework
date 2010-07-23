@@ -28,6 +28,7 @@ use Zend\Barcode,
     Zend\Barcode\Renderer,
     Zend\Barcode\Object,
     Zend\Config\Config,
+    Zend\Loader\PluginLoader,
     Zend\Pdf;
 
 /**
@@ -45,7 +46,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         // Set timezone to avoid "It is not safe to rely on the system's timezone settings."
         // message if timezone is not set within php.ini
         date_default_timezone_set('GMT');
-        Barcode\Barcode::resetPluginLoader();
+    }
+
+    public function tearDown()
+    {
+        $loader = new PluginLoader(array('Zend\Barcode\Object' => 'Zend/Barcode/Object'));
+        Barcode\Barcode::setPluginLoader($loader, Barcode\Barcode::OBJECT);
+        $loader = new PluginLoader(array('Zend\Barcode\Renderer' => 'Zend/Barcode/Renderer'));
+        Barcode\Barcode::setPluginLoader($loader, Barcode\Barcode::RENDERER);
     }
 
     public function testMinimalFactory()
@@ -217,14 +225,17 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testBarcodeObjectFactoryWithNamespace()
     {
-        Barcode\Barcode::getPluginLoader(Barcode\Barcode::OBJECT)->addPrefixPath('ZendTest\Barcode\Object\TestAsset', __DIR__ . '/Object/TestAsset');
+        $loader = new PluginLoader(array('ZendTest\Barcode\Object\TestAsset' => __DIR__ . '/Object/TestAsset'));
+        Barcode\Barcode::setPluginLoader($loader, Barcode\Barcode::OBJECT);
         $barcode = Barcode\Barcode::makeBarcode('barcodeNamespace');
         $this->assertTrue($barcode instanceof \ZendTest\Barcode\Object\TestAsset\BarcodeNamespace);
     }
 
     public function testBarcodeObjectFactoryWithNamespaceExtendStandardLibray()
     {
-        Barcode\Barcode::getPluginLoader(Barcode\Barcode::OBJECT)->addPrefixPath('ZendTest\Barcode\Object\TestAsset', __DIR__ . '/Object/TestAsset');
+        $loader = new PluginLoader(array('Zend\Barcode\Object' => 'Zend/Barcode/Object',
+                                         'ZendTest\Barcode\Object\TestAsset' => __DIR__ . '/Object/TestAsset'));
+        Barcode\Barcode::setPluginLoader($loader, Barcode\Barcode::OBJECT);
         $barcode = Barcode\Barcode::makeBarcode('error');
         $this->assertTrue($barcode instanceof \ZendTest\Barcode\Object\TestAsset\Error);
     }
@@ -234,7 +245,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testBarcodeObjectFactoryWithNamespaceButWithoutExtendingObjectAbstract()
     {
-        Barcode\Barcode::getPluginLoader(Barcode\Barcode::OBJECT)->addPrefixPath('ZendTest\Barcode\Object\TestAsset', __DIR__ . '/Object/TestAsset');
+        $loader = new PluginLoader(array('ZendTest\Barcode\Object\TestAsset' => __DIR__ . '/Object/TestAsset'));
+        Barcode\Barcode::setPluginLoader($loader, Barcode\Barcode::OBJECT);
         $barcode = Barcode\Barcode::makeBarcode('barcodeNamespaceWithoutExtendingObjectAbstract');
     }
 
@@ -309,7 +321,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testBarcodeRendererFactoryWithNamespace()
     {
         $this->_checkGDRequirement();
-        Barcode\Barcode::getPluginLoader(Barcode\Barcode::RENDERER)->addPrefixPath('ZendTest\Barcode\Renderer\TestAsset', __DIR__ . '/Renderer/TestAsset');
+        $loader = new PluginLoader(array('ZendTest\Barcode\Renderer\TestAsset' => __DIR__ . '/Renderer/TestAsset'));
+        Barcode\Barcode::setPluginLoader($loader, Barcode\Barcode::RENDERER);
         $renderer = Barcode\Barcode::makeRenderer('rendererNamespace');
         $this->assertTrue($renderer instanceof \Zend\Barcode\Renderer);
     }
@@ -319,7 +332,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testBarcodeFactoryWithNamespaceButWithoutExtendingRendererAbstract()
     {
-        Barcode\Barcode::getPluginLoader(Barcode\Barcode::RENDERER)->addPrefixPath('ZendTest\Barcode\Renderer\TestAsset', __DIR__ . '/Renderer/TestAsset');
+        $loader = new PluginLoader(array('ZendTest\Barcode\Renderer\TestAsset' => __DIR__ . '/Renderer/TestAsset'));
+        Barcode\Barcode::setPluginLoader($loader, Barcode\Barcode::RENDERER);
         $renderer = Barcode\Barcode::makeRenderer('rendererNamespaceWithoutExtendingRendererAbstract');
     }
 

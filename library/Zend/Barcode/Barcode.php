@@ -60,19 +60,11 @@ class Barcode
      * @var array
      */
     protected static $_loaders = array();
-
-    /**
-     * Reset all plugin loaders
-     */
-    public static function resetPluginLoader()
-    {
-        self::$_loaders = array();
-    }
     
     /**
      * Set plugin loader to use for validator or filter chain
      *
-     * @param  \Zend\Loader\PrefixPathMapper $loader
+     * @param  \Zend\Loader\ShortNameLocater $loader
      * @param  string $type 'object', or 'renderer'
      * @return \Zend\Form\Element
      * @throws \Zend\Form\Exception on invalid type
@@ -84,6 +76,7 @@ class Barcode
             case self::OBJECT:
             case self::RENDERER:
                 self::$_loaders[$type] = $loader;
+                return;
             default:
                 throw new Exception(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
         }

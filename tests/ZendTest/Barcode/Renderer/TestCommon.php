@@ -25,10 +25,7 @@
  */
 namespace ZendTest\Barcode\Renderer;
 
-// This was not being autoloaded; explicit require_once fixes issues
-require_once __DIR__ . '/../Object/_files/BarcodeTest.php';
-
-use ZendTest\Barcode\Object\_files as ObjectNSFiles;
+use ZendTest\Barcode\Object\TestAsset as TestAsset;
 use Zend\Barcode;
 use Zend\Barcode\Object;
 use Zend\Config;
@@ -226,7 +223,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
      */
     public function testRendererWithUnkownInstructionProvideByObject()
     {
-        $object = new ObjectNSFiles\BarcodeTest();
+        $object = new TestAsset\BarcodeTest();
         $object->setText('test');
         $object->addInstruction(array('type' => 'unknown'));
         $this->_renderer->setBarcode($object);

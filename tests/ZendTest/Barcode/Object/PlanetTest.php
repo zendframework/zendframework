@@ -43,7 +43,7 @@ class PlanetTest extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('Planet', $this->_object->getType());
+        $this->assertSame('planet', $this->_object->getType());
     }
 
     public function testChecksum()

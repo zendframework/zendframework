@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace ZendTest\Barcode\Object;
-use Zend\Barcode;
+use Zend\Barcode\Object\Ean8;
 
 /**
  * @category   Zend
@@ -38,12 +38,12 @@ class Ean8Test extends TestCommon
 {
     protected function _getBarcodeObject($options = null)
     {
-        return new Barcode\Object\Ean8($options);
+        return new Ean8($options);
     }
 
     public function testType()
     {
-        $this->assertSame('Ean8', $this->_object->getType());
+        $this->assertSame('ean8', $this->_object->getType());
     }
 
     public function testChecksum()

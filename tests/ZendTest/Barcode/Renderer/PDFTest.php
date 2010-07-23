@@ -36,7 +36,7 @@ use Zend\Barcode\Object;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PDFTest extends TestCommon
+class PdfTest extends TestCommon
 {
     protected function _getRendererObject($options = null)
     {
@@ -68,7 +68,7 @@ class PDFTest extends TestCommon
      */
     public function testDrawReturnResource()
     {
-        Barcode\Object\AbstractObject::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->_renderer->setBarcode($barcode);
         $resource = $this->_renderer->draw();

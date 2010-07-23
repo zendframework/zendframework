@@ -43,7 +43,7 @@ class RoyalmailTest extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('Royalmail', $this->_object->getType());
+        $this->assertSame('royalmail', $this->_object->getType());
     }
 
     public function testChecksum()

@@ -24,20 +24,9 @@
  * @namespace
  */
 namespace ZendTest\Barcode\Object;
-use Zend\Barcode;
-use Zend\Config;
-
-/**
- * Test helper
- */
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Config
- */
+use ZendTest\Barcode\Object\TestAsset,
+    Zend\Barcode,
+    Zend\Config;
 
 /**
  * @category   Zend
@@ -57,7 +46,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     protected function loadInstructionsFile($fileName)
     {
-        return include_once (__DIR__ . "/_files/$fileName.php");
+        return include_once (__DIR__ . "/TestAsset/$fileName.php");
     }
 
     public function setUp()
@@ -76,7 +65,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $this->assertEquals('', $this->_object->getFont());
         $object = $this->_getBarcodeObject();
         $this->assertEquals('my_static_font.ttf', $object->getFont());
-        Barcode\Barcode::setBarcodeFont('');
+        Barcode\Barcode::setBarcodeFont(null);
     }
 
     public function testStaticFontAsNumber()
@@ -412,7 +401,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testAddInstruction()
     {
-        $object = new _files\BarcodeTest();
+        $object = new TestAsset\BarcodeTest();
         $instructions = array('type' => 'text' , 'text' => 'text' , 'size' => 10 ,
                 'position' => array(5 , 5) ,
                 'font' => 'my_font.ttf' ,
@@ -425,7 +414,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testAddPolygon()
     {
-        $object = new _files\BarcodeTest();
+        $object = new TestAsset\BarcodeTest();
         $points = array();
         $color = '#123456';
         $filled = false;
@@ -437,7 +426,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testAddPolygonWithDefaultColor()
     {
-        $object = new _files\BarcodeTest();
+        $object = new TestAsset\BarcodeTest();
         $points = array();
         $color = 123456;
         $object->setForeColor($color);
@@ -450,7 +439,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testAddText()
     {
-        $object = new _files\BarcodeTest();
+        $object = new TestAsset\BarcodeTest();
         $size = 10;
         $text = 'foobar';
         $position = array();
@@ -470,7 +459,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testAddTextWithDefaultColor()
     {
-        $object = new _files\BarcodeTest();
+        $object = new TestAsset\BarcodeTest();
         $size = 10;
         $text = 'foobar';
         $position = array();

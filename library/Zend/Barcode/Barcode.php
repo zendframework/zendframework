@@ -25,6 +25,7 @@
 namespace Zend\Barcode;
 use Zend\Barcode\Renderer,
     Zend\Loader,
+    Zend\Loader\PluginLoader,
     Zend\Config\Config,
     Zend;
 
@@ -41,6 +42,8 @@ use Zend\Barcode\Renderer,
  */
 class Barcode
 {
+    const OBJECT   = 'OBJECT';
+    const RENDERER = 'RENDERER';
     /**
      * Default barcode TTF font name
      *
@@ -51,6 +54,98 @@ class Barcode
      * @var string
      */
     protected static $_staticFont = null;
+
+    /**
+     * Plugin loaders for object and renderer
+     * @var array
+     */
+    protected static $_loaders = array();
+
+
+    /**
+     * Set plugin loader to use for validator or filter chain
+     *
+     * @param  \Zend\Loader\PrefixPathMapper $loader
+     * @param  string $type 'object', or 'renderer'
+     * @return \Zend\Form\Element
+     * @throws \Zend\Form\Exception on invalid type
+     */
+    public static function setPluginLoader(PrefixPathMapper $loader, $type)
+    {
+        $type = strtoupper($type);
+        switch ($type) {
+            case self::OBJECT:
+            case self::RENDERER:
+                self::$_loaders[$type] = $loader;
+            default:
+                throw new Exception(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
+        }
+    }
+
+    /**
+     * Retrieve plugin loader for validator or filter chain
+     *
+     * Instantiates with default rules if none available for that type. Use
+     * 'decorator', 'filter', or 'validate' for $type.
+     *
+     * @param  string $type
+     * @return \Zend\Loader\PrefixPathMapper
+     * @throws \Zend\Loader\Exception on invalid type.
+     */
+    public static function getPluginLoader($type)
+    {
+        $type = strtoupper($type);
+        switch ($type) {
+            case self::OBJECT:
+            case self::RENDERER:
+                $prefixSegment = ucfirst(strtolower($type));
+                $pathSegment   = $prefixSegment;
+                if (!isset(self::$_loaders[$type])) {
+                    self::$_loaders[$type] = new PluginLoader(
+                        array('Zend\\Barcode\\' . $prefixSegment . '\\' => 'Zend/Barcode/' . $pathSegment . '/')
+                    );
+                }
+                return self::$_loaders[$type];
+            default:
+                throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
+        }
+    }
+
+    /**
+     * Add prefix path for plugin loader
+     *
+     * If no $type specified, assumes it is a base path for both filters and
+     * validators, and sets each according to the following rules:
+     * - decorators: $prefix = $prefix . '\Decorator'
+     * - filters: $prefix = $prefix . '\Filter'
+     * - validators: $prefix = $prefix . '\Validator'
+     *
+     * Otherwise, the path prefix is set on the appropriate plugin loader.
+     *
+     * @param  string $prefix
+     * @param  string $path
+     * @param  string $type
+     * @return \Zend\Form\Element
+     * @throws \Zend\Form\Exception for invalid type
+     */
+    public static function addPrefixPath($prefix, $path, $type = null)
+    {
+        $type = strtoupper($type);
+        switch ($type) {
+            case self::OBJECT:
+            case self::RENDERER:
+                self::getPluginLoader($type)->addPrefixPath($prefix, $path);
+                break;
+            case null:
+                $prefix = rtrim($prefix, '\\');
+                $path = rtrim($path, '/');
+                self::getPluginLoader(self::OBJECT  )->addPrefixPath($prefix . '\\Object',   $path . '/Object');
+                self::getPluginLoader(self::RENDERER)->addPrefixPath($prefix . '\\Renderer', $path . '/Renderer');
+                break;
+            default:
+                throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
+        }
+    }
 
     /**
      * Factory for Zend_Barcode classes.
@@ -169,24 +264,8 @@ class Barcode
                 'Barcode name must be specified in a string'
             );
         }
-        /*
-         * Form full barcode class name
-         */
-        $barcodeNamespace = '\Zend\Barcode\Object';
-        if (isset($barcodeConfig['barcodeNamespace'])) {
-            $barcodeNamespace = $barcodeConfig['barcodeNamespace'];
-        }
 
-        /** @todo Check if it's correct to drop case transformation */
-        $barcodeName = $barcodeNamespace . '\\' . ucfirst($barcode);
-
-        /*
-         * Load the barcode class.
-         * Important! This throws an exception if the specified class cannot be loaded.
-         */
-        if (!class_exists($barcodeName, false)) {
-            Loader::loadClass($barcodeName);
-        }
+        $barcodeName = self::getPluginLoader(self::OBJECT)->load($barcode);
 
         /*
          * Create an instance of the barcode class.
@@ -256,16 +335,7 @@ class Barcode
             throw $e;
         }
 
-        /*
-         * Form full barcode class name
-         */
-        $rendererNamespace = '\Zend\Barcode\Renderer';
-        if (isset($rendererConfig['rendererNamespace'])) {
-            $rendererNamespace = $rendererConfig['rendererNamespace'];
-        }
-
-        /** @todo Check if it's correct to drop case transformation */
-        $rendererName = $rendererNamespace . '\\' . ucfirst($renderer);
+        $rendererName = self::getPluginLoader(self::RENDERER)->load($renderer);
 
         /*
          * Load the renderer class.

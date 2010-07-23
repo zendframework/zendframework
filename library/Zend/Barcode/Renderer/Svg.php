@@ -24,6 +24,8 @@
  * @namespace
  */
 namespace Zend\Barcode\Renderer;
+use Zend\Pdf\Color;
+use Zend;
 
 /**
  * Class for rendering the barcode as svg
@@ -65,8 +67,8 @@ class Svg extends AbstractRenderer
     /**
      * Set height of the result image
      * @param null|integer $value
-     * @return Zend_Image_Barcode_Abstract
-     * @throw Zend_Image_Barcode_Exception
+     * @return Zend\Barcode\Renderer\Svg
+     * @throw Zend\Barcode\Renderer\Exception
      */
     public function setHeight($value)
     {

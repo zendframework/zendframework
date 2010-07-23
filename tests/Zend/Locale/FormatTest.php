@@ -1089,19 +1089,6 @@ class FormatTest extends \PHPUnit_Framework_TestCase
     public function testToNumberWithoutFormatWithPrecision()
     {
         $options = array('locale' => 'de_AT', 'precision' => 2);
-        $this->assertEquals('3,99', Format::toNumber(3.99, $options));
-        $this->assertEquals('3,99', Format::toNumber(3.994, $options));
-        $this->assertEquals('4,00', Format::toNumber(3.995, $options));
-        $this->assertEquals('4,00', Format::toNumber(3.999, $options));
-        $this->assertEquals('4,00', Format::toNumber(4, $options));
-    }
-
-    /**
-     * @group ZF-9319
-     */
-    public function testToNumberWithoutFormatWithPrecision()
-    {
-        $options = array('locale' => 'de_AT', 'precision' => 2);
         $this->assertEquals('3,99', Zend_Locale_Format::toNumber(3.99, $options));
         $this->assertEquals('3,99', Zend_Locale_Format::toNumber(3.994, $options));
         $this->assertEquals('4,00', Zend_Locale_Format::toNumber(3.995, $options));

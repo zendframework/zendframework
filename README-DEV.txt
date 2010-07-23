@@ -47,8 +47,8 @@ To run tests:
  * Execute PHPUnit, providing a path to a component directory for which
    you wish to run tests, or a specific test class file.
 
-   % phpunit Zend/Application
-   % phpunit Zend/Application/Resource/CacheManagerTest.php
+   % phpunit ZendTest/Application
+   % phpunit ZendTest/Application/Resource/CacheManagerTest.php
 
  * You may also provide the "--group" switch; in such cases, provide the
    top-level component name:

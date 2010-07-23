@@ -35,7 +35,7 @@ use Zend\OpenId\OpenId;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_OpenID
  */
-class OpenIDTest extends \PHPUnit_Framework_TestCase
+class OpenIdTest extends \PHPUnit_Framework_TestCase
 {
     private $_serverVariables;
 

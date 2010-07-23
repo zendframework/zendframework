@@ -24,8 +24,11 @@
  * @namespace
  */
 namespace Zend\Barcode\Renderer;
-use Zend\Pdf\Color;
-use Zend;
+use Zend\Pdf\Color,
+    Zend\Pdf\PdfDocument,
+    Zend\Pdf\Page,
+    Zend\Pdf\Font,
+    Zend;
 
 /**
  * Class for rendering the barcode in PDF resource
@@ -68,7 +71,7 @@ class Pdf extends AbstractRenderer
      */
     public function setResource($pdf, $page = 0)
     {
-        if (!$pdf instanceof Zend\Pdf\PdfDocument) {
+        if (!$pdf instanceof PdfDocument) {
             throw new Exception(
                 'Invalid \Zend\Pdf\PdfDocument resource provided to setResource()'
             );
@@ -79,7 +82,7 @@ class Pdf extends AbstractRenderer
 
         if (!count($this->_resource->pages)) {
             $this->_page = 0;
-            $this->_resource->pages[] = new Zend\Pdf\Page(
+            $this->_resource->pages[] = new Page(
                 Zend\Pdf\Page::SIZE_A4
             );
         }
@@ -113,9 +116,9 @@ class Pdf extends AbstractRenderer
     protected function _initRenderer()
     {
         if ($this->_resource === null) {
-            $this->_resource = new Zend\Pdf\PdfDocument();
-            $this->_resource->pages[] = new Zend\Pdf\Page(
-                Zend\Pdf\Page::SIZE_A4
+            $this->_resource = new PdfDocument();
+            $this->_resource->pages[] = new Page(
+                Page::SIZE_A4
             );
         }
 
@@ -158,8 +161,8 @@ class Pdf extends AbstractRenderer
         $page->setLineWidth($this->_moduleSize);
 
         $fillType = ($filled) 
-                  ? Zend\Pdf\Page::SHAPE_DRAW_FILL_AND_STROKE
-                  : Zend\Pdf\Page::SHAPE_DRAW_STROKE;
+                  ? Page::SHAPE_DRAW_FILL_AND_STROKE
+                  : Page::SHAPE_DRAW_STROKE;
 
         $page->drawPolygon($x, $y, $fillType);
     }
@@ -192,11 +195,11 @@ class Pdf extends AbstractRenderer
 
         $page->setLineColor($color);
         $page->setFillColor($color);
-        $page->setFont(Zend\Pdf\Font::fontWithPath($font), $size * $this->_moduleSize * 1.2);
+        $page->setFont(Font::fontWithPath($font), $size * $this->_moduleSize * 1.2);
 
         $width = $this->widthForStringUsingFontSize(
             $text,
-            Zend\Pdf\Font::fontWithPath($font),
+            Font::fontWithPath($font),
             $size * $this->_moduleSize
         );
 

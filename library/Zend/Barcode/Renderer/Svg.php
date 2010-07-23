@@ -25,13 +25,11 @@
  */
 namespace Zend\Barcode\Renderer;
 
-
-/** @see Zend_Barcode_Renderer_RendererAbstract*/
-require_once 'Zend/Barcode/Renderer/RendererAbstract.php';
-
 /**
  * Class for rendering the barcode as svg
  *
+ * @uses       \Zend\Barcode\Renderer\Exception
+ * @uses       \Zend\Barcode\Renderer\AbstractRenderer
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -23,10 +23,10 @@
  * @namespace
  */
 namespace Zend\Barcode;
-use Zend\Barcode\Renderer;
-use Zend\Loader;
-use Zend\Config;
-use Zend;
+use Zend\Barcode\Renderer,
+    Zend\Loader,
+    Zend\Config\Config,
+    Zend;
 
 /**
  * Class for generate Barcode
@@ -87,7 +87,7 @@ class Barcode
          * Convert \Zend\Config\Config argument to plain string
          * barcode name and separate config object.
          */
-        if ($barcode instanceof Config\Config) {
+        if ($barcode instanceof Config) {
             if (isset($barcode->rendererParams)) {
                 $rendererConfig = $barcode->rendererParams->toArray();
             }
@@ -138,8 +138,8 @@ class Barcode
          * Convert \Zend\Config\Config argument to plain string
          * barcode name and separate config object.
          */
-        if ($barcode instanceof Config\Config) {
-            if (isset($barcode->barcodeParams) && $barcode->barcodeParams instanceof Config\Config) {
+        if ($barcode instanceof Config) {
+            if (isset($barcode->barcodeParams) && $barcode->barcodeParams instanceof Config) {
                 $barcodeConfig = $barcode->barcodeParams->toArray();
             }
             if (isset($barcode->barcode)) {
@@ -148,7 +148,7 @@ class Barcode
                 $barcode = null;
             }
         }
-        if ($barcodeConfig instanceof Config\Config) {
+        if ($barcodeConfig instanceof Config) {
             $barcodeConfig = $barcodeConfig->toArray();
         }
 
@@ -222,7 +222,7 @@ class Barcode
          * Convert \Zend\Config\Config argument to plain string
          * barcode name and separate config object.
          */
-        if ($renderer instanceof Config\Config) {
+        if ($renderer instanceof Config) {
             if (isset($renderer->rendererParams)) {
                 $rendererConfig = $renderer->rendererParams->toArray();
             }
@@ -230,7 +230,7 @@ class Barcode
                 $renderer = (string) $renderer->renderer;
             }
         }
-        if ($rendererConfig instanceof Config\Config) {
+        if ($rendererConfig instanceof Config) {
             $rendererConfig = $rendererConfig->toArray();
         }
 

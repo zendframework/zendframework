@@ -2450,7 +2450,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'postaltoterritory', 'AT');
-        $this->assertEquals("\d{4}", $value);
+        $this->assertEquals('\d{4}', $value);
     }
 
     /**

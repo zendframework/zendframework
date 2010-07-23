@@ -49,7 +49,7 @@ github or other public site, or setup/use your own repository.
 
       % git remote add zf2 git://github.com/zendframework/zf2.git
       - OR -
-      % git remote add zf2 git://zendframework.com/zf2.git
+      % git remote add zf2 git://git.zendframework.com/zf.git
       - AND -
       % git fetch zf2
 
@@ -77,7 +77,7 @@ github or other public site, or setup/use your own repository.
 
   * Add a remote for the ZF repository and fetch it
 
-      % git remote add zf2 git://zendframework.com/zf2.git
+      % git remote add zf2 git://git.zendframework.com/zf.git
       % git fetch zf2
 
   * Create a new branch for the ZF repository (named "zf/master" here)

@@ -637,7 +637,6 @@ class FormatTest extends \PHPUnit_Framework_TestCase
     /**
      * test isDate
      * expected boolean
-     * @group current
      */
     public function testIsDate()
     {

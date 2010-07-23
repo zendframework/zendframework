@@ -20,12 +20,14 @@
  * @version    $Id: SvgTest.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
-require_once dirname(dirname(dirname(__DIR__))) . '/TestHelper.php';
-
-require_once __DIR__ . '/TestCommon.php';
-
-require_once 'Zend/Barcode/Renderer/Svg.php';
-require_once 'Zend/Barcode/Object/Code39.php';
+/**
+ * @namespace
+ */
+namespace ZendTest\Barcode\Renderer;
+use Zend\Pdf;
+use Zend\Barcode;
+use Zend\Barcode\Renderer\Svg;
+use Zend\Barcode\Object\Code39;
 
 /**
  * @category   Zend
@@ -35,12 +37,12 @@ require_once 'Zend/Barcode/Object/Code39.php';
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Renderer_SvgTest extends Zend_Barcode_Renderer_TestCommon
+class SvgTest extends TestCommon
 {
 
     protected function _getRendererObject($options = null)
     {
-        return new Zend_Barcode_Renderer_Svg($options);
+        return new Svg($options);
     }
 
     public function testType()
@@ -50,35 +52,35 @@ class Zend_Barcode_Renderer_SvgTest extends Zend_Barcode_Renderer_TestCommon
 
     public function testGoodSvgResource()
     {
-        $svgResource = new DOMDocument();
+        $svgResource = new \DOMDocument();
         $this->_renderer->setResource($svgResource, 10);
     }
 
     /**
-     * @expectedException Zend_Barcode_Renderer_Exception
+     * @expectedException \Zend\Barcode\Renderer\Exception
      */
     public function testObjectSvgResource()
     {
-        $svgResource = new StdClass();
+        $svgResource = new \StdClass();
         $this->_renderer->setResource($svgResource);
     }
 
     public function testDrawReturnResource()
     {
-        Zend_Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
-        $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
+        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        $barcode = new Code39(array('text' => '0123456789'));
         $this->_renderer->setBarcode($barcode);
         $resource = $this->_renderer->draw();
-        $this->assertTrue($resource instanceof DOMDocument);
-        Zend_Barcode::setBarcodeFont('');
+        $this->assertTrue($resource instanceof \DOMDocument);
+        Barcode\Barcode::setBarcodeFont('');
     }
 
     public function testDrawWithExistantResourceReturnResource()
     {
-        Zend_Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
-        $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
+        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        $barcode = new Code39(array('text' => '0123456789'));
         $this->_renderer->setBarcode($barcode);
-        $svgResource = new DOMDocument();
+        $svgResource = new \DOMDocument();
         $rootElement = $svgResource->createElement('svg');
         $rootElement->setAttribute('xmlns', "http://www.w3.org/2000/svg");
         $rootElement->setAttribute('version', '1.1');
@@ -87,14 +89,14 @@ class Zend_Barcode_Renderer_SvgTest extends Zend_Barcode_Renderer_TestCommon
         $svgResource->appendChild($rootElement);
         $this->_renderer->setResource($svgResource);
         $resource = $this->_renderer->draw();
-        $this->assertTrue($resource instanceof DOMDocument);
+        $this->assertTrue($resource instanceof \DOMDocument);
         $this->assertSame($resource, $svgResource);
-        Zend_Barcode::setBarcodeFont('');
+        Barcode\Barcode::setBarcodeFont('');
     }
 
     protected function _getRendererWithWidth500AndHeight300()
     {
-        $svg = new DOMDocument();
+        $svg = new \DOMDocument();
         $rootElement = $svg->createElement('svg');
         $rootElement->setAttribute('xmlns', "http://www.w3.org/2000/svg");
         $rootElement->setAttribute('version', '1.1');

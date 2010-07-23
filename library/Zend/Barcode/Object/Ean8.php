@@ -154,7 +154,7 @@ class Ean8 extends Ean13
      */
     protected function _validateText($value, $options = array())
     {
-        $validator = new BarcodeValidator\Barcode(array(
+        $validator = new BarcodeValidator(array(
             'adapter'  => 'ean8',
             'checksum' => false,
         ));

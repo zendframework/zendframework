@@ -216,12 +216,6 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     protected $_substituteChecksumCharacter = 0;
 
     /**
-     * TTF font name: can be set before instanciation of the object
-     * @var string
-     */
-    protected static $_staticFont = null;
-
-    /**
      * Constructor
      * @param array|\Zend\Config\Config $options
      * @return void
@@ -229,9 +223,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     public function __construct($options = null)
     {
         $this->_getDefaultOptions();
-        if (self::$_staticFont !== null) {
-            $this->_font = self::$_staticFont;
-        }
+        $this->_font = Barcode\Barcode::getBarcodeFont();
         if ($options instanceof Config) {
             $options = $options->toArray();
         }
@@ -708,18 +700,6 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     public function getWithChecksumInText()
     {
         return $this->_withChecksumInText;
-    }
-
-    /**
-     * Set the font for all instances of barcode
-     * @param string $font
-     * @return void
-     */
-    public static function setBarcodeFont($font)
-    {
-        if (is_string($font) || (is_int($font) && $font >= 1 && $font <= 5)) {
-            self::$_staticFont = $font;
-        }
     }
 
     /**

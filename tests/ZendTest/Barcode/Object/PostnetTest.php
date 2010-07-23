@@ -43,7 +43,7 @@ class PostnetTest extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('Postnet', $this->_object->getType());
+        $this->assertSame('postnet', $this->_object->getType());
     }
 
     public function testChecksum()

@@ -43,7 +43,7 @@ class Itf14Test extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('Itf14', $this->_object->getType());
+        $this->assertSame('itf14', $this->_object->getType());
     }
 
     public function testChecksum()

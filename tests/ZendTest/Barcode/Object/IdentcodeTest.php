@@ -43,7 +43,7 @@ class IdentcodeTest extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('Identcode', $this->_object->getType());
+        $this->assertSame('identcode', $this->_object->getType());
     }
 
     public function testChecksum()

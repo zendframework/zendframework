@@ -43,7 +43,7 @@ class Ean2Test extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('Ean2', $this->_object->getType());
+        $this->assertSame('ean2', $this->_object->getType());
     }
 
     public function testChecksum()

@@ -1,5 +1,5 @@
 <?php
-namespace ZendTest\Barcode\Object\_files;
+namespace ZendTest\Barcode\Object\TestAsset;
 
 class BarcodeTest extends \Zend\Barcode\Object\AbstractObject
 {

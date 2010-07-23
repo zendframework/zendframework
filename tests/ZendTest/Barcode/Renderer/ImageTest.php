@@ -53,7 +53,7 @@ class ImageTest extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('Image', $this->_renderer->getType());
+        $this->assertSame('image', $this->_renderer->getType());
     }
 
     public function testGoodImageResource()

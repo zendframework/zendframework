@@ -90,7 +90,7 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
      */
     protected function _getStorageClient($path = '')
     {
-        if ($this->_storageClient === NULL)) {
+        if (($this->_storageClient === NULL)) {
             $url = explode(':', $path);
             if (!$url) {
                 throw new Zend_Service_WindowsAzure_Exception('Could not parse path "' . $path . '".');

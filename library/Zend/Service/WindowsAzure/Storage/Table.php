@@ -297,7 +297,7 @@ class Zend_Service_WindowsAzure_Storage_Table
 		if ($tableName === '') {
 			throw new Zend_Service_WindowsAzure_Exception('Table name is not specified.');
 		}
-		if ($entity === NULL)) {
+		if (($entity === NULL)) {
 			throw new Zend_Service_WindowsAzure_Exception('Entity is not specified.');
 		}
 		                     
@@ -367,7 +367,7 @@ class Zend_Service_WindowsAzure_Storage_Table
 		if ($tableName === '') {
 			throw new Zend_Service_WindowsAzure_Exception('Table name is not specified.');
 		}
-		if ($entity === NULL)) {
+		if (($entity === NULL)) {
 			throw new Zend_Service_WindowsAzure_Exception('Entity is not specified.');
 		}
 		                     
@@ -689,7 +689,7 @@ class Zend_Service_WindowsAzure_Storage_Table
 		if ($tableName === '') {
 			throw new Zend_Service_WindowsAzure_Exception('Table name is not specified.');
 		}
-		if ($entity === NULL)) {
+		if (($entity === NULL)) {
 			throw new Zend_Service_WindowsAzure_Exception('Entity is not specified.');
 		}
 		                     
@@ -794,7 +794,7 @@ class Zend_Service_WindowsAzure_Storage_Table
 		    if ($azureValue->Type != '') {
 		        $value[] = ' m:type="' . $azureValue->Type . '"';
 		    }
-		    if ($azureValue->Value === NULL)) {
+		    if (($azureValue->Value === NULL)) {
 		        $value[] = ' m:null="true"'; 
 		    }
 		    $value[] = '>';

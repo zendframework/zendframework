@@ -543,7 +543,7 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
 
         $link = $this->getExtension('Atom')->getFeedLink();
 
-        if ($link === NULL) || empty($link)) {
+        if (($link === NULL) || empty($link)) {
             $link = $this->getOriginalSourceUri();
         }
 

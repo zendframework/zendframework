@@ -102,7 +102,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
         $httpMethod = null,
         Zend_Oauth_Http_RequestToken $request = null
     ) {
-        if ($request === NULL)) {
+        if (($request === NULL)) {
             $request = new Zend_Oauth_Http_RequestToken($this, $customServiceParameters);
         } elseif(($customServiceParameters !== NULL)) {
             $request->setParameters($customServiceParameters);
@@ -134,7 +134,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
         Zend_Oauth_Token_Request $token = null,
         Zend_Oauth_Http_UserAuthorization $redirect = null
     ) {
-        if ($redirect === NULL)) {
+        if (($redirect === NULL)) {
             $redirect = new Zend_Oauth_Http_UserAuthorization($this, $customServiceParameters);
         } elseif(($customServiceParameters !== NULL)) {
             $redirect->setParameters($customServiceParameters);
@@ -187,7 +187,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
             throw new Zend_Oauth_Exception(
                 'Response from Service Provider is not a valid authorized request token');
         }
-        if ($request === NULL)) {
+        if (($request === NULL)) {
             $request = new Zend_Oauth_Http_AccessToken($this);
         }
 

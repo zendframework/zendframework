@@ -134,7 +134,7 @@ class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
     protected function _setCommentCount(DOMDocument $dom, DOMElement $root)
     {
         $count = $this->getDataContainer()->getCommentCount();
-        if ($count === NULL)) {
+        if (($count === NULL)) {
             return;
         }
         $tcount = $this->_dom->createElement('thr:total');

@@ -109,7 +109,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     protected function _setBlock(DOMDocument $dom, DOMElement $root)
     {
         $block = $this->getDataContainer()->getItunesBlock();
-        if ($block === NULL)) {
+        if (($block === NULL)) {
             return;
         }
         $el = $dom->createElement('itunes:block');
@@ -200,7 +200,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     protected function _setExplicit(DOMDocument $dom, DOMElement $root)
     {
         $explicit = $this->getDataContainer()->getItunesExplicit();
-        if ($explicit === NULL)) {
+        if (($explicit === NULL)) {
             return;
         }
         $el = $dom->createElement('itunes:explicit');

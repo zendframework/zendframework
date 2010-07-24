@@ -40,7 +40,7 @@ class Zend_Oauth_Signature_Plaintext extends Zend_Oauth_Signature_SignatureAbstr
      */
     public function sign(array $params, $method = null, $url = null)
     {
-        if ($this->_tokenSecret === NULL)) {
+        if (($this->_tokenSecret === NULL)) {
             return $this->_consumerSecret . '&';
         }
         $return = implode('&', array($this->_consumerSecret, $this->_tokenSecret));

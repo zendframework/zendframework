@@ -181,7 +181,7 @@ class Zend_Oauth_Http
             $body   = $response->getBody();
             $status = $response->getStatus();
         }
-        if ($response === NULL) // Request failure/exception
+        if (($response === NULL) // Request failure/exception
             || $status == 500  // Internal Server Error
             || $status == 400  // Bad Request
             || $status == 401  // Unauthorized

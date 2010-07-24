@@ -84,7 +84,7 @@ class Zend_Ldap_Attribute
     public static function getAttribute(array $data, $attribName, $index = null)
     {
         $attribName = strtolower($attribName);
-        if ($index === NULL)) {
+        if (($index === NULL)) {
             if (!isset($data[$attribName])) return array();
             $retArray = array();
             foreach ($data[$attribName] as $v)

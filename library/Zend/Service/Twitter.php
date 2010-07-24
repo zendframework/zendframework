@@ -145,7 +145,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
             $this->setLocalHttpClient($options['accessToken']->getHttpClient($options));
         } else {
             $this->setLocalHttpClient(clone self::getHttpClient());
-            if ($consumer === NULL)) {
+            if (($consumer === NULL)) {
                 $this->_oauthConsumer = new Zend_Oauth_Consumer($options);
             } else {
                 $this->_oauthConsumer = $consumer;

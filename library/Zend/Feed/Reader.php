@@ -236,10 +236,10 @@ class Zend_Feed_Reader
         if (self::$_httpConditionalGet && $cache) {
             $data = $cache->load($cacheId);
             if ($data) {
-                if ($etag === NULL)) {
+                if (($etag === NULL)) {
                     $etag = $cache->load($cacheId.'_etag');
                 }
-                if ($lastModified === NULL)) {
+                if (($lastModified === NULL)) {
                     $lastModified = $cache->load($cacheId.'_lastmodified');;
                 }
                 if ($etag) {

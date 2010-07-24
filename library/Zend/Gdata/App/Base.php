@@ -375,8 +375,8 @@ abstract class Zend_Gdata_App_Base
     {
         // Check for a memoized result
         $key = $prefix . ' ' .
-               ($majorVersion === NULL) ? 'NULL' : $majorVersion) .
-               ' '. ($minorVersion === NULL) ? 'NULL' : $minorVersion);
+               (($majorVersion === NULL) ? 'NULL' : $majorVersion) .
+               ' '. (($minorVersion === NULL) ? 'NULL' : $minorVersion);
         if (array_key_exists($key, self::$_namespaceLookupCache))
           return self::$_namespaceLookupCache[$key];
         // If no match, return the prefix by default

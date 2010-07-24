@@ -136,7 +136,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      */
     public function getLdap()
     {
-        if ($this->_ldap === NULL)) {
+        if (($this->_ldap === NULL)) {
             /**
              * @see Zend_Ldap_Exception
              */

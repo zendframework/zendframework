@@ -198,13 +198,13 @@ class Zend_Service_WindowsAzure_Storage
 			$this->_usePathStyleUri = true;
 		}
 		
-		if ($this->_credentials === NULL)) {
+		if (($this->_credentials === NULL)) {
 		    $this->_credentials = new Zend_Service_WindowsAzure_Credentials_SharedKey(
 		    	$this->_accountName, $this->_accountKey, $this->_usePathStyleUri);
 		}
 		
 		$this->_retryPolicy = $retryPolicy;
-		if ($this->_retryPolicy === NULL)) {
+		if (($this->_retryPolicy === NULL)) {
 		    $this->_retryPolicy = Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract::noRetry();
 		}
 		
@@ -240,7 +240,7 @@ class Zend_Service_WindowsAzure_Storage
 	public function setRetryPolicy(Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy = null)
 	{
 		$this->_retryPolicy = $retryPolicy;
-		if ($this->_retryPolicy === NULL)) {
+		if (($this->_retryPolicy === NULL)) {
 		    $this->_retryPolicy = Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract::noRetry();
 		}
 	}
@@ -357,7 +357,7 @@ class Zend_Service_WindowsAzure_Storage
 		}
 			
 		// Clean headers
-		if ($headers === NULL)) {
+		if (($headers === NULL)) {
 		    $headers = array();
 		}
 		
@@ -406,7 +406,7 @@ class Zend_Service_WindowsAzure_Storage
 	 */
 	protected function _parseResponse(Zend_Http_Response $response = null)
 	{
-		if ($response === NULL)) {
+		if (($response === NULL)) {
 			throw new Zend_Service_WindowsAzure_Exception('Response should not be null.');
 		}
 		
@@ -485,7 +485,7 @@ class Zend_Service_WindowsAzure_Storage
 	    $tz = @date_default_timezone_get();
 	    @date_default_timezone_set('UTC');
 	    
-	    if ($timestamp === NULL)) {
+	    if (($timestamp === NULL)) {
 	        $timestamp = time();
 	    }
 	        

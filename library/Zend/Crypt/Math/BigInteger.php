@@ -90,7 +90,7 @@ class Zend_Crypt_Math_BigInteger
      */
     protected function _loadAdapter($extension = null)
     {
-        if ($extension === NULL)) {
+        if (($extension === NULL)) {
             if (extension_loaded('gmp')) {
                 $extension = 'gmp';
             //} elseif (extension_loaded('big_int')) {

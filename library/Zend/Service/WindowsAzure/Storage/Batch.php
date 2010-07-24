@@ -149,7 +149,7 @@ class Zend_Service_WindowsAzure_Storage_Batch
 		}
 			
 		// Clean headers
-		if ($headers === NULL)) {
+		if (($headers === NULL)) {
 		    $headers = array();
 		}
 		    
@@ -161,7 +161,7 @@ class Zend_Service_WindowsAzure_Storage_Batch
 		$requestUrl     = $this->getBaseUrl() . $path . $queryString;
 		
 		// Generate $rawData
-		if ($rawData === NULL)) {
+		if (($rawData === NULL)) {
 		    $rawData = '';
 		}
 		    

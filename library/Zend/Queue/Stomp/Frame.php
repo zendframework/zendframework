@@ -195,7 +195,7 @@ class Zend_Queue_Stomp_Frame
      */
     public function getBody()
     {
-        return($this->_body === NULL)
+        return ($this->_body === NULL)
             ? false
             : $this->_body;
     }
@@ -229,7 +229,7 @@ class Zend_Queue_Stomp_Frame
      */
     public function getCommand()
     {
-        return($this->_command === NULL)
+        return ($this->_command === NULL)
             ? false
             : $this->_command;
     }

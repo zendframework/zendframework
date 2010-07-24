@@ -176,7 +176,7 @@ class Zend_Filter_Compress_Rar extends Zend_Filter_Compress_CompressAbstract
     public function compress($content)
     {
         $callback = $this->getCallback();
-        if ($callback === NULL)) {
+        if (($callback === NULL)) {
             require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('No compression callback available');
         }

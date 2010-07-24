@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Framework\Client;
+namespace Zend\Tool\Framework\Client\Console;
 
 /**
  * Zend_Tool_Framework_Client_Console - the CLI Client implementation for Zend_Tool_Framework

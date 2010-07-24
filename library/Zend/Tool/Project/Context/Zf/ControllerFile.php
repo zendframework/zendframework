@@ -160,7 +160,7 @@ switch (\$errors->type) {
 }
 
 // Log exception, if logger available
-if (\$log = \$this->getLog()) {
+if ((\$log = \$this->getLog())) {
     \$log->crit(\$this->view->message, \$errors->exception);
 }
 

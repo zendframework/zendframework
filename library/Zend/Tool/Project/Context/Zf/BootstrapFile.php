@@ -101,7 +101,7 @@ class BootstrapFile extends \Zend\Tool\Project\Context\Filesystem\File
             'classes' => array(
                 new \Zend\CodeGenerator\PHP\PHPClass(array(
                     'name' => 'Bootstrap',
-                    'extendedClass' => 'Zend_Application_Bootstrap_Bootstrap',
+                    'extendedClass' => '\Zend\Application\Bootstrap',
                     )),
                 )
             ));

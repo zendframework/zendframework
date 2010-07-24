@@ -62,7 +62,7 @@ class Zend_Crypt_Rsa_Key_Private extends Zend_Crypt_Rsa_Key
 
     public function getPublicKey()
     {
-        if (is_null($this->_publicKey)) {
+        if ($this->_publicKey === NULL)) {
             /**
              * @see Zend_Crypt_Rsa_Key_Public
              */

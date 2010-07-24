@@ -129,7 +129,7 @@ class Zend_Service_WindowsAzure_Storage_TableEntityQuery
 	{
 	    $condition = $this->_replaceOperators($condition);
 	    
-	    if (!is_null($value)) {
+	    if (($value !== NULL)) {
 	        $condition = $this->_quoteInto($condition, $value);
 	    }
 	    
@@ -211,7 +211,7 @@ class Zend_Service_WindowsAzure_Storage_TableEntityQuery
 			$query[] = '$orderby=' . ($urlEncode ? urlencode($orderBy) : $orderBy);
 		}
 		
-		if (!is_null($this->_top)) {
+		if (($this->_top !== NULL)) {
 			$query[] = '$top=' . $this->_top;
 		}
 		
@@ -234,15 +234,15 @@ class Zend_Service_WindowsAzure_Storage_TableEntityQuery
 	    if ($includeParentheses) {
 	        $identifier .= '(';
 	        
-	        if (!is_null($this->_partitionKey)) {
+	        if (($this->_partitionKey !== NULL)) {
 	            $identifier .= 'PartitionKey=\'' . $this->_partitionKey . '\'';
 	        }
 	            
-	        if (!is_null($this->_partitionKey) && !is_null($this->_rowKey)) {
+	        if (($this->_partitionKey !== NULL) && ($this->_rowKey !== NULL)) {
 	            $identifier .= ', ';
 	        }
 	            
-	        if (!is_null($this->_rowKey)) {
+	        if (($this->_rowKey !== NULL)) {
 	            $identifier .= 'RowKey=\'' . $this->_rowKey . '\'';
 	        }
 	            

@@ -979,7 +979,7 @@ class Zend_Ldap
             require_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception($this, 'searching: ' . $filter);
         }
-        if (!is_null($sort) && is_string($sort)) {
+        if (($sort !== NULL) && is_string($sort)) {
             $isSorted = @ldap_sort($this->getResource(), $search, $sort);
             if($isSorted === false) {
                 /**
@@ -1156,7 +1156,7 @@ class Zend_Ldap
         foreach ($entry as $key => $value) {
             if (is_array($value)) {
                 foreach ($value as $i => $v) {
-                    if (is_null($v)) unset($value[$i]);
+                    if ($v === NULL)) unset($value[$i]);
                     else if (!is_scalar($v)) {
                         throw new InvalidArgumentException('Only scalar values allowed in LDAP data');
                     } else {
@@ -1170,7 +1170,7 @@ class Zend_Ldap
                 }
                 $entry[$key] = array_values($value);
             } else {
-                if (is_null($value)) $entry[$key] = array();
+                if ($value === NULL)) $entry[$key] = array();
                 else if (!is_scalar($value)) {
                     throw new InvalidArgumentException('Only scalar values allowed in LDAP data');
                 } else {

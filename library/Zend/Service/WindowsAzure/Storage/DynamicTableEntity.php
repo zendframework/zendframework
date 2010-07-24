@@ -86,7 +86,7 @@ class Zend_Service_WindowsAzure_Storage_DynamicTableEntity extends Zend_Service_
         } else {
             if (!array_key_exists(strtolower($name), $this->_dynamicProperties)) {
                 // Determine type?
-                if (is_null($type)) {
+                if ($type === NULL)) {
                     $type = 'Edm.String';
                     if (is_int($value)) {
                         $type = 'Edm.Int32';

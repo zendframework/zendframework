@@ -74,7 +74,7 @@ class Zend_Soap_Wsdl_Strategy_DefaultComplexType extends Zend_Soap_Wsdl_Strategy
                 $element->setAttribute('type', $this->getContext()->getType(trim($matches[1][0])));
 
                 // If the default value is null, then this property is nillable.
-                if (is_null($defaultProperties[$propertyName])) {
+                if ($defaultProperties[$propertyName] === NULL)) {
                     $element->setAttribute('nillable', 'true');
                 }
 

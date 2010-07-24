@@ -156,7 +156,7 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
      */
     public function __construct($options = null)
     {
-        if (!is_null($options)) {
+        if (($options !== NULL)) {
             if ($options instanceof Zend_Config) {
                 $options = $options->toArray();
             }
@@ -267,7 +267,7 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
      */
     public function getConsumerSecret()
     {
-        if (!is_null($this->_rsaPrivateKey)) {
+        if (($this->_rsaPrivateKey !== NULL)) {
             return $this->_rsaPrivateKey;
         }
         return $this->_consumerSecret;

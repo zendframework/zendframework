@@ -115,7 +115,7 @@ abstract class Zend_Oauth_Signature_SignatureAbstract
     protected function _assembleKey()
     {
         $parts = array($this->_consumerSecret);
-        if (!is_null($this->_tokenSecret)) {
+        if (($this->_tokenSecret !== NULL)) {
             $parts[] = $this->_tokenSecret;
         }
         foreach ($parts as $key => $secret) {

@@ -607,7 +607,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
     public function handle($request = null)
     {
         // Check if request was passed otherwise get it from the server
-        if (is_null($request) || !$request instanceof Zend_Amf_Request) {
+        if ($request === NULL) || !$request instanceof Zend_Amf_Request) {
             $request = $this->getRequest();
         } else {
             $this->setRequest($request);

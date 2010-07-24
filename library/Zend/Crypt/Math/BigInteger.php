@@ -61,7 +61,7 @@ class Zend_Crypt_Math_BigInteger
      */
     public function __construct($extension = null)
     {
-        if (!is_null($extension) && !in_array($extension, array('bcmath', 'gmp', 'bigint'))) {
+        if (($extension !== NULL) && !in_array($extension, array('bcmath', 'gmp', 'bigint'))) {
             require_once('Zend/Crypt/Math/BigInteger/Exception.php');
             throw new Zend_Crypt_Math_BigInteger_Exception('Invalid extension type; please use one of bcmath, gmp or bigint');
         }
@@ -90,7 +90,7 @@ class Zend_Crypt_Math_BigInteger
      */
     protected function _loadAdapter($extension = null)
     {
-        if (is_null($extension)) {
+        if ($extension === NULL)) {
             if (extension_loaded('gmp')) {
                 $extension = 'gmp';
             //} elseif (extension_loaded('big_int')) {

@@ -126,7 +126,7 @@ class Zend_Feed_Writer_Deleted
     public function setWhen($date = null)
     {
         $zdate = null;
-        if (is_null($date)) {
+        if ($date === NULL)) {
             $zdate = new Zend_Date;
         } elseif (ctype_digit($date) && strlen($date) == 10) {
             $zdate = new Zend_Date($date, Zend_Date::TIMESTAMP);

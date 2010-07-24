@@ -53,13 +53,13 @@ class Zend_Ldap_Attribute
             foreach ($value as $v)
             {
                 $v = self::_valueToLdap($v);
-                if (!is_null($v)) $valArray[] = $v;
+                if (($v !== NULL)) $valArray[] = $v;
             }
         }
-        else if (!is_null($value))
+        else if (($value !== NULL))
         {
             $value = self::_valueToLdap($value);
-            if (!is_null($value)) $valArray[] = $value;
+            if (($value !== NULL)) $valArray[] = $value;
         }
 
         if ($append === true && isset($data[$attribName]))
@@ -84,7 +84,7 @@ class Zend_Ldap_Attribute
     public static function getAttribute(array $data, $attribName, $index = null)
     {
         $attribName = strtolower($attribName);
-        if (is_null($index)) {
+        if ($index === NULL)) {
             if (!isset($data[$attribName])) return array();
             $retArray = array();
             foreach ($data[$attribName] as $v)
@@ -344,12 +344,12 @@ class Zend_Ldap_Attribute
         {
             foreach ($value as $v) {
                 $v = self::_valueToLdapDateTime($v, $utc);
-                if (!is_null($v)) $convertedValues[] = $v;
+                if (($v !== NULL)) $convertedValues[] = $v;
             }
         }
-        else if (!is_null($value)) {
+        else if (($value !== NULL)) {
             $value = self::_valueToLdapDateTime($value, $utc);
-            if (!is_null($value)) $convertedValues[] = $value;
+            if (($value !== NULL)) $convertedValues[] = $value;
         }
         self::setAttribute($data, $attribName, $convertedValues, $append);
     }

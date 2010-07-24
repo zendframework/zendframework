@@ -273,7 +273,7 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
         // NULL (null)
         if ($type >= self::NULL) {
             $type -= self::NULL;
-            if (is_null($value)) {
+            if ($value === NULL)) {
                 return false;
             }
         }

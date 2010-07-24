@@ -203,7 +203,7 @@ class Zend_Tool_Framework_Metadata_Basic
                     $varValue = '(object)';
                 }
 
-                if (is_null($varValue)) {
+                if ($varValue === NULL)) {
                     $varValue = '(null)';
                 }
 

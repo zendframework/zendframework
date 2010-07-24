@@ -103,7 +103,7 @@ class Zend_Service_WindowsAzure_Credentials_SharedKey
 		}
 		
 		// Build canonicalized headers
-		if (!is_null($headers)) {
+		if (($headers !== NULL)) {
 			foreach ($headers as $header => $value) {
 				if (is_bool($value)) {
 					$value = $value === true ? 'True' : 'False';

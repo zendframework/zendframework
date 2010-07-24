@@ -208,7 +208,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_Callback
      */
     public function hasFeedUpdate()
     {
-        if (is_null($this->_feedUpdate)) {
+        if ($this->_feedUpdate === NULL)) {
             return false;
         }
         return true;

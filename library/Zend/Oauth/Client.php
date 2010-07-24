@@ -78,7 +78,7 @@ class Zend_Oauth_Client extends Zend_Http_Client
     {
         parent::__construct($uri, $config);
         $this->_config = new Zend_Oauth_Config;
-        if (!is_null($oauthOptions)) {
+        if (($oauthOptions !== NULL)) {
             if ($oauthOptions instanceof Zend_Config) {
                 $oauthOptions = $oauthOptions->toArray();
             }
@@ -217,7 +217,7 @@ class Zend_Oauth_Client extends Zend_Http_Client
      */
     public function request($method = null)
     {
-        if (!is_null($method)) {
+        if (($method !== NULL)) {
             $this->setMethod($method);
         }
         $this->prepareOauth();

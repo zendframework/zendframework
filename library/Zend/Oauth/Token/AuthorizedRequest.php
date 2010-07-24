@@ -44,14 +44,14 @@ class Zend_Oauth_Token_AuthorizedRequest extends Zend_Oauth_Token
      */
     public function __construct(array $data = null, Zend_Oauth_Http_Utility $utility = null)
     {
-        if (!is_null($data)) {
+        if (($data !== NULL)) {
             $this->_data = $data;
             $params = $this->_parseData();
             if (count($params) > 0) {
                 $this->setParams($params);
             }
         }
-        if (!is_null($utility)) {
+        if (($utility !== NULL)) {
             $this->_httpUtility = $utility;
         } else {
             $this->_httpUtility = new Zend_Oauth_Http_Utility;

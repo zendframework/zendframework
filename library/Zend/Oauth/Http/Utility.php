@@ -60,7 +60,7 @@ class Zend_Oauth_Http_Utility
         }
 
 
-        if (!is_null($serviceProviderParams)) {
+        if (($serviceProviderParams !== NULL)) {
             $params = array_merge($params, $serviceProviderParams);
         }
 

@@ -195,7 +195,7 @@ class Zend_Queue_Stomp_Frame
      */
     public function getBody()
     {
-        return is_null($this->_body)
+        return($this->_body === NULL)
             ? false
             : $this->_body;
     }
@@ -211,7 +211,7 @@ class Zend_Queue_Stomp_Frame
      */
     public function setBody($body)
     {
-        if (!is_string($body) && !is_null($body)) {
+        if (!is_string($body) && ($body !== NULL)) {
             require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('$body is not a string or null');
         }
@@ -229,7 +229,7 @@ class Zend_Queue_Stomp_Frame
      */
     public function getCommand()
     {
-        return is_null($this->_command)
+        return($this->_command === NULL)
             ? false
             : $this->_command;
     }
@@ -243,7 +243,7 @@ class Zend_Queue_Stomp_Frame
      */
     public function setCommand($command)
     {
-        if (!is_string($command) && !is_null($command)) {
+        if (!is_string($command) && ($command !== NULL)) {
             require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('$command is not a string or null');
         }

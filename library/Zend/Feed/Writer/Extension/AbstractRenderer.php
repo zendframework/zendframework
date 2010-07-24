@@ -16,21 +16,21 @@
  * @package    Zend_Feed_Writer_Entry_Rss
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: RendererAbstract.php 20785 2010-01-31 09:43:03Z mikaelkael $
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace Zend\Feed\Writer\Extension;
 
 /**
- * @uses       \Zend\Feed\Writer\Extension
- * @category   Zend
- * @package    Zend_Feed_Writer_Entry_Rss
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
+* @uses \Zend\Feed\Writer\Extension\RendererInterface
+* @category Zend
+* @package Zend_Feed_Writer_Entry_Rss
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
 abstract class AbstractRenderer implements Renderer
 {
     /**
@@ -85,7 +85,7 @@ abstract class AbstractRenderer implements Renderer
      * Set feed encoding
      * 
      * @param  string $enc 
-     * @return \Zend\Feed\Writer\Extension\AbstractRenderer
+     * @return Zend_Feed_Writer_Extension_RendererAbstract
      */
     public function setEncoding($enc)
     {
@@ -108,7 +108,7 @@ abstract class AbstractRenderer implements Renderer
      * 
      * @param  DOMDocument $dom 
      * @param  DOMElement $base 
-     * @return \Zend\Feed\Writer\Extension\AbstractRenderer
+     * @return Zend_Feed_Writer_Extension_RendererAbstract
      */
     public function setDomDocument(\DOMDocument $dom, \DOMElement $base)
     {
@@ -131,7 +131,7 @@ abstract class AbstractRenderer implements Renderer
      * Set feed type
      * 
      * @param  string $type 
-     * @return \Zend\Feed\Writer\Extension\AbstractRenderer
+     * @return Zend_Feed_Writer_Extension_RendererAbstract
      */
     public function setType($type)
     {
@@ -153,7 +153,7 @@ abstract class AbstractRenderer implements Renderer
      * Set root element of document 
      * 
      * @param  DOMElement $root 
-     * @return \Zend\Feed\Writer\Extension\AbstractRenderer
+     * @return Zend_Feed_Writer_Extension_RendererAbstract
      */
     public function setRootElement(\DOMElement $root)
     {

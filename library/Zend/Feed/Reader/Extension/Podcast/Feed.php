@@ -16,15 +16,26 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Feed.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace Zend\Feed\Reader\Extension\Podcast;
+use Zend\Feed\Reader\Extension;
 
 /**
+<<<<<<< HEAD
+* @uses \Zend\Feed\Reader\Reader
+* @uses \Zend\Feed\Reader\Extension\EntryAbstract
+* @category Zend
+* @package Zend_Feed_Reader
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Feed extends Extension\AbstractFeed
+=======
  * @uses       \Zend\Feed\Reader\Extension\AbstractFeed
  * @category   Zend
  * @package    Zend_Feed_Reader
@@ -32,6 +43,7 @@ namespace Zend\Feed\Reader\Extension\Podcast;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
+>>>>>>> master
 {
     /**
      * Get the entry author
@@ -82,7 +94,7 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
      *
      * @return string
      */
-    public function getCategories()
+    public function getItunesCategories()
     {
         if (isset($this->_data['categories'])) {
             return $this->_data['categories'];
@@ -147,7 +159,7 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
      *
      * @return string
      */
-    public function getImage()
+    public function getItunesImage()
     {
         if (isset($this->_data['image'])) {
             return $this->_data['image'];

@@ -21,21 +21,21 @@
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace ZendTest\Feed\Reader\Entry;
 use Zend\Feed\Reader;
 use Zend\Date;
 
 /**
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Feed
- * @group      Zend_Feed_Reader
- */
+* @category Zend
+* @package Zend_Feed
+* @subpackage UnitTests
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+* @group Zend_Feed
+* @group Zend_Feed_Reader
+*/
 class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -52,7 +52,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
             $registry = \Zend\Registry::getInstance();
             unset($registry['Zend_Locale']);
         }
-        $this->_feedSamplePath = __DIR__ . '/_files/AtomStandaloneEntry';
+        $this->_feedSamplePath = dirname(__FILE__) . '/_files/AtomStandaloneEntry';
         $this->_options = Date\Date::setOptions();
         foreach($this->_options as $k=>$v) {
             if (is_null($v)) {
@@ -101,7 +101,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
         $object = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath . '/id/atom10.xml')
         );
-        $this->assertTrue($object instanceof \Zend\Feed\Reader\Entry\Atom);
+        $this->assertTrue($object instanceof Reader\Entry\Atom);
     }
 
     /**

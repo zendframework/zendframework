@@ -16,15 +16,24 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Source.php 20785 2010-01-31 09:43:03Z mikaelkael $
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace Zend\Feed\Writer;
 
 /**
+<<<<<<< HEAD
+* @uses \Zend\Feed\Writer\Feed\FeedAbstract
+* @category Zend
+* @package Zend_Feed_Writer
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Source extends AbstractFeed
+=======
  * @uses       \Zend\Feed\Writer\Feed\AbstractFeed
  * @category   Zend
  * @package    Zend_Feed_Writer
@@ -32,6 +41,7 @@ namespace Zend\Feed\Writer;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Source extends Feed\AbstractFeed
+>>>>>>> master
 {
 
 }

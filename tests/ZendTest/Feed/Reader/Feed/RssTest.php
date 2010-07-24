@@ -17,26 +17,26 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: RssTest.php 22297 2010-05-25 21:33:38Z padraic $
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace ZendTest\Feed\Reader\Feed;
 use Zend\Feed\Reader;
 use Zend\Date;
 
 /**
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Feed
- * @group      Zend_Feed_Reader
- */
-class RSSTest extends \PHPUnit_Framework_TestCase
+* @category Zend
+* @package Zend_Feed
+* @subpackage UnitTests
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+* @group Zend_Feed
+* @group Zend_Feed_Reader
+*/
+class RssTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
@@ -54,7 +54,7 @@ class RSSTest extends \PHPUnit_Framework_TestCase
             $registry = \Zend\Registry::getInstance();
             unset($registry['Zend_Locale']);
         }
-        $this->_feedSamplePath = __DIR__ . '/_files/Rss';
+        $this->_feedSamplePath = dirname(__FILE__) . '/_files/Rss';
         $this->_options = Date\Date::setOptions();
         foreach($this->_options as $k=>$v) {
             if (is_null($v)) {
@@ -2148,7 +2148,7 @@ class RSSTest extends \PHPUnit_Framework_TestCase
         );
         $fdate = $feed->getDateModified();
         $edate = new Date\Date;
-        $edate->set('2010-01-04T02:14:00-0600', Date\Date::ISO_8601);
+        $edate->set('2010-01-04T08:14:00-0600', Date\Date::ISO_8601);
         \Zend\Registry::getInstance()->offsetUnset('Zend_Locale');
         $this->assertTrue($edate->equals($fdate));
     }
@@ -2979,4 +2979,5 @@ class RSSTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals(null, $feed->getImage());
     }
+
 }

@@ -13,16 +13,32 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Reader
+ * @package    Reader\Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Source.php 20785 2010-01-31 09:43:03Z mikaelkael $
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace Zend\Feed\Reader\Feed\Atom;
+<<<<<<< HEAD
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Feed;
+use Zend\Date;
+
+/**
+* @uses \Zend\Feed\Reader\Reader
+* @uses \Zend\Feed\Reader\Extension\Atom\Feed
+* @uses \Zend\Feed\Reader\Feed\AbstractFeed
+* @category Zend
+* @package Reader
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Source extends Feed\Atom
+=======
 
 use Zend\Feed\Reader\Feed\Atom,
     Zend\Feed\Reader;
@@ -36,11 +52,16 @@ use Zend\Feed\Reader\Feed\Atom,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Source extends Atom
+>>>>>>> master
 {
 
     /**
      * Constructor: Create a Source object which is largely just a normal
+<<<<<<< HEAD
+     * Reader\Reader_FeedAbstract object only designed to retrieve feed level
+=======
      * Zend\Feed\Reader\AbstractFeed object only designed to retrieve feed level
+>>>>>>> master
      * metadata from an Atom entry's source element.
      *
      * @param DOMElement $source
@@ -55,10 +76,10 @@ class Source extends Atom
         $this->_registerNamespaces();
         $this->_loadExtensions();
         
-        $atomClass = Reader\Reader::getPluginLoader()->getClassName('Atom\Feed');
-        $this->_extensions['Atom\Feed'] = new $atomClass($this->_domDocument, $this->_data['type'], $this->_xpath);
-        $atomClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\Feed');
-        $this->_extensions['DublinCore\Feed'] = new $atomClass($this->_domDocument, $this->_data['type'], $this->_xpath);
+        $atomClass = Reader\Reader::getPluginLoader()->getClassName('Atom\\Feed');
+        $this->_extensions['Atom\\Feed'] = new $atomClass($this->_domDocument, $this->_data['type'], $this->_xpath);
+        $atomClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\\Feed');
+        $this->_extensions['DublinCore\\Feed'] = new $atomClass($this->_domDocument, $this->_data['type'], $this->_xpath);
         foreach ($this->_extensions as $extension) {
             $extension->setXpathPrefix(rtrim($xpathPrefix, '/') . '/atom:source');
         }

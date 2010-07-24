@@ -16,12 +16,12 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Writer.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace Zend\Feed\Writer;
 use Zend\Loader\PrefixPathMapper,
     Zend\Loader\ShortNameLocater,
@@ -29,6 +29,15 @@ use Zend\Loader\PrefixPathMapper,
     Zend\Loader\PluginLoaderException;
 
 /**
+<<<<<<< HEAD
+* @uses \Zend\Feed\Exception
+* @uses \Zend\Loader\PluginLoader\PluginLoader
+* @category Zend
+* @package Zend_Feed_Writer
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+=======
  * @uses       \Zend\Feed\Exception
  * @uses       \Zend\Loader\PluginLoader
  * @category   Zend
@@ -36,6 +45,7 @@ use Zend\Loader\PrefixPathMapper,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+>>>>>>> master
 class Writer
 {
 	/**
@@ -68,7 +78,11 @@ class Writer
     /**
      * PluginLoader instance used by component
      *
+<<<<<<< HEAD
+     * @var Zend_Loader_PluginLoader_Interface
+=======
      * @var \Zend\Loader\ShortNameLocater
+>>>>>>> master
      */
     protected static $_pluginLoader = null;
 
@@ -96,7 +110,11 @@ class Writer
     /**
      * Set plugin loader for use with Extensions
      *
+<<<<<<< HEAD
+     * @param  Zend_Loader_PluginLoader_Interface
+=======
      * @param  \Zend\Loader\ShortNameLocater
+>>>>>>> master
      */
     public static function setPluginLoader(ShortNameLocater $loader)
     {
@@ -106,13 +124,22 @@ class Writer
     /**
      * Get plugin loader for use with Extensions
      *
+<<<<<<< HEAD
+     * @return  Zend_Loader_PluginLoader_Interface
+=======
      * @return  \Zend\Loader\ShortNameLocater
+>>>>>>> master
      */
     public static function getPluginLoader()
     {
         if (!isset(self::$_pluginLoader)) {
+<<<<<<< HEAD
+            self::$_pluginLoader = new PluginLoader\PluginLoader(array(
+                'Zend\\Feed\\Writer\\Extension' => 'Zend/Feed/Writer/Extension/',
+=======
             self::$_pluginLoader = new PluginLoader(array(
                 'Zend\Feed\Writer\Extension\\' => 'Zend/Feed/Writer/Extension/',
+>>>>>>> master
             ));
         }
         return self::$_pluginLoader;
@@ -127,10 +154,13 @@ class Writer
      */
     public static function addPrefixPath($prefix, $path)
     {
+<<<<<<< HEAD
+=======
         $pluginLoader = self::getPluginLoader();
         if (!$pluginLoader instanceof PrefixPathMapper)  {
             return;
         }
+>>>>>>> master
         $prefix = rtrim($prefix, '\\');
         $path   = rtrim($path, DIRECTORY_SEPARATOR);
         $pluginLoader->addPrefixPath($prefix, $path);
@@ -163,14 +193,14 @@ class Writer
      *
      * @param  string $name
      * @return void
-     * @throws \Zend\Feed\Exception if unable to resolve Extension class
+     * @throws Zend_Feed_Exception if unable to resolve Extension class
      */
     public static function registerExtension($name)
     {
-        $feedName  = $name . '\Feed';
-        $entryName = $name . '\Entry';
-        $feedRendererName  = $name . '\Renderer\Feed';
-        $entryRendererName = $name . '\Renderer\Entry';
+        $feedName  = $name . '\\Feed';
+        $entryName = $name . '\\Entry';
+        $feedRendererName  = $name . '\\Renderer\\Feed';
+        $entryRendererName = $name . '\\Renderer\\Entry';
         if (self::isRegistered($name)) {
             if (self::getPluginLoader()->isLoaded($feedName)
                 || self::getPluginLoader()->isLoaded($entryName)
@@ -205,7 +235,7 @@ class Writer
             && !self::getPluginLoader()->isLoaded($feedRendererName)
             && !self::getPluginLoader()->isLoaded($entryRendererName)
         ) {
-            throw new \Zend\Feed\Exception('Could not load extension: ' . $name
+            throw new Exception('Could not load extension: ' . $name
                 . 'using Plugin Loader. Check prefix paths are configured and extension exists.');
         }
     }
@@ -218,10 +248,17 @@ class Writer
      */
     public static function isRegistered($extensionName)
     {
+<<<<<<< HEAD
+        $feedName  = $extensionName . '\\Feed';
+        $entryName = $extensionName . '\\Entry';
+        $feedRendererName  = $extensionName . '\\Renderer\\Feed';
+        $entryRendererName = $extensionName . '\\Renderer\\Entry';
+=======
         $feedName  = $extensionName . '\Feed';
         $entryName = $extensionName . '\Entry';
         $feedRendererName  = $extensionName . '\Renderer\Feed';
         $entryRendererName = $extensionName . '\Renderer\Entry';
+>>>>>>> master
         if (in_array($feedName, self::$_extensions['feed'])
             || in_array($entryName, self::$_extensions['entry'])
             || in_array($feedRendererName, self::$_extensions['feedRenderer'])

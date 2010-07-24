@@ -16,21 +16,30 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Category.php 20953 2010-02-06 17:55:34Z padraic $
  */
-
+ 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace Zend\Feed\Reader\Collection;
 
 /**
+<<<<<<< HEAD
+* @uses \Zend\Feed\Reader\Collection\CollectionAbstract
+* @category Zend
+* @package Zend_Feed_Reader
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+=======
  * @uses       \Zend\Feed\Reader\Collection\AbstractCollection
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+>>>>>>> master
 class Category extends AbstractCollection
 {
 

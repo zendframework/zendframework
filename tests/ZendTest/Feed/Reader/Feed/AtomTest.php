@@ -17,25 +17,25 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: AtomTest.php 22107 2010-05-05 13:42:20Z padraic $
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace ZendTest\Feed\Reader\Feed;
 use Zend\Feed\Reader;
 use Zend\Date;
 
 /**
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Feed
- * @group      Zend_Feed_Reader
- */
+* @category Zend
+* @package Zend_Feed
+* @subpackage UnitTests
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+* @group Zend_Feed
+* @group Zend_Feed_Reader
+*/
 class AtomTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -54,7 +54,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             $registry = \Zend\Registry::getInstance();
             unset($registry['Zend_Locale']);
         }
-        $this->_feedSamplePath = __DIR__ . '/_files/Atom';
+        $this->_feedSamplePath = dirname(__FILE__) . '/_files/Atom';
         $this->_options = Date\Date::setOptions();
         foreach($this->_options as $k=>$v) {
             if (is_null($v)) {
@@ -361,6 +361,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsLinkFromAtom10WithRelativeUrl()
     {
+        $this->markTestIncomplete('Pending fix for \Zend\URI\URL::validate()');
         $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/link/plain/atom10-relative.xml')
         );
@@ -399,6 +400,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsFeedLinkFromAtom10IfRelativeUri()
     {
+        $this->markTestIncomplete('Pending fix for \Zend\URI\URL::validate()');
         $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/feedlink/plain/atom10-relative.xml')
         );
@@ -415,7 +417,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get PubSubHubbub Hubs
+     * Get Pubsubhubbub Hubs
      */
     public function testGetsHubsFromAtom03()
     {

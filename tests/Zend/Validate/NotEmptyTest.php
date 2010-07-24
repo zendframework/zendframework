@@ -531,7 +531,7 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
      */
     public function testGetType()
     {
-        $this->assertEquals(237, $this->_validator->getType());
+        $this->assertEquals(493, $this->_validator->getType());
     }
 
     /**
@@ -558,7 +558,7 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
     public function testNonStringValidation()
     {
         $v2 = new Zend_Validate_NotEmpty();
-        $this->assertFalse($this->_validator->isValid($v2));
+        $this->assertTrue($this->_validator->isValid($v2));
     }
 
     /**
@@ -574,6 +574,55 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $messages = $valid->getMessages();
         $this->assertTrue(array_key_exists('isEmpty', $messages));
         $this->assertContains("can't be empty", $messages['isEmpty']);
+    }
+
+    /**
+     * @return void
+     */
+    public function testObjects()
+    {
+        $valid = new Zend_Validate_NotEmpty(Zend_Validate_NotEmpty::STRING);
+        $object = new ClassTest1();
+
+        $this->assertFalse($valid->isValid($object));
+
+        $valid = new Zend_Validate_NotEmpty(Zend_Validate_NotEmpty::OBJECT);
+        $this->assertTrue($valid->isValid($object));
+    }
+
+    /**
+     * @return void
+     */
+    public function testStringObjects()
+    {
+        $valid = new Zend_Validate_NotEmpty(Zend_Validate_NotEmpty::STRING);
+        $object = new ClassTest2();
+
+        $this->assertFalse($valid->isValid($object));
+
+        $valid = new Zend_Validate_NotEmpty(Zend_Validate_NotEmpty::OBJECT_STRING);
+        $this->assertTrue($valid->isValid($object));
+
+        $object = new ClassTest3();
+        $this->assertFalse($valid->isValid($object));
+    }
+}
+
+class ClassTest1 {}
+
+class ClassTest2
+{
+    public function __toString()
+    {
+        return 'Test';
+    }
+}
+
+class ClassTest3
+{
+    public function toString()
+    {
+        return '';
     }
 }
 

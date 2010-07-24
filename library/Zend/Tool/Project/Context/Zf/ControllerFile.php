@@ -140,47 +140,47 @@ class ControllerFile extends \Zend\Tool\Project\Context\Filesystem\File
                         'methods' => array(
                             new PHP\PHPMethod(array(
                                 'name' => 'errorAction',
-                                'body' => <<<EOS
-\$errors = \$this->_getParam('error_handler');
+                                'body' => <<<'EOS'
+$errors = $this->_getParam('error_handler');
 
-switch (\$errors->type) {
+switch ($errors->type) {
     case \Zend\Controller\Plugin\ErrorHandler::EXCEPTION_NO_ROUTE:
     case \Zend\Controller\Plugin\ErrorHandler::EXCEPTION_NO_CONTROLLER:
     case \Zend\Controller\Plugin\ErrorHandler::EXCEPTION_NO_ACTION:
 
         // 404 error -- controller or action not found
-        \$this->getResponse()->setHttpResponseCode(404);
-        \$this->view->message = 'Page not found';
+        $this->getResponse()->setHttpResponseCode(404);
+        $this->view->message = 'Page not found';
         break;
     default:
         // application error
-        \$this->getResponse()->setHttpResponseCode(500);
-        \$this->view->message = 'Application error';
+        $this->getResponse()->setHttpResponseCode(500);
+        $this->view->message = 'Application error';
         break;
 }
 
 // Log exception, if logger available
-if ((\$log = \$this->getLog())) {
-    \$log->crit(\$this->view->message, \$errors->exception);
+if (($log = $this->getLog())) {
+    $log->crit($this->view->message, $errors->exception);
 }
 
 // conditionally display exceptions
-if (\$this->getInvokeArg('displayExceptions') == true) {
-    \$this->view->exception = \$errors->exception;
+if ($this->getInvokeArg('displayExceptions') == true) {
+    $this->view->exception = $errors->exception;
 }
 
-\$this->view->request   = \$errors->request;
+$this->view->request = $errors->request;
 EOS
                                 )),
                             new PHP\PHPMethod(array(
                                 'name' => 'getLog',
-                                'body' => <<<EOS
-\$bootstrap = \$this->getInvokeArg('bootstrap');
-if (!\$bootstrap->hasPluginResource('Log')) {
+                                'body' => <<<'EOS'
+$bootstrap = $this->getInvokeArg('bootstrap');
+if (!$bootstrap->hasPluginResource('Log')) {
     return false;
 }
-\$log = \$bootstrap->getResource('Log');
-return \$log;
+$log = $bootstrap->getResource('Log');
+return $log;
 EOS
                                 )),
                             )

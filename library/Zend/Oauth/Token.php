@@ -68,14 +68,14 @@ abstract class Zend_Oauth_Token
         Zend_Http_Response $response = null,
         Zend_Oauth_Http_Utility $utility = null
     ) {
-        if (($response !== NULL)) {
+        if ($response !== null) {
             $this->_response = $response;
             $params = $this->_parseParameters($response);
             if (count($params) > 0) {
                 $this->setParams($params);
             }
         }
-        if (($utility !== NULL)) {
+        if ($utility !== null) {
             $this->_httpUtility = $utility;
         } else {
             $this->_httpUtility = new Zend_Oauth_Http_Utility;
@@ -278,7 +278,7 @@ abstract class Zend_Oauth_Token
      */
     public function __wakeup() 
     {
-        if (($this->_httpUtility === NULL)) {
+        if ($this->_httpUtility === null) {
             $this->_httpUtility = new Zend_Oauth_Http_Utility;
         }
     }

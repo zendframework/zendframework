@@ -79,7 +79,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
     public function __construct($options = null)
     {
         $this->_config = new Zend_Oauth_Config;
-        if (($options !== NULL)) {
+        if ($options !== null) {
             if ($options instanceof Zend_Config) {
                 $options = $options->toArray();
             }
@@ -102,12 +102,12 @@ class Zend_Oauth_Consumer extends Zend_Oauth
         $httpMethod = null,
         Zend_Oauth_Http_RequestToken $request = null
     ) {
-        if (($request === NULL)) {
+        if ($request === null) {
             $request = new Zend_Oauth_Http_RequestToken($this, $customServiceParameters);
-        } elseif(($customServiceParameters !== NULL)) {
+        } elseif($customServiceParameters !== null) {
             $request->setParameters($customServiceParameters);
         }
-        if (($httpMethod !== NULL)) {
+        if ($httpMethod !== null) {
             $request->setMethod($httpMethod);
         } else {
             $request->setMethod($this->getRequestMethod());
@@ -134,12 +134,12 @@ class Zend_Oauth_Consumer extends Zend_Oauth
         Zend_Oauth_Token_Request $token = null,
         Zend_Oauth_Http_UserAuthorization $redirect = null
     ) {
-        if (($redirect === NULL)) {
+        if ($redirect === null) {
             $redirect = new Zend_Oauth_Http_UserAuthorization($this, $customServiceParameters);
-        } elseif(($customServiceParameters !== NULL)) {
+        } elseif($customServiceParameters !== null) {
             $redirect->setParameters($customServiceParameters);
         }
-        if (($token !== NULL)) {
+        if ($token !== null) {
             $this->_requestToken = $token;
         }
         return $redirect->getUrl();
@@ -187,7 +187,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
             throw new Zend_Oauth_Exception(
                 'Response from Service Provider is not a valid authorized request token');
         }
-        if (($request === NULL)) {
+        if ($request === null) {
             $request = new Zend_Oauth_Http_AccessToken($this);
         }
 
@@ -198,7 +198,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
             ));
             $request->setParameters($params);
         }
-        if (($httpMethod !== NULL)) {
+        if ($httpMethod !== null) {
             $request->setMethod($httpMethod);
         } else {
             $request->setMethod($this->getRequestMethod());

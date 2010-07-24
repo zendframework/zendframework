@@ -263,7 +263,7 @@ class Zend_Service_WindowsAzure_Storage_TableEntity
         $properties = $type->getProperties();
         foreach ($properties as $property) {
             $accessor = self::getAzureAccessor($property);
-            if (($accessor !== NULL)) {
+            if ($accessor !== null) {
                 $azureAccessors[] = $accessor;
             }
         }
@@ -272,7 +272,7 @@ class Zend_Service_WindowsAzure_Storage_TableEntity
         $methods = $type->getMethods();
         foreach ($methods as $method) {
             $accessor = self::getAzureAccessor($method);
-            if (($accessor !== NULL)) {
+            if ($accessor !== null) {
                 $azureAccessors[] = $accessor;
             }
         }

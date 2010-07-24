@@ -74,7 +74,7 @@ abstract class Zend_Feed_Pubsubhubbub_CallbackAbstract
      */
     public function __construct($config = null)
     {
-        if (($config !== NULL)) {
+        if ($config !== null) {
             $this->setConfig($config);
         }
     }

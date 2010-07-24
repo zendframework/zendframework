@@ -190,7 +190,7 @@ class Zend_Crypt_Rsa
     {
         $config = null;
         $passPhrase = null;
-        if (($configargs !== NULL)) {
+        if ($configargs !== null) {
             if (isset($configargs['passPhrase'])) {
                 $passPhrase = $configargs['passPhrase'];
                 unset($configargs['passPhrase']);

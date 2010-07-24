@@ -86,10 +86,10 @@ class Zend_Oauth_Http
     ) {
         $this->_consumer = $consumer;
         $this->_preferredRequestScheme = $this->_consumer->getRequestScheme();
-        if (($parameters !== NULL)) {
+        if ($parameters !== null) {
             $this->setParameters($parameters);
         }
-        if (($utility !== NULL)) {
+        if ($utility !== null) {
             $this->_httpUtility = $utility;
         } else {
             $this->_httpUtility = new Zend_Oauth_Http_Utility;
@@ -177,11 +177,11 @@ class Zend_Oauth_Http
             require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('Error in HTTP request', null, $e);
         }
-        if (($response !== NULL)) {
+        if ($response !== null) {
             $body   = $response->getBody();
             $status = $response->getStatus();
         }
-        if (($response === NULL) // Request failure/exception
+        if ($response === null // Request failure/exception
             || $status == 500  // Internal Server Error
             || $status == 400  // Bad Request
             || $status == 401  // Unauthorized
@@ -233,7 +233,7 @@ class Zend_Oauth_Http
                 require_once 'Zend/Oauth/Exception.php';
                 throw new Zend_Oauth_Exception(
                     'Could not retrieve a valid Token response from Token URL:'
-                    . (($response !== NULL) 
+                    . ($response !== null 
                         ? PHP_EOL . $response->getBody()
                         : ' No body - check for headers')
                 );

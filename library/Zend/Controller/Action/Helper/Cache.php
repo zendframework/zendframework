@@ -223,7 +223,7 @@ class Zend_Controller_Action_Helper_Cache
      */
     public function getManager()
     {
-        if (($this->_manager !== NULL)) {
+        if ($this->_manager !== null) {
             return $this->_manager;
         }
         $front = Zend_Controller_Front::getInstance();

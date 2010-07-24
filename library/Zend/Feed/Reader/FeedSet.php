@@ -88,7 +88,7 @@ class Zend_Feed_Reader_FeedSet extends ArrayObject
     protected function _absolutiseUri($link, $uri = null)
     {
         if (!Zend_Uri::check($link)) {
-            if (($uri !== NULL)) {
+            if ($uri !== null) {
                 $uri = Zend_Uri::factory($uri);
 
                 if ($link[0] !== '/') {

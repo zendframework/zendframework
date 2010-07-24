@@ -90,7 +90,7 @@ class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
         $clink->setAttribute('type', 'text/html');
         $clink->setAttribute('href', $link);
         $count = $this->getDataContainer()->getCommentCount();
-        if (($count !== NULL)) {
+        if ($count !== null) {
             $clink->setAttribute('thr:count', $count);
         }
         $root->appendChild($clink);
@@ -116,7 +116,7 @@ class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
             $flink->setAttribute('type', 'application/'. $link['type'] .'+xml');
             $flink->setAttribute('href', $link['uri']);
             $count = $this->getDataContainer()->getCommentCount();
-            if (($count !== NULL)) {
+            if ($count !== null) {
                 $flink->setAttribute('thr:count', $count);
             }
             $root->appendChild($flink);
@@ -134,7 +134,7 @@ class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
     protected function _setCommentCount(DOMDocument $dom, DOMElement $root)
     {
         $count = $this->getDataContainer()->getCommentCount();
-        if (($count === NULL)) {
+        if ($count === null) {
             return;
         }
         $tcount = $this->_dom->createElement('thr:total');

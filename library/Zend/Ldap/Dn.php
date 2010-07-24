@@ -610,8 +610,8 @@ class Zend_Ldap_Dn implements ArrayAccess
                 $ret[] = array($k[$i] => $v[$i]);
             }
         }
-        if (($keys !== NULL)) $keys = $k;
-        if (($vals !== NULL)) $vals = $v;
+        if ($keys !== null) $keys = $k;
+        if ($vals !== null) $vals = $v;
         return $ret;
     }
 

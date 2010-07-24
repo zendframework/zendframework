@@ -74,7 +74,7 @@ class Zend_Feed_Pubsubhubbub_Publisher
      */
     public function __construct($config = null)
     {
-        if (($config !== NULL)) {
+        if ($config !== null) {
             $this->setConfig($config);
         }
     }
@@ -306,7 +306,7 @@ class Zend_Feed_Pubsubhubbub_Publisher
             $this->removeParameter($name);
             return $this;
         }
-        if (empty($value) || (!is_string($value) && ($value !== NULL))) {
+        if (empty($value) || (!is_string($value) && $value !== null)) {
             require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
             throw new Zend_Feed_Pubsubhubbub_Exception('Invalid parameter "value"'
                 .' of "' . $value . '" must be a non-empty string');

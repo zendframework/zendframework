@@ -99,7 +99,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
     protected function __construct(Zend_Ldap_Dn $dn, array $data, $fromDataSource, Zend_Ldap $ldap = null)
     {
         parent::__construct($dn, $data, $fromDataSource);
-        if (($ldap !== NULL)) $this->attachLdap($ldap);
+        if ($ldap !== null) $this->attachLdap($ldap);
         else $this->detachLdap();
     }
 
@@ -136,7 +136,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      */
     public function getLdap()
     {
-        if (($this->_ldap === NULL)) {
+        if ($this->_ldap === null) {
             /**
              * @see Zend_Ldap_Exception
              */
@@ -205,7 +205,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      */
     public function isAttached()
     {
-        return (($this->_ldap !== NULL));
+        return ($this->_ldap !== null);
     }
 
     /**

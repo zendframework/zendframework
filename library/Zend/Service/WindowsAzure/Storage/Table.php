@@ -297,7 +297,7 @@ class Zend_Service_WindowsAzure_Storage_Table
 		if ($tableName === '') {
 			throw new Zend_Service_WindowsAzure_Exception('Table name is not specified.');
 		}
-		if (($entity === NULL)) {
+		if ($entity === null) {
 			throw new Zend_Service_WindowsAzure_Exception('Entity is not specified.');
 		}
 		                     
@@ -367,7 +367,7 @@ class Zend_Service_WindowsAzure_Storage_Table
 		if ($tableName === '') {
 			throw new Zend_Service_WindowsAzure_Exception('Table name is not specified.');
 		}
-		if (($entity === NULL)) {
+		if ($entity === null) {
 			throw new Zend_Service_WindowsAzure_Exception('Entity is not specified.');
 		}
 		                     
@@ -523,7 +523,7 @@ class Zend_Service_WindowsAzure_Storage_Table
 		}
 		
 		// Add continuation querystring parameters?
-		if (($nextPartitionKey !== NULL) && ($nextRowKey !== NULL)) {
+		if ($nextPartitionKey !== null && $nextRowKey !== null) {
 		    if ($queryString !== '') {
 		        $queryString .= '&';
 		    }
@@ -689,7 +689,7 @@ class Zend_Service_WindowsAzure_Storage_Table
 		if ($tableName === '') {
 			throw new Zend_Service_WindowsAzure_Exception('Table name is not specified.');
 		}
-		if (($entity === NULL)) {
+		if ($entity === null) {
 			throw new Zend_Service_WindowsAzure_Exception('Entity is not specified.');
 		}
 		                     
@@ -794,12 +794,12 @@ class Zend_Service_WindowsAzure_Storage_Table
 		    if ($azureValue->Type != '') {
 		        $value[] = ' m:type="' . $azureValue->Type . '"';
 		    }
-		    if (($azureValue->Value === NULL)) {
+		    if ($azureValue->Value === null) {
 		        $value[] = ' m:null="true"'; 
 		    }
 		    $value[] = '>';
 		    
-		    if (($azureValue->Value !== NULL)) {
+		    if ($azureValue->Value !== null) {
 		        if (strtolower($azureValue->Type) == 'edm.boolean') {
 		            $value[] = ($azureValue->Value == true ? '1' : '0');
 		        } else {

@@ -522,7 +522,7 @@ class Zend_Service_DeveloperGarden_LocalSearch_SearchParameters
     {
         $retVal = array();
         foreach ($this->_parameters as $key => $value) {
-            if (($value === NULL)) {
+            if ($value === null) {
                 continue;
             }
             $param = array(

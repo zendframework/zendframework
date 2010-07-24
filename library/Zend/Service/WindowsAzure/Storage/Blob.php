@@ -469,13 +469,13 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 	{
 	    // Build query string
 	    $queryString = '?comp=list';
-	    if (($prefix !== NULL)) {
+	    if ($prefix !== null) {
 	        $queryString .= '&prefix=' . $prefix;
 	    }
-	    if (($maxResults !== NULL)) {
+	    if ($maxResults !== null) {
 	        $queryString .= '&maxresults=' . $maxResults;
 	    }
-	    if (($marker !== NULL)) {
+	    if ($marker !== null) {
 	        $queryString .= '&marker=' . $marker;
 	    }
 	        
@@ -486,7 +486,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			$xmlMarker = (string)$this->_parseResponse($response)->NextMarker;
 
 			$containers = array();
-			if (($xmlContainers !== NULL)) {
+			if ($xmlContainers !== null) {
 				for ($i = 0; $i < count($xmlContainers); $i++) {
 					$containers[] = new Zend_Service_WindowsAzure_Storage_BlobContainer(
 						(string)$xmlContainers[$i]->Name,
@@ -496,12 +496,12 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 				}
 			}
 			$currentResultCount = $currentResultCount + count($containers);
-			if (($maxResults !== NULL) && $currentResultCount < $maxResults) {
-    			if (($xmlMarker !== NULL) && $xmlMarker != '') {
+			if ($maxResults !== null && $currentResultCount < $maxResults) {
+    			if ($xmlMarker !== null && $xmlMarker != '') {
     			    $containers = array_merge($containers, $this->listContainers($prefix, $maxResults, $xmlMarker, $currentResultCount));
     			}
 			}
-			if (($maxResults !== NULL) && count($containers) > $maxResults) {
+			if ($maxResults !== null && count($containers) > $maxResults) {
 			    $containers = array_slice($containers, 0, $maxResults);
 			}
 			    
@@ -1135,16 +1135,16 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			
 	    // Build query string
 	    $queryString = '?restype=container&comp=list';
-        if (($prefix !== NULL)) {
+        if ($prefix !== null) {
 	        $queryString .= '&prefix=' . $prefix;
         }
 		if ($delimiter !== '') {
 			$queryString .= '&delimiter=' . $delimiter;
 		}
-	    if (($maxResults !== NULL)) {
+	    if ($maxResults !== null) {
 	        $queryString .= '&maxresults=' . $maxResults;
 	    }
-	    if (($marker !== NULL)) {
+	    if ($marker !== null) {
 	        $queryString .= '&marker=' . $marker;
 	    }
 
@@ -1156,7 +1156,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		    
 			// Blobs
 			$xmlBlobs = $this->_parseResponse($response)->Blobs->Blob;
-			if (($xmlBlobs !== NULL)) {
+			if ($xmlBlobs !== null) {
 				for ($i = 0; $i < count($xmlBlobs); $i++) {
 					$blobs[] = new Zend_Service_WindowsAzure_Storage_BlobInstance(
 						$containerName,
@@ -1176,7 +1176,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			// Blob prefixes (folders)
 			$xmlBlobs = $this->_parseResponse($response)->Blobs->BlobPrefix;
 			
-			if (($xmlBlobs !== NULL)) {
+			if ($xmlBlobs !== null) {
 				for ($i = 0; $i < count($xmlBlobs); $i++) {
 					$blobs[] = new Zend_Service_WindowsAzure_Storage_BlobInstance(
 						$containerName,
@@ -1196,12 +1196,12 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			// More blobs?
 			$xmlMarker = (string)$this->_parseResponse($response)->NextMarker;
 			$currentResultCount = $currentResultCount + count($blobs);
-			if (($maxResults !== NULL) && $currentResultCount < $maxResults) {
-    			if (($xmlMarker !== NULL) && $xmlMarker != '') {
+			if ($maxResults !== null && $currentResultCount < $maxResults) {
+    			if ($xmlMarker !== null && $xmlMarker != '') {
     			    $blobs = array_merge($blobs, $this->listBlobs($containerName, $prefix, $delimiter, $maxResults, $marker, $currentResultCount));
     			}
 			}
-			if (($maxResults !== NULL) && count($blobs) > $maxResults) {
+			if ($maxResults !== null && count($blobs) > $maxResults) {
 			    $blobs = array_slice($blobs, 0, $maxResults);
 			}
 			

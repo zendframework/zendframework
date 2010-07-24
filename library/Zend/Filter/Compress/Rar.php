@@ -176,7 +176,7 @@ class Zend_Filter_Compress_Rar extends Zend_Filter_Compress_CompressAbstract
     public function compress($content)
     {
         $callback = $this->getCallback();
-        if (($callback === NULL)) {
+        if ($callback === null) {
             require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('No compression callback available');
         }
@@ -210,7 +210,7 @@ class Zend_Filter_Compress_Rar extends Zend_Filter_Compress_CompressAbstract
         }
 
         $password = $this->getPassword();
-        if (($password !== NULL)) {
+        if ($password !== null) {
             $archive = rar_open($archive, $password);
         } else {
             $archive = rar_open($archive);

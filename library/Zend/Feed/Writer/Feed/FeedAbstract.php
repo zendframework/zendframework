@@ -171,7 +171,7 @@ class Zend_Feed_Writer_Feed_FeedAbstract
     public function setDateCreated($date = null)
     {
         $zdate = null;
-        if (($date === NULL)) {
+        if ($date === null) {
             $zdate = new Zend_Date;
         } elseif (ctype_digit($date) && strlen($date) == 10) {
             $zdate = new Zend_Date($date, Zend_Date::TIMESTAMP);
@@ -192,7 +192,7 @@ class Zend_Feed_Writer_Feed_FeedAbstract
     public function setDateModified($date = null)
     {
         $zdate = null;
-        if (($date === NULL)) {
+        if ($date === null) {
             $zdate = new Zend_Date;
         } elseif (ctype_digit($date) && strlen($date) == 10) {
             $zdate = new Zend_Date($date, Zend_Date::TIMESTAMP);
@@ -213,7 +213,7 @@ class Zend_Feed_Writer_Feed_FeedAbstract
     public function setLastBuildDate($date = null)
     {
         $zdate = null;
-        if (($date === NULL)) {
+        if ($date === null) {
             $zdate = new Zend_Date;
         } elseif (ctype_digit($date) && strlen($date) == 10) {
             $zdate = new Zend_Date($date, Zend_Date::TIMESTAMP);

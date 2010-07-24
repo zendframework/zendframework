@@ -166,7 +166,7 @@ class Zend_Cache_Backend_Static
         if (empty($fileName)) {
             $fileName = $this->_options['index_filename'];
         }
-        if (($this->_tagged === NULL) && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
+        if ($this->_tagged === null && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
             $this->_tagged = $tagged;
         } elseif (!$this->_tagged) {
             return false;
@@ -211,7 +211,7 @@ class Zend_Cache_Backend_Static
         }
 
         clearstatcache();
-        if (($id === NULL) || strlen($id) == 0) {
+        if ($id === null || strlen($id) == 0) {
             $id = $this->_detectId();
         } else {
             $id = $this->_decodeId($id);
@@ -225,7 +225,7 @@ class Zend_Cache_Backend_Static
         $pathName = realpath($this->_options['public_dir']) . dirname($id);
         $this->_createDirectoriesFor($pathName);
 
-        if (($id === NULL) || strlen($id) == 0) {
+        if ($id === null || strlen($id) == 0) {
             $dataUnserialized = unserialize($data);
             $data = $dataUnserialized['data'];
         }
@@ -239,9 +239,9 @@ class Zend_Cache_Backend_Static
         }
         @chmod($file, $this->_octdec($this->_options['cache_file_umask']));
 
-        if (($this->_tagged === NULL) && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
+        if ($this->_tagged === null && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
             $this->_tagged = $tagged;
-        } elseif (($this->_tagged === NULL)) {
+        } elseif ($this->_tagged === null) {
             $this->_tagged = array();
         }
         if (!isset($this->_tagged[$id])) {
@@ -305,7 +305,7 @@ class Zend_Cache_Backend_Static
             Zend_Cache::throwException('Invalid cache id: does not match expected public_dir path');
         }
         $fileName = basename($id);
-        if (($this->_tagged === NULL) && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
+        if ($this->_tagged === null && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
             $this->_tagged = $tagged;
         } elseif (!$this->_tagged) {
             return false;
@@ -394,7 +394,7 @@ class Zend_Cache_Backend_Static
                 if (empty($tags)) {
                     throw new Zend_Exception('Cannot use tag matching modes as no tags were defined');
                 }
-                if (($this->_tagged === NULL) && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
+                if ($this->_tagged === null && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
                     $this->_tagged = $tagged;
                 } elseif (!$this->_tagged) {
                     return true;
@@ -412,11 +412,11 @@ class Zend_Cache_Backend_Static
                 $result = true;
                 break;
             case Zend_Cache::CLEANING_MODE_ALL:
-                if (($this->_tagged === NULL)) {
+                if ($this->_tagged === null) {
                     $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME);
                     $this->_tagged = $tagged;
                 }
-                if (($this->_tagged === NULL) || empty($this->_tagged)) {
+                if ($this->_tagged === null || empty($this->_tagged)) {
                     return true;
                 }
                 $urls = array_keys($this->_tagged);
@@ -434,11 +434,11 @@ class Zend_Cache_Backend_Static
                 if (empty($tags)) {
                     throw new Zend_Exception('Cannot use tag matching modes as no tags were defined');
                 }
-                if (($this->_tagged === NULL)) {
+                if ($this->_tagged === null) {
                     $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME);
                     $this->_tagged = $tagged;
                 }
-                if (($this->_tagged === NULL) || empty($this->_tagged)) {
+                if ($this->_tagged === null || empty($this->_tagged)) {
                     return true;
                 }
                 $urls = array_keys($this->_tagged);
@@ -481,7 +481,7 @@ class Zend_Cache_Backend_Static
      */
     public function getInnerCache()
     {
-        if (($this->_tagCache === NULL)) {
+        if ($this->_tagCache === null) {
             Zend_Cache::throwException('An Inner Cache has not been set; use setInnerCache()');
         }
         return $this->_tagCache;

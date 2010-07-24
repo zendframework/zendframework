@@ -518,7 +518,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
 
         $headers = (is_array($meta)) ? $meta : array();
         $headers['x-amz-copy-source'] = $sourceObject;
-        $headers['x-amz-metadata-directive'] = ($meta === NULL) ? 'COPY' : 'REPLACE';
+        $headers['x-amz-metadata-directive'] = $meta === null ? 'COPY' : 'REPLACE';
 
         $response = $this->_makeRequest('PUT', $destObject, null, $headers);
 

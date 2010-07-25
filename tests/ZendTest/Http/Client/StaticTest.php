@@ -551,7 +551,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testOpenTempStreamWithValidFileDoesntThrowsException()
     {
-        $url = 'http://www.example.com';
+        $url = 'http://www.example.com/';
         $config = array (
             'output_stream' => realpath(__DIR__ . '/_files/zend_http_client_stream.file'),
         );
@@ -570,6 +570,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      * Testing if the connection can be closed
      * 
      * @group ZF-9685
+     * @expectedException \Zend\Http\Client\Exception
      */
     public function testOpenTempStreamWithBogusFileClosesTheConnection()
     {
@@ -578,13 +579,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             'output_stream' => '/path/to/bogus/file.ext',
         );
         $client = new HTTPClient($url, $config);
-        try {
-            $result = $client->request();
-            $this->fail('Expected exception was not thrown');
-        } catch (Http\Client\Exception $e) {
-            // we return since we expect the exception
-            return;
-        }
+        $result = $client->request();
     }
 
     /**

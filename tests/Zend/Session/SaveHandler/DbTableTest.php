@@ -94,7 +94,9 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        $this->_dropTable();
+        if ($this->_db instanceof Zend_Db_Adapter_Abstract) {
+            $this->_dropTable();
+        }
     }
 
     public function testConfigPrimaryAssignmentFullConfig()

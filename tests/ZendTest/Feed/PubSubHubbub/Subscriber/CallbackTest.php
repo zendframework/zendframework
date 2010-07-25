@@ -150,6 +150,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->assertThat($this->_callback->getStorage(), $this->identicalTo($storage));
     }
 
+    /**
+     * @group ZF2_CONFLICT
+     */
     public function testValidatesValidHttpGetData()
     {
         $this->_tableGateway->expects($this->any())

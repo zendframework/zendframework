@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace Zend\Feed\PubSubHubbub\Subscriber;
+use Zend\Feed\PubSubHubbub;
 
 /**
  * @uses       \Zend\Feed\PubSubHubbub\PubSubHubbub
@@ -34,7 +35,7 @@ namespace Zend\Feed\PubSubHubbub\Subscriber;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Callback extends \Zend\Feed\PubSubHubbub\AbstractCallback
+class Callback extends PubSubHubbub\AbstractCallback
 {
     /**
      * Contains the content of any feeds sent as updates to the Callback URL
@@ -112,7 +113,7 @@ class Callback extends \Zend\Feed\PubSubHubbub\AbstractCallback
         } elseif ($this->isValidHubVerification($httpGetData)) {
             $data = $this->_currentSubscriptionData;
             $this->getHttpResponse()->setBody($httpGetData['hub_challenge']);
-            $data['subscription_state'] = \Zend\Feed\PubSubHubbub\PubSubHubbub::SUBSCRIPTION_VERIFIED;
+            $data['subscription_state'] = PubSubHubbub\PubSubHubbub::SUBSCRIPTION_VERIFIED;
             if (isset($httpGetData['hub_lease_seconds'])) {
                 $data['lease_seconds'] = $httpGetData['hub_lease_seconds'];
             }

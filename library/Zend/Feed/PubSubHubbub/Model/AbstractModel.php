@@ -25,7 +25,7 @@
 namespace Zend\Feed\PubSubHubbub\Model;
 
 /**
- * @uses       \Zend\DB\Table\Table
+ * @uses       \Zend\Db\Table\Table
  * @uses       \Zend\Registry
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub

@@ -14,27 +14,27 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_URI
+ * @package    Zend_Uri
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id $
  */
 
 /**
  * @namespace
  */
-namespace ZendTest\URI;
-use Zend\URI\HTTP as HTTPUri;
+namespace ZendTest\Uri;
+use Zend\Uri\Http as HttpUri;
 
 /**
  * @category   Zend
- * @package    Zend_URI
+ * @package    Zend_Uri
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_URI
- * @group      Zend_URI_HTTP
+ * @group      Zend_Uri
+ * @group      Zend_Uri_Http
+ * @group      Zend_Http
  */
 class HTTPTest extends \PHPUnit_Framework_TestCase
 {
@@ -46,7 +46,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidScheme($scheme)
     {
-        $uri = new HTTPUri;
+        $uri = new HttpUri;
         $uri->setScheme($scheme);
         $this->assertEquals($scheme, $uri->getScheme());
     }
@@ -56,11 +56,11 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
      * 
      * @param string $scheme
      * @dataProvider invalidSchemeProvider
-     * @expectedException \Zend\URI\InvalidSchemeException
+     * @expectedException \Zend\Uri\InvalidSchemeException
      */
     public function testInvalidScheme($scheme)
     {
-        $uri = new HTTPUri;
+        $uri = new HttpUri;
         $uri->setScheme($scheme);
     }
 
@@ -73,7 +73,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidateSchemeInvalid($scheme)
     {
-        $this->assertFalse(HTTPUri::validateScheme($scheme));
+        $this->assertFalse(HttpUri::validateScheme($scheme));
     }
     
     /**

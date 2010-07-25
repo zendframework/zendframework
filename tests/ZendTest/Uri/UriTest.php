@@ -14,7 +14,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_URI
+ * @package    Zend_Uri
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -24,18 +24,18 @@
 /**
  * @namespace
  */
-namespace ZendTest\URI;
-use Zend\URI\URI;
+namespace ZendTest\Uri;
+use Zend\Uri\Uri;
 
 /**
  * @category   Zend
- * @package    Zend_URI
+ * @package    Zend_Uri
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_URI
+ * @group      Zend_Uri
  */
-class URITest extends \PHPUnit_Framework_TestCase
+class UriTest extends \PHPUnit_Framework_TestCase
 {   
     /**
      * General composing / parsing tests
@@ -47,9 +47,9 @@ class URITest extends \PHPUnit_Framework_TestCase
      * @param        string $uriString
      * @dataProvider validUriStringProvider
      */
-    public function testParseComposeURI($uriString)
+    public function testParseComposeUri($uriString)
     {
-        $uri = new URI($uriString);
+        $uri = new Uri($uriString);
         $this->assertEquals($uriString, $uri->generate());
     }
 
@@ -62,9 +62,9 @@ class URITest extends \PHPUnit_Framework_TestCase
      * @param array  $parts
      * @dataProvider uriWithPartsProvider
      */
-    public function testComposeNewURIandCastToString($exp, $parts)
+    public function testComposeNewUriAndCastToString($exp, $parts)
     {
-        $uri = new URI;
+        $uri = new Uri;
         foreach($parts as $k => $v) {
             $setMethod = 'set' . ucfirst($k);
             $uri->$setMethod($v);
@@ -86,7 +86,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testGetScheme($uriString, $parts)
     {
-        $uri = new URI($uriString);
+        $uri = new Uri($uriString);
         if (isset($parts['scheme'])) {
             $this->assertEquals($parts['scheme'], $uri->getScheme());
         } else {
@@ -103,7 +103,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUserInfo($uriString, $parts)
     {
-        $uri = new URI($uriString);
+        $uri = new Uri($uriString);
         if (isset($parts['userInfo'])) {
             $this->assertEquals($parts['userInfo'], $uri->getUserInfo());
         } else {
@@ -120,7 +120,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testGetHost($uriString, $parts)
     {
-        $uri = new URI($uriString);
+        $uri = new Uri($uriString);
         if (isset($parts['host'])) {
             $this->assertEquals($parts['host'], $uri->getHost());
         } else {
@@ -129,7 +129,7 @@ class URITest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that we can get the port out of a parsed URI
+     * Test that we can get the port out of a parsed Uri
      * 
      * @param string $uriString
      * @param array  $parts
@@ -137,7 +137,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPort($uriString, $parts)
     {
-        $uri = new URI($uriString);
+        $uri = new Uri($uriString);
         if (isset($parts['port'])) {
             $this->assertEquals($parts['port'], $uri->getPort());
         } else {
@@ -146,7 +146,7 @@ class URITest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that we can get the path out of a parsed URI
+     * Test that we can get the path out of a parsed Uri
      * 
      * @param string $uriString
      * @param array  $parts
@@ -154,7 +154,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPath($uriString, $parts)
     {
-        $uri = new URI($uriString);
+        $uri = new Uri($uriString);
         if (isset($parts['path'])) {
             $this->assertEquals($parts['path'], $uri->getPath());
         } else {
@@ -163,7 +163,7 @@ class URITest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test that we can get the query out of a parsed URI
+     * Test that we can get the query out of a parsed Uri
      * 
      * @param string $uriString
      * @param array  $parts
@@ -171,7 +171,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testGetQuery($uriString, $parts)
     {
-        $uri = new URI($uriString);
+        $uri = new Uri($uriString);
         if (isset($parts['query'])) {
             $this->assertEquals($parts['query'], $uri->getQuery());
         } else {
@@ -184,7 +184,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testGetQueryAsArrayReturnsCorrectArray()
     {
-        $url = new URI('http://example.com/foo/?test=a&var[]=1&var[]=2&some[thing]=3');
+        $url = new Uri('http://example.com/foo/?test=a&var[]=1&var[]=2&some[thing]=3');
         $this->assertEquals('test=a&var[]=1&var[]=2&some[thing]=3', $url->getQuery());
         
         $exp = array(
@@ -205,7 +205,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFragment($uriString, $parts)
     {
-        $uri = new URI($uriString);
+        $uri = new Uri($uriString);
         if (isset($parts['fragment'])) {
             $this->assertEquals($parts['fragment'], $uri->getFragment());
         } else {
@@ -223,7 +223,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testSetSchemeNull()
     {
-        $uri = new URI('http://example.com');
+        $uri = new Uri('http://example.com');
         $this->assertEquals('http', $uri->getScheme());
         
         $uri->setScheme(null);
@@ -238,7 +238,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testSetSchemeValid($scheme)
     {
-        $uri = new URI;
+        $uri = new Uri;
         $uri->setScheme($scheme);
         $this->assertEquals($scheme, $uri->getScheme());
     } 
@@ -248,11 +248,11 @@ class URITest extends \PHPUnit_Framework_TestCase
      * 
      * @param string $scheme
      * @dataProvider invalidSchemeProvider
-     * @expectedException \Zend\URI\InvalidSchemeException
+     * @expectedException \Zend\Uri\InvalidSchemeException
      */
     public function testSetInvalidScheme($scheme)
     {
-        $uri = new URI;
+        $uri = new Uri;
         $uri->setScheme($scheme);
     }
     
@@ -269,17 +269,17 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testValidUriIsValid($uriString)
     {
-        $uri = new URI($uriString);
+        $uri = new Uri($uriString);
         $this->assertTrue($uri->isValid());
     }
 
     /**
      * Test that invalid URIs pass validation
      *
-     * @param \Zend\URI\URI $uri 
+     * @param \Zend\Uri\Uri $uri 
      * @dataProvider invalidUriObjectProvider
      */
-    public function testInvalidUriIsInvalid(URI $uri)
+    public function testInvalidUriIsInvalid(Uri $uri)
     {
         $this->markTestSkipped();
         $this->assertFalse($uri->isValid());
@@ -293,7 +293,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testValidateSchemeValid($scheme)
     {
-        $this->assertTrue(URI::validateScheme($scheme));
+        $this->assertTrue(Uri::validateScheme($scheme));
     }
     
     /**
@@ -304,7 +304,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testValidSchemeInvalid($scheme)
     {
-        $this->assertFalse(URI::validateScheme($scheme));
+        $this->assertFalse(Uri::validateScheme($scheme));
     }
     
     /**
@@ -315,7 +315,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testValidateHostValid($host)
     {
-        $this->assertTrue(URI::validateHost($host));
+        $this->assertTrue(Uri::validateHost($host));
     }
     
     /**
@@ -326,7 +326,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testValiteHostInvalid($host)
     {
-        $this->assertFalse(URI::validateHost($host));
+        $this->assertFalse(Uri::validateHost($host));
     }
     
     /**
@@ -337,7 +337,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testValidQueryFragment($input)
     {
-        $this->assertTrue(URI::validateQueryFragment($input));
+        $this->assertTrue(Uri::validateQueryFragment($input));
     }
     
     /**
@@ -348,7 +348,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidQueryFragment($input, $exp)
     {
-        $this->assertFalse(URI::validateQueryFragment($input));
+        $this->assertFalse(Uri::validateQueryFragment($input));
     }
     
     /**
@@ -360,7 +360,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeInvalidQueryFragment($input, $exp)
     {
-        $actual = URI::encodeQueryFragment($input);
+        $actual = Uri::encodeQueryFragment($input);
         $this->assertEquals($exp, $actual);
     }
     
@@ -374,7 +374,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeValidQueryFragment($input)
     {
-        $actual = URI::encodeQueryFragment($input);
+        $actual = Uri::encodeQueryFragment($input);
         $this->assertEquals($input, $actual);
     }
     
@@ -386,7 +386,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testValidateUserInfoValid($userInfo)
     {
-        $this->assertTrue(URI::validateUserInfo($userInfo));
+        $this->assertTrue(Uri::validateUserInfo($userInfo));
     }
     
     /**
@@ -398,7 +398,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testValidateUserInfoInvalid($userInfo, $exp)
     {
-        $this->assertFalse(URI::validateUserInfo($userInfo));
+        $this->assertFalse(Uri::validateUserInfo($userInfo));
     }
     
     /**
@@ -409,7 +409,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeUserInfoValid($userInfo)
     {
-        $this->assertEquals($userInfo, URI::encodeUserInfo($userInfo));
+        $this->assertEquals($userInfo, Uri::encodeUserInfo($userInfo));
     }
     
     /**
@@ -421,7 +421,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeUserInfoInvalid($userInfo, $exp)
     {
-        $this->assertEquals($exp, URI::encodeUserInfo($userInfo));
+        $this->assertEquals($exp, Uri::encodeUserInfo($userInfo));
     }
     
     /**
@@ -432,7 +432,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testValidatePortValid($port)
     {
-        $this->assertTrue(URI::validatePort($port));
+        $this->assertTrue(Uri::validatePort($port));
     }
     
     /**
@@ -443,7 +443,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testValidatePortInvalid($port)
     {
-        $this->assertFalse(URI::validatePort($port));
+        $this->assertFalse(Uri::validatePort($port));
     }
     
     /**
@@ -452,7 +452,7 @@ class URITest extends \PHPUnit_Framework_TestCase
     /*
     public function testAddReplaceQueryParametersModifiesQueryAndReturnsOldQuery()
     {
-        $url = new URI('http://example.com/foo/?a=1&b=2&c=3');
+        $url = new Uri('http://example.com/foo/?a=1&b=2&c=3');
         $url->addReplaceQueryParameters(array('b' => 4, 'd' => -1));
         $this->assertEquals(array(
             'a' => 1,
@@ -470,7 +470,7 @@ class URITest extends \PHPUnit_Framework_TestCase
     /*
     public function testRemoveQueryParametersModifiesQueryAndReturnsOldQuery()
     {
-        $url = new URI('http://example.com/foo/?a=1&b=2&c=3&d=4');
+        $url = new Uri('http://example.com/foo/?a=1&b=2&c=3&d=4');
         $url->removeQueryParameters(array('b', 'd', 'e'));
         $this->assertEquals(array('a' => 1, 'c' => 3), $url->getQueryAsArray());
         $this->assertEquals('a=1&c=3', $url->getQuery());
@@ -490,7 +490,7 @@ class URITest extends \PHPUnit_Framework_TestCase
      */
     public function testFluentInterface($method, $params)
     {
-        $uri = new URI;
+        $uri = new Uri;
         $ret = call_user_func_array(array($uri, $method), $params);
         $this->assertSame($uri, $ret);
     }
@@ -635,14 +635,14 @@ class URITest extends \PHPUnit_Framework_TestCase
     static public function invalidUriObjectProvider()
     {
         // Empty URI is not valid
-        $obj1 = new URI;
+        $obj1 = new Uri;
         
         // Path cannot begin with '//' if there is no authority part
-        $obj2 = new URI;
+        $obj2 = new Uri;
         $obj2->setPath('//path');
 
         // A relative URI cannot have a path beginning with ':'
-        $obj3 = new URI;
+        $obj3 = new Uri;
         $obj3->setPath(':path');
         
         return array(

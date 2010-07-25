@@ -23,22 +23,22 @@
 /**
  * @namespace
  */
-namespace Zend\URI;
+namespace Zend\Uri;
 
 use Zend\Validator;
 
 /**
  * Generic URI handler
  *
- * @uses      \Zend\URI\Exception
- * @uses      \Zend\Validator\Hostname\Hostname
+ * @uses      \Zend\Uri\Exception
+ * @uses      \Zend\Validator\Hostname
  * @uses      \Zend\Validator\Ip
  * @category  Zend
  * @package   Zend_Uri
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class URI
+class Uri
 {
     /**
      * Character classes defined in RFC-3986
@@ -538,8 +538,8 @@ class URI
              
         } else {
             // Expect an IPv4 address or a hostname
-            $validator = new Validator\Hostname\Hostname(array(
-                'allow' => Validator\Hostname\Hostname::ALLOW_ALL,
+            $validator = new Validator\Hostname(array(
+                'allow' => Validator\Hostname::ALLOW_ALL,
                 'ip'    => new Validator\Ip(array('allowipv6' => false))
             ));
         }

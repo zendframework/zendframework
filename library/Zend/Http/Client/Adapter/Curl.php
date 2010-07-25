@@ -29,10 +29,10 @@ use Zend\Http\Client\Adapter as HTTPAdapter,
     Zend\Http\Client;
 
 /**
- * An adapter class for Zend_Http_Client based on the curl extension.
+ * An adapter class for Zend\Http\Client based on the curl extension.
  * Curl requires libcurl. See for full requirements the PHP manual: http://php.net/curl
  *
- * @uses       \Zend\Http\Client\Client
+ * @uses       \Zend\Http\Client
  * @uses       \Zend\Http\Client\Exception
  * @uses       \Zend\Http\Client\Adapter\Exception
  * @uses       \Zend\Http\Client\Adapter
@@ -99,7 +99,7 @@ class Curl implements HTTPAdapter, Stream
     public function __construct()
     {
         if (!extension_loaded('curl')) {
-            throw new Exception('cURL extension has to be loaded to use this Zend_Http_Client adapter.');
+            throw new Exception('cURL extension has to be loaded to use this Zend\Http\Client adapter');
         }
         $this->_invalidOverwritableCurlOptions = array(
             CURLOPT_HTTPGET,
@@ -176,7 +176,7 @@ class Curl implements HTTPAdapter, Stream
      *
      * @param  string|int $option
      * @param  mixed $value
-     * @return Zend_Http_Adapter_Curl
+     * @return Zend\Http\Adapter\Curl
      */
     public function setCurlOption($option, $value)
     {
@@ -231,7 +231,7 @@ class Curl implements HTTPAdapter, Stream
         }
 
         if ($secure !== false) {
-            // Behave the same like Zend_Http_Adapter_Socket on SSL options.
+            // Behave the same like Zend\Http\Adapter\Socket on SSL options.
             if (isset($this->_config['sslcert'])) {
                 curl_setopt($this->_curl, CURLOPT_SSLCERT, $this->_config['sslcert']);
             }
@@ -272,15 +272,15 @@ class Curl implements HTTPAdapter, Stream
         // ensure correct curl call
         $curlValue = true;
         switch ($method) {
-            case Client\Client::GET:
+            case Client::GET:
                 $curlMethod = CURLOPT_HTTPGET;
                 break;
 
-            case Client\Client::POST:
+            case Client::POST:
                 $curlMethod = CURLOPT_POST;
                 break;
 
-            case Client\Client::PUT:
+            case Client::PUT:
                 // There are two different types of PUT request, either a Raw Data string has been set
                 // or CURLOPT_INFILE and CURLOPT_INFILESIZE are used.
                 if(is_resource($body)) {
@@ -313,22 +313,22 @@ class Curl implements HTTPAdapter, Stream
                 }
                 break;
 
-            case Client\Client::DELETE:
+            case Client::DELETE:
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "DELETE";
                 break;
 
-            case Client\Client::OPTIONS:
+            case Client::OPTIONS:
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "OPTIONS";
                 break;
 
-            case Client\Client::TRACE:
+            case Client::TRACE:
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "TRACE";
                 break;
             
-            case Zend_Http_Client::HEAD:
+            case Client::HEAD:
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "HEAD";
                 break;
@@ -371,7 +371,7 @@ class Curl implements HTTPAdapter, Stream
          * Make sure POSTFIELDS is set after $curlMethod is set:
          * @link http://de2.php.net/manual/en/function.curl-setopt.php#81161
          */
-        if ($method == Client\Client::POST) {
+        if ($method == Client::POST) {
             curl_setopt($this->_curl, CURLOPT_POSTFIELDS, $body);
         } elseif ($curlMethod == CURLOPT_PUT) {
             // this covers a PUT by file-handle:
@@ -381,7 +381,7 @@ class Curl implements HTTPAdapter, Stream
             curl_setopt($this->_curl, CURLOPT_INFILESIZE, $this->_config['curloptions'][CURLOPT_INFILESIZE]);
             unset($this->_config['curloptions'][CURLOPT_INFILE]);
             unset($this->_config['curloptions'][CURLOPT_INFILESIZE]);
-        } elseif ($method == Client\Client::PUT) {
+        } elseif ($method == Client::PUT) {
             // This is a PUT by a setRawData string, not by file-handle
             curl_setopt($this->_curl, CURLOPT_POSTFIELDS, $body);
         }
@@ -412,7 +412,7 @@ class Curl implements HTTPAdapter, Stream
             throw new Client\Exception("Error in cURL request: " . curl_error($this->_curl));
         }
 
-        // cURL automatically decodes chunked-messages, this means we have to disallow the Zend_Http_Response to do it again
+        // cURL automatically decodes chunked-messages, this means we have to disallow the Zend\Http\Response to do it again
         if (stripos($this->_response, "Transfer-Encoding: chunked\r\n")) {
             $this->_response = str_ireplace("Transfer-Encoding: chunked\r\n", '', $this->_response);
         }

@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace ZendTest\Http\Client;
+use Zend\Http\Client;
 
 /**
  * Zend_Http_Client_Adapter_Proxy test suite.
@@ -78,7 +79,7 @@ class ProxyAdapterTest extends SocketTest
 
 
             $this->config = array(
-                'adapter'    => 'Zend_Http_Client_Adapter_Proxy',
+                'adapter'    => '\Zend\Http\Client\Adapter\Proxy',
                 'proxy_host' => $host,
                 'proxy_port' => $port,
                 'proxy_user' => $user,
@@ -88,7 +89,7 @@ class ProxyAdapterTest extends SocketTest
             parent::setUp();
 
         } else {
-            $this->markTestSkipped("Zend_Http_Client proxy server tests are not enabled in TestConfiguration.php");
+            $this->markTestSkipped("Zend\\Http\\Client proxy server tests are not enabled in TestConfiguration.php");
         }
     }
 
@@ -103,7 +104,7 @@ class ProxyAdapterTest extends SocketTest
         ));
 
         $this->client->setUri($this->baseuri . 'testGetLastRequest.php');
-        $res = $this->client->request(\Zend\Http\Client::TRACE);
+        $res = $this->client->request(Client::TRACE);
         if ($res->getStatus() == 405 || $res->getStatus() == 501) {
             $this->markTestSkipped("Server does not allow the TRACE method");
         }

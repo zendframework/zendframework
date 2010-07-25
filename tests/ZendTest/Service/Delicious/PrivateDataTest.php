@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Service\Delicious;
+
+/**
  * @category   Zend_Service
  * @package    Zend_Service_Delicious
  * @subpackage UnitTests
@@ -29,7 +34,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
  */
-class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
+class PrivateDataTest extends \PHPUnit_Framework_TestCase
 {
     const TEST_UNAME = 'zfTestUser';
     const TEST_PASS  = 'zfuser';
@@ -54,14 +59,14 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
         if (!constant('TESTS_ZEND_SERVICE_DELICIOUS_ENABLED')) {
             $this->markTestSkipped('Zend_Service_Delicious online tests are not enabled');
         }
-        $httpClient = new Zend_Http_Client();
+        $httpClient = new \Zend\HTTP\Client();
         $httpClient->setConfig(array(
                 'useragent' => 'Zend_Service_Delicious - Unit tests/0.1',
                 'keepalive' => true
         ));
-        Zend_Rest_Client::setDefaultHttpClient($httpClient);
+        \Zend\REST\Client\RESTClient::setDefaultHttpClient($httpClient);
 
-        $this->_delicious = new Zend_Service_Delicious(self::TEST_UNAME, self::TEST_PASS);
+        $this->_delicious = new \Zend\Service\Delicious\Delicious(self::TEST_UNAME, self::TEST_PASS);
     }
 
     /**
@@ -223,7 +228,7 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPosts()
     {
-        $posts = $this->_delicious->getPosts('zfSite', new Zend_Date(), 'help');
+        $posts = $this->_delicious->getPosts('zfSite', new \Zend\Date\Date(), 'help');
         $this->assertType('Zend_Service_Delicious_PostList', $posts);
         $this->assertTrue(count($posts) <= 10);
 

@@ -478,6 +478,38 @@ class UriTest extends \PHPUnit_Framework_TestCase
     */
     
     /**
+     * Resolving, Normalization and Reference creation tests
+     */
+    
+    /**
+     * Test that resolving relative URIs works using the examples specified in 
+     * the RFC
+     * 
+     * @param string $relative
+     * @param string $expected
+     * @dataProvider resolvedAbsoluteUriProvider
+     */
+    public function testRelativeUriResolvingRfcSamples($baseUrl, $relative, $expected)
+    {
+        $uri = new Uri($relative);
+        $uri->resolve($baseUrl);
+        
+        $this->assertEquals($expected, $uri->generate());
+    }
+    
+    /**
+     * Test the removal of extra dot segments from paths
+     * 
+     * @param        $orig
+     * @param        $expected
+     * @dataProvider pathWithDotSegmentProvider
+     */
+    public function testRemovePathDotSegments($orig, $expected)
+    {
+        $this->assertEquals($expected, Uri::removePathDotSegments($orig)); 
+    }
+    
+    /**
      * Other tests
      */
     
@@ -797,6 +829,74 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('makeRelative', array('http://foo.bar/')),
             array('resolve',      array('http://foo.bar/')),
             array('normalize',    array())
+        );
+    }
+    
+    /**
+     * Test cases for absolute URI resolving 
+     * 
+     * These examples are taken from RFC-3986 section about relative URI 
+     * resolving (@link http://tools.ietf.org/html/rfc3986#section-5.4). 
+     * 
+     * @return array
+     */
+    static public function resolvedAbsoluteUriProvider()
+    {
+        return array(
+            // Normal examples
+            array('http://a/b/c/d;p?q', 'g:h',     'g:h'),
+            array('http://a/b/c/d;p?q', 'g',       'http://a/b/c/g'),
+            array('http://a/b/c/d;p?q', './g',     'http://a/b/c/g'),
+            array('http://a/b/c/d;p?q', 'g/',      'http://a/b/c/g/'),
+            array('http://a/b/c/d;p?q', '/g',      'http://a/g'),
+            array('http://a/b/c/d;p?q', '//g',     'http://g'),
+            array('http://a/b/c/d;p?q', '?y',      'http://a/b/c/d;p?y'),
+            array('http://a/b/c/d;p?q', 'g?y',     'http://a/b/c/g?y'),
+            array('http://a/b/c/d;p?q', '#s',      'http://a/b/c/d;p?q#s'),
+            array('http://a/b/c/d;p?q', 'g#s',     'http://a/b/c/g#s'),
+            array('http://a/b/c/d;p?q', 'g?y#s',   'http://a/b/c/g?y#s'),
+            array('http://a/b/c/d;p?q', ';x',      'http://a/b/c/;x'),
+            array('http://a/b/c/d;p?q', 'g;x',     'http://a/b/c/g;x'),
+            array('http://a/b/c/d;p?q', 'g;x?y#s', 'http://a/b/c/g;x?y#s'),
+            array('http://a/b/c/d;p?q', '',        'http://a/b/c/d;p?q'),
+            array('http://a/b/c/d;p?q', '.',       'http://a/b/c/'),
+            array('http://a/b/c/d;p?q', './',      'http://a/b/c/'),
+            array('http://a/b/c/d;p?q', '..',      'http://a/b/'),
+            array('http://a/b/c/d;p?q', '../',     'http://a/b/'),
+            array('http://a/b/c/d;p?q', '../g',    'http://a/b/g'),
+            array('http://a/b/c/d;p?q', '../..',   'http://a/'),
+            array('http://a/b/c/d;p?q', '../../',  'http://a/'),
+            array('http://a/b/c/d;p?q', '../../g', 'http://a/g'),
+
+            // Abnormal examples
+            array('http://a/b/c/d;p?q', '../../../g',    'http://a/g'),
+            array('http://a/b/c/d;p?q', '../../../../g', 'http://a/g'),
+            array('http://a/b/c/d;p?q', '/./g',          'http://a/g'),
+            array('http://a/b/c/d;p?q', '/../g',         'http://a/g'),
+            array('http://a/b/c/d;p?q', 'g.',            'http://a/b/c/g.'),
+            array('http://a/b/c/d;p?q', '.g',            'http://a/b/c/.g'),
+            array('http://a/b/c/d;p?q', 'g..',           'http://a/b/c/g..'),
+            array('http://a/b/c/d;p?q', '..g',           'http://a/b/c/..g'),
+            array('http://a/b/c/d;p?q', './../g',        'http://a/b/g'),
+            array('http://a/b/c/d;p?q', './g/.',         'http://a/b/c/g/'),
+            array('http://a/b/c/d;p?q', 'g/./h',         'http://a/b/c/g/h'),
+            array('http://a/b/c/d;p?q', 'g/../h',        'http://a/b/c/h'),
+            array('http://a/b/c/d;p?q', 'g;x=1/./y',     'http://a/b/c/g;x=1/y'),
+            array('http://a/b/c/d;p?q', 'g;x=1/../y',    'http://a/b/c/y'),
+            array('http://a/b/c/d;p?q', 'http:g',        'http:g'),
+        );
+    }
+    
+    /**
+     * Provider for testing removal of extra dot segments in paths
+     * 
+     * @return array
+     */
+    static public function pathWithDotSegmentProvider()
+    {
+        return array(
+            array('/a/b/c/./../../g',   '/a/g'),
+            array('mid/content=5/../6', 'mid/6')
         );
     }
 }

@@ -111,7 +111,7 @@ class Uri
     /**
      * Create a new URI object
      * 
-     * @param \Zend\URI\URI|string|null $uri
+     * @param \Zend\Uri\Uri|string|null $uri
      * @throws \InvalidArgumentException
      */
     public function __construct($uri = null) 
@@ -131,7 +131,7 @@ class Uri
             
         } elseif ($uri !== null) {
             /**
-             * @todo use a proper Exception class for Zend\URI
+             * @todo use a proper Exception class for Zend\Uri
              */
             throw new \InvalidArgumentException('expecting a string or a URI object, got ' . gettype($uri));
         }
@@ -169,7 +169,7 @@ class Uri
     /**
      * Parse a URI string
      * 
-     * @return \Zend\URI\URI
+     * @return \Zend\Uri\Uri
      */
     public function parse($uri)
     {
@@ -270,7 +270,7 @@ class Uri
      * Eventually, two normalized URLs pointing to the same resource should be 
      * equal even if they were originally represented by two different strings 
      * 
-     * @return \Zend\URI\URI
+     * @return \Zend\Uri\Uri
      */
     public function normalize()
     {
@@ -281,13 +281,62 @@ class Uri
      * Convert a relative URI into an absolute URI using a base absolute URI as 
      * a reference.    
      * 
-     * @return \Zend\URI\URI
+     * @param \Zend\Uri\Uri | string $baseUrl
+     * @return \Zend\Uri\Uri
      */
     public function resolve($baseUrl)
     {
-        if (! $this->isAbsolute()) {
+        // Ignore if URI is absolute
+        if ($this->isAbsolute()) return $this;
             
+        if (is_string($baseUrl)) {
+            $baseUrl = new static($baseUrl);
         }
+        
+        /* @var $baseUrl \Zend\Uri\Uri */
+        if (! $baseUrl instanceof static) {
+            /** @todo create an exception type for this */ 
+            throw new Exception("Provided base URL is not an instance of " . get_class($this));
+        }
+        
+        if (! $baseUrl->isAbsolute()) {
+            /** @todo create an exception type for this */ 
+            throw new Exception("Provided base URL '$baseUrl' is not absolute");
+        }
+        
+        // Merging starts here...
+        if ($this->getHost()) {
+            $this->setPath(static::removePathDotSegments($this->getPath()));
+            
+        } else { 
+            $basePath = $baseUrl->getPath();
+            $relPath  = $this->getPath();
+            if (! $relPath) {
+                $this->setPath($basePath);
+                if (! $this->getQuery()) {
+                    $this->setQuery($baseUrl->getQuery());
+                }
+                
+            } else {
+                if (substr($relPath, 0, 1) == '/') {
+                    $this->setPath(static::removePathDotSegments($relPath));
+                } else {
+                    if ($baseUrl->getHost() && ! $basePath) {
+                        $mergedPath = '/';
+                    } else {
+                        $mergedPath = substr($basePath, 0, strrpos($basePath, '/') + 1);
+                    }
+                    $this->setPath(static::removePathDotSegments($mergedPath . $relPath));
+                }
+            }
+            
+            // Set the authority part
+            $this->setUserInfo($baseUrl->getUserInfo());
+            $this->setHost($baseUrl->getHost());
+            $this->setPort($baseUrl->getPort());
+        }
+        
+        $this->setScheme($baseUrl->getScheme());
         
         return $this;
     } 
@@ -301,7 +350,7 @@ class Uri
      *  If the two URIs do not intersect (e.g. the original URI is not in any
      *  way related to the base URI) the URI will not be modified. 
      * 
-     * @return \Zend\URI\URI
+     * @return \Zend\Uri\Uri
      */
     public function makeRelative($baseUrl)
     {
@@ -387,15 +436,15 @@ class Uri
 	 * 
 	 * If the scheme is not valid according to the generic scheme syntax or 
 	 * is not acceptable by the specific URI class (e.g. 'http' or 'https' are 
-	 * the only acceptable schemes for the Zend\URI\HTTTP class) an exception
+	 * the only acceptable schemes for the Zend\Uri\HTTTP class) an exception
 	 * will be thrown. 
 	 * 
 	 * You can check if a scheme is valid before setting it using the 
 	 * validateScheme() method. 
 	 * 
      * @param string $scheme
-     * @throws \Zend\URI\InvalidSchemeException
-     * @return \Zend\URI\URI
+     * @throws \Zend\Uri\InvalidSchemeException
+     * @return \Zend\Uri\Uri
      */
     public function setScheme($scheme)
     {
@@ -409,7 +458,7 @@ class Uri
 
 	/**
      * @param string $userInfo
-     * @return \Zend\URI\URI
+     * @return \Zend\Uri\Uri
      */
     public function setUserInfo($userInfo)
     {
@@ -419,7 +468,7 @@ class Uri
 
 	/**
      * @param string $host
-     * @return \Zend\URI\URI
+     * @return \Zend\Uri\Uri
      */
     public function setHost($host)
     {
@@ -429,7 +478,7 @@ class Uri
 
 	/**
      * @param integer $port
-     * @return \Zend\URI\URI
+     * @return \Zend\Uri\Uri
      */
     public function setPort($port)
     {
@@ -439,7 +488,7 @@ class Uri
 
 	/**
      * @param string $path
-     * @return \Zend\URI\URI
+     * @return \Zend\Uri\Uri
      */
     public function setPath($path)
     {
@@ -451,7 +500,7 @@ class Uri
 	 * Set the query string, encoding any characters which should be encoded.
 	 * 
      * @param string $query
-     * @return \Zend\URI\URI
+     * @return \Zend\Uri\Uri
      */
     public function setQuery($query)
     {
@@ -461,7 +510,7 @@ class Uri
 
 	/**
      * @param string $fragment
-     * @return \Zend\URI\URI
+     * @return \Zend\Uri\Uri
      */
     public function setFragment($fragment)
     {
@@ -646,5 +695,55 @@ class Uri
         };
         
         return preg_replace_callback($regex, $replace, $input);
+    }
+    
+    /**
+     * Remove any extra dot segments (/../, /./) from a path
+     *
+     * @todo   consider optimizing
+     * @param  string $path
+     * @return string
+     */
+    static public function removePathDotSegments($path)
+    {
+        $output = '';
+        
+        while ($path) {
+            if ($path == '..' || $path == '.') break;
+            
+            if ($path == '/.') {
+                $path = '/';
+                
+            } elseif ($path == '/..') {
+                $path = '/';
+                $output = substr($output, 0, strrpos($output, '/', -1));
+                
+            } elseif (substr($path, 0, 4) == '/../') {
+                $path = '/' . substr($path, 4);
+                $output = substr($output, 0, strrpos($output, '/', -1));
+                
+            } elseif (substr($path, 0, 3) == '/./') {
+                $path = substr($path, 2);
+                
+            } elseif (substr($path, 0, 2) == './') { 
+                $path = substr($path, 2);
+                
+            } elseif (substr($path, 0, 3) == '../') {
+                $path = substr($path, 3);
+                  
+            } else {
+                $slash = strpos($path, '/', 1);
+                if ($slash === false) { 
+                    $seg = $path;
+                } else {
+                    $seg = substr($path, 0, $slash); 
+                }
+                
+                $output .= $seg;
+                $path = substr($path, strlen($seg));
+            }
+        }
+        
+        return $output; 
     }
 }
